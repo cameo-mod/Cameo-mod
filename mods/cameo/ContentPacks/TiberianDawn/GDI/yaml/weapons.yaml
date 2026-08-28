@@ -214,6 +214,7 @@ SkyshieldCannon:
 		PercentageScale: 0
 
 ArcherArtilleryShell:
+	Inherits@collapsewh: ^Warhead_Concussion_Heavy
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
 	Inherits@3: ^MediumFlameWeapon
@@ -266,6 +267,24 @@ ArcherArtilleryShell:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 7
 	-Warhead@Effect:
+
+	-Warhead@MediumCannon:
+	-Warhead@HeavyCannon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	Warhead@Concussion_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 56000
+		PercentageScale: 0
+	Warhead@CollapseTargetCompatibility1: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Ship
+		Damage: 14000
+		PercentageScale: 0
 
 MachineGunH:
 	Inherits@wh: ^Warhead_Bullet_Light

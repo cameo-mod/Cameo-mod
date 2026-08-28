@@ -970,6 +970,7 @@ AsianPulverizerGatling:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
 AsianPulverizerMechaGatling:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: AsianPulverizerGatling
@@ -994,6 +995,13 @@ AsianPulverizerMechaGatling:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
+
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumMissile:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 4000
+		PercentageScale: 0
 
 AsianSinglePlasma:
 	Inherits: ^Warhead_CannonHE_Medium
@@ -1142,6 +1150,7 @@ AsianTurretPlasma:
 		Amount: 8
 
 AsianHarbingerPlasma:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -1262,6 +1271,18 @@ AsianHarbingerPlasma:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
 		ImpactActors: false
+
+	-Warhead@LightFlameWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 AsianRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy

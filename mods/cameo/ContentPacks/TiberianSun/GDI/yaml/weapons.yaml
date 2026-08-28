@@ -185,6 +185,8 @@ TSJugg120mm:
 	# 	Explosions: artillery_explosion
 
 KodiakCannon:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapseextra1: ^Compatibility_Railgun_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -234,6 +236,16 @@ KodiakCannon:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 4
+
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@HeavyMissile:
+	-Warhead@HeavyBomb:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 32000
+		PercentageScale: 0
 
 KodiakCannonSonic:
 	Inherits@wh: ^Warhead_CannonHE_Heavy

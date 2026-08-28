@@ -897,6 +897,8 @@ SteelScalpelRailgun_EMP_AA:
 		ImpactSounds: makoexplose.wav
 
 SteelFighterRailgun:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
 	Inherits: ^LaserWeapon
 	Inherits@2: ^RA2RailgunWeapon
 	Inherits@3: ^SteelMediumCannon
@@ -940,6 +942,14 @@ SteelFighterRailgun:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 		ValidTargets: Air
+
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 0
 
 SteelMegaSword:
 	Inherits: ^LightChemicalWeapon
@@ -1825,6 +1835,7 @@ HammerheadArtillery:
 		ValidTargets: Shielded
 
 SteelDaggerCannon:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^RA2Grenade
@@ -1873,6 +1884,14 @@ SteelDaggerCannon:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
+
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 0
 
 SteelDaggerCannon_elite:
 	Inherits: SteelDaggerCannon

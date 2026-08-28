@@ -159,6 +159,8 @@ HeavyOrdosCombatTankRockets:
 		LaunchAngle: 75
 
 eye_bomberguy:
+	Inherits@collapsewh: ^Warhead_Demolition_Heavy
+	-TargetActorCenter:
 	Inherits: ^Grenade
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^MediumFlameWeapon
@@ -225,6 +227,25 @@ eye_bomberguy:
 		ImpactActors: false
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1875
+
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	Warhead@Demolition_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 80000
+		PercentageScale: 0
+	Warhead@CollapseTargetCompatibility1: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Ship
+		Damage: 20000
+		PercentageScale: 0
 
 D2K_155mm_turret:
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -377,6 +398,7 @@ D2K_APC_Rocket_AA:
 	ValidTargets: Air
 
 DeviatorMissile:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -437,6 +459,13 @@ DeviatorMissile:
 		Damage: 1000
 
 	MinRange: 1415
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumMissile:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		PercentageScale: 0
+
 DeviatorMissile_Artillery:
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^HeavyFlameWeapon
@@ -475,6 +504,14 @@ DeviatorMissile_Artillery:
 		Range: 1250
 
 	MinRange: 2005
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyFlameWeapon:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 0
+
 Wraith_ToxinMissiles:
 	Inherits: DeviatorMissile_Artillery
 	Range: 8370
@@ -582,6 +619,7 @@ d2k_grenade:
 		Damage: 1875
 
 Laboratory_Bioball:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: d2k_grenade
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^MediumChemicalWeapon
@@ -665,7 +703,15 @@ Laboratory_Bioball:
 		Weapon: AnthraxCloud
 		InvalidTargets: Water, Structure
 
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		PercentageScale: 0
+
 facedancer_grenade:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -787,6 +833,20 @@ facedancer_grenade:
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLSML4.WAV
 		ImpactActors: false
+
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@LightMissile:
+	-Warhead@MediumMissile:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 140000
+		PercentageScale: 0
 
 GrenDeath:
 	Warhead@EnemyDam: SpreadDamage
@@ -955,6 +1015,7 @@ ordos_autogunturret:
 		ValidTargets: Ground, Water, Air
 
 autogun_tank:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1007,6 +1068,15 @@ autogun_tank:
 		ValidTargets: Ground, Water
 
 	MinRange: 1495
+	-Warhead@HeavyAAWeapon:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@Chaingun:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
+
 autogun_tank_small:
 	Inherits: autogun_tank
 	Range: 6220

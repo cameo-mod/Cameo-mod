@@ -118,6 +118,7 @@ DuelistTankCannon:
 		ExplosionPalette: effect75alpha
 
 D2K_155mm2:
+	Inherits@collapsewh: ^Warhead_CannonHE_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^ShrapnelWeapon
@@ -182,6 +183,24 @@ D2K_155mm2:
 		Color: FFB84D
 		Scale: 0.8
 		FadeFrames: 15
+
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 36000
+		PercentageScale: 0
+	Warhead@CollapseTargetCompatibility1: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Ship
+		Damage: 12000
+		PercentageScale: 0
 
 D2K_155mm3:
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -469,6 +488,8 @@ mtank_pri2:
 		ImpactActors: false
 		ValidTargets: Air
 IxRailgunDroneBullet:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@collapseextra1: ^Compatibility_Railgun_ExtraDamage
 	Inherits: ^FlakWeapon
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^RailgunWeapon
@@ -511,6 +532,15 @@ IxRailgunDroneBullet:
 		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
+	-Warhead@FlakWeapon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 18000
+		PercentageScale: 0
+
 ResonanceDroneRepair:
 	Inherits: ^RepairWeapon
 	ValidTargets: SpecialRepair, Repairing, Repair, lockdowned, plagued, ivanattached
@@ -852,6 +882,8 @@ HMG_Duelist:
 		PercentageScale: 0
 
 HMG_Duelist_upgrade:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -875,6 +907,14 @@ HMG_Duelist_upgrade:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@HeavyMissile:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 0
+
 d2kStormLasher:
 	# Ixian superweapon-class storm. Wired to Storm blend (2026-08-10).
 	# Was 150k Tesla + 150k Magic = 300k total → single 300k Storm.

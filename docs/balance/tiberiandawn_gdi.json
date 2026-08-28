@@ -5406,11 +5406,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "14000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
+        "damage": "56000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "466",
+        "tag": "Concussion_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "7",
@@ -5420,25 +5420,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "14000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "14000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "7",
@@ -5448,20 +5434,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "14000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -5469,37 +5441,40 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "14000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CollapseTargetCompatibility1",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
       "reloaddelay": "140",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Concussion_Heavy",
        "^MediumCannon",
        "^HeavyCannon",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Heavy"
+      ],
       "weapon": "ArcherArtilleryShell",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -1046,6 +1046,7 @@ NaxPlaneRockets_elite:
 	Warhead@MissileAP_Heavy: AreaDamage
 		Damage: 10000
 NaxiInterceptorGun:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1081,6 +1082,14 @@ NaxiInterceptorGun:
 		Damage: 6000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 3
+
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
+	-Warhead@SmallArms:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 18000
+		PercentageScale: 0
 
 NaxShoeRocket:
 	Inherits@wh: ^Warhead_Demolition_Heavy

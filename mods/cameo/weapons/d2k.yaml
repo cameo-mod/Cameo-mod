@@ -1704,6 +1704,7 @@ PhoenixRocketShrapnel:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 ixian_airdrone:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^LightChemicalWeapon
 	Inherits@3: ^FlakWeapon
@@ -1788,6 +1789,16 @@ ixian_airdrone:
 		AimTargetStances: Enemy, Neutral
 
 	MinRange: 1300
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyBomb:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		PercentageScale: 0
+
 d2k_kwny_fighter:
 	Inherits: PhoenixRocket
 	ReloadDelay: 75

@@ -176,6 +176,7 @@ TSSBoatTusk:
 		Damage: 9000
 		ValidTargets: Ground, Water, Air
 TSStankTibTusk:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -215,6 +216,14 @@ TSStankTibTusk:
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		Damage: 5000
 		ValidTargets: Ground, Water, Air
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@MediumCannonFriendlyFire:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 25000
+		PercentageScale: 0
+
 TSNODRedEye:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy

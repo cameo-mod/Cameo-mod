@@ -976,6 +976,7 @@ ShotgunAttackRobotGun_elite:
 	BurstDelays: 3
 
 CannonAttackRobotGun:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^RA2RailgunWeapon
@@ -1007,6 +1008,13 @@ CannonAttackRobotGun:
 	Warhead@Effect: CreateEffect
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
+
+	-Warhead@TankDestroyerCannon:
+	-Warhead@MediumFlameWeapon:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 0
 
 CannonAttackRobotGun_elite:
 	Inherits: CannonAttackRobotGun
@@ -1089,6 +1097,7 @@ FutureMechGatling:
 		Damage: 6000
 		PercentageScale: 0
 FutureMechPlasma:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^Grenade
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^SteelHeavyCannon
@@ -1134,6 +1143,14 @@ FutureMechPlasma:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 		ExplosionPalette: ra2effect
+
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 20000
+		PercentageScale: 0
 
 FutureMechPlasma_elite:
 	Inherits: FutureMechPlasma

@@ -34,6 +34,19 @@ ROOTS = {
     "MutHFlamerChem", "ShtoraLaser", "TS30mmRail",
     "TSCABALEnlightedLaser", "TSCABALObeliskLaserFire", "TSProton",
     "TankBusterBeamCannon",
+    "AsianHarbingerPlasma", "AsianPulverizerMechaGatling", "AtreusMG",
+    "CannonAttackRobotGun", "DeviatorMissile", "DeviatorMissile_Artillery",
+    "EpigraphMG", "FutureMechPlasma", "GoliathMk2MG", "HMG_Duelist_upgrade",
+    "HindMissilesThermobaric", "IxRailgunDroneBullet", "KodiakCannon",
+    "Laboratory_Bioball", "MarauderMissiles", "NaxiInterceptorGun",
+    "PhobosLaser", "RA2LarsRocket", "RA2PsychicJab", "RA2RBurritoRocket",
+    "SCTyr", "ScarabLaunch", "SteelDaggerCannon", "SteelFighterRailgun",
+    "TSStankTibTusk", "ThermobaricMaverick", "WyvernRockets", "autogun_tank",
+    "facedancer_grenade", "ixian_airdrone", "wc2arrowFire",
+    "wc2highArrowFire",
+    "ArcherArtilleryShell", "ArtilleryShellUpgrade", "BallistaMultiShot",
+    "BikeRockets", "D2K_155mm2", "SwarmlingShoot", "eye_bomberguy",
+    "v1rocketsThermobaric", "wc2_dwarf_Rifle", "wc2catapultFire",
 }
 
 ALLOWED_COMPARATOR_FINDINGS = {
@@ -57,7 +70,7 @@ class Under100PhysicalProfileTests(unittest.TestCase):
         remaining = classifier.classify(self.rules)
         names = {row["weapon"] for row in remaining}
         self.assertFalse(names & ROOTS, names & ROOTS)
-        self.assertLessEqual(len(remaining), 141)
+        self.assertLessEqual(len(remaining), 99)
 
     def test_flat_compatibility_helpers_cannot_add_percentage_damage(self):
         helpers = [name for name in self.rules.weapons if name.startswith("^Compatibility_")]

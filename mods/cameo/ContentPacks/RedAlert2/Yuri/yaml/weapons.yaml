@@ -449,6 +449,7 @@ RA2MagnetAA_elite:
 		InvalidTargets: Paratrooper
 
 RA2PsychicJab:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@4: ^TankDestroyerCannon
@@ -501,6 +502,14 @@ RA2PsychicJab:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LightFlameWeapon:
+	-Warhead@FlakWeapon:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
 
 RA2PsychicJab_elite:
 	Inherits: RA2PsychicJab

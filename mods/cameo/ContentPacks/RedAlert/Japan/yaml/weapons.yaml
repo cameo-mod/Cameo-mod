@@ -528,6 +528,8 @@ BallistaSingleShotAirEnergized:
 
 	MinRange: 1845
 BallistaMultiShot:
+	Inherits@collapsewh: ^Warhead_Arrow_Medium
+	-TargetActorCenter:
 	Inherits: ^Grenade
 	Inherits@2: ^LightFlameWeapon
 	Inherits@3: ^LightChemicalWeapon
@@ -600,6 +602,23 @@ BallistaMultiShot:
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground, Water
+
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@LightFlameWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@ArrowWeapon:
+	Warhead@Arrow_Medium:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 0
+	Warhead@CollapseTargetCompatibility1: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		PercentageScale: 0
 
 BallistaMultiShotEnergized:
 	Inherits: ^TeslaWeapon

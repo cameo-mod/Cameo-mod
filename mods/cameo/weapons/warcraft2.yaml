@@ -26,6 +26,7 @@ wc2peasantsmack:
 # 3-9 WC2 damage. 3 Base, 6 Pierce.
 
 wc2arrowFire:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -87,7 +88,19 @@ wc2arrowFire:
 		ImpactSounds: wc2_bowhit.aud
 		ValidTargets: Ground, Water, Air
 
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@ArrowWeapon:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		PercentageScale: 0
+
 wc2highArrowFire:
+	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
 	Inherits: ^LaserWeapon
 	Inherits@2: ^HeavyMissile
 	Inherits@3: ^HeavyAAWeapon
@@ -125,6 +138,15 @@ wc2highArrowFire:
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@HeavyMissile:
+	-Warhead@HeavyAAWeapon:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 29000
+		PercentageScale: 0
 
 SiegeEngineCannon:
 	Inherits: ^NuclearWarhead

@@ -16,8 +16,10 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
 
     def test_active_central_files_are_included_without_template_bleed(self):
         names = {row["weapon"] for row in self.rows}
-        self.assertIn("ixian_airdrone", names)     # active D2K central file
-        self.assertIn("edenRailgun", names)       # active Outpost 2 central file
+        active_files = {path.resolve() for path in classifier.weapon_files()}
+        self.assertIn((ROOT / "mods/cameo/weapons/d2k.yaml").resolve(), active_files)
+        self.assertIn("NaxisBlackBombSmaller", names)  # active RA2Mod central file
+        self.assertIn("edenRailgun", names)             # active Outpost 2 central file
         self.assertNotIn("ts_nod_mobilerepairvehicle", names)
 
     def test_every_root_has_a_review_bucket_and_flat_ledger(self):
@@ -37,7 +39,7 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
         rows = {row["weapon"]: row for row in self.rows}
         for name in ("DuelistTankCannon", "LatinSmokerCannon", "AsianPhotonCannon",
                      "Future_MultiMissile_Sigma", "PhotonCannon",
-                     "ArcherArtilleryShell"):
+                     "RA2GrandCannonWeapon"):
             self.assertEqual("human decision required", rows[name]["bucket"], name)
 
     def test_multiple_tiers_are_preserved_as_distinct_destinations(self):

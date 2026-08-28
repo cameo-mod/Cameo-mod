@@ -688,6 +688,8 @@ BroodweaverLeech:
 	InvalidTargets: Broodling
 
 SwarmlingShoot:
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
+	-TargetActorCenter:
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^Grenade
@@ -811,6 +813,22 @@ SwarmlingShoot:
 		ImpactSounds: zguhit00.aud
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
+
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@MediumMissile:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
 
 QueenSpine:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium

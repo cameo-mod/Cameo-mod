@@ -3434,6 +3434,11 @@ DefuseKit:
 			Helicopter: 2
 			Spaceship: 1
 
+# Percentage-inert compatibility profiles retire surplus legacy flat stacks from
+# weapons that already contain one or more modern canonical warheads. Their family
+# follows an existing canonical destination on that weapon; it is not a claim that
+# the compatibility slice describes the weapon's complete thematic role. Existing
+# canonical percentage warheads remain untouched so runtime rounding stays exact.
 ^Compatibility_CannonHE_MediumFlat:
 	Warhead@CannonHE_MediumFlatCompatibility: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy

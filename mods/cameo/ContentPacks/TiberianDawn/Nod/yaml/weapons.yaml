@@ -131,6 +131,7 @@ BigTiberiumExplosion:
 		Size: 1,0
 
 ArtilleryShellUpgrade:
+	Inherits@collapsewh: ^Warhead_Concussion_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumChemicalWeapon
@@ -197,6 +198,26 @@ ArtilleryShellUpgrade:
 		Damage: 3
 	-Warhead@Effect:
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumCannon:
+	-Warhead@HeavyBomb:
+	Warhead@Concussion_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 0
+	Warhead@CollapseTargetCompatibility1: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Ship
+		Damage: 6000
+		PercentageScale: 0
+
 MachineGun:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -226,6 +247,8 @@ FireballLauncherBuggy:
 	Warhead@Flame_Light:
 		Damage: 2000
 BikeRockets:
+	Inherits@collapsewh: ^Warhead_MissileAP_Medium
+	-TargetActorCenter:
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^FlakWeapon
@@ -256,6 +279,23 @@ BikeRockets:
 		Damage: 4000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 2
+
+	-Warhead@TankDestroyerCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
+	Warhead@MissileAP_Medium:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
+	Warhead@CollapseTargetCompatibility1: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 PDLaserBike:
 	Inherits: PDLaser

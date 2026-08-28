@@ -377,6 +377,7 @@ LatinMonkeyGrenadeExplode:
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
 RA2RBurritoRocket:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumFlameWeapon
@@ -440,7 +441,17 @@ RA2RBurritoRocket:
 		AimChance: 0
 		AimTargetStances: Enemy, Neutral
 
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@HeavyBomb:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
+
 RA2LarsRocket:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^D2KRocket
 	Inherits@2: ^HeavyAAWeapon
 	Inherits@3: ^LightMissile
@@ -491,6 +502,14 @@ RA2LarsRocket:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@HeavyAAWeapon:
+	-Warhead@LightMissile:
+	-Warhead@TankDestroyerCannon:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
+
 RA2Gren60mm:
 	Inherits: ^RA2HeavyCannon
 	Inherits@2: ^RA2MediumCannon

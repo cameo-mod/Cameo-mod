@@ -1368,18 +1368,11 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "30000",
+        "falloff": "100, 0",
+        "spread": "88",
+        "tag": "Arrow_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -1389,25 +1382,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -1417,22 +1396,22 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CollapseTargetCompatibility1",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1845",
       "pricing": true,
       "range": "9214",
@@ -1441,9 +1420,11 @@
       "versus_templates": [
        "BallistaMultiShot"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Medium"
+      ],
       "weapon": "BallistaTowerMultiShot",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -4813,18 +4794,11 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "30000",
+        "falloff": "100, 0",
+        "spread": "88",
+        "tag": "Arrow_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -4834,25 +4808,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -4862,36 +4822,39 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CollapseTargetCompatibility1",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2705",
       "pricing": true,
       "range": "13515",
       "reloaddelay": "176",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Arrow_Medium",
        "^Grenade",
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Medium"
+      ],
       "weapon": "BallistaMultiShot",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "5",
