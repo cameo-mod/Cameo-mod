@@ -1212,10 +1212,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1241,7 +1237,8 @@
     "prerequisites": [
      "~ra2_allies_alliedconstructionyard",
      "ra2_allies_alliedbattlelab",
-     "~techlevel.superweapons"
+     "~techlevel.superweapons",
+     "!ra2_allies_chronosphere_swlimit"
     ],
     "queue": [
      "Defence",
@@ -1757,10 +1754,6 @@
     "build_duration": {
      "src": "inherited",
      "v": "1500"
-    },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
     },
     "buildable": true,
     "cost": {

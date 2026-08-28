@@ -1821,10 +1821,6 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1849,7 +1845,7 @@
     "prerequisites": [
      "~naxis_constructionyard",
      "naxis_techcenter",
-     "!naxis_naxirocketsilo",
+     "!naxis_naxirocketsilo_swlimit",
      "~techlevel.superweapons"
     ],
     "queue": [

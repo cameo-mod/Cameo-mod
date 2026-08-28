@@ -2123,10 +2123,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2152,7 +2148,8 @@
     "prerequisites": [
      "~ra2_soviets_constructionyard",
      "ra2_soviets_battlelab",
-     "~techlevel.superweapons"
+     "~techlevel.superweapons",
+     "!ra2_soviets_ironcurtain_swlimit"
     ],
     "queue": [
      "Defence",
@@ -2183,10 +2180,6 @@
     "build_duration": {
      "src": "inherited",
      "v": "1500"
-    },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
     },
     "buildable": true,
     "cost": {

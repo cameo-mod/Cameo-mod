@@ -1316,10 +1316,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2025,7 +2021,7 @@
     "prerequisites": [
      "~cabal_core",
      "cabal_core",
-     "!cabalnuke",
+     "!cabalnuke_swlimit",
      "~techlevel.superweapons"
     ],
     "queue": [

@@ -1014,10 +1014,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1043,7 +1039,8 @@
     "prerequisites": [
      "~yuri_constructionyard",
      "yuri_battlelab",
-     "~techlevel.superweapons"
+     "~techlevel.superweapons",
+     "!yuri_geneticmutator_swlimit"
     ],
     "queue": [
      "Defence",
@@ -1074,10 +1071,6 @@
     "build_duration": {
      "src": "inherited",
      "v": "1500"
-    },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
     },
     "buildable": true,
     "cost": {

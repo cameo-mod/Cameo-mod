@@ -3716,10 +3716,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -3744,7 +3740,8 @@
     "name": "Iron Curtain",
     "prerequisites": [
      "~ra1_soviets_techcenter",
-     "~techlevel.superweapons"
+     "~techlevel.superweapons",
+     "!ra1_soviets_ironcurtain_swlimit"
     ],
     "queue": [
      "Defence",
@@ -3775,10 +3772,6 @@
     "build_duration": {
      "src": "inherited",
      "v": "1500"
-    },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
     },
     "buildable": true,
     "cost": {

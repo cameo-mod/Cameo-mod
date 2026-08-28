@@ -914,10 +914,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -942,7 +938,7 @@
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
      "asianalliance_asianbattlelab",
-     "!asianalliance_advancedcommunicationcenter",
+     "!asianalliance_advancedcommunicationcenter_swlimit",
      "~techlevel.superweapons"
     ],
     "queue": [
@@ -1542,10 +1538,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1570,7 +1562,8 @@
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
      "asianalliance_asianbattlelab",
-     "~techlevel.superweapons"
+     "~techlevel.superweapons",
+     "!asianalliance_chaosstorminductor_swlimit"
     ],
     "queue": [
      "Defence",

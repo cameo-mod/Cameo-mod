@@ -829,10 +829,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -856,7 +852,8 @@
     "name": "Mage Tower",
     "prerequisites": [
      "~wc2_humans_townhall",
-     "wc2_humans_castle"
+     "wc2_humans_castle",
+     "!wc2_humans_magetower_swlimit"
     ],
     "queue": [
      "Building",

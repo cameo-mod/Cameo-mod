@@ -1985,10 +1985,6 @@
      "src": "inherited",
      "v": "Steel"
     },
-    "build_limit": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Buildable.BuildLimit",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Valued.Cost",
@@ -2014,7 +2010,8 @@
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
      "steelconsortium_consortiumbattlelab",
-     "~techlevel.superweapons"
+     "~techlevel.superweapons",
+     "!steelconsortium_bfg10000_swlimit"
     ],
     "queue": [
      "Defence",
@@ -2693,10 +2690,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2721,7 +2714,7 @@
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
      "steelconsortium_consortiumbattlelab",
-     "!steelconsortium_orbitalcannonactivator",
+     "!steelconsortium_orbitalcannonactivator_swlimit",
      "~techlevel.superweapons"
     ],
     "queue": [

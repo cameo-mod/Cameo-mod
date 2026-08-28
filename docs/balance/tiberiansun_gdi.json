@@ -1021,6 +1021,7 @@
      "~ts_gdi_upgradecenter",
      "!ionc",
      "!droppod",
+     "!tsionc",
      "~techlevel.superweapons"
     ],
     "queue": [
@@ -1435,10 +1436,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1464,7 +1461,6 @@
     "prerequisites": [
      "~ts_gdi_constructionyard",
      "ts_gdi_techcenter",
-     "!tsionc",
      "~techlevel.superweapons"
     ],
     "queue": [
