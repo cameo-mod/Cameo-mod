@@ -132,11 +132,14 @@ def resolve_dps_uniqueness(rows, step: float = 0.01) -> None:
     """⚠ DEAD + SUPERSEDED — tunes a knob that W17 retired. Kept, not deleted,
     only because it is referenced by name in ROADMAP.md and LESSONS_LEARNED.md.
 
-    Nothing in this module calls it, and its one apparent caller
-    (`_balance_audit_report.py`) reaches for `resolve_dps_uniqueness` on the
-    `*_rebalance_proposal_final` modules, which no longer exist — that script
-    cannot import. The live uniqueness pass is `unique_dmg_per_shot`, which
-    nudges Damage on the grid. Do not revive this one without W17 in hand.
+    Nothing in this module calls it. Its one apparent caller,
+    `_balance_audit_report.py`, reached for `resolve_dps_uniqueness` on the
+    `*_rebalance_proposal_final` modules, which no longer exist — so that script
+    could not import, and it was deleted on 2026-08-28 (recover with
+    `git show 6e0a273b:tools/balance/_balance_audit_report.py`; its last output is
+    archived at `docs/history/balance/BALANCE_AUDIT.md`). The live uniqueness pass
+    is `unique_dmg_per_shot`, which nudges Damage on the grid. Do not revive this
+    one without W17 in hand.
 
     Tune FirepowerMultiplier so effective DAMAGE-PER-SHOT (Σwarheads × FP)
     is unique across the class — the maintainer 5-stat uniqueness law
