@@ -1098,7 +1098,12 @@ CannonAttackRobotGun:
 
 	-Warhead@TankDestroyerCannon:
 	-Warhead@MediumFlameWeapon:
-	-Warhead@CannonHE_MediumFlatCompatibility:
+	-Warhead@CannonHE_Medium:
+	-Warhead@Railgun_Heavy:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 4988
 CannonAttackRobotGun_elite:
 	Inherits: CannonAttackRobotGun
 	Range: 7000

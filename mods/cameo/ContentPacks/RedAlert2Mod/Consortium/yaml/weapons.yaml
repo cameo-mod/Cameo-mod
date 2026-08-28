@@ -2502,7 +2502,12 @@ SteelDaggerCannon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_HeavyFlatCompatibility:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Demolition_Light:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 4988
 SteelDaggerCannon_elite:
 	Inherits: SteelDaggerCannon
 	Range: 25000

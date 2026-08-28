@@ -535,7 +535,12 @@ RA2LarsRocket:
 	-Warhead@HeavyAAWeapon:
 	-Warhead@LightMissile:
 	-Warhead@TankDestroyerCannon:
-	-Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		PercentageScale: 3990
 RA2Gren60mm:
 	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
 	Inherits: ^RA2HeavyCannon
@@ -643,7 +648,12 @@ LatinSmokerCannon:
 	-Warhead@RailgunWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_MediumFlatCompatibility:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_Medium:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 13000
+		PercentageScale: 3070
 LatinSmokerCannon_elite:
 	Inherits: LatinSmokerCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -652,6 +662,7 @@ LatinSmokerCannon_elite:
 	BurstDelays: 3
 
 RA2GrenadePack:
+	Inherits@roleflat: ^Compatibility_Concussion_LightFlat
 	Inherits: ^Warhead_MissileAP_Heavy
 	Inherits@2: ^Warhead_Concussion_Light
 	Inherits@3: ^Effect_Concussion_Light
@@ -682,6 +693,13 @@ RA2GrenadePack:
 		Duration: 22
 		Range: 1310
 		ValidTargets: Ground, Water, Air
+	-Warhead@Concussion_Light:
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Heavy:
+	Warhead@Concussion_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 RA2GrenadePack_elite:
 	Inherits: RA2GrenadePack
@@ -1066,6 +1084,7 @@ LatinSentryMG_elite:
 	Range: 7777
 
 LatinAADefenderCannon:
+	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -1091,6 +1110,12 @@ LatinAADefenderCannon:
 		Damage: 2000
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2TOPOLCubaTarget:
 	ReloadDelay: 50

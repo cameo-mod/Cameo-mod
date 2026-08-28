@@ -119,8 +119,8 @@ class LaserHeavyRouteConsolidationTests(unittest.TestCase):
                 self.assertEqual(before[target], after[target], (name, target))
 
     def test_ratchets_match_live_reduction(self):
-        self.assertEqual(748, SPLIT_BASELINE)
-        self.assertEqual(408, BROADCAST_BASELINE)
+        self.assertEqual(736, SPLIT_BASELINE)
+        self.assertEqual(405, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":
