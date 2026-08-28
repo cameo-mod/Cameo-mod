@@ -603,6 +603,7 @@ SteelMantaAAResonanceBounce2:
 	-Warhead@shrapnel:
 
 SteelMantaHunterCannons:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2FlakWeapon
 	Inherits@2: ^SteelChaingun
 	Range: 8000
@@ -625,7 +626,14 @@ SteelMantaHunterCannons:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 SteelMantaHunterCannons_AA:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: ^SteelMediumMissile
 	Inherits@2: SteelMantaHunterCannons
 	Range: 12000
@@ -635,6 +643,11 @@ SteelMantaHunterCannons_AA:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 SteelMantaHunterCannonsResonance:
 	Inherits: SteelMantaHunterCannons
 	Warhead@shrapnel: FireShrapnel
@@ -644,17 +657,29 @@ SteelMantaHunterCannonsResonance:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 SteelMantaHunterCannonsResonanceBounce1:
 	Inherits: SteelMantaHunterCannonsResonance
 	Range: 3333
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaHunterCannonsResonanceBounce2
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 SteelMantaHunterCannonsResonanceBounce2:
 	Inherits: SteelMantaHunterCannonsResonance
 	Range: 2222
 	-Warhead@shrapnel:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 SteelMantaHunterCannonsAAResonance_AA:
 	Inherits: SteelMantaHunterCannons_AA
@@ -665,17 +690,29 @@ SteelMantaHunterCannonsAAResonance_AA:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 SteelMantaHunterCannonsAAResonanceBounce1:
 	Inherits: SteelMantaHunterCannonsAAResonance_AA
 	Range: 3333
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaHunterCannonsAAResonanceBounce2
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 SteelMantaHunterCannonsAAResonanceBounce2:
 	Inherits: SteelMantaHunterCannonsAAResonance_AA
 	Range: 2222
 	-Warhead@shrapnel:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 SteelRunnerPistols:
 	Inherits: ^TeslaWeapon

@@ -1604,6 +1604,7 @@ HovercraftPlasmaCannon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 
 JapaneseHovercraftFlak:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -1618,6 +1619,12 @@ JapaneseHovercraftFlak:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 JapaneseHovercraftFlakAA:
 	Inherits: JapaneseHovercraftFlak
 	Range: 7314
@@ -1626,15 +1633,29 @@ JapaneseHovercraftFlakAA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Light:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 4000
+		PercentageScale: 9975
 JapaneseHovercraftFlakWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapaneseHovercraftFlak
 	Inherits@3: ^WaveforceBulletProjectile
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 
 JapaneseHovercraftFlakAAkWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapaneseHovercraftFlakAA
 	Inherits@3: ^WaveforceBulletProjectile
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 4000
+		PercentageScale: 9975
 
 Type89Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -2134,6 +2155,7 @@ JapanesePlasmaBomb:
 		Explosions: blue_building_napalm
 
 JHighV:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -2149,6 +2171,12 @@ JHighV:
 		Damage: 4000
 	Warhead@Bullet_Medium:
 		Damage: 4000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 7488
 JHighVWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JHighV
@@ -2156,6 +2184,10 @@ JHighVWaveforce:
 	Report: bigggun1.aud
 	Warhead@Railgun_Heavy:
 		Damage: 4000
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 7488
 ExecutionerDeath:
 	Inherits: MiniNuke
 	Report: JUShoEx_OmegaShockwaveStereo.wav

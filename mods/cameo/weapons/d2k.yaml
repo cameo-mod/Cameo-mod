@@ -1126,6 +1126,7 @@ LMG:
 	Warhead@Bullet_Light:
 		Damage: 2000
 light_inf_lmg:
+	Inherits@finalmain: ^Compatibility_Bullet_LightFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -1137,6 +1138,12 @@ light_inf_lmg:
 		Damage: 2000
 	Warhead@Bullet_Light:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 LMG_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Bullet_Light
@@ -1928,6 +1935,10 @@ d2k_airdefenseplatform:
 			Medium: 90
 			Heavy: 90
 			Concrete: 30
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 
 D2KTheVoice:
 	ReloadDelay: 200

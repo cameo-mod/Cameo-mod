@@ -678,17 +678,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_Light",
+        "tag": "Bullet_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -700,6 +693,7 @@
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_LightFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -763,17 +757,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_Light",
+        "tag": "Bullet_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -785,6 +772,7 @@
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Bullet_LightFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
