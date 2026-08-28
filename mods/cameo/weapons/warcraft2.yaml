@@ -581,6 +581,8 @@ wc2mageBlizzard_Projectile:
 # Super weapon blizzard.
 
 wc2_tower_arrow:
+	Inherits@collapsewh: ^Warhead_Arrow_Heavy
+	-TargetActorCenter:
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^Chaingun
 	Inherits@3: ^ArrowWeapon
@@ -617,6 +619,14 @@ wc2_tower_arrow:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_bowhit.aud
 		ValidTargets: Ground, Water, Air
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@Chaingun:
+	-Warhead@ArrowWeapon:
+	Warhead@Arrow_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 19000
+		PercentageScale: 0
 
 ####################################################################################################
 #		WEAPONS wc2_orcs

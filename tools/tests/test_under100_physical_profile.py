@@ -27,6 +27,8 @@ ROOTS = {
     "MammothTuskThermobaric", "MonsterTankTuskThermobaric", "OrcaMissiles",
     "TowerMissile", "TSBikeTibMissile", "TSHellfireTwin",
     "wc2mageBlizzard_Projectile",
+    "APTusk", "MammothTusk2", "MissileSoldierWeapon", "Naxis_Komet",
+    "Spore_AA", "wc2_tower_arrow",
 }
 
 ALLOWED_COMPARATOR_FINDINGS = {

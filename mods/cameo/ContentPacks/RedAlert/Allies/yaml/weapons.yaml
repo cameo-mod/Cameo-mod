@@ -476,6 +476,7 @@ CryoReconRangerRecoillessGun:
 		Amount: -32000
 
 APTusk:
+	Inherits@collapsewh: ^Warhead_MissileAP_Heavy
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^Grenade
 	Inherits@3: ^FlakWeapon
@@ -512,6 +513,15 @@ APTusk:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	Warhead@MissileAP_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
 
 APTuskCryo:
 	Inherits: APTusk

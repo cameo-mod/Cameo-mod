@@ -1077,11 +1077,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
+        "damage": "19000",
+        "falloff": "100, 0",
+        "spread": "117",
+        "tag": "Arrow_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -1091,32 +1091,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -1127,20 +1106,23 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
       "requires": "guard",
       "slot": "Armament@guard",
       "versus_templates": [
+       "^Warhead_Arrow_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Heavy"
+      ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "cannon",
@@ -1229,11 +1211,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
+        "damage": "19000",
+        "falloff": "100, 0",
+        "spread": "117",
+        "tag": "Arrow_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -1243,32 +1225,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -1279,20 +1240,23 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
       "requires": "guard",
       "slot": "Armament@guard",
       "versus_templates": [
+       "^Warhead_Arrow_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Heavy"
+      ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "cannon",
@@ -1381,11 +1345,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
+        "damage": "19000",
+        "falloff": "100, 0",
+        "spread": "117",
+        "tag": "Arrow_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -1395,32 +1359,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -1431,20 +1374,23 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
       "requires": "guard",
       "slot": "Armament@guard",
       "versus_templates": [
+       "^Warhead_Arrow_Heavy",
        "^RailgunWeapon",
        "^Chaingun",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Heavy"
+      ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "cannon",

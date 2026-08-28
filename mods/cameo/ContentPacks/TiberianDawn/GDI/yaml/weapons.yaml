@@ -686,6 +686,7 @@ TowerMissileAMT:
 	Inherits@2: ^AMTProjectile
 
 MissileSoldierWeapon:
+	Inherits@collapsewh: ^Warhead_MissileAP_Heavy
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^LightChemicalWeapon
 	Inherits@3: ^ShrapnelWeapon
@@ -756,6 +757,17 @@ MissileSoldierWeapon:
 		Explosions: blue_building_napalm
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@HeavyMissile:
+	Warhead@MissileAP_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 51000
+		PercentageScale: 0
 
 EMPGrenade:
 	Inherits@collapsewh: ^Warhead_Tesla_Super

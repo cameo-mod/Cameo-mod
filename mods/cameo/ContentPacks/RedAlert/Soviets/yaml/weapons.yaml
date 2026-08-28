@@ -2480,6 +2480,7 @@ ra120mm2ThermobaricTargetingComputer:
 	ValidTargets: Ground, Water
 
 MammothTusk2:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^HeavyMissile
@@ -2528,6 +2529,13 @@ MammothTusk2:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@HeavyMissile:
+	Warhead@MissileHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 48000
+		PercentageScale: 0
 
 MammothTusk2TargetingComputer:
 	Inherits: MammothTusk2

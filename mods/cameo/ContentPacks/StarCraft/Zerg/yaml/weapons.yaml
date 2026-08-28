@@ -1067,6 +1067,8 @@ SCQUEENSUMMON:
 		ValidTargets: Air, Ground, Water
 
 Spore_AA:
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
+	-TargetActorCenter:
 	Inherits: ^MediumMissile
 	Inherits@2: ^Chaingun
 	Inherits@3: ^FlakWeapon
@@ -1105,6 +1107,13 @@ Spore_AA:
 		ImpactSounds: zluhit00.aud
 		ImpactActors: false
 		ValidTargets: Air
+	-Warhead@MediumMissile:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 36000
+		PercentageScale: 0
 
 Tentacle:
 	Inherits: ^Warhead_CannonHE_Heavy
