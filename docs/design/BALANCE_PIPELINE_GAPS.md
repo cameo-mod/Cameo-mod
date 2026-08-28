@@ -135,11 +135,37 @@ above it.
 
 | gap | why it matters |
 |---|---|
-| **No orchestrator.** 50+ scripts in `tools/balance/`, no `run_pipeline`-style entry point. | Every run is a hand-sequenced chain, so the order is tribal knowledge and a skipped re-extract goes unnoticed until `audit_balance_drift` catches it later. |
+| ~~**No orchestrator.**~~ **CLOSED** — `tools/balance/run_pipeline.py`. | It ran the documented order on its first real pass and immediately found what the gap predicted: 22 of 33 raw ledgers stale against yaml. See §3b. |
 | **No exception registry.** | Heroes, superweapons, harvesters, transports and promotion-only actors have no declared escape from class pricing, so each pass re-litigates them. |
 | **No constraint reporting.** | When a computed value exceeds what the engine can carry, nothing records *desired* alongside *implementable*. A silent clamp changes the model without saying so. |
 | **No determinism check.** | Ordering, locale and float behaviour are unverified; the compiler property (same inputs → same outputs) is intended but unmeasured. |
 | **Strategic layer absent.** | Counterplay, role coverage, tech reachability and economic tempo are not modelled anywhere, so a unit can price correctly and still be unhealthy. |
+
+### 3b. What the orchestrator found on its first run
+
+`run_pipeline.py` executes steps 1, 3, 7 and 8 plus the structural gates, reports each
+stage's real exit code, and stops at step 6. It cannot apply — no flag reaches
+`--confirm`, because a gate a tool can open by itself is not a gate.
+
+Its first real run came back **FAIL**, on the oldest known failure mode in this
+programme:
+
+| stage | result |
+|---|--:|
+| drift — yaml vs committed ledger | **FAIL**: 22 of 33 raw ledgers stale, 5 model |
+| multiplier modifiers integer | PASS |
+| generator reproduces every family | PASS — drift 0 across 139 templates |
+| empty warhead types | PASS — 0 of 2839 |
+
+`CLAUDE.md` already warns that `audit_balance_drift` "only helps if someone LOOKS", and
+that it had gone red twice for exactly this reason. This is the third time. The last
+commit to re-extract was #293; something after it moved yaml without re-running step 1.
+
+⭐ The remedy is one command — `python tools/balance/extract_stats.py`, then commit the
+ledgers with the yaml — and it belongs to whoever lands the next balance commit, not to
+a drive-by. The weapon-consolidation work already re-extracts as part of its flow; a
+single commit that skipped it left 22 ledgers stale. That is the argument for a runner
+in the documented order rather than a discipline nobody can see failing.
 
 The first three are mechanical and can be built without touching a balance number. The last two
 are design work that must not run ahead of the W-board.

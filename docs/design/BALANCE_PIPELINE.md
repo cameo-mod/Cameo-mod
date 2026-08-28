@@ -12,6 +12,23 @@ the same pipeline.
 
 ## 0. The core loop (maintainer's target workflow)
 
+**One command runs the verifying half of this loop in order:**
+
+```sh
+python tools/balance/run_pipeline.py              # verify — writes nothing
+python tools/balance/run_pipeline.py --extract    # + step 1, refresh the ledgers
+python tools/balance/run_pipeline.py --workbook   # + step 3, rebuild the workbooks
+python tools/balance/run_pipeline.py --dry-run    # print the plan, run nothing
+```
+
+It executes steps 1, 3, 7 and 8 plus the structural gates, reports each stage's real
+exit code, and **stops at step 6**. It cannot apply: there is no flag that reaches
+`--confirm`, because an approval gate a tool can open by itself is not a gate. When the
+verify stage is clean it prints the command for the maintainer to type.
+
+Steps 2, 4 and 6 are human by definition — a balance decision is not a transformation —
+and the runner lists them as such instead of skipping them quietly.
+
 ```
 1. pull    yaml ──► JSON ledger          python tools/balance/extract_stats.py
 2. edit    change values in the ledger (or in the generated sheet)
@@ -44,12 +61,13 @@ that cannot work as stated — four independently-writable copies of the
 same numbers is how drift is CREATED, not prevented. The goal (never
 manually checking mirrors) is kept, but through two rules:
 
-- **Single writer at any moment.** A tiny state file
-  (`docs/balance/.session`) records which representation is "open"
-  (yaml | ledger | sheet). Pipeline commands move values in ONE
-  direction and flip the state; running a command against a stale
-  state aborts with instructions. Mirrors are verified at rest, not
-  hoped for during writes.
+- **Single writer at any moment.** ⚠ **PROPOSED, NEVER BUILT.** The v2 plan called for
+  a state file (`docs/balance/.session`) recording which representation is "open"
+  (yaml | ledger | sheet), so a command run against a stale state would abort. No such
+  file exists and no tool reads one — this paragraph described it in the present tense
+  for long enough that it read as shipped. What actually enforces the invariant is the
+  weaker but real pair below: one direction per command, and the drift audit catching
+  disagreement after the fact rather than preventing it during the write.
 - **The workbook is a WORKBENCH, not a source.** xlsx is binary —
   concurrent agents + git = unmergeable conflicts. The committed
   truths are exactly two: yaml (runtime) and the JSON ledger (balance).
