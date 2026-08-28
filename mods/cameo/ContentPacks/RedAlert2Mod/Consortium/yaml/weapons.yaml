@@ -69,6 +69,8 @@ SteelVulcan:
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 6666
+	# Retain the inherited shell template's range-scaled flight behavior.
+	Projectile: ScaledBullet
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@CannonHE_Heavy:
 		Damage: 2000

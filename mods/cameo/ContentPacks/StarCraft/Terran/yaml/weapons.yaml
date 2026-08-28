@@ -987,10 +987,9 @@ GoliathMG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
-	# ^Projectile_Bullet_* would take the type and orphan the other one's
-	# guidance fields. Keeps today's resolved type verbatim.
-	Projectile: Bullet
+	# ^Projectile_Shell_Heavy provides range-scaled shell travel. The later
+	# chaingun inheritance must not demote it to Bullet's default speed.
+	Projectile: ScaledBullet
 
 GoliathRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy

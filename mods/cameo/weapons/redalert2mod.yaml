@@ -1194,6 +1194,9 @@ Lunar_Green105mm:
 	Inherits@5: ^LunarNaxisUpgradedCannons
 	Range: 5000
 	ReloadDelay: 50
+	# ^Projectile_Shell supplies range-scaled speed/inaccuracy, but the later
+	# Lunar/Naxis presentation layer changes the type. Keep the scaled runtime.
+	Projectile: ScaledBullet
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@Tesla_Heavy:

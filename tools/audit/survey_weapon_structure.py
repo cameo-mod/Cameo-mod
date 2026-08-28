@@ -68,6 +68,32 @@ def direct_armament_references(rules: Ruleset, known: set[str]) -> set[str]:
     return refs
 
 
+def weapon_reference_sets(rules: Ruleset, concrete: set[str]) -> tuple[set[str], set[str]]:
+    """Return direct Armament references and the full modeled weapon closure."""
+    direct_refs = direct_armament_references(rules, concrete)
+    actor_refs = set()
+    for name in rules.actors:
+        if name.startswith("^"):
+            continue
+        resolved = rules.resolve(name)
+        if resolved is not None:
+            actor_refs.update(weapon_references(resolved, concrete))
+
+    graph = {
+        name: weapon_references(rules.resolve_weapon(name), concrete)
+        for name in concrete
+    }
+    reachable = set(actor_refs)
+    pending = list(actor_refs)
+    while pending:
+        name = pending.pop()
+        for target in graph.get(name, ()):
+            if target not in reachable:
+                reachable.add(target)
+                pending.append(target)
+    return direct_refs, reachable
+
+
 def inventory(rules: Ruleset) -> dict[str, object]:
     concrete = {
         name for name in rules.weapons
@@ -77,28 +103,7 @@ def inventory(rules: Ruleset) -> dict[str, object]:
         name for name in concrete
         if len(main_warheads(rules.resolve_weapon(name))) > 1
     }
-    direct_refs = direct_armament_references(rules, concrete)
-
-    actor_refs = set()
-    for name in rules.actors:
-        if name.startswith("^"):
-            continue
-        resolved = rules.resolve(name)
-        if resolved is not None:
-            actor_refs.update(weapon_references(resolved, concrete))
-
-    graph = {}
-    for name in concrete:
-        graph[name] = weapon_references(rules.resolve_weapon(name), concrete)
-
-    reachable = set(actor_refs)
-    pending = list(actor_refs)
-    while pending:
-        name = pending.pop()
-        for target in graph.get(name, ()):
-            if target not in reachable:
-                reachable.add(target)
-                pending.append(target)
+    direct_refs, reachable = weapon_reference_sets(rules, concrete)
 
     direct = violations & direct_refs
     transitive = violations & reachable
