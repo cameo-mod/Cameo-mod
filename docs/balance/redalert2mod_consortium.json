@@ -750,7 +750,6 @@
       "requires": "steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
        "SteelQuantumTurretRail"
       ],
       "warheads": [
@@ -1439,7 +1438,6 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
        "SteelAirTurret_EMP"
       ],
       "warheads": [
@@ -3030,7 +3028,6 @@
       "requires": "steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
        "SteelQuantumTurretRail"
       ],
       "warheads": [
@@ -3100,7 +3097,6 @@
       "requires": "steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
        "SteelQuantumTurretRail"
       ],
       "warheads": [
@@ -7153,7 +7149,6 @@
       "reloaddelay": "38",
       "slot": "Armament@AG1",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
        "SteelQuantumTurretRail"
       ],
       "warheads": [
@@ -7221,7 +7216,6 @@
       "reloaddelay": "38",
       "slot": "Armament@AG2",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
        "SteelQuantumTurretRail"
       ],
       "warheads": [
@@ -10341,13 +10335,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "105600",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "30000",
         "falloff": "100, 0",
         "spread": "96",
@@ -10360,6 +10347,13 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "105600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "15",
@@ -10391,7 +10385,6 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_Railgun_Heavy",
@@ -10999,7 +10992,6 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
        "SteelStalkerRailgun_EMP"
       ],
       "warheads": [

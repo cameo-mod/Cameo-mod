@@ -2546,17 +2546,17 @@
      {
       "damage_warheads": [
        {
-        "damage": "24000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
-        "tag": "Sniper_LightFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2582,7 +2582,6 @@
       "requires": "!rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "^Compatibility_Sniper_LightFlat",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium",
@@ -2604,17 +2603,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
-        "tag": "Sniper_LightFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2662,17 +2661,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
-        "tag": "Sniper_LightFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2752,17 +2751,17 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "24000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
-        "tag": "Sniper_LightFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2788,7 +2787,6 @@
       "requires": "!rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo",
       "slot": "Armament@GARRISONED2",
       "versus_templates": [
-       "^Compatibility_Sniper_LightFlat",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium",
@@ -2811,17 +2809,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
-        "tag": "Sniper_LightFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2870,17 +2868,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
-        "tag": "Sniper_LightFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4776,7 +4774,6 @@
       "requires": "yuri_doctrine_lashertoxicgasshells && rank-elite",
       "slot": "Armament@ToxicELITE",
       "versus_templates": [
-       "^Compatibility_CannonChem_MediumFlat",
        "RA2LasherToxicMortar"
       ],
       "warheads": [],

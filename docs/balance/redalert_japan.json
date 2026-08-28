@@ -676,7 +676,6 @@
       "requires": "japan_upgrade_energizedarrows",
       "slot": "Armament@MissilesUpgrade",
       "versus_templates": [
-       "^Compatibility_Arrow_MediumFlat",
        "SkyHawkArrowsEnergized"
       ],
       "warheads": [
@@ -1484,17 +1483,17 @@
      {
       "damage_warheads": [
        {
-        "damage": "110000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_LightFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "20000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "110000",
+        "falloff": "100, 0",
+        "spread": "59",
+        "tag": "Arrow_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -1563,7 +1562,6 @@
       "requires": "japan_upgrade_energizedarrows",
       "slot": "Armament@UpgradeAIR",
       "versus_templates": [
-       "^Compatibility_Arrow_LightFlat",
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Light",

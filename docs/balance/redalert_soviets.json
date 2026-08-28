@@ -6383,7 +6383,6 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Tesla",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
        "VolkovMagneticWeapon",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6401,13 +6400,6 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "80000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "40000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
@@ -6420,6 +6412,13 @@
         "spread": "1000",
         "tag": "Nuclear_Super_Percentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "80000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "40000",
@@ -6452,7 +6451,6 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@NuclearShells",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
        "^Warhead_Nuclear_Super",
        "^Effect_Nuclear_Super",
        "VolkovMagneticWeapon"
@@ -6812,7 +6810,6 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@GARRISONEDTesla",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
        "VolkovMagneticWeapon",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6831,13 +6828,6 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "80000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "40000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
@@ -6850,6 +6840,13 @@
         "spread": "1000",
         "tag": "Nuclear_Super_Percentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "80000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "40000",
@@ -6882,7 +6879,6 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@GARRISONEDNuclearShells",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
        "^Warhead_Nuclear_Super",
        "^Effect_Nuclear_Super",
        "VolkovMagneticWeapon"
