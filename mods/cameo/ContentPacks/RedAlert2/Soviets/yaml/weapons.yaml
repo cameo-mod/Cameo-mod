@@ -399,7 +399,6 @@ RA2120xmm_rad:
 	-Warhead@CannonHE_HeavyFlatCompatibility:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@TankDestroyerCannon:
 RA2120xmm_fire:
 	Inherits: RA2120xmm
 	Warhead@FireShrapnel: FireShrapnel
@@ -758,10 +757,8 @@ RA2FlakTrackAAGun:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	-Warhead@Chaingun:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
-	-Warhead@SmallArms:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 6000

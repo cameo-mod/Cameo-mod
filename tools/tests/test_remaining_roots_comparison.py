@@ -2,11 +2,14 @@ import collections
 import hashlib
 import json
 import pathlib
+import sys
 import unittest
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 REPORT = ROOT / "docs/audit/latest/remaining_roots_merged_baseline_diff.json"
+sys.path.insert(0, str(ROOT / "tools" / "audit"))
+from miniyaml import Ruleset
 
 # Full before/after payload hashes form a strict accepted-change manifest. This
 # keeps the allowlist compact while ensuring that any weapon, armor modifier,
@@ -50,6 +53,54 @@ class RemainingRootsComparisonTests(unittest.TestCase):
         self.assertEqual(expected, set(self.by_kind["ValidTargets"]))
         self.assertEqual(expected, set(self.by_kind["top_level"]))
         self.assertEqual(expected, set(self.by_kind["percentage_warheads"]))
+
+    def test_compatibility_profiles_are_not_inherited_twice(self):
+        rules = Ruleset(ROOT)
+        duplicates = []
+        for name, local in rules.weapons.items():
+            local_roles = {
+                child.value for child in local.children
+                if child.key.startswith("Inherits@roleflat")
+            }
+            for child in local.children:
+                if child.key != "Inherits" and not child.key.startswith("Inherits@"):
+                    continue
+                parent = rules.weapon(child.value)
+                if parent is None:
+                    continue
+                parent_roles = {
+                    item.value for item in parent.children
+                    if item.key.startswith("Inherits@roleflat")
+                }
+                for role in local_roles & parent_roles:
+                    duplicates.append((name, role, child.value))
+        self.assertEqual([], duplicates)
+
+    def test_warhead_removals_exist_in_a_parent_or_the_local_block(self):
+        rules = Ruleset(ROOT)
+        invalid = []
+        for name, local in rules.weapons.items():
+            removals = {
+                child.key[1:] for child in local.children
+                if child.key.startswith("-Warhead@")
+            }
+            if not removals:
+                continue
+            available = {
+                child.key for child in local.children
+                if child.key.startswith("Warhead@")
+            }
+            for child in local.children:
+                if child.key != "Inherits" and not child.key.startswith("Inherits@"):
+                    continue
+                parent = rules.resolve_weapon(child.value)
+                if parent is not None:
+                    available.update(
+                        item.key for item in parent.children
+                        if item.key.startswith("Warhead@")
+                    )
+            invalid.extend((name, key) for key in removals - available)
+        self.assertEqual([], sorted(invalid))
 
 
 if __name__ == "__main__":

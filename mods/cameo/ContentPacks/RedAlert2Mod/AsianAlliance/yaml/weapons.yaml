@@ -300,12 +300,6 @@ AsianMaidenBow:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 0
-	-Warhead@FlakWeapon:
-	-Warhead@MagicExtraDamage:
-	-Warhead@MagicWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 250
@@ -468,19 +462,11 @@ AsianMaidenBow_elite:
 	Burst: 6
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Spread: 125
-	-Warhead@ArrowWeapon:
-	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@Arrow_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 0
-	-Warhead@FlakWeapon:
-	-Warhead@MagicExtraDamage:
-	-Warhead@MagicWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 250

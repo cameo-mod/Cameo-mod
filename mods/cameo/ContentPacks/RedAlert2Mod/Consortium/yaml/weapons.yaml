@@ -1540,7 +1540,6 @@ SteelMegaSword_elite:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 120000
 	-Warhead@HeavyChemicalWeapon:
-	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
@@ -1618,10 +1617,8 @@ SteelAirTurret_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
-	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
 	-Warhead@Laser_HeavyFlatCompatibility:
-	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
@@ -1659,11 +1656,8 @@ SteelAirTurret_elite:
 		Amount: 3
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
-	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
-	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
-	-Warhead@Laser_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 49600
@@ -1699,11 +1693,8 @@ SteelAirTurretEScatter:
 		ImpactSounds: xplos.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
-	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
-	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
-	-Warhead@Laser_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 9600
@@ -1840,9 +1831,7 @@ SteelQuantumTurretRail_EMP:
 		Damage: 6000
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@HeavyFlameWeapon:
-	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
-	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
@@ -2159,9 +2148,7 @@ SteelStalkerRailgun_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water
 		Damage: 60000
-	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
-	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
 	-Warhead@Railgun_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
@@ -2200,11 +2187,8 @@ SteelStalkerRailgun_elite:
 		Amount: 3
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
-	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
-	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
-	-Warhead@Railgun_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 121600
@@ -2240,11 +2224,8 @@ SteelStalkerRailgunEScatter:
 		ImpactSounds: xplos.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
-	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
-	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
-	-Warhead@Railgun_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 21600

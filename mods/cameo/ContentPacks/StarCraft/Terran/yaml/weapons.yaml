@@ -1095,15 +1095,11 @@ GoliathMk2Rockets:
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
 		ContrailLength: 0
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 32000
 		PercentageScale: 2500
 		PercentageDenominator: 10000
-	-Warhead@FlakWeapon:
-	-Warhead@LightMissile:
-	-Warhead@MediumMissile:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 4
@@ -1584,11 +1580,9 @@ BCYamatoCannon:
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@HeavyMissile:
-	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
 	-Warhead@Laser_HeavyFlatCompatibility:
 	-Warhead@NuclearWarhead:
-	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
 	Warhead@Plasma_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air

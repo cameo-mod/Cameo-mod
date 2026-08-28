@@ -104,8 +104,6 @@ PositronBounce1:
 	-Warhead@FlakWeapon:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
-	-Warhead@SmallArms:
-	-Warhead@TankDestroyerCannon:
 	Warhead@Quantum_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 24000
@@ -139,8 +137,6 @@ PositronBounce2:
 	-Warhead@FlakWeapon:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
-	-Warhead@SmallArms:
-	-Warhead@TankDestroyerCannon:
 	Warhead@Quantum_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 20000
@@ -409,9 +405,6 @@ GladiusCannon:
 		Damage: 40000
 		PercentageScale: 0
 	-Warhead@FlakWeapon:
-	-Warhead@HeavyCannon:
-	-Warhead@MediumCannon:
-	-Warhead@TankDestroyerCannon:
 	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 250

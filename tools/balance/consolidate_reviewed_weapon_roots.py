@@ -338,7 +338,8 @@ def comparable_node(node: Node) -> tuple[str, ...]:
 def apply_exact_preservation_block(
         changed: dict[pathlib.Path, list[str]], path: pathlib.Path, weapon: str,
         old_keys: set[str], replacements: dict[str, Node],
-        inherited_tags: set[str] | None = None) -> None:
+        inherited_tags: set[str] | None = None,
+        remove_retired: bool = True) -> None:
     """Replace retired flat keys with byte-equivalent resolved local slices."""
     lines = changed.setdefault(path, path.read_text(encoding="utf-8-sig").splitlines(True))
     start, end = block_bounds(lines, weapon)
@@ -354,8 +355,9 @@ def apply_exact_preservation_block(
     while insertion > start + 1 and not lines[insertion - 1].strip():
         insertion -= 1
 
-    payload = [f"\t-Warhead@{key}:\n" for key in sorted(old_keys)
-               if key not in existing_removals]
+    payload = ([f"\t-Warhead@{key}:\n" for key in sorted(old_keys)
+                if key not in existing_removals]
+               if remove_retired else [])
     for tag in sorted(set(inherited_tags or ()) - set(replacements)):
         payload.append(f"\t-Warhead@PreservedFlat_{tag}:\n")
     for tag, node in sorted(replacements.items()):
@@ -549,7 +551,7 @@ def main() -> int:
                 continue
             apply_exact_preservation_block(
                 changed, ROOT / child_local.file, child_name, old_keys, child_flats,
-                set(root_flats))
+                set(root_flats), remove_retired=False)
             repaired_descendants += 1
         summary.append((weapon, "exact compatibility", f"preserved {len(root_flats)} slices"))
         if repaired_descendants:
