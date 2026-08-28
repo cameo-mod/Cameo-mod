@@ -12,6 +12,7 @@ IncendiaryM1Carbine:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 ra1_soviets_ak47conscript_rifle:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -27,6 +28,12 @@ ra1_soviets_ak47conscript_rifle:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 CommissarPistol:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -1095,6 +1102,7 @@ IncendiaryChainGun:
 	Warhead@Bullet_Medium:
 		Damage: 2000
 HindMissiles:
+	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_Concussion_Medium
@@ -1118,6 +1126,13 @@ HindMissiles:
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 HindMissilesThermobaric:
 	Inherits@collapsewh: ^Warhead_Thermobaric_Medium
@@ -2726,7 +2741,8 @@ ra120mm2:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
-		Damage: 16000
+		PercentageScale: 3332
+		Damage: 48000
 	Warhead@Effect: CreateEffect
 		Explosions: small_building
 		ImpactSounds: kaboom15.aud
@@ -2734,9 +2750,7 @@ ra120mm2:
 
 	-Warhead@LightChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
-	Warhead@CannonHE_HeavyFlatCompatibility:
-		Damage: 32000
-		PercentageScale: 0
+	-Warhead@CannonHE_HeavyFlatCompatibility:
 ra120mm2TargetingComputer:
 	Inherits: ra120mm2
 	ReloadDelay: 105

@@ -299,8 +299,9 @@ SCTyr:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@CannonHE_Heavy:
+		PercentageScale: 2494
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 16000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_explosion, ra2_medium_clsn, ra2_large_twlt
 		ImpactSounds: gexp14a.wav, expnew09.wav, gexpapoa.wav
@@ -309,11 +310,7 @@ SCTyr:
 	-Warhead@Chaingun:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@CannonHE_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		PercentageScale: 0
-
+	-Warhead@CannonHE_HeavyFlatCompatibility:
 SCTyrAA:
 	Inherits: ^Grenade
 	Inherits@2: ^FlakWeapon
@@ -1057,8 +1054,9 @@ GoliathMk2MG:
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Bullet_Medium:
+		PercentageScale: 3317
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 6000
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -1067,11 +1065,7 @@ GoliathMk2MG:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@TankDestroyerCannon:
-	Warhead@Bullet_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 4000
-		PercentageScale: 0
-
+	-Warhead@Bullet_MediumFlatCompatibility:
 GoliathMk2Rockets:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K_Rocket
@@ -1403,19 +1397,16 @@ WyvernRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MissileAP_Heavy:
+		PercentageScale: 1422
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 14000
 	-Warhead@MediumFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@HeavyBomb:
 	-Warhead@FlakWeapon:
 	-Warhead@MediumMissile:
 	-Warhead@HeavyAAWeapon:
-	Warhead@MissileAP_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		PercentageScale: 0
-
+	-Warhead@MissileAP_HeavyFlatCompatibility:
 BCLaser:
 	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy

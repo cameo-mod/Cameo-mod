@@ -1057,11 +1057,10 @@ HMG_Duelist_upgrade:
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	-Warhead@HeavyMissile:
-	Warhead@Bullet_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+	Warhead@Bullet_Medium:
+		Damage: 16000
 		PercentageScale: 0
-
+	-Warhead@Bullet_MediumFlatCompatibility:
 d2kStormLasher:
 	# Ixian superweapon-class storm. Wired to Storm blend (2026-08-10).
 	# Was 150k Tesla + 150k Magic = 300k total → single 300k Storm.

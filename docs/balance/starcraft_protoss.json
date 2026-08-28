@@ -285,17 +285,10 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -306,6 +299,7 @@
       "reloaddelay": "65",
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_Flak_Medium",
        "^Warhead_Demolition_Light",
        "^Projectile_Flak_Medium",
@@ -322,17 +316,10 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -343,6 +330,7 @@
       "reloaddelay": "65",
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_Flak_Medium",
        "^Warhead_Demolition_Light",
        "^Projectile_Flak_Medium",
@@ -4785,13 +4773,6 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
@@ -4820,7 +4801,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -5733,14 +5714,7 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "150000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "50000",
+        "damage": "200000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",

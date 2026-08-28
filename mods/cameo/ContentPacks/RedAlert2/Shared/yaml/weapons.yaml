@@ -1989,6 +1989,7 @@ RA2PSIAtomicDamage:
 ####################################################################################################
 
 RA2HornetMissile:
+	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -2015,6 +2016,13 @@ RA2HornetMissile:
 	Warhead@MissileAP_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 RA2GIRockets:
 	Inherits: ^RA2LightMissile
 	Report: iggiat2a.wav, iggiat2b.wav
@@ -2542,6 +2550,7 @@ RA2SKELETON:
 		DamageTypes: DefaultDeath
 
 RA2CRM60:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -2556,6 +2565,12 @@ RA2CRM60:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 RA2CRM60H:
 	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -3214,6 +3229,7 @@ SealBomb:
 		Damage: 20000
 
 BorisAKM:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	Report: iboratta.wav, iborattb.wav
@@ -3229,6 +3245,12 @@ BorisAKM:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 4000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 WarpawayEffect:
 	ValidTargets: Ground, Water, Air

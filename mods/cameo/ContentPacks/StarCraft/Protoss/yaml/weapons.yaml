@@ -655,8 +655,9 @@ ScarabLaunch:
 		ValidTargets: Ground, Water
 		Damage: 25
 	Warhead@CannonHE_Heavy:
+		PercentageScale: 2500
 		ValidTargets: Ground, Water
-		Damage: 50000
+		Damage: 200000
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 50000
@@ -671,11 +672,7 @@ ScarabLaunch:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@MediumMissile:
-	Warhead@CannonHE_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 150000
-		PercentageScale: 0
-
+	-Warhead@CannonHE_HeavyFlatCompatibility:
 ScarabLaunchDummy:
 	ReloadDelay: 90
 	Range: 7777
@@ -754,6 +751,7 @@ ZeratulSlice:
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 CorsairFlash:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -780,6 +778,12 @@ CorsairFlash:
 		Damage: 2000
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
+	-Warhead@Demolition_Light:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 4000
+		PercentageScale: 9975
 
 Corsair_EMP:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -1323,8 +1327,9 @@ AtreusMG:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium:
+		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
 		ValidTargets: Ground, Water, Air
@@ -1333,11 +1338,7 @@ AtreusMG:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumMissile:
 	-Warhead@FlakWeapon:
-	Warhead@Bullet_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		PercentageScale: 0
-
+	-Warhead@Bullet_MediumFlatCompatibility:
 PatriarchShoot:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^Grenade

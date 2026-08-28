@@ -448,8 +448,9 @@ ReconRangerRecoillessGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MissileAP_Heavy:
+		PercentageScale: 1210
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 33000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -464,10 +465,7 @@ ReconRangerRecoillessGun:
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@MediumMissile:
-	Warhead@MissileAP_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 29000
-		PercentageScale: 0
+	-Warhead@MissileAP_HeavyFlatCompatibility:
 CryoReconRangerRecoillessGun:
 	Inherits: ReconRangerRecoillessGun
 	Inherits@2: ^CryoMissileProjectile
@@ -674,7 +672,8 @@ ChronoTuskCryo:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Medium:
-		Damage: 2000
+		PercentageScale: 1659
+		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
@@ -686,10 +685,7 @@ ChronoTuskCryo:
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
-	Warhead@CannonHE_MediumFlatCompatibility:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Damage: 10000
-		PercentageScale: 0
+	-Warhead@CannonHE_MediumFlatCompatibility:
 90mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium

@@ -1090,18 +1090,15 @@ CannonAttackRobotGun:
 	Warhead@Railgun_Heavy:
 		Damage: 2000
 	Warhead@CannonHE_Medium:
-		Damage: 2000
+		PercentageScale: 3317
+		Damage: 6000
 	Warhead@Effect: CreateEffect
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
 	-Warhead@TankDestroyerCannon:
 	-Warhead@MediumFlameWeapon:
-	Warhead@CannonHE_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 4000
-		PercentageScale: 0
-
+	-Warhead@CannonHE_MediumFlatCompatibility:
 CannonAttackRobotGun_elite:
 	Inherits: CannonAttackRobotGun
 	Range: 7000
@@ -1173,15 +1170,13 @@ FutureMechGatling:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium:
+		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 8000
 	-Warhead@TankDestroyerCannon:
 	-Warhead@LightMissile:
 	-Warhead@FlakWeapon:
-	Warhead@Bullet_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		PercentageScale: 0
+	-Warhead@Bullet_MediumFlatCompatibility:
 FutureMechPlasma:
 	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^Grenade

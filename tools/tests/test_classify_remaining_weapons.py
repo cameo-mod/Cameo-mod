@@ -62,7 +62,7 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
         folded = [hit for hit in classifier.percentage_ledger(weapon)
                   if hit["tag"] == "CannonHE_Medium" and hit["kind"] == "pct_folded"]
         self.assertEqual(1, len(folded))
-        self.assertEqual(10000, folded[0]["scale"])
+        self.assertEqual(2499, folded[0]["scale"])
         self.assertEqual(10000, folded[0]["denominator"])
         self.assertIn("Shield", folded[0]["percentage_versus"])
 

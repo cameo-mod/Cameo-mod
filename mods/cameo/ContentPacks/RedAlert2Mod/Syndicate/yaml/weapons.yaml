@@ -508,8 +508,9 @@ RA2LarsRocket:
 		MinimumLaunchSpeed: 125
 		Acceleration: 10
 	Warhead@MissileAP_Heavy:
+		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 8000
 	Warhead@HeavyAAWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -534,12 +535,9 @@ RA2LarsRocket:
 	-Warhead@HeavyAAWeapon:
 	-Warhead@LightMissile:
 	-Warhead@TankDestroyerCannon:
-	Warhead@MissileAP_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		PercentageScale: 0
-
+	-Warhead@MissileAP_HeavyFlatCompatibility:
 RA2Gren60mm:
+	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
 	Inherits: ^RA2HeavyCannon
 	Inherits@2: ^RA2MediumCannon
 	Inherits@3: ^RA2TankDestroyerCannon
@@ -554,11 +552,23 @@ RA2Gren60mm:
 		Damage: 2000
 	Warhead@CannonAP_Light:
 		Damage: 2000
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_Medium:
+	Warhead@CannonAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 9984
 RA2Gren60mm_elite:
+	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
 	Inherits: RA2Gren60mm
 	Range: 6031
 	Burst: 2
 	BurstDelays: 3
+	Warhead@CannonAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 9984
 
 LatinRusherRocket:
 	Inherits: ^RA2MediumMissile
@@ -626,17 +636,15 @@ LatinSmokerCannon:
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
 	Warhead@CannonHE_Medium:
-		Damage: 2000
+		PercentageScale: 1810
+		Damage: 11000
 	-Warhead@HeavyBomb:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@CannonHE_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 9000
-		PercentageScale: 0
+	-Warhead@CannonHE_MediumFlatCompatibility:
 LatinSmokerCannon_elite:
 	Inherits: LatinSmokerCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -736,8 +744,9 @@ DiabloCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Flak_Medium:
+		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 8000
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -746,10 +755,7 @@ DiabloCannon:
 	-Warhead@LightMissile:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@Chaingun:
-	Warhead@Flak_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		PercentageScale: 0
+	-Warhead@Flak_MediumFlatCompatibility:
 DiabloCannon_elite:
 	Inherits: DiabloCannon
 	Report: aacanon3.aud
@@ -1251,8 +1257,9 @@ RA2APCFlakCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Flak_Medium:
+		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 8000
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -1261,10 +1268,7 @@ RA2APCFlakCannon:
 	-Warhead@LightMissile:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@Chaingun:
-	Warhead@Flak_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		PercentageScale: 0
+	-Warhead@Flak_MediumFlatCompatibility:
 RA2APCFlakCannon_elite:
 	Inherits: RA2APCFlakCannon
 	Report: aacanon3.aud

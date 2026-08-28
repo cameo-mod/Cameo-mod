@@ -495,11 +495,10 @@ TurretGunBlackMarket:
 	-Warhead@Effect:
 	-Warhead@HeavyBomb:
 	-Warhead@HeavyCannon:
-	Warhead@Concussion_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 12000
+	Warhead@Concussion_Medium:
+		Damage: 31000
 		PercentageScale: 0
-
+	-Warhead@Concussion_MediumFlatCompatibility:
 Dragon:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy

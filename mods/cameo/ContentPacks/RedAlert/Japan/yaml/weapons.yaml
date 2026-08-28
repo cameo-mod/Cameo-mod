@@ -1,4 +1,5 @@
 CHGuardRifle:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -16,6 +17,12 @@ CHGuardRifle:
 # the scout anchor together with the Imperial Scoutsman's 20000/50/100.
 # Dedicated (never shared): CHGuardRifle serves civilians/other rules
 # and must not carry baseline duty.
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 japan_imperialscoutsman_rifle:
 	# Special-Forces baseline weapon (maintainer 2026-07-20): SmallArms +
 	# Chaingun + railgun-AP = 6000 dmg, precise (bullet projectile, no beam

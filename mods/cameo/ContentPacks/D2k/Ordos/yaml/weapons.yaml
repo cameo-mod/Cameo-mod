@@ -85,8 +85,8 @@ HeavyOrdosCombatTankRockets:
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 14000
+		PercentageScale: 2499
+		Damage: 56000
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 14000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
@@ -95,9 +95,7 @@ HeavyOrdosCombatTankRockets:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
-	Warhead@CannonHE_MediumFlatCompatibility:
-		Damage: 42000
-		PercentageScale: 0
+	-Warhead@CannonHE_MediumFlatCompatibility:
 120mm_cobra:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
@@ -440,8 +438,9 @@ DeviatorMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@MissileAP_Heavy:
+		PercentageScale: 3330
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 30000
 	Warhead@Effect: CreateEffect
 		Explosions: deviator
 		ExplosionPalette: deviatorgas
@@ -461,11 +460,7 @@ DeviatorMissile:
 	MinRange: 1415
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumMissile:
-	Warhead@MissileAP_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		PercentageScale: 0
-
+	-Warhead@MissileAP_HeavyFlatCompatibility:
 DeviatorMissile_Artillery:
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^HeavyFlameWeapon
@@ -507,11 +502,9 @@ DeviatorMissile_Artillery:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@HeavyFlameWeapon:
-	Warhead@MissileAP_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 40000
-		PercentageScale: 0
-
+	Warhead@MissileAP_Heavy:
+		Damage: 50000
+		PercentageScale: 1998
 Wraith_ToxinMissiles:
 	Inherits: DeviatorMissile_Artillery
 	Range: 8370

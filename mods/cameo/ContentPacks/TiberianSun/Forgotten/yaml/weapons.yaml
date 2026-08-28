@@ -46,6 +46,7 @@ TS70mmChem:
 		InvalidTargets: Water
 
 TS70mmTur:
+	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -64,6 +65,12 @@ TS70mmTur:
 		Damage: 4000
 	Warhead@CannonAP_Light:
 		Damage: 4000
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Medium:
+	Warhead@CannonAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 TS70mmTurChem:
 	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
@@ -79,7 +86,8 @@ TS70mmTurChem:
 		Blockable: false
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium:
-		Damage: 4000
+		PercentageScale: 3325
+		Damage: 12000
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
@@ -108,9 +116,7 @@ TS70mmTurChem:
 
 	-Warhead@LightChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
-	Warhead@CannonHE_MediumFlatCompatibility:
-		Damage: 8000
-		PercentageScale: 0
+	-Warhead@CannonHE_MediumFlatCompatibility:
 TS120mmx:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -262,7 +268,8 @@ TSScoopDualTurChem:
 	Projectile: Bullet
 		Speed: 850
 	Warhead@CannonHE_Heavy:
-		Damage: 16000
+		PercentageScale: 3332
+		Damage: 48000
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 16000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -294,9 +301,7 @@ TSScoopDualTurChem:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@CannonHE_HeavyFlatCompatibility:
-		Damage: 32000
-		PercentageScale: 0
+	-Warhead@CannonHE_HeavyFlatCompatibility:
 TSHighVelocity:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonAP_Light
@@ -1782,6 +1787,7 @@ TSRaiderCarCannon:
 	Warhead@Bullet_Light:
 		Damage: 4000
 TSBowlerCannon:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1794,6 +1800,12 @@ TSBowlerCannon:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 TSWaspClaw:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1809,6 +1821,7 @@ TSWaspClaw:
 		Damage: 4000
 		ValidTargets: Ground, Air
 TSMutApcCannon:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -1825,6 +1838,12 @@ TSMutApcCannon:
 		Damage: 2000
 	ValidTargets: Ground, Water, Air
 	ValidTargets: Ground, Water, Air
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 TSNomadGun:
 	Inherits@wh: ^Warhead_Bullet_Medium

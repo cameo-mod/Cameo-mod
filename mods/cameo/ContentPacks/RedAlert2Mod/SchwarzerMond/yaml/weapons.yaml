@@ -262,14 +262,12 @@ LunarTigerCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
-		Damage: 4000
+		PercentageScale: 2494
+		Damage: 16000
 	-Warhead@HeavyBomb:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
-	Warhead@CannonHE_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 12000
-		PercentageScale: 0
+	-Warhead@CannonHE_MediumFlatCompatibility:
 LunarTigerCannon_elite:
 	Inherits: LunarTigerCannon
 	Range: 6105
@@ -277,6 +275,7 @@ LunarTigerCannon_elite:
 	BurstDelays: 3
 
 NaxHaenebuQuadCannon:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_MissileAP_Heavy
 	Inherits@3: ^Effect_MissileAP_Heavy
@@ -306,13 +305,25 @@ NaxHaenebuQuadCannon:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Concussion_Light:
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Heavy:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 NaxHaenebuQuadCannon_elite:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: NaxHaenebuQuadCannon
 	Range: 7777
 	Burst: 7
 	Projectile: Bullet
 		ContrailStartColor: FF0000
 		Inaccuracy: 777
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 DalekCannon:
 	Inherits@wh: ^Warhead_Tesla_Heavy
