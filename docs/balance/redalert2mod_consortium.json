@@ -5912,7 +5912,7 @@
       "pricing": true,
       "range": "6200",
       "reloaddelay": "8",
-      "requires": "!rank-elite",
+      "requires": "!rank-elite && !steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^TeslaWeapon",
@@ -5996,7 +5996,7 @@
       "pricing": true,
       "range": "7200",
       "reloaddelay": "8",
-      "requires": "rank-elite",
+      "requires": "rank-elite && !steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@ELITE",
       "versus_templates": [
        "SteelRunnerPistols"
@@ -6079,7 +6079,7 @@
       "pricing": false,
       "range": "6200",
       "reloaddelay": "8",
-      "requires": "!rank-elite",
+      "requires": "!rank-elite && !steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^TeslaWeapon",
@@ -6164,7 +6164,7 @@
       "pricing": false,
       "range": "7200",
       "reloaddelay": "8",
-      "requires": "rank-elite",
+      "requires": "rank-elite && !steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
        "SteelRunnerPistols"
