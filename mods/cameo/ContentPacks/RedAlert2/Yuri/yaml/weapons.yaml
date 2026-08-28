@@ -736,6 +736,12 @@ RA2GattlingMG3_AA:
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 8000
+		PercentageScale: 9988
 YuriGatlingCannonMG3:
 	Inherits: RA2GattlingMG3
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
@@ -745,6 +751,7 @@ YuriGatlingCannonMG3_AA:
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
 
 RA2GattlingInf:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 15
@@ -768,6 +775,12 @@ RA2GattlingInf:
 		PercentageScale: 2500
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 16000
+		PercentageScale: 2494
 RA2Virusgun:
 	Inherits@roleflat: ^Compatibility_Sniper_LightFlat
 	Inherits: ^HeavyChemicalWeapon
@@ -931,6 +944,7 @@ RA2Chemspray:
 		InvalidTargets: Water
 
 RA2Chemspray2:
+	Inherits@roleflat: ^Compatibility_Chemical_HeavyFlat
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
@@ -948,6 +962,12 @@ RA2Chemspray2:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 4
 		Duration: 200
+	-Warhead@Chemical_Heavy:
+	-Warhead@Chemical_Medium:
+	Warhead@Chemical_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 RA2Chemspray_elite:
 	Inherits: RA2Chemspray2

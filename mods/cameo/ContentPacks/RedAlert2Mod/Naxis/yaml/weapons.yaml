@@ -33,6 +33,7 @@ NaxBrummbarArty_elite:
 	BurstDelays: 3
 
 NaxiWW2KübelwagenMachinegun:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
@@ -57,7 +58,14 @@ NaxiWW2KübelwagenMachinegun:
 	Warhead@Bullet_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 NaxiWW2Machinegun:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
@@ -82,6 +90,12 @@ NaxiWW2Machinegun:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 NaxiWW2Machinegun_AA:
 	Inherits: NaxiWW2Machinegun
 	Range: 8355
@@ -90,6 +104,12 @@ NaxiWW2Machinegun_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 8000
+		PercentageScale: 9988
 NaxiWW2MachinegunSmall:
 	Inherits: NaxiWW2Machinegun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
@@ -101,6 +121,12 @@ NaxiWW2MachinegunSmall:
 	Warhead@Bullet_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 NaxiWW2MachinegunSmall_AA:
 	Inherits: NaxiWW2MachinegunSmall
 	Range: 8355
@@ -109,6 +135,12 @@ NaxiWW2MachinegunSmall_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 4000
+		PercentageScale: 9975
 NaxiWW2MachinegunTop:
 	Inherits: NaxiWW2Machinegun
 	Range: 7555
@@ -123,6 +155,12 @@ NaxiWW2MachinegunTop_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 8000
+		PercentageScale: 9988
 NaxiWW2Machinegunner:
 	Inherits: NaxiWW2Machinegun
 	Range: 8970
