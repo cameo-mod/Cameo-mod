@@ -58,6 +58,10 @@ TSRaiderGrenade:
 		ImpactSounds: expnew13.aud
 
 TSProton:
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
+	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseground: ^Compatibility_ProtonLaser_GroundSlice
+	-TargetActorCenter:
 	Inherits: ^TSEnergyBlast
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^LaserWeapon
@@ -90,6 +94,14 @@ TSProton:
 		Damage: 15
 	Warhead@2Eff: CreateEffect
 		Explosions: small_frag
+
+	-Warhead@MediumFlameWeapon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 29000
+		PercentageScale: 0
 
 TSTibBazooka:
 	Inherits@wh: ^Warhead_MissileChem_Light

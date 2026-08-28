@@ -1161,6 +1161,8 @@ MutFlamer:
 	Warhead@Flame_Medium:
 		Damage: 28000
 MutFlamerChem:
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
+	-TargetActorCenter:
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 50
@@ -1199,6 +1201,13 @@ MutFlamerChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water
+		Damage: 42000
+		PercentageScale: 0
+
 MutHFlamer:
 	Inherits@collapsewh: ^Warhead_Flame_Heavy
 	Inherits: ^MediumFlameWeapon
@@ -1222,6 +1231,8 @@ MutHFlamer:
 		Damage: 40000
 		PercentageScale: 0
 MutHFlamerChem:
+	Inherits@collapsewh: ^Warhead_Chemical_Heavy
+	-TargetActorCenter:
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^HeavyFlameWeapon
 	Inherits@3: ^MediumChemicalWeapon
@@ -1283,6 +1294,15 @@ MutHFlamerChem:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
+
+	-Warhead@MediumFlameWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@HeavyChemicalWeapon:
+	Warhead@Chemical_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 60000
+		PercentageScale: 0
 
 TSFiendShard:
 	Inherits@wh: ^Warhead_Chemical_Light

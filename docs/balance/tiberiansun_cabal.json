@@ -1922,11 +1922,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "70000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
+        "damage": "69000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamageCompatibility",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "210000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CabalLaserGroundCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "35",
@@ -1936,13 +1957,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "70000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "35",
         "falloff": null,
         "spread": "75",
@@ -1950,32 +1964,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "70000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "35",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "70000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "35",
@@ -1986,21 +1979,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "12288",
       "reloaddelay": "90",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
+       "^Compatibility_Laser_ExtraDamage",
+       "^Compatibility_CabalLaser_GroundSlice",
        "^TankDestroyerCannon",
        "^LaserWeapon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
        "^TSLaserEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSCABALObeliskLaserFire",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4196,11 +4194,32 @@
      {
       "damage_warheads": [
        {
-        "damage": "70000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
+        "damage": "69000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamageCompatibility",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "210000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CabalLaserGroundCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "35",
@@ -4210,13 +4229,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "70000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "35",
         "falloff": null,
         "spread": "75",
@@ -4224,32 +4236,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "70000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "35",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "70000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "35",
@@ -4260,21 +4251,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
+       "^Compatibility_Laser_ExtraDamage",
+       "^Compatibility_CabalLaser_GroundSlice",
        "^TankDestroyerCannon",
        "^LaserWeapon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
        "^TSLaserEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSCABALEnlightedLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [],
@@ -4295,11 +4291,32 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "70000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
+        "damage": "69000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamageCompatibility",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "210000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CabalLaserGroundCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "35",
@@ -4309,13 +4326,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "70000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "35",
         "falloff": null,
         "spread": "75",
@@ -4323,32 +4333,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "70000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "35",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "70000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "35",
@@ -4359,21 +4348,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5120",
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
+       "^Compatibility_Laser_ExtraDamage",
+       "^Compatibility_CabalLaser_GroundSlice",
        "^TankDestroyerCannon",
        "^LaserWeapon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
        "^TSLaserEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSCABALEnlightedLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

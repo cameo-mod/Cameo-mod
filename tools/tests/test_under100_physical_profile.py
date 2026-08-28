@@ -30,6 +30,10 @@ ROOTS = {
     "APTusk", "MammothTusk2", "MissileSoldierWeapon", "Naxis_Komet",
     "Spore_AA", "wc2_tower_arrow",
     "HindMissilesNuclear", "NaxiMeteor", "RA2TOPOLCuba",
+    "BehemothShoot", "DreadshroudSpore", "FirehawkBomb", "MutFlamerChem",
+    "MutHFlamerChem", "ShtoraLaser", "TS30mmRail",
+    "TSCABALEnlightedLaser", "TSCABALObeliskLaserFire", "TSProton",
+    "TankBusterBeamCannon",
 }
 
 ALLOWED_COMPARATOR_FINDINGS = {
@@ -53,7 +57,7 @@ class Under100PhysicalProfileTests(unittest.TestCase):
         remaining = classifier.classify(self.rules)
         names = {row["weapon"] for row in remaining}
         self.assertFalse(names & ROOTS, names & ROOTS)
-        self.assertLessEqual(len(remaining), 152)
+        self.assertLessEqual(len(remaining), 141)
 
     def test_flat_compatibility_helpers_cannot_add_percentage_damage(self):
         helpers = [name for name in self.rules.weapons if name.startswith("^Compatibility_")]

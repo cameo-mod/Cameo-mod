@@ -15,6 +15,10 @@ TS30mm:
 		PercentageScale: 2500
 		Damage: 8000
 TS30mmRail:
+	Inherits@collapsewh: ^Warhead_Flak_Medium
+	Inherits@collapseextra: ^Compatibility_Railgun_ExtraDamage
+	Inherits@collapsetargets: ^Compatibility_TS30mmRail_UnscopedFlat
+	-TargetActorCenter:
 	Inherits: ^MediumMissile
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^RailgunWeapon
@@ -39,6 +43,15 @@ TS30mmRail:
 		Damage: 2000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 1
+
+	-Warhead@MediumMissile:
+	-Warhead@FlakWeapon:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 0
 
 TS120mmRail:
 	# Inherits: ^TSCannon

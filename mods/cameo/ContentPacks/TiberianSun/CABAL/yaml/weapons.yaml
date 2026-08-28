@@ -178,6 +178,10 @@ TSCABALDisable_EMP:
 		ValidTargets: Ground, Ship
 
 TSCABALObeliskLaserFire:
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
+	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseground: ^Compatibility_CabalLaser_GroundSlice
+	-TargetActorCenter:
 	Inherits: ^TankDestroyerCannon
 	Inherits@LASER: ^LaserWeapon
 	Inherits@FLAME: ^MediumFlameWeapon
@@ -239,6 +243,16 @@ TSCABALObeliskLaserFire:
 		ImpactSounds: drtelectro.wav
 		ImpactActors: false
 		ValidTargets: Ground, Ship
+
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 69000
+		PercentageScale: 0
 
 TSHellfireTwin:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
@@ -313,6 +327,10 @@ TSHellfireTwin:
 		Damage: 24000
 		PercentageScale: 0
 TSCABALEnlightedLaser:
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
+	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseground: ^Compatibility_CabalLaser_GroundSlice
+	-TargetActorCenter:
 	Range: 10088
 	ReloadDelay: 120
 	Inherits: ^TankDestroyerCannon
@@ -366,6 +384,16 @@ TSCABALEnlightedLaser:
 		ImpactSounds: drtelectro.wav
 		ImpactActors: false
 		ValidTargets: Ground, Ship
+
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 69000
+		PercentageScale: 0
 
 ####################################################################################################
 #		Tiberian Sun Other

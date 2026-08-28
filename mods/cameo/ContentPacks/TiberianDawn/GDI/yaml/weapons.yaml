@@ -1705,6 +1705,7 @@ FirehawkMissiles_AA:
 		ImpactSounds: xplobig4.aud
 
 FirehawkBomb:
+	Inherits@collapsewh: ^Warhead_Nuclear_Super
 	Inherits: ^HeavyBomb
 	Inherits@2: ^NuclearWarhead
 	Inherits@3: ^ShrapnelWeapon
@@ -1754,6 +1755,17 @@ FirehawkBomb:
 		Damage: 5
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
+
+	-Warhead@HeavyBomb:
+	-Warhead@NuclearWarhead:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumFlameWeapon:
+	Warhead@Nuclear_Super:
+		ValidTargets: Ground, Ship
+		Damage: 40000
+		PercentageScale: 0
+	-Warhead@Nuclear_Super_Percentage:
 
 ##########################
 # TIBERIAN DAWN EXPANSION

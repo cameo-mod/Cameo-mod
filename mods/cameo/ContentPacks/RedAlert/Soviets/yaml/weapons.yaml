@@ -1964,6 +1964,9 @@ HammerTankCannonThermobaric:
 		ImpactSounds: firebl3.aud
 
 ShtoraLaser:
+	Inherits@collapsewh: ^Warhead_Laser_Light
+	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
+	-TargetActorCenter:
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^LaserWeapon
@@ -2018,6 +2021,16 @@ ShtoraLaser:
 		Range: 500
 		ValidTargets: Ground, Water, Air
 		#ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
+
+	-Warhead@LightFlameWeapon:
+	-Warhead@FlakWeapon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Laser_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
 
 KotinCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy

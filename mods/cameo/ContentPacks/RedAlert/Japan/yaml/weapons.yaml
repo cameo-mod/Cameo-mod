@@ -103,6 +103,10 @@ japan_imperialscoutsman_rifle_waveforce:
 	Inherits@3: ^WaveforceBulletProjectile
 
 TankBusterBeamCannon:
+	Inherits@collapsewh: ^Warhead_Railgun_Heavy
+	Inherits@collapseextra: ^Compatibility_Railgun_ExtraDamage
+	Inherits@collapsetargets: ^Compatibility_TankBusterBeam_UnscopedFlat
+	-TargetActorCenter:
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^MediumCannon
 	Inherits@3: ^RailgunWeapon
@@ -133,6 +137,15 @@ TankBusterBeamCannon:
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+
+	-Warhead@TankDestroyerCannon:
+	-Warhead@MediumCannon:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	Warhead@Railgun_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 15000
+		PercentageScale: 0
 
 TankBusterBeamCannonCharged:
 	Inherits@wh: ^Warhead_Laser_Heavy

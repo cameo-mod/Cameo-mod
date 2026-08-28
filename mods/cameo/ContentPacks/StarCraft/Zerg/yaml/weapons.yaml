@@ -278,6 +278,8 @@ CorruptorSpore:
 		ValidTargets: Ground, Water, Air
 
 DreadshroudSpore:
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
+	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^ShrapnelWeapon
@@ -365,6 +367,19 @@ DreadshroudSpore:
 		ImpactSounds: zguhit00.aud
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
+
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 11000
+		PercentageScale: 0
 
 SCDevourerAA:
 	Inherits@Contaminated: TractorGLAnthraxPurple
@@ -943,6 +958,7 @@ InfestedExplosion:
 		ImpactActors: true
 
 BehemothShoot:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^HeavyMissile
@@ -1037,6 +1053,19 @@ BehemothShoot:
 	Warhead@EffectAir: CreateEffect
 		Explosions: sczhsplash
 		ImpactSounds: zguhit00.aud
+
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@HeavyMissile:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	Warhead@MissileHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 zerg_kerrigan:
 	Inherits@wh: ^Warhead_Melee_Medium

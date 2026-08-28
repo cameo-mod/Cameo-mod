@@ -3829,6 +3829,82 @@ DefuseKit:
 			Helicopter: 6
 			Spaceship: 5
 
+^Compatibility_Laser_ExtraDamage:
+	Warhead@LaserExtraDamageCompatibility: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 600
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+
+^Compatibility_Railgun_ExtraDamage:
+	Warhead@RailgunExtraDamageCompatibility: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 500
+		Damage: 1000
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+
+^Compatibility_TS30mmRail_UnscopedFlat:
+	Warhead@TS30mmRailUnscopedCompatibility: AreaDamage
+		Damage: 2000
+		PercentageScale: 0
+
+^Compatibility_TankBusterBeam_UnscopedFlat:
+	Warhead@TankBusterBeamUnscopedCompatibility: AreaDamage
+		Damage: 8000
+		PercentageScale: 0
+
+^Compatibility_CabalLaser_GroundSlice:
+	Warhead@CabalLaserGroundCompatibility: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 210000
+		PercentageScale: 0
+
+^Compatibility_ProtonLaser_GroundSlice:
+	Warhead@ProtonLaserGroundCompatibility: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 0
+
 ^Warhead_CannonHE_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
