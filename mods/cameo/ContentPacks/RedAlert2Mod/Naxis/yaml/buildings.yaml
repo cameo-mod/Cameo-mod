@@ -699,10 +699,11 @@ naxis_naxirocketsilo:
 	Tooltip:
 		Name: Naxi Rocket Silo
 	Buildable:
+		-BuildLimit:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~naxis_constructionyard, naxis_techcenter, !naxis_naxirocketsilo, ~techlevel.superweapons
+		Prerequisites: ~naxis_constructionyard, naxis_techcenter, !naxis_naxirocketsilo_swlimit, ~techlevel.superweapons
 		Queue: Defence, RADefence
 		Description: actor_nax_rocket.description
 	Building:
@@ -756,7 +757,7 @@ naxis_naxirocketsilo:
 	SupportPowerChargeBar:
 	WithSupportPowerActivationAnimation:
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: naxis_naxirocketsilo
+		Prerequisite: naxis_naxirocketsilo_swlimit
 
 ####################################################################################################
 #		Red Alert 2 Moon Naxis Structures

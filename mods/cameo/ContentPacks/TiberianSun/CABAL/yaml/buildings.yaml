@@ -529,6 +529,7 @@ cabal_core:
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
+		-BuildLimit:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
 		Prerequisites: ~cabal_constructionyard, cabal_techcenter
@@ -566,6 +567,9 @@ cabal_core:
 			cabalcore_silo: !build-incomplete && !cabalnuke
 	ProvidesPrerequisite@cabalnuke:
 		Prerequisite: cabalnuke
+		RequiresCondition: cabalnuke
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: cabalnuke_swlimit
 		RequiresCondition: cabalnuke
 	NukePowerCA:
 		OrderName: CabalMagicNuke

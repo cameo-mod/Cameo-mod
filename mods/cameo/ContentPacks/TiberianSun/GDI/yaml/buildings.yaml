@@ -600,7 +600,7 @@ ts_gdi_ioncannonuplink:
 		BuildPaletteOrder: 10
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~ts_gdi_upgradecenter, !ionc, !droppod, ~techlevel.superweapons
+		Prerequisites: ~ts_gdi_upgradecenter, !ionc, !droppod, !tsionc, ~techlevel.superweapons
 		Description: Unlocks the Ion Cannon superweapon.
 	Plug:
 		Type: ioncannon
@@ -640,9 +640,10 @@ ts_gdi_upgradecenter:
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@plugproducer: ^BuildingPlugProducer
 	Buildable:
+		-BuildLimit:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 160
-		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter, !tsionc, ~techlevel.superweapons
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter, ~techlevel.superweapons
 		Description: actor_ts_gdi_upgradecenter.description
 	Tooltip:
 		Name: Upgrade Center
@@ -727,6 +728,7 @@ ts_gdi_upgradecenter:
 		TargetCircleColor: ff000080
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: tsionc
+		RequiresCondition: ionc
 	RenderSprites:
 		PlayerPalette: playerra2
 

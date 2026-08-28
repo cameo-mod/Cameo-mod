@@ -43,6 +43,7 @@ ra2_soviets_nuclearmissilesilo:
 	Tooltip:
 		Name: Nuclear Missile Silo
 	Buildable:
+		-BuildLimit:
 		BuildPaletteOrder: 100
 		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_battlelab, !ra2nuke, ~techlevel.superweapons
 		Queue: Defence, RADefence
@@ -110,7 +111,8 @@ ra2_soviets_ironcurtain:
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Buildable:
-		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_battlelab, ~techlevel.superweapons
+		-BuildLimit:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_battlelab, ~techlevel.superweapons, !ra2_soviets_ironcurtain_swlimit
 		Description: actor_iron.description
 	Tooltip:
 		Name: Iron Curtain
@@ -156,6 +158,9 @@ ra2_soviets_ironcurtain:
 	SupportPowerChargeBar:
 	MustBeDestroyed:
 		RequiredForShortGame: false
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: ra2_soviets_ironcurtain_swlimit
+		RequiresPrerequisites: global-swlimit
 
 ra2_soviets_battlebunker:
 	Inherits: ^RA2Defense

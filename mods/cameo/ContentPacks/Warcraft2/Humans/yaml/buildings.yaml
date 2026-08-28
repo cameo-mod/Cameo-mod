@@ -488,9 +488,12 @@ wc2_humans_magetower:
 	Tooltip:
 		Name: Mage Tower
 	Buildable:
-		Prerequisites: ~wc2_humans_townhall, wc2_humans_castle
+		-BuildLimit:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_castle, !wc2_humans_magetower_swlimit
 		Queue: Building, RABuilding
 		Description: Teaches men in arcane magicks.\nTrains Mages.\nUnlocks Blizzard superweapon.
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: wc2_humans_magetower_swlimit
 	SpawnActorsOnSell:
 		ActorTypes: wc2_humans_footman
 	Voiced:
