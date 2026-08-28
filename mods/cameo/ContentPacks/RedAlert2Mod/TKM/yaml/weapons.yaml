@@ -60,6 +60,7 @@ tkmjuggap:
 		ValidTargets: Ground, Water
 		Damage: 6000
 tkmbunkmg:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 41
@@ -71,6 +72,12 @@ tkmbunkmg:
 		Damage: 2000
 	Warhead@Bullet_Light:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 HueyGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1129,6 +1136,7 @@ tkmabramscannon:
 		PercentageScale: 5000
 		Damage: 20000
 tkmquadcannonmg:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Chaingun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
@@ -1150,6 +1158,12 @@ tkmquadcannonmg:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 HeavyAATankCannontkm:
 	Inherits@collapsewh: ^Warhead_Flak_Heavy
 	-TargetActorCenter:

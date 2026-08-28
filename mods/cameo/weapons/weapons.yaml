@@ -18636,3 +18636,117 @@ generic_bullet_casing:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
+
+# Compatibility profiles for reviewed same-family consolidation.
+# Concrete weapons combine folded percentage units; the converter bounds
+# active-health rounding drift and rejects runtime overflow.
+
+^Compatibility_Chemical_HeavyFlat:
+	Warhead@Chemical_HeavyFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 366
+		Damage: 0
+		Falloff: 100, 88, 72, 50, 0
+		Versus:
+			HAZMAT: 51
+			COMPOSITE: 62
+			BLAST: 72
+			REFLECTOR: 96
+			ARMOR: 70
+			Shield: 223
+			Superheavy: 166
+			Plate: 162
+			Heavy: 147
+			Medium: 130
+			Flak: 126
+			Concrete: 111
+			Light: 108
+			None: 91
+			Scout: 83
+			Spaceship: 82
+			Heroic: 81
+			Steel: 80
+			Helicopter: 68
+			Wood: 60
+			Bomber: 58
+			Fighter: 49
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Corrosion: 100
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Heavy: 23
+			Plate: 22
+			Medium: 21
+			Flak: 20
+			Light: 19
+			None: 18
+			Scout: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+
+^Compatibility_MissileHE_LightFlat:
+	Warhead@MissileHE_LightFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 0
+		Falloff: 100, 45, 15, 0
+		Versus:
+			HAZMAT: 77
+			COMPOSITE: 88
+			BLAST: 45
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 137
+			Scout: 199
+			Wood: 175
+			Light: 156
+			Fighter: 115
+			Steel: 112
+			Medium: 110
+			Heavy: 96
+			None: 93
+			Bomber: 90
+			Concrete: 88
+			Superheavy: 78
+			Helicopter: 77
+			Flak: 68
+			Spaceship: 64
+			Plate: 39
+			Heroic: 38
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Steel: 13
+			Medium: 12
+			Concrete: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+			None: 4
+			Flak: 3
+			Plate: 2
+			Heroic: 1

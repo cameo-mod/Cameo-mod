@@ -679,6 +679,7 @@ V3Launch_elite:
 	Warhead@1Dam: TargetDamage
 
 RA2vulcan:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -691,6 +692,12 @@ RA2vulcan:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2CRFlakGuyGun:
 	Inherits: RA2FLAKAG

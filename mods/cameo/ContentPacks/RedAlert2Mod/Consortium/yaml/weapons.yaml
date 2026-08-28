@@ -2542,6 +2542,7 @@ SteelCruiserCannons_elite:
 	BurstDelays: 1
 
 SteelCargoshipCannons:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^SteelSmallArms
 	Inherits@2: ^SteelChaingun
 	ReloadDelay: 3
@@ -2566,3 +2567,9 @@ SteelCargoshipCannons:
 ####################################################################################################
 #		Red Alert 2 Steel Support Generator
 ####################################################################################################
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 4000
+		PercentageScale: 9975

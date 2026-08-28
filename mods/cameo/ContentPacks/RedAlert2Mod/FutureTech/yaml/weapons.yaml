@@ -1,4 +1,5 @@
 ACV_Machinegun:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -13,6 +14,12 @@ ACV_Machinegun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 
 ^FutureCryocopterRocketMissileCompatibility:
 	Warhead@FutureCryocopterMissileAP_Medium: AreaDamage
@@ -963,6 +970,7 @@ FutureJavelinRocketsDeployed_elite:
 	Burst: 2
 	BurstDelays: 3
 Future_Wheel_MG:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 40
@@ -974,12 +982,23 @@ Future_Wheel_MG:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 Future_Wheel_MG_elite:
 	Inherits: Future_Wheel_MG
 	Inherits@2: ^SteelChaingun
 	Report: gun8.aud
 	Range: 6806
 	Burst: 8
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 ShotgunAttackRobotGun:
 	Inherits@roleflat: ^Compatibility_Bullet_LightFlat

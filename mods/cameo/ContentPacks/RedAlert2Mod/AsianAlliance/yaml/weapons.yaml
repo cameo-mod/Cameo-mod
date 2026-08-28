@@ -742,6 +742,7 @@ AsianLynxTankCannon_elite:
 	BurstDelays: 3
 
 AsianLynxMG:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -756,6 +757,12 @@ AsianLynxMG:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 AsianLynxMG_elite:
 	Inherits: AsianLynxMG
 	Inherits@Elite: ^RA2EliteEffects
@@ -763,6 +770,7 @@ AsianLynxMG_elite:
 	Burst: 6
 
 AsianKamikazeChaingun:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
@@ -778,6 +786,12 @@ AsianKamikazeChaingun:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 AsianPhotonCannon:
 	Inherits: ^MediumMissile
 	Inherits@2: ^FlakWeapon
