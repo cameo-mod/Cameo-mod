@@ -32,7 +32,13 @@ from audit_three_way_split import main_warheads  # noqa: E402
 from miniyaml import Ruleset  # noqa: E402
 
 
-WEAPON_REF_FIELDS = {"Weapon", "Weapons", "TriggeredWeapon", "FallbackWeapon"}
+WEAPON_REF_FIELDS = {
+    "Weapon", "Weapons", "TriggeredWeapon", "FallbackWeapon",
+    "EmptyWeapon", "Explosion", "CasingWeapon", "ImpactWeapon",
+    "TeleportWeapon", "DemolishWeapon", "HelixWeapon", "TriggerWeapon",
+    "ThumpDamageWeapon", "DetonationWeapon", "MissileWeapon",
+}
+WEAPON_REF_MAP_FIELDS = {"MissileWeapons"}
 
 
 def walk(node):
@@ -44,12 +50,20 @@ def walk(node):
 def weapon_references(node, known: set[str]) -> set[str]:
     refs = set()
     for child in walk(node):
-        if child.key.split("@", 1)[0] not in WEAPON_REF_FIELDS or not child.value:
-            continue
-        for value in str(child.value).split(","):
-            name = value.strip()
-            if name in known:
-                refs.add(name)
+        field = child.key.split("@", 1)[0]
+        values = []
+        if field in WEAPON_REF_FIELDS and child.value:
+            values.append(child.value)
+        elif field in WEAPON_REF_MAP_FIELDS:
+            if child.value:
+                values.append(child.value)
+            values.extend(descendant.value for descendant in walk(child)
+                          if descendant.value)
+        for raw in values:
+            for value in str(raw).split(","):
+                name = value.strip()
+                if name in known:
+                    refs.add(name)
     return refs
 
 
@@ -118,6 +132,7 @@ def inventory(rules: Ruleset) -> dict[str, object]:
             "TargetDamage; excludes designed companions and friendly-fire twins"
         ),
         "reference_fields": sorted(WEAPON_REF_FIELDS),
+        "reference_map_fields": sorted(WEAPON_REF_MAP_FIELDS),
         "counts": {
             "concrete_weapons": len(concrete),
             "stacked_main_all_concrete": len(violations),

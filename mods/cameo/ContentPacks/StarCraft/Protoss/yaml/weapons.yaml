@@ -13,13 +13,14 @@ ArbiterStasis:
 
 PositronGrenade:
 	Inherits@roleflat: ^Compatibility_Quantum_MediumFlat
-	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^SmallArms
 	Inherits@5: ^FlakWeapon
 	Inherits@6: ^Grenade
 	Inherits@7: ^TankDestroyerCannon
+	ValidTargets: Ground, Water
+	TargetActorCenter: true
 	ReloadDelay: 30
 	Range: 5044
 	Report: tvuFir00.aud
@@ -74,7 +75,6 @@ PositronGrenade:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 498
-	-Warhead@CannonHE_Medium:
 
 PositronBounce1:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium

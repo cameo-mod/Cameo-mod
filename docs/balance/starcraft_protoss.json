@@ -5505,14 +5505,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5044",
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
        "^Compatibility_Quantum_MediumFlat",
-       "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^SmallArms",
@@ -5520,11 +5519,9 @@
        "^Grenade",
        "^TankDestroyerCannon"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "warheads": [],
       "weapon": "PositronGrenade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

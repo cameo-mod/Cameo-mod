@@ -137,7 +137,10 @@ PRESERVED_HASHES = {
     "LMG_ordos_upgrade": "fd36eafafe34cc0d3ac4c2d5716378a693fb5701c46d1d1b611891646949e95d",
     "OIPlasmaFlamer": "7375a13449ca48be29407b3b37e165081feb1f27c0e1e4c2914cac0d10fdf855",
     "PhobosLaser": "b86e5797903c50f44f03bf27bcc8ae4422e521ede60656de99adf24904db29fd",
-    "PositronGrenade": "d4bd9426fd1e333eae8d5d892118c80180287d919b971251ac568f4de0f44768",
+    # Strict MiniYAML requires the CannonHE parent to live only on the bounce
+    # children.  The root keeps its equivalent top-level fields locally, which
+    # changes node ordering but not runtime behavior.
+    "PositronGrenade": "89b3f2143344a842e7adb6dedd34cd186bfb7e90f368de3db8a75da03d4b660d",
     "SteelFighterRailgun": "71aa63ef108d45d550c487c086a88be818a9a32a478ff2d79eae628ef66dccc6",
     "TSSAPCCoreMissiles": "6e4b926c328333cd479869ac75abecdebbbf325fe794bde9167bcf046f0821d7",
     "ThermobaricMaverick": "cc52a17470681be4808d97b207a4021582c511bef3a1f20bf3dba5b1f6c275cc",
@@ -354,6 +357,25 @@ def apply_changes(rs: Ruleset) -> None:
         path = pathlib.Path(rs.weapon(name).file)
         lines = changed.setdefault(path, path.read_text(encoding="utf-8-sig").splitlines(True))
         add_inherit(lines, name, "\tInherits@pinnedcannon: ^Warhead_CannonHE_Medium")
+    # PositronGrenade's descendants need to pin CannonHE themselves, but strict
+    # MiniYAML forbids inheriting the same parent both directly and through the
+    # root.  Preserve the root-level fields locally and leave the warhead parent
+    # exclusively on the two bounce children.
+    positron_path = pathlib.Path(rs.weapon("PositronGrenade").file)
+    positron_lines = changed.setdefault(
+        positron_path, positron_path.read_text(encoding="utf-8-sig").splitlines(True))
+    start, end = block_bounds(positron_lines, "PositronGrenade")
+    direct_parent = "\tInherits: ^Warhead_CannonHE_Medium\n"
+    if direct_parent in positron_lines[start:end]:
+        positron_lines.remove(direct_parent)
+    start, end = block_bounds(positron_lines, "PositronGrenade")
+    insert_at = next(index for index in range(start + 1, end)
+                     if positron_lines[index].startswith("\tReloadDelay:"))
+    for field in reversed(("\tValidTargets: Ground, Water\n",
+                           "\tTargetActorCenter: true\n")):
+        if field not in positron_lines[start:end]:
+            positron_lines.insert(insert_at, field)
+    remove_removal(positron_lines, "PositronGrenade", "CannonHE_Medium")
     for path, lines in changed.items():
         path.write_text("".join(lines), encoding="utf-8", newline="\n")
     cleanup_stale_removals(set(SPECS) | {"FutureMechPlasma_elite"})

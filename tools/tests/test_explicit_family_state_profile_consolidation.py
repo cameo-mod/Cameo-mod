@@ -111,6 +111,15 @@ class ExplicitFamilyStateProfileTests(unittest.TestCase):
         for name, expected in cohort.PINNED_HASHES.items():
             self.assertEqual(expected, cohort.full_hash(self.rules, name), name)
 
+    def test_positron_cannon_parent_is_not_inherited_twice(self):
+        root_parents = {parent for _key, parent in
+                        self.rules.inherits_of(self.rules.weapon("PositronGrenade"))}
+        self.assertNotIn("^Warhead_CannonHE_Medium", root_parents)
+        for name in ("PositronBounce1", "PositronBounce2"):
+            child_parents = {parent for _key, parent in
+                             self.rules.inherits_of(self.rules.weapon(name))}
+            self.assertIn("^Warhead_CannonHE_Medium", child_parents, name)
+
     def test_ratchets_match_the_live_reduction(self):
         self.assertEqual(693, SPLIT_BASELINE)
         self.assertEqual(379, BROADCAST_BASELINE)

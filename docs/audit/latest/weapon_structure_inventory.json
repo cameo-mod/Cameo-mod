@@ -3,16 +3,30 @@
     "concrete_weapons": 2345,
     "stacked_main_all_concrete": 693,
     "stacked_main_direct_actor_armament": 494,
-    "stacked_main_indirect_weapon_graph": 84,
-    "stacked_main_transitive_weapon_graph": 578,
-    "stacked_main_unreached": 115
+    "stacked_main_indirect_weapon_graph": 90,
+    "stacked_main_transitive_weapon_graph": 584,
+    "stacked_main_unreached": 109
   },
   "predicate": "positive Damage on AreaDamage, SpreadDamage, HealthPercentageDamage, or TargetDamage; excludes designed companions and friendly-fire twins",
   "reference_fields": [
+    "CasingWeapon",
+    "DemolishWeapon",
+    "DetonationWeapon",
+    "EmptyWeapon",
+    "Explosion",
     "FallbackWeapon",
+    "HelixWeapon",
+    "ImpactWeapon",
+    "MissileWeapon",
+    "TeleportWeapon",
+    "ThumpDamageWeapon",
+    "TriggerWeapon",
     "TriggeredWeapon",
     "Weapon",
     "Weapons"
+  ],
+  "reference_map_fields": [
+    "MissileWeapons"
   ],
   "sets": {
     "direct_actor_armament": [
@@ -515,8 +529,10 @@
       "ASDFKamikazeExplosion",
       "ATMine",
       "AsianChaosMine",
+      "AsianHowitzerSplash",
       "AsianSubmarineBomb",
       "AsianTSIonCannon",
+      "CabalMagicNuke",
       "ChemRocketsExplosion",
       "DalekCannonScatter",
       "DalekCannonScatterE",
@@ -539,10 +555,13 @@
       "MiniNuke",
       "MutaBounce1",
       "MutaBounce2",
+      "NaxiV1Rocket",
+      "NaxisBlackBombSmaller",
       "ObeliskLaserFragment",
       "PLYMineExplosive",
       "PositronBounce1",
       "PositronBounce2",
+      "PulseMissile",
       "RA2Atomic",
       "RA2DemoBomb",
       "RA2RobotmmScatter_elite",
@@ -595,15 +614,14 @@
       "WaveTurretImpact",
       "YRBoomerSCUD",
       "YakTeslaArcFragment1",
-      "YakTeslaArcFragment2"
+      "YakTeslaArcFragment2",
+      "supernova_missile_super"
     ],
     "unreached": [
       "12MissilesSpawnerScud",
       "25mmWaveforce",
-      "AsianHowitzerSplash",
       "Atomic",
       "CHFlameBlue",
-      "CabalMagicNuke",
       "ChemTibAtomic",
       "CrateNuke",
       "D2K70mm",
@@ -656,11 +674,8 @@
       "NaxiJadgDestroyerCorrosion",
       "NaxiMP40",
       "NaxiMP40_elite",
-      "NaxiV1Rocket",
-      "NaxisBlackBombSmaller",
       "OrniMissile",
       "PhoenixRocket",
-      "PulseMissile",
       "RA2AsianShotgunFanatic1",
       "RA2AsianShotgunFanatic2",
       "RA2AsianShotgunFanatic3",
@@ -710,7 +725,6 @@
       "oDeathHandCluster",
       "oDevBullet",
       "plymouth_EMP_AA",
-      "supernova_missile_super",
       "tkmakap",
       "tkmm203"
     ]
