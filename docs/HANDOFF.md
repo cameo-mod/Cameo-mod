@@ -260,6 +260,19 @@ python tools/audit/audit_doc_health.py     # FAIL until (b)#3 lands
 python tools/audit/environment.py          # should print "complete" on a built tree
 ```
 
+**d. Read before proposing pipeline architecture.**
+
+[`design/BALANCE_PIPELINE_GAPS.md`](design/BALANCE_PIPELINE_GAPS.md) records what a single
+deterministic command still lacks — no orchestrator among 50+ scripts, no exception registry, no
+constraint reporting, no determinism check — and the verified residue of an outside review round
+that produced a great deal of confident, contradictory material about this repository.
+
+⭐ Its one transferable lesson: **a review of a repository snapshot is a review of a date.** Five
+reviewers disagreed about whether the balance documents existed; all five were reading the tree
+as it stood before the 83→43 compaction, and every path they called missing had simply moved.
+Establish which commit an outside report saw before acting on it — `git log --all -- <path>`
+separates "moved" from "never existed", and the substance of a stale report is often still good.
+
 ### 3.1 — The weapon rebuild (the main line)
 
 ⛔ **Set B (`mods/cameo/weapons/**`, `mods/cameo/ContentPacks/**/weapons.yaml`) is NOT free.**
