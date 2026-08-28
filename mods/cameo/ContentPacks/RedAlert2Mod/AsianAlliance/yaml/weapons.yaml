@@ -1089,16 +1089,16 @@ AsianQuasarBoatAG:
 	Inherits: AsianPhotonCannon
 	ValidTargets: Ground, Water
 	ReloadDelay: 22
-	Range: 8000
+	Range: 7168
 	Burst: 3
 	BurstDelays: 3
 	Projectile: Missile
-		RangeLimit: 12000
+		RangeLimit: 12c0
 		MinimumLaunchAngle: 75
-		MaximumLaunchAngle: 125
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
-		Inaccuracy: 500
+		MaximumLaunchAngle: 128
+		MaximumLaunchSpeed: 192
+		MinimumLaunchSpeed: 192
+		Inaccuracy: 512
 
 AsianQuasarBoatAG_EMP:
 	Inherits: AsianQuasarBoatAG
@@ -1109,15 +1109,15 @@ AsianQuasarBoat_AA:
 	Inherits: AsianPhotonCannon
 	ValidTargets: Air
 	ReloadDelay: 22
-	Range: 12000
+	Range: 7168
 	Burst: 3
 	BurstDelays: 3
 	Projectile: Missile
-		RangeLimit: 12000
+		RangeLimit: 12c0
 		MinimumLaunchAngle: 75
-		MaximumLaunchAngle: 125
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
+		MaximumLaunchAngle: 128
+		MaximumLaunchSpeed: 256
+		MinimumLaunchSpeed: 256
 		Inaccuracy: 250
 
 AsianQuasarBoat_EMP_AA:
@@ -1295,33 +1295,6 @@ AsianChemicalBombs:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
-
-AsianQuasarBoatAG:
-	Inherits: AsianPhotonCannon
-	ValidTargets: Ground, Water
-	ReloadDelay: 22
-	Burst: 3
-	Range: 7168
-	Projectile: Missile
-		RangeLimit: 12c0
-		MinimumLaunchAngle: 75
-		MaximumLaunchAngle: 128
-		MaximumLaunchSpeed: 192
-		MinimumLaunchSpeed: 192
-		Inaccuracy: 512
-
-AsianQuasarBoat_AA:
-	Inherits: AsianPhotonCannon
-	ValidTargets: Air
-	ReloadDelay: 22
-	Burst: 3
-	Range: 7168
-	Projectile: Missile
-		RangeLimit: 12c0
-		MinimumLaunchAngle: 75
-		MaximumLaunchAngle: 128
-		MaximumLaunchSpeed: 256
-		MinimumLaunchSpeed: 256
 
 AsianHowitzerCannon:
 	Inherits: ^RA2MediumCannon
