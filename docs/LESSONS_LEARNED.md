@@ -82,6 +82,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
 - [`docs/audit/latest/` is environment-bound — an incomplete tree reports LESS and still says PASS (2026-08-23)](#docsauditlatest-is-environment-bound--an-incomplete-tree-reports-less-and-still-says-pass-2026-08-23)
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
+- ["Regenerable" is a claim about a tool, and it needs running (2026-08-28)](#regenerable-is-a-claim-about-a-tool-and-it-needs-running-2026-08-28)
 
 ---
 
@@ -1031,6 +1032,51 @@ its own `GONE` table, and D4 for its own example anchor. A detector that scans t
 will eventually scan itself and its tests; write the exclusion when you add the check, not after
 it fires.
 
+
+## "Regenerable" is a claim about a tool, and it needs running (2026-08-28)
+
+The 83→43 documentation compaction deleted 40 files. Its commit message said **nothing was
+summarised away** and that every merged file's content lines had been checked for presence
+in the target — verified mechanically, 0 lines lost.
+
+That claim was true, and it covered the wrong set.
+
+It described the files that were **merged**. Alongside them, fifteen files were **deleted
+outright** on the grounds that they were generated and could be rebuilt on demand. That
+second claim was asserted, not tested.
+
+Re-checking it later, by diffing every deleted file's content lines against the whole live
+corpus:
+
+| outcome | count |
+|---|--:|
+| carried across into a merge target | 24 |
+| deleted, regeneration **verified by running the generator** | 13 |
+| deleted, **not regenerable** | 2 |
+
+The two that were not:
+
+* `docs/balance/BALANCE_AUDIT.md` — a per-unit formula-price-vs-cost delta report. Its
+  generator, `tools/balance/_balance_audit_report.py`, raises `ModuleNotFoundError: No
+  module named 'scout_rebalance_proposal_final'`. The module was removed long ago;
+  `propose_class_rebalance.py` even carries a comment saying those modules no longer
+  exist. The script is dead, nothing runs it, and nobody noticed because nobody ran it.
+* `docs/balance/proposal_vehicle_defense_anchors.md` — deleted with thirteen
+  `proposal_*.md` siblings, but it is not one of them. The proposer writes
+  `proposal_<class>_infantry.md`; this name matches no pattern and a repo-wide search
+  finds no generator at all. It was deleted by resemblance.
+
+Both are restored under `docs/history/balance/` with banners, because their numbers
+predate W24 and are provenance rather than current truth.
+
+⭐ **Deleting a generated artifact is safe exactly when the generator runs.** That is one
+command, and skipping it converts a reversible cleanup into permanent loss that a green
+verification report actively conceals — the check that ran measured merges, and the files
+at risk were the ones it did not cover. Run the generator, or keep the file.
+
+⭐ **Group deletions inherit the safety of the group's weakest member.** Fourteen files
+were removed under one justification; thirteen deserved it. A filename that merely looks
+like the others is the one to check individually, because resemblance is not provenance.
 ## `Inherits` POSITION is semantic, not cosmetic (2026-08-16)
 
 **The last node wins, and `Inherits` is a node.** `MiniYaml` walks a definition's children
