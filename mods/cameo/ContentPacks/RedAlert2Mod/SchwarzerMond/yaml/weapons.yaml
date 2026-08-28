@@ -984,6 +984,7 @@ NaxisBradleyTarget:
 		Inaccuracy: 1735
 
 Naxis_Komet:
+	Inherits@collapsewh: ^Warhead_Flak_Heavy
 	Inherits: ^FlakWeapon
 	Inherits@2: ^Grenade
 	Inherits@3: ^HeavyAAWeapon
@@ -1037,6 +1038,15 @@ Naxis_Komet:
 		Explosions: med_frag
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Ground, Ship
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@MediumMissile:
+	Warhead@Flak_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		PercentageScale: 0
 
 Naxis_Komet_AA:
 	Inherits: Naxis_Komet

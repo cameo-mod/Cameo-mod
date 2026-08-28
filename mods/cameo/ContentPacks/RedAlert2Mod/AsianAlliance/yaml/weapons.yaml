@@ -337,6 +337,7 @@ AsianCrocBite_elite:
 	BurstDelays: 3
 
 AsianLynxTankCannon:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightFlameWeapon
@@ -401,6 +402,17 @@ AsianLynxTankCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 10000
+		PercentageScale: 0
 AsianLynxTankCannon_elite:
 	Inherits: AsianLynxTankCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -958,6 +970,7 @@ AsianPulverizerGatling:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
 AsianPulverizerMechaGatling:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: AsianPulverizerGatling
@@ -982,6 +995,13 @@ AsianPulverizerMechaGatling:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
+
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumMissile:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 4000
+		PercentageScale: 0
 
 AsianSinglePlasma:
 	Inherits: ^Warhead_CannonHE_Medium
@@ -1130,6 +1150,7 @@ AsianTurretPlasma:
 		Amount: 8
 
 AsianHarbingerPlasma:
+	Inherits@collapsewh: ^Warhead_Plasma_Medium
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -1250,6 +1271,18 @@ AsianHarbingerPlasma:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
 		ImpactActors: false
+
+	-Warhead@LightFlameWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	Warhead@Plasma_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 AsianRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy

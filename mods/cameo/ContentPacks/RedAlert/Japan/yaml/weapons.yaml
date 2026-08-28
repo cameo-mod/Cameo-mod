@@ -103,6 +103,10 @@ japan_imperialscoutsman_rifle_waveforce:
 	Inherits@3: ^WaveforceBulletProjectile
 
 TankBusterBeamCannon:
+	Inherits@collapsewh: ^Warhead_Railgun_Heavy
+	Inherits@collapseextra: ^Compatibility_Railgun_ExtraDamage
+	Inherits@collapsetargets: ^Compatibility_TankBusterBeam_UnscopedFlat
+	-TargetActorCenter:
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^MediumCannon
 	Inherits@3: ^RailgunWeapon
@@ -134,6 +138,15 @@ TankBusterBeamCannon:
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 
+	-Warhead@TankDestroyerCannon:
+	-Warhead@MediumCannon:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	Warhead@Railgun_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 15000
+		PercentageScale: 0
+
 TankBusterBeamCannonCharged:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -156,6 +169,7 @@ TankBusterBeamCannonCharged:
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 PlasmaFlamer:
+	Inherits@collapsewh: ^Warhead_Plasma_Medium
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 35
@@ -197,6 +211,12 @@ PlasmaFlamer:
 		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: blue_small_napalm
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	Warhead@Plasma_Medium:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 0
 
 HeavyFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -508,6 +528,8 @@ BallistaSingleShotAirEnergized:
 
 	MinRange: 1845
 BallistaMultiShot:
+	Inherits@collapsewh: ^Warhead_Arrow_Medium
+	-TargetActorCenter:
 	Inherits: ^Grenade
 	Inherits@2: ^LightFlameWeapon
 	Inherits@3: ^LightChemicalWeapon
@@ -580,6 +602,23 @@ BallistaMultiShot:
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground, Water
+
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@LightFlameWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@ArrowWeapon:
+	Warhead@Arrow_Medium:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 0
+	Warhead@CollapseTargetCompatibility1: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		PercentageScale: 0
 
 BallistaMultiShotEnergized:
 	Inherits: ^TeslaWeapon

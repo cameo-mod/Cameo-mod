@@ -178,6 +178,10 @@ TSCABALDisable_EMP:
 		ValidTargets: Ground, Ship
 
 TSCABALObeliskLaserFire:
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
+	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseground: ^Compatibility_CabalLaser_GroundSlice
+	-TargetActorCenter:
 	Inherits: ^TankDestroyerCannon
 	Inherits@LASER: ^LaserWeapon
 	Inherits@FLAME: ^MediumFlameWeapon
@@ -240,7 +244,18 @@ TSCABALObeliskLaserFire:
 		ImpactActors: false
 		ValidTargets: Ground, Ship
 
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 69000
+		PercentageScale: 0
+
 TSHellfireTwin:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@TD: ^TankDestroyerCannon
 	Inherits@SHRAP: ^ShrapnelWeapon
@@ -299,7 +314,23 @@ TSHellfireTwin:
 		Explosions: cabal_missileexplosion
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Water, Air
+	-Warhead@HeavyCannon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumMissile:
+	Warhead@MissileHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 0
 TSCABALEnlightedLaser:
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
+	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseground: ^Compatibility_CabalLaser_GroundSlice
+	-TargetActorCenter:
 	Range: 10088
 	ReloadDelay: 120
 	Inherits: ^TankDestroyerCannon
@@ -353,6 +384,16 @@ TSCABALEnlightedLaser:
 		ImpactSounds: drtelectro.wav
 		ImpactActors: false
 		ValidTargets: Ground, Ship
+
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 69000
+		PercentageScale: 0
 
 ####################################################################################################
 #		Tiberian Sun Other
@@ -644,6 +685,7 @@ CabalHeavyReaperTrap:
 		ValidTargets: Ground, Water
 
 CabalArtilleryWalkerShell:
+	Inherits@collapsewh: ^Warhead_CannonHE_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumCannon
@@ -688,6 +730,15 @@ CabalArtilleryWalkerShell:
 		Explosions: large_explosion
 		ImpactSounds: expnew12.aud
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumCannon:
+	-Warhead@HeavyCannon:
+	Warhead@CannonHE_Heavy:
+		Damage: 168000
+		PercentageScale: 0
 CabalArtilleryWalkerShellUpgraded:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
@@ -1058,6 +1109,7 @@ CabalDissolverSpray:
 		Damage: 4000
 		PercentageScale: 0
 CabalCommandoPlasma:
+	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
@@ -1099,8 +1151,16 @@ CabalCommandoPlasma:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
+	-Warhead@HeavyCannon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Plasma_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 150000
+		PercentageScale: 0
 
 CabalCommandoPlasmaMk2:
+	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
@@ -1142,8 +1202,16 @@ CabalCommandoPlasmaMk2:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
+	-Warhead@HeavyCannon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Plasma_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 150000
+		PercentageScale: 0
 
 CabalSubmarinePlasma:
+	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
@@ -1190,6 +1258,13 @@ CabalSubmarinePlasma:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
+	-Warhead@HeavyCannon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Plasma_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 75000
+		PercentageScale: 0
 
 CabalCoreDefenderLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy

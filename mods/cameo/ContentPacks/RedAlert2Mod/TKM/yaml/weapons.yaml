@@ -1151,6 +1151,8 @@ tkmquadcannonmg:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 HeavyAATankCannontkm:
+	Inherits@collapsewh: ^Warhead_Flak_Heavy
+	-TargetActorCenter:
 	Inherits: ^LightMissile
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^SmallArms
@@ -1184,6 +1186,14 @@ HeavyAATankCannontkm:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Air, Air
 		Damage: 1
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
+	Warhead@Flak_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 tkmheavyaaturret:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium

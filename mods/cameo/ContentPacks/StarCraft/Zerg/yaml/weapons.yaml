@@ -278,6 +278,8 @@ CorruptorSpore:
 		ValidTargets: Ground, Water, Air
 
 DreadshroudSpore:
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
+	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^ShrapnelWeapon
@@ -365,6 +367,19 @@ DreadshroudSpore:
 		ImpactSounds: zguhit00.aud
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
+
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 11000
+		PercentageScale: 0
 
 SCDevourerAA:
 	Inherits@Contaminated: TractorGLAnthraxPurple
@@ -673,6 +688,8 @@ BroodweaverLeech:
 	InvalidTargets: Broodling
 
 SwarmlingShoot:
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
+	-TargetActorCenter:
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^Grenade
@@ -796,6 +813,22 @@ SwarmlingShoot:
 		ImpactSounds: zguhit00.aud
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
+
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@MediumMissile:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
 
 QueenSpine:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
@@ -943,6 +976,7 @@ InfestedExplosion:
 		ImpactActors: true
 
 BehemothShoot:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^HeavyMissile
@@ -1038,6 +1072,19 @@ BehemothShoot:
 		Explosions: sczhsplash
 		ImpactSounds: zguhit00.aud
 
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@HeavyMissile:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	Warhead@MissileHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
+
 zerg_kerrigan:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -1067,6 +1114,8 @@ SCQUEENSUMMON:
 		ValidTargets: Air, Ground, Water
 
 Spore_AA:
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
+	-TargetActorCenter:
 	Inherits: ^MediumMissile
 	Inherits@2: ^Chaingun
 	Inherits@3: ^FlakWeapon
@@ -1105,6 +1154,13 @@ Spore_AA:
 		ImpactSounds: zluhit00.aud
 		ImpactActors: false
 		ValidTargets: Air
+	-Warhead@MediumMissile:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 36000
+		PercentageScale: 0
 
 Tentacle:
 	Inherits: ^Warhead_CannonHE_Heavy

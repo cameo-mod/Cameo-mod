@@ -198,6 +198,7 @@ CycloneRocketsLockOn:
 	Range: 10000
 
 MarauderMissiles:
+	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -233,7 +234,15 @@ MarauderMissiles:
 		ValidTargets: Ground, Water
 		Damage: 5
 
+	-Warhead@TankDestroyerCannon:
+	-Warhead@MediumMissile:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 20000
+		PercentageScale: 0
+
 SCTyr:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^Chaingun
 	Inherits@3: ^ShrapnelWeapon
@@ -288,6 +297,15 @@ SCTyr:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_explosion, ra2_medium_clsn, ra2_large_twlt
 		ImpactSounds: gexp14a.wav, expnew09.wav, gexpapoa.wav
+
+	-Warhead@LightFlameWeapon:
+	-Warhead@Chaingun:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 SCTyrAA:
 	Inherits: ^Grenade
@@ -969,6 +987,7 @@ GoliathRockets_AA:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 GoliathMk2MG:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1006,6 +1025,14 @@ GoliathMk2MG:
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
+
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 0
 
 GoliathMk2Rockets:
 	Inherits: ^FlakWeapon
@@ -1183,6 +1210,7 @@ ValkyrieRockets:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 WyvernRockets:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1266,6 +1294,17 @@ WyvernRockets:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyAAWeapon:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
+
 BCLaser:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -1418,6 +1457,9 @@ BCYamatoCannon:
 		ImpactActors: false
 
 PhobosLaser:
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
+	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseextra2: ^Compatibility_Railgun_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1503,6 +1545,21 @@ PhobosLaser:
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
+
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@HeavyMissile:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@Laser_Heavy_ExtraDamage:
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 42000
+		PercentageScale: 0
 
 MissileTurret:
 	Inherits@wh: ^Warhead_MissileAA_Heavy

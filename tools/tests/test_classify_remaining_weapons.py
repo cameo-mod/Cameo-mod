@@ -16,8 +16,10 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
 
     def test_active_central_files_are_included_without_template_bleed(self):
         names = {row["weapon"] for row in self.rows}
-        self.assertIn("ixian_airdrone", names)     # active D2K central file
-        self.assertIn("edenRailgun", names)       # active Outpost 2 central file
+        active_files = {path.resolve() for path in classifier.weapon_files()}
+        self.assertIn((ROOT / "mods/cameo/weapons/d2k.yaml").resolve(), active_files)
+        self.assertIn("NaxisBlackBombSmaller", names)  # active RA2Mod central file
+        self.assertIn("edenRailgun", names)             # active Outpost 2 central file
         self.assertNotIn("ts_nod_mobilerepairvehicle", names)
 
     def test_every_root_has_a_review_bucket_and_flat_ledger(self):
@@ -35,9 +37,9 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
 
     def test_ambiguous_examples_stay_in_human_review(self):
         rows = {row["weapon"]: row for row in self.rows}
-        for name in ("DuelistTankCannon", "LatinSmokerCannon", "120mm_td",
-                     "ReconRangerRecoillessGun", "PhotonCannon",
-                     "ArcherArtilleryShell"):
+        for name in ("DuelistTankCannon", "LatinSmokerCannon", "AsianPhotonCannon",
+                     "Future_MultiMissile_Sigma", "PhotonCannon",
+                     "RA2GrandCannonWeapon"):
             self.assertEqual("human decision required", rows[name]["bucket"], name)
 
     def test_multiple_tiers_are_preserved_as_distinct_destinations(self):
@@ -47,10 +49,9 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
             self.assertGreater(len(destinations), 1, name)
 
     def test_folded_percentage_hit_is_recorded_beside_its_flat_hit(self):
-        rows = {row["weapon"]: row for row in self.rows}
-        weapon = rows["120mm_td"]
-        self.assertIn("CannonHE_Medium", {hit["tag"] for hit in weapon["flat_hits"]})
-        folded = [hit for hit in weapon["percentage_hits"]
+        weapon = Ruleset(ROOT).resolve_weapon("120mm_td")
+        self.assertIn("CannonHE_Medium", {hit["tag"] for hit in classifier.flat_ledger(weapon)})
+        folded = [hit for hit in classifier.percentage_ledger(weapon)
                   if hit["tag"] == "CannonHE_Medium" and hit["kind"] == "pct_folded"]
         self.assertEqual(1, len(folded))
         self.assertEqual(10000, folded[0]["scale"])
@@ -58,9 +59,8 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
         self.assertIn("Shield", folded[0]["percentage_versus"])
 
     def test_percentage_physical_state_map_is_recorded(self):
-        rows = {row["weapon"]: row for row in self.rows}
-        weapon = rows["120mm_td"]
-        states = [state for hit in weapon["percentage_hits"]
+        weapon = Ruleset(ROOT).resolve_weapon("120mm_td")
+        states = [state for hit in classifier.percentage_ledger(weapon)
                   for state in hit["physical_states"]]
         self.assertIn({"name": "Corrosion", "scale": "100", "source": "map"}, states)
 

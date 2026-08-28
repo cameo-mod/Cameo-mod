@@ -377,6 +377,7 @@ LatinMonkeyGrenadeExplode:
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
 RA2RBurritoRocket:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumFlameWeapon
@@ -440,7 +441,17 @@ RA2RBurritoRocket:
 		AimChance: 0
 		AimTargetStances: Enemy, Neutral
 
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@HeavyBomb:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
+
 RA2LarsRocket:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^D2KRocket
 	Inherits@2: ^HeavyAAWeapon
 	Inherits@3: ^LightMissile
@@ -491,6 +502,14 @@ RA2LarsRocket:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@HeavyAAWeapon:
+	-Warhead@LightMissile:
+	-Warhead@TankDestroyerCannon:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
+
 RA2Gren60mm:
 	Inherits: ^RA2HeavyCannon
 	Inherits@2: ^RA2MediumCannon
@@ -649,6 +668,7 @@ LatinSmokerRocket_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 48000
 DiabloCannon:
+	Inherits@collapseflat: ^Compatibility_Flak_MediumFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
@@ -683,6 +703,13 @@ DiabloCannon:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	-Warhead@LightMissile:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Chaingun:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
 DiabloCannon_elite:
 	Inherits: DiabloCannon
 	Report: aacanon3.aud
@@ -1010,6 +1037,7 @@ RA2TOPOLCubaTarget:
 	Warhead@1Dam: TargetDamage
 
 RA2TOPOLCuba:
+	Inherits@collapsewh: ^Warhead_Nuclear_Super
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^MediumFlameWeapon
@@ -1121,8 +1149,22 @@ RA2TOPOLCuba:
 		Falloff: 100, 85, 70, 55, 40, 25, 10
 		Level: 1000
 		LayerName: ra2radiation
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@Nuclear_Super:
+		ValidTargets: Ground, Water, Air
+		Damage: 120000
+		PercentageScale: 0
+	-Warhead@Nuclear_Super_Percentage:
 
 RA2APCFlakCannon:
+	Inherits@collapseflat: ^Compatibility_Flak_MediumFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
@@ -1157,6 +1199,13 @@ RA2APCFlakCannon:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	-Warhead@LightMissile:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Chaingun:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
 RA2APCFlakCannon_elite:
 	Inherits: RA2APCFlakCannon
 	Report: aacanon3.aud

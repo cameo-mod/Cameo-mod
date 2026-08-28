@@ -897,6 +897,8 @@ SteelScalpelRailgun_EMP_AA:
 		ImpactSounds: makoexplose.wav
 
 SteelFighterRailgun:
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
+	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
 	Inherits: ^LaserWeapon
 	Inherits@2: ^RA2RailgunWeapon
 	Inherits@3: ^SteelMediumCannon
@@ -940,6 +942,15 @@ SteelFighterRailgun:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 		ValidTargets: Air
+
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Laser_Heavy_ExtraDamage:
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 0
 
 SteelMegaSword:
 	Inherits: ^LightChemicalWeapon
@@ -1661,6 +1672,7 @@ SteelStalkerRailgunEScatter:
 		ValidTargets: Ground, Ship
 
 WhiteRabbitGatling:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^HeavyCannon
 	Inherits@2: ^SmallArms
 	Inherits@3: ^MediumMissile
@@ -1706,6 +1718,14 @@ WhiteRabbitGatling:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
+	-Warhead@HeavyCannon:
+	-Warhead@SmallArms:
+	-Warhead@MediumMissile:
+	-Warhead@FlakWeapon:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 16000
+		PercentageScale: 0
 HammerheadTankCannon:
 	Inherits: ^RA2MediumCannon
 	ReloadDelay: 55
@@ -1816,6 +1836,7 @@ HammerheadArtillery:
 		ValidTargets: Shielded
 
 SteelDaggerCannon:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^RA2Grenade
@@ -1865,6 +1886,14 @@ SteelDaggerCannon:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 0
+
 SteelDaggerCannon_elite:
 	Inherits: SteelDaggerCannon
 	Range: 25000
@@ -1900,6 +1929,7 @@ SteelCruiserArtillery_elite:
 	BurstDelays: 3
 
 SteelCruiserCannons:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^FlakWeapon
@@ -1938,6 +1968,13 @@ SteelCruiserCannons:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:
+	-Warhead@FlakWeapon:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 6000
+		PercentageScale: 0
 SteelCruiserCannons_elite:
 	Inherits: SteelCruiserCannons
 	Range: 8000

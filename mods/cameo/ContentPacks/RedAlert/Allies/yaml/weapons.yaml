@@ -354,6 +354,7 @@ AphidCryo_AA:
 		Damage: 8000
 
 ReconRangerRecoillessGun:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^Chaingun
@@ -446,6 +447,20 @@ ReconRangerRecoillessGun:
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@MediumMissile:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 29000
+		PercentageScale: 0
 CryoReconRangerRecoillessGun:
 	Inherits: ReconRangerRecoillessGun
 	Inherits@2: ^CryoMissileProjectile
@@ -461,6 +476,7 @@ CryoReconRangerRecoillessGun:
 		Amount: -32000
 
 APTusk:
+	Inherits@collapsewh: ^Warhead_MissileAP_Heavy
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^Grenade
 	Inherits@3: ^FlakWeapon
@@ -497,6 +513,15 @@ APTusk:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	Warhead@MissileAP_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
 
 APTuskCryo:
 	Inherits: APTusk
@@ -575,6 +600,7 @@ ChronoTuskCryo:
 	MinRange: 2035
 
 25mm:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -646,6 +672,17 @@ ChronoTuskCryo:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 10000
+		PercentageScale: 0
 90mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium

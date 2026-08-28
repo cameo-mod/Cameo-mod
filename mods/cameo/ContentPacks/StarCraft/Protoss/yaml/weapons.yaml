@@ -388,6 +388,7 @@ PsionicShockwave:
 		ValidTargets: Ground, Water, Air
 
 ScarabLaunch:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -442,6 +443,15 @@ ScarabLaunch:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: blueartexp
+
+	-Warhead@HeavyBomb:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumMissile:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 150000
+		PercentageScale: 0
 
 ScarabLaunchDummy:
 	ReloadDelay: 90
@@ -849,6 +859,7 @@ ScoutMG:
 		Explosions: steel_bluepiffs
 
 EpigraphMG:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -947,6 +958,21 @@ EpigraphMG:
 	Warhead@EffectAir: CreateEffect
 		Explosions: cryo_blast
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ArrowWeapon:
+	-Warhead@LightMissile:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 18000
+		PercentageScale: 0
+
 ManifoldMG:
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_CannonHE_Heavy
@@ -997,6 +1023,7 @@ ManifoldMG_AA:
 		ValidTargets: Air
 
 AtreusMG:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1050,6 +1077,15 @@ AtreusMG:
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
 		ValidTargets: Ground, Water, Air
+
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumMissile:
+	-Warhead@FlakWeapon:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
 
 PatriarchShoot:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
