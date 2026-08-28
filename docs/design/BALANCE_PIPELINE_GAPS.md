@@ -33,6 +33,33 @@ authoritative. The cheap check is `git log --all -- <path>`: a path with commits
 none at HEAD was *moved*, and the reviewer's substance may still be sound even though its
 address is stale.
 
+### 0b. The same lesson in a second form: load state
+
+A parallel disagreement ran between the audit reports and the Generals branch. The audits
+report four USA condition families as dead wiring across ~1,042 actors; the branch reports them
+correctly wired end to end. Both are right, about different trees.
+
+`defaults.yaml` (**loaded**) declares `GrantConditionOnPrerequisite@usabombardament`,
+`@usaholdtheline` and `@usasearchndestroy` at 5009–5031, and hangs five multipliers off those
+conditions — firepower, reload, damage, range and speed. The only thing that *provides* those
+prerequisites sits in `rules/generals.yaml` at 11034–11044, which is commented out of
+`mod.yaml`. So on master the conditions can never be granted and all five multipliers are
+permanently inert; in a branch where Generals is loaded, the same wiring is live and correct.
+
+⭐ **A finding is scoped to a load state as much as to a commit.** Dormant content can be the
+sole provider for live wiring, which makes a defect that is real on master invisible to anyone
+working with that content enabled — and vice versa. State which files were loaded when
+reporting a wiring defect.
+
+Two corrections to that audit item, both measured:
+
+* `upsubliminal` does **not** belong in the dead list. It is granted by
+  `Warhead@upsubliminal: GrantExternalCondition` in
+  `ContentPacks/RedAlert/Shared/yaml/weapons.yaml` and received by `^PropagandaEffectBuff` in
+  `defaults.yaml` — live, working, and unrelated to Generals.
+* The `*c`-suffixed variants (`usabombardmentc`, `usasearchndestroyc`, `usaholdthelinec`) exist
+  only inside `generals.yaml`. They are not a live alternative path on master.
+
 ---
 
 ## 1. Claims checked against the artifact
