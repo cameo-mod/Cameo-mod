@@ -138,7 +138,7 @@ above it.
 | ~~**No orchestrator.**~~ **CLOSED** — `tools/balance/run_pipeline.py`. | It ran the documented order on its first real pass and immediately found what the gap predicted: 22 of 33 raw ledgers stale against yaml. See §3b. |
 | **No exception registry.** | Heroes, superweapons, harvesters, transports and promotion-only actors have no declared escape from class pricing, so each pass re-litigates them. |
 | **No constraint reporting.** | When a computed value exceeds what the engine can carry, nothing records *desired* alongside *implementable*. A silent clamp changes the model without saying so. |
-| **No determinism check.** | Ordering, locale and float behaviour are unverified; the compiler property (same inputs → same outputs) is intended but unmeasured. |
+| ~~**No determinism check.**~~ **CLOSED** — `tools/balance/check_determinism.py`. | Measured at `c653f160`: **65 artifacts byte-identical** across two hash seeds and two timezones. The property held; what changed is that it is now evidence rather than an assumption. See §3c. |
 | **Strategic layer absent.** | Counterplay, role coverage, tech reachability and economic tempo are not modelled anywhere, so a unit can price correctly and still be unhealthy. |
 
 ### 3b. What the orchestrator found on its first run
@@ -171,6 +171,32 @@ The first three are mechanical and can be built without touching a balance numbe
 are design work that must not run ahead of the W-board.
 
 ---
+
+### 3c. Determinism, measured
+
+`check_determinism.py` extracts twice in **separate processes** under different
+`PYTHONHASHSEED` and `TZ`, builds the ledgers in memory, and compares every artifact
+byte for byte. Separate processes are the design: inside one interpreter the hash seed
+is fixed, so set and dict iteration order is stable by accident and an ordering leak
+stays invisible. Nothing is written under `docs/balance/` — a tool that verifies the
+ledgers must never be able to be the thing that moved them.
+
+**Result at `c653f160`: 65 of 65 artifacts byte-identical.** Raw ledgers, derived
+sidecars and the model constants all reproduce.
+
+That is a good answer, and it is worth being precise about what it is worth. It shows
+those two configurations agree. It is not a theorem: a different OS, Python version,
+filesystem ordering or locale is a separate experiment, and nondeterminism that is
+stable within a process but varies by machine is invisible to it.
+
+⭐ **A checker that cannot fail is worse than no checker**, because it manufactures
+confidence. This one was proven against an injected fault before being trusted — a list
+built by iterating a set of eight strings, the exact bug class it claims to catch. It
+named the artifact, the line and both values, gave the right diagnosis, and exited 1.
+Do that to any gate before believing its green.
+
+`serialize()` already writes `sort_keys=True`, so mapping order was never the risk.
+Sorting keys does nothing for the order of a **list**, which is where a set leaks.
 
 ## 4. Design guidance worth keeping — non-binding
 
