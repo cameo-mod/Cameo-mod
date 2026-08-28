@@ -351,7 +351,6 @@ TKMQuadCannonAG:
 		Damage: 4000
 		PercentageScale: 9975
 TKMQuadCannonAA:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: TKMQuadCannonAG
 	Range: 7880
 	Warhead@Flak_MediumFlatCompatibility:
@@ -429,7 +428,6 @@ TKMZazaCannonAG:
 		Damage: 4000
 		PercentageScale: 9975
 TKMZazaCannonAA:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: TKMZazaCannonAG
 	Range: 7926
 	Warhead@Flak_MediumFlatCompatibility:

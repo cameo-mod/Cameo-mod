@@ -2543,7 +2543,6 @@ ASDFGun:
 		Damage: 4000
 		PercentageScale: 9975
 ASDFGun2:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
@@ -2884,7 +2883,6 @@ asianalliance_fanatic_shotgun:
 		Damage: 4000
 		PercentageScale: 9975
 asianalliance_fanatic_shotgun_upgrade:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: asianalliance_fanatic_shotgun
 	Burst: 13
 	Warhead@Bullet_MediumFlatCompatibility:
@@ -2893,7 +2891,6 @@ asianalliance_fanatic_shotgun_upgrade:
 		PercentageScale: 9975
 
 asianalliance_fanatic_shotgun_elite:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: asianalliance_fanatic_shotgun
 	Burst: 20
 	Warhead@Bullet_MediumFlatCompatibility:

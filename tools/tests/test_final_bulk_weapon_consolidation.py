@@ -65,6 +65,38 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
                 [f"{destination}FlatCompatibility"],
                 main_warheads(resolved), weapon)
 
+    def test_selected_templates_are_not_reinherited_through_children(self):
+        rules = Ruleset(ROOT)
+        selected = final_cohorts.selections(rules)
+
+        def ancestors(name):
+            seen = set()
+            stack = [parent for _, parent in rules.inherits_of(rules.weapon(name))
+                     if parent in rules.weapons]
+            while stack:
+                parent = stack.pop()
+                if parent in seen:
+                    continue
+                seen.add(parent)
+                stack.extend(
+                    grandparent for _, grandparent in rules.inherits_of(rules.weapon(parent))
+                    if grandparent in rules.weapons)
+            return seen
+
+        for weapon in selected:
+            local = rules.weapon(weapon)
+            own = {
+                str(child.value) for child in local.children
+                if child.key == "Inherits@finalmain"
+            }
+            inherited = {
+                str(child.value)
+                for parent in ancestors(weapon)
+                for child in rules.weapon(parent).children
+                if child.key.startswith("Inherits")
+            }
+            self.assertTrue(own.isdisjoint(inherited), weapon)
+
     def test_structural_backlog_ratchet_was_lowered(self):
         self.assertEqual(847, SPLIT_BASELINE)
 

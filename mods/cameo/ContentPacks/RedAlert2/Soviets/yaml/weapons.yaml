@@ -731,7 +731,6 @@ RA2FLAKAA_elite:
 	BurstDelays: 3
 
 RA2FlakTrackGun_elite:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: RA2FlakTrackGun
 	Range: 6528
 	Burst: 2
@@ -798,7 +797,6 @@ IvanBombAir:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Aircraft
 BorisAKM_elite:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: BorisAKM
 	Range: 9167
 	Burst: 8
@@ -808,7 +806,6 @@ BorisAKM_elite:
 		PercentageScale: 9988
 
 BorisAKM2:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: BorisAKM
 	ValidTargets: Structure, Bridge, wall
 	-InvalidTargets:

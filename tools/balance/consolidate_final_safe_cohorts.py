@@ -272,6 +272,59 @@ def cleanup_stale_removals(names: set[str]) -> int:
     return removed
 
 
+def cleanup_duplicate_template_inherits(names: set[str]) -> int:
+    """Remove direct compatibility inherits already supplied by an ancestor."""
+    rules = Ruleset(ROOT)
+    changed: dict[pathlib.Path, list[str]] = {}
+    removed = 0
+
+    def ancestors(name: str) -> set[str]:
+        seen: set[str] = set()
+        stack = [parent for _, parent in rules.inherits_of(rules.weapon(name))
+                 if parent in rules.weapons]
+        while stack:
+            parent = stack.pop()
+            if parent in seen:
+                continue
+            seen.add(parent)
+            stack.extend(
+                grandparent for _, grandparent in rules.inherits_of(rules.weapon(parent))
+                if grandparent in rules.weapons)
+        return seen
+
+    for name in sorted(names):
+        local = rules.weapon(name)
+        if local is None:
+            raise RuntimeError(f"{name}: missing duplicate-inherit source")
+        direct = [child for child in local.children if child.key == "Inherits@finalmain"]
+        if not direct:
+            continue
+        if len(direct) != 1:
+            raise RuntimeError(f"{name}: duplicate local Inherits@finalmain")
+        template = str(direct[0].value)
+        inherited = any(
+            any(child.key.startswith("Inherits") and str(child.value) == template
+                for child in rules.weapon(parent).children)
+            for parent in ancestors(name)
+        )
+        if not inherited:
+            continue
+        path = pathlib.Path(local.file)
+        lines = changed.setdefault(
+            path, path.read_text(encoding="utf-8-sig").splitlines(True))
+        start, end = block_bounds(lines, name)
+        marker = f"\tInherits@finalmain: {template}"
+        indexes = [index for index in range(start + 1, end)
+                   if lines[index].rstrip("\r\n") == marker]
+        if len(indexes) != 1:
+            raise RuntimeError(f"{name}: duplicate-inherit source fingerprint changed")
+        del lines[indexes[0]]
+        removed += 1
+    for path, lines in changed.items():
+        path.write_text("".join(lines), encoding="utf-8", newline="\n")
+    return removed
+
+
 def validate_result() -> None:
     rs = Ruleset(ROOT)
     selected = selections(rs)
@@ -291,8 +344,10 @@ def main() -> int:
     if already:
         if args.apply:
             removed = cleanup_stale_removals(set(selected) | COMPATIBILITY_NESTED)
+            duplicate_inherits = cleanup_duplicate_template_inherits(set(selected))
             validate_result()
-            print(f"Removed {removed} stale descendant removals")
+            print(f"Removed {removed} stale descendant removals and "
+                  f"{duplicate_inherits} duplicate template inherits")
         print(f"Already consolidated {len(selected)} concrete definitions")
         return 0
     print(f"{len(ROOTS)} roots; {len(selected)} concrete definitions")
@@ -321,6 +376,7 @@ def main() -> int:
     for path, lines in changed.items():
         path.write_text("".join(lines), encoding="utf-8", newline="\n")
     cleanup_stale_removals(set(selected) | COMPATIBILITY_NESTED)
+    cleanup_duplicate_template_inherits(set(selected))
     validate_result()
     print(f"Applied and validated {len(changed)} files")
     return 0
