@@ -91,7 +91,7 @@ class RoleCompleteProfileConsolidationTests(unittest.TestCase):
             set(main_warheads(self.rules.resolve_weapon("ordos_airmine"))))
 
     def test_ratchets_match_the_live_reduction(self):
-        self.assertEqual(810, SPLIT_BASELINE)
+        self.assertEqual(801, SPLIT_BASELINE)
         self.assertEqual(432, BROADCAST_BASELINE)
 
 

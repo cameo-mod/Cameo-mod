@@ -96,14 +96,23 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
 
     def test_routing_and_overflow_hazards_remain_unconverted(self):
         deferred = {
-            "MachineGunHumvee2_AA", "RA220mmrapid", "TSSergGun", "d2k_shotgun",
+            "RA220mmrapid", "TSSergGun", "d2k_shotgun",
             "AlliedTankDestroyerCannon", "RA2TorpTube", "TSInfantryMortar",
         }
         for weapon in deferred:
             self.assertGreater(len(main_warheads(self.rules.resolve_weapon(weapon))), 1, weapon)
 
+        # This AA child still carries the deferred route-specific Medium nodes,
+        # but they have no Damage and therefore are not active second mains.
+        # Guard their continued presence without corrupting the shared damage
+        # predicate to keep the old survey count.
+        humvee = self.rules.resolve_weapon("MachineGunHumvee2_AA")
+        keys = {child.key for child in humvee.children}
+        self.assertIn("Warhead@Bullet_Light", keys)
+        self.assertIn("Warhead@Bullet_Medium", keys)
+
     def test_ratchets_match_the_live_reduction(self):
-        self.assertEqual(810, SPLIT_BASELINE)
+        self.assertEqual(801, SPLIT_BASELINE)
         self.assertEqual(432, BROADCAST_BASELINE)
 
 
