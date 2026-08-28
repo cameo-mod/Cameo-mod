@@ -375,6 +375,14 @@ def apply_changes(rs: Ruleset) -> None:
                            "\tTargetActorCenter: true\n")):
         if field not in positron_lines[start:end]:
             positron_lines.insert(insert_at, field)
+    start, end = block_bounds(positron_lines, "PositronGrenade")
+    obsolete = "\tWarhead@CannonHE_Medium:\n"
+    if obsolete in positron_lines[start:end]:
+        obsolete_at = positron_lines.index(obsolete, start, end)
+        obsolete_end = obsolete_at + 1
+        while obsolete_end < end and positron_lines[obsolete_end].startswith("\t\t"):
+            obsolete_end += 1
+        del positron_lines[obsolete_at:obsolete_end]
     remove_removal(positron_lines, "PositronGrenade", "CannonHE_Medium")
     for path, lines in changed.items():
         path.write_text("".join(lines), encoding="utf-8", newline="\n")
