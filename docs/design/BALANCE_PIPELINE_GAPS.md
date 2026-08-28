@@ -33,32 +33,48 @@ authoritative. The cheap check is `git log --all -- <path>`: a path with commits
 none at HEAD was *moved*, and the reviewer's substance may still be sound even though its
 address is stale.
 
-### 0b. The same lesson in a second form: load state
+### 0b. The same lesson twice more: load state, then namespace
 
-A parallel disagreement ran between the audit reports and the Generals branch. The audits
-report four USA condition families as dead wiring across ~1,042 actors; the branch reports them
-correctly wired end to end. Both are right, about different trees.
+Two further disagreements ran on the same fault line, and neither was a disagreement about
+the game.
 
-`defaults.yaml` (**loaded**) declares `GrantConditionOnPrerequisite@usabombardament`,
-`@usaholdtheline` and `@usasearchndestroy` at 5009–5031, and hangs five multipliers off those
-conditions — firepower, reload, damage, range and speed. The only thing that *provides* those
-prerequisites sits in `rules/generals.yaml` at 11034–11044, which is commented out of
-`mod.yaml`. So on master the conditions can never be granted and all five multipliers are
-permanently inert; in a branch where Generals is loaded, the same wiring is live and correct.
+**Load state.** The audits report four USA condition families as inert across ~1,042 actors;
+the Generals branch reports them working end to end. Both are right, about different trees —
+and the mechanism is worth reading in full, because it is four links long and only the last
+two are on master:
 
-⭐ **A finding is scoped to a load state as much as to a commit.** Dormant content can be the
-sole provider for live wiring, which makes a defect that is real on master invisible to anyone
-working with that content enabled — and vice versa. State which files were loaded when
-reporting a wiring defect.
+```
+usacommand  (rules/generals.yaml — NOT LOADED)
+  produces a doctrine upgrade
+    → GrantConditionOnProduction@1b/2s/3h   grants usabombardamentx / …x
+      → ProvidesPrerequisite@1b/2s/3h       supplies prerequisite "usabombardament"
+        → defaults.yaml:5009  GrantConditionOnPrerequisite  grants the condition
+          → Firepower / ReloadDelay / Damage / Range / Speed multipliers fire
+```
 
-Two corrections to that audit item, both measured:
+⚠ **This is a complete, correct mechanism, not rot.** An earlier draft of this section
+called it dead wiring and named `ProvidesPrerequisite` as "the only provider" — that is link
+three of four, and the word "dead" implies decay that is not there. Nothing is broken. The
+front end simply lives in content `mod.yaml` does not load, so on master the conditions can
+never be granted and the five multipliers are inert; enable Generals and the whole chain
+works.
 
-* `upsubliminal` does **not** belong in the dead list. It is granted by
-  `Warhead@upsubliminal: GrantExternalCondition` in
-  `ContentPacks/RedAlert/Shared/yaml/weapons.yaml` and received by `^PropagandaEffectBuff` in
-  `defaults.yaml` — live, working, and unrelated to Generals.
-* The `*c`-suffixed variants (`usabombardmentc`, `usasearchndestroyc`, `usaholdthelinec`) exist
-  only inside `generals.yaml`. They are not a live alternative path on master.
+The ~1,042-actor scale is not a red flag either: the multipliers hang off
+`^PropagandaEffectBuff`, which `^BasicUnit` inherits at `defaults.yaml:2418`, and nearly
+every unit in the mod descends from `^BasicUnit`.
+
+**Namespace.** The same four tokens then went missing entirely — searched for on master by
+one party and found, searched for in a contributor's working archive and not found. Neither
+search was wrong. That archive had renamed 874 actors plus every id that doubles as a string
+match, so `usabombardament` had become `usa_doctrine_bombardmentbattleplan` locally and
+nowhere else. Grepping master's names against a renamed tree returns nothing, and "not found"
+reads exactly like "removed upstream".
+
+⭐ **Three forms of one mistake, all of them "not found" mistaken for "not there".**
+A finding is scoped to a commit, to a load state, *and* to a namespace. Before concluding
+that something is absent, establish which tree, which loaded content, and which naming
+generation the search ran against — and prefer tracing a mechanism end to end over inferring
+its absence from a grep that returned nothing.
 
 ---
 

@@ -2,7 +2,7 @@
 >
 > Deleted by the 83→43 documentation compaction (`20f15194`) and restored here on
 > 2026-08-28 after a mechanical re-check found it was **not regenerable**, unlike the
-> thirteen `proposal_*.md` reports deleted alongside it. Its generator, `tools/balance/_balance_audit_report.py`, raises `ModuleNotFoundError: No module named 'scout_rebalance_proposal_final'` — a module removed long ago. The script is dead and nothing runs it.
+> thirteen `proposal_*.md` reports deleted alongside it. Its generator, `tools/balance/_balance_audit_report.py`, raised `ModuleNotFoundError: No module named 'scout_rebalance_proposal_final'` — a module removed long ago. The script was dead, nothing ran it, and it was **deleted on 2026-08-28**. Recover it with `git show 6e0a273b:tools/balance/_balance_audit_report.py` if the methodology is ever wanted back.
 >
 > Its numbers are a snapshot of a **pre-W24 tree**: the weapon rebuild has moved damage
 > structure since, so read it for method and for what was measured at the time, never as
