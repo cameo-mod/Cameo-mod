@@ -6060,18 +6060,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "42000",
-        "falloff": "100, 50, 33, 25, 20",
+        "damage": "168000",
+        "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "21000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "21",
@@ -6081,20 +6074,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "42000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "21000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "21",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -6102,25 +6081,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "42000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "21",
         "falloff": null,
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "42000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "21",
@@ -6131,7 +6096,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2315",
       "pricing": true,
       "range": "11580",
@@ -6139,14 +6104,17 @@
       "requires": "!cabal_upgrade_neutronnuclearcatalyst",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
        "^Grenade",
        "^ShrapnelWeapon",
        "^MediumCannon",
        "^HeavyCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "CabalArtilleryWalkerShell",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

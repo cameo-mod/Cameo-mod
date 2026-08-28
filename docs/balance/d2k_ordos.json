@@ -6428,10 +6428,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "14000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "damage": "42000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -6440,13 +6440,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "14000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "7",
@@ -6463,13 +6456,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "14000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
         "falloff": null,
         "spread": "75",
@@ -6484,6 +6470,7 @@
       "reloaddelay": "72",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_CannonHE_MediumFlat",
        "^MediumChemicalWeapon",
        "^LightChemicalWeapon",
        "^D2K_Cannon",

@@ -976,6 +976,7 @@ FireballLauncherBuggy2:
 	Warhead@Flame_Medium:
 		Damage: 2000
 LightTank2Cannon:
+	Inherits@collapsewh: ^Warhead_CannonHE_Medium
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumCannon
 	ReloadDelay: 35
@@ -1002,6 +1003,11 @@ LightTank2Cannon:
 		Explosions: chemball
 		ImpactSounds: xplos.aud
 
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumCannon:
+	Warhead@CannonHE_Medium:
+		Damage: 8000
+		PercentageScale: 0
 LightTank2Missiles:
 	Inherits: ^Warhead_Flame_Light
 	Inherits@2: ^Warhead_MissileAP_Medium

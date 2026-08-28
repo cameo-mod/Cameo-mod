@@ -5605,10 +5605,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -5619,13 +5619,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "150",
@@ -5634,18 +5627,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4903",
       "reloaddelay": "35",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonHE_Medium",
        "^LightChemicalWeapon",
        "^MediumCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "LightTank2Cannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

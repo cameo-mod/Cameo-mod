@@ -50,6 +50,7 @@ HeavyOrdosCombatTankRockets:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 120mm_td:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^LightChemicalWeapon
 	Inherits@3: ^D2K_Cannon
@@ -91,6 +92,12 @@ HeavyOrdosCombatTankRockets:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 7
 
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		Damage: 42000
+		PercentageScale: 0
 120mm_cobra:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium

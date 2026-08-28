@@ -1041,6 +1041,7 @@ MissileAttackRobotGun_elite:
 		ContrailStartColor: e60000
 
 FutureMechGatling:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^LightMissile
 	Inherits@3: ^FlakWeapon
@@ -1080,6 +1081,13 @@ FutureMechGatling:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LightMissile:
+	-Warhead@FlakWeapon:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
 FutureMechPlasma:
 	Inherits: ^Grenade
 	Inherits@2: ^MediumChemicalWeapon

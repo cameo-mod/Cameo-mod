@@ -644,6 +644,7 @@ CabalHeavyReaperTrap:
 		ValidTargets: Ground, Water
 
 CabalArtilleryWalkerShell:
+	Inherits@collapsewh: ^Warhead_CannonHE_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumCannon
@@ -688,6 +689,15 @@ CabalArtilleryWalkerShell:
 		Explosions: large_explosion
 		ImpactSounds: expnew12.aud
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumCannon:
+	-Warhead@HeavyCannon:
+	Warhead@CannonHE_Heavy:
+		Damage: 168000
+		PercentageScale: 0
 CabalArtilleryWalkerShellUpgraded:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon

@@ -290,6 +290,7 @@ wc2ballistaFire:
 		ImpactSounds: explode.aud
 
 MortarTeamArtilleryShell:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -356,6 +357,14 @@ MortarTeamArtilleryShell:
 		Explosions: idle
 		ImpactSounds: explode.aud
 
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 60000
+		PercentageScale: 0
 wc2gryphonFireVisible:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumFlameWeapon

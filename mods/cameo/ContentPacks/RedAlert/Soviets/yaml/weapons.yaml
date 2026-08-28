@@ -2381,6 +2381,7 @@ MammothTuskTeslaTargetingComputer:
 	ValidTargets: Ground, Water, Air
 
 ra120mm2:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -2423,6 +2424,11 @@ ra120mm2:
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Ground
 
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		Damage: 32000
+		PercentageScale: 0
 ra120mm2TargetingComputer:
 	Inherits: ra120mm2
 	ReloadDelay: 105

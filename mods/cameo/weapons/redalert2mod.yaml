@@ -335,6 +335,7 @@ SteelHoverMissile_elite:
 		Damage: 8000
 
 SteelTwisterMissiles:
+	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Grenade
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^FlakWeapon
@@ -403,6 +404,15 @@ SteelTwisterMissiles:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyAAWeapon:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 9000
+		PercentageScale: 0
 SteelTwisterMissiles_elite:
 	Inherits: SteelTwisterMissiles
 	Range: 6000

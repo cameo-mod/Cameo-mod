@@ -649,6 +649,7 @@ LatinSmokerRocket_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 48000
 DiabloCannon:
+	Inherits@collapseflat: ^Compatibility_Flak_MediumFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
@@ -683,6 +684,13 @@ DiabloCannon:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	-Warhead@LightMissile:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Chaingun:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
 DiabloCannon_elite:
 	Inherits: DiabloCannon
 	Report: aacanon3.aud
@@ -1123,6 +1131,7 @@ RA2TOPOLCuba:
 		LayerName: ra2radiation
 
 RA2APCFlakCannon:
+	Inherits@collapseflat: ^Compatibility_Flak_MediumFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
@@ -1157,6 +1166,13 @@ RA2APCFlakCannon:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	-Warhead@LightMissile:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Chaingun:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
 RA2APCFlakCannon_elite:
 	Inherits: RA2APCFlakCannon
 	Report: aacanon3.aud

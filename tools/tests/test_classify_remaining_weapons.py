@@ -35,8 +35,8 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
 
     def test_ambiguous_examples_stay_in_human_review(self):
         rows = {row["weapon"]: row for row in self.rows}
-        for name in ("DuelistTankCannon", "LatinSmokerCannon", "120mm_td",
-                     "ReconRangerRecoillessGun", "PhotonCannon",
+        for name in ("DuelistTankCannon", "LatinSmokerCannon", "NaxMausCannon",
+                     "NaxRatteCannon", "PhotonCannon",
                      "ArcherArtilleryShell"):
             self.assertEqual("human decision required", rows[name]["bucket"], name)
 
@@ -47,10 +47,9 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
             self.assertGreater(len(destinations), 1, name)
 
     def test_folded_percentage_hit_is_recorded_beside_its_flat_hit(self):
-        rows = {row["weapon"]: row for row in self.rows}
-        weapon = rows["120mm_td"]
-        self.assertIn("CannonHE_Medium", {hit["tag"] for hit in weapon["flat_hits"]})
-        folded = [hit for hit in weapon["percentage_hits"]
+        weapon = Ruleset(ROOT).resolve_weapon("120mm_td")
+        self.assertIn("CannonHE_Medium", {hit["tag"] for hit in classifier.flat_ledger(weapon)})
+        folded = [hit for hit in classifier.percentage_ledger(weapon)
                   if hit["tag"] == "CannonHE_Medium" and hit["kind"] == "pct_folded"]
         self.assertEqual(1, len(folded))
         self.assertEqual(10000, folded[0]["scale"])
@@ -58,9 +57,8 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
         self.assertIn("Shield", folded[0]["percentage_versus"])
 
     def test_percentage_physical_state_map_is_recorded(self):
-        rows = {row["weapon"]: row for row in self.rows}
-        weapon = rows["120mm_td"]
-        states = [state for hit in weapon["percentage_hits"]
+        weapon = Ruleset(ROOT).resolve_weapon("120mm_td")
+        states = [state for hit in classifier.percentage_ledger(weapon)
                   for state in hit["physical_states"]]
         self.assertIn({"name": "Corrosion", "scale": "100", "source": "map"}, states)
 

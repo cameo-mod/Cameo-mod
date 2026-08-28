@@ -337,6 +337,7 @@ AsianCrocBite_elite:
 	BurstDelays: 3
 
 AsianLynxTankCannon:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightFlameWeapon
@@ -401,6 +402,17 @@ AsianLynxTankCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 10000
+		PercentageScale: 0
 AsianLynxTankCannon_elite:
 	Inherits: AsianLynxTankCannon
 	Inherits@Elite: ^RA2EliteEffects
