@@ -1,6 +1,6 @@
 # audit_outliers — systemic numeric drift (B9)
 
-(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **176**, selection bounds > 5120: **0**
+(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **174**, selection bounds > 5120: **0**
 
 
 ## Hard screen — Selectable bounds above the 5x5-cell maximum
@@ -13,8 +13,6 @@ _none found_
 | trait.field | actor | value | median | robust z |
 |---|---|---|---|---|
 | Aircraft.CruiseAltitude | TSDPOD | 16384 | 2500 | 18.7 |
-| Aircraft.CruiseAltitude | TSDPODE1 | 16384 | 2500 | 18.7 |
-| Aircraft.CruiseAltitude | TSDPODE2 | 16384 | 2500 | 18.7 |
 | Aircraft.CruiseAltitude | INVISIBLEPLANE | 9000 | 2500 | 8.8 |
 | Aircraft.TurnSpeed | japan_rocketangel_husk | 160 | 20 | 18.9 |
 | Aircraft.TurnSpeed | ra2rock.husk | 160 | 20 | 18.9 |

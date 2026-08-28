@@ -201,24 +201,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -227,9 +213,10 @@
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@Missiles",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",
@@ -247,24 +234,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -273,9 +246,10 @@
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod1",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",
@@ -293,24 +267,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -319,9 +279,10 @@
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod2",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",
@@ -339,25 +300,18 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "253",
+        "tag": "Thermobaric_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -367,20 +321,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -388,25 +328,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -417,13 +343,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHE",
       "versus_templates": [
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -433,6 +360,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "HindMissilesThermobaric",
@@ -441,25 +369,18 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "253",
+        "tag": "Thermobaric_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -469,20 +390,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -490,25 +397,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -519,13 +412,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHERocketPod1",
       "versus_templates": [
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -535,6 +429,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "HindMissilesThermobaric",
@@ -543,25 +438,18 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "253",
+        "tag": "Thermobaric_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -571,20 +459,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -592,25 +466,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -621,13 +481,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHERocketPod2",
       "versus_templates": [
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -637,6 +498,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "HindMissilesThermobaric",
@@ -645,11 +507,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_Super",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -659,13 +521,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -673,25 +528,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -702,30 +543,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesNuke",
       "versus_templates": [
+       "^Warhead_Nuclear_Super",
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
        "^NuclearWarhead",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Nuclear_Super"
+      ],
       "weapon": "HindMissilesNuclear",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_Super",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -735,13 +579,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -749,25 +586,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -778,30 +601,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesNukeRocketPod1",
       "versus_templates": [
+       "^Warhead_Nuclear_Super",
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
        "^NuclearWarhead",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Nuclear_Super"
+      ],
       "weapon": "HindMissilesNuclear",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_Super",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -811,13 +637,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -825,25 +644,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -854,21 +659,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesNukeRocketPod2",
       "versus_templates": [
+       "^Warhead_Nuclear_Super",
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
        "^NuclearWarhead",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Nuclear_Super"
+      ],
       "weapon": "HindMissilesNuclear",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -1210,24 +1018,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1239,6 +1033,7 @@
       "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@Missiles",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",
@@ -1256,24 +1051,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1285,6 +1066,7 @@
       "requires": "!ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod1",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",
@@ -1302,24 +1084,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1331,6 +1099,7 @@
       "requires": "!ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod2",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",
@@ -1348,18 +1117,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "11000",
+        "falloff": "100, 52, 0",
+        "spread": "47",
+        "tag": "MissileTesla_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1369,32 +1131,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1404,32 +1145,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1447,6 +1167,7 @@
       "requires": "ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesUpgrade",
       "versus_templates": [
+       "^Compatibility_MissileTesla_MediumFlat",
        "^Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
@@ -1461,18 +1182,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "11000",
+        "falloff": "100, 52, 0",
+        "spread": "47",
+        "tag": "MissileTesla_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1482,32 +1196,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1517,32 +1210,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1560,6 +1232,7 @@
       "requires": "ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesUpgradeRocketPod1",
       "versus_templates": [
+       "^Compatibility_MissileTesla_MediumFlat",
        "^Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
@@ -1574,18 +1247,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "11000",
+        "falloff": "100, 52, 0",
+        "spread": "47",
+        "tag": "MissileTesla_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1595,32 +1261,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1630,32 +1275,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1673,6 +1297,7 @@
       "requires": "ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesUpgradeRocketPod2",
       "versus_templates": [
+       "^Compatibility_MissileTesla_MediumFlat",
        "^Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
@@ -2042,11 +1667,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
+        "damage": "36000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "6",
@@ -2056,25 +1681,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "6",
@@ -2092,7 +1703,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -2100,12 +1711,14 @@
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
       "slot": "Armament@NuclearUpgrade1",
       "versus_templates": [
+       "^Warhead_Thermobaric_Heavy",
        "^NuclearWarhead",
        "^HeavyMissile",
        "^MediumFlameWeapon",
        "Maverick"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ThermobaricMaverick",
@@ -2116,11 +1729,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
+        "damage": "36000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "6",
@@ -2130,25 +1743,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "6",
@@ -2166,7 +1765,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -2174,12 +1773,14 @@
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
       "slot": "Armament@NuclearUpgrade2",
       "versus_templates": [
+       "^Warhead_Thermobaric_Heavy",
        "^NuclearWarhead",
        "^HeavyMissile",
        "^MediumFlameWeapon",
        "Maverick"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ThermobaricMaverick",
@@ -2247,11 +1848,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "50000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
+        "damage": "200000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_SuperFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
@@ -2261,13 +1862,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "50000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "525",
@@ -2275,25 +1869,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "50000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
        },
        {
         "damage": "25",
@@ -2310,6 +1890,7 @@
       "reloaddelay": "125",
       "slot": "Armament@BOMBS",
       "versus_templates": [
+       "^Compatibility_Nuclear_SuperFlat",
        "^HeavyBomb",
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -2546,7 +2127,7 @@
       "pricing": true,
       "range": "7890",
       "reloaddelay": "50",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
@@ -2556,7 +2137,7 @@
       "warheads": [
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "NuclearMaverick",
+      "weapon": "Su57Maverick",
       "weapon_class_source": "template"
      },
      {
@@ -2577,7 +2158,7 @@
       "pricing": true,
       "range": "7890",
       "reloaddelay": "50",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets",
       "slot": "Armament@HE",
       "versus_templates": [
        "^Warhead_MissileThermobaric_Heavy",
@@ -2587,7 +2168,7 @@
       "warheads": [
        "^Warhead_MissileThermobaric_Heavy"
       ],
-      "weapon": "ThermobaricNuclearMaverick",
+      "weapon": "Su57MaverickThermobaric",
       "weapon_class_source": "template"
      },
      {
@@ -2753,8 +2334,8 @@
      "unit_class": null
     },
     "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets",
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
+     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
      "v": 1.15
     },
     "hp": {
@@ -2801,11 +2382,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "100000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
+        "damage": "400000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_SuperFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "50",
@@ -2815,13 +2396,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "100000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "50",
         "falloff": "99, 66, 33",
         "spread": "525",
@@ -2829,25 +2403,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "100000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "50",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "100000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
        },
        {
         "damage": "50",
@@ -2864,6 +2424,7 @@
       "reloaddelay": "50",
       "slot": "Armament@Nuke",
       "versus_templates": [
+       "^Compatibility_Nuclear_SuperFlat",
        "^HeavyBomb",
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -2939,32 +2500,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -2974,13 +2514,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "40000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "20",
         "falloff": "99, 66, 33",
         "spread": "525",
@@ -2988,18 +2521,46 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "40000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "20",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "PreservedFlat_HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "99, 66, 33",
+        "spread": "1050",
+        "tag": "PreservedFlat_HeavyChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "1000",
+        "tag": "PreservedFlat_HeavyFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "PreservedFlat_TeslaWeapon",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -3324,18 +2885,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "40000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -3345,13 +2899,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
@@ -3359,25 +2906,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -3388,20 +2921,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "1840",
       "reloaddelay": "110",
       "slot": "Armament@BOMBS",
       "versus_templates": [
+       "^Warhead_Flame_Heavy",
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "YakNapalm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -4401,11 +3937,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
+        "damage": "16000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -4415,13 +3951,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "300",
@@ -4429,25 +3958,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4458,20 +3973,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "12790",
       "reloaddelay": "27",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
        "^FlakWeapon",
        "^HeavyMissile",
        "^MediumMissile",
        "^LightMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "Nike",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4492,8 +4010,8 @@
      "unit_class": 0.225
     },
     "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets",
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
+     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
      "v": 1.1
     },
     "hp": {
@@ -4701,17 +4219,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4722,6 +4233,7 @@
       "reloaddelay": "11",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -4740,17 +4252,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4761,6 +4266,7 @@
       "reloaddelay": "11",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -5112,197 +4618,147 @@
      {
       "damage_warheads": [
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "200000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "CannonAP_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
-        "falloff": null,
-        "spread": "75",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "225",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "LegacyRailgunExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5804",
       "reloaddelay": "85",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonAP_Heavy",
        "^TankDestroyerCannon",
        "^RailgunWeapon",
        "^LightMissile",
        "^HeavyCannon",
        "^FlakWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonAP_Heavy"
+      ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "200000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "CannonAP_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
-        "falloff": null,
-        "spread": "75",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "225",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "LegacyRailgunExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5804",
       "reloaddelay": "85",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_CannonAP_Heavy",
        "^TankDestroyerCannon",
        "^RailgunWeapon",
        "^LightMissile",
        "^HeavyCannon",
        "^FlakWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonAP_Heavy"
+      ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5785,18 +5241,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "169",
+        "tag": "Thermobaric_LightFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -5804,13 +5253,6 @@
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -5842,6 +5284,7 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Thermobaric_LightFlat",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "GrenadeRA"
@@ -5857,18 +5300,11 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "169",
+        "tag": "Thermobaric_LightFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -5876,13 +5312,6 @@
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -5914,6 +5343,7 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
+       "^Compatibility_Thermobaric_LightFlat",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "GrenadeRA"
@@ -6759,17 +6189,17 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "20000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
         "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -6778,20 +6208,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -6809,6 +6225,7 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -6826,17 +6243,17 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
         "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -6845,20 +6262,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -6921,17 +6324,17 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "40000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "80000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
         "damage": "40000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -6940,20 +6343,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -6995,17 +6384,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "20000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
         "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -7014,20 +6403,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -7063,17 +6438,17 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "16000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
         "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -7084,32 +6459,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -7119,25 +6473,32 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": null,
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -7148,6 +6509,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@IncendiaryTesla",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "VolkovMagneticWeapon",
        "^MediumFlameWeapon",
        "^TeslaWeapon",
@@ -7164,10 +6526,10 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "40000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "60000",
+        "falloff": "100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0",
+        "spread": "400",
+        "tag": "CannonNuke_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -7176,13 +6538,6 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -7199,13 +6554,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "20",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -7213,25 +6561,32 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "40000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": null,
+        "spread": null,
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20000",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -7243,6 +6598,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@IncendiaryNuclearShells",
       "versus_templates": [
+       "^Compatibility_CannonNuke_HeavyFlat",
        "^MediumFlameWeapon",
        "^NuclearWarhead",
        "VolkovMagneticWeapon"
@@ -7259,17 +6615,17 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "20000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
         "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -7278,20 +6634,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -7309,6 +6651,7 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -7327,17 +6670,17 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
         "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -7346,20 +6689,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -7423,17 +6752,17 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "40000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "80000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
         "damage": "40000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -7442,20 +6771,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -7498,17 +6813,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "20000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
         "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -7517,20 +6832,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -7567,17 +6868,17 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "16000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
         "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -7588,32 +6889,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -7623,25 +6903,32 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": null,
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -7652,6 +6939,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@GARRISONEDIncendiaryTesla",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "VolkovMagneticWeapon",
        "^MediumFlameWeapon",
        "^TeslaWeapon",
@@ -7669,10 +6957,10 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "40000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "60000",
+        "falloff": "100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0",
+        "spread": "400",
+        "tag": "CannonNuke_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -7681,13 +6969,6 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -7704,13 +6985,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "20",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -7718,25 +6992,32 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "40000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": null,
+        "spread": null,
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20000",
+        "falloff": null,
+        "spread": null,
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -7748,6 +7029,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@GARRISONEDIncendiaryNuclearShells",
       "versus_templates": [
+       "^Compatibility_CannonNuke_HeavyFlat",
        "^MediumFlameWeapon",
        "^NuclearWarhead",
        "VolkovMagneticWeapon"
@@ -8675,33 +7957,6 @@
      "Upgrades"
     ]
    },
-   "ra1_soviets_upgrade_highexplosiverockets": {
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "7500"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "TechUpgrade",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "name": "High Explosive Rockets",
-    "prerequisites": [
-     "~ra1_soviets_techcenter",
-     "~ra1_soviets_doctrine_heavyarmor",
-     "!ra1_soviets_upgrade_highexplosiverockets"
-    ],
-    "queue": [
-     "Research"
-    ]
-   },
    "ra1_soviets_upgrade_incendiarybullets": {
     "build_limit": {
      "src": "inherited",
@@ -9055,6 +8310,33 @@
      "Upgrades"
     ]
    },
+   "ra1_soviets_upgrade_thermobaricrockets": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "TechUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Thermobaric Rockets",
+    "prerequisites": [
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_heavyarmor",
+     "!ra1_soviets_upgrade_thermobaricrockets"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
    "ra1_soviets_upgrade_thermonuclearrockets": {
     "build_limit": {
      "src": "inherited",
@@ -9172,17 +8454,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9193,6 +8468,7 @@
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -9210,17 +8486,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9245,17 +8514,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -9274,6 +8536,7 @@
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade1",
       "versus_templates": [
+       "^Compatibility_Tesla_HeavyFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -9291,17 +8554,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -9334,17 +8590,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -9377,17 +8626,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -10048,7 +9290,7 @@
       "pricing": true,
       "range": "13820",
       "reloaddelay": "115",
-      "requires": "!(ra1_soviets_upgrade_highexplosiverockets || ra1_soviets_upgrade_scorchedearth)",
+      "requires": "!(ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth)",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
@@ -10068,10 +9310,10 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "damage": "8000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -10080,13 +9322,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -10116,9 +9351,10 @@
       "pricing": true,
       "range": "13820",
       "reloaddelay": "115",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets || ra1_soviets_upgrade_scorchedearth",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_MissileHE_HeavyFlat",
        "^MediumChemicalWeapon",
        "^HeavyBomb",
        "GradRockets"
@@ -10291,11 +9527,25 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "32",
+        "tag": "Laser_Light",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Light_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamageCompatibility",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -10305,13 +9555,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -10319,32 +9562,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -10355,20 +9577,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6825",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_shtoradefensesystem",
       "slot": "Armament@shtora",
       "versus_templates": [
+       "^Warhead_Laser_Light",
+       "^Compatibility_Laser_ExtraDamage",
        "^LightFlameWeapon",
        "^FlakWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Light"
+      ],
       "weapon": "ShtoraLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -11209,11 +10435,11 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "24000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -11223,13 +10449,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "150",
@@ -11237,32 +10456,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -11273,32 +10471,35 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
       "requires": "!ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
        "^HeavyCannon",
        "^MediumCannon",
        "^ShrapnelWeapon",
        "^TankDestroyerCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ra120mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "24000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -11308,13 +10509,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "150",
@@ -11322,32 +10516,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -11358,7 +10531,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -11367,9 +10540,11 @@
       "versus_templates": [
        "ra120mm"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ra120mmTargetingComputer",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -11531,18 +10706,11 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "36000",
+        "falloff": "100, 52, 0",
+        "spread": "63",
+        "tag": "MissileTesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -11552,13 +10720,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
@@ -11566,32 +10727,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -11609,6 +10749,7 @@
       "requires": "ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@TeslaSECONDARY",
       "versus_templates": [
+       "^Compatibility_MissileTesla_HeavyFlat",
        "^Grenade",
        "^LightFlameWeapon",
        "^TeslaWeapon",
@@ -11625,18 +10766,11 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "36000",
+        "falloff": "100, 52, 0",
+        "spread": "63",
+        "tag": "MissileTesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -11646,13 +10780,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
@@ -11660,32 +10787,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -11715,10 +10821,10 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
+        "damage": "32000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -11729,25 +10835,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -11757,32 +10849,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -11792,20 +10863,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -11813,25 +10870,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -11842,13 +10885,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@NukeSECONDARY",
       "versus_templates": [
+       "^Warhead_Thermobaric_Heavy",
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon",
@@ -11858,9 +10902,11 @@
        "^MediumMissile",
        "^HeavyMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Thermobaric_Heavy"
+      ],
       "weapon": "MammothTuskThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -11868,10 +10914,10 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
+        "damage": "32000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -11882,25 +10928,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -11910,32 +10942,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -11945,20 +10956,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -11966,25 +10963,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -11995,7 +10978,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
@@ -12004,9 +10987,11 @@
       "versus_templates": [
        "MammothTuskThermobaric"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Thermobaric_Heavy"
+      ],
       "weapon": "MammothTuskThermobaricTargetingComputer",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -12194,7 +11179,7 @@
       "warheads": [
        "^Warhead_CannonFire_Heavy"
       ],
-      "weapon": "MonsterTank120mmThermobaric",
+      "weapon": "MonsterTank120mmInferno",
       "weapon_class_source": "template"
      },
      {
@@ -12241,18 +11226,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "26750",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "13250",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "120250",
+        "falloff": "100, 52, 0",
+        "spread": "63",
+        "tag": "MissileTesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "13",
@@ -12262,13 +11240,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "26750",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "13",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
@@ -12276,32 +11247,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "26750",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "13250",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "13",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "26750",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "13",
@@ -12319,6 +11269,7 @@
       "requires": "ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@TeslaSECONDARY",
       "versus_templates": [
+       "^Compatibility_MissileTesla_HeavyFlat",
        "^Grenade",
        "^LightFlameWeapon",
        "^TeslaWeapon",
@@ -12334,10 +11285,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "13250",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
+        "damage": "106000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -12348,25 +11299,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "13250",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "7",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "13250",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "7",
@@ -12376,32 +11313,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "13250",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6750",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "13250",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "7",
@@ -12411,20 +11327,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "13250",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6750",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -12432,25 +11334,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "13250",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "13250",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "7",
@@ -12461,13 +11349,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7833",
       "reloaddelay": "125",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
       "slot": "Armament@NukeSECONDARY",
       "versus_templates": [
+       "^Warhead_Thermobaric_Heavy",
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon",
@@ -12477,9 +11366,11 @@
        "^MediumMissile",
        "^HeavyMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Thermobaric_Heavy"
+      ],
       "weapon": "MonsterTankTuskThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -12504,8 +11395,8 @@
      "unit_class": 0.4
     },
     "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets",
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
+     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
      "v": 1.05
     },
     "hp": {
@@ -12837,17 +11728,10 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "48000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
         "type": "AreaDamage"
        },
        {
@@ -12856,13 +11740,6 @@
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "8",
@@ -12880,6 +11757,7 @@
       "requires": "!ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_CannonHE_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -12897,17 +11775,10 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "48000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
         "type": "AreaDamage"
        },
        {
@@ -12916,13 +11787,6 @@
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "8",
@@ -13048,10 +11912,10 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
+        "damage": "48000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -13062,25 +11926,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "16000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "8",
@@ -13091,21 +11941,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
        "^HeavyMissile",
        "^ImpactGlow"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "MammothTusk2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -13113,10 +11966,10 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
+        "damage": "48000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -13127,13 +11980,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "16000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -13141,13 +11987,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "16000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
         "falloff": null,
         "spread": "300",
@@ -13156,18 +11995,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@SECONDARYTargetingComputer",
       "versus_templates": [
        "MammothTusk2"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "MammothTusk2TargetingComputer",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -13175,10 +12016,10 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
+        "damage": "48000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -13189,25 +12030,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "16000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "8",
@@ -13218,20 +12045,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@UpgradeSECONDARY",
       "versus_templates": [
+       "^Warhead_Thermobaric_Heavy",
        "^HeavyFlameWeapon",
        "^HeavyBomb",
        "^HeavyMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Thermobaric_Heavy"
+      ],
       "weapon": "MammothTusk2Thermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -13239,10 +12069,10 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
+        "damage": "48000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -13253,25 +12083,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "16000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "8",
@@ -13282,18 +12098,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@UpgradeSECONDARYTargetingComputer",
       "versus_templates": [
        "MammothTusk2Thermobaric"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Thermobaric_Heavy"
+      ],
       "weapon": "MammothTusk2ThermobaricTargetingComputer",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -13633,11 +12451,11 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
+        "damage": "16000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -13647,20 +12465,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -13668,22 +12472,22 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CollapseTargetCompatibility1",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1920",
       "pricing": true,
       "range": "9595",
@@ -13691,13 +12495,16 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Warhead_Thermobaric_Heavy",
        "^MediumMissile",
        "^Grenade",
        "^HeavyFlameWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Thermobaric_Heavy"
+      ],
       "weapon": "v1rocketsThermobaric",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -13785,7 +12592,7 @@
       "pricing": true,
       "range": "14110",
       "reloaddelay": "120",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_teslarockets",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
@@ -13857,7 +12664,7 @@
       "pricing": true,
       "range": "14110",
       "reloaddelay": "120",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets",
       "slot": "Armament@HE",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",

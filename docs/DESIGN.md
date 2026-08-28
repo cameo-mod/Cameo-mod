@@ -718,10 +718,13 @@ cheapest provider wins).
    You cannot change one stat in isolation — the formula ties all stats
    together, so changing Speed changes the unit's power, which changes the
    correct price or requires adjusting other stats to hold the price. The
-   rebalance MUST land in BOTH the spreadsheet
-   (`docs/design/cameo_armor_system.xlsx`) AND the yaml in the same pass.
-   Never change a stat without updating the spreadsheet and verifying the
-   formula still holds. If the range is beautiful (6.000, 7.500), adjust
+   rebalance MUST move through the raw ledger (`docs/balance/*.json`) or an
+   unlocked cell in one of the two active generated workbenches, then land in
+   yaml through the guarded balance pipeline. Regenerate both
+   `cameo_balance_by_faction.xlsx` and `cameo_balance_by_type.xlsx` in the same
+   pass. The legacy `cameo_armor_system.xlsx` is reference-only and is not a
+   required second write. Never change a stat without updating the ledger and
+   verifying the formula still holds. If the range is beautiful (6.000, 7.500), adjust
    HP/Damage instead of Range. If the new Range would violate promotion
    superiority, adjust HP or Price instead.
 4. Run the relevant audit before and after your change
@@ -1169,20 +1172,21 @@ Implementation: `tools/reference/aggregate_archetype.py` (`HEROIC_FROM`,
 
 **LAW (2026-07-18): balance numbers move ONLY through the balance
 pipeline** — `docs/design/BALANCE_PIPELINE.md` (raw-stat JSON ledger in
-`docs/balance/`, generated workbench `cameo_balance_v2.xlsx`, gated
+`docs/balance/`, generated `cameo_balance_by_faction.xlsx` and
+`cameo_balance_by_type.xlsx` workbenches, gated
 `apply_balance.py`, `audit_balance_drift` enforcement in run_all).
 Hand-editing a stat in yaml is a red audit finding. The subsections
 below remain the FORMULA reference; the legacy workbook stays the
 design-judgment reference until the Phase-3 triage
 (`docs/balance/discrepancies.md`) completes.
 
-_Source of truth: **`docs/design/cameo_armor_system.xlsx`** (the repo
-working copy; design's private master is synced into it; sheets:
+_Historical design-judgment reference: **`docs/design/cameo_armor_system.xlsx`** (sheets:
 Armor Types, Weapon Types, Infantry, Tanks, Vehicles, Aircraft,
 Defenses; Tabelle2/3 are scratch). 333ggg's CABAL concept
-(`Downloads\cabal.xlsx`) uses the same sheet layout. Tooling: openpyxl
-reads AND writes these — formula changes can be re-applied to every
-unit programmatically. Research 2026-07-11; open questions marked ❓._
+(`Downloads\cabal.xlsx`) uses the same sheet layout. It is not the current
+numeric source of truth and must not overwrite the ledger or the generated
+faction/type workbenches. The formulas below document the historical design
+reference. Research 2026-07-11; open questions marked ❓._
 
 **The cost identity.** Every unit sheet computes three cost estimates
 from the stats and averages them; the design workflow INVERTS this:
@@ -1278,15 +1282,17 @@ steps so the house formulas stay integral:
     warhead (the K model now prices what they compensated for), while the 34
     sniper `OpenToppedDamage` ones STAY — those are how a sniper hits
     passengers, not a damage bonus. See BALANCE_PROGRAM_PLAN W19.
-  - **Percentage twin** = **100 flat damage is 0.01% of max health**, so the
-    twin is exactly `Damage / 100` written in BASIS POINTS on an
-    `AreaDamagePercentage` warhead with `PercentageDenominator: 10000`.
-    Percentage-warhead `Versus` values are multiples of **5** in [5, 100]
-    (the x5 rebase of the old 1..17 band, which exactly cancels the 5x
-    weaker base ratio — never change one without the other).
-    The stock `HealthPercentageDamage` cannot express this (whole percent
-    only) and is being migrated away; until then it keeps the OLD law of
-    1 per 2000.
+  - **Folded percentage hit** = the normal family path. `AreaDamage` derives
+    its second hit from the same authored `Damage` through `PercentageScale`
+    and `PercentageDenominator: 10000`; it therefore scales to zero with the
+    main hit and cannot drift as a separately authored twin. Percentage
+    `Versus` values remain multiples of **5** in [5, 100]. Current direct-Actor
+    impacts skip this folded second hit; the pipeline mirrors that shipped
+    behavior until the separate runtime repair is reviewed and merged.
+  - **Standalone percentage warheads** (`AreaDamagePercentage` and
+    `HealthPercentageDamage`) are reserved for bespoke effects whose damage
+    must remain independent of flat `Damage`. They are additive floors, not
+    family twins, and their explicit denominator defines the unit.
   - The ONE code implementation is `formula.distribute_damage` /
     `formula.spread_damage_sum`; guard `audit_warhead_split`.
 - **Only template-inherited warheads may exist.** Every `Warhead@X` on a
@@ -1548,6 +1554,14 @@ armor is then given back the RANK it held, so where the tilt agrees with the fam
 direction it sharpens, where it disagrees it flattens, and it can never invert
 `None > Flak > Plate`. That also removes any need for a `direction` argument, which is what
 makes it work for the blends.
+
+⭐ **This is the DISCRETE form, and it is what `gen_weapon_template.class_tilt` ships today.**
+Its continuous successor is **§12.0i**, which replaces the three armor sets above with one global
+armor axis and the four levels with a continuous `h`. Two things to carry across when reading this
+section: the tilt's span here is `TILT_RATIO = 1.5`, which is why §12.0i's `LO` was re-ruled to
+0.667 (= 1/1.5) rather than 0.80; and the three sets above are the LIGHTEST / MIDDLE / HEAVIEST
+rung of each ladder, which on §12.0i's axis is `h = 0 / 1 / 2` — every ladder is centred on 1.000
+precisely so that mapping is exact.
 
 ### 12.0e THE ARMOR-PLATING LAYER (maintainer 2026-08-16/17) — binding
 
@@ -1917,10 +1931,11 @@ range increase over the ground weapon.
 attackers, not light infantry. Their weapon must use laser / missile
 warheads appropriate to their role, never `^SmallArms`.
 
-**Balance workflow.** All CABAL rebalances start in
-`docs/design/cameo_armor_system.xlsx` (or the CABAL concept sheet) and
-land in YAML in the same pass. The workbook wins on mismatch. Promotions
-add `^PromotionUnitBuff` on top of the sheet stats.
+**Balance workflow.** A CABAL concept sheet may supply design judgment, but numeric
+rebalance changes enter the same raw ledger / active faction-or-type workbench pipeline
+as every other faction and land in YAML through the guarded apply step. On mismatch,
+current ledger extraction and generator rules win over the legacy workbook. Promotions
+add `^PromotionUnitBuff` on top of the ledger stats.
 
 **CABAL Avatar — 50% scaled Core Defender (design 2026-07-15).** The
 `cabal_avatar` is a mass-produced variant of the Core Defender, NOT a
@@ -1954,6 +1969,138 @@ needs three things for backup systems:
    removes `SpawnActorOnDeath@backup`, adds
    `GrantPeriodicCondition@rebuild` + `TransformOnCondition@buildingrebirth`
    for auto-reanimation, and `WithColoredOverlay@backup` for the visual.
+
+### 12.0i CONTINUOUS HEAVINESS — the global armor axis and the bell (maintainer 2026-08-23/24) — binding
+
+Replaces the discrete `Light/Medium/Heavy/Super` LEVEL with a continuous heaviness `h`. Full
+derivation and the measurements behind every constant: `docs/design/WEAPON_HEAVINESS.md` §9.
+
+> *"the weapon family should be the most important and the heaviness level should only nudge it a
+> little … a low level CannonAP will lean stronger towards lighter armor types but still deal more
+> damage to heavy armor, the difference just is not too much … Flame weapons will be the opposite
+> … but still more damage to light, because that's their identity."*
+
+> *"h=0 leans towards damage against light, h=1 leans towards damage against medium and h=2 leans
+> towards damage against heavy — each h value should shift the damage distribution, but on a
+> continuous scale."* (maintainer, 2026-08-24)
+
+    x(armor)      = ONE GLOBAL SCALE, 0..2, 13 evenly spaced slots, step 1/6
+    mu(family, h) = ( h + centre_of_mass(base_profile) ) / 2
+    curve(x)      = LO + (1 - LO) * exp( -(x - mu)^2 / (2*sigma^2) )
+    Versus(a, h)  = base(a) * curve(x(a), mu)
+                    then renormalised to a constant weighted mean
+                    then RANK-RESTORED per ladder (§12.0d) — see law 5
+
+#### The axis (maintainer, 2026-08-24)
+
+> *"scout -> none -> fighter -> light -> wood -> bomber -> medium = flak = steel -> helicopter ->
+> concrete -> heavy -> spaceship -> plate -> superheavy … symmetrical armor types that are always
+> evenly distributed from 0 to 2.0, and the 3 medium / flak / steel armor types in the middle with
+> exactly 1.0."*
+
+| slot | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `x` | 0.000 | 0.167 | 0.333 | 0.500 | 0.667 | 0.833 | **1.000** | 1.167 | 1.333 | 1.500 | 1.667 | 1.833 | 2.000 |
+| armor | Scout | None | Fighter | Light | Wood | Bomber | **Flak · Medium · Steel** | Helicopter | Concrete | Heavy | Spaceship | Plate | Superheavy |
+
+⭐ **EVERY LADDER IS CENTRED EXACTLY ON 1.000.** That is the property the whole model rests on:
+
+| ladder | rungs | width |
+|---|---|---|
+| VEH | Scout 0.000 · Light 0.500 · **Medium 1.000** · Heavy 1.500 · Superheavy 2.000 | 2.000 |
+| INF | None 0.167 · **Flak 1.000** · Plate 1.833 | 1.667 |
+| AIR | Fighter 0.333 · Bomber 0.833 · Helicopter 1.167 · Spaceship 1.667 | 1.333 |
+| BLD | Wood 0.667 · **Steel 1.000** · Concrete 1.333 | 0.667 |
+
+so `h=1` means "medium" in all four domains at once, `h=0` the lightest rung of every ladder and
+`h=2` the heaviest — literally what the maintainer asked for. The WIDTHS are the design claim:
+infantry armour varies nearly as much as vehicle armour (a rifleman to power armour), buildings
+least — they compensate with HP, and a narrow ladder keeps every anti-light weapon usable against
+bunkers (ruled 2026-08-24; wider buildings were offered and declined).
+
+⛔ **THE THREE-WAY TIE AT 1.0 IS DELIBERATE AND IT IS THE ONLY TIE.** `Flak`, `Medium` and `Steel`
+sit in three DIFFERENT ladders, and the rank restore is per-ladder, so they are never in
+competition. De-tying them (Flak 0.95 / Medium 1.00 / Steel 1.05) moves no row by more than
+**0.89%** — measured across 45 families × 5 heaviness values. The tie buys perfect symmetry and
+costs nothing. A tie **within** one ladder stays forbidden: that was the 2026-08-24 bucket bug,
+where `Bomber` and `Helicopter` shared a coordinate and heaviness could not tell them apart at all.
+
+⛔ **TWO EARLIER FORMS ARE RETIRED.** §12.0d's three coarse buckets tied armors inside a ladder.
+The per-ladder 0..2 normalisation that replaced them was unique within a ladder but collided four
+ways across ladders (`None`/`Scout`/`Wood`/`Fighter` all at 0.0), which is what the maintainer
+rejected: *"I want a continuous value for all of them and all of them should have their own unique
+value."*
+
+⚠ **The axis is a DESIGN RULING, not a measurement, and it cannot be one.** Two attempts to derive
+it from the 45 authored profiles both failed for structural reasons, and the negative result is
+worth keeping: (1) the cross-ladder OFFSETS are provably not identifiable — remove each family's
+macro-type priority (the confound: `Bullet` favours infantry whatever its heaviness) and the
+per-ladder means of the residual are exactly zero by construction; (2) the within-ladder SPACING
+that survives correlates **0.979** with mean `build_order` rank, i.e. it re-reads
+`gen_weapon_template`'s own interleave rule rather than confirming it. The corpus can confirm the
+rung ORDER — all four ladders come out monotone, independently — and nothing else.
+
+#### The constants
+
+| | value | why |
+|---|---|---|
+| `LO` | **0.667** (swing 1.50x) | RE-RULED 2026-08-24. 0.80 was measured against the retired family-anchored peak, which moved only 0.25; under the blend the peak sweeps a full 1.0 and 0.80 came out much gentler than the tilt that already ships (per-ladder 0.68–0.84 vs 0.50–0.52). 0.667 = `1/TILT_RATIO`, the same 1.5x span `class_tilt` uses, so collapsing three templates into one preserves today's differentiation. Mismatch against the shipped tilt: 0.089 → 0.056 (no tilt at all = 0.139). |
+| `sigma` | **0.75** | RULED 2026-08-24 — it had been an assumed 1.0 inherited from an audit. 0.75 gives the strongest consistent tilt; below ~0.5 the effect starts to INVERT, because only the rung nearest the peak still moves. |
+| `mu` | **`(h + centre_of_mass) / 2`** | the BLEND, ruled 2026-08-24 — see law 1. |
+| `SHIFT` | **deleted** | it belonged to the family-anchored peak. |
+| price effect | **none** | see law 2. |
+| verified | `audit_heaviness_bell.py`, 2026-08-24 | 48 families, h ∈ {0, 0.5, 1, 1.5, 2}: **0** ladder orderings changed, **0** weighted-mean drift, **2** flat families (`Sonic`, `Magic`) at the ratchet. |
+
+#### The laws
+
+1. **THE PEAK IS THE BLEND OF THE HEAVINESS AND THE FAMILY'S OWN MASS.** ⛔ This REPLACES the
+   earlier law 1, *"the peak is anchored to the family, never to the tier"*. That law rejected a
+   tier-anchored peak because it *"inverted 26 of 42 families"* — but that was measured **before
+   the rank restore existed**, the same omission that produced two false "known inversions" (see
+   law 5). Re-measured with the restore in place, a pure `mu = h` reorders **nothing**, at any
+   sigma, across 44 families × 5 heaviness values. Both pure forms were therefore available and
+   the maintainer ruled the blend: `mu = h` gives the family no formal say beyond the restore,
+   while `mu = centre_of_mass + SHIFT*(h-1)` made `h=1` mean *"wherever this family already sits"*
+   rather than "medium". The blend halves the distance and keeps `h` meaningful.
+
+   The shift still SHARPENS where it agrees with the family's centre of mass (CannonAP,
+   heavy-ward) and FLATTENS where it disagrees (Flame, light-ward) — the two halves of §12.0d's
+   sentence. Worked example, `CannonAP`, `Versus` at h=0 / 1 / 2: `Superheavy` 160.1 → 174.1 →
+   205.0, `Scout` 108.9 → 89.4 → 81.4. At h=0 `Superheavy` is still the largest value in the whole
+   profile — the weapon leans lighter without ever ceasing to be anti-heavy.
+2. **HEAVINESS IS FREE OF PRICE.** Renormalising to a constant weighted mean makes `K` invariant
+   in `h`. `Versus` = WHAT the weapon is good against, `Damage` = HOW strong it is. A late-game
+   weapon costs more because its `Damage` is higher, and **no tier term is added to pricing**.
+   This REVERSES `WEAPON_HEAVINESS.md` §1, which measured the retired additive model.
+3. **THE LEVEL IS NOT A DAMAGE LADDER, and never was.** 145 `^Warhead_*` templates carry only a
+   placeholder `Damage: 2000`: the template holds the SHAPE, the weapon holds the MAGNITUDE. A
+   family's effective damage across its rungs is emergent, orthogonal to the bell, and no law
+   requires it to rise. `audit_level_ladder`'s monotonic check was retired on 2026-08-23.
+4. **EXCLUDED FROM THE AXIS:** `Shield` (§12.0c — its own compressed ladder), the five ALL-CAPS
+   platings (§12.0e — they replace the class armor rather than sit on the axis), and `Heroic`
+   (§12.0b — a derived cell, recomputed rather than tilted).
+5. ⛔ **THE RANK RESTORE IS A STEP OF THE PIPELINE, NOT A FOOTNOTE.** §12.0d already says the tilt
+   "is applied to the VALUES and each armor is then given back the RANK it held", and that step is
+   what makes "can never invert" TRUE rather than merely hoped for. Measured across 48 families:
+   without it the bell changes a ladder's internal order in **127** cases spanning 60
+   family/ladder pairs; with it, **zero**. It permutes values inside one ladder, so the multiset
+   and therefore the weighted mean are untouched — law 2's price invariance survives it.
+
+   ⚠ A consequence worth knowing: a family with NO gradient (`Sonic`, `Magic`) does not come out
+   inert. With every value tied, the "rank held" falls back to the ladder's own lightest→heaviest
+   order, so the family picks up a mild gradient pointing that way. Reasonable as a tie-break, but
+   "flat family" does not mean "heaviness does nothing".
+
+⚠ **"Inert at h=1" is a DEPLOYMENT property, not a design one, and it needs proving separately.**
+The intent was the discipline `AreaDamage` shipped under: turn the code on with every weapon at
+h=1 and show no resolved number moved. It was unachievable under the old formula — anchored to the
+family's mass, the bell reshaped all 48 families at h=1, worst row **13.5%**. Under the ruled model
+h=1 peaks at the middle rung of every ladder, i.e. exactly §12.0d's Medium tilt, so the right
+acceptance test is: **regenerate the templates through the bell at h ∈ {0, 1, 2} and diff against
+today's Light / Medium / Heavy yaml.** Do NOT test it by comparing the bell against the shipped
+TEMPLATES directly — the level also changes the body's `step` and `floor` (`LEVELS` in
+`gen_weapon_template.py`), so even the shipped `class_tilt` itself scores **+18.7% worse than doing
+nothing** on that comparison. Compare tilt to tilt, on the same base.
 
 ## 16. Rank decorations, experience systems & elite weapons
 
@@ -2447,3 +2594,52 @@ Race*. Key motifs that can be mined for upgrades, unit names, and faction flavor
 
 These sources are used only as parody/satire references; the faction remains a
 fictional sci-fi faction, not an endorsement of any real-world ideology.
+
+## 19. AI bot personalities
+
+Each bot draws one of five squad-manager personalities per match: Rush,
+Turtle, Tech, Expansion, or Steamroller. Selection is implemented by the
+existing synchronized `GrantRandomCondition` trait on `Player`; the lobby
+continues to expose only difficulty bot types.
+
+The personality effect is currently confined to the squad manager. Each
+personality has its own `SquadManagerBotModuleCA` instance gated by
+`genericbot && personality-*`, while base building, unit production, budgets,
+and difficulty definitions remain shared. The Steamroller profile is documented
+as having **at most one harasser**: the engine short-circuits creation of the
+first guerrilla squad, and zero guerrilla units is not expressible in YAML.
+
+There is currently no in-game way to reveal which personality a bot drew.
+Cameo has no condition-triggered text-notification trait, and the CN observer
+announcement requires one. In-game personality confirmation is a follow-up.
+
+`RushInterval` and `RushAttackScanRadius` are deliberately absent from the
+personality blocks. They are stale keys from an older squad manager and are not
+declared by either the vendored CA implementation or the pinned engine.
+
+Only the attack-force value threshold gains a time ramp. The five personality
+blocks replace their flat `SquadValueRandomBonus` with ramp values that preserve
+the same early-game maximum, while the flat bonus path remains supported for
+other squad-manager instances. The ramp reaches its late-match range over the
+first 20 minutes using the default 25 ticks per second. Long-match ramp
+behavior has not been observed in-game; that verification is a follow-up.
+
+## 20. AI bot unit compositions
+
+Unit compositions are opt-in through `UseCompositions: true` on
+`UnitBuilderBotModuleCA`; existing unit builders continue to use their
+`UnitsToBuild` shares by default. Cameo has no separate baseline composition:
+each personality's `UnitsToBuild` table is the fallback whenever no active
+composition applies.
+
+An active composition only biases the production queue categories named by its
+`UnitQueues` field; an empty list applies to every category. The current pilot
+contains two 50%-chance, vehicle-focused TD compositions: a GDI armor push
+gated by `td_gdi_weaponsfactory` and a Nod stealth push gated by
+`td_nod_templeofnod`. Both become eligible after 9000 ticks, have a 15000-tick
+per-composition reselection interval, and expire after 4500 ticks.
+
+Explicit unit requests, including harvester and MCV requests, continue through
+the bypass path and do not use composition share filtering. Only boot
+verification has been performed for this system; no long-match in-game
+composition behavior is claimed.

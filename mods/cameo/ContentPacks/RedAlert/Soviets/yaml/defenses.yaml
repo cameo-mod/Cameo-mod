@@ -8,6 +8,7 @@ ra1_soviets_missilesilo:
 	Tooltip:
 		Name: Soviet Missile Silo
 	Buildable:
+		-BuildLimit:
 		Prerequisites: ~ra1_soviets_techcenter, ~techlevel.superweapons, !abomb
 		Description: actor_mslo.description
 	Building:
@@ -67,8 +68,9 @@ ra1_soviets_ironcurtain:
 	Inherits@SW: ^Superweapon
 	Inherits@sell: ^RASovietSpawnActorsOnSell
 	Buildable:
+		-BuildLimit:
 		Queue: Defence, RADefence
-		Prerequisites: ~ra1_soviets_techcenter, ~techlevel.superweapons
+		Prerequisites: ~ra1_soviets_techcenter, ~techlevel.superweapons, !ra1_soviets_ironcurtain_swlimit
 		Description: actor_iron.description
 	Tooltip:
 		Name: Iron Curtain
@@ -110,6 +112,9 @@ ra1_soviets_ironcurtain:
 			1: __x__ _xxx_ xxxxx _xxx_ __x__
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 		BlockedCursor: move-blocked
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: ra1_soviets_ironcurtain_swlimit
+		RequiresPrerequisites: global-swlimit
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
@@ -245,7 +250,7 @@ ra1_soviets_samsite:
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@shape: ^2x1Shape
 	Inherits@AntiAir: ^PrioritizeAir
-	Inherits@HighExplosiveRocketsUpgradeRA1: ^HighExplosiveRocketsUpgradeRA1
+	Inherits@ThermobaricRocketsUpgradeRA1: ^ThermobaricRocketsUpgradeRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	HitShape:
 		Type: Rectangle
@@ -294,11 +299,11 @@ ra1_soviets_samsite:
 		Range: 12790
 	DetectCloaked:
 		Range: 6395
-	FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 110
-	RangeMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 110
-	RevealsShroudMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 120
 	ActorStatValues:
-		Upgrades: ra1_soviets_upgrade_highexplosiverockets, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_stalinium

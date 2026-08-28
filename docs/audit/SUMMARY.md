@@ -4,8 +4,9 @@ _One page. Live reports: [`latest/`](latest/) · comparison snapshots: [`baselin
 faction map: [`../factions/MATRIX.md`](../factions/MATRIX.md)._
 
 **Evidence date: 2026-08-23**, from `bash tools/audit/run_all.sh` at `e60aab63`, with
-`doc_claims`, `gen_sync` and `level_ladder` re-measured at `519175ae` (all three read only
-tracked files, so they are trustworthy from any checkout).
+`doc_claims` and `gen_sync` re-measured at `519175ae` (both read only tracked files, so they are
+trustworthy from any checkout). `level_ladder` was RETIRED on 2026-08-23 — it enforced a
+damage-monotonic rule no law states — and replaced by `heaviness_bell`.
 Recurring code-health audits and their cadence: [`PERIODIC.md`](PERIODIC.md) +
 [`periodic.json`](periodic.json).
 
@@ -31,6 +32,36 @@ python tools/audit/audit_<name>.py   # one audit, straight to stdout
 the file (CLAUDE.md rule 8).
 
 ---
+
+## AI personality wiring
+
+`audit_ai_personalities.py` verifies that the five personality-gated
+`SquadManagerBotModuleCA` instances retain byte-identical shared fields and
+that their consumed conditions exactly match the `GrantRandomCondition`
+selector. Personality-specific differences are restricted to an explicit
+tuning allow-list.
+
+The implementation removes the stale `RushInterval` and
+`RushAttackScanRadius` keys; neither exists in the vendored CA or pinned engine
+SquadManager implementation. Steamroller is intentionally documented as
+having at most one harasser because the engine always creates the first
+guerrilla squad and YAML cannot express zero guerrilla units.
+
+There is no current in-game personality announcement. A condition-triggered
+notification/observer integration is a follow-up.
+
+The five personality managers now use optional time-scaled squad-value
+thresholds, preserving their early-game flat-bonus values. Other squad-manager
+instances retain the flat `SquadValueRandomBonus` path. The ramp and the
+actor-value cache have not been observed in a long match; that is an in-game
+verification follow-up.
+
+The unit-builder composition consumer is opt-in through `UseCompositions`.
+Without an active composition, each personality's `UnitsToBuild` table remains
+the fallback. The pilot compositions are limited to TD vehicle queues and are
+gated by their respective tech prerequisites; broader composition coverage is
+still a follow-up. Explicit unit requests continue to bypass composition
+shares.
 
 ## Counts by bug class
 
@@ -88,7 +119,7 @@ its §0a.
 
 | id | debt | measured |
 |---|---|--:|
-| W24 | fired weapons carrying more than one damage main | **927** |
+| W24 | fired weapons carrying more than one damage main | **614** |
 | W23 | fired weapons reaching a `^Warhead_*` family | **1231** |
 | W23 | direct inheritors of the legacy weapon templates | **1162** |
 | W26 | live `DamageMultiplier` declarations | **353** |

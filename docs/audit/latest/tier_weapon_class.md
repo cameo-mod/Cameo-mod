@@ -1,9 +1,9 @@
-# audit_tier_weapon_class — 218 of 1190 classifiable weapons break the TYPES x LEVELS budget
+# audit_tier_weapon_class — 218 of 1204 classifiable weapons break the TYPES x LEVELS budget
 
 LEGAL shapes:
-    672  1 type, 1 level - squarely in tier
+    688  1 type, 1 level - squarely in tier
     108  2 types, 2 adjacent levels - hybrid AND between-tier (budget 4)
-    102  1 type, 2 ADJACENT levels - between-tier mix
+    100  1 type, 2 ADJACENT levels - between-tier mix
      90  2 types, 1 level - lore hybrid
 
     927  weapons skipped — at least one LEGACY-named main warhead (no Family_Level), so the budget cannot be judged until they are 3-way split

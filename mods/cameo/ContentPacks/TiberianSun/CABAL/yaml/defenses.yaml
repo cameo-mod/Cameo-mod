@@ -56,7 +56,7 @@ cabal_missilesilo:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~cabal_core, cabal_core, !cabalnuke, ~techlevel.superweapons
+		Prerequisites: ~cabal_core, cabal_core, !cabalnuke_swlimit, ~techlevel.superweapons
 		Description: actor_cabal_missilesilo.description
 	Power:
 		Amount: -100

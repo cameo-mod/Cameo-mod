@@ -31,60 +31,6 @@
      "v": "300"
     }
    },
-   "TSDPODE1": {
-    "armor": {
-     "src": "inherited",
-     "v": "Light"
-    },
-    "buildable": false,
-    "cost": {
-     "src": "inherited",
-     "v": "10"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Aircraft",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "6000"
-    },
-    "name": "Drop Pod",
-    "speed_air": {
-     "src": "inherited",
-     "v": "300"
-    }
-   },
-   "TSDPODE2": {
-    "armor": {
-     "src": "inherited",
-     "v": "Light"
-    },
-    "buildable": false,
-    "cost": {
-     "src": "inherited",
-     "v": "10"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Aircraft",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "6000"
-    },
-    "name": "Drop Pod",
-    "speed_air": {
-     "src": "inherited",
-     "v": "300"
-    }
-   },
    "ts_gdi_carryall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Armor.Type",
@@ -233,17 +179,17 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamageCompatibility",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
         "type": "AreaDamage"
        },
        {
@@ -254,13 +200,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "125",
@@ -268,32 +207,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -311,6 +229,8 @@
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_CannonHE_HeavyFlat",
+       "^Compatibility_Railgun_ExtraDamage",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -963,6 +883,66 @@
     "queue": [
      "BuildingAddons"
     ]
+   },
+   "ts_gdi_dropshipbay": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "GDI Dropship Bay",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_techcenter",
+     "derricklimit"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
    },
    "ts_gdi_helipad": {
     "armor": {
@@ -1721,25 +1701,18 @@
      {
       "damage_warheads": [
        {
+        "damage": "33000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "16000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "8",
@@ -1749,25 +1722,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "16000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "8",
@@ -1785,6 +1744,7 @@
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -1939,17 +1899,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1961,6 +1914,7 @@
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -2449,17 +2403,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2471,6 +2418,7 @@
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -2489,17 +2437,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2511,6 +2452,7 @@
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -2528,11 +2470,25 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamageCompatibility",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2000",
         "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
+        "spread": null,
+        "tag": "TS30mmRailUnscopedCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2542,13 +2498,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -2556,42 +2505,33 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5873",
       "reloaddelay": "26",
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Warhead_Flak_Medium",
+       "^Compatibility_Railgun_ExtraDamage",
+       "^Compatibility_TS30mmRail_UnscopedFlat",
        "^MediumMissile",
        "^FlakWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "TS30mmRail",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2599,11 +2539,25 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamageCompatibility",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2000",
         "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
+        "spread": null,
+        "tag": "TS30mmRailUnscopedCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2613,13 +2567,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -2627,42 +2574,33 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5873",
       "reloaddelay": "26",
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
+       "^Warhead_Flak_Medium",
+       "^Compatibility_Railgun_ExtraDamage",
+       "^Compatibility_TS30mmRail_UnscopedFlat",
        "^MediumMissile",
        "^FlakWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
       "weapon": "TS30mmRail",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2729,17 +2667,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2750,6 +2681,7 @@
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^RA2FlakWeapon",
        "^RA2Chaingun"
       ],
@@ -3310,39 +3242,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -3352,25 +3256,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -3380,18 +3270,60 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeEnemy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelEnemy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunTankDestroyer",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunChaingun",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -3408,7 +3340,8 @@
        "^ShrapnelWeapon",
        "^TankDestroyerCannon",
        "^SmallArms",
-       "^Chaingun"
+       "^Chaingun",
+       "^ShotgunCannonHEMediumCompatibility"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3427,39 +3360,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -3469,25 +3374,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -3497,18 +3388,60 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeEnemy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelEnemy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunTankDestroyer",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunChaingun",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -3525,7 +3458,8 @@
        "^ShrapnelWeapon",
        "^TankDestroyerCannon",
        "^SmallArms",
-       "^Chaingun"
+       "^Chaingun",
+       "^ShotgunCannonHEMediumCompatibility"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3813,17 +3747,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3834,6 +3761,7 @@
       "reloaddelay": "10",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -3850,17 +3778,10 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3871,6 +3792,7 @@
       "reloaddelay": "10",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -3886,17 +3808,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3907,6 +3822,7 @@
       "reloaddelay": "10",
       "slot": "Armament@TERCERA",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -3922,17 +3838,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3943,6 +3852,7 @@
       "reloaddelay": "10",
       "slot": "Armament@CUARTA",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -4188,11 +4098,11 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -4202,32 +4112,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4238,30 +4127,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8159",
       "reloaddelay": "60",
       "slot": "Armament@QUINTA",
       "versus_templates": [
+       "^Warhead_MissileHE_Medium",
        "^FlakWeapon",
        "^MediumMissile",
        "^ShrapnelWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "TSHoverMissile",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -4271,32 +4163,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4307,19 +4178,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8159",
       "reloaddelay": "60",
       "slot": "Armament@SEXTA",
       "versus_templates": [
+       "^Warhead_MissileHE_Medium",
        "^FlakWeapon",
        "^MediumMissile",
        "^ShrapnelWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "TSHoverMissile",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4387,11 +4261,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -4401,32 +4275,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4437,19 +4290,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8159",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileHE_Medium",
        "^FlakWeapon",
        "^MediumMissile",
        "^ShrapnelWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "TSDestroyerMissiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5184,17 +5040,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5205,6 +5054,7 @@
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -5415,11 +5265,11 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -5429,32 +5279,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5465,19 +5294,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8159",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileHE_Medium",
        "^FlakWeapon",
        "^MediumMissile",
        "^ShrapnelWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "TSHoverMissile",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6798,17 +6630,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6820,6 +6645,7 @@
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",

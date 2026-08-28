@@ -124,6 +124,7 @@ NarcoGrenade_elite:
 		Weapon: AsianFlameFragment
 
 RA2NarcoAKM:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	Report: iboratta.wav, iborattb.wav
@@ -136,6 +137,12 @@ RA2NarcoAKM:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air, Garrisoned
+		Damage: 4000
+		PercentageScale: 9975
 RA2NarcoAKM_elite:
 	Inherits: RA2NarcoAKM
 	Range: 6800
@@ -158,6 +165,7 @@ RA2Narco60mm_elite:
 	BurstDelays: 3
 
 RA2FreedomAK47:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -194,6 +202,12 @@ RA2FreedomAK47:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 3
 		Spread: 30
+	-Warhead@Chaingun:
+	-Warhead@SniperWeapon:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air, Garrisoned
+		Damage: 12000
+		PercentageScale: 0
 
 RA2FreedomAK47_elite:
 	Inherits: RA2FreedomAK47
@@ -204,6 +218,7 @@ RA2FreedomAK47_elite:
 		Inaccuracy: 60
 
 RA2FreedomRocket:
+	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^FlakWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^RA2MediumMissile
@@ -233,6 +248,13 @@ RA2FreedomRocket:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 60000
+	-Warhead@FlakWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air, Garrisoned
+		Damage: 120000
+		PercentageScale: 0
 RA2FreedomRocket_elite:
 	Inherits: RA2FreedomRocket
 	Range: 8130
@@ -256,6 +278,13 @@ RA2FreedomRocket_elite:
 		Damage: 60
 	Warhead@MissileAP_Medium:
 		Damage: 120000
+	-Warhead@FlakWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air, Garrisoned
+		Damage: 240000
+		PercentageScale: 0
 SyndicateFireballLauncher_elite:
 	Inherits: SyndicateFireballLauncher
 	Range: 6666
@@ -377,6 +406,7 @@ LatinMonkeyGrenadeExplode:
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
 RA2RBurritoRocket:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumFlameWeapon
@@ -440,7 +470,17 @@ RA2RBurritoRocket:
 		AimChance: 0
 		AimTargetStances: Enemy, Neutral
 
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@HeavyBomb:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
+
 RA2LarsRocket:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^D2KRocket
 	Inherits@2: ^HeavyAAWeapon
 	Inherits@3: ^LightMissile
@@ -468,8 +508,9 @@ RA2LarsRocket:
 		MinimumLaunchSpeed: 125
 		Acceleration: 10
 	Warhead@MissileAP_Heavy:
+		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 8000
 	Warhead@HeavyAAWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -491,7 +532,12 @@ RA2LarsRocket:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@HeavyAAWeapon:
+	-Warhead@LightMissile:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@MissileAP_HeavyFlatCompatibility:
 RA2Gren60mm:
+	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
 	Inherits: ^RA2HeavyCannon
 	Inherits@2: ^RA2MediumCannon
 	Inherits@3: ^RA2TankDestroyerCannon
@@ -506,11 +552,22 @@ RA2Gren60mm:
 		Damage: 2000
 	Warhead@CannonAP_Light:
 		Damage: 2000
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_Medium:
+	Warhead@CannonAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 9984
 RA2Gren60mm_elite:
 	Inherits: RA2Gren60mm
 	Range: 6031
 	Burst: 2
 	BurstDelays: 3
+	Warhead@CannonAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 9984
 
 LatinRusherRocket:
 	Inherits: ^RA2MediumMissile
@@ -538,6 +595,7 @@ LatinRusherRocket_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 32000
 LatinSmokerCannon:
+	Inherits@roleflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^HeavyBomb
@@ -577,7 +635,15 @@ LatinSmokerCannon:
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
 	Warhead@CannonHE_Medium:
-		Damage: 2000
+		PercentageScale: 1810
+		Damage: 11000
+	-Warhead@HeavyBomb:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@CannonHE_MediumFlatCompatibility:
 LatinSmokerCannon_elite:
 	Inherits: LatinSmokerCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -649,6 +715,7 @@ LatinSmokerRocket_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 48000
 DiabloCannon:
+	Inherits@collapseflat: ^Compatibility_Flak_MediumFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
@@ -676,13 +743,18 @@ DiabloCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Flak_Medium:
+		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 8000
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	-Warhead@LightMissile:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Chaingun:
+	-Warhead@Flak_MediumFlatCompatibility:
 DiabloCannon_elite:
 	Inherits: DiabloCannon
 	Report: aacanon3.aud
@@ -718,6 +790,7 @@ DiabloCannonAAE_AA:
 	Projectile: Bullet
 
 RA2MortarBike:
+	Inherits@roleflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -797,6 +870,17 @@ RA2MortarBike:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		ImpactSounds: gexp14a.wav
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 0
 
 RA2MortarBike_elite:
 	Inherits: RA2MortarBike
@@ -805,6 +889,7 @@ RA2MortarBike_elite:
 	BurstDelays: 3
 
 LatinBuggyMG:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
@@ -828,6 +913,12 @@ LatinBuggyMG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 LatinBuggyMG_elite:
 	Inherits: LatinBuggyMG
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
@@ -1010,6 +1101,7 @@ RA2TOPOLCubaTarget:
 	Warhead@1Dam: TargetDamage
 
 RA2TOPOLCuba:
+	Inherits@collapsewh: ^Warhead_Nuclear_Super
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^MediumFlameWeapon
@@ -1121,8 +1213,22 @@ RA2TOPOLCuba:
 		Falloff: 100, 85, 70, 55, 40, 25, 10
 		Level: 1000
 		LayerName: ra2radiation
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@Nuclear_Super:
+		ValidTargets: Ground, Water, Air
+		Damage: 120000
+		PercentageScale: 0
+	-Warhead@Nuclear_Super_Percentage:
 
 RA2APCFlakCannon:
+	Inherits@collapseflat: ^Compatibility_Flak_MediumFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
@@ -1150,13 +1256,18 @@ RA2APCFlakCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Flak_Medium:
+		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 8000
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	-Warhead@LightMissile:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Chaingun:
+	-Warhead@Flak_MediumFlatCompatibility:
 RA2APCFlakCannon_elite:
 	Inherits: RA2APCFlakCannon
 	Report: aacanon3.aud
@@ -1192,6 +1303,7 @@ RA2APCFlakCannonAA_elite:
 	Projectile: Bullet
 
 RA2APCMachineGun:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -1216,6 +1328,12 @@ RA2APCMachineGun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 14975
 RA2APCMachineGun_elite:
 	Inherits: RA2APCMachineGun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
@@ -1259,29 +1377,53 @@ RA2APCRocket:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Acceleration: 10
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 2000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+	Warhead@MissileAP_Medium:
+		Damage: 8000
+		PercentageScale: 2500
+		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@FlakWeapon:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 1
-		ValidTargets: Ground, Water, Air
-	Warhead@HeavyAAWeapon: SpreadDamage
-		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water, Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Medium:
-		Damage: 2000
-		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect1: CreateEffect
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 RA2APCRocket_elite:
 	Inherits: RA2APCRocket
@@ -1390,6 +1532,132 @@ Rammax_Sabot:
 		Damage: 10000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 5
+	-Warhead@Chaingun:
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@PreservedFlat_Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 2000
+		Versus:
+			Shield: 125
+			None: 100
+			Flak: 95
+			Plate: 90
+			Heroic: 85
+			Scout: 80
+			Fighter: 75
+			Wood: 70
+			Light: 65
+			Bomber: 60
+			Concrete: 55
+			Medium: 50
+			Helicopter: 45
+			Steel: 40
+			Heavy: 35
+			Spaceship: 30
+			Superheavy: 25
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+	Warhead@PreservedFlat_LaserExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 600
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@PreservedFlat_LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		Damage: 10000
+		Versus:
+			REFLECTOR: 50
+			Shield: 140
+			Superheavy: 100
+			Spaceship: 96
+			Steel: 92
+			Heroic: 88
+			Heavy: 84
+			Helicopter: 80
+			Concrete: 76
+			Plate: 72
+			Medium: 68
+			Bomber: 64
+			Wood: 60
+			Flak: 56
+			Light: 52
+			Fighter: 48
+			None: 44
+			Scout: 40
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@PreservedFlat_TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Falloff: 100, 75, 50, 25
+		Spread: 200
+		Damage: 1000
+		Versus:
+			REFLECTOR: 50
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			None: 125
+			Superheavy: 100
+			Heavy: 75
+			Medium: 50
+			Light: 25
+			Scout: 10
+			Steel: 10
+			Concrete: 10
+			Wood: 10
+			Spaceship: 10
+			Helicopter: 10
+			Bomber: 10
+			Fighter: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@PreservedFlat_TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 2000
+		Versus:
+			REFLECTOR: 50
+			Shield: 150
+			Heroic: 100
+			Plate: 96
+			Flak: 92
+			None: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 ScrapCarSpawner:
 	Projectile: InstantExplode

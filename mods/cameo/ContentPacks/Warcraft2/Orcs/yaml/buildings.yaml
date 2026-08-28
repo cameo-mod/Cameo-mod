@@ -434,9 +434,12 @@ wc2_orcs_templeofthedamned:
 	Tooltip:
 		Name: Temple of the Damned
 	Buildable:
-		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_fortress
+		-BuildLimit:
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_fortress, !wc2_orcs_templeofthedamned_swlimit
 		Queue: Building, RABuilding
 		Description: Terrible rituals are performed here.\nTrains Death Knights and raise Skeletons.\nUnlocks Death & Decay superweapon.
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: wc2_orcs_templeofthedamned_swlimit
 	SpawnActorsOnSell:
 		ActorTypes: wc2_orcs_grunt
 	Voiced:

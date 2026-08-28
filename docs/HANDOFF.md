@@ -69,15 +69,18 @@ becomes a self-contained ContentPack. Runbook: [`MIGRATION.md`](MIGRATION.md).
 | crash-class content (B8) | **0** |
 | empty warhead types (boot NRE class) | **0** of 2765 weapons |
 | dangling weapon refs / dangling inherit targets | **0** / **0** |
-| `tools/tests` | **241 tests, all green** |
+| `tools/tests` | **286 tests, all green** |
 | cross-document consistency audit | 73 passed, 0 failed |
 | balance-ledger drift | **0** — master re-extracted in `31e649b8` |
 | pinned doc claims | **19 of 19 match** |
 | generator sync | drift **0** across 136 shared templates |
 | documentation structure (`audit_doc_health`, D1–D8) | **0** findings |
-| level-ladder ratchet | **9 broken, AT ratchet 9** — WARN, not FAIL. See §3.0a |
-| ⛔ **`audit_doc_health`** | **FAIL — D8 flags its own test fixtures**. See §3.0b |
-| ⛔ **`environment.py`** | **can never report a complete tree** — wrong CA path. See §3.0b |
+| heaviness bell | **0 inversions, 0 mean drift** across 48 families; 2 flat (`Sonic`, `Magic`) at ratchet 2 |
+| `audit_doc_health` | ✅ **PASS** — the D8 self-flag was fixed 2026-08-23 |
+| `environment.py` | ✅ reports a complete tree — the CA path was fixed 2026-08-23 |
+| **suite exit code** | **1**, and legitimately so — 8 gating audits report real content defects (§3.3's backlog). The 5 SCHEDULED scans that also reddened it are now ADVISORY. See §3.0c |
+| physical-state warheads | ✅ **PASS** — the audit demanded percentage TWINS the AreaDamage fold folded away; six false failures, fixed in the audit not the yaml |
+| `audit_test_coverage` | 269 untested vs baseline 224 — **advisory**, and recorded debt. `T3_BASELINE` deliberately NOT raised |
 
 ⚠ The counts above were re-measured at `519175ae`; the per-class counts in
 [`audit/SUMMARY.md`](audit/SUMMARY.md) come from the last full suite run and carry the
@@ -90,8 +93,8 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          927 fired weapons still carry 2+
- └─> W23  retrofit the legacy templates      1162 direct inheritors left; 1231 fired
+W24  one damage warhead per weapon          614 fired weapons still carry 2+
+ └─> W23  retrofit the legacy templates      1162 direct inheritors left; 1245 fired
  │        (its old "33-collision" blocker    weapons already reach a ^Warhead_* family
  │         is DISSOLVED — W24 removes it)
  └─> A5   retire the remaining inline-Versus weapons onto templates
@@ -184,29 +187,53 @@ Crashes and player-visible regressions jump everything below.
 
 ### 3.0 — DO THIS FIRST
 
-**a. Nine broken damage ladders — WARN, and still unruled.**
+**a. ✅ RULED 2026-08-23 — the nine "broken ladders" were never broken. Nothing to do.**
 
-A family's damage must RISE with its level. Nine do not: seven are INVERTED (a heavier level hits
-softer than a lighter one) and two are FLAT. The measured table for all nine and the shapes they
-fall into are in [`design/ROADMAP.md`](design/ROADMAP.md) under **BROKEN LADDERS**.
+`audit_level_ladder` required a family's effective damage to rise Light → Medium → Heavy → Super,
+and **no law ever said so.** §12.0d makes the level a TILT, §12.0h makes `Damage` a separate free
+knob, and 145 `^Warhead_*` templates carry only a placeholder `Damage: 2000` — the template holds
+the SHAPE, the weapon holds the MAGNITUDE. The audit is retired and replaced by
+`tools/audit/audit_heaviness_bell.py`.
 
-⚠ This was **10 and FAILING** on 2026-08-23 and came back to the ratchet without anyone ruling on
-anything: `a9f31258` (the RA1 Allies cryo conversion) moved `Demolition`'s Heavy rung 40000 →
-60000 as a side effect, taking it from FLAT to rising, and added a new measurable family. So the
-suite no longer exits 1 on this — but the count is not a progress metric. A family leaves the list
-by being fixed, by dropping below the measurability threshold, or by a conversion moving its rungs
-in passing. Read the table, not the number.
+⭐ **DESIGN §12.0i IS NOW COMPLETE (2026-08-24) — every constant ruled, nothing open.** The
+2026-08-23 version of it is superseded in three places:
 
-⛔ **Do not fix these by hand and do not raise the ratchet.** They are balance numbers
-(CLAUDE.md rule 3): the route is a maintainer ruling → `extract_stats` → ledger →
-`apply_balance --confirm`. `LADDER_BASELINE` is LOWER-ONLY, and lowering it is how this closes.
+| | 2026-08-23 | ruled 2026-08-24 |
+|---|---|---|
+| x-axis | §12.0d's three coarse buckets, then a per-ladder 0..2 | **one global 13-slot scale**, step 1/6, every ladder centred on 1.000, one deliberate three-way tie (`Flak`=`Medium`=`Steel`=1.0) |
+| peak | `centre_of_mass + SHIFT*(h-1)`, `SHIFT` 0.25 | **`mu = (h + centre_of_mass)/2`**; `SHIFT` deleted |
+| swing | `LO` 0.80 (1.25x) | **`LO` 0.667 (1.50x)** = `1/TILT_RATIO`, so the continuous model keeps the differentiation the discrete tilt already ships |
+| `sigma` | unruled, assumed 1.0 | **0.75** |
 
-The ruling needed is small — for each family, which rung is wrong — but it is a **design** ruling,
-so it belongs to the maintainer. `MissileAP` (n=80) and `Tesla` (n=67) descend monotonically
-across well-populated rungs, which reads as a family built the wrong way round rather than a stray
-weapon; `CannonAP`, `Flak` and `Thermobaric` invert against a rung holding only two weapons, where
-the thin side is the likelier error; `Bullet` is flat across 89 weapons, which is a different
-question again.
+`audit_heaviness_bell.py` runs the ruled model over 48 families at h ∈ {0, 0.5, 1, 1.5, 2}: **0
+ladder orderings changed, 0 weighted-mean drift**, 2 flat families at the ratchet.
+
+⛔ Two 2026-08-23 conclusions are RETRACTED, both from the same cause — measurements taken before
+§12.0d's rank restore was implemented in the audit. A tier-anchored peak was rejected for
+"inverting 26 of 42 families"; with the restore it inverts **nothing**. And "ship it inert at h=1"
+was unachievable under the family-anchored peak (all 48 families reshaped at h=1, worst row 13.5%),
+which is why the peak formula changed rather than the requirement.
+
+⭐ **Step 5 is the next action** — implement the bell in `gen_weapon_template.py` (replacing
+`class_tilt`), then in `AreaDamageWarhead`. The acceptance test is regenerating the templates
+through the bell at h ∈ {0, 1, 2} and diffing against today's Light/Medium/Heavy yaml; ⛔ never by
+comparing the bell to the shipped TEMPLATES directly, because the level also changes the body's
+`step`/`floor` and even the shipped `class_tilt` scores +18.7% worse than doing nothing on that
+comparison. Both of `WEAPON_HEAVINESS.md` §9.6's original blockers are gone: #1 was retired by the
+2026-08-23 ruling, and #2 (every family inside the 2x–8x spread band) had already been finished on
+2026-08-22 without the document noticing — `audit_versus_profile` reports 46 in band at
+`SPREAD_OFFENDERS_BASELINE = 0`.
+
+⛔ **RETRACTED:** an earlier version of this section listed two permanent "known inversions" and a
+gap in §9.4 needing new gradients authored. Both were artifacts of the audit skipping §12.0d's rank
+restore. With the restore the bell changes **zero** ladder orderings (without it, 127 across 60
+family/ladder pairs). Nothing needs authoring.
+
+⛔ **STILL OPEN, and the reason to start a fresh session on it:** the maintainer wants every armor
+to have its OWN unique continuous x — the interim per-ladder form is unique within a ladder but
+collides across them (four armors on 0.0, four on 2.0). A global scale means ranking armors ACROSS
+ladders, which §12.0d says the tilt is designed to change. Stated in full as an OPEN block in
+DESIGN §12.0i. **Do not change the axis before it is ruled.**
 
 **b. Three tooling defects are LIVE on master. Fixes were reported in flight on 2026-08-23 from a
 Windows session — check whether they landed before redoing them.**
@@ -255,12 +282,59 @@ claims (`audit_doc_claims` is **19 of 19**), and the memory-citation promotion �
 into `weapon_classes.yaml`'s header and `BALANCE_PROGRAM_PLAN.md` §7.
 
 ```sh
-python tools/audit/audit_level_ladder.py   # WARN 9, at the ratchet
-python tools/audit/audit_doc_health.py     # FAIL until (b)#3 lands
+python tools/audit/audit_heaviness_bell.py  # WARN 2 flat, 0 inversions, 0 drift
+python tools/audit/audit_doc_health.py     # PASS
 python tools/audit/environment.py          # should print "complete" on a built tree
 ```
 
-**d. Read before proposing pipeline architecture.**
+### 3.0c — What the suite's exit code does and does not mean (2026-08-24)
+
+⛔ **Do not re-read a background task's notification exit code as the script's.** It reports the
+wrapper (`cmd; echo "exit=$?"`), which is 0 whenever the trailing `echo` succeeds — i.e. always.
+That is how "the suite is green" was reported repeatedly while `run_all.sh` was exiting 1 on every
+run. Write `echo "exit=$?" >> "$OUT"` into the redirected file and read THAT line.
+
+⛔ **AND THE COMMIT GATE WAS NEVER "the suite exits 0".** CLAUDE.md's gate is: boot to the main
+menu with no new `exception-*.log`. An earlier draft of this section claimed a suite-green gate had
+"been dead for a week" — there is no such gate, and saying so overstated the finding.
+
+**What is actually red, measured audit by audit rather than by grepping reports for "FAIL":**
+**13** audits exit non-zero, and every one of them predates this work.
+
+* **5 are SCHEDULED scans** from [`audit/periodic.json`](audit/periodic.json) on 14–30 day cadences
+  — `code_duplication`, `test_coverage`, `recent_changes`, `error_handling`, `security` — which were
+  being run as per-commit gates. `test_coverage` alone drifted 223 → 235 → 249 → 257 → 270 untested
+  modules against a baseline of 224 from 2026-08-16. **These are now advisory.**
+* **8 are gating audits reporting REAL content defects** — `inherits`, `upgrades`, `sequences`,
+  `fluent`, `basebuilder_crates`, `buildable_order`, `weapon_suffixes`,
+  `impact_glow_preservation`. These are §3.3's bounded-bug backlog, and the advisory change neither
+  fixes nor hides them: **the suite still exits 1, correctly.**
+
+⚠ So "make the suite green" is a real work item, not a switch — it means clearing §3.3. What the
+advisory change bought is narrower and still worth having: a *scheduled scan's* findings no longer
+mix into the same signal as a content defect.
+
+**Maintainer ruling: those five are ADVISORY.** They run and write full reports; they do not set
+the suite's exit code. `run_all.sh` carries a second `for a in …; do` loop with `|| true`, and
+`run_all.py` finds it by the `# ADVISORY audits` marker comment — by marker, not by index, so a
+loop inserted between them cannot be mistaken for it. The calendar is still enforced by
+`python tools/audit/audit_periodic_freshness.py` with no flag, and each script still exits 1 on
+its own findings so CI can gate on one deliberately. `T3_BASELINE` was **not** raised.
+
+The sixth was a real gate enforcing a retired design — `audit_physical_state_warheads` demanded
+`Warhead@{Flame,Chemical}_{Level}_Percentage` twins that the AreaDamage fold folded into the main
+warhead. Fixed in the audit. Full account in [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md), "An audit
+is not evidence of a law".
+
+⚠ **Found while verifying, and worth knowing:** `run_all.py` parses its audit list out of
+`run_all.sh` so the two cannot drift — but `run_all.sh` is checked out CRLF, so a continuation is
+`\` + CRLF and the parser stripped only `\` + LF. Every continuation survived as its own audit
+name: **73 entries where 59 are real**, and the fallback runner tried `audit_\.py` fourteen times
+and reported fourteen phantom FAILEDs. Latent for as long as the file has had continuations,
+because nobody ever diffed the fallback against the canonical path. Fixed, with a regression test
+in `tools/tests/test_audit_run_all_parser.py`.
+
+### 3.0d — Read before proposing pipeline architecture
 
 [`design/BALANCE_PIPELINE_GAPS.md`](design/BALANCE_PIPELINE_GAPS.md) records what a single
 deterministic command still lacks — no orchestrator among 50+ scripts, no exception registry, no
@@ -283,8 +357,8 @@ holds.
 
 | step | what | how you know it moved |
 |---|---|---|
-| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 927 |
-| **W23** | retrofit the legacy templates onto `^Warhead_*` families | `unconverted_template_inheritors` goes DOWN from 1162; `warhead_family_reach` goes UP from 1231 |
+| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` is 614, down from 927 |
+| **W23** | retrofit the legacy templates onto `^Warhead_*` families | `unconverted_template_inheritors` goes DOWN from 1162; `warhead_family_reach` goes UP from 1245 |
 | **A5** | retire the remaining inline-`Versus` weapons onto templates | rule 4 — `Versus` only in `^Warhead_*` |
 
 Method for one W24 cluster, in order (this is the procedure that has worked for seven clusters
@@ -312,6 +386,58 @@ and is written out in full in `BALANCE_PROGRAM_PLAN.md` §1b):
 | **W10** `^Blindable` → `Blind` meter | D | unblocked, W6 shipped |
 | **W12** superweapons as a separate track | — | maintainer-led; superweapons are not unit-priced |
 | **Adopt the Sonic family** | B | `^Warhead_Sonic_*` bakes the mark but **nothing inherits it**, so it is inert. Needs a maintainer warhead order (rule 4). Law: an effect upgrade ADDS `^Warhead_Sonic_*`, it never replaces the base damage TYPE. |
+
+### 3.2b — Absorbing the other OpenRA mods (measured 2026-08-23)
+
+Plan and every number: [`design/UPSTREAM_MODS.md`](design/UPSTREAM_MODS.md).
+Re-measure with `python tools/audit/audit_upstream_adoption.py` (in `run_all.sh`).
+
+**Settled, do not re-derive.** The engine must NEVER move to `ca-engine` (it would discard 2 581
+commits and delete `OpenRA.Mods.AS`); CA mod code comes FORWARD onto Cameo's engine. Measured from
+the point where `cameo-engine` last took upstream OpenRA (`b0b0544d4a`, **2026-05-11**): Cameo is
+1 975 commits of its own past it and only **70 behind `openra/bleed`**. RV and SP pin ANCESTORS of
+`cameo-engine`, so they need **no engine work at all**. CN's own work is 170 enumerable commits on
+newer bleed, so its engine patches ARE cherry-pickable. Generals Alpha needs no engine work either
+— of the 49 commits its pin has that we lack, 41 are upstream bleed and 8 are maintenance.
+
+⛔ **`mtr/rv-engine` is STILL MAINTAINED** (tip 2026-07-25) — Generals Alpha pins it. The RV *mod*
+is dormant; the engine branch Cameo descends from is not. Any plan resting on "the RV engine is
+dead" is resting on a false premise.
+
+**`openra/bleed` is tracked as a sixth upstream** — the only one that is not a mod, because
+absorbing it means MOVING THE ENGINE (the `cameo-engine` pipeline: merge → push → `ENGINE_VERSION`
+in `mod.config` → `make.cmd all` → **recreate `engine/glsl/` shaders** → boot-gate), not copying
+types. The 70-commit gap holds .NET 10, ARM packaging with x86/Mono dropped, a large Gustas
+rendering/perf batch, several pathfinding fixes, and one real feature: **the Tiberian Sun Firestorm
+Defense**. Not a free update — schedule it a session of its own.
+`python tools/audit/audit_engine_freshness.py` reports the gap every suite run (it does not fetch;
+`git -C ~/Documents/GitHub/cameo-engine fetch upstream mtr --no-tags` first).
+
+**What is actually left, by TYPE** (Cameo resolves 1 101 yaml-visible names across 7 assemblies):
+
+| mod | already here | duplicate under another name | real candidates | live in its own yaml |
+|---|--:|--:|--:|--:|
+| Generals Alpha | 2 of 23 | 1 | 20 | **20** |
+| RV | 11 of 26 | 8 | 7 | 6 |
+| SP | 7 of 46 | 7 | 32 | 31 |
+| CN | 5 of 107 | 2 | 100 | 90 |
+| CA | 182 of 348 | 35 | 131 | 119 |
+
+⭐ **Start with Generals Alpha.** Smallest assembly, highest signal — 20 of 20 candidates are used
+by its own rules, and they group into whole mechanics: a 9-type supply-dock economy Cameo has no
+equivalent of, cash hacking, `LaysMinefield` (self-replenishing, NOT our ordered `Minelayer`),
+`ConditionIconOverlay`, `PilotChamber`, `FakePower`. And it exposes a dead tag we already carry:
+CA's `CashHackable` sits on two actors here while **no assembly Cameo loads has the power that
+reads it** — adopting a `CashHackPower` (CA's or GenSDK's) is a one-file fix.
+
+⛔ **A new NAME is not a new MECHANIC.** RV's `Temporal` + `AffectedByTemporal` are CA's
+`WarpDamage` + `Warpable`, already wired to `ChronoBeam`. Both were ported, built clean and
+reverted in one session. Read the DESTINATION — the actor, then its weapon — before porting
+anything. Full account in [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md).
+
+⚠ Order: Generals Alpha, then RV + SP (frozen, 37 live candidates), then CN, then CA. **Which mechanics Cameo wants is
+a maintainer call** — §5 of the plan: 86 of the 142 CA trait types already vendored here are
+unused, so wiring beats adopting.
 
 ### 3.3 — Bounded bug work (good for a short session)
 

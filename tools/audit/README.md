@@ -34,6 +34,7 @@ suite can gate CI.
 | `audit_upgrades.py` | B3 | inverted multiplier directions, dead upgrades, dead wiring (needs `docs/design/upgrades_intent.yaml`) |
 | `audit_upgrade_coverage.py` | B4 | roster-wide upgrade coverage gaps |
 | `audit_ai.py` | B5 | ai.yaml refs to nonexistent/unloaded actors; unwired combat units |
+| `audit_ai_personalities.py` | AI wiring | personality selector/consumer condition parity and byte-identical shared squad-manager fields |
 | `audit_sequences.py` | B6 | missing render images/sequences; orphaned sequence images |
 | `audit_metadata.py` | B7 | duplicate/missing tooltips per faction |
 | `audit_outliers.py` | B9 | robust-z numeric drift per (trait, field); bounds hard screen |
@@ -79,7 +80,7 @@ suite can gate CI.
 | `audit_plating_exclusivity.py` | §12.0e | no actor may ever wear two armor platings at once |
 | `audit_hex_shield_routing.py` | §12.0f | actor-specific shield sizing and invalid resolved shield routes |
 | `audit_survivability_pricing.py` | E1 | what a baseline shield SHOULD cost and currently does not (informational) |
-| `audit_k_linearity.py` | W1 | `K`'s flat part must stay damage-INDEPENDENT; exposes the %-twin floor |
+| `audit_k_linearity.py` | pricing | scalable K must stay damage-independent; inventories folded hits, standalone floors, and rounding |
 | `audit_balance_drift.py` | pipeline | yaml vs the committed ledger. **Red means a balance commit skipped `extract_stats.py`** |
 | `audit_packs.py` | §2 | content-pack conversion and placement |
 | `audit_ts_death_palette.py` | B6 | TS actors whose `PlayerPalette` and `DeathSequencePalette` disagree |

@@ -19,7 +19,7 @@ surrounds it. It is not yet threaded into `DESIGN.md` / `ROADMAP.md` (the mainta
 live uncommitted edits there); fold the binding parts in on the next clean commit pass.
 
 Related: `ARMOR_SYSTEM.md` (Versus/step law), `WEAPON_TYPE_SYSTEM.md`,
-`WEAPON_3WAY_SPLIT.md`, `FORMULA_V2.md` (SUM law), memory `cameo-expanding-damage-trait`
+`WEAPON_3WAY_SPLIT.md`, `FORMULA_V2.md` (SUM law)
 (→ now the AreaDamage decision), `cameo-versus-only-in-templates`.
 
 ---
@@ -41,16 +41,17 @@ Fields:
 - `MinRadius` / `MaxRadius` (default 0) — when `MaxRadius>0`, the damaged radius GROWS from
   MinRadius to MaxRadius across the ticks (expanding shockwave); when 0, every tick covers the
   full Falloff range (a **static DoT cloud**).
-- `TickDamage[]` (optional, length == Ticks) — relative per-tick damage weights, **normalised so
-  the ticks always sum to the authored `Damage`**. A DECREASING profile (`5,4,3,2,1`) + expanding
+- `TickDamage[]` (optional, length == Ticks) — relative per-tick damage weights, integer-normalised
+  against the authored `Damage` (truncation can leave a small remainder). A DECREASING profile (`5,4,3,2,1`) + expanding
   radius = the **nuclear shockwave** the maintainer wants: *small area / high damage first → each
   tick larger area / weaker damage*. INCREASING builds up instead. Omit for an even split.
 - **Baked friendly fire** (replaces the `_FriendlyFire` twin): `FriendlyFireDamage` (default 50 =
   Cameo law; 0 disables FF), `FriendlyFireSpread` (default 50 = allies only hit within half radius).
 
-**Balance invariant:** the authored `Damage` is always the TOTAL dealt across all ticks, so the
-balance pipeline reads ONE number (2000-grid law intact). Rounding on `100/Ticks` (or the weight
-split) is sub-1% — acceptable; if exactness ever matters, hand the remainder to tick 0.
+**Balance invariant:** the authored `Damage` is always the TOTAL before per-tick integer
+modifiers, so the balance pipeline reads ONE number on the current 100-damage grid. Runtime
+integer division can leave a small remainder (three even ticks apply 33% each); the pricing
+model mirrors those exact modifiers instead of silently redistributing the remainder.
 
 ### 2. Conversion scope — ALL 55 template main warheads → AreaDamage
 
@@ -164,7 +165,7 @@ combos = a second priced warhead; ability = K; delivery = projectile/effect laye
 Sonic (flat) scales with HP → anti-low-HP / anti-swarm (2 shots vs infantry, 256 vs an epic);
 Magic (%HP) converges to ~11 shots regardless of HP/armor → anti-high-HP / giant-killer. The
 oppressive giant-killer belongs on the *rare* weapon (Magic), not the common Sonic. Keep as-is;
-they are damage-calculation TYPES, not chips. (Matches memory `cameo-weapon-differentiation`.)
+they are damage-calculation TYPES, not chips. (Matches.)
 
 ### 4. Spread pricing + spread reduction (open formula work)
 
@@ -224,7 +225,7 @@ split the *template* responsibilities.
 6. **Epic vehicle template split** (§6) — independent; can run in parallel.
 
 Everything after step 1 is boot-gated per commit; scoped `git add`; the C# needs a rebuild before
-the boot gate (`cameo-launch-before-commit`).
+the boot gate.
 
 ### 8. The universal conversion CASCADES to retrofitted weapons (discovered + reverted 2026-08-03)
 
@@ -311,7 +312,7 @@ weapon files and names the offending weapon (0 = safe); `check-yaml` reproduces 
 full boot. **Run the empty-type scan after ANY template warhead deletion/rename.** (Memory:
 `cameo-empty-warhead-crash`.)
 
-**Build/deploy fact (memory `cameo-dll-deploy-engine-bin`):** `dotnet build` → `engine/bin`
+**Build/deploy fact:** `dotnet build` → `engine/bin`
 (gitignored, what the running `engine/bin/OpenRA.exe` loads). `mods/cameo/OpenRA.Mods.Cameo.dll`
 is a git-TRACKED copy that does NOT auto-update (was a month stale) — refresh it from engine/bin
 only for release/commit.
@@ -386,8 +387,8 @@ Everything below lives in the **template**. The weapon inline sets `Damage:` and
             Heavy: 108
             ...
         # ---- percentage half, folded in ----
-        PercentageScale: 100              # 0.01%-units of max HP per 2000 flat Damage.
-                                          #   100 == today's "1% per 2000". THIS is the per-family
+        PercentageScale: 10000            # Damage 2000 -> 100 basis points = 1.00% max HP.
+                                          #   10000 is today's "1% per 2000". THIS is the per-family
                                           #   dial: a chemical family scales harder, a kinetic one
                                           #   softer, without touching a single weapon.
         PercentageSpread: 50              # % of the main Spread — mirrors FriendlyFireSpread: 50

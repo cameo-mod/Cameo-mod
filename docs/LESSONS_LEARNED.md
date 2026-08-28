@@ -46,6 +46,9 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
 - [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
 - [Effect-warhead merge safety during 3-way split (2026-08-07)](#effect-warhead-merge-safety-during-3-way-split-2026-08-07)
+- [Measure the law's OWN pipeline, and never validate a rule against the corpus it generated (2026-08-24)](#measure-the-laws-own-pipeline-and-never-validate-a-rule-against-the-corpus-it-generated-2026-08-24)
+- [An audit is not evidence of a law — two guards enforced retired designs (2026-08-24)](#an-audit-is-not-evidence-of-a-law--two-guards-enforced-retired-designs-2026-08-24)
+- [Porting from an upstream mod: a NEW NAME is not a NEW MECHANIC (2026-08-23)](#porting-from-an-upstream-mod-a-new-name-is-not-a-new-mechanic-2026-08-23)
 - [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
 - [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
 
@@ -70,6 +73,8 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
+- [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
 - [Content installer and music filesystem plumbing (2026-08-11)](#content-installer-and-music-filesystem-plumbing-2026-08-11)
 - [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
 - [YAML lint rules learned (2026-07-24)](#yaml-lint-rules-learned-2026-07-24)
@@ -79,6 +84,41 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
 
 ---
+
+## YAML-only AI personalities and dead squad-manager keys (2026-08-21)
+
+The Cameo AI personality selector uses `GrantRandomCondition` on the inherited
+`Player` actor and gates five independent `SquadManagerBotModuleCA` instances
+with mutually exclusive personality conditions. The instances must duplicate
+their shared fields: YAML trait inheritance is keyed by the trait suffix, so a
+shared fallback can leave live managers with different or incomplete values.
+`tools/audit/audit_ai_personalities.py` compares every non-tuning field
+byte-for-byte and checks selector/consumer condition parity.
+
+`RushInterval` and `RushAttackScanRadius` are stale squad-manager keys. They
+are absent from both the vendored CA trait and the pinned engine, and must not
+be copied into new instances. Steamroller cannot express zero guerrilla units
+in YAML: the engine's `guerrillaForce == null` short-circuit creates the first
+guerrilla squad regardless of `JoinGuerrilla`, so its documented behavior is
+at most one harasser.
+
+## Opt-in AI unit compositions (2026-08-24)
+
+When porting a composition selector into a divergent unit builder, keep the
+consumer opt-in and preserve the existing `UnitsToBuild` table as the fallback
+rather than introducing a second baseline configuration. Resolve shares by
+production queue category, and keep explicit unit requests on their existing
+bypass path so harvesters and MCVs are not blocked by composition filtering.
+Composition candidates must be gated by time, per-composition interval,
+technology prerequisites, and whether their units are producible in the
+player's queues. Parallel production queues must count every queued unit
+toward produced-value expiry.
+
+When a squad manager gains optional time-scaled value thresholds, retain the
+flat `SquadValueRandomBonus` path for existing consumers and reject configuring
+both modes on one instance. Cache `ValuedInfo.Cost` by actor type when summing
+idle units; missing `ValuedInfo` must remain a cached zero rather than changing
+the threshold behavior.
 
 ## Content installer and music filesystem plumbing (2026-08-11)
 
@@ -796,6 +836,149 @@ not file by file.
 `tools/rename/rename_map_*.yaml`, which `gen_rename_maps.py` emits as a side effect of the
 naming report. `git status` after a suite run is therefore *expected* to be dirty in places the
 run never mentions — check what moved before assuming a stray edit.
+
+
+## Measure the law's OWN pipeline, and never validate a rule against the corpus it generated (2026-08-24)
+
+Two failure modes from one session designing DESIGN §12.0i's armor axis. Both produced results that
+were internally consistent, plausible, and wrong — the hardest kind to catch.
+
+**1. A measurement of an INCOMPLETE pipeline is not evidence about the design.**
+
+§12.0d says the class tilt "is applied to the VALUES and each armor is then given back the RANK it
+held". `audit_heaviness_bell.py` skipped that restore and compared only each ladder's first-vs-last
+rung. Everything measured against it was wrong:
+
+| conclusion drawn | reality with the restore in place |
+|---|---|
+| 2 permanent `KNOWN_INVERSIONS`, "a gap in §9.4, author new gradients under rule 4" | 0 inversions; nothing needs authoring |
+| a tier-anchored peak "inverts 26 of 42 families", so §12.0i law 1 must anchor to the family | `mu = h` inverts **nothing**, at any sigma, across 44 families × 5 heaviness values |
+| ladder orderings changed by the bell: 0 (endpoints only) | **127**, across 60 family/ladder pairs |
+
+The endpoint check was ALSO blind to 125 reorderings it should have caught, so the same omission
+produced both a false positive and a false negative. **When a binding law names a pipeline STEP,
+implement the step before measuring against the law.**
+
+**2. A GENERATED corpus cannot confirm the rule that generated it.**
+
+The maintainer asked for a continuous heaviness value per armor, and the tempting move was to
+derive it from the 45 authored `^Warhead_*_Medium` profiles rather than hand-type 15 numbers. PC1
+of those profiles looked like a triumph: every ladder monotone lightest→heaviest, and it reproduced
+the maintainer's own independent statement (*"bomber is between light and medium, helicopter
+between medium and heavy"*) to two decimals. It was not a measurement of heaviness:
+
+* **56% of PC1 was ladder MEMBERSHIP, not heaviness** — macro-type priority in disguise (`Bullet`
+  favours infantry whatever its heaviness). PC2 was 93% ladder membership.
+* Remove the macro-type term and the cross-ladder OFFSETS vanish with it: each ladder's residual
+  mean is exactly zero **by construction**. They are not identifiable, at all, from any corpus.
+* The within-ladder SPACING that survives correlates **0.979** with mean `build_order` rank — it
+  re-reads `gen_weapon_template`'s interleave rule rather than confirming it.
+
+What the corpus legitimately confirms is the rung ORDER (with macro-type removed, one axis explains
+92.3% of the residual and all four ladders come out monotone independently) — which was never in
+doubt. **Reporting "this is a ruling, not a measurement, and here is why it cannot be one" is what
+got the numbers ruled.** Dressing a design decision as a fit would have shipped 15 numbers nobody
+had actually chosen.
+
+**3. The corollary for acceptance tests: compare like with like.** "Can the bell reproduce the
+shipped Light/Heavy templates from one base?" scored the bell at 2% better than doing nothing, and
+that nearly went in the notes as evidence against the model. The control killed it: the **shipped**
+`class_tilt` scores **+18.7% WORSE than doing nothing** on the same comparison, because the level
+also changes the body's `step` and `floor` (`LEVELS` in `gen_weapon_template.py`), not just the
+tilt. Compared tilt-to-tilt on the same base, the bell recovers ~60% of the shipped tilt. Always run
+the shipped implementation through your own acceptance test first — if it fails, the test is wrong.
+
+## An audit is not evidence of a law — two guards enforced retired designs (2026-08-24)
+
+A failing audit feels like a finding about the tree. Twice in one session it was a finding about
+the AUDIT, and in one of those cases believing it would have meant **changing shipped content to
+satisfy a rule that no longer existed.**
+
+**1. `audit_physical_state_warheads` demanded warheads the AreaDamage fold had folded away.**
+
+It looked for a separate `Warhead@{Flame,Chemical}_{Light,Medium,Heavy}_Percentage` twin of type
+`AreaDamagePercentage`. All six reported "missing percentage warhead", it had been red for days,
+and the drafted fix was *"make `gen_weapon_template.py` emit the six twins its own comment already
+promises."* That would have added six warheads to satisfy a retired structure.
+
+The fold put all of it in ONE node — `AreaDamageWarhead` carries `PercentageScale`,
+`PercentageSpread`, `PercentageVersus`, `FriendlyFireDamage` and `FriendlyFireSpread` as fields:
+
+```
+Warhead@Flame_Light: AreaDamage
+    Damage: 2000  Spread: 200  Falloff: 100, 90, 78, 60, 0   <- flat
+    PercentageScale: 10000   PercentageSpread: 50            <- percentage, folded in
+    FriendlyFireDamage: 50   FriendlyFireSpread: 50          <- friendly fire, folded in
+    PhysicalStateName: Temperature   PhysicalStateScale: 100 <- the meter
+```
+
+⛔ **The tell that was walked straight past: `verify_generator_sync` reported 0 drift.** The
+generator and the yaml agreed. When two independent artifacts agree and a THIRD checker disagrees,
+**the checker is the suspect** — the same rule already written down as *"a result that contradicts
+a binding law is a contradiction, not a finding"*, and it still lost to the instinct to fix the
+data.
+
+⚠ Second trap inside the first: the meter has **two legal forms**. Flame uses singular
+`PhysicalStateName` + `PhysicalStateScale`; **Chemical uses the `PhysicalStates:` MAP**
+(`Corrosion: 100`), which is what blend families emit. Reading only the singular form makes
+Chemical look like it has no meter at all.
+
+**2. `audit_level_ladder` enforced a damage ladder no law states.** It required a family's
+effective damage to rise Light -> Medium -> Heavy -> Super. DESIGN §12.0d makes the level a TILT,
+§12.0h makes `Damage` a free knob, and 145 `^Warhead_*` templates carry only a placeholder
+`Damage: 2000` — the template holds the SHAPE, the weapon holds the MAGNITUDE. Nine families sat
+in a standing WARN for weeks, and it was `WEAPON_HEAVINESS.md` §9.6's "blocker #1", holding up the
+continuous-heaviness bell for nothing. Retired by maintainer ruling.
+
+**The habit both cases needed:** before acting on an audit's findings, ask **what design era it was
+written for**, and grep `docs/DESIGN.md` for the structure it demands to confirm that structure is
+still current. An audit encodes a law as of the day it was written; DESIGN.md is the law now.
+
+⚠ And the corollary for authors: when a design supersedes a structure, **the guards that enforced
+the old one are part of the change**. Both of these outlived their designs because the yaml moved
+and nobody swept the audits.
+
+
+## Porting from an upstream mod: a NEW NAME is not a NEW MECHANIC (2026-08-23)
+
+Cameo is absorbing four upstream mods (`docs/design/UPSTREAM_MODS.md`). The obvious way to decide
+what to take is "which of their types do we not have" — and it is wrong, because **the same
+mechanic arrives under different names in different mods**, and a name comparison cannot see that.
+
+The case that proved it. `audit_upstream_adoption.py` listed Romanov's Vengeance's `Temporal`
+warhead and `AffectedByTemporal` trait as NEW, and a grep for `Temporal` across every assembly
+Cameo loads returned nothing — so they were ported into `OpenRA.Mods.Cameo`, adapted for the
+one engine API difference, built clean, and confirmed registered in `--docs`. Every step passed.
+
+They were duplicates. Combined Arms' `WarpDamage` + `Warpable`, vendored here for months, are the
+same design — a `TargetDamageWarhead` subclass routing damage into a meter on a companion trait —
+and are **already wired to `ChronoBeam` and `IFVChronoBeam`**, exactly the weapons RV points
+`Temporal` at. CA's is the richer version (`RevokeRate`, `ScaleWithCurrentHealthPercentage`).
+The two traits even carry a word-for-word identical `[Desc]`. The port was reverted before
+anything was built on it.
+
+**Nothing on the C# side could have caught this.** The grep was correct, the build was correct,
+the registration was correct. What caught it was opening the DESTINATION — the actor that would
+use the new trait — and seeing a working implementation already there.
+
+So, before porting any upstream type:
+
+1. **Find the actor or weapon it would serve, and read it.** `ra2_allies_chronolegionnaire` fires
+   `ChronoBeam`; one look at that weapon ends the question. This is the only reliable step.
+2. **Search by MECHANIC, not by name** — the damage-routing base class, the companion trait, the
+   yaml field names — and search `OpenRA.Mods.CA` explicitly, since it is vendored at the repo
+   ROOT and a search rooted at `engine/` will miss all 181 files of it.
+3. **Let the audit pair the descriptions.** `audit_upstream_adoption.py` now compares `[Desc(...)]`
+   text and reports matches as a stop sign instead of a candidate. It found **52** such pairs
+   across the four upstreams — RV alone drops from 15 "new" types to 7. But the match is evidence,
+   not proof, and it misleads **both** ways: it missed `MissileSpawnerOldSlave`, a real duplicate
+   whose wording differs by one word, and it flags `LeaveSmudgeSP`, which repeats Common
+   `LeaveSmudge`'s description verbatim while being a genuine superset of it. The pairing narrows
+   the reading list; it does not replace it.
+
+⚠ The cost of getting this wrong is not a broken build — it is a second implementation of a live
+mechanic sitting unused in the assembly, which is exactly the bloat `UPSTREAM_MODS.md` §5 warns
+about (86 of the 142 CA trait types already vendored here are unused).
 
 
 ## Two ways a gate passes its own verification and is still broken (2026-08-23)

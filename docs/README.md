@@ -60,12 +60,13 @@ Crashes and player-visible regressions always jump the queue.
 | [`design/SPREAD_FALLOFF_PLAN.md`](design/SPREAD_FALLOFF_PLAN.md) | per-type spread and damage-falloff profiles |
 | [`design/INVENTED_WARHEAD_FAMILIES.md`](design/INVENTED_WARHEAD_FAMILIES.md) | *(generated)* the families with no cross-mod equivalent |
 
-### Systems — 2 documents
+### Systems — 3 documents
 
 | document | owns |
 |---|---|
 | [`design/PHYSICAL_STATE_SYSTEM.md`](design/PHYSICAL_STATE_SYSTEM.md) | the status-meter layer: heat, cryo, corrosion, EMP, sonic |
 | [`design/EMP_INTEGRITY_SYSTEM.md`](design/EMP_INTEGRITY_SYSTEM.md) | EMP / Integrity auto-scaling |
+| [`design/UPSTREAM_MODS.md`](design/UPSTREAM_MODS.md) | absorbing the other OpenRA mods — CA, Crystallized Nexus, Romanov's Vengeance, Shattered Paradise: the engine lineage, why the engine must NOT move to `ca-engine`, and the phased adoption plan |
 
 ### Factions and content — 5 documents
 
@@ -144,8 +145,10 @@ machine** — path separators alone make a cross-platform diff dirty.
 wholesale, so anything the suite does not produce is deleted on the next run — which is how
 `latest/superweapon_audit.yaml` disappeared while three documents still linked to it.
 
-⚠ **`design/cameo_balance_v2.xlsx` is TRACKED in git**, despite older notes calling it
-"gitignored". Regenerating it produces a real diff.
+⚠ **The active generated workbooks are TRACKED in git:**
+`design/cameo_balance_by_faction.xlsx` and `design/cameo_balance_by_type.xlsx`.
+`design/cameo_balance_v2.xlsx` is a frozen pre-split prototype; do not treat its
+old formulas as the current balance law.
 
 ## Two gates keep this set honest
 

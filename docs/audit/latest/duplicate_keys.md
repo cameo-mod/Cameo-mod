@@ -28,7 +28,7 @@ Files scanned: **635** — D1 dropped inherits: **88**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml | 161, 162 | asianalliance_asianservicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml | 545, 553 | naxis_naxibunker | Inherits | ^RA2Defense vs ^BuildingPlugProducer |
 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml | 200, 201 | latinsyndicate_mig21 | Inherits@flamerup | ^CartelRocketsUpgrade vs ^LatinFlameUpgrades |
-| mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml | 526, 527 | latinsyndicate_syndicateservicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
+| mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml | 554, 555 | latinsyndicate_syndicateservicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 955, 956 | latinsyndicate_missiletruck | Inherits@flamerup | ^CartelRocketsUpgrade vs ^LatinFlameUpgrades |
 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 1026, 1027 | latinsyndicate_burrito | Inherits@flamerup | ^CartelRocketsUpgrade vs ^LatinFlameUpgrades |
 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 1095, 1096 | latinsyndicate_lars | Inherits@flamerup | ^CartelRocketsUpgrade vs ^LatinFlameUpgrades |
@@ -164,8 +164,8 @@ Files scanned: **635** — D1 dropped inherits: **88**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml | 160, 170 | carryall.huskVTOL | FallsToEarth |
 | mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml | 239, 241 | engineer | ActorStatValues |
 | mods/cameo/ContentPacks/D2k/Shared/yaml/templates.yaml | 229, 266 | ^D2KInfantry | Passenger |
-| mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml | 182, 186 | ra1_allies_pillbox | ActorStatValues |
-| mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml | 356, 360 | ra1_allies_camopillbox | ActorStatValues |
+| mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml | 209, 213 | ra1_allies_pillbox | ActorStatValues |
+| mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml | 392, 396 | ra1_allies_camopillbox | ActorStatValues |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml | 50, 56 | japan_waveforcereactor | WithDeathAnimation |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml | 111, 121 | japan_tankbuster | WithInfantryBody |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml | 144, 187 | japan_japaneseflamethrower | UpdatesPlayerStatistics |
@@ -173,14 +173,14 @@ Files scanned: **635** — D1 dropped inherits: **88**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml | 33, 39 | ra1_powerplant | WithDeathAnimation |
 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml | 76, 83 | ra1_advancedpowerplant | WithDeathAnimation |
 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml | 222, 224 | ra1_engineer | ActorStatValues |
-| mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 342, 350 | ReimuOrbLauncher | Warhead@Shrapnel3 |
-| mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 412, 421 | MagicOrbHailstormSpawner | Warhead@Shrapnel3 |
+| mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 349, 357 | ReimuOrbLauncher | Warhead@Shrapnel3 |
+| mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 419, 428 | MagicOrbHailstormSpawner | Warhead@Shrapnel3 |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml | 33, 35 | ra1_soviets_barracks | ProvidesPrerequisite |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml | 731, 737 | ra1_soviets_commissar | WithDecoration@Carryall |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml | 1759, 1762 | ra1_soviets_monstertank | WithAmmoPipsDecoration |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 911, 913 | FLAK-23-AG | ReloadDelay |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/aircraft.yaml | 155, 170 | ra2_allies_blackeagle | Selectable |
-| mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml | 264, 268 | ra2_allies_pillbox | ActorStatValues |
+| mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml | 266, 270 | ra2_allies_pillbox | ActorStatValues |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml | 378, 380 | ra2_allies_guardiangi | ActorStatValues |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/sequences.yaml | 11, 37 | ra2_allies_alliedconstructionyard | dead |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 776, 796 | ra2sqd | AttackFrontal |
@@ -586,7 +586,4 @@ Files scanned: **635** — D1 dropped inherits: **88**, D2 merged duplicates: **
 | mods/cameo/weapons/warcraft2.yaml | 402, 407 | wc2mageBlizzard | ValidTargets |
 | mods/cameo/weapons/weapons.yaml | 2958, 2963 | ^RepairWeapon | Warhead@Defuse1 |
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
-
-
-D1 count 88 is below the baseline 89 — lower D1_BASELINE in this script to lock the fix in.
 

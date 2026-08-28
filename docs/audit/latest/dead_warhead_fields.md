@@ -1,8 +1,8 @@
-scanned 27071 resolved warhead nodes across 2760 weapons
+scanned 27097 resolved warhead nodes across 2784 weapons
 
 DEAD FIELDS — written in yaml, silently discarded by FieldLoader.Load:
 
-     38 weapons   OpenToppedDamage.Falloff
+     37 weapons   OpenToppedDamage.Falloff
      10 weapons   DetachDelayedWeapon.Spread
      10 weapons   DetachDelayedWeapon.Falloff
       6 weapons   FireShrapnel.TargetActorCenter
@@ -18,5 +18,5 @@ DEAD FIELDS — written in yaml, silently discarded by FieldLoader.Load:
       1 weapons   AreaDamage.Burst
       1 weapons   FireShrapnel.Range
 
-WARN 15 dead field kind(s) on 70 weapons (ratchet 15)
+WARN 15 dead field kind(s) on 69 weapons (ratchet 15)
 Lower `DEAD_FIELD_BASELINE` as each kind is fixed; never raise it.

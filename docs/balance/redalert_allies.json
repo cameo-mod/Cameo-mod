@@ -1281,11 +1281,11 @@
       "armament_name": "cannon",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "30000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "466",
+        "tag": "Concussion_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -1295,39 +1295,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -1338,7 +1310,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2035",
       "pricing": true,
       "range": "10185",
@@ -1348,19 +1320,21 @@
       "versus_templates": [
        "155mm"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Heavy"
+      ],
       "weapon": "155mmBastion",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "cannon",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "30000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "466",
+        "tag": "Concussion_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -1370,39 +1344,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -1413,7 +1359,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2035",
       "pricing": true,
       "range": "10185",
@@ -1423,9 +1369,11 @@
       "versus_templates": [
        "155mmCryo"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Heavy"
+      ],
       "weapon": "155mmBastionCryo",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1897,17 +1845,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1919,6 +1860,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -1937,17 +1879,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1959,6 +1894,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -3190,11 +3126,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "30000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "466",
+        "tag": "Concussion_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -3204,39 +3140,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -3247,7 +3155,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2670",
       "pricing": true,
       "range": "13350",
@@ -3255,22 +3163,25 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Concussion_Heavy",
        "^HeavyCannon",
        "^ShrapnelWeapon",
        "^Grenade"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Heavy"
+      ],
       "weapon": "155mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "30000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "466",
+        "tag": "Concussion_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -3280,39 +3191,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -3323,7 +3206,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2670",
       "pricing": true,
       "range": "13350",
@@ -3334,9 +3217,11 @@
        "155mm",
        "^CryoMissileProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Heavy"
+      ],
       "weapon": "155mmCryo",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3403,11 +3288,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3417,13 +3302,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -3431,25 +3309,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3466,6 +3330,7 @@
       "reloaddelay": "10",
       "slot": "Armament@AG",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^LightMissile",
        "^FlakWeapon",
        "^SmallArms",
@@ -3478,11 +3343,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3492,13 +3357,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -3506,25 +3364,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3541,6 +3385,7 @@
       "reloaddelay": "10",
       "slot": "Armament@AA",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "HeavyAATankCannonAG"
       ],
       "warheads": [],
@@ -3617,25 +3462,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3645,32 +3476,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3680,25 +3490,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3715,6 +3511,7 @@
       "reloaddelay": "37",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_CannonHE_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -4306,18 +4103,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
+        "damage": "20000",
+        "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -4327,25 +4117,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4355,25 +4131,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4384,40 +4146,36 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
        "^Grenade",
        "^FlakWeapon",
        "^Chaingun",
        "^HeavyMissile",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "ChronoTusk",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
+        "damage": "20000",
+        "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -4427,25 +4185,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4455,25 +4199,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4484,40 +4214,36 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
        "^Grenade",
        "^FlakWeapon",
        "^Chaingun",
        "^HeavyMissile",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "ChronoTusk",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
+        "damage": "20000",
+        "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -4527,25 +4253,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4555,25 +4267,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4584,7 +4282,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -4594,27 +4292,22 @@
        "ChronoTusk",
        "^CryoMissileProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "ChronoTuskCryo",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
+        "damage": "20000",
+        "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -4624,25 +4317,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4652,25 +4331,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4681,7 +4346,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -4691,9 +4356,11 @@
        "ChronoTusk",
        "^CryoMissileProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "ChronoTuskCryo",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5001,11 +4668,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -5015,20 +4682,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5036,25 +4689,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5065,32 +4704,35 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5038",
       "reloaddelay": "51",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "^TankDestroyerCannon",
        "^Grenade",
        "^FlakWeapon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
       "weapon": "APTusk",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -5100,20 +4742,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5121,25 +4749,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5150,7 +4764,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5038",
       "reloaddelay": "51",
@@ -5160,9 +4774,11 @@
        "APTusk",
        "^CryoMissileProjectile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
       "weapon": "APTuskCryo",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5351,39 +4967,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5393,25 +4981,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5421,25 +4995,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5449,20 +5009,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
@@ -5470,7 +5016,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "33000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -5485,6 +5031,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_MissileAP_HeavyFlat",
        "^Grenade",
        "^ShrapnelWeapon",
        "^Chaingun",
@@ -5503,39 +5050,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5545,25 +5064,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5573,25 +5078,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5601,20 +5092,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
@@ -5622,7 +5099,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "33000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -5815,17 +5292,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5837,6 +5307,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@MG",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",

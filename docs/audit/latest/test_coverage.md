@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (3 file(s)) | 29 | >= 24 |
-| T2 | `def test_*` in tools/tests (19 file(s)) | 227 | >= 177 |
-| T3 | modules with no test mentioning them | 270 | <= 224 |
+| T2 | `def test_*` in tools/tests (22 file(s)) | 300 | >= 177 |
+| T3 | modules with no test mentioning them | 269 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (270)
+## T3 — untested modules (269)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -172,13 +172,13 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_basebuilder_crates.py | audit_basebuilder_crates |
 | python | tools/audit/audit_buildable_order.py | audit_buildable_order |
 | python | tools/audit/audit_burst_delays.py | audit_burst_delays |
+| python | tools/audit/audit_ca_drift.py | audit_ca_drift |
 | python | tools/audit/audit_code_duplication.py | audit_code_duplication |
 | python | tools/audit/audit_consistency_report.py | audit_consistency_report |
 | python | tools/audit/audit_damage_grid.py | audit_damage_grid |
 | python | tools/audit/audit_dead_warhead_fields.py | audit_dead_warhead_fields |
 | python | tools/audit/audit_display_text.py | audit_display_text |
 | python | tools/audit/audit_doc_claims.py | audit_doc_claims |
-| python | tools/audit/audit_doc_health.py | audit_doc_health |
 | python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
 | python | tools/audit/audit_duplicate_inherits.py | audit_duplicate_inherits |
 | python | tools/audit/audit_effect_warhead_names.py | audit_effect_warhead_names |
@@ -193,7 +193,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_inherits.py | audit_inherits |
 | python | tools/audit/audit_inline_effects.py | audit_inline_effects |
 | python | tools/audit/audit_k_linearity.py | audit_k_linearity |
-| python | tools/audit/audit_level_ladder.py | audit_level_ladder |
 | python | tools/audit/audit_metadata.py | audit_metadata |
 | python | tools/audit/audit_meter_dilution.py | audit_meter_dilution |
 | python | tools/audit/audit_min_range.py | audit_min_range |
@@ -222,7 +221,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_upgrade_coverage.py | audit_upgrade_coverage |
 | python | tools/audit/audit_upgrade_regression.py | audit_upgrade_regression |
 | python | tools/audit/audit_upgrades.py | audit_upgrades |
-| python | tools/audit/audit_versus_profile.py | audit_versus_profile |
 | python | tools/audit/audit_warhead_split.py | audit_warhead_split |
 | python | tools/audit/audit_weapon_identity.py | audit_weapon_identity |
 | python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
@@ -230,6 +228,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/check_effect_audio.py | check_effect_audio |
 | python | tools/audit/dump_resolved.py | dump_resolved |
 | python | tools/audit/effect_audit.py | effect_audit |
+| python | tools/audit/environment.py | environment |
 | python | tools/audit/find_empty_warhead.py | find_empty_warhead |
 | python | tools/audit/find_mechanical_phase_a.py | find_mechanical_phase_a |
 | python | tools/audit/find_orphan_old_keys.py | find_orphan_old_keys |
@@ -293,5 +292,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 270 untested > baseline 224
+- T3: 269 untested > baseline 224
 

@@ -3,6 +3,26 @@
 _Entry point for a new session: **[`docs/HANDOFF.md`](../HANDOFF.md)**. This file is the
 granular, resumable task queue that the handoff points into._
 
+## AI PERSONALITY SELECTOR (2026-08-21)
+
+- [x] Add synchronized random Rush/Turtle/Tech/Expansion/Steamroller selection
+  (`cdd04e5a1`).
+- [x] Gate independent squad-manager instances on the selected condition
+  (`cdd04e5a1`).
+- [x] Add audit coverage for shared-field duplication and condition parity
+  (`cdd04e5a1`).
+- [ ] Observe long-match squad-value ramp behavior in-game; this branch makes no
+  long-match gameplay claim.
+- [ ] Add an observer-facing notification so players can see the selected
+  personality in-game.
+- [ ] Consider personality-specific base-builder behavior without duplicating
+  the full base-builder configuration.
+
+## AI UNIT COMPOSITIONS (2026-08-24)
+
+- [~] Port the opt-in unit-composition mechanism and two TD pilot compositions;
+  extend the pilot to other universes and factions as a follow-up.
+
 **Rule zero: crashes and player-visible regressions ALWAYS jump the queue.** Ordering inside a
 section: quickest wins first, then by severity. Effort: **S** < 1 h · **M** = one session ·
 **L** = multi-session. Every completed item carries its commit hash; every new order lands here
@@ -122,106 +142,112 @@ Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonan
 new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
 (needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
 
-## ⛔ BROKEN LADDERS — `audit_level_ladder` 9 vs ratchet 9 (breached at 10 on 2026-08-23)
+## ✅ RULED — the "broken ladders" were never broken (2026-08-23)
 
-The suite exited 1 on this until `a9f31258` brought it back to the ratchet; the nine below are
-still broken and still need a ruling. **The breach was ours, from tick tank commit
-`f9b71bffa`**, and it stayed
-invisible because `docs/audit/latest/level_ladder.md` had not been regenerated since `52b364cb5`,
-which PREDATES that commit — so a FAIL sat in the tree reporting itself as a WARN at baseline.
+Superseded the `⛔ BROKEN LADDERS` section that stood here and had been re-reported as an open
+maintainer question for days. **`audit_level_ladder` is retired.** It required a family's
+EFFECTIVE damage to rise Light -> Medium -> Heavy -> Super, and no law ever said so:
 
-Moving `TS90mm` / `TSLaser90mm` from `CannonHE_Medium` to `CannonAP_Medium` gave `CannonAP` a
-SECOND populated rung, so the family crossed the "2+ rungs with 2+ weapons" threshold and became
-measurable for the first time. What it measured:
+* **DESIGN §12.0d** makes the LEVEL a TILT — which armor the weapon is good against — not a
+  magnitude.
+* **DESIGN §12.0h** makes `Damage` a separate, free knob, and normalises every profile to MEAN 100
+  precisely so the tilt costs nothing.
+* Structurally decisive: **145 of the `^Warhead_*` templates carry only a placeholder
+  `Damage: 2000`.** The template holds the SHAPE, the weapon holds the MAGNITUDE. A family's damage
+  ladder is emergent from per-weapon values, and collapsing the levels into a continuous `h` never
+  touches a damage number.
 
-| family | Light | Medium | verdict |
-|---|--:|--:|---|
-| `CannonAP` | **48000** _(n=7)_ | **6000** _(n=2)_ | ⛔ INVERTED — Light hits **8x** harder than Medium |
+So nine families sat in a standing WARN against a rule that did not exist, and it was listed as
+blocker #1 of `WEAPON_HEAVINESS.md` §9.6 — blocking the bell for no reason.
 
-⚠ The tick tank change did not CREATE this; it EXPOSED it. `CannonAP_Light` was already at 48000
-while the weapons now on `CannonAP_Medium` sit at 6000. One of the two rungs is wrong.
+> **Maintainer, 2026-08-23**, restating the model in their own words: *"the weapon family should be
+> the most important and the heaviness level should only nudge it a little … a low level CannonAP
+> will lean stronger towards lighter armor types but still deal more damage to heavy armor … Flame
+> weapons will be the opposite … but still more damage to light, because that's their identity."*
 
-### All nine, so they can be ruled on in one pass
+That is §12.0d's sharpen-or-flatten sentence, and it is now **DESIGN §12.0i**, COMPLETE as of
+2026-08-24: one global 13-slot armor axis 0..2 (every ladder centred on 1.000, one deliberate
+three-way tie at 1.0), `mu = (h + centre_of_mass) / 2`, `LO` 0.667 (swing 1.50x = 1/`TILT_RATIO`),
+`sigma` 0.75, and **heaviness has no price effect** (`Versus` = WHAT, `Damage` = HOW). The
+2026-08-23 constants (`SHIFT` 0.25, `LO` 0.80, three buckets) are all retired — the axis twice, and
+`SHIFT` entirely.
 
-`CannonAP` is the family that crossed the measurability threshold, but it is not the only broken
-ladder. The full report (`python tools/audit/audit_level_ladder.py`, re-measured at `3b320c89`)
-reads:
+**Replaced by `tools/audit/audit_heaviness_bell.py`**, which simulates the bell before it exists so
+§9.6 step 6 has its test waiting. Measured across 48 families, checking each ladder's FULL rank
+order: **0 orderings changed, 0 mean drift**, and 2 families with no gradient (`Sonic`, `Magic` —
+down from the 6 §9.2 predicted, since `fit_band_floor` gave `Cryo`/`Railgun`/`Waveforce`/`Storm`
+real gradients).
 
-| family | Light | Medium | Heavy | Super | verdict |
-|---|--:|--:|--:|--:|---|
-| `CannonAP` | 48000 _(n=7)_ | 6000 _(n=2)_ | — | — | ⛔ INVERTED |
-| `Chemical` | 20000 _(n=9)_ | 32000 _(n=9)_ | 30000 _(n=3)_ | — | ⛔ INVERTED |
-| `Flak` | 32000 _(n=2)_ | 8000 _(n=15)_ | — | — | ⛔ INVERTED |
-| `Inferno` | 6000 _(n=5)_ | 10000 _(n=4)_ | 6000 _(n=5)_ | — | ⛔ INVERTED |
-| `MissileAP` | 20000 _(n=23)_ | 12000 _(n=26)_ | 12000 _(n=31)_ | — | ⛔ INVERTED |
-| `Tesla` | — | — | 12000 _(n=47)_ | 6500 _(n=20)_ | ⛔ INVERTED |
-| `Thermobaric` | — | 24000 _(n=2)_ | 18000 _(n=2)_ | — | ⛔ INVERTED |
-| `Bullet` | 4000 _(n=49)_ | 4000 _(n=40)_ | — | — | ⚠ FLAT |
-| `MissileFire` | 24000 _(n=2)_ | 24000 _(n=2)_ | — | — | ⚠ FLAT |
+⛔ **An earlier version of this section recorded two permanent "known inversions" and a gap in
+§9.4 that called for authoring new gradients. Both are RETRACTED.** They were artifacts of the
+audit skipping §12.0d's rank restore — the tilt is applied to the VALUES and each armor is then
+given back the RANK it held. Without that step the bell reorders ladders in **127** cases across 60
+family/ladder pairs; with it, **zero**. Nothing needs authoring.
 
-Rising correctly: `BulletCryo`, `CannonHE`, `Demolition`, `Flame`, `Laser`, `MissileChem`,
-`MissileHE`. Fifteen more families are still too thin to judge (fewer than 2 rungs with 2+
-weapons), so this list can move in either direction as W23/W24 adoption fills the rungs — which
-is an argument for ruling on the SHAPE of the ladder rather than on nine separate pairs of
-numbers.
+⛔ **The x-axis is NOT settled.** The maintainer wants every armor to carry its OWN unique
+continuous value; the interim per-ladder form is unique within a ladder but collides across them.
+Recorded as an explicit OPEN block in DESIGN §12.0i — think it through before changing anything.
 
-⚠ **It was ten on 2026-08-23 and the count fell without anyone ruling on anything.** The RA1
-Allies cryo conversion (`a9f31258`) took `Demolition` from FLAT to rising by moving its Heavy
-rung 40000 → 60000, and added a new measurable family (`BulletCryo`, rising). So the audit is
-back to **WARN 9 against ratchet 9** and the suite no longer exits 1 on it. Two things follow:
-the pressure is off, and the count is not a progress metric — a family can leave this list
-because it was fixed, because it fell below the measurability threshold, or because a
-conversion moved its rungs as a side effect. Read the table, not the number.
+⭐ **The bell is unblocked.** §9.6's blockers 1 and 2 are both gone — blocker 2 (every family in the
+spread band) was already finished on 2026-08-22 and the document had not noticed
+(`audit_versus_profile`: 46 in band, `SPREAD_OFFENDERS_BASELINE = 0`). Next action is §9.6 step 5:
+implement the family-anchored bell in `AreaDamageWarhead`, **inert at h=1**, and prove the resolved
+profiles are byte-identical before any weapon sets a different `h`.
 
-Three shapes are visible, and they may not want the same answer:
+## ✅ RULED AND SHIPPED — the Cryo families are adopted (2026-08-23, `a9f31258a`)
 
-* **`MissileAP` (n=81) and `Tesla` (n=67)** are monotonically DESCENDING across well-populated
-  rungs. That is not a stray weapon; that is the whole family built the wrong way round.
-* **`CannonAP`, `Flak`, `Thermobaric`** invert across a rung holding only 2 weapons — one thin
-  rung against a populated one, so the small side is the likelier error.
-* **`Bullet` and `Demolition`** are flat across 91 and 53 weapons: the levels were never
-  differentiated at all, which is a different question from an inversion.
+Superseded the "OPEN DECISION" that stood here. The maintainer ruled a **fourth** shape, better
+than the three that had been costed:
 
-**Needs a maintainer ruling**, then `extract_stats` → ledger → `apply_balance --confirm`. These
-are balance numbers, so they cannot be hand-fixed (rule 3), and the ratchet must not be raised —
-`LADDER_BASELINE` in `tools/audit/audit_level_ladder.py` says LOWER ONLY, and lowering it is how
-this closes.
+> *"their regular weapons are upgraded into cryo versions: MissileAP and MissileHE become
+> MissileCryo warheads and the Missile Projectile changes into the Missile Cryo projectile with
+> the cryo trails and the Missile effect changes into the cryo explosion effect. The apply
+> physical state is removed and the cryo physical state is applied directly from the warhead …
+> This is the same for bullets, cannons, missiles, bombs, etc. — a GLOBAL change for all the RA1
+> Allies weapons, not only those that already have it … even the snipers have cryo, everything
+> else should too (except those that don't deal any damage, or heal, or repair)."*
+> — and: *"both Demolition and Concussion become CryoBlast, because CryoBlast is
+> Demolition × Concussion × Cryo."*
 
-⭐ **Process lesson:** a ratchet re-measured only when someone remembers is not a ratchet.
-`f9b71bffa` was boot-gated and shipped without re-running the suite.
+That is neither ADD nor FOLD: the cryo weapon is a SEPARATE weapon on a **condition-gated
+armament slot**, so the upgrade SWAPS the armament instead of layering a warhead. No main warhead
+is added to any weapon, so the `three_way_split` ratchet does not move — the objection that
+disqualified the ADD shape never applies.
 
-## ⛔ OPEN DECISION — how the Cryo families get adopted (2026-08-23)
+**Shipped by `a9f31258a`:** **14** new `*Cryo` weapon definitions and **21** new armament slots,
+a delivery-agnostic `^Effect_Cryo` template (cryo impact with no `Projectile` and no
+`ApplyPhysicalState`), and a `FlakCryo` family in `gen_weapon_template.py`. Tree-wide totals are
+now 27 cryo weapons on 39 slots across 12 files — **37 of the 39 are condition-gated**; the two
+that are not are FutureTech's Cryocopter and cryo turret, which are cryo by identity rather than
+by upgrade and were never in this ruling's scope. The conversion map:
 
-`BulletCryo`, `CannonCryo`, `MissileCryo` and `CryoBlast` are BUILT and spliced but adopted by
-**0 weapons**. So is the base `Cryo` family. Everything cryo still runs the legacy path.
-
-⭐ **THE STRUCTURE IS NOT WHAT IT LOOKED LIKE.** All **17** cryo weapons are THIN CHILDREN of one
-shared template, `^CryoMissileProjectile` (`ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1`),
-which carries a single `Warhead@PhysicalStateCryo: ApplyPhysicalState`. Their main damage comes
-entirely from their NON-CRYO parents (`Stinger`, `SheridanMissiles`, `RapierBombs`, `M1Carbine`,
-`ViperMissiles`...), which other units share. Each cryo weapon overrides only the `Amount`:
-
-    -48000 x1   -32000 x1   -30000 x3   -20000 x2   -16000 x3   -10000 x2   -2000 x5
-
-That spread IS the hand-cranked dilution compensation diagnosed on the Sheridan, all in one place.
-
-⚠ A first pass misread this: a `sed` window overran the block and showed the NEXT weapon's
-`Inherits@wh:` lines, making these look like standalone weapons on modern templates. They are not.
-
-**Three shapes, one disqualified:**
-
-| option | verdict |
+| non-cryo | becomes |
 |---|---|
-| ADD the family as an extra warhead (DESIGN's "an upgrade ADDS the warhead") | ⛔ adds a main to ~12 weapons → **raises the `three_way_split` ratchet**, which is forbidden |
-| REPLACE the parents' mains | yaml cannot un-inherit; needs restructuring parents that non-cryo units depend on |
-| ⭐ **FOLD the meter onto the existing main warhead** — swap the discrete `ApplyPhysicalState` for `PhysicalStateName: Temperature` + `PhysicalStateScale` | no new warhead, no ratchet change, implements the Scale-200 support design, and is close to a ONE-TEMPLATE change because they all share `^CryoMissileProjectile` |
+| `Bullet`, `Sniper` | `BulletCryo` |
+| `CannonAP`, `CannonHE` | `CannonCryo` |
+| `MissileAP`, `MissileHE` | `MissileCryo` |
+| `Demolition`, `Concussion` | `CryoBlast` |
+| `Flak` | `FlakCryo` |
+| `Flame` | *dropped* — fire and cryo cancel; `ParaBombCryo` is `CryoBlast_Heavy` alone |
 
-**Recommended: fold.** ⚠ It implies the four Cryo families serve a DIFFERENT population — weapons
-whose damage TYPE should be cryo — not cryo-flavoured variants of existing weapons. Decide that
-before pointing anything at them.
+Adoption today: `BulletCryo` 8 weapons, `CryoBlast` 6, `CannonCryo` 5, `MissileCryo` 3,
+`FlakCryo` 1. (Was 0 for every family when this section said "OPEN".)
 
-12 of the 17 are additionally blocked behind the legacy 3-way split (`155mmBastionCryo`,
-`APTuskCryo`, the `LightMissile+SmallArms+Chaingun+...` beam soup, etc.).
+### The remainder — 4 weapons, blocked on their PARENTS, not on cryo
+
+`CryoReconRangerRecoillessGun`, `APTuskCryo`, `ChronoTuskCryo` and `155mmCryo`
+(`ContentPacks/RedAlert/Allies/yaml/weapons.yaml`) still run the legacy
+`^CryoMissileProjectile` + `Warhead@PhysicalStateCryo: ApplyPhysicalState` path. Each is a thin
+child whose parent is a legacy MULTI-MAIN weapon — `APTusk` resolves **4** mains
+(`^TankDestroyerCannon` + `^Grenade` + `^FlakWeapon` + `^MediumMissile`), `ChronoTusk` **5**. A
+cryo child cannot be pointed at one `^Warhead_*Cryo` template until its parent has been reduced
+to one main warhead, so these are **W24 work on the parents**, not cryo work. Converting them
+also needs warhead permission (hard rule 4).
+
+⚠ The other `PhysicalStateCryo` sites are NOT this backlog and must not be swept in:
+`RedAlert/Shared` (13) is the `^CryoMissileProjectile` template itself plus a deliberate
+hand-built 12-ring cryo falloff on a bomb; `RedAlert2Mod/FutureTech` (11) and `StarCraft/Protoss`
+(6) belong to other factions and were never in the ruling's scope, which was RA1 Allies.
 
 ## ⭐ FROM THE DISCORD PLAYTEST THREAD (2026-08-22)
 
@@ -374,11 +400,10 @@ The blockers previously listed here were measured with a broken hand parser that
 4. ✅ CLEARED — `CannonAP` 1.81x and `Cryo` 1.97x were too flat because the 2x band floor lived
    inside `finish_blend()` (blend families only) and ran BEFORE `class_tilt` reshaped the profile.
    It is now applied to every family, after the tilt (`edd1c4597`). Ratchet **0**.
-5. The broken DAMAGE ladders (`audit_level_ladder.py`) — unaffected by the parser bug, since
-   that audit reads `Damage` through the resolver. Still a balance restat needing
-   `apply_balance --confirm`. **Now 9 against a ratchet of 9 — WARN, not FAIL** (it was 10 and
-   failing on 2026-08-23; `a9f31258` fixed `Demolition`). The measured table and the three
-   distinct shapes are in the RATCHET BREACH section above.
+5. ✅ CLEARED — the "broken DAMAGE ladders" were never a defect. `audit_level_ladder.py` is
+   retired: it enforced a damage-monotonic rule no law states, while §12.0d makes the level a
+   TILT and the templates carry only a placeholder `Damage: 2000`. Replaced by
+   `audit_heaviness_bell.py`; see the RULED section above.
 
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER
 
@@ -481,7 +506,7 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    and docs; propose merge/generalize/delete plan. NO deletes without maintainer sign-off.
 4. **[M] New weapon templates** (AFTER vehicles) — kill warhead-mixing, **HARD LIMIT 2 inherits/weapon**
    (special >2 only if justified, bar TBD); then weapon-class pipeline + unit↔weapon binding. Maintainer
-   names them + I propose. See [[cameo-weapon-structure-rules]] + [[cameo-weapon-ordering-law]].
+   names them + I propose. See +.
    DESIGNED + SIGNED OFF 2026-08-01/02 (survives /compact via docs+memory): two-level ordering law
    (ARMOR_SYSTEM "PROFILE construction" + `cameo-weapon-ordering-law`); 4-dimensional differentiation
    model + flat/% orthogonal axis + Super tier + AoE-FF rule + CORRECTED %-warhead
@@ -513,7 +538,8 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    - ✅ **Warhead FF twins BUILT + BOOT-GATED 2026-08-02** (`956cf1ecb`) — 19 FriendlyFire twins for the
      7 AoE families (Demolition/Concussion/Flame/Chemical/Nuclear/Sonic/Melee). ExtraDamage twin (energy)
      stays per-weapon (bespoke +vs-shield). All 3 layers now exist (55 wh + 24 proj + 27 fx).
-   - **RETROFIT Phase A (SmallArms/Chaingun pilot) — IN PROGRESS 2026-08-02.** Repoint weapons to
+   - **RETROFIT Phase A (SmallArms/Chaingun pilot) — historical 2026-08-02 record; its
+     2000-grid/FirepowerMultiplier tuning rule is superseded by the current 100-grid/no-FP law.** Repoint weapons to
      `Inherits@wh + @proj + @fx`, renaming `Warhead@<Old>` keys → new key while **PRESERVING each
      weapon's existing on-grid `Damage` verbatim** (damage law = 2000-grid, all mains identical, fine-tune
      ONLY via one unconditional actor `FirepowerMultiplier` — DESIGN.md §nice-number). Handle INTERMEDIATE
@@ -583,7 +609,7 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    deemed fine/grandfathered** (116 = RA2 civ-terrain `ra2ct*`; ~83 variant/husk: `*mkii`←base,
    `ifv_*`←ifv, `E1`←minigunner, badger family, WC2 towers). NOT a must-fix — do it as its own pass
    later; resolution = inline (cross-pack/one-off) or hoist to `^Template` (same-pack). Memory:
-   [[cameo-no-actor-inheritance]]. Audit cmd in the memory. Don't stop pipeline work for it.
+. Audit cmd in the memory. Don't stop pipeline work for it.
 
 **ENGINE workflow.** ⚠ **CORRECTED 2026-08-15 — `engine/` is NOT a submodule of this repo.**
 Verified: no `.gitmodules`, no `engine/.git`, `.gitignore` lists `engine`/`engine*`, and
@@ -757,8 +783,9 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - **SUM law** — effective damage = Σ offensive SpreadDamage warheads (excl.
   `*ExtraDamage`/`*Percentage`/`*FriendlyFire`), never MAX. Canonical reducer
   `formula.spread_damage_sum` (done: propose_class_rebalance/fit_class/update_ranges route through it).
-- **Two-stage DPS tuning** — coarse: warhead `Damage` on the 2000 grid;
-  fine: `FirepowerMultiplier@<unit>` in 1% steps (1 = ×0.01). Dispatcher must emit both.
+- **DPS tuning** — identical main-warhead `Damage` on the 100 grid, with
+  reload/range used for the remaining fit. Unconditional actor
+  `FirepowerMultiplier` is retired as a fine-tuning knob.
 - **Baseline @ band middle**; **verifier ≡ baseline on range+speed, exactly
   2×HP / 2×DPS / 2.5×cost**; same tech tier as baseline so it cancels.
 - **WC/StarCraft unit costs = multiples of 20** (power = Cost/20).
@@ -805,12 +832,12 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `tier_multiplier` to the derived sidecar. Manual `design.tech_tier` values are
   preserved as overrides.
 - [ ] Build `tools/balance/rebalance_classes.py` dispatcher: SUM price →
-  2000-grid warheads → 1%-step FP-mult → range-solve to band (mult-of-10) →
+  100-grid warheads → range-solve to band (mult-of-10) →
   uniqueness within broad TYPE → Δ (goal ≤1). Consolidates the scout/
   closecombat/SF one-offs (LESSONS §172-176).
 - [x] **Fix uniqueness in code** (done 2026-07-22, commit pending):
   `propose_class_rebalance.resolve_dps_uniqueness` now keys on effective
-  damage-per-shot (Σwarheads×FP); the report checks the 5 raw stats — HP, Speed,
+  damage-per-shot at the baseline actor state; the report checks the 5 raw stats — HP, Speed,
   Range, RAW ReloadDelay, effective-damage-per-shot — with damage-per-shot and
   reload as SEPARATE dimensions (reload dupes flagged, never auto-nudged). STILL
   TODO: apply the same 5-stat metric to the standalone uniqueness AUDIT.
@@ -1406,8 +1433,9 @@ ledger (32 faction files, 2025 actors, raw stats + provenance,
 deterministic, `--check` drift mode). PHASE 2 DONE 2026-07-18:
 `formula.py` (Tiger identity exact, symbolic equivalence vs the
 legacy cell formulas exact, closed-form Range solver) +
-`build_workbook.py` -> cameo_balance_v2.xlsx workbench (gitignored;
-32 faction tabs, weapon sub-rows, live formulas, locked non-input
+`build_workbook.py` -> the tracked `cameo_balance_by_faction.xlsx` and
+`cameo_balance_by_type.xlsx` workbenches (`cameo_balance_v2.xlsx` is the frozen
+pre-split prototype; 32 faction tabs, weapon sub-rows, live formulas, locked non-input
 cells, delta traffic lights). PHASES 3+4 DONE 2026-07-18 — WORKING
 PROTOTYPE: seed_design.py (437 units seeded from the legacy sheet,
 discrepancies.md: 22 cost mismatches, 581 never-priced combat units,
@@ -1420,8 +1448,8 @@ fixed point exact (0 changes on untouched ledger), live demo
 Bonus: the fixed-point test exposed and fixed a resolver cache
 poisoning bug affecting ALL audits. Next: Phase 5 Formula v2 +
 Phase 6 enforcement (balance check into run_all). yaml → per-faction JSON
-ledger (committed) → generated cameo_balance_v2.xlsx (CABAL-tab format,
-formulas live in the sheet, locked cells) → legacy-sheet comparator +
+ledger (committed) → generated faction/type workbooks (formulas live in the
+sheet, locked cells) → legacy-sheet comparator +
 discrepancy triage → gated write-back (apply_balance.py, maintainer
 order only) → drift audit in run_all so hand-edited balance numbers
 become red findings mechanically. Phases 1-3 first (extractor,

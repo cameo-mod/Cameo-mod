@@ -56,25 +56,45 @@ export PYTHONIOENCODING=utf-8
 # encodes the RETIRED 2000-step grid and the `main // 2000` percentage twin.
 # The live law is formula.DAMAGE_STEP (= 100) + formula.percentage_twin().
 # Re-derive it from `formula` before wiring it in; see docs/HANDOFF.md.
-for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai sequences \
+for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai ai_personalities sequences \
          metadata outliers orphans assets fluent power_budget stat_formulas \
          weapon_uniqueness garrison_weapons asset_files promotion_gating min_range \
          basebuilder_crates buildable_order display_text rename_safety \
          missing_elite elite_gating rank_decoration \
          dune_rank_decoration effect_warhead_names weapon_suffixes \
          balance_sheet consistency_report packs balance_drift \
-         duplicate_keys code_duplication test_coverage recent_changes \
-         error_handling security \
+         duplicate_keys \
          template_conformance multiplier_modifiers nuclear_flash_bindings \
          ts_death_palette warhead_split physical_state_warheads \
          unique_traits armor_upgrade_harm plating_exclusivity k_linearity \
          survivability_pricing doc_claims doc_health hex_shield_routing \
          impact_glow_preservation dead_warhead_fields family_uniqueness \
-         three_way_split tier_weapon_class level_ladder versus_profile \
-         meter_dilution; do
+         three_way_split tier_weapon_class heaviness_bell versus_profile \
+         meter_dilution ca_drift upstream_adoption engine_freshness; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1
+  [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"
+done
+
+# ADVISORY audits — they RUN and write full reports, but they must NOT set the suite's exit
+# code. Maintainer ruling 2026-08-24.
+#
+# Every one is a SCHEDULED scan registered in docs/audit/periodic.json on a 14- or 30-day
+# cadence, and this suite is the PER-COMMIT gate — the same argument made a few lines below for
+# passing --warn-only to audit_periodic_freshness. All five had been red since 2026-08-16
+# (test_coverage alone drifted 223 -> 235 -> 249 -> 257 -> 270 untested modules), so run_all.sh
+# exited 1 on every clean tree for a week and the gate's "suite is green" signal was dead: a
+# genuinely NEW failure looked identical to the stale ones.
+#
+# ⚠ The calendar is still enforced, just not here: `python tools/audit/audit_periodic_freshness.py`
+#   with NO flag exits 1 when a scan is overdue. That is where lateness belongs.
+# ⚠ Each script still exits 1 on its own findings, so CI may gate on one deliberately.
+# ⚠ tools/audit/run_all.py parses BOTH loops out of this file — keep the `for a in ...; do`
+#   shape so the two runners cannot drift apart.
+for a in code_duplication test_coverage recent_changes error_handling security; do
+  echo "== audit_$a (advisory)"
+  "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"
 done
 

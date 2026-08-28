@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **615** across 1910 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **615** across 1911 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (41)
@@ -459,8 +459,8 @@ _none found_
 
 | actor | actual | expected |
 |---|---|---|
-| ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: ordos_artilleryplatform | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | schwarzermond: schwarzermond_lasertower | prereqs: schwarzermond_barracks, schwarzermond_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 
 

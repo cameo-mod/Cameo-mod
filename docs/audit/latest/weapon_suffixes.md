@@ -2,7 +2,7 @@
 
 X1 elite weapons not ending _elite: **25**
 X2 EMP weapons not ending _EMP: **10**
-X3 AA weapons not ending _AA: **5**
+X3 AA weapons not ending _AA: **8**
 X4 deprecated E suffix (informational): **2**
 X5 suffix ordering violations: **0**
 
@@ -52,11 +52,14 @@ X5 suffix ordering violations: **0**
 ## X3 — AA-only weapons not following _AA convention
 | File | Line | Weapon | ValidTargets |
 |---|---|---|---|
+| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 358 | BallistaSingleShotAir | Air |
+| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 366 | BallistaSingleShotAirEnergized | Air |
 | ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 977 | LaserBuggy2_AAInferno | Air |
 | ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 983 | LaserBuggy2_AABurning | Air |
 | ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 920 | CabalLaserBoatLaserAA | Air |
 | ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1245 | CabalManticoreMissilesAA | Air |
 | ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 568 | TSMammothTusk2 | Air |
+| weapons/darkreign.yaml | 404 | DRBionWeaponAA | Air |
 
 ## X4 — Weapons with deprecated E suffix (informational)
 | File | Line | Weapon |

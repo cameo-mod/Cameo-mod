@@ -139,7 +139,7 @@ must NOT strip these. Known so far (more to be defined; confirm each before keep
   (`SiegeEngineCannon`) = keep ALL AoE warheads + others combined = a unique shared explosion.
 
 Everything else: the 2-cap is strict. Build a concrete allow-list (unit/weapon ids) before
-the kill-mixing pass. See memory `cameo-weapon-structure-rules`.
+the kill-mixing pass. See.
 
 ## Retrofit specifics + weapon assignments (maintainer 2026-08-02)
 

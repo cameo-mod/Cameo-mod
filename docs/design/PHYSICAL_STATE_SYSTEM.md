@@ -4,7 +4,7 @@ Status: **The framework + the entire Temperature axis ALREADY EXIST and are wire
 corrects the first draft, which wrongly implied a from-scratch C# build. The real remaining work is
 small (one C# field + yaml config). Verify against the code before building — "don't trust, verify".
 
-Companion: `AREADAMAGE_WARHEAD.md`, `SPREAD_FALLOFF_PLAN.md`; memory `cameo-weapon-differentiation`.
+Companion: `AREADAMAGE_WARHEAD.md`, `SPREAD_FALLOFF_PLAN.md`;.
 
 ---
 
@@ -300,7 +300,7 @@ Cryo warhead's Versus is the real value (temperature alone would be redundant). 
 ⚠ **Combined weapons stack it further (maintainer 2026-08-09):** artillery is being reworked to
 **CannonHE + Demolition** (the slow big-blast combo), so a cryo upgrade makes Cryo the **THIRD** warhead
 (CannonHE + Demolition + Cryo). This exceeds the usual 2-warhead cap but is a justified exception (a
-combined artillery weapon + an upgrade) — the allow-list case in [[cameo-weapon-structure-rules]].
+combined artillery weapon + an upgrade) — the allow-list case in.
 
 **Damage model (maintainer 2026-08-09) — symmetric warheads + a FirepowerMultiplier penalty:**
 keep all members at the SAME damage (e.g. each 2000) and pay for the freeze by REDUCING net output.
@@ -347,7 +347,7 @@ used for Temperature's blue cold side) AND (b) **threshold artwork** at the extr
 | **Sonic** | 🔵 **looped, transparently-shifting blue** overlay (the sonic-mark visual) | — (on-hit, short duration) | **NEW art needed** — a looped shifting-blue overlay. PLACEHOLDER live now: `^SonicDebuff` uses a flat `WithColoredOverlay@SONICDEBUFF` (`0088FF40`, Multiply) — swap it for the looped overlay when the art lands. The commented-out `WithDecoration@SONICDEBUFF` in `^SonicDebuff` still points at the existing `2100commandodebuff` icon. |
 | **Armor Breach** | very light **grey** scaling overlay | **breach icon** at 100% — a bullet punching through armor plating (when they take 200%) | **NEW art needed** — the breach icon; overlay is just grey colour |
 
-**New sprite art to create** (RGBA PngSheet per memory `cameo-custom-effects-pngsheet`; pair every new
+**New sprite art to create** (RGBA PngSheet per pair every new
 effect with a sound): the **looped shifting-blue Sonic** overlay, and the **armor-breach breach-icon**
 (bullet-through-plating) for the 100% state. Corrosion's pulse already exists (play it at max) and its
 green tint is just a colour trait. The traits (`WithPhysicalStateColoredOverlay` / `WithIdleOverlay`)

@@ -1,6 +1,6 @@
 # audit_doc_health — is the documentation structurally sound?
 
-Documents scanned: **203**
+Documents scanned: **211**
 
 `audit_doc_claims.py` checks whether the NUMBERS are still true. This checks whether the documents themselves are intact.
 
@@ -13,6 +13,7 @@ Documents scanned: **203**
 | D5 | reference to a moved/removed document | 0 |
 | D6 | duplicate section id in DESIGN.md | 0 |
 | D7 | Contents index missing a section | 0 |
+| D8 | citation names a different section's law | 0 |
 
 
 ## D1 — Control characters (0)
@@ -46,6 +47,11 @@ _clean_
 
 
 ## D7 — Contents index out of date (0)
+
+_clean_
+
+
+## D8 — Citation points at the wrong law (0)
 
 _clean_
 

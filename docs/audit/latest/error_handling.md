@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **266**
+Files scanned: **273**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 66 | 30 |
+| E2 | handler discards the error | 69 | 30 |
 | E3 | open() without encoding= | 92 | 90 |
-| E4 | subprocess call without check= | 17 | 9 |
+| E4 | subprocess call without check= | 18 | 9 |
 
 
 ## E1 — 2 finding(s)
@@ -18,7 +18,7 @@ Files scanned: **266**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 66 finding(s)
+## E2 — 69 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -28,6 +28,7 @@ Files scanned: **266**
 | tools/audit/audit_dead_warhead_fields.py | 76 | handler body discards the error |
 | tools/audit/audit_dune_rank_decoration.py | 15 | handler body discards the error |
 | tools/audit/audit_elite_gating.py | 16 | handler body discards the error |
+| tools/audit/audit_engine_freshness.py | 76 | handler body discards the error |
 | tools/audit/audit_garrison_weapons.py | 61 | handler body discards the error |
 | tools/audit/audit_k_linearity.py | 80 | handler body discards the error |
 | tools/audit/audit_k_linearity.py | 96 | handler body discards the error |
@@ -40,8 +41,10 @@ Files scanned: **266**
 | tools/audit/audit_rank_decoration.py | 68 | handler body discards the error |
 | tools/audit/audit_three_way_split.py | 103 | handler body discards the error |
 | tools/audit/audit_tier_weapon_class.py | 76 | handler body discards the error |
-| tools/audit/audit_unique_traits.py | 71 | handler body discards the error |
+| tools/audit/audit_unique_traits.py | 73 | handler body discards the error |
 | tools/audit/audit_upgrades.py | 145 | handler body discards the error |
+| tools/audit/audit_upstream_adoption.py | 97 | handler body discards the error |
+| tools/audit/audit_upstream_adoption.py | 138 | handler body discards the error |
 | tools/audit/audit_weapon_suffixes.py | 119 | handler body discards the error |
 | tools/audit/audit_weapon_suffixes.py | 185 | handler body discards the error |
 | tools/audit/audit_weapon_suffixes.py | 297 | handler body discards the error |
@@ -188,15 +191,16 @@ Files scanned: **266**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 17 finding(s)
+## E4 — 18 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/audit/audit_doc_claims.py | 104 | `subprocess.run()` without check= |
-| tools/audit/audit_doc_health.py | 75 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 75 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 92 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 112 | `subprocess.run()` without check= |
+| tools/audit/audit_doc_health.py | 130 | `subprocess.run()` without check= |
+| tools/audit/audit_engine_freshness.py | 52 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 114 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 138 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 164 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 271 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 273 | `subprocess.run()` without check= |
 | tools/balance/compensate_retrofit.py | 170 | `subprocess.run()` without check= |
@@ -213,7 +217,7 @@ Files scanned: **266**
 
 ## FAIL
 
-- E2: 66 > baseline 30
+- E2: 69 > baseline 30
 - E3: 92 > baseline 90
-- E4: 17 > baseline 9
+- E4: 18 > baseline 9
 

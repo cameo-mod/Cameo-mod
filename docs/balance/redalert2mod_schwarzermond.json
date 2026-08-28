@@ -281,11 +281,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -295,13 +295,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -309,25 +302,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -340,25 +319,29 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "100",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^SmallArms",
        "^Chaingun",
        "^MediumMissile",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^LegacyLaserChipCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "LunarNaxiDroneLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -366,25 +349,11 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -394,25 +363,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -422,13 +377,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
@@ -436,10 +384,18 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "10000",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "43",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_Light_WallExcludedExtraDamage",
         "type": "AreaDamage"
        }
       ],
@@ -455,7 +411,8 @@
        "^MediumMissile",
        "^FlakWeapon",
        "^ArrowWeapon",
-       "^RA2LightMissile"
+       "^RA2LightMissile",
+       "^Compatibility_MissileAP_Light_WallExcluded"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -519,24 +476,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -548,6 +491,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_Concussion_Light",
        "^Warhead_MissileAP_Heavy",
        "^Effect_MissileAP_Heavy",
@@ -567,24 +511,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -670,24 +600,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -699,6 +615,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^Warhead_Concussion_Light",
        "^Warhead_MissileAP_Heavy",
        "^Effect_MissileAP_Heavy",
@@ -718,24 +635,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -850,11 +753,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -864,13 +767,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -878,25 +774,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -909,26 +791,38 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^SmallArms",
        "^Chaingun",
        "^MediumMissile",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^LegacyLaserChipCompatibility",
+       "^LaserHeavyGroundRemainderCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "NaxiBeetleLaser_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -936,11 +830,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -950,13 +844,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -964,25 +851,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -995,26 +868,38 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@elite",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^SmallArms",
        "^Chaingun",
        "^MediumMissile",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^LegacyLaserChipCompatibility",
+       "^LaserHeavyGroundRemainderCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "NaxiBeetleLaser_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1022,11 +907,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1036,13 +921,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -1050,25 +928,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1081,12 +945,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
@@ -1095,9 +966,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "NaxiBeetleLaser_AA_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1105,11 +978,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1119,13 +992,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -1133,25 +999,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1164,12 +1016,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
@@ -1178,9 +1037,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "NaxiBeetleLaser_AA_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1188,11 +1049,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1202,13 +1063,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -1216,25 +1070,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1247,12 +1087,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
@@ -1261,9 +1108,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_YellowBeetleLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1271,11 +1120,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1285,13 +1134,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -1299,25 +1141,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1330,12 +1158,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
@@ -1344,9 +1179,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_YellowBeetleLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1354,11 +1191,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1368,13 +1205,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -1382,25 +1212,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1413,12 +1229,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
@@ -1427,9 +1250,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_YellowBeetleLaser_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1437,11 +1262,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1451,13 +1276,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -1465,25 +1283,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1496,12 +1300,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
@@ -1510,9 +1321,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_YellowBeetleLaser_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1520,11 +1333,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1534,13 +1347,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -1548,25 +1354,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1579,12 +1371,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
@@ -1593,9 +1392,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_AmplifiedBeetleLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1603,11 +1404,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1617,13 +1418,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -1631,25 +1425,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1662,12 +1442,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
@@ -1676,9 +1463,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_AmplifiedBeetleLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1686,11 +1475,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1700,13 +1489,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -1714,25 +1496,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1745,12 +1513,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
@@ -1759,9 +1534,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_AmplifiedBeetleLaser_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1769,11 +1546,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1783,13 +1560,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -1797,25 +1567,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1828,12 +1584,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
@@ -1842,9 +1605,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_AmplifiedBeetleLaser_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2201,11 +1966,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2215,13 +1980,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -2229,25 +1987,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2260,36 +2004,40 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
       "requires": "!schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^SmallArms",
        "^Chaingun",
        "^MediumMissile",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^LegacyLaserChipCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "NaxLaserT",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2299,13 +2047,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -2313,25 +2054,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2344,12 +2071,12 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -2358,19 +2085,21 @@
       "versus_templates": [
        "NaxLaserT"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_YellowLaserT",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2380,13 +2109,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -2394,25 +2116,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2425,12 +2133,12 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -2439,9 +2147,11 @@
       "versus_templates": [
        "NaxLaserT"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_AmplifiedLaserT",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7070,11 +6780,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
+        "damage": "32000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "146",
+        "tag": "Flak_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -7084,20 +6794,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -7105,25 +6801,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -7134,32 +6816,35 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1565",
       "pricing": true,
       "range": "7825",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Flak_Heavy",
        "^FlakWeapon",
        "^Grenade",
        "^HeavyAAWeapon",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flak_Heavy"
+      ],
       "weapon": "Naxis_Komet",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
+        "damage": "32000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "146",
+        "tag": "Flak_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -7169,20 +6854,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -7190,25 +6861,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -7219,7 +6876,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2350",
       "pricing": true,
       "range": "11740",
@@ -7228,9 +6885,11 @@
       "versus_templates": [
        "Naxis_Komet"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flak_Heavy"
+      ],
       "weapon": "Naxis_Komet_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7459,11 +7118,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7473,13 +7132,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -7487,25 +7139,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -7518,26 +7156,38 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "!schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^SmallArms",
        "^Chaingun",
        "^MediumMissile",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^LegacyLaserChipCompatibility",
+       "^LaserHeavyGroundRemainderCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "NaxiBeetleLaser_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -7545,11 +7195,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7559,13 +7209,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -7573,25 +7216,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -7604,12 +7233,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
@@ -7618,9 +7254,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "NaxiBeetleLaser_AA_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -7628,11 +7266,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7642,13 +7280,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -7656,25 +7287,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -7687,12 +7304,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
@@ -7701,9 +7325,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_YellowBeetleLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -7711,11 +7337,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7725,13 +7351,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -7739,25 +7358,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -7770,12 +7375,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
@@ -7784,9 +7396,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_YellowBeetleLaser_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -7794,11 +7408,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7808,13 +7422,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -7822,25 +7429,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -7853,12 +7446,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
@@ -7867,9 +7467,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_AmplifiedBeetleLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -7877,11 +7479,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7891,13 +7493,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -7905,25 +7500,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -7936,12 +7517,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
@@ -7950,9 +7538,11 @@
       "versus_templates": [
        "NaxiBeetleLaser_AA_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_AmplifiedBeetleLaser_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8022,11 +7612,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -8036,13 +7626,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -8050,25 +7633,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8081,26 +7650,38 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "52",
       "requires": "!schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^SmallArms",
        "^Chaingun",
        "^MediumMissile",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^LegacyLaserChipCompatibility",
+       "^LaserHeavyGroundRemainderCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "NaxiTank2Laser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8108,11 +7689,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -8122,13 +7703,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -8136,25 +7710,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8167,12 +7727,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9750",
       "reloaddelay": "52",
@@ -8181,9 +7748,11 @@
       "versus_templates": [
        "NaxiTank2Laser"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "NaxiTank2Laser_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8191,11 +7760,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -8205,13 +7774,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -8219,25 +7781,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8250,12 +7798,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "52",
@@ -8264,9 +7819,11 @@
       "versus_templates": [
        "NaxiTank2Laser"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_YellowTank2Laser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8274,11 +7831,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -8288,13 +7845,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -8302,25 +7852,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8333,12 +7869,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9750",
       "reloaddelay": "52",
@@ -8347,9 +7890,11 @@
       "versus_templates": [
        "NaxiTank2Laser_AA"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_YellowTank2Laser_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8357,11 +7902,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -8371,13 +7916,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -8385,25 +7923,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8416,12 +7940,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "52",
@@ -8430,9 +7961,11 @@
       "versus_templates": [
        "NaxiTank2Laser"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_AmplifiedTank2Laser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8440,11 +7973,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -8454,13 +7987,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -8468,25 +7994,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -8499,12 +8011,19 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "LaserHeavyGroundRemainder",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9750",
       "reloaddelay": "52",
@@ -8513,9 +8032,11 @@
       "versus_templates": [
        "NaxiTank2Laser_AA"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "Lunar_AmplifiedTank2Laser_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9074,25 +8595,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -9102,13 +8609,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -9116,7 +8616,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -9131,6 +8631,7 @@
       "requires": "!rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_CannonHE_MediumFlat",
        "^LightChemicalWeapon",
        "^HeavyBomb",
        "^MediumFlameWeapon",
@@ -9148,25 +8649,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -9176,13 +8663,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -9190,7 +8670,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -9231,25 +8711,11 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -9259,13 +8725,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -9273,7 +8732,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -9321,25 +8780,11 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -9349,13 +8794,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -9363,7 +8801,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",

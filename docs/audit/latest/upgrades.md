@@ -121,25 +121,25 @@ _none found_
 
 | token | #consumer traits | sample consumers |
 |---|---|---|
-| base-reveal | 1582 | a10, a10carrier, alien.nax, apparition.ixian |
-| classicproductionqueues | 164 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianconstructionyard, asianalliance_asianwarfactory |
+| base-reveal | 1581 | a10, a10carrier, alien.nax, apparition.ixian |
+| classicproductionqueues | 165 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianconstructionyard, asianalliance_asianwarfactory |
 | derricklimit_is_0 | 1 | player |
 | derricklimit_is_3 | 1 | player |
 | derricklimit_is_infinite | 1 | player |
-| hybridproductionqueues | 164 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianconstructionyard, asianalliance_asianwarfactory |
-| littlebuilderenable | 164 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianconstructionyard, asianalliance_asianwarfactory |
+| hybridproductionqueues | 165 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianconstructionyard, asianalliance_asianwarfactory |
+| littlebuilderenable | 165 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianconstructionyard, asianalliance_asianwarfactory |
 | palace_emperor | 16 | fremen_creep, heavy_inf.ixian, ixian_lightinfantry, ixian_rockettrooper |
 | scaledprices | 108 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianwarfactory, atreides_heavyfactory |
 | scaledproductionqueues | 108 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianwarfactory, atreides_heavyfactory |
 | upemptesla | 3 | ra2_soviets_teslatrooper, ra2shk.bot, ra2shkhero |
-| upra2deso | 313 | alien.nax, asianalliance_alligator, asianalliance_asdf, asianalliance_asiancommando |
-| upsubliminal | 1089 | a10, a10carrier, alien.nax, apparition.ixian |
-| upsubliminal2 | 1089 | a10, a10carrier, alien.nax, apparition.ixian |
-| usabombardament | 1089 | a10, a10carrier, alien.nax, apparition.ixian |
-| usaholdtheline | 1089 | a10, a10carrier, alien.nax, apparition.ixian |
-| usasearchndestroy | 1089 | a10, a10carrier, alien.nax, apparition.ixian |
+| upra2deso | 311 | alien.nax, asianalliance_alligator, asianalliance_asdf, asianalliance_asiancommando |
+| upsubliminal | 1087 | a10, a10carrier, alien.nax, apparition.ixian |
+| upsubliminal2 | 1087 | a10, a10carrier, alien.nax, apparition.ixian |
+| usabombardament | 1087 | a10, a10carrier, alien.nax, apparition.ixian |
+| usaholdtheline | 1087 | a10, a10carrier, alien.nax, apparition.ixian |
+| usasearchndestroy | 1087 | a10, a10carrier, alien.nax, apparition.ixian |
 | usaupcounter | 2 | ra1_allies_alliedchinooktransport, ra1_soviets_hiptransport |
-| usaupsupplylines | 33 | asianalliance_militaryacademy, cabal_core, forgotten_tiberiumspike, futuretech_hypercore |
+| usaupsupplylines | 34 | asianalliance_militaryacademy, cabal_core, forgotten_tiberiumspike, futuretech_hypercore |
 
 
 ## Upgrades without an upgrades_intent.yaml entry

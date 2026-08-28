@@ -1,4 +1,4 @@
-# audit_duplicate_inherits — 1770 actor(s)/template(s) reach a parent through more than one path
+# audit_duplicate_inherits — 1769 actor(s)/template(s) reach a parent through more than one path
 
 A10Carrier:
   parent ^^ ^externalconditions  (2 paths)
@@ -1684,202 +1684,6 @@ TSE1:
   parent ^^ ^gravityweighter  (2 paths)
     -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-TSE1PARA:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^lockon  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> tse1para -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> tse1para -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-TSE2PARA:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^lockon  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> tse2para -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
 TSE3:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -37860,6 +37664,18 @@ ts_gdi_disruptor:
   parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
     -> ts_gdi_disruptor -> ^linebreakertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> ts_gdi_disruptor -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+ts_gdi_dropshipbay:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ts_gdi_dropshipbay -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ts_gdi_dropshipbay -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ts_gdi_dropshipbay -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_gdi_dropshipbay -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (3 paths)
+    -> ts_gdi_dropshipbay -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ts_gdi_dropshipbay -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ts_gdi_dropshipbay -> ^largecashtricklerwithexperience -> ^cashtricklerwithexperience -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ts_gdi_empulsecannon:
   parent ^^ ^globalbounty  (2 paths)

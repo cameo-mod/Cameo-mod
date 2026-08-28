@@ -335,6 +335,7 @@ SteelHoverMissile_elite:
 		Damage: 8000
 
 SteelTwisterMissiles:
+	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Grenade
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^FlakWeapon
@@ -392,8 +393,9 @@ SteelTwisterMissiles:
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@MissileAP_Medium:
+		PercentageScale: 1810
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 11000
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -403,6 +405,12 @@ SteelTwisterMissiles:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@MissileAP_MediumFlatCompatibility:
 SteelTwisterMissiles_elite:
 	Inherits: SteelTwisterMissiles
 	Range: 6000
@@ -587,33 +595,84 @@ NaxiRifle:
 		Width: 50
 	Warhead@Bullet_Light:
 		Damage: 6000
+^NaxiLegacyLaserDelivery:
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	TargetActorCenter: false
+	Projectile: LaserZap
+		Image: DRAGON
+		ContrailZOffset: 4000
+		ContrailStartColor: EECCAA88
+		ContrailEndColor: 88664422
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+		ContrailLength: 0
+		Speed: 500
+		Inaccuracy: 100
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	-Warhead@Glow:
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 NaxLaserT:
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
+	Inherits@legacychip: ^LegacyLaserChipCompatibility
 	ReloadDelay: 20
 	Range: 8181
 	Report: AWMinilaser.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: LaserZap
 		Width: 25
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
+	TargetActorCenter: false
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
+	Warhead@Laser_Heavy:
+		Damage: 8000
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 NaxiMP40:
 	Inherits: ^Warhead_Concussion_Light
@@ -918,6 +977,7 @@ NaxiMeteorSpreader:
 		ImpactActors: false
 
 NaxiMeteor:
+	Inherits@collapsewh: ^Warhead_Nuclear_Super
 	Inherits: ^Grenade
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^ShrapnelWeapon
@@ -1006,6 +1066,18 @@ NaxiMeteor:
 		Amount: 4
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@Nuclear_Super:
+		ValidTargets: Ground, Water, Air
+		Damage: 100000
+		PercentageScale: 0
+	-Warhead@Nuclear_Super_Percentage:
 
 MeteorFlameFragment:
 	Inherits@wh: ^Warhead_Flame_Light
@@ -1040,6 +1112,7 @@ NaxisBlackBomb:
 		AimTargetStances: Enemy, Neutral
 
 NaxisBlackBombSmaller:
+	Inherits@roleflat: ^Compatibility_Demolition_MediumFlat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^RA2MediumCannon
@@ -1094,6 +1167,12 @@ NaxisBlackBombSmaller:
 ####################################################################################################
 #		Red Alert 2 Naxis Upgraded Weapons
 ####################################################################################################
+	-Warhead@HeavyBomb:
+	-Warhead@LightChemicalWeapon:
+	Warhead@Demolition_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 50000
+		PercentageScale: 0
 
 ^LunarNaxisUpgradedCannons:
 	Report: nax_aliengun.wav
@@ -1411,6 +1490,7 @@ RA2RobotmmScatter_elite:
 # burst 10 rapid spray, no-air. NaxiMP40 kept for nothing else â€” renamed
 # with its elite pair per the rename law.
 naxis_sssoldier_smg:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1427,6 +1507,12 @@ naxis_sssoldier_smg:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 naxis_sssoldier_smg_elite:
 	Inherits: naxis_sssoldier_smg
 	Burst: 20

@@ -20,7 +20,7 @@ tsmcnealmechdrop: ALSO-USED (1)
   mods\cameo\weapons\heroes.yaml:799: 		Image: tsmcnealmechdrop
 tsdroppod: ALSO-USED (2)
   mods\cameo\ContentPacks\TiberianSun\GDI\yaml\aircraft.yaml:499: 		Image: tsdroppod
-  mods\cameo\weapons\tiberiansun.yaml:1527: 		Image: tsdroppod
+  mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1169: 		Image: tsdroppod
 hakurei_giphy: ALSO-USED (2)
   mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:850: 		Image: hakurei_giphy
   mods\cameo\sequences\misc.yaml:4534: 		Filename: hakurei_giphy.shp

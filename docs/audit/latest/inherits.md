@@ -1,13 +1,13 @@
 # audit_inherits — §10.3 invariant violations (B2)
 
-Actors+templates scanned: **3975**
+Actors+templates scanned: **3973**
 
 | violation | meaning | count |
 |---|---|---|
-| V1 | concrete actor inherits from concrete actor | 281 |
+| V1 | concrete actor inherits from concrete actor | 277 |
 | V2 | inherit crosses faction ownership | 0 |
 | V3 | dangling inherit target (BLOCKING) | 0 |
-| V4 | chain depth > 3 | 1863 |
+| V4 | chain depth > 3 | 1862 |
 | V5 | > 2 -Trait removals (warning) | 95 |
 
 
@@ -52,10 +52,6 @@ _none found_
 | SCSENTINELM | SCCOMMANDCENTERM | ? | ? | mods/cameo/rules/starcraft.yaml |
 | SCSTARPORTM | SCCOMMANDCENTERM | ? | ? | mods/cameo/rules/starcraft.yaml |
 | TECHBCANNON2 | TECHBCANNON | ? | ? | mods/cameo/rules/tech.yaml |
-| TSDPODE1 | TSDPOD | tiberiansun/gdi | tiberiansun/gdi | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml |
-| TSDPODE2 | TSDPOD | tiberiansun/gdi | tiberiansun/gdi | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml |
-| TSE1PARA | TSE1 | ? | ? | mods/cameo/rules/tiberiansun.yaml |
-| TSE2PARA | ts_gdi_discthrower | ? | tiberiansun/gdi | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEER | E6 | ? | tiberiandawn/shared | mods/cameo/rules/tiberiansun.yaml |
 | VT01 | T01 | ? | ? | mods/cameo/rules/trees.yaml |
 | VT02 | T02 | ? | ? | mods/cameo/rules/trees.yaml |
@@ -476,8 +472,6 @@ _none found_
 | TRAN | 5 | mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml |
 | TRAN.Husk | 4 | mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml |
 | TSE1 | 5 | mods/cameo/rules/tiberiansun.yaml |
-| TSE1PARA | 6 | mods/cameo/rules/tiberiansun.yaml |
-| TSE2PARA | 6 | mods/cameo/rules/tiberiansun.yaml |
 | TSE3 | 5 | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEER | 6 | mods/cameo/rules/tiberiansun.yaml |
 | TSGTCNST | 4 | mods/cameo/rules/tiberiansun.yaml |
@@ -1895,6 +1889,7 @@ _none found_
 | ts_gdi_destroyer | 4 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml |
 | ts_gdi_discthrower | 5 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml |
 | ts_gdi_disruptor | 5 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml |
+| ts_gdi_dropshipbay | 5 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml |
 | ts_gdi_empulsecannon | 5 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml |
 | ts_gdi_engineer | 7 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml |
 | ts_gdi_falconenforcer | 5 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml |
