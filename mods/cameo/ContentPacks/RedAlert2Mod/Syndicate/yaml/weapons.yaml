@@ -1018,6 +1018,7 @@ RA2TOPOLCubaTarget:
 	Warhead@1Dam: TargetDamage
 
 RA2TOPOLCuba:
+	Inherits@collapsewh: ^Warhead_Nuclear_Super
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^MediumFlameWeapon
@@ -1129,6 +1130,19 @@ RA2TOPOLCuba:
 		Falloff: 100, 85, 70, 55, 40, 25, 10
 		Level: 1000
 		LayerName: ra2radiation
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@Nuclear_Super:
+		ValidTargets: Ground, Water, Air
+		Damage: 120000
+		PercentageScale: 0
+	-Warhead@Nuclear_Super_Percentage:
 
 RA2APCFlakCannon:
 	Inherits@collapseflat: ^Compatibility_Flak_MediumFlat

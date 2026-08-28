@@ -29,6 +29,7 @@ ROOTS = {
     "wc2mageBlizzard_Projectile",
     "APTusk", "MammothTusk2", "MissileSoldierWeapon", "Naxis_Komet",
     "Spore_AA", "wc2_tower_arrow",
+    "HindMissilesNuclear", "NaxiMeteor", "RA2TOPOLCuba",
 }
 
 ALLOWED_COMPARATOR_FINDINGS = {
@@ -48,11 +49,11 @@ class Under100PhysicalProfileTests(unittest.TestCase):
     def setUpClass(cls):
         cls.rules = Ruleset(ROOT)
 
-    def test_selected_roots_are_retired_and_checkpoint_count_is_exact(self):
+    def test_selected_roots_are_retired_and_checkpoint_count_does_not_regress(self):
         remaining = classifier.classify(self.rules)
         names = {row["weapon"] for row in remaining}
         self.assertFalse(names & ROOTS, names & ROOTS)
-        self.assertLessEqual(len(remaining), 180)
+        self.assertLessEqual(len(remaining), 152)
 
     def test_flat_compatibility_helpers_cannot_add_percentage_damage(self):
         helpers = [name for name in self.rules.weapons if name.startswith("^Compatibility_")]

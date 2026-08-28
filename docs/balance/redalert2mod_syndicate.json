@@ -8294,11 +8294,11 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "damage": "120000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
+        "tag": "Nuclear_Super",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
@@ -8308,25 +8308,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "10",
@@ -8336,20 +8322,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "300",
@@ -8357,32 +8329,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "10",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "10",
@@ -8393,13 +8344,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.5,
       "minrange": "6400",
       "pricing": true,
       "range": "32000",
       "reloaddelay": "500",
       "slot": "Armament@Launch",
       "versus_templates": [
+       "^Warhead_Nuclear_Super",
        "^NuclearWarhead",
        "^HeavyBomb",
        "^MediumFlameWeapon",
@@ -8407,9 +8359,11 @@
        "^LightChemicalWeapon",
        "^Grenade"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Nuclear_Super"
+      ],
       "weapon": "RA2TOPOLCuba",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

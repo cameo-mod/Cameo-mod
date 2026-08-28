@@ -1141,6 +1141,7 @@ HindMissilesThermobaric:
 		ImpactActors: false
 
 HindMissilesNuclear:
+	Inherits@collapsewh: ^Warhead_Nuclear_Super
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^NuclearWarhead
@@ -1199,6 +1200,15 @@ HindMissilesNuclear:
 		Explosions: nuke_small
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@NuclearWarhead:
+	-Warhead@TankDestroyerCannon:
+	Warhead@Nuclear_Super:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
+	-Warhead@Nuclear_Super_Percentage:
 
 KamovMissilesTesla:
 	Inherits: ^Grenade

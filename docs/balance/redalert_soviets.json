@@ -645,11 +645,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_Super",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -659,13 +659,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -673,25 +666,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -702,30 +681,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesNuke",
       "versus_templates": [
+       "^Warhead_Nuclear_Super",
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
        "^NuclearWarhead",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Nuclear_Super"
+      ],
       "weapon": "HindMissilesNuclear",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_Super",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -735,13 +717,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -749,25 +724,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -778,30 +739,33 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesNukeRocketPod1",
       "versus_templates": [
+       "^Warhead_Nuclear_Super",
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
        "^NuclearWarhead",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Nuclear_Super"
+      ],
       "weapon": "HindMissilesNuclear",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_Super",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -811,13 +775,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -825,25 +782,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -854,21 +797,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesNukeRocketPod2",
       "versus_templates": [
+       "^Warhead_Nuclear_Super",
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
        "^NuclearWarhead",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Nuclear_Super"
+      ],
       "weapon": "HindMissilesNuclear",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

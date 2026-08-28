@@ -2807,26 +2807,26 @@
    "latinsyndicate_topolm": {
     "armaments": [
      {
-      "avg_versus": 0.7101,
+      "avg_versus": 0.7729,
       "damage_total": 120000.0,
       "dps_floor": 110.56,
       "eff_reload": 500.0,
-      "effective_damage": 733712.16,
-      "effective_dps": 845.06,
-      "effective_per_shot": 422531.91,
+      "effective_damage": 557663.89,
+      "effective_dps": 694.24,
+      "effective_per_shot": 347121.18,
       "factor_deadzone": 0.96,
       "factor_range": 1.5,
       "factor_targets": 0.95,
-      "footprint": 122.7424,
-      "k": 2.5739,
-      "k_context": 3.5211,
-      "k_flat": 2.2372,
-      "k_flat_context": 3.0604,
+      "footprint": 14.5888,
+      "k": 2.1145,
+      "k_context": 2.8927,
+      "k_flat": 1.7778,
+      "k_flat_context": 2.432,
       "model_limitations": [
        "unmodeled_projectile_trajectory:NukeLaunch"
       ],
       "model_status": "provisional",
-      "overkill": 0.6475,
+      "overkill": 0.7882,
       "pct_absolute": 40410.26,
       "pct_absolute_context": 55281.23,
       "reliability": 1.0,
@@ -2835,9 +2835,6 @@
       "weapon": "RA2TOPOLCuba"
      }
     ],
-    "physical_state_multiplier": 1.1234,
-    "physical_state_weapon": "RA2TOPOLCuba",
-    "physical_state_weight": 0.4934,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
     "shield_pool": 100000.0,

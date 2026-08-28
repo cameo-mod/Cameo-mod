@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-28
-Total concrete weapons on old families: 155
+Total concrete weapons on old families: 152
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 1
-Mixed old-family (Phase B maintainer sign-off): 154 in 129 groups
+Mixed old-family (Phase B maintainer sign-off): 151 in 126 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, Bullet_Medium=2000, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
@@ -76,9 +76,6 @@ Mixed old-family (Phase B maintainer sign-off): 154 in 129 groups
 ### Grenade, HeavyBomb, HeavyMissile, LightFlameWeapon, MediumChemicalWeapon, ShrapnelWeapon (1 weapons)
 - `BehemothShoot` (ContentPacks\StarCraft\Zerg\yaml\weapons.yaml) | dominant: LightFlameWeapon(2000) | LightFlameWeapon=2000, LightFlameWeaponPercentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, HeavyMissile=2000, HeavyMissilePercentage=1, Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, HeavyBomb=2000, HeavyBombPercentage=1, Effect=0, Effect2=0, EffectAir=0 | → collapse to LightFlameWeapon
 
-### Grenade, HeavyBomb, LightChemicalWeapon, MediumFlameWeapon, NuclearWarhead, ShrapnelWeapon (1 weapons)
-- `RA2TOPOLCuba` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | dominant: NuclearWarhead(20000) | NuclearWarhead=20000, NuclearWarheadPercentage=10, HeavyBomb=20000, HeavyBombPercentage=10, MediumFlameWeapon=20000, MediumFlameWeaponPercentage=10, ShrapnelWeapon=20000, ShrapnelWeaponFriendlyFire=10000, ShrapnelWeaponPercentage=10, LightChemicalWeapon=20000, LightChemicalWeaponPercentage=10, Grenade=20000, GrenadeFriendlyFire=10000, GrenadePercentage=10, Effect=0, GroundFireArea=0, Radiation=0 | → collapse to NuclearWarhead
-
 ### Grenade, HeavyBomb, MediumCannon, MediumChemicalWeapon, MediumFlameWeapon, ShrapnelWeapon (1 weapons)
 - `ArtilleryShellUpgrade` (ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml) | dominant: Grenade(6000) | Grenade=6000, GrenadeFriendlyFire=3000, GrenadePercentage=3, ShrapnelWeapon=6000, ShrapnelWeaponFriendlyFire=3000, ShrapnelWeaponPercentage=3, MediumChemicalWeapon=6000, MediumChemicalWeaponPercentage=3, MediumFlameWeapon=6000, MediumFlameWeaponPercentage=3, MediumCannon=6000, MediumCannonPercentage=3, HeavyBomb=6000, HeavyBombPercentage=3 | → collapse to Grenade
 
@@ -109,9 +106,6 @@ Mixed old-family (Phase B maintainer sign-off): 154 in 129 groups
 
 ### Grenade, HeavyBomb, MediumChemicalWeapon, MediumFlameWeapon, ShrapnelWeapon (1 weapons)
 - `eye_bomberguy` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: Grenade(20000) | Grenade=20000, GrenadeFriendlyFire=10000, GrenadePercentage=10, MediumChemicalWeapon=20000, MediumChemicalWeaponPercentage=10, MediumFlameWeapon=20000, MediumFlameWeaponPercentage=10, ShrapnelWeapon=20000, ShrapnelWeaponFriendlyFire=10000, ShrapnelWeaponPercentage=10, HeavyBomb=20000, HeavyBombPercentage=10, Effect=0, Concrete=1875 | → collapse to Grenade
-
-### Grenade, HeavyBomb, MediumFlameWeapon, NuclearWarhead, ShrapnelWeapon (1 weapons)
-- `NaxiMeteor` (weapons\redalert2mod.yaml) | dominant: Grenade(20000) | Grenade=20000, GrenadeFriendlyFire=10000, GrenadePercentage=5, MediumFlameWeapon=20000, MediumFlameWeaponPercentage=5, ShrapnelWeapon=20000, ShrapnelWeaponFriendlyFire=10000, ShrapnelWeaponPercentage=5, HeavyBomb=20000, HeavyBombPercentage=5, NuclearWarhead=20000, NuclearWarheadPercentage=5, Effect=0, MeteorFlameFragment=0 | → collapse to Grenade
 
 ### Grenade, MediumFlameWeapon, MediumMissile, ShrapnelWeapon, TeslaWeapon (1 weapons)
 - `KamovMissilesTesla` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: EMPUnit(5000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, TeslaWeapon=2000, TeslaExtraDamage=1000, TeslaWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, EMPUnit=5000, TeslaArc=0 | → collapse to EMPUnit
@@ -219,9 +213,6 @@ Mixed old-family (Phase B maintainer sign-off): 154 in 129 groups
 
 ### LaserWeapon, MagicWeapon, RailgunWeapon, TeslaChargedWeapon (1 weapons)
 - `bfg10kCannon` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: TeslaChargedWeapon(250000) | TeslaChargedWeapon=250000, TeslaChargedExtraDamage=125000, TeslaChargedWeaponPercentage=125, MagicWeapon=250000, MagicWeaponPercentage=125, LaserWeapon=250000, LaserWeaponPercentage=125, RailgunWeapon=250000, RailgunWeaponPercentage=125, Effect=0 | → collapse to TeslaChargedWeapon
-
-### MediumFlameWeapon, MediumMissile, NuclearWarhead, TankDestroyerCannon (1 weapons)
-- `HindMissilesNuclear` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: TankDestroyerCannon(2000) | TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, NuclearWarhead=2000, NuclearWarheadPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, Effect=0 | → collapse to TankDestroyerCannon
 
 ### FlakWeapon, LaserWeapon, LightFlameWeapon (2 weapons)
 - `MedicFlare` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: LightFlameWeapon(2000) | LightFlameWeapon=2000, LightFlameWeaponPercentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1, Condition=0 | → collapse to LightFlameWeapon
