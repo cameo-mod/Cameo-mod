@@ -2411,6 +2411,7 @@ AAGunBoatCannon_elite:
 
 AAGunBoatFlak:
 	Inherits: RA2FlakTrackGun
+	Inherits@groundflat: ^Compatibility_Flak_MediumFlat
 	Range: 9000
 	Burst: 2
 	BurstDelays: 3
@@ -2420,8 +2421,14 @@ AAGunBoatFlak:
 		ValidTargets: Ground, Water, Air
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		PercentageScale: 10000
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 0
 
 AAGunBoatFlak_elite:
 	Inherits: AAGunBoatFlak

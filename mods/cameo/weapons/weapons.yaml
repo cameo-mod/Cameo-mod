@@ -12683,12 +12683,6 @@ TSPulseCannon_EMP:
 		ExplosionPalette: tseffect
 		ImpactSounds: ptesto00.aud
 		ImpactActors: false
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
-		Damage: 10000
-		Spread: 2500
-		InvalidTargets: Infantry
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
@@ -12705,7 +12699,7 @@ TSPulseCannon_EMP:
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 10000
+		Damage: 20000
 		Spread: 2500
 		InvalidTargets: Infantry
 	Warhead@TeslaChargedExtraDamage: SpreadDamage

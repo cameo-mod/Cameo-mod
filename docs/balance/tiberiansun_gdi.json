@@ -1550,13 +1550,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "2500",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5000",
         "falloff": "100, 75, 50, 25",
         "spread": "5000",
@@ -1571,7 +1564,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 75, 50, 25",
         "spread": "2500",
         "tag": "TeslaChargedWeapon",
