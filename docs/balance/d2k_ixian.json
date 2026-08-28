@@ -95,7 +95,7 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_HeavyFlatCompatibility",
@@ -135,13 +135,6 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",

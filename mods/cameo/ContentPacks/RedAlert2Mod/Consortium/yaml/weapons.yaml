@@ -521,6 +521,7 @@ SteelMakoGun_EMP_elite:
 	BurstDelays: 3
 
 SteelMantaAG:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^SteelLightMissile
 	Inherits@2: ^SteelSmallArms
 	Inherits@3: ^RA2FlakWeapon
@@ -550,7 +551,16 @@ SteelMantaAG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Light:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 SteelManta_AA:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: SteelMantaAG
 	Report: steel_chaingunfire.wav
 	Range: 9999
@@ -559,6 +569,11 @@ SteelManta_AA:
 		Explosions: steel_bluepiffs
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
+	-Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 
 SteelMantaAGResonance:
 	Inherits: SteelMantaAG

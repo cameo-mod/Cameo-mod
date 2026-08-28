@@ -974,8 +974,10 @@ RA2MirageGun:
 	-Warhead@RailgunWeapon:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 17000
-		PercentageScale: 0
+		Damage: 25000
+		PercentageScale: 3196
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	-Warhead@CannonAP_Light:
 RA2HoverMissile:
 	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile

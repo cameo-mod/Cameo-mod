@@ -103,8 +103,8 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
             self.assertGreater(len(main_warheads(self.rules.resolve_weapon(weapon))), 1, weapon)
 
     def test_ratchets_match_the_live_reduction(self):
-        self.assertEqual(829, SPLIT_BASELINE)
-        self.assertEqual(440, BROADCAST_BASELINE)
+        self.assertEqual(810, SPLIT_BASELINE)
+        self.assertEqual(432, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":

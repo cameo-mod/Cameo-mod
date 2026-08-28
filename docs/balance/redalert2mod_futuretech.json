@@ -6745,7 +6745,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "17000",
+        "damage": "25000",
         "falloff": "100, 0",
         "spread": "80",
         "tag": "CannonAP_LightFlatCompatibility",
@@ -6764,13 +6764,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",

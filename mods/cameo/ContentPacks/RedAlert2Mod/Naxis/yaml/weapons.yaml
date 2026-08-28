@@ -763,8 +763,9 @@ NaxMausCannon:
 	-Warhead@TankDestroyerCannon:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 50000
-		PercentageScale: 0
+		Damage: 60000
+		PercentageScale: 1665
+	-Warhead@CannonHE_Medium:
 NaxMausCannon_elite:
 	Inherits: NaxMausCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -818,8 +819,9 @@ NaxRatteCannon:
 	-Warhead@LightChemicalWeapon:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 100000
-		PercentageScale: 0
+		Damage: 150000
+		PercentageScale: 3333
+	-Warhead@CannonHE_Medium:
 NaxRatteCannon_elite:
 	Inherits: NaxRatteCannon
 	Inherits@Elite: ^RA2EliteEffects

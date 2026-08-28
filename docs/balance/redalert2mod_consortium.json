@@ -517,31 +517,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -552,6 +531,7 @@
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelLightMissile",
        "^SteelSmallArms",
        "^RA2FlakWeapon",
@@ -9670,31 +9650,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9705,6 +9664,7 @@
       "reloaddelay": "20",
       "slot": "Armament@AG1",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelLightMissile",
        "^SteelSmallArms",
        "^RA2FlakWeapon",
@@ -9722,31 +9682,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9757,6 +9696,7 @@
       "reloaddelay": "20",
       "slot": "Armament@AG2",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelLightMissile",
        "^SteelSmallArms",
        "^RA2FlakWeapon",
@@ -9774,31 +9714,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9809,6 +9728,7 @@
       "reloaddelay": "20",
       "slot": "Armament@AA1",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "SteelMantaAG"
       ],
       "warheads": [
@@ -9823,31 +9743,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9858,6 +9757,7 @@
       "reloaddelay": "20",
       "slot": "Armament@AA2",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "SteelMantaAG"
       ],
       "warheads": [
@@ -9872,31 +9772,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9922,31 +9801,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9972,31 +9830,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10022,31 +9859,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],

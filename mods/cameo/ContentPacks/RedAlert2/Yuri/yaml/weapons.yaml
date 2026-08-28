@@ -534,9 +534,10 @@ RA2PsychicJab:
 	-Warhead@FlakWeapon:
 	Warhead@CannonHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		PercentageScale: 0
-
+		Damage: 8000
+		PercentageScale: 2488
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	-Warhead@CannonHE_Medium:
 RA2PsychicJab_elite:
 	Inherits: RA2PsychicJab
 	Range: 5440

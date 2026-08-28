@@ -1803,9 +1803,10 @@ ixian_airdrone:
 	-Warhead@HeavyBomb:
 	Warhead@MissileAP_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		PercentageScale: 0
-
+		Damage: 12000
+		PercentageScale: 1659
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	-Warhead@MissileAP_Heavy:
 d2k_kwny_fighter:
 	Inherits: PhoenixRocket
 	ReloadDelay: 75
