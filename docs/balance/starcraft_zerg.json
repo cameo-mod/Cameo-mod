@@ -1904,18 +1904,18 @@
      {
       "damage_warheads": [
        {
+        "damage": "19000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "6000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -1925,39 +1925,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -1975,6 +1947,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Compatibility_Melee_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2095,18 +2068,18 @@
      {
       "damage_warheads": [
        {
+        "damage": "19000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "6000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2116,39 +2089,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2166,6 +2111,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Compatibility_Melee_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2285,18 +2231,18 @@
      {
       "damage_warheads": [
        {
+        "damage": "19000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "6000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2306,39 +2252,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2356,6 +2274,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Compatibility_Melee_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2476,18 +2395,18 @@
      {
       "damage_warheads": [
        {
+        "damage": "19000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "6000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2497,39 +2416,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2547,6 +2438,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Compatibility_Melee_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",

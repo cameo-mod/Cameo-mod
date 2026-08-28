@@ -606,11 +606,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -618,13 +618,6 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -677,6 +670,7 @@
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^HeavyBomb",
        "^HeavyCannon",
        "TurretGun"
@@ -5943,10 +5937,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "damage": "24000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5957,25 +5951,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5985,13 +5965,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
@@ -5999,25 +5972,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6050,6 +6009,7 @@
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_CannonHE_HeavyFlat",
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
        "^HeavyBomb",

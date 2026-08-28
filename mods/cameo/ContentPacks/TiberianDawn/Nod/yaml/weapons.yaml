@@ -480,6 +480,7 @@ TurretGun:
 		PercentageScale: 0
 
 TurretGunBlackMarket:
+	Inherits@roleflat: ^Compatibility_Concussion_MediumFlat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyCannon
 	Inherits@3: TurretGun
@@ -492,6 +493,12 @@ TurretGunBlackMarket:
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 3
 	-Warhead@Effect:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyCannon:
+	Warhead@Concussion_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 12000
+		PercentageScale: 0
 
 Dragon:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
@@ -1332,6 +1339,7 @@ SpecterArtilleryShell:
 		ImpactSounds: kaboom15.aud
 
 SpecterArtilleryShellUpgrade:
+	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^HeavyBomb
@@ -1388,6 +1396,16 @@ SpecterArtilleryShellUpgrade:
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	-Warhead@Effect:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyCannon:
+	-Warhead@MediumCannon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 24000
+		PercentageScale: 0
 
 VenomLaser:
 	Inherits@wh: ^Warhead_Laser_Medium

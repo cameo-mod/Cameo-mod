@@ -158,6 +158,7 @@ RA2Narco60mm_elite:
 	BurstDelays: 3
 
 RA2FreedomAK47:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -194,6 +195,12 @@ RA2FreedomAK47:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 3
 		Spread: 30
+	-Warhead@Chaingun:
+	-Warhead@SniperWeapon:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air, Garrisoned
+		Damage: 12000
+		PercentageScale: 0
 
 RA2FreedomAK47_elite:
 	Inherits: RA2FreedomAK47
@@ -204,6 +211,7 @@ RA2FreedomAK47_elite:
 		Inaccuracy: 60
 
 RA2FreedomRocket:
+	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^FlakWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^RA2MediumMissile
@@ -233,6 +241,13 @@ RA2FreedomRocket:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 60000
+	-Warhead@FlakWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air, Garrisoned
+		Damage: 120000
+		PercentageScale: 0
 RA2FreedomRocket_elite:
 	Inherits: RA2FreedomRocket
 	Range: 8130
@@ -256,6 +271,13 @@ RA2FreedomRocket_elite:
 		Damage: 60
 	Warhead@MissileAP_Medium:
 		Damage: 120000
+	-Warhead@FlakWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air, Garrisoned
+		Damage: 240000
+		PercentageScale: 0
 SyndicateFireballLauncher_elite:
 	Inherits: SyndicateFireballLauncher
 	Range: 6666
@@ -557,6 +579,7 @@ LatinRusherRocket_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 32000
 LatinSmokerCannon:
+	Inherits@roleflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^HeavyBomb
@@ -597,6 +620,16 @@ LatinSmokerCannon:
 		Damage: 2000
 	Warhead@CannonHE_Medium:
 		Damage: 2000
+	-Warhead@HeavyBomb:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 9000
+		PercentageScale: 0
 LatinSmokerCannon_elite:
 	Inherits: LatinSmokerCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -745,6 +778,7 @@ DiabloCannonAAE_AA:
 	Projectile: Bullet
 
 RA2MortarBike:
+	Inherits@roleflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -824,6 +858,17 @@ RA2MortarBike:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		ImpactSounds: gexp14a.wav
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 0
 
 RA2MortarBike_elite:
 	Inherits: RA2MortarBike
@@ -1463,6 +1508,132 @@ Rammax_Sabot:
 		Damage: 10000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 5
+	-Warhead@Chaingun:
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@PreservedFlat_Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 2000
+		Versus:
+			Shield: 125
+			None: 100
+			Flak: 95
+			Plate: 90
+			Heroic: 85
+			Scout: 80
+			Fighter: 75
+			Wood: 70
+			Light: 65
+			Bomber: 60
+			Concrete: 55
+			Medium: 50
+			Helicopter: 45
+			Steel: 40
+			Heavy: 35
+			Spaceship: 30
+			Superheavy: 25
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+	Warhead@PreservedFlat_LaserExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 600
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@PreservedFlat_LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		Damage: 10000
+		Versus:
+			REFLECTOR: 50
+			Shield: 140
+			Superheavy: 100
+			Spaceship: 96
+			Steel: 92
+			Heroic: 88
+			Heavy: 84
+			Helicopter: 80
+			Concrete: 76
+			Plate: 72
+			Medium: 68
+			Bomber: 64
+			Wood: 60
+			Flak: 56
+			Light: 52
+			Fighter: 48
+			None: 44
+			Scout: 40
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@PreservedFlat_TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Falloff: 100, 75, 50, 25
+		Spread: 200
+		Damage: 1000
+		Versus:
+			REFLECTOR: 50
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			None: 125
+			Superheavy: 100
+			Heavy: 75
+			Medium: 50
+			Light: 25
+			Scout: 10
+			Steel: 10
+			Concrete: 10
+			Wood: 10
+			Spaceship: 10
+			Helicopter: 10
+			Bomber: 10
+			Fighter: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@PreservedFlat_TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 2000
+		Versus:
+			REFLECTOR: 50
+			Shield: 150
+			Heroic: 100
+			Plate: 96
+			Flak: 92
+			None: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 ScrapCarSpawner:
 	Projectile: InstantExplode

@@ -937,6 +937,7 @@ RA2sabot_elite:
 	Warhead@CannonAP_Light:
 		Damage: 160000
 RA2MirageGun:
+	Inherits@roleflat: ^Compatibility_CannonAP_LightFlat
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@wh: ^Warhead_CannonAP_Light
@@ -968,6 +969,13 @@ RA2MirageGun:
 	Warhead@CannonAP_Light:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	Warhead@CannonAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 17000
+		PercentageScale: 0
 RA2HoverMissile:
 	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
@@ -2261,6 +2269,7 @@ RA2SCUD:
 		ValidTargets: Ground, Air
 
 RA2SCUD_rad:
+	Inherits@roleflat: ^Compatibility_MissileChem_HeavyFlat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^HeavyChemicalWeapon
@@ -2313,6 +2322,13 @@ RA2SCUD_rad:
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 540
 		Level: 540
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@MissileChem_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 54000
+		PercentageScale: 0
 
 RA2SCUD_fire:
 	Inherits: RA2SCUD
@@ -2534,11 +2550,14 @@ RA2CRM60:
 		ValidTargets: Ground, Water
 		Damage: 2000
 RA2CRM60H:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^RA2Chaingun
-	Inherits@5: ^SniperWeapon
+	# Retained only for the independently rounded percentage application and
+	# the passenger damage effect. Its splash-damage main is removed below.
+	Inherits@legacy: ^SniperWeapon
 	ValidTargets: Ground, Water, Air
 	Report: iseaatta.wav, iseaattb.wav
 	ReloadDelay: 10
@@ -2567,6 +2586,13 @@ RA2CRM60H:
 	Warhead@SniperWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	-Warhead@SniperWeapon:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Damage: 2000
+		Falloff: 100, 0
+		PercentageScale: 0
 
 RA2FLAKAG:
 	Inherits: ^RA2FlakWeapon
@@ -2580,6 +2606,7 @@ RA2FLAKAG:
 	ValidTargets: Ground, Water
 
 RA2FlakTrackGun:
+	Inherits@roleflat: ^Compatibility_Flak_MediumFlat
 	Inherits: ^SmallArms
 	Inherits@2: ^Grenade
 	Inherits@3: ^Chaingun
@@ -2611,6 +2638,14 @@ RA2FlakTrackGun:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Chaingun:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@SmallArms:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 0
 RA2DoublePistols:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light

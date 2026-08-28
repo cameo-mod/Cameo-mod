@@ -149,6 +149,7 @@ wc2highArrowFire:
 		PercentageScale: 0
 
 SiegeEngineCannon:
+	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^LightMissile
 	Inherits@3: ^LightChemicalWeapon
@@ -308,6 +309,26 @@ SiegeEngineCannon:
 # 1-6 WC2 damage. 4 Base, 2 Pierce.
 
 	MinRange: 2240
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyCannon:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@LightFlameWeapon:
+	-Warhead@LightMissile:
+	-Warhead@MediumCannon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 140000
+		PercentageScale: 0
 wc2demolitionsquadMelee:
 	Inherits: wc2footmanslice
 

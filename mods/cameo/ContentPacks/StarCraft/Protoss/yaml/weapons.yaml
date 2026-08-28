@@ -12,6 +12,7 @@ ArbiterStasis:
 		Duration: 125
 
 PositronGrenade:
+	Inherits@roleflat: ^Compatibility_Quantum_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -64,6 +65,15 @@ PositronGrenade:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@SmallArms:
+	-Warhead@TankDestroyerCannon:
+	Warhead@Quantum_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 32000
+		PercentageScale: 0
 
 PositronBounce1:
 	Inherits: PositronGrenade
@@ -91,6 +101,13 @@ PositronBounce1:
 		Damage: 2
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PositronBounce2
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	Warhead@Quantum_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 24000
+		PercentageScale: 0
 
 PositronBounce2:
 	Inherits: PositronGrenade
@@ -117,6 +134,13 @@ PositronBounce2:
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	-Warhead@shrapnel:
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	Warhead@Quantum_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 20000
+		PercentageScale: 0
 
 InterceptorLauncher:
 	ReloadDelay: 100
@@ -172,6 +196,102 @@ PhotonCannon:
 		ImpactSounds: phohit00.wav
 		ValidTargets: Ground, Air
 		ImpactActors: false
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyCannon:
+	-Warhead@MediumCannon:
+	-Warhead@TankDestroyerCannon:
+	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 10000
+		Versus:
+			Shield: 125
+			Fighter: 100
+			Bomber: 95
+			Helicopter: 90
+			Spaceship: 85
+			None: 80
+			Flak: 75
+			Plate: 70
+			Heroic: 65
+			Scout: 60
+			Light: 55
+			Medium: 50
+			Heavy: 45
+			Superheavy: 40
+			Wood: 35
+			Concrete: 30
+			Steel: 25
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+	Warhead@PreservedFlat_HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 450
+		Damage: 10000
+		Versus:
+			Shield: 140
+			Scout: 100
+			Wood: 96
+			Light: 92
+			Concrete: 88
+			Medium: 84
+			Steel: 80
+			Heavy: 76
+			None: 72
+			Superheavy: 68
+			Flak: 64
+			Plate: 60
+			Heroic: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@PreservedFlat_MediumCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 10000
+		Versus:
+			Shield: 125
+			Scout: 100
+			Wood: 95
+			Light: 90
+			Concrete: 85
+			Medium: 80
+			Steel: 75
+			Heavy: 70
+			None: 65
+			Superheavy: 60
+			Flak: 55
+			Plate: 50
+			Heroic: 45
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+	Warhead@PreservedFlat_TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		Damage: 10000
+		Versus:
+			Shield: 110
+			Superheavy: 100
+			Heavy: 94
+			Medium: 88
+			Light: 82
+			Scout: 76
+			Steel: 70
+			Concrete: 64
+			Wood: 58
+			Plate: 52
+			Flak: 46
+			None: 40
+			Heroic: 34
+			Spaceship: 28
+			Helicopter: 22
+			Bomber: 16
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 DragoonCannon:
 	Inherits: PhotonCannon
@@ -183,6 +303,7 @@ DragoonCannon:
 		AllowSnapping: true
 
 GladiusCannon:
+	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^HeavyFlameWeapon
@@ -274,6 +395,108 @@ GladiusCannon:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 0
+	-Warhead@FlakWeapon:
+	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 10000
+		Versus:
+			Shield: 125
+			Fighter: 100
+			Bomber: 95
+			Helicopter: 90
+			Spaceship: 85
+			None: 80
+			Flak: 75
+			Plate: 70
+			Heroic: 65
+			Scout: 60
+			Light: 55
+			Medium: 50
+			Heavy: 45
+			Superheavy: 40
+			Wood: 35
+			Concrete: 30
+			Steel: 25
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+	Warhead@PreservedFlat_HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 450
+		Damage: 10000
+		Versus:
+			Shield: 140
+			Scout: 100
+			Wood: 96
+			Light: 92
+			Concrete: 88
+			Medium: 84
+			Steel: 80
+			Heavy: 76
+			None: 72
+			Superheavy: 68
+			Flak: 64
+			Plate: 60
+			Heroic: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@PreservedFlat_MediumCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 10000
+		Versus:
+			Shield: 125
+			Scout: 100
+			Wood: 95
+			Light: 90
+			Concrete: 85
+			Medium: 80
+			Steel: 75
+			Heavy: 70
+			None: 65
+			Superheavy: 60
+			Flak: 55
+			Plate: 50
+			Heroic: 45
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+	Warhead@PreservedFlat_TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		Damage: 10000
+		Versus:
+			Shield: 110
+			Superheavy: 100
+			Heavy: 94
+			Medium: 88
+			Light: 82
+			Scout: 76
+			Steel: 70
+			Concrete: 64
+			Wood: 58
+			Plate: 52
+			Flak: 46
+			None: 40
+			Heroic: 34
+			Spaceship: 28
+			Helicopter: 22
+			Bomber: 16
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ArbiterCannon:
 	Inherits: PhotonCannon
@@ -600,6 +823,7 @@ Corsair_EMP:
 		ImpactActors: false
 
 VoidRayBeam:
+	Inherits@roleflat: ^Compatibility_Prism_HeavyFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^Chaingun
@@ -692,8 +916,21 @@ VoidRayBeam:
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
 		Volume: 0.5
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Prism_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 13600
+		PercentageScale: 0
 
 StarshipSovereignBeam:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^Chaingun
@@ -800,6 +1037,20 @@ StarshipSovereignBeam:
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
 		Volume: 0.5
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 13600
+		PercentageScale: 0
+		-PhysicalStateName:
+		-PhysicalStateScale:
 
 ProbeAttack:
 	Inherits: ^WorkerAttack
