@@ -273,7 +273,8 @@ def positive_flat_keys(rs: Ruleset, family: str) -> set[str]:
 
 
 def add_compatibility_templates(changed: dict[pathlib.Path, list[str]], rs: Ruleset,
-                                destinations: set[str]) -> None:
+                                destinations: set[str],
+                                header: list[str] | None = None) -> None:
     path = ROOT / "mods/cameo/weapons/weapons.yaml"
     lines = changed.setdefault(path, path.read_text(encoding="utf-8-sig").splitlines(True))
     payload = []
@@ -299,7 +300,7 @@ def add_compatibility_templates(changed: dict[pathlib.Path, list[str]], rs: Rule
     if payload:
         if lines and lines[-1].strip():
             lines.append("\n")
-        lines.extend([
+        lines.extend(header or [
             "# Percentage-inert flat compatibility profiles for the final reviewed\n",
             "# retired-family consolidation. Percentage applications stay on their\n",
             "# legacy nodes to preserve shipped per-node rounding and overflow.\n",

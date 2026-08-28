@@ -18637,9 +18637,9 @@ generic_bullet_casing:
 			Helicopter: 2
 			Spaceship: 1
 
-# Percentage-inert flat compatibility profiles for the final reviewed
-# retired-family consolidation. Percentage applications stay on their
-# legacy nodes to preserve shipped per-node rounding and overflow.
+# Compatibility profiles for reviewed same-family consolidation.
+# Concrete weapons combine folded percentage units; the converter bounds
+# active-health rounding drift and rejects runtime overflow.
 
 ^Compatibility_Chemical_HeavyFlat:
 	Warhead@Chemical_HeavyFlatCompatibility: AreaDamage

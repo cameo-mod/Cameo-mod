@@ -181,7 +181,13 @@ def main() -> int:
     rs = Ruleset(ROOT)
     closures = validate(rs)
     changed: dict[pathlib.Path, list[str]] = {}
-    add_compatibility_templates(changed, rs, {spec[1] for spec in SPECS.values()})
+    add_compatibility_templates(
+        changed, rs, {spec[1] for spec in SPECS.values()},
+        header=[
+            "# Compatibility profiles for reviewed same-family consolidation.\n",
+            "# Concrete weapons combine folded percentage units; the converter bounds\n",
+            "# active-health rounding drift and rejects runtime overflow.\n",
+        ])
     total_definitions = 0
 
     for root, (old_keys, destination, _) in SPECS.items():
