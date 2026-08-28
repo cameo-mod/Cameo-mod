@@ -1016,6 +1016,7 @@ BTRMachineGun_AA:
 		Damage: 4000
 		PercentageScale: 9975
 BTRTeslaMachineGun:
+	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
 	Inherits@3: ^Projectile_Lightning_Heavy
@@ -1041,6 +1042,12 @@ BTRTeslaMachineGun:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
+	-Warhead@MissileAP_Light:
+	-Warhead@Tesla_Heavy:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 BTRTeslaMachineGunArc:
 	Inherits: BTRTeslaMachineGun
@@ -1050,16 +1057,28 @@ BTRTeslaMachineGunArc:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 BTRTeslaMachineGunArcFragment1:
 	Inherits: BTRTeslaMachineGunArc
 	Range: 2727
 	-Warhead@TeslaArc:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 BTRTeslaMachineGun_AA:
 	Inherits: BTRTeslaMachineGun
 	Range: 8181
 	ValidTargets: Air
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 BTRTeslaMachineGunArc_AA:
 	Inherits: BTRTeslaMachineGun_AA
@@ -1069,11 +1088,19 @@ BTRTeslaMachineGunArc_AA:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 BTRTeslaMachineGunArcFragment1AA:
 	Inherits: BTRTeslaMachineGunArc_AA
 	Range: 4090
 	-Warhead@TeslaArc:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 ChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium

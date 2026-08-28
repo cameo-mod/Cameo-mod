@@ -954,6 +954,7 @@ d2kChainGun_upgrade:
 	Warhead@Laser_Heavy:
 		Damage: 4000
 HMGstealth:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -970,6 +971,12 @@ HMGstealth:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 ordos_autogunturret:
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_Bullet_Medium
@@ -1298,6 +1305,10 @@ HMGstealth_upgrade:
 		Color: 00ffbb
 	Warhead@Laser_Heavy:
 		Damage: 2000
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 d2kCarryallChainGun_upgrade:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -1347,3 +1358,9 @@ light_inf_lmg_ordos_upgrade:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975

@@ -8514,17 +8514,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -8543,6 +8536,7 @@
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade1",
       "versus_templates": [
+       "^Compatibility_Tesla_HeavyFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -8560,17 +8554,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -8603,17 +8590,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -8646,17 +8626,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {

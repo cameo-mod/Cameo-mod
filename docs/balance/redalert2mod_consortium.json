@@ -7675,17 +7675,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7696,6 +7689,7 @@
       "reloaddelay": "8",
       "slot": "Armament@AG1",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^RA2FlakWeapon",
        "^SteelChaingun"
       ],
@@ -7710,17 +7704,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7731,6 +7718,7 @@
       "reloaddelay": "8",
       "slot": "Armament@AG2",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^RA2FlakWeapon",
        "^SteelChaingun"
       ],
@@ -7745,24 +7733,17 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7773,6 +7754,7 @@
       "reloaddelay": "12",
       "slot": "Armament@AA1",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^SteelMediumMissile",
        "SteelMantaHunterCannons"
       ],
@@ -7788,24 +7770,17 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7816,6 +7791,7 @@
       "reloaddelay": "12",
       "slot": "Armament@AA2",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^SteelMediumMissile",
        "SteelMantaHunterCannons"
       ],
@@ -7831,17 +7807,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7866,17 +7835,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7901,24 +7863,17 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7944,24 +7899,17 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
         "type": "AreaDamage"
        }
       ],

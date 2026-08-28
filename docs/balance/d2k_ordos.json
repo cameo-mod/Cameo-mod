@@ -2774,17 +2774,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_Light",
+        "tag": "Bullet_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2796,6 +2789,7 @@
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_LightFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2825,17 +2819,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_Light",
+        "tag": "Bullet_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2864,17 +2851,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_Light",
+        "tag": "Bullet_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2886,6 +2866,7 @@
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Bullet_LightFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
@@ -2916,17 +2897,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_Light",
+        "tag": "Bullet_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5966,17 +5940,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5988,6 +5955,7 @@
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@damage",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -6019,17 +5987,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
