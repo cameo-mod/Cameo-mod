@@ -88,14 +88,25 @@ class Under100PhysicalProfileTests(unittest.TestCase):
                     self.assertEqual("0", scale.value, f"{name}/{node.key}")
 
     def test_naxis_interceptor_is_air_first_without_anti_infantry_gun_bias(self):
-        rockets = self.rules.resolve_weapon("NaxPlaneRockets_elite")
+        shared_rockets = self.rules.resolve_weapon("NaxPlaneRockets_elite")
+        self.assertEqual("Ground, Water, Air", child(shared_rockets,
+                                                      "ValidTargets").value)
+        rockets = self.rules.resolve_weapon("NaxInterceptorRockets")
         self.assertEqual("Air", child(rockets, "ValidTargets").value)
         for key in ("MissileAP_Medium", "MissileAP_Heavy"):
             self.assertEqual("Air", child(child(rockets, f"Warhead@{key}"),
                                           "ValidTargets").value)
 
-        gun = child(self.rules.resolve_weapon("NaxiInterceptorGun"),
+        resolved_gun = self.rules.resolve_weapon("NaxiInterceptorGun")
+        gun = child(resolved_gun,
                     "Warhead@Bullet_MediumFlatCompatibility")
+        self.assertEqual("1", child(gun, "Spread").value)
+        self.assertIsNone(child(resolved_gun, "Warhead@CannonHE_Heavy"))
+        percentage = [node for node in resolved_gun.children
+                      if node.value == "AreaDamagePercentage"]
+        self.assertEqual(4, len(percentage))
+        for node in percentage:
+            self.assertEqual("1", child(node, "Spread").value, node.key)
         versus = child(gun, "Versus")
         for armor in ("None", "Flak", "Plate", "Heroic"):
             self.assertEqual("100", child(versus, armor).value, armor)
@@ -107,6 +118,20 @@ class Under100PhysicalProfileTests(unittest.TestCase):
             "MarauderMissiles": "MissileAP_MediumFlatCompatibility",
             "RA2RBurritoRocket": "CannonHE_HeavyFlatCompatibility",
             "TSStankTibTusk": "MissileAP_MediumFlatCompatibility",
+        }
+        for weapon_name, warhead_name in expected.items():
+            weapon = self.rules.resolve_weapon(weapon_name)
+            self.assertIsNotNone(child(weapon, f"Warhead@{warhead_name}"),
+                                 weapon_name)
+
+    def test_named_energy_and_biological_weapons_keep_their_roles(self):
+        expected = {
+            "AsianHarbingerPlasma": "Plasma_Medium",
+            "FutureMechPlasma": "Plasma_Heavy",
+            "IxRailgunDroneBullet": "Railgun_Heavy",
+            "Laboratory_Bioball": "Chemical_Medium",
+            "PhobosLaser": "Laser_Heavy",
+            "SteelFighterRailgun": "Laser_Heavy",
         }
         for weapon_name, warhead_name in expected.items():
             weapon = self.rules.resolve_weapon(weapon_name)

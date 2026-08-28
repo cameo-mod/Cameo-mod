@@ -619,7 +619,7 @@ d2k_grenade:
 		Damage: 1875
 
 Laboratory_Bioball:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	Inherits: d2k_grenade
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^MediumChemicalWeapon
@@ -705,7 +705,7 @@ Laboratory_Bioball:
 
 	-Warhead@MediumFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		PercentageScale: 0

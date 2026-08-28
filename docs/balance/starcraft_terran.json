@@ -537,9 +537,9 @@
       "damage_warheads": [
        {
         "damage": "42000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -620,7 +620,7 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_Laser_Heavy",
        "^Compatibility_Laser_ExtraDamage",
        "^Compatibility_Railgun_ExtraDamage",
        "^Warhead_CannonHE_Heavy",
@@ -635,6 +635,7 @@
        "^LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "PhobosLaser",

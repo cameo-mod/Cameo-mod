@@ -6551,9 +6551,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -6587,12 +6587,13 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_Plasma_Heavy",
        "^Grenade",
        "^MediumChemicalWeapon",
        "^SteelHeavyCannon"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "FutureMechPlasma",
@@ -6604,9 +6605,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -6643,6 +6644,7 @@
        "FutureMechPlasma"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "FutureMechPlasma_elite",

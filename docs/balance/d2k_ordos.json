@@ -407,9 +407,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
         "type": "AreaDamage"
        },
        {
@@ -456,12 +456,13 @@
       "reloaddelay": "42",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_Chemical_Medium",
        "d2k_grenade",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -5170,9 +5171,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
         "type": "AreaDamage"
        },
        {
@@ -5219,12 +5220,13 @@
       "reloaddelay": "42",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_Chemical_Medium",
        "d2k_grenade",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"

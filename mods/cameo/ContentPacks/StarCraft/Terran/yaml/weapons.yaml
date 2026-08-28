@@ -1457,7 +1457,7 @@ BCYamatoCannon:
 		ImpactActors: false
 
 PhobosLaser:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
 	Inherits@collapseextra2: ^Compatibility_Railgun_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1555,7 +1555,8 @@ PhobosLaser:
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	-Warhead@Laser_Heavy_ExtraDamage:
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 42000
 		PercentageScale: 0

@@ -12,9 +12,9 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -74,7 +74,7 @@
       "reloaddelay": "80",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Warhead_Laser_Heavy",
        "^Compatibility_Laser_ExtraDamage",
        "^LaserWeapon",
        "^RA2RailgunWeapon",
@@ -83,6 +83,7 @@
        "^SteelLightMissile"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileAP_Light"

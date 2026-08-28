@@ -1025,7 +1025,6 @@ NaxPlaneRockets_elite:
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	Inherits@2: ^D2KRocket
-	ValidTargets: Air
 	ReloadDelay: 100
 	Burst: 2
 	BurstDelays: 9
@@ -1043,11 +1042,18 @@ NaxPlaneRockets_elite:
 		TrailInterval: 1
 		TrailDelay: 1
 	Warhead@MissileAP_Medium:
-		ValidTargets: Air
 		Damage: 10000
 	Warhead@MissileAP_Heavy: AreaDamage
-		ValidTargets: Air
 		Damage: 10000
+
+NaxInterceptorRockets:
+	Inherits: NaxPlaneRockets_elite
+	ValidTargets: Air
+	Warhead@MissileAP_Medium:
+		ValidTargets: Air
+	Warhead@MissileAP_Heavy:
+		ValidTargets: Air
+
 NaxiInterceptorGun:
 	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1077,21 +1083,54 @@ NaxiInterceptorGun:
 		Damage: 6000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 3
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Chaingun: SpreadDamage
 		Damage: 6000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 3
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@SmallArms: SpreadDamage
 		Damage: 6000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 3
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@InterceptorCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 1
+		Falloff: 100, 0
+		Damage: 3
+		Versus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			None: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		UpdatesUnitStatistics: false
 
 	-Warhead@FlakWeapon:
 	-Warhead@Chaingun:
 	-Warhead@SmallArms:
+	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 18000
+		Spread: 1
+		Falloff: 100, 0
+		Damage: 24000
 		PercentageScale: 0
 		Versus:
 			None: 100

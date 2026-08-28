@@ -1097,7 +1097,7 @@ FutureMechGatling:
 		Damage: 6000
 		PercentageScale: 0
 FutureMechPlasma:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^SteelHeavyCannon
@@ -1147,7 +1147,7 @@ FutureMechPlasma:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@Plasma_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 0

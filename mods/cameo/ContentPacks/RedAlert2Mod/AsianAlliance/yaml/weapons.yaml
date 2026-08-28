@@ -1150,7 +1150,7 @@ AsianTurretPlasma:
 		Amount: 8
 
 AsianHarbingerPlasma:
-	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@collapsewh: ^Warhead_Plasma_Medium
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -1279,7 +1279,7 @@ AsianHarbingerPlasma:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@HeavyBomb:
-	Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@Plasma_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0

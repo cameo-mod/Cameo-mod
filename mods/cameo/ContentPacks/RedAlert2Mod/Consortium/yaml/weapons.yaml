@@ -897,7 +897,7 @@ SteelScalpelRailgun_EMP_AA:
 		ImpactSounds: makoexplose.wav
 
 SteelFighterRailgun:
-	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
 	Inherits: ^LaserWeapon
 	Inherits@2: ^RA2RailgunWeapon
@@ -946,7 +946,8 @@ SteelFighterRailgun:
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	-Warhead@TankDestroyerCannon:
-	Warhead@CannonHE_MediumFlatCompatibility:
+	-Warhead@Laser_Heavy_ExtraDamage:
+	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 0

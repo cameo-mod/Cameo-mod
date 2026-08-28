@@ -720,9 +720,9 @@
       "damage_warheads": [
        {
         "damage": "18000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -762,13 +762,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6034",
       "reloaddelay": "24",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Warhead_Railgun_Heavy",
        "^Compatibility_Railgun_ExtraDamage",
        "^FlakWeapon",
        "^TankDestroyerCannon",
@@ -776,6 +776,7 @@
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "IxRailgunDroneBullet",

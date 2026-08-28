@@ -13,9 +13,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "287",
+        "tag": "Plasma_Medium",
         "type": "AreaDamage"
        },
        {
@@ -76,13 +76,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Warhead_Plasma_Medium",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -96,11 +96,12 @@
        "^Effect_Apoc_Explosion_RA2"
       ],
       "warheads": [
+       "^Warhead_Plasma_Medium",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "AsianHarbingerPlasma",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
