@@ -98,7 +98,7 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
             self.assertTrue(own.isdisjoint(inherited), weapon)
 
     def test_structural_backlog_ratchet_was_lowered(self):
-        self.assertEqual(736, SPLIT_BASELINE)
+        self.assertEqual(717, SPLIT_BASELINE)
 
     def test_rejected_runtime_and_role_hazards_remain_unconverted(self):
         rules = Ruleset(ROOT)
@@ -111,7 +111,7 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
             "BCYamatoCannon", "HMGo_upgrade", "LightTank2Missiles",
             "latinsyndicate_latinmilitia_molotov",
             # Semantic name/delivery traps from the independent review.
-            "RA2MortarBike", "RA2ThunderboltMissile_AA", "SteelAirTurret_elite",
+            "RA2MortarBike", "SteelAirTurret_elite",
         }
         for weapon in deferred:
             self.assertGreater(len(main_warheads(rules.resolve_weapon(weapon))), 1, weapon)

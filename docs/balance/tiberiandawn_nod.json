@@ -4485,24 +4485,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "400",
-        "tag": "Flame_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "300",
-        "tag": "Flame_Medium",
+        "tag": "Flame_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4514,6 +4500,7 @@
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Flame_MediumFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Flame_Heavy",
        "^Warhead_Flame_Medium",

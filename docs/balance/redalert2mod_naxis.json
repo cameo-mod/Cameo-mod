@@ -7272,24 +7272,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "300",
-        "tag": "Flame_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_Heavy",
+        "tag": "Flame_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7300,6 +7286,7 @@
       "reloaddelay": "44",
       "slot": "Armament@Flam",
       "versus_templates": [
+       "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy",
@@ -9191,24 +9178,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "300",
-        "tag": "Flame_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_Heavy",
+        "tag": "Flame_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9219,6 +9192,7 @@
       "reloaddelay": "44",
       "slot": "Armament@Flam",
       "versus_templates": [
+       "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy",

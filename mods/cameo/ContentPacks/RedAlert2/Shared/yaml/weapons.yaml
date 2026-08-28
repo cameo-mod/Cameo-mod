@@ -1021,6 +1021,7 @@ RA2HoverMissile_AA_elite:
 	Range: 9640
 
 RA2ThunderboltMissile:
+	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1041,6 +1042,12 @@ RA2ThunderboltMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
+	-Warhead@MissileHE_Heavy:
+	-Warhead@MissileHE_Light:
+	Warhead@MissileHE_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2ThunderboltMissile_elite:
 	Inherits: RA2ThunderboltMissile
@@ -1110,6 +1117,7 @@ RA2MultiHoverMissile_AA_elite:
 	Range: 10255
 
 RA2MultiThunderboltMissile:
+	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1130,6 +1138,12 @@ RA2MultiThunderboltMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
+	-Warhead@MissileHE_Heavy:
+	-Warhead@MissileHE_Light:
+	Warhead@MissileHE_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2MultiThunderboltMissile_elite:
 	Inherits: RA2MultiThunderboltMissile

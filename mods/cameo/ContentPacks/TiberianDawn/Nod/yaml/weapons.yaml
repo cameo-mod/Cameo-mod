@@ -1010,6 +1010,7 @@ LaserBuggy2_AABurning:
 	Warhead@Inferno_Light:
 		ValidTargets: Air
 FireballLauncherBuggy2:
+	Inherits@roleflat: ^Compatibility_Flame_MediumFlat
 	Inherits: ^Warhead_Flame_Light
 	Inherits@2: ^Warhead_Flame_Heavy
 	Inherits@3: ^Warhead_Flame_Medium
@@ -1030,6 +1031,13 @@ FireballLauncherBuggy2:
 		Damage: 2000
 	Warhead@Flame_Medium:
 		Damage: 2000
+	-Warhead@Flame_Heavy:
+	-Warhead@Flame_Light:
+	-Warhead@Flame_Medium:
+	Warhead@Flame_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 9984
 LightTank2Cannon:
 	Inherits@collapsewh: ^Warhead_CannonHE_Medium
 	Inherits: ^LightChemicalWeapon

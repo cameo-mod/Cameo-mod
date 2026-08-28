@@ -221,8 +221,9 @@ TSStankTibTusk:
 	-Warhead@MediumCannonFriendlyFire:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 25000
-		PercentageScale: 0
+		Damage: 35000
+		PercentageScale: 2855
+	-Warhead@CannonHE_Medium:
 
 TSNODRedEye:
 	Inherits@wh: ^Warhead_MissileAP_Heavy

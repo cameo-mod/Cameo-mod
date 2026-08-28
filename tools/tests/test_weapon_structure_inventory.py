@@ -38,8 +38,8 @@ class WeaponStructureInventoryTests(unittest.TestCase):
 
     def test_current_corrected_baseline(self):
         self.assertEqual(2345, self.data["counts"]["concrete_weapons"])
-        self.assertEqual(736, self.data["counts"]["stacked_main_all_concrete"])
-        self.assertEqual(533, self.data["counts"]["stacked_main_direct_actor_armament"])
+        self.assertEqual(717, self.data["counts"]["stacked_main_all_concrete"])
+        self.assertEqual(514, self.data["counts"]["stacked_main_direct_actor_armament"])
 
 
 if __name__ == "__main__":
