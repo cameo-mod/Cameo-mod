@@ -2954,18 +2954,18 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
@@ -2976,7 +2976,6 @@
       "requires": "asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_Railgun_Heavy",
@@ -3044,18 +3043,18 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
@@ -3066,7 +3065,6 @@
       "requires": "asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_Railgun_Heavy",
@@ -4700,7 +4698,6 @@
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
@@ -4730,7 +4727,6 @@
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
@@ -4795,7 +4791,6 @@
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@GARRISONEDUpgrade",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
@@ -4826,7 +4821,6 @@
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
