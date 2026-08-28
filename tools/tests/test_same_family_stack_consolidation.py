@@ -46,6 +46,13 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
             self.assertEqual(expected_count, len(self.by_kind[kind]), kind)
             self.assertEqual(expected_hash, hashlib.sha256(payload).hexdigest(), kind)
 
+        selected = set()
+        for root, closure in bullets.ROOT_CLOSURES.items():
+            selected.update({root, *closure})
+        for root, (_, _, closure) in adjacent.SPECS.items():
+            selected.update({root, *closure})
+        self.assertEqual(selected, set(self.report["changed"]))
+
     def test_percentage_rounding_delta_never_exceeds_one_hp(self):
         deltas = []
         for changes in self.by_kind["percentage_damage"].values():

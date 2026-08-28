@@ -2,9 +2,10 @@
 """Consolidate explicitly reviewed same-family multi-main weapon stacks.
 
 The selected roots already use the Medium bullet projectile/effect identity.  This
-pass replaces their Light + Medium flat damage nodes with one percentage-inert
-Medium compatibility node.  The legacy percentage companions remain separate so
-the shipped runtime's per-node rounding and overflow behavior is unchanged.
+pass replaces their Light + Medium damage nodes with one Medium compatibility
+node.  Folded percentage units are combined too: the reviewed contract permits at
+most one HP of rounding drift across active health values and rejects larger drift
+or overflow.
 
 The root closure is an explicit fingerprint: discovering a new descendant fails
 closed instead of silently rewriting it.
