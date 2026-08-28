@@ -156,6 +156,7 @@ TankBusterBeamCannonCharged:
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 PlasmaFlamer:
+	Inherits@collapsewh: ^Warhead_Plasma_Medium
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 35
@@ -197,6 +198,12 @@ PlasmaFlamer:
 		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: blue_small_napalm
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	Warhead@Plasma_Medium:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 0
 
 HeavyFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium

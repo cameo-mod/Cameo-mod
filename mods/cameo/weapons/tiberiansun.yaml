@@ -999,6 +999,7 @@ TSBikeTibMissile:
 		ValidTargets: Ground, Water, Air
 
 TSSAPCMissiles:
+	Inherits@collapsewh: ^Warhead_MissileHE_Medium
 	Inherits: ^Grenade
 	Inherits@2: ^LightMissile
 	Range: 5300
@@ -1024,6 +1025,13 @@ TSSAPCMissiles:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
 		ValidTargets: Ground, Water, Air
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@LightMissile:
+	Warhead@MissileHE_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
 
 TSSAPCCoreMissiles:
 	Inherits@wh: ^Warhead_Chemical_Light

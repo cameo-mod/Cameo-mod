@@ -490,6 +490,7 @@ PitbullRockets:
 	Warhead@MissileAP_Light:
 		Damage: 20000
 TSHoverMissile:
+	Inherits@collapsewh: ^Warhead_MissileHE_Medium
 	Inherits: ^FlakWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^ShrapnelWeapon
@@ -526,8 +527,17 @@ TSHoverMissile:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@MissileHE_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 TSDestroyerMissiles:
+	Inherits@collapsewh: ^Warhead_MissileHE_Medium
 	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile
 	Inherits: ^ShrapnelWeapon
@@ -564,6 +574,14 @@ TSDestroyerMissiles:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@MissileHE_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 TSMammothTusk2:
 	Inherits@wh: ^Warhead_MissileAP_Heavy

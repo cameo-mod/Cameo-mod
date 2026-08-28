@@ -1068,6 +1068,7 @@ CabalDissolverSpray:
 		Damage: 4000
 		PercentageScale: 0
 CabalCommandoPlasma:
+	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
@@ -1109,8 +1110,16 @@ CabalCommandoPlasma:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
+	-Warhead@HeavyCannon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Plasma_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 150000
+		PercentageScale: 0
 
 CabalCommandoPlasmaMk2:
+	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
@@ -1152,8 +1161,16 @@ CabalCommandoPlasmaMk2:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
+	-Warhead@HeavyCannon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Plasma_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 150000
+		PercentageScale: 0
 
 CabalSubmarinePlasma:
+	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
@@ -1200,6 +1217,13 @@ CabalSubmarinePlasma:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
+	-Warhead@HeavyCannon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Plasma_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 75000
+		PercentageScale: 0
 
 CabalCoreDefenderLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy

@@ -35,8 +35,8 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
 
     def test_ambiguous_examples_stay_in_human_review(self):
         rows = {row["weapon"]: row for row in self.rows}
-        for name in ("DuelistTankCannon", "LatinSmokerCannon", "NaxMausCannon",
-                     "NaxRatteCannon", "PhotonCannon",
+        for name in ("DuelistTankCannon", "LatinSmokerCannon", "AsianPhotonCannon",
+                     "Future_MultiMissile_Sigma", "PhotonCannon",
                      "ArcherArtilleryShell"):
             self.assertEqual("human decision required", rows[name]["bucket"], name)
 

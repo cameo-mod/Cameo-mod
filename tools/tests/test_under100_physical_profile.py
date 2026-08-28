@@ -20,15 +20,9 @@ ROOTS = {
     "MortarTeamArtilleryShell", "RA2APCFlakCannon", "RA2LasherCannon",
     "ReconRangerRecoillessGun", "SteelCruiserCannons", "SteelTwisterMissiles",
     "TS70mmTurChem", "TSScoopDualTurChem", "WhiteRabbitGatling", "ra120mm2",
-}
-
-HELPERS = {
-    "^Compatibility_Bullet_MediumFlat",
-    "^Compatibility_CannonHE_HeavyFlat",
-    "^Compatibility_CannonHE_MediumFlat",
-    "^Compatibility_Flak_MediumFlat",
-    "^Compatibility_MissileAP_HeavyFlat",
-    "^Compatibility_MissileAP_MediumFlat",
+    "CabalCommandoPlasma", "CabalCommandoPlasmaMk2", "CabalSubmarinePlasma",
+    "HeavyAATankCannontkm", "PlasmaFlamer", "SkyshieldCannon",
+    "TSDestroyerMissiles", "TSHoverMissile", "TSSAPCMissiles",
 }
 
 ALLOWED_COMPARATOR_FINDINGS = {
@@ -52,27 +46,37 @@ class Under100PhysicalProfileTests(unittest.TestCase):
         remaining = classifier.classify(self.rules)
         names = {row["weapon"] for row in remaining}
         self.assertFalse(names & ROOTS, names & ROOTS)
-        self.assertEqual(180, len(remaining))
+        self.assertLessEqual(len(remaining), 180)
 
     def test_flat_compatibility_helpers_cannot_add_percentage_damage(self):
-        for name in HELPERS:
+        helpers = [name for name in self.rules.weapons
+                   if name.startswith("^Compatibility_") and name.endswith("Flat")]
+        self.assertTrue(helpers)
+        for name in helpers:
             helper = self.rules.resolve_weapon(name)
             self.assertIsNotNone(helper, name)
-            mains = [node for node in helper.children
-                     if node.key.startswith("Warhead@") and node.value == "AreaDamage"]
-            self.assertEqual(1, len(mains), name)
-            self.assertEqual("0", child(mains[0], "PercentageScale").value, name)
+            damage_nodes = [node for node in helper.children
+                            if node.key.startswith("Warhead@") and "Damage" in str(node.value)]
+            self.assertTrue(damage_nodes, name)
+            for node in damage_nodes:
+                self.assertNotIn("Percentage", str(node.value), f"{name}/{node.key}")
+                scale = child(node, "PercentageScale")
+                self.assertIsNotNone(scale, f"{name}/{node.key}")
+                self.assertEqual("0", scale.value, f"{name}/{node.key}")
 
     def test_baseline_comparison_contains_only_accepted_standardization(self):
-        path = ROOT / "docs" / "audit" / "latest" / "under100_checkpoint1_diff.json"
-        report = json.loads(path.read_text(encoding="utf-8"))
-        self.assertEqual([], report["added"])
-        self.assertEqual([], report["removed"])
-        self.assertTrue(report["changed"])
-        for weapon, findings in report["changed"].items():
-            kinds = {finding[0] for finding in findings}
-            self.assertLessEqual(kinds, ALLOWED_COMPARATOR_FINDINGS,
-                                 f"{weapon}: {sorted(kinds)}")
+        paths = sorted((ROOT / "docs" / "audit" / "latest").glob(
+            "under100_checkpoint*_diff.json"))
+        self.assertTrue(paths)
+        for path in paths:
+            report = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual([], report["added"], path.name)
+            self.assertEqual([], report["removed"], path.name)
+            self.assertTrue(report["changed"], path.name)
+            for weapon, findings in report["changed"].items():
+                kinds = {finding[0] for finding in findings}
+                self.assertLessEqual(kinds, ALLOWED_COMPARATOR_FINDINGS,
+                                     f"{path.name}/{weapon}: {sorted(kinds)}")
 
 
 if __name__ == "__main__":

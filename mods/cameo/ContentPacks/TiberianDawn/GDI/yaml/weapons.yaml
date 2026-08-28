@@ -170,6 +170,8 @@ BoxerCannon_AA:
 		ValidTargets: Air
 
 SkyshieldCannon:
+	Inherits@collapsewh: ^Warhead_Flak_Heavy
+	-TargetActorCenter:
 	Inherits: ^SmallArms
 	Inherits@2: ^LightMissile
 	Inherits@3: ^Chaingun
@@ -202,6 +204,14 @@ SkyshieldCannon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 1
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
+	Warhead@Flak_Heavy:
+		ValidTargets: Air
+		Damage: 8000
+		PercentageScale: 0
 
 ArcherArtilleryShell:
 	Inherits: ^MediumCannon

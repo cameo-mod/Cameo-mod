@@ -2773,11 +2773,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "50000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "150000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
@@ -2787,25 +2787,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "50000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "25",
@@ -2816,20 +2802,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5219",
       "reloaddelay": "90",
       "requires": "!cabal_upgrade_neutronnuclearcatalyst",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Plasma_Heavy",
        "^HeavyCannon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Plasma_Heavy"
+      ],
       "weapon": "CabalCommandoPlasma",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2962,11 +2951,11 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "50000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "150000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
@@ -2976,25 +2965,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "50000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "25",
@@ -3005,20 +2980,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5219",
       "reloaddelay": "90",
       "requires": "!cabal_upgrade_neutronnuclearcatalyst",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_Plasma_Heavy",
        "^HeavyCannon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Plasma_Heavy"
+      ],
       "weapon": "CabalCommandoPlasma",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3226,11 +3204,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "50000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "150000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
@@ -3240,25 +3218,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "50000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "25",
@@ -3269,20 +3233,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6264",
       "reloaddelay": "90",
       "requires": "!cabal_upgrade_neutronnuclearcatalyst",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Plasma_Heavy",
        "^HeavyCannon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Plasma_Heavy"
+      ],
       "weapon": "CabalCommandoPlasmaMk2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -3415,11 +3382,11 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "50000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "150000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
@@ -3429,25 +3396,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "50000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "25",
@@ -3458,20 +3411,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6264",
       "reloaddelay": "90",
       "requires": "!cabal_upgrade_neutronnuclearcatalyst",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_Plasma_Heavy",
        "^HeavyCannon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Plasma_Heavy"
+      ],
       "weapon": "CabalCommandoPlasmaMk2",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -5135,11 +5091,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "25000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "75000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "12",
@@ -5149,25 +5105,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "25000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "12",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "12",
@@ -5178,19 +5120,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "45",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Plasma_Heavy",
        "^HeavyCannon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Plasma_Heavy"
+      ],
       "weapon": "CabalSubmarinePlasma",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
