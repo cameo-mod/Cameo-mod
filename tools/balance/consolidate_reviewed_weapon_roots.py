@@ -498,8 +498,14 @@ def main() -> int:
             extra = {parent_key} if child_role != destination or child_has_own_role else set()
             if child_has_own_role:
                 child_total = 0
+            # The converted parent already removes inherited legacy slices.
+            # Only remove keys that the child reintroduces locally; requesting
+            # removal of an already-absent inherited key is a runtime MiniYAML
+            # error even though the audit resolver tolerates it.
+            child_removals = set(child_info["keys"])
             apply_compatibility_block(
-                changed, ROOT / child_local.file, child_name, child_role, old_keys,
+                changed, ROOT / child_local.file, child_name, child_role,
+                child_removals,
                 child_total, child_node.get("ValidTargets") or row["valid_targets"], extra)
             repaired_children += 1
         summary.append((weapon, destination, f"{len(flats)} slices -> {total}"))
