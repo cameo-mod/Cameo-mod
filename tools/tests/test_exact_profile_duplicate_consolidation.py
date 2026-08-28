@@ -77,8 +77,8 @@ class ExactProfileDuplicateConsolidationTests(unittest.TestCase):
             main_warheads(self.rules.resolve_weapon("RA2FlakTrackAAGun")),
         )
 
-    def test_structural_backlog_ratchet_is_790(self):
-        self.assertEqual(790, SPLIT_BASELINE)
+    def test_structural_backlog_ratchet_is_777(self):
+        self.assertEqual(777, SPLIT_BASELINE)
 
 
 if __name__ == "__main__":

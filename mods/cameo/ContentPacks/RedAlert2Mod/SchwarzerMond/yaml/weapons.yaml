@@ -38,7 +38,6 @@ NaxiBeetleLaser_elite:
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
 	Inherits@legacychip: ^LegacyLaserChipCompatibility
-	Inherits@groundremainder: ^LaserHeavyGroundRemainderCompatibility
 	Range: 6448
 	ReloadDelay: 60
 	Burst: 2
@@ -67,7 +66,7 @@ NaxiBeetleLaser_elite:
 		ValidTargets: Ground, Water
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 4000
+		Damage: 8000
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -85,6 +84,7 @@ NaxiBeetleLaser_AA_elite:
 		ValidTargets: Air
 	Warhead@Laser_Heavy:
 		ValidTargets: Air
+		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -113,7 +113,6 @@ NaxiTank2Laser:
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
 	Inherits@legacychip: ^LegacyLaserChipCompatibility
-	Inherits@groundremainder: ^LaserHeavyGroundRemainderCompatibility
 	Range: 6500
 	ReloadDelay: 52
 	Burst: 4
@@ -142,7 +141,7 @@ NaxiTank2Laser:
 		ValidTargets: Ground, Water
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 4000
+		Damage: 8000
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -160,6 +159,7 @@ NaxiTank2Laser_AA:
 		ValidTargets: Air
 	Warhead@Laser_Heavy:
 		ValidTargets: Air
+		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
