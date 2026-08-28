@@ -298,6 +298,110 @@ SamuraiBladeCharged:
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@SwordWeapon:
+	-Warhead@SwordWeaponFriendlyFire:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@PreservedFlat_SwordWeapon: SpreadDamage
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+		Falloff: 100, 50
+		Spread: 320
+		Damage: 10000
+		Versus:
+			Shield: 125
+			None: 100
+			Flak: 95
+			Plate: 90
+			Heroic: 85
+			Scout: 80
+			Light: 75
+			Medium: 70
+			Heavy: 65
+			Superheavy: 60
+			Steel: 55
+			Concrete: 50
+			Wood: 45
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@PreservedFlat_SwordWeaponFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Falloff: 100, 50
+		Spread: 160
+		Damage: 5000
+		Versus:
+			Shield: 125
+			None: 100
+			Flak: 95
+			Plate: 90
+			Heroic: 85
+			Scout: 80
+			Light: 75
+			Medium: 70
+			Heavy: 65
+			Superheavy: 60
+			Steel: 55
+			Concrete: 50
+			Wood: 45
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@PreservedFlat_TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Falloff: 100, 75, 50, 25
+		Spread: 200
+		Damage: 5000
+		Versus:
+			REFLECTOR: 50
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			None: 125
+			Superheavy: 100
+			Heavy: 75
+			Medium: 50
+			Light: 25
+			Scout: 10
+			Steel: 10
+			Concrete: 10
+			Wood: 10
+			Spaceship: 10
+			Helicopter: 10
+			Bomber: 10
+			Fighter: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@PreservedFlat_TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 10000
+		Versus:
+			REFLECTOR: 50
+			Shield: 150
+			Heroic: 100
+			Plate: 96
+			Flak: 92
+			None: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 JapanMaidenBow:
 	Inherits@wh: ^Warhead_Arrow_Light
@@ -334,6 +438,7 @@ JapanMaidenBow:
 		ValidTargets: Ground
 
 JapanMaidenBowEnergized:
+	Inherits@roleflat: ^Compatibility_Arrow_LightFlat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^ShrapnelWeapon
@@ -427,6 +532,17 @@ JapanMaidenBowEnergized:
 		Explosions: drneutronexp
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Air
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Arrow_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 33000
+		PercentageScale: 0
 
 BallistaSingleShotAir:
 	Inherits: JapanMaidenBow
@@ -437,6 +553,7 @@ BallistaSingleShotAir:
 		Damage: 160000
 	MinRange: 1845
 BallistaSingleShotAirEnergized:
+	Inherits@roleflat: ^Compatibility_Arrow_LightFlat
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Light
@@ -527,6 +644,17 @@ BallistaSingleShotAirEnergized:
 		Spread: 500
 
 	MinRange: 1845
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Arrow_LightFlatCompatibility:
+		ValidTargets: Air
+		Damage: 110000
+		PercentageScale: 0
 BallistaMultiShot:
 	Inherits@collapsewh: ^Warhead_Arrow_Medium
 	-TargetActorCenter:
@@ -621,6 +749,7 @@ BallistaMultiShot:
 		PercentageScale: 0
 
 BallistaMultiShotEnergized:
+	Inherits@roleflat: ^Compatibility_Arrow_MediumFlat
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^MediumChemicalWeapon
@@ -693,6 +822,15 @@ BallistaMultiShotEnergized:
 		Explosions: purplesplash
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground, Water
+	-Warhead@ArrowWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Arrow_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 45000
+		PercentageScale: 0
 
 BallistaTowerMultiShot:
 	Inherits: BallistaMultiShot
@@ -705,6 +843,7 @@ BallistaTowerMultiShotEnergized:
 
 	MinRange: 1845
 RocketAngelRockets:
+	Inherits@roleflat: ^Compatibility_MissileAA_LightFlat
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyMissile
 	Inherits@3: ^MediumFlameWeapon
@@ -818,6 +957,18 @@ RocketAngelRockets:
 		Explosions: drplasmaex2
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Air
+	-Warhead@ArrowWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@MissileAA_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 13000
+		PercentageScale: 0
 
 Hakureiring:
 	# Collapsed onto the new Magic %-equalizer (maintainer 2026-08-10). Was Tesla+Magic+EMP; the exorcist
@@ -1010,6 +1161,7 @@ ZeroFighterArrows:
 	Warhead@Arrow_Light:
 		Damage: 18000
 ZeroFighterArrowsEnergized:
+	Inherits@roleflat: ^Compatibility_Arrow_MediumFlat
 	Inherits: SkyHawkArrowsEnergized
 	Range: 6615
 	MinRange: 1325
@@ -1041,6 +1193,13 @@ ZeroFighterArrowsEnergized:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 		Spread: 800
+	-Warhead@MediumFlameWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Arrow_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		PercentageScale: 0
 
 SkyHawkChainGun:
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -1152,6 +1311,7 @@ SkyHawkArrows:
 		ValidTargets: Ground
 
 SkyHawkArrowsEnergized:
+	Inherits@roleflat: ^Compatibility_Arrow_MediumFlat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^TeslaWeapon
 	Inherits@3: SkyHawkArrows
@@ -1203,6 +1363,13 @@ SkyHawkArrowsEnergized:
 		Explosions: drneutronexp
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Air
+	-Warhead@MediumFlameWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Arrow_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 0
 
 155mm:
 	Inherits@collapsewh: ^Warhead_Concussion_Heavy
@@ -1242,6 +1409,7 @@ SkyHawkArrowsEnergized:
 		PercentageScale: 0
 
 HovercraftCannon:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
 	Inherits@3: ^Grenade
@@ -1305,8 +1473,21 @@ HovercraftCannon:
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
+	-Warhead@Chaingun:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@SmallArms:
+	-Warhead@TankDestroyerCannon:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 HovercraftPlasmaCannon:
+	Inherits@roleflat: ^Compatibility_Plasma_MediumFlat
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^HeavyCannon
@@ -1403,6 +1584,23 @@ HovercraftPlasmaCannon:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyCannon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Plasma_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 19000
+		PercentageScale: 0
+	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Chaingun:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@SmallArms:
+	-Warhead@TankDestroyerCannon:
 
 JapaneseHovercraftFlak:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -1452,6 +1650,7 @@ Type89Cannon:
 		Explosions: small_poof
 
 Type89PlasmaCannon:
+	Inherits@roleflat: ^Compatibility_Plasma_MediumFlat
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^HeavyCannon
@@ -1488,6 +1687,14 @@ Type89PlasmaCannon:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building
+	-Warhead@HeavyCannon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Plasma_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 11000
+		PercentageScale: 0
 
 Type97Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
@@ -1633,6 +1840,7 @@ OISmallCannon:
 		Explosions: small_poof
 
 OISmallPlasmaCannon:
+	Inherits@roleflat: ^Compatibility_Plasma_MediumFlat
 	Inherits: ^HeavyChemicalWeapon
 	Inherits@2: ^TeslaWeapon
 	Inherits@3: ^RailgunWeapon
@@ -1683,6 +1891,16 @@ OISmallPlasmaCannon:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building
+	-Warhead@HeavyCannon:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Plasma_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 10000
+		PercentageScale: 0
 
 OIBigCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
@@ -1805,6 +2023,7 @@ BuggyGrenade:
 	Warhead@Demolition_Light:
 		Damage: 60000
 BuggyPlasmaGrenade:
+	Inherits@roleflat: ^Compatibility_Plasma_LightFlat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: BuggyGrenade
@@ -1836,6 +2055,13 @@ BuggyPlasmaGrenade:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
+	-Warhead@HeavyBomb:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@Plasma_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 40000
+		PercentageScale: 0
 
 JapaneseHeavyBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
@@ -2026,6 +2252,7 @@ NanoReturnHeal:
 		ImpactSounds: vifvrepa.wav
 
 NanoSmokeAG:
+	Inherits@roleflat: ^Compatibility_Chemical_MediumFlat
 	Inherits: ^MagicWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^LightFlameWeapon
@@ -2086,6 +2313,14 @@ NanoSmokeAG:
 		ImpactActors: false
 		AirThreshold: 7777
 		ValidTargets: Air, Ground, Water
+	-Warhead@LightFlameWeapon:
+	-Warhead@MagicExtraDamage:
+	-Warhead@MagicWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Chemical_MediumFlatCompatibility:
+		ValidTargets: Infantry, Vehicle, Building
+		Damage: 10887
+		PercentageScale: 0
 
 WaveArtilleryShell:
 	ReloadDelay: 111

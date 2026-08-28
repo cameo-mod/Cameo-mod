@@ -789,6 +789,7 @@ Colt45Cryo:
 		Damage: 7777
 
 HeavyAATankCannonAG:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^SmallArms
@@ -821,8 +822,17 @@ HeavyAATankCannonAG:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
 
 HeavyAATankCannon_AA:
+	Inherits@roleflat: ^Compatibility_Flak_MediumFlat
 	Inherits: HeavyAATankCannonAG
 	Range: 7119
 	ValidTargets: Air
@@ -842,6 +852,15 @@ HeavyAATankCannon_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
+	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 8000
+		PercentageScale: 0
 
 RadarJammer:
 	ReloadDelay: 150

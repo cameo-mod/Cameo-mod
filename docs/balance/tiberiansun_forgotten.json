@@ -7373,6 +7373,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "60000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "121",
+        "tag": "CannonChem_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "30000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
@@ -7387,32 +7394,11 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "30000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "15",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "15",
@@ -7430,6 +7416,7 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_CannonChem_HeavyFlat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",

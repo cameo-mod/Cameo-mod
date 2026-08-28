@@ -127,6 +127,7 @@ TS120mmx:
 	Warhead@CannonHE_Medium:
 		Damage: 30000
 TSChem120mmx:
+	Inherits@roleflat: ^Compatibility_CannonChem_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -166,6 +167,13 @@ TSChem120mmx:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@CannonChem_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 60000
+		PercentageScale: 0
 
 TSScoopDual:
 	Inherits: ^TSCannonEffect

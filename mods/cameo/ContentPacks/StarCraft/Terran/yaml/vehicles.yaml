@@ -502,7 +502,7 @@ terran_goliath:
 		Amount: -80
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~terran_armory, ~!terran_promotion_goliathmk2
+		Prerequisites: ~terran_armory
 		Description: actor_scgoliath.description
 	Mobile:
 		Speed: 90
@@ -603,7 +603,7 @@ terran_goliathmk2:
 		Weapon: GoliathMk2Rockets
 		LocalOffset: 400,-400,300
 	FirepowerMultiplier@DualWeapon:
-		Modifier: 25
+		Modifier: 33
 	WithInfantryBody:
 	AttackTurreted:
 	WithMuzzleOverlay:

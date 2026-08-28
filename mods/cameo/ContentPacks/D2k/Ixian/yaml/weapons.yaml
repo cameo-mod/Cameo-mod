@@ -116,6 +116,143 @@ DuelistTankCannon:
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLMD2.WAV
 		ExplosionPalette: effect75alpha
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@TankDestroyerCannon:
+	Warhead@PreservedFlat_Grenade: SpreadDamage
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 14000
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 50
+			Shield: 110
+			None: 100
+			Wood: 94
+			Flak: 88
+			Concrete: 82
+			Plate: 76
+			Steel: 70
+			Heroic: 64
+			Scout: 58
+			Light: 52
+			Medium: 46
+			Heavy: 40
+			Superheavy: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@PreservedFlat_GrenadeFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 7000
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			HAZMAT: 25
+			Shield: 110
+			None: 100
+			Wood: 94
+			Flak: 88
+			Concrete: 82
+			Plate: 76
+			Steel: 70
+			Heroic: 64
+			Scout: 58
+			Light: 52
+			Medium: 46
+			Heavy: 40
+			Superheavy: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@PreservedFlat_HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Ship
+		Spread: 800
+		Damage: 14000
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 50
+			Shield: 140
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@PreservedFlat_MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		InvalidTargets: wall
+		Spread: 750
+		Damage: 14000
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 50
+			Shield: 125
+			None: 100
+			Flak: 95
+			Plate: 90
+			Heroic: 85
+			Wood: 80
+			Concrete: 75
+			Steel: 70
+			Scout: 65
+			Light: 60
+			Medium: 55
+			Heavy: 50
+			Superheavy: 45
+			Fighter: 40
+			Bomber: 35
+			Helicopter: 30
+			Spaceship: 25
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@PreservedFlat_TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water
+		Spread: 150
+		Damage: 14000
+		Versus:
+			Shield: 110
+			Superheavy: 100
+			Heavy: 94
+			Medium: 88
+			Light: 82
+			Scout: 76
+			Steel: 70
+			Concrete: 64
+			Wood: 58
+			Plate: 52
+			Flak: 46
+			None: 40
+			Heroic: 34
+			Spaceship: 28
+			Helicopter: 22
+			Bomber: 16
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 D2K_155mm2:
 	Inherits@collapsewh: ^Warhead_CannonHE_Heavy
@@ -549,6 +686,7 @@ ResonanceDroneRepair:
 	Range: 4500
 
 IxianBomb_EMP:
+	Inherits@roleflat: ^Compatibility_Demolition_HeavyFlat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^TeslaChargedWeapon
@@ -616,6 +754,14 @@ IxianBomb_EMP:
 		ImpactSounds: mobemp1.aud
 		ImpactActors: false
 		AffectsParent: true
+	-Warhead@HeavyBomb:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@TeslaChargedExtraDamage:
+	-Warhead@TeslaChargedWeapon:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 105000
+		PercentageScale: 0
 
 IxianCharge_EMP:
 	ReloadDelay: 3
@@ -1209,6 +1355,7 @@ d2k_farasha_charge:
 		TrackTarget: false
 
 ixian_farasha:
+	Inherits@roleflat: ^Compatibility_Laser_MediumFlat
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyFlameWeapon
 	Inherits@3: ^RailgunWeapon
@@ -1273,8 +1420,18 @@ ixian_farasha:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Laser_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
 
 d2k_farasha_aa:
+	Inherits@roleflat: ^Compatibility_Laser_MediumFlat
 	Inherits: ixian_farasha
 	-FirstBurstTargetOffset:
 	-FollowingBurstTargetOffset:
@@ -1303,6 +1460,15 @@ d2k_farasha_aa:
 		ValidTargets: Air
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Laser_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 8000
+		PercentageScale: 0
 
 farasha_drone_ixian:
 	Inherits@wh: ^Warhead_Inferno_Light

@@ -1163,6 +1163,7 @@ Spore_AA:
 		PercentageScale: 0
 
 Tentacle:
+	Inherits@roleflat: ^Compatibility_Melee_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1192,6 +1193,15 @@ Tentacle:
 		Explosions: sctentacle
 		ImpactSounds: zluhit00.aud
 		ImpactActors: false
+	-Warhead@Chaingun:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	-Warhead@SwordWeapon:
+	-Warhead@SwordWeaponFriendlyFire:
+	Warhead@Melee_HeavyFlatCompatibility:
+		ValidTargets: Ground
+		Damage: 19000
+		PercentageScale: 0
 
 DroneAttack:
 	Inherits: ^WorkerAttack

@@ -225,6 +225,7 @@ LunarNaxiJadgDestroyer_elite:
 	BurstDelays: 3
 
 LunarTigerCannon:
+	Inherits@roleflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^MediumFlameWeapon
@@ -262,6 +263,13 @@ LunarTigerCannon:
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		Damage: 4000
+	-Warhead@HeavyBomb:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 12000
+		PercentageScale: 0
 LunarTigerCannon_elite:
 	Inherits: LunarTigerCannon
 	Range: 6105

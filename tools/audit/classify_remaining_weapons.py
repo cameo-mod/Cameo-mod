@@ -34,6 +34,7 @@ OUT_MD = ROOT / "docs" / "audit" / "latest" / "remaining_weapon_classification.m
 OUT_JSON = ROOT / "docs" / "audit" / "latest" / "remaining_weapon_classification.json"
 CANONICAL = re.compile(r"^\^Warhead_([A-Za-z]+)_(Light|Medium|Heavy|Super)$")
 EXCEPTION_FAMILIES = {"^MagicWeapon", "^NuclearWarhead", "^LightFlameWeapon"}
+FLAT_DAMAGE_TYPES = {"AreaDamage", "SpreadDamage"}
 
 
 def damage(node) -> int:
@@ -53,6 +54,7 @@ def positive_flat_keys(rs: Ruleset, family: str) -> set[str]:
         if child.key.startswith("Warhead@")
         and "Percentage" not in child.key
         and "Concrete" not in child.key
+        and child.value in FLAT_DAMAGE_TYPES
         and damage(child) > 0
     }
 
@@ -161,7 +163,8 @@ def flat_ledger(node) -> list[dict[str, object]]:
         if not child.key.startswith("Warhead@"):
             continue
         is_percentage = "Percentage" in child.key or child.value == "HealthPercentageDamage"
-        if is_percentage or "Concrete" in child.key or damage(child) <= 0:
+        if (is_percentage or "Concrete" in child.key
+                or child.value not in FLAT_DAMAGE_TYPES or damage(child) <= 0):
             continue
         record = hit_contract(child)
         record["damage"] = damage(child)
@@ -186,6 +189,39 @@ def percentage_ledger(node) -> list[dict[str, object]]:
         })
         rows.append(record)
     return rows
+
+
+def choose_review_bucket(old: list[str], canonical_destinations: list[str],
+                         canonical_families: list[str], name_family: str | None,
+                         legacy_family: str | None,
+                         legacy_reason: str) -> tuple[str, str | None, list[str]]:
+    """Apply the conservative classification policy to already-extracted signals."""
+    reasons = []
+    if set(old) & EXCEPTION_FAMILIES:
+        reasons.append("exception-bearing retired family")
+    if len(canonical_destinations) > 1:
+        reasons.append("multiple inherited family/tier destinations")
+    if legacy_family is None:
+        reasons.append(legacy_reason)
+    if canonical_families and name_family and name_family not in canonical_families:
+        reasons.append("name and canonical destination disagree")
+    if canonical_families and legacy_family and legacy_family not in canonical_families:
+        reasons.append("canonical and legacy signals disagree")
+    if name_family and legacy_family and name_family != legacy_family:
+        reasons.append("name and legacy signals disagree")
+
+    if reasons:
+        return ("human decision required",
+                canonical_destinations[0] if len(canonical_destinations) == 1 else None,
+                reasons)
+    if len(canonical_destinations) == 1:
+        return "one inherited destination", canonical_destinations[0], reasons
+    if name_family and legacy_family == name_family:
+        return "corroborated suggestion", name_family, reasons
+    if legacy_family and not name_family:
+        return "legacy-only suggestion", legacy_family, reasons
+    reasons.append("no unique destination signal")
+    return "human decision required", None, reasons
 
 
 def classify(rs: Ruleset) -> list[dict[str, object]]:
@@ -218,38 +254,9 @@ def classify(rs: Ruleset) -> list[dict[str, object]]:
         canonical_families = sorted({item["family"] for item in canonical})
         name_family, name_reason = name_signal(name)
         legacy_family, legacy_reason = legacy_signal(old)
-        legacy_uncertain = legacy_family is None
-
-        reasons = []
-        if set(old) & EXCEPTION_FAMILIES:
-            reasons.append("exception-bearing retired family")
-        if len(canonical_destinations) > 1:
-            reasons.append("multiple inherited family/tier destinations")
-        if legacy_uncertain:
-            reasons.append(legacy_reason)
-        if canonical_families and name_family and name_family not in canonical_families:
-            reasons.append("name and canonical destination disagree")
-        if canonical_families and legacy_family and legacy_family not in canonical_families:
-            reasons.append("canonical and legacy signals disagree")
-        if name_family and legacy_family and name_family != legacy_family:
-            reasons.append("name and legacy signals disagree")
-
-        if reasons:
-            bucket = "human decision required"
-            candidate = canonical_destinations[0] if len(canonical_destinations) == 1 else None
-        elif len(canonical_destinations) == 1:
-            bucket = "one inherited destination"
-            candidate = canonical_destinations[0]
-        elif name_family and legacy_family == name_family:
-            bucket = "corroborated suggestion"
-            candidate = name_family
-        elif legacy_family and not name_family:
-            bucket = "legacy-only suggestion"
-            candidate = legacy_family
-        else:
-            bucket = "human decision required"
-            candidate = None
-            reasons.append("no unique destination signal")
+        bucket, candidate, reasons = choose_review_bucket(
+            old, canonical_destinations, canonical_families, name_family,
+            legacy_family, legacy_reason)
 
         all_old_keys = set().union(*(flat_keys[family] for family in old))
         descendant_overrides = []

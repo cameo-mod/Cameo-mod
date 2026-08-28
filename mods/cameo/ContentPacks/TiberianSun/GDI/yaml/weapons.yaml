@@ -111,6 +111,7 @@ TSRPGTower:
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
 TSRPGTowerRail:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -130,6 +131,14 @@ TSRPGTowerRail:
 		Damage: 16000
 	Warhead@HRailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 8
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 33000
+		PercentageScale: 0
 
 TSJugg90mm:
 	Inherits@wh: ^Warhead_Concussion_Medium

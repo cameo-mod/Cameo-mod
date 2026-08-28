@@ -68,6 +68,7 @@ GrenadeRAExplode:
 	Warhead@Flame_Light:
 		Damage: 4000
 GrenadeThermobaric:
+	Inherits@roleflat: ^Compatibility_Thermobaric_LightFlat
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: GrenadeRA
@@ -94,7 +95,15 @@ GrenadeThermobaric:
 		PhysicalStateScale: 100
 	Warhead@Flame_Light:
 		Damage: 4000
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@Thermobaric_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
 GrenadeThermobaricExplode:
+	Inherits@roleflat: ^Compatibility_Thermobaric_LightFlat
 	Inherits: GrenadeThermobaric
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
@@ -130,6 +139,13 @@ GrenadeThermobaricExplode:
 		Damage: 1
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@Thermobaric_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 0
 
 FireRockets:
 	Inherits@wh: ^Warhead_MissileFire_Light
@@ -728,6 +744,7 @@ GradRockets:
 	Warhead@Concussion_Medium:
 		Damage: 8000
 GradHeavyRockets:
+	Inherits@roleflat: ^Compatibility_MissileHE_HeavyFlat
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: GradRockets
@@ -758,6 +775,12 @@ GradHeavyRockets:
 		Damage: 4000
 	Warhead@Concussion_Medium:
 		Damage: 4000
+	-Warhead@HeavyBomb:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@MissileHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
 SCUD:
 	Inherits: ^Warhead_MissileHE_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
@@ -1241,6 +1264,7 @@ HindMissilesNuclear:
 	-Warhead@Nuclear_Super_Percentage:
 
 KamovMissilesTesla:
+	Inherits@roleflat: ^Compatibility_MissileTesla_MediumFlat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumFlameWeapon
@@ -1332,6 +1356,18 @@ KamovMissilesTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@MissileTesla_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 11000
+		PercentageScale: 0
 
 KamovTesla:
 	Inherits: ^Warhead_MissileAP_Light
@@ -1642,8 +1678,151 @@ YakTeslaBomb:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	-Warhead@Effect1:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@PreservedFlat_HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Ship
+		Spread: 800
+		Damage: 40000
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 50
+			Shield: 140
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@PreservedFlat_HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		InvalidTargets: wall
+		Spread: 1050
+		Damage: 40000
+		Falloff: 99, 66, 33
+		Versus:
+			HAZMAT: 50
+			Shield: 140
+			Superheavy: 100
+			Plate: 96
+			Heavy: 92
+			Flak: 88
+			Medium: 84
+			None: 80
+			Light: 76
+			Heroic: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStates:
+			Corrosion: 100
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@PreservedFlat_HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		InvalidTargets: wall
+		Spread: 1000
+		Damage: 40000
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 140
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Wood: 84
+			Concrete: 80
+			Steel: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@PreservedFlat_TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Falloff: 100, 75, 50, 25
+		Spread: 200
+		Damage: 20000
+		Versus:
+			REFLECTOR: 50
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			None: 125
+			Superheavy: 100
+			Heavy: 75
+			Medium: 50
+			Light: 25
+			Scout: 10
+			Steel: 10
+			Concrete: 10
+			Wood: 10
+			Spaceship: 10
+			Helicopter: 10
+			Bomber: 10
+			Fighter: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@PreservedFlat_TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 40000
+		Versus:
+			REFLECTOR: 50
+			Shield: 150
+			Heroic: 100
+			Plate: 96
+			Flak: 92
+			None: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 YakNuclearBomb:
+	Inherits@roleflat: ^Compatibility_Nuclear_SuperFlat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyChemicalWeapon
 	Inherits@3: ^HeavyFlameWeapon
@@ -1702,6 +1881,14 @@ YakNuclearBomb:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@NuclearWarhead:
+	Warhead@Nuclear_SuperFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 200000
+		PercentageScale: 0
 
 Maverick:
 	Inherits@wh: ^Warhead_MissileAP_Medium
@@ -2296,6 +2483,7 @@ MammothTuskThermobaricTargetingComputer:
 	ValidTargets: Ground, Water, Air
 
 MammothTuskTesla:
+	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
 	Inherits: ^Grenade
 	Inherits@2: ^LightFlameWeapon
 	Inherits@3: ^TeslaWeapon
@@ -2373,8 +2561,19 @@ MammothTuskTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyMissile:
+	-Warhead@LightFlameWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@MissileTesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Infantry, Monster, Air
+		Damage: 36000
+		PercentageScale: 0
 
 MammothTuskTeslaFragment1:
+	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
 	Inherits: MammothTuskTesla
 	ValidTargets: Ground, Water, Air
 	Range: 3206
@@ -2418,8 +2617,19 @@ MammothTuskTeslaFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyMissile:
+	-Warhead@LightFlameWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@MissileTesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 18000
+		PercentageScale: 0
 
 MammothTuskTeslaFragment2:
+	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
 	Inherits: MammothTuskTeslaFragment1
 	Range: 1603
 	Warhead@Grenade: SpreadDamage
@@ -2453,6 +2663,16 @@ MammothTuskTeslaFragment2:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 	-Warhead@TeslaArc:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyMissile:
+	-Warhead@LightFlameWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@MissileTesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 9000
+		PercentageScale: 0
 
 MammothTuskTeslaTargetingComputer:
 	Inherits: MammothTuskTesla
@@ -2736,6 +2956,7 @@ MonsterTankTusk:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 MonsterTankTuskTesla:
+	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
 	Inherits: ^Grenade
 	Inherits@2: ^LightFlameWeapon
 	Inherits@3: ^TeslaWeapon
@@ -2813,6 +3034,16 @@ MonsterTankTuskTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyMissile:
+	-Warhead@LightFlameWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@MissileTesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Infantry, Monster, Air
+		Damage: 120250
+		PercentageScale: 0
 
 MonsterTankTuskThermobaric:
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
@@ -2945,6 +3176,7 @@ MonsterTankTuskThermobaric:
 		PercentageScale: 0
 
 VolkovMagneticWeapon:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -2988,8 +3220,16 @@ VolkovMagneticWeapon:
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: kaboom25.aud
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 20000
+		PercentageScale: 0
 
 VolkovMagneticWeaponTesla:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: VolkovMagneticWeapon
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -3048,8 +3288,16 @@ VolkovMagneticWeaponTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 0
 
 VolkovMagneticWeaponTeslaFragment1:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: VolkovMagneticWeaponTesla
 	ValidTargets: Ground, Water, Air
 	Range: 2830
@@ -3086,8 +3334,16 @@ VolkovMagneticWeaponTeslaFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 VolkovMagneticWeaponTeslaFragment2:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: VolkovMagneticWeaponTeslaFragment1
 	Range: 1415
 	Warhead@CannonHE_Heavy: AreaDamage
@@ -3117,8 +3373,16 @@ VolkovMagneticWeaponTeslaFragment2:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 	-Warhead@TeslaArc:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 0
 
 VolkovMagneticWeaponNuclearShells:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: VolkovMagneticWeapon
@@ -3170,6 +3434,13 @@ VolkovMagneticWeaponNuclearShells:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 80000
+		PercentageScale: 0
 
 VolkovMagneticWeaponIncendiary:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -3180,6 +3451,7 @@ VolkovMagneticWeaponIncendiary:
 	Warhead@Flame_Medium:
 		Damage: 10000
 VolkovMagneticWeaponIncendiaryTesla:
+	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
 	Inherits: VolkovMagneticWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^TeslaWeapon
@@ -3256,8 +3528,17 @@ VolkovMagneticWeaponIncendiaryTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@MediumFlameWeapon:
+	-Warhead@Railgun_HeavyFlatCompatibility:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Quantum_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 0
 
 VolkovMagneticWeaponIncendiaryTeslaFragment1:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: VolkovMagneticWeaponTesla
 	ValidTargets: Ground, Water, Air
 	Range: 2830
@@ -3305,8 +3586,16 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 VolkovMagneticWeaponIncendiaryTeslaFragment2:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: VolkovMagneticWeaponIncendiaryTeslaFragment1
 	Range: 1415
 	Warhead@CannonHE_Heavy: AreaDamage
@@ -3347,8 +3636,16 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
 	-Warhead@TeslaArc:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 0
 
 VolkovMagneticWeaponIncendiaryNuclearShells:
+	Inherits@roleflat: ^Compatibility_CannonNuke_HeavyFlat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^NuclearWarhead
 	Inherits@3: VolkovMagneticWeapon
@@ -3413,8 +3710,16 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
+	-Warhead@MediumFlameWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@CannonNuke_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 60000
+		PercentageScale: 0
 
 ParaBombNuke:
+	Inherits@roleflat: ^Compatibility_Nuclear_SuperFlat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyChemicalWeapon
 	Inherits@3: ^HeavyFlameWeapon
@@ -3463,6 +3768,14 @@ ParaBombNuke:
 		AffectsParent: false
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom22.aud
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@NuclearWarhead:
+	Warhead@Nuclear_SuperFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 400000
+		PercentageScale: 0
 
 CyberneticDogJaw:
 	ValidTargets: Infantry, Vehicle

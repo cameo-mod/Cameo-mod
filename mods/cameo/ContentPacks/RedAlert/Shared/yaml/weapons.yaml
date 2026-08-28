@@ -836,6 +836,7 @@ WaveforceCannonChargedLaser:
 		ValidTargets: Air
 
 WaveforceCannonDistortedBeam1:
+	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyCannon
 	ReloadDelay: 120
@@ -884,6 +885,13 @@ WaveforceCannonDistortedBeam1:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 		ValidTargets: Air
+	-Warhead@HeavyCannon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Waveforce_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 25000
+		PercentageScale: 0
 
 WaveforceCannonDistortedBeam2:
 	Inherits@wh: ^Warhead_Chemical_Heavy
@@ -2151,6 +2159,7 @@ ChronoVortexInit:
 		ImpactActors: false
 
 ra1_allies_chronovortex:
+	Inherits@roleflat: ^Compatibility_Magic_HeavyFlat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^MagicWeapon
 	ReloadDelay: 5
@@ -2259,6 +2268,13 @@ ra1_allies_chronovortex:
 
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Allied
 # rifle infantry â€” burst 3, accurate, longest scout reach. Cryo pair.
+	-Warhead@HeavyBomb:
+	-Warhead@MagicExtraDamage:
+	-Warhead@MagicWeapon:
+	Warhead@Magic_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4888
+		PercentageScale: 0
 ra1_allies_rifleinfantry_carbine:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light

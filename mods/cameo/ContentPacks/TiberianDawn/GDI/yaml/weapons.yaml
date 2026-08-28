@@ -88,6 +88,7 @@ APCGun_AA:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 BoxerCannonAG:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^SmallArms
 	Inherits@2: ^LightMissile
 	Inherits@3: ^Grenade
@@ -137,8 +138,20 @@ BoxerCannonAG:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@LightMissile:
+	-Warhead@MediumCannon:
+	-Warhead@SmallArms:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 12000
+		PercentageScale: 0
 
 BoxerCannon_AA:
+	Inherits@roleflat: ^Compatibility_Flak_MediumFlat
 	Inherits: BoxerCannonAG
 	Range: 7290
 	ValidTargets: Air
@@ -168,6 +181,18 @@ BoxerCannon_AA:
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
+	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@LightMissile:
+	-Warhead@MediumCannon:
+	-Warhead@SmallArms:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 12000
+		PercentageScale: 0
 
 SkyshieldCannon:
 	Inherits@collapsewh: ^Warhead_Flak_Heavy

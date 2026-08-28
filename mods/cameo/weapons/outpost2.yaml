@@ -127,6 +127,7 @@ edenMobileDefenceLaser:
 	Range: 6656
 
 edenRailgun:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightChemicalWeapon
@@ -186,6 +187,18 @@ edenRailgun:
 		Damage: 4000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 2
+	-Warhead@HeavyCannon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumCannon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 25000
+		PercentageScale: 0
 
 edenTigerRailgun:
 	Inherits: edenRailgun

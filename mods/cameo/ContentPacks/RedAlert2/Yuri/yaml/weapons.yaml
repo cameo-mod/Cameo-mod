@@ -83,6 +83,7 @@ RA2LasherCannon_elite:
 	BurstDelays: 3
 
 RA2LasherToxicMortar:
+	Inherits@roleflat: ^Compatibility_CannonChem_MediumFlat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^HeavyBomb
@@ -207,8 +208,24 @@ RA2LasherToxicMortar:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyCannon:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumCannon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonChem_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 18000
+		PercentageScale: 0
 
 RA2LasherToxicMortar_elite:
+	Inherits@roleflat: ^Compatibility_CannonChem_MediumFlat
 	Inherits: RA2LasherToxicMortar
 	Range: 10000
 	Warhead@Grenade: SpreadDamage
@@ -276,6 +293,21 @@ RA2LasherToxicMortar_elite:
 		Explosions: ra2radbang
 		ExplosionPalette: ra2effect
 		ImpactSounds: vdemdiea.wav
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyCannon:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumCannon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonChem_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 0
 
 RA2LasherLaser:
 	Inherits: ^Warhead_CannonHE_Medium
@@ -741,6 +773,7 @@ RA2GattlingInf:
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
 RA2Virusgun:
+	Inherits@roleflat: ^Compatibility_Sniper_LightFlat
 	Inherits: ^HeavyChemicalWeapon
 	Inherits@2: ^SniperWeapon
 	ReloadDelay: 74
@@ -796,8 +829,15 @@ RA2Virusgun:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@SniperWeapon:
+	Warhead@Sniper_LightFlatCompatibility:
+		ValidTargets: Infantry
+		Damage: 24000
+		PercentageScale: 0
 
 RA2Virusgun2:
+	Inherits@roleflat: ^Compatibility_Sniper_LightFlat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
@@ -828,6 +868,12 @@ RA2Virusgun2:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 150
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@SniperWeapon:
+	Warhead@Sniper_LightFlatCompatibility:
+		ValidTargets: Ground, Ship, Garrisoned
+		Damage: 24000
+		PercentageScale: 0
 
 RA2Virusgun3:
 	Inherits@wh: ^Warhead_MissileAP_Medium
@@ -914,6 +960,7 @@ RA2Chemspray_elite:
 	Range: 5840
 
 RA2CosmonautLaser:
+	Inherits@roleflat: ^Compatibility_Laser_LightFlat
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^LaserWeapon
 	Inherits@3: ra2roktgun
@@ -961,3 +1008,15 @@ RA2CosmonautLaser:
 		Chance: 15
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	-Warhead@EffectWater:
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	Warhead@Laser_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 11600
+		PercentageScale: 0
+	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:

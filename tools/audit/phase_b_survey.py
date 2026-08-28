@@ -33,6 +33,8 @@ def inherited_flat_warhead_keys(family):
             continue
         if "Percentage" in warhead.key or "Concrete" in warhead.key:
             continue
+        if warhead.value not in {"AreaDamage", "SpreadDamage"}:
+            continue
         try:
             damage = int(str(warhead.get("Damage") or "0").strip())
         except ValueError:

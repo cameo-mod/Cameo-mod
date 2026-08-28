@@ -306,6 +306,7 @@ RA160mmE_tesla_elite:
 		Amount: 2
 
 RA2120xmm:
+	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^RA2HeavyCannon
@@ -329,7 +330,15 @@ RA2120xmm:
 		Damage: 2
 	Warhead@CannonHE_Heavy:
 		Damage: 4000
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
 RA2120xmm_rad:
+	Inherits@roleflat: ^Compatibility_CannonChem_HeavyFlat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^HeavyChemicalWeapon
@@ -380,6 +389,17 @@ RA2120xmm_rad:
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@CannonChem_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 12000
+		PercentageScale: 0
+	-Warhead@CannonHE_HeavyFlatCompatibility:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
 RA2120xmm_fire:
 	Inherits: RA2120xmm
 	Warhead@FireShrapnel: FireShrapnel
@@ -711,6 +731,7 @@ RA2FlakTrackGun_elite:
 	BurstDelays: 3
 
 RA2FlakTrackAAGun:
+	Inherits@roleflat: ^Compatibility_Flak_MediumFlat
 	Inherits: RA2FlakTrackGun
 	ReloadDelay: 25
 	Report: aacanon3.aud
@@ -738,6 +759,14 @@ RA2FlakTrackAAGun:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
+	-Warhead@Chaingun:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@SmallArms:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 6000
+		PercentageScale: 0
 RA2FlakTrackAAGun_elite:
 	Inherits: RA2FlakTrackAAGun
 	Range: 9292

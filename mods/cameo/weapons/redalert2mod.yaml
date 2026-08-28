@@ -1114,6 +1114,7 @@ NaxisBlackBomb:
 		AimTargetStances: Enemy, Neutral
 
 NaxisBlackBombSmaller:
+	Inherits@roleflat: ^Compatibility_Demolition_MediumFlat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^RA2MediumCannon
@@ -1168,6 +1169,12 @@ NaxisBlackBombSmaller:
 ####################################################################################################
 #		Red Alert 2 Naxis Upgraded Weapons
 ####################################################################################################
+	-Warhead@HeavyBomb:
+	-Warhead@LightChemicalWeapon:
+	Warhead@Demolition_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 50000
+		PercentageScale: 0
 
 ^LunarNaxisUpgradedCannons:
 	Report: nax_aliengun.wav
