@@ -5,8 +5,9 @@ ra1_allies_chronosphere:
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Inherits@sell: ^RASpawnActorsOnSell
 	Buildable:
+		-BuildLimit:
 		Queue: Defence, RADefence
-		Prerequisites: ~ra1_allies_alliedtechcenter, ~techlevel.superweapons, !ra1_allies_chronosphere
+		Prerequisites: ~ra1_allies_alliedtechcenter, ~techlevel.superweapons, !ra1_allies_chronosphere_swlimit
 		Description: actor_pdox.description
 	Tooltip:
 		Name: Chronosphere
@@ -147,7 +148,7 @@ ra1_allies_chronosphere:
 		BeaconActor: BLASTRADIUS.super
 		CameraRange: 12345
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: ra1_allies_chronosphere
+		Prerequisite: ra1_allies_chronosphere_swlimit
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:

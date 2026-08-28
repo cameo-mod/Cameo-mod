@@ -1024,7 +1024,8 @@ asianalliance_advancedcommunicationcenter:
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^AASpawnActorsOnSell
 	Buildable:
-		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianbattlelab, !asianalliance_advancedcommunicationcenter, ~techlevel.superweapons
+		-BuildLimit:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianbattlelab, !asianalliance_advancedcommunicationcenter_swlimit, ~techlevel.superweapons
 		Description: actor_cgionc.description
 	Tooltip:
 		Name: Advanced Communication Center
@@ -1069,7 +1070,7 @@ asianalliance_advancedcommunicationcenter:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: asianalliance_advancedcommunicationcenter
+		Prerequisite: asianalliance_advancedcommunicationcenter_swlimit
 
 asianalliance_chaosstorminductor:
 	Inherits: ^RA2Building
@@ -1080,7 +1081,8 @@ asianalliance_chaosstorminductor:
 	Tooltip:
 		Name: Chaos Storm Inductor
 	Buildable:
-		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianbattlelab, ~techlevel.superweapons
+		-BuildLimit:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianbattlelab, ~techlevel.superweapons, !asianalliance_chaosstorminductor_swlimit
 		Description: actor_cgchao.description
 	Building:
 		Footprint: =x= xxx xxx
@@ -1120,6 +1122,9 @@ asianalliance_chaosstorminductor:
 		LaunchSound: sgenopen.wav
 		IncomingSound: sgenopen.wav
 	SupportPowerChargeBar:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: asianalliance_chaosstorminductor_swlimit
+		RequiresPrerequisites: global-swlimit
 
 cgyard.asian:
 	Inherits: ^RA2Building
