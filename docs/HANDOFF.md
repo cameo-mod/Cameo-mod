@@ -472,7 +472,135 @@ balance problem. Nothing failed, no audit went red, and the pipeline confidently
 produced 15 wrong prices. When a migration renames a namespace, grep for the OLD
 name in the tooling, not only in the content.
 
-### 3.0f — ⛔ WHY 0 OF 27 CLASS ANCHORS ARE SIGNED (measured 2026-08-29)
+### 3.0h — ✅ FIXED: the converter ran its price levers in the wrong order
+
+**Found and fixed 2026-08-29,** immediately after §3.0g. With the eff-DPS bug gone,
+`scout` still sat at worst |Δ| **66.5 credits** against a goal of ≤1. That residual
+was not pricing at all — it was the converter's own lever ORDER.
+
+`propose_class_rebalance` has three levers, and they are wildly different in
+resolution:
+
+| lever | grid | what one step is worth |
+|---|---|---|
+| warhead `Damage` | 100 | a whole shot — 12.5% of DPS at Damage 800, 33% at 300 |
+| `Speed` | 1 | ~0.56% of cost |
+| `Range` | 10 | ~0.07% of cost |
+
+**The coarse lever ran LAST.** `unique_dmg_per_shot` — which moves Damage in whole
+100 steps to keep every member's damage-per-shot distinct — executed after the Range
+and Speed fine-tuners, so it threw away everything they had achieved. Measured across
+that single call on `scout`: worst |Δ| **15.6 before it, 66.5 after it**. The
+uniqueness pass, not the pricing, was the dominant error in the whole report.
+
+It was also a **greedy first-fit in ledger order**: whoever sorted first in the
+filename took the slot, and a later member got shoved several steps away.
+`forgotten_mutant` was displaced 500 → 200 and `td_nod_minigunner` 700 → 1200 for no
+reason but sort order.
+
+**The fix, in four parts.**
+
+1. **Order the levers coarsest-first** — Damage → Speed → Range.
+2. **`DamageGridAssignment`** replaces the greedy. `class_baseline_price` is linear in
+   DPS and DPS is linear in Damage, so each member's |Δ| is a **V** in the slot it
+   takes. With convex costs on a shared grid an optimal assignment never crosses, so
+   an order-preserving DP is *exact*, not heuristic. It runs twice: pass 1 minimises
+   the WORST |Δ| (`max` composes through a DP, lexicographic tuples do not), pass 2
+   minimises the TOTAL with every slot above that worst forbidden.
+3. **`polish_residuals`** — a joint (Damage, Speed, Range) search for members the
+   coordinate descent stranded. `ra1_soviets_ak47conscript` wants Damage 344; on the
+   100 grid its reachable slots are 300 (Δ −15.6) and 400 (Δ +15.6), so no single
+   Damage move helps, and with Damage pinned at 300 no single Speed move helps either.
+   The pair (400, Speed 62) prices it exactly. Neither lever finds it alone.
+4. **Run the whole iteration budget.** The trio is not monotone — `scout` walks
+   51.0 → 37.2 → 32.1 → 22.8 — so stopping at the first non-improvement froze it early.
+
+**Result. No class regressed; five improved:**
+
+| class | before | after |
+|---|--:|--:|
+| `scout` | 66.5 | **22.8** |
+| `archer` | 6.7 | **0.2** ✅ |
+| `flying_infantry` | 6.8 | **0.6** ✅ |
+| `missile_vehicle` | 2.5 | **0.6** ✅ |
+| `tank_destroyer` | 1801.7 | 1791.7 |
+
+**Classes now inside the ≤1 goal: 8** (`closecombat`, `grenadier`, `heavy_sniper`,
+`mortar`, `special_forces`, and the three above) — up from 5. Those are the signable
+candidates; see §3.0f for why signing them as a batch is still wrong.
+
+Pinned by `tools/tests/test_damage_grid_assignment.py`.
+
+### 3.0j — ✅ RULED: the verifier is a ratio, not a frozen actor (2026-08-29)
+
+**Maintainer:** *"Does it make sense anymore to have a verifier, or is it fine to just have the
+baseline actors — the verifiers are too stiff and I want them to be more independent?"*
+
+Measured before answering, and the measurement agrees three ways:
+
+| the verifier was supposed to be | what the tree says |
+|---|---|
+| a second calibration point at **2.5× cost0** | **8 of 23** sit at 2.5×; three (`line_breaker` 0.81×, `artillery_tank` 0.86×, `archer` 0.90×) are **cheaper than their own baseline** |
+| an independent check that the anchor prices a second known-good unit | its own Δ reaches **−3779.9** (`dreadnought`), −3368.8 (`high_tech_tank`), +990.1 (`rocket_trooper`) |
+| a constraint that keeps the class honest | releasing it moved the other members' worst \|Δ\| by **0.0 in 17 of 23 classes**, and IMPROVED 5 |
+
+⛔ **The third row is why this was worse than useless.** `protected` rows are excluded from the
+report's *"worst |Δ| among non-anchor members"* line, so a verifier 3779 credits out of position was
+**invisible in the very report that exists to catch bad pricing.** Freezing it did not just fail to
+help — it hid the failure.
+
+**Ruled: only the ANCHOR is frozen.** It defines `cost0`, which is what makes the class formula a
+formula. `verifier_actor` stays in `class_anchors.json` as the class's named reference unit, is
+still labelled in the report, is kept in the roster even when not buildable — and is now balanced
+and counted like every other member. The 2.5× baseband law is untouched: `check_band.py` enforces it
+on price RATIOS, not on a nominated actor. `BALANCE_PIPELINE.md` §8.1 carries the amendment.
+
+**Effect:** no class regressed except where the verifier's own error is now honestly counted
+(`dreadnought` 3751.1 → 3839.1, `heavy_infantry` 317.9 → 318.0, `heavy_sniper` 0.1 → 0.2).
+`rocket_trooper` improved 212.5 → 146.0, `archer` 6.7 → 0.2, `flying_infantry` 6.8 → 0.6.
+
+### 3.0i — ⛔ MAINTAINER RULING NEEDED: what does the uniqueness law separate?
+
+**This is the single decision that takes `scout` from 22.8 to 0.7 — inside the goal.**
+It is a design ruling, so it is not made here. `--uniqueness dps` measures the
+alternative and writes nothing; the default remains the law as written.
+
+After §3.0h, `scout`'s entire remaining residual is one effect. The members' ideal
+Damage slots **collide**: four of them want Damage 800 —
+
+| actor | Burst | ReloadDelay | eff-DPS at Damage 800 |
+|---|--:|--:|--:|
+| `latinsyndicate_latinmilitia` | 3 | 22 | 80.0 |
+| `td_nod_minigunner` | 4 | 50 | 57.1 |
+| `ra1_allies_rifleinfantry` | 3 | 50 | 41.4 |
+| `ra1_soviets_rifleinfantry` | 3 | 50 | 40.0 |
+
+Three of the four must move, and at Damage 800 one grid step is 12.5% of the unit's
+whole DPS — far more than the Range band (±1000 on 5000, i.e. ±3.3% of cost) can
+absorb. That is the 22.8.
+
+⚠ **But those four collide on nothing a player can see.** Their eff-DPS is 80.0 /
+57.1 / 41.4 / 40.0, because Burst and ReloadDelay already differ. The only thing they
+share is the literal number in the warhead node — and several of them **share that
+weapon file anyway** (`shared-wpn?` in the report), so it is not even a per-actor
+value. The report already tolerates `ReloadDelay` duplicates as a design choice.
+
+| uniqueness separates | worst \|Δ\| on `scout` |
+|---|--:|
+| raw warhead `Damage` (the law as written) | 22.8 |
+| effective DPS | **0.7** ✅ |
+
+**The question for the maintainer:** does the 5-stat uniqueness law mean *no two units
+share a Damage field*, or *no two units share an effective DPS*? If the latter, `scout`
+meets the ≤1 goal today and `--uniqueness dps` becomes the default.
+
+### 3.0f — ⛔ WHY 24 OF 27 CLASS ANCHORS ARE STILL UNSIGNED (measured 2026-08-29)
+
+⚠ **Corrected 2026-08-29.** This section, the C1 board row and the pinned claim all
+said **0 signed**. The artifact says **3** — `dreadnought`, `heavy_infantry`, `scout`
+carry `signed_off: true` in `docs/balance/class_anchors.json`, and `audit_doc_claims`
+had been reporting the mismatch. The analysis below is unchanged and still applies to
+the 24 that remain.
 
 Pricing is blocked on the anchors and nothing said why. `tools/balance/anchor_readiness.py`
 measures it. **`fit_class.py` validates an anchor by pricing every MEMBER of its class**,

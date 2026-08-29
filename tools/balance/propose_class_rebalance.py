@@ -23,6 +23,36 @@ import tier_chain  # noqa: E402
 LEDGER_DIR = ROOT / "docs/balance"
 ANCHORS_FILE = LEDGER_DIR / "class_anchors.json"
 
+UNIQUENESS_KEYS = {
+    "damage": "raw warhead Damage (the 5-stat law as written)",
+    "dps": "effective DPS (measurement only — needs a maintainer ruling)",
+}
+"""What the 5-stat uniqueness law separates, and why there is a second option.
+
+⚠ **`damage` is the law and stays the default.** `dps` writes nothing on its own;
+it exists so the cost of the law can be MEASURED instead of argued about.
+
+THE MEASUREMENT (2026-08-29, class `scout`, 22 movable members). With the levers
+fixed and ordered correctly, worst |Δ| lands at:
+
+    uniqueness on raw Damage       22.8 credits
+    uniqueness on effective DPS     0.7 credits   <- meets the <=1 goal
+
+The whole 22.8 is one effect. Damage moves on the 100 grid, and after the DPS
+solve the members' ideal slots COLLIDE: **four** of them want Damage 800
+(`td_nod_minigunner`, `ra1_allies_rifleinfantry`, `ra1_soviets_rifleinfantry`,
+`latinsyndicate_latinmilitia`). Three must move, and at Damage 800 one step is
+12.5% of the unit's whole DPS — far more than the range band (+-1000 on 5000,
+i.e. +-3.3% of cost) can absorb. Under DPS-uniqueness those four collide on
+NOTHING: their eff-DPS at Damage 800 is 57.1 / 41.4 / 40.0 / 80.0, because their
+Burst and ReloadDelay already differ. They are separated by every quantity a
+player can observe; only the literal number in the warhead node is shared — and
+some of them SHARE THAT WEAPON anyway, so it is not even a per-actor value.
+
+That is the case for the ruling, not the ruling itself. `docs/HANDOFF.md` carries
+it as an open item; until it is answered, the default writes Damage-uniqueness.
+"""
+
 # Actors the maintainer has explicitly retired from class rosters.
 EXCLUDED_ACTORS = {"light_inf"}
 
@@ -268,8 +298,30 @@ def load_class_rows(cls: str):
     if not anchor:
         raise SystemExit(f"No spec anchor for class {cls}")
     spec = anchor["spec"]
-    protected = {anchor.get("anchor_actor"), anchor.get("verifier_actor")}
+    # ⚠ THE VERIFIER IS NO LONGER FROZEN (maintainer ruling 2026-08-29).
+    # Only the ANCHOR is protected — it defines cost0, so freezing it is what
+    # makes the class formula a formula. The verifier used to be frozen too, as a
+    # second calibration point at 2.5x cost0 (`BALANCE_PIPELINE.md` §8.1). Three
+    # measurements retired that:
+    #   * it does not constrain the class — releasing it moved the other members'
+    #     worst |Δ| by 0.0 in 17 of 23 classes, and IMPROVED 5;
+    #   * it is not where the law puts it — only 8 of 23 sit at 2.5x cost0, and
+    #     three (`line_breaker`, `artillery_tank`, `archer`) are CHEAPER than
+    #     their own baseline, which makes them a second baseline, not a ceiling;
+    #   * it was not verifying anything — its own Δ reaches -3779.9
+    #     (`dreadnought`), and because `protected` rows are excluded from the
+    #     "worst |Δ| among non-anchor members" line, a verifier that far out was
+    #     INVISIBLE in the very report that exists to catch bad pricing.
+    # The 2.5x baseband law is unaffected: `check_band.py` enforces it on price
+    # RATIOS, not on a nominated actor. `verifier_actor` stays in the anchor file
+    # as the class's reference unit, and the report still labels it — it is now
+    # balanced and counted like every other member.
+    protected = {anchor.get("anchor_actor")}
     protected.discard(None)
+    # Kept in the roster even when not buildable — the verifier is still the
+    # class's named reference unit, it is just no longer exempt from balancing.
+    reference = protected | {anchor.get("verifier_actor")}
+    reference.discard(None)
     band_lo, band_hi = band_for(cls, spec)
     spd_lo = int(spec["speed0"] * 0.8)
     spd_hi = int(spec["speed0"] * 1.2)
@@ -307,7 +359,7 @@ def load_class_rows(cls: str):
                 # tagged design.balance_include (spawn-together siblings like
                 # molotovconscript, or support-power spawns like frank/undead —
                 # ~disabled by spawn mechanism, but real balance-relevant units).
-                if (not u.get("buildable", True) and actor not in protected
+                if (not u.get("buildable", True) and actor not in reference
                         and not design.get("balance_include")):
                     continue
                 hp = fnum((u.get("hp") or {}).get("v")) or 0
@@ -467,7 +519,163 @@ def decompose_dps(target_dps, base_dps, cur_sum, n_wh):
     return formula.snap_damage_step(needed / n_wh), 1.0
 
 
-def unique_dmg_per_shot(rows, step=None):
+class DamageGridAssignment:
+    """Lazy slot-assignment helper for the effective-damage-per-shot uniqueness law.
+
+    THE PROBLEM IT SOLVES. Every non-protected member of a class must end with a
+    DISTINCT effective damage-per-shot, and damage only moves on the 100 grid
+    (`formula.DAMAGE_STEP`). When two members want the same slot one has to move,
+    and one step is a whole shot — so the choice of WHO moves, and WHERE, is a
+    pricing decision, not a bookkeeping one.
+
+    It used to be neither: the rows were walked in ledger order and each took the
+    first free slot beside its ideal. That is greedy first-fit on a shared grid,
+    so an early row could take the slot a later one needed and shove it several
+    steps out. Measured on `scout`, worst |Δ| was **15.6 before the uniqueness
+    pass and 66.5 after it** — the pass, not the pricing, was the dominant error.
+    `forgotten_mutant` was displaced 500 -> 200 and `td_nod_minigunner` 700 ->
+    1200 purely because of who came first in the file.
+
+    WHY AN EXACT ANSWER IS AVAILABLE. `class_baseline_price` is LINEAR in DPS and
+    DPS is linear in Damage, so each row's |Δ| is a **V** in the slot it takes —
+    convex, with its minimum at the ideal the DPS solve already produced. With
+    convex costs on a shared 1-D grid an optimal assignment never crosses: if
+    row A wants a lower slot than row B, some optimum gives A the lower slot.
+    So sorting rows by ideal and walking slots in order loses nothing, and a DP
+    over (row, slot) is exact rather than heuristic.
+
+    It runs twice, because the goal is a MINIMAX one and lexicographic tuples do
+    not compose through a DP ((5,100) beats (6,1) until both take a 10 and the
+    order flips). Pass 1 minimises the worst |Δ| — `max` composes monotonically,
+    so that DP is exact. Pass 2 minimises the TOTAL |Δ| with every slot whose cost
+    exceeds that worst forbidden, which cannot spoil the worst it inherits.
+
+    LAZY, hence the name: slots and per-(row, slot) deltas are built on demand and
+    memoised. The candidate grid is O(rows^2) wide and each delta is a full price
+    evaluation, but the DP only ever asks for the band it actually walks, and a
+    class whose members never collide never pays for a single one.
+
+    Falls back to `None` from `solve()` when the members do not share one grid —
+    effective damage is `per_warhead x n_warheads`, so rows with different warhead
+    counts live on grids of different pitch and cannot be interleaved by one DP.
+    The caller then uses the greedy path.
+    """
+
+    INF = float("inf")
+
+    def __init__(self, rows, step, price_of, reach=None):
+        self.rows = list(rows)
+        self.step = step
+        self.price_of = price_of
+        # How far a row may be displaced. One slot per row is always enough to
+        # break every tie, so `len(rows)` steps either way can never bind.
+        self.reach = len(self.rows) if reach is None else reach
+        self._slots = None
+        self._delta = {}
+
+    # -- lazy pieces ----------------------------------------------------------
+    @property
+    def pitch(self):
+        """The shared grid pitch, or None when the rows do not share one."""
+        counts = {(r.get("n_wh", 1) or 1) for r in self.rows}
+        return self.step * counts.pop() if len(counts) == 1 else None
+
+    def ideal(self, i):
+        """The effective damage that would price row i at EXACTLY its cost.
+
+        Solved, not searched, and deliberately NOT read off the row's current
+        `per_wh`: price is affine in effective damage (`class_baseline_price` is
+        linear in DPS, DPS is linear in Damage), so two evaluations give the line
+        and the zero of `price − cost` follows. Taking the row's current value
+        instead makes this helper's row ORDER depend on the previous pass's
+        output, so re-running the trio walks the ideals away from the prices —
+        which is exactly the drift that showed up as `scout` settling at 51.0
+        instead of 21.8.
+        """
+        r = self.rows[i]
+        pitch = self.pitch or self.step
+        a = self.price_of(r, 0.0)
+        b = (self.price_of(r, pitch) - a) / pitch
+        if abs(b) < 1e-12:
+            return max(pitch, (r.get("per_wh") or self.step) * (r.get("n_wh", 1) or 1))
+        want = (r["cost"] - a) / b
+        return max(pitch, int(round(want / pitch)) * pitch)
+
+    @property
+    def slots(self):
+        """Every effective-damage value any row could sensibly take, ascending."""
+        if self._slots is None:
+            pitch = self.pitch
+            out = set()
+            for i in range(len(self.rows)):
+                base = self.ideal(i)
+                for k in range(-self.reach, self.reach + 1):
+                    v = base + k * pitch
+                    if v >= pitch:
+                        out.add(v)
+            self._slots = sorted(out)
+        return self._slots
+
+    def delta(self, i, slot):
+        """|price − cost| for row i at this effective damage. Memoised."""
+        key = (i, slot)
+        hit = self._delta.get(key)
+        if hit is None:
+            r = self.rows[i]
+            hit = abs(self.price_of(r, slot) - r["cost"])
+            self._delta[key] = hit
+        return hit
+
+    # -- the solver -----------------------------------------------------------
+    def _walk(self, order, cap):
+        """Order-preserving DP. `cap` None => minimise the WORST delta; a number
+        => minimise the TOTAL, refusing any slot costing more than `cap`."""
+        slots = self.slots
+        n, m = len(order), len(slots)
+        if n > m:
+            return None, None
+        best = [[self.INF] * (m + 1) for _ in range(n + 1)]
+        take = [[False] * (m + 1) for _ in range(n + 1)]
+        for j in range(m + 1):
+            best[0][j] = 0.0
+        for i in range(1, n + 1):
+            for j in range(i, m + 1):
+                skip = best[i][j - 1]
+                d = self.delta(order[i - 1], slots[j - 1])
+                prev = best[i - 1][j - 1]
+                if cap is None:
+                    use = max(prev, d) if prev < self.INF else self.INF
+                else:
+                    use = prev + d if (prev < self.INF and d <= cap + 1e-9) else self.INF
+                if use < skip - 1e-12:
+                    best[i][j], take[i][j] = use, True
+                else:
+                    best[i][j] = skip
+        if best[n][m] == self.INF:
+            return None, None
+        chosen, i, j = {}, n, m
+        while i > 0:
+            if take[i][j]:
+                chosen[order[i - 1]] = slots[j - 1]
+                i -= 1
+            j -= 1
+        return best[n][m], chosen
+
+    def solve(self):
+        """{row index: effective damage} minimising (worst |Δ|, then total |Δ|)."""
+        if not self.rows:
+            return {}
+        if self.pitch is None:
+            return None
+        order = sorted(range(len(self.rows)), key=lambda i: (self.ideal(i), i))
+        worst, chosen = self._walk(order, cap=None)
+        if chosen is None:
+            return None
+        _, tightened = self._walk(order, cap=worst)
+        return tightened or chosen
+
+
+def unique_dmg_per_shot(rows, step=None, price_of=None, key="damage"):
     """Nudge per-warhead `Damage` in GRID steps so effective damage-per-shot is
     unique across non-protected, non-soft members.
 
@@ -475,41 +683,213 @@ def unique_dmg_per_shot(rows, step=None):
     retired, Damage itself is the only lever — and the 100 grid is fine enough to
     be one, since the collision test needs just 0.5 of separation while one step
     moves a whole shot by `100 x n_warheads`. Damage never nudges below one step.
+
+    ⚠ **The tie-break is PRICE-AWARE, and it has to be.** Who moves, and where,
+    decides how far a member ends from its own price. `DamageGridAssignment`
+    (above) makes that choice optimally and explains the measurement that forced
+    it; this function is the thin wrapper that applies the plan.
+
+    `price_of(row, dmg_shot) -> price` supplies the objective. Without it — a
+    caller that only wants uniqueness — the old nearest-free-slot walk still runs,
+    and it is also the fallback when the members do not share one damage grid.
     """
     step = formula.DAMAGE_STEP if step is None else step
-    placed = []
+
+    def delta(r, dmg_shot):
+        if price_of is None:
+            return 0.0
+        return abs(price_of(r, dmg_shot) - r["cost"])
+
+    def commit(r, per_wh):
+        n_wh = r.get("n_wh", 1) or 1
+        r["per_wh"] = per_wh
+        r["dmg_shot"] = per_wh * n_wh
+        r["dmg_eff"] = r["dmg_shot"]
+        r["dps_eff"] = r["per_unit"] * r["dmg_shot"]
+
+    movable = [r for r in rows if not (r["protected"] or r.get("soft"))]
+    # Protected/soft rows never blocked the grid (the old `collides` filtered
+    # them out of the placed set) and still do not — they are simply not moved.
+    if not movable:
+        return
+
+    if key == "dps":
+        # MEASUREMENT MODE (see UNIQUENESS_KEYS). Uniqueness on effective DPS
+        # instead of the raw Damage field. Every row starts at its price-ideal
+        # and only an actual DPS collision moves anyone, so the pricing residual
+        # is whatever the 100 grid leaves and nothing more.
+        helper = DamageGridAssignment(movable, step, price_of)
+        taken_dps = []
+        for i, r in enumerate(movable):
+            n_wh = r.get("n_wh", 1) or 1
+            base = helper.ideal(i) if price_of is not None else (r.get("per_wh") or step) * n_wh
+            for k in range(0, 200):
+                for sign in ((1, -1) if k > 0 else (1,)):
+                    dmg_shot = base + sign * k * step * n_wh
+                    if dmg_shot < step * n_wh:
+                        continue
+                    dps = r["per_unit"] * dmg_shot
+                    if any(abs(o - dps) <= 0.5 for o in taken_dps):
+                        continue
+                    commit(r, dmg_shot // n_wh)
+                    taken_dps.append(dps)
+                    break
+                else:
+                    continue
+                break
+        return
+
+    if price_of is not None:
+        plan = DamageGridAssignment(movable, step, price_of).solve()
+        if plan is not None:
+            for i, dmg_shot in plan.items():
+                commit(movable[i], dmg_shot // (movable[i].get("n_wh", 1) or 1))
+            return
+
+    # Fallback: nearest free slot, ledger order. Used when no objective was given
+    # (uniqueness-only callers) or when the rows do not share one damage grid.
+    taken = set()
 
     def collides(de):
-        return any(abs(o["dmg_eff"] - de) <= 0.5 for o in placed
-                   if not o["protected"] and not o.get("soft"))
+        return any(abs(o - de) <= 0.5 for o in taken)
 
-    for r in rows:
-        if r["protected"] or r.get("soft"):
-            placed.append(r)
-            continue
+    for r in movable:
         n_wh = r.get("n_wh", 1) or 1
         base = r.get("per_wh") or step
         for k in range(0, 200):
             for sign in ((1, -1) if k > 0 else (1,)):
                 per_wh = base + sign * k * step
-                if per_wh < step:
+                if per_wh < step or collides(per_wh * n_wh):
                     continue
-                dmg_shot = per_wh * n_wh
-                if not collides(dmg_shot):
-                    r["per_wh"] = per_wh
-                    r["dmg_shot"] = dmg_shot
-                    r["dmg_eff"] = dmg_shot
-                    r["dps_eff"] = r["per_unit"] * dmg_shot
-                    placed.append(r)
-                    break
+                commit(r, per_wh)
+                taken.add(r["dmg_eff"])
+                break
             else:
                 continue
             break
-        else:
-            placed.append(r)
 
 
-def rebalance_class(cls: str):
+def fine_tune_range(rows, spec, band_lo, band_hi):
+    """Snap each member to the range that zeroes Δ at its FINAL DPS.
+
+    Range moves on a 10 grid, so it is a much finer price lever than one Damage
+    step — which is why it runs LAST, after the coarse Damage grid is fixed.
+    Members the DPS solve could not price at all (`over_priced`) are left alone.
+    """
+    for r in rows:
+        if r["protected"] or r.get("over_priced"):
+            continue
+        r0 = formula.solve_class_baseline_range(
+            r["cost"], r["hp"], r["spd"], r["dps_eff"],
+            spec["hp0"], spec["speed0"], spec["range0_wdist"], spec["dps0"],
+            spec["cost0"], special=r["special"], tech_tier=r["tech_tier"])
+        r0 = int(round(r0 / 10)) * 10
+        if band_lo <= r0 <= band_hi:
+            r["rng"] = r0
+    nudge_ranges(rows, band_lo, band_hi)   # re-unique after snapping
+
+
+def fine_tune_speed(rows, spec, spd_lo, spd_hi):
+    """FOOT infantry only, step 1: squeeze any member still off Δ0.
+
+    The maintainer allows Speed±1 on foot infantry as a fine price lever. Units
+    with a turn rate keep multiples of 5 (too coarse) and are left alone.
+    """
+    taken_spd = {r["spd"] for r in rows}
+    for r in rows:
+        if (r["protected"] or r.get("soft") or r.get("over_priced")
+                or r.get("spd_step", 1) != 1):
+            continue
+        d = _price(spec, r["hp"], r["spd"], r["rng"], r["dps_eff"],
+                   r["special"], r["tech_tier"]) - r["cost"]
+        if abs(d) <= 1:
+            continue
+        ideal = int(round(solve_target_speed(
+            spec, r["cost"], r["hp"], r["rng"], r["dps_eff"],
+            r["special"], r["tech_tier"], spd_lo, spd_hi)))
+        # Pick the nearest unused speed to ideal (speed stays unique) — but only
+        # if it actually helps. The band is 0.8..1.2 x speed0, so a 21-member
+        # class occupies most of it, and "nearest unused" can be nowhere near the
+        # ideal. Moving there anyway made `scout` WORSE, not better (worst |Δ|
+        # 22.8 -> 47.0, with ra2_allies_gi thrown to -37.2): this lever is only
+        # ever an improvement when the slot it can reach is an improvement.
+        taken_spd.discard(r["spd"])
+        best, best_d = r["spd"], abs(d)
+        for cand in sorted(range(spd_lo, spd_hi + 1), key=lambda s: (abs(s - ideal), s)):
+            if cand in taken_spd:
+                continue
+            cd = abs(_price(spec, r["hp"], cand, r["rng"], r["dps_eff"],
+                            r["special"], r["tech_tier"]) - r["cost"])
+            if cd < best_d - 1e-9:
+                best, best_d = cand, cd
+        r["spd"] = best
+        taken_spd.add(r["spd"])
+
+
+def polish_residuals(rows, spec, band_lo, band_hi, spd_lo, spd_hi, key, step=None):
+    """Joint (Damage, Speed, Range) search for members coordinate descent stranded.
+
+    The three levers run one after another, each optimal on its own — and that is
+    exactly how a coordinate descent gets stuck. `ra1_soviets_ak47conscript` wants
+    Damage 344; on the 100 grid at its speed the reachable slots are 300 (Δ -15.6)
+    and 400 (Δ +15.6), so no single Damage move helps, and with Damage pinned at
+    300 no single Speed move helps either. The pair (400, speed 62) prices it
+    EXACTLY, and neither lever can find it alone.
+
+    So: for each member still off by more than a credit, walk its Damage slots and
+    its Speed band TOGETHER, solving Range in closed form at each pair, and keep
+    the best combination that respects every uniqueness rule. Cheap — a dozen
+    slots times a 25-wide speed band, only for the rows that are actually stuck.
+    """
+    step = formula.DAMAGE_STEP if step is None else step
+
+    def price(r, spd, rng, dps):
+        return _price(spec, r["hp"], spd, rng, dps, r["special"], r["tech_tier"])
+
+    for r in sorted(rows, key=lambda r: -abs(
+            price(r, r["spd"], r["rng"], r["dps_eff"]) - r["cost"])):
+        if r["protected"] or r.get("soft") or r.get("over_priced"):
+            continue
+        cur = abs(price(r, r["spd"], r["rng"], r["dps_eff"]) - r["cost"])
+        if cur <= 1:
+            continue
+        others = [o for o in rows if o is not r]
+        busy_spd = {o["spd"] for o in others}
+        busy_rng = {o["rng"] for o in others if not o.get("protected")}
+        blocked = {(o["dps_eff"] if key == "dps" else o["dmg_eff"])
+                   for o in others if not (o["protected"] or o.get("soft"))}
+        n_wh = r.get("n_wh", 1) or 1
+        base = r.get("per_wh") or step
+        best = None
+        for k in range(-8, 9):
+            per_wh = base + k * step
+            if per_wh < step:
+                continue
+            dmg_shot = per_wh * n_wh
+            dps = r["per_unit"] * dmg_shot
+            if any(abs(b - (dps if key == "dps" else dmg_shot)) <= 0.5 for b in blocked):
+                continue
+            spds = ([s for s in range(spd_lo, spd_hi + 1) if s not in busy_spd]
+                    if r.get("spd_step", 1) == 1 else [r["spd"]])
+            for spd in spds + [r["spd"]]:
+                rng = formula.solve_class_baseline_range(
+                    r["cost"], r["hp"], spd, dps, spec["hp0"], spec["speed0"],
+                    spec["range0_wdist"], spec["dps0"], spec["cost0"],
+                    special=r["special"], tech_tier=r["tech_tier"])
+                rng = max(band_lo, min(band_hi, int(round(rng / 10)) * 10))
+                if rng in busy_rng and rng != r["rng"]:
+                    continue
+                d = abs(price(r, spd, rng, dps) - r["cost"])
+                if best is None or d < best[0] - 1e-9:
+                    best = (d, per_wh, spd, rng, dps, dmg_shot)
+        if best and best[0] < cur - 1e-9:
+            _, per_wh, spd, rng, dps, dmg_shot = best
+            r["per_wh"], r["spd"], r["rng"] = per_wh, spd, rng
+            r["dmg_shot"] = r["dmg_eff"] = dmg_shot
+            r["dps_eff"] = dps
+
+
+def rebalance_class(cls: str, uniqueness: str = "damage"):
     rows, spec, band_lo, band_hi, spd_lo, spd_hi = load_class_rows(cls)
     if not rows:
         return ""
@@ -554,53 +934,76 @@ def rebalance_class(cls: str):
         r["dmg_eff"] = r["dmg_shot"] * fp
         r["dps_eff"] = r["per_unit"] * r["dmg_shot"] * fp
         r["trimmed"] = (r["dmg_shot"] != (r["dmg_shot0"] or r["dmg_shot"]))
-    # 2b. Range fine-tune: range is a finer (10-step) Δ lever than one Damage step.
-    #     Snap each member to the range that zeroes Δ at its trimmed DPS when
-    #     that lands in band; the DPS-trim already handled out-of-band cases.
-    for r in rows:
-        if r["protected"] or r.get("over_priced"):
-            continue
-        r0 = formula.solve_class_baseline_range(
-            r["cost"], r["hp"], r["spd"], r["dps_eff"],
-            spec["hp0"], spec["speed0"], spec["range0_wdist"], spec["dps0"],
-            spec["cost0"], special=r["special"], tech_tier=r["tech_tier"])
-        r0 = int(round(r0 / 10)) * 10
-        if band_lo <= r0 <= band_hi:
-            r["rng"] = r0
-    nudge_ranges(rows, band_lo, band_hi)   # re-unique after snapping
-    # 2c. Speed fine-tune (FOOT infantry only, step 1): squeeze any member still
-    #     off Δ0 — the maintainer allows Speed±1 on foot infantry as a fine price
-    #     lever. Turn-rate units keep multiples of 5 (too coarse) and are left.
-    taken_spd = {r["spd"] for r in rows}
-    for r in rows:
-        if (r["protected"] or r.get("soft") or r.get("over_priced")
-                or r.get("spd_step", 1) != 1):
-            continue
-        d = _price(spec, r["hp"], r["spd"], r["rng"], r["dps_eff"],
-                   r["special"], r["tech_tier"]) - r["cost"]
-        if abs(d) <= 1:
-            continue
-        ideal = int(round(solve_target_speed(
-            spec, r["cost"], r["hp"], r["rng"], r["dps_eff"],
-            r["special"], r["tech_tier"], spd_lo, spd_hi)))
-        # pick nearest unused speed to ideal (keep speed uniqueness)
-        taken_spd.discard(r["spd"])
-        for cand in sorted(range(spd_lo, spd_hi + 1), key=lambda s: (abs(s - ideal), s)):
-            if cand not in taken_spd:
-                r["spd"] = cand
-                break
-        taken_spd.add(r["spd"])
-    # 3. Effective-damage-per-shot uniqueness (skips protected + soft)
-    unique_dmg_per_shot(rows)
+    # 3. Effective-damage-per-shot uniqueness + the two fine levers, iterated.
+    #    ⚠ ORDER MATTERS AND IT USED TO BE BACKWARDS. The COARSE lever (Damage on
+    #    the 100 grid) has to be set BEFORE the fine ones (Range on a 10 grid,
+    #    Speed by 1), because one Damage step is a whole shot: running uniqueness
+    #    last threw away everything the fine-tuners had achieved. Measured on
+    #    `scout`, worst |Δ| across that single call was 15.6 -> 66.5.
+    #
+    #    They are ITERATED rather than run once because the three constrain each
+    #    other: uniqueness scores a candidate at the current range/speed, the
+    #    fine-tuners then move both, and their own uniqueness rules (nudge_ranges,
+    #    the taken-speed set) can refuse the value the score assumed. Scoring
+    #    against what the bands COULD absorb instead of what they do is worse, not
+    #    better — it assumes an absorption that collides away, and worst |Δ| on
+    #    `scout` went to 74.3. So: run the trio, measure, keep the best state.
+    def price_at(r, dmg_shot):
+        return _price(spec, r["hp"], r["spd"], r["rng"],
+                      r["per_unit"] * dmg_shot, r["special"], r["tech_tier"])
+
+    def worst_delta():
+        return max((abs(_price(spec, r["hp"], r["spd"], r["rng"], r["dps_eff"],
+                               r["special"], r["tech_tier"]) - r["cost"])
+                    for r in rows if not r["protected"]), default=0.0)
+
+    def snapshot():
+        return [{k: r[k] for k in ("hp", "spd", "rng", "per_wh", "dmg_shot",
+                                   "dmg_eff", "dps_eff")} for r in rows]
+
+    def run(passes, use_polish):
+        """One descent. Returns (worst |Δ|, state). Keeps the best state it saw:
+        the trio is NOT monotone — a pass can trade one member's residual for
+        another's and come back better two rounds later (`scout` walks
+        51.0 -> 37.2 -> 32.1 -> 22.8), so stopping at the first non-improvement
+        freezes it early. Run the whole budget, keep the best."""
+        seen, seen_score = snapshot(), None
+        for _ in range(passes):
+            unique_dmg_per_shot(rows, price_of=price_at, key=uniqueness)
+            fine_tune_range(rows, spec, band_lo, band_hi)
+            fine_tune_speed(rows, spec, spd_lo, spd_hi)
+            fine_tune_range(rows, spec, band_lo, band_hi)
+            if use_polish:
+                polish_residuals(rows, spec, band_lo, band_hi, spd_lo, spd_hi,
+                                 uniqueness)
+            score = worst_delta()
+            if seen_score is None or score < seen_score - 1e-9:
+                seen, seen_score = snapshot(), score
+        return seen_score, seen
+
+    # The joint polish is a large win where the levers are stuck in a local
+    # optimum and a loss where they are merely over-subscribed: on `scout` it
+    # takes DPS-uniqueness from 15.6 to 0.7, and pushes damage-uniqueness from
+    # 22.8 to 32.1 by perturbing the descent into a worse basin. Neither is
+    # predictable from the class, so run both descents and keep the better.
+    start = snapshot()
+    best_score, best = run(10, use_polish=True)
+    for r, saved in zip(rows, start):
+        r.update(saved)
+    plain_score, plain = run(10, use_polish=False)
+    if plain_score is not None and (best_score is None or plain_score < best_score):
+        best_score, best = plain_score, plain
+    for r, saved in zip(rows, best):
+        r.update(saved)
     # 4. Prices / deltas
     for r in rows:
         r["price"] = _price(spec, r["hp"], r["spd"], r["rng"], r["dps_eff"],
                             r["special"], r["tech_tier"])
         r["delta"] = r["price"] - r["cost"]
-    return render_report(rows, cls)
+    return render_report(rows, cls, uniqueness)
 
 
-def render_report(rows, cls):
+def render_report(rows, cls, uniqueness="damage"):
     s = load_anchors()[cls]["spec"]
     lines = [
         f"# {cls.replace('_', ' ').title()} infantry rebalance proposal",
@@ -609,6 +1012,11 @@ def render_report(rows, cls):
         "",
         "Converter law: cost pinned, range clamped to band + made unique, "
         "eff-DPS trimmed to Δ≤1 via 100-grid warhead Damage; unconditional FirepowerMultiplier is retired.",
+        "",
+        f"Uniqueness separates **{UNIQUENESS_KEYS[uniqueness]}**. "
+        "The levers run coarsest-first — Damage (100 grid) → Speed (1) → Range (10) "
+        "— because one Damage step is a whole shot and running it last threw away "
+        "everything the fine levers had achieved.",
         "",
         "| actor | faction | HP | spd | rng | cost | dmg/wh×n | rl | burst | legacy FP% | eff DPS | price | Δ | flags |",
         "|---|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|---|",
@@ -691,8 +1099,14 @@ def main():
                     "design.class_anchor==<class> (or a mapped subtype).")
     ap.add_argument("--class", "-c", dest="cls", required=True, choices=valid,
                     metavar="CLASS", help="one of: " + ", ".join(valid))
+    ap.add_argument("--uniqueness", choices=("damage", "dps"), default="damage",
+                    help="which quantity the 5-stat uniqueness law separates. "
+                         "`damage` (default) is the law as written — the raw "
+                         "warhead Damage field. `dps` is a MEASUREMENT of the "
+                         "alternative described in UNIQUENESS_KEYS and needs a "
+                         "maintainer ruling before anything is written from it.")
     args = ap.parse_args()
-    text = rebalance_class(args.cls)
+    text = rebalance_class(args.cls, uniqueness=args.uniqueness)
     if not text:
         print(f"no units found for class {args.cls} "
               f"(tag members with design.class_anchor=={args.cls} first)")
