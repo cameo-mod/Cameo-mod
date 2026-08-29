@@ -40,6 +40,9 @@ RA2PatriotThunderboltMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
+	Warhead@MissileAA_Heavy:
+		ValidTargets: Air
+		Damage: 10000
 
 HarrierMissiles:
 	Inherits: ^LightFlameWeapon

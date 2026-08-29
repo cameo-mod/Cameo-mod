@@ -53,7 +53,7 @@ PRESERVED_HASHES = {
     "IxRailgunDroneBullet": "8f6f05b056d48d7a61c623779ea6b3115aef386a6c10a681e7ad94a92ebb96b1",
     # Post-consolidation correction: Wolverine Mk II keeps its advertised weak
     # AA role after Sonic Weaponry replaces the base armament.
-    "TSAssaultCannonTalSonic": "193772b68bde138b7365ad1f6c6cbbd6632e2cf98a84d2987491fba67b514413",
+    "TSAssaultCannonTalSonic": "6351589c35a2e3c2e9dac7dce494ecaed4be168eea38f407dda8affe87125e08",
 }
 
 CANONICAL = re.compile(r"^\^Warhead_([A-Za-z]+)_(\w+)$")
