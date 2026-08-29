@@ -2873,8 +2873,10 @@ AsianMLRS:
 	-Warhead@HeavyMissile:
 	Warhead@MissileAA_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 0
+		Damage: 8000
+		PercentageScale: 4988
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
 AsianSpitfireRockets:
 	Inherits: AsianMLRS
 	Inherits@fx: ^Effect_Explosion_Large_RA2
@@ -2908,8 +2910,10 @@ AsianSpitfireRockets:
 	-Warhead@HeavyMissile:
 	Warhead@MissileAA_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		PercentageScale: 0
+		Damage: 16000
+		PercentageScale: 2494
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
 AsianKamikazeImpactTargeting:
 	ReloadDelay: 25
 	Range: 7500

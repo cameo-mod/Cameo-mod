@@ -1171,8 +1171,9 @@ NaxisBlackBombSmaller:
 	-Warhead@LightChemicalWeapon:
 	Warhead@Demolition_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 50000
-		PercentageScale: 0
+		Damage: 75000
+		PercentageScale: 2666
+	-Warhead@CannonHE_Medium:
 
 ^LunarNaxisUpgradedCannons:
 	Report: nax_aliengun.wav

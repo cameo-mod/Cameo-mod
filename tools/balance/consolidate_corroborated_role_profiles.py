@@ -71,6 +71,10 @@ ROOTS = {
     "RA2CRM60H": ("Bullet_Medium", set(), "name"),
     "RA2FreedomAK47": (
         "Bullet_Medium", {"RA2FreedomAK47_elite"}, "name"),
+    "NaxisBlackBombSmaller": ("Demolition_Medium", set(), "name"),
+    "AsianMLRS": (
+        "MissileAA_Medium", {"AsianSpitfireRockets"}, "existing-roleflat"),
+    "harkonnen_autogunturret": ("Bullet_Medium", set(), "name"),
 }
 
 DESTINATION_OVERRIDES = {
@@ -130,6 +134,17 @@ BASELINE = {
         {"Bullet_MediumFlatCompatibility", "CannonHE_Heavy"}, 18000, 3328),
     "RA2FreedomAK47_elite": (
         {"Bullet_MediumFlatCompatibility", "CannonHE_Heavy"}, 18000, 3328),
+    "NaxisBlackBombSmaller": (
+        {"CannonHE_Medium", "Demolition_MediumFlatCompatibility"},
+        75000, 2666),
+    "AsianMLRS": (
+        {"Demolition_Light", "MissileAA_MediumFlatCompatibility",
+         "MissileAP_Medium"}, 8000, 4988),
+    "AsianSpitfireRockets": (
+        {"Demolition_Light", "MissileAA_MediumFlatCompatibility",
+         "MissileAP_Medium"}, 16000, 2494),
+    "harkonnen_autogunturret": (
+        {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 6000, 9984),
 }
 
 TARGETS = {
@@ -160,6 +175,10 @@ TARGETS = {
     "RA2CRM60H": "Ground, Water, Air",
     "RA2FreedomAK47": "Ground, Water, Air, Garrisoned",
     "RA2FreedomAK47_elite": "Ground, Water, Air, Garrisoned",
+    "NaxisBlackBombSmaller": "Ground, Water",
+    "AsianMLRS": "Ground, Water, Air",
+    "AsianSpitfireRockets": "Ground, Water, Air",
+    "harkonnen_autogunturret": "Ground, Water, Air",
 }
 
 CANONICAL = re.compile(r"^\^Warhead_([A-Za-z]+)_(\w+)$")
@@ -212,6 +231,13 @@ def selections(rs: Ruleset) -> dict[str, str]:
                 raise RuntimeError(
                     f"{root}: expected sole canonical family {destination}; "
                     f"found {sorted(canonical)}")
+        elif evidence == "existing-roleflat":
+            compatibility = f"^Compatibility_{destination}Flat"
+            if not any(str(child.value).strip() == compatibility
+                       for child in rs.weapon(root).children
+                       if child.key == "Inherits" or child.key.startswith("Inherits@")):
+                raise RuntimeError(
+                    f"{root}: expected existing {compatibility} role selection")
         for name in {root, *expected}:
             if name in selected:
                 raise RuntimeError(f"{name}: selected through multiple roots")

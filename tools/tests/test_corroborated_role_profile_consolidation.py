@@ -26,7 +26,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         cls.selected = selections(cls.rules)
 
     def test_selected_profiles_resolve_to_one_pinned_main(self):
-        self.assertEqual(27, len(self.selected))
+        self.assertEqual(31, len(self.selected))
         for name, destination in self.selected.items():
             nodes = main_warhead_nodes(self.rules.resolve_weapon(name))
             self.assertEqual(1, len(nodes), name)
@@ -52,11 +52,22 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
             "TSRPGTowerRail", "VolkovMagneticWeapon", "tkmjuggap",
             "tkmtechnicalmgap", "BCLaser", "BCYamatoCannon",
             "edenMobileLaserTiger", "MadcapGun", "MarineMG",
+            "JimRaynorMachineGun", "SteelCloneGun",
         }
         self.assertTrue(excluded.isdisjoint(self.selected))
         for name in excluded:
             self.assertGreaterEqual(
                 len(main_warheads(self.rules.resolve_weapon(name))), 2, name)
+
+    def test_new_bulk_roles_keep_special_companion_payloads(self):
+        naxis = self.rules.resolve_weapon("NaxisBlackBombSmaller")
+        self.assertIsNotNone(naxis.child("Warhead@LightChemicalWeaponPercentage"))
+        self.assertIsNotNone(naxis.child("Warhead@HeavyBombPercentage"))
+        self.assertIsNotNone(naxis.child("Warhead@Radiation"))
+
+        for name in ("AsianPhotonCannon_EMP", "AsianPunisherAG_EMP",
+                     "AsianQuasarAG_EMP", "AsianQuasar_EMP_AA"):
+            self.assertGreaterEqual(len(main_warheads(self.rules.resolve_weapon(name))), 2)
 
     def test_all_selected_definitions_are_reachable(self):
         concrete = {
