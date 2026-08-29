@@ -3,6 +3,14 @@
 Harvester Balance Table Generator
 Corrected formulas from engine source code analysis.
 
+⚠ SUPERSEDED for measurement by tools/balance/harvester_income.py, which derives
+every parameter from the resolved tree instead of the hardcoded HARVESTERS table
+below. That table is accurate for 30 of 33 rows but carries Capacity 100 for
+schwarzermond_noidharvester against a yaml value of 50, is missing
+EDEN_CARGOTRUCK_EMPTY and PLYMOUTH_CARGOTRUCK_EMPTY, and models neither the
+HarvesterBalancer speed boost nor the refinery dock/fleet terms. Kept for its
+engine-source notes and its HTML/PDF rendering. See docs/design/HARVESTER_BALANCE.md.
+
 Engine mechanics:
 - FullyLoadedSpeed is a PERCENTAGE of base Speed (not absolute).
   Harvester.cs:284-287: GetSpeedModifier() = 100 - (100 - FullyLoadedSpeed) * Fullness / 100
@@ -29,6 +37,16 @@ Engine mechanics:
 
 import math
 import html
+import pathlib
+
+# ⚠ These were absolute Windows paths. On Linux a backslash is an ordinary
+# filename character, so the "path" became a single file called
+# `c:\Users\...\harvester_balance_table.html` dropped in the repo root, which
+# then showed up as an untracked file on every clone. Resolve from this file
+# instead so the output lands in docs/audit/ on every platform.
+_ROOT = pathlib.Path(__file__).resolve().parents[2]
+OUT_HTML = _ROOT / "docs" / "audit" / "harvester_balance_table.html"
+OUT_PDF = _ROOT / "docs" / "audit" / "harvester_balance_table.pdf"
 
 # Terrain speeds from world.yaml locomotors (Clear terrain)
 TERRAIN_SPEEDS = {
@@ -311,7 +329,7 @@ html_parts.append("""</tbody>
 </body>
 </html>""")
 
-with open(r"c:\Users\AedisToru\Documents\GitHub\Cameo-mod\docs\audit\harvester_balance_table.html", "w", encoding="utf-8") as f:
+with open(OUT_HTML, "w", encoding="utf-8") as f:
     f.write("".join(html_parts))
 
 # Generate PDF using fpdf2
@@ -401,7 +419,7 @@ corrections = [
 for c in corrections:
     pdf.cell(0, 4, f"- {c}", new_x="LMARGIN", new_y="NEXT")
 
-pdf.output(r"c:\Users\AedisToru\Documents\GitHub\Cameo-mod\docs\audit\harvester_balance_table.pdf")
+pdf.output(str(OUT_PDF))
 print("PDF generated: docs/audit/harvester_balance_table.pdf")
 
 # Also print a text summary
