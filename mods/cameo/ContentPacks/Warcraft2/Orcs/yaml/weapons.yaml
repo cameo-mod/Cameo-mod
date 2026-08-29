@@ -531,12 +531,11 @@ wc2dragonFireVisible:
 		ValidTargets: Ground, Water, Air
 wc2dragonFireExplosion:
 	Inherits: wc2dragonFireVisible
-	Projectile: Bullet
 	Burst: 3
 	BurstDelays: 0
 	FirstBurstTargetOffset: 0,0,0
 	FollowingBurstTargetOffset: 1024,0,0
-	Projectile:
+	Projectile: Bullet
 		Image: wc2_fireball
 		Inaccuracy: 250
 		TrailImage: smokey

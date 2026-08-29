@@ -399,7 +399,7 @@ ReimuOrbLauncher:
 		AimTargetStances: Enemy
 		ValidTargets: Air, Ground, Water
 		Delay: 108
-	Warhead@Shrapnel3: FireShrapnel
+	Warhead@Shrapnel4: FireShrapnel
 		Weapon: ReimuYinYangOrb
 		ImpactActors: true
 		AimChance: 50
@@ -470,7 +470,7 @@ MagicOrbHailstormSpawner:
 		AimTargetStances: Enemy
 		ValidTargets: Air, Ground, Water
 		Delay: 9
-	Warhead@Shrapnel3: FireShrapnel
+	Warhead@Shrapnel4: FireShrapnel
 		Weapon: MagicOrbSpreaderProjectile
 		ImpactActors: false
 		TargetActorCenter: true

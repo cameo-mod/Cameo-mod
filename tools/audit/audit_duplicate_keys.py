@@ -21,10 +21,10 @@ D2 — every other duplicate key (same trait or field declared twice, or a
     result is usually what the author wanted, but any field set by both copies
     resolves to the last one. Hygiene: collapse them into one node.
 
-Exit code 1 when the D1 count RISES ABOVE ``D1_BASELINE``. The pre-existing
-findings are a ratchet, not a green light.  Renaming a label is behavior-preserving
+Exit code 1 when the D1 or D2 count rises above its baseline. The pre-existing
+findings are ratchets, not a green light. Renaming a label is behavior-preserving
 only when a resolved before/after comparison confirms it; otherwise the case needs
-individual review. Lower the baseline as findings are fixed; never raise it.
+individual review. Lower each baseline as findings are fixed; never raise them.
 
 Usage: python tools/audit/audit_duplicate_keys.py
 """
@@ -45,9 +45,9 @@ if hasattr(sys.stdout, "reconfigure"):
 SCAN_DIRS = ("mods/cameo",)
 SKIP_PARTS = ("maps", "bits")
 
-# Ratchet: D1 findings measured on 2026-08-11 against the unmodified tree.
-# Lower it as duplicates are resolved; never raise it without a note.
+# Ratchets: lower them as duplicates are resolved; never raise without a note.
 D1_BASELINE = 80
+D2_BASELINE = 411
 
 
 def duplicate_children(node: Node) -> dict[str, list[Node]]:
@@ -121,6 +121,15 @@ def main() -> int:
     if len(d1_rows) < D1_BASELINE:
         print(f"\nD1 count {len(d1_rows)} is below the baseline {D1_BASELINE} — "
               f"lower D1_BASELINE in this script to lock the fix in.\n")
+
+    if len(d2_rows) > D2_BASELINE:
+        print(f"\n**FAIL** — D2 count {len(d2_rows)} exceeds the baseline "
+              f"{D2_BASELINE}: a new duplicate key was introduced.\n")
+        return 1
+
+    if len(d2_rows) < D2_BASELINE:
+        print(f"\nD2 count {len(d2_rows)} is below the baseline {D2_BASELINE} — "
+              f"lower D2_BASELINE in this script to lock the fix in.\n")
 
     return 0
 
