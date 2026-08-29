@@ -534,8 +534,8 @@ Reference-clean units: **TD GDI Archer** (`gdiarcher`), **Ordos Raider**
 | Vehicle turning | `Mobile.TurnSpeed = Speed / 5`; `Turreted.TurnSpeed` equals it |
 | Turretless (AttackFrontal) vehicles | `TurnSpeed = 2 × Speed / 5` — the former artillery exception was dropped 2026-07-10 (data check: turretless artillery split 24 at 2×, 18 at 1× — no real pattern) |
 | Turreted artillery / fire support | Archer firing-slow: `GrantConditionOnAttack(firing)`, 50% Speed/Turn/TurretTurn multipliers, `RevokeDelay = weapon ReloadDelay / 2` |
-| Fighters & bombers (by template) | `Aircraft.TurnSpeed = Speed / 15` (frontal-weapon craft 2×) |
-| Helicopters & spaceships (by template) | `Aircraft.TurnSpeed = Speed / 5`, like vehicles (design 2026-07-10; 45 of ~55 helicopters already comply) |
+| Fighters & bombers (by template) | `Aircraft.TurnSpeed = Speed / 15` (frontal-weapon craft 2×) — measured modal law of both cohorts |
+| Helicopters & spaceships (by template) | `Aircraft.TurnSpeed = Speed / 5`, like vehicles (design 2026-07-10; **63 of 66 helicopters and 11 of 12 spaceships comply**, re-measured 2026-08-30 — was "45 of ~55") |
 | AA support vehicles | anti-air weapon range = **1.5 × anti-ground range** (forgotten_m113adats is reference-clean: 5606 / 8409) |
 | AA weapons | a weapon whose ValidTargets include Air must have ≥1 damage warhead that hits Air (inheritance-resolved) |
 
@@ -1283,11 +1283,20 @@ it as `turn_speed_air`.
 |---|--:|--:|--:|---|
 | ground **turreted** | 261 | **1.0** | 87% | `Speed/5` |
 | ground **turretless** | 335 | **2.0** | 64% | `2 × Speed/5` |
-| aircraft turreted | 14 | 1.0 | 79% | `Speed/5` |
+| **helicopter** | 66 | **1.0** | **95%** | `Speed/5` |
+| **spaceship** | 12 | **1.0** | 92% | `Speed/5` |
+| **epic air** | 10 | **1.0** | **100%** | `Speed/5` |
+| **fighter** | 23 | **0.333** | 35% | `Speed/15` |
+| **bomber** | 36 | **0.333** | 28% | `Speed/15` |
 
-⚠ The roster PREDATES the law: **325 of 871** mobile actors disagree and **63** carry a `Speed` off
-the 5 grid, so no integer `TurnSpeed` can satisfy either branch. `audit_turn_rate` is REPORT-ONLY
-until a boot-gated pass brings them inside; it is the work list, not a gate.
+⚠ **`Speed/15` does NOT make the Speed grid 15.** The grid is 5 and stays 5: it exists because
+`S/5` and `2S/5` must be integral, and `gcd(2,5) = 1` makes both reduce to `5 | S`. A fighter at
+Speed 250 derives `TurnSpeed` 16.67 — that is a question about how `TurnSpeed` is represented, never
+a reason to move a grid to suit a derived equation.
+
+⚠ The roster PREDATES the law: **340 of 871** mobile actors disagree, **63** carry a `Speed` off the
+5 grid, and **123 aircraft inherit no air template at all**, so they can be held to neither air law
+until they are classified. `audit_turn_rate` is REPORT-ONLY; it is the work list, not a gate.
 
 ⚠ **The steps live in ONE table with citations — `formula.STAT_GRIDS` — and anything that
 quantises reads them from there.** They used to be literals in whichever function needed them and
@@ -1656,8 +1665,17 @@ steps so the house formulas stay integral:
   turreted units turn at **`TurnSpeed = Speed / 5`**. Infantry normally turns
   instantly, but CABAL cyborg infantry use the vehicle fixed-weapon rule
   because they carry forward-facing weapons.
-- **TurnSpeed (aircraft):** helicopters and spaceships both use
-  **`Speed / 5`**.
+- **TurnSpeed (aircraft) — BY AIRFRAME, and this rule has TWO halves:**
+  helicopters, spaceships and epic air use **`Speed / 5`**, like vehicles;
+  **fighters and bombers use `Speed / 15`** (frontal-weapon craft **2×**, i.e.
+  `2 × Speed / 15`). ⚠ Both halves are also in the derived-stat table at
+  "Fighters & bombers (by template)" — this entry used to carry only the first,
+  so grepping one phrasing found one half. Classification is **by template**
+  (`^FighterTemplate`, `^BomberTemplate`, `^HelicopterTemplate`,
+  `^SpaceshipTemplate`, `^EpicAirUnitTemplate`), never by name and never by
+  `CanHover`/`VTOL` — measured, the trait flags put helicopters at 62%
+  compliance with their own law and the template puts them at **95%**.
+  Implemented in `formula.turn_speed_for`, checked by `audit_turn_rate.py`.
 - ReloadDelay: any integer.
 - **Beautiful ranges are kept**: if Range is exactly 6.000 or 7.500,
   adjust the other stats, not the range.

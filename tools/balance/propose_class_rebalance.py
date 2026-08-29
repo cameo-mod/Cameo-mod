@@ -586,10 +586,13 @@ class DamageGridAssignment:
 
     INF = float("inf")
 
-    def __init__(self, rows, step, price_of, reach=None):
+    def __init__(self, rows, step, price_of, reach=None, blocked=()):
         self.rows = list(rows)
         self.step = step
         self.price_of = price_of
+        # Slots held by rows this pass may not move (the anchor, soft spawns).
+        # They are unavailable, not invisible.
+        self.blocked = {float(b) for b in blocked}
         # How far a row may be displaced. One slot per row is always enough to
         # break every tie, so `len(rows)` steps either way can never bind.
         self.reach = len(self.rows) if reach is None else reach
@@ -634,7 +637,7 @@ class DamageGridAssignment:
                 base = self.ideal(i)
                 for k in range(-self.reach, self.reach + 1):
                     v = base + k * pitch
-                    if v >= pitch:
+                    if v >= pitch and not any(abs(v - b) <= 0.5 for b in self.blocked):
                         out.add(v)
             self._slots = sorted(out)
         return self._slots
@@ -731,8 +734,15 @@ def unique_dmg_per_shot(rows, step=None, price_of=None, key="damage"):
         r["dps_eff"] = r["per_unit"] * r["dmg_shot"]
 
     movable = [r for r in rows if not (r["protected"] or r.get("soft"))]
-    # Protected/soft rows never blocked the grid (the old `collides` filtered
-    # them out of the placed set) and still do not — they are simply not moved.
+    # ⚠ A ROW THAT CANNOT MOVE STILL OCCUPIES ITS SLOT (maintainer ruling
+    # 2026-08-30: *"give each of the scouts their own unique damage numbers"*).
+    # Protected and soft rows used to be filtered out of the collision set
+    # entirely, so a movable member could be assigned the damage the ANCHOR
+    # already had — `naxis_naxiriflerecruit` and `naxis_naxiriflesoldier` both sat
+    # on 4000, the only collision left in the class, precisely because the second
+    # is the anchor. Not moving a row and not seeing it are different things.
+    frozen = [r["dmg_eff"] for r in rows
+              if (r["protected"] or r.get("soft")) and r.get("dmg_eff")]
     if not movable:
         return
 
@@ -742,7 +752,8 @@ def unique_dmg_per_shot(rows, step=None, price_of=None, key="damage"):
         # and only an actual DPS collision moves anyone, so the pricing residual
         # is whatever the 100 grid leaves and nothing more.
         helper = DamageGridAssignment(movable, step, price_of)
-        taken_dps = []
+        taken_dps = [r["dps_eff"] for r in rows
+                     if (r["protected"] or r.get("soft")) and r.get("dps_eff")]
         for i, r in enumerate(movable):
             n_wh = r.get("n_wh", 1) or 1
             base = helper.ideal(i) if price_of is not None else (r.get("per_wh") or step) * n_wh
@@ -763,7 +774,7 @@ def unique_dmg_per_shot(rows, step=None, price_of=None, key="damage"):
         return
 
     if price_of is not None:
-        plan = DamageGridAssignment(movable, step, price_of).solve()
+        plan = DamageGridAssignment(movable, step, price_of, blocked=frozen).solve()
         if plan is not None:
             for i, dmg_shot in plan.items():
                 commit(movable[i], dmg_shot // (movable[i].get("n_wh", 1) or 1))
@@ -771,7 +782,7 @@ def unique_dmg_per_shot(rows, step=None, price_of=None, key="damage"):
 
     # Fallback: nearest free slot, ledger order. Used when no objective was given
     # (uniqueness-only callers) or when the rows do not share one damage grid.
-    taken = set()
+    taken = set(frozen)
 
     def collides(de):
         return any(abs(o - de) <= 0.5 for o in taken)

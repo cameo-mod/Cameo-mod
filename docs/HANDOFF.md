@@ -660,7 +660,72 @@ the audit prints the table above its findings.
 excluded — it drifts to the ground and nobody balances it. REPORT-ONLY, registered in `run_all.sh`
 as a pending-fix advisory with its ratchet promise; blocking once a boot-gated pass lands.
 
-### 3.0i — ⛔ MAINTAINER RULING NEEDED: what does the uniqueness law separate?
+### 3.0m — ✅ RULED: scout damage is unique per member; aircraft turn by AIRFRAME
+
+**Two maintainer rulings, 2026-08-30.**
+
+**1. Uniqueness stays on per-shot DAMAGE — the law as written.** *"Give each of the scouts their
+own unique damage numbers."* So `--uniqueness dps` stays a MEASUREMENT and is not promoted to the
+default; `scout` keeps worst |Δ| **22.8** rather than taking the 0.7 shortcut, and that is the
+deliberate trade. §3.0i is answered and closed.
+
+⛔ **Acting on it exposed a real defect: a row that cannot MOVE was not blocking its slot.**
+Protected and soft rows were filtered out of the collision set entirely, so a movable member could
+be handed the damage the ANCHOR already had. `naxis_naxiriflerecruit` and `naxis_naxiriflesoldier`
+both sat on Damage **4000** — the only collision left in the class — precisely because the second is
+the anchor. *Not moving a row and not seeing it are different things.* Fixed in both the DP and the
+greedy fallback; `scout` is now **24 of 24 distinct**, worst |Δ| unchanged at 22.8.
+
+⚠ **Remaining blocker for the yaml pass: 5 groups SHARE a weapon file,** so a unique Damage needs
+the weapon dedicated first — `ixian_lightinfantry`+`ordos_lightinfantry`;
+`naxis_naxiriflerecruit`+`naxis_naxiriflesoldier`; `tkm_marine`+`tkm_rifleman`;
+`ra1_soviets_ak47conscript`+`ra1_soviets_rifleinfantry`; and `forgotten_mutant` +
+`forgotten_mutant_wild` + `ts_gdi_lightinfantry` + `ts_nod_lightinfantry` (four on one file).
+
+**2. Aircraft `TurnSpeed` is per AIRFRAME, and I had only half the law.**
+*"Helicopters and spaceships have turn speed of speed/5 while planes like fighters and bombers have
+speed/15, right?"* — **Right, and it was already documented.**
+
+⛔ **DESIGN.md STATES THIS LAW IN TWO SEPARATE TABLES, 1100 LINES APART, and I grepped one.** The
+stat-law list said "helicopters and spaceships both use `Speed / 5`" and stopped; the derived-stat
+table carries *"Fighters & bombers (by template): `Aircraft.TurnSpeed = Speed / 15`
+(frontal-weapon craft 2×)"*. CLAUDE.md §8f says to grep DESIGN.md before designing anything — I did,
+found one phrasing, and stopped. **A law worth encoding is worth grepping twice.** The two entries
+now cross-reference each other so neither can be read alone.
+
+| cohort | n | modal ratio | share | law |
+|---|--:|--:|--:|---|
+| helicopter | 66 | 1.0 | **95%** | `Speed/5` |
+| spaceship | 12 | 1.0 | 92% | `Speed/5` |
+| epic air | 10 | 1.0 | **100%** | `Speed/5` |
+| fighter | 23 | **0.333** | 35% | `Speed/15` |
+| bomber | 36 | **0.333** | 28% | `Speed/15` |
+| ground turreted | 261 | 1.0 | 87% | `Speed/5` |
+| ground turretless | 335 | 2.0 | 64% | `2 × Speed/5` |
+
+**Classification is BY TEMPLATE** (`^FighterTemplate`, `^BomberTemplate`, `^HelicopterTemplate`,
+`^SpaceshipTemplate`, `^EpicAirUnitTemplate`), as DESIGN.md specifies — never by name, and never by
+`CanHover`/`VTOL`: measured, the trait flags put helicopters at **62%** compliance with their own
+law and the template puts them at **95%**.
+
+⚠ **`Speed/15` does NOT re-grid Speed to 15.** The grid is 5 and stays 5 — it exists because `S/5`
+and `2S/5` must be integral, and `gcd(2,5)=1` reduces both to `5 | S`. A fighter at Speed 250
+derives `TurnSpeed` 16.67; that is a question about how `TurnSpeed` is represented, never a reason
+to move a grid to suit a derived equation.
+
+**Work list** (`audit_turn_rate`, REPORT-ONLY): T1 **340 of 871** actors disagree · T2 **63** carry
+a Speed off the 5 grid · T3 **123 aircraft inherit no air template**, so they can be held to neither
+air law until classified — that overlaps the 127 unclassifiable aircraft in §3.3-air.
+
+**Also corrected a stale doc claim:** DESIGN.md said "45 of ~55 helicopters already comply". The
+measurement is **63 of 66 helicopters and 11 of 12 spaceships**.
+
+### 3.0i — ✅ ANSWERED (2026-08-30): the uniqueness law separates per-shot DAMAGE
+
+**Ruled: per-shot Damage, the law as written** — see §3.0m. `--uniqueness dps` stays
+a measurement and is NOT the default. The analysis below is kept because it is the
+evidence the ruling was made against, and it quantifies what the law costs.
+
 
 **This is the single decision that takes `scout` from 22.8 to 0.7 — inside the goal.**
 It is a design ruling, so it is not made here. `--uniqueness dps` measures the

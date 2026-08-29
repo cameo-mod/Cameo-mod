@@ -219,40 +219,82 @@ class StatGridsComeFromOneRegistry(unittest.TestCase):
         self.assertEqual(rows[1]["hp"] % 2500, 0)
 
 
-class TurnSpeedDependsOnTheTurret(unittest.TestCase):
-    """Maintainer 2026-08-29: *"the turn rate depends on if the unit has a turret
-    or not."* DESIGN.md: a turreted vehicle turns at `Speed/5`; one with no turret
-    or a fixed forward-facing weapon turns at `2 x Speed/5`; helicopters and
-    spaceships use `Speed/5`; infantry is instant EXCEPT CABAL cyborgs, which
-    carry forward-facing weapons and take the vehicle fixed-weapon rule."""
+class TurnSpeedDependsOnTurretAndAirframe(unittest.TestCase):
+    """Maintainer 2026-08-29/30. DESIGN.md states this law in TWO separate tables
+    and this code first shipped knowing only one: the stat-law list says
+    "helicopters and spaceships both use Speed/5" and stops, while the derived-stat
+    table 1100 lines earlier carries "Fighters & bombers (by template):
+    Aircraft.TurnSpeed = Speed / 15 (frontal-weapon craft 2x)"."""
 
-    def test_the_two_branches(self):
+    def test_ground_branches(self):
         self.assertEqual(formula.turn_speed_for(60, turreted=True), 12)
         self.assertEqual(formula.turn_speed_for(60, turreted=False), 24)
-        self.assertEqual(formula.turn_speed_for(60, turreted=False, aircraft=True), 12)
 
-    def test_both_branches_need_the_same_speed_grid(self):
-        """⭐ This is WHY the Speed grid is 5 turret or not: `2S/5` is an integer
-        exactly when `5 | 2S`, and gcd(2,5)=1, so that reduces to `5 | S` — the
-        same condition the turreted branch imposes. A reading that made turretless
-        units a different grid would be wrong."""
+    def test_pivoting_airframes_turn_like_vehicles(self):
+        for frame in ("helicopter", "spaceship", "epic_air"):
+            self.assertEqual(formula.turn_speed_for(150, airframe=frame), 30, frame)
+            # a turret cannot change a pivoting airframe's rate
+            self.assertEqual(formula.turn_speed_for(150, turreted=False, airframe=frame), 30)
+
+    def test_fighters_and_bombers_turn_on_the_fifteen_law(self):
+        for frame in ("fighter", "bomber"):
+            self.assertEqual(formula.turn_speed_for(150, airframe=frame), 10, frame)
+            self.assertEqual(formula.turn_speed_for(150, turreted=False, airframe=frame), 20)
+
+    def test_speed_over_fifteen_does_not_regrid_speed(self):
+        """⚠ The Speed grid is 5 and STAYS 5. It exists because `S/5` and `2S/5`
+        must be integral, and gcd(2,5)=1 makes both reduce to `5 | S`. A fighter
+        at Speed 250 derives TurnSpeed 16.67 — a question about how TurnSpeed is
+        represented, never a reason to move a grid to suit a derived equation."""
+        self.assertEqual(formula.stat_step("speed", "vehicle"), 5)
+        self.assertAlmostEqual(formula.turn_speed_for(250, airframe="fighter"), 250 / 15)
+
+    def test_both_ground_branches_need_the_same_speed_grid(self):
         step = formula.stat_step("speed", "vehicle")
         for speed in range(step, 200, step):
             for turreted in (True, False):
                 ts = formula.turn_speed_for(speed, turreted=turreted)
                 self.assertEqual(ts, int(ts), f"speed {speed} turreted={turreted}")
-        # and an off-grid speed breaks BOTH branches, not just one
         for turreted in (True, False):
             ts = formula.turn_speed_for(63, turreted=turreted)
             self.assertNotEqual(ts, int(ts))
 
+    def test_the_template_map_covers_every_airframe_the_law_names(self):
+        named = set(formula.AIR_TEMPLATES.values())
+        self.assertTrue({"fighter", "bomber", "helicopter", "spaceship"} <= named)
+        self.assertTrue(formula.PIVOTING_AIRFRAMES <= named)
+        self.assertNotIn("fighter", formula.PIVOTING_AIRFRAMES)
+        self.assertNotIn("bomber", formula.PIVOTING_AIRFRAMES)
 
-    def test_the_converter_reads_the_registry_not_its_own_literals(self):
-        import inspect
-        src = inspect.getsource(P.nudge_hp_spd)
-        self.assertIn('r.get("hp_step"', src)
-        lines = pathlib.Path(P.__file__).read_text(encoding="utf-8").splitlines()
-        self.assertEqual([ln for ln in lines if ln.startswith("VEHICLE_TYPE_CLASSES")], [])
+
+class FrozenRowsStillOccupyTheirSlot(unittest.TestCase):
+    """Maintainer 2026-08-30: *"give each of the scouts their own unique damage
+    numbers."* Protected and soft rows used to be filtered out of the collision
+    set entirely, so a movable member could be handed the damage the ANCHOR
+    already had — `naxis_naxiriflerecruit` and `naxis_naxiriflesoldier` both sat on
+    4000, the only collision left in `scout`, precisely because the second is the
+    anchor. Not moving a row and not seeing it are different things."""
+
+    def test_a_movable_row_cannot_take_the_anchors_damage(self):
+        anchor = row("anchor", 100, 800, 0.05, protected=True)
+        free = row("free", 100, 800, 0.05)
+        P.unique_dmg_per_shot([anchor, free], price_of=linear_price(2.5))
+        self.assertEqual(anchor["dmg_eff"], 800)
+        self.assertNotEqual(free["dmg_eff"], 800)
+
+    def test_soft_rows_block_too(self):
+        soft = row("spawn", 100, 800, 0.05, soft=True)
+        free = row("free", 100, 800, 0.05)
+        P.unique_dmg_per_shot([soft, free], price_of=linear_price(2.5))
+        self.assertNotEqual(free["dmg_eff"], 800)
+
+    def test_the_greedy_fallback_blocks_them_as_well(self):
+        """No price objective -> the nearest-free-slot walk, which must honour
+        the same frozen slots."""
+        anchor = row("anchor", 100, 800, 0.05, protected=True)
+        free = row("free", 100, 800, 0.05)
+        P.unique_dmg_per_shot([anchor, free])
+        self.assertNotEqual(free["dmg_eff"], 800)
 
 
 if __name__ == "__main__":

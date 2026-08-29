@@ -686,30 +686,60 @@ def hp_platform(section=None, class_anchor=None):
     return "vehicle" if (section or "").lower() in VEHICLE_SECTIONS else "infantry"
 
 
-def turn_speed_for(speed, turreted=True, aircraft=False):
+# Aircraft templates -> airframe, because DESIGN.md classifies them BY TEMPLATE
+# ("Fighters & bombers (by template)"), not by a trait flag. Measured, the template
+# is also the far cleaner classifier: `CanHover`/`VTOL` puts helicopters at 62% on
+# their law, the template puts them at 95%.
+AIR_TEMPLATES = {
+    "^FighterTemplate": "fighter",
+    "^BomberTemplate": "bomber",
+    "^HelicopterTemplate": "helicopter",
+    "^UnarmedTransportHelicopterTemplate": "helicopter",
+    "^SpaceshipTemplate": "spaceship",
+    "^EpicAirUnitTemplate": "epic_air",
+}
+
+# Airframes that turn like vehicles. Fighters and bombers do NOT.
+PIVOTING_AIRFRAMES = frozenset({"helicopter", "spaceship", "epic_air"})
+
+
+def turn_speed_for(speed, turreted=True, airframe=None):
     """`TurnSpeed` the law prescribes for this unit (DESIGN.md, FORMULA_V2 §3).
 
-    ⚠ **IT DEPENDS ON THE TURRET** (maintainer 2026-08-29):
+    ⚠ **IT DEPENDS ON THE TURRET, AND IN THE AIR ON THE AIRFRAME.** DESIGN.md
+    states the law in TWO separate tables, and reading only one of them is a trap
+    I fell into: the stat-law list says "helicopters and spaceships both use
+    Speed/5" and stops there, while the derived-stat table 1100 lines earlier
+    carries the other half — and the parenthesis that doubles it.
 
-        turreted vehicle                 TurnSpeed = Speed / 5
-        NO turret / fixed forward weapon TurnSpeed = 2 x Speed / 5
-        helicopters and spaceships       TurnSpeed = Speed / 5
-        infantry                         instant — EXCEPT CABAL cyborgs, which
-                                         carry forward-facing weapons and take
-                                         the vehicle fixed-weapon rule
+        turreted vehicle                  TurnSpeed = Speed / 5
+        turretless / fixed forward weapon TurnSpeed = 2 x Speed / 5
+        helicopter, spaceship, epic air   TurnSpeed = Speed / 5   (like vehicles)
+        FIGHTER or BOMBER                 TurnSpeed = Speed / 15
+        fighter/bomber, frontal weapon    TurnSpeed = 2 x Speed / 15
+        infantry                          instant — EXCEPT CABAL cyborgs, which
+                                          carry forward-facing weapons and take
+                                          the vehicle fixed-weapon rule
 
-    ⭐ **And this is WHY the Speed grid is 5 for every one of them, turret or
-    not.** `2·S/5` is an integer exactly when `5 | 2S`, and `gcd(2, 5) = 1`, so
-    that reduces to `5 | S` — the same condition the turreted branch imposes.
-    The turret changes the VALUE of TurnSpeed, never the grid Speed sits on. A
-    reading that made turretless units a different grid would be wrong.
+    ⭐ **MEASURED, not assumed** (`audit_turn_rate.py` prints the cohort table):
 
-    ⚠ NOT ENFORCEABLE YET. `extract_stats` records `Mobile.TurnSpeed` but not
-    whether the actor has a `Turreted` trait, so the ledger cannot tell the two
-    branches apart. Adding `turreted` to the extraction table is the prerequisite
-    for an audit that checks each unit's TurnSpeed against this function.
+        helicopter    66   95% on Speed/5        spaceship  12   92% on Speed/5
+        epic_air      10  100% on Speed/5        fighter    23   modal Speed/15
+        ground turret 261  87% on Speed/5        bomber     36   modal Speed/15
+        ground frontal 335 64% on 2 x Speed/5
+
+    ⚠ **`Speed/15` does NOT make the Speed grid 15.** The grid is 5 and stays 5:
+    it exists because `S/5` and `2S/5` must be integral, and `gcd(2,5)=1` makes
+    both reduce to `5 | S`. A fighter at Speed 250 gets TurnSpeed 16.67, which is
+    a question about how TurnSpeed is represented, NOT a reason to re-grid Speed.
+    Never move a grid to make a derived equation convenient — solve the derived
+    value and audit it.
     """
-    if aircraft or turreted:
+    if airframe in PIVOTING_AIRFRAMES:
+        return speed / 5
+    if airframe in ("fighter", "bomber"):
+        return (speed / 15) if turreted else (2 * speed / 15)
+    if turreted:
         return speed / 5
     return 2 * speed / 5
 

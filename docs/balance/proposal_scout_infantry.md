@@ -15,7 +15,7 @@ Uniqueness separates **raw warhead Damage (the 5-stat law as written)**. The lev
 | `asianalliance_asianmilitia` | redalert2mod_asianalliance | 28000 | 53 | 4550 | 110 | 3100×1 | 50 | 1 | 83 | 62.0 | 110 | +0.3 | fp-debt |
 | `futuretech_scoutdroid` | redalert2mod_futuretech | 33000 | 70 | 5450 | 200 | 1800×1 | 40 | 4 | 100 | 156.5 | 200 | -0.1 |  |
 | `naxis_coneheadsknights` | redalert2mod_naxis | 22000 | 72 | 4530 | 1000 | 26200×1 | 18 | 1 | 100 | 1455.6 | 1002 | +1.6 | shared-wpn? |
-| `naxis_naxiriflerecruit` | redalert2mod_naxis | 21000 | 48 | 5250 | 75 | 4000×1 | 100 | 1 | 67 | 40.0 | 75 | -0.0 | fp-debt |
+| `naxis_naxiriflerecruit` | redalert2mod_naxis | 21000 | 48 | 5130 | 75 | 4100×1 | 100 | 1 | 67 | 41.0 | 75 | -0.0 | fp-debt |
 | `naxis_naxiriflesoldier` | redalert2mod_naxis | 20000 | 60 | 5000 | 100 | 4000×1 | 50 | 1 | 100 | 80.0 | 119 | +19.4 | anchor |
 | `undead.nax` | redalert2mod_naxis | 14000 | 52 | 5430 | 100 | 6300×1 | 75 | 1 | 100 | 84.0 | 100 | -0.0 | soft shared-wpn? |
 | `latinsyndicate_latinmilitia` | redalert2mod_syndicate | 29000 | 51 | 4640 | 130 | 800×1 | 22 | 3 | 39 | 80.0 | 130 | +0.0 | fp-debt |
@@ -49,7 +49,7 @@ Uniqueness separates **raw warhead Damage (the 5-stat law as written)**. The lev
 - `asianalliance_asianmilitia`: HP 28000, Speed 53, Range 4550, each offensive warhead Damage 3100 (×1 = SUM 3100), ReloadDelay 50, Burst 1, **DELETE the unconditional FirepowerMultiplier (83%)** — the Damage above already includes it (W17)
 - `futuretech_scoutdroid`: HP 33000, Speed 70, Range 5450, each offensive warhead Damage 1800 (×1 = SUM 1800), ReloadDelay 40, Burst 4
 - `naxis_coneheadsknights`: HP 22000, Speed 72, Range 4530, each offensive warhead Damage 26200 (×1 = SUM 26200), ReloadDelay 18, Burst 1, residual Δ +1.6 (cost pinned at 1000)
-- `naxis_naxiriflerecruit`: HP 21000, Speed 48, Range 5250, each offensive warhead Damage 4000 (×1 = SUM 4000), ReloadDelay 100, Burst 1, **DELETE the unconditional FirepowerMultiplier (67%)** — the Damage above already includes it (W17)
+- `naxis_naxiriflerecruit`: HP 21000, Speed 48, Range 5130, each offensive warhead Damage 4100 (×1 = SUM 4100), ReloadDelay 100, Burst 1, **DELETE the unconditional FirepowerMultiplier (67%)** — the Damage above already includes it (W17)
 - `undead.nax`: HP 14000, Speed 52, Range 5430, each offensive warhead Damage 6300 (×1 = SUM 6300), ReloadDelay 75, Burst 1
 - `latinsyndicate_latinmilitia`: HP 29000, Speed 51, Range 4640, each offensive warhead Damage 800 (×1 = SUM 800), ReloadDelay 22, Burst 3, **DELETE the unconditional FirepowerMultiplier (39%)** — the Damage above already includes it (W17)
 - `tkm_marine`: HP 18000, Speed 57, Range 4880, each offensive warhead Damage 1300 (×1 = SUM 1300), ReloadDelay 16, Burst 5, residual Δ +21.7 (cost pinned at 300)
