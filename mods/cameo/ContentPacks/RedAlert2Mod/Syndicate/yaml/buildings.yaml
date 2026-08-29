@@ -283,7 +283,6 @@ latinsyndicate_spycenter:
 	WithIdleOverlay@lights:
 		Sequence: idle-lights2
 		RequiresCondition: !build-incomplete
-	SupportPowerChargeBar:
 	DetonateWeaponPowerCA:
 		AllowMultiple: false
 		OrderName: TraitorsPower

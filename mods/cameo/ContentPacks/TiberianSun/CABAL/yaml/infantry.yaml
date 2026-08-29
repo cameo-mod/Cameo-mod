@@ -223,10 +223,6 @@ cabal_rocketcyborg:
 		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
 		Damage: -20
 		DamageInterval: 1
-	DamagedByTerrain@TiberiumHeal:
-		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
-		Damage: -20
-		DamageInterval: 1
 	-SpawnActorOnDeath:
 	ExternalCondition@EMP:
 		TotalCap: 1
@@ -341,10 +337,6 @@ cabal_devout:
 		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
 		Damage: -20
 		DamageInterval: 1
-	DamagedByTerrain@TiberiumHeal:
-		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
-		Damage: -20
-		DamageInterval: 1
 	-SpawnActorOnDeath:
 	ExternalCondition@EMP:
 		TotalCap: 1
@@ -453,10 +445,6 @@ cabal_ascended:
 		Modifier: 50
 		RequiresCondition: cydamaged
 	-DamagedByTerrain:
-	DamagedByTerrain@TiberiumHeal:
-		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
-		Damage: -20
-		DamageInterval: 1
 	DamagedByTerrain@TiberiumHeal:
 		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
 		Damage: -20
@@ -581,10 +569,6 @@ cabal_enlighted:
 		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
 		Damage: -20
 		DamageInterval: 1
-	DamagedByTerrain@TiberiumHeal:
-		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
-		Damage: -20
-		DamageInterval: 1
 	-SpawnActorOnDeath:
 	ExternalCondition@EMP:
 		TotalCap: 1
@@ -702,10 +686,6 @@ cabal_hackercyborg:
 		Modifier: 50
 		RequiresCondition: cydamaged
 	-DamagedByTerrain:
-	DamagedByTerrain@TiberiumHeal:
-		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
-		Damage: -20
-		DamageInterval: 1
 	DamagedByTerrain@TiberiumHeal:
 		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
 		Damage: -20

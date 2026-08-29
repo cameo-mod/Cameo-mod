@@ -5,6 +5,7 @@ from __future__ import annotations
 import pathlib
 import sys
 import unittest
+from collections import defaultdict
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
@@ -185,6 +186,36 @@ class WeaponCorrectnessFollowupTests(unittest.TestCase):
             labels = [node.key for node in actor.children
                       if node.key == "Inherits" or node.key.startswith("Inherits@")]
             self.assertEqual(len(labels), len(set(labels)), name)
+
+    def test_active_actor_and_weapon_rules_have_no_exact_duplicate_traits(self):
+        def fingerprint(node):
+            return (node.key, node.value,
+                    tuple(fingerprint(item) for item in node.children))
+
+        findings = []
+
+        def inspect(node, path):
+            groups = defaultdict(list)
+            for item in node.children:
+                if item.key and not item.key.startswith("-"):
+                    groups[item.key].append(item)
+
+            for key, items in groups.items():
+                fingerprints = [fingerprint(item) for item in items]
+                if len(items) > 1 and len(set(fingerprints)) == 1:
+                    findings.append(
+                        f"{path} > {key} at "
+                        f"{', '.join(str(item.line) for item in items)}")
+
+            for item in node.children:
+                inspect(item, f"{path} > {item.key}")
+
+        paths = self.rules.manifest.rules + self.rules.manifest.weapons
+        for path in paths:
+            for node in load(path):
+                inspect(node, f"{path.relative_to(ROOT)}:{node.key}")
+
+        self.assertEqual([], findings)
 
 
 if __name__ == "__main__":
