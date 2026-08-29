@@ -46,7 +46,7 @@ td_nod_handofnod:
 	Tooltip:
 		Name: Hand of Nod
 	ProvidesPrerequisite:
-		Prerequisite: barracks
+		Prerequisite: cncbarracks
 	Buildable:
 		Prerequisites: ~td_nod_constructionyard, nuke
 		Description: Trains infantry units.
@@ -61,8 +61,6 @@ td_nod_handofnod:
 	Exit@1:
 		SpawnOffset: 512,1024,0
 		ExitCell: 1,2
-	ProvidesPrerequisite:
-		Prerequisite: cncbarracks
 
 td_nod_airstrip:
 	Inherits: ^TDBuilding

@@ -1140,7 +1140,7 @@ ixian_stormlasher:
 	WithMuzzleOverlay:
 	WithSpriteBody:
 		Name: make
-		Sequence: invisible
+		Sequence: idle
 	WithMakeAnimation:
 		Condition: build-incomplete
 		BodyNames: make
@@ -1156,8 +1156,6 @@ ixian_stormlasher:
 		ReplaceableTypes: Tower
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
-	WithSpriteBody:
-		Sequence: idle
 	-WithDeathAnimation:
 	-WithWallSpriteBody:
 	-WithSpriteTurret:

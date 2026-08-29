@@ -775,8 +775,6 @@ steelconsortium_consortiumminer:
 	Targetable@Hover:
 		TargetTypes: Water, Ship
 	WithMoveAnimation:
-	StoresResources:
-	DockClientManager:
 	WithHarvestOverlay@harvesting:
 		Sequence: harvesting
 		Palette: ra2effect
@@ -926,10 +924,9 @@ steelconsortium_quantumtank:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-	WithSpriteTurret:
-	Selectable:
 		Bounds: 1440, 1440
 		DecorationBounds: 1440, 1440
+	WithSpriteTurret:
 	Voiced:
 		VoiceSet: SteelQuantumTankVoice
 	RenderSprites:

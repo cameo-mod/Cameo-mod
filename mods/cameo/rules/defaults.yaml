@@ -2736,6 +2736,7 @@
 
 ^Submarine:
 	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
 	Cloak@underwater:
 		DetectionTypes: Underwater
 		InitialDelay: 0
@@ -2763,8 +2764,6 @@
 		RequiresCondition: underwater
 	WithColoredSelectionBox@UnderBridge:
 		RequiresCondition: underbridge && !underwater
-	Targetable:
-		TargetTypes: Ground, Water, Ship, Submarine
 	Targetable@Underwater:
 		TargetTypes: Submarine, Underwater
 		RequiresCondition: underwater
@@ -4079,6 +4078,7 @@
 		RepairStep: 200
 		PlayerExperience: 10
 		RepairingNotification: Repairing
+		RepairCondition: repairing
 	WithDeathAnimation:
 		DeathSequence: dead
 		DeathSequencePalette: ra2player
@@ -4131,6 +4131,8 @@
 		IsPlayerPalette: True
 		Scale: 0.40
 		ScaleWithZoom: True
+		Offsets:
+			powerdown: -10, 0
 	GrantCondition@disable:
 		Condition: disabled
 		RequiresCondition: (empdisable || superfreeze || chronobeamed || diskdrain || being-captured) && !invulnerability
@@ -4172,11 +4174,6 @@
 	GrantConditionOnBotOwner@defensebot:
 		Condition: defensebot
 		Bots: defenseai
-	RepairableBuilding:
-		RepairCondition: repairing
-	WithBuildingRepairDecoration:
-		Offsets:
-			powerdown: -10, 0
 	ActorStatValues:
 		Stats: Armor, Sight, Power
 	WithIdleOverlay@shrouded:
@@ -6901,7 +6898,7 @@ CPQDEBUGDUMMY:
 	WithStoresResourcesPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
-		PipCount: 7
+		PipCount: 10
 	SpeedMultiplier@HARVBALANCE:
 		RequiresCondition: harv-balance
 		Modifier: 138
@@ -6911,14 +6908,9 @@ CPQDEBUGDUMMY:
 		Stats: Armor, Sight, Speed, None, None, None, Harvester
 	StoresResources:
 		Resources: Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, RA2Copper, RA2Silver, RA2Ore, RA2Gems, SCMinerals, GESupplies, SWPCarbon, SWRCarbon, SWDCarbon, SWPNova, SWCNova, SWPMin, SWCMin, Spice, SCGas, SCGas2, SCGas3, SCMineralsChunk, SCRMinerals, DRWater, DRTaelon, D2Spice, D2SpiceDense, SWFarms, OP2Ore2, OP2Ore
-	DockClientManager:
 	Selectable:
 		Priority: 7
 		DecorationBounds: 1536, 1536
-	WithStoresResourcesPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: true
-		PipCount: 10
 
 ^RearmableAircraft:
 	Rearmable:
