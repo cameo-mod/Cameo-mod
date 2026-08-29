@@ -1243,10 +1243,26 @@ read 151. It is replaced by §12.0c below.
 Two quantisation laws govern every number the formula writes. Both are absolute:
 a value off its grid is a bug even when it is otherwise correct.
 
-| quantity | step | source of truth |
-|---|---|---|
-| `Damage` | **100** | `tools/balance/formula.py` `DAMAGE_STEP` (W15) |
-| `Cost` | **10** | maintainer 2026-08-29 |
+| quantity | step | keyed on | source of truth |
+|---|---|---|---|
+| `Damage` | **100** | — | `formula.STAT_GRIDS`, `DAMAGE_STEP` (W15) |
+| `Cost` | **10** | — | `formula.STAT_GRIDS` (not yet enforced — open item X2) |
+| `Range` | **10** | — | `formula.STAT_GRIDS` |
+| `Speed` | **5** / **1** | **locomotion** — turn rate is `speed/5` | `formula.speed_platform` |
+| `HP` | **2500** / **1000** | **unit kind** — self-heal is `HP/2500` or `HP/1000` | `formula.hp_platform` |
+
+⚠ **The steps live in ONE table with citations — `formula.STAT_GRIDS` — and anything that
+quantises reads them from there.** They used to be literals in whichever function needed them and
+three had silently drifted from this law by 2026-08-29: HP was quantised at 1000 for EVERY class,
+the Speed probe (a defined `Mobile.TurnSpeed`) reached **0 of the 168 aircraft** in the tree, and
+`propose_class_rebalance` carried a class-level `spd_step` and a `VEHICLE_TYPE_CLASSES` set that
+**nothing read**. A dead knob that looks like it enforces a law is worse than no knob.
+
+⚠ **And the key is PER-STAT.** Speed follows locomotion; HP follows the unit kind. A FutureTech
+droid drives like a vehicle (Speed step 5) and heals like infantry (HP step 1000), and takes one
+grid from each. Collapsing them onto one notion of "platform" is measurable, not cosmetic: it put
+`futuretech_scoutdroid` on the 2500 HP grid and pushed the `scout` class from worst |Δ| 22.8 to
+32.1 on its own.
 
 * **Damage — step 100.** The 2000-step grid plus a `FirepowerMultiplier` fine-tune
   is a **retired** law. `FirepowerMultiplier` is not a pricing knob at all (W17):

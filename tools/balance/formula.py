@@ -568,6 +568,98 @@ def spread_damage_sum(warheads, smallarms_only: bool = False,
     return total
 
 
+# ---------------------------------------------------------------------------
+# THE STAT GRID REGISTRY — one table, with provenance, for every legal step.
+# ---------------------------------------------------------------------------
+# ⚠ WHY THIS EXISTS. The grids were written as literals in whichever function
+# needed them, and three of them had silently drifted from the law by 2026-08-29:
+#
+#   * HP was quantised at 1000 for EVERY class. DESIGN.md is explicit that
+#     vehicles/aircraft/ships step by 2500 and only infantry by 1000, so every
+#     vehicle class was being nudged onto the wrong grid.
+#   * The Speed step was chosen from a defined `Mobile.TurnSpeed`, which covers
+#     vehicles (398 of 403) and ships (48 of 50) but reaches **0 of 168
+#     aircraft** — so an aircraft would have been stepped by 1 against a law that
+#     says 5. Latent only because no aircraft class exists yet (open item X6);
+#     it would have gone live the moment one was added.
+#   * `propose_class_rebalance` carried a class-level `spd_step` argument and a
+#     `VEHICLE_TYPE_CLASSES = {"mbt"}` set that NOTHING READ — the per-row step
+#     always won. A dead knob that looks like it enforces a law is worse than no
+#     knob, because it answers the question "is this handled?" with a lie.
+#
+# The rule that would have caught all three: a step is a LAW, and a law lives in
+# one place with a citation. Anything that quantises reads it from here.
+#
+# ⚠ AND THE KEY IS PER-STAT. Speed's step exists because turn rate is `speed/5`,
+# so it follows LOCOMOTION (`speed_platform`). HP's step exists because self-heal
+# is HP/2500 or HP/1000, so it follows the unit KIND (`hp_platform`). A FutureTech
+# droid drives like a vehicle and heals like infantry, and takes one grid from
+# each. Neither is "what class it is priced in" — a class is a pricing construct.
+
+STAT_GRIDS = {
+    # stat: {platform: (step, source)}
+    "hp": {
+        "infantry": (1000, "DESIGN.md 'HP: 2500-steps ... 1000-steps for infantry'"),
+        "vehicle": (2500, "DESIGN.md 'HP: 2500-steps for vehicles/aircraft/ships'"),
+    },
+    "speed": {
+        "infantry": (1, "FORMULA_V2.md 3 'Infantry: steps of 1'"),
+        "vehicle": (5, "FORMULA_V2.md 3 'Vehicles, aircraft, AND ships: steps of 5"
+                       " (turn rate = speed/5)'"),
+    },
+    "range": {"*": (10, "FORMULA_V2.md 3 'steps of 10'")},
+    "damage": {"*": (100, "DESIGN.md grid table, DAMAGE_STEP (W15)")},
+    "cost": {"*": (10, "DESIGN.md grid table, maintainer 2026-08-29"
+                       " — NOT yet enforced in code (open item X2)")},
+}
+
+# Ledger sections whose members move on the vehicle grid. `naval` and `aircraft`
+# are in here explicitly BECAUSE the turn-rate probe misses them: no aircraft in
+# the tree defines one, and two ships do not either.
+VEHICLE_SECTIONS = frozenset({"vehicles", "aircraft", "naval", "ships"})
+
+
+def speed_platform(section=None, turn_speed=None):
+    """Which SPEED grid this unit moves on.
+
+    ⚠ Keyed on LOCOMOTION, because that is where the step comes from: turn rate
+    is `speed/5`, so anything with a turn rate must sit on a multiple of 5. Two
+    signals, since neither alone is complete — a defined `Mobile.TurnSpeed`
+    catches the units that move as vehicles whatever section they are filed under
+    (Cabal cyborgs and FutureTech droids use vehicle locomotion while sitting in
+    `infantry`), and the section catches the ones the probe cannot see: NOT ONE
+    of the 168 aircraft in the tree defines a turn rate, nor do two of the ships.
+    """
+    if turn_speed:
+        return "vehicle"
+    return "vehicle" if (section or "").lower() in VEHICLE_SECTIONS else "infantry"
+
+
+def hp_platform(section=None):
+    """Which HP grid this unit moves on.
+
+    ⚠ Keyed on the SECTION, NOT on locomotion, and the difference is not
+    cosmetic. The HP step exists because of SELF-HEAL — DESIGN.md sets it beside
+    "self-heal HP/2500" for vehicles/aircraft/ships and "self-heal HP/1000" for
+    infantry. A FutureTech droid drives like a vehicle but heals like infantry,
+    so it takes the 1000 grid while still taking the speed-5 grid above.
+
+    Collapsing the two onto one notion of "platform" is a real error and it was
+    measurable: it put `futuretech_scoutdroid` on the 2500 HP grid and pushed the
+    `scout` class from worst |Δ| 22.8 to 32.1 on its own.
+    """
+    return "vehicle" if (section or "").lower() in VEHICLE_SECTIONS else "infantry"
+
+
+def stat_step(stat, platform="infantry"):
+    """The legal step for `stat` on `platform`. Raises on an unknown stat — a
+    quantiser reaching for a grid that does not exist is a bug, not a default."""
+    grids = STAT_GRIDS[stat]
+    if "*" in grids:
+        return grids["*"][0]
+    return grids[platform][0]
+
+
 # The flat-damage grid. 2000 until 2026-08-11, when the maintainer regridded it 20x finer
 # (2000 -> 200 -> 100) alongside a percentage twin measured in BASIS POINTS (0.01%).
 #

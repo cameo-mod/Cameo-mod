@@ -413,15 +413,17 @@ foolproof, and fixes the ORDER of operations. Reference data behind the anchor t
 
 ### 8.1 The BASEBAND law — encode it, stop trusting it to discipline
 
-⚠ **AMENDED 2026-08-29 — the verifier is a RATIO, not a frozen actor.** `verifier_actor` used
-to be exempt from balancing in `propose_class_rebalance`, alongside the anchor. It no longer is.
-Measured across 23 classes: freezing it moved the other members' worst |Δ| by **0.0 in 17 of them**
-(and improved 5); only **8 of 23** nominated verifiers actually sit at 2.5× cost0, while three sit
-BELOW their own baseline; and because exempt rows are excluded from the report's worst-|Δ| line, a
-verifier off by **−3779.9** credits (`dreadnought`) was invisible in the report meant to catch it.
-The baseband law below is unchanged and still enforced — by `check_band.py`, on price RATIOS, which
-is where it always belonged. `verifier_actor` remains the class's named reference unit and is now
-balanced and counted like every other member.
+⛔ **RETIRED 2026-08-29 — there is no verifier actor any more.** Maintainer: *"we no longer
+have to have those verifiers — they should be regular units like anything else and not have those
+stiff rules."* `verifier_actor` is gone from `class_anchors.json` and from every code path. It used
+to be exempt from balancing alongside the anchor; three measurements retired it. Freezing it moved
+the other members' worst |Δ| by **0.0 in 17 of 23 classes** (and improved 5). Only **8 of 23**
+nominated verifiers sat at the 2.5× cost0 below, while three sat BELOW their own baseline. And
+because exempt rows are excluded from the report's worst-|Δ| line, a verifier off by **−3779.9**
+credits (`dreadnought`) was invisible in the report meant to catch it — freezing it did not merely
+fail to help, it HID the failure. **Only the ANCHOR is frozen**, because it defines `cost0`, which
+is what makes the class formula a formula. The baseband ratio below is unchanged and still enforced
+by `check_band.py`, on price RATIOS — it never needed a nominated actor.
 
 The class **baseline** (100% cost) and **verifier** (250% cost = 2× HP + 2× DPS) bound a *band where
 most units live*. Distribution is deliberately uneven:

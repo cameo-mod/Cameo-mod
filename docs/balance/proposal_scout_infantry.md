@@ -29,7 +29,7 @@ Uniqueness separates **raw warhead Damage (the 5-stat law as written)**. The lev
 | `td_nod_minigunner` | tiberiandawn_nod | 24000 | 58 | 4610 | 100 | 1100×1 | 50 | 4 | 29 | 78.6 | 123 | +22.8 | fp-debt |
 | `forgotten_mutant` | tiberiansun_forgotten | 46000 | 68 | 4910 | 160 | 500×1 | 18 | 2 | 30 | 43.5 | 160 | -0.0 | shared-wpn? fp-debt |
 | `forgotten_mutant_wild` | tiberiansun_forgotten | 44000 | 66 | 4580 | 160 | 600×1 | 18 | 2 | 100 | 52.2 | 160 | +0.2 | shared-wpn? |
-| `forgotten_mutantsoldier` | tiberiansun_forgotten | 39000 | 60 | 4960 | 250 | 6200×1 | 50 | 1 | 100 | 124.0 | 250 | -0.0 | verifier |
+| `forgotten_mutantsoldier` | tiberiansun_forgotten | 39000 | 60 | 4960 | 250 | 6200×1 | 50 | 1 | 100 | 124.0 | 250 | -0.0 |  |
 | `ts_gdi_lightinfantry` | tiberiansun_gdi | 17000 | 59 | 4510 | 120 | 1400×1 | 12 | 1 | 100 | 116.7 | 131 | +11.0 | shared-wpn? |
 | `ts_nod_lightinfantry` | tiberiansun_nod | 15000 | 61 | 4500 | 120 | 1600×1 | 12 | 1 | 100 | 133.3 | 138 | +17.6 | shared-wpn? |
 

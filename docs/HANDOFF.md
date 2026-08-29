@@ -531,33 +531,64 @@ candidates; see §3.0f for why signing them as a batch is still wrong.
 
 Pinned by `tools/tests/test_damage_grid_assignment.py`.
 
-### 3.0j — ✅ RULED: the verifier is a ratio, not a frozen actor (2026-08-29)
+### 3.0j — ✅ RULED: there is no verifier any more (2026-08-29)
 
-**Maintainer:** *"Does it make sense anymore to have a verifier, or is it fine to just have the
-baseline actors — the verifiers are too stiff and I want them to be more independent?"*
+**Maintainer:** *"We no longer have to have those verifiers. They should be regular units like
+anything else and not have those stiff rules."*
 
-Measured before answering, and the measurement agrees three ways:
+Measured before acting, and it agrees three ways:
 
 | the verifier was supposed to be | what the tree says |
 |---|---|
-| a second calibration point at **2.5× cost0** | **8 of 23** sit at 2.5×; three (`line_breaker` 0.81×, `artillery_tank` 0.86×, `archer` 0.90×) are **cheaper than their own baseline** |
-| an independent check that the anchor prices a second known-good unit | its own Δ reaches **−3779.9** (`dreadnought`), −3368.8 (`high_tech_tank`), +990.1 (`rocket_trooper`) |
+| a second calibration point at **2.5× cost0** | **8 of 23** sat at 2.5×; three (`line_breaker` 0.81×, `artillery_tank` 0.86×, `archer` 0.90×) were **cheaper than their own baseline** |
+| an independent check that the anchor prices a second known-good unit | its own Δ reached **−3779.9** (`dreadnought`), −3368.8 (`high_tech_tank`), +990.1 (`rocket_trooper`) |
 | a constraint that keeps the class honest | releasing it moved the other members' worst \|Δ\| by **0.0 in 17 of 23 classes**, and IMPROVED 5 |
 
-⛔ **The third row is why this was worse than useless.** `protected` rows are excluded from the
+⛔ **The third row is why it was worse than useless.** `protected` rows are excluded from the
 report's *"worst |Δ| among non-anchor members"* line, so a verifier 3779 credits out of position was
-**invisible in the very report that exists to catch bad pricing.** Freezing it did not just fail to
-help — it hid the failure.
+**invisible in the very report that exists to catch bad pricing.** Freezing it did not merely fail
+to help — it hid the failure.
 
-**Ruled: only the ANCHOR is frozen.** It defines `cost0`, which is what makes the class formula a
-formula. `verifier_actor` stays in `class_anchors.json` as the class's named reference unit, is
-still labelled in the report, is kept in the roster even when not buildable — and is now balanced
-and counted like every other member. The 2.5× baseband law is untouched: `check_band.py` enforces it
-on price RATIOS, not on a nominated actor. `BALANCE_PIPELINE.md` §8.1 carries the amendment.
+**Done:** `verifier_actor` is stripped from all 27 anchors and from every code path; the label is
+gone from the report; the non-buildable roster exemption is gone. Only the **anchor** is frozen,
+because it defines `cost0`. The 2.5× baseband law is untouched — `check_band.py` enforces it on
+price RATIOS, which never needed a nominated actor. `BALANCE_PIPELINE.md` §8.1 carries the
+retirement. Pinned by `tools/tests/test_damage_grid_assignment.py::ThereIsNoVerifier`.
 
-**Effect:** no class regressed except where the verifier's own error is now honestly counted
-(`dreadnought` 3751.1 → 3839.1, `heavy_infantry` 317.9 → 318.0, `heavy_sniper` 0.1 → 0.2).
-`rocket_trooper` improved 212.5 → 146.0, `archer` 6.7 → 0.2, `flying_infantry` 6.8 → 0.6.
+### 3.0k — ✅ FIXED: three of the five stat grids had drifted from the law
+
+**"Are all the inputs quantized, and are the rules different per class?"** — checked against the
+tree, not the docs. **Yes to both, and three grids were wrong.**
+
+The law (`FORMULA_V2.md` §3, `DESIGN.md`): Cost 10 · Range 10 · Damage 100 · Speed **5** for
+vehicles/aircraft/ships and **1** for infantry · HP **2500** for vehicles/aircraft/ships and
+**1000** for infantry. Per-CLASS rules are the **bands** (range envelope, speed window, tech tier),
+not the step sizes — those are global per stat and platform.
+
+What the code was actually doing:
+
+| defect | evidence |
+|---|--:|
+| **HP quantised at 1000 for EVERY class** — `nudge_hp_spd` hardcoded it | every vehicle class nudged onto the infantry grid |
+| **The Speed-5 rule reached 0 of 168 aircraft** — the step was chosen from a defined `Mobile.TurnSpeed`, which covers vehicles (398/403) and ships (48/50) but **no aircraft defines one** | latent only because no aircraft class exists yet (open item X6); live the moment one is added |
+| **A dead knob.** `spd_step` was passed into `nudge_hp_spd` and `VEHICLE_TYPE_CLASSES = {"mbt"}` fed it — **nothing read either**; the per-row step always won | a knob that looks like it enforces a law answers "is this handled?" with a lie |
+
+**Fix: `formula.STAT_GRIDS`** — one table, every step with a citation, and anything that quantises
+reads it from there. The dead knob is deleted.
+
+⚠ **And the key is PER-STAT, which I got wrong first and measured my way out of.** Speed's step
+exists because turn rate is `speed/5` → it follows **locomotion**. HP's step exists because
+self-heal is `HP/2500` or `HP/1000` → it follows the **unit kind**. A FutureTech droid drives like a
+vehicle and heals like infantry, and takes one grid from each. Collapsing them onto one "platform"
+put `futuretech_scoutdroid` on the 2500 HP grid and pushed `scout` from worst |Δ| 22.8 to **32.1**
+on its own. Split into `formula.speed_platform` / `formula.hp_platform`; `scout` back to 22.8.
+
+**Also found, not fixed (data, not tooling):** **9 actors are off the speed-5 grid today** — 8
+vehicles (`ts_nod_mobilestealthgenerator` 56, `siege_tank` 43, `ra1_allies_minelayer` 128,
+`japan_nanodronebuggy` 77, …) and 1 ship (`tuboat.nax` 78). Needs a boot-gated yaml pass.
+
+**Still not enforced:** `Cost` step 10 has no audit (`balance_exceptions.yaml` open item X2). The
+converter pins cost so it cannot write an off-grid one; the gap is in `apply_balance`.
 
 ### 3.0i — ⛔ MAINTAINER RULING NEEDED: what does the uniqueness law separate?
 

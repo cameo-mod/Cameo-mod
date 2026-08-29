@@ -233,11 +233,18 @@ def _spd_snap(r, val, lo, hi):
     return int(max(lo, min(hi, val)))
 
 
-def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72, spd_step=1):
-    # HP steps by 1000. Speed steps PER-ROW: 1 for foot infantry, 5 for
-    # vehicle-turn-rate units (also snapped to a multiple of 5). maintainer 2026-07-22.
-    # --- HP: uniform step 1000 ---
-    for l, h, step in ((hp_lo, hp_hi, 1000),):
+def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72):
+    """Make HP and Speed unique, moving each row on ITS OWN legal grid.
+
+    ⚠ Both grids are per-ROW and come from `formula.STAT_GRIDS` — infantry HP
+    steps by 1000 and Speed by 1, vehicles/aircraft/ships by 2500 and 5. HP used
+    to be hardcoded at 1000 for every class, so every vehicle class was nudged
+    onto the infantry grid. There was also a class-level `spd_step` argument, and
+    a `VEHICLE_TYPE_CLASSES = {"mbt"}` set feeding it, that NOTHING READ: the
+    per-row step always won. Both are gone — a dead knob that looks like it
+    enforces a law is worse than no knob at all.
+    """
+    for l, h in ((hp_lo, hp_hi),):
         groups = {}
         for r in rows:
             groups.setdefault(r["hp"], []).append(r)
@@ -249,6 +256,7 @@ def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72, spd_step=
             offsets = [i - n // 2 for i in range(n)]
             group.sort(key=lambda r: r["actor"])
             for r, off in zip(group, offsets):
+                step = r.get("hp_step", 1000)
                 r["hp"] = max(l, min(h, int(round(r["hp"] + off * step))))
         for _ in range(100):
             dupes = {k: v for k, v in
@@ -260,6 +268,7 @@ def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72, spd_step=
                 for i, r in enumerate(group):
                     if r.get("protected"):
                         continue
+                    step = r.get("hp_step", 1000)
                     r["hp"] = max(l, min(h, r["hp"] + (1 if i % 2 == 0 else -1) * step))
     # --- Speed: per-row step; snap turn-rate units to a multiple of 5 first ---
     for r in rows:
@@ -298,30 +307,28 @@ def load_class_rows(cls: str):
     if not anchor:
         raise SystemExit(f"No spec anchor for class {cls}")
     spec = anchor["spec"]
-    # ⚠ THE VERIFIER IS NO LONGER FROZEN (maintainer ruling 2026-08-29).
-    # Only the ANCHOR is protected — it defines cost0, so freezing it is what
-    # makes the class formula a formula. The verifier used to be frozen too, as a
-    # second calibration point at 2.5x cost0 (`BALANCE_PIPELINE.md` §8.1). Three
-    # measurements retired that:
-    #   * it does not constrain the class — releasing it moved the other members'
+    # ⚠ THERE IS NO VERIFIER ANY MORE (maintainer ruling 2026-08-29):
+    # *"we no longer have to have those verifiers — they should be regular units
+    # like anything else and not have those stiff rules."*
+    #
+    # Only the ANCHOR is protected. It defines cost0, which is what makes the
+    # class formula a formula. A second actor used to be frozen alongside it as a
+    # 2.5x cost0 calibration point (`BALANCE_PIPELINE.md` §8.1). Three
+    # measurements retired it:
+    #   * it did not constrain the class — releasing it moved the other members'
     #     worst |Δ| by 0.0 in 17 of 23 classes, and IMPROVED 5;
-    #   * it is not where the law puts it — only 8 of 23 sit at 2.5x cost0, and
-    #     three (`line_breaker`, `artillery_tank`, `archer`) are CHEAPER than
-    #     their own baseline, which makes them a second baseline, not a ceiling;
-    #   * it was not verifying anything — its own Δ reaches -3779.9
+    #   * it was not where the law put it — only 8 of 23 sat at 2.5x cost0, and
+    #     three were CHEAPER than their own baseline, which makes them a second
+    #     baseline, not a ceiling;
+    #   * it was not verifying anything — its own Δ reached -3779.9
     #     (`dreadnought`), and because `protected` rows are excluded from the
     #     "worst |Δ| among non-anchor members" line, a verifier that far out was
-    #     INVISIBLE in the very report that exists to catch bad pricing.
-    # The 2.5x baseband law is unaffected: `check_band.py` enforces it on price
-    # RATIOS, not on a nominated actor. `verifier_actor` stays in the anchor file
-    # as the class's reference unit, and the report still labels it — it is now
-    # balanced and counted like every other member.
+    #     INVISIBLE in the very report that exists to catch bad pricing. Freezing
+    #     it did not merely fail to help; it HID the failure.
+    # The 2.5x baseband law is unaffected — `check_band.py` enforces it on price
+    # RATIOS, which never needed a nominated actor.
     protected = {anchor.get("anchor_actor")}
     protected.discard(None)
-    # Kept in the roster even when not buildable — the verifier is still the
-    # class's named reference unit, it is just no longer exempt from balancing.
-    reference = protected | {anchor.get("verifier_actor")}
-    reference.discard(None)
     band_lo, band_hi = band_for(cls, spec)
     spd_lo = int(spec["speed0"] * 0.8)
     spd_hi = int(spec["speed0"] * 1.2)
@@ -355,11 +362,11 @@ def load_class_rows(cls: str):
                     continue
                 # Non-buildable units (no Buildable/Queue or ~disabled/~wip) are
                 # excluded from balancing entirely (maintainer law 2026-07-22).
-                # EXCEPTIONS stay in: anchor/verifier (calibration refs) and units
+                # EXCEPTION stays in: the anchor (the class's calibration ref) and units
                 # tagged design.balance_include (spawn-together siblings like
                 # molotovconscript, or support-power spawns like frank/undead —
                 # ~disabled by spawn mechanism, but real balance-relevant units).
-                if (not u.get("buildable", True) and actor not in reference
+                if (not u.get("buildable", True) and actor not in protected
                         and not design.get("balance_include")):
                     continue
                 hp = fnum((u.get("hp") or {}).get("v")) or 0
@@ -385,8 +392,7 @@ def load_class_rows(cls: str):
                     "tier_abs": tier_chain.effective_tier(
                         design.get("tech_tier"), du.get("tier_multiplier"), default=1.0),
                     "protected": is_protected,
-                    "note": "anchor" if actor == anchor.get("anchor_actor") else
-                            ("verifier" if actor == anchor.get("verifier_actor") else ""),
+                    "note": "anchor" if actor == anchor.get("anchor_actor") else "",
                 }
                 # weapon display: first priced primary armament
                 priced = [a for a in u.get("armaments", []) if a.get("pricing") and a.get("slot") in ("Armament", "Armament@PRIMARY")]
@@ -413,7 +419,14 @@ def load_class_rows(cls: str):
                 # FutureTech droids that use vehicle locomotion, while zerglings
                 # etc. (chem locomotor but no TurnSpeed) stay foot-stepped.
                 row["vehicle_turnrate"] = bool(u.get("turn_speed"))
-                row["spd_step"] = 5 if row["vehicle_turnrate"] else 1
+                # ⚠ The two grids key off DIFFERENT things — Speed off locomotion
+                # (turn rate = speed/5), HP off the unit kind (self-heal = HP/2500
+                # or HP/1000). A droid drives like a vehicle and heals like
+                # infantry, and takes one grid from each. See formula.STAT_GRIDS.
+                row["speed_platform"] = formula.speed_platform(section_name, u.get("turn_speed"))
+                row["hp_platform"] = formula.hp_platform(section_name)
+                row["spd_step"] = formula.stat_step("speed", row["speed_platform"])
+                row["hp_step"] = formula.stat_step("hp", row["hp_platform"])
                 row["arm_rng"] = formula.wdist_value(arm.get("range"), 0)
                 # offensive warheads on the primary weapon (100-grid split target)
                 offensive = [w for w in arm.get("damage_warheads", [])
@@ -441,9 +454,6 @@ def load_class_rows(cls: str):
 
 # Classes whose Speed steps by 5 (vehicles/aircraft/ships: turn rate = speed/5).
 # Infantry classes step by 1. Extend as vehicle/aircraft/naval anchors land.
-VEHICLE_TYPE_CLASSES = {"mbt"}
-
-
 def _price(spec, hp, spd, rng, dps, special, tech_tier):
     return formula.class_baseline_price(
         hp, spd, rng, dps, spec["hp0"], spec["speed0"], spec["range0_wdist"],
@@ -893,8 +903,7 @@ def rebalance_class(cls: str, uniqueness: str = "damage"):
     rows, spec, band_lo, band_hi, spd_lo, spd_hi = load_class_rows(cls)
     if not rows:
         return ""
-    spd_step = 5 if cls in VEHICLE_TYPE_CLASSES else 1
-    nudge_hp_spd(rows, spd_lo=spd_lo, spd_hi=spd_hi, spd_step=spd_step)
+    nudge_hp_spd(rows, spd_lo=spd_lo, spd_hi=spd_hi)
     # 1. Range: protected → spec; others → clamp current into band (preserve feel).
     for r in rows:
         if r["protected"]:
@@ -983,16 +992,29 @@ def rebalance_class(cls: str, uniqueness: str = "damage"):
 
     # The joint polish is a large win where the levers are stuck in a local
     # optimum and a loss where they are merely over-subscribed: on `scout` it
-    # takes DPS-uniqueness from 15.6 to 0.7, and pushes damage-uniqueness from
-    # 22.8 to 32.1 by perturbing the descent into a worse basin. Neither is
-    # predictable from the class, so run both descents and keep the better.
+    # takes DPS-uniqueness from 15.6 to 0.7, and can push damage-uniqueness from
+    # 22.8 to 32.1 by perturbing the descent into a worse basin. Which way it
+    # goes is not predictable from the class, and it also moves when an unrelated
+    # grid changes — switching vehicles to their lawful 2500 HP step re-landed
+    # `scout` in the worse basin on its own. So do not pick: run the descents,
+    # SEED one from the other's best, and keep whichever state actually measures
+    # lowest. Each descent is a few milliseconds.
     start = snapshot()
-    best_score, best = run(10, use_polish=True)
-    for r, saved in zip(rows, start):
-        r.update(saved)
-    plain_score, plain = run(10, use_polish=False)
-    if plain_score is not None and (best_score is None or plain_score < best_score):
-        best_score, best = plain_score, plain
+    best_score, best = None, start
+
+    def consider(score, state):
+        nonlocal best_score, best
+        if score is not None and (best_score is None or score < best_score):
+            best_score, best = score, state
+
+    for seed, polish in ((start, True), (start, False), (None, True), (None, False)):
+        if seed is not None:
+            for r, saved in zip(rows, seed):
+                r.update(saved)
+        else:                       # seeded from the best found so far
+            for r, saved in zip(rows, best):
+                r.update(saved)
+        consider(*run(10, use_polish=polish))
     for r, saved in zip(rows, best):
         r.update(saved)
     # 4. Prices / deltas

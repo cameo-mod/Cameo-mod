@@ -5,7 +5,7 @@ tables" — so a write that clobbers the entry does not lose one record, it lose
 
 Measured 2026-08-17 on `mbt`: the write was `anchors[cls] = {...6 keys...}`, and one run
 deleted `spec` (cost0/dps0/hp0/range0_wdist/speed0), `armor`, `tech_tier`,
-`tech_tier_flag`, `verifier_actor`, `reveals_shroud` and the "★ LOCKED 2026-08-01"
+`tech_tier_flag`, `reveals_shroud` and the "★ LOCKED 2026-08-01"
 provisional note. Those are the maintainer's DESIGN inputs, not fit outputs:
 `formula.class_baseline_price` reads `spec`, and the tier/verifier pair is what enforces
 the 2.5x identity. The tool still exited 0 and still wrote a plausible validation table,
@@ -32,7 +32,7 @@ ANCHORS = ROOT / "docs" / "balance" / "class_anchors.json"
 # and two others record the tier inside `comment` as "Tier factor 0.75=T3" instead), `armor`
 # is 13/27, `provisional` 23/27 — asserting those universally fails on legitimate entries,
 # which is what a first version of this test did.
-DESIGN_KEYS = ("spec", "verifier_actor", "reveals_shroud", "comment")
+DESIGN_KEYS = ("spec", "reveals_shroud", "comment")
 # Keys the fit itself owns and is expected to overwrite.
 FIT_KEYS = ("anchor_actor", "cost0", "o0", "p0", "q0", "signed_off")
 
@@ -82,13 +82,13 @@ class MergeSemanticsTest(unittest.TestCase):
         return entry
 
     def test_merge_preserves_unrelated_keys(self):
-        existing = {"spec": {"cost0": 800}, "verifier_actor": "x", "tech_tier": 1.0,
+        existing = {"spec": {"cost0": 800}, "reveals_shroud": "x", "tech_tier": 1.0,
                     "comment": "design rationale", "signed_off": True}
         fit = {"anchor_actor": "a", "cost0": 800.0, "o0": 1.0, "p0": 2.0, "q0": 3.0,
                "signed_off": False, "fit_comment": "candidate"}
         merged = self._merge(existing, fit)
         self.assertEqual(merged["spec"], {"cost0": 800})
-        self.assertEqual(merged["verifier_actor"], "x")
+        self.assertEqual(merged["reveals_shroud"], "x")
         self.assertEqual(merged["comment"], "design rationale")
         for key in FIT_KEYS:
             self.assertIn(key, merged)

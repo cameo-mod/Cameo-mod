@@ -113,30 +113,95 @@ class LeverOrderIsCoarseFirst(unittest.TestCase):
                         body.index("fine_tune_speed"))
 
 
-class OnlyTheAnchorIsFrozen(unittest.TestCase):
-    """Maintainer ruling 2026-08-29: the verifier is a RATIO, not a frozen actor.
+class ThereIsNoVerifier(unittest.TestCase):
+    """Maintainer ruling 2026-08-29: *"we no longer have to have those verifiers —
+    they should be regular units like anything else and not have those stiff
+    rules."*
 
-    It used to be exempt from balancing alongside the anchor. Measured across 23
-    classes, freezing it moved the other members' worst |Δ| by 0.0 in 17 of them,
-    only 8 of 23 sat at the 2.5x cost0 the law names, and — because exempt rows are
-    excluded from the report's worst-|Δ| line — a verifier off by 3779.9 credits
-    was invisible in the report meant to catch exactly that.
+    A second actor used to be frozen alongside the anchor as a 2.5x cost0
+    calibration point. Measured across 23 classes, freezing it moved the other
+    members' worst |Δ| by 0.0 in 17 of them, only 8 of 23 sat at the 2.5x the law
+    names, and — because exempt rows are excluded from the report's worst-|Δ| line
+    — a verifier off by 3779.9 credits was invisible in the report meant to catch
+    exactly that.
     """
 
-    def test_load_class_rows_protects_the_anchor_alone(self):
+    def test_only_the_anchor_is_protected(self):
         import inspect
         src = inspect.getsource(P.load_class_rows)
         head = src[src.index("protected = "):src.index("protected.discard(None)")]
         self.assertIn("anchor_actor", head)
         self.assertNotIn("verifier_actor", head)
 
-    def test_the_verifier_stays_in_the_roster_when_not_buildable(self):
-        """Released is not the same as dropped — it is still the class's named
-        reference unit, so it survives the buildable filter."""
+    def test_no_code_path_reads_a_verifier_any_more(self):
+        """A dead knob that LOOKS like it enforces a law is worse than no knob —
+        it answers "is this handled?" with a lie. Same reason `spd_step` and
+        `VEHICLE_TYPE_CLASSES` were removed."""
+        src = pathlib.Path(P.__file__).read_text(encoding="utf-8")
+        code = [ln for ln in src.splitlines()
+                if 'verifier_actor' in ln and not ln.lstrip().startswith("#")]
+        self.assertEqual(code, [])
+
+    def test_the_anchor_file_no_longer_carries_the_field(self):
+        anchors = P.load_anchors()
+        carriers = [c for c, a in anchors.items()
+                    if isinstance(a, dict) and "verifier_actor" in a]
+        self.assertEqual(carriers, [])
+
+
+class StatGridsComeFromOneRegistry(unittest.TestCase):
+    """The grids were literals scattered across the quantisers and three had
+    drifted from the law by 2026-08-29 — HP quantised at 1000 for EVERY class
+    against a law of 2500 for vehicles, the Speed probe reaching 0 of 168
+    aircraft, and a class-level `spd_step` nothing read."""
+
+    def test_documented_steps(self):
+        self.assertEqual(formula.stat_step("hp", "infantry"), 1000)
+        self.assertEqual(formula.stat_step("hp", "vehicle"), 2500)
+        self.assertEqual(formula.stat_step("speed", "infantry"), 1)
+        self.assertEqual(formula.stat_step("speed", "vehicle"), 5)
+        self.assertEqual(formula.stat_step("range"), 10)
+        self.assertEqual(formula.stat_step("damage"), formula.DAMAGE_STEP)
+        self.assertEqual(formula.stat_step("cost"), 10)
+
+    def test_every_grid_cites_its_source(self):
+        for stat, grids in formula.STAT_GRIDS.items():
+            for platform, (step, source) in grids.items():
+                self.assertTrue(source.strip(), f"{stat}/{platform} has no citation")
+                self.assertGreater(step, 0)
+
+    def test_an_unknown_stat_raises_rather_than_defaulting(self):
+        """A quantiser reaching for a grid that does not exist is a bug."""
+        with self.assertRaises(KeyError):
+            formula.stat_step("morale")
+
+    def test_aircraft_take_the_speed_5_grid_without_a_turn_rate(self):
+        """NOT ONE of the 168 aircraft in the tree defines Mobile.TurnSpeed, so
+        the turn-rate probe alone stepped them by 1 against a law that says 5."""
+        self.assertEqual(formula.speed_platform("aircraft", None), "vehicle")
+        self.assertEqual(formula.speed_platform("naval", None), "vehicle")
+
+    def test_a_droid_filed_under_infantry_drives_by_5_and_heals_by_1000(self):
+        """The two grids key off DIFFERENT things and collapsing them is a real,
+        measurable error: Speed's step is turn rate (locomotion), HP's step is
+        self-heal (unit kind). Keying HP off locomotion put
+        `futuretech_scoutdroid` on the 2500 grid and pushed `scout` from worst
+        |Δ| 22.8 to 32.1 on its own."""
+        self.assertEqual(formula.speed_platform("infantry", 100), "vehicle")
+        self.assertEqual(formula.hp_platform("infantry"), "infantry")
+        self.assertEqual(formula.stat_step("speed", formula.speed_platform("infantry", 100)), 5)
+        self.assertEqual(formula.stat_step("hp", formula.hp_platform("infantry")), 1000)
+
+    def test_foot_infantry_takes_both_infantry_grids(self):
+        self.assertEqual(formula.speed_platform("infantry", None), "infantry")
+        self.assertEqual(formula.hp_platform("vehicles"), "vehicle")
+
+    def test_the_converter_reads_the_registry_not_its_own_literals(self):
         import inspect
-        src = inspect.getsource(P.load_class_rows)
-        self.assertIn('reference = protected | {anchor.get("verifier_actor")}', src)
-        self.assertIn('actor not in reference', src)
+        src = inspect.getsource(P.nudge_hp_spd)
+        self.assertIn('r.get("hp_step"', src)
+        lines = pathlib.Path(P.__file__).read_text(encoding="utf-8").splitlines()
+        self.assertEqual([ln for ln in lines if ln.startswith("VEHICLE_TYPE_CLASSES")], [])
 
 
 if __name__ == "__main__":
