@@ -14,6 +14,7 @@ latinsyndicate_latinmilitia_ak47_elite:
 	BurstDelays: 3
 
 latinsyndicate_latinmilitia_molotov:
+	Inherits@finalmain: ^Compatibility_Flame_LightFlat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Flame_Light
@@ -34,12 +35,24 @@ latinsyndicate_latinmilitia_molotov:
 		Amount: 4
 		AimChance: 25
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Demolition_Light:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
+		PhysicalStateScale: 75
 
 latinsyndicate_latinmilitia_molotov_elite:
 	Inherits: latinsyndicate_latinmilitia_molotov
 	Range: 5500
 	Burst: 2
 	BurstDelays: 3
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
+		PhysicalStateScale: 75
 
 LatinTankKillerRocket:
 	Inherits: ^RA2LightMissile

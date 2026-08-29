@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Collapse a reviewed cohort whose single damage role is corroborated.
 
-The selected roots name their delivery family directly (flak or machine gun),
-or combine that delivery evidence with an existing compatible profile.  Every
-selected definition has flat mains with one target/relationship contract, no
-physical-state hooks, and safely foldable percentage arithmetic.
+The selected roots name their delivery family directly (flak, machine gun, or
+molotov), or combine that delivery evidence with an existing compatible
+profile.  Every selected definition has flat mains with one target/relationship
+contract and safely foldable percentage arithmetic.  The Latin Molotov pair
+is the sole state-bearing exception: its Temperature contribution is preserved
+by scaling the combined Flame main from 100 to 75 percent.
 
 This deliberately excludes the user-pinned Atreus, Epigraph, Goliath, Duelist,
 and Ordos autogun roles, plus branches whose names contradict their inherited
@@ -96,6 +98,9 @@ ROOTS = {
     "MarineMG": ("Bullet_Medium", set(), "reviewed-anti-infantry"),
     "MadcapGun": ("Bullet_Medium", set(), "reviewed-anti-infantry"),
     "Future_MultiMissile": ("MissileAP_Light", set(), "name"),
+    "latinsyndicate_latinmilitia_molotov": (
+        "Flame_Light", {"latinsyndicate_latinmilitia_molotov_elite"},
+        "molotov-flame-role"),
 }
 
 DESTINATION_OVERRIDES = {
@@ -204,6 +209,10 @@ BASELINE = {
         {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 36000, 1664),
     "Future_MultiMissile": (
         {"Arrow_Light", "MissileAP_Light"}, 8000, 9988),
+    "latinsyndicate_latinmilitia_molotov": (
+        {"Demolition_Light", "Flame_Light"}, 8000, 9988),
+    "latinsyndicate_latinmilitia_molotov_elite": (
+        {"Demolition_Light", "Flame_Light"}, 8000, 9988),
 }
 
 TARGETS = {
@@ -255,6 +264,8 @@ TARGETS = {
     "MarineMG": "Ground, Water, Air",
     "MadcapGun": "Ground, Water, Air",
     "Future_MultiMissile": "Ground, Water, Air",
+    "latinsyndicate_latinmilitia_molotov": "Ground, Water",
+    "latinsyndicate_latinmilitia_molotov_elite": "Ground, Water",
 }
 
 CANONICAL = re.compile(r"^\^Warhead_([A-Za-z]+)_(\w+)$")
@@ -273,6 +284,10 @@ TOP_LEVEL_ROUTE_OVERRIDES = {
 }
 INHERITED_DESTINATION_TEMPLATE = {
     "AsianPulverizerMechaGatling": "Inherits@collapseflat",
+}
+STATE_SCALE_OVERRIDES = {
+    "latinsyndicate_latinmilitia_molotov": 75,
+    "latinsyndicate_latinmilitia_molotov_elite": 75,
 }
 
 
@@ -349,6 +364,14 @@ def selections(rs: Ruleset) -> dict[str, str]:
             if not armed:
                 raise RuntimeError(
                     f"{root}: reviewed actor binding for {actor_name} changed")
+        elif evidence == "molotov-flame-role":
+            actor = rs.resolve("latinsyndicate_latinmilitia")
+            bound = actor is not None and any(
+                child.key.startswith("Armament")
+                and child.get("Weapon") in {root, *expected}
+                for child in actor.children)
+            if not bound or "molotov" not in root.lower():
+                raise RuntimeError(f"{root}: Molotov role evidence changed")
         for name in {root, *expected}:
             if name in selected:
                 raise RuntimeError(f"{name}: selected through multiple roots")
@@ -379,6 +402,11 @@ def inspect(rs: Ruleset, selected: dict[str, str]):
                 raise RuntimeError(f"{name}: applied percentage scale changed")
             if str(node.get("ValidTargets") or "") != TARGETS[name]:
                 raise RuntimeError(f"{name}: applied target route changed")
+            if name in STATE_SCALE_OVERRIDES:
+                if (node.get("PhysicalStateName") != "Temperature"
+                        or node.get("PhysicalStateScale") !=
+                        str(STATE_SCALE_OVERRIDES[name])):
+                    raise RuntimeError(f"{name}: Temperature contribution changed")
             if name in NAX_ALLY_ACCOUNTING:
                 ally = resolved.child("Warhead@NaxFlakAllyCounted")
                 if ally is None or ally.get("Damage") != "1500":
@@ -420,9 +448,17 @@ def inspect(rs: Ruleset, selected: dict[str, str]):
                          and top_level_targets == TARGETS[name])):
             raise RuntimeError(f"{name}: baseline target route changed")
         for key, node in nodes.items():
-            if any("PhysicalState" in child.key
-                   or child.key in {"IntegrityScale", "DamageDuration"}
-                   for child in node.children):
+            state_fields = {
+                child.key: str(child.value) for child in node.children
+                if "PhysicalState" in child.key
+                or child.key in {"IntegrityScale", "DamageDuration"}
+            }
+            if name in STATE_SCALE_OVERRIDES and key == "Flame_Light":
+                if state_fields != {
+                        "PhysicalStateName": "Temperature",
+                        "PhysicalStateScale": "100"}:
+                    raise RuntimeError(f"{name}: Flame state contract changed")
+            elif state_fields:
                 raise RuntimeError(f"{name}: {key} carries a state hook")
         if name in NAX_ALLY_ACCOUNTING:
             ally = resolved.child("Warhead@NaxFlakAllyCounted")
@@ -527,8 +563,9 @@ def remove_local_compatibility_removal(
         changed: dict[pathlib.Path, list[str]], path: pathlib.Path,
         weapon: str, destination: str) -> None:
     """Allow a selected descendant to replace a formerly suppressed profile."""
-    lines = changed.setdefault(
-        path, path.read_text(encoding="utf-8-sig").splitlines(True))
+    if path not in changed:
+        changed[path] = path.read_text(encoding="utf-8-sig").splitlines(True)
+    lines = changed[path]
     start, end = block_bounds(lines, weapon)
     marker = f"-Warhead@{destination}FlatCompatibility:"
     matches = [
@@ -539,6 +576,35 @@ def remove_local_compatibility_removal(
         raise RuntimeError(f"{weapon}: duplicate local compatibility removals")
     if matches:
         del lines[matches[0]]
+
+
+def set_state_scale(changed: dict[pathlib.Path, list[str]], path: pathlib.Path,
+                    weapon: str, destination: str, scale: int) -> None:
+    lines = changed[path]
+    start, end = block_bounds(lines, weapon)
+    marker = f"\tWarhead@{destination}FlatCompatibility:"
+    rows = [i for i in range(start + 1, end)
+            if lines[i].rstrip("\r\n") == marker]
+    if len(rows) != 1:
+        raise RuntimeError(f"{weapon}: expected one compatibility override")
+    node_start = rows[0]
+    node_end = end
+    for i in range(node_start + 1, end):
+        if lines[i].startswith("\t") and not lines[i].startswith("\t\t") \
+                and lines[i].strip():
+            node_end = i
+            break
+    while node_end > node_start + 1 and not lines[node_end - 1].strip():
+        node_end -= 1
+    field = "\t\tPhysicalStateScale:"
+    matches = [i for i in range(node_start + 1, node_end)
+               if lines[i].startswith(field)]
+    if len(matches) > 1:
+        raise RuntimeError(f"{weapon}: duplicate PhysicalStateScale")
+    if matches:
+        lines[matches[0]] = f"{field} {scale}\n"
+    else:
+        lines.insert(node_end, f"{field} {scale}\n")
 
 
 def remove_redundant_local_template(
@@ -590,6 +656,9 @@ def apply_changes(rs: Ruleset, selected: dict[str, str], plans) -> None:
             set_scale(changed, path, name, destination, plan["scale"])
         if name in NAX_ALLY_ACCOUNTING:
             set_nax_ally_accounting(changed, path, name)
+        if name in STATE_SCALE_OVERRIDES:
+            set_state_scale(
+                changed, path, name, destination, STATE_SCALE_OVERRIDES[name])
     for path, lines in changed.items():
         path.write_text("".join(lines), encoding="utf-8", newline="\n")
     cleanup_stale_removals(set(selected))

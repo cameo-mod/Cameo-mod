@@ -12,7 +12,9 @@ from consolidate_corroborated_role_profiles import (
     BASELINE,
     ROOTS,
     TARGETS,
+    remove_local_compatibility_removal,
     selections,
+    set_state_scale,
 )
 from miniyaml import Ruleset
 from percentage_damage import runtime_percentage_hp
@@ -26,7 +28,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         cls.selected = selections(cls.rules)
 
     def test_selected_profiles_resolve_to_one_pinned_main(self):
-        self.assertEqual(48, len(self.selected))
+        self.assertEqual(50, len(self.selected))
         for name, destination in self.selected.items():
             nodes = main_warhead_nodes(self.rules.resolve_weapon(name))
             self.assertEqual(1, len(nodes), name)
@@ -102,6 +104,36 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         }
         self.assertIn(template, parent_inherits)
         self.assertNotIn(template, child_inherits)
+
+    def test_latin_molotov_keeps_temperature_and_fire_payloads(self):
+        for name in (
+                "latinsyndicate_latinmilitia_molotov",
+                "latinsyndicate_latinmilitia_molotov_elite"):
+            resolved = self.rules.resolve_weapon(name)
+            main = main_warhead_nodes(resolved)[0]
+            self.assertEqual("Temperature", main.get("PhysicalStateName"), name)
+            self.assertEqual("75", main.get("PhysicalStateScale"), name)
+            self.assertIsNotNone(resolved.child("Warhead@FireShrapnel"), name)
+
+    def test_converter_helpers_remove_suppression_and_keep_state_field(self):
+        path = pathlib.Path("unused")
+        lines = [
+            "Example:\n",
+            "\t-Warhead@Flame_LightFlatCompatibility:\n",
+            "\tWarhead@Flame_LightFlatCompatibility:\n",
+            "\t\tDamage: 8000\n",
+            "\t\tPhysicalStateScale: 100\n",
+            "Next:\n",
+        ]
+        changed = {path: lines}
+        remove_local_compatibility_removal(
+            changed, path, "Example", "Flame_Light")
+        self.assertNotIn(
+            "\t-Warhead@Flame_LightFlatCompatibility:\n", lines)
+        set_state_scale(changed, path, "Example", "Flame_Light", 75)
+        self.assertIn("\t\tPhysicalStateScale: 75\n", lines)
+        self.assertEqual(
+            1, lines.count("\t\tPhysicalStateScale: 75\n"))
 
     def test_folded_percentage_rounding_delta_is_pinned_and_minimal(self):
         health_values = set()
