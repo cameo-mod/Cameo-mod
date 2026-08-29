@@ -994,6 +994,8 @@ Future_Wheel_MG_elite:
 	Report: gun8.aud
 	Range: 6806
 	Burst: 8
+	Projectile: Bullet
+		Speed: 4000
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
@@ -1554,6 +1556,7 @@ BlackWidowPistols:
 	Burst: 2
 	BurstDelays: 3
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: 77777777
 		ContrailEndColor: 33333333
 		ContrailStartWidth: 33

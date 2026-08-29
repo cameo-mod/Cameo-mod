@@ -2587,6 +2587,7 @@ ASDFGun2:
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
+		Speed: 4000
 	-Warhead@Railgun_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
@@ -2904,6 +2905,7 @@ asianalliance_fanatic_shotgun:
 	Report: aa_sshtgatt.wav
 	SoundVolume: 0.1
 	Projectile: Bullet
+		Speed: 4000
 		Inaccuracy: 800
 	Warhead@Bullet_Light:
 		Damage: 2000

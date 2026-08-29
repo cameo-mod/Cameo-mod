@@ -889,6 +889,7 @@ TSJumpCannon:
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
+		Speed: 4000
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:

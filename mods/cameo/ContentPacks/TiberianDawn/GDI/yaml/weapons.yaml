@@ -50,6 +50,7 @@ td_gdi_commando_sniper_elite:
 	Inherits@fx: ^Effect_Railgun_Heavy
 	Inherits@2: td_gdi_commando_sniper
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
 		ContrailLength: 40
@@ -2013,6 +2014,7 @@ td_gdi_shotgunner_shotgun:
 	Report: DSDSHTGN.wav
 	SoundVolume: 0.2
 	Projectile: Bullet
+		Speed: 4000
 		Inaccuracy: 800
 	Warhead@Bullet_Light:
 		Damage: 2000
