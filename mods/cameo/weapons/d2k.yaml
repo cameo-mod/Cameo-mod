@@ -1186,7 +1186,6 @@ light_inf_lmg_upgrade:
 		Damage: 2000
 Fremen_S:
 	Inherits: ^MG
-	Report: FREMODD1.WAV
 	ValidTargets: Infantry
 	InvalidTargets: Vehicle, Structure, Air
 	ReloadDelay: 20
@@ -1621,7 +1620,6 @@ d2kFlameTurret:
 
 d2k_flame_tank:
 	Inherits: Flamer
-	ValidTargets: Ground, Water
 	InvalidTargets: wall
 	ReloadDelay: 5
 	Range: 4096
