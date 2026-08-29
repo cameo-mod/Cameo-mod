@@ -477,3 +477,153 @@ claims:
                            capture_output=True, text=True).stdout
       m = re.search(r'\*\*(\d+) ledger\(s\) drifted\*\*', out)
       print(m.group(1) if m else 0)
+
+  # --- Harvester economy (docs/design/HARVESTER_BALANCE.md, 2026-08-29) ---
+  - id: harvester_actor_count
+    value: 33
+    tolerance: 0
+    what: Actors carrying a Harvester trait. The harvester exception's whole scope.
+    docs: [docs/design/HARVESTER_BALANCE.md, docs/design/balance_exceptions.yaml]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      print(sum(1 for a in rs.actors
+                if not a.startswith(('^', '_'))
+                and rs.resolve(a) is not None
+                and rs.resolve(a).child('Harvester') is not None))
+
+  - id: harvester_balancer_coverage
+    value: 33
+    tolerance: 0
+    what: >
+      Harvesters carrying HarvesterBalancer + SpeedMultiplier@HARVBALANCE. The
+      +38%-within-5-cells boost is UNIVERSAL; the income model depends on that.
+    docs: [docs/design/HARVESTER_BALANCE.md, docs/design/balance_exceptions.yaml]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      n = 0
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is None or node.child('Harvester') is None:
+              continue
+          if node.child('HarvesterBalancer') is not None and any(
+                  c.key == 'SpeedMultiplier@HARVBALANCE' for c in node.children):
+              n += 1
+      print(n)
+
+  - id: harvester_income_spread
+    value: 4.30
+    tolerance: 0.02
+    what: >
+      Ratio of the best to the worst refinery economy (free fleet, aggregate of
+      6-cell and 30-cell mining). Drives the HARVESTER_BALANCE target bands.
+    docs: [docs/design/HARVESTER_BALANCE.md]
+    measure: |
+      import io, sys, contextlib
+      sys.argv = ['harvester_income.py']
+      sys.path.insert(0, 'tools/balance')
+      import harvester_income as hi
+      buf = io.StringIO()
+      with contextlib.redirect_stdout(buf):
+          hi.main()
+      for line in buf.getvalue().splitlines():
+          if 'SPREAD' in line:
+              print(line.split('SPREAD')[1].strip().rstrip('x'))
+              break
+
+  # --- Balance-formula exceptions (docs/design/balance_exceptions.yaml, 2026-08-29) ---
+  - id: superweapon_weapon_firing_powers
+    value: 40
+    tolerance: 0
+    what: >
+      Weapon-firing support/super power instances. The scope of the superweapon
+      damage audit the maintainer ordered 2026-08-29 (open item X1).
+    docs: [docs/design/balance_exceptions.yaml, docs/DESIGN.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      FIRING = {'DetonateWeaponPower', 'AirstrikePower', 'IonCannonPower',
+                'FireArmamentPower', 'NukePower'}
+      n = 0
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is None:
+              continue
+          n += sum(1 for c in node.children if c.key.split('@')[0] in FIRING)
+      print(n)
+
+  - id: promotion_upgrade_count
+    value: 236
+    tolerance: 0
+    what: >
+      Actors carrying PromotionUpgrade. 12 per faction across 19 factions plus
+      8 for ts_gdi; nine factions have zero. DESIGN.md section 6.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      print(sum(1 for a in rs.actors
+                if not a.startswith(('^', '_'))
+                and rs.resolve(a) is not None
+                and rs.resolve(a).child('PromotionUpgrade') is not None))
+
+  - id: promotion_rank1_only
+    value: 236
+    tolerance: 0
+    what: >
+      Promotions gated on rank1. ALL of them: the tier ladder is chain depth,
+      not veterancy rank. If this drops, someone converted them to rank gates.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      n = 0
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is None or node.child('PromotionUpgrade') is None:
+              continue
+          b = node.child('Buildable')
+          if b is not None and 'rank1' in (b.get('Prerequisites') or ''):
+              n += 1
+      print(n)
+
+  - id: factions_without_promotions
+    value: 9
+    tolerance: 0
+    what: >
+      Playable factions with zero promotions (eden, harkonnen, plymouth,
+      ra2_allies, ra2_soviets, ts_nod, wc2_humans, wc2_orcs, yuri). Maintainer
+      2026-08-29 ordered all of them filled to 12; this drops as that lands.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import sys, collections
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      m = Model()
+      rs = m.rs
+      have = collections.Counter()
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is not None and node.child('PromotionUpgrade') is not None:
+              have[a.split('_promotion_')[0]] += 1
+      print(sum(1 for f in m.real_factions() if have.get(f.internal, 0) == 0))
+

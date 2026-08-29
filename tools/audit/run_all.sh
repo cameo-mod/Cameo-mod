@@ -92,7 +92,15 @@ done
 # ⚠ Each script still exits 1 on its own findings, so CI may gate on one deliberately.
 # ⚠ tools/audit/run_all.py parses BOTH loops out of this file — keep the `for a in ...; do`
 #   shape so the two runners cannot drift apart.
-for a in code_duplication test_coverage recent_changes error_handling security; do
+#
+# `support_powers` is advisory for a DIFFERENT reason: its S1 check is red on a
+# real bug (9 support powers whose `Prerequisites:` header line is missing, so
+# the engine silently drops the level map underneath — CLAUDE.md 8b). The fix is
+# a yaml edit and yaml edits need a boot gate, so the finding is reported while
+# the suite stays green. MOVE IT INTO THE BLOCKING LOOP once S1 reads clean;
+# it guards a class grep cannot find. See docs/design/balance_exceptions.yaml.
+for a in code_duplication test_coverage recent_changes error_handling security \
+         support_powers; do
   echo "== audit_$a (advisory)"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"

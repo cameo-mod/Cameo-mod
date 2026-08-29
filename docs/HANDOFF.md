@@ -481,6 +481,50 @@ From [`audit/SUMMARY.md`](audit/SUMMARY.md), smallest first:
 5. **89 D1 duplicate-`Inherits` keys** — each one silently DROPS a template. This is the same
    family as the `Parent type X was already inherited` boot crash; triage before it bites.
 6. **47 prerequisite-order violations** across 841 buildable combat actors.
+7. **⛔ 9 support powers lost their `Prerequisites:` header line** (found 2026-08-29,
+   `tools/audit/audit_support_powers.py` S1). The level map under it is orphaned onto the
+   PREVIOUS key — `PauseOnCondition: disabled` / `OrderName: japanparatroopers` /
+   `ArmamentName: superweapon` — and the engine drops it in silence (rule 8b), so the gating
+   the author wrote is not in effect. **Four superweapons lose `~techlevel.superweapons`**
+   (RA2 Soviets Iron Curtain, Yuri Genetic Mutator, Steel Consortium BFG-10000, Asian
+   Alliance), and Japan's paratroopers, Naxis parabombs, the AA mass paradrop (14 levels!)
+   and the Ordos palace lose their upgrade/promotion gating. Grep cannot find this — every
+   individual line is valid MiniYAML. Exact file:line list in the audit's S1 section.
+   ⚠ It is a yaml edit, so it needs the boot gate; the audit is wired ADVISORY until it lands,
+   then move it into the blocking loop.
+
+### 3.3b — Queued by the maintainer rulings of 2026-08-29
+
+The rulings themselves are recorded in `DESIGN.md` §12.0-pre / §12.0-scope / §6 and in
+`docs/design/balance_exceptions.yaml`. What they leave to build:
+
+1. **Fill the promotion grid.** Nine factions have **zero** promotions (`eden`, `harkonnen`,
+   `plymouth`, `ra2_allies`, `ra2_soviets`, `ts_nod`, `wc2_humans`, `wc2_orcs`, `yuri`) and
+   `ts_gdi` has 8 of 12. Maintainer ordered all of them filled to the full 3x4 grid. RA2
+   Allies, RA2 Soviets and Yuri getting nothing from a system 20 factions use is a
+   competitive asymmetry, not a stylistic gap. A chain is a THEME and a theme can be
+   anything — do not re-sort the existing chains into infantry/vehicle/support.
+2. **Enforce the cost grid.** Cost is a multiple of 10 (maintainer 2026-08-29) and nothing
+   checks it: `formula.py` has `DAMAGE_STEP` but no `COST_STEP`, and no audit reports an
+   off-grid Cost. (`balance_exceptions.yaml` open item X2.)
+3. **Superweapon damage.** `audit_support_powers.py` S3 now reports it. First reading: Ion
+   Cannon damage spans **259068 to 452075** across factions at the same charge interval —
+   TD GDI and Steel Consortium/Protoss fire 452075, TS GDI's own fires 271072. Nobody has
+   ruled what the spread should be.
+4. **Harvester income bands.** `docs/design/HARVESTER_BALANCE.md` §5 proposes T1 (aggregate
+   within +/-15% of the median) and T2 (long/short ratio 0.24-0.34). **Not signed off.**
+   13 of 26 refinery economies are currently outside +/-25%.
+5. **Decide the movement-speed floor.** The maintainer's "pathfinding safe above 50" is a
+   FLOOR and the class anchors already encode it (`speed0` minimum is exactly 50). But 94
+   buildable ground units sit below it BY DESIGN — Kirov 30, Sturmtiger 30, Ratte 35,
+   Devastator 31. It cannot be applied as a sweep. (open item X3.)
+6. **Decide `HarvesterBalancer`'s direction.** All 33 harvesters get +38% speed within 5
+   cells of a refinery, inherited from CA's default. It rewards mining CLOSE, so it widens
+   the short/long income gap rather than closing it. (open item X4.)
+7. **Finish the instant-hit conversion.** The Shattered Paradise port
+   (`InstantHitWithFakeBullets`) is DONE and deployed, but 15 sniper weapons are still
+   `Bullet` at Speed 2500-10000, and `td_gdi_commando_sniper` is instant-hit while its
+   `_elite` variant is not — one family, two projectile types.
 
 ### 3.4 — Documentation and tooling debt this pass left behind
 

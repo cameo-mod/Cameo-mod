@@ -495,6 +495,27 @@ cheapest provider wins).
 - Multiplier semantics: reload/build <100 = faster; damage taken <100 =
   tankier; firepower/range/speed >100 = stronger.
 - **Promotions grant options (units/abilities); research grants stats.**
+- ⭐ **THE PROMOTION GRID: 3 CHAINS OF 4** (maintainer 2026-08-29). Each faction has
+  **twelve** promotions arranged as three prerequisite chains of four. Measured in
+  the tree 2026-08-29: 236 actors carry `PromotionUpgrade`, all on the `Promotions`
+  queue, 12 per faction for 19 factions and 8 for `ts_gdi`.
+  - **The tier is CHAIN DEPTH, not veterancy rank.** All 236 gate on `rank1`;
+    `rank2/3/4` are not used, and that is correct — "Tier 1 to 4" means the
+    position in the chain (A → B → C → D), reached by buying the previous
+    promotion, not by fielding veteran units. Do not convert these to rank gates.
+  - **A chain is a THEME, and a theme can be anything** (maintainer 2026-08-29:
+    *"themes can be many different things"*). Infantry / vehicle / support is one
+    valid grouping, not the required one — Asian Alliance's
+    `flametank → plasmatrooper → plasmatank → howitzer` is a **weapon-technology**
+    chain (flame, then plasma) and is thematically correct as authored. Judge a
+    chain by whether its four members read as one idea, not by unit domain.
+  - **Every playable faction gets the full twelve.** Nine currently have **zero**
+    (`eden`, `harkonnen`, `plymouth`, `ra2_allies`, `ra2_soviets`, `ts_nod`,
+    `wc2_humans`, `wc2_orcs`, `yuri`) and `ts_gdi` has 8 of 12. RA2 Allies, RA2
+    Soviets and Yuri getting nothing from a system 20 other factions use is a
+    competitive asymmetry, not a stylistic gap. Filling them is queued work.
+  - Support powers and minor upgrades are legitimate **chain fillers** where a
+    faction lacks four units that fit a theme.
 - Roster-wide upgrades must cover the full roster (audit_upgrade_coverage).
 - Worst-case stack budget ≤ 2.0× fresh-self effective power
   (audit_power_budget; veterancy ladders are exclusive, count best rank).
@@ -989,6 +1010,49 @@ profile peaked at exactly 100, so it produced the ceiling + floor; once profiles
 renormalised, "top" became a function of each family's SHARPNESS and the rule started
 rewarding sharpness instead of anti-shield design — a sword read 200 while a Tesla coil
 read 151. It is replaced by §12.0c below.
+
+### 12.0-pre THE TWO GRIDS (binding)
+
+Two quantisation laws govern every number the formula writes. Both are absolute:
+a value off its grid is a bug even when it is otherwise correct.
+
+| quantity | step | source of truth |
+|---|---|---|
+| `Damage` | **100** | `tools/balance/formula.py` `DAMAGE_STEP` (W15) |
+| `Cost` | **10** | maintainer 2026-08-29 |
+
+* **Damage — step 100.** The 2000-step grid plus a `FirepowerMultiplier` fine-tune
+  is a **retired** law. `FirepowerMultiplier` is not a pricing knob at all (W17):
+  `apply_balance` cannot write it, and `propose_class_rebalance.decompose_dps`
+  always solves at `fp = 1.0`. Documents still teaching 2000 + FP are describing
+  a system that no longer exists.
+* **Cost — step 10** (maintainer 2026-08-29). Every priced `Cost` is a multiple
+  of 10; the formula's raw output is rounded to the nearest 10, ties up. This is
+  a *presentation* grid — it applies to what lands in yaml, not to the ledger's
+  intermediate arithmetic. Not yet enforced in code: `formula.py` has no
+  `COST_STEP` and no audit reports an off-grid Cost
+  (`docs/design/balance_exceptions.yaml`, open item X2).
+
+### 12.0-scope WHAT THE FORMULA PRICES (binding)
+
+The class formula prices **combat units, defenses and heroes**. It does not price
+superweapons, harvesters, weaponless support units, or props. The full registry —
+with the ruling behind each entry and the method that governs the exceptions — is
+**`docs/design/balance_exceptions.yaml`**. Read it before asking whether some actor
+is in the formula; that question has been re-litigated more than once.
+
+* **Heroes are ordinary units** (maintainer 2026-08-29): *"Heroes are part of the
+  balance pipeline as they are regular units."* A hero sits in whatever class its
+  role gives it and prices from that anchor. There is no separate hero track.
+* **Superweapons are out** (maintainer 2026-08-29): *"neither units nor defenses"*.
+  They still need a **separate superweapon damage audit**, which does not exist yet
+  — 40 weapon-firing power instances are currently unaudited (open item X1).
+* **Harvesters are out**, and priced on income instead:
+  **`docs/design/HARVESTER_BALANCE.md`**, a six-parameter model with a tool
+  (`tools/balance/harvester_income.py`) that derives every parameter from the tree.
+* **Weaponless support units are manual** (maintainer 2026-08-29): with no DPS term
+  the formula has nothing to solve, so Cost is a maintainer decision. A unit whose
+  only weapon deals zero damage (repair beam, targeting laser) belongs here too.
 
 ### 12.0 THE PROFILE SHAPE LAW (maintainer, 2026-08-15) — binding
 
