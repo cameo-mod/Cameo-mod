@@ -334,36 +334,62 @@ and reported fourteen phantom FAILEDs. Latent for as long as the file has had co
 because nobody ever diffed the fallback against the canonical path. Fixed, with a regression test
 in `tools/tests/test_audit_run_all_parser.py`.
 
-### 3.0e — ⛔ The balance ledgers are stale on master (found 2026-08-28)
+### 3.0e — ✅ RESOLVED: the ledgers are no longer stale (re-verified 2026-08-29)
 
-`python tools/balance/run_pipeline.py` — the new orchestrator — came back FAIL on its
-first real run against `4643c3ee`:
+The 2026-08-28 finding — *"22 of 33 raw ledgers stale, 5 model"* against `4643c3ee` —
+**no longer holds.** `audit_balance_drift` now reports **clean: 32 ledgers match the
+live rules exactly.** The last ledger commit is #294; the weapon commits after it
+(#303–#305) moved projectile and targeting fields the ledger does not track, so no
+drift accrued.
 
-| stage | result |
-|---|--:|
-| drift — yaml vs committed ledger | **FAIL: 22 of 33 raw ledgers stale, 5 model** |
-| multiplier modifiers integer | PASS |
-| generator reproduces every family | PASS — drift 0 across 139 templates |
-| empty warhead types | PASS — 0 of 2839 |
-
-`CLAUDE.md` rule 3 already warns that `audit_balance_drift` "only helps if someone
-LOOKS", and that it had gone red twice for exactly this. **This is the third time.**
-The last commit to re-extract was #293; something after it moved yaml without running
-step 1.
-
-**The remedy is one command**, and it belongs to whoever lands the next balance commit
-rather than to a drive-by — the weapon-consolidation flow already re-extracts, and a
-single commit that skipped it left 22 ledgers stale:
+Kept as provenance because the lesson stands and CLAUDE.md rule 3 still applies:
+`audit_balance_drift` only helps if someone LOOKS, and it had gone red three times.
+**Re-extract before every commit that moves a balance number**, not at the end of a
+session:
 
 ```sh
 python tools/balance/extract_stats.py     # or: run_pipeline.py --extract
 ```
 
-then commit the ledgers together with the yaml that moved them.
+⚠ Never hand-edit a ledger number to make drift go away — that inverts the pipeline
+and is exactly what rule 3 forbids. Re-extraction regenerates the ledger *from* yaml.
 
-⚠ Do not read this as licence to hand-edit a ledger number. Re-extraction regenerates
-the ledger *from* yaml — the sanctioned direction. Editing a ledger to make drift go
-away inverts the pipeline and is exactly what rule 3 forbids.
+### 3.0f — ⛔ WHY 0 OF 27 CLASS ANCHORS ARE SIGNED (measured 2026-08-29)
+
+Pricing is blocked on the anchors and nothing said why. `tools/balance/anchor_readiness.py`
+measures it. **`fit_class.py` validates an anchor by pricing every MEMBER of its class**,
+so an anchor is signable only if it has members and they sit near it.
+
+| | |
+|---|--:|
+| buildable ledger units | 1871 |
+| tagged with a `design.class_anchor` | **336 (18.0%)** |
+| tagged including non-buildable | 346 |
+| classes ready to validate today | **3** (`support` 0.24, `closecombat` 0.82, `fire_support` 0.88) |
+| classes loose or scattered | 19 |
+| classes with **zero** members | **5** — `commando`, `flying_infantry`, `grenadier`, `mortar`, `pure_sniper` |
+
+⛔ **The class boundaries are NOT recoverable from stats.** Median distance from a
+tagged unit to its OWN anchor is **1.95**; median distance BETWEEN two anchors is
+**1.21**. Units sit further from their own anchor than the anchors sit from each
+other. A nearest-anchor classifier scores **17.6%** against the 346 known labels (all tagged units, buildable or not) —
+that experiment was run and is reported (`--classifier`) precisely so nobody tries it
+again expecting a different answer.
+
+Several anchors are statistically identical and separated only by what they SHOOT AT:
+`anti_air_vehicle` ↔ `missile_vehicle` at **0.024**, `archer` ↔ `flying_infantry` 0.048,
+`rocket_trooper` ↔ `special_forces` 0.053. **No numeric check can police those
+boundaries** — membership is a role judgement, which is why `fit_class.py` step 1 puts
+it in the maintainer's hands.
+
+**What this makes actionable:**
+1. Sign the three tight classes now — they will validate cleanly.
+2. The five empty classes need members before `fit_class.py` can run on them at all.
+3. `melee` (12.04), `special_forces` (5.09), `heavy_sniper` (5.02), `archer` (4.90)
+   need their ANCHOR revisited, not just more members: the anchor does not describe
+   the units already assigned to it.
+4. Do not sign the 27 as one batch. They are not equally ready, and a batch signature
+   would bake in the scattered ones.
 
 ### 3.0d — Read before proposing pipeline architecture
 

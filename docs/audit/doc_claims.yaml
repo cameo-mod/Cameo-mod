@@ -765,3 +765,78 @@ claims:
               n += 1
       print(n)
 
+  # --- Class anchor readiness (docs/HANDOFF.md 3.0f, 2026-08-29) ---
+  - id: class_anchor_membership_pct
+    value: 18.0
+    tolerance: 0.02
+    what: >
+      Percent of buildable ledger units carrying a design.class_anchor.
+      fit_class.py validates an anchor by pricing every MEMBER of its class, so
+      this is the hard blocker on signing anchors and therefore on pricing.
+      It must RISE; 5 classes still have zero members.
+    docs: [docs/HANDOFF.md]
+    measure: |
+      import glob, json, pathlib
+      tagged = total = 0
+      for path in sorted(glob.glob('docs/balance/*.json')):
+          if 'class_anchors' in path:
+              continue
+          try:
+              doc = json.loads(pathlib.Path(path).read_text(encoding='utf-8'))
+          except (ValueError, OSError):
+              continue
+          for _s, units in (doc.get('sections') or {}).items():
+              if not isinstance(units, dict):
+                  continue
+              for _n, rec in units.items():
+                  if not isinstance(rec, dict) or not rec.get('buildable'):
+                      continue
+                  total += 1
+                  if (rec.get('design') or {}).get('class_anchor'):
+                      tagged += 1
+      print(round(tagged / total * 100, 1))
+
+  - id: class_anchors_signed_off
+    value: 0
+    tolerance: 0
+    what: >
+      Class anchors with signed_off true. apply_balance --confirm is a NO-OP
+      until this rises, so it is the single number that says whether pricing can
+      run at all. 3 classes are measured ready to sign (anchor_readiness.py).
+    docs: [docs/HANDOFF.md, docs/design/BALANCE_PIPELINE.md]
+    measure: |
+      import json, pathlib
+      d = json.loads(pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      print(sum(1 for k, v in d.items()
+                if not k.startswith('_') and v.get('signed_off')))
+
+  - id: class_anchors_without_members
+    value: 5
+    tolerance: 0
+    what: >
+      Classes defined in class_anchors.json with no tagged member anywhere in the
+      ledgers (commando, flying_infantry, grenadier, mortar, pure_sniper).
+      fit_class.py cannot run on these at all. Must reach 0.
+    docs: [docs/HANDOFF.md]
+    measure: |
+      import glob, json, pathlib
+      anchors = json.loads(
+          pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      have = set()
+      for path in sorted(glob.glob('docs/balance/*.json')):
+          if 'class_anchors' in path:
+              continue
+          try:
+              doc = json.loads(pathlib.Path(path).read_text(encoding='utf-8'))
+          except (ValueError, OSError):
+              continue
+          for _s, units in (doc.get('sections') or {}).items():
+              if not isinstance(units, dict):
+                  continue
+              for _n, rec in units.items():
+                  if isinstance(rec, dict):
+                      c = (rec.get('design') or {}).get('class_anchor')
+                      if c:
+                          have.add(c)
+      print(sum(1 for k in anchors if not k.startswith('_') and k not in have))
+
