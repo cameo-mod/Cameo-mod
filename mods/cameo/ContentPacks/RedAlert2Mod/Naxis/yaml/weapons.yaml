@@ -411,10 +411,16 @@ NaxiSniper:
 	Range: 7777
 	Warhead@Sniper_Light:
 		Damage: 24000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 24000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 12
+		Spread: 1
+		Falloff: 100, 0
 
 NaxiSniper_elite:
 	Inherits: NaxiSniper

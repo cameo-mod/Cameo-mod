@@ -16,6 +16,8 @@ CryoLightSniper:
 		ContrailLength: 10
 	Warhead@BulletCryo_Light:
 		Damage: 30000
+		Spread: 1
+		Falloff: 100, 0
 
 M60mg:
 	Inherits@wh: ^Warhead_Bullet_Light

@@ -205,10 +205,16 @@ tkmawp:
 	Report: isniatta.wav
 	Warhead@Sniper_Light:
 		Damage: 44000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 22
+		Spread: 1
+		Falloff: 100, 0
 tkmsmg:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -1146,10 +1152,16 @@ VanSniper:
 	Report: isniatta.wav
 	Warhead@Sniper_Light:
 		Damage: 80000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 80000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 40
+		Spread: 1
+		Falloff: 100, 0
 
 tkmt72cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium

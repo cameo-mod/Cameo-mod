@@ -7,10 +7,16 @@ td_gdi_commando_sniper:
 	Range: 8086
 	Warhead@Sniper_Light:
 		Damage: 40000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 40000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 20
+		Spread: 1
+		Falloff: 100, 0
 
 M16AP:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -56,6 +62,11 @@ td_gdi_commando_sniper_elite:
 		ContrailLength: 40
 	Warhead@Railgun_Heavy:
 		Damage: 20000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Railgun_Heavy_ExtraDamage:
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light:
 		Damage: 20000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage

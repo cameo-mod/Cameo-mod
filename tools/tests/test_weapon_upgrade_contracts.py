@@ -7,6 +7,12 @@ import unittest
 import _bootstrap  # noqa: F401 — sys.path side effect
 
 import audit_upgrade_regression as upgrade
+from audit_three_way_split import (
+    INTENTIONAL_COMPOSITES,
+    SPLIT_BASELINE,
+    intentional_composite,
+    main_warheads,
+)
 from cameo_model import Model
 
 
@@ -116,6 +122,18 @@ class WeaponUpgradeContractTest(unittest.TestCase):
         self.assertEqual(kodiak_projectile.value, "Bullet")
         self.assertIsNone(kodiak_projectile.get("TrailImage"))
         self.assertIsNone(kodiak_projectile.get("PointDefenseTypes"))
+
+    def test_sonic_hellfire_is_one_exact_reviewed_composite(self):
+        self.assertEqual(693, SPLIT_BASELINE)
+        self.assertEqual(
+            {"TSHellfireSonic": ("MissileAP_Heavy", "Sonic_Medium")},
+            INTENTIONAL_COMPOSITES,
+        )
+        mains = main_warheads(self.rs.resolve_weapon("TSHellfireSonic"))
+        self.assertTrue(intentional_composite("TSHellfireSonic", mains))
+        self.assertFalse(intentional_composite("CopiedHellfireSonic", mains))
+        self.assertFalse(intentional_composite(
+            "TSHellfireSonic", mains + ["Sonic_Heavy"]))
 
     def test_quantum_emp_anti_air_replacements_increase_damage(self):
         for base, upgraded in (
