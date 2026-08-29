@@ -56,6 +56,7 @@ import json
 import math
 import statistics
 import pathlib
+import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -165,6 +166,37 @@ def predict(feat, section, anchors, sections_of):
     return scored[0][1], scored[0][0], runner
 
 
+VALIDATION = re.compile(
+    r"\|\s*`([^`]+)`\s*\|\s*([\d.]+)\s*\|\s*(.+?)\s*\|\s*([+-]?\d+)%")
+
+
+def residuals():
+    """{class: [abs percent error]} from fit_class.py's validation tables.
+
+    ⚠ THIS, NOT STAT DISTANCE, IS READINESS. A class can cluster tightly in
+    (hp, dps, range, speed) and still price badly, because the formula weights
+    those axes against an anchor rather than measuring nearness to it —
+    `fire_support` has a tight 0.88 median distance and a 35% median pricing
+    error. Only the residual says whether an anchor can be signed.
+    """
+    out, unscored = {}, {}
+    for path in sorted(LEDGER.glob("formula_v2_*.md")):
+        cls = path.stem.replace("formula_v2_", "")
+        if cls == "classes":                   # a design note, not a fit table
+            continue
+        deltas, nostats = [], 0
+        for line in path.read_text(encoding="utf-8").splitlines():
+            m = VALIDATION.match(line)
+            if m:
+                deltas.append(abs(int(m.group(4))))
+            elif "(no combat stats)" in line:
+                nostats += 1
+        if deltas:
+            out[cls] = deltas
+            unscored[cls] = nostats
+    return out, unscored
+
+
 def anchor_spread(anchors):
     """Pairwise distance between anchor SPECS — how separable the classes are."""
     specs = {k: (v.get("spec") or {}) for k, v in anchors.items()
@@ -202,8 +234,12 @@ def main():
     print(f"classes defined      : {len(classes)}")
     print(f"signed off           : **{len(signed)}**")
     print(f"buildable units      : {buildable}")
-    print(f"tagged with a class  : {len(tagged)} "
-          f"({len(tagged) / buildable * 100:.1f}%)\n")
+    tagged_buildable = sum(1 for _f, _s, _n, r in units
+                           if r.get("buildable")
+                           and (r.get("design") or {}).get("class_anchor"))
+    print(f"tagged with a class  : {tagged_buildable} of the buildable "
+          f"({tagged_buildable / buildable * 100:.1f}%); {len(tagged)} including "
+          "non-buildable\n")
 
     # --- per-class fit ------------------------------------------------------ #
     members = collections.defaultdict(list)
@@ -213,46 +249,65 @@ def main():
         if d is not None:
             members[cls].append(d)
 
+    resid, unscored = residuals()
     rows = []
     for cls in classes:
         ds = members.get(cls) or []
+        rs_ = resid.get(cls) or []
+        # A class "scored" only on members the formula could actually price, and
+        # a table containing nothing but its own anchor proves nothing: the
+        # anchor prices itself at exactly 0% by construction.
+        scored = len(rs_)
         rows.append({
             "class": cls,
             "members": len(ds),
-            "median_distance": round(statistics.median(ds), 2) if ds else None,
-            "worst": round(max(ds), 2) if ds else None,
+            "scored": scored,
+            "median_error_pct": round(statistics.median(rs_)) if rs_ else None,
+            "within_10pct": round(sum(1 for d in rs_ if d <= 10) / scored * 100)
+                            if scored else None,
+            "worst_error_pct": max(rs_) if rs_ else None,
+            "unpriceable": unscored.get(cls, 0),
             "signed_off": bool(anchors[cls].get("signed_off")),
         })
-    rows.sort(key=lambda r: (r["median_distance"] is None,
-                             r["median_distance"] or 0))
+    rows.sort(key=lambda r: (r["median_error_pct"] is None,
+                             r["median_error_pct"] if r["median_error_pct"] is not None else 0,
+                             -(r["scored"] or 0)))
 
-    print("## Per-class fit — how far members sit from their own anchor\n")
-    print("`d` is the mean squared log-ratio over (hp, dps, range, speed). "
-          "0 means a member sits exactly on its anchor.\n")
-    print("| class | members | median d | worst d | verdict |")
-    print("|---|--:|--:|--:|---|")
+    print("## Sign-off queue — ranked by PRICING error, not stat distance\n")
+    print("`median |Δ|` is how far the class formula's price sits from the unit's "
+          "actual cost, from `fit_class.py`'s validation table. **A class needs at "
+          "least 3 scored members to mean anything** — an anchor prices itself at "
+          "0% by construction.\n")
+    print("| class | scored | median \\|Δ\\| | within 10% | worst | verdict |")
+    print("|---|--:|--:|--:|--:|---|")
     ready = blocked = empty = 0
     for r in rows:
-        if not r["members"]:
-            verdict = "⛔ NO MEMBERS — `fit_class.py` cannot run at all"
+        if r["median_error_pct"] is None:
+            verdict = "⛔ not fitted — no anchor, or the anchor has no stats"
             empty += 1
-        elif r["median_distance"] <= 1.0:
-            verdict = "✅ tight — validate and sign this one"
+        elif r["scored"] < 3:
+            verdict = f"⚠ only {r['scored']} scored — too few to judge"
+            blocked += 1
+        elif r["median_error_pct"] <= 10:
+            verdict = "✅ **SIGN THIS ONE** — the anchor prices its class"
             ready += 1
-        elif r["median_distance"] <= 2.5:
-            verdict = "⚠ loose — expect visible residuals"
+        elif r["median_error_pct"] <= 25:
+            verdict = "⚠ close — review the outliers, then sign"
             blocked += 1
         else:
-            verdict = "⛔ scattered — fix the anchor or the membership first"
+            verdict = "⛔ the anchor does not describe its members"
             blocked += 1
-        print(f"| `{r['class']}` | {r['members']} | "
-              f"{r['median_distance'] if r['median_distance'] is not None else '—'} | "
-              f"{r['worst'] if r['worst'] is not None else '—'} | {verdict} |")
+        cells = [f"`{r['class']}`", str(r["scored"]),
+                 f"{r['median_error_pct']}%" if r["median_error_pct"] is not None else "—",
+                 f"{r['within_10pct']}%" if r["within_10pct"] is not None else "—",
+                 f"{r['worst_error_pct']}%" if r["worst_error_pct"] is not None else "—",
+                 verdict]
+        print("| " + " | ".join(cells) + " |")
 
     alld = [d for ds in members.values() for d in ds]
     pairs = anchor_spread(anchors)
-    print(f"\n**{ready} classes are ready to validate today**, {blocked} need work "
-          f"first, {empty} have no members at all.\n")
+    print(f"\n**{ready} classes are ready to SIGN today**, {blocked} need review "
+          f"first, {empty} could not be fitted.\n")
     if alld and pairs:
         own = statistics.median(alld)
         between = statistics.median([d for d, _a, _b in pairs])
