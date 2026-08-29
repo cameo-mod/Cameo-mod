@@ -71,11 +71,9 @@ wc2_humans_townhall:
 		Requirements:
 			wc2_humans_keep: wc2_humans_keep && !wc2_humans_castle
 	WithSpriteBody@keep:
-		RequiresCondition: !wc2_humans_keep && !wc2_humans_castle
-	WithSpriteBody@keep:
+		RequiresCondition: wc2_humans_keep && !wc2_humans_castle
 		Sequence: wc2_humans_keep
 		Name: keep
-		RequiresCondition: wc2_humans_keep && !wc2_humans_castle
 	WithSpriteBody@castle:
 		Sequence: wc2_humans_castle
 		Name: castle
@@ -449,6 +447,7 @@ wc2_humans_sunwell:
 	Building:
 		Footprint: XX XX
 		Dimensions: 2,2
+		BuildSounds: wc2_constrct.aud
 	Selectable:
 		Bounds: 2048, 2048, 0, -512
 	SpawnActorsOnSell:
@@ -461,8 +460,6 @@ wc2_humans_sunwell:
 		Type: CenterPosition
 		Weapon: wc2buildingexplode
 		EmptyWeapon: wc2buildingexplode
-	Building:
-		BuildSounds: wc2_constrct.aud
 	GrantTimedCondition:
 		Condition: wc2cond_playsound
 		Duration: 50

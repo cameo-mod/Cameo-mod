@@ -266,6 +266,28 @@ class WeaponCorrectnessFollowupTests(unittest.TestCase):
                 count = sum(item.key == key for item in actor.children)
                 self.assertEqual(1, count, f"{actor_name} > {key}")
 
+    def test_active_actor_and_weapon_rules_have_no_duplicate_traits(self):
+        expected = set()
+        findings = set()
+        paths = self.rules.manifest.rules + self.rules.manifest.weapons
+        for path in paths:
+            for actor in load(path):
+                groups = defaultdict(list)
+                for index, item in enumerate(actor.children):
+                    if item.key and not item.key.startswith("-"):
+                        groups[item.key].append(index)
+
+                for key, indexes in groups.items():
+                    if len(indexes) <= 1:
+                        continue
+                    removal = f"-{key}"
+                    between = actor.children[indexes[0] + 1:indexes[-1]]
+                    marker = removal if any(
+                        item.key == removal for item in between) else "<missing>"
+                    findings.add((actor.key, key, marker))
+
+        self.assertEqual(expected, findings)
+
 
 if __name__ == "__main__":
     unittest.main()

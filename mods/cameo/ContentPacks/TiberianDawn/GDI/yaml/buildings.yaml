@@ -33,7 +33,7 @@ td_gdi_barracks:
 	Tooltip:
 		Name: GDI Barracks
 	ProvidesPrerequisite:
-		Prerequisite: barracks
+		Prerequisite: cncbarracks
 	Buildable:
 		Prerequisites: ~td_gdi_constructionyard, nuke
 		Description: Trains infantry units.
@@ -50,8 +50,6 @@ td_gdi_barracks:
 	Exit@2:
 		SpawnOffset: 300,333,0
 		ExitCell: 1,1
-	ProvidesPrerequisite:
-		Prerequisite: cncbarracks
 
 td_gdi_weaponsfactory:
 	Inherits: ^TDBuilding

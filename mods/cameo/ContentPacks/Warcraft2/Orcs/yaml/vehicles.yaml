@@ -93,6 +93,7 @@ wc2_orcs_catapult:
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
+		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~wc2_orcs_blacksmith
@@ -119,8 +120,6 @@ wc2_orcs_catapult:
 	GrantConditionOnAttack@CatapultCooldown:
 		Condition: cond_catapult_cooldown
 		RevokeDelay: 34
-	Mobile:
-		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
 	ActorStatValues:
 		Upgrades: wc2_orcs_upgrade_catapultstrength, wc2_orcs_upgrade_catapultstrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii
 

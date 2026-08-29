@@ -134,6 +134,7 @@ wc2_humans_ballista:
 	Mobile:
 		Speed: 45
 		TurnSpeed: 18
+		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~wc2_humans_blacksmith
@@ -156,8 +157,6 @@ wc2_humans_ballista:
 	GrantConditionOnAttack@CatapultCooldown:
 		Condition: cond_catapult_cooldown
 		RevokeDelay: 34
-	Mobile:
-		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
 	ActorStatValues:
 		Upgrades: wc2_humans_upgrade_ballistastrength, wc2_humans_upgrade_ballistastrengthii, wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii
 

@@ -775,7 +775,7 @@ schwarzermond_komet:
 		Name: loaded
 	WithFacingSpriteBody@EMPTY:
 		RequiresCondition: firing
-		Sequence: empty-idle
+		Sequence: empty-turret
 		Name: reloading
 	RenderSprites:
 		PlayerPalette: playerra2
@@ -784,10 +784,6 @@ schwarzermond_komet:
 		RequiresCondition: !firing
 		Sequence: turret
 		Name: loaded
-	WithFacingSpriteBody@EMPTY:
-		RequiresCondition: firing
-		Sequence: empty-turret
-		Name: reloading
 schwarzermond_lasertank:
 	Inherits: ^Tank
 	Inherits@Crypto: ^NaxiCryptofascism

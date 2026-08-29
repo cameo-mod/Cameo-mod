@@ -718,7 +718,7 @@ Player:
 	Valued:
 		Cost: 2500
 	Health:
-		HP: 250000
+		HP: 300000
 	Armor:
 		Type: Wood
 	Power:
@@ -734,8 +734,6 @@ Player:
 		TerrainTypes: Water
 	RequiresBuildableArea:
 		Adjacent: 10
-	Health:
-		HP: 300000
 	RevealsShroud:
 		Range: 5000
 	GivesBuildableArea:
@@ -1340,7 +1338,7 @@ wc2_orc_skeleton:
 	Valued:
 		Cost: 100
 	Power:
-		Amount: -5
+		Amount: 0
 	Health:
 		HP: 10000
 	ChangesHealth@SelfHealing:
@@ -1351,8 +1349,6 @@ wc2_orc_skeleton:
 		Weapon: wc2skeletonpunch
 	Voiced:
 		VoiceSet: voiceskeleton
-	Power:
-		Amount: 0
 	# Undead target type
 	Targetable@UNDEAD:
 		TargetTypes: undeadtarget

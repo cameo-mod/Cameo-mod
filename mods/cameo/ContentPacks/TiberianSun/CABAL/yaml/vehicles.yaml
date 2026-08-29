@@ -132,6 +132,9 @@ cabal_cyborgreaper:
 		AddToArmyValue: true
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
+		DeathSequencePalette: playerra2
+		PlayerPalette: playerra2
+		CrushedSequencePalette: ra2effect
 	DeathSounds:
 	AttackMove:
 		Voice: Attack
@@ -150,10 +153,6 @@ cabal_cyborgreaper:
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-	WithDeathAnimation:
-		DeathSequencePalette: playerra2
-		PlayerPalette: playerra2
-		CrushedSequencePalette: ra2effect
 
 cabal_tiberiumharvester:
 	Inherits: ^TDHARV
@@ -781,6 +780,9 @@ cabal_heavyreaper:
 		AddToArmyValue: true
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
+		DeathSequencePalette: playerra2
+		PlayerPalette: playerra2
+		CrushedSequencePalette: ra2effect
 	DeathSounds:
 	AttackMove:
 		Voice: Attack
@@ -800,10 +802,6 @@ cabal_heavyreaper:
 	RenderSprites:
 		Image: cabal_cyborgreaper
 		PlayerPalette: playerra2
-	WithDeathAnimation:
-		DeathSequencePalette: playerra2
-		PlayerPalette: playerra2
-		CrushedSequencePalette: ra2effect
 
 cabal_avatar:
 	Inherits: ^Vehicle
