@@ -71,7 +71,6 @@ SteelVulcan:
 	Range: 6666
 	# Retain the inherited shell template's range-scaled flight behavior.
 	Projectile: ScaledBullet
-	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
 	Warhead@Bullet_Light:
@@ -625,7 +624,6 @@ SteelMantaHunterCannons:
 	Inherits@2: ^SteelChaingun
 	Range: 8000
 	ReloadDelay: 8
-	ValidTargets: Ground, Water
 	Report: pulseturretfire.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -1766,7 +1764,6 @@ SteelAirTurretEScatter:
 SteelFortressWeapons:
 	Inherits: ^SteelMediumCannon
 	Range: 6333
-	Report: protonfire.wav
 	ReloadDelay: 41
 	Burst: 2
 	BurstDelays: 0

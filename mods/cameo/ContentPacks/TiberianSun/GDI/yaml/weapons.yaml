@@ -533,7 +533,6 @@ TSHoverMissile:
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^ShrapnelWeapon
 	ValidTargets: Ground, Water, Air
-	Report: missile6.aud
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 8
@@ -576,11 +575,10 @@ TSHoverMissile:
 
 TSDestroyerMissiles:
 	Inherits@collapsewh: ^Warhead_MissileHE_Medium
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^ShrapnelWeapon
+	Inherits@flak: ^FlakWeapon
+	Inherits@missile: ^MediumMissile
+	Inherits@shrapnel: ^ShrapnelWeapon
 	ValidTargets: Ground, Water, Air
-	Report: missile6.aud
 	ReloadDelay: 60
 	Burst: 4
 	BurstDelays: 4
@@ -1039,14 +1037,7 @@ TSAAPCCannon:
 	ReloadDelay: 10
 	Range: 6263
 	ValidTargets: Ground, Water, Air
-	Warhead@Flak_Medium:
-	ValidTargets: Ground, Water, Air
 		Damage: 2000
-	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium:
-		Damage: 2000
-	ValidTargets: Ground, Water, Air
-	ValidTargets: Ground, Water, Air
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:

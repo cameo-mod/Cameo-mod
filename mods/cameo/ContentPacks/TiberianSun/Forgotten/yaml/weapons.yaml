@@ -562,7 +562,6 @@ TSJuggerFlakAA_boat:
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: jugger1.aud
-	Range: 12834
 	MinRange: 2245
 	ReloadDelay: 69
 	Burst: 2
@@ -731,7 +730,6 @@ TSVanMissile:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
-	Report: missile6.aud
 	ReloadDelay: 32
 	Burst: 2
 	BurstDelays: 8
@@ -752,7 +750,6 @@ TSChemVanMissile:
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
-	Report: missile6.aud
 	ReloadDelay: 32
 	Burst: 2
 	BurstDelays: 8
@@ -787,7 +784,6 @@ TSMLRSMissile:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
-	Report: missile6.aud
 	ReloadDelay: 34
 	Burst: 4
 	BurstDelays: 2
@@ -808,7 +804,6 @@ TSChemMLRSMissile:
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
-	Report: missile6.aud
 	ReloadDelay: 34
 	Burst: 4
 	BurstDelays: 2
@@ -1830,14 +1825,7 @@ TSMutApcCannon:
 	ReloadDelay: 12
 	Range: 6147
 	ValidTargets: Ground, Water, Air
-	Warhead@Flak_Medium:
-	ValidTargets: Ground, Water, Air
 		Damage: 2000
-	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium:
-		Damage: 2000
-	ValidTargets: Ground, Water, Air
-	ValidTargets: Ground, Water, Air
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:

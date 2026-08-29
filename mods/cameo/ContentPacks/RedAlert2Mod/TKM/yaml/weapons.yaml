@@ -739,7 +739,7 @@ tkmkatyushalalauncherrocketscryo:
 tkmkatyushalalauncherrocketsfire:
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
-	Inherits@3: ^Effect_Flame_Light
+	Inherits@flameeffect: ^Effect_Flame_Light
 	Inherits@3: tkmkatyushalalauncherrockets
 	Report: vintatta.wav
 	Range: 14000
@@ -841,7 +841,7 @@ SandmarineTuskCryo:
 	Inherits: SandmarineTusk
 	Inherits@2: ^CryoMissileProjectile
 SandmarineTuskFire:
-	Inherits: ^Warhead_MissileAP_Light
+	Inherits@missileap: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Missile_Light
 	Inherits@4: ^Effect_Flame_Light
@@ -892,7 +892,7 @@ ViperMissilesCryo:
 	Inherits: ViperMissiles
 	Inherits@2: ^CryoMissileProjectile
 ViperMissilesFire:
-	Inherits: ^Warhead_MissileAP_Light
+	Inherits@missileap: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Missile_Light
 	Inherits@4: ^Effect_Flame_Light
