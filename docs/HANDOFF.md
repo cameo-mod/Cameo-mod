@@ -519,6 +519,44 @@ From [`audit/SUMMARY.md`](audit/SUMMARY.md), smallest first:
    ⚠ It is a yaml edit, so it needs the boot gate; the audit is wired ADVISORY until it lands,
    then move it into the blocking loop.
 
+### 3.3-counters — ⛔ THE TANK DESTROYER COUNTER IS INVERTED (found 2026-08-29)
+
+`docs/balance/counter_matrix.yaml` states the intended class-vs-class
+relationships; `tools/audit/audit_counter_matrix.py` measures what the tree does.
+The first run found the counter running BACKWARDS on the class the maintainer
+cared most about.
+
+**`tank_destroyer`'s dominant warhead family is `CannonHE`, and CannonHE gets
+WEAKER against heavier armour:**
+
+| family | Light | Medium | Heavy | Superheavy | |
+|---|--:|--:|--:|--:|---|
+| `CannonHE` *(what TDs actually use)* | 133 | 119 | 106 | **90** | ❌ descending |
+| `Concussion` *(second most used)* | 122 | 109 | 101 | **87** | ❌ descending |
+| `CannonAP` *(what the role needs)* | 114 | 126 | 134 | **154** | ✅ ascending |
+
+So a Tank Destroyer today does **least** damage to the heaviest tanks — the exact
+inverse of the maintainer's law. **The fix is not a number.** `CannonAP` already
+exists and already ascends correctly; the class is simply holding the wrong
+weapon. That is a §1b family-assignment change.
+
+Four more classes hold a family their role does not call for:
+
+| class | wants | actually uses |
+|---|---|---|
+| `high_tech_tank` | CannonAP, Railgun, Laser | **CannonHE, Flame, Chemical** — none expected |
+| `anti_air_vehicle` | Flak, MissileAA | Bullet, Flak, CannonHE |
+| `scout_vehicle` | Bullet | MissileHE, Bullet, CannonHE |
+| `heavy_sniper` | Sniper, CannonAP | Flak, MissileAP, CannonAP |
+
+⚠ **Coverage is thin: 336 of 1871 units are class-tagged**, and `grenadier` and
+`pure_sniper` have no members at all, so their rows cannot be measured. Every row
+prints its sample size; a row backed by two units is not evidence.
+
+⚠ **Advisory permanently.** A mismatch can mean wrong implementation OR wrong
+intent, and only a human decides which. The audit names the gap; it never proposes
+a multiplier.
+
 ### 3.3-ifv — ⛔ EVERY IFV FIRES TWICE FOR THREE PASSENGERS (found 2026-08-29)
 
 Maintainer: *"Those things need their own separate audit since they are so

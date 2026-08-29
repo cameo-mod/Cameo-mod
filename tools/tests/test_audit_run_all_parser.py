@@ -69,6 +69,9 @@ class ParsesTheRealShellScript(unittest.TestCase):
         # Real yaml defects (double-firing IFV guards, dead armaments) whose fix
         # needs the boot gate. Blocking once F1/F3/F4 read clean.
         "ifv_conditions",
+        # Intent-vs-implementation report. Advisory PERMANENTLY — a mismatch may be
+        # wrong implementation OR wrong intent, and only a human decides which.
+        "counter_matrix",
     }
 
     def test_the_advisory_list_is_the_scheduled_family(self):

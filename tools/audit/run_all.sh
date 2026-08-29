@@ -117,8 +117,13 @@ done
 # ifv-lightsniper), so those passengers make the vehicle fire its specialist AND
 # its default weapon. Advisory only because the fix is yaml and needs the boot
 # gate. MOVE IT INTO THE BLOCKING LOOP once F1/F3/F4 read clean.
+#
+# `counter_matrix` compares docs/balance/counter_matrix.yaml (design intent) with
+# what the tree does. Advisory permanently: every finding is a design question —
+# reassign a family, retag a class, or change the intent — and never a build break.
 for a in code_duplication test_coverage recent_changes error_handling security \
-         support_powers engine_constraints class_redundancy ifv_conditions; do
+         support_powers engine_constraints class_redundancy ifv_conditions \
+         counter_matrix; do
   echo "== audit_$a (advisory)"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"
