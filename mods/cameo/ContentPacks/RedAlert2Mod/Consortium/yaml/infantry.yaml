@@ -448,20 +448,20 @@ steelconsortium_steelrunner:
 	Passenger:
 	Armament@PRIMARY:
 		Weapon: SteelRunnerPistols
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !steelconsortium_upgrade_resonanceammo
 		LocalOffset: 128,0,256
 	Armament@ELITE:
 		Weapon: SteelRunnerPistols_elite
-		RequiresCondition: rank-elite
+		RequiresCondition: rank-elite && !steelconsortium_upgrade_resonanceammo
 		LocalOffset: 128,0,256
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: SteelRunnerPistols
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !steelconsortium_upgrade_resonanceammo
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: SteelRunnerPistols_elite
-		RequiresCondition: rank-elite
+		RequiresCondition: rank-elite && !steelconsortium_upgrade_resonanceammo
 	Armament@UpgradePRIMARY:
 		Weapon: SteelRunnerPistolsResonance
 		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo

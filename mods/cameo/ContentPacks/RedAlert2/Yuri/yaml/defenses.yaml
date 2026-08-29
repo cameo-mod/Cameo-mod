@@ -130,6 +130,7 @@ yuri_psychicdominator:
 	Tooltip:
 		Name: Psychic Dominator
 	Buildable:
+		-BuildLimit:
 		Prerequisites: ~yuri_constructionyard, yuri_battlelab, !psydom, ~techlevel.superweapons
 		Description: actor_yappet.description
 	Building:
@@ -195,7 +196,8 @@ yuri_geneticmutator:
 	Tooltip:
 		Name: Genetic Mutator
 	Buildable:
-		Prerequisites: ~yuri_constructionyard, yuri_battlelab, ~techlevel.superweapons
+		-BuildLimit:
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab, ~techlevel.superweapons, !yuri_geneticmutator_swlimit
 		Description: actor_yagntc.description
 	Building:
 		Footprint: =x= xxx xxx
@@ -237,6 +239,9 @@ yuri_geneticmutator:
 		LaunchSound: sgenopen.wav
 		IncomingSound: sgenopen.wav
 	SupportPowerChargeBar:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: yuri_geneticmutator_swlimit
+		RequiresPrerequisites: global-swlimit
 
 yuri_tankbunker:
 	Inherits@2: ^RA2Defense

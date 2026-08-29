@@ -93,7 +93,7 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          927 fired weapons still carry 2+
+W24  one damage warhead per weapon          494 directly fired weapons still carry 2+
  └─> W23  retrofit the legacy templates      1162 direct inheritors left; 1245 fired
  │        (its old "33-collision" blocker    weapons already reach a ^Warhead_* family
  │         is DISSOLVED — W24 removes it)
@@ -334,6 +334,50 @@ and reported fourteen phantom FAILEDs. Latent for as long as the file has had co
 because nobody ever diffed the fallback against the canonical path. Fixed, with a regression test
 in `tools/tests/test_audit_run_all_parser.py`.
 
+### 3.0e — ⛔ The balance ledgers are stale on master (found 2026-08-28)
+
+`python tools/balance/run_pipeline.py` — the new orchestrator — came back FAIL on its
+first real run against `4643c3ee`:
+
+| stage | result |
+|---|--:|
+| drift — yaml vs committed ledger | **FAIL: 22 of 33 raw ledgers stale, 5 model** |
+| multiplier modifiers integer | PASS |
+| generator reproduces every family | PASS — drift 0 across 139 templates |
+| empty warhead types | PASS — 0 of 2839 |
+
+`CLAUDE.md` rule 3 already warns that `audit_balance_drift` "only helps if someone
+LOOKS", and that it had gone red twice for exactly this. **This is the third time.**
+The last commit to re-extract was #293; something after it moved yaml without running
+step 1.
+
+**The remedy is one command**, and it belongs to whoever lands the next balance commit
+rather than to a drive-by — the weapon-consolidation flow already re-extracts, and a
+single commit that skipped it left 22 ledgers stale:
+
+```sh
+python tools/balance/extract_stats.py     # or: run_pipeline.py --extract
+```
+
+then commit the ledgers together with the yaml that moved them.
+
+⚠ Do not read this as licence to hand-edit a ledger number. Re-extraction regenerates
+the ledger *from* yaml — the sanctioned direction. Editing a ledger to make drift go
+away inverts the pipeline and is exactly what rule 3 forbids.
+
+### 3.0d — Read before proposing pipeline architecture
+
+[`design/BALANCE_PIPELINE_GAPS.md`](design/BALANCE_PIPELINE_GAPS.md) records what a single
+deterministic command still lacks — no orchestrator among 50+ scripts, no exception registry, no
+constraint reporting, no determinism check — and the verified residue of an outside review round
+that produced a great deal of confident, contradictory material about this repository.
+
+⭐ Its one transferable lesson: **a review of a repository snapshot is a review of a date.** Five
+reviewers disagreed about whether the balance documents existed; all five were reading the tree
+as it stood before the 83→43 compaction, and every path they called missing had simply moved.
+Establish which commit an outside report saw before acting on it — `git log --all -- <path>`
+separates "moved" from "never existed", and the substance of a stale report is often still good.
+
 ### 3.1 — The weapon rebuild (the main line)
 
 ⛔ **Set B (`mods/cameo/weapons/**`, `mods/cameo/ContentPacks/**/weapons.yaml`) is NOT free.**
@@ -344,7 +388,7 @@ holds.
 
 | step | what | how you know it moved |
 |---|---|---|
-| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 927 |
+| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` is 494, down from 927 |
 | **W23** | retrofit the legacy templates onto `^Warhead_*` families | `unconverted_template_inheritors` goes DOWN from 1162; `warhead_family_reach` goes UP from 1245 |
 | **A5** | retire the remaining inline-`Versus` weapons onto templates | rule 4 — `Versus` only in `^Warhead_*` |
 

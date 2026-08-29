@@ -1,5 +1,457 @@
 # Development Log
 
+## 2026-08-28 — Under-200 mixed-role backlog checkpoint
+
+- Consolidated 15 selected roots and their descendant closure across standard bullet, Tesla,
+  concussion, and chemical roles. Two descendant roots retired with their parents, so the active
+  survey falls by 17 overall, from 214 to 197: 196 mixed roots in 157 groups and one isolated root.
+- The resolved 34-weapon comparison preserves every direct main total, every independently rounded
+  percentage application and profile, every valid-target total, projectile, cadence, report, and
+  top-level behavior. Explicit compatibility slices retain the commando's infantry/open-topped
+  damage, Japanese railgun and shield chip, EMP integrity and Temperature feed, sticky/snare
+  conditions, Mutalisk bounce chain, and authored ground/air damage splits.
+- Standard destination-family armor, blast, allied-damage, wall/BulletImmune, death, and meter
+  profiles are the intended gameplay normalization. The classifier now leaves four legacy-only
+  and 193 human-decision roots; broadcast debt falls from 838 to 818. Pricing and the parked
+  percentage-damage runtime fix remain separate.
+- Independent review caught and repaired an EMP relationship regression before publication. The
+  launch test then exposed redundant inherited-warhead removals in the sticky-foam descendants;
+  those loader-invalid removals were deleted without changing their resolved damage. Verification
+  passes 438 tests (11 optional spreadsheet tests skipped), the focused role-profile comparison,
+  all generated-balance and weapon-structure audits, and a controlled 90-second launch with no
+  crash or exception log. The exact test process was stopped afterward.
+
+## 2026-08-28 — Remaining override-free element roles
+
+- Consolidated ten actual roots without descendant flat-damage overrides: Hydra and Leech spit,
+  Lurker and Queen spines, three Forgotten chemical weapons plus both blue Fiend shards, and Yak
+  napalm. Their destinations are standard light/medium/heavy Chemical, medium chemical missile,
+  and heavy Flame roles.
+- Direct totals and all separate percentage applications remain unchanged. Projectiles, cadence,
+  reports, effects, smoke clouds, Leech infection, Queen broodling spawning, and the old
+  ground/air firing declarations remain intact.
+- Standard family armor, blast, allied-damage, wall, death, physical-state, and damage-target
+  profiles are intentional role-normalization consequences. The active survey falls from 224 to
+  214 roots: 211 mixed weapons in 166 groups and three isolated roots. The classifier now has
+  seven corroborated, 12 legacy-only, and 195 human-decision roots; broadcast debt falls from 845
+  to 838. Pricing and the parked runtime fix remain separate.
+- Independent review approved the resolved comparison: exactly the selected ten weapons changed,
+  with no projectile, cadence, effect, condition, top-level, direct-total, or percentage-profile
+  drift. Verification passes 433 tests (11 optional spreadsheet tests skipped), all balance
+  ledgers, generator, inheritance, empty-warhead, orphan-key, and physical-state checks. The
+  controlled pinned-engine launch stayed alive for 90 seconds with no YAML, exception, fatal, or
+  crash log matches; its exact process was stopped.
+
+## 2026-08-28 — Projectile-role backlog checkpoint
+
+- Consolidated 13 actual retired-family roots, covering 34 resolved parent/child weapons, into
+  standard bullet, concussion, cannon, and high-explosive missile roles.
+- Direct shot totals and all independently rounded percentage applications remain unchanged.
+  Projectiles, cadence, reports, effects, integrity damage, recursive shrapnel chains, and
+  descendant overrides remain in place; the Nike main remains explicitly air-only.
+- Intended standard-family consequences are the new armor/blast profiles, allied-damage rules,
+  death types, and target exclusions. The buggy anti-air child now applies its authored air-only
+  canonical override instead of inheriting ground/water-only legacy damage.
+- The active survey falls from 237 to 224 roots: 221 mixed weapons in 175 groups and three
+  isolated roots. The classifier now has 11 corroborated, 18 legacy-only, and 195 human-decision
+  roots. The broadcast-debt ratchet falls from 878 to 845. Pricing and the parked runtime fix
+  remain separate.
+- Independent review caught and repaired actor-center drift, excess CABAL air damage, and an
+  unintended no-friendly-splash override on the GDI Phalanx. Verification passes 430 tests (11
+  optional spreadsheet tests skipped), all 32 balance ledgers, generator, inheritance,
+  empty-warhead, orphan-key, and physical-state checks. The controlled pinned-engine launch stayed
+  alive for 90 seconds with no YAML, exception, fatal, or crash log matches; its exact process was
+  stopped.
+
+## 2026-08-28 — Percentage-safe chemical and flame role batch
+
+- Consolidated 13 roots covering 15 resolved weapons: four light chemical cannons, three heavy
+  chemical weapons, two heavy flamethrowers, and four light/medium/heavy chemical missiles.
+- Every legacy percentage application remains separate under its original key and retains its
+  armor table, spread, targets, statistics behavior, and physical-state binding. Flat totals,
+  cadence, projectiles, effects, reports, conditions, and the ADATS ground/water-only damage target
+  are preserved.
+- The deliberate role changes are the standard destination families' armor tables, compact blast
+  shapes, wall interaction, half allied damage, death types, and tiered Corrosion/Temperature feed.
+  The whole-tree comparator limits these findings to the 15 selected resolved definitions.
+- The active survey falls from 250 to 237 roots: 234 mixed weapons in 186 groups and three isolated
+  roots. The classifier now has 16 corroborated, 26 legacy-only, and 195 human-decision roots. The
+  broadcast-debt ratchet falls from 890 to 878. Pricing and the parked runtime fix remain separate.
+- Verification passes 424 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers,
+  generator, inheritance, empty-warhead, orphan-key, and physical-state checks. Independent review
+  caught and repaired eleven invalid nonexistent-warhead deletions before publication. The final
+  controlled pinned-engine launch stayed alive for 90 seconds with no YAML, exception, fatal, or
+  crash log matches; its exact test process was stopped.
+
+## 2026-08-27 — Remaining rapid/light laser role batch
+
+- Consolidated seven genuine rapid/light laser roots, covering 19 resolved weapons, onto the
+  standard heavy Laser profile: the M16 laser, elite cadre laser, Nod minigunner laser, Lunar
+  Naxis drone laser, Naxis turret laser, elite Beetle laser, and Tank 2 laser families.
+- Flat totals, every independently rounded percentage application, cadence, projectiles, effects,
+  reports, targets, and the legacy 600-damage shield chip are preserved. The Beetle and Tank 2
+  anti-air children retain their original 4000 air plus 4000 ground/water target split through a
+  ground-only compatibility remainder.
+- The intentional role changes are the standard laser impact and armor profile, half allied
+  damage, Explosion death type, Temperature meter, and removal of the old bullet-immunity
+  exclusion so these energy weapons behave as lasers rather than bullets.
+- The refreshed survey reports 250 remaining concrete roots: 247 mixed weapons in 191 groups and
+  three isolated roots. The conservative classifier leaves 195 roots for human decisions, with
+  25 corroborated and 30 legacy-only suggestions. The broadcast-debt ratchet falls from 897 to
+  890. No prices, pricing rules, runtime source, parked percentage-runtime change, or engine pin
+  are included.
+- Independent adversarial review caught a Naxis percentage-warhead inheritance regression before
+  publication. The original inherited slot was restored, the orphan audit learned to distinguish
+  retained percentage overrides from genuinely orphaned flat keys, and the whole-tree comparator
+  now fingerprints percentage armor, shape, targeting, and statistics behavior. Verification
+  passes 421 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers, generator,
+  inheritance, empty-warhead, orphan-key, and physical-state checks. After the repair, a controlled
+  pinned-engine launch stayed alive for 90 seconds without YAML, exception, fatal, or crash log
+  matches; its exact test process was then stopped.
+
+## 2026-08-27 — Remaining direct-hit sniper follow-up
+
+- Consolidated the GDI heavy sniper, Havoc's commando sniper, and Soviet Dragunov away from
+  their retired flat-damage stacks. The GDI and commando rifles now use the infantry-favoured
+  heavy Bullet profile; Dragunov keeps a heavy anti-armour CannonAP profile and air targeting.
+- Every spatial damage path now uses `Spread: 1` and `Falloff: 100, 0`, including percentage,
+  open-topped passenger, friendly-fire, and Dragunov shield-chip damage. This makes all three
+  weapons direct-hit only instead of allowing inherited splash.
+- Dragunov's folded flat damage is deliberately 200000: it still removes about 84% of a baseline
+  Mammoth Tank's health on a centre hit, but no longer one-shots it and loses the stationary
+  return-fire duel. A regression test locks the direct-hit rule, tank-focused armour profile,
+  no-one-shot result, and losing duel.
+- The refreshed active survey reports 257 remaining concrete roots: 254 mixed weapons in 193
+  groups and three isolated roots. The conservative classifier leaves 202 roots for human
+  decisions, with 25 corroborated and 30 legacy-only suggestions. No prices, pricing rules,
+  runtime source, parked percentage-runtime change, or engine pin are included.
+- Verification passes 417 tests (11 optional spreadsheet tests skipped), all balance-ledger,
+  generator, warhead, inheritance, orphan, physical-state, and classifier checks. Independent
+  adversarial review found no blocker. The first launch caught invalid removals of nonexistent
+  generated slots; after repairing them, the pinned engine stayed alive and responsive for 90
+  seconds with no exception, fatal, crash, or YAML error, then its exact test process was stopped.
+
+## 2026-08-27 — Named heavy-laser bulk consolidation
+
+- Consolidated six laser roots and eight resolved weapons onto the standard heavy Laser profile:
+  Black Hand, normal and elite CABAL Hunter-Killers, the Tiberian Sun laser emplacement,
+  Outpost 2 Eden mobile lasers, and the Ordos laser tank.
+- Flat totals, target-specific totals, every independently rounded percentage application,
+  shield-only compatibility chips, cadence, targets, projectiles, effects, reports, and concrete
+  damage are preserved. Black Hand and the Tiberian Sun emplacement retain their lower air total
+  through a ground-and-water-only remainder.
+- The intentional gameplay classification changes are the standard heavy-Laser armor table,
+  tight `Spread: 64` impact shape, half allied damage, Explosion death type, and Temperature meter.
+  The six roots leave the retired-family survey without changing prices, pricing rules, runtime
+  source, the parked percentage runtime fix, or the engine pin.
+- The refreshed active survey reports 260 remaining concrete roots: 257 mixed weapons in 195
+  groups and three isolated roots. The conservative classification report leaves 205 roots for
+  human decisions, with 25 corroborated and 30 legacy-only suggestions. The uniform-stack guard
+  ratchet is lowered from its stale 923 baseline to the measured 898 remaining weapons.
+- Whole-tree comparison preserves main and percentage totals across all 2345 resolved weapons and
+  limits guarded differences to the eight selected laser definitions. Verification passes 415
+  tests (11 optional spreadsheet tests skipped), all 32 balance ledgers, generator, empty-warhead,
+  orphan-key, and physical-state audits. Independent adversarial review found no blocker. A
+  controlled pinned-engine launch stayed alive and responsive for 90 seconds with no exception,
+  fatal, crash, or YAML error line; its exact test process was then stopped.
+
+## 2026-08-27 — Bulk shotgun and sniper profile consolidation
+
+- Consolidated four shotgun roots (seven resolved weapons) onto the standard medium CannonHE
+  damage profile. Four sniper roots (eleven resolved weapons) now use the infantry-favoured
+  standard heavy Bullet profile while retaining reduced damage against vehicle armor.
+- Separate compatibility slices preserve every old damage application instead of combining
+  equal hits. This keeps per-hit integer rounding, event counts, friendly-fire splits, score
+  accounting, `BulletImmune` exclusions, and every independently rounded percentage path intact.
+  Armour-piercing and lockdown sniper descendants retain their extra bullet hits, relationship
+  restrictions, and electrical damage types.
+- The intentional gameplay change is the selected standard CannonHE profile for shotguns and
+  heavy Bullet armor profile for snipers replacing the retired flat profiles. Every resolved
+  sniper damage warhead uses `Spread: 1` with `Falloff: 100, 0`, removing practical splash.
+  Projectiles, impact effects, reports, concrete damage, cadence, targets, damage strengths,
+  relationship restrictions, and damage types are unchanged.
+- Independent reviewers approved the repaired 18-weapon closure. The whole-tree comparator
+  preserves guarded flat and percentage behavior on all 2345 resolved weapons and reports only
+  those 18 intended profile changes.
+- Repaired two survey blind spots: its active central-file list omitted D2K, StarCraft, and
+  Outpost 2 while retaining inactive files, and its top-level-name parser failed to recognize
+  `^Template` blocks. The corrected survey reports 266 concrete roots after this batch (274 on
+  the same corrected basis before it): 263 mixed weapons in 201 groups and three isolated roots.
+  A new machine-readable classification report conservatively leaves 205 roots for human
+  decisions while prioritizing 31 roots where name and legacy evidence agree and 30 with a
+  legacy-only suggestion. It preserves full family-and-tier identities and records flat and
+  percentage hit inventories, physical-state bindings, descendant closure, and descendant
+  old-key overrides for later proposed-diff review.
+- Verification passes 412 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers,
+  generator, empty-warhead, orphan-key, physical-state, and dangling-inheritance checks. A
+  controlled pinned-engine launch stayed alive and responsive for 105 seconds with no exception
+  or crash line, then its exact test process was stopped. Pricing, runtime source, the parked
+  percentage runtime change, and the engine pin remain outside this work.
+
+## 2026-08-27 — Final low-risk single-family weapon cleanup
+
+- Consolidated four isolated active weapons away from their last retired flat-damage family:
+  the FutureTech cryocopter rocket onto medium missiles, the anti-tank mine onto light
+  demolition, the Waveforce chain gun onto medium bullets, and the Tiberian Sun laser 90mm
+  family onto medium anti-armour cannon damage.
+- Percentage-inert compatibility slices preserve the existing flat totals, enemy/ally target
+  splits, score accounting, and the laser's shield-only chip while adopting each selected
+  standard armour and blast profile. Every pre-existing percentage path remains independent, so
+  runtime rounding is unchanged; projectiles, effects, reports, cryo states, and mine exclusions
+  are untouched.
+- `RA2CRM60H` remains the only isolated candidate because its heavy-cannon and medium-bullet
+  signals conflict and its passenger-only damage needs an explicit classification decision. The
+  refreshed active survey now reports 266 concrete retired-family weapons: 265 mixed weapons in
+  201 groups and this one deferred isolated weapon. Pricing, runtime source, the parked percentage
+  runtime change, and the engine pin remain outside this work.
+- Independent review approved all four conversions after checking the actual resolved diff. The
+  whole-tree comparator preserves every guarded behavior across all 2345 weapons and reports only
+  the intended profile shapes. Verification passes 401 tests (11 optional spreadsheet tests
+  skipped), all ledger, generator, warhead, inheritance, and physical-state audits, and a
+  controlled pinned-engine launch that stayed alive and responsive with no new exception log;
+  its exact test process was then stopped.
+
+## 2026-08-27 — Steel Mako cannon-family consolidation
+
+- Consolidated the Steel Mako cannon root and its elite, EMP, and EMP-elite descendants away from
+  the retired medium-flame flat profile onto their already-selected standard medium CannonHE class.
+- A local percentage-inert CannonHE slice preserves the 2000 no-wall flat hit, allied half damage,
+  score/stat accounting, and Temperature binding. EMP variants retain their electrical damage
+  types; all independent flame, demolition, railgun, cannon, chemical, and tesla percentage paths
+  remain separately rounded.
+- Whole-tree comparison preserves every guarded behavior across all 2345 resolved weapons; only
+  the intended CannonHE blast/profile replacement reports on the four Steel Mako definitions.
+  The active survey now reports 270 concrete retired-family weapons: 265 mixed weapons in 201
+  groups and 5 single-family candidates. No prices, pricing logic, runtime source, parked runtime
+  change, or engine pin changed.
+- Independent review approved the CannonHE classification and compatibility design. Verification
+  passes 401 tests (11 optional spreadsheet tests skipped), all ledger/generator/warhead and
+  physical-state audits, and the full resolver comparison. A controlled pinned-engine launch
+  stayed alive and responsive with no new exception log, then its exact test process was stopped.
+
+## 2026-08-27 — RA2 SCUD missile-family consolidation
+
+- Consolidated the active RA2 SCUD root and its Dreadnought, V3 explosion, radioactive,
+  incendiary, tesla, and elite descendants away from the retired medium-flame flat profile.
+- A local standard heavy-missile compatibility slice preserves the original no-wall damage split.
+  The modern demolition and original heavy-missile hits remain independent, as do all three
+  separately rounded percentage contributions; radioactive and V3 children retain their local
+  18000/10000 payloads exactly.
+- Whole-tree comparison preserves flat damage, all active/design-health percentage results,
+  targets, relationships, score/stat accounting, cadence, projectiles, reports, effects,
+  radiation, shields, concrete, and child overrides across all 2345 resolved weapons. Only the
+  selected heavy-missile blast profile changes on the seven SCUD-family definitions.
+- The refreshed active survey now reports 271 concrete weapons on retired families: 265 mixed
+  weapons in 201 groups and 6 single-family candidates. Prices, pricing logic, engine/runtime
+  source, the parked runtime change, and the engine pin remain untouched.
+- Independent review retained the flame hit's Temperature-state binding and extended the
+  comparator to gate singular and mapped physical-state applications, including the engine's
+  disabled-by-default scale. Verification passes 401 tests (11 optional spreadsheet tests
+  skipped), all ledger/generator/warhead/physical-state audits, and the full resolver comparison.
+  The first launch caught redundant child removals rejected by engine MiniYAML; after removing
+  them, the controlled pinned-engine launch stayed alive and responsive with no new exception log,
+  and its exact test process was stopped.
+
+## 2026-08-27 — Naxis quad-cannon flak consolidation
+
+- Consolidated the active Naxis quad-cannon root and eleven ground, anti-air, elite, portable,
+  Sky Mage, and long-range descendants onto the existing standard medium-flak damage profile.
+- Preserved the original payload split: ground variants retain 7000 enemy and 6000 allied flat
+  damage, while anti-air variants retain 5000 Air damage plus the inherited 2000 Ground/Water
+  splash. Compatibility-only flak slices keep allied damage and its score/stat accounting exact.
+- Kept all four independently rounded percentage contributions, every target relationship,
+  projectile, report, effect, shield/concrete behavior, cadence, range, and descendant override.
+- Extended the whole-tree comparator to gate damage by relationship, target, and
+  `UpdatesUnitStatistics`, closing the blind spot found by independent review. It preserves flat
+  and percentage damage at every active/design health value across all 2345 resolved weapons;
+  only the selected medium-flak blast profile changes on the twelve Naxis definitions.
+- The refreshed active survey now reports 272 concrete weapons on retired families: 265 mixed
+  weapons in 201 groups and 7 single-family candidates. Ledgers were refreshed, but prices,
+  pricing logic, engine/runtime source, the parked runtime change, and the engine pin are untouched.
+- Verification: 398 tests pass (11 optional spreadsheet tests skipped); 32 ledgers match live
+  YAML; generator drift, empty warheads, real orphaned old keys, and dangling inheritance targets
+  are zero; the physical-state audit passes. A controlled pinned-engine launch remained alive and
+  responsive through startup with no new exception log, then its exact test process was stopped.
+
+## 2026-08-27 — MiG missile family consolidation
+
+- Consolidated the active MiG missile root and all ten resolved ground-attack, anti-air,
+  radioactive, incendiary, tesla, and elite variants onto the existing standard medium-missile
+  damage profile.
+- Preserved the original target split: 32000 flat damage on Ground/Ship and 24000 on Water for
+  ground-attack variants, while both anti-air variants retain 32000 Air damage. A compatibility-only
+  8000-point standard-profile slice carries the Ground/Ship difference without entering the
+  generated family library or shared pricing model.
+- Kept the three independently rounded percentage hits and every variant-specific projectile,
+  report, effect, fragment, radiation field, smudge, shield, glow, sound, and concrete behavior.
+- Whole-tree comparison preserves flat and runtime percentage damage at every active/design health
+  value, targeting, cadence, projectiles, and non-damage warheads across all 2345 resolved weapons.
+  Only the selected medium-missile blast profile changes on the ten MiG definitions.
+- The refreshed active survey now reports 273 concrete weapons on retired families: 266 mixed
+  weapons in 202 groups and 7 single-family candidates. Pricing and the parked runtime change remain
+  untouched.
+
+## 2026-08-26 — retrospective compatibility repair and missile cleanup
+
+- Independent review found that the earlier one-target percentage comparison hid current-runtime
+  rounding and unchecked-integer overflow differences at other active health values. It also found
+  lost projectile fields, reports, targeting exclusions, glows, shield durations, smudge chances,
+  and one concrete-damage effect. The affected chemical, flame, thermobaric, shotgun, sniper,
+  railgun, and laser weapon blocks were restored from their exact pre-cleanup snapshots. The older
+  consolidation entries below are retained as history but are superseded by this repair.
+- Strengthened `review_batch_diff.py` to compare the runtime result at all 155 active/design health
+  values and to fail on complete resolved top-level operation, projectile definitions, and
+  non-damage warheads. Blast/profile changes remain visible for maintainer review.
+- Consolidated nine missile roots, covering fourteen resolved weapons, onto their already-present
+  standard missile families. Each now uses one standard damage profile; three retain a separate
+  same-profile slice solely to preserve the part of their old damage that could not hit walls.
+  Explicit deletions remove the old
+  flat mains while their independently rounded percentage and presentation behavior remains active
+  until the parked runtime fix is handled separately.
+- Removed the last retired anti-air damage-family inheritance from the two Waveforce armored-car
+  variants. Their 1000-point flat hit is folded into the existing railgun main, while an explicit
+  compatibility percentage hit preserves the old independently rounded result at every active
+  health value. All non-damage behavior remains exactly resolved as before.
+- Whole-history comparison against the original upstream base preserves flat damage, runtime
+  percentage damage at every tested health, cadence, range, targeting, reports, projectiles,
+  effects, smudges, shields, and concrete. The only reported behavioral changes are the selected
+  missile-family blast/profile changes, the two selected Waveforce blast-profile changes, plus the
+  earlier chemical-cannon blast-profile change. The active survey is now 274 concrete legacy-family
+  weapons, with 267 mixed weapons in 203 groups, and the broadcast guard is 923. The survey now
+  counts only the winning active definition when multiple files repeat a weapon name.
+- Verification: 397 tests pass (11 optional spreadsheet tests skipped); all 32 ledgers match live
+  YAML; empty-warhead and orphan-old-key findings are zero; the physical-state audit passes. The
+  first controlled launch caught one restored reference to a wrapper removed by earlier structural
+  cleanup. Removing that stale reference left the explicit equivalent behavior in place; the next
+  launch stayed alive and responsive through startup with no new exception log, then its exact test
+  process was stopped. The comparator now rejects missing weapon parents before resolving them.
+- No pricing values, engine/runtime source, or engine pin changed.
+
+## 2026-08-26 — W24 A15: laser weapon group consolidated
+
+- Collapsed six explicitly laser-identified roots onto `^Warhead_Laser_Heavy`:
+  `RA2CosmonautLaser`, `LunarNaxiDroneLaser`, `NaxLaserT`,
+  `NaxiBeetleLaser_elite`, `NaxiTank2Laser`, and `TSLaser90mm`. Their targeting,
+  lens-upgrade, amplified, anti-air, and deployed descendants inherit the cleanup,
+  giving nineteen resolved definitions.
+- Whole-tree comparison preserves flat and runtime percentage damage on all 2345
+  weapons. Local `PercentageScale` values with whole-percent denominators retain the
+  legacy 4% and 6% totals, including hidden folded CannonAP percentage damage on the TS
+  laser and six inherited percentage twins on the Cosmonaut laser. They also avoid newly
+  exposing the parked Int32 overflow bug on the active 3,750,000-HP maximum target.
+- The shared `^NaxiLegacyLaserDelivery` mixin preserves the legacy hybrid LaserZap fields,
+  reports, targeting, cadence, water/air/ground effects, smudges, shield effects, and
+  concrete damage without retaining any legacy damage family. The standard heavy Laser
+  armor, blast, friendly-fire, and Temperature profile is the intended classification
+  consequence.
+- Survey debt falls 265 -> 259 weapons (253 -> 248 mixed, 202 -> 200 groups), and the
+  broadcast ratchet tightens 901 -> 889.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS. Independent review restored baseline actor-center targeting
+  and the smaller TS impact glow before approval. The first controlled launch caught one
+  redundant missing-key removal that static resolution tolerated; after removing it, the
+  second launch stayed alive and responsive through startup with no new exception log,
+  then its exact test process was stopped.
+- No pricing values, engine/runtime source, engine pin, cadence, or range changed;
+  runtime percentage totals remain exact for every active targetable HP value.
+
+## 2026-08-26 — W24 A14: Steel railgun pair consolidated
+
+- Collapsed `SteelAirTurret` and `SteelStalkerRailgun` from simultaneous legacy
+  Laser/Railgun damage stacks onto `^Warhead_Railgun_Heavy`. Their EMP, elite, and
+  scatter descendants inherit the cleanup, giving eight resolved definitions.
+- Whole-tree comparison preserves flat and runtime percentage damage on all 2345
+  weapons. The legacy 600-point Laser residual is folded into each new railgun main;
+  local percentage scales preserve every descendant's reference-target total exactly.
+- Resolver comparison preserves targeting, cadence, range, reports, railgun and scatter
+  projectiles, air/ground impacts, smudges, shield effects, and concrete damage. The
+  standard heavy Railgun armor/blast profile replaces the simultaneous Laser/Railgun
+  profiles as the intended classification consequence.
+- Survey debt falls 267 -> 265 weapons (255 -> 253 mixed), and the broadcast ratchet
+  tightens 907 -> 901.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS. Independent review caught and verified the restoration of
+  one inherited `ImpactActors: false`; no blockers remain. A controlled launch remained
+  alive and responsive through startup with no new exception log, then its exact test
+  process was stopped.
+- No pricing, engine/runtime source, engine pin, or percentage-damage runtime behavior
+  changed.
+
+## 2026-08-26 — W24 A13: active sniper family consolidated
+
+- Collapsed `AsianSniper`, `GhostSniper`, `SpecterSniper`, and `VonSniper` onto
+  `^Warhead_Bullet_Heavy`. Their AP, bunker, and
+  lockdown children inherit the cleanup, giving eleven resolved definitions in
+  the batch.
+- Whole-tree comparison preserves flat and runtime percentage damage on all 2345
+  weapons. The AP children preserve 92000 flat damage; the lockdown children keep
+  their Tesla and EMP components separate and unchanged. A local
+  `PercentageScale: 2308` preserves the inherited Ghost/Specter lockdown percentage
+  totals exactly after their sniper components are folded.
+- Resolver comparisons preserve cadence, range, reports, bullet projectiles and
+  contrails, ground/water/air impacts, shield duration and sounds, and 25 concrete
+  damage. The standard heavy Bullet armor profile replaces the five simultaneous legacy
+  CannonHE/Missile/Flak/Bullet profiles. All resolved spatial damage warheads use a
+  one-world-unit impact footprint, removing practical splash while keeping positional
+  projectile hits functional; this is the intended classification consequence.
+- Survey debt falls 271 -> 267 weapons (259 -> 255 mixed, 203 -> 202 groups), and
+  the broadcast ratchet tightens 912 -> 907.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS. A controlled launch remained alive and responsive through
+  startup with no new exception log, then its exact test process was stopped.
+- No pricing, engine/runtime source, engine pin, or percentage-damage runtime
+  behavior changed.
+
+## 2026-08-26 — W24 A12: active shotgun family consolidated
+
+- Collapsed `FutureEnforcerShotgun`, `TSCommandoShotgun`, `TSMutShotgun`, and
+  `TSShotgun` onto one `^Warhead_CannonHE_Medium` damage family each. The FutureTech
+  elite/deployed children inherit the cleanup, giving seven resolved definitions in the
+  batch.
+- Preserved flat totals at 12000/48000/24000/24000 and their exact reference-target
+  percentage totals. Resolver comparisons also preserve cadence, range, reports, the
+  legacy 50CAL projectile and contrail, ground/water/air impacts, shield duration and
+  sounds, smudges, glow, and 25 concrete damage.
+- The standard medium CannonHE armor/blast profile replaces the six simultaneous legacy
+  CannonHE/Grenade/Shrapnel/TankDestroyer/SmallArms/Chaingun profiles. This is the intended
+  classification consequence; no pricing or runtime arithmetic changed.
+- Combined with A11, whole-tree comparison preserves flat and percentage damage on all
+  2345 weapons and reports exactly 14 intended blast-profile replacements. Survey debt
+  falls 275 -> 271 weapons (263 -> 259 mixed, 204 -> 203 groups), and the broadcast
+  ratchet tightens 919 -> 912.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers match
+  live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0; physical-state
+  audit PASS. A controlled launch remained alive and responsive through startup with no new
+  exception log, then its exact test process was stopped.
+
+## 2026-08-26 — W24 A11: Soviet thermobaric missile group consolidated
+
+- Collapsed seven resolved definitions in one coherent batch: `v1rocketsThermobaric`,
+  `HindMissilesThermobaric`, both Mammoth Tusk thermobaric weapons and their targeting-
+  computer children, and `MonsterTankTuskThermobaric`. They now use the medium or heavy
+  `MissileThermobaric` family instead of broadcasting one damage number through three to
+  eight unrelated legacy families.
+- Whole-tree comparison preserves flat and percentage damage on all 2345 weapons. The
+  seven replacements adopt the intended standard thermobaric blast and armor profile;
+  resolver comparisons preserve targeting, cadence, range, reports, projectile operation,
+  contrails, water/air/ground impacts, smudges, ground fire, shield effects, glow, and
+  concrete damage.
+- Preserved the Monster Tank's legacy 106000 flat versus 112000 reference-target percentage
+  totals with a local `PercentageScale: 10566`; this avoids silently normalizing an existing
+  gameplay asymmetry during structural cleanup.
+- Survey debt falls 280 -> 275 weapons (268 -> 263 mixed, 208 -> 204 groups), and the
+  broadcast ratchet tightens 926 -> 919. `ThermobaricMaverick` remains separate because its
+  nuclear effect/upgrade identity needs an explicit classification decision.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers match
+  live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0; physical-state
+  audit PASS. A controlled launch remained alive and responsive through full startup with no
+  new exception log, then its exact test process was stopped.
+- No pricing, engine/runtime source, engine pin, or percentage-damage runtime behavior was
+  changed.
+
 ## 2026-08-26 — W24 A10: thermobaric grenade pair consolidated
 
 - Collapsed `GrenadeThermobaric` and its inherited `GrenadeThermobaricExplode`

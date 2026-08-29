@@ -88,24 +88,36 @@ FirebatF:
 	Warhead@Flame_Medium:
 		Damage: 2000
 HarakanF:
-	Inherits@wh: ^Warhead_Flame_Heavy
-	Inherits@proj: ^Projectile_Flame_Medium
-	Inherits@fx: ^Effect_Flame_Medium
+	Inherits@collapsewh: ^Warhead_Flame_Heavy
+	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^MediumFlameWeapon
 	ReloadDelay: 47
 	Burst: 20
 	BurstDelays: 2
 	Range: 4185
-	Report: flamer2.aud
 	StartBurstReport: TFBFir00.aud,TFBFir01.aud
 	Projectile: Bullet
 		Speed: 210
 		Image: tsflameall
 		Inaccuracy: 840
 		Palette: tseffect
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+
+	TargetActorCenter: false
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@MediumFlameWeapon:
 	Warhead@Flame_Heavy:
 		Damage: 4000
-
+		PercentageScale: 0
 MatadorFlamer:
+	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat
 	Inherits: ^Warhead_Flame_Light
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Warhead_Flame_Heavy
@@ -127,6 +139,13 @@ MatadorFlamer:
 		Damage: 2000
 	Warhead@Flame_Heavy:
 		Damage: 2000
+	-Warhead@Flame_Heavy:
+	-Warhead@Flame_Light:
+	-Warhead@Flame_Medium:
+	Warhead@Flame_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 9984
 MatadorLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -143,6 +162,7 @@ MatadorLaser:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 CycloneRockets:
+	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -180,6 +200,12 @@ CycloneRockets:
 		Condition: lockon
 		ValidTargets: lockable
 		ValidRelationships: Enemy
+	-Warhead@MissileHE_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@MissileHE_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 CycloneRocketsLockOn:
 	Inherits: CycloneRockets
@@ -187,6 +213,7 @@ CycloneRocketsLockOn:
 	Range: 10000
 
 MarauderMissiles:
+	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -222,7 +249,16 @@ MarauderMissiles:
 		ValidTargets: Ground, Water
 		Damage: 5
 
+	-Warhead@TankDestroyerCannon:
+	-Warhead@MediumMissile:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 3330
+	-Warhead@CannonHE_Heavy:
+
 SCTyr:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^Chaingun
 	Inherits@3: ^ShrapnelWeapon
@@ -272,12 +308,18 @@ SCTyr:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@CannonHE_Heavy:
+		PercentageScale: 2494
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 16000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_explosion, ra2_medium_clsn, ra2_large_twlt
 		ImpactSounds: gexp14a.wav, expnew09.wav, gexpapoa.wav
 
+	-Warhead@LightFlameWeapon:
+	-Warhead@Chaingun:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@CannonHE_HeavyFlatCompatibility:
 SCTyrAA:
 	Inherits: ^Grenade
 	Inherits@2: ^FlakWeapon
@@ -302,30 +344,26 @@ SCTyrAA:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		Acceleration: 10
-	Warhead@Grenade: SpreadDamage
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 16000
+		PercentageScale: 2500
+		PercentageDenominator: 10000
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyMissile:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 ReaperPistols:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -387,13 +425,14 @@ ReaperGrenade:
 		ExplosionPalette: effect75alpha
 
 GhostSniper:
-	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits: ^Warhead_Bullet_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^MediumMissile
 	Inherits@5: ^SmallArms
 	Inherits@6: ^FlakWeapon
 	Inherits@7: ^Chaingun
+	Inherits@compat: ^SniperBulletHeavyCompatibility
 	ReloadDelay: 22
 	Range: 8428
 	Report: TGhFir00.aud
@@ -408,36 +447,46 @@ GhostSniper:
 		Speed: 2500
 		Width: 100
 		Inaccuracy: 0
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@CannonHE_Heavy:
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Bullet_Heavy: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
+	Warhead@SniperMediumMissile:
+		Damage: 2000
+	Warhead@SniperFlak:
+		Damage: 2000
+	Warhead@SniperSmallArms:
+		Damage: 2000
+	Warhead@SniperChaingun:
+		Damage: 2000
 
 GhostSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -452,18 +501,25 @@ GhostSniperLockdown:
 		ContrailEndWidth: 150
 		ContrailStartColor: 4488FF
 		ContrailEndColor: 22446688
-	Warhead@Tesla_Super:
+	Warhead@Tesla_Super: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		PercentageScale: 2000
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
+	Warhead@SniperMediumMissile:
+		ValidRelationships: Enemy, Neutral
+		Damage: 20000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@SniperFlak:
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -472,26 +528,25 @@ GhostSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy: AreaDamage
+	Warhead@Bullet_Heavy: AreaDamage
 		PercentageScale: 2000
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 2
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -499,11 +554,15 @@ GhostSniperLockdown:
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Medium: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 2
@@ -515,13 +574,14 @@ GhostSniperLockdown:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 SpecterSniper:
-	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits: ^Warhead_Bullet_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^MediumMissile
 	Inherits@5: ^SmallArms
 	Inherits@6: ^FlakWeapon
 	Inherits@7: ^Chaingun
+	Inherits@compat: ^SniperBulletHeavyCompatibility
 	ReloadDelay: 33
 	Range: 7922
 	Report: TGhFir00.aud
@@ -536,36 +596,46 @@ SpecterSniper:
 		Speed: 2500
 		Width: 100
 		Inaccuracy: 0
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@CannonHE_Heavy:
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Bullet_Heavy: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
+	Warhead@SniperMediumMissile:
+		Damage: 4000
+	Warhead@SniperFlak:
+		Damage: 4000
+	Warhead@SniperSmallArms:
+		Damage: 4000
+	Warhead@SniperChaingun:
+		Damage: 4000
 
 SpecterSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -580,18 +650,25 @@ SpecterSniperLockdown:
 		ContrailEndWidth: 150
 		ContrailStartColor: 4488FF
 		ContrailEndColor: 22446688
-	Warhead@Tesla_Super:
+	Warhead@Tesla_Super: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		PercentageScale: 2000
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
+	Warhead@SniperMediumMissile:
+		ValidRelationships: Enemy, Neutral
+		Damage: 40000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@SniperFlak:
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -600,26 +677,25 @@ SpecterSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy: AreaDamage
+	Warhead@Bullet_Heavy: AreaDamage
 		PercentageScale: 2000
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 4
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -627,11 +703,15 @@ SpecterSniperLockdown:
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Medium: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 4
@@ -643,6 +723,7 @@ SpecterSniperLockdown:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 VultureGrenade:
+	Inherits@roleflat: ^Compatibility_Demolition_LightFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -688,6 +769,16 @@ VultureGrenade:
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@SmallArms:
+	-Warhead@TankDestroyerCannon:
+	Warhead@Demolition_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 20000
+		PercentageScale: 1995
+	-Warhead@CannonHE_Medium:
 
 SiegeTankCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
@@ -707,6 +798,7 @@ SiegeTankCannon:
 	Warhead@CannonAP_Light:
 		Damage: 10000
 SiegeTankSiegeCannon:
+	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^LightMissile
 	Inherits@3: ^LightChemicalWeapon
@@ -864,6 +956,26 @@ SiegeTankSiegeCannon:
 		ExplosionPalette: greyscale
 
 	MinRange: 2355
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyCannon:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@LightFlameWeapon:
+	-Warhead@LightMissile:
+	-Warhead@MediumCannon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 140000
+		PercentageScale: 0
 GoliathMG:
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_CannonHE_Heavy
@@ -885,10 +997,9 @@ GoliathMG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
-	# ^Projectile_Bullet_* would take the type and orphan the other one's
-	# guidance fields. Keeps today's resolved type verbatim.
-	Projectile: Bullet
+	# ^Projectile_Shell_Heavy provides range-scaled shell travel. The later
+	# chaingun inheritance must not demote it to Bullet's default speed.
+	Projectile: ScaledBullet
 
 GoliathRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
@@ -920,53 +1031,58 @@ GoliathRockets_AA:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 GoliathMk2MG:
+	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^Grenade
 	Inherits@5: ^TankDestroyerCannon
 	Inherits@6: ^RA2Chaingun
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	ReloadDelay: 34
 	Range: 6479
 	Burst: 4
 	BurstDelays: 2
 	Report: TGoFir00.aud
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		PercentageScale: 3317
+		ValidTargets: Ground, Water
+		Damage: 6000
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Bullet_MediumFlatCompatibility:
 GoliathMk2Rockets:
-	Inherits: ^FlakWeapon
-	Inherits@2: ^LightMissile
-	Inherits@3: ^MediumMissile
-	Inherits@4: ^D2KRocket
+	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy_D2K_Rocket
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket
 	ReloadDelay: 40
 	Range: 6479
 	Report: HKMISSLE.aud
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Air
 	Projectile: Missile
 		Blockable: false
 		MaximumLaunchSpeed: 250
@@ -977,20 +1093,108 @@ GoliathMk2Rockets:
 		Acceleration: 5
 		CloseEnough: 500
 		AllowSnapping: true
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 8000
+		Arm: 0
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		HomingActivationDelay: 2
+		PointDefenseTypes: Missile
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		ContrailLength: 0
+	Warhead@MissileAA_Heavy:
+		ValidTargets: Air
+		Damage: 32000
+		PercentageScale: 2500
+		PercentageDenominator: 10000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 4
-	Warhead@LightMissile: SpreadDamage
-		Damage: 8000
+		Spread: 125
+		Versus:
+			None: 16
+			Wood: 7
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Concrete: 6
+			Steel: 5
+			Scout: 12
+			Flak: 15
+			Plate: 14
+			Helicopter: 18
+			Spaceship: 17
+			Fighter: 20
+			Bomber: 19
+			Superheavy: 8
+			Heroic: 13
+			Shield: 25
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 4
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 8000
+		Spread: 100
+		Versus:
+			None: 2
+			Wood: 6
+			Light: 8
+			Medium: 11
+			Heavy: 14
+			Concrete: 9
+			Steel: 12
+			Scout: 5
+			Flak: 3
+			Plate: 4
+			Helicopter: 13
+			Spaceship: 15
+			Fighter: 7
+			Bomber: 10
+			Superheavy: 16
+			Heroic: 1
+			Shield: 17
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 4
-	Warhead@MissileAP_Heavy:
-		Damage: 8000
+		Spread: 200
+		Versus:
+			None: 6
+			Wood: 10
+			Light: 12
+			Medium: 15
+			Heavy: 18
+			Concrete: 13
+			Steel: 16
+			Scout: 9
+			Flak: 7
+			Plate: 8
+			Helicopter: 17
+			Spaceship: 19
+			Fighter: 11
+			Bomber: 14
+			Superheavy: 20
+			Heroic: 5
+			Shield: 25
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 WraithRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
@@ -1102,21 +1306,25 @@ ValkyrieRockets:
 		AllowSnapping: true
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
+	Warhead@MissileAP_Heavy:
+		Damage: 8000
+		PercentageScale: 2500
+		PercentageDenominator: 10000
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyAAWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@HeavyAAWeapon: SpreadDamage
-		Damage: 2000
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@MissileAP_Heavy:
-		Damage: 2000
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 WyvernRockets:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1198,9 +1406,23 @@ WyvernRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MissileAP_Heavy:
+		PercentageScale: 1422
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 14000
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 2494
 BCLaser:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1286,8 +1508,23 @@ BCLaser:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@HeavyAAWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@HeavyMissile:
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 33600
+		PercentageScale: 0
 
 BCYamatoCannon:
+	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
 	Inherits: BCLaser
 	Report: yamatoshoot.wav
 	SoundVolume: 5
@@ -1350,8 +1587,25 @@ BCYamatoCannon:
 		Explosions: nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
+	-Warhead@HeavyAAWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@HeavyMissile:
+	-Warhead@LaserWeapon:
+	-Warhead@Laser_HeavyFlatCompatibility:
+	-Warhead@NuclearWarhead:
+	-Warhead@RailgunWeapon:
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 129600
+		PercentageScale: 0
 
 PhobosLaser:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
+	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseextra2: ^Compatibility_Railgun_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1437,6 +1691,27 @@ PhobosLaser:
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
+
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@HeavyMissile:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@Laser_Heavy_ExtraDamage:
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 42000
+		PercentageScale: 0
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 48000
+		PercentageScale: 1248
 
 MissileTurret:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
@@ -1541,6 +1816,113 @@ MedicFlare:
 		Duration: 60
 		Range: 1200
 		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
+	-Warhead@FlakWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@LightFlameWeapon:
+	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 1000
+		Versus:
+			Shield: 125
+			Fighter: 100
+			Bomber: 95
+			Helicopter: 90
+			Spaceship: 85
+			None: 80
+			Flak: 75
+			Plate: 70
+			Heroic: 65
+			Scout: 60
+			Light: 55
+			Medium: 50
+			Heavy: 45
+			Superheavy: 40
+			Wood: 35
+			Concrete: 30
+			Steel: 25
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+	Warhead@PreservedFlat_LaserExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 600
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@PreservedFlat_LaserWeapon: SpreadDamage
+		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
+		Spread: 150
+		Damage: 2000
+		Versus:
+			REFLECTOR: 50
+			Shield: 140
+			Superheavy: 100
+			Spaceship: 96
+			Steel: 92
+			Heroic: 88
+			Heavy: 84
+			Helicopter: 80
+			Concrete: 76
+			Plate: 72
+			Medium: 68
+			Bomber: 64
+			Wood: 60
+			Flak: 56
+			Light: 52
+			Fighter: 48
+			None: 44
+			Scout: 40
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@PreservedFlat_LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
+		InvalidTargets: wall
+		Spread: 500
+		Damage: 2000
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 50
+			Shield: 110
+			None: 100
+			Flak: 94
+			Plate: 88
+			Heroic: 82
+			Wood: 76
+			Concrete: 70
+			Steel: 64
+			Scout: 58
+			Light: 52
+			Medium: 46
+			Heavy: 40
+			Superheavy: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 
 RavenRepair:
 	Inherits: ^RepairWeapon

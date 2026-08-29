@@ -232,6 +232,7 @@ SheridanMissilesCryo:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 SheridanVulcan:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -246,6 +247,12 @@ SheridanVulcan:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 SheridanVulcanCryo:
 	Inherits@wh: ^Warhead_BulletCryo_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -354,6 +361,7 @@ AphidCryo_AA:
 		Damage: 8000
 
 ReconRangerRecoillessGun:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^Chaingun
@@ -440,12 +448,24 @@ ReconRangerRecoillessGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MissileAP_Heavy:
+		PercentageScale: 1210
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 33000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@MediumMissile:
+	-Warhead@MissileAP_HeavyFlatCompatibility:
 CryoReconRangerRecoillessGun:
 	Inherits: ReconRangerRecoillessGun
 	Inherits@2: ^CryoMissileProjectile
@@ -461,6 +481,7 @@ CryoReconRangerRecoillessGun:
 		Amount: -32000
 
 APTusk:
+	Inherits@collapsewh: ^Warhead_MissileAP_Heavy
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^Grenade
 	Inherits@3: ^FlakWeapon
@@ -497,6 +518,15 @@ APTusk:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	Warhead@MissileAP_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
 
 APTuskCryo:
 	Inherits: APTusk
@@ -506,6 +536,7 @@ APTuskCryo:
 		Range: 300
 
 ChronoTusk:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^Chaingun
@@ -517,39 +548,30 @@ ChronoTusk:
 	Range: 6102
 	Report: missile6.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumMissile:
+	Warhead@MissileHE_Heavy:
+		Damage: 20000
+		PercentageScale: 0
 
 ChronoTuskCryo:
 	Inherits: ChronoTusk
@@ -583,6 +605,7 @@ ChronoTuskCryo:
 	MinRange: 2035
 
 25mm:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -649,11 +672,20 @@ ChronoTuskCryo:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Medium:
-		Damage: 2000
+		PercentageScale: 1659
+		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@CannonHE_MediumFlatCompatibility:
 90mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -760,6 +792,7 @@ Colt45Cryo:
 		Damage: 7777
 
 HeavyAATankCannonAG:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^SmallArms
@@ -792,8 +825,17 @@ HeavyAATankCannonAG:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
 
 HeavyAATankCannon_AA:
+	Inherits@roleflat: ^Compatibility_Flak_MediumFlat
 	Inherits: HeavyAATankCannonAG
 	Range: 7119
 	ValidTargets: Air
@@ -813,6 +855,13 @@ HeavyAATankCannon_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
+	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 8000
+		PercentageScale: 0
 
 RadarJammer:
 	ReloadDelay: 150

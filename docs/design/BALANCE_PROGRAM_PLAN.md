@@ -1,4 +1,4 @@
-# BALANCE PROGRAM — the execution plan (rev. 2026-08-23)
+# BALANCE PROGRAM — the execution plan (rev. 2026-08-28)
 
 **This file is the SINGLE SOURCE OF TRUTH for what is done, what is next, and who owns
 what.** It survives compaction, agent handover and session death. Every other document
@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **925 of 1622 = 57.0%** (histogram runs out to 15 mains) |
+| W24 — directly fired weapons with **more than one** damage main | **494** under the unified predicate (histogram runs out to 10 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** |
 | fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
@@ -52,7 +52,7 @@ the question was asked.
 
 **The order:**
 
-1. **W24** — one damage warhead per weapon (DESIGN §11b). 65% non-compliant.
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 494 directly fired weapons remain non-compliant.
 2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
    is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
    merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE
@@ -590,7 +590,7 @@ delivery and price number measured before it lands is measuring the wrong object
 | A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | ✅ DONE — `TS70mmChem` → `^Warhead_CannonChem_Light` at 6000, `TSScoopDualChem` → `^Warhead_CannonChem_Medium` at 30000, and `JapanesePlasmaBomb` → `^Warhead_Plasma_Heavy` at 30000. Main totals and weapon operation are preserved; standard family armour/blast profiles are accepted classification consequences. Upgrade audit records Ratty 0.75× Wood, Scooper 0.80× Wood, and Japanese bomber 0.96× Wood. Static audit-gated; in-game review deferred by maintainer request. |
 | A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | ✅ DONE — renamed the upgrade, condition, icon, UI text, Su-57 weapons, and Monster Tank inferno weapon across active YAML, Fluent, AI, sequences, and the survival-map script. `safe_rename.py` changed 89 references in 12 text files plus the icon; no old identifiers or dangling inheritance targets remain. Weapon values are unchanged. Static audit-gated; in-game review deferred by maintainer request. |
 | A5 | Collapse the 27 single-user templates | ✅ DONE for the active W24-created set — the refreshed upstream-based census found 14 live one-user W24 wrappers rather than the older estimate of 27. All 14 are removed across three isolated batches: five small projectile/effect wrappers, five Rocket Trooper projectiles, then the Tower Missile and `mtank_pri2` projectile/effect pairs. Every sole consumer is exactly equal after full inheritance resolution. Static audit-gated; in-game review deferred by maintainer request. |
-| A6 | Continue the burn-down | 🔵 IN PROGRESS — collapsed the chemical turret pair; four light-chemical/AP-cannon weapons onto CannonChem; the exact medium flame+chemical pair onto Plasma; two redundant medium+heavy Flame stacks onto Flame Heavy; three redundant light+medium+heavy Chemical stacks onto Chemical Heavy; and the thermobaric grenade/explosion pair onto Thermobaric Light. Flat and percentage totals, projectile operation, sounds, custom conditions/clouds, effects, smudges, shield behavior, and concrete damage are preserved; standard family profiles are accepted classification consequences. `review_batch_diff.py` now gates percentage totals and judges friendly-fire by resolved relationships as well as flat damage. Survey 294 → 280 and W24 broadcast debt 936 → 926. Static audit-gated; in-game review deferred by maintainer request. |
+| A6 | Continue the burn-down | 🔵 IN PROGRESS — retrospective review restored earlier weapon blocks whose grouped percentage hits could not reproduce the parked runtime's per-warhead rounding and overflow behavior at every active health value. The safe cleanup now includes nine earlier missile roots, the MiG, Naxis quad-cannon/flak, RA2 SCUD, and Steel Mako families, four isolated weapons, the bulk shotgun/sniper pass, thirteen named laser roots covering 27 resolved definitions, the remaining GDI/commando/Dragunov sniper roots, the percentage-safe chemical/flame cohort, a 13-root projectile-role checkpoint, ten remaining override-free chemical/flame roots, and the final mixed bullet/Tesla/concussion/chemical cohort. Every legacy percentage application remains separate while flat totals move onto standard role families. `review_batch_diff.py` tests all 155 active/design health values and fingerprints complete percentage-warhead profiles in addition to relationship-, statistics-, physical-state-, top-level-, projectile-, non-damage-, target-, and percentage behavior. On the corrected active survey basis the debt has fallen from 274 to 197 concrete roots: 196 mixed weapons in 157 groups and one isolated root. The conservative classifier now reports four legacy-only and 193 human-decision roots. Broadcast debt is ratcheted to 818. Pricing and the runtime fix remain separate. |
 
 ### Phase B — the physical-state half (parallel to A, different file set)
 
@@ -2767,8 +2767,8 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `ARMOR_LAYERS.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-fired weapons, **34.5%** comply (560 of 1622); **57.0%** (925 of 1622) carry 2 or more damage
-warheads, worst case **15**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
+directly fired weapons, **494** carry 2 or more damage
+warheads, worst case **10**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created
 rather than forcing a bad one (maintainer, 2026-08-16). Two already identified:

@@ -193,7 +193,8 @@ terran_missilesilo:
 	Power:
 		Amount: 0
 	Buildable:
-		Prerequisites: ~terran_commandcenter, terran_sciencefacility, ~techlevel.superweapons, !terran_missilesilo
+		-BuildLimit:
+		Prerequisites: ~terran_commandcenter, terran_sciencefacility, ~techlevel.superweapons, !terran_missilesilo_swlimit
 		Description: actor_mslo.description
 	Building:
 		Footprint: xx xx
@@ -246,7 +247,7 @@ terran_missilesilo:
 	# WithSupportPowerActivationAnimation:
 	# 	RequiresCondition: !build-incomplete
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: terran_missilesilo
+		Prerequisite: terran_missilesilo_swlimit
 	Voiced:
 		VoiceSet: SCNuclearSiloVoice
 	RenderSprites:

@@ -1,4 +1,5 @@
 TS30mm:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -14,7 +15,17 @@ TS30mm:
 	Warhead@Flak_Medium:
 		PercentageScale: 2500
 		Damage: 8000
+	-Warhead@Flak_Medium:
+	-Warhead@MissileHE_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 2494
 TS30mmRail:
+	Inherits@collapsewh: ^Warhead_Flak_Medium
+	Inherits@collapseextra: ^Compatibility_Railgun_ExtraDamage
+	Inherits@collapsetargets: ^Compatibility_TS30mmRail_UnscopedFlat
+	-TargetActorCenter:
 	Inherits: ^MediumMissile
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^RailgunWeapon
@@ -39,6 +50,15 @@ TS30mmRail:
 		Damage: 2000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 1
+
+	-Warhead@MediumMissile:
+	-Warhead@FlakWeapon:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 0
 
 TS120mmRail:
 	# Inherits: ^TSCannon
@@ -98,6 +118,7 @@ TSRPGTower:
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
 TSRPGTowerRail:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -117,6 +138,14 @@ TSRPGTowerRail:
 		Damage: 16000
 	Warhead@HRailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 8
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 33000
+		PercentageScale: 0
 
 TSJugg90mm:
 	Inherits@wh: ^Warhead_Concussion_Medium
@@ -172,6 +201,8 @@ TSJugg120mm:
 	# 	Explosions: artillery_explosion
 
 KodiakCannon:
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapseextra1: ^Compatibility_Railgun_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -213,8 +244,9 @@ KodiakCannon:
 		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@CannonHE_Heavy:
+		PercentageScale: 1998
 		ValidTargets: Ground, Water
-		Damage: 8000
+		Damage: 40000
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -222,6 +254,12 @@ KodiakCannon:
 		ValidTargets: Ground, Water
 		Damage: 4
 
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@HeavyMissile:
+	-Warhead@HeavyBomb:
+	-Warhead@CannonHE_HeavyFlatCompatibility:
 KodiakCannonSonic:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@wh2: ^Warhead_Sonic_Heavy
@@ -490,6 +528,7 @@ PitbullRockets:
 	Warhead@MissileAP_Light:
 		Damage: 20000
 TSHoverMissile:
+	Inherits@collapsewh: ^Warhead_MissileHE_Medium
 	Inherits: ^FlakWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^ShrapnelWeapon
@@ -526,8 +565,17 @@ TSHoverMissile:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@MissileHE_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 TSDestroyerMissiles:
+	Inherits@collapsewh: ^Warhead_MissileHE_Medium
 	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile
 	Inherits: ^ShrapnelWeapon
@@ -564,6 +612,14 @@ TSDestroyerMissiles:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@MissileHE_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 TSMammothTusk2:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
@@ -777,38 +833,47 @@ TSShotgun:
 	Inherits@6: ^TankDestroyerCannon
 	Inherits@7: ^SmallArms
 	Inherits@8: ^Chaingun
+	Inherits@compat: ^ShotgunCannonHEMediumCompatibility
 	ReloadDelay: 46
 	Range: 4002
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	Warhead@Grenade: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 4000
+	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@SmallArms: SpreadDamage
-		Damage: 4000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
-		Damage: 4000
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 2
+	Warhead@ShotgunGrenadeEnemy:
+		Damage: 4000
+	Warhead@ShotgunGrenadeAlly:
+		Damage: 2000
+	Warhead@ShotgunShrapnelEnemy:
+		Damage: 4000
+	Warhead@ShotgunShrapnelAlly:
+		Damage: 2000
+	Warhead@ShotgunTankDestroyer:
+		Damage: 4000
+	Warhead@ShotgunSmallArms:
+		Damage: 4000
+	Warhead@ShotgunChaingun:
+		Damage: 4000
 
 TSJumpCannon:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2FlakWeapon
 	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 25
@@ -824,8 +889,15 @@ TSJumpCannon:
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 TSAssaultCannonSonic:
+	Inherits@roleflat: ^Compatibility_Sonic_MediumFlat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Sonic_Medium
 	Inherits@proj: ^Projectile_Sonic_Shell
@@ -843,6 +915,12 @@ TSAssaultCannonSonic:
 	Warhead@Sonic_Medium: AreaDamage
 		PercentageScale: 5000
 		Damage: 4000
+	-Warhead@Flak_Medium:
+	-Warhead@Sonic_Medium:
+	Warhead@Sonic_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 4988
 
 TSAssaultCannonTal:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -860,6 +938,7 @@ TSAssaultCannonTal:
 		ValidTargets: Ground, Water
 		Damage: 8000
 TSAssaultCannonTalSonic:
+	Inherits@roleflat: ^Compatibility_Sonic_MediumFlat
 	Inherits: TSAssaultCannonTal
 	Inherits@wh2: ^Warhead_Sonic_Medium
 	Inherits@proj: ^Projectile_Sonic_Shell
@@ -872,8 +951,15 @@ TSAssaultCannonTalSonic:
 	Warhead@Sonic_Medium: AreaDamage
 		PercentageScale: 2500
 		Damage: 8000
+	-Warhead@Bullet_Medium:
+	-Warhead@Sonic_Medium:
+	Warhead@Sonic_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 6244
 
 TSVulcanGun:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -887,7 +973,14 @@ TSVulcanGun:
 		Damage: 4000
 	Warhead@Bullet_Medium:
 		Damage: 4000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 TSVulcanGunSonic:
+	Inherits@roleflat: ^Compatibility_Sonic_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Sonic_Medium
 	Inherits@proj: ^Projectile_Sonic_Shell
@@ -903,6 +996,12 @@ TSVulcanGunSonic:
 	Warhead@Sonic_Medium: AreaDamage
 		PercentageScale: 2500
 		Damage: 8000
+	-Warhead@Bullet_Medium:
+	-Warhead@Sonic_Medium:
+	Warhead@Sonic_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 2494
 
 KodiakAAGuns:
 	Inherits@wh: ^Warhead_Flak_Medium
@@ -930,6 +1029,7 @@ TSHammerheadGun:
 		Damage: 4000
 		ValidTargets: Ground, Water
 TSAAPCCannon:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -946,6 +1046,12 @@ TSAAPCCannon:
 		Damage: 2000
 	ValidTargets: Ground, Water, Air
 	ValidTargets: Ground, Water, Air
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 TSMechMGII:
 	Inherits@wh: ^Warhead_Bullet_Medium

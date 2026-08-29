@@ -58,6 +58,10 @@ TSRaiderGrenade:
 		ImpactSounds: expnew13.aud
 
 TSProton:
+	Inherits@collapsewh: ^Warhead_Laser_Heavy
+	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseground: ^Compatibility_ProtonLaser_GroundSlice
+	-TargetActorCenter:
 	Inherits: ^TSEnergyBlast
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^LaserWeapon
@@ -90,6 +94,14 @@ TSProton:
 		Damage: 15
 	Warhead@2Eff: CreateEffect
 		Explosions: small_frag
+
+	-Warhead@MediumFlameWeapon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 29000
+		PercentageScale: 0
 
 TSTibBazooka:
 	Inherits@wh: ^Warhead_MissileChem_Light
@@ -164,6 +176,7 @@ TSSBoatTusk:
 		Damage: 9000
 		ValidTargets: Ground, Water, Air
 TSStankTibTusk:
+	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -203,6 +216,15 @@ TSStankTibTusk:
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		Damage: 5000
 		ValidTargets: Ground, Water, Air
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@MediumCannonFriendlyFire:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 35000
+		PercentageScale: 2855
+	-Warhead@CannonHE_Medium:
+
 TSNODRedEye:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -253,6 +275,7 @@ TSFireballLauncher:
 	Warhead@Flame_Medium:
 		Damage: 8000
 TSLasergun:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -269,6 +292,12 @@ TSLasergun:
 		Damage: 2000
 	Warhead@Laser_Heavy:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 TSCommandoShotgun:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -278,38 +307,47 @@ TSCommandoShotgun:
 	Inherits@6: ^TankDestroyerCannon
 	Inherits@7: ^SmallArms
 	Inherits@8: ^Chaingun
+	Inherits@compat: ^ShotgunCannonHEMediumCompatibility
 	ReloadDelay: 20
 	Range: 4146
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	Warhead@Grenade: SpreadDamage
-		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 8000
+	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@SmallArms: SpreadDamage
-		Damage: 8000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@Chaingun: SpreadDamage
-		Damage: 8000
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 4
+	Warhead@ShotgunGrenadeEnemy:
+		Damage: 8000
+	Warhead@ShotgunGrenadeAlly:
+		Damage: 4000
+	Warhead@ShotgunShrapnelEnemy:
+		Damage: 8000
+	Warhead@ShotgunShrapnelAlly:
+		Damage: 4000
+	Warhead@ShotgunTankDestroyer:
+		Damage: 8000
+	Warhead@ShotgunSmallArms:
+		Damage: 8000
+	Warhead@ShotgunChaingun:
+		Damage: 8000
 
 elitecadregun:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -326,11 +364,19 @@ elitecadregun:
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
 		Damage: 8000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 2494
 laserelitecadregun:
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
 	Inherits@3: ^LaserWeapon
 	Inherits@4: ^TSLaserEffect
+	Inherits@legacychip: ^LegacyLaserChipCompatibility
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8
@@ -341,18 +387,21 @@ laserelitecadregun:
 	Report: cygun1.aud
 	Range: 6677
 	ValidTargets: Ground, Air
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
+	TargetActorCenter: false
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
+	Warhead@Laser_Heavy:
+		Damage: 6000
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 ChamBlade:
 	Inherits@wh: ^Warhead_Sniper_Light
@@ -477,6 +526,7 @@ TSHarpyAOEClaw:
 		Spread: 300
 		Falloff: 100, 50, 25
 TSLaserHarpyClaw:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -499,6 +549,12 @@ TSLaserHarpyClaw:
 	Warhead@Laser_Heavy:
 		Damage: 4000
 		ValidTargets: Ground, Air
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Air
+		Damage: 8000
+		PercentageScale: 9988
 TSLaserHarpyMultiClaw:
 	Inherits: TSLaserHarpyClaw
 	Burst: 4
@@ -516,6 +572,11 @@ TSLaserHarpyMultiClaw:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 0
 		ValidTargets: Ground, Air
+	-Warhead@Bullet_Medium:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 TSLaserHarpyAOEClaw:
 	Inherits: TSLaserHarpyClaw
@@ -528,6 +589,13 @@ TSLaserHarpyAOEClaw:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Spread: 300
 		Falloff: 100, 50, 25
+	-Warhead@Bullet_Medium:
+	Warhead@Laser_HeavyFlatCompatibility:
+		Spread: 300
+		Falloff: 100, 50, 25
+		ValidTargets: Ground, Air
+		Damage: 8000
+		PercentageScale: 9988
 
 TSToxinRifle:
 	Inherits@wh: ^Warhead_Chemical_Light
