@@ -1110,11 +1110,15 @@ RA2MultiHoverMissile_AA:
 	Inherits: RA2MultiHoverMissile
 	ValidTargets: Air
 	Range: 9255
+	Warhead@CannonHE_Medium:
+		ValidTargets: Air
 
 RA2MultiHoverMissile_AA_elite:
 	Inherits: RA2MultiHoverMissile_elite
 	ValidTargets: Air
 	Range: 10255
+	Warhead@CannonHE_Medium:
+		ValidTargets: Air
 
 RA2MultiThunderboltMissile:
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat

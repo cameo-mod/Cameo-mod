@@ -97,6 +97,11 @@ class FinalBacklogRoleProfileTests(unittest.TestCase):
             for key, value in warheads.items():
                 self.assertEqual(value, damage(weapon, key), f"{name}/{key}")
 
+        armored_car_aa = self.rules.resolve_weapon("ArmoredCarMG_AA")
+        self.assertEqual("Air", child(child(armored_car_aa,
+                                             "Warhead@ArmoredCarGroundCompatibility"),
+                                      "ValidTargets").value)
+
     def test_emp_temperature_and_sticky_side_effects_remain(self):
         for name in ("BHRedDarts", "EMPGrenade", "eden_EMP", "plymouth_EMP"):
             emp = child(self.rules.resolve_weapon(name), "Warhead@EMPCompatibility")
