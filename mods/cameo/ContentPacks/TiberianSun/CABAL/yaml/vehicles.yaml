@@ -5,8 +5,6 @@ cabal_constructionyard:
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@conyard: ^Conyard
-	Selectable:
-		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:

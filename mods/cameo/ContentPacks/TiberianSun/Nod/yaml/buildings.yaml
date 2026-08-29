@@ -3,8 +3,6 @@ ts_nod_constructionyard:
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@conyard: ^Conyard
-	Selectable:
-		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:

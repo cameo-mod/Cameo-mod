@@ -86,8 +86,6 @@ ordos_airmine:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@Cloak: ^CloakedAircraft
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
-	AutoTarget:
-		InitialStance: ReturnFire
 	Valued:
 		Cost: 500
 	Buildable:

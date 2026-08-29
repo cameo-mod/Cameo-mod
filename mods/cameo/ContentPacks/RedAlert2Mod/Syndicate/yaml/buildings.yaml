@@ -97,7 +97,6 @@ latinsyndicate_combatbarracks:
 		Range: 6666
 	ActorStatValues:
 		Stats: Armor, Sight, Cargo, Kills, Experience
-	GivesBuildableArea:
 
 latinsyndicate_recyclingrefinery:
 	Inherits: ^RA2Building
@@ -278,9 +277,6 @@ latinsyndicate_spycenter:
 	SupportPowerChargeBar:
 	ProvidesPrerequisite:
 	WithIdleOverlay@lights:
-		Sequence: idle-lights
-		RequiresCondition: !build-incomplete
-	WithIdleOverlay@lights:
 		Sequence: idle-lights2
 		RequiresCondition: !build-incomplete
 	DetonateWeaponPowerCA:
@@ -384,7 +380,6 @@ latinsyndicate_defensebureau:
 		Modifier: 50
 	RevealsShroud:
 		Range: 10000
-	GivesBuildableArea:
 
 latinsyndicate_recyclingcenter:
 	Inherits: ^RA2Building

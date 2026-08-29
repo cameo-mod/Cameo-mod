@@ -217,6 +217,55 @@ class WeaponCorrectnessFollowupTests(unittest.TestCase):
 
         self.assertEqual([], findings)
 
+    def test_reviewed_redundant_active_traits_are_unique(self):
+        expected = {
+            "^D2KInfantry": {"Passenger"},
+            "SCSPIDERMINE": {"AutoTarget"},
+            "SNOWHUT": {"RenderSprites"},
+            "asianalliance_chaostower": {"Selectable"},
+            "cabal_constructionyard": {"Selectable"},
+            "cabal_core": {"Selectable", "WithIdleOverlay@LIGHTS2"},
+            "duelist_tank.ixian": {"ActorStatValues"},
+            "ixian_ixcombatsiege": {"ActorStatValues"},
+            "ixian_rocketturret": {"AttackTurreted"},
+            "japan_japaneseflamethrower": {"UpdatesPlayerStatistics"},
+            "latinsyndicate_combatbarracks": {"GivesBuildableArea"},
+            "latinsyndicate_defensebureau": {"GivesBuildableArea"},
+            "latinsyndicate_spycenter": {"WithIdleOverlay@lights"},
+            "ordos_airmine": {"AutoTarget"},
+            "ra1_soviets_barracks": {"ProvidesPrerequisite"},
+            "ra1_soviets_monstertank": {"WithAmmoPipsDecoration"},
+            "ra2_allies_blackeagle": {"Selectable"},
+            "ra2_allies_guardiangi": {"ActorStatValues"},
+            "ra2_soviets_teslatrooper": {"ActorStatValues"},
+            "ra2dest": {"Selectable"},
+            "ra2sidewind": {"Voiced"},
+            "ra2sqd": {"AttackFrontal"},
+            "ts_gdi_constructionyard": {"Selectable"},
+            "tkm_abrams": {"Selectable"},
+            "tkm_as42": {"ActorStatValues"},
+            "tkm_t72m": {"Selectable"},
+            "tkm_technicaltank": {"Selectable"},
+            "tkm_tornadoglauncher": {"ActorStatValues"},
+            "tkm_trenchtank": {"Selectable"},
+            "tkm_trenchtruck": {"Selectable"},
+            "ts_gdi_techcenter": {"Selectable"},
+            "ts_gdi_titan": {"RenderVoxels"},
+            "ts_nod_constructionyard": {"Selectable"},
+            "ts_nod_mobilestealthgenerator": {"ActorStatValues"},
+            "tsun.asian": {"ActorStatValues"},
+            "wc2_humans_townhall": {"Refinery"},
+            "wc2_orcs_greathall": {"Refinery"},
+            "yrbpln": {"Contrail@1", "Contrail@2"},
+            "zerg_behemoth": {"ActorStatValues"},
+        }
+        for actor_name, keys in expected.items():
+            actor = self.rules.actor(actor_name)
+            self.assertIsNotNone(actor, actor_name)
+            for key in keys:
+                count = sum(item.key == key for item in actor.children)
+                self.assertEqual(1, count, f"{actor_name} > {key}")
+
 
 if __name__ == "__main__":
     unittest.main()
