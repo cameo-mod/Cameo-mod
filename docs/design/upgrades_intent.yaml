@@ -15,9 +15,10 @@
 ######################## TD Nod — Temple tier #######################
 td_nod_upgrade_elitecapacitors:
 	faction: td_nod
-	effect: laser firepower and fire rate +30%; range and vision +15%; Obelisk bonuses +60%/+30%
+	effect: laser firepower +30% with 15% longer reload; range and vision +15%; Obelisk bonuses +60% firepower, -60% reload delay, and +30% range and vision
 	coverage: listed
 	phase: late
+	drawbacks: reloaddelaymultiplier
 td_nod_upgrade_cyberneticmodifications:
 	faction: td_nod
 	effect: infantry shield and Medium armor profile; speed +20%

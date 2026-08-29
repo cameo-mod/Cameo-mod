@@ -16,7 +16,7 @@ class UpgradeDirectionContractTests(unittest.TestCase):
         cls.model = Model()
         cls.rules = cls.model.rs
 
-    def test_elite_capacitors_increase_fire_rate_for_every_recipient(self):
+    def test_elite_capacitors_preserve_authored_reload_tradeoff(self):
         recipients = {}
         condition = "td_nod_upgrade_elitecapacitors"
         for actor in sorted(self.rules.actors):
@@ -30,15 +30,18 @@ class UpgradeDirectionContractTests(unittest.TestCase):
                     recipients[actor] = int(trait.get("Modifier"))
 
         self.assertEqual({
-            "nodlasercorvette": 70,
-            "td_nod_lasercommando": 70,
-            "td_nod_lasertrooper": 70,
-            "td_nod_laserturret": 70,
-            "td_nod_lighttankmkii": 70,
+            "nodlasercorvette": 115,
+            "td_nod_lasercommando": 115,
+            "td_nod_lasertrooper": 115,
+            "td_nod_laserturret": 115,
+            "td_nod_lighttankmkii": 115,
             "td_nod_obeliskoflight": 40,
-            "td_nod_venom": 70,
+            "td_nod_venom": 115,
         }, recipients)
-        self.assertTrue(all(modifier < 100 for modifier in recipients.values()))
+        self.assertEqual(
+            "reloaddelaymultiplier",
+            load_intent(self.model.root)["td_nod_upgrade_elitecapacitors"]["drawbacks"],
+        )
 
     def test_cybernetic_damage_amplification_is_an_authored_tradeoff(self):
         intent = load_intent(self.model.root)
