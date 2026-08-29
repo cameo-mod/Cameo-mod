@@ -428,6 +428,7 @@ TSShadowTeamPistols:
 	BurstDelays: 3
 	Range: 8000
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: 77777777
 		ContrailEndColor: 33333333
 		ContrailStartWidth: 33
@@ -516,6 +517,7 @@ TSHarpyMultiClaw:
 	BurstDelays: 0
 	TargetActorCenter: true
 	Projectile: Bullet
+		Speed: 4000
 		Inaccuracy: 1024
 	Warhead@Bullet_Medium: AreaDamage
 		Damage: 0

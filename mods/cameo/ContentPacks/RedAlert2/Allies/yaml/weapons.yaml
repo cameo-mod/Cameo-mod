@@ -727,6 +727,7 @@ RA2AWP_elite:
 	Inherits: RA2AWP
 	Range: 12345
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: FF0000FF
 	Warhead@Sniper_Light:
 		Damage: 88000
@@ -745,6 +746,7 @@ RA2MP5:
 	Burst: 4
 	BurstDelays: 3
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: 77777777
 		ContrailEndColor: 33333333
 		ContrailStartWidth: 33
