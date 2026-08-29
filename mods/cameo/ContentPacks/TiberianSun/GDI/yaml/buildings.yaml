@@ -593,7 +593,7 @@ ts_gdi_ioncannonuplink:
 		BuildPaletteOrder: 10
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~ts_gdi_upgradecenter, !ionc, !droppod, !tsionc, ~techlevel.superweapons
+		Prerequisites: ~ts_gdi_upgradecenter, !droppod, !tsionc, ~techlevel.superweapons
 		Description: Unlocks the Ion Cannon superweapon.
 	Plug:
 		Type: ioncannon
@@ -612,11 +612,11 @@ ts_gdi_droppoduplink:
 	ProvidesPrerequisite@droppod:
 		Prerequisite: droppod
 	Buildable:
-		Queue: BuildingAddons
+		#Queue: BuildingAddons  # Disable because drop pods are deployed from the dropship bay
 		BuildPaletteOrder: 20
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~ts_gdi_upgradecenter, !ionc, !droppod, ~techlevel.superweapons
+		Prerequisites: ~ts_gdi_upgradecenter, !droppod, ~techlevel.superweapons
 		Description: Deploys elite infantry from orbit.
 	Plug:
 		Type: droppod
@@ -633,7 +633,6 @@ ts_gdi_upgradecenter:
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@plugproducer: ^BuildingPlugProducer
 	Buildable:
-		-BuildLimit:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 160
 		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter, ~techlevel.superweapons
@@ -836,6 +835,7 @@ ts_gdi_dropshipbay:
 		Sequence: idle-lights-bright
 	DetonateWeaponPower@DropPods:
 		OrderName: GDI Drop
+		AllowMultiple: true
 		Prerequisites:
 			1: ~techlevel.superweapons
 		PauseOnCondition: disabled

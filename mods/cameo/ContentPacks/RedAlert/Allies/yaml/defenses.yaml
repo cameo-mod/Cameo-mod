@@ -5,7 +5,6 @@ ra1_allies_chronosphere:
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Inherits@sell: ^RASpawnActorsOnSell
 	Buildable:
-		-BuildLimit:
 		Queue: Defence, RADefence
 		Prerequisites: ~ra1_allies_alliedtechcenter, ~techlevel.superweapons, !ra1_allies_chronosphere_swlimit
 		Description: actor_pdox.description
@@ -19,6 +18,7 @@ ra1_allies_chronosphere:
 		HasMinibib: true
 	RA2ChronoshiftPower@chronoshift:
 		OrderName: Chronoshift
+		AllowMultiple: true
 		Prerequisites:
 			1: !botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
@@ -55,6 +55,7 @@ ra1_allies_chronosphere:
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 	DetonateWeaponPower@ChronoReinforcements:
 		OrderName: ChronoReinforcements
+		AllowMultiple: true
 		Cost: 1000
 		Prerequisites:
 			1: ra1_allies_upgrade_chronoarmor, ~techlevel.superweapons
@@ -81,6 +82,7 @@ ra1_allies_chronosphere:
 	# AI always has its own fake chronoshift power separate from upgrades purchased.
 	DetonateWeaponPower@ChronoAI:
 		OrderName: ChronoshiftAI
+		AllowMultiple: true
 		Prerequisites:
 			1: botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled

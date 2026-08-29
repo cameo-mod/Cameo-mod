@@ -525,7 +525,6 @@ cabal_core:
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
-		-BuildLimit:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
 		Prerequisites: ~cabal_constructionyard, cabal_techcenter

@@ -661,7 +661,6 @@ ordos_palace:
 	Inherits@shape: ^3x3Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Buildable:
-		-BuildLimit:
 		Queue: Building, RABuilding
 		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter, !opalace, ~techlevel.superweapons
 		Description: This structure unlocks support powers.
@@ -702,6 +701,7 @@ ordos_palace:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: opalace
 	DetonateWeaponPower@Chaos:
+		AllowMultiple: true
 		OrderName: AsianChaosSuperweapon
 		PauseOnCondition: disabled
 		Prerequisites:

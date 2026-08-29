@@ -227,7 +227,6 @@ td_gdi_advancedcommunicationscenter:
 	ProvidesPrerequisite:
 		Prerequisite: anytdhq
 	Buildable:
-		-BuildLimit:
 		BuildPaletteOrder: 100
 		Prerequisites: ~td_gdi_constructionyard, td_gdi_communicationscenter
 		Queue: Building, RABuilding

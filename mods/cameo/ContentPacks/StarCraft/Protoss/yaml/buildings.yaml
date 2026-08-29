@@ -577,7 +577,6 @@ protoss_fleetbeacon:
 		Name: Fleet Beacon
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		-BuildLimit:
 		BuildPaletteOrder: 130
 		Prerequisites: ~protoss_nexus, protoss_stargate, !SCPurifierStrike
 		Queue: Building, RABuilding

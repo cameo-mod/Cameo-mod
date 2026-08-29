@@ -378,7 +378,6 @@ schwarzermond_meteortractionray:
 	Tooltip:
 		Name: Meteor Traction Ray
 	Buildable:
-		-BuildLimit:
 		BuildPaletteOrder: 100
 		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_techcenter, !schwarzermond_meteortractionray_swlimit, ~techlevel.superweapons
 		Queue: Defence, RADefence

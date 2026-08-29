@@ -446,7 +446,6 @@ ixian_supercomputer:
 	Inherits@shape: ^4x3Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Buildable:
-		-BuildLimit:
 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, !ixian_supercomputer_swlimit, ~techlevel.superweapons
 		Description: Provides a nuclear weapon support power.
 		IconPalette: player

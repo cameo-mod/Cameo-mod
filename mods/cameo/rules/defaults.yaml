@@ -8528,7 +8528,6 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 200
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		BuildLimit: 1
 		IconPalette: cameo
 	Valued:
 		Cost: 5000
@@ -8550,13 +8549,13 @@ CPQDEBUGDUMMY:
 		Range: 10000
 		RequiresCondition: !disabled
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@swlimit:
+		RequiresPrerequisites: global-swlimit
 
 ^PrimarySuperweapon:
 	Inherits: ^Superweapon
 	Valued:
 		Cost: 10000
-	ProvidesPrerequisite@swlimit:
-		RequiresPrerequisites: global-swlimit
 
 ####################################################################################################
 #		Generals

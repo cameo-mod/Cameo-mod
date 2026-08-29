@@ -74,7 +74,6 @@ ra2_allies_weathercontrolcenter:
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^RA2ASpawnActorsOnSell
 	Buildable:
-		-BuildLimit:
 		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab, !weatherstorm, ~techlevel.superweapons
 		Description: actor_gaweat.description
 	Tooltip:
@@ -137,7 +136,6 @@ ra2_allies_chronosphere:
 	Inherits@shape: ^3x4Shape
 	Inherits@sell: ^RA2ASpawnActorsOnSell
 	Buildable:
-		-BuildLimit:
 		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab, ~techlevel.superweapons, !ra2_allies_chronosphere_swlimit
 		Description: actor_pdox.description
 	Tooltip:
@@ -147,6 +145,7 @@ ra2_allies_chronosphere:
 		Dimensions: 4,3
 	RA2ChronoshiftPower@chronoshift:
 		OrderName: Chronoshift
+		AllowMultiple: true
 		Prerequisites:
 			1: !botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
@@ -184,6 +183,7 @@ ra2_allies_chronosphere:
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 	DetonateWeaponPower@aichrono:
 		OrderName: RA2ChronoshiftAI
+		AllowMultiple: true
 		Prerequisites:
 			1: botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
@@ -219,7 +219,6 @@ ra2_allies_chronosphere:
 		DeathSequencePalette: playerra2
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: ra2_allies_chronosphere_swlimit
-		RequiresPrerequisites: global-swlimit
 
 ra2_allies_pillbox:
 	Inherits: ^RA2Defense

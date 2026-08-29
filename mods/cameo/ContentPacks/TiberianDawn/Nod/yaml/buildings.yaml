@@ -237,7 +237,6 @@ td_nod_templeofnod:
 	ProvidesPrerequisite:
 		Prerequisite: anytdhq
 	Buildable:
-		-BuildLimit:
 		BuildPaletteOrder: 100
 		Prerequisites: ~td_nod_constructionyard, td_nod_communicationscenter
 		Queue: Building, RABuilding

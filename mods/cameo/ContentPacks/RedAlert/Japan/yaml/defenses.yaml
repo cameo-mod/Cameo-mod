@@ -7,7 +7,6 @@ japan_japaneseshrine:
 	Tooltip:
 		Name: Japanese Shrine
 	Buildable:
-		-BuildLimit:
 		Prerequisites: ~japan_japanesetechcenter, ~techlevel.superweapons, !japan_japaneseshrine_swlimit
 		Description: actor_mslo.description
 	Building:
