@@ -1658,15 +1658,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -1694,15 +1694,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -1729,8 +1729,8 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 48, 0",
-        "spread": "30",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "BulletCryo_Light",
         "type": "AreaDamage"
        }
@@ -1758,8 +1758,8 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 48, 0",
-        "spread": "30",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "BulletCryo_Light",
         "type": "AreaDamage"
        }

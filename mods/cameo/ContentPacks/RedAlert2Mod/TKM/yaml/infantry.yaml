@@ -439,9 +439,6 @@ tkm_rocketeer:
 	DamageMultiplier:
 		Modifier: 75
 		RequiresCondition: tkm_upgrade_natoarsenalupgrade
-	Armament@GARRISONED:
-		Name: garrisoned
-		Weapon: Rockets
 	GrantConditionOnPrerequisite@cloakon:
 		Condition: tkm_upgrade_berezkaarsenalupgrade
 		Prerequisites: tkm_upgrade_berezkaarsenalupgrade

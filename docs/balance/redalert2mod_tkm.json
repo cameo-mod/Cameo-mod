@@ -2432,11 +2432,11 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "6368",
-      "reloaddelay": "63",
+      "range": "6214",
+      "reloaddelay": "64",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2447,7 +2447,7 @@
       "warheads": [
        "^Warhead_MissileAP_Light"
       ],
-      "weapon": "Rockets",
+      "weapon": "tkmrockets",
       "weapon_class_source": "template"
      },
      {
@@ -2608,15 +2608,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2643,15 +2643,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3773,15 +3773,15 @@
       "damage_warheads": [
        {
         "damage": "80000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "40",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3808,15 +3808,15 @@
       "damage_warheads": [
        {
         "damage": "80000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "40",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }

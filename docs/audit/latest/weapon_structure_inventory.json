@@ -2,10 +2,10 @@
   "counts": {
     "concrete_weapons": 2345,
     "stacked_main_all_concrete": 694,
-    "stacked_main_direct_actor_armament": 495,
+    "stacked_main_direct_actor_armament": 496,
     "stacked_main_indirect_weapon_graph": 92,
-    "stacked_main_transitive_weapon_graph": 587,
-    "stacked_main_unreached": 107
+    "stacked_main_transitive_weapon_graph": 588,
+    "stacked_main_unreached": 106
   },
   "predicate": "positive Damage on AreaDamage, SpreadDamage, HealthPercentageDamage, or TargetDamage; excludes designed companions and friendly-fire twins",
   "reference_fields": [
@@ -219,6 +219,7 @@
       "MarineMG",
       "MedicFlare",
       "MigMissiles_rad",
+      "MigMissiles_rad_elite",
       "MissileAttackRobotGun",
       "MissileAttackRobotGun_elite",
       "MonsterTankTusk",
@@ -669,7 +670,6 @@
       "LMG_upgrade",
       "MagicOrb",
       "MagicOrb2",
-      "MigMissiles_rad_elite",
       "NaxTorpTube",
       "NaxiAntiTankCannonCorrosion",
       "NaxiHetzerDestroyerCorrosion",

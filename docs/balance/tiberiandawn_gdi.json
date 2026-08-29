@@ -2162,15 +2162,15 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2198,15 +2198,15 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2234,28 +2234,28 @@
        {
         "damage": "20000",
         "falloff": "100, 0",
-        "spread": "96",
+        "spread": "1",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
         "damage": "20000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2286,28 +2286,28 @@
        {
         "damage": "20000",
         "falloff": "100, 0",
-        "spread": "96",
+        "spread": "1",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
         "damage": "20000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3687,7 +3687,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -3697,7 +3697,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "4888",
+      "range": "5596",
       "reloaddelay": "20",
       "requires": "td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@Upgrade",
@@ -3718,7 +3718,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -3728,7 +3728,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "4888",
+      "range": "5596",
       "reloaddelay": "20",
       "requires": "td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@UpgradeGARRISONED",
