@@ -599,6 +599,130 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "4000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "250",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "8600",
+      "reloaddelay": "50",
+      "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions",
+      "slot": "Armament@PRIMARYELITERad",
+      "versus_templates": [
+       "MigMissiles_rad"
+      ],
+      "warheads": [
+       "^Warhead_Chemical_Medium",
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles_rad_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "4",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "250",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "8600",
+      "reloaddelay": "50",
+      "requires": "rank-elite && ra2_soviets_doctrine_firemunitions",
+      "slot": "Armament@PRIMARYELITEFire",
+      "versus_templates": [
+       "MigMissiles_fire"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "MigMissiles_fire_elite",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
         "damage": "4",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
@@ -641,7 +765,7 @@
       "range": "8600",
       "reloaddelay": "50",
       "requires": "rank-elite && ra2_soviets_doctrine_teslamunitions",
-      "slot": "Armament@PRIMARYELITERad",
+      "slot": "Armament@PRIMARYELITETesla",
       "versus_templates": [
        "MigMissiles_tesla"
       ],

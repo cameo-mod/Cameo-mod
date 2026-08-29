@@ -82,6 +82,74 @@ class WeaponCorrectnessFollowupTests(unittest.TestCase):
             self.assertEqual(
                 0, glow_audit.tier_path_count(self.rules, name, tier_memo), name)
 
+    def test_mig_elite_doctrine_weapons_use_distinct_armament_slots(self):
+        actor = self.rules.resolve("ra2_soviets_migbomber")
+        expected = {
+            "Armament@PRIMARYELITERad": (
+                "MigMissiles_rad_elite",
+                "rank-elite && ra2_soviets_doctrine_nuclearmunitions"),
+            "Armament@PRIMARYELITEFire": (
+                "MigMissiles_fire_elite",
+                "rank-elite && ra2_soviets_doctrine_firemunitions"),
+            "Armament@PRIMARYELITETesla": (
+                "MigMissiles_tesla_elite",
+                "rank-elite && ra2_soviets_doctrine_teslamunitions"),
+        }
+        for key, (weapon, condition) in expected.items():
+            armament = actor.child(key)
+            self.assertIsNotNone(armament, key)
+            self.assertEqual(weapon, armament.get("Weapon"), key)
+            self.assertEqual(condition, armament.get("RequiresCondition"), key)
+
+    def test_tkm_rocketeer_garrison_tracks_each_rocket_upgrade(self):
+        actor = self.rules.resolve("tkm_rocketeer")
+        expected = {
+            "Armament@GARRISONED": (
+                "tkmrockets",
+                "!tkm_upgrade_cryorocketsupgrade && "
+                "!tkm_upgrade_twinrocketsupgrade && "
+                "!tkm_upgrade_incendiaryrocketsupgrade"),
+            "Armament@GARRISONEDTITAN": (
+                "tkmcryorockets", "tkm_upgrade_cryorocketsupgrade"),
+            "Armament@GARRISONEDBEREZKA": (
+                "tkmtwinrockets", "tkm_upgrade_twinrocketsupgrade"),
+            "Armament@GARRISONEDNATO": (
+                "tkmfirerockets", "tkm_upgrade_incendiaryrocketsupgrade"),
+        }
+        for key, (weapon, condition) in expected.items():
+            armament = actor.child(key)
+            self.assertEqual("garrisoned", armament.get("Name"), key)
+            self.assertEqual(weapon, armament.get("Weapon"), key)
+            self.assertEqual(condition, armament.get("RequiresCondition"), key)
+
+    def test_repair_defuse_warhead_keeps_merged_geometry(self):
+        weapon = self.rules.resolve_weapon("^RepairWeapon")
+        defuse = weapon.child("Warhead@Defuse1")
+        self.assertEqual("DetachDelayedWeapon", defuse.value)
+        self.assertEqual("2000", defuse.get("Spread"))
+        self.assertEqual("100, 50", defuse.get("Falloff"))
+        self.assertEqual("2000", defuse.get("Range"))
+        self.assertEqual("defilerplague", defuse.get("Types"))
+        self.assertEqual("Ally", defuse.get("ValidRelationships"))
+
+    def test_reviewed_weapon_route_inheritance_labels_are_unique(self):
+        names = {
+            "japan_waveforceturret",
+            "td_gdi_advancedguardtower",
+            "tkmratflakdeployed",
+            "latinsyndicate_missiletruck",
+            "latinsyndicate_burrito",
+            "latinsyndicate_lars",
+            "latinsyndicate_mig21",
+            "^ScoutVehicleTemplate",
+            "^SupportVehicleTemplate",
+        }
+        for name in sorted(names):
+            actor = self.rules.actor(name)
+            labels = [node.key for node in actor.children
+                      if node.key == "Inherits" or node.key.startswith("Inherits@")]
+            self.assertEqual(len(labels), len(set(labels)), name)
+
 
 if __name__ == "__main__":
     unittest.main()
