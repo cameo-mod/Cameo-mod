@@ -1756,7 +1756,8 @@ TSMutShotgun:
 	Warhead@ShotgunGrenadeAlly:
 		Damage: 2000
 	Warhead@ShotgunShrapnelEnemy:
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@ShotgunShrapnelAlly:
 		Damage: 2000
 	Warhead@ShotgunTankDestroyer:
@@ -1765,6 +1766,7 @@ TSMutShotgun:
 		Damage: 4000
 	Warhead@ShotgunChaingun:
 		Damage: 4000
+	-Warhead@ShotgunGrenadeEnemy:
 
 TSMutVulcanTurret:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
