@@ -968,6 +968,7 @@ SCUDNUKEThermobaric:
 		ContrailEndColor: 33221100
 
 FLAK-23-AG:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -983,6 +984,12 @@ FLAK-23-AG:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 FLAK-23-AA:
 	Inherits: FLAK-23-AG
 	Range: 8118
@@ -991,6 +998,12 @@ FLAK-23-AA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 4000
+		PercentageScale: 9975
 
 BTRMachineGun:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat

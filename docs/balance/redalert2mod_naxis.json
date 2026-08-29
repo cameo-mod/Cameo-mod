@@ -1350,6 +1350,13 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -1371,15 +1378,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -1391,13 +1390,6 @@
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -1407,6 +1399,7 @@
       "reloaddelay": "88",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "NaxQuadCannon_AA"
       ],
       "warheads": [
@@ -4927,6 +4920,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -4948,15 +4948,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -4968,13 +4960,6 @@
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -4985,6 +4970,7 @@
       "requires": "(deployed || undeployed) && !rank-elite",
       "slot": "Armament@Deployed",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "NaxQuadCannon_AA"
       ],
       "warheads": [
@@ -4999,6 +4985,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5020,15 +5013,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -5040,13 +5025,6 @@
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -5057,6 +5035,7 @@
       "requires": "(deployed || undeployed) && rank-elite",
       "slot": "Armament@DEPLOYEDELITE",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "NaxQuadCannon_AA_elite"
       ],
       "warheads": [
@@ -5071,6 +5050,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5092,15 +5078,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -5112,13 +5090,6 @@
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -5129,6 +5100,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "NaxQuadCannon_AA"
       ],
       "warheads": [
@@ -5143,6 +5115,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5164,15 +5143,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -5184,13 +5155,6 @@
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -5201,6 +5165,7 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "NaxQuadCannon_AA_elite"
       ],
       "warheads": [

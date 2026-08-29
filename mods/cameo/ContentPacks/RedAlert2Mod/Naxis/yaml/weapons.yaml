@@ -1036,12 +1036,30 @@ NaxQuadCannonTargeting:
 	Range: 8888
 
 PortableFlak:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: NaxQuadCannon_AA
 	Range: 8888
+	-Warhead@Flak_Medium:
+	-Warhead@NaxFlakGroundWater:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 7000
+		PercentageScale: 2843
+	Warhead@NaxFlakAllyCounted:
+		Damage: 1500
 
 PortableFlak_elite:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: NaxQuadCannon_AA_elite
 	Range: 9999
+	-Warhead@Flak_Medium:
+	-Warhead@NaxFlakGroundWater:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 7000
+		PercentageScale: 2843
+	Warhead@NaxFlakAllyCounted:
+		Damage: 1500
 
 NaxFlakAG:
 	Inherits: NaxQuadCannon
@@ -1062,6 +1080,7 @@ NaxFlakAG:
 		Inaccuracy: 888
 
 NaxFlakAA:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: NaxQuadCannon_AA
 	ReloadDelay: 88
 	Range: 13200
@@ -1078,6 +1097,14 @@ NaxFlakAA:
 		Speed: 4400
 		Width: 44
 		Inaccuracy: 888
+	-Warhead@Flak_Medium:
+	-Warhead@NaxFlakGroundWater:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 7000
+		PercentageScale: 2843
+	Warhead@NaxFlakAllyCounted:
+		Damage: 1500
 
 NaxPlanegun_elite:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat

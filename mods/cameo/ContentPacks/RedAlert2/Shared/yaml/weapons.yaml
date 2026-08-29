@@ -2623,10 +2623,10 @@ RA2CRM60H:
 	-Warhead@SniperWeapon:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Spread: 1
-		Damage: 2000
-		Falloff: 100, 0
-		PercentageScale: 0
+		Damage: 6000
+		PercentageScale: 6650
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
 
 RA2FLAKAG:
 	Inherits: ^RA2FlakWeapon

@@ -66,8 +66,8 @@ class RoutedRoleCohortTests(unittest.TestCase):
             self.assertTrue(all(tag.startswith("PreservedFlat_") for tag in mains), name)
 
     def test_ratchets_match_live_reduction(self):
-        self.assertEqual(693, SPLIT_BASELINE)
-        self.assertEqual(371, BROADCAST_BASELINE)
+        self.assertEqual(679, SPLIT_BASELINE)
+        self.assertEqual(366, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":
