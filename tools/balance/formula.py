@@ -520,6 +520,29 @@ def main_spread_warheads(warheads, template_names=None) -> list:
     return [w for w in warheads if _is_main_spread(w)]
 
 
+# The small-arms families, for the `smallarms_only` pricing rule (FORMULA_V2 §3:
+# a cheap scout is priced on its rifle, not on its grenade).
+#
+# ⛔ THIS USED TO TEST `tag.startswith("smallarms")` AND SILENTLY PRICED 15 OF 24
+# SCOUTS AT ZERO DPS. The 3-way split renamed warhead tags to FAMILY names, so a
+# rifle that was `SmallArmsWarhead` became `Bullet_Light`; only 120 of 7618 damage
+# warheads still carry the legacy string. The filter therefore matched nothing for
+# every unit under the 1.5x cost0 threshold, `spread_damage_sum` returned 0, and
+# `propose_class_rebalance` priced those units at 32-63 against costs of 100-200.
+# The data was always correct — reload 50, damage 4000, right there in the ledger.
+#
+# Match on the FAMILY, not on a literal that a migration can rename out from under
+# it. `Bullet` is the post-split small-arms family; the legacy names are kept so
+# the 120 unconverted warheads still price.
+SMALLARMS_FAMILIES = frozenset({"smallarms", "bullet", "minigun", "rifle"})
+
+
+def is_smallarms_tag(tag) -> bool:
+    """Is this warhead tag a small-arms family, before or after the 3-way split?"""
+    family = (tag or "").split("_")[0].lower()
+    return any(family.startswith(f) for f in SMALLARMS_FAMILIES)
+
+
 def spread_damage_sum(warheads, smallarms_only: bool = False,
                       template_names=None) -> float:
     """Effective per-shot damage = SUM of the MAIN damage warheads
@@ -536,7 +559,7 @@ def spread_damage_sum(warheads, smallarms_only: bool = False,
     only their SmallArms warhead)."""
     total = 0.0
     for w in main_spread_warheads(warheads, template_names):
-        if smallarms_only and not (w.get("tag") or "").lower().startswith("smallarms"):
+        if smallarms_only and not is_smallarms_tag(w.get("tag")):
             continue
         try:
             total += float(w.get("damage"))

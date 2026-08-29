@@ -181,6 +181,83 @@ not repeatedly.
 
 ---
 
+## 2b. ⛔ SCOPE FREEZE — the Definition of Done (2026-08-29)
+
+The balance programme keeps growing because every finding is genuinely interesting.
+That is how it never finishes. This section is the brake.
+
+### THE ONE QUESTION
+
+Before starting anything, ask: **does this block the first production balance run?**
+If no — write it in `docs/design/FUTURE_BALANCE_IDEAS.md` and move on. Do not build
+the tool for it.
+
+⚠ The failure mode is not laziness, it is competence: a good question arrives, it
+gets a good answer, and the pipeline does not move. On 2026-08-29 fifteen commits
+landed and exactly one of them raised `class_anchors_signed_off`.
+
+### DEFINITION OF DONE — the pipeline is mechanically complete when it can
+
+1. read the live game state (yaml → resolved ruleset → raw ledger)
+2. prove the inputs are valid (audit suite green or knowingly ratcheted)
+3. compute derived metrics deterministically (proven: 65/65 byte-identical)
+4. classify units into approved classes with signed anchors
+5. generate targets from the model, not by hand
+6. produce an explainable proposal — what, why, formula, inputs, anchor, confidence
+7. apply only approved targets (`--confirm`, maintainer order)
+8. re-extract and verify yaml == ledger (`audit_balance_drift` clean)
+9. run the full audit suite
+10. generate the workbook
+11. **boot-gate**
+
+Anything past that is v2.
+
+### THE ONE NUMBER
+
+`class_anchors_signed_off`, currently **3 of 27**. If a task does not raise it or
+unblock something that does, it is not on the critical path.
+
+### DO NOT WORK ON YET
+
+Not because they are wrong — because none is required to reach the first
+production balance run:
+
+expand the armor taxonomy · 27 class armor types · redesign MEAN-100 · rewrite
+Formula V2 · autobalance superweapons · telemetry · Monte-Carlo simulation ·
+rewrite the IFV architecture · global renames · Generals balance · normalise
+promotions · map-specific balance · **the counter matrix beyond what already
+exists** (it becomes valuable AFTER the compiler produces reliable numbers, not
+before)
+
+### ⚠ TWO CORRECTIONS TO THE OBVIOUS PLAN
+
+**1. The 22 stale ledgers are NOT a blocker — they were already fixed.**
+`audit_balance_drift` reports **clean, 32 ledgers match the live rules exactly**
+(re-verified 2026-08-29). Any plan still listing "clear the 22 stale ledgers" is
+working from a stale finding; see §3.0e.
+
+**2. Signing more anchors comes SECOND, not first.** The natural plan is
+"sign anchors → generate targets → workbook". Measured, that produces noise: with
+`scout` signed, `propose_class_rebalance` reports **eff DPS = 0.0 for 15 of its 24
+members**, pricing them at 32–63 against costs of 100–200. The tool that consumes
+signed anchors cannot currently price, so more signatures buy nothing. **§3.0g is
+the first task.**
+
+### THE ROAD, in order
+
+```
+1. fix the eff-DPS reading bug            (§3.0g — blocks everything below)
+2. outlier pass on the close classes      (tank_destroyer, closecombat, mbt)
+3. sign the classes that pass
+4. targets for one pilot class, end to end
+5. workbook + dry-run proposal
+6. apply --confirm + re-extract + drift + audits + BOOT GATE
+7. expand from one class to the rest — coverage work, not design work
+```
+
+Step 4 is the psychological finish line: one class taken from raw yaml to an
+explainable proposed target. After that, scaling is coverage.
+
 ## 3. The queue, in priority order
 
 Crashes and player-visible regressions jump everything below.
@@ -354,35 +431,46 @@ python tools/balance/extract_stats.py     # or: run_pipeline.py --extract
 ⚠ Never hand-edit a ledger number to make drift go away — that inverts the pipeline
 and is exactly what rule 3 forbids. Re-extraction regenerates the ledger *from* yaml.
 
-### 3.0g — ⛔ THE PRICING TOOL READS eff-DPS AS 0 FOR MOST UNITS (found 2026-08-29)
+### 3.0g — ✅ FIXED: a stale string zeroed the pricing of 15 of 24 scouts
 
-The pipeline's last mile WORKS: with `scout` signed off,
-`propose_class_rebalance.py --class scout` produces a full 24-unit price proposal
-(`docs/balance/proposal_scout_infantry.md`). That is the first real output the
-pricing chain has produced.
+**Found and fixed 2026-08-29.** With `scout` signed off,
+`propose_class_rebalance --class scout` reported **eff DPS = 0.0 for 15 of its 24
+members**, pricing them at 32–63 against costs of 100–200. Worst |Δ| was 196.7%.
 
-**But 15 of the 24 rows report `eff DPS = 0.0`**, and those rows price at 32–63
-against costs of 100–200 — deltas of −50% to −87%. Any sign-off based on that
-table would be signing off noise.
+**Cause: `formula.spread_damage_sum(..., smallarms_only=True)` tested
+`tag.startswith("smallarms")`.** The 3-way split renamed warhead tags to FAMILY
+names, so a rifle that was `SmallArmsWarhead` became `Bullet_Light` — only **120 of
+7618** damage warheads still carry the legacy string. FORMULA_V2 §3 prices a cheap
+scout (cost ≤ 1.5 × cost0 = 150) on its small-arms warhead only, so for every unit
+under that threshold the filter matched nothing, the sum returned 0, and the DPS
+went with it.
 
-⚠ **It is NOT the W23 gap.** The obvious hypothesis — these are the unsplit legacy
-weapons — was tested and is **wrong**: **14 of the 15** zero-DPS units DO carry a
-`^Warhead_` family.
+The correlation was exact: **all 15 zero-DPS scouts cost ≤ 150; all four non-zero
+ones cost more.**
 
-⚠ **It is not missing data either.** Read straight from the ledger:
+⚠ **The data was never wrong.** `naxis_naxiriflesoldier` carries reload 50 and
+Damage 4000, plainly in the ledger, and read as 0.0. Two hypotheses were tested and
+rejected first — it was not the W23 gap (14 of the 15 DO carry a `^Warhead_`
+family) and it was not missing data.
 
-```
-naxis_naxiriflesoldier  Armament@PRIMARY  reload 50  warhead Bullet_Light 4000   -> reported 0.0
-ra2_allies_gi           Armament@PRIMARY  reload 15  warhead Bullet_Light 2000   -> reported 63.2
-```
+**Fix:** `formula.is_smallarms_tag()` matches the FAMILY (`Bullet`, plus the legacy
+names so the 120 unconverted warheads still price) instead of a literal that a
+migration can rename out from under it. Pinned by `tools/tests/test_formula_smallarms.py`.
 
-Same shape, same fields populated, one reads and one does not. **The defect is in
-`propose_class_rebalance`'s DPS reading**, not in the roster and not in the ledger.
+**Result on the scout class:**
 
-**This is the highest-value bug in the pipeline right now.** Until it is fixed, every
-class proposal is unusable, so signing more anchors buys nothing — the tool that
-consumes them cannot price. Fix this BEFORE tagging more units or signing more
-classes.
+| | before | after |
+|---|--:|--:|
+| rows reading eff DPS 0.0 | **15 of 24** | **0** |
+| worst \|Δ\| among non-anchor members | 196.7% | **66.5%** |
+
+Most members now price within ±0.1% of their actual cost.
+
+⭐ **The lesson, for the next migration.** A literal string in a filter went stale
+under a rename, silently, and the only symptom was a number that looked like a
+balance problem. Nothing failed, no audit went red, and the pipeline confidently
+produced 15 wrong prices. When a migration renames a namespace, grep for the OLD
+name in the tooling, not only in the content.
 
 ### 3.0f — ⛔ WHY 0 OF 27 CLASS ANCHORS ARE SIGNED (measured 2026-08-29)
 
