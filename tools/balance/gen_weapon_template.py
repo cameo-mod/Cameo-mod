@@ -29,6 +29,8 @@ import json
 import math
 import pathlib
 import statistics
+
+import heaviness
 import sys
 
 LADDERS = {  # lightest -> heaviest
@@ -959,6 +961,56 @@ def class_tilt(rows, level):
                    for a, v in out.items()}
     # Re-derive the products LAST, from the finished profile (§12.0b) — a derived value
     # computed before the last cell moves is not derived, it is stale.
+    peak = max(v for a, v in out.items()
+               if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
+    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
+                                  ("Airborne", ("Helicopter", "Scout"))):
+        if name in out and first in out and second in out and peak > 0:
+            out[name] = out[first] * out[second] / peak
+    return [(a, out[a]) for a, _ in rows]
+
+
+def heaviness_bell(rows, h):
+    """DESIGN §12.0i: the CONTINUOUS successor to `class_tilt`, at heaviness `h`.
+
+    `class_tilt` takes a discrete Light/Medium/Heavy/Super level and tilts toward
+    one coarse end of every ladder. This takes a continuous `h` in 0..2 and peaks
+    the profile on ONE GLOBAL armor axis, so h=0 is the lightest rung of every
+    ladder, h=1 the middle of all four at once, and h=2 the heaviest.
+
+    ⭐ The model is `tools/balance/heaviness.py`, shared with
+    `audit_heaviness_bell.py`. It is deliberately NOT reimplemented here: a binding
+    law with two implementations diverges, and this one is checked by that audit.
+
+    Same contract as `class_tilt`: takes and returns the row list in its original
+    order, preserves every ladder's rank, and re-derives the products LAST from the
+    finished profile (§12.0b) — a derived value computed before the last cell moves
+    is not derived, it is stale.
+
+    ⚠ NOT YET WIRED INTO THE EMITTER. `class_tilt` still ships. Switching over
+    regenerates every ^Warhead_ template in weapons.yaml, which is engine content
+    and needs the boot gate; see WEAPON_HEAVINESS.md §9.6 step 5.
+    """
+    vals = dict(rows)
+    live = [v for a, v in rows if a not in NON_ARMOR_ROWS]
+    if not live or max(live) <= min(live):
+        return rows          # Sonic / Magic are flat BY DESIGN; a bell would destroy that
+
+    # Only the on-axis class armors take part; the off-axis set keeps its own laws
+    # (§12.0c Shield, §12.0e platings, §12.0b the derived cells).
+    base = {a: float(v) for a, v in rows
+            if a not in NON_ARMOR_ROWS and a not in heaviness.OFF_AXIS
+            and a in heaviness.BUCKET}
+    if len(base) < 2:
+        return rows
+    mu = heaviness.mu_of(base, h)
+    if mu is None:
+        return rows
+
+    out = dict(vals)
+    out.update(heaviness.belled(base, mu))
+
+    # Re-derive the products LAST, from the finished profile (§12.0b).
     peak = max(v for a, v in out.items()
                if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
     for name, (first, second) in (("Heroic", ("Plate", "Scout")),

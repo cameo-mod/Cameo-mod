@@ -831,7 +831,7 @@ compressed ladder, not a normal armor), as are the five ALL-CAPS platings (§12.
 | 3 | Rule the armor x-axis (§9.5) | ✅ ruled 2026-08-24 — one global 13-slot scale, §9.5b |
 | 4 | Rule §9.3: does heaviness affect price? | ✅ ruled — no, price via `Damage` |
 | 4b | Rule `mu`, `LO`, `sigma` | ✅ ruled 2026-08-24 — blend, 0.667, 0.75 |
-| 5 | Implement the bell in `gen_weapon_template`, then `AreaDamageWarhead` | ▶ **next** |
+| 5 | Implement the bell in `gen_weapon_template`, then `AreaDamageWarhead` | ◐ **model implemented and measured 2026-08-29; NOT wired into the emitter** |
 | 6 | Verify no family inverts; verify the weighted mean is invariant | ✅ `audit_heaviness_bell` |
 | 7 | Collapse to one template per family; set `h` by the §3.3 rule | |
 
@@ -853,6 +853,52 @@ So the next action is step 5 — implementation — with every parameter now fix
     LO            = 0.667                      (swing 1.50x = 1/TILT_RATIO)
     sigma         = 0.75
     Versus(a, h)  = base(a) * curve(x(a), mu)  then renormalised, then RANK-RESTORED per ladder
+
+#### 9.6a Step 5, first half — the model is implemented and measured (2026-08-29)
+
+**`tools/balance/heaviness.py`** now holds the §12.0i model as ONE implementation:
+the 13-slot axis, `LO` 0.667, `SIGMA` 0.75, `centre_of_mass`, `mu_of`, `curve` and
+`belled` with the per-ladder rank restore.
+
+⭐ **It was MOVED, not rewritten.** The bell was written and proven inside
+`audit_heaviness_bell.py` first, deliberately, so this step would land against an
+existing test. Copying it into the generator would have created two
+implementations of a binding law that can silently diverge — the failure this
+project keeps finding elsewhere. The audit now imports the module, and its output
+after the move is **byte-identical** to before, which is the proof the refactor
+changed nothing.
+
+`gen_weapon_template.heaviness_bell(rows, h)` sits alongside `class_tilt` with the
+same contract: row order preserved, ladder ranks preserved, the §12.0b products
+re-derived LAST from the finished profile.
+
+⛔ **NOT wired into the emitter. `class_tilt` still ships.** Switching over
+regenerates every `^Warhead_` template in `weapons.yaml` — engine content, so it
+needs the boot gate. `verify_generator_sync` still reports **drift = 0** across 139
+templates, which is the clean baseline any switch must be measured against.
+
+**The §9.6 comparison, run tilt-to-tilt on the same base as this section demands:**
+
+| | mean \|Δ\| | worst | rows |
+|---|--:|--:|--:|
+| bell `h=0` vs shipped **Light** tilt | **3.50%** | 17.89% | 1007 |
+| bell `h=1` vs shipped **Medium** tilt | **6.45%** | 29.21% | 990 |
+| bell `h=2` vs shipped **Heavy** tilt | **3.18%** | 17.88% | 990 |
+| *control* — Light tilt vs Heavy tilt, same base | *17.50%* | | |
+
+The bell lands **3–6%** from its own level while the levels sit **17.5%** apart, so
+each `h` reproduces its discrete counterpart to within roughly a third of the
+inter-level distance. Collapsing three templates into one plus a continuous `h`
+preserves today's differentiation rather than flattening it — which is what `LO =
+1/TILT_RATIO` was chosen for.
+
+⚠ **`h=1` is the WORST fit, not the best.** This section predicts h=1 peaks at the
+middle rung of every ladder, "i.e. exactly §12.0d's Medium tilt". Measured, it is
+6.45% off — nearly double h=0 and h=2. "Inert at h=1" is therefore approximately
+true, not exactly true, and the 29.21% worst row deserves a look before the switch.
+The likely cause is the `mu` BLEND: at h=1 the family's own centre of mass pulls
+the peak away from 1.0 by half its offset, while at h=0 and h=2 the blend and the
+discrete tilt happen to agree more closely at the ladder ends.
 
 ⚠ **"Inert at h=1" is a DEPLOYMENT property and it needs proving on the right comparison.** Under
 the retired family-anchored peak it was unachievable — the bell reshaped all 48 families at h=1,
