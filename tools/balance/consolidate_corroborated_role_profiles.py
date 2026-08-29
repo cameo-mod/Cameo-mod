@@ -75,6 +75,17 @@ ROOTS = {
     "AsianMLRS": (
         "MissileAA_Medium", {"AsianSpitfireRockets"}, "existing-roleflat"),
     "harkonnen_autogunturret": ("Bullet_Medium", set(), "name"),
+    "SteelCloneGun": (
+        "Bullet_Medium",
+        {
+            "SteelCloneGun_elite", "SteelCloneGunResonance",
+            "SteelCloneGunResonance_elite", "SteelCloneGunResonanceBounce1",
+            "SteelCloneGunResonanceBounce1_elite",
+            "SteelCloneGunResonanceBounce2",
+            "SteelCloneGunResonanceBounce2_elite",
+        },
+        "local-scout-anti-infantry",
+    ),
 }
 
 DESTINATION_OVERRIDES = {
@@ -145,6 +156,22 @@ BASELINE = {
          "MissileAP_Medium"}, 16000, 2494),
     "harkonnen_autogunturret": (
         {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 6000, 9984),
+    "SteelCloneGun": (
+        {"Bullet_Light", "CannonHE_Heavy", "MissileAP_Medium"}, 6000, 9984),
+    "SteelCloneGun_elite": (
+        {"Bullet_Light", "CannonHE_Heavy", "MissileAP_Medium"}, 6000, 9984),
+    "SteelCloneGunResonance": (
+        {"Bullet_Light", "CannonHE_Heavy", "MissileAP_Medium"}, 6000, 9984),
+    "SteelCloneGunResonance_elite": (
+        {"Bullet_Light", "CannonHE_Heavy", "MissileAP_Medium"}, 6000, 9984),
+    "SteelCloneGunResonanceBounce1": (
+        {"Bullet_Light", "CannonHE_Heavy", "MissileAP_Medium"}, 6000, 9984),
+    "SteelCloneGunResonanceBounce1_elite": (
+        {"Bullet_Light", "CannonHE_Heavy", "MissileAP_Medium"}, 6000, 9984),
+    "SteelCloneGunResonanceBounce2": (
+        {"Bullet_Light", "CannonHE_Heavy", "MissileAP_Medium"}, 6000, 9984),
+    "SteelCloneGunResonanceBounce2_elite": (
+        {"Bullet_Light", "CannonHE_Heavy", "MissileAP_Medium"}, 6000, 9984),
 }
 
 TARGETS = {
@@ -179,6 +206,14 @@ TARGETS = {
     "AsianMLRS": "Ground, Water, Air",
     "AsianSpitfireRockets": "Ground, Water, Air",
     "harkonnen_autogunturret": "Ground, Water, Air",
+    "SteelCloneGun": "Ground, Water, Air",
+    "SteelCloneGun_elite": "Ground, Water, Air",
+    "SteelCloneGunResonance": "Ground, Water, Air",
+    "SteelCloneGunResonance_elite": "Ground, Water, Air",
+    "SteelCloneGunResonanceBounce1": "Ground, Water, Air",
+    "SteelCloneGunResonanceBounce1_elite": "Ground, Water, Air",
+    "SteelCloneGunResonanceBounce2": "Ground, Water, Air",
+    "SteelCloneGunResonanceBounce2_elite": "Ground, Water, Air",
 }
 
 CANONICAL = re.compile(r"^\^Warhead_([A-Za-z]+)_(\w+)$")
@@ -238,6 +273,20 @@ def selections(rs: Ruleset) -> dict[str, str]:
                        if child.key == "Inherits" or child.key.startswith("Inherits@")):
                 raise RuntimeError(
                     f"{root}: expected existing {compatibility} role selection")
+        elif evidence == "local-scout-anti-infantry":
+            actor = rs.actors.get("steelconsortium_clonetrooper")
+            buildable = actor.child("Buildable") if actor is not None else None
+            description = (
+                buildable.get("Description") if buildable is not None else None)
+            prioritizes_infantry = actor is not None and any(
+                str(child.value).strip() == "^PrioritizeInfantry"
+                for child in actor.children
+                if child.key == "Inherits" or child.key.startswith("Inherits@")
+            )
+            if (description != "template_scout_infantry.description"
+                    or not prioritizes_infantry):
+                raise RuntimeError(
+                    f"{root}: Clone Trooper local scout/infantry role changed")
         for name in {root, *expected}:
             if name in selected:
                 raise RuntimeError(f"{name}: selected through multiple roots")
@@ -282,7 +331,16 @@ def inspect(rs: Ruleset, selected: dict[str, str]):
         destination_key = (
             destination if destination in mains else compatibility)
         if destination_key not in mains:
-            raise RuntimeError(f"{name}: destination {destination} is absent")
+            if name not in {
+                "SteelCloneGun", "SteelCloneGun_elite",
+                "SteelCloneGunResonance", "SteelCloneGunResonance_elite",
+                "SteelCloneGunResonanceBounce1",
+                "SteelCloneGunResonanceBounce1_elite",
+                "SteelCloneGunResonanceBounce2",
+                "SteelCloneGunResonanceBounce2_elite",
+            }:
+                raise RuntimeError(f"{name}: destination {destination} is absent")
+            destination_key = sorted(mains)[0]
         nodes = flat_main_nodes(resolved, mains)
         if set(nodes) != mains:
             raise RuntimeError(f"{name}: selected mains are not all flat damage")

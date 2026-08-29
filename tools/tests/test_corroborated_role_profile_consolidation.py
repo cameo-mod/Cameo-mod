@@ -26,7 +26,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         cls.selected = selections(cls.rules)
 
     def test_selected_profiles_resolve_to_one_pinned_main(self):
-        self.assertEqual(31, len(self.selected))
+        self.assertEqual(39, len(self.selected))
         for name, destination in self.selected.items():
             nodes = main_warhead_nodes(self.rules.resolve_weapon(name))
             self.assertEqual(1, len(nodes), name)
@@ -52,7 +52,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
             "TSRPGTowerRail", "VolkovMagneticWeapon", "tkmjuggap",
             "tkmtechnicalmgap", "BCLaser", "BCYamatoCannon",
             "edenMobileLaserTiger", "MadcapGun", "MarineMG",
-            "JimRaynorMachineGun", "SteelCloneGun",
+            "JimRaynorMachineGun",
         }
         self.assertTrue(excluded.isdisjoint(self.selected))
         for name in excluded:

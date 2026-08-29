@@ -1,4 +1,5 @@
 SteelCloneGun:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^SteelHeavyCannon
 	Inherits@2: ^SteelMediumMissile
 	Inherits@3: ^SteelSmallArms
@@ -14,11 +15,22 @@ SteelCloneGun:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@MissileAP_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 SteelCloneGun_elite:
 	Inherits: SteelCloneGun
 	Range: 6000
 	Burst: 2
 	BurstDelays: 3
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelCloneGunResonance:
 	Inherits: SteelCloneGun
@@ -29,17 +41,29 @@ SteelCloneGunResonance:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelCloneGunResonanceBounce1:
 	Inherits: SteelCloneGunResonance
 	Range: 2500
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelCloneGunResonanceBounce2
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelCloneGunResonanceBounce2:
 	Inherits: SteelCloneGunResonance
 	Range: 1250
 	-Warhead@shrapnel:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelCloneGunResonance_elite:
 	Inherits: SteelCloneGun_elite
@@ -50,17 +74,29 @@ SteelCloneGunResonance_elite:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelCloneGunResonanceBounce1_elite:
 	Inherits: SteelCloneGunResonance_elite
 	Range: 3000
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelCloneGunResonanceBounce2_elite
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelCloneGunResonanceBounce2_elite:
 	Inherits: SteelCloneGunResonance_elite
 	Range: 2000
 	-Warhead@shrapnel:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelVulcan:
 	Inherits: ^SteelHeavyCannon
