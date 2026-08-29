@@ -422,8 +422,6 @@ SCSPIDERMINE:
 	# 	RequiresCondition: !triggered
 	Targetable:
 		RequiresCondition: !parachute && !untargetable
-	AutoTarget:
-		InitialStance: AttackAnything
 	Voiced:
 		VoiceSet: TerrorDroneVoice
 	Targetable@vehicleexplodedamage:

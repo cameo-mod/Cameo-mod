@@ -3,8 +3,6 @@ ts_gdi_constructionyard:
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@conyard: ^Conyard
-	Selectable:
-		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -507,8 +505,6 @@ ts_gdi_techcenter:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@shape: ^3x2Shape
-	Selectable:
-		Bounds: 3072, 2048
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:

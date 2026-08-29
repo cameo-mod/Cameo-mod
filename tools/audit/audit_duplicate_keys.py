@@ -47,7 +47,7 @@ SKIP_PARTS = ("maps", "bits")
 
 # Ratchets: lower them as duplicates are resolved; never raise without a note.
 D1_BASELINE = 35
-D2_BASELINE = 370
+D2_BASELINE = 329
 
 
 def duplicate_children(node: Node) -> dict[str, list[Node]]:

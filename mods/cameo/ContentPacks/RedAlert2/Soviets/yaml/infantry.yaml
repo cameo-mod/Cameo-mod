@@ -490,8 +490,6 @@ ra2_soviets_teslatrooper:
 	GrantConditionOnPrerequisite@EMPTesla:
 		Condition: emptesla
 		Prerequisites: upemptesla
-	ActorStatValues:
-		Upgrades: upemptesla, uparctesla
 	GrantExternalConditionToTransport:
 		Condition: ifv-tesla
 	ActorStatValues:
