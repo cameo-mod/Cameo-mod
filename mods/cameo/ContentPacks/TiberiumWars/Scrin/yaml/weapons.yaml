@@ -156,7 +156,7 @@ ScrinShockDiscs:
 	Inherits: ScrinHeavyBeam
 	Report: weapon-shock-disc-1.aud, weapon-shock-disc-2.aud, weapon-shock-disc-3.aud
 	-Projectile:
-	Projectile: MissileCA
+	Projectile: Missile
 		Image: scrin_fx_plasma_disc_small
 		Palette: scrin_projectiles
 		TrailImage: smokey
@@ -179,7 +179,7 @@ ScrinSeekerDiscs:
 	Inherits: ScrinLightBeamAA
 	Report: weapon-seeker-disc-1.aud, weapon-seeker-disc-2.aud, weapon-seeker-disc-3.aud
 	-Projectile:
-	Projectile: MissileCA
+	Projectile: Missile
 		Image: scrin_fx_plasma_disc_small
 		Palette: scrin_projectiles
 		TrailImage: smokey

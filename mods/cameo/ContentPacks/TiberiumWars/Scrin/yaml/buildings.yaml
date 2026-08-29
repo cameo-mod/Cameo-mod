@@ -541,6 +541,7 @@ scrin_buzzer_hive:
 	Armament:
 		Weapon: ScrinBuzzerHiveBeam
 	AttackOmni:
+		Voice:
 
 scrin_photon_cannon:
 	Inherits: ^ScrinDefense
@@ -576,6 +577,7 @@ scrin_photon_cannon:
 	Armament:
 		Weapon: ScrinPhotonCannonBeam
 	AttackTurreted:
+		Voice:
 	RenderSprites:
 		PlayerPalette: scrin_photon_cannon_player
 
@@ -613,6 +615,7 @@ scrin_plasma_missile_battery:
 	Armament:
 		Weapon: ScrinDefenseHeavyBeam
 	AttackTurreted:
+		Voice:
 	RenderSprites:
 		PlayerPalette: scrin_plasma_missile_battery_player
 
@@ -711,6 +714,7 @@ scrin_storm_column:
 	Armament:
 		Weapon: ScrinStormColumnBeam
 	AttackOmni:
+		Voice:
 
 scrin_rift_generator:
 	Inherits: ^ScrinBuilding
@@ -775,6 +779,7 @@ scrin_lightning_spike:
 	Armament:
 		Weapon: ScrinLightningSpikeBeam
 	AttackOmni:
+		Voice:
 
 scrin_tiberium_hive:
 	Inherits: ^ScrinDefense
@@ -806,6 +811,7 @@ scrin_tiberium_hive:
 	Armament:
 		Weapon: ScrinAcidBeam
 	AttackOmni:
+		Voice:
 
 scrin_warp_chasm:
 	Inherits: ^ScrinBuilding
