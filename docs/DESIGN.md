@@ -253,18 +253,36 @@ Worked example, the maintainer's own:
   `td_gdi_battletank_cannon_he_hypervelocity` and collided it with the real HV gun.
   Fourteen of the first run's 54 collisions were this one bug.
 
-* ⛔ **SHARED WEAPONS ARE NOT ACTOR-SCOPED.** **283 of 1637** live weapons (17.3%)
-  are fired by more than one actor — `DemoTruckTargeting` by 40, `Pistol` by 14
-  civilians, `DefuseKit` by 15 engineers across factions. "The actor that fires it"
-  has no answer there, so they take `shared_<namegroup>` built from their OWN old
-  name, not from their family: 19 shared weapons are Bullet-family, and
-  `shared_bullet` would rename nineteen distinct weapons to one id. This is the
-  same rule §1 already applies to sprites shared between actors.
+* ⛔ **SHARING A WEAPON IS A DEFECT, NOT A NAMING PROBLEM** (maintainer 2026-08-29).
+  *"Multiple units sharing the same weapon should no longer be the case, so it
+  should all be split so each one of them is unique ... especially since we want to
+  completely separate the different factions into content packs and also load them
+  independently."* **283 of 1637** live weapons (17.3%) have more than one firer,
+  and **85 of those are damage-dealing weapons shared ACROSS FACTIONS** —
+  `DepthCharge` spans 5 factions, `RA2IFVRepair` 5, `BigFlamer` 4. Every one is a
+  hard edge in the dependency graph that stops two ContentPacks loading
+  independently, which is the mission in `docs/MIGRATION.md`. They are split, one
+  weapon per actor.
 
-* ⛔ **`_elite` IS OVERLOADED TODAY — do not add to it.** 217 weapons end `_elite`,
-  but **124 of them are gated on an *upgrade* condition, not veterancy**. §16.3
-  reserves `_elite` for the RA2 veterancy weapon. An upgrade replacement takes the
-  upgrade's own name group (`_hypervelocity`, `_armorpiercing`), never `_elite`.
+  **The one exception is zero-damage support weapons** (21 measured), which may
+  stay shared: *"it's fine to call them `shared_defusekit` or `shared_targeting`
+  as long as each of them is unique — so if there are multiple different types of
+  targeting that are for different targets or ranges then you need to specify it
+  in the name."* So the shared name must be SPECIFIC, not merely unique:
+  `shared_targeting_air_long`, not two things both called `shared_targeting`.
+
+  ⚠ Until the split lands, `shared_<namegroup>` is the **migration-safe interim
+  identifier**, keyed on the weapon's own old name and never on its family — 19
+  shared weapons are Bullet-family and `shared_bullet` would rename nineteen
+  distinct weapons to one id. It is a waypoint, not the destination.
+
+* ⛔ **`_elite` MEANS VETERANCY. ALWAYS. Anything else is a bug** (maintainer
+  2026-08-29): *"the elite weapons must be always gated by veterancy, so gating on
+  upgrade is simply wrong and a mistake."* 217 weapons end `_elite` and **124 of
+  them are gated on an upgrade condition** — those 124 are a DEFECT to fix, not a
+  convention to preserve. §16.3 owns the veterancy meaning. An upgrade replacement
+  takes the upgrade's own name group (`_hypervelocity`, `_armorpiercing`).
+  Tracked as the `elite_suffix_upgrade_overload` doc-claim; it must reach **0**.
 
 ### ⛔ This rename is BLOCKED ON W27
 

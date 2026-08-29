@@ -705,3 +705,63 @@ claims:
                   n += 1
       print(n)
 
+  - id: cross_faction_shared_weapons
+    value: 85
+    tolerance: 0
+    what: >
+      Damage-dealing weapons fired by actors of MORE than one faction. Each is a
+      hard edge in the dependency graph that stops two ContentPacks loading
+      independently (docs/MIGRATION.md), which is why the maintainer ruled
+      2026-08-29 that weapon sharing is a defect. Must reach 0.
+    docs: [docs/DESIGN.md, docs/HANDOFF.md]
+    measure: |
+      import sys, collections
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      m = Model()
+      rs = m.rs
+      facs = {f.internal for f in m.real_factions()}
+
+      def faction_of(a):
+          parts = a.split('_')
+          for n in (2, 1):
+              cand = '_'.join(parts[:n])
+              if cand in facs:
+                  return cand
+          return None
+
+      fired = collections.defaultdict(set)
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is None:
+              continue
+          for c in node.children:
+              if c.key.split('@')[0] == 'Armament':
+                  w = c.get('Weapon')
+                  if w:
+                      fired[w.strip()].add(a)
+      n = 0
+      for w, acts in fired.items():
+          if len(acts) < 2:
+              continue
+          r = rs.resolve_weapon(w)
+          best = 0
+          if r is not None:
+              for c in r.children:
+                  if c.key.split('@')[0] != 'Warhead':
+                      continue
+                  d = c.get('Damage')
+                  if d:
+                      try:
+                          best = max(best, abs(int(str(d).strip())))
+                      except ValueError:
+                          pass
+          if best == 0:
+              continue
+          fs = {faction_of(a) for a in acts} - {None}
+          if len(fs) > 1:
+              n += 1
+      print(n)
+

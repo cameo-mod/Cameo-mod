@@ -493,6 +493,48 @@ From [`audit/SUMMARY.md`](audit/SUMMARY.md), smallest first:
    ⚠ It is a yaml edit, so it needs the boot gate; the audit is wired ADVISORY until it lands,
    then move it into the blocking loop.
 
+### 3.3-W23 — ⛔ THE COVERAGE WORK IS W23, NOT W27 (measured 2026-08-29)
+
+The green light was given for "W27, the weapon structure pass, to push §1b name
+coverage past 95%". **W27 is a different item and it will not move that number.**
+
+| | board W27 | what the coverage metric counts |
+|---|---|---|
+| what it does | move inline `Warhead@Effect*` nodes into `^Effect_*` templates | `Inherits@wh: ^Warhead_<Family>_<Level>` |
+| owner | **Devin** (`BALANCE_PROGRAM_PLAN.md` §2, W-board) | Claude (set B unlocked 2026-08-15) |
+| measured overlap | only **13.1%** of the 832 coverage-gap weapons carry an inline effect at all | — |
+
+Finishing W27 therefore changes 49.2% by roughly zero, and W27 is someone else's
+file-set (rule 6). **The item that moves coverage is W23** — *"retrofit the legacy
+templates into the `^Warhead_*` family system"*, owner Claude, sequenced after W24.
+
+⚠ The board's W27 line is also stale: it says 665 weapons / 815 nodes; the audit
+now reports 673/833 raw and **636/789** after superweapon exemption.
+
+#### The W23 plan is built: `tools/balance/propose_warhead_family.py`
+
+832 live weapons lack a `^Warhead_` inherit. The tool proposes a family for each,
+in confidence tiers, from evidence already in the tree:
+
+| tier | evidence | weapons | family already defined |
+|---|---|---|---|
+| **T1 CERTAIN** | the weapon inherits `^Compatibility_<Family>_<Level>Flat` — 63 such templates exist, zero-damage placeholders whose only content is the family name | **117** | 117 |
+| **T2 HIGH** | a legacy template name states it (`^HeavyCannon`, `^LightFlameWeapon`, `^RA2Chaingun`) | **161** | 160 |
+| **T3 MEDIUM** | inferred from `Projectile` type + damage magnitude — review each | **194** | 192 |
+| **T4 MANUAL** | no signal; a human picks | **360** | 0 |
+
+⚠ **T1+T2 alone reaches only 66.2%.** Even T1+T2+T3 lands near 78%. Clearing the
+95% gate needs ~750 conversions, so roughly **278 of the 360 T4 weapons must also
+be assigned by hand**. W23 is not a scripted sweep; budget for it accordingly.
+
+The `^Compatibility_*Flat` templates are the happy discovery — they are the
+retrofit's own breadcrumb trail, left by whoever staged this migration, and they
+make 117 conversions a direct read rather than a judgement.
+
+⚠ Conversions are engine content: `Damage` verbatim, projectile fields preserved,
+`find_empty_warhead.py = 0`, `review_resolve_diff.py` clean, **boot-gate per
+batch** (rule 5). None of it can be committed from a cloud container.
+
 ### 3.3-rename — The naming migration is SPECIFIED and SEQUENCED (2026-08-29)
 
 Maintainer asked for two renames. Both are specified; **neither is applied**, and the
@@ -524,8 +566,8 @@ Three findings the specification had to resolve:
 
 | finding | resolution |
 |---|---|
-| **283 of 1637** live weapons are fired by >1 actor (`DemoTruckTargeting` by 40, `Pistol` by 14 civilians) — "the actor that fires it" has no answer | `shared_<namegroup>` from the weapon's OWN name. Keying on family fails: 19 shared weapons are Bullet-family and would collapse onto one id. |
-| **124 of 217** `_elite` weapons are gated on an UPGRADE, not veterancy — §16.3 reserves `_elite` for the RA2 veterancy weapon | upgrade replacements take the upgrade's name group (`_hypervelocity`), never `_elite`. Tracked as `elite_suffix_upgrade_overload`, should fall to 0. |
+| **283 of 1637** live weapons are fired by >1 actor, and **85 damage-dealing ones cross FACTION boundaries** (`DepthCharge` spans 5) | **RULED a defect 2026-08-29** — split them, one weapon per actor; cross-faction sharing blocks independent ContentPack loading. 21 zero-damage support weapons may stay shared, with SPECIFIC names. `shared_<namegroup>` is the interim identifier only. |
+| **124 of 217** `_elite` weapons are gated on an UPGRADE, not veterancy | **RULED a mistake 2026-08-29** — `_elite` means veterancy, always. The 124 are a defect to fix. Tracked as `elite_suffix_upgrade_overload`; must reach 0. |
 | a negated condition (`!upgrade`) marks the BASE weapon, not the upgraded one | 14 of the first run's 54 collisions were this single bug. |
 
 **(2) Actors with illegal ids.** **281 buildable** actors are non-conforming:
