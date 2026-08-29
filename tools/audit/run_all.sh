@@ -104,8 +104,21 @@ done
 # change needing the boot gate — E2 in particular must be a PAIRED reload/damage
 # change through apply_balance, not a sweep. MOVE IT INTO THE BLOCKING LOOP once
 # the roster is inside the limits.
+#
+# `class_redundancy` is advisory because its findings are DESIGN decisions, not
+# defects a script can fix: 70 pairs are the same class, buildable at once, and
+# aimed at the same targets. Each needs a maintainer call (re-class one, gate one
+# behind an upgrade, or differentiate its targeting). It also only sees the 336
+# TAGGED units, so the count will RISE as classification proceeds — that is
+# expected, not a regression.
+#
+# `ifv_conditions` reports REAL yaml defects, not design questions: every IFV
+# default-weapon guard misses the same three conditions (ifv-archer, ifv-grenade,
+# ifv-lightsniper), so those passengers make the vehicle fire its specialist AND
+# its default weapon. Advisory only because the fix is yaml and needs the boot
+# gate. MOVE IT INTO THE BLOCKING LOOP once F1/F3/F4 read clean.
 for a in code_duplication test_coverage recent_changes error_handling security \
-         support_powers engine_constraints; do
+         support_powers engine_constraints class_redundancy ifv_conditions; do
   echo "== audit_$a (advisory)"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"

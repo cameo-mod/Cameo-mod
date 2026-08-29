@@ -298,6 +298,82 @@ the names are read from. `gen_weapon_names.py --write` **refuses** below
 archived) is SUPERSEDED and must not be applied: it renders `120mmDualHV` as
 `td_gdi_mammothtank_bullets_2`, discarding both the family and the upgrade.
 
+## 1c. Unit classes, coverage and counters (maintainer 2026-08-29) — binding
+
+### The counter system lives at TWO layers
+
+> Maintainer: *"Both, in that order."*
+
+1. **CLASS × CLASS is the design contract** — the layer that decides matchups and
+   the one that does not exist yet. Every class declares what it preys on and what
+   preys on it.
+2. **ARMOR × WEAPON must then DELIVER that contract.** Where a declared counter is
+   not visible in the `Versus` numbers, the numbers move — not the contract.
+
+⚠ **The armor layer is already balanced; do not "fix" it blind.** Measured
+2026-08-29 over 141 `^Warhead_*` templates, within each ladder (§12.0d: only
+within-ladder comparison is meaningful):
+
+| ladder | armors, softest first | spread |
+|---|---|---|
+| **VEH** | Scout 111.5, Light 108.3, Medium 105.4, Superheavy 105.1, Heavy 104.4 | **1.07×** |
+| **AIR** | Fighter 81.4, Bomber 79.5, Helicopter 77.5, Spaceship 76.6 | **1.06×** |
+| **BLD** | Wood 115.0, Steel 102.0, Concrete 97.8 | **1.18×** |
+| **INF** | None 128.6, Flak 116.6, Plate 110.8, *(Heroic 70.9)* | 1.81× → **1.16×** |
+
+The infantry ladder's 1.81× is entirely `Heroic`, which §12.0b defines as a
+DERIVED bridge (`Plate × Scout / PEAK`), not a rung. Excluding it, infantry sits at
+1.16× like everything else. **No armor is countered by most weapons and none is
+countered by few** — the maintainer's worry does not hold at this layer, so the
+work belongs at the class layer.
+
+The flip side is that VEH at 1.07× is nearly FLAT: armor choice barely changes what
+a vehicle takes. If class×class counters need armor to express them, this ladder is
+where there is room to sharpen — subject to §12.0d's rule that a tilt may never
+reorder a ladder.
+
+### Coverage: a gap is identity, not an omission
+
+> Maintainer: *"Gaps ARE faction identity."*
+
+Every faction leaves 14–26 of the 27 classes empty and that is correct — Zerg
+having no artillery is a statement about Zerg. A **required core set** must be
+covered by every playable faction; everything else is optional and each gap is a
+DELIBERATE, documented choice. Full 27-class coverage everywhere is explicitly
+rejected: it would make factions interchangeable.
+
+### Redundancy needs BOTH conditions
+
+> Maintainer: *"As long as they are not available at the same time it's fine,
+> because you can only have one of them. But if two units of the same class are
+> available in the same moment AND they also target the same things, then that is a
+> problem."*
+
+`tools/audit/audit_class_redundancy.py` reports a pair only when all three hold:
+same faction and class, **simultaneously buildable**, **overlapping ValidTargets**.
+
+Three shapes are correct design and are excused automatically:
+
+| excused | how it is detected | count |
+|---|---|--:|
+| mutually exclusive | one prerequisite token negated on one unit, positive on the other | 37 |
+| same unit, other state | differ only by a §1 structural suffix (`_hmg`, `_chrono`, `_empty`) | 18 |
+| different targeting | no shared `ValidTargets` | 12 |
+
+The maintainer's own example is the canonical excused shape:
+
+```
+td_nod_lighttank       ~td_nod_airstrip, ~!td_nod_promotion_lighttankmkii
+td_nod_lighttankmkii   ~td_nod_airstrip, ~td_nod_promotion_lighttankmkii
+```
+
+⚠ `~` marks a prerequisite HIDDEN, not negated, and may precede `!` (`~!token`).
+Strip it before testing for `!` — otherwise every hidden prerequisite reads as a
+negation, nothing is ever mutually exclusive, and the audit passes everything.
+
+**70 genuine pairs stand today**, over only the 336 tagged units. The count will
+RISE as classification proceeds; that is progress, not regression.
+
 ## 2. Content pack layout
 
 ```

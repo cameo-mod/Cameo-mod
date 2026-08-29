@@ -63,6 +63,12 @@ class ParsesTheRealShellScript(unittest.TestCase):
         # Maintainer-ruled engine limits (2026-08-29). Red on a real roster gap;
         # E2 needs a paired reload/damage change through the pipeline, not a sweep.
         "engine_constraints",
+        # Findings are design decisions (re-class, gate, or differentiate), and the
+        # count rises as classification proceeds. Never a per-commit gate.
+        "class_redundancy",
+        # Real yaml defects (double-firing IFV guards, dead armaments) whose fix
+        # needs the boot gate. Blocking once F1/F3/F4 read clean.
+        "ifv_conditions",
     }
 
     def test_the_advisory_list_is_the_scheduled_family(self):

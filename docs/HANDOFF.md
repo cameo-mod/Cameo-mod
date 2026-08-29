@@ -519,6 +519,50 @@ From [`audit/SUMMARY.md`](audit/SUMMARY.md), smallest first:
    ⚠ It is a yaml edit, so it needs the boot gate; the audit is wired ADVISORY until it lands,
    then move it into the blocking loop.
 
+### 3.3-ifv — ⛔ EVERY IFV FIRES TWICE FOR THREE PASSENGERS (found 2026-08-29)
+
+Maintainer: *"Those things need their own separate audit since they are so
+complicated and fucked up."* They were right.
+`tools/audit/audit_ifv_conditions.py`, 66 findings over 8 passenger-conditioned
+vehicles and 28 `ifv-*` conditions.
+
+**F3 is the real bug.** An IFV's default weapon fires when no specialist condition
+holds, expressed as `!ifv-a && !ifv-b && ...` enumerating every other type BY HAND.
+**Every guard on every IFV misses the same three** — `ifv-archer`, `ifv-grenade`,
+`ifv-lightsniper`. So an archer, grenadier or light sniper riding an IFV makes it
+fire its specialist weapon **and** its default weapon at once. Someone added those
+three armaments and never updated the guard lists, which is exactly what a
+hand-maintained negation list does over time.
+
+**F1: 10 armaments can never fire** — gated on a condition no actor grants:
+`ifv-archer`, `ifv-fremen`, `ifv-greelaser`, `ifv-litlaser`, `ifv-medlaser`,
+`ifv-misslaser`, `ifv-plasma`, `ifv-sonic`, `ifv-thrax`, `ifv-deso`. Note
+`ifv-archer` appears in BOTH F1 and F3: nothing grants it, and no guard negates it.
+
+**F2 is clean** — every granted condition is consumed somewhere.
+
+⚠ Do not "fix" this by trimming the guard lists. The correct shape is that every
+guard enumerates every condition its own vehicle gates on, and adding a new
+`ifv-` type means touching all of them. If that is unacceptable maintenance, the
+mechanism needs replacing — but that is a design decision, not a cleanup.
+
+⚠ The conditions are hyphenated (`ifv-mg`) against DESIGN §9's underscore-only
+rule. They are ours, not the engine's, so they are a rename candidate — but the
+rename touches every guard list, so it is not a drive-by.
+
+Advisory in `run_all.sh` because the fix is yaml and needs the boot gate.
+
+### 3.3-redundancy — 70 same-class pairs a player can build at once
+
+`tools/audit/audit_class_redundancy.py` implements the maintainer's 2026-08-29
+rule: a pair is redundant only when it is the same class, **simultaneously
+buildable**, AND aimed at the same targets. 67 pairs are excused automatically —
+37 mutually exclusive on a prerequisite token, 18 the same unit in another
+structural state, 12 with no shared `ValidTargets`.
+
+⚠ The count sees only the **336 tagged** units and will RISE as classification
+proceeds. That is progress, not regression.
+
 ### 3.3-W23 — ⛔ THE COVERAGE WORK IS W23, NOT W27 (measured 2026-08-29)
 
 The green light was given for "W27, the weapon structure pass, to push §1b name
