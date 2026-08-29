@@ -1,0 +1,57 @@
+"""Regression checks for split ground/air weapon target routing."""
+
+from __future__ import annotations
+
+import pathlib
+import sys
+import unittest
+
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path[:0] = [str(ROOT / "tools/audit")]
+
+from audit_three_way_split import main_warheads
+from audit_warhead_split import ROUTING_REVEALED_BROADCASTS, classify_warheads
+from miniyaml import Ruleset
+
+
+class AaWeaponRoutingTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.rules = Ruleset(ROOT)
+
+    def assert_main_warheads_target(self, weapon_name: str, targets: str,
+                                    expected_mains: set[str]):
+        weapon = self.rules.resolve_weapon(weapon_name)
+        self.assertIsNotNone(weapon, weapon_name)
+        self.assertEqual(targets, weapon.child("ValidTargets").value, weapon_name)
+        mains = set(main_warheads(weapon))
+        self.assertEqual(expected_mains, mains, weapon_name)
+        for key in mains:
+            warhead = weapon.child(f"Warhead@{key}")
+            self.assertIsNotNone(warhead, f"{weapon_name}/{key}")
+            self.assertEqual("2000", warhead.child("Damage").value,
+                             f"{weapon_name}/{key}")
+            self.assertEqual(targets, warhead.child("ValidTargets").value,
+                             f"{weapon_name}/{key}")
+
+    def test_flak_23_ground_and_air_routes_match_their_armaments(self):
+        mains = {"Bullet_Medium", "Flak_Medium"}
+        self.assert_main_warheads_target("FLAK-23-AG", "Ground, Water", mains)
+        self.assert_main_warheads_target("FLAK-23-AA", "Air", mains)
+
+    def test_manifold_ground_and_air_routes_match_their_armaments(self):
+        mains = {"Concussion_Light", "CannonHE_Heavy", "Bullet_Medium"}
+        self.assert_main_warheads_target("ManifoldMG", "Ground, Water", mains)
+        self.assert_main_warheads_target("ManifoldMG_AA", "Air", mains)
+
+    def test_routing_revealed_audit_exceptions_are_exact(self):
+        self.assertEqual({"FLAK-23-AA", "ManifoldMG_AA"},
+                         set(ROUTING_REVEALED_BROADCASTS))
+        for weapon_name, expected in ROUTING_REVEALED_BROADCASTS.items():
+            mains, _friendly_fire, _extra = classify_warheads(
+                self.rules.resolve_weapon(weapon_name))
+            self.assertEqual(expected, tuple(sorted(mains)), weapon_name)
+
+
+if __name__ == "__main__":
+    unittest.main()
