@@ -25,6 +25,9 @@ RESOLVED_SNIPERS = (
     "SpecterSniper", "SpecterSniperLockdown",
     "VonSniper", "VonSniperAP", "VonSniperLockdown",
     "GDISniperRifle", "CommandoSniper", "DragunovSniper",
+    "LightSniper", "CryoLightSniper", "RA2AWP",
+    "NaxiSniper", "NaxiSniper_elite", "tkmawp", "VanSniper",
+    "TSSniper", "td_gdi_commando_sniper", "td_gdi_commando_sniper_elite",
 )
 SPATIAL_DAMAGE_TYPES = {
     "AreaDamage", "AreaDamagePercentage", "OpenToppedDamage", "SpreadDamage",

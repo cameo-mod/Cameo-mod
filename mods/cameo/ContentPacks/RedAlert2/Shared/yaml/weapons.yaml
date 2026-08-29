@@ -2719,10 +2719,16 @@ RA2AWP:
 	Report: isniatta.wav
 	Warhead@Sniper_Light:
 		Damage: 44000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 22
+		Spread: 1
+		Falloff: 100, 0
 
 RA2GattlingMG1:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat

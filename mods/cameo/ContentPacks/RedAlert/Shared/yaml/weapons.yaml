@@ -336,10 +336,16 @@ LightSniper:
 	Range: 9153
 	Warhead@Sniper_Light:
 		Damage: 30000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 30000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 15
+		Spread: 1
+		Falloff: 100, 0
 
 ReimuYinYangOrb:
 	# Shrine super-orb projectile. Pure Magic (2026-08-10). Was 32k Tesla + 32k Magic = 64k total.
