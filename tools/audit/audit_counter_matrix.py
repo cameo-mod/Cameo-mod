@@ -125,6 +125,49 @@ def class_families(rs, actors):
     return counter
 
 
+def main_versus(rs, weapon):
+    """Versus of the weapon's MAIN damage warhead, or None.
+
+    ⚠ NOT "the first warhead carrying a Versus". A weapon's percentage twin and
+    its chip warheads also carry full profiles, so taking the first one can read
+    a 5-damage secondary as the weapon's identity. Pick by Damage.
+    """
+    node = rs.resolve_weapon(weapon)
+    if node is None:
+        return None
+    best, best_damage = None, -1
+    for child in node.children:
+        if child.key.split("@")[0] != "Warhead":
+            continue
+        versus = we.versus_of(child)
+        if not versus or len(versus) < 10:
+            continue
+        raw = child.get("Damage")
+        try:
+            damage = abs(int(str(raw).strip())) if raw else 0
+        except ValueError:
+            damage = 0
+        if damage > best_damage:
+            best, best_damage = versus, damage
+    return best
+
+
+def class_weapons(rs, actors):
+    """Every weapon the class's members actually fire, with its firer."""
+    out = []
+    for actor in actors:
+        node = rs.resolve(actor)
+        if node is None:
+            continue
+        for child in node.children:
+            if child.key.split("@")[0] != "Armament":
+                continue
+            weapon = (child.get("Weapon") or "").strip()
+            if weapon:
+                out.append((actor, weapon))
+    return out
+
+
 def family_profiles(rs):
     """{family: {armor: mean Versus}} over every ^Warhead_ template."""
     rows = collections.defaultdict(lambda: collections.defaultdict(list))
@@ -260,20 +303,35 @@ def main():
         ladder = spec.get("monotonic_by_armor")
         if not ladder or (args.cls and cls != args.cls):
             continue
-        fams = fams_of.get(cls) or collections.Counter()
-        print(f"**`{cls}`** over {' < '.join(ladder)}:\n")
-        for family, _n in fams.most_common(4):
-            prof = profiles.get(family)
-            if not prof:
+        actors = by_class.get(cls) or []
+        print(f"**`{cls}`** over {' < '.join(ladder)} — measured on the "
+              f"WEAPONS ITS MEMBERS CARRY, not on family templates:\n")
+        # ⚠ Measuring families here was wrong and hid the truth. A weapon can be
+        # correctly shaped WITHOUT belonging to a canonical family: RA2sabot
+        # ascends 119 -> 139 while carrying no `^Warhead_` inherit at all, so a
+        # family-based check scored it as contributing nothing and reported the
+        # whole class as inverted. Measure what the units actually fire.
+        good = bad = unknown = 0
+        for actor, weapon in sorted(set(class_weapons(rs, actors))):
+            versus = main_versus(rs, weapon)
+            if not versus:
+                unknown += 1
                 continue
-            vals = [prof.get(a) for a in ladder]
+            vals = [versus.get(a) for a in ladder]
             if any(v is None for v in vals):
+                unknown += 1
                 continue
+            vals = [float(v) for v in vals]
             ok = all(a < b for a, b in zip(vals, vals[1:]))
-            expected = family in (spec.get("expects_family") or [])
-            print(f"  {family:14} " + " -> ".join(f"{v:.0f}" for v in vals)
-                  + f"   {'ascending ✅' if ok else 'NOT monotonic ❌'}"
-                  + ("" if expected else "   (not an expected family)"))
+            good += ok
+            bad += not ok
+            print(f"  {weapon:32} " + " -> ".join(f"{v:6.0f}" for v in vals)
+                  + f"   {'ascending ✅' if ok else 'INVERTED ❌'}   ({actor})")
+        total = good + bad
+        if total:
+            print(f"\n  {good} of {total} weapons ascend"
+                  + (f"; {unknown} carry no readable profile" if unknown else "")
+                  + ".")
         print()
 
     if misassigned:

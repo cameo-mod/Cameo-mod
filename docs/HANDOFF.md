@@ -579,43 +579,60 @@ is the maintainer's call per `fit_class.py` step 1.
 classes, 3 are exceptions, 1 unresolvable from weapons. A faction pass is not a
 sweep either.
 
-### 3.3-counters — ⛔ THE TANK DESTROYER COUNTER IS INVERTED (found 2026-08-29)
+### 3.3-counters — the tank-destroyer counter, measured properly (2026-08-29)
 
 `docs/balance/counter_matrix.yaml` states the intended class-vs-class
-relationships; `tools/audit/audit_counter_matrix.py` measures what the tree does.
-The first run found the counter running BACKWARDS on the class the maintainer
-cared most about.
+relationships; `tools/audit/audit_counter_matrix.py` measures the tree.
 
-**`tank_destroyer`'s dominant warhead family is `CannonHE`, and CannonHE gets
-WEAKER against heavier armour:**
+⚠ **An earlier version of this section claimed "the tank destroyer counter is
+inverted" as a property of the CLASS, on the grounds that TDs use `CannonHE`
+rather than `CannonAP`. The maintainer rejected it — correctly — and the recheck
+found TWO bugs in the audit, not in the roster.**
 
-| family | Light | Medium | Heavy | Superheavy | |
-|---|--:|--:|--:|--:|---|
-| `CannonHE` *(what TDs actually use)* | 133 | 119 | 106 | **90** | ❌ descending |
-| `Concussion` *(second most used)* | 122 | 109 | 101 | **87** | ❌ descending |
-| `CannonAP` *(what the role needs)* | 114 | 126 | 134 | **154** | ✅ ascending |
+**Bug 1: C3 measured family TEMPLATES, not the weapons the units carry.** A weapon
+can be correctly shaped without belonging to a canonical family. `RA2sabot`
+ascends **119 → 123 → 127 → 139** across Light/Medium/Heavy/Superheavy while
+carrying no `^Warhead_` inherit at all, so the family-based check scored the RA2
+Allies Tank Destroyer — the one that is built right — as contributing nothing.
 
-So a Tank Destroyer today does **least** damage to the heaviest tanks — the exact
-inverse of the maintainer's law. **The fix is not a number.** `CannonAP` already
-exists and already ascends correctly; the class is simply holding the wrong
-weapon. That is a §1b family-assignment change.
+**Bug 2: the "main" warhead was picked as the first one carrying a `Versus`.** A
+weapon's percentage twin and chip warheads carry full profiles too, so a
+5-damage secondary was read as the weapon's identity. `120mm_td` looked like it
+ascended 14 → 20; its actual main warhead runs 129 → 90. Now picked by `Damage`.
 
-Four more classes hold a family their role does not call for:
+**The corrected measurement — 9 weapons across the 5 tagged tank destroyers:**
 
-| class | wants | actually uses |
+| weapon | Light → Superheavy | |
 |---|---|---|
-| `high_tech_tank` | CannonAP, Railgun, Laser | **CannonHE, Flame, Chemical** — none expected |
-| `anti_air_vehicle` | Flak, MissileAA | Bullet, Flak, CannonHE |
-| `scout_vehicle` | Bullet | MissileHE, Bullet, CannonHE |
-| `heavy_sniper` | Sniper, CannonAP | Flak, MissileAP, CannonAP |
+| `RA2sabot`, `RA2sabot_elite` | 119 → 123 → 127 → **139** | ✅ ascending |
+| `NaxiJadgDestroyer` (+`_elite`) | 120 → 114 → 107 → **106** | ❌ inverted |
+| `NaxiHetzerDestroyer` (+`_elite`) | 129 → 128 → 111 → **90** | ❌ inverted |
+| `120mm_td` | 129 → 128 → 111 → **90** | ❌ inverted |
+| `AlliedTankDestroyerCannon` (+`Cryo`) | 129 → 128 → 111 → **90** | ❌ inverted |
 
-⚠ **Coverage is thin: 336 of 1871 units are class-tagged**, and `grenadier` and
-`pure_sniper` have no members at all, so their rows cannot be measured. Every row
-prints its sample size; a row backed by two units is not evidence.
+**2 of 9 ascend.** So the class is not uniformly wrong: **RA2 Allies is built
+correctly and shows the target shape**, and the maintainer's insistence that a
+tank destroyer uses AP is right — `RA2sabot` is a sabot round and behaves like
+one. Four of the five faction implementations invert.
 
-⚠ **Advisory permanently.** A mismatch can mean wrong implementation OR wrong
-intent, and only a human decides which. The audit names the gap; it never proposes
-a multiplier.
+**Traced: the shared inverted profile is `^Warhead_CannonHE_Medium`.** That exact
+`129 → 128 → 111 → 90` is carried by **133 weapons** — `120mm`, `70mm`,
+`GDIPredatorTankCannon`, `LightTank2Cannon` and the rest of the general-purpose
+tank guns. It is correctly descending: HE is an anti-LIGHT profile.
+
+So the three faction tank destroyers are not mis-tuned. **They were never given a
+dedicated anti-tank weapon** — they carry the standard medium tank cannon and
+therefore behave as ordinary tanks. That is precisely the maintainer's point: a
+tank destroyer uses AP. `RA2sabot` is the one implementation that does, and it is
+the model the other three should follow. The fix is giving them an AP weapon, not
+editing `CannonHE` — which 130 other weapons legitimately depend on.
+
+⚠ Sample is 5 units. That is below this audit's own stated evidence bar, and the
+conclusion should be re-checked once `tank_destroyer` has more members.
+
+Four classes still hold a family their role does not call for, headed by
+`high_tech_tank` (uses CannonHE/Flame/Chemical; role wants CannonAP/Railgun/Laser).
+Those are C1 findings and are unaffected by the two bugs above.
 
 ### 3.3-ifv — ⛔ EVERY IFV FIRES TWICE FOR THREE PASSENGERS (found 2026-08-29)
 
