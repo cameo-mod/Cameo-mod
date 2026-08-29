@@ -1276,27 +1276,44 @@ exactly as they keep `Speed` there. Everything that looked for `Mobile.TurnSpeed
 carry an `Aircraft` trait and 318 define both `Speed` and `TurnSpeed`.** `extract_stats` now records
 it as `turn_speed_air`.
 
-⭐ **The law is CONFIRMED by the roster, not assumed** — `audit_turn_rate.py` measures
-`TurnSpeed ÷ (Speed/5)` per cohort and the ground units split exactly as written:
+✅ **ALREADY ENFORCED, AND THE ROSTER ALREADY COMPLIES.** `tools/audit/audit_stat_formulas.py`
+checks the whole law — **F8** vehicles `Speed/5`, **F9** `Turreted.TurnSpeed == Mobile.TurnSpeed`,
+**F10** turretless `2 × Speed/5`, **F17** fighters/bombers `Speed/15` (frontal 2×), **F19**
+helicopters/spaceships `Speed/5` — and `tools/balance/gen_derived_stats.py` FIXES violations by
+parsing that audit's own output, so the checker and the fixer cannot disagree. **All five read 0
+findings.** Do not write a second checker: one added on 2026-08-30 scoped by "has a Mobile or
+Aircraft trait" instead of unit-type-plus-template and reported 340 violations that do not exist.
 
-| cohort | n | modal ratio | share | law |
-|---|--:|--:|--:|---|
-| ground **turreted** | 261 | **1.0** | 87% | `Speed/5` |
-| ground **turretless** | 335 | **2.0** | 64% | `2 × Speed/5` |
-| **helicopter** | 66 | **1.0** | **95%** | `Speed/5` |
-| **spaceship** | 12 | **1.0** | 92% | `Speed/5` |
-| **epic air** | 10 | **1.0** | **100%** | `Speed/5` |
-| **fighter** | 23 | **0.333** | 35% | `Speed/15` |
-| **bomber** | 36 | **0.333** | 28% | `Speed/15` |
+**`TurnSpeed` depends on the TURRET** (`formula.turn_speed_for`) — turreted `Speed/5`; no turret or
+a fixed forward-facing weapon `2 × Speed/5`; helicopters and spaceships `Speed/5`; infantry instant
+except CABAL cyborgs, which carry forward-facing weapons and take the vehicle fixed-weapon rule.
+⭐ **This is exactly why the Speed grid is 5 either way**: `2S/5` is an integer when `5 | 2S`, and
+`gcd(2,5) = 1`, so that reduces to `5 | S` — the same condition the turreted branch imposes. The
+turret changes the VALUE of `TurnSpeed`, never the grid `Speed` sits on.
+
+⚠ **AIRCRAFT KEEP THEIR TURN RATE IN THE `Aircraft` TRAIT, NOT `Mobile`** (maintainer 2026-08-29) —
+exactly as they keep `Speed` there. Everything that looked for `Mobile.TurnSpeed` therefore saw
+**zero** of the 168 aircraft in the ledger and concluded they had none. They have one: **323 actors
+carry an `Aircraft` trait and 318 define both `Speed` and `TurnSpeed`.** `extract_stats` now records
+it as `turn_speed_air`.
+
+✅ **ALREADY ENFORCED, AND THE ROSTER ALREADY COMPLIES.** `tools/audit/audit_stat_formulas.py`
+checks the whole law — **F8** vehicles `Speed/5`, **F9** `Turreted.TurnSpeed == Mobile.TurnSpeed`,
+**F10** turretless `2 × Speed/5`, **F17** fighters/bombers `Speed/15` (frontal 2×), **F19**
+helicopters/spaceships `Speed/5` — and `tools/balance/gen_derived_stats.py` FIXES violations by
+parsing that audit's own output, so the checker and the fixer can never disagree.
+**All five read 0 findings.**
+
+⛔ **DO NOT WRITE A SECOND CHECKER.** One was added on 2026-08-30 and removed the same day. It was
+not merely redundant, it was WRONG: it scoped by "has a `Mobile` or `Aircraft` trait" instead of by
+unit type **plus template inheritance**, so it applied the GROUND law to aircraft belonging to no
+air template and reported **340 violations against a roster that has none**. The real audit scopes
+`ut == "air"` AND `inherits_template(FighterTemplate|BomberTemplate|…)`.
 
 ⚠ **`Speed/15` does NOT make the Speed grid 15.** The grid is 5 and stays 5: it exists because
 `S/5` and `2S/5` must be integral, and `gcd(2,5) = 1` makes both reduce to `5 | S`. A fighter at
 Speed 250 derives `TurnSpeed` 16.67 — that is a question about how `TurnSpeed` is represented, never
 a reason to move a grid to suit a derived equation.
-
-⚠ The roster PREDATES the law: **340 of 871** mobile actors disagree, **63** carry a `Speed` off the
-5 grid, and **123 aircraft inherit no air template at all**, so they can be held to neither air law
-until they are classified. `audit_turn_rate` is REPORT-ONLY; it is the work list, not a gate.
 
 ⚠ **The steps live in ONE table with citations — `formula.STAT_GRIDS` — and anything that
 quantises reads them from there.** They used to be literals in whichever function needed them and
@@ -1675,7 +1692,8 @@ steps so the house formulas stay integral:
   `^SpaceshipTemplate`, `^EpicAirUnitTemplate`), never by name and never by
   `CanHover`/`VTOL` — measured, the trait flags put helicopters at 62%
   compliance with their own law and the template puts them at **95%**.
-  Implemented in `formula.turn_speed_for`, checked by `audit_turn_rate.py`.
+  Enforced by `audit_stat_formulas.py` F8/F9/F10/F17/F19 (all 0 findings) and fixed
+  by `gen_derived_stats.py`. There is no second implementation and there must not be.
 - ReloadDelay: any integer.
 - **Beautiful ranges are kept**: if Range is exactly 6.000 or 7.500,
   adjust the other stats, not the range.

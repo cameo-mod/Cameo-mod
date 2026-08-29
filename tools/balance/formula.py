@@ -686,62 +686,24 @@ def hp_platform(section=None, class_anchor=None):
     return "vehicle" if (section or "").lower() in VEHICLE_SECTIONS else "infantry"
 
 
-# Aircraft templates -> airframe, because DESIGN.md classifies them BY TEMPLATE
-# ("Fighters & bombers (by template)"), not by a trait flag. Measured, the template
-# is also the far cleaner classifier: `CanHover`/`VTOL` puts helicopters at 62% on
-# their law, the template puts them at 95%.
-AIR_TEMPLATES = {
-    "^FighterTemplate": "fighter",
-    "^BomberTemplate": "bomber",
-    "^HelicopterTemplate": "helicopter",
-    "^UnarmedTransportHelicopterTemplate": "helicopter",
-    "^SpaceshipTemplate": "spaceship",
-    "^EpicAirUnitTemplate": "epic_air",
-}
-
-# Airframes that turn like vehicles. Fighters and bombers do NOT.
-PIVOTING_AIRFRAMES = frozenset({"helicopter", "spaceship", "epic_air"})
-
-
-def turn_speed_for(speed, turreted=True, airframe=None):
-    """`TurnSpeed` the law prescribes for this unit (DESIGN.md, FORMULA_V2 §3).
-
-    ⚠ **IT DEPENDS ON THE TURRET, AND IN THE AIR ON THE AIRFRAME.** DESIGN.md
-    states the law in TWO separate tables, and reading only one of them is a trap
-    I fell into: the stat-law list says "helicopters and spaceships both use
-    Speed/5" and stops there, while the derived-stat table 1100 lines earlier
-    carries the other half — and the parenthesis that doubles it.
-
-        turreted vehicle                  TurnSpeed = Speed / 5
-        turretless / fixed forward weapon TurnSpeed = 2 x Speed / 5
-        helicopter, spaceship, epic air   TurnSpeed = Speed / 5   (like vehicles)
-        FIGHTER or BOMBER                 TurnSpeed = Speed / 15
-        fighter/bomber, frontal weapon    TurnSpeed = 2 x Speed / 15
-        infantry                          instant — EXCEPT CABAL cyborgs, which
-                                          carry forward-facing weapons and take
-                                          the vehicle fixed-weapon rule
-
-    ⭐ **MEASURED, not assumed** (`audit_turn_rate.py` prints the cohort table):
-
-        helicopter    66   95% on Speed/5        spaceship  12   92% on Speed/5
-        epic_air      10  100% on Speed/5        fighter    23   modal Speed/15
-        ground turret 261  87% on Speed/5        bomber     36   modal Speed/15
-        ground frontal 335 64% on 2 x Speed/5
-
-    ⚠ **`Speed/15` does NOT make the Speed grid 15.** The grid is 5 and stays 5:
-    it exists because `S/5` and `2S/5` must be integral, and `gcd(2,5)=1` makes
-    both reduce to `5 | S`. A fighter at Speed 250 gets TurnSpeed 16.67, which is
-    a question about how TurnSpeed is represented, NOT a reason to re-grid Speed.
-    Never move a grid to make a derived equation convenient — solve the derived
-    value and audit it.
-    """
-    if airframe in PIVOTING_AIRFRAMES:
-        return speed / 5
-    if airframe in ("fighter", "bomber"):
-        return (speed / 15) if turreted else (2 * speed / 15)
-    if turreted:
-        return speed / 5
-    return 2 * speed / 5
+# ⚠ THE TURN-RATE LAW DOES NOT LIVE HERE, AND MUST NOT BE RE-ADDED.
+#
+# `TurnSpeed` is enforced by `tools/audit/audit_stat_formulas.py` (F8 vehicles, F9
+# turreted, F10 turretless, F17 fighters/bombers = Speed/15 with frontal 2x, F19
+# helicopters/spaceships = Speed/5) and FIXED by `tools/balance/gen_derived_stats.py`,
+# which parses that audit's own output so the checker and the fixer can never
+# disagree. All five read **0 findings**: the roster already complies.
+#
+# A second copy was added here on 2026-08-30 and removed the same day. It was not
+# just redundant, it was WRONG: it scoped by "has a Mobile or Aircraft trait"
+# instead of by unit type plus template inheritance, so it applied the GROUND law
+# to aircraft belonging to no air template and reported 340 violations against a
+# roster with none. The real audit scopes `ut == "air"` AND
+# `inherits_template(FighterTemplate|BomberTemplate|...)`.
+#
+# The lesson, for the third time in one session: GREP FOR THE MECHANISM, NOT JUST
+# THE PHRASE. "TurnSpeed (aircraft)" found one sentence of a two-part law;
+# "fighter" in tools/ would have found the whole thing already implemented.
 
 
 def stat_step(stat, platform="infantry"):

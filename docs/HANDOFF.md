@@ -631,16 +631,24 @@ if the unit has a turret or not."* Encoded as `formula.turn_speed_for`:
 turret changes the VALUE of `TurnSpeed`, never the grid `Speed` sits on. A reading that gave
 turretless units a different grid would be wrong, and the test pins both branches.
 
-✅ **ENFORCEABLE NOW — `tools/audit/audit_turn_rate.py`,** and getting there corrected something I
-had written.
+✅ **ALREADY ENFORCED — and I wrote a duplicate checker that was WRONG. Removed the same day.**
 
-⛔ **AIRCRAFT KEEP THEIR TURN RATE IN THE `Aircraft` TRAIT, NOT `Mobile`** (maintainer). I had
-recorded "not one of the 168 aircraft defines a turn rate". That was literally true of
-`Mobile.TurnSpeed` and **completely misleading**: `extract_stats` read only that trait, exactly as
-it reads `Aircraft.Speed` separately as `speed_air`. Aircraft have turn rates — **323 actors carry
-an `Aircraft` trait and 318 define both Speed and TurnSpeed.** It was an extractor blind spot, not
-missing data, and it is what made the Speed-grid probe miss every aircraft.
-`extract_stats` now records `turn_speed_air`; the converter reads either trait.
+⛔ **`tools/audit/audit_stat_formulas.py` has enforced this law all along**: F8 vehicles `Speed/5`,
+F9 `Turreted.TurnSpeed == Mobile.TurnSpeed`, F10 turretless `2 × Speed/5`, **F17 fighters/bombers
+`Speed/15` (frontal 2×)**, **F19 helicopters/spaceships `Speed/5`** — scoped by unit type AND
+template inheritance. `tools/balance/gen_derived_stats.py` FIXES violations by parsing that audit's
+own output, so the checker and the fixer can never disagree. **All five read 0 findings: the roster
+already complies.**
+
+My `audit_turn_rate.py` scoped by "has a `Mobile` or `Aircraft` trait" and then applied the GROUND
+law to aircraft belonging to no air template. It reported **340 violations against a roster that has
+none**, and those false numbers reached DESIGN.md and this file before the real audit was run.
+Deleted, unregistered, and the numbers struck. `formula.turn_speed_for` went with it — an unused
+second copy of a law is the same defect as a dead knob.
+
+⭐ **The correction I still stand behind:** aircraft keep their turn rate in the `Aircraft` trait,
+not `Mobile`, and `extract_stats` was blind to it. `turn_speed_air` is now extracted and is a real
+improvement. Everything else in this entry was me rebuilding what existed.
 
 ⭐ **And the law is CONFIRMED by the roster rather than assumed.** The audit measures
 `TurnSpeed ÷ (Speed/5)` per cohort, and the ground units split exactly as DESIGN.md says:
@@ -655,70 +663,47 @@ missing data, and it is what made the Speed-grid probe miss every aircraft.
 That is the strongest evidence available that the branches are the right way round — and it is why
 the audit prints the table above its findings.
 
-⚠ **The roster predates the law.** T1: **325 of 871** mobile actors disagree. T2: **63** carry a
-`Speed` off the 5 grid, so no integer `TurnSpeed` can satisfy either branch. `.Husk` wreckage is
-excluded — it drifts to the ground and nobody balances it. REPORT-ONLY, registered in `run_all.sh`
-as a pending-fix advisory with its ratchet promise; blocking once a boot-gated pass lands.
+✅ **Nothing to do here.** F8/F9/F10/F17/F19 all read 0 — the roster is already inside the law.
 
-### 3.0m — ✅ RULED: scout damage is unique per member; aircraft turn by AIRFRAME
+### 3.0n — ⛔ THREE CLASSES HAVE THEIR OWN FORMULA. NONE OF THEM CAN RUN.
 
-**Two maintainer rulings, 2026-08-30.**
+**Maintainer 2026-08-30:** *"Fighters and bombers have their own balance formula. Only helicopters
+and spaceships use the same formula as ground units. Fighters have different parameters and bombers
+don't have the new formula yet so it's still WIP. Defenses also have their own formula, right? It's
+all documented."*
 
-**1. Uniqueness stays on per-shot DAMAGE — the law as written.** *"Give each of the scouts their
-own unique damage numbers."* So `--uniqueness dps` stays a MEASUREMENT and is not promoted to the
-default; `scout` keeps worst |Δ| **22.8** rather than taking the 0.7 shortcut, and that is the
-deliberate trade. §3.0i is answered and closed.
+**All correct, and it is documented** — `BALANCE_PIPELINE.md` §5, which names the Tiger-anchored
+global formula's failure at the low end and the conventions it forced: **defenses-speed-100** and
+**bombers-reload-250**. Measured status of each:
 
-⛔ **Acting on it exposed a real defect: a row that cannot MOVE was not blocking its slot.**
-Protected and soft rows were filtered out of the collision set entirely, so a movable member could
-be handed the damage the ANCHOR already had. `naxis_naxiriflerecruit` and `naxis_naxiriflesoldier`
-both sat on Damage **4000** — the only collision left in the class — precisely because the second is
-the anchor. *Not moving a row and not seeing it are different things.* Fixed in both the DP and the
-greedy fallback; `scout` is now **24 of 24 distinct**, worst |Δ| unchanged at 22.8.
+| class | the law | implemented? | wired? | anchor? |
+|---|---|---|---|---|
+| **defense** | speed-LESS 3-input form — `(HP, Range, DPS)`, no speed term; footprint + power draw are the natural mobility substitutes; keeps the charge-delay −0.25 as a K modifier | ✅ `formula.class_baseline_price_3` / `_estimators_3` / `solve_class_baseline_range_3` | ⛔ **ZERO callers** | ⛔ none |
+| **fighter** | a SEPARATE formula with its own parameters; §5 says "port the current separate fighter formula into the registry unchanged, then re-express on raw stats" | ⛔ not in `formula.py` — it is not in the pipeline at all | ⛔ | ⛔ none |
+| **bomber** | **WIP.** §5: "replace the reload=250 convention with real `ReloadDelay` from raw stats" | ⛔ | ⛔ | ⛔ none |
+| helicopter · spaceship | the SAME formula as ground units — the 4-input v2 form | ✅ | ✅ | ⛔ none (no air class exists) |
 
-⚠ **Remaining blocker for the yaml pass: 5 groups SHARE a weapon file,** so a unique Damage needs
-the weapon dedicated first — `ixian_lightinfantry`+`ordos_lightinfantry`;
-`naxis_naxiriflerecruit`+`naxis_naxiriflesoldier`; `tkm_marine`+`tkm_rifleman`;
-`ra1_soviets_ak47conscript`+`ra1_soviets_rifleinfantry`; and `forgotten_mutant` +
-`forgotten_mutant_wild` + `ts_gdi_lightinfantry` + `ts_nod_lightinfantry` (four on one file).
+⛔ **The defense formula is the sharpest finding: it exists and nothing reaches it.** All three of
+`class_baseline_price_3`, `class_baseline_estimators_3` and `solve_class_baseline_range_3` are
+written, documented, and carry the maintainer's 2026-07-26 rule that `O = P = Q = cost0` exactly at
+the baseline — and `grep` finds **no caller anywhere outside `formula.py`**. It is DESIGN §8c in a
+new costume: *a thing that is present is not a thing that runs.* Wiring it needs a `defense`
+class-anchor entry (there are 27 anchors and not one of them is `defense`, `fighter` or `bomber`)
+and a branch in `propose_class_rebalance` / `fit_class` that selects the 3-input form for static
+classes.
 
-**2. Aircraft `TurnSpeed` is per AIRFRAME, and I had only half the law.**
-*"Helicopters and spaceships have turn speed of speed/5 while planes like fighters and bombers have
-speed/15, right?"* — **Right, and it was already documented.**
+⚠ **The speed-100 convention is NOT in the ledger.** 85 defenses are extracted and **0 carry
+`speed == 100`** — they carry no speed at all. So the convention lives in the legacy workbook, not
+in the data, and porting the defense class does not require unpicking 85 fake speeds.
 
-⛔ **DESIGN.md STATES THIS LAW IN TWO SEPARATE TABLES, 1100 LINES APART, and I grepped one.** The
-stat-law list said "helicopters and spaceships both use `Speed / 5`" and stopped; the derived-stat
-table carries *"Fighters & bombers (by template): `Aircraft.TurnSpeed = Speed / 15`
-(frontal-weapon craft 2×)"*. CLAUDE.md §8f says to grep DESIGN.md before designing anything — I did,
-found one phrasing, and stopped. **A law worth encoding is worth grepping twice.** The two entries
-now cross-reference each other so neither can be read alone.
+**Consequence for the queue.** `docs/design/BALANCE_PIPELINE_ESTIMATE.md` already budgets this as
+**D-def** (defenses formula, 13.0 estimated) and **C-def** (defense anchors, 13.0). It is real work,
+not a lookup, and it sits behind the classes that already fit. Nothing here changes the immediate
+path: sign what already meets ≤1, then structure.
 
-| cohort | n | modal ratio | share | law |
-|---|--:|--:|--:|---|
-| helicopter | 66 | 1.0 | **95%** | `Speed/5` |
-| spaceship | 12 | 1.0 | 92% | `Speed/5` |
-| epic air | 10 | 1.0 | **100%** | `Speed/5` |
-| fighter | 23 | **0.333** | 35% | `Speed/15` |
-| bomber | 36 | **0.333** | 28% | `Speed/15` |
-| ground turreted | 261 | 1.0 | 87% | `Speed/5` |
-| ground turretless | 335 | 2.0 | 64% | `2 × Speed/5` |
-
-**Classification is BY TEMPLATE** (`^FighterTemplate`, `^BomberTemplate`, `^HelicopterTemplate`,
-`^SpaceshipTemplate`, `^EpicAirUnitTemplate`), as DESIGN.md specifies — never by name, and never by
-`CanHover`/`VTOL`: measured, the trait flags put helicopters at **62%** compliance with their own
-law and the template puts them at **95%**.
-
-⚠ **`Speed/15` does NOT re-grid Speed to 15.** The grid is 5 and stays 5 — it exists because `S/5`
-and `2S/5` must be integral, and `gcd(2,5)=1` reduces both to `5 | S`. A fighter at Speed 250
-derives `TurnSpeed` 16.67; that is a question about how `TurnSpeed` is represented, never a reason
-to move a grid to suit a derived equation.
-
-**Work list** (`audit_turn_rate`, REPORT-ONLY): T1 **340 of 871** actors disagree · T2 **63** carry
-a Speed off the 5 grid · T3 **123 aircraft inherit no air template**, so they can be held to neither
-air law until classified — that overlaps the 127 unclassifiable aircraft in §3.3-air.
-
-**Also corrected a stale doc claim:** DESIGN.md said "45 of ~55 helicopters already comply". The
-measurement is **63 of 66 helicopters and 11 of 12 spaceships**.
+⚠ **Do not price a fighter or bomber with the ground formula in the meantime.** Only helicopters and
+spaceships share it. A fighter run through the 4-input v2 form is not "approximately right", it is
+using the wrong law — and the same goes for defenses through any form that has a speed term.
 
 ### 3.0i — ✅ ANSWERED (2026-08-30): the uniqueness law separates per-shot DAMAGE
 

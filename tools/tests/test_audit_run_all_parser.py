@@ -69,10 +69,6 @@ class ParsesTheRealShellScript(unittest.TestCase):
         # Real yaml defects (double-firing IFV guards, dead armaments) whose fix
         # needs the boot gate. Blocking once F1/F3/F4 read clean.
         "ifv_conditions",
-        # TurnSpeed vs the turret-dependent law. 325 of 871 mobile actors disagree
-        # because the roster PREDATES the law; every fix is yaml needing the boot
-        # gate. Blocking once a boot-gated pass has brought the roster inside it.
-        "turn_rate",
         # Intent-vs-implementation report. Advisory PERMANENTLY — a mismatch may be
         # wrong implementation OR wrong intent, and only a human decides which.
         "counter_matrix",

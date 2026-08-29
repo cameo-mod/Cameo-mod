@@ -219,54 +219,6 @@ class StatGridsComeFromOneRegistry(unittest.TestCase):
         self.assertEqual(rows[1]["hp"] % 2500, 0)
 
 
-class TurnSpeedDependsOnTurretAndAirframe(unittest.TestCase):
-    """Maintainer 2026-08-29/30. DESIGN.md states this law in TWO separate tables
-    and this code first shipped knowing only one: the stat-law list says
-    "helicopters and spaceships both use Speed/5" and stops, while the derived-stat
-    table 1100 lines earlier carries "Fighters & bombers (by template):
-    Aircraft.TurnSpeed = Speed / 15 (frontal-weapon craft 2x)"."""
-
-    def test_ground_branches(self):
-        self.assertEqual(formula.turn_speed_for(60, turreted=True), 12)
-        self.assertEqual(formula.turn_speed_for(60, turreted=False), 24)
-
-    def test_pivoting_airframes_turn_like_vehicles(self):
-        for frame in ("helicopter", "spaceship", "epic_air"):
-            self.assertEqual(formula.turn_speed_for(150, airframe=frame), 30, frame)
-            # a turret cannot change a pivoting airframe's rate
-            self.assertEqual(formula.turn_speed_for(150, turreted=False, airframe=frame), 30)
-
-    def test_fighters_and_bombers_turn_on_the_fifteen_law(self):
-        for frame in ("fighter", "bomber"):
-            self.assertEqual(formula.turn_speed_for(150, airframe=frame), 10, frame)
-            self.assertEqual(formula.turn_speed_for(150, turreted=False, airframe=frame), 20)
-
-    def test_speed_over_fifteen_does_not_regrid_speed(self):
-        """⚠ The Speed grid is 5 and STAYS 5. It exists because `S/5` and `2S/5`
-        must be integral, and gcd(2,5)=1 makes both reduce to `5 | S`. A fighter
-        at Speed 250 derives TurnSpeed 16.67 — a question about how TurnSpeed is
-        represented, never a reason to move a grid to suit a derived equation."""
-        self.assertEqual(formula.stat_step("speed", "vehicle"), 5)
-        self.assertAlmostEqual(formula.turn_speed_for(250, airframe="fighter"), 250 / 15)
-
-    def test_both_ground_branches_need_the_same_speed_grid(self):
-        step = formula.stat_step("speed", "vehicle")
-        for speed in range(step, 200, step):
-            for turreted in (True, False):
-                ts = formula.turn_speed_for(speed, turreted=turreted)
-                self.assertEqual(ts, int(ts), f"speed {speed} turreted={turreted}")
-        for turreted in (True, False):
-            ts = formula.turn_speed_for(63, turreted=turreted)
-            self.assertNotEqual(ts, int(ts))
-
-    def test_the_template_map_covers_every_airframe_the_law_names(self):
-        named = set(formula.AIR_TEMPLATES.values())
-        self.assertTrue({"fighter", "bomber", "helicopter", "spaceship"} <= named)
-        self.assertTrue(formula.PIVOTING_AIRFRAMES <= named)
-        self.assertNotIn("fighter", formula.PIVOTING_AIRFRAMES)
-        self.assertNotIn("bomber", formula.PIVOTING_AIRFRAMES)
-
-
 class FrozenRowsStillOccupyTheirSlot(unittest.TestCase):
     """Maintainer 2026-08-30: *"give each of the scouts their own unique damage
     numbers."* Protected and soft rows used to be filtered out of the collision
