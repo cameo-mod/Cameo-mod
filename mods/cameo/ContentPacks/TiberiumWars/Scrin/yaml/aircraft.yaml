@@ -13,6 +13,7 @@
 	Inherits: ^Helicopter
 	Inherits@shieldalignment: ^ScrinAircraftShieldAlignment
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@materialization: ^ScrinFactoryMaterialization
 	Health:
 		HP: 100000
 	Armor:
@@ -25,6 +26,8 @@
 		AltitudeVelocity: 100
 		CanForceLand: false
 		Repulsable: false
+		Voice: Move
+	DeathSounds:
 	-WithShadow:
 	-Hovers@CRUISING:
 	-AttackAircraft:
@@ -34,6 +37,10 @@
 scrin_drone_ship:
 	Inherits: ^Helicopter
 	Inherits@shieldalignment: ^ScrinAircraftShieldAlignment
+	Inherits@materialization: ^ScrinFactoryMaterialization
+	Voiced:
+		VoiceSet: ScrinDroneShipVoice
+	DeathSounds:
 	WithIdleOverlay@shield1:
 		Sequence: colossal-mobile-west
 		StartSequence: colossal-mobile-west
@@ -65,6 +72,7 @@ scrin_drone_ship:
 		AltitudeVelocity: 26
 		CanForceLand: false
 		Repulsable: false
+		Voice: Move
 	-WithShadow:
 	-Hovers@CRUISING:
 	Transforms:
@@ -74,12 +82,13 @@ scrin_drone_ship:
 		NoTransformNotification: BuildingCannotPlaceAudio
 	-AttackAircraft:
 	-SpawnActorOnDeath:
-	-Voiced:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
 scrin_stormrider:
 	Inherits: ^ScrinAircraftVisual
+	Voiced:
+		VoiceSet: ScrinStormriderVoice
 	Tooltip:
 		Name: actor_scrin_stormrider.name
 	Buildable:
@@ -100,15 +109,19 @@ scrin_stormrider:
 		CanHover: false
 		CanSlide: false
 		VTOL: false
+		Voice: Move
 	Armament:
 		Weapon: ScrinAirZap
 	AttackAircraft:
 		FacingTolerance: 128
+		Voice: Attack
 	RenderSprites:
 		PlayerPalette: scrin_stormrider_player
 
 scrin_devastator_warship:
 	Inherits: ^ScrinAircraftVisual
+	Voiced:
+		VoiceSet: ScrinDevastatorVoice
 	WithIdleOverlay@shield1:
 		Image: hexshield_directional_oval
 		Sequence: aircraft-large-west
@@ -121,7 +134,7 @@ scrin_devastator_warship:
 	Buildable:
 		Queue: ScrinCapitalAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: scrin_technology_assembler
+		Prerequisites: ~scrin_warp_chasm, scrin_technology_assembler
 		Icon: icon
 		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
@@ -135,10 +148,11 @@ scrin_devastator_warship:
 		Speed: 55
 		TurnSpeed: 12
 	Armament:
-		Weapon: ScrinCapitalBeam
+		Weapon: ScrinDevastatorDiscs
 	AttackAircraft:
 		FacingTolerance: 192
 		AttackType: Hover
+		Voice: Attack
 	Selectable:
 		Bounds: 2048, 2048, 0, -768
 	RenderSprites:
@@ -146,6 +160,8 @@ scrin_devastator_warship:
 
 scrin_planetary_assault_carrier:
 	Inherits: ^ScrinAircraftVisual
+	Voiced:
+		VoiceSet: ScrinPACVoice
 	WithIdleOverlay@shield1:
 		Image: hexshield_directional_oval
 		Sequence: aircraft-colossal
@@ -158,7 +174,7 @@ scrin_planetary_assault_carrier:
 	Buildable:
 		Queue: ScrinCapitalAircraft
 		BuildPaletteOrder: 40
-		Prerequisites: scrin_technology_assembler
+		Prerequisites: ~scrin_warp_chasm, scrin_technology_assembler
 		Icon: icon
 		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
@@ -176,6 +192,7 @@ scrin_planetary_assault_carrier:
 	AttackAircraft:
 		FacingTolerance: 192
 		AttackType: Hover
+		Voice: Attack
 	CarrierMaster:
 		Actors: scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter
 		RearmTicks: 25
@@ -219,6 +236,8 @@ scrin_invader_fighter:
 
 scrin_mothership:
 	Inherits: ^ScrinAircraftVisual
+	Voiced:
+		VoiceSet: ScrinMothershipVoice
 	WithIdleOverlay@shield1:
 		Sequence: capital-mobile-standard
 		StartSequence: capital-mobile-standard
@@ -231,7 +250,7 @@ scrin_mothership:
 	Buildable:
 		Queue: ScrinCapitalAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: scrin_signal_transmitter
+		Prerequisites: ~scrin_warp_chasm, scrin_signal_transmitter
 		BuildLimit: 1
 		Icon: icon
 		IconPalette: player_rgba
@@ -246,10 +265,11 @@ scrin_mothership:
 		Speed: 30
 		TurnSpeed: 8
 	Armament:
-		Weapon: ScrinMothershipBeam
+		Weapon: ScrinMothershipDiscs
 	AttackAircraft:
 		FacingTolerance: 256
 		AttackType: Hover
+		Voice: Attack
 	Selectable:
 		Bounds: 3072, 3072, 0, -1280
 	RenderSprites:

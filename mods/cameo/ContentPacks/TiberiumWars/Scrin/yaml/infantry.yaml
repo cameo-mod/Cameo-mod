@@ -4,10 +4,13 @@
 ^ScrinInfantryVisual:
 	Inherits: ^DefaultInfantry
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@materialization: ^ScrinFactoryMaterialization
 	Health:
 		HP: 10000
 	Mobile:
 		Speed: 50
+		Voice: Move
+	DeathSounds:
 	WithInfantryBody:
 		IdleSequences: stand
 		StandSequences: stand
@@ -17,6 +20,8 @@
 
 scrin_disintegrator:
 	Inherits: ^ScrinInfantryVisual
+	Voiced:
+		VoiceSet: ScrinDisintegratorVoice
 	Tooltip:
 		Name: actor_scrin_disintegrator.name
 	Buildable:
@@ -32,9 +37,10 @@ scrin_disintegrator:
 	Health:
 		HP: 7000
 	Armament:
-		Weapon: ScrinLightBeam
+		Weapon: ScrinDisintegratorBeam
 	AttackFrontal:
 		FacingTolerance: 64
+		Voice: Attack
 	RenderSprites:
 		PlayerPalette: scrin_disintegrator_player
 
@@ -42,6 +48,8 @@ scrin_assimilator:
 	Inherits: ^ScrinInfantryVisual
 	Inherits@engineer: ^EngineerDefaultWeapons
 	Inherits@isengineer: ^IsEngineer
+	Voiced:
+		VoiceSet: ScrinAssimilatorVoice
 	Tooltip:
 		Name: actor_scrin_assimilator.name
 	Buildable:
@@ -82,6 +90,8 @@ scrin_assimilator:
 
 scrin_shock_trooper:
 	Inherits: ^ScrinInfantryVisual
+	Voiced:
+		VoiceSet: ScrinShockTrooperVoice
 	Tooltip:
 		Name: actor_scrin_shock_trooper.name
 	Buildable:
@@ -96,15 +106,20 @@ scrin_shock_trooper:
 		Cost: 600
 	Health:
 		HP: 26000
+	Mobile:
+		Voice: Move
 	Armament:
-		Weapon: ScrinHeavyBeam
+		Weapon: ScrinShockDiscs
 	AttackFrontal:
 		FacingTolerance: 64
+		Voice: Attack
 	RenderSprites:
 		PlayerPalette: scrin_shock_trooper_player
 
 scrin_shock_trooper_blink_pack:
 	Inherits: ^ScrinInfantryVisual
+	Voiced:
+		VoiceSet: ScrinShockTrooperVoice
 	Tooltip:
 		Name: actor_scrin_shock_trooper_blink_pack.name
 	Buildable:
@@ -121,10 +136,12 @@ scrin_shock_trooper_blink_pack:
 		HP: 32000
 	Mobile:
 		Speed: 65
+		Voice: Move
 	Armament:
-		Weapon: ScrinHeavyBeam
+		Weapon: ScrinShockDiscs
 	AttackFrontal:
 		FacingTolerance: 64
+		Voice: Attack
 	RA2PortableChrono:
 		TeleportType: PortableChrono
 		ChargeDelay: 100
@@ -139,6 +156,8 @@ scrin_shock_trooper_blink_pack:
 
 scrin_ravager:
 	Inherits: ^ScrinInfantryVisual
+	Voiced:
+		VoiceSet: ScrinRavagerVoice
 	Tooltip:
 		Name: actor_scrin_ravager.name
 	Buildable:
@@ -159,11 +178,14 @@ scrin_ravager:
 		Weapon: ScrinShardBeam
 	AttackFrontal:
 		FacingTolerance: 64
+		Voice: Attack
 	RenderSprites:
 		PlayerPalette: scrin_ravager_player
 
 scrin_mastermind:
 	Inherits: ^ScrinInfantryVisual
+	Voiced:
+		VoiceSet: ScrinMastermindVoice
 	Tooltip:
 		Name: actor_scrin_mastermind.name
 	Buildable:
@@ -184,6 +206,7 @@ scrin_mastermind:
 		Weapon: ScrinMindControl
 	AttackFrontal:
 		FacingTolerance: 128
+		Voice: Attack
 	MindControllerCA:
 		ArmamentNames: primary
 		ExperienceFromControl: 100
@@ -196,6 +219,8 @@ scrin_mastermind:
 
 scrin_prodigy:
 	Inherits: ^ScrinInfantryVisual
+	Voiced:
+		VoiceSet: ScrinProdigyVoice
 	Tooltip:
 		Name: actor_scrin_prodigy.name
 	Buildable:
@@ -218,6 +243,7 @@ scrin_prodigy:
 		Weapon: ScrinMindControl
 	AttackFrontal:
 		FacingTolerance: 128
+		Voice: Attack
 	MindControllerCA:
 		ArmamentNames: primary
 		ExperienceFromControl: 150

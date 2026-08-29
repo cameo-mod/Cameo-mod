@@ -210,6 +210,17 @@ scrin_warp_gate_core:
 		Start: 0
 		Length: 48
 		Tick: 83
+		# The sequence is scaled to 0.923077. Relative to its original placement,
+		# the rendered core is now 3 pixels west and 5 pixels south.
+		Offset: -0.250,-26.583
+		Scale: 0.923077
+
+scrin_gravity_stabilizer_core:
+	idle:
+		Filename: scrin_sprites|scrin_warp_gate_core.png
+		Start: 0
+		Length: 48
+		Tick: 83
 		Offset: 3.000,-32.000
 		Scale: 0.923077
 
@@ -1295,3 +1306,59 @@ scrin_mothership:
 	icon:
 		Filename: scrin_sprites|scrin_mothership_icon.png
 		Length: 1
+
+# Namespaced Combined Arms GPLv3 projectile/effect sprites. Unit and building
+# art remains independently rendered from the official C&C3/KW source assets.
+scrin_fx_plasma_disc_small:
+	idle:
+		Filename: scrin_sprites|scrin_fx_plasma_disc_small.shp
+		Length: *
+		Tick: 50
+		ZOffset: 2047
+		BlendMode: Additive
+		IgnoreWorldTint: true
+
+scrin_fx_plasma_disc_large:
+	idle:
+		Filename: scrin_sprites|scrin_fx_plasma_disc_large.shp
+		Length: *
+		Tick: 50
+		ZOffset: 2047
+		BlendMode: Additive
+		IgnoreWorldTint: true
+
+scrin_fx_plasma_torpedo_small:
+	idle:
+		Filename: scrin_sprites|scrin_fx_plasma_torpedo_small.shp
+		Length: *
+		Tick: 50
+		ZOffset: 2047
+		BlendMode: Additive
+		IgnoreWorldTint: true
+
+scrin_fx_plasma_torpedo_large:
+	idle:
+		Filename: scrin_sprites|scrin_fx_plasma_torpedo_large.shp
+		Length: *
+		Tick: 50
+		ZOffset: 2047
+		BlendMode: Additive
+		IgnoreWorldTint: true
+
+scrin_fx_tiberium_spew_trail:
+	idle:
+		Filename: scrin_sprites|scrin_fx_tiberium_spew_trail.shp
+		Length: *
+		ZOffset: 2047
+
+scrin_fx_tiberium_spew:
+	idle:
+		Filename: scrin_sprites|scrin_fx_tiberium_spew.shp
+		Facings: 32
+		ZOffset: 2047
+
+scrin_fx_tiberium_splash:
+	idle:
+		Filename: scrin_sprites|scrin_fx_tiberium_splash.shp
+		Length: *
+		ZOffset: 2047

@@ -26,3 +26,12 @@ World:
 		Factions: scrin
 		BaseActor: scrin_drone_ship
 		SupportActors: scrin_disintegrator,scrin_disintegrator,scrin_disintegrator,scrin_assimilator,scrin_gun_walker,scrin_seeker,scrin_devourer_tank
+
+^ScrinFactoryMaterialization:
+	WithActorMaterialization:
+		FadeTicks: 10
+		RevealTicks: 40
+		SilhouetteColor: FFFFFFFF
+		ElectricBandHeight: 2
+		ElectricJitter: 0
+		OnlyProducedActors: true

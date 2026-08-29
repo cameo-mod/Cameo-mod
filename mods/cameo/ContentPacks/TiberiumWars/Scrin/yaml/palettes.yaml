@@ -1,4 +1,21 @@
 ^Palettes:
+	# Projectile/effect palette imported from Combined Arms' GPLv3 Scrin pack.
+	# These names are pack-local to avoid coupling the faction to CA's globals.
+	PaletteFromFile@scrin_projectiles:
+		Name: scrin_projectiles
+		Filename: scrin_sprites|scrin_projectiles.pal
+		ShadowIndex: 4
+	PaletteFromPaletteWithAlpha@scrin_projectiles_alpha85:
+		Name: scrin_projectiles_ignore_lighting_alpha85
+		BasePalette: scrin_projectiles
+		Alpha: 0.85
+	PaletteFromRGBA@scrin_projectile_trail:
+		Name: scrin_projectile_trail
+		R: 121
+		G: 101
+		B: 239
+		A: 40
+
 	PaletteFromPng@scrin_portal_training:
 		Name: scrin_portal_training
 		Filename: scrin_sprites|scrin_portal_training_palette.png

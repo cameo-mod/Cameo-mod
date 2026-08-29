@@ -3,6 +3,7 @@
 
 ^ScrinVehicleVisual:
 	Inherits: ^Vehicle
+	Inherits@materialization: ^ScrinFactoryMaterialization
 	Health:
 		HP: 100000
 	Armor:
@@ -11,6 +12,9 @@
 		Locomotor: wheeled
 		Speed: 50
 		TurnSpeed: 8
+		PauseOnCondition: materializing
+		Voice: Move
+	DeathSounds:
 	Selectable:
 		Bounds: 1024, 1024
 	-Voiced:
@@ -22,6 +26,8 @@
 
 scrin_explorer:
 	Inherits: ^ScrinHoverVisual
+	Voiced:
+		VoiceSet: ScrinExplorerVoice
 	Tooltip:
 		Name: actor_scrin_explorer.name
 	Buildable:
@@ -44,6 +50,8 @@ scrin_explorer:
 scrin_harvester:
 	Inherits: ^ScrinHoverVisual
 	Inherits@harvester: ^Harvester
+	Voiced:
+		VoiceSet: ScrinHarvesterVoice
 	Tooltip:
 		Name: actor_scrin_harvester.name
 	Buildable:
@@ -71,6 +79,8 @@ scrin_harvester:
 scrin_seeker:
 	Inherits: ^ScrinHoverVisual
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Voiced:
+		VoiceSet: ScrinSeekerVoice
 	Tooltip:
 		Name: actor_scrin_seeker.name
 	Buildable:
@@ -88,15 +98,18 @@ scrin_seeker:
 	Mobile:
 		Speed: 90
 	Armament:
-		Weapon: ScrinLightBeamAA
+		Weapon: ScrinSeekerDiscs
 	AttackFrontal:
 		FacingTolerance: 128
+		Voice: Attack
 	RenderSprites:
 		PlayerPalette: scrin_seeker_player
 
 scrin_devourer_tank:
 	Inherits: ^ScrinHoverVisual
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Voiced:
+		VoiceSet: ScrinDevourerVoice
 	Tooltip:
 		Name: actor_scrin_devourer_tank.name
 	Buildable:
@@ -114,9 +127,10 @@ scrin_devourer_tank:
 	Mobile:
 		Speed: 60
 	Armament:
-		Weapon: ScrinHeavyBeam
+		Weapon: ScrinDevourerBeam
 	AttackFrontal:
 		FacingTolerance: 128
+		Voice: Attack
 	RenderSprites:
 		PlayerPalette: scrin_devourer_tank_player
 
@@ -148,12 +162,15 @@ scrin_repair_drone:
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
+		RequiresCondition: !materializing
 	RenderSprites:
 		PlayerPalette: scrin_repair_drone_player
 
 scrin_gun_walker:
 	Inherits: ^ScrinVehicleVisual
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Voiced:
+		VoiceSet: ScrinGunWalkerVoice
 	Tooltip:
 		Name: actor_scrin_gun_walker.name
 	Buildable:
@@ -171,18 +188,22 @@ scrin_gun_walker:
 	Mobile:
 		Speed: 75
 	Armament:
-		Weapon: ScrinLightBeamAA
+		Weapon: ScrinGunWalkerBeam
 	AttackFrontal:
 		FacingTolerance: 128
+		Voice: Attack
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
+		RequiresCondition: !materializing
 	RenderSprites:
 		PlayerPalette: scrin_gun_walker_player
 
 scrin_shard_walker:
 	Inherits: ^ScrinVehicleVisual
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Voiced:
+		VoiceSet: ScrinShardWalkerVoice
 	Tooltip:
 		Name: actor_scrin_shard_walker.name
 	Buildable:
@@ -203,15 +224,19 @@ scrin_shard_walker:
 		Weapon: ScrinShardBeam
 	AttackFrontal:
 		FacingTolerance: 128
+		Voice: Attack
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
+		RequiresCondition: !materializing
 	RenderSprites:
 		PlayerPalette: scrin_shard_walker_player
 
 scrin_corrupter:
 	Inherits: ^ScrinVehicleVisual
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Voiced:
+		VoiceSet: ScrinCorrupterVoice
 	Tooltip:
 		Name: actor_scrin_corrupter.name
 	Buildable:
@@ -229,22 +254,26 @@ scrin_corrupter:
 	Mobile:
 		Speed: 55
 	Armament:
-		Weapon: ScrinAcidBeam
+		Weapon: ScrinCorrupterSpew
 	Armament@REPAIR:
 		Weapon: ScrinRepairBeam
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally
 	AttackFrontal:
 		FacingTolerance: 128
+		Voice: Attack
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
+		RequiresCondition: !materializing
 	RenderSprites:
 		PlayerPalette: scrin_corrupter_player
 
 scrin_annihilator_tripod:
 	Inherits: ^ScrinVehicleVisual
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Voiced:
+		VoiceSet: ScrinAnnihilatorTripodVoice
 	Tooltip:
 		Name: actor_scrin_annihilator_tripod.name
 	Buildable:
@@ -261,6 +290,7 @@ scrin_annihilator_tripod:
 		HP: 260000
 	Mobile:
 		Speed: 45
+		Voice: Move
 	Armament:
 		Weapon: ScrinTripodLaser
 		# Burst indexing is 0, 2, 1: center, right, left.
@@ -268,17 +298,21 @@ scrin_annihilator_tripod:
 	AttackFrontal:
 		Armaments: primary
 		FacingTolerance: 128
+		Voice: Attack
 	Selectable:
 		Bounds: 2048, 2048
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
+		RequiresCondition: !materializing
 	RenderSprites:
 		PlayerPalette: scrin_annihilator_tripod_player
 
 scrin_reaper_tripod:
 	Inherits: ^ScrinVehicleVisual
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Voiced:
+		VoiceSet: ScrinAnnihilatorTripodVoice
 	Tooltip:
 		Name: actor_scrin_reaper_tripod.name
 	Buildable:
@@ -302,17 +336,23 @@ scrin_reaper_tripod:
 	AttackFrontal:
 		Armaments: primary
 		FacingTolerance: 128
+		Voice: Attack
 	Selectable:
 		Bounds: 2048, 2048
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
+		RequiresCondition: !materializing
 	RenderSprites:
 		PlayerPalette: scrin_reaper_tripod_player
 
 scrin_eradicator_hexapod:
 	Inherits: ^Vehicle
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@materialization: ^ScrinFactoryMaterialization
+	Voiced:
+		VoiceSet: ScrinHexapodVoice
+	DeathSounds:
 	Tooltip:
 		Name: actor_scrin_eradicator_hexapod.name
 	Buildable:
@@ -334,15 +374,17 @@ scrin_eradicator_hexapod:
 		Locomotor: wheeled
 		Speed: 30
 		TurnSpeed: 8
+		Voice: Move
 	Armament:
 		Weapon: ScrinMothershipBeam
 	AttackFrontal:
 		FacingTolerance: 256
+		Voice: Attack
 	Selectable:
 		Bounds: 3072, 3072
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
-	-Voiced:
+		RequiresCondition: !materializing
 	RenderSprites:
 		PlayerPalette: scrin_hexapod_player

@@ -110,3 +110,8 @@ The sprites were independently extracted and rendered from the official
 *Command & Conquer 3: Tiberium Wars* and *Kane's Wrath* assets. The source
 models and textures are copyright Electronic Arts and remain the property of
 their respective owner.
+
+The small Scrin projectile, impact, and matching weapon-audio assets are
+adapted from the GPLv3 [Combined Arms project](https://github.com/Inq8/CAmod).
+They are kept namespaced inside this content pack; no Combined Arms unit or
+building art is included.

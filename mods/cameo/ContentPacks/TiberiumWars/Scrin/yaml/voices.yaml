@@ -1,0 +1,289 @@
+# Authentic CNC3/Kane's Wrath Scrin unit and structure audio.
+# Extracted locally and encoded as mono 22050 Hz Westwood IMA ADPCM AUD.
+
+ScrinDisintegratorVoice:
+	Voices:
+		Select: disintegrator-select-1.aud, disintegrator-select-2.aud, disintegrator-select-3.aud
+		Move: disintegrator-move-1.aud, disintegrator-move-2.aud, disintegrator-move-3.aud
+		Action: disintegrator-move-1.aud, disintegrator-move-2.aud, disintegrator-move-3.aud
+		Attack: disintegrator-attack-1.aud, disintegrator-attack-2.aud, disintegrator-attack-3.aud
+		Die: disintegrator-die-1.aud, disintegrator-die-2.aud, disintegrator-die-3.aud
+
+ScrinAssimilatorVoice:
+	Voices:
+		Select: assimilator-select-1.aud, assimilator-select-2.aud, assimilator-select-3.aud
+		Move: assimilator-move-1.aud, assimilator-move-2.aud, assimilator-move-3.aud
+		Action: assimilator-move-1.aud, assimilator-move-2.aud, assimilator-move-3.aud
+		Attack: assimilator-attack-1.aud, assimilator-attack-2.aud, assimilator-attack-3.aud
+		Die: assimilator-die-1.aud, assimilator-die-2.aud, assimilator-die-3.aud
+
+ScrinShockTrooperVoice:
+	Voices:
+		Select: shock-select-1.aud, shock-select-2.aud, shock-select-3.aud
+		Move: shock-move-1.aud, shock-move-2.aud, shock-move-3.aud
+		Action: shock-move-1.aud, shock-move-2.aud, shock-move-3.aud
+		Attack: shock-attack-1.aud, shock-attack-2.aud, shock-attack-3.aud
+		Die: shock-die-1.aud, shock-die-2.aud, shock-die-3.aud
+
+ScrinRavagerVoice:
+	Voices:
+		Select: ravager-select-1.aud, ravager-select-2.aud, ravager-select-3.aud
+		Move: ravager-move-1.aud, ravager-move-2.aud, ravager-move-3.aud
+		Action: ravager-move-1.aud, ravager-move-2.aud, ravager-move-3.aud
+		Attack: ravager-attack-1.aud, ravager-attack-2.aud, ravager-attack-3.aud
+		Die: ravager-die-1.aud, ravager-die-2.aud, ravager-die-3.aud
+
+ScrinMastermindVoice:
+	Voices:
+		Select: mastermind-select-1.aud, mastermind-select-2.aud, mastermind-select-3.aud
+		Move: mastermind-move-1.aud, mastermind-move-2.aud, mastermind-move-3.aud
+		Action: mastermind-move-1.aud, mastermind-move-2.aud, mastermind-move-3.aud
+		Attack: mastermind-attack-1.aud, mastermind-attack-2.aud, mastermind-attack-3.aud
+		Die: mastermind-die-1.aud, mastermind-die-2.aud, mastermind-die-3.aud
+
+ScrinProdigyVoice:
+	Voices:
+		Select: prodigy-select-1.aud, prodigy-select-2.aud, prodigy-select-3.aud
+		Move: prodigy-move-1.aud, prodigy-move-2.aud, prodigy-move-3.aud
+		Action: prodigy-move-1.aud, prodigy-move-2.aud, prodigy-move-3.aud
+		Attack: prodigy-attack-1.aud
+		Die: prodigy-die-1.aud, prodigy-die-2.aud, prodigy-die-3.aud
+
+ScrinExplorerVoice:
+	Voices:
+		Select: explorer-select-1.aud, explorer-select-2.aud, explorer-select-3.aud
+		Move: explorer-move-1.aud, explorer-move-2.aud, explorer-move-3.aud
+		Action: explorer-move-1.aud, explorer-move-2.aud, explorer-move-3.aud
+		Die: explorer-die-1.aud, explorer-die-2.aud, explorer-die-3.aud
+
+ScrinHarvesterVoice:
+	Voices:
+		Select: harvester-select-1.aud, harvester-select-2.aud, harvester-select-3.aud
+		Move: harvester-move-1.aud, harvester-move-2.aud, harvester-move-3.aud
+		Action: harvester-move-1.aud, harvester-move-2.aud, harvester-move-3.aud
+		Die: harvester-die-1.aud, harvester-die-2.aud, harvester-die-3.aud
+
+ScrinSeekerVoice:
+	Voices:
+		Select: seeker-select-1.aud, seeker-select-2.aud, seeker-select-3.aud
+		Move: seeker-move-1.aud, seeker-move-2.aud, seeker-move-3.aud
+		Action: seeker-move-1.aud, seeker-move-2.aud, seeker-move-3.aud
+		Attack: seeker-attack-1.aud, seeker-attack-2.aud, seeker-attack-3.aud
+		Die: seeker-die-1.aud, seeker-die-2.aud, seeker-die-3.aud
+
+ScrinDevourerVoice:
+	Voices:
+		Select: devourer-select-1.aud, devourer-select-2.aud, devourer-select-3.aud
+		Move: devourer-move-1.aud, devourer-move-2.aud, devourer-move-3.aud
+		Action: devourer-move-1.aud, devourer-move-2.aud, devourer-move-3.aud
+		Attack: devourer-attack-1.aud, devourer-attack-2.aud, devourer-attack-3.aud
+		Die: devourer-die-1.aud, devourer-die-2.aud, devourer-die-3.aud
+
+ScrinGunWalkerVoice:
+	Voices:
+		Select: gunwalker-select-1.aud, gunwalker-select-2.aud, gunwalker-select-3.aud
+		Move: gunwalker-move-1.aud, gunwalker-move-2.aud, gunwalker-move-3.aud
+		Action: gunwalker-move-1.aud, gunwalker-move-2.aud, gunwalker-move-3.aud
+		Attack: gunwalker-attack-1.aud, gunwalker-attack-2.aud, gunwalker-attack-3.aud
+		Die: gunwalker-die-1.aud, gunwalker-die-2.aud, gunwalker-die-3.aud
+
+ScrinShardWalkerVoice:
+	Voices:
+		Select: shardwalker-select-1.aud, shardwalker-select-2.aud, shardwalker-select-3.aud
+		Move: shardwalker-move-1.aud, shardwalker-move-2.aud, shardwalker-move-3.aud
+		Action: shardwalker-move-1.aud, shardwalker-move-2.aud, shardwalker-move-3.aud
+		Attack: shardwalker-attack-1.aud, shardwalker-attack-2.aud, shardwalker-attack-3.aud
+		Die: shardwalker-die-1.aud, shardwalker-die-2.aud, shardwalker-die-3.aud
+
+ScrinCorrupterVoice:
+	Voices:
+		Select: corrupter-select-1.aud, corrupter-select-2.aud, corrupter-select-3.aud
+		Move: corrupter-move-1.aud, corrupter-move-2.aud, corrupter-move-3.aud
+		Action: corrupter-move-1.aud, corrupter-move-2.aud, corrupter-move-3.aud
+		Attack: corrupter-attack-1.aud, corrupter-attack-2.aud, corrupter-attack-3.aud
+		Die: corrupter-die-1.aud, corrupter-die-2.aud, corrupter-die-3.aud
+
+ScrinAnnihilatorTripodVoice:
+	Voices:
+		Select: tripod-select-1.aud, tripod-select-2.aud, tripod-select-3.aud
+		Move: tripod-move-1.aud, tripod-move-2.aud, tripod-move-3.aud
+		Action: tripod-move-1.aud, tripod-move-2.aud, tripod-move-3.aud
+		Attack: tripod-attack-1.aud, tripod-attack-2.aud, tripod-attack-3.aud
+		Die: tripod-die-1.aud, tripod-die-2.aud, tripod-die-3.aud
+
+ScrinHexapodVoice:
+	Voices:
+		Select: hexapod-select-1.aud, hexapod-select-2.aud, hexapod-select-3.aud
+		Move: hexapod-move-1.aud, hexapod-move-2.aud, hexapod-move-3.aud
+		Action: hexapod-move-1.aud, hexapod-move-2.aud, hexapod-move-3.aud
+		Attack: hexapod-attack-1.aud, hexapod-attack-2.aud, hexapod-attack-3.aud
+		Die: hexapod-die-1.aud, hexapod-die-2.aud, hexapod-die-3.aud
+
+ScrinDroneShipVoice:
+	Voices:
+		Select: droneship-select-1.aud, droneship-select-2.aud, droneship-select-3.aud
+		Move: droneship-move-1.aud, droneship-move-2.aud, droneship-move-3.aud
+		Action: droneship-move-1.aud, droneship-move-2.aud, droneship-move-3.aud
+		Die: droneship-die-1.aud, droneship-die-2.aud
+
+ScrinStormriderVoice:
+	Voices:
+		Select: stormrider-select-1.aud, stormrider-select-2.aud, stormrider-select-3.aud
+		Move: stormrider-move-1.aud, stormrider-move-2.aud, stormrider-move-3.aud
+		Action: stormrider-move-1.aud, stormrider-move-2.aud, stormrider-move-3.aud
+		Attack: stormrider-attack-1.aud, stormrider-attack-2.aud, stormrider-attack-3.aud
+		Die: stormrider-die-1.aud, stormrider-die-2.aud, stormrider-die-3.aud
+
+ScrinDevastatorVoice:
+	Voices:
+		Select: devastator-select-1.aud, devastator-select-2.aud, devastator-select-3.aud
+		Move: devastator-move-1.aud, devastator-move-2.aud, devastator-move-3.aud
+		Action: devastator-move-1.aud, devastator-move-2.aud, devastator-move-3.aud
+		Attack: devastator-attack-1.aud, devastator-attack-2.aud, devastator-attack-3.aud
+		Die: devastator-die-1.aud, devastator-die-2.aud, devastator-die-3.aud
+
+ScrinPACVoice:
+	Voices:
+		Select: pac-select-1.aud, pac-select-2.aud, pac-select-3.aud
+		Move: pac-move-1.aud, pac-move-2.aud, pac-move-3.aud
+		Action: pac-move-1.aud, pac-move-2.aud, pac-move-3.aud
+		Attack: pac-attack-1.aud, pac-attack-2.aud, pac-attack-3.aud
+		Die: pac-die-1.aud, pac-die-2.aud, pac-die-3.aud
+
+ScrinMothershipVoice:
+	Voices:
+		Select: mothership-select-1.aud, mothership-select-2.aud, mothership-select-3.aud
+		Move: mothership-move-1.aud, mothership-move-2.aud, mothership-move-3.aud
+		Action: mothership-move-1.aud, mothership-move-2.aud, mothership-move-3.aud
+		Attack: mothership-attack-1.aud, mothership-attack-2.aud, mothership-attack-3.aud
+		Die: mothership-die-1.aud, mothership-die-2.aud
+
+ScrinDronePlatformVoice:
+	Voices:
+		Select: building-drone-platform-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinReactorVoice:
+	Voices:
+		Select: building-reactor-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinExtractorVoice:
+	Voices:
+		Select: building-extractor-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinPortalVoice:
+	Voices:
+		Select: building-portal-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinWarpGateVoice:
+	Voices:
+		Select: building-warp-gate-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinGravityStabilizerVoice:
+	Voices:
+		Select: building-gravity-stabilizer-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinNerveCenterVoice:
+	Voices:
+		Select: building-nerve-center-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinStasisChamberVoice:
+	Voices:
+		Select: building-stasis-chamber-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinTechnologyAssemblerVoice:
+	Voices:
+		Select: building-technology-assembler-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinSignalTransmitterVoice:
+	Voices:
+		Select: building-signal-transmitter-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinBuzzerHiveVoice:
+	Voices:
+		Select: building-buzzer-hive-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinPhotonCannonVoice:
+	Voices:
+		Select: building-photon-cannon-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinPlasmaBatteryVoice:
+	Voices:
+		Select: building-plasma-battery-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinGrowthAcceleratorVoice:
+	Voices:
+		Select: building-growth-accelerator-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinGrowthStimulatorVoice:
+	Voices:
+		Select: building-growth-stimulator-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinStormColumnVoice:
+	Voices:
+		Select: building-storm-column-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinRiftGeneratorVoice:
+	Voices:
+		Select: building-rift-generator-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinLightningSpikeVoice:
+	Voices:
+		Select: building-lightning-spike-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinTiberiumHiveVoice:
+	Voices:
+		Select: building-tiberium-hive-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinWarpChasmVoice:
+	Voices:
+		Select: building-warp-chasm-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinFoundryVoice:
+	Voices:
+		Select: building-foundry-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinOutpostVoice:
+	Voices:
+		Select: building-outpost-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinControlNodeVoice:
+	Voices:
+		Select: building-control-node-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinLifeformPlantVoice:
+	Voices:
+		Select: building-lifeform-plant-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinTerraformingNexusVoice:
+	Voices:
+		Select: building-terraforming-nexus-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud
+
+ScrinPhaseGeneratorVoice:
+	Voices:
+		Select: building-reactor-select-1.aud
+		Die: building-die-1.aud, building-die-2.aud, building-die-3.aud

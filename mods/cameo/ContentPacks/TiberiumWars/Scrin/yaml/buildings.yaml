@@ -16,9 +16,9 @@
 # procedural materialization replaces baked make/deconstruction sequences.
 ^ScrinBuilding:
 	Inherits: ^BaseBuilding
+	DeathSounds:
 	-WithMakeAnimation:
 	-WithDeathAnimation:
-	-WithBuildingRepairDecoration:
 	Building:
 		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune
 		BuildSounds: scrin_building_placed.wav
@@ -37,6 +37,8 @@
 
 scrin_drone_platform:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinDronePlatformVoice
 	Inherits@conyard: ^Conyard
 	Inherits@shape: ^3x3Shape
 	-Buildable:
@@ -93,6 +95,8 @@ scrin_drone_platform:
 
 scrin_reactor:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinReactorVoice
 	Inherits@shape: ^2x2Shape
 	Tooltip:
 		Name: actor_scrin_reactor.name
@@ -133,6 +137,10 @@ scrin_fusion_reactor:
 	Inherits: scrin_reactor
 	-GrantConditionOnPrerequisite@FUSION:
 	-TransformOnCondition@FUSION:
+	# Preserve the standard Reactor tech prerequisite after existing Reactors
+	# transform into this actor.
+	ProvidesPrerequisite@STANDARD_REACTOR:
+		Prerequisite: scrin_reactor
 	Tooltip:
 		Name: actor_scrin_fusion_reactor.name
 	Buildable:
@@ -153,6 +161,8 @@ scrin_fusion_reactor:
 
 scrin_extractor:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinExtractorVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^4x3Shape
 	Tooltip:
@@ -204,6 +214,8 @@ scrin_extractor:
 
 scrin_portal:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinPortalVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^Scrin3x1Shape
 	Tooltip:
@@ -237,7 +249,7 @@ scrin_portal:
 		Palette: player_rgba
 		IsPlayerPalette: true
 		RequiresCondition: !build-incomplete
-	Production@SCRININFANTRY:
+	MaterializingProduction@SCRININFANTRY:
 		Produces: ScrinInfantry
 		PauseOnCondition: disabled
 	ProductionQueue@SCRININFANTRY:
@@ -265,6 +277,8 @@ scrin_portal:
 
 scrin_warp_gate:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinWarpGateVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^4x2Shape
 	Tooltip:
@@ -283,7 +297,7 @@ scrin_warp_gate:
 		Amount: -40
 	Building:
 		Dimensions: 4,2
-		Footprint: x==x x==x
+		Footprint: xxxx xxxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: scrin_warp_gate_player
@@ -292,7 +306,7 @@ scrin_warp_gate:
 		Sequence: idle
 		Palette: effect
 		RequiresCondition: !build-incomplete
-	Production@SCRINVEHICLE:
+	MaterializingProduction@SCRINVEHICLE:
 		Produces: ScrinVehicle
 		PauseOnCondition: disabled
 	ProductionQueue@SCRINVEHICLE:
@@ -312,13 +326,16 @@ scrin_warp_gate:
 	RallyPoint:
 		Path: 1,2
 	Exit@SCRINVEHICLE:
-		# Matches the scaled core sequence offset of 3,-32 screen pixels.
-		SpawnOffset: 59,-630,0
+		# Horizontally aligned with the floating core, and placed 5 rendered
+		# pixels south of its previous ground spawn position.
+		SpawnOffset: 0,107,0
 		ExitCell: 1,2
 		ProductionTypes: ScrinVehicle
 
 scrin_gravity_stabilizer:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinGravityStabilizerVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^3x2Shape
 	Tooltip:
@@ -342,11 +359,11 @@ scrin_gravity_stabilizer:
 	RenderSprites:
 		PlayerPalette: scrin_gravity_stabilizer_player
 	WithIdleOverlay@CORE:
-		Image: scrin_warp_gate_core
+		Image: scrin_gravity_stabilizer_core
 		Sequence: idle
 		Palette: effect
 		RequiresCondition: !build-incomplete
-	Production@SCRINAIRCRAFT:
+	MaterializingProduction@SCRINAIRCRAFT:
 		Produces: ScrinAircraft
 		PauseOnCondition: disabled
 	ProductionQueue@SCRINAIRCRAFT:
@@ -365,12 +382,14 @@ scrin_gravity_stabilizer:
 		ProductionType: ScrinAircraft
 	RallyPoint:
 	Exit@SCRINAIRCRAFT:
-		# Gravity Stabilizer reuses the Warp Gate core and its center.
-		SpawnOffset: 59,-630,0
+		# Gravity Stabilizer reuses the Warp Gate core's horizontal center.
+		SpawnOffset: 59,0,0
 		ProductionTypes: ScrinAircraft
 
 scrin_nerve_center:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinNerveCenterVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x1Shape
 	Tooltip:
@@ -413,6 +432,8 @@ scrin_nerve_center:
 
 scrin_stasis_chamber:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinStasisChamberVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x2Shape
 	Tooltip:
@@ -438,6 +459,8 @@ scrin_stasis_chamber:
 
 scrin_technology_assembler:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinTechnologyAssemblerVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^3x3Shape
 	Tooltip:
@@ -463,6 +486,8 @@ scrin_technology_assembler:
 
 scrin_signal_transmitter:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinSignalTransmitterVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x2Shape
 	Tooltip:
@@ -488,6 +513,8 @@ scrin_signal_transmitter:
 
 scrin_buzzer_hive:
 	Inherits: ^ScrinDefense
+	Voiced:
+		VoiceSet: ScrinBuzzerHiveVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -512,11 +539,13 @@ scrin_buzzer_hive:
 	RenderSprites:
 		PlayerPalette: scrin_buzzer_hive_player
 	Armament:
-		Weapon: ScrinDefenseBeam
+		Weapon: ScrinBuzzerHiveBeam
 	AttackOmni:
 
 scrin_photon_cannon:
 	Inherits: ^ScrinDefense
+	Voiced:
+		VoiceSet: ScrinPhotonCannonVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -545,13 +574,15 @@ scrin_photon_cannon:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Armament:
-		Weapon: ScrinDefenseBeam
+		Weapon: ScrinPhotonCannonBeam
 	AttackTurreted:
 	RenderSprites:
 		PlayerPalette: scrin_photon_cannon_player
 
 scrin_plasma_missile_battery:
 	Inherits: ^ScrinDefense
+	Voiced:
+		VoiceSet: ScrinPlasmaBatteryVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -587,6 +618,8 @@ scrin_plasma_missile_battery:
 
 scrin_growth_accelerator:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinGrowthAcceleratorVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x1Shape
 	Tooltip:
@@ -619,6 +652,8 @@ scrin_growth_accelerator:
 # remains deferred with the playable faction rules.
 scrin_growth_stimulator:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinGrowthStimulatorVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x1Shape
 	Tooltip:
@@ -648,6 +683,8 @@ scrin_growth_stimulator:
 
 scrin_storm_column:
 	Inherits: ^ScrinDefense
+	Voiced:
+		VoiceSet: ScrinStormColumnVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -677,6 +714,8 @@ scrin_storm_column:
 
 scrin_rift_generator:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinRiftGeneratorVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^3x3Shape
 	Tooltip:
@@ -708,6 +747,8 @@ scrin_rift_generator:
 
 scrin_lightning_spike:
 	Inherits: ^ScrinDefense
+	Voiced:
+		VoiceSet: ScrinLightningSpikeVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -732,11 +773,13 @@ scrin_lightning_spike:
 	RenderSprites:
 		PlayerPalette: scrin_lightning_spike_player
 	Armament:
-		Weapon: ScrinDefenseBeam
+		Weapon: ScrinLightningSpikeBeam
 	AttackOmni:
 
 scrin_tiberium_hive:
 	Inherits: ^ScrinDefense
+	Voiced:
+		VoiceSet: ScrinTiberiumHiveVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -766,6 +809,8 @@ scrin_tiberium_hive:
 
 scrin_warp_chasm:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinWarpChasmVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^4x2Shape
 	Tooltip:
@@ -793,7 +838,7 @@ scrin_warp_chasm:
 		Sequence: idle
 		Palette: effect
 		RequiresCondition: !build-incomplete
-	Production@SCRINADVANCED:
+	MaterializingProduction@SCRINADVANCED:
 		Produces: ScrinAdvancedVehicle, ScrinCapitalAircraft
 		PauseOnCondition: disabled
 	ProductionQueue@SCRINADVANCEDVEHICLE:
@@ -812,6 +857,7 @@ scrin_warp_chasm:
 		Type: ScrinCapitalAircraft
 		DisplayOrder: 4
 		Group: Aircraft
+		AlwaysShowForFactions: scrin
 		LowPowerModifier: 300
 		ReadyAudio: UnitReady
 		BlockedAudio: NoBuild
@@ -827,16 +873,18 @@ scrin_warp_chasm:
 	RallyPoint:
 		Path: 1,2
 	Exit@SCRINADVANCEDVEHICLE:
-		# Matches the scaled core sequence offset of 0,-42 screen pixels.
-		SpawnOffset: 0,-827,0
+		# Ground position directly below the floating core.
+		SpawnOffset: 0,0,0
 		ExitCell: 1,2
 		ProductionTypes: ScrinAdvancedVehicle
 	Exit@SCRINCAPITALAIRCRAFT:
-		SpawnOffset: 0,-827,0
+		SpawnOffset: 0,0,0
 		ProductionTypes: ScrinCapitalAircraft
 
 scrin_foundry:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinFoundryVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x1Shape
 	Tooltip:
@@ -886,6 +934,8 @@ scrin_foundry:
 
 scrin_outpost:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinOutpostVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Tooltip:
@@ -905,6 +955,8 @@ scrin_outpost:
 
 scrin_control_node:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinControlNodeVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^4x3Shape
 	Tooltip:
@@ -931,6 +983,8 @@ scrin_control_node:
 
 scrin_phase_generator:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinPhaseGeneratorVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x2Shape
 	Tooltip:
@@ -959,6 +1013,8 @@ scrin_phase_generator:
 # actors; their metagame operations are not part of this visual foundation.
 scrin_lifeform_recycling_plant:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinLifeformPlantVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x1Shape
 	Tooltip:
@@ -985,6 +1041,8 @@ scrin_lifeform_recycling_plant:
 
 scrin_terraforming_nexus:
 	Inherits: ^ScrinBuilding
+	Voiced:
+		VoiceSet: ScrinTerraformingNexusVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^3x2Shape
 	Tooltip:

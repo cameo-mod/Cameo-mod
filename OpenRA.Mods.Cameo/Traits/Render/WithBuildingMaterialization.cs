@@ -22,10 +22,7 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
 {
-	[Desc("Materializes selected sprite bodies without requiring dedicated make sequences.",
-		"The bodies fade in as white silhouettes, then a configurable electric boundary",
-		"travels from bottom to top and reveals their normal sprites.")]
-	public class WithBuildingMaterializationInfo : TraitInfo, Requires<RenderSpritesInfo>, Requires<WithSpriteBodyInfo>
+	public abstract class MaterializationInfo : TraitInfo, Requires<RenderSpritesInfo>
 	{
 		[Desc("Ticks used to fade the initial white silhouette from transparent to opaque.")]
 		public readonly int FadeTicks = 10;
@@ -37,7 +34,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public readonly ImmutableArray<string> BodyNames = ["body"];
 
 		[GrantedConditionReference]
-		[Desc("Condition granted while materializing. Selected sprite bodies should require its inverse.")]
+		[Desc("Condition granted while materializing. Other traits may require its inverse to pause during the effect.")]
 		public readonly string Condition = "materializing";
 
 		[Desc("White silhouette color and opacity.")]
@@ -69,13 +66,20 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		[Desc("Pilot-only delay before repeating the effect. Zero keeps normal one-shot behavior.")]
 		public readonly int PreviewLoopDelayTicks = 0;
+	}
+
+	[Desc("Materializes selected sprite bodies without requiring dedicated make sequences.",
+		"The bodies fade in as white silhouettes, then a configurable electric boundary",
+		"travels from bottom to top and reveals their normal sprites.")]
+	public class WithBuildingMaterializationInfo : MaterializationInfo, Requires<WithSpriteBodyInfo>
+	{
 
 		public override object Create(ActorInitializer init) { return new WithBuildingMaterialization(init, this); }
 	}
 
 	public class WithBuildingMaterialization : INotifyCreated, ITick, IRender, IBuildingMakeAnimation
 	{
-		readonly WithBuildingMaterializationInfo info;
+		readonly MaterializationInfo info;
 		readonly WithSpriteBody[] bodies;
 		readonly RenderSprites renderSprites;
 		readonly bool skipForward;
@@ -340,16 +344,19 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly float progress;
 		readonly uint actorId;
 		readonly int jitterPhase;
-		readonly WithBuildingMaterializationInfo info;
+		readonly MaterializationInfo info;
+		readonly int bandHeight;
+		readonly int boundaryOffset;
 
 		public MaterializationClipRenderable(IModifyableRenderable inner, Rectangle sharedBounds,
 			MaterializationClipMode mode, float progress, uint actorId, int jitterPhase,
-			WithBuildingMaterializationInfo info)
-			: this(inner, sharedBounds, WVec.Zero, mode, progress, actorId, jitterPhase, info) { }
+			MaterializationInfo info, int bandHeight = 0, int boundaryOffset = 0)
+			: this(inner, sharedBounds, WVec.Zero, mode, progress, actorId, jitterPhase,
+				info, bandHeight, boundaryOffset) { }
 
 		MaterializationClipRenderable(IModifyableRenderable inner, Rectangle sharedBounds, WVec boundsOffset,
 			MaterializationClipMode mode, float progress, uint actorId, int jitterPhase,
-			WithBuildingMaterializationInfo info)
+			MaterializationInfo info, int bandHeight, int boundaryOffset)
 		{
 			this.inner = inner;
 			this.sharedBounds = sharedBounds;
@@ -359,6 +366,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			this.actorId = actorId;
 			this.jitterPhase = jitterPhase;
 			this.info = info;
+			this.bandHeight = bandHeight;
+			this.boundaryOffset = boundaryOffset;
 		}
 
 		public WPos Pos => inner.Pos;
@@ -377,7 +386,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		public IRenderable OffsetBy(in WVec offset)
 		{
 			return new MaterializationClipRenderable((IModifyableRenderable)inner.OffsetBy(offset),
-				sharedBounds, boundsOffset + offset, mode, progress, actorId, jitterPhase, info);
+				sharedBounds, boundsOffset + offset, mode, progress, actorId, jitterPhase,
+				info, bandHeight, boundaryOffset);
 		}
 
 		public IRenderable AsDecoration()
@@ -406,13 +416,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		MaterializationClipRenderable Wrap(IModifyableRenderable renderable)
 		{
 			return new MaterializationClipRenderable(renderable, sharedBounds, boundsOffset,
-				mode, progress, actorId, jitterPhase, info);
+				mode, progress, actorId, jitterPhase, info, bandHeight, boundaryOffset);
 		}
 
 		public IFinalizedRenderable PrepareRender(WorldRenderer wr)
 		{
 			return new FinalizedMaterializationClipRenderable(inner.PrepareRender(wr), sharedBounds, boundsOffset,
-				mode, progress, actorId, jitterPhase, info);
+				mode, progress, actorId, jitterPhase, info, bandHeight, boundaryOffset);
 		}
 	}
 
@@ -425,11 +435,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly float progress;
 		readonly uint actorId;
 		readonly int jitterPhase;
-		readonly WithBuildingMaterializationInfo info;
+		readonly MaterializationInfo info;
+		readonly int bandHeight;
+		readonly int boundaryOffset;
 
 		public FinalizedMaterializationClipRenderable(IFinalizedRenderable inner, Rectangle sharedBounds, WVec boundsOffset,
 			MaterializationClipMode mode, float progress, uint actorId, int jitterPhase,
-			WithBuildingMaterializationInfo info)
+			MaterializationInfo info, int bandHeight, int boundaryOffset)
 		{
 			this.inner = inner;
 			this.sharedBounds = sharedBounds;
@@ -439,6 +451,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			this.actorId = actorId;
 			this.jitterPhase = jitterPhase;
 			this.info = info;
+			this.bandHeight = bandHeight;
+			this.boundaryOffset = boundaryOffset;
 		}
 
 		Rectangle ViewBounds(WorldRenderer wr)
@@ -474,7 +488,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var revealTop = Math.Clamp(bounds.Top + Math.Max(0, info.RevealTopInset), bounds.Top, bounds.Bottom);
 			var revealBottom = Math.Clamp(bounds.Bottom - Math.Max(0, info.RevealBottomInset), revealTop, bounds.Bottom);
-			var boundary = revealBottom - (int)Math.Round(progress * (revealBottom - revealTop));
+			var boundary = revealBottom - (int)Math.Round(progress * (revealBottom - revealTop)) + boundaryOffset;
 			if (mode != MaterializationClipMode.Band)
 			{
 				var clip = mode == MaterializationClipMode.Above ?
@@ -486,11 +500,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			var stripWidth = Math.Max(1, info.ElectricStripWidth);
-			var bandHeight = Math.Max(1, info.ElectricBandHeight);
+			var renderedBandHeight = Math.Max(1, bandHeight > 0 ? bandHeight : info.ElectricBandHeight);
 			if (info.ElectricJitter <= 0)
 			{
-				var top = Math.Clamp(boundary - bandHeight / 2, bounds.Top, bounds.Bottom);
-				var bottom = Math.Clamp(top + bandHeight, bounds.Top, bounds.Bottom);
+				var top = Math.Clamp(boundary - renderedBandHeight / 2, bounds.Top, bounds.Bottom);
+				var bottom = Math.Clamp(top + renderedBandHeight, bounds.Top, bounds.Bottom);
 				RenderClipped(wr, Rectangle.FromLTRB(bounds.Left, top, bounds.Right, bottom));
 				return;
 			}
@@ -500,8 +514,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				var right = Math.Min(bounds.Right, left + stripWidth);
 				var jitter = Jitter(actorId, strip, jitterPhase, Math.Max(0, info.ElectricJitter));
 				var center = boundary + jitter;
-				var top = Math.Clamp(center - bandHeight / 2, bounds.Top, bounds.Bottom);
-				var bottom = Math.Clamp(top + bandHeight, bounds.Top, bounds.Bottom);
+				var top = Math.Clamp(center - renderedBandHeight / 2, bounds.Top, bounds.Bottom);
+				var bottom = Math.Clamp(top + renderedBandHeight, bounds.Top, bounds.Bottom);
 				RenderClipped(wr, Rectangle.FromLTRB(left, top, right, bottom));
 			}
 		}
