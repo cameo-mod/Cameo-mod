@@ -583,9 +583,17 @@ vehicle and heals like infantry, and takes one grid from each. Collapsing them o
 put `futuretech_scoutdroid` on the 2500 HP grid and pushed `scout` from worst |Δ| 22.8 to **32.1**
 on its own. Split into `formula.speed_platform` / `formula.hp_platform`; `scout` back to 22.8.
 
-**Also found, not fixed (data, not tooling):** **9 actors are off the speed-5 grid today** — 8
-vehicles (`ts_nod_mobilestealthgenerator` 56, `siege_tank` 43, `ra1_allies_minelayer` 128,
-`japan_nanodronebuggy` 77, …) and 1 ship (`tuboat.nax` 78). Needs a boot-gated yaml pass.
+**Also found, not fixed — and it is a GAP NO AUDIT COVERS.** `audit_stat_formulas` F8/F10 check
+the DERIVED value (`TurnSpeed == round(Speed/5)`, or `2×` for frontal), **not whether `Speed` itself
+is on the 5 grid.** An off-grid Speed whose TurnSpeed is consistently rounded passes every check:
+`japan_nanodronebuggy` Speed **77** → TurnSpeed 15 = round(77/5), and F8 is happy.
+
+**9 ledger actors carry a Speed that is not a multiple of 5, 8 of them buildable** —
+`japan_nanodronebuggy` 77, `ra1_allies_minelayer` 128, `ts_nod_mobilestealthgenerator` 56,
+`tuboat.nax` 78, `siege_tank` 43 (not buildable), … ⚠ **They are NOT turn-law violations** — F8, F10
+and F19 all read 0 and are right to. The Speed GRID is the thing nothing checks. Needs a boot-gated
+yaml pass, and the grid check is a candidate addition to `audit_stat_formulas` (extend it — do not
+write a second audit; see §3.0o).
 
 **Still not enforced:** `Cost` step 10 has no audit (`balance_exceptions.yaml` open item X2). The
 converter pins cost so it cannot write an off-grid one; the gap is in `apply_balance`.
@@ -664,6 +672,52 @@ That is the strongest evidence available that the branches are the right way rou
 the audit prints the table above its findings.
 
 ✅ **Nothing to do here.** F8/F9/F10/F17/F19 all read 0 — the roster is already inside the law.
+
+### 3.0o — ⛔ INCIDENT: I rebuilt existing work three times in one session
+
+**Recorded 2026-08-30 at the maintainer's instruction,** because the pattern matters more than any
+one instance. Three times in one session I built something the repository already had:
+
+| what I built | what already existed | cost |
+|---|---|---|
+| `audit_turn_rate.py` | `audit_stat_formulas.py` F8/F9/F10/F17/F19, already in `run_all.sh`, already at **0 findings**, already auto-FIXED by `gen_derived_stats.py` | **340 false findings** published into DESIGN.md and HANDOFF.md before the real audit was ever run |
+| `formula.turn_speed_for` | the same law, inline in the two files above | a second copy of a law — the exact defect I had removed two commits earlier as a "dead knob" |
+| the fighter/bomber `Speed/15` rule, "discovered" | `DESIGN.md:537`, in a second table 1100 lines from the one I grepped | a whole exchange spent re-deriving a shipped ruling |
+
+⭐ **THE ROOT CAUSE IS NOT A MISSING INSTRUCTION.** The SessionStart hook already prints *"BEFORE
+DESIGNING ANYTHING, GREP docs/DESIGN.md FOR THE CONCEPT"*, and it already tells the story of the
+2026-08-22 session lost to re-deriving §12.0h. I read it and failed anyway, because:
+
+1. **I grepped the PHRASE, not the MECHANISM.** `"TurnSpeed (aircraft)"` found one sentence of a
+   two-part law. `grep -ri fighter tools/` would have found the whole thing implemented and passing.
+2. **I never grepped `tools/` at all.** Every one of these failures was a *tool* that existed. The
+   checklist points at `docs/`; the duplicated work was in code.
+3. **I trusted my own new measurement over a passing audit** — which CLAUDE.md §8e already forbids:
+   *"a result that contradicts a binding law is a contradiction, not a finding."* 340 violations
+   against a roster the suite says is clean should have stopped me on sight.
+
+✅ **THE FIX IS MECHANICAL, BECAUSE ADVICE IS WHAT FAILED.** `tools/hooks/prior_art_guard.py`
+(PreToolUse on `Write`, registered in `.claude/settings.json`) runs the grep instead of asking me
+to. Creating a new `.py` under `tools/` is DENIED while any existing tool carries the same concept
+tokens in its name or module docstring. On the real case it names `gen_derived_stats.py` — the one
+file whose docstring lists F8/F9/F10/F17/F19 and points at `audit_stat_formulas`.
+
+Design notes that matter if anyone touches it:
+
+* It matches on **word boundaries, not substrings.** Substring matching ranked 148 unrelated tools
+  above the right one (`turn` hides inside `return`, `rate` inside `generate`). **A guard that
+  cries wolf is worse than no guard** — it gets skipped, which is the failure it exists to prevent.
+* It requires **every** concept token to be present, so one shared word is not enough.
+* The escape hatch is **one line** — a `PRIOR ART:` note in the new file. It forces the CHECK, not
+  obedience, and the citation stays where the next reader will see it.
+* It never blocks edits to existing files, anything outside `tools/`, or non-Python files.
+
+Pinned by `tools/tests/test_prior_art_guard.py`, including that the two pre-existing guards stay
+wired: **never weaken a guard while adding one.**
+
+⚠ **The rule this leaves behind, for everyone:** before writing a new tool, `grep -ril <concept>
+tools/` — not just `docs/`. And when a fresh measurement contradicts a passing audit, the
+measurement is wrong until proven otherwise.
 
 ### 3.0n — ⛔ THREE CLASSES HAVE THEIR OWN FORMULA. NONE OF THEM CAN RUN.
 

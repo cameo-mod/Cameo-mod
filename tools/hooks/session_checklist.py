@@ -33,6 +33,15 @@ question that feels novel usually is not. The rulings most often re-invented:
                        DESIGNED to change. Comparing them proves nothing.
   §12.0b HEROIC        a DERIVED cell: Heroic = Plate x Scout / PEAK. Never tilt it; recompute it.
 
+⛔ GREP `tools/` BEFORE WRITING A TOOL, NOT JUST `docs/`. On 2026-08-30 a new audit was written
+for a law `audit_stat_formulas.py` (F8/F9/F10/F17/F19) had enforced for months — already in
+run_all.sh, already at 0 findings, already auto-fixed by gen_derived_stats.py. The duplicate
+mis-scoped its cohort and published 340 findings against a CLEAN roster into DESIGN.md. Grep the
+MECHANISM, not the phrase: "TurnSpeed (aircraft)" found one sentence of a two-part law;
+`grep -ril fighter tools/` would have found the whole thing implemented. And a fresh measurement
+that contradicts a PASSING audit is WRONG until proven otherwise — read that audit's SCOPE first.
+[hook-enforced: prior_art_guard denies a new tools/*.py that duplicates an existing tool]
+
 ⛔ NEVER HAND-PARSE YAML. Read through `miniyaml.Ruleset.resolve_weapon` / `.resolve`, and pull
 Versus with `weapon_efficiency.versus_of(node)`. A bespoke line-scanner opened a dict on `Versus:`
 and never CLOSED it, so the `PercentageVersus:` rows sitting in the SAME warhead node overwrote the

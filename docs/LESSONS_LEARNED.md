@@ -29,6 +29,43 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 ---
 
+## ⛔ GREP `tools/` BEFORE WRITING A TOOL — not just `docs/` (2026-08-30)
+
+The reading order above is about DOCUMENTS. Three times in one session work was redone because the
+thing that already existed was **code**:
+
+* `audit_turn_rate.py` re-checked a law `audit_stat_formulas.py` (F8/F9/F10/F17/F19) had enforced
+  for months, already in `run_all.sh`, already at **0 findings**, already auto-fixed by
+  `gen_derived_stats.py`. The duplicate mis-scoped its cohort and published **340 findings against a
+  clean roster** into DESIGN.md and HANDOFF.md.
+* `formula.turn_speed_for` became a SECOND copy of that law — the same defect as the dead `spd_step`
+  knob removed two commits earlier.
+* The fighter/bomber `Speed/15` rule was "discovered" when it sits in `DESIGN.md:537`, a second
+  table 1100 lines from the one that was grepped.
+
+**Two habits, both cheap:**
+
+1. **Grep the MECHANISM, not the phrase.** `"TurnSpeed (aircraft)"` found one sentence of a
+   two-part law. `grep -ril fighter tools/` would have found the whole thing implemented and
+   passing. A law is usually written twice in prose and once in code; the code is the one that runs.
+2. **A fresh measurement that contradicts a PASSING audit is wrong until proven otherwise.** This is
+   CLAUDE.md §8e in a new costume. 340 violations against a suite that reports zero should stop you
+   on sight — go and read the passing check's SCOPE first. In that case the real audit scoped
+   `ut == "air"` **and** template inheritance; the duplicate scoped "has a Mobile or Aircraft trait"
+   and applied the ground law to aircraft in no air template.
+
+⭐ Enforced, not just written down: **`tools/hooks/prior_art_guard.py`** (PreToolUse on `Write`)
+denies creating a new `.py` under `tools/` while an existing tool carries the same concept tokens,
+and names it. One `PRIOR ART:` line in the new file releases the block — it forces the check, not
+obedience. Pinned by `tools/tests/test_prior_art_guard.py`.
+
+⚠ And a scope lesson from the same investigation, worth its own line: **`audit_stat_formulas` F8/F10
+check the DERIVED value, not the grid.** `TurnSpeed == round(Speed/5)` passes for a Speed that is
+not a multiple of 5 (`japan_nanodronebuggy` Speed 77 → TurnSpeed 15). Nine ledger actors sit off the
+Speed grid and no audit covers it. "The audit is green" answers only the question the audit asks.
+
+---
+
 ## Contents
 
 **Crash classes — these end a boot, and most gates cannot see them**

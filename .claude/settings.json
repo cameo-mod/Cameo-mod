@@ -31,6 +31,15 @@
             "timeout": 15
           }
         ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/tools/hooks/prior_art_guard.py\""
+          }
+        ]
       }
     ]
   }
