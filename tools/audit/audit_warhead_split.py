@@ -54,17 +54,12 @@ REVIEW_DMG = 8000
 # FIRED by a concrete actor, while this audit scans EVERY concrete weapon
 # (`rs.weapons`), fired or not. Two populations, both correct for their own
 # question — don't reconcile them by changing one.
-BROADCAST_BASELINE = 371
+BROADCAST_BASELINE = 366
 
-# These composites predate the ratchet. Their obsolete zero-damage child slots
-# used to hide otherwise uniform live mains until the AA routing repair removed
-# those dead slots. Match the exact main-key/damage fingerprint so any gameplay
-# edit stops qualifying and is caught by the normal ratchet.
-ROUTING_REVEALED_BROADCASTS = {
-    "FLAK-23-AA": (("Bullet_Medium", 2000), ("Flak_Medium", 2000)),
-    "ManifoldMG_AA": (("Bullet_Medium", 2000), ("CannonHE_Heavy", 2000),
-                      ("Concussion_Light", 2000)),
-}
+# The two former routing-revealed exceptions were consolidated into their
+# selected Flak and Bullet profiles. Keep the registry empty so a future
+# exception must be an explicit reviewed decision rather than inherited debt.
+ROUTING_REVEALED_BROADCASTS = {}
 
 
 def _int(v) -> int:

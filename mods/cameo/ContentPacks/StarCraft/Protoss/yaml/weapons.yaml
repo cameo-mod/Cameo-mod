@@ -1238,6 +1238,7 @@ EpigraphMG:
 		PercentageScale: 0
 
 ManifoldMG:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_CannonHE_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1268,6 +1269,13 @@ ManifoldMG:
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
 		ValidTargets: Ground, Water
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Light:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 9984
 
 ManifoldMG_AA:
 	Inherits: ManifoldMG
@@ -1281,6 +1289,13 @@ ManifoldMG_AA:
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		ValidTargets: Air
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Light:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 6000
+		PercentageScale: 9984
 
 AtreusMG:
 	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat

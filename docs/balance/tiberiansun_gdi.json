@@ -870,7 +870,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
      "v": "1000"
@@ -885,12 +885,8 @@
     "name": "Drop Pod Uplink",
     "prerequisites": [
      "~ts_gdi_upgradecenter",
-     "!ionc",
      "!droppod",
      "~techlevel.superweapons"
-    ],
-    "queue": [
-     "BuildingAddons"
     ]
    },
    "ts_gdi_dropshipbay": {
@@ -1028,7 +1024,6 @@
     "name": "Ion Cannon Uplink",
     "prerequisites": [
      "~ts_gdi_upgradecenter",
-     "!ionc",
      "!droppod",
      "!tsionc",
      "~techlevel.superweapons"
