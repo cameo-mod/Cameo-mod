@@ -987,6 +987,8 @@ NaxQuadCannon_AA:
 	Warhead@NaxFlakAllyUncounted:
 		ValidTargets: Air
 		Damage: 1000
+	Warhead@NaxFlakGroundWater:
+		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
 

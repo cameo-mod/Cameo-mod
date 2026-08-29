@@ -9,7 +9,7 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "tools/audit")]
 
-from audit_three_way_split import main_warheads
+from audit_three_way_split import main_warhead_nodes, main_warheads
 from audit_warhead_split import ROUTING_REVEALED_BROADCASTS, classify_warheads
 from miniyaml import Ruleset
 
@@ -43,6 +43,52 @@ class AaWeaponRoutingTests(unittest.TestCase):
         mains = {"Concussion_Light", "CannonHE_Heavy", "Bullet_Medium"}
         self.assert_main_warheads_target("ManifoldMG", "Ground, Water", mains)
         self.assert_main_warheads_target("ManifoldMG_AA", "Air", mains)
+
+    def test_consolidated_aa_families_route_every_main_to_air(self):
+        expected = {
+            "ArmoredCarMG_AA": {"Bullet_Medium": "8000",
+                                 "ArmoredCarGroundCompatibility": "8000"},
+            "NaxQuadCannon_AA": {"Flak_Medium": "5000",
+                                  "NaxFlakGroundWater": "2000"},
+            "RA2MultiHoverMissile_AA": {"CannonHE_Medium": "2000",
+                                         "MissileHE_Light": "2000"},
+            "RA2MultiHoverMissile_AA_elite": {"CannonHE_Medium": "2000",
+                                               "MissileHE_Light": "2000"},
+        }
+        for weapon_name, mains in expected.items():
+            weapon = self.rules.resolve_weapon(weapon_name)
+            self.assertEqual("Air", weapon.child("ValidTargets").value, weapon_name)
+            self.assertEqual(set(mains), set(main_warheads(weapon)), weapon_name)
+            for key, damage in mains.items():
+                warhead = weapon.child(f"Warhead@{key}")
+                self.assertEqual(damage, warhead.child("Damage").value,
+                                 f"{weapon_name}/{key}")
+                targets = {x.strip() for x in
+                           warhead.child("ValidTargets").value.split(",")}
+                self.assertIn("Air", targets, f"{weapon_name}/{key}")
+
+    def test_active_air_only_armaments_have_no_ground_only_main_damage(self):
+        failures = []
+        checked = set()
+        for actor_name in sorted(self.rules.actors):
+            actor = self.rules.resolve(actor_name)
+            if actor is None:
+                continue
+            for armament in actor.children_named("Armament"):
+                weapon_name = armament.get("Weapon")
+                if not weapon_name or weapon_name in checked:
+                    continue
+                checked.add(weapon_name)
+                weapon = self.rules.resolve_weapon(weapon_name)
+                if weapon is None or weapon.get("ValidTargets") != "Air":
+                    continue
+                for warhead in main_warhead_nodes(weapon):
+                    targets = {x.strip() for x in
+                               (warhead.get("ValidTargets") or "").split(",") if x.strip()}
+                    if "Air" not in targets:
+                        failures.append(f"{weapon_name}/{warhead.key}: "
+                                        f"{warhead.get('ValidTargets') or '<default>'}")
+        self.assertEqual([], failures)
 
     def test_routing_revealed_audit_exceptions_are_exact(self):
         self.assertEqual({"FLAK-23-AA", "ManifoldMG_AA"},
