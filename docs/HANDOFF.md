@@ -493,6 +493,34 @@ From [`audit/SUMMARY.md`](audit/SUMMARY.md), smallest first:
    ⚠ It is a yaml edit, so it needs the boot gate; the audit is wired ADVISORY until it lands,
    then move it into the blocking loop.
 
+### 3.3a — The engine limits are RULED (2026-08-29); the roster is not yet inside them
+
+`tools/audit/audit_engine_constraints.py` enforces them, advisory until the roster
+complies. Limits and exemptions live in `docs/design/balance_exceptions.yaml`, never
+in the checker.
+
+| limit | ruled | why | violations |
+|---|---|---|---|
+| **E1** ground `Speed` | **>= 30** | pathfinding safety | **2** (`sc_zerg_larva` 1, `cabal_avatar` 25) + 5 stationary `cabal_*_backup` to classify |
+| **E2** `ReloadDelay` | **>= 10** for ordinary direct-fire | CPU tick load, not balance | **72** live weapons |
+| **E3** snipers | `InstantHitWithFakeBullets` | one mechanism per role | **15** of 21 still `Bullet` |
+
+⚠ **30, not 50.** 50 is the CLASS ANCHOR minimum (`class_anchors.json` `speed0`), not the
+engine floor, and the two are different concepts. A floor of 50 flags 100 of 807 buildable
+ground movers and condemns the super-heavy class — Sturmtiger 30, Devastator 31, Ratte 35,
+Yamato 35 are heavy by design, and the 44-49 infantry band is fine. At 30 the audit flags
+seven, six of which are not units.
+
+⚠ **E2 is not a sweep.** Reload is half of DPS, so raising it alone is a straight nerf. The
+ruled fix is PAIRED and goes through `apply_balance`: a 6-tick reload becomes 12 with damage
+doubled — DPS preserved, tick load halved. Scheduled for the weapon balance phase, not now.
+
+⚠ **Exempt by MECHANISM, matched by family stem.** A continuous beam's `ReloadDelay` IS its
+damage tick; a Gatling ladder's 6/4/2 is the spin-up. The checker strips the DESIGN.md §1
+variant suffixes (`_AA`, `_elite`, `Waveforce`, ...) so one registry entry covers a whole
+family — otherwise the exemption silently stops covering `RA2GattlingMG3_AA` the day someone
+adds it.
+
 ### 3.3b — Queued by the maintainer rulings of 2026-08-29
 
 The rulings themselves are recorded in `DESIGN.md` §12.0-pre / §12.0-scope / §6 and in
@@ -507,21 +535,21 @@ The rulings themselves are recorded in `DESIGN.md` §12.0-pre / §12.0-scope / �
 2. **Enforce the cost grid.** Cost is a multiple of 10 (maintainer 2026-08-29) and nothing
    checks it: `formula.py` has `DAMAGE_STEP` but no `COST_STEP`, and no audit reports an
    off-grid Cost. (`balance_exceptions.yaml` open item X2.)
-3. **Superweapon damage.** `audit_support_powers.py` S3 now reports it. First reading: Ion
-   Cannon damage spans **259068 to 452075** across factions at the same charge interval —
-   TD GDI and Steel Consortium/Protoss fire 452075, TS GDI's own fires 271072. Nobody has
-   ruled what the spread should be.
+3. **Superweapon damage normalization — RULED a defect, DEFERRED.** Maintainer 2026-08-29:
+   *"A 259k to 452k damage spread for the same charge time is an un-normalized balance
+   defect. We will not fix this today, but log it. Superweapon damage normalization will get
+   its own dedicated pass after W27."* Measured by `audit_support_powers.py` S3: TD GDI and
+   Steel Consortium/Protoss 452075, TS GDI 271072, Asian Alliance 259068, all at 6000-7500
+   charge. Logged as open item X5. **Do not start this before W27.**
 4. **Harvester income bands.** `docs/design/HARVESTER_BALANCE.md` §5 proposes T1 (aggregate
    within +/-15% of the median) and T2 (long/short ratio 0.24-0.34). **Not signed off.**
    13 of 26 refinery economies are currently outside +/-25%.
-5. **Decide the movement-speed floor.** The maintainer's "pathfinding safe above 50" is a
-   FLOOR and the class anchors already encode it (`speed0` minimum is exactly 50). But 94
-   buildable ground units sit below it BY DESIGN — Kirov 30, Sturmtiger 30, Ratte 35,
-   Devastator 31. It cannot be applied as a sweep. (open item X3.)
-6. **Decide `HarvesterBalancer`'s direction.** All 33 harvesters get +38% speed within 5
-   cells of a refinery, inherited from CA's default. It rewards mining CLOSE, so it widens
-   the short/long income gap rather than closing it. (open item X4.)
-7. **Finish the instant-hit conversion.** The Shattered Paradise port
+5. **Decide `HarvesterBalancer`'s direction.** All 33 harvesters get +38% speed within 5
+   cells of a refinery, inherited from CA's default. It is a CANONIZED model input
+   (maintainer 2026-08-29) alongside `DockHost` concurrency and free refinery fleets — but
+   its DIRECTION is still open: it rewards mining CLOSE, so it widens the short/long income
+   gap rather than closing it. (open item X4.)
+6. **Finish the instant-hit conversion.** The Shattered Paradise port
    (`InstantHitWithFakeBullets`) is DONE and deployed, but 15 sniper weapons are still
    `Bullet` at Speed 2500-10000, and `td_gdi_commando_sniper` is instant-hit while its
    `_elite` variant is not — one family, two projectile types.

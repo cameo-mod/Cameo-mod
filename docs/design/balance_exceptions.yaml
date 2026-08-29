@@ -142,8 +142,19 @@ categories:
 limits:
   reload_delay:
     floor: 10
-    ruling: maintainer 2026-08-29
+    applies_to: standard projectile, missile and bullet weapons
+    ruling: maintainer 2026-08-29 (RULED)
     quote: "Reload delay lower limit should be at 10 unless there is a good reason for it like the tesla coil"
+    why: >
+      CPU, not balance. Hundreds of standard bullets firing every 3 frames is
+      tick exhaustion. That is why the exemptions below are by MECHANISM and
+      not by taste: a continuous beam ticking at 1 is one actor, a hundred
+      chainguns ticking at 6 is the load problem.
+    fix_method: >
+      PAIRED, through the pipeline. A 6-tick reload becomes 12 with damage
+      doubled — DPS preserved, tick load halved. Raising reload alone is a
+      straight DPS nerf and is not what was ruled.
+    tool: tools/audit/audit_engine_constraints.py E2
     measured_2026_08_29:
       live_weapons_below_floor: 121
       of_which_zero_damage: 7
@@ -166,7 +177,10 @@ limits:
         why: maintainer named the tesla coil explicitly; AttackTesla owns the cycle (DESIGN.md §6)
         members: [TeslaZap, TeslaZap_EMP, TeslaZapArc_EMP, PrismCharge, RA2Prism,
                   RA2CoilBolt, RA2CoilBolt2, RA2CoilBolt3, IxianCharge_EMP,
-                  TSCABALCharge_EMP]
+                  TSCABALCharge_EMP,
+                  # The OP variants are the same coil weapon; the infixed "OP"
+                  # is not a suffix, so stem matching cannot reach them.
+                  RA2OPCoilBolt1, RA2OPCoilBolt2, RA2OPCoilBolt3]
       - name: repair_and_heal
         why: not damage weapons; the delay is a heal tick
         members: [SCVRepair, RavenRepair, TKMMedicHeal, GDIRigDroneRepair,
@@ -177,32 +191,42 @@ limits:
                   NaxisDonnerschlagTargetVisualLaser, Future_MBT_DebuffLaser,
                   Future_MBT_DebuffLaser_elite, SCSpiderEngage]
     note: >
-      Everything NOT in an exempt family is a candidate for the floor — mostly
-      chainguns and pistols at 6-9 (ChainGun, Colt45, HueyGun, MachineGunH,
-      TSMechMGII, SteelRunnerPistols, ...). Raising those to 10 must be paired
-      with a Damage rise through the pipeline or it is a straight DPS nerf.
+      Everything NOT in an exempt family is a GENUINE VIOLATION (maintainer
+      2026-08-29) — mostly chainguns and pistols at 6-9 (ChainGun, Colt45,
+      HueyGun, MachineGunH, TSMechMGII, SteelRunnerPistols, ...). They are
+      reported now and scaled during the weapon balance phase, not before:
+      the paired damage change has to go through `apply_balance`.
 
   movement_speed:
-    floor: 50
-    applies_to: ground movers (Mobile); Aircraft are not on the ground pathfinder
-    ruling: maintainer 2026-08-29
-    quote: "pathfinding safe speed anything above 50 I would say"
+    floor: 30
+    applies_to: buildable ground movers (Mobile)
+    ruling: maintainer 2026-08-29 (RULED — supersedes the earlier 50 reading)
+    quote: >
+      "The absolute engine floor for ground movers is 30. ... The 44-49 infantry
+      band is acceptable."
+    why: pathfinding safety
+    exempt:
+      - Aircraft — no ground pathfinder
+      - structures
+      - actors deliberately stationary at Speed 0 (classify each; an accidental
+        0 is not exempt)
+    not_the_anchor_minimum: >
+      ⚠ 50 is the CLASS ANCHOR minimum (`docs/balance/class_anchors.json`
+      speed0 spans 50..200), NOT the engine floor. They are different concepts
+      and conflating them illegally flags the super-heavy class: Sturmtiger 30,
+      Devastator 31, Ratte 35, Yamato 35 are heavy BY DESIGN. A floor of 50
+      would have flagged 100 of 807 buildable ground movers; a floor of 30
+      flags 7.
     measured_2026_08_29:
-      buildable_movers: 975
-      below_floor: 118
-      of_those_aircraft: 18
-      of_those_props: 6      # 5x cabal *_backup at 0, sc_zerg_larva at 1
-      genuine_slow_ground_units: 94
-      median_speed: 75
-    note: >
-      Read as a FLOOR, not a ceiling. It is consistent with the class anchors:
-      `docs/balance/class_anchors.json` has speed0 spanning 50..200 with a
-      minimum of EXACTLY 50 (dreadnought, heavy_infantry, mortar,
-      special_forces, support), so the anchor table already encodes it.
-      The 94 genuine sub-50 units are slow BY DESIGN — Kirov 30, Battlecruiser
-      30, Sturmtiger 30, Ratte 35, Devastator 31, Chrono Legionnaire 35 — plus
-      a band of infantry at 40-49. Deciding whether the floor overrides that
-      design intent is an open question, not a cleanup.
+      buildable_ground_movers: 807
+      below_50: 100
+      below_40: 20
+      below_35: 12
+      below_30: 7
+      of_those_7:
+        non_units: 6        # 5x cabal_*_backup at Speed 0, sc_zerg_larva at 1
+        genuine: 1          # cabal_avatar at 25
+    tool: tools/audit/audit_engine_constraints.py E1
 
   projectile_speed:
     ruling: maintainer 2026-08-29, approximate
@@ -220,11 +244,14 @@ limits:
       belongs to flame weapons, which are short-range by design.
 
   instant_hit_conversion:
-    ruling: maintainer 2026-08-29
+    rule: every sniper weapon must use InstantHitWithFakeBullets
+    ruling: maintainer 2026-08-29 (RULED)
     quote: >
-      "those should be transformed into the instant hits with fake bullets we
-      ported from shattered paradise"
+      "All sniper weapons must use InstantHitWithFakeBullets. ... The 15 weapons
+      still using Bullet at 2500-10000 speed should be flagged by the constraint
+      reporter as deprecated patterns."
     status: PORT DONE, CONVERSION PARTIAL
+    tool: tools/audit/audit_engine_constraints.py E3
     projectile: OpenRA.Mods.Cameo/Projectiles/InstantHitWithFakeBullets.cs
     measured_2026_08_29:
       snipers_on_instant_hit: 6    # LightSniper, NaxiSniper, NaxiSniper_elite,
@@ -251,12 +278,29 @@ open_items:
       formula.py has DAMAGE_STEP but no COST_STEP, and no audit reports a Cost
       that is not a multiple of 10.
   - id: X3
-    what: The movement-speed floor conflicts with deliberate slow units.
+    what: RESOLVED 2026-08-29 — the movement-speed floor is 30, not 50.
     detail: >
-      94 buildable ground units sit below 50 by design. The floor cannot be
-      applied as a sweep; it needs a per-unit exemption list or a lower value.
+      50 is the class-anchor minimum, not the engine floor. At 30 the
+      heavy-by-design band is legal and only 7 buildable ground movers are
+      flagged, 6 of them non-units. See limits.movement_speed.
   - id: X4
     what: HarvesterBalancer pays +38% for mining CLOSE.
     detail: >
       It widens the short/long income gap rather than closing it. Uniform
       across all 33 harvesters, inherited from CA's 5-cell default.
+  - id: X5
+    what: Ion Cannon damage is un-normalized across factions.
+    ruling: maintainer 2026-08-29
+    quote: >
+      "A 259k to 452k damage spread for the same charge time is an
+      un-normalized balance defect. We will not fix this today, but log it.
+      Superweapon damage normalization will get its own dedicated pass after
+      W27."
+    measured_2026_08_29:
+      td_gdi_TDIonCannon: 452075
+      steelconsortium_and_protoss_SteelIonCannon: 452075
+      ts_gdi_TSIonCannon: 271072
+      asianalliance_AsianTSIonCannon: 259068
+      charge_interval: 6000-7500 for all four
+    status: DEFERRED to a dedicated pass after W27. Reported by
+            tools/audit/audit_support_powers.py S3.

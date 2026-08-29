@@ -41,21 +41,39 @@ match — but it must be a deliberate one.
 Refinery **cost and build time are identical across every faction** (3000 credits,
 750 build duration), so that axis is clean and needs no correction.
 
-### The corrected protocol
+### The official protocol (maintainer 2026-08-29 — RULED)
 
-Same map and build order, but measure a **rate over a fixed window** instead of a
-time to a moving threshold:
+> *"The official testing protocol for economy profiling is now credits harvested
+> over a fixed 5-minute window."*
 
-1. Game speed **Normal**. Single player, no bots, `DefaultCash: 12345`.
+Same map and build order as the field test, but measuring a **rate over a fixed
+window** instead of a time to a moving threshold:
+
+1. Game speed **Normal** (`Timestep: 40` = 25 ticks/sec). Single player, no bots,
+   `DefaultCash: 12345`.
 2. Power plant, then three refineries, placed as close to the starting ore as the
    footprint allows. Build nothing else.
 3. At a fixed mark **T0 = 3:00** (all three refineries complete and saturated for
    every faction), record credits. At **T1 = 8:00**, record credits again.
 4. **income = (credits(T1) − credits(T0)) / 300 seconds.**
-   Spending nothing between the marks keeps the cap out of the measurement; if the
-   cap is still reached, sell a silo's worth or extend with silos and say so.
+   Spending nothing between the marks keeps the storage cap out of the
+   measurement; if the cap is still reached, extend with silos and say so.
 5. Repeat with the refineries placed at the **far** ore field for the long-range
    figure. Both numbers are needed — one alone is not a balance measurement (§4).
+
+### Canonized model inputs (maintainer 2026-08-29 — RULED)
+
+Three mechanics are officially recognised as the primary drivers of faction
+economic divergence, and any economy model that omits one is incomplete:
+
+* **`HarvesterBalancer`** — the +38% speed within 5 cells of a refinery (§1).
+* **Multiple `DockHost` traits** — unload concurrency (§1 parameter 5).
+* **Free refinery fleets** — the harvesters a refinery gives away (§1 parameter 6).
+
+And: **`Capacity` must strictly follow the yaml.** No tool may carry its own
+copy. `harvester_income.py` reads it from `StoresResources` on the resolved
+actor; `harvester_table.py`'s hardcoded 100 for the Noid harvester against a
+yaml value of 50 is exactly the failure this rule prevents.
 
 This is deterministic: OpenRA's simulation is lockstep, so the same build order on
 the same map yields the same numbers every run.

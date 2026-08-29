@@ -99,8 +99,13 @@ done
 # a yaml edit and yaml edits need a boot gate, so the finding is reported while
 # the suite stays green. MOVE IT INTO THE BLOCKING LOOP once S1 reads clean;
 # it guards a class grep cannot find. See docs/design/balance_exceptions.yaml.
+# `engine_constraints` is advisory for the same reason: its findings are real
+# (maintainer-ruled limits, 2026-08-29) but every fix is a yaml or pipeline
+# change needing the boot gate — E2 in particular must be a PAIRED reload/damage
+# change through apply_balance, not a sweep. MOVE IT INTO THE BLOCKING LOOP once
+# the roster is inside the limits.
 for a in code_duplication test_coverage recent_changes error_handling security \
-         support_powers; do
+         support_powers engine_constraints; do
   echo "== audit_$a (advisory)"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"

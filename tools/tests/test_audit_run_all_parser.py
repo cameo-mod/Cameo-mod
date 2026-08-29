@@ -60,6 +60,9 @@ class ParsesTheRealShellScript(unittest.TestCase):
         # 9 support powers whose `Prerequisites:` header line is missing (CLAUDE.md 8b).
         # Blocking once S1 reads clean.
         "support_powers",
+        # Maintainer-ruled engine limits (2026-08-29). Red on a real roster gap;
+        # E2 needs a paired reload/damage change through the pipeline, not a sweep.
+        "engine_constraints",
     }
 
     def test_the_advisory_list_is_the_scheduled_family(self):
