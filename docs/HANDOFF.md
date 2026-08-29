@@ -354,6 +354,36 @@ python tools/balance/extract_stats.py     # or: run_pipeline.py --extract
 ⚠ Never hand-edit a ledger number to make drift go away — that inverts the pipeline
 and is exactly what rule 3 forbids. Re-extraction regenerates the ledger *from* yaml.
 
+### 3.0g — ⛔ THE PRICING TOOL READS eff-DPS AS 0 FOR MOST UNITS (found 2026-08-29)
+
+The pipeline's last mile WORKS: with `scout` signed off,
+`propose_class_rebalance.py --class scout` produces a full 24-unit price proposal
+(`docs/balance/proposal_scout_infantry.md`). That is the first real output the
+pricing chain has produced.
+
+**But 15 of the 24 rows report `eff DPS = 0.0`**, and those rows price at 32–63
+against costs of 100–200 — deltas of −50% to −87%. Any sign-off based on that
+table would be signing off noise.
+
+⚠ **It is NOT the W23 gap.** The obvious hypothesis — these are the unsplit legacy
+weapons — was tested and is **wrong**: **14 of the 15** zero-DPS units DO carry a
+`^Warhead_` family.
+
+⚠ **It is not missing data either.** Read straight from the ledger:
+
+```
+naxis_naxiriflesoldier  Armament@PRIMARY  reload 50  warhead Bullet_Light 4000   -> reported 0.0
+ra2_allies_gi           Armament@PRIMARY  reload 15  warhead Bullet_Light 2000   -> reported 63.2
+```
+
+Same shape, same fields populated, one reads and one does not. **The defect is in
+`propose_class_rebalance`'s DPS reading**, not in the roster and not in the ledger.
+
+**This is the highest-value bug in the pipeline right now.** Until it is fixed, every
+class proposal is unusable, so signing more anchors buys nothing — the tool that
+consumes them cannot price. Fix this BEFORE tagging more units or signing more
+classes.
+
 ### 3.0f — ⛔ WHY 0 OF 27 CLASS ANCHORS ARE SIGNED (measured 2026-08-29)
 
 Pricing is blocked on the anchors and nothing said why. `tools/balance/anchor_readiness.py`
