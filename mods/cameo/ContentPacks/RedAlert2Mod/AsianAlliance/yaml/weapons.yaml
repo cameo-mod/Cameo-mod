@@ -1441,6 +1441,7 @@ AsianSmallOilBomb:
 		AimTargetStances: Enemy, Neutral
 
 AsianPulverizerGatling:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_CannonHE_Heavy
 	Inherits@3: ^Projectile_Shell_Heavy
@@ -1468,8 +1469,14 @@ AsianPulverizerGatling:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 6000
+		PercentageScale: 9984
 AsianPulverizerMechaGatling:
-	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: AsianPulverizerGatling
@@ -1500,7 +1507,11 @@ AsianPulverizerMechaGatling:
 	Warhead@Bullet_Medium:
 		Damage: 6000
 		PercentageScale: 3317
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 10000
+		PercentageScale: 5990
 AsianSinglePlasma:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium

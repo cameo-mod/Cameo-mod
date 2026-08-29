@@ -1152,17 +1152,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1174,6 +1167,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief",
       "slot": "Armament@primary",
       "versus_templates": [
+       "^Compatibility_MissileAP_LightFlat",
        "^Warhead_Arrow_Light",
        "^RA2LightMissile",
        "^Effect_Grey_Explosion_Small_RA2"

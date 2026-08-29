@@ -631,6 +631,7 @@ Future_CoilerFriendFrag2:
 		Amount: 1
 
 Future_MultiMissile:
+	Inherits@finalmain: ^Compatibility_MissileAP_LightFlat
 	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
 	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
@@ -643,6 +644,12 @@ Future_MultiMissile:
 		Damage: 4000
 	Warhead@MissileAP_Light:
 		Damage: 4000
+	-Warhead@Arrow_Light:
+	-Warhead@MissileAP_Light:
+	Warhead@MissileAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 Future_MultiMissile_Javelin:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy

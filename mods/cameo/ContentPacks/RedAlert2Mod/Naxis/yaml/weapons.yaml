@@ -510,8 +510,9 @@ NaxiShrek:
 	-Warhead@TankDestroyerCannon:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 40000
-		PercentageScale: 0
+		Damage: 48000
+		PercentageScale: 1665
+	-Warhead@MissileAP_Medium:
 NaxiShrek_elite:
 	Inherits: NaxiShrek
 	Report: bazook1.aud
@@ -526,6 +527,10 @@ NaxiShrek_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 48000
+		PercentageScale: 1665
 
 NaxiShrekCons:
 	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
@@ -608,8 +613,9 @@ NaxiShrekCons:
 	-Warhead@TankDestroyerCannon:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 30000
-		PercentageScale: 0
+		Damage: 36000
+		PercentageScale: 1664
+	-Warhead@MissileAP_Medium:
 NaxiShrekCons_elite:
 	Inherits: NaxiShrekCons
 	Report: bazook1.aud
@@ -624,6 +630,10 @@ NaxiShrekCons_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 36000
+		PercentageScale: 1664
 
 NaxiHetzerDestroyer:
 	Inherits: ^Warhead_CannonHE_Medium

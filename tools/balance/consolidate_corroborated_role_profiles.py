@@ -86,6 +86,16 @@ ROOTS = {
         },
         "local-scout-anti-infantry",
     ),
+    "NaxiShrek": (
+        "MissileAP_Medium", {"NaxiShrek_elite"}, "existing-roleflat"),
+    "NaxiShrekCons": (
+        "MissileAP_Medium", {"NaxiShrekCons_elite"}, "existing-roleflat"),
+    "AsianPulverizerGatling": (
+        "Bullet_Medium", {"AsianPulverizerMechaGatling"},
+        "reviewed-anti-infantry"),
+    "MarineMG": ("Bullet_Medium", set(), "reviewed-anti-infantry"),
+    "MadcapGun": ("Bullet_Medium", set(), "reviewed-anti-infantry"),
+    "Future_MultiMissile": ("MissileAP_Light", set(), "name"),
 }
 
 DESTINATION_OVERRIDES = {
@@ -172,6 +182,28 @@ BASELINE = {
         {"Bullet_Light", "CannonHE_Heavy", "MissileAP_Medium"}, 6000, 9984),
     "SteelCloneGunResonanceBounce2_elite": (
         {"Bullet_Light", "CannonHE_Heavy", "MissileAP_Medium"}, 6000, 9984),
+    "NaxiShrek": (
+        {"MissileAP_Medium", "MissileAP_MediumFlatCompatibility"},
+        48000, 1665),
+    "NaxiShrek_elite": (
+        {"MissileAP_Medium", "MissileAP_MediumFlatCompatibility"},
+        48000, 1665),
+    "NaxiShrekCons": (
+        {"MissileAP_Medium", "MissileAP_MediumFlatCompatibility"},
+        36000, 1664),
+    "NaxiShrekCons_elite": (
+        {"MissileAP_Medium", "MissileAP_MediumFlatCompatibility"},
+        36000, 1664),
+    "AsianPulverizerGatling": (
+        {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 6000, 9984),
+    "AsianPulverizerMechaGatling": (
+        {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 10000, 5990),
+    "MarineMG": (
+        {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 36000, 1664),
+    "MadcapGun": (
+        {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 36000, 1664),
+    "Future_MultiMissile": (
+        {"Arrow_Light", "MissileAP_Light"}, 8000, 9988),
 }
 
 TARGETS = {
@@ -214,6 +246,15 @@ TARGETS = {
     "SteelCloneGunResonanceBounce1_elite": "Ground, Water, Air",
     "SteelCloneGunResonanceBounce2": "Ground, Water, Air",
     "SteelCloneGunResonanceBounce2_elite": "Ground, Water, Air",
+    "NaxiShrek": "Ground, Water",
+    "NaxiShrek_elite": "Ground, Water",
+    "NaxiShrekCons": "Ground, Water",
+    "NaxiShrekCons_elite": "Ground, Water",
+    "AsianPulverizerGatling": "Ground, Air, Water",
+    "AsianPulverizerMechaGatling": "Ground, Air, Water",
+    "MarineMG": "Ground, Water, Air",
+    "MadcapGun": "Ground, Water, Air",
+    "Future_MultiMissile": "Ground, Water, Air",
 }
 
 CANONICAL = re.compile(r"^\^Warhead_([A-Za-z]+)_(\w+)$")
@@ -227,6 +268,12 @@ CONTRACT_FIELDS = (
     "ValidTargets", "InvalidTargets", "ValidRelationships",
     "InvalidRelationships", "AffectsParent", "TargetActorCenter",
 )
+TOP_LEVEL_ROUTE_OVERRIDES = {
+    "NaxiShrek", "NaxiShrek_elite", "NaxiShrekCons", "NaxiShrekCons_elite",
+}
+INHERITED_DESTINATION_TEMPLATE = {
+    "AsianPulverizerMechaGatling": "Inherits@collapseflat",
+}
 
 
 def descendants(rs: Ruleset, root: str) -> set[str]:
@@ -287,6 +334,21 @@ def selections(rs: Ruleset) -> dict[str, str]:
                     or not prioritizes_infantry):
                 raise RuntimeError(
                     f"{root}: Clone Trooper local scout/infantry role changed")
+        elif evidence == "reviewed-anti-infantry":
+            actor_by_weapon = {
+                "AsianPulverizerGatling": "asianalliance_pulverizer",
+                "MarineMG": "terran_marine",
+                "MadcapGun": "terran_madcap",
+            }
+            actor_name = actor_by_weapon[root]
+            actor = rs.resolve(actor_name)
+            armed = actor is not None and any(
+                child.key.startswith("Armament")
+                and child.get("Weapon") == root
+                for child in actor.children)
+            if not armed:
+                raise RuntimeError(
+                    f"{root}: reviewed actor binding for {actor_name} changed")
         for name in {root, *expected}:
             if name in selected:
                 raise RuntimeError(f"{name}: selected through multiple roots")
@@ -348,9 +410,14 @@ def inspect(rs: Ruleset, selected: dict[str, str]):
             tuple(tokens(node.get(field)) for field in CONTRACT_FIELDS)
             for node in nodes.values()
         }
-        if len(contracts) != 1:
+        if len(contracts) != 1 and name not in TOP_LEVEL_ROUTE_OVERRIDES:
             raise RuntimeError(f"{name}: selected target contracts differ")
-        if str(nodes[destination_key].get("ValidTargets") or "") != TARGETS[name]:
+        destination_targets = str(
+            nodes[destination_key].get("ValidTargets") or "")
+        top_level_targets = str(resolved.get("ValidTargets") or "")
+        if (destination_targets != TARGETS[name]
+                and not (name in TOP_LEVEL_ROUTE_OVERRIDES
+                         and top_level_targets == TARGETS[name])):
             raise RuntimeError(f"{name}: baseline target route changed")
         for key, node in nodes.items():
             if any("PhysicalState" in child.key
@@ -456,6 +523,42 @@ def update_existing_compatibility(
         lines[matches[0]] = f"\t\t{key}: {value}\n"
 
 
+def remove_local_compatibility_removal(
+        changed: dict[pathlib.Path, list[str]], path: pathlib.Path,
+        weapon: str, destination: str) -> None:
+    """Allow a selected descendant to replace a formerly suppressed profile."""
+    lines = changed.setdefault(
+        path, path.read_text(encoding="utf-8-sig").splitlines(True))
+    start, end = block_bounds(lines, weapon)
+    marker = f"-Warhead@{destination}FlatCompatibility:"
+    matches = [
+        index for index in range(start + 1, end)
+        if lines[index].strip() == marker
+    ]
+    if len(matches) > 1:
+        raise RuntimeError(f"{weapon}: duplicate local compatibility removals")
+    if matches:
+        del lines[matches[0]]
+
+
+def remove_redundant_local_template(
+        changed: dict[pathlib.Path, list[str]], path: pathlib.Path,
+        weapon: str) -> None:
+    key = INHERITED_DESTINATION_TEMPLATE.get(weapon)
+    if key is None:
+        return
+    lines = changed.setdefault(
+        path, path.read_text(encoding="utf-8-sig").splitlines(True))
+    start, end = block_bounds(lines, weapon)
+    matches = [
+        index for index in range(start + 1, end)
+        if lines[index].lstrip().startswith(f"{key}:")
+    ]
+    if len(matches) != 1:
+        raise RuntimeError(f"{weapon}: expected one redundant {key}")
+    del lines[matches[0]]
+
+
 def apply_changes(rs: Ruleset, selected: dict[str, str], plans) -> None:
     changed: dict[pathlib.Path, list[str]] = {}
     add_compatibility_templates(changed, rs, set(selected.values()))
@@ -466,7 +569,11 @@ def apply_changes(rs: Ruleset, selected: dict[str, str], plans) -> None:
         destination = selected[name]
         local = rs.weapon(name)
         path = pathlib.Path(local.file)
-        ensure_template_inherit(changed, path, name, destination)
+        remove_redundant_local_template(changed, path, name)
+        remove_local_compatibility_removal(
+            changed, path, name, destination)
+        if name not in INHERITED_DESTINATION_TEMPLATE:
+            ensure_template_inherit(changed, path, name, destination)
         compatibility = f"{destination}FlatCompatibility"
         local_has_compatibility = any(
             child.key == f"Warhead@{compatibility}" for child in local.children)

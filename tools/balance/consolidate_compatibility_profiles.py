@@ -115,6 +115,7 @@ PERCENTAGE_SCALES = {
 # the compatibility profile the sole canonical main.  Keep this older converter
 # idempotent without weakening its checks for any other entry.
 FINALIZED_BY_PINNED_ROLE = {
+    'AsianPulverizerMechaGatling': (10000, 5990),
     'CannonAttackRobotGun': (8000, 4988),
     'LatinSmokerCannon': (13000, 3070),
     'RA2LarsRocket': (10000, 3990),

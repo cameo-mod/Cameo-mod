@@ -43,20 +43,20 @@ class WeaponStructureInventoryTests(unittest.TestCase):
 
     def test_current_corrected_baseline(self):
         self.assertEqual(2345, self.data["counts"]["concrete_weapons"])
-        self.assertEqual(656, self.data["counts"]["stacked_main_all_concrete"])
-        self.assertEqual(465, self.data["counts"]["stacked_main_direct_actor_armament"])
-        self.assertEqual(550, self.data["counts"]["stacked_main_transitive_weapon_graph"])
+        self.assertEqual(647, self.data["counts"]["stacked_main_all_concrete"])
+        self.assertEqual(456, self.data["counts"]["stacked_main_direct_actor_armament"])
+        self.assertEqual(541, self.data["counts"]["stacked_main_transitive_weapon_graph"])
         self.assertEqual(106, self.data["counts"]["stacked_main_unreached"])
-        self.assertEqual(3246, self.data["counts"]["main_warhead_instances_all_concrete"])
-        self.assertEqual(1218, self.data["counts"]["excess_main_warhead_instances_all_concrete"])
-        self.assertEqual(2810, self.data["counts"]["main_warhead_instances_transitive_weapon_graph"])
-        self.assertEqual(1065, self.data["counts"]["excess_main_warhead_instances_transitive_weapon_graph"])
+        self.assertEqual(3233, self.data["counts"]["main_warhead_instances_all_concrete"])
+        self.assertEqual(1205, self.data["counts"]["excess_main_warhead_instances_all_concrete"])
+        self.assertEqual(2797, self.data["counts"]["main_warhead_instances_transitive_weapon_graph"])
+        self.assertEqual(1052, self.data["counts"]["excess_main_warhead_instances_transitive_weapon_graph"])
 
     def test_engine_weapon_reference_fields_are_followed(self):
         reached = (set(self.data["sets"]["direct_actor_armament"])
                    | set(self.data["sets"]["indirect_weapon_graph"]))
         expected = {
-            "AsianHowitzerSplash", "Atomic", "CabalMagicNuke", "NaxiV1Rocket",
+            "Atomic", "CabalMagicNuke", "NaxiV1Rocket",
             "PulseMissile", "RAAtomic",
         }
         self.assertTrue(expected <= reached)
@@ -66,6 +66,7 @@ class WeaponStructureInventoryTests(unittest.TestCase):
             if not name.startswith("^") and self.rules.resolve_weapon(name) is not None
         }
         _direct, reachable = weapon_reference_sets(self.rules, concrete)
+        self.assertIn("AsianHowitzerSplash", reachable)
         self.assertIn("NaxisBlackBombSmaller", reachable)
         self.assertNotIn("NaxisBlackBombSmaller", reached)
 

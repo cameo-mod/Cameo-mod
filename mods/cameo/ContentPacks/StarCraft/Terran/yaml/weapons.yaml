@@ -1,4 +1,5 @@
 MarineMG:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_Bullet_Medium
 	Inherits@3: ^Warhead_CannonHE_Heavy
@@ -21,6 +22,13 @@ MarineMG:
 		PercentageScale: 1667
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 36000
+		PercentageScale: 1664
 JimRaynorMachineGun:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
@@ -50,6 +58,7 @@ JimRaynorMachineGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 MadcapGun:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_Bullet_Medium
 	Inherits@3: ^Warhead_CannonHE_Heavy
@@ -71,6 +80,13 @@ MadcapGun:
 		PercentageScale: 1667
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 36000
+		PercentageScale: 1664
 FirebatF:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium

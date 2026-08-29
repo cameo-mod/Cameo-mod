@@ -26,7 +26,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         cls.selected = selections(cls.rules)
 
     def test_selected_profiles_resolve_to_one_pinned_main(self):
-        self.assertEqual(39, len(self.selected))
+        self.assertEqual(48, len(self.selected))
         for name, destination in self.selected.items():
             nodes = main_warhead_nodes(self.rules.resolve_weapon(name))
             self.assertEqual(1, len(nodes), name)
@@ -47,11 +47,11 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
     def test_pinned_or_contradictory_roles_remain_outside_the_cohort(self):
         excluded = {
             "AtreusMG", "EpigraphMG", "GoliathMG", "GoliathMk2MG",
-            "HMG_Duelist_upgrade", "autogun_tank", "Future_MultiMissile",
+            "HMG_Duelist_upgrade", "autogun_tank",
             "RA2MortarBike", "TSAdatsMissile", "TSChemAdatsMissileAA",
             "TSRPGTowerRail", "VolkovMagneticWeapon", "tkmjuggap",
             "tkmtechnicalmgap", "BCLaser", "BCYamatoCannon",
-            "edenMobileLaserTiger", "MadcapGun", "MarineMG",
+            "edenMobileLaserTiger",
             "JimRaynorMachineGun",
         }
         self.assertTrue(excluded.isdisjoint(self.selected))
@@ -87,6 +87,21 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
             node = self.rules.resolve_weapon(name).child(
                 "Warhead@NaxFlakAllyCounted")
             self.assertEqual("1500", node.get("Damage"), name)
+
+    def test_pulverizer_child_does_not_reinherit_parent_template(self):
+        template = "^Compatibility_Bullet_MediumFlat"
+        parent = self.rules.weapon("AsianPulverizerGatling")
+        child_weapon = self.rules.weapon("AsianPulverizerMechaGatling")
+        parent_inherits = {
+            str(node.value).strip() for node in parent.children
+            if node.key.startswith("Inherits")
+        }
+        child_inherits = {
+            str(node.value).strip() for node in child_weapon.children
+            if node.key.startswith("Inherits")
+        }
+        self.assertIn(template, parent_inherits)
+        self.assertNotIn(template, child_inherits)
 
     def test_folded_percentage_rounding_delta_is_pinned_and_minimal(self):
         health_values = set()

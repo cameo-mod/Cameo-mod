@@ -72,14 +72,14 @@ class HighIdentityProfileConsolidationTests(unittest.TestCase):
 
     def test_delivery_conflicted_cases_remain_deferred(self):
         deferred = {
-            "Future_MultiMissile", "tkmjuggap", "tkmtechnicalmgap",
+            "tkmjuggap", "tkmtechnicalmgap",
         }
         for name in deferred:
             self.assertGreater(len(main_warheads(self.rules.resolve_weapon(name))), 1, name)
 
     def test_ratchets_match_live_reduction(self):
-        self.assertEqual(655, SPLIT_BASELINE)
-        self.assertEqual(354, BROADCAST_BASELINE)
+        self.assertEqual(646, SPLIT_BASELINE)
+        self.assertEqual(350, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":
