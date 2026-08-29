@@ -1492,7 +1492,8 @@ KamovTeslaArcFragment1:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 16000
+		PercentageScale: 0
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 4000
@@ -1506,6 +1507,7 @@ KamovTeslaArcFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@LightMissile:
 
 KamovTeslaArcFragment2:
 	Inherits: KamovTeslaArcFragment1
@@ -1515,7 +1517,8 @@ KamovTeslaArcFragment2:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
@@ -1524,6 +1527,7 @@ KamovTeslaArcFragment2:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 	-Warhead@TeslaArc:
+	-Warhead@LightMissile:
 
 YakChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -1623,7 +1627,8 @@ YakTeslaArcFragment1:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
@@ -1637,6 +1642,7 @@ YakTeslaArcFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@LightMissile:
 
 YakTeslaArcFragment2:
 	Inherits: YakTeslaArcFragment1
@@ -1646,7 +1652,8 @@ YakTeslaArcFragment2:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 4000
+		PercentageScale: 0
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 1000
@@ -1655,6 +1662,7 @@ YakTeslaArcFragment2:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
 	-Warhead@TeslaArc:
+	-Warhead@LightMissile:
 
 YakNapalm:
 	Inherits@collapsewh: ^Warhead_Flame_Heavy

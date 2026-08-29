@@ -859,7 +859,8 @@ TSShotgun:
 	Warhead@ShotgunGrenadeAlly:
 		Damage: 2000
 	Warhead@ShotgunShrapnelEnemy:
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@ShotgunShrapnelAlly:
 		Damage: 2000
 	Warhead@ShotgunTankDestroyer:
@@ -868,6 +869,7 @@ TSShotgun:
 		Damage: 4000
 	Warhead@ShotgunChaingun:
 		Damage: 4000
+	-Warhead@ShotgunGrenadeEnemy:
 
 TSJumpCannon:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat

@@ -28,7 +28,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "docs" / "audit" / "latest" / "weapon_structure_inventory.json"
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 
-from audit_three_way_split import main_warheads  # noqa: E402
+from audit_three_way_split import main_warhead_nodes, main_warheads  # noqa: E402
 from miniyaml import Ruleset  # noqa: E402
 
 
@@ -131,6 +131,11 @@ def inventory(rules: Ruleset) -> dict[str, object]:
     }
     direct_refs, reachable = weapon_reference_sets(rules, concrete)
 
+    main_counts = {
+        name: len(main_warhead_nodes(rules.resolve_weapon(name)))
+        for name in concrete
+    }
+
     direct = violations & direct_refs
     transitive = violations & reachable
     indirect = transitive - direct
@@ -152,6 +157,13 @@ def inventory(rules: Ruleset) -> dict[str, object]:
             "stacked_main_indirect_weapon_graph": len(indirect),
             "stacked_main_transitive_weapon_graph": len(transitive),
             "stacked_main_unreached": len(unreached),
+            "main_warhead_instances_all_concrete": sum(main_counts.values()),
+            "excess_main_warhead_instances_all_concrete": sum(
+                max(0, count - 1) for count in main_counts.values()),
+            "main_warhead_instances_transitive_weapon_graph": sum(
+                main_counts[name] for name in reachable),
+            "excess_main_warhead_instances_transitive_weapon_graph": sum(
+                max(0, main_counts[name] - 1) for name in reachable),
         },
         "sets": {
             "direct_actor_armament": sorted(direct),

@@ -47,6 +47,10 @@ class WeaponStructureInventoryTests(unittest.TestCase):
         self.assertEqual(496, self.data["counts"]["stacked_main_direct_actor_armament"])
         self.assertEqual(588, self.data["counts"]["stacked_main_transitive_weapon_graph"])
         self.assertEqual(106, self.data["counts"]["stacked_main_unreached"])
+        self.assertEqual(3303, self.data["counts"]["main_warhead_instances_all_concrete"])
+        self.assertEqual(1275, self.data["counts"]["excess_main_warhead_instances_all_concrete"])
+        self.assertEqual(2867, self.data["counts"]["main_warhead_instances_transitive_weapon_graph"])
+        self.assertEqual(1122, self.data["counts"]["excess_main_warhead_instances_transitive_weapon_graph"])
 
     def test_engine_weapon_reference_fields_are_followed(self):
         reached = (set(self.data["sets"]["direct_actor_armament"])
