@@ -136,7 +136,6 @@ cabal_cyborgfactory:
 	ProductionQueue@INFANTRY:
 	Power:
 		Amount: -20
-	ProvidesPrerequisite@buildingname:
 	Selectable:
 		Bounds: 1280, 1024
 	SelectionDecorations:
@@ -191,7 +190,6 @@ cabal_mechfactory:
 	ProductionQueue@VEHICLE:
 	Power:
 		Amount: -40
-	ProvidesPrerequisite@buildingname:
 	WithIdleOverlay@ROOF:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-roof

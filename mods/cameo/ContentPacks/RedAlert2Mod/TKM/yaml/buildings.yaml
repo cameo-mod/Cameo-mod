@@ -233,7 +233,6 @@ tkm_airpad:
 		ExitDelay: 3
 	Power:
 		Amount: -40
-	ProvidesPrerequisite@buildingname:
 	RenderSprites:
 		Image: tkm_airpad
 		PlayerPalette: player_rgba
@@ -255,8 +254,6 @@ tkm_observationvan:
 		ProductionType: Upgrades
 	Tooltip:
 		Name: TKM Observation Van
-	Selectable:
-		Bounds: 2048, 2048
 	Building:
 		Footprint: xx
 		Dimensions: 2,1
@@ -286,8 +283,6 @@ tkm_techcenter:
 		Description: Provides advanced TKM technologies.
 	Tooltip:
 		Name: TKM Tech Center
-	Selectable:
-		Bounds: 2048, 2048
 	Building:
 		Footprint: xxxx xxxx xxxx xxxx
 		Dimensions: 4,4

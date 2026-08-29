@@ -285,7 +285,6 @@ ts_nod_handof:
 	ProductionQueue@INFANTRY:
 	Power:
 		Amount: -20
-	ProvidesPrerequisite@buildingname:
 	SelectionDecorations:
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete
@@ -337,7 +336,6 @@ ts_nod_warfactory:
 	ProductionQueue@VEHICLE:
 	Power:
 		Amount: -40
-	ProvidesPrerequisite@buildingname:
 	WithIdleOverlay@ROOF:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-roof

@@ -234,7 +234,6 @@ ts_gdi_barracks:
 	ProductionQueue@INFANTRY:
 	Power:
 		Amount: -20
-	ProvidesPrerequisite@buildingname:
 	Selectable:
 		Bounds: 1280, 1024
 	WithIdleOverlay@LIGHTS:
@@ -290,7 +289,6 @@ ts_gdi_warfactory:
 	ProductionQueue@VEHICLE:
 	Power:
 		Amount: -40
-	ProvidesPrerequisite@buildingname:
 	WithIdleOverlay@ROOF:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-roof
@@ -567,7 +565,6 @@ ts_gdi_silo:
 		Range: 4c0
 	Power:
 		Amount: -10
-	ProvidesPrerequisite@buildingname:
 	SelectionDecorations:
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete

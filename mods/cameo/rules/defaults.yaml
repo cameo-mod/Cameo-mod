@@ -3627,8 +3627,6 @@
 		MaxMoveDelay: 750
 	MapEditorData:
 		Categories: Civilian infantry
-	Passenger:
-		CustomPipType: civilian
 
 ^Monster:
 	Inherits@1: ^ExistsInWorld
@@ -3719,7 +3717,6 @@
 	Voiced:
 		VoiceSet: AntVoice
 	WithDamageOverlay:
-	CombatDebugOverlay:
 	KillsSelf:
 		RequiresCondition: invulnerability
 	Chronoshiftable:
