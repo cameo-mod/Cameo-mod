@@ -395,8 +395,6 @@ wc2demolitionsquadExplode:
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
 	Warhead@Glow: GlowImpact
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
