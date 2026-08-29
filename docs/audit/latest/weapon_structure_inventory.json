@@ -3,9 +3,9 @@
     "concrete_weapons": 2345,
     "stacked_main_all_concrete": 693,
     "stacked_main_direct_actor_armament": 494,
-    "stacked_main_indirect_weapon_graph": 90,
-    "stacked_main_transitive_weapon_graph": 584,
-    "stacked_main_unreached": 109
+    "stacked_main_indirect_weapon_graph": 92,
+    "stacked_main_transitive_weapon_graph": 586,
+    "stacked_main_unreached": 107
   },
   "predicate": "positive Damage on AreaDamage, SpreadDamage, HealthPercentageDamage, or TargetDamage; excludes designed companions and friendly-fire twins",
   "reference_fields": [
@@ -532,6 +532,7 @@
       "AsianHowitzerSplash",
       "AsianSubmarineBomb",
       "AsianTSIonCannon",
+      "Atomic",
       "CabalMagicNuke",
       "ChemRocketsExplosion",
       "DalekCannonScatter",
@@ -571,6 +572,7 @@
       "RA2SCUD_rad",
       "RA2SCUD_tesla",
       "RA2Terrorist",
+      "RAAtomic",
       "ReactorNuke",
       "ReactorNukeWeak",
       "SCScourgeDroneExplosion",
@@ -620,7 +622,6 @@
     "unreached": [
       "12MissilesSpawnerScud",
       "25mmWaveforce",
-      "Atomic",
       "CHFlameBlue",
       "ChemTibAtomic",
       "CrateNuke",
@@ -682,7 +683,6 @@
       "RA2REVENANTAA",
       "RA2TRIPODPLAZMA",
       "RA2ThermobaricFlame",
-      "RAAtomic",
       "Rocket_stealth",
       "Rocket_stealth_AA",
       "Rocketeer_o",

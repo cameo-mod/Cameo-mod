@@ -7,13 +7,18 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 
 from miniyaml import Ruleset
-from survey_weapon_structure import inventory
+from survey_weapon_structure import (
+    canonical_weapon_names,
+    inventory,
+    weapon_reference_sets,
+)
 
 
 class WeaponStructureInventoryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data = inventory(Ruleset(ROOT))
+        cls.rules = Ruleset(ROOT)
+        cls.data = inventory(cls.rules)
 
     def test_partition_is_complete_and_disjoint(self):
         sets = self.data["sets"]
@@ -40,16 +45,34 @@ class WeaponStructureInventoryTests(unittest.TestCase):
         self.assertEqual(2345, self.data["counts"]["concrete_weapons"])
         self.assertEqual(693, self.data["counts"]["stacked_main_all_concrete"])
         self.assertEqual(494, self.data["counts"]["stacked_main_direct_actor_armament"])
+        self.assertEqual(586, self.data["counts"]["stacked_main_transitive_weapon_graph"])
+        self.assertEqual(107, self.data["counts"]["stacked_main_unreached"])
 
     def test_engine_weapon_reference_fields_are_followed(self):
         reached = (set(self.data["sets"]["direct_actor_armament"])
                    | set(self.data["sets"]["indirect_weapon_graph"]))
         expected = {
-            "AsianHowitzerSplash", "CabalMagicNuke", "NaxiV1Rocket",
-            "NaxisBlackBombSmaller", "PulseMissile",
+            "AsianHowitzerSplash", "Atomic", "CabalMagicNuke", "NaxiV1Rocket",
+            "NaxisBlackBombSmaller", "PulseMissile", "RAAtomic",
         }
         self.assertTrue(expected <= reached)
         self.assertTrue(expected.isdisjoint(self.data["sets"]["unreached"]))
+
+    def test_weapon_references_match_definition_names_case_insensitively(self):
+        concrete = {
+            name for name in self.rules.weapons
+            if not name.startswith("^") and self.rules.resolve_weapon(name) is not None
+        }
+        direct, reachable = weapon_reference_sets(self.rules, concrete)
+        self.assertIn("Claw", direct)
+        self.assertTrue({
+            "AsianIonbeam", "Atomic", "Claw", "RAAtomic", "TSIonbeam",
+        } <= reachable)
+
+    def test_canonical_lookup_matches_engine_lowercase_semantics(self):
+        self.assertEqual({"atomic": "Atomic"}, canonical_weapon_names({"Atomic"}))
+        with self.assertRaisesRegex(ValueError, "differ only by letter case"):
+            canonical_weapon_names({"Atomic", "atomic"})
 
 
 if __name__ == "__main__":

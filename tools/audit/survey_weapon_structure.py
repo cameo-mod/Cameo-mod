@@ -47,7 +47,15 @@ def walk(node):
         yield from walk(child)
 
 
-def weapon_references(node, known: set[str]) -> set[str]:
+def canonical_weapon_names(known: set[str]) -> dict[str, str]:
+    """Map case-insensitive weapon references to their canonical definition names."""
+    canonical = {name.lower(): name for name in known}
+    if len(canonical) != len(known):
+        raise ValueError("weapon definitions differ only by letter case")
+    return canonical
+
+
+def weapon_references(node, known_by_case: dict[str, str]) -> set[str]:
     refs = set()
     for child in walk(node):
         field = child.key.split("@", 1)[0]
@@ -62,12 +70,14 @@ def weapon_references(node, known: set[str]) -> set[str]:
         for raw in values:
             for value in str(raw).split(","):
                 name = value.strip()
-                if name in known:
-                    refs.add(name)
+                canonical = known_by_case.get(name.lower())
+                if canonical is not None:
+                    refs.add(canonical)
     return refs
 
 
-def direct_armament_references(rules: Ruleset, known: set[str]) -> set[str]:
+def direct_armament_references(
+        rules: Ruleset, known_by_case: dict[str, str]) -> set[str]:
     refs = set()
     for name in rules.actors:
         if name.startswith("^"):
@@ -77,24 +87,26 @@ def direct_armament_references(rules: Ruleset, known: set[str]) -> set[str]:
             continue
         for armament in resolved.children_named("Armament"):
             weapon = str(armament.get("Weapon") or "").strip()
-            if weapon in known:
-                refs.add(weapon)
+            canonical = known_by_case.get(weapon.lower())
+            if canonical is not None:
+                refs.add(canonical)
     return refs
 
 
 def weapon_reference_sets(rules: Ruleset, concrete: set[str]) -> tuple[set[str], set[str]]:
     """Return direct Armament references and the full modeled weapon closure."""
-    direct_refs = direct_armament_references(rules, concrete)
+    known_by_case = canonical_weapon_names(concrete)
+    direct_refs = direct_armament_references(rules, known_by_case)
     actor_refs = set()
     for name in rules.actors:
         if name.startswith("^"):
             continue
         resolved = rules.resolve(name)
         if resolved is not None:
-            actor_refs.update(weapon_references(resolved, concrete))
+            actor_refs.update(weapon_references(resolved, known_by_case))
 
     graph = {
-        name: weapon_references(rules.resolve_weapon(name), concrete)
+        name: weapon_references(rules.resolve_weapon(name), known_by_case)
         for name in concrete
     }
     reachable = set(actor_refs)
