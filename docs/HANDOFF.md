@@ -519,6 +519,66 @@ From [`audit/SUMMARY.md`](audit/SUMMARY.md), smallest first:
    ⚠ It is a yaml edit, so it needs the boot gate; the audit is wired ADVISORY until it lands,
    then move it into the blocking loop.
 
+### 3.3-air — ⛔ THERE IS NO AIRCRAFT CLASS. 127 AIRCRAFT, 0 CLASSIFIABLE.
+
+Found while starting the futuretech faction pass (2026-08-29). The 27-class
+taxonomy in `class_anchors.json` contains **no class an aircraft can belong to**:
+
+* `flying_infantry` is infantry that flies, and has **zero members**.
+* `anti_air_vehicle` is a GROUND class — all 13 members sit in `vehicles`.
+* There is no fighter, bomber, gunship or air-transport class at all.
+
+Measured across every ledger: **127 buildable aircraft, 113 of them armed, 0
+tagged with a class.** They fall through to the global Tiger formula, so no air
+unit is priced by a class anchor and no air unit has a declared role.
+
+**This blocks the air half of the counter matrix.** The `anti_air_vehicle →
+aircraft` row cannot be measured — the audit reports "defender has no tagged
+members" — so the AA relationship the maintainer specified in detail (+100%
+damage, +50% range, and the proposed −50% incoming) has nothing to verify against.
+
+**The armor already names the classes.** The 127 aircraft segment cleanly:
+
+| armor | count | suggested class |
+|---|--:|---|
+| `Helicopter` | 65 | `gunship` — close support, strong vs ground, dies to AA |
+| `Spaceship` | 21 | `heavy_aircraft` — the capital-ship tier |
+| `Bomber` | 20 | `bomber` — anti-structure and anti-cluster |
+| `Fighter` | 16 | `interceptor` — air-to-air |
+| `Light` / `Scout` | 5 | probably mis-armored; check individually |
+
+Adding four classes is cheap by comparison with everything else here: no yaml
+changes, four entries in `class_anchors.json` plus anchors picked from existing
+aircraft, and 127 units become classifiable and priceable at once. **This should
+come before more faction passes** — a faction pass currently cannot classify its
+aircraft at all, which is 3 of futuretech's 12 untagged units and 11 each for the
+StarCraft factions.
+
+### 3.3-futuretech — first faction pass, partial (2026-08-29)
+
+futuretech: 29 buildable, 17 tagged, 12 untagged. Of the 12:
+
+| unit | proposal | evidence |
+|---|---|---|
+| `futuretech_javelinsoldier` | `rocket_trooper` | Flak armour, `MissileAP`, hits air+ground — matches `futuretech_missiledroid`, already tagged `rocket_trooper` |
+| `futuretech_enforcer` | `heavy_infantry` | Plate, `CannonHE`, 8000 range — matches `futuretech_cannondroid`, already `heavy_infantry` |
+| `futuretech_blackwidow` | `heavy_sniper` | `Sniper` family, **Infantry-only** targeting, HP 25000 = the `heavy_sniper` anchor exactly |
+| `futuretech_cryolegionnaire` | `commando` | `Heroic` armour and 3500 cost mark a hero unit; would give the empty `commando` class its first member |
+| `futuretech_phalanxwip` | `artillery_tank` | Medium armour, 12000 range = the `artillery_tank` anchor's `range0` exactly; ground-only, so NOT `missile_vehicle` |
+| `futuretech_cryocopter`, `_harbingergunship`, `_twister` | ⛔ BLOCKED | aircraft — no class exists |
+| `futuretech_prospector`, `_prospectormk2` | EXCEPTION | harvesters, priced by `HARVESTER_BALANCE.md`, not the class formula |
+| `futuretech_mobileconstructionvehicle` | EXCEPTION? | MCV — no class fits; needs a ruling like the harvester one |
+| `futuretech_riptideacv` | UNRESOLVED | Light armour, 12000 range, amphibious, **no damage warhead family** — cannot be placed on weapon evidence |
+
+⚠ These are PROPOSALS awaiting review, not applied. Tagging is safe to do in the
+ledger — `extract_stats.load_existing_design` preserves `design.*` across
+re-extraction by design ("judgment data, NOT yaml facts") — but class assignment
+is the maintainer's call per `fit_class.py` step 1.
+
+**Yield is the point:** 5 of 12 classifiable, 3 blocked on the missing aircraft
+classes, 3 are exceptions, 1 unresolvable from weapons. A faction pass is not a
+sweep either.
+
 ### 3.3-counters — ⛔ THE TANK DESTROYER COUNTER IS INVERTED (found 2026-08-29)
 
 `docs/balance/counter_matrix.yaml` states the intended class-vs-class

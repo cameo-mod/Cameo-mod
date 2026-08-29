@@ -304,3 +304,30 @@ open_items:
       charge_interval: 6000-7500 for all four
     status: DEFERRED to a dedicated pass after W27. Reported by
             tools/audit/audit_support_powers.py S3.
+  - id: X6
+    what: The class taxonomy has NO aircraft class. 127 buildable aircraft, 0 classifiable.
+    detail: >
+      `flying_infantry` is infantry that flies (zero members) and
+      `anti_air_vehicle` is a ground class (all 13 members in `vehicles`). There
+      is no fighter, bomber, gunship or air-transport class, so 127 buildable
+      aircraft — 113 of them armed — fall through to the global Tiger formula
+      with no class anchor and no declared role. This blocks the air half of
+      counter_matrix.yaml: the anti_air_vehicle -> aircraft row cannot be
+      measured because the defender has no tagged members.
+    measured_2026_08_29:
+      buildable_aircraft: 127
+      armed: 113
+      tagged_with_a_class: 0
+      armor_segmentation:
+        Helicopter: 65
+        Spaceship: 21
+        Bomber: 20
+        Fighter: 16
+        other: 5
+    proposal: >
+      Four new classes named by the armor that already segments them — gunship
+      (Helicopter), heavy_aircraft (Spaceship), bomber (Bomber), interceptor
+      (Fighter). No yaml changes; four entries in class_anchors.json plus anchors
+      picked from existing aircraft. Do this BEFORE further faction passes: a
+      faction pass currently cannot classify its aircraft at all.
+

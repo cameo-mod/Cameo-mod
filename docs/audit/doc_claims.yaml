@@ -840,3 +840,29 @@ claims:
                           have.add(c)
       print(sum(1 for k in anchors if not k.startswith('_') and k not in have))
 
+  - id: buildable_aircraft_unclassified
+    value: 127
+    tolerance: 0
+    what: >
+      Buildable aircraft with no design.class_anchor. The taxonomy has no class
+      an aircraft can hold (flying_infantry is infantry, anti_air_vehicle is a
+      ground class), so none of them is priced by a class anchor and the air half
+      of counter_matrix.yaml cannot be measured. Must fall to 0.
+    docs: [docs/HANDOFF.md, docs/design/balance_exceptions.yaml]
+    measure: |
+      import glob, json, pathlib
+      n = 0
+      for path in sorted(glob.glob('docs/balance/*.json')):
+          if 'class_anchors' in path:
+              continue
+          try:
+              doc = json.loads(pathlib.Path(path).read_text(encoding='utf-8'))
+          except (ValueError, OSError):
+              continue
+          for _a, rec in (doc.get('sections') or {}).get('aircraft', {}).items():
+              if not isinstance(rec, dict) or not rec.get('buildable'):
+                  continue
+              if not (rec.get('design') or {}).get('class_anchor'):
+                  n += 1
+      print(n)
+
