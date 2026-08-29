@@ -113,6 +113,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "125"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "wc2_orcs_goblinzeppelin": {
@@ -168,6 +172,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "165"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "33"
     }
    }
   },

@@ -244,6 +244,16 @@ def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72):
     per-row step always won. Both are gone — a dead knob that looks like it
     enforces a law is worse than no knob at all.
     """
+    # ⚠ SNAP FIRST, then de-duplicate. This pass used to only STEP HP by the grid
+    # when breaking a tie, so a value that was never tied kept whatever off-grid
+    # number it had — 7 of the 28 scout vehicles sat on 22500/27500/37500 against
+    # a 1000 grid and the converter left them there. Speed has always snapped
+    # (`_spd_snap`); HP never did.
+    for r in rows:
+        if r.get("protected"):
+            continue
+        step = r.get("hp_step", 1000)
+        r["hp"] = max(hp_lo, min(hp_hi, int(round(r["hp"] / step)) * step))
     for l, h in ((hp_lo, hp_hi),):
         groups = {}
         for r in rows:
@@ -418,13 +428,16 @@ def load_class_rows(cls: str):
                 # 2026-07-22): this covers actual vehicles AND the Cabal cyborgs /
                 # FutureTech droids that use vehicle locomotion, while zerglings
                 # etc. (chem locomotor but no TurnSpeed) stay foot-stepped.
-                row["vehicle_turnrate"] = bool(u.get("turn_speed"))
+                # Either trait: `Mobile.TurnSpeed` for ground, `Aircraft.TurnSpeed`
+                # for air. Reading only the first made every aircraft look static.
+                turn = u.get("turn_speed") or u.get("turn_speed_air")
+                row["vehicle_turnrate"] = bool(turn)
                 # ⚠ The two grids key off DIFFERENT things — Speed off locomotion
                 # (turn rate = speed/5), HP off the unit kind (self-heal = HP/2500
                 # or HP/1000). A droid drives like a vehicle and heals like
                 # infantry, and takes one grid from each. See formula.STAT_GRIDS.
-                row["speed_platform"] = formula.speed_platform(section_name, u.get("turn_speed"))
-                row["hp_platform"] = formula.hp_platform(section_name)
+                row["speed_platform"] = formula.speed_platform(section_name, turn)
+                row["hp_platform"] = formula.hp_platform(section_name, actor_cls)
                 row["spd_step"] = formula.stat_step("speed", row["speed_platform"])
                 row["hp_step"] = formula.stat_step("hp", row["hp_platform"])
                 row["arm_rng"] = formula.wdist_value(arm.get("range"), 0)

@@ -590,6 +590,76 @@ vehicles (`ts_nod_mobilestealthgenerator` 56, `siege_tank` 43, `ra1_allies_minel
 **Still not enforced:** `Cost` step 10 has no audit (`balance_exceptions.yaml` open item X2). The
 converter pins cost so it cannot write an off-grid one; the gap is in `apply_balance`.
 
+### 3.0l — ✅ RULED: scout_vehicle uses the infantry HP grid; TurnSpeed keys on the turret
+
+**Maintainer 2026-08-29,** two rulings, both landed.
+
+**1. `scout_vehicle` → the infantry 1000 HP grid.** It still drives on the Speed-5 grid; only the HP
+step changes. Implemented as `formula.HP_GRID_BY_CLASS`, so the further per-class details the
+maintainer is sending slot straight in.
+
+⚠ **The tree did not agree when this landed, and that is recorded rather than smoothed over.** All
+28 tagged scout vehicles sat on the **2500** grid and **seven were not multiples of 1000** —
+`ra1_allies_ranger` and `forgotten_raidercar` at 22500, `tkm_as42` / `tkm_technical` /
+`ts_gdi_pitbull` / `td_gdi_humvee` at 27500, `td_gdi_humveemkii` at 37500. The converter moves them.
+
+⚠ **And it is not derivable from the tree.** `ChangesHealth.Step` is the quantity the HP-grid law is
+written against ("self-heal HP/2500" vs "HP/1000") and **only 7 actors in the entire tree define
+one**, so self-heal can neither confirm nor deny a class's grid. Populating it is what would turn
+these rulings into measurements.
+
+**Also fixed while here: HP was never SNAPPED to its grid.** The converter moved HP by the grid only
+when breaking a tie, so an untied value kept whatever off-grid number it had. Speed has always
+snapped (`_spd_snap`); HP did not. Every class now reports **0 off-grid HP**, and `rocket_trooper`
+improved **212.5 → 73.5** as a side effect. Some vehicle classes moved the other way
+(`epic_vehicle` 6109 → 6653, `dreadnought` 3751 → 3902) because they are now measured against
+LAWFUL HP instead of whatever was in yaml — those classes are broken in the thousands for unrelated
+reasons.
+
+**2. `TurnSpeed` depends on the TURRET.** *"Make sure you understand that the turn rate depends on
+if the unit has a turret or not."* Encoded as `formula.turn_speed_for`:
+
+| unit | `TurnSpeed` |
+|---|---|
+| turreted vehicle | `Speed / 5` |
+| no turret, or a fixed forward-facing weapon | `2 × Speed / 5` |
+| helicopters and spaceships | `Speed / 5` |
+| infantry | instant — **except CABAL cyborgs**, which carry forward-facing weapons and take the vehicle fixed-weapon rule |
+
+⭐ **This is exactly why the Speed grid is 5 either way.** `2S/5` is an integer when `5 | 2S`, and
+`gcd(2, 5) = 1`, so it reduces to `5 | S` — the same condition the turreted branch imposes. The
+turret changes the VALUE of `TurnSpeed`, never the grid `Speed` sits on. A reading that gave
+turretless units a different grid would be wrong, and the test pins both branches.
+
+✅ **ENFORCEABLE NOW — `tools/audit/audit_turn_rate.py`,** and getting there corrected something I
+had written.
+
+⛔ **AIRCRAFT KEEP THEIR TURN RATE IN THE `Aircraft` TRAIT, NOT `Mobile`** (maintainer). I had
+recorded "not one of the 168 aircraft defines a turn rate". That was literally true of
+`Mobile.TurnSpeed` and **completely misleading**: `extract_stats` read only that trait, exactly as
+it reads `Aircraft.Speed` separately as `speed_air`. Aircraft have turn rates — **323 actors carry
+an `Aircraft` trait and 318 define both Speed and TurnSpeed.** It was an extractor blind spot, not
+missing data, and it is what made the Speed-grid probe miss every aircraft.
+`extract_stats` now records `turn_speed_air`; the converter reads either trait.
+
+⭐ **And the law is CONFIRMED by the roster rather than assumed.** The audit measures
+`TurnSpeed ÷ (Speed/5)` per cohort, and the ground units split exactly as DESIGN.md says:
+
+| cohort | n | modal ratio | share | law |
+|---|--:|--:|--:|---|
+| ground **turreted** | 261 | **1.0** | 87% | `Speed/5` |
+| ground **turretless** | 335 | **2.0** | 64% | `2 × Speed/5` |
+| aircraft turreted | 14 | 1.0 | 79% | `Speed/5` |
+| aircraft turretless | 256 | 1.0 | 35% | `Speed/5` |
+
+That is the strongest evidence available that the branches are the right way round — and it is why
+the audit prints the table above its findings.
+
+⚠ **The roster predates the law.** T1: **325 of 871** mobile actors disagree. T2: **63** carry a
+`Speed` off the 5 grid, so no integer `TurnSpeed` can satisfy either branch. `.Husk` wreckage is
+excluded — it drifts to the ground and nobody balances it. REPORT-ONLY, registered in `run_all.sh`
+as a pending-fix advisory with its ratchet promise; blocking once a boot-gated pass lands.
+
 ### 3.0i — ⛔ MAINTAINER RULING NEEDED: what does the uniqueness law separate?
 
 **This is the single decision that takes `scout` from 22.8 to 0.7 — inside the goal.**

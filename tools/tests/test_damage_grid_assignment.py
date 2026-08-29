@@ -26,7 +26,8 @@ STEP = formula.DAMAGE_STEP
 
 
 def row(actor, cost, per_wh, per_unit, n_wh=1, **kw):
-    r = {"actor": actor, "cost": cost, "per_wh": per_wh, "n_wh": n_wh,
+    r = {"actor": actor, "cost": cost, "per_wh": per_wh, "n_wh": n_wh, "hp": 10000,
+         "spd": 60, "hp_step": 1000, "spd_step": 1,
          "per_unit": per_unit, "protected": False, "soft": False,
          "dmg_shot": per_wh * n_wh, "dmg_eff": per_wh * n_wh,
          "dps_eff": per_unit * per_wh * n_wh}
@@ -195,6 +196,56 @@ class StatGridsComeFromOneRegistry(unittest.TestCase):
     def test_foot_infantry_takes_both_infantry_grids(self):
         self.assertEqual(formula.speed_platform("infantry", None), "infantry")
         self.assertEqual(formula.hp_platform("vehicles"), "vehicle")
+
+    def test_a_class_may_override_only_its_hp_grid(self):
+        """HP is the one grid whose step is a tuning judgement rather than a
+        mechanical consequence, so a class may override it. `scout_vehicle` is on
+        the infantry grid by maintainer ruling 2026-08-29 even though it drives on
+        the vehicle SPEED grid."""
+        self.assertEqual(formula.hp_platform("vehicles", "scout_vehicle"), "infantry")
+        self.assertEqual(formula.stat_step("hp", formula.hp_platform("vehicles", "scout_vehicle")), 1000)
+        self.assertEqual(formula.stat_step("speed", formula.speed_platform("vehicles", None)), 5)
+        # an unlisted vehicle class keeps its section's grid
+        self.assertEqual(formula.hp_platform("vehicles", "mbt"), "vehicle")
+
+    def test_hp_is_snapped_to_its_grid_not_merely_stepped_by_it(self):
+        """The pass only STEPPED HP by the grid when breaking a tie, so a value
+        that was never tied kept whatever off-grid number it had — 7 of the 28
+        scout vehicles sat on 22500/27500/37500 against a 1000 grid."""
+        rows = [row("a", 100, 800, 0.05, hp=22500, hp_step=1000, spd=60, spd_step=1),
+                row("b", 100, 800, 0.05, hp=27500, hp_step=2500, spd=61, spd_step=5)]
+        P.nudge_hp_spd(rows)
+        self.assertEqual(rows[0]["hp"] % 1000, 0)
+        self.assertEqual(rows[1]["hp"] % 2500, 0)
+
+
+class TurnSpeedDependsOnTheTurret(unittest.TestCase):
+    """Maintainer 2026-08-29: *"the turn rate depends on if the unit has a turret
+    or not."* DESIGN.md: a turreted vehicle turns at `Speed/5`; one with no turret
+    or a fixed forward-facing weapon turns at `2 x Speed/5`; helicopters and
+    spaceships use `Speed/5`; infantry is instant EXCEPT CABAL cyborgs, which
+    carry forward-facing weapons and take the vehicle fixed-weapon rule."""
+
+    def test_the_two_branches(self):
+        self.assertEqual(formula.turn_speed_for(60, turreted=True), 12)
+        self.assertEqual(formula.turn_speed_for(60, turreted=False), 24)
+        self.assertEqual(formula.turn_speed_for(60, turreted=False, aircraft=True), 12)
+
+    def test_both_branches_need_the_same_speed_grid(self):
+        """⭐ This is WHY the Speed grid is 5 turret or not: `2S/5` is an integer
+        exactly when `5 | 2S`, and gcd(2,5)=1, so that reduces to `5 | S` — the
+        same condition the turreted branch imposes. A reading that made turretless
+        units a different grid would be wrong."""
+        step = formula.stat_step("speed", "vehicle")
+        for speed in range(step, 200, step):
+            for turreted in (True, False):
+                ts = formula.turn_speed_for(speed, turreted=turreted)
+                self.assertEqual(ts, int(ts), f"speed {speed} turreted={turreted}")
+        # and an off-grid speed breaks BOTH branches, not just one
+        for turreted in (True, False):
+            ts = formula.turn_speed_for(63, turreted=turreted)
+            self.assertNotEqual(ts, int(ts))
+
 
     def test_the_converter_reads_the_registry_not_its_own_literals(self):
         import inspect

@@ -624,18 +624,42 @@ def speed_platform(section=None, turn_speed=None):
 
     ⚠ Keyed on LOCOMOTION, because that is where the step comes from: turn rate
     is `speed/5`, so anything with a turn rate must sit on a multiple of 5. Two
-    signals, since neither alone is complete — a defined `Mobile.TurnSpeed`
-    catches the units that move as vehicles whatever section they are filed under
-    (Cabal cyborgs and FutureTech droids use vehicle locomotion while sitting in
-    `infantry`), and the section catches the ones the probe cannot see: NOT ONE
-    of the 168 aircraft in the tree defines a turn rate, nor do two of the ships.
+    signals, since neither alone is complete — a defined turn rate catches the
+    units that move as vehicles whatever section they are filed under (Cabal
+    cyborgs and FutureTech droids use vehicle locomotion while sitting in
+    `infantry`), and the section catches the rest.
+
+    ⚠ **Aircraft keep their turn rate in the `Aircraft` trait, not `Mobile`**
+    (maintainer 2026-08-29) — exactly as they keep `Speed` there. Reading only
+    `Mobile.TurnSpeed` made all 168 aircraft in the ledger look like they had NO
+    turn rate, and that is what made this probe miss every one of them. They have
+    one: **323 actors carry an `Aircraft` trait and 318 define both Speed and
+    TurnSpeed**. `extract_stats` now records it as `turn_speed_air`, and callers
+    pass whichever is set. The earlier note here said aircraft define no turn
+    rate; that was the extractor's blind spot, not the tree.
     """
     if turn_speed:
         return "vehicle"
     return "vehicle" if (section or "").lower() in VEHICLE_SECTIONS else "infantry"
 
 
-def hp_platform(section=None):
+# Classes whose HP moves on a grid their SECTION would not give them. The HP step
+# is a design judgement about how finely a class's durability should be tunable,
+# not a mechanical consequence of what the unit drives on — so it is the one grid
+# a class may override.
+#
+# `scout_vehicle` -> infantry (maintainer 2026-08-29). ⚠ The tree does not agree
+# yet: all 28 tagged scout vehicles sit on the 2500 grid today and SEVEN of them
+# are not multiples of 1000 (`ra1_allies_ranger` and `forgotten_raidercar` 22500,
+# `tkm_as42` / `tkm_technical` / `ts_gdi_pitbull` / `td_gdi_humvee` 27500,
+# `td_gdi_humveemkii` 37500). The converter will move those seven onto the finer
+# grid. Recorded here because a ruling the data contradicts must say so out loud.
+HP_GRID_BY_CLASS = {
+    "scout_vehicle": "infantry",
+}
+
+
+def hp_platform(section=None, class_anchor=None):
     """Which HP grid this unit moves on.
 
     ⚠ Keyed on the SECTION, NOT on locomotion, and the difference is not
@@ -647,8 +671,47 @@ def hp_platform(section=None):
     Collapsing the two onto one notion of "platform" is a real error and it was
     measurable: it put `futuretech_scoutdroid` on the 2500 HP grid and pushed the
     `scout` class from worst |Δ| 22.8 to 32.1 on its own.
+
+    ⚠ `HP_GRID_BY_CLASS` overrides the section. That is deliberate and it is the
+    ONLY grid a class may override — HP is the one whose step is a judgement
+    about tuning resolution rather than a mechanical consequence.
+
+    ⚠ NOT derivable from the tree today. `ChangesHealth.Step` is the quantity the
+    law is written against, and only **7 actors in the entire tree** define one,
+    so self-heal cannot confirm or deny a class's grid. Until that is populated,
+    these are design rulings, not measurements.
     """
+    if class_anchor and class_anchor in HP_GRID_BY_CLASS:
+        return HP_GRID_BY_CLASS[class_anchor]
     return "vehicle" if (section or "").lower() in VEHICLE_SECTIONS else "infantry"
+
+
+def turn_speed_for(speed, turreted=True, aircraft=False):
+    """`TurnSpeed` the law prescribes for this unit (DESIGN.md, FORMULA_V2 §3).
+
+    ⚠ **IT DEPENDS ON THE TURRET** (maintainer 2026-08-29):
+
+        turreted vehicle                 TurnSpeed = Speed / 5
+        NO turret / fixed forward weapon TurnSpeed = 2 x Speed / 5
+        helicopters and spaceships       TurnSpeed = Speed / 5
+        infantry                         instant — EXCEPT CABAL cyborgs, which
+                                         carry forward-facing weapons and take
+                                         the vehicle fixed-weapon rule
+
+    ⭐ **And this is WHY the Speed grid is 5 for every one of them, turret or
+    not.** `2·S/5` is an integer exactly when `5 | 2S`, and `gcd(2, 5) = 1`, so
+    that reduces to `5 | S` — the same condition the turreted branch imposes.
+    The turret changes the VALUE of TurnSpeed, never the grid Speed sits on. A
+    reading that made turretless units a different grid would be wrong.
+
+    ⚠ NOT ENFORCEABLE YET. `extract_stats` records `Mobile.TurnSpeed` but not
+    whether the actor has a `Turreted` trait, so the ledger cannot tell the two
+    branches apart. Adding `turreted` to the extraction table is the prerequisite
+    for an audit that checks each unit's TurnSpeed against this function.
+    """
+    if aircraft or turreted:
+        return speed / 5
+    return 2 * speed / 5
 
 
 def stat_step(stat, platform="infantry"):

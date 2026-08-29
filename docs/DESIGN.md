@@ -1251,6 +1251,44 @@ a value off its grid is a bug even when it is otherwise correct.
 | `Speed` | **5** / **1** | **locomotion** — turn rate is `speed/5` | `formula.speed_platform` |
 | `HP` | **2500** / **1000** | **unit kind** — self-heal is `HP/2500` or `HP/1000` | `formula.hp_platform` |
 
+⚠ **HP is the one grid a CLASS may override** (`formula.HP_GRID_BY_CLASS`), because its step is a
+judgement about how finely a class's durability should be tunable rather than a mechanical
+consequence of what the unit drives on. **`scout_vehicle` → the infantry 1000 grid** (maintainer
+2026-08-29): it still drives on the Speed-5 grid. The tree did not agree when the ruling landed —
+all 28 tagged scout vehicles sat on 2500 and seven were not multiples of 1000 — so the converter
+moves them. ⚠ And it is NOT derivable from the tree: `ChangesHealth.Step`, the quantity the law is
+written against, is defined on **7 actors in the entire tree**, so self-heal can neither confirm nor
+deny a class's grid. These are design rulings, not measurements, until that is populated.
+
+⚠ **HP is SNAPPED to its grid, not merely stepped by it.** The converter used to move HP by the
+grid only when breaking a tie, so a value that was never tied kept whatever off-grid number it had.
+
+**`TurnSpeed` depends on the TURRET** (`formula.turn_speed_for`) — turreted `Speed/5`; no turret or
+a fixed forward-facing weapon `2 × Speed/5`; helicopters and spaceships `Speed/5`; infantry instant
+except CABAL cyborgs, which carry forward-facing weapons and take the vehicle fixed-weapon rule.
+⭐ **This is exactly why the Speed grid is 5 either way**: `2S/5` is an integer when `5 | 2S`, and
+`gcd(2,5) = 1`, so that reduces to `5 | S` — the same condition the turreted branch imposes. The
+turret changes the VALUE of `TurnSpeed`, never the grid `Speed` sits on.
+
+⚠ **AIRCRAFT KEEP THEIR TURN RATE IN THE `Aircraft` TRAIT, NOT `Mobile`** (maintainer 2026-08-29) —
+exactly as they keep `Speed` there. Everything that looked for `Mobile.TurnSpeed` therefore saw
+**zero** of the 168 aircraft in the ledger and concluded they had none. They have one: **323 actors
+carry an `Aircraft` trait and 318 define both `Speed` and `TurnSpeed`.** `extract_stats` now records
+it as `turn_speed_air`.
+
+⭐ **The law is CONFIRMED by the roster, not assumed** — `audit_turn_rate.py` measures
+`TurnSpeed ÷ (Speed/5)` per cohort and the ground units split exactly as written:
+
+| cohort | n | modal ratio | share | law |
+|---|--:|--:|--:|---|
+| ground **turreted** | 261 | **1.0** | 87% | `Speed/5` |
+| ground **turretless** | 335 | **2.0** | 64% | `2 × Speed/5` |
+| aircraft turreted | 14 | 1.0 | 79% | `Speed/5` |
+
+⚠ The roster PREDATES the law: **325 of 871** mobile actors disagree and **63** carry a `Speed` off
+the 5 grid, so no integer `TurnSpeed` can satisfy either branch. `audit_turn_rate` is REPORT-ONLY
+until a boot-gated pass brings them inside; it is the work list, not a gate.
+
 ⚠ **The steps live in ONE table with citations — `formula.STAT_GRIDS` — and anything that
 quantises reads them from there.** They used to be literals in whichever function needed them and
 three had silently drifted from this law by 2026-08-29: HP was quantised at 1000 for EVERY class,

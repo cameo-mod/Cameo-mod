@@ -118,12 +118,20 @@ done
 # its default weapon. Advisory only because the fix is yaml and needs the boot
 # gate. MOVE IT INTO THE BLOCKING LOOP once F1/F3/F4 read clean.
 #
+# `turn_rate` checks TurnSpeed against the turret-dependent law (turreted Speed/5,
+# turretless 2 x Speed/5). Advisory because the roster PREDATES the law — 325 of
+# 871 mobile actors disagree and every fix is yaml needing the boot gate. It is
+# worth running anyway: its cohort table is the EVIDENCE the law is right (ground
+# turreted 87% on Speed/5, ground turretless 64% on 2 x Speed/5), and it only
+# became possible once extract_stats learned that aircraft keep their turn rate in
+# the `Aircraft` trait, not `Mobile`. RATCHET IT once a boot-gated pass lands.
+#
 # `counter_matrix` compares docs/balance/counter_matrix.yaml (design intent) with
 # what the tree does. Advisory permanently: every finding is a design question —
 # reassign a family, retag a class, or change the intent — and never a build break.
 for a in code_duplication test_coverage recent_changes error_handling security \
          support_powers engine_constraints class_redundancy ifv_conditions \
-         counter_matrix; do
+         turn_rate counter_matrix; do
   echo "== audit_$a (advisory)"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"

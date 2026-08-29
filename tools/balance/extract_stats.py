@@ -859,6 +859,13 @@ def extract_actor(rs, key: str, section: str,
             ("speed", "Mobile", "Speed"),
             ("speed_air", "Aircraft", "Speed"),
             ("turn_speed", "Mobile", "TurnSpeed"),
+            # ⚠ AIRCRAFT KEEP THEIR TURN RATE IN THE `Aircraft` TRAIT, not `Mobile`
+            # (maintainer 2026-08-29), exactly as they keep Speed there. Reading
+            # only Mobile.TurnSpeed made all 168 aircraft in the ledger look like
+            # they had NO turn rate, which is what made the Speed-grid probe miss
+            # every one of them. They have one: 323 actors carry an Aircraft trait
+            # and 318 define both Speed and TurnSpeed.
+            ("turn_speed_air", "Aircraft", "TurnSpeed"),
             ("sight", "RevealsShroud", "Range"),
             ("build_limit", "Buildable", "BuildLimit"),
             ("build_duration", "Buildable", "BuildDuration"),
