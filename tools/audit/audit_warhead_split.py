@@ -54,7 +54,7 @@ REVIEW_DMG = 8000
 # FIRED by a concrete actor, while this audit scans EVERY concrete weapon
 # (`rs.weapons`), fired or not. Two populations, both correct for their own
 # question — don't reconcile them by changing one.
-BROADCAST_BASELINE = 379
+BROADCAST_BASELINE = 371
 
 # These composites predate the ratchet. Their obsolete zero-damage child slots
 # used to hide otherwise uniform live mains until the AA routing repair removed

@@ -95,7 +95,8 @@ PositronBounce1:
 		PercentageScale: 10000
 		Damage: 4000
 	Warhead@CannonAP_Light: AreaDamage
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@shrapnel: FireShrapnel
@@ -107,6 +108,7 @@ PositronBounce1:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
+	-Warhead@Bullet_Light:
 
 PositronBounce2:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
@@ -130,7 +132,8 @@ PositronBounce2:
 		PercentageScale: 10000
 		Damage: 2000
 	Warhead@CannonAP_Light: AreaDamage
-		Damage: 2000
+		Damage: 4000
+		PercentageScale: 0
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	-Warhead@shrapnel:
@@ -141,6 +144,7 @@ PositronBounce2:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 0
+	-Warhead@Bullet_Light:
 
 InterceptorLauncher:
 	ReloadDelay: 100
@@ -375,7 +379,8 @@ GladiusCannon:
 		Damage: 5
 	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 30000
+		PercentageScale: 0
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -497,6 +502,8 @@ GladiusCannon:
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Medium:
 
 ArbiterCannon:
 	Inherits: PhotonCannon

@@ -870,23 +870,36 @@ FutureEnforcerShotgun:
 	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
+	Warhead@ShotgunShrapnelEnemy:
+		Damage: 4000
+		PercentageScale: 0
+	-Warhead@ShotgunGrenadeEnemy:
 
 FutureEnforcerShotgun_elite:
 	Inherits: FutureEnforcerShotgun
 	Range: 4000
 	Burst: 2
 	BurstDelays: 3
+	Warhead@ShotgunShrapnelEnemy:
+		Damage: 4000
+		PercentageScale: 0
 
 FutureEnforcerShotgunDeployed:
 	Inherits: FutureEnforcerShotgun
 	ReloadDelay: 65
 	Range: 6150
+	Warhead@ShotgunShrapnelEnemy:
+		Damage: 4000
+		PercentageScale: 0
 
 FutureEnforcerShotgunDeployed_elite:
 	Inherits: FutureEnforcerShotgunDeployed
 	Range: 7150
 	Burst: 2
 	BurstDelays: 3
+	Warhead@ShotgunShrapnelEnemy:
+		Damage: 4000
+		PercentageScale: 0
 
 FutureJavelinRockets:
 	Inherits@wh: ^Warhead_MissileAP_Medium

@@ -692,7 +692,8 @@ NaxCorrosionRocketTrooper_elite:
 	Warhead@PreservedFlat_Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@PreservedFlat_HeavyMissile: SpreadDamage
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@PreservedFlat_MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -797,6 +798,7 @@ NaxCorrosionRocketTrooper_elite:
 			Plate: 7
 			Flak: 6
 			None: 5
+	-Warhead@PreservedFlat_Grenade:
 NaxCorrosionBeast:
 	Inherits: NaxCorrosionRocket
 	Range: 7984

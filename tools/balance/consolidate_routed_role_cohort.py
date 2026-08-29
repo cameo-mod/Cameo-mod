@@ -64,6 +64,18 @@ OLD_MAINS = {
     "VultureGrenade": {"Demolition_LightFlatCompatibility", "CannonHE_Medium"},
 }
 
+PINNED_AFTER_MAINS = {
+    "SyndicateFireballLauncherExplode": {
+        "PreservedFlat_Flame_Heavy", "PreservedFlat_Flame_Light",
+        "PreservedFlat_Flame_Medium", "PreservedFlat_HeavyFlameWeapon",
+        "PreservedFlat_LightFlameWeapon", "PreservedFlat_MediumFlameWeapon",
+    },
+    "NaxCorrosionRocketTrooper_elite": {
+        "PreservedFlat_Concussion_Light", "PreservedFlat_HeavyMissile",
+        "PreservedFlat_MissileAP_Heavy", "PreservedFlat_MissileAP_Medium",
+    },
+}
+
 
 def descendants(rs, root):
     direct = collections.defaultdict(set)
@@ -116,7 +128,7 @@ def inspect(rs):
         mains = set(main_warheads(resolved))
         old = expected_old(name, root_of(name))
         if name in PINS:
-            after = all(key.startswith("PreservedFlat_") for key in mains) and len(mains) == len(old)
+            after = mains == PINNED_AFTER_MAINS[name]
             before = mains == old
             if not (before or after) or resolved_flat_total(resolved, mains) != total:
                 raise RuntimeError(f"{name}: preservation fingerprint changed: {sorted(mains)}")

@@ -2490,10 +2490,11 @@ WaveTurretImpact:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water
-		Damage: 10000
+		Damage: 20000
 		Spread: 500
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PercentageScale: 0
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 5
@@ -2505,6 +2506,7 @@ WaveTurretImpact:
 		Range: 1500
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
+	-Warhead@TeslaWeapon:
 
 ArmoredCarMG:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium

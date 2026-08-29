@@ -336,7 +336,8 @@ TSCommandoShotgun:
 	Warhead@ShotgunGrenadeAlly:
 		Damage: 4000
 	Warhead@ShotgunShrapnelEnemy:
-		Damage: 8000
+		Damage: 16000
+		PercentageScale: 0
 	Warhead@ShotgunShrapnelAlly:
 		Damage: 4000
 	Warhead@ShotgunTankDestroyer:
@@ -345,6 +346,7 @@ TSCommandoShotgun:
 		Damage: 8000
 	Warhead@ShotgunChaingun:
 		Damage: 8000
+	-Warhead@ShotgunGrenadeEnemy:
 
 elitecadregun:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat

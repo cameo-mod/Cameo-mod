@@ -1041,7 +1041,8 @@ GDISniperRifle:
 	Warhead@SniperSmallArms:
 		Damage: 8000
 	Warhead@SniperChaingun:
-		Damage: 8000
+		Damage: 16000
+		PercentageScale: 0
 	Warhead@SniperGrenadeFriendlyFire: AreaDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Air
@@ -1076,6 +1077,7 @@ GDISniperRifle:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
+	-Warhead@SniperFlak:
 
 MachineGunHumvee2:
 	Inherits@wh: ^Warhead_Bullet_Light
