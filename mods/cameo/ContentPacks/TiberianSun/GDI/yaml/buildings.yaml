@@ -119,7 +119,7 @@ ts_gdi_powerplant:
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@power: ^PowerPlant
-	Inherits: ^BuildingPlugProducer
+	Inherits@plug: ^BuildingPlugProducer
 	Tooltip:
 		Name: GDI Power Plant
 	Valued:
@@ -320,7 +320,7 @@ ts_gdi_servicedepot:
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@repair: ^RepairsUnits
-	Inherits@repair: ^RepairFacility
+	Inherits@repairfacility: ^RepairFacility
 	# HitShape:
 	# 	TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
 	# 	Type: Polygon

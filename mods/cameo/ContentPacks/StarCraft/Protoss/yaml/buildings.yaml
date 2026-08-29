@@ -139,7 +139,7 @@ protoss_assimilator:
 	Inherits@ref: ^SCRefineryCommon
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
-	Inherits: ^BuildingPlugProducer
+	Inherits@plug: ^BuildingPlugProducer
 	Tooltip:
 		Name: Assimilator
 	Power:
