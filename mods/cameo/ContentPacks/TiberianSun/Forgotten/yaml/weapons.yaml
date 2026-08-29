@@ -1328,6 +1328,7 @@ TSFiendShard:
 		Image: ra2txgasg
 		TrailImage: green_smokey
 	Warhead@Chemical_Light:
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@3Eff: CreateEffect
 		Explosions: sczhsplash
@@ -1351,14 +1352,17 @@ TSFiendShardUP:
 		Image: ra2txgasg
 		TrailImage: green_smokey
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
@@ -1382,6 +1386,7 @@ TSFiendShardUP:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@HeavyChemicalWeapon:
 	Warhead@Chemical_Heavy:
+		ValidTargets: Ground, Water, Air
 		Damage: 18000
 		PercentageScale: 0
 TSFiendShardBlue:
@@ -1402,14 +1407,18 @@ TSFiendShardBlue:
 		Image: ra2txgasg
 		TrailImage: blue_smokey
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
@@ -1424,6 +1433,7 @@ TSFiendShardBlue:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@MediumChemicalWeapon:
 	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 0
 
@@ -1447,22 +1457,28 @@ TSFiendShardBlueUP:
 		Image: ra2txgasg
 		TrailImage: blue_smokey
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
@@ -1487,6 +1503,7 @@ TSFiendShardBlueUP:
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@HeavyBomb:
 	Warhead@Chemical_Heavy:
+		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 0
 

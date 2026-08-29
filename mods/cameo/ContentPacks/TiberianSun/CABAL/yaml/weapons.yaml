@@ -2582,7 +2582,10 @@ CabalOverkillCharge:
 		SecondaryBeamColor: BB22DD30
 		TrackTarget: false
 	Warhead@Tesla_Heavy:
+		ValidTargets: Ground, Water, Air
 		Damage: 24000
+	Warhead@Tesla_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav

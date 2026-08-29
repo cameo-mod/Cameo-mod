@@ -904,6 +904,7 @@ TSAssaultCannonSonic:
 	Burst: 2
 	BurstDelays: 2
 	Range: 6305
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Inaccuracy: 250
 	Warhead@Flak_Medium: AreaDamage
@@ -915,7 +916,7 @@ TSAssaultCannonSonic:
 	-Warhead@Flak_Medium:
 	-Warhead@Sonic_Medium:
 	Warhead@Sonic_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 4988
 
@@ -932,7 +933,7 @@ TSAssaultCannonTal:
 		Speed: 2000
 		Inaccuracy: 200
 	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 TSAssaultCannonTalSonic:
 	Inherits@roleflat: ^Compatibility_Sonic_MediumFlat
@@ -942,6 +943,7 @@ TSAssaultCannonTalSonic:
 	Inherits@fx: ^Effect_Sonic_Shell
 	Report: 120mmf.aud
 	ReloadDelay: 45
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
@@ -951,7 +953,7 @@ TSAssaultCannonTalSonic:
 	-Warhead@Bullet_Medium:
 	-Warhead@Sonic_Medium:
 	Warhead@Sonic_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 6244
 
