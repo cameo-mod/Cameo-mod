@@ -550,7 +550,7 @@ naxis_naxibunker:
 	Inherits@gar: ^ClearableGarrison
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@Atlantikwall: ^Atlantikwall
-	Inherits: ^BuildingPlugProducer
+	Inherits@plug: ^BuildingPlugProducer
 	Tooltip:
 		Name: Naxi Bunker
 	Building:

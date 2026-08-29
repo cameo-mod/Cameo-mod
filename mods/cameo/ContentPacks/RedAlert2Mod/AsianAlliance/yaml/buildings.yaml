@@ -159,7 +159,7 @@ asianalliance_asianservicedepot:
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^AASpawnActorsOnSell
 	Inherits@repair: ^RepairsUnits
-	Inherits@repair: ^RepairFacility
+	Inherits@repairfacility: ^RepairFacility
 	HitShape:
 		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
 		Type: Polygon

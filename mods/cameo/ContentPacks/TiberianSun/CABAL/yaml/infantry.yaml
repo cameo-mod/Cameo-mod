@@ -762,7 +762,7 @@ cabal_hackercyborg:
 cabal_cyborgcommando:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
-	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@HeroTemplate: ^HeroInfantryTemplate
 	Inherits@Cyborg: ^TSCyborgs
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -849,7 +849,7 @@ cabal_cyborgcommando:
 cabal_cyborgcommandov2:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
-	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@HeroTemplate: ^HeroInfantryTemplate
 	Inherits@Cyborg: ^TSCyborgs
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -943,7 +943,7 @@ cabal_eliminator800:
 	Inherits@GATLING: ^GatlingSpinUpUnitBehavior
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
-	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@EXPERIENCERA2: ^GainsExperienceRA2
 	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
 	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
