@@ -1354,11 +1354,11 @@ OfficerMachineGunAP:
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 4
-	Range: 4888
+	Range: 5596
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
-		Damage: 4000
+		Damage: 16000
 GDIRigDroneTargeting:
 	# ValidTargets: SpecialRepair, Repairing, Repair, lockdowned, plagued, ivanattached
 	# ValidRelationships: Ally

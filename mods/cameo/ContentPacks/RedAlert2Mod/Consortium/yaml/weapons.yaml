@@ -171,7 +171,7 @@ ConsortiumMissileSystem_EMP:
 	-Warhead@TeslaWeapon:
 	Warhead@MissileQuantum_MediumFlatCompatibility:
 		ValidTargets: Air
-		Damage: 15000
+		Damage: 34000
 		PercentageScale: 0
 
 SteelQuantumCannon:
@@ -1386,6 +1386,14 @@ SteelInfRailgun_EMP_elite:
 SteelScalpelRailgun_EMP_AA:
 	Inherits: SteelInfRailgun_EMP_elite
 	ValidTargets: Air
+	Warhead@Railgun_Heavy:
+		Damage: 4000
+	Warhead@Flak_Medium:
+		Damage: 4000
+	Warhead@Bullet_Medium:
+		Damage: 4000
+	Warhead@MissileAP_Light:
+		Damage: 4000
 	Warhead@EffectAir: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect

@@ -36,7 +36,7 @@ TS30mmRail:
 		HelixRadius: 16
 	ReloadDelay: 26
 	Burst: 3
-	Range: 5873
+	Range: 6125
 	BurstDelays: 2
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 2000
@@ -57,7 +57,7 @@ TS30mmRail:
 	-Warhead@RailgunExtraDamage:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 16000
 		PercentageScale: 0
 
 TS120mmRail:
@@ -272,9 +272,9 @@ KodiakCannonSonic:
 	Report: tnkfire4.aud
 	ValidTargets: Ground, Water
 	Warhead@CannonHE_Heavy:
-		Damage: 8000
+		Damage: 22000
 	Warhead@Sonic_Heavy:
-		Damage: 8000
+		Damage: 22000
 TSSonicWeaponEffect:
 	ReloadDelay: 60
 	Range: 6144
@@ -670,10 +670,11 @@ TSMammothTusk2II_AA:
 		Explosions: small_building
 
 TSHellfireSonic:
+	Inherits: TSHellfire
 	Inherits@wh: ^Warhead_Sonic_Medium
 	Inherits@proj: ^Projectile_TS_Missile_Medium
 	Inherits@fx: ^Effect_Sonic_Medium
-	ReloadDelay: 60
+	ReloadDelay: 32
 	Range: 6144
 	Report: orcamis1.aud
 	ValidTargets: Ground, Water, Air
@@ -697,7 +698,7 @@ TSZoneHellfire:
 	Range: 6138
 
 TSZoneHellfireSonic:
-	Inherits: TSHellfireSonic
+	Inherits: TSZoneHellfire
 	Inherits@wh: ^Warhead_Sonic_Heavy
 	Inherits@proj: ^Projectile_TS_Missile_Heavy
 	Inherits@fx: ^Effect_Sonic_Heavy
@@ -943,6 +944,7 @@ TSAssaultCannonTalSonic:
 	Inherits@fx: ^Effect_Sonic_Shell
 	Report: 120mmf.aud
 	ReloadDelay: 45
+	Range: 6520
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 2000
