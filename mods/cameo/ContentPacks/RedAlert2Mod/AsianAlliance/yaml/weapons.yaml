@@ -2387,6 +2387,7 @@ AsianPelicanMissile_elite:
 		ContrailEndWidth: 1
 
 AsianPelicanMG:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2HeavyCannon
 	Inherits@2: ^RA2SmallArms
 	Inherits@3: ^RA2Chaingun
@@ -2408,12 +2409,23 @@ AsianPelicanMG:
 	# Preserve the shell template's range-scaled speed and inaccuracy after the
 	# mixed projectile inheritance resolves.
 	Projectile: ScaledBullet
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 AsianPelicanMG_elite:
 	Inherits: AsianPelicanMG
 	Range: 7100
 	Burst: 8
 	Projectile: ScaledBullet
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 AAGunBoatCannon:
 	Inherits: ^RA2HeavyCannon

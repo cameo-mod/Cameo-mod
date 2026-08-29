@@ -48,8 +48,14 @@ class AaWeaponRoutingTests(unittest.TestCase):
         expected = {
             "ArmoredCarMG_AA": {"Bullet_Medium": "8000",
                                  "ArmoredCarGroundCompatibility": "8000"},
-            "NaxQuadCannon_AA": {"Flak_Medium": "5000",
-                                  "NaxFlakGroundWater": "2000"},
+            "NaxQuadCannon_AA": {
+                "Flak_MediumFlatCompatibility": "7000"},
+            "NaxQuadCannon_AA_elite": {
+                "Flak_MediumFlatCompatibility": "7000"},
+            "SkyMageCannon_AA": {
+                "Flak_MediumFlatCompatibility": "7000"},
+            "SkyMageCannon_AA_elite": {
+                "Flak_MediumFlatCompatibility": "7000"},
             "RA2MultiHoverMissile_AA": {"CannonHE_Medium": "2000",
                                          "MissileHE_Light": "2000"},
             "RA2MultiHoverMissile_AA_elite": {"CannonHE_Medium": "2000",

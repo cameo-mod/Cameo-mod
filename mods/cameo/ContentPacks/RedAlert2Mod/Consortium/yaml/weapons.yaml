@@ -667,8 +667,9 @@ SteelMantaHunterCannons_AA:
 	-Warhead@Bullet_MediumFlatCompatibility:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 9984
+	-Warhead@MissileAP_Medium:
 SteelMantaHunterCannonsResonance:
 	Inherits: SteelMantaHunterCannons
 	Warhead@shrapnel: FireShrapnel
@@ -713,8 +714,8 @@ SteelMantaHunterCannonsAAResonance_AA:
 		ValidTargets: Ground, Water, Air
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelMantaHunterCannonsAAResonanceBounce1:
 	Inherits: SteelMantaHunterCannonsAAResonance_AA
@@ -723,8 +724,8 @@ SteelMantaHunterCannonsAAResonanceBounce1:
 		Weapon: SteelMantaHunterCannonsAAResonanceBounce2
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelMantaHunterCannonsAAResonanceBounce2:
 	Inherits: SteelMantaHunterCannonsAAResonance_AA
@@ -732,8 +733,8 @@ SteelMantaHunterCannonsAAResonanceBounce2:
 	-Warhead@shrapnel:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelRunnerPistols:
 	Inherits: ^TeslaWeapon

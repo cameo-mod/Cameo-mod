@@ -972,6 +972,7 @@ NaxQuadCannon_elite:
 	BurstDelays: 3
 
 NaxQuadCannon_AA:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: NaxQuadCannon
 	Inherits@compat: ^NaxQuadCannonFlakGroundWaterCompatibility
 	ValidTargets: Air
@@ -990,7 +991,7 @@ NaxQuadCannon_AA:
 		PercentageScale: 4000
 	Warhead@NaxFlakAllyCounted:
 		ValidTargets: Air
-		Damage: 500
+		Damage: 1500
 	Warhead@NaxFlakAllyUncounted:
 		ValidTargets: Air
 		Damage: 1000
@@ -998,6 +999,12 @@ NaxQuadCannon_AA:
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
+	-Warhead@Flak_Medium:
+	-Warhead@NaxFlakGroundWater:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 7000
+		PercentageScale: 2843
 
 NaxQuadCannon_AA_elite:
 	Inherits: NaxQuadCannon_AA
@@ -1036,30 +1043,12 @@ NaxQuadCannonTargeting:
 	Range: 8888
 
 PortableFlak:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: NaxQuadCannon_AA
 	Range: 8888
-	-Warhead@Flak_Medium:
-	-Warhead@NaxFlakGroundWater:
-	Warhead@Flak_MediumFlatCompatibility:
-		ValidTargets: Air
-		Damage: 7000
-		PercentageScale: 2843
-	Warhead@NaxFlakAllyCounted:
-		Damage: 1500
 
 PortableFlak_elite:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: NaxQuadCannon_AA_elite
 	Range: 9999
-	-Warhead@Flak_Medium:
-	-Warhead@NaxFlakGroundWater:
-	Warhead@Flak_MediumFlatCompatibility:
-		ValidTargets: Air
-		Damage: 7000
-		PercentageScale: 2843
-	Warhead@NaxFlakAllyCounted:
-		Damage: 1500
 
 NaxFlakAG:
 	Inherits: NaxQuadCannon
@@ -1080,7 +1069,6 @@ NaxFlakAG:
 		Inaccuracy: 888
 
 NaxFlakAA:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: NaxQuadCannon_AA
 	ReloadDelay: 88
 	Range: 13200
@@ -1097,14 +1085,6 @@ NaxFlakAA:
 		Speed: 4400
 		Width: 44
 		Inaccuracy: 888
-	-Warhead@Flak_Medium:
-	-Warhead@NaxFlakGroundWater:
-	Warhead@Flak_MediumFlatCompatibility:
-		ValidTargets: Air
-		Damage: 7000
-		PercentageScale: 2843
-	Warhead@NaxFlakAllyCounted:
-		Damage: 1500
 
 NaxPlanegun_elite:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
