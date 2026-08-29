@@ -988,13 +988,9 @@ FLAK-23-AA:
 	Inherits: FLAK-23-AG
 	Range: 8118
 	ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+	Warhead@Flak_Medium:
 		ValidTargets: Air
 
 BTRMachineGun:

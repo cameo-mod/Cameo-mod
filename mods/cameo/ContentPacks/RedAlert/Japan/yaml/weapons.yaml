@@ -2591,7 +2591,7 @@ ArmoredCarMG_AA:
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@ArmoredCarGroundCompatibility: AreaDamage
-		ValidTargets: Ground, Water
+		ValidTargets: Air
 		Damage: 8000
 
 ArmoredCarMGWaveforce:
