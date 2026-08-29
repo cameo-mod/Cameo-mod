@@ -493,6 +493,57 @@ From [`audit/SUMMARY.md`](audit/SUMMARY.md), smallest first:
    ⚠ It is a yaml edit, so it needs the boot gate; the audit is wired ADVISORY until it lands,
    then move it into the blocking loop.
 
+### 3.3-rename — The naming migration is SPECIFIED and SEQUENCED (2026-08-29)
+
+Maintainer asked for two renames. Both are specified; **neither is applied**, and the
+order matters.
+
+**(1) Weapons → `<actor>_<family>[_<qualifier>][_<variant>]`.** The law is
+**DESIGN.md §1b**; the generator is `tools/rename/gen_weapon_names.py`. It reproduces
+the maintainer's own example exactly:
+
+```
+120mmDual   -> td_gdi_mammothtank_cannon_he
+120mmDualHV -> td_gdi_mammothtank_cannon_he_hypervelocity
+```
+
+⛔ **BLOCKED ON W27.** The family token reads `Inherits@wh: ^Warhead_*`, and only
+**49.2%** of live weapons have one (806 of 1637; 307 on legacy templates, 524 on
+none). Renaming now names half the roster correctly and guesses at the rest, and
+W27 rewrites the very inheritance the names come from. `--write` refuses below 95%.
+Coverage is tracked as the `weapon_name_coverage_pct` doc-claim — it is the W27
+progress meter.
+
+⚠ `tools/rename/rename_map_weapons.yaml` is **SUPERSEDED — do not apply it.** 1560
+entries, generated then abandoned (1061 old names still live, 0 new ones present),
+and its scheme discards what the maintainer asked to keep: `120mmDualHV` becomes
+`td_gdi_mammothtank_bullets_2`, losing both the CannonHE family and the
+hyper-velocity upgrade. Its generator is already in `tools/archive/`.
+
+Three findings the specification had to resolve:
+
+| finding | resolution |
+|---|---|
+| **283 of 1637** live weapons are fired by >1 actor (`DemoTruckTargeting` by 40, `Pistol` by 14 civilians) — "the actor that fires it" has no answer | `shared_<namegroup>` from the weapon's OWN name. Keying on family fails: 19 shared weapons are Bullet-family and would collapse onto one id. |
+| **124 of 217** `_elite` weapons are gated on an UPGRADE, not veterancy — §16.3 reserves `_elite` for the RA2 veterancy weapon | upgrade replacements take the upgrade's name group (`_hypervelocity`), never `_elite`. Tracked as `elite_suffix_upgrade_overload`, should fall to 0. |
+| a negated condition (`!upgrade`) marks the BASE weapon, not the upgraded one | 14 of the first run's 54 collisions were this single bug. |
+
+**(2) Actors with illegal ids.** **281 buildable** actors are non-conforming:
+114 with no faction prefix (`carryall`, `atreides_*`, `concreteabuilding`), 107
+UPPERCASE (`A10`, `CNCPT`, `E6`), 60 dotted (`alien.nax`, `OILB.TS`,
+`carryall.paradrop`). Note DESIGN §1 **legalises** dotted `.husk` variants and §14
+exempts terrain decorations, so the raw count of 1229 non-conforming ids over the
+whole tree is not the work item — 281 is.
+
+⚠ An actor rename is not a yaml-only change: §14 requires every `ActorNN:` line in
+8 `map.yaml` files and every actor-type string in 11 `.lua` scripts to move with
+it, or maps crash on load. `tools/rename/safe_rename.py` +
+`tools/rename_map_actors.py` exist for this.
+
+**Neither rename can be committed from a cloud container** — both are engine
+content and rule 1 requires a boot gate. Land them in a session that can run
+`launch-game.cmd`.
+
 ### 3.3a — The engine limits are RULED (2026-08-29); the roster is not yet inside them
 
 `tools/audit/audit_engine_constraints.py` enforces them, advisory until the roster

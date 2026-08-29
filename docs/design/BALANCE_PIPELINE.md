@@ -72,6 +72,53 @@ B. patch    ledger from reports        python tools/balance/_patch_ledgers_from_
    then run steps 3–8 above.
 ```
 
+## 0b. THE TWO ENGINEERING PRINCIPLES (maintainer 2026-08-29) — binding
+
+Adopted after the same failure shape appeared four separate times. They are not
+philosophy; each has a named incident behind it.
+
+### P1 — Metrics must be context-aware
+
+> *"No metric should blindly sweep the tree without understanding the mechanical
+> context of the nodes it flags."*
+
+Classify the object BEFORE applying a threshold. A number means nothing until you
+know what produced it.
+
+| the sweep | what it would have condemned |
+|---|---|
+| `Speed < 50` | 100 of 807 buildable ground movers — the entire super-heavy class. The engine floor is **30**; 50 is the CLASS ANCHOR minimum, a different concept. At 30: 7 flagged, 6 not units. |
+| `ReloadDelay < 10` | 121 live weapons, most of them exempt BY MECHANISM — a continuous beam's reload IS its damage tick, a Gatling ladder's 6/4/2 is the spin-up. |
+| `credits per second` | two different economies. Swarm and single-harvester factions are not comparable on one number. |
+| `Damage == 0` | the GDI Ion Cannon, which delegates through `FireFragment` (see P2). |
+
+In practice: exemptions are declared by MECHANISM in
+`docs/design/balance_exceptions.yaml`, never hardcoded in the checker, and they
+match on **family stem** using the DESIGN §1 suffix grammar so one entry covers
+`RA2GattlingMG3` and `RA2GattlingMG3_AA` both.
+
+### P2 — Relationship traversal is infrastructure
+
+> *"We must trace the full delegation chain before declaring a value zero or a
+> node dead."*
+
+A raw yaml node is not the runtime mechanic. Resolve the chain:
+
+```
+actor -> Armament -> weapon -> Warhead -> {damage | FireFragment -> weapon -> ...}
+actor -> Buildable.Prerequisites -> upgrade/promotion -> condition -> consumer
+harvester -> refinery -> DockHost -> unload throughput -> free fleet
+weapon  -> Inherits@wh -> ^Warhead_<Family>_<Level>   (the §1b name source)
+```
+
+`audit_support_powers.py` S3 reported the GDI Ion Cannon at **zero damage**
+because it stopped at the top weapon; following `FireFragment` gives **452075**.
+"The GDI Ion Cannon is broken" was too surprising to be true, and it wasn't.
+
+No audit re-walks yaml by hand. Read through `miniyaml.Ruleset.resolve` /
+`.resolve_weapon` (CLAUDE.md 8e), and when a traversal is needed twice, promote it
+to shared infrastructure rather than reimplementing it.
+
 ## 1. ARCHITECTURE CORRECTION (the honest-opinion part, agreed with maintainer intent)
 
 "All 4 documents always mirrored and all writable" is the one part

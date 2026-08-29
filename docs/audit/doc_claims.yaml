@@ -627,3 +627,81 @@ claims:
               have[a.split('_promotion_')[0]] += 1
       print(sum(1 for f in m.real_factions() if have.get(f.internal, 0) == 0))
 
+  # --- Weapon naming, DESIGN.md section 1b (2026-08-29) ---
+  - id: weapon_name_coverage_pct
+    value: 49.2
+    tolerance: 0.02
+    what: >
+      Percent of LIVE weapons whose §1b family token is derivable, i.e. carrying
+      an `Inherits@wh: ^Warhead_*`. This is the W27 progress meter and the gate
+      on the rename: gen_weapon_names.py --write refuses below 95%. It should
+      RISE as the 3-way split lands; a fall means conversions were reverted.
+    docs: [docs/DESIGN.md, docs/HANDOFF.md]
+    measure: |
+      import sys, collections, re, pathlib
+      root = pathlib.Path('.').resolve()
+      sys.path.insert(0, 'tools/audit')
+      sys.path.insert(0, 'tools/rename')
+      from cameo_model import Model
+      import gen_weapon_names as g
+      rs = Model().rs
+      proposals, undecidable, _c = g.plan(rs)
+      total = len(proposals) + len(undecidable)
+      print(round(len(proposals) / total * 100, 1))
+
+  - id: shared_weapon_count
+    value: 283
+    tolerance: 0
+    what: >
+      Live weapons fired by MORE than one actor. They cannot take an actor-scoped
+      name (DemoTruckTargeting has 40 firers), so §1b gives them shared_<namegroup>.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import sys, collections
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      firers = collections.defaultdict(set)
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          n = rs.resolve(a)
+          if n is None:
+              continue
+          for c in n.children:
+              if c.key.split('@')[0] == 'Armament':
+                  w = c.get('Weapon')
+                  if w:
+                      firers[w.strip()].add(a)
+      print(sum(1 for v in firers.values() if len(v) > 1))
+
+  - id: elite_suffix_upgrade_overload
+    value: 124
+    tolerance: 0
+    what: >
+      Weapons ending _elite that are gated on an UPGRADE condition rather than
+      veterancy. DESIGN §16.3 reserves _elite for the RA2 veterancy weapon, so
+      these are the overload §1b forbids adding to. Should fall to 0 as the
+      rename lands.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      n = 0
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is None:
+              continue
+          for c in node.children:
+              if c.key.split('@')[0] != 'Armament':
+                  continue
+              w = (c.get('Weapon') or '').strip()
+              rc = (c.get('RequiresCondition') or '')
+              if w.endswith('_elite') and 'upgrade' in rc.lower():
+                  n += 1
+      print(n)
+
