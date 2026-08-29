@@ -2643,6 +2643,7 @@ CabalOverkillLaser:
 		ValidTargets: Ground, Water, Air
 
 CabalOverkillDroneLaser:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -2666,3 +2667,9 @@ CabalOverkillDroneLaser:
 		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
+	-Warhead@Bullet_Light:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988

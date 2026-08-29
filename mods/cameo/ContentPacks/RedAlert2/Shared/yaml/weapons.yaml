@@ -974,8 +974,10 @@ RA2MirageGun:
 	-Warhead@RailgunWeapon:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 17000
-		PercentageScale: 0
+		Damage: 25000
+		PercentageScale: 3196
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	-Warhead@CannonAP_Light:
 RA2HoverMissile:
 	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
@@ -1019,6 +1021,7 @@ RA2HoverMissile_AA_elite:
 	Range: 9640
 
 RA2ThunderboltMissile:
+	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1039,6 +1042,12 @@ RA2ThunderboltMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
+	-Warhead@MissileHE_Heavy:
+	-Warhead@MissileHE_Light:
+	Warhead@MissileHE_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2ThunderboltMissile_elite:
 	Inherits: RA2ThunderboltMissile
@@ -1108,6 +1117,7 @@ RA2MultiHoverMissile_AA_elite:
 	Range: 10255
 
 RA2MultiThunderboltMissile:
+	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1128,6 +1138,12 @@ RA2MultiThunderboltMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
+	-Warhead@MissileHE_Heavy:
+	-Warhead@MissileHE_Light:
+	Warhead@MissileHE_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2MultiThunderboltMissile_elite:
 	Inherits: RA2MultiThunderboltMissile
@@ -1665,17 +1681,13 @@ TeslaArmorDischargeDummy:
 TeslaArmorDischargeArc:
 	Inherits: TeslaArmorDischargeDummy
 	Report: tesla1.aud
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 12000
+		Damage: 24000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1694,12 +1706,10 @@ TeslaArmorDischargeFragment1:
 	Inherits: TeslaArmorDischargeArc
 	Report: tesla1.aud
 	Range: 2250
-	Warhead@LightMissile: SpreadDamage
-		Damage: 6000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 6000
+		Damage: 12000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 3000
@@ -1714,12 +1724,10 @@ TeslaArmorDischargeFragment2:
 	Inherits: TeslaArmorDischargeFragment1
 	Report: tesla1.aud
 	Range: 1500
-	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 4000
+		Damage: 8000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
@@ -2628,7 +2636,6 @@ RA2FLAKAG:
 	ValidTargets: Ground, Water
 
 RA2FlakTrackGun:
-	Inherits@roleflat: ^Compatibility_Flak_MediumFlat
 	Inherits: ^SmallArms
 	Inherits@2: ^Grenade
 	Inherits@3: ^Chaingun
@@ -2659,15 +2666,12 @@ RA2FlakTrackGun:
 		Damage: 1
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 8000
+		PercentageScale: 2488
 	-Warhead@Chaingun:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@SmallArms:
-	Warhead@Flak_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 6000
-		PercentageScale: 0
 RA2DoublePistols:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light

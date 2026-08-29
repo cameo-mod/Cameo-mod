@@ -12683,12 +12683,6 @@ TSPulseCannon_EMP:
 		ExplosionPalette: tseffect
 		ImpactSounds: ptesto00.aud
 		ImpactActors: false
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
-		Damage: 10000
-		Spread: 2500
-		InvalidTargets: Infantry
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
@@ -12705,7 +12699,7 @@ TSPulseCannon_EMP:
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 10000
+		Damage: 20000
 		Spread: 2500
 		InvalidTargets: Infantry
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
@@ -18869,3 +18863,406 @@ generic_bullet_casing:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+
+# Percentage-inert flat compatibility profiles for the final reviewed
+# retired-family consolidation. Percentage applications stay on their
+# legacy nodes to preserve shipped per-node rounding and overflow.
+
+^Compatibility_Sonic_MediumFlat:
+	Warhead@Sonic_MediumFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 0
+		Falloff: 100, 75, 50, 25, 0
+		Versus:
+			HAZMAT: 68
+			COMPOSITE: 96
+			BLAST: 58
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 233
+			Bomber: 100
+			Concrete: 100
+			Fighter: 100
+			Flak: 100
+			Heavy: 100
+			Helicopter: 100
+			Heroic: 100
+			Light: 100
+			Medium: 100
+			None: 100
+			Plate: 100
+			Scout: 100
+			Spaceship: 100
+			Steel: 100
+			Superheavy: 100
+			Wood: 100
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 8
+			Bomber: 8
+			Concrete: 8
+			Fighter: 8
+			Flak: 8
+			Heavy: 8
+			Helicopter: 8
+			Heroic: 8
+			Light: 8
+			Medium: 8
+			None: 8
+			Plate: 8
+			Scout: 8
+			Spaceship: 8
+			Steel: 8
+			Superheavy: 8
+			Wood: 8
+
+# Canonical named-family flat profiles used by the reviewed elemental,
+# energy, and sonic role consolidation.
+
+^Compatibility_Flame_HeavyFlat:
+	Warhead@Flame_HeavyFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 0
+		Falloff: 100, 90, 78, 60, 0
+		Versus:
+			HAZMAT: 39
+			COMPOSITE: 76
+			BLAST: 66
+			REFLECTOR: 99
+			ARMOR: 70
+			Shield: 225
+			None: 191
+			Wood: 187
+			Flak: 162
+			Plate: 160
+			Steel: 158
+			Concrete: 122
+			Scout: 79
+			Light: 75
+			Medium: 67
+			Heavy: 66
+			Heroic: 65
+			Superheavy: 63
+			Fighter: 58
+			Bomber: 53
+			Helicopter: 49
+			Spaceship: 44
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			None: 25
+			Wood: 24
+			Flak: 23
+			Steel: 22
+			Plate: 21
+			Concrete: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+
+^Compatibility_Thermobaric_MediumFlat:
+	Warhead@Thermobaric_MediumFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 253
+		Damage: 0
+		Falloff: 100, 76, 57, 43, 31, 17, 0
+		Versus:
+			HAZMAT: 54
+			COMPOSITE: 92
+			BLAST: 50
+			REFLECTOR: 83
+			ARMOR: 70
+			Shield: 194
+			Wood: 200
+			None: 191
+			Steel: 143
+			Flak: 140
+			Concrete: 111
+			Plate: 108
+			Scout: 102
+			Light: 97
+			Medium: 91
+			Heavy: 76
+			Fighter: 64
+			Superheavy: 61
+			Bomber: 60
+			Heroic: 55
+			Helicopter: 54
+			Spaceship: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 33
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Wood: 19
+			None: 18
+			Steel: 17
+			Flak: 16
+			Scout: 15
+			Concrete: 15
+			Plate: 14
+			Light: 13
+			Heroic: 12
+			Medium: 12
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+
+# Canonical flat profiles for the reviewed pinned-role cohort.
+
+^Compatibility_Concussion_LightFlat:
+	Warhead@Concussion_LightFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 233
+		Damage: 0
+		Falloff: 100, 72, 50, 32, 18, 8, 0
+		Versus:
+			HAZMAT: 68
+			COMPOSITE: 106
+			BLAST: 36
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 146
+			Scout: 152
+			None: 149
+			Wood: 146
+			Light: 129
+			Flak: 114
+			Steel: 112
+			Medium: 109
+			Fighter: 96
+			Heavy: 90
+			Heroic: 85
+			Plate: 84
+			Concrete: 83
+			Superheavy: 78
+			Bomber: 71
+			Helicopter: 55
+			Spaceship: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Scout: 16
+			None: 15
+			Wood: 14
+			Light: 13
+			Flak: 12
+			Steel: 11
+			Medium: 10
+			Plate: 9
+			Concrete: 8
+			Heavy: 7
+			Heroic: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+
+# Percentage-inert flat compatibility profiles for the final reviewed
+# retired-family consolidation. Percentage applications stay on their
+# legacy nodes to preserve shipped per-node rounding and overflow.
+
+^Compatibility_Flame_MediumFlat:
+	Warhead@Flame_MediumFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 0
+		Falloff: 100, 90, 78, 60, 0
+		Versus:
+			HAZMAT: 39
+			COMPOSITE: 76
+			BLAST: 66
+			REFLECTOR: 99
+			ARMOR: 70
+			Shield: 214
+			None: 200
+			Wood: 198
+			Flak: 155
+			Steel: 153
+			Plate: 115
+			Concrete: 92
+			Scout: 91
+			Light: 90
+			Medium: 87
+			Heavy: 68
+			Fighter: 67
+			Bomber: 64
+			Superheavy: 57
+			Helicopter: 56
+			Heroic: 53
+			Spaceship: 51
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Wood: 19
+			Flak: 18
+			Steel: 17
+			Plate: 16
+			Concrete: 15
+			Heroic: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+
+# Canonical flat profiles for explicit full-family state expansion.
+
+^Compatibility_Chemical_LightFlat:
+	Warhead@Chemical_LightFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 183
+		Damage: 0
+		Falloff: 100, 88, 72, 50, 0
+		Versus:
+			HAZMAT: 51
+			COMPOSITE: 62
+			BLAST: 72
+			REFLECTOR: 96
+			ARMOR: 70
+			Shield: 191
+			Plate: 141
+			Superheavy: 140
+			Heavy: 138
+			Flak: 134
+			Medium: 130
+			Light: 125
+			Scout: 119
+			Heroic: 118
+			None: 115
+			Concrete: 80
+			Steel: 76
+			Wood: 72
+			Spaceship: 60
+			Helicopter: 54
+			Bomber: 50
+			Fighter: 48
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Corrosion: 100
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Superheavy: 16
+			Heroic: 15
+			Heavy: 14
+			Plate: 13
+			Medium: 12
+			Flak: 11
+			Light: 10
+			None: 9
+			Scout: 8
+			Concrete: 7
+			Steel: 6
+			Wood: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+
+^Compatibility_Thermobaric_HeavyFlat:
+	Warhead@Thermobaric_HeavyFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 338
+		Damage: 0
+		Falloff: 100, 76, 57, 43, 31, 17, 0
+		Versus:
+			HAZMAT: 54
+			COMPOSITE: 92
+			BLAST: 50
+			REFLECTOR: 83
+			ARMOR: 70
+			Shield: 212
+			Wood: 154
+			None: 150
+			Steel: 148
+			Flak: 147
+			Concrete: 130
+			Plate: 128
+			Scout: 89
+			Light: 85
+			Medium: 84
+			Heavy: 83
+			Superheavy: 82
+			Heroic: 74
+			Fighter: 69
+			Bomber: 63
+			Helicopter: 58
+			Spaceship: 54
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 33
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 24
+			None: 23
+			Steel: 22
+			Flak: 21
+			Scout: 20
+			Concrete: 20
+			Plate: 19
+			Light: 18
+			Heroic: 17
+			Medium: 17
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10

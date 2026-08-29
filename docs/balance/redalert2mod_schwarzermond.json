@@ -83,24 +83,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -112,6 +98,7 @@
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_Concussion_Light",
        "^Warhead_MissileAP_Heavy",
        "^Effect_MissileAP_Heavy",
@@ -753,7 +740,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -793,13 +780,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -815,8 +795,7 @@
        "^Chaingun",
        "^MediumMissile",
        "^LaserWeapon",
-       "^LegacyLaserChipCompatibility",
-       "^LaserHeavyGroundRemainderCompatibility"
+       "^LegacyLaserChipCompatibility"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -830,7 +809,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -870,13 +849,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -892,8 +864,7 @@
        "^Chaingun",
        "^MediumMissile",
        "^LaserWeapon",
-       "^LegacyLaserChipCompatibility",
-       "^LaserHeavyGroundRemainderCompatibility"
+       "^LegacyLaserChipCompatibility"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -947,13 +918,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -1018,13 +982,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -1049,7 +1006,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -1089,13 +1046,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -1120,7 +1070,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -1160,13 +1110,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -1231,13 +1174,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -1302,13 +1238,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -1333,7 +1262,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -1373,13 +1302,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -1404,7 +1326,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -1444,13 +1366,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -1515,13 +1430,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -1586,13 +1494,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -2213,10 +2114,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2241,7 +2138,7 @@
     "prerequisites": [
      "~schwarzermond_constructionyard",
      "schwarzermond_techcenter",
-     "!schwarzermond_meteortractionray",
+     "!schwarzermond_meteortractionray_swlimit",
      "~techlevel.superweapons"
     ],
     "queue": [
@@ -2977,34 +2874,6 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": null,
         "spread": null,
         "tag": "GrenadeFriendlyFire",
@@ -3018,18 +2887,46 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": null,
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "233",
+        "tag": "PreservedFlat_Concussion_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "PreservedFlat_Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "PreservedFlat_HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "PreservedFlat_MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "PreservedFlat_MissileAP_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -3057,34 +2954,6 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": null,
         "spread": null,
         "tag": "GrenadeFriendlyFire",
@@ -3098,18 +2967,46 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": null,
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "233",
+        "tag": "PreservedFlat_Concussion_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "PreservedFlat_Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "PreservedFlat_HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "PreservedFlat_MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "PreservedFlat_MissileAP_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -3138,34 +3035,6 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": null,
         "spread": null,
         "tag": "GrenadeFriendlyFire",
@@ -3179,18 +3048,46 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": null,
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "233",
+        "tag": "PreservedFlat_Concussion_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "PreservedFlat_Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "PreservedFlat_HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "PreservedFlat_MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "PreservedFlat_MissileAP_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -3219,34 +3116,6 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": null,
         "spread": null,
         "tag": "GrenadeFriendlyFire",
@@ -3260,18 +3129,46 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": null,
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "233",
+        "tag": "PreservedFlat_Concussion_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "PreservedFlat_Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "PreservedFlat_HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "PreservedFlat_MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "PreservedFlat_MissileAP_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -6963,24 +6860,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7008,24 +6891,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7118,7 +6987,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -7158,13 +7027,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7180,8 +7042,7 @@
        "^Chaingun",
        "^MediumMissile",
        "^LaserWeapon",
-       "^LegacyLaserChipCompatibility",
-       "^LaserHeavyGroundRemainderCompatibility"
+       "^LegacyLaserChipCompatibility"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -7235,13 +7096,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7266,7 +7120,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -7306,13 +7160,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7377,13 +7224,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7408,7 +7248,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -7448,13 +7288,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7519,13 +7352,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7612,7 +7438,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -7652,13 +7478,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7674,8 +7493,7 @@
        "^Chaingun",
        "^MediumMissile",
        "^LaserWeapon",
-       "^LegacyLaserChipCompatibility",
-       "^LaserHeavyGroundRemainderCompatibility"
+       "^LegacyLaserChipCompatibility"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -7729,13 +7547,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7760,7 +7571,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -7800,13 +7611,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7871,13 +7675,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7902,7 +7699,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -7942,13 +7739,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -8013,13 +7803,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",

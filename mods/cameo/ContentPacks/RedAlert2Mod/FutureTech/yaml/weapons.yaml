@@ -1098,7 +1098,12 @@ CannonAttackRobotGun:
 
 	-Warhead@TankDestroyerCannon:
 	-Warhead@MediumFlameWeapon:
-	-Warhead@CannonHE_MediumFlatCompatibility:
+	-Warhead@CannonHE_Medium:
+	-Warhead@Railgun_Heavy:
+	Warhead@CannonHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 4988
 CannonAttackRobotGun_elite:
 	Inherits: CannonAttackRobotGun
 	Range: 7000
@@ -1178,6 +1183,7 @@ FutureMechGatling:
 	-Warhead@FlakWeapon:
 	-Warhead@Bullet_MediumFlatCompatibility:
 FutureMechPlasma:
+	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
 	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^MediumChemicalWeapon
@@ -1232,12 +1238,22 @@ FutureMechPlasma:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 0
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Plasma_Heavy:
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 3330
 
 FutureMechPlasma_elite:
 	Inherits: FutureMechPlasma
 	Range: 8000
 	Burst: 4
 	BurstDelays: 5
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 3330
 
 GuardianTankCannon:
 	Inherits: ^RA2MediumCannon

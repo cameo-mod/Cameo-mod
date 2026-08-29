@@ -1,4 +1,5 @@
 IncendiaryM1Carbine:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
@@ -11,6 +12,12 @@ IncendiaryM1Carbine:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 ra1_soviets_ak47conscript_rifle:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -69,11 +76,18 @@ GrenadeRA:
 	Warhead@Flame_Light:
 		Damage: 8000
 GrenadeRAExplode:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits: GrenadeRA
 	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Flame_Light:
 		Damage: 4000
+	-Warhead@Demolition_Light:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 GrenadeThermobaric:
 	Inherits@roleflat: ^Compatibility_Thermobaric_LightFlat
 	Inherits: ^ShrapnelWeapon
@@ -107,8 +121,10 @@ GrenadeThermobaric:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Thermobaric_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 8000
-		PercentageScale: 0
+		Damage: 16000
+		PercentageScale: 4994
+	-Warhead@Demolition_Light:
+	-Warhead@Flame_Light:
 GrenadeThermobaricExplode:
 	Inherits: GrenadeThermobaric
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -150,8 +166,10 @@ GrenadeThermobaricExplode:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Thermobaric_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 4000
-		PercentageScale: 0
+		Damage: 16000
+		PercentageScale: 4994
+	-Warhead@Grenade:
+	-Warhead@LightFlameWeapon:
 
 FireRockets:
 	Inherits@wh: ^Warhead_MissileFire_Light
@@ -1114,6 +1132,7 @@ ChainGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 IncendiaryChainGun:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Flame_Light
@@ -1128,6 +1147,12 @@ IncendiaryChainGun:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 HindMissiles:
 	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -1162,6 +1187,7 @@ HindMissiles:
 		PercentageScale: 9984
 
 HindMissilesThermobaric:
+	Inherits@roleflat: ^Compatibility_Thermobaric_MediumFlat
 	Inherits@collapsewh: ^Warhead_Thermobaric_Medium
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -1246,6 +1272,12 @@ HindMissilesThermobaric:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Thermobaric_Medium:
+	Warhead@Thermobaric_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		PercentageScale: 1990
 
 HindMissilesNuclear:
 	Inherits@collapsewh: ^Warhead_Nuclear_Super
@@ -1520,6 +1552,7 @@ ArmoredYakChainGun:
 	MinRange: 1290
 
 IncendiaryYakChainGun:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Flame_Light
@@ -1537,6 +1570,12 @@ IncendiaryYakChainGun:
 		Damage: 4000
 	Warhead@Bullet_Medium:
 		Damage: 4000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 IncendiaryArmoredYakChainGun:
 	Inherits: IncendiaryYakChainGun
 	ReloadDelay: 148
@@ -2043,6 +2082,7 @@ TeslaMaverickFragment2:
 	-Warhead@TeslaArc:
 
 ThermobaricMaverick:
+	Inherits@roleflat: ^Compatibility_Thermobaric_HeavyFlat
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^HeavyMissile
@@ -2103,6 +2143,12 @@ ThermobaricMaverick:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 0
+	-Warhead@MissileAP_Medium:
+	-Warhead@Thermobaric_Heavy:
+	Warhead@Thermobaric_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 48000
+		PercentageScale: 2498
 
 Su57Maverick:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
@@ -3889,6 +3935,7 @@ RAGatlingTankCannon_AA:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 IncendiaryRAGatlingTankCannon:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Flame_Light
@@ -3903,12 +3950,23 @@ IncendiaryRAGatlingTankCannon:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 IncendiaryRAGatlingTankCannon_AA:
 	Inherits: IncendiaryRAGatlingTankCannon
 	Range: 7500
 	ValidTargets: Air
 	Warhead@Flame_Light:
 		ValidTargets: Air
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Air
+		Damage: 4000
+		PercentageScale: 9975
 TeslaRAGatlingTankCannon:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -4018,6 +4076,7 @@ ra1_soviets_rifleinfantry_carbine:
 	Warhead@Bullet_Light:
 		Damage: 2000
 ra1_soviets_rifleinfantry_carbine_incendiary:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
@@ -4030,3 +4089,9 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975

@@ -38,7 +38,6 @@ NaxiBeetleLaser_elite:
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
 	Inherits@legacychip: ^LegacyLaserChipCompatibility
-	Inherits@groundremainder: ^LaserHeavyGroundRemainderCompatibility
 	Range: 6448
 	ReloadDelay: 60
 	Burst: 2
@@ -67,7 +66,7 @@ NaxiBeetleLaser_elite:
 		ValidTargets: Ground, Water
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 4000
+		Damage: 8000
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -85,6 +84,7 @@ NaxiBeetleLaser_AA_elite:
 		ValidTargets: Air
 	Warhead@Laser_Heavy:
 		ValidTargets: Air
+		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -113,7 +113,6 @@ NaxiTank2Laser:
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
 	Inherits@legacychip: ^LegacyLaserChipCompatibility
-	Inherits@groundremainder: ^LaserHeavyGroundRemainderCompatibility
 	Range: 6500
 	ReloadDelay: 52
 	Burst: 4
@@ -142,7 +141,7 @@ NaxiTank2Laser:
 		ValidTargets: Ground, Water
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 4000
+		Damage: 8000
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -160,6 +159,7 @@ NaxiTank2Laser_AA:
 		ValidTargets: Air
 	Warhead@Laser_Heavy:
 		ValidTargets: Air
+		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -493,6 +493,7 @@ BlackHoleSuck:
 		ImpactSounds: nax_bh_slurp_01.wav, nax_bh_slurp_02.wav, nax_bh_slurp_03.wav
 
 NaxCorrosionRocket:
+	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_MissileAP_Heavy
 	Inherits@3: ^Effect_MissileAP_Heavy
@@ -540,6 +541,13 @@ NaxCorrosionRocket:
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: !corroded
+	-Warhead@Concussion_Light:
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 NaxCorrosionExpand1:
 	ReloadDelay: 5
@@ -625,6 +633,170 @@ NaxCorrosionRocketTrooper_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 4000
 	MinRange: 1210
+	-Warhead@Grenade:
+	-Warhead@MissileAP_Medium:
+	-Warhead@HeavyMissile:
+	-Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@PreservedFlat_Concussion_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 233
+		Damage: 2000
+		Falloff: 100, 72, 50, 32, 18, 8, 0
+		Versus:
+			HAZMAT: 68
+			COMPOSITE: 106
+			BLAST: 36
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 146
+			Scout: 152
+			None: 149
+			Wood: 146
+			Light: 129
+			Flak: 114
+			Steel: 112
+			Medium: 109
+			Fighter: 96
+			Heavy: 90
+			Heroic: 85
+			Plate: 84
+			Concrete: 83
+			Superheavy: 78
+			Bomber: 71
+			Helicopter: 55
+			Spaceship: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Scout: 16
+			None: 15
+			Wood: 14
+			Light: 13
+			Flak: 12
+			Steel: 11
+			Medium: 10
+			Plate: 9
+			Concrete: 8
+			Heavy: 7
+			Heroic: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+	Warhead@PreservedFlat_Grenade: SpreadDamage
+		Damage: 4000
+	Warhead@PreservedFlat_HeavyMissile: SpreadDamage
+		Damage: 4000
+	Warhead@PreservedFlat_MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 85
+		Damage: 2000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 161
+			Superheavy: 160
+			Spaceship: 146
+			Heavy: 142
+			Medium: 126
+			Helicopter: 115
+			Light: 112
+			Concrete: 105
+			Scout: 99
+			Bomber: 98
+			Plate: 91
+			Steel: 82
+			Fighter: 75
+			Flak: 73
+			Wood: 66
+			Heroic: 57
+			None: 54
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Spaceship: 20
+			Helicopter: 19
+			Bomber: 18
+			Fighter: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+	Warhead@PreservedFlat_MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 64
+		Damage: 4000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
 NaxCorrosionBeast:
 	Inherits: NaxCorrosionRocket
 	Range: 7984

@@ -33,6 +33,12 @@ from miniyaml import Ruleset  # noqa: E402
 
 
 PAIR = {"Bullet_Light", "Bullet_Medium"}
+FINALIZED_DOWNSTREAM = {
+    "JHighVWaveforce": ("Waveforce_HeavyFlatCompatibility", 12000, 8325),
+    "JapanSpeedBoatGunWaveforce": (
+        "Waveforce_HeavyFlatCompatibility", 6000, 9984),
+    "light_inf_lmg_ordos_upgrade": ("Laser_HeavyFlatCompatibility", 6000, 9984),
+}
 
 # Every inheritance closure is explicit.  New descendants fail closed instead
 # of silently inheriting a role choice that was never reviewed.
@@ -87,6 +93,17 @@ def inspect(rs: Ruleset, selected: dict[str, str]):
             raise RuntimeError(f"{name}: missing resolved weapon")
         mains = set(main_warheads(resolved))
         compatibility = f"{destination}FlatCompatibility"
+        if name in FINALIZED_DOWNSTREAM:
+            final_key, final_damage, final_scale = FINALIZED_DOWNSTREAM[name]
+            if mains != {final_key}:
+                raise RuntimeError(f"{name}: downstream final main changed: {sorted(mains)}")
+            node = flat_main_nodes(resolved, mains)[final_key]
+            if int(str(node.get("Damage") or 0)) != final_damage:
+                raise RuntimeError(f"{name}: downstream final damage changed")
+            if int(str(node.get("PercentageScale") or 0)) != final_scale:
+                raise RuntimeError(f"{name}: downstream final percentage changed")
+            plans[name] = None
+            continue
         if not (mains & PAIR) and compatibility in mains:
             plans[name] = None
             continue

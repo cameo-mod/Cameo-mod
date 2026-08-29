@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **614 of 1637 = 37.5%** (histogram runs out to 10 mains) |
+| W24 — directly fired weapons with **more than one** damage main | **494** under the unified predicate (histogram runs out to 10 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** |
 | fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
@@ -52,7 +52,7 @@ the question was asked.
 
 **The order:**
 
-1. **W24** — one damage warhead per weapon (DESIGN §11b). 37.5% non-compliant.
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 494 directly fired weapons remain non-compliant.
 2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
    is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
    merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE
@@ -2767,7 +2767,7 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `ARMOR_LAYERS.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-fired weapons, **54.9%** comply (898 of 1637); **37.5%** (614 of 1637) carry 2 or more damage
+directly fired weapons, **494** carry 2 or more damage
 warheads, worst case **10**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created

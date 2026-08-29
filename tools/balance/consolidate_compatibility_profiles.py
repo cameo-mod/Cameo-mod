@@ -24,6 +24,7 @@ sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "balance"))
 
 from miniyaml import Node, Ruleset  # noqa: E402
+from audit_three_way_split import main_warheads  # noqa: E402
 from consolidate_reviewed_weapon_roots import block_bounds  # noqa: E402
 import percentage_damage as pd  # noqa: E402
 from review_batch_diff import active_health_values  # noqa: E402
@@ -110,6 +111,17 @@ PERCENTAGE_SCALES = {
     'wc2highArrowFire': 1210,
 }
 
+# A later reviewed cohort finishes these partial compatibility folds by making
+# the compatibility profile the sole canonical main.  Keep this older converter
+# idempotent without weakening its checks for any other entry.
+FINALIZED_BY_PINNED_ROLE = {
+    'CannonAttackRobotGun': (8000, 4988),
+    'LatinSmokerCannon': (13000, 3070),
+    'RA2LarsRocket': (10000, 3990),
+    'SteelDaggerCannon': (8000, 4988),
+    'WyvernRockets': (16000, 2494),
+}
+
 IGNORED_PROFILE_FIELDS = {"Damage", "PercentageScale"}
 
 
@@ -184,6 +196,17 @@ def validate_source(rs: Ruleset) -> tuple[set[str], bool]:
         if local is None or resolved is None:
             raise RuntimeError(f"{name}: missing source or resolved weapon")
         nodes = flat_nodes(resolved)
+        finalized = (name in FINALIZED_BY_PINNED_ROLE
+                     and set(main_warheads(resolved)) == {compatibility})
+        if finalized:
+            expected_damage, expected_scale = FINALIZED_BY_PINNED_ROLE[name]
+            if damage(nodes[compatibility]) != expected_damage:
+                raise RuntimeError(f"{name}: final pinned-role damage changed")
+            actual_scale = int(str(nodes[compatibility].get("PercentageScale") or "0"))
+            if actual_scale != expected_scale:
+                raise RuntimeError(f"{name}: final pinned-role scale changed")
+            converted_states.append(True)
+            continue
         already = compatibility not in nodes and destination in nodes
         baseline = compatibility in nodes and destination in nodes
         if not baseline and not already:

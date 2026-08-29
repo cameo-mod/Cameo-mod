@@ -1488,10 +1488,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1517,7 +1513,7 @@
     "prerequisites": [
      "~ra1_allies_alliedtechcenter",
      "~techlevel.superweapons",
-     "!ra1_allies_chronosphere"
+     "!ra1_allies_chronosphere_swlimit"
     ],
     "queue": [
      "Defence",

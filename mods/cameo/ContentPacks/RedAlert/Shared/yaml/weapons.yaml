@@ -171,6 +171,7 @@ ConscriptMolotov:
 		InvalidTargets: Water
 
 ConscriptMolotovExplode:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits: ConscriptMolotov
 	Warhead@Demolition_Light:
 		Damage: 4000
@@ -179,6 +180,12 @@ ConscriptMolotovExplode:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 25
+	-Warhead@Demolition_Light:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 RocketsRA:
 	Inherits@wh: ^Warhead_MissileHE_Medium
@@ -2131,6 +2138,7 @@ JapanSpeedBoatGun:
 		Damage: 4000
 		PercentageScale: 9975
 JapanSpeedBoatGunWaveforce:
+	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapanSpeedBoatGun
 	Inherits@3: ^WaveforceBulletProjectile
@@ -2138,6 +2146,12 @@ JapanSpeedBoatGunWaveforce:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Railgun_Heavy:
+	Warhead@Waveforce_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 YamatoCannon:
 	Inherits@wh: ^Warhead_Demolition_Heavy

@@ -52,9 +52,9 @@ if hasattr(sys.stdout, "reconfigure"):          # Windows consoles default to cp
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from miniyaml import Ruleset  # noqa: E402
 
-# Weapons resolving to >1 main damaging warhead when this was measured (2026-08-22). LOWER ONLY.
+# Weapons resolving to >1 main damaging warhead when this was measured (2026-08-28). LOWER ONLY.
 # 1190 -> 1178 the same day: a MEASUREMENT fix, not converted weapons. See FRIENDLY_FIRE below.
-SPLIT_BASELINE = 829
+SPLIT_BASELINE = 693
 
 # Warhead types that inflict damage on a normal target. Everything else (CreateEffect,
 # LeaveSmudge, GrantExternalCondition, SpawnActor, GlowImpact, ...) is cosmetic or utility and
@@ -84,8 +84,14 @@ def is_friendly_fire(wh) -> bool:
     return "Ally" in rel and "Enemy" not in rel
 
 
-def main_warheads(resolved) -> list[str]:
-    """The main damaging warheads a resolved weapon actually fires."""
+def main_warhead_nodes(resolved):
+    """Positive, non-companion damage warheads a resolved weapon fires.
+
+    OpenRA's DamageWarheadInfo.Damage defaults to zero.  Missing, zero,
+    negative, or symbolic Damage values therefore cannot make a weapon a
+    stacked-main violation.  This predicate is shared with the collapse
+    planner so the survey and its direct-armament subset cannot drift again.
+    """
     out = []
     for wh in resolved.children:
         if not (wh.key.startswith("Warhead@") or wh.key == "Warhead"):
@@ -97,13 +103,18 @@ def main_warheads(resolved) -> list[str]:
         if is_friendly_fire(wh):
             continue
         damage = wh.get("Damage")
-        try:                                    # a Damage: 0 warhead fires nothing
-            if damage is not None and int(str(damage).strip()) == 0:
+        try:
+            if damage is None or int(str(damage).strip()) <= 0:
                 continue
         except ValueError:
-            pass
-        out.append(wh.key.replace("Warhead@", ""))
+            continue
+        out.append(wh)
     return out
+
+
+def main_warheads(resolved) -> list[str]:
+    """Names of the warheads accepted by :func:`main_warhead_nodes`."""
+    return [wh.key.replace("Warhead@", "") for wh in main_warhead_nodes(resolved)]
 
 
 def main() -> int:

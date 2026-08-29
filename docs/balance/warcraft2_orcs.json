@@ -830,10 +830,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -857,7 +853,8 @@
     "name": "Temple of the Damned",
     "prerequisites": [
      "~wc2_orcs_greathall",
-     "wc2_orcs_fortress"
+     "wc2_orcs_fortress",
+     "!wc2_orcs_templeofthedamned_swlimit"
     ],
     "queue": [
      "Building",

@@ -2123,10 +2123,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2152,7 +2148,8 @@
     "prerequisites": [
      "~ra2_soviets_constructionyard",
      "ra2_soviets_battlelab",
-     "~techlevel.superweapons"
+     "~techlevel.superweapons",
+     "!ra2_soviets_ironcurtain_swlimit"
     ],
     "queue": [
      "Defence",
@@ -2183,10 +2180,6 @@
     "build_duration": {
      "src": "inherited",
      "v": "1500"
-    },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
     },
     "buildable": true,
     "cost": {
@@ -3942,13 +3935,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
@@ -3970,7 +3956,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
@@ -3984,7 +3970,6 @@
       "reloaddelay": "18",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Compatibility_Flak_MediumFlat",
        "^SmallArms",
        "^Grenade",
        "^Chaingun",
@@ -4523,13 +4508,6 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
@@ -4544,7 +4522,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -4559,7 +4537,6 @@
       "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
        "^RA2HeavyCannon",
@@ -4667,13 +4644,6 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
@@ -4688,7 +4658,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -4717,13 +4687,6 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
@@ -4738,7 +4701,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -4795,13 +4758,6 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
@@ -4816,7 +4772,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -4932,13 +4888,6 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
@@ -4953,7 +4902,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -4983,13 +4932,6 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
@@ -5004,7 +4946,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -5173,13 +5115,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
@@ -5201,7 +5136,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
@@ -5216,7 +5151,6 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Compatibility_Flak_MediumFlat",
        "^SmallArms",
        "^Grenade",
        "^Chaingun",
@@ -5282,13 +5216,6 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
@@ -5308,6 +5235,13 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -5318,7 +5252,8 @@
       "requires": "rank-elite",
       "slot": "Armament@AGE",
       "versus_templates": [
-       "RA2FlakTrackGun"
+       "RA2FlakTrackGun",
+       "^Compatibility_Flak_MediumFlat"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"

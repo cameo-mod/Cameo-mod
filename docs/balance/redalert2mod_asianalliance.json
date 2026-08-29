@@ -12,17 +12,10 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "16000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "287",
-        "tag": "Plasma_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Plasma_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -66,13 +59,6 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
@@ -82,6 +68,7 @@
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Plasma_MediumFlat",
        "^Warhead_Plasma_Medium",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -837,17 +824,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
-        "tag": "Chemical_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Chemical_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -858,6 +838,7 @@
       "reloaddelay": "8",
       "slot": "Armament@Secondary",
       "versus_templates": [
+       "^Compatibility_Chemical_HeavyFlat",
        "^Warhead_Chemical_Heavy",
        "^RA2MediumCannon"
       ],
@@ -927,10 +908,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -955,7 +932,7 @@
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
      "asianalliance_asianbattlelab",
-     "!asianalliance_advancedcommunicationcenter",
+     "!asianalliance_advancedcommunicationcenter_swlimit",
      "~techlevel.superweapons"
     ],
     "queue": [
@@ -1555,10 +1532,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1583,7 +1556,8 @@
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
      "asianalliance_asianbattlelab",
-     "~techlevel.superweapons"
+     "~techlevel.superweapons",
+     "!asianalliance_chaosstorminductor_swlimit"
     ],
     "queue": [
      "Defence",
@@ -4018,17 +3992,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4040,6 +4007,7 @@
       "requires": "asianalliance_doctrine_modernizedinfantryequipment && !rank-elite",
       "slot": "Armament@GRENADE",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2MediumCannon"
@@ -4056,17 +4024,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4148,17 +4109,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4170,6 +4124,7 @@
       "requires": "asianalliance_doctrine_modernizedinfantryequipment && !rank-elite",
       "slot": "Armament@GRENADEG",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2MediumCannon"
@@ -4187,17 +4142,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6356,13 +6304,6 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
@@ -6389,6 +6330,13 @@
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
@@ -6399,7 +6347,8 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "RA2FlakTrackGun"
+       "RA2FlakTrackGun",
+       "^Compatibility_Flak_MediumFlat"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -6412,13 +6361,6 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
@@ -6444,6 +6386,13 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10009,7 +9958,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "24000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
         "tag": "Chemical_MediumFlatCompatibility",
@@ -10049,13 +9998,6 @@
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
@@ -10085,7 +10027,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "24000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
         "tag": "Chemical_MediumFlatCompatibility",
@@ -10125,13 +10067,6 @@
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
@@ -10215,17 +10150,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10236,6 +10164,7 @@
       "reloaddelay": "92",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2MediumCannon"

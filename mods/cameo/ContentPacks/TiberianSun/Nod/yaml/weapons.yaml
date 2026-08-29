@@ -221,8 +221,9 @@ TSStankTibTusk:
 	-Warhead@MediumCannonFriendlyFire:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 25000
-		PercentageScale: 0
+		Damage: 35000
+		PercentageScale: 2855
+	-Warhead@CannonHE_Medium:
 
 TSNODRedEye:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
@@ -274,6 +275,7 @@ TSFireballLauncher:
 	Warhead@Flame_Medium:
 		Damage: 8000
 TSLasergun:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -290,6 +292,12 @@ TSLasergun:
 		Damage: 2000
 	Warhead@Laser_Heavy:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 TSCommandoShotgun:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -518,6 +526,7 @@ TSHarpyAOEClaw:
 		Spread: 300
 		Falloff: 100, 50, 25
 TSLaserHarpyClaw:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -540,6 +549,12 @@ TSLaserHarpyClaw:
 	Warhead@Laser_Heavy:
 		Damage: 4000
 		ValidTargets: Ground, Air
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Air
+		Damage: 8000
+		PercentageScale: 9988
 TSLaserHarpyMultiClaw:
 	Inherits: TSLaserHarpyClaw
 	Burst: 4
@@ -557,6 +572,11 @@ TSLaserHarpyMultiClaw:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 0
 		ValidTargets: Ground, Air
+	-Warhead@Bullet_Medium:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 TSLaserHarpyAOEClaw:
 	Inherits: TSLaserHarpyClaw
@@ -569,6 +589,13 @@ TSLaserHarpyAOEClaw:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Spread: 300
 		Falloff: 100, 50, 25
+	-Warhead@Bullet_Medium:
+	Warhead@Laser_HeavyFlatCompatibility:
+		Spread: 300
+		Falloff: 100, 50, 25
+		ValidTargets: Ground, Air
+		Damage: 8000
+		PercentageScale: 9988
 
 TSToxinRifle:
 	Inherits@wh: ^Warhead_Chemical_Light

@@ -625,6 +625,7 @@ mtank_pri2:
 		ImpactActors: false
 		ValidTargets: Air
 IxRailgunDroneBullet:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits@collapsewh: ^Warhead_Railgun_Heavy
 	Inherits@collapseextra1: ^Compatibility_Railgun_ExtraDamage
 	Inherits: ^FlakWeapon
@@ -678,6 +679,12 @@ IxRailgunDroneBullet:
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
 		PercentageScale: 0
+	-Warhead@CannonHE_Medium:
+	-Warhead@Railgun_Heavy:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 2496
 
 ResonanceDroneRepair:
 	Inherits: ^RepairWeapon

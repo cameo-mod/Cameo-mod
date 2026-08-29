@@ -106,17 +106,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -134,6 +127,7 @@
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Bullet_Light",
@@ -1322,10 +1316,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2031,7 +2021,7 @@
     "prerequisites": [
      "~cabal_core",
      "cabal_core",
-     "!cabalnuke",
+     "!cabalnuke_swlimit",
      "~techlevel.superweapons"
     ],
     "queue": [

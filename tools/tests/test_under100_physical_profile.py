@@ -113,8 +113,8 @@ class Under100PhysicalProfileTests(unittest.TestCase):
 
     def test_missile_consolidations_follow_the_weapon_roles(self):
         expected = {
-            "HindMissilesThermobaric": "Thermobaric_Medium",
-            "ThermobaricMaverick": "Thermobaric_Heavy",
+            "HindMissilesThermobaric": "Thermobaric_MediumFlatCompatibility",
+            "ThermobaricMaverick": "Thermobaric_HeavyFlatCompatibility",
             "MarauderMissiles": "MissileAP_MediumFlatCompatibility",
             "RA2RBurritoRocket": "CannonHE_HeavyFlatCompatibility",
             "TSStankTibTusk": "MissileAP_MediumFlatCompatibility",
@@ -126,12 +126,12 @@ class Under100PhysicalProfileTests(unittest.TestCase):
 
     def test_named_energy_and_biological_weapons_keep_their_roles(self):
         expected = {
-            "AsianHarbingerPlasma": "Plasma_Medium",
-            "FutureMechPlasma": "Plasma_Heavy",
-            "IxRailgunDroneBullet": "Railgun_Heavy",
+            "AsianHarbingerPlasma": "Plasma_MediumFlatCompatibility",
+            "FutureMechPlasma": "Plasma_HeavyFlatCompatibility",
+            "IxRailgunDroneBullet": "Railgun_HeavyFlatCompatibility",
             "Laboratory_Bioball": "Chemical_Medium",
-            "PhobosLaser": "Laser_Heavy",
-            "SteelFighterRailgun": "Laser_Heavy",
+            "PhobosLaser": "Laser_HeavyFlatCompatibility",
+            "SteelFighterRailgun": "Laser_HeavyFlatCompatibility",
         }
         for weapon_name, warhead_name in expected.items():
             weapon = self.rules.resolve_weapon(weapon_name)

@@ -1194,6 +1194,9 @@ Lunar_Green105mm:
 	Inherits@5: ^LunarNaxisUpgradedCannons
 	Range: 5000
 	ReloadDelay: 50
+	# ^Projectile_Shell supplies range-scaled speed/inaccuracy, but the later
+	# Lunar/Naxis presentation layer changes the type. Keep the scaled runtime.
+	Projectile: ScaledBullet
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@Tesla_Heavy:
@@ -1203,6 +1206,7 @@ Lunar_Green105mm:
 	Report: laser_cannon2_2.wav
 
 SyndicateFireballLauncher:
+	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat
 	Inherits: ^Warhead_Flame_Light
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Warhead_Flame_Heavy
@@ -1223,6 +1227,13 @@ SyndicateFireballLauncher:
 		Damage: 2000
 	Warhead@Flame_Heavy:
 		Damage: 2000
+	-Warhead@Flame_Heavy:
+	-Warhead@Flame_Light:
+	-Warhead@Flame_Medium:
+	Warhead@Flame_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 9984
 RA2RTruckRocket:
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium

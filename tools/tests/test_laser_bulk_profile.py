@@ -16,7 +16,7 @@ ROOT_LASERS = {
     "BlackHandLaser": (96000, 48000, 3),
     "CabalHunterKillerLasers": (16000, 0, 2),
     "CabalHunterKillerLasers_elite": (30000, 0, 3),
-    "TSLaser25mmDep": (2000, 2000, 2),
+    "TSLaser25mmDep": (4000, 0, 2),
     "edenMobileLaser": (8000, 0, 4),
     "ordos_lasertank": (40000, 0, 4),
     "M16Laser": (6000, 0, 3),
@@ -24,8 +24,8 @@ ROOT_LASERS = {
     "td_nod_minigunner_minigun_laser": (6000, 0, 3),
     "LunarNaxiDroneLaser": (8000, 0, 4),
     "NaxLaserT": (8000, 0, 4),
-    "NaxiBeetleLaser_elite": (4000, 4000, 4),
-    "NaxiTank2Laser": (4000, 4000, 4),
+    "NaxiBeetleLaser_elite": (8000, 0, 4),
+    "NaxiTank2Laser": (8000, 0, 4),
 }
 RESOLVED_LASERS = tuple(ROOT_LASERS) + (
     "edenMobileLaserTiger",
@@ -136,7 +136,7 @@ class LaserBulkProfileTests(unittest.TestCase):
             self.assertEqual("50", child(laser, "FriendlyFireSpread").value, name)
             self.assertIsNone(child(laser, "InvalidTargets"), name)
 
-    def test_naxi_aa_children_preserve_the_air_ground_damage_split(self):
+    def test_naxi_aa_children_keep_only_the_effective_air_slice(self):
         for name in (
             "NaxiBeetleLaser_AA_elite",
             "Lunar_AmplifiedBeetleLaser_AA",
@@ -150,8 +150,7 @@ class LaserBulkProfileTests(unittest.TestCase):
             remainder = child(weapon, "Warhead@LaserHeavyGroundRemainder")
             self.assertEqual("4000", child(laser, "Damage").value, name)
             self.assertEqual("Air", child(laser, "ValidTargets").value, name)
-            self.assertEqual("4000", child(remainder, "Damage").value, name)
-            self.assertEqual("Ground, Water", child(remainder, "ValidTargets").value, name)
+            self.assertIsNone(remainder, name)
 
     def test_naxi_laser_percentage_profile_survives_inheritance(self):
         for name in (

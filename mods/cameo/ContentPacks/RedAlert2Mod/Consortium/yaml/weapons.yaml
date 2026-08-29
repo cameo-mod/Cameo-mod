@@ -69,6 +69,8 @@ SteelVulcan:
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 6666
+	# Retain the inherited shell template's range-scaled flight behavior.
+	Projectile: ScaledBullet
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
@@ -521,6 +523,7 @@ SteelMakoGun_EMP_elite:
 	BurstDelays: 3
 
 SteelMantaAG:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^SteelLightMissile
 	Inherits@2: ^SteelSmallArms
 	Inherits@3: ^RA2FlakWeapon
@@ -550,7 +553,16 @@ SteelMantaAG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Light:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 SteelManta_AA:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: SteelMantaAG
 	Report: steel_chaingunfire.wav
 	Range: 9999
@@ -559,6 +571,11 @@ SteelManta_AA:
 		Explosions: steel_bluepiffs
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
+	-Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 
 SteelMantaAGResonance:
 	Inherits: SteelMantaAG
@@ -1377,6 +1394,7 @@ SteelScalpelRailgun_EMP_AA:
 		ImpactSounds: makoexplose.wav
 
 SteelFighterRailgun:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
 	Inherits: ^LaserWeapon
@@ -1431,6 +1449,14 @@ SteelFighterRailgun:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 0
+	-Warhead@CannonHE_Medium:
+	-Warhead@Laser_Heavy:
+	-Warhead@MissileAP_Light:
+	-Warhead@Railgun_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		PercentageScale: 5990
 
 SteelMegaSword:
 	Inherits@roleflat: ^Compatibility_Melee_HeavyFlat
@@ -1820,8 +1846,9 @@ SteelQuantumTurretRail:
 	-Warhead@TeslaWeapon:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 12600
-		PercentageScale: 0
+		Damage: 14600
+		PercentageScale: 1364
+	-Warhead@CannonHE_Heavy:
 
 SteelQuantumTurretRail_EMP:
 	Inherits: SteelQuantumTurretRail
@@ -1874,8 +1901,9 @@ SteelQuantumTurretRail_EMP:
 	-Warhead@TeslaWeapon:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 12600
-		PercentageScale: 0
+		Damage: 14600
+		PercentageScale: 1364
+	-Warhead@CannonHE_Heavy:
 
 SteelInspectorIonCannon:
 	Inherits: SteelInspectorIonCannonDamage
@@ -2485,7 +2513,12 @@ SteelDaggerCannon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_HeavyFlatCompatibility:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Demolition_Light:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 4988
 SteelDaggerCannon_elite:
 	Inherits: SteelDaggerCannon
 	Range: 25000

@@ -591,8 +591,10 @@ RA2HeavyMirageGun:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 25000
-		PercentageScale: 0
+		Damage: 33000
+		PercentageScale: 2422
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	-Warhead@CannonAP_Light:
 RA2HeavyMirageGun_elite:
 	Inherits: RA2HeavyMirageGun
 	Inherits@Elite: ^RA2EliteEffects

@@ -223,17 +223,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -252,6 +245,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses && !ts_nod_upgrade_auxiliaryweapon",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -270,17 +264,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "0",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -327,17 +314,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 50, 25",
         "spread": "300",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -1344,10 +1324,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1373,7 +1349,7 @@
     "prerequisites": [
      "~ts_nod_constructionyard",
      "ts_nod_techcenter",
-     "!ts_nod_missilesilo",
+     "!ts_nod_missilesilo_swlimit",
      "~techlevel.superweapons"
     ],
     "queue": [
@@ -2389,17 +2365,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2418,6 +2387,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -2435,17 +2405,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2464,6 +2427,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADEGARRISONED",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -3669,17 +3633,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "25000",
+        "damage": "35000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -4976,17 +4933,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "25000",
+        "damage": "35000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -5136,17 +5086,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "183",
-        "tag": "Chemical_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
+        "tag": "Chemical_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5172,6 +5115,7 @@
       "requires": "ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Chemical_LightFlat",
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
        "^Effect_Chem_Light",
@@ -5503,7 +5447,7 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -5529,13 +5473,6 @@
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "LaserHeavyGroundRemainder",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",

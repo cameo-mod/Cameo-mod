@@ -1014,10 +1014,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1043,7 +1039,8 @@
     "prerequisites": [
      "~yuri_constructionyard",
      "yuri_battlelab",
-     "~techlevel.superweapons"
+     "~techlevel.superweapons",
+     "!yuri_geneticmutator_swlimit"
     ],
     "queue": [
      "Defence",
@@ -1074,10 +1071,6 @@
     "build_duration": {
      "src": "inherited",
      "v": "1500"
-    },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
     },
     "buildable": true,
     "cost": {
@@ -1788,7 +1781,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "11600",
+        "damage": "13600",
         "falloff": "100, 0",
         "spread": "32",
         "tag": "Laser_LightFlatCompatibility",
@@ -1828,13 +1821,6 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
@@ -2129,17 +2115,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "8000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2190,17 +2169,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "8000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2253,17 +2225,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "8000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2310,17 +2275,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "8000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {

@@ -1933,10 +1933,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1963,7 +1959,7 @@
      "~forgotten_constructionyard",
      "forgotten_church",
      "~techlevel.superweapons",
-     "!forgotten_veinhole"
+     "!forgotten_veinhole_swlimit"
     ],
     "queue": [
      "Defence",
@@ -8679,17 +8675,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "183",
-        "tag": "Chemical_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
+        "tag": "Chemical_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -8714,6 +8703,7 @@
       "reloaddelay": "18",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Chemical_LightFlat",
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
        "^Effect_Chem_Light",

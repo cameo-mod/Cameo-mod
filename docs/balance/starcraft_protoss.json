@@ -1793,10 +1793,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -5473,17 +5469,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
+        "damage": "40000",
         "falloff": "100, 52, 0",
         "spread": "39",
         "tag": "Quantum_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -5516,14 +5505,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5044",
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
        "^Compatibility_Quantum_MediumFlat",
-       "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^SmallArms",
@@ -5531,11 +5519,9 @@
        "^Grenade",
        "^TankDestroyerCannon"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
+      "warheads": [],
       "weapon": "PositronGrenade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

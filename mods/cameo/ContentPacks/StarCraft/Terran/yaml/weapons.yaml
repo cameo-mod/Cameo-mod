@@ -117,6 +117,7 @@ HarakanF:
 		Damage: 4000
 		PercentageScale: 0
 MatadorFlamer:
+	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat
 	Inherits: ^Warhead_Flame_Light
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Warhead_Flame_Heavy
@@ -138,6 +139,13 @@ MatadorFlamer:
 		Damage: 2000
 	Warhead@Flame_Heavy:
 		Damage: 2000
+	-Warhead@Flame_Heavy:
+	-Warhead@Flame_Light:
+	-Warhead@Flame_Medium:
+	Warhead@Flame_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 9984
 MatadorLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -245,8 +253,9 @@ MarauderMissiles:
 	-Warhead@MediumMissile:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 20000
-		PercentageScale: 0
+		Damage: 30000
+		PercentageScale: 3330
+	-Warhead@CannonHE_Heavy:
 
 SCTyr:
 	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
@@ -767,8 +776,9 @@ VultureGrenade:
 	-Warhead@TankDestroyerCannon:
 	Warhead@Demolition_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 16000
-		PercentageScale: 0
+		Damage: 20000
+		PercentageScale: 1995
+	-Warhead@CannonHE_Medium:
 
 SiegeTankCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
@@ -987,10 +997,9 @@ GoliathMG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
-	# ^Projectile_Bullet_* would take the type and orphan the other one's
-	# guidance fields. Keeps today's resolved type verbatim.
-	Projectile: Bullet
+	# ^Projectile_Shell_Heavy provides range-scaled shell travel. The later
+	# chaingun inheritance must not demote it to Bullet's default speed.
+	Projectile: ScaledBullet
 
 GoliathRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
@@ -1406,7 +1415,12 @@ WyvernRockets:
 	-Warhead@FlakWeapon:
 	-Warhead@MediumMissile:
 	-Warhead@HeavyAAWeapon:
-	-Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 2494
 BCLaser:
 	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1588,6 +1602,7 @@ BCYamatoCannon:
 		PercentageScale: 0
 
 PhobosLaser:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
 	Inherits@collapseextra2: ^Compatibility_Railgun_ExtraDamage
@@ -1691,6 +1706,12 @@ PhobosLaser:
 		ValidTargets: Ground, Water, Air
 		Damage: 42000
 		PercentageScale: 0
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 48000
+		PercentageScale: 1248
 
 MissileTurret:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
