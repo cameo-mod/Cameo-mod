@@ -220,7 +220,7 @@ japan_waveforceturret:
 	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@shape: ^2x2Shape
 	Inherits@AntiTank: ^PrioritizeVehicle
-	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiTankPriority: ^PrioritizeTank
 	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Buildable:

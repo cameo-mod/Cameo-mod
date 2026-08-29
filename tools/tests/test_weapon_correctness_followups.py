@@ -132,6 +132,24 @@ class WeaponCorrectnessFollowupTests(unittest.TestCase):
         self.assertEqual("defilerplague", defuse.get("Types"))
         self.assertEqual("Ally", defuse.get("ValidRelationships"))
 
+    def test_reviewed_weapon_route_inheritance_labels_are_unique(self):
+        names = {
+            "japan_waveforceturret",
+            "td_gdi_advancedguardtower",
+            "tkmratflakdeployed",
+            "latinsyndicate_missiletruck",
+            "latinsyndicate_burrito",
+            "latinsyndicate_lars",
+            "latinsyndicate_mig21",
+            "^ScoutVehicleTemplate",
+            "^SupportVehicleTemplate",
+        }
+        for name in sorted(names):
+            actor = self.rules.actor(name)
+            labels = [node.key for node in actor.children
+                      if node.key == "Inherits" or node.key.startswith("Inherits@")]
+            self.assertEqual(len(labels), len(set(labels)), name)
+
 
 if __name__ == "__main__":
     unittest.main()

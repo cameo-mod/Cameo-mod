@@ -46,7 +46,7 @@ SCAN_DIRS = ("mods/cameo",)
 SKIP_PARTS = ("maps", "bits")
 
 # Ratchets: lower them as duplicates are resolved; never raise without a note.
-D1_BASELINE = 80
+D1_BASELINE = 71
 D2_BASELINE = 407
 
 

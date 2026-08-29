@@ -440,7 +440,7 @@ td_gdi_advancedguardtower:
 	Inherits@detect: ^GenericAllDetector
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@AntiTank: ^PrioritizeVehicle
-	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiTankPriority: ^PrioritizeTank
 	Inherits@shape: ^1x1Shape
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@MissileTargeting: ^AdvancedMissileTargeting
