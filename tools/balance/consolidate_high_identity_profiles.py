@@ -51,7 +51,9 @@ PRESERVED_HASHES = {
     "asianalliance_asianmilitia_grenade": "efc2a6ac497014679c90e887d3b7dd9cbcb60f4c231897daccfd134edef1420d",
     "asianalliance_asianmilitia_grenade_elite": "bcb0ae17f7673a55b7127faef9f93d1d212b1aa8f440de9e4203d901cb1dc2ff",
     "IxRailgunDroneBullet": "8f6f05b056d48d7a61c623779ea6b3115aef386a6c10a681e7ad94a92ebb96b1",
-    "TSAssaultCannonTalSonic": "9cba3f24ded85a2f819c8c610011b86afc3b5f2f1d199db020bc57e1f31e9bc7",
+    # Post-consolidation correction: Wolverine Mk II keeps its advertised weak
+    # AA role after Sonic Weaponry replaces the base armament.
+    "TSAssaultCannonTalSonic": "193772b68bde138b7365ad1f6c6cbbd6632e2cf98a84d2987491fba67b514413",
 }
 
 CANONICAL = re.compile(r"^\^Warhead_([A-Za-z]+)_(\w+)$")

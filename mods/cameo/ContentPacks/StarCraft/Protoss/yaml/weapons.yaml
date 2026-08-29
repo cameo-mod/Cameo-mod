@@ -602,8 +602,10 @@ PsionicShockwave:
 	Report: parfir00.aud
 	ValidTargets: Ground, Water, Air
 	Warhead@Tesla_Super:
+		ValidTargets: Ground, Water, Air
 		Damage: 30000
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
 		DamageTypes: Tesla
 		Damage: 15000
 	Warhead@Effect: CreateEffect
