@@ -327,10 +327,77 @@ DERIVED bridge (`Plate × Scout / PEAK`), not a rung. Excluding it, infantry sit
 countered by few** — the maintainer's worry does not hold at this layer, so the
 work belongs at the class layer.
 
-The flip side is that VEH at 1.07× is nearly FLAT: armor choice barely changes what
-a vehicle takes. If class×class counters need armor to express them, this ladder is
-where there is room to sharpen — subject to §12.0d's rule that a tilt may never
-reorder a ladder.
+⚠ **Read the aggregate correctly.** VEH at 1.07× is the mean across ALL 141 families
+and is flat only in AGGREGATE — per family the span runs **1.24× to 2.94×** (see the
+AP table below). That is MEAN-100 working exactly as designed: each weapon specialises
+sharply and the tilts cancel across the roster, so no armor is globally advantaged. It
+does NOT mean armor choice is meaningless, and it is not an invitation to sharpen the
+ladder.
+
+### ⛔ DO NOT give each class its own armor type (analysis 2026-08-29)
+
+The proposal was: *"give each class their own armor type in addition to the existing
+armor types and then apply the averaging of the two."* **Measured, it is unnecessary
+for the tank hierarchy and counter-productive for everything else.**
+
+**1. The tank-weight counter ALREADY EXISTS and already exceeds the spec.** The
+proposal asked for a Tank Destroyer at 80 vs Light rising to 150 vs Superheavy — a
+**1.88×** span. Measured on the live AP families across the VEH ladder
+(Scout → Light → Medium → Heavy → Superheavy):
+
+| family | Scout | Light | Medium | Heavy | Superheavy | span |
+|---|--:|--:|--:|--:|--:|--:|
+| `^Warhead_Railgun_Heavy` | 94 | 123 | 156 | 181 | 200 | **2.13×** |
+| `^Warhead_MissileAP_Medium` | 114 | 146 | 161 | 177 | 200 | **1.75×** |
+| `^Warhead_CannonAP_Heavy` | 93 | 105 | 118 | 134 | 151 | **1.62×** |
+| `^Warhead_Prism_Light` | 197 | 141 | 106 | 77 | 67 | 2.94× *(descending)* |
+
+They ascend monotonically, which is exactly "the heavier the tank, the stronger the
+counter". `Prism_Light` descends just as cleanly, so the system already expresses
+both directions. **Zero new armor types are required for the tank hierarchy** — the
+work is assigning the right family to the right class, which is §1b's job.
+
+**2. ⚠ CORRECTION: the VEH ladder is NOT flat.** An earlier note here read "VEH at
+1.07× is nearly flat, so armor choice barely changes what a vehicle takes — that is
+where there is room." That was the mean across ALL 141 families, and it is flat only
+in AGGREGATE. Per family the span runs **1.24× to 2.94×**. The aggregate flatness is
+MEAN-100 working exactly as designed: each weapon specialises sharply, and the tilts
+cancel across the roster so no armor is globally advantaged. Reading the aggregate as
+"no counters exist" inverts the meaning of the measurement.
+
+**3. Averaging makes a class overlay WEAKER than the ladder it would replace.** A
+second armor blends rather than replaces (`effective = (class_row + overlay_row) / 2`,
+window floor 10), so an overlay spans only **−45% … +50%**. The requested 80/150
+becomes 90/125 = **1.39×** — worse than the 1.62–2.13× the direct ladder already
+delivers. Adding class armors would *reduce* the counter strength it was meant to create.
+
+**4. The cost is 3807 rows.** §12.0e law 2 requires EVERY template to carry EVERY
+overlay row, because a missing row drops out of the average and makes the weapon hit
+overlaid units HARDER. 27 class armors × 141 templates = **3807 new rows**, each
+constrained by MEAN-100 (§12.0h) and by law 3's column law (every overlay's mean
+equal). Those two constraints together are close to unsatisfiable at that width.
+
+### ✅ What IS needed: exactly one new distinction (AA platforms)
+
+The one relationship the current taxonomy genuinely cannot express is *"aircraft
+weapons do half damage to anti-air vehicles"* — an AA vehicle is armored like any
+other vehicle, so no existing row separates it.
+
+That is what the **plating layer** (§12.0e) is for, and it fits without touching the
+class ladders: a sixth overlay, always-on for AA platforms, with aircraft families
+writing a low row and every other family omitting it. Cost is **141 rows, not 3807**,
+and the achievable −45% lands on the requested −50%.
+
+It must satisfy the plating laws already in force: law 2 (every template carries the
+row or deliberately omits it), law 3 (column mean equal to the other platings), law 4
+(never increases incoming damage — `audit_armor_upgrade_harm.py`).
+
+⚠ **Check the combined effect before shipping.** AA vehicles are already specified to
+get **+100% damage and +50% range** against aircraft. Adding −50% incoming on top
+makes three multipliers stacking one way. The pipeline should report the NET matchup
+(damage × survival × range), not the individual multipliers, so the result is a strong
+counter rather than a hard shutdown. Aircraft must retain a play: striking exposed AA,
+out-ranging it, or ignoring it for other targets.
 
 ### Coverage: a gap is identity, not an omission
 
