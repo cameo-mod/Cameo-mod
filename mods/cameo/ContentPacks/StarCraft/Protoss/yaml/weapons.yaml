@@ -1264,11 +1264,7 @@ ManifoldMG_AA:
 	Inherits: ManifoldMG
 	Range: 7170
 	ValidTargets: Air
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Air
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Air
-	Warhead@GrenadePercentage: AreaDamagePercentage
+	Warhead@Concussion_Light:
 		ValidTargets: Air
 	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Air
