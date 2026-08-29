@@ -43,14 +43,14 @@ class WeaponStructureInventoryTests(unittest.TestCase):
 
     def test_current_corrected_baseline(self):
         self.assertEqual(2345, self.data["counts"]["concrete_weapons"])
-        self.assertEqual(680, self.data["counts"]["stacked_main_all_concrete"])
-        self.assertEqual(482, self.data["counts"]["stacked_main_direct_actor_armament"])
-        self.assertEqual(574, self.data["counts"]["stacked_main_transitive_weapon_graph"])
+        self.assertEqual(668, self.data["counts"]["stacked_main_all_concrete"])
+        self.assertEqual(472, self.data["counts"]["stacked_main_direct_actor_armament"])
+        self.assertEqual(562, self.data["counts"]["stacked_main_transitive_weapon_graph"])
         self.assertEqual(106, self.data["counts"]["stacked_main_unreached"])
-        self.assertEqual(3284, self.data["counts"]["main_warhead_instances_all_concrete"])
-        self.assertEqual(1256, self.data["counts"]["excess_main_warhead_instances_all_concrete"])
-        self.assertEqual(2848, self.data["counts"]["main_warhead_instances_transitive_weapon_graph"])
-        self.assertEqual(1103, self.data["counts"]["excess_main_warhead_instances_transitive_weapon_graph"])
+        self.assertEqual(3269, self.data["counts"]["main_warhead_instances_all_concrete"])
+        self.assertEqual(1241, self.data["counts"]["excess_main_warhead_instances_all_concrete"])
+        self.assertEqual(2833, self.data["counts"]["main_warhead_instances_transitive_weapon_graph"])
+        self.assertEqual(1088, self.data["counts"]["excess_main_warhead_instances_transitive_weapon_graph"])
 
     def test_engine_weapon_reference_fields_are_followed(self):
         reached = (set(self.data["sets"]["direct_actor_armament"])

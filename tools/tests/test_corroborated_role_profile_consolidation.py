@@ -16,6 +16,7 @@ from consolidate_corroborated_role_profiles import (
 )
 from miniyaml import Ruleset
 from percentage_damage import runtime_percentage_hp
+from survey_weapon_structure import weapon_reference_sets
 
 
 class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
@@ -25,7 +26,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         cls.selected = selections(cls.rules)
 
     def test_selected_profiles_resolve_to_one_pinned_main(self):
-        self.assertEqual(14, len(self.selected))
+        self.assertEqual(27, len(self.selected))
         for name, destination in self.selected.items():
             nodes = main_warhead_nodes(self.rules.resolve_weapon(name))
             self.assertEqual(1, len(nodes), name)
@@ -49,30 +50,29 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
             "HMG_Duelist_upgrade", "autogun_tank", "Future_MultiMissile",
             "RA2MortarBike", "TSAdatsMissile", "TSChemAdatsMissileAA",
             "TSRPGTowerRail", "VolkovMagneticWeapon", "tkmjuggap",
-            "tkmtechnicalmgap",
+            "tkmtechnicalmgap", "BCLaser", "BCYamatoCannon",
+            "edenMobileLaserTiger", "MadcapGun", "MarineMG",
         }
         self.assertTrue(excluded.isdisjoint(self.selected))
         for name in excluded:
             self.assertGreaterEqual(
                 len(main_warheads(self.rules.resolve_weapon(name))), 2, name)
 
-    def test_all_selected_definitions_are_directly_actor_armed(self):
-        armed = set()
-        for name in self.rules.actors:
-            if name.startswith("^"):
-                continue
-            actor = self.rules.resolve(name)
-            if actor is None:
-                continue
-            for node in actor.children:
-                if node.key == "Armament" or node.key.startswith("Armament@"):
-                    weapon = str(node.get("Weapon") or "").strip()
-                    if weapon:
-                        armed.add(weapon)
-        self.assertTrue(set(self.selected) <= armed)
+    def test_all_selected_definitions_are_reachable(self):
+        concrete = {
+            name for name in self.rules.weapons
+            if not name.startswith("^")
+            and self.rules.resolve_weapon(name) is not None
+        }
+        _direct, reachable = weapon_reference_sets(self.rules, concrete)
+        self.assertTrue(set(self.selected) <= reachable)
 
     def test_naxis_flak_preserves_counted_allied_damage(self):
-        for name in ("NaxFlakAA", "PortableFlak", "PortableFlak_elite"):
+        for name in (
+            "NaxFlakAA", "NaxQuadCannon_AA", "NaxQuadCannon_AA_elite",
+            "PortableFlak", "PortableFlak_elite", "SkyMageCannon_AA",
+            "SkyMageCannon_AA_elite",
+        ):
             node = self.rules.resolve_weapon(name).child(
                 "Warhead@NaxFlakAllyCounted")
             self.assertEqual("1500", node.get("Damage"), name)

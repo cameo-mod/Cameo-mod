@@ -42,10 +42,28 @@ from miniyaml import Ruleset  # noqa: E402
 
 # root: (destination profile, exact concrete descendant closure, evidence)
 ROOTS = {
+    "AsianPelicanMG": ("Bullet_Medium", {"AsianPelicanMG_elite"}, "name"),
+    "light_inf_lmg_upgrade": ("Bullet_Medium", set(), "name"),
     "FLAK-23-AG": ("Flak_Medium", {"FLAK-23-AA"}, "name"),
-    "NaxFlakAA": ("Flak_Medium", set(), "name"),
-    "PortableFlak": ("Flak_Medium", set(), "name"),
-    "PortableFlak_elite": ("Flak_Medium", set(), "name"),
+    "NaxQuadCannon_AA": (
+        "Flak_Medium",
+        {
+            "NaxFlakAA", "NaxQuadCannon_AA_elite", "PortableFlak",
+            "PortableFlak_elite", "SkyMageCannon_AA",
+            "SkyMageCannon_AA_elite",
+        },
+        "name",
+    ),
+    "SteelMantaHunterCannons_AA": (
+        "Flak_Medium",
+        {
+            "SteelMantaHunterCannonsAAResonance_AA",
+            "SteelMantaHunterCannonsAAResonanceBounce1",
+            "SteelMantaHunterCannonsAAResonanceBounce2",
+        },
+        "name",
+    ),
+    "ra2roktgun": ("Bullet_Medium", {"RA2CosmonautLaser"}, "name"),
     "ManifoldMG": ("Bullet_Medium", {"ManifoldMG_AA"}, "name"),
     "HMG_turret_upgrade": ("Bullet_Medium", set(), "name"),
     "RaiderGuns_upgrade": ("Bullet_Medium", set(), "name"),
@@ -55,14 +73,44 @@ ROOTS = {
         "Bullet_Medium", {"RA2FreedomAK47_elite"}, "name"),
 }
 
+DESTINATION_OVERRIDES = {
+    "RA2CosmonautLaser": "Laser_Light",
+}
+
 # Exact baseline arithmetic.  These pins make the converter fail closed if a
 # selected profile changes before it is applied again.
 BASELINE = {
+    "AsianPelicanMG": (
+        {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 6000, 9984),
+    "AsianPelicanMG_elite": (
+        {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 6000, 9984),
+    "light_inf_lmg_upgrade": (
+        {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 6000, 9984),
     "FLAK-23-AG": ({"Bullet_Medium", "Flak_Medium"}, 4000, 9975),
     "FLAK-23-AA": ({"Bullet_Medium", "Flak_Medium"}, 4000, 9975),
     "NaxFlakAA": ({"Flak_Medium", "NaxFlakGroundWater"}, 7000, 2843),
+    "NaxQuadCannon_AA": (
+        {"Flak_Medium", "NaxFlakGroundWater"}, 7000, 2843),
+    "NaxQuadCannon_AA_elite": (
+        {"Flak_Medium", "NaxFlakGroundWater"}, 7000, 2843),
     "PortableFlak": ({"Flak_Medium", "NaxFlakGroundWater"}, 7000, 2843),
     "PortableFlak_elite": ({"Flak_Medium", "NaxFlakGroundWater"}, 7000, 2843),
+    "SkyMageCannon_AA": (
+        {"Flak_Medium", "NaxFlakGroundWater"}, 7000, 2843),
+    "SkyMageCannon_AA_elite": (
+        {"Flak_Medium", "NaxFlakGroundWater"}, 7000, 2843),
+    "SteelMantaHunterCannons_AA": (
+        {"Flak_MediumFlatCompatibility", "MissileAP_Medium"}, 6000, 9984),
+    "SteelMantaHunterCannonsAAResonance_AA": (
+        {"Flak_MediumFlatCompatibility", "MissileAP_Medium"}, 6000, 9984),
+    "SteelMantaHunterCannonsAAResonanceBounce1": (
+        {"Flak_MediumFlatCompatibility", "MissileAP_Medium"}, 6000, 9984),
+    "SteelMantaHunterCannonsAAResonanceBounce2": (
+        {"Flak_MediumFlatCompatibility", "MissileAP_Medium"}, 6000, 9984),
+    "ra2roktgun": (
+        {"Bullet_Medium", "Bullet_MediumFlatCompatibility"}, 8000, 2488),
+    "RA2CosmonautLaser": (
+        {"Laser_LightFlatCompatibility"}, 13600, 1464),
     "ManifoldMG": (
         {"Bullet_Medium", "CannonHE_Heavy", "Concussion_Light"}, 6000, 9984),
     "ManifoldMG_AA": (
@@ -85,11 +133,24 @@ BASELINE = {
 }
 
 TARGETS = {
+    "AsianPelicanMG": "Ground, Water, Air",
+    "AsianPelicanMG_elite": "Ground, Water, Air",
+    "light_inf_lmg_upgrade": "Ground, Water, Air",
     "FLAK-23-AG": "Ground, Water",
     "FLAK-23-AA": "Air",
     "NaxFlakAA": "Air",
+    "NaxQuadCannon_AA": "Air",
+    "NaxQuadCannon_AA_elite": "Air",
     "PortableFlak": "Air",
     "PortableFlak_elite": "Air",
+    "SkyMageCannon_AA": "Air",
+    "SkyMageCannon_AA_elite": "Air",
+    "SteelMantaHunterCannons_AA": "Ground, Water, Air",
+    "SteelMantaHunterCannonsAAResonance_AA": "Ground, Water, Air",
+    "SteelMantaHunterCannonsAAResonanceBounce1": "Ground, Water, Air",
+    "SteelMantaHunterCannonsAAResonanceBounce2": "Ground, Water, Air",
+    "ra2roktgun": "Ground, Air, Water",
+    "RA2CosmonautLaser": "Ground, Water, Air",
     "ManifoldMG": "Ground, Water",
     "ManifoldMG_AA": "Air",
     "HMG_turret_upgrade": "Ground, Water, Air",
@@ -102,7 +163,11 @@ TARGETS = {
 }
 
 CANONICAL = re.compile(r"^\^Warhead_([A-Za-z]+)_(\w+)$")
-NAX_ALLY_ACCOUNTING = {"NaxFlakAA", "PortableFlak", "PortableFlak_elite"}
+NAX_ALLY_ACCOUNTING = {
+    "NaxFlakAA", "NaxQuadCannon_AA", "NaxQuadCannon_AA_elite",
+    "PortableFlak", "PortableFlak_elite", "SkyMageCannon_AA",
+    "SkyMageCannon_AA_elite",
+}
 STRIP_EXISTING_COMPATIBILITY_FIELDS = {"RA2CRM60H": {"Spread", "Falloff"}}
 CONTRACT_FIELDS = (
     "ValidTargets", "InvalidTargets", "ValidRelationships",
@@ -150,7 +215,7 @@ def selections(rs: Ruleset) -> dict[str, str]:
         for name in {root, *expected}:
             if name in selected:
                 raise RuntimeError(f"{name}: selected through multiple roots")
-            selected[name] = destination
+            selected[name] = DESTINATION_OVERRIDES.get(name, destination)
     if set(selected) != set(BASELINE) or set(selected) != set(TARGETS):
         raise RuntimeError("selected definition pins are incomplete")
     return selected
@@ -188,7 +253,9 @@ def inspect(rs: Ruleset, selected: dict[str, str]):
         if mains != expected_keys:
             raise RuntimeError(
                 f"{name}: expected {sorted(expected_keys)}; found {sorted(mains)}")
-        if destination not in mains:
+        destination_key = (
+            destination if destination in mains else compatibility)
+        if destination_key not in mains:
             raise RuntimeError(f"{name}: destination {destination} is absent")
         nodes = flat_main_nodes(resolved, mains)
         if set(nodes) != mains:
@@ -199,7 +266,7 @@ def inspect(rs: Ruleset, selected: dict[str, str]):
         }
         if len(contracts) != 1:
             raise RuntimeError(f"{name}: selected target contracts differ")
-        if str(nodes[destination].get("ValidTargets") or "") != TARGETS[name]:
+        if str(nodes[destination_key].get("ValidTargets") or "") != TARGETS[name]:
             raise RuntimeError(f"{name}: baseline target route changed")
         for key, node in nodes.items():
             if any("PhysicalState" in child.key
@@ -238,9 +305,27 @@ def set_nax_ally_accounting(changed: dict[pathlib.Path, list[str]],
     lines = changed[path]
     start, end = block_bounds(lines, weapon)
     marker = "\tWarhead@NaxFlakAllyCounted:"
-    if any(lines[index].rstrip("\r\n") == marker
-           for index in range(start + 1, end)):
-        raise RuntimeError(f"{weapon}: allied-fire override already exists")
+    rows = [index for index in range(start + 1, end)
+            if lines[index].rstrip("\r\n") == marker]
+    if len(rows) > 1:
+        raise RuntimeError(f"{weapon}: duplicate allied-fire override")
+    if rows:
+        block_start = rows[0]
+        block_end = end
+        for index in range(block_start + 1, end):
+            if (lines[index].startswith("\t")
+                    and not lines[index].startswith("\t\t")
+                    and lines[index].strip()):
+                block_end = index
+                break
+        damage_rows = [
+            index for index in range(block_start + 1, block_end)
+            if lines[index].strip().startswith("Damage:")
+        ]
+        if len(damage_rows) != 1 or lines[damage_rows[0]].strip() != "Damage: 500":
+            raise RuntimeError(f"{weapon}: unexpected local allied-fire damage")
+        lines[damage_rows[0]] = "\t\tDamage: 1500\n"
+        return
     insertion = end
     while insertion > start + 1 and not lines[insertion - 1].strip():
         insertion -= 1

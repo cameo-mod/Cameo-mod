@@ -1165,6 +1165,7 @@ LMG_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 light_inf_lmg_upgrade:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Bullet_Light
 	Inherits@3: ^Warhead_CannonHE_Heavy
@@ -1184,6 +1185,13 @@ light_inf_lmg_upgrade:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 Fremen_S:
 	Inherits: ^MG
 	ValidTargets: Infantry
