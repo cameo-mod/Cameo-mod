@@ -937,6 +937,73 @@ classes they are provisional in a way the ≤1 goal does not reveal: a class can
 
 Reproduce: `python3 tools/balance/anchor_readiness.py` → *"The 3-way split gate"*.
 
+### 3.0z — ⭐ THE RIFLEMAN IS RETIRED AS THE TRANSFER KEY (2026-08-30) — distribution-relative synthesis
+
+**Maintainer:** *"I'm not a fan of the ratio of basic infantry to tank ... What if that game
+doesn't have any infantry and only uses vehicles? That's why we use those relative numbers."*
+
+Right, and it had four failure modes this corpus hits all of: a source with no infantry has no
+anchor; "basic rifleman" is a 40 HP Marine in one game and a 12,500 HP Light Infantry in another;
+one odd anchor silently rescales everything measured against it; and it answers *"how many
+riflemen is this worth"*, which nobody balances by.
+
+**Replaced by POSITION IN DISTRIBUTION** — `tools/balance/reference_distribution.py`. Each unit is
+placed inside its own source's spread, twice: against its **type** (infantry/vehicle/aircraft/
+ship/defense) and against the **overall** combat roster. Five aggregates per population (min, max,
+median, arithmetic mean, geometric mean); coordinates pooled across sources with the **geometric**
+mean; re-projected onto **Cameo's own** aggregates. Scope this pass is the **chassis** — HP, speed,
+turn rate — by maintainer scoping; weapons are the next layer.
+
+**Turn rate is chassis, not weapon, and deliberately so:** Cameo's law is *relative to speed*, so
+`turn_ratio = speed / turn_speed` is the measured quantity.
+
+⛔ **RATIOS TO RAW MIN AND MAX DO NOT VOTE — measured, not assumed.** The first run inflated every
+target roughly tenfold. Both ends of a roster are single actors and both are hostage to one oddity:
+
+* **Romanov's Vengeance lists a 100 HP vehicle**, so its vehicle median/min is **100** where
+  Combined Arms runs 12 and OpenRA RA 11.6. `x/min` for an ordinary RV tank is in the hundreds.
+* **Cameo's own vehicle ceiling is a 3,000,000 HP epic**, making its max/median **35×** against
+  peers' 2.8–16×. `x/max` then projects onto a ceiling no peer roster has.
+
+The middle three (median, AM, GM) are central statistics and survive one bad row, so they carry
+the projection. The min–max *idea* survives as `p_rng`, measured between the **5th and 95th
+percentiles** rather than the raw extremes — which is a step past what the external reviews
+proposed (they said "use position-in-range instead of min/max ratios", but position-in-range on
+RAW extremes inherits exactly the same fragility). `d_min`/`d_max` stay in the signature as
+diagnostics: when they disagree wildly with the middle three, that source's floor or ceiling is
+junk.
+
+**⭐ CALIBRATION — the model is centred, and the turn law reproduces itself.**
+
+| stat | HIGH-confidence rows | median ratio | within 2× |
+|---|--:|--:|--:|
+| hp | 185 | **1.04×** | 59% |
+| speed | 157 | **0.94×** | 97% |
+| turn_ratio | 98 | **0.97×** | 88% |
+
+A median of ~1.0 means Cameo's chassis distribution already broadly matches the genre — the
+measurement is not merely self-consistent, it agrees with the roster it was not fitted to. And
+`turn_ratio` lands the Apocalypse at **5 → 5** and the Nod Buggy at **5 → 5**: Cameo legislated
+`Speed/5`, and thirteen independent rosters independently agree. **That is a Cameo law confirmed
+from outside the project.**
+
+**Lineage de-duplication applied (maintainer ruling):** one vote per balance lineage, not per
+file. The RA2/YR family collapses into `Romanov's Vengeance`. ⚠ Recorded caveat: the five vanilla
+copies agree with each other on **96%** of shared units, which is what makes them one lineage —
+but RV is **not** a faithful copy. On the 86 units where the others agree and RV is present, RV is
+the **sole dissenter on 39 (45%)**: Kirov 32× vs 16×, Aegis Cruiser 3.2× vs 6.4×. Electing RV
+adopts RV's rebalance on those units. Defensible, since RV is the live resolvable codebase — but
+not a no-op, and this note exists so nobody later reads it as one.
+
+**Output, and it changes NOTHING:** `docs/balance/REFERENCE_SYNTHESIS_REPORT.md`,
+`docs/balance/derived/reference_distributions.json`, `docs/balance/derived/reference_signatures.json`.
+352 Cameo actors carry a signature. No ledger, no yaml, no anchor is touched — per
+`ORIGINAL_UNIT_STATS.md`, source games are an identity lookup, not a prescription.
+
+**Notable:** the Apocalypse lands at **350,000 → 118,607** under the distribution model, against
+162,192 under the retired rifle model. The methods disagree by 27%, and the distribution figure is
+the better-founded one.
+
 ### 3.0y — 📚 THE REFERENCE CORPUS, CLONED FROM SOURCE (2026-08-30): 25 sources, 15 OpenRA mods
 
 Every OpenRA reference mod is now cloned from its own repository and read through

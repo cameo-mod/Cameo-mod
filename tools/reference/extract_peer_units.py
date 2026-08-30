@@ -47,6 +47,55 @@ OUT = ROOT / "docs" / "design" / "ORIGINAL_UNITS_PEER_OPENRA.md"
 DEFAULT_TRAITS = {"health": ("Health",), "cost": ("Valued",),
                   "speed": ("Mobile", "Aircraft")}
 
+# ── Unit type ────────────────────────────────────────────────────────────────────────────────
+# Per-type distributions are the whole point of the distribution model: a Cameo vehicle must be
+# compared against a peer's VEHICLES, not against its whole roster. Every OpenRA mod names its
+# production queues differently — RA is plain (`Vehicle`), CA suffixes them (`VehicleSQ,
+# VehicleMQ`), RV qualifies them by faction (`Vehicle.Civilian`) — so the queue string is matched
+# by TOKEN rather than by equality, and traits are the fallback when a unit has no queue at all.
+TYPE_TOKENS = [("aircraft", "aircraft"), ("infantry", "infantry"), ("cyborg", "infantry"),
+               ("vehicle", "vehicle"), ("tank", "vehicle"), ("ship", "ship"), ("naval", "ship"),
+               ("defense", "defense"), ("building", "building"), ("structure", "building")]
+
+
+def unit_type(node):
+    """infantry | vehicle | aircraft | ship | defense | building | other."""
+    queue = ""
+    for c in node.children:
+        if c.key.split("@")[0] == "Buildable":
+            queue = (c.get("Queue") or "") + " " + (c.get("BuildAtProductionType") or "")
+    q = queue.lower()
+    for token, kind in TYPE_TOKENS:
+        if token in q:
+            return kind
+    traits = {c.key.split("@")[0] for c in node.children}
+    if "Aircraft" in traits:
+        return "aircraft"
+    if "Mobile" in traits:
+        return "vehicle"          # an unqueued mobile actor; infantry is nearly always queued
+    if "Building" in traits:
+        return "building"
+    return "other"
+
+
+def turn_speed(node):
+    """Turn rate and whether it comes from a TURRET.
+
+    Cameo's turn law is relative to speed and keyed on the turret: a turreted ground unit turns at
+    Speed/5 while a turretless one turns at 2xSpeed/5, and aircraft split again (helicopters and
+    spaceships Speed/5, planes Speed/15). A peer's raw TurnSpeed is therefore only meaningful
+    next to its speed and its turret state, so both travel together.
+    """
+    turreted = any(c.key.split("@")[0] == "Turreted" for c in node.children)
+    for names in (("Turreted",), ("Mobile",), ("Aircraft",)):
+        v = trait(node, names, "TurnSpeed")
+        if v:
+            try:
+                return int(str(v)), turreted
+            except ValueError:
+                return None, turreted
+    return None, turreted
+
 # mod_id -> dict describing the peer:
 #   label     human name used as the source label in the synthesis
 #   root      checkout candidates; the FIRST whose mods/<mod_id>/mod.yaml exists wins
@@ -244,8 +293,10 @@ def extract(mod_id):
             continue
         cost = trait(node, T["cost"], "Cost")
         speed = trait(node, T["speed"], "Speed")
+        ts, turreted = turn_speed(node)
         rows.append({
             "id": actor, "name": unit_name(actor, node, fluent),
+            "type": unit_type(node), "turn_speed": ts, "turreted": turreted,
             "hp": int(hp), "cost": int(cost) if cost else None,
             "speed": int(speed) if speed else None,
             "x_hp": int(hp) / rhp,
@@ -299,14 +350,16 @@ def main():
                 f"{rcost} credits = 1.00×**"]
         if data["note"]:
             out += ["", data["note"]]
-        out += ["", "| id | unit | HP | ×rifle | Cost | ×rifle cost | Speed |",
-                "|---|---|--:|--:|--:|--:|--:|"]
+        out += ["", "| id | unit | type | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | Turret |",
+                "|---|---|---|--:|--:|--:|--:|--:|--:|:-:|"]
         for r in sorted(data["rows"], key=lambda x: -x["x_hp"]):
             xc = f"{r['x_cost']:.2f}" if r["x_cost"] else "—"
             cost = f"{r['cost']:,}" if r["cost"] else "—"
             spd = r["speed"] if r["speed"] else "—"
-            out.append(f"| `{r['id']}` | {r['name']} | {r['hp']:,} | {r['x_hp']:.2f} | "
-                       f"{cost} | {xc} | {spd} |")
+            out.append(f"| `{r['id']}` | {r['name']} | {r['type']} | {r['hp']:,} | "
+                       f"{r['x_hp']:.2f} | {cost} | {xc} | {spd} | "
+                       f"{r['turn_speed'] if r['turn_speed'] else '—'} | "
+                       f"{'Y' if r['turreted'] else 'n'} |")
         out.append("")
 
     if args.dry_run:
