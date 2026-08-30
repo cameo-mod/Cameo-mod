@@ -293,10 +293,15 @@ def extract(mod_id):
             continue
         cost = trait(node, T["cost"], "Cost")
         speed = trait(node, T["speed"], "Speed")
+        # BuildLimit marks a mod's one-off epic/hero. It is emitted rather than dropped here so
+        # the reference document stays a COMPLETE record of each mod; the distribution engine
+        # filters it, where the choice is visible and auditable.
+        limit = trait(node, ("Buildable",), "BuildLimit")
         ts, turreted = turn_speed(node)
         rows.append({
             "id": actor, "name": unit_name(actor, node, fluent),
             "type": unit_type(node), "turn_speed": ts, "turreted": turreted,
+            "limit": int(limit) if (limit and str(limit).strip().isdigit()) else None,
             "hp": int(hp), "cost": int(cost) if cost else None,
             "speed": int(speed) if speed else None,
             "x_hp": int(hp) / rhp,
@@ -350,8 +355,9 @@ def main():
                 f"{rcost} credits = 1.00×**"]
         if data["note"]:
             out += ["", data["note"]]
-        out += ["", "| id | unit | type | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | Turret |",
-                "|---|---|---|--:|--:|--:|--:|--:|--:|:-:|"]
+        out += ["", "| id | unit | type | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | "
+                "Turret | Limit |",
+                "|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|"]
         for r in sorted(data["rows"], key=lambda x: -x["x_hp"]):
             xc = f"{r['x_cost']:.2f}" if r["x_cost"] else "—"
             cost = f"{r['cost']:,}" if r["cost"] else "—"
@@ -359,7 +365,8 @@ def main():
             out.append(f"| `{r['id']}` | {r['name']} | {r['type']} | {r['hp']:,} | "
                        f"{r['x_hp']:.2f} | {cost} | {xc} | {spd} | "
                        f"{r['turn_speed'] if r['turn_speed'] else '—'} | "
-                       f"{'Y' if r['turreted'] else 'n'} |")
+                       f"{'Y' if r['turreted'] else 'n'} | "
+                       f"{r['limit'] if r['limit'] else '—'} |")
         out.append("")
 
     if args.dry_run:

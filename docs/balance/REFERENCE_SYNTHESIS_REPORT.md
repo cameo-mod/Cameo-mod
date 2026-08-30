@@ -26,19 +26,19 @@ Measured first: those five vanilla copies agree with each other on **96%** of sh
 
 | source | population | stat | n | min | median | geo-mean | max |
 |---|---|---|--:|--:|--:|--:|--:|
-| Combined Arms | overall | hp | 329 | 1,800 | 27,000 | 24,019 | 150,000 |
+| Combined Arms | overall | hp | 312 | 1,800 | 25,500 | 23,004 | 150,000 |
 | Combined Arms | vehicle | hp | 165 | 2,500 | 30,000 | 27,374 | 140,000 |
-| Combined Arms | infantry | hp | 66 | 1,800 | 9,500 | 8,497 | 40,000 |
+| Combined Arms | infantry | hp | 61 | 1,800 | 8,000 | 8,320 | 40,000 |
 | Crystallized Nexus | overall | hp | 50 | 80 | 150 | 199 | 1,000 |
 | Crystallized Nexus | vehicle | hp | 29 | 100 | 200 | 255 | 1,000 |
 | Crystallized Nexus | infantry | hp | 14 | 80 | 105 | 114 | 200 |
-| Generals Alpha | overall | hp | 84 | 8,000 | 22,000 | 21,815 | 250,000 |
-| Generals Alpha | vehicle | hp | 46 | 10,000 | 25,000 | 30,126 | 250,000 |
-| Generals Alpha | infantry | hp | 26 | 10,000 | 12,000 | 13,250 | 75,000 |
+| Generals Alpha | overall | hp | 78 | 8,000 | 23,000 | 21,419 | 110,000 |
+| Generals Alpha | vehicle | hp | 45 | 10,000 | 25,000 | 28,742 | 110,000 |
+| Generals Alpha | infantry | hp | 21 | 10,000 | 12,000 | 12,346 | 75,000 |
 | OpenE2140 | overall | hp | 65 | 20 | 300 | 245 | 1,000 |
 | OpenE2140 | vehicle | hp | 29 | 80 | 300 | 280 | 800 |
 | OpenE2140 | infantry | hp | 8 | 20 | 28 | 28 | 40 |
-| OpenHV | overall | hp | 97 | 8,000 | 21,000 | 26,996 | 250,000 |
+| OpenHV | overall | hp | 91 | 8,000 | 21,000 | 24,269 | 100,000 |
 | OpenHV | vehicle | hp | 55 | 9,500 | 15,000 | 20,678 | 50,000 |
 | OpenRA Dune 2000 | overall | hp | 37 | 3,750 | 11,500 | 13,829 | 50,000 |
 | OpenRA Dune 2000 | vehicle | hp | 23 | 9,000 | 19,000 | 18,864 | 50,000 |
@@ -46,50 +46,50 @@ Measured first: those five vanilla copies agree with each other on **96%** of sh
 | OpenRA Dune II | overall | hp | 32 | 10 | 125 | 135 | 1,000 |
 | OpenRA Dune II | vehicle | hp | 21 | 45 | 130 | 152 | 1,000 |
 | OpenRA Dune II | infantry | hp | 6 | 10 | 375 | 130 | 1,000 |
-| OpenRA Red Alert | overall | hp | 77 | 1,800 | 35,000 | 23,921 | 150,000 |
+| OpenRA Red Alert | overall | hp | 71 | 1,800 | 30,000 | 21,896 | 150,000 |
 | OpenRA Red Alert | vehicle | hp | 20 | 2,800 | 32,500 | 27,744 | 90,000 |
-| OpenRA Red Alert | infantry | hp | 18 | 1,800 | 5,500 | 6,440 | 75,000 |
+| OpenRA Red Alert | infantry | hp | 17 | 1,800 | 5,000 | 6,275 | 75,000 |
 | OpenRA Tiberian Dawn | overall | hp | 31 | 3,000 | 15,000 | 19,541 | 120,000 |
 | OpenRA Tiberian Dawn | vehicle | hp | 16 | 7,500 | 18,500 | 22,829 | 120,000 |
 | OpenRA Tiberian Dawn | infantry | hp | 12 | 3,000 | 12,000 | 18,092 | 100,000 |
-| OpenRA Tiberian Sun | overall | hp | 37 | 10,000 | 22,500 | 26,555 | 100,000 |
-| OpenRA Tiberian Sun | vehicle | hp | 21 | 15,000 | 30,000 | 34,260 | 100,000 |
-| OpenRA Tiberian Sun | infantry | hp | 10 | 10,000 | 13,750 | 17,391 | 50,000 |
-| Romanov's Vengeance | overall | hp | 327 | 25 | 10,000 | 3,833 | 400,000 |
-| Romanov's Vengeance | vehicle | hp | 137 | 100 | 10,000 | 5,900 | 160,000 |
-| Romanov's Vengeance | infantry | hp | 125 | 25 | 5,000 | 1,826 | 40,000 |
-| Shattered Paradise | overall | hp | 148 | 6,400 | 25,000 | 31,594 | 650,000 |
-| Shattered Paradise | vehicle | hp | 72 | 8,000 | 37,500 | 43,436 | 650,000 |
-| Shattered Paradise | infantry | hp | 41 | 6,400 | 20,000 | 21,326 | 140,000 |
-| Valiant Shades | overall | hp | 114 | 25,000 | 200,000 | 230,523 | 2,000,000 |
+| OpenRA Tiberian Sun | overall | hp | 33 | 10,000 | 22,000 | 25,318 | 100,000 |
+| OpenRA Tiberian Sun | vehicle | hp | 20 | 15,000 | 30,000 | 32,838 | 100,000 |
+| OpenRA Tiberian Sun | infantry | hp | 7 | 10,000 | 12,500 | 13,562 | 30,000 |
+| Romanov's Vengeance | overall | hp | 203 | 5,000 | 15,000 | 18,900 | 400,000 |
+| Romanov's Vengeance | vehicle | hp | 91 | 10,000 | 20,000 | 23,781 | 160,000 |
+| Romanov's Vengeance | infantry | hp | 72 | 5,000 | 11,250 | 9,558 | 40,000 |
+| Shattered Paradise | overall | hp | 132 | 6,400 | 25,000 | 27,295 | 300,000 |
+| Shattered Paradise | vehicle | hp | 67 | 8,000 | 35,000 | 36,744 | 300,000 |
+| Shattered Paradise | infantry | hp | 32 | 6,400 | 15,000 | 17,867 | 60,000 |
+| Valiant Shades | overall | hp | 109 | 25,000 | 200,000 | 231,132 | 2,000,000 |
 | Valiant Shades | vehicle | hp | 63 | 100,000 | 210,000 | 322,708 | 2,000,000 |
-| Valiant Shades | infantry | hp | 36 | 25,000 | 125,000 | 111,647 | 250,000 |
+| Valiant Shades | infantry | hp | 31 | 25,000 | 125,000 | 100,251 | 200,000 |
 
 ### Cameo's own distributions
 
 | population | stat | n | min | median | geo-mean | max |
 |---|---|--:|--:|--:|--:|--:|
-| overall | hp | 987 | 2,400 | 70,000 | 68,720 | 3,750,000 |
-| overall | speed | 902 | 5 | 75 | 79 | 300 |
-| overall | turn_speed | 654 | 2 | 20 | 20 | 255 |
-| overall | turn_ratio | 654 | 0 | 5 | 4 | 47 |
-| infantry | hp | 282 | 2,400 | 31,000 | 29,290 | 400,000 |
-| infantry | speed | 282 | 5 | 60 | 61 | 195 |
-| infantry | turn_speed | 38 | 12 | 20 | 26 | 255 |
-| infantry | turn_ratio | 38 | 0 | 2 | 2 | 8 |
-| vehicle | hp | 403 | 10,000 | 85,000 | 93,175 | 3,000,000 |
-| vehicle | speed | 402 | 25 | 75 | 79 | 200 |
-| vehicle | turn_speed | 398 | 7 | 20 | 21 | 72 |
-| vehicle | turn_ratio | 398 | 1 | 5 | 4 | 6 |
-| aircraft | hp | 168 | 6,000 | 90,000 | 82,362 | 3,750,000 |
-| aircraft | speed | 168 | 25 | 150 | 123 | 300 |
-| aircraft | turn_speed | 168 | 2 | 20 | 17 | 80 |
-| aircraft | turn_ratio | 168 | 2 | 5 | 7 | 47 |
-| ship | hp | 50 | 7,500 | 110,000 | 107,677 | 350,000 |
-| ship | speed | 50 | 35 | 70 | 75 | 200 |
-| ship | turn_speed | 50 | 7 | 24 | 20 | 50 |
-| ship | turn_ratio | 50 | 2 | 5 | 4 | 7 |
-| defense | hp | 84 | 25,000 | 100,000 | 148,844 | 1,000,000 |
+| overall | hp | 823 | 5,000 | 65,000 | 66,434 | 1,350,000 |
+| overall | speed | 746 | 25 | 75 | 78 | 260 |
+| overall | turn_speed | 546 | 2 | 20 | 20 | 92 |
+| overall | turn_ratio | 546 | 1 | 5 | 4 | 18 |
+| infantry | hp | 229 | 5,000 | 30,000 | 27,396 | 400,000 |
+| infantry | speed | 229 | 30 | 60 | 61 | 195 |
+| infantry | turn_speed | 33 | 12 | 20 | 23 | 92 |
+| infantry | turn_ratio | 33 | 1 | 2 | 3 | 5 |
+| vehicle | hp | 355 | 10,000 | 80,000 | 85,692 | 1,000,000 |
+| vehicle | speed | 355 | 25 | 75 | 81 | 200 |
+| vehicle | turn_speed | 351 | 8 | 20 | 20 | 72 |
+| vehicle | turn_ratio | 351 | 1 | 5 | 4 | 6 |
+| aircraft | hp | 114 | 12,500 | 75,000 | 79,020 | 1,350,000 |
+| aircraft | speed | 114 | 30 | 145 | 121 | 260 |
+| aircraft | turn_speed | 114 | 2 | 20 | 18 | 80 |
+| aircraft | turn_ratio | 114 | 2 | 5 | 7 | 18 |
+| ship | hp | 48 | 25,000 | 122,500 | 119,600 | 350,000 |
+| ship | speed | 48 | 35 | 62 | 72 | 150 |
+| ship | turn_speed | 48 | 7 | 23 | 19 | 50 |
+| ship | turn_ratio | 48 | 2 | 5 | 4 | 7 |
+| defense | hp | 77 | 25,000 | 100,000 | 153,514 | 1,000,000 |
 
 ## Calibration — is the model centred?
 
@@ -97,139 +97,139 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 
 | stat | HIGH-confidence rows | median ratio | geo-mean ratio | within 2× |
 |---|--:|--:|--:|--:|
-| hp | 185 | 1.04× | 1.09× | 59% |
-| speed | 157 | 0.94× | 0.92× | 97% |
-| turn_speed | 98 | 0.83× | 0.74× | 76% |
-| turn_ratio | 98 | 0.97× | 1.08× | 88% |
+| hp | 161 | 1.26× | 1.36× | 70% |
+| speed | 141 | 0.93× | 0.92× | 99% |
+| turn_speed | 89 | 0.89× | 0.77× | 79% |
+| turn_ratio | 89 | 0.94× | 1.05× | 89% |
 
 ⭐ **The turn law reproduces itself out of the reference data.** `turn_ratio` is `speed / turn_speed` — the divisor in Cameo's own law (turreted ground `Speed/5`, turretless `2×Speed/5`, helicopters and spaceships `Speed/5`, planes `Speed/15`). The reference consensus lands the Apocalypse at **5 → 5** and the Nod Buggy at **5 → 5**, and the whole HIGH-confidence population at a median of ~1.0×. Cameo legislated that divisor; thirteen independent rosters agree with it. That is a law confirmed from outside, not an artifact of the measurement.
 
-## Reference targets — 352 Cameo actors with a signature
+## Reference targets — 302 Cameo actors with a signature
 
 `now` is the live ledger value; `target` is the reference consensus re-projected onto Cameo's distributions. Confidence is the number of independent sources that matched: HIGH ≥3, MEDIUM 2, LOW 1. A LOW row is one mod's opinion, not the genre's.
 
 | actor | type | stat | now | target | ratio | sources | confidence |
 |---|---|---|--:|--:|--:|--:|---|
-| `yuri_geneticmutator` | defense | hp | 1,000,000 | 10,890 | 0.01× | 1 | LOW |
 | `tkm_viper` | aircraft | turn_ratio | 15 | 0 | 0.03× | 1 | LOW |
-| `tkm_viper` | aircraft | turn_speed | 10 | 186 | 18.57× | 1 | LOW |
-| `yuri_floatingdisk` | aircraft | hp | 125,000 | 7,111 | 0.06× | 1 | LOW |
-| `ra1_general` | infantry | hp | 2,500 | 42,337 | 16.93× | 1 | LOW |
-| `ts_gdi_strike_orca` | ship | hp | 10,000 | 163,058 | 16.31× | 3 | HIGH |
+| `tkm_viper` | aircraft | turn_speed | 10 | 186 | 18.58× | 1 | LOW |
+| `ra2_soviets_terrordrone` | vehicle | turn_ratio | 5 | 0 | 0.06× | 2 | MEDIUM |
+| `ra2_soviets_terrordrone` | vehicle | turn_speed | 40 | 513 | 12.82× | 2 | MEDIUM |
 | `forgotten_ruiner` | vehicle | turn_ratio | 5 | 0 | 0.08× | 1 | LOW |
-| `cabal_mothership` | aircraft | turn_speed | 10 | 104 | 10.39× | 2 | MEDIUM |
-| `naxis_transportzeppelin` | aircraft | hp | 1,250,000 | 121,598 | 0.10× | 2 | MEDIUM |
-| `yuri_boomersubmarine` | ship | hp | 100,000 | 938,183 | 9.38× | 1 | LOW |
-| `ts_nod_laserfence` | defense | hp | 30,000 | 252,322 | 8.41× | 3 | HIGH |
-| `ra2_soviets_boris` | infantry | hp | 90,000 | 10,702 | 0.12× | 2 | MEDIUM |
-| `yuriinvisibleplane` | aircraft | hp | 100,000 | 13,241 | 0.13× | 3 | HIGH |
-| `forgotten_chinook` | aircraft | hp | 18,000 | 132,787 | 7.38× | 3 | HIGH |
-| `cabal_mothership` | aircraft | turn_ratio | 5 | 1 | 0.14× | 2 | MEDIUM |
-| `yuri_floatingdisk` | aircraft | turn_ratio | 5 | 35 | 6.98× | 1 | LOW |
-| `ra1_technician` | infantry | hp | 2,500 | 17,413 | 6.97× | 2 | MEDIUM |
-| `ra1_allies_mobileradarjammer` | vehicle | hp | 25,000 | 168,476 | 6.74× | 3 | HIGH |
-| `ra2_soviets_battlebunker` | defense | hp | 80,000 | 521,299 | 6.52× | 1 | LOW |
-| `forgotten_ruiner` | vehicle | turn_speed | 30 | 191 | 6.36× | 1 | LOW |
+| `naxis_transportzeppelin` | aircraft | hp | 1,250,000 | 108,545 | 0.09× | 2 | MEDIUM |
+| `ts_nod_laserfence` | defense | hp | 30,000 | 248,016 | 8.27× | 3 | HIGH |
+| `forgotten_warriortank` | vehicle | hp | 100,000 | 15,469 | 0.15× | 1 | LOW |
+| `forgotten_ruiner` | vehicle | turn_speed | 30 | 190 | 6.34× | 1 | LOW |
 | `asianalliance_viper` | vehicle | turn_ratio | 2 | 0 | 0.16× | 1 | LOW |
-| `forgotten_carryall` | aircraft | hp | 17,500 | 106,583 | 6.09× | 4 | HIGH |
-| `forgotten_warriortank` | vehicle | hp | 100,000 | 16,442 | 0.16× | 1 | LOW |
-| `asianalliance_alligator` | infantry | hp | 27,000 | 162,632 | 6.02× | 1 | LOW |
-| `ra2_allies_tanyaii` | infantry | hp | 50,000 | 8,955 | 0.18× | 3 | HIGH |
-| `ra1_allies_minelayer` | vehicle | hp | 30,000 | 164,627 | 5.49× | 4 | HIGH |
-| `yuriinvisibleplane` | aircraft | speed | 300 | 57 | 0.19× | 3 | HIGH |
-| `ixian_storminfantry` | infantry | speed | 44 | 220 | 4.99× | 1 | LOW |
-| `tkm_technicaltank` | vehicle | turn_speed | 22 | 108 | 4.93× | 2 | MEDIUM |
-| `ra1_allies_tanya` | infantry | hp | 44,000 | 8,955 | 0.20× | 3 | HIGH |
-| `ixian_stormraider` | vehicle | hp | 60,000 | 12,232 | 0.20× | 1 | LOW |
-| `ra1_allies_mechanic` | infantry | hp | 7,500 | 35,522 | 4.74× | 3 | HIGH |
-| `carryall.paradrop` | aircraft | hp | 500,000 | 106,583 | 0.21× | 4 | HIGH |
-| `carryall.reinforce` | aircraft | hp | 500,000 | 106,583 | 0.21× | 4 | HIGH |
-| `ra2_allies_chronosphere` | defense | hp | 1,000,000 | 219,407 | 0.22× | 4 | HIGH |
-| `ra1_allies_chronosphere` | defense | hp | 1,000,000 | 219,407 | 0.22× | 4 | HIGH |
-| `ra2_soviets_terrordrone` | vehicle | turn_ratio | 5 | 1 | 0.22× | 2 | MEDIUM |
-| `ra2_soviets_nuclearmissilesilo` | defense | hp | 1,000,000 | 220,566 | 0.22× | 3 | HIGH |
-| `schwarzermond_engineeringarmor` | infantry | hp | 50,000 | 11,046 | 0.22× | 9 | HIGH |
-| `protoss_archon` | vehicle | hp | 350,000 | 79,444 | 0.23× | 1 | LOW |
-| `japan_zerofighter_slave` | ship | speed | 175 | 40 | 0.23× | 1 | LOW |
-| `tkm_battlebus` | vehicle | hp | 50,000 | 216,382 | 4.33× | 2 | MEDIUM |
-| `yuri_floatingdisk` | aircraft | turn_speed | 16 | 4 | 0.23× | 1 | LOW |
-| `td_nod_stealthtank` | vehicle | hp | 17,500 | 74,679 | 4.27× | 6 | HIGH |
-| `steelconsortium_stalker` | vehicle | hp | 140,000 | 33,149 | 0.24× | 1 | LOW |
-| `naxis_engineeringtruck` | vehicle | hp | 50,000 | 11,895 | 0.24× | 9 | HIGH |
-| `forgotten_carryall` | aircraft | turn_ratio | 2 | 8 | 4.19× | 4 | HIGH |
-| `ts_gdi_carryall` | aircraft | turn_ratio | 2 | 8 | 4.19× | 4 | HIGH |
-| `yuri_cosmonaut` | infantry | turn_ratio | 5 | 1 | 0.24× | 2 | MEDIUM |
-| `ordos_mortartrooper` | infantry | hp | 20,000 | 82,598 | 4.13× | 2 | MEDIUM |
-| `forgotten_tiberianfiend` | infantry | hp | 80,000 | 19,554 | 0.24× | 1 | LOW |
-| `ra2_allies_miragetank` | vehicle | hp | 120,000 | 29,654 | 0.25× | 3 | HIGH |
-| `ra1_allies_phasetransport` | vehicle | hp | 30,000 | 120,018 | 4.00× | 1 | LOW |
+| `yuri_mastermind` | vehicle | turn_ratio | 5 | 1 | 0.18× | 2 | MEDIUM |
+| `ixian_stormraider` | vehicle | hp | 60,000 | 11,331 | 0.19× | 1 | LOW |
+| `protoss_archon` | vehicle | hp | 350,000 | 67,218 | 0.19× | 1 | LOW |
+| `tkm_technicaltank` | vehicle | turn_speed | 22 | 111 | 5.04× | 2 | MEDIUM |
+| `forgotten_carryall` | aircraft | hp | 17,500 | 86,146 | 4.92× | 4 | HIGH |
+| `ixian_storminfantry` | infantry | speed | 44 | 214 | 4.87× | 1 | LOW |
+| `yuri_chaosdrone` | vehicle | hp | 12,500 | 57,637 | 4.61× | 2 | MEDIUM |
+| `tkm_rocketeer` | infantry | hp | 9,000 | 40,223 | 4.47× | 3 | HIGH |
+| `tkm_battlebus` | vehicle | hp | 50,000 | 206,550 | 4.13× | 2 | MEDIUM |
+| `forgotten_carryall` | aircraft | turn_ratio | 2 | 8 | 4.08× | 4 | HIGH |
+| `ts_gdi_carryall` | aircraft | turn_ratio | 2 | 8 | 4.08× | 4 | HIGH |
+| `terran_goliathmk2` | vehicle | hp | 175,000 | 43,419 | 0.25× | 1 | LOW |
 | `forgotten_carryall` | aircraft | turn_speed | 80 | 20 | 0.25× | 4 | HIGH |
 | `ts_gdi_carryall` | aircraft | turn_speed | 80 | 20 | 0.25× | 4 | HIGH |
-| `cabal_cyborgcommandov2` | infantry | hp | 400,000 | 101,648 | 0.25× | 4 | HIGH |
+| `td_nod_stealthtank` | vehicle | turn_speed | 60 | 15 | 0.26× | 6 | HIGH |
+| `ra2_soviets_crazyivan` | infantry | hp | 10,000 | 38,848 | 3.88× | 3 | HIGH |
+| `ixian_storminfantry` | infantry | hp | 44,000 | 11,331 | 0.26× | 1 | LOW |
+| `yuri_boomersubmarine` | ship | hp | 100,000 | 386,912 | 3.87× | 1 | LOW |
+| `td_nod_stealthtank` | vehicle | hp | 17,500 | 67,262 | 3.84× | 6 | HIGH |
 | `ordos_tankdestroyer` | vehicle | turn_speed | 36 | 9 | 0.26× | 3 | HIGH |
-| `ra2_allies_rocketeer` | infantry | turn_ratio | 5 | 1 | 0.26× | 3 | HIGH |
-| `td_nod_stealthtank` | vehicle | turn_speed | 60 | 16 | 0.26× | 6 | HIGH |
-| `asianalliance_viper` | vehicle | turn_speed | 50 | 191 | 3.81× | 1 | LOW |
-| `cabal_avatar` | vehicle | hp | 1,000,000 | 268,762 | 0.27× | 2 | MEDIUM |
-| `yuri_psychicdominator` | defense | hp | 1,000,000 | 271,264 | 0.27× | 2 | MEDIUM |
-| `ra2_soviets_seascorpion` | ship | turn_speed | 48 | 13 | 0.27× | 3 | HIGH |
-| `cabal_constructionyard` | vehicle | hp | 1,000,000 | 274,934 | 0.27× | 9 | HIGH |
+| `asianalliance_viper` | vehicle | turn_speed | 50 | 190 | 3.81× | 1 | LOW |
+| `yuri_mastermind` | vehicle | turn_speed | 24 | 90 | 3.77× | 2 | MEDIUM |
+| `td_nod_specterartillery` | vehicle | turn_speed | 40 | 11 | 0.27× | 1 | LOW |
+| `cabal_avatar` | vehicle | hp | 1,000,000 | 270,017 | 0.27× | 2 | MEDIUM |
+| `ra1_allies_minelayer` | vehicle | hp | 30,000 | 110,917 | 3.70× | 4 | HIGH |
+| `yuri_tankbunker` | defense | hp | 100,000 | 369,534 | 3.70× | 1 | LOW |
 | `cabal_beholder` | vehicle | turn_speed | 50 | 14 | 0.28× | 1 | LOW |
-| `ixian_storminfantry` | infantry | hp | 44,000 | 12,232 | 0.28× | 1 | LOW |
-| `yuri_mastermind` | vehicle | turn_ratio | 5 | 1 | 0.28× | 3 | HIGH |
-| `ts_gdi_discthrower` | infantry | hp | 12,000 | 42,700 | 3.56× | 3 | HIGH |
-| `tkm_juggernaut` | infantry | hp | 36,000 | 127,445 | 3.54× | 4 | HIGH |
-| `cabal_cyborgassassin` | aircraft | speed | 180 | 51 | 0.28× | 2 | MEDIUM |
-| `yuri_gatlingcannon` | defense | hp | 140,000 | 493,105 | 3.52× | 2 | MEDIUM |
-| `ts_gdi_juggernaut` | vehicle | hp | 35,000 | 123,168 | 3.52× | 4 | HIGH |
-| `cabal_orbdrone_slave` | aircraft | speed | 140 | 40 | 0.28× | 1 | LOW |
+| `forgotten_tiberianfiend` | infantry | hp | 80,000 | 22,242 | 0.28× | 1 | LOW |
+| `ts_gdi_discthrower` | infantry | hp | 12,000 | 42,758 | 3.56× | 3 | HIGH |
+| `ra2_soviets_flakcannon` | defense | hp | 60,000 | 212,734 | 3.55× | 2 | MEDIUM |
 | `td_nod_ssmlauncher` | vehicle | turn_speed | 20 | 6 | 0.29× | 1 | LOW |
-| `ra2_allies_harrier` | aircraft | hp | 72,000 | 20,696 | 0.29× | 3 | HIGH |
-| `ra2_soviets_transportkirov` | aircraft | speed | 35 | 121 | 3.46× | 2 | MEDIUM |
-| `naxis_transportzeppelin` | aircraft | speed | 35 | 121 | 3.46× | 2 | MEDIUM |
-| `td_nod_specterartillery` | vehicle | turn_speed | 40 | 12 | 0.29× | 1 | LOW |
-| `terran_goliathmk2` | vehicle | hp | 175,000 | 50,808 | 0.29× | 1 | LOW |
-| `trooper` | infantry | hp | 12,000 | 41,294 | 3.44× | 2 | MEDIUM |
-| `zerg_queen` | aircraft | hp | 125,000 | 36,406 | 0.29× | 1 | LOW |
-| `td_gdi_grenadier` | infantry | hp | 8,000 | 27,430 | 3.43× | 6 | HIGH |
-| `ra2_allies_blackeagle` | aircraft | hp | 85,000 | 25,555 | 0.30× | 3 | HIGH |
-| `asianalliance_viper` | vehicle | hp | 25,000 | 82,638 | 3.31× | 1 | LOW |
-| `ra1_allies_mobilegapgenerator` | vehicle | hp | 25,000 | 82,598 | 3.30× | 3 | HIGH |
-| `ts_gdi_falconenforcer` | infantry | speed | 59 | 194 | 3.29× | 1 | LOW |
-| `zerg_guardian` | aircraft | hp | 150,000 | 45,787 | 0.31× | 1 | LOW |
-| `cabal_stealthgenerator` | defense | hp | 100,000 | 325,268 | 3.25× | 5 | HIGH |
-| `ts_nod_stealthgenerator` | defense | hp | 100,000 | 325,268 | 3.25× | 5 | HIGH |
-| `ordos_banshee` | aircraft | turn_speed | 33 | 10 | 0.31× | 2 | MEDIUM |
-| `td_nod_stealthtank` | vehicle | turn_ratio | 2 | 6 | 3.18× | 6 | HIGH |
-| `forgotten_mutanthijacker` | infantry | hp | 25,000 | 79,392 | 3.18× | 1 | LOW |
-| `yuri_magnetron` | vehicle | hp | 65,000 | 20,491 | 0.32× | 1 | LOW |
-| `ra1_agentdelphi` | infantry | hp | 2,500 | 7,920 | 3.17× | 1 | LOW |
-| `ra1_allies_medic` | infantry | hp | 10,000 | 31,499 | 3.15× | 6 | HIGH |
-| `ts_gdi_medic` | infantry | hp | 10,000 | 31,499 | 3.15× | 6 | HIGH |
-| `td_nod_venom` | aircraft | turn_speed | 40 | 13 | 0.32× | 1 | LOW |
-| `cabal_manticore` | vehicle | turn_ratio | 2 | 8 | 3.12× | 1 | LOW |
-| `ra2_soviets_terrordrone` | vehicle | turn_speed | 40 | 124 | 3.10× | 2 | MEDIUM |
-| `latinsyndicate_demolitiontruck` | vehicle | turn_speed | 40 | 13 | 0.32× | 4 | HIGH |
-| `tkm_technical` | vehicle | turn_speed | 35 | 108 | 3.10× | 2 | MEDIUM |
+| `ra1_allies_phasetransport` | vehicle | hp | 30,000 | 103,274 | 3.44× | 1 | LOW |
+| `cabal_cyborgassassin` | aircraft | speed | 180 | 53 | 0.29× | 2 | MEDIUM |
+| `ra2_soviets_transportkirov` | aircraft | speed | 35 | 118 | 3.38× | 2 | MEDIUM |
+| `naxis_transportzeppelin` | aircraft | speed | 35 | 118 | 3.38× | 2 | MEDIUM |
+| `forgotten_wasp` | aircraft | hp | 25,000 | 83,543 | 3.34× | 1 | LOW |
+| `yuri_cosmonaut` | infantry | turn_ratio | 5 | 2 | 0.30× | 2 | MEDIUM |
+| `naxis_slave` | infantry | hp | 10,000 | 32,725 | 3.27× | 1 | LOW |
+| `ra2_allies_engineer` | infantry | hp | 5,000 | 16,329 | 3.27× | 9 | HIGH |
+| `ra2_soviets_engineer` | infantry | hp | 5,000 | 16,329 | 3.27× | 9 | HIGH |
+| `yuri_engineer` | infantry | hp | 5,000 | 16,329 | 3.27× | 9 | HIGH |
+| `asianalliance_engineer` | infantry | hp | 5,000 | 16,329 | 3.27× | 9 | HIGH |
+| `steelconsortium_engineer` | infantry | hp | 5,000 | 16,329 | 3.27× | 9 | HIGH |
+| `futuretech_engineer` | infantry | hp | 5,000 | 16,329 | 3.27× | 9 | HIGH |
+| `latinsyndicate_engineer` | infantry | hp | 5,000 | 16,329 | 3.27× | 9 | HIGH |
+| `tkm_engineer` | infantry | hp | 5,000 | 16,329 | 3.27× | 9 | HIGH |
+| `engineer` | infantry | hp | 5,000 | 16,329 | 3.27× | 9 | HIGH |
+| `ra1_engineer` | infantry | hp | 5,000 | 16,329 | 3.27× | 9 | HIGH |
+| `ra1_allies_mechanic` | infantry | hp | 7,500 | 24,447 | 3.26× | 3 | HIGH |
+| `tkm_juggernaut` | infantry | hp | 36,000 | 116,710 | 3.24× | 4 | HIGH |
+| `ra2_soviets_seascorpion` | ship | hp | 25,000 | 80,335 | 3.21× | 3 | HIGH |
+| `ts_gdi_juggernaut` | vehicle | hp | 35,000 | 111,809 | 3.19× | 4 | HIGH |
+| `tkm_technical` | vehicle | turn_speed | 35 | 111 | 3.17× | 2 | MEDIUM |
+| `tkm_battlebus` | vehicle | turn_speed | 40 | 13 | 0.32× | 2 | MEDIUM |
+| `td_nod_stealthtank` | vehicle | turn_ratio | 2 | 6 | 3.13× | 6 | HIGH |
 | `cabal_manticore` | vehicle | turn_speed | 26 | 8 | 0.32× | 1 | LOW |
-| `tkm_battlebus` | vehicle | turn_ratio | 2 | 8 | 3.08× | 2 | MEDIUM |
-| `tkm_battlebus` | vehicle | turn_speed | 40 | 13 | 0.33× | 2 | MEDIUM |
-| `ra2_soviets_siegechopper` | aircraft | hp | 55,000 | 168,485 | 3.06× | 2 | MEDIUM |
-| `ra1_soviets_grenadier` | infantry | hp | 9,000 | 27,430 | 3.05× | 6 | HIGH |
-| `horten_bomber.nax` | aircraft | hp | 150,000 | 49,360 | 0.33× | 1 | LOW |
-| `ra1_badger_bomber` | aircraft | hp | 150,000 | 49,360 | 0.33× | 1 | LOW |
-| `ts_nod_mobilestealthgenerator` | vehicle | hp | 20,000 | 60,666 | 3.03× | 4 | HIGH |
-| `ts_nod_subterraneanapc` | vehicle | hp | 17,500 | 52,993 | 3.03× | 3 | HIGH |
+| `terran_marauder` | infantry | hp | 90,000 | 29,212 | 0.32× | 2 | MEDIUM |
+| `cabal_artilleryspider` | vehicle | turn_speed | 28 | 9 | 0.33× | 6 | HIGH |
+| `schwarzermond_engineeringarmor` | infantry | hp | 50,000 | 16,329 | 0.33× | 9 | HIGH |
 | `cabal_mantis` | vehicle | turn_speed | 48 | 16 | 0.33× | 1 | LOW |
-| `terran_marauder` | infantry | hp | 90,000 | 29,956 | 0.33× | 2 | MEDIUM |
-| `latinsyndicate_missiletruck` | vehicle | hp | 30,000 | 89,581 | 2.99× | 1 | LOW |
-| `ra2_soviets_apocalypsetank` | vehicle | hp | 350,000 | 118,607 | 0.34× | 3 | HIGH |
-| `ra2_soviets_ironcurtain` | defense | hp | 1,000,000 | 339,020 | 0.34× | 2 | MEDIUM |
-| `ra1_soviets_ironcurtain` | defense | hp | 1,000,000 | 339,020 | 0.34× | 2 | MEDIUM |
-| `td_nod_artillery` | vehicle | hp | 17,500 | 51,471 | 2.94× | 6 | HIGH |
-| `cabal_artilleryspider` | vehicle | turn_speed | 28 | 10 | 0.34× | 6 | HIGH |
-| `ra1_soviets_missilesilo` | defense | hp | 1,000,000 | 342,978 | 0.34× | 2 | MEDIUM |
-| `terran_missilesilo` | defense | hp | 1,000,000 | 342,978 | 0.34× | 2 | MEDIUM |
+| `ra2_soviets_terrordrone` | vehicle | hp | 10,000 | 30,119 | 3.01× | 2 | MEDIUM |
+| `trooper` | infantry | hp | 12,000 | 36,065 | 3.01× | 2 | MEDIUM |
+| `tkm_battlebus` | vehicle | turn_ratio | 2 | 8 | 3.00× | 2 | MEDIUM |
+| `cabal_manticore` | vehicle | turn_ratio | 2 | 8 | 3.00× | 1 | LOW |
+| `ts_gdi_falconenforcer` | infantry | speed | 59 | 177 | 3.00× | 1 | LOW |
+| `cabal_beholder` | vehicle | hp | 125,000 | 41,935 | 0.34× | 1 | LOW |
+| `ra2_allies_attackdog` | infantry | hp | 5,000 | 14,877 | 2.98× | 4 | HIGH |
+| `ra2_soviets_attackdog` | infantry | hp | 5,000 | 14,877 | 2.98× | 4 | HIGH |
+| `ra1_soviets_attackdog` | infantry | hp | 5,000 | 14,877 | 2.98× | 4 | HIGH |
+| `zerg_devourer` | aircraft | hp | 250,000 | 741,163 | 2.96× | 1 | LOW |
+| `ts_nod_laserturret` | defense | hp | 60,000 | 176,537 | 2.94× | 4 | HIGH |
+| `ra2_allies_rocketeer` | infantry | turn_ratio | 5 | 2 | 0.34× | 3 | HIGH |
+| `ts_nod_subterraneanapc` | vehicle | hp | 17,500 | 51,114 | 2.92× | 3 | HIGH |
+| `yuri_virus` | infantry | hp | 12,000 | 34,970 | 2.91× | 2 | MEDIUM |
+| `ra2_allies_chronominer` | vehicle | hp | 100,000 | 289,496 | 2.89× | 3 | HIGH |
+| `zerg_guardian` | aircraft | hp | 150,000 | 51,990 | 0.35× | 1 | LOW |
+| `latinsyndicate_missiletruck` | vehicle | turn_speed | 30 | 10 | 0.35× | 1 | LOW |
+| `terran_goliath` | vehicle | hp | 125,000 | 43,419 | 0.35× | 1 | LOW |
+| `ordos_banshee` | aircraft | turn_speed | 33 | 12 | 0.35× | 2 | MEDIUM |
+| `zerg_queen` | aircraft | hp | 125,000 | 43,611 | 0.35× | 1 | LOW |
+| `naxis_engineeringtruck` | vehicle | hp | 50,000 | 17,470 | 0.35× | 9 | HIGH |
+| `ra2_soviets_seascorpion` | ship | turn_speed | 48 | 17 | 0.35× | 3 | HIGH |
+| `cabal_radar_cruiser` | ship | turn_speed | 24 | 8 | 0.35× | 3 | HIGH |
+| `ts_nod_attackcycle` | vehicle | turn_ratio | 2 | 5 | 2.84× | 2 | MEDIUM |
+| `asianalliance_viper` | vehicle | hp | 25,000 | 70,325 | 2.81× | 1 | LOW |
+| `ra1_soviets_mortarsoldier` | infantry | hp | 16,000 | 44,912 | 2.81× | 1 | LOW |
+| `ra2_allies_patriotmissilesystem` | defense | hp | 90,000 | 252,180 | 2.80× | 3 | HIGH |
+| `latinsyndicate_demolitiontruck` | vehicle | turn_speed | 40 | 14 | 0.36× | 4 | HIGH |
+| `ts_nod_mobilestealthgenerator` | vehicle | hp | 20,000 | 55,834 | 2.79× | 4 | HIGH |
+| `td_gdi_grenadier` | infantry | hp | 8,000 | 22,331 | 2.79× | 6 | HIGH |
+| `schwarzermond_corruptorpiercer` | aircraft | turn_ratio | 15 | 5 | 0.36× | 1 | LOW |
+| `ra2_allies_tankdestroyer` | vehicle | turn_speed | 26 | 9 | 0.36× | 3 | HIGH |
+| `ra2_soviets_battlebunker` | defense | hp | 80,000 | 221,233 | 2.77× | 1 | LOW |
+| `latinsyndicate_missiletruck` | vehicle | turn_ratio | 2 | 7 | 2.76× | 1 | LOW |
+| `asianalliance_alligator` | infantry | speed | 108 | 40 | 0.37× | 1 | LOW |
+| `forgotten_zombiemutant` | infantry | speed | 100 | 37 | 0.37× | 1 | LOW |
+| `ra2_allies_chronosphere` | defense | hp | 1,000,000 | 369,534 | 0.37× | 1 | LOW |
+| `ra1_allies_chronosphere` | defense | hp | 1,000,000 | 369,534 | 0.37× | 1 | LOW |
+| `ra2_soviets_warminer` | vehicle | hp | 125,000 | 334,940 | 2.68× | 2 | MEDIUM |
+| `wc2_humans_wall` | defense | hp | 25,000 | 66,497 | 2.66× | 1 | LOW |
+| `wc2_orcs_wall` | defense | hp | 25,000 | 66,497 | 2.66× | 1 | LOW |
+| `td_nod_venom` | aircraft | turn_speed | 40 | 15 | 0.38× | 1 | LOW |
+| `zerg_devourer` | aircraft | speed | 90 | 34 | 0.38× | 1 | LOW |
+| `ts_nod_stealthtank` | vehicle | turn_speed | 40 | 15 | 0.39× | 6 | HIGH |
+| `ra1_allies_medic` | infantry | hp | 10,000 | 25,806 | 2.58× | 6 | HIGH |
+| `ts_gdi_medic` | infantry | hp | 10,000 | 25,806 | 2.58× | 6 | HIGH |
+| `cabal_avatar` | vehicle | speed | 25 | 64 | 2.57× | 2 | MEDIUM |
+| `futuretech_enforcer` | infantry | hp | 30,000 | 77,136 | 2.57× | 1 | LOW |
+| `ra1_soviets_teslatank` | vehicle | hp | 40,000 | 102,746 | 2.57× | 4 | HIGH |
+| `ra1_allies_longbow` | aircraft | turn_speed | 30 | 12 | 0.39× | 2 | MEDIUM |
 
 ## Not in this layer, by scoping
 

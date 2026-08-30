@@ -89,13 +89,39 @@ SIG_JSON = ROOT / "docs" / "balance" / "derived" / "reference_signatures.json"
 # electing RV as the lineage's voice adopts RV's rebalance for those units rather than vanilla's
 # consensus. That is a defensible choice (RV is the live, resolvable OpenRA codebase); it is just
 # not a no-op, and this note exists so nobody later reads it as one.
-LINEAGE = {
-    "RA2 vanilla": "Romanov's Vengeance",
-    "Yuri's Revenge": "Romanov's Vengeance",
-    "RA2/YR": "Romanov's Vengeance",
-    "OpenRA RA2 official": "Romanov's Vengeance",
-    "Yuri's Revenge on OpenRA": "Romanov's Vengeance",
-}
+# ⛔ A LINEAGE COLLAPSE **SELECTS** A REPRESENTATIVE. IT DOES NOT RELABEL AND MERGE.
+# The first implementation renamed every RA2-family row to "Romanov's Vengeance", which quietly
+# poured three rosters at INCOMPATIBLE SCALES into one distribution: RV runs 100..400,000 HP while
+# OpenRA RA2 and YR-on-OpenRA run 25..2,000. The merged population's median/min came out at 100 —
+# not because RV has a 100 HP prop (it has a Terror Drone, a perfectly legitimate unit) but
+# because the low tail was full of Westwood-scale rows sitting under an OpenRA-scale ceiling.
+# That is the exact failure this module's own header forbids: raw values from two sources must
+# never share a statistic. Members are now DROPPED; only the representative's roster survives.
+LINEAGE_REPRESENTATIVE = "Romanov's Vengeance"
+LINEAGE_MEMBERS = {"RA2 vanilla", "Yuri's Revenge", "RA2/YR",
+                   "OpenRA RA2 official", "Yuri's Revenge on OpenRA"}
+
+# ── THE POPULATION RULE (maintainer, 2026-08-30) ─────────────────────────────────────────────
+# "Only use buildable units and no epic units with build limits! Only unlimited units / defenses
+#  that can be built should be considered. Also Cameo's heroes and epic units must be excluded
+#  since they will be balanced separately."
+#
+# So a row enters a distribution only if it is BUILDABLE and UNLIMITED. Three exclusions, and each
+# has a distinct reason:
+#
+#   not buildable      — it never reaches a player's hands, so it is not part of the balance the
+#                        roster expresses (husks, map props, campaign-only actors).
+#   BuildLimit present — a one-off. `check_band.py:142` already defines Cameo's epic/hero
+#                        predicate as exactly `bool(u.get("build_limit"))`, and that predicate is
+#                        reused verbatim rather than restated.
+#   epic_vehicle class — belt and braces on the Cameo side: an epic that somehow carries no
+#                        build_limit is still an epic, and epics are balanced separately.
+#
+# ⚠ This is not merely a filter, it is a CORRECTION. Cameo's vehicle ceiling was a 3,000,000 HP
+# epic, which made its max/median 35x against peers' 2.8-16x and inflated every projection through
+# the max coordinate. Removing one-offs removes that distortion at the source rather than damping
+# it downstream — which is why the percentile guard below is now a safety net rather than a crutch.
+EXCLUDE_CLASSES = {"epic_vehicle"}
 
 CHASSIS_STATS = ("hp", "speed", "turn_speed", "turn_ratio")
 POPULATIONS = ("infantry", "vehicle", "aircraft", "ship", "defense")
@@ -176,6 +202,7 @@ def project(coord, agg):
 def peer_rows():
     """Doc 5 rows with type, raw HP/speed/turn — the chassis corpus, after lineage de-dup."""
     rows, source, header = [], None, None
+    dropped_lineage = peer_rows.dropped = set()
     text = (ROOT / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md").read_text(encoding="utf-8")
     for line in text.splitlines():
         if line.startswith("## "):
@@ -200,7 +227,13 @@ def peer_rows():
             except ValueError:
                 return None
         hp, spd, turn = num("hp"), num("speed"), num("turn")
-        rows.append({"source": LINEAGE.get(source, source), "raw_source": source,
+        limit = num("limit")
+        if limit:                     # a mod's one-off epic/hero — see POPULATION RULE below
+            continue
+        if source in LINEAGE_MEMBERS:
+            dropped_lineage.add(source)
+            continue
+        rows.append({"source": source, "raw_source": source,
                      "id": d.get("id", ""), "name": d.get("unit", ""),
                      "type": d.get("type", "other"),
                      "turreted": (d.get("turret", "").lower() == "y"),
@@ -225,6 +258,12 @@ def cameo_rows():
                 continue
             for name, rec in units.items():
                 if not isinstance(rec, dict):
+                    continue
+                if rec.get("buildable") is not True:
+                    continue
+                if rec.get("build_limit") is not None:      # check_band.py's epic/hero predicate
+                    continue
+                if ((rec.get("design") or {}).get("class_anchor")) in EXCLUDE_CLASSES:
                     continue
                 def val(field):
                     slot = rec.get(field)
@@ -281,7 +320,7 @@ def main():
     dist = build_distributions(peers)
     cameo_dist = build_distributions(cameo)["Cameo"]
 
-    dropped = sorted({r["raw_source"] for r in peers if r["raw_source"] != r["source"]})
+    dropped = sorted(peer_rows.dropped)
     print(f"peer rows           : {len(peers)}   sources after lineage de-dup: {len(dist)}")
     if dropped:
         print(f"lineage-collapsed   : {', '.join(dropped)} -> Romanov's Vengeance")
