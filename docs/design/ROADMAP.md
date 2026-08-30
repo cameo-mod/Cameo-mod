@@ -46,6 +46,20 @@ an open checkbox was moved.
 
 ---
 
+## ▶ W24 BATCH 01 IS PREPPED AND WAITING FOR A BOOT MACHINE (2026-08-30)
+
+**[`docs/balance/w24_batch_01_cannonhe.md`](../balance/w24_batch_01_cannonhe.md)** — 4 weapons
+(`TigerCannon`, `HammerTankCannon`, `KotinCannon`, `Type97Cannon`) collapsing
+`^Warhead_CannonHE_Heavy` + `^Warhead_CannonHE_Medium` into one main, per-shot totals preserved
+(16000 / 12000 / 12000 / 12000). Exact diff, the `Versus` and `Spread` evidence for the sign-off,
+the verification order, and the scoped `git add` are all in that file. Chosen as batch 01 because
+both mains are already `^Warhead_*` families (a collapse, not a conversion), the two profiles are
+the CLOSEST pair in the whole 472-weapon scope, and none of the four carries a percentage twin.
+
+⚠ It needs your sign-off, not just a boot: collapsing to Heavy widens `Spread` 300→400 on half
+the shot and moves the profile (biggest gaps `Spaceship 65↔41`, `Fighter 76↔98`). The next two
+clusters are surveyed in the same file and diverge much harder — do this one first.
+
 ## ⛔ P1 — BOOT-GATED WORK OWED FROM THE 2026-08-30 BALANCE SESSION
 
 Queued per `AGENT_WORKSPACE.md` git rule 3 (record work in ROADMAP before committing).
