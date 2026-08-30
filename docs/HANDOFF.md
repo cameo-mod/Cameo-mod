@@ -876,6 +876,49 @@ VEHICLE self-heal (`^VehicleBuffs`, Delay 1 / DamageCooldown 10) to the INFANTRY
 `ChangesHealth@SelfHealing.Step = HP/1000`. Boot-gated yaml, not done. The grid change without the
 self-heal change is half the ruling.
 
+### 3.0v — 🚦 PRICING IS ARMED (2026-08-30). 8 signed, 351 ledger targets, 89 yaml writes PENDING
+
+**Maintainer order, verbatim: *"sign the 8 and apply balance"*.** `class_anchors_signed_off` is
+**8 of 27** — the first non-zero value this project has had. Signed: `closecombat` 0.1, `mortar`
+0.1, `archer` 0.2, `grenadier` 0.2, `heavy_sniper` 0.2, `flying_infantry` 0.5, `missile_vehicle`
+0.6, `special_forces` 0.9.
+
+⚠ **They are the FITTED anchors — option B of §3.0t.** The anchor actors were never restatted to
+`spec`, so this freezes the CURRENT roster as each class's zero point and treats the ★ LOCKED
+2026-08-01 table as a later re-anchoring. Recorded on every signed entry's `fit_comment`.
+
+**The thing nobody had noticed: signing an anchor does nothing on its own.** `apply_balance` reads
+**only the ledger** — it skips `class_anchors.json` explicitly — so the first dry run after signing
+still said *"0 values would change"*. The proposals are markdown and had never been written into
+the ledger. That is step 2 of the sanctioned loop, and it had no working tool.
+
+    signed anchors ──✗──> apply_balance          (there is no edge here)
+    proposals ──> LEDGER ──> apply_balance ──> yaml ──> boot gate
+
+After patching the ledger: **351 values** across the 8 signed classes, and `apply_balance` reports
+**89 real yaml changes** (e.g. `forgotten_mutantmortarman/TSInfantryMortar.Range` 10830 → 10000,
+`ts_nod_attackcycle.hp` 20000 → 15000, `wc2_humans_mortarteam.speed` 80 → 60).
+
+**⛔ THE ONE COMMAND LEFT — needs a machine that can boot:**
+
+```
+python tools/balance/apply_balance.py --confirm     # writes the 89 values
+python tools/balance/extract_stats.py               # re-extract, MUST be after the write
+bash tools/audit/run_all.sh                         # audit_balance_drift back to clean
+launch-game.cmd                                     # BOOT GATE — main menu, no new exception-*.log
+```
+
+⚠ **Do NOT run `extract_stats.py` before the yaml write.** It rebuilds the ledger FROM yaml, so
+running it now would overwrite all 351 staged targets with the values they are meant to replace —
+silently, with a clean exit.
+
+⚠ **`audit_balance_drift` reads RED until the write lands.** That is the correct state for "targets
+staged, not applied", not a defect. It is exactly what the audit exists to say.
+
+⚠ **Why it is not already applied here:** `apply_balance --confirm` was refused by this
+environment's permission classifier, so **no yaml was written** (`git status` over `mods/` is 0).
+That step is also the only one needing the boot gate, which this machine cannot run either.
+
 ### 3.0u — 📊 ALL 27 CLASS PROPOSALS GENERATED (2026-08-30) — the whole sign-off queue in one table
 
 `propose_class_rebalance.py` run across **every** class, not one at a time. 27 of 27 now produce a
