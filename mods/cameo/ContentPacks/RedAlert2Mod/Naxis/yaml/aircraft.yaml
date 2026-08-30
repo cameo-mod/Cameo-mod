@@ -48,6 +48,7 @@ naxis_interceptor:
 		Actor: naxis_interceptor_husk
 	WithMoveAnimation:
 		MoveSequence: move
+		Condition: !Aircraft-Turning
 	AttackAircraft:
 		FacingTolerance: 40
 		PersistentTargeting: false
@@ -79,9 +80,6 @@ naxis_interceptor:
 	WithMoveAnimation@Turn-R:
 		MoveSequence: move-r
 		RequiresCondition: Aircraft-Turning && Aircraft-Vertical
-	WithMoveAnimation:
-		MoveSequence: move
-		Condition: !Aircraft-Turning
 	Contrail:
 		Offset: -500,0,250
 		TrailLength: 15

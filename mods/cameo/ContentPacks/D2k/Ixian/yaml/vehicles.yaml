@@ -1162,8 +1162,6 @@ ixian_ixcombatsiege:
 	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 		Modifier: 150
 		RequiresCondition: ixian_upgrade_reinforcedbarrel
-	ActorStatValues:
-		Upgrades: ixian_upgrade_reinforcedbarrel
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -1588,8 +1586,6 @@ duelist_tank.ixian:
 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50
-	ActorStatValues:
-		Upgrades: ixian_upgrade_reinforcedbarrel
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:

@@ -112,7 +112,9 @@ PRESERVED_HASHES = {
     "IncendiaryYakChainGun": "41c173cf4287292c5f8b45970053de5c609067d9a92e5dda586772cdc2e2d870",
     "NapalmA10Carrier": "681759d81958c17756b909aada1c0d24669ad2a12560795ad018aba701183f7e",
     "RA2CosmonautLaser": "95be178ac49664713f083712f15c5e7110c7e5b26856f3a04c5d580317f8f557",
-    "TSAssaultCannonSonic": "ce605c56ec936776472769de6bbb00a219f46fbdcce9656170da13defc74c1a0",
+    # Post-consolidation correction: Wolverine keeps its advertised weak AA
+    # role after Sonic Weaponry replaces the base armament.
+    "TSAssaultCannonSonic": "845a4a6c2be68852fed127665fe7537cbb26bab0c9886649bfd3c14945e88b4f",
     "TSLaserHarpyAOEClaw": "91796c834129cda6876c6b969432b236b98b70ef3815a37f4d2446e6225f33a0",
     "TSLaserHarpyClaw": "eeb4e892b06d1edc15620ad691e45b7e7afe45286088e83f81c9baa0a30257e1",
     "TSLaserHarpyMultiClaw": "31023bbe2fc4ead557dfb71e272e73293046514efa4470760dc0a44d5dbf5538",

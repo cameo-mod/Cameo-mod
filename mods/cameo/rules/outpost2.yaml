@@ -1133,7 +1133,6 @@ EDEN_SPACEPORT:
 	ProvidesPrerequisite:
 		Prerequisite: EDEN_SPACEPORT
 	Buildable:
-		-BuildLimit:
 		BuildPaletteOrder: 130
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED, !eden_spaceport_swlimit
@@ -2310,7 +2309,6 @@ PLYMOUTH_SPACEPORT:
 	ProvidesPrerequisite:
 		Prerequisite: PLYMOUTH_SPACEPORT
 	Buildable:
-		-BuildLimit:
 		BuildPaletteOrder: 130
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED, !plymouth_spaceport_swlimit

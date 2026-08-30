@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Reject reachable Bullet projectiles that lost range-scaled shell speed.
+"""Reject reachable Bullet projectiles that fall back to runtime Speed 17.
 
 ``ProjectileSpeedPercentage`` is implemented by ``ScaledBulletInfo``, not ordinary
 ``BulletInfo``.  If mixed inheritance changes the resolved type back to ``Bullet``
 and no explicit ``Speed`` survives, the projectile silently uses Bullet's default
 speed of 17 while carrying inert scaling metadata.
+
+The InstantTracer migration exposed the same fallback on ordinary Bullet overrides:
+their old projectile templates supplied Speed 2000/4000/10000, but the replacement
+templates supply ``FakeBulletSpeed`` instead.  A child that deliberately keeps the
+real Bullet type must therefore retain an explicit Speed.
 """
 from __future__ import annotations
 
@@ -40,15 +45,39 @@ def violations(rules: Ruleset) -> list[str]:
     return out
 
 
+def default_speed_violations(rules: Ruleset) -> list[str]:
+    concrete = {
+        name for name in rules.weapons
+        if not name.startswith("^") and rules.resolve_weapon(name) is not None
+    }
+    _direct, reachable = weapon_reference_sets(rules, concrete)
+    out = []
+    for name in sorted(reachable):
+        resolved = rules.resolve_weapon(name)
+        projectile = resolved.child("Projectile") if resolved is not None else None
+        if (projectile is not None
+                and str(projectile.value).strip() == "Bullet"
+                and projectile.get("Speed") is None):
+            out.append(name)
+    return out
+
+
 def main() -> int:
-    rows = violations(Ruleset(ROOT))
-    if rows:
-        print("FAIL reachable Bullet projectiles carry active-looking speed scaling "
-              "but fall back to Speed 17:")
-        for name in rows:
-            print(f"- {name}")
+    rules = Ruleset(ROOT)
+    rows = violations(rules)
+    defaults = default_speed_violations(rules)
+    if rows or defaults:
+        if defaults:
+            print("FAIL reachable Bullet projectiles fall back to runtime Speed 17:")
+            for name in defaults:
+                print(f"- {name}")
+        if rows:
+            print("FAIL reachable Bullet projectiles carry active-looking speed scaling "
+                  "that ordinary Bullet ignores:")
+            for name in rows:
+                print(f"- {name}")
         return 1
-    print("PASS no reachable Bullet projectile loses range-scaled speed")
+    print("PASS no reachable Bullet projectile falls back to runtime Speed 17")
     return 0
 
 

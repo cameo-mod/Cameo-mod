@@ -130,7 +130,6 @@ yuri_psychicdominator:
 	Tooltip:
 		Name: Psychic Dominator
 	Buildable:
-		-BuildLimit:
 		Prerequisites: ~yuri_constructionyard, yuri_battlelab, !psydom, ~techlevel.superweapons
 		Description: actor_yappet.description
 	Building:
@@ -196,7 +195,6 @@ yuri_geneticmutator:
 	Tooltip:
 		Name: Genetic Mutator
 	Buildable:
-		-BuildLimit:
 		Prerequisites: ~yuri_constructionyard, yuri_battlelab, ~techlevel.superweapons, !yuri_geneticmutator_swlimit
 		Description: actor_yagntc.description
 	Building:
@@ -209,6 +207,7 @@ yuri_geneticmutator:
 		RequiresCondition: !build-incomplete
 	DetonateWeaponPower@Mutate:
 		OrderName: GeneticMutator
+		AllowMultiple: true
 		PauseOnCondition: disabled
 			1: ~techlevel.superweapons
 		Icons:
@@ -241,7 +240,6 @@ yuri_geneticmutator:
 	SupportPowerChargeBar:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: yuri_geneticmutator_swlimit
-		RequiresPrerequisites: global-swlimit
 
 yuri_tankbunker:
 	Inherits@2: ^RA2Defense

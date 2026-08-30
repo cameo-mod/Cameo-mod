@@ -40,6 +40,9 @@ RA2PatriotThunderboltMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
+	Warhead@MissileAA_Heavy:
+		ValidTargets: Air
+		Damage: 10000
 
 HarrierMissiles:
 	Inherits: ^LightFlameWeapon
@@ -727,6 +730,7 @@ RA2AWP_elite:
 	Inherits: RA2AWP
 	Range: 12345
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: FF0000FF
 	Warhead@Sniper_Light:
 		Damage: 88000
@@ -745,6 +749,7 @@ RA2MP5:
 	Burst: 4
 	BurstDelays: 3
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: 77777777
 		ContrailEndColor: 33333333
 		ContrailStartWidth: 33
@@ -803,6 +808,7 @@ ra2roktgun:
 	-Warhead@LightMissile:
 	-Warhead@SmallArms:
 	Warhead@Bullet_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		PercentageScale: 0
+		ValidTargets: Ground, Air, Water
+		Damage: 8000
+		PercentageScale: 2488
+	-Warhead@Bullet_Medium:

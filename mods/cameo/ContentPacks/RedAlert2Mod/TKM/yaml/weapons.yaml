@@ -205,10 +205,16 @@ tkmawp:
 	Report: isniatta.wav
 	Warhead@Sniper_Light:
 		Damage: 44000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 22
+		Spread: 1
+		Falloff: 100, 0
 tkmsmg:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -219,6 +225,7 @@ tkmsmg:
 	Burst: 5
 	BurstDelays: 2
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: 77777777
 		ContrailEndColor: 33333333
 		ContrailStartWidth: 33
@@ -738,7 +745,7 @@ tkmkatyushalalauncherrocketscryo:
 tkmkatyushalalauncherrocketsfire:
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
-	Inherits@3: ^Effect_Flame_Light
+	Inherits@flameeffect: ^Effect_Flame_Light
 	Inherits@3: tkmkatyushalalauncherrockets
 	Report: vintatta.wav
 	Range: 14000
@@ -811,7 +818,8 @@ SandmarineTuskTwin:
 	ValidTargets: Ground, Water
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
@@ -836,11 +844,12 @@ SandmarineTuskTwin:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
 		Damage: 4000
+	-Warhead@FlakWeapon:
 SandmarineTuskCryo:
 	Inherits: SandmarineTusk
 	Inherits@2: ^CryoMissileProjectile
 SandmarineTuskFire:
-	Inherits: ^Warhead_MissileAP_Light
+	Inherits@missileap: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Missile_Light
 	Inherits@4: ^Effect_Flame_Light
@@ -891,7 +900,7 @@ ViperMissilesCryo:
 	Inherits: ViperMissiles
 	Inherits@2: ^CryoMissileProjectile
 ViperMissilesFire:
-	Inherits: ^Warhead_MissileAP_Light
+	Inherits@missileap: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Missile_Light
 	Inherits@4: ^Effect_Flame_Light
@@ -977,6 +986,11 @@ VonSniper:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
+	Warhead@SniperChaingun:
+		Damage: 18000
+		PercentageScale: 0
+	-Warhead@SniperFlak:
+	-Warhead@SniperMediumMissile:
 VonSniperAP:
 	Inherits: VonSniper
 	ReloadDelay: 50
@@ -1006,7 +1020,8 @@ VonSniperAP:
 	Warhead@Bullet_Medium: AreaDamage
 		Spread: 1
 		Falloff: 100, 0
-		Damage: 16000
+		Damage: 32000
+		PercentageScale: 0
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Spread: 1
 		Falloff: 100, 0
@@ -1014,6 +1029,12 @@ VonSniperAP:
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
+	Warhead@SniperChaingun:
+		Damage: 38000
+		PercentageScale: 0
+	-Warhead@SniperFlak:
+	-Warhead@SniperMediumMissile:
+	-Warhead@Bullet_Light:
 VonSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
@@ -1044,10 +1065,17 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@SniperFlak:
+	Warhead@SniperFlak: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 32000
+		FriendlyFireDamage: 100
+		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PercentageScale: 0
+	Warhead@SniperChaingun:
+		Damage: 6000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
@@ -1076,8 +1104,9 @@ VonSniperLockdown:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 32000
+		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PercentageScale: 0
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
@@ -1088,6 +1117,8 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@SniperMediumMissile:
+	-Warhead@Bullet_Light:
 
 tkmm16ap:
 	Inherits: ^RA2Chaingun
@@ -1145,10 +1176,16 @@ VanSniper:
 	Report: isniatta.wav
 	Warhead@Sniper_Light:
 		Damage: 80000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 80000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 40
+		Spread: 1
+		Falloff: 100, 0
 
 tkmt72cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium

@@ -7,7 +7,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "balance"))
 
-from audit_scaled_bullet_overrides import violations
+from audit_scaled_bullet_overrides import default_speed_violations, violations
 from effective_damage import parse_wdist
 from miniyaml import Ruleset
 from survey_weapon_structure import weapon_reference_sets
@@ -29,6 +29,36 @@ EXPECTED_SPEEDS = {
     "SteelVulcanResonanceBounce2": 222,
 }
 
+EXPECTED_ORDINARY_BULLET_SPEEDS = {
+    "ASDFGun2": 4000,
+    "BlackWidowPistols": 10000,
+    "BlackWidowPistols_elite": 10000,
+    "Colt45": 10000,
+    "Colt45Cryo": 10000,
+    "CryoLightSniper": 10000,
+    "Future_Wheel_MG_elite": 4000,
+    "NaxiRifleCons_elite": 2000,
+    "RA2AWP_elite": 10000,
+    "RA2DoublePistols": 10000,
+    "RA2DoublePistolsIFV": 10000,
+    "RA2DoublePistols_elite": 10000,
+    "RA2MP5": 10000,
+    "RA2MP5_elite": 10000,
+    "SkyHawkChainGun": 4000,
+    "TSHarpyMultiClaw": 4000,
+    "TSJumpCannon": 4000,
+    "TSShadowTeamPistols": 10000,
+    "asianalliance_fanatic_shotgun": 4000,
+    "asianalliance_fanatic_shotgun_elite": 4000,
+    "asianalliance_fanatic_shotgun_upgrade": 4000,
+    "naxis_sssoldier_smg": 4000,
+    "naxis_sssoldier_smg_elite": 4000,
+    "ra1_allies_rifleinfantry_carbine_cryo": 2000,
+    "td_gdi_commando_sniper_elite": 10000,
+    "td_gdi_shotgunner_shotgun": 4000,
+    "tkmsmg": 10000,
+}
+
 
 class ScaledBulletOverrideTests(unittest.TestCase):
     @classmethod
@@ -37,6 +67,13 @@ class ScaledBulletOverrideTests(unittest.TestCase):
 
     def test_reachable_regression_set_is_empty(self):
         self.assertEqual([], violations(self.rules))
+        self.assertEqual([], default_speed_violations(self.rules))
+
+    def test_real_bullet_overrides_keep_their_pre_instant_tracer_speeds(self):
+        for name, expected in EXPECTED_ORDINARY_BULLET_SPEEDS.items():
+            projectile = self.rules.resolve_weapon(name).child("Projectile")
+            self.assertEqual("Bullet", projectile.value, name)
+            self.assertEqual(str(expected), projectile.get("Speed"), name)
 
     def test_repaired_closures_use_scaled_bullet_at_expected_speed(self):
         for name, expected in EXPECTED_SPEEDS.items():

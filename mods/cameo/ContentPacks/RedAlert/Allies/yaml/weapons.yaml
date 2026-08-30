@@ -6,6 +6,7 @@ CryoLightSniper:
 	ReloadDelay: 100
 	Range: 9153
 	Projectile: Bullet
+		Speed: 10000
 		TrailImage: blue_smokey
 		TrailInterval: 0
 		ContrailStartColor: 77CCFF
@@ -15,6 +16,8 @@ CryoLightSniper:
 		ContrailLength: 10
 	Warhead@BulletCryo_Light:
 		Damage: 30000
+		Spread: 1
+		Falloff: 100, 0
 
 M60mg:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -759,6 +762,7 @@ Colt45:
 	Burst: 2
 	BurstDelays: 0
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: 77777777
 		ContrailEndColor: 33333333
 		ContrailStartWidth: 33
@@ -782,6 +786,7 @@ Colt45Cryo:
 	Burst: 2
 	BurstDelays: 0
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: 77777777
 		ContrailEndColor: 33333333
 		ContrailStartWidth: 33

@@ -2623,10 +2623,10 @@ RA2CRM60H:
 	-Warhead@SniperWeapon:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Spread: 1
-		Damage: 2000
-		Falloff: 100, 0
-		PercentageScale: 0
+		Damage: 6000
+		PercentageScale: 6650
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
 
 RA2FLAKAG:
 	Inherits: ^RA2FlakWeapon
@@ -2686,6 +2686,7 @@ RA2DoublePistols:
 	BurstDelays: 3
 	Range: 8000
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: 77777777
 		ContrailEndColor: 33333333
 		ContrailStartWidth: 33
@@ -2718,10 +2719,16 @@ RA2AWP:
 	Report: isniatta.wav
 	Warhead@Sniper_Light:
 		Damage: 44000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 22
+		Spread: 1
+		Falloff: 100, 0
 
 RA2GattlingMG1:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat

@@ -959,8 +959,9 @@ RaiderGuns_upgrade:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 9984
+	-Warhead@CannonHE_Heavy:
 HMG_turret:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -1012,8 +1013,9 @@ HMG_turret_upgrade:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 9984
+	-Warhead@CannonHE_Heavy:
 HMG_Duelist:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^LightMissile

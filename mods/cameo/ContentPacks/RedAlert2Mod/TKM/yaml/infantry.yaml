@@ -439,9 +439,6 @@ tkm_rocketeer:
 	DamageMultiplier:
 		Modifier: 75
 		RequiresCondition: tkm_upgrade_natoarsenalupgrade
-	Armament@GARRISONED:
-		Name: garrisoned
-		Weapon: Rockets
 	GrantConditionOnPrerequisite@cloakon:
 		Condition: tkm_upgrade_berezkaarsenalupgrade
 		Prerequisites: tkm_upgrade_berezkaarsenalupgrade
@@ -544,7 +541,7 @@ tkm_engineer:
 		RequiresCondition: tkm_upgrade_titanarsenalupgrade
 	RenderRangeCircleCA:
 		Armaments: primary
-		RangeCircleType: heal
+		RangeCircleType: repair
 		RequiresCondition: tkm_upgrade_titanarsenalupgrade
 	Armament@REPAIR:
 		Weapon: Repair
@@ -558,10 +555,6 @@ tkm_engineer:
 		Weapon: Repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-		RequiresCondition: tkm_upgrade_titanarsenalupgrade
-	RenderRangeCircleCA:
-		Armaments: primary
-		RangeCircleType: repair
 		RequiresCondition: tkm_upgrade_titanarsenalupgrade
 	AttackFrontal:
 		Voice: Action

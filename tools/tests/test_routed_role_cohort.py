@@ -62,12 +62,12 @@ class RoutedRoleCohortTests(unittest.TestCase):
         for name, (_total, _scale) in cohort.PINS.items():
             self.assertNotIn(name, self.report["changed"])
             mains = main_warheads(self.rules.resolve_weapon(name))
-            self.assertEqual(len(cohort.OLD_MAINS[name]), len(mains), name)
+            self.assertEqual(cohort.PINNED_AFTER_MAINS[name], set(mains), name)
             self.assertTrue(all(tag.startswith("PreservedFlat_") for tag in mains), name)
 
     def test_ratchets_match_live_reduction(self):
-        self.assertEqual(693, SPLIT_BASELINE)
-        self.assertEqual(379, BROADCAST_BASELINE)
+        self.assertEqual(667, SPLIT_BASELINE)
+        self.assertEqual(363, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":

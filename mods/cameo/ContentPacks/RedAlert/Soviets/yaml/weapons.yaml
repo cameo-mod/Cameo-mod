@@ -968,12 +968,12 @@ SCUDNUKEThermobaric:
 		ContrailEndColor: 33221100
 
 FLAK-23-AG:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	ValidTargets: Ground, Water
-	ReloadDelay: 10
 	Burst: 2
 	ReloadDelay: 5
 	Range: 5412
@@ -984,6 +984,12 @@ FLAK-23-AG:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 FLAK-23-AA:
 	Inherits: FLAK-23-AG
 	Range: 8118
@@ -992,6 +998,12 @@ FLAK-23-AA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 4000
+		PercentageScale: 9975
 
 BTRMachineGun:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
@@ -1493,7 +1505,8 @@ KamovTeslaArcFragment1:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 16000
+		PercentageScale: 0
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 4000
@@ -1507,6 +1520,7 @@ KamovTeslaArcFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@LightMissile:
 
 KamovTeslaArcFragment2:
 	Inherits: KamovTeslaArcFragment1
@@ -1516,7 +1530,8 @@ KamovTeslaArcFragment2:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
@@ -1525,6 +1540,7 @@ KamovTeslaArcFragment2:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 	-Warhead@TeslaArc:
+	-Warhead@LightMissile:
 
 YakChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -1624,7 +1640,8 @@ YakTeslaArcFragment1:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
@@ -1638,6 +1655,7 @@ YakTeslaArcFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@LightMissile:
 
 YakTeslaArcFragment2:
 	Inherits: YakTeslaArcFragment1
@@ -1647,7 +1665,8 @@ YakTeslaArcFragment2:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 4000
+		PercentageScale: 0
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 1000
@@ -1656,6 +1675,7 @@ YakTeslaArcFragment2:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
 	-Warhead@TeslaArc:
+	-Warhead@LightMissile:
 
 YakNapalm:
 	Inherits@collapsewh: ^Warhead_Flame_Heavy
@@ -2266,7 +2286,7 @@ HammerTankCannon:
 HammerTankCannonThermobaric:
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium
-	Inherits@3: ^Projectile_Flame_Medium
+	Inherits@flameprojectile: ^Projectile_Flame_Medium
 	Inherits@4: ^Effect_Flame_Medium
 	Inherits@3: HammerTankCannon
 	Report: tnkfire6.aud
@@ -2384,7 +2404,7 @@ KotinCannon:
 KotinCannonThermobaric:
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium
-	Inherits@3: ^Projectile_Flame_Medium
+	Inherits@flameprojectile: ^Projectile_Flame_Medium
 	Inherits@4: ^Effect_Flame_Medium
 	Inherits@3: KotinCannon
 	Report: tnkfire6.aud

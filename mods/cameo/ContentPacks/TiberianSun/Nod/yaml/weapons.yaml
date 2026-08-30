@@ -336,7 +336,8 @@ TSCommandoShotgun:
 	Warhead@ShotgunGrenadeAlly:
 		Damage: 4000
 	Warhead@ShotgunShrapnelEnemy:
-		Damage: 8000
+		Damage: 16000
+		PercentageScale: 0
 	Warhead@ShotgunShrapnelAlly:
 		Damage: 4000
 	Warhead@ShotgunTankDestroyer:
@@ -345,6 +346,7 @@ TSCommandoShotgun:
 		Damage: 8000
 	Warhead@ShotgunChaingun:
 		Damage: 8000
+	-Warhead@ShotgunGrenadeEnemy:
 
 elitecadregun:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
@@ -428,6 +430,7 @@ TSShadowTeamPistols:
 	BurstDelays: 3
 	Range: 8000
 	Projectile: Bullet
+		Speed: 10000
 		ContrailStartColor: 77777777
 		ContrailEndColor: 33333333
 		ContrailStartWidth: 33
@@ -516,6 +519,7 @@ TSHarpyMultiClaw:
 	BurstDelays: 0
 	TargetActorCenter: true
 	Projectile: Bullet
+		Speed: 4000
 		Inaccuracy: 1024
 	Warhead@Bullet_Medium: AreaDamage
 		Damage: 0
