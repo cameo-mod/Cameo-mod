@@ -23,22 +23,25 @@ work*. `BALANCE_SYNTHESIS.md` §15 specifies it as three documents; §16 proves 
 on the Apocalypse Tank. Document 1 exists. Documents 2 and 3 never got written — §15 ends
 with "Next: run this generation over all units (tooling)". This is that tooling.
 
-THE FOUR RULES THAT MAKE IT NOT-A-MEAN (§15.6)
-----------------------------------------------
-1. **A faithful REMAKE is not an independent vote.** Romanov's Vengeance reproduces vanilla
-   RA2's ratios exactly, so counting it separately DOUBLE-COUNTS vanilla. The vanilla family
-   (RA2 + Yuri's Revenge + RV) is pooled to ONE vote; the independent voices are the
-   rebalances (Mental Omega, CnC Reloaded).
-2. **Normalize each source to its OWN rifle before pooling** — every source runs a different
-   absolute scale (RV's rifle is 12500 HP, Mental Omega's 205, vanilla's 125). Document 1
-   carries the per-source `×rifle` column precisely so this is not re-derived per reader.
-3. **Flag wide-gap outliers.** A source running a deliberately wider infantry-vehicle spread
-   (§15.6.3 cites Combined Arms at 26× rifle against a 6.4× consensus) must not drag the
-   compromise. A vote more than OUTLIER_FACTOR from the median of the votes is reported and
-   excluded from the target, never silently averaged in.
-4. **The compromise is a judgement, not a mean.** The median of the weighted votes is the
-   defensible mechanical stand-in: it survives one bad source, which an arithmetic mean does
-   not, and it never invents a value no source proposed.
+HOW THE AVERAGE IS TAKEN (maintainer override, 2026-08-30)
+--------------------------------------------------------
+This supersedes §15.6.1, §15.6.3 and §15.6.4 of BALANCE_SYNTHESIS. Maintainer: *"I want
+averaging across ALL the reference documents ... use every single data set and then average them
+with geometric mean and also convert everything to the cameo scale first ... apocalypse tank is
+in RA2 YR, Romanov's Vengeance, cnc reloaded, mental omega, combined arms and of course our
+existing balancing stats so take everything into your calculations."*
+
+  * **Every source votes once.** No vanilla-family collapse, no remake down-weighting, no
+    exclusion of a source for disagreeing. The earlier build did all three and produced a
+    curated consensus; the maintainer wants the full spread.
+  * **Cameo's own current stat is a data point**, pooled alongside the sources rather than only
+    being the thing measured against.
+  * **Convert to the Cameo scale FIRST**, through each source's own basic rifleman, then pool.
+  * **Geometric mean**, not median and not arithmetic. Every value is a RATIO to a rifle, and in
+    ratio space the multiplicative centre is the correct one: a source running 2x high and one
+    running 2x low cancel to exactly 1.0, where an arithmetic mean returns 1.25 and biases every
+    target upward. It is also the only mean under which "normalize then average" and "average
+    then normalize" agree — which is precisely what makes converting first safe.
 
 ⚠ WHAT THIS DOES NOT DO. It does not touch Versus or damage magnitude. §15.4 is explicit that
 raw Versus is NOT comparable across sources (Westwood routinely >100, DTA ×10 again, every
@@ -55,6 +58,7 @@ import json
 import glob
 import pathlib
 import re
+import math
 import statistics
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -68,29 +72,71 @@ DOC3 = DESIGN / "SYNTHESIS_DELTA.md"
 # basic rifle infantryman. BALANCE_SYNTHESIS §5/§12.2: "Cameo's rifle anchor = 20000 HP = 1.00x".
 RIFLE_HP, RIFLE_COST, RIFLE_SPEED = 20000, 100, 60
 
-# §15.6.1 — the vanilla family votes ONCE. RV is a faithful remake and YR is vanilla's own
-# expansion pack; neither is an independent rebalance of vanilla's ratios.
-VANILLA_FAMILY = {"RA2 vanilla", "Yuri's Revenge", "Romanov's Veng."}
-INDEPENDENT = {"Mental Omega", "CnC Reloaded"}
+# ─────────────────────────────────────────────────────────────────────────────────────────────
+# MAINTAINER OVERRIDE, 2026-08-30. This supersedes §15.6.1, §15.6.3 and §15.6.4.
+#
+#   "I want averaging across ALL the reference documents ... use every single data set and then
+#    average them with geometric mean and also convert everything to the cameo scale first ...
+#    apocalypse tank is in RA2 YR, Romanov's Vengeance, cnc reloaded, mental omega, combined arms
+#    and of course our existing balancing stats so take everything into your calculations."
+#
+# The previous implementation followed §15.6 literally: it pooled the vanilla family to ONE vote,
+# EXCLUDED wide-gap outliers, and took a MEDIAN. That is now retired. Every source votes once,
+# nothing is down-weighted for being a remake, no source is dropped for disagreeing, Cameo's own
+# current value is itself a data point, and the average is GEOMETRIC.
+#
+# Why geometric is the right mean here, not a nicety: every value is a RATIO to a rifle. In ratio
+# space the natural centre is multiplicative — a source running 2x high and one running 2x low
+# should cancel exactly, and only the geometric mean does that (sqrt(2 * 0.5) = 1, while the
+# arithmetic mean gives 1.25 and silently biases every target upward). It is also the only mean
+# for which "normalize then average" and "average then normalize" agree, which is what makes
+# converting to the Cameo scale FIRST safe.
+# ─────────────────────────────────────────────────────────────────────────────────────────────
 
-# §15.6.3 — how far from the median of the votes a source may sit before it is called an
-# outlier and dropped from the target. 2.5x is chosen to catch the deliberate-wide-spread case
-# the spec names (26x against a 6.4x consensus is 4.1x out) without discarding ordinary
-# disagreement between two rebalances.
-OUTLIER_FACTOR = 2.5
-
-# An absolute sanity ceiling on a source row, in multiples of that source's own rifle.
-# The relative outlier rule above compares VOTES, so it cannot help when a unit appears in only
-# one source — and Document 1 contains at least one junk row: `Virus` at 114,514 HP = 558.6x
-# rifle (114514 is a well-known joke number, and the row carries no weapon at all). Left in, it
-# proposed an 11,172,000 HP target for `yuri_virus`. The widest DELIBERATE spread the spec names
-# is Combined Arms at 26x (§15.6.3) and the epic cap is 6-8x (§12.4), so 60x is far above any
-# real design intent and far below the junk.
+# The ONE exclusion that survives the override, and it is not a judgement about balance:
+# Document 1 contains junk rows. `Virus` is listed at 114,514 HP = 558.6x rifle — a joke number,
+# on a row carrying no weapon at all — and left in it proposed an 11,172,000 HP target. A
+# geometric mean resists it better than an arithmetic one but still cannot survive it. Pass
+# --include-junk to switch this off and see the raw pool.
 MAX_XRIFLE = 60.0
 
-# A reference name must be at least this long to match by prefix — below it, a name is too
-# generic to be evidence about a specific actor.
+# A reference name must be at least this long to match by prefix.
 MIN_KEY = 4
+
+# ── The reference corpus ──────────────────────────────────────────────────────────────────────
+# Two documents hold per-unit source stats, and they cover different games. Everything is
+# converted to Cameo's scale through each source's OWN basic rifleman before anything is pooled
+# (§15.6.2), because the sources do not share a power level: Romanov's Vengeance runs a 12,500 HP
+# rifle, Combined Arms 5,000, Shattered Paradise 15,000, Mental Omega ~205, vanilla RA2 125.
+#
+# DOC1 = ORIGINAL_UNITS_RAW.md — 1,021 rows, five RA2-family sources, and it already carries a
+#        per-row `×rifle` column so its HP needs no anchor here.
+# DOC4 = ORIGINAL_UNIT_STATS.md — the wider corpus: StarCraft, Warcraft 2, Red Alert 1, Tiberian
+#        Dawn, Tiberian Sun + Firestorm, RA2 + Yuri's Revenge, and DTA. Its tables are per-game
+#        with differing columns, so each section declares its own rifle anchor and cost rule.
+#
+# ⚠ Combined Arms and Shattered Paradise are in ORIGINAL_UNIT_STATS.md but only as ROLE BANDS
+# ("basic rifle 5000", "heavy trooper 7500-9000"), never as per-unit rows, so they cannot vote on
+# a named unit. The single CA per-unit figure anywhere in the tree is the Apocalypse at 130,000 HP
+# quoted in BALANCE_SYNTHESIS §16, and it is prose, not a dataset. CA_ROLE_BANDS below carries the
+# role table so the gap is visible rather than silently absent.
+DOC4 = DESIGN / "ORIGINAL_UNIT_STATS.md"
+
+# section heading prefix -> (source label, rifle HP, rifle cost, cost rule)
+# cost rule: "direct" = credits already; "sc" = 4*minerals + 8*vespene; "wc" = 4*gold + 8*wood
+DOC4_SOURCES = [
+    ("## StarCraft: Brood War",      "StarCraft BW",      40,   200, "sc"),
+    ("## Warcraft 2",                "Warcraft 2",        60,  2400, "wc"),
+    ("## Red Alert 1",               "Red Alert 1",       50,   100, "direct"),
+    ("## Tiberian Dawn",             "Tiberian Dawn",     50,   100, "direct"),
+    ("## Tiberian Sun",              "Tiberian Sun",     125,    50, "direct"),
+    ("## Red Alert 2 + Yuri",        "RA2/YR (raw INI)", 125,   100, "direct"),
+    ("## Dawn of the Tiberium Age",  "DTA",               50,   100, "direct"),
+]
+
+# §15.5, VERIFIED against the ledger: StarCraft `credits = 4*minerals + 8*vespene` fits Wraith
+# 150/100 -> 1400, Battlecruiser 400/300 -> 4000 and Science Vessel 100/225 -> 2200 exactly.
+# Warcraft's `4*gold + 8*wood` is by symmetry and is flagged as unverified in the output.
 
 
 def norm(name):
@@ -145,35 +191,89 @@ def rifle_of(rows, source):
     return best
 
 
-def votes_for(per_source, key):
-    """§15.6.1 — collapse the vanilla family to one vote, keep each rebalance as its own."""
-    fam = [v[key] for s, v in per_source.items() if s in VANILLA_FAMILY and v.get(key)]
-    out = {}
-    if fam:
-        out["vanilla family"] = statistics.median(fam)
-    for s, v in per_source.items():
-        if s in INDEPENDENT and v.get(key):
-            out[s] = v[key]
-    for s, v in per_source.items():                      # any source the spec did not name
-        if s not in VANILLA_FAMILY and s not in INDEPENDENT and v.get(key):
-            out[s] = v[key]
+def parse_doc4():
+    """[(source, unit, hp, cost, speed)] from ORIGINAL_UNIT_STATS.md.
+
+    Its tables are per-game with different columns — StarCraft prints `Cost m/g`, Warcraft
+    `Gold/Wood`, the Westwood games plain `Cost` — so the header row is read per table rather
+    than assumed, and each section declares its own rifle anchor in DOC4_SOURCES.
+    """
+    if not DOC4.exists():
+        return []
+    out, source, anchor, header = [], None, None, None
+    lines = DOC4.read_text(encoding="utf-8").splitlines()
+    for line in lines:
+        if line.startswith("## "):
+            source = anchor = None
+            for prefix, label, rhp, rcost, rule in DOC4_SOURCES:
+                if line.startswith(prefix):
+                    source, anchor = label, (rhp, rcost, rule)
+                    break
+            header = None
+            continue
+        if not source or not line.startswith("|"):
+            continue
+        cells = [c.strip().strip("*") for c in line.split("|")[1:-1]]
+        if not cells:
+            continue
+        low = [c.lower() for c in cells]
+        if "unit" in low[0] or "/" in cells[0] and "hp" in " ".join(low):
+            header = low
+            continue
+        if set("".join(cells)) <= set("-: "):
+            continue
+        if not header or len(cells) != len(header):
+            continue
+        row = dict(zip(header, cells))
+        unit = cells[0].split("(")[0].split("/")[0].strip()
+        hp = num(row.get("hp"))
+        rhp, rcost, rule = anchor
+        cost = None
+        if rule == "sc" or rule == "wc":
+            raw = row.get("cost m/g") or row.get("gold/wood") or ""
+            parts = re.split(r"[/]", raw)
+            if len(parts) == 2:
+                a, b = num(parts[0]), num(parts[1])
+                if a is not None and b is not None:
+                    cost = 4 * a + 8 * b
+        else:
+            cost = num(row.get("cost"))
+        spd = num(row.get("spd") or row.get("speed"))
+        if unit and hp:
+            out.append({"source": source, "unit": unit,
+                        "x_hp": hp / rhp,
+                        "hp": hp / rhp * RIFLE_HP,
+                        "x_cost": (cost / rcost) if cost else None,
+                        "cost": (cost / rcost * RIFLE_COST) if cost else None,
+                        "x_speed": None, "speed": None, "raw_speed": spd,
+                        "role": row.get("role", "") or row.get("weapon", ""),
+                        "kind": "", "category": ""})
     return out
 
 
-def compromise(votes):
-    """§15.6.3 + §15.6.4 — drop wide-gap outliers, then take the median of what is left.
+def geometric_mean(values):
+    """The multiplicative centre of a set of ratios.
 
-    Returns (target, [outlier names]). The median is used rather than a mean because a mean
-    lets one deliberately-wide source drag a value no source actually proposed.
+    Every value pooled here is a ratio to a rifle, and in ratio space the arithmetic mean is
+    simply the wrong operator: a source running 2x high and one running 2x low should cancel to
+    1.0, and only the geometric mean does that — the arithmetic mean returns 1.25 and biases
+    every target upward. It is also the only mean under which "convert to the Cameo scale, then
+    average" and "average, then convert" agree, which is what makes converting first safe.
     """
-    if not votes:
-        return None, []
-    vals = list(votes.values())
-    med = statistics.median(vals)
-    outliers = [s for s, v in votes.items()
-                if med > 0 and (v / med > OUTLIER_FACTOR or med / v > OUTLIER_FACTOR)]
-    kept = [v for s, v in votes.items() if s not in outliers]
-    return (statistics.median(kept) if kept else med), outliers
+    vals = [v for v in values if v and v > 0]
+    if not vals:
+        return None
+    return math.exp(sum(math.log(v) for v in vals) / len(vals))
+
+
+def pool(per_source, key):
+    """Every source votes once. No collapsing, no exclusions, no down-weighting.
+
+    MAINTAINER OVERRIDE 2026-08-30 — this replaces §15.6's vanilla-family collapse, its outlier
+    exclusion and its median. A remake now votes like any other source and a disagreeing source
+    is kept, because the maintainer wants the full spread represented rather than a curated one.
+    """
+    return {s: v[key] for s, v in per_source.items() if v.get(key)}
 
 
 def load_roster():
@@ -209,6 +309,9 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--class", dest="cls", help="restrict Document 3 to one class")
     ap.add_argument("--dry-run", action="store_true", help="report, write nothing")
+    ap.add_argument("--include-junk", action="store_true",
+                    help="keep source rows above the %gx-rifle sanity ceiling (see MAX_XRIFLE)"
+                         % MAX_XRIFLE)
     args = ap.parse_args()
 
     rows = parse_doc1()
@@ -219,7 +322,7 @@ def main():
     norm_rows, junk = [], []
     for src, r in rows:
         xr = num(r.get("×rifle"))
-        if xr and xr > MAX_XRIFLE:
+        if xr and xr > MAX_XRIFLE and not args.include_junk:
             junk.append(f"{src}: {r.get('Unit')} at {xr:.1f}x rifle")
             continue
         rf = rifles.get(src) or {}
@@ -236,6 +339,14 @@ def main():
         })
 
     # ---- pool the same unit across sources
+    doc4 = parse_doc4()
+    for r in doc4:
+        if r["x_hp"] and r["x_hp"] > MAX_XRIFLE and not args.include_junk:
+            junk.append(f"{r['source']}: {r['unit']} at {r['x_hp']:.1f}x rifle")
+            continue
+        norm_rows.append(r)
+    sources = sorted({r["source"] for r in norm_rows})
+
     # A reference name matches an actor when it is a PREFIX of the actor's last segment.
     # Exact equality was too strict and it broke the spec's own worked example: the vanilla,
     # CnC Reloaded and Romanov's Vengeance rows are all named "Apocalypse" while the Cameo actor
@@ -265,12 +376,25 @@ def main():
             for stat in ("hp", "cost", "speed"):
                 vals = [p[stat] for p in picks if p.get(stat)]
                 per_source[src][stat] = statistics.median(vals) if vals else None
+        # MAINTAINER ORDER: "and of course our existing balancing stats" — Cameo's own current
+        # value is a data point in the pool, not merely the thing measured against. It votes once,
+        # like every other source, which is why a unit with a single reference row still moves
+        # only halfway toward it rather than snapping to it.
+        rec_now = units[actor]
+        per_source["Cameo (current)"] = {
+            "unit": actor, "kind": "", "role": "", "category": "",
+            "hp": val(rec_now, "hp"), "cost": val(rec_now, "cost"),
+            "speed": val(rec_now, "speed"),
+            "x_hp": (val(rec_now, "hp") or 0) / RIFLE_HP or None,
+            "x_cost": None, "x_speed": None,
+        }
         key = actor_key[actor]
         actors = [actor]
-        targets, outliers = {}, {}
+        targets, contributors = {}, {}
         for stat in ("hp", "cost", "speed"):
-            t, o = compromise(votes_for(per_source, stat))
-            targets[stat], outliers[stat] = t, o
+            votes = pool(per_source, stat)
+            targets[stat] = geometric_mean(votes.values())
+            contributors[stat] = votes
         for actor in actors:
             rec = units[actor]
             synth.append({
@@ -278,7 +402,7 @@ def main():
                 "unit": next(iter(per_source.values()))["unit"],
                 "class": classes.get(actor, ""),
                 "sources": sorted(per_source),
-                "targets": targets, "outliers": outliers,
+                "targets": targets, "contributors": contributors,
                 "now": {"hp": val(rec, "hp"), "cost": val(rec, "cost"),
                         "speed": val(rec, "speed")},
             })
@@ -355,42 +479,70 @@ def write_doc3(synth, matched, sources):
            "compromise is a judgement, not a mean\"*), and pricing still runs through "
            "`fit_class` → sign-off → `apply_balance --confirm` → boot gate.", "",
            "## How each target is reached", "",
-           "1. Each source is normalized to **its own** rifle (§15.6.2).",
-           "2. The **vanilla family** — RA2, Yuri's Revenge and Romanov's Vengeance — is pooled "
-           "to **one vote** (§15.6.1: a faithful remake is not an independent vote; RV "
-           "reproduces vanilla's ratios exactly, so counting it separately double-counts "
-           "vanilla). The independent voices are the rebalances: Mental Omega, CnC Reloaded.",
-           f"3. A vote more than **{OUTLIER_FACTOR}×** from the median of the votes is called an "
-           "outlier, listed in its own column, and **excluded** from the target (§15.6.3).",
-           "4. The target is the **median** of the surviving votes — it survives one bad source, "
-           "which a mean does not, and it never invents a value no source proposed.", ""]
+           "**Maintainer override, 2026-08-30 — this supersedes §15.6.1, §15.6.3 and §15.6.4.** "
+           "The previous build pooled the vanilla family to one vote, excluded wide-gap outliers "
+           "and took a median; that produced a *curated* consensus. The instruction is to use "
+           "every dataset, include Cameo's own stats, convert to the Cameo scale first, and take "
+           "a **geometric mean**.", "",
+           "1. Every source is converted to **Cameo's scale first**, through its own basic "
+           "rifleman — the sources do not share a power level (Romanov's Vengeance runs a 12,500 "
+           "HP rifle, Combined Arms 5,000, Shattered Paradise 15,000, Mental Omega ~205, vanilla "
+           "RA2 125, Cameo 20,000), so an un-normalized comparison is meaningless.",
+           "2. **Every source votes once.** No family collapse, no remake down-weighting, no "
+           "exclusion for disagreeing.",
+           "3. **Cameo's own current value is one of the votes**, not merely the thing measured "
+           "against — so a unit with a single reference row moves halfway toward it, never snaps.",
+           "4. The target is the **geometric mean** of the votes. Every value is a ratio to a "
+           "rifle, and in ratio space the multiplicative centre is the correct one: a source "
+           "running 2× high and one running 2× low cancel to exactly 1.0, where an arithmetic "
+           "mean returns 1.25 and biases every target upward. It is also the only mean under "
+           "which *normalize-then-average* and *average-then-normalize* agree, which is what "
+           "makes converting to the Cameo scale first safe.", "",
+           f"The one surviving exclusion is not a balance judgement: source rows above "
+           f"**{MAX_XRIFLE:.0f}× rifle** are dropped as data errors (Document 1 lists `Virus` at "
+           "114,514 HP = 558.6× — a joke number on a row with no weapon). `--include-junk` "
+           "disables it.", ""]
 
-    n_out = sum(1 for s in matched if any(s["outliers"].values()))
+    n_multi = sum(1 for s in matched if len(s["contributors"].get("hp") or {}) > 1)
     out += ["## Coverage", "",
             f"* Document 1 sources: **{len(sources)}** — {', '.join(sources)}",
             f"* reference units matched to a Cameo actor: **{len(synth)}**",
             f"* of those, carrying a class tag: **{len(matched)}**",
-            f"* carrying at least one flagged outlier vote: **{n_out}**", "",
-            "⚠ **The reference corpus is RA2-family only.** All five sources are RA2 or an RA2 "
-            "mod, so a Tiberian Sun, Dune 2000, StarCraft or Warcraft unit gets a target only "
-            "where the same unit concept also appears in an RA2 mod. Extending Document 1 to the "
-            "other source games is what widens this — §15.5 already carries the VERIFIED cost "
-            "conversion for StarCraft (`credits = 4×minerals + 8×vespene`, three exact fits) and "
-            "the Warcraft one by symmetry, so those two are unblocked whenever their CSVs land.",
-            ""]
+            f"* pooling two or more independent HP votes: **{n_multi}**", "",
+            "The pool draws on **two** documents: `ORIGINAL_UNITS_RAW.md` (the five RA2-family "
+            "sources, which already carry a per-row ×rifle column) and `ORIGINAL_UNIT_STATS.md` "
+            "(StarCraft, Warcraft 2, Red Alert 1, Tiberian Dawn, Tiberian Sun + Firestorm, the "
+            "raw RA2/YR INIs, and DTA). StarCraft and Warcraft costs use §15.5's conversion — "
+            "`credits = 4×minerals + 8×vespene`, VERIFIED to three exact fits; the Warcraft "
+            "`4×gold + 8×wood` is by symmetry and is **not** independently verified.", "",
+            "⚠ **Combined Arms and Shattered Paradise cannot vote, and it is not an oversight.** "
+            "Both are in `ORIGINAL_UNIT_STATS.md`, but only as ROLE BANDS — *\"basic rifle 5000\"*, "
+            "*\"heavy trooper 7500–9000\"* — never as per-unit rows, so there is nothing to match "
+            "to a named actor. The one CA per-unit figure anywhere in this tree is the Apocalypse "
+            "at 130,000 HP (= 26× its 5,000 rifle) quoted in `BALANCE_SYNTHESIS.md` §16, and that "
+            "is prose in a worked example, not a dataset. Adding CA and SP means extracting their "
+            "`mods/ca/rules/` and `mods/sp/rules/` unit tables into a per-unit document the way "
+            "Document 1 was built; the rifle anchors are already known (CA 5,000, SP GDI 15,000), "
+            "so only the extraction is missing.", "",
+            "⚠ **`versus_raw.json` holds 16 sources — including Combined Arms, all three DTA "
+            "variants, Shattered Paradise, RA2 Reborn and Red Resurrection — but it carries "
+            "WARHEAD/Versus rows only, no unit HP, cost or speed.** It cannot feed this pool. It "
+            "is the right corpus for weapon identity (`aggregate_archetype.py`), the wrong one "
+            "for unit stats.", ""]
 
     for cls in sorted({s["class"] for s in matched}):
         rs = [s for s in matched if s["class"] == cls]
         out += [f"## `{cls}` — {len(rs)} member(s) with reference data", "",
-                "| actor | source unit | sources | HP now | HP target | Δ HP | cost now | "
-                "cost target | Δ cost | outliers |",
-                "|---|---|--:|--:|--:|--:|--:|--:|--:|---|"]
+                "| actor | source unit | HP now | HP target | Δ HP | cost now | "
+                "cost target | Δ cost | sources pooled for HP |",
+                "|---|---|--:|--:|--:|--:|--:|--:|---|"]
         for s in sorted(rs, key=lambda r: r["actor"]):
             t, n = s["targets"], s["now"]
             dhp = (t["hp"] - n["hp"]) if (t["hp"] and n["hp"]) else None
             dc = (t["cost"] - n["cost"]) if (t["cost"] and n["cost"]) else None
-            o = "; ".join(f"{k}: {', '.join(v)}" for k, v in s["outliers"].items() if v) or "—"
-            out.append(f"| `{s['actor']}` | {s['unit']} | {len(s['sources'])} | "
+            votes = s["contributors"].get("hp") or {}
+            o = ", ".join(f"{k} {v / RIFLE_HP:.1f}×" for k, v in sorted(votes.items())) or "—"
+            out.append(f"| `{s['actor']}` | {s['unit']} | "
                        f"{_f(n['hp'])} | {_f(t['hp'])} | {_f(dhp, '+,.0f')} | "
                        f"{_f(n['cost'])} | {_f(t['cost'])} | {_f(dc, '+,.0f')} | {o} |")
         out.append("")

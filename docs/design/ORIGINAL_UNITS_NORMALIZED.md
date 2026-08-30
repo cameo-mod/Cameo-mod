@@ -728,6 +728,102 @@ Each source is normalized to **its own** rifle first (§15.6.2): the sources do 
 | Civilian Texan C | infantry | 0.40 | 8,000 | 0.05 | 5 | 1.00 | 60 | anti-inf |
 | Osprey | aircraft | 0.20 | 4,000 | 0.25 | 25 | 3.00 | 180 | anti-armor |
 
+## RA2/YR (raw INI)  (56 units · cost/speed normalized: yes)
+
+| unit | kind | ×rifle HP | HP (Cameo) | ×rifle cost | cost (Cameo) | ×rifle spd | spd (Cameo) | role |
+|---|---|--:|--:|--:|--:|--:|--:|---|
+| Slave Miner |  | 16.00 | 320,000 | 15.00 | 1,500 | — | — |  |
+| Kirov Airship |  | 16.00 | 320,000 | 20.00 | 2,000 | — | — |  |
+| Boomer Sub |  | 9.60 | 192,000 | 20.00 | 2,000 | — | — |  |
+| War Miner |  | 8.00 | 160,000 | 14.00 | 1,400 | — | — |  |
+| Apocalypse |  | 6.40 | 128,000 | 17.50 | 1,750 | — | — |  |
+| Aegis Cruiser |  | 6.40 | 128,000 | 12.00 | 1,200 | — | — |  |
+| Aircraft Carrier |  | 6.40 | 128,000 | 20.00 | 2,000 | — | — |  |
+| Dreadnought |  | 6.40 | 128,000 | 20.00 | 2,000 | — | — |  |
+| Battle Fortress |  | 4.80 | 96,000 | 20.00 | 2,000 | — | — |  |
+| Floating Disk |  | 4.80 | 96,000 | 17.50 | 1,750 | — | — |  |
+| Destroyer |  | 4.80 | 96,000 | 10.00 | 1,000 | — | — |  |
+| Typhoon Sub |  | 4.80 | 96,000 | 10.00 | 1,000 | — | — |  |
+| Master Mind |  | 4.00 | 80,000 | 17.50 | 1,750 | — | — |  |
+| Rhino Tank |  | 3.20 | 64,000 | 9.00 | 900 | — | — |  |
+| Tank Destroyer |  | 3.20 | 64,000 | 9.00 | 900 | — | — |  |
+| Sea Scorpion |  | 3.20 | 64,000 | 6.00 | 600 | — | — |  |
+| Grizzly Tank |  | 2.40 | 48,000 | 7.00 | 700 | — | — |  |
+| Lasher Tank |  | 2.40 | 48,000 | 7.00 | 700 | — | — |  |
+| Tesla Tank |  | 2.40 | 48,000 | 12.00 | 1,200 | — | — |  |
+| Siege Chopper |  | 2.40 | 48,000 | 14.00 | 1,400 | — | — |  |
+| Gattling Tank |  | 1.68 | 33,600 | 6.00 | 600 | — | — |  |
+| Brute |  | 1.60 | 32,000 | 5.00 | 500 | — | — |  |
+| Tanya |  | 1.60 | 32,000 | 15.00 | 1,500 | — | — |  |
+| Boris |  | 1.60 | 32,000 | 15.00 | 1,500 | — | — |  |
+| Mirage Tank |  | 1.60 | 32,000 | 10.00 | 1,000 | — | — |  |
+| IFV |  | 1.60 | 32,000 | 6.00 | 600 | — | — |  |
+| Chaos Drone |  | 1.60 | 32,000 | 8.00 | 800 | — | — |  |
+| Black Eagle |  | 1.60 | 32,000 | 12.00 | 1,200 | — | — |  |
+| Dolphin |  | 1.60 | 32,000 | 5.00 | 500 | — | — |  |
+| Giant Squid |  | 1.60 | 32,000 | 10.00 | 1,000 | — | — |  |
+| Robot Tank |  | 1.44 | 28,800 | 6.00 | 600 | — | — |  |
+| Flak Track |  | 1.44 | 28,800 | 5.00 | 500 | — | — |  |
+| Desolator |  | 1.20 | 24,000 | 6.00 | 600 | — | — |  |
+| Yuri Prime |  | 1.20 | 24,000 | 15.00 | 1,500 | — | — |  |
+| Prism Tank |  | 1.20 | 24,000 | 12.00 | 1,200 | — | — |  |
+| Magnetron |  | 1.20 | 24,000 | 10.00 | 1,000 | — | — |  |
+| V3 Launcher |  | 1.20 | 24,000 | 8.00 | 800 | — | — |  |
+| Harrier |  | 1.20 | 24,000 | 12.00 | 1,200 | — | — |  |
+| Shock |  | 1.04 | 20,800 | 5.00 | 500 | — | — |  |
+| Conscript |  | 1.00 | 20,000 | 1.00 | 100 | — | — |  |
+| GI |  | 1.00 | 20,000 | 2.00 | 200 | — | — |  |
+| Crazy Ivan |  | 1.00 | 20,000 | 6.00 | 600 | — | — |  |
+| Sniper |  | 1.00 | 20,000 | 6.00 | 600 | — | — |  |
+| Rocketeer |  | 1.00 | 20,000 | 6.00 | 600 | — | — |  |
+| Navy SEAL |  | 1.00 | 20,000 | 10.00 | 1,000 | — | — |  |
+| Chrono Legionnaire |  | 1.00 | 20,000 | 15.00 | 1,500 | — | — |  |
+| Initiate |  | 0.80 | 16,000 | 2.00 | 200 | — | — |  |
+| Guardian GI |  | 0.80 | 16,000 | 4.00 | 400 | — | — |  |
+| Flak Trooper |  | 0.80 | 16,000 | 3.00 | 300 | — | — |  |
+| Attack Dog |  | 0.80 | 16,000 | 2.00 | 200 | — | — |  |
+| Spy |  | 0.80 | 16,000 | 10.00 | 1,000 | — | — |  |
+| Virus |  | 0.80 | 16,000 | 7.00 | 700 | — | — |  |
+| Yuri Clone |  | 0.80 | 16,000 | 8.00 | 800 | — | — |  |
+| Terror Drone |  | 0.80 | 16,000 | 5.00 | 500 | — | — |  |
+| Terrorist |  | 0.60 | 12,000 | 2.00 | 200 | — | — |  |
+| Engineer |  | 0.60 | 12,000 | 5.00 | 500 | — | — |  |
+
+## Red Alert 1  (30 units · cost/speed normalized: yes)
+
+| unit | kind | ×rifle HP | HP (Cameo) | ×rifle cost | cost (Cameo) | ×rifle spd | spd (Cameo) | role |
+|---|---|--:|--:|--:|--:|--:|--:|---|
+| Cruiser |  | 14.00 | 280,000 | 20.00 | 2,000 | — | — | 8-inch cannon (V.Long) |
+| Mammoth Tank |  | 12.00 | 240,000 | 17.00 | 1,700 | — | — | 120mm + AA missiles |
+| Medium Tank |  | 8.00 | 160,000 | 8.00 | 800 | — | — | 90mm |
+| Heavy Tank |  | 8.00 | 160,000 | 9.50 | 950 | — | — | 105mm (dual) |
+| Destroyer |  | 8.00 | 160,000 | 10.00 | 1,000 | — | — | homing missile + depth charge |
+| Chrono Tank |  | 7.00 | 140,000 | 24.00 | 2,400 | — | — | AP Tusk |
+| Light Tank |  | 6.00 | 120,000 | 7.00 | 700 | — | — | 75mm |
+| M.A.D. Tank |  | 6.00 | 120,000 | 23.00 | 2,300 | — | — | Timequake |
+| Longbow |  | 4.50 | 90,000 | 12.00 | 1,200 | — | — | Hellfire |
+| Hind |  | 4.50 | 90,000 | 12.00 | 1,200 | — | — | chaingun |
+| APC |  | 4.00 | 80,000 | 8.00 | 800 | — | — | MG |
+| Gunboat |  | 4.00 | 80,000 | 5.00 | 500 | — | — | cannon + depth charge |
+| Ranger |  | 3.00 | 60,000 | 6.00 | 600 | — | — | MG |
+| V2 Rocket |  | 3.00 | 60,000 | 7.00 | 700 | — | — | ballistic |
+| Missile Sub |  | 3.00 | 60,000 | 16.50 | 1,650 | — | — | NtS missile (V.Long) |
+| Submarine |  | 2.40 | 48,000 | 9.50 | 950 | — | — | torpedo |
+| Tesla Tank |  | 2.20 | 44,000 | 15.00 | 1,500 | — | — | Tesla |
+| Demo Truck |  | 2.20 | 44,000 | 24.00 | 2,400 | — | — | demo charge |
+| Shock Trooper |  | 1.60 | 32,000 | 9.00 | 900 | — | — | Aftermath, tanky |
+| Medic |  | 1.60 | 32,000 | 8.00 | 800 | — | — | Aftermath, heal |
+| Artillery |  | 1.50 | 30,000 | 6.00 | 600 | — | — | 155mm |
+| Mechanic |  | 1.20 | 24,000 | 9.50 | 950 | — | — | Aftermath, repair |
+| Yak |  | 1.20 | 24,000 | 8.00 | 800 | — | — | chaingun |
+| Rifle Infantry |  | 1.00 | 20,000 | 1.00 | 100 | — | — | basic fodder (Soviet slightly faster) |
+| Grenadier |  | 1.00 | 20,000 | 1.60 | 160 | — | — | anti-structure |
+| MiG |  | 1.00 | 20,000 | 12.00 | 1,200 | — | — | Maverick |
+| Rocket Soldier |  | 0.90 | 18,000 | 3.00 | 300 | — | — | AT + AA |
+| Flamethrower |  | 0.80 | 16,000 | 3.00 | 300 | — | — | anti-inf/structure |
+| Engineer |  | 0.50 | 10,000 | 5.00 | 500 | — | — | capture |
+| Spy |  | 0.50 | 10,000 | 5.00 | 500 | — | — | infiltration |
+
 ## Romanov's Veng.  (207 units · cost/speed normalized: yes)
 
 | unit | kind | ×rifle HP | HP (Cameo) | ×rifle cost | cost (Cameo) | ×rifle spd | spd (Cameo) | role |
@@ -939,6 +1035,128 @@ Each source is normalized to **its own** rifle first (§15.6.2): the sources do 
 | amobf |  | 0.50 | 10,000 | 0.20 | 20 | 1.00 | 60 | anti-inf |
 | amobfm |  | 0.50 | 10,000 | 0.20 | 20 | 1.00 | 60 | anti-inf |
 | repdron |  | 0.40 | 8,000 | — | — | — | — | ? |
+
+## StarCraft BW  (27 units · cost/speed normalized: yes)
+
+| unit | kind | ×rifle HP | HP (Cameo) | ×rifle cost | cost (Cameo) | ×rifle spd | spd (Cameo) | role |
+|---|---|--:|--:|--:|--:|--:|--:|---|
+| Battlecruiser |  | 12.50 | 250,000 | 20.00 | 2,000 | — | — |  |
+| Ultralisk |  | 10.00 | 200,000 | 12.00 | 1,200 | — | — |  |
+| Carrier |  | 7.50 | 150,000 | 17.00 | 1,700 | — | — |  |
+| Devourer |  | 6.25 | 125,000 | 11.00 | 1,100 | — | — |  |
+| Siege Tank |  | 3.75 | 75,000 | 7.00 | 700 | — | — |  |
+| Scout |  | 3.75 | 75,000 | 10.50 | 1,050 | — | — |  |
+| Guardian |  | 3.75 | 75,000 | 11.00 | 1,100 | — | — |  |
+| Goliath |  | 3.12 | 62,500 | 4.00 | 400 | — | — |  |
+| Lurker |  | 3.12 | 62,500 | 12.00 | 1,200 | — | — |  |
+| Wraith |  | 3.00 | 60,000 | 7.00 | 700 | — | — |  |
+| Mutalisk |  | 3.00 | 60,000 | 6.00 | 600 | — | — |  |
+| Zealot |  | 2.50 | 50,000 | 2.00 | 200 | — | — |  |
+| Dragoon |  | 2.50 | 50,000 | 4.50 | 450 | — | — |  |
+| Reaver |  | 2.50 | 50,000 | 8.00 | 800 | — | — |  |
+| Vulture |  | 2.00 | 40,000 | 1.50 | 150 | — | — |  |
+| Dark Templar |  | 2.00 | 40,000 | 6.50 | 650 | — | — |  |
+| Hydralisk |  | 2.00 | 40,000 | 2.50 | 250 | — | — |  |
+| Defiler |  | 2.00 | 40,000 | 7.00 | 700 | — | — |  |
+| Medic |  | 1.50 | 30,000 | 2.00 | 200 | — | — |  |
+| Infested Terran |  | 1.50 | 30,000 | 4.00 | 400 | — | — |  |
+| Firebat |  | 1.25 | 25,000 | 2.00 | 200 | — | — |  |
+| Ghost |  | 1.12 | 22,500 | 3.50 | 350 | — | — |  |
+| Marine |  | 1.00 | 20,000 | 1.00 | 100 | — | — |  |
+| High Templar |  | 1.00 | 20,000 | 7.00 | 700 | — | — |  |
+| Zergling |  | 0.88 | 17,500 | 0.50 | 50 | — | — |  |
+| Scourge |  | 0.62 | 12,500 | 1.76 | 176 | — | — |  |
+| Archon |  | 0.25 | 5,000 | 14.00 | 1,400 | — | — |  |
+
+## Tiberian Dawn  (23 units · cost/speed normalized: yes)
+
+| unit | kind | ×rifle HP | HP (Cameo) | ×rifle cost | cost (Cameo) | ×rifle spd | spd (Cameo) | role |
+|---|---|--:|--:|--:|--:|--:|--:|---|
+| Gunboat |  | 14.00 | 280,000 | 3.00 | 300 | — | — |  |
+| Mammoth Tank |  | 12.00 | 240,000 | 15.00 | 1,500 | — | — | 120mm + AA |
+| Medium Tank |  | 8.00 | 160,000 | 8.00 | 800 | — | — | 105mm |
+| Light Tank |  | 6.00 | 120,000 | 6.00 | 600 | — | — | 75mm |
+| Flame Tank |  | 6.00 | 120,000 | 8.00 | 800 | — | — | flame |
+| APC |  | 4.00 | 80,000 | 7.00 | 700 | — | — | MG |
+| Recon Bike |  | 3.20 | 64,000 | 5.00 | 500 | — | — | rocket |
+| Humvee |  | 3.00 | 60,000 | 4.00 | 400 | — | — | MG |
+| Buggy |  | 2.80 | 56,000 | 3.00 | 300 | — | — | MG |
+| Orca |  | 2.50 | 50,000 | 12.00 | 1,200 | — | — |  |
+| Apache |  | 2.50 | 50,000 | 12.00 | 1,200 | — | — |  |
+| Rocket Launcher |  | 2.40 | 48,000 | 7.50 | 750 | — | — | rockets |
+| Stealth Tank |  | 2.20 | 44,000 | 9.00 | 900 | — | — | rocket |
+| Commando |  | 2.00 | 40,000 | 10.00 | 1,000 | — | — | sniper + C4 |
+| SSM Launcher |  | 2.00 | 40,000 | 8.00 | 800 | — | — | 227mm |
+| Chinook |  | 1.80 | 36,000 | 15.00 | 1,500 | — | — |  |
+| Artillery |  | 1.50 | 30,000 | 4.50 | 450 | — | — | 155mm |
+| Flamethrower |  | 1.40 | 28,000 | 2.00 | 200 | — | — | flame |
+| Chem Warrior |  | 1.40 | 28,000 | 3.00 | 300 | — | — | chem |
+| Minigunner |  | 1.00 | 20,000 | 1.00 | 100 | — | — | M16 |
+| Grenadier |  | 1.00 | 20,000 | 1.60 | 160 | — | — | grenade |
+| Rocket Soldier |  | 0.50 | 10,000 | 3.00 | 300 | — | — | rocket (AT+AA) |
+| Engineer |  | 0.50 | 10,000 | 5.00 | 500 | — | — | — |
+
+## Tiberian Sun  (43 units · cost/speed normalized: yes)
+
+| unit | kind | ×rifle HP | HP (Cameo) | ×rifle cost | cost (Cameo) | ×rifle spd | spd (Cameo) | role |
+|---|---|--:|--:|--:|--:|--:|--:|---|
+| Core Defender** |  | 16.00 | 320,000 | 200.00 | 20,000 | — | — |  |
+| Dropship |  | 7.20 | 144,000 | 60.00 | 6,000 | — | — |  |
+| Mammoth Mk. II |  | 6.40 | 128,000 | 80.00 | 8,000 | — | — |  |
+| Mobile EM-Pulse |  | 6.40 | 128,000 | 15.00 | 1,500 | — | — |  |
+| Mobile War Factory |  | 6.40 | 128,000 | 36.00 | 3,600 | — | — |  |
+| Weed Eater |  | 4.80 | 96,000 | 28.00 | 2,800 | — | — |  |
+| Disruptor |  | 4.00 | 80,000 | 28.00 | 2,800 | — | — |  |
+| Nod Heavy Artillery |  | 3.60 | 72,000 | 20.00 | 2,000 | — | — |  |
+| Cyborg |  | 3.20 | 64,000 | 7.00 | 700 | — | — |  |
+| Cyborg Commando |  | 3.20 | 64,000 | 50.00 | 5,000 | — | — |  |
+| Titan |  | 3.20 | 64,000 | 13.00 | 1,300 | — | — |  |
+| Cyborg Reaper |  | 3.20 | 64,000 | 24.00 | 2,400 | — | — |  |
+| Juggernaut |  | 2.80 | 56,000 | 20.00 | 2,000 | — | — |  |
+| Tick Tank |  | 2.80 | 56,000 | 12.00 | 1,200 | — | — |  |
+| Nod Assault Tank |  | 2.80 | 56,000 | 6.00 | 600 | — | — |  |
+| Flame Tank |  | 2.40 | 48,000 | 11.00 | 1,100 | — | — |  |
+| Devil's Tongue |  | 2.40 | 48,000 | 17.00 | 1,700 | — | — |  |
+| Artillery |  | 2.40 | 48,000 | 20.00 | 2,000 | — | — |  |
+| GDI MLRS |  | 2.40 | 48,000 | 12.00 | 1,200 | — | — |  |
+| Banshee |  | 2.24 | 44,800 | 24.00 | 2,400 | — | — |  |
+| Orca Bomber |  | 2.08 | 41,600 | 32.00 | 3,200 | — | — |  |
+| Tiberian Fiend |  | 2.00 | 40,000 | 2.00 | 200 | — | — |  |
+| GDI Medium Strike Tank |  | 2.00 | 40,000 | 5.10 | 510 | — | — |  |
+| Hover MLRS |  | 1.84 | 36,800 | 14.00 | 1,400 | — | — |  |
+| Harpy |  | 1.80 | 36,000 | 16.00 | 1,600 | — | — |  |
+| Attack Buggy |  | 1.76 | 35,200 | 8.00 | 800 | — | — |  |
+| Ghost Stalker |  | 1.60 | 32,000 | 24.00 | 2,400 | — | — |  |
+| Amphibious APC |  | 1.60 | 32,000 | 14.00 | 1,400 | — | — |  |
+| Stealth Tank |  | 1.60 | 32,000 | 16.00 | 1,600 | — | — |  |
+| Mobile Stealth Generator |  | 1.60 | 32,000 | 26.00 | 2,600 | — | — |  |
+| Orca Fighter |  | 1.60 | 32,000 | 20.00 | 2,000 | — | — |  |
+| Wolverine |  | 1.40 | 28,000 | 8.00 | 800 | — | — |  |
+| Subterranean APC |  | 1.40 | 28,000 | 16.00 | 1,600 | — | — |  |
+| Disc Thrower |  | 1.20 | 24,000 | 3.00 | 300 | — | — |  |
+| Umagon |  | 1.20 | 24,000 | 12.00 | 1,200 | — | — |  |
+| Attack Cycle |  | 1.20 | 24,000 | 10.00 | 1,000 | — | — |  |
+| Chem Spray Infantry |  | 1.04 | 20,800 | 8.00 | 800 | — | — |  |
+| Light Infantry |  | 1.00 | 20,000 | 1.00 | 100 | — | — |  |
+| Medic |  | 1.00 | 20,000 | 6.00 | 600 | — | — |  |
+| Jumpjet Infantry |  | 0.96 | 19,200 | 8.00 | 800 | — | — |  |
+| Rocket Infantry |  | 0.80 | 16,000 | 3.00 | 300 | — | — |  |
+| Engineer |  | 0.80 | 16,000 | 10.00 | 1,000 | — | — |  |
+| Chameleon Spy |  | 0.80 | 16,000 | 20.00 | 2,000 | — | — |  |
+
+## Warcraft 2  (9 units · cost/speed normalized: yes)
+
+| unit | kind | ×rifle HP | HP (Cameo) | ×rifle cost | cost (Cameo) | ×rifle spd | spd (Cameo) | role |
+|---|---|--:|--:|--:|--:|--:|--:|---|
+| Flying Machine |  | 2.50 | 50,000 | 1.17 | 117 | — | — |  |
+| Ballista |  | 1.83 | 36,667 | 2.50 | 250 | — | — |  |
+| Gryphon |  | 1.67 | 33,333 | 4.17 | 417 | — | — |  |
+| Knight |  | 1.50 | 30,000 | 1.67 | 167 | — | — |  |
+| Footman |  | 1.00 | 20,000 | 1.00 | 100 | — | — |  |
+| Mage |  | 1.00 | 20,000 | 2.00 | 200 | — | — |  |
+| Elven Archer |  | 0.67 | 13,333 | 1.00 | 100 | — | — |  |
+| Demo Squad |  | 0.67 | 13,333 | 2.08 | 208 | — | — |  |
+| Peasant |  | 0.50 | 10,000 | 0.67 | 67 | — | — |  |
 
 ## Yuri's Revenge  (99 units · cost/speed normalized: yes)
 
