@@ -673,6 +673,56 @@ the audit prints the table above its findings.
 
 ✅ **Nothing to do here.** F8/F9/F10/F17/F19 all read 0 — the roster is already inside the law.
 
+### 3.0q — 📏 PRODUCTION-READINESS MEASUREMENT (2026-08-30, post-merge with master `eceb58be4`)
+
+Measured, not quoted. The binding order (`BALANCE_PROGRAM_PLAN.md` §0a) is
+**W24 → W23 → A5 → class anchors → W11 sign-off → targets → apply**, and every number below is
+from that chain rather than from a summary.
+
+| the front | pinned | measured now | direction |
+|---|--:|--:|---|
+| `multi_main_fired_weapons` (W24's scope) | 494 | **472** | ✅ down 22 — master's consolidation work |
+| `warhead_family_reach` (W23/W24 burn-up) | 1245 | **1391** | ✅ up 146 — more weapons reach a family |
+| `unconverted_template_inheritors` (W23's scope) | 1162 | **1443** | ⛔ **UP — and it is a RATCHET** |
+| `w24_multi_main_fed` | 380 | **419** | ⛔ **UP — also a RATCHET** |
+| `class_anchor_membership_pct` | 18.0 | 18.0 | — unchanged |
+| signed-off class anchors | 0 | **0** | — the hard gate |
+| classes inside the ≤1 |Δ| goal | — | **8** of 26 fittable | — |
+| `check_band` violations | — | **129 across 20 classes** | — the baseband law is far from met |
+
+⛔ **TWO RATCHETS READ UPWARD AND I HAVE NOT RE-BASELINED THEM.** `unconverted_template_inheritors`
+is documented *"RATCHET — this may only go DOWN"*. Raising a ratchet to match reality destroys the
+guard, so this is RAISED, not fixed. What I can say from the artifact:
+
+* `audit_unconverted_templates` now reports **116 unconverted templates**; the claim's own text says
+  *"the 47 remaining legacy weapon templates"*. The denominator grew.
+* **63 of the inheritors sit on `^Compatibility_Bullet_MediumFlat -> UNDECIDED`** — the W23
+  compatibility breadcrumbs, which are a conversion artifact rather than untouched legacy.
+* The audit reads **yaml only** (no `engine/`, no git history), so the incomplete tree here cannot
+  explain it — CLAUDE.md §8's degradation makes audits report FEWER findings, not more.
+
+⚠ **Whether that is scope growth or regression is the WEAPON-CONSOLIDATION OWNER'S call**, not
+mine — §2 file-set ownership. Do not update these two `value:` fields until that is answered.
+
+**What this means for sequencing.** Pricing is still correctly gated: W24 has 472 weapons to go,
+and `K` — which every price depends on — is built from warhead sets that are still moving. The
+useful work that does NOT need the boot gate is tooling and transcription; the useful work that
+DOES is the W24/W23 content itself.
+
+### 3.0r — ✅ THE PIPELINE TOOLING MOSTLY EXISTS — CHECK BEFORE BUILDING
+
+Two independent outside reviews of this session both recommended **building `check_band.py`**, a
+one-command `balance` wrapper, a determinism checker and a generator-sync check. **All four already
+exist**: `tools/balance/check_band.py`, `run_pipeline.py`, `check_determinism.py`,
+`verify_generator_sync.py`. That is the same failure this session was called out for, arriving from
+the outside — which is worth recording, because it means the instinct to build is strong enough to
+survive being warned about it twice.
+
+**The one real gap the check found:** `check_band.py` is **NOT wired into `run_all.sh`**, though
+`BALANCE_PIPELINE.md` §8.1 says "wire into run_all.sh". It is red on real content — **129 band
+violations across 20 classes**, e.g. `mbt` at 15/42 in the sweet spot, `missile_vehicle` 1/13 — so
+it belongs in the ADVISORY block with a ratchet promise, not the blocking loop.
+
 ### 3.0o — ⛔ INCIDENT: I rebuilt existing work three times in one session
 
 **Recorded 2026-08-30 at the maintainer's instruction,** because the pattern matters more than any

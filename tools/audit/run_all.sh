@@ -118,6 +118,16 @@ done
 # its default weapon. Advisory only because the fix is yaml and needs the boot
 # gate. MOVE IT INTO THE BLOCKING LOOP once F1/F3/F4 read clean.
 #
+# `check_band` enforces BALANCE_PIPELINE.md 8.1's baseband + tier-gate law: every unit's
+# class-formula price ratio must sit in the 75%-400% caps, >200% ungated must earn a gate, and
+# the 100-200% ungated band should hold >=80% of units. 8.1 says "wire into run_all.sh" and it
+# never was. Advisory because it is red on real CONTENT, not on a defect in itself: 129
+# violations across 20 classes (mbt 15/42 in the sweet spot, missile_vehicle 1/13), and every
+# fix is a priced yaml change that must go through apply_balance and the boot gate. It also
+# cannot be a per-commit gate while 0 anchors are signed — it is measuring prices nobody has
+# approved yet. MOVE IT INTO THE BLOCKING LOOP once anchors are signed and a first production
+# pass has brought the roster inside the band.
+#
 # `counter_matrix` compares docs/balance/counter_matrix.yaml (design intent) with
 # what the tree does. Advisory permanently: every finding is a design question —
 # reassign a family, retag a class, or change the intent — and never a build break.
@@ -128,6 +138,14 @@ for a in code_duplication test_coverage recent_changes error_handling security \
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"
 done
+
+# `check_band` is ADVISORY and lives in tools/balance/, so it gets its own line rather than a
+# slot in either loop: the cross-tree loop below sets `failed=1` on a non-zero exit, and
+# check_band exits non-zero on real CONTENT (129 violations across 20 classes). Putting it there
+# would turn the whole suite red for prices nobody has approved yet — 0 anchors are signed.
+echo "== check_band (advisory)"
+"$PYTHON" "tools/balance/check_band.py" "$@" > "$OUT/band.md" 2> "$OUT/band.err" || true
+[ -s "$OUT/band.err" ] || rm -f "$OUT/band.err"
 
 # Audits that live in tools/ rather than tools/audit/
 for a in createeffect_image:tools/audit_createeffect_image.py \
