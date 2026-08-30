@@ -876,6 +876,67 @@ VEHICLE self-heal (`^VehicleBuffs`, Delay 1 / DamageCooldown 10) to the INFANTRY
 `ChangesHealth@SelfHealing.Step = HP/1000`. Boot-gated yaml, not done. The grid change without the
 self-heal change is half the ruling.
 
+### 3.0x — ⛔ THE 3-WAY SPLIT GATE, MEASURED PER CLASS (2026-08-30) — and 5 of the 8 signed classes are behind it
+
+**Maintainer:** *"if a unit doesn't follow the 3-way split yet then you need to apply that thing
+first."* That is **§0a of `BALANCE_PROGRAM_PLAN.md`**, which is binding and is the maintainer's own
+2026-08-17 ruling: *"shouldn't we first finish the 3 way split like documented before we start
+applying the balance formula to our actors? It would be double work splitting the multi warheads
+later on."* The full order is therefore:
+
+    3-way split the members  ->  set the baseline actor (2c)  ->  synthesise the members (Doc 3)
+
+Nothing measured that gate **per class** until now. `anchor_readiness.py` has a new section that
+does, importing `audit_three_way_split.main_warhead_nodes` rather than restating it — that audit's
+docstring records it being wrong once, when a source-yaml scan could not tell an OVERRIDE from an
+ADDITION, so a second copy of the predicate is exactly the bug to avoid.
+
+**132 class-tagged members still fire 2+ main damage warheads. Only 3 classes owe nothing:
+`heavy_infantry`, `melee`, `scout`.**
+
+| class | members owing a split | of tagged | worst offender |
+|---|--:|--:|---|
+| `mbt` | 21 | 42 | `ptnk.asian` via `AsianTwinPlasma` — **8 mains** |
+| `scout_vehicle` | 17 | 28 | `ordos_raider` via `HMGo_upgrade` (3) |
+| `high_tech_tank` | 14 | 26 | `duelist_tank.ixian` via `DuelistTankCannon` (6) |
+| `artillery` | 14 | 28 | `ra1_soviets_v2rocketlauncher` via `SCUDThermobaric` (5) |
+| `epic_vehicle` | 10 | 24 | `tkm_bigshiee` via `SandmarineTuskTwin` (5) |
+| `artillery_tank` | 9 | 14 | `ordos_cobratank` via `120mm_cobra` (4) |
+| `line_breaker` | 9 | 30 | `latinsyndicate_tortugatank` via `LatinBuggyChaingun` (4) |
+| `special_forces` | 7 | 15 | `terran_ghost` via `GhostSniperLockdown` (6) |
+| `missile_vehicle` | 6 | 13 | `ordos_dustdrone` via `D2K_APC_Rocket` (3) |
+| `light_tank` | 6 | 16 | `asianalliance_quasar` via `AsianQuasarAG` (4) |
+| `fire_support` | 4 | 30 | `ra2_allies_prismtank` via `RA2Comet` (3) |
+| `anti_air_vehicle` · `dreadnought` · `tank_destroyer` | 3 each | 13 · 5 · 5 | `asianalliance_pulverizer` · `schwarzermond_neojagdpanzer` (4) · `naxis_jagdpanzer` |
+| `archer` | 2 | 4 | `asianalliance_veteranarcher` via `AsianMaidenBow` (5) |
+| `heavy_sniper` · `rocket_trooper` · `closecombat` · `support` | 1 each | 2 · 1 · 4 · 34 | `yuri_virus` · `futuretech_missiledroid` · `futuretech_shotgundroid` · `terran_medic` (4) |
+
+⛔ **AND THIS INDICTS §3.0v.** Crossed against the 8 classes signed earlier the same day:
+
+| | classes | members owing a split |
+|---|---|--:|
+| signed **and** structurally clean | `flying_infantry`, `grenadier`, `mortar` | 0 |
+| signed **but still behind the gate** | `archer`, `closecombat`, `heavy_sniper`, `missile_vehicle`, `special_forces` | **17** |
+
+**5 of the 8 signed classes jumped §0a.** Their proposals priced `K` from weapons that are about
+to be collapsed, and collapsing N mains into 1 preserves the damage SUM but MOVES `K` — so those
+targets will move again. The sign-off was ordered and the numbers are real, but for those five
+classes they are provisional in a way the ≤1 goal does not reveal: a class can sit at worst
+\|Δ\| 0.2 and still be priced on an input scheduled for replacement.
+
+**What follows from it, without re-litigating the sign-off:**
+
+* `flying_infantry`, `grenadier`, `mortar` are clean — their 89 pending yaml writes are safe to
+  apply and boot-gate as they stand.
+* The other five want their **17** members split first, then a re-run of
+  `propose_class_rebalance` before their share of the ledger targets is trusted.
+* `heavy_infantry`, `melee` and `scout` owe nothing structurally and are the next classes that
+  can go through the whole chain cleanly.
+* The largest single lever on the whole board is `mbt` — **21 of 42 members**, worst
+  `ptnk.asian` at **8 mains**.
+
+Reproduce: `python3 tools/balance/anchor_readiness.py` → *"The 3-way split gate"*.
+
 ### 3.0w — ✅ BUILT (2026-08-30): Documents 2 and 3 — step 3 of the per-unit application law
 
 **Maintainer:** *"first you need to apply the things from the class anchors, and then you need to

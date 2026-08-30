@@ -268,6 +268,70 @@ def anchor_actor_vs_spec(anchors, units):
     return rows
 
 
+def three_way_split_gate(units, classes):
+    """Which class members still fire MORE THAN ONE main damage warhead (W24 debt).
+
+    PRIOR ART: the predicate is `audit_three_way_split.main_warhead_nodes` and it is IMPORTED,
+    not restated. That audit's own docstring records it being wrong once — a source-yaml scan
+    could not tell an OVERRIDE from an ADDITION and reported 393 against a number that was
+    simultaneously too high and too low — so it now measures the RESOLVED node. Re-deriving the
+    predicate here would re-introduce exactly that bug in a second place.
+
+    WHY THIS GATES EVERYTHING ELSE. §0a of BALANCE_PROGRAM_PLAN is binding and is the maintainer's
+    own ruling (2026-08-17): *"shouldn't we first finish the 3 way split like documented before we
+    start applying the balance formula to our actors? It would be double work splitting the multi
+    warheads later on."* A price is a function of K, and K is share-weighted over each warhead's
+    armor profile — so collapsing N mains into 1 preserves the damage SUM but MOVES K, and
+    therefore moves the price. Pricing a member before its weapons are split prices an input that
+    is about to be replaced. `class_anchors.json` said so first: mbt.provisional carries
+    "DPS restat DEFERRED to the cannon/weapon rebuild."
+
+    So the real order for a class is:
+
+        3-way split its members  ->  set the baseline actor (2c)  ->  synthesise the members
+
+    and this reports how much of step 1 each class still owes.
+    """
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "audit"))
+    try:
+        import audit_three_way_split as tws
+        import miniyaml
+    except ImportError as exc:                  # keep readiness usable without the audit tree
+        return None, f"split gate unavailable: {exc}"
+
+    rules = miniyaml.Ruleset(ROOT)
+    debt = collections.defaultdict(list)
+    counted = collections.Counter()
+    for actor, rec in units.items():
+        cls = classes.get(actor)
+        if not cls:
+            continue
+        counted[cls] += 1
+        worst, worst_w = 0, None
+        for arm in rec.get("armaments") or []:
+            wname = arm.get("weapon") or arm.get("name")
+            if not wname:
+                # the ledger stores the weapon under whichever key extract_stats had; fall back
+                # to the slot's template list, whose LAST entry is the concrete weapon.
+                tpl = arm.get("versus_templates") or []
+                wname = tpl[-1] if tpl else None
+            if not wname:
+                continue
+            try:
+                resolved = rules.resolve_weapon(wname)
+            except Exception:
+                continue
+            if resolved is None:
+                continue
+            mains = tws.main_warheads(resolved)
+            if len(mains) > 1 and not tws.intentional_composite(wname, mains):
+                if len(mains) > worst:
+                    worst, worst_w = len(mains), (wname, mains)
+        if worst > 1:
+            debt[cls].append((actor, worst_w[0], worst))
+    return (debt, counted), None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", help="write the readiness table here")
@@ -377,6 +441,32 @@ def main():
     spec_rows = anchor_actor_vs_spec(anchors, {n: rec for _f, _sec, n, rec in units})
     drift = [r for r in spec_rows if r[5] is not None and abs(r[5] - 1.0) > 1e-9]
     offspec = [r for r in spec_rows if r[6]]
+    gate, gate_err = three_way_split_gate(
+        {n: r for _f, _sec, n, r in units}, {n: (r.get("design") or {}).get("class_anchor")
+                                             for _f, _sec, n, r in units})
+    print("\n## The 3-way split gate — what must be fixed BEFORE a class is priced\n")
+    print("§0a of `BALANCE_PROGRAM_PLAN.md` is binding: weapon structure comes before pricing. "
+          "`K` is share-weighted over each warhead's armor profile, so collapsing N mains into 1 "
+          "preserves the damage SUM but MOVES `K` — pricing a member whose weapons are not split "
+          "yet prices an input that is about to be replaced.\n")
+    if gate_err:
+        print(f"⚠ {gate_err}\n")
+    else:
+        debt, counted = gate
+        tot = sum(len(v) for v in debt.values())
+        print(f"* class-tagged members still firing 2+ main warheads: **{tot}**\n")
+        if debt:
+            print("| class | members owing a split | of tagged | worst offender |")
+            print("|---|--:|--:|---|")
+            for cls in sorted(debt, key=lambda c: -len(debt[c])):
+                rows = sorted(debt[cls], key=lambda r: -r[2])
+                a, w, n = rows[0]
+                print(f"| `{cls}` | {len(rows)} | {counted[cls]} | "
+                      f"`{a}` via `{w}` ({n} mains) |")
+        clean = sorted(c for c in counted if not debt.get(c))
+        print(f"\n**{len(clean)} class(es) owe NOTHING and are structurally ready to price"
+              + (": " + ", ".join(f"`{c}`" for c in clean) if clean else "") + ".**")
+
     print("\n## Anchor actor vs its ruled spec\n")
     print("`spec.*` is the LOCKED target from `anchor_decisions_log.md`; the top-level "
           "`cost0/o0/p0/q0` are FITTED from the anchor actor as it stands in yaml today. "
