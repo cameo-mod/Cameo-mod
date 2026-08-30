@@ -1,5 +1,22 @@
 # Class-anchor decisions log (maintainer-confirmed, one class at a time)
 
+> ⛔ **THE VERIFIER IS RETIRED (maintainer, 2026-08-29) — this log predates that ruling.**
+> *"We no longer have to have those verifiers. They should be regular units like anything else and
+> not have those stiff rules."* Nearly every class section below nominates a **verifier actor** and
+> derives it as 2×HP + 2×DPS → 2.5×cost (defenses: 2.5×HP + 2.5×DPS → 4.0×). Those rows are
+> **history**. `verifier_actor` is gone from all 27 anchors and from every code path; each class now
+> has exactly ONE fixed point — its **baseline** — and every former verifier is an ordinary member
+> priced by the formula like any other unit. **Read the baseline columns as binding and the verifier
+> columns as provenance.** The 100%–250% band law is NOT retired: `check_band.py` enforces it on
+> price RATIOS and never needed a nominated actor. Ruling + the three measurements behind it:
+> `docs/HANDOFF.md` §3.0j, `docs/design/BALANCE_PIPELINE.md` §8.1.
+>
+> ⚠ **This log remains the SOURCE OF TRUTH for anchors** (`docs/README.md`: `class_anchors.json` is
+> "maintained via" it). Where the JSON and this log disagree, check WHICH number you are reading
+> first — `spec.*` in the JSON is this log's ruled target, while top-level `cost0/o0/p0/q0` are
+> FITTED from the live roster. Those two disagreeing is expected, not drift.
+
+
 _Running record of the collaborative baseline+verifier definition (started 2026-07-25). Each class
 is LOCKED here once the maintainer confirms; then `fit_class` + sign-off + `defaults.yaml` template
 work follow. Fixed MBT anchor pivot: **Tiger `tiger.nax` = 100000 HP / 100 spd / **5500 rng** / 10000

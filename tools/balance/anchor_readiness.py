@@ -66,6 +66,14 @@ TICKS_PER_SECOND = 25
 FEATURES = ("hp", "dps", "range", "speed")
 SPEC_KEY = {"hp": "hp0", "dps": "dps0", "range": "range0_wdist", "speed": "speed0"}
 
+# `dps` is deliberately NOT compared against `spec.dps0` in anchor_actor_vs_spec. The two are
+# not on the same scale — `unit_dps` here reads raw per-shot damage out of the ledger while a
+# spec dps0 is the design ladder's figure — and, more importantly, the decisions log marks the
+# DPS restat DEFERRED to the cannon/weapon rebuild ("current in-game DPS is confounded by
+# warhead-mixing"). Reporting that gap as anchor drift would publish ~20x "mismatches" that are
+# a units difference plus a known deferral, not a finding.
+SPEC_COMPARABLE = ("hp", "range", "speed")
+
 
 def fnum(v):
     if v is None:
@@ -213,6 +221,53 @@ def anchor_spread(anchors):
     return sorted(pairs)
 
 
+def anchor_actor_vs_spec(anchors, units):
+    """Does each class's ANCHOR ACTOR actually carry the stats its spec rules for it?
+
+    PRIOR ART: this file already measures how far MEMBERS sit from `spec` (`residuals`,
+    `distance`). What it never checked is the zero point itself — whether the nominated
+    anchor ACTOR is at its ruled stats, and whether the FITTED `cost0` agrees with
+    `spec.cost0`. Those are different questions and the second one gates sign-off.
+
+    `class_anchors.json` holds two things per class, both correct:
+      * `spec.{cost0,hp0,speed0,dps0,range0_wdist}` — the LOCKED target from
+        `docs/balance/anchor_decisions_log.md` (the source of truth for anchors).
+      * top-level `cost0/o0/p0/q0` — FITTED from the anchor actor as it exists in yaml TODAY.
+
+    They disagree because the decisions log's own PER-UNIT APPLICATION LAW step 1 — "2c sets
+    ONLY the 13 baseline actors to the exact table stats" — has not run. Since
+    `price = cost0 * (h + r + d) / 3`, the anchor IS the class's zero point, so signing a
+    class freezes whatever the actor happens to be. Measured 2026-08-30: 0 of 13 vehicle
+    anchor actors were at their locked stats and 13 of 26 classes had fitted cost0 !=
+    spec.cost0, worst `tank_destroyer` at 2.17x.
+    """
+    rows = []
+    for cls in sorted(anchors):
+        entry = anchors[cls]
+        if not isinstance(entry, dict) or "cost0" not in entry:
+            continue
+        spec = entry.get("spec") or {}
+        fitted, want = fnum(entry.get("cost0")), fnum(spec.get("cost0"))
+        actor = entry.get("anchor_actor")
+        rec = units.get(actor)
+        off = []
+        if rec is not None:
+            feat = features(rec)
+            for key in SPEC_COMPARABLE:
+                got, target = feat.get(key), fnum(spec.get(SPEC_KEY[key]))
+                if got is None or target in (None, 0):
+                    continue
+                # range comes from armaments and carries per-weapon jitter; the ladder
+                # itself moves in steps of 500, so anything inside 250 is on target.
+                tol = 250 if key == "range" else 0
+                if abs(got - target) > tol:
+                    off.append(f"{key} {got:g}!={target:g}")
+        ratio = (fitted / want) if (fitted and want) else None
+        rows.append((cls, actor, rec is not None, fitted, want, ratio, off,
+                     entry.get("o0") == entry.get("p0") == entry.get("q0") == fitted))
+    return rows
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", help="write the readiness table here")
@@ -318,6 +373,33 @@ def main():
                   "anchors sit from each other, so the class boundaries are not "
                   "recoverable from stats — they are role judgements. Any check "
                   "that tries to police membership numerically will be wrong.")
+
+    spec_rows = anchor_actor_vs_spec(anchors, {n: rec for _f, _sec, n, rec in units})
+    drift = [r for r in spec_rows if r[5] is not None and abs(r[5] - 1.0) > 1e-9]
+    offspec = [r for r in spec_rows if r[6]]
+    print("\n## Anchor actor vs its ruled spec\n")
+    print("`spec.*` is the LOCKED target from `anchor_decisions_log.md`; the top-level "
+          "`cost0/o0/p0/q0` are FITTED from the anchor actor as it stands in yaml today. "
+          "They disagree wherever the decisions log's application-law step 2c (restat the "
+          "baseline actors to the table) has not run. Since `price = cost0 * (h+r+d)/3`, "
+          "the anchor IS the class zero point, so this gates sign-off.\n")
+    print(f"* fitted `cost0` != `spec.cost0`: **{len(drift)} of {len(spec_rows)}** classes")
+    print(f"* anchor actor off its ruled stats: **{len(offspec)} of {len(spec_rows)}** "
+          "(of those whose actor is in a ledger)")
+    ident = [r[0] for r in spec_rows if r[7]]
+    print(f"* satisfying the baseline identity `o0 = p0 = q0 = cost0`: "
+          f"**{len(ident)} of {len(spec_rows)}**"
+          + (f" ({', '.join('`%s`' % c for c in ident)})" if ident else "") + "\n")
+    if drift or offspec:
+        print("| class | anchor actor | fitted cost0 | spec cost0 | ratio | actor off spec |")
+        print("|---|---|--:|--:|--:|---|")
+        for cls, actor, seen, fitted, want, ratio, off, _id in spec_rows:
+            if ratio is not None and abs(ratio - 1.0) < 1e-9 and not off:
+                continue
+            note = ", ".join(off) if off else ("not in a ledger" if not seen else "on spec")
+            rs = f"{ratio:.2f}x" if ratio is not None else "-"
+            print(f"| `{cls}` | `{actor}` | {fitted:g} | "
+                  f"{want:g} | {rs} | {note} |".replace("None", "-"))
 
     print("\n## Anchors that are statistically indistinguishable\n")
     print("Separated by what they SHOOT AT, not by their stats. No stat-based "

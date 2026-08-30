@@ -6,7 +6,13 @@ class-formula price and the ratio price/cost0, then enforce the baseband law:
 
   * hard band     50%..400%  of the class baseline cost0
   * practical floor  ~75%   (formula breaks down below — units too weak/price)
-  * sweet spot   100%..250%  (baseline..verifier) — target >=80% occupancy
+  * sweet spot   100%..250%  of cost0 — target >=80% occupancy
+
+  The 250% ceiling is a PRICE RATIO. It used to be described as "baseline..verifier",
+  after a nominated second actor pinned at 2.5x cost0 — that verifier was RETIRED on
+  2026-08-29 (HANDOFF §3.0j; maintainer: "they should be regular units like anything
+  else and not have those stiff rules"). The law is unchanged: this check never read a
+  verifier actor, which is exactly why it survived the retirement intact.
 
 Read-only. Emits a report and a nonzero exit if any member is below 75% or
 above 400% (unless it is a BuildLimit:1 epic/hero, which is band-exempt).

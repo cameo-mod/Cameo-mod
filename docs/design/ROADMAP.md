@@ -563,7 +563,8 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    `td_gdi_defenserig` (Superheavy — already correct), `cabal_ravager` (Plate) — decide per-unit whether
    the base-state armor should match class.
 1. **[BLOCKED on maintainer confirm + `--confirm`] Apply VEHICLE stats** — once the REVISION table is
-   confirmed: baselines → `apply_balance --confirm` (fit_class scales members 0.5–4.0×, verifier 2.5×) →
+   confirmed: baselines → `apply_balance --confirm` (fit_class scales members 0.5–4.0×; the 2.5×
+   point is a PRICE RATIO, not an actor — ⛔ RETIRED 2026-08-29 (HANDOFF §3.0j) — no verifier actor exists; the 100–250% band survives as a price ratio.) →
    self-heal Step → epic 4×HP + MonsterTank DPS→10000 → re-extract → audits + BOOT →
    commit yaml+ledger. THEN **infantry** (build the same big class table first, then apply). NOTE: the
    HP/Speed/Cost/DPS restat of the 13 baselines + per-member synthesis is still pending here; DPS/range
@@ -841,7 +842,7 @@ exempt from the R2 check.
 ## Balance — universal class-formula program (2026-07-22, ACTIVE)
 
 **Goal:** ONE balance formula for every class; a class is re-weighted only
-by dropping in a **baseline actor** + **verifier actor** (the two calibrate
+by dropping in a **baseline actor** ~~+ **verifier actor**~~ (⛔ RETIRED 2026-08-29 (HANDOFF §3.0j) — no verifier actor exists; the 100–250% band survives as a price ratio.) (the two calibrate
 the weights). `UnitClass` scalar is deprecated → set to 1.0 once all anchors
 are picked, then delete. Order: infantry → tanks/vehicles → aircraft →
 defenses → naval. All DPS/cost below are PROVISIONAL (maintainer tunes

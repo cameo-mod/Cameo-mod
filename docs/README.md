@@ -95,7 +95,7 @@ Crashes and player-visible regressions always jump the queue.
 |---|---|
 | [`Cameo_Knowledge_Base_Manual.md`](Cameo_Knowledge_Base_Manual.md) | the engine / custom-trait / C# reference |
 | [`reference/WARHEAD_REFERENCE.md`](reference/WARHEAD_REFERENCE.md) | *(measured)* the corpus: family profiles, versus archetypes, archetype tables |
-| [`balance/anchor_decisions_log.md`](balance/anchor_decisions_log.md) | class-anchor decisions — maintainer-confirmed baselines + verifiers |
+| [`balance/anchor_decisions_log.md`](balance/anchor_decisions_log.md) | class-anchor decisions — maintainer-confirmed baselines (its **verifier** columns are history: retired 2026-08-29, HANDOFF §3.0j) |
 | [`balance/formula_v2_classes.md`](balance/formula_v2_classes.md) | per-class formula working logs |
 | [`design/DECISIONS.md`](design/DECISIONS.md) | small settled decisions scoped to one system |
 | [`design/RESEARCH_NOTES.md`](design/RESEARCH_NOTES.md) | source-game and mod research. Binds nothing. |

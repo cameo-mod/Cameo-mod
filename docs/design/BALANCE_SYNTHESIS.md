@@ -739,6 +739,15 @@ to 200×" over-indexed on base HP; the base spread wants only *modest* tightenin
 
 ### 18.4 The maintainer's COST-BAND proposal — assessment (asked: "what do you think?")
 
+> ⛔ **THE VERIFIER IS RETIRED (maintainer, 2026-08-29).** *"We no longer have to have those
+> verifiers. They should be regular units like anything else and not have those stiff rules."*
+> `verifier_actor` is gone from all 27 anchors and from every code path. Wherever this document
+> names a verifier actor, or a "2× HP + 2× DPS → 2.5× cost" second calibration point, read it as
+> **history**: each class now has ONE fixed point, its baseline, and every other member is an
+> ordinary unit priced by the formula. **The 100%–250% band law is NOT retired** — `check_band.py`
+> enforces it on price RATIOS, which never needed a nominated actor. Full ruling and the three
+> measurements behind it: `docs/HANDOFF.md` §3.0j and `docs/design/BALANCE_PIPELINE.md` §8.1.
+
 **Proposal:** run the formula so **every unit sits within 50%–400% of its class-baseline COST** (hard
 caps), with the **verifier at exactly 2.5× cost**. E.g. scout baseline 100 → hard floor 50, hard
 ceiling 400.

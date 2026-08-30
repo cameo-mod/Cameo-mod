@@ -856,10 +856,16 @@ Nine had a value already, and three of those were mine to answer for:
 | `line_breaker` `o0/p0/q0` | ⛔ **RESTORED** to the pre-fit values. My refit recomputed them from TODAY'S yaml, but the class was **LOCKED 2026-07-26** at HP 200000 / DPS 666.7 / cost0 1200 and the yaml has not been restatted to that design. `build_workbook` and `check_band` PRICE against `o0/p0/q0`, so refitting to un-restatted yaml silently moves the target. |
 | `mbt` `o0/p0/q0` 946.79/1093.58/1387.16 → **800/800/800** | ✅ **KEPT.** This one is provable: `BALANCE_PIPELINE.md` §5 states the Naxis Tiger anchor gives `O = P = Q = Cost = 800 exactly`. The old values were drift. |
 
-⚠ **A pre-existing discrepancy found on the way, NOT mine:** `class_anchors.json` gives
-`scout_vehicle` `hp0: 30000`; `anchor_decisions_log.md` LOCKED it at **HP 20000** ("½ the LightTank →
-fragile"). It reads 30000 at `origin/master` too, so it predates this session — but README says the
-JSON is maintained via the log, which makes the log the source of truth. Needs a maintainer call.
+⚠ ~~**A pre-existing discrepancy found on the way, NOT mine:** `class_anchors.json` gives
+`scout_vehicle` `hp0: 30000`; `anchor_decisions_log.md` LOCKED it at **HP 20000**. Needs a maintainer
+call.~~ ⛔ **WITHDRAWN 2026-08-30 — there was no discrepancy, and no maintainer call is needed.**
+Both numbers are correct and they mean different things. The log's **20000** appears in the
+ScoutVehicle section of **2026-07-26**, where it is quoting `td_nod_buggy`'s REAL HP at the time
+("anchored on its REAL stats, not an invented DPS"); the **★ LOCKED 2026-08-01 table**, which the log
+says *"SUPERSEDES all the iterative discussion below"*, rules scout HP **30000**. The JSON's
+`spec.hp0: 30000` is that ruled target. I compared a superseded quote of a live stat against a
+current target and called it a conflict. **Precedence inside the log is dated: the 2026-08-01 table
+wins over every earlier per-class section.** Read the date before reporting a conflict.
 
 ⚠ **And a HARD RULE I missed while implementing the scout_vehicle HP grid.** The log's ScoutVehicle
 section — **LOCKED 2026-07-26**, so the maintainer's question *"scout vehicles also use the infantry
@@ -869,6 +875,86 @@ VEHICLE self-heal (`^VehicleBuffs`, Delay 1 / DamageCooldown 10) to the INFANTRY
 (`^InfantryBuffs`, Delay 2 / DamageCooldown 20 / StartIfBelow 100), and each scout actor needs
 `ChangesHealth@SelfHealing.Step = HP/1000`. Boot-gated yaml, not done. The grid change without the
 self-heal change is half the ruling.
+
+### 3.0s — ✅ VERIFIED (2026-08-30): the verifier retirement landed in the DATA and the CODE, not the DOCS
+
+Re-checked on the maintainer's instruction ("verifiers are not used anymore — deep research on it
+first, but don't trust, verify"). §3.0j's claim that `verifier_actor` is *"stripped from all 27
+anchors and from every code path"* is **TRUE**, and now measured rather than asserted:
+
+| where | result |
+|---|---|
+| `class_anchors.json` `verifier_actor` | **0 of 26** classes carry one ✅ |
+| live code (`propose_class_rebalance.py`) | the only mention is the retirement comment itself ✅ |
+| `check_band.py` | never read a verifier actor — which is exactly why the band law survived intact ✅ |
+| `tools/tests/test_damage_grid_assignment.py::ThereIsNoVerifier` | pins it ✅ |
+
+**But the design documents were never swept, and six of them still taught it as live:**
+`FORMULA_V2.md` §2 is titled *"Baselines & verifiers (fixed points at both envelope ends)"*;
+`BALANCE_SYNTHESIS.md` derives the band from *"the verifier at exactly 2.5× cost"*;
+`BALANCE_PROGRAM_PLAN.md` still listed **"D2. Verifier laws"** as an OPEN deliverable with an
+unticked checklist box; `ROADMAP.md` scheduled a *"scout verifier tier fix"*; and
+`BALANCE_PIPELINE_ESTIMATE.md` **budgeted 26.0 days** for *"restat baselines + verifiers"*. That is
+live schedule and open work items for a mechanism the maintainer cancelled. All six are now
+bannered or struck, and `anchor_decisions_log.md` — which nominates a verifier in nearly every class
+section — carries a header banner saying to read the baseline columns as binding and the verifier
+columns as provenance.
+
+⚠ **What the sweep also turned up, and it is a rule violation, not a nit:** `fit_class.py:395`
+carried **`[[cameo-verifier-tier-k-match]]`** — a **memory citation**, the last one in the live
+tree. CLAUDE.md's Memory section says the live set holds **zero** and *"keep it that way"*, because
+nobody but one agent can open one. It was also citing a retired law as a live constraint. Removed;
+`grep -rn "\[\[cameo-" --include=*.py --include=*.md --include=*.json --include=*.yaml .`
+(excluding `docs/history/`) is back to **0**.
+
+**What is NOT retired:** the **100%–250% band**. `check_band.py` enforces it on price RATIOS. The
+label "baseline..verifier" in its docstring was the retired concept's last footprint in code and has
+been corrected to name the ratio.
+
+### 3.0t — ⛔ MEASURED (2026-08-30): NO vehicle anchor actor carries its ruled stats — 13 of 13
+
+Found while preparing the outlier pass. `class_anchors.json` holds **two different things** per
+class and they are both correct:
+
+* **`spec.{cost0,hp0,speed0,dps0,range0_wdist}`** — the LOCKED target from `anchor_decisions_log.md`.
+* **top-level `cost0/o0/p0/q0`** — **FITTED from the live roster**, i.e. from the anchor actor's
+  stats *as they are in yaml today*.
+
+They disagree because the decisions log's own **PER-UNIT APPLICATION LAW** step 1 — *"2c sets ONLY
+the 13 baseline actors (+ verifiers) to the exact table stats — the anchor per class"* — **has never
+run.** Measured against the ★ LOCKED 2026-08-01 table:
+
+| | |
+|---|---|
+| anchor actors carrying their ruled HP / range / speed | **5 of 26** (21 are off) |
+| vehicle anchor actors at their locked stats | **0 of 13** |
+| classes where fitted `cost0` ≠ `spec.cost0` | **13 of 26** |
+| classes satisfying the baseline identity `o0 = p0 = q0 = cost0` | **1 of 26** (`mbt`) |
+
+Worst offsets: `tank_destroyer` **2.17×** (`naxis_hetzer` 1300¢ vs ruled 600¢, HP 75000 vs 150000),
+`artillery_tank` 1.71×, `dreadnought` 1.50×, `line_breaker` **0.50×**, `missile_vehicle` 0.75×.
+
+⚠ **DPS is deliberately excluded from the "off spec" column.** The ledger's per-shot DPS and a
+`spec.dps0` are not the same quantity, and the decisions log marks the **DPS restat DEFERRED** to the
+cannon/weapon rebuild ("current in-game DPS is confounded by warhead-mixing"). A first cut of this
+check compared them and produced ~20× "mismatches" on every class — a units difference plus a known
+deferral, reported as drift. Only HP, range and speed are compared.
+
+**Why this gates sign-off.** `price = cost0 · (h + r + d)/3`-style ratios, so the anchor IS the
+class's zero point. Signing a class today freezes a baseline taken from a unit that is 2.17× off its
+own ruled cost — and `apply_balance --confirm` would then price every member against it. This is not
+a bug in `fit_class`; it prices what exists, correctly. It is a **sequencing question that only the
+maintainer can answer**:
+
+* **(A) restat the 13 baseline actors to `spec` first** (step 2c — boot-gated yaml, pipeline, needs
+  a maintainer order), then refit, then sign; or
+* **(B) sign the fitted anchors as-is**, accepting the current roster as the zero point and treating
+  the ★ LOCKED table as a later re-anchoring.
+
+Reproduce in one command: **`python3 tools/balance/anchor_readiness.py`** → the section
+*"Anchor actor vs its ruled spec"*. It lives there rather than in a new tool because
+`anchor_readiness` already measures how far MEMBERS sit from `spec`; what it was missing was the
+zero point itself.
 
 ### 3.0i — ✅ ANSWERED (2026-08-30): the uniqueness law separates per-shot DAMAGE
 

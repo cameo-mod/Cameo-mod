@@ -133,6 +133,17 @@ items below remain.
 
 ### PHASE C — Class anchors (baseline + verifier per class, members interpolated)
 
+> ⛔ **THE VERIFIER IS RETIRED (maintainer, 2026-08-29).** *"We no longer have to have those
+> verifiers. They should be regular units like anything else and not have those stiff rules."*
+> `verifier_actor` is gone from all 27 anchors and from every code path. Wherever this document
+> names a verifier actor, or a "2× HP + 2× DPS → 2.5× cost" second calibration point, read it as
+> **history**: each class now has ONE fixed point, its baseline, and every other member is an
+> ordinary unit priced by the formula. **The 100%–250% band law is NOT retired** — `check_band.py`
+> enforces it on price RATIOS, which never needed a nominated actor. Full ruling and the three
+> measurements behind it: `docs/HANDOFF.md` §3.0j and `docs/design/BALANCE_PIPELINE.md` §8.1.
+
+
+
 | # | Sub-task | O | M | P | **E (h)** | Sessions | Depends | Notes |
 |---|---|--:|--:|--:|--:|--:|---|---|
 | C-inf | Finish 14 infantry classes: restat baselines + verifiers, `^AntiTankAntiAir` split, scout-tier fix, membership open-calls | 12 | 24 | 48 | **26.0** | 4–8 | R4 | several started |
