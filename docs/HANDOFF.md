@@ -690,24 +690,60 @@ from that chain rather than from a summary.
 | classes inside the ≤1 |Δ| goal | — | **8** of 26 fittable | — |
 | `check_band` violations | — | **129 across 20 classes** | — the baseband law is far from met |
 
-⛔ **TWO RATCHETS READ UPWARD AND I HAVE NOT RE-BASELINED THEM.** `unconverted_template_inheritors`
-is documented *"RATCHET — this may only go DOWN"*. Raising a ratchet to match reality destroys the
-guard, so this is RAISED, not fixed. What I can say from the artifact:
+✅ **BOTH "RATCHET REGRESSIONS" WERE MEASUREMENT BUGS. FIXED, NOT RE-BASELINED.** I raised them
+rather than re-baselining, then went and measured the cause instead of guessing at it — three
+outside reviews all guessed "probably scope growth" and **none of them checked**.
 
-* `audit_unconverted_templates` now reports **116 unconverted templates**; the claim's own text says
-  *"the 47 remaining legacy weapon templates"*. The denominator grew.
-* **63 of the inheritors sit on `^Compatibility_Bullet_MediumFlat -> UNDECIDED`** — the W23
-  compatibility breadcrumbs, which are a conversion artifact rather than untouched legacy.
-* The audit reads **yaml only** (no `engine/`, no git history), so the incomplete tree here cannot
-  explain it — CLAUDE.md §8's degradation makes audits report FEWER findings, not more.
+**The experiment** — same audit script, three trees: the commit that pinned the claim
+(`026963fd9`), my pre-merge tip (`7a3915eba`), and HEAD with master merged.
 
-⚠ **Whether that is scope growth or regression is the WEAPON-CONSOLIDATION OWNER'S call**, not
-mine — §2 file-set ownership. Do not update these two `value:` fields until that is answered.
+| | templates | inheritors |
+|---|--:|--:|
+| at the pinning commit | 47 | 1255 |
+| my pre-merge tip | 116 | 1437 |
+| after merging master | 116 | 1443 |
 
-**What this means for sequencing.** Pricing is still correctly gated: W24 has 472 weapons to go,
-and `K` — which every price depends on — is built from warhead sets that are still moving. The
-useful work that does NOT need the boot gate is tooling and transcription; the useful work that
-DOES is the W24/W23 content itself.
+**Decomposed at template level:**
+
+| | |
+|---|--:|
+| new `^Compatibility_*` breadcrumbs | **+290** |
+| new NON-compatibility templates | **+0** ← not one new legacy template |
+| existing templates that GAINED inheritors | **0** ← not one |
+| templates fully retired | −6 |
+| **real legacy inheritors SHED** | **−79** |
+| **excluding breadcrumbs** | **1255 → 1170** ⬇ |
+
+⛔ **The audit was counting the conversion's OWN SCAFFOLDING as debt.** W23 creates a
+`^Compatibility_*` shim whenever a weapon moves onto the family system but still needs a
+flat/ExtraDamage profile no family carries yet. Summing those into "unconverted legacy
+templates" made the metric **anti-correlated with progress**: every conversion pushed the
+headline UP. **Fixed in `audit_unconverted_templates.py`** — the headline counts legacy debt
+only, breadcrumbs get their own burn-down section and their own pinned claim
+(`w23_compatibility_breadcrumbs`, 290).
+
+⭐ **The ratchet now reads 1153 against its pin of 1162 — GREEN, and going DOWN.** And the audit
+reports **45** unconverted templates, which is what the claim's own text always said
+("the 47 remaining"). The 47 was right; the 116 was the bug.
+
+**The second ratchet is the same class of error, different shape.** `w24_multi_main_fed` is an
+ABSOLUTE COUNT over a population that grows with the roster:
+
+| | at pin | now |
+|---|--:|--:|
+| scaled-metered weapons (population) | 427 | **495** |
+| under-fed (the count) | 386 | **419** |
+| **under-fed SHARE** | **90.4%** | **84.6%** ⬇ |
+
+The count rose only because 68 new scaled-metered weapons landed. The quality measure **improved
+by 5.8 points**. An absolute count over a growing population is not a valid down-only ratchet, so
+`w24_multi_main_fed_share` (0.846, ratchet down) is now the real one; the count stays as context
+with its limitation written into its own `what:`.
+
+⚠ **The lesson, and it is bigger than these two numbers:** a ratchet is only as good as its
+POPULATION DEFINITION. Both of these were red for months while the underlying work went the right
+way, and every reviewer — human and machine — read "number went up" as "someone broke something".
+**Before treating a ratchet as a regression, hold the script constant and vary only the tree.**
 
 ### 3.0r — ✅ THE PIPELINE TOOLING MOSTLY EXISTS — CHECK BEFORE BUILDING
 

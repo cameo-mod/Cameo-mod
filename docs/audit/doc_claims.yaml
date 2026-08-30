@@ -283,7 +283,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 380
+    value: 419
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -414,6 +414,52 @@ claims:
       print(sum(1 for v in d.values()
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
 
+  - id: w23_compatibility_breadcrumbs
+    value: 290
+    tolerance: 0
+    what: >
+      Weapons inheriting a `^Compatibility_*` breadcrumb — the W23 conversion's OWN
+      scaffolding, created when a weapon moves onto the family system but still needs a shim
+      for a flat/ExtraDamage profile no family carries yet. ⚠ NOT legacy debt and NOT summed
+      into unconverted_template_inheritors: doing so made that ratchet ANTI-CORRELATED WITH
+      PROGRESS, rising 1255 -> 1460 while real legacy inheritors FELL by 85. This is its own
+      burn-down and it legitimately rises while W23 runs; it falls as the families grow to
+      carry these profiles. Measured 2026-08-30: 71 templates, 290 inheritors.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
+    measure: |
+      import re, subprocess, sys
+      out = subprocess.run([sys.executable, 'tools/audit/audit_unconverted_templates.py'],
+                           capture_output=True, text=True).stdout
+      print(re.search(r'(\d+) direct inheritors \(separate burn-down\)', out).group(1))
+
+  - id: w24_multi_main_fed_share
+    value: 0.846
+    tolerance: 0.01
+    what: >
+      RATCHET (the REAL one) — the SHARE of damage-scaled metered weapons whose meter is fed by
+      less than 100% of main damage. ⚠ The absolute count `w24_multi_main_fed` is NOT a valid
+      down-only ratchet: its population grows as the roster does, so it rose 380 -> 419 purely
+      because scaled-metered weapons went 427 -> 495. Over the same span the SHARE fell
+      90.4% -> 84.6%, i.e. the work improved while the count "regressed". Track the share.
+    docs: [docs/design/WEAPON_3WAY_SPLIT.md, docs/HANDOFF.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      import physical_state_price as psp
+      rs = Model().rs
+      pop = under = 0
+      for w in psp.fired_weapons(rs):
+          _d, binds = psp.weapon_bindings(rs, w)
+          if not any(k == 'scaled' for _m, k, _g in binds):
+              continue
+          total, fed = psp.damage_split(rs, w)
+          if total > 0:
+              pop += 1
+              if fed / total < 0.999:
+                  under += 1
+      print(round(under / pop, 3) if pop else 0)
+
   - id: warhead_family_reach
     value: 1245
     tolerance: 0
@@ -453,7 +499,7 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 1162
+    value: 1153
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).
