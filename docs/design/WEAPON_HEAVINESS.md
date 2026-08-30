@@ -694,6 +694,53 @@ of every ladder. Measured across 48 families:
 So the spread band needs no widening, no warhead needs authoring for this, and the endpoint-only
 check that produced the two "known inversions" was also blind to 125 further reorderings.
 
+#### 9.2b ⛔ MEASURED 2026-08-30 — THE BELL DOES NOT TOUCH MACRO CONTRAST. It is a WITHIN-ladder instrument.
+
+Everything §9.2/§9.6a measures about the bell is about **rows and ladder ORDER**: 0 orderings
+changed, 0 mean drift, 3–6% from each discrete tilt. Nobody had asked what it does to **macro
+contrast** — the ratio between the INF, VEH and BLD ladder MEANS, which is the metric that sits at
+**1.63–1.82× against peers' 2.35–3.00×**. Measured over the 153 family-template profiles:
+
+| state | macro contrast | row spread |
+|---|--:|--:|
+| **shipped `class_tilt`** | **1.67×** | 2.96× |
+| bell `h=0` | 1.66× | **3.30×** |
+| bell `h=1` | 1.66× | 2.97× |
+| bell `h=2` | **1.65×** | **2.81×** |
+
+**Macro contrast does not move — 1.67 → 1.65, which is rounding.** Row spread moves properly: a
+**17% swing** from h=0 to h=2, which is the bell doing exactly its job.
+
+⛔ **THE CONSEQUENCE, AND IT MATTERS BEFORE THE SWITCH: the bell is NOT the fix for the macro
+contrast gap, and switching the emitter to it will not buy any.** The two knobs are orthogonal by
+construction —
+
+* the bell moves a peak **along a ladder** and renormalises to a constant weighted mean, so it
+  redistributes *inside* each ladder;
+* macro contrast is set by **which macro block leads the profile order** and by
+  `gen_weapon_template`'s *"interleave tied blocks round-robin"*, which spreads a weapon's strong
+  rows across several ladders before the bell ever runs.
+
+A constant weighted mean is precisely why the bell cannot raise macro contrast: lifting one
+ladder's mean must lower another's, and the bell has no term that prefers one ladder over another.
+
+**So the two pieces of work are independent and must not be conflated:**
+
+| goal | instrument | status |
+|---|---|---|
+| continuous heaviness, 3 templates → 1 + `h` | the bell | implemented, unwired, boot-gated |
+| raise macro contrast toward the genre's 2.4–3.0× | a macro-contrast axis in the profile ORDER | not built |
+
+Doing the bell switch first is still legitimate — it collapses templates and is measured at 3–6%
+fidelity — but it should be justified on **that** benefit, not on an armor-tilt improvement it
+cannot deliver.
+
+⚠ **Population note, so these numbers are not misread against §9.4's.** This table measures the
+**153 family-template** profiles; the 4.00× row spread reported elsewhere on 2026-08-30 measures
+**6,093 live weapon** profiles. Templates and the weapons that inherit them are different
+populations and their medians legitimately differ — always name which one a spread figure came
+from.
+
 #### 9.3 ⚠ TRADE-OFF — a constant mean means heaviness NO LONGER RAISES THE PRICE
 
 `HEAVINESS_RESEARCH.md` §1 established that K = SUM(share x versus x ...) reads the weighted mean
