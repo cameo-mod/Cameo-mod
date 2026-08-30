@@ -400,12 +400,13 @@ claims:
       print(len(fams))
 
   - id: signed_off_class_anchors
-    value: 3
+    value: 0
     tolerance: 0
     what: >
-      Class anchors the maintainer has signed off (W11) — dreadnought, heavy_infantry, scout.
-      The other 24 hold every price: apply_balance --confirm has nothing correct to apply for
-      a class until its anchor is signed.
+      Class anchors the MAINTAINER has signed off (W11). Back to 0 on 2026-08-30: the three that
+      read as signed (dreadnought, heavy_infantry, scout) were signed by an agent on its own
+      validation tables, and fit_class.py step 4 reserves that for the maintainer because signing
+      unblocks apply_balance --confirm for the class. While this is 0, NO price is final.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import json, pathlib
@@ -798,12 +799,12 @@ claims:
       print(round(tagged / total * 100, 1))
 
   - id: class_anchors_signed_off
-    value: 3
+    value: 0
     tolerance: 0
     what: >
-      Class anchors with signed_off true — dreadnought, heavy_infantry, scout.
-      apply_balance --confirm is a NO-OP for every class whose anchor is unsigned,
-      so this is the single number that says how far pricing can run at all.
+      Class anchors with signed_off true. apply_balance --confirm is a NO-OP for every class
+      whose anchor is unsigned, so this is the single number that says whether pricing can run
+      at all. Reverted to 0 on 2026-08-30 — see signed_off_class_anchors.
       (Duplicate id of signed_off_class_anchors, kept because the two carry
       different `docs:` lists; change BOTH or the audit goes half-red.)
     docs: [docs/HANDOFF.md, docs/design/BALANCE_PIPELINE.md]

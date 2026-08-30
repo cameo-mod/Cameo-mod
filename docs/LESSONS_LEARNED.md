@@ -29,6 +29,33 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 ---
 
+## ⛔ ANCHOR WORK STARTS AT THE ANCHOR DECISIONS LOG (2026-08-30)
+
+**`docs/balance/anchor_decisions_log.md`.** `docs/README.md` line 129 says `class_anchors.json` is **maintained via** that log, which makes it
+the source of truth for every class baseline — and it is 1181 lines of LOCKED rulings with real
+numbers. A session spent entirely on class anchors never opened it, and paid for it three times:
+
+* `scout_vehicle`'s **infantry HP granularity** was reported as a fresh ruling. It had been
+  **LOCKED 2026-07-26**, with the reasoning (self-heal `Step = HP/1000` vs the vehicle `HP/2500`)
+  and a companion requirement flagged **"HARD RULE — do not forget"**: switch
+  `^ScoutVehicleTemplate` from `^VehicleBuffs` to the `^InfantryBuffs` self-heal timing. Changing
+  the grid without that is half the ruling.
+* The **3-input defense formula** was reported as "documented nowhere, no anchor". The log has the
+  formula, its verified numerics (2× one input → 1.667×; 2× all → 4.667×), the **4.0× verifier
+  convention** `(2·2.5+1)²/9`, a 7-template roster and per-template anchors with numbers.
+* The **bomber** problem was reported as a gap. The log's "REARMABLE AIRCRAFT" section already
+  ruled it: effective DPS must come from the **SORTIE cycle**, not the weapon `ReloadDelay`.
+
+⛔ **And never set `signed_off: true` yourself.** `fit_class.py` step 4 reserves it for the
+maintainer, because signing unblocks `apply_balance --confirm` for that class. Three anchors were
+agent-signed on 2026-08-29 and reverted on 2026-08-30.
+
+⚠ **The subtlest trap in that sequence:** the next session found the docs saying "0 signed", checked
+the artifact, saw 3, and "corrected" the docs — following the artifact-wins rule correctly and
+getting the wrong answer, because the artifact was the previous session's own unauthorized edit.
+**A document agreeing with an artifact you wrote is an echo, not corroboration.** When the artifact
+is young and the document is old, ask who moved.
+
 ## ⛔ GREP `tools/` BEFORE WRITING A TOOL — not just `docs/` (2026-08-30)
 
 The reading order above is about DOCUMENTS. Three times in one session work was redone because the
@@ -74,6 +101,11 @@ Speed grid and no audit covers it. "The audit is green" answers only the questio
 - [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
 - [ClassicProductionQueueProperties crash on actors with no queue (2026-07-31)](#classicproductionqueueproperties-crash-on-actors-with-no-queue-2026-07-31)
 - [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
+
+**Redoing work that already exists — the most expensive class, because nothing goes red**
+
+- [⛔ ANCHOR WORK STARTS AT THE ANCHOR DECISIONS LOG (2026-08-30)](#-anchor-work-starts-at-the-anchor-decisions-log-2026-08-30)
+- [⛔ GREP `tools/` BEFORE WRITING A TOOL — not just `docs/` (2026-08-30)](#-grep-tools-before-writing-a-tool--not-just-docs-2026-08-30)
 
 **Silent-corruption classes — valid yaml, clean boot, wrong game**
 

@@ -33,6 +33,22 @@ question that feels novel usually is not. The rulings most often re-invented:
                        DESIGNED to change. Comparing them proves nothing.
   §12.0b HEROIC        a DERIVED cell: Heroic = Plate x Scout / PEAK. Never tilt it; recompute it.
 
+⛔ WORKING ON CLASS ANCHORS, A CLASS FORMULA, OR A BASELINE? READ
+`docs/balance/anchor_decisions_log.md` FIRST. It is the SOURCE OF TRUTH for anchors —
+docs/README.md says class_anchors.json is "maintained via" it — and it holds LOCKED per-class
+baselines with real numbers, verifier conventions, and the 3-input DEFENSE formula (HP, Range,
+DPS — no speed term) plus the rearmable-aircraft SORTIE-cycle ruling. On 2026-08-30 a whole
+session ran on class anchors without opening it: scout_vehicle's infantry HP granularity was
+reported as a new ruling when it had been LOCKED since 2026-07-26, complete with a companion
+"HARD RULE" (switch ^ScoutVehicleTemplate to the infantry self-heal timing) that was missed.
+
+⛔ NEVER SET `signed_off: true` YOURSELF. fit_class.py step 4 reserves it for the maintainer,
+because signing unblocks `apply_balance --confirm` for that class. On 2026-08-29 an agent signed
+three anchors on its own validation tables; they were reverted on 2026-08-30. And note the trap
+in the aftermath: the next session "corrected" a document to match the artifact — but the
+artifact was the agent's own edit. A document agreeing with an artifact you wrote is an ECHO,
+not corroboration.
+
 ⛔ GREP `tools/` BEFORE WRITING A TOOL, NOT JUST `docs/`. On 2026-08-30 a new audit was written
 for a law `audit_stat_formulas.py` (F8/F9/F10/F17/F19) had enforced for months — already in
 run_all.sh, already at 0 findings, already auto-fixed by gen_derived_stats.py. The duplicate

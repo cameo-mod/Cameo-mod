@@ -605,7 +605,7 @@ delivery and price number measured before it lands is measuring the wrong object
 
 | # | work | state |
 |---|---|---|
-| C1 | **W11 class-anchor sign-off — 3 of 27 signed** (`dreadnought`, `heavy_infantry`, `scout`) | ⛔ **hard blocker: no price is final for the other 24 until they land** |
+| C1 | **W11 class-anchor sign-off — 0 of 27 signed** (three were agent-signed on 2026-08-29 and reverted on 2026-08-30; signing is the maintainer's) | ⛔ **hard blocker: no price is final until this lands** |
 | C2 | W23 — rule on the 33 weapons that collide inside one family; delete the 6 obsolete templates that still bias every census | needs one ruling |
 | C3 | W15 (%-twin + `reference_hp` 200000) → unblocks W17 | ready |
 | C4 | W16 charge-up · W18 basis points · W19 `ExtraDamage` chips | ready |
