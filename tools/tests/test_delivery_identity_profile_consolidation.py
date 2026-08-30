@@ -114,7 +114,7 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
         self.assertIn("Warhead@Bullet_Medium", keys)
 
     def test_ratchets_match_the_live_reduction(self):
-        self.assertEqual(644, SPLIT_BASELINE)
+        self.assertEqual(643, SPLIT_BASELINE)
         self.assertEqual(350, BROADCAST_BASELINE)
 
 

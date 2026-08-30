@@ -124,7 +124,7 @@ class WeaponUpgradeContractTest(unittest.TestCase):
         self.assertIsNone(kodiak_projectile.get("PointDefenseTypes"))
 
     def test_sonic_hellfire_is_one_exact_reviewed_composite(self):
-        self.assertEqual(644, SPLIT_BASELINE)
+        self.assertEqual(643, SPLIT_BASELINE)
         self.assertEqual(
             {"TSHellfireSonic": ("MissileAP_Heavy", "Sonic_Medium")},
             INTENTIONAL_COMPOSITES,

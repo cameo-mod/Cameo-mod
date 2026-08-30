@@ -50,7 +50,7 @@ import percentage_damage as pd  # noqa: E402
 
 # Keep the design reference in the matrix even when no active actor currently
 # authors that exact HP. Active authored HP values are added below so the audit
-# also catches the parked runtime's rounding and unchecked Int32 overflow.
+# also catches live folded-percentage quantisation and checked-result overflow.
 PERCENTAGE_REFERENCE_HP = 200_000
 
 

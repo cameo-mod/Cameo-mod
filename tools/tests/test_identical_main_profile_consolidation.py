@@ -1,9 +1,11 @@
+import json
 import pathlib
 import sys
 import unittest
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
+FREEDOM_REPORT = ROOT / "docs/audit/latest/freedom_rocket_base_comparison.json"
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "balance"))
 
@@ -13,6 +15,7 @@ from consolidate_identical_main_profiles import (
     SELECTED,
     remaining_groups,
 )
+import consolidate_freedom_rocket_base as freedom
 from miniyaml import Ruleset
 
 
@@ -24,11 +27,10 @@ class IdenticalMainProfileConsolidationTests(unittest.TestCase):
     def test_selected_identical_groups_are_fully_consolidated(self):
         self.assertEqual([], remaining_groups(self.rules))
 
-    def test_unsafe_percentage_and_state_cases_remain_separate(self):
+    def test_freedom_rocket_base_is_folded_but_elite_remains_split(self):
         freedom_expected = {
             "RA2FreedomRocket": {
-                "MissileAP_MediumFlatCompatibility": ("120000", "0"),
-                "MissileAP_Medium": ("60000", "10000"),
+                "MissileAP_Medium": ("180000", "3333"),
             },
             "RA2FreedomRocket_elite": {
                 "MissileAP_MediumFlatCompatibility": ("240000", "0"),
@@ -44,6 +46,25 @@ class IdenticalMainProfileConsolidationTests(unittest.TestCase):
             for key, (damage, scale) in expected.items():
                 self.assertEqual(damage, nodes[key].get("Damage"))
                 self.assertEqual(scale, nodes[key].get("PercentageScale"))
+
+        self.assertEqual(
+            freedom.ELITE_MAIN_ORDER,
+            main_warheads(self.rules.resolve_weapon("RA2FreedomRocket_elite")),
+        )
+
+        self.assertTrue(freedom.inspect(self.rules))
+
+    def test_freedom_rocket_whole_tree_comparison_is_structural_only(self):
+        report = json.loads(FREEDOM_REPORT.read_text(encoding="utf-8"))
+        self.assertEqual([], report["added"])
+        self.assertEqual([], report["removed"])
+        self.assertEqual({"RA2FreedomRocket"}, set(report["changed"]))
+        self.assertEqual(
+            ["blast_shape", "64|100, 0|-|- ; 64|100, 0|-|-", "64|100, 0|-|-"],
+            report["changed"]["RA2FreedomRocket"][0],
+        )
+
+    def test_stateful_fireball_case_remains_separate(self):
 
         fireball_nodes = {
             node.key.removeprefix("Warhead@"): node

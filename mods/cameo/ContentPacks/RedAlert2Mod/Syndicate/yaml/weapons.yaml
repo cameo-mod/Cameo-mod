@@ -236,7 +236,6 @@ RA2FreedomAK47_elite:
 		PercentageScale: 3328
 
 RA2FreedomRocket:
-	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^FlakWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^RA2MediumMissile
@@ -265,15 +264,13 @@ RA2FreedomRocket:
 		Damage: 30
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air, Garrisoned
-		Damage: 60000
+		Damage: 180000
+		PercentageScale: 3333
 	-Warhead@FlakWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@MissileAP_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air, Garrisoned
-		Damage: 120000
-		PercentageScale: 0
 RA2FreedomRocket_elite:
+	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: RA2FreedomRocket
 	Range: 8130
 	Projectile: Missile
@@ -296,6 +293,7 @@ RA2FreedomRocket_elite:
 		Damage: 60
 	Warhead@MissileAP_Medium:
 		Damage: 120000
+		PercentageScale: 10000
 	-Warhead@FlakWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:

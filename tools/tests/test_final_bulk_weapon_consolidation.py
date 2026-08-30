@@ -98,12 +98,12 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
             self.assertTrue(own.isdisjoint(inherited), weapon)
 
     def test_structural_backlog_ratchet_was_lowered(self):
-        self.assertEqual(644, SPLIT_BASELINE)
+        self.assertEqual(643, SPLIT_BASELINE)
 
     def test_rejected_runtime_and_role_hazards_remain_unconverted(self):
         rules = Ruleset(ROOT)
         deferred = {
-            # Percentage overflow or inherited percentage drift.
+            # Live percentage quantisation or inherited percentage drift.
             "RA2FreedomRocket_elite", "RA2120xmm_rad",
             # Split ground/air routing without a reviewed single profile.
             "d2k_shotgun",

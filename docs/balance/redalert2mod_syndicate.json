@@ -1900,13 +1900,6 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "120000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "30",
         "falloff": null,
         "spread": "125",
@@ -1921,7 +1914,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "60000",
+        "damage": "180000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -1936,7 +1929,6 @@
       "requires": "!rank-elite",
       "slot": "Armament@ROCKET",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
        "^FlakWeapon",
        "^ShrapnelWeapon",
        "^RA2MediumMissile"
@@ -1987,6 +1979,7 @@
       "requires": "rank-elite",
       "slot": "Armament@ROCKETELITE",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "RA2FreedomRocket"
       ],
       "warheads": [
@@ -2091,13 +2084,6 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "120000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "30",
         "falloff": null,
         "spread": "125",
@@ -2112,7 +2098,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "60000",
+        "damage": "180000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -2127,7 +2113,6 @@
       "requires": "!rank-elite",
       "slot": "Armament@RocketGARRISONED",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
        "^FlakWeapon",
        "^ShrapnelWeapon",
        "^RA2MediumMissile"
@@ -2178,6 +2163,7 @@
       "requires": "rank-elite",
       "slot": "Armament@RocketGARRISONEDELITE",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "RA2FreedomRocket"
       ],
       "warheads": [

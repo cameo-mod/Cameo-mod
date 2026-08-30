@@ -119,7 +119,7 @@ class ExplicitFamilyStateProfileTests(unittest.TestCase):
             self.assertIn("^Warhead_CannonHE_Medium", child_parents, name)
 
     def test_ratchets_match_the_live_reduction(self):
-        self.assertEqual(644, SPLIT_BASELINE)
+        self.assertEqual(643, SPLIT_BASELINE)
         self.assertEqual(350, BROADCAST_BASELINE)
 
 
