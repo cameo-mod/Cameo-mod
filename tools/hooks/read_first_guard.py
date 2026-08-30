@@ -48,10 +48,38 @@ ALWAYS = (
 )
 # Topic-conditional. README line 129: class_anchors.json is "maintained via"
 # the decisions log, which makes the log the source of truth for every baseline.
+# ⚠ A GUARD WRITTEN FROM ONE INCIDENT COVERS ONE INCIDENT. This map held a SINGLE entry — the
+# anchor log — because that was the failure that prompted it. On 2026-08-30 the same class of
+# mistake happened again in a topic the map did not name: a full armor-tilt investigation ran
+# without `WEAPON_HEAVINESS.md`, whose §9.4 ALREADY RULED the 2x-8x band with a 4x target and
+# already recorded 37 of 42 families in it. Hours went into re-deriving a law, and a measurement
+# was reported as a defect when the law it supposedly violated was being met exactly. In the same
+# pass two external reviews asserted `Jumpjet = Plate x Scout`; `ARMOR_LAYERS.md` line 1714 says
+# `jumpjet = fighter x scout`, and nothing required that file to be open either.
+#
+# So the entries below are not a list of nice-to-reads. Each one is the document that would have
+# prevented a specific, dated failure, and the trigger words are the vocabulary that failure used.
 TOPICAL = {
     "docs/balance/anchor_decisions_log.md": (
         "anchor", "class_anchors", "baseline", "cost0", "signed_off", "verifier",
         "fit_class", "formula", "dps0", "hp0",
+    ),
+    # §9.4 is the spread law: 2x-8x, target 4x. Anyone measuring "tilt" or "spread" is measuring
+    # against a band that already exists, and needs to know which of the two metrics they hold.
+    "docs/design/WEAPON_HEAVINESS.md": (
+        "tilt", "spread", "heaviness", "macro contrast", "spread band", "2x-8x",
+        "mean-100", "mean_100", "bell",
+    ),
+    # The armor vocabulary and the DERIVED/hybrid armors. `Heroic = Plate x Scout / PEAK`,
+    # `Jumpjet = Fighter x Scout`. Getting a derived row wrong propagates into every profile.
+    "docs/design/ARMOR_LAYERS.md": (
+        "armor", "versus", "heroic", "jumpjet", "airborne", "plating", "armor ladder",
+        "armor type", "shield",
+    ),
+    # §0a: weapon STRUCTURE before pricing. Any weapon/warhead work is downstream of it.
+    "docs/design/BALANCE_PROGRAM_PLAN.md": (
+        "w24", "w23", "w27", "order of operations", "structure_debt", "multi-main",
+        "three_way", "3-way split", "warhead family",
     ),
 }
 GUARDED_ROOTS = ("docs", "tools")

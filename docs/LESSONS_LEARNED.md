@@ -29,6 +29,37 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 ---
 
+## ⛔ A GUARD WRITTEN FROM ONE INCIDENT COVERS ONE INCIDENT (2026-08-30)
+
+`read_first_guard.py` was built after a session ran on class anchors without opening
+`anchor_decisions_log.md`. It worked — and then the **same class of failure recurred in a topic
+its map did not name.** A full armor-tilt investigation ran without `WEAPON_HEAVINESS.md`, whose
+**§9.4 already ruled the 2×–8× band with a 4× target** and already recorded 37 of 42 families
+inside it. Hours went into re-deriving a law, and a fresh measurement (macro contrast 1.7×) was
+reported as a defect when the law it supposedly violated was being **met exactly** (row spread
+4.00×, 80% in band). In the same pass two external reviews asserted `Jumpjet = Plate × Scout`;
+`ARMOR_LAYERS.md` line 1714 says **`jumpjet = fighter × scout`** — and nothing required that file
+to be open either.
+
+**The guard's `TOPICAL` map had exactly ONE entry.** Not because armor work was judged safe, but
+because nobody had generalised it past the incident that prompted it. A guard authored from a
+single failure encodes that failure, not the class of failure.
+
+**Now:** the map names four documents, each the one that would have prevented a specific dated
+mistake, with the vocabulary that mistake used —
+`anchor_decisions_log.md` (anchors, baselines, sign-off) ·
+`WEAPON_HEAVINESS.md` (tilt, spread, the band, MEAN-100, the bell) ·
+`ARMOR_LAYERS.md` (armor, Versus, the DERIVED armors Heroic and Jumpjet, plating) ·
+`BALANCE_PROGRAM_PLAN.md` (W24/W23/W27, order of operations, structure debt).
+Pinned by `tools/tests/test_read_first_guard.py::TheTopicalMapCoversMoreThanOneIncident`, which
+tests the TOPICS rather than the mechanism so the map cannot silently shrink back.
+
+⚠ **And a note the test itself taught:** *"armor tilt"* correctly triggers **both** armor
+documents. The first draft of that test expected `WEAPON_HEAVINESS` alone to unblock the edit and
+failed — correctly. An agent holding only half of that pair is precisely the agent who re-derives
+§9.4 while getting a derived armor row wrong. When a guard and an expectation disagree, check
+which one is describing reality before "fixing" the guard.
+
 ## ⛔ ANCHOR WORK STARTS AT THE ANCHOR DECISIONS LOG (2026-08-30)
 
 **`docs/balance/anchor_decisions_log.md`.** `docs/README.md` line 129 says `class_anchors.json` is **maintained via** that log, which makes it

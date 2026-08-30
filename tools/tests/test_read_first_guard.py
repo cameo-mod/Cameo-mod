@@ -133,5 +133,57 @@ class EveryGuardStaysWired(unittest.TestCase):
             self.assertIn(hook, blob)
 
 
+class TheTopicalMapCoversMoreThanOneIncident(unittest.TestCase):
+    """⚠ A GUARD WRITTEN FROM ONE INCIDENT COVERS ONE INCIDENT.
+
+    `TOPICAL` held a single entry — the anchor decisions log — because that was the failure that
+    prompted the guard. On 2026-08-30 the identical class of mistake recurred in a topic the map
+    did not name: a full armor-tilt investigation ran without `WEAPON_HEAVINESS.md`, whose §9.4
+    had ALREADY ruled the 2x-8x band with a 4x target and already recorded 37 of 42 families
+    inside it. A law was re-derived from scratch, and a measurement was reported as a defect when
+    the law it supposedly broke was being met exactly. In the same pass two external reviews
+    asserted `Jumpjet = Plate x Scout`, while `ARMOR_LAYERS.md` says `jumpjet = fighter x scout`,
+    and nothing required that file to be open either.
+
+    These pin the TOPICS rather than the mechanism, so the map cannot silently shrink back to one.
+    """
+
+    def test_armor_tilt_work_requires_the_spread_law(self):
+        allowed, reason = edit("docs/DESIGN.md", ALWAYS,
+                               "raise the armor tilt spread band toward 4x")
+        self.assertFalse(allowed)
+        self.assertIn("WEAPON_HEAVINESS", reason)
+
+    def test_reading_BOTH_armor_docs_unblocks_it(self):
+        """`armor tilt` legitimately triggers two documents, and both are required.
+
+        The first draft of this test expected WEAPON_HEAVINESS alone to unblock it and failed —
+        correctly. The phrase carries the spread law AND the armor vocabulary, and an agent who
+        has read only one of them is exactly the agent who re-derives §9.4 while getting a
+        derived armor row wrong. The guard was right; the expectation was wrong.
+        """
+        allowed, _ = edit("docs/DESIGN.md",
+                          ALWAYS + ["docs/design/WEAPON_HEAVINESS.md",
+                                    "docs/design/ARMOR_LAYERS.md"],
+                          "raise the armor tilt spread band toward 4x")
+        self.assertTrue(allowed)
+
+    def test_derived_armor_work_requires_the_armor_layers_doc(self):
+        allowed, reason = edit("docs/DESIGN.md", ALWAYS,
+                               "jumpjet armor is fighter x scout, heroic is plate x scout")
+        self.assertFalse(allowed)
+        self.assertIn("ARMOR_LAYERS", reason)
+
+    def test_weapon_structure_work_requires_the_program_plan(self):
+        allowed, reason = edit("docs/DESIGN.md", ALWAYS,
+                               "W24 multi-main collapse and the 3-way split order")
+        self.assertFalse(allowed)
+        self.assertIn("BALANCE_PROGRAM_PLAN", reason)
+
+    def test_an_unrelated_edit_is_caught_by_none_of_it(self):
+        allowed, _ = edit("docs/README.md", ALWAYS, "fix a typo in the orientation page")
+        self.assertTrue(allowed)
+
+
 if __name__ == "__main__":
     unittest.main()
