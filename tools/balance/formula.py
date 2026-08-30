@@ -924,10 +924,19 @@ def class_baseline_estimators(hp, speed, range_wdist, dps_value,
     anchor's own f(C_anchor) would under- or over-price the baseline.  Use
     ``tier_multiplier`` for the unit and divide by the anchor's multiplier.
     """
-    h = hp / hp0
-    s = speed / speed0
-    r = (range_wdist / range0_wdist) * special
-    d = dps_value / dps0
+    # ⚠ A MISSING BASELINE IS NOT A ZERO BASELINE. A class whose spec omits an axis
+    # (`support` carries neither range0_wdist nor dps0 — its members are non-combat)
+    # reached here and took the whole proposal down with a bare ZeroDivisionError.
+    # Treat a missing baseline as "this axis does not price this class": the ratio is 1,
+    # which leaves the term neutral in every degree instead of crashing.
+    h = (hp / hp0) if hp0 else 1.0
+    s = (speed / speed0) if speed0 else 1.0
+    # A class whose spec carries no range baseline (`support`) reached here with
+    # range0_wdist == 0 and crashed the whole proposal with a bare ZeroDivisionError.
+    # Treat a missing baseline as "range is not a pricing axis for this class": r = 1
+    # leaves the term neutral instead of taking the run down.
+    r = ((range_wdist / range0_wdist) if range0_wdist else 1.0) * special
+    d = (dps_value / dps0) if dps0 else 1.0
     o = (h + s + r + d) * cost0 / 4 * tech_tier
     p = ((h * s) + (r * d)) * cost0 / 2 * tech_tier
     q = (h * s * r * d) * cost0 * tech_tier
@@ -968,9 +977,18 @@ def class_baseline_estimators_3(hp, range_wdist, dps_value,
     At the baseline (h=r=d=1): O = P = Q = cost0 and price = cost0.
     Price is still LINEAR in r (h, d constant), so solve_range stays closed-form.
     """
-    h = hp / hp0
-    r = (range_wdist / range0_wdist) * special
-    d = dps_value / dps0
+    # ⚠ A MISSING BASELINE IS NOT A ZERO BASELINE. A class whose spec omits an axis
+    # (`support` carries neither range0_wdist nor dps0 — its members are non-combat)
+    # reached here and took the whole proposal down with a bare ZeroDivisionError.
+    # Treat a missing baseline as "this axis does not price this class": the ratio is 1,
+    # which leaves the term neutral in every degree instead of crashing.
+    h = (hp / hp0) if hp0 else 1.0
+    # A class whose spec carries no range baseline (`support`) reached here with
+    # range0_wdist == 0 and crashed the whole proposal with a bare ZeroDivisionError.
+    # Treat a missing baseline as "range is not a pricing axis for this class": r = 1
+    # leaves the term neutral instead of taking the run down.
+    r = ((range_wdist / range0_wdist) if range0_wdist else 1.0) * special
+    d = (dps_value / dps0) if dps0 else 1.0
     o = (h + r + d) / 3 * cost0 * tech_tier
     p = (h * r + h * d + r * d) / 3 * cost0 * tech_tier
     q = (h * r * d) * cost0 * tech_tier
@@ -998,8 +1016,13 @@ def solve_class_baseline_range_3(cost, hp, dps_value,
                 + [1/3 + (h+d)/3 + h*d] * cost0 * r   (coeff of r, B3)
         r = (3*cost - A3) / B3
     """
-    h = hp / hp0
-    d = dps_value / dps0
+    # ⚠ A MISSING BASELINE IS NOT A ZERO BASELINE. A class whose spec omits an axis
+    # (`support` carries neither range0_wdist nor dps0 — its members are non-combat)
+    # reached here and took the whole proposal down with a bare ZeroDivisionError.
+    # Treat a missing baseline as "this axis does not price this class": the ratio is 1,
+    # which leaves the term neutral in every degree instead of crashing.
+    h = (hp / hp0) if hp0 else 1.0
+    d = (dps_value / dps0) if dps0 else 1.0
     a3 = ((h + d) / 3 + (h * d) / 3) * cost0 * tech_tier
     b3 = (1.0 / 3 + (h + d) / 3 + h * d) * cost0 * tech_tier
     if b3 == 0:
@@ -1027,9 +1050,14 @@ def solve_class_baseline_range(cost, hp, speed, dps_value,
         r = (3*cost - A) / B
         range_wdist = (r / special) * range0_wdist
     """
-    h = hp / hp0
-    s = speed / speed0
-    d = dps_value / dps0
+    # ⚠ A MISSING BASELINE IS NOT A ZERO BASELINE. A class whose spec omits an axis
+    # (`support` carries neither range0_wdist nor dps0 — its members are non-combat)
+    # reached here and took the whole proposal down with a bare ZeroDivisionError.
+    # Treat a missing baseline as "this axis does not price this class": the ratio is 1,
+    # which leaves the term neutral in every degree instead of crashing.
+    h = (hp / hp0) if hp0 else 1.0
+    s = (speed / speed0) if speed0 else 1.0
+    d = (dps_value / dps0) if dps0 else 1.0
     a = (h + s + d) * cost0 / 4 * tech_tier
     c = (h * s) * cost0 / 2 * tech_tier
     b = cost0 / 4 * tech_tier

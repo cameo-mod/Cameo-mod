@@ -1157,7 +1157,10 @@ def main():
         print(f"no units found for class {args.cls} "
               f"(tag members with design.class_anchor=={args.cls} first)")
         return
-    out = ROOT / "docs" / "balance" / f"proposal_{args.cls}_infantry.md"
+    # The "_infantry" suffix used to be HARDCODED here, so every class wrote
+    # `proposal_<class>_infantry.md` — `proposal_tank_destroyer_infantry.md` for a
+    # vehicle class. The suffix dates from when only infantry classes were converted.
+    out = ROOT / "docs" / "balance" / f"proposal_{args.cls}.md"
     out.write_text(text, encoding="utf-8")
     print(f"wrote {out.relative_to(ROOT)}")
 

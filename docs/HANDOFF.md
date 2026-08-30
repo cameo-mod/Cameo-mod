@@ -876,6 +876,64 @@ VEHICLE self-heal (`^VehicleBuffs`, Delay 1 / DamageCooldown 10) to the INFANTRY
 `ChangesHealth@SelfHealing.Step = HP/1000`. Boot-gated yaml, not done. The grid change without the
 self-heal change is half the ruling.
 
+### 3.0u — 📊 ALL 27 CLASS PROPOSALS GENERATED (2026-08-30) — the whole sign-off queue in one table
+
+`propose_class_rebalance.py` run across **every** class, not one at a time. 27 of 27 now produce a
+proposal (`docs/balance/proposal_<class>.md`); previously `support` crashed and every file was
+misnamed. **8 classes are at the ≤1 goal and are signable today**, subject to the anchor
+question in §3.0t.
+
+| class | worst \|Δ\| among non-anchor members | |
+|---|--:|---|
+| `closecombat` | 0.1 | ✅ **signable** |
+| `mortar` | 0.1 | ✅ **signable** |
+| `archer` | 0.2 | ✅ **signable** |
+| `grenadier` | 0.2 | ✅ **signable** |
+| `heavy_sniper` | 0.2 | ✅ **signable** |
+| `flying_infantry` | 0.5 | ✅ **signable** |
+| `missile_vehicle` | 0.6 | ✅ **signable** |
+| `special_forces` | 0.9 | ✅ **signable** |
+| `scout` | 22.8 |  |
+| `rocket_trooper` | 74.4 |  |
+| `heavy_infantry` | 318.0 |  |
+| `pure_sniper` | 599.9 |  |
+| `melee` | 815.6 |  |
+| `mbt` | 1,083.5 |  |
+| `scout_vehicle` | 1,090.6 |  |
+| `light_tank` | 1,215.4 |  |
+| `anti_air_vehicle` | 1,620.0 |  |
+| `tank_destroyer` | 1,813.3 |  |
+| `fire_support` | 1,915.9 |  |
+| `high_tech_tank` | 1,994.9 |  |
+| `artillery` | 2,019.5 |  |
+| `artillery_tank` | 2,356.9 |  |
+| `commando` | 3,196.6 |  |
+| `dreadnought` | 3,902.7 |  |
+| `support` | 5,114.6 |  |
+| `line_breaker` | 5,781.7 |  |
+| `epic_vehicle` | 6,653.2 |  |
+
+**Two bugs fixed to get here, both one-liners with real consequences:**
+
+* **Every proposal was written to `proposal_<class>_infantry.md`** — the `_infantry` suffix was
+  HARDCODED at `propose_class_rebalance.py:1160`, left over from when only infantry classes were
+  converted. `proposal_tank_destroyer_infantry.md` for a vehicle class is not a cosmetic problem:
+  it invites a reader to believe a vehicle proposal was priced on the infantry grids, which is the
+  exact defect §3.0k had just finished fixing. Files now land at `proposal_<class>.md`.
+* **A missing baseline was being read as a zero baseline.** `support` carries neither
+  `range0_wdist` nor `dps0` in its spec — its members are non-combat — and the estimators divided
+  straight through, taking the whole run down with a bare `ZeroDivisionError`. All **10** divide
+  sites across the four estimator functions now read a missing baseline as *"this axis does not
+  price this class"* (ratio 1, term neutral in every degree) rather than crashing or, worse,
+  silently pricing at 0.
+
+⚠ **Read `support` (5,114.6) with that fix in mind** — two of its four axes are now neutral by
+construction, so its number measures HP and speed alone. It needs a spec before it means anything.
+
+⚠ **These are PROPOSALS, not applied changes.** Nothing is written to yaml; `apply_balance
+--confirm` remains a no-op until sign-off. The ordering above is the work queue: the 8 signable
+classes are the maintainer's fastest path to unblocking pricing.
+
 ### 3.0s — ✅ VERIFIED (2026-08-30): the verifier retirement landed in the DATA and the CODE, not the DOCS
 
 Re-checked on the maintainer's instruction ("verifiers are not used anymore — deep research on it
