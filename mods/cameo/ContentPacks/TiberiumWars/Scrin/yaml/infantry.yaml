@@ -40,6 +40,7 @@ scrin_disintegrator:
 	AttackFrontal:
 		FacingTolerance: 64
 		Voice: Attack
+		PauseOnCondition: disabled
 	RenderSprites:
 		PlayerPalette: scrin_disintegrator_player
 
@@ -82,6 +83,7 @@ scrin_assimilator:
 		ConsumedByCapture: true
 	AttackFrontal:
 		FacingTolerance: 0
+		PauseOnCondition: disabled
 	Selectable:
 		Priority: 5
 	RenderSprites:
@@ -112,6 +114,7 @@ scrin_shock_trooper:
 	AttackFrontal:
 		FacingTolerance: 64
 		Voice: Attack
+		PauseOnCondition: disabled
 	RenderSprites:
 		PlayerPalette: scrin_shock_trooper_player
 
@@ -141,6 +144,7 @@ scrin_shock_trooper_blink_pack:
 	AttackFrontal:
 		FacingTolerance: 64
 		Voice: Attack
+		PauseOnCondition: disabled
 	RA2PortableChrono:
 		TeleportType: PortableChrono
 		ChargeDelay: 100
@@ -178,6 +182,7 @@ scrin_ravager:
 	AttackFrontal:
 		FacingTolerance: 64
 		Voice: Attack
+		PauseOnCondition: disabled
 	RenderSprites:
 		PlayerPalette: scrin_ravager_player
 
@@ -206,6 +211,7 @@ scrin_mastermind:
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
+		PauseOnCondition: disabled
 	MindControllerCA:
 		ArmamentNames: primary
 		ExperienceFromControl: 100
@@ -243,6 +249,7 @@ scrin_prodigy:
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
+		PauseOnCondition: disabled
 	MindControllerCA:
 		ArmamentNames: primary
 		ExperienceFromControl: 150

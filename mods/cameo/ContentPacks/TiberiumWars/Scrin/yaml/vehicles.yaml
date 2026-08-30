@@ -12,7 +12,7 @@
 		Locomotor: wheeled
 		Speed: 50
 		TurnSpeed: 8
-		PauseOnCondition: materializing
+		PauseOnCondition: disabled || materializing
 		Voice: Move
 	DeathSounds:
 	Selectable:
@@ -102,6 +102,7 @@ scrin_seeker:
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
+		PauseOnCondition: disabled || materializing
 	RenderSprites:
 		PlayerPalette: scrin_seeker_player
 
@@ -131,6 +132,7 @@ scrin_devourer_tank:
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
+		PauseOnCondition: disabled || materializing
 	RenderSprites:
 		PlayerPalette: scrin_devourer_tank_player
 
@@ -159,6 +161,7 @@ scrin_repair_drone:
 		ForceTargetRelationships: Ally
 	AttackFrontal:
 		FacingTolerance: 128
+		PauseOnCondition: disabled || materializing
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
@@ -192,6 +195,7 @@ scrin_gun_walker:
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
+		PauseOnCondition: disabled || materializing
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
@@ -225,6 +229,7 @@ scrin_shard_walker:
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
+		PauseOnCondition: disabled || materializing
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
@@ -262,6 +267,7 @@ scrin_corrupter:
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
+		PauseOnCondition: disabled || materializing
 	WithMoveAnimation:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
@@ -299,6 +305,7 @@ scrin_annihilator_tripod:
 		Armaments: primary
 		FacingTolerance: 128
 		Voice: Attack
+		PauseOnCondition: disabled || materializing
 	Selectable:
 		Bounds: 2048, 2048
 	WithMoveAnimation:
@@ -337,6 +344,7 @@ scrin_reaper_tripod:
 		Armaments: primary
 		FacingTolerance: 128
 		Voice: Attack
+		PauseOnCondition: disabled || materializing
 	Selectable:
 		Bounds: 2048, 2048
 	WithMoveAnimation:
@@ -374,12 +382,14 @@ scrin_eradicator_hexapod:
 		Locomotor: wheeled
 		Speed: 30
 		TurnSpeed: 8
+		PauseOnCondition: disabled || materializing
 		Voice: Move
 	Armament:
 		Weapon: ScrinMothershipBeam
 	AttackFrontal:
 		FacingTolerance: 256
 		Voice: Attack
+		PauseOnCondition: disabled || materializing
 	Selectable:
 		Bounds: 3072, 3072
 	WithMoveAnimation:

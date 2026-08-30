@@ -26,7 +26,10 @@
 
 ^ScrinDefense:
 	Inherits: ^ScrinBuilding
+	Inherits@defense: ^BasicDefense
+	-GivesBuildableArea:
 	-CommandBarBlacklist:
+	-AcceptsDeliveredCash:
 
 ^ScrinAuthenticBuildup:
 	WithMakeAnimation:
@@ -118,7 +121,6 @@ scrin_reactor:
 	TransformOnCondition@FUSION:
 		RequiresCondition: fusion-reactor
 		IntoActor: scrin_fusion_reactor
-		ForceHealthPercentage: 100
 		SkipMakeAnims: true
 	Building:
 		Dimensions: 2,2
@@ -542,6 +544,7 @@ scrin_buzzer_hive:
 		Weapon: ScrinBuzzerHiveBeam
 	AttackOmni:
 		Voice:
+		PauseOnCondition: disabled
 
 scrin_photon_cannon:
 	Inherits: ^ScrinDefense
@@ -578,6 +581,7 @@ scrin_photon_cannon:
 		Weapon: ScrinPhotonCannonBeam
 	AttackTurreted:
 		Voice:
+		PauseOnCondition: disabled
 	RenderSprites:
 		PlayerPalette: scrin_photon_cannon_player
 
@@ -616,6 +620,7 @@ scrin_plasma_missile_battery:
 		Weapon: ScrinDefenseHeavyBeam
 	AttackTurreted:
 		Voice:
+		PauseOnCondition: disabled
 	RenderSprites:
 		PlayerPalette: scrin_plasma_missile_battery_player
 
@@ -715,6 +720,7 @@ scrin_storm_column:
 		Weapon: ScrinStormColumnBeam
 	AttackOmni:
 		Voice:
+		PauseOnCondition: disabled
 
 scrin_rift_generator:
 	Inherits: ^ScrinBuilding
@@ -780,6 +786,7 @@ scrin_lightning_spike:
 		Weapon: ScrinLightningSpikeBeam
 	AttackOmni:
 		Voice:
+		PauseOnCondition: disabled
 
 scrin_tiberium_hive:
 	Inherits: ^ScrinDefense
@@ -812,6 +819,7 @@ scrin_tiberium_hive:
 		Weapon: ScrinAcidBeam
 	AttackOmni:
 		Voice:
+		PauseOnCondition: disabled
 
 scrin_warp_chasm:
 	Inherits: ^ScrinBuilding
