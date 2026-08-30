@@ -1936,7 +1936,11 @@ direction it sharpens, where it disagrees it flattens, and it can never invert
 `None > Flak > Plate`. That also removes any need for a `direction` argument, which is what
 makes it work for the blends.
 
-⭐ **This is the DISCRETE form, and it is what `gen_weapon_template.class_tilt` ships today.**
+⭐ **This is the DISCRETE form. It is NO LONGER what ships** — on 2026-08-30 the emitter was
+switched to §12.0i's bell (`gen_weapon_template.shape_profile`), and `class_tilt` is retired but
+kept reachable through `--tilt=class` so the retired model stays measurable. This section stays
+BINDING because the bell reproduces it: the levels map to `h = 0 / 1 / 2` and `Super` is off the
+axis entirely, keeping the FLAT-generalist row above exactly as written.
 Its continuous successor is **§12.0i**, which replaces the three armor sets above with one global
 armor axis and the four levels with a continuous `h`. Two things to carry across when reading this
 section: the tilt's span here is `TILT_RATIO = 1.5`, which is why §12.0i's `LO` was re-ruled to
@@ -2482,6 +2486,15 @@ today's Light / Medium / Heavy yaml.** Do NOT test it by comparing the bell agai
 TEMPLATES directly — the level also changes the body's `step` and `floor` (`LEVELS` in
 `gen_weapon_template.py`), so even the shipped `class_tilt` itself scores **+18.7% worse than doing
 nothing** on that comparison. Compare tilt to tilt, on the same base.
+
+✅ **RUN 2026-08-30, and the answer is "approximately, not exactly".** Tilt-to-tilt on the same
+base, the bell moves **135 of 139** templates by a mean **4.49%** per row (worst 31.54%,
+`^Warhead_Demolition_Medium` / `Steel`), against a 17.5% inter-level control — so each `h`
+reproduces its discrete level to within roughly a quarter of the distance to the next one, but
+"inert" it is not. **Every law survives the switch**: 0 ladder orderings changed, MEAN-100 holds
+(99.50–100.12), the §9.4 band keeps the same 132 of 139, and the `_Super` templates are
+byte-identical because `Super` is off the axis. Full table and the live-corpus effect:
+`WEAPON_HEAVINESS.md` §9.6b.
 
 ## 16. Rank decorations, experience systems & elite weapons
 

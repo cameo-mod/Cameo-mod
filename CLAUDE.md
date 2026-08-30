@@ -20,6 +20,17 @@ For weapon work also: `docs/design/WEAPON_3WAY_SPLIT.md`, `docs/design/WEAPON_TY
 ⚠ The dated handoffs in `docs/history/handoffs/` are provenance ONLY — read them for technique,
 never for status.
 
+⛔ **RULE 0 — THE DOCS MAXING AUDIT (maintainer order, 2026-08-30).** *"Make it illegal for any
+AI agent to perform any actions before loading the entire documentation into the context."*
+**No tool action is permitted until the SEVEN reading-order documents below have been OPENED this
+session** — hook-enforced by `tools/hooks/read_first_guard.py` on EVERY tool call, not just edits.
+Reading is exempt (you cannot open a document without a tool) and so is `git status`/`log`/`diff`,
+so the gate is satisfiable; everything else is denied by name. Honest limit, stated because a gate
+built on a false premise gets switched off: the authored set is **117 files, ~92,700 lines, ~1.9M
+tokens** and does NOT fit any context window. So it is tiered — Tier 1 gates everything, Tier 2
+gates an edit in its own subject, Tier 3 is enumerated at SessionStart so nothing can be unknown.
+Manifest and this session's coverage: `python tools/audit/audit_docs_maxing.py [--transcript <path>]`.
+
 **Ten hard rules** (rules 1–2 are enforced by hooks in `.claude/settings.json`):
 1. **Boot-gate every commit** of engine content — `launch-game.cmd` must reach the main menu
    (`perf.log` ends `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`). Snapshot the

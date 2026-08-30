@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""PreToolUse(Write|Edit) hook — refuse to edit until the required docs were READ.
+"""PreToolUse hook — the DOCS MAXING AUDIT's enforcement half.
+
+TWO GATES, in one file because they read the same evidence:
+  TIER 1 — no tool ACTION AT ALL until the seven reading-order documents have been
+           opened this session (maintainer order, 2026-08-30). Reads and `git
+           status`/`log`/`diff` are exempt; see READ_ONLY_BASH.
+  TIER 2 — no EDIT under docs/ or tools/ until the document that OWNS the subject
+           has been opened, matched on the edit's own vocabulary.
+The tiers themselves live in `tools/audit/audit_docs_maxing.py`, which REPORTS
+coverage; this file only enforces. Originally: refuse to edit until the required
+docs were READ.
 
 PRIOR ART: `session_checklist.py` (SessionStart) PRINTS the reading order and
 `prior_art_guard.py` (Write) blocks duplicate TOOLS. Neither verifies that a
@@ -37,51 +47,66 @@ import json
 import pathlib
 import sys
 
-# docs/README.md is the canonical reading-order definition; these are the entries
-# it marks "read in this order". CLAUDE.md is excluded — the harness injects it.
-ALWAYS = (
-    "docs/README.md",
-    "docs/LESSONS_LEARNED.md",
-    "docs/AGENT_WORKSPACE.md",
-    "docs/HANDOFF.md",
-    "docs/DESIGN.md",
-)
-# Topic-conditional. README line 129: class_anchors.json is "maintained via"
-# the decisions log, which makes the log the source of truth for every baseline.
-# ⚠ A GUARD WRITTEN FROM ONE INCIDENT COVERS ONE INCIDENT. This map held a SINGLE entry — the
-# anchor log — because that was the failure that prompted it. On 2026-08-30 the same class of
-# mistake happened again in a topic the map did not name: a full armor-tilt investigation ran
-# without `WEAPON_HEAVINESS.md`, whose §9.4 ALREADY RULED the 2x-8x band with a 4x target and
-# already recorded 37 of 42 families in it. Hours went into re-deriving a law, and a measurement
-# was reported as a defect when the law it supposedly violated was being met exactly. In the same
-# pass two external reviews asserted `Jumpjet = Plate x Scout`; `ARMOR_LAYERS.md` line 1714 says
-# `jumpjet = fighter x scout`, and nothing required that file to be open either.
+# ⭐ ONE SOURCE OF TRUTH. The tiers live in `tools/audit/audit_docs_maxing.py` — the
+# DOCS MAXING AUDIT — which reports coverage; this file ENFORCES it. Two copies of a
+# reading order is exactly the drift this project keeps paying for, so the tables are
+# imported, never restated. Fails OPEN if the import fails: a guard that cannot load
+# its own contract must not block the session.
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "audit"))
+try:
+    from audit_docs_maxing import TIER1 as _T1, TIER2 as _T2
+except Exception:      # pragma: no cover - fail open
+    _T1, _T2 = (), {}
+
+# `docs/README.md` marks these "read in this order"; CLAUDE.md repeats it. CLAUDE.md
+# itself is excluded — the harness injects it, so requiring it to be "opened" is a
+# check that could never fail honestly.
+ALWAYS = _T1
+TOPICAL = _T2
+
+# ⛔ THE TIER-1 GATE (maintainer order, 2026-08-30 — "make it illegal for any AI agent
+# to perform any actions before loading the entire documentation"). Below this line the
+# guard stops being about edits: until every ALWAYS document has been OPENED, no tool
+# call is permitted at all.
 #
-# So the entries below are not a list of nice-to-reads. Each one is the document that would have
-# prevented a specific, dated failure, and the trigger words are the vocabulary that failure used.
-TOPICAL = {
-    "docs/balance/anchor_decisions_log.md": (
-        "anchor", "class_anchors", "baseline", "cost0", "signed_off", "verifier",
-        "fit_class", "formula", "dps0", "hp0",
-    ),
-    # §9.4 is the spread law: 2x-8x, target 4x. Anyone measuring "tilt" or "spread" is measuring
-    # against a band that already exists, and needs to know which of the two metrics they hold.
-    "docs/design/WEAPON_HEAVINESS.md": (
-        "tilt", "spread", "heaviness", "macro contrast", "spread band", "2x-8x",
-        "mean-100", "mean_100", "bell",
-    ),
-    # The armor vocabulary and the DERIVED/hybrid armors. `Heroic = Plate x Scout / PEAK`,
-    # `Jumpjet = Fighter x Scout`. Getting a derived row wrong propagates into every profile.
-    "docs/design/ARMOR_LAYERS.md": (
-        "armor", "versus", "heroic", "jumpjet", "airborne", "plating", "armor ladder",
-        "armor type", "shield",
-    ),
-    # §0a: weapon STRUCTURE before pricing. Any weapon/warhead work is downstream of it.
-    "docs/design/BALANCE_PROGRAM_PLAN.md": (
-        "w24", "w23", "w27", "order of operations", "structure_debt", "multi-main",
-        "three_way", "3-way split", "warhead family",
-    ),
-}
+# Two exemptions, and they are not softenings — without them the gate is unsatisfiable:
+#   * READING. You cannot open a document without a tool. Read/Glob/Grep pass, and so
+#     do the Bash commands that are how reading is actually done here.
+#   * ORIENTATION. `git status` / `log` / `diff` / `show` / `branch` tell you where you
+#     are. An agent denied those cannot even report why it is stuck.
+# Everything else — every edit, every write, every command that changes state or runs
+# a tool — is denied with the exact commands that unblock it.
+READ_ONLY_TOOLS = frozenset({
+    "Read", "Glob", "Grep", "NotebookRead", "TodoWrite", "TaskCreate", "TaskUpdate",
+    "ListMcpResourcesTool", "ReadMcpResourceTool",
+})
+READ_ONLY_BASH = (
+    "cat ", "sed ", "head ", "tail ", "less ", "grep ", "rg ", "wc ", "ls ",
+    "find ", "awk ", "cut ", "sort ", "uniq ", "diff ", "file ", "stat ", "tree ",
+    "git status", "git log", "git diff", "git show", "git branch", "git remote",
+    "python tools/audit/audit_docs_maxing.py",
+)
+
+
+def is_read_only(data):
+    """True when this call cannot change anything — so the gate must let it through."""
+    tool = data.get("tool_name")
+    if tool in READ_ONLY_TOOLS:
+        return True
+    if tool != "Bash":
+        return False
+    cmd = str((data.get("tool_input") or {}).get("command") or "").strip()
+    if not cmd:
+        return False
+    # EVERY segment must be read-only: `cat x && rm -rf y` is not a read.
+    parts = [p.strip() for p in cmd.replace("&&", "\n").replace(";", "\n")
+             .replace("|", "\n").splitlines() if p.strip()]
+    # ⚠ The trailing space is deliberate: matching bare "ls" against the prefix "ls"
+    # would also pass "lsof" and "ls-and-then-something". Append one so a bare
+    # command still matches its own prefix and nothing longer sneaks in.
+    return bool(parts) and all((p + " ").startswith(READ_ONLY_BASH) for p in parts)
+
+
 GUARDED_ROOTS = ("docs", "tools")
 MAX_TRANSCRIPT_BYTES = 64 * 1024 * 1024
 
@@ -136,6 +161,24 @@ def main():
         data = json.load(sys.stdin)
     except Exception:
         return
+    tp0 = data.get("transcript_path")
+    if tp0 and not is_read_only(data):
+        opened0 = opened_paths(pathlib.Path(tp0))
+        if opened0 is not None:
+            unread = [d for d in ALWAYS if not was_opened(d, opened0)]
+            if unread:
+                deny(
+                    "DOCS MAXING AUDIT — TIER 1 NOT SATISFIED.\n\n"
+                    "This session has not opened:\n"
+                    + "\n".join(f"  - {d}" for d in unread) +
+                    "\n\nNo action is permitted until it has. Reading is exempt "
+                    "(you cannot open a document without a tool) and so are "
+                    "`git status` / `log` / `diff`. Read them, then retry:\n"
+                    + "\n".join(f"  sed -n '1,400p' {d}" for d in unread) +
+                    "\n\nFull manifest and coverage:\n"
+                    "  python tools/audit/audit_docs_maxing.py --transcript "
+                    + str(tp0))
+
     if data.get("tool_name") not in ("Write", "Edit", "NotebookEdit"):
         return
     inp = data.get("tool_input") or {}

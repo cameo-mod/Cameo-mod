@@ -28,9 +28,27 @@ Everything else under `docs/` is either **generated** (regenerate it, never hand
 Then [`design/ROADMAP.md`](design/ROADMAP.md) (the granular queue) and
 [`audit/SUMMARY.md`](audit/SUMMARY.md) (current bug counts).
 
+Plus [`design/ROADMAP.md`](design/ROADMAP.md) and [`audit/SUMMARY.md`](audit/SUMMARY.md) —
+those two complete the **TIER 1** set the gate enforces.
+
 `.windsurf/rules/start-protocol.md` and the `SessionStart` hook
 (`tools/hooks/session_checklist.py`) enforce this order at the IDE and CLI level. If either
 conflicts with this file, **this file wins** — and fix the copy.
+
+⛔ **THE DOCS MAXING AUDIT — the order is no longer advice.** `tools/hooks/read_first_guard.py`
+runs on **every** tool call and DENIES it until all seven Tier-1 documents have been opened this
+session (reads and `git status`/`log`/`diff` are exempt, so the gate can be satisfied). The tiers
+themselves are owned by [`../tools/audit/audit_docs_maxing.py`](../tools/audit/audit_docs_maxing.py),
+which also prints the full manifest of all 117 authored documents and reports a session's coverage:
+
+```sh
+python tools/audit/audit_docs_maxing.py                      # manifest + tiers
+python tools/audit/audit_docs_maxing.py --transcript <path>  # this session's coverage
+```
+
+⚠ It cannot demand the whole set and does not pretend to: 117 files, ~92,700 lines, ~1.9M tokens.
+Tier 1 gates every action, Tier 2 gates an edit in its own subject, Tier 3 is ENUMERATED at
+SessionStart — so a document may go unread, but it can never go unknown.
 
 Crashes and player-visible regressions always jump the queue.
 

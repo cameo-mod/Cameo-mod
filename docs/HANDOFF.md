@@ -291,8 +291,25 @@ ladder orderings changed, 0 weighted-mean drift**, 2 flat families at the ratche
 was unachievable under the family-anchored peak (all 48 families reshaped at h=1, worst row 13.5%),
 which is why the peak formula changed rather than the requirement.
 
-⭐ **Step 5 is the next action** — implement the bell in `gen_weapon_template.py` (replacing
-`class_tilt`), then in `AreaDamageWarhead`. The acceptance test is regenerating the templates
+◐ **Step 5's first half is BUILT AND MEASURED (2026-08-30) but deliberately NOT DEFAULTED.**
+`gen_weapon_template.shape_profile()` dispatches to the bell or to `class_tilt`; both paths are
+complete and tested. The switch was performed for real — 139 templates spliced, the whole suite and
+`tools/tests/` run against it — and then **`weapons.yaml` was reverted**, because it is engine
+content and no boot machine was available. `TILT_MODEL` stays `"class"` so the tree cannot fail
+`verify_generator_sync` and so an unrelated splice cannot ship the switch by accident. Flipping it
+is three commands, written out in `WEAPON_HEAVINESS.md` §9.6b and as ROADMAP item 0.
+
+⭐ **The switch cost six broken contracts before it was clean, and the fix IS in the tree**:
+`^Compatibility_*Flat` templates are frozen COPIES of a canonical warhead body, 51 of 54 went stale
+on the splice, and two PAID UPGRADES came out weaker than the weapons they replace.
+`splice_templates.py` now refreshes them in the same pass — that guard is landed and live for every
+future regenerate, not just this one.
+
+What remains of step 5 is the C# `AreaDamageWarhead` half (it lives in `OpenRA.Mods.Cameo/`, so it
+is IN this repo), which is what makes `h` continuous per WEAPON instead of pinned per level.
+
+⭐ **The original framing, kept because it is the acceptance test:** implement the bell in
+`gen_weapon_template.py` (replacing `class_tilt`), then in `AreaDamageWarhead`. The acceptance test is regenerating the templates
 through the bell at h ∈ {0, 1, 2} and diffing against today's Light/Medium/Heavy yaml; ⛔ never by
 comparing the bell to the shipped TEMPLATES directly, because the level also changes the body's
 `step`/`floor` and even the shipped `class_tilt` scores +18.7% worse than doing nothing on that

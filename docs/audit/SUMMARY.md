@@ -97,8 +97,18 @@ promotion wiring clean · `MinRange` clean · duplicate uniquely-resolved traits
 armor-plating invariants clean · plating exclusivity clean · physical-state warheads PASS ·
 cross-document consistency 73/0 · display text 0 active findings ·
 **documentation structure 0** (`doc_health.md`, D1–D8) · **balance-ledger drift 0** ·
-**doc claims 19 of 19 match** · **generator sync drift 0** (136 shared templates, no-op
-regenerate).
+**generator sync drift 0** (**139** shared templates, no-op regenerate — 139, not 136, since the
+2026-08-30 heaviness-bell switch regenerated the set).
+
+⚠ **`doc claims` is NO LONGER 19 of 19** — re-measured 2026-08-30, **11 pins disagree with the
+tree**: `signed_off_class_anchors` / `class_anchors_signed_off` (0 → 8), `ledgers_drifted` (0 →
+32), `multi_main_fired_weapons` (494 → 472), `warhead_family_reach` (1245 → 1391),
+`physical_state_fired_weapons` (460 → 509), `meters_filling_before_death` (137 → 239),
+`percentage_denominator_unset` (0 → 11) and the three `shield_*` numbers. ⛔ **None of them is the
+bell's doing** — the identical set, to three decimals bar a 0.2% shield drift, measures the same
+on the pre-switch `weapons.yaml`. They are the un-re-pinned residue of the 2026-08-30 anchor and
+ledger work, and each needs the claim updated together with every document under its `docs:` list,
+in one commit, by whoever owns that number.
 
 ## Red right now
 

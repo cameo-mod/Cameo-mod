@@ -149,6 +149,11 @@ PRESERVED_HASHES = {
     "light_inf_lmg_ordos_upgrade": "0261ecb21aaff41c54671e1a2d0270f11967dcd2dd8aaa47ffc62da05537dc3b",
     "ra1_soviets_rifleinfantry_carbine_incendiary": "539972a5a233509469de87c3648855ef97cff9628ac6a3bbd0a2d673f70d24ab",
 }
+# ⚠ ALL THREE MOVE WHEN THE HEAVINESS-BELL SWITCH LANDS (WEAPON_HEAVINESS.md §9.6b),
+# and the 18 PRESERVED_HASHES above do NOT — measured 2026-08-30. That is what will
+# prove the change is template-derived rather than a break: these three are FULL
+# resolved hashes of descendants, the others exclude the mains. Refresh with
+# `--print-hashes`; never re-pin to silence a change you cannot explain.
 PINNED_HASHES = {
     "FutureMechPlasma_elite": "ef35bc084c537718c291bbfa87175aaa51cfa5911e731849be89f4c606f54781",
     "PositronBounce1": "d251b401a3cc2d80433106dae4e95efa25c9374e1bcffa6cc3f0c1f57d64e4ed",

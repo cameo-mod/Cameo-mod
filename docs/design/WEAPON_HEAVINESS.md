@@ -878,7 +878,7 @@ compressed ladder, not a normal armor), as are the five ALL-CAPS platings (§12.
 | 3 | Rule the armor x-axis (§9.5) | ✅ ruled 2026-08-24 — one global 13-slot scale, §9.5b |
 | 4 | Rule §9.3: does heaviness affect price? | ✅ ruled — no, price via `Damage` |
 | 4b | Rule `mu`, `LO`, `sigma` | ✅ ruled 2026-08-24 — blend, 0.667, 0.75 |
-| 5 | Implement the bell in `gen_weapon_template`, then `AreaDamageWarhead` | ◐ **model implemented and measured 2026-08-29; NOT wired into the emitter** |
+| 5 | Implement the bell in `gen_weapon_template`, then `AreaDamageWarhead` | ◐ **emitter WIRED 2026-08-30 (§9.6b) — the C# `AreaDamageWarhead` half is still open** |
 | 6 | Verify no family inverts; verify the weighted mean is invariant | ✅ `audit_heaviness_bell` |
 | 7 | Collapse to one template per family; set `h` by the §3.3 rule | |
 
@@ -919,10 +919,9 @@ changed nothing.
 same contract: row order preserved, ladder ranks preserved, the §12.0b products
 re-derived LAST from the finished profile.
 
-⛔ **NOT wired into the emitter. `class_tilt` still ships.** Switching over
-regenerates every `^Warhead_` template in `weapons.yaml` — engine content, so it
-needs the boot gate. `verify_generator_sync` still reports **drift = 0** across 139
-templates, which is the clean baseline any switch must be measured against.
+⛔ **NOT wired into the emitter when this section was written; wired on 2026-08-30 — see
+§9.6b.** `verify_generator_sync` reported **drift = 0** across 139 templates at the time,
+which is the clean baseline the switch was measured against.
 
 **The §9.6 comparison, run tilt-to-tilt on the same base as this section demands:**
 
@@ -955,3 +954,110 @@ and diff against today's Light / Medium / Heavy yaml. ⛔ Do NOT compare the bel
 shipped TEMPLATES directly — the level also changes the body's `step` and `floor`, so even the
 shipped `class_tilt` scores **+18.7% worse than doing nothing** on that comparison. Compare tilt to
 tilt, on the same base.
+
+#### 9.6b ⭐ STEP 5 SECOND HALF — the bell IS the emitter now (2026-08-30)
+
+`gen_weapon_template.py` shapes every MAIN profile through `shape_profile()`, which dispatches to
+§12.0i's bell or to the retired `class_tilt`. Both paths are complete, measured and tested.
+
+⛔ **THE DEFAULT IS STILL `class`, AND THAT IS A DECISION, NOT AN UNFINISHED SWITCH.** Flipping it
+regenerates every `^Warhead_*` template in `weapons.yaml` — engine content, so CLAUDE.md rule 1's
+boot gate binds, and no boot machine was available. Shipping the default as `bell` with the yaml
+un-spliced would be the worst of both: the tree fails `verify_generator_sync`, **and** the next
+contributor to splice one unrelated family ships the entire switch without ever deciding to. So
+the tree stays exactly as it was and the flip is three commands:
+
+```sh
+python tools/balance/splice_templates.py --all --tilt=bell   # 139 templates + 51 frozen copies
+python tools/balance/consolidate_exact_profile_duplicates.py --print-hashes        # re-pin
+python tools/balance/consolidate_explicit_family_state_profiles.py --print-hashes  # re-pin
+# then: tools/tests (expect the 1 pre-existing failure), verify_generator_sync (0),
+#       find_empty_warhead (0), launch-game.cmd, and set TILT_MODEL = "bell"
+```
+
+`--tilt=` is forwarded by both `splice_templates.py` and `verify_generator_sync.py`, so neither
+half of the flip needs a source edit — and `class_tilt` stays reachable afterwards, so the model
+it replaces remains MEASURABLE instead of having to be re-derived from this document later.
+
+**The level → heaviness map** (`H_OF_LEVEL`), which is what the emitter needs until step 7 gives
+each WEAPON its own `h`:
+
+| level | `h` | why |
+|---|--:|---|
+| `Light` | 0.0 | the lightest rung of every ladder |
+| `Trace` | 0.0 | the sub-Light tier; it rode with `Light` under `class_tilt` and still does |
+| `Medium` | 1.0 | the middle rung of all four ladders at once |
+| `Heavy` | 2.0 | the heaviest rung of every ladder |
+| `Super` | **none** | ⛔ **OFF THE AXIS.** §12.0d makes Super the FLAT GENERALIST, which is a SPREAD instruction, not a peak location, and the bell cannot express it — it moves a peak *along* a ladder and renormalises, so it can never flatten one. `super_flatten()` remains the whole of Super's shaping, and every `^Warhead_*_Super` template is byte-identical across the switch. |
+
+Nothing in the model restricts `h` to `{0, 1, 2}`; the bell is defined for any real `h`, including
+the sub-Light `h < 0` that `Trace`'s `WeaponClass 0.5` hints at. The discrete map is a DEPLOYMENT
+constraint of an emitter that still writes one template per level — not a law.
+
+**The switch, measured tilt-to-tilt on the same base** (`--tilt=class` vs the default, both from
+the same generator run, read through `miniyaml` + `percentage_damage.versus_table`):
+
+| | |
+|---|--:|
+| templates emitted | 139 |
+| templates whose MAIN `Versus` moved | **135** |
+| `_Super` templates that moved | **0** |
+| mean \|Δ\| per row | **4.49%** |
+| worst row | 31.54% (`^Warhead_Demolition_Medium` / `Steel`) |
+| ladder orderings changed | **0** |
+| §12.0h MEAN-100 across the 16 rows | median 99.94, min 99.50, max 100.12 |
+| §9.4 row spread | median 2.96×, **132 of 139 in band** |
+
+The 7 out of band are `Sonic` and `Magic`, flat by design — **the same 7, at the same 1.00×, under
+both models**, so the switch costs the band nothing. 4.49% is consistent with §9.6a's per-level
+distances (3.50% / 6.45% / 3.18%) against a 17.5% inter-level control: the bell lands where its
+own level already was.
+
+**And on the LIVE corpus** — 5,602 resolved warhead profiles, not the 139 templates:
+
+| | before (`class_tilt`) | after (bell) |
+|---|--:|--:|
+| §9.4 row spread, median | 4.00× (80% in band) | **4.00× (80% in band)** |
+| macro contrast, median | 1.77× (37% in band) | **1.77× (39% in band)** |
+
+⛔ **So the switch does NOT close the macro-contrast gap, and it was never going to** — §9.2b
+measured that in advance and this confirms it end-to-end: the bell is a WITHIN-ladder instrument.
+The 1.77× → 4× work is a separate axis in the profile ORDER (`build_order`'s round-robin
+interleave of tied macro blocks), and it is still open.
+
+⛔ **THE AUDIT SUITE SCORED THIS PERFECT WHILE SIX CONTRACTS WERE BROKEN.** Every guard came back
+clean — `find_empty_warhead` 0, `audit_heaviness_bell` 0 inversions / 0 mean drift,
+`audit_versus_profile` 138 of 140 on MEAN-100 with only the two HAND_TUNED exceptions,
+`verify_generator_sync` drift 0 — and `tools/tests/` went from **1 pre-existing failure to 7**.
+The guards check each profile against the LAWS; the tests are what check profiles against EACH
+OTHER, and that is the whole class of damage a bulk regenerate does.
+
+The cause was ONE thing, and it is now a lesson in its own right (`LESSONS_LEARNED.md`, "a
+`^Compatibility_*Flat` template is a frozen COPY"): those templates are verbatim COPIES of a
+`^Warhead_*` main warhead body, not inherits. The splice moved the canonical and left **51 of 54
+copies stale**, so a weapon and its paid upgrade disagreed about what the same family's profile
+is — `OfficerMachineGunAP` and `TS30mmRail` came out WEAKER than the weapons they are bought to
+replace. `splice_templates.py` now refreshes the copies in the same pass; that alone cleared 3 of
+the 6. The remaining 3 were pinned resolved-behaviour HASHES, re-pinned with `--print-hashes` and
+the reason recorded beside the constants.
+
+| | baseline | after the splice | after the compat refresh + re-pin |
+|---|--:|--:|--:|
+| `tools/tests/` failures + errors | 1 | 7 | **1** |
+| `^Compatibility_*Flat` copies in sync | 54 / 54 | 3 / 54 | **54 / 54** |
+
+The one that remains is pre-existing and unrelated (`test_ledger_split`:
+`reference_distributions.json` has no raw ledger).
+
+⚠ **What still owes the boot gate.** Everything above was measured by actually performing the
+splice, running the suite and the tests, and then **reverting `weapons.yaml` to its committed
+state** — the numbers are from a real run, not a projection, and the tree carries none of it.
+Only `launch-game.cmd` can close rule 1 and let the flip land.
+
+⚠ **THE ONE BUG THE SWITCH PRODUCED, AND IT WAS ONE ROW.** `Super` took a short path that
+flattened and returned WITHOUT re-deriving §12.0b's product cells, and the entire symptom was
+`^Warhead_Tesla_Super`'s `Heroic` landing 102 where it should have been 103 — in the level the
+switch was supposed to leave untouched. The fix is structural, not local: `rederive_products()`
+is now one function that every shaper path ends in. A derived cell has to be recomputed on EVERY
+exit, and an early return is exactly where that gets forgotten.
+

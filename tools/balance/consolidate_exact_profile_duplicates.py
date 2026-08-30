@@ -72,6 +72,14 @@ SPECS = {
 
 # Hashes exclude only the selected ordinary mains.  They pin every percentage
 # companion and every projectile/effect/status/relationship descendant field.
+# ⚠ THESE MOVE WHEN THE HEAVINESS-BELL SWITCH LANDS, and the exact set is already
+# measured, so the next reader can tell "the law moved" from "I broke something"
+# without re-deriving it. Under `gen_weapon_template.py --tilt=bell` + a splice, the
+# three `TeslaArmorDischarge*` entries and all four `BRANCH_HASHES` move; the other
+# eight PRESERVED and all three FLAK entries do NOT. The unchanged ones exclude the
+# mains from the hash and the changed ones include template-derived rows — that split
+# IS the evidence that only profiles moved and no routing did.
+# Refresh with `--print-hashes`; NEVER re-pin to silence an unexplained change.
 PRESERVED_HASHES = {
     "RA2120xmm": "d67388638aee17cf11036eb137630243943cb637e83b660e7853604805fc7861",
     "RA2120xmm_elite": "1c644e2f3d9935b4fe81566b7c48f08ace9dd5c5f645f4f6b3df09191f02df53",
@@ -337,11 +345,36 @@ def validate_result() -> None:
         raise RuntimeError("exact-profile duplicate cohort remains unconsolidated")
 
 
+def print_hashes(rs: Ruleset) -> None:
+    """Re-emit every pinned hash from the CURRENT tree, ready to paste.
+
+    ⛔ Only for a hash that moved because a LAW moved — a regenerated
+    `^Warhead_*` template, say. Re-pinning after an accidental change is how a
+    guard is turned off, so record WHY in the same commit; the constants above
+    carry that note. The sibling
+    `consolidate_explicit_family_state_profiles.py --print-hashes` exists for
+    exactly this reason and this module had no equivalent, which meant the only
+    way to refresh these was by hand.
+    """
+    for label, mapping, excluded in (
+            ("PRESERVED_HASHES", PRESERVED_HASHES, lambda n: SPECS[n][0]),
+            ("BRANCH_HASHES", BRANCH_HASHES, lambda _n: None),
+            ("FLAK_BRANCH_PRESERVED_HASHES", FLAK_BRANCH_PRESERVED_HASHES,
+             lambda _n: {"Flak_Medium", "Flak_MediumFlatCompatibility"})):
+        print(label)
+        for name in mapping:
+            print(f'    "{name}": "{resolved_hash(rs, name, excluded(name))}",')
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--print-hashes", action="store_true")
     args = parser.parse_args()
     rules = Ruleset(ROOT)
+    if args.print_hashes:
+        print_hashes(rules)
+        return 0
     already = inspect(rules)
     if already:
         print(f"Already consolidated {len(SPECS)} concrete definitions")

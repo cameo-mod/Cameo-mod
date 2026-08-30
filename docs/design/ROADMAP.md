@@ -67,10 +67,52 @@ the shot and moves the profile (biggest gaps `Spaceship 65↔41`, `Fighter 76↔
 | 02 | [`w24_batch_02_demolition.md`](../balance/w24_batch_02_demolition.md) | 4 | large profile shift (`Scout 81↔144`, `Steel 164↔105`); `TSBoatcannon` is the in-batch canary at 89% Demolition already |
 | 03 | [`w24_batch_03_missilehe.md`](../balance/w24_batch_03_missilehe.md) | 3 | widest gap in the set (`None 79↔151`) **and the first cluster that should SPLIT** — the two Tusks to MissileHE, `GradRockets` to Concussion, because a Grad is area saturation, not a precision missile |
 
+## ✅ SHIPPED 2026-08-30 — THE DOCS MAXING AUDIT
+
+Maintainer order: *"Always load all the documents into your context and memory and make sure it
+will always do that every start, so it should be like a hook. Call it the docs maxing audit. Make
+it illegal for any AI agent to perform any actions before loading the entire documentation into
+the context."*
+
+* `tools/audit/audit_docs_maxing.py` — owns the tiers, prints the manifest of all **117** authored
+  documents, and reports a session's coverage from its transcript. In `run_all.sh`.
+* `tools/hooks/read_first_guard.py` — now matches **every** tool, not `Write|Edit`. TIER 1: no
+  action until all seven reading-order documents are opened. Reads and `git status`/`log`/`diff`
+  are exempt, or the gate would be a deadlock.
+* `tools/hooks/session_checklist.py` — appends the full manifest at SessionStart.
+* Recorded as **RULE 0** in `CLAUDE.md`, in `docs/README.md` and in `AGENT_WORKSPACE.md` step 0.
+
+⚠ **The literal order cannot be met and the implementation says so.** 117 files, ~92,700 lines,
+~1.9M tokens: no context holds it. Tier 1 gates every action, Tier 2 gates an edit in its own
+subject, Tier 3 is ENUMERATED every session — a document can go unread, never unknown.
+
 ## ⛔ P1 — BOOT-GATED WORK OWED FROM THE 2026-08-30 BALANCE SESSION
 
 Queued per `AGENT_WORKSPACE.md` git rule 3 (record work in ROADMAP before committing).
-None of these touched yaml; each needs a boot-gated machine.
+
+0. ⛔ **FLIP THE EMITTER TO THE HEAVINESS BELL.** Everything is built, measured and tested; the
+   only thing missing is a boot machine. `TILT_MODEL` is deliberately still `"class"` so the tree
+   stays self-consistent and no unrelated splice can ship the switch by accident. On a boot
+   machine, in this order:
+
+   ```sh
+   python tools/balance/splice_templates.py --all --tilt=bell
+   python tools/balance/consolidate_exact_profile_duplicates.py --print-hashes
+   python tools/balance/consolidate_explicit_family_state_profiles.py --print-hashes
+   #   -> paste the 3 TeslaArmorDischarge* + 4 BRANCH_HASHES + 3 PINNED_HASHES that moved
+   python -m unittest discover -s tools/tests -t tools/tests -q   # expect the 1 known failure
+   python tools/balance/verify_generator_sync.py --tilt=bell      # expect drift 0
+   python tools/audit/find_empty_warhead.py                       # expect 0
+   launch-game.cmd                                                # rule 1
+   #   -> then set gen_weapon_template.TILT_MODEL = "bell" and commit all of it together
+   ```
+
+   Expected result, already measured by doing it and reverting: 135 of 139 templates move, mean
+   4.49% per row, 0 ladder inversions, MEAN-100 held, §9.4 band unchanged at 132/139, every
+   `_Super` byte-identical. `tools/tests/` must come back to its **one** pre-existing failure
+   (`test_ledger_split`); anything more means something else moved.
+
+The rest below did not touch yaml; each still needs a boot-gated machine.
 
 1. **`^ScoutVehicleTemplate` self-heal switch — the missed half of a LOCKED ruling.**
    `anchor_decisions_log.md` locked scout vehicles onto the **infantry HP granularity**
@@ -459,9 +501,23 @@ The blockers previously listed here were measured with a broken hand parser that
 
 **What is genuinely still open:**
 
-1. Make the class tilt **CONTINUOUS** — driven by `h` from `tier_chain` (already computed and
-   stored per actor) instead of four discrete levels. This is the whole remaining idea.
-2. Collapse the level templates to **one per family + a per-weapon `h`**.
+1. ◐ **BUILT AND MEASURED 2026-08-30; the flip awaits a boot machine (item 0 above).**
+   `gen_weapon_template.shape_profile()` dispatches to §12.0i's bell or to the retired
+   `class_tilt`; both paths are complete and tested. The switch was performed for real — 139
+   templates spliced, full suite and `tools/tests/` run — and then `weapons.yaml` was REVERTED,
+   because it is engine content. Measured: 0 ladder inversions, MEAN-100 intact, §9.4 band
+   unchanged at 132/139, every `_Super` byte-identical because `Super` is off the axis. Details:
+   `WEAPON_HEAVINESS.md` §9.6b.
+   ⛔ And it cost six broken contracts before it was clean: `^Compatibility_*Flat` templates are
+   frozen COPIES of the canonical warhead body, 51 of 54 went stale, and two PAID UPGRADES came
+   out weaker than the weapons they replace. `splice_templates.py` now refreshes them in the same
+   pass; see `LESSONS_LEARNED.md`.
+   What remains of this item is the C# half — a per-weapon `Heaviness` field on
+   `AreaDamageWarhead` (it lives in `OpenRA.Mods.Cameo/Warheads/`, so it is IN this repo) so `h`
+   becomes continuous per weapon instead of pinned per level by `H_OF_LEVEL`.
+2. Collapse the level templates to **one per family + a per-weapon `h`**. ⚠ Blocked on 1's C#
+   half: the template must then carry the BASE profile and the bell must run at RUNTIME, or the
+   shaping is applied twice.
 3. ✅ CLEARED — the 4 orientation flips were **one real flip** (`Cryo`) plus 3 false positives from
    comparing `None` (INF ladder) against `Superheavy` (VEH); §12.0d only orders WITHIN a ladder.
    `Cryo` flipped because its blend tiebreak was decided per LEVEL on a one-point margin — the

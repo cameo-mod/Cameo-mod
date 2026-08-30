@@ -12,7 +12,8 @@ AreaDamage/universal-FF conversion. ^Warhead_Nuclear_Super and ^Warhead_Sniper_L
 are hand-tuned and are NOT emitted by the generator (HAND_TUNED), so they are
 skipped here too.
 
-Usage: python tools/balance/verify_generator_sync.py   (from the repo root)
+Usage: python tools/balance/verify_generator_sync.py [--tilt=bell|class]
+       (from the repo root; extra flags are forwarded to the generator)
 """
 from __future__ import annotations
 import subprocess
@@ -53,7 +54,10 @@ def blocks(lines):
 
 
 def main():
-    proc = subprocess.run([sys.executable, str(GEN)], capture_output=True, text=True)
+    # Flags are passed straight through, so `--tilt=class` can measure the RETIRED
+    # discrete shaper against the shipped file without editing anything.
+    proc = subprocess.run([sys.executable, str(GEN)] + sys.argv[1:],
+                          capture_output=True, text=True)
     if proc.returncode != 0:
         print("generator FAILED to run:\n" + proc.stderr, file=sys.stderr)
         return 2

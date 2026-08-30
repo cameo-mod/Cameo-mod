@@ -135,6 +135,46 @@ TWO THINGS YOU CANNOT RESOLVE FROM THE REPO:
    authority; promote anything binding into DESIGN.md.
 """
 
+# ⭐ THE DOCS MAXING AUDIT (maintainer order, 2026-08-30). The manifest is appended
+# to every SessionStart so the whole authored documentation set is at least ENUMERATED
+# before anything happens, and the TIER 1 gate in `read_first_guard.py` then refuses
+# every non-read action until the seven reading-order documents are actually opened.
+# Generated here rather than pasted: a hand-maintained file list goes stale the first
+# time someone adds a document, and a stale manifest is how "I didn't know it existed"
+# comes back.
+def _docs_maxing():
+    import pathlib as _pl
+    import sys as _sys
+    root = _pl.Path(__file__).resolve().parents[1]
+    _sys.path.insert(0, str(root / "audit"))
+    try:
+        import audit_docs_maxing as dm
+    except Exception:
+        return ""
+    lines = ["", "=" * 78,
+             "DOCS MAXING AUDIT — enumerate everything, then open the gate documents.",
+             "=" * 78,
+             "⛔ TIER 1 — NO TOOL ACTION IS PERMITTED until every one of these has been",
+             "   OPENED this session (hook-enforced: tools/hooks/read_first_guard.py).",
+             "   Reads and `git status`/`log`/`diff` are exempt, so the gate is satisfiable."]
+    for d in dm.TIER1:
+        lines.append(f"     sed -n '1,400p' {d}")
+    lines.append("⛔ TIER 2 — the document that OWNS your subject blocks an EDIT in it:")
+    for d in dm.TIER2:
+        lines.append(f"     {d}")
+    rest = [d for d in dm.authored_docs() if d not in dm.TIER1 and d not in dm.TIER2]
+    lines.append(f"TIER 3 — {len(rest)} further authored documents. Know THAT they exist and")
+    lines.append("   what each owns; open the one that covers your area before working in it.")
+    lines.append("   The authored set is ~92,000 lines / ~1.9M tokens — it does NOT fit a")
+    lines.append("   context window, which is why the gate is Tier 1 and not all of it.")
+    for d in rest:
+        lines.append(f"     {d}")
+    lines.append("   Full report + this session's coverage:")
+    lines.append("     python tools/audit/audit_docs_maxing.py --transcript <transcript>")
+    lines.append("=" * 78)
+    return "\n".join(lines)
+
+
 print(json.dumps({"hookSpecificOutput": {
     "hookEventName": "SessionStart",
-    "additionalContext": CHECKLIST}}))
+    "additionalContext": CHECKLIST + _docs_maxing()}}))

@@ -155,6 +155,11 @@ Speed grid and no audit covers it. "The audit is green" answers only the questio
 
 **Crash classes — these end a boot, and most gates cannot see them**
 
+- [⛔ A GUARD WRITTEN FROM ONE INCIDENT COVERS ONE INCIDENT (2026-08-30)](#-a-guard-written-from-one-incident-covers-one-incident-2026-08-30)
+- [⛔ THE CANONICAL REPO IS `cameo-mod/Cameo-mod`; THE OLD FORK IS DEAD (2026-08-30)](#-the-canonical-repo-is-cameo-modcameo-mod-the-old-fork-is-dead-2026-08-30)
+- [A `^Compatibility_*Flat` template is a frozen COPY, and regenerating its canonical desynchronises it (2026-08-30)](#a-compatibilityflat-template-is-a-frozen-copy-and-regenerating-its-canonical-desynchronises-it-2026-08-30)
+- [Pinned resolved-behaviour HASHES move when a law legitimately moves — re-pin, with the reason (2026-08-30)](#pinned-resolved-behaviour-hashes-move-when-a-law-legitimately-moves--re-pin-with-the-reason-2026-08-30)
+- [A DERIVED cell has to be recomputed on EVERY exit — an early return is where that is forgotten (2026-08-30)](#a-derived-cell-has-to-be-recomputed-on-every-exit--an-early-return-is-where-that-is-forgotten-2026-08-30)
 - [`Parent type X was already inherited` — the crash class nothing but the boot could see (2026-08-17)](#parent-type-x-was-already-inherited--the-crash-class-nothing-but-the-boot-could-see-2026-08-17)
 - [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
 - [ClassicProductionQueueProperties crash on actors with no queue (2026-07-31)](#classicproductionqueueproperties-crash-on-actors-with-no-queue-2026-07-31)
@@ -1299,6 +1304,85 @@ The legacy mixed-stack missile weapons (`227mm`, `GDIRigMissilePod`, `MammothTus
 A naive 3-way split onto `^Projectile_Missile_*` drops those colors and `review_resolve_diff.py` flags `Proj.CStart`/`Proj.CEnd`. Preserve them as local `Projectile:` overrides on the concrete weapon whenever the resolved baseline had them and the new family does not.
 
 ---
+
+## A `^Compatibility_*Flat` template is a frozen COPY, and regenerating its canonical desynchronises it (2026-08-30)
+
+⛔ **`^Compatibility_<Family>_<Level>Flat` is not a shim that points at `^Warhead_<Family>_<Level>`
+— it is a VERBATIM COPY of that template's main warhead body**, pinned into `weapons.yaml` by the
+3-way-split consolidators so a retrofitted weapon keeps exactly the profile it had. Only two fields
+differ: `Damage: 0` and `PercentageScale: 0`, which the weapon supplies.
+
+So **regenerating a `^Warhead_*` template silently desynchronises every copy of it**, and no tool
+noticed: the consolidators skip anything already consolidated (`already = COMPATIBILITY_KEY in
+mains …`) because they are ONE-SHOT migrations, not regenerators. Measured when the emitter
+switched to §12.0i's bell: **54 of 54 copies matched their canonical before the splice, 3 of 54
+after.**
+
+**The damage was real, not cosmetic.** Two PAID-UPGRADE contracts broke outright —
+`OfficerMachineGunAP` and `TS30mmRail` came out WEAKER than the weapons they are bought to
+replace — because the base weapon reads the frozen copy while its upgrade reads the live template.
+A player would have paid for a downgrade. Nothing in the audit suite sees this: the guards check
+each profile against the LAWS (MEAN-100, the spread band, ladder order), and both the stale copy
+and the fresh template obey every law. Only `tools/tests/` compared the two to each other.
+
+**The fix is structural: `splice_templates.py` now refreshes the copies in the same pass that moves
+the canonical**, scoped to the templates that run actually rewrote (so a HAND_TUNED canonical like
+`^Warhead_Nuclear_Super`, whose copy has genuinely diverged in shape, is left alone rather than
+tripping the fail-closed guard every time).
+
+Three things generalise past this one file:
+
+* **Search for COPIES of anything you regenerate.** "Nothing else references this template" is a
+  claim about `Inherits`, and a copy has no `Inherits` to find. Ask instead: does any node hold
+  the same VALUES?
+* **A one-shot migration tool is not a regenerator, and its `--apply` will not repair its own
+  output.** Re-running it is a no-op by design. Whatever it froze has to be refreshed by the tool
+  that moves the source.
+* **Run `tools/tests/` before believing a bulk regenerate is clean.** The audit suite scored this
+  change perfect — 0 inversions, MEAN-100 intact, spread band unchanged, `verify_generator_sync`
+  drift 0 — while six contracts were broken. Laws are checked per profile; the tests are what check
+  profiles against EACH OTHER. Always take a BASELINE run first: this tree has one pre-existing
+  failure (`test_ledger_split`), and without knowing that, "5 failures, 2 errors" is unreadable.
+
+## Pinned resolved-behaviour HASHES move when a law legitimately moves — re-pin, with the reason (2026-08-30)
+
+`consolidate_exact_profile_duplicates.py` and `consolidate_explicit_family_state_profiles.py` carry
+hardcoded SHA-256 pins of resolved weapons (`PRESERVED_HASHES`, `BRANCH_HASHES`, `PINNED_HASHES`),
+the proof their one-shot conversions preserved behaviour. Regenerating the `^Warhead_*` templates
+moves them, and there is no way to tell "the law moved" from "I broke something" except by looking.
+
+What made it readable here was WHICH pins moved: the 3 `TeslaArmorDischarge*` and all 4
+`BRANCH_HASHES` changed, while the other 8 `PRESERVED_HASHES` and all 3 `FLAK_*` did not. The
+unchanged ones exclude the mains from the hash; the changed ones include template-derived rows.
+That split is the evidence that only profiles moved and no routing did — and it is worth writing
+down in the constant's own comment, because the next reader has no other way to reconstruct it.
+
+⛔ **Never re-pin to make a red test green.** Refresh with `--print-hashes` (added to both modules
+so it is no longer a hand edit), and record the ruling that moved them in the same commit.
+
+## A DERIVED cell has to be recomputed on EVERY exit — an early return is where that is forgotten (2026-08-30)
+
+Wiring §12.0i's bell into `gen_weapon_template.py` replaced `class_tilt`. `Super` is off the
+heaviness axis (it is the FLAT generalist — a spread instruction, not a peak location), so the new
+`shape_profile()` gave it a short path: flatten, return. The old path had ended with §12.0b's
+product re-derivation (`Heroic = Plate x Scout / PEAK`); the short one did not.
+
+**The entire symptom was one row: `^Warhead_Tesla_Super`'s `Heroic` came out 102 instead of 103**
+— in the ONE level the switch was supposed to leave byte-identical, at a magnitude a rounding
+boundary could hide. Nothing failed, nothing warned, and the only reason it was caught is that the
+switch had a stated invariant ("every `_Super` template is unchanged") which was actually MEASURED
+rather than asserted.
+
+Two things generalise:
+
+* **A "derived LAST" law needs ONE implementation that every path ends in, not a copy at the end
+  of each path.** The re-derivation existed twice, and the third path simply did not get a copy.
+  It is now `rederive_products()`, called from `class_tilt`, `heaviness_bell` and the `Super`
+  branch alike.
+* **State the invariant your change is supposed to preserve, then measure THAT, not just the
+  totals.** "mean |delta| 4.49%" was true and clean with the bug in place; "of which `_Super`: 1"
+  is what exposed it. A per-cohort counter next to the aggregate is cheap and it is the only thing
+  that saw this.
 
 ## Tooling fixes discovered during W24 A1a (2026-08-22)
 
