@@ -1394,6 +1394,15 @@ The rulings themselves are recorded in `DESIGN.md` §12.0-pre / §12.0-scope / �
    `Bullet` at Speed 2500-10000, and `td_gdi_commando_sniper` is instant-hit while its
    `_elite` variant is not — one family, two projectile types.
 
+7. **The shipped game still fetches its icon from the abandoned fork.**
+   `mods/cameo/mod.yaml:5` is
+   `WebIcon32: https://raw.githubusercontent.com/Zeruel87/Cameo-mod/master/packaging/artwork/icon_32x32.png`.
+   `Zeruel87/Cameo-mod` is dead (see §4 and `LESSONS_LEARNED.md`), so this is a live runtime
+   dependency on a repository nobody maintains. One-line fix — repoint at
+   `cameo-mod/Cameo-mod` — but it is `mod.yaml`, parsed at boot, so it needs the boot gate.
+   ⚠ Do NOT let this turn into a sweep of the old name: `Zeruel87 Urban` is a TILESET
+   CATEGORY id and `credits.txt` names a person. **URL only.**
+
 ### 3.4 — Documentation and tooling debt this pass left behind
 
 * **`tools/audit/audit_damage_grid.py` is quarantined.** It still enforces the retired 2000-step
@@ -1467,6 +1476,7 @@ index — read the entry before working in that area.
 | An armor upgrade must never increase incoming damage | DESIGN §12.0e law 4. Guard: `audit_armor_upgrade_harm.py`. |
 | Bulk renames | never do a bare-identifier substitution: the same literal is a weapon, an actor, a condition and a sprite in this tree. Match the exact YAML field with a full-token comparison. |
 | Loose `*_extracted/` map folders | `.oramap` is a zip; the packaged file is what ships and silently shadows loose edits. Repack in the same session, then validate with `--check-yaml`. |
+| The abandoned upstream fork | `Zeruel87/Cameo-mod` still answers `git fetch`, so it looks like a live upstream. It is dead: fetched = history, pushed = lost. One remote, `origin` -> `cameo-mod/Cameo-mod`. Guarded by `bash_guard.py` 1b. But `Zeruel87 Urban` (tileset category) and `credits.txt` are ART CREDIT — never sweep the name, only the URL. |
 | UTF-16 audit reports | a PowerShell `>` redirect corrupts them. `run_all.sh` only. |
 
 ---

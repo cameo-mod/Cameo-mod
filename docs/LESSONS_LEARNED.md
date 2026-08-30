@@ -56,6 +56,33 @@ getting the wrong answer, because the artifact was the previous session's own un
 **A document agreeing with an artifact you wrote is an echo, not corroboration.** When the artifact
 is young and the document is old, ask who moved.
 
+## ⛔ THE CANONICAL REPO IS `cameo-mod/Cameo-mod`; THE OLD FORK IS DEAD (2026-08-30)
+
+`github.com/Zeruel87/Cameo-mod` is the ORIGINAL upstream fork and it is **abandoned**. It is
+still reachable, still has a `master`, and still answers `git fetch` — which is exactly what
+makes it dangerous: it looks like a live upstream. On 2026-08-11 it was re-added as `upstream`
+and a session was spent reconciling two stray commits against a tree nobody publishes to
+(`DEVELOPMENT_LOG.md` 657-670). Anything fetched from it is history; anything pushed to it is
+lost. `docs/design/BALANCE_PIPELINE_GAPS.md` already lists "the repository is Zeruel87/Cameo-mod"
+as a corrected-claim row — this is the same error arriving by a different route.
+
+**The rule:** one remote, `origin` -> `cameo-mod/Cameo-mod`. History that predates this
+repository lives in `docs/history/`, not on the fork. Enforced by `tools/hooks/bash_guard.py`
+rule 1b (denies any `git` command naming the fork). Residual hole to know about: the guard
+matches the fork NAME, so a remote already added under a neutral alias would still fetch — it
+blocks the `git remote add`, which is where the alias gets created.
+
+**And the mirror-image trap:** two appearances of the old author name are ART CREDIT, not
+repository pointers, and a well-meaning sweep that strips them does real damage —
+`Zeruel87 Urban` is a TILESET CATEGORY id in `mods/cameo/tilesets/*.yaml` (every map placing
+those tiles resolves it by name) and `mods/cameo/credits.txt` names a human being. Grep for
+the URL, never for the name.
+
+**One live pointer is still in shipped content:** `mods/cameo/mod.yaml:5` sets
+`WebIcon32: https://raw.githubusercontent.com/Zeruel87/Cameo-mod/master/packaging/artwork/icon_32x32.png`
+— the running game fetches its icon from the abandoned fork. Boot-gated one-line fix; see
+HANDOFF §3.3b.
+
 ## ⛔ GREP `tools/` BEFORE WRITING A TOOL — not just `docs/` (2026-08-30)
 
 The reading order above is about DOCUMENTS. Three times in one session work was redone because the

@@ -105,6 +105,27 @@ never for status.
     git author is a shared repo identity, so the trailer is the only provenance signal and a wrong
     one pollutes history. If you are not Claude, do not sign as Claude.
 
+## The canonical repository
+
+**`github.com/cameo-mod/Cameo-mod` is the ONLY repository for this project.** Its `master` is
+the trunk; work lands there through a PR from a feature branch.
+
+⛔ **`github.com/Zeruel87/Cameo-mod` is the ABANDONED original fork.** Do not add it as a remote,
+fetch it, compare against it, or push to it — it has had no publishing activity since the
+project moved, so anything read from it is history and anything written to it is lost. On
+2026-08-11 it was re-added as `upstream` and a session went into comparing two stray commits
+against a dead tree (`DEVELOPMENT_LOG.md` lines 657-670). Enforced by `bash_guard.py` rule 1b.
+For history that predates this repository, read `docs/history/` — never the fork.
+
+Related repositories in the same org are real and separate, and none of them is a mirror of
+this one: **`cameo-mod/OpenRA`** (the engine soft-fork — see rule 7 and §"Changing the engine";
+`engine/` in this tree is its BUILD OUTPUT, not source) and **`cameo-mod/cameo_ifv`**.
+
+⚠ **Two appearances of the old name are ART CREDIT and must never be "cleaned up":** the
+`Zeruel87 Urban` tileset categories in `mods/cameo/tilesets/*.yaml` (a terrain category id —
+renaming it breaks every map that places those tiles) and the author entry in
+`mods/cameo/credits.txt`. This rule is about git remotes and URLs, not about attribution.
+
 **Work queue:** `docs/design/ROADMAP.md` (crashes jump the queue). **Effort estimate for the whole
 balance program:** `docs/design/BALANCE_PIPELINE_ESTIMATE.md`.
 

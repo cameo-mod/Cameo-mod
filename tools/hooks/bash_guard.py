@@ -42,6 +42,31 @@ def main():
              "have live uncommitted WIP that a wide add would capture or clobber). "
              "Stage explicit paths instead: `git add <file> [<file> ...]`.")
 
+    # (1b) THE CANONICAL REMOTE IS `cameo-mod/Cameo-mod`, AND ONLY THAT.
+    # `Zeruel87/Cameo-mod` is the ORIGINAL upstream fork and it is ABANDONED. On 2026-08-11 an
+    # agent re-added it as `upstream`, fetched it, and spent a session comparing two stray
+    # commits against a repository nobody has published to since. Anything fetched from there is
+    # historical, not current; anything pushed there is lost. The tileset category
+    # `Zeruel87 Urban` and the `credits.txt` entry are ART CREDIT, not repository pointers --
+    # this rule is about git remotes and URLs only, and must never be used to strip a credit.
+    # Narrow to the verbs that actually REACH the fork. An earlier draft matched any `git`
+    # verb and denied its own author's `git diff --stat` because the same shell line also
+    # wrote the fork's name into a doc — a read-only command cannot contact a remote.
+    _FORK_VERBS = r"remote|fetch|pull|push|clone|ls-remote|submodule|request-pull"
+    # The flag skip `(?:-\S+(?:\s+\S+)?\s+)*` covers GLOBAL flags before the verb,
+    # including the two-token `-c key=value` form: `git -c protocol.version=2 fetch <fork>`
+    # reaches the fork just as surely as a bare `git fetch`. Only flag-SHAPED tokens are
+    # skipped, so a commit message containing the word "push" is not read as the verb.
+    if re.search(r"(?:^|[\n;&|(])\s*git\s+(?:-\S+(?:\s+\S+)?\s+)*(?:"
+                 + _FORK_VERBS + r")\b", cmd) \
+            and re.search(r"Zer" + r"uel87", cmd, re.I):
+        deny("`Zeruel87/Cameo-mod` is the ABANDONED upstream fork. The canonical repository is "
+             "`cameo-mod/Cameo-mod` and nothing else -- do not add it as a remote, fetch it, "
+             "compare against it, or push to it. If you need history that predates this repo, "
+             "read docs/history/ instead. (CLAUDE.md 'The canonical repository'.) "
+             "Note: `Zeruel87 Urban` tileset categories and the credits.txt entry are ART "
+             "CREDIT and must be left alone.")
+
     # (2) NEVER HAND-PARSE VERSUS. A bespoke line-scanner that opens a dict on `Versus:` and
     # scans following `Key: <int>` lines cannot see where the block ENDS, so the
     # `PercentageVersus:` rows that live in the SAME warhead node silently overwrite the real

@@ -70,6 +70,14 @@ OPEN guard was right, the CLOSE was missing. Guarded by tools/audit/audit_versus
 implements a law and verify_generator_sync reports 0 drift, "nothing conforms" means YOUR MEASURE
 is broken. Check the measurement before writing it up.
 
+⛔ ONE REPOSITORY: `cameo-mod/Cameo-mod`. `Zeruel87/Cameo-mod` is the ABANDONED original
+fork -- it still answers `git fetch`, which is what makes it dangerous. Never add it as a
+remote, fetch it, compare against it or push to it; on 2026-08-11 a session went into
+reconciling two stray commits against that dead tree. Pre-repo history lives in docs/history/.
+[hook-enforced: bash_guard 1b]  BUT `Zeruel87 Urban` (a TILESET CATEGORY id in
+mods/cameo/tilesets/*.yaml) and the credits.txt entry are ART CREDIT -- never sweep the NAME,
+only the URL. The engine soft-fork `cameo-mod/OpenRA` is a different, LIVE repository.
+
 HARD RULES (several are enforced by hooks — see .claude/settings.json):
  1. Never commit without booting to the main menu (perf.log ends
     MenuPostProcessEffect.PostWorldLoaded; no new %APPDATA%/OpenRA/Logs/exception-*.log). [hook-enforced]
