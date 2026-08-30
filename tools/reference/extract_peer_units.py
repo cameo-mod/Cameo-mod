@@ -71,7 +71,30 @@ TYPE_TOKENS = [("aircraft", "aircraft"), ("infantry", "infantry"), ("cyborg", "i
 # ⚠ `Versus` is a NODE WITH AN EMPTY VALUE whose CHILDREN are the armor rows. A probe using
 # `node.get("Versus")` reads the empty value and concludes the mod has no Versus at all — which
 # is exactly the wrong answer, and is how this pass nearly recorded "peers expose no Versus".
-def weapon_stats(rules, node):
+ARMOR_MAP_FILE = ROOT / "docs" / "reference" / "peer_armor_map.yaml"
+_ARMOR_MAP = None
+
+
+def armor_map(source_label):
+    """{peer tag: Cameo ladder} plus the source's confidence, from the hand-authored table.
+
+    Loaded from data rather than hardcoded because every entry is a judgement that has to stay
+    inspectable. Only `high` and `medium` sources vote on armor-aware damage; `low` is recorded
+    (E2140's four role tags carry no within-ladder information, so admitting them would flatten
+    every ladder they touch) and `exclude` cannot participate at all.
+    """
+    global _ARMOR_MAP
+    if _ARMOR_MAP is None:
+        try:
+            import yaml
+            _ARMOR_MAP = yaml.safe_load(ARMOR_MAP_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            _ARMOR_MAP = {"sources": {}}
+    entry = (_ARMOR_MAP.get("sources") or {}).get(source_label) or {}
+    return (entry.get("map") or {}), entry.get("confidence", "exclude")
+
+
+def weapon_stats(rules, node, source_label=""):
     """Primary armament's scale-free weapon numbers, resolved through the weapon chain."""
     weapons = [c.get("Weapon") for c in node.children
                if c.key.split("@")[0] == "Armament" and c.get("Weapon")]
@@ -100,8 +123,13 @@ def weapon_stats(rules, node):
         except ValueError:
             return None
 
+    # ⚠ `Versus` is a NODE whose VALUE is empty and whose CHILDREN are the armor rows. Reading
+    # `warhead.get("Versus")` returns the empty value and looks like "this mod has no Versus" —
+    # which is how the first sweep of this corpus reported 0 for all 13 mods.
+    amap, conf = armor_map(source_label)
     damage = 0
     mains = 0
+    ladder_hits = {}
     for c in w.children:
         if not c.key.startswith("Warhead"):
             continue
@@ -109,13 +137,30 @@ def weapon_stats(rules, node):
         if d and d > 0:
             damage += d
             mains += 1
+            for x in c.children:
+                if x.key != "Versus":
+                    continue
+                for row in x.children:
+                    ladder = amap.get(row.key)
+                    v = num(row.value)
+                    if ladder and v is not None:
+                        ladder_hits.setdefault(ladder, []).append(v)
     burst = num(w.get("Burst")) or 1
     reload_delay = num(w.get("ReloadDelay"))
     delays = [num(x) for x in (w.get("BurstDelays") or "").replace(",", " ").split() if x]
     delays = [d for d in delays if d]
     burst_time = sum(delays) if delays else (burst - 1) * 5   # OpenRA's default BurstDelays is 5
     cycle = (reload_delay or 0) + burst_time
-    return {"weapon": weapons[0], "w_range": num(w.get("Range")),
+    # Effective damage vs a LADDER is the mean of that ladder's Versus rows, as a fraction. A
+    # peer that expresses the whole AIR ladder with one `Aircraft` tag contributes one number to
+    # AIR — correct, because that is the entire precision that source has. A tag absent from the
+    # weapon's Versus block means OpenRA's default of 100%, so a missing ladder is left as None
+    # rather than 0: absent is not immune.
+    eff = {}
+    if conf in ("high", "medium"):
+        for ladder, vals in ladder_hits.items():
+            eff[f"eff_vs_{ladder}"] = sum(vals) / len(vals) / 100.0
+    return {"weapon": weapons[0], "w_range": num(w.get("Range")), "armor_conf": conf, **eff,
             "w_min_range": num(w.get("MinRange")), "w_damage": damage or None,
             "w_mains": mains or None, "w_burst": burst,
             "w_reload": reload_delay,
@@ -365,7 +410,7 @@ def extract(mod_id):
         # filters it, where the choice is visible and auditable.
         limit = trait(node, ("Buildable",), "BuildLimit")
         ts, turreted = turn_speed(node)
-        wep = weapon_stats(rules, node)
+        wep = weapon_stats(rules, node, label)
         rows.append({
             "id": actor, "name": unit_name(actor, node, fluent),
             "type": unit_type(node), "turn_speed": ts, "turreted": turreted,
@@ -425,8 +470,8 @@ def main():
         if data["note"]:
             out += ["", data["note"]]
         out += ["", "| id | unit | type | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | "
-                "Turret | Limit | Range | Dmg | Burst | Reload | DPS |",
-                "|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|"]
+                "Turret | Limit | Range | Dmg | Burst | Reload | DPS | vsINF | vsVEH | vsAIR | vsBLD |",
+                "|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|"]
         for r in sorted(data["rows"], key=lambda x: -x["x_hp"]):
             xc = f"{r['x_cost']:.2f}" if r["x_cost"] else "—"
             cost = f"{r['cost']:,}" if r["cost"] else "—"
@@ -439,6 +484,9 @@ def main():
                        + " | ".join(
                            (f"{r.get(k):,.0f}" if isinstance(r.get(k), (int, float)) else "—")
                            for k in ("w_range", "w_damage", "w_burst", "w_reload", "w_dps"))
+                       + " | " + " | ".join(
+                           (f"{r.get(k):.2f}" if isinstance(r.get(k), (int, float)) else "—")
+                           for k in ("eff_vs_INF", "eff_vs_VEH", "eff_vs_AIR", "eff_vs_BLD"))
                        + " |")
         out.append("")
 

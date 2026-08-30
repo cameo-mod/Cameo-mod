@@ -135,6 +135,17 @@ CHASSIS_STATS = ("hp", "speed", "turn_speed", "turn_ratio")
 # getting burned by.
 WEAPON_STATS = ("w_range", "w_damage", "w_burst", "w_reload", "w_dps")
 
+# ── The weapon layer, PART 2: ARMOR-AWARE sustained output ───────────────────────────────────
+# `dps_vs_<ladder>` = sustained DPS x that ladder's mean Versus fraction. Mapped to Cameo's FOUR
+# LADDERS (DESIGN.md: INF None/Flak/Plate/Heroic · VEH Scout/Light/Medium/Heavy/Superheavy ·
+# AIR Fighter/Bomber/Helicopter/Spaceship · BLD Wood/Concrete/Steel) rather than to its 16 rows,
+# because most peers ship five or six tags in total. Claiming a peer's `Light` means Cameo's
+# `Light` specifically would assert a precision no peer has; the ladder is the honest resolution
+# and it is Cameo's own structure. The per-source tag mapping and its confidence live in
+# `docs/reference/peer_armor_map.yaml` — data, because every entry is an arguable judgement.
+ARMOR_STATS = ("dps_vs_INF", "dps_vs_VEH", "dps_vs_AIR", "dps_vs_BLD")
+LADDERS = ("INF", "VEH", "AIR", "BLD")
+
 # ── METRIC ELIGIBILITY CONTRACT ──────────────────────────────────────────────────────────────
 # Every metric declares its own population predicate, because "which rows count" differs per stat
 # and getting it wrong is silent. A unit with no weapon is not a unit with 0 DPS; a unit that
@@ -153,6 +164,7 @@ ELIGIBILITY = {
     "w_burst":    {"zero_is_real": True,  "requires": "w_dps"},
     "w_reload":   {"zero_is_real": False, "requires": "w_dps"},
     "w_dps":      {"zero_is_real": False, "requires": "w_dps"},
+    **{k: {"zero_is_real": False, "requires": k} for k in ARMOR_STATS},
 }
 
 
@@ -171,7 +183,7 @@ POPULATIONS = ("infantry", "vehicle", "aircraft", "ship", "defense")
 # else in most rosters (1,137 of 2,568 peer rows), and letting them in would drag every median.
 COMBAT_TYPES = set(POPULATIONS)
 
-ALL_STATS = CHASSIS_STATS + WEAPON_STATS
+ALL_STATS = CHASSIS_STATS + WEAPON_STATS + ARMOR_STATS
 
 CAMEO_SECTION_TYPE = {"infantry": "infantry", "vehicles": "vehicle", "aircraft": "aircraft",
                       "naval": "ship", "defenses": "defense"}
@@ -274,6 +286,12 @@ def peer_rows():
         wep = {k: num(c) for k, c in (("w_range", "range"), ("w_damage", "dmg"),
                                       ("w_burst", "burst"), ("w_reload", "reload"),
                                       ("w_dps", "dps"))}
+        for lad in LADDERS:
+            # NB the header row is lowercased on read, so the column key is `vsinf`, not `vsINF`.
+            # Looking it up in the document's original case silently yields None for every row —
+            # which is how this first reported 0 armor-aware rows out of 2,256.
+            frac = num(f"vs{lad.lower()}")
+            wep[f"dps_vs_{lad}"] = (wep["w_dps"] * frac) if (wep.get("w_dps") and frac) else None
         limit = num("limit")
         if limit:                     # a mod's one-off epic/hero — see POPULATION RULE below
             continue
@@ -287,6 +305,60 @@ def peer_rows():
                      "hp": hp, "speed": spd, "turn_speed": turn,
                      "turn_ratio": (spd / turn) if (spd and turn) else None, **wep})
     return rows
+
+
+# Cameo's own 16 armor rows, grouped by the ladder DESIGN.md puts them in.
+CAMEO_LADDER = {}
+for _lad, _rows in (("INF", ("None", "Flak", "Plate", "Heroic")),
+                    ("VEH", ("Scout", "Light", "Medium", "Heavy", "Superheavy")),
+                    ("AIR", ("Fighter", "Bomber", "Helicopter", "Spaceship")),
+                    ("BLD", ("Wood", "Concrete", "Steel"))):
+    for _r in _rows:
+        CAMEO_LADDER[_r] = _lad
+
+_CAMEO_RULES = None
+
+
+def cameo_weapon_ladders(weapon_name):
+    """{ladder: mean Versus fraction} for one Cameo weapon, read through the resolver.
+
+    ⚠ §12.0h normalises every `^Warhead_*` main to arithmetic MEAN 100 across its 16 rows, so the
+    four ladder means hover near 1.0 by construction. That is not a bug and it is not noise — the
+    CLASS TILT (§12.0d) is precisely the DEVIATION between ladders, so comparing a weapon's
+    vs-VEH against its vs-INF is the signal, while its absolute level is fixed by law.
+    """
+    global _CAMEO_RULES
+    if _CAMEO_RULES is None:
+        sys.path.insert(0, str(ROOT / "tools" / "audit"))
+        import miniyaml
+        _CAMEO_RULES = miniyaml.Ruleset(ROOT)
+    try:
+        w = _CAMEO_RULES.resolve_weapon(weapon_name)
+    except Exception:
+        return {}
+    if w is None:
+        return {}
+    hits = {}
+    for c in w.children:
+        if not c.key.startswith("Warhead"):
+            continue
+        try:
+            if float(str(c.get("Damage") or 0)) <= 0:
+                continue
+        except ValueError:
+            continue
+        for x in c.children:
+            if x.key != "Versus":
+                continue
+            for row in x.children:
+                lad = CAMEO_LADDER.get(row.key)
+                if not lad:
+                    continue
+                try:
+                    hits.setdefault(lad, []).append(float(str(row.value)))
+                except (TypeError, ValueError):
+                    pass
+    return {k: sum(v) / len(v) / 100.0 for k, v in hits.items() if v}
 
 
 def cameo_rows():
@@ -350,9 +422,14 @@ def cameo_rows():
                     rel = anum(a.get("reloaddelay"))
                     burst = anum(a.get("burst")) or 1
                     cycle = (rel or 0) + (burst - 1) * 5
+                    dps = ((dmg * burst) / cycle) if (dmg and cycle) else None
                     w = {"w_range": anum(a.get("range")), "w_damage": dmg or None,
-                         "w_burst": burst, "w_reload": rel,
-                         "w_dps": ((dmg * burst) / cycle) if (dmg and cycle) else None}
+                         "w_burst": burst, "w_reload": rel, "w_dps": dps}
+                    tpl = a.get("versus_templates") or []
+                    wname = a.get("weapon") or (tpl[-1] if tpl else None)
+                    if dps and wname:
+                        for lad, frac in cameo_weapon_ladders(wname).items():
+                            w[f"dps_vs_{lad}"] = dps * frac
                 out.append({"source": "Cameo", "id": name, "name": name, "type": kind,
                             "hp": hp, "speed": spd, "turn_speed": turn,
                             "structure_debt": debt,

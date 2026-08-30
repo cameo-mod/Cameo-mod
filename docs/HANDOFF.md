@@ -1047,6 +1047,61 @@ undefined.
 Apocalypse weapon signature: range 6,992 → **7,169** (near-exact), reload 63 → 77, damage
 12,004 → 23,264, DPS 353 → 481 — all flagged `structure_debt`, so none of it is a target yet.
 
+### 3.0ab — ⚔️ WEAPON LAYER PART 2 (2026-08-30): armor-aware DPS, and Cameo tilts HALF as hard as the genre
+
+`docs/reference/peer_armor_map.yaml` — hand-authored, because every entry is an arguable
+judgement and has to stay inspectable. **Mapped to Cameo's four LADDERS, not its 16 rows**
+(DESIGN.md: INF `None/Flak/Plate/Heroic` · VEH `Scout/Light/Medium/Heavy/Superheavy` · AIR
+`Fighter/Bomber/Helicopter/Spaceship` · BLD `Wood/Concrete/Steel`). Most peers ship five or six
+tags in total, so claiming their `Light` means Cameo's `Light` *specifically* would assert a
+precision they do not have. The ladder is the honest resolution and it is Cameo's own structure.
+
+| confidence | sources | votes? |
+|---|---|:-:|
+| high | Romanov's Vengeance, Valiant Shades (the AS lineage Cameo's own armor set descends from), OpenRA RA/TD/TS, OpenHV | ✅ |
+| medium | Combined Arms, Crystallized Nexus, Shattered Paradise, OpenRA Dune 2000 | ✅ |
+| low | OpenE2140 — four role tags, no within-ladder information | ❌ recorded |
+| exclude | Generals Alpha (37 tags, several per-unit — targeting switches, not armor), OpenRA Dune II (no `Versus` at all) | ❌ |
+
+**726 peer rows and 641 Cameo rows carry an armor profile; 203 of 302 signatures have one.**
+
+**Cross-validation:** the light tank resolves to the same damage SHAPE in three independent mods —
+RV `1tnk` INF 0.18 / VEH 0.84 / BLD 0.57, CA `1TNK` 0.25 / 0.95 / 0.47, OpenRA RA `1TNK` 0.32 /
+0.82 / 0.42. Anti-armor cannon, weak against infantry, in all three.
+
+| stat | HIGH-conf rows | median ratio | within 2× |
+|---|--:|--:|--:|
+| dps_vs_INF | 65 | **1.01×** | 68% |
+| dps_vs_BLD | 67 | 1.21× | 63% |
+| dps_vs_VEH | 67 | 1.32× | 60% |
+| dps_vs_AIR | 0 | — | — |
+
+⚠ **`dps_vs_AIR` has NO high-confidence rows.** Only CA, CN and SP declare an AIR-mappable tag and
+all three are `medium`. Anti-air output is therefore **unmeasured**, not measured-as-fine.
+
+**⭐ THE FINDING: Cameo's armor tilt is about HALF the genre's.**
+
+| | rows | median tilt spread (max/min across INF, VEH, BLD on one weapon) |
+|---|--:|--:|
+| peers | 695 | **3.36×** |
+| Cameo | 641 | **1.73×** |
+
+That is the structural consequence of **§12.0h MEAN-100**: normalising each warhead's 16 rows to
+arithmetic mean 100 compresses cross-ladder differentiation relative to mods that never normalise.
+It explains the calibration table exactly — `dps_vs_INF` sits at 1.01× while VEH and BLD sit
+1.2–1.3× high, because Cameo's weapons are flatter across ladders than their peers'.
+
+⚠ **This is an OBSERVATION, not a defect and not a proposal.** §12.0d rules that the tilt is
+deliberate and "can never invert" within a ladder; MEAN-100 is binding law and the reason `K` is
+shape-only. Whether Cameo *wants* a genre-typical 3.4× tilt or deliberately runs a flatter 1.7×
+is a maintainer ruling, and the peers' own spread reflects their normalisation choices as much as
+their design. What is now measured is that the gap exists and how large it is.
+
+⛔ Two more measurement bugs, both silent, both caught by checking output rather than exit codes:
+the peer document's header row is lowercased on read, so looking up `vsINF` instead of `vsinf`
+returned **0 armor-aware rows out of 2,256**; and the Apocalypse's armor numbers move by 4× but it
+carries `structure_debt: true`, so they are not a target — which is exactly what that flag is for.
+
 ### 3.0y — 📚 THE REFERENCE CORPUS, CLONED FROM SOURCE (2026-08-30): 25 sources, 15 OpenRA mods
 
 Every OpenRA reference mod is now cloned from its own repository and read through
