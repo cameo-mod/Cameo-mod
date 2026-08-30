@@ -554,14 +554,29 @@ def write_doc3(synth, matched, sources):
             "raw RA2/YR INIs, and DTA). StarCraft and Warcraft costs use §15.5's conversion — "
             "`credits = 4×minerals + 8×vespene`, VERIFIED to three exact fits; the Warcraft "
             "`4×gold + 8×wood` is by symmetry and is **not** independently verified.", "",
-            "✅ **Combined Arms and Shattered Paradise now vote per-unit.** They used to appear "
+            "✅ **The OpenRA peer crossovers now vote per-unit.** They used to appear "
             "only as ROLE BANDS (*\"basic rifle 5000\"*, *\"heavy trooper 7500–9000\"*), so they "
             "could not be matched to a named actor; `tools/reference/extract_peer_units.py` now "
             "reads their own checkouts through `miniyaml.Ruleset` and emits "
-            "`ORIGINAL_UNITS_PEER_OPENRA.md` — **382 CA units and 306 SP units**. Anchors are "
-            "verified against the checkout, not trusted from a document: CA `E1` = **5,000 HP** "
-            "(matches what was documented) and SP `E1` (Light Infantry) = **12,500 HP** — "
-            "`ORIGINAL_UNIT_STATS.md` says 15,000, and the checkout wins.", "",
+            "`ORIGINAL_UNITS_PEER_OPENRA.md` — **382 Combined Arms, 306 Shattered Paradise and "
+            "97 Crystallized Nexus units**. Anchors are verified against the checkout, not "
+            "trusted from a document: CA `E1` = **5,000 HP** (matches what was documented), SP "
+            "`E1` (Light Infantry) = **12,500** — `ORIGINAL_UNIT_STATS.md` said 15,000, and the "
+            "checkout wins — and CN `GASOL` (Marine) = **125**, a classic-Westwood-sized scale "
+            "which is exactly why per-mod rifle normalization is not optional.", "",
+            "⚠ **Crystallized Nexus needed its own health trait.** CN ships `CNHealth` instead of "
+            "`Health`, so a reader hardcoding `Health` finds 610 actors and **zero** with hit "
+            "points — an empty result that reads like *\"this mod has no data\"* rather than like "
+            "a bug. Each peer now declares which traits carry its stats.", "",
+            "⛔ **Fractured Realms (`Logue-Yne/Fractured-Realms`) cannot vote, and that is a "
+            "finding rather than a missing extraction.** It resolves cleanly — 488 actors, 191 "
+            "weapons — but only **23** actors carry both `Health` and `Valued`, and **18 of those "
+            "are buildings** (walls, gates, power plants, a forge). What is left is a dozer, a "
+            "transport ship, an MCV, one bomber and one scout. There is no basic rifleman, so "
+            "there is nothing to normalize against, and inventing an anchor would fabricate every "
+            "ratio derived from it. Last pushed 2023-10; it reads as an early prototype rather "
+            "than a balanced mod. It stays declared in `extract_peer_units.py` so the check "
+            "re-runs automatically if it ever grows a roster.", "",
             "That extraction also confirms a number that had only ever been prose: "
             "`BALANCE_SYNTHESIS.md` §16 cites CA's Apocalypse at 130,000 HP = 26× rifle. CA's "
             "`APOC` resolves to exactly **130,000**, and 130,000 / 5,000 = **26.0×**.", "",

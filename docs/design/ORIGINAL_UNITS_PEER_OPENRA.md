@@ -395,6 +395,114 @@ Checkout: `/home/user/inq8/camod` · rifle anchor **`E1` = 5,000 HP / 100 credit
 | `DOG` | Attack Dog | 1,800 | 0.36 | 200 | 2.00 | 94 |
 | `TDOG` | Terror Dog | 1,800 | 0.36 | 300 | 3.00 | 94 |
 
+## Crystallized Nexus  (97 buildable units)
+
+Checkout: `/home/user/dogyaut/crystallized-nexus/.modsdk` · rifle anchor **`GASOL` = 125 HP / 120 credits = 1.00×**
+
+| id | unit | HP | ×rifle | Cost | ×rifle cost | Speed |
+|---|---|--:|--:|--:|--:|--:|
+| `GACNST` | Construction Yard | 1,500 | 12.00 | 2,500 | 20.83 | — |
+| `NACNST` | Construction Yard | 1,500 | 12.00 | 2,500 | 20.83 | — |
+| `GADEPT` | Service Depot | 1,100 | 8.80 | 1,200 | 10.00 | — |
+| `GAFIRE` | Firestorm Generator | 1,000 | 8.00 | 1,500 | 12.50 | — |
+| `GAFORT` | Fortress Garrison Bunker | 1,000 | 8.00 | 800 | 6.67 | — |
+| `GAPLUG` | GDI Upgrade Center | 1,000 | 8.00 | 1,000 | 8.33 | — |
+| `GARADR` | GDI Radar | 1,000 | 8.00 | 1,000 | 8.33 | — |
+| `GAWEAP` | GDI War Factory | 1,000 | 8.00 | 2,000 | 16.67 | — |
+| `GHARV` | Harvester | 1,000 | 8.00 | 1,400 | 11.67 | 71 |
+| `GMCV` | Mobile Construction Vehicle | 1,000 | 8.00 | 2,500 | 20.83 | 42 |
+| `HMEC` | Mammoth Mk. II | 1,000 | 8.00 | 3,000 | 25.00 | 42 |
+| `NAMISL` | Nod Missile Silo | 1,000 | 8.00 | 1,300 | 10.83 | — |
+| `NAPYRA` | Nod Pyramid | 1,000 | 8.00 | 1,500 | 12.50 | — |
+| `NARADR` | Nod Radar | 1,000 | 8.00 | 1,000 | 8.33 | — |
+| `NATMPL` | Temple of Nod | 1,000 | 8.00 | 2,000 | 16.67 | — |
+| `NAWEAP` | Nod War Factory | 1,000 | 8.00 | 2,000 | 16.67 | — |
+| `NHARV` | Harvester | 1,000 | 8.00 | 1,400 | 11.67 | 71 |
+| `NMCV` | Mobile Construction Vehicle | 1,000 | 8.00 | 2,500 | 20.83 | 42 |
+| `GPROC` | Tiberium Refinery | 900 | 7.20 | 2,000 | 16.67 | — |
+| `NPROC` | Tiberium Refinery | 900 | 7.20 | 2,000 | 16.67 | — |
+| `STING` | Sting of Nod | 900 | 7.20 | 3,000 | 25.00 | 50 |
+| `GAPILE` | GDI Barracks | 800 | 6.40 | 300 | 2.50 | — |
+| `MOBILEMP` | Mobile EMP Cannon | 800 | 6.40 | 1,000 | 8.33 | 85 |
+| `NAHAND` | Hand of Nod | 800 | 6.40 | 300 | 2.50 | — |
+| `GAPOWR` | GDI Power Plant | 750 | 6.00 | 300 | 2.50 | — |
+| `NAAPWR` | Nod Advanced Power Plant | 750 | 6.00 | 500 | 4.17 | — |
+| `NAPOWR` | Nod Power Plant | 750 | 6.00 | 300 | 2.50 | — |
+| `NAOBEL` | Obelisk of Light | 725 | 5.80 | 1,500 | 12.50 | — |
+| `GAHPAD` | Helipad | 600 | 4.80 | 500 | 4.17 | — |
+| `LPST` | Mobile Sensor Array | 600 | 4.80 | 950 | 7.92 | 85 |
+| `NAFLAMER` | Flamer Tower | 600 | 4.80 | 500 | 4.17 | — |
+| `NAGAT` | Gattling Tower | 600 | 4.80 | 600 | 5.00 | — |
+| `NAHPAD` | Helipad | 600 | 4.80 | 500 | 4.17 | — |
+| `NALASR` | Laser Tower | 600 | 4.80 | 600 | 5.00 | — |
+| `NASTLH` | Stealth Generator | 600 | 4.80 | 2,500 | 20.83 | — |
+| `WEED` | Weed Eater | 600 | 4.80 | 1,400 | 11.67 | 71 |
+| `4TNK` | Mammoth Tank | 500 | 4.00 | 1,400 | 11.67 | 56 |
+| `GAARMORY` | GDI Armory | 500 | 4.00 | 1,000 | 8.33 | — |
+| `GACAN` | Guardian Tower | 500 | 4.00 | 600 | 5.00 | — |
+| `GAGAT` | Vulture Tower | 500 | 4.00 | 800 | 6.67 | — |
+| `GAMG` | Vulcan Tower | 500 | 4.00 | 200 | 1.67 | — |
+| `GAMORTAR` | Mortar Tower | 500 | 4.00 | 900 | 7.50 | — |
+| `GASAM` | SAM Tower | 500 | 4.00 | 500 | 4.17 | — |
+| `GASEN` | Sensor Tower | 500 | 4.00 | 900 | 7.50 | — |
+| `GATECH` | GDI Tech Center | 500 | 4.00 | 1,500 | 12.50 | — |
+| `NAPULS` | EMP Cannon | 500 | 4.00 | 1,000 | 8.33 | — |
+| `NASAM` | S.A.M. Site | 500 | 4.00 | 500 | 4.17 | — |
+| `ORCA_TRAN` | Orca Transport | 500 | 4.00 | 1,200 | 10.00 | 84 |
+| `NAWAST` | Waste Refinery | 400 | 3.20 | 1,600 | 13.33 | — |
+| `GAGATE_A` | GDI Gate | 350 | 2.80 | 250 | 2.08 | — |
+| `GAGATE_B` | GDI Gate | 350 | 2.80 | 250 | 2.08 | — |
+| `NAGATE_A` | Nod Gate | 350 | 2.80 | 250 | 2.08 | — |
+| `NAGATE_B` | Nod Gate | 350 | 2.80 | 250 | 2.08 | — |
+| `GASILO` | Silo | 300 | 2.40 | 150 | 1.25 | — |
+| `NAPOST` | Laser Fence | 300 | 2.40 | 200 | 1.67 | — |
+| `GASAND` | Sandbags | 250 | 2.00 | 25 | 0.21 | — |
+| `GAWALL` | Concrete Wall | 225 | 1.80 | 50 | 0.42 | — |
+| `NAWALL` | Concrete Wall | 225 | 1.80 | 50 | 0.42 | — |
+| `GTMTNK` | Archon | 200 | 1.60 | 700 | 5.83 | 70 |
+| `HORNET` | Hornet | 200 | 1.60 | 1,500 | 12.50 | 200 |
+| `HYDRA` | Harpy | 200 | 1.60 | 1,000 | 8.33 | 130 |
+| `JUGG` | Juggernaut | 200 | 1.60 | 950 | 7.92 | 71 |
+| `MMCH` | Titan | 200 | 1.60 | 800 | 6.67 | 56 |
+| `ORCA_B` | Orca Bomber | 200 | 1.60 | 1,600 | 13.33 | 96 |
+| `SCRIN` | Banshee Fighter | 200 | 1.60 | 1,500 | 12.50 | 200 |
+| `SGEN` | Mobile Stealth Generator | 200 | 1.60 | 1,600 | 13.33 | 85 |
+| `SONIC` | Disruptor | 200 | 1.60 | 1,300 | 10.83 | 56 |
+| `TTNK` | Tick Tank | 200 | 1.60 | 800 | 6.67 | 85 |
+| `ZTROOPER` | Zone Trooper | 200 | 1.60 | 1,200 | 10.00 | 71 |
+| `SAPC` | Subterranean APC | 175 | 1.40 | 800 | 6.67 | 71 |
+| `TRNSPORT` | Carryall | 175 | 1.40 | 750 | 6.25 | 149 |
+| `CYCLOPS` | Cyclops | 150 | 1.20 | 900 | 7.50 | 99 |
+| `E2` | Disc Thrower | 150 | 1.20 | 200 | 1.67 | 56 |
+| `LTNK` | Scorpion Tank | 150 | 1.20 | 700 | 5.83 | 90 |
+| `ORCA_F1` | Orca Fighter | 150 | 1.20 | 1,000 | 8.33 | 186 |
+| `WARDEN` | Warden | 150 | 1.20 | 800 | 6.67 | 56 |
+| `HVR` | Hover MLRS | 130 | 1.04 | 900 | 7.50 | 99 |
+| `GASOL` | Marine | 125 | 1.00 | 120 | 1.00 | 71 |
+| `MEDIC` | Medic | 125 | 1.00 | 600 | 5.00 | 56 |
+| `GMISINF` | Missile Trooper | 120 | 0.96 | 250 | 2.08 | 56 |
+| `JUMPJET` | Jump Jet Infantry | 120 | 0.96 | 600 | 5.00 | 71 |
+| `ACOLYTE` | Acolyte | 110 | 0.88 | 1,000 | 8.33 | 71 |
+| `APC` | Amphibious APC | 100 | 0.80 | 800 | 6.67 | 113 |
+| `BGGY` | Attack Buggy | 100 | 0.80 | 500 | 4.17 | 142 |
+| `BIKE` | Attack Cycle | 100 | 0.80 | 600 | 5.00 | 170 |
+| `E3` | Rocket Infantry | 100 | 0.80 | 250 | 2.08 | 56 |
+| `ENGINEER` | Engineer | 100 | 0.80 | 500 | 4.17 | 56 |
+| `GASNIPER` | Sniper Squad | 100 | 0.80 | 500 | 4.17 | 71 |
+| `NACAD` | Elite Cadre | 100 | 0.80 | 600 | 5.00 | 71 |
+| `NENGINEER` | Engineer | 100 | 0.80 | 500 | 4.17 | 56 |
+| `NHWTZ` | Artillery | 100 | 0.80 | 975 | 8.12 | 71 |
+| `REPAIR` | Mobile Repair Vehicle | 100 | 0.80 | 1,000 | 8.33 | 85 |
+| `SHADOW` | Shadow Trooper | 100 | 0.80 | 800 | 6.67 | 71 |
+| `SMECH` | Wolverine | 100 | 0.80 | 500 | 4.17 | 100 |
+| `STNK` | Stealth Tank | 100 | 0.80 | 1,100 | 9.17 | 85 |
+| `SUBTANK` | Devil's Tongue | 100 | 0.80 | 750 | 6.25 | 71 |
+| `NASOL` | Rookie | 80 | 0.64 | 120 | 1.00 | 71 |
+
+## Fractured Realms
+
+⚠ not extracted — rifle actor e1 not present
+
 ## Shattered Paradise  (306 buildable units)
 
 Checkout: `/home/user/abrandau/shattered-paradise-sdk` · rifle anchor **`E1` = 12,500 HP / 120 credits = 1.00×**

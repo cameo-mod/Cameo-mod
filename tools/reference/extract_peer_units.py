@@ -40,55 +40,130 @@ import miniyaml  # noqa: E402
 
 OUT = ROOT / "docs" / "design" / "ORIGINAL_UNITS_PEER_OPENRA.md"
 
-# mod_id -> (label, checkout candidates, rifle actor, expected rifle HP or None)
+# ⚠ THE HEALTH TRAIT IS NOT ALWAYS CALLED `Health`. Crystallized Nexus ships its own
+# `CNHealth` (in `.modsdk/OpenRA.Mods.CN`), so a reader hardcoding `Health` finds 610 actors and
+# ZERO units with hit points — an empty result that looks like "this mod has no data" rather than
+# like a bug. Every peer therefore declares which traits carry its stats.
+DEFAULT_TRAITS = {"health": ("Health",), "cost": ("Valued",),
+                  "speed": ("Mobile", "Aircraft")}
+
+# mod_id -> dict describing the peer:
+#   label     human name used as the source label in the synthesis
+#   root      checkout candidates; the FIRST whose mods/<mod_id>/mod.yaml exists wins
+#   mod_id    the directory under mods/ (defaults to the key)
+#   rifle     actor id of the basic rifleman — the mod's own 1.00x anchor
+#   expect    documented anchor HP, checked against the checkout and REPORTED when it differs
+#   traits    overrides for DEFAULT_TRAITS
 PEERS = {
-    "ca": ("Combined Arms",
-           ["/home/user/inq8/camod", "~/Documents/GitHub/CAmod", "../CAmod"],
-           "E1", 5000),
-    "sp": ("Shattered Paradise",
-           ["/home/user/abrandau/shattered-paradise-sdk",
-            "~/Documents/GitHub/Shattered-Paradise-SDK", "../Shattered-Paradise-SDK"],
-           "E1", 12500),
+    "ca": {"label": "Combined Arms", "rifle": "E1", "expect": 5000,
+           "root": ["/home/user/inq8/camod", "~/Documents/GitHub/CAmod", "../CAmod"]},
+    "sp": {"label": "Shattered Paradise", "rifle": "E1", "expect": 12500,
+           "root": ["/home/user/abrandau/shattered-paradise-sdk",
+                    "~/Documents/GitHub/Shattered-Paradise-SDK",
+                    "../Shattered-Paradise-SDK"]},
+    # CN's basic rifleman is GASOL (the GDI "Marine", 125 HP / 120 cr) — it ships no E1, and its
+    # HP scale is classic-Westwood-sized rather than OpenRA-sized, which is exactly why the
+    # per-mod rifle normalization exists.
+    "cn": {"label": "Crystallized Nexus", "rifle": "GASOL", "expect": 125,
+           "traits": {"health": ("CNHealth", "Health")},
+           # CN keeps its mod under .modsdk/, not at the checkout root.
+           "root": ["/home/user/dogyaut/crystallized-nexus/.modsdk",
+                    "~/Documents/GitHub/crystallized-nexus/.modsdk",
+                    "~/Downloads/crystallized-nexus-main/.modsdk"]},
+    # ⚠ FRACTURED REALMS IS DECLARED BUT CANNOT VOTE, and that is a finding, not a gap in this
+    # tool. It resolves cleanly — 488 actors, 191 weapons — but only 23 actors carry BOTH Health
+    # and Valued, and 18 of those are buildings (walls, gates, power plants, a forge). The mobile
+    # remainder is a dozer, a transport ship, an MCV, one bomber and one scout. There is no basic
+    # rifleman, so there is nothing to normalize against, and inventing an anchor would fabricate
+    # every ratio derived from it. Last pushed 2023-10; it reads as an early prototype rather
+    # than a balanced mod. Kept here so the check is recorded and re-runs automatically if the
+    # mod ever grows a roster.
+    "fnw": {"label": "Fractured Realms", "rifle": "e1", "expect": None,
+            "root": ["/home/user/logue-yne/fractured-realms",
+                     "~/Documents/GitHub/Fractured-Realms", "../Fractured-Realms"]},
 }
 
 
-def find_checkout(cands):
+def find_checkout(cands, mod_id):
+    """First candidate that actually holds this mod's manifest.
+
+    Checking `mods/<mod_id>/mod.yaml` rather than just `mods/` matters: Crystallized Nexus keeps
+    its mod under `.modsdk/`, so the repository root has no `mods/` at all.
+    """
     for c in cands:
         p = pathlib.Path(c).expanduser()
-        if (p / "mods").is_dir():
+        if (p / "mods" / mod_id / "mod.yaml").is_file():
             return p
     return None
 
 
-def trait(node, name, field):
-    """First value of `field` on any `name` / `name@suffix` trait of a resolved actor."""
+def trait(node, names, field):
+    """First value of `field` on any of `names` (matching `Name` or `Name@suffix`)."""
+    if isinstance(names, str):
+        names = (names,)
     for child in node.children:
-        if child.key.split("@")[0] == name:
+        if child.key.split("@")[0] in names:
             v = child.get(field)
             if v:
                 return v
     return None
 
 
+def traits_for(spec):
+    t = dict(DEFAULT_TRAITS)
+    t.update(spec.get("traits") or {})
+    return t
+
+
 def load_fluent(root, mod_id):
-    """{key: text} from the mod's .ftl files — SP names its units by fluent key, not literally."""
+    """{key: text} from the mod's .ftl files.
+
+    SP and CN name their units by fluent key rather than literally, and the two use different
+    Fluent shapes — SP writes `e1-name = Light Infantry` on one line, CN writes an ATTRIBUTE
+    block:
+
+        actor-gasol =
+            .name = Marine
+            .description =
+            General-purpose infantry.
+
+    so both forms are read. Getting this wrong is not cosmetic: the display name is what matches
+    a peer unit to a Cameo actor, and an unresolved `actor-gasol.name` matches nothing.
+    """
     out = {}
-    for f in (root / "mods" / mod_id / "fluent").glob("*.ftl"):
-        for line in f.read_text(encoding="utf-8", errors="replace").splitlines():
-            m = re.match(r"^([a-z0-9-]+)\s*=\s*(.+)$", line)
+    for f in (root / "mods" / mod_id).rglob("*.ftl"):
+        text = f.read_text(encoding="utf-8", errors="replace")
+        key = None
+        for line in text.splitlines():
+            m = re.match(r"^([A-Za-z0-9_.-]+)\s*=\s*(.*)$", line)
             if m:
-                out[m.group(1)] = m.group(2).strip()
+                key = m.group(1)
+                if m.group(2).strip():
+                    out[key] = m.group(2).strip()
+                continue
+            a = re.match(r"^\s+\.([A-Za-z0-9_-]+)\s*=\s*(.+)$", line)
+            if a and key:
+                out[f"{key}.{a.group(1)}"] = a.group(2).strip()
     return out
 
 
-def unit_name(node, fluent):
+def unit_name(actor_id, node, fluent):
+    """Display name, tried in the order that actually resolves across these mods."""
     raw = trait(node, "Tooltip", "Name") or ""
-    return fluent.get(raw, raw)
+    if raw in fluent:
+        return fluent[raw]
+    # OpenRA's convention when a Tooltip carries no explicit Name.
+    for guess in (f"actor-{actor_id.lower()}.name", f"{actor_id.lower()}-name"):
+        if guess in fluent:
+            return fluent[guess]
+    return raw or actor_id
 
 
 def extract(mod_id):
-    label, cands, rifle_id, expect = PEERS[mod_id]
-    root = find_checkout(cands)
+    spec = PEERS[mod_id]
+    label, cands, rifle_id, expect = spec["label"], spec["root"], spec["rifle"], spec["expect"]
+    T = traits_for(spec)
+    root = find_checkout(cands, mod_id)
     if root is None:
         return label, None, f"no checkout found (looked in {', '.join(cands)})"
     rules = miniyaml.Ruleset(root, mod_id)
@@ -98,8 +173,8 @@ def extract(mod_id):
     if not key:
         return label, None, f"rifle actor {rifle_id} not present"
     rifle = rules.resolve(key)
-    rhp = trait(rifle, "Health", "HP")
-    rcost = trait(rifle, "Valued", "Cost")
+    rhp = trait(rifle, T["health"], "HP")
+    rcost = trait(rifle, T["cost"], "Cost")
     if not rhp:
         return label, None, f"{rifle_id} has no resolvable HP"
     rhp, rcost = int(rhp), int(rcost or 0)
@@ -117,13 +192,13 @@ def extract(mod_id):
             continue
         if not any(c.key.split("@")[0] == "Buildable" for c in node.children):
             continue
-        hp = trait(node, "Health", "HP")
+        hp = trait(node, T["health"], "HP")
         if not hp:
             continue
-        cost = trait(node, "Valued", "Cost")
-        speed = trait(node, "Mobile", "Speed") or trait(node, "Aircraft", "Speed")
+        cost = trait(node, T["cost"], "Cost")
+        speed = trait(node, T["speed"], "Speed")
         rows.append({
-            "id": actor, "name": unit_name(node, fluent) or actor,
+            "id": actor, "name": unit_name(actor, node, fluent),
             "hp": int(hp), "cost": int(cost) if cost else None,
             "speed": int(speed) if speed else None,
             "x_hp": int(hp) / rhp,
