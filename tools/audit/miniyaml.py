@@ -151,9 +151,14 @@ def resolve_ref(repo_root: pathlib.Path, ref: str, mod_id: str = "cameo") -> pat
         pkg, rel = ref.split("|", 1)
         base = PACKAGE_PREFIXES.get(pkg)
         if base is None:
-            # An unknown prefix in a FOREIGN mod is normal — CA and SP name their own packages.
-            # Treat it as that mod's own directory rather than failing the whole manifest.
+            # An unknown prefix in a FOREIGN mod is normal — every mod names its own packages.
+            # Prefer a real `mods/<pkg>/` directory (this is how `common|` resolves inside an
+            # OpenRA checkout, where common lives at mods/common rather than Cameo's
+            # engine/mods/common), and fall back to the mod's own directory.
             if mod_id != "cameo":
+                by_pkg = repo_root / "mods" / pkg / rel
+                if by_pkg.exists():
+                    return by_pkg
                 return repo_root / "mods" / mod_id / rel
             raise KeyError(f"unknown package prefix {pkg!r} in {ref!r}")
         return repo_root / base / rel

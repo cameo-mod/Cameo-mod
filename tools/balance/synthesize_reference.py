@@ -129,6 +129,28 @@ DOC4 = DESIGN / "ORIGINAL_UNIT_STATS.md"
 # (CA `E1` = 5,000 HP, SP `E1` = 12,500 HP).
 DOC5 = DESIGN / "ORIGINAL_UNITS_PEER_OPENRA.md"
 
+# ⚠ THE SAME MOD MUST NOT VOTE TWICE. "Every source votes once" is the maintainer's rule, and a
+# source appearing under two labels is a measurement error rather than extra evidence. Romanov's
+# Vengeance is in Document 1 as a hand-extract AND in Document 5 as a live clone of
+# MustaphaTR/Romanovs-Vengeance — and they agree exactly (Apocalypse 6.4× in both), which is the
+# proof that they are one source, not two. The live checkout supersedes the extract.
+#
+# Only EXACT duplicates belong here. A game and its OpenRA re-implementation (Tiberian Dawn vs
+# OpenRA Tiberian Dawn) are NOT duplicates — OpenRA rebalances as it ports — so both keep a vote,
+# and the overlap is reported instead of resolved.
+# NB the value must be the label AS THE POOL SEES IT. Document 5's headings carry a parenthesised
+# unit count that the heading parser strips, so a label written here with a "(live)" suffix would
+# never match anything and the duplicate would sail through silently.
+SUPERSEDED = {"Romanov's Veng.": "Romanov's Vengeance"}
+
+# Reported, not merged: sources covering the same underlying game from different extractions.
+NEAR_DUPLICATES = [
+    ("RA2 vanilla", "Yuri's Revenge", "RA2/YR (raw INI)"),
+    ("Tiberian Dawn", "OpenRA Tiberian Dawn"),
+    ("Tiberian Sun", "OpenRA Tiberian Sun"),
+    ("Red Alert 1", "OpenRA Red Alert"),
+]
+
 # section heading prefix -> (source label, rifle HP, rifle cost, cost rule)
 # cost rule: "direct" = credits already; "sc" = 4*minerals + 8*vespene; "wc" = 4*gold + 8*wood
 DOC4_SOURCES = [
@@ -379,11 +401,22 @@ def main():
 
     # ---- pool the same unit across sources
     doc4 = parse_doc4() + parse_doc5()
+    present = {r["source"] for r in doc4}
+    dropped_dupes = {}
     for r in doc4:
         if r["x_hp"] and r["x_hp"] > MAX_XRIFLE and not args.include_junk:
             junk.append(f"{r['source']}: {r['unit']} at {r['x_hp']:.1f}x rifle")
             continue
         norm_rows.append(r)
+    # drop a superseded source only when the thing that supersedes it is actually present
+    kept = []
+    for r in norm_rows:
+        winner = SUPERSEDED.get(r["source"])
+        if winner and winner in present:
+            dropped_dupes[r["source"]] = winner
+            continue
+        kept.append(r)
+    norm_rows = kept
     sources = sorted({r["source"] for r in norm_rows})
 
     # A reference name matches an actor when it is a PREFIX of the actor's last segment.
@@ -452,6 +485,8 @@ def main():
 
     print(f"Document 1 rows      : {len(rows)} across {len(sources)} sources")
     print(f"junk rows dropped    : {len(junk)}" + (f"  ({junk[0]})" if junk else ""))
+    for old, new in dropped_dupes.items():
+        print(f"superseded           : {old!r} -> {new!r} (same mod, live checkout wins)")
     print(f"matched to the roster: {len(synth)}  (class-tagged: {len(matched)})")
 
     if args.dry_run:
@@ -558,8 +593,11 @@ def write_doc3(synth, matched, sources):
             "only as ROLE BANDS (*\"basic rifle 5000\"*, *\"heavy trooper 7500–9000\"*), so they "
             "could not be matched to a named actor; `tools/reference/extract_peer_units.py` now "
             "reads their own checkouts through `miniyaml.Ruleset` and emits "
-            "`ORIGINAL_UNITS_PEER_OPENRA.md` — **382 Combined Arms, 306 Shattered Paradise and "
-            "97 Crystallized Nexus units**. Anchors are verified against the checkout, not "
+            "`ORIGINAL_UNITS_PEER_OPENRA.md` — **1,947 units across nine OpenRA mods**: "
+            "Romanov's Vengeance 729, Combined Arms 382, Shattered Paradise 306, Generals Alpha "
+            "153, Crystallized Nexus 97, and the four OpenRA base mods (Red Alert 94, Tiberian "
+            "Sun 74, Tiberian Dawn 56, Dune 2000 56). Anchors are verified against the checkout, "
+            "not "
             "trusted from a document: CA `E1` = **5,000 HP** (matches what was documented), SP "
             "`E1` (Light Infantry) = **12,500** — `ORIGINAL_UNIT_STATS.md` said 15,000, and the "
             "checkout wins — and CN `GASOL` (Marine) = **125**, a classic-Westwood-sized scale "
@@ -568,6 +606,14 @@ def write_doc3(synth, matched, sources):
             "`Health`, so a reader hardcoding `Health` finds 610 actors and **zero** with hit "
             "points — an empty result that reads like *\"this mod has no data\"* rather than like "
             "a bug. Each peer now declares which traits carry its stats.", "",
+            "⚠ **Sources that cover the same underlying game, kept separate on purpose.** "
+            + "; ".join("/".join(f"`{x}`" for x in grp) for grp in NEAR_DUPLICATES)
+            + ". A game and its OpenRA re-implementation are not the same balance — OpenRA "
+            "rebalances as it ports — so both keep a vote and the overlap is reported rather "
+            "than resolved. **Exact** duplicates are merged instead: Romanov's Vengeance was in "
+            "the pool twice, as a Document 1 hand-extract and as a live clone, and the two "
+            "agreed exactly (Apocalypse 6.4× in both), which is what proved them one source. "
+            "The live checkout wins.", "",
             "⛔ **Fractured Realms (`Logue-Yne/Fractured-Realms`) cannot vote, and that is a "
             "finding rather than a missing extraction.** It resolves cleanly — 488 actors, 191 "
             "weapons — but only **23** actors carry both `Health` and `Valued`, and **18 of those "

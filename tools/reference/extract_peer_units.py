@@ -81,6 +81,27 @@ PEERS = {
     "fnw": {"label": "Fractured Realms", "rifle": "e1", "expect": None,
             "root": ["/home/user/logue-yne/fractured-realms",
                      "~/Documents/GitHub/Fractured-Realms", "../Fractured-Realms"]},
+    "rv": {"label": "Romanov's Vengeance", "rifle": "e1", "expect": 12500,
+           "root": ["/home/user/mustaphatr/romanovs-vengeance",
+                    "~/Documents/GitHub/Romanovs-Vengeance", "../Romanovs-Vengeance"]},
+    # C&C Generals in OpenRA. §15.5 rules that SAGE economies do NOT map to credits, so its COST
+    # column is identity-only and must not be read as a price; HP normalized to its own basic
+    # infantry is still comparable. Its anchor is `infantry.conscript` (12,000 HP / 100) — there
+    # is no `E1` in this universe.
+    "gen": {"label": "Generals Alpha", "rifle": "infantry.conscript", "expect": 12000,
+            "root": ["/home/user/mustaphatr/generals-alpha",
+                     "~/Documents/GitHub/Generals-Alpha", "../Generals-Alpha"]},
+    # The four OpenRA BASE mods — the original games as the engine ships them. They are the
+    # closest thing to a neutral reading of Westwood's own balance, and `versus_raw.json` already
+    # samples all four for warheads; these are their unit stats.
+    "ra": {"label": "OpenRA Red Alert", "rifle": "E1", "expect": 5000,
+           "root": ["/home/user/openra/openra", "~/Documents/GitHub/OpenRA", "../OpenRA"]},
+    "cnc": {"label": "OpenRA Tiberian Dawn", "rifle": "E1", "expect": 5000,
+            "root": ["/home/user/openra/openra", "~/Documents/GitHub/OpenRA", "../OpenRA"]},
+    "ts": {"label": "OpenRA Tiberian Sun", "rifle": "E1", "expect": 12500,
+           "root": ["/home/user/openra/openra", "~/Documents/GitHub/OpenRA", "../OpenRA"]},
+    "d2k": {"label": "OpenRA Dune 2000", "rifle": "light_inf", "expect": 6000,
+            "root": ["/home/user/openra/openra", "~/Documents/GitHub/OpenRA", "../OpenRA"]},
 }
 
 
