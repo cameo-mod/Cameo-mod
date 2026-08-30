@@ -57,8 +57,15 @@ both mains are already `^Warhead_*` families (a collapse, not a conversion), the
 the CLOSEST pair in the whole 472-weapon scope, and none of the four carries a percentage twin.
 
 ⚠ It needs your sign-off, not just a boot: collapsing to Heavy widens `Spread` 300→400 on half
-the shot and moves the profile (biggest gaps `Spaceship 65↔41`, `Fighter 76↔98`). The next two
-clusters are surveyed in the same file and diverge much harder — do this one first.
+the shot and moves the profile (biggest gaps `Spaceship 65↔41`, `Fighter 76↔98`).
+
+**Batches 02 and 03 are prepped too, in risk order — do them in this order, not in parallel:**
+
+| batch | file | weapons | why it is later |
+|---|---|--:|---|
+| 01 | [`w24_batch_01_cannonhe.md`](../balance/w24_batch_01_cannonhe.md) | 4 | lowest risk — same family, adjacent levels |
+| 02 | [`w24_batch_02_demolition.md`](../balance/w24_batch_02_demolition.md) | 4 | large profile shift (`Scout 81↔144`, `Steel 164↔105`); `TSBoatcannon` is the in-batch canary at 89% Demolition already |
+| 03 | [`w24_batch_03_missilehe.md`](../balance/w24_batch_03_missilehe.md) | 3 | widest gap in the set (`None 79↔151`) **and the first cluster that should SPLIT** — the two Tusks to MissileHE, `GradRockets` to Concussion, because a Grad is area saturation, not a precision missile |
 
 ## ⛔ P1 — BOOT-GATED WORK OWED FROM THE 2026-08-30 BALANCE SESSION
 
