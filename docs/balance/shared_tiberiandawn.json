@@ -1,149 +1,157 @@
 {
+ "schema": 2,
  "ledger": "shared_tiberiandawn",
  "pack": "mods/cameo/ContentPacks/TiberianDawn/Shared",
- "schema": 2,
  "sections": {
   "aircraft": {
    "TRAN": {
-    "armor": {
-     "src": "inherited",
-     "v": "Helicopter"
-    },
-    "buildable": false,
+    "name": "Chinook Transport",
     "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Valued.Cost",
-     "v": "1500"
-    },
-    "design": {
-     "category": "Aircraft",
-     "class_anchor": null,
-     "special": null,
-     "subtype": "UnarmedTransportHelicopter",
-     "tech_tier": null,
-     "unit_class": null
+     "v": "1500",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Valued.Cost"
     },
     "hp": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Health.HP",
-     "v": "100000"
+     "v": "100000",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Health.HP"
     },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Chinook Transport",
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "9000"
+    "armor": {
+     "v": "Helicopter",
+     "src": "inherited"
     },
     "speed_air": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Aircraft.Speed",
-     "v": "150"
+     "v": "150",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Aircraft.Speed"
     },
     "turn_speed_air": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
-     "v": "20"
+     "v": "20",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed"
+    },
+    "sight": {
+     "v": "9000",
+     "src": "inherited"
+    },
+    "shield_flat": {
+     "v": "0",
+     "src": "inherited"
+    },
+    "shield_pct": {
+     "v": "100",
+     "src": "inherited"
+    },
+    "shield_init_flat": {
+     "v": "0",
+     "src": "inherited"
+    },
+    "integrity_pct": {
+     "v": "100",
+     "src": "inherited"
+    },
+    "buildable": false,
+    "design": {
+     "unit_class": null,
+     "special": null,
+     "tech_tier": null,
+     "class_anchor": null,
+     "subtype": "UnarmedTransportHelicopter",
+     "category": "Aircraft"
     }
    }
   },
   "buildings": {
    "BRIK": {
-    "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
-     "v": "Concrete"
-    },
-    "buildable": true,
+    "name": "Concrete Barrier",
     "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
-     "v": "200"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
+     "v": "200",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost"
     },
     "hp": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
-     "v": "100000"
+     "v": "100000",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP"
     },
-    "name": "Concrete Barrier",
+    "armor": {
+     "v": "Concrete",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type"
+    },
     "prerequisites": [
      "~concretebarrier"
     ],
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "buildable": true,
+    "design": {
+     "unit_class": null,
+     "special": null,
+     "tech_tier": null,
+     "class_anchor": null,
+     "subtype": "Building"
+    }
    },
    "FENC": {
-    "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
-     "v": "Light"
-    },
-    "buildable": true,
+    "name": "Wire Fence",
     "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
-     "v": "25"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
+     "v": "25",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost"
     },
     "hp": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
-     "v": "25000"
+     "v": "25000",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP"
     },
-    "name": "Wire Fence",
+    "armor": {
+     "v": "Light",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type"
+    },
     "prerequisites": [
      "~wirefence"
     ],
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "buildable": true,
+    "design": {
+     "unit_class": null,
+     "special": null,
+     "tech_tier": null,
+     "class_anchor": null,
+     "subtype": "Building"
+    }
    },
    "NUK2": {
-    "armor": {
-     "src": "inherited",
-     "v": "Wood"
-    },
-    "buildable": true,
+    "name": "Advanced Power Plant",
     "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
-     "v": "1000"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
+     "v": "1000",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost"
     },
     "hp": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
-     "v": "300000"
+     "v": "300000",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP"
+    },
+    "armor": {
+     "v": "Wood",
+     "src": "inherited"
+    },
+    "sight": {
+     "v": "5c0",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range"
+    },
+    "shield_flat": {
+     "v": "0",
+     "src": "inherited"
+    },
+    "shield_pct": {
+     "v": "100",
+     "src": "inherited"
+    },
+    "shield_init_flat": {
+     "v": "0",
+     "src": "inherited"
     },
     "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
+     "v": "100",
+     "src": "inherited"
     },
-    "name": "Advanced Power Plant",
     "prerequisites": [
      "~fact",
      "anytdhq"
@@ -152,49 +160,49 @@
      "Building",
      "RABuilding"
     ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range",
-     "v": "5c0"
+    "buildable": true,
+    "design": {
+     "unit_class": null,
+     "special": null,
+     "tech_tier": null,
+     "class_anchor": null,
+     "subtype": "Building"
     }
    },
    "NUKE": {
-    "armor": {
-     "src": "inherited",
-     "v": "Wood"
-    },
-    "buildable": true,
+    "name": "Power Plant",
     "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
-     "v": "500"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
+     "v": "500",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost"
     },
     "hp": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
-     "v": "150000"
+     "v": "150000",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP"
+    },
+    "armor": {
+     "v": "Wood",
+     "src": "inherited"
+    },
+    "sight": {
+     "v": "4c0",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range"
+    },
+    "shield_flat": {
+     "v": "0",
+     "src": "inherited"
+    },
+    "shield_pct": {
+     "v": "100",
+     "src": "inherited"
+    },
+    "shield_init_flat": {
+     "v": "0",
+     "src": "inherited"
     },
     "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
+     "v": "100",
+     "src": "inherited"
     },
-    "name": "Power Plant",
     "prerequisites": [
      "~fact"
     ],
@@ -202,79 +210,79 @@
      "Building",
      "RABuilding"
     ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range",
-     "v": "4c0"
+    "buildable": true,
+    "design": {
+     "unit_class": null,
+     "special": null,
+     "tech_tier": null,
+     "class_anchor": null,
+     "subtype": "Building"
     }
    },
    "SBAG": {
-    "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
-     "v": "Medium"
-    },
-    "buildable": true,
+    "name": "Sandbag Barrier",
     "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
-     "v": "50"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
+     "v": "50",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost"
     },
     "hp": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
-     "v": "50000"
+     "v": "50000",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP"
     },
-    "name": "Sandbag Barrier",
+    "armor": {
+     "v": "Medium",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type"
+    },
     "prerequisites": [
      "~sandbagbarrier"
     ],
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "buildable": true,
+    "design": {
+     "unit_class": null,
+     "special": null,
+     "tech_tier": null,
+     "class_anchor": null,
+     "subtype": "Building"
+    }
    },
    "SILO": {
-    "armor": {
-     "src": "inherited",
-     "v": "Wood"
-    },
-    "buildable": true,
+    "name": "Tiberium Silo",
     "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
-     "v": "100"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
+     "v": "100",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost"
     },
     "hp": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
-     "v": "100000"
+     "v": "100000",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP"
+    },
+    "armor": {
+     "v": "Wood",
+     "src": "inherited"
+    },
+    "sight": {
+     "v": "4c0",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range"
+    },
+    "shield_flat": {
+     "v": "0",
+     "src": "inherited"
+    },
+    "shield_pct": {
+     "v": "100",
+     "src": "inherited"
+    },
+    "shield_init_flat": {
+     "v": "0",
+     "src": "inherited"
     },
     "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
+     "v": "100",
+     "src": "inherited"
     },
-    "name": "Tiberium Silo",
     "prerequisites": [
      "~fact",
      "proc"
@@ -283,111 +291,89 @@
      "Defence",
      "RADefence"
     ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range",
-     "v": "4c0"
+    "buildable": true,
+    "design": {
+     "unit_class": null,
+     "special": null,
+     "tech_tier": null,
+     "class_anchor": null,
+     "subtype": "Building"
     }
    },
    "cycl": {
-    "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
-     "v": "Heavy"
-    },
-    "buildable": true,
+    "name": "Chain Link Fence",
     "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
-     "v": "75"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
+     "v": "75",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost"
     },
     "hp": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
-     "v": "75000"
+     "v": "75000",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP"
     },
-    "name": "Chain Link Fence",
+    "armor": {
+     "v": "Heavy",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type"
+    },
     "prerequisites": [
      "~chainlinkfence"
     ],
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "buildable": true,
+    "design": {
+     "unit_class": null,
+     "special": null,
+     "tech_tier": null,
+     "class_anchor": null,
+     "subtype": "Building"
+    }
    }
   },
   "infantry": {
    "E6": {
-    "armaments": [
-     {
-      "damage_warheads": [],
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": null,
-      "extraction_note": "no_damage_warheads",
-      "pricing": false,
-      "range": "1536",
-      "reloaddelay": "20",
-      "slot": "Armament@defuse",
-      "versus_templates": [
-       "^RemovesIvanBombs",
-       "^RemovesTerrorDrone"
-      ],
-      "warheads": [],
-      "weapon": "DefuseKit",
-      "weapon_class_source": "none"
-     },
-     {
-      "damage_warheads": [],
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": null,
-      "extraction_note": "no_damage_warheads",
-      "pricing": false,
-      "range": "1536",
-      "reloaddelay": "100",
-      "slot": "Armament@leechdisinfect",
-      "versus_templates": [],
-      "warheads": [],
-      "weapon": "LeechDisinfect",
-      "weapon_class_source": "none"
-     }
-    ],
-    "armor": {
-     "src": "inherited",
-     "v": "None"
-    },
-    "buildable": true,
+    "name": "Engineer",
     "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml#Valued.Cost",
-     "v": "500"
-    },
-    "design": {
-     "category": "Infantry",
-     "class_anchor": "support",
-     "special": null,
-     "subtype": "Infantry",
-     "tech_tier": null,
-     "unit_class": null
+     "v": "500",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml#Valued.Cost"
     },
     "hp": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml#Health.HP",
-     "v": "5000"
+     "v": "5000",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml#Health.HP"
     },
-    "name": "Engineer",
+    "armor": {
+     "v": "None",
+     "src": "inherited"
+    },
+    "speed": {
+     "v": "50",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml#Mobile.Speed"
+    },
+    "sight": {
+     "v": "5c0",
+     "src": "inherited"
+    },
+    "shield_flat": {
+     "v": "0",
+     "src": "inherited"
+    },
+    "shield_pct": {
+     "v": "100",
+     "src": "inherited"
+    },
+    "shield_init_flat": {
+     "v": "0",
+     "src": "inherited"
+    },
+    "shield_init_pct": {
+     "v": "100",
+     "src": "inherited"
+    },
+    "shield_condition": {
+     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)",
+     "src": "inherited"
+    },
     "prerequisites": [
      "~cncbarracks"
     ],
@@ -395,33 +381,47 @@
      "Infantry",
      "RAInfantry"
     ],
-    "shield_condition": {
-     "src": "inherited",
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
-    },
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "5c0"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml#Mobile.Speed",
-     "v": "50"
+    "buildable": true,
+    "armaments": [
+     {
+      "slot": "Armament@defuse",
+      "weapon": "DefuseKit",
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "reloaddelay": "20",
+      "range": "1536",
+      "damage_warheads": [],
+      "extraction_note": "no_damage_warheads",
+      "versus_templates": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ],
+      "warheads": [],
+      "design_weapon_class": null,
+      "weapon_class_source": "none",
+      "pricing": false
+     },
+     {
+      "slot": "Armament@leechdisinfect",
+      "weapon": "LeechDisinfect",
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "reloaddelay": "100",
+      "range": "1536",
+      "damage_warheads": [],
+      "extraction_note": "no_damage_warheads",
+      "versus_templates": [],
+      "warheads": [],
+      "design_weapon_class": null,
+      "weapon_class_source": "none",
+      "pricing": false
+     }
+    ],
+    "design": {
+     "unit_class": null,
+     "special": null,
+     "tech_tier": null,
+     "class_anchor": "support",
+     "subtype": "Infantry",
+     "category": "Infantry"
     }
    }
   }
