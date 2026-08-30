@@ -876,6 +876,63 @@ VEHICLE self-heal (`^VehicleBuffs`, Delay 1 / DamageCooldown 10) to the INFANTRY
 `ChangesHealth@SelfHealing.Step = HP/1000`. Boot-gated yaml, not done. The grid change without the
 self-heal change is half the ruling.
 
+### 3.0w — ✅ BUILT (2026-08-30): Documents 2 and 3 — step 3 of the per-unit application law
+
+**Maintainer:** *"first you need to apply the things from the class anchors, and then you need to
+use the reference data from the other mods to distribute the other units in the same class."*
+
+That is the **PER-UNIT APPLICATION LAW** verbatim (`anchor_decisions_log.md`, 2026-07-31), and
+only its first two steps had ever been built:
+
+1. set each class's BASELINE ACTOR to its ruled stats — step 2c ⛔ still not run (§3.0t)
+2. the FORMULA takes its weights from that baseline — ✅ `fit_class`
+3. each MEMBER's stats come from **SYNTHESIS** — the old Cameo values, **every relative stat from
+   the cross-game/mod data-mining**, and where the unit sits relative to its baseline
+
+Step 3 is what the law calls *"the real 'apply the class' work"*. `BALANCE_SYNTHESIS.md` §15
+specifies it as three documents. **Document 1 existed; Documents 2 and 3 never did** — §15 ends
+with *"Next: run this generation over all units (tooling)"* and that tooling was never written.
+It is now `tools/balance/synthesize_reference.py`, and it writes:
+
+* **`docs/design/ORIGINAL_UNITS_NORMALIZED.md`** (Document 2) — all 1,021 reference rows put on
+  Cameo's scale (rifle = 20,000 HP / 100¢ / speed 60, i.e. the `scout` spec), each source first
+  normalized to **its own** rifle per §15.6.2.
+* **`docs/design/SYNTHESIS_DELTA.md`** (Document 3) — per-class member targets with Δ against the
+  live roster, plus the §15.3 ranked "how far is every unit from its synthesized target" report.
+
+**It reproduces the spec's own worked example exactly.** §16 derives the Apocalypse Tank's
+consensus as **6.4× rifle = 128,000 HP**; the generator outputs `ra2_soviets_apocalypsetank`
+350,000 → **128,000**. That is the acceptance test, and it is why the two defects below were
+caught rather than shipped.
+
+**Two defects the worked example caught:**
+
+* **Exact name matching was too strict.** Cameo's actor is `ra2_soviets_apocalypsetank` while the
+  vanilla, CnC Reloaded and Romanov's Vengeance rows are all just *"Apocalypse"* — so §16's three
+  6.4× votes were never pooled and the target came only from the two rows spelled *"Apocalypse
+  Tank"*, giving 154,000. Matching now requires the reference name to be a **prefix** of the
+  actor's last segment, which pools those three and still keeps *"Apocalypse Prototype"* (17.6×)
+  and *"Virus Boss Brute"* out of their neighbours' votes.
+* **Document 1 contains junk rows.** `Virus` is listed at 114,514 HP = **558.6× rifle** — a joke
+  number, on a row with no weapon at all — and it proposed an **11,172,000 HP** target for
+  `yuri_virus`. The relative outlier rule could not catch it because that unit has only one vote
+  to compare against. An absolute ceiling of 60× rifle now drops it and **9 others** (worst
+  remaining: *Animal T-Rex* at 73.2×). The widest DELIBERATE spread the spec names is 26×.
+
+**Coverage, stated honestly: 220 reference units match a Cameo actor, 91 of them class-tagged.**
+All five sources are RA2-family, so a Tiberian Sun, D2K, StarCraft or Warcraft unit only gets a
+target where the same concept also appears in an RA2 mod. §15.5 already carries the VERIFIED
+StarCraft cost conversion (`credits = 4×minerals + 8×vespene`, three exact fits) and Warcraft's by
+symmetry, so both are unblocked the moment their CSVs land in Document 1.
+
+⚠ **The generator stops at the pure consensus and does not apply §12.4's extra-spread allowance.**
+§16 nudges the Apocalypse's 6.4× up to ~7× because Cameo intends to run wider than its sources.
+That nudge is a design judgement — §15.6.4: *"the compromise is a judgement, not a mean"* — so it
+is the maintainer's to make, per class, not the tool's.
+
+⚠ **No ledger, no yaml.** Document 3 holds proposals. Pricing still runs
+`fit_class` → sign-off → `apply_balance --confirm` → boot gate.
+
 ### 3.0v — 🚦 PRICING IS ARMED (2026-08-30). 8 signed, 351 ledger targets, 89 yaml writes PENDING
 
 **Maintainer order, verbatim: *"sign the 8 and apply balance"*.** `class_anchors_signed_off` is
