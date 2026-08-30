@@ -562,6 +562,62 @@ Checkout: `/home/user/openra/openra` · rifle anchor **`E1` = 5,000 HP / 100 cre
 | `E3` | Rocket Soldier | 4,500 | 0.90 | 300 | 3.00 | 39 |
 | `E6` | Engineer | 3,000 | 0.60 | 500 | 5.00 | 46 |
 
+## OpenRA Dune II  (49 buildable units)
+
+Checkout: `/home/user/openra/d2` · rifle anchor **`light_inf` = 20 HP / 60 credits = 1.00×**
+
+| id | unit | HP | ×rifle | Cost | ×rifle cost | Speed |
+|---|---|--:|--:|--:|--:|--:|
+| `palace` | Palace | 1,000 | 50.00 | 999 | 16.65 | — |
+| `sandworm` | Sandworm | 1,000 | 50.00 | — | — | 42 |
+| `sardaukar` | Sardaukar | 1,000 | 50.00 | 200 | 3.33 | 31 |
+| `fremen` | Fremen | 700 | 35.00 | 200 | 3.33 | 43 |
+| `nsfremen` | Fremen | 700 | 35.00 | 200 | 3.33 | 43 |
+| `frigate` | Frigate | 500 | 25.00 | — | — | 189 |
+| `outpost` | Outpost | 500 | 25.00 | 400 | 6.67 | — |
+| `starport` | Starport | 500 | 25.00 | 500 | 8.33 | — |
+| `refinery` | Spice Refinery | 450 | 22.50 | 400 | 6.67 | — |
+| `construction_yard` | Construction Yard | 400 | 20.00 | 400 | 6.67 | — |
+| `devastator` | Devastator | 400 | 20.00 | 800 | 13.33 | 31 |
+| `high_tech_factory` | High Tech Factory | 400 | 20.00 | 500 | 8.33 | — |
+| `research_centre` | Ix Lab | 400 | 20.00 | 500 | 8.33 | — |
+| `wor` | WOR | 400 | 20.00 | 400 | 6.67 | — |
+| `light_factory` | Light Factory | 350 | 17.50 | 400 | 6.67 | — |
+| `barracks` | Barracks | 300 | 15.00 | 300 | 5.00 | — |
+| `siege_tank` | Siege Tank | 300 | 15.00 | 600 | 10.00 | 43 |
+| `siege_tank.starport` | Siege Tank | 300 | 15.00 | 1,000 | 16.67 | 43 |
+| `combat_tank` | Combat Tank | 200 | 10.00 | 300 | 5.00 | 75 |
+| `combat_tank.starport` | Combat Tank | 200 | 10.00 | 1,300 | 21.67 | 75 |
+| `gun_turret` | Gun Turret | 200 | 10.00 | 125 | 2.08 | — |
+| `heavy_factory` | Heavy Factory | 200 | 10.00 | 600 | 10.00 | — |
+| `repair_pad` | Repair Pad | 200 | 10.00 | 700 | 11.67 | — |
+| `rocket_turret` | Rocket Turret | 200 | 10.00 | 250 | 4.17 | — |
+| `wind_trap` | Wind Trap | 200 | 10.00 | 300 | 5.00 | — |
+| `harvester` | Spice Harvester | 150 | 7.50 | 300 | 5.00 | 43 |
+| `harvester.starport` | Spice Harvester | 150 | 7.50 | 700 | 11.67 | 43 |
+| `mcv` | Mobile Construction Vehicle | 150 | 7.50 | 900 | 15.00 | 31 |
+| `mcv.starport` | Mobile Construction Vehicle | 150 | 7.50 | 1,500 | 25.00 | 31 |
+| `silo` | Silo | 150 | 7.50 | 150 | 2.50 | — |
+| `quad` | Missile Quad | 130 | 6.50 | 200 | 3.33 | 96 |
+| `quad.starport` | Missile Quad | 130 | 6.50 | 600 | 10.00 | 96 |
+| `deviator` | Deviator | 120 | 6.00 | 750 | 12.50 | 53 |
+| `sonic_tank` | Sonic Tank | 110 | 5.50 | 600 | 10.00 | 31 |
+| `trooper_squad` | Trooper | 110 | 5.50 | 200 | 3.33 | 31 |
+| `carryall` | Carryall | 100 | 5.00 | 800 | 13.33 | 144 |
+| `carryall.reinforce` | Carryall | 100 | 5.00 | 800 | 13.33 | 144 |
+| `carryall.starport` | Carryall | 100 | 5.00 | 1,500 | 25.00 | 144 |
+| `missile_tank` | Missile Tank | 100 | 5.00 | 450 | 7.50 | 64 |
+| `missile_tank.starport` | Missile Tank | 100 | 5.00 | 1,700 | 28.33 | 64 |
+| `trike` | Trike | 100 | 5.00 | 150 | 2.50 | 128 |
+| `trike.starport` | Trike | 100 | 5.00 | 400 | 6.67 | 128 |
+| `raider` | Raider Trike | 80 | 4.00 | 150 | 2.50 | 149 |
+| `light_squad` | Light Infantry Squad | 50 | 2.50 | 100 | 1.67 | 43 |
+| `wall` | Concrete Wall | 50 | 2.50 | 50 | 0.83 | — |
+| `trooper` | Trooper | 45 | 2.25 | 100 | 1.67 | 31 |
+| `light_inf` | Light Infantry | 20 | 1.00 | 60 | 1.00 | 43 |
+| `ornithopter` | Ornithopter | 10 | 0.50 | 600 | 10.00 | 224 |
+| `saboteur` | Saboteur | 10 | 0.50 | 300 | 5.00 | 43 |
+
 ## OpenRA Dune 2000  (56 buildable units)
 
 Checkout: `/home/user/openra/openra` · rifle anchor **`light_inf` = 6,000 HP / 50 credits = 1.00×**
@@ -624,6 +680,97 @@ Checkout: `/home/user/openra/openra` · rifle anchor **`light_inf` = 6,000 HP / 
 | `engineer` | Engineer | 5,000 | 0.83 | 400 | 8.00 | 31 |
 | `saboteur` | Saboteur | 5,000 | 0.83 | 300 | 6.00 | 43 |
 | `thumper` | Thumper Infantry | 3,750 | 0.62 | 200 | 4.00 | 43 |
+
+## OpenE2140  (84 buildable units)
+
+Checkout: `/home/user/opene2140/opene2140` · rifle anchor **`ed_infantry_a01` = 28 HP / 50 credits = 1.00×**
+
+| id | unit | HP | ×rifle | Cost | ×rifle cost | Speed |
+|---|---|--:|--:|--:|--:|--:|
+| `ed_mcu_an_center` | Mobile AN Center | 1,000 | 35.71 | 1,200 | 24.00 | 28 |
+| `ed_mcu_bcc` | Mobile BCC | 1,000 | 35.71 | 2,000 | 40.00 | 28 |
+| `ed_mcu_bio_center` | Mobile Bio-Center | 1,000 | 35.71 | 1,000 | 20.00 | 28 |
+| `ed_mcu_constr_center` | Mobile Construction Center | 1,000 | 35.71 | 2,500 | 50.00 | 28 |
+| `ed_mcu_defense_tower` | Mobile Defense Tower | 1,000 | 35.71 | 400 | 8.00 | 28 |
+| `ed_mcu_defense_tower_upgraded` | Mobile Defense Tower Upgr. | 1,000 | 35.71 | 600 | 12.00 | 28 |
+| `ed_mcu_heavy_defense_tower` | Mobile Heavy Def. Tower | 1,000 | 35.71 | 600 | 12.00 | 28 |
+| `ed_mcu_heavy_defense_tower_upgraded` | Mobile Heavy Def. Tower Upgr. | 1,000 | 35.71 | 800 | 16.00 | 28 |
+| `ed_mcu_pillbox` | Mobile Pillbox | 1,000 | 35.71 | 800 | 16.00 | 28 |
+| `ed_mcu_silo` | Mobile Silo | 1,000 | 35.71 | 1,000 | 20.00 | 28 |
+| `ed_mcu_tech_house` | Mobile Tech House | 1,000 | 35.71 | 1,500 | 30.00 | 28 |
+| `shared_mcu_air_base` | Mobile Air Base | 1,000 | 35.71 | 1,300 | 26.00 | 28 |
+| `shared_mcu_mine` | Mobile Mine | 1,000 | 35.71 | 800 | 16.00 | 28 |
+| `shared_mcu_power_plant` | Mobile Power Plant | 1,000 | 35.71 | 1,000 | 20.00 | 28 |
+| `shared_mcu_power_plant_upgraded` | Mobile Power Plant Upgr. | 1,000 | 35.71 | 2,000 | 40.00 | 28 |
+| `shared_mcu_refinery` | Mobile Refinery | 1,000 | 35.71 | 1,000 | 20.00 | 28 |
+| `shared_mcu_research_center` | Mobile Research Center | 1,000 | 35.71 | 1,500 | 30.00 | 28 |
+| `shared_mcu_shelter` | Mobile Shelter | 1,000 | 35.71 | 800 | 16.00 | 28 |
+| `shared_mcu_water_base` | Mobile Water Base | 1,000 | 35.71 | 1,200 | 24.00 | 28 |
+| `ucs_mcu_big_eye` | Mobile Big Eye | 1,000 | 35.71 | 600 | 12.00 | 28 |
+| `ucs_mcu_big_eye_upgraded` | Mobile Big Eye Upgr. | 1,000 | 35.71 | 800 | 16.00 | 28 |
+| `ucs_mcu_heavy_tech` | Mobile Heavy Tech | 1,000 | 35.71 | 1,450 | 29.00 | 28 |
+| `ucs_mcu_little_eye` | Mobile Little Eye | 1,000 | 35.71 | 400 | 8.00 | 28 |
+| `ucs_mcu_little_eye_upgraded` | Mobile Little Eye Upgr. | 1,000 | 35.71 | 600 | 12.00 | 28 |
+| `ucs_mcu_pb_cannon` | Mobile PB Cannon | 1,000 | 35.71 | 1,500 | 30.00 | 28 |
+| `ucs_mcu_pb_control` | Mobile PB Control | 1,000 | 35.71 | 2,000 | 40.00 | 28 |
+| `ucs_mcu_prod_center` | Mobile Production Center | 1,000 | 35.71 | 2,500 | 50.00 | 28 |
+| `ucs_mcu_robot_factory` | Mobile Robot Factory | 1,000 | 35.71 | 1,000 | 20.00 | 28 |
+| `ucs_mcu_sdi_defense` | Mobile SDI Defence | 1,000 | 35.71 | 2,000 | 40.00 | 28 |
+| `ucs_mcu_teleport` | Mobile Teleport | 1,000 | 35.71 | 2,150 | 43.00 | 28 |
+| `ed_ships_kt30` | KT 30 | 800 | 28.57 | 2,000 | 40.00 | 50 |
+| `ucs_ships_orca` | ORCA | 800 | 28.57 | 2,000 | 40.00 | 50 |
+| `ucs_vehicles_big_mech` | BIG MECH | 800 | 28.57 | 1,500 | 30.00 | 68 |
+| `ed_vehicles_ht30lr` | HT 30 LR | 600 | 21.43 | 1,500 | 30.00 | 50 |
+| `ed_vehicles_ht33r` | HT 33 R | 600 | 21.43 | 1,200 | 24.00 | 50 |
+| `ed_vehicles_ht34j` | HT 34 J | 600 | 21.43 | 1,200 | 24.00 | 50 |
+| `ed_vehicles_warhammer` | WARHAMMER | 600 | 21.43 | 1,200 | 24.00 | 50 |
+| `ucs_vehicles_tiger_hellmaker` | TIGER HellMaker | 500 | 17.86 | 500 | 10.00 | 50 |
+| `ed_ships_wtrn` | WTRN | 400 | 14.29 | 500 | 10.00 | 90 |
+| `shared_vehicles_bantha` | BANTHA | 400 | 14.29 | 400 | 8.00 | 50 |
+| `ucs_vehicles_spider_ii` | SPIDER II | 400 | 14.29 | 1,700 | 34.00 | 50 |
+| `ucs_vehicles_tiger_assault` | TIGER Assault | 400 | 14.29 | 700 | 14.00 | 50 |
+| `ed_aircrafts_nemezis` | NEMEZIS | 300 | 10.71 | 2,300 | 46.00 | 94 |
+| `ed_vehicles_miner` | MINER | 300 | 10.71 | 700 | 14.00 | 90 |
+| `ed_vehicles_mt200` | MT 200 | 300 | 10.71 | 500 | 10.00 | 90 |
+| `ed_vehicles_mt201l` | MT 201L | 300 | 10.71 | 800 | 16.00 | 90 |
+| `ed_vehicles_screamer` | SCREAMER | 300 | 10.71 | 900 | 18.00 | 90 |
+| `shared_aircrafts_heavy_lifter` | Heavy Lifter | 300 | 10.71 | 800 | 16.00 | — |
+| `ucs_vehicles_detector` | DETECTOR | 300 | 10.71 | 500 | 10.00 | 90 |
+| `ucs_vehicles_detector_old` | DETECTOR | 300 | 10.71 | 500 | 10.00 | 90 |
+| `ucs_vehicles_miner_bt` | MINER BT | 300 | 10.71 | 700 | 14.00 | 90 |
+| `ucs_vehicles_spider` | SPIDER | 300 | 10.71 | 1,500 | 30.00 | 50 |
+| `ucs_vehicles_wtp_100` | WTP 100 | 300 | 10.71 | 1,000 | 20.00 | 90 |
+| `ucs_ships_ttre400` | TTRE 400 | 260 | 9.29 | 700 | 14.00 | 50 |
+| `ed_aircrafts_hat` | HAT | 200 | 7.14 | 1,000 | 20.00 | 94 |
+| `ed_ships_shark` | SHARK | 200 | 7.14 | 300 | 6.00 | 90 |
+| `ed_vehicles_bio` | BIO | 200 | 7.14 | 1,000 | 20.00 | 90 |
+| `ed_vehicles_st01b` | ST 01B | 200 | 7.14 | 300 | 6.00 | 90 |
+| `ed_vehicles_st02` | ST 02 | 200 | 7.14 | 350 | 7.00 | 90 |
+| `ed_vehicles_tur` | TUR | 200 | 7.14 | 300 | 6.00 | 90 |
+| `shared_vehicles_hcum` | HCU-M | 200 | 7.14 | 800 | 16.00 | 90 |
+| `ucs_ships_russ3` | RUSS 3 | 200 | 7.14 | 500 | 10.00 | 50 |
+| `ucs_vehicles_atm_500` | ATM 500 | 200 | 7.14 | 400 | 8.00 | 90 |
+| `ucs_vehicles_raptor_ad` | RAPTOR AD | 200 | 7.14 | 300 | 6.00 | 68 |
+| `ucs_vehicles_raptor_es` | RAPTOR ES | 200 | 7.14 | 250 | 5.00 | 68 |
+| `ucs_vehicles_shadow` | SHADOW | 200 | 7.14 | 2,100 | 42.00 | 90 |
+| `ed_vehicles_btti` | BTTI | 150 | 5.36 | 200 | 4.00 | 100 |
+| `ucs_aircrafts_hellwind` | HELLWIND | 150 | 5.36 | 1,000 | 20.00 | 94 |
+| `ucs_vehicles_goliath` | GOLIATH | 150 | 5.36 | 600 | 12.00 | 90 |
+| `ucs_vehicles_hellbike` | HB Bike | 120 | 4.29 | 200 | 4.00 | 100 |
+| `ucs_vehicles_t100` | T 100 | 80 | 2.86 | 130 | 2.60 | 50 |
+| `ucs_aircrafts_gargoil` | GARGOIL | 60 | 2.14 | 600 | 12.00 | 175 |
+| `ed_aircrafts_vtol` | VTOL | 50 | 1.79 | 900 | 18.00 | 175 |
+| `ucs_aircrafts_gargoil_ii` | GARGOIL II | 50 | 1.79 | 900 | 18.00 | 175 |
+| `ed_aircrafts_storm` | STORM | 40 | 1.43 | 500 | 10.00 | 175 |
+| `ed_aircrafts_thunder` | THUNDER | 40 | 1.43 | 700 | 14.00 | 175 |
+| `ucs_infantry_silver_t` | SILVER T | 40 | 1.43 | 70 | 1.40 | 50 |
+| `ed_infantry_a01` | Android A01 | 28 | 1.00 | 50 | 1.00 | 50 |
+| `ed_infantry_a02` | Android A02 | 28 | 1.00 | 75 | 1.50 | 50 |
+| `ed_infantry_a03` | Android A03 | 28 | 1.00 | 100 | 2.00 | 50 |
+| `ucs_infantry_silver_max` | SILVER MAX | 28 | 1.00 | 100 | 2.00 | 50 |
+| `ucs_infantry_silver_one` | SILVER ONE | 28 | 1.00 | 50 | 1.00 | 50 |
+| `ucs_infantry_silver_r` | SILVER R | 28 | 1.00 | 75 | 1.50 | 50 |
+| `ed_infantry_a04` | Android A04 | 20 | 0.71 | 100 | 2.00 | 50 |
 
 ## Fractured Realms
 
@@ -789,6 +936,128 @@ Checkout: `/home/user/mustaphatr/generals-alpha` · rifle anchor **`infantry.con
 | `fake.advanced_demo_trap` | Fake Advanced Demo Trap | 1,500 | 0.12 | 25 | 0.25 | — |
 | `fake.demo_trap` | Fake Demo Trap | 1,500 | 0.12 | 50 | 0.50 | — |
 
+## OpenHV  (115 buildable units)
+
+Checkout: `/home/user/openhv/openhv` · rifle anchor **`RIFLEMAN` = 15,000 HP / 200 credits = 1.00×**
+
+| id | unit | HP | ×rifle | Cost | ×rifle cost | Speed |
+|---|---|--:|--:|--:|--:|--:|
+| `BASE` | Główna baza | 250,000 | 16.67 | 5,000 | 25.00 | — |
+| `BASE2` | Główna baza | 250,000 | 16.67 | 5,000 | 25.00 | — |
+| `BATTLESHIP` | Battleship | 250,000 | 16.67 | 12,000 | 60.00 | 100 |
+| `MOTHERSHIP` | Mothership | 250,000 | 16.67 | 12,000 | 60.00 | 100 |
+| `BARRIER` | Mur | 100,000 | 6.67 | 200 | 1.00 | — |
+| `FIELD` | Generator pola siłowego | 100,000 | 6.67 | 1,500 | 7.50 | — |
+| `HOWITZER` | Grand Howitzer | 100,000 | 6.67 | 2,000 | 10.00 | — |
+| `RADAR` | Radar Dome | 100,000 | 6.67 | 1,800 | 9.00 | — |
+| `RADAR2` | Radar Dome | 100,000 | 6.67 | 1,800 | 9.00 | — |
+| `SILO` | Launch Command | 100,000 | 6.67 | 3,000 | 15.00 | — |
+| `STORAGE` | Storage | 100,000 | 6.67 | 1,400 | 7.00 | — |
+| `TECHCENTER` | Technology Download Center | 100,000 | 6.67 | 3,000 | 15.00 | — |
+| `TELEVATOR` | Telewinda | 100,000 | 6.67 | 1,500 | 7.50 | — |
+| `UPLINK` | Orbital Strike Uplink Command | 100,000 | 6.67 | 2,500 | 12.50 | — |
+| `BOOMER` | Missile Submarine | 80,000 | 5.33 | 5,000 | 25.00 | 55 |
+| `CARRIER` | Drone Ship | 80,000 | 5.33 | 5,000 | 25.00 | 70 |
+| `FACTORY` | Vehicle Factory | 80,000 | 5.33 | 1,000 | 5.00 | — |
+| `FACTORY2` | Vehicle Factory | 80,000 | 5.33 | 1,000 | 5.00 | — |
+| `HARBOR` | Stocznia | 80,000 | 5.33 | 1,000 | 5.00 | — |
+| `HARBOR2` | Stocznia | 80,000 | 5.33 | 1,000 | 5.00 | — |
+| `STARPORT` | Starport | 80,000 | 5.33 | 700 | 3.50 | — |
+| `STARPORT2` | Starport | 80,000 | 5.33 | 700 | 3.50 | — |
+| `TRADER` | Platforma handlowa | 80,000 | 5.33 | 1,200 | 6.00 | — |
+| `HGATE` | Brama | 75,000 | 5.00 | 300 | 1.50 | — |
+| `VGATE` | Brama | 75,000 | 5.00 | 300 | 1.50 | — |
+| `LIGHTNINGBOAT` | Lightning Boat | 60,000 | 4.00 | 4,000 | 20.00 | 75 |
+| `MODULE` | Moduł | 60,000 | 4.00 | 500 | 2.50 | — |
+| `MODULE2` | Moduł | 60,000 | 4.00 | 500 | 2.50 | — |
+| `RAILGUNBOAT` | Railgun Boat | 60,000 | 4.00 | 4,000 | 20.00 | 75 |
+| `AATURRET` | Wieżyczka przeciwlotnicza | 55,000 | 3.67 | 1,000 | 5.00 | — |
+| `AATURRET2` | Wieżyczka przeciwlotnicza | 55,000 | 3.67 | 1,000 | 5.00 | — |
+| `TURRET` | Działko | 55,000 | 3.67 | 1,000 | 5.00 | — |
+| `TURRET2` | Działko | 55,000 | 3.67 | 1,000 | 5.00 | — |
+| `DUALMERCTANK` | Dual Mercenary Tank | 50,000 | 3.33 | 1,700 | 8.50 | 80 |
+| `FERRY` | Prom | 50,000 | 3.33 | 1,400 | 7.00 | 80 |
+| `LIGHTNINGTANK` | Lightning Tank | 50,000 | 3.33 | 3,000 | 15.00 | 80 |
+| `LIGHTNINGTANK.TRADE` | Lightning Tank | 50,000 | 3.33 | 3,000 | 15.00 | 80 |
+| `RADARTANK` | Czołg zwiadowczy | 50,000 | 3.33 | 800 | 4.00 | 90 |
+| `RADARTANK.TRADE` | Czołg zwiadowczy | 50,000 | 3.33 | 800 | 4.00 | 90 |
+| `RAILGUNTANK` | Railgun Tank | 50,000 | 3.33 | 3,000 | 15.00 | 80 |
+| `RAILGUNTANK.TRADE` | Railgun Tank | 50,000 | 3.33 | 3,000 | 15.00 | 80 |
+| `MBT` | Assault Tank | 46,000 | 3.07 | 1,700 | 8.50 | 95 |
+| `MBT.TRADE` | Assault Tank | 46,000 | 3.07 | 1,700 | 8.50 | 95 |
+| `MBT2` | Assault Tank | 46,000 | 3.07 | 1,700 | 8.50 | 95 |
+| `MBT2.TRADE` | Assault Tank | 46,000 | 3.07 | 1,700 | 8.50 | 95 |
+| `CHOPPER` | Helikopter transportowy | 45,000 | 3.00 | 1,800 | 9.00 | 135 |
+| `DROPSHIP` | Heavy Transport Dropship | 45,000 | 3.00 | 1,800 | 9.00 | 135 |
+| `MERCBOAT` | Mercenary Boat | 45,000 | 3.00 | 1,600 | 8.00 | 100 |
+| `MERCTANK` | Mercenary Tank | 45,000 | 3.00 | 1,700 | 8.50 | 90 |
+| `MISSILETANK` | Missile Tank | 45,000 | 3.00 | 2,400 | 12.00 | 80 |
+| `MISSILETANK.TRADE` | Missile Tank | 45,000 | 3.00 | 2,400 | 12.00 | 80 |
+| `SUBMARINE` | Submarine | 45,000 | 3.00 | 1,600 | 8.00 | 100 |
+| `TORPEDOBOAT` | Torpedo Boat | 45,000 | 3.00 | 1,600 | 8.00 | 110 |
+| `BUNKER` | Bunkier | 40,000 | 2.67 | 650 | 3.25 | — |
+| `BUNKER2` | Bunkier | 40,000 | 2.67 | 650 | 3.25 | — |
+| `GENERATOR` | Elektrownia | 40,000 | 2.67 | 300 | 1.50 | — |
+| `OREPURIFIER` | Ore Purifier | 40,000 | 2.67 | 1,200 | 6.00 | — |
+| `ORESMELT` | Ore Smelter | 40,000 | 2.67 | 1,200 | 6.00 | — |
+| `DUALARTILLERY` | Dual Artillery | 35,000 | 2.33 | 3,500 | 17.50 | 85 |
+| `LIGHTBOAT` | Light Boat | 30,000 | 2.00 | 900 | 4.50 | 125 |
+| `PATROLBOAT` | Patrol boat | 30,000 | 2.00 | 900 | 4.50 | 125 |
+| `STEALTHTANK` | Stealth Tank | 30,000 | 2.00 | 2,400 | 12.00 | 120 |
+| `STEALTHTANK.TRADE` | Stealth Tank | 30,000 | 2.00 | 2,400 | 12.00 | 120 |
+| `TURTLE` | Żółw | 30,000 | 2.00 | 1,500 | 7.50 | 100 |
+| `APC` | APC | 25,000 | 1.67 | 1,200 | 6.00 | 110 |
+| `APC.TRADE` | APC | 25,000 | 1.67 | 1,200 | 6.00 | 110 |
+| `MINELAYER` | Stawiacz min | 21,000 | 1.40 | 1,400 | 7.00 | 128 |
+| `MINELAYER.TRADE` | Stawiacz min | 21,000 | 1.40 | 1,400 | 7.00 | 128 |
+| `MINESHIP` | Naval Minelayer | 21,000 | 1.40 | 1,400 | 7.00 | 128 |
+| `MINESHIP2` | Naval Minelayer | 21,000 | 1.40 | 1,400 | 7.00 | 128 |
+| `REPAIRTANK` | Pojazd naprawczy | 20,000 | 1.33 | 1,600 | 8.00 | 95 |
+| `REPAIRTANK.TRADE` | Pojazd naprawczy | 20,000 | 1.33 | 1,600 | 8.00 | 95 |
+| `BROKER` | Broker | 17,500 | 1.17 | 1,400 | 7.00 | 80 |
+| `HACKERTANK` | Hacker Tank | 17,500 | 1.17 | 2,500 | 12.50 | 120 |
+| `HACKERTANK.TRADE` | Hacker Tank | 17,500 | 1.17 | 2,500 | 12.50 | 120 |
+| `AATANK` | Mobile AA | 15,000 | 1.00 | 1,000 | 5.00 | 115 |
+| `AATANK.TRADE` | Mobile AA | 15,000 | 1.00 | 1,000 | 5.00 | 115 |
+| `AATANK2` | Mobile AA | 15,000 | 1.00 | 1,000 | 5.00 | 115 |
+| `AATANK2.TRADE` | Mobile AA | 15,000 | 1.00 | 1,000 | 5.00 | 115 |
+| `ARTILLERY` | Artyleria | 15,000 | 1.00 | 1,600 | 8.00 | 95 |
+| `ARTILLERY.TRADE` | Artyleria | 15,000 | 1.00 | 1,600 | 8.00 | 95 |
+| `BANSHEE` | Banshee | 15,000 | 1.00 | 3,000 | 15.00 | 112 |
+| `ECMTANK` | Countermeasure Tank | 15,000 | 1.00 | 2,000 | 10.00 | 135 |
+| `ECMTANK.TRADE` | Countermeasure Tank | 15,000 | 1.00 | 2,000 | 10.00 | 135 |
+| `FLAMER` | Flamer | 15,000 | 1.00 | 700 | 3.50 | 70 |
+| `GUNSHIP3` | Bomber | 15,000 | 1.00 | 3,000 | 15.00 | 112 |
+| `JET` | Speeder | 15,000 | 1.00 | 1,500 | 7.50 | 220 |
+| `JET2` | Bomber | 15,000 | 1.00 | 3,000 | 15.00 | 155 |
+| `MINER` | Pojazd górniczy | 15,000 | 1.00 | 1,100 | 5.50 | 80 |
+| `MINER.TRADE` | Pojazd górniczy | 15,000 | 1.00 | 1,100 | 5.50 | 80 |
+| `MORTAR` | Mortar | 15,000 | 1.00 | 300 | 1.50 | 80 |
+| `RIFLEMAN` | Rifleman | 15,000 | 1.00 | 200 | 1.00 | 80 |
+| `ROCKETEER` | Rocketeer | 15,000 | 1.00 | 450 | 2.25 | 80 |
+| `SHOCKER` | Shocker | 15,000 | 1.00 | 450 | 2.25 | 80 |
+| `SNIPER` | Snajper | 15,000 | 1.00 | 1,000 | 5.00 | 70 |
+| `TANKER1` | Loaded Resource Transporter | 15,000 | 1.00 | 1,000 | 5.00 | 128 |
+| `TANKER2` | Empty Resource Transporter | 15,000 | 1.00 | 1,000 | 5.00 | 128 |
+| `TECHNICIAN` | Technician | 12,500 | 0.83 | 1,000 | 5.00 | 70 |
+| `BUILDER` | Builder | 12,000 | 0.80 | 1,000 | 5.00 | 100 |
+| `BUILDER.TRADE` | Builder | 12,000 | 0.80 | 1,000 | 5.00 | 100 |
+| `BUILDER2` | Builder | 12,000 | 0.80 | 1,000 | 5.00 | 100 |
+| `BUILDER2.TRADE` | Builder | 12,000 | 0.80 | 1,000 | 5.00 | 100 |
+| `CVIT` | Transport zasobów | 11,000 | 0.73 | 500 | 2.50 | 113 |
+| `BLASTER` | Blaster | 10,000 | 0.67 | 1,200 | 6.00 | 110 |
+| `BUGGY` | Ramp Buggy | 10,000 | 0.67 | 800 | 4.00 | 140 |
+| `BUGGY.TRADE` | Ramp Buggy | 10,000 | 0.67 | 800 | 4.00 | 140 |
+| `COPTER` | Helikopter bojowy | 10,000 | 0.67 | 2,000 | 10.00 | 115 |
+| `GUNSHIP` | Gun Ship | 10,000 | 0.67 | 2,000 | 10.00 | 200 |
+| `GUNSHIP2` | Gun Ship | 10,000 | 0.67 | 2,000 | 10.00 | 115 |
+| `BIKE` | Gatling Bike | 9,500 | 0.63 | 800 | 4.00 | 170 |
+| `BIKE.TRADE` | Gatling Bike | 9,500 | 0.63 | 800 | 4.00 | 170 |
+| `JETPACKER` | Jetpacker | 9,000 | 0.60 | 1,300 | 6.50 | 100 |
+| `BALLOON` | Balon zwiadowczy | 8,000 | 0.53 | 800 | 4.00 | 70 |
+| `OBSERVER` | Obserwator | 8,000 | 0.53 | 800 | 4.00 | 80 |
+| `SAUCER` | Spodek zwiadowczy | 8,000 | 0.53 | 800 | 4.00 | 80 |
+
 ## OpenRA Red Alert  (94 buildable units)
 
 Checkout: `/home/user/openra/openra` · rifle anchor **`E1` = 5,000 HP / 100 credits = 1.00×**
@@ -889,6 +1158,269 @@ Checkout: `/home/user/openra/openra` · rifle anchor **`E1` = 5,000 HP / 100 cre
 | `SPY` | SPY | 2,500 | 0.50 | 500 | 5.00 | 54 |
 | `SPY.England` | SPY.England | 2,500 | 0.50 | 250 | 2.50 | 54 |
 | `DOG` | Attack Dog | 1,800 | 0.36 | 200 | 2.00 | 100 |
+
+## OpenRA RA2 official  (86 buildable units)
+
+Checkout: `/home/user/openra/ra2` · rifle anchor **`e1` = 125 HP / 200 credits = 1.00×**
+
+| id | unit | HP | ×rifle | Cost | ×rifle cost | Speed |
+|---|---|--:|--:|--:|--:|--:|
+| `zep` | Kirov Airship | 2,000 | 16.00 | 2,000 | 10.00 | 25 |
+| `gayard` | Naval Yard | 1,500 | 12.00 | 1,000 | 5.00 | — |
+| `nayard` | Naval Yard | 1,500 | 12.00 | 1,000 | 5.00 | — |
+| `gadept` | Service Depot | 1,200 | 9.60 | 800 | 4.00 | — |
+| `nadept` | Service Depot | 1,200 | 9.60 | 800 | 4.00 | — |
+| `amcv` | Mobile Construction Vehicle | 1,000 | 8.00 | 3,000 | 15.00 | 60 |
+| `cmin` | Chrono Miner | 1,000 | 8.00 | 1,400 | 7.00 | 60 |
+| `gacnst` | Construction Yard | 1,000 | 8.00 | 3,000 | 15.00 | — |
+| `garefn` | Ore Refinery | 1,000 | 8.00 | 2,000 | 10.00 | — |
+| `gaspysat` | Spy Satellite Uplink | 1,000 | 8.00 | 1,500 | 7.50 | — |
+| `gaweap` | War Factory | 1,000 | 8.00 | 2,000 | 10.00 | — |
+| `gaweat` | Weather Controller | 1,000 | 8.00 | 5,000 | 25.00 | — |
+| `harv` | War Miner | 1,000 | 8.00 | 1,400 | 7.00 | 60 |
+| `naclon` | Cloning Vats | 1,000 | 8.00 | 2,500 | 12.50 | — |
+| `nacnst` | Construction Yard | 1,000 | 8.00 | 3,000 | 15.00 | — |
+| `namisl` | Nuclear Missile Silo | 1,000 | 8.00 | 5,000 | 25.00 | — |
+| `nanrct` | Nuclear Reactor | 1,000 | 8.00 | 1,000 | 5.00 | — |
+| `naradr` | Radar Tower | 1,000 | 8.00 | 1,000 | 5.00 | — |
+| `narefn` | Ore Refinery | 1,000 | 8.00 | 2,000 | 10.00 | — |
+| `naweap` | War Factory | 1,000 | 8.00 | 2,000 | 10.00 | — |
+| `smcv` | Mobile Construction Vehicle | 1,000 | 8.00 | 3,000 | 15.00 | 60 |
+| `gaorep` | Ore Purifier | 900 | 7.20 | 2,500 | 12.50 | — |
+| `gtgcan` | Grand Cannon | 900 | 7.20 | 2,000 | 10.00 | — |
+| `naflak` | Flak Cannon | 900 | 7.20 | 1,000 | 5.00 | — |
+| `nasam` | Patriot Missile System | 900 | 7.20 | 1,000 | 5.00 | — |
+| `aegis` | Aegis Cruiser | 800 | 6.40 | 1,200 | 6.00 | 60 |
+| `apoc` | Apocalypse Tank | 800 | 6.40 | 1,750 | 8.75 | 60 |
+| `carrier` | Aircraft Carrier | 800 | 6.40 | 2,000 | 10.00 | 60 |
+| `gacsph` | Chronosphere | 750 | 6.00 | 2,500 | 12.50 | — |
+| `gapowr` | Power Plant | 750 | 6.00 | 800 | 4.00 | — |
+| `nairon` | Iron Curtain Device | 750 | 6.00 | 2,500 | 12.50 | — |
+| `napowr` | Tesla Reactor | 750 | 6.00 | 600 | 3.00 | — |
+| `napsis` | Psychic Sensor | 750 | 6.00 | 1,000 | 5.00 | — |
+| `amradr` | American Airforce Command Headquarters | 600 | 4.80 | 1,000 | 5.00 | — |
+| `atesla` | Prism Tower | 600 | 4.80 | 1,500 | 7.50 | — |
+| `dest` | Destroyer | 600 | 4.80 | 1,000 | 5.00 | 90 |
+| `gaairc` | Airforce Command Headquarters | 600 | 4.80 | 1,000 | 5.00 | — |
+| `gagap` | Gap Generator | 600 | 4.80 | 1,000 | 5.00 | — |
+| `sub` | Typhoon Attack Sub | 600 | 4.80 | 1,000 | 5.00 | 60 |
+| `tesla` | Tesla Coil | 600 | 4.80 | 1,500 | 7.50 | — |
+| `gapile` | Barracks | 500 | 4.00 | 500 | 2.50 | — |
+| `gatech` | Battle Lab | 500 | 4.00 | 2,000 | 10.00 | — |
+| `nahand` | Barracks | 500 | 4.00 | 500 | 2.50 | — |
+| `natech` | Battle Lab | 500 | 4.00 | 2,000 | 10.00 | — |
+| `gapill` | Pill Box | 400 | 3.20 | 500 | 2.50 | — |
+| `htnk` | Rhino Heavy Tank | 400 | 3.20 | 900 | 4.50 | 90 |
+| `nalasr` | Sentry Gun | 400 | 3.20 | 500 | 2.50 | — |
+| `tnkd` | Tank Destroyer | 400 | 3.20 | 900 | 4.50 | 75 |
+| `gawall` | Allied Wall | 300 | 2.40 | 100 | 0.50 | — |
+| `hyd` | Sea Scorpion | 300 | 2.40 | 900 | 4.50 | 120 |
+| `lcrf` | Amphibious Transport | 300 | 2.40 | 900 | 4.50 | 90 |
+| `mtnk` | Grizzly Battle Tank | 300 | 2.40 | 700 | 3.50 | 105 |
+| `nawall` | Soviet Wall | 300 | 2.40 | 100 | 0.50 | — |
+| `sapc` | Amphibious Transport | 300 | 2.40 | 900 | 4.50 | 90 |
+| `ttnk` | Tesla Tank | 300 | 2.40 | 1,200 | 6.00 | 90 |
+| `beag` | Black Eagle | 200 | 1.60 | 1,200 | 6.00 | 210 |
+| `dlph` | Dolphin | 200 | 1.60 | 500 | 2.50 | 120 |
+| `fv` | Infantry Fighting Vehicle | 200 | 1.60 | 600 | 3.00 | 150 |
+| `mgtk` | Mirage Tank | 200 | 1.60 | 1,000 | 5.00 | 105 |
+| `sqd` | Giant Squid | 200 | 1.60 | 1,000 | 5.00 | 120 |
+| `yuripr` | Yuri Prime | 200 | 1.60 | 2,000 | 10.00 | 90 |
+| `htk` | Flak Track | 180 | 1.44 | 500 | 2.50 | 120 |
+| `shad` | Night Hawk | 175 | 1.40 | 1,000 | 5.00 | 140 |
+| `deso` | Desolator | 150 | 1.20 | 600 | 3.00 | 60 |
+| `dtruck` | Demolition Truck | 150 | 1.20 | 1,500 | 7.50 | 75 |
+| `orca` | Harrier | 150 | 1.20 | 1,200 | 6.00 | 210 |
+| `sref` | Prism Tank | 150 | 1.20 | 1,200 | 6.00 | 60 |
+| `shk` | Tesla Trooper | 130 | 1.04 | 500 | 2.50 | 60 |
+| `cleg` | Chrono Legionnaire | 125 | 1.00 | 1,500 | 7.50 | 60 |
+| `e1` | G.I. | 125 | 1.00 | 200 | 1.00 | 60 |
+| `e2` | Conscript | 125 | 1.00 | 100 | 0.50 | 60 |
+| `ghost` | Navy SEAL | 125 | 1.00 | 1,000 | 5.00 | 75 |
+| `ivan` | Crazy Ivan | 125 | 1.00 | 600 | 3.00 | 60 |
+| `jumpjet` | Rocketeer | 125 | 1.00 | 600 | 3.00 | 140 |
+| `snipe` | Sniper | 125 | 1.00 | 600 | 3.00 | 60 |
+| `tany` | Tanya | 125 | 1.00 | 1,000 | 5.00 | 75 |
+| `ccomand` | Chrono Commando | 100 | 0.80 | 2,000 | 10.00 | 75 |
+| `civan` | Chrono Ivan | 100 | 0.80 | 1,000 | 5.00 | 60 |
+| `dog` | Attack Dog | 100 | 0.80 | 200 | 1.00 | 120 |
+| `dron` | Terror Drone | 100 | 0.80 | 500 | 2.50 | 150 |
+| `flakt` | Flak Trooper | 100 | 0.80 | 300 | 1.50 | 60 |
+| `ptroop` | Psi Commando | 100 | 0.80 | 1,000 | 5.00 | 75 |
+| `yuri` | Yuri | 100 | 0.80 | 1,200 | 6.00 | 60 |
+| `engineer` | Engineer | 75 | 0.60 | 500 | 2.50 | 60 |
+| `terror` | Terrorist | 75 | 0.60 | 200 | 1.00 | 90 |
+| `spy` | spy | 25 | 0.20 | 1,000 | 5.00 | 60 |
+
+## Valiant Shades  (163 buildable units)
+
+Checkout: `/home/user/as/valiantshades` · rifle anchor **`e1` = 65,000 HP / 100 credits = 1.00×**
+
+| id | unit | HP | ×rifle | Cost | ×rifle cost | Speed |
+|---|---|--:|--:|--:|--:|--:|
+| `zep` | Kirov Airship | 2,000,000 | 30.77 | 2,000 | 20.00 | 25 |
+| `gayard` | Naval Yard | 1,500,000 | 23.08 | 1,000 | 10.00 | — |
+| `nayard` | Naval Yard | 1,500,000 | 23.08 | 1,000 | 10.00 | — |
+| `soyuz` | Soyuz | 1,500,000 | 23.08 | 3,000 | 30.00 | 25 |
+| `thor` | Thor Platform | 1,500,000 | 23.08 | 3,000 | 30.00 | 25 |
+| `gadept` | Service Depot | 1,200,000 | 18.46 | 800 | 8.00 | — |
+| `nadept` | Service Depot | 1,200,000 | 18.46 | 800 | 8.00 | — |
+| `amcv` | Mobile Construction Vehicle | 1,000,000 | 15.38 | 3,000 | 30.00 | 60 |
+| `chrp` | Chrono Prison | 1,000,000 | 15.38 | 1,800 | 18.00 | 60 |
+| `cmin` | Chrono Miner | 1,000,000 | 15.38 | 1,400 | 14.00 | 60 |
+| `gacnst` | Construction Yard | 1,000,000 | 15.38 | 3,000 | 30.00 | — |
+| `gadrop` | Dropship Bay | 1,000,000 | 15.38 | 2,500 | 25.00 | — |
+| `garefn` | Ore Refinery | 1,000,000 | 15.38 | 2,000 | 20.00 | — |
+| `gaspysat` | Spy Satellite Uplink | 1,000,000 | 15.38 | 1,500 | 15.00 | — |
+| `gaweap` | War Factory | 1,000,000 | 15.38 | 2,000 | 20.00 | — |
+| `gaweat` | Weather Controller | 1,000,000 | 15.38 | 5,000 | 50.00 | — |
+| `harv` | War Miner | 1,000,000 | 15.38 | 1,400 | 14.00 | 60 |
+| `naclon` | Cloning Vats | 1,000,000 | 15.38 | 2,500 | 25.00 | — |
+| `nacnst` | Construction Yard | 1,000,000 | 15.38 | 3,000 | 30.00 | — |
+| `namisl` | Nuclear Missile Silo | 1,000,000 | 15.38 | 5,000 | 50.00 | — |
+| `nanrct` | Nuclear Reactor | 1,000,000 | 15.38 | 1,500 | 15.00 | — |
+| `narefn` | Ore Refinery | 1,000,000 | 15.38 | 2,000 | 20.00 | — |
+| `naweap` | War Factory | 1,000,000 | 15.38 | 2,000 | 20.00 | — |
+| `smcv` | Mobile Construction Vehicle | 1,000,000 | 15.38 | 3,000 | 30.00 | 60 |
+| `turtl` | Turtle Tank | 1,000,000 | 15.38 | 1,750 | 17.50 | 40 |
+| `gaorep` | Allied Ore Purifier | 900,000 | 13.85 | 2,500 | 25.00 | — |
+| `naindp` | Industrial Plant | 900,000 | 13.85 | 2,500 | 25.00 | — |
+| `shab` | Balloon | 850,000 | 13.08 | 700 | 7.00 | 25 |
+| `4tnk` | Mammoth Tank | 800,000 | 12.31 | 1,750 | 17.50 | 60 |
+| `aegis` | Aegis Cruiser | 800,000 | 12.31 | 1,200 | 12.00 | 60 |
+| `apoc` | Apocalypse Tank | 800,000 | 12.31 | 1,750 | 17.50 | 60 |
+| `carrier` | Aircraft Carrier | 800,000 | 12.31 | 2,000 | 20.00 | 60 |
+| `dred` | Dreadnought | 800,000 | 12.31 | 2,000 | 20.00 | 60 |
+| `ovrl` | Overlord Tank | 800,000 | 12.31 | 1,750 | 17.50 | 60 |
+| `tnkd` | Tank Destroyer | 800,000 | 12.31 | 1,050 | 10.50 | 75 |
+| `gacsph` | Chronosphere | 750,000 | 11.54 | 2,500 | 25.00 | — |
+| `gapowr` | Power Plant | 750,000 | 11.54 | 800 | 8.00 | — |
+| `gaspir` | Shield Spire | 750,000 | 11.54 | 2,000 | 20.00 | — |
+| `nairon` | Iron Curtain Device | 750,000 | 11.54 | 2,000 | 20.00 | — |
+| `napowr` | Tesla Reactor | 750,000 | 11.54 | 600 | 6.00 | — |
+| `napsis` | Psychic Sensor | 750,000 | 11.54 | 1,500 | 15.00 | — |
+| `napsyd` | Psychic Dominator | 750,000 | 11.54 | 2,500 | 25.00 | — |
+| `garbur` | Research Bureau | 650,000 | 10.00 | 3,000 | 30.00 | — |
+| `natech` | Palace | 650,000 | 10.00 | 3,000 | 30.00 | — |
+| `bfrt` | Battle Fortress | 600,000 | 9.23 | 2,000 | 20.00 | 60 |
+| `bfrt.ai` | Battle Fortress | 600,000 | 9.23 | 2,000 | 20.00 | 60 |
+| `bfrt.ai2` | Battle Fortress | 600,000 | 9.23 | 2,000 | 20.00 | 60 |
+| `bfrt.ai3` | Battle Fortress | 600,000 | 9.23 | 2,000 | 20.00 | 60 |
+| `dest` | Destroyer | 600,000 | 9.23 | 1,000 | 10.00 | 90 |
+| `gaairc` | Airforce Command Headquarters | 600,000 | 9.23 | 1,000 | 10.00 | — |
+| `gafcmd` | Field Command | 600,000 | 9.23 | 1,000 | 10.00 | — |
+| `gagap` | Gap Generator | 600,000 | 9.23 | 1,000 | 10.00 | — |
+| `garobo` | Robot Control Center | 600,000 | 9.23 | 1,500 | 15.00 | — |
+| `gtgcan` | Grand Cannon | 600,000 | 9.23 | 2,000 | 20.00 | — |
+| `naairc` | Airforce Command Headquarters | 600,000 | 9.23 | 1,000 | 10.00 | — |
+| `naflak` | Flak Cannon | 600,000 | 9.23 | 1,000 | 10.00 | — |
+| `naradr` | Radar Tower | 600,000 | 9.23 | 1,000 | 10.00 | — |
+| `nasam` | Patriot Missile System | 600,000 | 9.23 | 1,000 | 10.00 | — |
+| `nasntl` | Sentinel Cannon | 600,000 | 9.23 | 2,000 | 20.00 | — |
+| `sub` | Typhoon Attack Sub | 600,000 | 9.23 | 1,000 | 10.00 | 60 |
+| `gapile` | Barracks | 500,000 | 7.69 | 500 | 5.00 | — |
+| `gatech` | Battle Lab | 500,000 | 7.69 | 2,000 | 20.00 | — |
+| `hammr` | Hammer Tank | 500,000 | 7.69 | 950 | 9.50 | 90 |
+| `htnk` | Rhino Heavy Tank | 500,000 | 7.69 | 950 | 9.50 | 90 |
+| `lasher` | Lasher Tank | 500,000 | 7.69 | 950 | 9.50 | 90 |
+| `mtnk` | Grizzly Battle Tank | 500,000 | 7.69 | 950 | 9.50 | 90 |
+| `nahand` | Barracks | 500,000 | 7.69 | 500 | 5.00 | — |
+| `natek` | Tech Center | 500,000 | 7.69 | 2,000 | 20.00 | — |
+| `empr` | Empress Tank | 450,000 | 6.92 | 2,200 | 22.00 | 75 |
+| `gacran` | Repair Crane | 450,000 | 6.92 | 1,000 | 10.00 | — |
+| `nacran` | Repair Crane | 450,000 | 6.92 | 1,000 | 10.00 | — |
+| `atesla` | Prism Tower | 400,000 | 6.15 | 1,500 | 15.00 | — |
+| `tesla` | Tesla Coil | 400,000 | 6.15 | 1,500 | 15.00 | — |
+| `mind` | Mastermind | 350,000 | 5.38 | 1,500 | 15.00 | 60 |
+| `bura` | Buratino | 300,000 | 4.62 | 1,600 | 16.00 | 60 |
+| `gawall` | Allied Wall | 300,000 | 4.62 | 100 | 1.00 | — |
+| `hyd` | Sea Scorpion | 300,000 | 4.62 | 900 | 9.00 | 120 |
+| `lcrf` | Amphibious Transport | 300,000 | 4.62 | 900 | 9.00 | 90 |
+| `nawall` | Soviet Wall | 300,000 | 4.62 | 100 | 1.00 | — |
+| `sapc` | Amphibious Transport | 300,000 | 4.62 | 900 | 9.00 | 90 |
+| `schp` | Siege Chopper | 300,000 | 4.62 | 1,000 | 10.00 | 180 |
+| `ttnk` | Tesla Tank | 300,000 | 4.62 | 1,200 | 12.00 | 75 |
+| `ttnk2` | Tesla Tank | 300,000 | 4.62 | 1,200 | 12.00 | 75 |
+| `gapill` | Pill Box | 266,000 | 4.09 | 500 | 5.00 | — |
+| `nalasr` | Sentry Gun | 266,000 | 4.09 | 500 | 5.00 | — |
+| `boris` | Boris Drubetskoy | 250,000 | 3.85 | 1,500 | 15.00 | 75 |
+| `hirano` | Hirano Nakatsuru | 250,000 | 3.85 | 1,500 | 15.00 | 75 |
+| `mgg` | Mobile Gap Generator | 250,000 | 3.85 | 1,250 | 12.50 | 90 |
+| `spirit` | Spirit | 250,000 | 3.85 | 2,000 | 20.00 | 226 |
+| `succ` | Succubus | 250,000 | 3.85 | 650 | 6.50 | 75 |
+| `tanya2` | Tanya Adams | 250,000 | 3.85 | 1,500 | 15.00 | 180 |
+| `volkov` | Vladislav Volkov | 250,000 | 3.85 | 1,500 | 15.00 | 75 |
+| `topol` | Topol-M Launcher | 225,000 | 3.46 | 2,500 | 25.00 | 30 |
+| `drgn` | Dragon Tank | 210,000 | 3.23 | 600 | 6.00 | 140 |
+| `slost` | Slostin | 210,000 | 3.23 | 500 | 5.00 | 140 |
+| `beag` | Black Eagle | 200,000 | 3.08 | 1,200 | 12.00 | 341 |
+| `brute` | Brute | 200,000 | 3.08 | 500 | 5.00 | 120 |
+| `dlph` | Dolphin | 200,000 | 3.08 | 500 | 5.00 | 120 |
+| `fflash` | Sapsan | 200,000 | 3.08 | 1,400 | 14.00 | 341 |
+| `fv` | Infantry Fighting Vehicle | 200,000 | 3.08 | 600 | 6.00 | 150 |
+| `fv.ai` | Infantry Fighting Vehicle | 200,000 | 3.08 | 600 | 6.00 | 150 |
+| `fv.ai2` | Infantry Fighting Vehicle | 200,000 | 3.08 | 600 | 6.00 | 150 |
+| `fv.ai3` | Infantry Fighting Vehicle | 200,000 | 3.08 | 600 | 6.00 | 150 |
+| `fv.ai4` | Infantry Fighting Vehicle | 200,000 | 3.08 | 600 | 6.00 | 150 |
+| `fv.ai5` | Infantry Fighting Vehicle | 200,000 | 3.08 | 600 | 6.00 | 150 |
+| `howi` | Howitzer | 200,000 | 3.08 | 1,100 | 11.00 | 75 |
+| `ltnk` | Wolverine Light Tank | 200,000 | 3.08 | 650 | 6.50 | 120 |
+| `marks` | Marksman | 200,000 | 3.08 | 800 | 8.00 | 60 |
+| `mgtk` | Mirage Tank | 200,000 | 3.08 | 1,000 | 10.00 | 105 |
+| `mnrva` | Minerva APC | 200,000 | 3.08 | 650 | 6.50 | 140 |
+| `mnrva.paradrop` | Minerva APC | 200,000 | 3.08 | 650 | 6.50 | 140 |
+| `sqd` | Giant Squid | 200,000 | 3.08 | 1,000 | 10.00 | 120 |
+| `htk` | Flak Track | 180,000 | 2.77 | 525 | 5.25 | 120 |
+| `htk.ai` | Flak Track | 180,000 | 2.77 | 525 | 5.25 | 120 |
+| `htk.ai-repair` | Flak Track | 180,000 | 2.77 | 525 | 5.25 | 120 |
+| `artemis` | Artemis | 175,000 | 2.69 | 450 | 4.50 | 60 |
+| `dione` | Dione | 175,000 | 2.69 | 300 | 3.00 | 60 |
+| `fairy` | Fairy | 175,000 | 2.69 | 800 | 8.00 | 60 |
+| `hind` | Hind Carryall | 175,000 | 2.69 | 1,250 | 12.50 | 125 |
+| `malf` | Malfestor | 175,000 | 2.69 | 1,600 | 16.00 | 60 |
+| `shad` | Night Hawk | 175,000 | 2.69 | 1,000 | 10.00 | 140 |
+| `shad.ai` | Night Hawk | 175,000 | 2.69 | 1,000 | 10.00 | 140 |
+| `shad.ai2` | Night Hawk | 175,000 | 2.69 | 1,000 | 10.00 | 140 |
+| `aero` | Aeroblaze | 150,000 | 2.31 | 1,500 | 15.00 | 60 |
+| `behold` | Beholder | 150,000 | 2.31 | 1,500 | 15.00 | 75 |
+| `cyborg` | Cyborg | 150,000 | 2.31 | 850 | 8.50 | 60 |
+| `deso` | Desolator | 150,000 | 2.31 | 450 | 4.50 | 60 |
+| `dtruck` | Demolition Truck | 150,000 | 2.31 | 1,500 | 15.00 | 75 |
+| `gaunt` | Gauntlet | 150,000 | 2.31 | 1,500 | 15.00 | 60 |
+| `hmmv` | Humvee | 150,000 | 2.31 | 425 | 4.25 | 140 |
+| `hmmv.ai` | Humvee | 150,000 | 2.31 | 425 | 4.25 | 140 |
+| `hmmv.ai-repair` | Humvee | 150,000 | 2.31 | 425 | 4.25 | 140 |
+| `hopl` | Hoplite | 150,000 | 2.31 | 850 | 8.50 | 60 |
+| `orca` | Harrier | 150,000 | 2.31 | 1,500 | 15.00 | 341 |
+| `robo` | Robot Tank | 150,000 | 2.31 | 600 | 6.00 | 120 |
+| `sref` | Prism Tank | 150,000 | 2.31 | 1,200 | 12.00 | 60 |
+| `v3` | V3 Launcher | 150,000 | 2.31 | 1,000 | 10.00 | 70 |
+| `shk` | Tesla Trooper | 130,000 | 2.00 | 250 | 2.50 | 60 |
+| `cleg` | Chrono Legionnaire | 125,000 | 1.92 | 1,000 | 10.00 | 60 |
+| `cosmo` | Cosmonaut | 125,000 | 1.92 | 650 | 6.50 | 140 |
+| `ghost` | Navy SEAL | 125,000 | 1.92 | 400 | 4.00 | 75 |
+| `gren` | Grenadier | 125,000 | 1.92 | 350 | 3.50 | 75 |
+| `ivan` | Crazy Ivan | 125,000 | 1.92 | 400 | 4.00 | 60 |
+| `jumpjet` | Rocketeer | 125,000 | 1.92 | 400 | 4.00 | 140 |
+| `snipe` | Sniper | 125,000 | 1.92 | 600 | 6.00 | 60 |
+| `tany` | Tanya Adams | 125,000 | 1.92 | 1,000 | 10.00 | 75 |
+| `yak` | Yak | 125,000 | 1.92 | 900 | 9.00 | 341 |
+| `dog` | Attack Dog | 100,000 | 1.54 | 100 | 1.00 | 140 |
+| `dron` | Terror Drone | 100,000 | 1.54 | 500 | 5.00 | 150 |
+| `init` | Initiate | 100,000 | 1.54 | 100 | 1.00 | 60 |
+| `terror` | Terrorist | 100,000 | 1.54 | 500 | 5.00 | 90 |
+| `virus` | Virus | 100,000 | 1.54 | 650 | 6.50 | 60 |
+| `yuri` | Yuri | 100,000 | 1.54 | 800 | 8.00 | 60 |
+| `aengineer` | Engineer | 75,000 | 1.15 | 250 | 2.50 | 60 |
+| `engineer` | Engineer | 75,000 | 1.15 | 250 | 2.50 | 60 |
+| `ggi` | Guardian G.I. | 75,000 | 1.15 | 150 | 1.50 | 60 |
+| `kamikaze` | Headless Kamikaze | 75,000 | 1.15 | 50 | 0.50 | 105 |
+| `sengineer` | Engineer | 75,000 | 1.15 | 250 | 2.50 | 60 |
+| `e1` | G.I. | 65,000 | 1.00 | 100 | 1.00 | 60 |
+| `e2` | Conscript | 50,000 | 0.77 | 50 | 0.50 | 60 |
+| `flakt` | Flak Trooper | 50,000 | 0.77 | 100 | 1.00 | 60 |
+| `agent` | agent | 25,000 | 0.38 | 500 | 5.00 | 60 |
+| `spy` | spy | 25,000 | 0.38 | 500 | 5.00 | 60 |
 
 ## Romanov's Vengeance  (729 buildable units)
 
@@ -2019,4 +2551,135 @@ Checkout: `/home/user/openra/openra` · rifle anchor **`E1` = 12,500 HP / 120 cr
 | `JUMPJET` | Jump Jet Infantry | 12,000 | 0.96 | 600 | 5.00 | 71 |
 | `E3` | Rocket Infantry | 10,000 | 0.80 | 250 | 2.08 | 56 |
 | `ENGINEER` | Engineer | 10,000 | 0.80 | 500 | 4.17 | 56 |
+
+## Yuri's Revenge on OpenRA  (124 buildable units)
+
+Checkout: `/home/user/cookgreen/yuris-revenge` · rifle anchor **`e1` = 125 HP / 200 credits = 1.00×**
+
+| id | unit | HP | ×rifle | Cost | ×rifle cost | Speed |
+|---|---|--:|--:|--:|--:|--:|
+| `smin` | Slave Miner | 2,000 | 16.00 | 1,500 | 7.50 | 45 |
+| `yarefn` | Slave Miner | 2,000 | 16.00 | 1,500 | 7.50 | — |
+| `zep` | Kirov Airship | 2,000 | 16.00 | 2,000 | 10.00 | 25 |
+| `gayard` | Naval Yard | 1,500 | 12.00 | 1,000 | 5.00 | — |
+| `nayard` | Naval Yard | 1,500 | 12.00 | 1,000 | 5.00 | — |
+| `yayard` | Yuri Naval Yard | 1,500 | 12.00 | 1,000 | 5.00 | — |
+| `bsub` | Yuri Boomer | 1,200 | 9.60 | 2,000 | 10.00 | 71 |
+| `gadept` | Service Depot | 1,200 | 9.60 | 800 | 4.00 | — |
+| `nadept` | Service Depot | 1,200 | 9.60 | 800 | 4.00 | — |
+| `amcv` | Mobile Construction Vehicle | 1,000 | 8.00 | 3,000 | 15.00 | 80 |
+| `cmin` | Chrono Miner | 1,000 | 8.00 | 1,400 | 7.00 | 85 |
+| `gacnst` | Construction Yard | 1,000 | 8.00 | 2,500 | 12.50 | — |
+| `garefn` | Ore Refinery | 1,000 | 8.00 | 2,000 | 10.00 | — |
+| `gaspysat` | Spy Satellite Uplink | 1,000 | 8.00 | 1,500 | 7.50 | — |
+| `gaweap` | War Factory | 1,000 | 8.00 | 2,000 | 10.00 | — |
+| `gaweat` | Weather Controller | 1,000 | 8.00 | 5,000 | 25.00 | — |
+| `harv` | War Miner | 1,000 | 8.00 | 1,400 | 7.00 | 85 |
+| `naclon` | Cloning Vats | 1,000 | 8.00 | 2,500 | 12.50 | — |
+| `nacnst` | Construction Yard | 1,000 | 8.00 | 3,000 | 15.00 | — |
+| `naindp` | Soviet Industrial Plant | 1,000 | 8.00 | 2,500 | 12.50 | — |
+| `namisl` | Nuclear Missile Silo | 1,000 | 8.00 | 5,000 | 25.00 | — |
+| `nanrct` | Nuclear Reactor | 1,000 | 8.00 | 1,000 | 5.00 | — |
+| `naradr` | Radar Tower | 1,000 | 8.00 | 1,000 | 5.00 | — |
+| `narefn` | Ore Refinery | 1,000 | 8.00 | 2,000 | 10.00 | — |
+| `natbnk` | Tank Bunker | 1,000 | 8.00 | 400 | 2.00 | — |
+| `naweap` | War Factory | 1,000 | 8.00 | 2,000 | 10.00 | — |
+| `pcv` | Mobile Construction Vehicle | 1,000 | 8.00 | 3,000 | 15.00 | 80 |
+| `smcv` | Mobile Construction Vehicle | 1,000 | 8.00 | 3,000 | 15.00 | 85 |
+| `yagntc` | Genetic Mutator | 1,000 | 8.00 | 2,500 | 12.50 | — |
+| `yappet` | Psychic Dominator | 1,000 | 8.00 | 5,000 | 25.00 | — |
+| `yaweap` | Yuri War Factory | 1,000 | 8.00 | 2,000 | 10.00 | — |
+| `gaorep` | Allied Ore Purifier | 900 | 7.20 | 2,500 | 12.50 | — |
+| `gtgcan` | Grand Cannon | 900 | 7.20 | 2,000 | 10.00 | — |
+| `naflak` | Flak Cannon | 900 | 7.20 | 1,000 | 5.00 | — |
+| `nasam` | Patriot Missile System | 900 | 7.20 | 1,000 | 5.00 | — |
+| `yagrnd` | Grinder | 900 | 7.20 | 600 | 3.00 | — |
+| `nabnkr` | Soviet Battle Bunker | 810 | 6.48 | 600 | 3.00 | — |
+| `yaggun` | Gattling Cannon | 810 | 6.48 | 1,000 | 5.00 | — |
+| `aegis` | Aegis Cruiser | 800 | 6.40 | 1,200 | 6.00 | 45 |
+| `apoc` | Apocalypse Tank | 800 | 6.40 | 1,750 | 8.75 | 45 |
+| `carrier` | Aircraft Carrier | 800 | 6.40 | 2,000 | 10.00 | 60 |
+| `dred` | Dreadnought | 800 | 6.40 | 2,000 | 10.00 | 60 |
+| `gacsph` | Chronosphere | 750 | 6.00 | 2,500 | 12.50 | — |
+| `gapowr` | Power Plant | 750 | 6.00 | 800 | 4.00 | — |
+| `nairon` | Iron Curtain Device | 750 | 6.00 | 2,500 | 12.50 | — |
+| `napowr` | Tesla Reactor | 750 | 6.00 | 600 | 3.00 | — |
+| `napsis` | Psychic Radar | 750 | 6.00 | 1,000 | 5.00 | — |
+| `yapowr` | Bio Reactor | 700 | 5.60 | 600 | 3.00 | — |
+| `amradr` | American Airforce Command Headquarters | 600 | 4.80 | 1,000 | 5.00 | — |
+| `atesla` | Prism Tower | 600 | 4.80 | 1,500 | 7.50 | — |
+| `bfrt` | Battle Fortress | 600 | 4.80 | 2,000 | 10.00 | 60 |
+| `dest` | Destroyer | 600 | 4.80 | 1,000 | 5.00 | 105 |
+| `disk` | Floating Disk | 600 | 4.80 | 1,750 | 8.75 | 200 |
+| `gaairc` | Airforce Command Headquarters | 600 | 4.80 | 1,000 | 5.00 | — |
+| `gagap` | Gap Generator | 600 | 4.80 | 1,000 | 5.00 | — |
+| `garobo` | Allied Robot Control Center | 600 | 4.80 | 600 | 3.00 | — |
+| `sub` | Typhoon Attack Sub | 600 | 4.80 | 1,000 | 5.00 | 71 |
+| `tesla` | Tesla Coil | 600 | 4.80 | 1,500 | 7.50 | — |
+| `gapile` | Barracks | 500 | 4.00 | 500 | 2.50 | — |
+| `gatech` | Battle Lab | 500 | 4.00 | 2,000 | 10.00 | — |
+| `mind` | Master Mind | 500 | 4.00 | 1,750 | 8.75 | 60 |
+| `nahand` | Barracks | 500 | 4.00 | 500 | 2.50 | — |
+| `natech` | Battle Lab | 500 | 4.00 | 2,000 | 10.00 | — |
+| `yabrck` | Yuri Barracks | 500 | 4.00 | 500 | 2.50 | — |
+| `yatech` | Yuri Battle Lab | 500 | 4.00 | 2,000 | 10.00 | — |
+| `yapsyt` | Psychic Tower | 455 | 3.64 | 1,500 | 7.50 | — |
+| `gapill` | Pill Box | 400 | 3.20 | 500 | 2.50 | — |
+| `htnk` | Rhino Heavy Tank | 400 | 3.20 | 900 | 4.50 | 75 |
+| `nalasr` | Sentry Gun | 400 | 3.20 | 500 | 2.50 | — |
+| `tnkd` | Tank Destroyer | 400 | 3.20 | 900 | 4.50 | 70 |
+| `gafwll` | Citadel Walls | 300 | 2.40 | 100 | 0.50 | — |
+| `gawall` | Allied Wall | 300 | 2.40 | 100 | 0.50 | — |
+| `hyd` | Sea Scorpion | 300 | 2.40 | 900 | 4.50 | 75 |
+| `lcrf` | Amphibious Transport | 300 | 2.40 | 900 | 4.50 | 75 |
+| `ltnk` | Lasher Light Tank | 300 | 2.40 | 700 | 3.50 | 105 |
+| `mtnk` | Grizzly Battle Tank | 300 | 2.40 | 700 | 3.50 | 90 |
+| `nawall` | Soviet Wall | 300 | 2.40 | 100 | 0.50 | — |
+| `sapc` | Amphibious Transport | 300 | 2.40 | 900 | 4.50 | 75 |
+| `schp` | Soviet Siege Chopper | 300 | 2.40 | 1,000 | 5.00 | 180 |
+| `ttnk` | Tesla Tank | 300 | 2.40 | 1,200 | 6.00 | 75 |
+| `yhvr` | Hover Transport Yuri | 300 | 2.40 | 900 | 4.50 | 75 |
+| `ytnk` | Gatling Tank | 210 | 1.68 | 600 | 3.00 | 90 |
+| `beag` | Black Eagle | 200 | 1.60 | 1,200 | 6.00 | 210 |
+| `boris` | Boris | 200 | 1.60 | 1,500 | 7.50 | 75 |
+| `brute` | Brute | 200 | 1.60 | 500 | 2.50 | 90 |
+| `caos` | Chaos Drone | 200 | 1.60 | 800 | 4.00 | 300 |
+| `dlph` | Dolphin | 200 | 1.60 | 500 | 2.50 | 90 |
+| `fv` | Infantry Fighting Vehicle | 200 | 1.60 | 600 | 3.00 | 128 |
+| `mgtk` | Mirage Tank | 200 | 1.60 | 1,000 | 5.00 | 105 |
+| `sqd` | Giant Squid | 200 | 1.60 | 500 | 2.50 | 90 |
+| `htk` | Flak Track | 180 | 1.44 | 500 | 2.50 | 120 |
+| `robo` | Robot Tank | 180 | 1.44 | 600 | 3.00 | 150 |
+| `shad` | Night Hawk | 175 | 1.40 | 1,000 | 5.00 | 100 |
+| `deso` | Desolator | 150 | 1.20 | 200 | 1.00 | 60 |
+| `dtruck` | Demolition Truck | 150 | 1.20 | 3,000 | 15.00 | 85 |
+| `orca` | Harrier | 150 | 1.20 | 1,200 | 6.00 | 210 |
+| `sref` | Prism Tank | 150 | 1.20 | 1,200 | 6.00 | 60 |
+| `tele` | Magnetron | 150 | 1.20 | 1,000 | 5.00 | 75 |
+| `v3` | V3 Launcher | 150 | 1.20 | 800 | 4.00 | 70 |
+| `yuripr` | Yuri Prime | 150 | 1.20 | 1,500 | 7.50 | 90 |
+| `shk` | Tesla Trooper | 130 | 1.04 | 500 | 2.50 | 51 |
+| `cleg` | Chrono Legionnaire | 125 | 1.00 | 1,500 | 7.50 | — |
+| `e1` | G.I. | 125 | 1.00 | 200 | 1.00 | 31 |
+| `e2` | Conscript | 125 | 1.00 | 100 | 0.50 | 34 |
+| `ggi` | Guardian GI | 125 | 1.00 | 200 | 1.00 | 31 |
+| `ghost` | Navy SEAL | 125 | 1.00 | 1,000 | 5.00 | 71 |
+| `ivan` | Crazy Ivan | 125 | 1.00 | 600 | 3.00 | 60 |
+| `jumpjet` | Rocketeer | 125 | 1.00 | 600 | 3.00 | 140 |
+| `lunr` | Lunar Infantry | 125 | 1.00 | 600 | 3.00 | 140 |
+| `snipe` | Sniper | 125 | 1.00 | 600 | 3.00 | 35 |
+| `tany` | Tanya | 125 | 1.00 | 1,000 | 5.00 | 71 |
+| `ccomand` | Chrono Commando | 100 | 0.80 | 2,000 | 10.00 | 71 |
+| `dog` | Attack Dog | 100 | 0.80 | 200 | 1.00 | 120 |
+| `dron` | Terror Drone | 100 | 0.80 | 500 | 2.50 | 105 |
+| `flakt` | Flak Trooper | 100 | 0.80 | 100 | 0.50 | 34 |
+| `init` | Initiate | 100 | 0.80 | 200 | 1.00 | 60 |
+| `ptroop` | Psi Commando | 100 | 0.80 | 1,000 | 5.00 | 71 |
+| `slav` | Slave | 100 | 0.80 | 700 | 3.50 | 45 |
+| `virus` | Virus | 100 | 0.80 | 700 | 3.50 | 60 |
+| `yuri` | Yuri Clone | 100 | 0.80 | 1,200 | 6.00 | 60 |
+| `engineer` | Engineer | 75 | 0.60 | 500 | 2.50 | 56 |
+| `terror` | Terrorist | 75 | 0.60 | 200 | 1.00 | 71 |
+| `yengineer` | Engineer | 75 | 0.60 | 500 | 2.50 | 60 |
+| `spy` | spy | 25 | 0.20 | 500 | 2.50 | 56 |
 

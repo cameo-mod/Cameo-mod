@@ -937,6 +937,61 @@ classes they are provisional in a way the ≤1 goal does not reveal: a class can
 
 Reproduce: `python3 tools/balance/anchor_readiness.py` → *"The 3-way split gate"*.
 
+### 3.0y — 📚 THE REFERENCE CORPUS, CLONED FROM SOURCE (2026-08-30): 25 sources, 15 OpenRA mods
+
+Every OpenRA reference mod is now cloned from its own repository and read through
+`miniyaml.Ruleset` — no hand-parsing, no trusting a document's numbers. All 13 checkouts verified
+at their remote tips.
+
+| mod | units | anchor | last commit |
+|---|--:|---|---|
+| Romanov's Vengeance | 729 | `e1` 12,500 | 2025-07-26 |
+| Combined Arms | 382 | `E1` 5,000 | 2026-07-30 |
+| Shattered Paradise | 306 | `E1` 12,500 | 2025-09-27 |
+| Valiant Shades | 163 | `e1` 65,000 | 2023-10-07 |
+| Generals Alpha | 153 | `infantry.conscript` 12,000 | 2026-07-25 |
+| Yuri's Revenge on OpenRA | 124 | `e1` 125 | 2024-11-30 |
+| OpenHV | 115 | `RIFLEMAN` 15,000 | 2026-08-25 |
+| Crystallized Nexus | 97 | `GASOL` 125 | 2026-08-20 |
+| OpenRA Red Alert / RA2 / TS / TD / D2k / Dune II | 94 / 86 / 74 / 56 / 56 / 49 | various | 2026-08-29 |
+| OpenE2140 | 84 | `ed_infantry_a01` 28 | 2026-08-29 |
+
+**2,568 peer rows; 25 voting sources in the pool; 642 Cameo actors matched, 151 class-tagged.**
+Every documented anchor was checked against its checkout and every one matched.
+
+**Three notable additions.** *Valiant Shades* runs on the **Attacque Supérior** fork — the same
+`OpenRA.Mods.AS` Cameo's own engine carries — so its power level is the closest of any peer to
+ours (it votes the Apocalypse at 12.3× against the RA2 family's 6.4×). *OpenHV* is original
+sci-fi IP, not a C&C crossover, so it shares almost no unit names and will rarely match — it is
+kept because a from-scratch OpenRA roster balanced without Westwood's legacy numbers is a
+genuinely independent voice. *OpenE2140*'s cost column is identity-only per §15.5.
+
+⚠ **THE TRAP THIS PASS KEEPS SETTING: a label containing `(` is silently truncated.** Document 5's
+headings are `## <label>  (N units)` and the synthesis reads them back with
+`line[3:].split("(")[0]`. It bit twice. `"Romanov's Vengeance (live)"` made a de-duplication rule
+match nothing, so RV kept voting **twice**. `"Yuri's Revenge (OpenRA)"` would have collapsed into
+Document 1's separate `"Yuri's Revenge"`, **merging two different mods without a word**.
+`extract_peer_units.py` now refuses to run if any peer label contains a parenthesis.
+
+⚠ **Sources covering the same underlying game are NOT merged** — they are reported: RA2 vanilla /
+RA2-YR raw INI / OpenRA RA2, Yuri's Revenge / on OpenRA, TD / TS / RA1 against their OpenRA
+re-implementations, and D2k / Dune II. OpenRA rebalances as it ports, so those are different
+balance opinions. Only an **exact** duplicate is merged, and RV qualified because both copies
+agreed to the digit.
+
+⛔ **Fractured Realms (`Logue-Yne/Fractured-Realms`) is cloned but cannot vote.** 488 actors
+resolve, but only 23 carry both `Health` and `Valued` and 18 of those are buildings. No basic
+rifleman means no anchor, and inventing one would fabricate every ratio. It stays declared so the
+check re-runs if the mod ever grows a roster.
+
+**Still outside the pool, and not cloneable:** Mental Omega, CnC Reloaded, DTA, RA2 Reborn and
+Red Resurrection are INI mods with no public rules repository — they entered via Document 1 from
+`.mix`/INI extraction on the maintainer's machine. `versus_raw.json` samples all of them for
+WARHEADS, but carries no unit HP, cost or speed, so it cannot feed this pool.
+
+Regenerate: `python3 tools/reference/extract_peer_units.py` then
+`python3 tools/balance/synthesize_reference.py`.
+
 ### 3.0w — ✅ BUILT (2026-08-30): Documents 2 and 3 — step 3 of the per-unit application law
 
 **Maintainer:** *"first you need to apply the things from the class anchors, and then you need to

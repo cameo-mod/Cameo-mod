@@ -102,6 +102,32 @@ PEERS = {
            "root": ["/home/user/openra/openra", "~/Documents/GitHub/OpenRA", "../OpenRA"]},
     "d2k": {"label": "OpenRA Dune 2000", "rifle": "light_inf", "expect": 6000,
             "root": ["/home/user/openra/openra", "~/Documents/GitHub/OpenRA", "../OpenRA"]},
+
+    # ── Found 2026-08-30 by searching GitHub's `topic:openra`, all cloned from source ────────
+    # `e1` (G.I.) and `e2` (Conscript) are both 125 HP in the RA2 family; `e1` is used as the
+    # anchor throughout for consistency with the rest of the corpus.
+    "ra2": {"label": "OpenRA RA2 official", "rifle": "e1", "expect": 125,
+            "root": ["/home/user/openra/ra2", "~/Documents/GitHub/ra2", "../ra2"]},
+    "yr": {"label": "Yuri's Revenge on OpenRA", "rifle": "e1", "expect": 125,
+           "root": ["/home/user/cookgreen/yuris-revenge",
+                    "~/Documents/GitHub/Yuris-Revenge", "../Yuris-Revenge"]},
+    # Valiant Shades runs on the Attacque Supérior fork — the same OpenRA.Mods.AS that Cameo's
+    # own engine carries — so its power level is the closest of any peer to Cameo's own.
+    "ra2vsh": {"label": "Valiant Shades", "rifle": "e1", "expect": 65000,
+               "root": ["/home/user/as/valiantshades",
+                        "~/Documents/GitHub/ValiantShades", "../ValiantShades"]},
+    # OpenHV is original sci-fi IP rather than a C&C crossover, so it shares no unit NAMES with
+    # Cameo and will rarely match by name. It is kept for the role/spread reading: a from-scratch
+    # OpenRA roster balanced without Westwood's legacy numbers is a genuinely independent voice.
+    "hv": {"label": "OpenHV", "rifle": "RIFLEMAN", "expect": 15000,
+           "root": ["/home/user/openhv/openhv", "~/Documents/GitHub/OpenHV", "../OpenHV"]},
+    "d2": {"label": "OpenRA Dune II", "rifle": "light_inf", "expect": 20,
+           "root": ["/home/user/openra/d2", "~/Documents/GitHub/d2", "../d2"]},
+    # Earth 2140. §15.5: Earth economies do NOT map to credits, so its cost column is
+    # identity-only; HP still normalizes against its own basic infantry.
+    "e2140": {"label": "OpenE2140", "rifle": "ed_infantry_a01", "expect": 28,
+              "root": ["/home/user/opene2140/opene2140",
+                       "~/Documents/GitHub/OpenE2140", "../OpenE2140"]},
 }
 
 
@@ -230,6 +256,17 @@ def extract(mod_id):
 
 
 def main():
+    # ⚠ A LABEL MUST NOT CONTAIN "(". Document 5's section headings are `## <label>  (N units)`,
+    # and the synthesis reads them back with `line[3:].split("(")[0]` — so a parenthesised label
+    # is TRUNCATED on the way in. That has bitten twice: "Romanov's Vengeance (live)" silently
+    # failed to match a de-duplication rule, and "Yuri's Revenge (OpenRA)" would have collapsed
+    # into Document 1's separate "Yuri's Revenge" source, merging two different mods without a
+    # word. Fail loudly here instead.
+    bad = {k: v["label"] for k, v in PEERS.items() if "(" in v["label"]}
+    if bad:
+        raise SystemExit(f"peer labels must not contain '(' — they are truncated by the "
+                         f"Document 5 heading parser: {bad}")
+
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--mod", choices=sorted(PEERS), action="append")
     ap.add_argument("--dry-run", action="store_true")

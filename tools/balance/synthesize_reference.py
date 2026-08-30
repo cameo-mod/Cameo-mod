@@ -145,10 +145,12 @@ SUPERSEDED = {"Romanov's Veng.": "Romanov's Vengeance"}
 
 # Reported, not merged: sources covering the same underlying game from different extractions.
 NEAR_DUPLICATES = [
-    ("RA2 vanilla", "Yuri's Revenge", "RA2/YR (raw INI)"),
+    ("RA2 vanilla", "RA2/YR (raw INI)", "OpenRA RA2 official"),
+    ("Yuri's Revenge", "Yuri's Revenge on OpenRA"),
     ("Tiberian Dawn", "OpenRA Tiberian Dawn"),
     ("Tiberian Sun", "OpenRA Tiberian Sun"),
     ("Red Alert 1", "OpenRA Red Alert"),
+    ("OpenRA Dune 2000", "OpenRA Dune II"),
 ]
 
 # section heading prefix -> (source label, rifle HP, rifle cost, cost rule)
@@ -593,11 +595,12 @@ def write_doc3(synth, matched, sources):
             "only as ROLE BANDS (*\"basic rifle 5000\"*, *\"heavy trooper 7500–9000\"*), so they "
             "could not be matched to a named actor; `tools/reference/extract_peer_units.py` now "
             "reads their own checkouts through `miniyaml.Ruleset` and emits "
-            "`ORIGINAL_UNITS_PEER_OPENRA.md` — **1,947 units across nine OpenRA mods**: "
-            "Romanov's Vengeance 729, Combined Arms 382, Shattered Paradise 306, Generals Alpha "
-            "153, Crystallized Nexus 97, and the four OpenRA base mods (Red Alert 94, Tiberian "
-            "Sun 74, Tiberian Dawn 56, Dune 2000 56). Anchors are verified against the checkout, "
-            "not "
+            "`ORIGINAL_UNITS_PEER_OPENRA.md` — **2,568 units across fifteen OpenRA mods**, "
+            "every one cloned from its own repository and read through the resolver: Romanov's "
+            "Vengeance 729, Combined Arms 382, Shattered Paradise 306, Valiant Shades 163, "
+            "Generals Alpha 153, Yuri's Revenge on OpenRA 124, OpenHV 115, Crystallized Nexus "
+            "97, OpenRA Red Alert 94, OpenRA RA2 86, OpenE2140 84, Tiberian Sun 74, Tiberian "
+            "Dawn 56, Dune 2000 56, Dune II 49. Anchors are verified against the checkout, not "
             "trusted from a document: CA `E1` = **5,000 HP** (matches what was documented), SP "
             "`E1` (Light Infantry) = **12,500** — `ORIGINAL_UNIT_STATS.md` said 15,000, and the "
             "checkout wins — and CN `GASOL` (Marine) = **125**, a classic-Westwood-sized scale "
