@@ -122,6 +122,13 @@ MIN_KEY = 4
 # role table so the gap is visible rather than silently absent.
 DOC4 = DESIGN / "ORIGINAL_UNIT_STATS.md"
 
+# DOC5 = ORIGINAL_UNITS_PEER_OPENRA.md — Combined Arms and Shattered Paradise, extracted per-unit
+# from their own checkouts by `tools/reference/extract_peer_units.py` through the resolver. Before
+# it existed these two could not vote on any named unit: the older documents carry them as ROLE
+# BANDS only. Its rows already carry `×rifle`, each against that mod's own verified anchor
+# (CA `E1` = 5,000 HP, SP `E1` = 12,500 HP).
+DOC5 = DESIGN / "ORIGINAL_UNITS_PEER_OPENRA.md"
+
 # section heading prefix -> (source label, rifle HP, rifle cost, cost rule)
 # cost rule: "direct" = credits already; "sc" = 4*minerals + 8*vespene; "wc" = 4*gold + 8*wood
 DOC4_SOURCES = [
@@ -251,6 +258,38 @@ def parse_doc4():
     return out
 
 
+def parse_doc5():
+    """[(row)] from ORIGINAL_UNITS_PEER_OPENRA.md — the two OpenRA peer crossovers."""
+    if not DOC5.exists():
+        return []
+    out, source, header = [], None, None
+    for line in DOC5.read_text(encoding="utf-8").splitlines():
+        if line.startswith("## "):
+            source = line[3:].split("(")[0].strip()
+            header = None
+            continue
+        if not source or not line.startswith("|"):
+            continue
+        cells = [c.strip().strip("`") for c in line.split("|")[1:-1]]
+        if not cells:
+            continue
+        if cells[0].lower() == "id":
+            header = [c.lower() for c in cells]
+            continue
+        if set("".join(cells)) <= set("-: ") or not header or len(cells) != len(header):
+            continue
+        row = dict(zip(header, cells))
+        xhp, xcost = num(row.get("×rifle")), num(row.get("×rifle cost"))
+        if not xhp:
+            continue
+        out.append({"source": source, "unit": row.get("unit") or row.get("id"),
+                    "kind": "", "role": "", "category": "",
+                    "x_hp": xhp, "hp": xhp * RIFLE_HP,
+                    "x_cost": xcost, "cost": (xcost * RIFLE_COST) if xcost else None,
+                    "x_speed": None, "speed": None})
+    return out
+
+
 def geometric_mean(values):
     """The multiplicative centre of a set of ratios.
 
@@ -339,7 +378,7 @@ def main():
         })
 
     # ---- pool the same unit across sources
-    doc4 = parse_doc4()
+    doc4 = parse_doc4() + parse_doc5()
     for r in doc4:
         if r["x_hp"] and r["x_hp"] > MAX_XRIFLE and not args.include_junk:
             junk.append(f"{r['source']}: {r['unit']} at {r['x_hp']:.1f}x rifle")
@@ -515,15 +554,17 @@ def write_doc3(synth, matched, sources):
             "raw RA2/YR INIs, and DTA). StarCraft and Warcraft costs use §15.5's conversion — "
             "`credits = 4×minerals + 8×vespene`, VERIFIED to three exact fits; the Warcraft "
             "`4×gold + 8×wood` is by symmetry and is **not** independently verified.", "",
-            "⚠ **Combined Arms and Shattered Paradise cannot vote, and it is not an oversight.** "
-            "Both are in `ORIGINAL_UNIT_STATS.md`, but only as ROLE BANDS — *\"basic rifle 5000\"*, "
-            "*\"heavy trooper 7500–9000\"* — never as per-unit rows, so there is nothing to match "
-            "to a named actor. The one CA per-unit figure anywhere in this tree is the Apocalypse "
-            "at 130,000 HP (= 26× its 5,000 rifle) quoted in `BALANCE_SYNTHESIS.md` §16, and that "
-            "is prose in a worked example, not a dataset. Adding CA and SP means extracting their "
-            "`mods/ca/rules/` and `mods/sp/rules/` unit tables into a per-unit document the way "
-            "Document 1 was built; the rifle anchors are already known (CA 5,000, SP GDI 15,000), "
-            "so only the extraction is missing.", "",
+            "✅ **Combined Arms and Shattered Paradise now vote per-unit.** They used to appear "
+            "only as ROLE BANDS (*\"basic rifle 5000\"*, *\"heavy trooper 7500–9000\"*), so they "
+            "could not be matched to a named actor; `tools/reference/extract_peer_units.py` now "
+            "reads their own checkouts through `miniyaml.Ruleset` and emits "
+            "`ORIGINAL_UNITS_PEER_OPENRA.md` — **382 CA units and 306 SP units**. Anchors are "
+            "verified against the checkout, not trusted from a document: CA `E1` = **5,000 HP** "
+            "(matches what was documented) and SP `E1` (Light Infantry) = **12,500 HP** — "
+            "`ORIGINAL_UNIT_STATS.md` says 15,000, and the checkout wins.", "",
+            "That extraction also confirms a number that had only ever been prose: "
+            "`BALANCE_SYNTHESIS.md` §16 cites CA's Apocalypse at 130,000 HP = 26× rifle. CA's "
+            "`APOC` resolves to exactly **130,000**, and 130,000 / 5,000 = **26.0×**.", "",
             "⚠ **`versus_raw.json` holds 16 sources — including Combined Arms, all three DTA "
             "variants, Shattered Paradise, RA2 Reborn and Red Resurrection — but it carries "
             "WARHEAD/Versus rows only, no unit HP, cost or speed.** It cannot feed this pool. It "

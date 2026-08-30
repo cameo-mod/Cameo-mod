@@ -19,14 +19,16 @@ The one surviving exclusion is not a balance judgement: source rows above **60×
 
 ## Coverage
 
-* Document 1 sources: **11** — CnC Reloaded, Mental Omega, RA2 vanilla, RA2/YR (raw INI), Red Alert 1, Romanov's Veng., StarCraft BW, Tiberian Dawn, Tiberian Sun, Warcraft 2, Yuri's Revenge
-* reference units matched to a Cameo actor: **323**
-* of those, carrying a class tag: **127**
-* pooling two or more independent HP votes: **127**
+* Document 1 sources: **13** — CnC Reloaded, Combined Arms, Mental Omega, RA2 vanilla, RA2/YR (raw INI), Red Alert 1, Romanov's Veng., Shattered Paradise, StarCraft BW, Tiberian Dawn, Tiberian Sun, Warcraft 2, Yuri's Revenge
+* reference units matched to a Cameo actor: **546**
+* of those, carrying a class tag: **143**
+* pooling two or more independent HP votes: **143**
 
 The pool draws on **two** documents: `ORIGINAL_UNITS_RAW.md` (the five RA2-family sources, which already carry a per-row ×rifle column) and `ORIGINAL_UNIT_STATS.md` (StarCraft, Warcraft 2, Red Alert 1, Tiberian Dawn, Tiberian Sun + Firestorm, the raw RA2/YR INIs, and DTA). StarCraft and Warcraft costs use §15.5's conversion — `credits = 4×minerals + 8×vespene`, VERIFIED to three exact fits; the Warcraft `4×gold + 8×wood` is by symmetry and is **not** independently verified.
 
-⚠ **Combined Arms and Shattered Paradise cannot vote, and it is not an oversight.** Both are in `ORIGINAL_UNIT_STATS.md`, but only as ROLE BANDS — *"basic rifle 5000"*, *"heavy trooper 7500–9000"* — never as per-unit rows, so there is nothing to match to a named actor. The one CA per-unit figure anywhere in this tree is the Apocalypse at 130,000 HP (= 26× its 5,000 rifle) quoted in `BALANCE_SYNTHESIS.md` §16, and that is prose in a worked example, not a dataset. Adding CA and SP means extracting their `mods/ca/rules/` and `mods/sp/rules/` unit tables into a per-unit document the way Document 1 was built; the rifle anchors are already known (CA 5,000, SP GDI 15,000), so only the extraction is missing.
+✅ **Combined Arms and Shattered Paradise now vote per-unit.** They used to appear only as ROLE BANDS (*"basic rifle 5000"*, *"heavy trooper 7500–9000"*), so they could not be matched to a named actor; `tools/reference/extract_peer_units.py` now reads their own checkouts through `miniyaml.Ruleset` and emits `ORIGINAL_UNITS_PEER_OPENRA.md` — **382 CA units and 306 SP units**. Anchors are verified against the checkout, not trusted from a document: CA `E1` = **5,000 HP** (matches what was documented) and SP `E1` (Light Infantry) = **12,500 HP** — `ORIGINAL_UNIT_STATS.md` says 15,000, and the checkout wins.
+
+That extraction also confirms a number that had only ever been prose: `BALANCE_SYNTHESIS.md` §16 cites CA's Apocalypse at 130,000 HP = 26× rifle. CA's `APOC` resolves to exactly **130,000**, and 130,000 / 5,000 = **26.0×**.
 
 ⚠ **`versus_raw.json` holds 16 sources — including Combined Arms, all three DTA variants, Shattered Paradise, RA2 Reborn and Red Resurrection — but it carries WARHEAD/Versus rows only, no unit HP, cost or speed.** It cannot feed this pool. It is the right corpus for weapon identity (`aggregate_archetype.py`), the wrong one for unit stats.
 
@@ -46,55 +48,65 @@ The pool draws on **two** documents: `ORIGINAL_UNITS_RAW.md` (the five RA2-famil
 | `japan_archermaiden` | Archer | 20,000 | 14,142 | -5,858 | 500 | 316 | -184 | Cameo (current) 1.0×, Mental Omega 0.5× |
 | `wc2_humans_elvenarcher` | Elven Archer | 25,000 | 18,257 | -6,743 | 600 | 245 | -355 | Cameo (current) 1.2×, Warcraft 2 0.7× |
 
-## `artillery` — 7 member(s) with reference data
+## `artillery` — 9 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `cabal_artilleryspider` | Artillery | 50,000 | 38,337 | -11,663 | 1,250 | 906 | -344 | Cameo (current) 2.5×, Red Alert 1 1.5×, Tiberian Dawn 1.5×, Tiberian Sun 2.4× |
+| `asianalliance_viper` | Viper | 25,000 | 48,990 | +23,990 | 700 | 972 | +272 | Cameo (current) 1.2×, Combined Arms 4.8× |
+| `cabal_artilleryspider` | Artillery | 50,000 | 38,664 | -11,336 | 1,250 | 848 | -402 | Cameo (current) 2.5×, Combined Arms 2.0×, Red Alert 1 1.5×, Tiberian Dawn 1.5×, Tiberian Sun 2.4× |
 | `japan_ballista` | Ballista | 65,000 | 48,819 | -16,181 | 1,150 | 536 | -614 | Cameo (current) 3.2×, Warcraft 2 1.8× |
-| `ra1_soviets_v2rocketlauncher` | V2 Rocket | 30,000 | 42,426 | +12,426 | 1,600 | 1,058 | -542 | Cameo (current) 1.5×, Red Alert 1 3.0× |
-| `td_nod_artillery` | Artillery | 17,500 | 29,487 | +11,987 | 400 | 682 | +282 | Cameo (current) 0.9×, Red Alert 1 1.5×, Tiberian Dawn 1.5×, Tiberian Sun 2.4× |
+| `ra1_soviets_v2rocketlauncher` | V2 Rocket | 30,000 | 47,622 | +17,622 | 1,600 | 1,003 | -597 | Cameo (current) 1.5×, Combined Arms 3.0×, Red Alert 1 3.0× |
+| `td_nod_artillery` | Artillery | 17,500 | 31,341 | +13,841 | 400 | 675 | +275 | Cameo (current) 0.9×, Combined Arms 2.0×, Red Alert 1 1.5×, Tiberian Dawn 1.5×, Tiberian Sun 2.4× |
+| `td_nod_specterartillery` | Specter | 22,500 | 26,833 | +4,333 | 900 | 949 | +49 | Cameo (current) 1.1×, Shattered Paradise 1.6× |
 | `tkm_dronepodtruck` | dron | 60,000 | 30,984 | -29,016 | 1,600 | 478 | -1,122 | Cameo (current) 3.0×, Romanov's Veng. 0.8× |
-| `ts_gdi_juggernautmkii` | Juggernaut | 50,000 | 53,924 | +3,924 | 2,200 | 1,489 | -711 | Cameo (current) 2.5×, CnC Reloaded 2.8×, Tiberian Sun 2.8× |
+| `ts_gdi_juggernautmkii` | Juggernaut | 50,000 | 77,522 | +27,522 | 2,200 | 1,504 | -696 | Cameo (current) 2.5×, CnC Reloaded 2.8×, Combined Arms 12.4×, Shattered Paradise 3.6×, Tiberian Sun 2.8× |
 | `wc2_humans_ballista` | Ballista | 45,000 | 40,620 | -4,380 | 900 | 474 | -426 | Cameo (current) 2.2×, Warcraft 2 1.8× |
 
 ## `artillery_tank` — 7 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `asianalliance_howitzer` | Howitzer | 40,000 | 33,294 | -6,706 | 1,600 | 606 | -994 | Cameo (current) 2.0×, CnC Reloaded 1.5×, RA2 vanilla 1.6×, Yuri's Revenge 1.6× |
-| `forgotten_mlrs` | mlrs | 40,000 | 30,984 | -9,016 | 2,750 | 793 | -1,957 | Cameo (current) 2.0×, Romanov's Veng. 1.2× |
-| `ra1_soviets_grad` | grad | 50,000 | 34,641 | -15,359 | 1,400 | 600 | -800 | Cameo (current) 2.5×, Romanov's Veng. 1.2× |
+| `asianalliance_howitzer` | Howitzer | 40,000 | 34,539 | -5,461 | 1,600 | 615 | -985 | Cameo (current) 2.0×, CnC Reloaded 1.5×, Combined Arms 2.0×, RA2 vanilla 1.6×, Yuri's Revenge 1.6× |
+| `forgotten_mlrs` | mlrs | 40,000 | 43,878 | +3,878 | 2,750 | 857 | -1,893 | Cameo (current) 2.0×, Combined Arms 4.4×, Romanov's Veng. 1.2× |
+| `ra1_soviets_grad` | grad | 50,000 | 40,656 | -9,344 | 1,400 | 646 | -754 | Cameo (current) 2.5×, Combined Arms 2.8×, Romanov's Veng. 1.2× |
 | `td_gdi_archerartillery` | Archer | 35,000 | 18,708 | -16,292 | 750 | 387 | -363 | Cameo (current) 1.8×, Mental Omega 0.5× |
-| `terran_siegetank` | Siege Tank | 150,000 | 106,066 | -43,934 | 2,800 | 1,400 | -1,400 | Cameo (current) 7.5×, StarCraft BW 3.8× |
-| `ts_gdi_juggernaut` | Juggernaut | 35,000 | 47,879 | +12,879 | 1,400 | 1,281 | -119 | Cameo (current) 1.8×, CnC Reloaded 2.8×, Tiberian Sun 2.8× |
-| `ts_nod_artillery` | Artillery | 30,000 | 33,740 | +3,740 | 1,300 | 915 | -385 | Cameo (current) 1.5×, Red Alert 1 1.5×, Tiberian Dawn 1.5×, Tiberian Sun 2.4× |
+| `terran_siegetank` | Siege Tank | 150,000 | 139,248 | -10,752 | 2,800 | 1,433 | -1,367 | Cameo (current) 7.5×, Combined Arms 12.0×, StarCraft BW 3.8× |
+| `ts_gdi_juggernaut` | Juggernaut | 35,000 | 72,185 | +37,185 | 1,400 | 1,374 | -26 | Cameo (current) 1.8×, CnC Reloaded 2.8×, Combined Arms 12.4×, Shattered Paradise 3.6×, Tiberian Sun 2.8× |
+| `ts_nod_artillery` | Artillery | 30,000 | 34,909 | +4,909 | 1,300 | 855 | -445 | Cameo (current) 1.5×, Combined Arms 2.0×, Red Alert 1 1.5×, Tiberian Dawn 1.5×, Tiberian Sun 2.4× |
 
 ## `epic_vehicle` — 5 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `cabal_coredefender` | Core Defender | 2,000,000 | 850,127 | -1,149,873 | 15,000 | 12,493 | -2,507 | Cameo (current) 100.0×, CnC Reloaded 48.0×, Tiberian Sun 16.0× |
-| `ra1_allies_chronotank` | Chrono Tank | 75,000 | 102,470 | +27,470 | 2,000 | 2,191 | +191 | Cameo (current) 3.8×, Red Alert 1 7.0× |
-| `ra1_soviets_madtank` | M.A.D. Tank | 300,000 | 189,737 | -110,263 | 3,000 | 2,627 | -373 | Cameo (current) 15.0×, Red Alert 1 6.0× |
-| `ts_gdi_mammothmkii` | MAMM | 1,200,000 | 250,648 | -949,352 | 8,000 | 3,642 | -4,358 | Cameo (current) 60.0×, CnC Reloaded 8.8×, Mental Omega 7.3×, Tiberian Sun 6.4× |
+| `cabal_coredefender` | Core Defender | 2,000,000 | 894,069 | -1,105,931 | 15,000 | 15,443 | +443 | Cameo (current) 100.0×, CnC Reloaded 48.0×, Shattered Paradise 52.0×, Tiberian Sun 16.0× |
+| `ra1_allies_chronotank` | Chrono Tank | 75,000 | 110,357 | +35,357 | 2,000 | 1,931 | -69 | Cameo (current) 3.8×, Combined Arms 6.4×, Red Alert 1 7.0× |
+| `ra1_soviets_madtank` | M.A.D. Tank | 300,000 | 258,532 | -41,468 | 3,000 | 2,272 | -728 | Cameo (current) 15.0×, Combined Arms 24.0×, Red Alert 1 6.0× |
+| `ts_gdi_mammothmkii` | MAMM | 1,200,000 | 285,430 | -914,570 | 8,000 | 3,742 | -4,258 | Cameo (current) 60.0×, CnC Reloaded 8.8×, Mental Omega 7.3×, Shattered Paradise 24.0×, Tiberian Sun 6.4× |
 | `ts_gdi_mammothprototype` | MAMM | 800,000 | 341,760 | -458,240 | 4,000 | 2,828 | -1,172 | Cameo (current) 40.0×, Mental Omega 7.3× |
 
-## `fire_support` — 11 member(s) with reference data
+## `fire_support` — 13 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
+| `cabal_mantis` | Mantis | 35,000 | 62,610 | +27,610 | 500 | 707 | +207 | Cameo (current) 1.8×, Combined Arms 5.6× |
 | `cabal_spidercnc4` | spider | 40,000 | 50,596 | +10,596 | 1,500 | 548 | -952 | Cameo (current) 2.0×, Romanov's Veng. 3.2× |
 | `forgotten_tankkiller` | Tank Killer | 85,000 | 61,156 | -23,844 | 900 | 822 | -78 | Cameo (current) 4.2×, Mental Omega 2.2× |
+| `forgotten_warriortank` | Warrior | 100,000 | 44,721 | -55,279 | 2,000 | 447 | -1,553 | Cameo (current) 5.0×, Combined Arms 1.0× |
 | `protoss_reaver` | Reaver | 275,000 | 117,260 | -157,740 | 2,700 | 1,470 | -1,230 | Cameo (current) 13.8×, StarCraft BW 2.5× |
-| `ra1_soviets_teslatank` | tesla | 40,000 | 50,996 | +10,996 | 1,700 | 835 | -865 | Cameo (current) 2.0×, CnC Reloaded 2.4×, RA2 vanilla 2.4×, RA2/YR (raw INI) 2.4×, Red Alert 1 2.2×, Romanov's Veng. 4.8×, Yuri's Revenge 2.4× |
-| `ra2_allies_prismtank` | Prism Tank | 60,000 | 37,947 | -22,053 | 2,000 | 1,549 | -451 | Cameo (current) 3.0×, RA2/YR (raw INI) 1.2× |
-| `ra2_soviets_teslatank` | tesla | 75,000 | 55,787 | -19,213 | 1,800 | 842 | -958 | Cameo (current) 3.8×, CnC Reloaded 2.4×, RA2 vanilla 2.4×, RA2/YR (raw INI) 2.4×, Red Alert 1 2.2×, Romanov's Veng. 4.8×, Yuri's Revenge 2.4× |
-| `td_nod_ssmlauncher` | SSM Launcher | 20,000 | 28,284 | +8,284 | 800 | 800 | -0 | Cameo (current) 1.0×, Tiberian Dawn 2.0× |
-| `ts_gdi_wolverine` | Wolverine | 30,000 | 30,567 | +567 | 550 | 479 | -71 | Cameo (current) 1.5×, CnC Reloaded 1.7×, Tiberian Sun 1.4× |
-| `ts_gdi_wolverinemkii` | Wolverine | 50,000 | 36,241 | -13,759 | 950 | 575 | -375 | Cameo (current) 2.5×, CnC Reloaded 1.7×, Tiberian Sun 1.4× |
+| `ra1_soviets_teslatank` | tesla | 40,000 | 58,455 | +18,455 | 1,700 | 874 | -826 | Cameo (current) 2.0×, CnC Reloaded 2.4×, Combined Arms 7.6×, RA2 vanilla 2.4×, RA2/YR (raw INI) 2.4×, Red Alert 1 2.2×, Romanov's Veng. 4.8×, Yuri's Revenge 2.4× |
+| `ra2_allies_prismtank` | Prism Tank | 60,000 | 48,658 | -11,342 | 2,000 | 1,480 | -520 | Cameo (current) 3.0×, Combined Arms 4.0×, RA2/YR (raw INI) 1.2× |
+| `ra2_soviets_teslatank` | tesla | 75,000 | 63,234 | -11,766 | 1,800 | 880 | -920 | Cameo (current) 3.8×, CnC Reloaded 2.4×, Combined Arms 7.6×, RA2 vanilla 2.4×, RA2/YR (raw INI) 2.4×, Red Alert 1 2.2×, Romanov's Veng. 4.8×, Yuri's Revenge 2.4× |
+| `td_nod_ssmlauncher` | SSM Launcher | 20,000 | 36,342 | +16,342 | 800 | 952 | +152 | Cameo (current) 1.0×, Combined Arms 3.0×, Tiberian Dawn 2.0× |
+| `ts_gdi_wolverine` | Wolverine | 30,000 | 43,781 | +13,781 | 550 | 505 | -45 | Cameo (current) 1.5×, CnC Reloaded 1.7×, Combined Arms 8.8×, Shattered Paradise 1.6×, Tiberian Sun 1.4× |
+| `ts_gdi_wolverinemkii` | Wolverine | 50,000 | 48,490 | -1,510 | 950 | 564 | -386 | Cameo (current) 2.5×, CnC Reloaded 1.7×, Combined Arms 8.8×, Shattered Paradise 1.6×, Tiberian Sun 1.4× |
 | `yuri_magnetron` | Magnetron | 65,000 | 32,761 | -32,239 | 1,300 | 866 | -434 | Cameo (current) 3.2×, CnC Reloaded 1.2×, Mental Omega 2.1×, RA2/YR (raw INI) 1.2×, Yuri's Revenge 1.2× |
 | `zerg_lurker` | Lurker | 125,000 | 88,388 | -36,612 | 1,300 | 1,249 | -51 | Cameo (current) 6.2×, StarCraft BW 3.1× |
+
+## `heavy_infantry` — 1 member(s) with reference data
+
+| actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
+|---|---|--:|--:|--:|--:|--:|--:|---|
+| `terran_marauder` | Marauder | 90,000 | 43,203 | -46,797 | 1,000 | 368 | -632 | Cameo (current) 4.5×, Combined Arms 2.8×, Shattered Paradise 0.8× |
 
 ## `heavy_sniper` — 1 member(s) with reference data
 
@@ -106,71 +118,78 @@ The pool draws on **two** documents: `ORIGINAL_UNITS_RAW.md` (the five RA2-famil
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `cabal_avatar` | Avatar | 1,000,000 | 334,664 | -665,336 | 7,500 | 2,562 | -4,938 | Cameo (current) 50.0×, CnC Reloaded 5.6× |
-| `ra1_soviets_mammothtank` | MAMM | 375,000 | 236,975 | -138,025 | 2,000 | 1,787 | -213 | Cameo (current) 18.8×, Mental Omega 7.3×, Red Alert 1 12.0×, Tiberian Dawn 12.0× |
-| `ra2_allies_miragetank` | Mirage Tank | 120,000 | 41,683 | -78,317 | 1,600 | 725 | -875 | Cameo (current) 6.0×, CnC Reloaded 1.6×, RA2 vanilla 1.6×, RA2/YR (raw INI) 1.6×, Yuri's Revenge 1.6× |
-| `ra2_soviets_apocalypsetank` | apoc | 350,000 | 138,430 | -211,570 | 1,750 | 1,092 | -658 | Cameo (current) 17.5×, CnC Reloaded 6.4×, Mental Omega 4.0×, RA2 vanilla 6.4×, RA2/YR (raw INI) 6.4×, Romanov's Veng. 6.4×, Yuri's Revenge 6.4× |
-| `td_gdi_mammothtank` | MAMM | 225,000 | 208,564 | -16,436 | 1,600 | 1,690 | +90 | Cameo (current) 11.2×, Mental Omega 7.3×, Red Alert 1 12.0×, Tiberian Dawn 12.0× |
-| `td_gdi_mammothtankmkiii` | MAMM | 500,000 | 225,930 | -274,070 | 3,000 | 1,690 | -1,310 | Cameo (current) 25.0×, CnC Reloaded 7.0×, Mental Omega 7.3×, Red Alert 1 12.0×, Tiberian Dawn 12.0× |
+| `cabal_avatar` | Avatar | 1,000,000 | 286,199 | -713,801 | 7,500 | 2,215 | -5,285 | Cameo (current) 50.0×, CnC Reloaded 5.6×, Combined Arms 15.6×, Shattered Paradise 9.6× |
+| `ra1_soviets_mammothtank` | MAMM | 375,000 | 235,953 | -139,047 | 2,000 | 1,713 | -287 | Cameo (current) 18.8×, Combined Arms 19.0×, Mental Omega 7.3×, Red Alert 1 12.0×, Shattered Paradise 7.2×, Tiberian Dawn 12.0× |
+| `ra2_allies_miragetank` | Mirage Tank | 120,000 | 50,253 | -69,747 | 1,600 | 729 | -871 | Cameo (current) 6.0×, CnC Reloaded 1.6×, Combined Arms 6.4×, RA2 vanilla 1.6×, RA2/YR (raw INI) 1.6×, Yuri's Revenge 1.6× |
+| `ra2_soviets_apocalypsetank` | apoc | 350,000 | 163,334 | -186,666 | 1,750 | 1,217 | -533 | Cameo (current) 17.5×, CnC Reloaded 6.4×, Combined Arms 26.0×, Mental Omega 4.0×, RA2 vanilla 6.4×, RA2/YR (raw INI) 6.4×, Romanov's Veng. 6.4×, Yuri's Revenge 6.4× |
+| `td_gdi_mammothtank` | MAMM | 225,000 | 216,696 | -8,304 | 1,600 | 1,651 | +51 | Cameo (current) 11.2×, Combined Arms 19.0×, Mental Omega 7.3×, Red Alert 1 12.0×, Shattered Paradise 7.2×, Tiberian Dawn 12.0× |
+| `td_gdi_mammothtankmkiii` | MAMM | 500,000 | 228,186 | -271,814 | 3,000 | 1,656 | -1,344 | Cameo (current) 25.0×, CnC Reloaded 7.0×, Combined Arms 19.0×, Mental Omega 7.3×, Red Alert 1 12.0×, Shattered Paradise 7.2×, Tiberian Dawn 12.0× |
 | `terran_goliath` | Goliath | 125,000 | 88,388 | -36,612 | 1,600 | 800 | -800 | Cameo (current) 6.2×, StarCraft BW 3.1× |
 | `terran_goliathmk2` | Goliath | 175,000 | 104,583 | -70,417 | 2,400 | 980 | -1,420 | Cameo (current) 8.8×, StarCraft BW 3.1× |
-| `ts_nod_stealthtank` | Stealth Tank | 80,000 | 44,874 | -35,126 | 1,750 | 1,085 | -665 | Cameo (current) 4.0×, CnC Reloaded 1.8×, Tiberian Dawn 2.2×, Tiberian Sun 1.6× |
-| `yuri_mastermind` | Master Mind | 100,000 | 76,146 | -23,854 | 1,500 | 1,293 | -207 | Cameo (current) 5.0×, CnC Reloaded 4.0×, Mental Omega 2.5×, RA2/YR (raw INI) 4.0×, Yuri's Revenge 4.0× |
+| `ts_nod_stealthtank` | Stealth Tank | 80,000 | 48,476 | -31,524 | 1,750 | 1,101 | -649 | Cameo (current) 4.0×, CnC Reloaded 1.8×, Combined Arms 4.0×, Shattered Paradise 2.0×, Tiberian Dawn 2.2×, Tiberian Sun 1.6× |
+| `yuri_mastermind` | Master Mind | 100,000 | 64,221 | -35,779 | 1,500 | 1,370 | -130 | Cameo (current) 5.0×, CnC Reloaded 4.0×, Combined Arms 2.2×, Mental Omega 2.5×, RA2/YR (raw INI) 4.0×, Shattered Paradise 2.0×, Yuri's Revenge 4.0× |
 
-## `light_tank` — 6 member(s) with reference data
+## `light_tank` — 7 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
+| `cabal_ravager` | Ravager | 70,000 | 57,303 | -12,697 | 1,500 | 744 | -756 | Cameo (current) 3.5×, Combined Arms 1.2×, Shattered Paradise 5.6× |
 | `futuretech_robottank` | robo | 50,000 | 33,958 | -16,042 | 1,600 | 428 | -1,172 | Cameo (current) 2.5×, CnC Reloaded 1.4×, RA2/YR (raw INI) 1.4×, Romanov's Veng. 2.0×, Yuri's Revenge 1.4× |
 | `ixian_shockraider` | Shock | 40,000 | 28,844 | -11,156 | 1,300 | 806 | -494 | Cameo (current) 2.0×, RA2/YR (raw INI) 1.0× |
-| `td_nod_lighttank` | Light Tank | 80,000 | 77,920 | -2,080 | 600 | 524 | -76 | Cameo (current) 4.0×, RA2 vanilla 1.6×, Red Alert 1 6.0×, Tiberian Dawn 6.0× |
-| `td_nod_lighttankmkii` | Light Tank | 80,000 | 77,920 | -2,080 | 800 | 563 | -237 | Cameo (current) 4.0×, RA2 vanilla 1.6×, Red Alert 1 6.0×, Tiberian Dawn 6.0× |
+| `td_nod_lighttank` | Light Tank | 80,000 | 88,588 | +8,588 | 600 | 556 | -44 | Cameo (current) 4.0×, Combined Arms 7.4×, RA2 vanilla 1.6×, Red Alert 1 6.0×, Tiberian Dawn 6.0× |
+| `td_nod_lighttankmkii` | Light Tank | 80,000 | 88,588 | +8,588 | 800 | 588 | -212 | Cameo (current) 4.0×, Combined Arms 7.4×, RA2 vanilla 1.6×, Red Alert 1 6.0×, Tiberian Dawn 6.0× |
 | `terran_vulture` | Vulture | 75,000 | 40,412 | -34,588 | 900 | 581 | -319 | Cameo (current) 3.8×, Mental Omega 1.1×, StarCraft BW 2.0× |
-| `yuri_lashertank` | Lasher Tank | 70,000 | 54,433 | -15,567 | 600 | 528 | -72 | Cameo (current) 3.5×, CnC Reloaded 2.4×, RA2/YR (raw INI) 2.4× |
+| `yuri_lashertank` | Lasher Tank | 70,000 | 77,872 | +7,872 | 600 | 641 | +41 | Cameo (current) 3.5×, CnC Reloaded 2.4×, Combined Arms 11.4×, RA2/YR (raw INI) 2.4× |
 
-## `line_breaker` — 8 member(s) with reference data
+## `line_breaker` — 10 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `forgotten_flametank` | Flame Tank | 200,000 | 77,920 | -122,080 | 1,300 | 891 | -409 | Cameo (current) 10.0×, CnC Reloaded 1.6×, Tiberian Dawn 6.0×, Tiberian Sun 2.4× |
+| `forgotten_flametank` | Flame Tank | 200,000 | 89,980 | -110,020 | 1,300 | 872 | -428 | Cameo (current) 10.0×, CnC Reloaded 1.6×, Combined Arms 8.0×, Tiberian Dawn 6.0×, Tiberian Sun 2.4× |
 | `protoss_archon` | Archon | 350,000 | 41,833 | -308,167 | 5,600 | 2,800 | -2,800 | Cameo (current) 17.5×, StarCraft BW 0.2× |
-| `ra2_allies_battlefortress` | Battle Fortress | 320,000 | 129,715 | -190,285 | 4,000 | 1,682 | -2,318 | Cameo (current) 16.0×, CnC Reloaded 4.8×, RA2/YR (raw INI) 4.8×, Yuri's Revenge 4.8× |
+| `ra2_allies_battlefortress` | Battle Fortress | 320,000 | 173,792 | -146,208 | 4,000 | 1,741 | -2,259 | Cameo (current) 16.0×, CnC Reloaded 4.8×, Combined Arms 28.0×, RA2/YR (raw INI) 4.8×, Yuri's Revenge 4.8× |
 | `steelconsortium_megalodon` | Megalodon | 450,000 | 201,246 | -248,754 | 4,600 | 2,796 | -1,804 | Cameo (current) 22.5×, Mental Omega 4.5× |
-| `td_nod_flametank` | Flame Tank | 100,000 | 65,523 | -34,477 | 800 | 789 | -11 | Cameo (current) 5.0×, CnC Reloaded 1.6×, Tiberian Dawn 6.0×, Tiberian Sun 2.4× |
-| `td_nod_flametankmkii` | Flame Tank | 200,000 | 77,920 | -122,080 | 1,300 | 891 | -409 | Cameo (current) 10.0×, CnC Reloaded 1.6×, Tiberian Dawn 6.0×, Tiberian Sun 2.4× |
-| `ts_gdi_disruptor` | Disruptor | 250,000 | 122,539 | -127,461 | 2,400 | 1,635 | -765 | Cameo (current) 12.5×, CnC Reloaded 4.6×, Tiberian Sun 4.0× |
-| `ts_nod_devilstongue` | Devil's Tongue | 100,000 | 62,962 | -37,038 | 1,150 | 921 | -229 | Cameo (current) 5.0×, CnC Reloaded 2.6×, Tiberian Sun 2.4× |
+| `td_nod_flametank` | Flame Tank | 100,000 | 78,332 | -21,668 | 800 | 791 | -9 | Cameo (current) 5.0×, CnC Reloaded 1.6×, Combined Arms 8.0×, Tiberian Dawn 6.0×, Tiberian Sun 2.4× |
+| `td_nod_flametankmkii` | Flame Tank | 200,000 | 89,980 | -110,020 | 1,300 | 872 | -428 | Cameo (current) 10.0×, CnC Reloaded 1.6×, Combined Arms 8.0×, Tiberian Dawn 6.0×, Tiberian Sun 2.4× |
+| `tkm_battlebus` | Battle Bus | 50,000 | 56,569 | +6,569 | 1,250 | 968 | -282 | Cameo (current) 2.5×, Shattered Paradise 3.2× |
+| `ts_gdi_disruptor` | Disruptor | 250,000 | 128,455 | -121,545 | 2,400 | 1,475 | -925 | Cameo (current) 12.5×, CnC Reloaded 4.6×, Combined Arms 13.2×, Shattered Paradise 3.6×, Tiberian Sun 4.0× |
+| `ts_gdi_mobileemp` | Mobile E.M.P | 150,000 | 176,635 | +26,635 | 1,400 | 1,269 | -131 | Cameo (current) 7.5×, Combined Arms 10.4× |
+| `ts_nod_devilstongue` | Devil's Tongue | 100,000 | 58,833 | -41,167 | 1,150 | 898 | -252 | Cameo (current) 5.0×, CnC Reloaded 2.6×, Shattered Paradise 2.4×, Tiberian Sun 2.4× |
 
-## `mbt` — 9 member(s) with reference data
+## `mbt` — 12 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `futuretech_guardiantank` | Guardian | 115,000 | 92,871 | -22,129 | 850 | 967 | +117 | Cameo (current) 5.8×, StarCraft BW 3.8× |
+| `asianalliance_lynxtank` | Lynx Tank | 120,000 | 75,895 | -44,105 | 850 | 704 | -146 | Cameo (current) 6.0×, Shattered Paradise 2.4× |
+| `futuretech_guardiantank` | Guardian | 115,000 | 65,108 | -49,892 | 850 | 978 | +128 | Cameo (current) 5.8×, Shattered Paradise 1.6×, StarCraft BW 3.8× |
 | `protoss_dragoon` | Dragoon | 75,000 | 61,237 | -13,763 | 1,200 | 735 | -465 | Cameo (current) 3.8×, StarCraft BW 2.5× |
-| `ra1_soviets_heavytank` | Heavy Tank | 150,000 | 154,919 | +4,919 | 1,000 | 975 | -25 | Cameo (current) 7.5×, Red Alert 1 8.0× |
-| `ra2_allies_grizzlytank` | Grizzly Tank | 100,000 | 69,282 | -30,718 | 750 | 725 | -25 | Cameo (current) 5.0×, RA2/YR (raw INI) 2.4× |
-| `ra2_soviets_rhinoheavytank` | Rhino Heavy Tank | 130,000 | 67,935 | -62,065 | 850 | 627 | -223 | Cameo (current) 6.5×, Mental Omega 2.0×, RA2 vanilla 3.2×, Yuri's Revenge 3.2× |
-| `td_gdi_predatortank` | Predator Tank | 170,000 | 100,995 | -69,005 | 1,250 | 685 | -565 | Cameo (current) 8.5×, CnC Reloaded 3.0× |
-| `ts_gdi_titan` | Titan | 100,000 | 78,644 | -21,356 | 950 | 791 | -159 | Cameo (current) 5.0×, CnC Reloaded 3.8×, Tiberian Sun 3.2× |
-| `ts_gdi_titanmkii` | Titan | 120,000 | 83,572 | -36,428 | 1,600 | 941 | -659 | Cameo (current) 6.0×, CnC Reloaded 3.8×, Tiberian Sun 3.2× |
-| `ts_nod_ticktank` | Tick Tank | 100,000 | 62,692 | -37,308 | 800 | 711 | -89 | Cameo (current) 5.0×, CnC Reloaded 2.2×, Tiberian Sun 2.8× |
+| `ra1_soviets_heavytank` | Heavy Tank | 150,000 | 181,226 | +31,226 | 1,000 | 1,030 | +30 | Cameo (current) 7.5×, Combined Arms 12.4×, Red Alert 1 8.0× |
+| `ra2_allies_grizzlytank` | Grizzly Tank | 100,000 | 92,521 | -7,479 | 750 | 772 | +22 | Cameo (current) 5.0×, Combined Arms 8.2×, RA2/YR (raw INI) 2.4× |
+| `ra2_soviets_rhinoheavytank` | Rhino Heavy Tank | 130,000 | 89,657 | -40,343 | 850 | 708 | -142 | Cameo (current) 6.5×, Combined Arms 13.6×, Mental Omega 2.0×, RA2 vanilla 3.2×, Yuri's Revenge 3.2× |
+| `td_gdi_battletank` | Battle Tank | 125,000 | 161,245 | +36,245 | 900 | 900 | +0 | Cameo (current) 6.2×, Combined Arms 10.4× |
+| `td_gdi_predatortank` | Predator Tank | 170,000 | 82,972 | -87,028 | 1,250 | 706 | -544 | Cameo (current) 8.5×, CnC Reloaded 3.0×, Shattered Paradise 2.8× |
+| `tkm_technicaltank` | Technical | 70,000 | 37,417 | -32,583 | 700 | 418 | -282 | Cameo (current) 3.5×, Shattered Paradise 1.0× |
+| `ts_gdi_titan` | Titan | 100,000 | 109,032 | +9,032 | 950 | 942 | -8 | Cameo (current) 5.0×, CnC Reloaded 3.8×, Combined Arms 22.0×, Shattered Paradise 3.6×, Tiberian Sun 3.2× |
+| `ts_gdi_titanmkii` | Titan | 120,000 | 113,082 | -6,918 | 1,600 | 1,045 | -555 | Cameo (current) 6.0×, CnC Reloaded 3.8×, Combined Arms 22.0×, Shattered Paradise 3.6×, Tiberian Sun 3.2× |
+| `ts_nod_ticktank` | Tick Tank | 100,000 | 60,948 | -39,052 | 800 | 700 | -100 | Cameo (current) 5.0×, CnC Reloaded 2.2×, Shattered Paradise 2.8×, Tiberian Sun 2.8× |
 
-## `melee` — 3 member(s) with reference data
+## `melee` — 4 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `ra1_soviets_attackdog` | Attack Dog | 5,000 | 11,970 | +6,970 | 200 | 132 | -68 | Cameo (current) 0.2×, CnC Reloaded 0.6×, RA2 vanilla 0.8×, RA2/YR (raw INI) 0.8×, Yuri's Revenge 0.8× |
-| `ra2_allies_attackdog` | Attack Dog | 5,000 | 11,970 | +6,970 | 200 | 132 | -68 | Cameo (current) 0.2×, CnC Reloaded 0.6×, RA2 vanilla 0.8×, RA2/YR (raw INI) 0.8×, Yuri's Revenge 0.8× |
-| `ra2_soviets_attackdog` | Attack Dog | 5,000 | 11,970 | +6,970 | 200 | 132 | -68 | Cameo (current) 0.2×, CnC Reloaded 0.6×, RA2 vanilla 0.8×, RA2/YR (raw INI) 0.8×, Yuri's Revenge 0.8× |
+| `ra1_soviets_attackdog` | Attack Dog | 5,000 | 10,998 | +5,998 | 200 | 141 | -59 | Cameo (current) 0.2×, CnC Reloaded 0.6×, Combined Arms 0.4×, RA2 vanilla 0.8×, RA2/YR (raw INI) 0.8×, Yuri's Revenge 0.8× |
+| `ra1_soviets_cyberdog` | Cyberdog | 50,000 | 52,915 | +2,915 | 1,000 | 632 | -368 | Cameo (current) 2.5×, Combined Arms 2.8× |
+| `ra2_allies_attackdog` | Attack Dog | 5,000 | 10,998 | +5,998 | 200 | 141 | -59 | Cameo (current) 0.2×, CnC Reloaded 0.6×, Combined Arms 0.4×, RA2 vanilla 0.8×, RA2/YR (raw INI) 0.8×, Yuri's Revenge 0.8× |
+| `ra2_soviets_attackdog` | Attack Dog | 5,000 | 10,998 | +5,998 | 200 | 141 | -59 | Cameo (current) 0.2×, CnC Reloaded 0.6×, Combined Arms 0.4×, RA2 vanilla 0.8×, RA2/YR (raw INI) 0.8×, Yuri's Revenge 0.8× |
 
 ## `missile_vehicle` — 5 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `td_gdi_mlrs` | mlrs | 27,500 | 25,690 | -1,810 | 1,000 | 478 | -522 | Cameo (current) 1.4×, Romanov's Veng. 1.2× |
-| `td_nod_reconbike` | Recon Bike | 22,500 | 37,947 | +15,447 | 500 | 500 | -0 | Cameo (current) 1.1×, Tiberian Dawn 3.2× |
-| `td_nod_stealthtank` | Stealth Tank | 17,500 | 30,689 | +13,189 | 900 | 919 | +19 | Cameo (current) 0.9×, CnC Reloaded 1.8×, Tiberian Dawn 2.2×, Tiberian Sun 1.6× |
-| `ts_gdi_hovermlrs` | Hover MLRS | 30,000 | 33,482 | +3,482 | 900 | 828 | -72 | Cameo (current) 1.5×, CnC Reloaded 1.7×, Tiberian Sun 1.8× |
+| `td_gdi_mlrs` | mlrs | 27,500 | 38,727 | +11,227 | 1,000 | 611 | -389 | Cameo (current) 1.4×, Combined Arms 4.4×, Romanov's Veng. 1.2× |
+| `td_nod_reconbike` | Recon Bike | 22,500 | 39,866 | +17,366 | 500 | 500 | +0 | Cameo (current) 1.1×, Combined Arms 2.2×, Tiberian Dawn 3.2× |
+| `td_nod_stealthtank` | Stealth Tank | 17,500 | 37,628 | +20,128 | 900 | 985 | +85 | Cameo (current) 0.9×, CnC Reloaded 1.8×, Combined Arms 4.0×, Shattered Paradise 2.0×, Tiberian Dawn 2.2×, Tiberian Sun 1.6× |
+| `ts_gdi_hovermlrs` | Hover MLRS | 30,000 | 40,876 | +10,876 | 900 | 894 | -6 | Cameo (current) 1.5×, CnC Reloaded 1.7×, Combined Arms 3.8×, Shattered Paradise 2.0×, Tiberian Sun 1.8× |
 | `ts_nod_attackcycle` | Attack Cycle | 15,000 | 19,933 | +4,933 | 550 | 516 | -34 | Cameo (current) 0.8×, CnC Reloaded 1.1×, Tiberian Sun 1.2× |
 
 ## `scout` — 6 member(s) with reference data
@@ -179,28 +198,29 @@ The pool draws on **two** documents: `ORIGINAL_UNITS_RAW.md` (the five RA2-famil
 |---|---|--:|--:|--:|--:|--:|--:|---|
 | `forgotten_mutantsoldier` | Mutant | 40,000 | 28,983 | -11,017 | 250 | 168 | -82 | Cameo (current) 2.0×, CnC Reloaded 1.1× |
 | `futuretech_scoutdroid` | Scout | 30,000 | 47,434 | +17,434 | 200 | 458 | +258 | Cameo (current) 1.5×, StarCraft BW 3.8× |
-| `ra1_allies_rifleinfantry` | Rifle Infantry | 27,000 | 23,238 | -3,762 | 100 | 100 | +0 | Cameo (current) 1.4×, Red Alert 1 1.0× |
-| `ra1_soviets_rifleinfantry` | Rifle Infantry | 34,000 | 26,077 | -7,923 | 100 | 100 | +0 | Cameo (current) 1.7×, Red Alert 1 1.0× |
-| `td_gdi_minigunner` | Minigunner | 31,000 | 24,900 | -6,100 | 100 | 100 | +0 | Cameo (current) 1.6×, Tiberian Dawn 1.0× |
-| `td_nod_minigunner` | Minigunner | 30,000 | 24,495 | -5,505 | 100 | 100 | +0 | Cameo (current) 1.5×, Tiberian Dawn 1.0× |
+| `ra1_allies_rifleinfantry` | Rifle Infantry | 27,000 | 22,104 | -4,896 | 100 | 100 | +0 | Cameo (current) 1.4×, Combined Arms 1.0×, Red Alert 1 1.0× |
+| `ra1_soviets_rifleinfantry` | Rifle Infantry | 34,000 | 23,870 | -10,130 | 100 | 100 | +0 | Cameo (current) 1.7×, Combined Arms 1.0×, Red Alert 1 1.0× |
+| `td_gdi_minigunner` | Minigunner | 31,000 | 23,146 | -7,854 | 100 | 100 | +0 | Cameo (current) 1.6×, Combined Arms 1.0×, Tiberian Dawn 1.0× |
+| `td_nod_minigunner` | Minigunner | 30,000 | 22,894 | -7,106 | 100 | 100 | +0 | Cameo (current) 1.5×, Combined Arms 1.0×, Tiberian Dawn 1.0× |
 
-## `scout_vehicle` — 11 member(s) with reference data
+## `scout_vehicle` — 12 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `forgotten_ruiner` | Ruiner | 35,000 | 45,056 | +10,056 | 500 | 742 | +242 | Cameo (current) 1.8×, Mental Omega 2.9× |
+| `forgotten_ruiner` | Ruiner | 35,000 | 49,570 | +14,570 | 500 | 883 | +383 | Cameo (current) 1.8×, Combined Arms 3.0×, Mental Omega 2.9× |
 | `japan_grenadebuggy` | gren | 60,000 | 34,641 | -25,359 | 900 | 254 | -646 | Cameo (current) 3.0×, Romanov's Veng. 1.0× |
 | `japan_scoutcar` | Scout | 25,000 | 43,301 | +18,301 | 300 | 561 | +261 | Cameo (current) 1.2×, StarCraft BW 3.8× |
-| `ra1_allies_ranger` | Ranger | 22,500 | 36,742 | +14,242 | 300 | 424 | +124 | Cameo (current) 1.1×, Red Alert 1 3.0× |
+| `ra1_allies_ranger` | Ranger | 22,500 | 43,267 | +20,767 | 300 | 416 | +116 | Cameo (current) 1.1×, Combined Arms 3.0×, Red Alert 1 3.0× |
 | `ra2_soviets_terrordrone` | terror | 10,000 | 14,087 | +4,087 | 600 | 280 | -320 | Cameo (current) 0.5×, CnC Reloaded 0.8×, Mental Omega 0.7×, RA2 vanilla 0.8×, RA2/YR (raw INI) 0.8×, Romanov's Veng. 0.6×, Yuri's Revenge 0.8× |
-| `td_gdi_humvee` | Humvee | 27,500 | 40,620 | +13,120 | 400 | 400 | -0 | Cameo (current) 1.4×, Tiberian Dawn 3.0× |
-| `td_gdi_humveemkii` | Humvee | 37,500 | 47,434 | +9,934 | 600 | 490 | -110 | Cameo (current) 1.9×, Tiberian Dawn 3.0× |
-| `td_nod_buggy` | Buggy | 20,000 | 33,466 | +13,466 | 300 | 300 | -0 | Cameo (current) 1.0×, Tiberian Dawn 2.8× |
-| `td_nod_buggymkii` | Buggy | 25,000 | 37,417 | +12,417 | 500 | 387 | -113 | Cameo (current) 1.2×, Tiberian Dawn 2.8× |
-| `ts_gdi_pitbull` | Pitbull | 27,500 | 25,690 | -1,810 | 400 | 374 | -26 | Cameo (current) 1.4×, CnC Reloaded 1.2× |
+| `td_gdi_humvee` | Humvee | 27,500 | 42,189 | +14,689 | 400 | 382 | -18 | Cameo (current) 1.4×, Combined Arms 3.0×, Shattered Paradise 1.6×, Tiberian Dawn 3.0× |
+| `td_gdi_humveemkii` | Humvee | 37,500 | 45,590 | +8,090 | 600 | 423 | -177 | Cameo (current) 1.9×, Combined Arms 3.0×, Shattered Paradise 1.6×, Tiberian Dawn 3.0× |
+| `td_nod_buggy` | Buggy | 20,000 | 39,009 | +19,009 | 300 | 316 | +16 | Cameo (current) 1.0×, Combined Arms 2.6×, Tiberian Dawn 2.8× |
+| `td_nod_buggymkii` | Buggy | 25,000 | 42,021 | +17,021 | 500 | 374 | -126 | Cameo (current) 1.2×, Combined Arms 2.6×, Tiberian Dawn 2.8× |
+| `tkm_technical` | Technical | 27,500 | 23,452 | -4,048 | 400 | 316 | -84 | Cameo (current) 1.4×, Shattered Paradise 1.0× |
+| `ts_gdi_pitbull` | Pitbull | 27,500 | 35,537 | +8,037 | 400 | 492 | +92 | Cameo (current) 1.4×, CnC Reloaded 1.2×, Combined Arms 3.4× |
 | `ts_nod_attackbuggy` | Attack Buggy | 30,000 | 34,236 | +4,236 | 450 | 448 | -2 | Cameo (current) 1.5×, CnC Reloaded 1.9×, Tiberian Sun 1.8× |
 
-## `special_forces` — 5 member(s) with reference data
+## `special_forces` — 7 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
@@ -208,44 +228,47 @@ The pool draws on **two** documents: `ORIGINAL_UNITS_RAW.md` (the five RA2-famil
 | `ra2_allies_seal` | SEAL | 31,000 | 22,316 | -8,684 | 1,162 | 617 | -545 | Cameo (current) 1.6×, CnC Reloaded 1.0×, RA2 vanilla 1.0×, Yuri's Revenge 1.0× |
 | `ra2_soviets_flaktrooper` | flakt | 10,000 | 15,946 | +5,946 | 416 | 177 | -239 | Cameo (current) 0.5×, CnC Reloaded 0.8×, Mental Omega 1.0×, RA2 vanilla 0.8×, RA2/YR (raw INI) 0.8×, Romanov's Veng. 1.0×, Yuri's Revenge 0.8× |
 | `terran_ghost` | Ghost | 44,000 | 41,234 | -2,766 | 1,176 | 311 | -865 | Cameo (current) 2.2×, Mental Omega 7.3×, Romanov's Veng. 1.0×, StarCraft BW 1.1× |
+| `terran_specter` | Specter | 50,000 | 40,000 | -10,000 | 1,744 | 1,321 | -423 | Cameo (current) 2.5×, Shattered Paradise 1.6× |
+| `ts_gdi_falconenforcer` | Falcon | 45,000 | 32,863 | -12,137 | 1,322 | 1,485 | +163 | Cameo (current) 2.2×, Shattered Paradise 1.2× |
 | `ts_nod_elitecadre` | Elite Cadre | 21,000 | 31,081 | +10,081 | 435 | 330 | -105 | Cameo (current) 1.1×, CnC Reloaded 2.3× |
 
-## `support` — 25 member(s) with reference data
+## `support` — 26 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `asianalliance_engineer` | Engineer | 5,000 | 11,043 | +6,043 | 500 | 392 | -108 | Cameo (current) 0.2×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
-| `cabal_engineer` | Engineer | 20,000 | 13,133 | -6,867 | 800 | 416 | -384 | Cameo (current) 1.0×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
-| `engineer` | Engineer | 5,000 | 11,043 | +6,043 | 500 | 392 | -108 | Cameo (current) 0.2×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
-| `forgotten_engineer` | Engineer | 10,000 | 12,043 | +2,043 | 600 | 401 | -199 | Cameo (current) 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `asianalliance_engineer` | Engineer | 5,000 | 11,347 | +6,347 | 500 | 395 | -105 | Cameo (current) 0.2×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `cabal_engineer` | Engineer | 20,000 | 13,034 | -6,966 | 800 | 414 | -386 | Cameo (current) 1.0×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `cabal_hackercyborg` | Hacker | 30,000 | 24,495 | -5,505 | 1,250 | 968 | -282 | Cameo (current) 1.5×, Combined Arms 1.0× |
+| `engineer` | Engineer | 5,000 | 11,347 | +6,347 | 500 | 395 | -105 | Cameo (current) 0.2×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `forgotten_engineer` | Engineer | 10,000 | 12,162 | +2,162 | 600 | 403 | -197 | Cameo (current) 0.5×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
 | `forgotten_mutanthijacker` | Mutant | 25,000 | 23,452 | -1,548 | 750 | 274 | -476 | Cameo (current) 1.2×, CnC Reloaded 1.1× |
-| `futuretech_engineer` | Engineer | 5,000 | 11,043 | +6,043 | 500 | 392 | -108 | Cameo (current) 0.2×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
-| `latinsyndicate_engineer` | Engineer | 5,000 | 11,043 | +6,043 | 500 | 392 | -108 | Cameo (current) 0.2×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `futuretech_engineer` | Engineer | 5,000 | 11,347 | +6,347 | 500 | 395 | -105 | Cameo (current) 0.2×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `latinsyndicate_engineer` | Engineer | 5,000 | 11,347 | +6,347 | 500 | 395 | -105 | Cameo (current) 0.2×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
 | `naxis_slaveoverseer` | slav | 20,000 | 17,889 | -2,111 | 500 | 120 | -380 | Cameo (current) 1.0×, Romanov's Veng. 0.8× |
 | `ordos_saboteur` | Saboteur | 12,000 | 12,961 | +961 | 300 | 548 | +248 | Cameo (current) 0.6×, Mental Omega 0.7× |
 | `protoss_hightemplar` | High Templar | 35,000 | 26,458 | -8,542 | 800 | 748 | -52 | Cameo (current) 1.8×, StarCraft BW 1.0× |
-| `ra1_allies_mechanic` | mech | 7,500 | 14,228 | +6,728 | 500 | 408 | -92 | Cameo (current) 0.4×, Red Alert 1 1.2×, Romanov's Veng. 0.8× |
-| `ra1_allies_medic` | medi | 10,000 | 20,617 | +10,617 | 500 | 306 | -194 | Cameo (current) 0.5×, CnC Reloaded 1.0×, Red Alert 1 1.6×, Romanov's Veng. 1.0×, StarCraft BW 1.5×, Tiberian Sun 1.0× |
-| `ra1_engineer` | Engineer | 5,000 | 11,043 | +6,043 | 500 | 392 | -108 | Cameo (current) 0.2×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `ra1_allies_mechanic` | mech | 7,500 | 15,492 | +7,992 | 500 | 406 | -94 | Cameo (current) 0.4×, Combined Arms 1.0×, Red Alert 1 1.2×, Romanov's Veng. 0.8× |
+| `ra1_allies_medic` | medi | 10,000 | 19,898 | +9,898 | 500 | 269 | -231 | Cameo (current) 0.5×, CnC Reloaded 1.0×, Combined Arms 1.0×, Red Alert 1 1.6×, Romanov's Veng. 1.0×, Shattered Paradise 0.8×, StarCraft BW 1.5×, Tiberian Sun 1.0× |
+| `ra1_engineer` | Engineer | 5,000 | 11,347 | +6,347 | 500 | 395 | -105 | Cameo (current) 0.2×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
 | `ra2_allies_chronolegionnaire` | Chrono Legionnaire | 35,000 | 22,369 | -12,631 | 1,500 | 990 | -510 | Cameo (current) 1.8×, CnC Reloaded 1.0×, RA2 vanilla 1.0×, RA2/YR (raw INI) 1.0×, Yuri's Revenge 1.0× |
-| `ra2_allies_engineer` | Engineer | 5,000 | 11,043 | +6,043 | 500 | 392 | -108 | Cameo (current) 0.2×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
-| `ra2_soviets_crazyivan` | Crazy Ivan | 10,000 | 18,103 | +8,103 | 600 | 412 | -188 | Cameo (current) 0.5×, CnC Reloaded 1.0×, Mental Omega 1.1×, RA2 vanilla 1.0×, RA2/YR (raw INI) 1.0×, Yuri's Revenge 1.0× |
-| `ra2_soviets_engineer` | Engineer | 5,000 | 11,043 | +6,043 | 500 | 392 | -108 | Cameo (current) 0.2×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
-| `steelconsortium_engineer` | Engineer | 5,000 | 11,043 | +6,043 | 500 | 392 | -108 | Cameo (current) 0.2×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
-| `terran_medic` | medi | 60,000 | 27,792 | -32,208 | 600 | 316 | -284 | Cameo (current) 3.0×, CnC Reloaded 1.0×, Red Alert 1 1.6×, Romanov's Veng. 1.0×, StarCraft BW 1.5×, Tiberian Sun 1.0× |
-| `tkm_engineer` | Engineer | 5,000 | 11,043 | +6,043 | 500 | 392 | -108 | Cameo (current) 0.2×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
-| `ts_gdi_engineer` | Engineer | 10,000 | 12,043 | +2,043 | 600 | 401 | -199 | Cameo (current) 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
-| `ts_gdi_medic` | medi | 10,000 | 20,617 | +10,617 | 500 | 306 | -194 | Cameo (current) 0.5×, CnC Reloaded 1.0×, Red Alert 1 1.6×, Romanov's Veng. 1.0×, StarCraft BW 1.5×, Tiberian Sun 1.0× |
-| `ts_nod_engineer` | Engineer | 10,000 | 12,043 | +2,043 | 600 | 401 | -199 | Cameo (current) 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
-| `yuri_engineer` | Engineer | 5,000 | 11,043 | +6,043 | 500 | 392 | -108 | Cameo (current) 0.2×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `ra2_allies_engineer` | Engineer | 5,000 | 11,347 | +6,347 | 500 | 395 | -105 | Cameo (current) 0.2×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `ra2_soviets_crazyivan` | Crazy Ivan | 10,000 | 20,809 | +10,809 | 600 | 434 | -166 | Cameo (current) 0.5×, CnC Reloaded 1.0×, Combined Arms 2.4×, Mental Omega 1.1×, RA2 vanilla 1.0×, RA2/YR (raw INI) 1.0×, Yuri's Revenge 1.0× |
+| `ra2_soviets_engineer` | Engineer | 5,000 | 11,347 | +6,347 | 500 | 395 | -105 | Cameo (current) 0.2×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `steelconsortium_engineer` | Engineer | 5,000 | 11,347 | +6,347 | 500 | 395 | -105 | Cameo (current) 0.2×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `terran_medic` | medi | 60,000 | 24,893 | -35,107 | 600 | 275 | -325 | Cameo (current) 3.0×, CnC Reloaded 1.0×, Combined Arms 1.0×, Red Alert 1 1.6×, Romanov's Veng. 1.0×, Shattered Paradise 0.8×, StarCraft BW 1.5×, Tiberian Sun 1.0× |
+| `tkm_engineer` | Engineer | 5,000 | 11,347 | +6,347 | 500 | 395 | -105 | Cameo (current) 0.2×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `ts_gdi_engineer` | Engineer | 10,000 | 12,162 | +2,162 | 600 | 403 | -197 | Cameo (current) 0.5×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `ts_gdi_medic` | medi | 10,000 | 19,898 | +9,898 | 500 | 269 | -231 | Cameo (current) 0.5×, CnC Reloaded 1.0×, Combined Arms 1.0×, Red Alert 1 1.6×, Romanov's Veng. 1.0×, Shattered Paradise 0.8×, StarCraft BW 1.5×, Tiberian Sun 1.0× |
+| `ts_nod_engineer` | Engineer | 10,000 | 12,162 | +2,162 | 600 | 403 | -197 | Cameo (current) 0.5×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
+| `yuri_engineer` | Engineer | 5,000 | 11,347 | +6,347 | 500 | 395 | -105 | Cameo (current) 0.2×, Combined Arms 0.5×, RA2 vanilla 0.6×, RA2/YR (raw INI) 0.6×, Red Alert 1 0.5×, Romanov's Veng. 0.8×, Shattered Paradise 0.8×, Tiberian Dawn 0.5×, Tiberian Sun 0.8×, Yuri's Revenge 0.6× |
 | `zerg_defiler` | Defiler | 80,000 | 56,569 | -23,431 | 1,400 | 990 | -410 | Cameo (current) 4.0×, StarCraft BW 2.0× |
 
 ## `tank_destroyer` — 2 member(s) with reference data
 
 | actor | source unit | HP now | HP target | Δ HP | cost now | cost target | Δ cost | sources pooled for HP |
 |---|---|--:|--:|--:|--:|--:|--:|---|
-| `ordos_tankdestroyer` | Tank Destroyer | 80,000 | 69,261 | -10,739 | 2,200 | 702 | -1,498 | Cameo (current) 4.0×, CnC Reloaded 3.8×, RA2 vanilla 3.2×, RA2/YR (raw INI) 3.2×, Yuri's Revenge 3.2× |
-| `ra2_allies_tankdestroyer` | Tank Destroyer | 145,000 | 78,009 | -66,991 | 1,500 | 650 | -850 | Cameo (current) 7.2×, CnC Reloaded 3.8×, RA2 vanilla 3.2×, RA2/YR (raw INI) 3.2×, Yuri's Revenge 3.2× |
+| `ordos_tankdestroyer` | Tank Destroyer | 80,000 | 78,955 | -1,045 | 2,200 | 762 | -1,438 | Cameo (current) 4.0×, CnC Reloaded 3.8×, Combined Arms 7.6×, RA2 vanilla 3.2×, RA2/YR (raw INI) 3.2×, Yuri's Revenge 3.2× |
+| `ra2_allies_tankdestroyer` | Tank Destroyer | 145,000 | 87,182 | -57,818 | 1,500 | 715 | -785 | Cameo (current) 7.2×, CnC Reloaded 3.8×, Combined Arms 7.6×, RA2 vanilla 3.2×, RA2/YR (raw INI) 3.2×, Yuri's Revenge 3.2× |
 
 ## Ranked — how far each Cameo unit sits from its synthesized HP target
 
@@ -253,64 +276,64 @@ The §15.3 payoff report. A large gap is not automatically a defect: Cameo delib
 
 | # | actor | class | HP now | HP target | ratio |
 |--:|---|---|--:|--:|--:|
-| 1 | `ra1_soviets_attackdog` | `melee` | 5,000 | 11,970 | 2.39× |
-| 2 | `ra2_allies_attackdog` | `melee` | 5,000 | 11,970 | 2.39× |
-| 3 | `ra2_soviets_attackdog` | `melee` | 5,000 | 11,970 | 2.39× |
-| 4 | `asianalliance_engineer` | `support` | 5,000 | 11,043 | 2.21× |
-| 5 | `engineer` | `support` | 5,000 | 11,043 | 2.21× |
-| 6 | `futuretech_engineer` | `support` | 5,000 | 11,043 | 2.21× |
-| 7 | `latinsyndicate_engineer` | `support` | 5,000 | 11,043 | 2.21× |
-| 8 | `ra1_engineer` | `support` | 5,000 | 11,043 | 2.21× |
-| 9 | `ra2_allies_engineer` | `support` | 5,000 | 11,043 | 2.21× |
-| 10 | `ra2_soviets_engineer` | `support` | 5,000 | 11,043 | 2.21× |
-| 11 | `steelconsortium_engineer` | `support` | 5,000 | 11,043 | 2.21× |
-| 12 | `tkm_engineer` | `support` | 5,000 | 11,043 | 2.21× |
-| 13 | `yuri_engineer` | `support` | 5,000 | 11,043 | 2.21× |
-| 14 | `ra1_allies_medic` | `support` | 10,000 | 20,617 | 2.06× |
-| 15 | `ts_gdi_medic` | `support` | 10,000 | 20,617 | 2.06× |
-| 16 | `ra1_allies_mechanic` | `support` | 7,500 | 14,228 | 1.90× |
-| 17 | `protoss_archon` | `line_breaker` | 350,000 | 41,833 | 0.12× |
-| 18 | `ra2_soviets_crazyivan` | `support` | 10,000 | 18,103 | 1.81× |
-| 19 | `ts_gdi_mammothmkii` | `epic_vehicle` | 1,200,000 | 250,648 | 0.21× |
-| 20 | `td_nod_stealthtank` | `missile_vehicle` | 17,500 | 30,689 | 1.75× |
-| 21 | `japan_scoutcar` | `scout_vehicle` | 25,000 | 43,301 | 1.73× |
-| 22 | `td_nod_reconbike` | `missile_vehicle` | 22,500 | 37,947 | 1.69× |
-| 23 | `td_nod_artillery` | `artillery` | 17,500 | 29,487 | 1.68× |
-| 24 | `td_nod_buggy` | `scout_vehicle` | 20,000 | 33,466 | 1.67× |
-| 25 | `cabal_avatar` | `high_tech_tank` | 1,000,000 | 334,664 | 0.33× |
-| 26 | `ra2_allies_miragetank` | `high_tech_tank` | 120,000 | 41,683 | 0.35× |
-| 27 | `ra1_allies_ranger` | `scout_vehicle` | 22,500 | 36,742 | 1.63× |
-| 28 | `forgotten_flametank` | `line_breaker` | 200,000 | 77,920 | 0.39× |
-| 29 | `td_nod_flametankmkii` | `line_breaker` | 200,000 | 77,920 | 0.39× |
-| 30 | `ra2_soviets_apocalypsetank` | `high_tech_tank` | 350,000 | 138,430 | 0.40× |
-| 31 | `ra2_allies_battlefortress` | `line_breaker` | 320,000 | 129,715 | 0.41× |
+| 1 | `asianalliance_engineer` | `support` | 5,000 | 11,347 | 2.27× |
+| 2 | `engineer` | `support` | 5,000 | 11,347 | 2.27× |
+| 3 | `futuretech_engineer` | `support` | 5,000 | 11,347 | 2.27× |
+| 4 | `latinsyndicate_engineer` | `support` | 5,000 | 11,347 | 2.27× |
+| 5 | `ra1_engineer` | `support` | 5,000 | 11,347 | 2.27× |
+| 6 | `ra2_allies_engineer` | `support` | 5,000 | 11,347 | 2.27× |
+| 7 | `ra2_soviets_engineer` | `support` | 5,000 | 11,347 | 2.27× |
+| 8 | `steelconsortium_engineer` | `support` | 5,000 | 11,347 | 2.27× |
+| 9 | `tkm_engineer` | `support` | 5,000 | 11,347 | 2.27× |
+| 10 | `yuri_engineer` | `support` | 5,000 | 11,347 | 2.27× |
+| 11 | `ra1_soviets_attackdog` | `melee` | 5,000 | 10,998 | 2.20× |
+| 12 | `ra2_allies_attackdog` | `melee` | 5,000 | 10,998 | 2.20× |
+| 13 | `ra2_soviets_attackdog` | `melee` | 5,000 | 10,998 | 2.20× |
+| 14 | `td_nod_stealthtank` | `missile_vehicle` | 17,500 | 37,628 | 2.15× |
+| 15 | `ra2_soviets_crazyivan` | `support` | 10,000 | 20,809 | 2.08× |
+| 16 | `ra1_allies_mechanic` | `support` | 7,500 | 15,492 | 2.07× |
+| 17 | `ts_gdi_juggernaut` | `artillery_tank` | 35,000 | 72,185 | 2.06× |
+| 18 | `ra1_allies_medic` | `support` | 10,000 | 19,898 | 1.99× |
+| 19 | `ts_gdi_medic` | `support` | 10,000 | 19,898 | 1.99× |
+| 20 | `asianalliance_viper` | `artillery` | 25,000 | 48,990 | 1.96× |
+| 21 | `td_nod_buggy` | `scout_vehicle` | 20,000 | 39,009 | 1.95× |
+| 22 | `ra1_allies_ranger` | `scout_vehicle` | 22,500 | 43,267 | 1.92× |
+| 23 | `protoss_archon` | `line_breaker` | 350,000 | 41,833 | 0.12× |
+| 24 | `td_nod_ssmlauncher` | `fire_support` | 20,000 | 36,342 | 1.82× |
+| 25 | `td_nod_artillery` | `artillery` | 17,500 | 31,341 | 1.79× |
+| 26 | `cabal_mantis` | `fire_support` | 35,000 | 62,610 | 1.79× |
+| 27 | `td_nod_reconbike` | `missile_vehicle` | 22,500 | 39,866 | 1.77× |
+| 28 | `ts_gdi_mammothmkii` | `epic_vehicle` | 1,200,000 | 285,430 | 0.24× |
+| 29 | `japan_scoutcar` | `scout_vehicle` | 25,000 | 43,301 | 1.73× |
+| 30 | `cabal_avatar` | `high_tech_tank` | 1,000,000 | 286,199 | 0.29× |
+| 31 | `td_nod_buggymkii` | `scout_vehicle` | 25,000 | 42,021 | 1.68× |
 | 32 | `ra2_soviets_flaktrooper` | `special_forces` | 10,000 | 15,946 | 1.59× |
-| 33 | `futuretech_scoutdroid` | `scout` | 30,000 | 47,434 | 1.58× |
-| 34 | `cabal_coredefender` | `epic_vehicle` | 2,000,000 | 850,127 | 0.43× |
-| 35 | `protoss_reaver` | `fire_support` | 275,000 | 117,260 | 0.43× |
-| 36 | `ts_gdi_mammothprototype` | `epic_vehicle` | 800,000 | 341,760 | 0.43× |
-| 37 | `steelconsortium_megalodon` | `line_breaker` | 450,000 | 201,246 | 0.45× |
-| 38 | `td_gdi_mammothtankmkiii` | `high_tech_tank` | 500,000 | 225,930 | 0.45× |
-| 39 | `terran_medic` | `support` | 60,000 | 27,792 | 0.46× |
-| 40 | `ts_gdi_disruptor` | `line_breaker` | 250,000 | 122,539 | 0.49× |
-| 41 | `td_nod_buggymkii` | `scout_vehicle` | 25,000 | 37,417 | 1.50× |
-| 42 | `yuri_magnetron` | `fire_support` | 65,000 | 32,761 | 0.50× |
-| 43 | `tkm_dronepodtruck` | `artillery` | 60,000 | 30,984 | 0.52× |
-| 44 | `ts_nod_elitecadre` | `special_forces` | 21,000 | 31,081 | 1.48× |
-| 45 | `ra2_soviets_rhinoheavytank` | `mbt` | 130,000 | 67,935 | 0.52× |
-| 46 | `td_gdi_humvee` | `scout_vehicle` | 27,500 | 40,620 | 1.48× |
-| 47 | `td_gdi_archerartillery` | `artillery_tank` | 35,000 | 18,708 | 0.53× |
-| 48 | `ra2_allies_tankdestroyer` | `tank_destroyer` | 145,000 | 78,009 | 0.54× |
-| 49 | `terran_vulture` | `light_tank` | 75,000 | 40,412 | 0.54× |
-| 50 | `ts_nod_stealthtank` | `high_tech_tank` | 80,000 | 44,874 | 0.56× |
-| 51 | `japan_grenadebuggy` | `scout_vehicle` | 60,000 | 34,641 | 0.58× |
-| 52 | `td_nod_ssmlauncher` | `fire_support` | 20,000 | 28,284 | 1.41× |
-| 53 | `ra1_soviets_v2rocketlauncher` | `artillery` | 30,000 | 42,426 | 1.41× |
-| 54 | `ra2_soviets_terrordrone` | `scout_vehicle` | 10,000 | 14,087 | 1.41× |
-| 55 | `td_gdi_predatortank` | `mbt` | 170,000 | 100,995 | 0.59× |
-| 56 | `terran_goliathmk2` | `high_tech_tank` | 175,000 | 104,583 | 0.60× |
-| 57 | `ts_nod_ticktank` | `mbt` | 100,000 | 62,692 | 0.63× |
-| 58 | `ts_nod_devilstongue` | `line_breaker` | 100,000 | 62,962 | 0.63× |
-| 59 | `ra1_soviets_mammothtank` | `high_tech_tank` | 375,000 | 236,975 | 0.63× |
-| 60 | `ts_gdi_juggernaut` | `artillery_tank` | 35,000 | 47,879 | 1.37× |
+| 33 | `ra1_soviets_v2rocketlauncher` | `artillery` | 30,000 | 47,622 | 1.59× |
+| 34 | `terran_medic` | `support` | 60,000 | 24,893 | 0.41× |
+| 35 | `ra2_allies_miragetank` | `high_tech_tank` | 120,000 | 50,253 | 0.42× |
+| 36 | `futuretech_scoutdroid` | `scout` | 30,000 | 47,434 | 1.58× |
+| 37 | `protoss_reaver` | `fire_support` | 275,000 | 117,260 | 0.43× |
+| 38 | `ts_gdi_mammothprototype` | `epic_vehicle` | 800,000 | 341,760 | 0.43× |
+| 39 | `cabal_coredefender` | `epic_vehicle` | 2,000,000 | 894,069 | 0.45× |
+| 40 | `forgotten_warriortank` | `fire_support` | 100,000 | 44,721 | 0.45× |
+| 41 | `steelconsortium_megalodon` | `line_breaker` | 450,000 | 201,246 | 0.45× |
+| 42 | `ts_gdi_juggernautmkii` | `artillery` | 50,000 | 77,522 | 1.55× |
+| 43 | `forgotten_flametank` | `line_breaker` | 200,000 | 89,980 | 0.45× |
+| 44 | `td_nod_flametankmkii` | `line_breaker` | 200,000 | 89,980 | 0.45× |
+| 45 | `td_gdi_mammothtankmkiii` | `high_tech_tank` | 500,000 | 228,186 | 0.46× |
+| 46 | `td_gdi_humvee` | `scout_vehicle` | 27,500 | 42,189 | 1.53× |
+| 47 | `ra2_soviets_apocalypsetank` | `high_tech_tank` | 350,000 | 163,334 | 0.47× |
+| 48 | `terran_marauder` | `heavy_infantry` | 90,000 | 43,203 | 0.48× |
+| 49 | `td_gdi_predatortank` | `mbt` | 170,000 | 82,972 | 0.49× |
+| 50 | `yuri_magnetron` | `fire_support` | 65,000 | 32,761 | 0.50× |
+| 51 | `ts_gdi_disruptor` | `line_breaker` | 250,000 | 128,455 | 0.51× |
+| 52 | `tkm_dronepodtruck` | `artillery` | 60,000 | 30,984 | 0.52× |
+| 53 | `ts_nod_elitecadre` | `special_forces` | 21,000 | 31,081 | 1.48× |
+| 54 | `ra1_allies_chronotank` | `epic_vehicle` | 75,000 | 110,357 | 1.47× |
+| 55 | `tkm_technicaltank` | `mbt` | 70,000 | 37,417 | 0.53× |
+| 56 | `td_gdi_archerartillery` | `artillery_tank` | 35,000 | 18,708 | 0.53× |
+| 57 | `ra1_soviets_teslatank` | `fire_support` | 40,000 | 58,455 | 1.46× |
+| 58 | `terran_vulture` | `light_tank` | 75,000 | 40,412 | 0.54× |
+| 59 | `ts_gdi_wolverine` | `fire_support` | 30,000 | 43,781 | 1.46× |
+| 60 | `ra2_allies_battlefortress` | `line_breaker` | 320,000 | 173,792 | 0.54× |
 

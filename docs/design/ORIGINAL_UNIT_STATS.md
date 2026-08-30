@@ -557,7 +557,7 @@ glass-cannon commandos trading HP for damage. A concrete precedent for our de-ho
 
 Both are **OpenRA mods → same engine as Cameo**, BUT **each mod sets its own power level**, so
 raw HP is **NOT** directly comparable (my earlier "directly comparable" was wrong — maintainer
-2026-07-25). Scale anchors (basic rifleman): **CA = 5000**, **SP GDI rifle = 15000**, **Cameo
+2026-07-25). Scale anchors (basic rifleman): **CA = 5000**, **SP GDI rifle = 12500** (corrected 2026-08-30: this said 15000; SP's `E1` Light Infantry resolves to 12,500 in the checkout — `tools/reference/extract_peer_units.py`), **Cameo
 scout anchor = 20000** — i.e. **Cameo runs the highest numbers (~4× CA, ~1.33× SP)**. So
 **normalize each mod to its own basic rifleman (= 1.00)** and read the *relative spread*, then map
 that onto Cameo's own scale. Both are crossovers like us, and — critically — **both DE-HOMOGENIZE
