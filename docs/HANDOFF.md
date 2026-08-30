@@ -1004,6 +1004,49 @@ not a no-op, and this note exists so nobody later reads it as one.
 162,192 under the retired rifle model. The methods disagree by 27%, and the distribution figure is
 the better-founded one.
 
+### 3.0aa — ⚔️ WEAPON LAYER PART 1 (2026-08-30): scale-free metrics, centred on first run
+
+Same distribution machinery, extended to `w_range`, `w_damage`, `w_burst`, `w_reload`, `w_dps`.
+Peer weapons resolve **100%** through `miniyaml.Ruleset.resolve_weapon`; 1,046 of 2,568 peer rows
+carry a resolved DPS (the rest are genuinely unarmed). **251 of 302** Cameo signatures now carry
+weapon metrics.
+
+| stat | HIGH-conf rows | median ratio | within 2× |
+|---|--:|--:|--:|
+| w_dps | 88 | **1.00×** | 62% |
+| w_damage | 96 | 1.07× | 65% |
+| w_reload | 114 | 1.06× | 80% |
+| w_range | 114 | 1.13× | 89% |
+
+`w_dps` landing at **exactly 1.00×** on first run is the same kind of external confirmation the
+chassis layer gave: Cameo's sustained-output distribution already matches the genre's.
+
+⛔ **ARMOR-AWARE EFFECTIVE DPS IS NOT IN THIS LAYER, AND THAT IS A MEASURED DECISION.**
+`docs/reference/PEER_ARMOR_VOCABULARIES.md` records why: **76 distinct `Versus` tags across the 13
+mods, and only FIVE shared by six or more** — `None`, `Light`, `Heavy`, `Wood`, `Concrete`.
+Generals Alpha declares 37, several **per-unit** (`vehicle.battle_bus.crate-1`) which are
+targeting switches rather than an armor ladder; OpenRA Dune II declares **none at all**; Dune 2000
+ships both `none` and `None`. A universal mapping is not derivable from the data — it must be
+hand-authored per source with confidence, and guessing it would fabricate a taxonomy.
+
+⚠ **AND THE MEASUREMENT ITSELF NEARLY LIED.** `Versus` is a node whose **value is empty** and whose
+**children** are the armor rows, so a probe using `node.get("Versus")` reads the empty value and
+reports that the mod has no Versus. The first sweep came back "0 peers expose Versus" for **all
+13**. That is CLAUDE.md rule 8e in a new costume: the structure, not the field, is the trap.
+
+**§0a structure-debt gate.** A Cameo weapon still firing 2+ damage mains has a `K` that W24 is
+scheduled to move, so its weapon numbers are not a stable target. **110 of 302** signatures carry
+`structure_debt: true` — including the Apocalypse. The flag rides on the signature so a later
+pricing pass refuses them rather than silently pricing an input about to change.
+
+**Metric eligibility contract.** Each stat declares its own population predicate (`zero_is_real`,
+`requires`), because a unit with no weapon is not a unit with 0 DPS and a static defense is not a
+unit with speed 0. Folding those zeroes in drags every median and makes the geometric mean
+undefined.
+
+Apocalypse weapon signature: range 6,992 → **7,169** (near-exact), reload 63 → 77, damage
+12,004 → 23,264, DPS 353 → 481 — all flagged `structure_debt`, so none of it is a target yet.
+
 ### 3.0y — 📚 THE REFERENCE CORPUS, CLONED FROM SOURCE (2026-08-30): 25 sources, 15 OpenRA mods
 
 Every OpenRA reference mod is now cloned from its own repository and read through

@@ -124,10 +124,54 @@ LINEAGE_MEMBERS = {"RA2 vanilla", "Yuri's Revenge", "RA2/YR",
 EXCLUDE_CLASSES = {"epic_vehicle"}
 
 CHASSIS_STATS = ("hp", "speed", "turn_speed", "turn_ratio")
+
+# ── The weapon layer, PART 1: the scale-free metrics ─────────────────────────────────────────
+# These need no armor taxonomy, so they are measurable today. Armor-aware effective DPS is NOT
+# here: across the 13 peers there are 76 distinct `Versus` tags and only FIVE — None, Light,
+# Heavy, Wood, Concrete — are shared by six or more mods. Generals Alpha declares 37, some of them
+# per-unit; OpenRA Dune II declares none; Dune 2000 ships both `none` and `None`. A universal
+# mapping is not derivable from the data, so it must be hand-authored with per-source confidence.
+# Shipping a guessed taxonomy would fabricate exactly the kind of number this project keeps
+# getting burned by.
+WEAPON_STATS = ("w_range", "w_damage", "w_burst", "w_reload", "w_dps")
+
+# ── METRIC ELIGIBILITY CONTRACT ──────────────────────────────────────────────────────────────
+# Every metric declares its own population predicate, because "which rows count" differs per stat
+# and getting it wrong is silent. A unit with no weapon is not a unit with 0 DPS; a unit that
+# cannot move is not a unit with speed 0. Folding those zeroes into a distribution drags every
+# median and makes the geometric mean undefined outright.
+#
+#   zero_is_real  — is a literal 0 a meaningful value for this stat, or does it mean "absent"?
+#   requires      — the row must have a positive value here to be eligible at all.
+ELIGIBILITY = {
+    "hp":         {"zero_is_real": False, "requires": "hp"},
+    "speed":      {"zero_is_real": False, "requires": "speed"},
+    "turn_speed": {"zero_is_real": False, "requires": "turn_speed"},
+    "turn_ratio": {"zero_is_real": False, "requires": "turn_ratio"},
+    "w_range":    {"zero_is_real": False, "requires": "w_dps"},
+    "w_damage":   {"zero_is_real": False, "requires": "w_dps"},
+    "w_burst":    {"zero_is_real": True,  "requires": "w_dps"},
+    "w_reload":   {"zero_is_real": False, "requires": "w_dps"},
+    "w_dps":      {"zero_is_real": False, "requires": "w_dps"},
+}
+
+
+def eligible(row, stat):
+    """Does `row` belong in the population for `stat`? (see ELIGIBILITY)"""
+    rule = ELIGIBILITY.get(stat)
+    if not rule:
+        return row.get(stat) is not None
+    gate = row.get(rule["requires"])
+    if gate is None or gate <= 0:
+        return False
+    v = row.get(stat)
+    return v is not None and (v > 0 or rule["zero_is_real"])
 POPULATIONS = ("infantry", "vehicle", "aircraft", "ship", "defense")
 # Buildings are excluded from OVERALL: they are not mobile combat units, they outnumber everything
 # else in most rosters (1,137 of 2,568 peer rows), and letting them in would drag every median.
 COMBAT_TYPES = set(POPULATIONS)
+
+ALL_STATS = CHASSIS_STATS + WEAPON_STATS
 
 CAMEO_SECTION_TYPE = {"infantry": "infantry", "vehicles": "vehicle", "aircraft": "aircraft",
                       "naval": "ship", "defenses": "defense"}
@@ -227,6 +271,9 @@ def peer_rows():
             except ValueError:
                 return None
         hp, spd, turn = num("hp"), num("speed"), num("turn")
+        wep = {k: num(c) for k, c in (("w_range", "range"), ("w_damage", "dmg"),
+                                      ("w_burst", "burst"), ("w_reload", "reload"),
+                                      ("w_dps", "dps"))}
         limit = num("limit")
         if limit:                     # a mod's one-off epic/hero — see POPULATION RULE below
             continue
@@ -238,7 +285,7 @@ def peer_rows():
                      "type": d.get("type", "other"),
                      "turreted": (d.get("turret", "").lower() == "y"),
                      "hp": hp, "speed": spd, "turn_speed": turn,
-                     "turn_ratio": (spd / turn) if (spd and turn) else None})
+                     "turn_ratio": (spd / turn) if (spd and turn) else None, **wep})
     return rows
 
 
@@ -278,9 +325,38 @@ def cameo_rows():
                 turn = val("turn_speed") or val("turn_speed_air")
                 if hp is None:
                     continue
+                # Cameo's weapon numbers come from the ledger's own armaments, resolved the same
+                # way as the peers': damage summed over POSITIVE mains, burst inside the cycle.
+                arms = [a for a in (rec.get("armaments") or [])
+                        if isinstance(a, dict) and a.get("pricing")]
+
+                def anum(v):
+                    try:
+                        return float(str(v))
+                    except (TypeError, ValueError):
+                        return None
+
+                w, debt = {}, False
+                if arms:
+                    a = arms[0]
+                    mains = [wh for wh in (a.get("damage_warheads") or [])
+                             if (anum(wh.get("damage")) or 0) > 0]
+                    # §0a STRUCTURE DEBT: a weapon still firing 2+ damage mains has a `K` that is
+                    # scheduled to move under W24, so its weapon numbers are not a stable target
+                    # yet. The flag rides along on the signature so a later pricing pass can
+                    # refuse to trust them, rather than silently pricing an input about to change.
+                    debt = len(mains) > 1
+                    dmg = sum(anum(wh.get("damage")) or 0 for wh in mains)
+                    rel = anum(a.get("reloaddelay"))
+                    burst = anum(a.get("burst")) or 1
+                    cycle = (rel or 0) + (burst - 1) * 5
+                    w = {"w_range": anum(a.get("range")), "w_damage": dmg or None,
+                         "w_burst": burst, "w_reload": rel,
+                         "w_dps": ((dmg * burst) / cycle) if (dmg and cycle) else None}
                 out.append({"source": "Cameo", "id": name, "name": name, "type": kind,
                             "hp": hp, "speed": spd, "turn_speed": turn,
-                            "turn_ratio": (spd / turn) if (spd and turn) else None})
+                            "structure_debt": debt,
+                            "turn_ratio": (spd / turn) if (spd and turn) else None, **w})
     return out
 
 
@@ -297,8 +373,8 @@ def build_distributions(rows):
         entry = {}
         for pop, members in pops.items():
             stats = {}
-            for stat in CHASSIS_STATS:
-                agg = aggregates([m.get(stat) for m in members])
+            for stat in ALL_STATS:
+                agg = aggregates([m.get(stat) for m in members if eligible(m, stat)])
                 if agg:
                     stats[stat] = agg
             if stats:
@@ -340,7 +416,7 @@ def main():
         if not peers_for:
             continue
         sig, targets = {}, {}
-        for stat in CHASSIS_STATS:
+        for stat in ALL_STATS:
             pooled = collections.defaultdict(list)
             used = set()
             for p in peers_for:
@@ -372,7 +448,8 @@ def main():
                                  "confidence": ("HIGH" if len(used) >= 3 else
                                                 "MEDIUM" if len(used) == 2 else "LOW")}
         if targets:
-            signatures[c["id"]] = {"type": c["type"], "targets": targets, "signature": sig}
+            signatures[c["id"]] = {"type": c["type"], "targets": targets, "signature": sig,
+                                   "structure_debt": bool(c.get("structure_debt"))}
             report_rows.append((c, targets))
 
     print(f"Cameo actors with a reference signature: {len(report_rows)}")

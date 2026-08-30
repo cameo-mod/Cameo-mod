@@ -58,6 +58,73 @@ TYPE_TOKENS = [("aircraft", "aircraft"), ("infantry", "infantry"), ("cyborg", "i
                ("defense", "defense"), ("building", "building"), ("structure", "building")]
 
 
+# ── Weapon extraction: the SCALE-FREE half ───────────────────────────────────────────────────
+# Range, reload, burst, burst delays and raw damage need no armor taxonomy, so they are extracted
+# now. Armor-aware effective DPS is deliberately NOT here: measured across the 13 peers there are
+# 76 distinct Versus tags and only FIVE (None, Light, Heavy, Wood, Concrete) are shared by six or
+# more mods. Generals Alpha declares 37, several of them per-unit
+# (`vehicle.battle_bus.crate-1`); OpenRA Dune II declares none at all; Dune 2000 ships both
+# `none` and `None`. A universal mapping is therefore not derivable from the data and must be
+# hand-authored with per-source confidence — that is the next layer, and inventing it here would
+# be fabricating a taxonomy.
+#
+# ⚠ `Versus` is a NODE WITH AN EMPTY VALUE whose CHILDREN are the armor rows. A probe using
+# `node.get("Versus")` reads the empty value and concludes the mod has no Versus at all — which
+# is exactly the wrong answer, and is how this pass nearly recorded "peers expose no Versus".
+def weapon_stats(rules, node):
+    """Primary armament's scale-free weapon numbers, resolved through the weapon chain."""
+    weapons = [c.get("Weapon") for c in node.children
+               if c.key.split("@")[0] == "Armament" and c.get("Weapon")]
+    if not weapons:
+        return {}
+    try:
+        w = rules.resolve_weapon(weapons[0])
+    except Exception:
+        return {}
+    if w is None:
+        return {}
+
+    def num(v):
+        if v is None:
+            return None
+        v = str(v).strip()
+        # OpenRA ranges are cell distances: "6c0" = 6 cells, "6c512" = 6.5 cells.
+        if "c" in v:
+            a, _, b = v.partition("c")
+            try:
+                return int(a) * 1024 + int(b or 0)
+            except ValueError:
+                return None
+        try:
+            return float(v)
+        except ValueError:
+            return None
+
+    damage = 0
+    mains = 0
+    for c in w.children:
+        if not c.key.startswith("Warhead"):
+            continue
+        d = num(c.get("Damage"))
+        if d and d > 0:
+            damage += d
+            mains += 1
+    burst = num(w.get("Burst")) or 1
+    reload_delay = num(w.get("ReloadDelay"))
+    delays = [num(x) for x in (w.get("BurstDelays") or "").replace(",", " ").split() if x]
+    delays = [d for d in delays if d]
+    burst_time = sum(delays) if delays else (burst - 1) * 5   # OpenRA's default BurstDelays is 5
+    cycle = (reload_delay or 0) + burst_time
+    return {"weapon": weapons[0], "w_range": num(w.get("Range")),
+            "w_min_range": num(w.get("MinRange")), "w_damage": damage or None,
+            "w_mains": mains or None, "w_burst": burst,
+            "w_reload": reload_delay,
+            # Sustained output over the full cycle, in damage per tick. Burst is inside the
+            # cycle, not on top of it — a 4-round burst with a 40-tick reload is not 4x a
+            # single shot, which is the most common way this number gets inflated.
+            "w_dps": ((damage * burst) / cycle) if (damage and cycle) else None}
+
+
 def unit_type(node):
     """infantry | vehicle | aircraft | ship | defense | building | other."""
     queue = ""
@@ -298,10 +365,12 @@ def extract(mod_id):
         # filters it, where the choice is visible and auditable.
         limit = trait(node, ("Buildable",), "BuildLimit")
         ts, turreted = turn_speed(node)
+        wep = weapon_stats(rules, node)
         rows.append({
             "id": actor, "name": unit_name(actor, node, fluent),
             "type": unit_type(node), "turn_speed": ts, "turreted": turreted,
             "limit": int(limit) if (limit and str(limit).strip().isdigit()) else None,
+            **wep,
             "hp": int(hp), "cost": int(cost) if cost else None,
             "speed": int(speed) if speed else None,
             "x_hp": int(hp) / rhp,
@@ -356,8 +425,8 @@ def main():
         if data["note"]:
             out += ["", data["note"]]
         out += ["", "| id | unit | type | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | "
-                "Turret | Limit |",
-                "|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|"]
+                "Turret | Limit | Range | Dmg | Burst | Reload | DPS |",
+                "|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|"]
         for r in sorted(data["rows"], key=lambda x: -x["x_hp"]):
             xc = f"{r['x_cost']:.2f}" if r["x_cost"] else "—"
             cost = f"{r['cost']:,}" if r["cost"] else "—"
@@ -366,7 +435,11 @@ def main():
                        f"{r['x_hp']:.2f} | {cost} | {xc} | {spd} | "
                        f"{r['turn_speed'] if r['turn_speed'] else '—'} | "
                        f"{'Y' if r['turreted'] else 'n'} | "
-                       f"{r['limit'] if r['limit'] else '—'} |")
+                       f"{r['limit'] if r['limit'] else '—'} | "
+                       + " | ".join(
+                           (f"{r.get(k):,.0f}" if isinstance(r.get(k), (int, float)) else "—")
+                           for k in ("w_range", "w_damage", "w_burst", "w_reload", "w_dps"))
+                       + " |")
         out.append("")
 
     if args.dry_run:
