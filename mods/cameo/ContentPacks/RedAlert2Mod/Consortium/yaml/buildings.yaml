@@ -362,7 +362,6 @@ steelconsortium_orbitalcannonactivator:
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
-		-BuildLimit:
 		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_consortiumbattlelab, !steelconsortium_orbitalcannonactivator_swlimit, ~techlevel.superweapons
 		Description: actor_cgionc.description
 	Tooltip:

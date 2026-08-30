@@ -151,8 +151,8 @@ PRESERVED_HASHES = {
 }
 PINNED_HASHES = {
     "FutureMechPlasma_elite": "ef35bc084c537718c291bbfa87175aaa51cfa5911e731849be89f4c606f54781",
-    "PositronBounce1": "b741e813e7561e087e5bd30aa0e32fb50ef7bf35ddc2082a7bb44d27659370ac",
-    "PositronBounce2": "bf2f8eb0155b7c300b3cd5d950da185dd65f86b7f0665174ad999ebc0b9b5d32",
+    "PositronBounce1": "d251b401a3cc2d80433106dae4e95efa25c9374e1bcffa6cc3f0c1f57d64e4ed",
+    "PositronBounce2": "034519ff967d2ebaf99606ff5040b99212a5d436988a1b7cf2ddfb7eb74bdcb5",
 }
 
 CONTRACT_FIELDS = (

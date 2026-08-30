@@ -411,10 +411,16 @@ NaxiSniper:
 	Range: 7777
 	Warhead@Sniper_Light:
 		Damage: 24000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 24000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 12
+		Spread: 1
+		Falloff: 100, 0
 
 NaxiSniper_elite:
 	Inherits: NaxiSniper
@@ -966,6 +972,7 @@ NaxQuadCannon_elite:
 	BurstDelays: 3
 
 NaxQuadCannon_AA:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: NaxQuadCannon
 	Inherits@compat: ^NaxQuadCannonFlakGroundWaterCompatibility
 	ValidTargets: Air
@@ -984,7 +991,7 @@ NaxQuadCannon_AA:
 		PercentageScale: 4000
 	Warhead@NaxFlakAllyCounted:
 		ValidTargets: Air
-		Damage: 500
+		Damage: 1500
 	Warhead@NaxFlakAllyUncounted:
 		ValidTargets: Air
 		Damage: 1000
@@ -992,6 +999,12 @@ NaxQuadCannon_AA:
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
+	-Warhead@Flak_Medium:
+	-Warhead@NaxFlakGroundWater:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 7000
+		PercentageScale: 2843
 
 NaxQuadCannon_AA_elite:
 	Inherits: NaxQuadCannon_AA

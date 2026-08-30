@@ -331,7 +331,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
@@ -345,21 +345,21 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
@@ -1738,7 +1738,7 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "15000",
+        "damage": "34000",
         "falloff": "100, 51, 0",
         "spread": "35",
         "tag": "MissileQuantum_MediumFlatCompatibility",
@@ -7488,13 +7488,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": null,
@@ -7502,7 +7495,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
+        "damage": "24000",
         "falloff": null,
         "spread": null,
         "tag": "RailgunWeapon",
@@ -7666,17 +7659,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7703,17 +7689,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7796,17 +7775,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7832,17 +7804,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -10300,13 +10265,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": null,
@@ -10314,7 +10272,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": null,
         "spread": null,
         "tag": "RailgunWeapon",
@@ -10395,13 +10353,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": null,
@@ -10409,7 +10360,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
+        "damage": "24000",
         "falloff": null,
         "spread": null,
         "tag": "RailgunWeapon",

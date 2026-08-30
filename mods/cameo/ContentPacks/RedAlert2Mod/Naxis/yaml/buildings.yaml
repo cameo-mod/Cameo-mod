@@ -550,7 +550,7 @@ naxis_naxibunker:
 	Inherits@gar: ^ClearableGarrison
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@Atlantikwall: ^Atlantikwall
-	Inherits: ^BuildingPlugProducer
+	Inherits@plug: ^BuildingPlugProducer
 	Tooltip:
 		Name: Naxi Bunker
 	Building:
@@ -574,6 +574,7 @@ naxis_naxibunker:
 		QuantizedFacings: 8
 	Selectable:
 		Bounds: 1792, 1792, 0, 0
+		Class: naxis_naxibunker
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
@@ -590,10 +591,9 @@ naxis_naxibunker:
 		Modifier: 50
 	RevealsShroud:
 		Range: 6666
-	Selectable:
-		Class: naxis_naxibunker
 	ActorStatValues:
 		Stats: Armor, Sight, Cargo, Kills, Experience
+		Upgrades: naxis_upgrade_atlantikwall
 	AttackTurreted:
 		Voice: Attack
 	Armament@mortar:
@@ -621,8 +621,6 @@ naxis_naxibunker:
 		RequiresCondition: !build-incomplete && aa
 		Sequence: turret-aa
 	ProvidesPrerequisite@buildingname:
-	ActorStatValues:
-		Upgrades: naxis_upgrade_atlantikwall
 	Pluggable:
 		Conditions:
 			naxis_machinegunbunkeraddon: mg
@@ -699,7 +697,6 @@ naxis_naxirocketsilo:
 	Tooltip:
 		Name: Naxi Rocket Silo
 	Buildable:
-		-BuildLimit:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100

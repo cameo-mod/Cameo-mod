@@ -263,14 +263,14 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "22000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
+        "damage": "22000",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "533",
         "tag": "Sonic_Heavy",
@@ -567,6 +567,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "24000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8000",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "400",
@@ -575,18 +582,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6144",
-      "reloaddelay": "60",
+      "reloaddelay": "32",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "TSHellfire",
        "^Warhead_Sonic_Medium",
        "^Projectile_TS_Missile_Medium",
        "^Effect_Sonic_Medium"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_Sonic_Medium"
       ],
       "weapon": "TSHellfireSonic",
@@ -683,10 +692,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "400",
-        "tag": "Sonic_Medium",
+        "damage": "24000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -698,20 +707,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6138",
       "reloaddelay": "28",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "TSHellfireSonic",
+       "TSZoneHellfire",
        "^Warhead_Sonic_Heavy",
        "^Projectile_TS_Missile_Heavy",
        "^Effect_Sonic_Heavy"
       ],
       "warheads": [
-       "^Warhead_Sonic_Medium",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_Sonic_Heavy"
       ],
       "weapon": "TSZoneHellfireSonic",
@@ -889,7 +898,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
      "v": "1000"
@@ -904,12 +913,8 @@
     "name": "Drop Pod Uplink",
     "prerequisites": [
      "~ts_gdi_upgradecenter",
-     "!ionc",
      "!droppod",
      "~techlevel.superweapons"
-    ],
-    "queue": [
-     "BuildingAddons"
     ]
    },
    "ts_gdi_dropshipbay": {
@@ -1047,7 +1052,6 @@
     "name": "Ion Cannon Uplink",
     "prerequisites": [
      "~ts_gdi_upgradecenter",
-     "!ionc",
      "!droppod",
      "!tsionc",
      "~techlevel.superweapons"
@@ -2081,14 +2085,14 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "18000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "233",
         "tag": "Concussion_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "12000",
+        "damage": "18000",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "266",
         "tag": "Sonic_Light",
@@ -2098,8 +2102,8 @@
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "6151",
-      "reloaddelay": "50",
+      "range": "6656",
+      "reloaddelay": "45",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
@@ -2161,14 +2165,14 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "18000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "233",
         "tag": "Concussion_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "12000",
+        "damage": "18000",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "266",
         "tag": "Sonic_Light",
@@ -2178,8 +2182,8 @@
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "6151",
-      "reloaddelay": "50",
+      "range": "6656",
+      "reloaddelay": "45",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
@@ -2481,7 +2485,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
@@ -2526,7 +2530,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "5873",
+      "range": "6125",
       "reloaddelay": "26",
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@Upgrade",
@@ -2550,7 +2554,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
@@ -2595,7 +2599,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "5873",
+      "range": "6125",
       "reloaddelay": "26",
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@UpgradeGARRISONED",
@@ -3292,13 +3296,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunGrenadeEnemy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
@@ -3306,7 +3303,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "ShotgunShrapnelEnemy",
@@ -3410,13 +3407,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunGrenadeEnemy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
@@ -3424,7 +3414,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "ShotgunShrapnelEnemy",
@@ -6820,7 +6810,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "5120",
+      "range": "6520",
       "reloaddelay": "45",
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",

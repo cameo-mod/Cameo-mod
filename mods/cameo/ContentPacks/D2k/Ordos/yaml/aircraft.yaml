@@ -86,8 +86,6 @@ ordos_airmine:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@Cloak: ^CloakedAircraft
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
-	AutoTarget:
-		InitialStance: ReturnFire
 	Valued:
 		Cost: 500
 	Buildable:
@@ -945,6 +943,7 @@ carryall_huskvtol.ordos:
 	FallsToEarth:
 		Moves: False
 		Velocity: 0c128
+		Explosion: D2KUnitExplodeLarge
 	Aircraft:
 		TurnSpeed: 16
 		CanSlide: True
@@ -952,8 +951,6 @@ carryall_huskvtol.ordos:
 	RenderSprites:
 		Image: ordos_advancedcarryall
 		PlayerPalette: player_rgba
-	FallsToEarth:
-		Explosion: D2KUnitExplodeLarge
 
 # d2k_emperor_worm:
 # 	Inherits: ^DINO

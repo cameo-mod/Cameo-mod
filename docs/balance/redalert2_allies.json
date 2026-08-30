@@ -1524,7 +1524,7 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "10000",
         "falloff": "100, 70, 30, 0",
         "spread": "400",
         "tag": "MissileAA_Heavy",
@@ -2654,7 +2654,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
@@ -2680,13 +2680,6 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
@@ -2995,15 +2988,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3030,15 +3023,15 @@
       "damage_warheads": [
        {
         "damage": "88000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "44",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3064,15 +3057,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3100,15 +3093,15 @@
       "damage_warheads": [
        {
         "damage": "88000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "44",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -4757,24 +4750,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4882,15 +4861,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -6077,15 +6056,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -6205,24 +6184,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -6330,15 +6295,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -7525,15 +7490,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -7655,24 +7620,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -7780,15 +7731,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -8975,15 +8926,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -9105,24 +9056,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -9230,15 +9167,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -10425,15 +10362,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -10554,24 +10491,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -10679,15 +10602,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -11874,15 +11797,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -12003,24 +11926,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -12128,15 +12037,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -13323,15 +13232,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }

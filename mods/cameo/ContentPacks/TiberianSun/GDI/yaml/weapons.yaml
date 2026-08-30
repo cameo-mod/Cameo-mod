@@ -36,7 +36,7 @@ TS30mmRail:
 		HelixRadius: 16
 	ReloadDelay: 26
 	Burst: 3
-	Range: 5873
+	Range: 6125
 	BurstDelays: 2
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 2000
@@ -57,7 +57,7 @@ TS30mmRail:
 	-Warhead@RailgunExtraDamage:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 16000
 		PercentageScale: 0
 
 TS120mmRail:
@@ -272,9 +272,9 @@ KodiakCannonSonic:
 	Report: tnkfire4.aud
 	ValidTargets: Ground, Water
 	Warhead@CannonHE_Heavy:
-		Damage: 8000
+		Damage: 22000
 	Warhead@Sonic_Heavy:
-		Damage: 8000
+		Damage: 22000
 TSSonicWeaponEffect:
 	ReloadDelay: 60
 	Range: 6144
@@ -533,7 +533,6 @@ TSHoverMissile:
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^ShrapnelWeapon
 	ValidTargets: Ground, Water, Air
-	Report: missile6.aud
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 8
@@ -576,11 +575,10 @@ TSHoverMissile:
 
 TSDestroyerMissiles:
 	Inherits@collapsewh: ^Warhead_MissileHE_Medium
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^ShrapnelWeapon
+	Inherits@flak: ^FlakWeapon
+	Inherits@missile: ^MediumMissile
+	Inherits@shrapnel: ^ShrapnelWeapon
 	ValidTargets: Ground, Water, Air
-	Report: missile6.aud
 	ReloadDelay: 60
 	Burst: 4
 	BurstDelays: 4
@@ -665,8 +663,6 @@ TSMammothTusk2II_AA:
 	ReloadDelay: 92
 	Burst: 2
 	BurstDelays: 8
-	Projectile: Missile
-		TrailImage: large_trail
 	Warhead@MissileAP_Heavy:
 		Damage: 60000
 		ValidTargets: Air
@@ -674,10 +670,11 @@ TSMammothTusk2II_AA:
 		Explosions: small_building
 
 TSHellfireSonic:
+	Inherits: TSHellfire
 	Inherits@wh: ^Warhead_Sonic_Medium
 	Inherits@proj: ^Projectile_TS_Missile_Medium
 	Inherits@fx: ^Effect_Sonic_Medium
-	ReloadDelay: 60
+	ReloadDelay: 32
 	Range: 6144
 	Report: orcamis1.aud
 	ValidTargets: Ground, Water, Air
@@ -701,7 +698,7 @@ TSZoneHellfire:
 	Range: 6138
 
 TSZoneHellfireSonic:
-	Inherits: TSHellfireSonic
+	Inherits: TSZoneHellfire
 	Inherits@wh: ^Warhead_Sonic_Heavy
 	Inherits@proj: ^Projectile_TS_Missile_Heavy
 	Inherits@fx: ^Effect_Sonic_Heavy
@@ -862,7 +859,8 @@ TSShotgun:
 	Warhead@ShotgunGrenadeAlly:
 		Damage: 2000
 	Warhead@ShotgunShrapnelEnemy:
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@ShotgunShrapnelAlly:
 		Damage: 2000
 	Warhead@ShotgunTankDestroyer:
@@ -871,6 +869,7 @@ TSShotgun:
 		Damage: 4000
 	Warhead@ShotgunChaingun:
 		Damage: 4000
+	-Warhead@ShotgunGrenadeEnemy:
 
 TSJumpCannon:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
@@ -908,6 +907,7 @@ TSAssaultCannonSonic:
 	Burst: 2
 	BurstDelays: 2
 	Range: 6305
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Inaccuracy: 250
 	Warhead@Flak_Medium: AreaDamage
@@ -919,7 +919,7 @@ TSAssaultCannonSonic:
 	-Warhead@Flak_Medium:
 	-Warhead@Sonic_Medium:
 	Warhead@Sonic_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 4988
 
@@ -936,7 +936,7 @@ TSAssaultCannonTal:
 		Speed: 2000
 		Inaccuracy: 200
 	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 TSAssaultCannonTalSonic:
 	Inherits@roleflat: ^Compatibility_Sonic_MediumFlat
@@ -946,6 +946,8 @@ TSAssaultCannonTalSonic:
 	Inherits@fx: ^Effect_Sonic_Shell
 	Report: 120mmf.aud
 	ReloadDelay: 45
+	Range: 6520
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
@@ -955,7 +957,7 @@ TSAssaultCannonTalSonic:
 	-Warhead@Bullet_Medium:
 	-Warhead@Sonic_Medium:
 	Warhead@Sonic_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 6244
 
@@ -1039,14 +1041,7 @@ TSAAPCCannon:
 	ReloadDelay: 10
 	Range: 6263
 	ValidTargets: Ground, Water, Air
-	Warhead@Flak_Medium:
-	ValidTargets: Ground, Water, Air
 		Damage: 2000
-	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium:
-		Damage: 2000
-	ValidTargets: Ground, Water, Air
-	ValidTargets: Ground, Water, Air
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:

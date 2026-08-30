@@ -813,6 +813,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -834,15 +841,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -854,13 +853,6 @@
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -871,6 +863,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "NaxQuadCannon",
        "^NaxQuadCannonFlakGroundWaterCompatibility"
       ],
@@ -886,6 +879,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -907,15 +907,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -926,13 +918,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -1374,6 +1359,13 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -1395,15 +1387,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -1414,13 +1398,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -1719,6 +1696,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -1740,15 +1724,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -1759,13 +1735,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -3696,15 +3665,15 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3733,15 +3702,15 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3767,15 +3736,15 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3805,15 +3774,15 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -4951,6 +4920,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -4972,15 +4948,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -4991,13 +4959,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -5023,6 +4984,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5044,15 +5012,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -5063,13 +5023,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -5095,6 +5048,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5116,15 +5076,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -5135,13 +5087,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -5167,6 +5112,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5188,15 +5140,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -5207,13 +5151,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -5423,6 +5360,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5444,15 +5388,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -5463,13 +5399,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -5494,6 +5423,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5515,15 +5451,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -5534,13 +5462,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -9575,6 +9496,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -9596,15 +9524,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -9615,13 +9535,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -9646,6 +9559,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -9667,15 +9587,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -9686,13 +9598,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],
@@ -10477,6 +10382,13 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -10498,15 +10410,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -10518,13 +10422,6 @@
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -10535,6 +10432,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "NaxQuadCannon",
        "^NaxQuadCannonFlakGroundWaterCompatibility"
       ],
@@ -10550,6 +10448,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -10571,15 +10476,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
+        "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyCounted",
@@ -10590,13 +10487,6 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "NaxFlakGroundWater",
         "type": "AreaDamage"
        }
       ],

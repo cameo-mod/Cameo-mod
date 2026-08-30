@@ -475,8 +475,8 @@ TSGrenadeSonic:
 	Inherits@wh2: ^Warhead_Sonic_Light
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
-	ReloadDelay: 50
-	Range: 6151
+	ReloadDelay: 45
+	Range: 6656
 	Report: toss1.aud
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -491,10 +491,10 @@ TSGrenadeSonic:
 		ContrailEndColor: FFFFFF22
 	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water
-		Damage: 12000
+		Damage: 18000
 	Warhead@Sonic_Light:
 		ValidTargets: Ground, Water
-		Damage: 12000
+		Damage: 18000
 TSGrenadeAA:
 	Inherits: TSGrenade
 	Range: 6512
@@ -1308,7 +1308,7 @@ TSAssaultCannon:
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 TSLaserRaiderCannon:
@@ -1346,7 +1346,6 @@ TSEngineerPistol:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
-	ReloadDelay: 60
 	Report: silencer.aud
 	ReloadDelay: 25
 	Range: 4303

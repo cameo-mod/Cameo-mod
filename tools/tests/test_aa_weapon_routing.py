@@ -10,7 +10,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "tools/audit")]
 
 from audit_three_way_split import main_warhead_nodes, main_warheads
-from audit_warhead_split import ROUTING_REVEALED_BROADCASTS, classify_warheads
+from audit_warhead_split import ROUTING_REVEALED_BROADCASTS
 from miniyaml import Ruleset
 
 
@@ -20,27 +20,27 @@ class AaWeaponRoutingTests(unittest.TestCase):
         cls.rules = Ruleset(ROOT)
 
     def assert_main_warheads_target(self, weapon_name: str, targets: str,
-                                    expected_mains: set[str]):
+                                    expected_mains: dict[str, str]):
         weapon = self.rules.resolve_weapon(weapon_name)
         self.assertIsNotNone(weapon, weapon_name)
         self.assertEqual(targets, weapon.child("ValidTargets").value, weapon_name)
         mains = set(main_warheads(weapon))
-        self.assertEqual(expected_mains, mains, weapon_name)
-        for key in mains:
+        self.assertEqual(set(expected_mains), mains, weapon_name)
+        for key, damage in expected_mains.items():
             warhead = weapon.child(f"Warhead@{key}")
             self.assertIsNotNone(warhead, f"{weapon_name}/{key}")
-            self.assertEqual("2000", warhead.child("Damage").value,
+            self.assertEqual(damage, warhead.child("Damage").value,
                              f"{weapon_name}/{key}")
             self.assertEqual(targets, warhead.child("ValidTargets").value,
                              f"{weapon_name}/{key}")
 
     def test_flak_23_ground_and_air_routes_match_their_armaments(self):
-        mains = {"Bullet_Medium", "Flak_Medium"}
+        mains = {"Flak_MediumFlatCompatibility": "4000"}
         self.assert_main_warheads_target("FLAK-23-AG", "Ground, Water", mains)
         self.assert_main_warheads_target("FLAK-23-AA", "Air", mains)
 
     def test_manifold_ground_and_air_routes_match_their_armaments(self):
-        mains = {"Concussion_Light", "CannonHE_Heavy", "Bullet_Medium"}
+        mains = {"Bullet_MediumFlatCompatibility": "6000"}
         self.assert_main_warheads_target("ManifoldMG", "Ground, Water", mains)
         self.assert_main_warheads_target("ManifoldMG_AA", "Air", mains)
 
@@ -48,8 +48,14 @@ class AaWeaponRoutingTests(unittest.TestCase):
         expected = {
             "ArmoredCarMG_AA": {"Bullet_Medium": "8000",
                                  "ArmoredCarGroundCompatibility": "8000"},
-            "NaxQuadCannon_AA": {"Flak_Medium": "5000",
-                                  "NaxFlakGroundWater": "2000"},
+            "NaxQuadCannon_AA": {
+                "Flak_MediumFlatCompatibility": "7000"},
+            "NaxQuadCannon_AA_elite": {
+                "Flak_MediumFlatCompatibility": "7000"},
+            "SkyMageCannon_AA": {
+                "Flak_MediumFlatCompatibility": "7000"},
+            "SkyMageCannon_AA_elite": {
+                "Flak_MediumFlatCompatibility": "7000"},
             "RA2MultiHoverMissile_AA": {"CannonHE_Medium": "2000",
                                          "MissileHE_Light": "2000"},
             "RA2MultiHoverMissile_AA_elite": {"CannonHE_Medium": "2000",
@@ -91,12 +97,7 @@ class AaWeaponRoutingTests(unittest.TestCase):
         self.assertEqual([], failures)
 
     def test_routing_revealed_audit_exceptions_are_exact(self):
-        self.assertEqual({"FLAK-23-AA", "ManifoldMG_AA"},
-                         set(ROUTING_REVEALED_BROADCASTS))
-        for weapon_name, expected in ROUTING_REVEALED_BROADCASTS.items():
-            mains, _friendly_fire, _extra = classify_warheads(
-                self.rules.resolve_weapon(weapon_name))
-            self.assertEqual(expected, tuple(sorted(mains)), weapon_name)
+        self.assertEqual({}, ROUTING_REVEALED_BROADCASTS)
 
 
 if __name__ == "__main__":

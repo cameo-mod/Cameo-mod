@@ -336,10 +336,16 @@ LightSniper:
 	Range: 9153
 	Warhead@Sniper_Light:
 		Damage: 30000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 30000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 15
+		Spread: 1
+		Falloff: 100, 0
 
 ReimuYinYangOrb:
 	# Shrine super-orb projectile. Pure Magic (2026-08-10). Was 32k Tesla + 32k Magic = 64k total.
@@ -399,7 +405,7 @@ ReimuOrbLauncher:
 		AimTargetStances: Enemy
 		ValidTargets: Air, Ground, Water
 		Delay: 108
-	Warhead@Shrapnel3: FireShrapnel
+	Warhead@Shrapnel4: FireShrapnel
 		Weapon: ReimuYinYangOrb
 		ImpactActors: true
 		AimChance: 50
@@ -470,7 +476,7 @@ MagicOrbHailstormSpawner:
 		AimTargetStances: Enemy
 		ValidTargets: Air, Ground, Water
 		Delay: 9
-	Warhead@Shrapnel3: FireShrapnel
+	Warhead@Shrapnel4: FireShrapnel
 		Weapon: MagicOrbSpreaderProjectile
 		ImpactActors: false
 		TargetActorCenter: true
@@ -1024,12 +1030,7 @@ MammothTusk:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
-ParaBomb:
-	Inherits: ^Warhead_Demolition_Heavy
-	Inherits@2: ^Warhead_Flame_Heavy
-	Inherits@3: ^Effect_Flame_Heavy
-	ReloadDelay: 8
-	Range: 5000
+^ParaBombDelivery:
 	Report: chute1.aud
 	Projectile: GravityBomb
 		Image: PARABOMB
@@ -1037,6 +1038,14 @@ ParaBomb:
 		Velocity: 0, 0, -75
 		Acceleration: 0, 0, 0
 		Shadow: False
+
+ParaBomb:
+	Inherits@delivery: ^ParaBombDelivery
+	Inherits: ^Warhead_Demolition_Heavy
+	Inherits@2: ^Warhead_Flame_Heavy
+	Inherits@3: ^Effect_Flame_Heavy
+	ReloadDelay: 8
+	Range: 5000
 	Warhead@Demolition_Heavy:
 		Damage: 20000
 	Warhead@Flame_Heavy:
@@ -1047,13 +1056,13 @@ ParaBomb:
 		ValidTargets: Ground, Ship
 
 ParaBombCryo:
+	Inherits@delivery: ^ParaBombDelivery
 	Inherits@wh: ^Warhead_CryoBlast_Heavy
 	Inherits@fx: ^Effect_Cryo
 	ReloadDelay: 8
 	Range: 5000
-	Report: chute1.aud
-	Projectile: GravityBomb
 	Warhead@CryoBlast_Heavy:
+		Damage: 40000
 
 JapanSuperBomb:
 	Inherits@collapsewh: ^Warhead_Demolition_Heavy

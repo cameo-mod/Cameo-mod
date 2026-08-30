@@ -562,7 +562,6 @@ TSJuggerFlakAA_boat:
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Report: jugger1.aud
-	Range: 12834
 	MinRange: 2245
 	ReloadDelay: 69
 	Burst: 2
@@ -731,7 +730,6 @@ TSVanMissile:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
-	Report: missile6.aud
 	ReloadDelay: 32
 	Burst: 2
 	BurstDelays: 8
@@ -752,7 +750,6 @@ TSChemVanMissile:
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
-	Report: missile6.aud
 	ReloadDelay: 32
 	Burst: 2
 	BurstDelays: 8
@@ -787,7 +784,6 @@ TSMLRSMissile:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
-	Report: missile6.aud
 	ReloadDelay: 34
 	Burst: 4
 	BurstDelays: 2
@@ -808,7 +804,6 @@ TSChemMLRSMissile:
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
-	Report: missile6.aud
 	ReloadDelay: 34
 	Burst: 4
 	BurstDelays: 2
@@ -1333,6 +1328,7 @@ TSFiendShard:
 		Image: ra2txgasg
 		TrailImage: green_smokey
 	Warhead@Chemical_Light:
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@3Eff: CreateEffect
 		Explosions: sczhsplash
@@ -1356,14 +1352,17 @@ TSFiendShardUP:
 		Image: ra2txgasg
 		TrailImage: green_smokey
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
@@ -1387,6 +1386,7 @@ TSFiendShardUP:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@HeavyChemicalWeapon:
 	Warhead@Chemical_Heavy:
+		ValidTargets: Ground, Water, Air
 		Damage: 18000
 		PercentageScale: 0
 TSFiendShardBlue:
@@ -1407,14 +1407,18 @@ TSFiendShardBlue:
 		Image: ra2txgasg
 		TrailImage: blue_smokey
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
@@ -1429,6 +1433,7 @@ TSFiendShardBlue:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@MediumChemicalWeapon:
 	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 0
 
@@ -1452,22 +1457,28 @@ TSFiendShardBlueUP:
 		Image: ra2txgasg
 		TrailImage: blue_smokey
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
@@ -1492,6 +1503,7 @@ TSFiendShardBlueUP:
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@HeavyBomb:
 	Warhead@Chemical_Heavy:
+		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 0
 
@@ -1744,7 +1756,8 @@ TSMutShotgun:
 	Warhead@ShotgunGrenadeAlly:
 		Damage: 2000
 	Warhead@ShotgunShrapnelEnemy:
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 0
 	Warhead@ShotgunShrapnelAlly:
 		Damage: 2000
 	Warhead@ShotgunTankDestroyer:
@@ -1753,6 +1766,7 @@ TSMutShotgun:
 		Damage: 4000
 	Warhead@ShotgunChaingun:
 		Damage: 4000
+	-Warhead@ShotgunGrenadeEnemy:
 
 TSMutVulcanTurret:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
@@ -1830,14 +1844,7 @@ TSMutApcCannon:
 	ReloadDelay: 12
 	Range: 6147
 	ValidTargets: Ground, Water, Air
-	Warhead@Flak_Medium:
-	ValidTargets: Ground, Water, Air
 		Damage: 2000
-	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium:
-		Damage: 2000
-	ValidTargets: Ground, Water, Air
-	ValidTargets: Ground, Water, Air
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
@@ -1874,10 +1881,16 @@ TSSniper:
 	Report: silencer.aud
 	Warhead@Sniper_Light:
 		Damage: 10000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 10000
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 5
+		Spread: 1
+		Falloff: 100, 0
 
 TSGhostGun:
 	Inherits@wh: ^Warhead_Chemical_Light

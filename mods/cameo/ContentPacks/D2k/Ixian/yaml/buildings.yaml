@@ -281,7 +281,7 @@ ixian_repairpad:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x3Shape
 	Inherits@repair: ^RepairsUnits
-	Inherits@repair: ^RepairFacility
+	Inherits@repairfacility: ^RepairFacility
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_advancedheavyfactory
 		Description: Repairs nearby vehicles.
@@ -446,7 +446,6 @@ ixian_supercomputer:
 	Inherits@shape: ^4x3Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Buildable:
-		-BuildLimit:
 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, !ixian_supercomputer_swlimit, ~techlevel.superweapons
 		Description: Provides a nuclear weapon support power.
 		IconPalette: player
@@ -729,7 +728,6 @@ ixian_rocketturret:
 	Turreted:
 		TurnSpeed: 32
 		InitialFacing: 2048
-	AttackTurreted:
 	WithWallSpriteBody:
 		RequiresCondition: !build-incomplete
 	WithSpriteTurret:
@@ -1141,7 +1139,7 @@ ixian_stormlasher:
 	WithMuzzleOverlay:
 	WithSpriteBody:
 		Name: make
-		Sequence: invisible
+		Sequence: idle
 	WithMakeAnimation:
 		Condition: build-incomplete
 		BodyNames: make
@@ -1157,9 +1155,6 @@ ixian_stormlasher:
 		ReplaceableTypes: Tower
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
-	WithSpriteBody:
-		Sequence: idle
-	WithMuzzleOverlay:
 	-WithDeathAnimation:
 	-WithWallSpriteBody:
 	-WithSpriteTurret:

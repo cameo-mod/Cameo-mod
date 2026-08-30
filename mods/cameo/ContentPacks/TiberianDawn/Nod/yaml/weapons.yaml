@@ -1476,6 +1476,7 @@ VenomLaserInferno:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 	Warhead@Inferno_Medium:
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 VenomLaserBurning:
 	Inherits: VenomLaserInferno

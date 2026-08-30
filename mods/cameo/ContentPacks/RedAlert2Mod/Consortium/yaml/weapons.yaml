@@ -71,7 +71,6 @@ SteelVulcan:
 	Range: 6666
 	# Retain the inherited shell template's range-scaled flight behavior.
 	Projectile: ScaledBullet
-	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
 	Warhead@Bullet_Light:
@@ -172,7 +171,7 @@ ConsortiumMissileSystem_EMP:
 	-Warhead@TeslaWeapon:
 	Warhead@MissileQuantum_MediumFlatCompatibility:
 		ValidTargets: Air
-		Damage: 15000
+		Damage: 34000
 		PercentageScale: 0
 
 SteelQuantumCannon:
@@ -221,8 +220,9 @@ SteelQuantumCannon_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water
-		Damage: 8000
+		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PercentageScale: 0
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 4
@@ -230,6 +230,7 @@ SteelQuantumCannon_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water
 		Damage: 12000
+	-Warhead@LaserWeapon:
 
 SteelQuantumCannon_elite:
 	Inherits: SteelQuantumCannon_EMP
@@ -248,7 +249,8 @@ SteelQuantumCannon_elite:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 12000
+		Damage: 24000
+		PercentageScale: 0
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@EMPUnit: AffectsIntegrity
@@ -262,6 +264,7 @@ SteelQuantumCannon_elite:
 		Amount: 3
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
+	-Warhead@LaserWeapon:
 
 SteelQuantumCannonScatter_elite:
 	Inherits: SteelQuantumCannon_elite
@@ -281,7 +284,8 @@ SteelQuantumCannonScatter_elite:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 4000
+		PercentageScale: 0
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
@@ -292,6 +296,7 @@ SteelQuantumCannonScatter_elite:
 		ImpactSounds: xplos.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
+	-Warhead@LaserWeapon:
 
 bfg10kCannonDummy:
 	Range: 25000
@@ -625,7 +630,6 @@ SteelMantaHunterCannons:
 	Inherits@2: ^SteelChaingun
 	Range: 8000
 	ReloadDelay: 8
-	ValidTargets: Ground, Water
 	Report: pulseturretfire.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -663,8 +667,9 @@ SteelMantaHunterCannons_AA:
 	-Warhead@Bullet_MediumFlatCompatibility:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 9984
+	-Warhead@MissileAP_Medium:
 SteelMantaHunterCannonsResonance:
 	Inherits: SteelMantaHunterCannons
 	Warhead@shrapnel: FireShrapnel
@@ -709,8 +714,8 @@ SteelMantaHunterCannonsAAResonance_AA:
 		ValidTargets: Ground, Water, Air
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelMantaHunterCannonsAAResonanceBounce1:
 	Inherits: SteelMantaHunterCannonsAAResonance_AA
@@ -719,8 +724,8 @@ SteelMantaHunterCannonsAAResonanceBounce1:
 		Weapon: SteelMantaHunterCannonsAAResonanceBounce2
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelMantaHunterCannonsAAResonanceBounce2:
 	Inherits: SteelMantaHunterCannonsAAResonance_AA
@@ -728,8 +733,8 @@ SteelMantaHunterCannonsAAResonanceBounce2:
 	-Warhead@shrapnel:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 9984
 
 SteelRunnerPistols:
 	Inherits: ^TeslaWeapon
@@ -1388,6 +1393,14 @@ SteelInfRailgun_EMP_elite:
 SteelScalpelRailgun_EMP_AA:
 	Inherits: SteelInfRailgun_EMP_elite
 	ValidTargets: Air
+	Warhead@Railgun_Heavy:
+		Damage: 4000
+	Warhead@Flak_Medium:
+		Damage: 4000
+	Warhead@Bullet_Medium:
+		Damage: 4000
+	Warhead@MissileAP_Light:
+		Damage: 4000
 	Warhead@EffectAir: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -1766,7 +1779,6 @@ SteelAirTurretEScatter:
 SteelFortressWeapons:
 	Inherits: ^SteelMediumCannon
 	Range: 6333
-	Report: protonfire.wav
 	ReloadDelay: 41
 	Burst: 2
 	BurstDelays: 0

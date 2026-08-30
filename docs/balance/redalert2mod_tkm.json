@@ -2448,11 +2448,11 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "6368",
-      "reloaddelay": "63",
+      "range": "6214",
+      "reloaddelay": "64",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2463,7 +2463,7 @@
       "warheads": [
        "^Warhead_MissileAP_Light"
       ],
-      "weapon": "Rockets",
+      "weapon": "tkmrockets",
       "weapon_class_source": "template"
      },
      {
@@ -2624,15 +2624,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2659,15 +2659,15 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "22",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3252,20 +3252,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "32000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperMediumMissile",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "32000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperFlak",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "1",
@@ -3280,13 +3266,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "32000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "16",
         "falloff": "100, 0",
         "spread": "1",
@@ -3294,7 +3273,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "32000",
+        "damage": "64000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Bullet_Medium",
@@ -3306,6 +3285,13 @@
         "spread": "1",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "64000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -3368,25 +3354,11 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "SniperMediumMissile",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperFlak",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "1",
         "tag": "SniperSmallArms",
         "type": "AreaDamage"
        },
        {
-        "damage": "6000",
+        "damage": "18000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "SniperChaingun",
@@ -3454,20 +3426,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperMediumMissile",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperFlak",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "1",
@@ -3475,17 +3433,10 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "6000",
+        "damage": "38000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "SniperChaingun",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
@@ -3496,7 +3447,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Bullet_Medium",
@@ -3568,25 +3519,11 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "SniperMediumMissile",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperFlak",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "1",
         "tag": "SniperSmallArms",
         "type": "AreaDamage"
        },
        {
-        "damage": "6000",
+        "damage": "18000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "SniperChaingun",
@@ -3655,20 +3592,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperMediumMissile",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperFlak",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "1",
@@ -3676,17 +3599,10 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "6000",
+        "damage": "38000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "SniperChaingun",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
@@ -3697,7 +3613,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Bullet_Medium",
@@ -3789,15 +3705,15 @@
       "damage_warheads": [
        {
         "damage": "80000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "40",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3824,15 +3740,15 @@
       "damage_warheads": [
        {
         "damage": "80000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "40",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Sniper_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -5182,7 +5098,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": null,
         "spread": null,
         "tag": "Grenade",
@@ -5201,13 +5117,6 @@
         "spread": null,
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -5278,7 +5187,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": null,
         "spread": null,
         "tag": "Grenade",
@@ -5297,13 +5206,6 @@
         "spread": null,
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6308,7 +6210,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": null,
         "spread": null,
         "tag": "Grenade",
@@ -6327,13 +6229,6 @@
         "spread": null,
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6404,7 +6299,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": null,
         "spread": null,
         "tag": "Grenade",
@@ -6423,13 +6318,6 @@
         "spread": null,
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",

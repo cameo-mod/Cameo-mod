@@ -242,6 +242,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
+       "^ParaBombDelivery",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy",
        "^Effect_Flame_Heavy"
@@ -256,7 +257,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "40000",
         "falloff": "100, 72, 50, 32, 19, 9, 0",
         "spread": "140",
         "tag": "CryoBlast_Heavy",
@@ -271,6 +272,7 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Cryo",
       "versus_templates": [
+       "^ParaBombDelivery",
        "^Warhead_CryoBlast_Heavy",
        "^Effect_Cryo"
       ],
@@ -448,6 +450,7 @@
       "reloaddelay": "8",
       "slot": "Armament",
       "versus_templates": [
+       "^ParaBombDelivery",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy",
        "^Effect_Flame_Heavy"

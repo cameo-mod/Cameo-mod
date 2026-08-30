@@ -279,7 +279,8 @@ RA2LasherToxicMortar_elite:
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Medium: AreaDamage
-		Damage: 4000
+		Damage: 12000
+		PercentageScale: 0
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Heavy: AreaDamage
@@ -302,6 +303,8 @@ RA2LasherToxicMortar_elite:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 0
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
 
 RA2LasherLaser:
 	Inherits: ^Warhead_CannonHE_Medium
@@ -804,10 +807,14 @@ RA2Virusgun:
 	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
+		Spread: 1
+		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@SniperWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 6
+		Spread: 1
+		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -821,6 +828,8 @@ RA2Virusgun:
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 6
+		Spread: 1
+		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
@@ -843,6 +852,8 @@ RA2Virusgun:
 		ValidTargets: Infantry
 		Damage: 24000
 		PercentageScale: 0
+		Spread: 1
+		Falloff: 100, 0
 
 RA2Virusgun2:
 	Inherits@wh: ^Warhead_Flak_Medium
@@ -854,6 +865,8 @@ RA2Virusgun2:
 	Warhead@Flak_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
+		Spread: 1
+		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@SniperWeapon: SpreadDamage
 		ValidTargets: Ground, Ship, Garrisoned
@@ -896,6 +909,8 @@ RA2Virusgun3:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
+		Spread: 1
+		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
