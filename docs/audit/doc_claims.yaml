@@ -158,12 +158,12 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 494
+    value: 453
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
       predicate — W24's scope, and the reason pricing must wait for the weapon rebuild.
-    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import sys, pathlib
       sys.path[:0] = ['tools/audit']
