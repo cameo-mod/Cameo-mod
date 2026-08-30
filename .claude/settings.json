@@ -23,6 +23,15 @@
     ],
     "PreToolUse": [
       {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/tools/hooks/read_first_guard.py\""
+          }
+        ]
+      },
+      {
         "matcher": "Bash",
         "hooks": [
           {

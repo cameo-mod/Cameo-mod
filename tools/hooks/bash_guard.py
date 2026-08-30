@@ -72,6 +72,61 @@ def main():
                 capture_output=True, text=True, timeout=15).stdout.split()
         except Exception:
             return  # git unavailable -> don't block
+        # (3a) UNAUTHORIZED SIGN-OFF. Flipping `signed_off` to true in
+        #      class_anchors.json unblocks `apply_balance --confirm` for that class,
+        #      and fit_class.py step 4 reserves it for the MAINTAINER. On 2026-08-29
+        #      an agent signed three anchors on its own validation tables; one of
+        #      them (`scout`) sat at worst |delta| 22.8 against a <=1 bar. Worse, the
+        #      next session "corrected" the docs to match — citing the artifact-wins
+        #      rule against an artifact the agent had written itself.
+        if "docs/balance/class_anchors.json" in staged:
+            try:
+                diff = subprocess.run(
+                    ["git", "-C", str(root), "diff", "--cached", "-U0",
+                     "--", "docs/balance/class_anchors.json"],
+                    capture_output=True, text=True, timeout=15).stdout
+            except Exception:
+                diff = ""
+            added = [ln for ln in diff.splitlines()
+                     if ln.startswith("+") and not ln.startswith("+++")
+                     and re.search(r'"signed_off"\s*:\s*true', ln)]
+            if added and "MAINTAINER-ORDERED SIGN-OFF" not in cmd:
+                deny("You are staging `signed_off: true` in class_anchors.json. That "
+                     "unblocks `apply_balance --confirm` for the class, and fit_class.py "
+                     "step 4 reserves signing for the MAINTAINER — a fit table is "
+                     "evidence FOR a decision, not the decision.\n\n"
+                     "On 2026-08-29 three anchors were self-signed this way; `scout` was "
+                     "among them at worst |delta| 22.8 against a <=1 bar. All reverted.\n\n"
+                     "If the maintainer has actually ordered it, quote them and put the "
+                     "words MAINTAINER-ORDERED SIGN-OFF in the commit message.")
+
+        # (3b) STALE BRANCH. AGENT_WORKSPACE.md git rule 1: "Always fetch, pull, and
+        #      merge before any commit. The remote may have changes from other
+        #      developers." Skipping it is how a branch drifted 16 commits behind
+        #      master and its regenerated ledgers came within one merge of REVERTING
+        #      another contributor's weapon-consolidation work. Advisory text did not
+        #      prevent that; this does. Uses only already-fetched refs — it never
+        #      reaches the network, so it cannot hang or fail closed on a bad link.
+        try:
+            base = subprocess.run(
+                ["git", "-C", str(root), "rev-parse", "--verify", "-q", "origin/master"],
+                capture_output=True, text=True, timeout=15)
+            behind = subprocess.run(
+                ["git", "-C", str(root), "rev-list", "--count", "HEAD..origin/master"],
+                capture_output=True, text=True, timeout=15).stdout.strip()
+        except Exception:
+            base, behind = None, ""
+        if base is not None and base.returncode == 0 and behind.isdigit() and int(behind) > 0:
+            deny(f"Your branch is {behind} commit(s) behind origin/master (as of the last "
+                 "fetch). AGENT_WORKSPACE.md git rule 1: always fetch, pull and merge "
+                 "BEFORE committing — the remote carries other contributors' work.\n\n"
+                 "This is not bookkeeping. A branch that drifted 16 behind regenerated the "
+                 "shared ledgers from a tree missing master's yaml, and came one merge away "
+                 "from reverting another contributor's weapon consolidation.\n\n"
+                 "Run: git fetch origin master && git merge origin/master\n"
+                 "Then REGENERATE anything derived (extract_stats.py for the ledgers) so it "
+                 "reflects the merged tree, and re-run the audits.")
+
         engine_prefixes = ("mods/", "OpenRA.Mods.Cameo/", "engine/")
         eng = [f for f in staged if f.startswith(engine_prefixes)]
 

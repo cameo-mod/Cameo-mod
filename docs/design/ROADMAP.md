@@ -46,6 +46,54 @@ an open checkbox was moved.
 
 ---
 
+## ⛔ P1 — BOOT-GATED WORK OWED FROM THE 2026-08-30 BALANCE SESSION
+
+Queued per `AGENT_WORKSPACE.md` git rule 3 (record work in ROADMAP before committing).
+None of these touched yaml; each needs a boot-gated machine.
+
+1. **`^ScoutVehicleTemplate` self-heal switch — the missed half of a LOCKED ruling.**
+   `anchor_decisions_log.md` locked scout vehicles onto the **infantry HP granularity**
+   on 2026-07-26 and flags a companion requirement **"HARD RULE — do not forget"**:
+   switch the template from `^VehicleBuffs` (Step 10 / Delay 1 / DamageCooldown 10) to
+   the `^InfantryBuffs` timing (Delay 2 / DamageCooldown 20 / StartIfBelow 100), and set
+   each scout actor's `ChangesHealth@SelfHealing.Step = HP/1000`. The converter now uses
+   the 1000 grid; **without this the ruling is only half applied.**
+2. **7 scout vehicles off the 1000 HP grid** — `ra1_allies_ranger`, `forgotten_raidercar`
+   (22500); `tkm_as42`, `tkm_technical`, `ts_gdi_pitbull`, `td_gdi_humvee` (27500);
+   `td_gdi_humveemkii` (37500).
+3. **9 actors carry a `Speed` off the 5 grid, 8 buildable** — `japan_nanodronebuggy` 77,
+   `ra1_allies_minelayer` 128, `ts_nod_mobilestealthgenerator` 56, `tuboat.nax` 78,
+   `siege_tank` 43 (not buildable). ⚠ **These are NOT turn-law violations** —
+   `audit_stat_formulas` F8/F10/F19 read 0 and are right to. F8/F10 check the DERIVED
+   value (`TurnSpeed == round(Speed/5)`), so an off-grid Speed with a consistently
+   rounded TurnSpeed passes. **The Speed GRID has no checker at all** — the natural home
+   is a new rule inside `audit_stat_formulas`, never a second audit.
+4. **9 support powers missing their `Prerequisites:` header** (`audit_support_powers` S1).
+5. **IFV default-weapon guards** miss `ifv-archer`, `ifv-grenade`, `ifv-lightsniper`, so
+   those passengers fire the specialist AND the default weapon (`audit_ifv_conditions` F3).
+
+## ⛔ P1 — MAINTAINER CALLS THAT BLOCK PRICING (2026-08-30)
+
+1. **`scout_vehicle` `hp0`:** `class_anchors.json` says **30000**; `anchor_decisions_log.md`
+   LOCKED **20000** ("½ the LightTank → fragile"). Predates this session; README makes the
+   log the source of truth, so the JSON is the one that looks wrong.
+2. **Sign the classes that already meet ≤1** — `closecombat` 0.1, `mortar` 0.1, `archer`
+   0.2, `grenadier` 0.2, `heavy_sniper` 0.2, `flying_infantry` 0.5, `missile_vehicle` 0.6,
+   `special_forces` 0.9. **`class_anchors_signed_off` is 0** — three anchors were
+   self-signed by an agent on 2026-08-29 and reverted on 2026-08-30. Signing is the
+   maintainer's; `bash_guard` now blocks the flip without an explicit order.
+3. **Transcribe the RULED defense system** into `class_anchors.json` and wire
+   `formula.class_baseline_price_3` (the 3-input, speed-less form) into
+   `propose_class_rebalance` / `fit_class` — it has **zero callers** today. The formula,
+   its verifier convention (2.5×HP + 2.5×DPS → exactly 4.0×) and per-template anchors WITH
+   NUMBERS are already ruled in `anchor_decisions_log.md`; this is transcription, not
+   design. Its own open items: name the hybrid AA template, resolve the Advanced
+   verifier's Obelisk-Prime charge-K clash, and settle Super at 4000 vs 2500.
+4. **Bombers need the SORTIE-cycle formula** (`anchor_decisions_log.md`, "REARMABLE
+   AIRCRAFT"): a returning bomber's weapon `ReloadDelay` (~250 placeholder) is not its
+   damage cadence. ⚠ Do NOT price fighters or bombers with the ground formula meanwhile —
+   only helicopters and spaceships share it.
+
 ## ⭐ START HERE — [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md)
 
 **The balance program's board, ownership and acceptance criteria live in ONE file:
