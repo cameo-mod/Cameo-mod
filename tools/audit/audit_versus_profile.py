@@ -76,6 +76,48 @@ COMPANION = ("Percentage", "ExtraDamage", "ExtraRepair", "Concrete",
 MEAN_LO, MEAN_HI = 95.0, 105.0
 SPREAD_LO, SPREAD_HI = 2.0, 8.0
 
+# ── MACRO CONTRAST: the SECOND spread metric, and it is not the same number ──────────────────
+# §9.4's `spread` is max/min over a profile's 16 armor ROWS, and Cameo passes it: measured
+# 2026-08-30 over 6,093 live profiles the median is **4.00x**, exactly the documented target, with
+# 80% inside [2,8]. That is the law being obeyed.
+#
+# MACRO CONTRAST is max/min over the three ladder MEANS (INF, VEH, BLD) — how far a weapon's
+# PREFERRED unit type separates from the types it is not for. Averaging four or five rows into a
+# ladder mean necessarily compresses, so this number is always the smaller of the two; the
+# question is by how much, and against whom.
+#
+#     corpus                 ROW spread    MACRO contrast
+#     Cameo                    4.00x           1.82x
+#     Romanov's Vengeance      5.00x           3.00x
+#     Combined Arms            4.38x           2.35x
+#     OpenRA Red Alert         4.00x           2.67x
+#
+# OpenRA Red Alert is the one that settles it: IDENTICAL row spread (4.00x), yet 47% more macro
+# contrast. So Cameo is not short of gradient — it spends the gradient WITHIN ladders instead of
+# BETWEEN them. The mechanism is in `gen_weapon_template.py`: tied macro blocks are "interleaved
+# round-robin", so a weapon good against several types alternates them and its strong rows land
+# in more than one ladder.
+#
+# ⚠ REPORTING ONE OF THESE AS "THE ARMOR TILT" IS HOW THIS GOT MISREAD. Quoting 1.8x invites
+# "the armor system is flat" when §9.4 is being met exactly; quoting 4.0x hides that macro
+# specialisation is materially below every peer. Both are printed, always, side by side.
+MACRO_LADDERS = {"INF": ("None", "Flak", "Plate", "Heroic"),
+                 "VEH": ("Scout", "Light", "Medium", "Heavy", "Superheavy"),
+                 "BLD": ("Wood", "Concrete", "Steel")}
+MACRO_TARGET_LO, MACRO_TARGET_HI = 2.0, 8.0
+
+
+def macro_contrast(profile):
+    """max/min over the INF, VEH and BLD ladder means. None when a ladder is missing."""
+    means = []
+    for rows in MACRO_LADDERS.values():
+        vals = [profile[r] for r in rows if profile.get(r, 0) > 0]
+        if vals:
+            means.append(sum(vals) / len(vals))
+    if len(means) < 3 or min(means) <= 0:
+        return None
+    return max(means) / min(means)
+
 
 def profiles() -> dict[tuple[str, str], dict[str, float]]:
     """{(family, level): {armor: versus}} for every `^Warhead_<Family>_<Level>` MAIN warhead."""
@@ -157,6 +199,18 @@ def main() -> int:
     for key, mean, hand in mean_bad:
         tag = " _(HAND_TUNED — generator skips it, expected)_" if hand else " **UNEXPECTED**"
         print(f"  {key[0]}_{key[1]}  mean {mean:.1f}{tag}")
+
+    import statistics as _st
+    _mc = [m for m in (macro_contrast(p) for p in data.values()) if m]
+    if _mc:
+        _in = sum(1 for m in _mc if MACRO_TARGET_LO <= m <= MACRO_TARGET_HI)
+        print(f"\n## macro contrast (INF/VEH/BLD ladder means) — median "
+              f"{_st.median(_mc):.2f}x over {len(_mc)} profiles, {_in / len(_mc) * 100:.0f}% "
+              f"in [{MACRO_TARGET_LO:.0f}x, {MACRO_TARGET_HI:.0f}x]\n")
+        print("This is NOT §9.4's row spread and must never be quoted as it. Peers measured "
+              "2026-08-30: Romanov's Vengeance 3.00x, OpenRA Red Alert 2.67x, Combined Arms "
+              "2.35x. OpenRA RA has the SAME row spread as Cameo (4.00x) and 47% more macro "
+              "contrast, so the gap is where the gradient is SPENT, not how much there is.\n")
 
     print(f"\n## spread band {SPREAD_LO:.0f}x-{SPREAD_HI:.0f}x (target 4x) — "
           f"{len(families) - len(spread_bad) - len(FLAT_BY_DESIGN)} in band\n")

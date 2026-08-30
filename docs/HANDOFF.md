@@ -1102,6 +1102,63 @@ the peer document's header row is lowercased on read, so looking up `vsINF` inst
 returned **0 armor-aware rows out of 2,256**; and the Apocalypse's armor numbers move by 4× but it
 carries `structure_debt: true`, so they are not a target — which is exactly what that flag is for.
 
+### 3.0ac — ⭐ THE ARMOR TILT GAP IS **MACRO CONTRAST**, NOT SPREAD (2026-08-30)
+
+**Maintainer:** *"our goal should be an armor tilt between minimum 2x and maximum 8x with a target
+of 4x ... 1.7x is unacceptable"* — and *"everything is already explained, find it."* Found:
+**`WEAPON_HEAVINESS.md` §9.4 "The spread law — 2x to 8x, target 4x"**. The band is not a new
+requirement; it has been law since 2026-08-23, and §9.4 already records **37 of 42 families in
+band, median 4.17×**.
+
+⛔ **SO THE FIRST THING TO SAY IS THAT §9.4 IS BEING MET.** Measured over **6,093 live profiles**:
+
+| metric | Cameo | RV | Combined Arms | OpenRA RA |
+|---|--:|--:|--:|--:|
+| **§9.4 ROW spread** (max/min over the 16 rows) | **4.00×** — 80% in band ✅ | 5.00× | 4.38× | 4.00× |
+| **MACRO CONTRAST** (max/min over INF/VEH/BLD ladder MEANS) | **1.82×** | 3.00× | 2.35× | 2.67× |
+
+**These are two different numbers and quoting either alone misleads.** My earlier "1.73× vs the
+genre's 3.36×" was the second metric; §9.4's "4.17×" is the first. Averaging four or five rows
+into a ladder mean necessarily compresses, so macro contrast is always the smaller — the question
+was only ever *by how much, against whom*.
+
+**⭐ OpenRA Red Alert settles it: IDENTICAL row spread (4.00×), 47% MORE macro contrast (2.67×).**
+So Cameo is **not short of gradient**. It **spends the gradient WITHIN ladders instead of BETWEEN
+them.**
+
+**The mechanism is in the generator, and it is deliberate.** `gen_weapon_template.py` line 20:
+*"interleave tied blocks round-robin."* When a weapon is equally good against several macro types,
+the generator **alternates** them — so its strong rows land in more than one ladder, and the
+preferred type never pulls away. Over the 140 family templates macro contrast medians **1.63×**
+with only **20% inside [2,8]**, against a row spread that passes.
+
+**What is missing is a third axis.** The profile today has LEVEL (within-ladder slope) and
+MACRO PRIORITY (which type is preferred) but **no control over how far the preferred type
+separates from the rest**. That axis — call it `macro_contrast` — is the fix, and it is a
+*redistribution*, not an inflation: row spread stays at 4×, MEAN-100 stays intact, ladder ranks
+stay non-inverting (§12.0d), and only the share of the gradient falling between ladders changes.
+
+⛔ **DO NOT "FIX" THIS BY EXPONENT-RESHAPING EVERY ROW.** Two of the external reviews proposed
+raising all multipliers by an exponent until the ladder means separate. That inflates the ROW
+spread past the 8× ceiling §9.4 sets, breaking a law that currently passes, in order to fix a
+metric it never measured. The gradient does not need to grow; it needs to be spent differently.
+
+⚠ **GENERALISTS ARE EXEMPT AND MUST STAY SO.** `Sonic` and `Magic` are 1.00× *by design*,
+`Concussion` is universal. Forcing a ≥2× macro contrast on them would make them not generalists.
+The band applies to SPECIALIST families.
+
+**Two metrics now print side by side, always** — `audit_versus_profile.py` reports macro contrast
+above the §9.4 band so neither can be quoted as the other again.
+
+⛔ **CORRECTION — JUMPJET IS NOT `Plate × Scout`.** Two external reviews asserted that; both were
+wrong, and the maintainer caught it. `docs/design/ARMOR_LAYERS.md:1714`, the maintainer's own
+words: *"the hybrid armors like heroic = plate x scout and the **jumpjet = fighter x scout**"*. It
+is the **flying-infantry** armor — Fighter (AIR) × Scout (the light/fast rung) — which is exactly
+why it cannot be Plate-derived. `Heroic = Plate × Scout / PEAK` is the one that uses Plate
+(§12.0b), and confusing the two would have propagated a wrong derived row into every profile.
+⚠ Also: **neither `Jumpjet` nor `Airborne` ships as a live `Versus` row today** — Cameo's live set
+is the 16 core rows plus Shield and the plating layer. They are planned, not present.
+
 ### 3.0y — 📚 THE REFERENCE CORPUS, CLONED FROM SOURCE (2026-08-30): 25 sources, 15 OpenRA mods
 
 Every OpenRA reference mod is now cloned from its own repository and read through
