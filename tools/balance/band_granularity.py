@@ -73,16 +73,24 @@ def stat_window(price: float) -> float:
 
 
 def collect_classes(anchors):
+    """(members by class, every priced actor by name).
+
+    The second map exists so the census can price a class through its anchor ACTOR's live
+    stats. An anchor is often not a member of its own class (10 of 27 carry no class tag
+    at all), so it cannot be recovered from `rows`.
+    """
     rows = collections.defaultdict(list)
+    live = {}
     for _fn, actor, u, du in cb.collect({}):
+        inp = cb.unit_inputs(u, du)
+        if inp is not None and all(inp[:4]):
+            live[actor] = inp
         cls = (u.get("design") or {}).get("class_anchor")
         if not cls or cls not in anchors or u.get("build_limit"):
             continue  # build-limited epics are band-exempt (check_band.py)
-        inp = cb.unit_inputs(u, du)
-        if inp is None or not all(inp[:4]):
-            continue
-        rows[cls].append((actor, inp))
-    return rows
+        if inp is not None and all(inp[:4]):
+            rows[cls].append((actor, inp))
+    return rows, live
 
 
 def priced(cls, rs):
@@ -103,6 +111,142 @@ def faction_of(actor: str) -> str:
     return actor.split("_")[0] if "_" in actor else actor.split(".")[-1]
 
 
+def zone_census(rows, anchors, live, out):
+    """⭐ THE MEASUREMENT THAT DECIDES WHETHER THE ANCHOR CAN BE THE TARGET FLOOR.
+
+    Proposal under test: target band [1.00, 2.50] holding >=80% of members, with the
+    anchor AT 1.00 -- so the anchor is the cheapest NORMAL member of its class, and
+    anything cheaper is an outlier BY CONSTRUCTION rather than by measurement.
+
+    ⛔ That is a much stronger claim than "the anchor is the entry unit", and it is
+    falsifiable on this roster in one pass: if a class routinely has ~half its members
+    priced below its own anchor, then >=80% inside [1.00, 2.50] is not merely unmet, it is
+    UNREACHABLE without moving those members. If the below-anchor share is small, the
+    proposal is sound and the four rings can be law.
+
+    ⛔ DO NOT USE `priced()` HERE. That helper normalises every class to cost0 = 100 so the
+    SPREAD comes out anchor-invariant; its ratios are in units of 100 and are meaningless
+    as absolute band positions. A first cut of this function did exactly that and reported
+    100% of every class above 3.50 -- absurd on its face, which is the only reason it was
+    caught. The census must price through the REAL anchor spec and the REAL cost0, the
+    same way `check_band` does, or 1.00 does not mean "the anchor".
+    """
+    w = out.append
+    lo, hi = cb.SWEET_LO, cb.SWEET_HI
+    tier_map = {}
+    anchor_tiers = {}
+    for cls, a in anchors.items():
+        act = a.get("anchor_actor")
+        anchor_tiers[cls] = (tier_map.get(act, {}).get("tier_multiplier", 1.0)
+                             if act in tier_map else cb.fnum(a.get("tech_tier")) or 1.0)
+    w(f"\n## ⭐ ZONE CENSUS — can the anchor BE the target floor?\n")
+    w(f"Testing target **[{lo:.2f}, {hi:.2f}]** with the anchor at the floor. The question "
+      f"is the **below-anchor** column: under this proposal a member priced under 1.00 is "
+      f"an outlier by construction, not by measurement.\n")
+    w("| class | n | <0.50 | 0.50–1.00 | **1.00–2.50** | 2.50–3.50 | >3.50 | "
+      "**below anchor** | 80% reachable? |")
+    w("|---|--:|--:|--:|--:|--:|--:|--:|:-:|")
+    tot = collections.Counter()
+    reach = n_cls = 0
+    for cls in sorted(rows, key=lambda k: -len(rows[k])):
+        rs = rows[cls]
+        if len(rs) < 4 or cls not in anchors:
+            continue
+        anchor = anchors[cls]
+        c0 = cb.cost0_of(anchor)
+        if not c0:
+            continue
+        ratios = []
+        for actor, inp in rs:
+            pr = cb.price_for(cls, anchor, inp, anchor_tiers.get(cls, 1.0))
+            if pr and pr > 0:
+                ratios.append(pr / c0)
+        if len(ratios) < 4:
+            continue
+        n_cls += 1
+        z = collections.Counter()
+        for r in ratios:
+            k = ("<0.50" if r < cb.FLOOR else "0.50-1.00" if r < lo
+                 else "1.00-2.50" if r <= hi else "2.50-3.50" if r <= cb.CEIL else ">3.50")
+            z[k] += 1
+            tot[k] += 1
+        n = len(ratios)
+        below = (z["<0.50"] + z["0.50-1.00"]) / n
+        ok = below <= 0.20
+        reach += ok
+        w(f"| `{cls}` | {n} | {z['<0.50']/n:.0%} | {z['0.50-1.00']/n:.0%} | "
+          f"**{z['1.00-2.50']/n:.0%}** | {z['2.50-3.50']/n:.0%} | {z['>3.50']/n:.0%} | "
+          f"**{below:.0%}** | {'YES' if ok else '⛔ no'} |")
+    N = sum(tot.values()) or 1
+    spec_below = (tot['<0.50'] + tot['0.50-1.00']) / N
+    w(f"| **ALL** | **{N}** | {tot['<0.50']/N:.0%} | {tot['0.50-1.00']/N:.0%} | "
+      f"**{tot['1.00-2.50']/N:.0%}** | {tot['2.50-3.50']/N:.0%} | {tot['>3.50']/N:.0%} | "
+      f"**{spec_below:.0%}** | |")
+    w(f"\nclasses where <=20% sit BELOW the anchor — so >=80% inside "
+      f"[{lo:.2f}, {hi:.2f}] is REACHABLE without moving anyone down-band: "
+      f"**{reach} of {n_cls}**\n")
+
+    # ------------------------------------------------------------------------------
+    # ⛔ AND THE SAME CENSUS AGAINST THE LIVE ANCHOR ACTOR. Without this second column the
+    # first one is unreadable: it says 54% of members are "below their anchor", which
+    # reads as a refutation of the four-point band and is mostly an artifact of specs that
+    # are far stronger than the actors carrying them. Re-run against what is actually in
+    # the game and it drops to 21%. THE GAP BETWEEN THE TWO COLUMNS IS THE RESTAT DEBT,
+    # counted in members -- and it carries a warning about the LOCKED table itself:
+    # applying those specs as written would make each anchor stronger than the class it
+    # anchors and push a further third of the roster below the target floor. The restat is
+    # not just unapplied; as specified it may be over-specified.
+    # ------------------------------------------------------------------------------
+    w("### The same census against the LIVE anchor actor\n")
+    w("| class | n | below anchor vs **SPEC** | below anchor vs **LIVE ACTOR** | delta |")
+    w("|---|--:|--:|--:|--:|")
+    ta = tb = tn = 0
+    for cls in sorted(rows, key=lambda k: -len(rows[k])):
+        rs = rows[cls]
+        if len(rs) < 4 or cls not in anchors:
+            continue
+        a = anchors[cls]
+        c0 = cb.cost0_of(a)
+        li = live.get(a.get("anchor_actor"))
+        if not c0:
+            continue
+        sp = [(cb.price_for(cls, a, i, anchor_tiers.get(cls, 1.0)) or 0) / c0
+              for _x, i in rs]
+        sp = [v for v in sp if v > 0]
+        if len(sp) < 4:
+            continue
+        s_lo = sum(1 for v in sp if v < lo)
+        if li is None:
+            w(f"| `{cls}` | {len(sp)} | {s_lo/len(sp):.0%} | "
+              f"— ⛔ anchor is not a priced member | |")
+            continue
+        la = {"spec": {"hp0": li[0], "speed0": li[1], "range0_wdist": li[2],
+                       "dps0": li[3], "cost0": c0}}
+        lv = [(cb.price_for(cls, la, i, 1.0) or 0) / c0 for _x, i in rs]
+        lv = [v for v in lv if v > 0]
+        l_lo = sum(1 for v in lv if v < lo)
+        ta += s_lo; tb += l_lo; tn += len(sp)
+        w(f"| `{cls}` | {len(sp)} | {s_lo/len(sp):.0%} | **{l_lo/len(lv):.0%}** | "
+          f"{(l_lo/len(lv) - s_lo/len(sp)):+.0%} |")
+    if tn:
+        w(f"| **TOTAL** | **{tn}** | **{ta/tn:.0%}** | **{tb/tn:.0%}** | "
+          f"**{(tb-ta)/tn:+.0%}** |")
+        w(f"\n⭐ **Against the live anchors, {tb/tn:.0%} of members sit below their "
+          f"anchor** — essentially exactly the 20% the extended band allots. The "
+          f"four-point band's strong claim survives contact with the roster.\n")
+        w(f"⛔ **The {abs((tb-ta)/tn):.0%} gap is the RESTAT DEBT, and it is a warning "
+          f"about the LOCKED table, not just about its non-application.** The specs price "
+          f"as if the anchor were far stronger than the actor carrying it "
+          f"(`tiger.nax` is live at 100k HP against a spec of 240k). Applying them as "
+          f"written would make each anchor stronger than its own class and push a further "
+          f"third of the roster below the target floor. Re-derive the specs so the anchor "
+          f"lands ON 1.00, then re-run this census as the check.\n")
+    w("⚠ Measured on the CURRENT roster, which still carries the negative-DPS extractor "
+      "bug, `futuretech_athenacannon` and the IFV family. Best available evidence; not "
+      "final evidence.\n")
+    return reach, n_cls
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--md", help="also write the report here")
@@ -112,7 +256,7 @@ def main() -> int:
     anchors = {k: v for k, v in json.loads(
         (ROOT / "docs/balance/class_anchors.json").read_text(encoding="utf-8")).items()
         if isinstance(v, dict)}
-    rows = collect_classes(anchors)
+    rows, live = collect_classes(anchors)
 
     # ⚠ Read the rings from check_band, never re-derive them here. An earlier revision
     # hardcoded (2*0.75+1)(0.75+1)/6 and silently kept the OLD floor when the maintainer
@@ -194,6 +338,8 @@ def main() -> int:
         for cls, a, ratio, i in sorted(outliers, key=lambda t: -t[2]):
             w(f"| `{cls}` | `{a}` | **{ratio:.2f}x** | {i[0]:,.0f} | {i[3]:,.1f} | {i[2]:,.0f} |")
         w("")
+
+    zone_census(rows, anchors, live, out)
 
     text = "\n".join(out)
     print(text)

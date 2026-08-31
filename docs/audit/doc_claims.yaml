@@ -990,17 +990,18 @@ claims:
       print(sum(1 for k in anchors if not k.startswith('_') and k not in have))
 
   - id: class_anchors_band_reachable
-    value: 4
+    value: 2
     tolerance: 0
     what: >
       Classes with >=4 priced non-epic members whose OWN priced spread fits inside the
-      TARGET band (SWEET_HI/SWEET_LO = 2.50/0.75 = 3.33x, BALANCE_PIPELINE 8.1a), i.e.
+      TARGET band (SWEET_HI/SWEET_LO = 2.50/1.00 = 2.50x, BALANCE_PIPELINE 8.1a), i.e.
       classes for which SOME anchor could reach the ruled >=80% occupancy. ⛔ THE NUMBER
       THAT SAYS RE-ANCHORING IS NOT THE FIX: members are priced as RATIOS to the anchor,
       so moving the anchor SLIDES a class along the band and never NARROWS it (pinned by
       tools/tests/test_band_law.py). `archer` 1.8x, `tank_destroyer` 1.9x, `scout` 2.5x
-      and `closecombat` 2.9x qualify. ⭐ 2 -> 4 on 2026-08-31 when the maintainer widened
-      the target band to 75%..250% -- the widening alone bought two classes. ⚠ Read it
+      qualify. ⭐ 4 -> 2 on 2026-08-31 when the maintainer ruled the target floor ONTO the
+      anchor (1.00..2.50): the narrower target band costs two classes, and the extended
+      0.50..3.50 band is what now holds their tails. ⚠ Read it
       NEXT TO the hard band: 14 of 17 classes fit 0.50..3.50 (7.0x) on trimmed spreads.
       Inside the hard band = a REPRICING job; outside = a SCOPE question.
       ⚠ READ THE TRIMMED SPREAD, NOT THIS COUNT ALONE: `artillery` measures 324.5x raw and

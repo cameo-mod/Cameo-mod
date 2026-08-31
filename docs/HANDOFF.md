@@ -281,19 +281,34 @@ x(P)        = (sqrt(1 + 48P) - 3) / 4          # what stat window a ring means
 ⛔ **THE RINGS ARE COST NUMBERS** — ruled directly: *"The 75% referred to the unit price not the
 stats"*, and *"the full band from cost 50% and stats 50% to cost 3.5x and stats 2.5x"*.
 
+⭐ **THE FOUR-POINT BAND** — *"the 1.0x to 2.5x the regular Band for 80% of the unit population, the
+baseline actor being exactly at 1.0x ... the extended band for the remaining 20% outlier units is
+between 0.5x and 3.5x price."*
+
 | ring | cost | stat window | exact in BOTH spaces? |
 |---|--:|--:|:-:|
 | `FLOOR` | **0.50** | **×0.50** | ✅ |
-| `SWEET_LO` | **0.75** | ×0.7707 | cost only — the ruling |
-| anchor | **1.00** | **×1.00** | ✅ |
+| `SWEET_LO` **= the anchor** | **1.00** | **×1.00** | ✅ |
 | `SWEET_HI` | **2.50** | **×2.00** | ✅ |
 | `CEIL` | **3.50** | **×2.50** | ✅ |
 
-⚠ **Do NOT "fix" `SWEET_LO` to 35/48 = 0.7292** (the cost of ×0.75 stats). An earlier revision did
-exactly that by reading "75%" as a stat window; it was ruled on and reverted, and
-`test_SWEET_LO_is_a_PRICE_of_75_percent_and_NOT_the_cost_of_three_quarter_stats` now fails anyone
-who tries again. Rejected ceilings: ×2.723 → 4.00 (round in neither space), ×3 → 4.667, ×4 → **7.50**
-(a member 7.5× its own anchor is an epic, and epics are already band-exempt via `build_limit`).
+All four exact in both spaces at once. ⚠ **`SWEET_LO` has been wrong twice and both wrong values
+looked principled** — 0.7292 (the cost of ×0.75 stats; rejected, *"the 75% referred to the unit
+price not the stats"*) and 0.75 (a 75% price; superseded by the four-point ruling). Neither is a bug
+awaiting re-fix. Rejected ceilings: ×2.723 → 4.00, ×3 → 4.667, ×4 → **7.50** (a member 7.5× its own
+anchor is an epic, already band-exempt via `build_limit`). Rejected fifth ring: a ~0.68 lower sweet
+edge — the anchor/boundary coupling it worries about is fixed by pricing from the spec's `cost0`,
+not by adding a number round in neither space.
+
+⛔ **THE STRONG CLAIM, AND THE MEASUREMENT THAT LICENSED IT.** A target floor ON the anchor means a
+normal member is never cheaper than the class face — below 1.00 is an outlier by construction.
+`band_granularity.py`: **54%** of members sit below their anchor judged against the ruled SPEC, but
+only **21%** judged against the LIVE anchor actor — essentially exactly the 20% the extended band
+allots. ⛔ **The 33-point gap is the RESTAT DEBT and it warns about the LOCKED table itself:** the
+specs price as if the anchor were far stronger than the actor carrying it (`tiger.nax` live at 100k
+HP against a spec of 240k). Applying them as written would make each anchor stronger than its own
+class and push a further third of the roster below the floor. **Re-derive the specs so the anchor
+lands ON 1.00**, then re-run the census as the check.
 
 Three consequences that change what the next job is:
 
@@ -305,7 +320,7 @@ Three consequences that change what the next job is:
 * ⛔ **RE-ANCHORING CANNOT NARROW A CLASS.** Members price as ratios to the anchor, so a new
   anchor SLIDES the class and never shrinks it. That is repricing work, not anchor work.
 * ⭐ **The two band widths SORT the work.** On trimmed spreads, **14 of 17 classes already fit
-  the HARD band (7.0×) and only 4 fit the target band (3.33×)**. Inside the hard band = a
+  the HARD band (7.0×) and only 2 fit the target band (2.50×)**. Inside the hard band = a
   REPRICING job. Outside it (`scout_vehicle` 11.1×, `support` 10.1×, `artillery_tank` 8.3×) = a
   SCOPE question — those members may not belong in one class. `support` is outside for a third
   reason: it carries six of the eight negative-DPS extractor bugs.
@@ -317,7 +332,7 @@ Three consequences that change what the next job is:
 fix the extractor before pricing `support` or `line_breaker`.
 
 ⭐ **The band is not the constraint.** At the peer cost resolution of **1.143×** (14 shipped mods,
-266 gaps, `tools/reference/peer_cost_grid.py`) the target band holds **9.0 rungs** and the hard band
+266 gaps, `tools/reference/peer_cost_grid.py`) the target band holds **6.9 rungs** and the hard band
 **14.6**; `mbt`'s 42 members come from 22 factions — 4.6 per rung, matching Combined Arms' 4.67
 units per distinct cost. Cameo's cost elasticity is **1.16** against a peer median of **0.84** — a
 recorded exchange rate, not a defect.

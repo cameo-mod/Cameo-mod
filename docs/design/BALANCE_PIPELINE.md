@@ -472,23 +472,58 @@ stat window is the **derived** reading. ⭐ **Four of the five rings come out ex
 spaces at once** — which is exactly why this band beats the 4.00 ceiling it replaced
 (×2.7231 stats: round in neither space, and unexplainable to anyone who asked why).
 
+⭐ **THE FOUR-POINT BAND** (maintainer, 2026-08-31): *"we make the 1.0x to 2.5x the regular
+Band for 80% of the unit population, the baseline actor being exactly at 1.0x ... and the
+extended band for the remaining 20% outlier units is between 0.5x and 3.5x price."*
+
 | ring | cost | stat window | exact in BOTH? |
 |---|--:|--:|:-:|
 | `FLOOR` | **0.50** | **×0.50** HP and DPS | ✅ |
-| `SWEET_LO` | **0.75** | ×0.7707 | cost only — **and that is the ruling** |
-| the anchor | **1.00** | **×1.00** | ✅ |
+| `SWEET_LO` **= the anchor** | **1.00** | **×1.00** | ✅ |
 | `SWEET_HI` | **2.50** | **×2.00** | ✅ — *"2× HP and 2× DPS"* |
 | `CEIL` | **3.50** | **×2.50** | ✅ |
 
-⚠ **Do not "fix" `SWEET_LO` to 35/48 = 0.7292.** That is the cost of ×0.75 *stats*, and an
-earlier revision of this section set it there by reading "75%" as a stat window. It was
-ruled on directly and reverted. `test_SWEET_LO_is_a_PRICE_of_75_percent_and_NOT_the_cost_of_three_quarter_stats`
+**All four are exact in both spaces at once — no earlier candidate managed it.** The fifth
+ring is gone: the target floor IS the anchor.
+
+⚠ **`SWEET_LO` has been wrong twice, and both wrong values looked principled.** 0.7292
+(= 35/48) is the cost of ×0.75 *stats* — rejected, *"the 75% referred to the unit price not
+the stats"*. 0.75 is a 75% *price* — superseded by the four-point ruling. Neither is a bug
+awaiting re-fix; `test_SWEET_LO_IS_THE_ANCHOR_and_both_rejected_values_stay_rejected` pins it.
+
+#### ⛔ The strong claim this encodes, and the measurement that licensed it
+
+Putting the target floor **on** the anchor says a normal class member is never *cheaper*
+than the class face — anything below 1.00 is an outlier **by construction**, not by
+measurement. That is much stronger than "the anchor is the entry unit", and it was
+challenged as possibly unreachable. The challenge was right to demand a number.
+`band_granularity.py` answers it:
+
+| judged against | members below their own anchor |
+|---|--:|
+| the ruled **SPEC** | **54%** |
+| the **live anchor actor** | **21%** |
+
+⭐ **21% — essentially exactly the 20% the extended band allots.** The strong claim survives
+contact with the roster.
+
+⛔ **And the 33-point gap is not the roster; it is the RESTAT DEBT, carrying a warning about
+the LOCKED table itself.** The specs price as if the anchor were far stronger than the actor
+carrying it — `tiger.nax` is live at **100k HP against a spec of 240k**. Applying those
+specs as written would make each anchor stronger than the class it anchors and push a
+further third of the roster below the target floor. **The restat is not merely unapplied; as
+specified it appears over-specified.** Re-derive the specs so the anchor lands *on* 1.00,
+then re-run the census as the check. `test_SWEET_LO_is_a_PRICE_of_75_percent_and_NOT_the_cost_of_three_quarter_stats`
 fails if anyone tries again.
 
 The rejected ceilings, for the record: ×2.723 → 4.00 (round in neither space), ×3 → 4.667
 (wide enough that a class starts overlapping the epic bracket), ×4 → **7.50** (a member 7.5×
 its own anchor is not a class member — it is an epic, and epics are already band-exempt via
-`build_limit`, §8.4).
+`build_limit`, §8.4). And the rejected *fifth ring*: a distinct lower sweet edge at ~0.68
+was proposed to keep the anchor off the band boundary. Rejected — the coupling it worries
+about is real but is fixed by **process** (price from the spec's `cost0`, never from
+whatever the anchor actor happens to cost today), not by adding a number that is round in
+neither space.
 
 **The maintainer derived `SWEET_HI` twice, independently, a month apart** — §8.1 above has
 carried *"verifier (250% cost = 2× HP + 2× DPS)"* since it was written. It is correct, and
@@ -529,12 +564,12 @@ design is.**
 Members are priced as **ratios** to the anchor, so choosing a different anchor **slides** a
 class along the band and never **narrows** it (pinned by
 `test_a_class_spread_does_not_depend_on_which_member_anchors_it`). The target band is
-`2.50 / 0.75` = **3.33× wide** and the hard band `3.50 / 0.50` = **7.0×**. A class whose own
+`2.50 / 1.00` = **2.50× wide** and the hard band `3.50 / 0.50` = **7.0×**. A class whose own
 priced spread exceeds those cannot reach the ruled ≥80% occupancy from *any* member.
 Measure it with **`tools/balance/band_granularity.py`**, never by eye.
 
 ⭐ **And the two numbers it reports are a work-sorting rule, not one verdict.** On trimmed
-(P10..P90) spreads: **14 of 17 classes already fit the HARD band, and only 4 fit the target
+(P10..P90) spreads: **14 of 17 classes already fit the HARD band, and only 2 fit the target
 one.** A class inside the hard band is a **repricing** job — its members sit at plausible
 relative values and need pulling toward the anchor. A class outside it (`scout_vehicle`
 11.1×, `support` 10.1×, `artillery_tank` 8.3×) is a **scope** question: those members may
@@ -549,8 +584,12 @@ peer corpus in `docs/design/ORIGINAL_UNITS_PEER_OPENRA.md` (`tools/reference/`, 
 cost gaps, 14 mods): **the median adjacent cost step in a shipped OpenRA mod is 1.143×**,
 and per-mod it runs 1.056×–1.200×. So:
 
-> **the 3.33×-wide target band holds ≈ 9.0 distinct price rungs**, and the 7.0× hard band
+> **the 2.50×-wide target band holds ≈ 6.9 distinct price rungs**, and the 7.0× hard band
 > holds ≈ 14.6.
+
+⚠ That is the honest cost of putting the floor on the anchor: the target band lost ~2 rungs.
+`mbt`'s 42 members over 6.9 rungs is 6.1 per rung, above Combined Arms' observed 4.67 — tight
+but not broken, since same-rung members are cross-faction siblings drawn from 22 factions.
 
 ⭐ **A class with 42 members does not need 42 rungs.** Shipped mods deliberately price
 several units alike — Combined Arms runs **4.67 units per distinct cost** across 215 armed

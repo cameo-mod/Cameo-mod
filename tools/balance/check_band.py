@@ -5,7 +5,7 @@ For every ledger unit tagged design.class_anchor = <class>, compute its
 class-formula price and the ratio price/cost0, then enforce the baseband law:
 
   * hard band     50%..350%  of the class baseline cost0   (= x0.50 .. x2.50 stats)
-  * TARGET band   75%..250%  of cost0 — target >=80% occupancy
+  * TARGET band  100%..250%  of cost0 — target >=80% occupancy, anchor ON the floor
                   (maintainer 2026-08-31: *"the target band should be at 75% to 250% where
                   most units are located"*, *"the 75% referred to the unit price not the
                   stats"*, and *"let's use the full band from cost 50% and stats 50% to
@@ -24,8 +24,7 @@ price collapses to a closed form — verified exactly against the module in
 So each ring of the band is just the price of a STAT WINDOW, and the useful ones are exact:
 
     x = 0.50  ->  0.500   FLOOR       half the anchor's HP and DPS      EXACT BOTH WAYS
-    x = 0.7707 -> 0.750   SWEET_LO    a 75% PRICE, per the ruling
-    x = 1.00  ->  1.000   the anchor itself                              EXACT BOTH WAYS
+    x = 1.00  ->  1.000   SWEET_LO = the anchor itself                   EXACT BOTH WAYS
     x = 2.00  ->  2.500   SWEET_HI    double                             EXACT BOTH WAYS
     x = 2.50  ->  3.500   CEIL        two and a half                     EXACT BOTH WAYS
 
@@ -67,17 +66,33 @@ ANCHORS = LEDGER / "class_anchors.json"
 #   (a) "The 75% referred to the unit PRICE not the stats" -- the rings live in cost space,
 #       which is the space players see, and the stat window is the DERIVED reading.
 #   (b) "the full band from cost 50% and stats 50% to cost 3.5x and stats 2.5x"
-# ⭐ FOUR OF THE FIVE RINGS ARE EXACT IN BOTH SPACES AT ONCE, which is what makes this
-# band better than the 4.00 ceiling it replaces (4.00 was x2.7231 stats -- round in
-# neither space, and unexplainable to anyone who asked why).
-FLOOR      = 0.50   # = x0.50 stats  EXACT BOTH WAYS
-SWEET_LO   = 0.75   # = x0.7707 stats -- round in COST only, and that is the ruling:
-                    #   "75%" is a price the player reads off the build palette.
-                    #   ⚠ Do NOT "fix" this to 35/48 = 0.7292 (the cost of x0.75 stats).
-                    #   An earlier revision did exactly that and had to be reverted.
-SWEET_HI   = 2.50   # = x2.00 stats  EXACT BOTH WAYS -- the maintainer's own derivation
-CEIL       = 3.50   # = x2.50 stats  EXACT BOTH WAYS
+#   (c) "we make the 1.0x to 2.5x the regular Band for 80% of the unit population, the
+#        baseline actor being exactly at 1.0x ... and the extended band for the remaining
+#        20% outlier units is between 0.5x and 3.5x price"
+# ⭐ ALL FOUR RINGS ARE NOW EXACT IN BOTH SPACES AT ONCE -- 0.50/1.00/2.50/3.50 map to
+# x0.50/x1.00/x2.00/x2.50 on HP and DPS together. No ring is round in only one space, and
+# the fifth ring is gone: the target floor IS the anchor.
+#
+# ⛔ THE STRONG CLAIM THIS ENCODES, AND THE MEASUREMENT THAT LICENSED IT. Putting the
+# target floor ON the anchor says a normal class member is never CHEAPER than the class
+# face -- anything below 1.00 is an outlier by construction rather than by measurement.
+# That was challenged as possibly unreachable, and the challenge was right to demand a
+# number. `band_granularity.py --census` answers it: judged against the LIVE anchor actor,
+# **21% of members sit below their anchor** -- essentially exactly the 20% the extended
+# band allots. Judged against the ruled SPEC it is 54%, and that 33-point gap is not the
+# roster, it is the restat debt (see the docstring warning in `zone_census`).
+FLOOR      = 0.50   # = x0.50 stats   EXACT BOTH WAYS
+SWEET_LO   = 1.00   # = x1.00 stats   EXACT BOTH WAYS -- THE ANCHOR ITSELF
+SWEET_HI   = 2.50   # = x2.00 stats   EXACT BOTH WAYS -- the maintainer's own derivation
+CEIL       = 3.50   # = x2.50 stats   EXACT BOTH WAYS
 SOFT_FLOOR = SWEET_LO   # kept: the old name for the same ring
+
+# ⚠ SWEET_LO HAS BEEN WRONG TWICE THIS WEEK AND BOTH WRONG VALUES LOOKED PRINCIPLED.
+#   0.7292 (= 35/48) is the cost of x0.75 STATS -- rejected: "The 75% referred to the unit
+#           price not the stats."
+#   0.75    is a 75% PRICE -- superseded by the four-point ruling below, which puts the
+#           lower target edge ON the anchor.
+# Neither is a bug to re-fix. 1.00 is the ruling and `test_band_law.py` pins it.
 
 
 def fnum(v):

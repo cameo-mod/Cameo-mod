@@ -11,13 +11,12 @@ rings are EXACT stat windows:
     price(x, x) = (2x + 1)(x + 1) / 6
     x(P)        = (sqrt(1 + 48P) - 3) / 4
 
-    x = 0.50 -> 0.500 FLOOR      x = 1.00 -> 1.000 anchor
+    x = 0.50 -> 0.500 FLOOR      x = 1.00 -> 1.000 SWEET_LO = the anchor
     x = 2.00 -> 2.500 SWEET_HI   x = 2.50 -> 3.500 CEIL
 
-⭐ FOUR OF THE FIVE RINGS ARE EXACT IN BOTH SPACES AT ONCE. Only SWEET_LO is round in
-cost alone (0.75 cost = x0.7707 stats), and that is the ruling, not a gap: *"the 75%
-referred to the unit price not the stats"*. Rings are declared in COST — the space a
-player reads off the build palette — and the stat window is the derived reading.
+⭐ ALL FOUR RINGS ARE EXACT IN BOTH SPACES AT ONCE, which no earlier candidate managed.
+Rings are declared in COST — the space a player reads off the build palette — and the
+stat window is the derived reading; here the two agree at every ring.
 
 The maintainer derived SWEET_HI independently — *"cost from 100% to 250% makes sense
 because in the balance formula that is exactly true when a unit has 2x HP and 2x DPS"* —
@@ -78,18 +77,35 @@ def test_two_and_a_half_stats_cost_exactly_the_hard_ceiling():
     assert check_band.CEIL == pytest.approx(3.50, abs=1e-12)
 
 
-def test_SWEET_LO_is_a_PRICE_of_75_percent_and_NOT_the_cost_of_three_quarter_stats():
-    """⛔ THE REGRESSION THIS FILE EXISTS TO PREVENT. An earlier revision read the
-    maintainer's "75%" as a STAT window and set SWEET_LO = 35/48 = 0.7292, the cost of
-    x0.75 HP and DPS. That was wrong and was ruled on directly: *"The 75% referred to the
-    unit price not the stats"*. Rings live in COST. Anyone "fixing" 0.75 back to 0.7292
-    because it looks underived will fail here."""
-    assert check_band.SWEET_LO == pytest.approx(0.75, abs=1e-12)
-    # 0.75 COST is this stat window -- not round, and that is fine
-    assert price(0.7707, 0.7707) == pytest.approx(0.75, abs=1e-3)
-    # the confusable value, explicitly rejected
+def test_SWEET_LO_IS_THE_ANCHOR_and_both_rejected_values_stay_rejected():
+    """⛔ THE REGRESSION THIS FILE EXISTS TO PREVENT — and SWEET_LO has now been wrong
+    twice in one week, both times for a reason that looked principled at the time:
+
+      0.7292 (= 35/48)  the cost of x0.75 STATS. Rejected: *"The 75% referred to the unit
+                        price not the stats."*
+      0.75              a 75% PRICE. Superseded by the four-point ruling: *"we make the
+                        1.0x to 2.5x the regular Band ... the baseline actor being exactly
+                        at 1.0x."*
+
+    Neither is a bug awaiting re-fix. The target floor IS the anchor, which is what makes
+    all four rings exact in both spaces at once."""
+    assert check_band.SWEET_LO == pytest.approx(1.00, abs=1e-12)
+    assert price(1.0, 1.0) == pytest.approx(1.00, abs=1e-12)
+    # both superseded values, pinned so a "restoration" fails loudly
     assert price(0.75, 0.75) == pytest.approx(35.0 / 48.0, abs=1e-12)
-    assert check_band.SWEET_LO != pytest.approx(35.0 / 48.0, abs=1e-6)
+    assert price(0.7707, 0.7707) == pytest.approx(0.75, abs=1e-3)
+    assert check_band.SWEET_LO not in (pytest.approx(35.0 / 48.0, abs=1e-6),
+                                      pytest.approx(0.75, abs=1e-6))
+
+
+def test_all_FOUR_rings_are_exact_in_both_cost_and_stat_space():
+    """⭐ The property that makes 0.50 / 1.00 / 2.50 / 3.50 the right ring set: each is a
+    round COST and the preimage is a round STAT multiplier. No earlier candidate managed
+    it -- 4.00 was x2.7231, 0.729 was round in stats only, 0.75 in cost only."""
+    for cost, stat in ((0.50, 0.50), (1.00, 1.00), (2.50, 2.00), (3.50, 2.50)):
+        assert price(stat, stat) == pytest.approx(cost, abs=1e-12)
+    assert (check_band.FLOOR, check_band.SWEET_LO,
+            check_band.SWEET_HI, check_band.CEIL) == (0.50, 1.00, 2.50, 3.50)
 
 
 # --------------------------------------------------------------------------------------
@@ -157,7 +173,12 @@ def test_a_class_spread_does_not_depend_on_which_member_anchors_it():
 
 
 def test_the_band_rings_are_ordered_and_the_target_sits_inside_the_hard_band():
-    assert check_band.FLOOR < check_band.SWEET_LO < 1.0 < check_band.SWEET_HI < check_band.CEIL
+    """⚠ The target floor now EQUALS the anchor, so this is `<=`, not `<`. The strict form
+    encoded the old four-ring layout and failed the moment the ruling landed — which is
+    the test doing its job, not a licence to loosen it further: FLOOR must stay strictly
+    below the anchor, or the extended band has no lower skirt at all."""
+    assert check_band.FLOOR < check_band.SWEET_LO
+    assert check_band.SWEET_LO <= 1.0 < check_band.SWEET_HI < check_band.CEIL
     assert check_band.SOFT_FLOOR == check_band.SWEET_LO
 
 

@@ -192,8 +192,8 @@ measured against a ruler planted in the wrong place.
 ⛔ **But re-anchoring alone cannot fix it, and that is the larger finding.** Members are priced as
 RATIOS to the anchor, so moving the anchor SLIDES a class along the band and never NARROWS it
 (pinned by `tools/tests/test_band_law.py`). ⭐ **The two band widths SORT the remaining work.** On
-trimmed spreads, **14 of 17 classes already fit the HARD band (3.50/0.50 = 7.0x) and only 4 fit the
-target band (2.50/0.75 = 3.33x)**. Inside the hard band = a REPRICING job, which is what the
+trimmed spreads, **14 of 17 classes already fit the HARD band (3.50/0.50 = 7.0x) and only 2 fit the
+target band (2.50/1.00 = 2.50x)**. Inside the hard band = a REPRICING job, which is what the
 pipeline exists to do. Outside it — `scout_vehicle` 11.1x, `support` 10.1x, `artillery_tank` 8.3x —
 = a SCOPE question: those members may not belong in one class at all. `support` is outside for a
 third reason entirely: it carries six of the eight negative-DPS extractor bugs.
@@ -219,6 +219,15 @@ flat-20 snap changes almost nothing. A flat 20 is one perceptible notch only nea
 `step(price) = max(20, 20 * round(0.143 * price / 20))` -- 20 at 140, **160 at the median**, 700 at
 5,000. **105 distinct prices -> 55**; 92% of units move by a median 2.0%. A snap is a REPRICING and
 goes through the ledger + `apply_balance --confirm` + boot gate.
+
+⛔ **AND THE RESTAT MAY BE OVER-SPECIFIED — new, and it changes what step 3 should do.**
+`band_granularity.py` runs the below-anchor census twice: **54%** of members price below their
+anchor against the ruled SPEC, **21%** against the LIVE anchor actor. The 33-point gap is the restat
+debt, and its direction is the warning: the specs price as if the anchor were far stronger than the
+actor carrying it (`tiger.nax` live at 100k HP against a spec of **240k**). Applying the LOCKED
+table as written would make each anchor stronger than the class it anchors and push a further third
+of the roster below the target floor. **Re-derive the specs so the anchor lands ON 1.00 before
+applying them**, then re-run the census as the check.
 
 ⭐ **Two free wins are available now, both maintainer calls, neither applied:** `tank_destroyer`
 `naxis_hetzer` 60% -> `ra1_allies_alliedtankdestroyer` **100%**; and `scout`, whose signed anchor
