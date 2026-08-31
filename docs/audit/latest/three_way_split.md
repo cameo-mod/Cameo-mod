@@ -1,13 +1,13 @@
-# audit_three_way_split — 391 raw stacked weapons; 265 remain unreviewed
+# audit_three_way_split — 390 raw stacked weapons; 264 remain unreviewed
 
-   1638  correct — exactly one main warhead
+   1639  correct — exactly one main warhead
     317  none — utility / effect-only weapons
-    391  RAW STACKS — structural inventory
+    390  RAW STACKS — structural inventory
     126  reviewed — exact intentional composites
-    265  UNREVIEWED — classification backlog
+    264  UNREVIEWED — classification backlog
 
   mains  weapons
-      2    206
+      2    205
       3    115
       4     42
       5     13
@@ -31,7 +31,6 @@
 | 4 | CannonHE_Heavy + CannonHE_Medium |
 | 4 | Magic_Heavy + Tesla_Heavy |
 | 4 | Flame_Heavy + Tesla_Super |
-| 3 | CannonAP_Light + CannonHE_Medium |
 | 3 | CannonHE_Heavy + Plasma_HeavyFlatCompatibility |
 | 3 | 1Dam + Flame_Medium |
 | 3 | 1Dam + Demolition_Light |
@@ -39,6 +38,7 @@
 | 3 | 1Dam + Demolition_Heavy + Flame_Heavy |
 | 3 | CannonHE_Heavy + Concussion_Medium + Demolition_Light |
 | 3 | Bullet_Light + Bullet_Medium + Concussion_Medium + Demolition_Light |
+| 3 | Laser_Heavy + Railgun_Heavy + Tesla_Heavy |
 
 Reviewed exact composites (126):
 
@@ -169,5 +169,5 @@ Reviewed exact composites (126):
 - `wc2_dwarf_Rifle`: Bullet_Medium + CollapseTargetCompatibility1
 - `wc2catapultFire`: CollapseTargetCompatibility1 + Concussion_Heavy
 
-WARN raw 391/391; unreviewed 265/265
+WARN raw 390/390; unreviewed 264/264
 Lower raw ratchets only for structural consolidation; lower the unreviewed ratchet only for exact reviewed decisions.

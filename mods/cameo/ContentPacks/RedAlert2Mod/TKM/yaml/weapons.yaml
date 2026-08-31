@@ -365,6 +365,7 @@ TKMQuadCannonAA:
 		Damage: 4000
 		PercentageScale: 9975
 tkmturretcannon:
+	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -379,6 +380,14 @@ tkmturretcannon:
 		Damage: 8000
 	Warhead@CannonHE_Medium:
 		Damage: 8000
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Medium:
+	Warhead@CannonAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 9994
+		Spread: 300
+		Falloff: 100, 50, 20, 0
 tkmltgun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium

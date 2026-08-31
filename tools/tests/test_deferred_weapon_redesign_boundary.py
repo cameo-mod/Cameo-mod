@@ -21,7 +21,6 @@ RECOMMENDED_DESIGN_BATCH = {
 PRESERVE_HYBRID = {
     "TSBoatcannon",
     "SheridanCannon",
-    "tkmturretcannon",
     "HammerTankCannon",
     "KotinCannon",
     "TigerCannon",
@@ -54,7 +53,6 @@ STATE_PROFILE = {"GrenadeRA"}
 AP_HE_PROFILE = {
     "AlliedTankDestroyerCannon",
     "SheridanCannon",
-    "tkmturretcannon",
 }
 
 HE_TIER_PROFILE = {
@@ -91,11 +89,11 @@ EXPECTED_MAIN_ORDER.update({
 })
 EXPECTED_MAIN_ORDER.update({
     name: ("CannonHE_Medium", "CannonAP_Light")
-    for name in AP_HE_PROFILE - {"SheridanCannon", "tkmturretcannon"}
+    for name in AP_HE_PROFILE - {"SheridanCannon"}
 })
 EXPECTED_MAIN_ORDER.update({
     name: ("CannonAP_Light", "CannonHE_Medium")
-    for name in {"SheridanCannon", "tkmturretcannon"}
+    for name in {"SheridanCannon"}
 })
 EXPECTED_MAIN_ORDER.update({
     name: ("CannonHE_Heavy", "CannonHE_Medium")
@@ -118,7 +116,7 @@ EXPECTED_DESCENDANT_CLOSURE = {
 }
 
 EXPECTED_MAIN_PROFILE_SHA256 = (
-    "087c3395738abbdee27db90bccea314e5c561a2bc39871ba7f8f772f85de15fe"
+    "cddbebbcb70a0a53f10a87695ba7988f04942c6f18f9aaa5660837a6a743b79d"
 )
 
 
@@ -168,7 +166,7 @@ class DeferredWeaponRedesignBoundaryTests(unittest.TestCase):
         self.assertFalse(RECOMMENDED_DESIGN_BATCH & PRESERVE_HYBRID)
         self.assertFalse(RECOMMENDED_DESIGN_BATCH & ISOLATE_FIRST)
         self.assertFalse(PRESERVE_HYBRID & ISOLATE_FIRST)
-        self.assertEqual(15, len(DEFERRED_COHORT))
+        self.assertEqual(14, len(DEFERRED_COHORT))
 
     def test_current_composite_profiles_remain_unmodified(self):
         self.assertEqual(DEFERRED_COHORT, set(EXPECTED_MAIN_ORDER))

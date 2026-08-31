@@ -62,8 +62,8 @@ from intentional_composites import (  # noqa: E402
 
 # Weapons resolving to >1 main damaging warhead when this was measured (2026-08-28). LOWER ONLY.
 # 1190 -> 1178 the same day: a MEASUREMENT fix, not converted weapons. See FRIENDLY_FIRE below.
-RAW_SPLIT_BASELINE = 391
-SPLIT_BASELINE = 265
+RAW_SPLIT_BASELINE = 390
+SPLIT_BASELINE = 264
 INTENTIONAL_COMPOSITES = reviewed_fingerprints()
 REPORT = pathlib.Path(__file__).resolve().parents[2] / "docs/audit/latest/three_way_split.md"
 

@@ -4,10 +4,10 @@ This report compresses the honest unreviewed backlog into inheritance
 families. It is a review queue, not conversion authority. Reviewed exact
 composites remain in the raw structural count but are excluded here.
 
-- Raw reachable stacked definitions: **290**
+- Raw reachable stacked definitions: **289**
 - Exact reviewed composites: **126**
-- Unreviewed reachable definitions: **164**
-- Unreviewed inheritance families: **107**
+- Unreviewed reachable definitions: **163**
+- Unreviewed inheritance families: **106**
 
 The buckets describe why automatic consolidation is unsafe. They do not
 decide the eventual damage family.
@@ -21,7 +21,7 @@ listed after the colon remain open decisions.
 | state delivery | 31 | 47 |
 | legacy compatibility | 5 | 5 |
 | numbered warhead key | 1 | 1 |
-| no special mechanical signal | 28 | 36 |
+| no special mechanical signal | 27 | 35 |
 
 ## Target And State Routing (18 families)
 
@@ -219,7 +219,7 @@ listed after the colon remain open decisions.
 - **`TS120mmx`** (1; numbered): `TS120mmx`
   - mains `1Dam + CannonHE_Medium + Concussion_Medium`: `TS120mmx`
 
-## No Special Mechanical Signal (28 families)
+## No Special Mechanical Signal (27 families)
 
 - **`LatinBuggyChaingun`** (2; none detected): `LatinBuggyChaingun`, `LatinBuggyChaingun_elite`
   - mains `Bullet_Light + Bullet_Medium + CannonAP_Light + Flak_Medium`: `LatinBuggyChaingun`, `LatinBuggyChaingun_elite`
@@ -276,8 +276,6 @@ listed after the colon remain open decisions.
   - mains `Bullet_Light + Bullet_Medium + CannonHE_Heavy`: `ordos_autogunturret`
 - **`t30shell`** (1; none detected): `t30shell`
   - mains `Demolition_Heavy + Railgun_Heavy`: `t30shell`
-- **`tkmturretcannon`** (1; none detected): `tkmturretcannon`
-  - mains `CannonAP_Light + CannonHE_Medium`: `tkmturretcannon`
 
 ## Maintainer decision shape
 

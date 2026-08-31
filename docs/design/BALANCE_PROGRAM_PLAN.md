@@ -639,14 +639,19 @@ three low-health +1 folded-percentage rounding cases, and the intentional Kirov 
 |---|---|
 | `GrenadeRA` | Choose ordinary explosive `Demolition_Light` or retain the current Flame identity. Its death and thermobaric routes are now independently pinned and cannot inherit the decision accidentally. |
 
-**Preserve the current hybrid — 7 weapon definitions.** The available actor descriptions do not
+**Approved anti-armor defense — 1 weapon definition.**
+
+| weapon | faction / active user | approved contract |
+|---|---|---|
+| `tkmturretcannon` | TKM Tank Turret Bunker | The stationary defense now uses one 16,000-damage `CannonAP_Light` main, prioritizes vehicles, and presents the standard anti-tank-defense description. Its armor curve favors vehicles while retaining 74% damage against unarmored infantry. The fold keeps the old broad 300-range delivery geometry; the derived moving-target reliability is 0.8276 and effective DPS is 569.35, comparable to the TD/RA gun-turret role rather than the unintended 83.60-DPS narrow-geometry result rejected in review. It can therefore repel an isolated infantry unit without becoming an anti-infantry defense. Its structure performance is not a role constraint. |
+
+**Preserve the current hybrid — 6 weapon definitions.** The available actor descriptions do not
 support choosing either half as the sole role.
 
 | weapon | faction / active users | why it stays hybrid |
 |---|---|---|
 | `TSBoatcannon` | Forgotten Cannon Tug | The old Concussion proposal produces a large vehicle gain and structure loss. Demolition is closer to its current 2,000 Concussion + 16,000 Demolition weighting, but a pure profile is still an unrequested re-role. |
 | `SheridanCannon` | Allied Sheridan Assault Tank | Its explicit general-purpose infantry/vehicle role is represented by the AP+HE blend. |
-| `tkmturretcannon` | TKM Tank Turret Bunker | No tooltip or upgrade contract supports turning the generic defense into pure HE. |
 | `HammerTankCannon` | Soviet Hammer Tank | A main battle-tank progression should not silently become pure HE; its thermobaric descendant also inherits the parent route. |
 | `KotinCannon` | Soviet Kotin Nuclear Tank | Same progression problem as Hammer, plus a nuclear-shell upgrade and thermobaric descendant. |
 | `TigerCannon` | Allied Tiger Heavy Tank and Cyber Tank | One shared weapon serves two armored-combat units; pure HE is not corroborated for both. |
@@ -667,8 +672,10 @@ low-HP percentage deltas, nominal state-scale compensation, the accepted GP-25 T
 armor matrix, and the unchanged Molotov death payload. GP-25's effective meter is intentionally
 reprofiled with the selected Demolition armor and falloff; it is not claimed as state-neutral.
 `tools/tests/test_closure_isolation_consolidation.py` pins the first isolation batch and its exact
-whole-tree comparison. `tools/tests/test_deferred_weapon_redesign_boundary.py` pins the remaining
-15-definition boundary, ordered main-profile fingerprint, descendant closure and 12-direct/3-indirect
+whole-tree comparison. `tools/tests/test_tkm_tank_turret_role.py` pins the approved anti-armor
+profile, vehicle priority, tooltip, unchanged ordinary TKM Bunker role, and exact whole-tree
+comparison. `tools/tests/test_deferred_weapon_redesign_boundary.py` pins the remaining
+14-definition boundary, ordered main-profile fingerprint, descendant closure and 11-direct/3-indirect
 reachability split.
 Until a remaining gameplay consequence is authorized, that cohort's current main-damage contract
 stays unchanged. Pricing remains after W24/W23/A5 as required by §0a.

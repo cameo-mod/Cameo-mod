@@ -20,9 +20,9 @@ class WeaponDecisionBundleTests(unittest.TestCase):
 
     def test_every_unreviewed_reachable_weapon_occurs_once(self):
         names = [member for row in self.rows for member in row["members"]]
-        self.assertEqual(164, len(names))
+        self.assertEqual(163, len(names))
         self.assertEqual(len(names), len(set(names)))
-        self.assertEqual(107, len(self.rows))
+        self.assertEqual(106, len(self.rows))
 
     def test_reviewed_composites_are_not_presented_as_open_decisions(self):
         names = {member for row in self.rows for member in row["members"]}
@@ -50,7 +50,7 @@ class WeaponDecisionBundleTests(unittest.TestCase):
             "state delivery": (31, 47),
             "legacy compatibility": (5, 5),
             "numbered warhead key": (1, 1),
-            "no special mechanical signal": (28, 36),
+            "no special mechanical signal": (27, 35),
         }, counts)
 
     def test_every_member_is_covered_by_one_exact_main_fingerprint(self):

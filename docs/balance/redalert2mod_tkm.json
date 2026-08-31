@@ -1269,17 +1269,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1290,6 +1283,7 @@
       "reloaddelay": "28",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_CannonAP_LightFlat",
        "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
