@@ -2,7 +2,7 @@
 #		Red Alert 2 Asian Alliance
 ####################################################################################################
 
-AsianHowitzerSplash:
+^AsianHowitzerSplashLegacy:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Twlt_VeryLarge_RA2
@@ -11,6 +11,16 @@ AsianHowitzerSplash:
 		Damage: 20000
 	Warhead@Demolition_Heavy:
 		Damage: 20000
+
+AsianHowitzerSplash:
+	Inherits: ^AsianHowitzerSplashLegacy
+	Warhead@Concussion_Medium:
+		Damage: 40000
+	-Warhead@Demolition_Heavy:
+
+RA2KirovHowitzerSplash:
+	Inherits: ^AsianHowitzerSplashLegacy
+
 AsianFlameFragment:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light

@@ -5065,10 +5065,7 @@
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Flame_Light"
+       "^GrenadeRALegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -5103,10 +5100,7 @@
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Flame_Light"
+       "^GrenadeRALegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -5150,7 +5144,7 @@
        "^Compatibility_Thermobaric_LightFlat",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
-       "GrenadeRA"
+       "^GrenadeRALegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -5195,7 +5189,7 @@
        "^Compatibility_Thermobaric_LightFlat",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
-       "GrenadeRA"
+       "^GrenadeRALegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",

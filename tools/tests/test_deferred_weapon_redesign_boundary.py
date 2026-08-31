@@ -15,6 +15,7 @@ from survey_weapon_structure import inventory
 
 RECOMMENDED_DESIGN_BATCH = {
     "AlliedTankDestroyerCannon",
+    "GrenadeRA",
 }
 
 PRESERVE_HYBRID = {
@@ -28,33 +29,24 @@ PRESERVE_HYBRID = {
 }
 
 ISOLATE_FIRST = {
-    "AsianHowitzerSplash",
     "RA2Terrorist",
     "SCScourgeDroneExplosion",
     "ScourgeDroneExplosion",
     "SCScourgeExplosion",
     "ScourgeExplosion",
-    "TS155mm",
-    "TSAux155mm",
     "TSBomb",
-    "TSInfantryMortar",
-    "GrenadeRA",
 }
 
 DEFERRED_COHORT = RECOMMENDED_DESIGN_BATCH | PRESERVE_HYBRID | ISOLATE_FIRST
 
 BLAST_PROFILE = {
-    "AsianHowitzerSplash",
     "RA2Terrorist",
     "SCScourgeDroneExplosion",
     "SCScourgeExplosion",
     "ScourgeDroneExplosion",
     "ScourgeExplosion",
-    "TS155mm",
-    "TSAux155mm",
     "TSBoatcannon",
     "TSBomb",
-    "TSInfantryMortar",
 }
 
 STATE_PROFILE = {"GrenadeRA"}
@@ -73,7 +65,6 @@ HE_TIER_PROFILE = {
 }
 
 INDIRECT_ONLY = {
-    "AsianHowitzerSplash",
     "RA2Terrorist",
     "SCScourgeDroneExplosion",
     "SCScourgeExplosion",
@@ -88,7 +79,6 @@ EXPECTED_MAIN_ORDER.update({
         "SCScourgeExplosion",
         "ScourgeDroneExplosion",
         "ScourgeExplosion",
-        "TSInfantryMortar",
     }
 })
 EXPECTED_MAIN_ORDER.update({
@@ -113,11 +103,6 @@ EXPECTED_MAIN_ORDER.update({
 })
 
 EXPECTED_DESCENDANT_CLOSURE = {
-    "GrenadeRA": {
-        "GrenadeRAExplode",
-        "GrenadeThermobaric",
-        "GrenadeThermobaricExplode",
-    },
     "HammerTankCannon": {"HammerTankCannonThermobaric"},
     "KotinCannon": {"KotinCannonThermobaric"},
     "RA2Terrorist": {
@@ -130,12 +115,10 @@ EXPECTED_DESCENDANT_CLOSURE = {
     },
     "SCScourgeDroneExplosion": {"ScourgeDroneExplosion"},
     "SCScourgeExplosion": {"ScourgeExplosion"},
-    "TS155mm": {"TS155mm_bluenuke", "TSAux155mm"},
-    "TSInfantryMortar": {"TSInfantryMortarChem"},
 }
 
 EXPECTED_MAIN_PROFILE_SHA256 = (
-    "50e71d6c86a910102b880d179c4a1286ebd5ad3377dfb034de8ce66b4cc2ac94"
+    "087c3395738abbdee27db90bccea314e5c561a2bc39871ba7f8f772f85de15fe"
 )
 
 
@@ -185,7 +168,7 @@ class DeferredWeaponRedesignBoundaryTests(unittest.TestCase):
         self.assertFalse(RECOMMENDED_DESIGN_BATCH & PRESERVE_HYBRID)
         self.assertFalse(RECOMMENDED_DESIGN_BATCH & ISOLATE_FIRST)
         self.assertFalse(PRESERVE_HYBRID & ISOLATE_FIRST)
-        self.assertEqual(19, len(DEFERRED_COHORT))
+        self.assertEqual(15, len(DEFERRED_COHORT))
 
     def test_current_composite_profiles_remain_unmodified(self):
         self.assertEqual(DEFERRED_COHORT, set(EXPECTED_MAIN_ORDER))

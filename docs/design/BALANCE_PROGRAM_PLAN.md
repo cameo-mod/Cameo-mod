@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured evidence |
 |---|---|
-| W24 — directly fired weapons with **more than one** damage main | **444** under the unified predicate; current 2026-08-31 survey (histogram runs out to 10 mains) |
+| W24 — directly fired weapons with **more than one** damage main | **441** under the unified predicate; current 2026-08-31 survey (histogram runs out to 10 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** (2026-08-17 snapshot) |
 | fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** (2026-08-17 snapshot) — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
@@ -52,7 +52,7 @@ the question was asked.
 
 **The order:**
 
-1. **W24** — one damage warhead per weapon (DESIGN §11b). 444 directly fired weapons remain non-compliant.
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 441 directly fired weapons remain non-compliant.
 2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
    is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
    merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE
@@ -590,7 +590,7 @@ delivery and price number measured before it lands is measuring the wrong object
 | A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | ✅ DONE — `TS70mmChem` → `^Warhead_CannonChem_Light` at 6000, `TSScoopDualChem` → `^Warhead_CannonChem_Medium` at 30000, and `JapanesePlasmaBomb` → `^Warhead_Plasma_Heavy` at 30000. Main totals and weapon operation are preserved; standard family armour/blast profiles are accepted classification consequences. Upgrade audit records Ratty 0.75× Wood, Scooper 0.80× Wood, and Japanese bomber 0.96× Wood. Static audit-gated; in-game review deferred by maintainer request. |
 | A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | ✅ DONE — renamed the upgrade, condition, icon, UI text, Su-57 weapons, and Monster Tank inferno weapon across active YAML, Fluent, AI, sequences, and the survival-map script. `safe_rename.py` changed 89 references in 12 text files plus the icon; no old identifiers or dangling inheritance targets remain. Weapon values are unchanged. Static audit-gated; in-game review deferred by maintainer request. |
 | A5 | Collapse the 27 single-user templates | ✅ DONE for the active W24-created set — the refreshed upstream-based census found 14 live one-user W24 wrappers rather than the older estimate of 27. All 14 are removed across three isolated batches: five small projectile/effect wrappers, five Rocket Trooper projectiles, then the Tower Missile and `mtank_pri2` projectile/effect pairs. Every sole consumer is exactly equal after full inheritance resolution. Static audit-gated; in-game review deferred by maintainer request. |
-| A6 | Continue the burn-down | 🔵 IN PROGRESS — the current long-lived PR #320 combines the reviewed role cohorts with the Cameo percentage-runtime repair. Folded percentage hits now execute exactly once for positional and direct-Actor impacts, and wide intermediates eliminate the old multiplication wraparound. `review_batch_diff.py` checks all 155 active/design health values and now fingerprints armor profiles as well as targeting, relationships, projectiles, effects, physical state, non-damage warheads, and percentage output. The maintainer-authorized role batch consolidates 10 definitions across 12 resolved stacks while holding back the Allied Tank Destroyer because its paid Cryo replacement would become substantially weaker in the unit's core role. The refreshed survey reports 528 reachable stacked weapons (444 direct armaments and 84 indirect weapon-graph entries); the all-ruleset unreviewed ratchet is 631 plus one reviewed intentional composite. Pricing has not started. |
+| A6 | Continue the burn-down | 🔵 IN PROGRESS — the current long-lived PR #320 combines the reviewed role cohorts with the Cameo percentage-runtime repair. Folded percentage hits now execute exactly once for positional and direct-Actor impacts, and wide intermediates eliminate the old multiplication wraparound. `review_batch_diff.py` checks all 155 active/design health values and now fingerprints armor profiles as well as targeting, relationships, projectiles, effects, physical state, non-damage warheads, and percentage output. The authorized role batches consolidate 14 definitions across 16 resolved stacks; the first closure-isolation pass also detaches Kirov, blue-nuke, chemical-mortar and grenade descendants before changing their parents. The refreshed survey reports 525 reachable stacked weapons (441 direct armaments and 84 indirect weapon-graph entries); the all-ruleset unreviewed ratchet is 628 plus one reviewed intentional composite. The active target is below 300 reachable stacked weapons. Pricing has not started. |
 
 #### A6 design gate — authorized batch and exact remaining cohort (2026-08-31)
 
@@ -614,11 +614,30 @@ geometry and application count change intentionally; folded percentage rounding 
 | `NaxiAntiTankCannon`, `NaxiAntiTankCannon_elite`, `NaxiHetzerDestroyer`, `NaxiHetzerDestroyer_elite` | Naxis Anti-Tank Cannon/Old Tank and Hetzer | `CannonAP_Light` | Matches the anti-vehicle/tank-destroyer role; removes HE splash. Corrosion descendants must retain their current resolved routes. |
 | `AsianHowitzerCannon`, `AsianHowitzerCannon_elite` | Asian Alliance Howitzer | `CannonHE_Heavy` | Commits the artillery cannon to the wider Heavy HE profile instead of its current Medium/Heavy blend. |
 
+**Closure isolation and artillery follow-up — 4 more consolidated definitions.**
+
+| weapon definitions | isolation boundary | selected role / result |
+|---|---|---|
+| `AsianHowitzerSplash` | Kirov now triggers the exact legacy alias `RA2KirovHowitzerSplash` | Asian inferno splash becomes pure `Concussion_Medium`; Kirov remains byte-equivalent. |
+| `TS155mm`, `TSAux155mm` | `TS155mm_bluenuke` now inherits the exact abstract legacy payload instead of the ordinary cannon | Standard and auxiliary Nod artillery become pure `Concussion_Medium`; blue-nuke remains unchanged. |
+| `TSInfantryMortar` | `TSInfantryMortarChem` now inherits the exact abstract legacy payload | Ordinary Forgotten mortar becomes pure `Concussion_Medium`; the three-main chemical upgrade remains unchanged. |
+| `GrenadeRA` | Ordinary, death and thermobaric routes now share an abstract legacy payload rather than inheriting through the ordinary weapon | No grenade gameplay change yet; the ordinary grenade can now be redesigned without leaking into its death/thermobaric descendants. |
+
+The Kirov alias adds one concrete definition, so four resolved consolidations reduce the reachable
+stacked backlog by three. The whole-tree report pins the added alias, exact descendant hashes,
+three low-health +1 folded-percentage rounding cases, and the intentional Kirov trigger-name swap.
+
 **Held back after critical review — 1 weapon definition.**
 
 | weapon | reason |
 |---|---|
 | `AlliedTankDestroyerCannon` | Pure `CannonAP_Light` would deepen the paid `AlliedTankDestroyerCannonCryo` replacement's existing losses against Superheavy, Heavy and Concrete from roughly 0.91/0.92/0.93× to 0.75/0.87/0.83×. The base remains unchanged until the Cryo progression is designed with it. |
+
+**Ready for a role decision after isolation — 1 weapon definition.**
+
+| weapon | remaining decision |
+|---|---|
+| `GrenadeRA` | Choose ordinary explosive `Demolition_Light` or retain the current Flame identity. Its death and thermobaric routes are now independently pinned and cannot inherit the decision accidentally. |
 
 **Preserve the current hybrid — 7 weapon definitions.** The available actor descriptions do not
 support choosing either half as the sole role.
@@ -633,26 +652,24 @@ support choosing either half as the sole role.
 | `TigerCannon` | Allied Tiger Heavy Tank and Cyber Tank | One shared weapon serves two armored-combat units; pure HE is not corroborated for both. |
 | `Type97Cannon` | Japan Chi-Ha Heavy Tank | No active description supports an HE-only heavy-tank role. |
 
-**Isolate or reconstruct the closure first — 11 weapon definitions.** These parents are shared by
+**Isolate or reconstruct the closure first — 6 weapon definitions.** These parents are shared by
 other factions, delivery modes or excluded upgrade descendants. Editing only the named root would
 quietly change weapons outside this cohort.
 
 | weapon definitions | active users / inherited closure | prerequisite decision |
 |---|---|---|
-| `AsianHowitzerSplash` | Asian Howitzer inferno layer and Soviet Kirov fire bomb | Split the cross-faction payload before choosing Concussion or a fire-aligned profile. |
 | `RA2Terrorist` | Latin Terrorist/bomb cars, RA2 civilian bomb cars, CABAL Enlighted, Eden Starflare Lynx/Tiger; `GLDemolitionExplode`, two GL Terrorist routes, two GL Bomb Truck routes and global `GLBarrelExplode` descendants | Define the shared demolition contract and explicitly preserve or redesign every descendant, including the global structure/barrel death route. |
 | `SCScourgeDroneExplosion`, `ScourgeDroneExplosion`, `SCScourgeExplosion`, `ScourgeExplosion` | Scourge Drone and Zerg Scourge attack/death payloads | Define one AA-suicide contract and protect the paired attack/death behavior; generic Demolition is not enough. |
-| `TS155mm`, `TSAux155mm` | Nod Artillery standard/upgrade; `TS155mm_bluenuke` remains outside the cohort | Preserve the blue-nuclear child before choosing a Concussion artillery profile. |
 | `TSBomb` | GDI Orca Bomber and Strike Orca | Preserve its Ground/Ship damage targeting and separate water-impact effect routing before selecting a generic bomb family. |
-| `TSInfantryMortar` | Forgotten Mutant Mortarman; chemical upgrade child | Preserve the chemical descendant before choosing a Concussion profile. |
-| `GrenadeRA` | Soviet Grenadier; explosion and thermobaric descendants | Decide whether the ordinary grenade loses Temperature and its flame-looking effect, then preserve the upgrade children. |
 
 `tools/tests/test_authorized_role_profile_consolidation.py` pins the exact 12 resolved changes,
 low-HP percentage deltas, nominal state-scale compensation, the accepted GP-25 Temperature
 armor matrix, and the unchanged Molotov death payload. GP-25's effective meter is intentionally
 reprofiled with the selected Demolition armor and falloff; it is not claimed as state-neutral.
-`tools/tests/test_deferred_weapon_redesign_boundary.py` pins the remaining 19-definition boundary,
-ordered main-profile fingerprint, descendant closure and 15-direct/4-indirect reachability split.
+`tools/tests/test_closure_isolation_consolidation.py` pins the first isolation batch and its exact
+whole-tree comparison. `tools/tests/test_deferred_weapon_redesign_boundary.py` pins the remaining
+15-definition boundary, ordered main-profile fingerprint, descendant closure and 12-direct/3-indirect
+reachability split.
 Until a remaining gameplay consequence is authorized, that cohort's current main-damage contract
 stays unchanged. Pricing remains after W24/W23/A5 as required by §0a.
 
@@ -2831,7 +2848,7 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `ARMOR_LAYERS.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-directly fired weapons, **444** carry 2 or more damage
+directly fired weapons, **441** carry 2 or more damage
 warheads, worst case **10**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created

@@ -4101,17 +4101,10 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "60000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
         "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -4124,9 +4117,7 @@
       "requires": "(deployed || undeployed) && !ts_nod_upgrade_auxiliaryweapon",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "^Warhead_Concussion_Medium",
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy"
+       "^TS155mmLegacy"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium",
@@ -4139,17 +4130,10 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "60000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
         "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        }
       ],

@@ -55,7 +55,7 @@ CommissarPistol:
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 5
 
-GrenadeRA:
+^GrenadeRALegacy:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Grenade_Light
@@ -75,9 +75,13 @@ GrenadeRA:
 		Damage: 8000
 	Warhead@Flame_Light:
 		Damage: 8000
+
+GrenadeRA:
+	Inherits: ^GrenadeRALegacy
+
 GrenadeRAExplode:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat
-	Inherits: GrenadeRA
+	Inherits: ^GrenadeRALegacy
 	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Flame_Light:
@@ -92,7 +96,7 @@ GrenadeThermobaric:
 	Inherits@roleflat: ^Compatibility_Thermobaric_LightFlat
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: GrenadeRA
+	Inherits@3: ^GrenadeRALegacy
 	Projectile: Bullet
 		ContrailStartColor: FF8844FF
 	Warhead@ShrapnelWeapon: SpreadDamage

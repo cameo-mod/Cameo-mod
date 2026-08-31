@@ -3280,14 +3280,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
         "tag": "Concussion_Medium",
@@ -3303,10 +3296,7 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Effect_Demolition_Heavy",
-       "^TSCannonEffect"
+       "^TSInfantryMortarLegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
@@ -3348,7 +3338,7 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "TSInfantryMortar",
+       "^TSInfantryMortarLegacy",
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
        "^Effect_Chem_Medium"
@@ -3365,14 +3355,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
         "tag": "Concussion_Medium",
@@ -3388,10 +3371,7 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Effect_Demolition_Heavy",
-       "^TSCannonEffect"
+       "^TSInfantryMortarLegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
@@ -3434,7 +3414,7 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
-       "TSInfantryMortar",
+       "^TSInfantryMortarLegacy",
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
        "^Effect_Chem_Medium"

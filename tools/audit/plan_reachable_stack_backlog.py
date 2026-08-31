@@ -1,0 +1,155 @@
+#!/usr/bin/env python3
+"""Group the live reachable stacked-weapon backlog by inheritance root.
+
+This is a planning inventory, not conversion authority.  It always resolves
+the current active rules rather than consuming the tracked survey snapshot.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import pathlib
+import re
+import sys
+
+
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools" / "audit"))
+
+from audit_three_way_split import main_warhead_nodes, main_warheads
+from miniyaml import Ruleset
+from survey_weapon_structure import inventory
+
+
+def descendants(rules, names):
+    children = {}
+    parents = {}
+    for name, node in rules.weapons.items():
+        for _key, parent in rules.inherits_of(node):
+            if parent not in rules.weapons:
+                continue
+            children.setdefault(parent, set()).add(name)
+            parents.setdefault(name, set()).add(parent)
+    return children, parents
+
+
+def walk_closure(root, children, selected):
+    seen = set()
+    pending = list(children.get(root, set()))
+    while pending:
+        name = pending.pop()
+        if name in seen:
+            continue
+        seen.add(name)
+        pending.extend(children.get(name, set()))
+    return seen & selected
+
+
+def route(node):
+    return (
+        node.get("ValidTargets") or "",
+        node.get("InvalidTargets") or "",
+        node.get("ValidRelationships") or "",
+        node.get("InvalidRelationships") or "",
+    )
+
+
+def flags(nodes):
+    tags = [node.key.split("@", 1)[-1] for node in nodes]
+    routes = {route(node) for node in nodes}
+    state = any(
+        node.get("PhysicalStateName")
+        or node.child("PhysicalStates") is not None
+        or node.get("IntegrityScale")
+        for node in nodes
+    )
+    return {
+        "air_only": all(
+            {token.strip() for token in (node.get("ValidTargets") or "").split(",")
+             if token.strip()} == {"Air"}
+            for node in nodes
+        ),
+        "legacy_bridge": any(
+            "PreservedFlat" in tag or "Compatibility" in tag for tag in tags),
+        "numbered": any(re.match(r"^\d", tag) for tag in tags),
+        "route_mixed": len(routes) > 1,
+        "state_or_integrity": state,
+    }
+
+
+def build():
+    rules = Ruleset(ROOT)
+    survey = inventory(rules)
+    selected = set(survey["sets"]["direct_actor_armament"])
+    selected.update(survey["sets"]["indirect_weapon_graph"])
+    children, parents = descendants(rules, selected)
+
+    roots = sorted(
+        name for name in selected
+        if not any(parent in selected for parent in parents.get(name, set()))
+    )
+    groups = []
+    covered = set()
+    for root in roots:
+        members = {root, *walk_closure(root, children, selected)}
+        covered.update(members)
+        member_rows = []
+        aggregate_flags = {
+            "air_only": True,
+            "legacy_bridge": False,
+            "numbered": False,
+            "route_mixed": False,
+            "state_or_integrity": False,
+        }
+        for name in sorted(members):
+            nodes = main_warhead_nodes(rules.resolve_weapon(name))
+            member_flags = flags(nodes)
+            aggregate_flags["air_only"] &= member_flags["air_only"]
+            for key in aggregate_flags.keys() - {"air_only"}:
+                aggregate_flags[key] |= member_flags[key]
+            member_rows.append({
+                "name": name,
+                "mains": main_warheads(rules.resolve_weapon(name)),
+                "flags": member_flags,
+            })
+        groups.append({
+            "root": root,
+            "size": len(members),
+            "flags": aggregate_flags,
+            "members": member_rows,
+        })
+
+    if covered != selected:
+        raise RuntimeError(
+            f"root partition incomplete: missing={sorted(selected - covered)}, "
+            f"duplicate-or-extra={sorted(covered - selected)}")
+    groups.sort(key=lambda row: (-row["size"], row["root"]))
+    return {
+        "reachable_stacked": len(selected),
+        "root_count": len(groups),
+        "groups": groups,
+    }
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--limit", type=int, default=30)
+    parser.add_argument("--json", action="store_true")
+    args = parser.parse_args()
+    data = build()
+    if args.json:
+        print(json.dumps(data, indent=2, sort_keys=True))
+        return 0
+    print(f"reachable stacked: {data['reachable_stacked']}")
+    print(f"inheritance roots: {data['root_count']}")
+    for group in data["groups"][:args.limit]:
+        flags_text = ", ".join(key for key, value in group["flags"].items() if value) or "ordinary"
+        print(f"\n{group['size']:>2}  {group['root']}  [{flags_text}]")
+        for member in group["members"]:
+            print(f"    {member['name']}: {' + '.join(member['mains'])}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
