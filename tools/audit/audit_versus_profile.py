@@ -86,17 +86,38 @@ SPREAD_LO, SPREAD_HI = 2.0, 8.0
 # ladder mean necessarily compresses, so this number is always the smaller of the two; the
 # question is by how much, and against whom.
 #
-#     corpus                 ROW spread    MACRO contrast
-#     Cameo                    4.00x           1.82x
-#     Romanov's Vengeance      5.00x           3.00x
-#     Combined Arms            4.38x           2.35x
-#     OpenRA Red Alert         4.00x           2.67x
+# ⛔ CORRECTED 2026-08-30. An earlier version of this comment carried an UNATTRIBUTED peer table
+# (RV 3.00x, OpenRA RA 2.67x, CA 2.35x) and concluded from it that "Cameo is not short of gradient,
+# it spends it WITHIN ladders instead of BETWEEN them". Both halves were unsound:
 #
-# OpenRA Red Alert is the one that settles it: IDENTICAL row spread (4.00x), yet 47% more macro
-# contrast. So Cameo is not short of gradient — it spends the gradient WITHIN ladders instead of
-# BETWEEN them. The mechanism is in `gen_weapon_template.py`: tied macro blocks are "interleaved
-# round-robin", so a weapon good against several types alternates them and its strong rows land
-# in more than one ladder.
+#   1. THE NUMBERS WERE NOT REPRODUCIBLE and two were wrong. Re-measured from the committed
+#      `docs/reference/versus_raw.json` (`--peers`): RV is **2.00x**, not 3.00x, and CA is
+#      **2.93x**, not 2.35x. Only OpenRA RA (2.56x vs 2.67x) was close.
+#   2. THEY WERE NOT MEASURED ON THE SAME FRAME. A ladder MEAN over 4-5 rows compresses toward the
+#      profile mean; a mean over ONE row does not. OpenRA RA has five armor classes total, so its
+#      "INF mean" IS its `none` row, while Cameo averages None+Flak+Plate+Heroic. Measured on the
+#      IDENTICAL 139 Cameo templates, the frame alone moves the answer **1.63x -> 1.91x (+17%)**.
+#      Roughly a third of the published gap was the estimator, not the design.
+#
+# So `--peers` now measures every peer on ITS OWN frame and Cameo on that SAME frame. Like-for-like
+# (median over each corpus, `python tools/audit/audit_versus_profile.py --peers`):
+#
+#     peer (own frame)        n     peer    Cameo on that frame   ratio
+#     Mental Omega          367    4.15x           1.67x            2.48x  <- the ONLY corpus at "4x"
+#     Combined Arms         196    2.93x           1.90x            1.54x
+#     OpenRA Red Alert       45    2.56x           1.90x            1.35x
+#     Romanov's Vengeance    75    2.00x           1.63x            1.23x
+#     RA2 vanilla            60    1.73x           1.67x            1.03x  <- the original game is
+#                                                                             AT Cameo's level
+#
+# WHAT SURVIVES: a real but smaller and far less uniform gap. Cameo sits below three of the five
+# and level with RA2 vanilla. "Target 4x" describes Mental Omega alone, not the field.
+# WHAT DOES NOT: "Cameo spends its gradient in the wrong place" — the macro SHARE of Cameo's total
+# spread (~60-73%) is inside the peer range (64-90%), so the allocation was never the anomaly.
+#
+# The knob that was genuinely MISSING is `gen_weapon_template.macro_spread` — a third profile axis
+# alongside the within-ladder shaper and the macro PRIORITY order. It ships inert (MACRO_RATIO 1.0);
+# `gen_weapon_template.py --macro=<r>` sweeps it.
 #
 # ⚠ REPORTING ONE OF THESE AS "THE ARMOR TILT" IS HOW THIS GOT MISREAD. Quoting 1.8x invites
 # "the armor system is flat" when §9.4 is being met exactly; quoting 4.0x hides that macro
@@ -105,6 +126,66 @@ MACRO_LADDERS = {"INF": ("None", "Flak", "Plate", "Heroic"),
                  "VEH": ("Scout", "Light", "Medium", "Heavy", "Superheavy"),
                  "BLD": ("Wood", "Concrete", "Steel")}
 MACRO_TARGET_LO, MACRO_TARGET_HI = 2.0, 8.0
+
+
+# Peer armor tag -> ladder, paired with the Cameo rows that make the SAME frame. Terrain props
+# (`tree`, `truk`, `brick`) and `rocket` (a projectile-interception class) are not unit armors and
+# are excluded. `drone` is a light mechanical walker, which Cameo files under `Scout`.
+PEER_FRAMES = {
+    "Combined Arms": ("combined_arms",
+                      {"INF": ["none"], "VEH": ["light", "heavy"], "BLD": ["wood", "concrete"]},
+                      {"INF": ["None"], "VEH": ["Light", "Heavy"], "BLD": ["Wood", "Concrete"]}),
+    "OpenRA Red Alert": ("openra_ra",
+                         {"INF": ["none"], "VEH": ["light", "heavy"], "BLD": ["wood", "concrete"]},
+                         {"INF": ["None"], "VEH": ["Light", "Heavy"], "BLD": ["Wood", "Concrete"]}),
+    "Romanov's Vengeance": ("romanovs_vengeance",
+                            {"INF": ["none", "flak", "plate"],
+                             "VEH": ["light", "medium", "heavy", "drone"],
+                             "BLD": ["wood", "steel", "concrete"]},
+                            {"INF": ["None", "Flak", "Plate"],
+                             "VEH": ["Light", "Medium", "Heavy", "Scout"],
+                             "BLD": ["Wood", "Steel", "Concrete"]}),
+    "RA2 vanilla": ("ra2_vanilla",
+                    {"INF": ["none", "flak", "plate"], "VEH": ["light", "medium", "heavy"],
+                     "BLD": ["wood", "steel", "concrete"]},
+                    {"INF": ["None", "Flak", "Plate"], "VEH": ["Light", "Medium", "Heavy"],
+                     "BLD": ["Wood", "Steel", "Concrete"]}),
+    "Mental Omega": ("mental_omega",
+                     {"INF": ["none", "flak", "plate"], "VEH": ["light", "medium", "heavy"],
+                      "BLD": ["wood", "steel", "concrete"]},
+                     {"INF": ["None", "Flak", "Plate"], "VEH": ["Light", "Medium", "Heavy"],
+                      "BLD": ["Wood", "Steel", "Concrete"]}),
+}
+VERSUS_RAW = ROOT / "docs" / "reference" / "versus_raw.json"
+
+
+def contrast_on(profile, frame):
+    """max/min over ladder means for an ARBITRARY frame. None if a ladder has no live row."""
+    means = []
+    for rungs in frame.values():
+        vals = [profile[a] for a in rungs if profile.get(a, 0) > 0]
+        if not vals:
+            return None
+        means.append(statistics.fmean(vals))
+    return max(means) / min(means) if min(means) > 0 else None
+
+
+def peer_table():
+    """[(label, n, peer median, Cameo median ON THE SAME FRAME)] — the like-for-like."""
+    import json
+    raw = json.loads(VERSUS_RAW.read_text(encoding="utf-8"))["sources"]
+    cameo = list(profiles().values())
+    out = []
+    for label, (key, ptags, ctags) in PEER_FRAMES.items():
+        if key not in raw:
+            continue
+        pv = [x for x in (contrast_on({k.lower(): float(v) for k, v in r["versus"].items()}, ptags)
+                          for r in raw[key]["rows"]) if x]
+        cv = [x for x in (contrast_on(p, ctags) for p in cameo) if x]
+        if len(pv) < 5 or not cv:
+            continue
+        out.append((label, len(pv), statistics.median(pv), statistics.median(cv)))
+    return sorted(out, key=lambda r: -r[2])
 
 
 def macro_contrast(profile):
@@ -159,6 +240,15 @@ def ladder_direction(profile, rungs):
 
 
 def main() -> int:
+    if "--peers" in sys.argv:
+        print("# macro contrast, each peer on ITS OWN armor frame, Cameo on that SAME frame\n")
+        print(f"{'corpus':24s} {'n':>5s} {'peer':>8s} {'Cameo':>8s}  ratio")
+        for label, n, pm, cm in peer_table():
+            print(f"{label:24s} {n:5d} {pm:7.2f}x {cm:7.2f}x  {pm / cm:.2f}x")
+        print("\n⚠ A ladder mean over ONE row does not compress; over five it does. Never compare "
+              "two corpora on different frames — the frame alone is worth ~17%.")
+        return 0
+
     data = profiles()
     families = sorted({f for f, _l in data})
 

@@ -155,6 +155,7 @@ Speed grid and no audit covers it. "The audit is green" answers only the questio
 
 **Crash classes — these end a boot, and most gates cannot see them**
 
+- [Two corpora measured on DIFFERENT frames are not comparable — the frame was worth 17% (2026-08-30)](#two-corpora-measured-on-different-frames-are-not-comparable--the-frame-was-worth-17-2026-08-30)
 - [⛔ A GUARD WRITTEN FROM ONE INCIDENT COVERS ONE INCIDENT (2026-08-30)](#-a-guard-written-from-one-incident-covers-one-incident-2026-08-30)
 - [⛔ THE CANONICAL REPO IS `cameo-mod/Cameo-mod`; THE OLD FORK IS DEAD (2026-08-30)](#-the-canonical-repo-is-cameo-modcameo-mod-the-old-fork-is-dead-2026-08-30)
 - [A `^Compatibility_*Flat` template is a frozen COPY, and regenerating its canonical desynchronises it (2026-08-30)](#a-compatibilityflat-template-is-a-frozen-copy-and-regenerating-its-canonical-desynchronises-it-2026-08-30)
@@ -1304,6 +1305,44 @@ The legacy mixed-stack missile weapons (`227mm`, `GDIRigMissilePod`, `MammothTus
 A naive 3-way split onto `^Projectile_Missile_*` drops those colors and `review_resolve_diff.py` flags `Proj.CStart`/`Proj.CEnd`. Preserve them as local `Projectile:` overrides on the concrete weapon whenever the resolved baseline had them and the new family does not.
 
 ---
+
+## Two corpora measured on DIFFERENT frames are not comparable — the frame was worth 17% (2026-08-30)
+
+`audit_versus_profile.py` carried a peer table — Romanov's Vengeance 3.00×, OpenRA Red Alert
+2.67×, Combined Arms 2.35× — and a conclusion drawn from it: *"OpenRA RA has the SAME row spread
+as Cameo yet 47% more macro contrast, so Cameo is not short of gradient — it spends it WITHIN
+ladders instead of BETWEEN them."* That sentence set the design direction for the next session.
+
+**It was wrong three ways, and the numbers had no recorded source.**
+
+1. **Unattributed.** No command, no dataset, no date. When they were finally re-derived from the
+   committed `docs/reference/versus_raw.json`, **RV came out 2.00× (not 3.00×) and CA 2.93× (not
+   2.35×)**. Only OpenRA RA was close.
+2. **Measured on different FRAMES.** Macro contrast is `max/min` over ladder MEANS. Averaging 4–5
+   rows into a mean pulls it toward the profile mean; averaging ONE row does not. OpenRA RA ships
+   five armor classes in total, so its "INF mean" *is* its `none` row, while Cameo averages
+   `None + Flak + Plate + Heroic`. Measured on the **identical** 139 Cameo templates, changing only
+   the frame moves the answer **1.63× → 1.91×**. About a third of the "47% gap" was the estimator.
+   ⚠ The comment even contained the sentence *"averaging four or five rows into a ladder mean
+   necessarily compresses"* — and then compared against mods with one row per ladder anyway.
+   Knowing the mechanism did not stop the comparison.
+3. **The inference did not follow.** Cameo's macro SHARE of its total spread is 60–73%, inside the
+   peer range of 64–90% — so "spends its gradient in the wrong place" was never supported by the
+   data that was supposed to show it.
+
+**The generalisations:**
+
+* **A cross-corpus number needs its FRAME in the same breath as its value.** "RV is 2.00×" is not a
+  fact; "RV is 2.00× over `none/flak/plate | light/medium/heavy/drone | wood/steel/concrete`" is.
+  Two corpora with different armor vocabularies have no shared metric until you build one, and the
+  honest construction is to measure **each peer on its own frame and yourself on that same frame** —
+  which is what `--peers` now does.
+* **A number without a re-measure command is a rumour**, however carefully it was once measured.
+  That is precisely what `docs/audit/doc_claims.yaml` exists for, and these three were never pinned.
+  Anything that steers a decision goes in the registry, in the same commit that measures it.
+* **"Target 4×" turned out to describe ONE mod** (Mental Omega, 4.15×) out of five. The field median
+  is ~2.6×, and RA2 vanilla at 1.73× is level with Cameo. Check whether a target is the field's
+  median or its outlier before adopting it as a goal.
 
 ## A `^Compatibility_*Flat` template is a frozen COPY, and regenerating its canonical desynchronises it (2026-08-30)
 

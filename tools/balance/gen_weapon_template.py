@@ -1105,6 +1105,103 @@ def shape_profile(rows, level):
     return heaviness_bell(rows, h)
 
 
+# --------------------------------------------------------------------------- #
+# THE MACRO-CONTRAST AXIS — the THIRD profile knob (2026-08-30)
+# --------------------------------------------------------------------------- #
+# A profile already has two knobs and they are both WITHIN-ladder:
+#
+#   LEVEL / heaviness   WHERE along a ladder the family peaks   (`shape_profile`)
+#   MACRO PRIORITY      WHICH macro type leads the row order    (`build_order`)
+#
+# Neither controls HOW FAR the preferred macro type pulls away from the rest, and
+# that is the metric the maintainer rejected at 1.7x. `build_order` interleaves the
+# blocks of a combined group round-robin, so a family good against several macro
+# types lands its strong rows in more than one ladder and the ladder MEANS converge.
+#
+# ⛔ THIS COULD NOT LIVE IN `table()`, WHICH IS WHERE IT LOOKS LIKE IT BELONGS.
+# Measured before writing a line: **53 of 57** family x level combinations take a
+# MEASURED corpus profile from `reference_main`, and only `Nuclear` falls through to
+# `table()`'s even ramp. A knob in the ramp would have reached one family. So it is a
+# PIPELINE STAGE on the common path, exactly like the tilt — and being on the common
+# path is what makes it cover the blends and the inherit families too.
+#
+# ⭐ IT AMPLIFIES THE FAMILY'S OWN PREFERENCE, IT DOES NOT IMPOSE ONE. The ranks come
+# from the finished profile's own ladder means, never from a table of which family
+# should like which target. So a measured profile, a designed one and a blend are all
+# treated the same way, and the axis can never contradict a family's measured
+# identity — it can only sharpen it.
+#
+# WHY IT IS SAFE AGAINST THE THREE LAWS THAT BIND HERE:
+#   §12.0d  a ladder is scaled by ONE factor, so nothing inside it can reorder. The
+#           rank restore the tilt needs is unnecessary here — it holds by construction.
+#           CROSS-ladder order does change, which §12.0d explicitly permits ("None (INF)
+#           vs Superheavy (VEH) is a CROSS-ladder relation the tilt is DESIGNED to change").
+#   §12.0h  `mean_normalise` runs after it, so MEAN-100 and price invariance survive.
+#   §9.4    it WIDENS the row spread, so it is bounded by the 2x-8x band. `MACRO_RATIO`
+#           is the tunable and the band is the ceiling — see `--macro-sweep`.
+#
+# ⭐ GENERALISTS ARE EXEMPT WITHOUT A SPECIAL CASE, which is the part worth keeping.
+# Ties share a rank and therefore share a factor: `Laser` is one combined block over all
+# four ladders, so its ladder means are near-equal, it ranks near-tied and barely moves.
+# `Sonic`/`Magic` are the FLAT/PCT branches whose rows are all equal, so the
+# "no gradient" guard returns them untouched. Nobody has to remember to exclude them.
+MACRO_RATIO = 1.0    # 1.0 = OFF. See the sweep before changing it; it is boot-gated.
+
+
+def macro_means(vals):
+    """{ladder: mean of its live rungs} — derived cells and non-armors excluded."""
+    out = {}
+    for name, rungs in LADDERS.items():
+        live = [vals[a] for a in rungs
+                if a in vals and a not in DERIVED_ARMORS and a not in NON_ARMOR_ROWS]
+        if live:
+            out[name] = statistics.fmean(live)
+    return out
+
+
+def macro_spread(rows, ratio=None):
+    """Push the macro LADDER MEANS apart by `ratio`, without touching any ladder's order.
+
+    `ratio` is the multiplicative widening between the MOST and LEAST favoured ladder
+    mean: 2.0 doubles the gap. The exponent shape mirrors `tilt_exponent` — `t - 0.5`
+    over the rank range — so the two axes are visibly the same kind of object rather
+    than two unrelated tricks.
+
+    Tied ladders take the AVERAGE rank and therefore an identical factor, which is what
+    makes a generalist inert without naming it.
+    """
+    ratio = MACRO_RATIO if ratio is None else ratio
+    if ratio <= 1.0:
+        return rows
+    vals = dict(rows)
+    means = macro_means(vals)
+    if len(means) < 2 or max(means.values()) <= min(means.values()):
+        return rows          # flat, or only one ladder present — nothing to spread
+    # Average ranks, so a tie shares a factor instead of an arbitrary order deciding it.
+    order = sorted(means, key=lambda k: means[k])
+    ranks = {}
+    i = 0
+    while i < len(order):
+        j = i
+        while j + 1 < len(order) and means[order[j + 1]] == means[order[i]]:
+            j += 1
+        for k in range(i, j + 1):
+            ranks[order[k]] = (i + j) / 2.0
+        i = j + 1
+    span = max(ranks.values())
+    if span <= 0:
+        return rows
+    out = dict(vals)
+    for name, rungs in LADDERS.items():
+        if name not in ranks:
+            continue
+        factor = ratio ** (ranks[name] / span - 0.5)
+        for a in rungs:
+            if a in out and a not in DERIVED_ARMORS and a not in NON_ARMOR_ROWS:
+                out[a] = out[a] * factor
+    return [(a, v) for a, v in ((a, out[a]) for a, _ in rows)]
+
+
 def _powerlaw(vals, alpha):
     g = statistics.geometric_mean([max(v, 1.0) for v in vals])
     return [g * (max(v, 1.0) / g) ** alpha for v in vals]
@@ -1494,6 +1591,10 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         # would otherwise leave the mean off 100. Order-preserving by construction
         # (both paths rank-restore), so the two-level ordering law is untouched.
         main = shape_profile(main, level)
+        # THE MACRO-CONTRAST AXIS — after the within-ladder shaper, before the band floor
+        # and the mean, both of which have to see the final ladder. Inert at
+        # MACRO_RATIO 1.0, which is what ships until the sweep is ruled on.
+        main = macro_spread(main)
         # DESIGN 12.0 rule 5 — the 2x band floor, applied to EVERY family and AFTER the tilt.
         # See fit_band_floor: the blend-only copy inside finish_blend missed CannonAP entirely
         # and let the tilt undo it for Cryo.
@@ -2183,7 +2284,16 @@ def storm_versus(level):
 def _generate():
     global TILT_MODEL
     argv = sys.argv[1:]
+    global MACRO_RATIO
     for a in argv:
+        # `--macro=` is how the macro-contrast axis is SWEPT without editing the source.
+        # It is a boot-gated knob: changing it regenerates every template, so the
+        # maintainer needs to see the ratio -> (macro contrast, row spread) curve and
+        # rule on a number rather than inherit one an agent picked.
+        if a.startswith("--macro="):
+            MACRO_RATIO = float(a.split("=", 1)[1])
+            if not 1.0 <= MACRO_RATIO <= 4.0:
+                sys.exit("--macro= takes a ratio in [1.0, 4.0]; 1.0 is OFF")
         if a.startswith("--tilt="):
             TILT_MODEL = a.split("=", 1)[1]
             if TILT_MODEL not in ("bell", "class"):

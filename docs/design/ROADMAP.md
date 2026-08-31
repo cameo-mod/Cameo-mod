@@ -135,6 +135,33 @@ The rest below did not touch yaml; each still needs a boot-gated machine.
 5. **IFV default-weapon guards** miss `ifv-archer`, `ifv-grenade`, `ifv-lightsniper`, so
    those passengers fire the specialist AND the default weapon (`audit_ifv_conditions` F3).
 
+## ⛔ P1 — MAINTAINER CALL: PICK `MACRO_RATIO` (2026-08-30)
+
+The macro-contrast axis is **built, tested and shipping INERT** at `MACRO_RATIO = 1.0`
+(`gen_weapon_template.macro_spread`, 10 tests, pinned by `macro_ratio_shipped`). Turning it on
+regenerates every `^Warhead_*` template, so the number is a balance ruling and the flip is
+boot-gated. Sweep and full reasoning: `WEAPON_HEAVINESS.md` §9.7; `--macro=<r>` reproduces any row.
+
+| `MACRO_RATIO` | macro contrast | in [2,8] | row spread | in [2,8] | inversions |
+|--:|--:|--:|--:|--:|--:|
+| **1.00** (ships) | 2.05× | 51% | 3.30× | 95% | 0 |
+| **1.50** | 2.74× | 93% | **4.26×** ← closest to §9.4's 4× target | 95% | 0 |
+| **1.75** | 3.03× | 94% | 4.44× | 94% | 0 |
+| 2.00 | 3.20× | 95% | 4.65× | 94% | 0 |
+| 3.00 | 3.56× | 94% | 5.00× | 91% | 0 |
+
+⛔ **AND A CORRECTION THAT CHANGES WHAT "4×" MEANS.** The peer table this goal was set from was
+unattributed and two of its three numbers were wrong: **RV measures 2.00×, not 3.00×; CA 2.93×,
+not 2.35×**. The frames also differed — a ladder mean over one row does not compress, over five it
+does, and that alone is worth **+17%** on the identical Cameo templates. Measured like-for-like
+(`audit_versus_profile.py --peers`), **only Mental Omega reaches 4.15×**; the field median is
+2.56× and **RA2 vanilla (1.73×) is level with Cameo**. Both numbers are now pinned
+(`macro_contrast_cameo`, `macro_contrast_peer_median`) so they cannot rot again.
+
+So the question for you is not "how do we reach 4×" but **which corpus Cameo should read like**:
+1.50 lands row spread on §9.4's target, 1.75–2.00 reaches RV's and OpenRA RA's league, and nothing
+inside §9.4's band reaches Mental Omega.
+
 ## ⛔ P1 — MAINTAINER CALLS THAT BLOCK PRICING (2026-08-30)
 
 1. **`scout_vehicle` `hp0`:** `class_anchors.json` says **30000**; `anchor_decisions_log.md`

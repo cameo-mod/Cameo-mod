@@ -741,6 +741,94 @@ cannot deliver.
 populations and their medians legitimately differ — always name which one a spread figure came
 from.
 
+#### 9.7 ⭐ THE MACRO-CONTRAST AXIS — the third profile knob (2026-08-30)
+
+⛔ **FIRST, A CORRECTION TO §9.2b's FOLLOW-UP, BECAUSE THE DIAGNOSIS IT FED WAS UNSOUND.**
+`audit_versus_profile.py` carried an unattributed peer table — RV 3.00×, OpenRA RA 2.67×, CA
+2.35× — and concluded from it that *"Cameo is not short of gradient, it spends it WITHIN ladders
+instead of BETWEEN them."* Re-measured from the committed `docs/reference/versus_raw.json`
+(`python tools/audit/audit_versus_profile.py --peers`), **two of the three numbers were wrong and
+the comparison was not like-for-like**:
+
+* **RV is 2.00×, not 3.00×**; **CA is 2.93×, not 2.35×**. Only OpenRA RA (2.56× vs 2.67×) was close.
+* **The frames differed.** A ladder MEAN over 4–5 rows compresses toward the profile mean; a mean
+  over ONE row does not. OpenRA RA ships five armor classes total, so its "INF mean" *is* its
+  `none` row, while Cameo averages `None + Flak + Plate + Heroic`. On the **identical** 139
+  templates the frame alone moves the answer **1.63× → 1.91×, +17%** — about a third of the
+  published gap was the estimator, not the design.
+* **The allocation was never the anomaly.** Cameo's macro SHARE of its total spread is 60–73%,
+  inside the peer range of 64–90%.
+
+**The like-for-like table** — each peer on its own frame, Cameo on that same frame:
+
+| corpus | n | peer | Cameo, same frame | ratio |
+|---|--:|--:|--:|--:|
+| Mental Omega | 367 | **4.15×** | 1.67× | 2.48× |
+| Combined Arms | 196 | 2.93× | 1.90× | 1.54× |
+| OpenRA Red Alert | 45 | 2.56× | 1.90× | 1.35× |
+| Romanov's Vengeance | 75 | 2.00× | 1.63× | 1.23× |
+| RA2 vanilla | 60 | 1.73× | 1.67× | **1.03×** |
+
+⚠ **"Target 4×" describes Mental Omega and nothing else.** The field median is ~2.6×, RV sits at
+2.00×, and the original RA2 is *level with Cameo*. A real but modest gap survives the correction;
+a mandate to reach 4× does not follow from the field.
+
+##### The knob that was genuinely missing
+
+A profile had two axes and both are WITHIN-ladder: **heaviness** (where along a ladder it peaks)
+and **macro priority** (which type leads `build_order`). Nothing controlled **how far the preferred
+macro type pulls away**. `gen_weapon_template.macro_spread()` is that third axis.
+
+⛔ **It could not live in `table()`, which is where it looks like it belongs.** Measured before a
+line was written: **53 of 57** family × level combinations take a MEASURED corpus profile from
+`reference_main`, and only `Nuclear` reaches `table()`'s even ramp. A knob in the ramp would have
+moved one family. So it is a pipeline stage on the common path — which is also what makes it cover
+the blends and the inherit families.
+
+⭐ **It amplifies the family's own preference; it never imposes one.** Ranks come from the finished
+profile's own ladder means, so measured, designed and blended families are treated identically and
+the axis can only sharpen a measured identity, never contradict it.
+
+⭐ **Generalists are exempt without being named.** Tied ladders share a rank and therefore a
+factor, so `Laser` (one combined block over all four ladders) barely moves, and `Sonic`/`Magic`
+arrive flat and are returned untouched. Nobody has to maintain an exemption list.
+
+##### Why it is safe against the three laws
+
+| law | why it holds |
+|---|---|
+| **§12.0d** ranks | a ladder is scaled by ONE factor, so it cannot reorder internally — true by construction, no rank restore needed. Cross-ladder order does move, which §12.0d explicitly permits. |
+| **§12.0h** MEAN-100 | `mean_normalise` runs after it, so the mean and price invariance survive. |
+| **§9.4** row spread | it WIDENS rows, so the 2×–8× band is the ceiling. That is what the sweep is for. |
+
+##### The sweep — `gen_weapon_template.py --macro=<r>`
+
+| `MACRO_RATIO` | macro (4 ladders) | in [2,8] | macro (shared 3) | row spread | in [2,8] | inversions |
+|--:|--:|--:|--:|--:|--:|--:|
+| **1.00** (ships) | 2.05× | 51% | 1.67× | 3.30× | 95% | 0 |
+| 1.25 | 2.44× | 89% | 1.91× | 3.84× | 95% | 0 |
+| **1.50** | 2.74× | 93% | 2.00× | **4.26×** | 95% | 0 |
+| **1.75** | 3.03× | 94% | 2.09× | 4.44× | 94% | 0 |
+| 2.00 | 3.20× | 95% | 2.16× | 4.65× | 94% | 0 |
+| 2.50 | 3.43× | 94% | 2.27× | 4.88× | 93% | 0 |
+| 3.00 | 3.56× | 94% | 2.33× | 5.00× | 91% | 0 |
+
+**Zero ladder inversions at every ratio**, and MEAN-100 is undisturbed throughout — the two
+properties the design was built to guarantee, confirmed rather than assumed.
+
+⛔ **THE DEFAULT SHIPS AT 1.00 (OFF) AND THE CHOICE IS THE MAINTAINER'S.** Turning it on
+regenerates every `^Warhead_*` template, so it is boot-gated, and picking the number is a balance
+ruling, not an implementation detail. What the sweep says:
+
+* **1.50** puts row spread at **4.26×**, closest to §9.4's stated 4× target, and lifts macro
+  in-band coverage from 51% to 93%.
+* **1.75–2.00** buys more macro separation (3.03–3.20×) and reaches RV's and OpenRA RA's league,
+  at a row spread of 4.4–4.7×.
+* Past 2.00 it is diminishing: macro gains 0.36× while row spread pushes to 5.00× and in-band
+  coverage decays.
+* Nothing in the achievable range reaches Mental Omega's 4.15×, and chasing it would push row
+  spread out of §9.4.
+
 #### 9.3 ⚠ TRADE-OFF — a constant mean means heaviness NO LONGER RAISES THE PRICE
 
 `HEAVINESS_RESEARCH.md` §1 established that K = SUM(share x versus x ...) reads the weighted mean

@@ -28,6 +28,53 @@
 #    how the `Shield = top + floor` duplication survived for weeks.
 
 claims:
+  - id: macro_contrast_cameo
+    value: 1.63
+    tolerance: 0.03
+    what: >
+      Median MACRO CONTRAST (max/min over the INF, VEH and BLD ladder MEANS) across Cameo's
+      MAIN warhead profiles. THE NUMBER THE MAINTAINER REJECTED AT "1.7x". ⛔ It is NOT
+      §9.4's row spread and must never be quoted as it — that one is max/min over the 16
+      individual ROWS and it passes. Frame: MACRO_LADDERS in audit_versus_profile.py.
+    docs: [docs/design/WEAPON_HEAVINESS.md, docs/audit/SUMMARY.md]
+    measure: |
+      import statistics, sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import audit_versus_profile as a
+      v = [x for x in (a.macro_contrast(p) for p in a.profiles().values()) if x]
+      print(round(statistics.median(v), 4))
+
+  - id: macro_contrast_peer_median
+    value: 2.56
+    tolerance: 0.05
+    what: >
+      Median macro contrast across the five reference corpora, each measured ON ITS OWN
+      armor frame (audit_versus_profile.py --peers). ⛔ THIS IS THE CLAIM THAT CORRECTS
+      "target 4x": only Mental Omega (4.15x) reaches it, RA2 vanilla (1.73x) is level with
+      Cameo, and an earlier UNPINNED table had RV at 3.00x when it measures 2.00x. A peer
+      number without its frame and its command is a rumour — that is why this is pinned.
+    docs: [docs/design/WEAPON_HEAVINESS.md, docs/LESSONS_LEARNED.md]
+    measure: |
+      import statistics, sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import audit_versus_profile as a
+      print(round(statistics.median(r[2] for r in a.peer_table()), 4))
+
+  - id: macro_ratio_shipped
+    value: 1.0
+    tolerance: 0.0001
+    what: >
+      gen_weapon_template.MACRO_RATIO — the macro-contrast axis. 1.0 is OFF. Turning it on
+      regenerates every ^Warhead_* template, so it is BOOT-GATED and the ratio is a
+      maintainer ruling, not an implementation detail. The sweep is in WEAPON_HEAVINESS
+      §9.7; this pin exists so the default cannot drift on without that ruling.
+    docs: [docs/design/WEAPON_HEAVINESS.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import gen_weapon_template as g
+      print(g.MACRO_RATIO)
+
   - id: shield_versus_mean
     value: 189.088
     tolerance: 0.01
