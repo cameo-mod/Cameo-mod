@@ -155,6 +155,7 @@ Speed grid and no audit covers it. "The audit is green" answers only the questio
 
 **Crash classes — these end a boot, and most gates cannot see them**
 
+- [A test can encode a WEAKER property than the law and then defend the bug (2026-08-30)](#a-test-can-encode-a-weaker-property-than-the-law-and-then-defend-the-bug-2026-08-30)
 - [Two corpora measured on DIFFERENT frames are not comparable — the frame was worth 17% (2026-08-30)](#two-corpora-measured-on-different-frames-are-not-comparable--the-frame-was-worth-17-2026-08-30)
 - [⛔ A GUARD WRITTEN FROM ONE INCIDENT COVERS ONE INCIDENT (2026-08-30)](#-a-guard-written-from-one-incident-covers-one-incident-2026-08-30)
 - [⛔ THE CANONICAL REPO IS `cameo-mod/Cameo-mod`; THE OLD FORK IS DEAD (2026-08-30)](#-the-canonical-repo-is-cameo-modcameo-mod-the-old-fork-is-dead-2026-08-30)
@@ -1398,6 +1399,43 @@ down in the constant's own comment, because the next reader has no other way to 
 
 ⛔ **Never re-pin to make a red test green.** Refresh with `--print-hashes` (added to both modules
 so it is no longer a hand edit), and record the ruling that moved them in the same commit.
+
+## A test can encode a WEAKER property than the law and then defend the bug (2026-08-30)
+
+One commit after `rederive_products()` was extracted so every shaper path would end in §12.0b's
+re-derivation, a NEW stage — `macro_spread` — was added that moves `Plate` (INF) and `Scout` (VEH),
+the two INPUTS to `Heroic`, and did not re-derive it. The same bug, in a new stage, one commit later.
+
+⛔ **There was a unit test for exactly this cell, and it passed.** It asserted:
+
+    self.assertEqual(before["Heroic"], after["Heroic"])     # "not scaled as a rung"
+
+which is a WEAKER property than the law. §12.0b does not say `Heroic` is unchanged — it says
+`Heroic` is **recomputed from the finished profile**. "Unchanged" and "correctly re-derived" agree
+only while the inputs stay still, and this stage moves them. So the test encoded the symptom it
+happened to observe on the day it was written, and then actively defended the defect.
+
+**What actually caught it** was measuring the audit's own §9.4 metric, where `Heroic` sits inside
+the INF ladder mean: a frozen row visibly damped the metric the axis exists to move. A number that
+would not budge, not a red test.
+
+Three things generalise:
+
+* **Assert the MECHANISM, not a symptom.** The corrected test computes
+  `after["Plate"] * after["Scout"] / peak` and compares — it now fails if the re-derivation is
+  skipped OR done wrongly, which the equality check could never do.
+* **When a fix turns a test red, ask which one matches the LAW before "fixing" the test.** Here
+  the fix was right and the test was wrong; the previous instance of this question (an armor-tilt
+  edit needing both armor docs) went the other way. The question has to be asked either way.
+* **Extracting a shared helper does not stop the bug recurring — only calling it does.** A helper
+  that the next new stage forgets is a helper that documents the law without enforcing it. Worth
+  asking, whenever a pipeline gains a stage: which of the shared FINAL steps does it owe?
+
+⚠ The consequence here was not cosmetic. With `Heroic` correctly re-derived it falls as roughly the
+SQUARE of the macro ratio on families whose favoured ladder is neither INF nor VEH, because it draws
+one input from each — so `MissileAA` breaks §9.4's 8× ceiling at ratio 1.20 where the buggy version
+looked safe past 1.50. The bug had made an unsafe setting look recommendable, and four independent
+reviews had recommended it.
 
 ## A DERIVED cell has to be recomputed on EVERY exit — an early return is where that is forgotten (2026-08-30)
 

@@ -252,7 +252,8 @@ def main() -> int:
     data = profiles()
     families = sorted({f for f, _l in data})
 
-    mean_bad, spread_bad, flips = [], [], []
+    import statistics as _st
+    mean_bad, spread_bad, flips, all_spreads = [], [], [], []
 
     for key, prof in sorted(data.items()):
         rows = armor_rows(prof)
@@ -274,6 +275,7 @@ def main() -> int:
         if not rows:
             continue
         spread = max(rows) / min(rows)
+        all_spreads.append(spread)
         if not (SPREAD_LO <= spread <= SPREAD_HI):
             spread_bad.append((family, spread))
 
@@ -290,20 +292,32 @@ def main() -> int:
         tag = " _(HAND_TUNED — generator skips it, expected)_" if hand else " **UNEXPECTED**"
         print(f"  {key[0]}_{key[1]}  mean {mean:.1f}{tag}")
 
-    import statistics as _st
     _mc = [m for m in (macro_contrast(p) for p in data.values()) if m]
     if _mc:
         _in = sum(1 for m in _mc if MACRO_TARGET_LO <= m <= MACRO_TARGET_HI)
         print(f"\n## macro contrast (INF/VEH/BLD ladder means) — median "
               f"{_st.median(_mc):.2f}x over {len(_mc)} profiles, {_in / len(_mc) * 100:.0f}% "
               f"in [{MACRO_TARGET_LO:.0f}x, {MACRO_TARGET_HI:.0f}x]\n")
-        print("This is NOT §9.4's row spread and must never be quoted as it. Peers measured "
-              "2026-08-30: Romanov's Vengeance 3.00x, OpenRA Red Alert 2.67x, Combined Arms "
-              "2.35x. OpenRA RA has the SAME row spread as Cameo (4.00x) and 47% more macro "
-              "contrast, so the gap is where the gradient is SPENT, not how much there is.\n")
+        print("⛔ This is NOT §9.4's row spread and must never be quoted as it — they are "
+              "printed together, below, so neither can stand in for the other.\n"
+              "Peer comparison: `--peers`, which measures each corpus on ITS OWN armor frame. "
+              "Like-for-like, ONLY Mental Omega (4.15x) is at '4x'; the field median is 2.56x "
+              "and RA2 vanilla (1.73x) is level with Cameo. An earlier UNATTRIBUTED table here "
+              "had RV at 3.00x when it measures 2.00x, and compared across frames — worth ~17% "
+              "on its own. Pinned as `macro_contrast_peer_median`.\n")
 
-    print(f"\n## spread band {SPREAD_LO:.0f}x-{SPREAD_HI:.0f}x (target 4x) — "
+    print(f"\n## §9.4 spread band {SPREAD_LO:.0f}x-{SPREAD_HI:.0f}x (target 4x) — "
+          f"{len(families) - len(spread_bad) - len(FLAT_BY_DESIGN)} in band, "
+          f"median {_st.median(all_spreads):.2f}x over {len(all_spreads)} families\n"
+          if all_spreads else
+          f"\n## §9.4 spread band {SPREAD_LO:.0f}x-{SPREAD_HI:.0f}x (target 4x) — "
           f"{len(families) - len(spread_bad) - len(FLAT_BY_DESIGN)} in band\n")
+    # ⛔ THE MEDIAN IS PRINTED BECAUSE ITS ABSENCE CAUSED A REAL ERROR. This section used to
+    # report only the OFFENDERS, so the band's central value lived nowhere and "4.00x" was
+    # quoted from memory — sometimes meaning this per-FAMILY figure, sometimes a per-WEAPON
+    # one measured over a different population entirely. A law with a target and no published
+    # central value invites exactly that. Note the population: ONE level per family, over
+    # `armor_rows` (the 16 class armors, `Heroic` INCLUDED, platings and Shield excluded).
     for family, spread in sorted(spread_bad, key=lambda r: r[1]):
         why = "too FLAT" if spread < SPREAD_LO else "too SHARP"
         print(f"  {family:14s} {spread:6.2f}x   {why}")

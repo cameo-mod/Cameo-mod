@@ -99,11 +99,28 @@ class ItCannotBreakTheLawsThatBindHere(unittest.TestCase):
         self.assertEqual([a for a, _ in rows],
                          [a for a, _ in g.macro_spread(rows, 2.0)])
 
-    def test_the_derived_cell_is_not_scaled_as_if_it_were_a_rung(self):
-        """§12.0b: `Heroic` is a PRODUCT, recomputed from the finished profile. Scaling it
-        with the INF ladder would bake in a stale value before the re-derivation runs."""
-        self.assertEqual(dict(profile())["Heroic"],
-                         dict(g.macro_spread(profile(), 2.0))["Heroic"])
+    def test_the_derived_cell_is_RE_DERIVED_not_scaled_and_not_frozen(self):
+        """§12.0b: `Heroic = Plate x Scout / PEAK`, recomputed from the FINISHED profile.
+
+        ⛔ THIS TEST USED TO ASSERT THE WRONG PROPERTY and it hid a real bug. It checked that
+        `Heroic` was UNCHANGED, which is not the law — the law is that it is not scaled as a
+        RUNG but IS recomputed once its inputs move. This stage moves both inputs (`Plate` in
+        INF, `Scout` in VEH), so "unchanged" meant "stale". The test passed, and what actually
+        caught it was measuring the audit's §9.4 metric, where `Heroic` sits inside the INF
+        ladder mean and a frozen row visibly damped the axis.
+
+        A test can encode a weaker property than the law and then defend the bug. Assert the
+        MECHANISM — recomputed from the finished cells — not a symptom.
+        """
+        after = dict(g.macro_spread(profile(), 2.0))
+        peak = max(v for a, v in after.items()
+                   if a not in g.NON_ARMOR_ROWS and a not in g.DERIVED_ARMORS)
+        self.assertAlmostEqual(after["Plate"] * after["Scout"] / peak, after["Heroic"],
+                               places=6)
+        # and it must NOT be the INF rung factor applied to the old value
+        before = dict(profile())
+        self.assertNotAlmostEqual(before["Heroic"] * after["Plate"] / before["Plate"],
+                                  after["Heroic"], places=3)
 
 
 class GeneralistsAreExemptWithoutBeingNamed(unittest.TestCase):

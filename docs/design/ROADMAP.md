@@ -135,32 +135,44 @@ The rest below did not touch yaml; each still needs a boot-gated machine.
 5. **IFV default-weapon guards** miss `ifv-archer`, `ifv-grenade`, `ifv-lightsniper`, so
    those passengers fire the specialist AND the default weapon (`audit_ifv_conditions` F3).
 
-## ⛔ P1 — MAINTAINER CALL: PICK `MACRO_RATIO` (2026-08-30)
+## ⛔ P1 — MAINTAINER CALL: PICK `MACRO_RATIO` — AND RULE ON `Heroic` (2026-08-30)
 
-The macro-contrast axis is **built, tested and shipping INERT** at `MACRO_RATIO = 1.0`
-(`gen_weapon_template.macro_spread`, 10 tests, pinned by `macro_ratio_shipped`). Turning it on
-regenerates every `^Warhead_*` template, so the number is a balance ruling and the flip is
-boot-gated. Sweep and full reasoning: `WEAPON_HEAVINESS.md` §9.7; `--macro=<r>` reproduces any row.
+The macro-contrast axis is **built, tested and shipping INERT** at `MACRO_RATIO = 1.0`. Sweep and
+full reasoning: `WEAPON_HEAVINESS.md` §9.7; `--macro=<r>` reproduces any row. Measured with
+`audit_versus_profile`'s OWN §9.4 definition (one level per family, `Heroic` included):
 
-| `MACRO_RATIO` | macro contrast | in [2,8] | row spread | in [2,8] | inversions |
-|--:|--:|--:|--:|--:|--:|
-| **1.00** (ships) | 2.05× | 51% | 3.30× | 95% | 0 |
-| **1.50** | 2.74× | 93% | **4.26×** ← closest to §9.4's 4× target | 95% | 0 |
-| **1.75** | 3.03× | 94% | 4.44× | 94% | 0 |
-| 2.00 | 3.20× | 95% | 4.65× | 94% | 0 |
-| 3.00 | 3.56× | 94% | 5.00× | 91% | 0 |
+| `MACRO_RATIO` | §9.4 median | worst family | in band | macro contrast |
+|--:|--:|--:|--:|--:|
+| **1.00** (ships) | 3.84× | 6.48× | **100%** | 1.63× |
+| **1.15** | **4.07×** | 7.84× | **100%** | 1.69× |
+| 1.25 | 4.08× | 8.70× | 98% ⛔ | 1.74× |
+| 1.35 | 4.17× | 8.70× | 98% ⛔ | 1.78× |
+| 1.50 | 4.26× | 8.70× | 98% ⛔ | 1.84× |
 
-⛔ **AND A CORRECTION THAT CHANGES WHAT "4×" MEANS.** The peer table this goal was set from was
-unattributed and two of its three numbers were wrong: **RV measures 2.00×, not 3.00×; CA 2.93×,
-not 2.35×**. The frames also differed — a ladder mean over one row does not compress, over five it
-does, and that alone is worth **+17%** on the identical Cameo templates. Measured like-for-like
-(`audit_versus_profile.py --peers`), **only Mental Omega reaches 4.15×**; the field median is
-2.56× and **RA2 vanilla (1.73×) is level with Cameo**. Both numbers are now pinned
-(`macro_contrast_cameo`, `macro_contrast_peer_median`) so they cannot rot again.
+⛔ **THREE THINGS THAT CHANGE THE OBVIOUS ANSWER:**
 
-So the question for you is not "how do we reach 4×" but **which corpus Cameo should read like**:
-1.50 lands row spread on §9.4's target, 1.75–2.00 reaches RV's and OpenRA RA's league, and nothing
-inside §9.4's band reaches Mental Omega.
+1. **The shipped state is ALREADY 3.84×**, four percent under the 4× target. An earlier table in
+   this file said 3.30× → 4.26×; that was measured on the wrong row set (it excluded `Heroic` and
+   spanned all 139 templates rather than the 44 families the audit judges). There is much less
+   headroom than it looked.
+2. **`1.35` is NOT safe.** `MissileAA` breaches §9.4's 8× ceiling from ratio 1.20 up, because
+   `Heroic = Plate × Scout / PEAK` draws one input from INF and one from VEH — for an anti-air
+   family BOTH are disfavoured, so it falls as the SQUARE of the ratio (`Spaceship 200` vs
+   `Heroic 23` at 1.25). **`1.15` is the largest ratio that keeps 100% in band.**
+3. **The axis does not close the macro gap.** Across the whole legal range macro contrast moves
+   only **1.63× → 1.84×** against a like-for-like field median of **2.56×**. The remaining gap is
+   the profile ORDER (`build_order`'s interleave), not a scalar knob.
+
+**So there are two decisions, and the second unlocks the first:**
+
+* **Is a DERIVED cell one of the "rows" §9.4's band was written about?** §12.0b calls `Heroic` a
+  product recomputed from the finished profile, and §12.0d already excludes it from the tilt for
+  that reason. Excluding it from §9.4's min too would be consistent — and it moves the ceiling
+  from **1.15** to **1.50** (100% in band, median 4.26×). Measured both ways in §9.7.
+* **Then the ratio**: `1.15` under the law as written, or up to `1.50` if `Heroic` comes out.
+
+Flipping it is boot-gated (it regenerates every `^Warhead_*` template), and it should be decided
+together with item 0's bell flip so the tree is regenerated once, not twice.
 
 ## ⛔ P1 — MAINTAINER CALLS THAT BLOCK PRICING (2026-08-30)
 

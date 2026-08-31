@@ -1199,7 +1199,15 @@ def macro_spread(rows, ratio=None):
         for a in rungs:
             if a in out and a not in DERIVED_ARMORS and a not in NON_ARMOR_ROWS:
                 out[a] = out[a] * factor
-    return [(a, v) for a, v in ((a, out[a]) for a, _ in rows)]
+    # ⛔ §12.0b — RE-DERIVE LAST. This stage moves `Plate` (INF) and `Scout` (VEH), the two
+    # inputs to `Heroic`, so a `Heroic` left alone here is STALE: the exact failure
+    # `rederive_products` was extracted for one commit earlier, reintroduced in a new stage.
+    # The unit tests did NOT catch it — they assert Heroic is not scaled AS A RUNG, which is
+    # still true and still right. What caught it was measuring the audit's own §9.4 metric,
+    # where `Heroic` sits INSIDE the INF ladder mean: a frozen row was damping the very
+    # metric this axis exists to move.
+    out = rederive_products(out)
+    return [(a, out[a]) for a, _ in rows]
 
 
 def _powerlaw(vals, alpha):

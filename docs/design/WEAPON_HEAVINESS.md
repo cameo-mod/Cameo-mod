@@ -803,31 +803,74 @@ arrive flat and are returned untouched. Nobody has to maintain an exemption list
 
 ##### The sweep — `gen_weapon_template.py --macro=<r>`
 
-| `MACRO_RATIO` | macro (4 ladders) | in [2,8] | macro (shared 3) | row spread | in [2,8] | inversions |
-|--:|--:|--:|--:|--:|--:|--:|
-| **1.00** (ships) | 2.05× | 51% | 1.67× | 3.30× | 95% | 0 |
-| 1.25 | 2.44× | 89% | 1.91× | 3.84× | 95% | 0 |
-| **1.50** | 2.74× | 93% | 2.00× | **4.26×** | 95% | 0 |
-| **1.75** | 3.03× | 94% | 2.09× | 4.44× | 94% | 0 |
-| 2.00 | 3.20× | 95% | 2.16× | 4.65× | 94% | 0 |
-| 2.50 | 3.43× | 94% | 2.27× | 4.88× | 93% | 0 |
-| 3.00 | 3.56× | 94% | 2.33× | 5.00× | 91% | 0 |
+⛔ **THE FIRST VERSION OF THIS TABLE WAS WRONG TWICE OVER AND IS REPLACED.** It was measured
+(a) on a row set that EXCLUDED `Heroic` and spanned all 139 templates, which is not what §9.4
+enforces, and (b) against a `macro_spread` that had a real bug — it moved `Plate` and `Scout`,
+the two INPUTS to `Heroic`, and never re-derived it. Both are fixed. The numbers below use
+**`audit_versus_profile`'s own §9.4 definition**: one level per family, `armor_rows` (the 16
+class armors with `Heroic` INCLUDED, `Shield` and the platings excluded), `FLAT_BY_DESIGN` and
+`HAND_TUNED` skipped — the same 44 families the audit judges.
 
-**Zero ladder inversions at every ratio**, and MEAN-100 is undisturbed throughout — the two
-properties the design was built to guarantee, confirmed rather than assumed.
+| `MACRO_RATIO` | §9.4 median | worst family | in band | macro contrast | macro in band |
+|--:|--:|--:|--:|--:|--:|
+| **1.00** (ships) | 3.84× | 6.48× | **100%** | 1.63× | 19% |
+| **1.15** | **4.07×** | 7.84× | **100%** | 1.69× | 27% |
+| 1.20 | 4.08× | 8.29× | 98% ⛔ | 1.71× | 33% |
+| 1.25 | 4.08× | 8.70× | 98% ⛔ | 1.74× | 35% |
+| 1.35 | 4.17× | 8.70× | 98% ⛔ | 1.78× | 37% |
+| 1.50 | 4.26× | 8.70× | 98% ⛔ | 1.84× | 39% |
 
-⛔ **THE DEFAULT SHIPS AT 1.00 (OFF) AND THE CHOICE IS THE MAINTAINER'S.** Turning it on
-regenerates every `^Warhead_*` template, so it is boot-gated, and picking the number is a balance
-ruling, not an implementation detail. What the sweep says:
+⭐ **THE SHIPPED STATE IS ALREADY AT 3.84×, four percent under §9.4's 4× target.** The
+"3.30× → 4.26×" story the first table told was an artifact of the wrong row set. There was far
+less row-spread headroom than it appeared, and the axis spends it quickly.
 
-* **1.50** puts row spread at **4.26×**, closest to §9.4's stated 4× target, and lifts macro
-  in-band coverage from 51% to 93%.
-* **1.75–2.00** buys more macro separation (3.03–3.20×) and reaches RV's and OpenRA RA's league,
-  at a row spread of 4.4–4.7×.
-* Past 2.00 it is diminishing: macro gains 0.36× while row spread pushes to 5.00× and in-band
-  coverage decays.
-* Nothing in the achievable range reaches Mental Omega's 4.15×, and chasing it would push row
-  spread out of §9.4.
+##### ⛔ `Heroic` sets the ceiling, and it does so QUADRATICALLY
+
+The single family that breaks the 8× ceiling is **`MissileAA`**, and the reason is structural
+rather than a tuning accident. Its profile at ratio 1.25 runs `Spaceship 200` down to
+**`Heroic 23`** — and `Heroic = Plate × Scout / PEAK` (§12.0b) takes one input from INF and one
+from VEH. For an anti-air family **both of those ladders are disfavoured**, so both factors push
+the same way and `Heroic` falls roughly as the SQUARE of the ratio while the favoured `Spaceship`
+row rises. It is the natural floor of every profile, and it is what bounds this axis.
+
+| `MACRO_RATIO` | §9.4 with `Heroic` (the law today) | | §9.4 without `Heroic` | |
+|--:|--:|--:|--:|--:|
+| | median | in band | median | in band |
+| 1.00 | 3.84× | 100% | 3.63× | 100% |
+| 1.15 | 4.07× | 100% | 4.03× | 100% |
+| 1.25 | 4.08× | 98% | 4.08× | **100%** |
+| 1.50 | 4.26× | 98% | 4.26× | **100%** |
+| 1.75 | 4.52× | 93% | 4.52× | 95% |
+
+So the ceiling question is really a **ruling** question: *is a DERIVED cell one of the "rows"
+§9.4's band was written about?* §12.0b calls `Heroic` a product recomputed from the finished
+profile, not an authored rung — and §12.0d already excludes it from the tilt for exactly that
+reason. Excluding it from §9.4's min as well would be consistent, and it is the difference
+between a ceiling at **1.15** and one at **1.50**. ⛔ That is the maintainer's call, not the
+implementation's.
+
+##### ⛔ AND THE HONEST HEADLINE: THE AXIS DOES NOT CLOSE THE MACRO GAP
+
+On the metric that was actually pinned (`macro_contrast_cameo`), the whole legal range moves
+**1.63× → 1.84×**. The field median measured like-for-like is **2.56×**. The axis puts §9.4's row
+spread onto its target; it does **not** reach the peers on macro contrast, and no ratio inside
+§9.4 does.
+
+Part of that is the metric measuring itself: `MACRO_LADDERS` puts the derived `Heroic` INSIDE the
+INF mean, where the axis cannot move it as a rung, and that damps the reading — measured, INF
+without `Heroic` reads 1.99× at ratio 1.50 against 1.84× with it, and macro band coverage 49% vs
+39%. Real, but it is not the dominant term. **The remaining gap is not a knob that is missing; it
+is the profile ORDER**, which is `build_order`'s interleave and a per-family design decision, not
+a scalar.
+
+##### What the sweep supports
+
+* **`1.15` under the law exactly as written** — 100% in band, §9.4 median **4.07×**, on target.
+  ⛔ NOT 1.35: `MissileAA` breaches 8× from 1.20 upward.
+* **`1.50` if — and only if — `Heroic` is ruled out of §9.4's min**, giving 100% in band and a
+  median of 4.26×.
+* Either way the macro gain is modest (1.69–1.84×). If the goal is genuinely to read like the
+  field on macro contrast, this axis is not sufficient and the next lever is the ORDER.
 
 #### 9.3 ⚠ TRADE-OFF — a constant mean means heaviness NO LONGER RAISES THE PRICE
 
