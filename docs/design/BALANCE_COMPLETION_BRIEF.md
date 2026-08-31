@@ -71,17 +71,66 @@ eight class pairs that are *statistically indistinguishable* (`anti_air_vehicle`
 `missile_vehicle` at 0.024, `archer` ↔ `flying_infantry` at 0.048 …) and are separated only by
 **what they shoot at**. Coverage is a classification job, not a fitting job.
 
-### 1c. The anchor ACTORS do not match their ruled specs
+### 1c. The anchors, reviewed — half are engineered, half are placeholders
 
-The anchor is the zero point of its class formula, so a wrong baseline actor freezes a wrong zero:
+⭐ **"The anchor actor does not match its ruled spec" does NOT mean the anchor is wrong.** It means
+the restat was **designed, locked, and never applied**. `class_anchors.json`'s `mbt` entry says so
+in its own comment: *"NEW 2026-07-31 restat (**was legacy Tiger 100k/100/200/5000**)"* — and the
+live `tiger.nax` still reads hp 100000, speed 100. The `spec` block is a TARGET the baseline actor
+is meant to be restatted TO; the LOCKED table itself says *"HP/Speed/Cost/armor restat can proceed
+now"*. Measured: **19 of 27 anchor actors differ from their spec, 8 match, 0 are missing.**
 
-    mbt              tiger.nax                 hp 100000 != 240000, range 6000 != 5500, speed 100 != 95
-    tank_destroyer   naxis_hetzer              hp  75000 != 150000, cost ratio 2.17x
-    missile_vehicle  ts_gdi_hovermlrs          hp  30000 != 160000, speed 80 != 100     ← SIGNED
-    line_breaker     td_nod_flametank          hp 100000 != 750000
-    mortar           forgotten_mutantmortarman range 10830 != 10000                     ← SIGNED
+#### The vehicle ladder is genuinely engineered — verified, not quoted
 
-Reconcile spec vs actor **before** fitting, per `anchor_decisions_log.md`. Do not fit around it.
+The 2026-08-01 LOCKED table claims four properties. Recomputed from `class_anchors.json`:
+
+| claim | measured |
+|---|---|
+| HP in clean 10,000 steps | ✅ all 13 |
+| Cost / HP / Speed / DPS / Range all unique | ✅ all five |
+| A+B spread ≤ 2.0× | ✅ **1.922×** |
+| DPS/Cost within 0.5–1.5, epic the sole 2.0 | ✅ 0.50–2.00 |
+
+That is a real ladder: 13 classes ordered by A+B, every stat deliberate. **The vehicle anchors make
+sense.**
+
+#### The other 14 do not have a ladder at all
+
+| provenance recorded in `provisional` | classes |
+|---|---|
+| `2026-08-01 LOCKED table` | **13** — the vehicle ladder |
+| `dps0/cost0 placeholders — test in-game` | `archer` `grenadier` `melee` `rocket_trooper` |
+| **`— none —`** | `closecombat` `scout` `special_forces` `support` |
+| one-off notes (weights frozen, verifier blocked, "derived from the RA2 sniper") | 6 |
+
+The decisions log carries **no infantry ladder**. Its only infantry-flavoured entry is the
+scout-vehicle HP-granularity rule. So every infantry class's anchor is a placeholder or has no
+recorded provenance.
+
+#### ⛔ And that is where the sign-offs went
+
+**Seven of the eight signed classes sit in the un-engineered half** — `archer`, `closecombat`,
+`flying_infantry`, `grenadier`, `heavy_sniper`, `mortar`, `special_forces`. Three of those
+(`closecombat`, `special_forces`, plus `scout` which is unsigned) carry **no provenance at all**.
+Only `missile_vehicle` comes from the LOCKED table — and it is the one `anchor_readiness` flags
+⛔ at 30% median pricing error.
+
+This is not an argument that the sign-off was wrong. It is the observation that **the engineered
+half is unsigned and the placeholder half is signed**, which is the reverse of what the evidence
+supports, and it explains `special_forces` reading 57%.
+
+#### Three DIFFERENT problems hide behind one phrase
+
+Sorting the 19 mismatches by kind, because they need different fixes:
+
+| kind | examples | what to do |
+|---|---|---|
+| **unapplied restat** — the spec is right, the actor is pre-restat | `line_breaker` hp 100k→750k (7.5×), `dreadnought` 300k→1.15M, `high_tech_tank` 225k→700k, `epic_vehicle` 1M→4M, `fire_support` 30k→120k | apply through the PIPELINE (ledger → `apply_balance --confirm`), boot-gated. Never a hand edit. |
+| **near-miss** — rounding or a grid step | `archer` speed 72≠70, `heavy_sniper` 78≠80, `scout_vehicle` hp 20k≠30k | trivial; fold into the same apply |
+| ⚠ **suspected SPEC bug** — the spec looks wrong, not the actor | `flying_infantry` speed **80** vs the rocketeer's **180**. Its note says *"speed0 from air-speed"*, but measured over 168 buildable aircraft the median is **150** and only 36 fly at ≤80. A rocketeer at 80 would be in the slow tail, contradicting the role. | **maintainer ruling** — do not restat the actor to a spec that may itself be wrong |
+
+⛔ **Reconcile spec against actor BEFORE fitting**, per `anchor_decisions_log.md`. Fitting around a
+mismatch freezes a wrong zero point into every price in that class.
 
 ---
 
@@ -179,9 +228,12 @@ DEFINITION OF DONE — G0..G7 in §2. Not "the scripts exist".
 
 ## 6. First three actions, ranked by leverage
 
-1. **Re-read the sign-off queue against pricing error** (§1a) and decide: re-affirm the eight, or
-   narrow to the three the tool calls ready. No boot needed. This gates G6.
-2. **Class coverage** (§1b) — 18% is the ceiling on how much of the roster can ever be priced.
-   Classification is judgement plus evidence, never numeric proximity. No boot needed.
-3. **The single regeneration** (G1+G2) on the boot machine. Everything downstream is stale until
-   it lands, including three of the five red pins.
+1. **Build the infantry ladder** the way the vehicle one was built (§1c). Fourteen classes have no
+   engineered anchor, seven of them are signed, and `special_forces` reads 57% pricing error as a
+   direct consequence. This is the single largest gap in the model and it needs no boot.
+2. **Re-read the sign-off queue against pricing error** (§1a): re-affirm the eight, or narrow to
+   the three the tool calls ready. Gates G6. No boot.
+3. **Rule `flying_infantry`'s speed spec** (§1c) — the one mismatch that is probably a spec bug
+   rather than unapplied work, and it is signed.
+4. **The single regeneration** (G1+G2) on the boot machine. Everything downstream is stale until it
+   lands, including three of the five red pins.

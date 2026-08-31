@@ -172,6 +172,48 @@ evidence of anything.
 current set would price `special_forces` and `missile_vehicle` through anchors their own readiness
 tool flags. Re-read the queue before the APPLY — it does not block the bell/macro flip.
 
+## ⛔ P0 — THERE IS NO INFANTRY ANCHOR LADDER (2026-08-30)
+
+Full review: [`BALANCE_COMPLETION_BRIEF.md`](BALANCE_COMPLETION_BRIEF.md) §1c.
+
+The 2026-08-01 LOCKED table engineered **13 vehicle classes** and its four claims all verify
+against `class_anchors.json`: HP in clean 10k steps, Cost/HP/Speed/DPS/Range all unique, A+B spread
+**1.922×** (≤2.0), DPS/Cost 0.50–2.00. **The vehicle anchors make sense.**
+
+The other **14 classes have no such table.** Their `provisional` fields read:
+
+* `dps0/cost0 placeholders — test in-game` — `archer`, `grenadier`, `melee`, `rocket_trooper`
+* **`— none —`** — `closecombat`, `scout`, `special_forces`, `support`
+* one-off notes (weights frozen, verifier blocked, "derived from the RA2 sniper") — 6 more
+
+⛔ **Seven of the eight signed classes are in the un-engineered half** — `archer`, `closecombat`,
+`flying_infantry`, `grenadier`, `heavy_sniper`, `mortar`, `special_forces`. Only `missile_vehicle`
+comes from the LOCKED table, and it is the one flagged ⛔ at 30% pricing error. **The engineered
+half is unsigned and the placeholder half is signed.** That is the reverse of what the evidence
+supports, and it is why `special_forces` reads 57%.
+
+**The work:** build the infantry ladder the way the vehicle one was built — a fixed class order, a
+capped A+B spread, unique base stats, HP on a stated grid — then re-fit and re-queue for sign-off.
+No boot needed. This is the single largest gap in the pricing model.
+
+## ⛔ P0 — 19 OF 27 ANCHOR ACTORS ARE PRE-RESTAT (2026-08-30)
+
+⭐ **This is UNAPPLIED WORK, not a broken design.** `class_anchors.json`'s `mbt` entry says it in
+its own comment — *"NEW 2026-07-31 restat (was legacy Tiger 100k/100/200/5000)"* — and the live
+`tiger.nax` still reads hp 100000 / speed 100. `spec` is the TARGET; the LOCKED table itself says
+*"HP/Speed/Cost/armor restat can proceed now"*. It never was.
+
+Three different problems wear the same label, and they need different fixes:
+
+| kind | examples | fix |
+|---|---|---|
+| **unapplied restat** | `line_breaker` hp 100k→750k (**7.5×**), `dreadnought` 300k→1.15M, `high_tech_tank` 225k→700k, `epic_vehicle` 1M→4M, `fire_support` 30k→120k | pipeline only — ledger → `apply_balance --confirm`, boot-gated |
+| **near-miss** | `archer` speed 72≠70, `heavy_sniper` 78≠80, `scout_vehicle` hp 20k≠30k | fold into the same apply |
+| ⚠ **suspected SPEC bug** | `flying_infantry` speed **80** vs the rocketeer's **180**; its note says "speed0 from air-speed", but over 168 buildable aircraft the median is **150** and only 36 fly at ≤80 | **maintainer ruling** — do not restat an actor to a spec that may itself be wrong. This class is SIGNED. |
+
+⛔ Reconcile spec against actor **before** fitting. Fitting around a mismatch freezes a wrong zero
+point into every price in that class.
+
 ## ⛔ P0 — 82% OF THE BUILDABLE ROSTER HAS NO CLASS (2026-08-30)
 
 **336 of 1870 buildable actors are class-tagged (18.0%).** The formula cannot price an actor with
