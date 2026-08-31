@@ -20,9 +20,9 @@ class WeaponDecisionBundleTests(unittest.TestCase):
 
     def test_every_unreviewed_reachable_weapon_occurs_once(self):
         names = [member for row in self.rows for member in row["members"]]
-        self.assertEqual(178, len(names))
+        self.assertEqual(164, len(names))
         self.assertEqual(len(names), len(set(names)))
-        self.assertEqual(120, len(self.rows))
+        self.assertEqual(107, len(self.rows))
 
     def test_reviewed_composites_are_not_presented_as_open_decisions(self):
         names = {member for row in self.rows for member in row["members"]}
@@ -33,7 +33,7 @@ class WeaponDecisionBundleTests(unittest.TestCase):
         self.assertNotIn("WaveArtilleryImpact", families)
         self.assertIn("RA2Virusgun3", families)
         self.assertIn("WaveTurretImpact", families)
-        self.assertEqual(112, self.data["reviewed_reachable"])
+        self.assertEqual(126, self.data["reviewed_reachable"])
 
     def test_buckets_use_engine_defaults_and_mechanical_labels(self):
         counts = {
@@ -45,12 +45,12 @@ class WeaponDecisionBundleTests(unittest.TestCase):
             for name in report.BUCKETS
         }
         self.assertEqual({
-            "target and state routing": (19, 40),
-            "target routing": (25, 37),
+            "target and state routing": (18, 39),
+            "target routing": (24, 36),
             "state delivery": (31, 47),
-            "legacy compatibility": (7, 8),
+            "legacy compatibility": (5, 5),
             "numbered warhead key": (1, 1),
-            "no special mechanical signal": (37, 45),
+            "no special mechanical signal": (28, 36),
         }, counts)
 
     def test_every_member_is_covered_by_one_exact_main_fingerprint(self):

@@ -36,7 +36,7 @@ class ReachableStackPlannerTests(unittest.TestCase):
         self.assertEqual(raw, set(self.names))
         self.assertEqual(290, len(raw))
         self.assertEqual(
-            112,
+            126,
             self.inventory["counts"]["reviewed_stacked_main_transitive_weapon_graph"],
         )
 

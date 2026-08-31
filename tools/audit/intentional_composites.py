@@ -141,6 +141,30 @@ DECISION_GROUPS = {
          ("MissileHE_Heavy", "Railgun_Heavy")),
         (("WaveArtilleryImpact",), ("Railgun_Heavy", "Tesla_Heavy")),
     ),
+    "maintainer-approved role blend": (
+        (("AtreusMG",), ("Bullet_Medium", "CannonHE_Heavy")),
+        (("EpigraphMG",),
+         ("Bullet_MediumFlatCompatibility", "CannonHE_Heavy")),
+        (("GoliathMG",),
+         ("Bullet_Medium", "CannonHE_Heavy", "Concussion_Light")),
+        (("GoliathMk2MG",), ("Bullet_Medium", "CannonHE_Heavy")),
+        (("DuelistTankCannon",),
+         ("CannonHE_Heavy", "CannonHE_Medium", "PreservedFlat_Grenade",
+          "PreservedFlat_HeavyBomb", "PreservedFlat_MediumFlameWeapon",
+          "PreservedFlat_TankDestroyerCannon")),
+        (("HMG_Duelist_upgrade",), ("Bullet_Medium", "CannonHE_Heavy")),
+        (("autogun_tank", "autogun_tank_small"),
+         ("Bullet_MediumFlatCompatibility", "CannonHE_Heavy",
+          "MissileAP_Heavy")),
+    ),
+    "maintainer-curated signature": (
+        (("IxianCombatTankCannon", "HeavyIxianCombatTankCannon"),
+         ("CannonAP_Light", "CannonHE_Heavy", "CannonHE_Medium")),
+        (("D2K_Rocket_Trooper1", "D2K_Rocket_Trooper_AA"),
+         ("Flak_Medium", "MissileAP_Heavy", "MissileAP_Light")),
+        (("D2K_Rocket_Trooper2", "D2K_Rocket_Trooper_AGOnly"),
+         ("CannonHE_Medium", "Demolition_Light", "Railgun_Heavy")),
+    ),
 }
 
 
@@ -279,6 +303,14 @@ CATEGORY_RATIONALES = {
         "retains a conventional impact together with a separately authored energy "
         "or Waveforce effect payload delivered on the same shot"
     ),
+    "maintainer-approved role blend": (
+        "retains the exact mixed armor profile that implements the maintainer's "
+        "approved unit role instead of forcing that role into one canonical family"
+    ),
+    "maintainer-curated signature": (
+        "retains the exact multi-layer D2K weapon identity named by the binding "
+        "two-warhead-cap exception"
+    ),
 }
 
 CATEGORY_REFERENCES = {
@@ -286,6 +318,12 @@ CATEGORY_REFERENCES = {
     "status payload": "Resolved family review: primary hit plus status payload",
     "target-routed composite": "Resolved family review: target and armor routing",
     "effect-delivery composite": "Resolved family review: overlapping effect delivery",
+    "maintainer-approved role blend": (
+        "Maintainer decision: retain the unit's current mixed combat role"
+    ),
+    "maintainer-curated signature": (
+        "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list"
+    ),
 }
 
 CATEGORY_OVERLAP = {
@@ -305,6 +343,122 @@ CATEGORY_OVERLAP = {
         "Overlap is intentional: the special energy or Waveforce payload is "
         "delivered together with the conventional impact."
     ),
+    "maintainer-approved role blend": (
+        "Overlap is intentional and limited to this exact weapon: each authored "
+        "armor contribution is part of the approved broad unit role."
+    ),
+    "maintainer-curated signature": (
+        "Overlap is intentional and limited to the exact D2K signature layers "
+        "named by the maintainer-curated exception."
+    ),
+}
+
+ROLE_BLEND_DECISIONS = {
+    "AtreusMG": {
+        "component_purposes": {
+            "Bullet_Medium": "retained authored bullet component of the accepted Atreus profile",
+            "CannonHE_Heavy": "retained authored heavy-impact component of the accepted Atreus profile",
+        },
+        "rationale": (
+            "The maintainer accepted the current Protoss Atreus behavior as-is; "
+            "preserve its exact two-part armor and blast profile."
+        ),
+        "review_reference": "Maintainer unit decision: Protoss Atreus is good enough as authored",
+    },
+    "EpigraphMG": {
+        "component_purposes": {
+            "Bullet_MediumFlatCompatibility": (
+                "retained authored bullet component of the accepted Epigraph profile"
+            ),
+            "CannonHE_Heavy": "retained authored heavy-impact component of the accepted Epigraph profile",
+        },
+        "rationale": (
+            "The maintainer accepted the current Protoss Epigraph behavior as-is; "
+            "preserve its exact two-part armor and blast profile."
+        ),
+        "review_reference": "Maintainer unit decision: Protoss Epigraph is good enough as authored",
+    },
+    "GoliathMG": {
+        "component_purposes": {
+            "Bullet_Medium": "authored bullet contribution to the Mk1 secondary ground attack",
+            "CannonHE_Heavy": "authored heavy-impact contribution to the Mk1 secondary ground attack",
+            "Concussion_Light": "authored light-concussion contribution to the Mk1 secondary ground attack",
+        },
+        "rationale": (
+            "The Goliath remains primarily anti-air; the maintainer accepted Mk1's "
+            "weaker secondary ground attack and asked that existing Mk1 units remain usable."
+        ),
+        "review_reference": "Maintainer progression decision: preserve Goliath Mk1 ground behavior",
+    },
+    "GoliathMk2MG": {
+        "component_purposes": {
+            "Bullet_Medium": "authored bullet contribution to the improved Mk2 ground attack",
+            "CannonHE_Heavy": "authored heavy-impact contribution to the improved Mk2 ground attack",
+        },
+        "rationale": (
+            "The maintainer approved Mk2 as superior in most situations while retaining "
+            "excellent anti-air and only mediocre secondary ground performance."
+        ),
+        "review_reference": "Maintainer progression decision: preserve approved Goliath Mk2 role",
+    },
+    "DuelistTankCannon": {
+        "component_purposes": {
+            "CannonHE_Heavy": "heavy cannon contribution to the Duelist's vehicle and structure role",
+            "CannonHE_Medium": "medium cannon contribution to the Duelist's versatile ground role",
+            "PreservedFlat_Grenade": "separate hostile-target grenade geometry in the Duelist impact",
+            "PreservedFlat_HeavyBomb": "separate ground and ship heavy-bomb route in the Duelist impact",
+            "PreservedFlat_MediumFlameWeapon": (
+                "temperature-state and flame contribution to the Duelist impact"
+            ),
+            "PreservedFlat_TankDestroyerCannon": (
+                "anti-armor contribution to the Duelist's vehicle role"
+            ),
+        },
+        "rationale": (
+            "The maintainer defined the Ixian Duelist as versatile against vehicles and "
+            "structures with limited air holdoff, but not universally dominant; its six "
+            "resolved mains deliberately retain distinct armor, geometry, relationship, "
+            "target, and Temperature-state behavior."
+        ),
+        "review_reference": "Maintainer unit decision: preserve the Ixian Duelist's versatile role",
+    },
+    "HMG_Duelist_upgrade": {
+        "component_purposes": {
+            "Bullet_Medium": "bullet contribution to the Duelist's upgraded secondary gun",
+            "CannonHE_Heavy": "heavy-impact contribution to the Duelist's upgraded secondary gun",
+        },
+        "rationale": (
+            "The upgraded secondary gun is part of the maintainer-approved Duelist role; "
+            "preserve its exact mixed ground and air-capable profile alongside the base cannon."
+        ),
+        "review_reference": "Maintainer unit decision: preserve the Ixian Duelist's limited air holdoff",
+    },
+    "autogun_tank": {
+        "component_purposes": {
+            "Bullet_MediumFlatCompatibility": "primary anti-infantry and light-target bullet profile",
+            "CannonHE_Heavy": "secondary general-impact contribution to the autogun profile",
+            "MissileAP_Heavy": "limited vehicle and aircraft contribution to the autogun profile",
+        },
+        "rationale": (
+            "The maintainer defined every Ordos autogun-tank variant as strong against "
+            "infantry, light vehicles, and aircraft but mediocre against vehicles and "
+            "inferior one-on-one to dedicated anti-armor units."
+        ),
+        "review_reference": "Maintainer unit decision: preserve the Ordos autogun-tank role",
+    },
+    "autogun_tank_small": {
+        "component_purposes": {
+            "Bullet_MediumFlatCompatibility": "primary anti-infantry and light-target bullet profile",
+            "CannonHE_Heavy": "secondary general-impact contribution to the autogun profile",
+            "MissileAP_Heavy": "limited vehicle and aircraft contribution to the autogun profile",
+        },
+        "rationale": (
+            "The maintainer defined every Ordos autogun-tank variant as strong against "
+            "infantry, light vehicles, and aircraft but mediocre against vehicles and "
+            "inferior one-on-one to dedicated anti-armor units."
+        ),
+        "review_reference": "Maintainer unit decision: preserve the Ordos autogun-tank role",
+    },
 }
 
 
@@ -313,6 +467,10 @@ def component_purpose(category: str, main: str) -> str:
         return f"authored superweapon stage {main} with independently pinned behavior"
     if category == "target-routed composite":
         return f"authored target, armor, relationship, or state route {main}"
+    if category == "maintainer-approved role blend":
+        return f"authored armor contribution {main} to the approved mixed unit role"
+    if category == "maintainer-curated signature":
+        return f"authored D2K signature layer {main} retained by the explicit exception"
     special = (
         "tesla", "cryo", "chem", "nuclear", "sonic", "inferno",
         "temperature", "ioncannon", "railgun", "waveforce", "quantum",
@@ -335,21 +493,38 @@ def curated_decisions() -> dict[str, dict[str, object]]:
             for name in names:
                 if name in decisions:
                     raise ValueError(f"duplicate reviewed weapon {name}")
-                decisions[name] = {
-                    "category": category,
-                    "component_purposes": {
+                role_decision = ROLE_BLEND_DECISIONS.get(name)
+                if category == "maintainer-approved role blend" and role_decision is None:
+                    raise ValueError(f"missing exact maintainer role decision for {name}")
+                component_purposes = (
+                    role_decision["component_purposes"] if role_decision is not None
+                    else {
                         main: component_purpose(category, main)
                         for main in expected_mains
-                    },
+                    }
+                )
+                decisions[name] = {
+                    "category": category,
+                    "component_purposes": component_purposes,
                     "mains": list(expected_mains),
                     "overlap_justification": CATEGORY_OVERLAP[category],
                     "rationale": (
-                        f"Exact family decision for {', '.join(names)}: "
-                        f"{CATEGORY_RATIONALES[category]}; reviewed components are "
-                        f"{', '.join(expected_mains)}."
+                        role_decision["rationale"] if role_decision is not None
+                        else (
+                            f"Exact family decision for {', '.join(names)}: "
+                            f"{CATEGORY_RATIONALES[category]}; reviewed components are "
+                            f"{', '.join(expected_mains)}."
+                        )
                     ),
-                    "review_reference": CATEGORY_REFERENCES[category],
+                    "review_reference": (
+                        role_decision["review_reference"] if role_decision is not None
+                        else CATEGORY_REFERENCES[category]
+                    ),
                 }
+    if set(ROLE_BLEND_DECISIONS) != {
+            name for names, _mains in DECISION_GROUPS["maintainer-approved role blend"]
+            for name in names}:
+        raise ValueError("exact maintainer role decision set differs from curated group")
     return decisions
 
 

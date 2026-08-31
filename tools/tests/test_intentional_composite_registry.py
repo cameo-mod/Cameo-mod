@@ -31,10 +31,10 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
 
     def test_exact_reviewed_name_set_and_schema_are_pinned(self):
         names = sorted(self.manifest["entries"])
-        self.assertEqual(112, len(names))
+        self.assertEqual(126, len(names))
         self.assertEqual(set(reviewed.curated_decisions()), set(names))
         self.assertEqual(
-            "7a82f9ab5a98a805bcdb5f29a5f8bf964b3dc3cc4f0876d6cfa13dc269274344",
+            "e2f629b6c0bb8c545867260d93a8d75b364a30ef1e4ce5dae88dbc6b677eeddf",
             hashlib.sha256(("\n".join(names) + "\n").encode()).hexdigest(),
         )
         self.assertEqual([], reviewed.validate_manifest(
@@ -43,6 +43,56 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
             self.manifest,
             reviewed.generated_manifest(self.rules, main_warhead_nodes),
         )
+
+    def test_exact_maintainer_role_blends_and_referrers_are_pinned(self):
+        names = {
+            name for name, entry in self.manifest["entries"].items()
+            if entry["category"] == "maintainer-approved role blend"
+        }
+        self.assertEqual({
+            "AtreusMG", "DuelistTankCannon", "EpigraphMG", "GoliathMG",
+            "GoliathMk2MG", "HMG_Duelist_upgrade", "autogun_tank",
+            "autogun_tank_small",
+        }, names)
+        expected_actors = {
+            "AtreusMG": {"protoss_atreus"},
+            "DuelistTankCannon": {"duelist_tank.ixian"},
+            "EpigraphMG": {"protoss_epigraph"},
+            "GoliathMG": {"terran_goliath"},
+            "GoliathMk2MG": {"terran_goliathmk2"},
+            "HMG_Duelist_upgrade": {"duelist_tank.ixian"},
+            "autogun_tank": {"ordos_heavyautoguntank"},
+            "autogun_tank_small": {"ordos_combatautoguntank"},
+        }
+        for name, actors in expected_actors.items():
+            entry = self.manifest["entries"][name]
+            self.assertEqual("direct", entry["expected_reachability"], name)
+            self.assertEqual(
+                actors,
+                {row["name"] for row in entry["referrers"] if row["kind"] == "actor"},
+                name,
+            )
+        for name in ("EpigraphMG", "GoliathMG", "GoliathMk2MG"):
+            self.assertEqual(2, len(self.manifest["entries"][name]["referrers"]), name)
+        self.assertIn(
+            "Temperature-state",
+            self.manifest["entries"]["DuelistTankCannon"]["rationale"],
+        )
+
+    def test_exact_maintainer_curated_d2k_signatures_are_pinned(self):
+        names = {
+            name for name, entry in self.manifest["entries"].items()
+            if entry["category"] == "maintainer-curated signature"
+        }
+        self.assertEqual({
+            "D2K_Rocket_Trooper1", "D2K_Rocket_Trooper2",
+            "D2K_Rocket_Trooper_AA", "D2K_Rocket_Trooper_AGOnly",
+            "HeavyIxianCombatTankCannon", "IxianCombatTankCannon",
+        }, names)
+        for name in names:
+            entry = self.manifest["entries"][name]
+            self.assertEqual("direct", entry["expected_reachability"], name)
+            self.assertIn("WEAPON_3WAY_SPLIT", entry["review_reference"], name)
 
     def test_reviewed_weapon_is_reachable_directly_with_exact_referrer(self):
         entry = self.manifest["entries"]["TSHellfireSonic"]
@@ -56,6 +106,16 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
             "name": "ts_gdi_orcafighter",
             "path": "Armament@Upgrade/Weapon",
         }], entry["referrers"])
+
+    def test_duelist_secondary_upgrade_replaces_only_the_secondary_gun(self):
+        actor = self.rules.resolve("duelist_tank.ixian")
+        self.assertEqual("DuelistTankCannon", actor.child("Armament").get("Weapon"))
+        base = actor.child("Armament@Guns")
+        upgrade = actor.child("Armament@Upgrade")
+        self.assertEqual("HMG_Duelist", base.get("Weapon"))
+        self.assertEqual("!ixian_upgrade_tungstenneedleguns", base.get("RequiresCondition"))
+        self.assertEqual("HMG_Duelist_upgrade", upgrade.get("Weapon"))
+        self.assertEqual("ixian_upgrade_tungstenneedleguns", upgrade.get("RequiresCondition"))
 
     def test_every_entry_matches_its_declared_reachability_and_purpose(self):
         sets = self.current["sets"]
@@ -161,7 +221,7 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
         self.assertEqual(0, status)
         self.assertEqual(report, split.REPORT.read_text(encoding="utf-8"))
         self.assertIn("391 raw stacked weapons", report)
-        self.assertIn("279 remain unreviewed", report)
+        self.assertIn("265 remain unreviewed", report)
         self.assertEqual(
             serialized(self.current),
             INVENTORY_REPORT.read_text(encoding="utf-8"),

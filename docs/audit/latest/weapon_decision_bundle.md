@@ -5,9 +5,9 @@ families. It is a review queue, not conversion authority. Reviewed exact
 composites remain in the raw structural count but are excluded here.
 
 - Raw reachable stacked definitions: **290**
-- Exact reviewed composites: **112**
-- Unreviewed reachable definitions: **178**
-- Unreviewed inheritance families: **120**
+- Exact reviewed composites: **126**
+- Unreviewed reachable definitions: **164**
+- Unreviewed inheritance families: **107**
 
 The buckets describe why automatic consolidation is unsafe. They do not
 decide the eventual damage family.
@@ -16,14 +16,14 @@ listed after the colon remain open decisions.
 
 | decision bucket | families | definitions |
 |---|---:|---:|
-| target and state routing | 19 | 40 |
-| target routing | 25 | 37 |
+| target and state routing | 18 | 39 |
+| target routing | 24 | 36 |
 | state delivery | 31 | 47 |
-| legacy compatibility | 7 | 8 |
+| legacy compatibility | 5 | 5 |
 | numbered warhead key | 1 | 1 |
-| no special mechanical signal | 37 | 45 |
+| no special mechanical signal | 28 | 36 |
 
-## Target And State Routing (19 families)
+## Target And State Routing (18 families)
 
 - **`VolkovMagneticWeapon`** (10; legacy bridge, route mixed, state or integrity): `VolkovMagneticWeapon`, `VolkovMagneticWeaponIncendiary`, `VolkovMagneticWeaponIncendiaryNuclearShells`, `VolkovMagneticWeaponIncendiaryTesla`, `VolkovMagneticWeaponIncendiaryTeslaFragment1`, `VolkovMagneticWeaponIncendiaryTeslaFragment2`, `VolkovMagneticWeaponNuclearShells`, `VolkovMagneticWeaponTesla`, `VolkovMagneticWeaponTeslaFragment1`, `VolkovMagneticWeaponTeslaFragment2`
   - mains `CannonHE_Heavy + CannonNuke_HeavyFlatCompatibility + Grenade + MediumChemicalWeapon`: `VolkovMagneticWeaponIncendiaryNuclearShells`
@@ -52,8 +52,6 @@ listed after the colon remain open decisions.
   - mains `Demolition_Light + Flame_Medium + Laser_Heavy`: `RA2Comet`, `RA2Comet_elite`
 - **`WaveTurretImpact`** (1; route mixed, state or integrity): `WaveTurretImpact`
   - mains `RailgunWeapon + Railgun_Heavy + Tesla_Heavy`: `WaveTurretImpact`
-- **`DuelistTankCannon`** (1; legacy bridge, route mixed, state or integrity): `DuelistTankCannon`
-  - mains `CannonHE_Heavy + CannonHE_Medium + PreservedFlat_Grenade + PreservedFlat_HeavyBomb + PreservedFlat_MediumFlameWeapon + PreservedFlat_TankDestroyerCannon`: `DuelistTankCannon`
 - **`JapanesePlasmaBomb`** (1; route mixed, state or integrity): `JapanesePlasmaBomb`
   - mains `Chemical_Heavy + Demolition_Heavy + Flame_Heavy`: `JapanesePlasmaBomb`
 - **`MedicFlare`** (1; legacy bridge, route mixed, state or integrity): `MedicFlare`
@@ -75,7 +73,7 @@ listed after the colon remain open decisions.
 - **`tkmstrykerfirerockets`** (1; route mixed, state or integrity): `tkmstrykerfirerockets`
   - mains `Flame_Medium + MissileAP_Medium`: `tkmstrykerfirerockets`
 
-## Target Routing (25 families)
+## Target Routing (24 families)
 
 - **`SteelVulcan`** (4; route mixed): `SteelVulcan`, `SteelVulcanResonance`, `SteelVulcanResonanceBounce1`, `SteelVulcanResonanceBounce2`
   - mains `Bullet_Light + Bullet_Medium + CannonHE_Heavy`: `SteelVulcan`, `SteelVulcanResonance`, `SteelVulcanResonanceBounce1`, `SteelVulcanResonanceBounce2`
@@ -106,8 +104,6 @@ listed after the colon remain open decisions.
   - mains `Concussion_Medium + Demolition_Light + MissileHE_Heavy + MissileHE_Medium`: `CabalHeavyReaperMissiles`
 - **`CabalReaperMissiles`** (1; route mixed): `CabalReaperMissiles`
   - mains `Concussion_Medium + Demolition_Light + MissileHE_Light + MissileHE_Medium`: `CabalReaperMissiles`
-- **`D2K_Rocket_Trooper2`** (1; route mixed): `D2K_Rocket_Trooper2`
-  - mains `CannonHE_Medium + Demolition_Light + Railgun_Heavy`: `D2K_Rocket_Trooper2`
 - **`Future_Cryocopter_Rocket`** (1; route mixed): `Future_Cryocopter_Rocket`
   - mains `FutureCryocopterMissileAP_Medium + MissileAP_Heavy + MissileAP_Medium`: `Future_Cryocopter_Rocket`
 - **`GLBarrelExplode`** (1; numbered, route mixed): `GLBarrelExplode`
@@ -205,12 +201,8 @@ listed after the colon remain open decisions.
 - **`edenMobileLaserTiger`** (1; state or integrity): `edenMobileLaserTiger`
   - mains `CannonHE_Medium + Laser_Heavy`: `edenMobileLaserTiger`
 
-## Legacy Compatibility (7 families)
+## Legacy Compatibility (5 families)
 
-- **`autogun_tank`** (2; legacy bridge): `autogun_tank`, `autogun_tank_small`
-  - mains `Bullet_MediumFlatCompatibility + CannonHE_Heavy + MissileAP_Heavy`: `autogun_tank`, `autogun_tank_small`
-- **`EpigraphMG`** (1; legacy bridge): `EpigraphMG`
-  - mains `Bullet_MediumFlatCompatibility + CannonHE_Heavy`: `EpigraphMG`
 - **`RA2FreedomRocket_elite`** (1; legacy bridge): `RA2FreedomRocket_elite`
   - mains `MissileAP_Medium + MissileAP_MediumFlatCompatibility`: `RA2FreedomRocket_elite`
 - **`Rammax_Sabot`** (1; legacy bridge): `Rammax_Sabot`
@@ -227,7 +219,7 @@ listed after the colon remain open decisions.
 - **`TS120mmx`** (1; numbered): `TS120mmx`
   - mains `1Dam + CannonHE_Medium + Concussion_Medium`: `TS120mmx`
 
-## No Special Mechanical Signal (37 families)
+## No Special Mechanical Signal (28 families)
 
 - **`LatinBuggyChaingun`** (2; none detected): `LatinBuggyChaingun`, `LatinBuggyChaingun_elite`
   - mains `Bullet_Light + Bullet_Medium + CannonAP_Light + Flak_Medium`: `LatinBuggyChaingun`, `LatinBuggyChaingun_elite`
@@ -252,26 +244,8 @@ listed after the colon remain open decisions.
   - mains `CannonAP_Light + CannonHE_Medium`: `AlliedTankDestroyerCannon`
 - **`Aphid_AA`** (1; none detected): `Aphid_AA`
   - mains `Concussion_Medium + MissileHE_Heavy`: `Aphid_AA`
-- **`AtreusMG`** (1; none detected): `AtreusMG`
-  - mains `Bullet_Medium + CannonHE_Heavy`: `AtreusMG`
-- **`D2K_Rocket_Trooper1`** (1; none detected): `D2K_Rocket_Trooper1`
-  - mains `Flak_Medium + MissileAP_Heavy + MissileAP_Light`: `D2K_Rocket_Trooper1`
-- **`D2K_Rocket_Trooper_AA`** (1; air only): `D2K_Rocket_Trooper_AA`
-  - mains `Flak_Medium + MissileAP_Heavy + MissileAP_Light`: `D2K_Rocket_Trooper_AA`
-- **`D2K_Rocket_Trooper_AGOnly`** (1; none detected): `D2K_Rocket_Trooper_AGOnly`
-  - mains `CannonHE_Medium + Demolition_Light + Railgun_Heavy`: `D2K_Rocket_Trooper_AGOnly`
 - **`GlaveCanon`** (1; none detected): `GlaveCanon`
   - mains `Demolition_Light + Railgun_Heavy`: `GlaveCanon`
-- **`GoliathMG`** (1; none detected): `GoliathMG`
-  - mains `Bullet_Medium + CannonHE_Heavy + Concussion_Light`: `GoliathMG`
-- **`GoliathMk2MG`** (1; none detected): `GoliathMk2MG`
-  - mains `Bullet_Medium + CannonHE_Heavy`: `GoliathMk2MG`
-- **`HMG_Duelist_upgrade`** (1; none detected): `HMG_Duelist_upgrade`
-  - mains `Bullet_Medium + CannonHE_Heavy`: `HMG_Duelist_upgrade`
-- **`HeavyIxianCombatTankCannon`** (1; none detected): `HeavyIxianCombatTankCannon`
-  - mains `CannonAP_Light + CannonHE_Heavy + CannonHE_Medium`: `HeavyIxianCombatTankCannon`
-- **`IxianCombatTankCannon`** (1; none detected): `IxianCombatTankCannon`
-  - mains `CannonAP_Light + CannonHE_Heavy + CannonHE_Medium`: `IxianCombatTankCannon`
 - **`JimRaynorMachineGun`** (1; none detected): `JimRaynorMachineGun`
   - mains `CannonHE_Heavy + MissileHE_Heavy`: `JimRaynorMachineGun`
 - **`RA2Terrorist`** (1; none detected): `RA2Terrorist`

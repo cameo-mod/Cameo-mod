@@ -322,6 +322,31 @@
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "23d33719f6b83c623e2429fe5081c20302a06c7be9f56581a2b11354a5d39c78"
     },
+    "AtreusMG": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "Bullet_Medium": "retained authored bullet component of the accepted Atreus profile",
+        "CannonHE_Heavy": "retained authored heavy-impact component of the accepted Atreus profile"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "6768831057f94955289bdf90d2f51f3e382c59c1aab033f0faa30d16f90e85c1",
+      "mains": [
+        "Bullet_Medium",
+        "CannonHE_Heavy"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "The maintainer accepted the current Protoss Atreus behavior as-is; preserve its exact two-part armor and blast profile.",
+      "referrer_digest": "230354973dafb262cf9dd22399959be063e97e6834059fbf59fd41bbca897ecd",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "protoss_atreus",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer unit decision: Protoss Atreus is good enough as authored",
+      "weapon_digest": "835d898fe049ef146c236c1a517742d68e1e12012b816dceb2aff09d8f2e142b"
+    },
     "BallistaMultiShot": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -634,6 +659,134 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "dfe176a0d5fb2d6153d6e52756cf31e2d2c8ddc5d14db77e0f4a94deaf876fc0"
     },
+    "D2K_Rocket_Trooper1": {
+      "category": "maintainer-curated signature",
+      "component_purposes": {
+        "Flak_Medium": "authored D2K signature layer Flak_Medium retained by the explicit exception",
+        "MissileAP_Heavy": "authored D2K signature layer MissileAP_Heavy retained by the explicit exception",
+        "MissileAP_Light": "authored D2K signature layer MissileAP_Light retained by the explicit exception"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "fdb56fb8b164a9fb10097a1c388cc39f00c519518cf3c62f8e28452efa426a83",
+      "mains": [
+        "Flak_Medium",
+        "MissileAP_Heavy",
+        "MissileAP_Light"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to the exact D2K signature layers named by the maintainer-curated exception.",
+      "rationale": "Exact family decision for D2K_Rocket_Trooper1, D2K_Rocket_Trooper_AA: retains the exact multi-layer D2K weapon identity named by the binding two-warhead-cap exception; reviewed components are Flak_Medium, MissileAP_Heavy, MissileAP_Light.",
+      "referrer_digest": "166221b3a9d0b48fb7ce52c9a51966e859b9c60d70ac42b29e02acc4c2c4e3ab",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ixian_twinrockettrooper",
+          "path": "Armament/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_twinrockettrooper",
+          "path": "Armament@garrisoned/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+      "weapon_digest": "5d3595fbd70c041b65618d4694d36dddd36fd10af4519ef06c543540229b9cb0"
+    },
+    "D2K_Rocket_Trooper2": {
+      "category": "maintainer-curated signature",
+      "component_purposes": {
+        "CannonHE_Medium": "authored D2K signature layer CannonHE_Medium retained by the explicit exception",
+        "Demolition_Light": "authored D2K signature layer Demolition_Light retained by the explicit exception",
+        "Railgun_Heavy": "authored D2K signature layer Railgun_Heavy retained by the explicit exception"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "62856b742bf13dd02258c0a4d575b5ffeca5f46e5587ac3dffbb2b7223f5b7fc",
+      "mains": [
+        "CannonHE_Medium",
+        "Demolition_Light",
+        "Railgun_Heavy"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to the exact D2K signature layers named by the maintainer-curated exception.",
+      "rationale": "Exact family decision for D2K_Rocket_Trooper2, D2K_Rocket_Trooper_AGOnly: retains the exact multi-layer D2K weapon identity named by the binding two-warhead-cap exception; reviewed components are CannonHE_Medium, Demolition_Light, Railgun_Heavy.",
+      "referrer_digest": "247f87329ab3878bc0996a3aa1cf6ce0c1a1835f09e502fa109b3bfa66ddcb15",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ixian_twinrockettrooper",
+          "path": "Armament@SECONDARY/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_twinrockettrooper",
+          "path": "Armament@SECONDARYgarrisoned/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+      "weapon_digest": "2af133a1f0adab18797a509a110c48ccc468c54821420aaa696529dacc0f41ce"
+    },
+    "D2K_Rocket_Trooper_AA": {
+      "category": "maintainer-curated signature",
+      "component_purposes": {
+        "Flak_Medium": "authored D2K signature layer Flak_Medium retained by the explicit exception",
+        "MissileAP_Heavy": "authored D2K signature layer MissileAP_Heavy retained by the explicit exception",
+        "MissileAP_Light": "authored D2K signature layer MissileAP_Light retained by the explicit exception"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "fb07a2f26fdbce835fd57d93d6b400f3c1a4668a2561405d2d63903d2a09cc8a",
+      "mains": [
+        "Flak_Medium",
+        "MissileAP_Heavy",
+        "MissileAP_Light"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to the exact D2K signature layers named by the maintainer-curated exception.",
+      "rationale": "Exact family decision for D2K_Rocket_Trooper1, D2K_Rocket_Trooper_AA: retains the exact multi-layer D2K weapon identity named by the binding two-warhead-cap exception; reviewed components are Flak_Medium, MissileAP_Heavy, MissileAP_Light.",
+      "referrer_digest": "054a6bf387e7693ea2fe5e9869c6b5a117b4b6308cebdd71c5f8513fa559f230",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ordos_antiairtrooper",
+          "path": "Armament/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_antiairtrooper",
+          "path": "Armament@garrisoned/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+      "weapon_digest": "7043e5f3d1b995da23f2b3d32a3df0f3428121ca5a89c8b93923768bf1fd83b5"
+    },
+    "D2K_Rocket_Trooper_AGOnly": {
+      "category": "maintainer-curated signature",
+      "component_purposes": {
+        "CannonHE_Medium": "authored D2K signature layer CannonHE_Medium retained by the explicit exception",
+        "Demolition_Light": "authored D2K signature layer Demolition_Light retained by the explicit exception",
+        "Railgun_Heavy": "authored D2K signature layer Railgun_Heavy retained by the explicit exception"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "e11ae42c5c11d2dff17ebdf6306e6c673b99bcd9d8cc6148cd954fd25169de19",
+      "mains": [
+        "CannonHE_Medium",
+        "Demolition_Light",
+        "Railgun_Heavy"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to the exact D2K signature layers named by the maintainer-curated exception.",
+      "rationale": "Exact family decision for D2K_Rocket_Trooper2, D2K_Rocket_Trooper_AGOnly: retains the exact multi-layer D2K weapon identity named by the binding two-warhead-cap exception; reviewed components are CannonHE_Medium, Demolition_Light, Railgun_Heavy.",
+      "referrer_digest": "bad3bf553a2ef151cbf398ba621616b6be3ae88357c4f8c9352620afe49460d8",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ordos_antiairtrooper",
+          "path": "Armament@SECONDARY/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_antiairtrooper",
+          "path": "Armament@SECONDARYgarrisoned/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+      "weapon_digest": "617d0b7297d6788fce2a9e48903537504376aa7516f53ba98cc0c71c86d3e84f"
+    },
     "DRPlasmaTankWeapon": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -688,6 +841,39 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "2d662748de8761dafe5aa36a07fc5a810a5bbf24f6cfb6e4f615afd24f46b19e"
+    },
+    "DuelistTankCannon": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "CannonHE_Heavy": "heavy cannon contribution to the Duelist's vehicle and structure role",
+        "CannonHE_Medium": "medium cannon contribution to the Duelist's versatile ground role",
+        "PreservedFlat_Grenade": "separate hostile-target grenade geometry in the Duelist impact",
+        "PreservedFlat_HeavyBomb": "separate ground and ship heavy-bomb route in the Duelist impact",
+        "PreservedFlat_MediumFlameWeapon": "temperature-state and flame contribution to the Duelist impact",
+        "PreservedFlat_TankDestroyerCannon": "anti-armor contribution to the Duelist's vehicle role"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "ed4113752cb11af16b97cf126a19ab04bf7397adb4798afa194fa72d876bd330",
+      "mains": [
+        "CannonHE_Heavy",
+        "CannonHE_Medium",
+        "PreservedFlat_Grenade",
+        "PreservedFlat_HeavyBomb",
+        "PreservedFlat_MediumFlameWeapon",
+        "PreservedFlat_TankDestroyerCannon"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "The maintainer defined the Ixian Duelist as versatile against vehicles and structures with limited air holdoff, but not universally dominant; its six resolved mains deliberately retain distinct armor, geometry, relationship, target, and Temperature-state behavior.",
+      "referrer_digest": "ab62276af8ea3a6b40a40ef8cc91443c70eaadeb25682cbb28e27edc91f0664c",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "duelist_tank.ixian",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer unit decision: preserve the Ixian Duelist's versatile role",
+      "weapon_digest": "3f32d59b3277c86a8b8e1780f767f1e37a98b3d08270a3aeee5eab35a00792aa"
     },
     "EMPGrenade": {
       "category": "status payload",
@@ -749,6 +935,36 @@
       ],
       "review_reference": "Resolved family review: primary hit plus status payload",
       "weapon_digest": "e1c4dbcf27064da470675953fa378eebc50bf30edba0180e57cdc8b201d33419"
+    },
+    "EpigraphMG": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "Bullet_MediumFlatCompatibility": "retained authored bullet component of the accepted Epigraph profile",
+        "CannonHE_Heavy": "retained authored heavy-impact component of the accepted Epigraph profile"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "32f67e3e3d3821036e6bbb5a5d0d67aaa76e4a0921dfa25bf4b3f48c17bfc2de",
+      "mains": [
+        "Bullet_MediumFlatCompatibility",
+        "CannonHE_Heavy"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "The maintainer accepted the current Protoss Epigraph behavior as-is; preserve its exact two-part armor and blast profile.",
+      "referrer_digest": "4008de14f978decb05320b8d2c858c85d9daaecf8e19a8c9d46fbca59c60a3eb",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "protoss_epigraph",
+          "path": "Armament@PRIMARY/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_epigraph",
+          "path": "Armament@SECONDARY/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer unit decision: Protoss Epigraph is good enough as authored",
+      "weapon_digest": "9fbc207b1afbfa51b6bde1b59cf5732f793358f175c5984ea21e13ed5d026cb3"
     },
     "ExecutionerDeath": {
       "category": "staged superweapon",
@@ -1041,6 +1257,120 @@
       "review_reference": "Resolved family review: primary hit plus status payload",
       "weapon_digest": "4ac06a204c87a6ec9e17e26fc57e3600877e94e863385a2e8f2dadad2af8c7e0"
     },
+    "GoliathMG": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "Bullet_Medium": "authored bullet contribution to the Mk1 secondary ground attack",
+        "CannonHE_Heavy": "authored heavy-impact contribution to the Mk1 secondary ground attack",
+        "Concussion_Light": "authored light-concussion contribution to the Mk1 secondary ground attack"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "85f6e6bda1b4734f33b8cc024b42f198e04050a95cd6e027f60546f4f57e1dad",
+      "mains": [
+        "Bullet_Medium",
+        "CannonHE_Heavy",
+        "Concussion_Light"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "The Goliath remains primarily anti-air; the maintainer accepted Mk1's weaker secondary ground attack and asked that existing Mk1 units remain usable.",
+      "referrer_digest": "34cce816ea5270ed7612ddf15f06e1ae4e5d946032e1ba4d02bbe43d8ae32f52",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "terran_goliath",
+          "path": "Armament@G1/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_goliath",
+          "path": "Armament@G2/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer progression decision: preserve Goliath Mk1 ground behavior",
+      "weapon_digest": "3881f6e1bfdc2a564f3c417fc35d3d9808b66c7b17b21542bdecc4779f333ec0"
+    },
+    "GoliathMk2MG": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "Bullet_Medium": "authored bullet contribution to the improved Mk2 ground attack",
+        "CannonHE_Heavy": "authored heavy-impact contribution to the improved Mk2 ground attack"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "4813372b74f5f45c8de1a10007187d6312ea3854de6618288c8b1e16c1061dec",
+      "mains": [
+        "Bullet_Medium",
+        "CannonHE_Heavy"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "The maintainer approved Mk2 as superior in most situations while retaining excellent anti-air and only mediocre secondary ground performance.",
+      "referrer_digest": "e7588a6dd75a2fa99716ba0ff28e1119291f750db42438f8b42371b5802d1297",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "terran_goliathmk2",
+          "path": "Armament@G1/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_goliathmk2",
+          "path": "Armament@G2/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer progression decision: preserve approved Goliath Mk2 role",
+      "weapon_digest": "4b28aab514f5ea3499ba09aaaed87d63d1a41ab3dce83307c23eeccaffe13659"
+    },
+    "HMG_Duelist_upgrade": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "Bullet_Medium": "bullet contribution to the Duelist's upgraded secondary gun",
+        "CannonHE_Heavy": "heavy-impact contribution to the Duelist's upgraded secondary gun"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "41dad031ce3ab775c66725b1f58d611896925b56fb8506c0927be26430d0f26d",
+      "mains": [
+        "Bullet_Medium",
+        "CannonHE_Heavy"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "The upgraded secondary gun is part of the maintainer-approved Duelist role; preserve its exact mixed ground and air-capable profile alongside the base cannon.",
+      "referrer_digest": "91f1adcd17e1f459ac252da351f2ce3a6bee90f925e7058dc120ba09aa451ae2",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "duelist_tank.ixian",
+          "path": "Armament@Upgrade/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer unit decision: preserve the Ixian Duelist's limited air holdoff",
+      "weapon_digest": "95a125988f0c27881c7768b912ec651ab25814e5772d76c21f6f10767590f7da"
+    },
+    "HeavyIxianCombatTankCannon": {
+      "category": "maintainer-curated signature",
+      "component_purposes": {
+        "CannonAP_Light": "authored D2K signature layer CannonAP_Light retained by the explicit exception",
+        "CannonHE_Heavy": "authored D2K signature layer CannonHE_Heavy retained by the explicit exception",
+        "CannonHE_Medium": "authored D2K signature layer CannonHE_Medium retained by the explicit exception"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "dd51f9f87f01ab43a7c56bf0f985a2350ca542ee8cf5881d85e75ede385ab275",
+      "mains": [
+        "CannonAP_Light",
+        "CannonHE_Heavy",
+        "CannonHE_Medium"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to the exact D2K signature layers named by the maintainer-curated exception.",
+      "rationale": "Exact family decision for IxianCombatTankCannon, HeavyIxianCombatTankCannon: retains the exact multi-layer D2K weapon identity named by the binding two-warhead-cap exception; reviewed components are CannonAP_Light, CannonHE_Heavy, CannonHE_Medium.",
+      "referrer_digest": "76b12a55426dcb876e28986bd92a0b18e93c739f11059ca338a2cff27e480bb2",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ixian_heavykodatank",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+      "weapon_digest": "027d6215bbc639d2691a551597a06e36bee4db9806684b91de4715fee4e41074"
+    },
     "HellfireCryo": {
       "category": "status payload",
       "component_purposes": {
@@ -1105,6 +1435,33 @@
       ],
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "921dc0623ab5a88f0a8c3aab128f54bee99e9c5e43a875e4492f56b997112d4a"
+    },
+    "IxianCombatTankCannon": {
+      "category": "maintainer-curated signature",
+      "component_purposes": {
+        "CannonAP_Light": "authored D2K signature layer CannonAP_Light retained by the explicit exception",
+        "CannonHE_Heavy": "authored D2K signature layer CannonHE_Heavy retained by the explicit exception",
+        "CannonHE_Medium": "authored D2K signature layer CannonHE_Medium retained by the explicit exception"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "0a944ad8b9c380b11b9decebeea52d613d7a1d1b39bcdb39f306287514dc4387",
+      "mains": [
+        "CannonAP_Light",
+        "CannonHE_Heavy",
+        "CannonHE_Medium"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to the exact D2K signature layers named by the maintainer-curated exception.",
+      "rationale": "Exact family decision for IxianCombatTankCannon, HeavyIxianCombatTankCannon: retains the exact multi-layer D2K weapon identity named by the binding two-warhead-cap exception; reviewed components are CannonAP_Light, CannonHE_Heavy, CannonHE_Medium.",
+      "referrer_digest": "f73b9b45a87d1a4b5c9225dd8c7857210def423933a3bf84373438a032e153bd",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ixian_kodatank",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+      "weapon_digest": "dba9552c7c3a114cfe42ab2f3b2962b3586d022b53b59301f527ade5d6880492"
     },
     "JapaneseHovercraftFlakAAkWaveforce": {
       "category": "effect-delivery composite",
@@ -2985,6 +3342,60 @@
       ],
       "review_reference": "Resolved family review: overlapping effect delivery",
       "weapon_digest": "d2e862e1c8993df140f619e0ecd400496ee36e070ff1a58b56822c1136b2b726"
+    },
+    "autogun_tank": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "Bullet_MediumFlatCompatibility": "primary anti-infantry and light-target bullet profile",
+        "CannonHE_Heavy": "secondary general-impact contribution to the autogun profile",
+        "MissileAP_Heavy": "limited vehicle and aircraft contribution to the autogun profile"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "a5477ec3e02840bf26387b9f9aeceab52319aa2974d299ec8c01dbba5f1b3b3f",
+      "mains": [
+        "Bullet_MediumFlatCompatibility",
+        "CannonHE_Heavy",
+        "MissileAP_Heavy"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "The maintainer defined every Ordos autogun-tank variant as strong against infantry, light vehicles, and aircraft but mediocre against vehicles and inferior one-on-one to dedicated anti-armor units.",
+      "referrer_digest": "8736f9bbdf7e6950040ee026e0773a7f423a72d90d23afef06a518a0a043b7d9",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ordos_heavyautoguntank",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer unit decision: preserve the Ordos autogun-tank role",
+      "weapon_digest": "5f501edfdab114708063fa3ad32b4458a35cf884f99c792f221f5c53690312cb"
+    },
+    "autogun_tank_small": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "Bullet_MediumFlatCompatibility": "primary anti-infantry and light-target bullet profile",
+        "CannonHE_Heavy": "secondary general-impact contribution to the autogun profile",
+        "MissileAP_Heavy": "limited vehicle and aircraft contribution to the autogun profile"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "a5477ec3e02840bf26387b9f9aeceab52319aa2974d299ec8c01dbba5f1b3b3f",
+      "mains": [
+        "Bullet_MediumFlatCompatibility",
+        "CannonHE_Heavy",
+        "MissileAP_Heavy"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "The maintainer defined every Ordos autogun-tank variant as strong against infantry, light vehicles, and aircraft but mediocre against vehicles and inferior one-on-one to dedicated anti-armor units.",
+      "referrer_digest": "b10b897025b1676da6456f0854b1c6c1a64bc9be63552c97dc70730900fb3dcb",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ordos_combatautoguntank",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer unit decision: preserve the Ordos autogun-tank role",
+      "weapon_digest": "3fc0c572fde96501a3fdc6369adf35193971cd86a15588e310f86a787374b314"
     },
     "edenTiger_EMP": {
       "category": "status payload",

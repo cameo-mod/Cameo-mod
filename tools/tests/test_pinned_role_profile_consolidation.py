@@ -84,7 +84,7 @@ class PinnedRoleProfileConsolidationTests(unittest.TestCase):
             self.assertEqual(1, len(main_warheads(self.rules.resolve_weapon(name))), name)
 
     def test_ratchets_match_reduction(self):
-        self.assertEqual(279, SPLIT_BASELINE)
+        self.assertEqual(265, SPLIT_BASELINE)
         self.assertEqual(135, BROADCAST_BASELINE)
 
 

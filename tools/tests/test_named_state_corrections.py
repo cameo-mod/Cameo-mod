@@ -83,7 +83,7 @@ class NamedStateCorrectionTests(unittest.TestCase):
             self.assertEqual("wall", str(temperature.get("InvalidTargets")), name)
 
     def test_ratchets_match_live_reduction(self):
-        self.assertEqual(279, SPLIT_BASELINE)
+        self.assertEqual(265, SPLIT_BASELINE)
         self.assertEqual(135, BROADCAST_BASELINE)
 
 
