@@ -155,7 +155,7 @@ InterceptorLauncher:
 	Projectile: InstantHit
 	Warhead@Dummy: Dummy
 
-PhotonCannon:
+^PhotonCannonLegacy:
 	Inherits: ^FlakWeapon
 	Inherits@2: ^HeavyCannon
 	Inherits@3: ^MediumCannon
@@ -297,6 +297,17 @@ PhotonCannon:
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
+PhotonCannon:
+	Inherits@finalmain: ^Compatibility_Plasma_HeavyFlat
+	Inherits: ^PhotonCannonLegacy
+	-Warhead@PreservedFlat_FlakWeapon:
+	-Warhead@PreservedFlat_HeavyCannon:
+	-Warhead@PreservedFlat_MediumCannon:
+	-Warhead@PreservedFlat_TankDestroyerCannon:
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 0
 DragoonCannon:
 	Inherits: PhotonCannon
 	ReloadDelay: 40
@@ -305,6 +316,10 @@ DragoonCannon:
 		Speed: 500
 		CloseEnough: 500
 		AllowSnapping: true
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 0
 
 GladiusCannon:
 	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
@@ -407,7 +422,7 @@ GladiusCannon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Plasma_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 40000
+		Damage: 110000
 		PercentageScale: 0
 	-Warhead@FlakWeapon:
 	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
@@ -504,6 +519,11 @@ GladiusCannon:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Medium:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@PreservedFlat_FlakWeapon:
+	-Warhead@PreservedFlat_HeavyCannon:
+	-Warhead@PreservedFlat_MediumCannon:
+	-Warhead@PreservedFlat_TankDestroyerCannon:
 
 ArbiterCannon:
 	Inherits: PhotonCannon
@@ -513,6 +533,10 @@ ArbiterCannon:
 		Speed: 428
 		CloseEnough: 428
 		AllowSnapping: true
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 0
 
 GlaveCanon:
 	Inherits@wh: ^Warhead_Demolition_Light

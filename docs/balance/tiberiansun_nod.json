@@ -3568,17 +3568,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "9000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "9000",
+        "damage": "18000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3590,6 +3583,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",
@@ -4827,17 +4821,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4849,6 +4836,7 @@
       "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",

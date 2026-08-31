@@ -50,7 +50,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         excluded = {
             "AtreusMG", "EpigraphMG", "GoliathMG", "GoliathMk2MG",
             "HMG_Duelist_upgrade", "autogun_tank",
-            "RA2MortarBike", "TSAdatsMissile", "TSChemAdatsMissileAA",
+            "TSAdatsMissile", "TSChemAdatsMissileAA",
             "TSRPGTowerRail", "VolkovMagneticWeapon", "tkmjuggap",
             "tkmtechnicalmgap", "BCLaser", "BCYamatoCannon",
             "edenMobileLaserTiger",
@@ -69,7 +69,13 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
 
         for name in ("AsianPhotonCannon_EMP", "AsianPunisherAG_EMP",
                      "AsianQuasarAG_EMP", "AsianQuasar_EMP_AA"):
-            self.assertGreaterEqual(len(main_warheads(self.rules.resolve_weapon(name))), 2)
+            weapon = self.rules.resolve_weapon(name)
+            self.assertEqual(1, len(main_warheads(weapon)), name)
+            self.assertIsNotNone(weapon.child("Warhead@EMPUnit"), name)
+            self.assertIsNotNone(
+                weapon.child("Warhead@PreservedFlat_MagicExtraDamage"), name)
+            self.assertIsNotNone(
+                weapon.child("Warhead@PreservedFlat_TeslaExtraDamage"), name)
 
     def test_all_selected_definitions_are_reachable(self):
         concrete = {

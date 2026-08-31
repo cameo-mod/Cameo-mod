@@ -550,6 +550,7 @@ Vulcan:
 		Damage: 12000
 		Spread: 600
 Napalm:
+	Inherits@finalmain: ^Compatibility_Flame_HeavyFlat
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
 	Inherits@3: ^Effect_Flame_Heavy
@@ -569,7 +570,15 @@ Napalm:
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Heavy:
+	Warhead@Flame_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 12000
+		PercentageScale: 9992
 
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
 VulcanA10Carrier:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium

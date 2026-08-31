@@ -311,10 +311,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "44000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_Medium",
+        "tag": "Chemical_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -344,20 +344,6 @@
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MutaliskCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": null,
-        "spread": null,
-        "tag": "DevourerChemicalAirCompatibility",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
@@ -755,10 +741,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_Medium",
+        "tag": "Chemical_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -788,13 +774,6 @@
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MutaliskCompatibility",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
@@ -804,6 +783,7 @@
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Chemical_MediumFlat",
        "^Warhead_Chemical_Medium",
        "^SwordWeapon",
        "^MediumChemicalWeapon",

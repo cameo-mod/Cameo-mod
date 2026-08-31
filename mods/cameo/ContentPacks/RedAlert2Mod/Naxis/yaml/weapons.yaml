@@ -1290,6 +1290,7 @@ NaxiInterceptorGun:
 			Heroic: 100
 
 NaxShoeRocket:
+	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2MediumMissile
@@ -1324,6 +1325,97 @@ NaxShoeRocket:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
+	Warhead@CollapsedNaxShoeRocketDemolition_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 45, 18
+		Range: 0, 466, 932
+	Warhead@CollapsedNaxShoeRocketDemolition_LightPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 17
+			Wood: 16
+			Steel: 15
+			Concrete: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		Falloff: 100, 45, 18
+		Range: 0, 233, 466
+	Warhead@CollapsedNaxShoeRocketMissileAP_MediumPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+		Falloff: 100, 50
+		Range: 0, 32
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		Damage: 24000
+		PercentageScale: 0
 NaxTigerCannon:
 	Inherits: ^RA2MediumCannon
 	Range: 5000
@@ -1373,8 +1465,13 @@ NaxiAlienPistol_elite:
 	Range: 3500
 	Burst: 4
 	BurstDelays: 3
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 24000
+		PercentageScale: 4163
 
 NaxiMissileUboat:
+	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -1408,6 +1505,97 @@ NaxiMissileUboat:
 	Warhead@MissileAP_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
+	Warhead@CollapsedNaxiMissileUboatDemolition_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 800
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 45, 18
+		Range: 0, 466, 932
+	Warhead@CollapsedNaxiMissileUboatDemolition_LightPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 800
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 17
+			Wood: 16
+			Steel: 15
+			Concrete: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		Falloff: 100, 45, 18
+		Range: 0, 233, 466
+	Warhead@CollapsedNaxiMissileUboatMissileAP_MediumPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 800
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+		Falloff: 100, 50
+		Range: 0, 32
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 48000
+		PercentageScale: 0
 NaxiSlaveWhip:
 	Range: 2500
 	ReloadDelay: 50

@@ -399,6 +399,7 @@ ReaperPistols:
 		Damage: 2
 
 ReaperGrenade:
+	Inherits@finalmain: ^Compatibility_Demolition_LightFlat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -439,6 +440,13 @@ ReaperGrenade:
 		ImpactSounds: EXPLMD2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
+	Warhead@Demolition_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 GhostSniper:
 	Inherits: ^Warhead_Bullet_Heavy

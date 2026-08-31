@@ -240,17 +240,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "tag": "MissileHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -263,6 +256,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_MissileHE_HeavyFlat",
        "^Warhead_Concussion_Medium",
        "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Heavy",

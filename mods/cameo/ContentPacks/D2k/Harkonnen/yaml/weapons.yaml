@@ -57,7 +57,7 @@ DebrisMissile:
 		Damage: 2000
 
 ExplosiveDebris:
-	Inherits: Debris2
+	Inherits: ^Debris2Legacy
 	Range: 7c0
 	Projectile: Bullet
 		Image: 120mm

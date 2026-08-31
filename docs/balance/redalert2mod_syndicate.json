@@ -2238,24 +2238,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Demolition_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2268,6 +2254,7 @@
       "requires": "(!latinsyndicate_upgrade_asianalliancestolentechhotfire && !rank-elite)",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Demolition_LightFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
@@ -2289,24 +2276,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Demolition_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2334,24 +2307,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Demolition_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2378,24 +2337,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Demolition_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2408,6 +2353,7 @@
       "requires": "(!latinsyndicate_upgrade_asianalliancestolentechhotfire && !rank-elite)",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Demolition_LightFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
@@ -2430,24 +2376,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Demolition_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2476,24 +2408,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Demolition_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3825,25 +3743,35 @@
       "burstdelays": "15",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA2AkulaRocketsDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA2AkulaRocketsDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA2AkulaRocketsMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
@@ -3853,6 +3781,7 @@
       "reloaddelay": "500",
       "slot": "Armament@ARTILLERY",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_Demolition_Heavy",
        "^RA2Grenade",
        "^RA2MediumMissile",
@@ -6231,17 +6160,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "36000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -6289,6 +6211,7 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Compatibility_CannonHE_MediumFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -6311,17 +6234,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "30000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "36000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {

@@ -638,6 +638,7 @@ HueyTwinMissiles:
 		Damage: 6000
 		PercentageScale: 9984
 sandmarinemortar:
+	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Flame_Medium
@@ -661,7 +662,16 @@ sandmarinemortar:
 		Damage: 120000
 	Warhead@Flame_Medium:
 		Damage: 120000
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Medium:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 240000
+		PercentageScale: 10000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
 bigshieemortar:
+	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Flame_Medium
@@ -685,6 +695,14 @@ bigshieemortar:
 		Damage: 80000
 	Warhead@Flame_Medium:
 		Damage: 80000
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Medium:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 160000
+		PercentageScale: 10000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
 TKMLockOn:
 	ReloadDelay: 20
 	Range: 10000
@@ -771,7 +789,7 @@ tkmkatyushalalauncherrocketsfire:
 tkmkatyushalalauncherrocketstwin:
 	Inherits: tkmkatyushalalauncherrockets
 	Burst: 16
-SandmarineTusk:
+^SandmarineTuskLegacy:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -788,7 +806,17 @@ SandmarineTusk:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 40000
+SandmarineTusk:
+	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
+	Inherits: ^SandmarineTuskLegacy
+	-Warhead@Concussion_Medium:
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 80000
+		PercentageScale: 9999
 BigShieeTusk:
+	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -805,8 +833,14 @@ BigShieeTusk:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 40000
+	-Warhead@Concussion_Medium:
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 80000
+		PercentageScale: 9999
 SandmarineTuskTwin:
-	Inherits: SandmarineTusk
+	Inherits: ^SandmarineTuskLegacy
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -846,14 +880,21 @@ SandmarineTuskTwin:
 		Damage: 4000
 	-Warhead@FlakWeapon:
 SandmarineTuskCryo:
+	Inherits@finalmain: ^Compatibility_MissileCryo_HeavyFlat
 	Inherits: SandmarineTusk
 	Inherits@2: ^CryoMissileProjectile
+	-Warhead@MissileHE_HeavyFlatCompatibility:
+	Warhead@MissileCryo_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 80000
+		PercentageScale: 9999
+		-PhysicalStates:
 SandmarineTuskFire:
 	Inherits@missileap: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Missile_Light
 	Inherits@4: ^Effect_Flame_Light
-	Inherits: SandmarineTusk
+	Inherits: ^SandmarineTuskLegacy
 	Projectile: Missile
 		TrailImage: fb2
 		TrailInterval: 1

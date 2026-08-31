@@ -84,8 +84,8 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
                 self.assertEqual(1, after - before, name)
 
     def test_ratchets_match_live_reduction(self):
-        self.assertEqual(551, SPLIT_BASELINE)
-        self.assertEqual(262, BROADCAST_BASELINE)
+        self.assertEqual(400, SPLIT_BASELINE)
+        self.assertEqual(142, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":

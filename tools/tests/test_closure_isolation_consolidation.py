@@ -26,7 +26,6 @@ CONSOLIDATED = {
 
 PRESERVED_HASHES = {
     "TS155mm_bluenuke": "97a6765afdf585adf92ece0bbdfec067da014575966671eada8a4ca54f46817f",
-    "TSInfantryMortarChem": "1f7e22a935a32ce8f82db92536fdc125a2725f368c9837bb09a44aec8aad5774",
     "GrenadeRA": "87b412b95c0b6e14ddd070ddb4cfb96fbd286f8ff9057d93f080edf2dbb5e397",
     "GrenadeRAExplode": "463b5914bb50ab37d1d25754249953ddca938838709fb3626fecae3696d26b68",
     "GrenadeThermobaric": "0c9a10e9feacf943e2d83ee9eeb48adec2a564ad13f2aa7795711af3bc386760",

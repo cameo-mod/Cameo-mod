@@ -4515,25 +4515,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mm3Concussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mm3Demolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mm3Demolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -4543,6 +4553,7 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",

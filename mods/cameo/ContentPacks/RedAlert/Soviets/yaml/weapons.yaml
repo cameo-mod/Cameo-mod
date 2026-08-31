@@ -2313,6 +2313,7 @@ Su57MaverickThermobaric:
 		Explosions: small_poof
 
 105mmThermobaric:
+	Inherits@finalmain: ^Compatibility_Flame_MediumFlat
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
@@ -2327,7 +2328,15 @@ Su57MaverickThermobaric:
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
+	-Warhead@CannonHE_Medium:
+	-Warhead@Flame_Medium:
+	Warhead@Flame_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 12000
+		PercentageScale: 9992
 
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
 HammerTankCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@wh2: ^Warhead_CannonHE_Medium
@@ -2498,6 +2507,7 @@ ra120mmTargetingComputer:
 	ValidTargets: Ground, Water
 
 ra120mmThermobaric:
+	Inherits@finalmain: ^Compatibility_Thermobaric_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -2520,11 +2530,201 @@ ra120mmThermobaric:
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
 	-Warhead@Effect:
+	Warhead@Collapsedra120mmThermobaricCannonHE_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			None: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 50, 35
+		Range: 0, 400, 600
+	Warhead@Collapsedra120mmThermobaricDemolition_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 45, 18
+		Range: 0, 466, 932
+	Warhead@Collapsedra120mmThermobaricFlame_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			None: 25
+			Wood: 24
+			Flak: 23
+			Steel: 22
+			Plate: 21
+			Concrete: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 90, 78
+		Range: 0, 400, 800
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Heavy:
+	Warhead@Thermobaric_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 24000
+		PercentageScale: 0
 
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 34
 ra120mmThermobaricTargetingComputer:
 	Inherits: ra120mmThermobaric
 	ValidTargets: Ground, Water
+	-Warhead@Collapsedra120mmThermobaricCannonHE_HeavyPercentage:
+	-Warhead@Collapsedra120mmThermobaricDemolition_HeavyPercentage:
+	-Warhead@Collapsedra120mmThermobaricFlame_HeavyPercentage:
+	Warhead@Collapsedra120mmThermobaricTargetingComputerCannonHE_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			None: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 50, 35
+		Range: 0, 400, 600
+	Warhead@Collapsedra120mmThermobaricTargetingComputerDemolition_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 45, 18
+		Range: 0, 466, 932
+	Warhead@Collapsedra120mmThermobaricTargetingComputerFlame_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			None: 25
+			Wood: 24
+			Flak: 23
+			Steel: 22
+			Plate: 21
+			Concrete: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 90, 78
+		Range: 0, 400, 800
+	Warhead@Thermobaric_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 24000
+		PercentageScale: 0
 
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 34
 MammothTuskTargetingComputer:
 	Inherits: MammothTusk
 	ValidTargets: Ground, Water, Air
@@ -2911,6 +3111,7 @@ ra120mm2TargetingComputer:
 	ValidTargets: Ground, Water
 
 ra120mm2Thermobaric:
+	Inherits@finalmain: ^Compatibility_Thermobaric_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -2933,12 +3134,202 @@ ra120mm2Thermobaric:
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
 	-Warhead@Effect:
+	Warhead@Collapsedra120mm2ThermobaricCannonHE_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 800
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			None: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 50, 35
+		Range: 0, 400, 600
+	Warhead@Collapsedra120mm2ThermobaricDemolition_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 800
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 45, 18
+		Range: 0, 466, 932
+	Warhead@Collapsedra120mm2ThermobaricFlame_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		Damage: 800
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			None: 25
+			Wood: 24
+			Flak: 23
+			Steel: 22
+			Plate: 21
+			Concrete: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 90, 78
+		Range: 0, 400, 800
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Heavy:
+	Warhead@Thermobaric_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 48000
+		PercentageScale: 0
 
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 34
 ra120mm2ThermobaricTargetingComputer:
 	Inherits: ra120mm2Thermobaric
 	ReloadDelay: 105
 	ValidTargets: Ground, Water
+	-Warhead@Collapsedra120mm2ThermobaricCannonHE_HeavyPercentage:
+	-Warhead@Collapsedra120mm2ThermobaricDemolition_HeavyPercentage:
+	-Warhead@Collapsedra120mm2ThermobaricFlame_HeavyPercentage:
+	Warhead@Collapsedra120mm2ThermobaricTargetingComputerCannonHE_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 800
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			None: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 50, 35
+		Range: 0, 400, 600
+	Warhead@Collapsedra120mm2ThermobaricTargetingComputerDemolition_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 800
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 45, 18
+		Range: 0, 466, 932
+	Warhead@Collapsedra120mm2ThermobaricTargetingComputerFlame_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		Damage: 800
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			None: 25
+			Wood: 24
+			Flak: 23
+			Steel: 22
+			Plate: 21
+			Concrete: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 90, 78
+		Range: 0, 400, 800
+	Warhead@Thermobaric_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 48000
+		PercentageScale: 0
 
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 34
 MammothTusk2:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^LightFlameWeapon
@@ -3117,6 +3508,7 @@ MonsterTank120mmInferno:
 		Damage: 120000
 		AffectsParent: true
 MonsterTankTusk:
+	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -3133,6 +3525,12 @@ MonsterTankTusk:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
+	-Warhead@Demolition_Heavy:
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 9998
 MonsterTankTuskTesla:
 	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
 	Inherits: ^Grenade

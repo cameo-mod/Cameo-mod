@@ -97,6 +97,7 @@ zsu_23Cryo:
 		Damage: 4000
 
 Hellfire:
+	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -112,6 +113,12 @@ Hellfire:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
+	-Warhead@Concussion_Medium:
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 9994
 HellfireCryo:
 	Inherits@wh: ^Warhead_CryoBlast_Medium
 	Inherits@wh2: ^Warhead_MissileCryo_Heavy

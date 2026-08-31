@@ -1228,32 +1228,43 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "CannonHE_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
@@ -1263,12 +1274,8 @@
       "reloaddelay": "74",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Projectile_Grenade_Light_D2K_155mm",
-       "^Effect_Demolition_Heavy_D2K_155mm",
-       "^D2K_Cannon"
+       "^Compatibility_CannonHE_MediumFlat",
+       "^D2K155mmLegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",

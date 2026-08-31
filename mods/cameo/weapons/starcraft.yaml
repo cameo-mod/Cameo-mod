@@ -114,7 +114,7 @@ MedicHeal:
 	InvalidTargets: Broodling
 
 IdolCannon:
-	Inherits: PhotonCannon
+	Inherits: ^PhotonCannonLegacy
 	ReloadDelay: 20
 	Range: 6405
 	Projectile: Missile

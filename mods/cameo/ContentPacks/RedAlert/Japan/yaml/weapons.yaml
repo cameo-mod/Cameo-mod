@@ -1180,6 +1180,12 @@ ZeroFighterArrows:
 		Damage: 18000
 	Warhead@Arrow_Light:
 		Damage: 18000
+	-Warhead@Arrow_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@Arrow_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 36000
+		PercentageScale: 9998
 ZeroFighterArrowsEnergized:
 	Inherits: SkyHawkArrowsEnergized
 	Range: 6615
@@ -1217,8 +1223,10 @@ ZeroFighterArrowsEnergized:
 	-Warhead@TeslaWeapon:
 	Warhead@Arrow_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		PercentageScale: 0
+		Damage: 36000
+		PercentageScale: 4442
+	-Warhead@Arrow_Light:
+	-Warhead@MissileHE_Medium:
 
 SkyHawkChainGun:
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -1297,6 +1305,7 @@ SkyHawkPlasmaCannon:
 		Explosions: purple_plasma
 
 SkyHawkArrows:
+	Inherits@finalmain: ^Compatibility_Arrow_LightFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_Arrow_Light
 	Inherits@proj: ^Projectile_Arrow_Light
@@ -1329,6 +1338,12 @@ SkyHawkArrows:
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
+	-Warhead@Arrow_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@Arrow_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 64000
+		PercentageScale: 9999
 
 SkyHawkArrowsEnergized:
 	Inherits@roleflat: ^Compatibility_Arrow_MediumFlat
@@ -1388,8 +1403,11 @@ SkyHawkArrowsEnergized:
 	-Warhead@TeslaWeapon:
 	Warhead@Arrow_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 40000
-		PercentageScale: 0
+		Damage: 72000
+		PercentageScale: 4444
+	-Warhead@Arrow_Light:
+	-Warhead@Arrow_LightFlatCompatibility:
+	-Warhead@MissileHE_Medium:
 
 155mm:
 	Inherits@collapsewh: ^Warhead_Concussion_Heavy

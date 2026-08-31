@@ -49,7 +49,8 @@ EXPECTED_PARENTS = {
     "KotinCannonThermobaric": {
         "^Projectile_Flame_Medium", "KotinCannon",
     },
-    "SandmarineTuskFire": {"^Warhead_MissileAP_Light", "SandmarineTusk"},
+    "SandmarineTuskFire": {
+        "^Warhead_MissileAP_Light", "^SandmarineTuskLegacy"},
     "TSDestroyerMissiles": {"^FlakWeapon", "^MediumMissile", "^ShrapnelWeapon"},
     "ViperMissilesFire": {"^Warhead_MissileAP_Light", "^ViperMissilesLegacy"},
     "tkmkatyushalalauncherrocketsfire": {

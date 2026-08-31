@@ -1315,7 +1315,7 @@ BHRedDarts:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-SpecterArtilleryShell:
+^SpecterArtilleryShellLegacy:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -1345,6 +1345,15 @@ SpecterArtilleryShell:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
 
+SpecterArtilleryShell:
+	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
+	Inherits: ^SpecterArtilleryShellLegacy
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
+	Warhead@Concussion_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 32000
+		PercentageScale: 9997
 SpecterArtilleryShellUpgrade:
 	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^MediumChemicalWeapon
@@ -1353,7 +1362,7 @@ SpecterArtilleryShellUpgrade:
 	Inherits@4: ^TankDestroyerCannon
 	Inherits@5: ^MediumCannon
 	Inherits@6: ^HeavyCannon
-	Inherits@7: SpecterArtilleryShell
+	Inherits@7: ^SpecterArtilleryShellLegacy
 	Projectile: Bullet
 		ContrailStartWidth: 111
 		ContrailEndWidth: 11

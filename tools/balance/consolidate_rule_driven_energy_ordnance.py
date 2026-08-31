@@ -13,6 +13,7 @@ import hashlib
 import json
 import math
 import pathlib
+import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -258,11 +259,54 @@ def add_percentage_companions(changed, path: pathlib.Path, name: str,
     }
     payload = []
     for key, spec in plan["percentage"].items():
-        companion = f"Collapsed{key}Percentage"
+        # Include the concrete weapon name so parent and child companions
+        # cannot merge through MiniYAML inheritance.
+        companion = percentage_companion_name(name, key)
         if any(child.key == f"Warhead@{companion}" for child in resolved.children):
             raise RuntimeError(f"{name}: percentage companion {companion} exists")
         payload.extend(companion_lines(by_key[key], companion, spec))
     lines[insertion:insertion] = payload
+
+
+def percentage_companion_name(name: str, key: str) -> str:
+    weapon_tag = re.sub(r"[^A-Za-z0-9_]", "_", name)
+    return f"Collapsed{weapon_tag}{key}Percentage"
+
+
+def remove_batch_parent_percentage_companions(
+        changed, path: pathlib.Path, name: str, rs: Ruleset, plans) -> None:
+    """Remove companions generated on selected ancestors in this same batch.
+
+    A selected child gets its own complete baseline-derived percentage plan. If
+    it also inherits companions generated for a selected parent, those routes
+    would be counted twice.
+    """
+    pending = [parent for _key, parent in rs.inherits_of(rs.weapon(name))]
+    seen = set()
+    companions = set()
+    while pending:
+        parent = pending.pop()
+        if parent in seen:
+            continue
+        seen.add(parent)
+        plan = plans.get(parent)
+        if plan is not None:
+            companions.update(
+                percentage_companion_name(parent, key)
+                for key in plan["percentage"])
+        local = rs.weapon(parent)
+        if local is not None:
+            pending.extend(p for _key, p in rs.inherits_of(local))
+    if not companions:
+        return
+    lines = changed.setdefault(
+        path, path.read_text(encoding="utf-8-sig").splitlines(True))
+    start, end = block_bounds(lines, name)
+    insertion = end
+    while insertion > start + 1 and not lines[insertion - 1].strip():
+        insertion -= 1
+    lines[insertion:insertion] = [
+        f"\t-Warhead@{companion}:\n" for companion in sorted(companions)]
 
 
 def isolate_viper_fire(changed, rs: Ruleset) -> None:
@@ -299,6 +343,8 @@ def apply_changes(rs: Ruleset, rows) -> None:
             raise RuntimeError(f"{name}: missing local weapon")
         path = pathlib.Path(local.file)
         resolved = rs.resolve_weapon(name)
+        remove_batch_parent_percentage_companions(
+            changed, path, name, rs, rows)
         add_percentage_companions(changed, path, name, resolved, plan)
         ensure_template_inherit(changed, path, name, destination)
         apply_compatibility_block(

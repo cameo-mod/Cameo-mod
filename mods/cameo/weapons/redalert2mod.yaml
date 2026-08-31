@@ -880,6 +880,7 @@ NaxiAntiTankCannonCorrosion:
 	Inherits@Corrosion: ^NaxOxidationShells
 
 NaxiAlienPistol:
+	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits: Lunar_Green105mm
 	Report: nax_aliengun.wav
 	Range: 2777
@@ -900,6 +901,13 @@ NaxiAlienPistol:
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+	-Warhead@CannonHE_Medium:
+	-Warhead@TeslaWeapon:
+	-Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 24000
+		PercentageScale: 4163
 
 NaxiV1Rocket:
 	Inherits: Atomic
@@ -1205,6 +1213,7 @@ NaxisBlackBombSmaller:
 		ImpactSounds: makoexplose.wav
 
 Lunar_Green105mm:
+	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
 	Inherits: ^Warhead_Tesla_Heavy
 	Inherits@2: ^Projectile_Lightning_Heavy
 	Inherits@3: ^Effect_Tesla_Heavy
@@ -1222,6 +1231,12 @@ Lunar_Green105mm:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 4000
 	Report: laser_cannon2_2.wav
+	-Warhead@CannonHE_Medium:
+	-Warhead@Tesla_Heavy:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 9994
 
 SyndicateFireballLauncher:
 	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat

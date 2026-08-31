@@ -1047,7 +1047,7 @@ MammothTusk:
 		Acceleration: 0, 0, 0
 		Shadow: False
 
-ParaBomb:
+^ParaBombLegacy:
 	Inherits@delivery: ^ParaBombDelivery
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
@@ -1063,6 +1063,17 @@ ParaBomb:
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Ground, Ship
 
+ParaBomb:
+	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
+	Inherits: ^ParaBombLegacy
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Heavy:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 40000
+		PercentageScale: 9998
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
 ParaBombCryo:
 	Inherits@delivery: ^ParaBombDelivery
 	Inherits@wh: ^Warhead_CryoBlast_Heavy
@@ -2171,6 +2182,7 @@ JapanSpeedBoatGunWaveforce:
 		PercentageScale: 9984
 
 YamatoCannon:
+	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -2195,6 +2207,12 @@ YamatoCannon:
 		Damage: 20000
 	Warhead@CannonHE_Heavy:
 		Damage: 20000
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Demolition_Heavy:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 40000
+		PercentageScale: 9998
 YamatoFlak:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium

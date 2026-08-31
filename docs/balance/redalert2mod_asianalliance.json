@@ -1782,10 +1782,10 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "16000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -1829,55 +1829,6 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "PreservedFlat_HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "PreservedFlat_LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "PreservedFlat_LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "PreservedFlat_MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "PreservedFlat_MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "PreservedFlat_ShrapnelWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1000",
@@ -1961,6 +1912,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -1989,13 +1947,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -2003,31 +1954,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -2039,6 +1969,7 @@
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Plasma_HeavyFlat",
        "^MediumMissile",
        "^FlakWeapon",
        "^TeslaWeapon",
@@ -2051,6 +1982,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -2079,13 +2017,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -2093,31 +2024,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -2129,6 +2039,7 @@
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "AsianPhotonCannon"
       ],
       "warheads": [],
@@ -2434,6 +2345,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -2462,13 +2380,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -2476,31 +2387,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -2512,6 +2402,7 @@
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "AsianPhotonCannon"
       ],
       "warheads": [],
@@ -2520,6 +2411,13 @@
      },
      {
       "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 51, 0",
+        "spread": "35",
+        "tag": "MissileQuantum_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
@@ -2549,13 +2447,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -2563,31 +2454,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -2599,6 +2469,7 @@
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_MissileQuantum_MediumFlat",
        "AsianPunisherAG"
       ],
       "warheads": [],
@@ -4828,10 +4699,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "16000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4877,55 +4748,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "PreservedFlat_HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "PreservedFlat_LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "PreservedFlat_LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "PreservedFlat_MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "PreservedFlat_MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "PreservedFlat_ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -4941,6 +4763,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Plasma_HeavyFlat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -4966,10 +4789,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "16000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5013,55 +4836,6 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "PreservedFlat_HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "PreservedFlat_LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "PreservedFlat_LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "PreservedFlat_MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "PreservedFlat_MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "PreservedFlat_ShrapnelWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1000",
@@ -5092,10 +4866,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "16000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5141,55 +4915,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "PreservedFlat_HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "PreservedFlat_LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "PreservedFlat_LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "PreservedFlat_MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "PreservedFlat_MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "PreservedFlat_ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -5205,6 +4930,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Plasma_HeavyFlat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -5230,10 +4956,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "16000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5277,55 +5003,6 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "PreservedFlat_HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "PreservedFlat_LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "PreservedFlat_LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "PreservedFlat_MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "PreservedFlat_MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "PreservedFlat_ShrapnelWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1000",
@@ -5582,7 +5259,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "59",
         "tag": "Arrow_LightFlatCompatibility",
@@ -5617,13 +5294,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -5631,31 +5301,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
@@ -5696,7 +5345,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "59",
         "tag": "Arrow_LightFlatCompatibility",
@@ -5731,13 +5380,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -5745,31 +5387,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
@@ -5808,7 +5429,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "59",
         "tag": "Arrow_LightFlatCompatibility",
@@ -5843,13 +5464,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -5857,31 +5471,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
@@ -5923,7 +5516,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "59",
         "tag": "Arrow_LightFlatCompatibility",
@@ -5958,13 +5551,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -5972,31 +5558,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
@@ -6743,6 +6308,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -6771,13 +6343,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -6785,31 +6350,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -6832,6 +6376,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -6860,13 +6411,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -6874,31 +6418,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -6910,6 +6433,7 @@
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@UpgradeAG",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "AsianQuasarBoatAG"
       ],
       "warheads": [],
@@ -6921,6 +6445,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -6949,13 +6480,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -6963,31 +6487,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -6999,6 +6502,7 @@
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament@AA",
       "versus_templates": [
+       "^Compatibility_MissileAA_MediumFlat",
        "AsianPhotonCannon"
       ],
       "warheads": [],
@@ -7009,6 +6513,13 @@
       "burst": "3",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 51, 0",
+        "spread": "35",
+        "tag": "MissileQuantum_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
@@ -7038,13 +6549,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -7052,31 +6556,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -7088,6 +6571,7 @@
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@UpgradeAA",
       "versus_templates": [
+       "^Compatibility_MissileQuantum_MediumFlat",
        "AsianQuasarBoat_AA"
       ],
       "warheads": [],
@@ -9065,6 +8549,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -9093,13 +8584,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -9107,31 +8591,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -9152,6 +8615,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -9180,13 +8650,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -9194,31 +8657,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -9230,6 +8672,7 @@
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@UpgradeAG",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "AsianQuasarAG"
       ],
       "warheads": [],
@@ -9238,6 +8681,13 @@
      },
      {
       "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
@@ -9267,13 +8717,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -9281,31 +8724,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -9317,6 +8739,7 @@
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament@AA",
       "versus_templates": [
+       "^Compatibility_MissileAA_MediumFlat",
        "AsianPhotonCannon"
       ],
       "warheads": [],
@@ -9325,6 +8748,13 @@
      },
      {
       "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 51, 0",
+        "spread": "35",
+        "tag": "MissileQuantum_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
@@ -9354,13 +8784,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "888",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "444",
@@ -9368,31 +8791,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "222",
-        "tag": "PreservedFlat_MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "PreservedFlat_MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "100",
-        "tag": "PreservedFlat_TeslaWeapon",
         "type": "SpreadDamage"
        }
       ],
@@ -9404,6 +8806,7 @@
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@UpgradeAA",
       "versus_templates": [
+       "^Compatibility_MissileQuantum_MediumFlat",
        "AsianQuasar_AA"
       ],
       "warheads": [],
@@ -10002,10 +9405,10 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "16000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -10049,55 +9452,6 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "PreservedFlat_HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "PreservedFlat_LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "PreservedFlat_LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "PreservedFlat_MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "PreservedFlat_MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "PreservedFlat_ShrapnelWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1000",
@@ -10129,10 +9483,10 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "16000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -10176,55 +9530,6 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "PreservedFlat_HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "PreservedFlat_LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "PreservedFlat_LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "PreservedFlat_MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "PreservedFlat_MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "PreservedFlat_ShrapnelWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1000",

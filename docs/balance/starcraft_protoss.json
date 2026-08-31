@@ -10,6 +10,13 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
+        "damage": "40000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "5",
         "falloff": null,
         "spread": "125",
@@ -36,34 +43,6 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "PreservedFlat_HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "PreservedFlat_TankDestroyerCannon",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -696,7 +675,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "110000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
         "tag": "Plasma_HeavyFlatCompatibility",
@@ -757,41 +736,6 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "PreservedFlat_HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "PreservedFlat_TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": null,
-        "spread": null,
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -2521,6 +2465,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "40000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "5",
         "falloff": null,
         "spread": "125",
@@ -2547,34 +2498,6 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "PreservedFlat_HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "PreservedFlat_TankDestroyerCannon",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -2584,10 +2507,8 @@
       "reloaddelay": "28",
       "slot": "Armament",
       "versus_templates": [
-       "^FlakWeapon",
-       "^HeavyCannon",
-       "^MediumCannon",
-       "^TankDestroyerCannon"
+       "^Compatibility_Plasma_HeavyFlat",
+       "^PhotonCannonLegacy"
       ],
       "warheads": [],
       "weapon": "PhotonCannon",
@@ -4886,6 +4807,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "40000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "5",
         "falloff": null,
         "spread": "125",
@@ -4912,34 +4840,6 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "PreservedFlat_FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "PreservedFlat_HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "PreservedFlat_TankDestroyerCannon",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",

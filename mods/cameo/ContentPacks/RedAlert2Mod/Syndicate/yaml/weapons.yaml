@@ -530,6 +530,7 @@ SyndicateFireballLauncherExplode:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 LatinMonkeyGrenade1:
+	Inherits@finalmain: ^Compatibility_Demolition_LightFlat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -581,6 +582,13 @@ LatinMonkeyGrenade1:
 		Amount: 2
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
+	Warhead@Demolition_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 30000
+		PercentageScale: 9997
 
 LatinMonkeyGrenade2:
 	Inherits: LatinMonkeyGrenade1
@@ -590,6 +598,10 @@ LatinMonkeyGrenade2:
 	BurstDelays: 3
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
+	Warhead@Demolition_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 30000
+		PercentageScale: 9997
 
 LatinMonkeyGrenade3:
 	Inherits: LatinMonkeyGrenade2
@@ -599,6 +611,10 @@ LatinMonkeyGrenade3:
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
 		Amount: 4
+	Warhead@Demolition_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 30000
+		PercentageScale: 9997
 
 LatinMonkeyGrenadeExplode:
 	Inherits: LatinMonkeyGrenade2
@@ -608,6 +624,13 @@ LatinMonkeyGrenadeExplode:
 		Damage: 4000
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
+	Warhead@Demolition_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 RA2RBurritoRocket:
 	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^RA2Grenade
@@ -1012,6 +1035,7 @@ DiabloCannonAAE_AA:
 	Projectile: Bullet
 
 RA2MortarBike:
+	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
 	Inherits@roleflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -1103,12 +1127,22 @@ RA2MortarBike:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 0
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@Concussion_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 36000
+		PercentageScale: 1664
 
 RA2MortarBike_elite:
 	Inherits: RA2MortarBike
 	Range: 8500
 	Burst: 2
 	BurstDelays: 3
+	Warhead@Concussion_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 36000
+		PercentageScale: 1664
 
 LatinBuggyMG:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
@@ -1705,6 +1739,7 @@ SMLLauncher:
 		Inaccuracy: 1000
 
 RA2AkulaRockets:
+	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2MediumMissile
@@ -1747,6 +1782,97 @@ RA2AkulaRockets:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
+	Warhead@CollapsedRA2AkulaRocketsDemolition_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 45, 18
+		Range: 0, 466, 932
+	Warhead@CollapsedRA2AkulaRocketsDemolition_LightPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 17
+			Wood: 16
+			Steel: 15
+			Concrete: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		Falloff: 100, 45, 18
+		Range: 0, 233, 466
+	Warhead@CollapsedRA2AkulaRocketsMissileAP_MediumPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+		Falloff: 100, 50
+		Range: 0, 32
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		Damage: 24000
+		PercentageScale: 0
 Rammax_Sabot:
 	Inherits: ^Chaingun
 	Inherits@2: ^LaserWeapon

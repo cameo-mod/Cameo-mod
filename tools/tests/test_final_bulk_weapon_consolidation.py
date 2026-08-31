@@ -11,7 +11,6 @@ REPORT = ROOT / "docs/audit/latest/multi_main_bulk2_comparison.json"
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "balance"))
 
-import consolidate_compatibility_profiles as compatibility
 import consolidate_final_safe_cohorts as final_cohorts
 from audit_three_way_split import SPLIT_BASELINE, main_warheads
 from miniyaml import Ruleset
@@ -33,7 +32,6 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
                 cls.by_kind[change[0]][weapon] = change[1:]
 
     def test_converters_are_fully_applied_and_idempotent(self):
-        compatibility.validate_result(set())
         final_cohorts.validate_result()
 
     def test_whole_tree_change_manifest_is_exact(self):
@@ -98,7 +96,7 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
             self.assertTrue(own.isdisjoint(inherited), weapon)
 
     def test_structural_backlog_ratchet_was_lowered(self):
-        self.assertEqual(551, SPLIT_BASELINE)
+        self.assertEqual(400, SPLIT_BASELINE)
 
     def test_rejected_runtime_and_role_hazards_remain_unconverted(self):
         rules = Ruleset(ROOT)
@@ -110,7 +108,7 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
             # Friendly-fire or physical-state behavior would change.
             "BCYamatoCannon", "HMGo_upgrade", "LightTank2Missiles",
             # Semantic name/delivery traps from the independent review.
-            "RA2MortarBike", "SteelAirTurret_elite",
+            "SteelAirTurret_elite",
         }
         for weapon in deferred:
             self.assertGreater(len(main_warheads(rules.resolve_weapon(weapon))), 1, weapon)

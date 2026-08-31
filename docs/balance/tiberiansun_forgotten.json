@@ -1487,17 +1487,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1509,6 +1502,7 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_CannonHE_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -3308,25 +3302,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "48000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_Medium",
+        "tag": "Chemical_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 88, 72",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedTSInfantryMortarChemChemical_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedTSInfantryMortarChemConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedTSInfantryMortarChemDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -3338,6 +3342,7 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Chemical_MediumFlat",
        "^TSInfantryMortarLegacy",
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -3384,25 +3389,35 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "48000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_Medium",
+        "tag": "Chemical_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 88, 72",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedTSInfantryMortarChemChemical_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedTSInfantryMortarChemConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedTSInfantryMortarChemDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -3414,6 +3429,7 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
+       "^Compatibility_Chemical_MediumFlat",
        "^TSInfantryMortarLegacy",
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
@@ -6955,17 +6971,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
-        "tag": "Chemical_Heavy",
+        "tag": "Chemical_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6976,6 +6985,7 @@
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Chemical_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Chemical_Heavy",
        "^Effect_Demolition_Heavy",
@@ -8428,17 +8438,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "18000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "18000",
+        "damage": "36000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8450,6 +8453,7 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",
@@ -8768,17 +8772,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "30000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_Medium",
+        "tag": "Chemical_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8790,6 +8787,7 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Chemical_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Chemical_Medium",
        "^Projectile_Shell_Medium",

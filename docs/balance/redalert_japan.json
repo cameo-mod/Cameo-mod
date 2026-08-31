@@ -249,17 +249,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "32000",
+        "damage": "64000",
         "falloff": "100, 0",
         "spread": "59",
-        "tag": "Arrow_Light",
+        "tag": "Arrow_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -271,6 +264,7 @@
       "requires": "!japan_upgrade_energizedarrows",
       "slot": "Armament@Missiles",
       "versus_templates": [
+       "^Compatibility_Arrow_LightFlat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Arrow_Light",
        "^Projectile_Arrow_Light",
@@ -286,7 +280,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "72000",
         "falloff": "100, 0",
         "spread": "88",
         "tag": "Arrow_MediumFlatCompatibility",
@@ -305,20 +299,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -595,17 +575,10 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "18000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "18000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "59",
-        "tag": "Arrow_Light",
+        "tag": "Arrow_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -632,7 +605,7 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "88",
         "tag": "Arrow_MediumFlatCompatibility",
@@ -651,20 +624,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
