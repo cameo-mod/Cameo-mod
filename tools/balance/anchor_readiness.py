@@ -360,6 +360,79 @@ def main():
           f"({tagged_buildable / buildable * 100:.1f}%); {len(tagged)} including "
           "non-buildable\n")
 
+    # --- ⛔ ANCHOR INTEGRITY — measured 2026-08-30, and it outranks the fit table ---- #
+    #
+    # A class formula measures its members against the ANCHOR, so the anchor has to BE a
+    # member and it has to sit somewhere near the middle of what it describes. Neither was
+    # ever checked, and the sign-off queue below cannot see the difference between "this
+    # class fits badly" and "this class has nothing to fit".
+    #
+    # What the first run found: 10 of 27 anchors carry NO class tag at all, 5 classes have
+    # ZERO tagged members (3 of them SIGNED), and `special_forces` -- 15 members, signed --
+    # anchors on an actor at the 13th percentile of its own class. That last one IS its 57%
+    # median pricing error: the zero point is an outlier at the bottom of the population it
+    # defines, so every member is measured against a ruler planted in the wrong place.
+    # Fixable by moving the anchor, without touching the formula.
+    tag_of = {n: (r.get("design") or {})["class_anchor"] for _f, _s, n, r in tagged}
+    hp_of = {}
+    for _f, _s, n, r in units:
+        v = r.get("hp")
+        v = v.get("v") if isinstance(v, dict) else v
+        try:
+            hp_of[n] = float(v)
+        except (TypeError, ValueError):
+            pass
+    by_class = collections.defaultdict(list)
+    for n, c in tag_of.items():
+        by_class[c].append(n)
+
+    untagged_anchor, empty, off_centre = [], [], []
+    for cls in classes:
+        a = (anchors.get(cls) or {}).get("anchor_actor")
+        sg = " **SIGNED**" if anchors[cls].get("signed_off") else ""
+        if not by_class.get(cls):
+            empty.append(f"{cls}{sg}")
+        if a and tag_of.get(a) != cls:
+            untagged_anchor.append(f"{cls} -> `{a}` ({tag_of.get(a) or 'UNTAGGED'}){sg}")
+        elif a and a in hp_of:
+            hps = sorted(hp_of[n] for n in by_class[cls] if n in hp_of)
+            if len(hps) >= 4:
+                pct = 100 * sum(1 for h in hps if h <= hp_of[a]) / len(hps)
+                if pct <= 25 or pct >= 75:
+                    off_centre.append(f"{cls} -> `{a}` at the {pct:.0f}th percentile of "
+                                      f"{len(hps)} members{sg}")
+
+    print("## ⛔ Anchor integrity — an anchor must BE a member, and near the middle\n")
+    print(f"anchors tagged into the class they anchor : "
+          f"**{len(classes) - len(untagged_anchor)} of {len(classes)}**\n")
+    if empty:
+        print(f"**{len(empty)} classes have ZERO tagged members** — nothing to fit, and a "
+              "one-member fit table reads 0% because an anchor prices ITSELF at 0%:\n")
+        for e in sorted(empty):
+            print(f"  - {e}")
+        print()
+    if untagged_anchor:
+        print(f"**{len(untagged_anchor)} anchors are not tagged into their own class** — the "
+              "zero point sits outside the population it defines:\n")
+        for e in sorted(untagged_anchor):
+            print(f"  - {e}")
+        print()
+    if off_centre:
+        print("**Anchors far from their class centre** — a pricing-error cause, fixed by moving "
+              "the ANCHOR rather than the formula.\n")
+        print("⚠ READ THIS BEFORE RE-ANCHORING ANYTHING. For the 13 classes on the 2026-08-01 "
+              "LOCKED table the anchor actor is still PRE-RESTAT, so its percentile is measured "
+              "on stats the design already intends to replace — `scout_vehicle`'s buggy reads "
+              "7th at hp 20000 against a spec of 30000, and the restat moves it. Those entries "
+              "are a SYMPTOM of the unapplied restat, not an independent defect: apply the "
+              "restat, then re-read this list.\n")
+        print("The ones that are NOT explained that way are the infantry classes, where no "
+              "restat is queued because no ladder exists — `special_forces` at the 13th "
+              "percentile of 15 members is the real thing, and it is signed.\n")
+        for e in sorted(off_centre):
+            print(f"  - {e}")
+        print()
+
     # --- per-class fit ------------------------------------------------------ #
     members = collections.defaultdict(list)
     for _f, _s, _n, rec in tagged:

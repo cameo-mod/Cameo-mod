@@ -119,6 +119,49 @@ This is not an argument that the sign-off was wrong. It is the observation that 
 half is unsigned and the placeholder half is signed**, which is the reverse of what the evidence
 supports, and it explains `special_forces` reading 57%.
 
+#### ⛔⛔ AND THE INFANTRY CLASSES DO NOT HAVE POPULATIONS TO FIT
+
+Before drafting any ladder I measured whether each anchor is REPRESENTATIVE of the class it
+anchors. It is worse than "placeholders", and it changes what the next job is.
+
+| finding | measured |
+|---|--:|
+| anchors **tagged into the class they anchor** | **17 of 27** |
+| anchors carrying **no class tag at all** | **10** — `commando` `flying_infantry` `grenadier` `heavy_infantry` `heavy_sniper` `melee` `mortar` `pure_sniper` `rocket_trooper` `scout` |
+| classes with **ZERO tagged members** | **5** — `commando` `flying_infantry` `grenadier` `mortar` `pure_sniper` |
+| of those five, **signed** | **3** — `flying_infantry` `grenadier` `mortar` |
+
+And where a class does have members, the anchor is often not near its centre:
+
+| class | members | anchor's percentile within its own class |
+|---|--:|---|
+| `special_forces` | 15 | **13th** ← SIGNED |
+| `closecombat` | 4 | 25th ← SIGNED |
+| `support` | 34 | 44th |
+| `archer` | 4 | 50th ← SIGNED |
+
+⚠ **One caveat before anyone re-anchors a vehicle class.** `anchor_readiness --` now reports 12
+off-centre anchors, but for the 13 LOCKED-table classes the actor is still PRE-RESTAT, so its
+percentile is measured on stats the design already intends to replace (`scout_vehicle`'s buggy
+reads 7th at hp 20000 against a spec of 30000). Those are a SYMPTOM of §1c's unapplied restat —
+apply it, then re-read the list. The infantry entries are not explained that way, because no
+restat is queued for them.
+
+⭐ **`special_forces` sitting at the 13th percentile of its own 15 members IS the 57% pricing
+error.** The zero point is an outlier at the bottom of the population it defines, so every member
+is measured against a ruler planted in the wrong place. That is a mechanical explanation, not a
+coincidence — and it is fixable by re-selecting the anchor, without touching the formula.
+
+⛔ **THE LADDER IS NOT THE NEXT JOB.** You cannot engineer a ladder for five classes that have no
+members and ten anchors that are not in their own class. The vehicle ladder worked because those
+classes have real populations — `mbt` 40 members, `scout_vehicle` 27, `high_tech_tank` 25 — so the
+table had something to describe. **Classification comes first; the ladder is derived from the
+populations, not invented ahead of them.**
+
+⚠ **And it reframes the "8 signed" number.** Three of the eight price ZERO units, so signing them
+changed nothing in effect — but it also means readiness was never 8. Of the eight, five have any
+members at all, and two of those five are the ⛔ ones.
+
 #### Three DIFFERENT problems hide behind one phrase
 
 Sorting the 19 mismatches by kind, because they need different fixes:
@@ -228,12 +271,18 @@ DEFINITION OF DONE — G0..G7 in §2. Not "the scripts exist".
 
 ## 6. First three actions, ranked by leverage
 
-1. **Build the infantry ladder** the way the vehicle one was built (§1c). Fourteen classes have no
-   engineered anchor, seven of them are signed, and `special_forces` reads 57% pricing error as a
-   direct consequence. This is the single largest gap in the model and it needs no boot.
-2. **Re-read the sign-off queue against pricing error** (§1a): re-affirm the eight, or narrow to
-   the three the tool calls ready. Gates G6. No boot.
-3. **Rule `flying_infantry`'s speed spec** (§1c) — the one mismatch that is probably a spec bug
-   rather than unapplied work, and it is signed.
-4. **The single regeneration** (G1+G2) on the boot machine. Everything downstream is stale until it
-   lands, including three of the five red pins.
+⛔ **NOT the infantry ladder.** That was the obvious next move and the measurement killed it: five
+classes have zero members and ten anchors are not tagged into their own class. A ladder needs
+populations to describe.
+
+1. **Tag the infantry roster** — classification, the same job as G4's 18%. It is the prerequisite
+   for everything else in the anchor system: no population, no fit, no ladder, no sign-off.
+   Judgement plus evidence, never numeric proximity. No boot.
+2. **Re-select the anchors that sit outside or at the edge of their class** — `special_forces` at
+   the 13th percentile is the 57% error, and it is fixable by moving the zero point rather than
+   touching the formula. Maintainer ruling, evidence preparable now. No boot.
+3. **THEN derive the infantry ladder** from the measured populations, the way the vehicle one was
+   consolidated from per-class rulings rather than invented in one pass.
+4. **Re-read the sign-off queue** (§1a) once 1–3 land; three of the eight currently price nothing.
+5. **The single regeneration** (G1+G2) on the boot machine — independent of all the above, and it
+   invalidates three of the five red pins, so it can happen whenever you have the machine.

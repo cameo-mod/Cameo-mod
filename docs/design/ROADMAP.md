@@ -172,7 +172,37 @@ evidence of anything.
 current set would price `special_forces` and `missile_vehicle` through anchors their own readiness
 tool flags. Re-read the queue before the APPLY — it does not block the bell/macro flip.
 
-## ⛔ P0 — THERE IS NO INFANTRY ANCHOR LADDER (2026-08-30)
+## ⛔ P0 — THE INFANTRY CLASSES HAVE NO POPULATIONS (2026-08-30)
+
+⛔ **This supersedes "build the infantry ladder", which was the obvious next move until it was
+measured.** `anchor_readiness.py` now reports anchor INTEGRITY, and it is worse than placeholders:
+
+| | measured |
+|---|--:|
+| anchors tagged into the class they anchor | **17 of 27** |
+| anchors carrying **no class tag at all** | **10** |
+| classes with **ZERO tagged members** | **5** — `commando` `flying_infantry` `grenadier` `mortar` `pure_sniper` |
+| of those five, **SIGNED** | **3** — `flying_infantry` `grenadier` `mortar` |
+
+⭐ **`special_forces` anchors on an actor at the 13th percentile of its own 15 members — and THAT
+is its 57% median pricing error.** The zero point is an outlier at the bottom of the population it
+defines, so every member is measured against a ruler planted in the wrong place. Fixable by moving
+the ANCHOR, without touching the formula.
+
+**You cannot engineer a ladder for classes that have no members.** The vehicle ladder worked
+because those classes have real populations (`mbt` 40, `scout_vehicle` 27, `high_tech_tank` 25).
+**Classification comes first; the ladder is DERIVED from the populations, not invented ahead of
+them.** So the order is: tag the roster → re-select the off-centre anchors → derive the ladder →
+re-fit → re-queue for sign-off.
+
+⚠ **And it reframes "8 signed":** three of the eight price ZERO units. Signing them changed nothing
+in effect, but readiness was never 8 — five have any members, and two of those five are the ⛔ ones.
+
+⚠ Before re-anchoring a VEHICLE class, note that its anchor is still pre-restat, so its percentile
+is measured on stats the design already intends to replace. Those entries are a symptom of the
+unapplied restat below; apply it first, then re-read.
+
+## ⛔ P0 — THE INFANTRY CLASSES HAVE NO ENGINEERED LADDER EITHER (2026-08-30)
 
 Full review: [`BALANCE_COMPLETION_BRIEF.md`](BALANCE_COMPLETION_BRIEF.md) §1c.
 
