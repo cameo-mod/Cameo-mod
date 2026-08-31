@@ -302,7 +302,10 @@ wc2ballistaFire:
 	Warhead@Concussion_Medium:
 		Damage: 30000
 	Warhead@Demolition_Heavy:
-		Damage: 30000
+		Damage: 90000
+		PercentageScale: 9999
+	-Warhead@Demolition_Light:
+	-Warhead@Concussion_Medium:
 	Warhead@Effect: CreateEffect
 		Image: wc2_catapult_impact
 		Explosions: idle

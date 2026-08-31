@@ -1,11 +1,11 @@
 # Folded percentage runtime audit
 
 - Reachable direct-hit weapons activated: **184**
-- Folded direct-hit applications activated: **195**
+- Folded direct-hit applications activated: **189**
 - Direct weapons also carrying standalone percentage hits: **7**
 - Direct weapons whose folded hit feeds physical state: **7**
 - Direct weapons whose folded hit feeds integrity: **5**
-- Legacy Int32 overflow applications repaired: **4**
+- Legacy Int32 overflow applications repaired: **7**
 - Non-default direct relationship sets: **0**
 - Dispatch structural findings: **0**
 
@@ -13,10 +13,13 @@
 
 | weapon | warhead | legacy units | repaired units |
 |---|---|---:|---:|
+| `DalekCannon` | `Railgun_HeavyFlatCompatibility` | -6474 | 15000 |
+| `DalekCannon_elite` | `Railgun_HeavyFlatCompatibility` | 8525 | 30000 |
 | `ExecutionerSword` | `Melee_Medium` | 8525 | 30000 |
 | `Hakureiring2` | `Magic_Heavy` | -9474 | 12000 |
 | `OIHakureiring2` | `Magic_Heavy` | -9474 | 12000 |
 | `d2kStormLasher` | `Storm_Heavy` | -6474 | 15000 |
+| `sandmarinemortar` | `Demolition_HeavyFlatCompatibility` | -9474 | 12000 |
 
 ## Direct-hit mixed effects
 

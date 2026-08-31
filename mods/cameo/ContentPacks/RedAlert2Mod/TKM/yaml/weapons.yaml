@@ -853,7 +853,6 @@ SandmarineTuskTwin:
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-		PercentageScale: 0
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
@@ -1475,4 +1474,6 @@ FlakbusAA:
 		Damage: 16000
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-		Damage: 16000
+		Damage: 32000
+		PercentageScale: 9997
+	-Warhead@MissileHE_Medium:

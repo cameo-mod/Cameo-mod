@@ -20,6 +20,10 @@ AsianHowitzerSplash:
 
 RA2KirovHowitzerSplash:
 	Inherits: ^AsianHowitzerSplashLegacy
+	Warhead@Concussion_Medium:
+		Damage: 40000
+		PercentageScale: 9998
+	-Warhead@Demolition_Heavy:
 
 AsianFlameFragment:
 	Inherits@wh: ^Warhead_Flame_Light

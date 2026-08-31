@@ -89,11 +89,28 @@ def build():
         name for name in selected
         if not any(parent in selected for parent in parents.get(name, set()))
     )
+    candidate_members = {
+        root: {root, *walk_closure(root, children, selected)}
+        for root in roots
+    }
+    candidate_roots = {name: [] for name in selected}
+    for root, members in candidate_members.items():
+        for name in members:
+            candidate_roots[name].append(root)
+    missing = {name for name, owners in candidate_roots.items() if not owners}
+    if missing:
+        raise RuntimeError(f"root partition incomplete: missing={sorted(missing)}")
+
+    # Selected weapons can share a descendant through multiple inheritance.
+    # Assign each one to a single deterministic planning root; retain aliases
+    # as metadata instead of silently duplicating the weapon across groups.
+    owner = {
+        name: (name if name in roots else min(candidate_roots[name]))
+        for name in selected
+    }
     groups = []
-    covered = set()
     for root in roots:
-        members = {root, *walk_closure(root, children, selected)}
-        covered.update(members)
+        members = {name for name, assigned in owner.items() if assigned == root}
         member_rows = []
         aggregate_flags = {
             "air_only": True,
@@ -112,6 +129,9 @@ def build():
                 "name": name,
                 "mains": main_warheads(rules.resolve_weapon(name)),
                 "flags": member_flags,
+                "alternate_roots": sorted(
+                    candidate for candidate in candidate_roots[name]
+                    if candidate != root),
             })
         groups.append({
             "root": root,
@@ -120,10 +140,14 @@ def build():
             "members": member_rows,
         })
 
-    if covered != selected:
+    flattened = [
+        member["name"] for group in groups for member in group["members"]
+    ]
+    if len(flattened) != len(selected) or set(flattened) != selected:
         raise RuntimeError(
-            f"root partition incomplete: missing={sorted(selected - covered)}, "
-            f"duplicate-or-extra={sorted(covered - selected)}")
+            f"root partition invalid: missing={sorted(selected - set(flattened))}, "
+            f"duplicate_count={len(flattened) - len(set(flattened))}, "
+            f"extra={sorted(set(flattened) - selected)}")
     groups.sort(key=lambda row: (-row["size"], row["root"]))
     return {
         "reachable_stacked": len(selected),

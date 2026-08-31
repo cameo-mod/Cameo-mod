@@ -1343,9 +1343,9 @@ DeviatorMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@MissileAP_Heavy:
-		PercentageScale: 3330
+		PercentageScale: 4998
 		ValidTargets: Ground, Water, Air
-		Damage: 30000
+		Damage: 40000
 	Warhead@Effect: CreateEffect
 		Explosions: deviator
 		ExplosionPalette: deviatorgas
@@ -1366,6 +1366,7 @@ DeviatorMissile:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumMissile:
 	-Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@CannonHE_Heavy:
 DeviatorMissile_Artillery:
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^HeavyFlameWeapon
@@ -1408,8 +1409,8 @@ DeviatorMissile_Artillery:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@HeavyFlameWeapon:
 	Warhead@MissileAP_Heavy:
-		Damage: 50000
-		PercentageScale: 1998
+		Damage: 60000
+		PercentageScale: 3332
 Wraith_ToxinMissiles:
 	Inherits: DeviatorMissile_Artillery
 	Range: 8370

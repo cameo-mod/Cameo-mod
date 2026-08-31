@@ -93,10 +93,10 @@ class ClosureIsolationConsolidationTests(unittest.TestCase):
         self.assertEqual(set(), descendants(self.rules, "TSInfantryMortar"))
         self.assertEqual(set(), descendants(self.rules, "GrenadeRA"))
 
-    def test_kirov_uses_an_exact_legacy_payload_alias(self):
+    def test_kirov_uses_the_pinned_canonicalized_splash_payload(self):
         alias = self.rules.resolve_weapon("RA2KirovHowitzerSplash")
         self.assertEqual(
-            "e4ff8f79e27c2795ac72110a75592771cfb48b060ea439351771aa430d266f2e",
+            "b77525d04f7bd02e15f288318bbd3e027f1232d9d4e1c2d1c522cb900b491bf0",
             children_hash(alias),
         )
         kirov = self.rules.resolve_weapon("RA2KirovBomb_fire")

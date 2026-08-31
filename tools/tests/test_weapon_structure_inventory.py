@@ -8,8 +8,11 @@ sys.path.insert(0, str(ROOT / "tools" / "audit"))
 
 from miniyaml import Ruleset
 from survey_weapon_structure import (
+    RAW_REACHABLE_BASELINE,
+    RAW_REACHABLE_EXCESS_BASELINE,
     canonical_weapon_names,
     inventory,
+    ratchet_errors,
     weapon_reference_sets,
 )
 
@@ -43,14 +46,30 @@ class WeaponStructureInventoryTests(unittest.TestCase):
 
     def test_current_corrected_baseline(self):
         self.assertEqual(2346, self.data["counts"]["concrete_weapons"])
-        self.assertEqual(397, self.data["counts"]["stacked_main_all_concrete"])
-        self.assertEqual(240, self.data["counts"]["stacked_main_direct_actor_armament"])
-        self.assertEqual(296, self.data["counts"]["stacked_main_transitive_weapon_graph"])
+        self.assertEqual(391, self.data["counts"]["stacked_main_all_concrete"])
+        self.assertEqual(235, self.data["counts"]["stacked_main_direct_actor_armament"])
+        self.assertEqual(55, self.data["counts"]["stacked_main_indirect_weapon_graph"])
+        self.assertEqual(290, self.data["counts"]["stacked_main_transitive_weapon_graph"])
         self.assertEqual(101, self.data["counts"]["stacked_main_unreached"])
-        self.assertEqual(2736, self.data["counts"]["main_warhead_instances_all_concrete"])
-        self.assertEqual(707, self.data["counts"]["excess_main_warhead_instances_all_concrete"])
-        self.assertEqual(2307, self.data["counts"]["main_warhead_instances_transitive_weapon_graph"])
-        self.assertEqual(561, self.data["counts"]["excess_main_warhead_instances_transitive_weapon_graph"])
+        self.assertEqual(2729, self.data["counts"]["main_warhead_instances_all_concrete"])
+        self.assertEqual(700, self.data["counts"]["excess_main_warhead_instances_all_concrete"])
+        self.assertEqual(2300, self.data["counts"]["main_warhead_instances_transitive_weapon_graph"])
+        self.assertEqual(554, self.data["counts"]["excess_main_warhead_instances_transitive_weapon_graph"])
+        self.assertEqual(112, self.data["counts"]["reviewed_stacked_main_all_concrete"])
+        self.assertEqual(84, self.data["counts"]["reviewed_stacked_main_direct_actor_armament"])
+        self.assertEqual(28, self.data["counts"]["reviewed_stacked_main_indirect_weapon_graph"])
+        self.assertEqual(112, self.data["counts"]["reviewed_stacked_main_transitive_weapon_graph"])
+        self.assertEqual(279, self.data["counts"]["unreviewed_stacked_main_all_concrete"])
+        self.assertEqual(178, self.data["counts"]["unreviewed_stacked_main_transitive_weapon_graph"])
+        self.assertEqual(227, self.data["counts"]["reviewed_excess_main_warhead_instances_all_concrete"])
+        self.assertEqual(227, self.data["counts"]["reviewed_excess_main_warhead_instances_transitive_weapon_graph"])
+        self.assertEqual(473, self.data["counts"]["unreviewed_excess_main_warhead_instances_all_concrete"])
+        self.assertEqual(327, self.data["counts"]["unreviewed_excess_main_warhead_instances_transitive_weapon_graph"])
+
+    def test_raw_reachable_ratchets_match_the_checkpoint(self):
+        self.assertEqual(290, RAW_REACHABLE_BASELINE)
+        self.assertEqual(554, RAW_REACHABLE_EXCESS_BASELINE)
+        self.assertEqual([], ratchet_errors(self.data))
 
     def test_engine_weapon_reference_fields_are_followed(self):
         reached = (set(self.data["sets"]["direct_actor_armament"])
