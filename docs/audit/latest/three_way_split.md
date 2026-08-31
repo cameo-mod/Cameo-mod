@@ -1,13 +1,13 @@
-# audit_three_way_split — 390 raw stacked weapons; 264 remain unreviewed
+# audit_three_way_split — 387 raw stacked weapons; 261 remain unreviewed
 
-   1639  correct — exactly one main warhead
+   1642  correct — exactly one main warhead
     317  none — utility / effect-only weapons
-    390  RAW STACKS — structural inventory
+    387  RAW STACKS — structural inventory
     126  reviewed — exact intentional composites
-    264  UNREVIEWED — classification backlog
+    261  UNREVIEWED — classification backlog
 
   mains  weapons
-      2    205
+      2    202
       3    115
       4     42
       5     13
@@ -15,7 +15,7 @@
       7      7
       8      2
 
-142 distinct stacked combinations; the 20 most common:
+141 distinct stacked combinations; the 20 most common:
 
 | count | combination |
 |---|---|
@@ -169,5 +169,5 @@ Reviewed exact composites (126):
 - `wc2_dwarf_Rifle`: Bullet_Medium + CollapseTargetCompatibility1
 - `wc2catapultFire`: CollapseTargetCompatibility1 + Concussion_Heavy
 
-WARN raw 390/390; unreviewed 264/264
+WARN raw 387/387; unreviewed 261/261
 Lower raw ratchets only for structural consolidation; lower the unreviewed ratchet only for exact reviewed decisions.

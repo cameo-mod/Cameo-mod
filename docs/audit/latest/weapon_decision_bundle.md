@@ -4,10 +4,10 @@ This report compresses the honest unreviewed backlog into inheritance
 families. It is a review queue, not conversion authority. Reviewed exact
 composites remain in the raw structural count but are excluded here.
 
-- Raw reachable stacked definitions: **289**
+- Raw reachable stacked definitions: **287**
 - Exact reviewed composites: **126**
-- Unreviewed reachable definitions: **163**
-- Unreviewed inheritance families: **106**
+- Unreviewed reachable definitions: **161**
+- Unreviewed inheritance families: **105**
 
 The buckets describe why automatic consolidation is unsafe. They do not
 decide the eventual damage family.
@@ -21,7 +21,7 @@ listed after the colon remain open decisions.
 | state delivery | 31 | 47 |
 | legacy compatibility | 5 | 5 |
 | numbered warhead key | 1 | 1 |
-| no special mechanical signal | 27 | 35 |
+| no special mechanical signal | 26 | 33 |
 
 ## Target And State Routing (18 families)
 
@@ -219,7 +219,7 @@ listed after the colon remain open decisions.
 - **`TS120mmx`** (1; numbered): `TS120mmx`
   - mains `1Dam + CannonHE_Medium + Concussion_Medium`: `TS120mmx`
 
-## No Special Mechanical Signal (27 families)
+## No Special Mechanical Signal (26 families)
 
 - **`LatinBuggyChaingun`** (2; none detected): `LatinBuggyChaingun`, `LatinBuggyChaingun_elite`
   - mains `Bullet_Light + Bullet_Medium + CannonAP_Light + Flak_Medium`: `LatinBuggyChaingun`, `LatinBuggyChaingun_elite`
@@ -229,8 +229,6 @@ listed after the colon remain open decisions.
   - mains `Concussion_Medium + Demolition_Heavy`: `SCScourgeDroneExplosion`, `ScourgeDroneExplosion`
 - **`SCScourgeExplosion`** (2; air only): `SCScourgeExplosion`, `ScourgeExplosion`
   - mains `Concussion_Medium + Demolition_Heavy`: `SCScourgeExplosion`, `ScourgeExplosion`
-- **`TSAdatsMissile`** (2; none detected): `TSAdatsMissile`, `TSAdatsMissile_AA`
-  - mains `Flak_Medium + MissileHE_Light`: `TSAdatsMissile`, `TSAdatsMissile_AA`
 - **`TSTacticalMissileDamage`** (2; none detected): `TSTacticalChemMissileDamage`, `TSTacticalMissileDamage`
   - mains `LightMissile + MediumMissile`: `TSTacticalChemMissileDamage`, `TSTacticalMissileDamage`
 - **`d2k_air_drone_guns`** (2; none detected): `d2k_air_drone_guns`, `d2k_air_drone_guns_upgrade`

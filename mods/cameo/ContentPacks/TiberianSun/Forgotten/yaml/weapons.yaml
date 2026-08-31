@@ -1263,6 +1263,7 @@ TSChemCobraMissile:
 		InvalidTargets: Water
 
 TSAdatsMissile:
+	Inherits@finalmain: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1279,13 +1280,21 @@ TSAdatsMissile:
 	Warhead@MissileHE_Light:
 		Damage: 4000
 		ValidTargets: Ground, Water
+	-Warhead@Flak_Medium:
+	-Warhead@MissileHE_Light:
+	Warhead@MissileHE_LightFlatCompatibility:
+		Damage: 8000
+		PercentageScale: 9988
+		ValidTargets: Ground, Water
 TSAdatsMissile_AA:
 	Inherits: TSAdatsMissile
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Range: 8409
 	ValidTargets: Air
-	Warhead@Flak_Medium:
-		ValidTargets: Air
-	Warhead@MissileHE_Light:
+	-Warhead@MissileHE_LightFlatCompatibility:
+	Warhead@Flak_MediumFlatCompatibility:
+		Damage: 8000
+		PercentageScale: 9988
 		ValidTargets: Air
 MutFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium

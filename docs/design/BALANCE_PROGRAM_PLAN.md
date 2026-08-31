@@ -645,6 +645,12 @@ three low-health +1 folded-percentage rounding cases, and the intentional Kirov 
 |---|---|---|
 | `tkmturretcannon` | TKM Tank Turret Bunker | The stationary defense now uses one 16,000-damage `CannonAP_Light` main, prioritizes vehicles, and presents the standard anti-tank-defense description. Its armor curve favors vehicles while retaining 74% damage against unarmored infantry. The fold keeps the old broad 300-range delivery geometry; the derived moving-target reliability is 0.8276 and effective DPS is 569.35, comparable to the TD/RA gun-turret role rather than the unintended 83.60-DPS narrow-geometry result rejected in review. It can therefore repel an isolated infantry unit without becoming an anti-infantry defense. Its structure performance is not a role constraint. |
 
+**Approved air-first support vehicle — 3 weapon definitions and one paid-upgrade route.**
+
+| unit | approved contract |
+|---|---|
+| Forgotten M113 ADATS | The long-range Air-only route now uses one 8,000-damage `Flak_Medium` main; the shorter ground route uses one 8,000-damage `MissileHE_Light` main against Ground/Water. The actor already prioritizes Air and advertises strength against aircraft and light vehicles. Purchasing Chemical Weapons now replaces both base armaments with the existing 12,000-damage `TSChemAdatsMissile` and `TSChemAdatsMissileAA` definitions instead of selecting the unchanged base weapons. The upgrade raises modeled ground and anti-air output by roughly 58% and 50%, respectively. The authored chemical ground route retains its corrosion state, cloud, positional delivery and three percentage companions; the chemical AA route retains its chemical trail and stronger Flak damage but intentionally has no Corrosion state. |
+
 **Preserve the current hybrid — 6 weapon definitions.** The available actor descriptions do not
 support choosing either half as the sole role.
 
@@ -674,6 +680,8 @@ reprofiled with the selected Demolition armor and falloff; it is not claimed as 
 `tools/tests/test_closure_isolation_consolidation.py` pins the first isolation batch and its exact
 whole-tree comparison. `tools/tests/test_tkm_tank_turret_role.py` pins the approved anti-armor
 profile, vehicle priority, tooltip, unchanged ordinary TKM Bunker role, and exact whole-tree
+comparison. `tools/tests/test_adats_air_first_role.py` pins the ADATS ground/air profiles, Air
+priority, chemical-upgrade replacements, monotonic paid progression, and exact whole-tree
 comparison. `tools/tests/test_deferred_weapon_redesign_boundary.py` pins the remaining
 14-definition boundary, ordered main-profile fingerprint, descendant closure and 11-direct/3-indirect
 reachability split.

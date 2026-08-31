@@ -1175,10 +1175,10 @@ TSChemAdatsMissileAA:
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
-	Warhead@Flak_Medium:
-		Damage: 6000
-	Warhead@MissileHE_Light:
-		Damage: 6000
+	Warhead@Flak_MediumFlatCompatibility:
+		Damage: 12000
+		PercentageScale: 9992
+		ValidTargets: Air
 TSSlimeAttack:
 	ReloadDelay: 80
 	Range: 1408

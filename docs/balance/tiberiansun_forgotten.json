@@ -7617,17 +7617,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7639,6 +7632,7 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileHE_LightFlat",
        "^Warhead_Flak_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
@@ -7656,17 +7650,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7678,7 +7665,8 @@
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "TSAdatsMissile"
+       "TSAdatsMissile",
+       "^Compatibility_Flak_MediumFlat"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
@@ -7692,38 +7680,51 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
+        "damage": "12000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "44",
+        "tag": "MissileChem_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 45, 15, 0",
+        "damage": "2",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
         "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
+        "tag": "LightMissilePercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5606",
       "reloaddelay": "54",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileHE_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_MissileHE_Light"
+       "^Warhead_MissileChem_Light",
+       "^LightChemicalWeapon",
+       "^FlakWeapon",
+       "^LightMissile"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileChem_Light"
       ],
-      "weapon": "TSAdatsMissile",
+      "weapon": "TSChemAdatsMissile",
       "weapon_class_source": "template"
      },
      {
@@ -7731,21 +7732,14 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8409",
@@ -7753,13 +7747,13 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADEAA",
       "versus_templates": [
-       "TSAdatsMissile"
+       "TSAdatsMissile_AA"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
        "^Warhead_MissileHE_Light"
       ],
-      "weapon": "TSAdatsMissile_AA",
+      "weapon": "TSChemAdatsMissileAA",
       "weapon_class_source": "template"
      }
     ],

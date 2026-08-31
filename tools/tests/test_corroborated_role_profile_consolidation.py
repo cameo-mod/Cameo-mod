@@ -50,7 +50,6 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         excluded = {
             "AtreusMG", "EpigraphMG", "GoliathMG", "GoliathMk2MG",
             "HMG_Duelist_upgrade", "autogun_tank",
-            "TSAdatsMissile", "TSChemAdatsMissileAA",
             "TSRPGTowerRail", "VolkovMagneticWeapon", "tkmjuggap",
             "tkmtechnicalmgap", "BCLaser", "BCYamatoCannon",
             "edenMobileLaserTiger",

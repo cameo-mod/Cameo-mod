@@ -220,8 +220,8 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
         report, status = split.rendered(self.rules)
         self.assertEqual(0, status)
         self.assertEqual(report, split.REPORT.read_text(encoding="utf-8"))
-        self.assertIn("390 raw stacked weapons", report)
-        self.assertIn("264 remain unreviewed", report)
+        self.assertIn("387 raw stacked weapons", report)
+        self.assertIn("261 remain unreviewed", report)
         self.assertEqual(
             serialized(self.current),
             INVENTORY_REPORT.read_text(encoding="utf-8"),
