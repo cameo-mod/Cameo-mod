@@ -31,10 +31,10 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
 
     def test_exact_reviewed_name_set_and_schema_are_pinned(self):
         names = sorted(self.manifest["entries"])
-        self.assertEqual(128, len(names))
+        self.assertEqual(210, len(names))
         self.assertEqual(set(reviewed.curated_decisions()), set(names))
         self.assertEqual(
-            "85881d4782537a8276b3a4184f4569746c78a1aecf994964d455cb3f576a6836",
+            "0018deda4abaca69feab5e6cf3efdc0ed2009b79c0da30356f69e43d75db06b1",
             hashlib.sha256(("\n".join(names) + "\n").encode()).hexdigest(),
         )
         self.assertEqual([], reviewed.validate_manifest(
@@ -106,6 +106,23 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
             self.assertGreaterEqual(len(entry["mains"]), 2, name)
             self.assertIn("separately authored", entry["rationale"], name)
             self.assertTrue(entry["referrers"], name)
+
+    def test_bulk_technical_review_does_not_bless_redesign_hazards(self):
+        reviewed_signatures = {
+            "VolkovMagneticWeapon", "RA2SCUD", "WaveTurretImpact",
+            "RA2Virusgun3", "FutureTankCannons", "SamuraiBladeCharged",
+            "wc2deathknightFire", "RA2Robotmm", "Laboratory_Bioball",
+            "TSRPGTowerRail", "TankBusterBeamCannon",
+        }
+        redesign_hazards = {
+            "RA160mmE_rad_elite", "SandmarineTuskFire", "SteelVulcan",
+            "GuardianShoot", "NaxCorrosionRocketTrooper_elite",
+            "d2k_air_drone_guns_upgrade", "TSSonicZapWeapon",
+            "Type97PlasmaCannon", "SyndicateFireballLauncherExplode",
+        }
+        names = set(self.manifest["entries"])
+        self.assertTrue(reviewed_signatures <= names)
+        self.assertTrue(redesign_hazards.isdisjoint(names))
 
     def test_reviewed_weapon_is_reachable_directly_with_exact_referrer(self):
         entry = self.manifest["entries"]["TSHellfireSonic"]
@@ -234,7 +251,7 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
         self.assertEqual(0, status)
         self.assertEqual(report, split.REPORT.read_text(encoding="utf-8"))
         self.assertIn("387 raw stacked weapons", report)
-        self.assertIn("259 remain unreviewed", report)
+        self.assertIn("177 remain unreviewed", report)
         self.assertEqual(
             serialized(self.current),
             INVENTORY_REPORT.read_text(encoding="utf-8"),

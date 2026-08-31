@@ -99,7 +99,7 @@ class ConventionalWeaponCoreTests(unittest.TestCase):
 
     def test_ratchets_match_the_live_structural_reduction(self):
         self.assertEqual(387, RAW_SPLIT_BASELINE)
-        self.assertEqual(259, SPLIT_BASELINE)
+        self.assertEqual(177, SPLIT_BASELINE)
         self.assertEqual(131, BROADCAST_BASELINE)
 
 

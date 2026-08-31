@@ -78,7 +78,7 @@ class HighIdentityProfileConsolidationTests(unittest.TestCase):
             self.assertGreater(len(main_warheads(self.rules.resolve_weapon(name))), 1, name)
 
     def test_ratchets_match_live_reduction(self):
-        self.assertEqual(259, SPLIT_BASELINE)
+        self.assertEqual(177, SPLIT_BASELINE)
         self.assertEqual(131, BROADCAST_BASELINE)
 
 

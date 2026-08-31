@@ -20,9 +20,9 @@ class WeaponDecisionBundleTests(unittest.TestCase):
 
     def test_every_unreviewed_reachable_weapon_occurs_once(self):
         names = [member for row in self.rows for member in row["members"]]
-        self.assertEqual(159, len(names))
+        self.assertEqual(77, len(names))
         self.assertEqual(len(names), len(set(names)))
-        self.assertEqual(103, len(self.rows))
+        self.assertEqual(58, len(self.rows))
 
     def test_reviewed_composites_are_not_presented_as_open_decisions(self):
         names = {member for row in self.rows for member in row["members"]}
@@ -31,9 +31,11 @@ class WeaponDecisionBundleTests(unittest.TestCase):
         self.assertNotIn("WaveforceCannon", names)
         self.assertNotIn("RA2Virusgun2", families)
         self.assertNotIn("WaveArtilleryImpact", families)
-        self.assertIn("RA2Virusgun3", families)
-        self.assertIn("WaveTurretImpact", families)
-        self.assertEqual(128, self.data["reviewed_reachable"])
+        self.assertNotIn("RA2Virusgun3", families)
+        self.assertNotIn("WaveTurretImpact", families)
+        self.assertIn("SteelVulcan", families)
+        self.assertIn("RA160mmE_rad_elite", families)
+        self.assertEqual(210, self.data["reviewed_reachable"])
 
     def test_buckets_use_engine_defaults_and_mechanical_labels(self):
         counts = {
@@ -45,10 +47,10 @@ class WeaponDecisionBundleTests(unittest.TestCase):
             for name in report.BUCKETS
         }
         self.assertEqual({
-            "target and state routing": (18, 39),
-            "target routing": (24, 36),
-            "state delivery": (31, 47),
-            "legacy compatibility": (3, 3),
+            "target and state routing": (2, 2),
+            "target routing": (16, 21),
+            "state delivery": (12, 19),
+            "legacy compatibility": (1, 1),
             "numbered warhead key": (1, 1),
             "no special mechanical signal": (26, 33),
         }, counts)
@@ -71,7 +73,7 @@ class WeaponDecisionBundleTests(unittest.TestCase):
             if len(row["fingerprints"]) > 1:
                 multi_rows += 1
                 multi_definitions += len(row["members"])
-        self.assertEqual((17, 50), (multi_rows, multi_definitions))
+        self.assertEqual((8, 18), (multi_rows, multi_definitions))
 
     def test_report_is_fresh(self):
         self.assertEqual(

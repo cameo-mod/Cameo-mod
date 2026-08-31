@@ -1,5 +1,55 @@
 {
   "entries": {
+    "AAGunBoatFlak": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Flak_Medium": "authored target, armor, relationship, or state route Flak_Medium",
+        "Flak_MediumFlatCompatibility": "authored target, armor, relationship, or state route Flak_MediumFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "1a5de2d4c6217da21ad2a60d3289fc80f47f711d12a0bee6d3800aa836fe9d44",
+      "mains": [
+        "Flak_Medium",
+        "Flak_MediumFlatCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for AAGunBoatFlak, AAGunBoatFlak_elite: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Flak_Medium, Flak_MediumFlatCompatibility.",
+      "referrer_digest": "f4e0913c17f18710a03a2e88fdd783a5c598607681d52f165b69b2a4b3ed793a",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "gunb.asian",
+          "path": "Armament@AA/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "2f92854fcea4db333274fe0f811fc1a5b8b44c5bb91780addad41c6087aa07f2"
+    },
+    "AAGunBoatFlak_elite": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Flak_Medium": "authored target, armor, relationship, or state route Flak_Medium",
+        "Flak_MediumFlatCompatibility": "authored target, armor, relationship, or state route Flak_MediumFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "1a5de2d4c6217da21ad2a60d3289fc80f47f711d12a0bee6d3800aa836fe9d44",
+      "mains": [
+        "Flak_Medium",
+        "Flak_MediumFlatCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for AAGunBoatFlak, AAGunBoatFlak_elite: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Flak_Medium, Flak_MediumFlatCompatibility.",
+      "referrer_digest": "9029923eb9e4401c7c64074126571b8efd3e5d45e55621300ba2334fdd9812ef",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "gunb.asian",
+          "path": "Armament@EliteAA/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "212937b8a97bc22aadd2699c59928dea2e7feaf0b772e2f22c5d4edc5086075f"
+    },
     "ATMine": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -164,6 +214,60 @@
       ],
       "review_reference": "Resolved family review: primary hit plus status payload",
       "weapon_digest": "3ce0c998f013cbc13efdfb1e6974b660eb31405018ad74927a6f7d6187692ca7"
+    },
+    "AsianPhoenixRocket": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "Flame_Medium": "primary conventional delivery or impact Flame_Medium",
+        "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "b60e8018b57f8829deedaf448544fabbb5e23080366bc4c9c3a92a1c7326b155",
+      "mains": [
+        "Demolition_Light",
+        "Flame_Medium",
+        "MissileAP_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for AsianPhoenixRocket, AsianPhoenixRocket_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, Flame_Medium, MissileAP_Heavy.",
+      "referrer_digest": "eaa0084d0f018c84e0204f8649b1bce2be1b0013a7db2787567397769721d7bf",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "asianalliance_phoenix",
+          "path": "Armament@PRIMARY/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "e4db5029db72504c5f6f2674668b5d959527313beaea0ef0968adf4f15d96616"
+    },
+    "AsianPhoenixRocket_elite": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "Flame_Medium": "primary conventional delivery or impact Flame_Medium",
+        "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "b60e8018b57f8829deedaf448544fabbb5e23080366bc4c9c3a92a1c7326b155",
+      "mains": [
+        "Demolition_Light",
+        "Flame_Medium",
+        "MissileAP_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for AsianPhoenixRocket, AsianPhoenixRocket_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, Flame_Medium, MissileAP_Heavy.",
+      "referrer_digest": "5e2d2d2c987ff82d6706e58943580f2b342a361359b2ae3b5506bc302ac6f445",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "asianalliance_phoenix",
+          "path": "Armament@PRIMARYELITE/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "7f541904710e64861857e8a9fe5a9bb622b48f16a8e4555c6200f6a5143b8bb4"
     },
     "AsianSniper": {
       "category": "target-routed composite",
@@ -347,6 +451,71 @@
       "review_reference": "Maintainer unit decision: Protoss Atreus is good enough as authored",
       "weapon_digest": "835d898fe049ef146c236c1a517742d68e1e12012b816dceb2aff09d8f2e142b"
     },
+    "BCLaser": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Laser_HeavyFlatCompatibility": "primary conventional delivery or impact Laser_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "9645af58e03084480d3dbc87cd7732aa760ca1781dfe66fe2c8ff8c708ac7931",
+      "mains": [
+        "CannonHE_Heavy",
+        "Laser_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for BCLaser: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Laser_HeavyFlatCompatibility.",
+      "referrer_digest": "0d40dee5d35942b2de5bfd3478c75c73e6524cf38e8d91997781854213e0ecbd",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "SCBATTLECRUISER.Husk",
+          "path": "FallsToEarth/Explosion"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_battlecruiser",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "4b5f50827a297129dbdbce2a78b974ba1d1226cec8873a817bd38c2a84109fd5"
+    },
+    "BCYamatoCannon": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Plasma_HeavyFlatCompatibility": "primary conventional delivery or impact Plasma_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "f84f8c478d3eaab9ed93dc4982626df7177c36d9c4589e0f5b925490690af104",
+      "mains": [
+        "CannonHE_Heavy",
+        "Plasma_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for BCYamatoCannon: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Plasma_HeavyFlatCompatibility.",
+      "referrer_digest": "7b68e78280c942d9ade63f4b00c4adeb8642516896e9275477fa758b82014b3e",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "SCPHOBOS.Husk",
+          "path": "FallsToEarth/Explosion"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_battlecruiser",
+          "path": "Armament@Yamato/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_phobos",
+          "path": "Armament@Yamato/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "a55903d599272cda86f96657f1bac2bd954a73be40671ae37a5bd10e374632c4"
+    },
     "BallistaMultiShot": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -371,6 +540,35 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "64e14d5044b287df167eb2b366ae08b9db4b2ca73e4e2fdf986c59712ae32cf2"
+    },
+    "BallistaSingleShotAirEnergized": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Arrow_Light": "authored target, armor, relationship, or state route Arrow_Light",
+        "Arrow_LightFlatCompatibility": "authored target, armor, relationship, or state route Arrow_LightFlatCompatibility",
+        "CannonHE_Medium": "authored target, armor, relationship, or state route CannonHE_Medium",
+        "MissileAP_Light": "authored target, armor, relationship, or state route MissileAP_Light"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "148ac8a1e918059d0dcd87290896b51642162c51fb3465d643a338053421fa4c",
+      "mains": [
+        "Arrow_Light",
+        "Arrow_LightFlatCompatibility",
+        "CannonHE_Medium",
+        "MissileAP_Light"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for BallistaSingleShotAirEnergized: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Arrow_Light, Arrow_LightFlatCompatibility, CannonHE_Medium, MissileAP_Light.",
+      "referrer_digest": "f07579646e5326562f3ecaa0a44a75791b65519c7a370d40fb206b9baaed1a4a",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_ballistatower",
+          "path": "Armament@UpgradeAIR/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "583c42bdb9c2593bea23c5c3522f0e987d9d36d6d46efa54c477f2ca9ab5f022"
     },
     "BallistaTowerMultiShot": {
       "category": "target-routed composite",
@@ -634,6 +832,60 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "2f1c19e8c8fdabed16fa14d929010fb538ec94b173072c61febd280a911086d6"
     },
+    "ConsortiumMissileSystem": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flak_Medium": "primary conventional delivery or impact Flak_Medium",
+        "MissileAA_MediumFlatCompatibility": "primary conventional delivery or impact MissileAA_MediumFlatCompatibility",
+        "MissileAP_Medium": "primary conventional delivery or impact MissileAP_Medium"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "d89555ef1264592869c5832941be6bca34f0cc59d0caef2e6eb5602d9d023e1c",
+      "mains": [
+        "Flak_Medium",
+        "MissileAA_MediumFlatCompatibility",
+        "MissileAP_Medium"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for ConsortiumMissileSystem: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flak_Medium, MissileAA_MediumFlatCompatibility, MissileAP_Medium.",
+      "referrer_digest": "8232f84ee9fb90b311c7cb6337fb650035862ab9f93f3183f230a987b5ac8c9c",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "steelconsortium_antiairquantummissileturret",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "0d5b4b95a984972d4700511bf203f21f6ab90be768b4a329f550205c76d916dd"
+    },
+    "ConsortiumMissileSystem_EMP": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flak_Medium": "primary conventional delivery or impact Flak_Medium",
+        "MissileAP_Medium": "primary conventional delivery or impact MissileAP_Medium",
+        "MissileQuantum_MediumFlatCompatibility": "special energy, status, or effect payload MissileQuantum_MediumFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "f75ff18f1bff605feb65cd665eca4a6093b027cb72f8c96b7208dfad461808ee",
+      "mains": [
+        "Flak_Medium",
+        "MissileAP_Medium",
+        "MissileQuantum_MediumFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for ConsortiumMissileSystem_EMP: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flak_Medium, MissileAP_Medium, MissileQuantum_MediumFlatCompatibility.",
+      "referrer_digest": "2d5bca25d1a456bd3b81f77f3e38bd996b459897af60573c49ca488bb2998d93",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "steelconsortium_antiairquantummissileturret",
+          "path": "Armament@Upgrade/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "157143239bc1a573462248968ea84f6096d815a1f643cf0e99ff4bf06507cbdd"
+    },
     "D2K_155mm2": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -841,6 +1093,38 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "2d662748de8761dafe5aa36a07fc5a810a5bbf24f6cfb6e4f615afd24f46b19e"
+    },
+    "DredMissile": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy",
+        "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "3ac116c3633bf09d9e07575d49212c95492cc09c1cb0af0b2db01f115e52baf7",
+      "mains": [
+        "Demolition_Light",
+        "MissileAP_Heavy",
+        "RA2SCUDMissileAP_Heavy_NoWall"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for DredMissile, RA2SCUD, RA2SCUD_fire, RA2SCUD_tesla, V3Explode: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, MissileAP_Heavy, RA2SCUDMissileAP_Heavy_NoWall.",
+      "referrer_digest": "3c0dc901e2758cfdfbc40ddd194ad4573ba8dda75779cf1b275b8c40c93c02a7",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2dmisl",
+          "path": "SpawnedExplodes/EmptyWeapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2dmisl",
+          "path": "SpawnedExplodes/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "9eda2d6aca5ce3372fc5ff5422cd778265f70c7627db22113ac58dc86af1e7e5"
     },
     "DuelistTankCannon": {
       "category": "maintainer-approved role blend",
@@ -1160,6 +1444,106 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "39eb128e91ccd44e9a9472f148466a3420bb39d096e0bf2b4618752dcd7c03cc"
     },
+    "FutureHarbingerCannon": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Plasma_HeavyFlatCompatibility": "primary conventional delivery or impact Plasma_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "3a853a1d7b486ad4125df2f77778a40a357b8d2f359bef316e76aafaa3437868",
+      "mains": [
+        "CannonHE_Heavy",
+        "Plasma_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for FutureHarbingerCannon, FutureHarbingerCannon_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Plasma_HeavyFlatCompatibility.",
+      "referrer_digest": "f5d86b40d8c7f077efe8d238952a81853f51af63ccbb7e78bd4c063fdfda7bcd",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "futuretech_harbingergunship",
+          "path": "Armament@PRIMARY/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "958355ce5acbe814ddd1a34acbb4acf562d551653ec3912292d148506e50f438"
+    },
+    "FutureHarbingerCannon_elite": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Plasma_HeavyFlatCompatibility": "primary conventional delivery or impact Plasma_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "3a853a1d7b486ad4125df2f77778a40a357b8d2f359bef316e76aafaa3437868",
+      "mains": [
+        "CannonHE_Heavy",
+        "Plasma_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for FutureHarbingerCannon, FutureHarbingerCannon_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Plasma_HeavyFlatCompatibility.",
+      "referrer_digest": "ad194a5a8343d7c3cd764250d93c179e2e8626f006b2ec69d5a36e629233a03b",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "futuretech_harbingergunship",
+          "path": "Armament@PRIMARYELITE/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "6f69186e7a9943a4e2e2f7dce14511370c5c57f79b14df9ce00e50d82c0a1d20"
+    },
+    "FutureTankCannons": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "CannonHE_Heavy": "authored target, armor, relationship, or state route CannonHE_Heavy",
+        "CannonHE_HeavyFlatCompatibility": "authored target, armor, relationship, or state route CannonHE_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "f0eb6bf4c90a6a5a9338060f30f024770bbd2be6018a9b2106ef3f913e6c07a9",
+      "mains": [
+        "CannonHE_Heavy",
+        "CannonHE_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for FutureTankCannons, FutureTankCannons_elite: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are CannonHE_Heavy, CannonHE_HeavyFlatCompatibility.",
+      "referrer_digest": "abec19fe254d92e0f1847adbcbf1f0383f9fe03216e91d4badf30b3a9eef87d1",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "futuretech_futuretank",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "8578fb39f709e6072ae63d853ae2bbd918e992b98cc2f6ecdba33f02a937c793"
+    },
+    "FutureTankCannons_elite": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "CannonHE_Heavy": "authored target, armor, relationship, or state route CannonHE_Heavy",
+        "CannonHE_HeavyFlatCompatibility": "authored target, armor, relationship, or state route CannonHE_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "f0eb6bf4c90a6a5a9338060f30f024770bbd2be6018a9b2106ef3f913e6c07a9",
+      "mains": [
+        "CannonHE_Heavy",
+        "CannonHE_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for FutureTankCannons, FutureTankCannons_elite: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are CannonHE_Heavy, CannonHE_HeavyFlatCompatibility.",
+      "referrer_digest": "a0e3a63d06b53653ef8c77d9e930ff31557141b6d219ca0c29584e739ded398f",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "futuretech_futuretank",
+          "path": "Armament@elite/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "aae042778b3ede5fb82c9e50b8d5281b9c0a5cab45524769d13b407a389b7920"
+    },
     "GDISniperRifle": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -1344,6 +1728,58 @@
       "review_reference": "Maintainer unit decision: preserve the Ixian Duelist's limited air holdoff",
       "weapon_digest": "95a125988f0c27881c7768b912ec651ab25814e5772d76c21f6f10767590f7da"
     },
+    "HMGo_upgrade": {
+      "category": "status payload",
+      "component_purposes": {
+        "Bullet_Light": "primary conventional delivery or impact Bullet_Light",
+        "Bullet_Medium": "primary conventional delivery or impact Bullet_Medium",
+        "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "f1f1e65777eacb159a709048a9114d510b8111516851df385cf550129f8c3b7f",
+      "mains": [
+        "Bullet_Light",
+        "Bullet_Medium",
+        "Laser_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for HMGo_upgrade: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Bullet_Light, Bullet_Medium, Laser_Heavy.",
+      "referrer_digest": "d5d041fb86d08834d118a905c96a3bb53e71ad28eb723aa8a9de297c7effcc05",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ordos_raider",
+          "path": "Armament@damageLaser/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "7ed670469edae39c0080b007c44f1b37953ba7bafb3c71ebf9acec0129038fa2"
+    },
+    "HMGstealth_upgrade": {
+      "category": "status payload",
+      "component_purposes": {
+        "Bullet_MediumFlatCompatibility": "primary conventional delivery or impact Bullet_MediumFlatCompatibility",
+        "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "2bcf55b64bfa1db0329a5134fde5e5796a60f0e38ec693482e26cdece08e6e50",
+      "mains": [
+        "Bullet_MediumFlatCompatibility",
+        "Laser_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for HMGstealth_upgrade: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Bullet_MediumFlatCompatibility, Laser_Heavy.",
+      "referrer_digest": "d049cc79bf1bbef3db4e28bed1803e6cef8c1987cba99022c8311d563a6568bf",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ordos_stealthraider",
+          "path": "Armament@damageLaser/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "790e1df804ddbd0fef179c914d46215e412df4caa1c2e77ca32ad243ad57c938"
+    },
     "HeavyIxianCombatTankCannon": {
       "category": "maintainer-curated signature",
       "component_purposes": {
@@ -1463,6 +1899,38 @@
       "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
       "weapon_digest": "dba9552c7c3a114cfe42ab2f3b2962b3586d022b53b59301f527ade5d6880492"
     },
+    "JapanMaidenBowEnergized": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Arrow_Light": "authored target, armor, relationship, or state route Arrow_Light",
+        "Arrow_LightFlatCompatibility": "authored target, armor, relationship, or state route Arrow_LightFlatCompatibility",
+        "CannonHE_Medium": "authored target, armor, relationship, or state route CannonHE_Medium"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "4038ed1a25c477d03843a4b71f66483110e6120f150f3222e04ce812af814543",
+      "mains": [
+        "Arrow_Light",
+        "Arrow_LightFlatCompatibility",
+        "CannonHE_Medium"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for JapanMaidenBowEnergized: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Arrow_Light, Arrow_LightFlatCompatibility, CannonHE_Medium.",
+      "referrer_digest": "5397f5fb3f6bd063bc9bfb069aba360504ba4fdc24b27957afd9b8272200f2d9",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_archermaiden",
+          "path": "Armament@Upgrade/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_archermaiden",
+          "path": "Armament@UpgradeGARRISONED/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "642b26d30bd407fb35f4ff79e8a95783b3682997a653a902c1185019fa608782"
+    },
     "JapaneseHovercraftFlakAAkWaveforce": {
       "category": "effect-delivery composite",
       "component_purposes": {
@@ -1513,6 +1981,33 @@
       "review_reference": "Resolved family review: overlapping effect delivery",
       "weapon_digest": "db858af86de534eee8e75ea6c88900c8852b4d7642da649b72835120b1d45148"
     },
+    "JapanesePlasmaBomb": {
+      "category": "status payload",
+      "component_purposes": {
+        "Chemical_Heavy": "special energy, status, or effect payload Chemical_Heavy",
+        "Demolition_Heavy": "primary conventional delivery or impact Demolition_Heavy",
+        "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "eb53a3cda3c166923b901ecaa05a44299858597ff4af9e105866dd8c46230747",
+      "mains": [
+        "Chemical_Heavy",
+        "Demolition_Heavy",
+        "Flame_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for JapanesePlasmaBomb: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Chemical_Heavy, Demolition_Heavy, Flame_Heavy.",
+      "referrer_digest": "8940b82500500ad86849f198879bff447ea57856d2597a219675aeb1bc55f51b",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_japanesebomber",
+          "path": "Armament@UpgradeBombs/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "7bb78682b9e8e25b34c3e78d2cbdacef885b61a01a1c366af567686c931c4cdc"
+    },
     "KodiakCannonSonic": {
       "category": "status payload",
       "component_purposes": {
@@ -1538,6 +2033,40 @@
       "review_reference": "Resolved family review: primary hit plus status payload",
       "weapon_digest": "511df8a01e5939d815053641705c9a35f1b2b11ab3e283dc067b8d262f6baaed"
     },
+    "Laboratory_Bioball": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Chemical_Medium": "special energy, status, or effect payload Chemical_Medium",
+        "Concussion_Medium": "primary conventional delivery or impact Concussion_Medium",
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "50956282f8bdd6a763aa2588eccd69a96ea3d9d8e8e8690eaa5572188fa38c72",
+      "mains": [
+        "CannonHE_Heavy",
+        "Chemical_Medium",
+        "Concussion_Medium",
+        "Demolition_Light"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for Laboratory_Bioball: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Chemical_Medium, Concussion_Medium, Demolition_Light.",
+      "referrer_digest": "668199b2bea344e65464fa1f3344f48a46e8b38c7bf7bc4cf6696fa0149480bc",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ordos_banshee",
+          "path": "Armament/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_laboratorycrawler",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "2fdd2a78577741897a4b867386c93d3eef87c93e6ef18de2b1884b00d48e8b6e"
+    },
     "LaserObeliskBurning": {
       "category": "status payload",
       "component_purposes": {
@@ -1562,6 +2091,90 @@
       ],
       "review_reference": "Resolved family review: primary hit plus status payload",
       "weapon_digest": "51e5e4ed166211ac022220fefd3107428b2c0f45a48d5630c6571e80cf54717c"
+    },
+    "Lunar_GreenTigerCannon": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Medium": "primary conventional delivery or impact CannonHE_Medium",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "7d6fa58022a7861cb322e1b2809e623a675af7d538b57046a3425385906e754b",
+      "mains": [
+        "CannonHE_Medium",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for Lunar_GreenTigerCannon, Lunar_GreenTigerCannon_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Medium, Tesla_Heavy.",
+      "referrer_digest": "8944937a748d08bed1527f4a08a09b215895c77b91c6718c313205eda385fac4",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "schwarzermond_lunartiger",
+          "path": "Armament@-upgrade/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "a37e815422c512030e7537d8d0597a60326ef8da85ed4c48b80be7549d15405d"
+    },
+    "Lunar_GreenTigerCannon_elite": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Medium": "primary conventional delivery or impact CannonHE_Medium",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "7d6fa58022a7861cb322e1b2809e623a675af7d538b57046a3425385906e754b",
+      "mains": [
+        "CannonHE_Medium",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for Lunar_GreenTigerCannon, Lunar_GreenTigerCannon_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Medium, Tesla_Heavy.",
+      "referrer_digest": "dbf1b5c21a371741bca73ed05040447378934603f67a696646f997efc24a202a",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "schwarzermond_lunartiger",
+          "path": "Armament@elite-upgrade/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "c8a2f12f469256c90652a5ceaf55d58629cd96ae78e504af8a9ae2218ad296fa"
+    },
+    "MedicFlare": {
+      "category": "status payload",
+      "component_purposes": {
+        "MediumChemicalWeapon": "special energy, status, or effect payload MediumChemicalWeapon",
+        "PreservedFlat_FlakWeapon": "primary conventional delivery or impact PreservedFlat_FlakWeapon",
+        "PreservedFlat_LaserWeapon": "primary conventional delivery or impact PreservedFlat_LaserWeapon",
+        "PreservedFlat_LightFlameWeapon": "primary conventional delivery or impact PreservedFlat_LightFlameWeapon"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "b1d7e79f22551db73c8af117e52f2e9b5b6710ba70fc4d2fd4e19c59fca5e9aa",
+      "mains": [
+        "MediumChemicalWeapon",
+        "PreservedFlat_FlakWeapon",
+        "PreservedFlat_LaserWeapon",
+        "PreservedFlat_LightFlameWeapon"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for MedicFlare: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are MediumChemicalWeapon, PreservedFlat_FlakWeapon, PreservedFlat_LaserWeapon, PreservedFlat_LightFlameWeapon.",
+      "referrer_digest": "b895f8747ad9305aa48caa6877e6d39f60c52e52dc6b6787c025d9c105af0323",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "terran_medic",
+          "path": "Armament@Flare/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_medic",
+          "path": "Armament@FlareGARRISONED/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "4ca70680d7e578f27d4c6deec0f20b64c991e6477ad37f53d6054f6fcc5931ad"
     },
     "MigMissiles_rad": {
       "category": "status payload",
@@ -1780,6 +2393,33 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "668b71d4b67c82aa71a78e44958651024b7293a4afa84e9b18ad085c5001a1e7"
     },
+    "OIBigPlasmaCannon": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "7327ea9901011c75fbc4fc5306a8557aad5646909b9bb305084979405f158c4f",
+      "mains": [
+        "CannonHE_Heavy",
+        "Railgun_Heavy",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for OIBigPlasmaCannon: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Railgun_Heavy, Tesla_Heavy.",
+      "referrer_digest": "afd5dcbfbb2954e1a0ea212bd7f3c5e47aefb6f39ee9d59a0a08f488a04bc8ec",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_oitank",
+          "path": "Armament@Upgrade/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "ac1fd68764fb51fd719228a569481400657967b0259b9dcee82f7dd028499751"
+    },
     "PLYMineExplosive": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -1804,6 +2444,60 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "209780fd7d1053c1d3ad29c61f943078f4066e020fa4767ff00f7605c3b7e6cb"
+    },
+    "PositronBounce1": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonAP_Light": "primary conventional delivery or impact CannonAP_Light",
+        "CannonHE_Medium": "primary conventional delivery or impact CannonHE_Medium",
+        "Quantum_MediumFlatCompatibility": "special energy, status, or effect payload Quantum_MediumFlatCompatibility"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "47858bb462994df0044be171b3f1cfb9bca32189839613dbfbeeeea67daeb6a7",
+      "mains": [
+        "CannonAP_Light",
+        "CannonHE_Medium",
+        "Quantum_MediumFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for PositronBounce1, PositronBounce2: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonAP_Light, CannonHE_Medium, Quantum_MediumFlatCompatibility.",
+      "referrer_digest": "3097d0b572e1a7397401f92a0d41cea1c22cfa1367145cec54eb6283fc522c69",
+      "referrers": [
+        {
+          "kind": "weapon",
+          "name": "PositronGrenade",
+          "path": "Warhead@shrapnel/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "c2cd4057f0b3e02701a17d8ef22cd3389db29c3c3303fa8d0d950c5262cca0ee"
+    },
+    "PositronBounce2": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonAP_Light": "primary conventional delivery or impact CannonAP_Light",
+        "CannonHE_Medium": "primary conventional delivery or impact CannonHE_Medium",
+        "Quantum_MediumFlatCompatibility": "special energy, status, or effect payload Quantum_MediumFlatCompatibility"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "34a671d248d26f728ee0bfd7e108b56b38e82a01d10882f361b8363e8ecb42b2",
+      "mains": [
+        "CannonAP_Light",
+        "CannonHE_Medium",
+        "Quantum_MediumFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for PositronBounce1, PositronBounce2: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonAP_Light, CannonHE_Medium, Quantum_MediumFlatCompatibility.",
+      "referrer_digest": "4044919f7beb4c37d6ca01c7fa95a940584e4ab313a598bc0efa2cfcd51532dd",
+      "referrers": [
+        {
+          "kind": "weapon",
+          "name": "PositronBounce1",
+          "path": "Warhead@shrapnel/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "8dec30818ec0cf200c820dc4dfa04b5e7c7cb08f66c817dac3b1ec73aa15e374"
     },
     "PulseMissile": {
       "category": "staged superweapon",
@@ -1842,6 +2536,60 @@
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "a99044c44ee5c658b0887f9b76e589d4d718151a4f00a604ed988bdc9d445523"
     },
+    "RA2120xmm_rad": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonAP_Light": "primary conventional delivery or impact CannonAP_Light",
+        "CannonChem_HeavyFlatCompatibility": "special energy, status, or effect payload CannonChem_HeavyFlatCompatibility",
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "7c42803cd6117dad7c75b1f2295efff9eb6095daf43a1b5ca9300506f035d7fe",
+      "mains": [
+        "CannonAP_Light",
+        "CannonChem_HeavyFlatCompatibility",
+        "CannonHE_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA2120xmm_rad, RA2120xmm_rad_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonAP_Light, CannonChem_HeavyFlatCompatibility, CannonHE_Heavy.",
+      "referrer_digest": "f4adeb705cb4071505d665accf843ad4f77201728c6c73f46e57566dcbe4e5f6",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_apocalypsetank",
+          "path": "Armament@PRIMARYRad/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "3f8f3192d7a13256ec6164c96873209c42b1e7c8ac477bc77ab84e316f4e7282"
+    },
+    "RA2120xmm_rad_elite": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonAP_Light": "primary conventional delivery or impact CannonAP_Light",
+        "CannonChem_HeavyFlatCompatibility": "special energy, status, or effect payload CannonChem_HeavyFlatCompatibility",
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "7c42803cd6117dad7c75b1f2295efff9eb6095daf43a1b5ca9300506f035d7fe",
+      "mains": [
+        "CannonAP_Light",
+        "CannonChem_HeavyFlatCompatibility",
+        "CannonHE_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA2120xmm_rad, RA2120xmm_rad_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonAP_Light, CannonChem_HeavyFlatCompatibility, CannonHE_Heavy.",
+      "referrer_digest": "a731ab02d9da485e6beac34dc545329e7a17be75fd5595982940274eb04034fd",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_apocalypsetank",
+          "path": "Armament@PRIMARYELITERad/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "ff8ce4ddb41d9f6b3c038b051f56000f6b0507719dbd856c284c73afec0cf8a3"
+    },
     "RA2Atomic": {
       "category": "staged superweapon",
       "component_purposes": {
@@ -1878,6 +2626,60 @@
       ],
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "cd005e85c2dc58ecc3f62f36288dac54863df76d8fa96176c7628bc9cc45faee"
+    },
+    "RA2Comet": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "Flame_Medium": "primary conventional delivery or impact Flame_Medium",
+        "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "d6242952725a41272374ccf9617ebdb57dbd6d81d7387e3e5d59ba55489bdbd2",
+      "mains": [
+        "Demolition_Light",
+        "Flame_Medium",
+        "Laser_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA2Comet, RA2Comet_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, Flame_Medium, Laser_Heavy.",
+      "referrer_digest": "b9666290b26cbd1e9a8f04a4292c18ccb0854b5579cab9851ddd2bb783096139",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2_allies_prismtank",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "16c716e4464e536e36ad9d69c99837c4d4c41cb4b249034bd8444aba1543cac3"
+    },
+    "RA2Comet_elite": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "Flame_Medium": "primary conventional delivery or impact Flame_Medium",
+        "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "d6242952725a41272374ccf9617ebdb57dbd6d81d7387e3e5d59ba55489bdbd2",
+      "mains": [
+        "Demolition_Light",
+        "Flame_Medium",
+        "Laser_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA2Comet, RA2Comet_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, Flame_Medium, Laser_Heavy.",
+      "referrer_digest": "a6ff40dde0cb9dba502b6ae165c6557a809b5460ef67173b5baff3858a9a8e8c",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2_allies_prismtank",
+          "path": "Armament@elite/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "24e700cce7dd0742c7f1b3f5b12871c6e74243dd630ff2b3e1d996991cfbd4f0"
     },
     "RA2DemoBomb": {
       "category": "staged superweapon",
@@ -1993,6 +2795,31 @@
       ],
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "bc50fbc78905fa200e0631f083064b4bb331feba71c59ab8780664263f0b15c6"
+    },
+    "RA2DiskDrain": {
+      "category": "status payload",
+      "component_purposes": {
+        "Magic_Heavy": "primary conventional delivery or impact Magic_Heavy",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "da8488148c096cf028536c76ca97870dc7b2e2dd988ca464c5fbda0db93957b6",
+      "mains": [
+        "Magic_Heavy",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA2DiskDrain: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Magic_Heavy, Tesla_Heavy.",
+      "referrer_digest": "384a987a8a74b9006dd612a68218f7cb555c8396d48d8dd6e62999569399379a",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "yuri_floatingdisk",
+          "path": "Armament@SECOND/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "c6cafd1d6631d0ae7f34efe029461312a7a522972709bcc543c393ff9c82c6ac"
     },
     "RA2FreedomRocket_elite": {
       "category": "percentage-scope compatibility",
@@ -2149,6 +2976,301 @@
       "review_reference": "Resolved family review: primary hit plus status payload",
       "weapon_digest": "5e7e940b5c8283a7cf919068646a9f3da962da3dd6f449d1de0d76ca04c555aa"
     },
+    "RA2Robotmm": {
+      "category": "status payload",
+      "component_purposes": {
+        "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy",
+        "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "c6e32df410f3d6bffd4cfa6289d181ca757d26dd1480ec457090febbbec0d576",
+      "mains": [
+        "Laser_Heavy",
+        "Railgun_Heavy",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA2Robotmm, RA2RobotmmScatter_elite, RA2Robotmm_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Laser_Heavy, Railgun_Heavy, Tesla_Heavy.",
+      "referrer_digest": "9091e760c6a45e3efb021ebef3594110bf39e64d54ea7675dbd15ba9ff86f503",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "futuretech_robottank",
+          "path": "Armament/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yrrobo",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "1c24af0e32740724a04b4df902ec0611ba045064f512bd7943ac5809d30e5860"
+    },
+    "RA2RobotmmScatter_elite": {
+      "category": "status payload",
+      "component_purposes": {
+        "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy",
+        "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "336bee7a0ffce47f41afd24887f7111f64b0ee8df8206aa4b02bd1e145e74d0e",
+      "mains": [
+        "Laser_Heavy",
+        "Railgun_Heavy",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA2Robotmm, RA2RobotmmScatter_elite, RA2Robotmm_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Laser_Heavy, Railgun_Heavy, Tesla_Heavy.",
+      "referrer_digest": "af1b3e830aeb66fd4af17504070b2f9d3d1f56df5d847948e0c742f5421e4cc9",
+      "referrers": [
+        {
+          "kind": "weapon",
+          "name": "RA2Robotmm_elite",
+          "path": "Warhead@Scatter/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "1afcbd2a9ba676e2e6cc2ecfb8485cd279d9a80eb11bd3600152d0b93f1506c1"
+    },
+    "RA2Robotmm_elite": {
+      "category": "status payload",
+      "component_purposes": {
+        "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy",
+        "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "c6e32df410f3d6bffd4cfa6289d181ca757d26dd1480ec457090febbbec0d576",
+      "mains": [
+        "Laser_Heavy",
+        "Railgun_Heavy",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA2Robotmm, RA2RobotmmScatter_elite, RA2Robotmm_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Laser_Heavy, Railgun_Heavy, Tesla_Heavy.",
+      "referrer_digest": "317c29c51cf8a32173f4a4f4c244e92cf1eb5806bd8e63d40918d5494278333c",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "futuretech_robottank",
+          "path": "Armament@elite/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yrrobo",
+          "path": "Armament@elite/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "f783269bc6c57a919e3cab18c64cb07ff39932bca18f51b91806fb86954c68c4"
+    },
+    "RA2SCUD": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy",
+        "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "3ac116c3633bf09d9e07575d49212c95492cc09c1cb0af0b2db01f115e52baf7",
+      "mains": [
+        "Demolition_Light",
+        "MissileAP_Heavy",
+        "RA2SCUDMissileAP_Heavy_NoWall"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for DredMissile, RA2SCUD, RA2SCUD_fire, RA2SCUD_tesla, V3Explode: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, MissileAP_Heavy, RA2SCUDMissileAP_Heavy_NoWall.",
+      "referrer_digest": "e8420bd0f31b58c5f2e417ae2a146f7e007de05f931f787650a074484dd122a3",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2_ctmisc01",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_ctmisc02",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_ctmisc06",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocket",
+          "path": "SpawnedExplodes/EmptyWeapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocket",
+          "path": "SpawnedExplodes/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "928b4e6c01972ea69ca21e656005889e11f3afcef76e5bb5703fedbdbfb2d9e7"
+    },
+    "RA2SCUDELITE": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy",
+        "Nuclear_Super": "special energy, status, or effect payload Nuclear_Super",
+        "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "ea4652fc25e3da614318a1ed114aa676deb8ff7dbb1a74e7db1584d73937521f",
+      "mains": [
+        "Demolition_Light",
+        "MissileAP_Heavy",
+        "Nuclear_Super",
+        "RA2SCUDMissileAP_Heavy_NoWall"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA2SCUDELITE: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, MissileAP_Heavy, Nuclear_Super, RA2SCUDMissileAP_Heavy_NoWall.",
+      "referrer_digest": "4be7c81745c61754b4cb72bbb82d48bf009c4be5a0a50763d0e363d7f0aa0e90",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2v3rocketelite",
+          "path": "SpawnedExplodes/EmptyWeapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocketelite",
+          "path": "SpawnedExplodes/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "be45bbe905b374f47b2f7ff9b24d17cd21ea4a822b5cb4b53cc0fda2e1734b5c"
+    },
+    "RA2SCUD_fire": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy",
+        "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "3ac116c3633bf09d9e07575d49212c95492cc09c1cb0af0b2db01f115e52baf7",
+      "mains": [
+        "Demolition_Light",
+        "MissileAP_Heavy",
+        "RA2SCUDMissileAP_Heavy_NoWall"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for DredMissile, RA2SCUD, RA2SCUD_fire, RA2SCUD_tesla, V3Explode: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, MissileAP_Heavy, RA2SCUDMissileAP_Heavy_NoWall.",
+      "referrer_digest": "b7aad16f1a8778cd7b78b0857a3529458204db1e63f0e9d01fc333c7f2b636a1",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2v3rocket",
+          "path": "SpawnedExplodes@fire/EmptyWeapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocket",
+          "path": "SpawnedExplodes@fire/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocketelite",
+          "path": "SpawnedExplodes@fire/EmptyWeapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocketelite",
+          "path": "SpawnedExplodes@fire/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "4399828b08d181492c80ccaf41ed57c5cc4dffa26d1c7750207bc57a1e14797f"
+    },
+    "RA2SCUD_rad": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy",
+        "MissileChem_HeavyFlatCompatibility": "special energy, status, or effect payload MissileChem_HeavyFlatCompatibility",
+        "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "413107f1a5a0e18a9501b5c81b658ab84938764c31d8d394cbf19f1e513659cb",
+      "mains": [
+        "Demolition_Light",
+        "MissileAP_Heavy",
+        "MissileChem_HeavyFlatCompatibility",
+        "RA2SCUDMissileAP_Heavy_NoWall"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA2SCUD_rad: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, MissileAP_Heavy, MissileChem_HeavyFlatCompatibility, RA2SCUDMissileAP_Heavy_NoWall.",
+      "referrer_digest": "3a9e0efb0f71fc912f6496a8f9c1b8909c25ab83e4614fb22ea223c6d876c7b7",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2_ctmisc06_rad",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocket",
+          "path": "SpawnedExplodes@rad/EmptyWeapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocket",
+          "path": "SpawnedExplodes@rad/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "12dc08e9b0e9411efc14990e878ae7e0850d3e2b26a134192ab2361df4de1ffd"
+    },
+    "RA2SCUD_tesla": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy",
+        "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "3ac116c3633bf09d9e07575d49212c95492cc09c1cb0af0b2db01f115e52baf7",
+      "mains": [
+        "Demolition_Light",
+        "MissileAP_Heavy",
+        "RA2SCUDMissileAP_Heavy_NoWall"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for DredMissile, RA2SCUD, RA2SCUD_fire, RA2SCUD_tesla, V3Explode: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, MissileAP_Heavy, RA2SCUDMissileAP_Heavy_NoWall.",
+      "referrer_digest": "957fd593848933339f4d8412345f3e802823ec46d1491df7a4114722a5468312",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2v3rocket",
+          "path": "SpawnedExplodes@tesla/EmptyWeapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocket",
+          "path": "SpawnedExplodes@tesla/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocketelite",
+          "path": "SpawnedExplodes@tesla/EmptyWeapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2v3rocketelite",
+          "path": "SpawnedExplodes@tesla/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "60058be843850e9be8e0ab5cc5768770ac7c0f9aec57f00399d259c078b51337"
+    },
     "RA2Virusgun2": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -2178,6 +3300,70 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "70673a3dc62ca931dd05f376371253fb8908476cab633e22fc95d02c30c14857"
+    },
+    "RA2Virusgun3": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Flak_Medium": "authored target, armor, relationship, or state route Flak_Medium",
+        "MissileAP_Medium": "authored target, armor, relationship, or state route MissileAP_Medium",
+        "Sniper_LightFlatCompatibility": "authored target, armor, relationship, or state route Sniper_LightFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "30f8f77abcc7dcc73aee81c368804131e7de553b8a386b540bcb8864ac31f94b",
+      "mains": [
+        "Flak_Medium",
+        "MissileAP_Medium",
+        "Sniper_LightFlatCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for RA2Virusgun3, RA2Virusgun_elite: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Flak_Medium, MissileAP_Medium, Sniper_LightFlatCompatibility.",
+      "referrer_digest": "babcaa39c3607de8baee2f260900fc3d746cb11eb18808733cff83e33c3f31ee",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "yuri_virus",
+          "path": "Armament@GARRISONED3/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_virus",
+          "path": "Armament@PRIMARY3/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "9aca274e962f7e46f45b3a52c1bc04fb60f1f3d2bb9f8479a2052b0ffca14dd8"
+    },
+    "RA2Virusgun_elite": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Flak_Medium": "authored target, armor, relationship, or state route Flak_Medium",
+        "MissileAP_Medium": "authored target, armor, relationship, or state route MissileAP_Medium",
+        "Sniper_LightFlatCompatibility": "authored target, armor, relationship, or state route Sniper_LightFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "30f8f77abcc7dcc73aee81c368804131e7de553b8a386b540bcb8864ac31f94b",
+      "mains": [
+        "Flak_Medium",
+        "MissileAP_Medium",
+        "Sniper_LightFlatCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for RA2Virusgun3, RA2Virusgun_elite: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Flak_Medium, MissileAP_Medium, Sniper_LightFlatCompatibility.",
+      "referrer_digest": "6bcfb4d7db1a0d901c71b3c2707e10986801a62944deb2e8ea49da155645ef3b",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "yuri_virus",
+          "path": "Armament@ELITE/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_virus",
+          "path": "Armament@GARRISONEDELITE/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "c6a3ada76a4ceca9a0aee03c6d2087ea0488276a849c86137f418af4bcb030ec"
     },
     "RAAtomic": {
       "category": "staged superweapon",
@@ -2353,6 +3539,108 @@
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "be620d15d9d1b759b8f52b1a0fac6dbfa773c69f93e3b6950490e6080982eaca"
     },
+    "SCUD": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy",
+        "MissileHE_Heavy": "primary conventional delivery or impact MissileHE_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "d95ddb101915430116a6923531ea95542a4b5d82ba746c6df40501fde8bf0b8a",
+      "mains": [
+        "Flame_Heavy",
+        "MissileHE_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for SCUD: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flame_Heavy, MissileHE_Heavy.",
+      "referrer_digest": "c3af146ecef2cd91f1f7cb7a45274b228b48b85368cf3c5ce0f97face109ead9",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_v2rocketlauncher",
+          "path": "Armament@PRIMARY/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_v2rocketlauncher",
+          "path": "FireWarheadsOnDeath/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "69d1051aaac0943c327142eae27b185af6e999bea866c183ce7dcf89afa92ee0"
+    },
+    "SCUDTesla": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy",
+        "HeavyFlameWeapon": "primary conventional delivery or impact HeavyFlameWeapon",
+        "HeavyMissile": "primary conventional delivery or impact HeavyMissile",
+        "MissileHE_Heavy": "primary conventional delivery or impact MissileHE_Heavy",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "613272f2ecceed89c0d089b8bba7b8e5829271640322d761d6ea7b4b1b72edca",
+      "mains": [
+        "Flame_Heavy",
+        "HeavyFlameWeapon",
+        "HeavyMissile",
+        "MissileHE_Heavy",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for SCUDTesla: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flame_Heavy, HeavyFlameWeapon, HeavyMissile, MissileHE_Heavy, Tesla_Heavy.",
+      "referrer_digest": "cda5a5d866a240fb3b52a0e49c1448c684a6c072a99f0036e214afeecdeb2068",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_v2rocketlauncher",
+          "path": "Armament@Tesla/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_v2rocketlauncher",
+          "path": "FireWarheadsOnDeath@Tesla/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "f38fbd05fef66d0c755a92329d8295a8b5495b66a6415ee4f5089d331ad974bb"
+    },
+    "SCUDThermobaric": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Heavy": "primary conventional delivery or impact Demolition_Heavy",
+        "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy",
+        "HeavyFlameWeapon": "primary conventional delivery or impact HeavyFlameWeapon",
+        "HeavyMissile": "primary conventional delivery or impact HeavyMissile",
+        "MissileHE_Heavy": "primary conventional delivery or impact MissileHE_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "5f4a423970325f7df00ffb0de7f29fff6a98008a1d2810a85a9ae982a2158909",
+      "mains": [
+        "Demolition_Heavy",
+        "Flame_Heavy",
+        "HeavyFlameWeapon",
+        "HeavyMissile",
+        "MissileHE_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for SCUDThermobaric: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Heavy, Flame_Heavy, HeavyFlameWeapon, HeavyMissile, MissileHE_Heavy.",
+      "referrer_digest": "3e1036aad0f7ab24376f118feb61cdf0d0f941af538042ac50d0731301f7075a",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_v2rocketlauncher",
+          "path": "Armament@HE/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_v2rocketlauncher",
+          "path": "FireWarheadsOnDeath@HE/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "67b38541f27b3d6849adce3e30fc1de26094b1f963956a5b97e75cd3bf3259cc"
+    },
     "SaboDeath": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -2382,6 +3670,152 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "c9a3f1007aae93d578e820922d897d6831238169feb31c0f5cc503825983cc31"
+    },
+    "SamuraiBladeCharged": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "PreservedFlat_SwordWeapon": "authored target, armor, relationship, or state route PreservedFlat_SwordWeapon",
+        "PreservedFlat_TeslaWeapon": "authored target, armor, relationship, or state route PreservedFlat_TeslaWeapon"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "100bd02834c0f30f680f628c81ada2ae31665c19844ed0f4f04a5efe3c7dd981",
+      "mains": [
+        "PreservedFlat_SwordWeapon",
+        "PreservedFlat_TeslaWeapon"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for SamuraiBladeCharged: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are PreservedFlat_SwordWeapon, PreservedFlat_TeslaWeapon.",
+      "referrer_digest": "6bee7e9bb722423471381e6ab71b5ff4c2a641dba8321af807f4f4973bf25f0a",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_samurai",
+          "path": "Armament@Upgrade/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_samurai",
+          "path": "Armament@UpgradeGARRISONED/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "9eff6da960228d6323a66185e8843e654e3b6e78762015fdf0852a8645e37924"
+    },
+    "ShotgunAttackRobotGun": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Bullet_LightFlatCompatibility": "authored target, armor, relationship, or state route Bullet_LightFlatCompatibility",
+        "Bullet_Medium": "authored target, armor, relationship, or state route Bullet_Medium",
+        "CannonHE_Medium": "authored target, armor, relationship, or state route CannonHE_Medium"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "703c8cef3f74e7132f0d43f726c3045ccb15e83d5d7b76a4b235daa6903259b9",
+      "mains": [
+        "Bullet_LightFlatCompatibility",
+        "Bullet_Medium",
+        "CannonHE_Medium"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for ShotgunAttackRobotGun, ShotgunAttackRobotGun_elite: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Bullet_LightFlatCompatibility, Bullet_Medium, CannonHE_Medium.",
+      "referrer_digest": "5968bda28e5f4ad92d898b3a1e63a06cc6fa9b05788ed58671d60461faaaff5e",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "futuretech_shotgundroid",
+          "path": "Armament@GARRISONED/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_shotgundroid",
+          "path": "Armament@PRIMARY/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "76cbc1a1ca43603e95c8ac02511d9db88013785069ed9c43491959f3d55177f4"
+    },
+    "ShotgunAttackRobotGun_elite": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Bullet_LightFlatCompatibility": "authored target, armor, relationship, or state route Bullet_LightFlatCompatibility",
+        "Bullet_Medium": "authored target, armor, relationship, or state route Bullet_Medium",
+        "CannonHE_Medium": "authored target, armor, relationship, or state route CannonHE_Medium"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "703c8cef3f74e7132f0d43f726c3045ccb15e83d5d7b76a4b235daa6903259b9",
+      "mains": [
+        "Bullet_LightFlatCompatibility",
+        "Bullet_Medium",
+        "CannonHE_Medium"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for ShotgunAttackRobotGun, ShotgunAttackRobotGun_elite: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Bullet_LightFlatCompatibility, Bullet_Medium, CannonHE_Medium.",
+      "referrer_digest": "fea59aa2e455bab0ec85d0bfc313e0ff3c9c37552358e1918a07bcacbdc79613",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "futuretech_shotgundroid",
+          "path": "Armament@ELITE/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_shotgundroid",
+          "path": "Armament@GARRISONEDELITE/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "0f98e8d7edbb934cf4166dabc84210f1f74e3f77f539afcc3151b2171a91f827"
+    },
+    "SkyHawkChainGun": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Bullet_Medium": "authored target, armor, relationship, or state route Bullet_Medium",
+        "Demolition_Light": "authored target, armor, relationship, or state route Demolition_Light"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "2c59e66ee0458247092c9fbf38ff13606bc5dfce6fc66b49e833eb0694485e97",
+      "mains": [
+        "Bullet_Medium",
+        "Demolition_Light"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for SkyHawkChainGun: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Bullet_Medium, Demolition_Light.",
+      "referrer_digest": "bf2aafb67e83259cc091b711fb2c2e05e44a175bb7e1d9cb28da32759c7afa46",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_skyhawk",
+          "path": "Armament@ChainGun/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "86073b8e9e7d34a70b96c3881e4cf8283879807c942464ce43cb3481a98bb450"
+    },
+    "SkyHawkChainGunWaveforce": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Bullet_Medium": "authored target, armor, relationship, or state route Bullet_Medium",
+        "Demolition_Light": "authored target, armor, relationship, or state route Demolition_Light",
+        "Railgun_Heavy": "authored target, armor, relationship, or state route Railgun_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "0ff704f289eab5bbba7f6ba787f08d3cdb9a7d89e9b7a4ecd984448353380c35",
+      "mains": [
+        "Bullet_Medium",
+        "Demolition_Light",
+        "Railgun_Heavy"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for SkyHawkChainGunWaveforce: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Bullet_Medium, Demolition_Light, Railgun_Heavy.",
+      "referrer_digest": "55608318e5c5d8bf352001d229197074d2297e9a9f03f578c7f95cad81d63bb5",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_skyhawk",
+          "path": "Armament@ChainGunUpgrade/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "f4b9d5e395ac7fdafba869d5a9a50e03bfbc1d4ef37dd7c3f698a63bf7075fb3"
     },
     "SonicZap": {
       "category": "target-routed composite",
@@ -2628,6 +4062,31 @@
       ],
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "1c95efd2974b9f199a2a063345ac5e14436097d0461e78719112fdc0e7a7845d"
+    },
+    "SteelMegaSword_elite": {
+      "category": "status payload",
+      "component_purposes": {
+        "Quantum_HeavyFlatCompatibility": "special energy, status, or effect payload Quantum_HeavyFlatCompatibility",
+        "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "72f38392f0ace673635d8ad8dce512bf4e63de2ba5826bfa148740296ca0a6df",
+      "mains": [
+        "Quantum_HeavyFlatCompatibility",
+        "Railgun_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for SteelMegaSword_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Quantum_HeavyFlatCompatibility, Railgun_Heavy.",
+      "referrer_digest": "ea271b29047faced7e308d7406cef377df1d28d99f390e99c8ae1a967b4134b6",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "steelconsortium_megalodon",
+          "path": "Armament@elite/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "edde24baa23f4a0b710cc56eb2650c3bb3e584a99f0a33ef6ff42690f0ff0c47"
     },
     "SteelStalkerRailgunEScatter": {
       "category": "status payload",
@@ -3012,6 +4471,31 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "9f14e0935fe901bd865effc14e8c3a02639e3c8fca52f8e86a32b15bfce6cb71"
     },
+    "TSLaserObeliskLaserFire": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonAP_Light": "primary conventional delivery or impact CannonAP_Light",
+        "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "680a3146b14c71c27926d3b68f24876446cb281ab7c478262689bd9e0f819574",
+      "mains": [
+        "CannonAP_Light",
+        "Laser_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for TSLaserObeliskLaserFire, TSObeliskLaserFire: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonAP_Light, Laser_Heavy.",
+      "referrer_digest": "8f2a05efcdb757dda0bd3b241cc4987d160b226e5fbeba659bf0ab17b25bc49a",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ts_nod_obeliskoflight",
+          "path": "Armament@UPGRADE/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "5ce8c4be85c32f4254439f1766147831eb9c96480405dfd644b10db5aeec9eb4"
+    },
     "TSLocustBombChem": {
       "category": "status payload",
       "component_purposes": {
@@ -3073,6 +4557,31 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "12e3ba307f549bc3ac0985e697ef3c21519824a1b8ccff05a1bb57cc4c63f2f8"
     },
+    "TSObeliskLaserFire": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonAP_Light": "primary conventional delivery or impact CannonAP_Light",
+        "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "eb11529787065dfd88adbe1942e3ea92973b59d6fc545af8316d05de7cfd93a7",
+      "mains": [
+        "CannonAP_Light",
+        "Laser_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for TSLaserObeliskLaserFire, TSObeliskLaserFire: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonAP_Light, Laser_Heavy.",
+      "referrer_digest": "1c1ad2b36c9da9a535184e9b7e63ac13aef58064f8402f2cdf685feee15d3adc",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ts_nod_obeliskoflight",
+          "path": "Armament@PRIMARY/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "c6a32f0c1d9d2f3cb88ddc8ea3eae7eb6b6c73fd6e4ea808df6b14235d837960"
+    },
     "TSProton": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -3097,6 +4606,31 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "3ce1dc6bbdfedf10779da6002805aa5efa862c82d3df00beb089b8bccb4b21da"
+    },
+    "TSRPGTowerRail": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "CannonHE_Heavy": "authored target, armor, relationship, or state route CannonHE_Heavy",
+        "Railgun_HeavyFlatCompatibility": "authored target, armor, relationship, or state route Railgun_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "203154b78c6a50c9956bd060d2394fac59ed262fc2e9138b31eb243d211751b9",
+      "mains": [
+        "CannonHE_Heavy",
+        "Railgun_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for TSRPGTowerRail: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are CannonHE_Heavy, Railgun_HeavyFlatCompatibility.",
+      "referrer_digest": "8e810156f2592660e9298d070b273f0f066f0cfaa6da326264015d2a1c426e4f",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ts_gdi_rpgtower",
+          "path": "Armament@Upgrade/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "1eb4c9adae56b1bf940fc5ec0033c1b498fd90f2162352594eba5dfb8cad4950"
     },
     "TSShotgun": {
       "category": "target-routed composite",
@@ -3159,6 +4693,86 @@
       "review_reference": "Resolved family review: primary hit plus status payload",
       "weapon_digest": "7cfbc7fa825d23a17923f7fe9145505b2ae78ecd1e1e573917b14c88ef7fd6e1"
     },
+    "TTankZap2ArcTeslaFragment1_EMP": {
+      "category": "status payload",
+      "component_purposes": {
+        "TeslaWeapon": "special energy, status, or effect payload TeslaWeapon",
+        "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "006db12443ff760e1fe8e6fb853ca7b1fff9e3cad0f50f230bec2f382f765e55",
+      "mains": [
+        "TeslaWeapon",
+        "Tesla_Super"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for TTankZap2ArcTeslaFragment1_EMP, TTankZap2ArcTeslaFragment2_EMP: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are TeslaWeapon, Tesla_Super.",
+      "referrer_digest": "1007e400bad481ec28db3db9de1d4ab40f9342553a92dbf19a72080623ca172f",
+      "referrers": [
+        {
+          "kind": "weapon",
+          "name": "TTankZap2Arc_EMP",
+          "path": "Warhead@TeslaArc/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "f0ec2fb5bfdb063eb3ec19903cd7df2f601ae2902b19c9ceda4bba9644d97455"
+    },
+    "TTankZap2ArcTeslaFragment2_EMP": {
+      "category": "status payload",
+      "component_purposes": {
+        "TeslaWeapon": "special energy, status, or effect payload TeslaWeapon",
+        "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "14aa41bbe4541cf5020bf5df1de10ad4b8c5172851104a5f539aaa21d09aba09",
+      "mains": [
+        "TeslaWeapon",
+        "Tesla_Super"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for TTankZap2ArcTeslaFragment1_EMP, TTankZap2ArcTeslaFragment2_EMP: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are TeslaWeapon, Tesla_Super.",
+      "referrer_digest": "61f066d263e3c69e66f839405fc0310a6b4b4dbd29755ac4597c9d660802a404",
+      "referrers": [
+        {
+          "kind": "weapon",
+          "name": "TTankZap2ArcTeslaFragment1_EMP",
+          "path": "Warhead@TeslaArc/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "f7e94b8e1af1a2df1c7fe8f16c22b6cdfbf95f29d4de70f2dd60612e80c1de72"
+    },
+    "TankBusterBeamCannon": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Railgun_Heavy": "authored target, armor, relationship, or state route Railgun_Heavy",
+        "TankBusterBeamUnscopedCompatibility": "authored target, armor, relationship, or state route TankBusterBeamUnscopedCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "f8119bae619c63fec823bd5f65808fec3a3278d9b39c573e8b684252c46a46b2",
+      "mains": [
+        "Railgun_Heavy",
+        "TankBusterBeamUnscopedCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for TankBusterBeamCannon: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Railgun_Heavy, TankBusterBeamUnscopedCompatibility.",
+      "referrer_digest": "f855b4021351355aae78f3e10e3c920225ed7be7121963780dcf098cf0793026",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_tankbuster",
+          "path": "Armament@GARRISONED/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_tankbuster",
+          "path": "Armament@PRIMARY/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "466fc9c2cc5884c71b8dd5a811848998eb304592be6478ee9c7bfa2b0492fa5d"
+    },
     "TorpTube": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -3183,6 +4797,408 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "22a4f16fe9bb5c5461c038c939801439c169e72bd9328aa2bb11aa62f29bb74f"
+    },
+    "V3Explode": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "primary conventional delivery or impact Demolition_Light",
+        "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy",
+        "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "ff067361e93655d9f574338acc183d3cfa548cf48cb1c15702656f5c3472d388",
+      "mains": [
+        "Demolition_Light",
+        "MissileAP_Heavy",
+        "RA2SCUDMissileAP_Heavy_NoWall"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for DredMissile, RA2SCUD, RA2SCUD_fire, RA2SCUD_tesla, V3Explode: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Light, MissileAP_Heavy, RA2SCUDMissileAP_Heavy_NoWall.",
+      "referrer_digest": "bac9397eb7ef5737c5c9da2e6c4fd2e3b304a7844c2a4c071e1e88758566c259",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_burrito",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_lars",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_missiletruck",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_topolm",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_donnerschlag",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_v3rocketlauncher",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_komet",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_mars",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_tornadoglauncher",
+          "path": "FireWarheadsOnDeath/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "ed83820550efba27a4968b62917c381fdc9f35822c4d077df9e8ee34acc31753"
+    },
+    "ViperMissilesFire": {
+      "category": "status payload",
+      "component_purposes": {
+        "Concussion_Medium": "primary conventional delivery or impact Concussion_Medium",
+        "Flame_Light": "primary conventional delivery or impact Flame_Light",
+        "MissileAP_Light": "primary conventional delivery or impact MissileAP_Light",
+        "MissileAP_Medium": "primary conventional delivery or impact MissileAP_Medium"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "232190258720a96dd4d511d19cd117405b658f205eb2e608c9301be5bcd84d69",
+      "mains": [
+        "Concussion_Medium",
+        "Flame_Light",
+        "MissileAP_Light",
+        "MissileAP_Medium"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for ViperMissilesFire: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Concussion_Medium, Flame_Light, MissileAP_Light, MissileAP_Medium.",
+      "referrer_digest": "a5b237d343e5040a82e77b821720e0a5ea2e2bd473040c1ad77e310a05e6c25e",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "tkm_viper",
+          "path": "Armament@PRIMARYTITAN/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "2d2ddfa22672819f2b87b632d679a9b38736f5a3fbed6c1cdee37a42b3ded855"
+    },
+    "VolkovMagneticWeapon": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "5ca9fb3e00c66a470672c960cec63276d1cee20ec4959793e5816fc04d48aff3",
+      "mains": [
+        "CannonHE_Heavy",
+        "Railgun_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for VolkovMagneticWeapon: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Railgun_HeavyFlatCompatibility.",
+      "referrer_digest": "dc25612cec50c271c4f5efc5acfb0a68c7a839afe27bf34ecdb44b3cce720b46",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@GARRISONED/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "b25890d151f6daaee535ff92487f7e9a801e7326b3ee31dcc5ea68b9226d1bcd"
+    },
+    "VolkovMagneticWeaponIncendiary": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Flame_Medium": "primary conventional delivery or impact Flame_Medium",
+        "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "fbfaa210bec853e8e018224fb78e13e2a7ff0534464f5873fe6c702a6a4e414e",
+      "mains": [
+        "CannonHE_Heavy",
+        "Flame_Medium",
+        "Railgun_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for VolkovMagneticWeaponIncendiary: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Flame_Medium, Railgun_HeavyFlatCompatibility.",
+      "referrer_digest": "51f56433bbcb0263622d2dcec988093e0fc01c04a01bc8cbe6f7523f3c4f1c53",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@GARRISONEDIncendiary/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@Incendiary/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "e24fdcac59be3ac684dfbeb5a740ff6fadeb9ea5cd4e0964a8e901eb342f1cf4"
+    },
+    "VolkovMagneticWeaponIncendiaryNuclearShells": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "CannonNuke_HeavyFlatCompatibility": "primary conventional delivery or impact CannonNuke_HeavyFlatCompatibility",
+        "Grenade": "primary conventional delivery or impact Grenade",
+        "MediumChemicalWeapon": "special energy, status, or effect payload MediumChemicalWeapon"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "a0f12994728a7f49709cf473f65858f2ee8746677a928a4447316decb1b04927",
+      "mains": [
+        "CannonHE_Heavy",
+        "CannonNuke_HeavyFlatCompatibility",
+        "Grenade",
+        "MediumChemicalWeapon"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for VolkovMagneticWeaponIncendiaryNuclearShells: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, CannonNuke_HeavyFlatCompatibility, Grenade, MediumChemicalWeapon.",
+      "referrer_digest": "aaaaa7a14d391f9cb398de8cd904b56b676724f42d0f66b6f10e560c69f3d0dd",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@GARRISONEDIncendiaryNuclearShells/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@IncendiaryNuclearShells/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "5a3886b34e4535f96e3bba13277443eeae0f851bf3d1677849a7ba53c80a1aed"
+    },
+    "VolkovMagneticWeaponIncendiaryTesla": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Grenade": "primary conventional delivery or impact Grenade",
+        "MediumChemicalWeapon": "special energy, status, or effect payload MediumChemicalWeapon",
+        "Quantum_HeavyFlatCompatibility": "special energy, status, or effect payload Quantum_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "0b52f5591d261ebcf29ab92c5ed44e0a801a08dd4bdb5b0e1ccd03dc001357dd",
+      "mains": [
+        "CannonHE_Heavy",
+        "Grenade",
+        "MediumChemicalWeapon",
+        "Quantum_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for VolkovMagneticWeaponIncendiaryTesla: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Grenade, MediumChemicalWeapon, Quantum_HeavyFlatCompatibility.",
+      "referrer_digest": "3555f358134f650aa732493c0cddf0b3d9d17d76c3794c02a2f20481dd49572a",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@GARRISONEDIncendiaryTesla/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@IncendiaryTesla/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "ffe70a400967d97f8323de8b6c86330c2264e5f1c315660dce10a50cf0000add"
+    },
+    "VolkovMagneticWeaponIncendiaryTeslaFragment1": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "MediumFlameWeapon": "primary conventional delivery or impact MediumFlameWeapon",
+        "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "b0371d7ac88b56328a7b8244b7fca2e2110ed2ee62d83f4ee43c901be69d493e",
+      "mains": [
+        "CannonHE_Heavy",
+        "MediumFlameWeapon",
+        "Railgun_HeavyFlatCompatibility",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for VolkovMagneticWeaponIncendiaryTeslaFragment1, VolkovMagneticWeaponIncendiaryTeslaFragment2: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, MediumFlameWeapon, Railgun_HeavyFlatCompatibility, Tesla_Heavy.",
+      "referrer_digest": "e2c3a80bc63bca49ff84234c5fa9d325263e9ca2578affdb13c9cb3e480a137b",
+      "referrers": [
+        {
+          "kind": "weapon",
+          "name": "VolkovMagneticWeaponIncendiaryTesla",
+          "path": "Warhead@TeslaArc/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "1f625f18726e0df0c6e660144a8bd5366e6b50822585fe70d4e6952946922908"
+    },
+    "VolkovMagneticWeaponIncendiaryTeslaFragment2": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "MediumFlameWeapon": "primary conventional delivery or impact MediumFlameWeapon",
+        "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "01c6c4967851bbd2ac90d7b4af66a21f781dd14cba4d7d22711daca5eba7aa2c",
+      "mains": [
+        "CannonHE_Heavy",
+        "MediumFlameWeapon",
+        "Railgun_HeavyFlatCompatibility",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for VolkovMagneticWeaponIncendiaryTeslaFragment1, VolkovMagneticWeaponIncendiaryTeslaFragment2: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, MediumFlameWeapon, Railgun_HeavyFlatCompatibility, Tesla_Heavy.",
+      "referrer_digest": "37f37b455c6ee1a22cf40c4e7d39c877b2707b938af2cbd19deb389e7e1fb580",
+      "referrers": [
+        {
+          "kind": "weapon",
+          "name": "VolkovMagneticWeaponIncendiaryTeslaFragment1",
+          "path": "Warhead@TeslaArc/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "45fb3ace1aec0e9c206e32a5c2d94eeeebbacd984256e799d8eadd285afe32f2"
+    },
+    "VolkovMagneticWeaponNuclearShells": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Nuclear_Super": "special energy, status, or effect payload Nuclear_Super",
+        "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "4c8f0764520ed86fbdd31fa2daf90ce61dc2f9ad5d9ae736a4ff4c2273fd39ee",
+      "mains": [
+        "CannonHE_Heavy",
+        "Nuclear_Super",
+        "Railgun_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for VolkovMagneticWeaponNuclearShells: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Nuclear_Super, Railgun_HeavyFlatCompatibility.",
+      "referrer_digest": "5e4ff610f11f7591caf3ed916104e98c0ddf3e05380db064483fdabb6db23175",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@GARRISONEDNuclearShells/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@NuclearShells/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "b7d20ece0f5bfa8ae075051cadc25a98849d391070464a8c8d3abc222e8181f2"
+    },
+    "VolkovMagneticWeaponTesla": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "0b2888707c421833a2384a4db0e9421c9116d3fa9d0e75b4ca40028a67ae61c2",
+      "mains": [
+        "CannonHE_Heavy",
+        "Railgun_HeavyFlatCompatibility",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for VolkovMagneticWeaponTesla, VolkovMagneticWeaponTeslaFragment1, VolkovMagneticWeaponTeslaFragment2: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Railgun_HeavyFlatCompatibility, Tesla_Heavy.",
+      "referrer_digest": "6c364c1c3517344c8dd6eff241904701b8f4cac6d9acd2b1611f3f32a5639dad",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@GARRISONEDTesla/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_volkov",
+          "path": "Armament@Tesla/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "ad30c7a64d920c0217feac53aba3354c5b7e0469d3aec289a19571fbeb303adf"
+    },
+    "VolkovMagneticWeaponTeslaFragment1": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "a782d01171479f2b3f6f0209289cc7cfb6233bb4927edd7c1a83cbf8c3450fbf",
+      "mains": [
+        "CannonHE_Heavy",
+        "Railgun_HeavyFlatCompatibility",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for VolkovMagneticWeaponTesla, VolkovMagneticWeaponTeslaFragment1, VolkovMagneticWeaponTeslaFragment2: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Railgun_HeavyFlatCompatibility, Tesla_Heavy.",
+      "referrer_digest": "53696b4bbd4e6a19822e77843f1cb10a87d8099fb71e1e773bf187ba46ff5ea6",
+      "referrers": [
+        {
+          "kind": "weapon",
+          "name": "VolkovMagneticWeaponTesla",
+          "path": "Warhead@TeslaArc/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "aa2d8d63650b56e0adf062e2ca014347c9c2d0be724e5cc049ebad816b41a61b"
+    },
+    "VolkovMagneticWeaponTeslaFragment2": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "9075e0f648afae38c2191407ad31aef869751a29d4a60415b23a18b50a99472f",
+      "mains": [
+        "CannonHE_Heavy",
+        "Railgun_HeavyFlatCompatibility",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for VolkovMagneticWeaponTesla, VolkovMagneticWeaponTeslaFragment1, VolkovMagneticWeaponTeslaFragment2: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Railgun_HeavyFlatCompatibility, Tesla_Heavy.",
+      "referrer_digest": "48dc92c95293f40a16b7c1ec426a6fa38e56b2187935447163f616944fe8789f",
+      "referrers": [
+        {
+          "kind": "weapon",
+          "name": "VolkovMagneticWeaponTeslaFragment1",
+          "path": "Warhead@TeslaArc/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "0c76d3e508923f17521a75a80cb40163a8c790c133e1c66dcc028a86723992dc"
     },
     "VonSniper": {
       "category": "target-routed composite",
@@ -3308,6 +5324,48 @@
       "review_reference": "Resolved family review: overlapping effect delivery",
       "weapon_digest": "ab4bffc541b2cff1ff949ced3b1d7ce308c6fcf8414f112723e83d6a932eb7ac"
     },
+    "WaveTurretImpact": {
+      "category": "status payload",
+      "component_purposes": {
+        "RailgunWeapon": "special energy, status, or effect payload RailgunWeapon",
+        "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "ac03bb21e68eef830e04e15650dd6c197337b49a6750572b8c31bea0f4b89ac7",
+      "mains": [
+        "RailgunWeapon",
+        "Railgun_Heavy",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for WaveTurretImpact: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are RailgunWeapon, Railgun_Heavy, Tesla_Heavy.",
+      "referrer_digest": "d2b4cb29be2fe67cfca8bbd050bbed31197eaaf8f1db28dd754884aaa1554285",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_waveforceartillery",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_waveforcetank",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_waveforceturret",
+          "path": "FireWarheadsOnDeath/Weapon"
+        },
+        {
+          "kind": "weapon",
+          "name": "WaveTurretShell",
+          "path": "Projectile/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "31ee8ac617d800d520cd8b57d7ae708cde800ac3fc51a270ea2d9d7b1a4bce33"
+    },
     "WaveforceCannon": {
       "category": "effect-delivery composite",
       "component_purposes": {
@@ -3362,6 +5420,65 @@
       ],
       "review_reference": "Resolved family review: overlapping effect delivery",
       "weapon_digest": "bcd38ab504a80c2df24e936c74dc2f651408075f863e6fc2d2de132d19504562"
+    },
+    "WaveforceCannonDistortedBeam2": {
+      "category": "status payload",
+      "component_purposes": {
+        "Chemical_Heavy": "special energy, status, or effect payload Chemical_Heavy",
+        "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "238dc15deb859c56b87ec07f57e9c90eced29ab9abaeccc238d52bc2dde012c8",
+      "mains": [
+        "Chemical_Heavy",
+        "Flame_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for WaveforceCannonDistortedBeam2: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Chemical_Heavy, Flame_Heavy.",
+      "referrer_digest": "3a9151ce55d4138f1838e41e62ec4fc34193b8a683f011f79f3a874ef4d95f1a",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_waveforcetank",
+          "path": "Armament@Upgrade3/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_idol",
+          "path": "Armament@Upgrade3/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "7d3d19a414f8f162c36139fae260570982bc53971812e3f7f643d14705d3e7aa"
+    },
+    "YakTeslaBomb": {
+      "category": "status payload",
+      "component_purposes": {
+        "PreservedFlat_HeavyBomb": "primary conventional delivery or impact PreservedFlat_HeavyBomb",
+        "PreservedFlat_HeavyChemicalWeapon": "special energy, status, or effect payload PreservedFlat_HeavyChemicalWeapon",
+        "PreservedFlat_HeavyFlameWeapon": "primary conventional delivery or impact PreservedFlat_HeavyFlameWeapon",
+        "PreservedFlat_TeslaWeapon": "special energy, status, or effect payload PreservedFlat_TeslaWeapon"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "3e46809e4e0fe98467ef8241510d1ff612733e8a13997f58ba41d0b21e4d6f25",
+      "mains": [
+        "PreservedFlat_HeavyBomb",
+        "PreservedFlat_HeavyChemicalWeapon",
+        "PreservedFlat_HeavyFlameWeapon",
+        "PreservedFlat_TeslaWeapon"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for YakTeslaBomb: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are PreservedFlat_HeavyBomb, PreservedFlat_HeavyChemicalWeapon, PreservedFlat_HeavyFlameWeapon, PreservedFlat_TeslaWeapon.",
+      "referrer_digest": "0ce968c666e5a17078da18d170b979708f8d0175001758d88cef3ad7210314db",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_teslayak",
+          "path": "Armament@BOMBS/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "dad96e57d3f75542919f78287b19911b0472abd437efad190a99fbed4efd6a47"
     },
     "ZeroFighterChainGunWaveforce": {
       "category": "effect-delivery composite",
@@ -3458,6 +5575,31 @@
       ],
       "review_reference": "Maintainer unit decision: preserve the Ordos autogun-tank role",
       "weapon_digest": "3fc0c572fde96501a3fdc6369adf35193971cd86a15588e310f86a787374b314"
+    },
+    "edenMobileLaserTiger": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Medium": "primary conventional delivery or impact CannonHE_Medium",
+        "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "a1d8029c77e8192bbc6b0de1da2bb195bad75a41bd848b10864df8e4cdf3979c",
+      "mains": [
+        "CannonHE_Medium",
+        "Laser_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for edenMobileLaserTiger: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Medium, Laser_Heavy.",
+      "referrer_digest": "910254a8839d551c958c828578643b3bca28f7cac2e65251e2a691e8e343e90a",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "EDEN_TIGER_LASER",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "ba81cda8d0e26778c295598883f13871e61e941db79d157dedf2e42b5ef7e30a"
     },
     "edenTiger_EMP": {
       "category": "status payload",
@@ -3609,6 +5751,72 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "12ddc8b5d12b363504562149c61aec1c56ff0f4cdfb51fb4c8b544094354a4a0"
     },
+    "japan_imperialscoutsman_rifle": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Bullet_Medium": "authored target, armor, relationship, or state route Bullet_Medium",
+        "RailgunCompatibility": "authored target, armor, relationship, or state route RailgunCompatibility",
+        "RailgunShieldCompatibility": "authored target, armor, relationship, or state route RailgunShieldCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "24a4194fdbdbdb6754e24e5872a841c19b296243df3df4a2ecd8ce553024fa5e",
+      "mains": [
+        "Bullet_Medium",
+        "RailgunCompatibility",
+        "RailgunShieldCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for japan_imperialscoutsman_rifle: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Bullet_Medium, RailgunCompatibility, RailgunShieldCompatibility.",
+      "referrer_digest": "680f895b430cecab7f73ec7af5824c5075d6e7831fcfa17fb3cd0d0abca3dad8",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_imperialscoutsman",
+          "path": "Armament@GARRISONED/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_imperialscoutsman",
+          "path": "Armament@PRIMARY/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "d8c68d4c13f9a0884a18b2ff459d799eaded1ffacd639bb6adf131f3cd3b3fd7"
+    },
+    "japan_imperialscoutsman_rifle_waveforce": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Bullet_Medium": "authored target, armor, relationship, or state route Bullet_Medium",
+        "RailgunCompatibility": "authored target, armor, relationship, or state route RailgunCompatibility",
+        "RailgunShieldCompatibility": "authored target, armor, relationship, or state route RailgunShieldCompatibility",
+        "Railgun_Heavy": "authored target, armor, relationship, or state route Railgun_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "72101572d761ce6ecab2200c9920033aa580b963bd6b12b99cf358da48d05553",
+      "mains": [
+        "Bullet_Medium",
+        "RailgunCompatibility",
+        "RailgunShieldCompatibility",
+        "Railgun_Heavy"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for japan_imperialscoutsman_rifle_waveforce: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Bullet_Medium, RailgunCompatibility, RailgunShieldCompatibility, Railgun_Heavy.",
+      "referrer_digest": "cb84464abf23fe97263fc7adacc8e3cfac89566ccf0f9f17051d7212f6c2771c",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_imperialscoutsman",
+          "path": "Armament@Upgrade/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_imperialscoutsman",
+          "path": "Armament@UpgradeGARRISONED/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "4ebc6ecba6bb268b33af9be3998e773de73291984e8c877372841b1a549d0e68"
+    },
     "mtank_pri": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -3658,6 +5866,62 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "025e3b31ed065a389994700662658df3ddc3e9ebfe04a72a846f2c94c76a9234"
+    },
+    "plymouthStickyDefence": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "CannonHE_Medium": "primary conventional delivery or impact CannonHE_Medium",
+        "Chemical_Light": "special energy, status, or effect payload Chemical_Light",
+        "StickyWildcardCompatibility": "primary conventional delivery or impact StickyWildcardCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "32a0d04d1cab742d853b5e2636d0201294afa1488ba8a859e38e148d89cb5122",
+      "mains": [
+        "CannonHE_Heavy",
+        "CannonHE_Medium",
+        "Chemical_Light",
+        "StickyWildcardCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for plymouthStickyDefence: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, CannonHE_Medium, Chemical_Light, StickyWildcardCompatibility.",
+      "referrer_digest": "072b6720c27508598ee196d033ea3eec91ffd28bc5ce1cd163178dda1398d45e",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_GP_STICKYFOAM",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "c21e6e7648a5bed448e117a3555dfddf105c6d6105e71a551d3da2921b9ed4bb"
+    },
+    "plymouthStickyTiger": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Medium": "primary conventional delivery or impact CannonHE_Medium",
+        "Chemical_Light": "special energy, status, or effect payload Chemical_Light",
+        "StickyWildcardCompatibility": "primary conventional delivery or impact StickyWildcardCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "ae56337705c803479648893ed53e00bb57f88d10cdbb05eb35e74b2a4c38fbe2",
+      "mains": [
+        "CannonHE_Medium",
+        "Chemical_Light",
+        "StickyWildcardCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for plymouthStickyTiger: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Medium, Chemical_Light, StickyWildcardCompatibility.",
+      "referrer_digest": "d79dc6f8c5dee76e5cb50f20a9a5381af61f1602e45bfea9b79d2935b2d75bf9",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_TIGER_STICKYFOAM",
+          "path": "Armament/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "bf4c35d05ff1b658271864085816d2d9f731a20ab2ee4eba5e24288551482a95"
     },
     "plymouth_EMP": {
       "category": "status payload",
@@ -3773,6 +6037,93 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "6182878fcaf515148b083915cd102f47785ac7f54ece1eb92a10485c9041e394"
     },
+    "tkmfirerockets": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flame_Light": "primary conventional delivery or impact Flame_Light",
+        "MissileAP_Light": "primary conventional delivery or impact MissileAP_Light"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "b14b09320be34ab89edd477d4c9052d3b6f681b4427092e73c82d2dfb0e74d53",
+      "mains": [
+        "Flame_Light",
+        "MissileAP_Light"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for tkmfirerockets: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flame_Light, MissileAP_Light.",
+      "referrer_digest": "f97265a8d4a5df7db99e04e0b7413925536f3f37bcebd8731d83eec8df533dd6",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "tkm_as42",
+          "path": "Armament@PRIMARYTITAN/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_rocketeer",
+          "path": "Armament@GARRISONEDNATO/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_rocketeer",
+          "path": "Armament@PRIMARYTITAN/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "c7b07cbded67b4bf8caba8d5b088bc63389dbfe899a1b9e95c153942369e5004"
+    },
+    "tkmkatyushalalauncherrocketsfire": {
+      "category": "status payload",
+      "component_purposes": {
+        "Concussion_Medium": "primary conventional delivery or impact Concussion_Medium",
+        "Flame_Light": "primary conventional delivery or impact Flame_Light",
+        "MissileAP_Light": "primary conventional delivery or impact MissileAP_Light"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "ce7ebdc8658b904b6da6e921f601725c0e415c1be23861676573a05f02b52707",
+      "mains": [
+        "Concussion_Medium",
+        "Flame_Light",
+        "MissileAP_Light"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for tkmkatyushalalauncherrocketsfire: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Concussion_Medium, Flame_Light, MissileAP_Light.",
+      "referrer_digest": "2a4ee5952598302688695a84056e9c1632ed1e420c7f5f8b61131be13b55151f",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "tkm_tornadoglauncher",
+          "path": "Armament@PRIMARYTITAN/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "aa5ab49e7db79e8ba5ba9c395e35bf1a9d55451be1926d6f9b94cfba8eb4d2ec"
+    },
+    "tkmstrykerfirerockets": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flame_Medium": "primary conventional delivery or impact Flame_Medium",
+        "MissileAP_Medium": "primary conventional delivery or impact MissileAP_Medium"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "59656513de1c3cd1ed0f9c0d6230bd3a59f30de9c63ad33bb0f321da5a27a4f7",
+      "mains": [
+        "Flame_Medium",
+        "MissileAP_Medium"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for tkmstrykerfirerockets: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flame_Medium, MissileAP_Medium.",
+      "referrer_digest": "9030663219e47099235a7d9528adfd9f461d0444a3eafcf362ebd902b708c33c",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "tkm_stryker",
+          "path": "Armament@missilefire/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "6314f00f0af663755e05311a571f9faadb7e93657a2082b34179c0538e0f2ae2"
+    },
     "v1rocketsThermobaric": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -3857,6 +6208,111 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "4a8563d111ba9f44a337775f7a10db450b6b3b29fdb0a74ae817019bbeab1394"
+    },
+    "wc2deathknightDeathCoil": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy",
+        "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "eb7595136dc1d4aebcd848993ac52af9f5c754faef903624e9a6ee12e7c5f618",
+      "mains": [
+        "Flame_Heavy",
+        "Tesla_Super"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for wc2deathknightDeathCoil, wc2deathknightDeathCoilScatter_Left, wc2deathknightDeathCoilScatter_Right, wc2deathknightFire: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flame_Heavy, Tesla_Super.",
+      "referrer_digest": "1b9d3c0e4fd476a1ae9d23f300b51af3f1a6b5e6dcd824509546e553010a0394",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_deathknight",
+          "path": "Armament@DEATHCOIL/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "97b84ce9a4de215ce75fada84b60abf3d8aec163efaec8903330dede50f67040"
+    },
+    "wc2deathknightDeathCoilScatter_Left": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy",
+        "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "eb7595136dc1d4aebcd848993ac52af9f5c754faef903624e9a6ee12e7c5f618",
+      "mains": [
+        "Flame_Heavy",
+        "Tesla_Super"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for wc2deathknightDeathCoil, wc2deathknightDeathCoilScatter_Left, wc2deathknightDeathCoilScatter_Right, wc2deathknightFire: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flame_Heavy, Tesla_Super.",
+      "referrer_digest": "337b5ffdc85964b4562e22a0fb8ced0930f14782a0377929a6d317f09fac4144",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_deathknight",
+          "path": "Armament@DEATHCOILSCATTER1/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "8a13ffe80adab2fae74478caba233d39a1c978145eb15b2a51015a58daba1548"
+    },
+    "wc2deathknightDeathCoilScatter_Right": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy",
+        "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "eb7595136dc1d4aebcd848993ac52af9f5c754faef903624e9a6ee12e7c5f618",
+      "mains": [
+        "Flame_Heavy",
+        "Tesla_Super"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for wc2deathknightDeathCoil, wc2deathknightDeathCoilScatter_Left, wc2deathknightDeathCoilScatter_Right, wc2deathknightFire: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flame_Heavy, Tesla_Super.",
+      "referrer_digest": "005902ba8186574cd685c3e2c516e56ffac4abf29f52e5178c03564289863ca6",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_deathknight",
+          "path": "Armament@DEATHCOILSCATTER2/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "3f7170528a68f50b16910a7db6b92d2cb696d522fa0919478e7bcadb4074b73d"
+    },
+    "wc2deathknightFire": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy",
+        "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "eb7595136dc1d4aebcd848993ac52af9f5c754faef903624e9a6ee12e7c5f618",
+      "mains": [
+        "Flame_Heavy",
+        "Tesla_Super"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for wc2deathknightDeathCoil, wc2deathknightDeathCoilScatter_Left, wc2deathknightDeathCoilScatter_Right, wc2deathknightFire: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flame_Heavy, Tesla_Super.",
+      "referrer_digest": "9831a9dd4a8e0251160e5851fdd98faa643cadb90d06c03549d7246e1aa0c7ab",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_deathknight",
+          "path": "Armament/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_deathknight",
+          "path": "Armament@GARRISONED/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "86f1a928f4f865721ce1d0fc2bcee8369ee6e09f187517ef6b2202fa78387112"
     }
   },
   "schema_version": 1
