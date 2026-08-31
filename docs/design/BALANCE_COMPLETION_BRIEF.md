@@ -164,13 +164,15 @@ FLOOR, SOFT_FLOOR, SWEET_LO, SWEET_HI, CEIL = 0.50, 0.75, 1.00, 2.50, 4.00
 
 | ring | multiple of `cost0` | meaning |
 |---|--:|---|
-| hard band | **0.50× – 4.00×** | outside this, the unit is not in the class |
-| practical floor | 0.75× | below it, the member is suspiciously cheap for the class |
-| **sweet spot** | **1.00× – 2.50×** | where **≥80%** of members must land |
+| hard band | **0.50× – 3.50×** | = ×0.50 – ×2.50 stats; outside this the unit is not in the class |
+| **target band** | **0.75× – 2.50×** | where **≥80%** of members must land |
+| the anchor | **1.00×** | ×1.00 stats — the class's zero point |
 
-So the baseline IS at 100% of cost — the maintainer's intuition is exactly the shipped law — but
-it is the **FLOOR of the sweet spot, not its centre**. `SWEET_LO == 1.00` is the anchor itself.
-The class extends **upward** from its zero point; it does not straddle it.
+⛔ **The rings are COST numbers** — ruled directly: *"The 75% referred to the unit price not the
+stats"*. Cost is what a player reads off the build palette; the stat window is the derived reading,
+and it comes out exact at four of the five rings. The anchor at 1.00 sits at the **lower quartile**
+of the target band, not its centre: the class extends **upward** from its zero point because the
+anchor is the entry unit.
 
 ⭐ **And that is the right shape, not an accident.** The anchor is the class's recognisable ENTRY
 unit — the plain rifleman, the plain light tank — and everything else in the class is that unit
@@ -193,7 +195,7 @@ stat can see role.
 
 Members are priced as RATIOS to the anchor, so **moving the anchor SLIDES a class along the band —
 it can never NARROW it** (pinned by `test_a_class_spread_does_not_depend_on_which_member_anchors_it`).
-The target band is `2.50 / 0.729` = **3.43× wide**. A class whose own priced spread exceeds that
+The target band is `2.50 / 0.75` = **3.33× wide**. A class whose own priced spread exceeds that
 cannot reach the ruled ≥80% occupancy from *any* member, and the shortfall is arithmetic, not tuning.
 
 ⛔ **BUT DO NOT READ THE RAW SPREAD.** `artillery` measures **324.5×** raw and **5.9×** on P10..P90,
@@ -201,7 +203,7 @@ because ONE member carries the entire number. Judging the class on the raw figur
 class that is within striking distance of the band. `tools/balance/band_granularity.py` reports both
 and leads with the trimmed one.
 
-| class | n | factions | raw | **P10..P90** | fits 3.43×? |
+| class | n | factions | raw | **P10..P90** | fits target 3.33×? |
 |---|--:|--:|--:|--:|:-:|
 | `mbt` | 42 | 22 | 22.9× | **6.1×** | no |
 | `line_breaker` | 30 | 15 | 24.7× | **4.2×** | no |
@@ -221,8 +223,10 @@ and leads with the trimmed one.
 | `closecombat` | 4 | 4 | 2.9× | **2.9×** | **YES** |
 | `archer` | 4 | 3 | 1.8× | **1.8×** | **YES** |
 
-⭐ **4 of 17 fit today, and the honest gap on the rest is 1.1×–3.2×, not one to two orders of
-magnitude.** That is a tractable repricing job — which is what the pipeline exists to do — rather
+⭐ **14 of 17 already fit the HARD band (7.0×); only 4 fit the target band (3.33×).** That gap is
+the work-sorting rule: inside the hard band is a REPRICING job, outside it (`scout_vehicle` 11.1×,
+`support` 10.1×, `artillery_tank` 8.3×) is a SCOPE question. The honest gap on the rest is
+1.1×–3.2×, not one to two orders of magnitude.** That is a tractable repricing job — which is what the pipeline exists to do — rather
 than the structural collapse the raw numbers implied. ⚠ An earlier revision of this section reported
 the raw spreads as the verdict; that was wrong and this replaces it.
 
@@ -248,14 +252,19 @@ third group is pipeline work.
 #### Granularity — the band is not the constraint, and that is measured
 
 At the shipped-mod cost resolution of **1.143×** (median of 266 adjacent-cost gaps across 14 peer
-mods, `tools/reference/peer_cost_grid.py`) the 3.43× target band holds **9.2 distinct rungs**.
+mods, `tools/reference/peer_cost_grid.py`) the 3.33× target band holds **9.0 distinct rungs** and
+the 7.0× hard band **14.6**.
 `mbt` has 42 members from **22 factions** — 4.6 per rung, filled from different factions, against
 Combined Arms' observed **4.67 units per distinct cost** at 215 armed units. **The band comfortably
 holds every class Cameo has.**
 
-⚠ The reverse problem is real though: Cameo prices 1341 units across only **105 distinct costs** at
-a **1.041× median step** — 0.078 distinct prices per unit against Combined Arms' 0.214. Prices are
-being separated below the resolution a player can perceive. Snapping to a ~1.14× grid costs nothing.
+⛔ **The price grid: 20 is the right ATOM and the wrong STEP** (`tools/balance/cost_grid.py`).
+Prices run 10–10,000 (a **1000× range**, median **1,200**) and **89% are already multiples of 20** —
+so a flat-20 snap changes almost nothing, because the over-precision is in the SPACING, not the last
+digit. A flat 20 is one perceptible notch only near **140 credits**, and 6% of the roster is at or
+below 200; at the median it is **1.7%**. Keep the atom and derive the step:
+`step(price) = max(20, 20 × round(0.143 × price / 20))` — 20 at 140, **160 at the median**, 700 at
+5,000. **105 distinct prices → 55**, median step 1.041× → 1.078×, 92% of units move by a median 2.0%.
 
 #### The two free wins, offered for a ruling
 

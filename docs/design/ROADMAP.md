@@ -191,9 +191,12 @@ measured against a ruler planted in the wrong place.
 
 ⛔ **But re-anchoring alone cannot fix it, and that is the larger finding.** Members are priced as
 RATIOS to the anchor, so moving the anchor SLIDES a class along the band and never NARROWS it
-(pinned by `tools/tests/test_band_law.py`). The target band is **3.43x wide** (2.50/0.729), and
-**13 of the 17 measurable classes are wider than that**. So the band law is not being broken by bad
-anchor picks; it is measuring an UNPRICED roster, which is what the pipeline exists to fix.
+(pinned by `tools/tests/test_band_law.py`). ⭐ **The two band widths SORT the remaining work.** On
+trimmed spreads, **14 of 17 classes already fit the HARD band (3.50/0.50 = 7.0x) and only 4 fit the
+target band (2.50/0.75 = 3.33x)**. Inside the hard band = a REPRICING job, which is what the
+pipeline exists to do. Outside it — `scout_vehicle` 11.1x, `support` 10.1x, `artillery_tank` 8.3x —
+= a SCOPE question: those members may not belong in one class at all. `support` is outside for a
+third reason entirely: it carries six of the eight negative-DPS extractor bugs.
 
 ⛔ **READ THE TRIMMED SPREAD, NEVER THE RAW ONE.** `artillery` measures **324.5x raw** and **5.9x**
 on P10..P90 — ONE member, `futuretech_athenacannon` at DPS **193,600** (24x the next artillery),
@@ -209,9 +212,13 @@ be fixed before those classes are priced at all.
 peer cost resolution of **1.143x** (`tools/reference/peer_cost_grid.py`, 266 adjacent-cost gaps) the
 3.43x band holds **9.2 distinct rungs**, and `mbt`'s 42 members come from **22 factions** — 4.6 per
 rung, against Combined Arms' observed 4.67 units per distinct cost. Every class Cameo has fits.
-⚠ The reverse is the real defect: Cameo prices 1341 units across only **105 distinct costs** at a
-**1.041x** step, finer than any of the 14 peers — separating prices below the resolution a player
-can perceive.
+⛔ **The price grid: 20 is the right ATOM and the wrong STEP** (`tools/balance/cost_grid.py`).
+Prices run 10-10,000 (a 1000x range, median **1,200**) and **89% are already multiples of 20**, so a
+flat-20 snap changes almost nothing. A flat 20 is one perceptible notch only near 140 credits, and
+6% of the roster is at or below 200. Keep the atom, derive the step:
+`step(price) = max(20, 20 * round(0.143 * price / 20))` -- 20 at 140, **160 at the median**, 700 at
+5,000. **105 distinct prices -> 55**; 92% of units move by a median 2.0%. A snap is a REPRICING and
+goes through the ledger + `apply_balance --confirm` + boot gate.
 
 ⭐ **Two free wins are available now, both maintainer calls, neither applied:** `tank_destroyer`
 `naxis_hetzer` 60% -> `ra1_allies_alliedtankdestroyer` **100%**; and `scout`, whose signed anchor

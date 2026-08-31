@@ -465,18 +465,37 @@ price(x, x) = (2x + 1)(x + 1) / 6              # both stats moved together
 x(P)        = (√(1 + 48P) − 3) / 4             # the inverse: what window a ring means
 ```
 
-| ring | value | stat window | exact? |
+⛔ **THE RINGS ARE DECLARED IN COST.** Maintainer, 2026-08-31: *"The 75% referred to the
+unit price not the stats"*, and *"let's use the full band from cost 50% and stats 50% to
+cost 3.5x and stats 2.5x"*. Cost is the space a player reads off the build palette; the
+stat window is the **derived** reading. ⭐ **Four of the five rings come out exact in both
+spaces at once** — which is exactly why this band beats the 4.00 ceiling it replaced
+(×2.7231 stats: round in neither space, and unexplainable to anyone who asked why).
+
+| ring | cost | stat window | exact in BOTH? |
 |---|--:|--:|:-:|
-| `FLOOR` | 0.500 | **×0.50** HP and DPS | ✅ exact |
-| `SWEET_LO` | 0.729 (35/48) | **×0.75** | ✅ exact — the maintainer's "75%" |
-| the anchor | 1.000 | **×1.00** | ✅ exact |
-| `SWEET_HI` | 2.500 | **×2.00** | ✅ exact — *"2× HP and 2× DPS"* |
-| `CEIL` | 4.000 | ×2.72 | ✗ — a generous LIMIT; ×2.5 → 3.50 and ×3 → 4.667 are the round ones |
+| `FLOOR` | **0.50** | **×0.50** HP and DPS | ✅ |
+| `SWEET_LO` | **0.75** | ×0.7707 | cost only — **and that is the ruling** |
+| the anchor | **1.00** | **×1.00** | ✅ |
+| `SWEET_HI` | **2.50** | **×2.00** | ✅ — *"2× HP and 2× DPS"* |
+| `CEIL` | **3.50** | **×2.50** | ✅ |
+
+⚠ **Do not "fix" `SWEET_LO` to 35/48 = 0.7292.** That is the cost of ×0.75 *stats*, and an
+earlier revision of this section set it there by reading "75%" as a stat window. It was
+ruled on directly and reverted. `test_SWEET_LO_is_a_PRICE_of_75_percent_and_NOT_the_cost_of_three_quarter_stats`
+fails if anyone tries again.
+
+The rejected ceilings, for the record: ×2.723 → 4.00 (round in neither space), ×3 → 4.667
+(wide enough that a class starts overlapping the epic bracket), ×4 → **7.50** (a member 7.5×
+its own anchor is not a class member — it is an epic, and epics are already band-exempt via
+`build_limit`, §8.4).
 
 **The maintainer derived `SWEET_HI` twice, independently, a month apart** — §8.1 above has
 carried *"verifier (250% cost = 2× HP + 2× DPS)"* since it was written. It is correct, and
 the same argument run downward is what makes `FLOOR = 0.50` exact rather than a round number
-someone liked.
+someone liked. The ×2.5 → 3.50 ceiling closes the set: the hard band is now exactly the
+**±2.5× stat window**, and the target band the **75%–250% price window**, each round in the
+space it is declared in.
 
 ⚠ **The rings are CURVES, not boxes.** `3(h+d) + 4hd = 28` is the *entire* 250% iso-cost line:
 
@@ -510,9 +529,17 @@ design is.**
 Members are priced as **ratios** to the anchor, so choosing a different anchor **slides** a
 class along the band and never **narrows** it (pinned by
 `test_a_class_spread_does_not_depend_on_which_member_anchors_it`). The target band is
-`2.50 / 0.729` = **3.43× wide**. A class whose own priced spread exceeds that therefore
-cannot reach the ruled ≥80% occupancy from *any* member. Measure it with
-**`tools/balance/band_granularity.py`**, never by eye.
+`2.50 / 0.75` = **3.33× wide** and the hard band `3.50 / 0.50` = **7.0×**. A class whose own
+priced spread exceeds those cannot reach the ruled ≥80% occupancy from *any* member.
+Measure it with **`tools/balance/band_granularity.py`**, never by eye.
+
+⭐ **And the two numbers it reports are a work-sorting rule, not one verdict.** On trimmed
+(P10..P90) spreads: **14 of 17 classes already fit the HARD band, and only 4 fit the target
+one.** A class inside the hard band is a **repricing** job — its members sit at plausible
+relative values and need pulling toward the anchor. A class outside it (`scout_vehicle`
+11.1×, `support` 10.1×, `artillery_tank` 8.3×) is a **scope** question: those members may
+not belong in one class at all. ⚠ `support` is outside for a third reason entirely — it is
+the class carrying six of the eight negative-DPS extractor bugs.
 
 #### Granularity — how many units actually fit, measured against 14 shipped mods
 
@@ -522,7 +549,8 @@ peer corpus in `docs/design/ORIGINAL_UNITS_PEER_OPENRA.md` (`tools/reference/`, 
 cost gaps, 14 mods): **the median adjacent cost step in a shipped OpenRA mod is 1.143×**,
 and per-mod it runs 1.056×–1.200×. So:
 
-> **the 3.43×-wide target band holds ≈ 9.2 distinct price rungs.**
+> **the 3.33×-wide target band holds ≈ 9.0 distinct price rungs**, and the 7.0× hard band
+> holds ≈ 14.6.
 
 ⭐ **A class with 42 members does not need 42 rungs.** Shipped mods deliberately price
 several units alike — Combined Arms runs **4.67 units per distinct cost** across 215 armed
@@ -531,11 +559,35 @@ members over 9.2 rungs is **4.6 per rung**, filled by different factions — the
 a shipped 215-unit mod already uses. **The band is wide enough. The problem was never
 capacity.**
 
-⚠ **Cameo's own price grid is finer than any peer's and should be coarsened**: 1341 buildable
-non-epic priced units across only **105 distinct costs** at a **1.041× median step** — 0.078
-distinct prices per unit against Combined Arms' 0.214 and Shattered Paradise's 0.293. Prices
-are being distinguished below the resolution a player can perceive. Snapping to a ~1.14× (or
-a fixed-credit) grid loses nothing and makes the rung structure legible.
+#### ⛔ The price grid — why a FLAT credit step is not a grid
+
+Maintainer proposal: *"having prices of units in steps of 20 is good enough"*. **20 is the
+right ATOM and the wrong STEP**, and the roster is what says so
+(`tools/balance/cost_grid.py`):
+
+* Cameo's prices run **10 – 10,000 credits, a 1000× range**, median **1,200**.
+* **89% of prices are ALREADY multiples of 20.** Snapping to a flat 20 changes almost
+  nothing, because the over-precision is in the SPACING, not the last digit.
+* A flat 20 is ~14% — one perceptible notch — only near **140 credits**. Just **6% of the
+  roster** sits at or below 200. At the median it is **1.7%**, eight times finer than
+  anything a player can read; at 5,000 it is 0.4%.
+* A 1.143× ladder cannot even be *expressed* on a flat 20 above ~140 — consecutive rungs
+  collide on the same multiple.
+
+So keep the atom and derive the step:
+
+```
+step(price) = max(20, 20 × round(0.143 × price / 20))
+```
+
+Every price stays a legible multiple of 20; adjacent rungs stay one perceptible notch
+apart. The step is 20 at 140 credits, **160 at the median**, 700 at 5,000. That takes the
+roster from **105 distinct prices to 55** (0.078 → 0.041 per unit, against Combined Arms'
+0.214) and the median adjacent step from **1.041× to 1.078×**. 92% of units move, median
+move 2.0%.
+
+⚠ A grid snap is a **repricing**: it goes through the ledger and `apply_balance --confirm`,
+must re-pass `check_band`, and must boot-gate. `cost_grid.py` proposes and never writes.
 
 #### How steep is Cameo's pricing, against the same 14 mods?
 

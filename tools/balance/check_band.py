@@ -4,10 +4,12 @@
 For every ledger unit tagged design.class_anchor = <class>, compute its
 class-formula price and the ratio price/cost0, then enforce the baseband law:
 
-  * hard band     50%..400%  of the class baseline cost0
-  * TARGET band   72.9%..250% of cost0 — target >=80% occupancy
-                  (maintainer 2026-08-31: *"50% to 400% is the hard limit ... the target
-                  band should be at 75% to 250% where most units are located"*)
+  * hard band     50%..350%  of the class baseline cost0   (= x0.50 .. x2.50 stats)
+  * TARGET band   75%..250%  of cost0 — target >=80% occupancy
+                  (maintainer 2026-08-31: *"the target band should be at 75% to 250% where
+                  most units are located"*, *"the 75% referred to the unit price not the
+                  stats"*, and *"let's use the full band from cost 50% and stats 50% to
+                  cost 3.5x and stats 2.5x"*)
 
 ⭐ EVERY ONE OF THOSE NUMBERS IS DERIVED, NOT PREFERRED (BALANCE_PIPELINE §8.1a).
 Hold speed and range at the anchor's and write h, d for the HP and DPS multipliers.
@@ -21,16 +23,17 @@ price collapses to a closed form — verified exactly against the module in
 
 So each ring of the band is just the price of a STAT WINDOW, and the useful ones are exact:
 
-    x = 0.50  ->  0.500   FLOOR       half the anchor's HP and DPS
-    x = 0.75  ->  0.729   SWEET_LO    three quarters      <- the maintainer's "75%"
-    x = 1.00  ->  1.000   the anchor itself
-    x = 2.00  ->  2.500   SWEET_HI    double              <- the maintainer's own derivation
-    x = 2.72  ->  4.000   CEIL        (not round in stat space; x=2.5 -> 3.50, x=3 -> 4.667)
+    x = 0.50  ->  0.500   FLOOR       half the anchor's HP and DPS      EXACT BOTH WAYS
+    x = 0.7707 -> 0.750   SWEET_LO    a 75% PRICE, per the ruling
+    x = 1.00  ->  1.000   the anchor itself                              EXACT BOTH WAYS
+    x = 2.00  ->  2.500   SWEET_HI    double                             EXACT BOTH WAYS
+    x = 2.50  ->  3.500   CEIL        two and a half                     EXACT BOTH WAYS
 
-⚠ THE 75% IS A STAT NUMBER, NOT A COST NUMBER. Three quarters of the anchor's HP and DPS
-costs **72.9%**, not 75%; 75% of the cost is x=0.7707. `SWEET_LO` is set to the derived
-72.9% so the ring means something in the space the design reasons in. Changing it to a
-literal 0.75 is a one-line edit and costs the derivation.
+⚠ THE RINGS ARE COST NUMBERS. The maintainer ruled it explicitly -- *"the 75% referred to
+the unit price not the stats"* -- and it is the right call: a price is what a player reads
+off the build palette, a stat multiplier is not. The stat window is the DERIVED reading,
+and it happens to come out round at four of the five rings, which is why this band beats
+the 4.00 ceiling it replaced (x2.7231 -- round in neither space).
 
 ⚠ AND THE RINGS ARE CURVES, NOT BOXES. `3(h+d) + 4hd = 28` is the entire 250% iso-cost
 line, so 2x HP with 2x DPS, 4x HP with 0.84x DPS, and 1x HP with 3.57x DPS all cost
@@ -59,13 +62,22 @@ import tier_chain  # noqa: E402
 LEDGER = ROOT / "docs/balance"
 ANCHORS = LEDGER / "class_anchors.json"
 
-# ⛔ DERIVED FROM THE STAT WINDOW, NOT CHOSEN. See the module docstring and
-# BALANCE_PIPELINE §8.1a. price(x, x) = (2x+1)(x+1)/6 at x = 0.5, 0.75, 1, 2.
-FLOOR      = 0.50           # x0.50 stats — exact
-SWEET_LO   = 35.0 / 48.0    # x0.75 stats — exact = 0.729166..., the maintainer's "75%"
-SWEET_HI   = 2.50           # x2.00 stats — exact
-CEIL       = 4.00           # x2.72 stats — a generous LIMIT, deliberately not a stat round number
-SOFT_FLOOR = SWEET_LO       # kept: the old name for the same ring, now derived
+# ⛔ RINGS ARE DECLARED IN **COST**, and every one of them is checked back through
+# price(x, x) = (2x+1)(x+1)/6. Maintainer ruling 2026-08-31, in two parts:
+#   (a) "The 75% referred to the unit PRICE not the stats" -- the rings live in cost space,
+#       which is the space players see, and the stat window is the DERIVED reading.
+#   (b) "the full band from cost 50% and stats 50% to cost 3.5x and stats 2.5x"
+# ⭐ FOUR OF THE FIVE RINGS ARE EXACT IN BOTH SPACES AT ONCE, which is what makes this
+# band better than the 4.00 ceiling it replaces (4.00 was x2.7231 stats -- round in
+# neither space, and unexplainable to anyone who asked why).
+FLOOR      = 0.50   # = x0.50 stats  EXACT BOTH WAYS
+SWEET_LO   = 0.75   # = x0.7707 stats -- round in COST only, and that is the ruling:
+                    #   "75%" is a price the player reads off the build palette.
+                    #   ⚠ Do NOT "fix" this to 35/48 = 0.7292 (the cost of x0.75 stats).
+                    #   An earlier revision did exactly that and had to be reverted.
+SWEET_HI   = 2.50   # = x2.00 stats  EXACT BOTH WAYS -- the maintainer's own derivation
+CEIL       = 3.50   # = x2.50 stats  EXACT BOTH WAYS
+SOFT_FLOOR = SWEET_LO   # kept: the old name for the same ring
 
 
 def fnum(v):

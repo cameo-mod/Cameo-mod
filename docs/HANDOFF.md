@@ -278,9 +278,22 @@ price(x, x) = (2x + 1)(x + 1) / 6              # both stats moved together
 x(P)        = (sqrt(1 + 48P) - 3) / 4          # what stat window a ring means
 ```
 
-`FLOOR 0.50` = ×0.50 stats · `SWEET_LO 0.729` = ×0.75 · anchor `1.00` = ×1 · `SWEET_HI 2.50` = ×2
-· `CEIL 4.00` = ×2.72. ⚠ **The "75%" is a STAT number: ¾ of the anchor's HP and DPS costs 72.9%**,
-so `check_band.SWEET_LO` is 35/48, not 0.75.
+⛔ **THE RINGS ARE COST NUMBERS** — ruled directly: *"The 75% referred to the unit price not the
+stats"*, and *"the full band from cost 50% and stats 50% to cost 3.5x and stats 2.5x"*.
+
+| ring | cost | stat window | exact in BOTH spaces? |
+|---|--:|--:|:-:|
+| `FLOOR` | **0.50** | **×0.50** | ✅ |
+| `SWEET_LO` | **0.75** | ×0.7707 | cost only — the ruling |
+| anchor | **1.00** | **×1.00** | ✅ |
+| `SWEET_HI` | **2.50** | **×2.00** | ✅ |
+| `CEIL` | **3.50** | **×2.50** | ✅ |
+
+⚠ **Do NOT "fix" `SWEET_LO` to 35/48 = 0.7292** (the cost of ×0.75 stats). An earlier revision did
+exactly that by reading "75%" as a stat window; it was ruled on and reverted, and
+`test_SWEET_LO_is_a_PRICE_of_75_percent_and_NOT_the_cost_of_three_quarter_stats` now fails anyone
+who tries again. Rejected ceilings: ×2.723 → 4.00 (round in neither space), ×3 → 4.667, ×4 → **7.50**
+(a member 7.5× its own anchor is an epic, and epics are already band-exempt via `build_limit`).
 
 Three consequences that change what the next job is:
 
@@ -290,8 +303,12 @@ Three consequences that change what the next job is:
 * **The anchor is at the LOWER QUARTILE of the band (26% of its log-width), not the centre** —
   a consequence of the entry-unit rule, not a preference.
 * ⛔ **RE-ANCHORING CANNOT NARROW A CLASS.** Members price as ratios to the anchor, so a new
-  anchor SLIDES the class and never shrinks it. 13 of 17 measurable classes are wider than the
-  3.43× band; that is repricing work, not anchor work.
+  anchor SLIDES the class and never shrinks it. That is repricing work, not anchor work.
+* ⭐ **The two band widths SORT the work.** On trimmed spreads, **14 of 17 classes already fit
+  the HARD band (7.0×) and only 4 fit the target band (3.33×)**. Inside the hard band = a
+  REPRICING job. Outside it (`scout_vehicle` 11.1×, `support` 10.1×, `artillery_tank` 8.3×) = a
+  SCOPE question — those members may not belong in one class. `support` is outside for a third
+  reason: it carries six of the eight negative-DPS extractor bugs.
 
 ⛔ **And read the TRIMMED spread.** `artillery` is 324.5× raw, **5.9×** on P10..P90 — one member
 (`futuretech_athenacannon`, DPS 193,600) is the whole number. Honest gaps are **1.1×–3.2×**.
@@ -300,11 +317,20 @@ Three consequences that change what the next job is:
 fix the extractor before pricing `support` or `line_breaker`.
 
 ⭐ **The band is not the constraint.** At the peer cost resolution of **1.143×** (14 shipped mods,
-266 gaps, `tools/reference/peer_cost_grid.py`) it holds **9.2 rungs**, and `mbt`'s 42 members come
-from 22 factions — 4.6 per rung, matching Combined Arms' 4.67 units per distinct cost. ⚠ Cameo's
-own grid is **1.041×**, finer than any peer: prices are separated below player-perceptible
-resolution. Cameo's cost elasticity is **1.16** against a peer median of **0.84** — a recorded
-exchange rate, not a defect.
+266 gaps, `tools/reference/peer_cost_grid.py`) the target band holds **9.0 rungs** and the hard band
+**14.6**; `mbt`'s 42 members come from 22 factions — 4.6 per rung, matching Combined Arms' 4.67
+units per distinct cost. Cameo's cost elasticity is **1.16** against a peer median of **0.84** — a
+recorded exchange rate, not a defect.
+
+⛔ **The price grid: 20 is the right ATOM and the wrong STEP** (`tools/balance/cost_grid.py`).
+Prices run 10–10,000 (a **1000× range**, median **1,200**) and **89% are already multiples of 20**,
+so a flat-20 snap changes almost nothing — the over-precision is in the SPACING. A flat 20 is one
+perceptible notch only near **140 credits**, and just 6% of the roster is at or below 200; at the
+median it is **1.7%**. Keep the atom, derive the step:
+`step(price) = max(20, 20 × round(0.143 × price / 20))` — 20 at 140 credits, **160 at the median**,
+700 at 5,000. Result: **105 distinct prices → 55**, median step 1.041× → 1.078×, 92% of units move
+by a median 2.0%. ⚠ A grid snap is a REPRICING: ledger → `apply_balance --confirm` → `check_band`
+→ boot gate. `cost_grid.py` proposes and never writes.
 
 
 **a. ✅ RULED 2026-08-23 — the nine "broken ladders" were never broken. Nothing to do.**

@@ -11,8 +11,13 @@ rings are EXACT stat windows:
     price(x, x) = (2x + 1)(x + 1) / 6
     x(P)        = (sqrt(1 + 48P) - 3) / 4
 
-    x = 0.50 -> 0.500 FLOOR    x = 0.75 -> 0.729 SWEET_LO
-    x = 1.00 -> 1.000 anchor   x = 2.00 -> 2.500 SWEET_HI
+    x = 0.50 -> 0.500 FLOOR      x = 1.00 -> 1.000 anchor
+    x = 2.00 -> 2.500 SWEET_HI   x = 2.50 -> 3.500 CEIL
+
+⭐ FOUR OF THE FIVE RINGS ARE EXACT IN BOTH SPACES AT ONCE. Only SWEET_LO is round in
+cost alone (0.75 cost = x0.7707 stats), and that is the ruling, not a gap: *"the 75%
+referred to the unit price not the stats"*. Rings are declared in COST — the space a
+player reads off the build palette — and the stat window is the derived reading.
 
 The maintainer derived SWEET_HI independently — *"cost from 100% to 250% makes sense
 because in the balance formula that is exactly true when a unit has 2x HP and 2x DPS"* —
@@ -66,14 +71,25 @@ def test_half_hp_and_half_dps_costs_exactly_the_hard_floor():
     assert check_band.FLOOR == pytest.approx(0.50, abs=1e-12)
 
 
-def test_three_quarter_stats_cost_the_target_floor_and_it_is_NOT_75_percent():
-    """⚠ The maintainer's "75%" is a STAT number. Three quarters of the anchor's HP and
-    DPS costs 72.9%, and SWEET_LO is set to that derived value rather than to a literal
-    0.75 — the whole point being that every ring names a stat window."""
-    assert price(0.75, 0.75) == pytest.approx(35.0 / 48.0, abs=1e-12)
-    assert check_band.SWEET_LO == pytest.approx(0.7291666, abs=1e-6)
-    # and the confusable reading — 75% of the COST — is a different, non-round window
+def test_two_and_a_half_stats_cost_exactly_the_hard_ceiling():
+    """The ruled CEIL. x2.5 on both stats is exactly 3.5x cost, which is what makes 3.50
+    a better ceiling than the 4.00 it replaced (4.00 = x2.7231, round in neither space)."""
+    assert price(2.5, 2.5) == pytest.approx(3.50, abs=1e-12)
+    assert check_band.CEIL == pytest.approx(3.50, abs=1e-12)
+
+
+def test_SWEET_LO_is_a_PRICE_of_75_percent_and_NOT_the_cost_of_three_quarter_stats():
+    """⛔ THE REGRESSION THIS FILE EXISTS TO PREVENT. An earlier revision read the
+    maintainer's "75%" as a STAT window and set SWEET_LO = 35/48 = 0.7292, the cost of
+    x0.75 HP and DPS. That was wrong and was ruled on directly: *"The 75% referred to the
+    unit price not the stats"*. Rings live in COST. Anyone "fixing" 0.75 back to 0.7292
+    because it looks underived will fail here."""
+    assert check_band.SWEET_LO == pytest.approx(0.75, abs=1e-12)
+    # 0.75 COST is this stat window -- not round, and that is fine
     assert price(0.7707, 0.7707) == pytest.approx(0.75, abs=1e-3)
+    # the confusable value, explicitly rejected
+    assert price(0.75, 0.75) == pytest.approx(35.0 / 48.0, abs=1e-12)
+    assert check_band.SWEET_LO != pytest.approx(35.0 / 48.0, abs=1e-6)
 
 
 # --------------------------------------------------------------------------------------
@@ -90,7 +106,7 @@ def test_two_stat_closed_form_matches_formula_py(h, d):
     assert price(h, d) == pytest.approx((3 * (h + d) + 4 * h * d + 2) / 12, abs=1e-12)
 
 
-@pytest.mark.parametrize("p", [0.5, 0.729166, 1.0, 2.5, 3.5, 4.0])
+@pytest.mark.parametrize("p", [0.5, 0.729166, 0.75, 1.0, 2.5, 3.5, 4.0])
 def test_the_inverse_recovers_the_stat_window(p):
     x = (math.sqrt(1 + 48 * p) - 3) / 4
     assert price(x, x) == pytest.approx(p, abs=1e-6)

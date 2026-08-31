@@ -994,13 +994,15 @@ claims:
     tolerance: 0
     what: >
       Classes with >=4 priced non-epic members whose OWN priced spread fits inside the
-      TARGET band (SWEET_HI/SWEET_LO = 2.50/0.729 = 3.43x, BALANCE_PIPELINE 8.1a), i.e.
+      TARGET band (SWEET_HI/SWEET_LO = 2.50/0.75 = 3.33x, BALANCE_PIPELINE 8.1a), i.e.
       classes for which SOME anchor could reach the ruled >=80% occupancy. ⛔ THE NUMBER
       THAT SAYS RE-ANCHORING IS NOT THE FIX: members are priced as RATIOS to the anchor,
       so moving the anchor SLIDES a class along the band and never NARROWS it (pinned by
       tools/tests/test_band_law.py). `archer` 1.8x, `tank_destroyer` 1.9x, `scout` 2.5x
       and `closecombat` 2.9x qualify. ⭐ 2 -> 4 on 2026-08-31 when the maintainer widened
-      the target band to 75%..250% -- the widening alone bought two classes.
+      the target band to 75%..250% -- the widening alone bought two classes. ⚠ Read it
+      NEXT TO the hard band: 14 of 17 classes fit 0.50..3.50 (7.0x) on trimmed spreads.
+      Inside the hard band = a REPRICING job; outside = a SCOPE question.
       ⚠ READ THE TRIMMED SPREAD, NOT THIS COUNT ALONE: `artillery` measures 324.5x raw and
       5.9x on P10..P90 because ONE member (futuretech_athenacannon, dps 193600) carries the
       whole number. `tools/balance/band_granularity.py` reports both and the outlier queue.
@@ -1071,6 +1073,32 @@ claims:
                            capture_output=True, text=True).stdout
       row = [l for l in out.splitlines() if 'POOLED, mod fixed effects' in l][0]
       print(re.findall(r'\*\*([0-9.]+)\*\*', row)[3])
+
+  - id: cameo_distinct_costs
+    value: 105
+    tolerance: 0
+    what: >
+      Distinct cost VALUES across the buildable non-epic priced roster (1341 units, 10..10000
+      credits, median 1200). ⭐ THE NUMBER BEHIND THE GRID RULING: 0.078 distinct prices per
+      unit against Combined Arms' 0.214 and Shattered Paradise's 0.293, at a 1.041x median
+      adjacent step -- finer than any of the 14 peer mods and far below the 1.143x a player
+      can perceive. ⛔ NOT fixed by snapping to a flat 20: 89% of prices are ALREADY multiples
+      of 20, because the over-precision is in the SPACING, not the last digit. The proposed
+      grid keeps 20 as the ATOM and derives the STEP
+      (step = max(20, 20*round(0.143*price/20))), taking this to 55.
+      Re-read with `tools/balance/cost_grid.py`.
+    docs: [docs/design/BALANCE_PIPELINE.md, docs/HANDOFF.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/balance')
+      import check_band as cb
+      vals = set()
+      for _fn, _a, u, _du in cb.collect({}):
+          c = cb.fnum((u.get('cost') or {}).get('v') if isinstance(u.get('cost'), dict)
+                      else u.get('cost'))
+          if c and c > 0 and not u.get('build_limit'):
+              vals.add(c)
+      print(len(vals))
 
   - id: buildable_aircraft_unclassified
     value: 127

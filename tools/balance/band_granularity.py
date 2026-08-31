@@ -114,25 +114,33 @@ def main() -> int:
         if isinstance(v, dict)}
     rows = collect_classes(anchors)
 
-    sweet_lo, sweet_hi = (2 * 0.75 + 1) * (0.75 + 1) / 6, cb.SWEET_HI
+    # ⚠ Read the rings from check_band, never re-derive them here. An earlier revision
+    # hardcoded (2*0.75+1)(0.75+1)/6 and silently kept the OLD floor when the maintainer
+    # ruled the rings are COST numbers -- two files then disagreed about the same law.
+    sweet_lo, sweet_hi = cb.SWEET_LO, cb.SWEET_HI
     width = sweet_hi / sweet_lo
     rungs = math.log(width) / math.log(PEER_STEP)
 
     out = []
     w = out.append
     w("# Band granularity — does each class FIT the baseband, and at what resolution?\n")
-    w(f"Target band **{sweet_lo:.3f} .. {sweet_hi:.2f}** of `cost0` "
-      f"(= the anchor's HP and DPS times **{stat_window(sweet_lo):.2f} .. "
-      f"{stat_window(sweet_hi):.2f}**), width **{width:.2f}x**.\n")
+    w(f"Target band **{sweet_lo:.2f} .. {sweet_hi:.2f}** of `cost0` "
+      f"(= the anchor's HP and DPS times **{stat_window(sweet_lo):.3f} .. "
+      f"{stat_window(sweet_hi):.2f}**), width **{width:.2f}x**. Hard band "
+      f"**{cb.FLOOR:.2f} .. {cb.CEIL:.2f}** (= x{stat_window(cb.FLOOR):.2f} .. "
+      f"x{stat_window(cb.CEIL):.2f} stats).\n")
     w(f"At the shipped-mod cost resolution of **{PEER_STEP}x** that band holds "
       f"**{rungs:.1f} distinct rungs**. A class with more members than rungs is NOT "
       f"overcrowded — peers deliberately price several units alike; what matters is that "
       f"the units sharing a rung come from DIFFERENT factions.\n")
     w("⛔ Read the TRIMMED spread, not the raw one. See the outlier list beneath.\n")
-    w("| class | n | factions | n/faction | raw spread | **P10..P90** | fits? | rungs used |")
-    w("|---|--:|--:|--:|--:|--:|:-:|--:|")
+    hard_w = cb.CEIL / cb.FLOOR
+    w(f"| class | n | factions | n/faction | raw spread | **P10..P90** | fits target "
+      f"{width:.2f}x? | fits HARD {hard_w:.1f}x? | rungs used |")
+    w("|---|--:|--:|--:|--:|--:|:-:|:-:|--:|")
 
     bugs, outliers, fits = [], [], 0
+    hard_fits = [0]
     for cls in sorted(rows, key=lambda k: -len(rows[k])):
         rs = rows[cls]
         if len(rs) < args.min_members:
@@ -145,9 +153,12 @@ def main() -> int:
         lo_i, hi_i = int(0.1 * len(pr)), min(len(pr) - 1, int(0.9 * len(pr)))
         trim = pr[hi_i][0] / pr[lo_i][0]
         ok = trim <= width
+        hard_ok = trim <= hard_w
         fits += ok
+        hard_fits[0] += hard_ok
         w(f"| `{cls}` | {len(pr)} | {len(facs)} | {len(pr)/len(facs):.1f} | {raw:.1f}x | "
           f"**{trim:.1f}x** | {'YES' if ok else 'no'} | "
+          f"{'**YES**' if hard_ok else '⛔ no'} | "
           f"{math.log(trim)/math.log(PEER_STEP):.0f} |")
 
         med = statistics.median([p for p, _a, _i in pr])
@@ -158,8 +169,14 @@ def main() -> int:
             elif p / med > OUT_HI or p / med < OUT_LO:
                 outliers.append((cls, a, p / med, i))
 
-    w(f"\nclasses whose trimmed spread FITS the target band: "
-      f"**{fits}** of {sum(1 for c in rows if len(rows[c]) >= args.min_members)}\n")
+    n_cls = sum(1 for c in rows if len(rows[c]) >= args.min_members)
+    w(f"\nclasses whose trimmed spread FITS the **target** band: **{fits}** of {n_cls}")
+    w(f"\nclasses whose trimmed spread FITS the **hard** band: "
+      f"**{hard_fits[0]}** of {n_cls}\n")
+    w("⭐ The gap between those two numbers is the actual work. A class inside the hard "
+      "band is a REPRICING job — its members exist at plausible relative values and need "
+      "to be pulled toward the anchor. A class outside it is a SCOPE question: those "
+      "members may not belong in one class at all.\n")
 
     if bugs:
         w("## ⛔ DATA BUGS — no repricing can fix these\n")
