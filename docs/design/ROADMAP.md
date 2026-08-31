@@ -143,6 +143,49 @@ The rest below did not touch yaml; each still needs a boot-gated machine.
 5. **IFV default-weapon guards** miss `ifv-archer`, `ifv-grenade`, `ifv-lightsniper`, so
    those passengers fire the specialist AND the default weapon (`audit_ifv_conditions` F3).
 
+## ⛔ P0 — THE SIGN-OFF QUEUE DISAGREES WITH WHAT WAS SIGNED (2026-08-30)
+
+Full evidence and the ordered gate list: [`BALANCE_COMPLETION_BRIEF.md`](BALANCE_COMPLETION_BRIEF.md).
+
+`anchor_readiness.py` ranks by **PRICING error** — how far the class formula's price sits from the
+unit's actual cost. Measured against the eight signed classes:
+
+| signed class | scored | median \|Δ\| | worst | verdict |
+|---|--:|--:|--:|---|
+| `flying_infantry` · `grenadier` · `mortar` | **1** each | 0–6% | ≤6% | ⚠ too few to judge |
+| `closecombat` · `archer` | 4 | 12–14% | 74–82% | ⚠ review outliers first |
+| `heavy_sniper` | 3 | 22% | 334% | ⚠ review outliers first |
+| `missile_vehicle` | 13 | **30%** | 373% | ⛔ **anchor does not describe its members** |
+| `special_forces` | 15 | **57%** | 523% | ⛔ **anchor does not describe its members** |
+
+And the three the tool calls **ready to sign today** — `dreadnought` 2%, `scout` 4%,
+`heavy_infantry` 7% — are exactly the three an agent self-signed on 2026-08-29 and which were
+correctly reverted. None is signed.
+
+⚠ **The two-metric confusion, for the third time this session.** The eight were signed against the
+≤1 bar quoted above in the P1 item (`closecombat` 0.1, `mortar` 0.1 …). Those are NOT these
+percentages — a different measure. Neither number is wrong; quoting one while meaning the other is.
+⛔ **An anchor prices ITSELF at 0% by construction**, so a one-member class reading 0% is not
+evidence of anything.
+
+**This does not re-open the maintainer's sign-off.** It says `apply_balance --confirm` on the
+current set would price `special_forces` and `missile_vehicle` through anchors their own readiness
+tool flags. Re-read the queue before the APPLY — it does not block the bell/macro flip.
+
+## ⛔ P0 — 82% OF THE BUILDABLE ROSTER HAS NO CLASS (2026-08-30)
+
+**336 of 1870 buildable actors are class-tagged (18.0%).** The formula cannot price an actor with
+no class, and must never infer one from numeric similarity: `anchor_readiness` lists eight class
+pairs that are *statistically indistinguishable* (`anti_air_vehicle` ↔ `missile_vehicle` 0.024,
+`archer` ↔ `flying_infantry` 0.048, `rocket_trooper` ↔ `special_forces` 0.053 …) and are separated
+only by **what they shoot at**. Coverage is a classification job, not a fitting job — and it is the
+hard ceiling on how much of the roster can ever be priced.
+
+⚠ Related, same section of the readiness report: several anchor ACTORS do not match their ruled
+specs (`mbt`/`tiger.nax` hp 100000≠240000; `missile_vehicle`/`ts_gdi_hovermlrs` hp 30000≠160000 —
+and that class is signed). The anchor is its class formula's ZERO POINT; reconcile spec against
+actor before fitting, per `anchor_decisions_log.md`, rather than fitting around it.
+
 ## ⛔ P1 — MAINTAINER CALL: PICK `MACRO_RATIO` (2026-08-30)
 
 ✅ **The `Heroic` question is RULED** (WEAPON_HEAVINESS §9.4a, maintainer 2026-08-30): the derived
