@@ -62,6 +62,33 @@ HAND_TUNED = {("Nuclear", "Super"), ("Sniper", "Light")}
 FLAT_BY_DESIGN = {"Sonic", "Magic"}
 
 NON_ARMOR = {"Shield", "HAZMAT", "COMPOSITE", "BLAST", "REFLECTOR", "ARMOR"}
+
+# ⭐ MAINTAINER RULING 2026-08-30 — `Heroic` IS CALCULATED BUT NOT MEASURED.
+#
+#   *"Since Heroic armor is only for hero units with build limits it should not be included in
+#    the 4x measurements. Only unlimited units should be counted. Heroic should only be
+#    calculated but not be part of the spread analysis."*
+#
+# It stays in `armor_rows`, so §12.0h's MEAN-100 still averages it and pricing still accounts for
+# the damage a weapon deals to heroes. It is removed from the two SPREAD metrics only.
+#
+# THE PREMISE WAS VERIFIED, NOT ASSUMED. Resolved over the live tree: **32 actors wear `Heroic`
+# — 30 buildable with `BuildLimit: 1`, 2 non-buildable campaign variants of a hero that is
+# itself limited, and ZERO buildable-unlimited units.** So the row describes an armor no unit
+# in the balance population wears; `reference_distribution.py` already drops every one of its
+# wearers (`if rec.get("build_limit") is not None: continue`).
+#
+# THREE INDEPENDENT REASONS CONVERGE, which is what makes this a ruling rather than a tweak:
+#   1. POPULATION — its wearers are build-limited heroes, balanced separately by explicit order.
+#   2. DERIVED — §12.0b makes it a PRODUCT (`Plate x Scout / PEAK`) recomputed from the finished
+#      profile, and §12.0d ALREADY excludes it from the class tilt for exactly that reason.
+#      Including a formula's output in a law about authored design was the inconsistency.
+#   3. MEASUREMENT — it was the MINIMUM row of **21%** of profiles, so it set the spread
+#      denominator for a fifth of the corpus. Worse, under `macro_spread` it draws one input
+#      from INF and one from VEH, so on an anti-air family BOTH are disfavoured and it falls as
+#      roughly the SQUARE of the ratio — `MissileAA` hit 8.70x on `Heroic 23` alone. A derived
+#      cell was setting the ceiling for a knob it does not describe.
+DERIVED_ROWS = {"Heroic"}
 # The armor LADDERS, from gen_weapon_template.LADDERS. Direction is only meaningful WITHIN one.
 LADDERS = {
     "INF": ["None", "Flak", "Plate", "Heroic"],
@@ -122,7 +149,10 @@ SPREAD_LO, SPREAD_HI = 2.0, 8.0
 # ⚠ REPORTING ONE OF THESE AS "THE ARMOR TILT" IS HOW THIS GOT MISREAD. Quoting 1.8x invites
 # "the armor system is flat" when §9.4 is being met exactly; quoting 4.0x hides that macro
 # specialisation is materially below every peer. Both are printed, always, side by side.
-MACRO_LADDERS = {"INF": ("None", "Flak", "Plate", "Heroic"),
+# ⚠ `Heroic` is NOT here, by the same 2026-08-30 ruling: it was inside the INF mean, where the
+# macro axis cannot move it as a rung, damping the very metric the axis is judged on (measured
+# 1.84x with it against 1.99x without, at ratio 1.50).
+MACRO_LADDERS = {"INF": ("None", "Flak", "Plate"),
                  "VEH": ("Scout", "Light", "Medium", "Heavy", "Superheavy"),
                  "BLD": ("Wood", "Concrete", "Steel")}
 MACRO_TARGET_LO, MACRO_TARGET_HI = 2.0, 8.0
@@ -271,7 +301,8 @@ def main() -> int:
         # generated laws do not apply to them.
         if (family, level) in HAND_TUNED:
             continue
-        rows = [v for v in armor_rows(data[(family, level)]).values() if v > 0]
+        rows = [v for k, v in armor_rows(data[(family, level)]).items()
+                if v > 0 and k not in DERIVED_ROWS]      # ruling above: calculated, not measured
         if not rows:
             continue
         spread = max(rows) / min(rows)

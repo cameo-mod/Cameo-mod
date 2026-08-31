@@ -150,5 +150,51 @@ class TheSweepFlagIsUsableAndBounded(unittest.TestCase):
         self.assertNotEqual(0, bad.returncode)
 
 
+class HeroicIsCalculatedButNotMeasured(unittest.TestCase):
+    """⭐ MAINTAINER RULING 2026-08-30 (WEAPON_HEAVINESS §9.4a).
+
+    *"Since Heroic armor is only for hero units with build limits it should not be
+    included in the 4x measurements ... Heroic should only be calculated but not be
+    part of the spread analysis."*
+
+    The distinction is the whole ruling: `Heroic` stays in MEAN-100 (a weapon really
+    does damage heroes, and pricing must see it) and leaves the two SPREAD metrics.
+    These pin BOTH halves, because dropping it from `armor_rows` outright would
+    silently change pricing.
+    """
+
+    def test_the_derived_row_is_named_and_excluded_from_the_spread_metrics(self):
+        import audit_versus_profile as A
+        self.assertIn("Heroic", A.DERIVED_ROWS)
+        for rungs in A.MACRO_LADDERS.values():
+            self.assertNotIn("Heroic", rungs)
+
+    def test_it_is_STILL_counted_by_MEAN_100(self):
+        """⛔ The half that is easy to over-apply. §12.0h averages every armor row; a
+        weapon that ignores heroes is not thereby cheaper. `armor_rows` must keep it."""
+        import audit_versus_profile as A
+        self.assertNotIn("Heroic", A.NON_ARMOR)
+        self.assertIn("Heroic", A.armor_rows({"Heroic": 50.0, "None": 100.0}))
+
+    def test_the_premise_still_holds_no_unlimited_unit_wears_heroic(self):
+        """The ruling rests on a fact about the tree, so the fact is a test. If a
+        buildable-unlimited actor ever gains `Heroic`, the exclusion stops being
+        justified and this fails rather than quietly mis-measuring the corpus."""
+        import miniyaml
+        rs = miniyaml.Ruleset(ROOT)
+        offenders = []
+        for name in rs.actors:
+            if name.startswith(("^", "-")):
+                continue
+            r = rs.resolve(name)
+            if r is None or "Heroic" not in {a.get("Type") for a in r.children_named("Armor")}:
+                continue
+            b = r.child("Buildable")
+            if b is not None and not b.get("BuildLimit"):
+                offenders.append(name)
+        self.assertEqual([], offenders,
+                         "buildable-unlimited actors now wear Heroic; §9.4a's premise is broken")
+
+
 if __name__ == "__main__":
     unittest.main()

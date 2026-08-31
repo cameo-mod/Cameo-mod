@@ -29,13 +29,16 @@
 
 claims:
   - id: macro_contrast_cameo
-    value: 1.63
+    value: 1.67
     tolerance: 0.03
     what: >
       Median MACRO CONTRAST (max/min over the INF, VEH and BLD ladder MEANS) across Cameo's
       MAIN warhead profiles. THE NUMBER THE MAINTAINER REJECTED AT "1.7x". ⛔ It is NOT
-      §9.4's row spread and must never be quoted as it — that one is max/min over the 16
+      §9.4's row spread and must never be quoted as it — that one is max/min over the
       individual ROWS and it passes. Frame: MACRO_LADDERS in audit_versus_profile.py.
+      ⭐ 1.63 -> 1.67 on 2026-08-30 when the maintainer ruled the DERIVED `Heroic` cell out of
+      both spread metrics (WEAPON_HEAVINESS §9.4a): it sat inside the INF mean where the macro
+      axis cannot move it as a rung, damping the metric it is judged on.
     docs: [docs/design/WEAPON_HEAVINESS.md, docs/audit/SUMMARY.md]
     measure: |
       import statistics, sys
@@ -43,6 +46,36 @@ claims:
       import audit_versus_profile as a
       v = [x for x in (a.macro_contrast(p) for p in a.profiles().values()) if x]
       print(round(statistics.median(v), 4))
+
+  - id: spread_median_families
+    value: 3.63
+    tolerance: 0.03
+    what: >
+      Median §9.4 ROW SPREAD across the 44 judged families (one level each, `armor_rows` minus
+      DERIVED_ROWS, FLAT_BY_DESIGN and HAND_TUNED skipped). ⛔ PINNED BECAUSE ITS ABSENCE CAUSED
+      A REAL ERROR: the audit reported only the OFFENDERS, never a central value, so "4.00x" was
+      quoted from memory — sometimes meaning this per-FAMILY figure, sometimes a per-WEAPON one
+      over a different population. A law with a target and no published central value invites
+      exactly that. Target is 4x, band [2,8]; 3.63 is the SHIPPED state at MACRO_RATIO 1.0.
+    docs: [docs/design/WEAPON_HEAVINESS.md, docs/audit/SUMMARY.md]
+    measure: |
+      import statistics, sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import audit_versus_profile as a
+      d = a.profiles()
+      fams = sorted({f for f, _ in d})
+      out = []
+      for fam in fams:
+          if fam in a.FLAT_BY_DESIGN:
+              continue
+          lvl = next((l for l in a.LEVELS if (fam, l) in d), None)
+          if lvl is None or (fam, lvl) in a.HAND_TUNED:
+              continue
+          rows = [v for k, v in a.armor_rows(d[(fam, lvl)]).items()
+                  if v > 0 and k not in a.DERIVED_ROWS]
+          if rows:
+              out.append(max(rows) / min(rows))
+      print(round(statistics.median(out), 4))
 
   - id: macro_contrast_peer_median
     value: 2.56

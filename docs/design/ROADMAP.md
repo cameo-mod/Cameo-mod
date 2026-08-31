@@ -135,44 +135,42 @@ The rest below did not touch yaml; each still needs a boot-gated machine.
 5. **IFV default-weapon guards** miss `ifv-archer`, `ifv-grenade`, `ifv-lightsniper`, so
    those passengers fire the specialist AND the default weapon (`audit_ifv_conditions` F3).
 
-## ⛔ P1 — MAINTAINER CALL: PICK `MACRO_RATIO` — AND RULE ON `Heroic` (2026-08-30)
+## ⛔ P1 — MAINTAINER CALL: PICK `MACRO_RATIO` (2026-08-30)
 
-The macro-contrast axis is **built, tested and shipping INERT** at `MACRO_RATIO = 1.0`. Sweep and
-full reasoning: `WEAPON_HEAVINESS.md` §9.7; `--macro=<r>` reproduces any row. Measured with
-`audit_versus_profile`'s OWN §9.4 definition (one level per family, `Heroic` included):
+✅ **The `Heroic` question is RULED** (WEAPON_HEAVINESS §9.4a, maintainer 2026-08-30): the derived
+cell is **calculated but not measured** — it stays in MEAN-100 and leaves both spread metrics.
+Premise verified against the tree first: **32 wearers, 30 with `BuildLimit: 1`, 2 non-buildable
+hero variants, ZERO buildable-unlimited units.** That ruling is what opened the ratio range.
 
-| `MACRO_RATIO` | §9.4 median | worst family | in band | macro contrast |
+The axis is **built, tested and shipping INERT** at `MACRO_RATIO = 1.0`. Measured with
+`audit_versus_profile`'s own post-ruling §9.4 definition:
+
+| `MACRO_RATIO` | §9.4 median | worst | in band | macro contrast |
 |--:|--:|--:|--:|--:|
-| **1.00** (ships) | 3.84× | 6.48× | **100%** | 1.63× |
-| **1.15** | **4.07×** | 7.84× | **100%** | 1.69× |
-| 1.25 | 4.08× | 8.70× | 98% ⛔ | 1.74× |
-| 1.35 | 4.17× | 8.70× | 98% ⛔ | 1.78× |
-| 1.50 | 4.26× | 8.70× | 98% ⛔ | 1.84× |
+| **1.00** (ships) | 3.63× | 5.71× | **100%** | 1.67× |
+| **1.15** | **4.03×** ← smallest that reaches the 4× target | 5.94× | **100%** | 1.84× |
+| 1.25 | 4.08× | 6.45× | **100%** | 1.90× |
+| 1.35 | 4.17× | 6.45× | **100%** | 1.95× |
+| **1.50** | 4.26× | 7.07× | **100%** | **2.00×** ← Romanov's Vengeance parity |
+| 1.75 | 4.52× | 8.25× | 95% ⛔ | 2.08× |
 
-⛔ **THREE THINGS THAT CHANGE THE OBVIOUS ANSWER:**
+**The two defensible picks:**
 
-1. **The shipped state is ALREADY 3.84×**, four percent under the 4× target. An earlier table in
-   this file said 3.30× → 4.26×; that was measured on the wrong row set (it excluded `Heroic` and
-   spanned all 139 templates rather than the 44 families the audit judges). There is much less
-   headroom than it looked.
-2. **`1.35` is NOT safe.** `MissileAA` breaches §9.4's 8× ceiling from ratio 1.20 up, because
-   `Heroic = Plate × Scout / PEAK` draws one input from INF and one from VEH — for an anti-air
-   family BOTH are disfavoured, so it falls as the SQUARE of the ratio (`Spaceship 200` vs
-   `Heroic 23` at 1.25). **`1.15` is the largest ratio that keeps 100% in band.**
-3. **The axis does not close the macro gap.** Across the whole legal range macro contrast moves
-   only **1.63× → 1.84×** against a like-for-like field median of **2.56×**. The remaining gap is
-   the profile ORDER (`build_order`'s interleave), not a scalar knob.
+* **`1.15`** — minimum intervention. §9.4 lands on its 4× target and nothing else moves much.
+* **`1.50`** — the largest fully-safe ratio, and the first to reach macro **2.00×**, which is
+  *exactly* Romanov's Vengeance's like-for-like figure. RV is the closest peer Cameo has:
+  `peer_armor_map.yaml` records Cameo's armor set as descending from the same Attacque Superior
+  lineage ("the highest-confidence mapping in the file"). At 1.50, Cameo reads like its own
+  armor ancestor with §9.4 at 4.26× and zero offenders.
 
-**So there are two decisions, and the second unlocks the first:**
+⛔ **1.75 breaks §9.4** (95%, worst 8.25×). The safe range ends at 1.50.
 
-* **Is a DERIVED cell one of the "rows" §9.4's band was written about?** §12.0b calls `Heroic` a
-  product recomputed from the finished profile, and §12.0d already excludes it from the tilt for
-  that reason. Excluding it from §9.4's min too would be consistent — and it moves the ceiling
-  from **1.15** to **1.50** (100% in band, median 4.26×). Measured both ways in §9.7.
-* **Then the ratio**: `1.15` under the law as written, or up to `1.50` if `Heroic` comes out.
+Flipping it is boot-gated — it regenerates every `^Warhead_*` template — so decide it together
+with item 0's bell flip and regenerate the tree once, not twice.
 
-Flipping it is boot-gated (it regenerates every `^Warhead_*` template), and it should be decided
-together with item 0's bell flip so the tree is regenerated once, not twice.
+⚠ Follow-up, not a blocker: `fit_band_floor` targets ≥2× in floats but the emit rounds to
+integers, so a family can land at 1.9855× (`CannonAP_Light` = 137/69). A round-aware floor would
+remove the non-monotonic in-band column.
 
 ## ⛔ P1 — MAINTAINER CALLS THAT BLOCK PRICING (2026-08-30)
 
