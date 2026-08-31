@@ -102,6 +102,12 @@ in YAML: the engine's `guerrillaForce == null` short-circuit creates the first
 guerrilla squad regardless of `JoinGuerrilla`, so its documented behavior is
 at most one harasser.
 
+The personality indicator uses a reusable `ObserverConditionNotification`
+trait rather than a personality-specific UI path. It announces once after a
+short delay to spectators and replay viewers through the local chat feed, while
+live players are excluded so opponent strategy is not revealed. Keep this
+observer-only behavior display-local and out of synchronized game state.
+
 ## Opt-in AI unit compositions (2026-08-24)
 
 When porting a composition selector into a divergent unit builder, keep the

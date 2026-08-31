@@ -2602,9 +2602,13 @@ and difficulty definitions remain shared. The Steamroller profile is documented
 as having **at most one harasser**: the engine short-circuits creation of the
 first guerrilla squad, and zero guerrilla units is not expressible in YAML.
 
-There is currently no in-game way to reveal which personality a bot drew.
-Cameo has no condition-triggered text-notification trait, and the CN observer
-announcement requires one. In-game personality confirmation is a follow-up.
+When a personality condition becomes active, the reusable
+`ObserverConditionNotification` trait announces the selected profile in the
+chat feed for spectators and replay viewers. Live players do not see this
+indicator because revealing an opponent's strategy would leak information.
+The notification is delayed by 25 ticks by default, appears once per trait
+instance, and is display-only and client-local. It is intentionally chat-only;
+there is no live-player UI decoration for the personality.
 
 `RushInterval` and `RushAttackScanRadius` are deliberately absent from the
 personality blocks. They are stale keys from an older squad manager and are not
@@ -2622,8 +2626,9 @@ behavior has not been observed in-game; that verification is a follow-up.
 Unit compositions are opt-in through `UseCompositions: true` on
 `UnitBuilderBotModuleCA`; existing unit builders continue to use their
 `UnitsToBuild` shares by default. Cameo has no separate baseline composition:
-each personality's `UnitsToBuild` table is the fallback whenever no active
-composition applies.
+the single shared `UnitsToBuild` table on the one unit builder is the fallback
+whenever no active composition applies. Compositions are therefore not
+personality-specific today.
 
 An active composition only biases the production queue categories named by its
 `UnitQueues` field; an empty list applies to every category. The current pilot
