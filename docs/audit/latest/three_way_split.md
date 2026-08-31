@@ -1,10 +1,10 @@
-# audit_three_way_split — 387 raw stacked weapons; 177 remain unreviewed
+# audit_three_way_split — 387 raw stacked weapons; 175 remain unreviewed
 
    1642  correct — exactly one main warhead
     317  none — utility / effect-only weapons
     387  RAW STACKS — structural inventory
-    210  reviewed — exact intentional composites
-    177  UNREVIEWED — classification backlog
+    212  reviewed — exact intentional composites
+    175  UNREVIEWED — classification backlog
 
   mains  weapons
       2    203
@@ -15,7 +15,7 @@
       7      7
       8      2
 
-86 distinct stacked combinations; the 20 most common:
+85 distinct stacked combinations; the 20 most common:
 
 | count | combination |
 |---|---|
@@ -30,7 +30,6 @@
 | 4 | CannonHE_Heavy + CannonHE_Medium |
 | 3 | 1Dam + Flame_Medium |
 | 3 | 1Dam + Demolition_Light |
-| 3 | Demolition_Light + Flame_Light |
 | 3 | 1Dam + Demolition_Heavy + Flame_Heavy |
 | 3 | Magic_Heavy + Tesla_Heavy |
 | 3 | CannonHE_Heavy + Concussion_Medium + Demolition_Light |
@@ -39,8 +38,9 @@
 | 3 | 1Dam + Flame_Light |
 | 3 | Bullet_Light + Demolition_Light |
 | 2 | CannonAP_Light + CannonHE_Heavy + CannonHE_Medium |
+| 2 | CannonAP_Light + CannonHE_Medium |
 
-Reviewed exact composites (210):
+Reviewed exact composites (212):
 
 - `AAGunBoatFlak`: Flak_Medium + Flak_MediumFlatCompatibility
 - `AAGunBoatFlak_elite`: Flak_Medium + Flak_MediumFlatCompatibility
@@ -85,6 +85,7 @@ Reviewed exact composites (210):
 - `EMPGrenadeExplode`: TemperatureCompatibility + TeslaAirCompatibility + TeslaSharedCompatibility + Tesla_Super
 - `EpigraphMG`: Bullet_MediumFlatCompatibility + CannonHE_Heavy
 - `ExecutionerDeath`: 10Dam_areanuke3 + 11Dam_areanuke3 + 1Dam_impact + 4Dam_areanuke1 + 7Dam_areanuke2 + 8Dam_areanuke2 + Damage
+- `ExplosiveDebris`: Demolition_Light + Flame_Light
 - `Fremen_RPG`: 1Dam + MissileAP_Heavy
 - `FutureEnforcerShotgun`: CannonHE_Medium + ShotgunChaingun + ShotgunShrapnelEnemy + ShotgunSmallArms + ShotgunTankDestroyer
 - `FutureEnforcerShotgunDeployed`: CannonHE_Medium + ShotgunChaingun + ShotgunShrapnelEnemy + ShotgunSmallArms + ShotgunTankDestroyer
@@ -178,6 +179,7 @@ Reviewed exact composites (210):
 - `SteelStalkerRailgunEScatter`: Quantum_HeavyFlatCompatibility + Tesla_Heavy
 - `SteelStalkerRailgun_EMP`: Quantum_HeavyFlatCompatibility + Tesla_Heavy
 - `SteelStalkerRailgun_elite`: Quantum_HeavyFlatCompatibility + Tesla_Heavy
+- `SyndicateFireballLauncherExplode`: PreservedFlat_Flame_Heavy + PreservedFlat_Flame_Light + PreservedFlat_Flame_Medium + PreservedFlat_HeavyFlameWeapon + PreservedFlat_LightFlameWeapon + PreservedFlat_MediumFlameWeapon
 - `TDIonCannonDamage`: IonCannon + Tesla_Heavy + Tesla_Super
 - `TSBombSonic`: Demolition_Heavy + Sonic_Heavy
 - `TSCABALEnlightedLaser`: CabalLaserGroundCompatibility + Laser_Heavy
@@ -253,5 +255,5 @@ Reviewed exact composites (210):
 - `wc2deathknightDeathCoilScatter_Right`: Flame_Heavy + Tesla_Super
 - `wc2deathknightFire`: Flame_Heavy + Tesla_Super
 
-WARN raw 387/387; unreviewed 177/177
+WARN raw 387/387; unreviewed 175/175
 Lower raw ratchets only for structural consolidation; lower the unreviewed ratchet only for exact reviewed decisions.

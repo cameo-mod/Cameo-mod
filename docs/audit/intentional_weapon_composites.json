@@ -1285,6 +1285,31 @@
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "a3a215e057219856729ead3610b5d91579324947774d414ad5fd069f4d64e4f9"
     },
+    "ExplosiveDebris": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Light": "separate 3000-damage wide conventional blast at Spread 1c562",
+        "Flame_Light": "separate 16000-damage close burn applying Temperature at scale 100"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "d77d688d240623a06df923a6d17ea60ce239dffd2e82c13da6041b1264f6261f",
+      "mains": [
+        "Demolition_Light",
+        "Flame_Light"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Devastator meltdown debris intentionally combines a weak wide explosion with a stronger close Temperature-bearing burn; folding either route into the other would multiply wide damage or erase the close fire payload.",
+      "referrer_digest": "82abc6f79645514ab4ebf295c832de0661e10e9919a17bfdb9799e2aaec3af16",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "devastator",
+          "path": "FireProjectilesOnDeath@MELTDOWN/Weapons"
+        }
+      ],
+      "review_reference": "Resolved state review: Devastator wide blast and close burning debris",
+      "weapon_digest": "72fbc09e4583fbd3d78ae82eeb380e5857f832ce780370d9252c6a542b4b0990"
+    },
     "Fremen_RPG": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -4162,6 +4187,39 @@
       ],
       "review_reference": "Resolved family review: primary hit plus status payload",
       "weapon_digest": "8b7a83b31184c63546bb26d27f096c1b76919ee3fa082e2f8caf372a2259e710"
+    },
+    "SyndicateFireballLauncherExplode": {
+      "category": "status payload",
+      "component_purposes": {
+        "PreservedFlat_Flame_Heavy": "independent heavy-tier flat flame application with Temperature scale 100",
+        "PreservedFlat_Flame_Light": "independent light-tier flat flame application with Temperature scale 100",
+        "PreservedFlat_Flame_Medium": "independent medium-tier flat flame application with Temperature scale 100",
+        "PreservedFlat_HeavyFlameWeapon": "independent legacy heavy-flame application with Temperature scale 100",
+        "PreservedFlat_LightFlameWeapon": "independent legacy light-flame application with Temperature scale 100",
+        "PreservedFlat_MediumFlameWeapon": "independent legacy medium-flame application with Temperature scale 100"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "8aec25a4020c3abbd87f2586b4fc8363b4979bcbfffec9de75916894eca0a19d",
+      "mains": [
+        "PreservedFlat_Flame_Heavy",
+        "PreservedFlat_Flame_Light",
+        "PreservedFlat_Flame_Medium",
+        "PreservedFlat_HeavyFlameWeapon",
+        "PreservedFlat_LightFlameWeapon",
+        "PreservedFlat_MediumFlameWeapon"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "The death fireball deliberately retains six flat Temperature-bearing applications plus three percentage Temperature applications. Per-warhead rounding, thresholds, observers, and state changes make a one-node fold behaviorally unproven even when nominal flat damage is preserved.",
+      "referrer_digest": "be476d60c49027174d4cd6702bfc5a515542a1f7de7688be0be496f5299d4e75",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_latinflametrooper",
+          "path": "FireWarheadsOnDeath/Weapon"
+        }
+      ],
+      "review_reference": "Resolved state review: nine independent Temperature-bearing applications",
+      "weapon_digest": "314b83ee74459aaf854fa4b16ae05a09d8aab3394a7a4363d46943441cb1f9fa"
     },
     "TDIonCannonDamage": {
       "category": "staged superweapon",

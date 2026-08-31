@@ -20,9 +20,9 @@ class WeaponDecisionBundleTests(unittest.TestCase):
 
     def test_every_unreviewed_reachable_weapon_occurs_once(self):
         names = [member for row in self.rows for member in row["members"]]
-        self.assertEqual(77, len(names))
+        self.assertEqual(75, len(names))
         self.assertEqual(len(names), len(set(names)))
-        self.assertEqual(58, len(self.rows))
+        self.assertEqual(56, len(self.rows))
 
     def test_reviewed_composites_are_not_presented_as_open_decisions(self):
         names = {member for row in self.rows for member in row["members"]}
@@ -33,9 +33,11 @@ class WeaponDecisionBundleTests(unittest.TestCase):
         self.assertNotIn("WaveArtilleryImpact", families)
         self.assertNotIn("RA2Virusgun3", families)
         self.assertNotIn("WaveTurretImpact", families)
+        self.assertNotIn("ExplosiveDebris", families)
+        self.assertNotIn("SyndicateFireballLauncherExplode", families)
         self.assertIn("SteelVulcan", families)
         self.assertIn("RA160mmE_rad_elite", families)
-        self.assertEqual(210, self.data["reviewed_reachable"])
+        self.assertEqual(212, self.data["reviewed_reachable"])
 
     def test_buckets_use_engine_defaults_and_mechanical_labels(self):
         counts = {
@@ -49,7 +51,7 @@ class WeaponDecisionBundleTests(unittest.TestCase):
         self.assertEqual({
             "target and state routing": (2, 2),
             "target routing": (16, 21),
-            "state delivery": (12, 19),
+            "state delivery": (10, 17),
             "legacy compatibility": (1, 1),
             "numbered warhead key": (1, 1),
             "no special mechanical signal": (26, 33),
@@ -76,10 +78,16 @@ class WeaponDecisionBundleTests(unittest.TestCase):
         self.assertEqual((8, 18), (multi_rows, multi_definitions))
 
     def test_report_is_fresh(self):
+        text = report.OUT.read_text(encoding="utf-8")
         self.assertEqual(
             report.rendered(self.data),
-            report.OUT.read_text(encoding="utf-8"),
+            text,
         )
+        self.assertIn(
+            "RedAlert2Mod / Naxis: Grille (`naxis_grille`)", text)
+        self.assertIn("and 552 more actors", text)
+        self.assertIn("transitive delivery: `TSTacticalChemMissile`", text)
+        self.assertIn("WEAPON_REDESIGN_RECOMMENDATIONS.md", text)
 
 
 if __name__ == "__main__":

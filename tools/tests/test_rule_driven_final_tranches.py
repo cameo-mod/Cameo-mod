@@ -139,7 +139,7 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
         self.assertEqual(232, counts["stacked_main_direct_actor_armament"])
         self.assertEqual(55, counts["stacked_main_indirect_weapon_graph"])
         self.assertEqual(387, counts["stacked_main_all_concrete"])
-        self.assertEqual(177, SPLIT_BASELINE)
+        self.assertEqual(175, SPLIT_BASELINE)
         self.assertEqual(131, BROADCAST_BASELINE)
 
 

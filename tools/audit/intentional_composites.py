@@ -195,6 +195,13 @@ DECISION_GROUPS = {
          ("Chemical_Heavy", "Flame_Heavy")),
         (("edenMobileLaserTiger",),
          ("CannonHE_Medium", "Laser_Heavy")),
+        (("ExplosiveDebris",),
+         ("Demolition_Light", "Flame_Light")),
+        (("SyndicateFireballLauncherExplode",),
+         ("PreservedFlat_Flame_Heavy", "PreservedFlat_Flame_Light",
+          "PreservedFlat_Flame_Medium", "PreservedFlat_HeavyFlameWeapon",
+          "PreservedFlat_LightFlameWeapon",
+          "PreservedFlat_MediumFlameWeapon")),
     ),
     "target-routed composite": (
         (("FutureEnforcerShotgun", "FutureEnforcerShotgunDeployed",
@@ -615,6 +622,58 @@ ROLE_BLEND_DECISIONS = {
     },
 }
 
+TECHNICAL_DECISION_OVERRIDES = {
+    "ExplosiveDebris": {
+        "component_purposes": {
+            "Demolition_Light": (
+                "separate 3000-damage wide conventional blast at Spread 1c562"
+            ),
+            "Flame_Light": (
+                "separate 16000-damage close burn applying Temperature at scale 100"
+            ),
+        },
+        "rationale": (
+            "Devastator meltdown debris intentionally combines a weak wide explosion "
+            "with a stronger close Temperature-bearing burn; folding either route "
+            "into the other would multiply wide damage or erase the close fire payload."
+        ),
+        "review_reference": (
+            "Resolved state review: Devastator wide blast and close burning debris"
+        ),
+    },
+    "SyndicateFireballLauncherExplode": {
+        "component_purposes": {
+            "PreservedFlat_Flame_Heavy": (
+                "independent heavy-tier flat flame application with Temperature scale 100"
+            ),
+            "PreservedFlat_Flame_Light": (
+                "independent light-tier flat flame application with Temperature scale 100"
+            ),
+            "PreservedFlat_Flame_Medium": (
+                "independent medium-tier flat flame application with Temperature scale 100"
+            ),
+            "PreservedFlat_HeavyFlameWeapon": (
+                "independent legacy heavy-flame application with Temperature scale 100"
+            ),
+            "PreservedFlat_LightFlameWeapon": (
+                "independent legacy light-flame application with Temperature scale 100"
+            ),
+            "PreservedFlat_MediumFlameWeapon": (
+                "independent legacy medium-flame application with Temperature scale 100"
+            ),
+        },
+        "rationale": (
+            "The death fireball deliberately retains six flat Temperature-bearing "
+            "applications plus three percentage Temperature applications. Per-warhead "
+            "rounding, thresholds, observers, and state changes make a one-node fold "
+            "behaviorally unproven even when nominal flat damage is preserved."
+        ),
+        "review_reference": (
+            "Resolved state review: nine independent Temperature-bearing applications"
+        ),
+    },
+}
+
 
 def component_purpose(category: str, main: str) -> str:
     if category == "staged superweapon":
@@ -654,10 +713,11 @@ def curated_decisions() -> dict[str, dict[str, object]]:
                 if name in decisions:
                     raise ValueError(f"duplicate reviewed weapon {name}")
                 role_decision = ROLE_BLEND_DECISIONS.get(name)
+                exact_decision = role_decision or TECHNICAL_DECISION_OVERRIDES.get(name)
                 if category == "maintainer-approved role blend" and role_decision is None:
                     raise ValueError(f"missing exact maintainer role decision for {name}")
                 component_purposes = (
-                    role_decision["component_purposes"] if role_decision is not None
+                    exact_decision["component_purposes"] if exact_decision is not None
                     else {
                         main: component_purpose(category, main)
                         for main in expected_mains
@@ -669,7 +729,7 @@ def curated_decisions() -> dict[str, dict[str, object]]:
                     "mains": list(expected_mains),
                     "overlap_justification": CATEGORY_OVERLAP[category],
                     "rationale": (
-                        role_decision["rationale"] if role_decision is not None
+                        exact_decision["rationale"] if exact_decision is not None
                         else (
                             f"Exact family decision for {', '.join(names)}: "
                             f"{CATEGORY_RATIONALES[category]}; reviewed components are "
@@ -677,7 +737,7 @@ def curated_decisions() -> dict[str, dict[str, object]]:
                         )
                     ),
                     "review_reference": (
-                        role_decision["review_reference"] if role_decision is not None
+                        exact_decision["review_reference"] if exact_decision is not None
                         else CATEGORY_REFERENCES[category]
                     ),
                 }
@@ -685,6 +745,10 @@ def curated_decisions() -> dict[str, dict[str, object]]:
             name for names, _mains in DECISION_GROUPS["maintainer-approved role blend"]
             for name in names}:
         raise ValueError("exact maintainer role decision set differs from curated group")
+    if not set(TECHNICAL_DECISION_OVERRIDES) <= {
+            name for names, _mains in DECISION_GROUPS["status payload"]
+            for name in names}:
+        raise ValueError("technical decision overrides differ from status-payload groups")
     return decisions
 
 

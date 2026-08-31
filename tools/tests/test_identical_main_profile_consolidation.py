@@ -65,11 +65,10 @@ class IdenticalMainProfileConsolidationTests(unittest.TestCase):
         )
 
     def test_stateful_fireball_case_remains_separate(self):
-
+        resolved = self.rules.resolve_weapon("SyndicateFireballLauncherExplode")
         fireball_nodes = {
             node.key.removeprefix("Warhead@"): node
-            for node in main_warhead_nodes(
-                self.rules.resolve_weapon("SyndicateFireballLauncherExplode"))
+            for node in main_warhead_nodes(resolved)
         }
         preserved = {
             "PreservedFlat_HeavyFlameWeapon",
@@ -82,6 +81,13 @@ class IdenticalMainProfileConsolidationTests(unittest.TestCase):
             self.assertEqual("4000", node.get("Damage"))
             self.assertEqual("Temperature", node.get("PhysicalStateName"))
             self.assertEqual("100", node.get("PhysicalStateScale"))
+        temperature_nodes = [
+            node for node in resolved.children
+            if node.key.startswith("Warhead@")
+            and node.get("PhysicalStateName") == "Temperature"
+            and node.get("PhysicalStateScale") == "100"
+        ]
+        self.assertEqual(9, len(temperature_nodes))
 
     def test_lockdown_descendants_keep_their_original_routes(self):
         for name, (flak_damage, chaingun_damage) in LOCKDOWN_PINS.items():

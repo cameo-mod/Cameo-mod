@@ -7,6 +7,8 @@ import argparse
 import pathlib
 
 from plan_reachable_stack_backlog import build
+from intentional_composites import resolved_referrer_index
+from miniyaml import Ruleset
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -20,6 +22,62 @@ BUCKETS = (
     "numbered warhead key",
     "no special mechanical signal",
 )
+
+
+def transitive_actor_referrers(index, weapon_names):
+    """Resolve weapon-to-weapon delivery chains back to their active actors."""
+    actors = set()
+    stages = set()
+    pending = list(weapon_names)
+    seen = {name.lower() for name in weapon_names}
+    while pending:
+        current = pending.pop()
+        for referrer in index.get(current.lower(), []):
+            if referrer["kind"] == "actor":
+                actors.add(referrer["name"])
+                continue
+            name = referrer["name"]
+            stages.add(name)
+            if name.lower() not in seen:
+                seen.add(name.lower())
+                pending.append(name)
+    return sorted(actors), sorted(stages)
+
+
+def source_scope(path):
+    parts = str(path or "").replace("\\", "/").split("/")
+    if "ContentPacks" in parts:
+        start = parts.index("ContentPacks") + 1
+        end = parts.index("yaml") if "yaml" in parts[start:] else len(parts) - 1
+        return " / ".join(parts[start:end])
+    if "rules" in parts:
+        return "shared rules"
+    return "shared content"
+
+
+def actor_label(rules, name):
+    actor = rules.resolve(name)
+    tooltip = actor.child("Tooltip") if actor is not None else None
+    display = tooltip.get("Name") if tooltip is not None else None
+    if not display or display.startswith("actor_") or display.startswith("notification-"):
+        display = name
+    elif display.lower() != name.lower():
+        display = f"{display} (`{name}`)"
+    else:
+        display = f"`{name}`"
+    source = rules.actor(name)
+    return f"{source_scope(source.file if source is not None else '')}: {display}"
+
+
+def enrich_referrers(rows):
+    rules = Ruleset(ROOT)
+    index = resolved_referrer_index(rules)
+    for row in rows:
+        actors, stages = transitive_actor_referrers(index, row["members"])
+        row["actor_count"] = len(actors)
+        row["actors"] = [actor_label(rules, name) for name in actors]
+        row["delivery_stages"] = stages
+    return rows
 
 
 def bucket(flags: dict[str, bool]) -> str:
@@ -83,6 +141,7 @@ def decision_rows(data=None):
 
 def rendered(data=None) -> str:
     rows, data = decision_rows(data)
+    enrich_referrers(rows)
     lines = [
         "# Remaining reachable weapon decisions",
         "",
@@ -92,6 +151,8 @@ def rendered(data=None) -> str:
         "Three independent reviews found no mechanically exact fold in this",
         "remaining set; each row requires an armor, geometry, targeting, state,",
         "or progression decision before its live behavior can be changed.",
+        "The player-facing recommendation for every family is maintained in",
+        "`docs/design/WEAPON_REDESIGN_RECOMMENDATIONS.md`.",
         "",
         f"- Raw reachable stacked definitions: **{data['reachable_stacked']}**",
         f"- Exact reviewed composites: **{data['reviewed_reachable']}**",
@@ -121,6 +182,18 @@ def rendered(data=None) -> str:
             lines.append(
                 f"- **`{row['family']}`** ({len(row['members'])}; {signals}): "
                 f"{members}")
+            actors = row["actors"][:8]
+            actor_text = "; ".join(actors) if actors else "weapon-chain only"
+            if row["actor_count"] > len(actors):
+                actor_text += f"; and {row['actor_count'] - len(actors)} more actors"
+            lines.append(f"  - active users: {actor_text}")
+            if row["delivery_stages"]:
+                stages = row["delivery_stages"][:8]
+                stage_text = ", ".join(f"`{stage}`" for stage in stages)
+                if len(row["delivery_stages"]) > len(stages):
+                    stage_text += (
+                        f", and {len(row['delivery_stages']) - len(stages)} more stages")
+                lines.append(f"  - transitive delivery: {stage_text}")
             for fingerprint in row["fingerprints"]:
                 mains = " + ".join(fingerprint["mains"])
                 fingerprint_members = ", ".join(

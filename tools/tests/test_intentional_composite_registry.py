@@ -31,10 +31,10 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
 
     def test_exact_reviewed_name_set_and_schema_are_pinned(self):
         names = sorted(self.manifest["entries"])
-        self.assertEqual(210, len(names))
+        self.assertEqual(212, len(names))
         self.assertEqual(set(reviewed.curated_decisions()), set(names))
         self.assertEqual(
-            "0018deda4abaca69feab5e6cf3efdc0ed2009b79c0da30356f69e43d75db06b1",
+            "63c5a317d71189769af463f6a1da31626b518e1e9d9c30a96c2c5617ceab8b1e",
             hashlib.sha256(("\n".join(names) + "\n").encode()).hexdigest(),
         )
         self.assertEqual([], reviewed.validate_manifest(
@@ -112,17 +112,31 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
             "VolkovMagneticWeapon", "RA2SCUD", "WaveTurretImpact",
             "RA2Virusgun3", "FutureTankCannons", "SamuraiBladeCharged",
             "wc2deathknightFire", "RA2Robotmm", "Laboratory_Bioball",
-            "TSRPGTowerRail", "TankBusterBeamCannon",
+            "TSRPGTowerRail", "TankBusterBeamCannon", "ExplosiveDebris",
+            "SyndicateFireballLauncherExplode",
         }
         redesign_hazards = {
             "RA160mmE_rad_elite", "SandmarineTuskFire", "SteelVulcan",
             "GuardianShoot", "NaxCorrosionRocketTrooper_elite",
             "d2k_air_drone_guns_upgrade", "TSSonicZapWeapon",
-            "Type97PlasmaCannon", "SyndicateFireballLauncherExplode",
+            "Type97PlasmaCannon",
         }
         names = set(self.manifest["entries"])
         self.assertTrue(reviewed_signatures <= names)
         self.assertTrue(redesign_hazards.isdisjoint(names))
+
+    def test_state_composite_purposes_name_every_independent_application(self):
+        debris = self.manifest["entries"]["ExplosiveDebris"]
+        self.assertIn("wide conventional blast", debris["component_purposes"][
+            "Demolition_Light"])
+        self.assertIn("Temperature", debris["component_purposes"]["Flame_Light"])
+
+        fireball = self.manifest["entries"]["SyndicateFireballLauncherExplode"]
+        self.assertEqual(6, len(fireball["component_purposes"]))
+        for purpose in fireball["component_purposes"].values():
+            self.assertIn("independent", purpose)
+            self.assertIn("Temperature scale 100", purpose)
+        self.assertIn("nine independent", fireball["review_reference"])
 
     def test_reviewed_weapon_is_reachable_directly_with_exact_referrer(self):
         entry = self.manifest["entries"]["TSHellfireSonic"]
@@ -251,7 +265,7 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
         self.assertEqual(0, status)
         self.assertEqual(report, split.REPORT.read_text(encoding="utf-8"))
         self.assertIn("387 raw stacked weapons", report)
-        self.assertIn("177 remain unreviewed", report)
+        self.assertIn("175 remain unreviewed", report)
         self.assertEqual(
             serialized(self.current),
             INVENTORY_REPORT.read_text(encoding="utf-8"),
