@@ -184,10 +184,39 @@ measured.** `anchor_readiness.py` now reports anchor INTEGRITY, and it is worse 
 | classes with **ZERO tagged members** | **5** — `commando` `flying_infantry` `grenadier` `mortar` `pure_sniper` |
 | of those five, **SIGNED** | **3** — `flying_infantry` `grenadier` `mortar` |
 
-⭐ **`special_forces` anchors on an actor at the 13th percentile of its own 15 members — and THAT
-is its 57% median pricing error.** The zero point is an outlier at the bottom of the population it
-defines, so every member is measured against a ruler planted in the wrong place. Fixable by moving
-the ANCHOR, without touching the formula.
+⭐ **`special_forces` puts only 20% of its own members in the sweet spot §8.1 requires 80% of them
+to occupy** (`anchor_readiness.py --propose-anchors`), and THAT is its 57% median pricing error.
+The zero point is an outlier at the bottom of the population it defines, so every member is
+measured against a ruler planted in the wrong place.
+
+⛔ **But re-anchoring alone cannot fix it, and that is the larger finding.** Members are priced as
+RATIOS to the anchor, so moving the anchor SLIDES a class along the band and never NARROWS it
+(pinned by `tools/tests/test_band_law.py`). The target band is **3.43x wide** (2.50/0.729), and
+**13 of the 17 measurable classes are wider than that**. So the band law is not being broken by bad
+anchor picks; it is measuring an UNPRICED roster, which is what the pipeline exists to fix.
+
+⛔ **READ THE TRIMMED SPREAD, NEVER THE RAW ONE.** `artillery` measures **324.5x raw** and **5.9x**
+on P10..P90 — ONE member, `futuretech_athenacannon` at DPS **193,600** (24x the next artillery),
+carries the entire number. Across the board the honest gap is **1.1x-3.2x**, not orders of
+magnitude: `mbt` 6.1x, `line_breaker` 4.2x, `special_forces` 5.8x, `scout_vehicle` 11.1x.
+That is a tractable repricing job. **`tools/balance/band_granularity.py`** reports raw, trimmed,
+the outlier queue and the data bugs; ⛔ it also found **8 members with NEGATIVE DPS**
+(`tkm_battlebus` -600, `cabal_engineer` -650, six medics/mechanics) where a heal armament is being
+summed as damage by `formula.spread_damage_sum` — an extractor bug, not a pricing one, and it must
+be fixed before those classes are priced at all.
+
+⭐ **The band is NOT the constraint, and that is now measured against 14 shipped mods.** At the
+peer cost resolution of **1.143x** (`tools/reference/peer_cost_grid.py`, 266 adjacent-cost gaps) the
+3.43x band holds **9.2 distinct rungs**, and `mbt`'s 42 members come from **22 factions** — 4.6 per
+rung, against Combined Arms' observed 4.67 units per distinct cost. Every class Cameo has fits.
+⚠ The reverse is the real defect: Cameo prices 1341 units across only **105 distinct costs** at a
+**1.041x** step, finer than any of the 14 peers — separating prices below the resolution a player
+can perceive.
+
+⭐ **Two free wins are available now, both maintainer calls, neither applied:** `tank_destroyer`
+`naxis_hetzer` 60% -> `ra1_allies_alliedtankdestroyer` **100%**; and `scout`, whose signed anchor
+`naxis_naxiriflesoldier` **is not a priced member of its own class**, -> `ra1_allies_rifleinfantry`
+**83%** (over target, and the archetypal scout-tier rifleman on the role axis too).
 
 **You cannot engineer a ladder for classes that have no members.** The vehicle ladder worked
 because those classes have real populations (`mbt` 40, `scout_vehicle` 27, `high_tech_tank` 25).

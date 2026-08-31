@@ -1990,7 +1990,7 @@ Laws:
 ### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
 
 ```
-effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x0.529 measured
+effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x0.572 measured
 ```
 The factor is MEASURED from the live ruleset, never frozen — the Shield ladder is generated
 and has moved repeatedly. ⚠ **`Integrity` is NOT a shield and is NOT counted**: it absorbs
@@ -2013,7 +2013,7 @@ all 43 Protoss shields (`InitialPercentageStrength: 100`, `RequiresCondition: !d
 report a shield-free roster. Only a POSITIVE token gates.
 
 **The weapon side gets its own weight, not a rung.** `armor_weights()` carries a 17th `Shield`
-row at the measured baseline damage share (**1.432%**), taken OUT of the 16 class rows so the
+row at the measured baseline damage share (**1.561%**), taken OUT of the 16 class rows so the
 weights still sum to 1.0; `weighted_versus` iterates the weights, never `ARMORS`. Effect:
 +0.65% (Bullet) to +3.47% (Tesla). `effective_density` deliberately stays on `ARMORS` — it
 counts BODIES, and a shield sits on a body the class row already counted.

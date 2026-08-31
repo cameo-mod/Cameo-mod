@@ -425,12 +425,15 @@ fail to help, it HID the failure. **Only the ANCHOR is frozen**, because it defi
 is what makes the class formula a formula. The baseband ratio below is unchanged and still enforced
 by `check_band.py`, on price RATIOS — it never needed a nominated actor.
 
-The class **baseline** (100% cost) and **verifier** (250% cost = 2× HP + 2× DPS) bound a *band where
+The class **baseline** (100% cost) and the 250% ceiling (**= 2× HP + 2× DPS**) bound a *band where
 most units live*. Distribution is deliberately uneven:
-- **Sweet spot 100%–250% cost** — ~**80% of all units**, skewed toward the **baseline (100%)**.
-- **Hard caps 50%–400%** — only a few units below baseline or above the verifier.
-- **★ The formula BREAKS DOWN below ~75% cost** — units become too weak for their price (a
-  600¢ tank vs an 800¢ base; the Naxis Rifle Recruit at 75¢). **75% is the practical FLOOR**, not 50.
+- **⭐ TARGET BAND 72.9%–250% cost** (maintainer 2026-08-31: *"the target band should be at 75% to
+  250% where most units are located"*) — ~**80% of all units**, skewed toward the **baseline**.
+  ⚠ The floor is **72.9%, not 75%**: see §8.1a — the maintainer's "75%" is a STAT number, and
+  ¾ of the anchor's HP and DPS costs 0.729, while 75% of the *cost* is ×0.771 stats.
+- **Hard caps 50%–400%** — only a few units below the target floor or above 250%.
+- **★ The 50% floor is not a guess either** — it is exactly HALF the anchor's HP and DPS, the
+  same derivation as the 250% ceiling run downward (§8.1a).
 - **★ Price ⇒ tech-tier GATE mapping (maintainer 2026-07-25).** Cost above the baseline must be
   *earned* by a gate (the 2.5× verifier already is — e.g. the Forgotten Soldier is an upgrade-unlock
   on Tier-2/Radar while its baseline is a plain Tier-1 unit). The rule:
@@ -444,6 +447,112 @@ most units live*. Distribution is deliberately uneven:
   Report the **100–200% ungated occupancy** (target ≥ 80%). Gate detection = `design.tech_tier ≥ 3`,
   a promotion/upgrade token in `prerequisites`, or `build_limit`/hero template. Wire into
   `run_all.sh`. This turns the baseband + tier-gate from remembered rules into an **enforced gate**.
+
+### 8.1a ⭐ WHY THOSE NUMBERS — the band law is DERIVED, not preferred
+
+⛔ **Read this before proposing any band ring, and before "re-anchoring" a class to fix
+occupancy.** Every constant in `check_band.py` is the price of a **stat window**, and the
+derivation is a closed form that `tools/tests/test_band_law.py` checks against
+`formula.py` itself at every point quoted here.
+
+Hold speed and range at the anchor's, and write `h`, `d` for the HP and DPS multipliers.
+`formula.class_baseline_estimators` is then `O = (h+1+1+d)/4`, `P = (h·1 + 1·d)/2`,
+`Q = h·1·1·d`, and `price = (O+P+Q)/3` collapses to:
+
+```
+price(h, d) = (3(h + d) + 4hd + 2) / 12        # SYMMETRIC in h and d
+price(x, x) = (2x + 1)(x + 1) / 6              # both stats moved together
+x(P)        = (√(1 + 48P) − 3) / 4             # the inverse: what window a ring means
+```
+
+| ring | value | stat window | exact? |
+|---|--:|--:|:-:|
+| `FLOOR` | 0.500 | **×0.50** HP and DPS | ✅ exact |
+| `SWEET_LO` | 0.729 (35/48) | **×0.75** | ✅ exact — the maintainer's "75%" |
+| the anchor | 1.000 | **×1.00** | ✅ exact |
+| `SWEET_HI` | 2.500 | **×2.00** | ✅ exact — *"2× HP and 2× DPS"* |
+| `CEIL` | 4.000 | ×2.72 | ✗ — a generous LIMIT; ×2.5 → 3.50 and ×3 → 4.667 are the round ones |
+
+**The maintainer derived `SWEET_HI` twice, independently, a month apart** — §8.1 above has
+carried *"verifier (250% cost = 2× HP + 2× DPS)"* since it was written. It is correct, and
+the same argument run downward is what makes `FLOOR = 0.50` exact rather than a round number
+someone liked.
+
+⚠ **The rings are CURVES, not boxes.** `3(h+d) + 4hd = 28` is the *entire* 250% iso-cost line:
+
+| HP × | max DPS × still costing exactly 250% |
+|--:|--:|
+| 1.0 | 3.571 |
+| 1.5 | 2.611 |
+| **2.0** | **2.000** |
+| 3.0 | 1.267 |
+| 4.0 | 0.842 |
+| 6.0 | 0.370 |
+
+That is the maintainer's *"one of the stats can also be higher if the other one is a bit
+lower"*, in closed form — and because `price(h,d) = price(d,h)`, **HP and DPS are exactly
+interchangeable in pricing**. A single narrow cost band therefore holds units that play
+nothing alike: a 6× HP / 0.37× DPS bunker-crawler and a 1× HP / 3.57× DPS glass cannon are
+the SAME price. Reading the band as a box ("≤2× HP AND ≤2× DPS") would wrongly exclude both.
+
+#### Where does the baseline actor sit in the band? At the lower quartile — by construction
+
+Not the centre. In the target band `[0.729, 2.50]` the anchor at 1.000 sits at **26% of the
+log-width**; in stat space the window is ×0.75…×2.00 and the anchor at ×1 sits at **37%**.
+That is a *consequence*, not a preference: the anchor is the class's recognisable ENTRY
+unit, so almost nothing in the class is meaningfully weaker than it, while plenty is
+stronger. A centred anchor would put half of every class below its own zero point, which
+would mean the zero point is not the entry unit. **The band is asymmetric because the
+design is.**
+
+#### ⛔ RE-ANCHORING CANNOT FIX A CLASS THAT IS WIDER THAN THE BAND
+
+Members are priced as **ratios** to the anchor, so choosing a different anchor **slides** a
+class along the band and never **narrows** it (pinned by
+`test_a_class_spread_does_not_depend_on_which_member_anchors_it`). The target band is
+`2.50 / 0.729` = **3.43× wide**. A class whose own priced spread exceeds that therefore
+cannot reach the ruled ≥80% occupancy from *any* member. Measure it with
+**`tools/balance/band_granularity.py`**, never by eye.
+
+#### Granularity — how many units actually fit, measured against 14 shipped mods
+
+The band is a **resolution budget**: at a cost step `s`, a band of width `W` holds
+`ln(W)/ln(s)` rungs a player can tell apart. `s` is not a guess — it is measured from the
+peer corpus in `docs/design/ORIGINAL_UNITS_PEER_OPENRA.md` (`tools/reference/`, 266 adjacent
+cost gaps, 14 mods): **the median adjacent cost step in a shipped OpenRA mod is 1.143×**,
+and per-mod it runs 1.056×–1.200×. So:
+
+> **the 3.43×-wide target band holds ≈ 9.2 distinct price rungs.**
+
+⭐ **A class with 42 members does not need 42 rungs.** Shipped mods deliberately price
+several units alike — Combined Arms runs **4.67 units per distinct cost** across 215 armed
+units. Cameo's `mbt` has 42 members drawn from **22 factions** (1.9 per faction), so 42
+members over 9.2 rungs is **4.6 per rung**, filled by different factions — the exact density
+a shipped 215-unit mod already uses. **The band is wide enough. The problem was never
+capacity.**
+
+⚠ **Cameo's own price grid is finer than any peer's and should be coarsened**: 1341 buildable
+non-epic priced units across only **105 distinct costs** at a **1.041× median step** — 0.078
+distinct prices per unit against Combined Arms' 0.214 and Shattered Paradise's 0.293. Prices
+are being distinguished below the resolution a player can perceive. Snapping to a ~1.14× (or
+a fixed-credit) grid loses nothing and makes the rung structure legible.
+
+#### How steep is Cameo's pricing, against the same 14 mods?
+
+Regressing `log(cost)` on `log(HP)` and `log(DPS)` over **766 armed mobile units** with mod
+fixed effects gives a shipped-mod exponent of **a+b = 0.84** (HP 0.62, DPS 0.21; R² 0.43;
+per-mod median 0.84, range 0.48 – 1.25). Cameo's class formula has a combined elasticity of
+**1.16** over ×0.5…×2 (1.17 locally at the anchor).
+
+> **Cameo charges ~38% more per unit of stat than the median shipped mod**, and sits at the
+> top of the observed range — above 12 of the 14, near Tiberian Sun (1.25), Dune 2000 (1.20)
+> and Shattered Paradise (1.12).
+
+⛔ That is a **finding, not a defect**, and it is NOT an argument to flatten the formula. A
+steeper curve means a class's stat window maps to a wider cost band, which is precisely why
+the ×2 window costs 2.5× here and would cost only 1.78× in the median peer. It is recorded so
+that the next person who compares a Cameo price to an RA2 price knows the exchange rate
+instead of rediscovering it. Re-measure with `tools/reference/peer_cost_grid.py`.
 
 ### 8.2 Determinism & agent-independence (the anti-"wrong memory" rules)
 

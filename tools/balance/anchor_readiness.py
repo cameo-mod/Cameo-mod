@@ -335,6 +335,10 @@ def three_way_split_gate(units, classes):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", help="write the readiness table here")
+    ap.add_argument("--propose-anchors", action="store_true",
+                    help="rank each class's members as candidate anchors by SWEET-SPOT "
+                         "OCCUPANCY (BALANCE_PIPELINE 8.1), and report which classes are "
+                         "wider than the band itself. Evidence for a ruling, never an assignment.")
     ap.add_argument("--classifier", action="store_true",
                     help="also self-score a nearest-anchor classifier on the "
                          "known labels (the 17.6% evidence)")
@@ -401,6 +405,133 @@ def main():
                 if pct <= 25 or pct >= 75:
                     off_centre.append(f"{cls} -> `{a}` at the {pct:.0f}th percentile of "
                                       f"{len(hps)} members{sg}")
+
+    if args.propose_anchors:
+        # ⭐ RANKED BY THE RULED CRITERION, NOT A PROXY I INVENTED.
+        #
+        # The first version of this mode ranked candidates by CENTRALITY — how close a member
+        # sits to its class median. That was a guess. The maintainer asked the right question:
+        # "must the anchor be at the CENTRE of the band?" — and the answer was already ruled.
+        # `check_band.py` enforces BALANCE_PIPELINE §8.1:
+        #
+        #     hard band     50%..400% of cost0
+        #     target band  72.9%..250% of cost0, target >=80% occupancy
+        #
+        # ⚠ 72.9%, not 75%: BALANCE_PIPELINE §8.1a — the ring is the price of a STAT
+        # window, and 3/4 of the anchor's HP and DPS costs 0.729, not 0.75.
+        #
+        # So the anchor is the FLOOR of the sweet spot — the cheapest typical member — and the
+        # class extends UPWARD from it. It is deliberately NOT the centre. Centrality would
+        # have moved every anchor to the wrong place.
+        #
+        # This therefore scores each candidate by what actually matters: if THIS actor were the
+        # anchor, how much of the class lands in 72.9%..250%? That is the law, computed, and it
+        # imports check_band's pricing so there is ONE implementation of it.
+        #
+        # ⛔ Still evidence for a ruling, never an assignment: an anchor must also be
+        # ROLE-typical (the class's recognisable entry unit), and no stat can see role.
+        sys.path.insert(0, str(ROOT / "tools" / "balance"))
+        import check_band as cb
+        SWEET_WIDTH = cb.SWEET_HI / cb.SWEET_LO
+
+        tier_map = {}
+        rows_by_class = collections.defaultdict(list)
+        for _fn, actor, u, du in cb.collect(tier_map):
+            cls = (u.get("design") or {}).get("class_anchor")
+            if not cls or cls not in anchors:
+                continue
+            inp = cb.unit_inputs(u, du)
+            if inp is None:
+                continue
+            cost = cb.fnum((u.get("cost") or {}).get("v")
+                           if isinstance(u.get("cost"), dict) else u.get("cost"))
+            rows_by_class[cls].append((actor, inp, cost, bool(u.get("build_limit"))))
+
+        def occupancy(cls, spec, rows):
+            """Share of non-epic members landing in the sweet spot under `spec`."""
+            hits = tot = 0
+            for _a, inp, _c, epic in rows:
+                if epic:
+                    continue
+                pr = cb.price_for(cls, {"spec": spec}, inp, 1.0)
+                if pr is None or not spec.get("cost0"):
+                    continue
+                tot += 1
+                if cb.SWEET_LO <= pr / spec["cost0"] <= cb.SWEET_HI:
+                    hits += 1
+            return (hits / tot if tot else None), tot
+
+        print("# Candidate anchors — ranked by SWEET-SPOT OCCUPANCY (BALANCE_PIPELINE §8.1)\n")
+        print("The anchor sits at the LOWER QUARTILE of the target band "
+              "(72.9%–250% of `cost0`, §8.1a), not at its centre: "
+              "the cheapest TYPICAL member, with the class extending upward. Each candidate is "
+              "scored by how much of its class would land in that band if it were the anchor.\n")
+        print("⛔ Evidence for a ruling, never an assignment — an anchor must also be the "
+              "class's recognisable ENTRY unit, and no stat can see role.\n")
+        for cls in sorted(classes):
+            rows = rows_by_class.get(cls) or []
+            if len(rows) < 4:
+                continue
+            cand = []
+            for actor, inp, cost, epic in rows:
+                hp, speed, rng, dps_v, _sp, _uc, _t = inp
+                if not (hp and speed and rng and dps_v and cost):
+                    continue
+                spec = {"hp0": hp, "speed0": speed, "range0_wdist": rng,
+                        "dps0": dps_v, "cost0": cost}
+                occ, tot = occupancy(cls, spec, rows)
+                if occ is not None:
+                    cand.append((occ, actor, tot))
+            if not cand:
+                continue
+            cand.sort(key=lambda r: -r[0])
+            cur = (anchors.get(cls) or {}).get("anchor_actor")
+            cur_occ = next((f"{o:.0%}" for o, a, _ in cand if a == cur), None)
+            sg = " **SIGNED**" if anchors[cls].get("signed_off") else ""
+
+            # ⛔ THE CEILING ON RE-ANCHORING. A class's members are priced by RATIOS to the
+            # anchor, so moving the anchor SLIDES the whole class along the band — it never
+            # narrows it. The sweet spot is SWEET_HI/SWEET_LO = 2.5x wide, so a class whose
+            # own priced spread exceeds 2.5x CANNOT reach 100% occupancy from ANY anchor.
+            # That is arithmetic, not a tuning failure: those classes need their MEMBERS
+            # repriced (which is what the pipeline is for) or their SCOPE narrowed.
+            best = cand[0][0]
+            width = None
+            ref = {"hp0": None}
+            spread_rows = []
+            for actor, inp, cost, epic in rows:
+                if epic:
+                    continue
+                hp, speed, rng, dps_v, _sp, _uc, _t = inp
+                if not (hp and speed and rng and dps_v and cost):
+                    continue
+                spread_rows.append((actor, inp))
+            if len(spread_rows) >= 2:
+                a0, i0 = spread_rows[0]
+                h0, s0, r0, d0, _a, _b, _c = i0
+                base = {"hp0": h0, "speed0": s0, "range0_wdist": r0,
+                        "dps0": d0, "cost0": 100.0}
+                pr = [cb.price_for(cls, {"spec": base}, i, 1.0) for _a, i in spread_rows]
+                pr = [x for x in pr if x and x > 0]
+                if len(pr) >= 2:
+                    width = max(pr) / min(pr)
+
+            print(f"### `{cls}` — {cand[0][2]} priced members{sg}\n")
+            print(f"current anchor `{cur}`: "
+                  f"**{cur_occ + ' occupancy' if cur_occ else 'not a priced member'}** "
+                  f"(target >=80%)\n")
+            if width is not None:
+                verdict = ("any anchor can reach 100%" if width <= SWEET_WIDTH
+                           else f"⛔ NO anchor can reach 100% — the class is "
+                                f"{width / SWEET_WIDTH:.1f}x TOO WIDE")
+                print(f"priced spread across the class: **{width:.1f}x** "
+                      f"against a **{SWEET_WIDTH:.1f}x** sweet spot -> {verdict}\n")
+            print(f"best achievable occupancy from any member: **{best:.0%}**\n")
+            for occ, actor, _ in cand[:3]:
+                mark = "  ← current" if actor == cur else ""
+                print(f"  {occ:>5.0%}  `{actor}`{mark}")
+            print()
+        return 0
 
     print("## ⛔ Anchor integrity — an anchor must BE a member, and near the middle\n")
     print(f"anchors tagged into the class they anchor : "

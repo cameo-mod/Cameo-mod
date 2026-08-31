@@ -109,7 +109,7 @@ claims:
       print(g.MACRO_RATIO)
 
   - id: shield_versus_mean
-    value: 189.088
+    value: 174.802
     tolerance: 0.01
     what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md, docs/design/ARMOR_LAYERS.md]
@@ -120,7 +120,7 @@ claims:
       print(tm.pseudo_armor_mean('Shield'))
 
   - id: shield_hp_factor
-    value: 0.528855
+    value: 0.572075
     tolerance: 0.01
     what: What one shield point is worth as HP (100 / mean Versus vs Shield).
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
@@ -131,7 +131,7 @@ claims:
       print(tm.shield_hp_factor())
 
   - id: shield_damage_share
-    value: 0.01432
+    value: 0.0156141
     tolerance: 0.05
     what: >
       Fraction of roster raw damage landing on the Shield row at BASELINE. The claim that
@@ -308,7 +308,7 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 137
+    value: 239
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
@@ -406,7 +406,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 460
+    value: 509
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -988,6 +988,89 @@ claims:
                       if c:
                           have.add(c)
       print(sum(1 for k in anchors if not k.startswith('_') and k not in have))
+
+  - id: class_anchors_band_reachable
+    value: 4
+    tolerance: 0
+    what: >
+      Classes with >=4 priced non-epic members whose OWN priced spread fits inside the
+      TARGET band (SWEET_HI/SWEET_LO = 2.50/0.729 = 3.43x, BALANCE_PIPELINE 8.1a), i.e.
+      classes for which SOME anchor could reach the ruled >=80% occupancy. ⛔ THE NUMBER
+      THAT SAYS RE-ANCHORING IS NOT THE FIX: members are priced as RATIOS to the anchor,
+      so moving the anchor SLIDES a class along the band and never NARROWS it (pinned by
+      tools/tests/test_band_law.py). `archer` 1.8x, `tank_destroyer` 1.9x, `scout` 2.5x
+      and `closecombat` 2.9x qualify. ⭐ 2 -> 4 on 2026-08-31 when the maintainer widened
+      the target band to 75%..250% -- the widening alone bought two classes.
+      ⚠ READ THE TRIMMED SPREAD, NOT THIS COUNT ALONE: `artillery` measures 324.5x raw and
+      5.9x on P10..P90 because ONE member (futuretech_athenacannon, dps 193600) carries the
+      whole number. `tools/balance/band_granularity.py` reports both and the outlier queue.
+      Must RISE as the roster is priced.
+    docs: [docs/design/ROADMAP.md, docs/design/BALANCE_COMPLETION_BRIEF.md]
+    measure: |
+      import collections, json, pathlib, sys
+      sys.path.insert(0, 'tools/balance')
+      import check_band as cb
+      anchors = json.loads(
+          pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      rows = collections.defaultdict(list)
+      for _fn, actor, u, du in cb.collect({}):
+          cls = (u.get('design') or {}).get('class_anchor')
+          if not cls or cls.startswith('_') or cls not in anchors or u.get('build_limit'):
+              continue
+          inp = cb.unit_inputs(u, du)
+          if inp is None or not all(inp[:4]):
+              continue
+          rows[cls].append(inp)
+      width = cb.SWEET_HI / cb.SWEET_LO
+      n = 0
+      for cls, rs in rows.items():
+          if len(rs) < 4:
+              continue
+          base = {'hp0': rs[0][0], 'speed0': rs[0][1], 'range0_wdist': rs[0][2],
+                  'dps0': rs[0][3], 'cost0': 100.0}
+          pr = [cb.price_for(cls, {'spec': base}, i, 1.0) for i in rs]
+          pr = [x for x in pr if x and x > 0]
+          if len(pr) >= 2 and max(pr) / min(pr) <= width:
+              n += 1
+      print(n)
+
+  - id: peer_cost_step
+    value: 1.143
+    tolerance: 0.01
+    what: >
+      Median ratio between adjacent DISTINCT costs across the armed mobile units of 14
+      shipped OpenRA mods (266 gaps). ⭐ THE COST RESOLUTION A BAND IS MEASURED IN: two
+      units priced closer than this are not distinguishable to a player, so a band of
+      width W holds ln(W)/ln(1.143) rungs -- 9.2 for the 3.43x target band. It is the
+      external, non-preference answer to "how many units fit in a class". Cameo's own
+      grid is 1.041x, FINER than any of the 14, which is a defect not a feature.
+      Carried in code as `band_granularity.PEER_STEP`.
+    docs: [docs/design/BALANCE_PIPELINE.md]
+    measure: |
+      import subprocess, sys, re
+      out = subprocess.run([sys.executable, 'tools/reference/peer_cost_grid.py'],
+                           capture_output=True, text=True).stdout
+      print(re.search(r'median adjacent step over all \d+ gaps: ([0-9.]+)x', out).group(1))
+
+  - id: peer_cost_elasticity
+    value: 0.84
+    tolerance: 0.02
+    what: >
+      `a + b` from regressing log(cost) on log(HP) and log(DPS) over 766 armed mobile units
+      of 14 shipped OpenRA mods, pooled with MOD FIXED EFFECTS. Doubling BOTH stats costs
+      2^0.84 = 1.78x in a game people play. ⭐ THE EXTERNAL CHECK ON THE CAMEO FORMULA,
+      whose combined elasticity is 1.16 over x0.5..x2 -- steeper than 12 of the 14, near
+      Tiberian Sun (1.25), Dune 2000 (1.20) and Shattered Paradise (1.12). A FINDING, not a
+      defect: the steeper curve is why a x2 stat window costs 2.5x here and 1.78x there.
+      ⛔ Never pool these mods WITHOUT fixed effects -- HP scales differ by three orders of
+      magnitude between WC2 and C&C, and the naive pooled fit reads 0.10 at R2 0.08.
+    docs: [docs/design/BALANCE_PIPELINE.md]
+    measure: |
+      import subprocess, sys, re
+      out = subprocess.run([sys.executable, 'tools/reference/peer_cost_grid.py'],
+                           capture_output=True, text=True).stdout
+      row = [l for l in out.splitlines() if 'POOLED, mod fixed effects' in l][0]
+      print(re.findall(r'\*\*([0-9.]+)\*\*', row)[3])
 
   - id: buildable_aircraft_unclassified
     value: 127

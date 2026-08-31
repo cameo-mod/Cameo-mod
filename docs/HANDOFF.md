@@ -264,6 +264,49 @@ Crashes and player-visible regressions jump everything below.
 
 ### 3.0 — DO THIS FIRST
 
+**a0. ⭐ RULED + DERIVED 2026-08-31 — THE BAND LAW. Read `BALANCE_PIPELINE` §8.1a before
+proposing any band ring or "fixing" a class by re-anchoring it.**
+
+Maintainer: *"50% to 400% is the hard limit ... the target band should be at 75% to 250% where
+most units are located ... The reason cost from 100% to 250% makes sense is because in the balance
+formula that is exactly true when a unit has 2x HP and 2x DPS."* **That derivation is correct, it
+now covers every ring, and `tools/tests/test_band_law.py` pins it against `formula.py`:**
+
+```
+price(h, d) = (3(h + d) + 4hd + 2) / 12        # SYMMETRIC in h and d
+price(x, x) = (2x + 1)(x + 1) / 6              # both stats moved together
+x(P)        = (sqrt(1 + 48P) - 3) / 4          # what stat window a ring means
+```
+
+`FLOOR 0.50` = ×0.50 stats · `SWEET_LO 0.729` = ×0.75 · anchor `1.00` = ×1 · `SWEET_HI 2.50` = ×2
+· `CEIL 4.00` = ×2.72. ⚠ **The "75%" is a STAT number: ¾ of the anchor's HP and DPS costs 72.9%**,
+so `check_band.SWEET_LO` is 35/48, not 0.75.
+
+Three consequences that change what the next job is:
+
+* **The rings are CURVES, not boxes.** `3(h+d) + 4hd = 28` is the whole 250% line, and HP and DPS
+  are exactly interchangeable — 2×/2×, 4× HP /0.84× DPS and 1× HP /3.57× DPS all cost 250%. That
+  is the maintainer's *"one stat higher if the other is lower"*, in closed form.
+* **The anchor is at the LOWER QUARTILE of the band (26% of its log-width), not the centre** —
+  a consequence of the entry-unit rule, not a preference.
+* ⛔ **RE-ANCHORING CANNOT NARROW A CLASS.** Members price as ratios to the anchor, so a new
+  anchor SLIDES the class and never shrinks it. 13 of 17 measurable classes are wider than the
+  3.43× band; that is repricing work, not anchor work.
+
+⛔ **And read the TRIMMED spread.** `artillery` is 324.5× raw, **5.9×** on P10..P90 — one member
+(`futuretech_athenacannon`, DPS 193,600) is the whole number. Honest gaps are **1.1×–3.2×**.
+**`tools/balance/band_granularity.py`** reports raw + trimmed + outliers + data bugs; it found
+**8 members with NEGATIVE DPS** (heal armaments summed as damage by `formula.spread_damage_sum`) —
+fix the extractor before pricing `support` or `line_breaker`.
+
+⭐ **The band is not the constraint.** At the peer cost resolution of **1.143×** (14 shipped mods,
+266 gaps, `tools/reference/peer_cost_grid.py`) it holds **9.2 rungs**, and `mbt`'s 42 members come
+from 22 factions — 4.6 per rung, matching Combined Arms' 4.67 units per distinct cost. ⚠ Cameo's
+own grid is **1.041×**, finer than any peer: prices are separated below player-perceptible
+resolution. Cameo's cost elasticity is **1.16** against a peer median of **0.84** — a recorded
+exchange rate, not a defect.
+
+
 **a. ✅ RULED 2026-08-23 — the nine "broken ladders" were never broken. Nothing to do.**
 
 `audit_level_ladder` required a family's effective damage to rise Light → Medium → Heavy → Super,

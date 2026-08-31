@@ -152,6 +152,127 @@ error.** The zero point is an outlier at the bottom of the population it defines
 is measured against a ruler planted in the wrong place. That is a mechanical explanation, not a
 coincidence — and it is fixable by re-selecting the anchor, without touching the formula.
 
+#### ⛔ MUST THE ANCHOR BE AT THE CENTRE OF THE BAND? NO — AND THAT WAS ALREADY RULED
+
+The question came up as *"should the baseline be at 100% Cost while the band goes from 50% to
+400%?"*, and grepping first (RULE 8f) found it decided and shipped. `tools/balance/check_band.py`
+enforces `BALANCE_PIPELINE` §8.1:
+
+```python
+FLOOR, SOFT_FLOOR, SWEET_LO, SWEET_HI, CEIL = 0.50, 0.75, 1.00, 2.50, 4.00
+```
+
+| ring | multiple of `cost0` | meaning |
+|---|--:|---|
+| hard band | **0.50× – 4.00×** | outside this, the unit is not in the class |
+| practical floor | 0.75× | below it, the member is suspiciously cheap for the class |
+| **sweet spot** | **1.00× – 2.50×** | where **≥80%** of members must land |
+
+So the baseline IS at 100% of cost — the maintainer's intuition is exactly the shipped law — but
+it is the **FLOOR of the sweet spot, not its centre**. `SWEET_LO == 1.00` is the anchor itself.
+The class extends **upward** from its zero point; it does not straddle it.
+
+⭐ **And that is the right shape, not an accident.** The anchor is the class's recognisable ENTRY
+unit — the plain rifleman, the plain light tank — and everything else in the class is that unit
+with more of something, which the formula `Cost = cost0 · (O/O0 + P/P0 + Q/Q0)/3` prices as *more
+than 1.0×*. Centre-anchoring would put half of every class BELOW its own baseline, which would
+mean the zero point is not the entry unit. The band is asymmetric because the design is.
+
+#### The candidate anchors, ranked by the ruled criterion — `--propose-anchors`
+
+⚠ **The first version of this mode ranked by CENTRALITY and was wrong.** Centrality is a proxy I
+invented; the law above is the actual criterion. The mode now scores each member by *if THIS actor
+were the anchor, what share of the class lands in 1.00×–2.50×?*, importing `check_band`'s pricing
+so there is one implementation of §8.1. The rankings changed completely — for `special_forces` the
+centrality top-3 and the occupancy top-3 share **no** members.
+
+⛔ Still evidence for a ruling, never an assignment: an anchor must also be ROLE-typical, and no
+stat can see role.
+
+#### ⛔⛔ AND THE ANSWER IT PRODUCED IS BIGGER THAN THE ANCHORS
+
+Members are priced as RATIOS to the anchor, so **moving the anchor SLIDES a class along the band —
+it can never NARROW it** (pinned by `test_a_class_spread_does_not_depend_on_which_member_anchors_it`).
+The target band is `2.50 / 0.729` = **3.43× wide**. A class whose own priced spread exceeds that
+cannot reach the ruled ≥80% occupancy from *any* member, and the shortfall is arithmetic, not tuning.
+
+⛔ **BUT DO NOT READ THE RAW SPREAD.** `artillery` measures **324.5×** raw and **5.9×** on P10..P90,
+because ONE member carries the entire number. Judging the class on the raw figure would condemn a
+class that is within striking distance of the band. `tools/balance/band_granularity.py` reports both
+and leads with the trimmed one.
+
+| class | n | factions | raw | **P10..P90** | fits 3.43×? |
+|---|--:|--:|--:|--:|:-:|
+| `mbt` | 42 | 22 | 22.9× | **6.1×** | no |
+| `line_breaker` | 30 | 15 | 24.7× | **4.2×** | no |
+| `fire_support` | 27 | 16 | 8.6× | **6.0×** | no |
+| `scout_vehicle` | 27 | 13 | 18.8× | **11.1×** | no |
+| `artillery` | 26 | 15 | **324.5×** | **5.9×** | no |
+| `high_tech_tank` | 25 | 15 | 7.9× | **4.4×** | no |
+| `support` | 11 | 8 | 15.8× | **10.1×** | no |
+| `light_tank` | 16 | 14 | 9.5× | **6.0×** | no |
+| `special_forces` | 15 | 10 | 12.0× | **5.8×** | no |
+| `missile_vehicle` | 13 | 9 | 9.1× | **6.6×** | no |
+| `artillery_tank` | 12 | 9 | 12.0× | **8.3×** | no |
+| `anti_air_vehicle` | 12 | 10 | 7.0× | **3.9×** | no |
+| `scout` | 6 | 4 | 2.5× | **2.5×** | **YES** |
+| `dreadnought` | 5 | 5 | 4.0× | **4.0×** | no |
+| `tank_destroyer` | 5 | 4 | 1.9× | **1.9×** | **YES** |
+| `closecombat` | 4 | 4 | 2.9× | **2.9×** | **YES** |
+| `archer` | 4 | 3 | 1.8× | **1.8×** | **YES** |
+
+⭐ **4 of 17 fit today, and the honest gap on the rest is 1.1×–3.2×, not one to two orders of
+magnitude.** That is a tractable repricing job — which is what the pipeline exists to do — rather
+than the structural collapse the raw numbers implied. ⚠ An earlier revision of this section reported
+the raw spreads as the verdict; that was wrong and this replaces it.
+
+#### ⛔ EIGHT MEMBERS HAVE NEGATIVE DPS — no repricing can fix that
+
+`band_granularity.py` flags them: `tkm_battlebus` (−600), `cabal_engineer` (−650),
+`futuretech_repairdroid` (−508), `tkm_engineer` (−397), `ra1_allies_mechanic` (−357),
+`terran_medic` (−183), `ra1_allies_medic` and `ts_gdi_medic` (−40). A **heal/repair armament is
+being summed as damage** by `formula.spread_damage_sum`, so every one of them prices as if it
+shot backwards. Fix the extractor, not the units.
+
+#### The outlier triage queue — 33 members, and the shape of it is informative
+
+| what | members | reading |
+|---|---|---|
+| `futuretech_athenacannon` | DPS **193,600** — 24× the next artillery | ⛔ a stat error, not a heavy unit. It alone is `artillery`'s 324× |
+| the RA2 **IFV family** (7 actors) | all at DPS 19,211.7, 5.9–7.9× the `scout_vehicle` median | a TRANSFORMING unit. `RTS_BALANCE_REFERENCE` §7 already rules these need their own model; pricing one variant's weapon onto the chassis is the error |
+| `steelconsortium_megalodon`, `latinsyndicate_smokertank`, `ra1_soviets_siegemammothtank`, … | 3.3×–5.8× their class median | genuinely heavy — these are repricing or reclassification, not bugs |
+
+So the 33 outliers are **one stat error, one modelling gap, and ~25 real repricings**. Only the
+third group is pipeline work.
+
+#### Granularity — the band is not the constraint, and that is measured
+
+At the shipped-mod cost resolution of **1.143×** (median of 266 adjacent-cost gaps across 14 peer
+mods, `tools/reference/peer_cost_grid.py`) the 3.43× target band holds **9.2 distinct rungs**.
+`mbt` has 42 members from **22 factions** — 4.6 per rung, filled from different factions, against
+Combined Arms' observed **4.67 units per distinct cost** at 215 armed units. **The band comfortably
+holds every class Cameo has.**
+
+⚠ The reverse problem is real though: Cameo prices 1341 units across only **105 distinct costs** at
+a **1.041× median step** — 0.078 distinct prices per unit against Combined Arms' 0.214. Prices are
+being separated below the resolution a player can perceive. Snapping to a ~1.14× grid costs nothing.
+
+#### The two free wins, offered for a ruling
+
+Two classes are already narrow enough for the law, and one is mis-anchored:
+
+* **`tank_destroyer`** — `naxis_hetzer` (60%) → **`ra1_allies_alliedtankdestroyer` (100%)**. The
+  class fits in 1.9×; the only reason it misses the target is the pick.
+* **`scout`** — the signed-off anchor `naxis_naxiriflesoldier` **is not a priced member of its own
+  class**, so it scores nothing. **`ra1_allies_rifleinfantry` reaches 83%**, over the ≥80% target,
+  and is the archetypal scout-tier rifleman on the role axis too.
+
+Both are maintainer calls. Neither is applied.
+
+⚠ For the 13 LOCKED-table classes the actor is still PRE-RESTAT, so these numbers are measured on
+stats §1c already intends to replace. Apply the restat, then re-read. The infantry rows are not
+explained that way — no restat is queued for them.
+
 ⛔ **THE LADDER IS NOT THE NEXT JOB.** You cannot engineer a ladder for five classes that have no
 members and ten anchors that are not in their own class. The vehicle ladder worked because those
 classes have real populations — `mbt` 40 members, `scout_vehicle` 27, `high_tech_tank` 25 — so the
