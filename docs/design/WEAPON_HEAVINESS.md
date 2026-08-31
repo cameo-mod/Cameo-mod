@@ -829,6 +829,58 @@ judges.
 targets ≥2× in floats and the emit rounds to integers. It is why the column is not monotonic.
 Worth a follow-up (round-aware floor), not a blocker: both candidate ratios are 100%.
 
+##### ⛔ 9.7a PRICE NEUTRALITY — MEASURED, AND IT IS NOT EXACT
+
+§12.0h's *"a tilt is FREE"* is a statement about the **arithmetic** mean, which `mean_normalise`
+pins. **K does not use the arithmetic mean.** `target_model.armor_weights()` weights each armor by
+roster prevalence within its macro class, times that class's `ENGAGEMENT` share — measured
+**INF 0.345 · VEH 0.394 · BLD 0.148 · AIR 0.098**. That is a *weighted* mean, and the macro axis
+exists precisely to move output BETWEEN macro classes. Two different invariants; only one is pinned.
+
+**Measured across all 139 templates, ratio 1.0 as the base:**
+
+| ratio | arithmetic mean drift | **weighted mean drift** | worst family |
+|--:|--:|--:|---|
+| 1.15 | 0.10% | **0.67%** | `BulletCryo_Light` +1.8% |
+| 1.35 | 0.10% | **1.37%** | `Cryo_Heavy` +3.7% |
+| 1.50 | 0.09% | **1.75%** | `Cryo_Heavy` **+5.3%** |
+
+The 0.1% arithmetic column is integer rounding — **MEAN-100 holds exactly as designed.** The
+weighted column is the real effect, and its direction is systematic: a family that specialises
+harder into heavily-engaged targets (VEH, INF) gains weighted efficiency, while one aimed at AIR or
+BLD loses it.
+
+⚠ **That is arguably CORRECT rather than a defect** — a weapon that concentrates its output on the
+targets the roster actually fields *is* worth more — but it means **the macro axis is a pricing
+input, not only a shape knob**, and that has to be a conscious ruling instead of a side-effect
+nobody measured. Two consequences follow:
+
+1. **The flip requires a re-extract in the same session.** `apply_balance` reads the ledger, so
+   after regenerating the templates the K values behind every price are stale by up to ~5% on the
+   worst family. `extract_stats.py` → ledger → audits, per `BALANCE_PIPELINE.md`, before anything
+   is priced.
+2. **It bounds how far this axis should ever go.** Whatever the macro-contrast ambition, a ratio
+   is also silently repricing; ~1.75% average at 1.50 is small against `DAMAGE_STEP = 100`, but it
+   is not zero and it grows with the ratio.
+
+##### 9.7b The band MARGINS at the candidate ratios
+
+"100% in band" hides how close the band is to breaking, so `audit_versus_profile` now prints both
+margins. Measured over all levels:
+
+| ratio | floor margin | ceiling margin |
+|--:|---|---|
+| 1.00 (ships) | 2.04× (+2.0%) | 5.71× (29% headroom) |
+| 1.10 | **1.986× (−0.7%)** ⚠ `CannonAP_Light` = 137/69 | 6.35× (21%) |
+| **1.50** | **2.242× (+12.1%)** `Laser_Light` | **7.14× (11%)** `MissileNuke_Medium` |
+
+⚠ **The 1.10 dip is a float/int seam, not a floor failure.** `fit_band_floor` already aims at
+`BAND_LOW × BAND_MARGIN` (1.03) for exactly this reason, and 3% was 0.7% short for one family that
+happened to land on the floor. ⭐ **It does not threaten the 1.50 certification**, which has 12%
+floor headroom — but the ceiling headroom there is 11%, and that one is STRUCTURAL: `macro_spread`
+pushes a family's disfavoured ladders down together, so a new anti-air family or a change to
+`build_order`'s interleave eats it without anyone touching `MACRO_RATIO`.
+
 ##### What the sweep supports — and the ruling opened it right up
 
 * **`1.15` — the smallest ratio that reaches §9.4's 4× target** (4.03×), 100% in band. Minimum

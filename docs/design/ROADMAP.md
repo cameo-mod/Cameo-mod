@@ -96,15 +96,23 @@ Queued per `AGENT_WORKSPACE.md` git rule 3 (record work in ROADMAP before commit
    machine, in this order:
 
    ```sh
-   python tools/balance/splice_templates.py --all --tilt=bell
+   # ⭐ ONE regeneration, both changes. MACRO_RATIO=1.50 is the recorded consensus (see the
+   # macro-ratio call below); --macro= forwards through the splice exactly like --tilt=.
+   python tools/balance/splice_templates.py --all --tilt=bell --macro=1.50
    python tools/balance/consolidate_exact_profile_duplicates.py --print-hashes
    python tools/balance/consolidate_explicit_family_state_profiles.py --print-hashes
    #   -> paste the 3 TeslaArmorDischarge* + 4 BRANCH_HASHES + 3 PINNED_HASHES that moved
    python -m unittest discover -s tools/tests -t tools/tests -q   # expect the 1 known failure
    python tools/balance/verify_generator_sync.py --tilt=bell      # expect drift 0
    python tools/audit/find_empty_warhead.py                       # expect 0
+   python tools/audit/audit_versus_profile.py                     # margins + both metrics
    launch-game.cmd                                                # rule 1
-   #   -> then set gen_weapon_template.TILT_MODEL = "bell" and commit all of it together
+   #   -> set TILT_MODEL = "bell" AND MACRO_RATIO = 1.50 in gen_weapon_template.py
+   #   -> then RE-EXTRACT: the macro axis moves K by ~1.75% (worst +5.3%), so every price
+   #      behind the ledger is stale. See WEAPON_HEAVINESS §9.7a.
+   python tools/balance/extract_stats.py
+   bash tools/audit/run_all.sh          # from a COMPLETE tree only (CLAUDE.md rule 8)
+   #   -> commit yaml + ledger + the two constants TOGETHER
    ```
 
    Expected result, already measured by doing it and reverting: 135 of 139 templates move, mean
@@ -153,6 +161,18 @@ The axis is **built, tested and shipping INERT** at `MACRO_RATIO = 1.0`. Measure
 | 1.35 | 4.17× | 6.45× | **100%** | 1.95× |
 | **1.50** | 4.26× | 7.07× | **100%** | **2.00×** ← Romanov's Vengeance parity |
 | 1.75 | 4.52× | 8.25× | 95% ⛔ | 2.08× |
+
+⭐ **CONSENSUS 2026-08-30: `1.50`.** Five independent reviews converged on it, and the two
+verifications they asked for both came back clean or bounded (§9.7a, §9.7b): the rounding seam does
+not threaten it (12% floor headroom, 11% ceiling), and the pricing drift is measured rather than
+assumed. Recorded here; the constant still SHIPS AT 1.0 for the same reason `TILT_MODEL` does — a
+splice by anyone, for any unrelated family, would otherwise ship it without a decision.
+
+⛔ **AND THE FLIP NOW NEEDS A RE-EXTRACT.** Measured in §9.7a: the axis is arithmetic-mean-neutral
+(MEAN-100 holds) but **not weighted-mean-neutral** — `armor_weights()` weights by ENGAGEMENT share
+(INF 0.345 · VEH 0.394 · BLD 0.148 · AIR 0.098), so K moves **1.75% on average and +5.3% on
+`Cryo_Heavy`** at 1.50. Every price behind the ledger is stale by that much after the flip.
+`extract_stats.py` → ledger → audits in the SAME boot session, before anything is priced.
 
 **The two defensible picks:**
 

@@ -352,6 +352,20 @@ def main() -> int:
     for family, spread in sorted(spread_bad, key=lambda r: r[1]):
         why = "too FLAT" if spread < SPREAD_LO else "too SHARP"
         print(f"  {family:14s} {spread:6.2f}x   {why}")
+    # ⭐ REPORT THE MARGINS, NOT ONLY THE PASS. "100% in band" hides how close the band is to
+    # breaking, and this corpus has two live reasons to care:
+    #   * the CEILING is structural — `macro_spread` pushes a family's disfavoured ladders down
+    #     together, so a new anti-air family or a change to `build_order`'s interleave eats the
+    #     headroom without anyone touching `MACRO_RATIO`;
+    #   * the FLOOR has a float/int seam — `fit_band_floor` aims at BAND_LOW * BAND_MARGIN in
+    #     floats and the emit rounds to integers, which is how `CannonAP_Light` once landed at
+    #     137/69 = 1.9855x from a fix that had just put it in band.
+    # A pass with 0.7% of headroom and a pass with 12% are not the same fact.
+    if all_spreads:
+        lo_f, hi_f = min(all_spreads), max(all_spreads)
+        print(f"\n  margin to the 2x FLOOR    {lo_f:5.2f}x  ({(lo_f / SPREAD_LO - 1) * 100:+.1f}%)"
+              f"\n  margin to the 8x CEILING  {hi_f:5.2f}x  "
+              f"({(1 - hi_f / SPREAD_HI) * 100:.0f}% headroom)")
     print(f"  _(flat by design, excluded: {', '.join(sorted(FLAT_BY_DESIGN))})_")
 
     print("")
