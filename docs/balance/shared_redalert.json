@@ -1,147 +1,110 @@
 {
- "schema": 2,
  "ledger": "shared_redalert",
  "pack": "mods/cameo/ContentPacks/RedAlert/Shared",
+ "schema": 2,
  "sections": {
   "aircraft": {
    "japan_badger": {
-    "name": "Badger",
-    "cost": {
-     "v": "4000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "150000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "175",
-     "src": "inherited"
-    },
-    "turn_speed_air": {
-     "v": "20",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Bomber"
     },
     "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Aircraft",
      "class_anchor": null,
+     "special": null,
      "subtype": "Aircraft",
-     "category": "Aircraft"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Badger",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "japan_japanesesuperbomber": {
-    "name": "Japanese Super Bomber",
-    "cost": {
-     "v": "5000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "125000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "200",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed"
-    },
-    "turn_speed_air": {
-     "v": "20",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "JapanSuperBomb",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "5",
-      "range": "3000",
       "damage_warheads": [
        {
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage",
         "damage": "50000",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "falloff": "100, 45, 18, 6, 0"
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage",
         "damage": "5",
+        "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
-        "falloff": "100, 50, 33, 25, 20"
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage",
         "damage": "5",
+        "falloff": "100, 75, 50, 25",
         "spread": "300",
-        "falloff": "100, 75, 50, 25"
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage",
         "damage": "5",
+        "falloff": "99, 66, 33",
         "spread": "350",
-        "falloff": "99, 66, 33"
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage",
         "damage": "5",
+        "falloff": "111, 33, 11, 3",
         "spread": "375",
-        "falloff": "111, 33, 11, 3"
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "tag": "HeavyBombPercentage",
-        "type": "AreaDamagePercentage",
         "damage": "5",
+        "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
-        "falloff": "100, 50, 25, 10, 5"
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "3000",
+      "reloaddelay": "5",
+      "slot": "Armament",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
        "^Grenade",
@@ -153,130 +116,131 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "JapanSuperBomb",
+      "weapon_class_source": "template"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost",
+     "v": "5000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Aircraft",
      "class_anchor": null,
+     "special": null,
      "subtype": "Aircraft",
-     "category": "Aircraft"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Japanese Super Bomber",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "200"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_allies_badger": {
-    "name": "Badger",
-    "cost": {
-     "v": "4000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "150000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "175",
-     "src": "inherited"
-    },
-    "turn_speed_air": {
-     "v": "20",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Bomber"
     },
     "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Aircraft",
      "class_anchor": null,
+     "special": null,
      "subtype": "Aircraft",
-     "category": "Aircraft"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Badger",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_allies_cargoplanebomber": {
-    "name": "Cargo Plane",
-    "cost": {
-     "v": "4000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "150000",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "175",
-     "src": "inherited"
-    },
-    "turn_speed_air": {
-     "v": "20",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "ParaBomb",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "8",
-      "range": "5000",
       "damage_warheads": [
        {
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage",
         "damage": "20000",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "falloff": "100, 45, 18, 6, 0"
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "tag": "Flame_Heavy",
-        "type": "AreaDamage",
         "damage": "20000",
+        "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "falloff": "100, 90, 78, 60, 0"
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "8",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament",
       "versus_templates": [
        "^ParaBombDelivery",
        "^Warhead_Demolition_Heavy",
@@ -287,26 +251,26 @@
        "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "ParaBomb",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@Cryo",
-      "weapon": "ParaBombCryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "8",
-      "range": "5000",
       "damage_warheads": [
        {
-        "tag": "CryoBlast_Heavy",
-        "type": "AreaDamage",
         "damage": "40000",
+        "falloff": "100, 72, 50, 32, 19, 9, 0",
         "spread": "140",
-        "falloff": "100, 72, 50, 32, 19, 9, 0"
+        "tag": "CryoBlast_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "8",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Cryo",
       "versus_templates": [
        "^ParaBombDelivery",
        "^Warhead_CryoBlast_Heavy",
@@ -315,177 +279,176 @@
       "warheads": [
        "^Warhead_CryoBlast_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "ParaBombCryo",
+      "weapon_class_source": "template"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "Aircraft"
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Cargo Plane",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_allies_cargoplaneparadrop": {
-    "name": "Cargo Plane",
-    "cost": {
-     "v": "4000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "150000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "175",
-     "src": "inherited"
-    },
-    "turn_speed_air": {
-     "v": "20",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Bomber"
     },
     "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "Aircraft"
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Cargo Plane",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_badger": {
-    "name": "Badger",
-    "cost": {
-     "v": "4000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "150000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP"
-    },
     "armor": {
-     "v": "Bomber",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Armor.Type"
-    },
-    "speed_air": {
-     "v": "175",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed"
-    },
-    "turn_speed_air": {
-     "v": "20",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Armor.Type",
+     "v": "Bomber"
     },
     "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost",
+     "v": "4000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Aircraft",
      "class_anchor": null,
+     "special": null,
      "subtype": "Aircraft",
-     "category": "Aircraft"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Badger",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
     }
    },
    "ra1_badger_bomber": {
-    "name": "Badger",
-    "cost": {
-     "v": "4000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "150000",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "175",
-     "src": "inherited"
-    },
-    "turn_speed_air": {
-     "v": "20",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "ParaBomb",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "8",
-      "range": "5000",
       "damage_warheads": [
        {
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage",
         "damage": "20000",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "falloff": "100, 45, 18, 6, 0"
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "tag": "Flame_Heavy",
-        "type": "AreaDamage",
         "damage": "20000",
+        "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "falloff": "100, 90, 78, 60, 0"
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "8",
+      "slot": "Armament",
       "versus_templates": [
        "^ParaBombDelivery",
        "^Warhead_Demolition_Heavy",
@@ -496,238 +459,267 @@
        "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "ParaBomb",
+      "weapon_class_source": "template"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Aircraft",
      "class_anchor": null,
+     "special": null,
      "subtype": "Aircraft",
-     "category": "Aircraft"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Badger",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_soviets_badger": {
-    "name": "Badger",
-    "cost": {
-     "v": "4000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "150000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "175",
-     "src": "inherited"
-    },
-    "turn_speed_air": {
-     "v": "20",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Bomber"
     },
     "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Aircraft",
      "class_anchor": null,
+     "special": null,
      "subtype": "Aircraft",
-     "category": "Aircraft"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Badger",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_soviets_spyplane": {
-    "name": "Spy Plane",
-    "cost": {
-     "v": "5000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "100000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Bomber",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Armor.Type"
-    },
-    "speed_air": {
-     "v": "300",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed"
-    },
-    "turn_speed_air": {
-     "v": "20",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "SpyPlaneTargeting",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "5",
-      "range": "10000",
       "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "10000",
+      "reloaddelay": "5",
+      "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "design_weapon_class": null,
-      "weapon_class_source": "none",
-      "pricing": false
+      "weapon": "SpyPlaneTargeting",
+      "weapon_class_source": "none"
      }
     ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Armor.Type",
+     "v": "Bomber"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost",
+     "v": "5000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Aircraft",
      "class_anchor": null,
+     "special": null,
      "subtype": "Aircraft",
-     "category": "Aircraft"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Spy Plane",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "300"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
     }
    },
    "ra1_soviets_superspyplane": {
-    "name": "Spy Plane",
-    "cost": {
-     "v": "5000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "100000",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "300",
-     "src": "inherited"
-    },
-    "turn_speed_air": {
-     "v": "20",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "SpyPlaneTargeting2",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "5",
-      "range": "10000",
       "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "10000",
+      "reloaddelay": "5",
+      "slot": "Armament",
       "versus_templates": [
        "SpyPlaneTargeting"
       ],
       "warheads": [],
-      "design_weapon_class": null,
-      "weapon_class_source": "none",
-      "pricing": false
+      "weapon": "SpyPlaneTargeting2",
+      "weapon_class_source": "none"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Aircraft",
      "class_anchor": null,
+     "special": null,
      "subtype": "Aircraft",
-     "category": "Aircraft"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "name": "Spy Plane",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "300"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    }
   },
   "buildings": {
    "japan_japanesenavalyard": {
-    "name": "Japanese Naval Yard",
-    "cost": {
-     "v": "3000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "600000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "12000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "250",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "250"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "600000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Japanese Naval Yard",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
      "japan_japaneseorerefinery",
@@ -737,49 +729,49 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "12000"
     }
    },
    "ra1_advancedpowerplant": {
-    "name": "Advanced Power Plant",
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "buildable": true,
     "cost": {
-     "v": "1000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "250000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Wood",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
+     "v": "250000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Advanced Power Plant",
     "prerequisites": [
      "~rafact",
      "anyrahq"
@@ -788,53 +780,53 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "5c0"
     }
    },
    "ra1_allies_alliednavalyard": {
-    "name": "Allied Naval Yard",
-    "cost": {
-     "v": "3000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "600000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "12000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "250",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "250"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "600000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Allied Naval Yard",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
      "ra1_allies_alliedorerefinery",
@@ -844,49 +836,49 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "12000"
     }
    },
    "ra1_oresilo": {
-    "name": "Ore Silo",
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "buildable": true,
     "cost": {
-     "v": "150",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "150"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "50000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Wood",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type"
-    },
-    "sight": {
-     "v": "4c0",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
+     "v": "50000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Ore Silo",
     "prerequisites": [
      "~rafact",
      "raproc"
@@ -895,49 +887,49 @@
      "Defence",
      "RADefence"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
     }
    },
    "ra1_powerplant": {
-    "name": "Power Plant",
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "buildable": true,
     "cost": {
-     "v": "500",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "125000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Wood",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type"
-    },
-    "sight": {
-     "v": "4c0",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
+     "v": "125000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Power Plant",
     "prerequisites": [
      "~rafact"
     ],
@@ -945,53 +937,53 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
     }
    },
    "ra1_soviets_kennel": {
-    "name": "Kennel",
-    "cost": {
-     "v": "200",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "50000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP"
-    },
     "armor": {
-     "v": "Wood",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type"
-    },
-    "sight": {
-     "v": "4c0",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
     },
     "build_duration": {
-     "v": "250",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "250"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "200"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
+     "v": "50000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Kennel",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
      "ra1_soviets_barracks",
@@ -1001,53 +993,53 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": false,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
     }
    },
    "ra1_soviets_subpen": {
-    "name": "Soviet Sub Pen",
-    "cost": {
-     "v": "800",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "600000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "12000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "250",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "250"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "600000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Soviet Sub Pen",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
      "ra1_soviets_orerefinery",
@@ -1057,124 +1049,251 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "12000"
     }
    }
   },
   "infantry": {
    "ra1_agentdelphi": {
-    "name": "Agent Delphi",
-    "cost": {
-     "v": "10",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "2500",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "71",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed"
-    },
-    "sight": {
-     "v": "2c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "Pistol",
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "reloaddelay": "7",
-      "range": "3072",
       "damage_warheads": [
        {
-        "tag": "1Dam",
-        "type": "SpreadDamage",
         "damage": "100",
+        "falloff": null,
         "spread": "200",
-        "falloff": null
+        "tag": "1Dam",
+        "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "3072",
+      "reloaddelay": "7",
+      "slot": "Armament",
       "versus_templates": [
        "^LightMG"
       ],
       "warheads": [],
-      "design_weapon_class": null,
-      "weapon_class_source": "none",
-      "pricing": true
+      "weapon": "Pistol",
+      "weapon_class_source": "none"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "10"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Infantry",
      "class_anchor": null,
+     "special": null,
      "subtype": "Infantry",
-     "category": "Infantry"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "name": "Agent Delphi",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "2c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "71"
     }
    },
    "ra1_allies_alliedrocketsoldier": {
-    "name": "Allied Rocket Soldier",
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
+        "tag": "MissileHE_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "6643",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
+      ],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
+      "weapon": "RocketsRA",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
+        "tag": "MissileHE_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": false,
+      "range": "6643",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileHE_Light"
+      ],
+      "warheads": [
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileHE_Light"
+      ],
+      "weapon": "RocketsRA",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 60, 27, 0",
+        "spread": "40",
+        "tag": "MissileCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6643",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Warhead_MissileCryo_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_MissileCryo_Medium"
+      ],
+      "weapon": "RocketsRACryo",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 60, 27, 0",
+        "spread": "40",
+        "tag": "MissileCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "6643",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^Warhead_MissileCryo_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_MissileCryo_Medium"
+      ],
+      "weapon": "RocketsRACryo",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
     "cost": {
-     "v": "300",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "300"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "10000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "10000"
     },
-    "armor": {
-     "v": "Flak",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "55",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "6500",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_condition": {
-     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)",
-     "src": "inherited"
-    },
+    "name": "Allied Rocket Soldier",
     "prerequisites": [
      "~ra1_allies_alliedbarracks"
     ],
@@ -1182,188 +1301,183 @@
      "Infantry",
      "RAInfantry"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament@PRIMARY",
-      "weapon": "RocketsRA",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "50",
-      "range": "6643",
-      "damage_warheads": [
-       {
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage",
-        "damage": "10000",
-        "spread": "150",
-        "falloff": "100, 45, 15, 0"
-       },
-       {
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage",
-        "damage": "10000",
-        "spread": "100",
-        "falloff": "100, 45, 15, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_MissileHE_Light"
-      ],
-      "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
-      ],
-      "design_weapon_class": 0.875,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@GARRISONED",
-      "weapon": "RocketsRA",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "50",
-      "range": "6643",
-      "damage_warheads": [
-       {
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage",
-        "damage": "10000",
-        "spread": "150",
-        "falloff": "100, 45, 15, 0"
-       },
-       {
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage",
-        "damage": "10000",
-        "spread": "100",
-        "falloff": "100, 45, 15, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_MissileHE_Light"
-      ],
-      "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
-      ],
-      "design_weapon_class": 0.875,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "armament_name": "garrisoned",
-      "pricing": false
-     },
-     {
-      "slot": "Armament@Upgrade",
-      "weapon": "RocketsRACryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "50",
-      "range": "6643",
-      "damage_warheads": [
-       {
-        "tag": "MissileCryo_Medium",
-        "type": "AreaDamage",
-        "damage": "20000",
-        "spread": "40",
-        "falloff": "100, 60, 27, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_MissileCryo_Medium",
-       "^Projectile_Missile_Light",
-       "^Effect_Cryo"
-      ],
-      "warheads": [
-       "^Warhead_MissileCryo_Medium"
-      ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@UpgradeGARRISONED",
-      "weapon": "RocketsRACryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "50",
-      "range": "6643",
-      "damage_warheads": [
-       {
-        "tag": "MissileCryo_Medium",
-        "type": "AreaDamage",
-        "damage": "20000",
-        "spread": "40",
-        "falloff": "100, 60, 27, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_MissileCryo_Medium",
-       "^Projectile_Missile_Light",
-       "^Effect_Cryo"
-      ],
-      "warheads": [
-       "^Warhead_MissileCryo_Medium"
-      ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "armament_name": "garrisoned",
-      "pricing": false
-     }
-    ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "AntiTankAntiAirInfantry",
-     "category": "Infantry"
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "55"
     }
    },
    "ra1_allies_rifleinfantry": {
-    "name": "Rifle Infantry",
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "5500",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "ra1_allies_rifleinfantry_carbine",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "5500",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "ra1_allies_rifleinfantry_carbine",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 48, 0",
+        "spread": "30",
+        "tag": "BulletCryo_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "5500",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Light"
+      ],
+      "weapon": "ra1_allies_rifleinfantry_carbine_cryo",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 48, 0",
+        "spread": "30",
+        "tag": "BulletCryo_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "5500",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Light"
+      ],
+      "weapon": "ra1_allies_rifleinfantry_carbine_cryo",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
     "cost": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": "scout",
+     "special": 1.0,
+     "subtype": "ScoutInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#FirepowerMultiplier@ra1_allies_rifleinfantry.Modifier",
+     "trait": "FirepowerMultiplier@ra1_allies_rifleinfantry",
+     "v": 0.47
     },
     "hp": {
-     "v": "27000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP",
+     "v": "27000"
     },
-    "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "55",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_condition": {
-     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)",
-     "src": "inherited"
-    },
+    "name": "Rifle Infantry",
     "prerequisites": [
      "~ra1_allies_alliedbarracks"
     ],
@@ -1371,231 +1485,131 @@
      "Infantry",
      "RAInfantry"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament@PRIMARY",
-      "weapon": "ra1_allies_rifleinfantry_carbine",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "50",
-      "burst": "3",
-      "burstdelays": "4",
-      "range": "5500",
-      "damage_warheads": [
-       {
-        "tag": "Bullet_Light",
-        "type": "AreaDamage",
-        "damage": "2000",
-        "spread": "67",
-        "falloff": "100, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Light"
-      ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@GARRISONED",
-      "weapon": "ra1_allies_rifleinfantry_carbine",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "50",
-      "burst": "3",
-      "burstdelays": "4",
-      "range": "5500",
-      "damage_warheads": [
-       {
-        "tag": "Bullet_Light",
-        "type": "AreaDamage",
-        "damage": "2000",
-        "spread": "67",
-        "falloff": "100, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Light"
-      ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "armament_name": "garrisoned",
-      "pricing": false
-     },
-     {
-      "slot": "Armament@Upgrade",
-      "weapon": "ra1_allies_rifleinfantry_carbine_cryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "50",
-      "burst": "3",
-      "burstdelays": "4",
-      "range": "5500",
-      "damage_warheads": [
-       {
-        "tag": "BulletCryo_Light",
-        "type": "AreaDamage",
-        "damage": "2000",
-        "spread": "30",
-        "falloff": "100, 48, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_BulletCryo_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Cryo"
-      ],
-      "warheads": [
-       "^Warhead_BulletCryo_Light"
-      ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@UpgradeGARRISONED",
-      "weapon": "ra1_allies_rifleinfantry_carbine_cryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "50",
-      "burst": "3",
-      "burstdelays": "4",
-      "range": "5500",
-      "damage_warheads": [
-       {
-        "tag": "BulletCryo_Light",
-        "type": "AreaDamage",
-        "damage": "2000",
-        "spread": "30",
-        "falloff": "100, 48, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_BulletCryo_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Cryo"
-      ],
-      "warheads": [
-       "^Warhead_BulletCryo_Light"
-      ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "armament_name": "garrisoned",
-      "pricing": false
-     }
-    ],
-    "firepower_multiplier": {
-     "v": 0.47,
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#FirepowerMultiplier@ra1_allies_rifleinfantry.Modifier",
-     "trait": "FirepowerMultiplier@ra1_allies_rifleinfantry"
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
     },
-    "design": {
-     "unit_class": 1.0,
-     "special": 1.0,
-     "tech_tier": 1.0,
-     "class_anchor": "scout",
-     "subtype": "ScoutInfantry",
-     "category": "Infantry"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "55"
     }
    },
    "ra1_einstein": {
-    "name": "Prof. Einstein",
-    "cost": {
-     "v": "10",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "2500",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "71",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed"
-    },
-    "sight": {
-     "v": "2c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "None"
     },
     "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "10"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Infantry",
      "class_anchor": null,
+     "special": null,
      "subtype": "Infantry",
-     "category": "Infantry"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "name": "Prof. Einstein",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "2c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "71"
     }
    },
    "ra1_engineer": {
-    "name": "Engineer",
+    "armaments": [
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "1536",
+      "reloaddelay": "20",
+      "slot": "Armament@defuse",
+      "versus_templates": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ],
+      "warheads": [],
+      "weapon": "DefuseKit",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "1536",
+      "reloaddelay": "100",
+      "slot": "Armament@leechdisinfect",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "LeechDisinfect",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
     "cost": {
-     "v": "500",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": "support",
+     "special": null,
+     "subtype": "Infantry",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "5000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP",
+     "v": "5000"
     },
-    "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "50",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_init_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_condition": {
-     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)",
-     "src": "inherited"
-    },
+    "name": "Engineer",
     "prerequisites": [
      "~rabarracks"
     ],
@@ -1603,196 +1617,247 @@
      "Infantry",
      "RAInfantry"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament@defuse",
-      "weapon": "DefuseKit",
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "reloaddelay": "20",
-      "range": "1536",
-      "damage_warheads": [],
-      "extraction_note": "no_damage_warheads",
-      "versus_templates": [
-       "^RemovesIvanBombs",
-       "^RemovesTerrorDrone"
-      ],
-      "warheads": [],
-      "design_weapon_class": null,
-      "weapon_class_source": "none",
-      "pricing": false
-     },
-     {
-      "slot": "Armament@leechdisinfect",
-      "weapon": "LeechDisinfect",
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "reloaddelay": "100",
-      "range": "1536",
-      "damage_warheads": [],
-      "extraction_note": "no_damage_warheads",
-      "versus_templates": [],
-      "warheads": [],
-      "design_weapon_class": null,
-      "weapon_class_source": "none",
-      "pricing": false
-     }
-    ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": "support",
-     "subtype": "Infantry",
-     "category": "Infantry"
+    "shield_condition": {
+     "src": "inherited",
+     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "50"
     }
    },
    "ra1_general": {
-    "name": "General",
-    "cost": {
-     "v": "10",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "2500",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "56",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "2c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "Pistol",
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "reloaddelay": "7",
-      "range": "3072",
       "damage_warheads": [
        {
-        "tag": "1Dam",
-        "type": "SpreadDamage",
         "damage": "100",
+        "falloff": null,
         "spread": "200",
-        "falloff": null
+        "tag": "1Dam",
+        "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "3072",
+      "reloaddelay": "7",
+      "slot": "Armament",
       "versus_templates": [
        "^LightMG"
       ],
       "warheads": [],
-      "design_weapon_class": null,
-      "weapon_class_source": "none",
-      "pricing": true
+      "weapon": "Pistol",
+      "weapon_class_source": "none"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "10"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Infantry",
      "class_anchor": null,
+     "special": null,
      "subtype": "Infantry",
-     "category": "Infantry"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "name": "General",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "2c0"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "56"
     }
    },
    "ra1_scientist": {
-    "name": "Scientist",
-    "cost": {
-     "v": "500",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "2500",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "56",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "2c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "None"
     },
     "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Infantry",
      "class_anchor": null,
+     "special": null,
      "subtype": "Infantry",
-     "category": "Infantry"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "name": "Scientist",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "2c0"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "56"
     }
    },
    "ra1_soviets_molotovconscript": {
-    "name": "Molotov Conscript",
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "200",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "5725",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Flame_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "ConscriptMolotov",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "200",
+        "tag": "Flame_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "5725",
+      "reloaddelay": "50",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Flame_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Flame_Light"
+      ],
+      "weapon": "ConscriptMolotov",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": false,
     "cost": {
-     "v": 200,
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "balance_include": true,
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "GrenadierInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.4
     },
     "hp": {
-     "v": 11000,
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP",
+     "v": "11000"
     },
-    "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": 67,
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed"
-    },
-    "sight": {
-     "v": "5500",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
+    "name": "Molotov Conscript",
     "prerequisites": [
      "~disabled"
     ],
@@ -1800,206 +1865,141 @@
      "Infantry",
      "RAInfantry"
     ],
-    "buildable": false,
-    "armaments": [
-     {
-      "slot": "Armament",
-      "weapon": "ConscriptMolotov",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": 50,
-      "range": 5430,
-      "damage_warheads": [
-       {
-        "tag": "Demolition_Light",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "233",
-        "falloff": "100, 45, 18, 6, 0"
-       },
-       {
-        "tag": "Flame_Light",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "200",
-        "falloff": "100, 90, 78, 60, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Flame_Light"
-      ],
-      "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light"
-      ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "pricing": true,
-      "burst": 1
-     },
-     {
-      "slot": "Armament@GARRISONED",
-      "weapon": "ConscriptMolotov",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "50",
-      "range": "5725",
-      "damage_warheads": [
-       {
-        "tag": "Demolition_Light",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "233",
-        "falloff": "100, 45, 18, 6, 0"
-       },
-       {
-        "tag": "Flame_Light",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "200",
-        "falloff": "100, 90, 78, 60, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Flame_Light"
-      ],
-      "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light"
-      ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "armament_name": "garrisoned",
-      "pricing": false
-     }
-    ],
-    "design": {
-     "unit_class": 0.4,
-     "special": 1.25,
-     "tech_tier": 1.0,
-     "class_anchor": null,
-     "subtype": "GrenadierInfantry",
-     "balance_include": true,
-     "category": "Infantry"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "67"
     }
    },
    "ra1_technician": {
-    "name": "Technician",
-    "cost": {
-     "v": "10",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "2500",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "56",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "2c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "Pistol",
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "reloaddelay": "7",
-      "range": "3072",
       "damage_warheads": [
        {
-        "tag": "1Dam",
-        "type": "SpreadDamage",
         "damage": "100",
+        "falloff": null,
         "spread": "200",
-        "falloff": null
+        "tag": "1Dam",
+        "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "3072",
+      "reloaddelay": "7",
+      "slot": "Armament",
       "versus_templates": [
        "^LightMG"
       ],
       "warheads": [],
-      "design_weapon_class": null,
-      "weapon_class_source": "none",
-      "pricing": true
+      "weapon": "Pistol",
+      "weapon_class_source": "none"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "10"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Infantry",
      "class_anchor": null,
+     "special": null,
      "subtype": "Infantry",
-     "category": "Infantry"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "name": "Technician",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "2c0"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "56"
     }
    }
   },
   "naval": {
    "japan_japanesecarrier": {
-    "name": "actor_japan_japanesecarrier.name",
+    "armaments": [
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "20000",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "JapanCarrierTarget",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "buildable": true,
     "cost": {
-     "v": "3000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "3000"
+    },
+    "design": {
+     "category": "Naval",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ArtilleryShip",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "225000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Superheavy",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "45",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "9",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "225000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "actor_japan_japanesecarrier.name",
     "prerequisites": [
      "~japan_japanesenavalyard",
      "japan_japanesetechcenter"
@@ -2008,98 +2008,50 @@
      "Naval",
      "RANaval"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament@PRIMARY",
-      "weapon": "JapanCarrierTarget",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "25",
-      "range": "20000",
-      "damage_warheads": [],
-      "extraction_note": "no_damage_warheads",
-      "versus_templates": [],
-      "warheads": [],
-      "design_weapon_class": null,
-      "weapon_class_source": "none",
-      "pricing": false
-     }
-    ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "ArtilleryShip",
-     "category": "Naval"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "45"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "9"
     }
    },
    "japan_japanesespeedboat": {
-    "name": "Japanese Speedboat",
-    "cost": {
-     "v": "1200",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "40000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Light",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "140",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "28",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "10000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "prerequisites": [
-     "~japan_japanesenavalyard"
-    ],
-    "queue": [
-     "Naval",
-     "RANaval"
-    ],
-    "buildable": true,
     "armaments": [
      {
-      "slot": "Armament@AG",
-      "weapon": "JapanSpeedBoatGun",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "4",
-      "range": "5750",
       "damage_warheads": [
        {
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage",
         "damage": "4000",
+        "falloff": "100, 0",
         "spread": "100",
-        "falloff": "100, 0"
+        "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "5750",
+      "reloaddelay": "4",
+      "requires": "!japan_upgrade_waveforcebullets",
+      "slot": "Armament@AG",
       "versus_templates": [
        "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
@@ -2111,33 +2063,33 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "design_weapon_class": 0.875,
-      "weapon_class_source": "template",
-      "requires": "!japan_upgrade_waveforcebullets",
-      "pricing": true
+      "weapon": "JapanSpeedBoatGun",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@Upgrade",
-      "weapon": "JapanSpeedBoatGunWaveforce",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "4",
-      "range": "5750",
       "damage_warheads": [
        {
-        "tag": "Waveforce_HeavyFlatCompatibility",
-        "type": "AreaDamage",
         "damage": "6000",
+        "falloff": "100, 81, 61, 38, 0",
         "spread": "76",
-        "falloff": "100, 81, 61, 38, 0"
+        "tag": "Waveforce_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage",
         "damage": "1000",
+        "falloff": "100, 75, 50, 25",
         "spread": "200",
-        "falloff": "100, 75, 50, 25"
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5750",
+      "reloaddelay": "4",
+      "requires": "japan_upgrade_waveforcebullets",
+      "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Compatibility_Waveforce_HeavyFlat",
        "^WaveforceBulletWarhead",
@@ -2149,26 +2101,25 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "design_weapon_class": null,
-      "weapon_class_source": "illegal_mix",
-      "requires": "japan_upgrade_waveforcebullets",
-      "pricing": true
+      "weapon": "JapanSpeedBoatGunWaveforce",
+      "weapon_class_source": "illegal_mix"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "60",
       "slot": "Armament@DC1",
-      "weapon": "DepthCharge",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "60",
-      "range": "6000",
-      "damage_warheads": [
-       {
-        "tag": "Demolition_Light",
-        "type": "AreaDamage",
-        "damage": "60000",
-        "spread": "233",
-        "falloff": "100, 45, 18, 6, 0"
-       }
-      ],
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -2177,25 +2128,25 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "DepthCharge",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@DC2",
-      "weapon": "DepthCharge",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "60",
-      "range": "6000",
       "damage_warheads": [
        {
-        "tag": "Demolition_Light",
-        "type": "AreaDamage",
         "damage": "60000",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "falloff": "100, 45, 18, 6, 0"
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "60",
+      "slot": "Armament@DC2",
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -2204,96 +2155,95 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "DepthCharge",
+      "weapon_class_source": "template"
      }
     ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "ScoutShip",
-     "category": "Naval"
-    }
-   },
-   "japan_yamatobattleship": {
-    "name": "Yamato Battleship",
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "buildable": true,
     "cost": {
-     "v": "2200",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "category": "Naval",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ScoutShip",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "250000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Superheavy",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "35",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "7",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "9000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "40000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Japanese Speedboat",
     "prerequisites": [
-     "~japan_japanesenavalyard",
-     "japan_japaneseradararray"
+     "~japan_japanesenavalyard"
     ],
     "queue": [
      "Naval",
      "RANaval"
     ],
-    "buildable": true,
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "140"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "28"
+    }
+   },
+   "japan_yamatobattleship": {
     "armaments": [
      {
+      "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2500",
+      "pricing": true,
+      "range": "12500",
+      "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
-      "weapon": "YamatoCannon",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "125",
-      "burst": "2",
-      "range": "12500",
-      "minrange": "2500",
-      "damage_warheads": [
-       {
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage",
-        "damage": "20000",
-        "spread": "466",
-        "falloff": "100, 45, 18, 6, 0"
-       },
-       {
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage",
-        "damage": "20000",
-        "spread": "400",
-        "falloff": "100, 50, 20, 0"
-       }
-      ],
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy",
@@ -2304,64 +2254,64 @@
        "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "YamatoCannon",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@SECONDARY",
-      "weapon": "YamatoCannon",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "125",
-      "burst": "2",
-      "range": "12500",
-      "minrange": "2500",
-      "damage_warheads": [
-       {
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage",
-        "damage": "20000",
-        "spread": "466",
-        "falloff": "100, 45, 18, 6, 0"
-       },
-       {
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage",
-        "damage": "20000",
-        "spread": "400",
-        "falloff": "100, 50, 20, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
-      ],
-      "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_CannonHE_Heavy"
-      ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
       "armament_name": "secondary",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@AA",
-      "weapon": "YamatoFlak",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "4",
-      "range": "12500",
+      "burst": "2",
       "damage_warheads": [
        {
-        "tag": "Flak_Medium",
-        "type": "AreaDamage",
-        "damage": "2000",
-        "spread": "110",
-        "falloff": "100, 58, 32, 16, 6, 0"
+        "damage": "20000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2500",
+      "pricing": true,
+      "range": "12500",
+      "reloaddelay": "125",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "YamatoCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "12500",
+      "reloaddelay": "4",
+      "slot": "Armament@AA",
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -2370,82 +2320,91 @@
       "warheads": [
        "^Warhead_Flak_Medium"
       ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "YamatoFlak",
+      "weapon_class_source": "template"
      }
     ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "2200"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Naval",
      "class_anchor": null,
+     "special": null,
      "subtype": "BattleShip",
-     "category": "Naval"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Yamato Battleship",
+    "prerequisites": [
+     "~japan_japanesenavalyard",
+     "japan_japaneseradararray"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "35"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "7"
     }
    },
    "japan_zerofighter_slave": {
-    "name": "Zero Fighter",
-    "cost": {
-     "v": "150",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "7500",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "175",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Aircraft.Speed"
-    },
-    "turn_speed_air": {
-     "v": "25",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Aircraft.TurnSpeed"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "buildable": false,
     "armaments": [
      {
+      "burst": "12",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "1325",
+      "pricing": true,
+      "range": "6615",
+      "reloaddelay": "92",
+      "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@PRIMARY",
-      "weapon": "ZeroFighterChainGun",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "92",
-      "burst": "12",
-      "burstdelays": "4",
-      "range": "6615",
-      "minrange": "1325",
-      "damage_warheads": [
-       {
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage",
-        "damage": "6000",
-        "spread": "100",
-        "falloff": "100, 0"
-       }
-      ],
       "versus_templates": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -2454,29 +2413,29 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "requires": "!japan_upgrade_waveforcebullets",
-      "pricing": true
+      "weapon": "ZeroFighterChainGun",
+      "weapon_class_source": "template"
      },
      {
+      "burst": "12",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "1325",
+      "pricing": true,
+      "range": "6615",
+      "reloaddelay": "92",
+      "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@SECONDARY",
-      "weapon": "ZeroFighterChainGun",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "92",
-      "burst": "12",
-      "burstdelays": "4",
-      "range": "6615",
-      "minrange": "1325",
-      "damage_warheads": [
-       {
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage",
-        "damage": "6000",
-        "spread": "100",
-        "falloff": "100, 0"
-       }
-      ],
       "versus_templates": [
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -2485,64 +2444,64 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "requires": "!japan_upgrade_waveforcebullets",
-      "pricing": true
+      "weapon": "ZeroFighterChainGun",
+      "weapon_class_source": "template"
      },
      {
+      "burst": "12",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "ZeroFighterBullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "ZeroFighterBullet_MediumFriendly",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "minrange": "1325",
+      "pricing": true,
+      "range": "6615",
+      "reloaddelay": "92",
+      "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
-      "weapon": "ZeroFighterChainGunWaveforce",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "92",
-      "burst": "12",
-      "burstdelays": "4",
-      "range": "6615",
-      "minrange": "1325",
-      "damage_warheads": [
-       {
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage",
-        "damage": "4000",
-        "spread": "96",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage",
-        "damage": "1000",
-        "spread": "200",
-        "falloff": "100, 75, 50, 25"
-       },
-       {
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage",
-        "damage": "2",
-        "spread": "200",
-        "falloff": "100, 50, 33, 25, 20"
-       },
-       {
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage",
-        "damage": "6000",
-        "spread": "100",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "ZeroFighterBullet_Medium",
-        "type": "AreaDamage",
-        "damage": "1000",
-        "spread": "100",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "ZeroFighterBullet_MediumFriendly",
-        "type": "AreaDamage",
-        "damage": "500",
-        "spread": "100",
-        "falloff": "100, 0"
-       }
-      ],
       "versus_templates": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -2554,64 +2513,64 @@
        "^Warhead_Railgun_Heavy",
        "^Warhead_Bullet_Medium"
       ],
-      "design_weapon_class": 1.125,
-      "weapon_class_source": "template",
-      "requires": "japan_upgrade_waveforcebullets",
-      "pricing": true
+      "weapon": "ZeroFighterChainGunWaveforce",
+      "weapon_class_source": "template"
      },
      {
+      "burst": "12",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "ZeroFighterBullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "ZeroFighterBullet_MediumFriendly",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "minrange": "1325",
+      "pricing": true,
+      "range": "6615",
+      "reloaddelay": "92",
+      "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@UpgradeSECONDARY",
-      "weapon": "ZeroFighterChainGunWaveforce",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "92",
-      "burst": "12",
-      "burstdelays": "4",
-      "range": "6615",
-      "minrange": "1325",
-      "damage_warheads": [
-       {
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage",
-        "damage": "4000",
-        "spread": "96",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage",
-        "damage": "1000",
-        "spread": "200",
-        "falloff": "100, 75, 50, 25"
-       },
-       {
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage",
-        "damage": "2",
-        "spread": "200",
-        "falloff": "100, 50, 33, 25, 20"
-       },
-       {
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage",
-        "damage": "6000",
-        "spread": "100",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "ZeroFighterBullet_Medium",
-        "type": "AreaDamage",
-        "damage": "1000",
-        "spread": "100",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "ZeroFighterBullet_MediumFriendly",
-        "type": "AreaDamage",
-        "damage": "500",
-        "spread": "100",
-        "falloff": "100, 0"
-       }
-      ],
       "versus_templates": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -2623,26 +2582,25 @@
        "^Warhead_Railgun_Heavy",
        "^Warhead_Bullet_Medium"
       ],
-      "design_weapon_class": 1.125,
-      "weapon_class_source": "template",
-      "requires": "japan_upgrade_waveforcebullets",
-      "pricing": true
+      "weapon": "ZeroFighterChainGunWaveforce",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament",
-      "weapon": "JapanCarrierFighterBomb",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "5",
-      "range": "3000",
       "damage_warheads": [
        {
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage",
         "damage": "10000",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "falloff": "100, 45, 18, 6, 0"
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "3000",
+      "reloaddelay": "5",
+      "slot": "Armament",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
        "^Effect_Demolition_Heavy"
@@ -2650,67 +2608,235 @@
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "JapanCarrierFighterBomb",
+      "weapon_class_source": "template"
      }
     ],
-    "firepower_multiplier": {
-     "v": 0.5,
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#FirepowerMultiplier@doublecannons.Modifier",
-     "trait": "FirepowerMultiplier@doublecannons"
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "150"
     },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Naval",
      "class_anchor": null,
+     "special": null,
      "subtype": "Bomber",
-     "category": "Naval"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#FirepowerMultiplier@doublecannons.Modifier",
+     "trait": "FirepowerMultiplier@doublecannons",
+     "v": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "7500"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Zero Fighter",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Aircraft.Speed",
+     "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "ra1_allies_cruiser": {
-    "name": "Cruiser",
+    "armaments": [
+     {
+      "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "3000",
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "250",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "8Inch",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "3000",
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "250",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "8Inch",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "80000",
+        "falloff": "100, 72, 50, 32, 19, 9, 0",
+        "spread": "140",
+        "tag": "CryoBlast_Heavy",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "3000",
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "250",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARYCryo",
+      "versus_templates": [
+       "^Warhead_CryoBlast_Heavy",
+       "^Projectile_Grenade_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_CryoBlast_Heavy"
+      ],
+      "weapon": "8InchCryo",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "80000",
+        "falloff": "100, 72, 50, 32, 19, 9, 0",
+        "spread": "140",
+        "tag": "CryoBlast_Heavy",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "3000",
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "250",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@SECONDARYCryo",
+      "versus_templates": [
+       "^Warhead_CryoBlast_Heavy",
+       "^Projectile_Grenade_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_CryoBlast_Heavy"
+      ],
+      "weapon": "8InchCryo",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "buildable": true,
     "cost": {
-     "v": "3000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "3000"
+    },
+    "design": {
+     "category": "Naval",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ArtilleryShip",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "225000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Superheavy",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "40",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "8",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "225000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Cruiser",
     "prerequisites": [
      "~ra1_allies_alliednavalyard",
      "ra1_allies_alliedtechcenter"
@@ -2719,227 +2845,52 @@
      "Naval",
      "RANaval"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament@PRIMARY",
-      "weapon": "8Inch",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "250",
-      "burst": "2",
-      "range": "15000",
-      "minrange": "3000",
-      "damage_warheads": [
-       {
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage",
-        "damage": "40000",
-        "spread": "466",
-        "falloff": "100, 45, 18, 6, 0"
-       },
-       {
-        "tag": "Demolition_Light",
-        "type": "AreaDamage",
-        "damage": "40000",
-        "spread": "233",
-        "falloff": "100, 45, 18, 6, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light"
-      ],
-      "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
-      ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@SECONDARY",
-      "weapon": "8Inch",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "250",
-      "burst": "2",
-      "range": "15000",
-      "minrange": "3000",
-      "damage_warheads": [
-       {
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage",
-        "damage": "40000",
-        "spread": "466",
-        "falloff": "100, 45, 18, 6, 0"
-       },
-       {
-        "tag": "Demolition_Light",
-        "type": "AreaDamage",
-        "damage": "40000",
-        "spread": "233",
-        "falloff": "100, 45, 18, 6, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light"
-      ],
-      "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
-      ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "armament_name": "secondary",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@PRIMARYCryo",
-      "weapon": "8InchCryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "250",
-      "burst": "2",
-      "range": "15000",
-      "minrange": "3000",
-      "damage_warheads": [
-       {
-        "tag": "CryoBlast_Heavy",
-        "type": "AreaDamage",
-        "damage": "80000",
-        "spread": "140",
-        "falloff": "100, 72, 50, 32, 19, 9, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_CryoBlast_Heavy",
-       "^Projectile_Grenade_Light",
-       "^Effect_Cryo"
-      ],
-      "warheads": [
-       "^Warhead_CryoBlast_Heavy"
-      ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@SECONDARYCryo",
-      "weapon": "8InchCryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "250",
-      "burst": "2",
-      "range": "15000",
-      "minrange": "3000",
-      "damage_warheads": [
-       {
-        "tag": "CryoBlast_Heavy",
-        "type": "AreaDamage",
-        "damage": "80000",
-        "spread": "140",
-        "falloff": "100, 72, 50, 32, 19, 9, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_CryoBlast_Heavy",
-       "^Projectile_Grenade_Light",
-       "^Effect_Cryo"
-      ],
-      "warheads": [
-       "^Warhead_CryoBlast_Heavy"
-      ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "armament_name": "secondary",
-      "pricing": true
-     }
-    ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "ArtilleryShip",
-     "category": "Naval"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "8"
     }
    },
    "ra1_allies_destroyer": {
-    "name": "Destroyer",
-    "cost": {
-     "v": "1600",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "125000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Heavy",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "85",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "17",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "9000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "prerequisites": [
-     "~ra1_allies_alliednavalyard",
-     "ra1_allies_alliedradardome"
-    ],
-    "queue": [
-     "Naval",
-     "RANaval"
-    ],
-    "buildable": true,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "Stinger",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "27",
       "burst": "2",
       "burstdelays": "7",
-      "range": "8000",
       "damage_warheads": [
        {
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage",
         "damage": "10000",
+        "falloff": "100, 0",
         "spread": "85",
-        "falloff": "100, 0"
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "27",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
@@ -2948,28 +2899,28 @@
       "warheads": [
        "^Warhead_MissileAP_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "Stinger",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@Upgrade",
-      "weapon": "StingerCryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "27",
       "burst": "2",
       "burstdelays": "7",
-      "range": "8000",
       "damage_warheads": [
        {
-        "tag": "MissileCryo_Heavy",
-        "type": "AreaDamage",
         "damage": "10000",
+        "falloff": "100, 60, 27, 0",
         "spread": "53",
-        "falloff": "100, 60, 27, 0"
+        "tag": "MissileCryo_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "27",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_MissileCryo_Heavy",
        "^Projectile_Missile_Heavy",
@@ -2978,26 +2929,26 @@
       "warheads": [
        "^Warhead_MissileCryo_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "StingerCryo",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "60",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC1",
-      "weapon": "DepthCharge",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "60",
-      "range": "6000",
-      "damage_warheads": [
-       {
-        "tag": "Demolition_Light",
-        "type": "AreaDamage",
-        "damage": "60000",
-        "spread": "233",
-        "falloff": "100, 45, 18, 6, 0"
-       }
-      ],
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -3006,26 +2957,26 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "DepthCharge",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "60",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC2",
-      "weapon": "DepthCharge",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "60",
-      "range": "6000",
-      "damage_warheads": [
-       {
-        "tag": "Demolition_Light",
-        "type": "AreaDamage",
-        "damage": "60000",
-        "spread": "233",
-        "falloff": "100, 45, 18, 6, 0"
-       }
-      ],
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -3034,26 +2985,26 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "DepthCharge",
+      "weapon_class_source": "template"
      },
      {
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "falloff": "100, 72, 50, 32, 19, 9, 0",
+        "spread": "70",
+        "tag": "CryoBlast_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "60",
+      "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC1Cryo",
-      "weapon": "DepthChargeCryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "60",
-      "range": "6000",
-      "damage_warheads": [
-       {
-        "tag": "CryoBlast_Light",
-        "type": "AreaDamage",
-        "damage": "60000",
-        "spread": "70",
-        "falloff": "100, 72, 50, 32, 19, 9, 0"
-       }
-      ],
       "versus_templates": [
        "^Warhead_CryoBlast_Light",
        "^Projectile_Grenade_Light",
@@ -3062,26 +3013,26 @@
       "warheads": [
        "^Warhead_CryoBlast_Light"
       ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "DepthChargeCryo",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@DC2Cryo",
-      "weapon": "DepthChargeCryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "60",
-      "range": "6000",
       "damage_warheads": [
        {
-        "tag": "CryoBlast_Light",
-        "type": "AreaDamage",
         "damage": "60000",
+        "falloff": "100, 72, 50, 32, 19, 9, 0",
         "spread": "70",
-        "falloff": "100, 72, 50, 32, 19, 9, 0"
+        "tag": "CryoBlast_Light",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "60",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@DC2Cryo",
       "versus_templates": [
        "^Warhead_CryoBlast_Light",
        "^Projectile_Grenade_Light",
@@ -3090,87 +3041,88 @@
       "warheads": [
        "^Warhead_CryoBlast_Light"
       ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "DepthChargeCryo",
+      "weapon_class_source": "template"
      }
     ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "BattleShip",
-     "category": "Naval"
-    }
-   },
-   "ra1_allies_gunboat": {
-    "name": "Gunboat",
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
     "cost": {
-     "v": "1300",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "category": "Naval",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BattleShip",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "60000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Medium",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "120",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "24",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "10000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "125000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Destroyer",
     "prerequisites": [
-     "~ra1_allies_alliednavalyard"
+     "~ra1_allies_alliednavalyard",
+     "ra1_allies_alliedradardome"
     ],
     "queue": [
      "Naval",
      "RANaval"
     ],
-    "buildable": true,
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "85"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "17"
+    }
+   },
+   "ra1_allies_gunboat": {
     "armaments": [
      {
-      "slot": "Armament@PRIMARY",
-      "weapon": "2Inch",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "30",
-      "range": "6000",
       "damage_warheads": [
        {
-        "tag": "CannonAP_Light",
-        "type": "AreaDamage",
         "damage": "30000",
+        "falloff": "100, 0",
         "spread": "300",
-        "falloff": "100, 0"
+        "tag": "CannonAP_Light",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "30",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Light",
@@ -3179,26 +3131,27 @@
       "warheads": [
        "^Warhead_CannonAP_Light"
       ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "2Inch",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@SECONDARY",
-      "weapon": "DepthCharge",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "60",
-      "range": "6000",
+      "armament_name": "secondary",
       "damage_warheads": [
        {
-        "tag": "Demolition_Light",
-        "type": "AreaDamage",
         "damage": "60000",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "falloff": "100, 45, 18, 6, 0"
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "60",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -3207,27 +3160,26 @@
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "armament_name": "secondary",
-      "pricing": true
+      "weapon": "DepthCharge",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@PRIMARYCryo",
-      "weapon": "2InchCryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "30",
-      "range": "6000",
       "damage_warheads": [
        {
-        "tag": "CannonCryo_Light",
-        "type": "AreaDamage",
         "damage": "30000",
+        "falloff": "100, 61, 28, 0",
         "spread": "300",
-        "falloff": "100, 61, 28, 0"
+        "tag": "CannonCryo_Light",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "30",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARYCryo",
       "versus_templates": [
        "^Warhead_CannonCryo_Light",
        "^Projectile_Shell_Light",
@@ -3236,26 +3188,27 @@
       "warheads": [
        "^Warhead_CannonCryo_Light"
       ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "2InchCryo",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@SECONDARYCryo",
-      "weapon": "DepthChargeCryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "60",
-      "range": "6000",
+      "armament_name": "secondary",
       "damage_warheads": [
        {
-        "tag": "CryoBlast_Light",
-        "type": "AreaDamage",
         "damage": "60000",
+        "falloff": "100, 72, 50, 32, 19, 9, 0",
         "spread": "70",
-        "falloff": "100, 72, 50, 32, 19, 9, 0"
+        "tag": "CryoBlast_Light",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "60",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@SECONDARYCryo",
       "versus_templates": [
        "^Warhead_CryoBlast_Light",
        "^Projectile_Grenade_Light",
@@ -3264,64 +3217,95 @@
       "warheads": [
        "^Warhead_CryoBlast_Light"
       ],
-      "design_weapon_class": 0.75,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "armament_name": "secondary",
-      "pricing": true
+      "weapon": "DepthChargeCryo",
+      "weapon_class_source": "template"
      }
     ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "1300"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Naval",
      "class_anchor": null,
+     "special": null,
      "subtype": "ScoutShip",
-     "category": "Naval"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "60000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Gunboat",
+    "prerequisites": [
+     "~ra1_allies_alliednavalyard"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "120"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "24"
     }
    },
    "ra1_navaltransport": {
-    "name": "Naval Transport",
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
     "cost": {
-     "v": "500",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "category": "Naval",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Ship",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "100000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Heavy",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "100",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "40",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "7500",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#RevealsShroud.Range"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "100000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Naval Transport",
     "prerequisites": [
      "~ranavaltransport"
     ],
@@ -3329,86 +3313,52 @@
      "Naval",
      "RANaval"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Ship",
-     "category": "Naval"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#RevealsShroud.Range",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "40"
     }
    },
    "ra1_soviets_missilesubmarine": {
-    "name": "Missile Submarine",
-    "cost": {
-     "v": "3000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "70000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Medium",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "60",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "24",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "prerequisites": [
-     "~ra1_soviets_subpen",
-     "ra1_soviets_techcenter"
-    ],
-    "queue": [
-     "Naval",
-     "RANaval"
-    ],
-    "buildable": true,
     "armaments": [
      {
-      "slot": "Armament@PRIMARY",
-      "weapon": "227mm",
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "reloaddelay": "111",
       "burst": "6",
       "burstdelays": "5",
-      "range": "9920",
-      "minrange": "1985",
       "damage_warheads": [
        {
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage",
         "damage": "8000",
+        "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "falloff": "100, 45, 15, 0"
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "1985",
+      "pricing": true,
+      "range": "9920",
+      "reloaddelay": "111",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",
@@ -3417,98 +3367,100 @@
       "warheads": [
        "^Warhead_MissileHE_Medium"
       ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "227mm",
+      "weapon_class_source": "template"
      }
     ],
-    "firepower_multiplier": {
-     "v": 2.0,
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#FirepowerMultiplier@MissileSubBuff.Modifier",
-     "trait": "FirepowerMultiplier@MissileSubBuff"
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "3000"
     },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Naval",
      "class_anchor": null,
+     "special": null,
      "subtype": "ArtilleryShip",
-     "category": "Naval"
-    }
-   },
-   "ra1_soviets_submarine": {
-    "name": "Soviet Submarine",
-    "cost": {
-     "v": "1000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#FirepowerMultiplier@MissileSubBuff.Modifier",
+     "trait": "FirepowerMultiplier@MissileSubBuff",
+     "v": 2.0
     },
     "hp": {
-     "v": "100000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Heavy",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "75",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "30",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "10000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "70000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Missile Submarine",
     "prerequisites": [
-     "~ra1_soviets_subpen"
+     "~ra1_soviets_subpen",
+     "ra1_soviets_techcenter"
     ],
     "queue": [
      "Naval",
      "RANaval"
     ],
-    "buildable": true,
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "ra1_soviets_submarine": {
     "armaments": [
      {
-      "slot": "Armament@PRIMARY",
-      "weapon": "TorpTube",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "100",
-      "range": "10000",
       "damage_warheads": [
        {
-        "tag": "Concussion_Light",
-        "type": "AreaDamage",
         "damage": "16000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "233",
-        "falloff": "100, 72, 50, 32, 18, 8, 0"
+        "tag": "Concussion_Light",
+        "type": "AreaDamage"
        },
        {
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage",
         "damage": "16000",
+        "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "falloff": "100, 45, 15, 0"
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "100",
+      "requires": "!ra1_soviets_doctrine_inferno",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy",
@@ -3519,26 +3471,26 @@
        "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy"
       ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "requires": "!ra1_soviets_doctrine_inferno",
-      "pricing": true
+      "weapon": "TorpTube",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@Upgrade",
-      "weapon": "TorpTubeThermobaric",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "100",
-      "range": "10000",
       "damage_warheads": [
        {
-        "tag": "MissileNuke_Heavy",
-        "type": "AreaDamage",
         "damage": "32000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "106",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0"
+        "tag": "MissileNuke_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "100",
+      "requires": "ra1_soviets_doctrine_inferno",
+      "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_MissileNuke_Heavy",
        "^Projectile_Missile_Heavy",
@@ -3548,212 +3500,210 @@
       "warheads": [
        "^Warhead_MissileNuke_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "requires": "ra1_soviets_doctrine_inferno",
-      "pricing": true
+      "weapon": "TorpTubeThermobaric",
+      "weapon_class_source": "template"
      }
     ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "1000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Naval",
      "class_anchor": null,
+     "special": null,
      "subtype": "ScoutShip",
-     "category": "Naval"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Soviet Submarine",
+    "prerequisites": [
+     "~ra1_soviets_subpen"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "30"
     }
    }
   },
   "upgrades": {
    "japan_upgrade_nanotechrepairs_proxy_actor": {
-    "name": "Nanotech Repairs",
     "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1"
     },
     "buildable": false,
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Nanotech Repairs"
    },
    "ra1_allies_upgrade_gpssatellitesupport_proxy_actor": {
-    "name": "GPS Satellite Support",
     "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1"
     },
     "buildable": false,
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "GPS Satellite Support"
    },
    "ra1_soviets_upgrade_menofsteel_proxy_actor": {
-    "name": "Men Of Steel",
     "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1"
     },
     "buildable": false,
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Men Of Steel"
    },
    "ra1_soviets_upgrade_nuclearshells_proxy_actor": {
-    "name": "Nuclear Tank Shells",
     "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1"
     },
     "buildable": false,
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Nuclear Tank Shells"
    },
    "ra1_soviets_upgrade_reactoroverload_proxy_actor": {
-    "name": "Reactor Overload",
     "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1"
     },
     "buildable": false,
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Reactor Overload"
    },
    "ra1_soviets_upgrade_scorchedearth_proxy_actor": {
-    "name": "Scorched Earth",
     "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1"
     },
     "buildable": false,
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Scorched Earth"
    },
    "ra1_soviets_upgrade_stalinium_proxy_actor": {
-    "name": "Stalinium",
     "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1"
     },
     "buildable": false,
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Stalinium"
    },
    "ra1_soviets_upgrade_wareconomy_proxy_actor": {
-    "name": "War Economy",
     "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1"
     },
     "buildable": false,
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "War Economy"
    }
   },
   "vehicles": {
    "ra1_allies_alliedapc": {
-    "name": "Allied APC",
-    "cost": {
-     "v": "1300",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "50000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Medium",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "105",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "21",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "prerequisites": [
-     "~ra1_allies_alliedbarracks",
-     "~!ra1_allies_promotion_phasetransport"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle"
-    ],
-    "buildable": true,
     "armaments": [
      {
-      "slot": "Armament@PRIMARY",
-      "weapon": "APCGunAllies",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "10",
-      "range": "5978",
       "damage_warheads": [
        {
-        "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage",
         "damage": "4000",
+        "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "falloff": "100, 58, 32, 16, 6, 0"
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5978",
+      "reloaddelay": "10",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Compatibility_Flak_MediumFlat",
        "^Warhead_Bullet_Medium",
@@ -3765,25 +3715,26 @@
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "APCGunAllies",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@SECONDARY",
-      "weapon": "APCGunAllies_AA",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "10",
-      "range": "8967",
+      "armament_name": "secondary",
       "damage_warheads": [
        {
-        "tag": "Flak_MediumFlatCompatibility",
-        "type": "AreaDamage",
         "damage": "4000",
+        "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "falloff": "100, 58, 32, 16, 6, 0"
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "8967",
+      "reloaddelay": "10",
+      "slot": "Armament@SECONDARY",
       "versus_templates": [
        "APCGunAllies"
       ],
@@ -3791,94 +3742,95 @@
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "armament_name": "secondary",
-      "pricing": true
+      "weapon": "APCGunAllies_AA",
+      "weapon_class_source": "template"
      }
     ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "SupportVehicle",
-     "category": "Vehicles"
-    }
-   },
-   "ra1_allies_alliedcybertank": {
-    "name": "Allied Cyber Tank",
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "buildable": true,
     "cost": {
-     "v": "1300",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "160000",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Heavy",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "75",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "15",
-     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "6000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Allied APC",
     "prerequisites": [
-     "~disabled"
+     "~ra1_allies_alliedbarracks",
+     "~!ra1_allies_promotion_phasetransport"
     ],
     "queue": [
      "Vehicle",
      "RAVehicle"
     ],
-    "buildable": false,
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "105"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "21"
+    }
+   },
+   "ra1_allies_alliedcybertank": {
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "TigerCannon",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "60",
-      "range": "5915",
       "damage_warheads": [
        {
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage",
         "damage": "8000",
+        "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "falloff": "100, 50, 20, 0"
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage",
         "damage": "8000",
+        "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "falloff": "100, 50, 20, 0"
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": true,
+      "range": "5915",
+      "reloaddelay": "60",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium",
@@ -3889,26 +3841,26 @@
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
-      "design_weapon_class": 1.125,
-      "weapon_class_source": "template",
-      "requires": "!ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "TigerCannon",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@Cryo",
-      "weapon": "TigerCannonCryo",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "reloaddelay": "60",
-      "range": "5915",
       "damage_warheads": [
        {
-        "tag": "CannonCryo_Heavy",
-        "type": "AreaDamage",
         "damage": "16000",
+        "falloff": "100, 61, 28, 0",
         "spread": "74",
-        "falloff": "100, 61, 28, 0"
+        "tag": "CannonCryo_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "5915",
+      "reloaddelay": "60",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Cryo",
       "versus_templates": [
        "^Warhead_CannonCryo_Heavy",
        "^Projectile_Shell_Heavy",
@@ -3917,19 +3869,66 @@
       "warheads": [
        "^Warhead_CannonCryo_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "requires": "ra1_allies_upgrade_cryomissiles",
-      "pricing": true
+      "weapon": "TigerCannonCryo",
+      "weapon_class_source": "template"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1300"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Vehicles",
      "class_anchor": "mbt",
+     "special": null,
      "subtype": "MainBattleTank",
-     "category": "Vehicles"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Health.HP",
+     "v": "160000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Allied Cyber Tank",
+    "prerequisites": [
+     "~disabled"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
     }
    }
   }

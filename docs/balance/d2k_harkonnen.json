@@ -1,80 +1,43 @@
 {
- "schema": 2,
  "ledger": "d2k_harkonnen",
  "pack": "mods/cameo/ContentPacks/D2k/Harkonnen",
+ "schema": 2,
  "sections": {
   "buildings": {
    "harkonnen_autogunturret": {
-    "name": "Harkonnen Autogun Turret",
-    "cost": {
-     "v": "1100",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "75000",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Concrete",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Armor.Type"
-    },
-    "sight": {
-     "v": "7710",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#RevealsShroud.Range"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "prerequisites": [
-     "~harkonnen_constructionyard",
-     "harkonnen_barracks"
-    ],
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "harkonnen_autogunturret",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "reloaddelay": "132",
       "burst": "26",
       "burstdelays": "2",
-      "range": "7700",
       "damage_warheads": [
        {
-        "tag": "Bullet_Light",
-        "type": "AreaDamage",
         "damage": "2000",
+        "falloff": "100, 0",
         "spread": "67",
-        "falloff": "100, 0"
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
        },
        {
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage",
         "damage": "2000",
+        "falloff": "100, 0",
         "spread": "100",
-        "falloff": "100, 0"
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        },
        {
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage",
         "damage": "2000",
+        "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "falloff": "100, 50, 20, 0"
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7700",
+      "reloaddelay": "132",
+      "slot": "Armament",
       "versus_templates": [
        "ordos_autogunturret"
       ],
@@ -83,57 +46,86 @@
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
-      "design_weapon_class": null,
-      "weapon_class_source": "illegal_mix",
-      "pricing": true
+      "weapon": "harkonnen_autogunturret",
+      "weapon_class_source": "illegal_mix"
      }
     ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Armor.Type",
+     "v": "Concrete"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost",
+     "v": "1100"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "AdvancedDefense"
+     "special": null,
+     "subtype": "AdvancedDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP",
+     "v": "75000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Harkonnen Autogun Turret",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "harkonnen_barracks"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "7710"
     }
    },
    "harkonnen_barracks": {
-    "name": "Harkonnen Barracks",
-    "cost": {
-     "v": "1000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "200000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Wood",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Wood"
     },
     "build_duration": {
-     "v": "250",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "250"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Harkonnen Barracks",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_windtrap"
@@ -142,49 +134,49 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
     }
    },
    "harkonnen_constructionyard": {
-    "name": "Harkonnen Construction Yard",
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "buildable": false,
     "cost": {
-     "v": "5000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "1000000",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "10000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1000000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Harkonnen Construction Yard",
     "prerequisites": [
      "~disabled"
     ],
@@ -192,76 +184,43 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": false,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
     }
    },
    "harkonnen_flameturret": {
-    "name": "Harkonnen Flame Turret",
-    "cost": {
-     "v": "1200",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "125000",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "7979",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#RevealsShroud.Range"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "prerequisites": [
-     "~harkonnen_constructionyard",
-     "harkonnen_barracks"
-    ],
-    "queue": [
-     "Defence",
-     "RADefence"
-    ],
-    "buildable": true,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "HarkonnenFlameTurret",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "reloaddelay": "50",
       "burst": "5",
       "burstdelays": "3",
-      "range": "6742",
       "damage_warheads": [
        {
-        "tag": "Flame_Medium",
-        "type": "AreaDamage",
         "damage": "25135",
+        "falloff": "100, 90, 78, 60, 0",
         "spread": "300",
-        "falloff": "100, 90, 78, 60, 0"
+        "tag": "Flame_Medium",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6742",
+      "reloaddelay": "50",
+      "slot": "Armament",
       "versus_templates": [
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
@@ -270,57 +229,90 @@
       "warheads": [
        "^Warhead_Flame_Medium"
       ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "HarkonnenFlameTurret",
+      "weapon_class_source": "template"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost",
+     "v": "1200"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "BasicDefense"
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP",
+     "v": "125000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Harkonnen Flame Turret",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "harkonnen_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "7979"
     }
    },
    "harkonnen_heavyfactory": {
-    "name": "Harkonnen Heavy Factory",
-    "cost": {
-     "v": "2000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "400000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "500"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Harkonnen Heavy Factory",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_refinery"
@@ -329,53 +321,53 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
     }
    },
    "harkonnen_hightechfactory": {
-    "name": "High Tech Factory",
-    "cost": {
-     "v": "1500",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "300000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "6000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "375",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "375"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1500"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "High Tech Factory",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_outpost"
@@ -384,53 +376,53 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
     }
    },
    "harkonnen_ixresearchcenter": {
-    "name": "Ix Research Center",
-    "cost": {
-     "v": "5000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "500000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "10000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "1500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1500"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Ix Research Center",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_outpost"
@@ -439,53 +431,53 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
     }
    },
    "harkonnen_lightfactory": {
-    "name": "Harkonnen Light Factory",
-    "cost": {
-     "v": "1000",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "200000",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "500"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP",
+     "v": "200000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Harkonnen Light Factory",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_refinery"
@@ -494,53 +486,53 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
     }
    },
    "harkonnen_outpost": {
-    "name": "Harkonnen Outpost",
-    "cost": {
-     "v": "2500",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "250000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Wood",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "10000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Wood"
     },
     "build_duration": {
-     "v": "750",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "750"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Harkonnen Outpost",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_refinery"
@@ -549,53 +541,53 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
     }
    },
    "harkonnen_palace": {
-    "name": "Harkonnen Palace",
-    "cost": {
-     "v": "10000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "1000000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "10000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "1500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1500"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Harkonnen Palace",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_ixresearchcenter",
@@ -606,53 +598,53 @@
      "Defence",
      "RADefence"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
     }
    },
    "harkonnen_refinery": {
-    "name": "Refinery",
-    "cost": {
-     "v": "3000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "300000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "6000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "750",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "750"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Refinery",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_windtrap"
@@ -661,53 +653,53 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
     }
    },
    "harkonnen_repairpad": {
-    "name": "Harkonnen Repair Pad",
-    "cost": {
-     "v": "1000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "250000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "750",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "750"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Harkonnen Repair Pad",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_heavyfactory"
@@ -716,73 +708,44 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
     }
    },
    "harkonnen_rocketturret": {
-    "name": "Harkonnen Rocket Turret",
-    "cost": {
-     "v": "1500",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "150000",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Concrete",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Armor.Type"
-    },
-    "sight": {
-     "v": "10684",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#RevealsShroud.Range"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "prerequisites": [
-     "~harkonnen_constructionyard",
-     "harkonnen_outpost"
-    ],
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament@PRIMARY",
-      "weapon": "D2K_TowerMissile",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "reloaddelay": "42",
       "burst": "2",
       "burstdelays": "5",
-      "range": "10684",
-      "minrange": "2135",
       "damage_warheads": [
        {
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage",
         "damage": "16000",
+        "falloff": "100, 0",
         "spread": "85",
-        "falloff": "100, 0"
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2135",
+      "pricing": true,
+      "range": "10684",
+      "reloaddelay": "42",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^D2KMissile",
        "^Projectile_Missile_Heavy_D2K",
@@ -791,61 +754,90 @@
       "warheads": [
        "^Warhead_MissileAP_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "D2K_TowerMissile",
+      "weapon_class_source": "template"
      }
     ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Armor.Type",
+     "v": "Concrete"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "AdvancedDefense"
+     "special": null,
+     "subtype": "AdvancedDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP",
+     "v": "150000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Harkonnen Rocket Turret",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "harkonnen_outpost"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "10684"
     }
    },
    "harkonnen_starport": {
-    "name": "Starport",
-    "cost": {
-     "v": "5000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "500000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "3c768",
-     "src": "inherited"
-    },
-    "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "1500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1500"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Starport",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_ixresearchcenter",
@@ -855,49 +847,49 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "3c768"
     }
    },
    "harkonnen_storagesilo": {
-    "name": "Storage Silo",
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
     "cost": {
-     "v": "150",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "150"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "50000",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "Wood",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "4c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "50000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Storage Silo",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_refinery"
@@ -906,49 +898,49 @@
      "Defence",
      "RADefence"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "4c0"
     }
    },
    "harkonnen_windtrap": {
-    "name": "Wind Trap",
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "buildable": true,
     "cost": {
-     "v": "500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "200000",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "4c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "200000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Wind Trap",
     "prerequisites": [
      "~harkonnen_constructionyard"
     ],
@@ -956,59 +948,79 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "4c0"
     }
    }
   },
   "vehicles": {
    "combat_tank.harkonnen": {
-    "name": "Harkonnen Combat Tank",
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "55",
+      "slot": "Armament",
+      "versus_templates": [
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "80mm_H",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "buildable": true,
     "cost": {
-     "v": "600",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "mbt",
+     "special": null,
+     "subtype": "MainBattleTank",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "70000",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Heavy",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "65",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "13",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "6000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP",
+     "v": "70000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Harkonnen Combat Tank",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen_combat"
@@ -1018,89 +1030,98 @@
      "RAVehicle",
      "Starport"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament",
-      "weapon": "80mm_H",
-      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
-      "reloaddelay": "55",
-      "range": "5120",
-      "damage_warheads": [
-       {
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "300",
-        "falloff": "100, 50, 20, 0"
-       }
-      ],
-      "versus_templates": [
-       "^D2K_Cannon"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "pricing": true
-     }
-    ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": "mbt",
-     "subtype": "MainBattleTank",
-     "category": "Vehicles"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "65"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "13"
     }
    },
    "devastator": {
-    "name": "Harkonnen Devastator Tank",
-    "cost": {
-     "v": "3000",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "550000",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP"
-    },
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "80000",
+        "falloff": null,
+        "spread": "666",
+        "tag": "CannonHE_Heavy_D2K_DevBullet",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "666",
+        "tag": "CannonHE_Heavy_D2K_DevBullet_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "100",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy_D2K_DevBullet",
+       "^Projectile_Shell_Heavy_D2K_DevBullet",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy_D2K_DevBullet",
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "DevBullet",
+      "weapon_class_source": "template"
+     }
+    ],
     "armor": {
-     "v": "Superheavy",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Armor.Type"
-    },
-    "speed": {
-     "v": "31",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "12",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "4c768",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#RevealsShroud.Range"
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Armor.Type",
+     "v": "Superheavy"
     },
     "build_duration": {
-     "v": "1000",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Buildable.BuildDuration"
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Buildable.BuildDuration",
+     "v": "1000"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost",
+     "v": "3000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Vehicle",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP",
+     "v": "550000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Harkonnen Devastator Tank",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen",
@@ -1111,98 +1132,61 @@
      "RAVehicle",
      "Starport"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament",
-      "weapon": "DevBullet",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "100",
-      "range": "6666",
-      "damage_warheads": [
-       {
-        "tag": "CannonHE_Heavy_D2K_DevBullet",
-        "type": "SpreadDamage",
-        "damage": "80000",
-        "spread": "666",
-        "falloff": null
-       },
-       {
-        "tag": "CannonHE_Heavy_D2K_DevBullet_Percentage",
-        "type": "AreaDamagePercentage",
-        "damage": "5",
-        "spread": "666",
-        "falloff": null
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_CannonHE_Heavy_D2K_DevBullet",
-       "^Projectile_Shell_Heavy_D2K_DevBullet",
-       "^Effect_CannonHE_Heavy_D2K_DevBullet"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy_D2K_DevBullet",
-       "^Warhead_CannonHE_Heavy"
-      ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "pricing": true
-     }
-    ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Vehicle"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "4c768"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "31"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "12"
     }
    },
    "harkonnen_mobileconstructionvehicle": {
-    "name": "Harkonnen Mobile Construction Vehicle",
-    "cost": {
-     "v": "5000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "300000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Medium",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "75",
-     "src": "inherited"
-    },
-    "turn_speed": {
-     "v": "15",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Medium"
     },
     "build_duration": {
-     "v": "1500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1500"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Harkonnen Mobile Construction Vehicle",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "harkonnen_mcv_production"
@@ -1212,57 +1196,94 @@
      "RAVehicle",
      "Starport"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "SupportVehicle"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
     }
    },
    "missile_tank": {
-    "name": "Missile Tank",
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "25",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15000",
+        "falloff": null,
+        "spread": null,
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2050",
+      "pricing": true,
+      "range": "10240",
+      "reloaddelay": "150",
+      "slot": "Armament",
+      "versus_templates": [
+       "^D2KMissile"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "mtank_pri",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": true,
     "cost": {
-     "v": 750,
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost",
+     "v": "750"
+    },
+    "design": {
+     "class_anchor": "missile_vehicle",
+     "special": null,
+     "subtype": "MissileVehicle",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": 47500,
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Light",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": 95,
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "26",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "6c256",
-     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#RevealsShroud.Range"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Missile Tank",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.missile_tank",
@@ -1274,50 +1295,29 @@
      "RAVehicle",
      "Starport"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament",
-      "weapon": "mtank_pri",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": 150,
-      "burst": 4,
-      "burstdelays": "25",
-      "range": 9580,
-      "minrange": "2050",
-      "damage_warheads": [
-       {
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage",
-        "damage": "2000",
-        "spread": "85",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "1Dam",
-        "type": "SpreadDamage",
-        "damage": "15000",
-        "spread": null,
-        "falloff": null
-       }
-      ],
-      "versus_templates": [
-       "^D2KMissile"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Heavy"
-      ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "pricing": true
-     }
-    ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": "missile_vehicle",
-     "subtype": "MissileVehicle"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "6c256"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "64"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "26"
     }
    }
   }

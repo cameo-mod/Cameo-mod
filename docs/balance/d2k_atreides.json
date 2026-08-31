@@ -1,43 +1,35 @@
 {
- "schema": 2,
  "ledger": "d2k_atreides",
  "pack": "mods/cameo/ContentPacks/D2k/Atreides",
+ "schema": 2,
  "sections": {
   "buildings": {
    "atreides_constructionyard": {
-    "name": "Atreides Construction Yard",
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "buildable": false,
     "cost": {
-     "v": "5000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "1000000",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "10000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1000000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Atreides Construction Yard",
     "prerequisites": [
      "~disabled"
     ],
@@ -45,53 +37,53 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": false,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
     }
    },
    "atreides_heavyfactory": {
-    "name": "Atreides Heavy Factory",
-    "cost": {
-     "v": "2000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "400000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "500"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Atreides Heavy Factory",
     "prerequisites": [
      "~atreides_constructionyard",
      "refinery.atreides"
@@ -100,49 +92,49 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
     }
    },
    "d2k_silo.atreides": {
-    "name": "Storage Silo",
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
     "cost": {
-     "v": "150",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "150"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "50000",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "Wood",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "4c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "50000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Storage Silo",
     "prerequisites": [
      "~atreides_constructionyard",
      "refinery.atreides"
@@ -151,53 +143,53 @@
      "Defence",
      "RADefence"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "4c0"
     }
    },
    "refinery.atreides": {
-    "name": "Spice Refinery",
-    "cost": {
-     "v": "3000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "300000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "6000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "750",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "750"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Spice Refinery",
     "prerequisites": [
      "~atreides_constructionyard",
      "wind_trap.atreides"
@@ -206,49 +198,49 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
     }
    },
    "wind_trap.atreides": {
-    "name": "Wind Trap",
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "buildable": true,
     "cost": {
-     "v": "500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "200000",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "Concrete",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "4c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "200000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Wind Trap",
     "prerequisites": [
      "~atreides_constructionyard"
     ],
@@ -256,63 +248,55 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "4c0"
     }
    }
   },
   "vehicles": {
    "atreides_mobileconstructionvehicle": {
-    "name": "Atreides Mobile Construction Vehicle",
-    "cost": {
-     "v": "5000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "300000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Medium",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "75",
-     "src": "inherited"
-    },
-    "turn_speed": {
-     "v": "15",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Medium"
     },
     "build_duration": {
-     "v": "1500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1500"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Atreides Mobile Construction Vehicle",
     "prerequisites": [
      "~atreides_vehicle_production",
      "atreides_mcv_production"
@@ -322,57 +306,85 @@
      "RAVehicle",
      "Starport"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "SupportVehicle"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
     }
    },
    "combat_tank.atreides": {
-    "name": "Combat Tank",
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "25",
+      "slot": "Armament",
+      "versus_templates": [
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "80mm_A",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "buildable": true,
     "cost": {
-     "v": "600",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "600"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "mbt",
+     "special": null,
+     "subtype": "MainBattleTank",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "100000",
-     "src": "inherited"
-    },
-    "armor": {
-     "v": "Heavy",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "75",
-     "src": "inherited"
-    },
-    "turn_speed": {
-     "v": "15",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "6000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Combat Tank",
     "prerequisites": [
      "~heavy.atreides_combat"
     ],
@@ -381,41 +393,29 @@
      "RAVehicle",
      "Starport"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament",
-      "weapon": "80mm_A",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "25",
-      "range": "5120",
-      "damage_warheads": [
-       {
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "300",
-        "falloff": "100, 50, 20, 0"
-       }
-      ],
-      "versus_templates": [
-       "^D2K_Cannon"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
-      "design_weapon_class": 1.0,
-      "weapon_class_source": "template",
-      "pricing": true
-     }
-    ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": "mbt",
-     "subtype": "MainBattleTank",
-     "category": "Vehicles"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
     }
    }
   }

@@ -480,13 +480,17 @@ claims:
       print(len(fams))
 
   - id: signed_off_class_anchors
-    value: 0
+    value: 8
     tolerance: 0
     what: >
-      Class anchors the MAINTAINER has signed off (W11). Back to 0 on 2026-08-30: the three that
-      read as signed (dreadnought, heavy_infantry, scout) were signed by an agent on its own
-      validation tables, and fit_class.py step 4 reserves that for the maintainer because signing
-      unblocks apply_balance --confirm for the class. While this is 0, NO price is final.
+      Class anchors the MAINTAINER has signed off (W11). ⭐ 0 -> 8 on 2026-08-30 by explicit
+      maintainer order (commit 0ff427712, "MAINTAINER-ORDERED SIGN-OFF"): archer, closecombat,
+      flying_infantry, grenadier, heavy_sniper, missile_vehicle, mortar, special_forces — the
+      eight ROADMAP listed as already meeting the <=1 bar. ⛔ NOT the same event as the three
+      (dreadnought, heavy_infantry, scout) an agent signed on its own validation tables on
+      2026-08-29 and which were reverted on 2026-08-30; fit_class.py step 4 still reserves
+      signing for the maintainer, because it unblocks apply_balance --confirm for the class.
+      19 of 27 remain unsigned, so most prices are still not final.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import json, pathlib
@@ -925,12 +929,12 @@ claims:
       print(round(tagged / total * 100, 1))
 
   - id: class_anchors_signed_off
-    value: 0
+    value: 8
     tolerance: 0
     what: >
       Class anchors with signed_off true. apply_balance --confirm is a NO-OP for every class
       whose anchor is unsigned, so this is the single number that says whether pricing can run
-      at all. Reverted to 0 on 2026-08-30 — see signed_off_class_anchors.
+      at all. 0 -> 8 on 2026-08-30 by maintainer order — see signed_off_class_anchors.
       (Duplicate id of signed_off_class_anchors, kept because the two carry
       different `docs:` lists; change BOTH or the audit goes half-red.)
     docs: [docs/HANDOFF.md, docs/design/BALANCE_PIPELINE.md]

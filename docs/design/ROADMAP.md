@@ -197,11 +197,13 @@ remove the non-monotonic in-band column.
 1. **`scout_vehicle` `hp0`:** `class_anchors.json` says **30000**; `anchor_decisions_log.md`
    LOCKED **20000** ("½ the LightTank → fragile"). Predates this session; README makes the
    log the source of truth, so the JSON is the one that looks wrong.
-2. **Sign the classes that already meet ≤1** — `closecombat` 0.1, `mortar` 0.1, `archer`
-   0.2, `grenadier` 0.2, `heavy_sniper` 0.2, `flying_infantry` 0.5, `missile_vehicle` 0.6,
-   `special_forces` 0.9. **`class_anchors_signed_off` is 0** — three anchors were
-   self-signed by an agent on 2026-08-29 and reverted on 2026-08-30. Signing is the
-   maintainer's; `bash_guard` now blocks the flip without an explicit order.
+2. ✅ **DONE — the eight classes meeting ≤1 are SIGNED** (`0ff427712`, on explicit maintainer
+   order): `archer`, `closecombat`, `flying_infantry`, `grenadier`, `heavy_sniper`,
+   `missile_vehicle`, `mortar`, `special_forces`. **`class_anchors_signed_off` is 8 of 27.**
+   ⛔ Do not confuse this with the three (`dreadnought`, `heavy_infantry`, `scout`) an agent
+   self-signed on 2026-08-29 and which were reverted on 2026-08-30 — signing is the
+   maintainer's, and `bash_guard` still blocks the flip without an explicit order.
+   **19 remain unsigned, so most prices are still not final.**
 3. **Transcribe the RULED defense system** into `class_anchors.json` and wire
    `formula.class_baseline_price_3` (the 3-input, speed-less form) into
    `propose_class_rebalance` / `fit_class` — it has **zero callers** today. The formula,

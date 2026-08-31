@@ -1,55 +1,36 @@
 {
- "schema": 2,
  "ledger": "shared_d2k",
  "pack": "mods/cameo/ContentPacks/D2k/Shared",
+ "schema": 2,
  "sections": {
   "aircraft": {
    "carryall": {
-    "name": "Autonomous Carryall",
-    "cost": {
-     "v": "2000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "200000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Health.HP"
-    },
     "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "156",
-     "src": "inherited"
-    },
-    "turn_speed_air": {
-     "v": "24",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Bomber"
     },
     "build_limit": {
-     "v": "10",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "10"
     },
-    "self_heal_step": {
-     "v": "50",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2000"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Health.HP",
+     "v": "200000"
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
+    "name": "Autonomous Carryall",
     "prerequisites": [
      "~ixian_hightechfactory"
     ],
@@ -57,262 +38,273 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Aircraft",
-     "category": "Aircraft"
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "156"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "24"
     }
    },
    "carryall.paradrop": {
-    "name": "Autonomous Carryall",
-    "cost": {
-     "v": "5000",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "500000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Bomber",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "156",
-     "src": "inherited"
-    },
-    "turn_speed_air": {
-     "v": "24",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Bomber"
     },
     "build_limit": {
-     "v": "10",
-     "src": "inherited"
-    },
-    "self_heal_step": {
-     "v": "50",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "10"
     },
     "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Aircraft",
      "class_anchor": null,
+     "special": null,
      "subtype": "Aircraft",
-     "category": "Aircraft"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Autonomous Carryall",
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "156"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "24"
     }
    },
    "carryall.reinforce": {
-    "name": "Autonomous Carryall",
-    "cost": {
-     "v": "5000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "500000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Health.HP"
-    },
     "armor": {
-     "v": "Bomber",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Armor.Type"
-    },
-    "speed_air": {
-     "v": "156",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.Speed"
-    },
-    "turn_speed_air": {
-     "v": "24",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Armor.Type",
+     "v": "Bomber"
     },
     "build_limit": {
-     "v": "10",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Buildable.BuildLimit"
-    },
-    "self_heal_step": {
-     "v": "50",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#ChangesHealth.Step"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Buildable.BuildLimit",
+     "v": "10"
     },
     "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Valued.Cost",
+     "v": "5000"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Aircraft",
      "class_anchor": null,
+     "special": null,
      "subtype": "Aircraft",
-     "category": "Aircraft"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Health.HP",
+     "v": "500000"
+    },
+    "name": "Autonomous Carryall",
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#ChangesHealth.Step",
+     "v": "50"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "156"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
     }
    },
    "frigate": {
-    "name": "Frigate",
-    "cost": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "500000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Health.HP"
-    },
     "armor": {
-     "v": "Spaceship",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Armor.Type"
-    },
-    "speed_air": {
-     "v": "189",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.Speed"
-    },
-    "turn_speed_air": {
-     "v": "4",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Armor.Type",
+     "v": "Spaceship"
     },
     "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "0"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "Aircraft"
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Health.HP",
+     "v": "500000"
+    },
+    "name": "Frigate",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "189"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "4"
     }
    },
    "frigate.paradrop": {
-    "name": "Frigate",
-    "cost": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "500000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Spaceship",
-     "src": "inherited"
-    },
-    "speed_air": {
-     "v": "189",
-     "src": "inherited"
-    },
-    "turn_speed_air": {
-     "v": "4",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Spaceship"
     },
     "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "0"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
      "class_anchor": null,
-     "subtype": "Aircraft"
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Frigate",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "189"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "4"
     }
    }
   },
   "buildings": {
    "OILB.d2k": {
-    "name": "Spice Sifter",
-    "cost": {
-     "v": "2500",
-     "src": "inherited"
-    },
-    "hp": {
-     "v": "250000",
-     "src": "inherited"
-    },
     "armor": {
-     "v": "Wood",
-     "src": "inherited"
-    },
-    "sight": {
-     "v": "7500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "Wood"
     },
     "build_duration": {
-     "v": "1500",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1500"
     },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
     },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
     },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
     },
     "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "100"
     },
+    "name": "Spice Sifter",
     "prerequisites": [
      "~construction_yard",
      "research_centre",
@@ -322,25 +314,41 @@
      "Building",
      "RABuilding"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
     }
    },
    "concreteabuilding": {
-    "name": "Concrete Slab",
-    "cost": {
-     "v": "500",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost"
-    },
     "build_duration": {
-     "v": "125",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "125"
     },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Concrete Slab",
     "prerequisites": [
      "~construction_yard",
      "~!upgrade_conyard"
@@ -348,26 +356,26 @@
     "queue": [
      "Building",
      "RABuilding"
-    ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
-    }
+    ]
    },
    "concreteadefense": {
-    "name": "Concrete Slab",
-    "cost": {
-     "v": "500",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost"
-    },
     "build_duration": {
-     "v": "125",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "125"
     },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Concrete Slab",
     "prerequisites": [
      "~construction_yard",
      "~!upgrade_conyard"
@@ -375,90 +383,86 @@
     "queue": [
      "Defence",
      "RADefence"
-    ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
-    }
+    ]
    },
    "concretebbuilding": {
-    "name": "Large Concrete Slab",
-    "cost": {
-     "v": "500",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost"
-    },
     "build_duration": {
-     "v": "125",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "125"
     },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Large Concrete Slab",
     "prerequisites": [
      "~upgrade_conyard"
     ],
     "queue": [
      "Building",
      "RABuilding"
-    ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
-    }
+    ]
    },
    "concretebdefense": {
-    "name": "Large Concrete Slab",
-    "cost": {
-     "v": "500",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost"
-    },
     "build_duration": {
-     "v": "125",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "125"
     },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Large Concrete Slab",
     "prerequisites": [
      "~upgrade_conyard"
     ],
     "queue": [
      "Defence",
      "RADefence"
-    ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
-    }
+    ]
    },
    "wall": {
-    "name": "Concrete Wall",
-    "cost": {
-     "v": "125",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "26000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Health.HP"
-    },
     "armor": {
-     "v": "Concrete",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Armor.Type"
-    },
-    "sight": {
-     "v": "1c768",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#RevealsShroud.Range"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Armor.Type",
+     "v": "Concrete"
     },
     "build_duration": {
-     "v": "62",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "62"
     },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "125"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Health.HP",
+     "v": "26000"
+    },
+    "name": "Concrete Wall",
     "prerequisites": [
      "~d2k_construction_yard"
     ],
@@ -466,59 +470,69 @@
      "Defence",
      "RADefence"
     ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "Building"
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "1c768"
     }
    }
   },
   "infantry": {
    "engineer": {
-    "name": "Engineer",
+    "armaments": [
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "1536",
+      "reloaddelay": "20",
+      "slot": "Armament@defuse",
+      "versus_templates": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ],
+      "warheads": [],
+      "weapon": "DefuseKit",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "1536",
+      "reloaddelay": "100",
+      "slot": "Armament@leechdisinfect",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "LeechDisinfect",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
     "cost": {
-     "v": "500",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": "support",
+     "special": null,
+     "subtype": "Infantry",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "5000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
+     "v": "5000"
     },
-    "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "50",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed"
-    },
-    "sight": {
-     "v": "5c0",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_init_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_condition": {
-     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)",
-     "src": "inherited"
-    },
+    "name": "Engineer",
     "prerequisites": [
      "~d2k_barracks"
     ],
@@ -526,118 +540,67 @@
      "Infantry",
      "RAInfantry"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament@defuse",
-      "weapon": "DefuseKit",
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "reloaddelay": "20",
-      "range": "1536",
-      "damage_warheads": [],
-      "extraction_note": "no_damage_warheads",
-      "versus_templates": [
-       "^RemovesIvanBombs",
-       "^RemovesTerrorDrone"
-      ],
-      "warheads": [],
-      "design_weapon_class": null,
-      "weapon_class_source": "none",
-      "pricing": false
-     },
-     {
-      "slot": "Armament@leechdisinfect",
-      "weapon": "LeechDisinfect",
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "reloaddelay": "100",
-      "range": "1536",
-      "damage_warheads": [],
-      "extraction_note": "no_damage_warheads",
-      "versus_templates": [],
-      "warheads": [],
-      "design_weapon_class": null,
-      "weapon_class_source": "none",
-      "pricing": false
-     }
-    ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": "support",
-     "subtype": "Infantry",
-     "category": "Infantry"
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "50"
     }
    },
    "fremen_creep": {
-    "name": "Fremen Warrior",
-    "cost": {
-     "v": "500",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "25000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "50",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed"
-    },
-    "sight": {
-     "v": "10000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#RevealsShroud.Range"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_condition": {
-     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)",
-     "src": "inherited"
-    },
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament@PRIMARY",
-      "weapon": "HMG_fremen",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "20",
-      "range": "3072",
       "damage_warheads": [
        {
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage",
         "damage": "2000",
+        "falloff": "100, 0",
         "spread": "100",
-        "falloff": "100, 0"
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        },
        {
-        "tag": "Bullet_Light",
-        "type": "AreaDamage",
         "damage": "2000",
+        "falloff": "100, 0",
         "spread": "67",
-        "falloff": "100, 0"
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
        },
        {
-        "tag": "1Dam",
-        "type": "SpreadDamage",
         "damage": "2000",
+        "falloff": null,
         "spread": null,
-        "falloff": null
+        "tag": "1Dam",
+        "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "3072",
+      "reloaddelay": "20",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "HMG"
       ],
@@ -645,33 +608,33 @@
        "^Warhead_Bullet_Medium",
        "^Warhead_Bullet_Light"
       ],
-      "design_weapon_class": 0.875,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "HMG_fremen",
+      "weapon_class_source": "template"
      },
      {
-      "slot": "Armament@SECONDARY",
-      "weapon": "Fremen_RPG",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "45",
-      "range": "4864",
-      "minrange": "975",
       "damage_warheads": [
        {
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage",
         "damage": "2000",
+        "falloff": "100, 0",
         "spread": "85",
-        "falloff": "100, 0"
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "tag": "1Dam",
-        "type": "SpreadDamage",
         "damage": "3200",
+        "falloff": null,
         "spread": null,
-        "falloff": null
+        "tag": "1Dam",
+        "type": "SpreadDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "975",
+      "pricing": true,
+      "range": "4864",
+      "reloaddelay": "45",
+      "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^D2KMissile",
        "^Effect_MissileAP_Heavy"
@@ -679,58 +642,219 @@
       "warheads": [
        "^Warhead_MissileAP_Heavy"
       ],
-      "design_weapon_class": 1.25,
-      "weapon_class_source": "template",
-      "pricing": true
+      "weapon": "Fremen_RPG",
+      "weapon_class_source": "template"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Infantry",
      "class_anchor": null,
+     "special": null,
      "subtype": "Infantry",
-     "category": "Infantry"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Fremen Warrior",
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#RevealsShroud.Range",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "50"
     }
    },
    "light_inf": {
-    "name": "Light Infantry",
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_LightFlatCompatibility",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "5475",
+      "reloaddelay": "20",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Compatibility_Bullet_LightFlat",
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "light_inf_lmg",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4500",
+      "reloaddelay": "20",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^HeavyMachineGunProjectile"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "light_inf_lmg_upgrade",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_LightFlatCompatibility",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": false,
+      "range": "5475",
+      "reloaddelay": "20",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Compatibility_Bullet_LightFlat",
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "light_inf_lmg",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "4500",
+      "reloaddelay": "20",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^HeavyMachineGunProjectile"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Bullet_Light",
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "light_inf_lmg_upgrade",
+      "weapon_class_source": "illegal_mix"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
     "cost": {
-     "v": "150",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
+     "v": "150"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ScoutInfantry",
+     "tech_tier": null,
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#FirepowerMultiplier@light_inf.Modifier",
+     "trait": "FirepowerMultiplier@light_inf",
+     "v": 0.91
     },
     "hp": {
-     "v": "40000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
+     "v": "40000"
     },
-    "armor": {
-     "v": "None",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "54",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed"
-    },
-    "sight": {
-     "v": "8000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_condition": {
-     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)",
-     "src": "inherited"
-    },
+    "name": "Light Infantry",
     "prerequisites": [
      "~d2k_barracks",
      "~!ordos_barracks",
@@ -740,193 +864,147 @@
      "Infantry",
      "RAInfantry"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament@PRIMARY",
-      "weapon": "light_inf_lmg",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "20",
-      "range": "5475",
-      "damage_warheads": [
-       {
-        "tag": "Bullet_LightFlatCompatibility",
-        "type": "AreaDamage",
-        "damage": "4000",
-        "spread": "67",
-        "falloff": "100, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Compatibility_Bullet_LightFlat",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light"
-      ],
-      "design_weapon_class": 0.875,
-      "weapon_class_source": "template",
-      "requires": "!ixian_upgrade_tungstenneedleguns",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@Upgrade",
-      "weapon": "light_inf_lmg_upgrade",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "20",
-      "range": "4500",
-      "damage_warheads": [
-       {
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage",
-        "damage": "6000",
-        "spread": "100",
-        "falloff": "100, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^HeavyMachineGunProjectile"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
-       "^Warhead_CannonHE_Heavy"
-      ],
-      "design_weapon_class": null,
-      "weapon_class_source": "illegal_mix",
-      "requires": "ixian_upgrade_tungstenneedleguns",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@GARRISONED",
-      "weapon": "light_inf_lmg",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "20",
-      "range": "5475",
-      "damage_warheads": [
-       {
-        "tag": "Bullet_LightFlatCompatibility",
-        "type": "AreaDamage",
-        "damage": "4000",
-        "spread": "67",
-        "falloff": "100, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Compatibility_Bullet_LightFlat",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light"
-      ],
-      "design_weapon_class": 0.875,
-      "weapon_class_source": "template",
-      "requires": "!ixian_upgrade_tungstenneedleguns",
-      "armament_name": "garrisoned",
-      "pricing": false
-     },
-     {
-      "slot": "Armament@UpgradeGARRISONED",
-      "weapon": "light_inf_lmg_upgrade",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "20",
-      "range": "4500",
-      "damage_warheads": [
-       {
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage",
-        "damage": "6000",
-        "spread": "100",
-        "falloff": "100, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^HeavyMachineGunProjectile"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
-       "^Warhead_CannonHE_Heavy"
-      ],
-      "design_weapon_class": null,
-      "weapon_class_source": "illegal_mix",
-      "requires": "ixian_upgrade_tungstenneedleguns",
-      "armament_name": "garrisoned",
-      "pricing": false
-     }
-    ],
-    "firepower_multiplier": {
-     "v": 0.91,
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#FirepowerMultiplier@light_inf.Modifier",
-     "trait": "FirepowerMultiplier@light_inf"
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
     },
-    "design": {
-     "unit_class": 1.0,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "ScoutInfantry",
-     "category": "Infantry"
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "54"
     }
    },
    "trooper": {
-    "name": "Rocket Trooper",
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6185",
+      "reloaddelay": "64",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_Rocket_Trooper",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "6185",
+      "reloaddelay": "64",
+      "slot": "Armament@garrisoned",
+      "versus_templates": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "D2K_Rocket_Trooper",
+      "weapon_class_source": "illegal_mix"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
     "cost": {
-     "v": "300",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
-     "v": "12000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
+     "v": "12000"
     },
-    "armor": {
-     "v": "Flak",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "48",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed"
-    },
-    "sight": {
-     "v": "6500",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_condition": {
-     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)",
-     "src": "inherited"
-    },
+    "name": "Rocket Trooper",
     "prerequisites": [
      "~d2k_barracks",
      "~!ordos_upgrade_antiairtrooper",
@@ -938,177 +1016,107 @@
      "Infantry",
      "RAInfantry"
     ],
-    "buildable": true,
-    "armaments": [
-     {
-      "slot": "Armament",
-      "weapon": "D2K_Rocket_Trooper",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "64",
-      "range": "6185",
-      "damage_warheads": [
-       {
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "43",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "64",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "85",
-        "falloff": "100, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy"
-      ],
-      "design_weapon_class": null,
-      "weapon_class_source": "illegal_mix",
-      "pricing": true
-     },
-     {
-      "slot": "Armament@garrisoned",
-      "weapon": "D2K_Rocket_Trooper",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "64",
-      "range": "6185",
-      "damage_warheads": [
-       {
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "43",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "64",
-        "falloff": "100, 0"
-       },
-       {
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage",
-        "damage": "8000",
-        "spread": "85",
-        "falloff": "100, 0"
-       }
-      ],
-      "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy"
-      ],
-      "design_weapon_class": null,
-      "weapon_class_source": "illegal_mix",
-      "armament_name": "garrisoned",
-      "pricing": false
-     }
-    ],
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "AntiTankAntiAirInfantry",
-     "category": "Infantry"
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "48"
     }
    }
   },
   "upgrades": {
    "d2k_spice_sifter_upgrade": {
-    "name": "Efficient Filtering",
-    "cost": {
-     "v": "10000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost"
-    },
     "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1"
     },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Efficient Filtering",
     "prerequisites": [
      "~research_centre",
      "!d2k_spice_sifter_upgrade"
     ],
     "queue": [
      "Research"
-    ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+    ]
    },
    "d2k_wind_trap_upgrade": {
-    "name": "Advanced Wind Traps",
-    "cost": {
-     "v": "5000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost"
-    },
     "build_limit": {
-     "v": "1",
-     "src": "inherited"
+     "src": "inherited",
+     "v": "1"
     },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Advanced Wind Traps",
     "prerequisites": [
      "~outpost.d2k",
      "!d2k_wind_trap_upgrade"
     ],
     "queue": [
      "Upgrades"
-    ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+    ]
    },
    "upgrade_barracks": {
-    "name": "Barracks Upgrade",
-    "cost": {
-     "v": "1250",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost"
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration",
+     "v": "1500"
     },
     "build_limit": {
-     "v": "1",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit",
+     "v": "1"
     },
-    "build_duration": {
-     "v": "1500",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration"
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1250"
     },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Barracks Upgrade",
     "prerequisites": [
      "~d2k_barracks",
      "research_centre",
@@ -1116,30 +1124,30 @@
     ],
     "queue": [
      "Upgrades"
-    ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+    ]
    },
    "upgrade_conyard": {
-    "name": "Construction Yard Upgrade",
-    "cost": {
-     "v": "1250",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost"
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration",
+     "v": "1500"
     },
     "build_limit": {
-     "v": "1",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit",
+     "v": "1"
     },
-    "build_duration": {
-     "v": "1500",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration"
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1250"
     },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Construction Yard Upgrade",
     "prerequisites": [
      "~d2k_construction_yard",
      "research_centre",
@@ -1147,30 +1155,30 @@
     ],
     "queue": [
      "Upgrades"
-    ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+    ]
    },
    "upgrade_heavy": {
-    "name": "Heavy Factory Upgrade",
-    "cost": {
-     "v": "1250",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost"
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration",
+     "v": "1500"
     },
     "build_limit": {
-     "v": "1",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit",
+     "v": "1"
     },
-    "build_duration": {
-     "v": "1500",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration"
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1250"
     },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Heavy Factory Upgrade",
     "prerequisites": [
      "~heavy_factory",
      "research_centre",
@@ -1178,30 +1186,30 @@
     ],
     "queue": [
      "Upgrades"
-    ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+    ]
    },
    "upgrade_hightech": {
-    "name": "High Tech Factory Upgrade",
-    "cost": {
-     "v": "1250",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost"
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration",
+     "v": "1500"
     },
     "build_limit": {
-     "v": "1",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit"
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit",
+     "v": "1"
     },
-    "build_duration": {
-     "v": "1500",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration"
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1250"
     },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "High Tech Factory Upgrade",
     "prerequisites": [
      "~high_tech_factory",
      "research_centre",
@@ -1209,107 +1217,49 @@
     ],
     "queue": [
      "Upgrades"
-    ],
-    "buildable": true,
-    "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
-     "class_anchor": null,
-     "subtype": "ResearchedUpgrade"
-    }
+    ]
    }
   },
   "vehicles": {
    "siege_tank": {
-    "name": "Siege Tank",
-    "cost": {
-     "v": "600",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Valued.Cost"
-    },
-    "hp": {
-     "v": "40000",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Health.HP"
-    },
-    "armor": {
-     "v": "Light",
-     "src": "inherited"
-    },
-    "speed": {
-     "v": "43",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Mobile.Speed"
-    },
-    "turn_speed": {
-     "v": "48",
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed"
-    },
-    "sight": {
-     "v": "9000",
-     "src": "inherited"
-    },
-    "shield_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "shield_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "shield_init_flat": {
-     "v": "0",
-     "src": "inherited"
-    },
-    "integrity_pct": {
-     "v": "100",
-     "src": "inherited"
-    },
-    "prerequisites": [
-     "~disabled",
-     "upgrade_heavy"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle",
-     "Starport"
-    ],
-    "buildable": false,
     "armaments": [
      {
-      "slot": "Armament",
-      "weapon": "D2K_155mm",
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "reloaddelay": "74",
-      "range": "10000",
       "damage_warheads": [
        {
-        "tag": "Demolition_Light",
-        "type": "AreaDamage",
         "damage": "12000",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "falloff": "100, 45, 18, 6, 0"
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
        },
        {
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage",
         "damage": "12000",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "falloff": "100, 45, 18, 6, 0"
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage",
         "damage": "12000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "falloff": "100, 72, 50, 32, 18, 8, 0"
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage",
         "damage": "12000",
+        "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "falloff": "100, 50, 20, 0"
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
        }
       ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "74",
+      "slot": "Armament",
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
@@ -1324,18 +1274,68 @@
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
-      "design_weapon_class": null,
-      "weapon_class_source": "illegal_mix",
-      "pricing": true
+      "weapon": "D2K_155mm",
+      "weapon_class_source": "illegal_mix"
      }
     ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Valued.Cost",
+     "v": "600"
+    },
     "design": {
-     "unit_class": null,
-     "special": null,
-     "tech_tier": null,
+     "category": "Vehicles",
      "class_anchor": "artillery",
+     "special": null,
      "subtype": "Artillery",
-     "category": "Vehicles"
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Health.HP",
+     "v": "40000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Siege Tank",
+    "prerequisites": [
+     "~disabled",
+     "upgrade_heavy"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle",
+     "Starport"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "43"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "48"
     }
    }
   }
