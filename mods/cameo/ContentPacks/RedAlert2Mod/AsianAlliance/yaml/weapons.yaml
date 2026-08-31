@@ -2361,6 +2361,7 @@ AsianChaosMine:
 		InvalidTargets: Water
 
 AsianPelicanMissile:
+	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_MissileAP_Heavy
 	Inherits@3: ^Projectile_Missile_Heavy
@@ -2381,6 +2382,13 @@ AsianPelicanMissile:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
+	-Warhead@Concussion_Light:
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 AsianPelicanMissile_elite:
 	Inherits: AsianPelicanMissile
 	Range: 7100
@@ -2395,6 +2403,10 @@ AsianPelicanMissile_elite:
 		ContrailLength: 33
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 AsianPelicanMG:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat

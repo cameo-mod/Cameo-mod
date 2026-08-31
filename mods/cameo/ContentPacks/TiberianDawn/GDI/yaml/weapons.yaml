@@ -1140,6 +1140,7 @@ RocketsHumvee2_AA:
 	Warhead@MissileAP_Light:
 		ValidTargets: Air
 RocketsHumvee2AMT:
+	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
@@ -1148,7 +1149,14 @@ RocketsHumvee2AMT:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 16000
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Light:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 32000
+		PercentageScale: 9997
 RocketsHumvee2AMT_AA:
+	Inherits@finalmain: ^Compatibility_MissileAA_HeavyFlat
 	Inherits: RocketsHumvee2AMT
 	Range: 8397
 	ValidTargets: Air
@@ -1156,6 +1164,13 @@ RocketsHumvee2AMT_AA:
 		ValidTargets: Air
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@MissileAP_Light:
+	Warhead@MissileAA_HeavyFlatCompatibility:
+		ValidTargets: Air
+		Damage: 32000
+		PercentageScale: 9997
 TDShotgun:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits@collapseexplosive: ^Warhead_Concussion_Medium
@@ -1607,6 +1622,7 @@ CommandoSniper:
 		ImpactSounds: xplos.aud
 
 CommandoRocketLauncher:
+	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1636,6 +1652,12 @@ CommandoRocketLauncher:
 		Explosions: blue_building_napalm
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
+	-Warhead@MissileHE_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@MissileHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 40000
+		PercentageScale: 9998
 
 CommandoGrenadeLauncher:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium

@@ -979,6 +979,7 @@ RA2MirageGun:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	-Warhead@CannonAP_Light:
 RA2HoverMissile:
+	Inherits@finalmain: ^Compatibility_MissileAP_LightFlat
 	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
 	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
@@ -998,6 +999,12 @@ RA2HoverMissile:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		-ImpactSounds:
+	-Warhead@Arrow_Light:
+	-Warhead@MissileAP_Light:
+	Warhead@MissileAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 RA2HoverMissile_elite:
 	Inherits: RA2HoverMissile
@@ -1009,16 +1016,32 @@ RA2HoverMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
+	Warhead@MissileAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 RA2HoverMissile_AA:
+	Inherits@finalmain: ^Compatibility_MissileAA_LightFlat
 	Inherits: RA2HoverMissile
 	ValidTargets: Air
 	Range: 8640
+	-Warhead@MissileAP_LightFlatCompatibility:
+	Warhead@MissileAA_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 RA2HoverMissile_AA_elite:
+	Inherits@finalmain: ^Compatibility_MissileAA_LightFlat
 	Inherits: RA2HoverMissile_elite
 	ValidTargets: Air
 	Range: 9640
+	-Warhead@MissileAP_LightFlatCompatibility:
+	Warhead@MissileAA_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 RA2ThunderboltMissile:
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
@@ -1074,6 +1097,7 @@ RA2ThunderboltMissile_AA_elite:
 	Range: 9640
 
 RA2MultiHoverMissile:
+	Inherits@finalmain: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1094,6 +1118,12 @@ RA2MultiHoverMissile:
 		MaximumLaunchSpeed: 64
 		MinimumLaunchSpeed: 128
 		Acceleration: 16
+	-Warhead@CannonHE_Medium:
+	-Warhead@MissileHE_Light:
+	Warhead@MissileHE_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2MultiHoverMissile_elite:
 	Inherits: RA2MultiHoverMissile
@@ -1105,20 +1135,38 @@ RA2MultiHoverMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
+	Warhead@MissileHE_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2MultiHoverMissile_AA:
+	Inherits@finalmain: ^Compatibility_MissileAA_LightFlat
 	Inherits: RA2MultiHoverMissile
 	ValidTargets: Air
 	Range: 9255
 	Warhead@CannonHE_Medium:
 		ValidTargets: Air
+	-Warhead@CannonHE_Medium:
+	-Warhead@MissileHE_LightFlatCompatibility:
+	Warhead@MissileAA_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2MultiHoverMissile_AA_elite:
+	Inherits@finalmain: ^Compatibility_MissileAA_LightFlat
 	Inherits: RA2MultiHoverMissile_elite
 	ValidTargets: Air
 	Range: 10255
 	Warhead@CannonHE_Medium:
 		ValidTargets: Air
+	-Warhead@CannonHE_Medium:
+	-Warhead@MissileHE_LightFlatCompatibility:
+	Warhead@MissileAA_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2MultiThunderboltMissile:
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
@@ -2424,6 +2472,7 @@ YRBoomerSCUD:
 		ImpactActors: false
 
 RA2TorpTube:
+	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
 	Inherits@fx: ^Effect_Watersplash_Large_RA2
@@ -2458,6 +2507,12 @@ RA2TorpTube:
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 36000
+		PercentageScale: 9998
 
 RA2TorpTube_elite:
 	Inherits: RA2TorpTube
@@ -2468,6 +2523,10 @@ RA2TorpTube_elite:
 ####################################################################################################
 #		Machineguns
 ####################################################################################################
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 36000
+		PercentageScale: 9998
 
 ^RA2MG:
 	Inherits: ^RA2SmallArms
@@ -2842,6 +2901,7 @@ RA2VirusExplode:
 		InvalidTargets: Water
 
 RA220mmrapid:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -2857,6 +2917,12 @@ RA220mmrapid:
 ####################################################################################################
 #		SuperWeapons
 ####################################################################################################
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 RA2Mutate:
 	ValidTargets: Ground, Air

@@ -1468,6 +1468,7 @@ KamovMissilesTesla:
 		PercentageScale: 0
 
 KamovTesla:
+	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
 	Inherits@3: ^Projectile_Lightning_Heavy
@@ -1491,6 +1492,12 @@ KamovTesla:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
+	-Warhead@MissileAP_Light:
+	-Warhead@Tesla_Heavy:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		PercentageScale: 9997
 
 KamovTeslaArc:
 	Inherits: KamovTesla
@@ -1500,6 +1507,10 @@ KamovTeslaArc:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		PercentageScale: 9997
 
 KamovTeslaArcFragment1:
 	Inherits: KamovTeslaArc
@@ -1525,6 +1536,11 @@ KamovTeslaArcFragment1:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	-Warhead@LightMissile:
+	-Warhead@TeslaWeapon:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 48000
+		PercentageScale: 6665
 
 KamovTeslaArcFragment2:
 	Inherits: KamovTeslaArcFragment1
@@ -1545,6 +1561,11 @@ KamovTeslaArcFragment2:
 		Damage: 4000
 	-Warhead@TeslaArc:
 	-Warhead@LightMissile:
+	-Warhead@TeslaWeapon:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 7998
 
 YakChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -1600,6 +1621,7 @@ IncendiaryArmoredYakChainGun:
 	MinRange: 1290
 
 YakTeslaGun:
+	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
 	Inherits@3: ^Projectile_Lightning_Heavy
@@ -1627,6 +1649,12 @@ YakTeslaGun:
 		Damage: 4000
 
 	MinRange: 1400
+	-Warhead@MissileAP_Light:
+	-Warhead@Tesla_Heavy:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 9994
 YakTeslaGunArc:
 	Inherits: YakTeslaGun
 	Warhead@TeslaArc: FireShrapnel
@@ -1635,6 +1663,10 @@ YakTeslaGunArc:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 9994
 
 YakTeslaArcFragment1:
 	Inherits: YakTeslaGunArc
@@ -1660,6 +1692,11 @@ YakTeslaArcFragment1:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	-Warhead@LightMissile:
+	-Warhead@TeslaWeapon:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 6663
 
 YakTeslaArcFragment2:
 	Inherits: YakTeslaArcFragment1
@@ -1680,6 +1717,11 @@ YakTeslaArcFragment2:
 		Damage: 1000
 	-Warhead@TeslaArc:
 	-Warhead@LightMissile:
+	-Warhead@TeslaWeapon:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		PercentageScale: 7995
 
 YakNapalm:
 	Inherits@collapsewh: ^Warhead_Flame_Heavy
@@ -2027,6 +2069,7 @@ Maverick:
 	Warhead@MissileAP_Medium:
 		Damage: 40000
 TeslaMaverick:
+	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@2: Maverick
@@ -2062,6 +2105,12 @@ TeslaMaverick:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@MissileAP_Medium:
+	-Warhead@Tesla_Heavy:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		PercentageScale: 9997
 
 TeslaMaverickFragment1:
 	Inherits: TeslaMaverick
@@ -2086,6 +2135,12 @@ TeslaMaverickFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@MissileAP_Medium:
+	-Warhead@Tesla_Heavy:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 9994
 
 TeslaMaverickFragment2:
 	Inherits: TeslaMaverickFragment1
@@ -2100,6 +2155,12 @@ TeslaMaverickFragment2:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 	-Warhead@TeslaArc:
+	-Warhead@MissileAP_Medium:
+	-Warhead@Tesla_Heavy:
+	Warhead@Tesla_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 
 ThermobaricMaverick:
 	Inherits@roleflat: ^Compatibility_Thermobaric_HeavyFlat

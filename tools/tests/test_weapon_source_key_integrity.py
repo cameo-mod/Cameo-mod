@@ -51,7 +51,7 @@ EXPECTED_PARENTS = {
     },
     "SandmarineTuskFire": {"^Warhead_MissileAP_Light", "SandmarineTusk"},
     "TSDestroyerMissiles": {"^FlakWeapon", "^MediumMissile", "^ShrapnelWeapon"},
-    "ViperMissilesFire": {"^Warhead_MissileAP_Light", "ViperMissiles"},
+    "ViperMissilesFire": {"^Warhead_MissileAP_Light", "^ViperMissilesLegacy"},
     "tkmkatyushalalauncherrocketsfire": {
         "^Effect_Flame_Light", "tkmkatyushalalauncherrockets",
     },

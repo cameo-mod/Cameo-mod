@@ -889,17 +889,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -918,6 +911,7 @@
       "requires": "!ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Tesla",
       "versus_templates": [
+       "^Compatibility_Tesla_HeavyFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -933,17 +927,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -1517,10 +1504,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -1529,13 +1516,6 @@
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -1547,6 +1527,7 @@
       "requires": "ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@TeslaUpgrade1",
       "versus_templates": [
+       "^Compatibility_Tesla_HeavyFlat",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "Maverick",
@@ -1564,10 +1545,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -1576,13 +1557,6 @@
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -1594,6 +1568,7 @@
       "requires": "ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@TeslaUpgrade2",
       "versus_templates": [
+       "^Compatibility_Tesla_HeavyFlat",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "Maverick",
@@ -2493,17 +2468,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2523,6 +2491,7 @@
       "requires": "!ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Tesla",
       "versus_templates": [
+       "^Compatibility_Tesla_HeavyFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -2540,17 +2509,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_Heavy",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5626,17 +5588,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5647,6 +5602,7 @@
       "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
@@ -5663,17 +5619,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5684,6 +5633,7 @@
       "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",

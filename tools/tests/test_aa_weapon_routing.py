@@ -56,10 +56,10 @@ class AaWeaponRoutingTests(unittest.TestCase):
                 "Flak_MediumFlatCompatibility": "7000"},
             "SkyMageCannon_AA_elite": {
                 "Flak_MediumFlatCompatibility": "7000"},
-            "RA2MultiHoverMissile_AA": {"CannonHE_Medium": "2000",
-                                         "MissileHE_Light": "2000"},
-            "RA2MultiHoverMissile_AA_elite": {"CannonHE_Medium": "2000",
-                                               "MissileHE_Light": "2000"},
+            "RA2MultiHoverMissile_AA": {
+                "MissileAA_LightFlatCompatibility": "4000"},
+            "RA2MultiHoverMissile_AA_elite": {
+                "MissileAA_LightFlatCompatibility": "4000"},
         }
         for weapon_name, mains in expected.items():
             weapon = self.rules.resolve_weapon(weapon_name)

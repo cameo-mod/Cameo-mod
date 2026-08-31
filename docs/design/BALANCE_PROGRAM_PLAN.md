@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured evidence |
 |---|---|
-| W24 — directly fired weapons with **more than one** damage main | **441** under the unified predicate; current 2026-08-31 survey (histogram runs out to 10 mains) |
+| W24 — directly fired weapons with **more than one** damage main | **374** under the unified predicate; current 2026-08-31 survey (histogram runs out to 10 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** (2026-08-17 snapshot) |
 | fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** (2026-08-17 snapshot) — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
@@ -52,7 +52,7 @@ the question was asked.
 
 **The order:**
 
-1. **W24** — one damage warhead per weapon (DESIGN §11b). 441 directly fired weapons remain non-compliant.
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 374 directly fired weapons remain non-compliant.
 2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
    is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
    merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE
@@ -590,7 +590,7 @@ delivery and price number measured before it lands is measuring the wrong object
 | A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | ✅ DONE — `TS70mmChem` → `^Warhead_CannonChem_Light` at 6000, `TSScoopDualChem` → `^Warhead_CannonChem_Medium` at 30000, and `JapanesePlasmaBomb` → `^Warhead_Plasma_Heavy` at 30000. Main totals and weapon operation are preserved; standard family armour/blast profiles are accepted classification consequences. Upgrade audit records Ratty 0.75× Wood, Scooper 0.80× Wood, and Japanese bomber 0.96× Wood. Static audit-gated; in-game review deferred by maintainer request. |
 | A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | ✅ DONE — renamed the upgrade, condition, icon, UI text, Su-57 weapons, and Monster Tank inferno weapon across active YAML, Fluent, AI, sequences, and the survival-map script. `safe_rename.py` changed 89 references in 12 text files plus the icon; no old identifiers or dangling inheritance targets remain. Weapon values are unchanged. Static audit-gated; in-game review deferred by maintainer request. |
 | A5 | Collapse the 27 single-user templates | ✅ DONE for the active W24-created set — the refreshed upstream-based census found 14 live one-user W24 wrappers rather than the older estimate of 27. All 14 are removed across three isolated batches: five small projectile/effect wrappers, five Rocket Trooper projectiles, then the Tower Missile and `mtank_pri2` projectile/effect pairs. Every sole consumer is exactly equal after full inheritance resolution. Static audit-gated; in-game review deferred by maintainer request. |
-| A6 | Continue the burn-down | 🔵 IN PROGRESS — the current long-lived PR #320 combines the reviewed role cohorts with the Cameo percentage-runtime repair. Folded percentage hits now execute exactly once for positional and direct-Actor impacts, and wide intermediates eliminate the old multiplication wraparound. `review_batch_diff.py` checks all 155 active/design health values and now fingerprints armor profiles as well as targeting, relationships, projectiles, effects, physical state, non-damage warheads, and percentage output. The authorized role batches consolidate 14 definitions across 16 resolved stacks; the first closure-isolation pass also detaches Kirov, blue-nuke, chemical-mortar and grenade descendants before changing their parents. The refreshed survey reports 525 reachable stacked weapons (441 direct armaments and 84 indirect weapon-graph entries); the all-ruleset unreviewed ratchet is 628 plus one reviewed intentional composite. The active target is below 300 reachable stacked weapons. Pricing has not started. |
+| A6 | Continue the burn-down | 🔵 IN PROGRESS — the current long-lived PR #320 combines the reviewed role cohorts with the Cameo percentage-runtime repair. Folded percentage hits now execute exactly once for positional and direct-Actor impacts, and wide intermediates eliminate the old multiplication wraparound. `review_batch_diff.py` checks all 155 active/design health values and fingerprints armor profiles, targeting, relationships, projectiles, effects, physical state, non-damage warheads, and percentage output. The closure-isolation pass detaches Kirov, blue-nuke, chemical-mortar, grenade, and fire-Viper descendants before changing shared parents. The first rule-driven energy/ordnance tranche consolidates 75 reachable definitions while preserving flat totals and limiting foldable percentage rounding to one HP; only three mathematically non-foldable definitions use exact standalone percentage companions. The refreshed survey reports 450 reachable stacked weapons (374 direct armaments and 76 indirect weapon-graph entries); the all-ruleset unreviewed ratchet is 551 plus one reviewed intentional composite. The active target is below 300 reachable stacked weapons. Pricing has not started. |
 
 #### A6 design gate — authorized batch and exact remaining cohort (2026-08-31)
 
@@ -2848,7 +2848,7 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `ARMOR_LAYERS.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-directly fired weapons, **441** carry 2 or more damage
+directly fired weapons, **374** carry 2 or more damage
 warheads, worst case **10**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created

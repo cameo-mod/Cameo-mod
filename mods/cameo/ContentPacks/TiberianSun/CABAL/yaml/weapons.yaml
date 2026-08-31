@@ -469,6 +469,7 @@ CabalBerserkerBlades:
 		ValidTargets: Ground, Water
 
 CabalCyborgChaingun:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -484,8 +485,15 @@ CabalCyborgChaingun:
 		Explosions: piffs
 		ImpactSounds: methit1.aud
 		ValidTargets: Ground, Water, Air
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		PercentageScale: 9995
 
 TSDevoutChainguns:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -503,6 +511,12 @@ TSDevoutChainguns:
 		Explosions: piffs
 		ImpactSounds: methit1.aud
 		ValidTargets: Ground, Water, Air
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 9996
 
 CabalEliminatorGatling:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -1336,6 +1350,7 @@ CabalEngineerRepairBeam:
 		Damage: -1600
 
 CabalMantisGun:
+	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -1359,7 +1374,15 @@ CabalMantisGun:
 		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
+	-Warhead@Bullet_Light:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
+		PhysicalStateScale: 38
 CabalLegionGun:
+	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -1383,6 +1406,13 @@ CabalLegionGun:
 		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
+	-Warhead@Bullet_Light:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 120000
+		PercentageScale: 10000
+		PhysicalStateScale: 38
 ^CabalManticoreMissiles:
 	Inherits@wh: ^Warhead_MissileHE_Light
 	Inherits@wh2: ^Warhead_MissileHE_Medium
@@ -1426,6 +1456,7 @@ CabalManticoreMissilesAA:
 	Warhead@Concussion_Medium: AreaDamage
 		ValidTargets: Air
 CabalRocketCyborgRockets:
+	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Light
 	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^CabalMissileLight
@@ -1449,7 +1480,14 @@ CabalRocketCyborgRockets:
 		Damage: 6000
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
+	-Warhead@MissileHE_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@MissileHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 CabalRocketCyborgRocketsUpgraded:
+	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Light
 	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^CabalMissileLight
@@ -1473,6 +1511,12 @@ CabalRocketCyborgRocketsUpgraded:
 		Damage: 6000
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
+	-Warhead@MissileHE_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@MissileHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 CabalMothershipRockets:
 	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
 	Inherits: ^TeslaWeapon

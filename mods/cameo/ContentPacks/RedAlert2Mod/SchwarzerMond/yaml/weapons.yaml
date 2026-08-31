@@ -1,4 +1,5 @@
 schwarzermond_lunarsoldier_rifle:
+	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: NaxiRifle
 	Inherits@3: ^RA2LaserWeapon
@@ -25,11 +26,24 @@ schwarzermond_lunarsoldier_rifle:
 		PercentageScale: 5000
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 4996
+		PhysicalStateScale: 25
 schwarzermond_lunarsoldier_rifle_elite:
 	Inherits: schwarzermond_lunarsoldier_rifle
 	Range: 5500
 	Burst: 2
 	BurstDelays: 3
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 4996
+		PhysicalStateScale: 25
 
 NaxiBeetleLaser_elite:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -1027,6 +1041,11 @@ schwarzermond_lunarsoldier_rifle_yellow:
 	BurstDelays: 3
 	Projectile: LaserZap
 		Color: f3e021AA
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 4996
+		PhysicalStateScale: 25
 
 schwarzermond_lunarsoldier_rifle_yellow_elite:
 	Inherits: schwarzermond_lunarsoldier_rifle_elite
@@ -1034,6 +1053,11 @@ schwarzermond_lunarsoldier_rifle_yellow_elite:
 	BurstDelays: 3
 	Projectile: LaserZap
 		Color: f3e021AA
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 4996
+		PhysicalStateScale: 25
 
 schwarzermond_lunarsoldier_rifle_amplified:
 	Inherits: schwarzermond_lunarsoldier_rifle
@@ -1041,6 +1065,11 @@ schwarzermond_lunarsoldier_rifle_amplified:
 	BurstDelays: 3
 	Projectile: LaserZap
 		Color: f3e021AA
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 4996
+		PhysicalStateScale: 25
 
 schwarzermond_lunarsoldier_rifle_amplified_elite:
 	Inherits: schwarzermond_lunarsoldier_rifle_elite
@@ -1048,6 +1077,11 @@ schwarzermond_lunarsoldier_rifle_amplified_elite:
 	BurstDelays: 3
 	Projectile: LaserZap
 		Color: f3e021AA
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 4996
+		PhysicalStateScale: 25
 
 Lunar_YellowLaserT:
 	Inherits: NaxLaserT

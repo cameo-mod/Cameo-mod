@@ -45,6 +45,7 @@ M60mgCryo:
 		Damage: 4000
 
 RATurretGun:
+	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -60,6 +61,12 @@ RATurretGun:
 		Damage: 10000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 20000
+		PercentageScale: 9995
 
 zsu_23:
 	Inherits@wh: ^Warhead_Flak_Medium

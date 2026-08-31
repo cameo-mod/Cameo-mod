@@ -123,6 +123,7 @@ AsianChaosSuperweapon:
 		ExplosionInterval: 9999
 
 AsianSmallTorpedo:
+	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
 	Inherits@fx: ^Effect_Watersplash_Large_RA2
@@ -159,6 +160,12 @@ AsianSmallTorpedo:
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 24000
+		PercentageScale: 9996
 
 ^SteelSmallArms:
 	Inherits: ^RA2SmallArms

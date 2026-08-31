@@ -608,6 +608,7 @@ MammothTankCannon:
 		InvalidTargets: Vehicle, Building, wall
 
 TSTurretLaser:
+	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -628,13 +629,26 @@ TSTurretLaser:
 		Damage: 10000
 	Warhead@Laser_Heavy:
 		Damage: 10000
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		PercentageScale: 9995
+		PhysicalStateScale: 38
 TSCABALPlasmaFire:
 	Inherits: TSTurretLaser
 	Projectile: LaserZap
 		Color: 0040FF
 		SecondaryBeamColor: 80C0FF
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		PercentageScale: 9995
+		PhysicalStateScale: 38
 
 TSLaserTurretLaser:
+	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -662,8 +676,16 @@ TSLaserTurretLaser:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		PercentageScale: 9997
+		PhysicalStateScale: 38
 
 TurretLaserFragment:
+	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -680,6 +702,13 @@ TurretLaserFragment:
 		Damage: 8000
 	Warhead@Laser_Heavy:
 		Damage: 8000
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 9994
+		PhysicalStateScale: 38
 TSObeliskLaserFire:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
@@ -753,6 +782,7 @@ TSLaserObeliskLaserFire:
 		AimTargetStances: Enemy, Neutral
 
 ObeliskLaserFragment:
+	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -771,6 +801,13 @@ ObeliskLaserFragment:
 		Damage: 40000
 	Warhead@Laser_Heavy:
 		Damage: 40000
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 80000
+		PercentageScale: 9999
+		PhysicalStateScale: 38
 TSLaserFence:
 	TargetActorCenter: true
 	Projectile: InstantHit
@@ -899,6 +936,7 @@ TSMammothTusk_elite:
 	Range: 9216
 
 TSBikeMissile:
+	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Light
 	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -917,6 +955,12 @@ TSBikeMissile:
 	Warhead@MissileHE_Medium:
 		Damage: 6000
 		ValidTargets: Ground, Water, Air
+	-Warhead@MissileHE_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@MissileHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 TSBikeTibMissile:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
 	Inherits: ^LightChemicalWeapon
@@ -1318,6 +1362,7 @@ TSAssaultCannon:
 		Damage: 4000
 		PercentageScale: 9975
 TSLaserRaiderCannon:
+	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -1337,6 +1382,13 @@ TSLaserRaiderCannon:
 		Damage: 6000
 	Warhead@Laser_Heavy:
 		Damage: 6000
+	-Warhead@Bullet_Light:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
+		PhysicalStateScale: 38
 TSPistola:
 	Inherits: ^TSMG
 	Range: 3072

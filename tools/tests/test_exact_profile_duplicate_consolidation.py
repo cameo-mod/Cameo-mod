@@ -78,7 +78,7 @@ class ExactProfileDuplicateConsolidationTests(unittest.TestCase):
         )
 
     def test_structural_backlog_ratchet_is_777(self):
-        self.assertEqual(628, SPLIT_BASELINE)
+        self.assertEqual(551, SPLIT_BASELINE)
 
 
 if __name__ == "__main__":

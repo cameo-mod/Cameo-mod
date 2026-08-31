@@ -61,6 +61,7 @@ TS30mmRail:
 		PercentageScale: 0
 
 TS120mmRail:
+	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
 	# Inherits: ^TSCannon
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_Railgun_Heavy
@@ -73,6 +74,12 @@ TS120mmRail:
 		Damage: 8000
 	Warhead@Railgun_Heavy:
 		Damage: 8000
+	-Warhead@CannonHE_Medium:
+	-Warhead@Railgun_Heavy:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 9994
 TS120mmTal:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -88,6 +95,7 @@ TS120mmTal:
 	Warhead@CannonHE_Medium:
 		Damage: 24000
 TS120mmTalRail:
+	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
 	# Inherits: ^TSCannon
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_Railgun_Heavy
@@ -100,7 +108,14 @@ TS120mmTalRail:
 		Damage: 18000
 	Warhead@Railgun_Heavy:
 		Damage: 18000
+	-Warhead@CannonHE_Medium:
+	-Warhead@Railgun_Heavy:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 36000
+		PercentageScale: 9998
 TSRPGTower:
+	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -117,6 +132,12 @@ TSRPGTower:
 		Damage: 16000
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 32000
+		PercentageScale: 9997
 TSRPGTowerRail:
 	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy

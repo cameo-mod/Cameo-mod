@@ -1952,6 +1952,7 @@ MutAPRifle:
 	Warhead@Bullet_Light:
 		Damage: 4000
 TSSergGun:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1971,6 +1972,12 @@ TSSergGun:
 # verification unit proves the class formula: 2x HP + 2x damage at
 # same range/speed must price at exactly 250% (O 1.5x, P 2x, Q 4x).
 # MutAPRifle stays for its other users.
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 2494
 forgotten_mutantsoldier_rifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light

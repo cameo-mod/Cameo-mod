@@ -189,6 +189,7 @@ ConscriptMolotovExplode:
 		PercentageScale: 9988
 
 RocketsRA:
+	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -200,6 +201,12 @@ RocketsRA:
 		Damage: 10000
 	Warhead@MissileHE_Light:
 		Damage: 10000
+	-Warhead@MissileHE_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@MissileHE_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		PercentageScale: 9995
 RocketsRACryo:
 	Inherits@wh: ^Warhead_MissileCryo_Medium
 	Inherits@proj: ^Projectile_Missile_Light

@@ -863,7 +863,7 @@ SandmarineTuskFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-ViperMissiles:
+^ViperMissilesLegacy:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@2: ^RA2MediumMissile
@@ -893,18 +893,35 @@ ViperMissiles:
 	Warhead@MissileAP_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
+ViperMissiles:
+	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits: ^ViperMissilesLegacy
+	-Warhead@Concussion_Medium:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		PercentageScale: 9997
 ViperMissilesTwin:
 	Inherits: ViperMissiles
 	Burst: 8
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		PercentageScale: 9997
 ViperMissilesCryo:
 	Inherits: ViperMissiles
 	Inherits@2: ^CryoMissileProjectile
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		PercentageScale: 9997
 ViperMissilesFire:
 	Inherits@missileap: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Missile_Light
 	Inherits@4: ^Effect_Flame_Light
-	Inherits: ViperMissiles
+	Inherits: ^ViperMissilesLegacy
 	Projectile: Missile
 		TrailImage: fb2
 		TrailInterval: 1
@@ -1338,6 +1355,7 @@ tkmrh120gun:
 	Warhead@CannonHE_Medium:
 		Damage: 12000
 tkmtrenchcannon:
+	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -1352,10 +1370,20 @@ tkmtrenchcannon:
 		Damage: 20000
 	Warhead@CannonHE_Heavy:
 		Damage: 20000
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 40000
+		PercentageScale: 9998
 tkmtrenchdepcannon:
 	Inherits: tkmtrenchcannon
 	ReloadDelay: 36
 	Range: 11071
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 40000
+		PercentageScale: 9998
 
 TKMPDLaser:
 	Inherits: PDLaser
