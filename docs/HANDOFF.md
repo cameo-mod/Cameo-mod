@@ -10,6 +10,7 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 | know the balance program's state and who owns what | [`design/BALANCE_PROGRAM_PLAN.md`](design/BALANCE_PROGRAM_PLAN.md) §0, §0a, §1, §2 |
 | know a binding rule before editing yaml | [`DESIGN.md`](DESIGN.md) |
 | avoid a trap someone already hit | [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md) |
+| know how the bots are meant to work, and what is only designed | [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) |
 | know the current bug counts | [`audit/SUMMARY.md`](audit/SUMMARY.md) |
 | find which document owns a topic | [`README.md`](README.md) |
 
@@ -2208,7 +2209,7 @@ If you really need an engine change:
 
 ## 5b. The shape of the documentation set
 
-**43 live documents.** Everything else under `docs/` is generated (regenerate it) or archived in
+**44 live documents.** Everything else under `docs/` is generated (regenerate it) or archived in
 `history/` (what happened, never what is true now). [`README.md`](README.md) lists the whole live
 set in one table — if a document is not in that table, it is not live.
 

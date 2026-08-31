@@ -13,8 +13,9 @@ granular, resumable task queue that the handoff points into._
   (`cdd04e5a1`).
 - [ ] Observe long-match squad-value ramp behavior in-game; this branch makes no
   long-match gameplay claim.
-- [ ] Add an observer-facing notification so players can see the selected
-  personality in-game.
+- [x] Add an observer/replay-only chat notification so spectators can see the
+  selected personality; live players intentionally receive no UI decoration
+  because the indicator would leak opponent strategy.
 - [ ] Consider personality-specific base-builder behavior without duplicating
   the full base-builder configuration.
 
@@ -22,6 +23,44 @@ granular, resumable task queue that the handoff points into._
 
 - [~] Port the opt-in unit-composition mechanism and two TD pilot compositions;
   extend the pilot to other universes and factions as a follow-up.
+
+## AI ARCHITECTURE (2026-08-31)
+
+Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Nothing here is implemented; the
+design document is the deliverable so far. Ordered so each item is independently
+verifiable.
+
+- [x] Measure how ContentPack `ai.yaml` merges with the global AI file
+  (add-only, packs load first, removal is a load-time crash).
+- [ ] **S** Migrate one pack's `UnitsToBuild` rows out of `ai/ai.yaml` into
+  `ContentPacks/TiberianDawn/GDI/yaml/ai.yaml`, gated on a byte-identical
+  `--resolved-rules Player` dump. Mechanical once the first one works.
+- [ ] **M** Repeat per pack, then per dictionary (`UnitLimits`,
+  `BuildingFractions`).
+- [ ] **S** Personality-specific compositions via condition-gated
+  `ProvidesPrerequisite` tokens plus group tokens for OR - zero C#.
+- [ ] **M** Guerrilla as the sixth personality (many small simultaneous raids).
+- [ ] **M** `MasterAiBotModule`: fogged per-enemy signals, main-target scoring,
+  personality choice. Switches travel as a `SetBotPersonality` order resolved by
+  a synced controller trait, because bot logic may not touch synced state.
+- [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
+  cannot attribute losses to a specific opponent).
+- [ ] **M** JSONL match logging: match / decision / outcome records, the episode
+  as the unit of learning. Record-only, no behaviour change - this is the
+  proof-of-concept deliverable.
+- [ ] **M** Offline aggregation tool: personality and composition performance per
+  faction matchup, with a minimum sample threshold.
+- [ ] **L** Bandit-style (UCB1/Thompson) personality priors per matchup, fitted
+  offline and committed as reviewed data.
+- [ ] **L** Headless AI-vs-AI batch harness to produce the data volume.
+- [ ] **DEFERRED** Anything neural - blocked on factions and balance being
+  finished, per the maintainer's own sequencing.
+- [ ] **OPEN DESIGN** Fogged bot observation. Bots currently scan `World.Actors`
+  and filter only cloak, never shroud, so they know the whole map from tick zero.
+  This is the only real cheat left (difficulty is `BotLimits` throttling, not
+  resources), and fixing it will make bots temporarily weaker and requires a
+  scouting module. Maintainer's call - see AI_ARCHITECTURE.md section 9,
+  decision 1.
 
 **Rule zero: crashes and player-visible regressions ALWAYS jump the queue.** Ordering inside a
 section: quickest wins first, then by severity. Effort: **S** < 1 h · **M** = one session ·

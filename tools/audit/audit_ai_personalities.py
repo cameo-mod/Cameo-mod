@@ -88,6 +88,24 @@ def condition_values(block: list[str]) -> set[str]:
     return set()
 
 
+def notification_blocks(block: list[str]) -> tuple[dict[str, list[str]], set[str]]:
+    blocks: dict[str, list[str]] = {}
+    duplicates: set[str] = set()
+    for line in block:
+        match = re.match(r"^\tObserverConditionNotification@([^:]+):$", line)
+        if not match:
+            continue
+
+        name = match.group(1)
+        if name in blocks:
+            duplicates.add(name)
+            continue
+
+        blocks[name] = lines_for_block(block, f"ObserverConditionNotification@{name}")
+
+    return blocks, duplicates
+
+
 def main() -> int:
     lines = AI_PATH.read_text(encoding="utf-8").splitlines()
     failures: list[str] = []
@@ -111,6 +129,31 @@ def main() -> int:
 
     if "\tSquadManagerBotModuleCA@generic:" in lines:
         failures.append("legacy SquadManagerBotModuleCA@generic block remains")
+
+    notification_blocks_by_name, duplicate_notifications = notification_blocks(player)
+    expected_notification_names = {f"personality-{name}" for name in PERSONALITIES}
+    notification_names = set(notification_blocks_by_name)
+    missing_notifications = expected_notification_names - notification_names
+    orphan_notifications = notification_names - expected_notification_names
+    if missing_notifications:
+        failures.append(f"missing personality notifications: {', '.join(sorted(missing_notifications))}")
+    if orphan_notifications:
+        failures.append(f"orphan personality notifications: {', '.join(sorted(orphan_notifications))}")
+    if duplicate_notifications:
+        failures.append(f"duplicate personality notifications: {', '.join(sorted(duplicate_notifications))}")
+
+    for name in PERSONALITIES:
+        notification = notification_blocks_by_name.get(f"personality-{name}")
+        if notification is None:
+            continue
+
+        fields = field_blocks(notification)
+        required = f"genericbot && personality-{name}"
+        if fields.get("RequiresCondition", "").strip() != f"RequiresCondition: {required}":
+            failures.append(f"{name} notification has incorrect RequiresCondition")
+        expected_notification = f"Notification: notification-bot-personality-{name}"
+        if fields.get("Notification", "").strip() != expected_notification:
+            failures.append(f"{name} notification has incorrect Notification")
 
     consumed = set()
     parsed_fields = {}
@@ -147,6 +190,7 @@ def main() -> int:
     print(f"- Selector conditions: `{', '.join(sorted(granted))}`")
     print(f"- Consumed conditions: `{', '.join(sorted(consumed))}`")
     print(f"- Personality blocks: {len([block for block in blocks.values() if block])}/5")
+    print(f"- Personality notifications: {len(notification_names)}/5")
     print(f"- Explicit tuning allow-list: `{', '.join(sorted(TUNING_FIELDS))}`")
     print()
     if failures:
@@ -157,6 +201,7 @@ def main() -> int:
     print("## PASS")
     print("- Shared non-tuning fields are byte-identical across all five instances.")
     print("- GrantRandomCondition and squad-manager condition sets match exactly.")
+    print("- Personality conditions have exactly one matching notification block each.")
     print("- No dead RushInterval/RushAttackScanRadius keys remain.")
     return 0
 
