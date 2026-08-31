@@ -1994,6 +1994,36 @@
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "bc50fbc78905fa200e0631f083064b4bb331feba71c59ab8780664263f0b15c6"
     },
+    "RA2FreedomRocket_elite": {
+      "category": "percentage-scope compatibility",
+      "component_purposes": {
+        "MissileAP_Medium": "percentage-scaled canonical damage component MissileAP_Medium",
+        "MissileAP_MediumFlatCompatibility": "fixed compatibility remainder MissileAP_MediumFlatCompatibility with percentage scaling disabled"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "cf05fb48ecfaa58cdd18248469fcad1d8f61611e17e19b8610459c7dc5e0762f",
+      "mains": [
+        "MissileAP_Medium",
+        "MissileAP_MediumFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to the exact fixed and percentage-scaled applications whose separate integer rounding is behaviorally significant.",
+      "rationale": "Exact family decision for RA2FreedomRocket_elite: retains separately authored fixed and percentage-scaled damage slices whose integer runtime applications are not interchangeable; reviewed components are MissileAP_Medium, MissileAP_MediumFlatCompatibility.",
+      "referrer_digest": "904a4f1a134df0daad30bd7a8f3353add5574841d9c1c6fc4f9b3f993c002d43",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_freedomfighter",
+          "path": "Armament@ROCKETELITE/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_freedomfighter",
+          "path": "Armament@RocketGARRISONEDELITE/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: fixed and percentage-scaled compatibility slices",
+      "weapon_digest": "c3e5cb5d63a97ff5077e4947722e33cc1ccaa43ba1c1d0f2c9b16624f4e483c1"
+    },
     "RA2KirovBomb_nuclear": {
       "category": "status payload",
       "component_purposes": {
@@ -2185,6 +2215,38 @@
       ],
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "b5a82b9a03194c2d74683212d865fa377f55d06b714413fa64561d2b5aac9069"
+    },
+    "Rammax_Sabot": {
+      "category": "effect-delivery composite",
+      "component_purposes": {
+        "PreservedFlat_Chaingun": "primary conventional delivery or impact PreservedFlat_Chaingun",
+        "PreservedFlat_LaserWeapon": "primary conventional delivery or impact PreservedFlat_LaserWeapon",
+        "PreservedFlat_TeslaWeapon": "special energy, status, or effect payload PreservedFlat_TeslaWeapon"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "dee5467f7ed2689e60c073ff8e2d1bd6e3f8d181521d50358d281e66a24533af",
+      "mains": [
+        "PreservedFlat_Chaingun",
+        "PreservedFlat_LaserWeapon",
+        "PreservedFlat_TeslaWeapon"
+      ],
+      "overlap_justification": "Overlap is intentional: the special energy or Waveforce payload is delivered together with the conventional impact.",
+      "rationale": "Exact family decision for Rammax_Sabot: retains a conventional impact together with a separately authored energy or Waveforce effect payload delivered on the same shot; reviewed components are PreservedFlat_Chaingun, PreservedFlat_LaserWeapon, PreservedFlat_TeslaWeapon.",
+      "referrer_digest": "6fd1fba8fe4d088fd9b6d643b8c0ba9bfdcde44aa848bb78d52671849a04ca1c",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "rammax.latin",
+          "path": "Armament@ELITE/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "rammax.latin",
+          "path": "Armament@PRIMARY/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: overlapping effect delivery",
+      "weapon_digest": "66b80e21df52deb0c0561800022a768241f60a9abdae06c4057640465e91bc9e"
     },
     "ReactorNuke": {
       "category": "staged superweapon",

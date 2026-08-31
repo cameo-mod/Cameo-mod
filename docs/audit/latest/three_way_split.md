@@ -1,21 +1,21 @@
-# audit_three_way_split — 387 raw stacked weapons; 261 remain unreviewed
+# audit_three_way_split — 387 raw stacked weapons; 259 remain unreviewed
 
    1642  correct — exactly one main warhead
     317  none — utility / effect-only weapons
     387  RAW STACKS — structural inventory
-    126  reviewed — exact intentional composites
-    261  UNREVIEWED — classification backlog
+    128  reviewed — exact intentional composites
+    259  UNREVIEWED — classification backlog
 
   mains  weapons
-      2    202
-      3    115
+      2    203
+      3    114
       4     42
       5     13
       6      6
       7      7
       8      2
 
-141 distinct stacked combinations; the 20 most common:
+139 distinct stacked combinations; the 20 most common:
 
 | count | combination |
 |---|---|
@@ -40,7 +40,7 @@
 | 3 | Bullet_Light + Bullet_Medium + Concussion_Medium + Demolition_Light |
 | 3 | Laser_Heavy + Railgun_Heavy + Tesla_Heavy |
 
-Reviewed exact composites (126):
+Reviewed exact composites (128):
 
 - `ATMine`: ATMineDemolition_Light + Demolition_Light
 - `AphidCryo_AA`: CryoBlast_Medium + MissileCryo_Heavy
@@ -105,6 +105,7 @@ Reviewed exact composites (126):
 - `PulseMissile`: 10Dam_areanuke3 + 11Dam_areanuke3 + 1Dam_impact + 4Dam_areanuke1 + 7Dam_areanuke2 + 8Dam_areanuke2 + Tesla_Heavy + Tesla_Super
 - `RA2Atomic`: Nuclear_Super + Tesla_Heavy + Tesla_Super
 - `RA2DemoBomb`: 10Dam_areanuke3 + 11Dam_areanuke3 + 1Dam_impact + 4Dam_areanuke1 + 7Dam_areanuke2 + 8Dam_areanuke2 + Damage
+- `RA2FreedomRocket_elite`: MissileAP_Medium + MissileAP_MediumFlatCompatibility
 - `RA2KirovBomb_nuclear`: Demolition_Heavy + Nuclear_Super
 - `RA2KirovBomb_nuclear_elite`: Demolition_Heavy + Nuclear_Super
 - `RA2KirovBomb_rad`: Chemical_Heavy + Demolition_Heavy
@@ -112,6 +113,7 @@ Reviewed exact composites (126):
 - `RA2LasherToxicMortar_elite`: CannonChem_MediumFlatCompatibility + CannonHE_Medium
 - `RA2Virusgun2`: Flak_Medium + Sniper_LightFlatCompatibility
 - `RAAtomic`: Nuclear_Super + Tesla_Heavy + Tesla_Super
+- `Rammax_Sabot`: PreservedFlat_Chaingun + PreservedFlat_LaserWeapon + PreservedFlat_TeslaWeapon
 - `ReactorNuke`: 10Dam_areanuke3 + 11Dam_areanuke3 + 1Dam_impact + 4Dam_areanuke1 + 7Dam_areanuke2 + 8Dam_areanuke2 + Damage
 - `ReactorNukeWeak`: 10Dam_areanuke3 + 11Dam_areanuke3 + 1Dam_impact + 4Dam_areanuke1 + 7Dam_areanuke2 + 8Dam_areanuke2 + Damage
 - `SaboDeath`: 1Dam + EnemyDam
@@ -169,5 +171,5 @@ Reviewed exact composites (126):
 - `wc2_dwarf_Rifle`: Bullet_Medium + CollapseTargetCompatibility1
 - `wc2catapultFire`: CollapseTargetCompatibility1 + Concussion_Heavy
 
-WARN raw 387/387; unreviewed 261/261
+WARN raw 387/387; unreviewed 259/259
 Lower raw ratchets only for structural consolidation; lower the unreviewed ratchet only for exact reviewed decisions.

@@ -131,6 +131,10 @@ DECISION_GROUPS = {
         (("ordos_airmine",), ("1Dam", "MissileAP_HeavyFlatCompatibility")),
         (("RA2Virusgun2",), ("Flak_Medium", "Sniper_LightFlatCompatibility")),
     ),
+    "percentage-scope compatibility": (
+        (("RA2FreedomRocket_elite",),
+         ("MissileAP_Medium", "MissileAP_MediumFlatCompatibility")),
+    ),
     "effect-delivery composite": (
         (("ZeroFighterChainGunWaveforce",),
          ("Bullet_Medium", "Railgun_Heavy", "ZeroFighterBullet_Medium")),
@@ -140,6 +144,9 @@ DECISION_GROUPS = {
         (("WaveforceCannon", "WaveforceCannonChargedLaser"),
          ("MissileHE_Heavy", "Railgun_Heavy")),
         (("WaveArtilleryImpact",), ("Railgun_Heavy", "Tesla_Heavy")),
+        (("Rammax_Sabot",),
+         ("PreservedFlat_Chaingun", "PreservedFlat_LaserWeapon",
+          "PreservedFlat_TeslaWeapon")),
     ),
     "maintainer-approved role blend": (
         (("AtreusMG",), ("Bullet_Medium", "CannonHE_Heavy")),
@@ -299,6 +306,10 @@ CATEGORY_RATIONALES = {
         "retains distinct target, relationship, armor, or physical-state routes "
         "rather than treating the mains as interchangeable damage copies"
     ),
+    "percentage-scope compatibility": (
+        "retains separately authored fixed and percentage-scaled damage slices "
+        "whose integer runtime applications are not interchangeable"
+    ),
     "effect-delivery composite": (
         "retains a conventional impact together with a separately authored energy "
         "or Waveforce effect payload delivered on the same shot"
@@ -317,6 +328,9 @@ CATEGORY_REFERENCES = {
     "staged superweapon": "Resolved family review: authored stage timing and geometry",
     "status payload": "Resolved family review: primary hit plus status payload",
     "target-routed composite": "Resolved family review: target and armor routing",
+    "percentage-scope compatibility": (
+        "Resolved family review: fixed and percentage-scaled compatibility slices"
+    ),
     "effect-delivery composite": "Resolved family review: overlapping effect delivery",
     "maintainer-approved role blend": (
         "Maintainer decision: retain the unit's current mixed combat role"
@@ -338,6 +352,10 @@ CATEGORY_OVERLAP = {
     "target-routed composite": (
         "This is not a blanket overlap waiver; the exact components are retained "
         "for their distinct target, relationship, armor, or state routes."
+    ),
+    "percentage-scope compatibility": (
+        "Overlap is intentional and limited to the exact fixed and percentage-scaled "
+        "applications whose separate integer rounding is behaviorally significant."
     ),
     "effect-delivery composite": (
         "Overlap is intentional: the special energy or Waveforce payload is "
@@ -467,6 +485,12 @@ def component_purpose(category: str, main: str) -> str:
         return f"authored superweapon stage {main} with independently pinned behavior"
     if category == "target-routed composite":
         return f"authored target, armor, relationship, or state route {main}"
+    if category == "percentage-scope compatibility":
+        if main.endswith("FlatCompatibility"):
+            return f"fixed compatibility remainder {main} with percentage scaling disabled"
+        if main.startswith("CannonHE_"):
+            return f"separate conventional impact component {main} outside the AP percentage split"
+        return f"percentage-scaled canonical damage component {main}"
     if category == "maintainer-approved role blend":
         return f"authored armor contribution {main} to the approved mixed unit role"
     if category == "maintainer-curated signature":

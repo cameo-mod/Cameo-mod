@@ -1742,10 +1742,11 @@ facedancer_grenade:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@LightMissile:
 	-Warhead@MediumMissile:
+	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAP_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 140000
-		PercentageScale: 0
+		Damage: 160000
+		PercentageScale: 1250
 
 GrenDeath:
 	Warhead@EnemyDam: SpreadDamage

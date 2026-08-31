@@ -31,10 +31,10 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
 
     def test_exact_reviewed_name_set_and_schema_are_pinned(self):
         names = sorted(self.manifest["entries"])
-        self.assertEqual(126, len(names))
+        self.assertEqual(128, len(names))
         self.assertEqual(set(reviewed.curated_decisions()), set(names))
         self.assertEqual(
-            "e2f629b6c0bb8c545867260d93a8d75b364a30ef1e4ce5dae88dbc6b677eeddf",
+            "85881d4782537a8276b3a4184f4569746c78a1aecf994964d455cb3f576a6836",
             hashlib.sha256(("\n".join(names) + "\n").encode()).hexdigest(),
         )
         self.assertEqual([], reviewed.validate_manifest(
@@ -93,6 +93,19 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
             entry = self.manifest["entries"][name]
             self.assertEqual("direct", entry["expected_reachability"], name)
             self.assertIn("WEAPON_3WAY_SPLIT", entry["review_reference"], name)
+
+    def test_audited_compatibility_signatures_are_pinned_without_reprofiling(self):
+        expected = {
+            "RA2FreedomRocket_elite": "percentage-scope compatibility",
+            "Rammax_Sabot": "effect-delivery composite",
+        }
+        for name, category in expected.items():
+            entry = self.manifest["entries"][name]
+            self.assertEqual(category, entry["category"], name)
+            self.assertEqual("direct", entry["expected_reachability"], name)
+            self.assertGreaterEqual(len(entry["mains"]), 2, name)
+            self.assertIn("separately authored", entry["rationale"], name)
+            self.assertTrue(entry["referrers"], name)
 
     def test_reviewed_weapon_is_reachable_directly_with_exact_referrer(self):
         entry = self.manifest["entries"]["TSHellfireSonic"]
@@ -221,7 +234,7 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
         self.assertEqual(0, status)
         self.assertEqual(report, split.REPORT.read_text(encoding="utf-8"))
         self.assertIn("387 raw stacked weapons", report)
-        self.assertIn("261 remain unreviewed", report)
+        self.assertIn("259 remain unreviewed", report)
         self.assertEqual(
             serialized(self.current),
             INVENTORY_REPORT.read_text(encoding="utf-8"),

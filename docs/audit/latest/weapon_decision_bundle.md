@@ -5,9 +5,9 @@ families. It is a review queue, not conversion authority. Reviewed exact
 composites remain in the raw structural count but are excluded here.
 
 - Raw reachable stacked definitions: **287**
-- Exact reviewed composites: **126**
-- Unreviewed reachable definitions: **161**
-- Unreviewed inheritance families: **105**
+- Exact reviewed composites: **128**
+- Unreviewed reachable definitions: **159**
+- Unreviewed inheritance families: **103**
 
 The buckets describe why automatic consolidation is unsafe. They do not
 decide the eventual damage family.
@@ -19,7 +19,7 @@ listed after the colon remain open decisions.
 | target and state routing | 18 | 39 |
 | target routing | 24 | 36 |
 | state delivery | 31 | 47 |
-| legacy compatibility | 5 | 5 |
+| legacy compatibility | 3 | 3 |
 | numbered warhead key | 1 | 1 |
 | no special mechanical signal | 26 | 33 |
 
@@ -201,18 +201,14 @@ listed after the colon remain open decisions.
 - **`edenMobileLaserTiger`** (1; state or integrity): `edenMobileLaserTiger`
   - mains `CannonHE_Medium + Laser_Heavy`: `edenMobileLaserTiger`
 
-## Legacy Compatibility (5 families)
+## Legacy Compatibility (3 families)
 
-- **`RA2FreedomRocket_elite`** (1; legacy bridge): `RA2FreedomRocket_elite`
-  - mains `MissileAP_Medium + MissileAP_MediumFlatCompatibility`: `RA2FreedomRocket_elite`
-- **`Rammax_Sabot`** (1; legacy bridge): `Rammax_Sabot`
-  - mains `PreservedFlat_Chaingun + PreservedFlat_LaserWeapon + PreservedFlat_TeslaWeapon`: `Rammax_Sabot`
 - **`TSRPGTowerRail`** (1; legacy bridge): `TSRPGTowerRail`
   - mains `CannonHE_Heavy + Railgun_HeavyFlatCompatibility`: `TSRPGTowerRail`
 - **`TankBusterBeamCannon`** (1; legacy bridge): `TankBusterBeamCannon`
   - mains `Railgun_Heavy + TankBusterBeamUnscopedCompatibility`: `TankBusterBeamCannon`
 - **`facedancer_grenade`** (1; legacy bridge): `facedancer_grenade`
-  - mains `CannonHE_Heavy + MissileAP_Heavy + MissileAP_HeavyFlatCompatibility`: `facedancer_grenade`
+  - mains `CannonHE_Heavy + MissileAP_HeavyFlatCompatibility`: `facedancer_grenade`
 
 ## Numbered Warhead Key (1 family)
 

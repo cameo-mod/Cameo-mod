@@ -20,9 +20,9 @@ class WeaponDecisionBundleTests(unittest.TestCase):
 
     def test_every_unreviewed_reachable_weapon_occurs_once(self):
         names = [member for row in self.rows for member in row["members"]]
-        self.assertEqual(161, len(names))
+        self.assertEqual(159, len(names))
         self.assertEqual(len(names), len(set(names)))
-        self.assertEqual(105, len(self.rows))
+        self.assertEqual(103, len(self.rows))
 
     def test_reviewed_composites_are_not_presented_as_open_decisions(self):
         names = {member for row in self.rows for member in row["members"]}
@@ -33,7 +33,7 @@ class WeaponDecisionBundleTests(unittest.TestCase):
         self.assertNotIn("WaveArtilleryImpact", families)
         self.assertIn("RA2Virusgun3", families)
         self.assertIn("WaveTurretImpact", families)
-        self.assertEqual(126, self.data["reviewed_reachable"])
+        self.assertEqual(128, self.data["reviewed_reachable"])
 
     def test_buckets_use_engine_defaults_and_mechanical_labels(self):
         counts = {
@@ -48,7 +48,7 @@ class WeaponDecisionBundleTests(unittest.TestCase):
             "target and state routing": (18, 39),
             "target routing": (24, 36),
             "state delivery": (31, 47),
-            "legacy compatibility": (5, 5),
+            "legacy compatibility": (3, 3),
             "numbered warhead key": (1, 1),
             "no special mechanical signal": (26, 33),
         }, counts)
