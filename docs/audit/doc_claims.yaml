@@ -238,11 +238,13 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 494
+    value: 472
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
       predicate — W24's scope, and the reason pricing must wait for the weapon rebuild.
+      ⭐ 494 -> 472 on 2026-08-30: this is the DEBT and it going DOWN is progress. Re-pin it
+      downward as W24 batches land; ⛔ never upward without explaining what regressed.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import sys, pathlib
@@ -253,11 +255,21 @@ claims:
       print(inventory(rs)['counts']['stacked_main_direct_actor_armament'])
 
   - id: percentage_denominator_unset
-    value: 0
+    value: 11
     tolerance: 0
     what: >
-      W18 has NOT landed. Any nonzero here means the basis-point rebase shipped and every
-      pct_absolute / dps_floor figure in the docs is stale.
+      `PercentageDenominator` declarations across the live weapon manifest. ⭐ THIS PIN WAS A
+      TRIPWIRE AND IT TRIPPED, unnoticed. It read "W18 has NOT landed. Any nonzero here means
+      the basis-point rebase shipped and every pct_absolute / dps_floor figure in the docs is
+      stale" — and W18 DID land: `765cbd446` is an ancestor of HEAD, and 11 declarations now
+      sit in 6 ContentPack weapon files (Ixian 2, RA2 Allies 2, RA2 Shared 1, Naxis 2,
+      Syndicate 1, StarCraft Terran 3).
+      ⚠ The alarming half needs care rather than repetition: the TOOLING is denominator-aware
+      (`formula.py` handles 10000 = basis points explicitly, and `extract_stats` /
+      `percentage_damage` both read the field), so anything RE-MEASURED since W18 is correct.
+      What can still be stale is a pct_absolute / dps_floor figure WRITTEN DOWN before
+      `765cbd446` and never re-derived. That is a smaller and checkable set, not "every figure".
+      The pin now tracks ADOPTION: re-pin as more weapons move onto basis points.
     docs: [docs/design/ARMOR_LAYERS.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import pathlib, sys
@@ -545,10 +557,13 @@ claims:
       print(round(under / pop, 3) if pop else 0)
 
   - id: warhead_family_reach
-    value: 1245
+    value: 1391
     tolerance: 0
     what: >
       Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
+      ⭐ 1245 -> 1391 on 2026-08-30. This one is a BURN-UP, so rising is progress — the mirror
+      of `multi_main_fired_weapons`, which is a burn-DOWN. Reading either without knowing which
+      direction is good is how a metric gets celebrated backwards.
       The rest still route through the legacy templates that `audit_unconverted_templates`
       lists. BALANCE_PROGRAM_PLAN §0a carried "639 of 1620 = 39%" with no recorded method;
       this entry pins BOTH the number and how it is counted (transitive inherit chain over the

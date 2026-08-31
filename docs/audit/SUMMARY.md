@@ -100,15 +100,31 @@ cross-document consistency 73/0 · display text 0 active findings ·
 **generator sync drift 0** (**139** shared templates, no-op regenerate — 139, not 136, since the
 2026-08-30 heaviness-bell switch regenerated the set).
 
-⚠ **`doc claims` is NO LONGER 19 of 19** — re-measured 2026-08-30, **11 pins disagree with the
-tree**: `signed_off_class_anchors` / `class_anchors_signed_off` (0 → 8), `ledgers_drifted` (0 →
-32), `multi_main_fired_weapons` (494 → 472), `warhead_family_reach` (1245 → 1391),
-`physical_state_fired_weapons` (460 → 509), `meters_filling_before_death` (137 → 239),
-`percentage_denominator_unset` (0 → 11) and the three `shield_*` numbers. ⛔ **None of them is the
-bell's doing** — the identical set, to three decimals bar a 0.2% shield drift, measures the same
-on the pre-switch `weapons.yaml`. They are the un-re-pinned residue of the 2026-08-30 anchor and
-ledger work, and each needs the claim updated together with every document under its `docs:` list,
-in one commit, by whoever owns that number.
+⚠ **`doc claims` is NO LONGER 19 of 19.** It read 11 drifted on 2026-08-30; **6 were resolved and
+5 remain**, deliberately.
+
+✅ **Resolved.** `ledgers_drifted` (32 → **0**) by a pipeline re-extract — the ledger was behind
+the yaml that actually ships, including real values (`missile_tank` hp 47500→50000, speed 95→64).
+`signed_off_class_anchors` / `class_anchors_signed_off` (0 → **8**, maintainer-ordered, verified
+against `0ff427712`). `multi_main_fired_weapons` (494 → **472** — a burn-DOWN, so lower is
+progress). `warhead_family_reach` (1245 → **1391** — a burn-UP, so higher is progress).
+`percentage_denominator_unset` (0 → **11**) — that pin was a TRIPWIRE for "W18 shipped" and it had
+tripped unnoticed; W18 is an ancestor of HEAD.
+
+⛔ **Left red ON PURPOSE — 5 pins, because re-pinning them is a judgement, not a measurement:**
+
+| pin | pinned | measures | why it is not just re-pinned |
+|---|--:|--:|---|
+| `shield_versus_mean` | 189.088 | 174.802 | feeds `shield_hp_factor`, which is a PRICING input |
+| `shield_hp_factor` | 0.528855 | 0.572075 | derived from the above — what one shield point is worth as HP |
+| `shield_damage_share` | 0.01432 | 0.0156 | roster damage landing on the Shield row |
+| `physical_state_fired_weapons` | 460 | 509 | scope of the meter layer; direction of good unrecorded |
+| `meters_filling_before_death` | 137 | 239 | a dilution symptom — rising may be the DEFECT, not progress |
+
+⭐ **Blanket re-pinning is how a guard gets switched off.** The three `shield_*` numbers move
+prices, and `meters_filling_before_death` may be measuring a regression — a pin whose direction of
+good is unrecorded must not be quietly dragged to match the tree. Each needs the owner's call, and
+the claim updated with every document under its `docs:` list in the same commit.
 
 ## Red right now
 
