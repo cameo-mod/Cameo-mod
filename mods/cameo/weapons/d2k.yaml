@@ -250,12 +250,27 @@ D2K_Rocket_Trooper:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_MissileAP_Heavy
-	Inherits@proj: ^Projectile_Missile_Medium_D2K_Rocket_Trooper
+	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 64
 	Range: 6185
 	Report: ROCKET1.WAV
 	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 666
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+		Acceleration: 6
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -607,6 +622,7 @@ facedancer_attack:
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
 LeechSpit:
+	Inherits@collapsewh: ^Warhead_Chemical_Light
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^LightMissile
 	Inherits@3: ^SmallArms
@@ -625,37 +641,17 @@ LeechSpit:
 		Speed: 2500
 		Width: 25
 		TrailImage: sczhsplash
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Vehicle
-		Damage: 4000
-		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Vehicle
-		Damage: 4000
-		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Vehicle
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
-	Warhead@ArrowWeapon: SpreadDamage
-		ValidTargets: Vehicle
-		Damage: 2000
-		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
@@ -663,6 +659,15 @@ LeechSpit:
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
 		Explosions: sczhsplash
+	-Warhead@LightChemicalWeapon:
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:
+	-Warhead@ArrowWeapon:
+	Warhead@Chemical_Light:
+		ValidTargets: Vehicle
+		Damage: 12000
+		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
+		PercentageScale: 0
 
 WormJaw:
 	ReloadDelay: 10
@@ -935,7 +940,7 @@ D2KRepair:
 		Types: ivanbomb
 		ValidTargets: ivanattached
 		ValidRelationships: Ally
-	Warhead@2Defuse: DetachDelayedWeapon
+	Warhead@3Defuse: DetachDelayedWeapon
 		Types: lockdown
 		ValidTargets: lockdowned
 		ValidRelationships: Ally
@@ -1121,6 +1126,7 @@ LMG:
 	Warhead@Bullet_Light:
 		Damage: 2000
 light_inf_lmg:
+	Inherits@finalmain: ^Compatibility_Bullet_LightFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -1132,6 +1138,12 @@ light_inf_lmg:
 		Damage: 2000
 	Warhead@Bullet_Light:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 LMG_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Bullet_Light
@@ -1153,6 +1165,7 @@ LMG_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 light_inf_lmg_upgrade:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Bullet_Light
 	Inherits@3: ^Warhead_CannonHE_Heavy
@@ -1172,9 +1185,15 @@ light_inf_lmg_upgrade:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 Fremen_S:
 	Inherits: ^MG
-	Report: FREMODD1.WAV
 	ValidTargets: Infantry
 	InvalidTargets: Vehicle, Structure, Air
 	ReloadDelay: 20
@@ -1288,7 +1307,7 @@ Arrakis_Tanya_Guns:
 
 Fremen_RPG:
 	Inherits: ^D2KMissile
-	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Missile_Blast
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 45
 	Range: 4864
 	ValidTargets: Air, Vehicle, Structure
@@ -1296,6 +1315,17 @@ Fremen_RPG:
 	Projectile: Missile
 		Image: d2k_RPG
 		TrailImage: bazooka_trail2
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_rocket_explosion
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		Damage: 3200
 		ValidTargets: Air, Vehicle, Structure
@@ -1598,7 +1628,6 @@ d2kFlameTurret:
 
 d2k_flame_tank:
 	Inherits: Flamer
-	ValidTargets: Ground, Water
 	InvalidTargets: wall
 	ReloadDelay: 5
 	Range: 4096
@@ -1688,6 +1717,7 @@ PhoenixRocketShrapnel:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 ixian_airdrone:
+	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^LightChemicalWeapon
 	Inherits@3: ^FlakWeapon
@@ -1772,6 +1802,17 @@ ixian_airdrone:
 		AimTargetStances: Enemy, Neutral
 
 	MinRange: 1300
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyBomb:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 1659
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	-Warhead@MissileAP_Heavy:
 d2k_kwny_fighter:
 	Inherits: PhoenixRocket
 	ReloadDelay: 75
@@ -1901,6 +1942,10 @@ d2k_airdefenseplatform:
 			Medium: 90
 			Heavy: 90
 			Concrete: 30
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 
 D2KTheVoice:
 	ReloadDelay: 200

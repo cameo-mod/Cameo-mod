@@ -34,7 +34,7 @@ conflicts with this file, **this file wins** — and fix the copy.
 
 Crashes and player-visible regressions always jump the queue.
 
-### The balance program — 6 documents
+### The balance program — 8 documents
 
 | document | owns |
 |---|---|
@@ -43,6 +43,8 @@ Crashes and player-visible regressions always jump the queue.
 | [`design/FORMULA_V2.md`](design/FORMULA_V2.md) | the formula law: per-class, SUM, bands, uniqueness |
 | [`design/BALANCE_SYNTHESIS.md`](design/BALANCE_SYNTHESIS.md) | the mod-synthesis methodology and its sources |
 | [`design/BALANCE_PIPELINE_ESTIMATE.md`](design/BALANCE_PIPELINE_ESTIMATE.md) | effort estimate for the whole programme |
+| [`design/BALANCE_PIPELINE_GAPS.md`](design/BALANCE_PIPELINE_GAPS.md) | what a one-click run still lacks, plus the verified residue of the 2026-08 outside review round |
+| [`design/RTS_BALANCE_REFERENCE.md`](design/RTS_BALANCE_REFERENCE.md) | *(non-binding)* RTS and multiplayer balance dimensions a stat-consistency model cannot see |
 | [`design/EFFECTIVE_DAMAGE.md`](design/EFFECTIVE_DAMAGE.md) | the area-integrated `effective_damage` metric |
 
 ### Weapons, warheads and defence — 9 documents
@@ -144,8 +146,10 @@ machine** — path separators alone make a cross-platform diff dirty.
 wholesale, so anything the suite does not produce is deleted on the next run — which is how
 `latest/superweapon_audit.yaml` disappeared while three documents still linked to it.
 
-⚠ **`design/cameo_balance_v2.xlsx` is TRACKED in git**, despite older notes calling it
-"gitignored". Regenerating it produces a real diff.
+⚠ **The active generated workbooks are TRACKED in git:**
+`design/cameo_balance_by_faction.xlsx` and `design/cameo_balance_by_type.xlsx`.
+`design/cameo_balance_v2.xlsx` is a frozen pre-split prototype; do not treat its
+old formulas as the current balance law.
 
 ## Two gates keep this set honest
 

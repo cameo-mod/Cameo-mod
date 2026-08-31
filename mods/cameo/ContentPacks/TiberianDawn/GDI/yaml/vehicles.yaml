@@ -1188,7 +1188,7 @@ td_gdi_defenserig:
 		RequiresCondition: deployed
 	RejectsOrders@deployment:
 		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
+		RequiresCondition: !(botmicro && !attacking) && deployed
 	GrantConditionOnDeploy:
 		PauseOnCondition: disabled
 		DeployedCondition: deployed
@@ -1198,9 +1198,6 @@ td_gdi_defenserig:
 		UndeployOnMove: true
 		SmartDeploy: True
 		Facing: 0
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !(botmicro && !attacking) && deployed
 	RejectsMoveToAttack:
 		RequiresCondition: !(botmicro && !attacking) && deployed
 	Passenger:
@@ -1221,7 +1218,6 @@ td_gdi_defenserig:
 	Voiced:
 		VoiceSet: SCSiegeTankVoice
 	DeathSounds:
-	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
 		Bounds: 1536, 1536

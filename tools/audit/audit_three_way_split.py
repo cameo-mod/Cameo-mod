@@ -52,9 +52,17 @@ if hasattr(sys.stdout, "reconfigure"):          # Windows consoles default to cp
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from miniyaml import Ruleset  # noqa: E402
 
-# Weapons resolving to >1 main damaging warhead when this was measured (2026-08-22). LOWER ONLY.
+# Weapons resolving to >1 main damaging warhead when this was measured (2026-08-28). LOWER ONLY.
 # 1190 -> 1178 the same day: a MEASUREMENT fix, not converted weapons. See FRIENDLY_FIRE below.
-SPLIT_BASELINE = 1176
+SPLIT_BASELINE = 667
+
+# Exact, reviewed composites that intentionally carry a delivery payload plus a
+# separate status payload.  The fingerprint is deliberately strict: changing a
+# key, adding a third main, or copying the same pair onto another weapon drops
+# the exception and trips the lower-only ratchet.
+INTENTIONAL_COMPOSITES = {
+    "TSHellfireSonic": ("MissileAP_Heavy", "Sonic_Medium"),
+}
 
 # Warhead types that inflict damage on a normal target. Everything else (CreateEffect,
 # LeaveSmudge, GrantExternalCondition, SpawnActor, GlowImpact, ...) is cosmetic or utility and
@@ -84,8 +92,14 @@ def is_friendly_fire(wh) -> bool:
     return "Ally" in rel and "Enemy" not in rel
 
 
-def main_warheads(resolved) -> list[str]:
-    """The main damaging warheads a resolved weapon actually fires."""
+def main_warhead_nodes(resolved):
+    """Positive, non-companion damage warheads a resolved weapon fires.
+
+    OpenRA's DamageWarheadInfo.Damage defaults to zero.  Missing, zero,
+    negative, or symbolic Damage values therefore cannot make a weapon a
+    stacked-main violation.  This predicate is shared with the collapse
+    planner so the survey and its direct-armament subset cannot drift again.
+    """
     out = []
     for wh in resolved.children:
         if not (wh.key.startswith("Warhead@") or wh.key == "Warhead"):
@@ -97,13 +111,23 @@ def main_warheads(resolved) -> list[str]:
         if is_friendly_fire(wh):
             continue
         damage = wh.get("Damage")
-        try:                                    # a Damage: 0 warhead fires nothing
-            if damage is not None and int(str(damage).strip()) == 0:
+        try:
+            if damage is None or int(str(damage).strip()) <= 0:
                 continue
         except ValueError:
-            pass
-        out.append(wh.key.replace("Warhead@", ""))
+            continue
+        out.append(wh)
     return out
+
+
+def main_warheads(resolved) -> list[str]:
+    """Names of the warheads accepted by :func:`main_warhead_nodes`."""
+    return [wh.key.replace("Warhead@", "") for wh in main_warhead_nodes(resolved)]
+
+
+def intentional_composite(name: str, mains: list[str]) -> bool:
+    """Whether *name* has its one exact, reviewed multi-main fingerprint."""
+    return INTENTIONAL_COMPOSITES.get(name) == tuple(sorted(mains))
 
 
 def main() -> int:
@@ -111,6 +135,7 @@ def main() -> int:
     hist = collections.Counter()
     combos = collections.Counter()
     rows: list[tuple[str, list[str]]] = []
+    reviewed: list[tuple[str, list[str]]] = []
 
     for name in sorted(rs.weapons):
         if name.startswith("^"):
@@ -121,14 +146,19 @@ def main() -> int:
         mains = main_warheads(resolved)
         hist[len(mains)] += 1
         if len(mains) > 1:
-            rows.append((name, mains))
-            combos[tuple(sorted(mains))] += 1
+            if intentional_composite(name, mains):
+                reviewed.append((name, mains))
+            else:
+                rows.append((name, mains))
+                combos[tuple(sorted(mains))] += 1
 
     total = sum(hist.values())
-    print(f"# audit_three_way_split — {len(rows)} of {total} weapons fire more than ONE main warhead\n")
+    print(f"# audit_three_way_split — {len(rows)} of {total} weapons fire more than ONE "
+          "unreviewed main warhead\n")
     print(f"  {hist[1]:5d}  correct — exactly one main warhead")
     print(f"  {hist[0]:5d}  none — utility / effect-only weapons")
-    print(f"  {len(rows):5d}  VIOLATIONS — stacked mains\n")
+    print(f"  {len(rows):5d}  VIOLATIONS — stacked mains")
+    print(f"  {len(reviewed):5d}  reviewed — exact intentional composites\n")
 
     print("  mains  weapons")
     for k in sorted(hist):
@@ -139,6 +169,13 @@ def main() -> int:
     print("| count | combination |\n|---|---|")
     for combo, n in combos.most_common(20):
         print(f"| {n} | {' + '.join(combo)} |")
+
+    print(f"\nReviewed exact composites ({len(reviewed)}):\n")
+    if reviewed:
+        for name, mains in reviewed:
+            print(f"- `{name}`: {' + '.join(sorted(mains))}")
+    else:
+        print("_none_")
 
     over = len(rows) > SPLIT_BASELINE
     print(f"\n{'FAIL' if over else 'WARN'} {len(rows)} violating weapons (ratchet {SPLIT_BASELINE})")

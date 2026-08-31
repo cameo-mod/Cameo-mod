@@ -147,6 +147,8 @@ wc2runesSuper:
 		ImpactSounds: wc2_runes.aud
 
 wc2catapultFire:
+	Inherits@collapsewh: ^Warhead_Concussion_Heavy
+	-TargetActorCenter:
 	Inherits: ^Grenade
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^ShrapnelWeapon
@@ -191,6 +193,24 @@ wc2catapultFire:
 		Image: wc2_catapult_stone_projectile_medium
 		Explosions: idle
 		ImpactSounds: explode.aud
+
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	Warhead@Concussion_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 90000
+		PercentageScale: 0
+	Warhead@CollapseTargetCompatibility1: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Ship
+		Damage: 30000
+		PercentageScale: 0
 
 # Death Knight basic attack
 
@@ -511,12 +531,11 @@ wc2dragonFireVisible:
 		ValidTargets: Ground, Water, Air
 wc2dragonFireExplosion:
 	Inherits: wc2dragonFireVisible
-	Projectile: Bullet
 	Burst: 3
 	BurstDelays: 0
 	FirstBurstTargetOffset: 0,0,0
 	FollowingBurstTargetOffset: 1024,0,0
-	Projectile:
+	Projectile: Bullet
 		Image: wc2_fireball
 		Inaccuracy: 250
 		TrailImage: smokey

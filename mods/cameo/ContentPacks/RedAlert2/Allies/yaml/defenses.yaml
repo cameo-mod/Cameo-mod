@@ -136,7 +136,7 @@ ra2_allies_chronosphere:
 	Inherits@shape: ^3x4Shape
 	Inherits@sell: ^RA2ASpawnActorsOnSell
 	Buildable:
-		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab, ~techlevel.superweapons
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab, ~techlevel.superweapons, !ra2_allies_chronosphere_swlimit
 		Description: actor_pdox.description
 	Tooltip:
 		Name: Chronosphere
@@ -145,6 +145,7 @@ ra2_allies_chronosphere:
 		Dimensions: 4,3
 	RA2ChronoshiftPower@chronoshift:
 		OrderName: Chronoshift
+		AllowMultiple: true
 		Prerequisites:
 			1: !botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
@@ -182,6 +183,7 @@ ra2_allies_chronosphere:
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 	DetonateWeaponPower@aichrono:
 		OrderName: RA2ChronoshiftAI
+		AllowMultiple: true
 		Prerequisites:
 			1: botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
@@ -215,6 +217,8 @@ ra2_allies_chronosphere:
 		RequiresCondition: !build-incomplete
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: ra2_allies_chronosphere_swlimit
 
 ra2_allies_pillbox:
 	Inherits: ^RA2Defense
@@ -267,7 +271,6 @@ ra2_allies_pillbox:
 		Damage: 120
 		ReloadDelay: 24
 		Range: 6583
-	ActorStatValues:
 		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
 
 ra2_allies_patriotmissilesystem:

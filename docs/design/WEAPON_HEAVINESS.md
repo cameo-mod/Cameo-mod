@@ -89,7 +89,9 @@ K = SUM over warheads   share_w x versus_w x ( reliability_w + secondary_w )
 and `extract_stats.py`:
 
 ```
-effective_dps = k_context x damage_total x burst / eff_reload
+effective_per_shot = damage_total x k_flat_context
+                     + pct_absolute_context + folded_rounding_context
+effective_dps = effective_per_shot x burst / eff_reload
 ```
 
 Price is driven by effective DPS. So **raising Versus raises `versus_w` → raises K → raises

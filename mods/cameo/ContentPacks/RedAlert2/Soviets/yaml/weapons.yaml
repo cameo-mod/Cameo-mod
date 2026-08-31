@@ -328,8 +328,13 @@ RA2120xmm:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Heavy:
-		Damage: 4000
+		Damage: 12000
+		PercentageScale: 3325
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
 RA2120xmm_rad:
+	Inherits@roleflat: ^Compatibility_CannonChem_HeavyFlat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^HeavyChemicalWeapon
@@ -380,6 +385,16 @@ RA2120xmm_rad:
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
+		PercentageScale: 10000
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumChemicalWeapon:
+	Warhead@CannonChem_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 12000
+		PercentageScale: 0
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
 RA2120xmm_fire:
 	Inherits: RA2120xmm
 	Warhead@FireShrapnel: FireShrapnel
@@ -660,6 +675,7 @@ V3Launch_elite:
 	Warhead@1Dam: TargetDamage
 
 RA2vulcan:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -672,6 +688,12 @@ RA2vulcan:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2CRFlakGuyGun:
 	Inherits: RA2FLAKAG
@@ -706,10 +728,15 @@ RA2FLAKAA_elite:
 
 RA2FlakTrackGun_elite:
 	Inherits: RA2FlakTrackGun
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Range: 6528
 	Burst: 2
 	BurstDelays: 3
-
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 2488
 RA2FlakTrackAAGun:
 	Inherits: RA2FlakTrackGun
 	ReloadDelay: 25
@@ -737,7 +764,11 @@ RA2FlakTrackAAGun:
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Flak_Medium:
+		PercentageScale: 2488
+		Damage: 8000
 		ValidTargets: Air
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 RA2FlakTrackAAGun_elite:
 	Inherits: RA2FlakTrackAAGun
 	Range: 9292
@@ -764,12 +795,20 @@ BorisAKM_elite:
 	Inherits: BorisAKM
 	Range: 9167
 	Burst: 8
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 BorisAKM2:
 	Inherits: BorisAKM
 	ValidTargets: Structure, Bridge, wall
 	-InvalidTargets:
 	Range: 9167
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 MigTarget:
 	ValidTargets: Structure, Bridge, wall

@@ -1,4 +1,4 @@
-# BALANCE PROGRAM — the execution plan (rev. 2026-08-23)
+# BALANCE PROGRAM — the execution plan (rev. 2026-08-28)
 
 **This file is the SINGLE SOURCE OF TRUTH for what is done, what is next, and who owns
 what.** It survives compaction, agent handover and session death. Every other document
@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **925 of 1622 = 57.0%** (histogram runs out to 15 mains) |
+| W24 — directly fired weapons with **more than one** damage main | **494** under the unified predicate (histogram runs out to 10 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** |
 | fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
@@ -52,7 +52,7 @@ the question was asked.
 
 **The order:**
 
-1. **W24** — one damage warhead per weapon (DESIGN §11b). 65% non-compliant.
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 494 directly fired weapons remain non-compliant.
 2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
    is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
    merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE
@@ -587,10 +587,10 @@ delivery and price number measured before it lands is measuring the wrong object
 | A1a | Rename the 4 element-first blends to delivery-first (12 templates, 6 files) | ✅ DONE — CannonFire/MissileFire/CannonChem/MissileChem live, safe_rename.py preserves case, splice_templates.py runs full generator and preserves CRLF, verify_generator_sync drift 0, extract_stats --check clean |
 | A1b | Generate MissileNuke / CannonNuke / MissileQuantum / MissileTesla / MissileThermobaric (L/M/H) via gen_weapon_template.py | ✅ DONE — 15 new ^Warhead_* blocks live, verify_generator_sync drift 0, extract_stats regenerated, boot-gated |
 | A2 | Collapse the 7 nuclear weapons onto A1b's families — ONE main each, total preserved | ✅ DONE — `NuclearMaverick`→`MissileHE_Heavy` 40000, `ThermobaricNuclearMaverick`→`MissileThermobaric_Heavy` 42000, `MonsterTank120mm`→`CannonNuke_Heavy` 80000, `TorpTubeThermobaric`→`MissileNuke_Heavy` 32000, `MonsterTank120mmThermobaric`→`CannonFire_Heavy` 120000; SCUDNUKE/…Thermobaric stay on `^Warhead_Nuclear_Super` (already single-main, and genuinely Super-tier — moving to Heavy would be a class demotion). `review_batch_diff` main damage preserved on all 2325 weapons; `find_empty_warhead` 0, `verify_generator_sync` 0, `audit_warhead_split` 939 vs baseline 939, boot-gated. ⚠ Blast shape flattened on all five (`Ticks: 10` → family 6-step falloff): `AreaDamageWarhead.cs:282` splits Damage ACROSS ticks, so the SUM is safe, but the expanding shockwave is gone — restore it in the FAMILY via the generator if nuclear weapons should keep it, never per-weapon. |
-| A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | invariant diff = 0 |
-| A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | `safe_rename.py`, fluent keys |
-| A5 | Collapse the 27 single-user templates | template census |
-| A6 | Continue the burn-down: `w24_multi_main_fed` **380**, `multi_main_fired_weapons` **927** | both ratchets fall |
+| A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | ✅ DONE — `TS70mmChem` → `^Warhead_CannonChem_Light` at 6000, `TSScoopDualChem` → `^Warhead_CannonChem_Medium` at 30000, and `JapanesePlasmaBomb` → `^Warhead_Plasma_Heavy` at 30000. Main totals and weapon operation are preserved; standard family armour/blast profiles are accepted classification consequences. Upgrade audit records Ratty 0.75× Wood, Scooper 0.80× Wood, and Japanese bomber 0.96× Wood. Static audit-gated; in-game review deferred by maintainer request. |
+| A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | ✅ DONE — renamed the upgrade, condition, icon, UI text, Su-57 weapons, and Monster Tank inferno weapon across active YAML, Fluent, AI, sequences, and the survival-map script. `safe_rename.py` changed 89 references in 12 text files plus the icon; no old identifiers or dangling inheritance targets remain. Weapon values are unchanged. Static audit-gated; in-game review deferred by maintainer request. |
+| A5 | Collapse the 27 single-user templates | ✅ DONE for the active W24-created set — the refreshed upstream-based census found 14 live one-user W24 wrappers rather than the older estimate of 27. All 14 are removed across three isolated batches: five small projectile/effect wrappers, five Rocket Trooper projectiles, then the Tower Missile and `mtank_pri2` projectile/effect pairs. Every sole consumer is exactly equal after full inheritance resolution. Static audit-gated; in-game review deferred by maintainer request. |
+| A6 | Continue the burn-down | 🔵 IN PROGRESS — retrospective review restored earlier weapon blocks whose grouped percentage hits could not reproduce the parked runtime's per-warhead rounding and overflow behavior at every active health value. The safe cleanup now includes nine earlier missile roots, the MiG, Naxis quad-cannon/flak, RA2 SCUD, and Steel Mako families, four isolated weapons, the bulk shotgun/sniper pass, thirteen named laser roots covering 27 resolved definitions, the remaining GDI/commando/Dragunov sniper roots, the percentage-safe chemical/flame cohort, a 13-root projectile-role checkpoint, ten remaining override-free chemical/flame roots, and the final mixed bullet/Tesla/concussion/chemical cohort. Every legacy percentage application remains separate while flat totals move onto standard role families. `review_batch_diff.py` tests all 155 active/design health values and fingerprints complete percentage-warhead profiles in addition to relationship-, statistics-, physical-state-, top-level-, projectile-, non-damage-, target-, and percentage behavior. On the corrected active survey basis the debt has fallen from 274 to 197 concrete roots: 196 mixed weapons in 157 groups and one isolated root. The conservative classifier now reports four legacy-only and 193 human-decision roots. Broadcast debt is ratcheted to 818. Pricing and the runtime fix remain separate. |
 
 ### Phase B — the physical-state half (parallel to A, different file set)
 
@@ -677,11 +677,13 @@ Commit trailer = the ACTUAL agent (CLAUDE.md rule 10). Never sign as another age
 `effective_dps = Damage_total × (burst / eff_reload) × FirepowerMultiplier × K`, with
 `K = Σ_warheads share_w × versus_w × (reliability_w + secondary_w)`.
 
-The FLAT part of K is independent of the Damage magnitude, so pricing inverts exactly:
+The scalable part of K (flat + chip + folded `PercentageScale`) is independent of the
+Damage magnitude, so pricing inverts exactly:
 `Damage_required = (target_per_shot − pct_absolute_context) / k_flat_context`, snapped to
-the grid. ⚠ **Never invert `k` / `k_context`** — a `%`-of-max-HP twin is ADDITIVE, so those
-two move when Damage moves (E4, fixed 2026-08-17; guard `audit_k_linearity.py`). They remain
-correct measurements. Spec: `EFFECTIVE_DAMAGE.md`.
+the grid. ⚠ **Never invert `k` / `k_context`** — standalone percentage warheads are
+ADDITIVE, and folded basis-point rounding is a current-shot residual. Those two make the
+measurement move with Damage. Folded percentage damage itself is scalable and never a
+floor (E4, corrected 2026-08-25; guard `audit_k_linearity.py`). Spec: `EFFECTIVE_DAMAGE.md`.
 
 **VERIFY:** `python tools/balance/weapon_efficiency.py --families` prints 20 rows.
 
@@ -850,8 +852,10 @@ traced to the ONE factor that moved it. Spec + shapes: `EFFECTIVE_DAMAGE.md` §3
 into the new **`k_flat_context`** and the pricing inversion stays closed-form. **Overkill
 does** depend on Damage, so it is reported BESIDE K and never inside it — folding it in
 would turn the inversion into a fixed-point iteration. `test_weapon_context.py` pins that
-distinction explicitly. ⚠ The `%`-twin is that same defect and WAS folded in until E4
-(2026-08-17) split it out as the additive `pct_absolute_context`.
+distinction explicitly. ⚠ Standalone percentage warheads are additive and live in
+`pct_absolute_context`; folded `AreaDamage.PercentageScale` follows the main Damage and
+lives in `k_flat_context`. The first E4 implementation recognized only specially named
+standalone twins and no folded hits; the type-based model corrected that on 2026-08-25.
 
 ⚠ **Item 5 was based on a field that isn't there.** `AttackDelay` appears **0 times** in
 the tree. Charge-up is an ACTOR trait (`AttackCharged`, `AttackCharges`, `AttackTesla`, …)
@@ -1491,13 +1495,13 @@ actually is" (74 000) and "what we price against" (200 000) is itself informatio
 **DONE WHEN** the twin is continuous in Damage; `reference_hp` is the design constant
 with the measured one still reportable; the family-table shift is recorded in §5.
 
-**✅ DONE** — `formula.percentage_twin()` replaces `per // DAMAGE_STEP`: same 1-per-2000
-design ratio, rounded half-up, floored at 1 for any live warhead, monotone in Damage.
-Rounding is explicit rather than `round()`, whose banker's rounding sends 5000 → 2 but
-7000 → 4. The engine's Damage field for a percentage warhead is an INTEGER percent of
-max HP, so 1 point remains the finest step available — the derivation is continuous, the
-engine's resolution is not, and going finer would need a scale field on
-`AreaDamagePercentageWarhead` (not done; flag it if a design ever needs sub-1% twins).
+**✅ SUPERSEDED BY THE FOLDED RUNTIME MODEL** — the temporary
+`formula.percentage_twin()` solution removed the zero-damage cliff, but still left two
+authored warheads that could drift. The completed family path now keeps one
+`AreaDamage` warhead and derives its percentage hit through `PercentageScale` plus a
+basis-point `PercentageDenominator`. This folded hit scales to zero with flat Damage.
+Standalone `AreaDamagePercentage` and `HealthPercentageDamage` warheads remain valid
+only for bespoke additive effects and are modeled as an absolute DPS floor.
 
 `target_model.REFERENCE_HP = 200_000` is now a plain constant; the measured figure moved
 to `measured_reference_hp()` and is still printed by the family table, the
@@ -2276,7 +2280,11 @@ Prism 0.96 · Bullet 0.92 · Tesla 0.89 · Railgun 0.83 · Laser 0.63`
 CannonAP 1.73 · MissileHE 1.63 · MissileAP 1.58 · Sonic 1.56 · Magic 1.24 ·
 Bullet 0.89 · Prism 0.87 · Tesla 0.81 · Railgun 0.76 · Laser 0.61`
 
-Every family rose, because every family carries a %-twin and each twin is now priced
+> **Historical model snapshot.** These values predate the 2026-08-25 type-based percentage
+> repair, which found folded hits plus standalone nodes whose tags did not end `_Percentage`.
+> Use the regenerated family table and derived sidecars for current comparisons.
+
+Every family rose in that snapshot, because every family carries percentage damage and it was priced
 against 2.7x more HP. What matters is that they rose UNEQUALLY, in proportion to how much
 of the family's output is percentage damage:
 
@@ -2459,7 +2467,8 @@ them** into one sequence so we never lose the order. Each phase links the doc th
 
 **Phases D–G:** `FORMULA_V2` has open terms (spread-pricing, AA/AoE pricing, per-class defense/infantry
 baselines). Ledgers exist (`docs/balance/*.json`, 28 factions) but many predate current laws. Workbooks
-exist (`cameo_armor_system.xlsx` legacy reference, `cameo_balance_v2.xlsx` workbench). Per-faction
+exist (`cameo_armor_system.xlsx` legacy reference plus the active
+`cameo_balance_by_faction.xlsx` / `cameo_balance_by_type.xlsx` workbenches). Per-faction
 synthesize→apply (F) not started. Phase-3 discrepancy triage open (`docs/balance/discrepancies.md`).
 
 ---
@@ -2560,16 +2569,18 @@ verifiers, stat bands, conversion checklist.*
 
 ### 6. PHASE E — the EXCEL / WORKBOOK pipeline
 
-*Dual-write law: price set in `cameo_armor_system.xlsx` first
-(M in its cell; O/P/Q recompute), yaml FOLLOWS; never scale costs directly in yaml. If
-`~$cameo_armor_system.xlsx` exists the workbook is OPEN in Excel — do NOT write it; queue + say so.*
+*Pipeline law: set a price in the raw ledger or an unlocked cell of an active generated
+workbench, import it, then let guarded tooling update yaml; never scale costs directly in yaml.
+Regenerate both active workbenches after the ledger changes. The legacy workbook is not a
+required parallel write.*
 
 - **E1. Legacy reference** `cameo_armor_system.xlsx` remains the design-judgment reference until the
   Phase-3 discrepancy triage completes (`discrepancies.md`).
-- **E2. The v2 workbench** — `tools/balance/build_workbook.py` -> `cameo_balance_v2.xlsx` (gitignored),
-  edit the UNLOCKED input cells, read back with `import_workbook.py`. Also
-  `cameo_balance_by_faction.xlsx` / `cameo_balance_by_type.xlsx` views. Excel is OPTIONAL — you can
-  edit the ledger JSON directly instead.
+- **E2. The active workbenches** — `tools/balance/build_workbook.py` generates the tracked
+  `cameo_balance_by_faction.xlsx` / `cameo_balance_by_type.xlsx`; edit the UNLOCKED input cells
+  and read one back with `import_workbook.py --workbook faction|type`.
+  `cameo_balance_v2.xlsx` is the frozen pre-split prototype. Excel is OPTIONAL — you can edit the
+  ledger JSON directly instead.
 
 ---
 
@@ -2694,7 +2705,7 @@ W1's K coefficient, `armor_exposure.py` and the family surveys are all built on.
 |---|---|
 | `tools/audit/audit_unconverted_templates.py` | which templates are still outside the system (45 / 1196) |
 | `tools/balance/measure_retrofit_gap.py` | how far each legacy ladder sits from its target family, and **which** family by rank correlation |
-| `tools/balance/retrofit_legacy_template.py` | performs one conversion, template + all descendants |
+| `tools/balance/retrofit_legacy_template.py` | **quarantined**: retired separate-percentage-twin writer; always refuses until redesigned for folded percentage |
 | `tools/balance/verify_retrofit.py` | proves resolved behaviour survived (mean output held, no orphans, no geometry drift) |
 | `tools/balance/remove_dead_weapons.py` | deletes loaded-but-unused definitions that bias the census |
 
@@ -2756,8 +2767,8 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `ARMOR_LAYERS.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-fired weapons, **34.5%** comply (560 of 1622); **57.0%** (925 of 1622) carry 2 or more damage
-warheads, worst case **15**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
+directly fired weapons, **494** carry 2 or more damage
+warheads, worst case **10**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created
 rather than forcing a bad one (maintainer, 2026-08-16). Two already identified:

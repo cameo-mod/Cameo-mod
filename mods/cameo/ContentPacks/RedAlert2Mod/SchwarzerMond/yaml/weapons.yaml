@@ -32,10 +32,12 @@ schwarzermond_lunarsoldier_rifle_elite:
 	BurstDelays: 3
 
 NaxiBeetleLaser_elite:
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
+	Inherits@legacychip: ^LegacyLaserChipCompatibility
 	Range: 6448
 	ReloadDelay: 60
 	Burst: 2
@@ -44,30 +46,29 @@ NaxiBeetleLaser_elite:
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
 		Width: 25
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	TargetActorCenter: false
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 NaxiBeetleLaser_AA_elite:
 	Inherits: NaxiBeetleLaser_elite
@@ -81,11 +82,10 @@ NaxiBeetleLaser_AA_elite:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Air
+		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
@@ -107,10 +107,12 @@ LunarPanzerCannon_elite:
 	BurstDelays: 3
 
 NaxiTank2Laser:
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
+	Inherits@legacychip: ^LegacyLaserChipCompatibility
 	Range: 6500
 	ReloadDelay: 52
 	Burst: 4
@@ -119,30 +121,29 @@ NaxiTank2Laser:
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
 		Width: 25
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	TargetActorCenter: false
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 NaxiTank2Laser_AA:
 	Inherits: NaxiTank2Laser
@@ -156,11 +157,10 @@ NaxiTank2Laser_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Air
+		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
@@ -225,6 +225,7 @@ LunarNaxiJadgDestroyer_elite:
 	BurstDelays: 3
 
 LunarTigerCannon:
+	Inherits@roleflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^MediumFlameWeapon
@@ -261,7 +262,12 @@ LunarTigerCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
-		Damage: 4000
+		PercentageScale: 2494
+		Damage: 16000
+	-Warhead@HeavyBomb:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@CannonHE_MediumFlatCompatibility:
 LunarTigerCannon_elite:
 	Inherits: LunarTigerCannon
 	Range: 6105
@@ -269,6 +275,7 @@ LunarTigerCannon_elite:
 	BurstDelays: 3
 
 NaxHaenebuQuadCannon:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_MissileAP_Heavy
 	Inherits@3: ^Effect_MissileAP_Heavy
@@ -298,6 +305,13 @@ NaxHaenebuQuadCannon:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Concussion_Light:
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Heavy:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 NaxHaenebuQuadCannon_elite:
 	Inherits: NaxHaenebuQuadCannon
 	Range: 7777
@@ -305,6 +319,10 @@ NaxHaenebuQuadCannon_elite:
 	Projectile: Bullet
 		ContrailStartColor: FF0000
 		Inaccuracy: 777
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 DalekCannon:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -475,6 +493,7 @@ BlackHoleSuck:
 		ImpactSounds: nax_bh_slurp_01.wav, nax_bh_slurp_02.wav, nax_bh_slurp_03.wav
 
 NaxCorrosionRocket:
+	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_MissileAP_Heavy
 	Inherits@3: ^Effect_MissileAP_Heavy
@@ -522,6 +541,13 @@ NaxCorrosionRocket:
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: !corroded
+	-Warhead@Concussion_Light:
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 NaxCorrosionExpand1:
 	ReloadDelay: 5
@@ -607,6 +633,172 @@ NaxCorrosionRocketTrooper_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 4000
 	MinRange: 1210
+	-Warhead@Grenade:
+	-Warhead@MissileAP_Medium:
+	-Warhead@HeavyMissile:
+	-Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@PreservedFlat_Concussion_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 233
+		Damage: 2000
+		Falloff: 100, 72, 50, 32, 18, 8, 0
+		Versus:
+			HAZMAT: 68
+			COMPOSITE: 106
+			BLAST: 36
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 146
+			Scout: 152
+			None: 149
+			Wood: 146
+			Light: 129
+			Flak: 114
+			Steel: 112
+			Medium: 109
+			Fighter: 96
+			Heavy: 90
+			Heroic: 85
+			Plate: 84
+			Concrete: 83
+			Superheavy: 78
+			Bomber: 71
+			Helicopter: 55
+			Spaceship: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Scout: 16
+			None: 15
+			Wood: 14
+			Light: 13
+			Flak: 12
+			Steel: 11
+			Medium: 10
+			Plate: 9
+			Concrete: 8
+			Heavy: 7
+			Heroic: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+	Warhead@PreservedFlat_Grenade: SpreadDamage
+		Damage: 4000
+	Warhead@PreservedFlat_HeavyMissile: SpreadDamage
+		Damage: 8000
+		PercentageScale: 0
+	Warhead@PreservedFlat_MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 85
+		Damage: 2000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 161
+			Superheavy: 160
+			Spaceship: 146
+			Heavy: 142
+			Medium: 126
+			Helicopter: 115
+			Light: 112
+			Concrete: 105
+			Scout: 99
+			Bomber: 98
+			Plate: 91
+			Steel: 82
+			Fighter: 75
+			Flak: 73
+			Wood: 66
+			Heroic: 57
+			None: 54
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Spaceship: 20
+			Helicopter: 19
+			Bomber: 18
+			Fighter: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+	Warhead@PreservedFlat_MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 64
+		Damage: 4000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+	-Warhead@PreservedFlat_Grenade:
 NaxCorrosionBeast:
 	Inherits: NaxCorrosionRocket
 	Range: 7984
@@ -656,7 +848,7 @@ NaxDieGlocke:
 	Report: flamer2.aud
 	Range: 2500
 	ReloadDelay: 60
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	Projectile: InstantHit
 	TargetActorCenter: true
 	Warhead@Chemical_Heavy:
@@ -984,6 +1176,7 @@ NaxisBradleyTarget:
 		Inaccuracy: 1735
 
 Naxis_Komet:
+	Inherits@collapsewh: ^Warhead_Flak_Heavy
 	Inherits: ^FlakWeapon
 	Inherits@2: ^Grenade
 	Inherits@3: ^HeavyAAWeapon
@@ -1037,6 +1230,15 @@ Naxis_Komet:
 		Explosions: med_frag
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Ground, Ship
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@MediumMissile:
+	Warhead@Flak_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		PercentageScale: 0
 
 Naxis_Komet_AA:
 	Inherits: Naxis_Komet

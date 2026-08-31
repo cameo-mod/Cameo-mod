@@ -6,7 +6,7 @@ ra1_allies_chronosphere:
 	Inherits@sell: ^RASpawnActorsOnSell
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~ra1_allies_alliedtechcenter, ~techlevel.superweapons, !ra1_allies_chronosphere
+		Prerequisites: ~ra1_allies_alliedtechcenter, ~techlevel.superweapons, !ra1_allies_chronosphere_swlimit
 		Description: actor_pdox.description
 	Tooltip:
 		Name: Chronosphere
@@ -18,6 +18,7 @@ ra1_allies_chronosphere:
 		HasMinibib: true
 	RA2ChronoshiftPower@chronoshift:
 		OrderName: Chronoshift
+		AllowMultiple: true
 		Prerequisites:
 			1: !botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
@@ -54,6 +55,7 @@ ra1_allies_chronosphere:
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 	DetonateWeaponPower@ChronoReinforcements:
 		OrderName: ChronoReinforcements
+		AllowMultiple: true
 		Cost: 1000
 		Prerequisites:
 			1: ra1_allies_upgrade_chronoarmor, ~techlevel.superweapons
@@ -80,6 +82,7 @@ ra1_allies_chronosphere:
 	# AI always has its own fake chronoshift power separate from upgrades purchased.
 	DetonateWeaponPower@ChronoAI:
 		OrderName: ChronoshiftAI
+		AllowMultiple: true
 		Prerequisites:
 			1: botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
@@ -147,7 +150,7 @@ ra1_allies_chronosphere:
 		BeaconActor: BLASTRADIUS.super
 		CameraRange: 12345
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: ra1_allies_chronosphere
+		Prerequisite: ra1_allies_chronosphere_swlimit
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
@@ -210,7 +213,6 @@ ra1_allies_pillbox:
 		Damage: 200
 		ReloadDelay: 48
 		Range: 6570
-	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 
 ra1_allies_alliedgunturret:
@@ -393,7 +395,6 @@ ra1_allies_camopillbox:
 		Damage: 200
 		ReloadDelay: 50
 		Range: 7640
-	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 
 ra1_allies_bastionartillerybunker:
