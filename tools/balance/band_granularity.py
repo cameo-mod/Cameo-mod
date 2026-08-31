@@ -247,6 +247,82 @@ def zone_census(rows, anchors, live, out):
     return reach, n_cls
 
 
+def bell_report(rows, anchors, live, out):
+    """⭐ THE BELL LAW (BALANCE_PIPELINE §8.1b) — the distribution INSIDE the band.
+
+    Maintainer, 2026-08-31: *"the distribution of the units in the band should be like a
+    bell curve and the outliers should be like a standard deviation or something like that
+    but with the 80/20 split."* Solve a log-normal that puts 80% inside [1.00, 2.50]:
+
+        sigma(log price) = 0.3575     geometric centre mu = 1.581 x cost0 (= sqrt(2.50))
+
+    and every ring becomes a sigma level. The target band is EXACTLY +/-1.28 sigma, which
+    IS the 80% interval of a normal distribution -- so the 80/20 split was never a quota,
+    it is the +/-1.28 sigma envelope and the four rings land on it. The skirts come out
+    9.9% / 8.7% and only 1.4% falls outside the hard band: the true exception population.
+
+    ⚠ TWO THINGS THAT ARE EASY TO GET BACKWARDS.
+      * The class's geometric centre is 1.581x cost0, NOT 1.00. The anchor sits at the
+        BOTTOM edge of the bell (-1.28 sigma) because it is the entry unit. "Bell-shaped"
+        describes the MEMBERS; it does not move the anchor to the middle.
+      * The 80% is a DIAGNOSTIC TARGET, not a quota. A class at 74/26 is not automatically
+        broken -- check its sigma first. Forcing a percentage by moving members is how you
+        get a beautiful table that describes nothing.
+
+    ⭐ AND THE TEST EARNS ITS KEEP: run on the live roster it flags `artillery`,
+    `scout_vehicle` and `missile_vehicle` as non-bell -- which are exactly the three classes
+    carrying known data bugs (athenacannon, the IFV family, the worst spec/actor mismatch).
+    It found them without being told what to look for.
+    """
+    w = out.append
+    SIGMA_WANTED = 0.3575
+    w("\n## ⭐ THE BELL LAW — is each class bell-shaped in log price?\n")
+    w(f"An 80% target band implies **sigma(log price) = {SIGMA_WANTED}** about a geometric "
+      f"centre of **{math.sqrt(cb.SWEET_HI):.3f}x cost0**, with the anchor at the bottom "
+      f"edge (**-1.28 sigma**). Skew and excess kurtosis near 0 mean the class already has "
+      f"that shape.\n")
+    w("| class | n | skew | excess kurtosis | sigma_log | verdict |")
+    w("|---|--:|--:|--:|--:|---|")
+    pooled = []
+    for cls in sorted(rows, key=lambda k: -len(rows[k])):
+        rs = rows[cls]
+        if len(rs) < 8 or cls not in anchors:
+            continue
+        li = live.get(anchors[cls].get("anchor_actor"))
+        c0 = cb.cost0_of(anchors[cls])
+        if li is None or not c0:
+            continue
+        la = {"spec": {"hp0": li[0], "speed0": li[1], "range0_wdist": li[2],
+                       "dps0": li[3], "cost0": c0}}
+        lg = []
+        for _a, i in rs:
+            pr = cb.price_for(cls, la, i, 1.0)
+            if pr and pr > 0:
+                lg.append(math.log(pr / c0))
+        if len(lg) < 8:
+            continue
+        pooled += lg
+        m = statistics.mean(lg); sd = statistics.pstdev(lg)
+        if sd == 0:
+            continue
+        sk = sum(((x - m) / sd) ** 3 for x in lg) / len(lg)
+        ku = sum(((x - m) / sd) ** 4 for x in lg) / len(lg) - 3
+        ok = abs(sk) < 0.6 and abs(ku) < 1.5
+        w(f"| `{cls}` | {len(lg)} | {sk:+.2f} | {ku:+.2f} | {sd:.3f} | "
+          f"{'bell-like' if ok else '⛔ skewed'} |")
+    if pooled:
+        m = statistics.mean(pooled); sd = statistics.pstdev(pooled)
+        sk = sum(((x - m) / sd) ** 3 for x in pooled) / len(pooled)
+        ku = sum(((x - m) / sd) ** 4 for x in pooled) / len(pooled) - 3
+        w(f"| **POOLED** | **{len(pooled)}** | **{sk:+.2f}** | **{ku:+.2f}** | "
+          f"**{sd:.3f}** | |")
+        w(f"\n⭐ **THE ONE NUMBER THAT SIZES THE WHOLE REPRICING JOB: sigma_log = "
+          f"{sd:.3f} against the {SIGMA_WANTED} an 80% target band wants — the roster is "
+          f"~{sd/SIGMA_WANTED:.1f}x too dispersed.** Every repricing pass should move it "
+          f"toward {SIGMA_WANTED}; it is the cheapest progress metric the programme has.\n")
+    return None
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--md", help="also write the report here")
@@ -340,6 +416,7 @@ def main() -> int:
         w("")
 
     zone_census(rows, anchors, live, out)
+    bell_report(rows, anchors, live, out)
 
     text = "\n".join(out)
     print(text)

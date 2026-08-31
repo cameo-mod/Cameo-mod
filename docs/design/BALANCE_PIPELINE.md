@@ -549,6 +549,64 @@ interchangeable in pricing**. A single narrow cost band therefore holds units th
 nothing alike: a 6× HP / 0.37× DPS bunker-crawler and a 1× HP / 3.57× DPS glass cannon are
 the SAME price. Reading the band as a box ("≤2× HP AND ≤2× DPS") would wrongly exclude both.
 
+### 8.1b ⭐ THE BELL LAW — the distribution INSIDE the band
+
+Maintainer, 2026-08-31: *"the distribution of the units in the band should be like a bell
+curve and the outliers should be like a standard deviation or something like that but with
+the 80/20 split."* **That closes the band law.** Solve a log-normal price distribution that
+puts 80% inside `[1.00, 2.50]`:
+
+```
+σ(log price) = 0.3575        geometric centre μ = 1.581 × cost0   ( = √2.50 )
+```
+
+Every ring then becomes a **σ-level**, and the zone shares fall out of the arithmetic:
+
+| zone | σ range | share of a bell-shaped class |
+|---|---|--:|
+| below `FLOOR` 0.50 | −∞ … −3.22σ | **0.1%** |
+| lower skirt 0.50–1.00 | −3.22σ … **−1.28σ** | **9.9%** |
+| **TARGET 1.00–2.50** | **−1.28σ … +1.28σ** | **80.0%** |
+| upper skirt 2.50–3.50 | +1.28σ … **+2.22σ** | **8.7%** |
+| above `CEIL` 3.50 | +2.22σ … +∞ | **1.3%** |
+
+⭐ **The target band is exactly ±1.28σ — which *is* the 80% interval of a normal
+distribution.** The 80/20 split was never an arbitrary quota; it is the ±1.28σ envelope, and
+the four ruled rings land on it. The skirts split **9.9% / 8.7%** — an almost perfect 10/10
+of the remaining 20% — and only **1.4%** falls genuinely outside the hard band. That 1.4% is
+the true exception population the registry is for: epics, transforms, data bugs.
+
+⚠ **Two things that are easy to get backwards.**
+
+1. **The class's geometric centre is 1.581× `cost0`, not 1.00.** The anchor sits at the
+   **bottom edge** of the bell (−1.28σ) because it is the entry unit. "Bell-shaped" describes
+   the MEMBERS; it does not move the anchor to the middle. §8.1a's lower-quartile result and
+   this one are the same fact in two coordinate systems.
+2. **The 80% is a DIAGNOSTIC TARGET, not a quota.** A class at 74/26 is not automatically
+   broken — check its σ first. Forcing a percentage by moving members produces a beautiful
+   table that describes nothing.
+
+#### And the test earns its keep — it found the data bugs unprompted
+
+`band_granularity.py` measures skew and excess kurtosis of log price per class. **8 of 11
+classes are already bell-like**, and the three that are not are **exactly** the three
+carrying known data bugs: `artillery` (skew +2.43, kurtosis +7.55 — `futuretech_athenacannon`
+at DPS 193,600), `scout_vehicle` (+0.60 — the 7-actor IFV family), `missile_vehicle` (+0.87 —
+the worst spec/actor mismatch in the tree). The shape law identified them without being told
+what to look for, which is the strongest available evidence that it describes something real.
+
+#### ⭐ σ_log — the one number that sizes the whole repricing job
+
+```
+σ_log measured on the roster  : 1.013
+σ_log an 80% target band wants: 0.357
+```
+
+**The roster is ~2.8× too dispersed in log price.** Every repricing pass should move that
+number toward 0.357. It is the cheapest progress metric the programme has, it is pinned in
+`doc_claims.yaml` as `roster_sigma_log`, and it collapses "how much work is left?" into one
+scalar that cannot be argued with.
+
 #### Where does the baseline actor sit in the band? At the lower quartile — by construction
 
 Not the centre. In the target band `[0.729, 2.50]` the anchor at 1.000 sits at **26% of the

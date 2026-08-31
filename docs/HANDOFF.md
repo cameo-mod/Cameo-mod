@@ -264,6 +264,13 @@ Crashes and player-visible regressions jump everything below.
 
 ### 3.0 — DO THIS FIRST
 
+⛔ **IF YOU CAN RUN `launch-game.cmd`, READ `docs/design/BOOT_GATE_RUNBOOK.md` FIRST.** It is
+the boot-gated queue — the bell/macro flip, the LOCKED-spec reconciliation, W24/W23 — with the
+exact commands, the gate procedure, and the one warning that matters most: ⛔ **do not apply
+the LOCKED vehicle specs as written.** That runbook is subordinate to this file; where they
+disagree, this file wins.
+
+
 **a0. ⭐ RULED + DERIVED 2026-08-31 — THE BAND LAW. Read `BALANCE_PIPELINE` §8.1a before
 proposing any band ring or "fixing" a class by re-anchoring it.**
 
@@ -309,6 +316,17 @@ specs price as if the anchor were far stronger than the actor carrying it (`tige
 HP against a spec of 240k). Applying them as written would make each anchor stronger than its own
 class and push a further third of the roster below the floor. **Re-derive the specs so the anchor
 lands ON 1.00**, then re-run the census as the check.
+
+⭐ **AND THE DISTRIBUTION INSIDE THE BAND IS A BELL** (§8.1b, ruled 2026-08-31). A log-normal
+holding 80% inside [1.00, 2.50] has **σ(log price) = 0.3575** about a geometric centre of
+**1.581× cost0** — so the target band is exactly **±1.28σ**, which IS the 80% interval of a
+normal distribution. The skirts split 9.9% / 8.7% and only **1.4%** falls outside the hard
+band: the true exception population. ⚠ The class centre is 1.581×, **not** the anchor — the
+anchor sits at the bell's bottom edge because it is the entry unit.
+⭐ **σ_log is 1.013 against the 0.357 the band wants — the roster is ~2.8× too dispersed, and
+that one number sizes the entire repricing job.** 8 of 11 classes are already bell-like; the
+three that are not (`artillery`, `scout_vehicle`, `missile_vehicle`) are exactly the three
+with known data bugs — the test found them unprompted.
 
 Three consequences that change what the next job is:
 

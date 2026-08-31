@@ -1101,6 +1101,26 @@ claims:
               vals.add(c)
       print(len(vals))
 
+  - id: roster_sigma_log
+    value: 1.013
+    tolerance: 0.02
+    what: >
+      Pooled standard deviation of LOG PRICE across every class with >=8 priced non-epic
+      members, measured against each class's LIVE anchor actor. ⭐ THE ONE NUMBER THAT SIZES
+      THE WHOLE REPRICING JOB. BALANCE_PIPELINE 8.1b: a log-normal holding 80% inside the
+      [1.00, 2.50] target band has sigma(log price) = 0.3575, so the roster is currently
+      ~2.8x too dispersed. Every repricing pass must move this DOWN toward 0.357; it is the
+      cheapest progress metric the programme has and the only one that collapses "how much
+      work is left" into a scalar. ⚠ Measured on the LIVE anchor, never the ruled spec --
+      the spec column is inflated by the restat debt (54% vs 21% below-anchor). Re-read with
+      `tools/balance/band_granularity.py`.
+    docs: [docs/design/BALANCE_PIPELINE.md, docs/HANDOFF.md, docs/design/BOOT_GATE_RUNBOOK.md]
+    measure: |
+      import subprocess, sys, re
+      out = subprocess.run([sys.executable, 'tools/balance/band_granularity.py'],
+                           capture_output=True, text=True).stdout
+      print(re.search(r'sigma_log = ([0-9.]+) against', out).group(1))
+
   - id: buildable_aircraft_unclassified
     value: 127
     tolerance: 0
