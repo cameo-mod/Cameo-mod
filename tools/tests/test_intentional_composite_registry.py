@@ -31,10 +31,10 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
 
     def test_exact_reviewed_name_set_and_schema_are_pinned(self):
         names = sorted(self.manifest["entries"])
-        self.assertEqual(212, len(names))
+        self.assertEqual(225, len(names))
         self.assertEqual(set(reviewed.curated_decisions()), set(names))
         self.assertEqual(
-            "63c5a317d71189769af463f6a1da31626b518e1e9d9c30a96c2c5617ceab8b1e",
+            "979d57487dc544efc2ce49b46feaf57476cc39f0426fefc5830af1276c165f77",
             hashlib.sha256(("\n".join(names) + "\n").encode()).hexdigest(),
         )
         self.assertEqual([], reviewed.validate_manifest(
@@ -52,7 +52,7 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
         self.assertEqual({
             "AtreusMG", "DuelistTankCannon", "EpigraphMG", "GoliathMG",
             "GoliathMk2MG", "HMG_Duelist_upgrade", "autogun_tank",
-            "autogun_tank_small",
+            "autogun_tank_small", "SandmarineTuskTwin", "ordos_autogunturret",
         }, names)
         expected_actors = {
             "AtreusMG": {"protoss_atreus"},
@@ -63,6 +63,8 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
             "HMG_Duelist_upgrade": {"duelist_tank.ixian"},
             "autogun_tank": {"ordos_heavyautoguntank"},
             "autogun_tank_small": {"ordos_combatautoguntank"},
+            "SandmarineTuskTwin": {"tkm_bigshiee", "tkm_sandmarine"},
+            "ordos_autogunturret": {"ordos_autogunturret"},
         }
         for name, actors in expected_actors.items():
             entry = self.manifest["entries"][name]
@@ -116,8 +118,6 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
             "SyndicateFireballLauncherExplode",
         }
         redesign_hazards = {
-            "RA160mmE_rad_elite", "SandmarineTuskFire", "SteelVulcan",
-            "GuardianShoot", "NaxCorrosionRocketTrooper_elite",
             "d2k_air_drone_guns_upgrade", "TSSonicZapWeapon",
             "Type97PlasmaCannon",
         }
@@ -264,8 +264,8 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
         report, status = split.rendered(self.rules)
         self.assertEqual(0, status)
         self.assertEqual(report, split.REPORT.read_text(encoding="utf-8"))
-        self.assertIn("387 raw stacked weapons", report)
-        self.assertIn("175 remain unreviewed", report)
+        self.assertIn("339 raw stacked weapons", report)
+        self.assertIn("114 remain unreviewed", report)
         self.assertEqual(
             serialized(self.current),
             INVENTORY_REPORT.read_text(encoding="utf-8"),

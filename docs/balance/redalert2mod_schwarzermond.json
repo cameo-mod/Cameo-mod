@@ -2329,24 +2329,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
         "type": "AreaDamage"
        }
       ],
@@ -2389,24 +2375,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "30000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
         "type": "AreaDamage"
        }
       ],
@@ -2869,6 +2841,13 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": null,
         "spread": null,
@@ -2890,32 +2869,28 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "PreservedFlat_Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
+        "damage": "100",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
         "spread": null,
-        "tag": "PreservedFlat_HeavyMissile",
-        "type": "SpreadDamage"
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_Concussion_LightPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "PreservedFlat_MissileAP_Heavy",
-        "type": "AreaDamage"
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "PreservedFlat_MissileAP_Medium",
-        "type": "AreaDamage"
+        "damage": "200",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -2942,6 +2917,13 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": null,
         "spread": null,
@@ -2963,32 +2945,28 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "PreservedFlat_Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
+        "damage": "100",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
         "spread": null,
-        "tag": "PreservedFlat_HeavyMissile",
-        "type": "SpreadDamage"
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_Concussion_LightPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "PreservedFlat_MissileAP_Heavy",
-        "type": "AreaDamage"
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "PreservedFlat_MissileAP_Medium",
-        "type": "AreaDamage"
+        "damage": "200",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -3016,6 +2994,13 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": null,
         "spread": null,
@@ -3037,32 +3022,28 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "PreservedFlat_Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
+        "damage": "100",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
         "spread": null,
-        "tag": "PreservedFlat_HeavyMissile",
-        "type": "SpreadDamage"
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_Concussion_LightPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "PreservedFlat_MissileAP_Heavy",
-        "type": "AreaDamage"
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "PreservedFlat_MissileAP_Medium",
-        "type": "AreaDamage"
+        "damage": "200",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -3090,6 +3071,13 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": null,
         "spread": null,
@@ -3111,32 +3099,28 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "PreservedFlat_Concussion_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
+        "damage": "100",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
         "spread": null,
-        "tag": "PreservedFlat_HeavyMissile",
-        "type": "SpreadDamage"
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_Concussion_LightPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "PreservedFlat_MissileAP_Heavy",
-        "type": "AreaDamage"
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "PreservedFlat_MissileAP_Medium",
-        "type": "AreaDamage"
+        "damage": "200",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -7535,24 +7519,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "48000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
         "type": "AreaDamage"
        }
       ],
@@ -7585,24 +7555,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "48000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
         "type": "AreaDamage"
        }
       ],
@@ -7643,24 +7599,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "16000",
+        "damage": "48000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
         "type": "AreaDamage"
        }
       ],
@@ -7707,24 +7649,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "16000",
+        "damage": "48000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
         "type": "AreaDamage"
        }
       ],

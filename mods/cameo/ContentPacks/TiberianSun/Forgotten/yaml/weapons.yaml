@@ -122,18 +122,17 @@ TS120mmx:
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^TSCannon
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@fxold: ^Effect_Concussion_Medium
 	Range: 5677
 	ReloadDelay: 52
 	Burst: 2
 	BurstDelays: 4
-	Warhead@Concussion_Medium:
-		Damage: 30000
 	Warhead@CannonHE_Medium:
-		Damage: 30000
+		Damage: 63600
+		PercentageScale: 9434
+	-Warhead@1Dam:
 TSChem120mmx:
-	Inherits@roleflat: ^Compatibility_CannonChem_HeavyFlat
+	Inherits@chemical: ^Warhead_CannonChem_Heavy
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -144,21 +143,11 @@ TSChem120mmx:
 	ReloadDelay: 52
 	Burst: 2
 	BurstDelays: 4
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 30000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 15000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@CannonHE_Medium:
-		Damage: 30000
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 30000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		Damage: 33600
+		PercentageScale: 8929
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 15
 		PhysicalStateName: Corrosion
@@ -176,7 +165,8 @@ TSChem120mmx:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@CannonChem_HeavyFlatCompatibility:
+	-Warhead@1Dam:
+	Warhead@CannonChem_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 60000
 		PercentageScale: 0

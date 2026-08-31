@@ -631,17 +631,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "24000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "233",
-        "tag": "Concussion_Light",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -673,6 +666,7 @@
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Concussion_Light",
        "^Grenade",
@@ -999,17 +993,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "50000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "damage": "100000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "400",
+        "tag": "MissileAA_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1884,17 +1871,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "19000",
+        "damage": "25000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Melee_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -2048,17 +2028,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "19000",
+        "damage": "25000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Melee_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -2211,17 +2184,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "19000",
+        "damage": "25000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Melee_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -2375,17 +2341,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "19000",
+        "damage": "25000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Melee_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {

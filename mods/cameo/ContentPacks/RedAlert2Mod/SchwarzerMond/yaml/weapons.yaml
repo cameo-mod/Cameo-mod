@@ -989,58 +989,22 @@ NaxCorrosionRocketTrooper_elite:
 	ReloadDelay: 50
 	Burst: 1
 	Range: 6055
-	Warhead@Grenade: SpreadDamage
-		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 4000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@MissileAP_Medium:
-		Damage: 4000
 	MinRange: 1210
-	-Warhead@Grenade:
-	-Warhead@MissileAP_Medium:
-	-Warhead@HeavyMissile:
-	-Warhead@MissileAP_MediumFlatCompatibility:
-	Warhead@PreservedFlat_Concussion_Light: AreaDamage
+	Warhead@CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_Concussion_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 233
-		Damage: 2000
-		Falloff: 100, 72, 50, 32, 18, 8, 0
-		Versus:
-			HAZMAT: 68
-			COMPOSITE: 106
-			BLAST: 36
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 146
-			Scout: 152
-			None: 149
-			Wood: 146
-			Light: 129
-			Flak: 114
-			Steel: 112
-			Medium: 109
-			Fighter: 96
-			Heavy: 90
-			Heroic: 85
-			Plate: 84
-			Concrete: 83
-			Superheavy: 78
-			Bomber: 71
-			Helicopter: 55
-			Spaceship: 46
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
+		Damage: 100
+		PercentageDenominator: 10000
+		Versus:
 			Shield: 17
 			Scout: 16
 			None: 15
@@ -1058,45 +1022,17 @@ NaxCorrosionRocketTrooper_elite:
 			Bomber: 3
 			Helicopter: 2
 			Spaceship: 1
-	Warhead@PreservedFlat_Grenade: SpreadDamage
-		Damage: 4000
-	Warhead@PreservedFlat_HeavyMissile: SpreadDamage
-		Damage: 8000
-	Warhead@PreservedFlat_MissileAP_Heavy: AreaDamage
+		Falloff: 100, 72, 50, 32
+		Range: 0, 233, 466, 699
+	Warhead@CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 85
-		Damage: 2000
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 44
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 161
-			Superheavy: 160
-			Spaceship: 146
-			Heavy: 142
-			Medium: 126
-			Helicopter: 115
-			Light: 112
-			Concrete: 105
-			Scout: 99
-			Bomber: 98
-			Plate: 91
-			Steel: 82
-			Fighter: 75
-			Flak: 73
-			Wood: 66
-			Heroic: 57
-			None: 54
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
+		Damage: 100
+		PercentageDenominator: 10000
+		Versus:
 			Shield: 35
 			Superheavy: 25
 			Heavy: 24
@@ -1114,41 +1050,17 @@ NaxCorrosionRocketTrooper_elite:
 			Plate: 12
 			Flak: 11
 			None: 10
-	Warhead@PreservedFlat_MissileAP_Medium: AreaDamage
+		Falloff: 100, 51
+		Range: 0, 42
+	Warhead@CollapsedNaxCorrosionRocketTrooper_elitePreservedFlat_MissileAP_MediumPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 64
-		Damage: 4000
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 44
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 145
-			Superheavy: 200
-			Heavy: 177
-			Medium: 161
-			Light: 146
-			Spaceship: 124
-			Helicopter: 123
-			Scout: 114
-			Bomber: 112
-			Concrete: 82
-			Fighter: 75
-			Plate: 64
-			Steel: 55
-			Wood: 53
-			Flak: 44
-			Heroic: 37
-			None: 33
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
+		Damage: 200
+		PercentageDenominator: 10000
+		Versus:
 			Shield: 25
 			Superheavy: 20
 			Heavy: 19
@@ -1166,7 +1078,14 @@ NaxCorrosionRocketTrooper_elite:
 			Plate: 7
 			Flak: 6
 			None: 5
-	-Warhead@PreservedFlat_Grenade:
+		Falloff: 100, 50
+		Range: 0, 32
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
+		FriendlyFireDamage: 75
+		FriendlyFireSpread: 75
 NaxCorrosionBeast:
 	Inherits: NaxCorrosionRocket
 	Range: 7984

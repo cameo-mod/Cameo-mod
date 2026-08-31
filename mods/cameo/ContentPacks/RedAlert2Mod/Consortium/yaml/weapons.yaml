@@ -99,6 +99,7 @@ SteelCloneGunResonanceBounce2_elite:
 		PercentageScale: 9984
 
 SteelVulcan:
+	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^SteelHeavyCannon
 	Inherits@2: ^SteelSmallArms
 	Inherits@3: ^SteelChaingun
@@ -107,12 +108,13 @@ SteelVulcan:
 	Range: 6666
 	# Retain the inherited shell template's range-scaled flight behavior.
 	Projectile: ScaledBullet
-	Warhead@CannonHE_Heavy:
-		Damage: 2000
-	Warhead@Bullet_Light:
-		Damage: 2000
-	Warhead@Bullet_Medium:
-		Damage: 2000
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 9984
 	Report: pulseturretfire.wav
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs

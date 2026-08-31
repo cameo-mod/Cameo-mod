@@ -1602,9 +1602,75 @@ HMG:
 		Damage: 1800
 
 HMG_fremen:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: HMG
 	Report: FREMODD1.WAV
+	Warhead@CollapsedHMG_fremenBullet_LightPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 100
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
+		Falloff: 100, 51
+		Range: 0, 33
+	Warhead@CollapsedHMG_fremenBullet_MediumPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 100
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		Falloff: 100, 50
+		Range: 0, 50
+	-Warhead@1Dam:
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
 
+		FriendlyFireDamage: 67
+		FriendlyFireSpread: 67
 HMG_tleilaxu:
 	Inherits: HMG
 	ReloadDelay: 80

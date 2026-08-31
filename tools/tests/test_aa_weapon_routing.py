@@ -46,8 +46,7 @@ class AaWeaponRoutingTests(unittest.TestCase):
 
     def test_consolidated_aa_families_route_every_main_to_air(self):
         expected = {
-            "ArmoredCarMG_AA": {"Bullet_Medium": "8000",
-                                 "ArmoredCarGroundCompatibility": "8000"},
+            "ArmoredCarMG_AA": {"Bullet_Medium": "16000"},
             "NaxQuadCannon_AA": {
                 "Flak_MediumFlatCompatibility": "7000"},
             "NaxQuadCannon_AA_elite": {

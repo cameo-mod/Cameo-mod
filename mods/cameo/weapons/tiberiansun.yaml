@@ -928,14 +928,26 @@ TSReaperTusk:
 		ValidTargets: Ground
 
 TSAegisMissile:
+	Inherits@roleflat: ^Compatibility_MissileAA_MediumFlat
 	Inherits: ^TSDefaultMissile
+	ValidTargets: Air
 	Burst: 2
 	Range: 9216
 	Report: vaegatta.wav, vaegattb.wav
 	Projectile: Missile
 		RangeLimit: 18c0
-	Warhead@1Dam: SpreadDamage
-		Damage: 5000
+	-Warhead@MediumMissile:
+	-Warhead@LightMissile:
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Air
+	Warhead@LightMissilePercentage:
+		ValidTargets: Air
+	Warhead@MissileAA_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 25000
+		PercentageScale: 0
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
 
 TSMammothTusk_elite:
 	Inherits: TSMammothTusk2

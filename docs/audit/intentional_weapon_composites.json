@@ -135,6 +135,31 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "f09014479356e597e513d01e439674f3e42b654f8f425520ebce3ebee4b18cea"
     },
+    "ArmoredCarMGAAWaveforce": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Bullet_Medium": "authored target, armor, relationship, or state route Bullet_Medium",
+        "Railgun_Heavy": "authored target, armor, relationship, or state route Railgun_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "4be3ea7f6f3326a77631666e08a32bc4df6e3216b7b56806ce4f5dc05b213d5c",
+      "mains": [
+        "Bullet_Medium",
+        "Railgun_Heavy"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for ArmoredCarMGAAWaveforce: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Bullet_Medium, Railgun_Heavy.",
+      "referrer_digest": "37fff458bf7f76b41533de19fe2dcb762fc6009ede41a029bf46dc1d7e702886",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_armoredcar",
+          "path": "Armament@UpgradeAA/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "840dc6dcf3188381802f56c7b4123aaf6aabd888dad7ffbd22f9c2e2743719bb"
+    },
     "ArmoredCarMGWaveforce": {
       "category": "effect-delivery composite",
       "component_purposes": {
@@ -1569,6 +1594,31 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "aae042778b3ede5fb82c9e50b8d5281b9c0a5cab45524769d13b407a389b7920"
     },
+    "Future_Cryocopter_Rocket": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "FutureCryocopterMissileAP_Medium": "authored target, armor, relationship, or state route FutureCryocopterMissileAP_Medium",
+        "MissileAP_MediumFlatCompatibility": "authored target, armor, relationship, or state route MissileAP_MediumFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "811a0d065184aa5653a85b87be69432dc55ccc9482da16b149c3385144d8c944",
+      "mains": [
+        "FutureCryocopterMissileAP_Medium",
+        "MissileAP_MediumFlatCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for Future_Cryocopter_Rocket: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are FutureCryocopterMissileAP_Medium, MissileAP_MediumFlatCompatibility.",
+      "referrer_digest": "539791a0b0b2a52410dbcdf87cbd6d8acef2f321585c9c8024d3e541859bb633",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "futuretech_cryocopter",
+          "path": "Armament@Rocket/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "28881814cfcd8373eb9e9a13cd659b6a65b804d0e2daaf759aa58e5fd4a86a19"
+    },
     "GDISniperRifle": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -1600,6 +1650,2836 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "155f9650b51ebbe17b8b88e36f8d85f51a9b1a05d15e3daff800019e0147992d"
+    },
+    "GLBarrelExplode": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "1Dam": "authored target, armor, relationship, or state route 1Dam",
+        "Demolition_HeavyFlatCompatibility": "authored target, armor, relationship, or state route Demolition_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "indirect",
+      "main_digest": "869c0160f04f2ddb610ae413539b41f8c8737c38640856db704cce44480a8ecb",
+      "mains": [
+        "1Dam",
+        "Demolition_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for GLBarrelExplode: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are 1Dam, Demolition_HeavyFlatCompatibility.",
+      "referrer_digest": "07a441cda70fe699c5e39fdc694e972dd323af62e3eff571ca34913b272cdb0b",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "AMMOBOX1",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "AMMOBOX2",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "AMMOBOX3",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "BARL",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "BRL3",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "C2KFIREDEPARTMENT",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "C2KINDUSTRY",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "C2KNUKE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "C2KPOLICEDEPARTMENT",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "CNCSPEN",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "CNCSYRD",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_AGRIDOME",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_DIRT",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_FACTORY_CONSUMER",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_FACTORY_STRUCTURE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_FACTORY_VEHICLE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_GARAGE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_GORF",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_GP_EMP",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_GP_LASER",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_GP_RAILGUN",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_LAB_ADVANCED",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_LAB_BASIC",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_LAB_STANDARD",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_LIGHT_TOWER",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_MINE_COMMON",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_NURSERY",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_RCC",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_RESIDENCE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_SMELTER_COMMON",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_SMELTER_RARE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_SOLAR_ARRAY",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_SPACEPORT",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_STORAGE_COMMON",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_TOKAMAK",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "EDEN_UNIVERSITY",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "FCOM",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "FCOM.Husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "HOSP",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "HOSP.Husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "MAMMOTHBUNKER",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "MISS",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "MISS.Husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "NUK2",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "NUKE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "OILB",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "OILB.Building",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "OILB.Husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "OILB.RA2",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "OILB.TS",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "OILB.d2k",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_AGRIDOME",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_BASIC_LAB",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_DIRT",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_FACTORY_ARACHNID",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_FACTORY_VEHICLE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_GARAGE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_GORF",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_GP_MICROWAVE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_GP_RPG",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_GP_STICKYFOAM",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_LAB_ADVANCED",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_LAB_STANDARD",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_LIGHT_TOWER",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_LYNX_STARFLARE",
+          "path": "FireWarheadsOnDeath@bomb/EmptyWeapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_LYNX_STARFLARE",
+          "path": "FireWarheadsOnDeath@bomb/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_MINE_COMMON",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_NURSERY",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_RCC",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_RESIDENCE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_SMELTER_COMMON",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_SMELTER_RARE",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_SOLARARRAY",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_SPACEPORT",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_STORAGE_COMMON",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_STRUCTURE_FACTORY",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_TIGER_STARFLARE",
+          "path": "FireWarheadsOnDeath@bomb/EmptyWeapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_TIGER_STARFLARE",
+          "path": "FireWarheadsOnDeath@bomb/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_TOKAMAK",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "PLYMOUTH_UNIVERSITY",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "RABIO",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "RAMISS",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "SILO",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "TECHBCANNON",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "TECHBCANNON2",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "TSGTCNST",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "V19",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "V19.Husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_advancedcommunicationcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_asianairforcecommand",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_asianbarracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_asianbattlelab",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_asianconstructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_asianorerefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_asianpetrolplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_asianradar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_asiansentryflamer",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_asianservicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_asianwarfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_chaosstorminductor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_chaostower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_hyperionprojector",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_militaryacademy",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_plasmacannon",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_pulsar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_railtower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_spitfire",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "asianalliance_tankreactor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "atreides_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "atreides_heavyfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "bio",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "bio.Husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_core",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_cyborgfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_heavycabalobelisk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_helipad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_mechfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_navalyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_obeliskofdarkness",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_pillbox",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_plasmaturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_powerplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_radar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_refinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_servicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_silo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_stealthgenerator",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cabal_techcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cgpnch.asian",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cgyard.asian",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "cgyard.latin",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "d2k_silo.atreides",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "fact.colorpicker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_brokenrattytankturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_brokenscoopertankturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_brokenwarriortankturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_chemicalplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_church",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_crystalpowerextractor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_helipad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_juggerflakwall",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_machineguntower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_navalyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_radar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_refinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_servicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_silo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_tiberiumspike",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_veinhole",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "forgotten_warfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_battlelab",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_frostbiteturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_hypercore",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_launchpad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_multiturretsystem",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_refinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_robotcontrolcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_thermalpowerplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_transmissioncenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_troopgate",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "futuretech_warpgate",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_autogunturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_flameturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_heavyfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_hightechfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_ixresearchcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_lightfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_outpost",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_palace",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_refinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_repairpad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_rocketturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_starport",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_storagesilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "harkonnen_windtrap",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_advancedheavyfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_gunturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_hightechfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_ixresearchcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_launchpad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_machinegunturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_munitionssilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_outpost",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_refineryixian",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_repairpad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_rocketturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_starport",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_storagesilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_stormlasher",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_supercomputer",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ixian_windtrap",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_ballistatower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japaneseairfield",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japanesebarracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japaneseconstructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japanesemgnest",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japanesenavalyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japaneseorerefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japaneseradararray",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japaneseservicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japaneseshrine",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japanesetechcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_japanesewarfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_waveforcereactor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "japan_waveforceturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_airstation",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_bunkertower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_combatbarracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_defensebureau",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_latinaadefender",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_latinempradar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_latinsentrygun",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_powerstation",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_recyclingcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_recyclingrefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_smlturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_spycenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_syndicateconstructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_syndicatefactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_syndicateservicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "latinsyndicate_topolsilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "mammothbunker.husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naval.nax",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_academy",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_airfield",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_beerfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_flak88",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_naxibunker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_naxirocketsilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_naxpetrolplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_orerefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_radar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_rifletower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_sausagefactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_techcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "naxis_warfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_artilleryplatform",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_autogunturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_heavyfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_hightechfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_ixresearchcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_lightfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_outpost",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_palace",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_refineryordos",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_repairpad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_starport",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_storagesilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_windtrap",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_arbitertribunal",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_assimilator",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_citadelofadun",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_cyberneticscore",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_fleetbeacon",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_forge",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_gateway",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_nexus",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_observatory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_photoncannon",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_pylon",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_roboticsfacility",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_roboticssupportbay",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_shieldbattery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_stargate",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "protoss_templararchives",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_advancedpowerplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliedaagun",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliedbarracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliedconstructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliedgunturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliedhelipad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliednavalyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliedorerefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliedradardome",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliedservicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliedtechcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_alliedwarfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_bastionartillerybunker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_camopillbox",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_chronosphere",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_gapgenerator",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_pillbox",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_allies_reinforcementpad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_oresilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_powerplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_airfield",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_flametower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_ironcurtain",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_kennel",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_largefactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_largesovietairfield",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_missilesilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_orerefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_radardome",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_samsite",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_servicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_subpen",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_techcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_teslacoil",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra1_soviets_warfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_airforcecommandhq",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_alliedbarracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_alliedbattlelab",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_alliedconstructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_alliedorerefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_alliedpowerplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_alliedservicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_alliedwarfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_chronosphere",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_gapgenerator",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_grandcannon",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_orepurifier",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_patriotmissilesystem",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_pillbox",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_prismtower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_spysatelliteuplink",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_allies_weathercontrolcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_cgcloa",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_cgcloa.husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_ctoutp",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_ctoutp.husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_airfield",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_battlebunker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_battlelab",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_flakcannon",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_industrialplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_ironcurtain",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_nuclearmissilesilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_nuclearreactor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_orerefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_radar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_sentrygun",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_servicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_teslacoil",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_teslareactor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_warfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2caairp",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2caairp.husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2caairpv",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2caairpv.husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2caoild",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2caoild.husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2cpower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2cpower.husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2gayard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2hospt",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2hospt.husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2machshop",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2machshop.husk",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ra2nayard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "rafact.colorpicker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "rafactj.colorpicker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "refinery.atreides",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_airfield",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_gravitycore",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_hydrogenplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_lasertower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_meteortractionray",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_moondairyfarm",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_orerefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_radar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_sturmcannon",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_techcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "schwarzermond_warfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "sietch_creep",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "sietch_creep_disabled",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_antiairquantummissileturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_bfg10000",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_cloningvats",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_consortiumairpad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_consortiumbattlelab",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_consortiumconstructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_consortiumpowerplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_consortiumradar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_consortiumrefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_consortiumsentryturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_consortiumwarfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_geothermalreactor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_orbitalcannonactivator",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_quantumcannon",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "steelconsortium_steelbarracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_advancedcommunicationscenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_advancedguardtower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_communicationscenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_guardtower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_helipad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_repairfacility",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_skyshield",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_tiberiumrefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_gdi_weaponsfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_airstrip",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_communicationscenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_gunturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_handofnod",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_helipad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_laserturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_obeliskoflight",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_repairfacility",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_samsite",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_templeofnod",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_templeprime",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "td_nod_tiberiumrefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "techcementffact",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "techmetalffact",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_academy",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_armory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_bunker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_commandcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_engineeringbay",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_missilesilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_missileturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_refinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_sciencefacility",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_sentinel",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_starport",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_supplydepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "terran_weaponsfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_airpad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_bunker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_observationvan",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_orerefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_powerplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_quadturretbunker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_tankturretbunker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_techcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_trenchtruckdeployed",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_warfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkmratflakdeployed",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkmtrenchtankdeployed",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_dropshipbay",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_empulsecannon",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_helipad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_navalyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_powerplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_radar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_rpgtower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_samtower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_servicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_silo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_techcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_tiberiumrefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_upgradecenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_vulcantower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_gdi_warfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_advancedpowerplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_handof",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_helipad",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_laserfence",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_laserturret",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_missilesilo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_navalyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_obeliskoflight",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_powerplant",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_radar",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_samsite",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_servicedepot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_silo",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_stealthgenerator",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_techcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_tiberiumrefinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_tiberiumwastefacility",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ts_nod_warfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tsctarmr",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_human_foundry",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_human_oil_platform",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_human_oil_refinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_human_shipyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_blacksmith",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_cannontower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_church",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_elvenlumbermill",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_farm",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_gnomishinventor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_gryphonaviary",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_guardtower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_humangoldmine",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_humangoldmine_bot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_humanscouttower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_magetower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_stables",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_sunwell",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_humans_townhall",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orc_foundry",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orc_oil_platform",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orc_oil_refinery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orc_shipyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_altarofstorms",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_blacksmith",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_cannontower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_dragonroost",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_golbinalchemist",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_greathall",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_guardtower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_ogremound",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_orcgoldmine",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_orcgoldmine_bot",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_orcwatchtower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_pigfarm",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_templeofthedamned",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wc2_orcs_trolllumbermill",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "wind_trap.atreides",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yrygyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_barracks",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_battlelab",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_bioreactor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_cloningvats",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_constructionyard",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_gatlingcannon",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_geneticmutator",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_grinder",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_lunarcommandcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_psychicdominator",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_psychicsensor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_psychictower",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_slaveminer_deployed",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_tankbunker",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "yuri_warfactory",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_creepcolony",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_creepcolony_defense",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_defilermound",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_evolutionchamber",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_extractor",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_hatchery",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_hydraliskden",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_infestedcommandcenter",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_nyduscanal",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_overmind",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_queensnest",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_spawningpool",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_spire",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_sporecolony",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_sunkencolony_defense",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_ultraliskcavern",
+          "path": "PeriodicExplosion@boobytrap/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "3a3f40044273a16a3e3166cdb0c066f69c1b7862788ab0ec219bedf2be2e7f7b"
     },
     "GhostSniper": {
       "category": "target-routed composite",
@@ -2117,6 +4997,81 @@
       "review_reference": "Resolved family review: primary hit plus status payload",
       "weapon_digest": "51e5e4ed166211ac022220fefd3107428b2c0f45a48d5630c6571e80cf54717c"
     },
+    "Lunar_GreenGrilleArty": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "22d1c9bc7ed3c350fba7f1aa76fa89c6de45742aeeaaa4c53e52980714e9697d",
+      "mains": [
+        "CannonHE_Heavy",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for Lunar_GreenGrilleArty, Lunar_GreenGrilleArty_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Tesla_Heavy.",
+      "referrer_digest": "a248b4e92b8ad99248f2fb95709be40d07151dc68da98cf6cf78ed9984c99e9d",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "schwarzermond_lunargrille",
+          "path": "Armament@upgraded/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "ec1b99133d94a7507dc6d81655034a857467a240b3fdbc29a0a458553cf5b5b1"
+    },
+    "Lunar_GreenGrilleArty_elite": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "22d1c9bc7ed3c350fba7f1aa76fa89c6de45742aeeaaa4c53e52980714e9697d",
+      "mains": [
+        "CannonHE_Heavy",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for Lunar_GreenGrilleArty, Lunar_GreenGrilleArty_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonHE_Heavy, Tesla_Heavy.",
+      "referrer_digest": "dfab8265ac8533f2951c741225e07f939477ac913a9785abaf30a8860f307ac7",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "schwarzermond_lunargrille",
+          "path": "Armament@elite-upgrade/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "c3d8c84df64a61bd2a9105d042e4052f8ab3544ef2975879917753ecaaa74d14"
+    },
+    "Lunar_GreenSturmArty": {
+      "category": "status payload",
+      "component_purposes": {
+        "Demolition_Heavy": "primary conventional delivery or impact Demolition_Heavy",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "f6e5f911119eafb0c2c4ea2dbacc14ea75911cf8dc0f7d162495e856b0d97df0",
+      "mains": [
+        "Demolition_Heavy",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for Lunar_GreenSturmArty: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Heavy, Tesla_Heavy.",
+      "referrer_digest": "c4365f11ecdda71e936f5b159f1e5255fc6d072c322d83194574ab571f8bf14d",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "schwarzermond_sturmcannon",
+          "path": "Armament@PRIMARY_UP/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "c14ac7035d81adc3ef6d997caea804bcf2aaf6053f6e7792876d3daaccb121cd"
+    },
     "Lunar_GreenTigerCannon": {
       "category": "status payload",
       "component_purposes": {
@@ -2560,6 +5515,31 @@
       ],
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "a99044c44ee5c658b0887f9b76e589d4d718151a4f00a604ed988bdc9d445523"
+    },
+    "RA160mmE_rad_elite": {
+      "category": "status payload",
+      "component_purposes": {
+        "Chemical_LightFlatCompatibility": "special energy, status, or effect payload Chemical_LightFlatCompatibility",
+        "Nuclear_Super": "special energy, status, or effect payload Nuclear_Super"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "ec7e725fdb4892eedad12ad89f833ff3855407bce474be2485c983e10df155d5",
+      "mains": [
+        "Chemical_LightFlatCompatibility",
+        "Nuclear_Super"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for RA160mmE_rad_elite: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Chemical_LightFlatCompatibility, Nuclear_Super.",
+      "referrer_digest": "6ae308fc59c55122eb894c9d532d9042db1e35059b80a42353b7fab4429ef982",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ra2_soviets_siegechopper",
+          "path": "Armament@DeployedEliteRad/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "008101fe5dc1f42421e626f54be75b4fd4475b5d1d37dac7e7a8734850cf9ced"
     },
     "RA2120xmm_rad": {
       "category": "status payload",
@@ -3459,6 +6439,36 @@
       "review_reference": "Resolved family review: overlapping effect delivery",
       "weapon_digest": "66b80e21df52deb0c0561800022a768241f60a9abdae06c4057640465e91bc9e"
     },
+    "RashidanGun_upgrade": {
+      "category": "target-routed composite",
+      "component_purposes": {
+        "Bullet_MediumFlatCompatibility": "authored target, armor, relationship, or state route Bullet_MediumFlatCompatibility",
+        "RashidanGroundCompatibility": "authored target, armor, relationship, or state route RashidanGroundCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "78f85077ef39faefe472132d86f787736207e11fd400a5fd7d97e9b9c94a1765",
+      "mains": [
+        "Bullet_MediumFlatCompatibility",
+        "RashidanGroundCompatibility"
+      ],
+      "overlap_justification": "This is not a blanket overlap waiver; the exact components are retained for their distinct target, relationship, armor, or state routes.",
+      "rationale": "Exact family decision for RashidanGun_upgrade: retains distinct target, relationship, armor, or physical-state routes rather than treating the mains as interchangeable damage copies; reviewed components are Bullet_MediumFlatCompatibility, RashidanGroundCompatibility.",
+      "referrer_digest": "74f83e277c5fd2e6b97da3254cf8a5f89fc06dc6d03c8fae7e1071d93e7fd0b1",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "heavy_inf.ixian",
+          "path": "Armament@Upgrade/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "heavy_inf.ixian",
+          "path": "Armament@UpgradeGARRISONED/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: target and armor routing",
+      "weapon_digest": "ea594afce19da63cc80a503c56b1a6857136de8aa1a052b7a44f93571705142a"
+    },
     "ReactorNuke": {
       "category": "staged superweapon",
       "component_purposes": {
@@ -3726,6 +6736,94 @@
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "9eff6da960228d6323a66185e8843e654e3b6e78762015fdf0852a8645e37924"
     },
+    "SandmarineTuskFire": {
+      "category": "status payload",
+      "component_purposes": {
+        "Flame_Light": "primary conventional delivery or impact Flame_Light",
+        "MissileAP_Light": "primary conventional delivery or impact MissileAP_Light",
+        "MissileHE_HeavyFlatCompatibility": "primary conventional delivery or impact MissileHE_HeavyFlatCompatibility"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "f943972dcfe80021b1058df16991bd682b045ca50c5ed484e97ff8f12c9a43d0",
+      "mains": [
+        "Flame_Light",
+        "MissileAP_Light",
+        "MissileHE_HeavyFlatCompatibility"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for SandmarineTuskFire: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Flame_Light, MissileAP_Light, MissileHE_HeavyFlatCompatibility.",
+      "referrer_digest": "915ad8993e6bc4c353e4b5a87c4aadab13c7c1339a876e36f05cacb6bba3516b",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "tkm_bigshiee",
+          "path": "Armament@PRIMARYTITAN/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_bigshiee",
+          "path": "Armament@SECONDARYTITAN/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_sandmarine",
+          "path": "Armament@PRIMARYTITAN/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_sandmarine",
+          "path": "Armament@SECONDARYTITAN/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "0e78a6610f840298772b53b457726153d4c9254d7006a8885cf1eb5192611b79"
+    },
+    "SandmarineTuskTwin": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "Bullet_Medium": "close anti-infantry and light-target part of the twin salvo",
+        "Concussion_Medium": "broad conventional blast part of the twin salvo",
+        "Grenade": "separate grenade geometry in the generalist ground impact",
+        "MissileAP_Medium": "anti-vehicle part of the generalist ground impact",
+        "MissileHE_Heavy": "heavy explosive core of the twin missile salvo"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "842f1664b8bc2ccf4c520923813c50c121e6a24580cff7f1141accf629df7d80",
+      "mains": [
+        "Bullet_Medium",
+        "Concussion_Medium",
+        "Grenade",
+        "MissileAP_Medium",
+        "MissileHE_Heavy"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "The maintainer approved Sand Marine and Big Shiee as intentional generalist ground super-units; preserve the exact five-part ground profile.",
+      "referrer_digest": "67994915928f230683ea1d682491f49dbce544cad25c9415afbcbd780e802621",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "tkm_bigshiee",
+          "path": "Armament@PRIMARYBEREZKA/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_bigshiee",
+          "path": "Armament@SECONDARYBEREZKA/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_sandmarine",
+          "path": "Armament@PRIMARYBEREZKA/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "tkm_sandmarine",
+          "path": "Armament@SECONDARYBEREZKA/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer decision: preserve Sand Marine and Big Shiee generalist ground role",
+      "weapon_digest": "1c4ea58bbeb6b1be978a612d26a03686dff5b8584eb78ca0c1c4e0cdb8a3c3d6"
+    },
     "ShotgunAttackRobotGun": {
       "category": "target-routed composite",
       "component_purposes": {
@@ -3841,6 +6939,31 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "f4b9d5e395ac7fdafba869d5a9a50e03bfbc1d4ef37dd7c3f698a63bf7075fb3"
+    },
+    "SkyHawkPlasmaCannon": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonAP_Light": "primary conventional delivery or impact CannonAP_Light",
+        "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "98c70b58fee3df2735608eca898a098e849d1b011c3c7467bf67224791daea72",
+      "mains": [
+        "CannonAP_Light",
+        "Tesla_Heavy"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for SkyHawkPlasmaCannon: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonAP_Light, Tesla_Heavy.",
+      "referrer_digest": "33c749879ee0d2bd4c7c92d712042cc8a6cfb765f7d834c7f9d8f3841348a29c",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "japan_skyhawk",
+          "path": "Armament@CannonUpgrade/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "489b8224e43d03e0a76e5f14798a9aef64200f2c51f81362a9f0f2fbc29b2c19"
     },
     "SonicZap": {
       "category": "target-routed composite",
@@ -4251,17 +7374,17 @@
     "TSBombSonic": {
       "category": "status payload",
       "component_purposes": {
-        "Demolition_Heavy": "primary conventional delivery or impact Demolition_Heavy",
+        "Demolition_HeavyFlatCompatibility": "primary conventional delivery or impact Demolition_HeavyFlatCompatibility",
         "Sonic_Heavy": "special energy, status, or effect payload Sonic_Heavy"
       },
       "expected_reachability": "direct",
-      "main_digest": "abbc26fdd00fedf5dbb329152df1ccd5e4a007ea3359fb81489a530e4cc94b57",
+      "main_digest": "b90c4a7a30d0a067a33dd7d7fadfe8e0d55142afe15290c7918a7a9cc6226afb",
       "mains": [
-        "Demolition_Heavy",
+        "Demolition_HeavyFlatCompatibility",
         "Sonic_Heavy"
       ],
       "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
-      "rationale": "Exact family decision for TSBombSonic: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_Heavy, Sonic_Heavy.",
+      "rationale": "Exact family decision for TSBombSonic: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are Demolition_HeavyFlatCompatibility, Sonic_Heavy.",
       "referrer_digest": "325c606a02b0ecf373c3ec18b13ed40800a06e154b5be8d6b936dd39493e45fd",
       "referrers": [
         {
@@ -4271,7 +7394,7 @@
         }
       ],
       "review_reference": "Resolved family review: primary hit plus status payload",
-      "weapon_digest": "2932064a8381dfcbd966d4c4f1932f8c28c9562da49b41a2b4651faafa992260"
+      "weapon_digest": "9330a491520784e51ff5d9ae2f23fff72a7297355a7a2d3661bfb08182734e9f"
     },
     "TSCABALEnlightedLaser": {
       "category": "target-routed composite",
@@ -4327,6 +7450,31 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "fe89f4c9a530c3dade51b51b95a6b5b1653ee5b4f83d7887bbf1b59b78c494c0"
+    },
+    "TSChem120mmx": {
+      "category": "status payload",
+      "component_purposes": {
+        "CannonChem_Heavy": "special energy, status, or effect payload CannonChem_Heavy",
+        "CannonHE_Medium": "primary conventional delivery or impact CannonHE_Medium"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "6a803f7ce6545def45263713636034d32e7c7ce3553c92f10a60a6a2d4632935",
+      "mains": [
+        "CannonChem_Heavy",
+        "CannonHE_Medium"
+      ],
+      "overlap_justification": "Overlap on the struck target is intentional: the delivery hit and status payload are both meant to apply.",
+      "rationale": "Exact family decision for TSChem120mmx: retains its primary delivery damage and separately authored status or special-damage payload; reviewed components are CannonChem_Heavy, CannonHE_Medium.",
+      "referrer_digest": "8d5430ae1a27bc86b9c3164512a24c7d28c95dbc3f6630bc90c70b04452bfbdb",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "forgotten_experimentalmammothtank",
+          "path": "Armament@UPGRADE/Weapon"
+        }
+      ],
+      "review_reference": "Resolved family review: primary hit plus status payload",
+      "weapon_digest": "c422d8d9700554fadb3ba47c644d2092d7d4140fc682a0bd5916ca800cbd83bd"
     },
     "TSCommandoShotgun": {
       "category": "target-routed composite",
@@ -5924,6 +9072,38 @@
       ],
       "review_reference": "Resolved family review: target and armor routing",
       "weapon_digest": "025e3b31ed065a389994700662658df3ddc3e9ebfe04a72a846f2c94c76a9234"
+    },
+    "ordos_autogunturret": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "Bullet_Light": "light-bullet contribution to anti-infantry defense",
+        "Bullet_Medium": "medium-bullet contribution against infantry and light vehicles",
+        "CannonHE_Heavy": "limited heavier impact that keeps the turret from being helpless"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "c05fe82415a4fa92e8dbf4414dee4179acb1719e93c2d78947765aee5bed1369",
+      "mains": [
+        "Bullet_Light",
+        "Bullet_Medium",
+        "CannonHE_Heavy"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "The maintainer approved the Ordos autogun family as anti-infantry and light-vehicle firepower that remains mediocre against heavier vehicles.",
+      "referrer_digest": "9de80421bcb55618a4e98b2af3981b039e9ac7fbb25416381797da843636e6c0",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "ordos_autogunturret",
+          "path": "Armament/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "ordos_autogunturret",
+          "path": "WithMuzzleSmoke/Weapons"
+        }
+      ],
+      "review_reference": "Maintainer decision: preserve the Ordos autogun role across its inherited variants",
+      "weapon_digest": "a383d797865512ad0fb81c6d61ab0f52edffb79ce2d4642459efdb4abb786313"
     },
     "plymouthStickyDefence": {
       "category": "status payload",

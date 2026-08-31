@@ -85,6 +85,7 @@ ACV_Machinegun:
 		UpdatesUnitStatistics: false
 
 Future_Cryocopter_Rocket:
+	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Grenade
 	Inherits@2: ^D2KRocket
 	Inherits@3: ^SteelMediumMissile
@@ -100,12 +101,12 @@ Future_Cryocopter_Rocket:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
-	Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 32000
+		PercentageScale: 9997
 	Warhead@PhysicalStateCryo1: ApplyPhysicalState
 		PhysicalStateName: Temperature
 		Amount: -16000

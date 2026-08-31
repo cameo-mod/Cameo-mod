@@ -539,6 +539,7 @@ ArbiterCannon:
 		PercentageScale: 0
 
 GlaveCanon:
+	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -554,12 +555,12 @@ GlaveCanon:
 		Inaccuracy: 0
 		CloseEnough: 822
 		AllowSnapping: true
-	Warhead@Demolition_Light:
+	-Warhead@Demolition_Light:
+	-Warhead@Railgun_Heavy:
+	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@Railgun_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 8000
+		Damage: 16000
+		PercentageScale: 9994
 psi_blades:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -1119,6 +1120,7 @@ SCWorkerExplodeProtoss:
 	Warhead@Demolition_Light:
 		Damage: 12000
 ScoutMG:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -1137,14 +1139,14 @@ ScoutMG:
 		ContrailEndWidth: 15
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@Flak_Medium:
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
+	-Warhead@Demolition_Light:
+	-Warhead@Flak_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 
 EpigraphMG:
 	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat

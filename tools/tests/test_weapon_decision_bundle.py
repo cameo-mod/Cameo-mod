@@ -20,9 +20,9 @@ class WeaponDecisionBundleTests(unittest.TestCase):
 
     def test_every_unreviewed_reachable_weapon_occurs_once(self):
         names = [member for row in self.rows for member in row["members"]]
-        self.assertEqual(75, len(names))
+        self.assertEqual(14, len(names))
         self.assertEqual(len(names), len(set(names)))
-        self.assertEqual(56, len(self.rows))
+        self.assertEqual(12, len(self.rows))
 
     def test_reviewed_composites_are_not_presented_as_open_decisions(self):
         names = {member for row in self.rows for member in row["members"]}
@@ -35,9 +35,9 @@ class WeaponDecisionBundleTests(unittest.TestCase):
         self.assertNotIn("WaveTurretImpact", families)
         self.assertNotIn("ExplosiveDebris", families)
         self.assertNotIn("SyndicateFireballLauncherExplode", families)
-        self.assertIn("SteelVulcan", families)
-        self.assertIn("RA160mmE_rad_elite", families)
-        self.assertEqual(212, self.data["reviewed_reachable"])
+        self.assertNotIn("SteelVulcan", families)
+        self.assertNotIn("RA160mmE_rad_elite", families)
+        self.assertEqual(225, self.data["reviewed_reachable"])
 
     def test_buckets_use_engine_defaults_and_mechanical_labels(self):
         counts = {
@@ -49,12 +49,12 @@ class WeaponDecisionBundleTests(unittest.TestCase):
             for name in report.BUCKETS
         }
         self.assertEqual({
-            "target and state routing": (2, 2),
-            "target routing": (16, 21),
-            "state delivery": (10, 17),
-            "legacy compatibility": (1, 1),
-            "numbered warhead key": (1, 1),
-            "no special mechanical signal": (26, 33),
+            "target and state routing": (0, 0),
+            "target routing": (0, 0),
+            "state delivery": (2, 2),
+            "legacy compatibility": (0, 0),
+            "numbered warhead key": (0, 0),
+            "no special mechanical signal": (10, 12),
         }, counts)
 
     def test_every_member_is_covered_by_one_exact_main_fingerprint(self):
@@ -75,7 +75,7 @@ class WeaponDecisionBundleTests(unittest.TestCase):
             if len(row["fingerprints"]) > 1:
                 multi_rows += 1
                 multi_definitions += len(row["members"])
-        self.assertEqual((8, 18), (multi_rows, multi_definitions))
+        self.assertEqual((1, 2), (multi_rows, multi_definitions))
 
     def test_report_is_fresh(self):
         text = report.OUT.read_text(encoding="utf-8")
@@ -83,9 +83,8 @@ class WeaponDecisionBundleTests(unittest.TestCase):
             report.rendered(self.data),
             text,
         )
-        self.assertIn(
-            "RedAlert2Mod / Naxis: Grille (`naxis_grille`)", text)
-        self.assertIn("and 552 more actors", text)
+        self.assertIn("Ixian Air Drone (`ixian_airdrone`)", text)
+        self.assertIn("Casino Crate (`casinocrate`)", text)
         self.assertIn("transitive delivery: `TSTacticalChemMissile`", text)
         self.assertIn("WEAPON_REDESIGN_RECOMMENDATIONS.md", text)
 

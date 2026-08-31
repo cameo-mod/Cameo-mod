@@ -2998,7 +2998,7 @@ RA2DemoBomb:
 		Level: 500
 		LayerName: ra2radiation
 
-RA2Terrorist:
+^RA2TerroristLegacy:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Terrorist_Explosion_RA2
@@ -3007,6 +3007,16 @@ RA2Terrorist:
 		Damage: 50000
 	Warhead@Demolition_Heavy:
 		Damage: 50000
+
+RA2Terrorist:
+	Inherits@roleflat: ^Compatibility_Demolition_HeavyFlat
+	Inherits: ^RA2TerroristLegacy
+	-Warhead@Demolition_Heavy:
+	-Warhead@Concussion_Medium:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 100000
+		PercentageScale: 9999
 2100Tanktrap:
 	Warhead@1Dam: SpreadDamage
 		Spread: 128

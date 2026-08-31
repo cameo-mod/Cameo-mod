@@ -7247,24 +7247,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "63600",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "3600",
-        "falloff": "100, 50, 25, 12, 6, 3, 0",
-        "spread": "108",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7280,12 +7266,10 @@
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^TSCannon",
-       "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_Concussion_Medium"
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "TS120mmx",
       "weapon_class_source": "template"
@@ -7298,22 +7282,15 @@
         "damage": "60000",
         "falloff": "100, 82, 61, 38, 0",
         "spread": "121",
-        "tag": "CannonChem_HeavyFlatCompatibility",
+        "tag": "CannonChem_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "30000",
+        "damage": "33600",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "3600",
-        "falloff": "100, 50, 25, 12, 6, 3, 0",
-        "spread": "108",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        },
        {
         "damage": "15",
@@ -7331,14 +7308,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5677",
       "reloaddelay": "52",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Compatibility_CannonChem_HeavyFlat",
+       "^Warhead_CannonChem_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -7347,6 +7324,7 @@
        "^ShrapnelWeapon"
       ],
       "warheads": [
+       "^Warhead_CannonChem_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "TSChem120mmx",

@@ -1176,6 +1176,13 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
+        "damage": "108000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
+        "tag": "Chemical_LightFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "36000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
@@ -1190,25 +1197,28 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "36000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "183",
-        "tag": "Chemical_Light",
-        "type": "AreaDamage"
+        "damage": "1800",
+        "falloff": "100, 88, 72",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA160mmE_rad_eliteChemical_LightPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "36000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
+        "damage": "1800",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA160mmE_rad_eliteConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "36000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
+        "damage": "1800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA160mmE_rad_eliteDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1220,6 +1230,7 @@
       "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
       "slot": "Armament@DeployedEliteRad",
       "versus_templates": [
+       "^Compatibility_Chemical_LightFlat",
        "^Warhead_Nuclear_Super",
        "^Effect_Nuclear_Super",
        "^RA160mmRadLegacy",

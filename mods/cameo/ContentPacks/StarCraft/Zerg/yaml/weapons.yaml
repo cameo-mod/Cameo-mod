@@ -476,23 +476,25 @@ ScourgeExplosion:
 		ImpactSounds: zavdth00.aud
 
 SCScourgeExplosion:
+	Inherits@finalmain: ^Compatibility_MissileAA_HeavyFlat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^Projectile_Grenade_Light
 	ValidTargets: Air
-	Warhead@Concussion_Medium:
-		ValidTargets: Air
-		Damage: 50000
-	Warhead@Demolition_Heavy:
-		ValidTargets: Air
-		Damage: 50000
 	Warhead@Effect: CreateEffect
 		Explosions: scscourgeexplosion
 		ValidTargets: Air
 		ImpactSounds: zavdth00.aud
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Heavy:
+	Warhead@MissileAA_HeavyFlatCompatibility:
+		ValidTargets: Air
+		Damage: 100000
+		PercentageScale: 9999
 
 GuardianShoot:
+	Inherits@roleflat: ^Compatibility_Concussion_MediumFlat
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits@compatwh: ^Warhead_Concussion_Light
 	Inherits: ^Grenade
@@ -533,17 +535,14 @@ GuardianShoot:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@ShrapnelWeapon:
+	-Warhead@Concussion_Medium:
+	-Warhead@Concussion_Light:
+	Warhead@Concussion_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 24000
+		PercentageScale: 0
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@HeavyBomb:
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water
-		Damage: 16000
-		PercentageScale: 0
-	Warhead@Concussion_Light:
-		ValidTargets: Ground, Ship
-		Damage: 8000
-		PercentageScale: 0
-
 SporemawShoot:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -1211,20 +1210,11 @@ Tentacle:
 	ReloadDelay: 32
 	Range: 7680
 	Report: zlufir00.aud
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 6000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 3
-	Warhead@Chaingun: SpreadDamage
-		Damage: 6000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 3
-	Warhead@CannonHE_Heavy:
-		Damage: 6000
-	Warhead@SwordWeapon: SpreadDamage
-		Damage: 6000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
+	-Warhead@CannonHE_Heavy:
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Effect: CreateEffect
@@ -1238,8 +1228,8 @@ Tentacle:
 	-Warhead@SwordWeaponFriendlyFire:
 	Warhead@Melee_HeavyFlatCompatibility:
 		ValidTargets: Ground
-		Damage: 19000
-		PercentageScale: 0
+		Damage: 25000
+		PercentageScale: 2396
 
 DroneAttack:
 	Inherits: ^WorkerAttack

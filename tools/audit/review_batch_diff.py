@@ -36,6 +36,7 @@ replace the old stack's geometry.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import pathlib
 import sys
@@ -287,6 +288,11 @@ def compare(base: dict, head: dict) -> tuple[dict, list, list]:
     return changed, gone, added
 
 
+def snapshot_digest(value: dict) -> str:
+    raw = json.dumps(value, sort_keys=True, separators=(",", ":"), default=list)
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -369,7 +375,17 @@ def main() -> int:
 
     if a.json:
         pathlib.Path(a.json).write_text(
-            json.dumps({"changed": changed, "removed": gone, "added": added}, indent=1),
+            json.dumps({
+                "meta": {
+                    "base_snapshot_sha256": snapshot_digest(base),
+                    "head_snapshot_sha256": snapshot_digest(head),
+                    "health_values": health_values,
+                    "with_concrete": a.with_concrete,
+                },
+                "changed": changed,
+                "removed": gone,
+                "added": added,
+            }, indent=1),
             encoding="utf-8")
         print(f"\n_wrote {a.json}_")
 

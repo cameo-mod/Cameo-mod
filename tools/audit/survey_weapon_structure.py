@@ -26,8 +26,8 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "docs" / "audit" / "latest" / "weapon_structure_inventory.json"
-RAW_REACHABLE_BASELINE = 287
-RAW_REACHABLE_EXCESS_BASELINE = 550
+RAW_REACHABLE_BASELINE = 239
+RAW_REACHABLE_EXCESS_BASELINE = 449
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 
 from audit_three_way_split import (  # noqa: E402

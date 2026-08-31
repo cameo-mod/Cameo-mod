@@ -50,8 +50,8 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         excluded = {
             "AtreusMG", "EpigraphMG", "GoliathMG", "GoliathMk2MG",
             "HMG_Duelist_upgrade", "autogun_tank",
-            "TSRPGTowerRail", "VolkovMagneticWeapon", "tkmjuggap",
-            "tkmtechnicalmgap", "BCLaser", "BCYamatoCannon",
+            "TSRPGTowerRail", "VolkovMagneticWeapon",
+            "BCLaser", "BCYamatoCannon",
             "edenMobileLaserTiger",
             "JimRaynorMachineGun",
         }
@@ -59,6 +59,8 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         for name in excluded:
             self.assertGreaterEqual(
                 len(main_warheads(self.rules.resolve_weapon(name))), 2, name)
+        for name in ("tkmjuggap", "tkmtechnicalmgap"):
+            self.assertEqual(1, len(main_warheads(self.rules.resolve_weapon(name))), name)
 
     def test_new_bulk_roles_keep_special_companion_payloads(self):
         naxis = self.rules.resolve_weapon("NaxisBlackBombSmaller")

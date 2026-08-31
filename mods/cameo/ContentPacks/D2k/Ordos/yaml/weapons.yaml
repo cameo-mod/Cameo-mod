@@ -1610,8 +1610,6 @@ Laboratory_Bioball:
 		PercentageScale: 0
 
 facedancer_grenade:
-	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
-	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^LightFlameWeapon
@@ -1639,29 +1637,11 @@ facedancer_grenade:
 		Inaccuracy: 5
 		InaccuracyType: PerCellIncrement
 		Shadow: true
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1669,53 +1649,21 @@ facedancer_grenade:
 		DamageCalculationType: ClosestTargetablePosition
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageCalculationType: ClosestTargetablePosition
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1723,7 +1671,8 @@ facedancer_grenade:
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 20000
+		Damage: 180000
+		PercentageScale: 2222
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater
@@ -1742,11 +1691,6 @@ facedancer_grenade:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@LightMissile:
 	-Warhead@MediumMissile:
-	-Warhead@MissileAP_Heavy:
-	Warhead@MissileAP_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 160000
-		PercentageScale: 1250
 
 GrenDeath:
 	Warhead@EnemyDam: SpreadDamage

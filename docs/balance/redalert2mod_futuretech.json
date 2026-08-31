@@ -12,25 +12,18 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "32000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "8",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "16000",
@@ -54,6 +47,7 @@
       "reloaddelay": "60",
       "slot": "Armament@Rocket",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Grenade",
        "^D2KRocket",
        "^SteelMediumMissile",

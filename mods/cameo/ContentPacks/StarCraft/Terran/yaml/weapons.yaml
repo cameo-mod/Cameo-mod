@@ -831,6 +831,7 @@ VultureGrenade:
 	-Warhead@CannonHE_Medium:
 
 SiegeTankCannon:
+	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@wh3: ^Warhead_CannonAP_Light
@@ -841,12 +842,13 @@ SiegeTankCannon:
 	Report: TTaFir00.aud
 	Projectile: Bullet
 		Speed: 611
-	Warhead@CannonHE_Heavy:
-		Damage: 10000
-	Warhead@CannonHE_Medium:
-		Damage: 10000
-	Warhead@CannonAP_Light:
-		Damage: 10000
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_Medium:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 9997
 SiegeTankSiegeCannon:
 	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^NuclearWarhead

@@ -1072,19 +1072,15 @@ LightTank2Cannon:
 		Damage: 8000
 		PercentageScale: 0
 LightTank2Missiles:
-	Inherits: ^Warhead_Flame_Light
 	Inherits@2: ^Warhead_MissileAP_Medium
 	Inherits@3: ^Projectile_Missile_Medium
 	Inherits@4: ^Effect_MissileAP_Medium
 	ReloadDelay: 35
 	Range: 4903
 	Report: bazook1.aud
-	Warhead@Flame_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 

@@ -1,4 +1,5 @@
 110mm_Gun:
+	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -11,13 +12,13 @@
 	Report: TURRET1.WAV
 	Projectile: Bullet
 		Speed: 797
-	Warhead@CannonAP_Light:
-		Damage: 10000
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 10000
-	Warhead@CannonHE_Heavy:
-		Damage: 10000
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_Medium:
+	Warhead@CannonAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 9997
 IxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -966,6 +967,7 @@ RashidanGun:
 		PercentageScale: 0
 
 RashidanGun_upgrade:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -975,35 +977,87 @@ RashidanGun_upgrade:
 	Inherits@5: RashidanGun
 	Inherits@6: ^HeavyMachineGunProjectile
 	ValidTargets: Ground, Water, Air
-	Warhead@MissileHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 0
 	Warhead@RashidanGroundCompatibility: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	Warhead@CollapsedRashidanGun_upgradeCannonHE_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 100
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			None: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 50, 35
+		Range: 0, 400, 600
+	Warhead@CollapsedRashidanGun_upgradeMissileHE_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 100
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			Fighter: 17
+			Bomber: 16
+			Helicopter: 15
+			Spaceship: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
+		Falloff: 100, 45, 30
+		Range: 0, 200, 300
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@MissileHE_Heavy:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
+		FriendlyFireDamage: 67
+		FriendlyFireSpread: 67
 RaiderGuns:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light

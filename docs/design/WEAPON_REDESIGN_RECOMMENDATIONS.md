@@ -68,7 +68,7 @@ role as intentional. `Hold` means the evidence is not yet sufficient for a safe 
 | `TSSonicZapWeapon` | **Hold progression redesign** | Base Magic/Tesla identity is ambiguous and the paid Sonic replacement is no better than 0.88x across judged core armor. Do not register away the downgrade. |
 | `Type97PlasmaCannon` | **Hold coordinated base/plasma redesign** | Current paid plasma drops to 0.78x Wood and 0.81x Scout. Its electrical split is defensible, but progression must be fixed with base `Type97Cannon`. |
 | `facedancer_grenade` | **Convert:** fold HE 20k into `MissileAP_Heavy` for 180k | Face Dancer becomes a coherent anti-heavy direct hit with less HE splash. Retain every percentage/status companion. |
-| `TS120mmx` | **Convert candidate:** `CannonHE_Medium` 63.6k | Removes Concussion and numbered legacy curves for four shared tanks. Requires gameplay sign-off because their tooltips do not define one universal role. |
+| `TS120mmx` | **Convert:** `CannonHE_Medium` 63.6k | Removes Concussion and numbered legacy curves for the active Forgotten Experimental Mammoth. Similar Tiberian Alliances definitions are inactive and do not govern live behavior. |
 
 ## Ordinary role decisions — 33 definitions / 26 families
 

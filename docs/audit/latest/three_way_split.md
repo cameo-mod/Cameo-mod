@@ -1,52 +1,53 @@
-# audit_three_way_split — 387 raw stacked weapons; 175 remain unreviewed
+# audit_three_way_split — 339 raw stacked weapons; 114 remain unreviewed
 
-   1642  correct — exactly one main warhead
+   1690  correct — exactly one main warhead
     317  none — utility / effect-only weapons
-    387  RAW STACKS — structural inventory
-    212  reviewed — exact intentional composites
-    175  UNREVIEWED — classification backlog
+    339  RAW STACKS — structural inventory
+    225  reviewed — exact intentional composites
+    114  UNREVIEWED — classification backlog
 
   mains  weapons
-      2    203
-      3    114
-      4     42
-      5     13
+      2    189
+      3     98
+      4     25
+      5     12
       6      6
       7      7
       8      2
 
-85 distinct stacked combinations; the 20 most common:
+52 distinct stacked combinations; the 20 most common:
 
 | count | combination |
 |---|---|
 | 15 | 1Dam + MissileAP_Heavy |
 | 9 | 1Dam + CannonHE_Medium |
-| 8 | Concussion_Medium + Demolition_Heavy |
-| 7 | 1Dam + Bullet_Light + Bullet_Medium |
-| 6 | 1Dam + Concussion_Medium + Demolition_Heavy |
-| 6 | Bullet_Light + Bullet_Medium + CannonHE_Heavy |
+| 6 | 1Dam + Bullet_Light + Bullet_Medium |
+| 5 | 1Dam + Concussion_Medium + Demolition_Heavy |
 | 4 | 1Dam + Flame_Heavy + MissileHE_Heavy |
 | 4 | 1Dam + Bullet_Light |
-| 4 | CannonHE_Heavy + CannonHE_Medium |
 | 3 | 1Dam + Flame_Medium |
 | 3 | 1Dam + Demolition_Light |
 | 3 | 1Dam + Demolition_Heavy + Flame_Heavy |
 | 3 | Magic_Heavy + Tesla_Heavy |
-| 3 | CannonHE_Heavy + Concussion_Medium + Demolition_Light |
 | 3 | Bullet_Light + Bullet_Medium + Concussion_Medium + Demolition_Light |
-| 3 | 1Dam + LightMissile + MediumMissile |
 | 3 | 1Dam + Flame_Light |
-| 3 | Bullet_Light + Demolition_Light |
-| 2 | CannonAP_Light + CannonHE_Heavy + CannonHE_Medium |
 | 2 | CannonAP_Light + CannonHE_Medium |
+| 2 | Nuclear_Super + Tesla_Heavy + Tesla_Super |
+| 2 | 1Dam + Demolition_Light + Flame_Light |
+| 2 | 1Dam + Clear |
+| 2 | Bullet_Light + Bullet_Medium |
+| 2 | Bullet_Medium + CannonHE_Heavy + Concussion_Light |
+| 2 | 1Dam + 1Dam_impact |
+| 2 | Flame_Heavy + MissileHE_Heavy |
 
-Reviewed exact composites (212):
+Reviewed exact composites (225):
 
 - `AAGunBoatFlak`: Flak_Medium + Flak_MediumFlatCompatibility
 - `AAGunBoatFlak_elite`: Flak_Medium + Flak_MediumFlatCompatibility
 - `ATMine`: ATMineDemolition_Light + Demolition_Light
 - `AphidCryo_AA`: CryoBlast_Medium + MissileCryo_Heavy
 - `ArcherArtilleryShell`: CollapseTargetCompatibility1 + Concussion_Heavy
+- `ArmoredCarMGAAWaveforce`: Bullet_Medium + Railgun_Heavy
 - `ArmoredCarMGWaveforce`: Bullet_Medium + Railgun_Heavy
 - `ArtilleryShellUpgrade`: CollapseTargetCompatibility1 + Concussion_Heavy
 - `AsianChaosMine`: CannonAP_Light + Chemical_Heavy
@@ -95,7 +96,9 @@ Reviewed exact composites (212):
 - `FutureHarbingerCannon_elite`: CannonHE_Heavy + Plasma_HeavyFlatCompatibility
 - `FutureTankCannons`: CannonHE_Heavy + CannonHE_HeavyFlatCompatibility
 - `FutureTankCannons_elite`: CannonHE_Heavy + CannonHE_HeavyFlatCompatibility
+- `Future_Cryocopter_Rocket`: FutureCryocopterMissileAP_Medium + MissileAP_MediumFlatCompatibility
 - `GDISniperRifle`: Bullet_Heavy + SniperChaingun + SniperSmallArms
+- `GLBarrelExplode`: 1Dam + Demolition_HeavyFlatCompatibility
 - `GhostSniper`: Bullet_Heavy + SniperChaingun + SniperSmallArms
 - `GhostSniperLockdown`: Bullet_Heavy + Bullet_Medium + SniperChaingun + SniperFlak + SniperSmallArms + Tesla_Super
 - `GoliathMG`: Bullet_Medium + CannonHE_Heavy + Concussion_Light
@@ -114,6 +117,9 @@ Reviewed exact composites (212):
 - `KodiakCannonSonic`: CannonHE_Heavy + Sonic_Heavy
 - `Laboratory_Bioball`: CannonHE_Heavy + Chemical_Medium + Concussion_Medium + Demolition_Light
 - `LaserObeliskBurning`: Inferno_Heavy + Laser_Heavy
+- `Lunar_GreenGrilleArty`: CannonHE_Heavy + Tesla_Heavy
+- `Lunar_GreenGrilleArty_elite`: CannonHE_Heavy + Tesla_Heavy
+- `Lunar_GreenSturmArty`: Demolition_Heavy + Tesla_Heavy
 - `Lunar_GreenTigerCannon`: CannonHE_Medium + Tesla_Heavy
 - `Lunar_GreenTigerCannon_elite`: CannonHE_Medium + Tesla_Heavy
 - `MedicFlare`: MediumChemicalWeapon + PreservedFlat_FlakWeapon + PreservedFlat_LaserWeapon + PreservedFlat_LightFlameWeapon
@@ -129,6 +135,7 @@ Reviewed exact composites (212):
 - `PositronBounce1`: CannonAP_Light + CannonHE_Medium + Quantum_MediumFlatCompatibility
 - `PositronBounce2`: CannonAP_Light + CannonHE_Medium + Quantum_MediumFlatCompatibility
 - `PulseMissile`: 10Dam_areanuke3 + 11Dam_areanuke3 + 1Dam_impact + 4Dam_areanuke1 + 7Dam_areanuke2 + 8Dam_areanuke2 + Tesla_Heavy + Tesla_Super
+- `RA160mmE_rad_elite`: Chemical_LightFlatCompatibility + Nuclear_Super
 - `RA2120xmm_rad`: CannonAP_Light + CannonChem_HeavyFlatCompatibility + CannonHE_Heavy
 - `RA2120xmm_rad_elite`: CannonAP_Light + CannonChem_HeavyFlatCompatibility + CannonHE_Heavy
 - `RA2Atomic`: Nuclear_Super + Tesla_Heavy + Tesla_Super
@@ -155,6 +162,7 @@ Reviewed exact composites (212):
 - `RA2Virusgun_elite`: Flak_Medium + MissileAP_Medium + Sniper_LightFlatCompatibility
 - `RAAtomic`: Nuclear_Super + Tesla_Heavy + Tesla_Super
 - `Rammax_Sabot`: PreservedFlat_Chaingun + PreservedFlat_LaserWeapon + PreservedFlat_TeslaWeapon
+- `RashidanGun_upgrade`: Bullet_MediumFlatCompatibility + RashidanGroundCompatibility
 - `ReactorNuke`: 10Dam_areanuke3 + 11Dam_areanuke3 + 1Dam_impact + 4Dam_areanuke1 + 7Dam_areanuke2 + 8Dam_areanuke2 + Damage
 - `ReactorNukeWeak`: 10Dam_areanuke3 + 11Dam_areanuke3 + 1Dam_impact + 4Dam_areanuke1 + 7Dam_areanuke2 + 8Dam_areanuke2 + Damage
 - `SCUD`: Flame_Heavy + MissileHE_Heavy
@@ -162,10 +170,13 @@ Reviewed exact composites (212):
 - `SCUDThermobaric`: Demolition_Heavy + Flame_Heavy + HeavyFlameWeapon + HeavyMissile + MissileHE_Heavy
 - `SaboDeath`: 1Dam + EnemyDam
 - `SamuraiBladeCharged`: PreservedFlat_SwordWeapon + PreservedFlat_TeslaWeapon
+- `SandmarineTuskFire`: Flame_Light + MissileAP_Light + MissileHE_HeavyFlatCompatibility
+- `SandmarineTuskTwin`: Bullet_Medium + Concussion_Medium + Grenade + MissileAP_Medium + MissileHE_Heavy
 - `ShotgunAttackRobotGun`: Bullet_LightFlatCompatibility + Bullet_Medium + CannonHE_Medium
 - `ShotgunAttackRobotGun_elite`: Bullet_LightFlatCompatibility + Bullet_Medium + CannonHE_Medium
 - `SkyHawkChainGun`: Bullet_Medium + Demolition_Light
 - `SkyHawkChainGunWaveforce`: Bullet_Medium + Demolition_Light + Railgun_Heavy
+- `SkyHawkPlasmaCannon`: CannonAP_Light + Tesla_Heavy
 - `SonicZap`: ExtraSquidDamage + Magic_Heavy
 - `SpecterSniper`: Bullet_Heavy + SniperChaingun + SniperSmallArms
 - `SpecterSniperLockdown`: Bullet_Heavy + Bullet_Medium + SniperChaingun + SniperFlak + SniperSmallArms + Tesla_Super
@@ -181,9 +192,10 @@ Reviewed exact composites (212):
 - `SteelStalkerRailgun_elite`: Quantum_HeavyFlatCompatibility + Tesla_Heavy
 - `SyndicateFireballLauncherExplode`: PreservedFlat_Flame_Heavy + PreservedFlat_Flame_Light + PreservedFlat_Flame_Medium + PreservedFlat_HeavyFlameWeapon + PreservedFlat_LightFlameWeapon + PreservedFlat_MediumFlameWeapon
 - `TDIonCannonDamage`: IonCannon + Tesla_Heavy + Tesla_Super
-- `TSBombSonic`: Demolition_Heavy + Sonic_Heavy
+- `TSBombSonic`: Demolition_HeavyFlatCompatibility + Sonic_Heavy
 - `TSCABALEnlightedLaser`: CabalLaserGroundCompatibility + Laser_Heavy
 - `TSCABALObeliskLaserFire`: CabalLaserGroundCompatibility + Laser_Heavy
+- `TSChem120mmx`: CannonChem_Heavy + CannonHE_Medium
 - `TSCommandoShotgun`: CannonHE_Medium + ShotgunChaingun + ShotgunShrapnelEnemy + ShotgunSmallArms + ShotgunTankDestroyer
 - `TSCropBombChem`: Chemical_Heavy + Demolition_Heavy
 - `TSGrenadeSonic`: Concussion_Light + Sonic_Light
@@ -238,6 +250,7 @@ Reviewed exact composites (212):
 - `japan_imperialscoutsman_rifle_waveforce`: Bullet_Medium + RailgunCompatibility + RailgunShieldCompatibility + Railgun_Heavy
 - `mtank_pri`: 1Dam + MissileAP_Heavy
 - `ordos_airmine`: 1Dam + MissileAP_HeavyFlatCompatibility
+- `ordos_autogunturret`: Bullet_Light + Bullet_Medium + CannonHE_Heavy
 - `plymouthStickyDefence`: CannonHE_Heavy + CannonHE_Medium + Chemical_Light + StickyWildcardCompatibility
 - `plymouthStickyTiger`: CannonHE_Medium + Chemical_Light + StickyWildcardCompatibility
 - `plymouth_EMP`: TemperatureCompatibility + Tesla_Super
@@ -255,5 +268,5 @@ Reviewed exact composites (212):
 - `wc2deathknightDeathCoilScatter_Right`: Flame_Heavy + Tesla_Super
 - `wc2deathknightFire`: Flame_Heavy + Tesla_Super
 
-WARN raw 387/387; unreviewed 175/175
+WARN raw 339/339; unreviewed 114/114
 Lower raw ratchets only for structural consolidation; lower the unreviewed ratchet only for exact reviewed decisions.

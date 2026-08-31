@@ -1781,17 +1781,10 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "8000",
         "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "spread": "80",
+        "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1803,6 +1796,7 @@
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@PRIMARYUPGRADE",
       "versus_templates": [
+       "^Compatibility_CannonAP_LightFlat",
        "^Warhead_Bullet_Light",
        "^RA2Grenade"
       ],
@@ -1846,17 +1840,10 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "8000",
         "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "spread": "80",
+        "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1868,6 +1855,7 @@
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
+       "^Compatibility_CannonAP_LightFlat",
        "^Warhead_Bullet_Light",
        "^RA2Grenade"
       ],
@@ -5165,6 +5153,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "80000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
@@ -5177,20 +5172,6 @@
         "spread": "200",
         "tag": "Flame_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5201,6 +5182,7 @@
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
+       "^Compatibility_MissileHE_HeavyFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Missile_Light",
@@ -5221,6 +5203,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "80000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
@@ -5233,20 +5222,6 @@
         "spread": "200",
         "tag": "Flame_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -5257,6 +5232,7 @@
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@SECONDARYTITAN",
       "versus_templates": [
+       "^Compatibility_MissileHE_HeavyFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Missile_Light",
@@ -6250,6 +6226,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "80000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
@@ -6262,20 +6245,6 @@
         "spread": "200",
         "tag": "Flame_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -6286,6 +6255,7 @@
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@PRIMARYTITAN",
       "versus_templates": [
+       "^Compatibility_MissileHE_HeavyFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Missile_Light",
@@ -6306,6 +6276,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "80000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
@@ -6318,20 +6295,6 @@
         "spread": "200",
         "tag": "Flame_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -6342,6 +6305,7 @@
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
       "slot": "Armament@SECONDARYTITAN",
       "versus_templates": [
+       "^Compatibility_MissileHE_HeavyFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Missile_Light",
@@ -6612,17 +6576,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 0",
         "spread": "512",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -6640,6 +6597,7 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -6893,17 +6851,10 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "8000",
         "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "spread": "80",
+        "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],

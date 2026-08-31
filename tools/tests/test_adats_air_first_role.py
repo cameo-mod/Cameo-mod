@@ -155,9 +155,9 @@ class ADATSAirFirstRoleTests(unittest.TestCase):
                 "forgotten_m113adats"]["armaments"]
         }
         self.assertEqual(234.16, rows["Armament@PRIMARY"]["effective_dps"])
-        self.assertEqual(369.91, rows["Armament@UPGRADE"]["effective_dps"])
+        self.assertEqual(369.89, rows["Armament@UPGRADE"]["effective_dps"])
         self.assertEqual(165.39, rows["Armament@SECONDARY"]["effective_dps"])
-        self.assertEqual(248.09, rows["Armament@UPGRADEAA"]["effective_dps"])
+        self.assertEqual(248.08, rows["Armament@UPGRADEAA"]["effective_dps"])
         self.assertGreater(
             rows["Armament@UPGRADE"]["effective_dps"],
             rows["Armament@PRIMARY"]["effective_dps"],

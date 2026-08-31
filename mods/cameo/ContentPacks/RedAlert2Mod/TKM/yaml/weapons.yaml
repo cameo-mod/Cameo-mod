@@ -45,6 +45,7 @@ tkm_juggernaut:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 tkmjuggap:
+	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Grenade
 	ReloadDelay: 9
@@ -53,12 +54,12 @@ tkmjuggap:
 	Range: 4792
 	Report: mgun11.aud
 	ValidTargets: Ground, Water
-	Warhead@Demolition_Light:
+	-Warhead@Bullet_Light:
+	-Warhead@Demolition_Light:
+	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water
-		Damage: 6000
+		Damage: 8000
+		PercentageScale: 9988
 tkmbunkmg:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Bullet_Light
@@ -107,12 +108,6 @@ HueyMissiles:
 tkmtechnicalmgap:
 	Inherits: tkmjuggap
 	ValidTargets: Ground, Water
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water
-		Damage: 6000
 tkmtwinrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -530,6 +525,7 @@ tkmstrykermg:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 t30shell:
+	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -550,21 +546,19 @@ t30shell:
 		LaunchAngle: 50
 		MaximumLaunchSpeed: 125
 		Acceleration: 5
-	Warhead@Demolition_Heavy:
-		PercentageScale: 1000
-		ValidTargets: Ground, Water
-		Damage: 40000
-	Warhead@Railgun_Heavy:
-		PercentageScale: 5000
-		ValidTargets: Ground, Water
-		Spread: 512
-		Damage: 40000
 	# Warhead@FireShrapnel: FireShrapnel
 	# 	InvalidTargets: FireImmune
 	# 	Weapon: AsianFlameFragment
 	# 	Amount: 4
 	# 	AimChance: 0
 	# 	AimTargetStances: Enemy, Neutral
+	-Warhead@Demolition_Heavy:
+	-Warhead@Railgun_Heavy:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 80000
+		Spread: 512
+		PercentageScale: 3000
 HueyCryoMissiles:
 	Inherits@roleflat: ^Compatibility_Cryo_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -898,6 +892,7 @@ SandmarineTuskCryo:
 		PercentageScale: 9999
 		-PhysicalStates:
 SandmarineTuskFire:
+	Inherits@roleflat: ^Compatibility_MissileHE_HeavyFlat
 	Inherits@missileap: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Missile_Light
@@ -912,6 +907,12 @@ SandmarineTuskFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	-Warhead@MissileHE_Heavy:
+	-Warhead@Concussion_Medium:
+	Warhead@MissileHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 80000
+		PercentageScale: 9999
 ^ViperMissilesLegacy:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium

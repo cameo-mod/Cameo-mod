@@ -6324,32 +6324,43 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "32000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedCabalReaperMissilesConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedCabalReaperMissilesDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 45, 30",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedCabalReaperMissilesMissileHE_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 45, 30",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedCabalReaperMissilesMissileHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -6359,6 +6370,7 @@
       "reloaddelay": "24",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
@@ -6542,32 +6554,43 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "tag": "MissileHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "12000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
+        "damage": "600",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedCabalHeavyReaperMissilesConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedCabalHeavyReaperMissilesDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 30",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedCabalHeavyReaperMissilesMissileHE_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 30",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedCabalHeavyReaperMissilesMissileHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -6577,6 +6600,7 @@
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_MissileHE_HeavyFlat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Demolition_Light",

@@ -1250,7 +1250,6 @@ SkyHawkChainGunWaveforce:
 		Damage: 500
 
 SkyHawkCannon:
-	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
@@ -1260,15 +1259,11 @@ SkyHawkCannon:
 	Report: cannon2.aud
 	Projectile: Bullet
 		Speed: 305
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 	Warhead@CannonAP_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 SkyHawkPlasmaCannon:
 	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_MissileAP_Medium
 	Inherits@3: SkyHawkCannon
 	Projectile: Bullet
 		Speed: 610
@@ -1285,17 +1280,9 @@ SkyHawkPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@CannonAP_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
@@ -2607,13 +2594,11 @@ ArmoredCarMG_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-		Damage: 8000
+		Damage: 16000
+		FriendlyFireDamage: 75
+		FriendlyFireSpread: 75
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@ArmoredCarGroundCompatibility: AreaDamage
-		ValidTargets: Air
-		Damage: 8000
-
 ArmoredCarMGWaveforce:
 	Inherits@2: ^WaveforceBulletWarhead
 	Inherits@3: ArmoredCarMG

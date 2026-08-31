@@ -12565,7 +12565,14 @@ FakeHealtAPC:
 		ValidRelationships: Ally
 
 GLBarrelExplode:
+	Inherits@roleflat: ^Compatibility_Demolition_HeavyFlat
 	Inherits: GLTerroristExplosive
+	-Warhead@Demolition_Heavy:
+	-Warhead@Concussion_Medium:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 100000
+		PercentageScale: 9999
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c512
 		Falloff: 100, 80, 60, 30, 15
@@ -12602,7 +12609,7 @@ GLBarrelExplode2:
 		ImpactSounds: gexpdema.wav, gexpdemb.wav, gexpdemc.wav
 
 GLDemolitionExplode:
-	Inherits: RA2Terrorist
+	Inherits: ^RA2TerroristLegacy
 	ReloadDelay: 250
 	Range: 1536
 	Projectile: InstantExplode

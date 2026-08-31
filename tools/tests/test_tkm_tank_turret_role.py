@@ -62,8 +62,8 @@ class TKMTankTurretRoleTests(unittest.TestCase):
         self.assertEqual("tkmturretcannon", armament["weapon"])
         self.assertEqual(204.31, armament["sigma"])
         self.assertEqual(0.8276, armament["reliability"])
-        self.assertEqual(15941.71, armament["effective_per_shot"])
-        self.assertEqual(569.35, armament["effective_dps"])
+        self.assertEqual(15941.41, armament["effective_per_shot"])
+        self.assertEqual(569.34, armament["effective_dps"])
 
     def test_actor_prioritizes_vehicles_and_uses_anti_tank_description(self):
         local_inherits = {

@@ -50,7 +50,7 @@ class FinalBacklogRoleProfileTests(unittest.TestCase):
                               "OpenToppedCompatibility": 4000},
             "EMPGrenade": {"Tesla_Super": 32000, "TeslaSharedCompatibility": 32000,
                             "TemperatureCompatibility": 8000, "EMPCompatibility": 32000},
-            "GuardianShoot": {"Concussion_Medium": 16000, "Concussion_Light": 8000},
+            "GuardianShoot": {"Concussion_MediumFlatCompatibility": 24000},
             "MutaliskSpore": {"Chemical_MediumFlatCompatibility": 32000},
             "RashidanGun": {"Bullet_Medium": 8000},
             "TDShotgun": {"Bullet_Medium": 4000, "Concussion_Medium": 8000},
@@ -72,9 +72,8 @@ class FinalBacklogRoleProfileTests(unittest.TestCase):
 
     def test_descendant_damage_splits_remain_explicit(self):
         expected = {
-            "ArmoredCarMG_AA": {"Bullet_Medium": 8000,
-                                 "ArmoredCarGroundCompatibility": 8000},
-            "RashidanGun_upgrade": {"Bullet_Medium": 4000,
+            "ArmoredCarMG_AA": {"Bullet_Medium": 16000},
+            "RashidanGun_upgrade": {"Bullet_MediumFlatCompatibility": 12000,
                                      "RashidanGroundCompatibility": 4000},
             "MutaBounce1": {"Chemical_MediumFlatCompatibility": 24000},
             "MutaBounce2": {"Chemical_MediumFlatCompatibility": 16000},
@@ -95,7 +94,7 @@ class FinalBacklogRoleProfileTests(unittest.TestCase):
 
         armored_car_aa = self.rules.resolve_weapon("ArmoredCarMG_AA")
         self.assertEqual("Air", child(child(armored_car_aa,
-                                             "Warhead@ArmoredCarGroundCompatibility"),
+                                             "Warhead@Bullet_Medium"),
                                       "ValidTargets").value)
 
     def test_emp_temperature_and_sticky_side_effects_remain(self):

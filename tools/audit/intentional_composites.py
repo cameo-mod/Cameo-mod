@@ -51,6 +51,15 @@ DECISION_GROUPS = {
           "Tesla_Heavy", "Tesla_Super")),
     ),
     "status payload": (
+		(("Lunar_GreenGrilleArty", "Lunar_GreenGrilleArty_elite"),
+		 ("CannonHE_Heavy", "Tesla_Heavy")),
+		(("Lunar_GreenSturmArty",), ("Demolition_Heavy", "Tesla_Heavy")),
+		(("SkyHawkPlasmaCannon",), ("CannonAP_Light", "Tesla_Heavy")),
+		(("RA160mmE_rad_elite",),
+		 ("Chemical_LightFlatCompatibility", "Nuclear_Super")),
+		(("SandmarineTuskFire",),
+		 ("Flame_Light", "MissileAP_Light", "MissileHE_HeavyFlatCompatibility")),
+		(("TSChem120mmx",), ("CannonChem_Heavy", "CannonHE_Medium")),
         (("edenTiger_EMP", "edenTiger_EMP_AA", "eden_EMP", "eden_EMP_AA",
           "eden_EMP_GP", "plymouth_EMP", "plymouth_EMP_Tiger"),
          ("TemperatureCompatibility", "Tesla_Super")),
@@ -69,7 +78,7 @@ DECISION_GROUPS = {
           "SniperSmallArms", "Tesla_Super")),
         (("KodiakCannonSonic",), ("CannonHE_Heavy", "Sonic_Heavy")),
         (("TSGrenadeSonic",), ("Concussion_Light", "Sonic_Light")),
-        (("TSBombSonic",), ("Demolition_Heavy", "Sonic_Heavy")),
+        (("TSBombSonic",), ("Demolition_HeavyFlatCompatibility", "Sonic_Heavy")),
         (("TSHellfireSonic",), ("MissileAP_Heavy", "Sonic_Medium")),
         (("TSZoneHellfireSonic",), ("MissileAP_Heavy", "Sonic_Heavy")),
         (("AphidCryo_AA", "HellfireCryo"),
@@ -204,6 +213,12 @@ DECISION_GROUPS = {
           "PreservedFlat_MediumFlameWeapon")),
     ),
     "target-routed composite": (
+		(("ArmoredCarMGAAWaveforce",), ("Bullet_Medium", "Railgun_Heavy")),
+		(("Future_Cryocopter_Rocket",),
+		 ("FutureCryocopterMissileAP_Medium", "MissileAP_MediumFlatCompatibility")),
+		(("GLBarrelExplode",), ("1Dam", "Demolition_HeavyFlatCompatibility")),
+		(("RashidanGun_upgrade",),
+		 ("Bullet_MediumFlatCompatibility", "RashidanGroundCompatibility")),
         (("FutureEnforcerShotgun", "FutureEnforcerShotgunDeployed",
           "FutureEnforcerShotgunDeployed_elite", "FutureEnforcerShotgun_elite",
           "TSCommandoShotgun", "TSMutShotgun", "TSShotgun"),
@@ -292,6 +307,11 @@ DECISION_GROUPS = {
           "PreservedFlat_TeslaWeapon")),
     ),
     "maintainer-approved role blend": (
+		(("SandmarineTuskTwin",),
+		 ("Bullet_Medium", "Concussion_Medium", "Grenade",
+		  "MissileAP_Medium", "MissileHE_Heavy")),
+		(("ordos_autogunturret",),
+		 ("Bullet_Light", "Bullet_Medium", "CannonHE_Heavy")),
         (("AtreusMG",), ("Bullet_Medium", "CannonHE_Heavy")),
         (("EpigraphMG",),
          ("Bullet_MediumFlatCompatibility", "CannonHE_Heavy")),
@@ -515,6 +535,36 @@ CATEGORY_OVERLAP = {
 }
 
 ROLE_BLEND_DECISIONS = {
+    "SandmarineTuskTwin": {
+        "component_purposes": {
+            "Bullet_Medium": "close anti-infantry and light-target part of the twin salvo",
+            "Concussion_Medium": "broad conventional blast part of the twin salvo",
+            "Grenade": "separate grenade geometry in the generalist ground impact",
+            "MissileAP_Medium": "anti-vehicle part of the generalist ground impact",
+            "MissileHE_Heavy": "heavy explosive core of the twin missile salvo",
+        },
+        "rationale": (
+            "The maintainer approved Sand Marine and Big Shiee as intentional "
+            "generalist ground super-units; preserve the exact five-part ground profile."
+        ),
+        "review_reference": (
+            "Maintainer decision: preserve Sand Marine and Big Shiee generalist ground role"
+        ),
+    },
+    "ordos_autogunturret": {
+        "component_purposes": {
+            "Bullet_Light": "light-bullet contribution to anti-infantry defense",
+            "Bullet_Medium": "medium-bullet contribution against infantry and light vehicles",
+            "CannonHE_Heavy": "limited heavier impact that keeps the turret from being helpless",
+        },
+        "rationale": (
+            "The maintainer approved the Ordos autogun family as anti-infantry and "
+            "light-vehicle firepower that remains mediocre against heavier vehicles."
+        ),
+        "review_reference": (
+            "Maintainer decision: preserve the Ordos autogun role across its inherited variants"
+        ),
+    },
     "AtreusMG": {
         "component_purposes": {
             "Bullet_Medium": "retained authored bullet component of the accepted Atreus profile",
