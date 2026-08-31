@@ -47,11 +47,17 @@ def walk_closure(root, children, selected):
 
 
 def route(node):
+    def normalized(field, default=""):
+        child = node.child(field)
+        raw = default if child is None else (child.value or "")
+        return tuple(sorted(
+            token.strip() for token in str(raw).split(",") if token.strip()))
+
     return (
-        node.get("ValidTargets") or "",
-        node.get("InvalidTargets") or "",
-        node.get("ValidRelationships") or "",
-        node.get("InvalidRelationships") or "",
+        normalized("ValidTargets", "Ground, Water"),
+        normalized("InvalidTargets"),
+        normalized("ValidRelationships", "Ally, Neutral, Enemy"),
+        normalized("InvalidRelationships"),
     )
 
 
@@ -83,6 +89,8 @@ def build():
     survey = inventory(rules)
     selected = set(survey["sets"]["direct_actor_armament"])
     selected.update(survey["sets"]["indirect_weapon_graph"])
+    reviewed = set(survey["sets"]["reviewed_direct_actor_armament"])
+    reviewed.update(survey["sets"]["reviewed_indirect_weapon_graph"])
     children, parents = descendants(rules, selected)
 
     roots = sorted(
@@ -129,6 +137,7 @@ def build():
                 "name": name,
                 "mains": main_warheads(rules.resolve_weapon(name)),
                 "flags": member_flags,
+                "reviewed": name in reviewed,
                 "alternate_roots": sorted(
                     candidate for candidate in candidate_roots[name]
                     if candidate != root),
@@ -151,6 +160,8 @@ def build():
     groups.sort(key=lambda row: (-row["size"], row["root"]))
     return {
         "reachable_stacked": len(selected),
+        "reviewed_reachable": len(reviewed),
+        "unreviewed_reachable": len(selected - reviewed),
         "root_count": len(groups),
         "groups": groups,
     }
@@ -166,12 +177,15 @@ def main():
         print(json.dumps(data, indent=2, sort_keys=True))
         return 0
     print(f"reachable stacked: {data['reachable_stacked']}")
+    print(f"reviewed / unreviewed: {data['reviewed_reachable']} / "
+          f"{data['unreviewed_reachable']}")
     print(f"inheritance roots: {data['root_count']}")
     for group in data["groups"][:args.limit]:
         flags_text = ", ".join(key for key, value in group["flags"].items() if value) or "ordinary"
         print(f"\n{group['size']:>2}  {group['root']}  [{flags_text}]")
         for member in group["members"]:
-            print(f"    {member['name']}: {' + '.join(member['mains'])}")
+            marker = "reviewed" if member["reviewed"] else "unreviewed"
+            print(f"    {member['name']} [{marker}]: {' + '.join(member['mains'])}")
     return 0
 
 
