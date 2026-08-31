@@ -2648,3 +2648,28 @@ Explicit unit requests, including harvester and MCV requests, continue through
 the bypass path and do not use composition share filtering. Only boot
 verification has been performed for this system; no long-match in-game
 composition behavior is claimed.
+
+## 21. AI architecture (forward design)
+
+The forward design for bot modules, per-ContentPack AI splitting, the dynamic
+personality manager, the master AI module, and match logging lives in
+[`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md). Sections 19 and 20
+above remain the binding rules for what ships today; nothing in the
+architecture document is implemented.
+
+Two measured constraints from that document are binding on any AI yaml edit,
+because both fail in ways that reading the yaml will not reveal:
+
+* **A ContentPack can add to a bot module, never override or remove.**
+  `ContentPacks/**/yaml/ai.yaml` resolves BEFORE `cameo|ai/ai.yaml`, so any key
+  the global AI file sets wins permanently, and `-TraitName` removal syntax in
+  a pack for a trait the global file declares is a load-time `YamlException`, not
+  a no-op. Moving faction data into a pack therefore requires deleting it from
+  the global file in the same change, verified by an unchanged
+  `--resolved-rules Player` dump.
+* **`UnitCompositionsBotModule` must stay a single instance.**
+  `UnitBuilderBotModuleCA` resolves it with `TraitOrDefault`, which throws on
+  the second instance, and a disabled `ConditionalTrait` still occupies the
+  trait dictionary - so condition-gating multiple composition modules crashes
+  on the first bot tick rather than degrading. Personality-specific compositions use
+  condition-gated `ProvidesPrerequisite` tokens instead.

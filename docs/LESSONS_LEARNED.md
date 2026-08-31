@@ -75,6 +75,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 - [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
 - [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
+- [A ContentPack can only ADD to a bot module - and a partial migration fails silently (2026-08-31)](#a-contentpack-can-only-add-to-a-bot-module---and-a-partial-migration-fails-silently-2026-08-31)
 - [Content installer and music filesystem plumbing (2026-08-11)](#content-installer-and-music-filesystem-plumbing-2026-08-11)
 - [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
 - [YAML lint rules learned (2026-07-24)](#yaml-lint-rules-learned-2026-07-24)
@@ -1212,3 +1213,35 @@ First scan: **665 concrete weapons carry 815 inline effect warhead nodes** (`War
 - Add new effect families to `gen_weapon_template.py` / `weapons.yaml` instead of copy-pasting `CreateEffect` nodes.
 
 **Guard:** `tools/audit/audit_inline_effects.py` is now implemented. Current baseline: **665 concrete weapons carry 815 inline effect nodes**; after auto-detecting superweapons, **628 weapons with 771 nodes** remain as non-exempt debt. Run it after any conversion batch to watch the count fall.
+
+## A ContentPack can only ADD to a bot module - and a partial migration fails silently (2026-08-31)
+
+`ContentPacks/**/yaml/ai.yaml` resolves BEFORE the global `Rules:` block, so
+`cameo|ai/ai.yaml` is the LATER file and wins every leaf collision. Measured with
+`--resolved-rules Player`, one case at a time, against a 1375-row baseline:
+
+| what a pack does | what happens |
+|---|---|
+| adds a NEW dictionary row | unions - 1375 to 1376 rows |
+| sets a scalar the global file also sets | global wins; the pack's value leaves no trace |
+| declares a NEW trait instance (`@suffix`) | works, no warning |
+| removes a trait the global file declares | `YamlException: There are no elements with key ... to remove` |
+
+Three traps follow. First, "split the AI per ContentPack" is a SUBTRACTIVE job on
+`ai/ai.yaml`: whatever the global file still declares is permanently unownable by
+any pack. Second, a half-finished migration is SILENT - the global value simply
+keeps winning, so the yaml looks split and behaves as if it never was. Gate every
+step on a byte-identical resolved-rules dump, not on reading the file. Third,
+"add, never remove": a pack cannot opt out of a global default, and reaching for
+`-TraitName` to do it is a load-time crash. Express opt-out as a value the pack
+ADDS - a condition, a prerequisite token, or a zero-weight row the consumer
+treats as "never".
+
+The corollary for multi-instance modules: `@suffix` instances load fine, so the
+resolver will not stop you creating a second decision authority. Whether that is
+safe is a property of the CONSUMER, not of the yaml -
+`UnitBuilderBotModuleCA` resolves `UnitCompositionsBotModule` with
+`TraitOrDefault`, which throws on the second instance, and a disabled
+`ConditionalTrait` still occupies the trait dictionary - so gating five
+composition modules by condition crashes on the first bot tick instead of
+degrading.

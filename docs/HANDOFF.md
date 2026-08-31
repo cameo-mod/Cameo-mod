@@ -585,7 +585,7 @@ If you really need an engine change:
 
 ## 5b. The shape of the documentation set
 
-**43 live documents.** Everything else under `docs/` is generated (regenerate it) or archived in
+**44 live documents.** Everything else under `docs/` is generated (regenerate it) or archived in
 `history/` (what happened, never what is true now). [`README.md`](README.md) lists the whole live
 set in one table — if a document is not in that table, it is not live.
 

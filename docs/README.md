@@ -61,13 +61,14 @@ Crashes and player-visible regressions always jump the queue.
 | [`design/SPREAD_FALLOFF_PLAN.md`](design/SPREAD_FALLOFF_PLAN.md) | per-type spread and damage-falloff profiles |
 | [`design/INVENTED_WARHEAD_FAMILIES.md`](design/INVENTED_WARHEAD_FAMILIES.md) | *(generated)* the families with no cross-mod equivalent |
 
-### Systems — 3 documents
+### Systems - 4 documents
 
 | document | owns |
 |---|---|
 | [`design/PHYSICAL_STATE_SYSTEM.md`](design/PHYSICAL_STATE_SYSTEM.md) | the status-meter layer: heat, cryo, corrosion, EMP, sonic |
 | [`design/EMP_INTEGRITY_SYSTEM.md`](design/EMP_INTEGRITY_SYSTEM.md) | EMP / Integrity auto-scaling |
 | [`design/UPSTREAM_MODS.md`](design/UPSTREAM_MODS.md) | absorbing the other OpenRA mods — CA, Crystallized Nexus, Romanov's Vengeance, Shattered Paradise: the engine lineage, why the engine must NOT move to `ca-engine`, and the phased adoption plan |
+| [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) | bot modules, per-ContentPack AI splitting, the dynamic personality manager, the master AI module, and the match-logging / offline-learning loop |
 
 ### Factions and content — 5 documents
 
