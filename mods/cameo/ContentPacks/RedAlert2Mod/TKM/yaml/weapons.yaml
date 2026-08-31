@@ -1146,9 +1146,10 @@ tkm_trooper_gp25:
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
 	Warhead@Demolition_Light:
-		Damage: 6000
-	Warhead@Flame_Light:
-		Damage: 6000
+		Damage: 12000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
+	-Warhead@Flame_Light:
 tkmstrykerfirerockets:
 	Inherits: ^Warhead_MissileAP_Medium
 	Inherits@2: ^Warhead_Flame_Medium

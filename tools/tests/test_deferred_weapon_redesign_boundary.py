@@ -14,17 +14,7 @@ from survey_weapon_structure import inventory
 
 
 RECOMMENDED_DESIGN_BATCH = {
-    "ASDFKamikazeExplosion",
-    "TSBusMortar",
-    "ConscriptMolotov",
-    "tkm_trooper_gp25",
     "AlliedTankDestroyerCannon",
-    "NaxiAntiTankCannon",
-    "NaxiAntiTankCannon_elite",
-    "NaxiHetzerDestroyer",
-    "NaxiHetzerDestroyer_elite",
-    "AsianHowitzerCannon",
-    "AsianHowitzerCannon_elite",
 }
 
 PRESERVE_HYBRID = {
@@ -54,7 +44,6 @@ ISOLATE_FIRST = {
 DEFERRED_COHORT = RECOMMENDED_DESIGN_BATCH | PRESERVE_HYBRID | ISOLATE_FIRST
 
 BLAST_PROFILE = {
-    "ASDFKamikazeExplosion",
     "AsianHowitzerSplash",
     "RA2Terrorist",
     "SCScourgeDroneExplosion",
@@ -65,25 +54,18 @@ BLAST_PROFILE = {
     "TSAux155mm",
     "TSBoatcannon",
     "TSBomb",
-    "TSBusMortar",
     "TSInfantryMortar",
 }
 
-STATE_PROFILE = {"ConscriptMolotov", "GrenadeRA", "tkm_trooper_gp25"}
+STATE_PROFILE = {"GrenadeRA"}
 
 AP_HE_PROFILE = {
     "AlliedTankDestroyerCannon",
-    "NaxiAntiTankCannon",
-    "NaxiAntiTankCannon_elite",
-    "NaxiHetzerDestroyer",
-    "NaxiHetzerDestroyer_elite",
     "SheridanCannon",
     "tkmturretcannon",
 }
 
 HE_TIER_PROFILE = {
-    "AsianHowitzerCannon",
-    "AsianHowitzerCannon_elite",
     "HammerTankCannon",
     "KotinCannon",
     "TigerCannon",
@@ -91,7 +73,6 @@ HE_TIER_PROFILE = {
 }
 
 INDIRECT_ONLY = {
-    "ASDFKamikazeExplosion",
     "AsianHowitzerSplash",
     "RA2Terrorist",
     "SCScourgeDroneExplosion",
@@ -102,7 +83,6 @@ EXPECTED_MAIN_ORDER = {}
 EXPECTED_MAIN_ORDER.update({
     name: ("Demolition_Heavy", "Concussion_Medium")
     for name in {
-        "ASDFKamikazeExplosion",
         "RA2Terrorist",
         "SCScourgeDroneExplosion",
         "SCScourgeExplosion",
@@ -128,17 +108,11 @@ EXPECTED_MAIN_ORDER.update({
     for name in {"SheridanCannon", "tkmturretcannon"}
 })
 EXPECTED_MAIN_ORDER.update({
-    name: ("CannonHE_Medium", "CannonHE_Heavy")
-    for name in {"AsianHowitzerCannon", "AsianHowitzerCannon_elite"}
-})
-EXPECTED_MAIN_ORDER.update({
     name: ("CannonHE_Heavy", "CannonHE_Medium")
-    for name in HE_TIER_PROFILE - {"AsianHowitzerCannon", "AsianHowitzerCannon_elite"}
+    for name in HE_TIER_PROFILE
 })
 
 EXPECTED_DESCENDANT_CLOSURE = {
-    "AsianHowitzerCannon": {"AsianHowitzerCannon_elite"},
-    "ConscriptMolotov": {"ConscriptMolotovExplode"},
     "GrenadeRA": {
         "GrenadeRAExplode",
         "GrenadeThermobaric",
@@ -146,14 +120,6 @@ EXPECTED_DESCENDANT_CLOSURE = {
     },
     "HammerTankCannon": {"HammerTankCannonThermobaric"},
     "KotinCannon": {"KotinCannonThermobaric"},
-    "NaxiAntiTankCannon": {
-        "NaxiAntiTankCannonCorrosion",
-        "NaxiAntiTankCannon_elite",
-    },
-    "NaxiHetzerDestroyer": {
-        "NaxiHetzerDestroyerCorrosion",
-        "NaxiHetzerDestroyer_elite",
-    },
     "RA2Terrorist": {
         "GLBarrelExplode",
         "GLBombTruckToxExplosive",
@@ -169,7 +135,7 @@ EXPECTED_DESCENDANT_CLOSURE = {
 }
 
 EXPECTED_MAIN_PROFILE_SHA256 = (
-    "45780c46881cd38380b7ba1b7beb07e9777e52557e30144754023fb2e8c3146c"
+    "50e71d6c86a910102b880d179c4a1286ebd5ad3377dfb034de8ce66b4cc2ac94"
 )
 
 
@@ -219,7 +185,7 @@ class DeferredWeaponRedesignBoundaryTests(unittest.TestCase):
         self.assertFalse(RECOMMENDED_DESIGN_BATCH & PRESERVE_HYBRID)
         self.assertFalse(RECOMMENDED_DESIGN_BATCH & ISOLATE_FIRST)
         self.assertFalse(PRESERVE_HYBRID & ISOLATE_FIRST)
-        self.assertEqual(29, len(DEFERRED_COHORT))
+        self.assertEqual(19, len(DEFERRED_COHORT))
 
     def test_current_composite_profiles_remain_unmodified(self):
         self.assertEqual(DEFERRED_COHORT, set(EXPECTED_MAIN_ORDER))

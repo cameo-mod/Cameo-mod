@@ -645,10 +645,9 @@ NaxiHetzerDestroyer:
 	Range: 7132
 	Projectile: Bullet
 		Speed: 713
-	Warhead@CannonHE_Medium:
-		Damage: 20000
 	Warhead@CannonAP_Light:
-		Damage: 20000
+		Damage: 40000
+	-Warhead@CannonHE_Medium:
 NaxiHetzerDestroyer_elite:
 	Inherits: NaxiHetzerDestroyer
 	Inherits@Elite: ^RA2EliteEffects
@@ -698,10 +697,9 @@ NaxiAntiTankCannon:
 		ContrailWidth: 333
 		ContrailLength: 33
 		Speed: 3333
-	Warhead@CannonHE_Medium:
-		Damage: 14000
 	Warhead@CannonAP_Light:
-		Damage: 14000
+		Damage: 28000
+	-Warhead@CannonHE_Medium:
 NaxiAntiTankCannon_elite:
 	Inherits: NaxiAntiTankCannon
 	Range: 8361

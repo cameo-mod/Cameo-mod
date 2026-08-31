@@ -155,10 +155,10 @@ ConscriptMolotov:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Demolition_Light:
-		Damage: 8000
 	Warhead@Flame_Light:
-		Damage: 8000
+		Damage: 16000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 40
@@ -169,6 +169,7 @@ ConscriptMolotov:
 		Palette: ra_temperat
 		Weapon: CHFlame
 		InvalidTargets: Water
+	-Warhead@Demolition_Light:
 
 ConscriptMolotovExplode:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat

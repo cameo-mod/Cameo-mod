@@ -1352,10 +1352,8 @@ AsianHowitzerCannon:
 		ContrailEndWidth: 20
 		TrailInterval: 1
 		Inaccuracy: 320
-	Warhead@CannonHE_Medium:
-		Damage: 20000
 	Warhead@CannonHE_Heavy:
-		Damage: 20000
+		Damage: 40000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 125
@@ -1389,6 +1387,7 @@ AsianHowitzerCannon:
 		Amount: 2
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
+	-Warhead@CannonHE_Medium:
 
 AsianHowitzerCannon_elite:
 	Inherits: AsianHowitzerCannon
@@ -2642,13 +2641,12 @@ ASDFKamikazeExplosion:
 	Inherits@3: ^Projectile_Grenade_Light
 	Report: M203.aud
 	Warhead@Demolition_Heavy:
-		Damage: 10000
-	Warhead@Concussion_Medium:
-		Damage: 10000
+		Damage: 20000
 	Warhead@Effect: CreateEffect
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpcraa.wav
+	-Warhead@Concussion_Medium:
 
 AsianSniper:
 	Inherits: ^Warhead_Bullet_Heavy

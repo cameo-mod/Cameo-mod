@@ -418,9 +418,8 @@ TSBusMortar:
 		ContrailEndColor: 22222222
 		TrailImage: black_smokey
 	Warhead@Concussion_Medium:
-		Damage: 32000
-	Warhead@Demolition_Heavy:
-		Damage: 32000
+		Damage: 64000
+	-Warhead@Demolition_Heavy:
 TSBusMortarChem:
 	Inherits@collapsewh: ^Warhead_Chemical_Heavy
 	Inherits: ^ShrapnelWeapon

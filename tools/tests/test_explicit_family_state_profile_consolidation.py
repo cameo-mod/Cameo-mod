@@ -97,7 +97,7 @@ class ExplicitFamilyStateProfileTests(unittest.TestCase):
 
     def test_unsafe_routes_and_user_deferred_weapons_remain_stacked(self):
         deferred_stacks = {
-            "ConscriptMolotov", "GrenadeRA",
+            "GrenadeRA",
             "PositronBounce1", "PositronBounce2",
         }
         for name in deferred_stacks:
@@ -119,8 +119,8 @@ class ExplicitFamilyStateProfileTests(unittest.TestCase):
             self.assertIn("^Warhead_CannonHE_Medium", child_parents, name)
 
     def test_ratchets_match_the_live_reduction(self):
-        self.assertEqual(643, SPLIT_BASELINE)
-        self.assertEqual(350, BROADCAST_BASELINE)
+        self.assertEqual(631, SPLIT_BASELINE)
+        self.assertEqual(338, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":

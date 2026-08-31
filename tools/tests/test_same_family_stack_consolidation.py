@@ -113,7 +113,7 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
             "RA220mmrapid", "CabalCyborgChaingun", "TSDevoutChainguns",
             "CommandoRocketLauncher", "RocketsRA", "SheridanMissiles",
             "CabalRocketCyborgRockets", "CabalRocketCyborgRocketsUpgraded",
-            "TSBikeMissile", "AsianHowitzerCannon", "TigerCannon",
+            "TSBikeMissile", "TigerCannon",
             "Type97Cannon", "TSZoneHellfireSonic",
         }
         selected = set(bullets.ROOT_CLOSURES) | set(adjacent.SPECS)
