@@ -40,9 +40,9 @@ it could possibly be true.
 |---|---|
 | repo | `github.com/cameo-mod/Cameo-mod` — ⛔ `Zeruel87/Cameo-mod` is the **abandoned fork**, forbidden by `CLAUDE.md`, and two external reviewers cited it this week. Commits quoted from that URL do not exist. |
 | branch | `claude/docs-audit-reorganize-xgzwhr` |
-| HEAD | `e5a390da6` |
+| HEAD | `e5a390da6` + the §6.1 extractor fix |
 | behind master | 0 |
-| tests | **734 pass**, 1 pre-existing failure (`test_ledger_split` — `reference_distributions.json` has no raw counterpart; predates this work) |
+| tests | **754 pass**, 1 pre-existing failure (`test_ledger_split` — `reference_distributions.json` has no raw counterpart; predates this work) |
 | `audit_doc_health` | **PASS** |
 | ledger drift | **0** |
 | boot gate owed by these commits | **NO** — docs + tools only, no yaml, no engine content, no balance number |
@@ -157,6 +157,14 @@ distribution.** The 80/20 split was not an arbitrary quota; it is the ±1.28σ e
 the four rings land on it. The skirts come out **9.9% / 8.7%** — an almost perfect 10/10
 split of the remaining 20% — and only **1.4%** falls genuinely outside the hard band. That
 1.4% is the true exception population: epics, transforms, data bugs.
+
+⚠ **BE PRECISE ABOUT WHAT IS DERIVED HERE.** The mathematics says: *given these bounds and
+a log-normal model, an 80% central interval is ±1.28155σ.* It does **not** prove Cameo must
+hold 80% of its units there — that is a design choice, and the evidence for it is empirical
+(the below-anchor census reads 79/21 against live anchors, §8.1a). Both halves matter: the
+σ-arithmetic is exact, the 80% is a **ruled target with supporting measurement**. Anyone
+quoting this section as "the roster is mathematically required to be 80/20" is overclaiming,
+and that distinction is the kind this project has been repeatedly rescued by.
 
 ⚠ **Two consequences that are easy to get backwards.**
 
@@ -347,7 +355,51 @@ bash tools/audit/run_all.sh                                    # drift must be 0
 
 ## §6 — The no-boot queue (any agent, any machine, in this order)
 
-### §6.1 — ⛔ P0: the negative-DPS extractor bug
+### §6.1 — ✅ DONE 2026-08-31: the negative-DPS extractor bug
+
+**Landed. Verified: 0 of 757 priced actors now carry a negative DPS.** Kept here because
+the *shape* of the fix is the reusable lesson, and because what it did **not** fix matters
+as much as what it did.
+
+⭐ **The fix classifies by the SIGN of `Damage`, not by the tag name** — a negative `Damage`
+heals, and that is the engine's convention, not a Cameo one. A tag whitelist
+(`HealingWeapon`, `RepairWeapon`, …) is the obvious fix and the wrong one, for exactly the
+reason `formula.py` already documents about `smallarms`: a literal is something a migration
+renames out from under you. Measured: **7 of 160 negative warheads carry a generic tag** —
+`1Dam` on five WC2 paladin/priest heals, `Percentage` on two Tesla charges — so a name
+filter would have priced five healers as combat units.
+
+⭐ **And the ARMAMENT is the right grain**: 0 of 2,561 armaments mix positive and negative
+warheads, so an armament is unambiguously one channel or the other. `terran_medic` keeps its
+real 116.7 offensive DPS *and* loses its heal — which a unit-level filter would have got
+wrong.
+
+`formula.spread_damage_sum` is now the OFFENSIVE channel (never negative);
+`formula.support_throughput_sum` is the SUPPORT channel (never negative); together they
+partition the main warheads. `distribute_damage` **raises** on a support armament — without
+that guard, "read the total, redistribute it" would overwrite `Damage: -2000` with 0 and
+silently delete the heal. Pinned by `tools/tests/test_support_channel.py` (20 tests).
+
+**What it measurably fixed:**
+
+| | before | after |
+|---|--:|--:|
+| actors with negative DPS | 8 | **0** |
+| `support` trimmed spread | 10.1× (⛔ outside the hard band) | **4.5× (inside)** |
+| `line_breaker` raw spread | 24.7× | **16.4×** |
+| classes fitting the hard band | 14 of 17 | **15 of 17** |
+
+⚠ **What it did NOT fix, and this is the useful part.** The three non-bell classes are
+*unchanged* — `artillery` +2.43 skew, `scout_vehicle` +0.62, `missile_vehicle` +0.87 — and
+σ_log barely moved (1.013 → 1.017). That is the correct outcome, not a disappointment: those
+three are skewed by the **other two** bugs (§6.2's athenacannon and IFV family, and the
+spec/actor mismatch), exactly as diagnosed. `scout_vehicle` even got slightly *worse*
+(11.1× → 11.7×) because a healer was propping up its low end. **A fix that moves only the
+thing it was aimed at is a fix that was aimed correctly.**
+
+<!-- original brief retained below for anyone auditing the diagnosis -->
+
+### §6.1a — the original brief (kept as provenance)
 
 `formula.spread_damage_sum` sums **heal/repair armaments as damage**. Eight actors price as
 if they shoot backwards:

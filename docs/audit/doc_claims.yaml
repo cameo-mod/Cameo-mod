@@ -1102,14 +1102,17 @@ claims:
       print(len(vals))
 
   - id: roster_sigma_log
-    value: 1.013
+    value: 1.017
     tolerance: 0.02
     what: >
       Pooled standard deviation of LOG PRICE across every class with >=8 priced non-epic
       members, measured against each class's LIVE anchor actor. ⭐ THE ONE NUMBER THAT SIZES
       THE WHOLE REPRICING JOB. BALANCE_PIPELINE 8.1b: a log-normal holding 80% inside the
       [1.00, 2.50] target band has sigma(log price) = 0.3575, so the roster is currently
-      ~2.8x too dispersed. Every repricing pass must move this DOWN toward 0.357; it is the
+      ~2.8x too dispersed. ⚠ 1.013 -> 1.017 on 2026-08-31 when the negative-DPS extractor
+      fix removed 8 healers from the offensive channel -- the metric is SENSITIVE to
+      population changes, so always re-read it after an extractor or classification change
+      rather than comparing across them. Every repricing pass must move this DOWN toward 0.357; it is the
       cheapest progress metric the programme has and the only one that collapses "how much
       work is left" into a scalar. ⚠ Measured on the LIVE anchor, never the ruled spec --
       the spec column is inflated by the restat debt (54% vs 21% below-anchor). Re-read with

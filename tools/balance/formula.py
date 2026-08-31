@@ -543,15 +543,72 @@ def is_smallarms_tag(tag) -> bool:
     return any(family.startswith(f) for f in SMALLARMS_FAMILIES)
 
 
+# ---------------------------------------------------------------------------
+# ⛔ THE TWO CHANNELS: OFFENSIVE DAMAGE vs SUPPORT THROUGHPUT
+# ---------------------------------------------------------------------------
+# A NEGATIVE `Damage` HEALS. That is the engine's convention, not a Cameo one,
+# and `spread_damage_sum` used to add it straight into the offensive total — so
+# eight actors priced as if they SHOT BACKWARDS:
+#
+#     cabal_engineer -650   tkm_battlebus -600   futuretech_repairdroid -508
+#     tkm_engineer   -397   ra1_allies_mechanic -357   terran_medic -183
+#     ra1_allies_medic -40  ts_gdi_medic -40
+#
+# `support` and `line_breaker` could not be priced at all, and the two classes
+# showed up as the only non-bell-shaped ones in `band_granularity.py`.
+#
+# ⛔ CLASSIFY BY THE SIGN, NEVER BY THE TAG NAME. The obvious fix is a tag
+# whitelist — `HealingWeapon`, `RepairWeapon`, `ExtraHealing`, … — and it is the
+# WRONG fix, for exactly the reason spelled out 20 lines above about
+# `smallarms`: a literal is something a migration renames out from under you.
+# Measured on this tree: of 160 negative warheads, **7 carry a generic tag**
+# (`1Dam` on the five WC2 paladin/priest heals, `Percentage` on two Tesla
+# charges). A name filter would have priced five healers as combat units. The
+# sign cannot be renamed.
+#
+# ⭐ AND THE ARMAMENT IS THE RIGHT GRAIN. Measured: **0 of 2,561 armaments mix
+# positive and negative warheads** — 58 armaments across 37 actors are purely
+# supportive. So an armament is unambiguously one channel or the other, and a
+# unit that both heals and shoots does it with two separate armaments.
+
+def armament_channel(warheads, template_names=None) -> str:
+    """``"offensive"`` | ``"support"`` | ``"empty"`` for one armament's warheads.
+
+    Decided on the SIGN of the main damage warheads, at the ARMAMENT grain —
+    see the block above for why both of those choices are load-bearing.
+    """
+    vals = []
+    for w in main_spread_warheads(warheads, template_names):
+        try:
+            vals.append(float(w.get("damage")))
+        except (TypeError, ValueError):
+            continue
+    if any(v > 0 for v in vals):
+        # A mixed armament does not exist in this tree and would be a design
+        # question, not a rounding one. Call it offensive and let the sums below
+        # keep the channels clean rather than inventing a third category.
+        return "offensive"
+    if any(v < 0 for v in vals):
+        return "support"
+    return "empty"
+
+
 def spread_damage_sum(warheads, smallarms_only: bool = False,
                       template_names=None) -> float:
-    """Effective per-shot damage = SUM of the MAIN damage warheads
+    """OFFENSIVE effective per-shot damage = SUM of the MAIN damage warheads
     (maintainer law 2026-07-22; main = template-named SpreadDamage, see
     ``main_spread_warheads``). A multi-warhead weapon deals the ADDED damage
     of all its warheads to a target, so the SUM — never the max — is the price
     driver: pricing on the max would let a 10-warhead weapon deal 10x the
     damage for the price of one. `*ExtraDamage` / `*FriendlyFire` /
     `*Percentage` twins are excluded.
+
+    ⛔ **HEALING IS EXCLUDED, AND THE RESULT IS NEVER NEGATIVE.** A negative
+    `Damage` heals (see the block above); it belongs to
+    ``support_throughput_sum``, not here. Before 2026-08-31 it was summed in
+    and eight support actors priced as if they shot backwards. A pure healer
+    now reads **0**, which is the truth about its OFFENSIVE output — ask
+    ``support_throughput_sum`` for what it actually does.
 
     This is the ONE canonical warhead-damage reducer; every pricing tool MUST
     call it so the MAX convention can never creep back in. ``smallarms_only``
@@ -562,9 +619,30 @@ def spread_damage_sum(warheads, smallarms_only: bool = False,
         if smallarms_only and not is_smallarms_tag(w.get("tag")):
             continue
         try:
-            total += float(w.get("damage"))
+            d = float(w.get("damage"))
         except (TypeError, ValueError):
             continue
+        if d > 0:            # ⛔ healing is the other channel — never sum it here
+            total += d
+    return total
+
+
+def support_throughput_sum(warheads, template_names=None) -> float:
+    """SUPPORT throughput per shot = the MAGNITUDE of the healing/repair main
+    warheads. **Non-negative by construction**, and 0 for a combat weapon.
+
+    The mirror of ``spread_damage_sum``: together the two partition the main
+    warheads by sign, so no warhead is counted twice and none is dropped. A
+    class that prices non-combat members must declare which channel it consumes
+    — `support` reads THIS one, every combat class reads the other."""
+    total = 0.0
+    for w in main_spread_warheads(warheads, template_names):
+        try:
+            d = float(w.get("damage"))
+        except (TypeError, ValueError):
+            continue
+        if d < 0:
+            total += -d
     return total
 
 
@@ -827,6 +905,20 @@ def distribute_damage(new_total, warheads, template_names=None) -> dict[str, int
     for every warhead the law assigns a value to.
     """
     warheads = warheads or []
+
+    # ⛔ NEVER WRITE A DAMAGE TOTAL ONTO A SUPPORT ARMAMENT. `spread_damage_sum`
+    # reads 0 for a healer (healing is the other channel), so a caller that
+    # round-trips "read the total, redistribute it" would silently overwrite
+    # `Damage: -2000` with 0 and DELETE the heal. That is a data-loss bug one
+    # careless `apply_balance` away, and it is invisible in a diff of numbers.
+    # Refuse loudly instead: a support armament is not priced through the damage
+    # grid at all, so reaching here means the caller failed to filter.
+    if armament_channel(warheads, template_names) == "support":
+        raise ValueError(
+            "distribute_damage called on a SUPPORT armament (healing/repair). "
+            "Its output is support_throughput_sum, not spread_damage_sum; "
+            "filter with armament_channel() before pricing.")
+
     mains = main_spread_warheads(warheads, template_names)
     if not mains:
         return {}

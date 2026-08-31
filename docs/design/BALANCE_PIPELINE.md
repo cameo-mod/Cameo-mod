@@ -576,6 +576,14 @@ the four ruled rings land on it. The skirts split **9.9% / 8.7%** — an almost 
 of the remaining 20% — and only **1.4%** falls genuinely outside the hard band. That 1.4% is
 the true exception population the registry is for: epics, transforms, data bugs.
 
+⚠ **BE PRECISE ABOUT WHAT IS DERIVED HERE.** The mathematics says: *given these bounds and
+a log-normal model, an 80% central interval is ±1.28155σ.* It does **not** prove Cameo must
+hold 80% of its units there — that is a design choice, and the evidence for it is empirical
+(the below-anchor census reads 79/21 against live anchors, §8.1a). Both halves matter: the
+σ-arithmetic is exact, the 80% is a **ruled target with supporting measurement**. Anyone
+quoting this section as "the roster is mathematically required to be 80/20" is overclaiming,
+and that distinction is the kind this project has been repeatedly rescued by.
+
 ⚠ **Two things that are easy to get backwards.**
 
 1. **The class's geometric centre is 1.581× `cost0`, not 1.00.** The anchor sits at the
