@@ -2055,6 +2055,7 @@ DepthChargeCryo:
 		Spread: 300
 
 8Inch:
+	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -2079,6 +2080,12 @@ DepthChargeCryo:
 		Damage: 40000
 	Warhead@Demolition_Light:
 		Damage: 40000
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 80000
+		PercentageScale: 9999
 8InchCryo:
 	Inherits@wh: ^Warhead_CryoBlast_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light

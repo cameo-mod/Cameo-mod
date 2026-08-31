@@ -1,15 +1,15 @@
 {
   "counts": {
     "concrete_weapons": 2346,
-    "excess_main_warhead_instances_all_concrete": 712,
-    "excess_main_warhead_instances_transitive_weapon_graph": 564,
-    "main_warhead_instances_all_concrete": 2741,
-    "main_warhead_instances_transitive_weapon_graph": 2310,
-    "stacked_main_all_concrete": 401,
-    "stacked_main_direct_actor_armament": 243,
+    "excess_main_warhead_instances_all_concrete": 707,
+    "excess_main_warhead_instances_transitive_weapon_graph": 561,
+    "main_warhead_instances_all_concrete": 2736,
+    "main_warhead_instances_transitive_weapon_graph": 2307,
+    "stacked_main_all_concrete": 397,
+    "stacked_main_direct_actor_armament": 240,
     "stacked_main_indirect_weapon_graph": 56,
-    "stacked_main_transitive_weapon_graph": 299,
-    "stacked_main_unreached": 102
+    "stacked_main_transitive_weapon_graph": 296,
+    "stacked_main_unreached": 101
   },
   "predicate": "positive Damage on AreaDamage, SpreadDamage, HealthPercentageDamage, or TargetDamage; excludes designed companions and friendly-fire twins",
   "reference_fields": [
@@ -35,7 +35,6 @@
   "sets": {
     "direct_actor_armament": [
       "110mm_Gun",
-      "8Inch",
       "AAGunBoatFlak",
       "AAGunBoatFlak_elite",
       "AlliedTankDestroyerCannon",
@@ -200,8 +199,6 @@
       "TSChem120mmx",
       "TSCommandoShotgun",
       "TSCropBombChem",
-      "TSGrenade",
-      "TSGrenadeG",
       "TSGrenadeSonic",
       "TSHellfireSonic",
       "TSLaser90mm",
@@ -400,7 +397,6 @@
       "Rocketeer_o",
       "Rocketeer_t",
       "SCUDIrak",
-      "Short8Inch",
       "Support_EMP_Bomb",
       "TDShotgun",
       "TS155mm_bluenuke",

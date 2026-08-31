@@ -445,6 +445,7 @@ TS155mm_bluenuke:
 		Explosions: magicnuke_med
 
 TSGrenade:
+	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -475,6 +476,12 @@ TSGrenade:
 		Damage: 6000
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
+	-Warhead@CannonHE_Medium:
+	-Warhead@Concussion_Medium:
+	Warhead@Concussion_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 24000
+		PercentageScale: 9996
 
 TSGrenadeSonic:
 	Inherits@wh: ^Warhead_Concussion_Light

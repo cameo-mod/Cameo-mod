@@ -135,12 +135,12 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
 
     def test_backlog_and_audit_ratchets_match_the_checkpoint(self):
         counts = self.inventory["counts"]
-        self.assertEqual(299, counts["stacked_main_transitive_weapon_graph"])
-        self.assertEqual(243, counts["stacked_main_direct_actor_armament"])
+        self.assertEqual(296, counts["stacked_main_transitive_weapon_graph"])
+        self.assertEqual(240, counts["stacked_main_direct_actor_armament"])
         self.assertEqual(56, counts["stacked_main_indirect_weapon_graph"])
-        self.assertEqual(401, counts["stacked_main_all_concrete"])
-        self.assertEqual(400, SPLIT_BASELINE)
-        self.assertEqual(142, BROADCAST_BASELINE)
+        self.assertEqual(397, counts["stacked_main_all_concrete"])
+        self.assertEqual(396, SPLIT_BASELINE)
+        self.assertEqual(138, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":
