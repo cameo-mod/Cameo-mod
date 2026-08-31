@@ -10,6 +10,7 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 | know the balance program's state and who owns what | [`design/BALANCE_PROGRAM_PLAN.md`](design/BALANCE_PROGRAM_PLAN.md) §0, §0a, §1, §2 |
 | know a binding rule before editing yaml | [`DESIGN.md`](DESIGN.md) |
 | avoid a trap someone already hit | [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md) |
+| know how the bots are meant to work, and what is only designed | [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) |
 | know the current bug counts | [`audit/SUMMARY.md`](audit/SUMMARY.md) |
 | find which document owns a topic | [`README.md`](README.md) |
 

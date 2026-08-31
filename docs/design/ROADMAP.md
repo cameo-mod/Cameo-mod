@@ -59,7 +59,8 @@ verifiable.
   and filter only cloak, never shroud, so they know the whole map from tick zero.
   This is the only real cheat left (difficulty is `BotLimits` throttling, not
   resources), and fixing it will make bots temporarily weaker and requires a
-  scouting module. Maintainer's call - see AI_ARCHITECTURE.md 9.1.
+  scouting module. Maintainer's call - see AI_ARCHITECTURE.md section 9,
+  decision 1.
 
 **Rule zero: crashes and player-visible regressions ALWAYS jump the queue.** Ordering inside a
 section: quickest wins first, then by severity. Effort: **S** < 1 h · **M** = one session ·

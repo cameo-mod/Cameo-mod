@@ -61,7 +61,7 @@ Crashes and player-visible regressions always jump the queue.
 | [`design/SPREAD_FALLOFF_PLAN.md`](design/SPREAD_FALLOFF_PLAN.md) | per-type spread and damage-falloff profiles |
 | [`design/INVENTED_WARHEAD_FAMILIES.md`](design/INVENTED_WARHEAD_FAMILIES.md) | *(generated)* the families with no cross-mod equivalent |
 
-### Systems - 4 documents
+### Systems — 4 documents
 
 | document | owns |
 |---|---|
