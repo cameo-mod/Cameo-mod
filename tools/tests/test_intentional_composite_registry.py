@@ -31,10 +31,10 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
 
     def test_exact_reviewed_name_set_and_schema_are_pinned(self):
         names = sorted(self.manifest["entries"])
-        self.assertEqual(225, len(names))
+        self.assertEqual(226, len(names))
         self.assertEqual(set(reviewed.curated_decisions()), set(names))
         self.assertEqual(
-            "979d57487dc544efc2ce49b46feaf57476cc39f0426fefc5830af1276c165f77",
+            "75975da18271c1882a515d4512f05ec3c2b97c547f81fd8a9b1d18f52f421ac8",
             hashlib.sha256(("\n".join(names) + "\n").encode()).hexdigest(),
         )
         self.assertEqual([], reviewed.validate_manifest(
@@ -50,7 +50,7 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
             if entry["category"] == "maintainer-approved role blend"
         }
         self.assertEqual({
-            "AtreusMG", "DuelistTankCannon", "EpigraphMG", "GoliathMG",
+            "AtreusMG", "DuelistTankCannon", "EpigraphMG", "GoliathMG", "HydraSpit",
             "GoliathMk2MG", "HMG_Duelist_upgrade", "autogun_tank",
             "autogun_tank_small", "SandmarineTuskTwin", "ordos_autogunturret",
         }, names)
@@ -60,6 +60,7 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
             "EpigraphMG": {"protoss_epigraph"},
             "GoliathMG": {"terran_goliath"},
             "GoliathMk2MG": {"terran_goliathmk2"},
+            "HydraSpit": {"zerg_hydralisk"},
             "HMG_Duelist_upgrade": {"duelist_tank.ixian"},
             "autogun_tank": {"ordos_heavyautoguntank"},
             "autogun_tank_small": {"ordos_combatautoguntank"},
@@ -264,7 +265,7 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
         report, status = split.rendered(self.rules)
         self.assertEqual(0, status)
         self.assertEqual(report, split.REPORT.read_text(encoding="utf-8"))
-        self.assertIn("339 raw stacked weapons", report)
+        self.assertIn("340 raw stacked weapons", report)
         self.assertIn("114 remain unreviewed", report)
         self.assertEqual(
             serialized(self.current),

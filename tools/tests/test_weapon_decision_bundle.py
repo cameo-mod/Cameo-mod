@@ -37,7 +37,7 @@ class WeaponDecisionBundleTests(unittest.TestCase):
         self.assertNotIn("SyndicateFireballLauncherExplode", families)
         self.assertNotIn("SteelVulcan", families)
         self.assertNotIn("RA160mmE_rad_elite", families)
-        self.assertEqual(225, self.data["reviewed_reachable"])
+        self.assertEqual(226, self.data["reviewed_reachable"])
 
     def test_buckets_use_engine_defaults_and_mechanical_labels(self):
         counts = {

@@ -58,7 +58,7 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
         }
         raw = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
         self.assertEqual(
-            "c764a159376135226f9302eeee4b9ec98aa65466a2cfbd4a359481937874af03",
+            "e65496668e328c845f3e86bdbba8360d10a92ffaf678679b9706c1ee119b322b",
             hashlib.sha256(raw).hexdigest())
 
     def test_only_intentional_flat_total_and_target_route_changed(self):
@@ -86,8 +86,8 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
 
     def test_reachable_backlog_is_reduced_to_the_review_boundary(self):
         counts = self.inventory["counts"]
-        self.assertEqual(239, counts["stacked_main_transitive_weapon_graph"])
-        self.assertEqual(225, counts["reviewed_stacked_main_transitive_weapon_graph"])
+        self.assertEqual(240, counts["stacked_main_transitive_weapon_graph"])
+        self.assertEqual(226, counts["reviewed_stacked_main_transitive_weapon_graph"])
         self.assertEqual(14, counts["unreviewed_stacked_main_transitive_weapon_graph"])
         self.assertEqual(100, counts["unreviewed_stacked_main_unreached"])
 

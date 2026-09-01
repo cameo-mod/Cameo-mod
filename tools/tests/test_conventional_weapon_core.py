@@ -98,7 +98,7 @@ class ConventionalWeaponCoreTests(unittest.TestCase):
         }, self.report["percentage_rounding"])
 
     def test_ratchets_match_the_live_structural_reduction(self):
-        self.assertEqual(339, RAW_SPLIT_BASELINE)
+        self.assertEqual(340, RAW_SPLIT_BASELINE)
         self.assertEqual(114, SPLIT_BASELINE)
         self.assertEqual(90, BROADCAST_BASELINE)
 

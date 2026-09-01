@@ -2586,10 +2586,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "72000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "183",
-        "tag": "Chemical_Light",
+        "damage": "18000",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "LightChemicalWeapon",
         "type": "AreaDamage"
        },
        {
@@ -2600,6 +2600,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "18000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -2607,11 +2614,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "18000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "18000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2622,32 +2643,29 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5979",
       "reloaddelay": "15",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Chemical_Light",
        "^LightChemicalWeapon",
        "^LightMissile",
        "^SmallArms",
        "^ArrowWeapon"
       ],
-      "warheads": [
-       "^Warhead_Chemical_Light"
-      ],
+      "warheads": [],
       "weapon": "HydraSpit",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "72000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "183",
-        "tag": "Chemical_Light",
+        "damage": "18000",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "LightChemicalWeapon",
         "type": "AreaDamage"
        },
        {
@@ -2658,6 +2676,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "18000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -2665,11 +2690,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "18000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "18000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2680,23 +2719,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5979",
       "reloaddelay": "15",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Chemical_Light",
        "^LightChemicalWeapon",
        "^LightMissile",
        "^SmallArms",
        "^ArrowWeapon"
       ],
-      "warheads": [
-       "^Warhead_Chemical_Light"
-      ],
+      "warheads": [],
       "weapon": "HydraSpit",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

@@ -62,7 +62,9 @@ from intentional_composites import (  # noqa: E402
 
 # Weapons resolving to >1 main damaging warhead when this was measured (2026-08-28). LOWER ONLY.
 # 1190 -> 1178 the same day: a MEASUREMENT fix, not converted weapons. See FRIENDLY_FIRE below.
-RAW_SPLIT_BASELINE = 339
+# Hydralisk was deliberately restored as an exact four-profile composite after
+# its single-main fold caused a live 1.6x-2.38x ground-damage regression.
+RAW_SPLIT_BASELINE = 340
 SPLIT_BASELINE = 114
 INTENTIONAL_COMPOSITES = reviewed_fingerprints()
 REPORT = pathlib.Path(__file__).resolve().parents[2] / "docs/audit/latest/three_way_split.md"

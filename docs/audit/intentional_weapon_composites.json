@@ -4777,6 +4777,40 @@
       "review_reference": "Resolved family review: authored stage timing and geometry",
       "weapon_digest": "921dc0623ab5a88f0a8c3aab128f54bee99e9c5e43a875e4492f56b997112d4a"
     },
+    "HydraSpit": {
+      "category": "maintainer-approved role blend",
+      "component_purposes": {
+        "ArrowWeapon": "original narrow projectile-impact armor contribution",
+        "LightChemicalWeapon": "original corrosion-bearing chemical contribution",
+        "LightMissile": "original missile armor contribution",
+        "SmallArms": "original small-arms armor contribution"
+      },
+      "expected_reachability": "direct",
+      "main_digest": "6a2237d3536d7eb2edd2cdb86ac3463626e64841fc4c593ddd96f80c25662114",
+      "mains": [
+        "ArrowWeapon",
+        "LightChemicalWeapon",
+        "LightMissile",
+        "SmallArms"
+      ],
+      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+      "rationale": "Restore the pre-PR-287 Hydralisk profile after the Chemical-Light fold raised real ground damage by roughly 1.6x to 2.38x and quadrupled the flat corrosion feed. Preserve the exact four-part behavior.",
+      "referrer_digest": "5c5210e755e7c2688c1edc9e445dd039dd1b1e08332bbf64ef2462b276c20175",
+      "referrers": [
+        {
+          "kind": "actor",
+          "name": "zerg_hydralisk",
+          "path": "Armament@GARRISONED/Weapon"
+        },
+        {
+          "kind": "actor",
+          "name": "zerg_hydralisk",
+          "path": "Armament@PRIMARY/Weapon"
+        }
+      ],
+      "review_reference": "Maintainer regression report: Hydralisk was not previously this strong",
+      "weapon_digest": "35eea1dfd33886ecc1efd73388d5bfe33c6111c816577fe2860bde30b0fa399e"
+    },
     "IxianCombatTankCannon": {
       "category": "maintainer-curated signature",
       "component_purposes": {

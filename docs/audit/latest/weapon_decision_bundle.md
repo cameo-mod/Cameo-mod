@@ -9,8 +9,8 @@ or progression decision before its live behavior can be changed.
 The player-facing recommendation for every family is maintained in
 `docs/design/WEAPON_REDESIGN_RECOMMENDATIONS.md`.
 
-- Raw reachable stacked definitions: **239**
-- Exact reviewed composites: **225**
+- Raw reachable stacked definitions: **240**
+- Exact reviewed composites: **226**
 - Unreviewed reachable definitions: **14**
 - Unreviewed inheritance families: **12**
 

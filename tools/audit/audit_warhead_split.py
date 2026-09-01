@@ -61,6 +61,17 @@ BROADCAST_BASELINE = 90
 # exception must be an explicit reviewed decision rather than inherited debt.
 ROUTING_REVEALED_BROADCASTS = {}
 
+# Exact behavior restoration, not a newly authored broadcast.  PR 287 folded
+# these four profiles and accidentally multiplied Hydralisk's ground damage.
+RESTORED_GAMEPLAY_BROADCASTS = {
+    "HydraSpit": (
+        ("ArrowWeapon", 18000),
+        ("LightChemicalWeapon", 18000),
+        ("LightMissile", 18000),
+        ("SmallArms", 18000),
+    ),
+}
+
 
 def _int(v) -> int:
     try:
@@ -98,6 +109,7 @@ def main() -> int:
 
     broadcast_rows = []   # FAIL 1 (uniform main warheads)
     routing_revealed_rows = []  # known composites unmasked by target-route repair
+    restored_gameplay_rows = []  # exact profiles restored to repair regressions
     ff_rows = []          # FAIL 2
     review_rows = []      # informational
 
@@ -121,6 +133,8 @@ def main() -> int:
             fingerprint = tuple(sorted(mains))
             if ROUTING_REVEALED_BROADCASTS.get(wname) == fingerprint:
                 routing_revealed_rows.append(row)
+            elif RESTORED_GAMEPLAY_BROADCASTS.get(wname) == fingerprint:
+                restored_gameplay_rows.append(row)
             else:
                 broadcast_rows.append(row)
 
@@ -155,6 +169,10 @@ def main() -> int:
     out.append(table(["weapon", "mains", "per_warhead", "total"], broadcast_rows[:40]))
     if len(broadcast_rows) > 40:
         out.append(f"\n_... and {len(broadcast_rows) - 40} more._\n")
+
+    out.append(h2(f"Review — exact gameplay restorations ({len(restored_gameplay_rows)})"))
+    out.append(table(
+        ["weapon", "mains", "per_warhead", "total"], restored_gameplay_rows))
 
     out.append(h2(f"Review — routing-revealed composites ({len(routing_revealed_rows)})"))
     out.append(

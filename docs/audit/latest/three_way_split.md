@@ -1,15 +1,15 @@
-# audit_three_way_split — 339 raw stacked weapons; 114 remain unreviewed
+# audit_three_way_split — 340 raw stacked weapons; 114 remain unreviewed
 
-   1690  correct — exactly one main warhead
+   1689  correct — exactly one main warhead
     317  none — utility / effect-only weapons
-    339  RAW STACKS — structural inventory
-    225  reviewed — exact intentional composites
+    340  RAW STACKS — structural inventory
+    226  reviewed — exact intentional composites
     114  UNREVIEWED — classification backlog
 
   mains  weapons
       2    189
       3     98
-      4     25
+      4     26
       5     12
       6      6
       7      7
@@ -40,7 +40,7 @@
 | 2 | 1Dam + 1Dam_impact |
 | 2 | Flame_Heavy + MissileHE_Heavy |
 
-Reviewed exact composites (225):
+Reviewed exact composites (226):
 
 - `AAGunBoatFlak`: Flak_Medium + Flak_MediumFlatCompatibility
 - `AAGunBoatFlak_elite`: Flak_Medium + Flak_MediumFlatCompatibility
@@ -109,6 +109,7 @@ Reviewed exact composites (225):
 - `HeavyIxianCombatTankCannon`: CannonAP_Light + CannonHE_Heavy + CannonHE_Medium
 - `HellfireCryo`: CryoBlast_Medium + MissileCryo_Heavy
 - `HermitExplode`: 10Dam_areanuke3 + 11Dam_areanuke3 + 1Dam_impact + 4Dam_areanuke1 + 7Dam_areanuke2 + 8Dam_areanuke2 + Damage
+- `HydraSpit`: ArrowWeapon + LightChemicalWeapon + LightMissile + SmallArms
 - `IxianCombatTankCannon`: CannonAP_Light + CannonHE_Heavy + CannonHE_Medium
 - `JapanMaidenBowEnergized`: Arrow_Light + Arrow_LightFlatCompatibility + CannonHE_Medium
 - `JapaneseHovercraftFlakAAkWaveforce`: Flak_MediumFlatCompatibility + Railgun_Heavy
@@ -268,5 +269,5 @@ Reviewed exact composites (225):
 - `wc2deathknightDeathCoilScatter_Right`: Flame_Heavy + Tesla_Super
 - `wc2deathknightFire`: Flame_Heavy + Tesla_Super
 
-WARN raw 339/339; unreviewed 114/114
+WARN raw 340/340; unreviewed 114/114
 Lower raw ratchets only for structural consolidation; lower the unreviewed ratchet only for exact reviewed decisions.
