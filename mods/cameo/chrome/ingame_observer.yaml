@@ -1938,8 +1938,8 @@ Container@OBSERVER_WIDGETS:
 							Y: 0
 							Width: PARENT_WIDTH - 5
 							Height: PARENT_HEIGHT
-							ValueFormat: {0:$#,##0;-$#,##0;$0}
-							YAxisValueFormat: {0:$#,##0;-$#,##0;$0}
+							ValueFormat: ${0}
+							YAxisValueFormat: ${0:F0}
 							XAxisSize: 40
 							XAxisTicksPerLabel: 2
 							XAxisLabel: Game Minute

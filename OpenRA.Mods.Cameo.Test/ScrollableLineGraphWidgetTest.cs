@@ -10,7 +10,6 @@
 #endregion
 
 using System.Collections.Generic;
-using System.Reflection;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Widgets;
 using OpenRA.Primitives;
@@ -26,9 +25,7 @@ namespace OpenRA.Mods.Cameo.Test
 			foreach (var values in points)
 				series.Add(new ScrollableLineGraphSeries("test", Color.White, values));
 
-			var method = typeof(ScrollableLineGraphWidget).GetMethod(
-				"GetScaledRange", BindingFlags.Static | BindingFlags.NonPublic);
-			return ((float Min, float Max))method.Invoke(null, new object[] { series });
+			return ScrollableLineGraphWidget.GetScaledRange(series);
 		}
 
 		[Test]

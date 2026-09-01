@@ -463,7 +463,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 			cr.DrawLine(graphOrigin, graphOrigin + new float2(0, -height), 1, Color.White);
 		}
 
-		private static (float Min, float Max) GetScaledRange(IEnumerable<ScrollableLineGraphSeries> series)
+		public static (float Min, float Max) GetScaledRange(IEnumerable<ScrollableLineGraphSeries> series)
 		{
 			var points = series.SelectMany(s => s.Points).ToArray();
 			var max = points.Concat(new[] { 0f }).Max();
