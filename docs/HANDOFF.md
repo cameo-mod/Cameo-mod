@@ -324,10 +324,18 @@ holding 80% inside [1.00, 2.50] has **σ(log price) = 0.3575** about a geometric
 normal distribution. The skirts split 9.9% / 8.7% and only **1.4%** falls outside the hard
 band: the true exception population. ⚠ The class centre is 1.581×, **not** the anchor — the
 anchor sits at the bell's bottom edge because it is the entry unit.
-⭐ **σ_log is 1.013 against the 0.357 the band wants — the roster is ~2.8× too dispersed, and
-that one number sizes the entire repricing job.** 8 of 11 classes are already bell-like; the
-three that are not (`artillery`, `scout_vehicle`, `missile_vehicle`) are exactly the three
-with known data bugs — the test found them unprompted.
+⭐ **σ_log sizes the entire repricing job in one number: 0.870 against the 0.357 the band wants
+— the roster is ~2.4× too dispersed.** It has moved twice today and BOTH moves were population
+changes, not repricing: 1.013 → 1.017 (negative-DPS extractor fix removed 8 healers from the
+offensive channel) → **0.870** (athenacannon + the 7-actor IFV family quarantined). ⚠ Always
+re-read it after an extractor or classification change; never compare across one.
+
+⭐ **The bell test found the data bugs unprompted, and closing them closed the bells.**
+`artillery` went skew **+2.43 → +0.35**, kurtosis **+7.55 → −0.43**; `scout_vehicle`
+**+0.62 → +0.22** and 11.7× → **2.3×**, landing it in the target band. **10 of 11 classes are
+now bell-like, 16 of 17 fit the hard band, 3 of 17 fit the target band.** The one still skewed
+— `missile_vehicle` +0.87 — is the spec/actor mismatch, which is **boot-gated**: three skewed
+classes, three distinct causes, two closed here and the third on the Windows queue.
 
 Three consequences that change what the next job is:
 
@@ -349,6 +357,14 @@ Three consequences that change what the next job is:
 **`tools/balance/band_granularity.py`** reports raw + trimmed + outliers + data bugs; it found
 **8 members with NEGATIVE DPS** (heal armaments summed as damage by `formula.spread_damage_sum`) —
 fix the extractor before pricing `support` or `line_breaker`.
+
+✅ **The no-boot balance queue is now CLOSED except for maintainer rulings.** Landed today:
+the negative-DPS extractor split (8 actors no longer price as if they shoot backwards), the
+two single-cause quarantines, and — the part that mattered — **a reader that makes the
+exception registry live**. `docs/design/balance_exceptions.yaml`'s `categories:` section had
+**no consumer at all**; `tools/balance/exceptions.py` now owns it and `band_granularity.py`
+honours it. ⚠ `apply_balance` (the WRITER) still does not consult it — that needs a maintainer
+order. Everything else remaining is either a one-word ruling (§7 of the runbook) or boot-gated.
 
 ⭐ **The band is not the constraint.** At the peer cost resolution of **1.143×** (14 shipped mods,
 266 gaps, `tools/reference/peer_cost_grid.py`) the target band holds **6.9 rungs** and the hard band

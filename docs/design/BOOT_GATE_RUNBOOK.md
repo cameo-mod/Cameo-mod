@@ -40,9 +40,9 @@ it could possibly be true.
 |---|---|
 | repo | `github.com/cameo-mod/Cameo-mod` — ⛔ `Zeruel87/Cameo-mod` is the **abandoned fork**, forbidden by `CLAUDE.md`, and two external reviewers cited it this week. Commits quoted from that URL do not exist. |
 | branch | `claude/docs-audit-reorganize-xgzwhr` |
-| HEAD | `e5a390da6` + the §6.1 extractor fix |
+| HEAD | `e5a390da6` + §6.1 extractor fix + §6.2 quarantines (merged with master twice) |
 | behind master | 0 |
-| tests | **754 pass**, 1 pre-existing failure (`test_ledger_split` — `reference_distributions.json` has no raw counterpart; predates this work) |
+| tests | **754+ pass**, 1 pre-existing failure (`test_ledger_split` — `reference_distributions.json` has no raw counterpart; predates this work) |
 | `audit_doc_health` | **PASS** |
 | ledger drift | **0** |
 | boot gate owed by these commits | **NO** — docs + tools only, no yaml, no engine content, no balance number |
@@ -428,7 +428,51 @@ Regression tests that must exist: adding a heal weapon to an actor **cannot redu
 re-tagging after the fix is double work, and `support` / `line_breaker` cannot be priced at
 all until it lands.
 
-### §6.2 — P1: quarantine the two single-cause distortions
+### §6.2 — ✅ DONE 2026-08-31: quarantine the two single-cause distortions
+
+**Landed, and it worked.** Both entries are in `docs/design/balance_exceptions.yaml` under a
+new `actors:` section.
+
+⛔ **The important part was NOT the yaml entry.** Before this change the registry's
+`categories:` section was read by **nothing** — only `limits:` had a consumer
+(`audit_engine_constraints.py`). Writing `in_formula: false` would have changed no
+measurement and no price: a decorative entry, and exactly the dead-knob antipattern
+`formula.py` documents about `VEHICLE_TYPE_CLASSES = {"mbt"}`, a class-level knob that
+nothing read. So a new reader — **`tools/balance/exceptions.py`** — now owns the registry,
+and `band_granularity.py` honours it.
+
+⚠ **`apply_balance` does NOT yet consult it.** Wiring the WRITER changes what lands in yaml
+and needs a maintainer order (CLAUDE.md rule 3). A quarantined actor is currently excluded
+from class *statistics* while its Cost in the tree is untouched — the conservative half.
+
+**Measured effect — the diagnosis held exactly:**
+
+| | before | after |
+|---|--:|--:|
+| `artillery` log-price skew / kurtosis | +2.43 / **+7.55** | **+0.35 / −0.43** ✅ bell-like |
+| `scout_vehicle` skew, trimmed spread | +0.62, 11.7× | **+0.22, 2.3×** ✅ bell-like **and in the target band** |
+| classes bell-like | 8 of 11 | **10 of 11** |
+| classes fitting the HARD band | 15 of 17 | **16 of 17** |
+| classes fitting the TARGET band | 2 of 17 | **3 of 17** |
+| **σ_log** | 1.017 | **0.870** (2.8× → **2.4×** too dispersed) |
+
+⭐ **`missile_vehicle` is still skewed (+0.87) and that is the correct outcome** — it is the
+spec/actor mismatch, which is **§5.2, boot-gated**, exactly as diagnosed. Three skewed
+classes, three distinct causes; two are now closed and the third is on your queue.
+
+⚠ **A quarantine is a HOLDING action, not a verdict.** `futuretech_athenacannon` is held out
+because 193,600 DPS is a suspected **stat error** — triage the data and *delete the entry*.
+The IFV family is held out because it needs a chassis+payload model that does not exist yet.
+Neither is "balanced by being on a list".
+
+⚠ **One inconsistency this surfaced and fixed:** the `class_anchors_band_reachable` claim was
+measuring **raw** spread while `band_granularity.py` reports **trimmed** — they disagreed
+(2 vs 3) purely because `scout_vehicle` is 4.4× raw and 2.3× trimmed. The claim now uses the
+trimmed spread and honours the same registry, so the two cannot drift apart again.
+
+<!-- original brief retained below for anyone auditing the diagnosis -->
+
+### §6.2a — the original brief (kept as provenance)
 
 | what | evidence | disposition |
 |---|---|---|

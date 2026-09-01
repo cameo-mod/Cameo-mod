@@ -990,18 +990,20 @@ claims:
       print(sum(1 for k in anchors if not k.startswith('_') and k not in have))
 
   - id: class_anchors_band_reachable
-    value: 2
+    value: 3
     tolerance: 0
     what: >
-      Classes with >=4 priced non-epic members whose OWN priced spread fits inside the
-      TARGET band (SWEET_HI/SWEET_LO = 2.50/1.00 = 2.50x, BALANCE_PIPELINE 8.1a), i.e.
+      Classes with >=4 priced non-epic members whose TRIMMED (P10..P90) priced spread
+      fits inside the TARGET band (SWEET_HI/SWEET_LO = 2.50/1.00 = 2.50x, BALANCE_PIPELINE 8.1a), i.e.
       classes for which SOME anchor could reach the ruled >=80% occupancy. ⛔ THE NUMBER
       THAT SAYS RE-ANCHORING IS NOT THE FIX: members are priced as RATIOS to the anchor,
       so moving the anchor SLIDES a class along the band and never NARROWS it (pinned by
       tools/tests/test_band_law.py). `archer` 1.8x, `tank_destroyer` 1.9x, `scout` 2.5x
       qualify. ⭐ 4 -> 2 on 2026-08-31 when the maintainer ruled the target floor ONTO the
-      anchor (1.00..2.50): the narrower target band costs two classes, and the extended
-      0.50..3.50 band is what now holds their tails. ⚠ Read it
+      anchor (1.00..2.50), then 2 -> 3 when quarantining the IFV family took
+      `scout_vehicle` from 11.7x to 2.3x. ⚠ The measure HONOURS the quarantine registry
+      via tools/balance/exceptions.py, exactly as band_granularity.py does -- if the two
+      disagree, one of them stopped reading the registry. ⚠ Read it
       NEXT TO the hard band: 14 of 17 classes fit 0.50..3.50 (7.0x) on trimmed spreads.
       Inside the hard band = a REPRICING job; outside = a SCOPE question.
       ⚠ READ THE TRIMMED SPREAD, NOT THIS COUNT ALONE: `artillery` measures 324.5x raw and
@@ -1013,12 +1015,15 @@ claims:
       import collections, json, pathlib, sys
       sys.path.insert(0, 'tools/balance')
       import check_band as cb
+      import exceptions as exc
       anchors = json.loads(
           pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
       rows = collections.defaultdict(list)
       for _fn, actor, u, du in cb.collect({}):
           cls = (u.get('design') or {}).get('class_anchor')
           if not cls or cls.startswith('_') or cls not in anchors or u.get('build_limit'):
+              continue
+          if not exc.is_priced(actor):
               continue
           inp = cb.unit_inputs(u, du)
           if inp is None or not all(inp[:4]):
@@ -1031,9 +1036,15 @@ claims:
               continue
           base = {'hp0': rs[0][0], 'speed0': rs[0][1], 'range0_wdist': rs[0][2],
                   'dps0': rs[0][3], 'cost0': 100.0}
-          pr = [cb.price_for(cls, {'spec': base}, i, 1.0) for i in rs]
-          pr = [x for x in pr if x and x > 0]
-          if len(pr) >= 2 and max(pr) / min(pr) <= width:
+          pr = sorted(x for x in (cb.price_for(cls, {'spec': base}, i, 1.0) for i in rs)
+                      if x and x > 0)
+          if len(pr) < 2:
+              continue
+          # TRIMMED P10..P90, identical to band_granularity.py. Raw max/min is a
+          # lie on a roster that still has data bugs -- it read 2 here while the
+          # tool read 3, purely because `scout_vehicle` is 4.4x raw and 2.3x trimmed.
+          lo, hi = int(0.1 * len(pr)), min(len(pr) - 1, int(0.9 * len(pr)))
+          if pr[hi] / pr[lo] <= width:
               n += 1
       print(n)
 
@@ -1102,14 +1113,14 @@ claims:
       print(len(vals))
 
   - id: roster_sigma_log
-    value: 1.017
+    value: 0.870
     tolerance: 0.02
     what: >
       Pooled standard deviation of LOG PRICE across every class with >=8 priced non-epic
       members, measured against each class's LIVE anchor actor. ⭐ THE ONE NUMBER THAT SIZES
       THE WHOLE REPRICING JOB. BALANCE_PIPELINE 8.1b: a log-normal holding 80% inside the
       [1.00, 2.50] target band has sigma(log price) = 0.3575, so the roster is currently
-      ~2.8x too dispersed. ⚠ 1.013 -> 1.017 on 2026-08-31 when the negative-DPS extractor
+      ~2.4x too dispersed. ⚠ 1.013 -> 1.017 on 2026-08-31 when the negative-DPS extractor
       fix removed 8 healers from the offensive channel -- the metric is SENSITIVE to
       population changes, so always re-read it after an extractor or classification change
       rather than comparing across them. Every repricing pass must move this DOWN toward 0.357; it is the

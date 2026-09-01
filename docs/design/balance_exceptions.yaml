@@ -137,6 +137,74 @@ categories:
       salvage/repair figure, not a price.
 
 # --------------------------------------------------------------------------- #
+# PER-ACTOR quarantines (2026-08-31) — single actors that distort a whole class
+# --------------------------------------------------------------------------- #
+# ⛔ THESE ARE NOT "UNITS WE DISLIKE". Each one was found by a MEASUREMENT that
+# named it: `band_granularity.py` reports the outlier queue and the log-price
+# skew per class, and the three classes it flagged as non-bell-shaped were
+# exactly the three carrying a distortion listed here.
+#
+# ⭐ AND THE ENTRIES ARE LIVE, NOT DECORATIVE. Before this section the registry's
+# `categories:` block was read by NOTHING — only `limits:` had a consumer
+# (`audit_engine_constraints.py`). A quarantine that no tool reads is the
+# "dead knob" antipattern `formula.py` already documents about
+# `VEHICLE_TYPE_CLASSES`: it answers "is this handled?" with a lie. So
+# `tools/balance/exceptions.py` now reads this section and
+# `band_granularity.py` honours it. ⚠ `apply_balance` does NOT yet consult it —
+# wiring the WRITER is a separate change and needs a maintainer order.
+actors:
+
+  futuretech_athenacannon:
+    in_formula: false
+    manual: true
+    ruling: proposed 2026-08-31 by measurement — awaiting maintainer confirmation
+    method: hold out of class pricing until the DPS is triaged
+    measured_2026_08_31:
+      dps: 193600
+      next_highest_in_artillery: 7920
+      ratio_to_class_median: 133.24
+      artillery_raw_spread_with_it: 324.5
+      artillery_trimmed_spread_P10_P90: 5.9
+      artillery_log_price_skew: 2.43
+      artillery_log_price_excess_kurtosis: 7.55
+    note: >
+      ⛔ THIS IS A STAT ERROR, NOT A HEAVY UNIT. 193,600 DPS is 24x the next
+      artillery in the class and 133x the class median; it alone turns a 5.9x
+      class into a 324.5x one and is the entire reason `artillery` reads as
+      non-bell-shaped. An Athena Cannon is a targeting beacon — the likely cause
+      is an airstrike warhead being attributed to the spotter. Quarantined so it
+      cannot corrupt the class, NOT priced as an epic. Fix the data, then remove
+      this entry.
+
+  ra2_ifv_family:
+    in_formula: false
+    manual: true
+    ruling: proposed 2026-08-31 — RTS_BALANCE_REFERENCE §7 already rules this class of unit
+    method: needs a chassis + payload model, not a single-weapon price
+    members:
+      - ra2_allies_ifv
+      - ra2_allies_ifv_chrono
+      - ra2_allies_ifv_hmg
+      - ra2_allies_ifv_mg
+      - ra2_allies_ifv_missile
+      - ra2_allies_ifv_repair
+      - futuretech_salamanderifv
+    measured_2026_08_31:
+      dps_all_seven_identical: 19211.7
+      ratio_to_scout_vehicle_median: 5.89
+      futuretech_salamanderifv_ratio: 7.92
+      scout_vehicle_trimmed_spread: 11.7
+      scout_vehicle_log_price_skew: 0.62
+    note: >
+      A TRANSFORMING unit priced from ONE variant's weapon bolted onto the
+      chassis — all seven actors carry the identical 19,211.7 DPS, which is the
+      missile variant's gun. `RTS_BALANCE_REFERENCE` §7 already rules that
+      transforming units need their own model ("a state machine with transition
+      cost, not two units"), so this is not a new decision, it is that ruling
+      applied. ⚠ Quarantine is a HOLDING action: the family still needs a real
+      chassis+payload pricing method before it can re-enter the formula.
+
+# --------------------------------------------------------------------------- #
 # Engine-side floors and ceilings (maintainer 2026-08-29, MEASURED)
 # --------------------------------------------------------------------------- #
 limits:

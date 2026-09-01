@@ -55,6 +55,7 @@ import argparse, collections, json, math, pathlib, statistics, sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/balance"))
 import check_band as cb  # noqa: E402
+import exceptions as exc  # noqa: E402
 
 # The observed cost RESOLUTION of shipped OpenRA mods: the median ratio between adjacent
 # distinct costs over 266 gaps in 14 mods (docs/design/ORIGINAL_UNITS_PEER_OPENRA.md,
@@ -84,10 +85,16 @@ def collect_classes(anchors):
     for _fn, actor, u, du in cb.collect({}):
         inp = cb.unit_inputs(u, du)
         if inp is not None and all(inp[:4]):
-            live[actor] = inp
+            live[actor] = inp          # anchors stay resolvable even if quarantined
         cls = (u.get("design") or {}).get("class_anchor")
         if not cls or cls not in anchors or u.get("build_limit"):
             continue  # build-limited epics are band-exempt (check_band.py)
+        # ⛔ The registry is LIVE here, not decorative -- see tools/balance/exceptions.py.
+        # A quarantined actor is held OUT of its class's statistics because one
+        # stat error or one unmodelled transforming unit otherwise sets the whole
+        # class's spread and shape.
+        if not exc.is_priced(actor):
+            continue
         if inp is not None and all(inp[:4]):
             rows[cls].append((actor, inp))
     return rows, live
@@ -354,6 +361,13 @@ def main() -> int:
       f"overcrowded — peers deliberately price several units alike; what matters is that "
       f"the units sharing a rung come from DIFFERENT factions.\n")
     w("⛔ Read the TRIMMED spread, not the raw one. See the outlier list beneath.\n")
+    q = exc.quarantined_actors()
+    if q:
+        w(f"⚠ **{len(q)} actors are QUARANTINED** by `docs/design/balance_exceptions.yaml` "
+          f"and excluded from every number below: "
+          + ", ".join(f"`{a}`" for a in sorted(q)) + ". A quarantine is a HOLDING "
+          "action pending a data fix or a real model — not a verdict that the actor "
+          "is balanced.\n")
     hard_w = cb.CEIL / cb.FLOOR
     w(f"| class | n | factions | n/faction | raw spread | **P10..P90** | fits target "
       f"{width:.2f}x? | fits HARD {hard_w:.1f}x? | rungs used |")

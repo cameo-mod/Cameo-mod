@@ -10,6 +10,36 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 
 ---
 
+## A registry nothing reads, and a reader that fails silently (2026-08-31)
+
+⛔ **Two versions of the same bug, one nested inside the other.**
+
+`docs/design/balance_exceptions.yaml` is the maintainer's answer to "is this actor in the
+formula?". Its `limits:` section had a consumer. Its `categories:` section had **none** — so
+writing `in_formula: false` changed no measurement and no price. A quarantine that no tool
+reads answers *"is this handled?"* with a lie, which is exactly what `formula.py` already
+documents about `VEHICLE_TYPE_CLASSES = {"mbt"}`, a class-level knob that nothing read while
+the per-row step always won. **Fix: one reader (`tools/balance/exceptions.py`), and a test
+that asserts a CONSUMER honours it — not merely that the file parses.**
+
+⛔ **Then the reader did it again, quieter.** It did `import yaml` and returned `{}` on
+ImportError. That worked from the CLI and quarantined **nothing** under `pytest`, because
+pytest here runs on a uv-managed interpreter with no PyYAML. Six tests failed and said so;
+without them the registry would have looked live while doing nothing on every machine
+without PyYAML — possibly including the Windows one.
+
+⭐ **The rule: an unreadable input must be LOUD, never empty.** `_registry()` now raises on an
+unreadable file, uses PyYAML when importable, and falls back to a strict minimal parser
+otherwise. ⚠ And a hand parser is only acceptable *with a check on it* — rule 8e's disaster
+was a hand parser with nothing verifying it, which opened a block and never closed it. So
+`test_the_fallback_parser_agrees_with_PyYAML` compares the two wherever both exist, and the
+fallback closes its list the moment indentation returns to its level, which is the exact line
+whose absence caused that incident.
+
+⚠ **Generalise past yaml:** "the tool ran and found nothing" and "the tool could not look"
+must never produce the same output. Check which one you have before believing a clean result.
+
+
 ## Required reading order for every new task
 
 **`docs/README.md` is the canonical definition of the reading order.** The list below is a
@@ -155,6 +185,7 @@ Speed grid and no audit covers it. "The audit is green" answers only the questio
 
 **Crash classes — these end a boot, and most gates cannot see them**
 
+- [A registry nothing reads, and a reader that fails silently (2026-08-31)](#a-registry-nothing-reads-and-a-reader-that-fails-silently-2026-08-31)
 - [A test can encode a WEAKER property than the law and then defend the bug (2026-08-30)](#a-test-can-encode-a-weaker-property-than-the-law-and-then-defend-the-bug-2026-08-30)
 - [Two corpora measured on DIFFERENT frames are not comparable — the frame was worth 17% (2026-08-30)](#two-corpora-measured-on-different-frames-are-not-comparable--the-frame-was-worth-17-2026-08-30)
 - [⛔ A GUARD WRITTEN FROM ONE INCIDENT COVERS ONE INCIDENT (2026-08-30)](#-a-guard-written-from-one-incident-covers-one-incident-2026-08-30)
