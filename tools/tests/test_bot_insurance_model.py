@@ -66,6 +66,39 @@ def test_the_model_matches_the_csharp_defaults():
     assert (cs["MinDelayTicks"], cs["MaxDelayTicks"]) == (m.MIN_DELAY, m.MAX_DELAY)
     assert (cs["MinCashPerTick"], cs["MaxCashPerTick"]) == (m.MIN_CASH, m.MAX_CASH)
     assert (cs["MinPurifierModifier"], cs["MaxPurifierModifier"]) == (m.MIN_PURIFIER, m.MAX_PURIFIER)
+    # the net-worth layer
+    assert cs["ArmyValueWeight"] == m.ARMY_VALUE_WEIGHT
+    assert cs["MinSelfRatio"] == m.MIN_SELF_RATIO
+    assert (cs["ParRatioMin"], cs["ParRatioMax"]) == (m.PAR_RATIO_MIN, m.PAR_RATIO_MAX)
+    assert cs["MinWorthFactor"] == m.MIN_WORTH_FACTOR
+    assert cs["ParShapeStep"] == m.PAR_SHAPE_STEP
+    assert cs["ParBaseWorth"] == m.PAR_BASE_WORTH
+    assert cs["ParAsymptotePerRank"] == m.PAR_ASYMPTOTE_PER_RANK
+    assert (cs["ParMidpointEasiest"], cs["ParMidpointHardest"]) == (
+        m.PAR_MIDPOINT_EASIEST, m.PAR_MIDPOINT_HARDEST)
+
+
+def test_the_par_curve_table_matches_the_csharp_default():
+    """The shape is a yaml-tunable ARRAY; model and trait must ship the same one."""
+    src = csharp_source()
+    block = re.search(r"public readonly int\[\] ParShape =\s*\{([^}]*)\}", src)
+    assert block, "the ParShape field moved or changed shape"
+    assert [int(v) for v in re.findall(r"-?\d+", block.group(1))] == m.PAR_SHAPE
+
+
+def test_the_csharp_uses_no_floating_point_in_the_curve():
+    """⛔ Desync guard. Math.Exp/Sqrt are not bit-identical across platforms; this feeds [Sync]."""
+    # ⚠ Strip comments AND [Desc] string literals first. The trait EXPLAINS why Math.Exp is
+    # banned, in both a comment and a Desc line, and a naive substring search flags its own
+    # documentation — a guard that fails on the thing it is documenting gets switched off.
+    def is_prose(line: str) -> bool:
+        s = line.strip()
+        return s.startswith(("//", "///", "*", "/*", '"', "[Desc("))
+
+    code = "\n".join(line for line in csharp_source().splitlines() if not is_prose(line))
+    for banned in ("Math.Exp", "Math.Sqrt", "Math.Pow", "double ", "float "):
+        assert banned not in code, f"{banned} in a synced code path — a desync waiting to happen"
+    assert "IntSqrt" in code
 
 
 def test_the_csharp_difficulty_list_matches_the_model():
@@ -326,3 +359,101 @@ def test_the_peak_rate_is_reached_only_at_zero_cash():
         ins = m.Insurance(d)
         assert abs(_pay_rate(d, 0) - ins.cash_per_tick) < 0.05
         assert _pay_rate(d, m.MAX_THRESHOLD - 1) < 0.05
+
+
+# ------------------------------------------------------- the net-worth layer
+
+def _crashed(difficulty="medium", assets=0, army=0, par=True, ticks=3000):
+    """Healthy cash average, then cash collapses to zero while the owner keeps `assets`."""
+    ins = m.Insurance(difficulty, use_par_curve=par)
+    for _ in range(m.AVERAGE_WINDOW):
+        ins.tick(8000, 0, assets, army)
+    paid = sum(ins.tick(0, 0, assets, army) for _ in range(ticks))
+    return ins, paid
+
+
+def test_the_mid_push_false_positive_is_fixed():
+    """⭐ The bug this layer exists for.
+
+    A bot at zero cash holding a large army and base is NOT bankrupt — it is spending correctly
+    and its harvesters will refill it. It must be helped far less than one that has been wiped out.
+    """
+    rich, rich_paid = _crashed(assets=60000, army=30000)
+    poor, poor_paid = _crashed(assets=500, army=0)
+    assert rich.last_worth_factor < poor.last_worth_factor
+    assert rich_paid < poor_paid / 2, (rich_paid, poor_paid)
+
+
+def test_a_wealthy_bot_still_gets_the_floor_and_never_nothing():
+    """Assets a bot cannot sell do not rebuild a base, so the factor floors rather than hitting 0."""
+    rich, rich_paid = _crashed(assets=500000, army=200000)
+    assert rich.last_worth_factor == m.MIN_WORTH_FACTOR
+    assert rich_paid > 0
+
+
+def test_the_worth_factor_is_monotonic_in_wealth():
+    factors = [_crashed(assets=a)[0].last_worth_factor
+               for a in (500, 3000, 10000, 30000, 100000)]
+    assert factors == sorted(factors, reverse=True), factors
+
+
+def test_without_playerstatistics_it_degrades_to_the_cash_only_behaviour():
+    """Absence degrades, never breaks — the AI_ARCHITECTURE section 10 invariant."""
+    with_stats, _ = _crashed(assets=20000)
+    without, _ = _crashed(assets=0, army=0, par=False)
+    assert without.last_worth_factor == 1000
+    assert with_stats.last_worth_factor < 1000
+
+
+def test_the_self_comparison_never_reads_another_player():
+    """⛔ The fog ruling, asserted on the interface: tick() takes only the OWNER's numbers."""
+    import inspect
+    params = list(inspect.signature(m.Insurance.tick).parameters)
+    assert params == ["self", "cash", "resources", "assets", "army"], params
+    src = pathlib.Path(m.__file__).read_text(encoding="utf-8")
+    for banned in ("opponent", "enemy", "other_player", "world.Players"):
+        assert banned not in src.lower(), f"{banned} — the peer signal must stay self-referential"
+
+
+# ------------------------------------------------------- the par curve
+
+def test_the_par_curve_starts_at_the_opening_bank_and_saturates():
+    for rank in range(len(m.DIFFICULTIES)):
+        assert m.par_worth(rank, 0) == m.PAR_BASE_WORTH
+        top = m.PAR_BASE_WORTH + m.PAR_ASYMPTOTE_PER_RANK * (rank + 1)
+        assert m.par_worth(rank, 10 ** 6) == top
+
+
+def test_the_par_curve_is_monotonic_in_time_and_difficulty():
+    for rank in range(len(m.DIFFICULTIES)):
+        vals = [m.par_worth(rank, t) for t in range(0, 60000, 2000)]
+        assert vals == sorted(vals), rank
+    for t in (7500, 15000, 30000):
+        vals = [m.par_worth(r, t) for r in range(len(m.DIFFICULTIES))]
+        assert vals == sorted(vals), (t, vals)
+
+
+def test_the_integer_table_tracks_the_continuous_logistic_it_was_sampled_from():
+    """⚠ Sampling costs accuracy. Bounded, and bounded well inside the noise of three invented
+    magnitudes — but asserted, so a future edit to ParShape cannot quietly break the shape."""
+    sys.path.insert(0, str(ROOT / "tools" / "balance"))
+    import bot_difficulty_curve as c
+    worst = 0.0
+    for rank, d in enumerate(m.DIFFICULTIES):
+        for minutes in (5, 10, 15, 20, 30):
+            approx = m.par_worth(rank, minutes * m.TICKS_PER_MINUTE)
+            exact = c.logistic(d, minutes)
+            worst = max(worst, abs(approx - exact) / max(exact, 1))
+    assert worst < 0.05, f"table diverges {worst:.1%} from its own logistic"
+
+
+def test_the_par_ratio_is_clamped_so_a_bad_curve_cannot_dominate():
+    """The magnitudes are invented; the clamp is what makes shipping them safe."""
+    ins = m.Insurance("medium")
+    ins.peak_worth = 100000
+    ins.ticks = 20 * m.TICKS_PER_MINUTE
+    hopeless = ins.worth_factor_permille(1)
+    ins.peak_worth = 100000
+    absurd = ins.worth_factor_permille(10 ** 9)
+    assert hopeless <= 1000 and absurd >= m.MIN_WORTH_FACTOR
+    assert m.PAR_RATIO_MIN < 1000 < m.PAR_RATIO_MAX

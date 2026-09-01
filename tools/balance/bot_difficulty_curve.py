@@ -86,7 +86,11 @@ TICKS_PER_MINUTE = 1500          # 40ms timestep -- mods/cameo/mod.yaml GameSpee
 START_CASH = 10000               # opening bank; the curve must equal this at t=0
 ASYMPTOTE_PER_HARVESTER = 5000   # tuning knob: net worth a bot converges to, per harvester slot
 MIDPOINT_MINUTES = 12.0          # when a MEDIUM bot reaches halfway to its asymptote
-STEEPNESS = 0.45                 # logistic k, per minute
+# ⚠ Steepness is expressed RELATIVE TO THE MIDPOINT, not per minute. A fixed per-minute k would
+# give faster difficulties a relatively shallower S-curve -- an artifact of the parameterisation,
+# not a design intent -- and it made this tool disagree with the shipped integer table by 25%.
+# k * midpoint = 5.4 means every difficulty follows the SAME economic story, just faster or slower.
+STEEPNESS_X_MIDPOINT = 5.4
 
 
 def asymptote(difficulty: str) -> int:
@@ -107,7 +111,8 @@ def logistic(difficulty: str, minutes: float) -> int:
     every bot look behind from tick one.
     """
     a, t0 = asymptote(difficulty), midpoint(difficulty)
-    raw = lambda m: 1.0 / (1.0 + math.exp(-STEEPNESS * (m - t0)))
+    k = STEEPNESS_X_MIDPOINT / t0
+    raw = lambda m: 1.0 / (1.0 + math.exp(-k * (m - t0)))
     span = 1.0 - raw(0.0)
     return int(START_CASH + (a - START_CASH) * (raw(minutes) - raw(0.0)) / span)
 

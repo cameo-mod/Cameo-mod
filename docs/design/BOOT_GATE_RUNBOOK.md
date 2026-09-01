@@ -365,12 +365,11 @@ the mod's only `normalbot` grant is on a Dark Reign building and conditions are 
 difficulty — receives **zero** insurance income, while `easy` gets 3 rungs and `hard` gets 5.
 
 ```bash
-python tools/audit/audit_bot_insurance.py        # FAILS on master today, and names the rung
-git apply --check docs/patches/bot_insurance_01_fix_medium_difficulty.patch
-git apply         docs/patches/bot_insurance_01_fix_medium_difficulty.patch
-python tools/audit/audit_bot_insurance.py        # must now PASS
-python tools/audit/audit_doc_claims.py           # bot_insurance_unreachable_difficulties 1 -> 0
-# --- BOOT GATE --- then set that claim's `value:` to 0 and commit yaml + claim + doc edits
+git checkout claude/bot_insurance_dynamic_trait
+python tools/audit/audit_bot_insurance.py    # FAILS on master today, and names the rung
+bash docs/patches/apply_all.sh --check       # dry run — applies the series, verifies, undoes it
+bash docs/patches/apply_all.sh               # apply, build, run every check that needs no game
+# --- BOOT GATE --- the script stops here and prints exactly what is left
 ```
 
 Patch 01 is now the pure bug fix — eight `normalbot` → `mediumbot`, nothing else. **Every other

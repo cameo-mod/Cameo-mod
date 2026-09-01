@@ -481,6 +481,37 @@ no `BuildingDelayModifier` / `BuildingIntervalModifier` / `UnitDelayModifier` /
 `veryhard`'s 125 and `challenger`'s 75 — so the ladder is monotonic **by luck, not by intent**.
 Not a live bug; worth stating explicitly in yaml.
 
+### ✅ RULED 2026-09-01 — the eight decisions, and what shipped
+
+The maintainer answered all eight open questions in one pass. Recorded here as rulings, not
+options; `docs/patches/README.md` carries the implementation detail.
+
+| # | question | ruling |
+|---|---|---|
+| 1 | Sequencing | **No boot gate until Saturday.** Build everything now on a separate branch, `claude/bot_insurance_dynamic_trait`, never touching master. |
+| 2 | Peer signal (OD-N) | **The bot's own peak net worth.** Fog-safe: it never reads another player, so it adds no omniscience and does not rubber-band against the human. |
+| 3 | Distress input (OD-K) | **Two-factor.** Liquidity decides *whether*, net worth decides *how much*. |
+| 4 | Combining the ratios | **Geometric mean**, never the product. |
+| 5 | Delivery | **Patches plus `apply_all.sh`.** The hook blocks engine-content commits on *any* branch from a container with no `perf.log`; that is machine-level, not branch-level, and forging boot proof is not an option. |
+| 6 | Production multipliers (OD-J) | **Continuous only for the future `adaptive` type.** The ten fixed difficulties keep their fixed multipliers — they are the A/B baseline the whole cheat-removal roadmap is measured against. |
+| 7 | Adaptive difficulty (OD-L) | **After `DynamicBotInsurance` boots.** Design now, build on proven code. |
+| 8 | Par-curve magnitudes (OD-M) | **Ship conservative, log for tuning.** The curve's ratio is clamped to [0.5, 2.0] so invented numbers cannot dominate, and the trait logs measured-vs-expected worth every 1500 ticks. |
+
+⭐ **Two things the implementation turned up that no amount of design would have.**
+
+**The par curve cannot be a formula.** It feeds a `[Sync]` value in a lockstep simulation, and
+`Math.Exp` is not guaranteed bit-identical across platforms or runtimes — a live logistic is a
+desync waiting for a multiplayer game. It ships as a sampled integer table with an integer square
+root. ⚠ Sampling it correctly took two corrections, both caught by a cross-check test rather than
+by reading: a 0.25× step diverged **22.5%** from its own logistic, and a steepness expressed per
+minute rather than per midpoint added another **24.7%** by giving faster difficulties a relatively
+shallower curve. Final divergence: **1.9%**.
+
+**`ArmyValueWeight` ships at 0 deliberately.** `PlayerStatistics` exposes `ArmyValue` *and*
+`AssetsValue` and it is still unproven whether the latter already counts combat units. At 0 the
+army is counted exactly once. ⛔ This is the one number that must be checked in a running game
+before it is trusted — a wrong value double-counts the largest term in the calculation.
+
 ### Open decisions this file adds
 
 | id | decision |
@@ -490,11 +521,11 @@ Not a live bug; worth stating explicitly in yaml.
 | **OD-E** | ✅ **CLOSED 2026-09-01 — it exists.** `BotInsurance` + `CashTrickler` + `ResourcePurifier`, ten rungs on `^AIConyardCash` (`defaults.yaml:6712`). See §1. What remains open is the *removal shape*, now row 5 of the removal order: trim to one rung (human parity), not to zero. |
 | **OD-G** | ✅ **CLOSED 2026-09-01.** `normalbot` → `mediumbot`, plus human parity at four rungs (the maintainer's ruling). Patch written and verified; needs only the boot gate. |
 | **OD-H** | ✅ **CLOSED 2026-09-01** — the ladder moves to the `Player` actor as part of the `DynamicBotInsurance` rewrite, which also removes the conyard multiplication. The one open verification is carried on that patch: does `INotifyResourceAccepted` reach a Player-actor trait? Needs a running game. |
-| **OD-M** | The par curve's free parameters: `ASYMPTOTE_PER_HARVESTER` (5000), `MIDPOINT_MINUTES` (12 for medium) and `STEEPNESS` (0.45). Derived shape, invented magnitudes — these need playtest data, not more arithmetic. |
-| **OD-N** | ⛔ Does `r_peers` ship at all? It is omniscience plus rubber-banding (see above). Options: ship it as a deliberate exception, replace it with the bot's own peak net worth (fog-safe), or drop it and keep `r_target` alone. |
-| **OD-J** | Should the production multipliers become continuous (two thin per-actor traits reading one player-level authority), or stay as the 20 fixed instances? Cost: two new traits plus the queue-time sampling problem above. |
-| **OD-K** | Should distress use NET WORTH (cash + `ArmyValue` + `AssetsValue`) rather than cash alone? ⭐ Recommended — it removes the "broke mid-push with a huge army" false positive at no runtime cost. Open question is the weighting. |
-| **OD-L** | An `adaptive` 11th bot type whose effective rank floats 0→9 during a match — YES as an opt-in difficulty, ⛔ NOT as a modifier applied to the ten fixed ones. Fixed difficulties are the A/B baseline the whole cheat-removal roadmap is measured against; a difficulty that drifts with the economy makes two matches incomparable. |
+| **OD-M** | ✅ **CLOSED** — ship conservative with the par ratio clamped, and log measured-vs-expected for tuning. |
+| **OD-N** | ✅ **CLOSED** — the bot's own peak net worth. Fog-safe; no opponent data is read. |
+| **OD-J** | ✅ **CLOSED** — continuous only for the future `adaptive` type; the ten fixed difficulties keep fixed multipliers. |
+| **OD-K** | ✅ **CLOSED** — two-factor: liquidity decides whether, net worth decides how much. Shipped. |
+| **OD-L** | ✅ **CLOSED** — `adaptive` is an opt-in 11th type, built after the insurance trait boots. |
 | **OD-I** | Cheat-removal end state for axis 3: with the payout now capped at 10 000 and no conyard scaling, is the bot ladder still a "cheat" to remove, or is it now close enough to the human floor to keep permanently? Decide from phase-1 logs. |
 | **OD-F** | Cheat-removal order — is vision genuinely first, given it is the one that most corrupts *balance* measurement rather than making bots weakest? |
 

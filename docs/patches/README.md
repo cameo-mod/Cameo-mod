@@ -38,17 +38,16 @@ git commit
 the one-token stopgap that needs only a boot. `03` is the real replacement and needs a C# build.
 `03` is written to apply on top of `01`, so landing both in order is fine and is the expected path.
 
-**Apply order, when landing everything:**
+**One command:**
 
 ```bash
-git apply docs/patches/bot_insurance_01_fix_medium_difficulty.patch    # yaml, boot only
-git apply docs/patches/bot_insurance_03a_dynamic_trait_csharp.patch    # creates the .cs
-git apply docs/patches/bot_insurance_03b_dynamic_trait_yaml.patch      # swaps the yaml over
-DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release --nologo -p:TargetPlatform=win-x64
-python tools/audit/audit_bot_insurance.py     # must PASS
-uv run --with pytest python -m pytest tools/tests/test_bot_insurance_model.py -q
-# --- BOOT GATE --- then commit, and `git rm` the three patches in the same commit
+bash docs/patches/apply_all.sh --check     # dry run: applies the series, checks it, undoes it
+bash docs/patches/apply_all.sh             # apply, build, run every check that needs no game
 ```
+
+It stops before the boot gate on purpose and prints exactly what is left for you. ⚠ The patches are
+a **series, not independent** — 03b rewrites the block 01 edits — so applying them out of order or
+individually with `--check` fails on the second. Use the script.
 
 ⚠ **Why the C# ships as a patch too.** `OpenRA.Mods.Cameo/` counts as engine content to
 `bash_guard.py` exactly like `mods/`, so a boot-less environment cannot commit the `.cs` either.
@@ -99,6 +98,18 @@ trickle that stops ally cash transfers from bankrupting the giver.
 
 ---
 
+## `bot_limits_04_brutal_explicit_cadence.patch`
+
+**Status:** ready, zero behaviour change. 17 lines.
+
+`BotLimits@brutal` was the only tier declaring none of the four cadence modifiers. It falls back to
+the trait default of 100 (`OpenRA.Mods.CA/Traits/BotModules/BotLimits.cs:22-28`), which happens to
+sit correctly between `veryhard`'s 125 and `challenger`'s 75 — **monotonic by luck, not by intent.**
+The patch states them explicitly. Nothing changes today; it stops the ladder breaking silently if
+the trait default ever moves. Skippable if you want the smallest possible Saturday diff.
+
+---
+
 ## `bot_insurance_03a_dynamic_trait_csharp.patch` + `bot_insurance_03b_dynamic_trait_yaml.patch`
 
 **Status:** ⚠ written and algorithmically verified, **but the C# has never been compiled** — a
@@ -122,6 +133,57 @@ is one more name in one list.
 | delay divisor (`delay = average / divisor`) | 10 | … | 100 |
 | **PEAK** credits / tick (paid at zero cash) | 1 | … | 10 |
 | purifier bonus | 5% | … | 50% |
+
+### The net-worth layer (maintainer rulings, 2026-09-01)
+
+Four rulings, all implemented and all pinned by tests:
+
+| ruling | what it means in the trait |
+|---|---|
+| **Two-factor distress** | Liquidity (cash) decides *whether* the insurance arms and fires; net worth decides *how much*. |
+| **Fog-safe self-comparison** | The peer ratio is against the bot's **own peak net worth** — never another player's, which no human can see and which would rubber-band against how well you are playing. |
+| **Geometric mean** | `√(r_self · r_target)`, never the product. The two ratios are correlated, so multiplying squares one piece of evidence. |
+| **Conservative par curve + logging** | The curve's ratio is **clamped to [0.5, 2.0]** so its invented magnitudes cannot dominate, and the trait logs measured-vs-expected worth every 1500 ticks so they can be replaced with real numbers. |
+
+⭐ **The false positive this removes.** A bot at zero cash in the middle of a push, holding a
+30 000-credit army, is not bankrupt — it is spending correctly and its harvesters will refill it.
+Measured, at zero cash after a crash:
+
+| bot | assets | worth factor | paid over 3000 ticks |
+|---|--:|--:|--:|
+| mid-push, big army + base | 60,000 | 25% | 2,800 |
+| crippled, scraps left | 6,000 | 63% | 7,033 |
+| wiped out | 500 | 83% | 9,318 |
+| no `PlayerStatistics` | — | 100% | 11,200 |
+
+⚠ **The last row is the degradation path**: without `PlayerStatistics` the worth factor stays
+neutral and the trait behaves exactly as it did before net worth existed. Absence degrades, never
+breaks.
+
+⛔ **`ArmyValueWeight` ships at 0, and that is a decision not an oversight.** `PlayerStatistics`
+exposes both `ArmyValue` and `AssetsValue`, and whether `AssetsValue` already counts combat units
+could not be settled without the Common assembly. At 0 the army is counted exactly **once**,
+through `AssetsValue`. If a real game shows `AssetsValue` excludes the army, raise it to 100 —
+but do not guess: a wrong value double-counts the largest term in the calculation.
+
+### ⛔ The par curve is a TABLE, because a formula here is a desync
+
+The curve feeds a `[Sync]` value in a simulation OpenRA replays in lockstep across machines.
+`Math.Exp` is **not** guaranteed bit-identical across platforms or runtimes, so evaluating a
+logistic live is a desync waiting for a multiplayer game. It is therefore sampled at authoring
+time into `ParShape` — 25 permille samples every 0.125× the midpoint — and interpolated with
+integer arithmetic end to end (including an integer `IntSqrt`, not `Math.Sqrt`).
+
+⭐ **Which is also better for tuning:** the economy model is a yaml array, so retuning it needs no
+rebuild — exactly what "ship conservative, log for tuning" asks for.
+
+⚠ Sampling costs accuracy, and it is asserted rather than hoped: the table tracks the logistic it
+came from to within **1.9%**. At the first attempt, a 0.25× step diverged 22.5% and a mismatched
+steepness convention added another 24.7% — both caught by the cross-check test, not by inspection.
+
+⭐ **And two magnitudes still need no inventing:** the asymptote is `10000 + 15000 × (rank+1)`,
+which is 5000 per harvester slot because `HarvesterLimit` is exactly `3 × (rank+1)`; and the
+midpoint interpolates 23400 → 7200 ticks, which is 12 minutes × `ProductionTimeMultiplier`.
 
 ### The state machine
 

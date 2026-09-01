@@ -66,6 +66,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import math
 import sys
 
 DIFFICULTIES = ["easiest", "veryeasy", "easy", "medium", "hard",
@@ -84,6 +85,7 @@ DIFFICULTIES = ["easiest", "veryeasy", "easy", "medium", "hard",
 # same number: a ceiling above the payout exit lets an owner trigger and then immediately stop
 # paying, which is churn with no benefit.
 AVERAGE_WINDOW = 1500
+TICKS_PER_MINUTE = 1500        # 40ms timestep -- mods/cameo/mod.yaml GameSpeeds/default
 MAX_THRESHOLD = 10000
 MIN_THRESHOLD = 1000
 MIN_RATE, MAX_RATE = 1, 10
@@ -91,6 +93,71 @@ MIN_DIVISOR, MAX_DIVISOR = 10, 100
 MIN_DELAY, MAX_DELAY = 25, 1500
 MIN_CASH, MAX_CASH = 1, 10
 MIN_PURIFIER, MAX_PURIFIER = 5, 50
+
+# --- net-worth layer (maintainer rulings, 2026-09-01) ---------------------------------------
+# ARMY_VALUE_WEIGHT is 0 because PlayerStatistics exposes BOTH ArmyValue and AssetsValue and it is
+# not settled here whether AssetsValue already counts combat units -- Common is not vendored, so
+# it could not be checked from this container. At 0 the army is counted ONCE, through AssetsValue.
+# ⚠ If Saturday shows AssetsValue excludes the army, raise this to 100. Do not guess: a wrong
+# value double-counts the biggest term in the whole calculation.
+ARMY_VALUE_WEIGHT = 0            # percent of ArmyValue added on top of AssetsValue
+
+# The self-comparison is FOG-SAFE by ruling: a bot is measured against its OWN peak, never against
+# another player's worth, which no player can see and which would rubber-band against the human.
+MIN_SELF_RATIO = 100             # permille floor, so a total collapse cannot divide by ~0
+
+# The par curve is CONSERVATIVE by ruling: its three magnitudes are invented, so its ratio is
+# CLAMPED before it can influence anything. Even a badly calibrated curve can then only move the
+# combined figure by sqrt(0.5) ~ 0.71x at worst, instead of dominating it.
+PAR_RATIO_MIN, PAR_RATIO_MAX = 500, 2000        # permille
+
+# Floor under the worth factor: a bot that is wealthy on paper but has no cash still gets SOME
+# help, because assets it cannot sell do not rebuild a base.
+MIN_WORTH_FACTOR = 250           # permille
+
+# --- the par curve, as DETERMINISTIC INTEGER MATH ------------------------------------------------
+# ⛔ NO exp() AND NO FLOATING POINT. This feeds a [Sync] value in a simulation OpenRA replays
+# lockstep across machines; `Math.Exp` is not guaranteed bit-identical across platforms or
+# runtimes, so a logistic evaluated live is a desync waiting for a multiplayer game. The curve is
+# therefore SAMPLED into a table at authoring time and interpolated linearly between samples.
+#
+# ⭐ Which is also better for tuning: the shape is a yaml array, so retuning the economy model
+# needs no rebuild -- exactly what "ship conservative, log for tuning" asks for.
+#
+# Samples run 0 to 3x the midpoint in steps of 0.125x, in permille of the way from the opening
+# bank to the asymptote. Generated from the logistic k*t0 = 5.4 used by bot_difficulty_curve.py;
+# index 8 is the midpoint and reads 498, i.e. half way, as a sigmoid must.
+# ⚠ The 0.125x step is not cosmetic: at 0.25x, linear interpolation across the curve's steepest
+# stretch diverged 22.5% from the logistic it was sampled from. Halving the step halves that.
+PAR_SHAPE = [0, 4, 13, 29, 59, 113, 202, 334, 498, 661, 793, 883, 937, 967, 983, 991, 995, 998, 999, 999, 1000, 1000, 1000, 1000, 1000]
+PAR_SHAPE_STEP = 125             # permille of the midpoint between samples
+
+# Asymptote = PAR_BASE_WORTH + PAR_ASYMPTOTE_PER_RANK * (rank + 1).
+# 15000 per rank == 5000 per harvester slot, since HarvesterLimit is exactly 3*(rank+1).
+PAR_BASE_WORTH = 10000
+PAR_ASYMPTOTE_PER_RANK = 15000
+# Midpoint in ticks, interpolated by rank: easiest slowest. 12 min x ProductionTimeMultiplier/100,
+# so 15.6 min (23400 ticks) at easiest down to 4.8 min (7200) at cameogod.
+PAR_MIDPOINT_EASIEST, PAR_MIDPOINT_HARDEST = 23400, 7200
+
+
+def par_worth(rank: int, ticks: int, count: int = len(DIFFICULTIES)) -> int:
+    """Expected NET WORTH for this difficulty at this game time. Integer, deterministic."""
+    midpoint = by_rank(PAR_MIDPOINT_EASIEST, PAR_MIDPOINT_HARDEST, rank, count)
+    if midpoint <= 0:
+        return PAR_BASE_WORTH
+
+    progress = ticks * 1000 // midpoint                  # permille of the midpoint
+    idx = progress // PAR_SHAPE_STEP
+    if idx >= len(PAR_SHAPE) - 1:
+        shape = PAR_SHAPE[-1]
+    else:
+        frac = progress - idx * PAR_SHAPE_STEP
+        lo, hi = PAR_SHAPE[idx], PAR_SHAPE[idx + 1]
+        shape = lo + (hi - lo) * frac // PAR_SHAPE_STEP
+
+    asymptote = PAR_BASE_WORTH + PAR_ASYMPTOTE_PER_RANK * (rank + 1)
+    return PAR_BASE_WORTH + (asymptote - PAR_BASE_WORTH) * shape // 1000
 
 
 def by_rank(minimum: int, maximum: int, rank: int, count: int) -> int:
@@ -106,10 +173,11 @@ class Insurance:
 
     def __init__(self, difficulty: str, difficulties: list[str] | None = None,
                  average_window: int = AVERAGE_WINDOW, max_threshold: int = MAX_THRESHOLD,
-                 min_threshold: int = MIN_THRESHOLD):
+                 min_threshold: int = MIN_THRESHOLD, use_par_curve: bool = True):
         self.difficulties = difficulties or DIFFICULTIES
         self.rank = self.difficulties.index(difficulty) if difficulty in self.difficulties else -1
         self.max_threshold = max_threshold
+        self.use_par_curve = use_par_curve
         self.min_threshold = min_threshold
 
         n = len(self.difficulties)
@@ -125,6 +193,45 @@ class Insurance:
         self.phase = "arming"
         self.paid = 0
         self.accumulator = 0            # milli-credits carried between ticks
+        self.ticks = 0                  # game time, for the par curve
+        self.peak_worth = 0             # the fog-safe self-reference
+        self.last_worth_factor = 1000   # permille, for tracing
+
+    def net_worth(self, cash: int, resources: int, assets: int, army: int) -> int:
+        """Cash + resources + everything owned. 0 assets means "no PlayerStatistics" (see tick)."""
+        return cash + resources + assets + army * ARMY_VALUE_WEIGHT // 100
+
+    def worth_factor_permille(self, worth: int) -> int:
+        """⭐ How much of the peak payout this owner's NET WORTH justifies, 0..1000.
+
+        Two ratios, both clamped, combined by GEOMETRIC MEAN rather than by product:
+
+            r_self   = worth / my own peak worth      (fog-safe -- ruling, 2026-09-01)
+            r_target = worth / par curve at this time (clamped hard; its magnitudes are invented)
+            w        = sqrt(r_self * r_target)
+
+        ⛔ NOT a product. The two ratios are correlated -- a bot behind its own peak is usually
+        also behind the curve -- so multiplying squares one piece of evidence: 0.5 x 0.5 = 0.25
+        claims "four times worse than par" from two observations that each said "twice". The
+        geometric mean keeps the answer on the scale of its inputs. See bot_difficulty_curve.py.
+
+        The result is inverted into a factor: at par (w = 1) the owner is doing fine and the factor
+        collapses to its floor; at total collapse (w -> 0) it reaches 1000.
+        """
+        if self.peak_worth <= 0:
+            return 1000
+
+        r_self = min(1000, max(MIN_SELF_RATIO, 1000 * worth // self.peak_worth))
+
+        r_target = 1000
+        if self.use_par_curve:
+            target = par_worth(self.rank, self.ticks, len(self.difficulties))
+            if target > 0:
+                r_target = min(PAR_RATIO_MAX, max(PAR_RATIO_MIN, 1000 * worth // target))
+
+        w = int(math.isqrt(r_self * r_target))          # integer sqrt -> deterministic
+        shortfall = max(0, min(1000, 1000 - w))
+        return MIN_WORTH_FACTOR + (1000 - MIN_WORTH_FACTOR) * shortfall // 1000
 
     def depth_permille(self, cash: int) -> int:
         """How deep below the cap the owner is, 0 (at the cap) to 1000 (broke).
@@ -138,13 +245,28 @@ class Insurance:
     def average(self) -> int:
         return sum(self.history) // len(self.history) if self.history else 0
 
-    def tick(self, cash: int) -> int:
-        """Advance one tick against the owner's current cash. Returns credits granted this tick."""
+    def tick(self, cash: int, resources: int = 0, assets: int = 0, army: int = 0) -> int:
+        """Advance one tick. Returns credits granted this tick.
+
+        ⭐ TWO-FACTOR, by ruling: LIQUIDITY decides WHETHER the insurance arms and fires (it is
+        cash that blocks rebuilding), NET WORTH decides HOW MUCH. That fixes the false positive
+        where a bot at zero cash in the middle of a push, holding a 30,000-credit army, reads as
+        bankrupt -- it is spending correctly and its harvesters will refill it.
+
+        ⚠ `assets` at 0 means "PlayerStatistics was not available", and the worth factor then stays
+        neutral at 1000 -- absence degrades to the cash-only behaviour rather than to no insurance
+        at all. Same invariant as AI_ARCHITECTURE section 10: absence degrades, never breaks.
+        """
         if self.rank < 0:
             return 0
 
+        self.ticks += 1
         self.history.append(cash)
         granted = 0
+
+        worth = self.net_worth(cash, resources, assets, army)
+        self.peak_worth = max(self.peak_worth, worth)
+        self.last_worth_factor = self.worth_factor_permille(worth) if assets or army else 1000
 
         if self.phase == "arming":
             target = min(max(self.average, self.min_threshold), self.max_threshold)
@@ -175,7 +297,7 @@ class Insurance:
                 self.accumulator = 0
                 self.phase = "arming"
             else:
-                depth = self.depth_permille(cash)
+                depth = self.depth_permille(cash) * self.last_worth_factor // 1000
                 self.accumulator += self.cash_per_tick * depth
                 granted += self.accumulator // 1000
                 self.accumulator %= 1000

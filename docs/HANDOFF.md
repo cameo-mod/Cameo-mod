@@ -292,20 +292,31 @@ never grants (it grants `mediumbot`); the only grant of `normalbot` in the mod i
 building and conditions are per-actor. **`tools/audit/audit_bot_insurance.py` (new, in
 `run_all.sh`) is RED on master because of it.**
 
-⭐ **Two prepared fixes, in `docs/patches/` (they are alternatives; 03 applies on top of 01).**
+⭐ **The whole change set lives on branch `claude/bot_insurance_dynamic_trait`, and it is one
+command.**
 
-* **`bot_insurance_01_fix_medium_difficulty.patch`** — eight `normalbot` → `mediumbot`. `medium`
-  goes 0 → 4 rungs, everything else unchanged. **Boot gate only.**
-* **`bot_insurance_03b_dynamic_trait_yaml.patch` + `OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs`**
-  — replaces all thirty ladder nodes with **one trait on `Player:`**, no conditions, scaled by the
-  owner's bot-type index. Folds in the ore-purifier bonus. Removes the conyard multiplication and
-  caps a payout at 10 000, so difficulty buys speed rather than a bigger total. ⚠ **Needs a C#
-  build** — it has never been compiled here.
+```bash
+bash docs/patches/apply_all.sh --check     # dry run: applies the series, verifies, undoes it
+bash docs/patches/apply_all.sh             # apply, build, run everything that needs no game
+```
+
+Four patches: the `medium` bug fix, the `DynamicBotInsurance` C# trait, the yaml swap, and an
+explicit `BotLimits@brutal` cadence (zero behaviour change). The script stops before the boot gate
+on purpose and prints what is left for you.
+
+⚠ **Why patches and not committed files:** `bash_guard.py` refuses to commit anything under
+`mods/` or `OpenRA.Mods.Cameo/` without boot proof, and that check is machine-level, not
+branch-level — a cloud container has no `perf.log` and forging one is not an option.
 
 ⛔ **Humans get NO bot insurance, and this was corrected once already.** One rung is 1 credit/tick;
 a buildable oil derrick is also 1 credit/tick, and the human derrick cap is 3. The human safety net
-is `player.yaml:243-262` only. Full reasoning, the measured boundary tables and the two open
-verifications: **`docs/patches/README.md`**.
+is `player.yaml:243-262` only.
+
+⛔ **Two things only a running game can settle**, both flagged by the script: whether
+`INotifyResourceAccepted` reaches a Player-actor trait (the ore-purifier half depends on it), and
+whether `PlayerStatistics.AssetsValue` already counts combat units (`ArmyValueWeight` ships at 0 to
+avoid double-counting until that is known). Full reasoning and every measured table:
+**`docs/patches/README.md`**.
 
 `docs/design/DEVIN_BRANCH_REVIEW.md` headline: Phase 0 audit,
 2026-09-01. Its headline corrects a premise that five external review rounds were built on:
