@@ -183,9 +183,30 @@ to the conyard that needs it.
 them.** A `medium` bot receives **zero** insurance income, while `easy` gets 3 rungs and `hard` gets
 5. The difficulty ladder has a hole in its middle, and it is the default difficulty.
 
-⚠ **Not fixed here.** The fix is one token (`normalbot` → `mediumbot`, or add `mediumbot` to the
-four lists) but it **changes bot difficulty balance**, and a yaml change needs a boot gate this
-container cannot run. Queued in `ROADMAP.md`; which way to fix it is **OD-G**.
+⭐ **RULED and WRITTEN 2026-09-01 — waiting only on a boot gate.** Maintainer: *"the players
+should also get the same insurance that the medium bot gets."* So the fix does two things at once:
+`normalbot` → `mediumbot`, and the four lowest rungs are opened to human players with
+`(!genericbot && !campaignbot)`.
+
+⚠ **`campaignbot` is new and necessary.** `genericbot` covers the ten selectable difficulties but
+deliberately **not** the eleventh bot type, `campaign`, and other modules depend on that omission —
+so widening `genericbot` was the wrong move. A separate `campaignbot` grant is added to
+`^AIDifficulties` instead, and campaign AI is explicitly excluded so scripted missions are not
+handed free income.
+
+The patch is `docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch`; `git apply --check`
+is clean against master. Measured by resolving the real expressions through `miniyaml.Ruleset`:
+
+| player kind | before | after |
+|---|--:|--:|
+| human | 0 | **4** |
+| campaign | 0 | 0 |
+| easiest / veryeasy / easy | 1 / 2 / 3 | 1 / 2 / 3 |
+| **medium** | **0** ⛔ | **4** |
+| hard … cameogod | 5 … 10 | 5 … 10 |
+
+⭐ **Every existing bot difficulty is unchanged** — only the broken rung and the human column move.
+`tools/audit/audit_bot_insurance.py` (new, in `run_all.sh`) fails before and passes after.
 
 ⚠ **A second finding, C#-side:** `BotInsurance` marks `ticks` `[VerifySync]` but the class does not
 implement `ISync`, so the sync check never runs on it — already recorded in the audit baseline
@@ -358,7 +379,8 @@ the one-owner rule. Every agent that proposed replacing those proposed it withou
 | **OD-C** | Strongest-first (maintainer's rule) vs the finishing exception — which wins when they disagree? Decide from phase-1 logs. |
 | **OD-D** | Does a team cash-transfer API exist? ⛔ Verify before any sharing code. |
 | **OD-E** | ✅ **CLOSED 2026-09-01 — it exists.** `BotInsurance` + `CashTrickler` + `ResourcePurifier`, ten rungs on `^AIConyardCash` (`defaults.yaml:6712`). See §1. What remains open is the *removal shape*, now row 5 of the removal order: trim to one rung (human parity), not to zero. |
-| **OD-G** | The `medium` rung gates on `normalbot`, a condition never granted on the conyard, so `medium` bots get zero insurance while `easy` gets 3 rungs and `hard` gets 5 (§1). Fix by renaming `normalbot` → `mediumbot` in the four lists, or by adding `mediumbot` alongside it? Either changes bot difficulty balance and needs a boot gate. |
+| **OD-G** | ✅ **CLOSED 2026-09-01.** `normalbot` → `mediumbot`, plus human parity at four rungs (the maintainer's ruling). Patch written and verified; needs only the boot gate. |
+| **OD-H** | Should the ladder move from the construction yard to the `Player` actor? `BotInsurance.cs` was written for the Player actor, and the current placement multiplies by conyard count **and** switches the ladder off when a bot loses its last conyard — the exact stuck case it exists to prevent. Patch prepared (`docs/patches/bot_insurance_02_…`), blocked on a magnitude ruling and one in-game check that `ResourcePurifier` still credits from the Player actor. |
 | **OD-F** | Cheat-removal order — is vision genuinely first, given it is the one that most corrupts *balance* measurement rather than making bots weakest? |
 
 ---

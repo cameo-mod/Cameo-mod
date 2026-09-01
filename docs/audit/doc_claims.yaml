@@ -1165,43 +1165,39 @@ claims:
     value: 1
     tolerance: 0
     what: >
-      Bot difficulties that can reach ZERO rungs of the passive-income ladder on
-      `^AIConyardCash` (defaults.yaml:6712). Currently 1 — `medium`, because the four
-      lowest rungs gate on `normalbot`, a condition `^AIDifficulties` never grants (it
-      grants `mediumbot`; the mod's only `normalbot` grant is on a Dark Reign building
-      and conditions are per-actor). ⛔ This is a BUG, not a design: `easy` gets 3 rungs
-      and `hard` gets 5, so the ladder has a hole at the DEFAULT difficulty. When it is
-      fixed this must fall to 0 and every doc below must say so IN THE SAME COMMIT.
-      Fixing it moves bot difficulty balance, so it needs a boot gate — ROADMAP OD-G.
-      ⭐ It exists because "passive bot income" was twice reported as NOT FOUND: the
+      Bot difficulties that can reach ZERO rungs of the passive-income ladder.
+      Currently 1 — `medium`, because the four lowest rungs gate on `normalbot`, a
+      condition `^AIDifficulties` never grants (it grants `mediumbot`; the mod's only
+      `normalbot` grant is on a Dark Reign building and conditions are per-actor).
+      ⛔ This is a BUG, not a design: `easy` gets 3 rungs and `hard` gets 5, so the
+      ladder has a hole at the DEFAULT difficulty. The fix is written and verified —
+      `docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch` — and needs only
+      a boot gate. **Set this to 0 IN THE SAME COMMIT that lands the patch.**
+      ⭐ The bug exists because "passive bot income" was twice reported as NOT FOUND: the
       trait is `BotInsurance` and nothing in its name says "cash". The measure below
-      searches by WIRING (which condition each rung requires), not by vocabulary, which
-      is the search that would have found it the first time.
+      searches by WIRING — it resolves the host actors and EVALUATES each rung's
+      RequiresCondition — so it is immune both to naming and to the ladder moving
+      actors (patch 02 relocates it to `Player:`). Enforced continuously by
+      `tools/audit/audit_bot_insurance.py`, which is wired into run_all.sh.
     docs:
       - docs/HANDOFF.md
       - docs/design/AI_RESEARCH_RECONCILIATION.md
       - docs/design/ROADMAP.md
+      - docs/design/BOOT_GATE_RUNBOOK.md
       - docs/LESSONS_LEARNED.md
       - docs/Cameo_Knowledge_Base_Manual.md
+      - docs/audit/SUMMARY.md
+      - docs/patches/README.md
     measure: |
-      import pathlib, re
-
-      def block(path, header):
-          lines = pathlib.Path(path).read_text(encoding='utf-8').split('\n')
-          s = next(i for i, l in enumerate(lines) if l.startswith(header))
-          e = next((i for i in range(s + 1, len(lines))
-                    if lines[i] and not lines[i][0].isspace() and not lines[i].startswith('#')),
-                   len(lines))
-          return '\n'.join(lines[s:e])
-
-      diff = block('mods/cameo/ai/ai.yaml', '^AIDifficulties:')
-      granted = set()
-      for m in re.finditer(r'GrantConditionOnBotOwner@\w+:\s*\n\s*Condition:\s*(\w+)', diff):
-          granted.add(m.group(1))
-      ladder = block('mods/cameo/rules/defaults.yaml', '^AIConyardCash:')
-      seen = set(re.findall(r'\w+', ' '.join(re.findall(r'RequiresCondition:.*', ladder))))
-      print(len([c for c in granted
-                 if c.endswith('bot') and c != 'genericbot' and c not in seen]))
+      import importlib.util, pathlib, sys
+      spec = importlib.util.spec_from_file_location(
+          'abi', pathlib.Path('tools/audit/audit_bot_insurance.py'))
+      abi = importlib.util.module_from_spec(spec)
+      sys.modules['abi'] = abi
+      spec.loader.exec_module(abi)
+      rungs = abi.ladder_rungs(abi.miniyaml.Ruleset('.'))
+      print(sum(1 for d in abi.DIFFICULTIES
+                if not any(abi.evaluate(r, abi.conditions_for(d)) for r in rungs)))
 
   - id: bot_insurance_rungs
     value: 10
@@ -1219,11 +1215,11 @@ claims:
       - docs/design/AI_RESEARCH_RECONCILIATION.md
       - docs/Cameo_Knowledge_Base_Manual.md
     measure: |
-      import pathlib, re
-      lines = pathlib.Path('mods/cameo/rules/defaults.yaml').read_text(encoding='utf-8').split('\n')
-      s = next(i for i, l in enumerate(lines) if l.startswith('^AIConyardCash:'))
-      e = next((i for i in range(s + 1, len(lines))
-                if lines[i] and not lines[i][0].isspace() and not lines[i].startswith('#')),
-               len(lines))
-      print(sum(1 for l in lines[s:e] if l.strip().startswith('BotInsurance@')))
+      import importlib.util, pathlib, sys
+      spec = importlib.util.spec_from_file_location(
+          'abi', pathlib.Path('tools/audit/audit_bot_insurance.py'))
+      abi = importlib.util.module_from_spec(spec)
+      sys.modules['abi'] = abi
+      spec.loader.exec_module(abi)
+      print(len(abi.ladder_rungs(abi.miniyaml.Ruleset('.'))))
 

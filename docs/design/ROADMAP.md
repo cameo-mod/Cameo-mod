@@ -64,11 +64,22 @@ the conyard never sees it.
 | unbeatable | 9 |
 | cameogod | 10 |
 
-- [ ] **XS, MAINTAINER CALL (OD-G)** — fix by renaming `normalbot` → `mediumbot` in the eight lines
-  above, or by adding `mediumbot` alongside `normalbot` (keeps the Dark Reign spawner's meaning
-  untouched, though that grant is on a different actor and cannot collide). **Either way this moves
-  bot difficulty balance at the default difficulty**, so it needs a boot gate and a maintainer
-  order, not a drive-by edit.
+- [x] **RULED 2026-09-01** — `normalbot` → `mediumbot`, and the four lowest rungs also open to
+  human players, per the maintainer: *"the players should also get the same insurance that the
+  medium bot gets."* Human parity is therefore **four rungs**, matching a medium bot exactly.
+- [ ] **XS, NEEDS ONLY A BOOT GATE** — the patch is written and verified:
+  **`docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch`**. `git apply --check` is
+  clean against master; `audit_bot_insurance.py` fails before and passes after; every other
+  difficulty's rung count is unchanged. Procedure and commit checklist:
+  [`../patches/README.md`](../patches/README.md), or `BOOT_GATE_RUNBOOK.md` §5.5.
+- [ ] **S, MAINTAINER CALL** — **`docs/patches/bot_insurance_02_relocate_to_player_actor.patch`**
+  moves the ladder from the conyard to the `Player` actor. `BotInsurance.cs` was written for the
+  Player actor (`Created` special-cases `self.Info.Name == "player"`), and the current placement
+  both multiplies the ladder by conyard count and switches it off when a bot loses its last
+  conyard — the exact stuck case the feature exists to prevent. ⛔ Blocked on two things a
+  boot-less environment cannot settle: the top-difficulty magnitude ruling, and an in-game check
+  that `ResourcePurifier` still credits from the Player actor (the yaml names `ResourcePurifier`,
+  which resolves past the vendored `ResourcePurifierCA` to a type not in this repo).
 - [ ] **XS** — `BotInsurance` marks `ticks` `[VerifySync]` without implementing `ISync`
   (`docs/audit/baseline/check_yaml_dedup.txt:11367`). C# change ⇒ rebuild ⇒ boot gate.
 - [ ] **S** — upstream CA gates insurance to *"2 minutes into the game"*
@@ -82,7 +93,12 @@ the check is silent. **Conditions are per-ACTOR.** A grant on actor A and a cons
 dead wiring that no current audit can see, and its own docstring says the check is approximate
 (`audit_orphans.py:10-11`).
 
-- [ ] **M** — new audit: **per-actor condition reachability**. For every resolved actor, collect the
+- [x] **DONE 2026-09-01** — **`tools/audit/audit_bot_insurance.py`**, wired into `run_all.sh`.
+  Closes the gap for this ladder specifically by EVALUATING each rung's `RequiresCondition` per
+  player kind instead of counting condition names. Two laws: rung count may never decrease as
+  difficulty rises, and no difficulty may reach zero rungs. **It is RED on master right now** —
+  that is the bug above, and it goes green the moment patch 01 lands.
+- [ ] **M** — the general case, still open: **per-actor condition reachability**. For every resolved actor, collect the
   conditions its traits GRANT and the conditions its traits REQUIRE, and report every requirement
   no trait on that same actor can ever grant (ignoring `ExternalCondition`, which is granted from
   off-actor by design). Read through `miniyaml.Ruleset.resolve` — ⛔ never hand-parse (CLAUDE.md

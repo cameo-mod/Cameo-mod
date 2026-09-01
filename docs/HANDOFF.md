@@ -289,8 +289,15 @@ searching the whole mod for the *concept*, both missed it. Full anatomy, magnitu
 ⛔ **A bug found while verifying it: `medium` bots get ZERO insurance income**, while `easy` gets 3
 rungs and `hard` gets 5. The four lowest rungs gate on `normalbot`, a condition `^AIDifficulties`
 never grants (it grants `mediumbot`); the only grant of `normalbot` in the mod is on a Dark Reign
-building and conditions are per-actor. One-token fix, but it moves bot difficulty balance and needs
-a boot gate — queued in `ROADMAP.md` as **OD-G**.
+building and conditions are per-actor. **`tools/audit/audit_bot_insurance.py` (new, in
+`run_all.sh`) is RED on master because of it.**
+
+⭐ **The fix is written, verified and waiting on one boot:**
+`docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch`. It also lands the maintainer's
+parity ruling — human players get the same four rungs a `medium` bot gets — and leaves every other
+difficulty's rung count untouched. Apply per `docs/patches/README.md` or `BOOT_GATE_RUNBOOK.md`
+§5.5. A second, separate patch relocates the ladder to the `Player` actor (where `BotInsurance.cs`
+was written to run); that one is blocked on a maintainer ruling and one in-game check.
 
 ⚠ **Do not plan to delete axis 3 outright.** Its job is stopping a bot getting permanently stuck at
 zero income, and `player.yaml:243-262` gives **human** players the same floor. Parity is one rung,

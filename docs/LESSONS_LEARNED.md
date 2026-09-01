@@ -10,6 +10,45 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 
 ---
 
+## A boot-less environment can still land engine work — as a patch, not as a hack (2026-09-01)
+
+⛔ **The conundrum.** A cloud container has no `engine/` build and no `%APPDATA%/OpenRA/Logs`, so
+the boot gate (CLAUDE.md rule 1, enforced on `git commit` by `bash_guard.py`) is **unsatisfiable
+there by construction**. Every yaml fix found in such a session hits the same wall.
+
+**The three wrong answers**, all of which have a certain logic and all of which are wrong:
+
+1. *Disable or edit the hook.* The gate exists because the Python resolver does not catch junk
+   trait nodes and only the engine does. A gate switched off for convenience is a gate that was
+   never load-bearing.
+2. *Leave it uncommitted in the working tree.* The container is ephemeral. The work dies with it,
+   and the next session re-derives it — this project has paid that bill more than once.
+3. *Commit it anyway and let someone boot later.* That is exactly the failure the gate prevents,
+   and it puts unverified content on a branch other people build on.
+
+⭐ **The right answer: `docs/patches/`.** Author the change, verify it as far as a boot-less
+environment honestly can, and commit it as a `git apply`-able patch plus a README section stating
+what was verified, what was NOT, and the exact apply-verify-boot-commit sequence. The work
+survives, the gate holds, and the person with a boot machine spends one command instead of a
+session. Delete the patch in the same commit that lands it, so the directory never accumulates
+changes that are already in the tree.
+
+**What "verify as far as you honestly can" means, concretely** — all of this needs no boot:
+
+* `git apply --check` against the real tree, then apply, then restore, so you know it lands;
+* resolve the affected actors through **`miniyaml.Ruleset`** before and after, on a hard-linked
+  shadow tree, and diff the trait lists — never hand-parse (rule 8e);
+* write the **audit that would have caught the bug**, and show it red before and green after;
+* state the residue. The `ResourcePurifier` relocation in patch 02 could not be verified because
+  the yaml names a type that resolves past the vendored `ResourcePurifierCA` into an assembly this
+  repository does not contain. That is written down as a blocker, not smoothed over.
+
+⚠ **The shadow tree trick, because the obvious version corrupts the repository.** `cp -al` gives
+you a whole hard-linked copy for free, but the files then SHARE inodes with the originals, and
+`cp` over one truncates the original in place. **`rm` the file first, then copy.** And never
+`git checkout -- .` to clean up (rule 6) — restore only the paths you touched, by name.
+
+
 ## "Not found" is a claim about your search, not about the tree (2026-09-01)
 
 ⛔ **The incident.** The maintainer said the bots have *"a passive income that increases with
@@ -226,6 +265,7 @@ Speed grid and no audit covers it. "The audit is green" answers only the questio
 
 **Crash classes — these end a boot, and most gates cannot see them**
 
+- [A boot-less environment can still land engine work — as a patch, not as a hack (2026-09-01)](#a-boot-less-environment-can-still-land-engine-work--as-a-patch-not-as-a-hack-2026-09-01)
 - ["Not found" is a claim about your search, not about the tree (2026-09-01)](#not-found-is-a-claim-about-your-search-not-about-the-tree-2026-09-01)
 - [A registry nothing reads, and a reader that fails silently (2026-08-31)](#a-registry-nothing-reads-and-a-reader-that-fails-silently-2026-08-31)
 - [A test can encode a WEAKER property than the law and then defend the bug (2026-08-30)](#a-test-can-encode-a-weaker-property-than-the-law-and-then-defend-the-bug-2026-08-30)

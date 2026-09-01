@@ -351,30 +351,40 @@ bash tools/audit/run_all.sh                                    # drift must be 0
 # --- BOOT GATE --- then commit yaml AND ledger TOGETHER
 ```
 
-### §5.5 — G5: the `medium`-bot insurance hole ⭐ **independent of G1–G4, one token, do it whenever**
+### §5.5 — G5: the `medium`-bot insurance hole ⭐ **PATCH IS WRITTEN — apply, boot, commit**
 
-Not a balance-pipeline change — a plain yaml wiring bug — but it moves **bot difficulty balance at
-the default difficulty**, so it needs your boot gate and a maintainer word on which way to fix it.
+Independent of G1–G4. Not a balance-pipeline change (`apply_balance` never writes these traits and
+they are in no ledger), so CLAUDE.md rule 3 does not apply — it is plain wiring. But it *is* engine
+content, so it needs your boot gate.
 
-`^AIConyardCash` (`mods/cameo/rules/defaults.yaml:6712`) is the bot passive-income ladder: ten rungs
-of `BotInsurance` + `CashTrickler` + `ResourcePurifier`, one per difficulty. Eight lines gate on
-**`normalbot`** (`:6801 :6805 :6814 :6818 :6827 :6831 :6840 :6844`). `^AIDifficulties`
-(`mods/cameo/ai/ai.yaml:16-18`) grants **`mediumbot`**, never `normalbot`; the mod's only
-`normalbot` grant is on the Dark Reign building `drpplant1.freedomguard`
-(`mods/cameo/rules/darkreign.yaml:3348`), and conditions are per-actor, so the conyard never sees
-it. `mediumbot` appears in **none** of the ten `RequiresCondition` lists.
-
-**Result: a `medium` bot gets ZERO insurance income**, while `easy` gets 3 rungs and `hard` gets 5.
+**The bug.** `^AIConyardCash` (`mods/cameo/rules/defaults.yaml:6712`) is the bot passive-income
+ladder — ten rungs of `BotInsurance` + `CashTrickler` + `ResourcePurifier`, one per difficulty.
+Eight lines gate on **`normalbot`**, which `^AIDifficulties` never grants (it grants `mediumbot`;
+the mod's only `normalbot` grant is on a Dark Reign building and conditions are per-actor). So
+`mediumbot` appears in **none** of the ten rung expressions and a `medium` bot — the DEFAULT
+difficulty — receives **zero** insurance income, while `easy` gets 3 rungs and `hard` gets 5.
 
 ```bash
-# the measurement, before and after — must go 1 -> 0
-python tools/audit/audit_doc_claims.py     # claim: bot_insurance_unreachable_difficulties
+python tools/audit/audit_bot_insurance.py        # FAILS on master today, and names the rung
+git apply --check docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch
+git apply         docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch
+python tools/audit/audit_bot_insurance.py        # must now PASS
+python tools/audit/audit_doc_claims.py           # bot_insurance_unreachable_difficulties 1 -> 0
+# --- BOOT GATE --- then set that claim's `value:` to 0 and commit yaml + claim + doc edits
 ```
 
-⛔ **Maintainer call (OD-G):** rename `normalbot` → `mediumbot` in those eight lines, or add
-`mediumbot` alongside it. Then update `value:` for `bot_insurance_unreachable_difficulties` in
-`docs/audit/doc_claims.yaml` **in the same commit** as the yaml, per the registry's own rule.
-Full anatomy: `AI_RESEARCH_RECONCILIATION.md` §1.
+Patch 01 also implements the maintainer's parity ruling — human players get the same four rungs a
+`medium` bot gets. **Every other difficulty is unchanged**; only the broken rung and the human
+column move. Full before/after table, rationale and the exact commit checklist:
+[`../patches/README.md`](../patches/README.md).
+
+⚠ **`bot_insurance_02_relocate_to_player_actor.patch` is a SEPARATE decision — do not apply it
+with 01 on autopilot.** It moves the ladder off the construction yard onto the `Player` actor,
+which is where `BotInsurance.cs` was written to run and which fixes a second real bug (today the
+ladder dies when a bot loses its last conyard — the exact "stuck with no income" case it exists to
+prevent). But it needs a maintainer ruling on the top-difficulty magnitude *and* one in-game check
+that `ResourcePurifier` still credits from the Player actor, which no boot-less environment can
+answer. Read `../patches/README.md` before applying it.
 
 ---
 
