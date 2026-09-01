@@ -424,6 +424,63 @@ omniscience — the same cheat class the roadmap in §1 exists to remove, reintr
 economy instead of through vision. An adaptive *difficulty setting* comparing against opponents
 may be a deliberate exception, but it must be argued for, not leaked in.
 
+### ⭐ The net-worth "par curve" proposal (2026-09-01) — three corrections and two free numbers
+
+Maintainer proposal: measure distress as net worth (cash + army + assets) against **two** ratios —
+`r_target` (versus what this difficulty should be worth at this game time) and `r_peers` (versus
+the average opponent) — and combine them into one "effective cash" for the insurance.
+Model: **`tools/balance/bot_difficulty_curve.py`**; 14 tests in `test_bot_difficulty_curve.py`.
+
+⛔ **1. The curve is a LOGISTIC, not an exponential approach.** "Rises slowly, then grows
+exponentially, then flattens" is a **sigmoid**. The function usually reached for —
+`A - (A-S)·e^(-t/τ)`, the **monomolecular / Mitscherlich / Newton-cooling** curve, a.k.a.
+"exponential rise to a maximum" — has *no slow start*: it grows fastest at t=0 and only ever
+decelerates. Measured on a `medium` bot, the two disagree most in exactly the window that matters:
+
+| minutes | 0 | 5 | 10 | 15 | 20 |
+|---|--:|--:|--:|--:|--:|
+| logistic | 10,000 | 12,205 | 27,150 | 57,591 | 68,396 |
+| Mitscherlich | 10,000 | **30,445** | 43,924 | 52,809 | 58,667 |
+
+At 5 minutes the wrong curve expects **2.5×** what the right one does. Judging bots against it
+would put nearly every early game "behind par" and fire the insurance for everybody.
+
+⛔ **2. The two ratios must NOT be multiplied — they are correlated.** A bot behind the curve is
+usually also behind the field, because both measure the same failure. Multiplying squares one piece
+of evidence: the worked example 0.5 × 0.5 = **0.25** claims "four times worse than par" from two
+observations that each said "twice". Worse, 0.25 × 0.25 = **0.0625** would pin the insurance at
+maximum permanently. Use the **geometric mean** `√(r_target · r_peers)`: 0.5 and 0.5 → **0.5**, and
+"twice the field but half the curve" → exactly **1.0**, which is the honest reading of par.
+
+⛔ **3. `r_peers` is the omniscience rule from the previous section, re-entering by another door.**
+It reads opponents' net worth, which no player can see, and it rubber-bands against the human's
+success — the same objection that ruled out scaling the production multipliers by distress
+(OD-L). It is a legitimate *choice*, not an error, but it must be made deliberately: it adds a
+cheat to a roadmap whose purpose is removing them, and it makes bot difficulty depend on how well
+the human is playing. A fog-safe alternative that keeps most of the value: compare against the
+bot's **own peak** net worth rather than the field.
+
+⭐ **Two numbers do NOT need inventing — they are already in the tree and already balanced:**
+
+* **The asymptote scale.** `BotLimits.HarvesterLimit` is exactly `3 × (rank+1)` — 3, 6, 9 … 30,
+  a precise **1× to 10× ladder**, which is the scale the proposal guessed at. Income capacity *is*
+  harvester count, so the per-difficulty asymptote derives straight from it.
+* **The time constant.** `ProductionTimeMultiplier` runs 130 (easiest) → 40 (cameogod). Scaling the
+  curve's midpoint by it makes harder bots ramp proportionally sooner and reuses a number that is
+  already tuned, instead of adding a second one to keep in sync.
+
+⚠ **One trap to check before summing.** `PlayerStatistics` exposes both `ArmyValue` and
+`AssetsValue`. If `AssetsValue` already counts combat units, then `cash + ArmyValue + AssetsValue`
+**double-counts the army**. Confirm against the engine source before wiring it — Common is not
+vendored here, so this could not be settled from this container.
+
+⚠ **And an unrelated fragility found while measuring:** `BotLimits@brutal` (`ai.yaml:103`) declares
+no `BuildingDelayModifier` / `BuildingIntervalModifier` / `UnitDelayModifier` /
+`UnitIntervalModifier`, unlike every other tier. It falls back to the trait default of 100
+(`OpenRA.Mods.CA/Traits/BotModules/BotLimits.cs:22-28`), which happens to sit correctly between
+`veryhard`'s 125 and `challenger`'s 75 — so the ladder is monotonic **by luck, not by intent**.
+Not a live bug; worth stating explicitly in yaml.
+
 ### Open decisions this file adds
 
 | id | decision |
@@ -433,6 +490,8 @@ may be a deliberate exception, but it must be argued for, not leaked in.
 | **OD-E** | ✅ **CLOSED 2026-09-01 — it exists.** `BotInsurance` + `CashTrickler` + `ResourcePurifier`, ten rungs on `^AIConyardCash` (`defaults.yaml:6712`). See §1. What remains open is the *removal shape*, now row 5 of the removal order: trim to one rung (human parity), not to zero. |
 | **OD-G** | ✅ **CLOSED 2026-09-01.** `normalbot` → `mediumbot`, plus human parity at four rungs (the maintainer's ruling). Patch written and verified; needs only the boot gate. |
 | **OD-H** | ✅ **CLOSED 2026-09-01** — the ladder moves to the `Player` actor as part of the `DynamicBotInsurance` rewrite, which also removes the conyard multiplication. The one open verification is carried on that patch: does `INotifyResourceAccepted` reach a Player-actor trait? Needs a running game. |
+| **OD-M** | The par curve's free parameters: `ASYMPTOTE_PER_HARVESTER` (5000), `MIDPOINT_MINUTES` (12 for medium) and `STEEPNESS` (0.45). Derived shape, invented magnitudes — these need playtest data, not more arithmetic. |
+| **OD-N** | ⛔ Does `r_peers` ship at all? It is omniscience plus rubber-banding (see above). Options: ship it as a deliberate exception, replace it with the bot's own peak net worth (fog-safe), or drop it and keep `r_target` alone. |
 | **OD-J** | Should the production multipliers become continuous (two thin per-actor traits reading one player-level authority), or stay as the 20 fixed instances? Cost: two new traits plus the queue-time sampling problem above. |
 | **OD-K** | Should distress use NET WORTH (cash + `ArmyValue` + `AssetsValue`) rather than cash alone? ⭐ Recommended — it removes the "broke mid-push with a huge army" false positive at no runtime cost. Open question is the weighting. |
 | **OD-L** | An `adaptive` 11th bot type whose effective rank floats 0→9 during a match — YES as an opt-in difficulty, ⛔ NOT as a modifier applied to the ten fixed ones. Fixed difficulties are the A/B baseline the whole cheat-removal roadmap is measured against; a difficulty that drifts with the economy makes two matches incomparable. |
