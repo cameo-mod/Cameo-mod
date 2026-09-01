@@ -624,3 +624,188 @@ weights, hence bandits with exploration rather than fixed tables), and **distrib
 5. **Do we want a human-replay pipeline** at all, given §8.4's distribution-shift warning?
 6. **Are the ten difficulty tiers all supposed to get the manager**, or is dynamic switching itself
    a high-difficulty feature? Making it difficulty-gated is a cheap, honest difficulty axis.
+
+---
+
+## 10. The module plan: every module, what changes, and how they connect
+
+§5 states the master module's role in the abstract. This section is the concrete build plan: what
+each module that Cameo actually loads does today, what changes for it, and what it is allowed to
+read. It exists so that implementation can start module by module without re-deriving the design,
+and so that a reviewer can check any single module against it in isolation.
+
+### 10.1 One authority per decision
+
+The load-bearing rule, and the one most likely to be violated by accident:
+
+> A decision has exactly one owner. The master module changes the *inputs* to a decision. It never
+> makes a decision another module already owns.
+
+Concretely: the master may raise the AA demand that `UnitBuilderBotModuleCA` reads, but it never
+queues a production order itself; it may name the main target, but `SquadManagerBotModuleCA` still
+picks which squad attacks what. Every past AI regression in this tree came from two writers of the
+same state, and §1.3 shows the engine punishes duplicate authorities with a hard crash rather than
+a subtle bug.
+
+The second rule follows from it: **absence degrades, it never breaks.** Every reader treats a
+missing master, a missing snapshot, or a stale snapshot as "carry on as today". That is what makes
+this incrementally shippable — each phase in 10.6 is a complete, playable state.
+
+### 10.2 What Cameo loads today
+
+Grounded in `mods/cameo/ai/ai.yaml` at the cited lines. This is the full set the plan has to
+account for — there are no other bot modules in the mod.
+
+| Module (instances) | ai.yaml | Owns today | Planned change |
+|---|---|---|---|
+| `SquadManagerBotModuleCA` @rush/@turtle/@tech/@expansion/@steamroller | 3177, 3250, 3323, 3396, 3469 | squad formation, attack/defence posture, retreat | reads main target + urgency from the snapshot; gains a sixth @guerrilla instance; **fog gate on its actor scan** (§0.2) |
+| `BaseBuilderBotModuleCA@generic` | 3755 | what to build and where, defence fractions, expansion | reads defence-fraction and expansion-appetite hints |
+| `UnitBuilderBotModuleCA@generic` | 4774 | unit mix, idle-unit accounting, composition consumption | reads counter-demand hints (AA / anti-armour / anti-infantry / detector / artillery) |
+| `UnitCompositionsBotModule` (world, **singleton**) | 6414 | the composition table | unchanged C#; gains personality- and counter-tagged rows via prerequisite tokens (§1.4) |
+| `SupportPowerBotASModule` | 214 | support power usage | reads main target so powers land on the player being pressured |
+| `SendUnitToAttackBotModule` (+@chrono) | 3538, 3655 | opportunistic single-unit attacks | reads main target as a preference, not a constraint |
+| `HarvesterBotModuleCA` | 3131 | harvester assignment, threat response | unchanged in phase 1; later reads "economy under attack" |
+| `McvExpansionManagerBotModule` (the only MCV module loaded) | 3143 | MCV deployment and expansion | reads expansion appetite (Expansion/Guerrilla raise it, Turtle lowers it) |
+| `CaptureManagerBotModuleCA` | 3157 | capture targets | reads main target for capture preference |
+| `BuildingRepairBotModule(CA)` | 3139, 3141 | repair response | unchanged |
+| `PowerDownBotModule` | 212 | power management | unchanged |
+| `CratePickupBotModule` | 3167 | crate collection | unchanged |
+| `LoadGarrisonerBotModuleCA@Infantry`, `LoadCargoBotModule@*` | 3687, 3691, 3727, 3733 | garrisoning and transports | unchanged in phase 1; Turtle should prefer garrisoning |
+| `MinelayerBotModule` | 3740 | minelaying | reads posture: Turtle mines approaches, Rush does not |
+| `ResourceMapBotModule` | 3747 | resource knowledge for the builders | unchanged (already an information provider, not a decider) |
+| `ExternalBotOrdersManager` | 3172 | queues orders that **synced** traits registered via `IssueOrderToBot` | unchanged, but see 10.4 — it is the precedent for order plumbing, in the opposite direction |
+| `BotLimits` per difficulty | 37-142 | the entire difficulty axis | unchanged; the manager is difficulty-gated by condition, not by new knobs (§9.6) |
+| **new** `MasterAiBotModule` | — | — | per-player observer/decider; owns main target, personality, urgency, snapshot |
+| **new** `ScoutBotModule` | — | — | dependency of fogged observation; Cameo has no scouting behaviour at all |
+| **new** `BotPersonalityController` (synced) | — | — | the only synced piece: resolves the personality order, grants/revokes the token (10.4) |
+
+Two things this table makes obvious. First, **most modules change by reading, not by being
+rewritten** — the snapshot is the whole integration surface, which is why 10.3 pins it down before
+any code. Second, the squad managers are the only place where personality is expressed structurally
+(five parallel instances), and that is already the mechanism the manager needs; nothing about the
+five-instance shape has to change to make switching dynamic.
+
+### 10.3 The snapshot: the one shared data structure
+
+The user's "input matrix". One immutable object per player, rebuilt on the slow cadence, read by
+everyone, written by nobody but the master.
+
+```csharp
+// unsynced, host-local, rebuilt on the slow cadence (10.5)
+sealed class BotSituation
+{
+    int Tick;                                 // when this was built; readers check staleness
+    Player MainTarget;                        // may be null: no contact yet
+    string Personality;                       // what the master ASKED for, not what is granted
+    Urgency Urgency;                          // Normal | Pressured | Emergency
+    IReadOnlyDictionary<Player, EnemyProfile> Enemies;   // §3.2 signals, per enemy
+    CounterDemand Demand;                     // AA, anti-armour, anti-infantry, detector, artillery: 0-100
+    int DefenceFractionHint;                  // for the base builder
+    int ExpansionAppetiteHint;                // for the MCV/expansion modules
+}
+```
+
+Three properties are deliberate:
+
+* **Pull-based.** Readers ask the master (`TraitOrDefault<MasterAiBotModule>()?.Situation`). The
+  master does not know its readers, so a reader can be added without touching it, and a missing
+  master is a `null` that every reader already has to handle.
+* **Immutable and stamped.** Readers may cache it and compare `Tick`; nobody can mutate another
+  module's view. This also makes the snapshot the natural log record (§6.2) — the thing we log is
+  exactly the thing the bot decided on, so a replay explanation is never a reconstruction.
+* **Hints, not commands.** `DefenceFractionHint` is an input the base builder may clamp or ignore
+  by its own rules. That is what keeps 10.1 true.
+
+`Personality` in the snapshot is the *request*. The authoritative state is the granted condition,
+because that is what the five squad-manager instances key off. Readers that care about posture must
+read the condition (as they do today), not this field; the field exists for logging and for the
+one-tick window before the order resolves.
+
+### 10.4 The one synced piece, and why an existing trait cannot do it
+
+The switch has to cross from unsynced reasoning into synced state, and §1.1 allows exactly one
+bridge: queue an order. `ExternalBotOrdersManager` (10.2) is the precedent for order plumbing, but
+it runs the other way — synced traits register, the module queues. What we need is the
+`PlacePlugAI` direction: module queues, synced trait resolves.
+
+`GrantConditionOnOrders` (`OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnOrders.cs`) looks like a
+zero-C# answer and is not one. Its `ResolveOrder` revokes the condition on **any** order whose name
+is not in its set (lines 44-47), and the Player actor resolves plenty of unrelated orders —
+`PlaceBuilding` is a player-level trait (`engine/OpenRA.Mods.Common/Traits/Player/PlaceBuilding.cs:22`),
+as are the production queues. The first building the bot places would clear its own personality.
+Five instances would give correct mutual exclusion and still lose the state on the next placement.
+
+So one small synced trait is unavoidable — the only new synced state in the whole design:
+
+```
+MasterAiBotModule (unsynced, IBotTick)
+    bot.QueueOrder(new Order("SetBotPersonality", player.PlayerActor, false)
+                   { TargetString = "guerrilla", SuppressVisualFeedback = true })
+        |
+BotPersonalityController (synced, on Player, IResolveOrder)   ~40 lines
+    validates TargetString against its configured token map
+    revokes the previous token, grants the new one, ignores a repeat of the current one
+        |
+existing consumers, unchanged:
+    SquadManagerBotModuleCA@<personality>       (condition-gated instance selection)
+    ProvidesPrerequisite@personality_<p>        -> personality-tagged compositions (§1.4)
+    ObserverConditionNotification@<p>           (observer-only switch announcement)
+```
+
+`GrantRandomCondition@personality` (`ai.yaml:5-6`) stays as the **initial draw**. If the manager is
+absent, disabled, or difficulty-gated off, the bot behaves exactly as it does today — a random
+fixed personality — which is the degradation rule of 10.1 applied to the riskiest change here.
+
+Two consequences to accept: every switch is a replay-visible order (good — it is auditable and it
+is how the observer indicator learns about it), and the switch costs one order per change, so the
+cadence limits in §4.5 are not just anti-thrash tuning, they are the cost control.
+
+### 10.5 Cadence, and why the master is cheap
+
+| Loop | Cadence | Work |
+|---|---|---|
+| Emergency check | ~25 ticks | danger delta only; can force Urgency=Emergency and Turtle |
+| Snapshot rebuild | ~150 ticks | per-enemy signal scan, counter demand, hints |
+| Target + personality decision | ~1500 ticks | scoring, hysteresis, the order |
+| Log flush | match end + on switch | append JSONL (§6) |
+
+The expensive part is the actor scan in the snapshot rebuild, and it is the same scan the squad
+manager already does every tick — so doing it once per 150 ticks in the master and letting readers
+share the result is a net *saving* if the squad managers are later pointed at the shared result
+instead of scanning independently. That consolidation is not phase 1, but the snapshot is shaped to
+allow it.
+
+### 10.6 Build order, each phase shippable on its own
+
+1. **Match logging, record-only.** No behaviour change. Writes the match record (§6.2) including
+   the fixed personality and the outcome. Value: the learning loop has data before any decision
+   code exists, and the log schema gets exercised while it is still cheap to change.
+2. **`MasterAiBotModule`, observe-only.** Builds and publishes the snapshot; decides nothing, and
+   no module reads it yet. Logged per rebuild. This is where the signal derivations get validated
+   against replays cheaply — a wrong detector is visible in the log without touching gameplay.
+3. **`BotPersonalityController` + dynamic switching.** The first behaviour change. Difficulty-gated
+   so the lower tiers keep today's fixed personality.
+4. **Main target selection**, consumed by the squad managers and support powers.
+5. **Counter demand and hints**, consumed by the unit builder, base builder and compositions
+   (`ProvidesPrerequisite` tokens, zero C#).
+6. **Fogged observation + `ScoutBotModule`.** Deliberately last among the behaviour changes,
+   because it makes the bots temporarily weaker and it invalidates any tuning done against
+   omniscient signals. This is the §9.1 decision; phases 1-5 are honest about being pre-fog.
+7. **Offline learning.** Aggregate logs, fit bandit priors per (faction, personality, enemy
+   strategy), commit them as reviewed data (§6.1 tier 4). Nothing neural until balance is frozen.
+
+Phases 1 and 2 are pure additions with no gameplay effect and can proceed while the balance
+pipeline is still moving. Phase 3 is the first one that needs playtesting attention, and phase 6 is
+the one that needs a tuning pass on everything before it.
+
+### 10.7 Failure modes this shape is chosen to avoid
+
+| Failure | Why it is avoided here |
+|---|---|
+| Duplicate authority (two writers of production or squads) | 10.1; enforced by the master owning no queues and no squads |
+| Second instance of a `TraitOrDefault` consumer | §1.3; the master and the compositions module are singletons by declaration |
+| Personality thrash | §4.5 hold time + momentum + slow cadence; and every switch costs an order (10.4) |
+| Desync from learning | §6.1 tiers; learned data is read at load or never touches synced state |
+| Learned weights overfitted to bot-vs-bot play | §8.4 distribution shift; priors stay small and are reviewed as balance data |
+| Losing today's behaviour on a bad phase | degradation rule in 10.1; `GrantRandomCondition` remains the fallback |
+| Tuning invalidated by the fog switch | fog is phase 6, and phases 1-5 are labelled pre-fog rather than pretending otherwise |
