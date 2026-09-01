@@ -32,127 +32,217 @@ git commit
 
 ---
 
-## `bot_insurance_01_fix_medium_and_human_parity.patch`
+## The bot-insurance work, in three parts
 
-**Status:** ready. Fixes a live bug. Needs the boot gate; needs no design ruling.
+⭐ **Read this first.** `01` and `03` are alternatives, not a sequence you must complete. `01` is
+the one-token stopgap that needs only a boot. `03` is the real replacement and needs a C# build.
+`03` is written to apply on top of `01`, so landing both in order is fine and is the expected path.
 
-### What it changes
+**Apply order, when landing everything:**
 
-`mods/cameo/ai/ai.yaml` — adds one condition grant to `^AIDifficulties`:
-
+```bash
+git apply docs/patches/bot_insurance_01_fix_medium_difficulty.patch    # yaml, boot only
+git apply docs/patches/bot_insurance_03a_dynamic_trait_csharp.patch    # creates the .cs
+git apply docs/patches/bot_insurance_03b_dynamic_trait_yaml.patch      # swaps the yaml over
+DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release --nologo -p:TargetPlatform=win-x64
+python tools/audit/audit_bot_insurance.py     # must PASS
+uv run --with pytest python -m pytest tools/tests/test_bot_insurance_model.py -q
+# --- BOOT GATE --- then commit, and `git rm` the three patches in the same commit
 ```
-	GrantConditionOnBotOwner@campaign:
-		Condition: campaignbot
-		Bots: campaign
-```
 
-`mods/cameo/rules/defaults.yaml` — rewrites the eight `RequiresCondition` lines of the four
-lowest rungs of the insurance ladder in `^AIConyardCash`, doing two things at once:
+⚠ **Why the C# ships as a patch too.** `OpenRA.Mods.Cameo/` counts as engine content to
+`bash_guard.py` exactly like `mods/`, so a boot-less environment cannot commit the `.cs` either.
+`tools/tests/test_bot_insurance_model.py` reads the trait **out of the patch** when the file is not
+in the tree, so the model-vs-C# drift guard stays live in the window before it lands — which is
+precisely when the two are being edited together.
 
-1. **`normalbot` → `mediumbot`.** `^AIDifficulties` grants `mediumbot` and never `normalbot`; the
-   mod's only `normalbot` grant is on the Dark Reign building `drpplant1.freedomguard`
-   (`darkreign.yaml:3348`) and conditions are per-ACTOR, so the ladder's host never saw it.
-   `mediumbot` appeared in **none** of the ten rung expressions, so a `medium` bot — the default
-   difficulty — received **zero** insurance income while `easy` got 3 rungs and `hard` got 5.
-2. **`(!genericbot && !campaignbot)` added to the four lowest rungs**, opening them to human
-   players. `genericbot` covers the ten selectable difficulties but deliberately **not** the
-   eleventh bot type, `campaign`; several modules rely on that, so `campaignbot` is added above
-   rather than widening `genericbot`, and campaign AI is explicitly excluded so scripted missions
-   are not handed free income.
+(`02`, which relocated the ladder to the `Player` actor, has been **deleted** — `03` subsumes it
+entirely, and this directory must never hold a patch that is already superseded.)
 
-### Why human parity, and why exactly four rungs
+---
 
-Maintainer ruling, 2026-09-01: *"the players should also get the same insurance that the medium
-bot gets."* The medium bot's rungs are `medium`, `easy`, `veryeasy`, `easiest` — so a human gets
-those four, ramping 1 → 4 credits/tick as cash falls from 4000 to below 1000. This also sets the
-target for cheat removal: humans already had a comeback floor of their own
-(`player.yaml:243-262`), so **parity is one ladder, not zero** — the ladder must never simply be
-deleted when the difficulty cheats come off.
+## `bot_insurance_01_fix_medium_difficulty.patch`
 
-### Verification (all of this was run before the patch was committed)
+**Status:** ready. Fixes a live bug. Needs the boot gate; needs no design ruling. **58 lines,
+eight identical token changes.**
+
+`^AIConyardCash` gates its four lowest rungs on **`normalbot`**. `^AIDifficulties` grants
+`mediumbot` and never `normalbot`; the mod's only `normalbot` grant is on the Dark Reign building
+`drpplant1.freedomguard` (`darkreign.yaml:3348`), and conditions are per-ACTOR, so the ladder's
+host never sees it. `mediumbot` appears in **none** of the ten rung expressions, so a `medium`
+bot — the DEFAULT difficulty — receives **zero** insurance income while `easy` gets 3 rungs and
+`hard` gets 5.
+
+The patch replaces those eight `normalbot` references with `mediumbot`. Nothing else.
 
 ```bash
 python tools/audit/audit_bot_insurance.py     # FAILS before, PASSES after
 python tools/audit/audit_doc_claims.py        # bot_insurance_unreachable_difficulties: 1 -> 0
 ```
 
-Measured rung counts, evaluated by resolving the real `RequiresCondition` expressions through
-`miniyaml.Ruleset`:
-
 | player kind | before | after |
 |---|--:|--:|
-| human | 0 | **4** |
+| human | 0 | 0 |
 | campaign | 0 | 0 |
-| easiest | 1 | 1 |
-| veryeasy | 2 | 2 |
-| easy | 3 | 3 |
+| easiest / veryeasy / easy | 1 / 2 / 3 | 1 / 2 / 3 |
 | **medium** | **0** ⛔ | **4** |
-| hard | 5 | 5 |
-| veryhard | 6 | 6 |
-| brutal | 7 | 7 |
-| challenger | 8 | 8 |
-| unbeatable | 9 | 9 |
-| cameogod | 10 | 10 |
+| hard … cameogod | 5 … 10 | 5 … 10 |
 
-⭐ **Every existing bot difficulty is unchanged.** Only the broken rung and the human column move.
-
-### On commit, also
-
-* set `value: 0` for `bot_insurance_unreachable_difficulties` in `docs/audit/doc_claims.yaml`
-  (the registry's own rule: the number and the docs move in the same commit);
-* strike the "medium gets zero" wording in `docs/HANDOFF.md`,
-  `docs/design/AI_RESEARCH_RECONCILIATION.md` §1, `docs/audit/SUMMARY.md` and
-  `docs/Cameo_Knowledge_Base_Manual.md`, and close **OD-G**.
+⛔ **Humans stay at zero, deliberately.** An earlier draft of this patch also opened the four
+lowest rungs to human players. That was **wrong and has been reverted**: one rung is
+`Interval: 1, Amount: 1` = 1 credit/tick, and a buildable oil derrick is
+`Interval: 250, Amount: 250` = **the same 1 credit/tick**. Four rungs is therefore four free oil
+derricks, against a human derrick cap of 3 (`player.yaml:279`,
+`CashTrickler < 3 && derricklimit_is_3`). The human safety net is, and stays, the two mechanics
+already in `player.yaml:243-262`: insurance while you have no construction yard, and the sub-1000
+trickle that stops ally cash transfers from bankrupting the giver.
 
 ---
 
-## `bot_insurance_02_relocate_to_player_actor.patch`
+## `bot_insurance_03a_dynamic_trait_csharp.patch` + `bot_insurance_03b_dynamic_trait_yaml.patch`
 
-**Status:** ⚠ prepared, **needs a maintainer ruling AND one in-game check** on top of the boot
-gate. Applies on top of patch 01.
+**Status:** ⚠ written and algorithmically verified, **but the C# has never been compiled** — a
+cloud container has no `engine/` and no dotnet. Needs a build, then the boot gate.
 
-### What it changes
+### What it does
 
-Moves all ten rungs — `BotInsurance` + `CashTrickler` + `ResourcePurifier` — out of
-`^AIConyardCash` (`defaults.yaml`) and onto `Player:` (`player.yaml`). `^AIConyardCash` keeps its
-two `Inherits@` lines and a note; the template name is kept because 47 actors inherit it and
-renaming it is a 47-file change for no behavioural gain.
+Deletes all thirty ladder nodes from `^AIConyardCash` and puts **one trait on `Player:`**:
 
-### Why the Player actor is the right host
+```
+	DynamicBotInsurance:
+```
 
-* **`BotInsurance.cs` was written for it.** `Created` opens with
-  `var playerActor = self.Info.Name == "player" ? self : self.Owner.PlayerActor;` — an explicit
-  Player-actor special case, with the conyard as the fallback path.
-* **The conyard placement multiplies the ladder by conyard count.** `BotLimits` lets `cameogod`
-  build 7 (`ai.yaml:134`), and each conyard carries an independent ladder.
-* ⭐ **And it switches the ladder off exactly when it is needed most.** A bot that loses its last
-  construction yard loses the whole ladder and drops to `player.yaml`'s single `nobase` rung with
-  a 60-second delay — which is precisely the *"stuck on no income and cannot rebuild"* case the
-  feature exists to prevent. This is the strongest argument for the move: it is a bug fix, not a
-  refactor.
+No conditions, no per-difficulty duplication. The trait reads `self.Owner.BotType`, finds its
+index in a `Difficulties` list, and interpolates everything from that index — so a new difficulty
+is one more name in one list.
 
-### ⛔ The two things that must be settled first
+| | easiest | → | cameogod |
+|---|--:|:-:|--:|
+| threshold tracking rate / tick | 1 | … | 10 |
+| delay divisor (`delay = average / divisor`) | 10 | … | 100 |
+| **PEAK** credits / tick (paid at zero cash) | 1 | … | 10 |
+| purifier bonus | 5% | … | 50% |
 
-1. **`ResourcePurifier` on the Player actor is UNVERIFIED.** The vendored `ResourcePurifierCA`
-   (`OpenRA.Mods.CA/Traits/ResourcePurifierCA.cs`) carries the same `"player"` special case and
-   even guards its floating text with `HasTraitInfo<IOccupySpaceInfo>()`, so it clearly expects to
-   run there — **but the yaml says `ResourcePurifier:`, not `ResourcePurifierCA:`**, and with the
-   assembly order `AS, CA, Cameo, Cnc, D2k, Common` that name resolves past CA to a type neither
-   vendored in this repository nor present in a cloud container. **Confirm in a running game that
-   purifier income is still credited after the move**, or split the purifiers back onto the
-   conyard. Everything else is safe: `CashTrickler` on the Player actor is already proven in this
-   very mod (`player.yaml:250`, `:258`).
-2. **It is a balance change at the top difficulties.** For the common case — one construction
-   yard — nothing changes. It removes a late-game multiplier that only bites when a bot holds
-   several conyards *and* is broke. Whether that multiplier was intended is the maintainer's call.
+### The state machine
 
-### Verification already done
+**ARMING** → the bar **tracks** the rolling average: it moves toward
+`clamp(average, 1000, 10000)` by at most `rate` per tick — **up when the average is above it, down
+when below, same rate either way**. When the owner's cash falls **strictly below** the bar, freeze
+it and compute `delay = average / divisor`.
+**DELAYING** → wait that long; recovering above the frozen bar cancels outright and unfreezes.
+**PAYING** → grant a payout **scaled by how deep below 10000 the owner is**, plus the purifier
+percentage on the same scale, until cash reaches 10000 — then re-arm.
 
-Resolved through `miniyaml.Ruleset` on a shadow tree with both patches applied:
+Three design points, each of which was wrong in an earlier draft and is now pinned by a test:
 
-* `Player` gains the 10 rungs and keeps its existing `secondaryinsurance` + `comeback` mechanics;
-* `^Conyard` — the template all 47 conyard actors reach — drops to **0** rungs;
-* `Player` already grants every `*bot` condition the rungs gate on (it inherits `^AIDifficulties`
-  at `ai.yaml:144-145`), so no condition is left dangling;
-* `audit_bot_insurance.py` PASSES, with rung counts **identical** to patch 01 alone — the move is
-  behaviour-preserving in rung terms, which is exactly what a relocation should be.
+⭐ **The payout is PROPORTIONAL TO DEPTH, which is where the old ladder's granularity lived.** The
+ten rungs were not just ten difficulties — they **stacked**, so a `cameogod` bot drew 1 credit/tick
+just under 10000 and 10 credits/tick near zero. A flat on/off payout throws that away and hands the
+hardest bot its maximum for the entire time it is insured. So:
+
+```
+depth_permille = clamp(1000 * (10000 - cash) / 10000, 0, 1000)
+accumulator   += peak_rate * depth_permille
+grant          = accumulator / 1000          # remainder carries to the next tick
+```
+
+Measured against the old ladder — it reproduces the curve and then fills in **between** the rungs:
+
+| cash | old rungs (cameogod) | new credits/tick (cameogod) |
+|--:|--:|--:|
+| 9000 | 1 | 1.00 |
+| 7500 | 3 | 2.50 |
+| 5000 | 5 | 5.00 |
+| 2500 | 8 | 7.50 |
+| 1000 | 9 | 9.00 |
+| 0 | 10 | 10.00 |
+
+⚠ **Integer milli-credits, never floating point** — the payout must be deterministic across
+machines or it desyncs. The carried remainder is what makes a 0.5 credit/tick rate actually pay
+1 credit every other tick instead of truncating to nothing, which is what a naive integer divide
+does to every low difficulty.
+
+⛔ **The bar tracks both ways. It is not a one-way ramp and not a falling bar.** A bar *falling*
+from 10000 (the first spec) is **dead mechanics**: the trigger is easiest to satisfy when the bar
+is *highest*, so a falling bar fires on tick one for anyone under 10000 and only ever makes
+triggering harder afterwards. Simulated, every difficulty behaved identically and the entire
+ordering came from the delay divisor — the rate did nothing at all. A one-way *rising* bar works
+but never comes back down, so it stops describing the economy the moment the economy changes.
+
+⛔ **The trigger is strictly `<`, not `<=`.** With `<=` the bar converges to the average, the
+average converges to a stable cash pile, and **every bot under the cap eventually insures itself** —
+an emergency measure quietly becoming baseline income. Measured: at `<=` a bot cruising at 9000
+insured itself; at `<` it does not. `test_a_stable_bot_is_not_subsidised` pins it.
+
+⛔ **`MinThreshold` must be greater than zero.** This is the answer to *"0 for the lowest
+boundary?"* — **no, and 0 breaks the feature outright.** The bar tracks the average, so a bot stuck
+at zero drives its own average to zero, the bar follows it down, and `cash < 0` is unsatisfiable.
+Measured, floor 0 strands a bankrupt bot **permanently**; floor 500 or 1000 rescues it. The floor
+is the absolute poverty line: below it you are insured whatever your history says.
+
+| floor | bot stuck at 0 | bot stuck at 300 |
+|--:|---|---|
+| **0** | ⛔ **stuck forever** | ⛔ **stuck forever** |
+| 500 | rescued | rescued |
+| **1000** (chosen) | rescued | rescued |
+
+⚠ **And `MaxThreshold` should stay at 10000, not go higher** — it is both the bar's ceiling and the
+payout exit, and raising it insures bots that are not in trouble. A bot running a 25 000 economy
+that dips is left alone at a cap of 10000 and subsidised at 20000:
+
+| cap | crash 25000 → 12000 | → 15000 | → 18000 |
+|--:|---|---|---|
+| **10000** (chosen) | not insured | not insured | not insured |
+| 20000 | ⛔ insured | ⛔ insured | ⛔ insured |
+
+⚠ **Honest limit on the rate knob.** Even tracking both ways, `ThresholdRatePerTick` is the
+**weakest** of the three difficulty levers: the trigger fires as soon as cash dips below the
+tracked average, so convergence speed rarely gates anything. The divisor and the credits/tick are
+what actually separate the difficulties (both 10×). If the rate needs more bite, the lever is
+`AverageWindow`, not the rate.
+
+### What the removal buys, and what it costs
+
+⭐ **No more conyard scaling.** The ladder sat on the construction yard, so it multiplied by
+conyards owned (`BotLimits` allows `cameogod` **7**) — a late-game snowball — and switched off
+entirely when a bot lost its last conyard, the exact "stuck with no income" case it exists to
+prevent. Both are gone.
+
+⭐ **Self-limiting by construction, and it tapers.** A payout stops at 10000 and shrinks as the
+owner approaches it, so difficulty buys **speed and depth of help, not a bigger cap**. Recovering a
+bankrupt bot over 12000 ticks: easiest reaches 6977, medium 9912, cameogod 9991 — the same
+destination, approached at very different rates. This is a real nerf to late-game AI economy
+(previously up to 7 conyards × 10 rungs = 70 credits/tick; now 10 at the absolute peak) and it is
+intended.
+
+### ⚠ What is verified, and what is not
+
+**Verified** (`tools/balance/bot_insurance_model.py`, 50 tests in
+`tools/tests/test_bot_insurance_model.py`): the state machine — the track/freeze/delay/pay/re-arm
+cycle, monotonicity across difficulties, no payout oscillation, a rich bot never insured, a stable
+bot never subsidised, a bankrupt bot always rescued at every difficulty, both boundary choices
+above, the payout ramping rather than switching on, fractional rates surviving integer truncation,
+the purifier only paying while paying, and the model's constants matching the C# field
+defaults parsed out of the `.cs`. The maintainer's worked example (average 1500 → 150-tick delay at
+easiest) is pinned as a test.
+
+**NOT verified — do these at build time:**
+
+1. ⛔ **It does not compile here.** No `engine/`, no dotnet. Expect to fix small things.
+2. ⛔ **`INotifyResourceAccepted` on the Player actor.** The purifier half depends on the engine
+   delivering that notification to a Player-actor trait. `ResourcePurifierCA` carries the same
+   `self.Info.Name == "player"` special case and guards its floating text with
+   `HasTraitInfo<IOccupySpaceInfo>()`, so it plainly expects to run there — but that is inference,
+   not proof, and the notifying code is in an assembly this repository does not contain.
+   **Check in a running game that purifier income is credited**; if it is not, the fallback is a
+   thin refinery-side trait that forwards the value.
+3. **Balance.** The numbers above are the shape you asked for, not a tuned economy.
+
+### On CA vs Common for the purifier — the answer is neither
+
+Today's yaml says `ResourcePurifier:`, and with the assembly order
+`AS, CA, Cameo, Cnc, D2k, Common` **nobody in this repository can say which type that resolves
+to** — the vendored copy is named `ResourcePurifierCA`, so the bare name resolves past it into an
+assembly that is not here. Folding the logic into `DynamicBotInsurance` removes the question
+entirely: it becomes Cameo-owned, single-assembly, and reads the way it behaves. That is also why
+the whole mechanic is one trait rather than three from three assemblies.

@@ -1,0 +1,328 @@
+"""THE C# CANNOT BE COMPILED HERE, SO THE STATE MACHINE IS PINNED IN PYTHON INSTEAD.
+
+⛔ WHAT THIS FILE IS DEFENDING. `OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs` replaces a
+ten-rung yaml ladder with one trait holding a small state machine: a threshold that rises, freezes,
+and re-arms, with a delay derived from a rolling average. A cloud container has no `engine/` and no
+dotnet (CLAUDE.md rule 7), so that C# is unverified AS CODE until someone builds it. The state
+machine, though, is exactly the part with non-obvious failure modes -- it can oscillate, stick at
+zero, pay a rich player, or never fire at all -- and all of that IS verifiable here.
+
+`tools/balance/bot_insurance_model.py` mirrors `Tick` line for line. These tests pin the behaviour
+that mirror must have. ⚠ The two files must change together; `test_the_model_matches_the_csharp_defaults`
+is the guard that notices when they do not, by parsing the field defaults straight out of the .cs.
+"""
+
+from __future__ import annotations
+
+import pathlib
+import re
+import sys
+
+import pytest
+
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools" / "balance"))
+
+import bot_insurance_model as m  # noqa: E402
+
+CS = ROOT / "OpenRA.Mods.Cameo" / "Traits" / "DynamicBotInsurance.cs"
+CS_PATCH = ROOT / "docs" / "patches" / "bot_insurance_03a_dynamic_trait_csharp.patch"
+
+
+def csharp_source() -> str:
+    """The trait's C# — from the tree once the patch has landed, from the PATCH before that.
+
+    ⚠ Reading the patch is not a convenience, it is the point. `OpenRA.Mods.Cameo/` is engine
+    content, so a boot-less environment cannot commit the .cs and it ships as a patch instead
+    (docs/patches/README.md). If the drift guard only looked at the tree it would silently skip in
+    exactly the window where the model and the trait are being edited together and drift is most
+    likely — which is a test that passes by not running, the failure mode this repo keeps paying
+    for.
+    """
+    if CS.exists():
+        return CS.read_text(encoding="utf-8")
+
+    assert CS_PATCH.exists(), f"neither {CS} nor {CS_PATCH} exists — the trait has been lost"
+    return "\n".join(line[1:] for line in CS_PATCH.read_text(encoding="utf-8").splitlines()
+                      if line.startswith("+") and not line.startswith("+++"))
+
+
+# ------------------------------------------------------- drift guard (the important one)
+
+def _csharp_defaults() -> dict[str, int]:
+    src = csharp_source()
+    return {n: int(v) for n, v in
+            re.findall(r"public readonly int (\w+) = (-?\d+);", src)}
+
+
+def test_the_model_matches_the_csharp_defaults():
+    """If this fails, the model and the trait have drifted and every test below is fiction."""
+    cs = _csharp_defaults()
+    assert cs["AverageWindow"] == m.AVERAGE_WINDOW
+    assert cs["MaxThreshold"] == m.MAX_THRESHOLD
+    assert cs["MinThreshold"] == m.MIN_THRESHOLD
+    assert (cs["MinThresholdRatePerTick"], cs["MaxThresholdRatePerTick"]) == (m.MIN_RATE, m.MAX_RATE)
+    assert (cs["MinDelayDivisor"], cs["MaxDelayDivisor"]) == (m.MIN_DIVISOR, m.MAX_DIVISOR)
+    assert (cs["MinDelayTicks"], cs["MaxDelayTicks"]) == (m.MIN_DELAY, m.MAX_DELAY)
+    assert (cs["MinCashPerTick"], cs["MaxCashPerTick"]) == (m.MIN_CASH, m.MAX_CASH)
+    assert (cs["MinPurifierModifier"], cs["MaxPurifierModifier"]) == (m.MIN_PURIFIER, m.MAX_PURIFIER)
+
+
+def test_the_csharp_difficulty_list_matches_the_model():
+    src = csharp_source()
+    block = re.search(r"public readonly string\[\] Difficulties =\s*\{(.*?)\};", src, re.S)
+    assert block, "the Difficulties field moved or changed shape"
+    assert re.findall(r'"(\w+)"', block.group(1)) == m.DIFFICULTIES
+
+
+def test_the_bar_tracks_both_ways_and_the_csharp_says_so():
+    """The bar is a slew-limited tracker. Both earlier designs were rejected; keep it deliberate."""
+    src = csharp_source()
+    assert "Math.Clamp(target - threshold, -ratePerTick, ratePerTick)" in src
+    assert "IT IS NOT A ONE-WAY RAMP AND NOT A FALLING BAR" in src
+    assert "cash < threshold" in src, "the trigger must be STRICT"
+
+
+# ------------------------------------------------------- rank scaling
+
+def test_rank_endpoints_are_exactly_the_configured_min_and_max():
+    n = len(m.DIFFICULTIES)
+    assert m.by_rank(1, 10, 0, n) == 1
+    assert m.by_rank(1, 10, n - 1, n) == 10
+    assert m.by_rank(10, 100, 0, n) == 10
+    assert m.by_rank(10, 100, n - 1, n) == 100
+
+
+def test_the_maintainers_worked_example():
+    """"if the average was like 1500 in the last minute then make it 150 ticks" -- easiest."""
+    ins = m.Insurance("easiest")
+    for _ in range(m.AVERAGE_WINDOW):
+        ins.history.append(1500)
+    assert ins.average == 1500
+    assert ins.average // ins.delay_divisor == 150
+
+
+def test_the_hardest_difficulty_waits_ten_times_less_than_the_easiest():
+    easiest, hardest = m.Insurance("easiest"), m.Insurance("cameogod")
+    assert hardest.delay_divisor == 10 * easiest.delay_divisor
+    assert hardest.rate_per_tick == 10 * easiest.rate_per_tick
+    assert hardest.cash_per_tick == 10 * easiest.cash_per_tick
+
+
+# ------------------------------------------------------- who is insured at all
+
+@pytest.mark.parametrize("who", ["campaign", "", "human", "nonsense"])
+def test_a_player_outside_the_difficulty_list_is_never_insured(who):
+    ins = m.Insurance(who)
+    assert ins.rank == -1
+    assert sum(ins.tick(0) for _ in range(5000)) == 0, (
+        "a non-bot owner must never receive a credit -- one rung is one oil derrick, and the "
+        "human derrick cap is 3")
+
+
+@pytest.mark.parametrize("difficulty", m.DIFFICULTIES)
+def test_a_rich_bot_is_never_insured(difficulty):
+    r = m.simulate(difficulty, cash=m.MAX_THRESHOLD + 5000, ticks=5000)
+    assert r["first_payout_tick"] is None and r["total_paid"] == 0
+
+
+@pytest.mark.parametrize("difficulty", m.DIFFICULTIES)
+def test_a_bankrupt_bot_is_always_rescued(difficulty):
+    """The whole purpose: a bot at zero must never be left stuck at zero."""
+    r = m.simulate(difficulty, cash=0, ticks=5000)
+    assert r["first_payout_tick"] is not None
+    assert r["first_payout_tick"] <= m.MIN_DELAY + 5
+    assert r["total_paid"] > 0
+
+
+# ------------------------------------------------------- the laws
+
+def test_harder_bots_are_rescued_sooner_after_a_crash():
+    """The property the original falling-bar spec did NOT have.
+
+    Measured on a CRASH -- a healthy average, then cash collapses -- because that is what
+    insurance is for. A bot merely HOLDING a small stable pile is deliberately not insured
+    (see test_a_stable_bot_is_not_subsidised), so it is the wrong scenario to measure speed on.
+    """
+    firsts = []
+    for d in m.DIFFICULTIES:
+        ins = m.Insurance(d)
+        for _ in range(m.AVERAGE_WINDOW * 2):
+            ins.tick(8000)
+        firsts.append(next((t for t in range(20000) if ins.tick(500)), None))
+
+    assert all(f is not None for f in firsts), firsts
+    assert firsts == sorted(firsts, reverse=True), firsts
+    assert firsts[0] >= 8 * firsts[-1], (
+        f"easiest {firsts[0]} vs hardest {firsts[-1]} — the difficulty spread has collapsed")
+
+
+@pytest.mark.parametrize("cash", [2000, 5000, 9000, 9999, 12000])
+def test_a_stable_bot_is_not_subsidised(cash):
+    """⛔ The reason the trigger is `<` and not `<=`.
+
+    With `<=` the bar converges to the average, the average converges to a stable cash pile, and
+    every bot under the cap eventually insures itself — turning an emergency measure into baseline
+    income, which is the snowball this rewrite exists to remove.
+    """
+    ins = m.Insurance("cameogod")
+    assert not any(ins.tick(cash) for _ in range(10000))
+
+
+def test_a_bot_below_the_poverty_line_IS_subsidised_even_when_stable():
+    """The other side of the same law: MinThreshold is an absolute floor, not a relative one."""
+    ins = m.Insurance("medium")
+    assert any(ins.tick(m.MIN_THRESHOLD - 500) for _ in range(10000))
+
+
+@pytest.mark.parametrize("difficulty", ["easiest", "medium", "cameogod"])
+def test_a_zero_floor_strands_a_bankrupt_bot(difficulty):
+    """⛔ Why MinThreshold must be > 0 — the answer to "0 for the lowest boundary?".
+
+    The bar tracks the rolling average. A bot stuck at zero drives its own average to zero, so
+    with a floor of 0 the bar follows it to 0 and `cash < 0` can never be satisfied. The bot is
+    stranded permanently, in the exact situation the trait exists to prevent.
+    """
+    stranded = m.Insurance(difficulty, min_threshold=0)
+    assert not any(stranded.tick(0) for _ in range(20000)), "a zero floor must strand — it does not"
+
+    rescued = m.Insurance(difficulty, min_threshold=m.MIN_THRESHOLD)
+    assert any(rescued.tick(0) for _ in range(20000))
+
+
+def test_raising_the_cap_subsidises_bots_that_are_not_in_trouble():
+    """Why the ceiling is 10000 and not "10k or higher" — the measured cost of raising it.
+
+    The case is a WEALTHY bot dipping, not a stable one: a bot running a 25000 economy that falls
+    to 18000. At cap 10000 the bar is pinned at 10000 and it is correctly left alone — 18000 is
+    not distress. At cap 20000 the bar follows the average up and insures it, which is a subsidy
+    to the richest player on the map.
+    """
+    def dips_to(cap, rich, now):
+        ins = m.Insurance("medium", max_threshold=cap)
+        # ⚠ Prime long enough for the bar to actually CONVERGE on the cap. At 4/tick it needs
+        # 5000 ticks to climb to 20000; a shorter prime measures the ramp, not the cap.
+        for _ in range(6000):
+            ins.tick(rich)
+        return any(ins.tick(now) for _ in range(8000))
+
+    for crash_to in (12000, 15000, 18000):
+        assert not dips_to(m.MAX_THRESHOLD, 25000, crash_to), (
+            f"{crash_to} must not be insured at cap {m.MAX_THRESHOLD}")
+        assert dips_to(20000, 25000, crash_to), (
+            f"at cap 20000 a bot with {crash_to} credits IS insured — a subsidy, not insurance")
+
+
+def test_a_payout_never_exceeds_the_gap_to_the_cap():
+    """Self-limiting by construction: difficulty buys SPEED, not a bigger total."""
+    for d in m.DIFFICULTIES:
+        r = m.simulate(d, cash=0, ticks=40000)
+        assert r["total_paid"] <= m.MAX_THRESHOLD + 50, (d, r)
+
+
+def test_no_credit_is_ever_granted_at_or_above_the_start_threshold():
+    ins = m.Insurance("cameogod")
+    for _ in range(5000):
+        assert ins.tick(m.MAX_THRESHOLD) == 0
+
+
+def test_paying_does_not_oscillate():
+    """Exiting at the frozen bar instead of StartThreshold makes a payout oscillator. It must not."""
+    ins = m.Insurance("medium")
+    cash, transitions, last = 1500, 0, ins.phase
+    for _ in range(20000):
+        cash += ins.tick(max(0, cash))
+        if ins.phase != last:
+            transitions += 1
+            last = ins.phase
+    assert transitions < 30, f"{transitions} phase flips is churn, not a state machine"
+
+
+def test_recovering_during_the_delay_cancels_the_payout():
+    # A CRASH, not a stable small pile: a stable bot is deliberately never insured, so it would
+    # never reach the delay to have it cancelled.
+    ins = m.Insurance("cameogod")
+    for _ in range(m.AVERAGE_WINDOW):
+        ins.tick(8000)
+    for _ in range(200):
+        ins.tick(500)
+    assert ins.phase in ("delaying", "paying")
+
+    # One tick above the frozen bar is enough to cancel. The bar is then UNFROZEN, not reset:
+    # it resumes tracking the average, which is the whole point of making it a tracker.
+    before = ins.threshold
+    assert ins.tick(m.MAX_THRESHOLD + 1) == 0
+    assert ins.phase == "arming"
+    for _ in range(50):
+        ins.tick(m.MAX_THRESHOLD + 1)
+    assert ins.threshold != before, "the bar stayed frozen after the cancel — it must resume tracking"
+    assert ins.threshold <= m.MAX_THRESHOLD
+
+
+# ------------------------------------------------------- the purifier half
+
+def test_the_purifier_bonus_is_paid_only_while_paying_and_scales_with_difficulty():
+    for difficulty, want in (("easiest", 5), ("cameogod", 50)):
+        ins = m.Insurance(difficulty)
+        ins.banked = 1000
+        assert ins.tick(m.MAX_THRESHOLD + 1) == 0, "banked but rich -- must pay nothing"
+        assert ins.banked == 1000, "the bank must not be spent while not paying"
+
+        # At zero cash depth is 1000 permille, so the payout is the difficulty's PEAK rate and the
+        # purifier bonus is its full percentage.
+        ins = m.Insurance(difficulty)
+        while ins.phase != "paying":
+            ins.tick(0)
+        ins.accumulator = 0
+        ins.banked = 1000
+        granted = ins.tick(0)
+        assert granted == ins.cash_per_tick + 1000 * want // 100
+        assert ins.banked == 0
+
+
+# ------------------------------------------------------- proportional payout (the granularity)
+
+def _pay_rate(difficulty: str, cash: int, ticks: int = 2000) -> float:
+    """Credits per tick the PAYING phase grants at a given cash level.
+
+    ⚠ The phase is forced, deliberately. You cannot measure this by holding cash steady and
+    waiting: the bar converges on a stable pile and `cash < threshold` then never fires, which is
+    the strict-`<` law working (see test_a_stable_bot_is_not_subsidised). Isolating the payout law
+    from the arming law is the only way to measure the payout curve at a chosen depth.
+    """
+    ins = m.Insurance(difficulty)
+    ins.phase = "paying"
+    ins.accumulator = 0
+    return sum(ins.tick(cash) for _ in range(ticks)) / ticks
+
+
+def test_the_payout_reproduces_the_old_stacked_ladder():
+    """⭐ The granularity the ten-rung ladder had, restored continuously.
+
+    The old rungs sat at 1000..10000 and STACKED, so a `cameogod` bot drew one credit/tick per
+    rung it was below. Depth-scaling reproduces that curve and then fills in between the rungs.
+    """
+    for cash in (9000, 7500, 5000, 2500, 1000, 0):
+        old_rungs = sum(1 for r in range(1, 11) if cash < r * 1000)
+        assert abs(_pay_rate("cameogod", cash) - old_rungs) <= 0.75, cash
+
+
+def test_the_payout_rises_monotonically_as_a_bot_gets_poorer():
+    """The point of the rewrite: NOT binary. Every difficulty must ramp, not switch on."""
+    for d in ("easiest", "medium", "cameogod"):
+        rates = [_pay_rate(d, c) for c in (9000, 7000, 5000, 3000, 1000, 0)]
+        assert rates == sorted(rates), (d, rates)
+        assert rates[0] < rates[-1], f"{d} pays a flat rate — the granularity is gone"
+
+
+def test_a_fractional_rate_is_actually_paid_and_not_truncated_away():
+    """Milli-credit accumulation. A naive integer divide pays ZERO for every low difficulty."""
+    rate = _pay_rate("easiest", m.MAX_THRESHOLD // 2)
+    assert 0.4 <= rate <= 0.6, f"expected ~0.5 credits/tick, got {rate}"
+
+
+def test_the_peak_rate_is_reached_only_at_zero_cash():
+    for d in m.DIFFICULTIES:
+        ins = m.Insurance(d)
+        assert abs(_pay_rate(d, 0) - ins.cash_per_tick) < 0.05
+        assert _pay_rate(d, m.MAX_THRESHOLD - 1) < 0.05

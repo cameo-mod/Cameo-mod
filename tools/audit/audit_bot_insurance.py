@@ -16,16 +16,22 @@ a condition granted on actor A and consumed on actor B is neither "granted never
 one gap for the ladder specifically, by EVALUATING each rung's `RequiresCondition` for each
 player kind instead of counting names.
 
-WHAT IT CHECKS, on the RESOLVED actors so it holds wherever the ladder is hosted (it moved from
-`^AIConyardCash` to `Player:` — see docs/patches/):
+WHAT IT CHECKS, on the RESOLVED actors, in whichever of the two worlds the tree is currently in:
 
-  1. MONOTONICITY — rung count must never DECREASE as difficulty rises. A dip is the bug class
-     above: a harder bot getting less help than an easier one is always a wiring mistake.
-  2. NO DEAD RUNG — every difficulty must reach at least one rung, since the ladder's whole
-     stated purpose is stopping a bot getting permanently stuck at zero income.
+  * LADDER world (today) — ten yaml rungs on `^AIConyardCash` or `Player:`. Two laws:
+      1. MONOTONICITY — rung count must never DECREASE as difficulty rises. A dip is the bug
+         class above: a harder bot getting less help than an easier one is always a wiring mistake.
+      2. NO DEAD RUNG — every difficulty must reach at least one rung, since the whole stated
+         purpose is stopping a bot getting permanently stuck at zero income.
+  * TRAIT world (after docs/patches/bot_insurance_03_*) — one `DynamicBotInsurance` on `Player:`,
+    which reads the owner's bot type itself. The monotonicity law is then structural (everything
+    interpolates by list index), so the only thing left to check is COVERAGE: every bot type the
+    mod actually loads must appear in the trait's `Difficulties`, except `campaign`, which is
+    excluded on purpose so scripted missions get no free income.
 
-It deliberately does NOT assert the exact counts: the ladder's shape is a maintainer decision,
-its monotonicity is not.
+Both worlds share the same failure it exists to catch: a difficulty that silently reaches nothing.
+It deliberately does NOT assert exact amounts — the shape of the help is a maintainer decision, its
+reachability is not.
 
 EXIT CODE: 1 on any violation.
 """
@@ -50,6 +56,12 @@ DIFFICULTIES = ["easiest", "veryeasy", "easy", "medium", "hard", "veryhard",
 HOSTS = ["Player", "^Conyard"]
 
 INSURANCE_RE = re.compile(r"\b\w+botinsurance\b")
+
+# Bot types that are deliberately uninsured. `campaign` drives scripted missions; handing it an
+# income drip would change mission pacing that was tuned without one.
+UNINSURED_BOT_TYPES = {"campaign"}
+
+CS_TRAIT = pathlib.Path("OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs")
 TOKEN_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_.-]*|\(|\)|&&|\|\||!")
 
 
@@ -95,6 +107,45 @@ def ladder_rungs(rules: miniyaml.Ruleset) -> list[str]:
     return sorted(set(found))
 
 
+def dynamic_difficulties(rules: miniyaml.Ruleset) -> list[str] | None:
+    """The `Difficulties` list of `DynamicBotInsurance` on `Player:`, or None if not present.
+
+    ⚠ Reads the C# field default when the yaml does not override it, because that is what the
+    engine does: `FieldLoader` only writes the fields the yaml names and leaves the rest at their
+    declared defaults. An audit that looked only at yaml would report an empty list for a trait
+    that is working perfectly.
+    """
+    node = rules.resolve("Player")
+    if node is None or node.child("DynamicBotInsurance") is None:
+        return None
+
+    declared = node.child("DynamicBotInsurance").get("Difficulties")
+    if declared:
+        return [d.strip() for d in declared.split(",") if d.strip()]
+
+    if not CS_TRAIT.exists():
+        return []
+
+    block = re.search(r"public readonly string\[\] Difficulties =\s*\{(.*?)\};",
+                      CS_TRAIT.read_text(encoding="utf-8"), re.S)
+    return re.findall(r'"(\w+)"', block.group(1)) if block else []
+
+
+def loaded_bot_types() -> list[str]:
+    """Every `ModularBot` `Type:` the mod declares — the set that must be covered."""
+    found = []
+    for path in sorted(pathlib.Path("mods/cameo").rglob("*.yaml")):
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        if "ModularBot@" not in text:
+            continue
+        for m in re.finditer(r"ModularBot@\w+:\s*\n(?:\s+\w+:.*\n)*?\s+Type:\s*(\w+)", text):
+            found.append(m.group(1))
+    return sorted(set(found))
+
+
 def conditions_for(kind: str) -> dict[str, bool]:
     """Conditions live on the host actor for one player kind, with the ladder fully triggered.
 
@@ -112,14 +163,59 @@ def conditions_for(kind: str) -> dict[str, bool]:
     return cond
 
 
+def check_dynamic_trait(difficulties: list[str]) -> int:
+    """TRAIT world: the only reachability question left is whether the list covers the bot types."""
+    loaded = loaded_bot_types()
+    print("Mechanism: **one `DynamicBotInsurance` on `Player:`** — scaling is by list index, so "
+          "monotonicity is structural and only COVERAGE can go wrong.\n")
+    print(f"`Difficulties` ({len(difficulties)}): {', '.join(difficulties) or '_empty_'}\n")
+
+    missing = [b for b in loaded if b not in difficulties and b not in UNINSURED_BOT_TYPES]
+    unknown = [d for d in difficulties if d not in loaded]
+
+    print("| bot type | insured |")
+    print("|---|---|")
+    for b in loaded:
+        state = ("yes" if b in difficulties
+                 else "no — deliberately" if b in UNINSURED_BOT_TYPES else "⛔ NO")
+        print(f"| {b} | {state} |")
+    print()
+
+    problems = []
+    if missing:
+        problems.append(
+            "these bot types load but are in no `Difficulties` entry, so they get **no insurance "
+            "at all**: " + ", ".join(f"`{b}`" for b in missing)
+            + ". Add them to the trait, or to UNINSURED_BOT_TYPES here if that is deliberate.")
+    if unknown:
+        problems.append(
+            "these `Difficulties` entries match no loaded `ModularBot` `Type:`, so they are dead "
+            "list entries: " + ", ".join(f"`{d}`" for d in unknown) + ".")
+
+    if problems:
+        print("## ⛔ FAIL\n")
+        for p in problems:
+            print(f"- {p}")
+        return 1
+
+    print("**PASS** — every loaded bot type is either insured or deliberately excluded.")
+    return 0
+
+
 def main() -> int:
     rules = miniyaml.Ruleset(".")
-    rungs = ladder_rungs(rules)
 
-    print("# audit_bot_insurance — does every difficulty reach the income ladder?\n")
+    print("# audit_bot_insurance — does every difficulty reach the income mechanism?\n")
+
+    difficulties = dynamic_difficulties(rules)
+    if difficulties is not None:
+        return check_dynamic_trait(difficulties)
+
+    rungs = ladder_rungs(rules)
     if not rungs:
-        print("⛔ **FAIL** — no insurance rungs resolved on " + " or ".join(f"`{h}`" for h in HOSTS)
-              + ". Either the ladder moved again or it was deleted; this audit needs updating.\n")
+        print("⛔ **FAIL** — no `DynamicBotInsurance` on `Player:` AND no yaml rungs on "
+              + " or ".join(f"`{h}`" for h in HOSTS)
+              + ". Bot anti-bankruptcy income has disappeared entirely.\n")
         return 1
 
     print(f"Ladder: **{len(rungs)}** payout rungs, resolved from "

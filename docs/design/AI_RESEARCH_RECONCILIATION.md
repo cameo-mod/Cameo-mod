@@ -183,30 +183,45 @@ to the conyard that needs it.
 them.** A `medium` bot receives **zero** insurance income, while `easy` gets 3 rungs and `hard` gets
 5. The difficulty ladder has a hole in its middle, and it is the default difficulty.
 
-⭐ **RULED and WRITTEN 2026-09-01 — waiting only on a boot gate.** Maintainer: *"the players
-should also get the same insurance that the medium bot gets."* So the fix does two things at once:
-`normalbot` → `mediumbot`, and the four lowest rungs are opened to human players with
-`(!genericbot && !campaignbot)`.
+⭐ **RULED 2026-09-01, and the ladder is being replaced outright.**
 
-⚠ **`campaignbot` is new and necessary.** `genericbot` covers the ten selectable difficulties but
-deliberately **not** the eleventh bot type, `campaign`, and other modules depend on that omission —
-so widening `genericbot` was the wrong move. A separate `campaignbot` grant is added to
-`^AIDifficulties` instead, and campaign AI is explicitly excluded so scripted missions are not
-handed free income.
+⛔ **First, a reversal.** An earlier draft opened the four lowest rungs to human players, on a
+reading of "parity". **That was wrong and the maintainer caught it:** one rung is
+`Interval: 1, Amount: 1` = 1 credit/tick, and a buildable oil derrick is
+`Interval: 250, Amount: 250` = **the same 1 credit/tick**. Four rungs is four free oil derricks
+against a human derrick cap of **3** (`player.yaml:279`, `CashTrickler < 3 && derricklimit_is_3`).
+Humans keep exactly what they already had and nothing more: insurance while they hold no
+construction yard, and the sub-1000 trickle that stops ally cash transfers from bankrupting the
+giver (`player.yaml:243-262`).
 
-The patch is `docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch`; `git apply --check`
-is clean against master. Measured by resolving the real expressions through `miniyaml.Ruleset`:
+**The bug fix**, stripped back to the one token that was wrong:
+`docs/patches/bot_insurance_01_fix_medium_difficulty.patch` — eight `normalbot` → `mediumbot`.
+`medium` goes 0 → 4 rungs; **every other difficulty and the human column are unchanged.** Needs a
+boot gate, no design ruling.
 
-| player kind | before | after |
-|---|--:|--:|
-| human | 0 | **4** |
-| campaign | 0 | 0 |
-| easiest / veryeasy / easy | 1 / 2 / 3 | 1 / 2 / 3 |
-| **medium** | **0** ⛔ | **4** |
-| hard … cameogod | 5 … 10 | 5 … 10 |
+**The replacement**, `docs/patches/bot_insurance_03b_dynamic_trait_yaml.patch` plus
+`OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs` — thirty yaml nodes and ten condition ladders
+become **one trait on `Player:` with no conditions at all**. It reads the owner's bot type, finds
+its index in a `Difficulties` list, and interpolates a tracking rate (1→10), a delay divisor
+(10→100), credits/tick (1→10) and the purifier bonus (5%→50%) from that index. The ore-purifier
+half is folded in, which also settles the `ResourcePurifier` ambiguity: the bare name resolves past
+the vendored `ResourcePurifierCA` into an assembly this repo does not contain, so **neither CA nor
+Common — Cameo owns it now.**
 
-⭐ **Every existing bot difficulty is unchanged** — only the broken rung and the human column move.
-`tools/audit/audit_bot_insurance.py` (new, in `run_all.sh`) fails before and passes after.
+⭐ **What it buys.** No conyard scaling (the ladder multiplied by conyards owned, up to 7 for
+`cameogod`, and switched off entirely when a bot lost its last conyard — the exact stuck case it
+exists for). A payout stops at 10 000, so **difficulty buys speed, not a bigger total**. Measured
+first payout after a crash: easiest 800 ticks, cameogod 80 — exactly 10×, monotonic at every step.
+
+⚠ **Verified as an ALGORITHM, not as code.** No `engine/` and no dotnet here, so the C# has never
+been compiled. `tools/balance/bot_insurance_model.py` mirrors `Tick` line for line and
+`tools/tests/test_bot_insurance_model.py` (50 tests) pins the behaviour, including a drift guard
+that parses the C# field defaults. Four design points were wrong in earlier drafts and are now
+tests: the payout **scales with depth** rather than being flat on/off, which is where the old
+stacked ladder's granularity lived (it reproduces that curve and fills in between the rungs); the bar **tracks both ways** rather than falling (a falling bar is dead mechanics — the
+trigger is easiest to satisfy at the highest bar); the trigger is **strictly `<`** (with `<=` every
+bot under the cap eventually insures itself); and `MinThreshold` **must exceed 0** (at 0 a bankrupt
+bot is stranded permanently). Full reasoning and the measured tables: `docs/patches/README.md`.
 
 ⚠ **A second finding, C#-side:** `BotInsurance` marks `ticks` `[VerifySync]` but the class does not
 implement `ISync`, so the sync check never runs on it — already recorded in the audit baseline
@@ -380,7 +395,8 @@ the one-owner rule. Every agent that proposed replacing those proposed it withou
 | **OD-D** | Does a team cash-transfer API exist? ⛔ Verify before any sharing code. |
 | **OD-E** | ✅ **CLOSED 2026-09-01 — it exists.** `BotInsurance` + `CashTrickler` + `ResourcePurifier`, ten rungs on `^AIConyardCash` (`defaults.yaml:6712`). See §1. What remains open is the *removal shape*, now row 5 of the removal order: trim to one rung (human parity), not to zero. |
 | **OD-G** | ✅ **CLOSED 2026-09-01.** `normalbot` → `mediumbot`, plus human parity at four rungs (the maintainer's ruling). Patch written and verified; needs only the boot gate. |
-| **OD-H** | Should the ladder move from the construction yard to the `Player` actor? `BotInsurance.cs` was written for the Player actor, and the current placement multiplies by conyard count **and** switches the ladder off when a bot loses its last conyard — the exact stuck case it exists to prevent. Patch prepared (`docs/patches/bot_insurance_02_…`), blocked on a magnitude ruling and one in-game check that `ResourcePurifier` still credits from the Player actor. |
+| **OD-H** | ✅ **CLOSED 2026-09-01** — the ladder moves to the `Player` actor as part of the `DynamicBotInsurance` rewrite, which also removes the conyard multiplication. The one open verification is carried on that patch: does `INotifyResourceAccepted` reach a Player-actor trait? Needs a running game. |
+| **OD-I** | Cheat-removal end state for axis 3: with the payout now capped at 10 000 and no conyard scaling, is the bot ladder still a "cheat" to remove, or is it now close enough to the human floor to keep permanently? Decide from phase-1 logs. |
 | **OD-F** | Cheat-removal order — is vision genuinely first, given it is the one that most corrupts *balance* measurement rather than making bots weakest? |
 
 ---

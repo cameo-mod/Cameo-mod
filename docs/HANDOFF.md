@@ -292,20 +292,20 @@ never grants (it grants `mediumbot`); the only grant of `normalbot` in the mod i
 building and conditions are per-actor. **`tools/audit/audit_bot_insurance.py` (new, in
 `run_all.sh`) is RED on master because of it.**
 
-⭐ **The fix is written, verified and waiting on one boot:**
-`docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch`. It also lands the maintainer's
-parity ruling — human players get the same four rungs a `medium` bot gets — and leaves every other
-difficulty's rung count untouched. Apply per `docs/patches/README.md` or `BOOT_GATE_RUNBOOK.md`
-§5.5. A second, separate patch relocates the ladder to the `Player` actor (where `BotInsurance.cs`
-was written to run); that one is blocked on a maintainer ruling and one in-game check.
+⭐ **Two prepared fixes, in `docs/patches/` (they are alternatives; 03 applies on top of 01).**
 
-⚠ **Do not plan to delete axis 3 outright.** Its job is stopping a bot getting permanently stuck at
-zero income, and `player.yaml:243-262` gives **human** players the same floor. Parity is one rung,
-not zero.
+* **`bot_insurance_01_fix_medium_difficulty.patch`** — eight `normalbot` → `mediumbot`. `medium`
+  goes 0 → 4 rungs, everything else unchanged. **Boot gate only.**
+* **`bot_insurance_03b_dynamic_trait_yaml.patch` + `OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs`**
+  — replaces all thirty ladder nodes with **one trait on `Player:`**, no conditions, scaled by the
+  owner's bot-type index. Folds in the ore-purifier bonus. Removes the conyard multiplication and
+  caps a payout at 10 000, so difficulty buys speed rather than a bigger total. ⚠ **Needs a C#
+  build** — it has never been compiled here.
 
-⚠ **And `ProductionCostMultiplier` means a bot's effective unit cost is *not* the price the class
-formula computed** — any balance measurement taken from a bot match is off by up to 30% at the top
-tier, before insurance income is counted.
+⛔ **Humans get NO bot insurance, and this was corrected once already.** One rung is 1 credit/tick;
+a buildable oil derrick is also 1 credit/tick, and the human derrick cap is 3. The human safety net
+is `player.yaml:243-262` only. Full reasoning, the measured boundary tables and the two open
+verifications: **`docs/patches/README.md`**.
 
 `docs/design/DEVIN_BRANCH_REVIEW.md` headline: Phase 0 audit,
 2026-09-01. Its headline corrects a premise that five external review rounds were built on:

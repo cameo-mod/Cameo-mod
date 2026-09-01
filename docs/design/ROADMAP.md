@@ -64,22 +64,31 @@ the conyard never sees it.
 | unbeatable | 9 |
 | cameogod | 10 |
 
-- [x] **RULED 2026-09-01** — `normalbot` → `mediumbot`, and the four lowest rungs also open to
-  human players, per the maintainer: *"the players should also get the same insurance that the
-  medium bot gets."* Human parity is therefore **four rungs**, matching a medium bot exactly.
+- [x] **RULED 2026-09-01** — `normalbot` → `mediumbot`. Nothing else: an earlier draft also opened
+  the four lowest rungs to human players and **that was reverted** (see the human-insurance ruling
+  below).
 - [ ] **XS, NEEDS ONLY A BOOT GATE** — the patch is written and verified:
-  **`docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch`**. `git apply --check` is
-  clean against master; `audit_bot_insurance.py` fails before and passes after; every other
-  difficulty's rung count is unchanged. Procedure and commit checklist:
+  **`docs/patches/bot_insurance_01_fix_medium_difficulty.patch`**. `git apply --check` is clean
+  against master; `audit_bot_insurance.py` fails before and passes after; every other difficulty's
+  rung count and the human column are unchanged. Procedure and commit checklist:
   [`../patches/README.md`](../patches/README.md), or `BOOT_GATE_RUNBOOK.md` §5.5.
-- [ ] **S, MAINTAINER CALL** — **`docs/patches/bot_insurance_02_relocate_to_player_actor.patch`**
-  moves the ladder from the conyard to the `Player` actor. `BotInsurance.cs` was written for the
-  Player actor (`Created` special-cases `self.Info.Name == "player"`), and the current placement
-  both multiplies the ladder by conyard count and switches it off when a bot loses its last
-  conyard — the exact stuck case the feature exists to prevent. ⛔ Blocked on two things a
-  boot-less environment cannot settle: the top-difficulty magnitude ruling, and an in-game check
-  that `ResourcePurifier` still credits from the Player actor (the yaml names `ResourcePurifier`,
-  which resolves past the vendored `ResourcePurifierCA` to a type not in this repo).
+- [ ] **M, NEEDS A C# BUILD** — **`docs/patches/bot_insurance_03b_dynamic_trait_yaml.patch`** plus
+  **`..._03a_dynamic_trait_csharp.patch`** (which creates
+  `OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs`) replace the ladder outright: thirty yaml
+  nodes and ten condition lists become ONE trait on `Player:` with no conditions, scaled by the
+  owner's bot-type index (tracking rate 1→10, delay divisor 10→100, peak credits/tick 1→10,
+  purifier 5%→50%), with the payout **proportional to depth** so the old stacked-rung granularity
+  survives continuously. Ore-purifier logic folded in, which also settles which `ResourcePurifier`
+  type was running (nobody could say — the bare name resolves past the vendored CA copy).
+  Removes the conyard multiplication and caps a payout at 10 000.
+  ⚠ **Never compiled** — no `engine/`, no dotnet here. The ALGORITHM is verified:
+  `tools/balance/bot_insurance_model.py` mirrors `Tick` line for line and
+  `tools/tests/test_bot_insurance_model.py` (50 tests) pins it, including a drift guard that
+  parses the C# field defaults. ⛔ One in-game check remains: does `INotifyResourceAccepted` reach
+  a Player-actor trait? If not, the purifier half needs a refinery-side forwarder.
+- [x] **RULED 2026-09-01** — humans get NO bot insurance. One rung is 1 credit/tick and a buildable
+  oil derrick is also 1 credit/tick (`Interval: 250, Amount: 250`), against a human derrick cap of
+  3 (`player.yaml:279`). An earlier draft that granted human parity was reverted.
 - [ ] **XS** — `BotInsurance` marks `ticks` `[VerifySync]` without implementing `ISync`
   (`docs/audit/baseline/check_yaml_dedup.txt:11367`). C# change ⇒ rebuild ⇒ boot gate.
 - [ ] **S** — upstream CA gates insurance to *"2 minutes into the game"*

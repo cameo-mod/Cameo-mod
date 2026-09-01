@@ -366,25 +366,22 @@ difficulty — receives **zero** insurance income, while `easy` gets 3 rungs and
 
 ```bash
 python tools/audit/audit_bot_insurance.py        # FAILS on master today, and names the rung
-git apply --check docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch
-git apply         docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch
+git apply --check docs/patches/bot_insurance_01_fix_medium_difficulty.patch
+git apply         docs/patches/bot_insurance_01_fix_medium_difficulty.patch
 python tools/audit/audit_bot_insurance.py        # must now PASS
 python tools/audit/audit_doc_claims.py           # bot_insurance_unreachable_difficulties 1 -> 0
 # --- BOOT GATE --- then set that claim's `value:` to 0 and commit yaml + claim + doc edits
 ```
 
-Patch 01 also implements the maintainer's parity ruling — human players get the same four rungs a
-`medium` bot gets. **Every other difficulty is unchanged**; only the broken rung and the human
-column move. Full before/after table, rationale and the exact commit checklist:
-[`../patches/README.md`](../patches/README.md).
+Patch 01 is now the pure bug fix — eight `normalbot` → `mediumbot`, nothing else. **Every other
+difficulty and the human column are unchanged.** (An earlier draft also granted humans parity;
+that was reverted — one rung is one oil derrick and the human derrick cap is 3.)
 
-⚠ **`bot_insurance_02_relocate_to_player_actor.patch` is a SEPARATE decision — do not apply it
-with 01 on autopilot.** It moves the ladder off the construction yard onto the `Player` actor,
-which is where `BotInsurance.cs` was written to run and which fixes a second real bug (today the
-ladder dies when a bot loses its last conyard — the exact "stuck with no income" case it exists to
-prevent). But it needs a maintainer ruling on the top-difficulty magnitude *and* one in-game check
-that `ResourcePurifier` still credits from the Player actor, which no boot-less environment can
-answer. Read `../patches/README.md` before applying it.
+⚠ **`bot_insurance_03b_dynamic_trait_yaml.patch` is the real fix and it NEEDS A C# BUILD**, so it
+is not a drop-in for 01 — it is what 01 buys time for. It replaces the whole ladder with one
+`DynamicBotInsurance` trait on `Player:`. Read [`../patches/README.md`](../patches/README.md)
+before applying it: it carries the design reasoning, the measured boundary tables, and the one
+in-game check that no boot-less environment can answer.
 
 ---
 

@@ -1165,20 +1165,19 @@ claims:
     value: 1
     tolerance: 0
     what: >
-      Bot difficulties that can reach ZERO rungs of the passive-income ladder.
-      Currently 1 — `medium`, because the four lowest rungs gate on `normalbot`, a
-      condition `^AIDifficulties` never grants (it grants `mediumbot`; the mod's only
+      Bot difficulties that reach NO anti-bankruptcy income at all. Currently 1 — `medium`,
+      the DEFAULT difficulty, because the four lowest rungs of the ladder gate on `normalbot`,
+      a condition `^AIDifficulties` never grants (it grants `mediumbot`; the mod's only
       `normalbot` grant is on a Dark Reign building and conditions are per-actor).
-      ⛔ This is a BUG, not a design: `easy` gets 3 rungs and `hard` gets 5, so the
-      ladder has a hole at the DEFAULT difficulty. The fix is written and verified —
-      `docs/patches/bot_insurance_01_fix_medium_and_human_parity.patch` — and needs only
-      a boot gate. **Set this to 0 IN THE SAME COMMIT that lands the patch.**
-      ⭐ The bug exists because "passive bot income" was twice reported as NOT FOUND: the
-      trait is `BotInsurance` and nothing in its name says "cash". The measure below
-      searches by WIRING — it resolves the host actors and EVALUATES each rung's
-      RequiresCondition — so it is immune both to naming and to the ladder moving
-      actors (patch 02 relocates it to `Player:`). Enforced continuously by
-      `tools/audit/audit_bot_insurance.py`, which is wired into run_all.sh.
+      ⛔ A BUG, not a design: `easy` gets 3 rungs and `hard` gets 5, so the ladder has a hole
+      in its middle. Two prepared fixes each take this to 0 —
+      `docs/patches/bot_insurance_01_fix_medium_difficulty.patch` (boot gate only) and
+      `..._03_single_dynamic_trait.patch` (the real replacement; needs a C# build).
+      **Set this to 0 IN THE SAME COMMIT that lands either one.**
+      The measure works in BOTH worlds — the yaml ladder and the single `DynamicBotInsurance`
+      trait — and searches by WIRING, evaluating each rung's RequiresCondition, because this bug
+      was invisible to name-counting: `audit_orphans` O3 counts conditions mod-GLOBALLY while
+      conditions are per-ACTOR. Enforced continuously by `tools/audit/audit_bot_insurance.py`.
     docs:
       - docs/HANDOFF.md
       - docs/design/AI_RESEARCH_RECONCILIATION.md
@@ -1195,25 +1194,34 @@ claims:
       abi = importlib.util.module_from_spec(spec)
       sys.modules['abi'] = abi
       spec.loader.exec_module(abi)
-      rungs = abi.ladder_rungs(abi.miniyaml.Ruleset('.'))
-      print(sum(1 for d in abi.DIFFICULTIES
-                if not any(abi.evaluate(r, abi.conditions_for(d)) for r in rungs)))
+      rules = abi.miniyaml.Ruleset('.')
+      dyn = abi.dynamic_difficulties(rules)
+      if dyn is not None:
+          loaded = abi.loaded_bot_types()
+          print(len([b for b in loaded
+                     if b not in dyn and b not in abi.UNINSURED_BOT_TYPES]))
+      else:
+          rungs = abi.ladder_rungs(rules)
+          print(sum(1 for d in abi.DIFFICULTIES
+                    if not any(abi.evaluate(r, abi.conditions_for(d)) for r in rungs)))
 
   - id: bot_insurance_rungs
     value: 10
     tolerance: 0
     what: >
-      Rungs in the bot passive-income ladder on `^AIConyardCash` — one `BotInsurance`
-      per difficulty, thresholds 1000 (`easiest`) to 10000 (`cameogod`), each paired
-      with a `CashTrickler` (1 credit/tick) and a `ResourcePurifier` (Modifier 5).
-      This is AI difficulty cheat axis 3 of 4 and the largest of them; the cheat-removal
-      roadmap trims it to ONE rung (human parity — `player.yaml:243-262` gives every
-      player the same floor), never to zero, because its job is stopping a bot getting
-      permanently stuck at no income.
+      Difficulty steps in the bot anti-bankruptcy income mechanism. Ten either way: ten yaml
+      rungs on `^AIConyardCash` today, ten `Difficulties` entries in `DynamicBotInsurance` after
+      `docs/patches/bot_insurance_03_*`. This is AI difficulty cheat axis 3 of 4 and the largest.
+      ⛔ It must never simply be DELETED when the cheats come off: its job is stopping a bot
+      getting permanently stuck at no income. Humans get their own, much smaller floor
+      (`player.yaml:243-262`) and must NOT be given this one — one credit/tick is exactly one
+      oil derrick (Interval 250 / Amount 250) and the human derrick cap is 3, so even the
+      `medium` step would be more than a player can build.
     docs:
       - docs/HANDOFF.md
       - docs/design/AI_RESEARCH_RECONCILIATION.md
       - docs/Cameo_Knowledge_Base_Manual.md
+      - docs/patches/README.md
     measure: |
       import importlib.util, pathlib, sys
       spec = importlib.util.spec_from_file_location(
@@ -1221,5 +1229,6 @@ claims:
       abi = importlib.util.module_from_spec(spec)
       sys.modules['abi'] = abi
       spec.loader.exec_module(abi)
-      print(len(abi.ladder_rungs(abi.miniyaml.Ruleset('.'))))
-
+      rules = abi.miniyaml.Ruleset('.')
+      dyn = abi.dynamic_difficulties(rules)
+      print(len(dyn) if dyn is not None else len(abi.ladder_rungs(rules)))
