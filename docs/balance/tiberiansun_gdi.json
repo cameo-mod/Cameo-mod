@@ -381,17 +381,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -403,6 +396,7 @@
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Heavy",
        "^Effect_Demolition_Heavy"
@@ -419,10 +413,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -441,6 +435,7 @@
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Sonic_Heavy",
        "^Projectile_Sonic_Shell",
@@ -1657,17 +1652,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1679,6 +1667,7 @@
       "requires": "!ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_CannonHE_HeavyFlat",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -2012,17 +2001,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "24000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2041,6 +2023,7 @@
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -2095,17 +2078,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "24000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2457,7 +2433,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "18000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
@@ -2469,13 +2445,6 @@
         "spread": "500",
         "tag": "RailgunExtraDamageCompatibility",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": null,
-        "tag": "TS30mmRailUnscopedCompatibility",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2509,7 +2478,6 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Compatibility_Railgun_ExtraDamage",
-       "^Compatibility_TS30mmRail_UnscopedFlat",
        "^MediumMissile",
        "^FlakWeapon",
        "^RailgunWeapon"
@@ -2526,7 +2494,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "18000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
@@ -2538,13 +2506,6 @@
         "spread": "500",
         "tag": "RailgunExtraDamageCompatibility",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": null,
-        "tag": "TS30mmRailUnscopedCompatibility",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2578,7 +2539,6 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Compatibility_Railgun_ExtraDamage",
-       "^Compatibility_TS30mmRail_UnscopedFlat",
        "^MediumMissile",
        "^FlakWeapon",
        "^RailgunWeapon"
@@ -3917,17 +3877,10 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3939,6 +3892,7 @@
       "reloaddelay": "250",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -3956,17 +3910,10 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3978,6 +3925,7 @@
       "reloaddelay": "250",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -3994,17 +3942,10 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4016,6 +3957,7 @@
       "reloaddelay": "250",
       "slot": "Armament@TERCERA",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -4032,17 +3974,10 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4054,6 +3989,7 @@
       "reloaddelay": "250",
       "slot": "Armament@CUARTA",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -4484,17 +4420,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4505,6 +4434,7 @@
       "reloaddelay": "38",
       "slot": "Armament@BOMBS",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Heavy",
        "^Effect_Demolition_Heavy"
@@ -6359,17 +6289,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -6388,6 +6311,7 @@
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -6494,17 +6418,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "18000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "18000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -6523,6 +6440,7 @@
       "requires": "ts_gdi_upgrade_railgunweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",

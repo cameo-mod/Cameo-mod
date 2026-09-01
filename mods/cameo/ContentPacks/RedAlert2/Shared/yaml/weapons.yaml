@@ -979,6 +979,7 @@ RA2MirageGun:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	-Warhead@CannonAP_Light:
 RA2HoverMissile:
+	Inherits@finalmain: ^Compatibility_MissileAP_LightFlat
 	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
 	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
@@ -998,6 +999,12 @@ RA2HoverMissile:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		-ImpactSounds:
+	-Warhead@Arrow_Light:
+	-Warhead@MissileAP_Light:
+	Warhead@MissileAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 RA2HoverMissile_elite:
 	Inherits: RA2HoverMissile
@@ -1009,16 +1016,32 @@ RA2HoverMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
+	Warhead@MissileAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 RA2HoverMissile_AA:
+	Inherits@finalmain: ^Compatibility_MissileAA_LightFlat
 	Inherits: RA2HoverMissile
 	ValidTargets: Air
 	Range: 8640
+	-Warhead@MissileAP_LightFlatCompatibility:
+	Warhead@MissileAA_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 RA2HoverMissile_AA_elite:
+	Inherits@finalmain: ^Compatibility_MissileAA_LightFlat
 	Inherits: RA2HoverMissile_elite
 	ValidTargets: Air
 	Range: 9640
+	-Warhead@MissileAP_LightFlatCompatibility:
+	Warhead@MissileAA_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 RA2ThunderboltMissile:
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
@@ -1074,6 +1097,7 @@ RA2ThunderboltMissile_AA_elite:
 	Range: 9640
 
 RA2MultiHoverMissile:
+	Inherits@finalmain: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1094,6 +1118,12 @@ RA2MultiHoverMissile:
 		MaximumLaunchSpeed: 64
 		MinimumLaunchSpeed: 128
 		Acceleration: 16
+	-Warhead@CannonHE_Medium:
+	-Warhead@MissileHE_Light:
+	Warhead@MissileHE_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2MultiHoverMissile_elite:
 	Inherits: RA2MultiHoverMissile
@@ -1105,20 +1135,38 @@ RA2MultiHoverMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
+	Warhead@MissileHE_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2MultiHoverMissile_AA:
+	Inherits@finalmain: ^Compatibility_MissileAA_LightFlat
 	Inherits: RA2MultiHoverMissile
 	ValidTargets: Air
 	Range: 9255
 	Warhead@CannonHE_Medium:
 		ValidTargets: Air
+	-Warhead@CannonHE_Medium:
+	-Warhead@MissileHE_LightFlatCompatibility:
+	Warhead@MissileAA_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2MultiHoverMissile_AA_elite:
+	Inherits@finalmain: ^Compatibility_MissileAA_LightFlat
 	Inherits: RA2MultiHoverMissile_elite
 	ValidTargets: Air
 	Range: 10255
 	Warhead@CannonHE_Medium:
 		ValidTargets: Air
+	-Warhead@CannonHE_Medium:
+	-Warhead@MissileHE_LightFlatCompatibility:
+	Warhead@MissileAA_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 RA2MultiThunderboltMissile:
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
@@ -2403,6 +2451,7 @@ DredMissile:
 		ImpactActors: false
 
 YRBoomerSCUD:
+	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
 	Inherits@fx: ^Effect_Watersplash_Large_RA2
@@ -2422,8 +2471,15 @@ YRBoomerSCUD:
 		ValidTargets: Ground, Air
 	Warhead@EffectWater: CreateEffect
 		ImpactActors: false
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 9998
 
 RA2TorpTube:
+	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
 	Inherits@fx: ^Effect_Watersplash_Large_RA2
@@ -2458,6 +2514,12 @@ RA2TorpTube:
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 36000
+		PercentageScale: 9998
 
 RA2TorpTube_elite:
 	Inherits: RA2TorpTube
@@ -2468,6 +2530,10 @@ RA2TorpTube_elite:
 ####################################################################################################
 #		Machineguns
 ####################################################################################################
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 36000
+		PercentageScale: 9998
 
 ^RA2MG:
 	Inherits: ^RA2SmallArms
@@ -2842,6 +2908,7 @@ RA2VirusExplode:
 		InvalidTargets: Water
 
 RA220mmrapid:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -2857,6 +2924,12 @@ RA220mmrapid:
 ####################################################################################################
 #		SuperWeapons
 ####################################################################################################
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 RA2Mutate:
 	ValidTargets: Ground, Air
@@ -2925,7 +2998,7 @@ RA2DemoBomb:
 		Level: 500
 		LayerName: ra2radiation
 
-RA2Terrorist:
+^RA2TerroristLegacy:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Terrorist_Explosion_RA2
@@ -2934,6 +3007,16 @@ RA2Terrorist:
 		Damage: 50000
 	Warhead@Demolition_Heavy:
 		Damage: 50000
+
+RA2Terrorist:
+	Inherits@roleflat: ^Compatibility_Demolition_HeavyFlat
+	Inherits: ^RA2TerroristLegacy
+	-Warhead@Demolition_Heavy:
+	-Warhead@Concussion_Medium:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 100000
+		PercentageScale: 9999
 2100Tanktrap:
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
@@ -3154,6 +3237,7 @@ IvanAttach:
 	Warhead@2: TargetDamage
 
 IvanBomb:
+	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@wh3: ^Warhead_Concussion_Medium
@@ -3176,6 +3260,13 @@ IvanBomb:
 		ImpactSounds: gexpcraa.wav
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 90000
+		PercentageScale: 9999
 
 IFVAttach:
 	Inherits: IvanAttach
@@ -3220,6 +3311,184 @@ TanyaBomb:
 	Warhead@CannonAP_Light:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
+	Warhead@CollapsedTanyaBombCannonAP_LightPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Air, Water, Underwater
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 5000
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		Falloff: 100, 50
+		Range: 0, 40
+	Warhead@CollapsedTanyaBombCannonHE_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Air, Water, Underwater
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 5000
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			None: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 50, 35
+		Range: 0, 400, 600
+	Warhead@CollapsedTanyaBombCannonHE_MediumPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Air, Water, Underwater
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 5000
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Steel: 17
+			Medium: 16
+			Concrete: 15
+			Heavy: 14
+			Superheavy: 13
+			None: 12
+			Flak: 11
+			Plate: 10
+			Heroic: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		Falloff: 100, 50, 35
+		Range: 0, 300, 450
+	Warhead@CollapsedTanyaBombConcussion_MediumPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Air, Water, Underwater
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 5000
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Steel: 15
+			Medium: 14
+			Plate: 13
+			Concrete: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		Falloff: 100, 72, 50, 32
+		Range: 0, 350, 700, 1050
+	Warhead@CollapsedTanyaBombDemolition_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Air, Water, Underwater
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 5000
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		Falloff: 100, 45, 18
+		Range: 0, 466, 932
+	Warhead@CollapsedTanyaBombDemolition_LightPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Air, Water, Underwater
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 5000
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 17
+			Wood: 16
+			Steel: 15
+			Concrete: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		Falloff: 100, 45, 18
+		Range: 0, 233, 466
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_Medium:
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Air, Water, Underwater
+		Damage: 600000
+		PercentageScale: 0
 SEALAttach:
 	Inherits: TanyaAttach
 	ValidTargets: Vehicle, Ship, Submarine, demolishable
@@ -3242,6 +3511,22 @@ SealBomb:
 		Damage: 20000
 	Warhead@Demolition_Heavy:
 		Damage: 20000
+	-Warhead@CollapsedTanyaBombCannonAP_LightPercentage:
+	-Warhead@CollapsedTanyaBombCannonHE_HeavyPercentage:
+	-Warhead@CollapsedTanyaBombCannonHE_MediumPercentage:
+	-Warhead@CollapsedTanyaBombConcussion_MediumPercentage:
+	-Warhead@CollapsedTanyaBombDemolition_HeavyPercentage:
+	-Warhead@CollapsedTanyaBombDemolition_LightPercentage:
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_Medium:
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Air, Water, Underwater
+		Damage: 120000
+		PercentageScale: 10000
 
 BorisAKM:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat

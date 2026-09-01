@@ -312,7 +312,7 @@ AsianMaidenBow:
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@Arrow_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 12000
 		PercentageScale: 0
 	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -468,6 +468,11 @@ AsianMaidenBow:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
+	-Warhead@Plasma_HeavyFlatCompatibility:
+	-Warhead@PreservedFlat_FlakWeapon:
+	-Warhead@PreservedFlat_MagicWeapon:
+	-Warhead@PreservedFlat_MediumMissile:
+	-Warhead@PreservedFlat_TeslaWeapon:
 
 AsianMaidenBow_elite:
 	Inherits: AsianMaidenBow
@@ -479,7 +484,7 @@ AsianMaidenBow_elite:
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@Arrow_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 12000
 		PercentageScale: 0
 	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -635,6 +640,10 @@ AsianMaidenBow_elite:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
+	-Warhead@PreservedFlat_FlakWeapon:
+	-Warhead@PreservedFlat_MagicWeapon:
+	-Warhead@PreservedFlat_MediumMissile:
+	-Warhead@PreservedFlat_TeslaWeapon:
 AsianNinjaStar:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -805,6 +814,7 @@ AsianKamikazeChaingun:
 		Damage: 4000
 		PercentageScale: 9975
 AsianPhotonCannon:
+	Inherits@finalmain: ^Compatibility_Plasma_HeavyFlat
 	Inherits: ^MediumMissile
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^TeslaWeapon
@@ -1051,11 +1061,25 @@ AsianPhotonCannon:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
+	-Warhead@PreservedFlat_FlakWeapon:
+	-Warhead@PreservedFlat_MagicWeapon:
+	-Warhead@PreservedFlat_MediumMissile:
+	-Warhead@PreservedFlat_TeslaWeapon:
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianPhotonCannon_EMP:
+	Inherits@finalmain: ^Compatibility_Quantum_HeavyFlat
 	Inherits: AsianPhotonCannon
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Quantum_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianQuasarAG:
 	Inherits: AsianPhotonCannon
@@ -1069,13 +1093,24 @@ AsianQuasarAG:
 		MinimumLaunchSpeed: 250
 		MaximumLaunchSpeed: 250
 		Inaccuracy: 500
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianQuasarAG_EMP:
+	Inherits@finalmain: ^Compatibility_Quantum_HeavyFlat
 	Inherits: AsianQuasarAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Quantum_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianQuasar_AA:
+	Inherits@finalmain: ^Compatibility_MissileAA_MediumFlat
 	Inherits: AsianPhotonCannon
 	ValidTargets: Air
 	ReloadDelay: 33
@@ -1087,13 +1122,25 @@ AsianQuasar_AA:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Inaccuracy: 250
+	-Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@MissileAA_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianQuasar_EMP_AA:
+	Inherits@finalmain: ^Compatibility_MissileQuantum_MediumFlat
 	Inherits: AsianQuasar_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@MissileAA_MediumFlatCompatibility:
+	Warhead@MissileQuantum_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianPunisherAG:
+	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits: AsianPhotonCannon
 	ValidTargets: Ground, Water
 	ReloadDelay: 12
@@ -1105,11 +1152,22 @@ AsianPunisherAG:
 		MaximumLaunchSpeed: 240
 		MinimumLaunchSpeed: 240
 		Inaccuracy: 240
+	-Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianPunisherAG_EMP:
+	Inherits@finalmain: ^Compatibility_MissileQuantum_MediumFlat
 	Inherits: AsianPunisherAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileQuantum_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianQuasarBoatAG:
 	Inherits: AsianPhotonCannon
@@ -1125,13 +1183,24 @@ AsianQuasarBoatAG:
 		MaximumLaunchSpeed: 192
 		MinimumLaunchSpeed: 192
 		Inaccuracy: 512
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianQuasarBoatAG_EMP:
+	Inherits@finalmain: ^Compatibility_Quantum_HeavyFlat
 	Inherits: AsianQuasarBoatAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Quantum_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianQuasarBoat_AA:
+	Inherits@finalmain: ^Compatibility_MissileAA_MediumFlat
 	Inherits: AsianPhotonCannon
 	ValidTargets: Air
 	ReloadDelay: 22
@@ -1145,11 +1214,22 @@ AsianQuasarBoat_AA:
 		MaximumLaunchSpeed: 256
 		MinimumLaunchSpeed: 256
 		Inaccuracy: 250
+	-Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@MissileAA_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianQuasarBoat_EMP_AA:
+	Inherits@finalmain: ^Compatibility_MissileQuantum_MediumFlat
 	Inherits: AsianQuasarBoat_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@MissileAA_MediumFlatCompatibility:
+	Warhead@MissileQuantum_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 AsianChemical:
 	Inherits@roleflat: ^Compatibility_Chemical_MediumFlat
@@ -1352,10 +1432,8 @@ AsianHowitzerCannon:
 		ContrailEndWidth: 20
 		TrailInterval: 1
 		Inaccuracy: 320
-	Warhead@CannonHE_Medium:
-		Damage: 20000
 	Warhead@CannonHE_Heavy:
-		Damage: 20000
+		Damage: 40000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 125
@@ -1389,6 +1467,7 @@ AsianHowitzerCannon:
 		Amount: 2
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
+	-Warhead@CannonHE_Medium:
 
 AsianHowitzerCannon_elite:
 	Inherits: AsianHowitzerCannon
@@ -1441,6 +1520,7 @@ AsianSmallOilBomb:
 		AimTargetStances: Enemy, Neutral
 
 AsianPulverizerGatling:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_CannonHE_Heavy
 	Inherits@3: ^Projectile_Shell_Heavy
@@ -1468,8 +1548,14 @@ AsianPulverizerGatling:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 6000
+		PercentageScale: 9984
 AsianPulverizerMechaGatling:
-	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: AsianPulverizerGatling
@@ -1500,8 +1586,13 @@ AsianPulverizerMechaGatling:
 	Warhead@Bullet_Medium:
 		Damage: 6000
 		PercentageScale: 3317
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Air, Water
+		Damage: 10000
+		PercentageScale: 5990
 AsianSinglePlasma:
+	Inherits@finalmain: ^Compatibility_Plasma_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -1813,6 +1904,18 @@ AsianSinglePlasma:
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_Medium:
+	-Warhead@PreservedFlat_HeavyBomb:
+	-Warhead@PreservedFlat_LightChemicalWeapon:
+	-Warhead@PreservedFlat_LightFlameWeapon:
+	-Warhead@PreservedFlat_MediumChemicalWeapon:
+	-Warhead@PreservedFlat_MediumFlameWeapon:
+	-Warhead@PreservedFlat_ShrapnelWeapon:
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 2494
 
 AsianSinglePlasma_elite:
 	Inherits: AsianSinglePlasma
@@ -1821,6 +1924,10 @@ AsianSinglePlasma_elite:
 	BurstDelays: 3
 	Warhead@FireShrapnel: FireShrapnel
 		Amount: 2
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 2494
 
 AsianTwinPlasma:
 	Inherits: AsianSinglePlasma
@@ -1834,6 +1941,10 @@ AsianTwinPlasma:
 		ContrailLength: 35
 	Warhead@FireShrapnel: FireShrapnel
 		Amount: 2
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 2494
 
 AsianTwinPlasma_elite:
 	Inherits: AsianTwinPlasma
@@ -1841,6 +1952,10 @@ AsianTwinPlasma_elite:
 	Burst: 4
 	Warhead@FireShrapnel: FireShrapnel
 		Amount: 4
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 2494
 
 AsianTurretPlasma:
 	Inherits: AsianSinglePlasma
@@ -1859,6 +1974,10 @@ AsianTurretPlasma:
 		ImpactSounds: expnew09.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Amount: 8
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 2494
 
 AsianHarbingerPlasma:
 	Inherits@roleflat: ^Compatibility_Plasma_MediumFlat
@@ -2351,6 +2470,7 @@ AsianChaosMine:
 		InvalidTargets: Water
 
 AsianPelicanMissile:
+	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_MissileAP_Heavy
 	Inherits@3: ^Projectile_Missile_Heavy
@@ -2371,6 +2491,13 @@ AsianPelicanMissile:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
+	-Warhead@Concussion_Light:
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 AsianPelicanMissile_elite:
 	Inherits: AsianPelicanMissile
 	Range: 7100
@@ -2385,6 +2512,10 @@ AsianPelicanMissile_elite:
 		ContrailLength: 33
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 9992
 
 AsianPelicanMG:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
@@ -2494,6 +2625,7 @@ TsunamiCarrierTarget:
 	Warhead@1Dam: TargetDamage
 
 AsianSubmarineBomb:
+	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
@@ -2516,6 +2648,12 @@ AsianSubmarineBomb:
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
 	Warhead@Effect: CreateEffect
 		ImpactSounds: expnew09.wav
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	Warhead@Demolition_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Ship, Submarine, Underwater
+		Damage: 100000
+		PercentageScale: 9999
 
 AsianPhoenixRocket:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -2631,13 +2769,12 @@ ASDFKamikazeExplosion:
 	Inherits@3: ^Projectile_Grenade_Light
 	Report: M203.aud
 	Warhead@Demolition_Heavy:
-		Damage: 10000
-	Warhead@Concussion_Medium:
-		Damage: 10000
+		Damage: 20000
 	Warhead@Effect: CreateEffect
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpcraa.wav
+	-Warhead@Concussion_Medium:
 
 AsianSniper:
 	Inherits: ^Warhead_Bullet_Heavy
@@ -2873,8 +3010,10 @@ AsianMLRS:
 	-Warhead@HeavyMissile:
 	Warhead@MissileAA_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 0
+		Damage: 8000
+		PercentageScale: 4988
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
 AsianSpitfireRockets:
 	Inherits: AsianMLRS
 	Inherits@fx: ^Effect_Explosion_Large_RA2
@@ -2908,8 +3047,10 @@ AsianSpitfireRockets:
 	-Warhead@HeavyMissile:
 	Warhead@MissileAA_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		PercentageScale: 0
+		Damage: 16000
+		PercentageScale: 2494
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
 AsianKamikazeImpactTargeting:
 	ReloadDelay: 25
 	Range: 7500
