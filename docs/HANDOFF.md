@@ -265,6 +265,19 @@ Crashes and player-visible regressions jump everything below.
 
 ### 3.0 — DO THIS FIRST
 
+⛔ **BEFORE ANY AI/BOT-MODULE WORK, READ `docs/design/DEVIN_BRANCH_REVIEW.md`.** Phase 0 audit,
+2026-09-01. Its headline corrects a premise that five external review rounds were built on:
+**there is no Devin bot-module implementation.** PR #324 is documentation only — 2 files, no C#,
+no yaml — and the other five `devin/*` branches are either already merged (zero file difference
+from master) or the observer graph in PR #323. Any instruction to "audit Devin's bot module code"
+is asking for an audit of code that does not exist.
+
+The review APPROVES #324 with one required amendment: **`BotGlobalUnitBudget`** (`ai.yaml:4765`,
+`IBotRequestPauseUnitProduction`) is loaded, can pause all bot unit production, and is missing from
+a §10.2 table that claims to be exhaustive — a second authority over the very decision the design
+feeds counter-demand hints into. 25 of 25 of that table's other line citations verify exactly.
+
+
 ⛔ **IF YOU CAN RUN `launch-game.cmd`, READ `docs/design/BOOT_GATE_RUNBOOK.md` FIRST.** It is
 the boot-gated queue — the bell/macro flip, the LOCKED-spec reconciliation, W24/W23 — with the
 exact commands, the gate procedure, and the one warning that matters most: ⛔ **do not apply
