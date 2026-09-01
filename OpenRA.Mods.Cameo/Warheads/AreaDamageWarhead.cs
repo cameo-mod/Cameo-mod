@@ -163,6 +163,9 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 		void IRulesetLoaded<WeaponInfo>.RulesetLoaded(Ruleset rules, WeaponInfo info)
 		{
+			if (PercentageDenominator <= 0)
+				throw new YamlException("PercentageDenominator must be positive.");
+
 			if (Range != null)
 			{
 				if (Range.Length != 1 && Range.Length != Falloff.Length)
@@ -422,7 +425,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 					ImpactOrientation = impactOrientation,
 				};
 
-				InflictDamage(victim, firedBy, closestActiveShape, updatedWarheadArgs);
+				InflictPrimaryDamage(victim, firedBy, closestActiveShape, updatedWarheadArgs);
 
 				// The folded-in percentage half: a SECOND application on the same victim, with
 				// its own (smaller) radius and its own armor table. Applied here rather than as a
@@ -443,7 +446,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			// factor of 100 is the hundredths granularity — see PercentageScale's [Desc].
 			// ROUND, do not truncate: integer division biases every weapon DOWNWARD by up to
 			// one basis point, which showed up as a systematic 0.99% where 1.00% was meant.
-			var basisPoints = (Damage * PercentageScale + 100000) / 200000;
+			var basisPoints = FoldedPercentageUnits(Damage, PercentageScale);
 			if (basisPoints <= 0)
 				return;
 
@@ -457,8 +460,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			// ApplyPercentageModifiers already divided by 100 for the basisPoints modifier, so
 			// only the remaining factor is left. Applied LAST, on the largest intermediate, so the
 			// extra division costs the least precision.
-			if (PercentageDenominator != 100)
-				damage = damage * 100 / PercentageDenominator;
+			damage = ApplyPercentageDenominator(damage, PercentageDenominator);
 
 			if (damage <= 0)
 				return;
@@ -477,6 +479,17 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 		protected override void InflictDamage(Actor victim, Actor firedBy, HitShape shape, WarheadArgs args)
 		{
+			// DamageWarhead routes direct Actor impacts here instead of through DoImpact.
+			// Keep the folded hit in this wrapper so direct weapons receive it exactly once;
+			// positional impacts call InflictPrimaryDamage from ApplyRing and add their own
+			// radius-gated folded hit there.
+			InflictPrimaryDamage(victim, firedBy, shape, args);
+			if (PercentageScale > 0)
+				InflictPercentage(victim, firedBy, shape, args);
+		}
+
+		protected virtual void InflictPrimaryDamage(Actor victim, Actor firedBy, HitShape shape, WarheadArgs args)
+		{
 			var damage = Util.ApplyPercentageModifiers(Damage, args.DamageModifiers.Append(DamageVersus(victim, shape, args)));
 			victim.InflictDamage(firedBy, new Damage(damage, DamageTypes, GetProjectileType(args)));
 			ApplyPhysicalState(victim, firedBy, damage);
@@ -494,11 +507,11 @@ namespace OpenRA.Mods.Cameo.Warheads
 				return;
 
 			if (!string.IsNullOrEmpty(PhysicalStateName) && PhysicalStateScale != 0)
-				ApplyOneState(victim, firedBy, PhysicalStateName, damage * PhysicalStateScale / 100);
+				ApplyOneState(victim, firedBy, PhysicalStateName, ScaleDamage(damage, PhysicalStateScale));
 
 			foreach (var kv in PhysicalStates)
 				if (kv.Value != 0)
-					ApplyOneState(victim, firedBy, kv.Key, damage * kv.Value / 100);
+					ApplyOneState(victim, firedBy, kv.Key, ScaleDamage(damage, kv.Value));
 		}
 
 		static void ApplyOneState(Actor victim, Actor firedBy, string name, int change)
@@ -528,13 +541,32 @@ namespace OpenRA.Mods.Cameo.Warheads
 			if (damage == 0 || IntegrityScale == 0)
 				return;
 
-			var change = damage * IntegrityScale / 100;
+			var change = ScaleDamage(damage, IntegrityScale);
 			if (change == 0)
 				return;
 
 			victim.TraitsImplementing<Integrity>()
 				.FirstOrDefault(t => !t.IsTraitPaused && !t.IsTraitDisabled)
 				?.Regenerate(victim, -change);
+		}
+
+		// Keep authored fields and final engine damage as Int32, but use Int64 for
+		// intermediate products so valid large weapons cannot wrap before division.
+		internal static int FoldedPercentageUnits(int damage, int percentageScale)
+		{
+			return checked((int)(((long)damage * percentageScale + 100000L) / 200000L));
+		}
+
+		internal static int ApplyPercentageDenominator(int damage, int denominator)
+		{
+			return denominator == 100
+				? damage
+				: checked((int)((long)damage * 100 / denominator));
+		}
+
+		internal static int ScaleDamage(int damage, int percentage)
+		{
+			return checked((int)((long)damage * percentage / 100));
 		}
 
 		int GetDamageFalloff(int distance)

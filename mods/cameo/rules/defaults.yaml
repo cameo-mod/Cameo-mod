@@ -5515,7 +5515,7 @@
 		LowerValue: -20000
 	WithPhysicalStateColoredOverlay@CryoFreeze:
 		PhysicalStateName: Temperature
-		MinColor: 88BBFF64
+		MinColor: 88BBFF40
 		MaxColor: 4488FF08
 		UpperValue: -200
 		LowerValue: -20000
@@ -5529,7 +5529,7 @@
 	WithPhysicalStateColoredOverlay@Overheating:
 		PhysicalStateName: Temperature
 		MinColor: FF884408
-		MaxColor: FF40207B
+		MaxColor: FF402040
 		UpperValue: 20000
 		LowerValue: 200
 	WithIdleOverlay@overheat:
@@ -5736,7 +5736,7 @@
 	WithPhysicalStateColoredOverlay@Corrosion:
 		PhysicalStateName: Corrosion
 		MinColor: 44FF4422
-		MaxColor: 00FF0088
+		MaxColor: 00FF0040
 		UpperValue: 20000
 		LowerValue: 200
 	ChangesHealthProportionalToPhysicalState@Corrosion:

@@ -4,7 +4,7 @@ Analysed **2039** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
-_clean_ — modeled 2195 folded and 2292 standalone applications.
+_clean_ — modeled 2184 folded and 2288 standalone applications.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 
@@ -12,13 +12,13 @@ _clean_ — `k_flat` held to within 1e-09 across 3 scalings of every weapon.
 
 ## L2 — the scalable/absolute split decomposes the published `k`
 
-`k == k_flat + (pct_absolute + folded_rounding) / damage_total`. The standalone term is a floor; the folded term is the current runtime residual, including Int32 wrap where present.
+`k == k_flat + (pct_absolute + folded_rounding) / damage_total`. The standalone term is a floor; the folded term is the current runtime quantisation residual.
 
 _clean_ — the identity holds for every analysed weapon; 11 percentage-only weapon(s) correctly have no flat-Damage denominator.
 
 ## L3 — weapons with a standalone percentage DPS floor
 
-651 weapon(s) carry a standalone percentage hit; **57** have a floor at or above 25% of output.
+651 weapon(s) carry a standalone percentage hit; **153** have a floor at or above 25% of output.
 
 A price target below the floor is UNREACHABLE by lowering flat Damage — `required_damage()` returns None rather than a wrong positive number. To price these lower, the standalone percentage hit has to shrink.
 
@@ -35,62 +35,62 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `d2k_aircraft_eater` | 100.0% |
 | `TSTacticalMissile` | 100.0% |
 | `TSTacticalChemMissile` | 100.0% |
+| `BlackEagleThunderboltMissiles_elite` | 97.7% |
+| `BlackEagleThunderboltMissiles` | 97.6% |
 | `TSTacticalMissileDamage` | 95.3% |
 | `TSTacticalChemMissileDamage` | 95.3% |
+| `RA2APCRocket_AA_elite` | 93.4% |
+| `MigMissiles_elite` | 93.2% |
+| `MigMissiles_fire_elite` | 93.2% |
+| `MigMissiles_tesla_elite` | 93.2% |
+| `RA2APCRocket_AA` | 93.2% |
+| `MigMissiles` | 92.9% |
+| `MigMissiles_fire` | 92.9% |
+| `MigMissiles_tesla` | 92.9% |
+| `RA2APCRocket_elite` | 92.6% |
+| `RA2APCRocket` | 92.4% |
+| `PhobosLaser` | 86.9% |
 | `TSHSeekerBomb` | 85.7% |
-| `Spit` | 78.8% |
-| `PlasBullet` | 74.0% |
-| `bowFire_AA` | 72.7% |
-| `bowFire` | 72.7% |
-| `wc_tower_fire` | 72.3% |
-| `Spit_AA` | 69.1% |
-| `wc2lightshipFire` | 67.0% |
-| `wc2submarineFire` | 66.7% |
-| `wc2tornadoTest` | 66.7% |
-| `wc2daemonFire` | 66.7% |
-| `wc2heavyshipFire` | 66.5% |
-| `d2k_quake_thump` | 65.8% |
-| `d2k_quake_boom` | 65.8% |
-| `TeslaArmorDischargeFragment2` | 62.5% |
-| `MADTankDetonate` | 46.6% |
-| `TeslaArmorDischargeFragment1` | 45.4% |
+| `LunarNaxiDroneMissile` | 85.3% |
+| `SCTyrAA` | 84.1% |
+| `D2K_RocketsCymek` | 84.1% |
 
-_... and 27 more._
+_... and 123 more._
 
-## L4 — folded runtime residual (rounding or Int32 wrap)
+## L4 — folded runtime quantisation residual
 
-43 weapon(s) have a non-zero current folded runtime residual.
+382 weapon(s) have a non-zero current folded runtime residual.
 This residual is included in measured output but excluded from `k_flat` and `dps_floor`; recompute it after snapping a proposed Damage value.
 
 | weapon | context-adjusted residual per shot |
 |---|--:|
-| `d2kStormLasher` | -548372.8868 |
-| `ExecutionerSword` | -196272.8356 |
-| `OIHakureiring2` | -3474.2528 |
-| `Hakureiring2` | -2683.8183 |
-| `12MissilesSpawnerScud` | -1.5158 |
-| `SteelStalkerRailgunEScatter` | -0.3485 |
-| `HammerheadArtillery` | +0.2215 |
-| `SteelAirTurretEScatter` | -0.1435 |
-| `TSZoneRailgunRail` | +0.1178 |
-| `MagicOrb` | -0.0928 |
-| `ThermobaricNuclearMaverick` | -0.0797 |
-| `MarineMG` | -0.0677 |
-| `MadcapGun` | -0.0666 |
-| `SteelQuantumCannonScatter_elite` | -0.0651 |
-| `HarkonnenFlameTurret` | -0.0548 |
-| `Lunar_GreenSturmArty` | +0.0433 |
-| `NaxSturmArty` | +0.0433 |
-| `ExplosiveDebris` | +0.0266 |
-| `SandmarineTuskFire` | -0.0153 |
-| `TSSBoatTusk` | +0.0143 |
-| `oDevBullet` | +0.0130 |
-| `o110mm_Gun` | +0.0104 |
-| `o80mm_A` | +0.0095 |
-| `o80mm_H` | +0.0095 |
-| `o80mm_O` | +0.0095 |
-| `ZeroFighterChainGunWaveforce` | -0.0057 |
-| `tkm_rifleman_rifle` | +0.0047 |
-| `RA28Inch` | +0.0030 |
-| `o155mm` | +0.0026 |
-| `ViperMissilesFire` | -0.0014 |
+| `FutureMechPlasma_elite` | +1.9195 |
+| `ThermobaricMaverick` | +1.9116 |
+| `FutureMechPlasma` | +1.8494 |
+| `BTRTeslaMachineGun` | +1.7781 |
+| `BTRTeslaMachineGunArc` | +1.7781 |
+| `edenMobileDefenceLaser` | +1.7721 |
+| `AsianChemicalBombs` | +1.7040 |
+| `d2kChainGun_upgrade` | +1.6687 |
+| `NapalmA10Carrier` | +1.6493 |
+| `TSLasergun` | +1.5857 |
+| `TSLaserHarpyClaw` | +1.5849 |
+| `TSLaserHarpyAOEClaw` | +1.5849 |
+| `JHighVWaveforce` | +1.5743 |
+| `BTRTeslaMachineGunArcFragment1` | +1.5713 |
+| `NambuMGWaveforce` | +1.5681 |
+| `LMG_ordos_upgrade` | +1.5489 |
+| `light_inf_lmg_ordos_upgrade` | +1.5388 |
+| `CabalOverkillDroneLaser` | +1.5246 |
+| `d2kCarryallChainGun_upgrade` | +1.5180 |
+| `12MissilesSpawnerScud` | -1.5170 |
+| `JapanSpeedBoatGunWaveforce` | +1.4667 |
+| `RA2120xmm_elite` | +1.4649 |
+| `RA2120xmm_fire_elite` | +1.4649 |
+| `RA2120xmm_tesla_elite` | +1.4649 |
+| `tkmbunkmg` | +1.4463 |
+| `RA2120xmm` | +1.4429 |
+| `RA2120xmm_fire` | +1.4429 |
+| `RA2120xmm_tesla` | +1.4429 |
+| `AsianGrenade_elite` | +1.4078 |
+| `RA2NarcoAKM_elite` | +1.4068 |

@@ -85,6 +85,7 @@ ACV_Machinegun:
 		UpdatesUnitStatistics: false
 
 Future_Cryocopter_Rocket:
+	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Grenade
 	Inherits@2: ^D2KRocket
 	Inherits@3: ^SteelMediumMissile
@@ -100,12 +101,12 @@ Future_Cryocopter_Rocket:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
-	Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 32000
+		PercentageScale: 9997
 	Warhead@PhysicalStateCryo1: ApplyPhysicalState
 		PhysicalStateName: Temperature
 		Amount: -16000
@@ -386,6 +387,7 @@ CryoLegionnaireAttack:
 		-PhysicalStateScale:
 
 FutureMicrotorpedos:
+	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
 	Inherits@fx: ^Effect_Watersplash_Large_RA2
@@ -424,6 +426,12 @@ FutureMicrotorpedos:
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 12000
+		PercentageScale: 19992
 
 AthenaLaser:
 	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
@@ -631,6 +639,7 @@ Future_CoilerFriendFrag2:
 		Amount: 1
 
 Future_MultiMissile:
+	Inherits@finalmain: ^Compatibility_MissileAP_LightFlat
 	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
 	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
@@ -643,6 +652,12 @@ Future_MultiMissile:
 		Damage: 4000
 	Warhead@MissileAP_Light:
 		Damage: 4000
+	-Warhead@Arrow_Light:
+	-Warhead@MissileAP_Light:
+	Warhead@MissileAP_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 Future_MultiMissile_Javelin:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1125,6 +1140,7 @@ CannonAttackRobotGun_elite:
 	BurstDelays: 3
 
 MissileAttackRobotGun:
+	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -1139,6 +1155,12 @@ MissileAttackRobotGun:
 		Damage: 12000
 	Warhead@MissileAP_Light: AreaDamage
 		Damage: 12000
+	-Warhead@MissileAP_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 9996
 MissileAttackRobotGun_elite:
 	Inherits: MissileAttackRobotGun
 	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
@@ -1149,6 +1171,10 @@ MissileAttackRobotGun_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 9996
 
 FutureMechGatling:
 	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
@@ -1588,6 +1614,7 @@ BlackWidowPistols_elite:
 	Burst: 8
 
 OrionRailgun:
+	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
 	Inherits: ^Warhead_Railgun_Heavy
 	Inherits@2: ^Projectile_Railgun_Heavy
 	Inherits@3: ^Effect_Railgun_Heavy
@@ -1611,6 +1638,12 @@ OrionRailgun:
 		Damage: 30000
 	Warhead@Effect: CreateEffect
 		ImpactSounds: gexp14a.wav
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Railgun_Heavy:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 60000
+		PercentageScale: 9999
 
 OrionRailgun_elite:
 	Inherits: OrionRailgun
@@ -1629,6 +1662,12 @@ OrionRailgun_elite:
 		Damage: 30
 	Warhead@CannonHE_Heavy:
 		Damage: 60000
+	-Warhead@CannonHE_Heavy:
+	-Warhead@RailgunWeapon:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 150000
+		PercentageScale: 6000
 BeehiveCarrierTarget:
 	Inherits: RA2CarrierTarget
 	ReloadDelay: 150
