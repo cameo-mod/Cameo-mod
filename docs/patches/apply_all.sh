@@ -22,13 +22,15 @@ PATCHES=(
   docs/patches/bot_insurance_03a_dynamic_trait_csharp.patch
   docs/patches/bot_insurance_03b_dynamic_trait_yaml.patch
   docs/patches/bot_limits_04_brutal_explicit_cadence.patch
+  docs/patches/chrome_05_drop_mis_scaled_3x_sheets.patch
 )
 
 # ⚠ The patches are a SERIES, not independent: 03b rewrites the block 01 edits, so
 # `git apply --check` on each one against the pristine tree fails on the second. A dry run has to
 # apply them cumulatively and then undo. Files are backed up first and restored by a trap, so an
 # interrupted check cannot leave the tree half-patched.
-TOUCHED=(mods/cameo/ai/ai.yaml mods/cameo/rules/defaults.yaml mods/cameo/rules/player.yaml)
+TOUCHED=(mods/cameo/ai/ai.yaml mods/cameo/rules/defaults.yaml mods/cameo/rules/player.yaml
+         mods/cameo/chrome.yaml)
 if [ -n "$CHECK" ]; then
   BACKUP="$(mktemp -d)"
   restore() {
@@ -66,6 +68,7 @@ assert rungs == 0, f"^Conyard still carries {rungs} ladder nodes"
 print("   Player: has DynamicBotInsurance, ^Conyard has 0 ladder nodes — ok")
 PYEOF
   python tools/audit/audit_bot_insurance.py | tail -2
+  python tools/audit/audit_chrome_scale_variants.py | tail -1
   echo
   echo "Dry run complete — the tree has been restored to exactly how it was."
   exit 0
@@ -78,6 +81,7 @@ DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release --nologo -p:TargetPlatfo
 echo
 echo "== audits and tests that do not need a running game"
 python tools/audit/audit_bot_insurance.py
+python tools/audit/audit_chrome_scale_variants.py
 python tools/audit/audit_doc_claims.py
 python -m pytest tools/tests/test_bot_insurance_model.py \
                  tools/tests/test_bot_difficulty_curve.py \

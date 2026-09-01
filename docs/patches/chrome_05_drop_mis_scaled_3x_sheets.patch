@@ -1,0 +1,32 @@
+--- a/mods/cameo/chrome.yaml
++++ b/mods/cameo/chrome.yaml
+@@ -12,7 +12,13 @@
+ ^Glyphs:
+ 	Image: glyphs.png
+ 	Image2x: glyphs_2x.png
+-	Image3x: glyphs_3x.png
++	# Image3x: glyphs_3x.png -- REMOVED. The file is 1024px, which is 4x the
++	# glyphs.png base, not 3x. ChromeProvider multiplies this collection's 1x regions by 3
++	# to index the sheet, so every icon was read from the wrong place, wrongly by an amount
++	# proportional to its distance from the top-left corner. Dropping the declaration makes
++	# the engine fall back to a smaller correct sheet: slightly softer at high DPI, but the
++	# right pixels. Restore this line only with a re-export at exactly 3x.
++	# See docs/audit/CHROME_SCALE_BUG.md -- guarded by audit_chrome_scale_variants.py.
+ 
+ editor:
+ 	Inherits: ^Glyphs
+@@ -245,7 +251,13 @@
+ ^Flags:
+ 	Image: flags.png
+ 	Image2x: flags_2x.png
+-	Image3x: flags_3x.png
++	# Image3x: flags_3x.png -- REMOVED. The file is 2048px, which is 4x the
++	# flags.png base, not 3x. ChromeProvider multiplies this collection's 1x regions by 3
++	# to index the sheet, so every icon was read from the wrong place, wrongly by an amount
++	# proportional to its distance from the top-left corner. Dropping the declaration makes
++	# the engine fall back to a smaller correct sheet: slightly softer at high DPI, but the
++	# right pixels. Restore this line only with a re-export at exactly 3x.
++	# See docs/audit/CHROME_SCALE_BUG.md -- guarded by audit_chrome_scale_variants.py.
+ 
+ games:
+ 	Inherits: ^Flags
