@@ -10,6 +10,47 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 
 ---
 
+## "Not found" is a claim about your search, not about the tree (2026-09-01)
+
+⛔ **The incident.** The maintainer said the bots have *"a passive income that increases with
+difficulty"*. I searched every `mods/cameo/**/*.yaml` for `CashTrickler`, `GrantCash` and income
+traits gated on a bot condition, found nothing, and wrote **"NOT FOUND in this mod"** into two
+documents — hedged as *"recorded as not-found, not as false"*, which is the right hedge and was
+still not enough, because a reader acts on the headline. The maintainer then supplied the name:
+**bot insurance**. One grep for `insurance` found `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` and a
+ten-rung ladder in `mods/cameo/rules/defaults.yaml:6712` that is the single largest AI cheat in the
+mod.
+
+⭐ **Why the concept search could not have worked.** The thing *is* a `CashTrickler`. But it is
+gated on conditions called `easiestbotinsurance` … `cameogodbotinsurance` — no economic word
+anywhere in the name — granted by a trait whose own `[Desc]` says only *"Grants a condition to this
+actor when the player has stored resources"*, and it lives on the **construction yard**, not on the
+`Player` actor or in `ai.yaml`. Every filter I applied was a filter it legitimately passes through.
+Even the Knowledge Base Manual's entry for it described it as a generic hook for *"emergency
+behaviors such as power sell"* and never mentioned that the mod wires it to income.
+
+**The rules, in the order they would have saved the time:**
+
+1. **When a person who knows the tree tells you a thing exists, the prior is that it exists.** Ask
+   for the name before concluding it does not. A maintainer's memory of their own mod outranks your
+   grep of it.
+2. **Grep the NAME, not only the concept.** Concept greps assume the author named the thing after
+   what it does. This one is named after the *situation it insures against*, which is a perfectly
+   normal way to name a feature and invisible to every keyword you would pick.
+3. **Search by wiring, not by vocabulary.** The mechanical version of rule 2: enumerate every
+   `CashTrickler` / `GrantCash` / `ResourcePurifier` in the mod and print *what condition each one
+   requires*, then read the list. That finds it in one pass with no guess about naming, and it is
+   the check `audit_doc_claims.py` now runs (`bot_insurance_rungs`).
+4. **Say what you searched, not just what you found.** "No trait matching `<pattern>` under
+   `<paths>`" is checkable and invites correction. "NOT FOUND in this mod" is neither.
+
+⚠ **And the near-miss.** Verifying the correction turned up a live bug — the four lowest rungs gate
+on `normalbot`, a condition `^AIDifficulties` never grants, so `medium` bots get **zero** insurance
+income while `easy` gets three rungs and `hard` gets five. It had been in the tree unnoticed
+precisely because nobody had ever read the ladder end to end. **The verification is worth more than
+the correction.**
+
+
 ## A registry nothing reads, and a reader that fails silently (2026-08-31)
 
 ⛔ **Two versions of the same bug, one nested inside the other.**
@@ -185,6 +226,7 @@ Speed grid and no audit covers it. "The audit is green" answers only the questio
 
 **Crash classes — these end a boot, and most gates cannot see them**
 
+- ["Not found" is a claim about your search, not about the tree (2026-09-01)](#not-found-is-a-claim-about-your-search-not-about-the-tree-2026-09-01)
 - [A registry nothing reads, and a reader that fails silently (2026-08-31)](#a-registry-nothing-reads-and-a-reader-that-fails-silently-2026-08-31)
 - [A test can encode a WEAKER property than the law and then defend the bug (2026-08-30)](#a-test-can-encode-a-weaker-property-than-the-law-and-then-defend-the-bug-2026-08-30)
 - [Two corpora measured on DIFFERENT frames are not comparable — the frame was worth 17% (2026-08-30)](#two-corpora-measured-on-different-frames-are-not-comparable--the-frame-was-worth-17-2026-08-30)

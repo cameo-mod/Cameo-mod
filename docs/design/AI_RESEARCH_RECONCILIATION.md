@@ -31,13 +31,23 @@ Gemini, Devin, and the maintainer.
 
 The maintainer's correction — *"you were wrong earlier about the AI not having other cheats. There
 exist production cost and build time modifiers for each AI difficulty ... and also there is a
-passive income"* — was substantially correct, and my first check was wrong because I greped
-`ai.yaml` and `player.yaml` only. **The multipliers live in `mods/cameo/rules/defaults.yaml`.**
+passive income"* — was correct in **every** particular, including the passive income, and my first two checks were
+wrong. Check one greped `ai.yaml` and `player.yaml` only; **the multipliers live in
+`mods/cameo/rules/defaults.yaml`**. Check two then declared the income "not found" after searching
+the whole mod for the *concept*; it is there under a name that never says what it does, and the
+maintainer's third correction supplied that name. **The cheat surface is four axes, not two.**
 
-### ✅ The complete cheat surface is exactly two trait types
+| # | axis | where |
+|--:|---|---|
+| 1 | production cost / time multipliers | `defaults.yaml:3977`, `:4007` |
+| 2 | `BotLimits` decision cadence | `ai.yaml:37-142` |
+| 3 | **passive income — the `BotInsurance` ladder** | `defaults.yaml:6712` |
+| 4 | omniscient vision | `AI_ARCHITECTURE.md` §0.2 |
+
+### ✅ Axis 1 — production cost and time
 
 Enumerated by scanning every `mods/cameo/**/*.yaml` for a trait gated on a `*botplayer`
-prerequisite. **Two types, ten tiers each, and nothing else:**
+prerequisite. **Two types, ten tiers each:**
 
 | difficulty | `ProductionCostMultiplier` | `ProductionTimeMultiplier` |
 |---|--:|--:|
@@ -56,7 +66,7 @@ prerequisite. **Two types, ten tiers each, and nothing else:**
 and builds in **40% of the time** — a 1.43× economy and a 2.5× production-speed advantage. Below
 `medium` the multipliers run the other way: the easy tiers are *handicapped*, not merely un-buffed.
 
-### ✅ A third axis nobody named: `BotLimits` decision cadence
+### ✅ Axis 2 — `BotLimits` decision cadence, which nobody named
 
 Separate from the above, in `ai.yaml`, `BotLimits@<difficulty>` sets
 `Building/UnitDelayModifier` and `Building/UnitIntervalModifier` — **how often the bot issues
@@ -71,18 +81,122 @@ orders**, as a percentage:
 independent multipliers compound. `BotLimits` itself has **no** cost or income field — its ten
 fields are limits and timings only (`OpenRA.Mods.CA/Traits/BotModules/BotLimits.cs:18-33`).
 
-### ⛔ The passive-income claim: NOT FOUND in this mod
+### ✅ Axis 3 — the passive-income claim: FOUND, and it is the largest of the four
 
-No `CashTrickler`, `GrantCash` or income trait anywhere in `mods/cameo/**/*.yaml` is gated on a bot
-difficulty. The only `CashTrickler` hits are a Warcraft 2 Orcs building available to any player
-(`PauseOnCondition: disabled`, not bot-gated).
+⛔ **Correction, 2026-09-01.** This section previously read *"NOT FOUND in this mod"*. That was
+wrong. The maintainer named it: *"the cash trickler for bot income you didn't find is called
+something like bot insurance and it's basically the same thing as a cash trickler but with a delay
+and a threshold under a certain cash amount so the bot can not get stuck on no income and
+rebuild."* Correct down to the mechanism.
 
-⚠ **Recorded as not-found, not as false.** It may exist in the engine's lobby-handicap system —
-which `engine/` is not in this repository, so no reader here can check — or it may be a memory of a
-different mod. **Whoever has the running game should confirm before the removal roadmap treats it
-as a target.**
+⭐ **Why the first grep missed it, because the lesson generalises.** It *is* a `CashTrickler` — but
+it is gated on a condition whose name contains no economic word at all (`easiestbotinsurance` …
+`cameogodbotinsurance`), granted by a Cameo-original trait called `BotInsurance`, and it lives on
+the **construction yard**, not on the Player actor or in `ai.yaml`. Searching for the *concept*
+("cash", "income", "trickler gated on a bot condition") returned nothing usable. Searching for the
+maintainer's *word* found it in one grep. **Grep the name as well as the concept.**
 
-### ✅ And a fourth, already documented: omniscient vision
+#### The trait
+
+`OpenRA.Mods.Cameo/Traits/BotInsurance.cs` — 92 lines, `ITick`, three fields:
+
+| field | default | meaning |
+|---|--:|---|
+| `Condition` | *(required)* | granted while the owner is broke |
+| `Threshold` | 1000 | grant below this much cash |
+| `ThresholdDuration` | 250 | ticks the owner must stay below it first — the maintainer's *"delay"* |
+
+`Tick` (lines 71–90): while `Cash >= Threshold` the counter resets to `ThresholdDuration`, else it
+decrements; the condition is granted when `GetCashAndResources() < Threshold && ticks < 0`. The real
+delay is therefore `ThresholdDuration + 1` ticks — **250 ticks ≈ 10.0 s** at this mod's default
+40 ms timestep (`mods/cameo/mod.yaml:551`).
+
+⚠ **Two different quantities, one comparison.** The countdown reads `Cash`; the grant reads
+`Cash + Resources`. A bot sitting on a full silo counts down forever and never triggers. Harmless
+today, but the delay is measured against a different number than the trigger and anyone editing
+this must know it.
+
+#### The wiring: ten rungs on the construction yard
+
+`^AIConyardCash` (`mods/cameo/rules/defaults.yaml:6712`), inherited by **47** construction-yard /
+faction-HQ actors including the `^Conyard` template. Ten rungs, each one
+`BotInsurance` + `CashTrickler` + `ResourcePurifier`:
+
+| rung | `Threshold` | `defaults.yaml` | reachable by |
+|---|--:|--:|---|
+| cameogod | 10000 | 6715 | cameogod |
+| unbeatable | 9000 | 6728 | unbeatable, cameogod |
+| challenger | 8000 | 6741 | challenger and above |
+| brutal | 7000 | 6754 | brutal and above |
+| veryhard | 6000 | 6767 | veryhard and above |
+| hard | 5000 | 6780 | hard and above |
+| medium | 4000 | 6793 | ⛔ **nobody** — see the bug below |
+| easy | 3000 | 6806 | easy, and hard and above |
+| veryeasy | 2000 | 6819 | veryeasy, easy, and hard and above |
+| easiest | 1000 | 6832 | easiest and above |
+
+Every rung carries `ThresholdDuration: 250` and the same two payouts: `CashTrickler`
+`Interval: 1, Amount: 1, ShowTicks: False` — **1 credit per tick = 25 credits/s** — and
+`ResourcePurifier` `Modifier: 5`.
+
+⭐ **It is a graduated floor, not a flat stipend, and that part is good design.** Rungs switch on
+independently as cash falls and switch off again as it recovers, so a `cameogod` bot draws 1
+credit/tick below 10 000 and 10 credits/tick below 1 000. It cannot be starved out — exactly the
+stated intent.
+
+⚠ **The magnitude is not small, and it is per construction yard.** The rungs sit on the conyard, so
+a bot with N conyards runs N independent ladders, and `BotLimits` allows `cameogod` **7**
+(`ai.yaml:134`). Fully broke that is 7 × 10 = **70 credits/tick = 1 750/s ≈ 105 000/min**, plus a
+stacked resource-value bonus if `ResourcePurifier.Modifier` is the percentage its other uses in this
+mod imply (RA2's Ore Purifier and TS Nod both use `Modifier: 25`).
+⚠ **That multiplication is arithmetic from the yaml, not an observation in play.** `engine/` is not
+in this repository, so `CashTrickler` and `ResourcePurifier` semantics could not be read from
+source here. Confirm the credited rate in a running game before this number drives a decision.
+
+#### ⭐ Humans get a comeback mechanic too — and that sets the fairness target
+
+`mods/cameo/rules/player.yaml`, on the `Player:` actor, for **every** player, bot or human:
+
+| lines | what |
+|---|---|
+| 243–254 | `BotInsurance@secondaryinsurance` — `Threshold: 10000`, `ThresholdDuration: 1500` (**60 s**), gated `nobase` (no conyard) → `CashTrickler` 1/tick |
+| 255–262 | `GrantConditionOnPlayerTotalCash` `Threshold: 999` → `CashTrickler@comeback` 1/tick |
+
+So *"bots should only have what a player has"* has a concrete definition here: **one rung, 1
+credit/tick, below ~1 000 cash** — plus the base-loss floor. The ten-rung conyard ladder is the part
+that exceeds it, and the target state is one rung, not zero.
+
+### ⛔ A real bug found while verifying the above: `medium` bots get no insurance at all
+
+The four lowest rungs gate on **`normalbot`** where every other file in the mod uses **`mediumbot`**:
+
+```
+defaults.yaml:6801  RequiresCondition: (normalbot || hardbot || ...) && mediumbotinsurance
+```
+
+`^AIDifficulties` (`ai.yaml:16-18`) grants `mediumbot`, never `normalbot`. The only
+`GrantConditionOnBotOwner` in the mod that grants `normalbot` is on a Dark Reign building,
+`drpplant1.freedomguard` (`darkreign.yaml:3348`) — and conditions are per-actor, so it is invisible
+to the conyard that needs it.
+
+**Consequence, by exhaustion of all ten `RequiresCondition` lists: `mediumbot` appears in none of
+them.** A `medium` bot receives **zero** insurance income, while `easy` gets 3 rungs and `hard` gets
+5. The difficulty ladder has a hole in its middle, and it is the default difficulty.
+
+⚠ **Not fixed here.** The fix is one token (`normalbot` → `mediumbot`, or add `mediumbot` to the
+four lists) but it **changes bot difficulty balance**, and a yaml change needs a boot gate this
+container cannot run. Queued in `ROADMAP.md`; which way to fix it is **OD-G**.
+
+⚠ **A second finding, C#-side:** `BotInsurance` marks `ticks` `[VerifySync]` but the class does not
+implement `ISync`, so the sync check never runs on it — already recorded in the audit baseline
+(`docs/audit/baseline/check_yaml_dedup.txt:11367`). `ticks` is driven by synced `PlayerResources`
+state, so it should be `ISync`. A C# change means rebuild + boot gate; not done here.
+
+⚠ **And a staleness note:** upstream CA shipped *"Don't enable bot insurance until 2 minutes into
+the game"* (`docs/research/ca-staleness-audit.md:348`). Cameo's copy has **no game-time gate** —
+the ladder is live from tick 251.
+
+### ✅ Axis 4 — omniscient vision, already documented
 
 `AI_ARCHITECTURE.md` §0.2 already records that the squad managers' actor scan respects only
 `IVisibilityModifier`, not shroud — so bots see the whole map from tick zero except cloaked units.
@@ -97,7 +211,8 @@ shoot what they cannot see."*
 | 2 | vision (fog gate) | phases 1–5 stable | it is the cheat that most distorts *balance* data: every engagement metric collected under omniscience is biased |
 | 3 | `BotLimits` cadence toward 100 | fog absorbed | a cadence cheat compensates for a bad decision loop; fix the loop first |
 | 4 | `ProductionTimeMultiplier` → 100 | learning shows parity | |
-| 5 | `ProductionCostMultiplier` → 100 | learning shows parity | last, because it is the largest single advantage |
+| 5 | `BotInsurance` ladder → **one rung**, matching what a human player already gets | the bot can hold an economy without it | ⛔ do NOT delete it outright — its stated job is stopping a bot getting permanently stuck at zero income, and `player.yaml:243-262` gives humans the same floor. Parity is one rung, not zero. |
+| 6 | `ProductionCostMultiplier` → 100 | learning shows parity | last, because it is the largest single *per-unit* advantage |
 
 ⛔ **One at a time, with a measurement between each.** Removing three at once and then asking which
 one mattered is the mistake this project has already paid for twice this week.
@@ -223,9 +338,12 @@ Three amendments to `AI_ARCHITECTURE.md` §10, all small:
    `DEVIN_BRANCH_REVIEW.md` §2 — it can pause all bot unit production and is a second authority over
    the decision counter-demand hints feed. Without it, a phase-5 log showing "AA demand 91, zero AA
    built" reads as a broken demand model when it is a budget cap working correctly.
-2. **Add the difficulty multipliers to the log schema (§6.2).** A match record that does not name
-   the bot's cost and time multipliers cannot be compared across difficulties, and the cheat-removal
-   roadmap in §1 is a sequence of exactly such comparisons.
+2. **Add all four cheat axes to the log schema (§6.2).** A match record that does not name the
+   bot's cost and time multipliers, its `BotLimits` cadence, **and its live insurance rungs** cannot
+   be compared across difficulties, and the cheat-removal roadmap in §1 is a sequence of exactly
+   such comparisons. ⭐ Insurance especially: it is *conditional* income, so it does not show up as a
+   constant and a log that records only "credits earned" will attribute it to harvesting. Log the
+   count of granted `*botinsurance` conditions per tick-bucket, per conyard.
 3. **Team layer enters at the same phase as main-target selection**, as a `TeamSituation` published
    by one deterministic coordinator — never as a module that issues orders to allies.
 
@@ -239,7 +357,8 @@ the one-owner rule. Every agent that proposed replacing those proposed it withou
 |---|---|
 | **OD-C** | Strongest-first (maintainer's rule) vs the finishing exception — which wins when they disagree? Decide from phase-1 logs. |
 | **OD-D** | Does a team cash-transfer API exist? ⛔ Verify before any sharing code. |
-| **OD-E** | Is there a per-difficulty passive income anywhere (engine lobby handicap)? Not found in this mod; needs someone with the running game. |
+| **OD-E** | ✅ **CLOSED 2026-09-01 — it exists.** `BotInsurance` + `CashTrickler` + `ResourcePurifier`, ten rungs on `^AIConyardCash` (`defaults.yaml:6712`). See §1. What remains open is the *removal shape*, now row 5 of the removal order: trim to one rung (human parity), not to zero. |
+| **OD-G** | The `medium` rung gates on `normalbot`, a condition never granted on the conyard, so `medium` bots get zero insurance while `easy` gets 3 rungs and `hard` gets 5 (§1). Fix by renaming `normalbot` → `mediumbot` in the four lists, or by adding `mediumbot` alongside it? Either changes bot difficulty balance and needs a boot gate. |
 | **OD-F** | Cheat-removal order — is vision genuinely first, given it is the one that most corrupts *balance* measurement rather than making bots weakest? |
 
 ---

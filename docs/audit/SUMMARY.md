@@ -65,6 +65,21 @@ gated by their respective tech prerequisites; broader composition coverage is
 still a follow-up. Explicit unit requests continue to bypass composition
 shares.
 
+## ⛔ Known blind spot: O3 dead conditions are counted MOD-GLOBALLY (2026-09-01)
+
+`audit_orphans.py` O3 reports conditions granted-never-consumed and consumed-never-granted across
+the **whole mod**. Conditions in OpenRA are **per-actor**, so a grant on actor A satisfying nothing
+for a consumer on actor B is dead wiring O3 cannot see. Its own docstring says the check is
+approximate (`audit_orphans.py:10-11`); this is the concrete shape of that approximation.
+
+**A live instance, found 2026-09-01 by reading yaml rather than by any audit:** the bot
+passive-income ladder on `^AIConyardCash` (`defaults.yaml:6712`) gates its four lowest rungs on
+`normalbot`, which `^AIDifficulties` never grants — the mod's only `normalbot` grant is on a Dark
+Reign building. `medium` bots therefore get **zero** insurance income while `easy` gets 3 rungs and
+`hard` gets 5. O3 stayed silent because `normalbot` is both granted and consumed *somewhere*.
+Details and the fix: [`../design/ROADMAP.md`](../design/ROADMAP.md) "medium BOTS GET ZERO INSURANCE
+INCOME"; the count is pinned as `bot_insurance_unreachable_difficulties` in `doc_claims.yaml`.
+
 ## Counts by bug class
 
 | class | what | count | report |

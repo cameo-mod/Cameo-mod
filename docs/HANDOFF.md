@@ -269,15 +269,36 @@ Crashes and player-visible regressions jump everything below.
 Phase 0 audit) and `docs/design/AI_RESEARCH_RECONCILIATION.md` (team play, learning, and the
 difficulty cheats — rounds 2–3; round 1 is already reconciled in `AI_ARCHITECTURE.md` §11).
 
-⭐ **The measured difficulty cheats, because this was got wrong twice.** They are in
-`mods/cameo/rules/defaults.yaml`, NOT `ai.yaml` — exactly two trait types, ten tiers each:
-`ProductionCostMultiplier` 115 (easiest) → **70** (cameogod) and `ProductionTimeMultiplier` 130 →
-**40**. Plus a third, separate axis in `ai.yaml`: `BotLimits` decision cadence 300% → **25%**. All
-three compound. ⚠ A per-difficulty **passive income was NOT found** anywhere in `mods/cameo/**`
-— recorded as not-found, not as false; it may be an engine lobby handicap, which this repo cannot
-check. ⚠ And `ProductionCostMultiplier` means a bot's effective unit cost is **not** the price the
-class formula computed — any balance measurement taken from a bot match is off by up to 30% at the
-top tier.
+⭐ **The measured difficulty cheats — FOUR axes, because this was got wrong three times.**
+
+| # | axis | where | range, easiest → cameogod |
+|--:|---|---|---|
+| 1 | `ProductionCostMultiplier` / `ProductionTimeMultiplier` | `defaults.yaml:4007` / `:3977` (**not** `ai.yaml`) | 115 → **70** / 130 → **40** |
+| 2 | `BotLimits` decision cadence | `ai.yaml:37-142` | 300% → **25%** |
+| 3 | **passive income — the `BotInsurance` ladder** | `defaults.yaml:6712` (`^AIConyardCash`) | 1 rung → **10 rungs**, 1 credit/tick each |
+| 4 | omniscient vision | `AI_ARCHITECTURE.md` §0.2 | on at every difficulty |
+
+All four compound. ⛔ **Axis 3 was twice reported as "not found" and it exists.** It is a
+`CashTrickler` gated on a condition called `easiestbotinsurance` … `cameogodbotinsurance`, granted
+by the Cameo-original trait `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` when cash stays below a
+per-difficulty threshold (1 000 … 10 000) for 250 ticks (~10 s). It sits on the **construction
+yard**, not the Player actor — which is why searching `ai.yaml` and `player.yaml`, and then
+searching the whole mod for the *concept*, both missed it. Full anatomy, magnitudes and caveats:
+`AI_RESEARCH_RECONCILIATION.md` §1.
+
+⛔ **A bug found while verifying it: `medium` bots get ZERO insurance income**, while `easy` gets 3
+rungs and `hard` gets 5. The four lowest rungs gate on `normalbot`, a condition `^AIDifficulties`
+never grants (it grants `mediumbot`); the only grant of `normalbot` in the mod is on a Dark Reign
+building and conditions are per-actor. One-token fix, but it moves bot difficulty balance and needs
+a boot gate — queued in `ROADMAP.md` as **OD-G**.
+
+⚠ **Do not plan to delete axis 3 outright.** Its job is stopping a bot getting permanently stuck at
+zero income, and `player.yaml:243-262` gives **human** players the same floor. Parity is one rung,
+not zero.
+
+⚠ **And `ProductionCostMultiplier` means a bot's effective unit cost is *not* the price the class
+formula computed** — any balance measurement taken from a bot match is off by up to 30% at the top
+tier, before insurance income is counted.
 
 `docs/design/DEVIN_BRANCH_REVIEW.md` headline: Phase 0 audit,
 2026-09-01. Its headline corrects a premise that five external review rounds were built on:

@@ -24,6 +24,73 @@ granular, resumable task queue that the handoff points into._
 - [~] Port the opt-in unit-composition mechanism and two TD pilot compositions;
   extend the pilot to other universes and factions as a follow-up.
 
+## ⛔ P1 — `medium` BOTS GET ZERO INSURANCE INCOME (2026-09-01, needs a boot machine)
+
+**Found while verifying the maintainer's "bot insurance" correction.** Full anatomy:
+[`AI_RESEARCH_RECONCILIATION.md`](AI_RESEARCH_RECONCILIATION.md) §1.
+
+`^AIConyardCash` (`mods/cameo/rules/defaults.yaml:6712`) is the bot passive-income ladder: ten rungs
+of `BotInsurance` + `CashTrickler` + `ResourcePurifier`, one per difficulty. The four lowest rungs
+gate on **`normalbot`**:
+
+```
+defaults.yaml:6801  RequiresCondition: (normalbot || hardbot || ...) && mediumbotinsurance
+defaults.yaml:6805  (same)
+defaults.yaml:6814  RequiresCondition: (easybot || normalbot || ...) && easybotinsurance
+defaults.yaml:6818  (same)
+defaults.yaml:6827  RequiresCondition: (veryeasybot || easybot || normalbot || ...) && veryeasybotinsurance
+defaults.yaml:6831  (same)
+defaults.yaml:6840  RequiresCondition: (easiestbot || veryeasybot || easybot || normalbot || ...) && easiestbotinsurance
+defaults.yaml:6844  (same)
+```
+
+`^AIDifficulties` (`mods/cameo/ai/ai.yaml:16-18`) grants **`mediumbot`**, never `normalbot`. The
+mod's only `normalbot` grant is `GrantConditionOnBotOwner@medium` on the Dark Reign building
+`drpplant1.freedomguard` (`mods/cameo/rules/darkreign.yaml:3348`), and conditions are per-actor, so
+the conyard never sees it.
+
+**Effect, by exhaustion of all ten `RequiresCondition` lists: `mediumbot` appears in none of them.**
+
+| difficulty | rungs reachable |
+|---|--:|
+| easiest | 1 |
+| veryeasy | 2 |
+| easy | 3 |
+| **medium** | **0** ⛔ |
+| hard | 5 |
+| veryhard | 6 |
+| brutal | 7 |
+| challenger | 8 |
+| unbeatable | 9 |
+| cameogod | 10 |
+
+- [ ] **XS, MAINTAINER CALL (OD-G)** — fix by renaming `normalbot` → `mediumbot` in the eight lines
+  above, or by adding `mediumbot` alongside `normalbot` (keeps the Dark Reign spawner's meaning
+  untouched, though that grant is on a different actor and cannot collide). **Either way this moves
+  bot difficulty balance at the default difficulty**, so it needs a boot gate and a maintainer
+  order, not a drive-by edit.
+- [ ] **XS** — `BotInsurance` marks `ticks` `[VerifySync]` without implementing `ISync`
+  (`docs/audit/baseline/check_yaml_dedup.txt:11367`). C# change ⇒ rebuild ⇒ boot gate.
+- [ ] **S** — upstream CA gates insurance to *"2 minutes into the game"*
+  (`docs/research/ca-staleness-audit.md:348`); Cameo's copy has no game-time gate. Decide whether to
+  adopt it.
+
+⛔ **And the audit gap that let this survive.** `audit_orphans.py` O3 counts conditions
+**mod-globally**: `normalbot` is granted somewhere (`darkreign.yaml:3349`) and consumed somewhere
+(`defaults.yaml:6801`), so it is neither "granted never consumed" nor "consumed never granted" and
+the check is silent. **Conditions are per-ACTOR.** A grant on actor A and a consume on actor B is
+dead wiring that no current audit can see, and its own docstring says the check is approximate
+(`audit_orphans.py:10-11`).
+
+- [ ] **M** — new audit: **per-actor condition reachability**. For every resolved actor, collect the
+  conditions its traits GRANT and the conditions its traits REQUIRE, and report every requirement
+  no trait on that same actor can ever grant (ignoring `ExternalCondition`, which is granted from
+  off-actor by design). Read through `miniyaml.Ruleset.resolve` — ⛔ never hand-parse (CLAUDE.md
+  rule 8e). Expect a large first-run list; land it as a LOWER-ONLY ratchet like
+  `audit_dead_warhead_fields.py`, not as a fix-everything pass.
+
+---
+
 ## AI ARCHITECTURE (2026-08-31)
 
 Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Nothing here is implemented; the

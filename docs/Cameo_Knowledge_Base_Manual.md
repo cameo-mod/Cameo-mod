@@ -14481,7 +14481,7 @@ After studying this chapter, you should be able to:
 | `OpenRA.Mods.Cameo/Traits/BotModules/DeployBotModule.cs` | Issues deploy orders for `AutoDeployer` traits. |
 | `OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs` | Spawns building plugs for the AI. |
 | `OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs` | Global combat-unit budget shared across all living bots. |
-| `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` | Grants a condition when the bot's stored cash is low for a duration. |
+| `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` | Grants a condition when stored cash is low for a duration. Drives the ten-rung **bot passive-income ladder** on `^AIConyardCash`. |
 | `mods/cameo/ai/ai.yaml` | Main AI configuration for all difficulty levels. |
 | `mods/cameo/ai/ai_airforce.yaml` | Specialized air/naval-focused AI configuration. |
 | `OpenRA.Mods.Common/Traits/BotModules/ResourceMapBotModule.cs` | Upstream resource map still used by harvester and base builder. |
@@ -14724,7 +14724,15 @@ As opponents are eliminated, surviving bots are allowed larger armies, but the t
 
 ### BotInsurance
 
-`BotInsurance` in `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` is not a module in the `IBotTick` sense, but it is attached to the bot player actor and grants a condition when the bot's stored resources fall below `Threshold` for `ThresholdDuration` ticks. This condition can be used in YAML to enable emergency behaviors such as power sell, defensive upgrades, or alternative production paths.
+`BotInsurance` in `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` is not a module in the `IBotTick` sense. It grants a condition when the owner's cash stays below `Threshold` (default 1000) for `ThresholdDuration` ticks (default 250, ~10 s at the mod's default 40 ms timestep). Note the two-quantity asymmetry in `Tick` (lines 71-90): the countdown resets on `Cash >= Threshold`, but the grant tests `GetCashAndResources() < Threshold`, so an owner sitting on a full silo counts down and never triggers.
+
+⭐ **What it is actually wired to, because the trait name says nothing about it.** It is not a generic hook for "emergency behaviors" — in this mod it drives **bot passive income**, and it is one of the four AI difficulty cheats. `^AIConyardCash` (`mods/cameo/rules/defaults.yaml:6712`, inherited by 47 construction-yard / HQ actors including `^Conyard`) declares **ten rungs**, one per difficulty, each pairing a `BotInsurance` (thresholds 1000 for `easiest` up to 10000 for `cameogod`, all `ThresholdDuration: 250`) with a `CashTrickler` (`Interval: 1, Amount: 1` = 1 credit/tick) and a `ResourcePurifier` (`Modifier: 5`), gated `RequiresCondition: (<this difficulty or higher>) && <tier>botinsurance`. Rungs switch on independently as cash falls, so the payout ramps from 1 credit/tick to 10 as a `cameogod` bot approaches zero. The rungs live on the conyard, so the ladder multiplies by the number of conyards owned.
+
+The same trait also appears on the `Player` actor at `mods/cameo/rules/player.yaml:246` (`@secondaryinsurance`, `Threshold: 10000`, `ThresholdDuration: 1500`, gated on having no construction yard) for **every** player including humans — that one is a comeback mechanic, not a bot cheat.
+
+⛔ **Known bug:** the four lowest rungs gate on `normalbot`, which `^AIDifficulties` never grants (it grants `mediumbot`); the mod's only `normalbot` grant is on `drpplant1.freedomguard` in `darkreign.yaml:3348` and conditions are per-actor. `mediumbot` appears in none of the ten lists, so a `medium` bot receives no insurance income at all. See `docs/design/AI_RESEARCH_RECONCILIATION.md` §1.
+
+⚠ **Lint:** `ticks` carries `[VerifySync]` but the class does not implement `ISync`, so the sync check never runs on it (`docs/audit/baseline/check_yaml_dedup.txt:11367`).
 
 ### BotLimits
 

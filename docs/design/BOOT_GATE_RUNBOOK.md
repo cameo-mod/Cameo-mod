@@ -351,6 +351,31 @@ bash tools/audit/run_all.sh                                    # drift must be 0
 # --- BOOT GATE --- then commit yaml AND ledger TOGETHER
 ```
 
+### §5.5 — G5: the `medium`-bot insurance hole ⭐ **independent of G1–G4, one token, do it whenever**
+
+Not a balance-pipeline change — a plain yaml wiring bug — but it moves **bot difficulty balance at
+the default difficulty**, so it needs your boot gate and a maintainer word on which way to fix it.
+
+`^AIConyardCash` (`mods/cameo/rules/defaults.yaml:6712`) is the bot passive-income ladder: ten rungs
+of `BotInsurance` + `CashTrickler` + `ResourcePurifier`, one per difficulty. Eight lines gate on
+**`normalbot`** (`:6801 :6805 :6814 :6818 :6827 :6831 :6840 :6844`). `^AIDifficulties`
+(`mods/cameo/ai/ai.yaml:16-18`) grants **`mediumbot`**, never `normalbot`; the mod's only
+`normalbot` grant is on the Dark Reign building `drpplant1.freedomguard`
+(`mods/cameo/rules/darkreign.yaml:3348`), and conditions are per-actor, so the conyard never sees
+it. `mediumbot` appears in **none** of the ten `RequiresCondition` lists.
+
+**Result: a `medium` bot gets ZERO insurance income**, while `easy` gets 3 rungs and `hard` gets 5.
+
+```bash
+# the measurement, before and after — must go 1 -> 0
+python tools/audit/audit_doc_claims.py     # claim: bot_insurance_unreachable_difficulties
+```
+
+⛔ **Maintainer call (OD-G):** rename `normalbot` → `mediumbot` in those eight lines, or add
+`mediumbot` alongside it. Then update `value:` for `bot_insurance_unreachable_difficulties` in
+`docs/audit/doc_claims.yaml` **in the same commit** as the yaml, per the registry's own rule.
+Full anatomy: `AI_RESEARCH_RECONCILIATION.md` §1.
+
 ---
 
 ## §6 — The no-boot queue (any agent, any machine, in this order)
