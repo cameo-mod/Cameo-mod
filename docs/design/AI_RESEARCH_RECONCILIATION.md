@@ -387,6 +387,43 @@ Three amendments to `AI_ARCHITECTURE.md` §10, all small:
 the one-owner rule. Every agent that proposed replacing those proposed it without evidence, and
 `AI_ARCHITECTURE` §11.4 already rejected the five-module pipeline variant on the same grounds.
 
+### ⭐ Findings for the "adaptive difficulty" question (2026-09-01, measured)
+
+Two facts that were expensive to establish and that decide most of the design space. Recorded
+here so nobody re-derives them.
+
+⛔ **The production multipliers CANNOT move into a Player-actor trait.**
+`ProductionTimeMultiplier` / `ProductionCostMultiplier` live in `^BotProductionBehavior`
+(`defaults.yaml:3976`), which is inherited by **`^BasicUnit` and `^BaseBuilding`**
+(`defaults.yaml:2406`) — i.e. by every produced actor, not by `Player:`. The engine asks the
+**item being built** for its cost and time modifiers, so no trait on the Player actor can supply
+them. (They are also gated on `Prerequisites: *botplayer`, not on the `*bot` conditions, so they
+are a fourth gating mechanism on top of the three already catalogued in §1.)
+**What IS possible:** keep one thin per-actor trait that reads its multiplier from a single
+player-level authority. That takes 20 hand-maintained instances down to 2 and makes the values
+continuous — but it needs two new Cameo traits implementing the engine's modifier interfaces,
+not a field on `DynamicBotInsurance`.
+⚠ **And the real risk is not the plumbing.** OpenRA recomputes an item's remaining cost against
+its current total while it is building. A multiplier that moves mid-build can over- or
+under-charge, or strand a queue. Any dynamic cost multiplier must be **sampled when the item is
+queued and held for that item**, or only allowed to change while the queue is empty.
+
+✅ **Army and building value are already available on the Player actor, for free.**
+`PlayerStatistics` is at `player.yaml:217` and exposes `ArmyValue` and `AssetsValue` (read at
+`CameoObserverStatsLogic.cs:478` and `:705`), plus `ArmySamples` / `IncomeSamples` histories.
+`DynamicBotInsurance` can read them via `playerActor.TraitOrDefault<PlayerStatistics>()` with no
+new scanning cost.
+⭐ **This fixes a real false positive in the trait as written:** a bot at zero cash in the middle
+of a push, holding a 30 000-credit army, is not bankrupt — it is spending correctly and its
+harvesters will refill it. Today it would be insured. Distress is **liquidity AND low net worth**,
+not liquidity alone.
+
+⛔ **Binding fog rule for any of this: insurance inputs must be SELF-REFERENTIAL.** My cash, my
+army, my assets, my own history. The moment the trait reads another player's values it is
+omniscience — the same cheat class the roadmap in §1 exists to remove, reintroduced through the
+economy instead of through vision. An adaptive *difficulty setting* comparing against opponents
+may be a deliberate exception, but it must be argued for, not leaked in.
+
 ### Open decisions this file adds
 
 | id | decision |
@@ -396,6 +433,9 @@ the one-owner rule. Every agent that proposed replacing those proposed it withou
 | **OD-E** | ✅ **CLOSED 2026-09-01 — it exists.** `BotInsurance` + `CashTrickler` + `ResourcePurifier`, ten rungs on `^AIConyardCash` (`defaults.yaml:6712`). See §1. What remains open is the *removal shape*, now row 5 of the removal order: trim to one rung (human parity), not to zero. |
 | **OD-G** | ✅ **CLOSED 2026-09-01.** `normalbot` → `mediumbot`, plus human parity at four rungs (the maintainer's ruling). Patch written and verified; needs only the boot gate. |
 | **OD-H** | ✅ **CLOSED 2026-09-01** — the ladder moves to the `Player` actor as part of the `DynamicBotInsurance` rewrite, which also removes the conyard multiplication. The one open verification is carried on that patch: does `INotifyResourceAccepted` reach a Player-actor trait? Needs a running game. |
+| **OD-J** | Should the production multipliers become continuous (two thin per-actor traits reading one player-level authority), or stay as the 20 fixed instances? Cost: two new traits plus the queue-time sampling problem above. |
+| **OD-K** | Should distress use NET WORTH (cash + `ArmyValue` + `AssetsValue`) rather than cash alone? ⭐ Recommended — it removes the "broke mid-push with a huge army" false positive at no runtime cost. Open question is the weighting. |
+| **OD-L** | An `adaptive` 11th bot type whose effective rank floats 0→9 during a match — YES as an opt-in difficulty, ⛔ NOT as a modifier applied to the ten fixed ones. Fixed difficulties are the A/B baseline the whole cheat-removal roadmap is measured against; a difficulty that drifts with the economy makes two matches incomparable. |
 | **OD-I** | Cheat-removal end state for axis 3: with the payout now capped at 10 000 and no conyard scaling, is the bot ladder still a "cheat" to remove, or is it now close enough to the human floor to keep permanently? Decide from phase-1 logs. |
 | **OD-F** | Cheat-removal order — is vision genuinely first, given it is the one that most corrupts *balance* measurement rather than making bots weakest? |
 
