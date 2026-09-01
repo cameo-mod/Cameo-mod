@@ -265,7 +265,21 @@ Crashes and player-visible regressions jump everything below.
 
 ### 3.0 — DO THIS FIRST
 
-⛔ **BEFORE ANY AI/BOT-MODULE WORK, READ `docs/design/DEVIN_BRANCH_REVIEW.md`.** Phase 0 audit,
+⛔ **BEFORE ANY AI/BOT-MODULE WORK, READ TWO FILES:** `docs/design/DEVIN_BRANCH_REVIEW.md` (the
+Phase 0 audit) and `docs/design/AI_RESEARCH_RECONCILIATION.md` (team play, learning, and the
+difficulty cheats — rounds 2–3; round 1 is already reconciled in `AI_ARCHITECTURE.md` §11).
+
+⭐ **The measured difficulty cheats, because this was got wrong twice.** They are in
+`mods/cameo/rules/defaults.yaml`, NOT `ai.yaml` — exactly two trait types, ten tiers each:
+`ProductionCostMultiplier` 115 (easiest) → **70** (cameogod) and `ProductionTimeMultiplier` 130 →
+**40**. Plus a third, separate axis in `ai.yaml`: `BotLimits` decision cadence 300% → **25%**. All
+three compound. ⚠ A per-difficulty **passive income was NOT found** anywhere in `mods/cameo/**`
+— recorded as not-found, not as false; it may be an engine lobby handicap, which this repo cannot
+check. ⚠ And `ProductionCostMultiplier` means a bot's effective unit cost is **not** the price the
+class formula computed — any balance measurement taken from a bot match is off by up to 30% at the
+top tier.
+
+`docs/design/DEVIN_BRANCH_REVIEW.md` headline: Phase 0 audit,
 2026-09-01. Its headline corrects a premise that five external review rounds were built on:
 **there is no Devin bot-module implementation.** PR #324 is documentation only — 2 files, no C#,
 no yaml — and the other five `devin/*` branches are either already merged (zero file difference
