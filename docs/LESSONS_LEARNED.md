@@ -119,7 +119,6 @@ consumer opt-in and preserve the existing `UnitsToBuild` table as the fallback
 rather than introducing a second baseline configuration. Resolve shares by
 production queue category, and keep explicit unit requests on their existing
 bypass path so harvesters and MCVs are not blocked by composition filtering.
-
 Composition candidates must be gated by time, per-composition interval,
 technology prerequisites, and whether their units are producible in the
 player's queues. Parallel production queues must count every queued unit
