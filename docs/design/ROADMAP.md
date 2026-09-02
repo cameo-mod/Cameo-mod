@@ -101,6 +101,10 @@ dead wiring that no current audit can see, and its own docstring says the check 
 
 ## AI ARCHITECTURE (2026-08-31)
 
+Unit classification: [`UNIT_CLASSIFICATION_PROGRAM.md`](UNIT_CLASSIFICATION_PROGRAM.md)
+— twelve maintainer rulings, three workstreams. ⭐ Classifying every buildable unit
+(workstream A) BLOCKS the KeepsDistance rework and the weapon splits.
+
 Baseline actors: [`BASELINE_ACTOR_REVIEW.md`](BASELINE_ACTOR_REVIEW.md) — the binding spec
 for re-selecting every class anchor (cheapest member, maintainer-confirmed) and repricing
 every member on the coarse-first 50/20/10 grid. ⛔ Five orphan classes await a ruling in §4.
