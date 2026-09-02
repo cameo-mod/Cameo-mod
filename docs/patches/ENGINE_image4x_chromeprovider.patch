@@ -1,0 +1,61 @@
+--- a/OpenRA.Game/Graphics/ChromeProvider.cs
++++ b/OpenRA.Game/Graphics/ChromeProvider.cs
+@@ -49,6 +49,10 @@
+ 			public readonly string Image2x = null;
+ 			public readonly string Image3x = null;
+ 
++			// Cameo addition. `Collection` is built by FieldLoader.Load<Collection>(yaml), which
++			// walks the type's public fields, so declaring it here is all the yaml side needs.
++			public readonly string Image4x = null;
++
+ 			public readonly ImmutableArray<int> PanelRegion = default;
+ 			public readonly PanelSides PanelSides = PanelSides.All;
+ 			public readonly FrozenDictionary<string, Rectangle> Regions = FrozenDictionary<string, Rectangle>.Empty;
+@@ -112,17 +116,40 @@
+ 			// Outer cache avoids recalculating image names
+ 			if (!cachedCollectionSheets.TryGetValue(c, out (Sheet, int) sheetDensity))
+ 			{
++				// Cameo change: pick the SMALLEST declared variant whose density covers dpiScale,
++				// and fall back to the largest declared one when none does.
++				//
++				// ⭐ Behaviour is IDENTICAL to the upstream if/else ladder for every collection
++				// shape that actually exists -- `Image` alone, and the full Image/Image2x/Image3x
++				// triple -- at every dpiScale including the exact boundaries 1.0, 2.0 and 3.0.
++				// Measured across Cameo, upstream ra/cnc and Combined Arms: those are the only two
++				// shapes any of them use. So this cannot regress a sheet that works today.
++				//
++				// ⚠ ONE shape does differ: `Image` + `Image3x` with NO `Image2x`. Upstream falls
++				// back to 1x at dpiScale 1.5 (its else-if tests Image2x and gives up); this loop
++				// picks the 3x sheet, which is arguably better but IS a difference. Nothing
++				// anywhere declares that combination, and a test in the mod repository
++				// (test_chrome_density_ladder.py) fails the day something does.
++				//
++				// Why it exists: Cameo's flags sheet is authored at 4x and there is no sensible way
++				// to use a 4x sheet under a hardcoded 3x ladder. With this, `Image4x` is selected
++				// for anything above 2x scaling and the sprite scale (1f / density) sizes it
++				// correctly -- the extra pixels simply supersample. See
++				// docs/audit/CHROME_SCALE_BUG.md in the mod repository.
+ 				var image = c.Image;
+ 				var density = 1;
+-				if (dpiScale > 2 && !string.IsNullOrEmpty(c.Image3x))
++				foreach (var (candidate, candidateDensity) in new[]
+ 				{
+-					image = c.Image3x;
+-					density = 3;
+-				}
+-				else if (dpiScale > 1 && !string.IsNullOrEmpty(c.Image2x))
++					(c.Image, 1), (c.Image2x, 2), (c.Image3x, 3), (c.Image4x, 4)
++				})
+ 				{
+-					image = c.Image2x;
+-					density = 2;
++					if (string.IsNullOrEmpty(candidate))
++						continue;
++
++					image = candidate;
++					density = candidateDensity;
++					if (candidateDensity >= dpiScale)
++						break;
+ 				}
+ 
+ 				// Inner cache makes sure we share sheets between collections

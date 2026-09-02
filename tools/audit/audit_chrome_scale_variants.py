@@ -66,7 +66,7 @@ if hasattr(sys.stdout, "reconfigure"):          # Windows consoles default to cp
 
 CHROME = pathlib.Path("mods/cameo/chrome.yaml")
 UIBITS = pathlib.Path("mods/cameo/uibits")
-DENSITY = {"Image": 1, "Image2x": 2, "Image3x": 3}
+DENSITY = {"Image": 1, "Image2x": 2, "Image3x": 3, "Image4x": 4}
 
 # Antialiasing on a resized sheet bleeds a pixel or two past the ideal edge, and artwork need not
 # reach the very last row. Neither is a defect; being a whole density step out is.
@@ -211,7 +211,7 @@ def main() -> int:
         if not bx or not by:
             continue
 
-        for field, density in (("Image2x", 2), ("Image3x", 3)):
+        for field, density in (("Image2x", 2), ("Image3x", 3), ("Image4x", 4)):
             fn = imgs.get(field)
             if not fn or fn == imgs["Image"]:
                 continue                        # same file = deliberate opt-out

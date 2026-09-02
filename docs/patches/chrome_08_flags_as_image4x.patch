@@ -1,0 +1,18 @@
+--- a/mods/cameo/chrome.yaml
++++ b/mods/cameo/chrome.yaml
+@@ -245,7 +245,14 @@
+ ^Flags:
+ 	Image: flags.png
+ 	Image2x: flags_2x.png
+-	Image3x: flags_3x.png
++	# ⚠ REQUIRES the Image4x engine change -- docs/patches/ENGINE_image4x_chromeprovider.patch.
++	# Do NOT apply this without it: ChromeProvider stock has no Image4x field, FieldLoader would
++	# silently DROP this line (CLAUDE.md rule 8b) and flags would fall back to the 2x sheet.
++	#
++	# flags_3x.png is authored at 4x -- artwork 1536x2048 against a 385x512 base -- which is why
++	# it was misread under the hardcoded 3x ladder. Declared honestly as 4x it is used directly,
++	# at full resolution, above 2x display scaling, and the sprite's 1f/4 scale sizes it correctly.
++	Image4x: flags_3x.png
+ 
+ games:
+ 	Inherits: ^Flags

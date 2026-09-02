@@ -118,94 +118,69 @@ pixels and then draw every flag at **128x64** in a 35px-wide slot. There is no y
 scale that fixes that. **All three variants must share one set of 1x regions, so each must be laid
 out at exactly its declared density.**
 
-### ⛔ Can it be 4x instead?
+### ⭐ Can the 4x file be used DIRECTLY? Yes — with a ~10-line engine change
 
-No, and not for a stylistic reason:
+Not from yaml alone (there is no `Image4x` field to point at, and `density` is a hardcoded
+literal). But with C# on the table it is small, and two facts make it smaller than it looks:
 
-* `ChromeProvider.Collection` declares **only** `Image`, `Image2x`, `Image3x`. There is no
-  `Image4x` field to point at.
-* `density` is a hardcoded literal, never measured from the sheet.
-* Adding `Image4x` to the soft-forked engine would follow CLAUDE.md rule 7 and is only a few
-  lines — but it **would not help these players**. The existing ladder is `dpiScale > 2` for 3x, so
-  a 4x branch would need `dpiScale > 3`: above **300% display scaling**. Nobody in the report is
-  near that, and it would put Cameo's chrome pipeline permanently out of step with both upstreams
-  for a case that essentially never fires.
+* `Collection` is built by **`FieldLoader.Load<Collection>(yaml)`**, which walks the type's public
+  fields — so adding `public readonly string Image4x = null;` is the *entire* yaml side.
+* The sprite maths is **already density-agnostic**: `density * mi` and `1f / density` work for 4
+  exactly as for 3. Nothing else needs touching.
 
-⚠ **Nothing has to be "dumbed down" to do this.** The 4x master art stays in the project as the
-source. The 1x and 2x sheets halved from it are already correct and already ship. Only the sheet
-that `Image3x` points at has to be 3x artwork — and that file already exists in this repository's
-history.
+⛔ **A mod-side shadow cannot do it** — the check CLAUDE.md rule 7 requires first.
+`ChromeProvider` is a `public static class` in `OpenRA.Game`, called directly at compile time and
+never constructed through `ObjectCreator`, so the assembly-order trick does not apply. (`ImageWidget`
+*is* ObjectCreator-resolved and could be shadowed, but it would need collection-specific scaling
+inside a generic widget plus every flag region rewritten x4 — worse than the engine change.)
 
-⚠ **One convention detail if the sheet is ever re-exported rather than restored:** CA and upstream
-both pad the 3x artwork into a power-of-two canvas (1024, 2048). Blackrobe's file is 1536x1536,
-which is not a power of two. OpenRA handles non-POT sheets, and this one measured correct — but
-padding 1155x1536 of artwork into a 2048x2048 canvas would match the peers exactly.
+**The change**, `docs/patches/ENGINE_image4x_chromeprovider.patch` — for the **`cameo-mod/OpenRA`
+soft-fork**, not this repository. It replaces the if/else ladder with:
 
-## The cause
+> pick the **smallest declared variant whose density covers `dpiScale`**, and fall back to the
+> largest declared one when none does.
 
-## ⭐ It was found and fixed once, in 2026-06, and reverted the same day
+⭐ **Why that shape rather than just bolting on a fourth `else if`:** an extra branch would need
+`dpiScale > 3`, so the 4x sheet would only load above **300% display scaling** — no help to anyone
+in the bug report. The loop instead selects `Image4x` for anything above 2x scaling when no 3x
+sheet is declared, which is exactly the band where the bug bites, and the extra pixels simply
+supersample.
 
-Full history (the clone is shallow by default — `git fetch --unshallow` first, or `git log` on
-these files tells you nothing):
+⚠ **It touches every chrome sheet in the mod, so the safety claim is the whole argument** and it is
+tested rather than asserted (`tools/tests/test_chrome_density_ladder.py`, 11 tests): behaviour is
+**identical to upstream at every dpiScale** for every collection shape that exists — `Image` alone,
+and the full `Image`/`Image2x`/`Image3x` triple — including the exact boundaries 1.0, 2.0, 3.0.
+Measured across Cameo, upstream ra/cnc and Combined Arms, those are the only two shapes any of them
+use.
 
-| commit | date | author | |
-|---|---|---|---|
-| `1326cc44e` | 2026-06-09 | Blackrobe | *"Try to rescale faction flags in lobby for big-scaled screens"* — `flags-3x.png` 2048 → **1536** |
-| `ce2170c9b` | 2026-06-09 | Blackrobe | **Revert**, back to 2048. No reason recorded. |
+⚠ **One honest divergence, found by the test sweep rather than by reading:** a collection declaring
+`Image` + `Image3x` with **no** `Image2x` gets the 3x sheet at dpiScale 1.5 where upstream falls
+back to 1x. Arguably better, but a difference. **Nothing anywhere declares that shape**, and
+`test_the_divergent_shape_is_unused` fails the day something does.
 
-**It reached neither the release nor dev.** Every revision since carries the 2048 file, including
-tag `playtest-20260709` (the newest of 67) and `origin/master` today. So the answer to *"was it
-before or after the release, or dev only"* is **none of those** — it existed for a few hours and
-was undone.
+**The mod side** is `docs/patches/chrome_08_flags_as_image4x.patch`: `^Flags` declares
+`Image4x: flags_3x.png` instead of `Image3x`. ⛔ **Never apply it without the engine patch** —
+stock `ChromeProvider` has no `Image4x` field, `FieldLoader` would silently drop the line
+(CLAUDE.md rule 8b) and flags would quietly fall back to the 2x sheet.
 
-⭐ **And the reverted file was good.** 1536 is exactly 3 × 512, arrived at independently. Its
-colour density per pixel matches the 2x sheet that ships and works:
+**The cost**, stated plainly: it is a permanent divergence from upstream that every engine update
+must carry, it needs the full rule-7 pipeline (edit the `cameo-engine` clone → push → set
+`ENGINE_VERSION` in `mod.config` → `make.cmd all` → boot gate), and it cannot be compiled or booted
+from a cloud container. Against that: the 4x artwork is used at full resolution and no art is ever
+downscaled.
 
-| icon | 1x | 2x (works) | 2x/1x | Blackrobe 1536 | 1536/1x |
-|---|--:|--:|--:|--:|--:|
-| gdi | 235 | 697 | 3.0x | 1,423 | 6.1x |
-| XCOM | 478 | 1,712 | 3.6x | 3,368 | 7.0x |
-| Warcraft | 510 | 1,975 | 3.9x | 4,163 | 8.2x |
+### The three options### The four options
 
-2x holds 4× the pixels for ~3.4× the colours (0.85 per pixel); the 1536 sheet holds 9× the pixels
-for ~7.0× the colours (0.78 per pixel). Same treatment, no evidence of a bad resample.
+| | what it does | needs | risk | result |
+|---|---|---|---|---|
+| **A. Restore the 3x sheet** (`chrome_06_*.sh`) | puts back Blackrobe's verified 3.00x file | boot gate | none — the asset is in history and measured | correct and sharp everywhere |
+| **B. Use the 4x directly** (`ENGINE_image4x_*` + `chrome_08_*`) ⭐ **what "use the 4x file" means** | adds `Image4x` and a generalised ladder | **engine rebuild** + boot gate | small but engine-wide; backward compatibility is tested | full 4x resolution, no art ever downscaled |
+| **C. Drop `Image3x`** (`chrome_07_*_FALLBACK.patch`) | falls back to the correct 2x sheet above 200% | boot gate | none — removes the failure mode by construction | slightly soft above 200% |
+| **D. Copy CA literally** (drop `Image2x` too) | CA's `flags:` declares no variants at all | boot gate | none | ⛔ **worse for most users** |
 
-⚠ **Why was it reverted, then? The most likely answer is that it only fixed HALF the bug.**
-`glyphs_3x.png` has been 1024px (4x of a 256 base) since 2020 and has never been touched by anyone.
-Fixing flags alone leaves every editor/UI glyph still broken — so a tester at high DPI would still
-see mangled UI and reasonably conclude the flags change had not worked.
-**Fix both, or it will look like it failed again.**
-
-⭐ **Decoded, the misread is unmistakable.** Reading each icon's 3x region out of the shipped 4x
-sheet, distinct colours collapse as you move away from the origin — `Warcraft` in the far corner
-returns **one flat colour**, i.e. the icon is not there at all:
-
-| icon | colours @1x | read from the 4x sheet at 3x |
-|---|--:|--:|
-| gdi | 235 | 54 |
-| nod | 219 | 84 |
-| XCOM | 478 | 37 |
-| Warcraft | 510 | **1** |
-
-## The fix
-
-**Faction icons — `docs/patches/chrome_06_restore_flags_3x.sh`. No new art required.** The correct
-1536px sheet is already in this repository's history; restoring it is one line:
-
-```bash
-git show 1326cc44e:mods/cameo/uibits/flags-3x.png > mods/cameo/uibits/flags_3x.png
-```
-
-(The hyphen→underscore rename landed later, in `938e988d2`, so the paths differ.) This keeps full
-sharpness at high DPI — strictly better than dropping the declaration.
-
-### The three options, and why "exactly like CA" is not the best one
-
-| | what it does | risk | sharpness |
-|---|---|---|---|
-| **Restore the 3x sheet** (`chrome_06_restore_flags_3x.sh`) ⭐ **recommended** | puts back Blackrobe's verified 3.00x file | none measurable; the asset is in history and was measured | full at every scale |
-| **Drop `Image3x`** (`chrome_07_drop_flags_3x_FALLBACK.patch`) | engine falls back to the correct 2x sheet above 200% scaling | none — removes the failure mode by construction | slightly soft above 200% |
-| **Copy CA exactly** (drop `Image2x` too) | CA's `flags:` declares no variants at all | none | ⛔ **worse for most users** |
+**A is the smallest change that fixes it. B is the one that honours "use the highest-resolution
+file".** They are mutually exclusive — A points `Image3x` at a 3x sheet, B points `Image4x` at the
+4x sheet. C is the belt-and-braces fallback if either looks wrong on a real machine.
 
 ⚠ **Do not copy CA literally.** CA's flags collection has no scale variants, so CA renders the 1x
 sheet at every DPI. Doing that here would throw away Cameo's `flags_2x.png`, which is **verified
