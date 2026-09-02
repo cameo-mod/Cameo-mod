@@ -140,14 +140,21 @@ the counterexample: equal damage, four different ladders.
   hand-written; `verify_generator_sync` 142 templates drift 0, `audit_family_uniqueness` OK,
   `heaviness_bell` 0 inversions / 0 drift, `find_empty_warhead` 0. ⛔ Needs a boot machine:
   [`../patches/README.md`](../patches/README.md) `01_bulletchem_family.patch`.
-- [ ] **S** — ⚠ RULING NEEDED before `HydraSpit` is repointed: `BulletChem` lifts `Fighter` (1.71x
-  vs the Chemical collapse's 0.87x) and `Bomber` (1.18x vs 0.93x) as ordered, but `Helicopter` is
-  flat (1.02x) and `Spaceship` DROPS (0.92x vs 1.22x). Both parents are weak on those two rows
-  (Bullet 66/53, Chemical 54/60), so no weighting fixes it — only a third air-tilted parent
-  (`MissileAA` is 177/191 there, and `PhotonCannon` already uses it that way).
-- [ ] **S** — repoint `HydraSpit` onto `^Warhead_BulletChem_Light` + its projectile/effect layers,
-  one damage main at the preserved raw 72,000, dropping three of the four percentage twins.
-  Boot gate.
+- [x] **RULED 2026-09-02** — air rows accepted as the blend produces them (`Fighter` x1.71 and
+  `Bomber` x1.18 up; `Helicopter` x1.02 flat, `Spaceship` x0.92 down). Neither parent has anti-air,
+  so only a third air-tilted parent could lift those two rows; not taken.
+- [x] **DONE (patch) 2026-09-02** — `HydraSpit` repointed onto `^Warhead_BulletChem_Light` +
+  `^Projectile_Chem_Light` + `^Effect_Chem_Light`. ONE damage main at the preserved raw 72,000; all
+  four standalone percentage twins gone, replaced by the family fold. Splash SHRINKS (radius 700
+  -> 220) and Corrosion is nearly preserved (x1.17, not the x4.00 a Chemical collapse would have
+  caused) — both better than the review predicted. ⚠ The percentage half rises **x9.6** (0.45% ->
+  4.32% of max HP vs `None`), because the old hand-typed twins never tracked the weapon's real
+  damage; a local `PercentageScale: 1042` would restore the old floor if wanted.
+- [ ] ⛔ **WATCH IN PLAY.** This fold was tried once before and REVERTED — `intentional_composites.py`
+  quarantined `HydraSpit` with *"Hydralisk was not previously this strong"* and measured the same
+  numbers this review did (1.6x-2.38x ground, quadrupled corrosion). The 2026-09-02 ruling
+  supersedes that quarantine because the target is now `BulletChem`, not `Chemical`. If it reads
+  too strong again, this is the decision to revisit.
 
 ---
 

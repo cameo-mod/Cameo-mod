@@ -297,7 +297,7 @@ pricing pass. **Structure first, magnitudes later, new families after.**
 `^Warhead_BulletChem_{Light,Medium,Heavy}` — the **bullet-delivery member of the Chem set**, next
 to `CannonChem` and `MissileChem`. Generated, not hand-written: one `BLEND_FAMILIES` entry
 (`["Bullet", "Chemical"]`) plus `--all` regenerate. Waiting on a boot machine as
-[`../patches/01_bulletchem_family.patch`](../patches/README.md), with its full verification
+[`../patches/01_bulletchem_hydraspit.patch`](../patches/README.md), with its full verification
 table there.
 
 Shape falls out of the machinery and is unique: radius = geometric mean of Bullet 100 and Chemical
@@ -341,3 +341,54 @@ Chemical 54/60 — so no weighting of the two can lift them. Only a third, air-t
 
 ⚠ At the raw 72,000 the collapse is a **1.46× mean buff**, per the ruling. A mean-preserving
 `Damage` would be **49,200** if it is ever wanted.
+
+### §8.1 — RULED and APPLIED (2026-09-02): air accepted as-is, HydraSpit repointed
+
+Maintainer: **accept the air rows as the blend produces them**, and **repoint `HydraSpit` in the
+same patch**. Done — [`../patches/README.md`](../patches/README.md)
+`01_bulletchem_hydraspit.patch`. `HydraSpit` now resolves to ONE damage main
+(`AreaDamage`, 72,000) on `^Warhead_BulletChem_Light`, plus `^Projectile_Chem_Light` and
+`^Effect_Chem_Light`.
+
+⚠ **Projectile layer is `^Projectile_Chem_Light`, not `^Projectile_Bullet_Light`.** The Bullet
+projectile family is HITSCAN (`InstantHitWithFakeBullets`) — taking it would have deleted the
+visible travelling spore. The Chem projectile is `Projectile: Bullet`, and the weapon keeps
+`scmspore`, `Speed 2500`, `Width 25`, its contrails and `TrailImage` as local overrides.
+
+⭐ **Two of this review's own predictions came out BETTER than forecast**, because `BulletChem` is
+a bullet-sized blend rather than a chemical one:
+
+| §1 predicted, for a Chemical collapse | what BulletChem actually does |
+|---|---|
+| splash: all damage onto the 350 ring | **radius 220** (`Spread 55`, 5-step falloff) — TIGHTER than the old stack's 700 (Chemical) and 420 (Arrow) |
+| Corrosion feed ×4.00 | **×1.17** (11,520 → 13,493) — the Chem set's Light rung scales Corrosion at 20%, not 100% |
+
+⚠ **And one moved harder than forecast: the percentage half, ×9.6.** §1 counted four standalone
+`AreaDamagePercentage` twins as ~11% of modelled output. Resolved, they are `Damage: 1` against
+Versus rows of 11 / 2 / 16 / 16 — **0.45%** of max HP vs `None`. The family fold at Damage 72,000
+gives 3,600 basis points × `PercentageVersus` = **4.32%**. Both are the same "1% per 2,000 damage"
+convention; the hand-typed twins simply never tracked the weapon's real damage, which is the exact
+drift `PercentageScale` was introduced to end (`AreaDamageWarhead.cs:99-110`). A local
+`PercentageScale: 1042` would reproduce the old floor if that is wanted.
+
+### §8.2 — ⛔ THE FOLD WAS TRIED ONCE BEFORE, AND REVERTED
+
+Found while regenerating the composite manifest, not by searching for it.
+`tools/audit/intentional_composites.py` held `HydraSpit` under *"maintainer-approved role blend"*
+with this rationale, already in the tree before Blackrobe raised anything:
+
+> *"Restore the pre-PR-287 Hydralisk profile after the Chemical-Light fold raised real ground
+> damage by roughly 1.6x to 2.38x and quadrupled the flat corrosion feed. Preserve the exact
+> four-part behavior."* — review reference: *"Maintainer regression report: Hydralisk was not
+> previously this strong"*
+
+⭐ **That is this review's §1 measured independently, months earlier, by someone else.** My numbers
+were 1.57×–2.38× on ground and ×4.00 on Corrosion; the quarantine says *"roughly 1.6x to 2.38x"*
+and *"quadrupled"*. Two separate measurements of the same fold agreeing to two significant figures
+is the strongest evidence in this document — and it means the W24 collapse rule has now produced
+the same regression twice on the same weapon.
+
+The 2026-09-02 ruling **supersedes that quarantine**, and the patch removes it: the collapse now
+targets `BulletChem`, not `Chemical`, which is the difference the ruling turns on. If the Hydralisk
+reads as too strong again in play, this is the decision to revisit and this is where the history
+is.
