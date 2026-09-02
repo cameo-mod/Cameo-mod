@@ -5689,15 +5689,9 @@
 	WithColoredOverlay@corroded:
 		RequiresCondition: corroded
 		Color: 44FF4444
-	WithIdleOverlay@corroded:
-		RequiresCondition: corroded
-		Image: explosion
-		Sequence: nax_corr_frag
-		StartSequence: nax_corr_frag
-		Palette: ra2effect
 	# --- Corrosion METER (physical-state axis). ADDITIVE + inert until a weapon feeds it via
 	# AreaDamage PhysicalStateName: Corrosion / PhysicalStateScale. Green tint 200->20000; effects
-	# open at 1% (Corroding); nax_corr_frag pulse at max. Binary `corroded` above kept until the
+	# open at 1% (Corroding). Binary `corroded` above is kept until the
 	# Schwarzer Mond weapons are migrated onto the meter. See docs/design/PHYSICAL_STATE_SYSTEM.md.
 	PhysicalState@Corrosion:
 		Name: Corrosion
@@ -5770,14 +5764,6 @@
 		DamageMultiplierAtMaximum: 150
 		UseDeviationFromRelaxed: true
 		RequiresCondition: Corroding
-	WithIdleOverlay@CorrosionPulse:
-		RequiresCondition: CorrosionMax
-		Image: explosion
-		Sequence: nax_corr_frag
-		StartSequence: nax_corr_frag
-		Palette: ra2effect
-		IsDecoration: True
-
 ^AffectedByHealingField:
 	ExternalCondition@HealingField:
 		Condition: HealingField
