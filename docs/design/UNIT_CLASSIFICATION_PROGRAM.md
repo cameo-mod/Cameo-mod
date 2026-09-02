@@ -82,10 +82,43 @@ drifted** — the archers were tagged `archer` in the ledger years before `^Arch
 had a single inheritor. So fixing the templates makes the derived value right, and `class_anchor`
 then follows for free. **The 67 are the work list, and finishing workstream A empties it.**
 
-⚠ **Do not "fix" this by copying `class_anchor` onto the templates.** The ledger tag covers 16% of
-the roster and has its own errors (`futuretech_cannondroid` is tagged `heavy_infantry` while
-templated `MainBattleTank`). The template is the authority per A1; the tag is the cross-check that
-says which templates to fix first.
+⚠ **Do not "fix" this by copying `class_anchor` onto the templates.** The ledger tag covers only
+16% of the roster, so it cannot be the source. The template is the authority per A1; the tag is the
+cross-check that says which templates to fix first.
+
+⛔ **CORRECTED — my example of a "tag error" was not one.** I cited `futuretech_cannondroid`
+(tagged `heavy_infantry`, templated `MainBattleTank`) as evidence the tag has its own errors.
+**Maintainer:** *"The futuretech droids were actually already planned for changing into the infantry
+templates, so yeah the heavy infantry was already correct."* The tag recorded the **planned**
+classification; the template is the stale side. All five droids are in that state.
+
+### A5b. Working the conflicts one by one — 67 → 56, before any ruling
+
+⛔ **11 of the 67 are a NAMING CONVENTION, not a conflict.** My comparison stripped punctuation but
+not the type suffix, so a template named for its type never matched its class:
+
+| template | class | n | normalises to |
+|---|---|--:|---|
+| `CloseCombatInfantry` | `closecombat` | 3 | `closecombat` ✅ |
+| `SpecialForcesInfantry` | `special_forces` | 3 | `specialforces` ✅ |
+| `ScoutInfantry` | `scout` | 5 | `scout` ✅ |
+
+**A5's name map must strip a trailing `Infantry` / `Vehicle` / `Tank`** before comparing, on top of
+the `mbt` abbreviation and the sub-template resolution. With that, **the real conflict count is 56.**
+
+### A5c. ⭐ `^MedicTemplate` and `^MechanicTemplate` should be SUB-TEMPLATES of support
+
+Five more conflicts (`Medic -> support` 3, `Mechanic -> support` 2) share one cause: both templates
+stand alone, inheriting only `^GainsExperienceInfantry`, `^ExternalConditions`,
+`^GenericGroundDetector` and `^InfantryBuffs` — **not `^SupportInfantryTemplate`**.
+
+⭐ **Make them inherit it, exactly as `^DogTemplate` inherits `^MeleeInfantryTemplate`** (A2). Then
+`subtype` keeps returning the specific `Medic` / `Mechanic`, the class resolves to `support`, and all
+five conflicts disappear without retagging a single actor.
+
+⚠ And it composes with C2: both templates are the only two carrying `dummytargeting`, and both are
+the units B5's friendly-seeking is designed for. The same five actors sit at the centre of three
+workstreams.
 
 Regenerated from `Inherits@Template:`, with an **explicit exclusion list** for actors the pipeline
 must not price. Measured candidates for exclusion: `EDEN_*` / `PLYMOUTH_*` imports, `*_backup`
