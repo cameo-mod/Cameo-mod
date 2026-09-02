@@ -216,6 +216,39 @@ exception: **zero-damage support weapons (21 measured) may stay shared** under a
 ones are the backlog.
 
 ### C2. The 7 dummy weapons: audit each, remove only the stand-off ones
+### C2a. ⭐ MEASURED: what `dummytargeting` is actually for, and why B5 replaces it
+
+**Maintainer:** *"exactly, that's why we need to remove the dummy weapon from those! But only after
+the keep distance rework is fine and done."* ✅ Sequencing confirmed — C2 runs **after** B is
+verified, never alongside it.
+
+Measured, so the removal is a specified swap rather than a hopeful deletion:
+
+| | `Heal` | `dummytargeting` |
+|---|---|---|
+| `Range` | **5,000** | **10,000** |
+| `ValidTargets` | `Heal, lockdowned, plagued, ivanattached` | `Ground, Water, Air` |
+| `ReloadDelay` | 75 | — |
+
+⭐ **The dummy is exactly 2x the heal range, and it is the only armament that matches the
+autotarget priority.** `AutoTargetPriority@DEFAULT` lists `Infantry, plagued, ivanattached,
+lockdowned` — and `Infantry` is a target type the `Heal` weapon **cannot** hit while the dummy can.
+So the dummy does two jobs: it widens the autotarget SCAN to 10,000 so a medic notices a patient it
+must walk to, and it satisfies the `Infantry` priority row.
+
+⛔ **Deleting it without a replacement would halve a medic's effective seek range and break that
+priority row.** That is the concrete risk behind "must not break auto-healing".
+
+⭐ **And B5 is the replacement, at the same distance.** `KeepsDistance: Distance: 10` cells is
+~10,240 — the dummy's 10,000 to within 2%. B5 already makes the unit move toward friendlies it can
+service, using the B2 predicate pointed at allies, inside exactly that radius. So once B lands the
+medic seeks patients *because it is a support unit*, not because it carries a fake gun.
+
+**The C2 test for these two templates is therefore specific:** with the dummy removed and B active,
+a medic must still walk to and heal a wounded infantryman first sighted at ~10,000 — not merely one
+already inside 5,000.
+
+
 `dummytargeting`, `FakeHealtAPC`, `RemovableDebuffDummy`, `ScarabLaunchDummy`,
 `TeslaArmorDischargeDummy`, `bfg10kCannonDummy`, `superbfg10kCannonDummy`. Any that exists **only**
 to fake a range or a stand-off becomes removable once B lands; the ones carrying real mechanics
