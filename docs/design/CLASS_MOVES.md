@@ -272,3 +272,49 @@ into a nearest neighbour.
 (CLAUDE.md rule 1). The three new templates must be written before the units can inherit them, and
 `^SuicideVehicleTemplate` needs a pricing shape that is not DPS-based before its members can be
 priced at all.
+
+---
+
+## 3. Conflict group 1 — `ScoutInfantry` (template) vs `support` (tag), 6 units
+
+Worked one by one at the maintainer's instruction. ⚠ **First finding: most of what looked
+distinctive was inherited noise.** `Captures`, `Cloak`, `MindControllableCA` and `Passenger` appear
+on all six — and a control check shows `td_gdi_minigunner`, `ra1_allies_medic` and
+`td_gdi_grenadier` carry exactly the same four. Only what is **absent** from ordinary infantry
+discriminates.
+
+**So the six are three different things, not one class:**
+
+| | units | real discriminator |
+|---|---|---|
+| **spies** | `ra1_allies_raspy` 500 · `ra2_allies_ra2spy` 500 · `futuretech_spyfutu` 1,000 | `Disguise` **+** `Infiltrates` |
+| **mind controller** | `yuri_clone` 500 | `MindControllerCA` + `ProximityCaptor` |
+| **neither** | `naxis_slaveoverseer` 500 (whip + rifle) · `zerg_defiler` 1,400 (80,000 HP, `DefilerPlague`) | — |
+
+### ⭐ Infiltrators are a candidate class: exactly 3 units, mod-wide
+
+`Disguise + Infiltrates` matches **3 buildable units in the whole mod** — the three above, all
+currently `^ScoutInfantryTemplate`, spanning 500–1,000 (a 2.0x spread that fits the band).
+⚠ Three members is small but not unprecedented: `closecombat` has 4, `tank_destroyer` and
+`dreadnought` have 5 each.
+
+### ⛔ Mind control is a MECHANIC, not a class — measured, and it kills the obvious idea
+
+`MindControllerCA` matches **7 buildable units spread across 6 different templates**:
+
+| unit | cost | template |
+|---|--:|---|
+| `cabal_radar_cruiser` | 0 | `^ScoutShipTemplate` |
+| `yuri_clone` | 500 | `^ScoutInfantryTemplate` |
+| `cabal_hackercyborg` | 1,250 | `^HeavyInfantryTemplate` |
+| `yuri_mastermind` | 1,500 | `^HighTechTankTemplate` |
+| `yuri_psychictower` | 2,000 | `^AdvancedDefenseTemplate` |
+| `yuri_yurix` | 4,000 | `^HeroInfantryTemplate` |
+| `yuri_psychicdominator` | 10,000 | ⛔ none |
+
+A ship, an infantryman, a cyborg, a tank, a **defence building**, a hero and a superweapon. ⭐ **A
+"caster class" would put a building and a hero in the same price distribution** — so mind control is
+correctly a mechanic that cuts across classes, exactly like `Cloak`. Not a classification axis.
+
+⚠ It does surface one real defect on the way: **`yuri_psychicdominator` (10,000cr) has no class
+template** — a superweapon, so probably an A7 separation rather than a class.
