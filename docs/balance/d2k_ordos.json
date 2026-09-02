@@ -466,25 +466,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -494,6 +504,7 @@
       "reloaddelay": "42",
       "slot": "Armament@aa1",
       "versus_templates": [
+       "^Compatibility_MissileAA_MediumFlat",
        "D2K_APC_Rocket"
       ],
       "warheads": [
@@ -507,25 +518,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -535,6 +556,7 @@
       "reloaddelay": "42",
       "slot": "Armament@aa2",
       "versus_templates": [
+       "^Compatibility_MissileAA_MediumFlat",
        "D2K_APC_Rocket"
       ],
       "warheads": [
@@ -905,13 +927,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -926,7 +941,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "50000",
+        "damage": "60000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -1026,32 +1041,43 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "CannonHE_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mm_turretCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mm_turretConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mm_turretDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mm_turretDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -1061,6 +1087,7 @@
       "reloaddelay": "74",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_CannonHE_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
@@ -2425,20 +2452,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "140000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
@@ -2488,7 +2501,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
+        "damage": "180000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -2503,8 +2516,6 @@
       "reloaddelay": "90",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^LightFlameWeapon",
@@ -2517,7 +2528,6 @@
        "^D2KMissile"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "facedancer_grenade",
@@ -2526,20 +2536,6 @@
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
-       {
-        "damage": "140000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
        {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
@@ -2590,7 +2586,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
+        "damage": "180000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -2605,8 +2601,6 @@
       "reloaddelay": "90",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
-       "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^LightFlameWeapon",
@@ -2619,7 +2613,6 @@
        "^D2KMissile"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "facedancer_grenade",
@@ -2977,32 +2970,43 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "40000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
-        "type": "AreaDamage"
+        "damage": "500",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedDune_SiegeMortarCannonAP_LightPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
+        "damage": "500",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedDune_SiegeMortarCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedDune_SiegeMortarConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedDune_SiegeMortarDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -3013,6 +3017,7 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
@@ -3033,32 +3038,43 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "40000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
-        "type": "AreaDamage"
+        "damage": "500",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedDune_SiegeMortarCannonAP_LightPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
+        "damage": "500",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedDune_SiegeMortarCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedDune_SiegeMortarConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedDune_SiegeMortarDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -3069,6 +3085,7 @@
       "reloaddelay": "80",
       "slot": "Armament@garrisoned",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
@@ -3142,25 +3159,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_HeavyFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
@@ -3170,6 +3197,7 @@
       "reloaddelay": "64",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_MissileAP_HeavyFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
@@ -3188,25 +3216,35 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_HeavyFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
@@ -3216,6 +3254,7 @@
       "reloaddelay": "64",
       "slot": "Armament@garrisoned",
       "versus_templates": [
+       "^Compatibility_MissileAP_HeavyFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
@@ -3947,25 +3986,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -3975,6 +4024,7 @@
       "reloaddelay": "42",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -4060,32 +4110,43 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
+        "damage": "120000",
         "falloff": "100, 0",
         "spread": "80",
-        "tag": "CannonAP_Light",
+        "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "30000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
+        "damage": "1500",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_cobraCannonAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_cobraCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_cobraConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_cobraDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -4096,6 +4157,7 @@
       "requires": "undeployed",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_CannonAP_LightFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
@@ -4116,32 +4178,43 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "30000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
+        "damage": "120000",
         "falloff": "100, 0",
         "spread": "80",
-        "tag": "CannonAP_Light",
+        "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "30000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
+        "damage": "1500",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_cobra_deployCannonAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_cobra_deployCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_cobra_deployConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_cobra_deployDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -4486,13 +4559,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -4507,7 +4573,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "50000",
+        "damage": "60000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -4603,13 +4669,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -4624,7 +4683,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "30000",
+        "damage": "40000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -4725,25 +4784,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -4753,6 +4822,7 @@
       "reloaddelay": "42",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -5177,25 +5247,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5205,6 +5285,7 @@
       "reloaddelay": "42",
       "slot": "Armament@aa1",
       "versus_templates": [
+       "^Compatibility_MissileAA_MediumFlat",
        "D2K_APC_Rocket"
       ],
       "warheads": [
@@ -5218,25 +5299,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "400",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5246,6 +5337,7 @@
       "reloaddelay": "42",
       "slot": "Armament@aa2",
       "versus_templates": [
+       "^Compatibility_MissileAA_MediumFlat",
        "D2K_APC_Rocket"
       ],
       "warheads": [
@@ -5533,32 +5625,43 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "30000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
+        "damage": "120000",
         "falloff": "100, 0",
         "spread": "80",
-        "tag": "CannonAP_Light",
+        "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "30000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
+        "damage": "1500",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_pythonCannonAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_pythonCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_pythonConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_pythonDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5586,32 +5689,43 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "30000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
+        "damage": "120000",
         "falloff": "100, 0",
         "spread": "80",
-        "tag": "CannonAP_Light",
+        "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "30000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
+        "damage": "1500",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_python_deployCannonAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_python_deployCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_python_deployConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1500",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsed120mm_python_deployDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",

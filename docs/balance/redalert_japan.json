@@ -253,17 +253,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "32000",
+        "damage": "64000",
         "falloff": "100, 0",
         "spread": "59",
-        "tag": "Arrow_Light",
+        "tag": "Arrow_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -275,6 +268,7 @@
       "requires": "!japan_upgrade_energizedarrows",
       "slot": "Armament@Missiles",
       "versus_templates": [
+       "^Compatibility_Arrow_LightFlat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Arrow_Light",
        "^Projectile_Arrow_Light",
@@ -290,7 +284,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "72000",
         "falloff": "100, 0",
         "spread": "88",
         "tag": "Arrow_MediumFlatCompatibility",
@@ -309,20 +303,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -348,14 +328,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "80",
         "tag": "CannonAP_Light",
@@ -363,20 +336,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "32",
       "requires": "!japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@Cannon",
       "versus_templates": [
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "SkyHawkCannon",
@@ -399,21 +370,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "80",
         "tag": "CannonAP_Light",
@@ -421,7 +378,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "32",
@@ -429,17 +386,14 @@
       "slot": "Armament@CannonUpgrade",
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
-       "^Warhead_MissileAP_Medium",
        "SkyHawkCannon"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "SkyHawkPlasmaCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -603,17 +557,10 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "18000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "18000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "59",
-        "tag": "Arrow_Light",
+        "tag": "Arrow_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -640,7 +587,7 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "88",
         "tag": "Arrow_MediumFlatCompatibility",
@@ -659,20 +606,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -4183,7 +4116,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4244,13 +4177,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": null,
-        "tag": "ArmoredCarGroundCompatibility",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -4392,7 +4318,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4453,13 +4379,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": null,
-        "tag": "ArmoredCarGroundCompatibility",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",

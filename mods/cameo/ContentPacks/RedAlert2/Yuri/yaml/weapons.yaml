@@ -307,6 +307,7 @@ RA2LasherToxicMortar_elite:
 	-Warhead@CannonHE_Heavy:
 
 RA2LasherLaser:
+	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -329,6 +330,13 @@ RA2LasherLaser:
 	Warhead@Laser_Heavy:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	-Warhead@CannonHE_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 9994
+		PhysicalStateScale: 38
 RA2LasherLaser_elite:
 	Inherits: RA2LasherLaser
 	Range: 8065
@@ -343,6 +351,13 @@ RA2LasherLaser_elite:
 		Damage: 16000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 8
+	-Warhead@CannonHE_Medium:
+	-Warhead@LaserWeapon:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 5998
+		PhysicalStateScale: 15
 
 RA2DiskLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -659,6 +674,7 @@ BoomerLaunch:
 	BurstDelays: 8
 
 YRBoomerTorpedo:
+	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
 	Inherits@fx: ^Effect_Watersplash_Large_RA2
@@ -696,6 +712,12 @@ YRBoomerTorpedo:
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAP_HeavyFlatCompatibility:
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 40000
+		PercentageScale: 9998
 
 ^YuriGatlingCannonProjectileStreak:
 	Projectile: Bullet

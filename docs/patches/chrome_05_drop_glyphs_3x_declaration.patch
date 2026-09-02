@@ -1,0 +1,18 @@
+--- a/mods/cameo/chrome.yaml
++++ b/mods/cameo/chrome.yaml
+@@ -12,7 +12,14 @@
+ ^Glyphs:
+ 	Image: glyphs.png
+ 	Image2x: glyphs_2x.png
+-	Image3x: glyphs_3x.png
++	# Image3x: glyphs_3x.png -- REMOVED. The file is 1024px, which is 4x the 256px glyphs.png
++	# base, not 3x (that would be 768). ChromeProvider multiplies this collection's 1x regions
++	# by 3 to index the sheet, so every glyph was read from the wrong place, wrongly in
++	# proportion to its distance from the top-left corner.
++	# ⚠ Unlike flags_3x, NO correct 3x glyph sheet has ever existed -- the file has been 1024px
++	# since 2020. Dropping the declaration makes the engine fall back to a smaller correct
++	# sheet: slightly softer at high DPI, right pixels. Restore this line only with a re-export
++	# at exactly 768x768. See docs/audit/CHROME_SCALE_BUG.md.
+ 
+ editor:
+ 	Inherits: ^Glyphs

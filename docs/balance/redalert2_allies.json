@@ -12,25 +12,35 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedBlackEagleMissilesDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedBlackEagleMissilesDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedBlackEagleMissilesMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
@@ -41,6 +51,7 @@
       "requires": "!rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
@@ -61,25 +72,35 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_Medium",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedBlackEagleMissiles_eliteDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedBlackEagleMissiles_eliteDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedBlackEagleMissiles_eliteMissileAP_MediumPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
@@ -1369,10 +1390,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "250000",
+        "damage": "300000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -1402,13 +1423,6 @@
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
@@ -4073,17 +4087,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4094,6 +4101,7 @@
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -4169,17 +4177,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4190,6 +4191,7 @@
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -4264,17 +4266,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4285,6 +4280,7 @@
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -5350,17 +5346,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5372,6 +5361,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missile",
       "versus_templates": [
+       "^Compatibility_MissileHE_LightFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
@@ -5529,17 +5519,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5551,6 +5534,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primary",
       "versus_templates": [
+       "^Compatibility_MissileAP_LightFlat",
        "^Warhead_Arrow_Light",
        "^RA2LightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
@@ -5568,17 +5552,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5606,17 +5583,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5628,6 +5598,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile"
       ],
       "warheads": [
@@ -5643,17 +5614,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5665,6 +5629,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
@@ -5797,17 +5762,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5833,17 +5791,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5855,6 +5806,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile"
       ],
       "warheads": [
@@ -5868,17 +5820,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5890,6 +5835,7 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile_elite"
       ],
       "warheads": [
@@ -6784,17 +6730,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6806,6 +6745,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missile",
       "versus_templates": [
+       "^Compatibility_MissileHE_LightFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
@@ -6963,17 +6903,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6985,6 +6918,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primary",
       "versus_templates": [
+       "^Compatibility_MissileAP_LightFlat",
        "^Warhead_Arrow_Light",
        "^RA2LightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
@@ -7002,17 +6936,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7040,17 +6967,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7062,6 +6982,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile"
       ],
       "warheads": [
@@ -7077,17 +6998,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7099,6 +7013,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
@@ -7231,17 +7146,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7267,17 +7175,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7289,6 +7190,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile"
       ],
       "warheads": [
@@ -7302,17 +7204,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7324,6 +7219,7 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile_elite"
       ],
       "warheads": [
@@ -8220,17 +8116,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8242,6 +8131,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missile",
       "versus_templates": [
+       "^Compatibility_MissileHE_LightFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
@@ -8399,17 +8289,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8421,6 +8304,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primary",
       "versus_templates": [
+       "^Compatibility_MissileAP_LightFlat",
        "^Warhead_Arrow_Light",
        "^RA2LightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
@@ -8438,17 +8322,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8476,17 +8353,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8498,6 +8368,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile"
       ],
       "warheads": [
@@ -8513,17 +8384,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8535,6 +8399,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
@@ -8667,17 +8532,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8703,17 +8561,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8725,6 +8576,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile"
       ],
       "warheads": [
@@ -8738,17 +8590,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8760,6 +8605,7 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile_elite"
       ],
       "warheads": [
@@ -9656,17 +9502,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9678,6 +9517,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missile",
       "versus_templates": [
+       "^Compatibility_MissileHE_LightFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
@@ -9835,17 +9675,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9857,6 +9690,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primary",
       "versus_templates": [
+       "^Compatibility_MissileAP_LightFlat",
        "^Warhead_Arrow_Light",
        "^RA2LightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
@@ -9874,17 +9708,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9912,17 +9739,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9934,6 +9754,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile"
       ],
       "warheads": [
@@ -9949,17 +9770,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9971,6 +9785,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
@@ -10103,17 +9918,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10139,17 +9947,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10161,6 +9962,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile"
       ],
       "warheads": [
@@ -10174,17 +9976,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10196,6 +9991,7 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile_elite"
       ],
       "warheads": [
@@ -11091,17 +10887,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -11113,6 +10902,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missile",
       "versus_templates": [
+       "^Compatibility_MissileHE_LightFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
@@ -11270,17 +11060,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -11292,6 +11075,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primary",
       "versus_templates": [
+       "^Compatibility_MissileAP_LightFlat",
        "^Warhead_Arrow_Light",
        "^RA2LightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
@@ -11309,17 +11093,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -11347,17 +11124,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -11369,6 +11139,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile"
       ],
       "warheads": [
@@ -11384,17 +11155,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -11406,6 +11170,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
@@ -11538,17 +11303,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -11574,17 +11332,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -11596,6 +11347,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile"
       ],
       "warheads": [
@@ -11609,17 +11361,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -11631,6 +11376,7 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile_elite"
       ],
       "warheads": [
@@ -12526,17 +12272,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -12548,6 +12287,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missile",
       "versus_templates": [
+       "^Compatibility_MissileHE_LightFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
@@ -12705,17 +12445,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -12727,6 +12460,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primary",
       "versus_templates": [
+       "^Compatibility_MissileAP_LightFlat",
        "^Warhead_Arrow_Light",
        "^RA2LightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
@@ -12744,17 +12478,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -12782,17 +12509,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -12804,6 +12524,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile"
       ],
       "warheads": [
@@ -12819,17 +12540,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "12000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -12841,6 +12555,7 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
@@ -12973,17 +12688,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -13009,17 +12717,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -13031,6 +12732,7 @@
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile"
       ],
       "warheads": [
@@ -13044,17 +12746,10 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "4000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -13066,6 +12761,7 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
+       "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile_elite"
       ],
       "warheads": [

@@ -220,17 +220,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "40000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "400",
-        "tag": "Flame_Heavy",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -242,10 +235,8 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
-       "^ParaBombDelivery",
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Flame_Heavy",
-       "^Effect_Flame_Heavy"
+       "^Compatibility_Demolition_HeavyFlat",
+       "^ParaBombLegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
@@ -429,17 +420,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "40000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "400",
-        "tag": "Flame_Heavy",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -450,10 +434,8 @@
       "reloaddelay": "8",
       "slot": "Armament",
       "versus_templates": [
-       "^ParaBombDelivery",
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Flame_Heavy",
-       "^Effect_Flame_Heavy"
+       "^Compatibility_Demolition_HeavyFlat",
+       "^ParaBombLegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
@@ -1142,17 +1124,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1164,6 +1139,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
@@ -1180,17 +1156,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1202,6 +1171,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
@@ -1764,14 +1734,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -1801,14 +1764,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -2223,17 +2179,10 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
+        "damage": "40000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2245,6 +2194,7 @@
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_CannonHE_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -2262,17 +2212,10 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
+        "damage": "40000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2284,6 +2227,7 @@
       "reloaddelay": "125",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Compatibility_CannonHE_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -2674,17 +2618,10 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2697,6 +2634,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
@@ -2714,17 +2652,10 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2737,6 +2668,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",

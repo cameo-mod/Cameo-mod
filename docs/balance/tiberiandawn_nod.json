@@ -4140,17 +4140,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4163,6 +4156,7 @@
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
@@ -5575,14 +5569,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -5590,20 +5577,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4903",
       "reloaddelay": "35",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Missile",
       "versus_templates": [
-       "^Warhead_Flame_Light",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_Flame_Light",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "LightTank2Missiles",
@@ -5891,17 +5876,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5914,10 +5892,8 @@
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Projectile_Grenade_Light",
-       "^Effect_Concussion_Medium"
+       "^Compatibility_Concussion_MediumFlat",
+       "^SpecterArtilleryShellLegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -5994,7 +5970,7 @@
        "^TankDestroyerCannon",
        "^MediumCannon",
        "^HeavyCannon",
-       "SpecterArtilleryShell"
+       "^SpecterArtilleryShellLegacy"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",

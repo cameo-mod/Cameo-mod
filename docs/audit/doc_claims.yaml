@@ -238,14 +238,15 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 472
+    value: 243
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
       predicate — W24's scope, and the reason pricing must wait for the weapon rebuild.
-      ⭐ 494 -> 472 on 2026-08-30: this is the DEBT and it going DOWN is progress. Re-pin it
-      downward as W24 batches land; ⛔ never upward without explaining what regressed.
-    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+      ⭐ 494 -> 472 (2026-08-30) -> 243 (#320, percentage damage + live weapon backlog
+      consolidation). This is the DEBT and it going DOWN is progress. Re-pin it downward as
+      W24 batches land; ⛔ never upward without explaining what regressed.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import sys, pathlib
       sys.path[:0] = ['tools/audit']

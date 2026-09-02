@@ -3504,24 +3504,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3532,6 +3518,7 @@
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
@@ -3550,24 +3537,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3578,6 +3551,7 @@
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
@@ -3802,24 +3776,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3830,6 +3790,7 @@
       "reloaddelay": "26",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
@@ -3850,24 +3811,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3878,6 +3825,7 @@
       "reloaddelay": "26",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
@@ -4279,24 +4227,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Demolition_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4308,6 +4242,7 @@
       "reloaddelay": "45",
       "slot": "Armament@Grenade",
       "versus_templates": [
+       "^Compatibility_Demolition_LightFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
@@ -4398,24 +4333,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Demolition_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4427,6 +4348,7 @@
       "reloaddelay": "45",
       "slot": "Armament@GARRISONEDGrenade",
       "versus_templates": [
+       "^Compatibility_Demolition_LightFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
@@ -6555,24 +6477,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "30000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6584,6 +6492,7 @@
       "requires": "undeployed",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_CannonHE_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light",

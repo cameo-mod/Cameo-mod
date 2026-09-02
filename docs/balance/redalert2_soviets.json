@@ -1007,17 +1007,10 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "60000",
+        "damage": "120000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "60000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1030,9 +1023,8 @@
       "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && deployed",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "^Warhead_Concussion_Medium",
-       "^Effect_Concussion_Medium",
-       "^RA2Grenade"
+       "^Compatibility_Concussion_MediumFlat",
+       "^RA160mmLegacy"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium",
@@ -1045,25 +1037,35 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "36000",
+        "damage": "108000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "183",
-        "tag": "Chemical_Light",
+        "tag": "Chemical_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "36000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
+        "damage": "1800",
+        "falloff": "100, 88, 72",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA160mm_radChemical_LightPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "36000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
+        "damage": "1800",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA160mm_radConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA160mm_radDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1075,11 +1077,8 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
       "slot": "Armament@DeployedRad",
       "versus_templates": [
-       "^Warhead_Chemical_Light",
-       "^Projectile_Chem_Light",
-       "^Effect_Chem_Light",
-       "RA160mm",
-       "^RA2RadShell"
+       "^Compatibility_Chemical_LightFlat",
+       "^RA160mmRadLegacy"
       ],
       "warheads": [
        "^Warhead_Chemical_Light",
@@ -1093,17 +1092,10 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "60000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "60000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "damage": "120000",
+        "falloff": "100, 76, 56, 38, 0",
+        "spread": "346",
+        "tag": "CannonFire_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1116,6 +1108,7 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_firemunitions && deployed",
       "slot": "Armament@DeployedFire",
       "versus_templates": [
+       "^Compatibility_CannonFire_HeavyFlat",
        "RA160mm"
       ],
       "warheads": [
@@ -1129,17 +1122,10 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "60000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "60000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "damage": "120000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1152,6 +1138,7 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions && deployed",
       "slot": "Armament@DeployedTesla",
       "versus_templates": [
+       "^Compatibility_Tesla_HeavyFlat",
        "RA160mm"
       ],
       "warheads": [
@@ -1167,17 +1154,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "60000",
+        "damage": "120000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "60000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1204,6 +1184,13 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
+        "damage": "108000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
+        "tag": "Chemical_LightFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "36000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
@@ -1218,25 +1205,28 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "36000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "183",
-        "tag": "Chemical_Light",
-        "type": "AreaDamage"
+        "damage": "1800",
+        "falloff": "100, 88, 72",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA160mmE_rad_eliteChemical_LightPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "36000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
+        "damage": "1800",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA160mmE_rad_eliteConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
-        "damage": "36000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
+        "damage": "1800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedRA160mmE_rad_eliteDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1248,9 +1238,10 @@
       "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
       "slot": "Armament@DeployedEliteRad",
       "versus_templates": [
+       "^Compatibility_Chemical_LightFlat",
        "^Warhead_Nuclear_Super",
        "^Effect_Nuclear_Super",
-       "RA160mm_rad",
+       "^RA160mmRadLegacy",
        "^RA2EliteEffects"
       ],
       "warheads": [
@@ -1266,17 +1257,10 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "60000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "60000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "damage": "120000",
+        "falloff": "100, 76, 56, 38, 0",
+        "spread": "346",
+        "tag": "CannonFire_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1304,17 +1288,10 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "60000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "60000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "damage": "120000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5562,17 +5539,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Chemical_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5584,6 +5554,7 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions",
       "slot": "Armament@PRIMARYRad",
       "versus_templates": [
+       "^Compatibility_Chemical_MediumFlat",
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
        "^Effect_Chem_Medium",
@@ -5687,17 +5658,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Chemical_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6216,17 +6180,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6237,6 +6194,7 @@
       "reloaddelay": "15",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
