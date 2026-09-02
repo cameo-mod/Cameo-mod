@@ -101,6 +101,10 @@ dead wiring that no current audit can see, and its own docstring says the check 
 
 ## AI ARCHITECTURE (2026-08-31)
 
+Baseline actors: [`BASELINE_ACTOR_REVIEW.md`](BASELINE_ACTOR_REVIEW.md) — the binding spec
+for re-selecting every class anchor (cheapest member, maintainer-confirmed) and repricing
+every member on the coarse-first 50/20/10 grid. ⛔ Five orphan classes await a ruling in §4.
+
 Effort: [`AI_MODULE_REWORK_ESTIMATE.md`](AI_MODULE_REWORK_ESTIMATE.md) — phases 0-2 are
 4-6 sessions and 2 boot gates and are worth committing to; phases 3-7 cannot be estimated
 until phase 2's logs exist, and the document says why rather than inventing a total.
