@@ -65,6 +65,28 @@ they carry *no* template or an *infantry* one. Same defect, different shape.
 "buildable **or spawned by a carrier**"). ⚠ `audit_class_templates.py` currently scopes on
 `Buildable`, so it does not see these at all — that scope has to widen with this ruling.
 
+### A7. Husks and non-units are SEPARATED, never classified
+**Maintainer:** *"Husks and other things must be also separated so they don't appear as regular
+units in the balance formula."*
+
+⚠ **This is the counterpart to A6, not a contradiction of it.** A6 says a spawned *combat* unit is
+balanced content and gets a class. A7 says a wreck, a camera or a blast marker is not a unit at all
+and must never enter a class distribution — a husk priced as an `mbt` would drag that class's
+anchor and its sigma.
+
+**Measured — 951 non-buildable actors, in four groups:**
+
+| group | n | examples |
+|---|--:|---|
+| **husks** | **305** | `A10.Husk`, `ARCO.Husk`, `BADR.Husk` — all with no template |
+| unbuildable buildings | 439 | `AMMOBOX1`, `ARCO` |
+| unbuildable mobile | 123 | `C1`, `C10`, `C17` (civilians) — ⚠ needs sorting: carrier drones live here too |
+| other | 84 | `BLASTRADIUS.atomic`, `CAMERA` |
+
+⛔ **The 123 "unbuildable mobile" is the group that needs care**, because A6's carrier drones and
+A7's civilians are both in it. Spawned-by-a-carrier is the discriminator, and it is structural: an
+actor named in some carrier's `Spawner*.Actors` list.
+
 ---
 
 ## B. `KeepsDistance` — make the trait do what its own `[Desc]` claims
@@ -199,6 +221,29 @@ carrier with 8 drones gives `4000 / 8 * 0.2 = 100` per drone, and `8 x 100 = 800
 
 ### D3. Drone health uses the same function
 `drone_hp = (carrier_hp / drone_count) * 0.2`, so all drones together carry 20% of the carrier's HP.
+
+### D4. Carrier drones carry a LIMITED AMMO POOL, and it sizes the damage
+**Maintainer:** *"Carrier drones should also have a limited ammo pool like the bomber template
+(that's exactly why they used that template before, but the bomber template is now only for
+buildable bomber units while carrier drones should be separated). The carrier drones ammo pool
+should be used to calculate the entire damage output which is then used to calculate the damage
+output of the carrier including all the drones."*
+
+⭐ **This explains the bomber template.** The drones were never mis-filed at random — they were put
+in `^BomberTemplate` *for its ammo pool*. `^CarrierDroneTemplate` (A6) therefore has to carry an
+ammo pool of its own, and `^BomberTemplate` narrows to buildable bombers only.
+
+**So a carrier drone's damage is a FINITE total, not a rate:**
+
+```
+drone_damage_total   = ammo_pool x damage_per_shot
+carrier_damage_total = own weapon + SUM(drone_damage_total)      # D1
+```
+
+⚠ **This changes what D1 means.** A drone with 4 rounds contributes four shots' worth and then must
+rearm — so a carrier's "50% from drones" is a *sortie* figure, not a sustained DPS. Whether the
+pricing formula should use burst or sustained damage for carriers is an open question, and it must
+be settled before D1 can be applied.
 
 ⚠ **Not yet verified, and it must be before this is applied:** the cloudbreaker is
 `^SpaceshipTemplate`, `Cost: 5000`, `HP: 250000`, and its spawner was not in the 29 the scan found —
