@@ -31,6 +31,62 @@ add-on) **and stays band-exempt**, so a 10,000-credit epic does not distort the 
 ⚠ `BuildLimit:1` epics are already band-exempt in `check_band.py`; this keeps that.
 
 ### A5. `design.class_anchor` becomes DERIVED output ⛔ overrides current practice
+### A5a. ⭐ MOSTLY ALREADY BUILT — and the two sources CONVERGE
+
+⛔ **I was about to write a tool that exists.** `extract_stats.py` already derives the class from the
+template chain: `actor_subtype()` (line 193) walks every `Inherits*` and returns the nearest
+`^<Name>Template`, writing it as **`design.subtype`**. Only `class_anchor` is hand-maintained — it is
+literally initialised to `None` (line 945) and filled in by hand afterwards.
+
+| field | source | coverage |
+|---|---|--:|
+| `design.subtype` | **derived from templates** | **2,099 rows — the whole ledger** |
+| `design.class_anchor` | hand-maintained | 346 rows (16%) |
+
+⭐ **So A5 is a rename plus a name map, not a new derivation.**
+
+**And the two sources agree far more than they disagree:**
+
+| | pairs | actors |
+|---|--:|--:|
+| exact name match | 13 | **233** |
+| disagree | 27 | 113 |
+| — **not actually defects** | 2 | 46 |
+| **real disagreements** | | **67** |
+
+The two non-defects matter because they define the mapping rules:
+* `MainBattleTank -> mbt` (42) — an **abbreviation**. A5 needs an explicit CamelCase→snake name map;
+  `mbt` cannot be derived mechanically from `MainBattleTank`.
+* `Dog -> melee` (4) — **correct by the A2 sub-template rule.** `subtype` returns the *nearest*
+  template (`Dog`), the class is its parent (`melee`). The map must therefore resolve a sub-template
+  to its class, exactly as `audit_class_templates.py` already does.
+
+### ⭐ The 67 disagreements ARE the classification to-do list — and it matches the template analysis
+
+This was derived from the *ledger*, entirely independently of the template scan, and it lands on the
+same defects:
+
+| disagreement | n | already known as |
+|---|--:|---|
+| `Infantry -> support` | 12 | **§2.1** — engineers with NO class template at all |
+| `ScoutInfantry -> support` | 6 | spies/clones mis-tagged |
+| `HeavyInfantry -> special_forces` | 5 | |
+| `SniperInfantry -> support` | 4 | **§2.1** — the four engineers stuck in `^SniperInfantryTemplate` |
+| `AntiTankAntiAirInfantry -> special_forces` | 4 | the AT/AA grab-bag |
+| **`AntiTankAntiAirInfantry -> archer`** | **3** | **class 1** — the elven/Asian archers |
+| **`SniperInfantry -> archer`** | **1** | **class 1** — `japan_archermaiden` |
+| `futuretech_*droid` family | 5 | one faction tagged by ROLE while templated as vehicles |
+
+⭐ **The hand-written tag usually recorded the INTENDED role correctly, and the TEMPLATE is what
+drifted** — the archers were tagged `archer` in the ledger years before `^ArcherInfantryTemplate`
+had a single inheritor. So fixing the templates makes the derived value right, and `class_anchor`
+then follows for free. **The 67 are the work list, and finishing workstream A empties it.**
+
+⚠ **Do not "fix" this by copying `class_anchor` onto the templates.** The ledger tag covers 16% of
+the roster and has its own errors (`futuretech_cannondroid` is tagged `heavy_infantry` while
+templated `MainBattleTank`). The template is the authority per A1; the tag is the cross-check that
+says which templates to fix first.
+
 Regenerated from `Inherits@Template:`, with an **explicit exclusion list** for actors the pipeline
 must not price. Measured candidates for exclusion: `EDEN_*` / `PLYMOUTH_*` imports, `*_backup`
 variants, `ra2_c_*` campaign actors — the 21 the `mbt` ledger already omits. **The omissions get
