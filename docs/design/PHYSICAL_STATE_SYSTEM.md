@@ -96,7 +96,9 @@ parts relate*.
 ⛔ **This is why `BALANCE_PROGRAM_PLAN` §0a puts weapon STRUCTURE before pricing** — restated by
 the maintainer 2026-08-19: *"that's exactly why I said you should finish the 3 way weapon split
 first!"* Pricing a weapon whose structure is wrong measures the wrong object. The burn-down is
-pinned as `w24_multi_main_fed` (380, ratchet-down-only).
+pinned as `w24_multi_main_fed` (380 when written; **429** on 2026-09-02, over a
+population that grew 427 -> 516 — read the SHARE, `w24_multi_main_fed_share`, which
+fell to 0.831).
 
 ⚠ **RELAXATION is still excluded** and moves this number down further: `RelaxationDelay 25` +
 `RelaxationLinear 5` + `RelaxationScaled 50` bleeds ~642 meter/shot at `ReloadDelay 60` (23% of

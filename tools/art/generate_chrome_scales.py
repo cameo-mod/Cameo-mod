@@ -29,6 +29,8 @@ why an artist may still prefer a native 3x export — `--check` will accept eith
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import pathlib
 import re
 import struct
@@ -38,6 +40,7 @@ import zlib
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
+STAMP = pathlib.Path("tools/art/chrome_masters.json")
 CHROME = pathlib.Path("mods/cameo/chrome.yaml")
 UIBITS = pathlib.Path("mods/cameo/uibits")
 FIELD_DENSITY = {"Image": 1, "Image2x": 2, "Image3x": 3, "Image4x": 4}
@@ -179,6 +182,39 @@ def artwork(path: pathlib.Path):
     return w, h, mx + 1, my + 1
 
 
+# --------------------------------------------------------------------------- the freshness stamp
+
+def sha(path: pathlib.Path) -> str | None:
+    """Content hash. ⚠ NOT mtime — a checkout, a stash pop or a rebase rewrites mtimes without
+    changing a pixel, and `git` does not preserve them at all. Only content can answer 'did the
+    master change since these were derived?'."""
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError:
+        return None
+
+
+def read_stamp() -> dict:
+    try:
+        return json.loads(STAMP.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def write_stamp(collection: str, master: pathlib.Path, emitted: list[pathlib.Path]) -> None:
+    """Record what was derived from what. This is the ONLY state the freshness audit needs, and it
+    is deliberately outside `mods/` — it is tooling metadata, not engine content, so it can be
+    committed without a boot gate while the PNGs it describes cannot."""
+    data = read_stamp()
+    data[collection] = {
+        "master": master.name,
+        "master_sha256": sha(master),
+        "derived": {d.name: sha(d) for d in sorted(emitted, key=lambda q: q.name)},
+    }
+    STAMP.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(f"\n  stamped {STAMP} — `audit_chrome_master_freshness.py` now guards this set")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("collection", nargs="?", help="collection name, e.g. flags")
@@ -190,6 +226,11 @@ def main() -> int:
                          "when the master is NOT declared in chrome.yaml — which is the normal "
                          "case: a 4x master is an ART SOURCE, and the engine's ladder stops at 3x, "
                          "so it never appears in the yaml at all.")
+    ap.add_argument("--stamp", action="store_true",
+                    help="record the CURRENT files as the generated set, without regenerating "
+                         "anything. Use it once to seed the freshness stamp for sheets that were "
+                         "already derived correctly (and whose PNGs therefore must not be "
+                         "rewritten in a tree that cannot boot-gate them).")
     ap.add_argument("--emit", metavar="N[,N...]",
                     help="densities to emit from the master regardless of what chrome.yaml "
                          "declares, e.g. --emit 1,2,3. Filenames follow the convention "
@@ -274,18 +315,47 @@ def main() -> int:
     master_density = int(round(best_density))
     ms = png_size(master)
 
+    # ⛔ THE BUG THIS TOOL EXISTS FOR, REPORTED AS A FAILURE RATHER THAN AS SILENCE.
+    # When the master was auto-detected it sits in a DECLARED slot, and that slot carries a density
+    # the engine will multiply the 1x regions by. If the artwork density and the slot density
+    # disagree, the collection is broken in game — and the derived-sheet comparison below would say
+    # "nothing to do", because it measures the other sheets against the master and never asks
+    # whether the master belongs where it is declared. That silence is the same class of mistake as
+    # the bug itself: trusting the field name instead of measuring.
+    if not args.master and best is not None and FIELD_DENSITY[best] != master_density:
+        slot = FIELD_DENSITY[best]
+        stem = re.sub(r"(_\dx)?\.png$", "", imgs[best])
+        print(f"⛔ **Broken collection.** `{imgs[best]}` is declared as `{best}` (density {slot}x) "
+              f"but its artwork is laid out at **{master_density}x**. `ChromeProvider` multiplies "
+              f"the 1x regions in `chrome.yaml` by {slot}, so every icon is indexed at the wrong "
+              f"place — wrongly in proportion to its distance from the top-left corner.\n\n"
+              f"There is also NO true {slot}x sheet to generate, because the {slot}x slot is where "
+              f"this master is sitting. Give it its own name and derive the ladder from it:\n\n"
+              f"    git mv mods/cameo/uibits/{imgs[best]} mods/cameo/uibits/{stem}_{master_density}x.png\n"
+              f"    python tools/art/generate_chrome_scales.py {args.collection} \\\n"
+              f"        --master {stem}_{master_density}x.png --emit "
+              + ",".join(str(d) for d in range(1, master_density)) + " --write\n\n"
+              f"See `docs/audit/CHROME_SCALE_BUG.md`.")
+        return 1
+
     # ⛔ Uniform resize only reproduces the right layout if the master's canvas is the base canvas
     # times its density. A PADDED master (upstream's convention) breaks that: scaling it gives the
     # right artwork ratio in an oddly-sized canvas. Refuse rather than emit something surprising.
+    #
+    # ⚠ But only refuse GENERATION. A padded sheet is the upstream convention and `glyphs_3x.png`
+    # is one, so failing a plain --check on it would report a healthy collection as broken — the
+    # same false positive that my first diagnosis of this bug made by reading canvases.
     if ms != (bw * master_density, bh * master_density):
-        print(f"⛔ **Refusing.** The master's canvas is {ms[0]}x{ms[1]}, but {master_density}x of "
+        verb = "**Refusing.**" if args.emit else "**Not a generation source.**"
+        print(f"⛔ {verb} The master's canvas is {ms[0]}x{ms[1]}, but {master_density}x of "
               f"the base canvas ({bw}x{bh}) is {bw*master_density}x{bh*master_density}. That means "
               f"the master is PADDED — the upstream convention — and a uniform resize would produce "
               f"correct artwork inside an oddly-sized canvas.\n\n"
               f"Nothing is wrong with a padded sheet; it just cannot be used as a generation "
               f"source. Export the derived sheets from the art source instead, or supply an "
-              f"unpadded master.")
-        return 1
+              f"unpadded master.\n")
+        if args.emit:
+            return 1
 
     if args.emit:
         stem = re.sub(r"(_\dx)?\.png$", "", args.master or imgs[best])
@@ -310,12 +380,24 @@ def main() -> int:
             print(f"| {d}x | `{fn}` | {want[0]}x{want[1]} "
                   f"| {'overwrite' if cur else 'create'} |")
             emit.append((dst, want))
+        if args.stamp and not args.write:
+            # ⭐ SEED THE STAMP WITHOUT TOUCHING A PIXEL. The sheets in this tree were already
+            # derived correctly and are engine content, so rewriting them to record a hash would
+            # need a boot gate for no gain. --stamp records what is on disk as the generated set.
+            missing = [d.name for d, _ in emit if not d.exists()]
+            if missing:
+                print(f"\n⛔ cannot stamp: {', '.join(missing)} do not exist yet. "
+                      f"Generate them with --write first.")
+                return 1
+            write_stamp(args.collection, master, [d for d, _ in emit])
+            return 0
         if not args.write:
             print(f"\n{len(emit)} file(s) would be written. Re-run with `--write`.")
             return 0
         for dst, (nw, nh) in emit:
             how = resize(master, dst, nw, nh)
             print(f"\n  wrote {dst}  {nw}x{nh}  ({how})")
+        write_stamp(args.collection, master, [d for d, _ in emit])
         print("\n⚠ Generated files are engine content: run "
               "`python tools/audit/audit_chrome_scale_variants.py`, then BOOT GATE before "
               "committing (CLAUDE.md rule 1).")
@@ -331,7 +413,15 @@ def main() -> int:
         want_art = (bax * density, bay * density)
         got = artwork(UIBITS / imgs[field])
         cur = f"{got[2]}x{got[3]}" if got else "—"
-        ok = got is not None and abs(got[2] - want_art[0]) <= 2 and abs(got[3] - want_art[1]) <= 2
+        # ⚠ A FLAT ±2px TOLERANCE CALLS CORRECTLY GENERATED SHEETS BROKEN. Resampling bleeds
+        # alpha outward, so a downscaled sheet's bounding box lands a few pixels off the exact
+        # ratio — the shipped 2x flags sheet measures 771 where 387 x 2 = 774, and --check told
+        # you to regenerate a file this very tool had just produced. Scale the tolerance: 0.5% is
+        # still two orders of magnitude tighter than the 33% error this tool exists to catch.
+        tol = (max(2, want_art[0] // 200), max(2, want_art[1] // 200))
+        ok = (got is not None
+              and abs(got[2] - want_art[0]) <= tol[0]
+              and abs(got[3] - want_art[1]) <= tol[1])
         print(f"| {field} | `{imgs[field]}` | {cur} | {want_art[0]}x{want_art[1]} "
               f"| {'ok' if ok else ('**regenerate**' if got else '**create**')} |")
         if not ok:

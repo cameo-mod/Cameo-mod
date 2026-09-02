@@ -261,7 +261,7 @@ claims:
       print(inventory(rs)['counts']['stacked_main_direct_actor_armament'])
 
   - id: percentage_denominator_unset
-    value: 11
+    value: 183
     tolerance: 0
     what: >
       `PercentageDenominator` declarations across the live weapon manifest. ⭐ THIS PIN WAS A
@@ -276,6 +276,7 @@ claims:
       What can still be stale is a pct_absolute / dps_floor figure WRITTEN DOWN before
       `765cbd446` and never re-derived. That is a smaller and checkable set, not "every figure".
       The pin now tracks ADOPTION: re-pin as more weapons move onto basis points.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 11 -> 183. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/ARMOR_LAYERS.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import pathlib, sys
@@ -314,7 +315,7 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 239
+    value: 269
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
@@ -344,6 +345,7 @@ claims:
       Add it after W24, not before — it is a second term on the same corrected base.
       The formula lives ONLY in `tools/balance/physical_state_price.py`, which this measure
       imports, so the two can no longer disagree.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 239 -> 269. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/ARMOR_LAYERS.md]
     measure: |
       import sys, pathlib
@@ -381,7 +383,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 419
+    value: 429
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -395,6 +397,7 @@ claims:
       (*"that's exactly why I said you should finish the 3 way weapon split first!"*): weapon
       STRUCTURE before pricing. Pricing a weapon whose structure is wrong measures the wrong
       object — that is exactly how `meters_filling_before_death` came to claim 534.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 419 -> 429. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/WEAPON_3WAY_SPLIT.md, docs/design/PHYSICAL_STATE_SYSTEM.md]
     measure: |
       import sys
@@ -412,7 +415,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 509
+    value: 530
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -420,6 +423,7 @@ claims:
       damage-scaled `PhysicalStateScale`, and a BLEND's `PhysicalStates:` dict — which carries no
       `PhysicalStateName` at all, so keying on that name misses every blend family. Counting one
       shape is how the docs carried "~89 bindings"; counting two gave 367.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 509 -> 530. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/ARMOR_LAYERS.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import sys, pathlib
@@ -517,7 +521,7 @@ claims:
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
 
   - id: w23_compatibility_breadcrumbs
-    value: 290
+    value: 453
     tolerance: 0
     what: >
       Weapons inheriting a `^Compatibility_*` breadcrumb — the W23 conversion's OWN
@@ -527,6 +531,8 @@ claims:
       PROGRESS, rising 1255 -> 1460 while real legacy inheritors FELL by 85. This is its own
       burn-down and it legitimately rises while W23 runs; it falls as the families grow to
       carry these profiles. Measured 2026-08-30: 71 templates, 290 inheritors.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 290 -> 454, then 453 once `a073f6cc6` removed GladiusCannon's
+      duplicate inherited compatibility root (the boot blocker) — one inheritor fewer. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import re, subprocess, sys
@@ -535,7 +541,7 @@ claims:
       print(re.search(r'(\d+) direct inheritors \(separate burn-down\)', out).group(1))
 
   - id: w24_multi_main_fed_share
-    value: 0.846
+    value: 0.831
     tolerance: 0.01
     what: >
       RATCHET (the REAL one) — the SHARE of damage-scaled metered weapons whose meter is fed by
@@ -543,6 +549,7 @@ claims:
       down-only ratchet: its population grows as the roster does, so it rose 380 -> 419 purely
       because scaled-metered weapons went 427 -> 495. Over the same span the SHARE fell
       90.4% -> 84.6%, i.e. the work improved while the count "regressed". Track the share.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 0.846 -> 0.831. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/WEAPON_3WAY_SPLIT.md, docs/HANDOFF.md]
     measure: |
       import sys
@@ -563,7 +570,7 @@ claims:
       print(round(under / pop, 3) if pop else 0)
 
   - id: warhead_family_reach
-    value: 1391
+    value: 1392
     tolerance: 0
     what: >
       Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
@@ -575,6 +582,7 @@ claims:
       this entry pins BOTH the number and how it is counted (transitive inherit chain over the
       fired-weapon set), so the next reader does not have to guess which was measured.
       ⛔ RATCHET — this may only go UP.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 1391 -> 1392. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import pathlib, sys
@@ -604,11 +612,12 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 1153
+    value: 1155
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).
       ⛔ RATCHET — this may only go DOWN. Was 1343 when BALANCE_PROGRAM_PLAN §0a was written.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 1153 -> 1155. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import re, subprocess, sys

@@ -357,6 +357,7 @@ Speed grid and no audit covers it. "The audit is green" answers only the questio
 - [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
 - [`docs/audit/latest/` is environment-bound — an incomplete tree reports LESS and still says PASS (2026-08-23)](#docsauditlatest-is-environment-bound--an-incomplete-tree-reports-less-and-still-says-pass-2026-08-23)
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
+- [A green test runner that runs none of the tests (2026-09-02)](#a-green-test-runner-that-runs-none-of-the-tests-2026-09-02)
 - ["Regenerable" is a claim about a tool, and it needs running (2026-08-28)](#regenerable-is-a-claim-about-a-tool-and-it-needs-running-2026-08-28)
 - ["Not found" is not "not there" — three ways a grep lies (2026-08-28)](#not-found-is-not-not-there--three-ways-a-grep-lies-2026-08-28)
 
@@ -1673,3 +1674,46 @@ safe is a property of the CONSUMER, not of the yaml -
 `ConditionalTrait` still occupies the trait dictionary - so gating five
 composition modules by condition crashes on the first bot tick instead of
 degrading.
+
+## A green test runner that runs none of the tests (2026-09-02)
+
+`tools/tests/README.md` said "stdlib `unittest` only", and `audit_test_coverage.py` and
+`docs/audit/PERIODIC.md` both document
+
+```sh
+python -m unittest discover -s tools/tests -t tools/tests
+```
+
+as *the* way to run the suite. It is true for 81 of the 89 files. The other eight are written
+pytest-style — bare `def test_*` functions, seven of them also using `@pytest.mark.parametrize`,
+`pytest.approx` or `pytest.raises`. `unittest discover` collects `TestCase` subclasses and nothing
+else, so it runs **zero** of their ~105 assertions.
+
+⛔ **Both failure modes are silent in the direction that matters.**
+
+| shape | what discovery reports |
+|---|---|
+| `import pytest` at the top | one `_FailedTest` import error — looks like an environment problem, not a hole |
+| bare functions, no pytest import | `Ran 0 tests … OK` — **completely silent** |
+
+⚠ **The coverage audit cannot catch it.** `audit_test_coverage.py` counts `def test_*` by regex
+and never executes anything, so a file satisfies the floor while running not one assertion. A
+number that comes from counting source lines is not evidence that any of them ran.
+
+⛔ **The wrong fix is to change the command.** `load_tests` + `unittest.FunctionTestCase` does wire
+bare functions into discovery — it was written and it worked on the one file that does not import
+pytest — but on the other seven the import fails before any hook can run, so the shim is dead
+weight that *looks* like a fix. The right answer was to state the real dependency: those eight need
+`pytest`, and the README now says so with the file list.
+
+⭐ **How it surfaced, which is the transferable part.** The PR-325 patch applier (since
+retired, when the series landed as source in `a073f6cc6`) invoked
+`python -m pytest`; a later session found no pytest in the container and "corrected" it to the
+documented stdlib command. That edit turned a command that fails loudly into one that passes
+having tested nothing. The tell was `Ran 0 tests in 0.000s OK` on a file with nine tests in it —
+**a runner that reports zero and succeeds is a failure, not a pass.** Always read the count, not
+the verdict.
+
+⚠ And `.pytest_cache/` mtime is a usable artifact: it showed pytest genuinely had run on
+2026-08-31, with `lastfailed` naming the same single pre-existing failure that had been reported.
+The suite had been green; only the interpreter changed underneath it.

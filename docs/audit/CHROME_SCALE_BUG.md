@@ -251,13 +251,68 @@ soft-forked engine would not help the reported players either: that branch would
 ⚠ **Do not "fix" this by inventing a file or by pointing `Image3x` at the 2x sheet** — the region
 maths would then be wrong in the other direction.
 
+## ✅ ANSWERED — which scale lands in which bucket, and what a 4x rung would need
+
+Measured from `cameo-mod/OpenRA` @ `2b3da9e`, not inferred. Four files decide everything:
+
+| file | fact |
+|---|---|
+| `OpenRA.Game/Graphics/ChromeProvider.cs:117` | `if (dpiScale > 2 && Image3x != null) density = 3; else if (dpiScale > 1 && Image2x != null) density = 2;` |
+| `OpenRA.Game/Renderer.cs:386` | `WindowScale => Window.EffectiveWindowScale` |
+| `OpenRA.Platforms.Default/Sdl2PlatformWindow.cs:77-82` | `EffectiveWindowScale = windowScale * scaleModifier` — **the OS display scale times the game's UI Scale setting** |
+| `OpenRA.Mods.Common/Widgets/Logic/Settings/DisplaySettingsLogic.cs:628` | `validScales = { 1f, 1.25f, 1.5f, 1.75f, 2f }` filtered by `maxScale = NativeResolution / MinEffectiveResolution` |
+
+`windowScale` is the OS scaling factor (`SDL_GetDisplayDPI / 96` on Windows, `Xft.dpi / 96` or
+`GDK_SCALE` on Linux, GL-pixels-per-point on macOS), overridable with **`OPENRA_DISPLAY_SCALE`**.
+`MinEffectiveResolution` is the engine default **1024x720** — `mods/cameo/mod.yaml:523` sets only
+`DefaultScale` / `MaxZoomScale` / `MaxZoomWindowHeight`, so Cameo does not move it.
+
+⭐ **The report said "150%" and the threshold is `> 2`; both are right.** The setting is only half
+the product. Windows at 150% display scaling *with* the game's UI Scale at 150% gives
+`1.5 x 1.5 = 2.25`, which trips the 3x branch. On a plain 100%-DPI monitor the UI Scale dropdown
+stops at 200%, `1.0 x 2.0 = 2.0` is **not** `> 2`, and **the 3x sheet is never loaded at all**.
+
+⚠ **The two ceilings multiply out to one number.** `NativeWindowSize` is the *logical* size
+(`surfaceSize / windowScale`, Sdl2PlatformWindow.cs:280), so the OS scale cancels:
+
+```
+dpiScale  =  nativeScale x UIScale
+UIScale   <=  min(logicalW/1024, logicalH/720)  =  min(physW, physH-based) / nativeScale
+=>  dpiScale <= min(physW/1024, physH/720)      AND      dpiScale <= 2 x nativeScale
+```
+
+**Worked out over every offered UI Scale — by `tools/art/chrome_density_reach.py`, not by hand:**
+
+| panel | max `dpiScale` | at OS scale x UI Scale | sheet today | with `Image4x` |
+|---|--:|---|---|---|
+| 1920x1080 | 1.50 | 100% x 150% | 2x | 2x |
+| 2560x1440 | 2.00 | 100% x 200% | 2x | **2x** — `> 2` is strict, so 3x never loads |
+| 3840x2160 (4K) | **3.00** | 150% x 200% | 3x | **3x — a 4x rung would be DEAD here** |
+| 3456x2234 (16in Retina) | 3.06 | 175% x 175% | 3x | **4x** ⭐ |
+| 5120x2880 (5K) | **4.00** | 200% x 200% | 3x | **4x** ⭐ |
+
+⛔ **The table is generated, and that is not fastidiousness.** The first hand-written version got
+two of these five rows wrong: 1920x1080 was quoted as 1.87 — that is the WIDTH term, while the
+HEIGHT term binds at 1.50 — and the 16in Retina row was quoted as 3.00 when it actually reaches
+3.06 and therefore *would* use a 4x sheet. Two ceilings multiply and a `min()` picks between four
+terms; that is one step past what is safe to do in your head.
+
+⛔ **So a 4x rung would be dead on 4K**, the most common high-DPI setup there is: it lands on
+exactly 3.00 across every combination, and the 4x test is `dpiScale > 3`. It needs
+`min(physW/1024, physH/720) > 3` **and** an OS scale above 150% — a 5K/6K/8K panel, a 4K 16:10
+panel at 250%, or a 3456x2234-class Retina at 175%.
+
+⭐ **Two escape hatches make it testable without the hardware**, which is how to decide this
+empirically rather than by argument: `OPENRA_DISPLAY_SCALE` forces `nativeScale` on Windows and
+Linux, and `Graphics.UIScale` written straight into `settings.yaml` is **not** clamped to the
+dropdown's 2.0 — only `BlankLoadScreen.cs:117` touches it, and only to reset to 1.0 when the
+resolution is below `MinEffectiveResolution`.
+
+⚠ **And glyphs would need the same treatment**, but only if flags gets it: `glyphs_3x.png` is a
+correct padded 3x sheet, so a 4x rung would silently keep using it — no breakage, just no gain.
+
 ## Not yet answered
 
-* **Which scale lands in which bucket.** The exact `ChromeProvider` thresholds could not be read
-  here: `engine/` is build output and is not part of this repository (CLAUDE.md rule 7). The
-  diagnosis does not depend on them — a 4x sheet declared as 3x is wrong at any threshold — but
-  whoever confirms the fix should note the scale at which the 3x path engages, so the report can be
-  closed with a reproduction rather than an inference.
 * **Dead config inherited from CA, resolved as advisory.** `loading-artwork` and `menu-logo`
   (`chrome.yaml:1143`, `:1150`) declare `ca-loading-artwork*.png` and `ca-menu-logo*.png`, which
   exist in Combined Arms but were never copied into Cameo. `^LoadScreen` likewise names a missing
@@ -265,3 +320,39 @@ maths would then be wrong in the other direction.
   of them**, so they never load and the game boots fine — `ChromeProvider` opens a sheet lazily,
   on first sprite request. Harmless today, a crash if anything ever asks for them. Left alone
   deliberately: removing them is a yaml change needing a boot gate for zero present benefit.
+
+---
+
+## The guard that catches the NEXT mistake: `audit_chrome_master_freshness.py`
+
+⛔ **`audit_chrome_scale_variants.py` cannot catch the likeliest future failure.** It measures each
+sheet's artwork EXTENT against its declared density, which is exactly right for the bug that
+shipped — a sheet laid out at 4x sitting in the 3x slot. It is blind to this: someone edits one
+faction icon inside `flags_4x.png`, commits, and the 1x/2x/3x sheets keep the OLD icon. Every
+extent still matches, every dimension is still right, the audit passes, and three of the game's
+four scales render stale art.
+
+So the freshness audit compares **content**. `generate_chrome_scales.py --write` records the
+master's SHA-256 and each derived sheet's SHA-256 in `tools/art/chrome_masters.json`; the audit
+re-hashes and reports **which side moved**:
+
+| master | derived | verdict |
+|---|---|---|
+| changed | unchanged | ⛔ edited and never regenerated — **`--fix` regenerates** |
+| unchanged | changed | ⛔ a generated sheet was hand-edited — **`--fix` is refused** |
+| changed | changed | ⚠ regenerated without re-stamping, or both edited |
+
+⛔ **`--fix` is deliberately NOT offered for the second row.** Regenerating pulls from an unchanged
+master, so it would overwrite the hand edit it just flagged — the guard would destroy the work it
+found. The remedy is to port the change into the master first.
+
+⚠ **Hashes, not mtimes.** A checkout, a stash pop or a rebase rewrites mtimes without changing a
+pixel, and git does not preserve them at all.
+
+⚠ **`--fix` does not clear the boot gate** and says so: it writes PNGs under `mods/`, exits
+non-zero, and tells you to launch the game. The stamp itself lives under `tools/art/` precisely
+because it is tooling metadata — it can be committed in a tree that cannot boot, while the PNGs it
+describes cannot.
+
+Wired into the blocking loop in `tools/audit/run_all.sh`; nine tests in
+`tools/tests/test_audit_chrome_master_freshness.py`.

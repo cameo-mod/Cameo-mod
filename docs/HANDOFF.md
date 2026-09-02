@@ -877,7 +877,7 @@ Measured, not quoted. The binding order (`BALANCE_PROGRAM_PLAN.md` §0a) is
 **W24 → W23 → A5 → class anchors → W11 sign-off → targets → apply**, and every number below is
 from that chain rather than from a summary.
 
-| the front | pinned | measured now | direction |
+| the front | pinned | measured 2026-08-31 | direction |
 |---|--:|--:|---|
 | `multi_main_fired_weapons` (W24's scope) | 494 | **472** | ✅ down 22 — master's consolidation work |
 | `warhead_family_reach` (W23/W24 burn-up) | 1245 | **1391** | ✅ up 146 — more weapons reach a family |
@@ -887,6 +887,26 @@ from that chain rather than from a summary.
 | signed-off class anchors | 0 | **0** | — the hard gate |
 | classes inside the ≤1 |Δ| goal | — | **8** of 26 fittable | — |
 | `check_band` violations | — | **129 across 20 classes** | — the baseband law is far from met |
+
+⚠ **Re-measured 2026-09-02, after `origin/master` (#320, percentage damage activated) was merged
+into this branch.** Every one of these moved again, and none of them because of any change on this
+branch — it edits no yaml under `mods/`. The claims were re-pinned to these values in
+`docs/audit/doc_claims.yaml` in the same commit that recorded them.
+
+| claim | pinned 2026-08-31 | **measured 2026-09-02** |
+|---|--:|--:|
+| `warhead_family_reach` | 1391 | **1392** |
+| `unconverted_template_inheritors` | 1153 | **1155** (46 templates) |
+| `w23_compatibility_breadcrumbs` | 290 | **453** (76 templates) — 454 before `a073f6cc6` dropped GladiusCannon's duplicate root |
+| `w24_multi_main_fed` | 419 | **429** (population 516) |
+| `w24_multi_main_fed_share` | 0.846 | **0.831** ⬇ still improving |
+| `physical_state_fired_weapons` | 509 | **530** |
+| `meters_filling_before_death` | 239 | **269** |
+| `percentage_denominator_unset` | 11 | **183** — W18 adoption, which this pin now tracks |
+
+⭐ **The pattern is the same one this section is about.** Four of the eight are absolute counts over
+a population that master grew; the one SHARE among them fell. A pin taken before a merge and read
+after it measures two different corpora — **hold the script constant and vary only the tree.**
 
 ✅ **BOTH "RATCHET REGRESSIONS" WERE MEASUREMENT BUGS. FIXED, NOT RE-BASELINED.** I raised them
 rather than re-baselining, then went and measured the cause instead of guessing at it — three
@@ -918,7 +938,7 @@ flat/ExtraDamage profile no family carries yet. Summing those into "unconverted 
 templates" made the metric **anti-correlated with progress**: every conversion pushed the
 headline UP. **Fixed in `audit_unconverted_templates.py`** — the headline counts legacy debt
 only, breadcrumbs get their own burn-down section and their own pinned claim
-(`w23_compatibility_breadcrumbs`, 290).
+(`w23_compatibility_breadcrumbs`, 290 at the time; **453** on 2026-09-02).
 
 ⭐ **The ratchet now reads 1153 against its pin of 1162 — GREEN, and going DOWN.** And the audit
 reports **45** unconverted templates, which is what the claim's own text always said
@@ -935,7 +955,7 @@ ABSOLUTE COUNT over a population that grows with the roster:
 
 The count rose only because 68 new scaled-metered weapons landed. The quality measure **improved
 by 5.8 points**. An absolute count over a growing population is not a valid down-only ratchet, so
-`w24_multi_main_fed_share` (0.846, ratchet down) is now the real one; the count stays as context
+`w24_multi_main_fed_share` (0.846 then, **0.831** on 2026-09-02; ratchet down) is now the real one; the count stays as context
 with its limitation written into its own `what:`.
 
 ⚠ **The lesson, and it is bigger than these two numbers:** a ratchet is only as good as its

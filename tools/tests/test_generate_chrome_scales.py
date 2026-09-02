@@ -94,3 +94,87 @@ def test_generated_files_are_flagged_as_engine_content():
     """They land under mods/, so they carry the boot gate (CLAUDE.md rule 1)."""
     src = TOOL.read_text(encoding="utf-8")
     assert "BOOT GATE" in src and "engine content" in src
+
+
+def test_it_reports_a_mis_declared_master_instead_of_nothing_to_do():
+    """⛔ THE THIRD HAZARD, AND THE WORST: silence on the very collection that is broken.
+
+    `--check` compares each derived sheet against the master. When the master IS the mis-declared
+    sheet — `flags_3x.png` holding 4x artwork — there is nothing left to compare it to, so the
+    report ended with "Nothing to do" on the one collection this whole tool exists for. The check
+    has to ask whether the master belongs in the slot it is declared in, which is the question the
+    original bug turned on.
+    """
+    src = TOOL.read_text(encoding="utf-8")
+    assert "FIELD_DENSITY[best] != master_density" in src
+    assert "Broken collection" in src
+    # It must hand over the remedy, not just the diagnosis.
+    assert "git mv" in src and "--emit" in src
+
+
+def test_a_padded_master_is_only_fatal_when_generating():
+    """`glyphs_3x.png` is a correctly padded 3x sheet. A plain --check on it must not go red.
+
+    Refusing to GENERATE from a padded master is right; reporting a healthy collection as broken
+    is the same false positive that the first diagnosis of this bug made by reading canvases.
+    """
+    src = TOOL.read_text(encoding="utf-8")
+    assert "Not a generation source" in src
+    assert re.search(r"if args\.emit:\s*\n\s*return 1", src), \
+        "the padded-master refusal must exit non-zero only on --emit"
+
+
+def test_the_broken_collection_check_does_not_fire_for_a_supplied_master():
+    """`--master flags_4x.png` is the fix being applied; it must not trip the diagnosis.
+
+    A supplied master is a path, not a chrome.yaml slot, so there is no declared density to
+    disagree with — and route E runs exactly this way (docs/patches/chrome_10_*.sh).
+    """
+    src = TOOL.read_text(encoding="utf-8")
+    assert "if not args.master and best is not None" in src
+
+
+def test_the_4x_master_is_never_declared_as_a_chrome_variant():
+    """⛔ THE INVARIANT THAT KEEPS THE FIX FIXED.
+
+    `flags_4x.png` is the editable art source. The engine's density ladder stops at 3x, so
+    declaring the master in `chrome.yaml` cannot help — and `FieldLoader.Load` drops an `Image4x`
+    key the type does not declare *in silence* (CLAUDE.md rule 8b), so flags would quietly fall
+    back to the 2x sheet and look like nothing happened. The master stays out of chrome.yaml.
+    """
+    chrome = (ROOT / "mods" / "cameo" / "chrome.yaml").read_text(encoding="utf-8")
+    # A COMMENT naming the master is wanted — it tells the next artist which file to edit. A
+    # DECLARATION is the thing that must not exist.
+    declared = [ln for ln in chrome.splitlines()
+                if "flags_4x.png" in ln and not ln.lstrip().startswith("#")]
+    assert not declared, declared
+    assert (ROOT / "mods" / "cameo" / "uibits" / "flags_4x.png").exists(), \
+        "the master must be committed — it is the only flags file anyone should edit"
+
+
+def test_the_pytest_dependency_is_written_down_where_the_runner_is():
+    """⛔ `unittest discover` runs ZERO of seven files here and still prints OK.
+
+    Six `import pytest` (one _FailedTest each); the seventh — this file — is bare functions and
+    disappears in silence. `audit_test_coverage.py` counts `def test_*` by regex, so nothing else
+    can notice. The README has to say so, or the next person "fixes" a missing-pytest failure by
+    switching to the documented stdlib command and turns a loud failure into a silent pass.
+    """
+    readme = (ROOT / "tools" / "tests" / "README.md").read_text(encoding="utf-8")
+    assert "python -m pytest" in readme
+    assert "does NOT run the whole suite" in readme
+    for named in ("test_bot_insurance_model", "test_generate_chrome_scales", "test_band_law"):
+        assert named in readme, f"{named} is pytest-style and must be listed"
+
+
+def test_the_check_tolerance_scales_with_the_sheet():
+    """⛔ A FLAT ±2px TOLERANCE FAILS THE TOOL'S OWN OUTPUT.
+
+    Resampling bleeds alpha outward, so a downscaled sheet's bounding box lands a few pixels off
+    the exact ratio: the shipped 2x flags sheet measures 771 where 387 x 2 = 774. `--check` was
+    telling you to regenerate a file this very tool had just generated — and a check that cries
+    wolf on correct art gets ignored on incorrect art.
+    """
+    src = TOOL.read_text(encoding="utf-8")
+    assert "want_art[0] // 200" in src, "the tolerance must scale with the sheet, not be flat"
+    assert "abs(got[2] - want_art[0]) <= tol[0]" in src
