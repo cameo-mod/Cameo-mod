@@ -392,3 +392,61 @@ The 2026-09-02 ruling **supersedes that quarantine**, and the patch removes it: 
 targets `BulletChem`, not `Chemical`, which is the difference the ruling turns on. If the Hydralisk
 reads as too strong again in play, this is the decision to revisit and this is where the history
 is.
+
+---
+
+## §9 — ⛔ THE HYDRALISK IS NOT SPECIAL: sum-preservation is mean-neutral and matchup-destroying
+
+The ruling kept §6.2 — *"the resolved per-armor comparison is what makes the manual review
+cheap"* — so it is built. **`tools/balance/plan_warhead_collapse.py --impact`** now resolves the
+proposed family for every directly-armed multi-main weapon and reports what preserving the numeric
+sum does to resolved damage. Running it over the whole roster changes the picture.
+
+### §9.1 The board's "broadcast" premise does not survive measurement
+
+`BALANCE_PROGRAM_PLAN.md` §1b justifies sum-preservation from a damage-equality fingerprint:
+*"576 of 934 (61.7%) have EVERY main at the identical damage."* True — but equal damage is not
+equal behaviour. Measured on **profile** as well, over the 190 directly actor-armed multi-main
+weapons:
+
+| shape | weapons | what it means |
+|---|--:|---|
+| **BROADCAST** — same damage AND same `Versus` | **1** | the sum really is neutral |
+| **PILEUP** — same damage, DIFFERENT `Versus` | **43** | the HydraSpit shape |
+| **MIXED** — mains differ in damage too | **113** | a real multi-warhead design |
+| unmeasurable — no family, or no rung at that level | 33 | reported, not guessed |
+
+⛔ **One.** The cohort §1b's argument protects is a single weapon. Every other equal-damage
+weapon is a pileup whose mains disagree about armor.
+
+### §9.2 And the number that matters is the SPREAD, not the mean
+
+| statistic | p25 | median | p75 | max |
+|---|--:|--:|--:|--:|
+| mean effective damage after/before | 0.99 | **1.00** | 1.01 | 1.48 |
+| per-armor **spread** (max/min ratio) | 1.88 | **2.78** | 3.84 | **9.73** |
+
+**108 of 157 measurable weapons have a spread above 2×.** So the collapse is doing what a
+mean-preserving transform does: it keeps each weapon's average damage and rewrites who that weapon
+beats. `HydraSpit` was noticed because its *mean* also moved (1.48×) — it is the p100 of the wrong
+statistic. The weapons that move matchups hardest barely move their mean at all:
+
+| weapon | mean | min | max | **spread** |
+|---|--:|--:|--:|--:|
+| `JapaneseHovercraftFlakAAkWaveforce` | 1.02 | 0.25 | 2.48 | **9.73** |
+| `JapaneseHovercraftFlakWaveforce` | 1.02 | 0.25 | 2.48 | **9.73** |
+| `BallistaSingleShotAirEnergized` | 0.99 | 0.21 | 2.03 | **9.52** |
+| `tkmstrykerfirerockets` | 1.02 | 0.33 | 3.01 | **9.06** |
+| `tkmfirerockets` | 1.03 | 0.36 | 3.04 | **8.33** |
+| `SandmarineTuskTwin` | 0.97 | 0.26 | 2.09 | **8.13** |
+| *(for scale)* `HydraSpit` | 1.48 | 0.62 | 2.38 | 3.84 |
+
+⭐ **This does not overturn the ruling** — the manual per-faction pass is exactly the right
+instrument for a change of this shape, and no automated gate could rule on 108 matchup rewrites.
+What it changes is **where the review looks**: sorting by mean finds one weapon, sorting by spread
+finds the hundred that actually change games.
+
+```sh
+python tools/balance/plan_warhead_collapse.py --impact           # the whole table, spread-sorted
+python tools/balance/plan_warhead_collapse.py --impact --risky   # the 156 that move something
+```

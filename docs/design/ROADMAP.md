@@ -150,6 +150,13 @@ the counterexample: equal damage, four different ladders.
   caused) — both better than the review predicted. ⚠ The percentage half rises **x9.6** (0.45% ->
   4.32% of max HP vs `None`), because the old hand-typed twins never tracked the weapon's real
   damage; a local `PercentageScale: 1042` would restore the old floor if wanted.
+- [x] **DONE 2026-09-02** — `plan_warhead_collapse.py --impact` (+ `--risky`) adds the resolved
+  per-armor half the naming plan never had. ⛔ It changes the premise: of 190 directly-armed
+  multi-main weapons only **1** is a true broadcast (same damage AND same `Versus`), 43 are the
+  HydraSpit pileup shape and 113 are mixed. And the mean is the wrong statistic — median mean
+  ratio **1.00x** while the median per-armor SPREAD is **2.78x**, max **9.73x**, with **108
+  weapons over 2x**. Sum-preservation keeps each weapon's average and rewrites who it beats.
+  ⭐ Sort the manual faction review by SPREAD, not by mean: by mean, only HydraSpit stands out.
 - [ ] ⛔ **WATCH IN PLAY.** This fold was tried once before and REVERTED — `intentional_composites.py`
   quarantined `HydraSpit` with *"Hydralisk was not previously this strong"* and measured the same
   numbers this review did (1.6x-2.38x ground, quadrupled corrosion). The 2026-09-02 ruling
