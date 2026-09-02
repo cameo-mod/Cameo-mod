@@ -39,6 +39,14 @@ than as defects: defence buildings DO carry templates (`^BasicDefenseTemplate`,
 `^AdvancedDefenseTemplate`, `^SuperDefenseTemplate`, `^BunkerTemplate`) while production buildings
 carry none, and whether a barracks should be classified is a maintainer ruling, not a bug.
 
+⛔ TEMPLATES INHERIT TEMPLATES, AND COUNTING TRANSITIVELY CALLS THAT A DEFECT.
+`^UnarmedTransportHelicopterTemplate` declares `Inherits@Template: ^HelicopterTemplate`, and
+`^DogTemplate` declares `Inherits: ^MeleeInfantryTemplate`. A chinook that correctly names ONLY the
+transport template therefore has TWO templates in its ancestry, and a transitive count reports it as
+a multi-class defect. The first run of this audit did exactly that and reported 18 defects, of which
+**12 were this bug**. Only the MOST SPECIFIC template counts: any template that is a strict ancestor
+of another template the unit carries is dropped before counting.
+
 ⚠ THE ADD-ON EXCEPTION IS EXACTLY TWO TEMPLATES. `^EpicVehicleTemplate` and `^EpicAirUnitTemplate`
 layer ON TOP of a full class template, so a unit carrying one of them plus one full template is
 CORRECT. A unit carrying an add-on and NOTHING else is still a defect -- it has no class.
@@ -89,6 +97,17 @@ def main() -> int:
             # failure into a zero and prints the zero as a measurement.
             unreadable.append((name, f"{type(exc).__name__}: {exc}"))
 
+    def tmpl_ancestors(t):
+        """The templates a TEMPLATE itself inherits — a sub-template is not a second class."""
+        seen, stack = set(), list(parents.get(t, []))
+        while stack:
+            x = stack.pop()
+            if x in seen:
+                continue
+            seen.add(x)
+            stack.extend(parents.get(x, []))
+        return {a for a in seen if a.endswith("Template")}
+
     def ancestors(name, seen=None, depth=0):
         seen = set() if seen is None else seen
         if depth > 24:
@@ -127,6 +146,11 @@ def main() -> int:
         # reports as dead. That bug produced `^BasicDefenseTemplate` in the dead list on the
         # first run, next to the defence buildings that plainly inherit it.
         anc_tmpl = {a for a in anc if a.endswith("Template") and a not in NOT_A_CLASS}
+        # Keep only the MOST SPECIFIC: drop any template that another kept template inherits.
+        superseded = set()
+        for t in anc_tmpl:
+            superseded |= (tmpl_ancestors(t) & anc_tmpl)
+        anc_tmpl -= superseded
         used |= anc_tmpl
         is_mobile = node.child("Mobile") is not None or node.child("Aircraft") is not None
         if not is_mobile:
@@ -135,8 +159,7 @@ def main() -> int:
                 buildings_untemplated.append(name)
             continue                                   # scope question, reported separately
 
-        tmpl = {a for a in anc
-                if a.endswith("Template") and a not in NOT_A_CLASS}
+        tmpl = anc_tmpl          # already most-specific; see the header
         full = sorted(tmpl - ADD_ON)
         addons = sorted(tmpl & ADD_ON)
         cost = None
@@ -147,7 +170,6 @@ def main() -> int:
             except (TypeError, ValueError):
                 pass
 
-        used |= tmpl
         if len(full) == 1:
             ok += 1
             per_class[full[0]] += 1
@@ -221,7 +243,13 @@ def main() -> int:
         w("First 30: " + ", ".join(f"`{b}`" for b in sorted(buildings_untemplated)[:30]))
         w("")
 
-    dead = sorted(declared - used - ADD_ON)
+    # ⚠ A BASE TEMPLATE IS USED BY EVERYTHING THAT USES ITS SUB-TEMPLATES. `used` now holds only
+    # the MOST SPECIFIC template per unit, so `^HelicopterTemplate` would report dead the day every
+    # helicopter became a transport. Close it upward before subtracting.
+    used_closed = set(used)
+    for t in list(used):
+        used_closed |= tmpl_ancestors(t)
+    dead = sorted(declared - used_closed - ADD_ON)
     if dead:
         w(f"## ⛔ Dead class templates ({len(dead)})\n")
         w("Declared in the rules and inherited by **nothing**. A class whose template is dead has")

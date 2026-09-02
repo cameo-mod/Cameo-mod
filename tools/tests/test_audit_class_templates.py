@@ -72,3 +72,32 @@ class ClassTemplateAuditTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SubTemplateTest(unittest.TestCase):
+    """⛔ TEMPLATES INHERIT TEMPLATES, AND A TRANSITIVE COUNT CALLS THAT A DEFECT.
+
+    `^UnarmedTransportHelicopterTemplate` declares `Inherits@Template: ^HelicopterTemplate`, and
+    `^DogTemplate` declares `Inherits: ^MeleeInfantryTemplate`. A chinook naming ONLY the transport
+    template still has two templates in its ancestry. The first run of this audit reported 18
+    multi-class defects; 12 of them were this bug and the real number is 6. The maintainer caught it
+    by asking whether the transport template already inherits the helicopter one.
+    """
+
+    def test_only_the_most_specific_template_counts(self):
+        src = AUDIT.read_text(encoding="utf-8")
+        self.assertIn("superseded", src)
+        self.assertIn("anc_tmpl -= superseded", src)
+        self.assertIn("MOST SPECIFIC", src)
+
+    def test_the_counting_path_uses_the_most_specific_set(self):
+        """The first fix landed on the building branch only and the count stayed at 18."""
+        src = AUDIT.read_text(encoding="utf-8")
+        self.assertIn("tmpl = anc_tmpl", src)
+
+    def test_a_base_template_is_not_dead_just_because_its_subtemplate_is_used(self):
+        """⚠ `used` holds only the most specific template, so `^HelicopterTemplate` would report
+        dead the day every helicopter became a transport. Closed upward before subtracting."""
+        src = AUDIT.read_text(encoding="utf-8")
+        self.assertIn("used_closed", src)
+        self.assertIn("declared - used_closed - ADD_ON", src)

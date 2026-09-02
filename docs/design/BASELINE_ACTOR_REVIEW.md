@@ -274,21 +274,39 @@ template by itself."*
 | ⛔ more than one | **18** |
 | ⛔ add-on only, no base class | **24** |
 
-### The 18 multi-template units are two different problems
+### ⛔ CORRECTED: 6 multi-template defects, not 18
 
-Grouped by pair, because the shape of the group is the ruling:
+**Maintainer, 2026-09-02:** *"Unarmed transport helicopter already inherits the helicopter template
+right? Same thing with the dog template and the melee template?"* — **yes, and that made 12 of my
+18 "defects" my own bug.**
 
-| pair | n | reading |
-|---|--:|---|
-| `^HelicopterTemplate` + `^UnarmedTransportHelicopterTemplate` | 8 | recurs across GDI, Nod, RA1, RA2, Terran, Protoss, Zerg — a **specialisation**, almost certainly a third add-on rather than 8 defects |
-| `^DogTemplate` + `^MeleeInfantryTemplate` | 4 | same shape: `^DogTemplate` refines melee infantry |
-| `^HeavyInfantryTemplate` + `^HeroInfantryTemplate` | 2 | `cabal_cyborgcommando`, `…v2` — genuine ambiguity |
-| `^ScoutInfantryTemplate` + `^SniperInfantryTemplate` | 1 | `forgotten_mutantsniper` |
-| `^HeavyInfantryTemplate` + `^SniperInfantryTemplate` | 1 | ⛔ **`japan_archermaiden` — the `archer` ANCHOR, and signed** |
-| `^ScoutInfantryTemplate` + `^SpecialForcesInfantryTemplate` | 1 | ⛔ **`japan_imperialscoutsman` — the `special_forces` ANCHOR, and signed** |
-| `^HarvesterTemplate` + `^MeleeInfantryTemplate` | 1 | `wc2_humans_militiapeasant` — a peasant that fights; genuinely dual-role |
+```
+^UnarmedTransportHelicopterTemplate:
+    Inherits@Template: ^HelicopterTemplate        <-- a SUB-template
 
-⛔ **Two of the eight signed anchors are themselves in two classes.**
+td_gdi_chinooktransport:
+    Inherits: ^Helicopter                          <-- a different template entirely
+    Inherits@Template: ^UnarmedTransportHelicopterTemplate   <-- names ONE class, correctly
+```
+
+The chinook is right. My audit counted its ancestry **transitively**, so the sub-template plus its
+own parent read as two classes. **Only the most specific template counts**: any template that
+another kept template inherits is dropped before counting. Fixed, with three regression tests.
+
+**The six that survive are real:**
+
+| pair | actor | cost |
+|---|---|--:|
+| `^HeavyInfantryTemplate` + `^HeroInfantryTemplate` | `cabal_cyborgcommando` | 5,000 |
+| | `cabal_cyborgcommandov2` | 10,000 |
+| `^HeavyInfantryTemplate` + `^SniperInfantryTemplate` | ⛔ `japan_archermaiden` — the signed `archer` anchor | 500 |
+| `^ScoutInfantryTemplate` + `^SpecialForcesInfantryTemplate` | ⛔ `japan_imperialscoutsman` — the signed `special_forces` anchor | 200 |
+| `^ScoutInfantryTemplate` + `^SniperInfantryTemplate` | `forgotten_mutantsniper` | 650 |
+| `^HarvesterTemplate` + `^MeleeInfantryTemplate` | `wc2_humans_militiapeasant` | 300 |
+
+⭐ Two of the six are signed class anchors, and `japan_archermaiden` is resolved by class 1.
+
+⚠ **The corrected headline: 881 of 978 units (90%) already carry exactly one class template.**
 
 ### ⛔ Five DEAD class templates
 
