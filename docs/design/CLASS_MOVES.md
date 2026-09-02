@@ -108,3 +108,102 @@ as this one and roughly 20 units in size, and it empties most of the grab-bag at
 3. **The tie-break rule** for stat-identical upgrade pairs (above).
 4. **`wc2_orcs_kodobeast`** — which class does a mounted axe-thrower belong to?
 
+
+---
+
+## 2. The unclassified 91 — grouped for approval (A3 + A4)
+
+Every **buildable, mobile** actor carrying no full class template. 67 have nothing at all; 24 carry
+only an epic add-on. Buildings are out of scope (§4.5 of `BASELINE_ACTOR_REVIEW.md`), upgrades are
+not units.
+
+⭐ **Groups are ordered by confidence.** Approve the top ones outright; the bottom ones are
+genuinely ambiguous and I flag why.
+
+### 2.1 ⭐ Engineers → `^SupportInfantryTemplate` *(fills a DEAD template)* — 11 units, high confidence
+
+All share `DefuseKit, LeechDisinfect`:
+`engineer` · `ra1_engineer` · `ra2_allies_engineer` · `ra2_soviets_engineer` ·
+`asianalliance_engineer` · `futuretech_engineer` · `latinsyndicate_engineer` ·
+`steelconsortium_engineer` · `tkm_engineer` · `yuri_engineer` · `E6` — all 500cr / 5,000 HP.
+
+⭐ **And this reunites them with four engineers currently mis-filed in `^SniperInfantryTemplate`**
+(`TSENGINEER`, `forgotten_engineer`, `ts_gdi_engineer`, `ts_nod_engineer` — found in §1). **15
+engineers in one class**, and one of the five dead templates is filled by its obvious tenants.
+
+### 2.2 ⭐ Support vehicles → `^SupportVehicleTemplate` — 6 units, high confidence
+
+| unit | cost | role |
+|---|--:|---|
+| `ra1_allies_minelayer` | 800 | minelayer |
+| `ts_nod_mobilerepairvehicle` | 1,000 | repair |
+| `ts_gdi_mobilesensorarray` | 1,100 | detection |
+| `ts_nod_mobilestealthgenerator` | 1,500 | cloak field |
+| `ra1_allies_mobilegapgenerator` | 5,000 | shroud — ⚠ armed with `dummytargeting` (C2) |
+| `ra1_allies_mobileradarjammer` | 5,000 | jammer |
+
+### 2.3 ⭐ Air transports → `^UnarmedTransportHelicopterTemplate` — 7 units, high confidence
+
+`forgotten_chinook` 700 · `forgotten_carryall` 750 · `ts_gdi_carryall` 750 · `carryall` 2,000 ·
+`carryall.paradrop` 5,000 · `carryall.reinforce` 5,000 · `wc2_orc_eye_of_kilrogg` 2,000 (unarmed scout)
+
+⚠ **Two ARMED carryalls do not belong here**: `ordos_advancedcarryall` (2,000) and
+`carryall_reinforce.ordos` (5,000) carry `d2kCarryallChainGun` — an *armed* transport helicopter, so
+`^HelicopterTemplate` instead.
+
+### 2.4 Ground and naval transports — 10 units, ⚠ needs a class that may not exist
+
+`CNCRSS` 500 · `LST` 500 · `ra1_navaltransport` 500 · `ra2lcrf` 750 · `ra2sapc` 750 · `yrhovr` 750 ·
+`ts_gdi_hover` 1,200 · `ts_nod_hover` 1,200 · `cabal_lcraft` 1,200 ·
+`wc2_human_transport` / `wc2_orc_transport` 1,000
+
+⛔ **There is no ground- or naval-transport template.** `^SupportVehicleTemplate` would take them,
+but a landing craft is not a support vehicle. This group needs a ruling: new template, or fold into
+support?
+
+### 2.5 Demolition trucks — 4 units, ⚠ no class exists
+
+`asianalliance_oiltruck` 1,000 · `latinsyndicate_demolitiontruck` 1,500 ·
+`ra1_soviets_nukedemotruck` 1,500 · `latinsyndicate_nuketruck` 3,000 *(epic)* — all
+`DemoTruckTargeting`.
+
+⛔ A suicide unit prices unlike anything else: its damage is one-shot and it dies doing it. Needs its
+own template, or an explicit exclusion.
+
+### 2.6 The 24 epic-only → base class from role (A4)
+
+Each keeps `^EpicVehicleTemplate` as the add-on and gains a base class. Proposed:
+
+| base class | units |
+|---|---|
+| `^HighTechTankTemplate` | `forgotten_chemicalmammothtank`, `forgotten_experimentalmammothtank`, `ts_gdi_mammothprototype`, `ts_gdi_mammothmkii`, `ra1_soviets_monstertank`, `futuretech_futuretank`, `tkm_sandmarine`, `tkm_bigshiee`, `naxis_ratte`, `japan_exorcistoitank` |
+| `^MainBattleTankTemplate` | `tkm_t30`, `schwarzermond_dalek`, `ra1_allies_chronotank`, `naxis_nokana` |
+| `^ArtilleryTankTemplate` | `latinsyndicate_topolm`, `zerg_hermit` |
+| `^LineBreakerTemplate` | `japan_shogunexecutioner`, `cabal_coredefender`, `protoss_idol` |
+| `^SupportVehicleTemplate` | `ixian_ixprojector` (EMP), `td_gdi_defenserig`, `forgotten_nomadbarracks` |
+| *(2.5 demolition)* | `latinsyndicate_nuketruck` |
+| ⚠ unresolved | `ra1_soviets_madtank` — a suicide-by-shockwave epic; 2.5 or its own thing |
+
+### 2.7 ⚠ Not units — propose A7 separation, not a class
+
+| group | units | why |
+|---|---|---|
+| critters | `wc2_critter_boar`, `_helboar`, `_seal`, `_sheep`, `sc_zerg_larva` | ambient/critter fauna, 50–100cr, unarmed |
+| markers | `eden_impulseitems`, `_2`, `_3` | **HP 1**, unarmed, 300–1,000cr — not units |
+| mobile buildings | `japan_corepowerplant` · `corebarracks` · `coreservicedepot` · `coreairfield` · `corewarfactory` · `coreradar` · `corerefinery` · `coretechcenter` (8) | Japan's mobile-base system — buildings that move; pricing them as vehicles distorts any class |
+| | `PLYMOUTH_CONVEC_STRUCTURE_FACTORY` 5,000 | same shape, Outpost-2 import |
+
+### 2.8 ⚠ Genuinely ambiguous — one at a time
+
+| unit | cost | evidence | my read |
+|---|--:|---|---|
+| `tsldrone` | 150 | `TSLimpetBomb_EMP`, 11,500 HP | limpet drone — `^ScoutVehicleTemplate`? |
+| `tsprobe` | 600 | air, `TSHSeekerTargeting` | air scout — no air-scout class exists |
+| `tsaegis` | 1,200 | `TSAegisMissile`, 80,000 HP | `^AntiAirVehicleTemplate` |
+| `RAPT` | 1,000 | `claw`, 100,000 HP | a melee vehicle — no class fits |
+| `devastator` | 3,000 | `DevBullet`, 550,000 HP | D2k Devastator → `^HighTechTankTemplate` |
+| `ra1_soviets_gorynychtank` | 1,300 | `BigFlamer`, 150,000 HP | `^LineBreakerTemplate` (flame) |
+| `wc2_neutral_daemon` | 2,000 | air, `wc2daemonFire` | air attacker → `^FighterTemplate`? |
+| `ordos_saboteur` | 300 | `GenericC4` | 2.1 engineers, or its own saboteur role |
+
+⚠ **`ra1_allies_chronotank` also appears in §1's multi-template list** — resolve there first.
