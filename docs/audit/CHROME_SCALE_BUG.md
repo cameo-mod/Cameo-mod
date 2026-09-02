@@ -302,6 +302,18 @@ exactly 3.00 across every combination, and the 4x test is `dpiScale > 3`. It nee
 `min(physW/1024, physH/720) > 3` **and** an OS scale above 150% — a 5K/6K/8K panel, a 4K 16:10
 panel at 250%, or a 3456x2234-class Retina at 175%.
 
+⭐ **THE TRIAGE RULE FOR THE NEXT REPORT.** Because `NativeWindowSize` is logical, the reachable
+`dpiScale` is bounded by the physical panel alone — which turns "is this report even this bug?"
+into one check on the numbers a reporter can read off their own display:
+
+> **If `min(width/1024, height/720) <= 2`, that machine cannot load the 3x sheet at ANY setting,
+> so the report is a different bug.**
+
+⛔ **This clears the common ultrawides.** 2560x1080 reaches 1.50 and 3440x1440 reaches exactly
+2.00 — and the test is `> 2` — so neither ever touches the malformed sheet. An ultrawide report of
+broken flags is a separate layout problem and needs its own screenshot. Same for 2560x1440.
+`python tools/art/chrome_density_reach.py 3440x1440` answers it for any panel.
+
 ⭐ **Two escape hatches make it testable without the hardware**, which is how to decide this
 empirically rather than by argument: `OPENRA_DISPLAY_SCALE` forces `nativeScale` on Windows and
 Linux, and `Graphics.UIScale` written straight into `settings.yaml` is **not** clamped to the
