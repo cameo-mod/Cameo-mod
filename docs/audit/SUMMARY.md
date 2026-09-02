@@ -111,6 +111,7 @@ The general per-actor reachability audit is still queued.
 | E | elite / rank wiring | 197 missing elite armaments · 21 ungated ELITE blocks · 52 decoration issues | `missing_elite.md`, `elite_gating.md`, `rank_decoration.md` |
 | Q | build order | prerequisite-order violations across 841 buildables | `buildable_order.md` |
 | D | duplicate keys | **88 D1 dropped inherits** · 439 D2 merged duplicates | `duplicate_keys.md` |
+| C | infantry class bands (FORMULA_V2 §6b) | 29 of 256 units outside their own class's band · 6 with two class templates | `infantry_class_bands.md` (advisory) |
 
 ## Green — and must stay green
 

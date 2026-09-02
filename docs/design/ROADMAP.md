@@ -105,6 +105,15 @@ Unit classification: [`UNIT_CLASSIFICATION_PROGRAM.md`](UNIT_CLASSIFICATION_PROG
 — twelve maintainer rulings, three workstreams. ⭐ Classifying every buildable unit
 (workstream A) BLOCKS the KeepsDistance rework and the weapon splits.
 
+Class moves: [`CLASS_MOVES.md`](CLASS_MOVES.md) — one section per class, each a proposal until
+the maintainer approves it. ⭐ §6 is the whole infantry roster measured against `FORMULA_V2.md`
+§6b's range bands by the new `tools/audit/audit_infantry_class_bands.py` (advisory in
+`run_all.sh`): **256 units, 29 outside their own class's band**, plus six units carrying two
+class templates — one of which is §6b's own special-forces baseline. ⛔ Three things need a
+maintainer ruling before any of it can be applied: §6b's self-contradiction at exactly 5500
+(§6.2), the units whose 2026-07-20 verdict and measured range name different classes (§6.1), and
+the **bands for the nine TBD classes** (§6.4), without which §6b's contiguity promise cannot hold.
+
 Baseline actors: [`BASELINE_ACTOR_REVIEW.md`](BASELINE_ACTOR_REVIEW.md) — the binding spec
 for re-selecting every class anchor (cheapest member, maintainer-confirmed) and repricing
 every member on the coarse-first 50/20/10 grid. ⛔ Five orphan classes await a ruling in §4.

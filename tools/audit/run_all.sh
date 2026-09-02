@@ -130,12 +130,20 @@ done
 # approved yet. MOVE IT INTO THE BLOCKING LOOP once anchors are signed and a first production
 # pass has brought the roster inside the band.
 #
+# `infantry_class_bands` measures FORMULA_V2 §6b's contiguous range bands against the tree:
+# the band DEFINES class membership, so a scout whose weapon reaches 6000 is in the wrong class.
+# Advisory because every finding is one of two maintainer calls — re-class the unit, or move its
+# range, which is a priced change that must go through apply_balance and the boot gate. It also
+# judges ONLY the four classes §6b gives a band; the nine TBD classes are measured and reported
+# without a verdict, so the count will move as those bands get ruled. MOVE IT INTO THE BLOCKING
+# LOOP once the four banded classes read clean.
+#
 # `counter_matrix` compares docs/balance/counter_matrix.yaml (design intent) with
 # what the tree does. Advisory permanently: every finding is a design question —
 # reassign a family, retag a class, or change the intent — and never a build break.
 for a in code_duplication test_coverage recent_changes error_handling security \
          support_powers engine_constraints class_redundancy ifv_conditions \
-         counter_matrix; do
+         infantry_class_bands counter_matrix; do
   echo "== audit_$a (advisory)"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"

@@ -72,6 +72,10 @@ class ParsesTheRealShellScript(unittest.TestCase):
         # Intent-vs-implementation report. Advisory PERMANENTLY — a mismatch may be
         # wrong implementation OR wrong intent, and only a human decides which.
         "counter_matrix",
+        # FORMULA_V2 §6b's range bands: a unit outside its own class's band is either
+        # re-classed or re-ranged, and re-ranging is a priced change needing the boot
+        # gate. Blocking once the four banded classes read clean.
+        "infantry_class_bands",
     }
 
     def test_the_advisory_list_is_the_scheduled_family(self):

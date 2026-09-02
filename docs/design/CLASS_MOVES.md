@@ -433,3 +433,162 @@ Measured against the band and the air rule. **The ledger tag was right in all fi
 2. **`terran_ghost` (8,428) and `terran_specter` (7,922) are ABOVE the band**, yet the 2026-07-20
    roster verdict names ghost/specter as special forces. Two parts of the law disagree: either the
    verdict outranks the band, or their ranges must come down into it. ⚠ Ruling needed.
+
+---
+
+## 6. ⭐ The whole infantry roster, measured against §6b — 256 units, 29 out of band
+
+**New tool: `tools/audit/audit_infantry_class_bands.py`** (advisory in `run_all.sh`). §5 checked
+five units by hand. This is the same check over every buildable infantry unit in the mod, and it
+turns "let's check everything one by one where there are still conflicts" into a list rather than
+a search.
+
+| class | band | members | in band | out of band |
+|---|---|--:|--:|--:|
+| melee (incl. `^DogTemplate`) | [1250, 2500) | 45 | 29 | **16** |
+| closecombat | [2500, 4500) | 4 | 3 | **1** |
+| scout | [4500, 5500) | 34 | 21 | **11** |
+| special forces | [5500, 6500] | 3 | 2 | **1** |
+
+Nine further infantry classes have a **TBD** band in §6b, so nothing in them can be out of band.
+They are measured without a verdict in §6.4.
+
+### 6.0 ⛔ The finding that was nearly invisible: the special-forces BASELINE has two classes
+
+`japan_imperialscoutsman` is §6b's special-forces baseline (`@ 200 — LIVE`). It declares
+`Inherits@Template: ^SpecialForcesInfantryTemplate` **and** reaches `^ScoutInfantryTemplate`
+through `Inherits: ^RA1AlliesRifleInfantry`. Two classes means no single band to check, so the
+first draft of the audit dropped it — silently. **The anchor of a class was invisible to the
+audit of that class.** Six units are in this state:
+
+| unit | class templates |
+|---|---|
+| `japan_imperialscoutsman` | `^ScoutInfantryTemplate` + `^SpecialForcesInfantryTemplate` |
+| `cabal_cyborgcommando` | `^HeavyInfantryTemplate` + `^HeroInfantryTemplate` |
+| `cabal_cyborgcommandov2` | `^HeavyInfantryTemplate` + `^HeroInfantryTemplate` |
+| `forgotten_mutantsniper` | `^ScoutInfantryTemplate` + `^SniperInfantryTemplate` |
+| `japan_archermaiden` | `^HeavyInfantryTemplate` + `^SniperInfantryTemplate` |
+| `wc2_humans_militiapeasant` | `^HarvesterTemplate` + `^MeleeInfantryTemplate` |
+
+⚠ `japan_archermaiden` is one of the eight §1 archers, so its fix is already proposed there
+(`^ArcherInfantryTemplate`, dropping the other two). The other five need a ruling.
+
+### 6.1 ⛔ Out of their own class's band — 29 units
+
+The band **defines** membership, so each of these has exactly two legal fixes: **re-class the
+unit**, or **move its range into its class's band**. The second is a priced change and must go
+through `apply_balance`, so the cheap fix is almost always the first. My reading is in the last
+column and is a PROPOSAL, not a decision.
+
+**Melee holding units that are not melee (16).** Nine are flame/spray/shotgun troops sitting one
+band too low — they are closecombat by range and by weapon type, which is exactly what
+closecombat means (§6b: "shotgun/SMG", 2500 spray → 4500 long shotgun):
+
+| unit | range | lands in | proposed |
+|---|--:|---|---|
+| `futuretech_blackwidow` | 9,000 | above | sniper family — not melee at any reading |
+| `ts_nod_shadowteam` | 8,000 | above | sniper family |
+| `ra2_allies_seal` | 6,386 | special forces | §6b verdict already says **navy seal → special forces (from sniper)** |
+| `tkm_spetsnaz` | 5,750 | special forces | special forces (hits no air — see §6.3) |
+| `terran_harakan` | 4,185 | closecombat | closecombat |
+| `ts_gdi_riottrooper` | 4,002 | closecombat | closecombat |
+| `heavy_inf.ixian` | 3,800 | closecombat | closecombat (hits air) |
+| `td_nod_chemicalwarrior` | 3,414 | closecombat | closecombat |
+| `terran_firebat` | 3,400 | closecombat | closecombat |
+| `tkm_thermonaut` | 3,204 | closecombat | closecombat |
+| `forgotten_chemsprayinfantry` | 3,183 | closecombat | closecombat |
+| `forgotten_runnershotgal` | 3,112 | closecombat | closecombat |
+| `futuretech_enforcer` | 3,000 | closecombat | §6b verdict already says **futuretech enforcer → closecombat** |
+| `ra1_soviets_cyberdog` | 2,500 | closecombat | ⚠ a DOG at exactly 2500 — the boundary rule puts it in closecombat, but a dog that is not melee is a design question, not an arithmetic one |
+| `SCBROODLING` | 1,200 | below | round UP to 1250 (§6b: "sub-1250 outliers round UP") |
+| `forgotten_zombiemutant` | 1,127 | below | §6b names this exact unit as the round-up case |
+
+**Scout holding units that are not scouts (11):**
+
+| unit | range | lands in | proposed |
+|---|--:|---|---|
+| `zerg_defiler` | 9,000 | above | §6b verdict: **casters → support class** |
+| `yuri_clone` | 7,000 | above | needs a ruling — no verdict covers it |
+| `naxis_slaveoverseer` | 5,621 | special forces | ⚠ §6b verdict says **naxi slaveoverseer → scout (lose air)** — so the RANGE moves, not the class |
+| `undead.nax` | 5,621 | special forces | same weapon as the above; also a naming-rule defect (`.` not `_`) |
+| `ra1_allies_rifleinfantry` | 5,500 | ⚠ **the boundary** | see §6.2 |
+| `TSE1` / `ts_gdi_lightinfantry` / `ts_nod_lightinfantry` | 4,062 | closecombat | ⚠ these are the TS riflemen — rifles are the SCOUT archetype, so the class is right and the RANGE is 438 short of the band |
+| `zerg_spithid` | 3,855 | closecombat | §6b verdict says **zerg spithid → scout (lose air)** — again the range moves |
+| `ra1_allies_raspy` | 2,560 | closecombat | needs a ruling |
+| `naxis_coneheadsknights` | 1,555 | melee | ⚠ §6b verdict says **coneheads knight → special forces**, and it measures 1,555 — a 4,000-point gap. One of the two is wrong. |
+
+**Closecombat (1):** `naxis_sssoldier` at exactly 4,500 lands in scout. §6b's closecombat line
+explicitly names it as a T3 member of that class, so this is the boundary rule biting a unit the
+law places by name — the range should come down one step, not the class change.
+
+**Special forces (1):** `tkm_trooper` at 5,191 lands in scout — and §6b's verdict says
+**"→ scout (lose air): … tkm trooper"**. A move that was ruled 2026-07-20 and never applied.
+
+### 6.2 ⛔ §6b contradicts itself at exactly 5500, and one unit sits on it
+
+§6b's table writes scout as the CLOSED interval **[4500, 5500]** and special forces as
+**"5500–6500"**, so 5500 belongs to both. Its prose settles it the other way — *"Boundary rule: a
+weapon at exactly 2500 is closecombat; exactly 4500 is scout (half-open bands)"* — so the audit
+reads every band half-open and **`ra1_allies_rifleinfantry` @ 5,500 becomes special forces**.
+
+That is almost certainly not intended: it is the RA1 Allied rifleman, the archetypal scout, and it
+cannot hit air. ⚠ **Needs a ruling** — either §6b's table is corrected to `[4500, 5500)` and this
+unit's range drops one step, or the boundary is closed at the top and the prose is corrected.
+Whichever way, one of the two statements in §6b has to go.
+
+### 6.3 ⚠ Air capability outside special forces — 19 units
+
+§6b: *"Air is the special-forces class trait, baked into the baseline — hitting air is NEVER a
+per-unit special."* Sixteen of the nineteen are scouts, and the 2026-07-20 sweep already ruled
+"→ scout (lose air)" for several of them by name (`ra2_soviets_conscript`,
+`asianalliance_asianmilitia`, `latinsyndicate_latinmilitia`, `naxis_slaveoverseer`,
+`zerg_spithid`, `tkm_marine`):
+
+`futuretech_enforcer` · `heavy_inf.ixian` · `ra2_soviets_crazyivan` (melee) —
+`TSE1` · `asianalliance_asianmilitia` · `ixian_lightinfantry` · `latinsyndicate_latinmilitia` ·
+`light_inf` · `naxis_slaveoverseer` · `ordos_lightinfantry` · `ra2_allies_gi` ·
+`ra2_soviets_conscript` · `ra2e2.black` · `tkm_marine` · `ts_gdi_lightinfantry` ·
+`ts_nod_lightinfantry` · `undead.nax` · `zerg_defiler` · `zerg_spithid` (scout)
+
+⚠ The D2k light-infantry ladder (`light_inf`, `ordos_lightinfantry`, `ixian_lightinfantry`) is
+named in §6b's own price ladder as scout class, and all three hit air. That is the largest block
+here and it needs one ruling, not three.
+
+⚠ `ra2_soviets_crazyivan` is melee-classed and air-capable; §6b's verdict says
+**"crazy ivan (bomb-attach) → special forces"**. Its 2,000 range makes it melee by the band. Same
+shape of conflict as `naxis_coneheadsknights`.
+
+### 6.4 The unapplied split, in numbers — where the SF/rocket-trooper/archer intake is
+
+The nine TBD classes, by where each member's range LANDS. This is §0's dead-template story as a
+measurement: `^AntiTankAntiAirInfantryTemplate` and `^HeavyInfantryTemplate` are holding 43 units
+that land in the special-forces band, while `^SpecialForcesInfantryTemplate` has **3 members**.
+
+| class (template) | members | melee | closecombat | scout | special forces | above | below | no range |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|
+| `^AntiTankAntiAirInfantryTemplate` | 44 | 0 | 1 | 1 | **25** | 17 | 0 | 0 |
+| `^HeavyInfantryTemplate` | 46 | 0 | 5 | 14 | **18** | 8 | 0 | 1 |
+| `^HeroInfantryTemplate` | 29 | 5 | 1 | 2 | 4 | 16 | 0 | 1 |
+| `^SniperInfantryTemplate` | 22 | 0 | 5 | 1 | 2 | 14 | 0 | 0 |
+| `^FlyingInfantryTemplate` | 11 | 0 | 0 | 5 | 3 | 2 | 1 | 0 |
+| `^GrenadierInfantryTemplate` | 7 | 0 | 0 | 0 | 7 | 0 | 0 | 0 |
+| `^MortarInfantryTemplate` | 5 | 0 | 0 | 0 | 0 | 5 | 0 | 0 |
+| `^MedicTemplate` | 3 | 0 | 0 | 0 | 1 | 2 | 0 | 0 |
+| `^MechanicTemplate` | 3 | 0 | 0 | 0 | 0 | 3 | 0 | 0 |
+
+⚠ **This table does NOT say those 43 units are special forces.** The 17 `AntiTankAntiAir` units
+ABOVE the band are the rocket-trooper/archer intake the 2026-07-21 split was designed for, and a
+grenadier landing in the SF band means grenadier's own band, once ruled, will have to overlap
+5500–6500 or those seven move. **The bands for the nine TBD classes are the blocking decision**,
+and §6b's contiguity promise ("no unit can ever fall between classes again") cannot hold while
+nine of thirteen classes have none.
+
+### 6.5 What this sweep deliberately does NOT do
+
+* It does not price anything. Every range change here is a balance number and belongs to
+  `apply_balance --confirm` with a maintainer order.
+* It does not touch yaml. This container has no `engine/` build, so no boot gate is possible;
+  the template moves ship as a `docs/patches/` patch when they are approved (LESSONS_LEARNED,
+  *"A boot-less environment can still land engine work"*).
+* It does not judge the nine TBD classes. A band nobody has ruled is not a band this audit gets
+  to invent.
