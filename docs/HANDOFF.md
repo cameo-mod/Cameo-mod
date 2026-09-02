@@ -216,8 +216,16 @@ Anything past that is v2.
 
 ### THE ONE NUMBER
 
-`class_anchors_signed_off`, currently **0 of 27** (see §3.0p). If a task does not raise it or
+`class_anchors_signed_off`, currently **8 of 27** — measured 2026-09-02 straight out of
+`docs/balance/class_anchors.json`: `archer`, `closecombat`, `flying_infantry`, `grenadier`,
+`heavy_sniper`, `missile_vehicle`, `mortar`, `special_forces`. If a task does not raise it or
 unblock something that does, it is not on the critical path.
+
+⚠ **This section said "0 of 27" until 2026-09-02, and that had been wrong since `0ff427712`.**
+The 0 was true of §3.0p's reverted self-signing; the maintainer's *"sign the 8 and apply balance"*
+order made it 8 the same day, and §3.0q line 1494 has said 8 ever since. Two numbers for one fact
+in one document, and the one at the top — the one a reader is told to steer by — was the stale one.
+The artifact wins: `class_anchors.json` is the number.
 
 ### DO NOT WORK ON YET
 
@@ -248,14 +256,27 @@ the first task.**
 ### THE ROAD, in order
 
 ```
-1. fix the eff-DPS reading bug            (§3.0g — blocks everything below)
-2. outlier pass on the close classes      (tank_destroyer, closecombat, mbt)
-3. sign the classes that pass
+1. fix the eff-DPS reading bug            ✅ DONE (§3.0g)
+2. outlier pass on the close classes      ✅ DONE — 8 classes met the <=1 bar
+3. sign the classes that pass             ✅ DONE — 8 of 27, by maintainer order 0ff427712
+   3b. 3-way split the members            ✅ ESSENTIALLY DONE — 132 members -> 6, 0 signed
+                                             classes behind the gate (§3.0x banner)
+>> 2c. RESTAT THE ANCHOR ACTORS to their ruled spec   <-- THE LIVE BLOCKER, 21 of 26 off
 4. targets for one pilot class, end to end
 5. workbook + dry-run proposal
 6. apply --confirm + re-extract + drift + audits + BOOT GATE
 7. expand from one class to the rest — coverage work, not design work
 ```
+
+⛔ **Step 2c is not a step 4 detail; it is upstream of every target.** `price = cost0 * (h+r+d)/3`
+makes the anchor actor the class zero point, and 21 of 26 anchors do not match the spec the
+decisions log locked for them. A class priced against a zero point that is 2x off is wrong by 2x
+in a way the |Δ| <= 1 reporting cannot show, because the error lives in the denominator that
+reporting is relative to.
+
+⚠ **And it is a balance-number change**, so it runs through the pipeline like any other: propose,
+review, `apply_balance --confirm` **on a maintainer order**, re-extract, drift, audits, boot gate.
+The proposal is the part that needs no order — produce it first and decide from it.
 
 Step 4 is the psychological finish line: one class taken from raw yaml to an
 explainable proposed target. After that, scaling is coverage.
@@ -1095,6 +1116,37 @@ VEHICLE self-heal (`^VehicleBuffs`, Delay 1 / DamageCooldown 10) to the INFANTRY
 self-heal change is half the ruling.
 
 ### 3.0x — ⛔ THE 3-WAY SPLIT GATE, MEASURED PER CLASS (2026-08-30) — and 5 of the 8 signed classes are behind it
+
+> ## ⭐ SUPERSEDED 2026-09-02 — THIS GATE IS ESSENTIALLY CLEARED, AND THE BLOCKER HAS MOVED
+>
+> Re-measured with the same tool (`python tools/balance/anchor_readiness.py`) on the merged tree:
+>
+> | | 2026-08-30 (below) | **2026-09-02** |
+> |---|--:|--:|
+> | class-tagged members still firing 2+ main warheads | 132 | **6** |
+> | classes owing nothing, structurally ready to price | 3 | **18** |
+> | **signed classes behind the gate** | **5 of 8** | **0 of 8** ⭐ |
+>
+> All that remains is `mbt` 3, and one member each in `tank_destroyer`, `light_tank`,
+> `line_breaker`. The `mbt` lever this section calls "the largest single lever on the whole
+> board" — 21 of 42 members, `ptnk.asian` at 8 mains — is down to 3 members.
+>
+> ⛔ **The live blocker is now step 2c, not weapon structure.** `price = cost0 * (h+r+d)/3`, so
+> the anchor actor IS the class zero point — and the anchors have not been restated to their
+> ruled spec:
+>
+> * anchor actor off its ruled stats: **21 of 26**
+> * fitted `cost0` != `spec.cost0`: **13 of 26**
+> * satisfying the baseline identity `o0 = p0 = q0 = cost0`: **1 of 26** (`mbt`)
+>
+> Worst offenders are not marginal: `line_breaker` at **0.50x** (`td_nod_flametank` hp 100 000
+> against a ruled 750 000), `tank_destroyer` **2.17x**, `artillery_tank` **1.71x**. Pricing a
+> class against a zero point that is off by 2x prices everything in it wrong, and no amount of
+> ≤1 |Δ| reporting reveals it — the error is in the denominator.
+>
+> ⚠ Everything below is kept as the record of how the gate was measured and why §0a ordered the
+> work. Read it for method; do not read its numbers as current.
+
 
 **Maintainer:** *"if a unit doesn't follow the 3-way split yet then you need to apply that thing
 first."* That is **§0a of `BALANCE_PROGRAM_PLAN.md`**, which is binding and is the maintainer's own

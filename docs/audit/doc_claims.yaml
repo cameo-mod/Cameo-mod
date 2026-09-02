@@ -974,6 +974,29 @@ claims:
       print(sum(1 for k, v in d.items()
                 if not k.startswith('_') and v.get('signed_off')))
 
+  - id: anchors_off_ruled_spec
+    value: 21
+    tolerance: 0
+    what: >
+      Class anchors whose ACTOR in yaml does not match the stats the decisions log locked for it
+      (application-law step 2c). ⛔ THIS IS THE LIVE BLOCKER ON THE FIRST PRODUCTION BALANCE RUN,
+      pinned 2026-09-02 because the number it replaced rotted for three days: HANDOFF named the
+      3-way split gate as the blocker at 132 members owing a split, and a re-measure found 6 —
+      the gate had been cleared by other people's merged work while the summary still said it was
+      the wall. `price = cost0 * (h+r+d)/3` makes the anchor the class zero point, so an anchor
+      that is off spec prices its whole class against a wrong denominator, and the |Δ| <= 1
+      reporting cannot show it because it is relative to that same denominator. Worst: line_breaker
+      0.50x (td_nod_flametank hp 100000 vs a ruled 750000), tank_destroyer 2.17x,
+      artillery_tank 1.71x. Only 1 of 26 (`mbt`) satisfies the baseline identity o0=p0=q0=cost0.
+      **This number goes DOWN as step 2c runs; re-pin it, and do not let it rot.**
+    docs: [docs/HANDOFF.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import re, subprocess, sys
+      out = subprocess.run([sys.executable, 'tools/balance/anchor_readiness.py'],
+                           capture_output=True, text=True).stdout
+      m = re.search(r'anchor actor off its ruled stats: \*\*(\d+) of \d+\*\*', out)
+      print(m.group(1) if m else -1)
+
   - id: class_anchors_without_members
     value: 5
     tolerance: 0
