@@ -17,10 +17,9 @@ derives the rest by uniform resize, which is correct BY CONSTRUCTION — a sheet
 proportional, so scaling the whole canvas scales every icon's position and size together. There is
 no offset to get wrong and no icon that can drift.
 
-⚠ IT DOES NOT DECIDE THE MASTER'S SCALE. If the master is 4x, `--write` emits 1x/2x/3x from it. The
-4x file itself is only USABLE in game with the `Image4x` engine change
-(`docs/patches/ENGINE_image4x_chromeprovider.patch`); without it the engine's ladder stops at 3x and
-the generated 3x sheet is what ships. Both are fine — this tool serves either.
+⚠ THE MASTER IS NOT A CHROME VARIANT. If the master is 4x, `--write` emits 1x/2x/3x from it. The
+engine's ladder stops at 3x, so the generated 3x sheet is what ships; `flags_4x.png` is the editable
+art source and is intentionally not declared in chrome.yaml.
 
 ⚠ RESAMPLING. Pillow (LANCZOS) is used when importable, otherwise a pure-Python area-average box
 filter, and the tool PRINTS which. Both are correct; Pillow is sharper and much faster. 4x -> 2x and

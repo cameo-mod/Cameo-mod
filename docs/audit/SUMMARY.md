@@ -83,8 +83,8 @@ INCOME"; the count is pinned as `bot_insurance_unreachable_difficulties` in `doc
 ⭐ **Closed for this ladder, still open in general.** `audit_bot_insurance.py` (new, in
 `run_all.sh`) evaluates each rung's `RequiresCondition` per player kind rather than counting
 condition names, and enforces two laws: rung count may never decrease as difficulty rises, and
-no difficulty may reach zero rungs. **It is RED on master** until
-one of the two prepared fixes in `docs/patches/` is boot-gated and landed.
+no difficulty may reach zero rungs. The committed `DynamicBotInsurance` replacement instead
+checks that every loaded bot type is covered by its `Difficulties` list.
 The general per-actor reachability audit is still queued.
 
 ## Counts by bug class
@@ -155,7 +155,7 @@ the claim updated with every document under its `docs:` list in the same commit.
 | check | state | what to do |
 |---|---|---|
 | **level ladder** | **WARN — 9 broken, at ratchet 9** (7 inverted, 2 flat) | no longer failing: `a9f31258` fixed `Demolition`. Still blocked on a maintainer ruling. Full measured table + the diagnosis: [`../design/ROADMAP.md`](../design/ROADMAP.md) "BROKEN LADDERS". These are balance numbers: pipeline only, and **never raise the ratchet**. |
-| **bot insurance ladder** | **FAIL — `medium` reaches 0 rungs** | `audit_bot_insurance.py`. Two prepared fixes in `docs/patches/`: `..._01_fix_medium_difficulty.patch` (boot gate only) or `..._03_single_dynamic_trait.patch` (the `DynamicBotInsurance` rewrite; needs a C# build). Either takes it green. |
+| **bot insurance** | **PASS — every loaded bot type is insured or deliberately excluded** | `audit_bot_insurance.py` validates the committed `DynamicBotInsurance` coverage list. |
 | duplicate keys D1 | 88 dropped inherits | each one silently drops a template — same family as the `Parent type X was already inherited` boot crash |
 | warhead-split ratchet | at baseline | pre-existing W24 debt, not a regression; lower the baseline as W24 lands |
 

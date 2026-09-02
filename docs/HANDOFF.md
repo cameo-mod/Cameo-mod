@@ -293,31 +293,26 @@ never grants (it grants `mediumbot`); the only grant of `normalbot` in the mod i
 building and conditions are per-actor. **`tools/audit/audit_bot_insurance.py` (new, in
 `run_all.sh`) is RED on master because of it.**
 
-⭐ **The whole change set lives on branch `claude/bot_insurance_dynamic_trait`, and it is one
-command.**
+⭐ **The complete runtime change set lives on branch `claude/bot_insurance_dynamic_trait`.**
 
-```bash
-bash docs/patches/apply_all.sh --check     # dry run: applies the series, verifies, undoes it
-bash docs/patches/apply_all.sh             # apply, build, run everything that needs no game
+```powershell
+.\tools\preflight-build.ps1
+.\make all
+python tools\audit\audit_bot_insurance.py
+python tools\audit\audit_chrome_scale_variants.py
 ```
 
-Four patches: the `medium` bug fix, the `DynamicBotInsurance` C# trait, the yaml swap, and an
-explicit `BotLimits@brutal` cadence (zero behaviour change). The script stops before the boot gate
-on purpose and prints what is left for you.
-
-⚠ **Why patches and not committed files:** `bash_guard.py` refuses to commit anything under
-`mods/` or `OpenRA.Mods.Cameo/` without boot proof, and that check is machine-level, not
-branch-level — a cloud container has no `perf.log` and forging one is not an option.
+The committed source includes the `DynamicBotInsurance` C# trait, its YAML swap, the explicit
+`BotLimits@brutal` cadence (zero behaviour change), and a booted flags repair. See
+**`docs/patches/README.md`** for the exact file list and generation command.
 
 ⛔ **Humans get NO bot insurance, and this was corrected once already.** One rung is 1 credit/tick;
 a buildable oil derrick is also 1 credit/tick, and the human derrick cap is 3. The human safety net
 is `player.yaml:243-262` only.
 
-⛔ **Two things only a running game can settle**, both flagged by the script: whether
-`INotifyResourceAccepted` reaches a Player-actor trait (the ore-purifier half depends on it), and
-whether `PlayerStatistics.AssetsValue` already counts combat units (`ArmyValueWeight` ships at 0 to
-avoid double-counting until that is known). Full reasoning and every measured table:
-**`docs/patches/README.md`**.
+⚠ **One balance question remains for match testing:** whether `PlayerStatistics.AssetsValue`
+already counts combat units. `ArmyValueWeight` remains 0 to avoid double-counting until that is
+measured in a real match.
 
 `docs/design/DEVIN_BRANCH_REVIEW.md` headline: Phase 0 audit,
 2026-09-01. Its headline corrects a premise that five external review rounds were built on:

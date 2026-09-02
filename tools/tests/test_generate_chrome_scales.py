@@ -61,12 +61,14 @@ def test_it_reads_real_png_dimensions():
     assert g.png_size(flags) == (512, 512)
 
 
-def test_artwork_finds_the_real_extent_of_the_shipped_sheets():
-    """Anchors the numbers the whole diagnosis rests on, against the real files."""
+def test_artwork_finds_the_real_extent_of_the_generated_flag_sheets():
+    """The 4x master and every generated variant remain at their declared density."""
     uibits = ROOT / "mods" / "cameo" / "uibits"
     cases = {
-        "flags.png": (512, 512, 385, 512),        # base: artwork is narrower than its canvas
-        "flags_3x.png": (2048, 2048, 1536, 2048),  # 4x artwork -- the bug
+        "flags.png": (512, 512, 387, 512),
+        "flags_2x.png": (1024, 1024, 771, 1024),
+        "flags_3x.png": (1536, 1536, 1153, 1536),
+        "flags_4x.png": (2048, 2048, 1536, 2048),
         "glyphs_3x.png": (1024, 1024, 768, 768),   # 3x artwork in a padded canvas -- correct
     }
     for name, want in cases.items():

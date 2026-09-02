@@ -134,8 +134,8 @@ never constructed through `ObjectCreator`, so the assembly-order trick does not 
 *is* ObjectCreator-resolved and could be shadowed, but it would need collection-specific scaling
 inside a generic widget plus every flag region rewritten x4 — worse than the engine change.)
 
-**The change**, `docs/patches/ENGINE_image4x_chromeprovider.patch` — for the **`cameo-mod/OpenRA`
-soft-fork**, not this repository. It replaces the if/else ladder with:
+**The unshipped engine alternative** would modify the **`cameo-mod/OpenRA`** soft-fork to replace
+the if/else ladder with:
 
 > pick the **smallest declared variant whose density covers `dpiScale`**, and fall back to the
 > largest declared one when none does.
@@ -146,8 +146,8 @@ in the bug report. The loop instead selects `Image4x` for anything above 2x scal
 sheet is declared, which is exactly the band where the bug bites, and the extra pixels simply
 supersample.
 
-⚠ **It touches every chrome sheet in the mod, so the safety claim is the whole argument** and it is
-tested rather than asserted (`tools/tests/test_chrome_density_ladder.py`, 11 tests): behaviour is
+⚠ **It touches every chrome sheet in the mod, so the safety claim is the whole argument**:
+behaviour should be
 **identical to upstream at every dpiScale** for every collection shape that exists — `Image` alone,
 and the full `Image`/`Image2x`/`Image3x` triple — including the exact boundaries 1.0, 2.0, 3.0.
 Measured across Cameo, upstream ra/cnc and Combined Arms, those are the only two shapes any of them
@@ -158,10 +158,9 @@ use.
 back to 1x. Arguably better, but a difference. **Nothing anywhere declares that shape**, and
 `test_the_divergent_shape_is_unused` fails the day something does.
 
-**The mod side** is `docs/patches/chrome_08_flags_as_image4x.patch`: `^Flags` declares
-`Image4x: flags_3x.png` instead of `Image3x`. ⛔ **Never apply it without the engine patch** —
-stock `ChromeProvider` has no `Image4x` field, `FieldLoader` would silently drop the line
-(CLAUDE.md rule 8b) and flags would quietly fall back to the 2x sheet.
+**This branch deliberately does not take that engine route.** Stock `ChromeProvider` has no
+`Image4x` field, so `flags_4x.png` is an art source only; the committed `Image3x` sheet is generated
+at the correct density and the engine continues to use the stock ladder.
 
 **The cost**, stated plainly: it is a permanent divergence from upstream that every engine update
 must carry, it needs the full rule-7 pipeline (edit the `cameo-engine` clone → push → set
@@ -223,9 +222,9 @@ audit accepts either.
 
 | | what it does | needs | risk | result |
 |---|---|---|---|---|
-| **A. Restore the 3x sheet** (`chrome_06_*.sh`) | puts back Blackrobe's verified 3.00x file | boot gate | none — the asset is in history and measured | correct and sharp everywhere |
-| **B. Use the 4x directly** (`ENGINE_image4x_*` + `chrome_08_*`) ⭐ **what "use the 4x file" means** | adds `Image4x` and a generalised ladder | **engine rebuild** + boot gate | small but engine-wide; backward compatibility is tested | full 4x resolution, no art ever downscaled |
-| **C. Drop `Image3x`** (`chrome_07_*_FALLBACK.patch`) | falls back to the correct 2x sheet above 200% | boot gate | none — removes the failure mode by construction | slightly soft above 200% |
+| **A. Restore a 3x sheet** | puts back Blackrobe's verified 3.00x file | boot gate | none — the asset is in history and measured | correct and sharp everywhere |
+| **B. Use the 4x directly** | adds `Image4x` and a generalised ladder | **engine rebuild** + boot gate | small but engine-wide | full 4x resolution, no art ever downscaled |
+| **C. Drop `Image3x`** | falls back to the correct 2x sheet above 200% | boot gate | none — removes the failure mode by construction | slightly soft above 200% |
 | **D. Copy CA literally** (drop `Image2x` too) | CA's `flags:` declares no variants at all | boot gate | none | ⛔ **worse for most users** |
 
 ⭐ **E. Generate everything from the 4x master** (`tools/art/generate_chrome_scales.py`, above) is

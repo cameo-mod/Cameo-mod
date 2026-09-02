@@ -366,21 +366,15 @@ difficulty — receives **zero** insurance income, while `easy` gets 3 rungs and
 
 ```bash
 git checkout claude/bot_insurance_dynamic_trait
-python tools/audit/audit_bot_insurance.py    # FAILS on master today, and names the rung
-bash docs/patches/apply_all.sh --check       # dry run — applies the series, verifies, undoes it
-bash docs/patches/apply_all.sh               # apply, build, run every check that needs no game
-# --- BOOT GATE --- the script stops here and prints exactly what is left
+tools/preflight-build.ps1
+./make all
+python tools/audit/audit_bot_insurance.py
+# --- BOOT GATE --- launch Cameo and wait for MenuPostProcessEffect.PostWorldLoaded
 ```
 
-Patch 01 is now the pure bug fix — eight `normalbot` → `mediumbot`, nothing else. **Every other
-difficulty and the human column are unchanged.** (An earlier draft also granted humans parity;
-that was reverted — one rung is one oil derrick and the human derrick cap is 3.)
-
-⚠ **`bot_insurance_03b_dynamic_trait_yaml.patch` is the real fix and it NEEDS A C# BUILD**, so it
-is not a drop-in for 01 — it is what 01 buys time for. It replaces the whole ladder with one
-`DynamicBotInsurance` trait on `Player:`. Read [`../patches/README.md`](../patches/README.md)
-before applying it: it carries the design reasoning, the measured boundary tables, and the one
-in-game check that no boot-less environment can answer.
+The committed replacement is one `DynamicBotInsurance` trait on `Player:`. It replaces the ladder
+outright, keeps humans excluded, and requires the C# build plus boot gate above. The generation and
+verification commands are recorded in [`../patches/README.md`](../patches/README.md).
 
 ---
 

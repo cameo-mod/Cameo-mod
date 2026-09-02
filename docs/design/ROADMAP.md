@@ -64,28 +64,11 @@ the conyard never sees it.
 | unbeatable | 9 |
 | cameogod | 10 |
 
-- [x] **RULED 2026-09-01** — `normalbot` → `mediumbot`. Nothing else: an earlier draft also opened
-  the four lowest rungs to human players and **that was reverted** (see the human-insurance ruling
-  below).
-- [ ] **XS, NEEDS ONLY A BOOT GATE** — the patch is written and verified:
-  **`docs/patches/bot_insurance_01_fix_medium_difficulty.patch`**. `git apply --check` is clean
-  against master; `audit_bot_insurance.py` fails before and passes after; every other difficulty's
-  rung count and the human column are unchanged. Procedure and commit checklist:
-  [`../patches/README.md`](../patches/README.md), or `BOOT_GATE_RUNBOOK.md` §5.5.
-- [ ] **M, NEEDS A C# BUILD** — **`docs/patches/bot_insurance_03b_dynamic_trait_yaml.patch`** plus
-  **`..._03a_dynamic_trait_csharp.patch`** (which creates
-  `OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs`) replace the ladder outright: thirty yaml
-  nodes and ten condition lists become ONE trait on `Player:` with no conditions, scaled by the
-  owner's bot-type index (tracking rate 1→10, delay divisor 10→100, peak credits/tick 1→10,
-  purifier 5%→50%), with the payout **proportional to depth** so the old stacked-rung granularity
-  survives continuously. Ore-purifier logic folded in, which also settles which `ResourcePurifier`
-  type was running (nobody could say — the bare name resolves past the vendored CA copy).
-  Removes the conyard multiplication and caps a payout at 10 000.
-  ⚠ **Never compiled** — no `engine/`, no dotnet here. The ALGORITHM is verified:
-  `tools/balance/bot_insurance_model.py` mirrors `Tick` line for line and
-  `tools/tests/test_bot_insurance_model.py` (50 tests) pins it, including a drift guard that
-  parses the C# field defaults. ⛔ One in-game check remains: does `INotifyResourceAccepted` reach
-  a Player-actor trait? If not, the purifier half needs a refinery-side forwarder.
+- [x] **DONE 2026-09-02** — `DynamicBotInsurance` replaces the ten-rung conyard ladder with one
+  Player trait, keeping humans excluded. It scales by bot-type index (tracking rate 1→10, delay
+  divisor 10→100, peak credits/tick 1→10, purifier 5%→50%) and retains the old payout granularity
+  through depth scaling. The source compiled, the bot coverage audit passed, and Cameo booted to
+  the main menu. Match tuning of the conservative net-worth curve remains a gameplay follow-up.
 - [x] **RULED 2026-09-01** — humans get NO bot insurance. One rung is 1 credit/tick and a buildable
   oil derrick is also 1 credit/tick (`Interval: 250, Amount: 250`), against a human derrick cap of
   3 (`player.yaml:279`). An earlier draft that granted human parity was reverted.

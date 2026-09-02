@@ -111,11 +111,10 @@ def test_a_healthy_ladder_shows_no_dip_and_no_zero():
                 if counts[hi] < counts[lo]]
 
 
-def test_the_audit_is_red_on_the_tree_right_now_and_says_why():
-    """⚠ FLIP THIS when patch 01 lands — it is the test that proves the fix took effect."""
-    rungs = abi.ladder_rungs(abi.miniyaml.Ruleset(str(pathlib.Path(__file__).resolve().parents[2])))
-    assert len(rungs) == 10, "the ladder should resolve to ten rungs"
-    counts = _counts(rungs)
-    assert counts["medium"] == 0, (
-        "`medium` now reaches a rung — if docs/patches/bot_insurance_01_*.patch has landed, "
-        "update this test to assert counts['medium'] == 4 and set the doc_claims value to 0.")
+def test_the_dynamic_trait_replaces_the_legacy_ladder_and_covers_every_bot_type():
+    """The committed runtime trait replaces every YAML rung without leaving a bot difficulty out."""
+    rules = abi.miniyaml.Ruleset(str(pathlib.Path(__file__).resolve().parents[2]))
+    assert abi.ladder_rungs(rules) == []
+    difficulties = abi.dynamic_difficulties(rules)
+    assert difficulties == abi.DIFFICULTIES
+    assert abi.check_dynamic_trait(difficulties) == 0

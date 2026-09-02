@@ -23,7 +23,7 @@ WHAT IT CHECKS, on the RESOLVED actors, in whichever of the two worlds the tree 
          class above: a harder bot getting less help than an easier one is always a wiring mistake.
       2. NO DEAD RUNG — every difficulty must reach at least one rung, since the whole stated
          purpose is stopping a bot getting permanently stuck at zero income.
-  * TRAIT world (after docs/patches/bot_insurance_03_*) — one `DynamicBotInsurance` on `Player:`,
+  * TRAIT world — one `DynamicBotInsurance` on `Player:`,
     which reads the owner's bot type itself. The monotonicity law is then structural (everything
     interpolates by list index), so the only thing left to check is COVERAGE: every bot type the
     mod actually loads must appear in the trait's `Difficulties`, except `campaign`, which is
@@ -245,7 +245,7 @@ def main() -> int:
         print("## ⛔ FAIL\n")
         for p in problems:
             print(f"- {p}")
-        print("\nSee `docs/design/AI_RESEARCH_RECONCILIATION.md` §1 and `docs/patches/`.")
+        print("\nSee `docs/design/AI_RESEARCH_RECONCILIATION.md` §1.")
         return 1
 
     print("**PASS** — the ladder is monotonic and every difficulty reaches it.")

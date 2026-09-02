@@ -240,6 +240,17 @@ Player:
 	RangedGpsWatcher:
 	TeleportNetworkManager:
 		Type: nydus
+	# ---------------------------------------------------------------------------------
+	# BOT anti-bankruptcy income -- ONE trait, replacing ten rungs of
+	# BotInsurance + CashTrickler + ResourcePurifier that used to sit on ^AIConyardCash.
+	# It reads the owner's bot type itself, so difficulties need no conditions and no
+	# extra traits; a human owner is simply not in the list and gets nothing.
+	# ⛔ HUMANS MUST NOT BE ADDED HERE. One credit/tick is exactly one oil derrick
+	# (Interval 250 / Amount 250), and the human derrick cap is 3 (see derricklimit
+	# below). The human safety net is the two mechanics that follow: insurance on
+	# losing your base, and the sub-1k trickle that keeps ally cash transfers from
+	# bankrupting the giver.
+	DynamicBotInsurance:
 	GrantConditionOnPrerequisite@enable-secondaryinsurance:
 		Condition: nobase
 		Prerequisites: !conyard

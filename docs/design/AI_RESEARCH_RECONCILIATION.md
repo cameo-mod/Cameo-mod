@@ -194,13 +194,8 @@ Humans keep exactly what they already had and nothing more: insurance while they
 construction yard, and the sub-1000 trickle that stops ally cash transfers from bankrupting the
 giver (`player.yaml:243-262`).
 
-**The bug fix**, stripped back to the one token that was wrong:
-`docs/patches/bot_insurance_01_fix_medium_difficulty.patch` — eight `normalbot` → `mediumbot`.
-`medium` goes 0 → 4 rungs; **every other difficulty and the human column are unchanged.** Needs a
-boot gate, no design ruling.
-
-**The replacement**, `docs/patches/bot_insurance_03b_dynamic_trait_yaml.patch` plus
-`OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs` — thirty yaml nodes and ten condition ladders
+**The committed replacement**, `OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs` plus its Player
+and conyard YAML changes — thirty yaml nodes and ten condition ladders
 become **one trait on `Player:` with no conditions at all**. It reads the owner's bot type, finds
 its index in a `Difficulties` list, and interpolates a tracking rate (1→10), a delay divisor
 (10→100), credits/tick (1→10) and the purifier bonus (5%→50%) from that index. The ore-purifier
@@ -213,15 +208,15 @@ Common — Cameo owns it now.**
 exists for). A payout stops at 10 000, so **difficulty buys speed, not a bigger total**. Measured
 first payout after a crash: easiest 800 ticks, cameogod 80 — exactly 10×, monotonic at every step.
 
-⚠ **Verified as an ALGORITHM, not as code.** No `engine/` and no dotnet here, so the C# has never
-been compiled. `tools/balance/bot_insurance_model.py` mirrors `Tick` line for line and
-`tools/tests/test_bot_insurance_model.py` (50 tests) pins the behaviour, including a drift guard
+⭐ **Verified as code and algorithm.** `./make all` compiles the trait; Cameo boots to the main menu.
+`tools/balance/bot_insurance_model.py` mirrors `Tick` line for line and
+`tools/tests/test_bot_insurance_model.py` pins the behaviour, including a drift guard
 that parses the C# field defaults. Four design points were wrong in earlier drafts and are now
 tests: the payout **scales with depth** rather than being flat on/off, which is where the old
 stacked ladder's granularity lived (it reproduces that curve and fills in between the rungs); the bar **tracks both ways** rather than falling (a falling bar is dead mechanics — the
 trigger is easiest to satisfy at the highest bar); the trigger is **strictly `<`** (with `<=` every
 bot under the cap eventually insures itself); and `MinThreshold` **must exceed 0** (at 0 a bankrupt
-bot is stranded permanently). Full reasoning and the measured tables: `docs/patches/README.md`.
+bot is stranded permanently). Generation and verification details: `docs/patches/README.md`.
 
 ⚠ **A second finding, C#-side:** `BotInsurance` marks `ticks` `[VerifySync]` but the class does not
 implement `ISync`, so the sync check never runs on it — already recorded in the audit baseline
@@ -484,7 +479,7 @@ Not a live bug; worth stating explicitly in yaml.
 ### ✅ RULED 2026-09-01 — the eight decisions, and what shipped
 
 The maintainer answered all eight open questions in one pass. Recorded here as rulings, not
-options; `docs/patches/README.md` carries the implementation detail.
+options; `docs/patches/README.md` carries the delivery detail.
 
 | # | question | ruling |
 |---|---|---|
@@ -492,7 +487,7 @@ options; `docs/patches/README.md` carries the implementation detail.
 | 2 | Peer signal (OD-N) | **The bot's own peak net worth.** Fog-safe: it never reads another player, so it adds no omniscience and does not rubber-band against the human. |
 | 3 | Distress input (OD-K) | **Two-factor.** Liquidity decides *whether*, net worth decides *how much*. |
 | 4 | Combining the ratios | **Geometric mean**, never the product. |
-| 5 | Delivery | **Patches plus `apply_all.sh`.** The hook blocks engine-content commits on *any* branch from a container with no `perf.log`; that is machine-level, not branch-level, and forging boot proof is not an option. |
+| 5 | Delivery | **Committed source plus boot evidence.** The C# and YAML land together only after a preflight build and a main-menu boot. |
 | 6 | Production multipliers (OD-J) | **Continuous only for the future `adaptive` type.** The ten fixed difficulties keep their fixed multipliers — they are the A/B baseline the whole cheat-removal roadmap is measured against. |
 | 7 | Adaptive difficulty (OD-L) | **After `DynamicBotInsurance` boots.** Design now, build on proven code. |
 | 8 | Par-curve magnitudes (OD-M) | **Ship conservative, log for tuning.** The curve's ratio is clamped to [0.5, 2.0] so invented numbers cannot dominate, and the trait logs measured-vs-expected worth every 1500 ticks. |

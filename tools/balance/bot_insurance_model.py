@@ -17,15 +17,17 @@ if they drift, the tests are testing a fiction. Keep `tick()` a line-for-line mi
 
 THE MACHINE, in three phases:
 
-  ARMING    the bar TRACKS the rolling average, moving toward clamp(average, MinThreshold,
+  ARMING    the bar TRACKS the rolling average of total spendable funds, moving toward
+             clamp(average, MinThreshold,
             MaxThreshold) by at most `rate_per_tick` a tick -- up when the average is above it,
-            down when below, at the same rate either way. When the bar reaches the owner's cash
-            (`cash < threshold`) the owner qualifies -> freeze, compute the delay, go to DELAYING.
+             down when below, at the same rate either way. When the bar reaches the owner's liquid
+             funds (`liquidity < threshold`) the owner qualifies -> freeze, compute the delay, go to
+             DELAYING.
 
             ⛔ IT IS A SLEW-LIMITED TRACKER, NOT A ONE-WAY RAMP, AND NOT A FALLING BAR. Two
             earlier designs were tried and rejected against this model:
               * FALLING from MaxThreshold (the original spec) is DEAD MECHANICS. The trigger
-                `cash < threshold` is easiest to satisfy when the bar is HIGHEST, so a falling bar
+                `liquidity < threshold` is easiest to satisfy when the bar is HIGHEST, so a falling bar
                 fires on tick one for anyone under MaxThreshold and only ever makes triggering
                 harder afterwards. Measured, every difficulty behaved identically and the whole
                 ordering came from the delay divisor -- the rate did nothing at all.
@@ -36,14 +38,16 @@ THE MACHINE, in three phases:
             has actually been doing.
   DELAYING  wait `average / delay_divisor` ticks, clamped. Recovering above the frozen bar cancels
             outright and re-arms from the top.
-  PAYING    grant a payout SCALED BY DEPTH until cash reaches MaxThreshold, then re-arm.
+  PAYING    grant a payout SCALED BY DEPTH until total spendable funds reach MaxThreshold, then
+             re-arm. Resource-purifier deliveries bank only during this phase and every payout is
+             capped at the remaining gap.
 
 ⭐ THE PAYOUT IS PROPORTIONAL TO DEPTH, WHICH IS WHERE THE OLD LADDER'S GRANULARITY CAME FROM.
 The ten-rung ladder was not merely ten difficulties — the rungs STACKED, so a `cameogod` bot drew
 1 credit/tick just under 10000 and 10 credits/tick near zero. A flat "on/off" payout throws that
 away and makes the hardest bot draw its maximum the whole time it is insured. So:
 
-    depth_permille = clamp(1000 * (MaxThreshold - cash) / MaxThreshold, 0, 1000)
+    depth_permille = clamp(1000 * (MaxThreshold - liquidity) / MaxThreshold, 0, 1000)
     accumulator   += cash_per_tick * depth_permille
     grant          = accumulator // 1000        # and keep the remainder
 
@@ -77,11 +81,11 @@ DIFFICULTIES = ["easiest", "veryeasy", "easy", "medium", "hard",
 #
 # MIN_THRESHOLD is 1000 rather than 0, and with a STRICT `<` trigger that is load-bearing, not
 # cosmetic: a persistently broke owner drives its own average to 0, the bar tracks it to 0, and
-# `cash < 0` is unsatisfiable -- the mechanic would switch itself off in exactly the situation it
+# `liquidity < 0` is unsatisfiable -- the mechanic would switch itself off in exactly the situation it
 # exists for. The floor is the absolute poverty line: below it you are insured whatever your
 # history says. See test_a_zero_floor_strands_a_bankrupt_bot.
 #
-# MAX_THRESHOLD is both the bar's ceiling AND the cash level at which a payout stops. Keep them the
+# MAX_THRESHOLD is both the bar's ceiling AND the liquid-funds level at which a payout stops. Keep them the
 # same number: a ceiling above the payout exit lets an owner trigger and then immediately stop
 # paying, which is churn with no benefit.
 AVERAGE_WINDOW = 1500
@@ -198,7 +202,7 @@ class Insurance:
         self.last_worth_factor = 1000   # permille, for tracing
 
     def net_worth(self, cash: int, resources: int, assets: int, army: int) -> int:
-        """Cash + resources + everything owned. 0 assets means "no PlayerStatistics" (see tick)."""
+        """Cash + resources + everything owned when PlayerStatistics is available."""
         return cash + resources + assets + army * ARMY_VALUE_WEIGHT // 100
 
     def worth_factor_permille(self, worth: int) -> int:
@@ -233,40 +237,47 @@ class Insurance:
         shortfall = max(0, min(1000, 1000 - w))
         return MIN_WORTH_FACTOR + (1000 - MIN_WORTH_FACTOR) * shortfall // 1000
 
-    def depth_permille(self, cash: int) -> int:
+    def depth_permille(self, liquidity: int) -> int:
         """How deep below the cap the owner is, 0 (at the cap) to 1000 (broke).
 
         Measured against MaxThreshold rather than against the dynamic bar on purpose: this is the
         ABSOLUTE poverty scale the old ladder used, so the two agree rung for rung.
         """
-        return max(0, min(1000, 1000 * (self.max_threshold - cash) // self.max_threshold))
+        return max(0, min(1000, 1000 * (self.max_threshold - liquidity) // self.max_threshold))
 
     @property
     def average(self) -> int:
         return sum(self.history) // len(self.history) if self.history else 0
 
-    def tick(self, cash: int, resources: int = 0, assets: int = 0, army: int = 0) -> int:
+    def resource_accepted(self, value: int) -> None:
+        """Mirror `INotifyResourceAccepted`: only distressed deliveries may earn purifier cash."""
+        if self.rank >= 0 and self.phase == "paying":
+            self.banked += value
+
+    def tick(self, cash: int, resources: int = 0, assets: int = 0, army: int = 0,
+              has_statistics: bool = True) -> int:
         """Advance one tick. Returns credits granted this tick.
 
-        ⭐ TWO-FACTOR, by ruling: LIQUIDITY decides WHETHER the insurance arms and fires (it is
-        cash that blocks rebuilding), NET WORTH decides HOW MUCH. That fixes the false positive
-        where a bot at zero cash in the middle of a push, holding a 30,000-credit army, reads as
-        bankrupt -- it is spending correctly and its harvesters will refill it.
+        ⭐ TWO-FACTOR, by ruling: total immediately spendable funds decide WHETHER the insurance
+        arms and fires, NET WORTH decides HOW MUCH. That fixes the false positive where a bot has
+        no cash but enough stored ore to spend, or a bot holds a 30,000-credit army and is simply
+        spending correctly while its harvesters will refill it.
 
-        ⚠ `assets` at 0 means "PlayerStatistics was not available", and the worth factor then stays
-        neutral at 1000 -- absence degrades to the cash-only behaviour rather than to no insurance
-        at all. Same invariant as AI_ARCHITECTURE section 10: absence degrades, never breaks.
+        `has_statistics` models the C# trait's `stats != null` check. A real PlayerStatistics
+        instance whose values are all zero is still statistics; only a missing trait leaves the
+        worth factor neutral at 1000.
         """
         if self.rank < 0:
             return 0
 
         self.ticks += 1
-        self.history.append(cash)
+        liquidity = cash + resources
+        self.history.append(liquidity)
         granted = 0
 
         worth = self.net_worth(cash, resources, assets, army)
         self.peak_worth = max(self.peak_worth, worth)
-        self.last_worth_factor = self.worth_factor_permille(worth) if assets or army else 1000
+        self.last_worth_factor = self.worth_factor_permille(worth) if has_statistics else 1000
 
         if self.phase == "arming":
             target = min(max(self.average, self.min_threshold), self.max_threshold)
@@ -276,13 +287,13 @@ class Insurance:
             # to a stable cash pile, and every bot under the cap eventually insures itself -- the
             # mechanic stops being an emergency measure and becomes baseline income. Strict `<`
             # means "poorer than your own recent normal", which is the actual signal wanted.
-            if cash < self.threshold:
+            if liquidity < self.threshold:
                 self.delay_remaining = min(max(self.average // self.delay_divisor, MIN_DELAY),
                                            MAX_DELAY)
                 self.phase = "delaying"
 
         elif self.phase == "delaying":
-            if cash > self.threshold:
+            if liquidity > self.threshold:
                 # Unfreeze only. Slamming the bar back to zero would throw away the tracker and
                 # make the next arming cycle start from a lie about the economy.
                 self.phase = "arming"
@@ -292,18 +303,20 @@ class Insurance:
                     self.phase = "paying"
 
         elif self.phase == "paying":
-            if cash >= self.max_threshold:
+            if liquidity >= self.max_threshold:
                 self.banked = 0
                 self.accumulator = 0
                 self.phase = "arming"
             else:
-                depth = self.depth_permille(cash) * self.last_worth_factor // 1000
+                depth = self.depth_permille(liquidity) * self.last_worth_factor // 1000
                 self.accumulator += self.cash_per_tick * depth
-                granted += self.accumulator // 1000
+                requested = self.accumulator // 1000
                 self.accumulator %= 1000
+                granted += min(requested, max(0, self.max_threshold - liquidity))
 
                 if self.banked >= 250:
-                    granted += self.banked * self.purifier_modifier * depth // 100000
+                    bonus = self.banked * self.purifier_modifier * depth // 100000
+                    granted += min(bonus, max(0, self.max_threshold - liquidity - granted))
                     self.banked = 0
 
         self.paid += granted

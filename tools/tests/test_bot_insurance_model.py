@@ -26,25 +26,12 @@ sys.path.insert(0, str(ROOT / "tools" / "balance"))
 import bot_insurance_model as m  # noqa: E402
 
 CS = ROOT / "OpenRA.Mods.Cameo" / "Traits" / "DynamicBotInsurance.cs"
-CS_PATCH = ROOT / "docs" / "patches" / "bot_insurance_03a_dynamic_trait_csharp.patch"
 
 
 def csharp_source() -> str:
-    """The trait's C# — from the tree once the patch has landed, from the PATCH before that.
-
-    ⚠ Reading the patch is not a convenience, it is the point. `OpenRA.Mods.Cameo/` is engine
-    content, so a boot-less environment cannot commit the .cs and it ships as a patch instead
-    (docs/patches/README.md). If the drift guard only looked at the tree it would silently skip in
-    exactly the window where the model and the trait are being edited together and drift is most
-    likely — which is a test that passes by not running, the failure mode this repo keeps paying
-    for.
-    """
-    if CS.exists():
-        return CS.read_text(encoding="utf-8")
-
-    assert CS_PATCH.exists(), f"neither {CS} nor {CS_PATCH} exists — the trait has been lost"
-    return "\n".join(line[1:] for line in CS_PATCH.read_text(encoding="utf-8").splitlines()
-                      if line.startswith("+") and not line.startswith("+++"))
+    """The committed trait and the model must change together."""
+    assert CS.exists(), f"{CS} is missing"
+    return CS.read_text(encoding="utf-8")
 
 
 # ------------------------------------------------------- drift guard (the important one)
@@ -113,7 +100,28 @@ def test_the_bar_tracks_both_ways_and_the_csharp_says_so():
     src = csharp_source()
     assert "Math.Clamp(target - threshold, -ratePerTick, ratePerTick)" in src
     assert "IT IS NOT A ONE-WAY RAMP AND NOT A FALLING BAR" in src
-    assert "cash < threshold" in src, "the trigger must be STRICT"
+    assert "liquidity < threshold" in src, "the trigger must be STRICT"
+
+
+def test_the_csharp_uses_total_liquid_funds_and_bounds_every_payout():
+    """Stored resources are spendable, and purifier bursts cannot jump over the cap."""
+    src = csharp_source()
+    assert "var liquidity = playerResources.GetCashAndResources();" in src
+    assert "Record(liquidity);" in src
+    assert "if (liquidity < threshold)" in src
+    assert "if (liquidity >= info.MaxThreshold)" in src
+    assert "DepthPermille(liquidity)" in src
+    assert "var cappedGrant = Math.Min(grant" in src
+    assert "var cappedBonus = Math.Min(purifierBonus" in src
+
+
+def test_the_csharp_banks_purifier_deliveries_only_while_paying_and_hashes_hidden_state():
+    """The model cannot exercise engine callbacks, so pin their state boundaries in source."""
+    src = csharp_source()
+    assert "rank >= 0 && phase == Phase.Paying" in src
+    assert "[VerifySync]\n\t\tint stateHash;" in src
+    for state in ("historyIndex", "historyCount", "historySum", "historyHash", "worthFactor", "(int)phase"):
+        assert state in src
 
 
 # ------------------------------------------------------- rank scaling
@@ -313,6 +321,36 @@ def test_the_purifier_bonus_is_paid_only_while_paying_and_scales_with_difficulty
         assert ins.banked == 0
 
 
+def test_purifier_deliveries_before_distress_are_never_banked_or_released():
+    """A rich bot must not cash out a lifetime of harvests at the first rescue tick."""
+    ins = m.Insurance("cameogod")
+    for _ in range(10):
+        ins.resource_accepted(10000)
+    assert ins.banked == 0
+
+    while ins.phase != "paying":
+        ins.tick(0)
+    ins.accumulator = 0
+    granted = ins.tick(0)
+    assert granted == ins.cash_per_tick
+    assert ins.banked == 0
+
+
+def test_purifier_and_trickle_cannot_cross_the_liquid_funds_cap():
+    ins = m.Insurance("cameogod")
+    ins.phase = "paying"
+    ins.banked = 100000
+    granted = ins.tick(m.MAX_THRESHOLD - 100)
+    assert granted == 100
+
+
+def test_stored_resources_are_liquid_and_never_trigger_or_receive_insurance():
+    ins = m.Insurance("cameogod")
+    for _ in range(5000):
+        assert ins.tick(0, m.MAX_THRESHOLD) == 0
+    assert ins.phase == "arming"
+
+
 # ------------------------------------------------------- proportional payout (the granularity)
 
 def _pay_rate(difficulty: str, cash: int, ticks: int = 2000) -> float:
@@ -326,7 +364,7 @@ def _pay_rate(difficulty: str, cash: int, ticks: int = 2000) -> float:
     ins = m.Insurance(difficulty)
     ins.phase = "paying"
     ins.accumulator = 0
-    return sum(ins.tick(cash) for _ in range(ticks)) / ticks
+    return sum(ins.tick(cash, has_statistics=False) for _ in range(ticks)) / ticks
 
 
 def test_the_payout_reproduces_the_old_stacked_ladder():
@@ -363,12 +401,12 @@ def test_the_peak_rate_is_reached_only_at_zero_cash():
 
 # ------------------------------------------------------- the net-worth layer
 
-def _crashed(difficulty="medium", assets=0, army=0, par=True, ticks=3000):
+def _crashed(difficulty="medium", assets=0, army=0, par=True, ticks=3000, has_statistics=True):
     """Healthy cash average, then cash collapses to zero while the owner keeps `assets`."""
     ins = m.Insurance(difficulty, use_par_curve=par)
     for _ in range(m.AVERAGE_WINDOW):
-        ins.tick(8000, 0, assets, army)
-    paid = sum(ins.tick(0, 0, assets, army) for _ in range(ticks))
+        ins.tick(8000, 0, assets, army, has_statistics)
+    paid = sum(ins.tick(0, 0, assets, army, has_statistics) for _ in range(ticks))
     return ins, paid
 
 
@@ -400,16 +438,23 @@ def test_the_worth_factor_is_monotonic_in_wealth():
 def test_without_playerstatistics_it_degrades_to_the_cash_only_behaviour():
     """Absence degrades, never breaks — the AI_ARCHITECTURE section 10 invariant."""
     with_stats, _ = _crashed(assets=20000)
-    without, _ = _crashed(assets=0, army=0, par=False)
+    without, _ = _crashed(assets=0, army=0, par=False, has_statistics=False)
     assert without.last_worth_factor == 1000
     assert with_stats.last_worth_factor < 1000
+
+
+def test_zero_valued_statistics_are_not_treated_as_missing():
+    """C# tests `stats != null`; zero-valued fields are still a real statistics trait."""
+    with_stats, _ = _crashed(assets=0, army=0, par=False, has_statistics=True)
+    without_stats, _ = _crashed(assets=0, army=0, par=False, has_statistics=False)
+    assert with_stats.last_worth_factor < without_stats.last_worth_factor
 
 
 def test_the_self_comparison_never_reads_another_player():
     """⛔ The fog ruling, asserted on the interface: tick() takes only the OWNER's numbers."""
     import inspect
     params = list(inspect.signature(m.Insurance.tick).parameters)
-    assert params == ["self", "cash", "resources", "assets", "army"], params
+    assert params == ["self", "cash", "resources", "assets", "army", "has_statistics"], params
     src = pathlib.Path(m.__file__).read_text(encoding="utf-8")
     for banned in ("opponent", "enemy", "other_player", "world.Players"):
         assert banned not in src.lower(), f"{banned} — the peer signal must stay self-referential"

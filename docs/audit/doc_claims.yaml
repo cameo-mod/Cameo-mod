@@ -1168,22 +1168,15 @@ claims:
       print(n)
 
   - id: bot_insurance_unreachable_difficulties
-    value: 1
+    value: 0
     tolerance: 0
     what: >
-      Bot difficulties that reach NO anti-bankruptcy income at all. Currently 1 — `medium`,
-      the DEFAULT difficulty, because the four lowest rungs of the ladder gate on `normalbot`,
-      a condition `^AIDifficulties` never grants (it grants `mediumbot`; the mod's only
-      `normalbot` grant is on a Dark Reign building and conditions are per-actor).
-      ⛔ A BUG, not a design: `easy` gets 3 rungs and `hard` gets 5, so the ladder has a hole
-      in its middle. Two prepared fixes each take this to 0 —
-      `docs/patches/bot_insurance_01_fix_medium_difficulty.patch` (boot gate only) and
-      `..._03_single_dynamic_trait.patch` (the real replacement; needs a C# build).
-      **Set this to 0 IN THE SAME COMMIT that lands either one.**
-      The measure works in BOTH worlds — the yaml ladder and the single `DynamicBotInsurance`
-      trait — and searches by WIRING, evaluating each rung's RequiresCondition, because this bug
-      was invisible to name-counting: `audit_orphans` O3 counts conditions mod-GLOBALLY while
-      conditions are per-ACTOR. Enforced continuously by `tools/audit/audit_bot_insurance.py`.
+      Bot difficulties that reach NO anti-bankruptcy income at all. The committed
+      `DynamicBotInsurance` trait covers every loaded bot type except deliberately uninsured
+      `campaign`, so this is now 0. The predecessor ladder had a `normalbot`/`mediumbot` wiring
+      hole that left the default medium bot with no income; replacing it on `Player:` removes the
+      per-conyard condition ladder entirely. Enforced continuously by
+      `tools/audit/audit_bot_insurance.py`.
     docs:
       - docs/HANDOFF.md
       - docs/design/AI_RESEARCH_RECONCILIATION.md
@@ -1216,8 +1209,8 @@ claims:
     tolerance: 0
     what: >
       Difficulty steps in the bot anti-bankruptcy income mechanism. Ten either way: ten yaml
-      rungs on `^AIConyardCash` today, ten `Difficulties` entries in `DynamicBotInsurance` after
-      `docs/patches/bot_insurance_03_*`. This is AI difficulty cheat axis 3 of 4 and the largest.
+      rungs on `^AIConyardCash` before the rewrite, now ten `Difficulties` entries in committed
+      `DynamicBotInsurance`. This is AI difficulty cheat axis 3 of 4 and the largest.
       ⛔ It must never simply be DELETED when the cheats come off: its job is stopping a bot
       getting permanently stuck at no income. Humans get their own, much smaller floor
       (`player.yaml:243-262`) and must NOT be given this one — one credit/tick is exactly one
