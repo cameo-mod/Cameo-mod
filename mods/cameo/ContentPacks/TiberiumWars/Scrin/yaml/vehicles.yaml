@@ -255,11 +255,15 @@ scrin_corrupter:
 	Valued:
 		Cost: 1000
 	Health:
-		HP: 90000
+		HP: 150000
 	Mobile:
 		Speed: 55
 	Armament:
 		Weapon: ScrinCorrupterSpew
+		# Authored FX_WEAPON_01 mouth position, including the sprite's visual lift.
+		LocalOffset: 512,0,960
+		MuzzleSequence: muzzle
+		MuzzlePalette: greenspark
 	Armament@REPAIR:
 		Weapon: ScrinRepairBeam
 		TargetRelationships: Ally
@@ -272,6 +276,7 @@ scrin_corrupter:
 		MoveSequence: move
 		ValidMovementTypes: Horizontal
 		RequiresCondition: !materializing
+	WithMuzzleOverlay:
 	RenderSprites:
 		PlayerPalette: scrin_corrupter_player
 
@@ -301,6 +306,15 @@ scrin_annihilator_tripod:
 		Weapon: ScrinTripodLaser
 		# Burst indexing is 0, 2, 1: center, right, left.
 		LocalOffset: 140,-73,2044, 673,-823,1944, 673,664,2100
+	WithAttackLensFlare:
+		Armaments: primary
+		RayColor: 3399FFD0
+		CoreColor: EEF8FFFF
+		Size: 34, 30
+		Width: 2.5
+		CoreSize: 5
+		Duration: 19
+		ZOffset: 2048
 	AttackFrontal:
 		Armaments: primary
 		FacingTolerance: 128
@@ -340,6 +354,15 @@ scrin_reaper_tripod:
 		Weapon: ScrinReaperTripodLaser
 		# Burst indexing is 0, 2, 1: center, right, left.
 		LocalOffset: 140,-73,2044, 673,-823,1944, 673,664,2100
+	WithAttackLensFlare:
+		Armaments: primary
+		RayColor: 33FF66D0
+		CoreColor: EEFFF4FF
+		Size: 34, 30
+		Width: 2.5
+		CoreSize: 5
+		Duration: 19
+		ZOffset: 2048
 	AttackFrontal:
 		Armaments: primary
 		FacingTolerance: 128

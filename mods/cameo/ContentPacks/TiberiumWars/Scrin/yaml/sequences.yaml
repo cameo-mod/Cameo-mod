@@ -593,6 +593,23 @@ scrin_rift_generator_orb:
 		Tick: 167
 		Offset: -2.000,-109.000
 
+scrin_rift_weapon_orb:
+	idle:
+		Filename: scrin_sprites|scrin_rift_weapon_orb.png
+		Start: 0
+		Length: 1
+		Scale: 1.0
+		ZOffset: 4096
+		IgnoreWorldTint: true
+
+scrin_rift_weapon_vortex:
+	idle:
+		Filename: scrin_sprites|scrin_rift_weapon_vortex.png
+		Start: 0
+		Length: 1
+		ZOffset: 0
+		IgnoreWorldTint: true
+
 scrin_lightning_spike:
 	idle:
 		Filename: scrin_sprites|scrin_lightning_spike_indexed8.png
@@ -1029,6 +1046,43 @@ scrin_corrupter:
 		ShadowStart: 128
 		ShadowZOffset: -5
 		Offset: 3.166,-10.167
+	muzzle:
+		Scale: 1.25
+		IgnoreWorldTint: true
+		Combine:
+			flame_n:
+				Filename: shared_sprites|flame_n.shp
+				Length: *
+				Offset: 3,6
+			flame_nw:
+				Filename: shared_sprites|flame_nw.shp
+				Length: *
+				Offset: 8,7
+			flame_w:
+				Filename: shared_sprites|flame_w.shp
+				Length: *
+				Offset: 8,2
+			flame_sw:
+				Filename: shared_sprites|flame_sw.shp
+				Length: *
+				Offset: 7,-2
+			flame_s:
+				Filename: shared_sprites|flame_s.shp
+				Length: *
+				Offset: 3,-2
+			flame_se:
+				Filename: shared_sprites|flame_se.shp
+				Length: *
+				Offset: -5,-2
+			flame_e:
+				Filename: shared_sprites|flame_e.shp
+				Length: *
+				Offset: -7,2
+			flame_ne:
+				Filename: shared_sprites|flame_ne.shp
+				Length: *
+				Offset: -7,8
+		Facings: 8
 
 	icon:
 		Filename: scrin_sprites|scrin_corrupter_icon.png

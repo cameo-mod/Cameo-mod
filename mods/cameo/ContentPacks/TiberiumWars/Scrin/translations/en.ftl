@@ -158,3 +158,6 @@ actor_scrin_invader_fighter =
 
 actor_scrin_mothership =
    .name = Scrin Mothership
+
+support-power-scrin-rift =
+   .description = Open a ten-second spatial rift that distorts the surrounding battlefield.

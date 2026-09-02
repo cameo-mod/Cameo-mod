@@ -754,6 +754,54 @@ scrin_rift_generator:
 		Sequence: idle
 		Palette: effect
 		RequiresCondition: !build-incomplete
+	DetonateWeaponPowerCA@SCRIN_RIFT:
+		OrderName: scrin_rift
+		Prerequisites:
+			1: ~techlevel.superweapons
+		IconImage: scrin_rift_generator
+		Icons:
+			1: icon
+		IconPalette: scrin_rift_generator
+		Cursor: ability
+		ChargeInterval: 10500
+		StartFullyCharged: true
+		Names:
+			1: actor_scrin_rift_generator.name
+		Descriptions:
+			1: support-power-scrin-rift.description
+		Weapons:
+			1: ScrinRiftInit
+		SelectTargetTextNotification: Select target.
+		DisplayRadarPing: true
+		BeaconActor: camera.placeholderhack
+		CameraRange: 8c0
+		CameraRemoveDelay: 250
+		PauseOnCondition: disabled
+
+scrin_rift_weapon_effect:
+	Inherits: ^RiftBase
+	RenderSprites:
+		Image: scrin_rift_weapon_orb
+		Palette: effect
+	WithRotatingSprite@VORTEX:
+		Image: scrin_rift_weapon_vortex
+		Sequence: idle
+		Palette: effect
+		Alpha: 1.0
+		RevolutionTicks: 500
+		Clockwise: true
+	WithSpriteBody:
+	PeriodicExplosion:
+		Weapon: ScrinRiftShockwavePulse
+	WithLifetimeFade:
+		Duration: 250, 250
+		FadeInTicks: 12
+		FadeOutTicks: 12
+	Health:
+		HP: 1
+	RevealsShroud:
+		Range: 8c0
+		Type: CenterPosition
 
 scrin_lightning_spike:
 	Inherits: ^ScrinDefense

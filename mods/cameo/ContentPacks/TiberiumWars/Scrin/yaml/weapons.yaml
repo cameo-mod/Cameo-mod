@@ -215,24 +215,30 @@ ScrinCorrupterSpew:
 	Inherits: ScrinAcidBeam
 	-Report:
 	StartBurstReport: weapon-corrupter-1.aud, weapon-corrupter-2.aud, weapon-corrupter-3.aud
-	Burst: 10
-	BurstDelays: 2
+	ReloadDelay: 54
+	Burst: 1
 	-Projectile:
 	Projectile: Bullet
-		Image: scrin_fx_tiberium_spew
-		Palette: scrin_projectiles_ignore_lighting_alpha85
-		TrailImage: scrin_fx_tiberium_spew_trail
-		TrailPalette: scrin_projectiles_ignore_lighting_alpha85
-		Speed: 110
-		LaunchAngle: 62
-		Inaccuracy: 682
+		Speed: 3000
 		Blockable: false
-	Warhead@1Dam:
-		Damage: 420
+	-Warhead@1Dam:
+	Warhead@1Dam: AreaDamage
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+		Spread: 96
+		Damage: 15000
+		Versus:
+			None: 125
+			Wood: 115
+			Light: 95
+			Medium: 65
+			Heavy: 45
+			Concrete: 35
+		DamageTypes: Prone50Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@2Eff: CreateEffect
-		Image: scrin_fx_tiberium_splash
-		Explosions: idle
-		ExplosionPalette: scrin_projectiles
+		Explosions: chemball
 
 ScrinDevastatorDiscs:
 	Inherits: ScrinCapitalBeam
@@ -286,12 +292,15 @@ ScrinTripodLaser:
 	ValidTargets: Ground, Water
 	Projectile: PlasmaBeam
 		Duration: 19
-		Colors: 7D44FFE6, EB66FFE6, 5763FFE6
-		InnerLightness: 200
-		OuterLightness: 115
+		Colors: 3399FFEE, 0066CCEE
+		InnerLightness: 170
+		OuterLightness: 130
 		Radius: 2
 		Blockable: false
 		RecalculateColors: true
+		CenterBeam: true
+		CenterBeamWidth: 45
+		CenterBeamColor: EEF8FFFF
 		StartOffset: -150,300,0
 		FollowingOffset: 20,-40,0
 		ImpactTicks: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
@@ -425,3 +434,39 @@ ScrinStormColumnBeam:
 	Range: 10c0
 	Warhead@1Dam:
 		Damage: 18000
+
+ScrinRiftInit:
+	ValidTargets: Ground, Water
+	Projectile: InstantExplode
+	# Match Cameo's nuclear terrain distortion radius and strength, but keep its
+	# fade bounded to the Rift's ten-second lifetime.
+	Warhead@Distortion: HeatDistortion
+		# Keep the refraction concentrated tightly inside the visible orb.
+		RadiusScale: 0.5
+		StrengthScale: 2.0
+		# 0.5 s fade-in + 9 s steady hold + 0.5 s fade-out.
+		FadeFrames: 60
+		FadeInFrames: 30
+		HoldFrames: 540
+	Warhead@Spawn: SpawnActor
+		Actors: scrin_rift_weapon_effect
+		Range: 1
+		ForceGround: true
+		ValidTargets: Ground, Water
+		ImpactActors: false
+
+ScrinRiftShockwavePulse:
+	ReloadDelay: 250
+	Burst: 10
+	# PeriodicExplosion adds one tick to each delay: 24 is exactly one second
+	# at the engine's 40 ms timestep.
+	BurstDelays: 24, 24, 24, 24, 24, 24, 24, 24, 24
+	Warhead@InverseShockwave: Shockwave
+		# Cameo's active renderer has a 500 px base radius. Terrain uses 48 px
+		# tiles, so 0.768 starts the ring at 384 px = 8 tiles.
+		RadiusScale: 0.768
+		StrengthScale: 1.0
+		Reverse: true
+		ReverseEndRadiusFraction: 0
+		FadeFrames: 60
+		FadeInFrames: 6
