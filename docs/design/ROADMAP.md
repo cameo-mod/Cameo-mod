@@ -129,7 +129,25 @@ the counterexample: equal damage, four different ladders.
   resolves to **0.1876x** always-on firepower (GlobalBuffs 50 x InfantryBuff 110 x
   AntiTankAntiAirInfantryBuff 110 x TripleShot 31), `zerg_hydralisk` to **0.599x** — a 3.19x gap
   that W17 made invisible to pricing while it stays fully live in play.
-- [ ] Hold `HydraSpit` as-is until the first two land.
+- [x] **RULED 2026-09-02** — the maintainer accepts the drift: *"I will review all factions
+  manually one by one actor before we release anything. For now it's more important to reduce
+  everything down to a single warhead and we can then make new warheads."* So §1b's
+  sum-preservation stands, the shape classifier is downgraded from a gate to a REPORT, and the
+  per-armor comparison becomes the worksheet that makes the manual review cheap. The two audit
+  items above are unaffected — they are live defects, not balance questions.
+- [x] **DONE (patch) 2026-09-02** — `^Warhead_BulletChem_{Light,Medium,Heavy}`, the bullet-delivery
+  member of the Chem set (`["Bullet", "Chemical"]`), for the `HydraSpit` collapse. Generated, not
+  hand-written; `verify_generator_sync` 142 templates drift 0, `audit_family_uniqueness` OK,
+  `heaviness_bell` 0 inversions / 0 drift, `find_empty_warhead` 0. ⛔ Needs a boot machine:
+  [`../patches/README.md`](../patches/README.md) `01_bulletchem_family.patch`.
+- [ ] **S** — ⚠ RULING NEEDED before `HydraSpit` is repointed: `BulletChem` lifts `Fighter` (1.71x
+  vs the Chemical collapse's 0.87x) and `Bomber` (1.18x vs 0.93x) as ordered, but `Helicopter` is
+  flat (1.02x) and `Spaceship` DROPS (0.92x vs 1.22x). Both parents are weak on those two rows
+  (Bullet 66/53, Chemical 54/60), so no weighting fixes it — only a third air-tilted parent
+  (`MissileAA` is 177/191 there, and `PhotonCannon` already uses it that way).
+- [ ] **S** — repoint `HydraSpit` onto `^Warhead_BulletChem_Light` + its projectile/effect layers,
+  one damage main at the preserved raw 72,000, dropping three of the four percentage twins.
+  Boot gate.
 
 ---
 

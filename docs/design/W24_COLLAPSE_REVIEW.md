@@ -268,3 +268,76 @@ python tools/audit/audit_physical_state_warheads.py      # PASS today — the po
 The per-armor tables and the duplicate-binding census were produced by short scripts over
 `miniyaml.Ruleset` + `percentage_damage.versus_table`; §6.2 and §6.3 turn both into permanent
 tools so they never have to be re-derived by hand.
+
+---
+
+## §8 — ⛔ MAINTAINER RULING, 2026-09-02 — this review's §6 is SUPERSEDED in part
+
+> *"Don't worry about it, I will review all factions manually one by one actor before we release
+> anything. For now it's more important to reduce everything down to a single warhead and we can
+> then make new warheads. For the hydralisk I'm thinking about a new BulletChem that is like
+> Bullet x Chemical so it's more similar to what it was before but more damage against infantry
+> and aircraft with a little bit damage against tanks from the chemical side."*
+
+**What this settles.** The balance drift this review measured is **accepted**, because a manual
+per-actor pass stands behind it. §1b's "preserve the SUM and let the pricing pass fix the
+magnitude" therefore stands as written — it is now backed by a human review, not only by the
+pricing pass. **Structure first, magnitudes later, new families after.**
+
+| this review's proposal | status after the ruling |
+|---|---|
+| §6.1 split the collapse rule by shape | ⛔ **NOT NEEDED for magnitude.** Sum-preservation is ruled fine. The shape classifier may still be worth having as a REPORT, so the manual review knows which weapons changed most — but it is no longer a gate. |
+| §6.2 resolved per-armor comparison in `review_resolve_diff` | ✅ **STILL WANTED** — it is what makes the manual review cheap. It stops being a blocker and becomes a worksheet. |
+| §6.3 fix `audit_physical_state_warheads` to model the two forms as ADDITIVE | ✅ **UNAFFECTED** — a live defect on ~200 warheads, nothing to do with W24. |
+| §6.4 unconditional `FirepowerMultiplier` stacks on the board | ✅ **UNAFFECTED**. |
+| §6.5 leave `HydraSpit` alone | ⛔ **SUPERSEDED** — it collapses onto the new `BulletChem` family. |
+
+### The new family
+
+`^Warhead_BulletChem_{Light,Medium,Heavy}` — the **bullet-delivery member of the Chem set**, next
+to `CannonChem` and `MissileChem`. Generated, not hand-written: one `BLEND_FAMILIES` entry
+(`["Bullet", "Chemical"]`) plus `--all` regenerate. Waiting on a boot machine as
+[`../patches/01_bulletchem_family.patch`](../patches/README.md), with its full verification
+table there.
+
+Shape falls out of the machinery and is unique: radius = geometric mean of Bullet 100 and Chemical
+1100 = **332**, falloff `100, 82, 61, 38, 0`. Nearest neighbour `BulletFire` (346,
+`100, 83, 64, 43, 0`) differs on both axes, so `audit_family_uniqueness` stays OK.
+
+Corrosion follows the **Chem** convention (`{Light 20, Medium 33, Heavy 50}`), not the flat
+`_m(0.50)` the other Bullet blends use. The two agree at Heavy — Chemical's full 100 over 2
+parents — so the ramp is the same per-parent-average rule with a level curve, and being the third
+member of the Chem set outranks being the fifth member of the Bullet set. ⚠ Flagged rather than
+assumed; say the word and it becomes flat 50.
+
+### `HydraSpit` collapsed onto it — measured
+
+Against the 4-warhead stack that ships today, and against the pure-`Chemical` collapse this
+review was written about:
+
+| armor | now | BulletChem @ raw 72,000 | ×now | Chemical @ 72,000 | ×now |
+|---|--:|--:|--:|--:|--:|
+| None | 51,480 | 137,520 | **2.67** | 82,800 | 1.61 |
+| Scout | 38,520 | 105,120 | **2.73** | 85,680 | 2.22 |
+| Flak | 51,480 | 111,600 | 2.17 | 96,480 | 1.87 |
+| Light | 39,600 | 90,720 | 2.29 | 90,000 | 2.27 |
+| Fighter | 39,600 | 67,680 | **1.71** | 34,560 | 0.87 |
+| Bomber | 38,520 | 45,360 | **1.18** | 36,000 | 0.93 |
+| Helicopter | 37,440 | 38,160 | 1.02 | 38,880 | 1.04 |
+| Spaceship | 35,280 | 32,400 | 0.92 | 43,200 | 1.22 |
+| Heavy | 41,760 | 65,520 | 1.57 | 99,360 | 2.38 |
+| Superheavy | 42,840 | 57,600 | 1.34 | 100,800 | 2.35 |
+| | | **min 0.52 · max 2.78 · median 1.60** | | min 0.62 · max 2.38 · median 1.74 | |
+
+⭐ **The order's intent is confirmed on every row it names.** Against the Chemical collapse:
+infantry up hard (`None` 2.67 vs 1.61, `Scout` 2.73 vs 2.22), aircraft up (`Fighter` 1.71 vs 0.87,
+`Bomber` 1.18 vs 0.93), tanks kept to *"a little bit"* (`Heavy` 1.57 vs 2.38, `Superheavy` 1.34 vs
+2.35) while staying well above what pure Bullet would give (Bullet's own Heavy row is 59).
+
+⚠ **Two air rows move the wrong way and need a ruling before the repoint.** `Helicopter` is flat
+(1.02 vs 1.04) and `Spaceship` drops (0.92 vs 1.22). Both parents are weak there — Bullet 66/53,
+Chemical 54/60 — so no weighting of the two can lift them. Only a third, air-tilted parent could
+(`MissileAA` is 177/191 on those rows; `PhotonCannon` already uses it as a third parent).
+
+⚠ At the raw 72,000 the collapse is a **1.46× mean buff**, per the ruling. A mean-preserving
+`Damage` would be **49,200** if it is ever wanted.
