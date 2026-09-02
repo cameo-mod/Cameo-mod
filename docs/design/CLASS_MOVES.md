@@ -111,14 +111,19 @@ as this one and roughly 20 units in size, and it empties most of the grab-bag at
 
 ---
 
-## 2. The unclassified 91 — grouped for approval (A3 + A4)
+## 2. The unclassified 91 — ✅ APPROVED 2026-09-02 (A3 + A4)
 
 Every **buildable, mobile** actor carrying no full class template. 67 have nothing at all; 24 carry
 only an epic add-on. Buildings are out of scope (§4.5 of `BASELINE_ACTOR_REVIEW.md`), upgrades are
 not units.
 
-⭐ **Groups are ordered by confidence.** Approve the top ones outright; the bottom ones are
-genuinely ambiguous and I flag why.
+✅ **Maintainer approved 2.1, 2.2, 2.3 and 2.6 outright**, ruled that ground/naval transports get
+their **own template**, and made three further rulings recorded below. Three units are deliberately
+deferred to be handled one at a time.
+
+**Three NEW templates come out of this pass** — `^TransportVehicleTemplate`,
+`^SuicideVehicleTemplate` and `^CarrierDroneTemplate` (A6) — and one DEAD template,
+`^SupportInfantryTemplate`, is filled by its obvious tenants.
 
 ### 2.1 ⭐ Engineers → `^SupportInfantryTemplate` *(fills a DEAD template)* — 11 units, high confidence
 
@@ -151,7 +156,36 @@ engineers in one class**, and one of the five dead templates is filled by its ob
 `carryall_reinforce.ordos` (5,000) carry `d2kCarryallChainGun` — an *armed* transport helicopter, so
 `^HelicopterTemplate` instead.
 
-### 2.4 Ground and naval transports — 10 units, ⚠ needs a class that may not exist
+### 2.4 ✅ Transports → **NEW `^TransportVehicleTemplate`** — 11 units, one class
+
+**Ruled: one template for all 11.** Measured, they share an identical cargo contract
+(`Infantry, Hacker, Fremen, Vehicle`) and span 500–1,200 — a **2.4x spread that already fits the
+2.5x band**, anchored on the cheapest at 500. They differ only in *how* they cross water:
+
+| locomotor | units |
+|---|---|
+| `lcraft` | `CNCRSS` 500 · `LST` 500 · `ra1_navaltransport` 500 |
+| `hover` | `ra2lcrf` 750 · `ra2sapc` 750 · `yrhovr` 750 · `ts_gdi_hover` 1,200 · `ts_nod_hover` 1,200 · `cabal_lcraft` 1,200 |
+| `naval` | `wc2_human_transport` 1,000 · `wc2_orc_transport` 1,000 |
+
+⭐ **Locomotor is a movement detail, not a role.** All eleven do the same job.
+
+### 2.4a ✅ Oil tankers → `^HarvesterTemplate` — and ⛔ a BROKEN MECHANIC recorded
+
+`wc2_human_oil_tanker` and `wc2_orc_oil_tanker` (400cr, `naval`, **no cargo**) are not transports —
+they are WC2 resource ships, found only because the locomotor check separated them from 2.4.
+
+⛔ **Maintainer, recorded as a defect, not a classification problem:** *"the game mechanic is not
+working correctly. What they should do is travel between the two naval buildings, load up in one and
+move to the other. Currently we can't do that. Also we don't have oil patches in the water — so what
+is the purpose?"*
+
+So the class is `^HarvesterTemplate`, **but the unit currently has no working economy loop**: no
+water oil patches to harvest from, and no building-to-building haul route. ⚠ **Pricing them before
+that is settled prices a unit that does nothing.** Flagged for the balance pipeline as a
+quarantine candidate (`docs/design/balance_exceptions.yaml`) until the mechanic works.
+
+### 2.4b (superseded — see 2.4)
 
 `CNCRSS` 500 · `LST` 500 · `ra1_navaltransport` 500 · `ra2lcrf` 750 · `ra2sapc` 750 · `yrhovr` 750 ·
 `ts_gdi_hover` 1,200 · `ts_nod_hover` 1,200 · `cabal_lcraft` 1,200 ·
@@ -161,14 +195,17 @@ engineers in one class**, and one of the five dead templates is filled by its ob
 but a landing craft is not a support vehicle. This group needs a ruling: new template, or fold into
 support?
 
-### 2.5 Demolition trucks — 4 units, ⚠ no class exists
+### 2.5 ✅ Suicide units → **NEW `^SuicideVehicleTemplate`** — 5 units
 
 `asianalliance_oiltruck` 1,000 · `latinsyndicate_demolitiontruck` 1,500 ·
 `ra1_soviets_nukedemotruck` 1,500 · `latinsyndicate_nuketruck` 3,000 *(epic)* — all
 `DemoTruckTargeting`.
 
-⛔ A suicide unit prices unlike anything else: its damage is one-shot and it dies doing it. Needs its
-own template, or an explicit exclusion.
+**Ruled: their own template.** ⭐ The reasoning is a pricing one, and it is why a class exists at
+all: a one-shot unit **cannot be priced on DPS**. Its damage is a single burst and its survivability
+is irrelevant the moment it fires, so pricing it against sustained line-breakers reads as wildly
+wrong in either direction. `ra1_soviets_madtank` joins them — it is a suicide-by-shockwave epic, and
+it keeps its `^EpicVehicleTemplate` add-on.
 
 ### 2.6 The 24 epic-only → base class from role (A4)
 
@@ -193,7 +230,14 @@ Each keeps `^EpicVehicleTemplate` as the add-on and gains a base class. Proposed
 | mobile buildings | `japan_corepowerplant` · `corebarracks` · `coreservicedepot` · `coreairfield` · `corewarfactory` · `coreradar` · `corerefinery` · `coretechcenter` (8) | Japan's mobile-base system — buildings that move; pricing them as vehicles distorts any class |
 | | `PLYMOUTH_CONVEC_STRUCTURE_FACTORY` 5,000 | same shape, Outpost-2 import |
 
-### 2.8 ⚠ Genuinely ambiguous — one at a time
+### 2.8 ⚠ Still open — three DEFERRED by ruling, five proposed
+
+✅ **Deferred, to be brought one at a time with full stats:** `RAPT`, `tsprobe`,
+`wc2_neutral_daemon`. All three are roles the taxonomy genuinely lacks — a melee vehicle, an air
+scout, an air attacker — and the maintainer chose to see them individually rather than force them
+into a nearest neighbour.
+
+⚠ **Five still carry only my proposed read and need a call:**
 
 | unit | cost | evidence | my read |
 |---|--:|---|---|
@@ -207,3 +251,24 @@ Each keeps `^EpicVehicleTemplate` as the add-on and gains a base class. Proposed
 | `ordos_saboteur` | 300 | `GenericC4` | 2.1 engineers, or its own saboteur role |
 
 ⚠ **`ra1_allies_chronotank` also appears in §1's multi-template list** — resolve there first.
+
+### 2.9 ✅ The approved tally
+
+| destination | n | status |
+|---|--:|---|
+| `^SupportInfantryTemplate` *(dead → filled)* | 11 + **4 rescued from `^SniperInfantryTemplate`** = **15** | ✅ approved |
+| `^SupportVehicleTemplate` | 6 | ✅ approved |
+| `^UnarmedTransportHelicopterTemplate` | 7 | ✅ approved |
+| `^HelicopterTemplate` (the 2 ARMED carryalls) | 2 | ✅ approved |
+| **NEW `^TransportVehicleTemplate`** | 11 | ✅ ruled |
+| **NEW `^SuicideVehicleTemplate`** | 5 | ✅ ruled |
+| `^HarvesterTemplate` (oil tankers) | 2 | ✅ ruled — ⛔ mechanic broken, quarantine first |
+| the epic 24 → base class + add-on | 24 | ✅ approved |
+| **A7 separation, not a class** | 17 | ⚠ proposed (5 critters, 3 `eden_impulseitems`, 9 mobile buildings) |
+| deferred, one at a time | 3 | ✅ ruled |
+| still needing a call | 5 | ⚠ open |
+
+⚠ **Every line here is a yaml edit to `mods/**` — engine content.** Boot gate before commit
+(CLAUDE.md rule 1). The three new templates must be written before the units can inherit them, and
+`^SuicideVehicleTemplate` needs a pricing shape that is not DPS-based before its members can be
+priced at all.
