@@ -69,7 +69,7 @@ not of the history: the commits exist upstream. Either run `git fetch --unshallo
 | # | item | verify | state 2026-09-02 |
 |---|---|---|---|
 | 1 | **CLASS ANCHORS** — all 27 ready, then signed | `python tools/balance/anchor_readiness.py` | **8 of 27 signed**. Membership: **597 of 1870 buildable (32%)**, up from 336 (18%) on 2026-09-02 — see below. **26 of 27** anchors are now members of their own class (was 17), and **0** classes have zero members (was 5) |
-| 2 | **UNIT TEMPLATES** — exactly one `Inherits@Template:` per buildable actor | `python tools/audit/audit_class_templates.py` | 109 defects (missing or multiple) |
+| 2 | **UNIT TEMPLATES** — exactly one `Inherits@Template:` per buildable actor | `python tools/audit/audit_class_templates.py` | **97 defects**: 67 with none, 6 with more than one, 24 carrying only an add-on. ⭐ The 67 group into **8 cohorts + 32 singles**, so it is ~40 rulings, not 67 |
 
 ⭐ **They are the same problem seen from two ends.** The ledger's `design.class_anchor` is a
 hand-maintained tag covering 18%; the yaml templates classify **structurally and cover everything**.

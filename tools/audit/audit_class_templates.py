@@ -71,6 +71,23 @@ NOT_A_CLASS = {
     "^UnitUpgradeTemplate", "^TeamUpgradeTemplate", "^TechUpgradeTemplate", "^DoctrineTemplate",
 }
 # Layered on top of a full class template; never a class on their own.
+# ⚠ A READING OF EACH COHORT'S SHARED SIGNATURE, NOT A DECISION. Three of the templates named
+# here DO NOT EXIST YET (`^TransportTemplate`, `^SuicideVehicleTemplate`, `^DeployVehicleTemplate`)
+# and are marked NEW — the maintainer has ruled that transports and suicide units should each get
+# their own template (2026-09-02); the deploy/MCV one is unruled. Anything not listed prints
+# "needs a ruling" rather than being guessed into a class.
+PROPOSED = {
+    ("^Soldier", "^RA2Infantry", "^SelectableSupportUnit"): "`^SupportInfantryTemplate` — engineers",
+    ("^Soldier", "^TDRAInfantry", "^SelectableSupportUnit"): "`^SupportInfantryTemplate` — engineers",
+    ("^BoatUnit", "^UnarmedCargoVehicle"): "**NEW** `^TransportTemplate` — naval transport (ruled)",
+    ("^Helicopter", "^TSRenderVoxel"): "`^UnarmedTransportHelicopterTemplate` (exists)",
+    ("^AirstrikePlane", "^CloakedAircraft", "^D2KPaletteRender"): "`^UnarmedTransportHelicopterTemplate` — carryalls",
+    ("^Vehicle", "^AutoTargetGroundAssaultMove", "^PrioritizeDefence"): "**NEW** `^SuicideVehicleTemplate` (ruled)",
+    ("^Vehicle", "^SelectableSupportUnit"): "`^SupportVehicleTemplate`",
+    ("^Tank", "^TSRenderVoxel", "^GenericGroundDetector"): "`^SupportVehicleTemplate` — sensor/stealth",
+    ("^WC2Critter",): "⚠ not player-controlled — EXEMPT or a critter class?",
+}
+
 ADD_ON = {"^EpicVehicleTemplate", "^EpicAirUnitTemplate"}
 
 
@@ -170,13 +187,19 @@ def main() -> int:
             except (TypeError, ValueError):
                 pass
 
+        # ⭐ THE SIGNATURE IS WHAT MAKES 91 DEFECTS INTO ~9 RULINGS. An untemplated actor still
+        # inherits BEHAVIOUR templates (^Soldier, ^BoatUnit, ^Helicopter, ^SelectableSupportUnit
+        # ...), and units that need the same class share those. Grouping on the signature turns
+        # "67 actors to classify one by one" into a handful of cohorts — which is PRIORITY 0's
+        # own instruction: work the top level, not the single unit.
+        sig = tuple(v for v in inherit_values(rs.actor(name)) if not v.endswith("Template"))[:3]
         if len(full) == 1:
             ok += 1
             per_class[full[0]] += 1
         elif not full and addons:
             addon_only.append((name, cost, addons))
         elif not full:
-            missing.append((name, cost))
+            missing.append((name, cost, sig))
         else:
             multiple.append((name, cost, full, addons))
 
@@ -201,11 +224,38 @@ def main() -> int:
     w("")
 
     if missing:
+        # ⭐ PRIORITY 0 item 2 AS A DECISION LIST, NOT A BACKLOG. The 67 untemplated actors are
+        # not 67 rulings: they share BEHAVIOUR templates, and units needing the same class share
+        # those. Cohorts below 3 stay in the singles list rather than being padded into a group.
+        by_sig = collections.defaultdict(list)
+        for n, c, sig in missing:
+            by_sig[sig].append((n, c))
+        cohorts = sorted(((k, v) for k, v in by_sig.items() if len(v) >= 3),
+                         key=lambda kv: -len(kv[1]))
+        singles = sorted((x for k, v in by_sig.items() if len(v) < 3 for x in v))
+        w(f"## ⭐ The 67, grouped — {len(cohorts)} cohorts and {len(singles)} singles\n")
+        w("Grouped on the BEHAVIOUR templates each actor already inherits, so a cohort is a")
+        w("single ruling rather than N. ⚠ The `proposal` column is a READING of the shared")
+        w("signature, never a decision: three of the templates it names do not exist yet.\n")
+        w("| shared inherits | actors | proposal |")
+        w("|---|--:|---|")
+        for sig, actors in cohorts:
+            w(f"| {' + '.join('`'+x+'`' for x in sig) or '—'} | **{len(actors)}** | "
+              f"{PROPOSED.get(sig, '⚠ needs a ruling')} |")
+        w("")
+        for sig, actors in cohorts:
+            w(f"**{' + '.join('`'+x+'`' for x in sig) or '—'}** → {PROPOSED.get(sig, '⚠ needs a ruling')}\n")
+            w("  " + " · ".join(f"`{n}`" for n, _c in sorted(actors)) + "\n")
+        if singles:
+            w(f"### ⚠ Singles — {len(singles)}, each its own ruling\n")
+            w("  " + " · ".join(f"`{n}`" for n, _c in singles) + "\n")
+
+    if missing:
         w(f"## ⛔ No class template ({len(missing)})\n")
         w("These cannot be classified, so the pipeline cannot price them.\n")
         w("| actor | cost |")
         w("|---|--:|")
-        for n, c in sorted(missing, key=lambda r: (-(r[1] or 0), r[0])):
+        for n, c, _sig in sorted(missing, key=lambda r: (-(r[1] or 0), r[0])):
             w(f"| `{n}` | {c if c is not None else '—'} |")
         w("")
 
