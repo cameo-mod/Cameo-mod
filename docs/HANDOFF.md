@@ -68,7 +68,7 @@ not of the history: the commits exist upstream. Either run `git fetch --unshallo
 
 | # | item | verify | state 2026-09-02 |
 |---|---|---|---|
-| 1 | **CLASS ANCHORS** — all 27 ready, then signed | `python tools/balance/anchor_readiness.py` | **8 of 27 signed**, and only **336 of 1870** buildable units (18%) carry a class tag. 17 of 27 anchors are not members of the class they anchor; 5 classes have ZERO members |
+| 1 | **CLASS ANCHORS** — all 27 ready, then signed | `python tools/balance/anchor_readiness.py` | **8 of 27 signed**. Membership: **597 of 1870 buildable (32%)**, up from 336 (18%) on 2026-09-02 — see below. **26 of 27** anchors are now members of their own class (was 17), and **0** classes have zero members (was 5) |
 | 2 | **UNIT TEMPLATES** — exactly one `Inherits@Template:` per buildable actor | `python tools/audit/audit_class_templates.py` | 109 defects (missing or multiple) |
 
 ⭐ **They are the same problem seen from two ends.** The ledger's `design.class_anchor` is a
@@ -81,6 +81,49 @@ Deriving the class from the template is the one change that takes every downstre
 or does it move the SYSTEM?"* One weapon, one warhead, one actor is the trap: it feels productive,
 produces good documents, and advances the pipeline by nothing. A single-unit fix that is genuinely
 needed goes into [`design/ROADMAP.md`](design/ROADMAP.md) as a line, not into this session as work.
+
+
+### ⭐ 2026-09-02 — the 18% was a property of the READER, and it is fixed
+
+`design.class_anchor` is a hand-maintained tag on a third of the roster. `design.subtype` — **the
+`^<Name>Template` the actor inherits** — is re-derived from yaml for every row on every extract.
+The class was always derivable; what was missing was a complete map, and there were **three
+incomplete copies of it that disagreed** (`propose_class_rebalance` 17 entries,
+`build_workbook` 5, `update_ranges` 5), while the readers that matter — `anchor_readiness`,
+`fit_class`, `check_band`, `band_granularity` — called none of them and read the raw tag.
+
+**[`tools/balance/class_membership.py`](../tools/balance/class_membership.py) is now the one map.**
+All three copies delegate to it; `anchor_readiness` reads it. Measured effect, no new hand-tagging:
+
+| | before | after |
+|---|--:|--:|
+| units with a class | 346 (35% of 993 real units) | **660 (66%)** |
+| buildable units tagged | 336 (18%) | **597 (32%)** |
+| anchors that ARE members of their own class | 17 of 27 | **26 of 27** |
+| classes with ZERO members | **5** (3 of them signed) | **0** |
+
+⛔ **It also fixed a live bug all three copies carried:** `linebreaker -> mbt`, folding 40
+line-breakers into the MBT population in the workbook and the range tool, while `line_breaker` is
+one of the 27 classes with 30 of its 31 members tagged as such.
+
+**What is now visible, and blocking:**
+
+1. **219 units have no class that exists.** `class_anchors.json` holds 27 classes and **not one is
+   an air or a naval class** — 181 air units (helicopter 58, bomber 34, aircraft 26, fighter 22,
+   spaceship 21, transport-helicopter 9, flying infantry 11), 54 naval, 27 harvesters. The pipeline
+   cannot price a third of the roster. **Needs a maintainer ruling on new classes.**
+2. **114 units have no unit template at all** — PRIORITY 0 item 2, now enumerated by subtype.
+3. **38 rows where the hand tag disagrees with the template** — the drift, now listed rather than
+   invisible. The explicit tag still wins; the disagreements are reported.
+4. **1 anchor still outside its class**: `heavy_sniper -> td_gdi_heavysniper`, which sits in
+   `^SniperInfantryTemplate` and so classifies as `pure_sniper`. `^HeavySniperInfantryTemplate` is
+   one of the five dead templates (`docs/design/CLASS_MOVES.md` §0) — the anchor is signed for a
+   class whose template has zero inheritors.
+
+```sh
+python tools/balance/class_membership.py          # coverage + the disagreements
+python tools/balance/class_membership.py --gaps   # only what still has no class
+```
 
 ---
 

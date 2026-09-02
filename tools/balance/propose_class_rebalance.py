@@ -19,6 +19,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/balance"))
 import formula  # noqa: E402
 import tier_chain  # noqa: E402
+import class_membership  # noqa: E402
 
 LEDGER_DIR = ROOT / "docs/balance"
 ANCHORS_FILE = LEDGER_DIR / "class_anchors.json"
@@ -94,36 +95,16 @@ def fnum(v):
         return None
 
 
-def subtype_to_anchor(st: str | None) -> str | None:
-    """Map a design.subtype (the ^<Name>Template the actor inherits) to its
-    class-anchor key. Membership is template-driven; an explicit
-    design.class_anchor override still wins over this (see load_class_rows).
-    MortarInfantry → grenadier and AntiTankAntiAir → rocket_trooper are
-    provisional (flagged for the maintainer review + the ^AntiTankAntiAir
-    split task)."""
-    if not st:
-        return None
-    name = re.sub(r"[^A-Za-z0-9]", "", str(st)).casefold()
-    exact = {
-        "scoutinfantry": "scout",
-        "closecombatinfantry": "closecombat",
-        "specialforcesinfantry": "special_forces",
-        "grenadierinfantry": "grenadier",
-        "mortarinfantry": "mortar",             # separate class (long-range/slow)
-        "antitankantiairinfantry": "rocket_trooper",  # provisional (AT+AA launcher)
-        "rockettrooperinfantry": "rocket_trooper",
-        "heavyinfantry": "heavy_infantry",
-        "meleeinfantry": "melee",
-        "sniperinfantry": "pure_sniper",
-        "heavysniperinfantry": "heavy_sniper",
-        "archerinfantry": "archer",
-        "supportinfantry": "support",
-        "heroinfantry": "commando",
-        "flyinginfantry": "flying_infantry",
-        "mainbattletank": "mbt",
-        "linebreaker": "mbt",
-    }
-    return exact.get(name)
+def subtype_to_anchor(st):
+    """DELEGATES to `tools/balance/class_membership.py`, the single map.
+
+    ⛔ There were THREE copies of this function and they disagreed: this one and
+    `update_ranges.py` knew 5 subtypes, `propose_class_rebalance.py` knew 17, and all three said
+    `linebreaker -> mbt` when `line_breaker` is its own class with 30 of 31 members tagged that
+    way — so 40 line-breakers were being folded into the MBT population. Kept as a name so the
+    call sites do not all have to change at once.
+    """
+    return class_membership.subtype_to_anchor(st)
 
 
 def load_anchors():

@@ -60,6 +60,8 @@ import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
+import class_membership  # noqa: E402
+
 LEDGER = ROOT / "docs" / "balance"
 TICKS_PER_SECOND = 25
 
@@ -346,8 +348,14 @@ def main():
 
     anchors = json.loads((LEDGER / "class_anchors.json").read_text(encoding="utf-8"))
     units = load_units()
+    # ⛔ MEMBERSHIP COMES FROM THE TEMPLATE, NOT FROM THE HAND TAG (PRIORITY 0 item 1,
+    # 2026-09-02). Reading `design.class_anchor` raw was why this board said 18%: the tag is a
+    # hand-maintained copy covering a third of the roster, while `design.subtype` -- the
+    # ^<Name>Template the actor inherits -- is re-derived from yaml for every row on every
+    # extract. `class_membership.classify` prefers an explicit tag and falls back to the
+    # template, which takes coverage from 346 to 660 of 993 units with no new tagging.
     tagged = [(f, s, n, r) for f, s, n, r in units
-              if (r.get("design") or {}).get("class_anchor")]
+              if class_membership.classify(r.get("design") or {})[0]]
 
     buildable = sum(1 for _f, _s, _n, r in units if r.get("buildable"))
     classes = [c for c in anchors if not c.startswith("_")]
@@ -359,7 +367,7 @@ def main():
     print(f"buildable units      : {buildable}")
     tagged_buildable = sum(1 for _f, _s, _n, r in units
                            if r.get("buildable")
-                           and (r.get("design") or {}).get("class_anchor"))
+                           and class_membership.classify(r.get("design") or {})[0])
     print(f"tagged with a class  : {tagged_buildable} of the buildable "
           f"({tagged_buildable / buildable * 100:.1f}%); {len(tagged)} including "
           "non-buildable\n")
@@ -377,7 +385,8 @@ def main():
     # median pricing error: the zero point is an outlier at the bottom of the population it
     # defines, so every member is measured against a ruler planted in the wrong place.
     # Fixable by moving the anchor, without touching the formula.
-    tag_of = {n: (r.get("design") or {})["class_anchor"] for _f, _s, n, r in tagged}
+    tag_of = {n: class_membership.classify(r.get("design") or {})[0]
+              for _f, _s, n, r in tagged}
     hp_of = {}
     for _f, _s, n, r in units:
         v = r.get("hp")
@@ -437,7 +446,7 @@ def main():
         tier_map = {}
         rows_by_class = collections.defaultdict(list)
         for _fn, actor, u, du in cb.collect(tier_map):
-            cls = (u.get("design") or {}).get("class_anchor")
+            cls = class_membership.classify(u.get("design") or {})[0]
             if not cls or cls not in anchors:
                 continue
             inp = cb.unit_inputs(u, du)
@@ -567,7 +576,7 @@ def main():
     # --- per-class fit ------------------------------------------------------ #
     members = collections.defaultdict(list)
     for _f, _s, _n, rec in tagged:
-        cls = (rec.get("design") or {})["class_anchor"]
+        cls = class_membership.classify(rec.get("design") or {})[0]
         d = distance(features(rec), (anchors.get(cls) or {}).get("spec") or {})
         if d is not None:
             members[cls].append(d)
@@ -646,7 +655,7 @@ def main():
     drift = [r for r in spec_rows if r[5] is not None and abs(r[5] - 1.0) > 1e-9]
     offspec = [r for r in spec_rows if r[6]]
     gate, gate_err = three_way_split_gate(
-        {n: r for _f, _sec, n, r in units}, {n: (r.get("design") or {}).get("class_anchor")
+        {n: r for _f, _sec, n, r in units}, {n: class_membership.classify(r.get("design") or {})[0]
                                              for _f, _sec, n, r in units})
     print("\n## The 3-way split gate — what must be fixed BEFORE a class is priced\n")
     print("§0a of `BALANCE_PROGRAM_PLAN.md` is binding: weapon structure comes before pricing. "
@@ -705,10 +714,10 @@ def main():
         hit = miss = skipped = 0
         sections_of = collections.defaultdict(set)
         for _f, section, _n, rec in tagged:
-            sections_of[(rec.get("design") or {})["class_anchor"]].add(section)
+            sections_of[class_membership.classify(rec.get("design") or {})[0]].add(section)
         confusion = collections.Counter()
         for _f, section, _n, rec in tagged:
-            truth = (rec.get("design") or {})["class_anchor"]
+            truth = class_membership.classify(rec.get("design") or {})[0]
             got, _d, _r = predict(features(rec), section, anchors, sections_of)
             if got is None:
                 skipped += 1
