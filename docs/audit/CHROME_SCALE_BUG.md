@@ -56,6 +56,72 @@ declaration. That patch has been **withdrawn**; it was a false positive from mea
 flags, and nothing else. Blackrobe's own note that Dobry's cut-off *build cards* "could be
 engine-level" is consistent — those are a separate issue, not this one.
 
+## How OpenRA and Combined Arms do it — measured, not assumed
+
+Blackrobe's objection was *"why 3x and not 4x like it is also for CA and OpenRA"*. He is right
+about what those files look like, and the resolution is that **canvas size and artwork scale are
+two different things.** Measured across all three projects:
+
+### Combined Arms (`Inq8/CAmod`, `mods/ca/uibits/`)
+
+| file | canvas | **artwork** | implied |
+|---|--:|--:|--:|
+| `glyphs.png` | 256x512 | 254x272 | 1x |
+| `glyphs-2x.png` | 512x1024 | 509x544 | **2.00x** |
+| `glyphs-3x.png` | **1024x2048** | **763x816** | **3.00x** |
+
+⭐ CA's `-3x` file has a canvas **4x** the base — exactly what Blackrobe saw — while its **artwork
+is exactly 3x**. The extra canvas is padding, nothing more.
+
+⭐ **And CA's `flags:` collection declares only `Image: flags.png` — no `Image2x`, no `Image3x`.**
+CA cannot have this bug for flags because CA never loads a scaled flag sheet at all. "It doesn't
+happen in CA" is true, and it is not because CA solved 4x.
+
+### Upstream OpenRA (`mods/ra/uibits/`)
+
+| file | canvas | **artwork** | implied |
+|---|--:|--:|--:|
+| `glyphs.png` | 256x256 | — | 1x |
+| `glyphs-2x.png` | 512x512 | 512x512 | 2.00x |
+| `glyphs-3x.png` | **1024x1024** | **768x768** | **3.00x** |
+
+Same convention: 3 x 256 = 768 is not a power of two, so the sheet is padded to 1024. All twelve
+of upstream's variant declarations look "4x" by canvas; every one is 3x artwork.
+
+### Cameo
+
+| file | canvas | **artwork** | implied | |
+|---|--:|--:|--:|---|
+| `glyphs_3x.png` | 1024x1024 | 768x768 | 3.02x | ✅ matches the convention |
+| `flags_3x.png` | 2048x2048 | **1536x2048** | **4.00x** | ⛔ **the only outlier anywhere** |
+| Blackrobe's reverted 1536 | 1536x1536 | 1153x1536 | **3.00x** | ✅ correct |
+
+**So "make it work exactly like OpenRA and Combined Arms" means: artwork at 3x.** One file in one
+project is out of line, and restoring the already-authored replacement puts it back in line.
+
+### ⛔ Can it be 4x instead?
+
+No, and not for a stylistic reason:
+
+* `ChromeProvider.Collection` declares **only** `Image`, `Image2x`, `Image3x`. There is no
+  `Image4x` field to point at.
+* `density` is a hardcoded literal, never measured from the sheet.
+* Adding `Image4x` to the soft-forked engine would follow CLAUDE.md rule 7 and is only a few
+  lines — but it **would not help these players**. The existing ladder is `dpiScale > 2` for 3x, so
+  a 4x branch would need `dpiScale > 3`: above **300% display scaling**. Nobody in the report is
+  near that, and it would put Cameo's chrome pipeline permanently out of step with both upstreams
+  for a case that essentially never fires.
+
+⚠ **Nothing has to be "dumbed down" to do this.** The 4x master art stays in the project as the
+source. The 1x and 2x sheets halved from it are already correct and already ship. Only the sheet
+that `Image3x` points at has to be 3x artwork — and that file already exists in this repository's
+history.
+
+⚠ **One convention detail if the sheet is ever re-exported rather than restored:** CA and upstream
+both pad the 3x artwork into a power-of-two canvas (1024, 2048). Blackrobe's file is 1536x1536,
+which is not a power of two. OpenRA handles non-POT sheets, and this one measured correct — but
+padding 1155x1536 of artwork into a 2048x2048 canvas would match the peers exactly.
+
 ## The cause
 
 ## ⭐ It was found and fixed once, in 2026-06, and reverted the same day
@@ -133,8 +199,10 @@ maths would then be wrong in the other direction.
   diagnosis does not depend on them — a 4x sheet declared as 3x is wrong at any threshold — but
   whoever confirms the fix should note the scale at which the 3x path engages, so the report can be
   closed with a reproduction rather than an inference.
-* **Three chrome files are declared but not present in the tree**: `loadscreen.png`,
-  `ca-loading-artwork.png`, `ca-menu-logo.png` (`^LoadScreen`, `loading-artwork`, `menu-logo`).
-  `^LoadScreen` is additionally inherited by nothing. The game boots, so these are either dead
-  config or supplied outside `mods/cameo/`. Advisory in the audit, not a failure — worth a look,
-  unrelated to this bug.
+* **Dead config inherited from CA, resolved as advisory.** `loading-artwork` and `menu-logo`
+  (`chrome.yaml:1143`, `:1150`) declare `ca-loading-artwork*.png` and `ca-menu-logo*.png`, which
+  exist in Combined Arms but were never copied into Cameo. `^LoadScreen` likewise names a missing
+  `loadscreen.png` and is inherited by nothing. **Nothing under `mods/cameo/chrome/` references any
+  of them**, so they never load and the game boots fine — `ChromeProvider` opens a sheet lazily,
+  on first sprite request. Harmless today, a crash if anything ever asks for them. Left alone
+  deliberately: removing them is a yaml change needing a boot gate for zero present benefit.
