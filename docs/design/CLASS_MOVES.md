@@ -318,3 +318,47 @@ correctly a mechanic that cuts across classes, exactly like `Cloak`. Not a class
 
 ⚠ It does surface one real defect on the way: **`yuri_psychicdominator` (10,000cr) has no class
 template** — a superweapon, so probably an A7 separation rather than a class.
+
+---
+
+## 4. ⛔ THE MIRROR PROBLEM — measured, and it changes the uniqueness rule
+
+**Maintainer, on the engineers:** *"those engineers are all mirrored units so of course it makes
+sense to have the same price for those."* ✅ And on support: *"Support units are exempt from the
+balance pipeline and will be deliberately hand tuned."*
+
+The support exemption solves support. ⛔ **It does not solve the problem, because the problem is
+roster-wide.**
+
+### Measured across every COMBAT class
+
+**178 of 312 combat units (57%) share a price with a classmate**, and the clearest cases are
+unmistakable faction mirrors:
+
+| class | members | share | the mirror |
+|---|--:|--:|---|
+| `scout` | 6 | 4 | `ra1_allies_rifleinfantry`, `ra1_soviets_rifleinfantry`, `td_gdi_minigunner`, `td_nod_minigunner` — **all 100cr** |
+| `melee` | 4 | 3 | `ra1_soviets_attackdog`, `ra2_allies_attackdog`, `ra2_soviets_attackdog` — **all 200cr** |
+| `mbt` | 42 | **35** | 4 at 800cr incl. `tiger.nax` (the anchor) |
+| `scout_vehicle` | 28 | **23** | 8 at 500cr |
+| `epic_vehicle` | 24 | 18 | 6 at 5,000cr |
+| `high_tech_tank` | 26 | 16 | 4 at 1,600cr |
+
+⛔ **Strict per-class uniqueness would reprice 178 combat units and break faction mirroring
+everywhere** — the RA2 Allied attack dog would have to cost something different from the RA2 Soviet
+attack dog, for no design reason. In a crossover mod whose factions deliberately mirror each other,
+that is a visible fairness bug, not a rounding detail.
+
+### ⭐ The resolution the maintainer's own reasoning implies
+
+> **A MIRROR SET — the same role shipped once per faction — shares one price by design.
+> Uniqueness applies BETWEEN roles, never within a mirror set.**
+
+Operationally this is identical to **unique per (class x faction)**: no two units of the same class
+in the SAME faction may share a price, and every class averages 1.0–2.1 members per faction, so it
+is always satisfiable. ⚠ It needs no new concept and no per-unit annotation — the faction is already
+known from the ContentPack.
+
+⚠ **This does NOT weaken the rule where it matters.** Inside one faction, two units of the same
+class still cannot share a price, which is the case a player actually compares side by side in the
+build palette.
