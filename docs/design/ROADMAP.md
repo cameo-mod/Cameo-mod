@@ -99,6 +99,40 @@ dead wiring that no current audit can see, and its own docstring says the check 
 
 ---
 
+## ⛔ P1 — W24's COLLAPSE RULE IS VERIFIED ON THE WRONG INVARIANT (2026-09-02)
+
+**Raised by Blackrobe, verified in full:** [`W24_COLLAPSE_REVIEW.md`](W24_COLLAPSE_REVIEW.md).
+Collapsing a multi-main weapon while preserving its summed `Damage` preserves the raw number and
+moves the resolved one. On `HydraSpit` (4 mains x 18,000, four DIFFERENT `Versus` ladders) a
+72,000 collapse to `^Warhead_Chemical_Light` multiplies mean effective damage by **1.48x**, with
+per-armor ratios from **0.62x to 2.38x**. `review_resolve_diff.py` certifies it as neutral because
+its docstring says new-template `Versus` tables are *"NOT flagged"* — the gate is blind to the only
+thing that changed.
+
+⭐ `BALANCE_PROGRAM_PLAN.md` §1b's "preserve the SUM anyway" is a deliberate staging decision, not
+an oversight. Its justification is the BROADCAST finding (576 of 934 weapons have every main at the
+same damage). The unstated precondition is that those mains also share a PROFILE — and HydraSpit is
+the counterexample: equal damage, four different ladders.
+
+- [ ] **M** — classify every multi-main weapon by SHAPE: true broadcast (same Damage AND same
+  Versus, sum-preservation is neutral) / profile pileup (equal Damage, different Versus, needs the
+  `measure_retrofit_gap` mean-ratio rescale in the same commit) / real multi-warhead design
+  (per-weapon maintainer call).
+- [ ] **M** — extend `review_resolve_diff.py` with a resolved PER-ARMOR comparison (Damage x Versus
+  over all 20 rows, the AA rows, widest `Spread`, physical-state feed, standalone percentage count).
+- [ ] **S** — ⛔ INDEPENDENT LIVE DEFECT: `audit_physical_state_warheads.py` models
+  `PhysicalStateName` and `PhysicalStates` as alternatives (`scaled_states()` returns a SET). The
+  runtime applies BOTH — `AreaDamageWarhead.cs:512` and the field's own `[Desc]`: *"applied IN
+  ADDITION to"*. **216 warheads on 172 weapons (156 of them fired) bind the same state twice**, so
+  ~200 warheads push Corrosion at double rate while the audit says PASS.
+- [ ] **S** — put the unconditional `FirepowerMultiplier` stacks on the board. `terran_marine`
+  resolves to **0.1876x** always-on firepower (GlobalBuffs 50 x InfantryBuff 110 x
+  AntiTankAntiAirInfantryBuff 110 x TripleShot 31), `zerg_hydralisk` to **0.599x** — a 3.19x gap
+  that W17 made invisible to pricing while it stays fully live in play.
+- [ ] Hold `HydraSpit` as-is until the first two land.
+
+---
+
 ## AI ARCHITECTURE (2026-08-31)
 
 Unit classification: [`UNIT_CLASSIFICATION_PROGRAM.md`](UNIT_CLASSIFICATION_PROGRAM.md)
