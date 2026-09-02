@@ -722,11 +722,17 @@ YRBoomerTorpedo:
 ^YuriGatlingCannonProjectileStreak:
 	Projectile: Bullet
 		Image:
-		ProjectileStreakLength: 1280
-		ProjectileStreakLengthVariation: 128
-		ProjectileStreakWidth: 40
+		ProjectileStreakLength: 960
+		ProjectileStreakLengthVariation: 96
+		ProjectileStreakWidth: 45
 		ProjectileStreakColor: FFF4C2
+		ProjectileStreakTailWidth: 6
+		ProjectileStreakHeadWidth: 24
+		ProjectileStreakHeadTaperLength: 192
+		ProjectileStreakTailColor: FFB060
+		ProjectileStreakTailColorAlpha: 176
 		ContrailLength: 0
+		Speed: 4000
 
 YuriGatlingCannonMG1:
 	Inherits: RA2GattlingMG1

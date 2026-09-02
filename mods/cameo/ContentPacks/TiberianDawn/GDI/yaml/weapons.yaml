@@ -39,6 +39,39 @@ HighV:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
+
+td_gdi_guardtower_highv:
+	Inherits: HighV
+	Projectile: Bullet
+		-Image:
+		ProjectileStreakLength: 960
+		ProjectileStreakLengthVariation: 96
+		ProjectileStreakWidth: 45
+		ProjectileStreakColor: FFF4C2
+		ProjectileStreakTailWidth: 6
+		ProjectileStreakHeadWidth: 24
+		ProjectileStreakHeadTaperLength: 192
+		ProjectileStreakTailColor: FFB060
+		ProjectileStreakTailColorAlpha: 176
+		ContrailLength: 0
+		Speed: 4000
+
+td_gdi_guardtower_highvap:
+	Inherits: HighVAP
+	Projectile: Bullet
+		-Image:
+		ProjectileStreakLength: 960
+		ProjectileStreakLengthVariation: 96
+		ProjectileStreakWidth: 45
+		ProjectileStreakColor: FFF4C2
+		ProjectileStreakTailWidth: 6
+		ProjectileStreakHeadWidth: 24
+		ProjectileStreakHeadTaperLength: 192
+		ProjectileStreakTailColor: FFB060
+		ProjectileStreakTailColorAlpha: 176
+		ContrailLength: 0
+		Speed: 4000
+
 GrenadeExplode:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Projectile_Grenade_Light
@@ -271,9 +304,11 @@ ArcherArtilleryShell:
 	Range: 14000
 	MinRange: 2800
 	Report: tnkfire2.aud
+	-InvalidTargets:
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 280
+		Blockable: false
 		Inaccuracy: 700
 		LaunchAngle: 70
 		ContrailLength: 28
