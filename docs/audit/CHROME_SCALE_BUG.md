@@ -16,40 +16,47 @@ Same UI scale, opposite outcomes — which is why it read as a scaling bug. It i
 reports partition exactly on **which DPI sheet the engine picks**, and only one of the three sheets
 is broken.
 
+## ⛔ CORRECTION — the first version of this diagnosis was half wrong
+
+**Blackrobe asked the right question:** *"I don't know why it thinks the resolution should be at 3x
+and not 4x like it is also for CA and OpenRA."* He was right about the convention, and the first
+pass of this document (and its audit) was wrong to compare **canvas sizes**.
+
+Read at the pinned engine (`mod.config` ENGINE_VERSION `462fc1fc4`,
+`OpenRA.Game/Graphics/ChromeProvider.cs`):
+
+```csharp
+if (dpiScale > 2 && Image3x != null) { image = c.Image3x; density = 3; }
+else if (dpiScale > 1 && Image2x != null) { image = c.Image2x; density = 2; }
+...
+new Sprite(sheet, density * mi, TextureChannel.RGBA, 1f / density);
+```
+
+`density` is a **hardcoded 3**, and the `Collection` class declares only `Image`, `Image2x` and
+`Image3x` — **there is no `Image4x` field.** So the engine cannot use a 4x sheet at all.
+
+⭐ **But upstream's `-3x` files really are 4x by CANVAS — and they are correct.** 3 × 256 = 768 is
+not a power of two, so upstream pads: `OpenRA/mods/ra/uibits/glyphs-3x.png` is a **1024x1024 canvas
+holding 768x768 of artwork**. All twelve upstream variant declarations look "4x" by canvas and every
+one is fine. **The canvas is padding. What matters is where the ARTWORK is laid out.**
+
+Measured that way — artwork bounding box against the base sheet's artwork:
+
+| sheet | base artwork | expected at 3x | actual artwork | implied |
+|---|--:|--:|--:|--:|
+| `flags_3x.png` | 385x512 | 1155x1536 | **1536x2048** | **4.00x** ⛔ |
+| `glyphs_3x.png` | 254x256 | 762x768 | 768x768 | 3.02x ✅ |
+| Blackrobe's 1536 | 385x512 | 1155x1536 | 1153x1536 | **3.00x** ✅ |
+
+⭐ **So exactly ONE sheet is wrong — `flags_3x.png` — and `glyphs_3x.png` is fine.** An earlier
+revision of this document claimed both were broken and shipped a patch dropping the glyphs
+declaration. That patch has been **withdrawn**; it was a false positive from measuring canvases.
+
+⚠ **And that single-sheet scope is exactly what the reporters describe:** lobby faction and game
+flags, and nothing else. Blackrobe's own note that Dobry's cut-off *build cards* "could be
+engine-level" is consistent — those are a separate issue, not this one.
+
 ## The cause
-
-`mods/cameo/chrome.yaml` declares each collection's regions **once, in 1x coordinates**, and
-`ChromeProvider` (`OpenRA.Game/Graphics/ChromeProvider.cs`) multiplies them by 2 or 3 to index into
-the `Image2x` / `Image3x` sheet. That arithmetic is only correct if the sheet really is 2x / 3x.
-
-**Two sheets are 4x, declared as 3x:**
-
-| collection | base | `Image2x` | `Image3x` | |
-|---|--:|--:|--:|---|
-| `^Flags` (`chrome.yaml:246`) | `flags.png` 512x512 | `flags_2x.png` 1024 ✅ 2x | `flags_3x.png` **2048** | ⛔ 4x |
-| `^Glyphs` (`chrome.yaml:13`) | `glyphs.png` 256x256 | `glyphs_2x.png` 512 ✅ 2x | `glyphs_3x.png` **1024** | ⛔ 4x |
-
-3x of 512 is **1536**, not 2048. Every other collection in the file is unaffected — 71 of them
-declare only `Image` and have no variants at all.
-
-⭐ **`^Flags` is the faction and game icons. `^Glyphs` is editor/UI glyphs.** That is precisely
-*"faction icons and some UI"*, and nothing else — the report's own scope is the strongest
-confirmation of the diagnosis.
-
-## Why the corner looks fine and the rest does not
-
-Reading at 3x from a 4x sheet, a region at 1x `(x, y)` is fetched from `(3x, 3y)` while its art
-actually sits at `(4x, 4y)`. **The error is proportional to distance from the top-left corner:**
-
-| icon | 1x region | engine reads | art actually at | correct pixels |
-|---|---|---|---|--:|
-| `gdi` | 0, 0, 32, 16 | 0,0 96x48 | 0,0 128x64 | **100%** |
-| `nod` | 0, 16, 32, 16 | 0,48 96x48 | 0,64 128x64 | 67% |
-| `XCOM` | 352, 224, 32, 16 | 1056,672 | 1408,896 | **0%** |
-| `Warcraft` | 160, 496, 32, 16 | 480,1488 | 640,1984 | **0%** |
-
-So the first icons in the sheet render perfectly and everything further right or down degrades into
-neighbouring artwork. That is why it reads as *"some* UI" and why it survived unnoticed.
 
 ## ⭐ It was found and fixed once, in 2026-06, and reverted the same day
 
@@ -107,11 +114,14 @@ git show 1326cc44e:mods/cameo/uibits/flags-3x.png > mods/cameo/uibits/flags_3x.p
 (The hyphen→underscore rename landed later, in `938e988d2`, so the paths differ.) This keeps full
 sharpness at high DPI — strictly better than dropping the declaration.
 
-**Glyphs — `docs/patches/chrome_05_drop_glyphs_3x_declaration.patch`.** No correct 3x glyph sheet
-has ever existed, so there is nothing to restore. Dropping the declaration makes the engine fall
-back to a smaller correct sheet: slightly softer, right pixels. Absence is the normal case here
-(71 collections do it), so there is no missing-asset risk. Replace it whenever someone exports
-`glyphs_3x.png` at exactly **768x768**; the audit will confirm the size.
+**Glyphs — nothing to do.** `glyphs_3x.png` measures 3.02x and is correct. The patch that dropped
+its declaration was withdrawn.
+
+⭐ **Nothing needs "dumbing down".** The 4x master art can stay in the project as the source — the
+1x and 2x sheets generated from it by halving are already correct and already ship. The engine
+simply caps at 3x, so the sheet `Image3x` points at must be 3x artwork. Adding `Image4x` to the
+soft-forked engine would not help the reported players either: that branch would need
+`dpiScale > 3`, i.e. above 300% display scaling.
 
 ⚠ **Do not "fix" this by inventing a file or by pointing `Image3x` at the 2x sheet** — the region
 maths would then be wrong in the other direction.
