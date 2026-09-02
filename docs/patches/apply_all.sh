@@ -22,7 +22,7 @@ PATCHES=(
   docs/patches/bot_insurance_03a_dynamic_trait_csharp.patch
   docs/patches/bot_insurance_03b_dynamic_trait_yaml.patch
   docs/patches/bot_limits_04_brutal_explicit_cadence.patch
-  docs/patches/chrome_05_drop_mis_scaled_3x_sheets.patch
+  docs/patches/chrome_05_drop_glyphs_3x_declaration.patch
 )
 
 # ⚠ The patches are a SERIES, not independent: 03b rewrites the block 01 edits, so
@@ -38,6 +38,7 @@ if [ -n "$CHECK" ]; then
       [ -f "$BACKUP/$(basename "$f")" ] && cp "$BACKUP/$(basename "$f")" "$f"
     done
     rm -f OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs
+    git checkout -- mods/cameo/uibits/flags_3x.png 2>/dev/null || true
     rm -rf "$BACKUP"
   }
   trap restore EXIT
@@ -52,6 +53,10 @@ for p in "${PATCHES[@]}"; do
 done
 
 if [ -n "$CHECK" ]; then
+  # The flags sheet comes from git history, not from a patch, so the dry run has to do it too or
+  # the chrome audit below fails on a file the real run would have fixed. The trap restores it.
+  bash docs/patches/chrome_06_restore_flags_3x.sh > /dev/null
+
   echo
   echo "== resolved-ruleset check (the part a dry run CAN prove)"
   python - <<'PYEOF'
@@ -73,6 +78,10 @@ PYEOF
   echo "Dry run complete — the tree has been restored to exactly how it was."
   exit 0
 fi
+
+echo
+echo "== restoring the correct 1536px flags sheet from history (no new art needed)"
+bash docs/patches/chrome_06_restore_flags_3x.sh
 
 echo
 echo "== building OpenRA.Mods.Cameo (rule 7: stale DLLs crash the boot)"
@@ -106,7 +115,11 @@ cat <<'NEXT'
     measured vs expected net worth every 1500 ticks, which is how the par
     curve's three invented magnitudes get replaced with measured ones.
 
- 3. COMMIT, and in the SAME commit `git rm` the four patches and this script —
+ 3. CHECK THE UI AT HIGH DPI. The chrome fix is in this set: set UI scale to 150%+
+    and confirm faction icons and editor glyphs render correctly. ⚠ Fix BOTH or it
+    looks like it failed — that is very likely why the 2026-06 attempt was reverted.
+
+ 4. COMMIT, and in the SAME commit `git rm` the patches and this script —
     docs/patches/ must never hold a change that already landed. Set
     bot_insurance_unreachable_difficulties to 0 in docs/audit/doc_claims.yaml.
     Scoped `git add <files>` only, never -A.

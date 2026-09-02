@@ -49,6 +49,32 @@ you a whole hard-linked copy for free, but the files then SHARE inodes with the 
 `git checkout -- .` to clean up (rule 6) — restore only the paths you touched, by name.
 
 
+## A shallow clone makes `git log` lie by omission (2026-09-02)
+
+⛔ **The incident.** Investigating the "150% UI scale breaks faction icons" report, `git log` on
+`flags_3x.png` returned exactly one commit — a weapons commit that had swept the file up
+incidentally. It looked like the asset had barely been touched. **That was an artifact of the
+clone, not a fact about the file.** A cloud container clones shallow, and
+`git rev-parse --is-shallow-repository` said `true`.
+
+After `git fetch --unshallow` the real history was 4,193 commits, and the file's own log showed the
+thing that actually mattered: **the bug had been found and fixed once, by Blackrobe on 2026-06-09,
+and reverted the same day.** The correct 1536px sheet was sitting in history the whole time. Acting
+on the shallow log would have meant re-creating an asset that already existed, and never learning
+that a previous fix had been rejected — which turned out to be the most important fact in the
+investigation.
+
+⭐ **The rule: before any `git log`, `git blame`, `git tag` or "when did this change" reasoning,
+check `git rev-parse --is-shallow-repository`.** If it says `true`, `git fetch --unshallow` first.
+Tags are missing too — this clone had none of its 67 tags until the fetch, so "is it in the latest
+release" was unanswerable and would have been guessed.
+
+⚠ **And the generalisation, which is the same shape as "'Not found' is a claim about your
+search":** an empty or thin result from a tool is a statement about the tool's reach, not about the
+world. `git log` with no results, a grep with no hits, and an audit with no findings all fail the
+same way — silently, and looking exactly like good news.
+
+
 ## "Not found" is a claim about your search, not about the tree (2026-09-01)
 
 ⛔ **The incident.** The maintainer said the bots have *"a passive income that increases with
@@ -266,6 +292,7 @@ Speed grid and no audit covers it. "The audit is green" answers only the questio
 **Crash classes — these end a boot, and most gates cannot see them**
 
 - [A boot-less environment can still land engine work — as a patch, not as a hack (2026-09-01)](#a-boot-less-environment-can-still-land-engine-work--as-a-patch-not-as-a-hack-2026-09-01)
+- [A shallow clone makes `git log` lie by omission (2026-09-02)](#a-shallow-clone-makes-git-log-lie-by-omission-2026-09-02)
 - ["Not found" is a claim about your search, not about the tree (2026-09-01)](#not-found-is-a-claim-about-your-search-not-about-the-tree-2026-09-01)
 - [A registry nothing reads, and a reader that fails silently (2026-08-31)](#a-registry-nothing-reads-and-a-reader-that-fails-silently-2026-08-31)
 - [A test can encode a WEAKER property than the law and then defend the bug (2026-08-30)](#a-test-can-encode-a-weaker-property-than-the-law-and-then-defend-the-bug-2026-08-30)

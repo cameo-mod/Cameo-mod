@@ -238,14 +238,19 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 243
+    value: 190
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
       predicate — W24's scope, and the reason pricing must wait for the weapon rebuild.
-      ⭐ 494 -> 472 (2026-08-30) -> 243 (#320, percentage damage + live weapon backlog
+      ⭐ 494 -> 472 (2026-08-30) -> 190 (#320, percentage damage + live weapon backlog
       consolidation). This is the DEBT and it going DOWN is progress. Re-pin it downward as
       W24 batches land; ⛔ never upward without explaining what regressed.
+      ⚠ RE-MEASURED 2026-09-02 when #320 was merged into a feature branch: #320 pinned 243 but
+      its own tree measures 190, so this audit was red on master. Verified as master's number,
+      not the branch's: `git diff origin/master...HEAD -- mods/` is EMPTY, and the only
+      shared tool the measure touches (`miniyaml.py`) differs only by an additive `mod_id`
+      parameter that defaults to "cameo" and is behaviour-identical for it.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import sys, pathlib
