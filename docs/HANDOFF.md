@@ -56,6 +56,34 @@ not of the history: the commits exist upstream. Either run `git fetch --unshallo
 
 ---
 
+## 0a. ⛔⛔ PRIORITY 0 — THE BALANCE PIPELINE, BEFORE ANY SINGLE-UNIT WORK
+
+**Maintainer order, 2026-09-02**, after a session went into one weapon while the pipeline sat still:
+
+> *"We need to finish the balancing pipeline. Finish all the class anchors. Apply all the correct
+> unit templates for each actor. Working on a single unit is not getting us any closer to finishing
+> the balance pipeline... we need to work on the top level first, like a system design."*
+
+**Two items. Nothing below §3 outranks them.**
+
+| # | item | verify | state 2026-09-02 |
+|---|---|---|---|
+| 1 | **CLASS ANCHORS** — all 27 ready, then signed | `python tools/balance/anchor_readiness.py` | **8 of 27 signed**, and only **336 of 1870** buildable units (18%) carry a class tag. 17 of 27 anchors are not members of the class they anchor; 5 classes have ZERO members |
+| 2 | **UNIT TEMPLATES** — exactly one `Inherits@Template:` per buildable actor | `python tools/audit/audit_class_templates.py` | 109 defects (missing or multiple) |
+
+⭐ **They are the same problem seen from two ends.** The ledger's `design.class_anchor` is a
+hand-maintained tag covering 18%; the yaml templates classify **structurally and cover everything**.
+Deriving the class from the template is the one change that takes every downstream tool
+(`fit_class`, `check_band`, `band_granularity`, `propose_class_rebalance`, `apply_balance`) from
+18% coverage to full coverage. Fix the templates, derive the tag, and the anchors become fittable.
+
+⚠ **THE DRIFT TEST — apply it to your own next action.** *"Does this move a NUMBER for one unit,
+or does it move the SYSTEM?"* One weapon, one warhead, one actor is the trap: it feels productive,
+produces good documents, and advances the pipeline by nothing. A single-unit fix that is genuinely
+needed goes into [`design/ROADMAP.md`](design/ROADMAP.md) as a line, not into this session as work.
+
+---
+
 ## 1. Where the project actually is (verified 2026-08-23)
 
 **The mission.** Cameo is a crossover RTS spanning the classic RTS games. The architectural goal

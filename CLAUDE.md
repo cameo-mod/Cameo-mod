@@ -2,6 +2,23 @@
 
 ## ⚡ START HERE — read before acting (the rest of this file is the full contract)
 
+⛔⛔ PRIORITY 0 — FINISH THE BALANCE PIPELINE BEFORE ANY SINGLE-UNIT WORK.
+   Maintainer order, 2026-09-02: *"We need to finish the balancing pipeline. Finish all the class
+   anchors. Apply all the correct unit templates for each actor. Working on a single unit is not
+   getting us any closer... we need to work on the TOP LEVEL first, like a system design."*
+   The two open top-level items, in order:
+     1. CLASS ANCHORS -- 8 of 27 signed, and only 336 of 1870 buildable units carry a class tag
+        (18%). Every anchor is fitted against 18% of its own population, and 17 of 27 anchors are
+        not even members of the class they anchor. `python tools/balance/anchor_readiness.py`
+     2. UNIT TEMPLATES -- every buildable actor needs EXACTLY ONE `Inherits@Template:`.
+        `python tools/audit/audit_class_templates.py`
+   ⚠ THE DRIFT TEST, apply it to your own next action: *"does this move a NUMBER for one unit,
+   or does it move the SYSTEM?"* Investigating one weapon, one warhead, one actor is the trap --
+   it feels productive and it does not advance the pipeline. If a single-unit fix is genuinely
+   needed, WRITE IT DOWN in docs/design/ROADMAP.md and keep going on the top level.
+   ⭐ This block exists because it happened: 2026-09-02 went into one weapon (HydraSpit) and its
+   warhead family while both items above sat untouched.
+
 **Don't trust, verify.** Before asserting anything is done / pending / blocked / missing,
 check the artifact itself — grep the data, `ls` the file (incl. `~/Downloads`), run the tool,
 boot-gate the tree. When a summary (ROADMAP line, handoff, memory, status table) disagrees with
