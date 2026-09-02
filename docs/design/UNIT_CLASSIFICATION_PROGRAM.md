@@ -49,21 +49,56 @@ content and need a class; only genuinely non-unit actors (husks, cameras, concre
 excluded.
 
 **Measured:** 29 spawner carriers exist, via `DroneSpawnerMaster`, `DroneSpawnerMasterCA`,
-`MissileSpawnerMasterCA`, `MobSpawnerMaster` and `SlaveMinerSpawnerMaster`. Their spawned actors are
-classified inconsistently or not at all:
+`MissileSpawnerMasterCA`, `MobSpawnerMaster` and `SlaveMinerSpawnerMaster`.
 
-| spawned actor | buildable? | template today |
+⛔ **CORRECTED 2026-09-02 — three of the four I called defects are not defects.** A spawner is not a
+carrier, and I lumped four unrelated mechanics together:
+
+| spawned actor | what it actually is | verdict |
 |---|---|---|
-| `apparition.ixian` | no | ⛔ `^MeleeInfantryTemplate` |
-| `ra2shk.bot` | yes | ⛔ `^HeavyInfantryTemplate` |
-| `ra2dmisl`, `yrbsubmisl`, `miniv2.nax`, `fremen_creep` | no | ⛔ **none** |
+| `ra2dmisl`, `yrbsubmisl`, `miniv2.nax` | **MISSILES** — weapon projectiles that explode on impact | ✅ not drones. *"They should be balanced as if they were fired by the unit directly. However they can be intercepted and destroyed, that's why it's harder to balance those and they need their own formula."* |
+| `ra2shk.bot` | the RA2 **tesla charger** — spawned only to charge a tesla coil, **with no attack at all** | ✅ a support unit, not a drone |
+| `fremen_creep` | "Fremen Warrior", 500cr / 25,000 HP, foot, HMG + RPG, from a `MobSpawnerMaster` | ⚠ spawned *infantry* from a sietch, not a drone |
+| **`apparition.ixian`** | 2,000cr / 37,500 HP hover craft, `d2k_basq` + `d2k_basq_AA`, filed as **`^MeleeInfantryTemplate`** | ⛔ **the only real defect** |
 
-⚠ **Correction to the brief:** the maintainer recalled these as carrying `^BomberTemplate`; measured,
-they carry *no* template or an *infantry* one. Same defect, different shape.
+⭐ **So three spawn mechanics need three treatments, not one class:**
+* **Missiles** — priced into the firing unit's damage, with their own formula because they are
+  interceptable. Not classified as units.
+* **Support spawns** (tesla charger) — a support unit; no drone class, no damage contribution.
+* **Carrier drones** (apparition) — a real class with an ammo pool (D4).
 
 **Ruled:** a new `^CarrierDroneTemplate` (and the audit's population widens from "buildable" to
 "buildable **or spawned by a carrier**"). ⚠ `audit_class_templates.py` currently scopes on
 `Buildable`, so it does not see these at all — that scope has to widen with this ruling.
+
+### A6a. The apparition fix, and ⛔ why it is not yet a yaml-only change
+**Maintainer:** *"the apparition should be transformed into a carrier drone and the Ixian projector
+should work more like a land based aircraft carrier."*
+
+**The structural half is straightforward** and can go in the next class pass:
+* `apparition.ixian` → `^CarrierDroneTemplate` (replacing `^MeleeInfantryTemplate`)
+* `ixian_ixprojector` (5,000cr, epic add-on, no base class) → a base class + the epic add-on
+
+⛔ **The behavioural half is blocked on the engine, and I could not make it work in yaml.** A
+land-based carrier means *launch → attack → return → rearm from a finite pool*. What the projector
+has today is **respawn**, not rearm:
+
+```
+DroneSpawnerMaster@steel_scalpel:
+    Actors: apparition.ixian x5
+    ArmamentNames: secondary
+    RespawnTicks: 250          <-- a destroyed drone is REPLACED after 250 ticks
+    FollowAfterAttackDelay: 25
+```
+
+`DroneSpawnerMasterCA` (readable in `OpenRA.Mods.Cameo/`) is respawn-based — `spawnReplaceTicks =
+Info.RespawnTicks` — and exposes no ammo pool, no rearm and no return-to-carrier. The projector's
+own `DroneSpawnerMaster` (no `CA` suffix) is in an assembly this repository does not contain, so its
+capabilities are **unverified**.
+
+⚠ **Therefore: the class move is proposable now; carrier SEMANTICS need either a trait that supports
+rearming or new C#.** Recorded, not attempted — and it is the concrete reason D stays deferred
+rather than a scheduling preference.
 
 ### A7. Husks and non-units are SEPARATED, never classified
 **Maintainer:** *"Husks and other things must be also separated so they don't appear as regular
