@@ -314,6 +314,9 @@ instead of `^ArcherInfantryTemplate`.
 none. Whether a barracks or a refinery must be classifiable is a maintainer ruling — the audit lists
 them rather than failing on them.
 
+Per-class proposals live in [`CLASS_MOVES.md`](CLASS_MOVES.md), one section per
+class, in the order they are done.
+
 ## 5. Order of work
 
 1. ⛔ **Maintainer rules on the SCOPE question** (§4.1): does a class member mean *inherits the
