@@ -101,6 +101,10 @@ dead wiring that no current audit can see, and its own docstring says the check 
 
 ## AI ARCHITECTURE (2026-08-31)
 
+Effort: [`AI_MODULE_REWORK_ESTIMATE.md`](AI_MODULE_REWORK_ESTIMATE.md) — phases 0-2 are
+4-6 sessions and 2 boot gates and are worth committing to; phases 3-7 cannot be estimated
+until phase 2's logs exist, and the document says why rather than inventing a total.
+
 Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Nothing here is implemented; the
 design document is the deliverable so far. Ordered so each item is independently
 verifiable.
