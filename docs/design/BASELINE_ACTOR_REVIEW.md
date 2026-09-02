@@ -178,32 +178,83 @@ in view (§2.6).
 
 ---
 
-## 4. ⛔ Awaiting a maintainer ruling: the five orphan classes
+## 4. ⛔ CORRECTED — there are no orphan classes. The taxonomy lives in yaml.
 
-Five classes have an anchor and a `cost0` but **zero tagged members**, so no cheapest-member anchor
-can be computed and no distribution can be fitted. Each needs a decision:
+⛔ **An earlier version of this section listed five classes as having "zero members". That was
+wrong, and it was wrong three times over** — see `LESSONS_LEARNED.md` → *"Three ways I measured
+zero"*. The decisive correction came from the maintainer: *"Check the unit templates defined in the
+defaults yaml and you can find each one of them."*
 
-| class | anchor actor | cost0 | signed? |
-|---|---|--:|---|
-| `commando` | `td_gdi_commando` | 3000 | no |
-| `flying_infantry` | `ra2_allies_rocketeer` | 600 | **YES** |
-| `grenadier` | `td_gdi_grenadier` | 200 | **YES** |
-| `mortar` | `forgotten_mutantmortarman` | 500 | **YES** |
-| `pure_sniper` | `naxis_naximercenarysniper` | 320 | no |
+⭐ **CLASS MEMBERSHIP IS `Inherits@Template:` — a KEYED inherit, in the actor's own yaml.**
 
-For each: **do its members exist but sit untagged, or should the class be retired?** ⚠ Three of them
-are signed, which is how 3 of the 8 signatures came to cover nothing.
+```
+td_gdi_grenadier:
+    Inherits: ^Soldier
+    Inherits@Template: ^GrenadierInfantryTemplate      <-- the class
+```
 
-⚠ **`support` is NOT an orphan.** An earlier count called it one; it has **34 members** and
-`spec.cost0 = 500`. The miscount came from reading the top-level `cost0` while `check_band.cost0_of`
-prefers `spec.cost0` — the same bespoke-parser trap CLAUDE.md rule 8e warns about, hit and caught
-inside one session.
+A traversal that follows only the bare `Inherits:` sees none of it. The five "orphans" are fully
+populated, including every unit the maintainer named:
 
----
+| class | template | members | cheapest | current anchor | cheapest already? |
+|---|---|--:|---|---|---|
+| `grenadier` | `^GrenadierInfantryTemplate` | **7** | 200 `td_gdi_grenadier` | `td_gdi_grenadier` | ✅ (3-way tie at 200) |
+| `mortar` | `^MortarInfantryTemplate` | **5** | 500 `forgotten_mutantmortarman` | `forgotten_mutantmortarman` | ✅ (3-way tie at 500) |
+| `flying_infantry` | `^FlyingInfantryTemplate` | **11** | 270 `cabal_orbdrone_slave` | `ra2_allies_rocketeer` (600) | ⛔ no |
+| `pure_sniper` | `^SniperInfantryTemplate` | **26** | 250 `naxis_naximercenarysniper` | `naxis_naximercenarysniper` | ✅ |
+| `commando` | `^HeroInfantryTemplate` | **33** | 750 `forgotten_mutanthijacker` | `td_gdi_commando` (3000) | ⛔ no |
+
+### 4.1 ⛔ The bigger finding: the ledger tags are a drifted copy of the taxonomy
+
+Only **8 of 27** classes agree between `Inherits@Template:` and `design.class_anchor`:
+
+| agree ✅ | drift ⛔ (structural − tagged) |
+|---|---|
+| `anti_air_vehicle`, `artillery_tank`, `closecombat`, `dreadnought`, `epic_vehicle`, `light_tank`, `missile_vehicle`, `tank_destroyer` | `heavy_infantry` **+48** · `support` **+47** · `rocket_trooper` **+43** · `melee` **+43** · `scout` **+34** · `commando` **+33** · `scout_vehicle` **+27** · `pure_sniper` **+26** · `mbt` **+21** · `flying_infantry` **+11** · `line_breaker` **+10** · `grenadier` **+7** · `fire_support` **+6** · `mortar` **+5** · `high_tech_tank` **+2** · `artillery` **+1** · `special_forces` **−11** · `archer` **−4** · `heavy_sniper` **−2** |
+
+⚠ **This does NOT mean the template count is simply right.** Spot-checked on `mbt`, the 21 the
+ledger omits are `EDEN_*`/`PLYMOUTH_*` imports, `*_backup` variants and `ra2_c_*` — plausibly
+excluded on purpose. **Two sources, two scopes:** the template says what a unit structurally *is*;
+the ledger says what the balance programme *prices*. Which one defines a class member is a
+maintainer ruling, and it changes every count in §3.
+
+⚠ **Two classes have no template at all** — `archer` (no `^ArcherTemplate` exists) and
+`heavy_sniper` (`^HeavySniperInfantryTemplate` is declared at `defaults.yaml:1425` and **nothing
+inherits it**) — yet both carry ledger tags and both are **signed**.
+
+### 4.2 ⛔ Fourteen structural classes have no anchor at all
+
+Whole branches of the roster sit outside the band programme:
+
+| template | members | | template | members |
+|---|--:|---|---|--:|
+| `^HelicopterTemplate` | 67 | | `^ScoutShipTemplate` | 26 |
+| `^BasicDefenseTemplate` | 46 | | `^FighterTemplate` | 23 |
+| `^BomberTemplate` | 36 | | `^SpaceshipTemplate` | 21 |
+| `^AdvancedDefenseTemplate` | 34 | | `^AntiAirDefenseTemplate` | 18 |
+| `^HarvesterTemplate` | 30 | | `^ArtilleryShipTemplate` | 16 |
+
+Air, naval and defences are entirely unanchored. Out of scope for the vehicle pass, but they are
+why "27 classes" is not the same as "the roster".
+
+### 4.3 Two anchor candidates that need judgment, not arithmetic
+
+Exactly the case §2.1 keeps the maintainer in the loop for:
+
+* **`flying_infantry` → `cabal_orbdrone_slave` (270).** A **slave** unit — spawned, not built.
+  Anchoring a class on something a player cannot buy is almost certainly wrong.
+* **`commando` → `forgotten_mutanthijacker` (750)** against a class priced 3,000–10,000. Anchoring
+  there puts the rest of the class at 4x–13x and blows the band open by itself.
+* ⚠ **And `pure_sniper` is not one class.** `^SniperInfantryTemplate` currently carries four
+  **engineers** (`TSENGINEER`, `forgotten_engineer`, `ts_gdi_engineer`, `ts_nod_engineer`) plus
+  mages, priests and sorceresses. That is a §2.9 scope question before it is a pricing question.
 
 ## 5. Order of work
 
-1. ⛔ **Maintainer rules on the five orphans** (§4).
+1. ⛔ **Maintainer rules on the SCOPE question** (§4.1): does a class member mean *inherits the
+   template* or *is tagged in the ledger*? Every count in §3 depends on it — `mbt` is 42 or 63,
+   `scout_vehicle` 28 or 55 — and so does whether the grid still fits (§3 was computed on the
+   ledger counts).
 2. **`mbt` end to end** — candidate anchor, triangulated stats, reference comparison, full member
    repricing on the coarse-first grid, distribution fit. Maintainer approves the FORMAT here.
 3. The remaining ten vehicle classes, one per round.

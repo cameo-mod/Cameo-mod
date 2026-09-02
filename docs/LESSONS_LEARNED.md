@@ -357,6 +357,7 @@ Speed grid and no audit covers it. "The audit is green" answers only the questio
 - [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
 - [`docs/audit/latest/` is environment-bound — an incomplete tree reports LESS and still says PASS (2026-08-23)](#docsauditlatest-is-environment-bound--an-incomplete-tree-reports-less-and-still-says-pass-2026-08-23)
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
+- [Three ways I measured zero, and the tree said otherwise (2026-09-02)](#three-ways-i-measured-zero-and-the-tree-said-otherwise-2026-09-02)
 - [A green test runner that runs none of the tests (2026-09-02)](#a-green-test-runner-that-runs-none-of-the-tests-2026-09-02)
 - ["Regenerable" is a claim about a tool, and it needs running (2026-08-28)](#regenerable-is-a-claim-about-a-tool-and-it-needs-running-2026-08-28)
 - ["Not found" is not "not there" — three ways a grep lies (2026-08-28)](#not-found-is-not-not-there--three-ways-a-grep-lies-2026-08-28)
@@ -1717,3 +1718,46 @@ the verdict.
 ⚠ And `.pytest_cache/` mtime is a usable artifact: it showed pytest genuinely had run on
 2026-08-31, with `lastfailed` naming the same single pre-existing failure that had been reported.
 The suite had been green; only the interpreter changed underneath it.
+
+## Three ways I measured zero, and the tree said otherwise (2026-09-02)
+
+The maintainer had to correct the same claim twice: *"You keep saying that these classes have zero
+members but it's not true! Check the unit templates defined in the defaults yaml."* They were right
+each time, and the three failures had three different causes — but one shape.
+
+| # | what I ran | what it reported | what was actually wrong |
+|---|---|--:|---|
+| 1 | bespoke scan of `docs/balance/*.json` for `design.class_anchor` | **0 members in all 27 classes** | the ledger nests actors under `doc["sections"][section]`; my loop read the top level and found nothing. `check_band.collect()` had the correct shape all along |
+| 2 | same scan, reading `anchor["cost0"]` | `support` has **no cost0** | `check_band.cost0_of()` prefers `spec.cost0` and falls back to the top-level one. `support` has `spec.cost0 = 500` |
+| 3 | inheritance traversal for `^GrenadierInfantryTemplate` | **0 concrete actors** | `rs.inherits_of()` takes a **Node**, not a name. It raised `AttributeError` on every actor — and my `except Exception: continue` swallowed all 3,117 of them |
+
+⛔ **THE THIRD IS THE DANGEROUS ONE, AND IT IS A CODE SMELL WITH A NAME.** A bare
+`try: ... except Exception: continue` inside a counting loop converts *every* failure into a zero
+and prints the zero as a measurement. There is no error, no traceback, no missing-data marker —
+just a confident, wrong number in a table. **Never wrap the body of a census in a bare except.**
+Count the failures and print them, or let it raise.
+
+⭐ **AND THE REAL FINDING WAS UNDERNEATH ALL THREE: the class taxonomy lives in yaml, not in the
+ledger.** Membership is `Inherits@Template:` — a KEYED inherit, which is why a traversal that only
+follows the bare `Inherits:` sees nothing:
+
+```
+td_gdi_grenadier:
+    Inherits: ^Soldier
+    Inherits@Template: ^GrenadierInfantryTemplate     <-- the class
+```
+
+Measured through `miniyaml` over every `Inherits*` key, `^GrenadierInfantryTemplate` has **7**
+inheritors, `^MortarInfantryTemplate` **5**, `^FlyingInfantryTemplate` **11**,
+`^SniperInfantryTemplate` **26**, `^HeroInfantryTemplate` **33** — against **0, 0, 0, 0, 0** tagged
+in the ledger. Only **8 of 27** classes agree between the two sources; the ledger under-tags by as
+much as **+48** (`heavy_infantry`: 50 structural, 2 tagged).
+
+⚠ **Which does NOT make the template count automatically right.** The 21 MBTs the ledger omits are
+`EDEN_*`/`PLYMOUTH_*` imports, `*_backup` variants and `ra2_c_*` — plausibly excluded on purpose.
+Two sources, two scopes: the template says *what a unit structurally IS*, the ledger says *what the
+balance programme prices*. The drift is a question for the maintainer, not a bug to auto-fix.
+
+⚠ **"Not found" was already a lesson here** ("*Not found is a claim about your search*"). It
+recurred because that entry is about grep. Extend it: **a COUNT of zero is also a claim about your
+search.** Before reporting a zero, name one member you expect and prove the query finds it.
