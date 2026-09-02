@@ -362,3 +362,74 @@ known from the ContentPack.
 ⚠ **This does NOT weaken the rule where it matters.** Inside one faction, two units of the same
 class still cannot share a price, which is the case a player actually compares side by side in the
 build palette.
+
+---
+
+## 5. ⛔ CORRECTION — `FORMULA_V2.md` already rules all of this, and I re-derived it wrong
+
+**Maintainer:** *"Can you read again the documentation about our planned unit classes? The special
+forces infantry are the long range rifle guys that are able to attack air like the terran marine,
+ghost, gdi officer, Nod stealth trooper."*
+
+⛔ **All of it is already law in [`FORMULA_V2.md`](FORMULA_V2.md), which I had never opened**, and
+27 per-class working logs sit in `docs/balance/formula_v2_*.md`. This is CLAUDE.md rule 8f exactly:
+*"a design question that feels novel usually is not."*
+
+### §6b — class membership is a RANGE BAND, and special forces is defined
+
+> **CONTIGUOUS half-open range bands (maintainer design): no unit can ever fall between classes
+> again — the band DEFINES membership.**
+
+| class | range band | baseline |
+|---|---|---|
+| melee | [1250, 2500) | `asianalliance_alligator` @ 280 |
+| closecombat | [2500, 4500) | `td_gdi_shotgunner` @ 200 |
+| scout | [4500, 5500] | `naxis_naxiriflesoldier` @ 100 |
+| **special forces (advanced; CAN hit air)** | **5500–6500 (r₀ 6000)** | **`japan_imperialscoutsman` @ 200 — LIVE** |
+
+> **"Air is the special-forces class trait, baked into the baseline — hitting air is NEVER a
+> per-unit special."**
+> **Roster verdicts, air-capable infantry sweep (maintainer 2026-07-20): → special forces: marine,
+> ghost/specter, clone trooper, lunar…"**
+
+### ⛔ §3d already rules UNIQUENESS — and it is about STATS, not price
+
+> **Uniqueness within a class** (EXACTLY these 5): no two units may share the same **HP**, **Speed**,
+> **effective damage per shot**, **raw `ReloadDelay`**, or **Range**.
+> **Original C&C prices are PINNED**: TD, TS, RA1 and RA2 factions keep their original costs for
+> memorability; **only stats move**. Custom/RA2-mod factions may adjust cost in **10-credit steps**.
+> **Faction personality over formula equality**: similar factions stay close (RA1 Allies rifle vs
+> RA1 Soviets rifle, TD GDI vs TD Nod minigunner) but **every stat must differ by at least one step**.
+
+⭐⭐ **This dissolves §4's mirror problem entirely, and it was law the whole time.** The 4 riflemen at
+100cr and the 3 attack dogs at 200cr are **TD/RA1/RA2 originals — PINNED, and not allowed to move.**
+Mirrors keep the SAME PRICE; it is their **STATS** that must differ by at least one step. That is
+the exact opposite of the unique-price rule I spent this thread deriving.
+
+⚠ **So §2.4's price grid needs re-basing against §3d before anything is applied:** price uniqueness
+is not the law, stat uniqueness is; TD/TS/RA1/RA2 costs cannot move at all; and the 10-credit step
+the maintainer named is already §3d's, for custom factions only.
+
+### ✅ Conflict group 2 RESOLVED by the law — `HeavyInfantry` vs `special_forces` (5)
+
+Measured against the band and the air rule. **The ledger tag was right in all five cases:**
+
+| unit | range | in 5500–6500? | hits air? |
+|---|--:|:-:|:-:|
+| `td_gdi_officer` | 5,596 | ✅ | ✅ |
+| `forgotten_mutantsergeant` | 5,611 | ✅ | ✅ |
+| `cabal_eliminator800` | 5,857 | ✅ | ✅ |
+| `td_nod_stealthsoldier` | 6,480 | ✅ | ✅ |
+| `ra1_allies_machinegunner` | 6,500 | ✅ | ⛔ **no** |
+| *(control)* `terran_marine` | 6,105 | ✅ | ✅ |
+
+**All five move to `^SpecialForcesInfantryTemplate`** — the templates were wrong, the tags right.
+
+### ⛔ Two defects the law exposes
+
+1. **`ra1_allies_machinegunner` is in the band but cannot hit air.** §6b says air is the class trait,
+   *"never a per-unit special"* — so either it gains air targeting or it is not special forces.
+   ⚠ Needs a ruling; it is 6,500 range, exactly the band's top edge.
+2. **`terran_ghost` (8,428) and `terran_specter` (7,922) are ABOVE the band**, yet the 2026-07-20
+   roster verdict names ghost/specter as special forces. Two parts of the law disagree: either the
+   verdict outranks the band, or their ranges must come down into it. ⚠ Ruling needed.
