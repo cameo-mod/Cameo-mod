@@ -1,0 +1,20 @@
+--- a/mods/cameo/chrome.yaml
++++ b/mods/cameo/chrome.yaml
+@@ -245,7 +245,16 @@
+ ^Flags:
+ 	Image: flags.png
+ 	Image2x: flags_2x.png
+-	Image3x: flags_3x.png
++	# Image3x: flags_3x.png -- DROPPED. Belt-and-braces alternative to restoring the correct 3x
++	# sheet (docs/patches/chrome_06_restore_flags_3x.sh). Use ONE of the two, not both.
++	#
++	# With no Image3x the engine falls back to flags_2x.png -- which is verified correct at 2.00x --
++	# and GPU-filters it up above 200% display scaling. Right pixels, slightly soft, and the 4x
++	# layout can never be read at 3x again. See docs/audit/CHROME_SCALE_BUG.md.
++	#
++	# ⚠ Do NOT also drop Image2x. CA's flags collection has no variants at all, but copying that
++	# here would throw away a CORRECT 2x sheet and soften the common HiDPI case for everyone.
++	# Only the 3x path was ever broken.
+ 
+ games:
+ 	Inherits: ^Flags

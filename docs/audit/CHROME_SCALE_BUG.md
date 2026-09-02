@@ -99,6 +99,25 @@ of upstream's variant declarations look "4x" by canvas; every one is 3x artwork.
 **So "make it work exactly like OpenRA and Combined Arms" means: artwork at 3x.** One file in one
 project is out of line, and restoring the already-authored replacement puts it back in line.
 
+### ⛔ Can ONLY the highest-resolution sheet be used, scaled correctly?
+
+No — and the blocker is one line in the engine. `ImageWidget.Draw()`:
+
+```csharp
+WidgetUtils.DrawSprite(GetSprite(), RenderOrigin.ToVector2());
+```
+
+It draws the sprite at its **native size** at the widget's origin. The `Width:` / `Height:` on a
+chrome `Image@FLAG:` widget (e.g. `ingame_observer.yaml:1207`, `Width: 35`) only lay the widget
+out; they do **not** scale what is drawn. The only thing that makes a flag render at 32x16 instead
+of its raw pixel size is the `1f / density` scale that `ChromeProvider` bakes into the `Sprite` —
+and `density` comes from the hardcoded 1/2/3 ladder.
+
+So pointing the base `Image` at the 2048 sheet (with regions rewritten to 4x) would fetch the right
+pixels and then draw every flag at **128x64** in a 35px-wide slot. There is no yaml-side offset or
+scale that fixes that. **All three variants must share one set of 1x regions, so each must be laid
+out at exactly its declared density.**
+
 ### ⛔ Can it be 4x instead?
 
 No, and not for a stylistic reason:
@@ -179,6 +198,20 @@ git show 1326cc44e:mods/cameo/uibits/flags-3x.png > mods/cameo/uibits/flags_3x.p
 
 (The hyphen→underscore rename landed later, in `938e988d2`, so the paths differ.) This keeps full
 sharpness at high DPI — strictly better than dropping the declaration.
+
+### The three options, and why "exactly like CA" is not the best one
+
+| | what it does | risk | sharpness |
+|---|---|---|---|
+| **Restore the 3x sheet** (`chrome_06_restore_flags_3x.sh`) ⭐ **recommended** | puts back Blackrobe's verified 3.00x file | none measurable; the asset is in history and was measured | full at every scale |
+| **Drop `Image3x`** (`chrome_07_drop_flags_3x_FALLBACK.patch`) | engine falls back to the correct 2x sheet above 200% scaling | none — removes the failure mode by construction | slightly soft above 200% |
+| **Copy CA exactly** (drop `Image2x` too) | CA's `flags:` declares no variants at all | none | ⛔ **worse for most users** |
+
+⚠ **Do not copy CA literally.** CA's flags collection has no scale variants, so CA renders the 1x
+sheet at every DPI. Doing that here would throw away Cameo's `flags_2x.png`, which is **verified
+correct at 2.00x** and covers the common HiDPI case (any 200%-scaled laptop). Only the 3x path was
+ever broken; the 2x path has always been right. "Like CA" is the right instinct about *outcome* —
+no broken flags — but the literal configuration would be a quality regression.
 
 **Glyphs — nothing to do.** `glyphs_3x.png` measures 3.02x and is correct. The patch that dropped
 its declaration was withdrawn.
