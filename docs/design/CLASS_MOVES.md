@@ -28,72 +28,83 @@ against the ledger, and why both are SIGNED against a template with zero inherit
 
 ---
 
-## 1. `archer` — ⭐ PROPOSAL, no price changes needed
+## 1. `archer` — ⭐ PROPOSAL (revised: 8 members, not 4)
 
-### The roster
+⛔ **My first roster was wrong and the maintainer corrected it twice.** I searched by NAME
+(`archer|bow|arrow`) and found 4. The maintainer: *"The orc axe throwers and headhunter are the
+equivalent to the elven archers so they must be in the same archer template."* Correct — and
+enumerating the bucket structurally instead of by name found **8**, including
+`wc2_humans_elvenranger`, which has neither "archer" nor "bow" nor "arrow" in its name.
 
-Four units are archers. Two look like archers and are not: `ra1_allies_longbow` is an Apache
-gunship (`^HelicopterTemplate` ✅) and `td_gdi_archerartillery` is the British Archer SPG
-(`^ArtilleryTankTemplate` ✅). Both keep their current class.
+⭐ **The reliable query is the template's own definition, not the unit's name.** All eight sit in
+`^AntiTankAntiAirInfantryTemplate` firing `Missile`-projectile thrown/drawn weapons —
+`wc2arrowFire`, `wc2axeFire`, `AsianMaidenBow`. That is exactly the population
+`^ArcherInfantryTemplate` describes ("projectile-arc infantry using the MISSILE projectile … hits
+air") and exactly what the 2026-07-21 split was meant to remove from AT/AA.
 
-| unit | today | cost | HP | move to |
-|---|---|--:|--:|---|
-| `asianalliance_veteranarcher` | `^AntiTankAntiAirInfantryTemplate` | 450 | 14,000 | `^ArcherInfantryTemplate` |
-| `japan_archermaiden` | ⛔ `^HeavyInfantryTemplate` **+** `^SniperInfantryTemplate` | 500 | 20,000 | `^ArcherInfantryTemplate` |
-| `wc2_humans_elvenarcher` | `^AntiTankAntiAirInfantryTemplate` | 600 | 25,000 | `^ArcherInfantryTemplate` |
-| `wc2_humans_highelvenarcher` | `^AntiTankAntiAirInfantryTemplate` | 1,100 | 35,000 | `^ArcherInfantryTemplate` |
+### The roster, and the repricing
 
-⭐ `japan_archermaiden` is **also one of the 18 multi-template defects** and **the current `archer`
-anchor** — it is signed while inheriting neither archer template nor a single class.
+Anchor = cheapest = **`asianalliance_veteranarcher` @ 450**.
 
-### The new anchor, and how the class lands
-
-**Cheapest member = `asianalliance_veteranarcher` @ 450** (today's anchor is `japan_archermaiden`
-@ 500, so the anchor moves and the class unsigns per §2.11).
+| was | → new | ×cost0 | HP | actor | why it moves |
+|--:|--:|--:|--:|---|---|
+| 450 | **450** | 1.00 | 14,000 | `asianalliance_veteranarcher` | anchor |
+| 500 | **500** | 1.11 | 20,000 | `japan_archermaiden` | lowest HP of the 500 group keeps the round number |
+| 500 | **550** | 1.22 | 30,000 | `wc2_orcs_trollaxethrower` | collision |
+| 500 | **600** | 1.33 | 30,000 | `wc2_orcs_trollberserker` | collision; the axethrower's upgrade form, so it prices above it |
+| 600 | **650** | 1.44 | 25,000 | `wc2_humans_elvenarcher` | collision |
+| 600 | **700** | 1.56 | 25,000 | `wc2_humans_elvenranger` | collision; the archer's upgrade form |
+| 1,000 | **1,000** | 2.22 | 40,000 | `wc2_orcs_trollheadhunter` | unchanged |
+| 1,100 | **1,100** | 2.44 | 35,000 | `wc2_humans_highelvenarcher` | unchanged |
 
 | | measured | target |
 |---|--:|--:|
-| occupancy in the target band | **4 of 4 = 100%** | >= 80% |
+| occupancy in the target band | **8 of 8 = 100%** | >= 80% |
 | spread | **2.44x** | fits 2.50x |
-| **sigma_log** | **0.346** | 0.3575 — and 0.869 roster-wide |
-| prices unique | ✅ | required |
-| prices multiples of 50 | ✅ 450 / 500 / 600 / 1,100 | required |
+| **sigma_log** | **0.296** | 0.3575 |
+| unique prices, all multiples of 50 | ✅ | required |
 
-⭐ **No price changes are needed.** The class already satisfies the band, the bell and the grid on
-the costs it ships with. This class is a pure re-tag.
+⚠ **Four units need +50 or +100, and that is a balance number** — so it goes through
+`apply_balance --confirm` on a maintainer order, not a hand edit (CLAUDE.md rule 3).
 
-### ⚠ But the re-tag is NOT behaviour-neutral
+⚠ **The tie-break needs a ruling, because mine was luck.** `trollaxethrower`/`trollberserker` and
+`elvenarcher`/`elvenranger` are stat-identical pairs (500/30,000 and 600/25,000). I broke the tie
+alphabetically and it happened to put each upgrade form above its base. That is not a rule. The
+principled tie-break is **the tech/upgrade relationship**, and it should be stated rather than
+relied on by accident.
 
-Moving between templates moves real traits. Per unit:
+### Two units that look like archers and are not
 
-| | from `^AntiTankAntiAir` | from `^Sniper` | to `^Archer` |
-|---|---|---|---|
-| `Armor.Type` | Flak | Flak | **None** ⛔ |
-| class `FirepowerMultiplier` | 110 | 120 | **100** |
-| `RevealsShroud` | 6,500 | 7,500 | 7,000 |
-| `DetectCloaked` | — | 3,750 | **removed** |
-| `KeepsDistance` | — | 10 | **removed** |
-| `RenderRangeCircle` | — | yes | **removed** |
-| IFV condition | `ifv-miss` | `ifv-lightsniper` | `ifv-miss` |
-| `BuildPaletteOrder` | 30 | 70 | 50 |
+* `ra1_allies_longbow` — an Apache gunship (`^HelicopterTemplate` ✅)
+* `td_gdi_archerartillery` — the British Archer SPG (`^ArtilleryTankTemplate` ✅)
 
-⛔ **`Armor: Flak -> None` is the largest consequence and it is a real balance change**, not a
-label: armor type is the row every incoming weapon looks up. `japan_archermaiden` additionally
-loses a **120 -> 100 firepower multiplier (-17%)** and its cloak detection; the three AT/AA archers
-lose **110 -> 100 (-9%)** and gain 500 shroud range.
+### ⛔ And one separate defect found on the way
 
-⚠ **So this cannot ship as a bare yaml edit.** The moves go through the pipeline: re-extract ->
-`check_band` -> proposal -> `apply_balance --confirm` **on a maintainer order** for any stat that
-must be compensated -> re-extract -> `audit_balance_drift` -> audit suite -> **boot gate**.
+`wc2_orcs_kodobeast` (1,000) throws the same `wc2axeFire` and sits in
+`^AntiTankAntiAirInfantryTemplate` — but it inherits **`^WC2Vehicle`**. It is a **vehicle in an
+infantry class template**, which is a different defect from the eight above and needs its own
+ruling: a mounted axe-thrower is arguably a `scout_vehicle` or a `light_tank`, not an archer.
+⚠ Its `Tooltip` also declares `Name:` twice (`Kodo Beast`, then `garrisoned`).
+
+### ⛔ The bucket this comes out of needs a 3-way split, not a 1-way move
+
+`^AntiTankAntiAirInfantryTemplate` holds **44** members and is the grab-bag the 2026-07-21 design
+was written to break up. Measured by projectile:
+
+| destination | n | examples |
+|---|--:|---|
+| **`^ArcherInfantryTemplate`** (this section) | 8 | thrown/drawn `Missile` weapons |
+| **`^RocketTrooperInfantryTemplate`** — currently DEAD | ~20 | `td_gdi_rocketsoldier`, `ra1_allies_alliedrocketsoldier`, `ordos_rockettrooper`, `cabal_rocketcyborg` … all `Missile` rockets/bazookas |
+| **stays, or goes elsewhere** | ~16 | `Bullet`/`InstantHit` AA — and several that are plainly misfiled: `terran_marine` (basic infantry), `zerg_hydralisk` (3,314), `protoss_hightemplar` (a PsiStorm caster), `ra1_soviets_dragunovantimaterialsniper` (a sniper) |
+
+⭐ **That is the real shape of the job**: filling `^RocketTrooperInfantryTemplate` is the same task
+as this one and roughly 20 units in size, and it empties most of the grab-bag at the same time.
 
 ### Open questions for this class
 
-1. **Is `Armor: None` intended for archers?** It is what `^ArcherInfantryTemplate` declares, but
-   the four units all ship as `Flak` today, so the template has never been tested against a real
-   member. If the intent was "unarmoured light infantry", fine; if it is a placeholder, it should be
-   settled before four units inherit it.
-2. **Should archers keep hitting air?** The template comment says *"Hits air"*, which is why these
-   units sat in AT/AA. Confirm that survives the move, or the three WC2/Asian archers lose their
-   role.
-3. **`^HeavySniperInfantryTemplate` is the mirror case** and is next: `td_gdi_heavysniper` (700) is
-   the signed `heavy_sniper` anchor and does not inherit it either.
+1. **Is `Armor: None` intended for archers?** `^ArcherInfantryTemplate` declares it; all eight ship
+   as `Flak` today, so the template has never been tested against a real member.
+2. **Do archers keep hitting air?** The template says *"Hits air"* — that is why they were in AT/AA.
+3. **The tie-break rule** for stat-identical upgrade pairs (above).
+4. **`wc2_orcs_kodobeast`** — which class does a mounted axe-thrower belong to?
+
