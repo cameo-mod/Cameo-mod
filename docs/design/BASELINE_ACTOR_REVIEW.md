@@ -249,6 +249,71 @@ Exactly the case §2.1 keeps the maintainer in the loop for:
   **engineers** (`TSENGINEER`, `forgotten_engineer`, `ts_gdi_engineer`, `ts_nod_engineer`) plus
   mages, priests and sorceresses. That is a §2.9 scope question before it is a pricing question.
 
+## 4.4 ⭐ RULED: one class template per buildable unit — and it is now audited
+
+**Maintainer, 2026-09-02:** *"Every buildable actor must have an inherited template so the unit can
+be classified. And this is also what you must use to balance the units around for each class in the
+unit class balancing pipeline. If a buildable unit doesn't have an inherited template it's wrong and
+a real defect, and if it inherits multiple templates that's also a real defect — with the only
+exception being the epic vehicle and epic aircraft, which is like an add-on template but not a full
+template by itself."*
+
+⭐ **This settles §4.1's scope question: the TEMPLATE is the class, the ledger tag is not.**
+`tools/audit/audit_class_templates.py` (new, in `run_all.sh`'s blocking loop) enforces it.
+
+**Measured on the current tree:**
+
+| | |
+|---|--:|
+| buildable actors | 2,166 |
+| — upgrades and promotions (not units) | 632 |
+| — buildings (scope question, §4.5) | 556 |
+| **units the law reaches** | **978** |
+| ✅ exactly one class template | **869 (89%)** |
+| ⛔ no class template | **67** |
+| ⛔ more than one | **18** |
+| ⛔ add-on only, no base class | **24** |
+
+### The 18 multi-template units are two different problems
+
+Grouped by pair, because the shape of the group is the ruling:
+
+| pair | n | reading |
+|---|--:|---|
+| `^HelicopterTemplate` + `^UnarmedTransportHelicopterTemplate` | 8 | recurs across GDI, Nod, RA1, RA2, Terran, Protoss, Zerg — a **specialisation**, almost certainly a third add-on rather than 8 defects |
+| `^DogTemplate` + `^MeleeInfantryTemplate` | 4 | same shape: `^DogTemplate` refines melee infantry |
+| `^HeavyInfantryTemplate` + `^HeroInfantryTemplate` | 2 | `cabal_cyborgcommando`, `…v2` — genuine ambiguity |
+| `^ScoutInfantryTemplate` + `^SniperInfantryTemplate` | 1 | `forgotten_mutantsniper` |
+| `^HeavyInfantryTemplate` + `^SniperInfantryTemplate` | 1 | ⛔ **`japan_archermaiden` — the `archer` ANCHOR, and signed** |
+| `^ScoutInfantryTemplate` + `^SpecialForcesInfantryTemplate` | 1 | ⛔ **`japan_imperialscoutsman` — the `special_forces` ANCHOR, and signed** |
+| `^HarvesterTemplate` + `^MeleeInfantryTemplate` | 1 | `wc2_humans_militiapeasant` — a peasant that fights; genuinely dual-role |
+
+⛔ **Two of the eight signed anchors are themselves in two classes.**
+
+### ⛔ Five DEAD class templates
+
+Declared in `defaults.yaml` and inherited by **nothing**:
+
+| template | a class anchor points at it? |
+|---|---|
+| `^ArcherInfantryTemplate` | **`archer` — and it is SIGNED** |
+| `^HeavySniperInfantryTemplate` | **`heavy_sniper` — and it is SIGNED** |
+| `^RocketTrooperInfantryTemplate` | `rocket_trooper` |
+| `^SuperDefenseTemplate` | no |
+| `^SupportInfantryTemplate` | no |
+
+⭐ **This is why `archer` and `heavy_sniper` looked strange in §4.1**: they are the two classes whose
+member count went *down* against the ledger. Structurally they have **no members at all** — their
+templates are dead, and `japan_archermaiden` (the `archer` anchor) inherits Heavy Infantry + Sniper
+instead of `^ArcherInfantryTemplate`.
+
+## 4.5 ⚠ Open: do buildings need a class?
+
+556 buildable buildings are out of scope above. Defence buildings **do** carry templates
+(`^BasicDefenseTemplate`, `^AdvancedDefenseTemplate`, `^BunkerTemplate`); production buildings carry
+none. Whether a barracks or a refinery must be classifiable is a maintainer ruling — the audit lists
+them rather than failing on them.
+
 ## 5. Order of work
 
 1. ⛔ **Maintainer rules on the SCOPE question** (§4.1): does a class member mean *inherits the
