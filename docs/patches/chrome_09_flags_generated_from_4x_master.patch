@@ -1,0 +1,16 @@
+--- a/mods/cameo/chrome.yaml
++++ b/mods/cameo/chrome.yaml
+@@ -245,7 +245,13 @@
+ ^Flags:
+ 	Image: flags.png
+ 	Image2x: flags_2x.png
++	# flags_3x.png is now GENERATED from the 4x master by tools/art/generate_chrome_scales.py.
++	# Edit flags_4x.png only; run `python tools/art/generate_chrome_scales.py flags --emit 1,2,3
++	# --write` and the 1x/2x/3x sheets are re-derived, correct by construction.
+ 	Image3x: flags_3x.png
++	# ⚠ Uncomment ONLY with docs/patches/ENGINE_image4x_chromeprovider.patch applied. Without the
++	# engine change FieldLoader silently drops this line (CLAUDE.md rule 8b).
++	# Image4x: flags_4x.png
+ 
+ games:
+ 	Inherits: ^Flags

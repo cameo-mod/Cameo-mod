@@ -169,7 +169,57 @@ must carry, it needs the full rule-7 pipeline (edit the `cameo-engine` clone →
 from a cloud container. Against that: the 4x artwork is used at full resolution and no art is ever
 downscaled.
 
-### The three options### The four options
+### The three options### ⭐ THE RECOMMENDED ANSWER — one master, the rest generated
+
+Maintainer, 2026-09-02: *"keep the 4x as a base which is used for all the edits and then write a
+tool that automatically creates the 1x, 2x and 3x versions from the 4x so we only need to edit one
+file and the rest is created automatically."*
+
+**`tools/art/generate_chrome_scales.py`** does exactly that:
+
+```bash
+python tools/art/generate_chrome_scales.py flags --master flags_4x.png --emit 1,2,3 --write
+python tools/audit/audit_chrome_scale_variants.py     # PASS
+# --- BOOT GATE --- generated sheets are engine content
+```
+
+⭐ **It removes the bug class rather than the bug.** A sheet's layout is proportional, so uniformly
+resizing the master scales every icon's position and size together — the derived sheets are correct
+**by construction**. There is no offset to get wrong and no icon that can drift. Verified on the
+real master:
+
+| generated | canvas | artwork | vs 1x |
+|---|--:|--:|--:|
+| `flags.png` | 512x512 | 387x512 | 1.00x |
+| `flags_2x.png` | 1024x1024 | 771x1024 | 1.99x |
+| `flags_3x.png` | 1536x1536 | 1153x1536 | 2.98x |
+| `flags_4x.png` (master) | 2048x2048 | 1536x2048 | 3.97x |
+
+⭐ The generated 3x sheet is **1153x1536 — the same dimensions as Blackrobe's reverted file**,
+derived independently. His file was right.
+
+**And it answers the rename question: yes, rename the master to `flags_4x.png`.** The engine never
+sees it — the ladder stops at 3x, so a 4x master is an *art source*, not a chrome declaration, and
+`--master` takes it by path precisely so it need not appear in `chrome.yaml` at all. The name then
+states the density instead of lying about it.
+
+⚠ **Two hazards it guards, both hit while building it**, and both are the same underlying error —
+trusting the canvas or the filename instead of measuring the artwork, which is the error that
+caused this bug in the first place:
+
+* **It refuses to overwrite the master.** Cameo's 4x master is *named* `flags_3x.png`, so `--emit 3`
+  would replace the highest-resolution source with its own downscale. That actually happened during
+  testing and was only recoverable from a manual backup.
+* **It refuses a padded master.** Upstream and CA pad 3x artwork into a power-of-two canvas;
+  `glyphs_3x.png` is exactly that shape. Resizing such a master gives correct artwork in a nonsense
+  canvas, so the tool detects it and stops — `glyphs` needs nothing and must not be "fixed".
+
+Resampling uses Pillow (LANCZOS) when importable and a pure-Python area-average box filter
+otherwise, and prints which ran. 4x -> 2x and 4x -> 1x are exact integer ratios; 4x -> 3x is a 0.75
+resample, so a native 3x export from the art source is still slightly better if one exists — the
+audit accepts either.
+
+### The four options
 
 | | what it does | needs | risk | result |
 |---|---|---|---|---|
@@ -178,8 +228,10 @@ downscaled.
 | **C. Drop `Image3x`** (`chrome_07_*_FALLBACK.patch`) | falls back to the correct 2x sheet above 200% | boot gate | none — removes the failure mode by construction | slightly soft above 200% |
 | **D. Copy CA literally** (drop `Image2x` too) | CA's `flags:` declares no variants at all | boot gate | none | ⛔ **worse for most users** |
 
-**A is the smallest change that fixes it. B is the one that honours "use the highest-resolution
-file".** They are mutually exclusive — A points `Image3x` at a 3x sheet, B points `Image4x` at the
+⭐ **E. Generate everything from the 4x master** (`tools/art/generate_chrome_scales.py`, above) is
+the recommended route: it needs no engine change, no new art, and no one to remember anything.
+A is the smallest one-off fix; B is the only way the 4x pixels themselves reach the screen.
+A, B and E are mutually exclusive at the `Image3x` slot — A points `Image3x` at a 3x sheet, B points `Image4x` at the
 4x sheet. C is the belt-and-braces fallback if either looks wrong on a real machine.
 
 ⚠ **Do not copy CA literally.** CA's flags collection has no scale variants, so CA renders the 1x
