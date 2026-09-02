@@ -39,6 +39,32 @@ recorded rather than staying implicit**, which is what makes one source of truth
 ⚠ Drift being repaired: `heavy_infantry` +48, `support` +47, `rocket_trooper` +43, `melee` +43,
 `scout` +34, `commando` +33, `scout_vehicle` +27, `pure_sniper` +26, `mbt` +21.
 
+### A6. Unbuildable spawned units get their OWN class, not an exclusion ⛔ corrects my proposal
+**Maintainer:** *"there should be still something for unbuildable units like those like the carrier
+drones so that these also get their own unique classification … it should be their own carrier
+drone template that belongs to their own balancing."*
+
+⛔ I had proposed putting spawned units on the A5 exclusion list. **Wrong** — they are balanced
+content and need a class; only genuinely non-unit actors (husks, cameras, concrete markers) are
+excluded.
+
+**Measured:** 29 spawner carriers exist, via `DroneSpawnerMaster`, `DroneSpawnerMasterCA`,
+`MissileSpawnerMasterCA`, `MobSpawnerMaster` and `SlaveMinerSpawnerMaster`. Their spawned actors are
+classified inconsistently or not at all:
+
+| spawned actor | buildable? | template today |
+|---|---|---|
+| `apparition.ixian` | no | ⛔ `^MeleeInfantryTemplate` |
+| `ra2shk.bot` | yes | ⛔ `^HeavyInfantryTemplate` |
+| `ra2dmisl`, `yrbsubmisl`, `miniv2.nax`, `fremen_creep` | no | ⛔ **none** |
+
+⚠ **Correction to the brief:** the maintainer recalled these as carrying `^BomberTemplate`; measured,
+they carry *no* template or an *infantry* one. Same defect, different shape.
+
+**Ruled:** a new `^CarrierDroneTemplate` (and the audit's population widens from "buildable" to
+"buildable **or spawned by a carrier**"). ⚠ `audit_class_templates.py` currently scopes on
+`Buildable`, so it does not see these at all — that scope has to widen with this ruling.
+
 ---
 
 ## B. `KeepsDistance` — make the trait do what its own `[Desc]` claims
@@ -72,6 +98,51 @@ No new trait and no second distance field. The five templates that already decla
 `KeepsDistance: Distance: 10` (Medic, Mechanic, Sniper, HeavySniper, Archer's neighbours) get the
 behaviour for free, and the trait finally matches its own description.
 
+### B5. Falling back means REJOINING THE ARMY, not just halting
+**Maintainer:** *"if it has to fall back or route around enemies it should instead move to where
+the most friendly units are by value."*
+
+* **Value = build cost weighted by damage taken.** A support unit drifts toward the expensive
+  *and* the hurt, not merely the expensive.
+* **Preference is a weighting, never exclusive.** Friendlies the unit can service count roughly 3x;
+  everything else still counts, so a medic in an all-vehicle army shelters with the tanks instead of
+  standing alone. A sniper services nobody, so it weights everything equally and simply goes where
+  the army is.
+* **The attack-move order stays queued, and the unit KEEPS TRACKING the friendly centre of value
+  while it waits** — so a medic trails an advancing army rather than sitting where the army used to
+  be, and resumes the push when the blocker clears.
+* **Search radius = the trait's own `Distance`.** No second number. With no friendlies inside it,
+  B3 applies unchanged: halt at stand-off and hold.
+
+⭐ **"Units I can service" is the SAME predicate as B2, pointed at allies.** Verified on
+`ra1_allies_medic`: `Armament: Weapon: Heal, TargetRelationships: Ally`. So one mechanism answers
+all three questions — *can I attack E*, *can E attack me*, *can I help F* — with no new concept and
+no yaml marker.
+
+⚠ **Assumed, flag if wrong:** the brief said *"medics should stay with vehicles they can repair"*;
+read as **mechanics** repair vehicles, medics heal infantry, matching the separate `^MedicTemplate`
+and `^MechanicTemplate` that both already declare `KeepsDistance`.
+
+### B6. ⛔ The predicate must IGNORE zero-damage armaments — or it fails on the exact units it is for
+Measured on `ra1_allies_medic`:
+
+```
+Armament@Dummy:  Name: dummy,  Weapon: dummytargeting     <- Range 10000, ValidTargets: Ground, Water, Air
+Armament:        Weapon: Heal, TargetRelationships: Ally
+```
+
+`dummytargeting` is `Range: 10000`, targets **Ground, Water and Air**, and carries a single
+`Warhead@Dummy: Dummy` — zero damage. A naive *"does any armament of mine target E"* therefore
+answers **yes** for a medic against everything, and the medic never keeps distance. **The predicate
+counts only armaments whose weapon can actually deal damage.**
+
+⭐ This is also direct evidence for C2: `dummytargeting` is declared on exactly two templates —
+`^MedicTemplate` (`defaults.yaml:1133`) and `^MechanicTemplate` (`:1162`) — and does nothing but
+give an unarmed unit something to point at. It is the prime removal candidate once B lands.
+⚠ But it feeds `AutoTarget` (`InitialStance: AttackAnything` +
+`AutoTargetPriority: ValidTargets: Infantry, plagued, ivanattached, lockdowned`), which is how a
+medic finds patients — so removing it must not break auto-healing. Verify, do not assume.
+
 ⛔ **No dummy weapons.** *"I don't want to use some crappy dummy weapons for that since that would
 also block their main healing or repair weapon from firing, and it would stop the snipers from
 attacking infantry."* The stand-off must be independent of any armament.
@@ -102,6 +173,40 @@ of the archer work. It gets `^SupportVehicleTemplate` and its own `wc2kodo*` wea
 
 ---
 
+---
+
+## D. Carriers and their drones — recorded for later, not yet scheduled
+
+**Maintainer, verbatim:** *"carrier drone damage must be added to the damage of the carrier itself.
+Currently there is only one carrier where it was done correctly (if you count the fire power
+multiplier which will be replaced in the future) and it's the Steel Consortium cloud breaker. If you
+calculate it the carrier drones summed up will deal exactly 50% of the total damage while the other
+50% is done by that carriers main weapon."*
+
+### D1. A carrier's damage INCLUDES its drones' damage
+For pricing, a carrier's DPS is `own weapon + sum of drone DPS`. Today only
+`steelconsortium_cloudbreaker` is built this way — 50% carrier weapon, 50% drones.
+⚠ *"if you count the firepower multiplier, which will be replaced in the future"* — so the 50/50
+holds under today's `FirepowerMultiplier`, which W17 is retiring. **The split has to be re-derived
+once that knob goes**, or the one correct example stops being correct.
+
+### D2. Drone cost = 20% of the carrier's price, divided across the drones
+```
+drone_cost = (carrier_cost / drone_count) * 0.2
+```
+so **all drones together cost 20% of the carrier**. Worked example from the brief: a 4,000-credit
+carrier with 8 drones gives `4000 / 8 * 0.2 = 100` per drone, and `8 x 100 = 800 = 20% of 4000`. ✅
+
+### D3. Drone health uses the same function
+`drone_hp = (carrier_hp / drone_count) * 0.2`, so all drones together carry 20% of the carrier's HP.
+
+⚠ **Not yet verified, and it must be before this is applied:** the cloudbreaker is
+`^SpaceshipTemplate`, `Cost: 5000`, `HP: 250000`, and its spawner was not in the 29 the scan found —
+so its drone count and the 50/50 measurement still need confirming against the resolved rules.
+Recorded as a maintainer statement, not yet as a measured fact.
+
+---
+
 ## Sequencing
 
 1. **A3 + A4** — classify the 67 and the epic 24, grouped, for approval. *(in progress)*
@@ -110,6 +215,9 @@ of the archer work. It gets `^SupportVehicleTemplate` and its own `wc2kodo*` wea
 4. **C2** — dummy-weapon audit, once B proves which are redundant.
 5. **C1 / C3** — weapon splits, alongside the per-class passes in
    [`CLASS_MOVES.md`](CLASS_MOVES.md).
+6. **D** — carriers. ⛔ Deliberately last: D1's 50/50 baseline is stated in terms of
+   `FirepowerMultiplier`, which W17 is retiring, so measuring it now would pin a number to a knob
+   that is being removed. Verify the cloudbreaker first, then derive.
 
 ⚠ Every yaml or C# change here is engine content: boot gate before commit (CLAUDE.md rule 1), and
 any number that moves goes through `apply_balance --confirm` on a maintainer order (rule 3).
