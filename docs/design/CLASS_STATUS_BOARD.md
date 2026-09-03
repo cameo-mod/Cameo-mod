@@ -241,3 +241,81 @@ tank destroyers, which a stat rule alone can never separate from dreadnoughts.
 
 ⭐ `turreted` is now recorded by `extract_stats.py`, so both halves of the definition become
 machine-checkable on the next ledger refresh. **138 of 305 Cameo vehicles are turretless.**
+
+---
+
+## §10 — ⛔ The range inversion is in the ANCHORS, not just the yaml (2026-09-03)
+
+§9's table read the LEDGER — what yaml ships today. The maintainer's response: *"These are still the
+old values right? I was already planning to change them with the class anchors."* Correct, and the
+anchors were checked. **The defect survives into the spec.**
+
+| class | anchor | hp0 | speed0 | range0 | dps0 | cost0 | sight |
+|---|---|--:|--:|--:|--:|--:|--:|
+| `dreadnought` | `terran_warhound` | **1,150,000** | **50** | **7,000** | 3,750 | 3,000 | 8,000 |
+| `tank_destroyer` | `naxis_hetzer` | 150,000 | 70 | **7,500** | 900 | 600 | 7,500 |
+| `mbt` | `tiger.nax` | 240,000 | 95 | 5,500 | 600 | 800 | 6,000 |
+
+Against the definition — *"like tank destroyers but with more range and armor and slower"*:
+
+| axis | dreadnought ÷ tank destroyer | verdict |
+|---|--:|---|
+| HP | **7.7×** | ⭐ tougher — holds |
+| speed | **0.71×** | ⭐ slower — holds |
+| DPS | 4.2× | harder-hitting |
+| **range** | **0.93×** | ⛔ **SHORTER — the definition is inverted in the spec** |
+
+⭐ **And the anchor knows it should be longer.** Its own comment reads *"Heavy long-range assault
+walker"*, and its `reveals_shroud` is **8,000** against the tank destroyer's 7,500 — the sight
+range already carries the intent the weapon range contradicts.
+
+**So this cannot be fixed by restating the units.** `dreadnought.spec.range0_wdist` has to move above
+`tank_destroyer`'s 7,500, or the class definition and the class anchor stay in conflict whatever the
+members do.
+
+---
+
+## §11 — Three ruled exceptions, and one that cannot be automated (2026-09-03)
+
+### `asianalliance_pulverizermecha` — a RAMPING weapon, not a weak one
+
+*"uses the gatling speedup behavior so it deals more damage the more it fires and together with the
+heavy pulverizer upgrade it becomes one of the most powerful weapons in the game if not outright
+broken."*
+
+⛔ **This is a measurement gap in the whole stat layer, not a fact about one mecha.** Every damage
+figure the reference pipeline reads — Cameo's and every peer's — is **base damage**. For a weapon
+that ramps with sustained fire, base damage understates the unit, and §9.1 flagged the Pulverizer as
+"below the MBT median" on exactly that basis. It is not weak; it is measured wrong.
+
+⚠ **The size of the gap is currently unknowable and must not be guessed.** `GrantConditionOnAttack`,
+`FirepowerMultiplier` and `ReloadDelayMultiplier` each resolve onto ~1,860 of ~2,000 actors —
+barrels, ammo boxes and civilians included — because they are inherited from shared defaults. Their
+presence proves nothing, so the ramping units cannot be counted by trait presence. A real detector
+has to follow the granted CONDITION through to a firepower change or a weapon swap.
+**Until that exists, no damage target should be trusted for a ramping weapon.**
+
+### `schwarzermond_neojagdpanzer` — the hover chassis, a ruled faction exception
+
+*"The lunar neo cymek is turreted indeed but it uses an invisible chassis so the whole unit is the
+turret which makes it look like it can drift like the hovercraft / anti gravity unit it is, so the
+rule here still holds true ... we can make it a ruled exception for the Schwarzer Mond faction since
+all their units hover and it's their specialty."*
+
+**Ruled:** a Schwarzer Mond actor whose `Turreted` is the whole chassis counts as **frontal-facing**
+for class purposes. ⚠ Measured: only **15 of 61** Schwarzer Mond actors (25%) carry a `Turreted`
+trait at all, so the exception applies to those 15 and is not a blanket faction rule.
+
+### ⛔ `ixian_neocymek` — the distinction is NOT in the data
+
+*"the main weapon is the dual railgun and it is frontal facing while the support weapon in the back
+is turreted."*
+
+Real in game, and **not machine-readable here.** The actor carries one unnamed `Turreted` and two
+armaments — `Armament@Cannon` (D2K_StormGunCymek) and `Armament@Rockets` — and **neither declares a
+`Turret:` link**, so both bind to the single default turret. Across 1,044 armaments scanned only
+**73 (7%)** declare an explicit `Turret:`; the rest bind by OpenRA's default.
+
+**So "which weapon is frontal" is only readable for 7% of armaments.** A mixed-mount unit needs an
+explicit hand tag — the turret-presence flag alone will keep misclassifying it, and no amount of
+yaml reading will fix that.
