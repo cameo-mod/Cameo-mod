@@ -203,3 +203,72 @@ python tools/balance/lineage_dedup.py --all-pairs                        # incl.
 python tools/balance/synthesize_reference.py --dry-run                   # the collapse, applied
 python -m unittest discover -s tools/tests -p "test_lineage_dedup.py"
 ```
+
+---
+
+## §9 — ⭐ The SECOND corpus, and why it needs its own verdicts (measured 2026-09-03)
+
+`docs/reference/versus_raw.json` is a separate reference corpus of **3,150 warheads across 16
+sources** — and it holds three sources the unit corpus does not: **Red Resurrection** (480
+warheads), **RA2 Reborn** (176) and **all three DTA variants** (228). It carries warhead `Versus`
+profiles ONLY — no unit, HP, cost, speed, damage or range — so these sources can vote on the
+armour axis and cannot vote on the stat axis.
+
+⚠ **The recorded file paths say why the stat side is missing**, and it is the DTA problem again:
+
+```
+dta_enhanced      G:\BackUp\AedisToru\Desktop\DTA\DTA Release\INI\Base\Enhance.ini
+red_resurrection  C:\Users\AedisToru\Downloads\_extracted_rr\expandmd99_8218f9f4.ini
+ra2_reborn        C:\Users\AedisToru\Downloads\_extracted_reborn\INI_c5d7f6ce.ini
+```
+
+All read on the maintainer's machine; only the derived Versus rows were ever committed.
+
+### ⛔ The same source gets DIFFERENT verdicts in the two corpora
+
+| pair | warheads | `w10` | `w25` | armour verdict | stat verdict |
+|---|--:|--:|--:|---|---|
+| `ra2_reborn ~ yr_vanilla` | 106 | **97%** | 98% | ⛔ **DUPLICATE** | — |
+| `cnc_reloaded ~ ra2_reborn` | 109 | **87%** | 90% | ⛔ **DUPLICATE** | — |
+| `cnc_reloaded ~ yr_vanilla` | 116 | 88% | 90% | partial (borderline) | — |
+| `cnc_reloaded ~ romanovs_vengeance` | — | — | — | — | ⭐ **47% — independent** |
+| `mental_omega ~ anything` | 65–86 | **52–66%** | — | ⭐ independent | ⭐ independent (17–33%) |
+| `red_resurrection ~ anything` | 70–78 | **52–68%** | — | ⭐ independent | (no stat rows) |
+| `dta_classic ~ dta_enhanced` | 17 | 38% | 57% | ⭐ genuinely different tables | — |
+
+⭐ **CnC Reloaded is INDEPENDENT on unit stats (47%) and a NEAR-DUPLICATE on armour (88%).** A mod
+can rebalance its roster while keeping vanilla's `Versus` tables almost untouched — and RA2 Reborn
+does exactly that at **97%**. So a de-duplication ruling **cannot be shared between the two
+corpora**: each axis needs its own verdict, from its own measurement.
+
+⭐ **Mental Omega and Red Resurrection are independent on BOTH axes** — the maintainer's instinct
+that *"Mental omega might be different enough so it justifies a unique vote"* holds twice over.
+
+---
+
+## §10 — New peer candidates, surveyed (2026-09-03)
+
+⭐ **Public GitHub clones work from the working environment** (verified), so any OpenRA-based mod
+can become a full source with units and weapons. Red Resurrection and RA2 Reborn cannot — they are
+Ares/YR INI mods, and their data lives in MIX archives.
+
+Four candidates cloned and resolved. `usable` = actors carrying both `Health` and `Valued`:
+
+| candidate | actors | usable | combat | closest existing source | verdict |
+|---|--:|--:|--:|---|---|
+| **RA Unplugged** (`RAunplugged/uRA`) | 651 | **400** | **309** | OpenRA Red Alert — 80% / 92% | ⚠ partial, just under the cut |
+| **Red Alert Plus** (`MlemandPurrs/raplusmod`) | 668 | 229 | 202 | OpenRA Red Alert — 82% / 89% | ⚠ partial, just under the cut |
+| **OpenRA2 fork** (`hel1o-wor1d/OpenRA2`) | 587 | 141 | 92 | Valiant Shades — 76% / 78% | ⚠ partial |
+| **Red Alert .5** (`MustaphaTR/Red-Alert-.5`) | 370 | 157 | 121 | OpenRA Red Alert — **90% / 96%** | ⛔ **DUPLICATE — must not vote** |
+
+⭐ **The test earned its keep immediately**: Red Alert .5 is a prequel-campaign mod that reuses RA's
+roster wholesale, and it would have entered the pool as a third RA voice. RA Unplugged's 309 combat
+units would be the third-largest roster in the corpus after Combined Arms and Romanov's Vengeance.
+
+⚠ All three surviving candidates sit at 76–82% against an existing source — real overlap, below the
+cut. Adding them strengthens the thin TD/RA1 home set, at the cost of tilting the pool further
+toward the RA lineage. **That is a maintainer call, not a measurement.**
+
+⚠ **`extract_peer_units.extract()` still refuses a mod that has no named rifle actor** — Red Alert
+Plus failed with `rifle actor e1 not present`. That is the retired transfer key blocking an
+adoption the distribution method does not need one for; it has to go before any candidate lands.
