@@ -108,10 +108,14 @@ one of the 27 classes with 30 of its 31 members tagged as such.
 
 **What is now visible, and blocking:**
 
-1. **219 units have no class that exists.** `class_anchors.json` holds 27 classes and **not one is
-   an air or a naval class** — 181 air units (helicopter 58, bomber 34, aircraft 26, fighter 22,
-   spaceship 21, transport-helicopter 9, flying infantry 11), 54 naval, 27 harvesters. The pipeline
-   cannot price a third of the roster. **Needs a maintainer ruling on new classes.**
+1. **219 units have no class that exists.** Worked in full:
+   **[`design/MISSING_CLASSES.md`](design/MISSING_CLASSES.md)** — nine proposed classes (5 air,
+   3 naval, 1 economy), each with its measured population and a drone-corrected anchor candidate,
+   plus the five rulings needed. Taking it to **89% coverage**.
+   ⛔ **One prerequisite blocks it:** 22 of the 219 are not buildable — spawned carrier and suicide
+   drones parked in the air templates (`^BomberTemplate` is **44%** drones). The cheapest-member
+   anchor rule would plant three air anchors on a drone, off by 5.8×–14×. `^CarrierDroneTemplate`
+   was already ruled on 2026-09-02 and never created; it has to land first.
 2. **114 units have no unit template at all** — PRIORITY 0 item 2, now enumerated by subtype.
 3. **38 rows where the hand tag disagrees with the template** — the drift, now listed rather than
    invisible. The explicit tag still wins; the disagreements are reported.
