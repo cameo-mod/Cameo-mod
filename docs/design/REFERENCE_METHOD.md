@@ -607,3 +607,70 @@ Two consequences, both real:
 ⚠ **Unruled.** The options are to leave it and record the caveat, to EXCLUDE the unambiguous naval
 rows so those sources abstain rather than distort, or to retype them as `ship` — which would build
 a partial naval population out of name guesses. Nothing is applied.
+
+---
+
+## §11 — The assignment is built (2026-09-03) — and its coverage number is inflated
+
+`tools/balance/assign_references.py` implements the §9 law: a lexicographic cascade, a greedy
+descent (clause 9 says *"assign the best remaining"*, which is a greedy, not a global optimum),
+one reference per source per unit, each reference used once, exemptions applied first so an exempt
+unit never consumes a reference.
+
+| | |
+|---|--:|
+| Cameo actors in scope | **695** (128 exempt) |
+| assigned at least one reference | **595** |
+| reaching the ≥2 reference floor | **448** |
+| total assignments made | **1,850** |
+
+⭐ Against 221 actors clearing the floor before, that looks like a doubling. **It is not, and the
+quality distribution says why.**
+
+### ⛔ 43% of the assignments are weak or unrelated
+
+| name score | meaning | count | share |
+|---|---|--:|--:|
+| 1.00 | exact name match | 449 | 24% |
+| 0.90–1.00 | prefix / alias | 93 | 5% |
+| 0.75–0.90 | strong similarity | 131 | 7% |
+| 0.60–0.75 | shares a distinctive word | 374 | 20% |
+| **0.40–0.60** | **weak** | **730** | **39%** |
+| **0.00–0.40** | **unrelated** | **73** | **4%** |
+
+Median name score **0.62**. Real examples from `scout`: `forgotten_mutant_wild` drew *"Pilot"*,
+*"Bodybuilder"*, *"Warrior"*, *"Red Devil"*, *"Civilian"* and *"Virus"* — six sources, not one of
+them a match. `asianalliance_asianmilitia` drew *"Assimilator"* and *"Civilian Male White"*.
+
+**Coverage against quality:**
+
+| minimum name score | assignments | actors ≥2 |
+|---|--:|--:|
+| none (today) | 1,850 | **448** |
+| ≥ 0.60 | 1,047 | **261** |
+| ≥ 0.75 | 673 | 171 |
+| ≥ 0.90 | 542 | 141 |
+| exact only | 449 | 122 |
+
+### ⛔ The root cause is the missing ROLE step, not the greedy
+
+The cascade is *name → tech tier → type → role → cost*. Measured against the corpus:
+
+* **tech tier: unavailable in EVERY peer source.** Cameo carries `design.tech_tier`; no reference
+  document has a tier column. The step is recorded as unavailable rather than silently satisfied.
+* **role: available for 2 of 15 sources.** Only Document 1 (Mental Omega, CnC Reloaded) carries a
+  `Role` column — 622 of 2,878 rows. DOC5 has none.
+* type and cost work everywhere (cost on 86% of rows, after it was carried through from a column
+  that was being dropped on read).
+
+**So for 13 of 15 sources the cascade ranks on name and cost alone — and name plus cost cannot
+tell a legitimate role analogy from a random pairing.** A name threshold would cut the junk and
+also cut exactly the analogies the maintainer asked for (`asianalliance_lynxtank` ← MO's Qiling
+scores low on name and is a good match).
+
+⭐ **Which is why the ruled workflow is the answer, not a threshold.** The assignment PROPOSES; the
+per-class review disposes. The table above sizes that job honestly: ~1,850 proposals, of which
+roughly 800 are weak enough to strike on sight.
+
+> ⛔ **The 448 figure must not be quoted as coverage.** Until a class has been reviewed, its
+> assignment is a proposal list, and the ≥2 floor counts proposals rather than evidence.

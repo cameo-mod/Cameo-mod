@@ -1,0 +1,252 @@
+#!/usr/bin/env python3
+"""ONE reference unit per source, used ONCE — the maintainer's matching law, solved.
+
+PRIOR ART: `reference_distribution.py` matches by a prefix test on the actor id's last token and
+lets every hit vote, which is what the law forbids; `explain_unit.py` shows one unit's working but
+assigns nothing. This is the assignment itself. Neither is duplicated — both are imported.
+
+    python tools/balance/assign_references.py                  # the whole corpus, summary
+    python tools/balance/assign_references.py --class scout    # one class, reviewable table
+    python tools/balance/assign_references.py --write          # save the assignment
+
+⛔ THE LAW (maintainer 2026-09-03), in full, because every line below implements one clause:
+  1. role analogies are allowed — matching is not restricted to names;
+  2. at most ONE reference unit per source, per Cameo unit;
+  3. a reference unit may be used ONCE, ever;
+  4. maximise DISTINCT references — where the natural counterpart is taken, find another;
+  5. a zero-damage row never matches a combat unit;
+  6. among variants, take the one carrying the Cameo unit's IDENTITY;
+  7. contests go to FACTION LINEAGE first, then stats;
+  8. a collapsed lineage offers ONE reference, not several;
+  9. every fit is assigned — no blanks; confidence carries the warning;
+ 10. MCV / engineer / harvester / support / transports / detectors are EXEMPT; armed APCs are not.
+
+WHY GREEDY AND NOT OPTIMAL
+--------------------------
+Clause 9 says "assign the best remaining candidate", which IS a greedy descent over the score, not
+a global optimum — a maximum-weight matching would move a unit off its best reference to improve
+someone else's, and the maintainer asked for the opposite. It is also deterministic and explains
+itself, which matters when every row is reviewed by hand.
+"""
+from __future__ import annotations
+
+import argparse
+import collections
+import difflib
+import json
+import pathlib
+import re
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "audit"))
+import class_membership as cm      # noqa: E402
+import explain_unit as eu          # noqa: E402
+import reference_distribution as rd  # noqa: E402
+
+ROOT = rd.ROOT
+syn = rd.syn
+OUT = ROOT / "docs" / "balance" / "derived" / "reference_assignment.json"
+
+# ── Clause 10: the exempt roles ───────────────────────────────────────────────────────────────
+# ⚠ ARMED APCs STAY IN (maintainer 2026-09-03): the test is whether the actor has a damaging
+# armament, not what it is called. An unarmed carrier is exempt; a troop carrier that shoots is a
+# combat unit with real HP, DPS and armour.
+EXEMPT_WORDS = ("mobileconstructionvehicle", "mcv", "engineer", "harvester", "miner",
+                "transport", "carryall", "chinook", "dropship", "hovercraft", "spy", "detector")
+EXEMPT_CLASSES = {"support"}
+
+
+def ledger():
+    """{actor: record} across every pack — the only place cost, class and buildability live."""
+    out = {}
+    for path in sorted((ROOT / "docs" / "balance").glob("*.json")):
+        if path.name == "class_anchors.json":
+            continue
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+        except ValueError:
+            continue
+        for section in (doc.get("sections") or {}).values():
+            if isinstance(section, dict):
+                for name, rec in section.items():
+                    if isinstance(rec, dict):
+                        out[name] = rec
+    return out
+
+
+def is_armed(rec):
+    for arm in (rec.get("armaments") or []):
+        if isinstance(arm, dict) and arm.get("pricing"):
+            return True
+    return False
+
+
+def exempt(actor, rec):
+    if cm.classify(rec.get("design") or {})[0] in EXEMPT_CLASSES:
+        return "support-class"
+    tail = actor.split("_")[-1]
+    for word in EXEMPT_WORDS:
+        if word in tail:
+            # the APC carve-out: a carrier that shoots is not exempt
+            if word in ("transport", "carryall", "chinook", "dropship", "hovercraft") and is_armed(rec):
+                return None
+            return f"role-identical ({word})"
+    return None
+
+
+def norm_words(text):
+    return [w for w in re.split(r"[^a-z0-9]+", (text or "").lower()) if w]
+
+
+def name_score(cameo_id, peer_name):
+    """0..1. Exact and alias matches sit at the top; a shared distinctive word still counts."""
+    tail = syn.norm(cameo_id.split("_")[-1])
+    peer = syn.norm(peer_name)
+    if not tail or not peer:
+        return 0.0
+    if tail == peer:
+        return 1.0
+    if tail.startswith(peer) or peer.startswith(tail):
+        return 0.9
+    ratio = difflib.SequenceMatcher(None, tail, peer).ratio()
+    shared = set(norm_words(cameo_id.split("_")[-1])) & set(norm_words(peer_name))
+    return max(ratio, 0.6 if shared else 0.0)
+
+
+def pct_rank(value, population):
+    """Where a value sits in its OWN population — the only scale-free way to compare costs."""
+    if not value or not population:
+        return None
+    below = sum(1 for v in population if v < value)
+    return below / len(population)
+
+
+def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home):
+    """The LEXICOGRAPHIC cascade (maintainer: name, then tech tier, then type, then role, then cost).
+
+    Returned as a tuple so Python's own ordering does the cascade — a weighted sum would let a large
+    cost advantage outvote a name match, which is exactly what the maintainer ruled against.
+
+    ⛔ TECH TIER IS ABSENT FROM EVERY PEER SOURCE. Cameo carries `design.tech_tier`; no reference
+    document has a tier column, so the step cannot be evaluated and is recorded as unavailable
+    rather than silently satisfied. It sits in the tuple as a constant so the cascade's SHAPE stays
+    honest and the step can be filled the day the data exists.
+    """
+    if cam["type"] != peer["type"]:
+        return None                                   # cross-type is refused (§9 cross-type ruling)
+    if peer.get("w_damage") is not None and not peer["w_damage"] and is_armed(rec):
+        return None                                   # clause 5: zero damage never matches a combat unit
+    name = name_score(cam["id"], peer.get("name", ""))
+    TIER_UNAVAILABLE = 0.0
+    role = 0.0
+    if peer.get("role"):                              # only DOC1 sources carry one
+        klass = (cm.classify(rec.get("design") or {})[0] or "")
+        role = 1.0 if peer["role"].lower() in klass.replace("_", "") else 0.0
+    cost = 0.0
+    if cam_cost_pct is not None and peer_cost_pct is not None:
+        cost = 1.0 - abs(cam_cost_pct - peer_cost_pct)
+    return (round(name, 3), TIER_UNAVAILABLE, 1.0, role, round(cost, 3), 1 if home else 0)
+
+
+def assign(only_class=None):
+    peers, cameo = rd.peer_rows(), rd.cameo_rows()
+    led = ledger()
+    cam_rows = [c for c in cameo if c["id"] in led]
+
+    # exemptions first, so exempt units never consume a reference
+    scope, skipped = [], {}
+    for c in cam_rows:
+        why = exempt(c["id"], led[c["id"]])
+        if why:
+            skipped[c["id"]] = why
+        else:
+            scope.append(c)
+
+    cam_costs = collections.defaultdict(list)
+    for c in scope:
+        v = (led[c["id"]].get("cost") or {})
+        v = v.get("v") if isinstance(v, dict) else v
+        try:
+            cam_costs[c["type"]].append(float(v))
+        except (TypeError, ValueError):
+            pass
+    peer_costs = collections.defaultdict(list)
+    for p in peers:
+        if p.get("cost"):
+            peer_costs[(p["source"], p["type"])].append(p["cost"])
+
+    by_source = collections.defaultdict(list)
+    for p in peers:
+        by_source[p["source"]].append(p)
+
+    result = collections.defaultdict(dict)
+    for source, plist in sorted(by_source.items()):
+        cands = []
+        for c in scope:
+            rec = led[c["id"]]
+            if only_class and cm.classify(rec.get("design") or {})[0] != only_class:
+                continue
+            raw = (rec.get("cost") or {})
+            raw = raw.get("v") if isinstance(raw, dict) else raw
+            try:
+                ccost = float(raw)
+            except (TypeError, ValueError):
+                ccost = None
+            cpct = pct_rank(ccost, cam_costs.get(c["type"], []))
+            home = source in eu.HOME.get(eu.family_of(c["id"]) or "", [])
+            for p in plist:
+                s = score(c, rec, p, cpct,
+                          pct_rank(p.get("cost"), peer_costs.get((source, p["type"]), [])), home)
+                if s:
+                    cands.append((s, c["id"], p))
+        # clause 9: greedy descent — best remaining wins, both sides then spoken for
+        cands.sort(key=lambda t: (t[0], t[1]), reverse=True)
+        used_cam, used_peer = set(), set()
+        for s, cid, p in cands:
+            key = (p["source"], syn.norm(p.get("name", "")), p.get("id", ""))
+            if cid in used_cam or key in used_peer:
+                continue
+            used_cam.add(cid)
+            used_peer.add(key)
+            result[cid][source] = {"name": p.get("name"), "score": s,
+                                   "hp": p.get("hp"), "cost": p.get("cost"),
+                                   "home": bool(s[5])}
+    return result, skipped, len(scope)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--class", dest="cls", help="restrict to one class and print its review table")
+    ap.add_argument("--write", action="store_true", help="save the assignment as JSON")
+    ap.add_argument("--limit", type=int, default=25)
+    args = ap.parse_args()
+
+    result, skipped, in_scope = assign(args.cls)
+    counts = collections.Counter(len(v) for v in result.values())
+    print(f"Cameo actors in scope : {in_scope}   exempt: {len(skipped)}")
+    print(f"actors assigned >=1   : {len(result)}")
+    print(f"actors reaching the >=2 reference floor: "
+          f"{sum(1 for v in result.values() if len(v) >= 2)}")
+    print(f"sources per actor     : "
+          + ", ".join(f"{k}:{v}" for k, v in sorted(counts.items())))
+
+    if args.cls:
+        print(f"\n── {args.cls} — every member and its one reference per source ──")
+        for cid in sorted(result):
+            got = result[cid]
+            print(f"\n  {cid}   ({len(got)} sources)")
+            for src, m in sorted(got.items(), key=lambda kv: -kv[1]["score"][0]):
+                flag = "HOME" if m["home"] else "    "
+                print(f"     {flag} {src[:22]:<24}{str(m['name'])[:28]:<30}"
+                      f"name={m['score'][0]:.2f} cost={m['score'][4]:.2f}")
+    if args.write:
+        OUT.parent.mkdir(parents=True, exist_ok=True)
+        OUT.write_text(json.dumps({"assignment": result, "exempt": skipped},
+                                  indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        print(f"\nwrote {OUT.relative_to(ROOT)}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

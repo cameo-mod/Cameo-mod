@@ -301,7 +301,12 @@ def doc1_rows():
                "turn_speed": None, "turn_ratio": None,
                "cost": cost,
                "w_range": rng, "w_damage": dmg, "w_burst": None, "w_reload": rld,
-               "w_dps": (dmg / rld) if (dmg and rld) else None}
+               "w_dps": (dmg / rld) if (dmg and rld) else None,
+               # DOC1 alone carries a role and a best-guess Cameo template; DOC5 has neither, so
+               # these two sources can answer the cascade's ROLE step where the other thirteen
+               # cannot. Carried rather than dropped, and never inferred for the rest.
+               "role": (r.get("Role") or "").strip(),
+               "category": (r.get("**Category**") or "").strip()}
         for lad in LADDERS:
             row[f"dps_vs_{lad}"] = None        # no armour columns — abstain, never guess
         out.append(row)
@@ -336,6 +341,9 @@ def peer_rows():
             except ValueError:
                 return None
         hp, spd, turn = num("hp"), num("speed"), num("turn")
+        # ⚠ Cost was in the document and dropped on read. The matching cascade's last tie-break is
+        # cost proximity, and without this it was available for two of fifteen sources.
+        cost = num("cost")
         wep = {k: num(c) for k, c in (("w_range", "range"), ("w_damage", "dmg"),
                                       ("w_burst", "burst"), ("w_reload", "reload"),
                                       ("w_dps", "dps"))}
@@ -371,7 +379,8 @@ def peer_rows():
                      "type": d.get("type", "other"),
                      "turreted": (d.get("turret", "").lower() == "y"),
                      "hp": hp, "speed": spd, "turn_speed": turn,
-                     "turn_ratio": (spd / turn) if (spd and turn) else None, **wep})
+                     "turn_ratio": (spd / turn) if (spd and turn) else None,
+                     "cost": cost, **wep})
     # Document 1's INI mods join here so they pass through the SAME lineage de-duplication and
     # land in the same distributions. Appended rather than merged: they are separate sources.
     for row in doc1_rows():
