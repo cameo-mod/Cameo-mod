@@ -907,6 +907,16 @@ def extract_actor(rs, key: str, section: str,
     # or a disabling prereq like ~disabled/~wip) → excluded from balancing AND all
     # audits. Its cost is only an XP-on-kill value; its stats don't matter.
     u["buildable"] = _is_balance_buildable(buildable)
+    # ⛔ TURRET PRESENCE, not a field value (maintainer 2026-09-03). It is the second half of the
+    # `dreadnought` definition — "heavy, slow, FRONTAL-FACING (no turret), more range and damage
+    # than a regular tank" — and it is what FORMULA_V2 §3b already prices as the tank destroyer's
+    # frontal-weapon −0.25 special. The peer extractor has recorded it since day one; Cameo's own
+    # rows carried `None`, so neither the class definition nor the special could be checked on our
+    # own units.
+    # ⚠ Presence, because `Turreted` need not declare any field: a turret with default TurnSpeed
+    # is still a turret, and reading `Turreted.TurnSpeed` would call it turretless.
+    u["turreted"] = any(c.key == "Turreted" or c.key.startswith("Turreted@")
+                        for c in resolved.children)
     arms = []
     for c in resolved.children:
         if c.key == "Armament" or c.key.startswith("Armament@"):

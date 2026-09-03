@@ -182,3 +182,62 @@ python tools/balance/anchor_readiness.py     # this board
 python tools/balance/class_membership.py     # membership + coverage
 python tools/balance/check_band.py           # per-class band occupancy
 ```
+
+---
+
+## §9 — ⛔ The `dreadnought` shape sweep (2026-09-03) — REPORT ONLY
+
+Run after the class was defined by SHAPE for the first time: *heavy, SLOW, frontal-facing (NO
+TURRET), with more range and damage than a regular tank.* MBT median for comparison (n=39):
+**hp 110,000 · speed 80 · range 5,672 · dmg 12,000**. **Zero of 39 MBTs are turretless.**
+
+> ⚠ **Proposes, never decides.** Membership comes from the TEMPLATE. §7's finding stands: units sit
+> further from their own class anchor (2.94) than the anchors sit from each other (1.21), so no
+> stat rule can settle a class boundary.
+
+### §9.1 — ⛔ Only 2 of the 5 current members fit the definition
+
+| unit | turret | hp | speed | range | dmg | verdict |
+|---|:--:|--:|--:|--:|--:|---|
+| `naxis_sturmtiger` | no | 250,000 | 30 | 14,000 | 80,000 | ⭐ fits |
+| `terran_warhound` | no | 300,000 | 45 | 7,156 | 16,006 | ⭐ fits |
+| `asianalliance_pulverizermecha` | no | 285,000 | 55 | 7,020 | 10,002 | ⚠ damage **below** the MBT median |
+| `ixian_neocymek` | **YES** | 300,000 | 45 | 6,787 | 32,000 | ⛔ **has a turret** |
+| `schwarzermond_neojagdpanzer` | **YES** | 450,000 | 45 | 7,379 | 90,000 | ⛔ **has a turret** — and it is named *Jagdpanzer*, a turretless tank destroyer |
+
+### §9.2 — 10 units elsewhere fit the shape
+
+| current class | unit | hp | speed | range | dmg |
+|---|---|--:|--:|--:|--:|
+| `fire_support` | `protoss_reaver` | 275,000 | 40 | 7,777 | 200,075 |
+| `fire_support` | `asianalliance_heavyrailguntank` | 250,000 | 50 | 10,000 | 37,000 |
+| `fire_support` | `asianalliance_railguntank` | 160,000 | 65 | 8,888 | 25,000 |
+| `high_tech_tank` | `cabal_avatar` | 1,000,000 | 25 | 6,332 | 81,000 |
+| `line_breaker` | `futuretech_plasmastrider` | 240,000 | 40 | 7,000 | 30,010 |
+| `line_breaker` | `steelconsortium_poseidontank` | 125,000 | 50 | 6,333 | 14,000 |
+| `mbt` | `cabal_widow` | 120,000 | 60 | 6,813 | 121,000 |
+| `tank_destroyer` | `ra2_allies_tankdestroyer` | 145,000 | 65 | 7,040 | 80,000 |
+| `tank_destroyer` | `naxis_jagdpanzer` | 125,000 | 50 | 7,396 | 60,000 |
+| `tank_destroyer` | `ra1_allies_alliedtankdestroyer` | 120,000 | 60 | 6,819 | 24,000 |
+
+### §9.3 — ⛔ The dreadnought / tank-destroyer distinction does NOT hold in the roster
+
+The definition separates them: a dreadnought is *"like tank destroyers but with more range and
+armor and slower"*. Measured:
+
+| class | n | hp | speed | range | dmg | turretless |
+|---|--:|--:|--:|--:|--:|--:|
+| `dreadnought` | 5 | **300,000** | **45** | 7,156 | 32,000 | **3/5** |
+| `tank_destroyer` | 5 | 120,000 | 65 | 7,132 | 56,021 | **5/5** |
+
+* ⭐ **Armour and speed separate them correctly** — 2.5× the HP, two-thirds the speed.
+* ⛔ **Range does NOT.** 7,156 against 7,132 — statistically identical, where the definition
+  requires dreadnoughts to out-range tank destroyers.
+* ⛔ **Tank destroyers honour the frontal-facing rule better than the class defined by it** — 5/5
+  turretless against 3/5.
+
+**So the class needs a stat pass, not just an anchor**, and three of the ten candidates above are
+tank destroyers, which a stat rule alone can never separate from dreadnoughts.
+
+⭐ `turreted` is now recorded by `extract_stats.py`, so both halves of the definition become
+machine-checkable on the next ledger refresh. **138 of 305 Cameo vehicles are turretless.**
