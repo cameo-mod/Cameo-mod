@@ -70,6 +70,7 @@ import statistics
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import reference_lineages  # noqa: E402  (the shared lineage rulings)
 import synthesize_reference as syn  # noqa: E402  (parsers + roster loader are reused wholesale)
 
 ROOT = syn.ROOT
@@ -97,9 +98,11 @@ SIG_JSON = ROOT / "docs" / "balance" / "derived" / "reference_signatures.json"
 # because the low tail was full of Westwood-scale rows sitting under an OpenRA-scale ceiling.
 # That is the exact failure this module's own header forbids: raw values from two sources must
 # never share a statistic. Members are now DROPPED; only the representative's roster survives.
-LINEAGE_REPRESENTATIVE = "Romanov's Vengeance"
-LINEAGE_MEMBERS = {"RA2 vanilla", "Yuri's Revenge", "RA2/YR",
-                   "OpenRA RA2 official", "Yuri's Revenge on OpenRA"}
+# ⛔ THIS LIST USED TO LIVE HERE, AND IT CARRIED A MEMBER THAT NEVER MATCHED: `"RA2/YR"`, while
+# the parser labels that source `"RA2/YR (raw INI)"`. Three copies of the rulings existed and had
+# drifted apart; they are now one, in `reference_lineages.py`, and `lineage_dedup.py` fails when a
+# label there is absent from the corpus so the same typo cannot recur silently.
+LINEAGE_MEMBERS = set(reference_lineages.superseded_map())
 
 # ── THE POPULATION RULE (maintainer, 2026-08-30) ─────────────────────────────────────────────
 # "Only use buildable units and no epic units with build limits! Only unlimited units / defenses
@@ -296,6 +299,8 @@ def peer_rows():
         if limit:                     # a mod's one-off epic/hero — see POPULATION RULE below
             continue
         if source in LINEAGE_MEMBERS:
+            # A member is dropped, never relabelled — see the header. Its representative keeps
+            # the lineage's single vote.
             dropped_lineage.add(source)
             continue
         rows.append({"source": source, "raw_source": source,
@@ -476,7 +481,12 @@ def main():
     dropped = sorted(peer_rows.dropped)
     print(f"peer rows           : {len(peers)}   sources after lineage de-dup: {len(dist)}")
     if dropped:
-        print(f"lineage-collapsed   : {', '.join(dropped)} -> Romanov's Vengeance")
+        # ⚠ The representative is looked up per source, not hardcoded. There is more than one
+        # lineage now, and printing every collapse as "-> Romanov's Vengeance" would misreport
+        # the moment a second one has a member in this layer.
+        collapse = reference_lineages.superseded_map()
+        for source in dropped:
+            print(f"lineage-collapsed   : {source} -> {collapse[source]}")
     print(f"Cameo rows          : {len(cameo)}")
 
     # index peers by normalized name so a Cameo actor can find its counterparts

@@ -99,6 +99,58 @@ dead wiring that no current audit can see, and its own docstring says the check 
 
 ---
 
+## ✅ SHIPPED 2026-09-03 — THE REFERENCE CORPUS IS DE-DUPLICATED (one roster, one vote)
+
+**Maintainer order 2026-09-03:** *"All data needs to be unique and then used as a geometric mean
+for the design and then normalized to the new cameo scale."*
+
+Applied. Full method, findings and rulings: **[`REFERENCE_DEDUP.md`](REFERENCE_DEDUP.md)**.
+Measure it with `python tools/balance/lineage_dedup.py`.
+
+* ⭐ The order was right and the effect is large: the RA2 lineage cast a **median 50% of all votes**
+  on the 128 multi-source units it touches, an outright majority on 45. One vote moves the
+  synthesized HP target **>10% on 52%** of them, up to **1.77×**.
+* ⛔ It was **half applied** — the rifle layer collapsed nothing, because 2026-08-30's *"every
+  source votes once, no collapsing"* was read as covering duplicates. It is about sources that
+  **disagree**. Both rules now hold.
+* ⛔ **A live bug fixed by consolidation:** `LINEAGE_MEMBERS` listed `"RA2/YR"`; the parser labels
+  that source `"RA2/YR (raw INI)"`, so the member never matched and voted all along. The three
+  drifted copies of the rulings are now one (`tools/balance/reference_lineages.py`), and
+  `lineage_dedup.py` fails when a ruled label is absent from the corpus.
+* ⭐ **The maintainer's own example came out half wrong, and that is the useful half.** Scale is not
+  the issue — TD~OpenRA TD and RA1~OpenRA RA both sit at a median offset of exactly **1.00×**. They
+  disagree *after* normalisation: **41%** and **35%** within 10% (Tesla Tank 2.2 vs **8.0×** rifle,
+  M.A.D. Tank 6 vs **18×**). OpenRA re-tunes TD and RA1 as it ports them, so both keep their votes.
+  **`Tiberian Sun` ~ `OpenRA Tiberian Sun` is the real duplicate (96%, 25 of 27 identical)** and is
+  newly collapsed.
+
+### ⛔ P1 — DTA IS A NAMED SOURCE AND CONTRIBUTES ZERO ROWS
+
+`DOC4_SOURCES` registers `Dawn of the Tiberium Age`, and `lineage_dedup.corpus()` finds **0 rows**
+for it. `ORIGINAL_UNIT_STATS.md`'s DTA section is a 15-row Classic-vs-Enhanced **highlight table
+with no `HP` column**, so every row is skipped and the section reads as present while voting on
+nothing. The full extract went to a scratchpad CSV on a local path and never landed in the repo.
+
+⚠ **This matters for TD/RA1 specifically.** DTA is one of only three sources covering that
+crossover, and it is exactly where OpenRA's rebalance means the originals cannot speak alone.
+**Needs:** the DTA roster extracted into `ORIGINAL_UNIT_STATS.md` in the per-unit table shape the
+parser reads (`| Unit | HP | Cost | Spd |`), HP ÷10 for the TS engine.
+
+### ⚠ P2 — THE RA2 FAMILY IS STILL OVER-REPRESENTED AFTER THE COLLAPSE
+
+Nine of the 26 source labels descend from one game family (vanilla ×3, OpenRA ×2, RV, CnC
+Reloaded, Mental Omega, Valiant Shades). The collapse removes five; the remaining four are genuine
+rebalances and keep their votes **by rule**. So an RA2-era Cameo unit still hears four RA2 voices
+against one each from TD, RA1 and TS. Not a bug — but a weighting the maintainer should see before
+the anchors are signed, since §2's cross-reference principle pools every appearance.
+
+⚠ Two partials sit just under the cut and are judgement calls: `CnC Reloaded` ~ `Yuri's Revenge`
+(**81%**, 44 of 57 shared units *exactly* equal to vanilla RA2) and `Valiant Shades` ~
+`OpenRA RA2 official` (**79%** at a **0.52×** offset — the corpus's closest near-miss to
+"identical and just scaled").
+
+---
+
 ## ⛔ P1 — THE PRICING MODEL IGNORES `AmmoPool` (2026-09-02, maintainer-found)
 
 **Maintainer, 2026-09-02:** *"I'm pretty sure you miscalculated that one by adding the ammo limited

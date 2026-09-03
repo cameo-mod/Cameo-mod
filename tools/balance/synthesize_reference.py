@@ -60,6 +60,10 @@ import pathlib
 import re
 import math
 import statistics
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import reference_lineages  # noqa: E402  (the shared lineage rulings — data only)
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 LEDGER = ROOT / "docs" / "balance"
@@ -129,29 +133,28 @@ DOC4 = DESIGN / "ORIGINAL_UNIT_STATS.md"
 # (CA `E1` = 5,000 HP, SP `E1` = 12,500 HP).
 DOC5 = DESIGN / "ORIGINAL_UNITS_PEER_OPENRA.md"
 
-# ⚠ THE SAME MOD MUST NOT VOTE TWICE. "Every source votes once" is the maintainer's rule, and a
-# source appearing under two labels is a measurement error rather than extra evidence. Romanov's
-# Vengeance is in Document 1 as a hand-extract AND in Document 5 as a live clone of
-# MustaphaTR/Romanovs-Vengeance — and they agree exactly (Apocalypse 6.4× in both), which is the
-# proof that they are one source, not two. The live checkout supersedes the extract.
+# ⚠ THE SAME MOD MUST NOT VOTE TWICE, AND NEITHER MAY THE SAME ROSTER.
+# ⛔ MAINTAINER ORDER 2026-09-03, superseding the "no collapsing" note on `pool()` below for
+# DUPLICATES specifically: *"All data needs to be unique and then used as a geometric mean for the
+# design."* The 2026-08-30 override was about not curating away sources that DISAGREE; it was never
+# a licence for one roster to cast five votes. Both now hold: a disagreeing source keeps its vote,
+# a duplicate roster does not.
 #
-# Only EXACT duplicates belong here. A game and its OpenRA re-implementation (Tiberian Dawn vs
-# OpenRA Tiberian Dawn) are NOT duplicates — OpenRA rebalances as it ports — so both keep a vote,
-# and the overlap is reported instead of resolved.
-# NB the value must be the label AS THE POOL SEES IT. Document 5's headings carry a parenthesised
-# unit count that the heading parser strips, so a label written here with a "(live)" suffix would
-# never match anything and the duplicate would sail through silently.
-SUPERSEDED = {"Romanov's Veng.": "Romanov's Vengeance"}
+# Measured before applying (`tools/balance/lineage_dedup.py`): the RA2 lineage casts a MEDIAN 50%
+# of all votes on the 128 multi-source units it touches, and an outright MAJORITY on 45 of them.
+# Collapsing it to one vote moves the synthesized HP target by more than 10% on 52% of those units,
+# by more than 25% on 29, and by up to 1.77x.
+#
+# The rulings themselves are in `reference_lineages.py` — one list, read by this module,
+# `reference_distribution.py` and `lineage_dedup.py`, because three private copies is what produced
+# a member label (`"RA2/YR"`) that matched no source and silently never collapsed.
+SUPERSEDED = reference_lineages.superseded_map()
 
-# Reported, not merged: sources covering the same underlying game from different extractions.
-NEAR_DUPLICATES = [
-    ("RA2 vanilla", "RA2/YR (raw INI)", "OpenRA RA2 official"),
-    ("Yuri's Revenge", "Yuri's Revenge on OpenRA"),
-    ("Tiberian Dawn", "OpenRA Tiberian Dawn"),
-    ("Tiberian Sun", "OpenRA Tiberian Sun"),
-    ("Red Alert 1", "OpenRA Red Alert"),
-    ("OpenRA Dune 2000", "OpenRA Dune II"),
-]
+# Reported, not merged: same underlying game, different extraction, and MEASURABLY not a copy.
+# ⭐ Tiberian Dawn ~ OpenRA TD agrees on only 41% of shared units and Red Alert 1 ~ OpenRA RA on
+# 35% — OpenRA rebalances TD and RA1 as it ports them, so both keep a vote. It does NOT rebalance
+# TS (96%), which is why TS is a lineage and these are not.
+NEAR_DUPLICATES = reference_lineages.NEAR_DUPLICATES
 
 # section heading prefix -> (source label, rifle HP, rifle cost, cost rule)
 # cost rule: "direct" = credits already; "sc" = 4*minerals + 8*vespene; "wc" = 4*gold + 8*wood
@@ -335,6 +338,13 @@ def pool(per_source, key):
     MAINTAINER OVERRIDE 2026-08-30 — this replaces §15.6's vanilla-family collapse, its outlier
     exclusion and its median. A remake now votes like any other source and a disagreeing source
     is kept, because the maintainer wants the full spread represented rather than a curated one.
+
+    ⚠ NARROWED 2026-09-03, AND THE TWO RULES DO NOT CONFLICT. "No collapsing" is about not
+    curating away sources that DISAGREE; it was never a licence for one ROSTER to cast five votes.
+    De-duplication now happens upstream of here, at row level against `SUPERSEDED`, so by the time
+    a vote reaches this function every source in it is a distinct roster. This function still does
+    no collapsing of its own — that is the point, and it is why the dedup is visible in `main()`'s
+    output rather than buried in the mean.
     """
     return {s: v[key] for s, v in per_source.items() if v.get(key)}
 
@@ -488,7 +498,13 @@ def main():
     print(f"Document 1 rows      : {len(rows)} across {len(sources)} sources")
     print(f"junk rows dropped    : {len(junk)}" + (f"  ({junk[0]})" if junk else ""))
     for old, new in dropped_dupes.items():
-        print(f"superseded           : {old!r} -> {new!r} (same mod, live checkout wins)")
+        # Two different reasons, and printing one label for both hides which rule fired: an
+        # EXTRACT is the same mod extracted twice, a LINEAGE is a different mod that is the same
+        # roster. Only the first is a no-op; the second adopts the representative's rebalance.
+        why = ("same mod, live checkout wins"
+               if old in reference_lineages.SUPERSEDED_EXTRACTS else
+               "one vote per lineage — see reference_lineages.py")
+        print(f"superseded           : {old!r} -> {new!r} ({why})")
     print(f"matched to the roster: {len(synth)}  (class-tagged: {len(matched)})")
 
     if args.dry_run:

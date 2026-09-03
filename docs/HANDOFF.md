@@ -83,6 +83,48 @@ produces good documents, and advances the pipeline by nothing. A single-unit fix
 needed goes into [`design/ROADMAP.md`](design/ROADMAP.md) as a line, not into this session as work.
 
 
+### ⭐ 2026-09-03 — the reference corpus is de-duplicated, and the maintainer's example was half wrong
+
+**Order:** *"All data needs to be unique and then used as a geometric mean for the design and then
+normalized to the new cameo scale."* Applied — full method and findings in
+**[`design/REFERENCE_DEDUP.md`](design/REFERENCE_DEDUP.md)**.
+
+The same shape as the 18% finding one layer up: **three private copies of the de-duplication
+rulings, drifted apart, one carrying a live bug.** `reference_distribution.LINEAGE_MEMBERS` listed
+`"RA2/YR"` while the parser labels that source `"RA2/YR (raw INI)"`, so the member never matched
+and voted all along. They are now one list
+(**[`tools/balance/reference_lineages.py`](../tools/balance/reference_lineages.py)**), and
+`lineage_dedup.py` fails when a ruled label is absent from the corpus.
+
+| | before | after |
+|---|--:|--:|
+| voting source labels, rifle layer | 25 | **19** |
+| ruled lineages | 1, applied in the chassis layer only | **2, applied in both** |
+| ruled labels matching no source | **1** | 0 |
+
+⭐ **The effect is large, which is why the order mattered.** The RA2 lineage cast a **median 50% of
+all votes** on the 128 multi-source units it touches and an outright majority on 45. One vote moves
+the synthesized HP target **>10% on 52%** of them, up to **1.77×**.
+
+⭐ **And the maintainer's own example came out half wrong — usefully.** *"the original TD and RA1
+rules and the OpenRA rules are identical and just scaled"*: scale is **not** the issue (both pairs
+sit at a median offset of exactly 1.00× once normalised to rifle), but they disagree after that —
+**TD 41%**, **RA1 35%** within 10%; OpenRA re-tunes both as it ports them (Tesla Tank 2.2 vs 8.0×
+rifle, M.A.D. Tank 6 vs 18×). The real duplicate is the pair nobody named:
+**`Tiberian Sun` ~ `OpenRA Tiberian Sun` at 96%**, now collapsed.
+
+⛔ **Newly visible and blocking the TD/RA1 side: DTA is a registered source that contributes ZERO
+rows.** Its `ORIGINAL_UNIT_STATS.md` section is a 15-row highlight table with no `HP` column, so
+every row is skipped and the section reads as present. DTA is one of only three sources covering the
+TD + RA1 crossover — exactly where OpenRA's rebalance means the originals cannot speak alone.
+
+```sh
+python tools/balance/lineage_dedup.py                                   # the table + the lineages
+python tools/balance/lineage_dedup.py --pair "Red Alert 1" "OpenRA Red Alert"
+```
+
+---
+
 ### ⭐ 2026-09-02 — the 18% was a property of the READER, and it is fixed
 
 `design.class_anchor` is a hand-maintained tag on a third of the roster. `design.subtype` — **the

@@ -113,6 +113,15 @@ The hard question the maintainer posed: we can't plug-and-play mod numbers (diff
 
 1. **Extract** every mod's FULL stats (§4), **normalized to that mod's basic rifleman** → a common
    *relative* scale (ratios, not raw numbers).
+1b. ⛔ **DE-DUPLICATE the corpus — one roster, one vote.** *(maintainer order 2026-09-03: "All data
+   needs to be unique and then used as a geometric mean for the design.")* This step comes BEFORE
+   the mean, because the geometric mean has no defence against a roster that votes five times:
+   measured, the RA2 lineage casts a **median 50% of all votes** on the 128 multi-source units it
+   touches, and collapsing it moves the synthesized HP target by **>10% on 52%** of them.
+   ⚠ The test is scale-free by construction, so *"identical and just scaled"* reads as a duplicate.
+   ⭐ Measured verdicts: **TS ~ OpenRA TS is a duplicate (96%)**; **TD ~ OpenRA TD (41%)** and
+   **RA1 ~ OpenRA RA (35%)** are NOT — OpenRA re-tunes those two as it ports them. Full method,
+   findings and the rulings: **`REFERENCE_DEDUP.md`** + `tools/balance/lineage_dedup.py`.
 2. **Synthesize a target relative-profile** per Cameo class/faction by pooling the relevant sources
    (§2, weighted by relevance) **+ old Cameo Layer-2** (current stats — keep what works) **+ the
    original game**. Reason/extrapolate to a coherent relative target; fill gaps by role-analogy.
@@ -124,6 +133,15 @@ The hard question the maintainer posed: we can't plug-and-play mod numbers (diff
 6. Result: the **formula still does the pricing/spreading** (keeps Cameo's system); the **mods set
    the anchors** (grounds the previously-arbitrary anchor picks in real, synthesized data). We
    never write a mod's HP into a unit — we write synthesized-normalized targets into the *anchors*.
+
+⚠ **The aggregation operator is the GEOMETRIC mean, everywhere, and not by preference.** Every
+value pooled here is a *ratio*, and in ratio space a source running 2× high and one running 2× low
+must cancel to 1.0 — only the geometric mean does that (the arithmetic mean returns 1.25 and biases
+every target upward). It is also the only mean under which "convert to the Cameo scale, then
+average" and "average, then convert" agree, which is what makes step 3 safe to do in either order.
+⛔ **Raw stats are NEVER averaged across sources** — 125 HP and 12,500 HP are the same design intent
+at different scales and their mean belongs to no game. Only the dimensionless coordinates are
+pooled. (`synthesize_reference.geometric_mean`, `reference_distribution.py`.)
 
 **Formula may need changes:** anchor **ratios** should come from synthesized mod data (tighter than
 today — see §6); the **DPS side** must be reworked around the weapon-template binding (§8).

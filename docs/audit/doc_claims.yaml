@@ -1263,3 +1263,63 @@ claims:
       rules = abi.miniyaml.Ruleset('.')
       dyn = abi.dynamic_difficulties(rules)
       print(len(dyn) if dyn is not None else len(abi.ladder_rungs(rules)))
+
+  - id: lineage_ts_openra_ts_agreement
+    value: 0.96
+    tolerance: 0.02
+    what: >
+      Share of shared units on which `Tiberian Sun` and `OpenRA Tiberian Sun` agree within 10%
+      after their median scale offset is divided out (`w10`). ⭐ THE EVIDENCE FOR THE 2026-09-03
+      LINEAGE COLLAPSE — 26 of 27 shared units agree within 10% and 25 to three decimals, so OpenRA does NOT
+      rebalance TS as it ports it. Contrast the same measure for TD (0.41) and RA1 (0.35), which
+      is why those two keep separate votes. If this drops below the DUP_W10 cut of 0.85 the
+      collapse is no longer supported and `reference_lineages.RULED_LINEAGES` must be re-read.
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/balance')
+      import lineage_dedup as ld
+      d = ld.corpus()
+      print(round(ld.compare(d['Tiberian Sun'], d['OpenRA Tiberian Sun'])[2], 2))
+    docs:
+      - docs/design/REFERENCE_DEDUP.md
+      - docs/design/BALANCE_SYNTHESIS.md
+      - docs/design/ROADMAP.md
+
+  - id: lineage_ra1_openra_ra_agreement
+    value: 0.35
+    tolerance: 0.05
+    what: >
+      The same `w10` measure for `Red Alert 1` vs `OpenRA Red Alert`. ⛔ THE NUMBER THAT
+      CONTRADICTS THE MAINTAINER'S OWN EXAMPLE ("the original TD and RA1 rules and the OpenRA
+      rules are identical and just scaled"). Scale is not the issue — the median offset is
+      exactly 1.00x — but OpenRA re-tunes the roster after porting it: Tesla Tank 2.2 vs 8.0x
+      rifle, M.A.D. Tank 6 vs 18x. Both sources therefore keep a vote. If this ever rises past
+      DUP_W10 (0.85) the ruling in `reference_lineages.NEAR_DUPLICATES` must be revisited.
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/balance')
+      import lineage_dedup as ld
+      d = ld.corpus()
+      print(round(ld.compare(d['Red Alert 1'], d['OpenRA Red Alert'])[2], 2))
+    docs:
+      - docs/design/REFERENCE_DEDUP.md
+      - docs/design/BALANCE_SYNTHESIS.md
+      - docs/design/ROADMAP.md
+
+  - id: reference_dta_rows
+    value: 0
+    tolerance: 0
+    what: >
+      Reference rows DTA contributes to the synthesis corpus. ⛔ IT IS A REGISTERED SOURCE IN
+      `DOC4_SOURCES` AND IT VOTES ON NOTHING: `ORIGINAL_UNIT_STATS.md`'s DTA section is a 15-row
+      Classic-vs-Enhanced highlight table with no `HP` column, so every row is skipped and the
+      section reads as present. This claim exists so the gap cannot be forgotten — when the DTA
+      roster is extracted properly the value goes UP and this entry is updated in the same commit.
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/balance')
+      import lineage_dedup as ld
+      print(len(ld.corpus().get('DTA', {})))
+    docs:
+      - docs/design/REFERENCE_DEDUP.md
+      - docs/design/ROADMAP.md
