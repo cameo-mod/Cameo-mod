@@ -543,6 +543,44 @@ Omega's armed `vehicle` rows, not the top. Above it: the Paradox Engine (5,000 �
 Kirov Airship (3,000), the Apocalypse *Prototype* (3,600), an Enterprise Aircraft Carrier and a
 Tigr APC. Among genuine tanks it is the top, exactly as ruled.
 
+### §9.15 — ⭐ AN ARMED BUILDING IS A DEFENCE — 94 votes were being thrown away
+
+The maintainer pushed back on §9.14: *"Both mental omega and cnc reloaded have defenses! Search for
+tesla coil and you will find it! Maybe it is using a different category!"*
+
+**Half right, and the half that was right is much bigger than the question.**
+
+⚠ For MO and CnCR specifically the original reading holds: Document 1's Mental Omega section (lines
+196–523) and CnC Reloaded section (523–852) contain **no structures at all** — zero blank-`kind`
+rows, no defence rows, and the `Category` column has no defensive category either. The `tesla`,
+`atesla`, `tesla-tr` and `atesla-tr` rows at lines 888–900 are in the **Romanov's Vengeance**
+section, and RV is the one DOC1 source with 49 blank-`kind` rows — its structures.
+
+⛔ **But the corpus-wide check the question prompted found a real defect.** Defences were in the
+corpus all along, typed **`building`**:
+
+| | before | after |
+|---|--:|--:|
+| defence-named ARMED rows typed `building` | **73** | 0 |
+| rows in the `defense` population | **85** | **179** |
+| sources contributing any defence | **5 of 15** | **13 of 15** |
+| Romanov's Vengeance defences | **0** | **27** |
+| Shattered Paradise defences | 2 | **23** |
+
+**And a `building` row was not merely misfiled — it voted on NOTHING.** Buildings are excluded from
+the `overall` population by design, and `defense` is its own population, so an Obelisk of Light
+filed as `building` was measured against neither. **94 armed rows were silent.**
+
+The cause is that type comes from the mod's QUEUE NAME (`TYPE_TOKENS` in `extract_peer_units.py`),
+so any mod filing turrets under a "Building" queue lost every one of them — Crystallized Nexus,
+Generals Alpha, OpenRA TD/TS/D2K and Dune II all contributed zero defences for that reason.
+
+**The rule now applied in `peer_rows()`: a structure that shoots is a defence.** The test is the
+weapon, not the name. ⚠ It is applied at READ time as a population rule; `extract_peer_units.py`
+still writes `building`, and should follow.
+
+⭐ **41 of Cameo's own defence actors now carry a reference signature.**
+
 ### §9.14 — ⛔ MO and CnC Reloaded have NO ship type, so their vehicle population is contaminated
 
 Found while checking the above. Their `kind` column uses only **infantry / vehicle / aircraft**:

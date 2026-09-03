@@ -348,6 +348,19 @@ def peer_rows():
         limit = num("limit")
         if limit:                     # a mod's one-off epic/hero — see POPULATION RULE below
             continue
+        # ⛔ AN ARMED BUILDING IS A DEFENCE (2026-09-03). Found when the maintainer asked why
+        # Mental Omega and CnC Reloaded showed no defences: the corpus HAS them, typed `building`.
+        # 73 defence-named ARMED rows (Obelisk of Light, Flamer Tower, Gattling Tower...) sat in
+        # `building` against 21 in `defense`, and 94 armed rows are typed `building` overall.
+        # ⚠ THAT IS A VOTE LOST ENTIRELY, not merely misfiled: buildings are excluded from the
+        # `overall` population by design and `defense` is its own population, so an armed structure
+        # typed `building` was measured against NOTHING. The type comes from the mod's queue name
+        # (`TYPE_TOKENS` in extract_peer_units.py), so a mod that files turrets under a "Building"
+        # queue lost every one of them.
+        # The test is the weapon, not the name: a structure that shoots is a defence.
+        if d.get("type", "").strip().lower() == "building" and wep.get("w_damage"):
+            d["type"] = "defense"
+
         if source in LINEAGE_MEMBERS:
             # A member is dropped, never relabelled — see the header. Its representative keeps
             # the lineage's single vote.
