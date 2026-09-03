@@ -1353,3 +1353,41 @@ claims:
     docs:
       - docs/design/REFERENCE_DEDUP.md
       - docs/reference/WARHEAD_REFERENCE.md
+
+  - id: dreadnought_range_under_tank_destroyer
+    value: 7000
+    tolerance: 0
+    what: >
+      `class_anchors.dreadnought.spec.range0_wdist`. ⛔ DELIBERATELY LOWER THAN
+      `tank_destroyer`'s 7500, and that is a PLAYTEST RULING, not a defect (maintainer
+      2026-09-03): dreadnoughts were far too strong in in-game testing, mostly because of range,
+      so theirs was cut and the tank destroyer's raised to counter them. The class law is "more
+      range and damage than a REGULAR TANK" -- 7000 against mbt 5500 -- which holds. This claim
+      exists because the number LOOKS like a mistake against the written definition, and the
+      maintainer had themselves forgotten why it was 7000; without it a future reader "fixes" it
+      and silently undoes the balance decision. If it legitimately changes, update
+      CLASS_STATUS_BOARD.md section 10 in the same commit.
+    measure: |
+      import json, pathlib
+      d = json.loads(pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      print(d['dreadnought']['spec']['range0_wdist'])
+    docs:
+      - docs/design/CLASS_STATUS_BOARD.md
+      - docs/balance/class_anchors.json
+
+  - id: tank_destroyer_range_counter
+    value: 7500
+    tolerance: 0
+    what: >
+      `class_anchors.tank_destroyer.spec.range0_wdist`. The DELIBERATE COUNTER to dreadnoughts
+      (maintainer 2026-09-03) and the tank destroyer's ONLY edge over them -- the dreadnought has
+      7.7x the HP, 4.2x the DPS and 0.71x the speed. Reducing it to restore a "dreadnought
+      out-ranges everything" reading would undo the playtest result. Paired with
+      `dreadnought_range_under_tank_destroyer`; the two must move together or not at all.
+    measure: |
+      import json, pathlib
+      d = json.loads(pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      print(d['tank_destroyer']['spec']['range0_wdist'])
+    docs:
+      - docs/design/CLASS_STATUS_BOARD.md
+      - docs/balance/class_anchors.json

@@ -244,36 +244,50 @@ machine-checkable on the next ledger refresh. **138 of 305 Cameo vehicles are tu
 
 ---
 
-## §10 — ⛔ The range inversion is in the ANCHORS, not just the yaml (2026-09-03)
+## §10 — ⭐ The dreadnought/tank-destroyer range gap is DELIBERATE (2026-09-03)
 
-§9's table read the LEDGER — what yaml ships today. The maintainer's response: *"These are still the
-old values right? I was already planning to change them with the class anchors."* Correct, and the
-anchors were checked. **The defect survives into the spec.**
+⛔ **I reported this as a defect. It is a playtest ruling, and the maintainer had to remind me:**
 
-| class | anchor | hp0 | speed0 | range0 | dps0 | cost0 | sight |
-|---|---|--:|--:|--:|--:|--:|--:|
-| `dreadnought` | `terran_warhound` | **1,150,000** | **50** | **7,000** | 3,750 | 3,000 | 8,000 |
-| `tank_destroyer` | `naxis_hetzer` | 150,000 | 70 | **7,500** | 900 | 600 | 7,500 |
-| `mbt` | `tiger.nax` | 240,000 | 95 | 5,500 | 600 | 800 | 6,000 |
+> *"the reason why I decided to change and reduce the range of the dreadnoughts in the last minute
+> and increase the range of the tank destroyers was because in our in game testing dreadnoughts were
+> far too strong and it was mostly because of their range, and tank destroyers got slightly more
+> range to counter them."*
 
-Against the definition — *"like tank destroyers but with more range and armor and slower"*:
+**So the tank destroyer's range edge IS the counter mechanism.** It is not an inverted definition; it
+is the thing that stops dreadnoughts dominating, arrived at from play and applied to the anchors at
+the last minute.
 
-| axis | dreadnought ÷ tank destroyer | verdict |
-|---|--:|---|
-| HP | **7.7×** | ⭐ tougher — holds |
-| speed | **0.71×** | ⭐ slower — holds |
-| DPS | 4.2× | harder-hitting |
-| **range** | **0.93×** | ⛔ **SHORTER — the definition is inverted in the spec** |
+| class | anchor | hp0 | speed0 | range0 | dps0 | sight |
+|---|---|--:|--:|--:|--:|--:|
+| `dreadnought` | `terran_warhound` | 1,150,000 | 50 | **7,000** | 3,750 | 8,000 |
+| `tank_destroyer` | `naxis_hetzer` | 150,000 | 70 | **7,500** | 900 | 7,500 |
+| `mbt` | `tiger.nax` | 240,000 | 95 | 5,500 | 600 | 6,000 |
 
-⭐ **And the anchor knows it should be longer.** Its own comment reads *"Heavy long-range assault
-walker"*, and its `reveals_shroud` is **8,000** against the tank destroyer's 7,500 — the sight
-range already carries the intent the weapon range contradicts.
+### What the definition actually claims, and what holds
 
-**So this cannot be fixed by restating the units.** `dreadnought.spec.range0_wdist` has to move above
-`tank_destroyer`'s 7,500, or the class definition and the class anchor stay in conflict whatever the
-members do.
+The definition has two clauses and only the first is a class law:
 
----
+| clause | measured | status |
+|---|---|---|
+| *"more range and damage than **regular tanks**"* | range **7,000 vs MBT 5,500 = 1.27×**; DPS 3,750 vs 600 = 6.2× | ⭐ **HOLDS — this is the class law** |
+| *"like tank destroyers but with more range"* | 7,000 vs 7,500 = 0.93× | ⛔ **SUPERSEDED by the playtest ruling** |
+
+Everything else holds against the tank destroyer too: **7.7× the HP, 0.71× the speed, 4.2× the DPS.**
+The dreadnought is the tougher, slower, harder-hitting unit; the tank destroyer's *only* edge is
+range, and that edge is deliberate.
+
+### ⭐ And the sight range is not a contradiction either
+
+`dreadnought` sees **8,000** and shoots **7,000**; `tank_destroyer` sees and shoots **7,500**. So a
+dreadnought spots a target it cannot yet engage while a tank destroyer can shoot everything it sees.
+That is a coherent design — the dreadnought needs to close, which is exactly what makes its range
+nerf bite. I read the 8,000 sight as evidence of contradicted intent; it is evidence of the ruling.
+
+> ⛔ **THE LESSON, AND IT IS THE POINT OF WRITING THIS DOWN.** A number arrived at from play carries
+> its reason nowhere in the tree. `dreadnought.range0_wdist = 7000` looks like a mistake against the
+> written definition, so the next reader "fixes" it and quietly undoes a balance decision. **The
+> maintainer had themselves forgotten why it was 7,000.** Any anchor value set from playtesting
+> against the written law needs its reason recorded beside it, or it will be corrected away.
 
 ## §11 — Three ruled exceptions, and one that cannot be automated (2026-09-03)
 
