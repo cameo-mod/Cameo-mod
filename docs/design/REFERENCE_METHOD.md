@@ -323,13 +323,22 @@ reference matching**. They are the same design in every faction, they are not wh
 corpus is for, `support` is already ability-priced and hand-tuned by ruling, and harvesters need a
 throughput formula rather than a DPS one.
 
+**Widened 2026-09-03 to include transports and detectors** — their value is capacity or an
+ability, not HP and DPS, so a reference target for them means little.
+
 | | count |
 |---|--:|
 | role-identical by name (MCV · engineer · harvester · miner) | 61 |
 | `class == support` | 110 |
-| **union exempted** | **129** (42 in both) |
-| of the 302 matched actors, now exempt | 57 |
-| **matched actors that remain in scope** | **245** |
+| transports / detectors by name | 47 |
+| transports by template subtype | 9 |
+| **union exempted** | **166** |
+| of the 302 matched actors, now exempt | 64 |
+| **matched actors that remain in scope** | **238** |
+
+⚠ **One boundary needs a ruling: the APCs.** The keyword sweep catches `cabal_scarabapc` and
+`forgotten_apctruck`. An unarmed transport clearly belongs out; an ARMED troop carrier is a combat
+unit with real stats. Currently they are exempted with the rest — flagged rather than settled.
 
 ⭐ This also dissolves the capacity problem the one-to-one rule would otherwise create: 17 MCVs
 competing for ~13 MCV references, with at least 4 guaranteed to lose.
@@ -368,3 +377,35 @@ computed and immediately redone.
 ⚠ And `td_gdi_mammothtank` vs `ra1_soviets_mammothtank` are two different units that DTA gives
 different stats — *"but you need the enhanced ini for it first right?"* Correct: DTA contributes
 zero unit rows (§6), so that distinction cannot be honoured until the INIs arrive.
+
+### §9.7 — Every fit is assigned; confidence carries the warning
+
+**Ruling:** the optimiser does **not** leave blanks. It assigns the best remaining candidate in
+every source and marks anything below the fit threshold, letting the existing LOW / MEDIUM / HIGH
+confidence level carry the caveat downstream rather than dropping the row.
+
+⚠ **Consequence to watch:** the tail of each source's assignment is made of leftovers, and those
+are exactly the units with no natural counterpart. A LOW-confidence match is therefore not merely
+"one source" — it may also be a poor pairing. The confidence label has to distinguish *few sources*
+from *weak fit*, or the two collapse into one word and the second becomes invisible.
+
+### §9.8 — The assignment is recomputed, never pinned
+
+**Ruling:** always compute the globally best assignment, and **report every match that changed and
+every target that moved by more than 10%**.
+
+⚠ **This interacts with §9.7 and the interaction is the risk.** Because a reference may be used
+only once, adding a single new source can cascade: the newcomer takes a unit, freeing the one it
+displaced, which displaces another, and so on down the chain. **A signed anchor can therefore move
+because an unrelated mod was added.** The change report is not a nicety here — it is the only thing
+standing between a recomputed assignment and a silently re-based class. It must diff *targets*, not
+just matches.
+
+### §9.9 — Reviewed one class at a time
+
+**Ruling:** one reviewable table per class — members down the side, sources across, the proposed
+reference in each cell with its fit reason. That matches the class-by-class workflow, and lets a
+class's **matching and its anchor be signed together**.
+
+⛔ Which means: **a class cannot be signed while its matching is unreviewed**, because the anchor is
+chosen from among the grounded members and the matching decides which those are.
