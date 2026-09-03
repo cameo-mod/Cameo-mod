@@ -917,6 +917,20 @@ def extract_actor(rs, key: str, section: str,
     # is still a turret, and reading `Turreted.TurnSpeed` would call it turretless.
     u["turreted"] = any(c.key == "Turreted" or c.key.startswith("Turreted@")
                         for c in resolved.children)
+    # ⛔ AND `turreted` IS NOT THE FRONTAL-FACING TEST. Corrected 2026-09-03 after it misreported
+    # `ixian_neocymek` as turreted when the unit fires frontally: the discriminator is the ATTACK
+    # trait. `AttackFrontal` makes the BODY face the target (the Cymek allows 20 degrees);
+    # `AttackTurreted` lets the turret track independently. A unit can carry `Turreted` for weapon
+    # tracking and still attack frontally, which is exactly what the Cymek does.
+    # ⚠ Removing such a turret is NOT a cleanup. `Armament.Turret` defaults to "primary" and
+    # `Turreted.Turret` defaults to "primary" (engine Armament.cs:41, Turreted.cs:23, bound at
+    # Armament.cs:222), so an armament that declares no `Turret:` still USES the default turret.
+    # Measured, the attack trait tracks the classes almost perfectly: tank_destroyer 100% frontal,
+    # artillery 89%, line_breaker 88%, dreadnought 80% -- against mbt at 9%.
+    u["attack_trait"] = next(
+        (c.key.split("@")[0] for c in resolved.children
+         if c.key.split("@")[0].startswith("Attack") and c.key.split("@")[0] != "AttackMove"),
+        None)
     arms = []
     for c in resolved.children:
         if c.key == "Armament" or c.key.startswith("Armament@"):

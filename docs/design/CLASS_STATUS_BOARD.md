@@ -320,16 +320,57 @@ all their units hover and it's their specialty."*
 for class purposes. ⚠ Measured: only **15 of 61** Schwarzer Mond actors (25%) carry a `Turreted`
 trait at all, so the exception applies to those 15 and is not a blanket faction rule.
 
-### ⛔ `ixian_neocymek` — the distinction is NOT in the data
+### ⭐ `ixian_neocymek` — READABLE AFTER ALL. I was testing the wrong trait.
 
-*"the main weapon is the dual railgun and it is frontal facing while the support weapon in the back
-is turreted."*
+I reported this as needing a hand tag. It does not. **`Turreted` presence was never the
+frontal-facing test — the ATTACK trait is**, and the Cymek already declares the right one:
 
-Real in game, and **not machine-readable here.** The actor carries one unnamed `Turreted` and two
-armaments — `Armament@Cannon` (D2K_StormGunCymek) and `Armament@Rockets` — and **neither declares a
-`Turret:` link**, so both bind to the single default turret. Across 1,044 armaments scanned only
-**73 (7%)** declare an explicit `Turret:`; the rest bind by OpenRA's default.
+```
+AttackFrontal      FacingTolerance: 20        <- the BODY must face the target
+Armament@Cannon    Name: primary    Weapon: D2K_StormGunCymek
+Armament@Rockets   Name: secondary  Weapon: D2K_RocketsCymek
+Turreted           TurnSpeed: 9               <- weapon tracking, not free traverse
+```
 
-**So "which weapon is frontal" is only readable for 7% of armaments.** A mixed-mount unit needs an
-explicit hand tag — the turret-presence flag alone will keep misclassifying it, and no amount of
-yaml reading will fix that.
+`AttackFrontal` makes the hull face the target within 20°; `AttackTurreted` lets a turret track
+independently. **A unit can carry `Turreted` for weapon tracking and still attack frontally**, which
+is exactly what the Cymek does — and what the maintainer described.
+
+⛔ **And the turret must NOT be removed to "make the rule hold".** `Armament.Turret` defaults to
+`"primary"` and `Turreted.Turret` defaults to `"primary"` (engine `Armament.cs:41`,
+`Turreted.cs:23`, bound at `Armament.cs:222`), so an armament that declares no `Turret:` **still
+uses the default turret**. Both Cymek weapons use it. Deleting `Turreted` would stop them tracking
+and force the whole hull to turn for every shot — a gameplay change, not a cleanup.
+
+### ⭐ The attack trait tracks the classes almost perfectly
+
+| class | frontal | turreted | % frontal |
+|---|--:|--:|--:|
+| `tank_destroyer` | 5 | 0 | **100%** |
+| `artillery` | 25 | 0 | 89% |
+| `line_breaker` | 29 | 4 | 88% |
+| **`dreadnought`** | **4** | **1** | **80%** |
+| `fire_support` | 21 | 10 | 68% |
+| `light_tank` | 5 | 11 | 31% |
+| `high_tech_tank` | 5 | 21 | 19% |
+| **`mbt`** | **4** | **42** | **9%** |
+
+Roster-wide: **510 `AttackFrontal` against 268 `AttackTurreted`.**
+
+⭐ **So §9.1's turret column was wrong on both units it flagged.** Under the correct test the
+dreadnought class is clean:
+
+| member | attack trait | |
+|---|---|---|
+| `ixian_neocymek` | `AttackFrontal` | ⭐ fits — the flag was wrong |
+| `asianalliance_pulverizermecha` | `AttackFrontal` | ⭐ fits |
+| `naxis_sturmtiger` | `AttackFrontal` | ⭐ fits |
+| `terran_warhound` | `AttackFrontal` | ⭐ fits |
+| `schwarzermond_neojagdpanzer` | `AttackTurreted` | ⚠ the ONE exception — and it is the ruled Schwarzer Mond hover chassis |
+
+**4 of 5 fit, and the 5th is already a ruled exception.** All five tank destroyers are
+`AttackFrontal` with no `Turreted` at all, which independently confirms FORMULA_V2 §3b's
+frontal-weapon −0.25 special.
+
+`extract_stats.py` now records `attack_trait` alongside `turreted`, so the frontal rule is
+machine-checkable on the next ledger refresh.
