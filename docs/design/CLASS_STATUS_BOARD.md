@@ -374,3 +374,66 @@ frontal-weapon −0.25 special.
 
 `extract_stats.py` now records `attack_trait` alongside `turreted`, so the frontal rule is
 machine-checkable on the next ledger refresh.
+
+---
+
+## §12 — ⭐ The gatling ramp is findable exactly (maintainer 2026-09-03)
+
+*"For cameo it's just the gatling behavior inherit! Check out if that one is still the case!"*
+**It is.** `^GatlingSpinUpTurretBehavior` and its two descendants (`defaults.yaml` 5837+) replaced
+the deleted `^GatlingSpeedUp*` stack in W8, and every actor carrying the behaviour has a
+`gatling`-suffixed trait. **45 actors, 44 of them buildable** — an exact set, where the shared-default
+traits I reached for first (`GrantConditionOnAttack` and friends) resolve onto ~1,860 of ~2,000
+actors and prove nothing.
+
+⭐ **And the template quantifies the ramp**, so it needs no estimating:
+
+```
+reload  0.95^10 = 0.599  ->  ReloadDelayTo 60      (lower = faster)
+range   1.02^10 = 1.219  ->  RangeTo       122
+```
+
+Ten stages driven by the `gatling` condition count. **A fully spun-up gatling sustains ~1/0.6 =
+1.67× its base DPS at 1.22× its base range, while each shot still hits for exactly the same
+amount.**
+
+⚠ **So §9.1's flag on `asianalliance_pulverizermecha` was right about damage and wrong as a
+judgement.** Its damage per shot really is 10,002, below the MBT median of 12,000 — the ramp does
+not touch damage per shot. What it changes is fire rate, and the unit's sustained output is 1.67×
+what a per-shot reading suggests. The measurement was correct; the conclusion drawn from it was not.
+
+`extract_stats.py` now records `gatling_spinup`, so the 44 are identifiable in the ledger.
+
+---
+
+## §13 — ⛔ The anchor sweep: 6 specs contradict the written laws (2026-09-03)
+
+Ruled after the dreadnought case showed a playtest decision surviving only because it was
+questioned. **All 27 anchors carry a spec; 6 contradict a written law.** Five are the same pattern.
+
+| class | contradiction |
+|---|---|
+| `artillery` | **sight 9,000 < weapon range 15,000** |
+| `artillery_tank` | **sight 9,000 < weapon range 12,000** |
+| `fire_support` | **sight 8,000 < weapon range 10,000** |
+| `missile_vehicle` | **sight 7,000 < weapon range 8,000** — and this class is **SIGNED** |
+| `epic_vehicle` | sight 8,000 < weapon range 8,500 |
+| `line_breaker` | range **2,500** — under 3 cells, the shortest of any vehicle class |
+
+⭐ **The five sight cases may all be one deliberate design**: artillery that out-ranges its own
+vision needs a spotter, which is how the V3, the Juggernaut and every classic siege unit work. If
+so it is the dreadnought situation again — a rule that reads as a defect and is not — and it should
+be recorded as such rather than "corrected".
+
+⭐ **`line_breaker` at 2,500 looks equally deliberate**: its anchor is `td_nod_flametank`, and a
+flame tank is a close-assault brawler. Short range IS the class.
+
+⚠ **`dreadnought` does NOT appear** — it sees 8,000 and shoots 7,000, the opposite pattern, and
+that one is already explained (§10).
+
+**What passed:** `light_tank` is correctly faster (125 vs mbt 95), cheaper (400 vs 800) and
+squishier (100k vs 240k) than the MBT; `tank_destroyer` is correctly a glass cannon (150k vs 240k).
+The laws hold everywhere else.
+
+> ⛔ **Needs a ruling per row, not a fix.** Each is either a deliberate decision that must be
+> recorded beside its number — as the dreadnought's now is — or a real error. Nothing is changed.

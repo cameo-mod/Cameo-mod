@@ -927,6 +927,18 @@ def extract_actor(rs, key: str, section: str,
     # Armament.cs:222), so an armament that declares no `Turret:` still USES the default turret.
     # Measured, the attack trait tracks the classes almost perfectly: tank_destroyer 100% frontal,
     # artillery 89%, line_breaker 88%, dreadnought 80% -- against mbt at 9%.
+    # ⭐ THE GATLING SPIN-UP, which is what makes BASE damage understate a unit (maintainer
+    # 2026-09-03: "For cameo it's just the gatling behavior inherit"). `^GatlingSpinUpTurretBehavior`
+    # and its two descendants replaced the old ^GatlingSpeedUp* stack in W8; every actor carrying
+    # the behaviour has a `gatling`-suffixed trait, which makes the set findable EXACTLY rather
+    # than by the shared-default traits that resolve onto ~1,860 of ~2,000 actors and prove nothing.
+    # Measured: 45 actors, 44 of them buildable.
+    # ⚠ The ramp moves RELOAD and RANGE, not damage per shot: defaults.yaml documents
+    # `ReloadDelayTo 60` (0.95^10) and `RangeTo 122` (1.02^10) over ten stages, so a fully spun-up
+    # gatling sustains ~1/0.6 = 1.67x its base DPS at 1.22x its base range while each shot still
+    # hits for the same amount. A damage-per-shot reading of such a unit is correct and a
+    # STRENGTH judgement built on it is not.
+    u["gatling_spinup"] = any("gatling" in c.key.lower() for c in resolved.children)
     u["attack_trait"] = next(
         (c.key.split("@")[0] for c in resolved.children
          if c.key.split("@")[0].startswith("Attack") and c.key.split("@")[0] != "AttackMove"),
