@@ -45,9 +45,12 @@ class-wide; it is blocked on five named units.
 | `scout` | 7 | **4%** | 71% | 57% | one outlier at 57% drags the worst column; the median is solid |
 | `heavy_infantry` | 3 | **7%** | 67% | 47% | 3 scored is the minimum that means anything, and it clears |
 
-⚠ **`dreadnought` is a GROUND-mech class despite the naval name** — `terran_warhound`,
-`naxis_sturmtiger`, `asianalliance_pulverizermecha`, `ixian_neocymek`. Do not read it as capital
-ships; the naval classes do not exist yet (`MISSING_CLASSES.md`).
+⛔ **CORRECTED 2026-09-03 — `dreadnought` is NOT a mech class.** That was inferred from its
+current members and it was wrong. The maintainer's definition: **heavy, slow, frontal-facing (no
+turret), with more range and damage than a regular tank** — *"like tank destroyers but with more
+range and armor and slower"*. Mechs (`terran_warhound`, `naxis_sturmtiger`,
+`asianalliance_pulverizermecha`, `ixian_neocymek`) are an EXAMPLE of the shape, not the class.
+⚠ It is also not naval — the naval classes do not exist yet (`MISSING_CLASSES.md`).
 
 ⚠ Its anchor `terran_warhound` sits at the **80th percentile** of its 5 members, so the zero point
 is near the top of the population rather than the middle. It still prices the class to 2%, so this

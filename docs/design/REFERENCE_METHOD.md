@@ -409,3 +409,61 @@ class's **matching and its anchor be signed together**.
 
 ⛔ Which means: **a class cannot be signed while its matching is unreviewed**, because the anchor is
 chosen from among the grounded members and the matching decides which those are.
+
+### §9.10 — The fit score is LEXICOGRAPHIC, not weighted
+
+**Ruling 2026-09-03:** *"All of the above should be considered! Name similarity first, then tech
+Tier confirmed, then type, then role then cost."*
+
+So it is an ordered cascade, not a weighted sum — each criterion only breaks ties left by the one
+above it:
+
+1. **name similarity** — an exact or alias name match wins outright
+2. **tech tier** — confirmed, not assumed
+3. **type** — infantry / vehicle / aircraft / ship / defense
+4. **role** — the class archetype
+5. **cost** — the final tie-break
+
+⚠ A weighted score would let a large cost advantage outvote a name match. A cascade cannot, which
+is why it is the stricter and more predictable reading. **Faction lineage (§9.4) sits above all
+five** — it decides who wins a contested reference; this cascade decides how well any one pairing
+fits.
+
+### §9.11 — ARMED APCs stay in the pool
+
+An unarmed carrier is exempt (§9.3); an **armed** troop carrier is a combat unit with real HP, DPS
+and armour and stays in. The test is mechanical — *does the actor have a damaging armament* — not
+the name, so `cabal_scarabapc` and `forgotten_apctruck` are judged by their guns.
+
+### §9.12 — ⛔ Class definitions, from the maintainer (2026-09-03)
+
+I reported these six classes as having zero *reference coverage*. That is a different claim from
+having no *definition*, and I should have quoted the definitions that exist. **`archer` and
+`heavy_sniper` are both defined in `FORMULA_V2.md` §6b** and always were:
+
+* **archer** — *"projectile-arc infantry; uses the MISSILE projectile; arrow speed = maxRange/10;
+  hits air (wc2 archers, japan/asian maidens)"*. Maintainer's roster: archer maiden, veteran
+  archer, Warcraft archers and axe throwers, rangers, headhunters.
+* **heavy sniper** — *"all GROUND, NO air; loses to pure snipers as the trade"*. Anti-tank snipers
+  that target all ground units and deal good damage; they lose the anti-air ability.
+
+⛔ **`dreadnought` genuinely had no definition** — only a validation table. Now defined in
+`FORMULA_V2.md`: heavy, slow, **frontal-facing (no turret)**, more range and damage than a regular
+tank. ⭐ **That is mechanically testable** — the corpus carries a `Turret` column — and it already
+finds its match: **Crystallized Nexus' Mammoth Mk. II**, the only turretless Mammoth in the corpus,
+with the longest range of any (10,240 against 4,864–6,912) at a low speed. Shattered Paradise's
+turretless Juggernaut is the second candidate.
+
+The remaining three, as ruled:
+
+* **commando** — any HERO infantry: RA1/RA2 Tanya, Boris, TD commando, TS railgun and shotgun
+  commandos, RA1 Japan exorcist, RA1 Soviet Volkov, StarCraft Jim Raynor, Kerrigan, Zeratul.
+* **closecombat** — any SHORT-RANGE infantry: shotgunners and SMG troops, e.g. the Naxis SS soldier
+  and the mutant shotgun gal.
+* **epic_vehicle** — ⛔ **build-limited vehicles, EXEMPT from the balance pipeline**, same standing
+  as `support`. It should stop being reported as an unfitted failure.
+
+⭐ **So of the six "empty" classes, only three are genuinely blocked**: `epic_vehicle` is exempt,
+`dreadnought` has a measurable definition and a corpus match, and `heavy_sniper`/`archer` have
+documented rosters to match against. `commando` and `closecombat` have wide, named rosters that
+should match well once Mental Omega is wired.

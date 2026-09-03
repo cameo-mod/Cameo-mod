@@ -444,6 +444,8 @@ infantry classes.
 | battlefortress | slow "bunker on tracks": high HP, troop-carry/garrison, short range — NEW template |
 | anti-air vehicle | dedicated mobile AA (flak/missile) — NEW template |
 | tank destroyer | AP glass-cannon vs heavy armour; frontal weapon (−0.25 special); range/speed on the 2×-bullet-speed convention — NEW template |
+| **dreadnought** | ⭐ **DEFINED 2026-09-03 (maintainer):** heavy, SLOW, **frontal-facing (no turret)**, with **more range and damage than a regular tank** — *"like tank destroyers but with more range and armor and slower"*. Mechs are an EXAMPLE, not the definition. ⚠ RA2, TD and RA1 vanilla field no unit fitting it; the only vanilla C&C match is the **TS GDI Mammoth Mk II**. |
+| **epic vehicle** | ⛔ **EXEMPT from the balance pipeline** (maintainer, re-confirmed 2026-09-03) — build-limited vehicles, balanced separately. Same standing as `support`. |
 
 Vehicle-only specials attach here (§3b future scope): frontal-facing
 (non-turreted) weapon = −0.25. Long charge delay is NO LONGER a special —

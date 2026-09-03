@@ -93,10 +93,10 @@ and are priced on capacity, like the naval transports you already ruled get thei
 Worth a look before the anchors are signed — it is the kind of inversion the class system exists to
 surface.
 
-⚠ `dreadnought` already exists as one of the 27 classes and its five members
-(`terran_warhound`, `naxis_sturmtiger`, `asianalliance_pulverizermecha`, `ixian_neocymek`) are
-**ground mechs**, not ships. The name collides with the naval reading; no action needed, but do not
-assume `dreadnought` covers capital ships.
+⚠ `dreadnought` already exists as one of the 27 classes and is **not naval**. ⛔ It is also not a
+mech class — that reading was inferred from its members and corrected 2026-09-03. It is defined by
+SHAPE: heavy, slow, frontal-facing (no turret), more range and damage than a regular tank. Its
+current members happen to be mechs; the definition is not.
 
 ### Economy — 1 class, 27 units
 
