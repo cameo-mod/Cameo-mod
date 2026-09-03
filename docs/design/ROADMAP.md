@@ -99,6 +99,48 @@ dead wiring that no current audit can see, and its own docstring says the check 
 
 ---
 
+## ⛔ P1 — THE PRICING MODEL IGNORES `AmmoPool` (2026-09-02, maintainer-found)
+
+**Maintainer, 2026-09-02:** *"I'm pretty sure you miscalculated that one by adding the ammo limited
+weapon to the regular weapon right? It can only shoot that really powerful gun once in a while."*
+**Verified — correct, and it is systemic.**
+
+`fit_class.py:117` does `total_dps += raw` for EVERY armament, and neither `fit_class.py` nor
+`formula.py` mentions `AmmoPool` anywhere. A weapon with 12 rounds is priced as if it fires
+forever.
+
+| unit | primary | ammo-limited weapon | ratio | ammo | % of priced DPS |
+|---|--:|--:|--:|--:|--:|
+| `terran_ghost` | `GhostSniper` 10,000 | `GhostSniperLockdown` **144,000** | 14.4x | 12 | **94%** |
+| `terran_specter` | `SpecterSniper` 20,000 | `SpecterSniperLockdown` **288,000** | 14.4x | 12 | **94%** |
+
+That is why both read **+514%** and **+523%** against the `special_forces` formula — the two worst
+rows in the whole class table, and they are a measurement artifact, not a design problem.
+
+⚠ **107 buildable units carry an `AmmoPool` AND 2+ damaging armaments.** On the worst, the
+ammo-limited weapon is 68-100% of priced DPS: `td_nod_reconbike` 100%, `A10Carrier` 96%,
+`ra1_soviets_nuclearyak` 87%, `terran_phobos` 86%, `japan_zerofighter_slave` 83%,
+`terran_battlecruiser` 79%, `cabal_hunterdronecarrier` 77%.
+
+⭐ **THE SAME BUG IS ALREADY DOCUMENTED ONE FUNCTION ABOVE, FOR CHARGE WEAPONS**
+(`fit_class.py:99-104`): *"A Tesla Coil's weapon reloads every 3 ticks, so reading the weapon alone
+prices the coil as firing 20 times a second when it fires 3 zaps per 106 ticks — DPS overstated
+11.8x, and DPS drives the price."* `charge_attack_cycle` fixes that case. Ammo is the same shape
+and has no equivalent.
+
+- [ ] **M** — teach the DPS model about `AmmoPool`. A weapon with N rounds and a reload period
+  cannot contribute its burst rate indefinitely; it contributes N shots and then the unit is dry
+  (or waits on `SelfReloads`/a rearm trip). Mirror `charge_attack_cycle`'s shape: a cycle length
+  and a shot count, not a raw rate.
+- [ ] ⚠ **Until it lands, no class containing one of the 107 can be signed** — the fit is measuring
+  a weapon the unit cannot actually sustain. That includes `special_forces` (ghost, specter).
+- [ ] ⚠ **A second defect found alongside:** `terran_ghost` and `terran_specter` each declare
+  `Armament@lockdown` and `Armament@PRIMARY` with **no `Name:` on either**, so both default to
+  `primary`. Two armaments sharing a name is its own problem — check whether the AmmoPool binds
+  what it is meant to bind.
+
+---
+
 ## ⛔ P1 — W24's COLLAPSE RULE IS VERIFIED ON THE WRONG INVARIANT (2026-09-02)
 
 **Raised by Blackrobe, verified in full:** [`W24_COLLAPSE_REVIEW.md`](W24_COLLAPSE_REVIEW.md).
