@@ -272,3 +272,73 @@ toward the RA lineage. **That is a maintainer call, not a measurement.**
 ⚠ **`extract_peer_units.extract()` still refuses a mod that has no named rifle actor** — Red Alert
 Plus failed with `rifle actor e1 not present`. That is the retired transfer key blocking an
 adoption the distribution method does not need one for; it has to go before any candidate lands.
+
+---
+
+## §11 — ⛔ RA2 and YR are ONE game, and the corpus counted them as two
+
+**Maintainer ruling 2026-09-03:** *"RA2 and YR are the same! YR is just the add on for RA2 so if
+anything only YR should be used! But Romanov's Vengeance is already YR but scaled to OpenRA! Which
+means neither vanilla RA2 nor YR are needed anymore! Only Romanov's Vengeance, and of course the
+other RA2 mods like cnc reloaded, mental omega, RA2 reborn and red resurrection!"*
+
+⭐ **Confirmed by measurement before applying:** `ra2_vanilla ~ yr_vanilla` agree on **98%** of
+shared Versus cells (761 cells over 79 warheads), `w25` 99%. They are one source wearing two names,
+and `extract_versus.SOURCES` labelled them as two lineages — "RA2" and "YR" — so the vanilla table
+counted as two independent voices in every lineage tally downstream. **Now relabelled `RA2/YR`.**
+
+⭐ **The unit corpus already implements this ruling** — RA2 vanilla, Yuri's Revenge, RA2/YR (raw
+INI), OpenRA RA2 official and YR-on-OpenRA all collapse into Romanov's Vengeance
+(`reference_lineages.py`). Only the Versus corpus was still splitting them.
+
+### ⚠ Two consequences the ruling did not anticipate
+
+**1. Dropping the vanillas does NOT remove vanilla's armour table from the pool.**
+
+| pair | warheads | `w10` | `w25` |
+|---|--:|--:|--:|
+| `ra2_reborn ~ yr_vanilla` | 106 | **97%** | 98% |
+| `ra2_reborn ~ ra2_vanilla` | 69 | **94%** | 95% |
+| `cnc_reloaded ~ ra2_reborn` | 109 | **87%** | 90% |
+| `cnc_reloaded ~ yr_vanilla` | 116 | 88% | 90% |
+
+**RA2 Reborn *is* vanilla YR's armour table**, and CnC Reloaded is close behind. At the 85% cut the
+transitive group is `{ra2_vanilla, yr_vanilla, ra2_reborn, cnc_reloaded}` — **one voice, four
+labels.** So removing the two vanillas leaves vanilla's data still voting, under RA2 Reborn's name.
+
+⚠ Note this does NOT contradict §9: CnC Reloaded is **independent on unit stats** (47% against
+Romanov's Vengeance) and a **near-duplicate on armour**. Same source, different verdict per axis.
+
+**2. "Romanov's Vengeance is already YR" cannot be verified on the armour axis.** RV shares
+**ZERO** warhead names with any INI source — it names warheads by calibre (`105mm`, `120mmxrad`,
+`155mm`) where the Westwood mods name them by role (`ap`, `antiperson`, `artyhe`). It is an OpenRA
+reimplementation with an entirely different warhead vocabulary, so whether it carries vanilla's
+profile or its own **cannot be told from the data**. It keeps its vote by default, not by evidence.
+
+**So the honest post-ruling picture of the armour axis is four voices, not five:**
+
+| voice | sources | status |
+|---|---|---|
+| vanilla RA2/YR | `ra2_vanilla` · `yr_vanilla` · `ra2_reborn` · `cnc_reloaded` | 84–98% mutually — **needs a representative** |
+| Mental Omega | `mental_omega` (731) | ⭐ independent, 52–66% |
+| Red Resurrection | `red_resurrection` (480) | ⭐ independent, 52–68% |
+| Romanov's Vengeance | `romanovs_vengeance` (148) | ⚠ unverifiable — 0 shared names |
+
+### ⛔ What this broke, and what survives
+
+`aggregate_archetype.py` published, in seven places in `WARHEAD_REFERENCE.md`:
+
+> *"For AP that is not a data error — **six independent RA2-lineage mods** all write
+> `none 25 · flak 25 · plate 15`."*
+
+**That count was an overcount of exactly the kind this ruling exposes.** Four of the six are one
+voice. Corrected to **three independent RA2/YR voices** in the tool and in all seven places.
+
+⭐ **The finding itself survives at reduced strength** — three independent voices agreeing is still
+evidence that the plate inversion is Westwood's design rather than one mod's quirk, so
+`lawful_profile`'s reason for existing is unchanged. It is the *strength* claim that was wrong, and
+it was wrong because the corpus split one game into two.
+
+⚠ **`versus_raw.json`'s committed `lineage` fields are now stale** — `extract_versus.py` reads from
+paths on the maintainer's machine and cannot re-run here, so the relabel takes effect on the next
+extraction. The measurements above read the warhead rows directly and are unaffected.

@@ -1323,3 +1323,33 @@ claims:
     docs:
       - docs/design/REFERENCE_DEDUP.md
       - docs/design/ROADMAP.md
+
+  - id: versus_ra2_yr_vanilla_agreement
+    value: 0.98
+    tolerance: 0.02
+    what: >
+      Share of shared Versus cells on which `ra2_vanilla` and `yr_vanilla` agree within 10% in
+      the warhead corpus. ⭐ THE EVIDENCE FOR THE 2026-09-03 RULING that RA2 and YR are one game,
+      not two: 761 cells over 79 warheads, one source wearing two names. `extract_versus.SOURCES`
+      had them under separate "RA2" and "YR" lineages, so vanilla counted as two independent
+      voices in every tally downstream — which is how "six independent RA2-lineage mods" reached
+      seven places in WARHEAD_REFERENCE.md when the true count is three.
+    measure: |
+      import json, pathlib, statistics, math
+      d = json.loads(pathlib.Path('docs/reference/versus_raw.json').read_text(encoding='utf-8'))
+      def prof(s):
+          o = {}
+          for r in d['sources'][s]['rows']:
+              k = ''.join(c for c in (r.get('warhead') or '').lower() if c.isalnum())
+              if k and r.get('versus'):
+                  o.setdefault(k, r['versus'])
+          return o
+      a, b = prof('ra2_vanilla'), prof('yr_vanilla')
+      rs = [a[w][k] / b[w][k] for w in set(a) & set(b) for k in set(a[w]) & set(b[w])
+            if a[w].get(k) and b[w].get(k) and a[w][k] > 0 and b[w][k] > 0]
+      med = statistics.median(rs)
+      print(round(sum(1 for r in rs
+                      if abs(math.log(r / med)) <= math.log(1 / 0.9) + 1e-9) / len(rs), 2))
+    docs:
+      - docs/design/REFERENCE_DEDUP.md
+      - docs/reference/WARHEAD_REFERENCE.md
