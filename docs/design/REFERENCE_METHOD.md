@@ -513,3 +513,59 @@ source, per Cameo unit* — is exactly the fix, and it is now **blocking rather 
 > `reference_signatures.json` are regenerated with all 15 sources and are correct in method, but
 > every multi-row match is mis-weighted until the one-to-one assignment lands. No anchor should be
 > set from them in the meantime.
+
+### §9.13 — Choosing between VARIANTS of the same reference unit (maintainer 2026-09-03)
+
+The one-to-one law says one reference unit per source. When a source lists the same unit several
+times, something has to choose. The worked case — Mental Omega's four Apocalypse rows:
+
+| unit | HP | cost | spd | weapon | dmg | rng | role |
+|---|--:|--:|--:|---|--:|--:|---|
+| Apocalypse | 620 | 1600 | 4 | `CatastropheGre` | **0** | 7.5 | ? |
+| Apocalypse Tank | 1050 | 2000 | 5 | `120mmx` | 130 | 8 | general |
+| **Apocalypse Tank** | **1575** | 2000 | 4 | `120mmx` | 130 | 8 | general |
+| Apocalypse Prototype | 3600 | 1500 | 5 | `120mmMammoth` | 120 | 7 | anti-inf |
+
+**Rule A — a zero-damage row never matches a combat unit.** *"Obviously the zero damage one should
+be excluded."* The 620 HP row carries `CatastropheGre` and deals 0 damage: it is a different
+device, not a weaker Apocalypse.
+
+**Rule B — among true variants, take the one carrying the Cameo unit's IDENTITY.** The 1050 and
+1575 rows are identical in cost, weapon, damage, reload and range and differ only in HP (1.5×) and
+speed — the signature of a subfaction variant. Ruling: *"for the apocalypse tank I would use the
+bigger number simply because it's the biggest tank in the game"*. So where a Cameo unit's identity
+is *the heaviest of its kind*, the heaviest variant is the match; the fit cascade (§9.10) decides
+the rest.
+
+⚠ **The premise checks out for TANKS and not for the population**, which matters because every
+coordinate is measured against that population. 1575 sits at the **89th percentile** of Mental
+Omega's armed `vehicle` rows, not the top. Above it: the Paradox Engine (5,000 — MO's epic), a
+Kirov Airship (3,000), the Apocalypse *Prototype* (3,600), an Enterprise Aircraft Carrier and a
+Tigr APC. Among genuine tanks it is the top, exactly as ruled.
+
+### §9.14 — ⛔ MO and CnC Reloaded have NO ship type, so their vehicle population is contaminated
+
+Found while checking the above. Their `kind` column uses only **infantry / vehicle / aircraft**:
+
+| source | infantry | vehicle | aircraft | ship | defense |
+|---|--:|--:|--:|--:|--:|
+| Mental Omega | 130 | 151 | 41 | **0** | **0** |
+| CnC Reloaded | 111 | 191 | 22 | **0** | **0** |
+| Romanov's Vengeance | 50 | 48 | 13 | 18 | 29 |
+
+**Every naval unit is therefore typed `vehicle`.** Unambiguous cases: MO's Tesla Cruiser, Siren
+Frigate, Reaper Corvette, Mosquito Demoboat; CnCR's Hydra Submarine, Mini-Sub, Aircraft Carrier.
+Counted by name, **13% of MO's and 18% of CnCR's `vehicle` rows** look naval or airborne.
+
+Two consequences, both real:
+
+1. ⛔ **MO and CnCR cannot contribute to the `ship` or `defense` populations at all** — they have
+   none, so they silently abstain there. Only Romanov's Vengeance and the OpenRA sources carry
+   naval and defensive rows.
+2. ⛔ **Their `vehicle` distributions are stretched by submarines and cruisers**, which are tanky,
+   so every MO/CnCR vehicle coordinate is measured against a population that is partly not
+   vehicles.
+
+⚠ **Unruled.** The options are to leave it and record the caveat, to EXCLUDE the unambiguous naval
+rows so those sources abstain rather than distort, or to retype them as `ship` — which would build
+a partial naval population out of name guesses. Nothing is applied.
