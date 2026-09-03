@@ -467,3 +467,49 @@ The remaining three, as ruled:
 `dreadnought` has a measurable definition and a corpus match, and `heavy_sniper`/`archer` have
 documented rosters to match against. `commando` and `closecombat` have wide, named rosters that
 should match well once Mental Omega is wired.
+
+---
+
+## §10 — Mental Omega and CnC Reloaded are WIRED (2026-09-03) — and it broke the targets
+
+**Ruled and done.** `reference_distribution.doc1_rows()` reads Document 1's hand-extracted tables
+into the peer-row shape, so the distribution layer runs on **15 sources, 2,878 rows**, with MO (306)
+and CnCR (316) third and fourth largest. Cameo actors carrying a reference signature: **302 → 324**.
+
+⭐ **No unit conversion was needed.** Every coordinate is dimensionless and every distribution is
+built from one source's own values, so MO's damage in Westwood points never meets Combined Arms' in
+OpenRA points. DOC1 measures range in CELLS and reload in FRAMES; the ratios are identical either
+way.
+
+**Three limits, declared rather than papered over:** no `Turret`, `Burst` or armour columns, so
+these two abstain on `turn_ratio`, `w_burst` and every `dps_vs_*` coordinate; `w_dps` is derived as
+Damage/Reload, proportional to real DPS within a source but not comparable to DOC5's measured DPS
+as a raw number; and ⛔ **no build-limit column, so the population rule cannot be fully applied** —
+`cost > 0` removes the decoys (MO lists a *"Decoy Quetzal Eyes"* at cost 0, damage 1, range 1) but a
+one-off hero may still sit in their distributions.
+
+### ⛔ AND THE TARGETS GOT WORSE, WHICH IS THE POINT
+
+| worked example | HP target before | after |
+|---|--:|--:|
+| `ra2_soviets_apocalypsetank` | 0.98× of current | **0.52×** |
+| `ra2_soviets_conscript` | 0.93× | **0.69×** |
+
+Not because the new sources are bad — **because the matching law (§9) is not implemented yet.**
+Mental Omega lists three "Apocalypse Tank" rows (1050, 1575 and 620 HP, the last with zero damage)
+and two "Conscript" rows. The pooling appends **once per ROW**, so:
+
+* Mental Omega casts **3 of the Apocalypse's 7 votes (43%)** and 2 of the Conscript's 6 (33%);
+* across the corpus, **114 of 324 matched actors (35%) now draw 2+ rows from a single source**,
+  up from 95 of 302 before;
+* the worst are extreme — `cabal_avatar` takes **8 rows from CnC Reloaded alone**,
+  `ts_nod_mobilerepairvehicle` 5, `yuri_virus` and `ra2_allies_harrier` 4 each from Mental Omega.
+
+⛔ **So a source's weight is currently decided by how many rows happen to share a unit's name**, and
+adding evidence makes that worse rather than better. §9 rule 2 — *at most ONE reference unit per
+source, per Cameo unit* — is exactly the fix, and it is now **blocking rather than optional**.
+
+> ⛔ **DO NOT USE THE CURRENT TARGETS.** `REFERENCE_SYNTHESIS_REPORT.md` and
+> `reference_signatures.json` are regenerated with all 15 sources and are correct in method, but
+> every multi-row match is mis-weighted until the one-to-one assignment lands. No anchor should be
+> set from them in the meantime.

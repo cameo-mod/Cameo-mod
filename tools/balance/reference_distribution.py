@@ -258,6 +258,56 @@ def project(coord, agg):
     return out
 
 
+# ── Document 1: the hand-extracted INI mods (maintainer ruling 2026-09-03) ────────────────────
+# *"MO + CnCR now, originals later"*. Mental Omega and CnC Reloaded are Ares/YR mods with no
+# resolvable checkout, so they exist only as hand-typed tables in ORIGINAL_UNITS_RAW.md. That
+# document carries `kind` — the unit TYPE — which is what makes them usable here: the type half of
+# the ten relative values needs a population per type, and DOC4's tables have no type column at all.
+#
+# ⭐ THE UNITS DO NOT NEED CONVERTING. Every coordinate is dimensionless and every distribution is
+# built from ONE source's own values, so MO's damage in Westwood points and Combined Arms' in
+# OpenRA points never meet. DOC1 measures range in CELLS and reload in FRAMES where DOC5 uses world
+# distance and ticks; the ratios are identical either way.
+#
+# ⚠ THREE HONEST LIMITS, none of them silent:
+#   * no `Turret`, `Burst` or armour columns -> these sources abstain on turn_ratio, w_burst and
+#     every `dps_vs_*` coordinate rather than contributing a guess;
+#   * `w_dps` is derived as Damage/Reload, which is proportional to real DPS within a source and
+#     therefore fine for a ratio, but is NOT comparable to DOC5's measured DPS as a raw number;
+#   * ⛔ NO BUILD-LIMIT COLUMN, so THE POPULATION RULE CANNOT BE FULLY APPLIED. DOC5 rows drop
+#     one-off epics and heroes via `Limit`; these cannot, so a hero may sit inside MO's or CnCR's
+#     distribution and stretch its tail. `cost > 0` removes the decoys and campaign props (MO lists
+#     a "Decoy Quetzal Eyes" at cost 0, damage 1, range 1), which is the best proxy available.
+DOC1_SOURCES = {"Mental Omega", "CnC Reloaded"}
+
+
+def doc1_rows():
+    """Mental Omega and CnC Reloaded in the peer-row shape, from Document 1."""
+    out = []
+    for source, r in syn.parse_doc1():
+        if source not in DOC1_SOURCES:
+            continue
+        kind = (r.get("kind") or "").strip().lower()
+        if kind not in COMBAT_TYPES and kind != "defense":
+            continue
+        hp, cost = syn.num(r.get("HP")), syn.num(r.get("Cost"))
+        if not hp or not cost:                 # cost 0 == decoy / prop / not really built
+            continue
+        dmg, rld, rng = (syn.num(r.get(c)) for c in ("Dmg", "Rld", "Rng"))
+        row = {"source": source, "raw_source": source,
+               "id": r.get("Unit", ""), "name": r.get("Unit", ""),
+               "type": kind, "turreted": None,
+               "hp": hp, "speed": syn.num(r.get("Spd")),
+               "turn_speed": None, "turn_ratio": None,
+               "cost": cost,
+               "w_range": rng, "w_damage": dmg, "w_burst": None, "w_reload": rld,
+               "w_dps": (dmg / rld) if (dmg and rld) else None}
+        for lad in LADDERS:
+            row[f"dps_vs_{lad}"] = None        # no armour columns — abstain, never guess
+        out.append(row)
+    return out
+
+
 def peer_rows():
     """Doc 5 rows with type, raw HP/speed/turn — the chassis corpus, after lineage de-dup."""
     rows, source, header = [], None, None
@@ -309,6 +359,13 @@ def peer_rows():
                      "turreted": (d.get("turret", "").lower() == "y"),
                      "hp": hp, "speed": spd, "turn_speed": turn,
                      "turn_ratio": (spd / turn) if (spd and turn) else None, **wep})
+    # Document 1's INI mods join here so they pass through the SAME lineage de-duplication and
+    # land in the same distributions. Appended rather than merged: they are separate sources.
+    for row in doc1_rows():
+        if row["source"] in LINEAGE_MEMBERS:
+            dropped_lineage.add(row["source"])
+            continue
+        rows.append(row)
     return rows
 
 

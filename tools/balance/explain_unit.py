@@ -34,10 +34,10 @@ gm = rd.gm
 # ── The home sources per Cameo faction family (maintainer 2026-09-03) ────────────────────────
 # ⚠ NAMES AS THE POOL SEES THEM. A label typed differently here silently routes to nothing —
 # the exact failure `reference_lineages.py` was created to stop.
-# ⛔ Mental Omega and CnC Reloaded are RULED IN but NOT YET WIRED into the distribution layer, and
-# DTA contributes zero rows, so those three cannot vote yet. They are listed because the routing is
-# the maintainer's, and `--check` reports which named sources are currently unavailable rather than
-# letting a routing quietly run on half its intended evidence.
+# ⭐ Mental Omega and CnC Reloaded were wired into the distribution layer 2026-09-03, so the RA2
+# home set is now complete. DTA still contributes zero rows (no roster), so the TD/RA1 home set
+# runs on three of its four named sources. The tool reports which named sources are missing rather
+# than letting a routing quietly run on half its intended evidence.
 HOME = {
     "ra2": ["CnC Reloaded", "Romanov's Vengeance", "Mental Omega", "Combined Arms"],
     "td_ra1": ["DTA", "OpenRA Tiberian Dawn", "OpenRA Red Alert", "Combined Arms"],

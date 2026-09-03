@@ -26,7 +26,8 @@ class FamilyRoutingTest(unittest.TestCase):
         """⚠ A label typed differently here routes to nothing, silently — the exact failure
         `reference_lineages.py` exists to stop. The three that legitimately have no rows yet are
         named, so a FOURTH typo cannot hide among them."""
-        known_absent = {"CnC Reloaded", "Mental Omega", "DTA"}
+        # MO and CnC Reloaded were wired in 2026-09-03; only DTA still has no roster.
+        known_absent = {"DTA"}
         present = {p["source"] for p in rd.peer_rows()}
         for fam, sources in eu.HOME.items():
             for s in sources:
