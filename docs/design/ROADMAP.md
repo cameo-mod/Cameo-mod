@@ -1880,6 +1880,10 @@ types, creating a unified wall+turret defense system across the mod.
 
 ## Phase D — SP-ification of the other TS factions (after CABAL)
 - TS GDI, Nod, Forgotten, then Scrin — SP-recipe weapons/effects, workbook stats.
+- [x] Scrin structures foundation: hidden faction metadata plus nine
+  map/editor-ready structure actors and independent Kane's Wrath-derived sprites.
+- [ ] Add the Drone Ship and its deployment into the Drone Platform before
+  enabling Scrin in the lobby or defining starting units and production.
 
 ## Phase E — Platform & engine (background, L)
 - [x] **Port `AttackGarrisonedSP`** (one fire port per passenger) + convert all

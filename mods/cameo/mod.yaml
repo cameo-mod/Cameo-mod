@@ -33,6 +33,8 @@ FileSystem: ContentInstallerFileSystem
 		~cameo|ContentPacks/TiberianSun/Shared/files/sprites: ts_shared_sprites
 		~cameo|ContentPacks/TiberianSun/Shared/files/voxels: ts_shared_voxels
 		~cameo|ContentPacks/TiberianSun/Shared/files/sounds: ts_shared_sounds
+		~cameo|ContentPacks/TiberiumWars/Scrin/files/sprites: scrin_sprites
+		~cameo|ContentPacks/TiberiumWars/Scrin/files/sounds: scrin_sounds
 		~cameo|ContentPacks/Shared/files/icons: shared_icons
 		~cameo|ContentPacks/Shared/files/sprites: shared_sprites
 		~cameo|ContentPacks/Shared/files/voxels: shared_voxels
@@ -141,6 +143,7 @@ Include: ContentPacks/TiberianSun/CABAL/content.yaml
 Include: ContentPacks/TiberianSun/Nod/content.yaml
 Include: ContentPacks/TiberianSun/GDI/content.yaml
 Include: ContentPacks/TiberianSun/Forgotten/content.yaml
+Include: ContentPacks/TiberiumWars/Scrin/content.yaml
 Include: ContentPacks/RedAlert2/Shared/content.yaml
 Include: ContentPacks/RedAlert2/Allies/content.yaml
 Include: ContentPacks/RedAlert2/Soviets/content.yaml
@@ -402,6 +405,7 @@ ChromeLayout:
 	common|chrome/text-notifications.yaml
 	cameo|chrome/tooltips.yaml
 Voices:
+	ContentPacks|TiberiumWars/Scrin/yaml/voices.yaml
 	cameo|audio/advancewars.yaml
 	cameo|audio/315custom.yaml
 	cameo|audio/classicdoom.yaml
