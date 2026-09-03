@@ -128,10 +128,60 @@ prices the coil as firing 20 times a second when it fires 3 zaps per 106 ticks �
 11.8x, and DPS drives the price."* `charge_attack_cycle` fixes that case. Ammo is the same shape
 and has no equivalent.
 
-- [ ] **M** — teach the DPS model about `AmmoPool`. A weapon with N rounds and a reload period
-  cannot contribute its burst rate indefinitely; it contributes N shots and then the unit is dry
-  (or waits on `SelfReloads`/a rearm trip). Mirror `charge_attack_cycle`'s shape: a cycle length
-  and a shot count, not a raw rate.
+### The full mechanic (maintainer, 2026-09-02) — four inputs, not one
+
+*"Check the ammo consumption for each weapon! And not only the ammo consumption but also the ammo
+regeneration to calculate how often the weapon is actually able to fire and if two weapons share
+the same ammo pool calculate what will happen if both of them use it."*
+
+⭐ **All four are already in the yaml, and `terran_ghost` shows every one of them:**
+
+```
+Armament@lockdown:  Weapon: GhostSniperLockdown
+    AmmoUsage: 6                  <- 1. CONSUMPTION: 6 of 12 rounds per shot
+    PauseOnCondition: ammo < 12   <- 4. GATE: only fires at a FULL pool
+Armament@PRIMARY:   Weapon: GhostSniper
+    PauseOnCondition: !ammo       <- the fallback, fires while any ammo remains
+AmmoPool:      Ammo: 12   AmmoCondition: ammo     <- 3. SHARED by both armaments
+ReloadAmmoPool: Delay: 44   Count: 1              <- 2. REGENERATION: +1 per 44 ticks
+```
+
+The lockdown shot drops the pool 12 -> 6, which trips its own `ammo < 12` gate; it cannot fire
+again until regeneration restores six rounds = **264 ticks**. The model prices it at its
+`ReloadDelay` of **22**. That is the maintainer's reading exactly — *"the big weapon is only used
+at the beginning and the small weapon is used on low ammo"* — and it is 12x.
+
+**Measured across the roster:**
+
+| | count |
+|---|--:|
+| buildable units with an `AmmoPool` | **138** |
+| with per-armament `AmmoUsage` != 1 | **35** |
+| with an ammo `PauseOnCondition` gate | **111** |
+| with `ReloadAmmoPool` regeneration | 98 |
+| ⛔ with NO regeneration at all — must rearm at a pad/depot | **40** |
+
+| unit | ammo | regen/tick | model dmg/tick | sustained | overstated |
+|---|--:|--:|--:|--:|--:|
+| `latinsyndicate_yakovlev` | 8 | 0.0250 | 3,300 | 200 | **16.5x** |
+| `ra1_soviets_gatlingtank` | 4 | 0.0400 | 2,400 | 160 | **15.0x** |
+| `terran_ghost` | 12 | 0.0227 | 7,000 | 545 | **12.8x** |
+| `ts_gdi_riottrooper` | 6 | 0.0025 | 609 | 70 | 8.7x |
+| `terran_specter` | 12 | 0.0152 | 9,333 | 1,091 | 8.6x |
+| `japan_armoredcar` | 12 | 0.0833 | 9,000 | 1,667 | 5.4x |
+
+- [ ] **M** — teach the DPS model the SUSTAINED rate, not the burst rate. The shape:
+  1. every shot costs `AmmoUsage` (default 1) from the pool it is bound to;
+  2. the pool refills at `ReloadAmmoPool.Count / Delay` ammo per tick — or not at all, and then
+     the ceiling is a rearm round trip the actor does not describe;
+  3. armaments sharing a pool COMPETE for the same ammo, so their rates are not independent;
+  4. `PauseOnCondition` on the ammo condition decides which weapon may fire at which pool level.
+  **Sustained ceiling = regen_rate x (damage per ammo of the mix actually used).** Burst above
+  that is available only until the pool drains, so it is a duration, not a rate.
+  ⚠ Mirror `charge_attack_cycle`'s shape — a cycle length and a shot count, never a raw rate.
+- [ ] ⚠ **The 40 with no regeneration need a separate ruling.** Their sustained rate depends on
+  travel time to a rearm pad, which is a map property, not an actor stat. Either they get a
+  modelled rearm cycle or they are excluded from DPS pricing and hand-tuned like `support`.
 - [ ] ⚠ **Until it lands, no class containing one of the 107 can be signed** — the fit is measuring
   a weapon the unit cannot actually sustain. That includes `special_forces` (ghost, specter).
 - [ ] ⚠ **A second defect found alongside:** `terran_ghost` and `terran_specter` each declare
