@@ -271,3 +271,100 @@ python tools/balance/lineage_dedup.py                  # source duplication, eve
 python tools/balance/lineage_dedup.py --pair "CnC Reloaded" "Romanov's Vengeance"
 python tools/balance/anchor_readiness.py               # per-class anchor integrity
 ```
+
+---
+
+## §9 — ⛔ THE MATCHING LAW (maintainer 2026-09-03)
+
+Matching is step 3 of §2 and it is what limits everything: **521 of 823 Cameo actors match nothing
+today**, and coverage — not source count, not the vote floor — is the binding constraint on how
+many anchors can be grounded. The maintainer's ruling turns it from a per-unit search into a
+**one-to-one assignment**.
+
+### §9.1 — The four rules
+
+> *"you can use the mental omega Chinese assault tank (I think it's called Qiling) as reference!
+> Same for the Latin Syndicate rusher tank use the Latin confederation jaguar tank which is also
+> supposed to be a fast light tank right? ... The rule is one unit that fits best per mod / game
+> but never use the same unit twice for different units and never use different units from the
+> same game for one unit!"*
+
+1. **Role analogies are allowed.** `asianalliance_lynxtank ≈ an MBT` is legitimate — both are main
+   battle tanks. Matching is not restricted to names.
+2. ⛔ **At most ONE reference unit per source, per Cameo unit.** Never two units from the same game
+   for one Cameo unit. *"you are not allowed to use two different tanks like grizzly and rhino for
+   the same unit as reference since they are completely different."*
+3. ⛔ **A reference unit may be used ONCE, ever.** Never the same reference for two Cameo units.
+   *"This is to make each reference chain clean and not muddy."*
+4. ⭐ **Maximise DISTINCT references.** Where a natural counterpart is already taken, find a
+   different one from a mod not yet drawn on for that role — that is the point of the rule, not a
+   side effect of it.
+
+**Together these make it a bipartite one-to-one assignment, computed per source** (the sources are
+independent of each other, which is what keeps it tractable). It cannot be done greedily per unit.
+
+### §9.2 — How badly the current matcher breaks it
+
+| | |
+|---|--:|
+| Cameo units with any match | 302 |
+| distinct reference rows in use | 478 |
+| ⛔ reference rows feeding **several** Cameo units | **192 (40%)** |
+| ⛔ Cameo units drawing **2+ rows from one source** | **95** |
+| ⭐ matches already law-abiding | **~35 of 302** |
+
+The worst case: **one Combined Arms MCV row feeds 17 different Cameo MCVs**, and six other sources
+do the same. `ra2_allies_battlefortress` pulls four separate Valiant Shades units at once.
+
+### §9.3 — Exempt: the role-identical units
+
+**Ruling:** MCVs, engineers, harvesters/miners and the whole `support` class are **exempt from
+reference matching**. They are the same design in every faction, they are not what the reference
+corpus is for, `support` is already ability-priced and hand-tuned by ruling, and harvesters need a
+throughput formula rather than a DPS one.
+
+| | count |
+|---|--:|
+| role-identical by name (MCV · engineer · harvester · miner) | 61 |
+| `class == support` | 110 |
+| **union exempted** | **129** (42 in both) |
+| of the 302 matched actors, now exempt | 57 |
+| **matched actors that remain in scope** | **245** |
+
+⭐ This also dissolves the capacity problem the one-to-one rule would otherwise create: 17 MCVs
+competing for ~13 MCV references, with at least 4 guaranteed to lose.
+
+### §9.4 — Who wins a contested reference: FACTION LINEAGE first, then stats
+
+When several Cameo units can claim one reference, **faction lineage outranks statistical fit**,
+then cost and HP proximity break ties. This follows the inspiration map already recorded in
+`BALANCE_SYNTHESIS.md` §3 and the maintainer's own worked examples:
+
+| Cameo unit | reference | why |
+|---|---|---|
+| `ra2_soviets_rhinoheavytank` | Mental Omega **Russia MBT** | same faction lineage |
+| `ra2_allies_grizzlytank` | Mental Omega **Euro Alliance Cavalier** | same faction lineage |
+| `asianalliance_lynxtank` | Mental Omega **Qiling** (Chinese assault tank) | Asian Alliance ← MO China |
+| `latinsyndicate_rushertank` | Mental Omega **Jaguar** (fast light tank) | Latin Syndicate ← MO Latin Confederation |
+
+⚠ **A purely statistical scorer would hand a Soviet reference to a Dune unit** whenever the numbers
+happened to line up better. Lineage-first prevents that.
+
+### §9.5 — A collapsed lineage offers ONE reference, not several
+
+For rule 2's per-source cap, a de-duplicated lineage counts as **one source** — only the
+representative may offer a unit. RV's Rhino and vanilla YR's Rhino are the same design, so allowing
+both to be assigned would re-introduce through the matching layer the duplicate vote that
+`REFERENCE_DEDUP.md` removed.
+
+### §9.6 — ⛔ Blocked on Mental Omega
+
+**Every reference the maintainer named for the modded factions is Mental Omega** — Qiling, Jaguar,
+Cavalier, Russia MBT. MO is ruled into the distribution layer and **not yet wired**, so Latin
+Syndicate, Asian Alliance and the other MO-inspired factions currently have nothing to match
+against. **Wiring MO and CnC Reloaded comes before the assignment is built**, or it would be
+computed and immediately redone.
+
+⚠ And `td_gdi_mammothtank` vs `ra1_soviets_mammothtank` are two different units that DTA gives
+different stats — *"but you need the enhanced ini for it first right?"* Correct: DTA contributes
+zero unit rows (§6), so that distinction cannot be honoured until the INIs arrive.
