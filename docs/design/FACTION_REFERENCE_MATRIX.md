@@ -244,3 +244,56 @@ two games. Valiant Shades and Combined Arms are the genuine second voices.
    `redalert_japan`, plus `d2k_ixian`. They are formula-only until one is found.
 4. ⚠ **Three need a second choosing**: `tiberiansun_cabal`, `tiberiansun_forgotten`,
    `redalert2mod_futuretech`.
+
+---
+
+# PART III — rulings of 2026-09-04 (later session)
+
+## §9 — ⭐ THE MIRROR-MERGE RULE
+
+**Maintainer, on OpenHV's two near-identical factions:** *"since they are nearly identical we just
+regard them as one big faction with twice the units as reference!"*
+
+⭐ **This is the general answer to the mirror problem, and it is better than choosing.** Picking one
+mirror throws away half the roster; using both as separate voices double-counts one design. Merging
+them into a **single voice with twice the units** keeps every data point and counts the source once.
+
+**Applied:** `sc` + `yi` become one **OpenHV** voice of **80 units**. Justified on identity too —
+Steel Consortium fields energy weapons, shields *and* railguns, which is `yi`'s lightning and force
+fields plus `sc`'s railguns and howitzers.
+
+⚠ The two are measurably near-mirrors: identical composition (17 vehicles · 7 buildings · 6
+aircraft · 5 defenses · 5 ships each), the same buildings, and swapped weapon flavour —
+Lightning Tank against Railgun Tank, Drone Ship against Railgun Boat.
+
+## §10 — The updated Tier-4 map
+
+| Cameo faction | game A | game B | game C | status |
+|---|---|---|---|---|
+| `redalert2mod_asianalliance` | MO **China** | Generals Alpha **`prc`** | ⚠ **RotE China** | ⭐ ruled |
+| `redalert2mod_syndicate` (Latin) | MO **Latin Confederation** | a **GLA** source | | ⭐ ruled |
+| `redalert2mod_tkm` | ⭐ **GLA** — *"they look and feel like they are GLA"* | the other GLA source | ⛔ needs a third to stay distinct from Latin Syndicate | ⚠ |
+| `redalert2mod_consortium` | MO **Foehn Revolt** | ⭐ **OpenHV (merged, 80 units)** | | ⭐ ruled |
+| `redalert2mod_futuretech` | **OpenE2140 `ucs`** | ⛔ open — Scrin is now reserved | ⚠ |
+| `redalert2mod_naxis` | ⭐ **OpenE2140 `ed`** — *"ED is a heavy tank faction so the same as Naxis"* | ⛔ open | ⚠ |
+| `redalert2mod_schwarzermond` | ⛔ Earth 2150 not on disk | ⛔ open | ⛔ |
+
+⛔ **Combined Arms `scrin` is RESERVED** for the upcoming Cameo Scrin faction and must not be spent
+on Consortium or FutureTech.
+
+⚠ **TKM and Latin Syndicate both draw on GLA**, so each needs a distinct partner or they converge:
+Latin Syndicate has MO Latin Confederation; **TKM's second is still open.**
+
+## §11 — ⛔ Sources the maintainer must supply
+
+Neither can be fetched here — both are Westwood/Ares INI mods whose rules live inside MIX archives,
+and every mod-hosting domain is blocked by this environment's egress proxy.
+
+| mod | needed for | status |
+|---|---|---|
+| **DTA** | all four TD/RA1 factions | promised **2026-09-05** — ASK |
+| **Rise of the East** | Asian Alliance (China) · TKM (GLA) | ⭐ newly identified — RA2/YR mod adding Generals' China and GLA, three subfactions each, v3.0 |
+
+⚠ Also unresolved: the maintainer mentions a **Combined Arms fork** — *"the ymca mod … more chaotic
+and less balanced … only try to use it for the scrin"*. Not identified from the name; needs the
+real name or a link before it can be assessed.
