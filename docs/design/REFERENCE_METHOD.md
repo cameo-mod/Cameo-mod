@@ -674,3 +674,72 @@ roughly 800 are weak enough to strike on sight.
 
 > ⛔ **The 448 figure must not be quoted as coverage.** Until a class has been reviewed, its
 > assignment is a proposal list, and the ≥2 floor counts proposals rather than evidence.
+
+---
+
+## §12 — The role step, the cascade bug, and an honest coverage number (2026-09-03)
+
+§11 left the assignment ranking on name and cost alone, because the cascade's ROLE step had data
+for 2 of 15 sources. Two fixes, and one of them was a bug in my own tuple.
+
+### §12.1 — A derived role that invents nothing
+
+⛔ **Assigning a peer unit a Cameo class would be exactly the *"inferred and invented data that
+might be wrong"* the maintainer warned about.** What is measurable — and is the method's own
+machinery — is **where a unit sits in its own roster**: a scout is fast, fragile and short-ranged
+*relative to its own game*, whoever made that game. So the role step compares position vectors, not
+labels:
+
+```
+shape(u) = ( pct_rank(hp), pct_rank(speed), pct_rank(range), pct_rank(dps) )
+           each within u's own SOURCE and own TYPE
+role     = 1 − mean| shape(cameo) − shape(peer) |
+```
+
+Dimensionless on both sides, so a 12,500 HP roster and a 205 HP roster compare directly — the same
+property that makes the ten relative values work at all. ⚠ Where a source carries a **real** role
+column (Document 1), that is read and it wins.
+
+### §12.2 — ⛔ THE CASCADE WAS NOT A CASCADE
+
+A lexicographic tuple whose first key is a **near-continuous float** degenerates into *"rank by that
+key alone"* — exact ties never occur, so tier, role and cost are computed and thrown away. Measured:
+**38% of assignments had a role score below 0.5 while the role step ran on every one of them.**
+
+Fixed by bucketing the name key — `4` exact · `3` prefix/alias · `2` strong · `1` shares a
+distinctive word · `0` neither — which restores the stated intent: **name dominates, and the later
+keys decide among names of comparable quality.**
+
+| | before bucketing | after |
+|---|--:|--:|
+| median role score of what was assigned | 0.64 | **0.74** |
+| assignments with a good shape (≥0.75) | 31% | **48%** |
+| assignments with a different shape (<0.5) | 38% | **34%** |
+
+### §12.3 — Confidence separates a weak FIT from thin EVIDENCE
+
+§9.7 warned that one label for both makes the second invisible. Now emitted per assignment:
+
+* **STRONG** — an exact/alias name, or a real name overlap backed by a matching shape
+* **FAIR** — one of the two holds
+* **WEAK** — neither; the greedy assigned the best of a bad field, because clause 9 forbids a blank
+
+| | |
+|---|--:|
+| STRONG | **721 (39%)** |
+| FAIR | 753 (41%) |
+| WEAK | **378 (20%)** |
+
+### §12.4 — ⭐ The number that can be quoted
+
+| measure | value |
+|---|--:|
+| actors reaching ≥2 references of any quality | 454 |
+| **actors reaching ≥2 NON-WEAK references** | **370** |
+| (for comparison, before this session) | 221 |
+
+**370 is the honest floor** — and it is still a proposal count, not evidence, until each class is
+reviewed. ⚠ The residual WEAK rows are not a defect to fix: they are clause 9 working as ruled
+(*"assign, but flag low-confidence"*). `asianalliance_asianmilitia` drawing *"Animal Alligator"*
+from CnC Reloaded is the greedy taking the best of what was left after better-matched militia units
+claimed the good candidates. **It is flagged WEAK, which is the whole point.**

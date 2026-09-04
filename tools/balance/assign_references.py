@@ -122,7 +122,41 @@ def pct_rank(value, population):
     return below / len(population)
 
 
-def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home):
+# ── The ROLE step, for the thirteen sources that carry no role column ─────────────────────────
+# ⛔ NOT AN INVENTED LABEL. Assigning a peer unit a Cameo class would be exactly the "inferred and
+# invented data that might be wrong" the maintainer warned about. What IS measurable, and is the
+# method's own machinery, is WHERE A UNIT SITS IN ITS OWN ROSTER: a scout is fast, fragile and
+# short-ranged relative to its own game, whoever made that game. So the role step compares two
+# POSITION VECTORS rather than two labels.
+#
+#   shape(u) = ( pct_rank(hp), pct_rank(speed), pct_rank(range), pct_rank(dps) )
+#              each taken within u's own SOURCE and own TYPE
+#   role     = 1 - mean(|shape(cameo) - shape(peer)|)
+#
+# Dimensionless on both sides, so a 12,500 HP roster and a 205 HP roster are directly comparable —
+# the same property that lets the ten relative values work at all.
+# ⚠ Where a source DOES carry a real role column (Document 1: Mental Omega, CnC Reloaded), that is
+# read rather than derived, and it wins.
+SHAPE_FIELDS = ("hp", "speed", "w_range", "w_dps")
+
+
+def shape_vector(row, pools, key):
+    """The unit's position in its own (source, type) population across the role-bearing axes."""
+    out = []
+    for field in SHAPE_FIELDS:
+        out.append(pct_rank(row.get(field), pools.get((key, row.get("type"), field), [])))
+    return out
+
+
+def shape_similarity(a, b):
+    """1.0 = same position in its own roster; 0.0 = opposite ends. None if too little overlap."""
+    pairs = [(x, y) for x, y in zip(a, b) if x is not None and y is not None]
+    if len(pairs) < 2:                      # one axis is not a shape
+        return None
+    return 1.0 - sum(abs(x - y) for x, y in pairs) / len(pairs)
+
+
+def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, peer_shape=None):
     """The LEXICOGRAPHIC cascade (maintainer: name, then tech tier, then type, then role, then cost).
 
     Returned as a tuple so Python's own ordering does the cascade — a weighted sum would let a large
@@ -137,16 +171,32 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home):
         return None                                   # cross-type is refused (§9 cross-type ruling)
     if peer.get("w_damage") is not None and not peer["w_damage"] and is_armed(rec):
         return None                                   # clause 5: zero damage never matches a combat unit
-    name = name_score(cam["id"], peer.get("name", ""))
+    # ⛔ THE NAME SCORE IS BUCKETED, AND THAT IS WHAT MAKES THE CASCADE A CASCADE.
+    # A lexicographic tuple whose first key is a near-continuous float degenerates into "rank by
+    # that key alone": exact ties never happen, so tier, type, role and cost are never consulted.
+    # Measured before this fix, 38% of assignments had a role score under 0.5 — the role step was
+    # computed and then thrown away. Bucketing restores the maintainer's stated intent: name
+    # DOMINATES, and the later keys decide among names of comparable quality.
+    #   4 exact · 3 prefix/alias · 2 strong similarity · 1 shares a distinctive word · 0 neither
+    raw_name = name_score(cam["id"], peer.get("name", ""))
+    name = (4 if raw_name >= 1.0 else 3 if raw_name >= 0.9 else
+            2 if raw_name >= 0.75 else 1 if raw_name >= 0.6 else 0)
     TIER_UNAVAILABLE = 0.0
     role = 0.0
-    if peer.get("role"):                              # only DOC1 sources carry one
+    if peer.get("role"):                              # a READ role wins over a derived one
         klass = (cm.classify(rec.get("design") or {})[0] or "")
         role = 1.0 if peer["role"].lower() in klass.replace("_", "") else 0.0
+    elif cam_shape is not None and peer_shape is not None:
+        sim = shape_similarity(cam_shape, peer_shape)
+        if sim is not None:
+            role = sim
     cost = 0.0
     if cam_cost_pct is not None and peer_cost_pct is not None:
         cost = 1.0 - abs(cam_cost_pct - peer_cost_pct)
-    return (round(name, 3), TIER_UNAVAILABLE, 1.0, role, round(cost, 3), 1 if home else 0)
+    # home lineage sits directly under the name bucket: it decides CONTESTS (§9.4), which is a
+    # stronger claim than shape similarity or cost proximity.
+    return (name, 1 if home else 0, TIER_UNAVAILABLE, round(role, 3), round(cost, 3),
+            round(raw_name, 3))
 
 
 def assign(only_class=None):
@@ -176,6 +226,19 @@ def assign(only_class=None):
         if p.get("cost"):
             peer_costs[(p["source"], p["type"])].append(p["cost"])
 
+    # populations for the shape vectors: per (source, type, field), and Cameo as its own "source"
+    pools = collections.defaultdict(list)
+    for p in peers:
+        for f in SHAPE_FIELDS:
+            if p.get(f):
+                pools[(p["source"], p["type"], f)].append(p[f])
+    for c in scope:
+        for f in SHAPE_FIELDS:
+            if c.get(f):
+                pools[("Cameo", c["type"], f)].append(c[f])
+    cam_shapes = {c["id"]: shape_vector(c, pools, "Cameo") for c in scope}
+    peer_shapes = {id(p): shape_vector(p, pools, p["source"]) for p in peers}
+
     by_source = collections.defaultdict(list)
     for p in peers:
         by_source[p["source"]].append(p)
@@ -197,7 +260,8 @@ def assign(only_class=None):
             home = source in eu.HOME.get(eu.family_of(c["id"]) or "", [])
             for p in plist:
                 s = score(c, rec, p, cpct,
-                          pct_rank(p.get("cost"), peer_costs.get((source, p["type"]), [])), home)
+                          pct_rank(p.get("cost"), peer_costs.get((source, p["type"]), [])), home,
+                          cam_shapes.get(c["id"]), peer_shapes.get(id(p)))
                 if s:
                     cands.append((s, c["id"], p))
         # clause 9: greedy descent — best remaining wins, both sides then spoken for
@@ -209,9 +273,23 @@ def assign(only_class=None):
                 continue
             used_cam.add(cid)
             used_peer.add(key)
+            # ⛔ CONFIDENCE MUST SEPARATE "few sources" FROM "weak fit" (§9.7). Collapsing them
+            # into one word is how a bad pairing hides behind a LOW that only ever meant thin
+            # evidence. This label is about THIS pairing; the source COUNT is reported separately.
+            #   STRONG  an exact/alias name, or a real name overlap backed by a matching shape
+            #   FAIR    one of the two holds
+            #   WEAK    neither — the greedy assigned the best of a bad field (clause 9 forbids
+            #           leaving a blank, so the row exists and must announce itself)
+            bucket, role_score = s[0], s[3]
+            if bucket >= 3 or (bucket >= 1 and role_score >= 0.75):
+                conf = "STRONG"
+            elif bucket >= 1 or role_score >= 0.75:
+                conf = "FAIR"
+            else:
+                conf = "WEAK"
             result[cid][source] = {"name": p.get("name"), "score": s,
                                    "hp": p.get("hp"), "cost": p.get("cost"),
-                                   "home": bool(s[5])}
+                                   "home": bool(s[1]), "raw_name": s[5], "confidence": conf}
     return result, skipped, len(scope)
 
 
@@ -230,6 +308,14 @@ def main():
           f"{sum(1 for v in result.values() if len(v) >= 2)}")
     print(f"sources per actor     : "
           + ", ".join(f"{k}:{v}" for k, v in sorted(counts.items())))
+    conf = collections.Counter(m["confidence"] for v in result.values() for m in v.values())
+    total = sum(conf.values())
+    print(f"assignment confidence : "
+          + ", ".join(f"{k} {v} ({v/total:.0%})" for k, v in
+                      sorted(conf.items(), key=lambda kv: -kv[1])))
+    strong2 = sum(1 for v in result.values()
+                  if sum(1 for m in v.values() if m["confidence"] != "WEAK") >= 2)
+    print(f"⭐ actors with >=2 NON-WEAK references (the honest floor): {strong2}")
 
     if args.cls:
         print(f"\n── {args.cls} — every member and its one reference per source ──")
@@ -238,8 +324,9 @@ def main():
             print(f"\n  {cid}   ({len(got)} sources)")
             for src, m in sorted(got.items(), key=lambda kv: -kv[1]["score"][0]):
                 flag = "HOME" if m["home"] else "    "
-                print(f"     {flag} {src[:22]:<24}{str(m['name'])[:28]:<30}"
-                      f"name={m['score'][0]:.2f} cost={m['score'][4]:.2f}")
+                print(f"     {flag} {m['confidence']:<7}{src[:20]:<22}{str(m['name'])[:26]:<28}"
+                      f"name={m['raw_name']:.2f}({m['score'][0]}) "
+                      f"role={m['score'][3]:.2f} cost={m['score'][4]:.2f}")
     if args.write:
         OUT.parent.mkdir(parents=True, exist_ok=True)
         OUT.write_text(json.dumps({"assignment": result, "exempt": skipped},
