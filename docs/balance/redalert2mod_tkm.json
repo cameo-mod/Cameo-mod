@@ -170,6 +170,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Valued.Cost",
@@ -188,6 +189,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -227,7 +229,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "tkm_viper": {
     "armaments": [
@@ -381,6 +384,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Valued.Cost",
@@ -394,6 +398,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -435,13 +440,15 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": false
    },
    "tkmdrone": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Valued.Cost",
@@ -455,6 +462,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Health.HP",
      "v": "10000"
@@ -494,7 +502,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "80"
-    }
+    },
+    "turreted": false
    },
    "tkmsuicidedrone": {
     "armaments": [
@@ -528,6 +537,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Valued.Cost",
@@ -541,6 +551,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
@@ -573,7 +584,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -582,6 +594,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -598,6 +611,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -630,13 +644,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "tkm_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -653,6 +669,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -685,13 +702,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "tkm_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -704,6 +723,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -735,13 +755,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "tkm_observationvan": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -758,6 +780,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -790,13 +813,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "tkm_orerefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -813,6 +838,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -845,13 +871,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "tkm_powerplant": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Valued.Cost",
@@ -864,6 +892,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Health.HP",
      "v": "100000"
@@ -895,9 +924,11 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "tkm_supportlabor": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Valued.Cost",
@@ -910,6 +941,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "TKM Support Labor",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -917,13 +949,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_techcenter": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -940,6 +974,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -972,13 +1007,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "tkm_trenchtruckdeployed": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Valued.Cost",
@@ -991,6 +1028,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Health.HP",
      "v": "100000"
@@ -1022,13 +1060,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6720"
-    }
+    },
+    "turreted": false
    },
    "tkm_warfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1045,6 +1085,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1077,7 +1118,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -1149,6 +1191,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Valued.Cost",
@@ -1162,6 +1205,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Health.HP",
      "v": "120000"
@@ -1194,7 +1238,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7496"
-    }
+    },
+    "turreted": true
    },
    "tkm_quadturretbunker": {
     "armaments": [
@@ -1233,6 +1278,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Valued.Cost",
@@ -1246,6 +1292,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Health.HP",
      "v": "85000"
@@ -1278,7 +1325,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6720"
-    }
+    },
+    "turreted": true
    },
    "tkm_tankturretbunker": {
     "armaments": [
@@ -1318,6 +1366,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Valued.Cost",
@@ -1331,6 +1380,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -1363,7 +1413,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "8683"
-    }
+    },
+    "turreted": true
    },
    "tkmratflakdeployed": {
     "armaments": [
@@ -1401,6 +1452,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Valued.Cost",
@@ -1414,6 +1466,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Health.HP",
      "v": "120000"
@@ -1438,7 +1491,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6720"
-    }
+    },
+    "turreted": true
    },
    "tkmtrenchtankdeployed": {
     "armaments": [
@@ -1473,6 +1527,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Valued.Cost",
@@ -1486,6 +1541,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Health.HP",
      "v": "200000"
@@ -1510,7 +1566,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6720"
-    }
+    },
+    "turreted": true
    }
   },
   "infantry": {
@@ -1710,6 +1767,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
@@ -1723,6 +1781,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -1762,7 +1821,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "tkm_juggernaut": {
     "armaments": [
@@ -1887,6 +1947,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Armor.Type",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
@@ -1900,6 +1961,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "36000"
@@ -1933,7 +1995,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "45"
-    }
+    },
+    "turreted": false
    },
    "tkm_marine": {
     "armaments": [
@@ -2060,6 +2123,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
@@ -2073,6 +2137,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -2109,7 +2174,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "tkm_rifleman": {
     "armaments": [
@@ -2202,6 +2268,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
@@ -2220,6 +2287,7 @@
      "trait": "FirepowerMultiplier@tkm_rifleman",
      "v": 0.89
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "29000"
@@ -2257,7 +2325,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "61"
-    }
+    },
+    "turreted": false
    },
    "tkm_rocketeer": {
     "armaments": [
@@ -2514,6 +2583,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
@@ -2527,6 +2597,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "9000"
@@ -2562,7 +2633,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "tkm_sniper": {
     "armaments": [
@@ -2640,6 +2712,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
@@ -2653,6 +2726,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -2686,7 +2760,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "tkm_spetsnaz": {
     "armaments": [
@@ -2785,6 +2860,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
@@ -2798,6 +2874,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -2831,7 +2908,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "100"
-    }
+    },
+    "turreted": false
    },
    "tkm_thermonaut": {
     "armaments": [
@@ -2899,6 +2977,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
@@ -2912,6 +2991,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "60000"
@@ -2945,7 +3025,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "tkm_trooper": {
     "armaments": [
@@ -3074,6 +3155,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
@@ -3092,6 +3174,7 @@
      "trait": "FirepowerMultiplier@tkm_trooper",
      "v": 0.37
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "33000"
@@ -3128,7 +3211,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "59"
-    }
+    },
+    "turreted": false
    },
    "tkm_von": {
     "armaments": [
@@ -3580,6 +3664,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3597,6 +3682,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -3629,7 +3715,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "tkmvan": {
     "armaments": [
@@ -3707,6 +3794,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3724,6 +3812,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -3758,7 +3847,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "tkmworker": {
     "armaments": [
@@ -3822,6 +3912,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
@@ -3835,6 +3926,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "10000"
@@ -3866,11 +3958,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "tkm_promotion_battlebus": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3883,6 +3977,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Battle Bus",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -3892,9 +3987,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_dronepodtruck": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3907,6 +4004,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Drone Pod Truck",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -3916,9 +4014,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_flakbus": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3931,6 +4031,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Flak Bus",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -3940,9 +4041,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_juggernaut": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3955,6 +4058,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Juggernaut",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -3964,9 +4068,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_medictruck": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3979,6 +4085,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Medic Truck",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -3987,9 +4094,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_radartruck": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4002,6 +4111,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Radar Truck",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4010,9 +4120,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_repairtruck": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4025,6 +4137,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Repair Truck",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4033,9 +4146,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_t30": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4048,6 +4163,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock T30",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4057,9 +4173,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_thebigshiee": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4072,6 +4190,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock the Big Shiee",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4081,9 +4200,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_thesandmarine": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4096,6 +4217,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock the Sand Marine",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4105,9 +4227,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_trenchtank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4120,6 +4244,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Trench Tank",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4129,9 +4254,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_promotion_viper": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4144,6 +4271,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Viper",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4153,11 +4281,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "tkm_upgrade_berezkaarsenalupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4174,6 +4304,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Berezka Arsenal Upgrade",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4183,9 +4314,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_cryorocketsupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4202,6 +4335,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "EMP Rockets Upgrade",
     "prerequisites": [
      "~tkm_observationvan",
@@ -4210,9 +4344,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_gp25upgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4229,6 +4365,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "GP-25 Upgrade",
     "prerequisites": [
      "~tkm_observationvan",
@@ -4237,9 +4374,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_heavytitanplating": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4256,6 +4395,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Depleted Uranium Plating",
     "prerequisites": [
      "~tkm_techcenter",
@@ -4264,9 +4404,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_incendiaryrocketsupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4283,6 +4425,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Incendiary Rockets Upgrade",
     "prerequisites": [
      "~tkm_observationvan",
@@ -4291,9 +4434,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_infantryupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4310,6 +4455,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "TKM Infantry Upgrade",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4318,9 +4464,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_natoarsenalupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4337,6 +4485,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "NATO Arsenal Upgrade",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4346,9 +4495,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_pointdefensesystem": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4365,6 +4516,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Point Defense System",
     "prerequisites": [
      "~tkm_observationvan",
@@ -4374,9 +4526,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_semiautoriflesupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4393,6 +4547,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Semi Auto Rifles Upgrade",
     "prerequisites": [
      "~tkm_observationvan",
@@ -4401,9 +4556,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_technicaltankrocketaddon": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4420,6 +4577,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Technical Tank Rocket Addon",
     "prerequisites": [
      "~tkm_techcenter",
@@ -4429,9 +4587,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_titanarmorpiercingbulletsupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4448,6 +4608,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Tungsten Core Bullets Upgrade",
     "prerequisites": [
      "~tkm_observationvan",
@@ -4456,9 +4617,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_titanarsenalupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4475,6 +4638,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Titan Arsenal Upgrade",
     "prerequisites": [
      "~tkm_constructionyard",
@@ -4484,9 +4648,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "tkm_upgrade_twinrocketsupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4503,6 +4669,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Twin Rockets Upgrade",
     "prerequisites": [
      "~tkm_observationvan",
@@ -4511,7 +4678,8 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -4550,6 +4718,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -4563,6 +4732,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "120000"
@@ -4604,7 +4774,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "tkm_as42": {
     "armaments": [
@@ -4735,6 +4906,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -4748,6 +4920,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "27500"
@@ -4787,7 +4960,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "tkm_battlebus": {
     "armaments": [
@@ -4833,6 +5007,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -4846,6 +5021,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -4887,7 +5063,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "tkm_bigshiee": {
     "armaments": [
@@ -5300,6 +5477,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -5317,6 +5495,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "500000"
@@ -5359,7 +5538,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "tkm_dronepodtruck": {
     "armaments": [
@@ -5389,6 +5569,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -5402,6 +5583,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -5443,13 +5625,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "tkm_flakbus": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -5463,6 +5647,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "120000"
@@ -5504,7 +5689,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "tkm_medictruck": {
     "armaments": [
@@ -5550,6 +5736,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -5563,6 +5750,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -5603,13 +5791,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "tkm_mobileconstructionvehicletkm": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5627,6 +5817,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -5666,7 +5857,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "tkm_quadtruck": {
     "armaments": [
@@ -5731,6 +5923,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -5744,6 +5937,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "65000"
@@ -5785,7 +5979,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    },
    "tkm_radartruck": {
     "armaments": [
@@ -5808,6 +6003,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -5821,6 +6017,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -5861,7 +6058,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "tkm_repairtruck": {
     "armaments": [
@@ -5910,6 +6108,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -5923,6 +6122,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -5963,7 +6163,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "tkm_sandmarine": {
     "armaments": [
@@ -6373,6 +6574,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -6390,6 +6592,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "800000"
@@ -6432,7 +6635,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "tkm_stryker": {
     "armaments": [
@@ -6531,6 +6735,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -6544,6 +6749,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "80000"
@@ -6585,7 +6791,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "21"
-    }
+    },
+    "turreted": true
    },
    "tkm_t30": {
     "armaments": [
@@ -6632,6 +6839,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -6649,6 +6857,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "400000"
@@ -6691,7 +6900,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": true
    },
    "tkm_t72m": {
     "armaments": [
@@ -6778,6 +6988,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -6791,6 +7002,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -6832,7 +7044,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "tkm_technical": {
     "armaments": [
@@ -6896,6 +7109,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -6909,6 +7123,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "27500"
@@ -6948,7 +7163,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "35"
-    }
+    },
+    "turreted": true
    },
    "tkm_technicaltank": {
     "armaments": [
@@ -7012,6 +7228,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -7025,6 +7242,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
@@ -7064,13 +7282,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "22"
-    }
+    },
+    "turreted": true
    },
    "tkm_templateharvesterraname": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -7088,6 +7308,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -7132,7 +7353,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": false
    },
    "tkm_tornadoglauncher": {
     "armaments": [
@@ -7275,6 +7497,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -7288,6 +7511,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "35000"
@@ -7328,7 +7552,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    },
    "tkm_trenchtank": {
     "armaments": [
@@ -7368,6 +7593,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Buildable.BuildDuration",
      "v": "3000"
@@ -7385,6 +7611,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "200000"
@@ -7426,13 +7653,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "13"
-    }
+    },
+    "turreted": true
    },
    "tkm_trenchtruck": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Buildable.BuildDuration",
      "v": "3000"
@@ -7450,6 +7679,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -7492,7 +7722,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    },
    "tkm_zaza": {
     "armaments": [
@@ -7557,6 +7788,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
@@ -7570,6 +7802,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -7611,7 +7844,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    }
   }
  }

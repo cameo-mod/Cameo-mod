@@ -140,6 +140,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Valued.Cost",
@@ -153,6 +154,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
@@ -194,7 +196,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "yuriinvisibleplane": {
     "armaments": [
@@ -217,6 +220,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": "AttackBomber",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Valued.Cost",
@@ -230,6 +234,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -258,7 +263,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -267,6 +273,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -283,6 +290,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -315,13 +323,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "yuri_battlelab": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -338,6 +348,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -370,13 +381,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "yuri_bioreactor": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Valued.Cost",
@@ -389,6 +402,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Health.HP",
      "v": "125000"
@@ -420,13 +434,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "yuri_cloningvats": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -447,6 +463,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -481,13 +498,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "yuri_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -500,6 +519,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -531,13 +551,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "yuri_grinder": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "750"
@@ -554,6 +576,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -586,13 +609,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "yuri_lunarcommandcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -613,6 +638,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -646,13 +672,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "yuri_psychicsensor": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -669,6 +697,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -701,13 +730,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "yuri_warfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -724,6 +755,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -756,7 +788,8 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -765,6 +798,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Valued.Cost",
@@ -778,6 +812,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -789,7 +824,8 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_gatlingcannon": {
     "armaments": [
@@ -966,6 +1002,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Valued.Cost",
@@ -979,6 +1016,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
      "v": "140000"
@@ -1011,13 +1049,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "8250"
-    }
+    },
+    "turreted": true
    },
    "yuri_geneticmutator": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1035,6 +1075,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1069,13 +1110,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "yuri_psychicdominator": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1093,6 +1136,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1127,7 +1171,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "yuri_psychictower": {
     "armaments": [
@@ -1159,6 +1204,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Valued.Cost",
@@ -1172,6 +1218,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
      "v": "150000"
@@ -1204,7 +1251,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "10000"
-    }
+    },
+    "turreted": true
    },
    "yuri_slaveminer_deployed": {
     "armaments": [
@@ -1241,6 +1289,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Buildable.BuildDuration",
      "v": "750"
@@ -1257,6 +1306,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
      "v": "200000"
@@ -1293,13 +1343,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    },
    "yuri_tankbunker": {
     "armor": {
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackGarrisoned",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Valued.Cost",
@@ -1313,6 +1365,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -1345,7 +1398,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    }
   },
   "infantry": {
@@ -1543,6 +1597,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
@@ -1556,6 +1611,7 @@
      "tech_tier": 0.5,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
      "v": "96000"
@@ -1588,7 +1644,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
      "v": "64"
-    }
+    },
+    "turreted": false
    },
    "yuri_brute": {
     "armaments": [
@@ -1653,6 +1710,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
@@ -1666,6 +1724,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
      "v": "45000"
@@ -1697,7 +1756,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
      "v": "80"
-    }
+    },
+    "turreted": false
    },
    "yuri_clone": {
     "armaments": [
@@ -1728,6 +1788,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
@@ -1741,6 +1802,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -1776,7 +1838,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "yuri_cosmonaut": {
     "armaments": [
@@ -1848,6 +1911,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
@@ -1866,6 +1930,7 @@
      "trait": "FirepowerMultiplier@FirerateCompensation",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
      "v": "28000"
@@ -1901,7 +1966,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Aircraft.TurnSpeed",
      "v": "33"
-    }
+    },
+    "turreted": false
    },
    "yuri_engineer": {
     "armaments": [
@@ -1941,6 +2007,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
@@ -1954,6 +2021,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -1993,7 +2061,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "yuri_gatlingtrooper": {
     "armaments": [
@@ -2059,6 +2128,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
@@ -2077,6 +2147,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.08
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
      "v": "36000"
@@ -2113,7 +2184,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
      "v": "45"
-    }
+    },
+    "turreted": false
    },
    "yuri_initiate": {
     "armaments": [
@@ -2330,6 +2402,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
@@ -2348,6 +2421,7 @@
      "trait": "FirepowerMultiplier@SplashCompensation",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
      "v": "24000"
@@ -2383,7 +2457,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
      "v": "66"
-    }
+    },
+    "turreted": false
    },
    "yuri_virus": {
     "armaments": [
@@ -2802,6 +2877,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
@@ -2815,6 +2891,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
      "v": "12000"
@@ -2846,7 +2923,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
      "v": "52"
-    }
+    },
+    "turreted": false
    },
    "yuri_yurix": {
     "armaments": [
@@ -2928,6 +3006,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2945,6 +3024,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -2977,7 +3057,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
      "v": "100"
-    }
+    },
+    "turreted": false
    }
   },
   "naval": {
@@ -3040,6 +3121,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#Valued.Cost",
@@ -3058,6 +3140,7 @@
      "trait": "FirepowerMultiplier@RANK-1",
      "v": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#Health.HP",
      "v": "100000"
@@ -3097,11 +3180,13 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": true
    }
   },
   "upgrades": {
    "yuri_doctrine_chaosgasemitters": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3118,6 +3203,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Chaos Gas Emitters",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3127,9 +3213,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_doctrine_lasherhecannon": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3146,6 +3234,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Lasher HE Cannon",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3154,9 +3243,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_doctrine_lasherlasercannon": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3173,6 +3264,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Lasher Laser Cannon",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3181,9 +3273,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_doctrine_lashertoxicgasshells": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3200,6 +3294,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Lasher Toxic Gas Shells",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3208,9 +3303,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_doctrine_psionicelite": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3227,6 +3324,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Psionic Elite",
     "prerequisites": [
      "~yuri_psychicsensor",
@@ -3234,9 +3332,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_doctrine_psionicfanatics": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3253,6 +3353,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Psionic Fanatics",
     "prerequisites": [
      "~yuri_psychicsensor",
@@ -3260,9 +3361,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_doctrine_psioniclegion": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3279,6 +3382,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Psionic Legion",
     "prerequisites": [
      "~yuri_psychicsensor",
@@ -3287,9 +3391,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_doctrine_psionicvehicleshields": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3306,6 +3412,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Psionic Vehicle Shields",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3315,9 +3422,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_doctrine_scrapvehiclearmor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3334,6 +3443,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Scrap Vehicle Armor",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3343,9 +3453,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_bioengineering": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3362,6 +3474,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Bio Engineering",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3371,9 +3484,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_bioreactorefficiency": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3390,6 +3505,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Bio Reactor Efficiency",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3399,9 +3515,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_brutestrengthmutations": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3418,6 +3536,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Brute Strength Mutations",
     "prerequisites": [
      "~yuri_psychicsensor",
@@ -3425,9 +3544,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_corrosiveammo": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3444,6 +3565,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Corrosive Ammo",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3453,9 +3575,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_diskhighfrequencylasers": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3472,6 +3596,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Disk High Frequency Lasers",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3480,9 +3605,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_disksiphonattack": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3499,6 +3626,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Disk Siphon Attack",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3507,9 +3635,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_domination": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3526,6 +3656,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Domination",
     "prerequisites": [
      "~yuri_psychicsensor",
@@ -3534,9 +3665,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_gatlingfirepowerupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3553,6 +3686,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Gatling Firepower Upgrade",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3560,9 +3694,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_gatlingspeedupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3579,6 +3715,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Gatling Speed Upgrade",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3588,9 +3725,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_geneticmodificationboost": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3607,6 +3746,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Genetic Modification Boost",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3616,9 +3756,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_gravitondrive": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3635,6 +3777,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Graviton Drive",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3643,9 +3786,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_infantrystealthsuits": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3662,6 +3807,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Infantry Stealth Suits",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3671,9 +3817,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_initiatepowersurge": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3690,6 +3838,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Initiate Power Surge",
     "prerequisites": [
      "~yuri_psychicsensor",
@@ -3697,9 +3846,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_lasherarmorimprovements": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3716,6 +3867,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Lasher Armor Improvements",
     "prerequisites": [
      "~yuri_psychicsensor",
@@ -3723,9 +3875,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_meltingvirus": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3742,6 +3896,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Melting Virus",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3749,9 +3904,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_psionicarmor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3768,6 +3925,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Psionic Armor",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3775,9 +3933,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_psionicplasmabeams": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3794,6 +3954,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Psionic Plasma Beams",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3801,9 +3962,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_psychicrange": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3820,6 +3983,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Psychic Range",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3828,9 +3992,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_psychicvision": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3847,6 +4013,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Psychic Vision",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3856,9 +4023,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_supermagnets": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3875,6 +4044,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Super Magnets",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3883,9 +4053,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yuri_upgrade_toxicengines": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3902,6 +4074,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Toxic Engines",
     "prerequisites": [
      "~yuri_battlelab",
@@ -3909,7 +4082,8 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -3949,6 +4123,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Armor.Type",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
@@ -3962,6 +4137,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
      "v": "12500"
@@ -4005,7 +4181,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": true
    },
    "yuri_gatlingtank": {
     "armaments": [
@@ -4178,6 +4355,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
@@ -4196,6 +4374,7 @@
      "trait": "FirepowerMultiplier@SpeedupCompensation",
      "v": 0.75
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
      "v": "45000"
@@ -4239,7 +4418,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    },
    "yuri_lashertank": {
     "armaments": [
@@ -4675,6 +4855,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
@@ -4688,6 +4869,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
@@ -4731,7 +4913,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "21"
-    }
+    },
+    "turreted": true
    },
    "yuri_magnetron": {
     "armaments": [
@@ -4884,6 +5067,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
@@ -4897,6 +5081,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
      "v": "65000"
@@ -4940,7 +5125,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "13"
-    }
+    },
+    "turreted": true
    },
    "yuri_mastermind": {
     "armaments": [
@@ -4972,6 +5158,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
@@ -4985,6 +5172,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -5029,13 +5217,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": true
    },
    "yuri_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5053,6 +5243,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -5097,7 +5288,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "yuri_slaveminer": {
     "armaments": [
@@ -5134,6 +5326,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Buildable.BuildDuration",
      "v": "750"
@@ -5151,6 +5344,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
      "v": "200000"
@@ -5194,7 +5388,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": true
    }
   }
  }

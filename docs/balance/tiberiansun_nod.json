@@ -78,6 +78,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Valued.Cost",
@@ -91,6 +92,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Health.HP",
      "v": "60000"
@@ -132,7 +134,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_harpy": {
     "armaments": [
@@ -354,6 +357,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Valued.Cost",
@@ -367,6 +371,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
@@ -406,7 +411,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -415,6 +421,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
@@ -427,6 +434,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Health.HP",
      "v": "240000"
@@ -459,13 +467,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
@@ -478,6 +488,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Health.HP",
      "v": "1000000"
@@ -509,13 +520,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_handof": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -532,6 +545,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -564,13 +578,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_helipad": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -587,6 +603,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -619,13 +636,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_navalyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -642,6 +661,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -675,13 +695,15 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_powerplant": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
@@ -694,6 +716,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Health.HP",
      "v": "120000"
@@ -725,13 +748,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_radar": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -748,6 +773,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -780,13 +806,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_servicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -803,6 +831,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -835,13 +864,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_techcenter": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -858,6 +889,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -890,13 +922,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_tiberiumrefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -913,6 +947,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -945,13 +980,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_tiberiumwastefacility": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -968,6 +1005,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Health.HP",
      "v": "100000"
@@ -1001,13 +1039,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_warfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1024,6 +1064,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1056,7 +1097,8 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -1065,6 +1107,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Valued.Cost",
@@ -1078,6 +1121,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
      "v": "30000"
@@ -1109,7 +1153,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_laserturret": {
     "armaments": [
@@ -1196,6 +1241,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Valued.Cost",
@@ -1209,6 +1255,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
      "v": "60000"
@@ -1241,7 +1288,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7c0"
-    }
+    },
+    "turreted": true
    },
    "ts_nod_missilesilo": {
     "armaments": [
@@ -1316,6 +1364,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": "AttackFollow",
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1333,6 +1382,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1367,7 +1417,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_obeliskoflight": {
     "armaments": [
@@ -1466,6 +1517,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackCharges",
     "buildable": true,
     "charge_up": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#AttackCharges",
@@ -1484,6 +1536,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
      "v": "250000"
@@ -1516,7 +1569,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7c0"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_samsite": {
     "armaments": [
@@ -1583,6 +1637,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Valued.Cost",
@@ -1596,6 +1651,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -1628,13 +1684,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "13176"
-    }
+    },
+    "turreted": true
    },
    "ts_nod_silo": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Valued.Cost",
@@ -1648,6 +1706,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -1680,13 +1739,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_stealthgenerator": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -1704,6 +1765,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -1736,7 +1798,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6c0"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -1781,6 +1844,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
@@ -1794,6 +1858,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -1826,7 +1891,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Mobile.Speed",
      "v": "90"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_elitecadre": {
     "armaments": [
@@ -2082,6 +2148,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
@@ -2100,6 +2167,7 @@
      "trait": "FirepowerMultiplier",
      "v": 0.93
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
      "v": "21000"
@@ -2136,7 +2204,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Mobile.Speed",
      "v": "55"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_engineer": {
     "armaments": [
@@ -2245,6 +2314,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2258,6 +2328,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "10000"
@@ -2297,7 +2368,8 @@
     "speed": {
      "src": "inherited",
      "v": "55"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_lightinfantry": {
     "armaments": [
@@ -2442,6 +2514,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2455,6 +2528,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "16000"
@@ -2490,7 +2564,8 @@
     "speed": {
      "src": "inherited",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_rocketinfantry": {
     "armaments": [
@@ -2613,6 +2688,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2626,6 +2702,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "12000"
@@ -2661,7 +2738,8 @@
     "speed": {
      "src": "inherited",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_shadowteam": {
     "armaments": [
@@ -2758,6 +2836,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
@@ -2771,6 +2850,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -2803,7 +2883,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_shadowteam_air": {
     "armaments": [
@@ -2826,6 +2907,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
@@ -2839,6 +2921,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -2867,7 +2950,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Aircraft.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_shotguncommando": {
     "armaments": [
@@ -3097,6 +3181,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3114,6 +3199,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
      "v": "100000"
@@ -3146,7 +3232,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Mobile.Speed",
      "v": "80"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_toxintrooper": {
     "armaments": [
@@ -3214,6 +3301,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
@@ -3227,6 +3315,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -3259,7 +3348,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Mobile.Speed",
      "v": "55"
-    }
+    },
+    "turreted": false
    }
   },
   "naval": {
@@ -3431,6 +3521,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Valued.Cost",
@@ -3443,6 +3534,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Health.HP",
      "v": "350000"
@@ -3483,13 +3575,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "8"
-    }
+    },
+    "turreted": true
    },
    "ts_nod_hover": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Valued.Cost",
@@ -3502,6 +3596,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Health.HP",
      "v": "100000"
@@ -3541,7 +3636,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_rayboat": {
     "armaments": [
@@ -3630,6 +3726,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Valued.Cost",
@@ -3642,6 +3739,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Health.HP",
      "v": "80000"
@@ -3681,7 +3779,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "45"
-    }
+    },
+    "turreted": true
    },
    "ts_nod_submarine": {
     "armaments": [
@@ -3749,6 +3848,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Valued.Cost",
@@ -3761,6 +3861,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Health.HP",
      "v": "140000"
@@ -3800,11 +3901,13 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "36"
-    }
+    },
+    "turreted": true
    }
   },
   "upgrades": {
    "ts_nod_upgrade_advancedtiberiumrefinement": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3821,6 +3924,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Advanced Tiberium Refinement",
     "prerequisites": [
      "~ts_nod_techcenter",
@@ -3828,9 +3932,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ts_nod_upgrade_auxiliaryweapon": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3847,6 +3953,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Auxiliary Weapon",
     "prerequisites": [
      "~ts_nod_techcenter",
@@ -3854,9 +3961,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ts_nod_upgrade_infiltrationkit": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3873,6 +3982,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Infiltration Kit",
     "prerequisites": [
      "~ts_nod_radar",
@@ -3880,9 +3990,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ts_nod_upgrade_mobilityspecialization": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3899,6 +4011,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Mobility Specialization",
     "prerequisites": [
      "~ts_nod_radar",
@@ -3906,9 +4019,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ts_nod_upgrade_stealthfieldsimprovements": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3925,6 +4040,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Stealth Fields Improvements",
     "prerequisites": [
      "~ts_nod_techcenter",
@@ -3932,9 +4048,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ts_nod_upgrade_tiberiumcoremissiles": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3951,6 +4069,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Tiberium Core Missiles",
     "prerequisites": [
      "~ts_nod_techcenter",
@@ -3958,9 +4077,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ts_nod_upgrade_tiberiumlenses": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3977,6 +4098,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Tiberium Lenses",
     "prerequisites": [
      "~ts_nod_techcenter",
@@ -3984,9 +4106,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ts_nod_upgrade_willofkane": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4003,6 +4127,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Will of Kane",
     "prerequisites": [
      "~ts_nod_techcenter",
@@ -4010,9 +4135,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ts_nod_upgrade_willofkane_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4025,7 +4152,9 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Will of Kane (Team Upgrade)"
+    "gatling_spinup": false,
+    "name": "Will of Kane (Team Upgrade)",
+    "turreted": false
    }
   },
   "vehicles": {
@@ -4111,6 +4240,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
@@ -4124,6 +4254,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
@@ -4164,7 +4295,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    },
    "ts_nod_attackbuggy": {
     "armaments": [
@@ -4272,6 +4404,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
@@ -4285,6 +4418,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.333
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
@@ -4324,7 +4458,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "64"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_attackcycle": {
     "armaments": [
@@ -4426,6 +4561,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
@@ -4439,6 +4575,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
      "v": "20000"
@@ -4478,7 +4615,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "68"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_devilstongue": {
     "armaments": [
@@ -4516,6 +4654,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
@@ -4529,6 +4668,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -4569,13 +4709,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -4593,6 +4735,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -4633,7 +4776,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_mobilerepairvehicle": {
     "armaments": [
@@ -4681,6 +4825,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
@@ -4694,6 +4839,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -4734,13 +4880,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_mobilestealthgenerator": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
@@ -4754,6 +4902,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
      "v": "20000"
@@ -4794,7 +4943,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "11"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_stealthtank": {
     "armaments": [
@@ -4883,6 +5033,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
@@ -4896,6 +5047,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
      "v": "80000"
@@ -4936,7 +5088,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_subterraneanapc": {
     "armaments": [
@@ -5036,6 +5189,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
@@ -5049,6 +5203,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
      "v": "17500"
@@ -5089,13 +5244,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_tiberiumharvester": {
     "armor": {
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -5113,6 +5270,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
@@ -5157,7 +5315,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "ts_nod_ticktank": {
     "armaments": [
@@ -5402,6 +5561,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
@@ -5415,6 +5575,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -5454,7 +5615,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    }
   }
  }

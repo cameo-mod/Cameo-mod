@@ -202,6 +202,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
@@ -215,6 +216,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "500000"
@@ -255,13 +257,15 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "6"
-    }
+    },
+    "turreted": false
    },
    "terran_dropship": {
     "armor": {
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
@@ -275,6 +279,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
@@ -315,7 +320,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": false
    },
    "terran_medivac": {
     "armaments": [
@@ -361,6 +367,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
@@ -374,6 +381,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
@@ -414,7 +422,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": false
    },
    "terran_phobos": {
     "armaments": [
@@ -619,6 +628,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackTurreted",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -636,6 +646,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "1000000"
@@ -677,7 +688,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "5"
-    }
+    },
+    "turreted": true
    },
    "terran_pythean": {
     "armaments": [
@@ -724,6 +736,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -741,6 +754,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "400000"
@@ -781,7 +795,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "8"
-    }
+    },
+    "turreted": false
    },
    "terran_raven": {
     "armaments": [
@@ -829,6 +844,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
@@ -842,6 +858,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -882,7 +899,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "terran_sciencevessel": {
     "armaments": [
@@ -953,6 +971,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
@@ -966,6 +985,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "200000"
@@ -1005,7 +1025,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "13"
-    }
+    },
+    "turreted": true
    },
    "terran_sundog": {
     "armaments": [
@@ -1102,6 +1123,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
@@ -1120,6 +1142,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "160000"
@@ -1160,7 +1183,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "terran_valkyrie": {
     "armaments": [
@@ -1273,6 +1297,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
@@ -1291,6 +1316,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "120000"
@@ -1332,7 +1358,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    },
    "terran_wraith": {
     "armaments": [
@@ -1429,6 +1456,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
@@ -1442,6 +1470,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
@@ -1482,7 +1511,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "terran_wyvern": {
     "armaments": [
@@ -1651,6 +1681,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
@@ -1664,6 +1695,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "180000"
@@ -1705,7 +1737,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "14"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -1714,6 +1747,7 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1730,6 +1764,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
      "v": "150000"
@@ -1762,13 +1797,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "terran_armory": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Valued.Cost",
@@ -1781,6 +1818,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
      "v": "250000"
@@ -1813,13 +1851,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "terran_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1836,6 +1876,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1867,13 +1908,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "terran_commandcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1890,6 +1933,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1921,13 +1965,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "terran_engineeringbay": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "625"
@@ -1944,6 +1990,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -1976,9 +2023,11 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "terran_expandedstorage": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Valued.Cost",
@@ -1991,6 +2040,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Expanded Storage",
     "prerequisites": [
      "~terran_commandcenter",
@@ -1998,13 +2048,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "terran_refinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -2021,6 +2073,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -2052,13 +2105,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "terran_sciencefacility": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -2075,6 +2130,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -2108,13 +2164,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "terran_starport": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -2131,6 +2189,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -2163,13 +2222,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "terran_supplydepot": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Valued.Cost",
@@ -2182,6 +2243,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -2213,9 +2275,11 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "terran_vespenegascollector": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Valued.Cost",
@@ -2228,6 +2292,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Vespene Gas Collector",
     "prerequisites": [
      "~terran_commandcenter",
@@ -2235,13 +2300,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "terran_weaponsfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -2258,6 +2325,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -2290,7 +2358,8 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -2299,6 +2368,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackOpenTopped",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Valued.Cost",
@@ -2312,6 +2382,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Health.HP",
      "v": "240000"
@@ -2344,13 +2415,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    },
    "terran_missilesilo": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -2368,6 +2441,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -2402,7 +2476,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "terran_missileturret": {
     "armaments": [
@@ -2465,6 +2540,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackPopupTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Valued.Cost",
@@ -2478,6 +2554,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.225
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Health.HP",
      "v": "200000"
@@ -2510,7 +2587,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "11626"
-    }
+    },
+    "turreted": true
    },
    "terran_sentinel": {
     "armaments": [
@@ -2585,6 +2663,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Valued.Cost",
@@ -2598,6 +2677,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Health.HP",
      "v": "160000"
@@ -2630,7 +2710,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "8181"
-    }
+    },
+    "turreted": true
    }
   },
   "infantry": {
@@ -2759,6 +2840,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
@@ -2777,6 +2859,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
      "v": "52000"
@@ -2809,7 +2892,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
      "v": "52"
-    }
+    },
+    "turreted": false
    },
    "terran_ghost": {
     "armaments": [
@@ -3080,6 +3164,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
@@ -3098,6 +3183,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.03
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
      "v": "44000"
@@ -3130,7 +3216,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "terran_harakan": {
     "armaments": [
@@ -3313,6 +3400,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
@@ -3331,6 +3419,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
      "v": "78000"
@@ -3363,7 +3452,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
      "v": "56"
-    }
+    },
+    "turreted": false
    },
    "terran_jimraynor": {
     "armaments": [
@@ -3449,6 +3539,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3466,6 +3557,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
      "v": "200000"
@@ -3497,7 +3589,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "terran_madcap": {
     "armaments": [
@@ -3571,6 +3664,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
@@ -3589,6 +3683,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.08
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
      "v": "60000"
@@ -3625,7 +3720,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "terran_marauder": {
     "armaments": [
@@ -3723,6 +3819,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
@@ -3736,6 +3833,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
      "v": "90000"
@@ -3767,7 +3865,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
      "v": "45"
-    }
+    },
+    "turreted": false
    },
    "terran_marine": {
     "armaments": [
@@ -3845,6 +3944,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
@@ -3863,6 +3963,7 @@
      "trait": "FirepowerMultiplier@TripleShot",
      "v": 0.31
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
      "v": "41000"
@@ -3899,7 +4000,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
      "v": "61"
-    }
+    },
+    "turreted": false
    },
    "terran_medic": {
     "armaments": [
@@ -4108,6 +4210,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
@@ -4121,6 +4224,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
      "v": "60000"
@@ -4152,7 +4256,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "terran_reaper": {
     "armaments": [
@@ -4370,6 +4475,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
@@ -4383,6 +4489,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
      "v": "60000"
@@ -4414,7 +4521,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
      "v": "120"
-    }
+    },
+    "turreted": false
    },
    "terran_specter": {
     "armaments": [
@@ -4685,6 +4793,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
@@ -4703,6 +4812,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.06
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -4735,11 +4845,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
      "v": "80"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "terran_promotion_cyclone": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4752,6 +4864,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Cyclone",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4761,9 +4874,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_goliathmk2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4776,6 +4891,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Goliath Mk2",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4785,9 +4901,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_harakan": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4800,6 +4918,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Harakan",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4809,9 +4928,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_madcap": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4824,6 +4945,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Madcap",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4832,9 +4954,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_matador": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4847,6 +4971,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Matador",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4855,9 +4980,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_phobos": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4870,6 +4997,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Phobos",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4879,9 +5007,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_pythean": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4894,6 +5024,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Pythean",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4903,9 +5034,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_raven": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4918,6 +5051,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Raven",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4927,9 +5061,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_spectreandmedivac": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4942,6 +5078,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Spectre and Medivac",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4951,9 +5088,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_sundog": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4966,6 +5105,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Sundog",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4974,9 +5114,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_warhound": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4989,6 +5131,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Warhound",
     "prerequisites": [
      "~terran_commandcenter",
@@ -4998,9 +5141,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "terran_promotion_wyvern": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5013,6 +5158,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Wyvern",
     "prerequisites": [
      "~terran_commandcenter",
@@ -5022,11 +5168,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "terran_upgrade_advancedsiegemode": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5043,6 +5191,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Advanced Siege Mode",
     "prerequisites": [
      "~terran_sciencefacility",
@@ -5050,9 +5199,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_cloakupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5069,6 +5220,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Cloak Upgrade",
     "prerequisites": [
      "~terran_sciencefacility",
@@ -5076,9 +5228,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_infantryarmorlevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5095,6 +5249,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Infantry Armor Level 1",
     "prerequisites": [
      "~terran_engineeringbay",
@@ -5102,9 +5257,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_infantryarmorlevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5121,6 +5278,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Infantry Armor Level 2",
     "prerequisites": [
      "~terran_sciencefacility",
@@ -5129,9 +5287,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_infantryweaponslevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5148,6 +5308,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Infantry Weapons Level 1",
     "prerequisites": [
      "~terran_engineeringbay",
@@ -5155,9 +5316,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_infantryweaponslevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5174,6 +5337,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Infantry Weapons Level 2",
     "prerequisites": [
      "~terran_sciencefacility",
@@ -5182,9 +5346,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_shipplatinglevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5201,6 +5367,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ship Plating Level 1",
     "prerequisites": [
      "~terran_armory",
@@ -5208,9 +5375,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_shipplatinglevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5227,6 +5396,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ship Plating Level 2",
     "prerequisites": [
      "~terran_sciencefacility",
@@ -5235,9 +5405,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_shipweaponslevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5254,6 +5426,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ship Weapons Level 1",
     "prerequisites": [
      "~terran_armory",
@@ -5261,9 +5434,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_shipweaponslevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5280,6 +5455,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ship Weapons Level 2",
     "prerequisites": [
      "~terran_sciencefacility",
@@ -5288,9 +5464,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_stimpack": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5307,6 +5485,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Stim Pack",
     "prerequisites": [
      "~terran_academy",
@@ -5314,9 +5493,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_u238shells": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5333,6 +5514,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "U-238 Shells",
     "prerequisites": [
      "~terran_academy",
@@ -5340,9 +5522,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_upgradesupplydepotlevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5359,6 +5543,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Upgrade Supply Depot Level 1",
     "prerequisites": [
      "~terran_engineeringbay",
@@ -5366,9 +5551,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_upgradesupplydepotlevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5385,6 +5572,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Upgrade Supply Depot Level 2",
     "prerequisites": [
      "~terran_armory",
@@ -5393,9 +5581,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_vehicleplatinglevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5412,6 +5602,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Vehicle Plating Level 1",
     "prerequisites": [
      "~terran_armory",
@@ -5419,9 +5610,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_vehicleplatinglevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5438,6 +5631,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Vehicle Plating Level 2",
     "prerequisites": [
      "~terran_sciencefacility",
@@ -5446,9 +5640,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_vehicleweaponslevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5465,6 +5661,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Vehicle Weapons Level 1",
     "prerequisites": [
      "~terran_armory",
@@ -5472,9 +5669,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_vehicleweaponslevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5491,6 +5690,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Vehicle Weapons Level 2",
     "prerequisites": [
      "~terran_sciencefacility",
@@ -5499,9 +5699,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "terran_upgrade_yamatocannonandtacticaljumpupgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5518,6 +5720,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Yamato Cannon and Tactical Jump Upgrade",
     "prerequisites": [
      "~terran_sciencefacility",
@@ -5525,7 +5728,8 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -5598,6 +5802,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
@@ -5611,6 +5816,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "90000"
@@ -5651,7 +5857,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "23"
-    }
+    },
+    "turreted": true
    },
    "terran_goliath": {
     "armaments": [
@@ -5808,6 +6015,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
@@ -5826,6 +6034,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.33
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -5866,7 +6075,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    },
    "terran_goliathmk2": {
     "armaments": [
@@ -6083,6 +6293,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
@@ -6101,6 +6312,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.33
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "175000"
@@ -6141,7 +6353,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "terran_matador": {
     "armaments": [
@@ -6220,6 +6433,7 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
@@ -6233,6 +6447,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -6273,13 +6488,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "terran_mobilecommandcenter": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -6297,6 +6514,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -6336,7 +6554,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "terran_scv": {
     "armaments": [
@@ -6410,6 +6629,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -6427,6 +6647,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "45000"
@@ -6470,7 +6691,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "terran_siegetank": {
     "armaments": [
@@ -6650,6 +6872,7 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurretedCharged",
     "buildable": true,
     "charge_up": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#AttackTurretedCharged",
@@ -6668,6 +6891,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
@@ -6707,7 +6931,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "terran_vulture": {
     "armaments": [
@@ -6776,6 +7001,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
@@ -6789,6 +7015,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -6828,7 +7055,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "terran_warhound": {
     "armaments": [
@@ -6944,6 +7172,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
@@ -6957,6 +7186,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "300000"
@@ -6997,7 +7227,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": false
    }
   }
  }

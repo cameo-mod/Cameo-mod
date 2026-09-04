@@ -79,6 +79,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -96,6 +97,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
      "v": "225000"
@@ -143,7 +145,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "protoss_carrier": {
     "armaments": [
@@ -168,6 +171,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Valued.Cost",
@@ -181,6 +185,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
      "v": "300000"
@@ -228,7 +233,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": false
    },
    "protoss_corsair": {
     "armaments": [
@@ -335,6 +341,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Valued.Cost",
@@ -348,6 +355,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
@@ -395,7 +403,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": false
    },
    "protoss_epigraph": {
     "armaments": [
@@ -618,6 +627,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Valued.Cost",
@@ -636,6 +646,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
      "v": "200000"
@@ -684,7 +695,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "protoss_gladius": {
     "armaments": [
@@ -797,6 +809,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Valued.Cost",
@@ -815,6 +828,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -863,13 +877,15 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": false
    },
    "protoss_observer": {
     "armor": {
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Valued.Cost",
@@ -883,6 +899,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
      "v": "12500"
@@ -930,7 +947,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "protoss_scout": {
     "armaments": [
@@ -1057,6 +1075,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Valued.Cost",
@@ -1070,6 +1089,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
      "v": "75000"
@@ -1118,13 +1138,15 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "protoss_shuttle": {
     "armor": {
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Valued.Cost",
@@ -1138,6 +1160,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -1185,7 +1208,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "protoss_starshipsovereign": {
     "armaments": [
@@ -1265,6 +1289,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -1287,6 +1312,7 @@
      "trait": "FirepowerMultiplier@Cryo",
      "v": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
      "v": "750000"
@@ -1339,7 +1365,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "8"
-    }
+    },
+    "turreted": false
    },
    "protoss_voidray": {
     "armaments": [
@@ -1419,6 +1446,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Valued.Cost",
@@ -1437,6 +1465,7 @@
      "trait": "FirepowerMultiplier@Cryo",
      "v": 0.09
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
      "v": "70000"
@@ -1485,7 +1514,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -1494,6 +1524,7 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "750"
@@ -1510,6 +1541,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Health.HP",
      "v": "250000"
@@ -1551,13 +1583,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "protoss_assimilator": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1574,6 +1608,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1613,13 +1648,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "protoss_citadelofadun": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "625"
@@ -1636,6 +1673,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -1676,13 +1714,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "protoss_cyberneticscore": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1699,6 +1739,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Health.HP",
      "v": "150000"
@@ -1739,13 +1780,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "protoss_fleetbeacon": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1762,6 +1805,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1803,13 +1847,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "protoss_forge": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1826,6 +1872,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Health.HP",
      "v": "150000"
@@ -1865,13 +1912,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "protoss_gateway": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1888,6 +1937,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1927,13 +1977,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "protoss_nexus": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1950,6 +2002,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1989,13 +2042,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "protoss_observatory": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -2012,6 +2067,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Health.HP",
      "v": "250000"
@@ -2052,13 +2108,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "protoss_pylon": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Valued.Cost",
@@ -2071,6 +2129,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Health.HP",
      "v": "250000"
@@ -2110,13 +2169,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "protoss_roboticsfacility": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -2133,6 +2194,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -2173,13 +2235,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "protoss_roboticssupportbay": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "625"
@@ -2196,6 +2260,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -2236,7 +2301,8 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "protoss_shieldbattery": {
     "armaments": [
@@ -2282,6 +2348,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Valued.Cost",
@@ -2294,6 +2361,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Health.HP",
      "v": "100000"
@@ -2334,13 +2402,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "10000"
-    }
+    },
+    "turreted": true
    },
    "protoss_stargate": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -2357,6 +2427,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -2397,13 +2468,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "protoss_templararchives": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "750"
@@ -2420,6 +2493,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Health.HP",
      "v": "250000"
@@ -2461,9 +2535,11 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "protoss_vespenegascollector": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml#Valued.Cost",
@@ -2476,6 +2552,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Vespene Gas Collector",
     "prerequisites": [
      "~protoss_nexus",
@@ -2483,7 +2560,8 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    }
   },
   "defenses": {
@@ -2546,6 +2624,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackPopupTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/defenses.yaml#Valued.Cost",
@@ -2559,6 +2638,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.325
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/defenses.yaml#Health.HP",
      "v": "200000"
@@ -2599,7 +2679,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "8228"
-    }
+    },
+    "turreted": true
    }
   },
   "infantry": {
@@ -2685,6 +2766,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Valued.Cost",
@@ -2698,6 +2780,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -2737,7 +2820,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Mobile.Speed",
      "v": "70"
-    }
+    },
+    "turreted": false
    },
    "protoss_amaranth": {
     "armaments": [
@@ -2773,6 +2857,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Valued.Cost",
@@ -2786,6 +2871,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Health.HP",
      "v": "70000"
@@ -2826,7 +2912,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Mobile.Speed",
      "v": "70"
-    }
+    },
+    "turreted": false
    },
    "protoss_darktemplar": {
     "armaments": [
@@ -2862,6 +2949,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Valued.Cost",
@@ -2875,6 +2963,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -2915,7 +3004,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "protoss_hightemplar": {
     "armaments": [
@@ -3218,6 +3308,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Valued.Cost",
@@ -3231,6 +3322,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Health.HP",
      "v": "35000"
@@ -3270,7 +3362,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Mobile.Speed",
      "v": "70"
-    }
+    },
+    "turreted": false
    },
    "protoss_legionnaire": {
     "armaments": [
@@ -3306,6 +3399,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Valued.Cost",
@@ -3319,6 +3413,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Health.HP",
      "v": "60000"
@@ -3359,7 +3454,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "protoss_patriarch": {
     "armaments": [
@@ -3519,6 +3615,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3536,6 +3633,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Health.HP",
      "v": "75000"
@@ -3576,7 +3674,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "protoss_zealot": {
     "armaments": [
@@ -3614,6 +3713,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Valued.Cost",
@@ -3627,6 +3727,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -3667,7 +3768,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Mobile.Speed",
      "v": "70"
-    }
+    },
+    "turreted": false
    },
    "protoss_zeratul": {
     "armaments": [
@@ -3703,6 +3805,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3720,6 +3823,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Health.HP",
      "v": "250000"
@@ -3759,11 +3863,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#Mobile.Speed",
      "v": "100"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "protoss_promotion_amaranth": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3776,6 +3882,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Amaranth",
     "prerequisites": [
      "~protoss_nexus",
@@ -3785,9 +3892,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_analogue": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3800,6 +3909,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Analogue",
     "prerequisites": [
      "~protoss_nexus",
@@ -3809,9 +3919,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_atreus": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3824,6 +3936,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Atreus",
     "prerequisites": [
      "~protoss_nexus",
@@ -3833,9 +3946,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_epigraph": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3848,6 +3963,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Epigraph",
     "prerequisites": [
      "~protoss_nexus",
@@ -3856,9 +3972,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_gladius": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3871,6 +3989,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Gladius",
     "prerequisites": [
      "~protoss_nexus",
@@ -3880,9 +3999,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_idol": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3895,6 +4016,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Idol",
     "prerequisites": [
      "~protoss_nexus",
@@ -3904,9 +4026,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_legionnaire": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3919,6 +4043,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Legionnaire",
     "prerequisites": [
      "~protoss_nexus",
@@ -3927,9 +4052,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_manifold": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3942,6 +4069,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Manifold",
     "prerequisites": [
      "~protoss_nexus",
@@ -3951,9 +4079,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_patriarch": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3966,6 +4096,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Patriarch",
     "prerequisites": [
      "~protoss_nexus",
@@ -3975,9 +4106,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_positron": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3990,6 +4123,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Positron",
     "prerequisites": [
      "~protoss_nexus",
@@ -3998,9 +4132,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_starsovereign": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4013,6 +4149,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Star Sovereign",
     "prerequisites": [
      "~protoss_nexus",
@@ -4022,9 +4159,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_promotion_voidray": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4037,6 +4176,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Void Ray",
     "prerequisites": [
      "~protoss_nexus",
@@ -4046,11 +4186,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "protoss_upgrade_airarmorlevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4067,6 +4209,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Air Armor Level 1",
     "prerequisites": [
      "~protoss_cyberneticscore",
@@ -4074,9 +4217,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_airarmorlevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4093,6 +4238,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Air Armor Level 2",
     "prerequisites": [
      "~protoss_fleetbeacon",
@@ -4101,9 +4247,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_airweaponslevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4120,6 +4268,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Air Weapons Level 1",
     "prerequisites": [
      "~protoss_cyberneticscore",
@@ -4127,9 +4276,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_airweaponslevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4146,6 +4297,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Air Weapons Level 2",
     "prerequisites": [
      "~protoss_fleetbeacon",
@@ -4154,9 +4306,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_graviticpropulsion": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4173,6 +4327,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Gravitic Propulsion",
     "prerequisites": [
      "~protoss_roboticssupportbay",
@@ -4180,9 +4335,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_groundarmorlevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4199,6 +4356,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ground Armor Level 1",
     "prerequisites": [
      "~protoss_forge",
@@ -4206,9 +4364,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_groundarmorlevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4225,6 +4385,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ground Armor Level 2",
     "prerequisites": [
      "~protoss_templararchives",
@@ -4233,9 +4394,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_groundweaponslevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4252,6 +4415,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ground Weapons Level 1",
     "prerequisites": [
      "~protoss_forge",
@@ -4259,9 +4423,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_groundweaponslevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4278,6 +4444,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ground Weapons Level 2",
     "prerequisites": [
      "~protoss_templararchives",
@@ -4286,9 +4453,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_plasmashields": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4305,6 +4474,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Plasma Shields",
     "prerequisites": [
      "~protoss_cyberneticscore",
@@ -4312,9 +4482,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_reavercapacity": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4331,15 +4503,18 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Reaver Capacity",
     "prerequisites": [
      "~protoss_roboticssupportbay"
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_resonatingglaves": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4356,6 +4531,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Resonating Glaves",
     "prerequisites": [
      "~protoss_citadelofadun",
@@ -4363,9 +4539,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_singularitycharge": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4382,6 +4560,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Singularity Charge",
     "prerequisites": [
      "~protoss_cyberneticscore",
@@ -4389,9 +4568,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_upgradepylonlevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4408,6 +4589,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Upgrade Pylon Level 1",
     "prerequisites": [
      "~protoss_forge",
@@ -4415,9 +4597,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "protoss_upgrade_upgradepylonlevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4434,6 +4618,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Upgrade Pylon Level 2",
     "prerequisites": [
      "~protoss_cyberneticscore",
@@ -4442,7 +4627,8 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -4518,6 +4704,7 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Valued.Cost",
@@ -4531,6 +4718,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -4579,7 +4767,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "protoss_archon": {
     "armaments": [
@@ -4622,6 +4811,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Valued.Cost",
@@ -4635,6 +4825,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
      "v": "350000"
@@ -4682,7 +4873,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "protoss_atreus": {
     "armaments": [
@@ -4754,6 +4946,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Valued.Cost",
@@ -4767,6 +4960,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
      "v": "250000"
@@ -4815,7 +5009,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "protoss_dragoon": {
     "armaments": [
@@ -4875,6 +5070,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Valued.Cost",
@@ -4893,6 +5089,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -4940,7 +5137,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    },
    "protoss_idol": {
     "armaments": [
@@ -5067,6 +5265,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -5089,6 +5288,7 @@
      "trait": "FirepowerMultiplier@TripleBeam",
      "v": 2.23
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
      "v": "350000"
@@ -5137,7 +5337,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "protoss_manifold": {
     "armaments": [
@@ -5204,6 +5405,7 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Valued.Cost",
@@ -5217,6 +5419,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -5265,13 +5468,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "protoss_mobilenexus": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5289,6 +5494,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -5336,7 +5542,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "protoss_positron": {
     "armaments": [
@@ -5402,6 +5609,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Valued.Cost",
@@ -5420,6 +5628,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -5468,7 +5677,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "48"
-    }
+    },
+    "turreted": false
    },
    "protoss_probe": {
     "armaments": [
@@ -5502,6 +5712,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -5519,6 +5730,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "45000"
@@ -5566,7 +5778,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "protoss_reaver": {
     "armaments": [
@@ -5651,6 +5864,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Valued.Cost",
@@ -5664,6 +5878,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
      "v": "275000"
@@ -5711,7 +5926,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    }
   }
  }

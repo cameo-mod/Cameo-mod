@@ -230,6 +230,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
@@ -243,6 +244,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "800000"
@@ -284,7 +286,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "6"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_migbomber": {
     "armaments": [
@@ -900,6 +903,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
@@ -913,6 +917,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "57500"
@@ -953,7 +958,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "14"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_siegechopper": {
     "armaments": [
@@ -1320,6 +1326,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
@@ -1338,6 +1345,7 @@
      "trait": "FirepowerMultiplier@FirerateCompensation",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "55000"
@@ -1378,7 +1386,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": true
    },
    "ra2_soviets_transportkirov": {
     "armaments": [
@@ -1415,6 +1424,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
@@ -1428,6 +1438,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "265000"
@@ -1468,7 +1479,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "7"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -1477,6 +1489,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -1493,6 +1506,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Health.HP",
      "v": "250000"
@@ -1525,13 +1539,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "7c0"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1548,6 +1564,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1580,13 +1597,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_battlelab": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1603,6 +1622,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1635,13 +1655,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1654,6 +1676,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1685,13 +1708,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_industrialplant": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1712,6 +1737,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1744,13 +1770,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_nuclearreactor": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Valued.Cost",
@@ -1763,6 +1791,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Health.HP",
      "v": "400000"
@@ -1795,13 +1824,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_orerefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1818,6 +1849,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1850,13 +1882,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_radar": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1873,6 +1907,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1905,13 +1940,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_servicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1928,6 +1965,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1960,13 +1998,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_teslareactor": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Valued.Cost",
@@ -1979,6 +2019,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Health.HP",
      "v": "150000"
@@ -2010,13 +2051,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_warfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -2033,6 +2076,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -2065,7 +2109,8 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -2074,6 +2119,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackOpenTopped",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
@@ -2087,6 +2133,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Health.HP",
      "v": "80000"
@@ -2119,13 +2166,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    },
    "ra2_soviets_concretebarrier": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
@@ -2139,6 +2188,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -2150,7 +2200,8 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_flakcannon": {
     "armaments": [
@@ -2184,6 +2235,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
@@ -2197,6 +2249,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.225
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Health.HP",
      "v": "60000"
@@ -2229,13 +2282,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "12936"
-    }
+    },
+    "turreted": true
    },
    "ra2_soviets_ironcurtain": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -2253,6 +2308,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -2287,13 +2343,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_nuclearmissilesilo": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -2311,6 +2369,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -2345,7 +2404,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_sentrygun": {
     "armaments": [
@@ -2384,6 +2444,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
@@ -2397,6 +2458,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Health.HP",
      "v": "57000"
@@ -2429,7 +2491,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6577"
-    }
+    },
+    "turreted": true
    },
    "ra2_soviets_teslacoil": {
     "armaments": [
@@ -2640,6 +2703,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTesla",
     "buildable": true,
     "charge_up": {
      "burst": 1,
@@ -2660,6 +2724,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Health.HP",
      "v": "120000"
@@ -2692,7 +2757,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "10000"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -2724,6 +2790,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Armor.Type",
      "v": "None"
     },
+    "attack_trait": "AttackLeap",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
@@ -2737,6 +2804,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -2768,7 +2836,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
      "v": "100"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_boris": {
     "armaments": [
@@ -2946,6 +3015,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2963,6 +3033,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "90000"
@@ -2995,7 +3066,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_conscript": {
     "armaments": [
@@ -3087,6 +3159,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
@@ -3105,6 +3178,7 @@
      "trait": "FirepowerMultiplier@ra2_soviets_conscript",
      "v": 0.19
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "26000"
@@ -3140,7 +3214,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
      "v": "58"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_crazyivan": {
     "armaments": [
@@ -3179,6 +3254,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
@@ -3192,6 +3268,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "10000"
@@ -3223,7 +3300,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
      "v": "100"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_desolator": {
     "armaments": [
@@ -3316,6 +3394,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
@@ -3329,6 +3408,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -3361,7 +3441,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
      "v": "59"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_engineer": {
     "armaments": [
@@ -3401,6 +3482,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
@@ -3414,6 +3496,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -3453,7 +3536,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_flaktrooper": {
     "armaments": [
@@ -3686,6 +3770,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
@@ -3704,6 +3789,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.07
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "10000"
@@ -3739,7 +3825,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
      "v": "44"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_teslatrooper": {
     "armaments": [
@@ -3974,6 +4061,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
@@ -3987,6 +4075,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "48000"
@@ -4018,7 +4107,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
      "v": "38"
-    }
+    },
+    "turreted": false
    }
   },
   "naval": {
@@ -4103,6 +4193,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Valued.Cost",
@@ -4116,6 +4207,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Health.HP",
      "v": "25000"
@@ -4155,11 +4247,13 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "48"
-    }
+    },
+    "turreted": false
    }
   },
   "upgrades": {
    "ra2_soviets_doctrine_conscription": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4176,6 +4270,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Conscription",
     "prerequisites": [
      "~ra2_soviets_radar",
@@ -4184,9 +4279,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_doctrine_firemunitions": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4203,6 +4300,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Fire Munitions",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4212,9 +4310,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_doctrine_harshenvironmentinfantryconditioning": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4231,6 +4331,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Harsh Environment Infantry Conditioning",
     "prerequisites": [
      "~ra2_soviets_radar",
@@ -4238,9 +4339,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_doctrine_heavyarmorplatings": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4257,6 +4360,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Armor Platings",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4265,9 +4369,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_doctrine_nuclearmunitions": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4284,6 +4390,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Nuclear Munitions",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4293,9 +4400,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_doctrine_reactivearmor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4312,6 +4421,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Reactive Armor",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4320,9 +4430,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_doctrine_shocktroopertraining": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4339,6 +4451,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Shock Trooper Training",
     "prerequisites": [
      "~ra2_soviets_radar",
@@ -4346,9 +4459,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_doctrine_tesladischargearmor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4365,6 +4480,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Tesla Discharge Armor",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4373,9 +4489,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_doctrine_teslamunitions": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4392,6 +4510,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Tesla Munitions",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4401,9 +4520,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_upgrade_gastroburners": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4420,6 +4541,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Gastroburners",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4428,9 +4550,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_upgrade_grindertanktreads": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4447,6 +4571,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Grinder Tank Treads",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4454,9 +4579,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_upgrade_heavycannons": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4473,6 +4600,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Cannons",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4480,9 +4608,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_upgrade_kirovarmorplatings": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4499,6 +4629,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Kirov Armor Platings",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4507,9 +4638,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_upgrade_kirovatomicbombs": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4526,6 +4659,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Kirov Atomic Bombs",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4535,9 +4669,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_upgrade_terrordronesurprise": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4554,6 +4690,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Terror Drone Surprise",
     "prerequisites": [
      "~ra2_soviets_radar",
@@ -4561,9 +4698,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_upgrade_teslacoilchargers": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4580,6 +4719,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Tesla Coil Chargers",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4587,9 +4727,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_soviets_upgrade_teslaoverload": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4606,6 +4748,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Tesla Overload",
     "prerequisites": [
      "~ra2_soviets_battlelab",
@@ -4613,7 +4756,8 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -5120,6 +5264,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
@@ -5138,6 +5283,7 @@
      "trait": "FirepowerMultiplier@ra2_soviets_doctrine_nuclearmunitions",
      "v": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "350000"
@@ -5178,7 +5324,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "11"
-    }
+    },
+    "turreted": true
    },
    "ra2_soviets_flaktrack": {
     "armaments": [
@@ -5383,6 +5530,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
@@ -5401,6 +5549,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "45000"
@@ -5440,13 +5589,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "19"
-    }
+    },
+    "turreted": true
    },
    "ra2_soviets_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5464,6 +5615,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -5504,7 +5656,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_rhinoheavytank": {
     "armaments": [
@@ -5748,6 +5901,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
@@ -5761,6 +5915,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "130000"
@@ -5800,7 +5955,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "17"
-    }
+    },
+    "turreted": true
    },
    "ra2_soviets_terrordrone": {
     "armaments": [
@@ -5855,6 +6011,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackInfectCA",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
@@ -5868,6 +6025,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "10000"
@@ -5907,7 +6065,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_teslatank": {
     "armaments": [
@@ -6023,6 +6182,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
@@ -6036,6 +6196,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -6075,7 +6236,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "ra2_soviets_v3rocketlauncher": {
     "armaments": [
@@ -6116,6 +6278,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
@@ -6134,6 +6297,7 @@
      "trait": "FirepowerMultiplier@RANK-1",
      "v": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "37500"
@@ -6173,7 +6337,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "ra2_soviets_warminer": {
     "armaments": [
@@ -6210,6 +6375,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -6227,6 +6393,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -6270,7 +6437,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    }
   }
  }

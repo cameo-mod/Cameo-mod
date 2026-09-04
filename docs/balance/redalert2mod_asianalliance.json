@@ -95,6 +95,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Valued.Cost",
@@ -107,6 +108,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Health.HP",
      "v": "90000"
@@ -147,7 +149,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "14"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_pelican": {
     "armaments": [
@@ -285,6 +288,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Valued.Cost",
@@ -298,6 +302,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Health.HP",
      "v": "40000"
@@ -337,7 +342,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_phoenix": {
     "armaments": [
@@ -443,6 +449,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Valued.Cost",
@@ -456,6 +463,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Health.HP",
      "v": "90000"
@@ -496,7 +504,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "bomber_minebomb.asian": {
     "armaments": [
@@ -519,6 +528,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": "AttackBomber",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Valued.Cost",
@@ -532,6 +542,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -560,7 +571,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": false
    },
    "bomber_minebomb2.asian": {
     "armaments": [
@@ -583,6 +595,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackBomber",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -596,6 +609,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "100000"
@@ -624,7 +638,8 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "25"
-    }
+    },
+    "turreted": false
    },
    "kami.asian": {
     "armaments": [
@@ -647,6 +662,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Valued.Cost",
@@ -660,6 +676,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Health.HP",
      "v": "7500"
@@ -692,7 +709,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "kami_asdf.asian": {
     "armaments": [
@@ -715,6 +733,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Valued.Cost",
@@ -728,6 +747,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "7500"
@@ -760,7 +780,8 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "kami_chemical.asian": {
     "armaments": [
@@ -828,6 +849,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Valued.Cost",
@@ -841,6 +863,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Health.HP",
      "v": "15000"
@@ -873,7 +896,8 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "16"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -882,6 +906,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -898,6 +923,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -932,13 +958,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianairforcecommand": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -955,6 +983,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -987,13 +1016,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianbarracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1010,6 +1041,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1042,13 +1074,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianbattlelab": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1065,6 +1099,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1097,13 +1132,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianconstructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1116,6 +1153,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1147,13 +1185,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianorerefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1170,6 +1210,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1202,13 +1243,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianpetrolplant": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Valued.Cost",
@@ -1221,6 +1264,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "175000"
@@ -1252,13 +1296,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianradar": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1275,6 +1321,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1307,7 +1354,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asiansentryflamer": {
     "armaments": [
@@ -1345,6 +1393,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Valued.Cost",
@@ -1357,6 +1406,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "71000"
@@ -1389,13 +1439,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_asianservicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1412,6 +1464,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1444,13 +1497,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianwarfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1467,6 +1522,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1499,13 +1555,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_chaosstorminductor": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1522,6 +1580,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1556,7 +1615,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_chaostower": {
     "armaments": [
@@ -1579,6 +1639,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1595,6 +1656,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "100000"
@@ -1627,13 +1689,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5000"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_concretebarrier": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Valued.Cost",
@@ -1646,6 +1710,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "100000"
@@ -1657,7 +1722,8 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_hyperionprojector": {
     "armaments": [
@@ -1701,6 +1767,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Valued.Cost",
@@ -1713,6 +1780,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "100000"
@@ -1745,13 +1813,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "9000"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_militaryacademy": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1772,6 +1842,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1805,7 +1876,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_plasmacannon": {
     "armaments": [
@@ -1893,6 +1965,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Valued.Cost",
@@ -1905,6 +1978,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "300000"
@@ -1937,7 +2011,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "14000"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_pulsar": {
     "armaments": [
@@ -2083,6 +2158,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Valued.Cost",
@@ -2095,6 +2171,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "80000"
@@ -2127,7 +2204,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "14000"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_railtower": {
     "armaments": [
@@ -2171,6 +2249,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTesla",
     "buildable": true,
     "charge_up": {
      "burst": 5,
@@ -2190,6 +2269,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "125000"
@@ -2222,7 +2302,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "9600"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_spitfire": {
     "armaments": [
@@ -2275,6 +2356,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Valued.Cost",
@@ -2287,6 +2369,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "100000"
@@ -2319,13 +2402,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "14000"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_tankreactor": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Valued.Cost",
@@ -2338,6 +2423,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "350000"
@@ -2370,7 +2456,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "cgpnch.asian": {
     "armaments": [
@@ -2513,6 +2600,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Valued.Cost",
@@ -2525,6 +2613,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Health.HP",
      "v": "140000"
@@ -2556,13 +2645,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "12000"
-    }
+    },
+    "turreted": true
    },
    "cgyard.asian": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -2579,6 +2670,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -2612,7 +2704,8 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -2679,6 +2772,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Armor.Type",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -2692,6 +2786,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "27000"
@@ -2723,7 +2818,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "108"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asdf": {
     "armaments": [
@@ -2892,6 +2988,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -2910,6 +3007,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.09
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "39000"
@@ -2943,7 +3041,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "58"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asiancommando": {
     "armaments": [
@@ -3395,6 +3494,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3412,6 +3512,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -3444,7 +3545,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianflametrooper": {
     "armaments": [
@@ -3631,6 +3733,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -3649,6 +3752,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "26000"
@@ -3681,7 +3785,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "53"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianmilitia": {
     "armaments": [
@@ -3922,6 +4027,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -3940,6 +4046,7 @@
      "trait": "FirepowerMultiplier@asianalliance_asianmilitia",
      "v": 0.83
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "24000"
@@ -3975,7 +4082,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "53"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asiantankkiller": {
     "armaments": [
@@ -4200,6 +4308,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -4213,6 +4322,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "17000"
@@ -4248,7 +4358,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "51"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_engineer": {
     "armaments": [
@@ -4288,6 +4399,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -4301,6 +4413,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -4340,7 +4453,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_fanatic": {
     "armaments": [
@@ -4534,6 +4648,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -4552,6 +4667,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "100000"
@@ -4584,7 +4700,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_japanesesamurai": {
     "armaments": [
@@ -4677,6 +4794,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -4690,6 +4808,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -4723,7 +4842,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "72"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_plasmatrooper": {
     "armaments": [
@@ -5066,6 +5186,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -5079,6 +5200,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "64000"
@@ -5112,7 +5234,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "42"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_shinobi": {
     "armaments": [
@@ -5237,6 +5360,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -5250,6 +5374,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -5282,7 +5407,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_veteranarcher": {
     "armaments": [
@@ -5631,6 +5757,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
@@ -5644,6 +5771,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
      "v": "14000"
@@ -5681,7 +5809,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
      "v": "68"
-    }
+    },
+    "turreted": false
    }
   },
   "naval": {
@@ -5917,6 +6046,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Valued.Cost",
@@ -5930,6 +6060,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Health.HP",
      "v": "90000"
@@ -5969,7 +6100,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "36"
-    }
+    },
+    "turreted": false
    },
    "karrier.asian": {
     "armaments": [
@@ -5992,6 +6124,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Valued.Cost",
@@ -6005,6 +6138,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Health.HP",
      "v": "175000"
@@ -6046,7 +6180,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "11"
-    }
+    },
+    "turreted": false
    },
    "ksub.asian": {
     "armaments": [
@@ -6068,6 +6203,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Valued.Cost",
@@ -6081,6 +6217,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Health.HP",
      "v": "25000"
@@ -6120,7 +6257,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "50"
-    }
+    },
+    "turreted": true
    },
    "lsub.asian": {
     "armaments": [
@@ -6160,6 +6298,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Valued.Cost",
@@ -6173,6 +6312,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Health.HP",
      "v": "240000"
@@ -6213,7 +6353,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": true
    },
    "panth.asian": {
     "armaments": [
@@ -6279,6 +6420,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Valued.Cost",
@@ -6292,6 +6434,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Health.HP",
      "v": "100000"
@@ -6331,7 +6474,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    },
    "quasfrig.asian": {
     "armaments": [
@@ -6615,6 +6759,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Valued.Cost",
@@ -6628,6 +6773,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Health.HP",
      "v": "137500"
@@ -6668,7 +6814,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "tsun.asian": {
     "armaments": [
@@ -6691,6 +6838,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Valued.Cost",
@@ -6704,6 +6852,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Health.HP",
      "v": "275000"
@@ -6745,11 +6894,13 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "13"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "asianalliance_promotion_asdf": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6762,6 +6913,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock ASDF",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -6771,9 +6923,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_fanatic": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6786,6 +6940,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Fanatic",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -6794,9 +6949,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_flametank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6809,6 +6966,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Flame Tank",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -6817,9 +6975,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_heavyrailguntank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6832,6 +6992,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Heavy Railgun Tank",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -6841,9 +7002,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_howitzer": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6856,6 +7019,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Howitzer",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -6865,9 +7029,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_mlrs": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6880,6 +7046,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock MLRS",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -6889,9 +7056,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_plasmatank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6904,6 +7073,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Plasma Tank",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -6913,9 +7083,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_plasmatrooper": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6928,6 +7100,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Plasma Trooper",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -6937,9 +7110,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_pulverizermecha": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6952,6 +7127,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Pulverizer Mecha",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -6961,9 +7137,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_samurai": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6976,6 +7154,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Samurai",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -6984,9 +7163,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_veteranarchers": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6999,6 +7180,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Veteran Archers",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -7008,9 +7190,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_promotion_warturtle": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7023,6 +7207,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock War Turtle",
     "prerequisites": [
      "~asianalliance_asianconstructionyard",
@@ -7032,11 +7217,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "asianalliance_doctrine_asianphalanx": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7053,6 +7240,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Asian Phalanx",
     "prerequisites": [
      "~asianalliance_asianradar",
@@ -7060,9 +7248,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_doctrine_heavypulverizerweapons": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7079,6 +7269,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Pulverizer Weapons",
     "prerequisites": [
      "~asianalliance_asianradar",
@@ -7086,9 +7277,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_doctrine_modernizedinfantryequipment": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7105,6 +7298,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Modernized Infantry Equipment",
     "prerequisites": [
      "~asianalliance_asianradar",
@@ -7112,9 +7306,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_upgrade_asiandiplomacy": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7131,6 +7327,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Asian Diplomacy",
     "prerequisites": [
      "~asianalliance_asianbattlelab",
@@ -7139,9 +7336,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_upgrade_banzaimode": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7158,6 +7357,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Banzai Mode",
     "prerequisites": [
      "~asianalliance_asianbattlelab",
@@ -7166,9 +7366,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_upgrade_celestialpower": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7185,6 +7387,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Celestial Power",
     "prerequisites": [
      "~asianalliance_asianbattlelab",
@@ -7192,9 +7395,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_upgrade_chaosbombs": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7211,6 +7416,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Chaos Bombs",
     "prerequisites": [
      "~asianalliance_asianradar",
@@ -7220,9 +7426,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_upgrade_clusterbombs": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7239,6 +7447,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Cluster Bombs",
     "prerequisites": [
      "~asianalliance_asianradar",
@@ -7246,9 +7455,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_upgrade_dragonfire": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7265,6 +7476,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Dragon Fire",
     "prerequisites": [
      "~asianalliance_asianbattlelab",
@@ -7272,9 +7484,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_upgrade_massparadrop": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7291,6 +7505,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Mass Paradrop",
     "prerequisites": [
      "~asianalliance_asianradar",
@@ -7298,9 +7513,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "asianalliance_upgrade_wayofthedragon": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7317,6 +7534,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Way of the Dragon",
     "prerequisites": [
      "~asianalliance_asianbattlelab",
@@ -7325,9 +7543,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "cgcnst_infiltrated.asian": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7340,9 +7560,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Stolen Asian Buildings Plans"
+    "gatling_spinup": false,
+    "name": "Stolen Asian Buildings Plans",
+    "turreted": false
    },
    "up_dragonway_proxy_actor.asian": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7355,9 +7578,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Way of the Dragon"
+    "gatling_spinup": false,
+    "name": "Way of the Dragon",
+    "turreted": false
    },
    "up_team_diplomacy_proxy_actor.asian": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7370,9 +7596,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Asian Diplomacy"
+    "gatling_spinup": false,
+    "name": "Asian Diplomacy",
+    "turreted": false
    },
    "up_tsunami.asian": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7389,6 +7618,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Tsunami Carrier Upgrade",
     "prerequisites": [
      "~asianalliance_militaryacademy",
@@ -7397,7 +7627,8 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -7464,6 +7695,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -7482,6 +7714,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "85000"
@@ -7522,13 +7755,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "34"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_asianmobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -7546,6 +7781,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -7586,13 +7822,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_dragonfly": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackOpenTopped",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -7606,6 +7844,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "32500"
@@ -7645,13 +7884,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_droneminer": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Armor.Type",
      "v": "Plate"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Buildable.BuildDuration",
      "v": "125"
@@ -7669,6 +7910,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -7712,7 +7954,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_heavyrailguntank": {
     "armaments": [
@@ -7789,6 +8032,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -7802,6 +8046,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "250000"
@@ -7843,7 +8088,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_howitzer": {
     "armaments": [
@@ -7911,6 +8157,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -7924,6 +8171,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -7965,7 +8213,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_lynxtank": {
     "armaments": [
@@ -8168,6 +8417,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -8181,6 +8431,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "120000"
@@ -8220,7 +8471,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_oiltruck": {
     "armaments": [
@@ -8242,6 +8494,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -8255,6 +8508,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "20000"
@@ -8296,7 +8550,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_pulverizer": {
     "armaments": [
@@ -8370,6 +8625,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -8383,6 +8639,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "85000"
@@ -8424,7 +8681,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "13"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_pulverizermecha": {
     "armaments": [
@@ -8520,6 +8778,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -8533,6 +8792,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "285000"
@@ -8574,7 +8834,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "22"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_quasar": {
     "armaments": [
@@ -8850,6 +9111,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -8863,6 +9125,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "55000"
@@ -8902,7 +9165,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_railguntank": {
     "armaments": [
@@ -8982,6 +9246,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -8995,6 +9260,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "160000"
@@ -9036,7 +9302,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_type89mlrs": {
     "armaments": [
@@ -9090,6 +9357,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -9103,6 +9371,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -9144,7 +9413,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "asianalliance_viper": {
     "armaments": [
@@ -9283,6 +9553,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -9296,6 +9567,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -9336,7 +9608,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "asianalliance_warturtle": {
     "armaments": [
@@ -9374,6 +9647,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -9387,6 +9661,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "250000"
@@ -9428,7 +9703,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "ptnk.asian": {
     "armaments": [
@@ -9593,6 +9869,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
@@ -9606,6 +9883,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
      "v": "130000"
@@ -9647,7 +9925,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": true
    }
   }
  }

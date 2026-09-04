@@ -9,6 +9,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Valued.Cost",
@@ -22,6 +23,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -54,7 +56,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -63,6 +66,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
@@ -75,6 +79,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
      "v": "100000"
@@ -86,13 +91,15 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "FENC": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
@@ -105,6 +112,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
      "v": "25000"
@@ -116,13 +124,15 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "NUK2": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
@@ -135,6 +145,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
      "v": "300000"
@@ -167,13 +178,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "NUKE": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
@@ -186,6 +199,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
      "v": "150000"
@@ -217,13 +231,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "SBAG": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
@@ -236,6 +252,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
      "v": "50000"
@@ -247,13 +264,15 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "SILO": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
@@ -266,6 +285,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
      "v": "100000"
@@ -298,13 +318,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "cycl": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
@@ -317,6 +339,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
      "v": "75000"
@@ -328,7 +351,8 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    }
   },
   "infantry": {
@@ -370,6 +394,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml#Valued.Cost",
@@ -383,6 +408,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -422,7 +448,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    }
   }
  }

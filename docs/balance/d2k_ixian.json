@@ -38,6 +38,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
@@ -50,6 +51,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
@@ -90,7 +92,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    },
    "ixian_airdrone": {
     "armaments": [
@@ -274,6 +277,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
@@ -287,6 +291,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
      "v": "62500"
@@ -330,7 +335,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "11"
-    }
+    },
+    "turreted": false
    },
    "ixian_empbomber": {
     "armaments": [
@@ -386,6 +392,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
@@ -399,6 +406,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
      "v": "111000"
@@ -444,7 +452,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": false
    },
    "ixian_farasha": {
     "armaments": [
@@ -580,6 +589,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -597,6 +607,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
      "v": "250000"
@@ -646,7 +657,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "8"
-    }
+    },
+    "turreted": true
    },
    "ixian_railgundrone": {
     "armaments": [
@@ -715,6 +727,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
@@ -728,6 +741,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
      "v": "30000"
@@ -772,7 +786,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "34"
-    }
+    },
+    "turreted": false
    },
    "ixian_resonancedrone": {
     "armaments": [
@@ -820,6 +835,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
@@ -833,6 +849,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
@@ -878,7 +895,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -887,6 +905,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -903,6 +922,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -935,13 +955,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "ixian_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -958,6 +980,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -990,13 +1013,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "ixian_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1009,6 +1034,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1040,7 +1066,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ixian_gunturret": {
     "armaments": [
@@ -1083,6 +1110,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Valued.Cost",
@@ -1095,6 +1123,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Health.HP",
      "v": "125000"
@@ -1127,13 +1156,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "7979"
-    }
+    },
+    "turreted": true
    },
    "ixian_hightechfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -1150,6 +1181,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1182,13 +1214,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "ixian_ixresearchcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1205,6 +1239,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1237,13 +1272,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ixian_launchpad": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -1260,6 +1297,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1292,7 +1330,8 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "ixian_machinegunturret": {
     "armaments": [
@@ -1368,6 +1407,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Valued.Cost",
@@ -1380,6 +1420,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Health.HP",
      "v": "75000"
@@ -1412,13 +1453,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "7394"
-    }
+    },
+    "turreted": true
    },
    "ixian_munitionssilo": {
     "armor": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Valued.Cost",
@@ -1431,6 +1474,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Health.HP",
      "v": "50000"
@@ -1463,13 +1507,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ixian_outpost": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1486,6 +1532,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1518,13 +1565,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ixian_refineryixian": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1541,6 +1590,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1573,13 +1623,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "ixian_repairpad": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1596,6 +1648,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1628,7 +1681,8 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "ixian_rocketturret": {
     "armaments": [
@@ -1667,6 +1721,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Valued.Cost",
@@ -1679,6 +1734,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Health.HP",
      "v": "150000"
@@ -1711,13 +1767,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "10684"
-    }
+    },
+    "turreted": true
    },
    "ixian_starport": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1738,6 +1796,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1771,13 +1830,15 @@
     "sight": {
      "src": "inherited",
      "v": "3c768"
-    }
+    },
+    "turreted": false
    },
    "ixian_storagesilo": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1790,6 +1851,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -1822,7 +1884,8 @@
     "sight": {
      "src": "inherited",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ixian_stormlasher": {
     "armaments": [
@@ -1857,6 +1920,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Valued.Cost",
@@ -1870,6 +1934,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.325
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -1907,13 +1972,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "11384"
-    }
+    },
+    "turreted": true
    },
    "ixian_supercomputer": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1930,6 +1997,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1964,13 +2032,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ixian_windtrap": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1983,6 +2053,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -2014,7 +2085,8 @@
     "sight": {
      "src": "inherited",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -2353,6 +2425,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
@@ -2366,6 +2439,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "32000"
@@ -2402,7 +2476,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "ixian_lightinfantry": {
     "armaments": [
@@ -2543,6 +2618,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
@@ -2561,6 +2637,7 @@
      "trait": "FirepowerMultiplier@ixian_lightinfantry",
      "v": 1.13
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "32000"
@@ -2596,7 +2673,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
      "v": "56"
-    }
+    },
+    "turreted": false
    },
    "ixian_rockettrooper": {
     "armaments": [
@@ -2718,6 +2796,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
@@ -2731,6 +2810,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "12000"
@@ -2767,7 +2847,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
      "v": "48"
-    }
+    },
+    "turreted": false
    },
    "ixian_shockinfantry": {
     "armaments": [
@@ -2831,6 +2912,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
@@ -2844,6 +2926,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "36000"
@@ -2881,7 +2964,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
      "v": "45"
-    }
+    },
+    "turreted": false
    },
    "ixian_storminfantry": {
     "armaments": [
@@ -2945,6 +3029,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
@@ -2958,6 +3043,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "44000"
@@ -2995,7 +3081,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
      "v": "44"
-    }
+    },
+    "turreted": false
    },
    "ixian_twinrockettrooper": {
     "armaments": [
@@ -3200,6 +3287,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
@@ -3213,6 +3301,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "24000"
@@ -3249,11 +3338,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
      "v": "48"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "ixian_promotion_farasha": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3266,6 +3357,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Farasha",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3275,9 +3367,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_heavyixraider": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3290,6 +3384,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Heavy Ix Raider",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3298,9 +3393,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_ixianempbomber": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3313,6 +3410,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Ixian EMP Bomber",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3322,9 +3420,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_ixprojector": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3337,6 +3437,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Ix Projector",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3346,9 +3447,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_ixrailgundrone": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3361,6 +3464,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Ix Railgun Drone",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3369,9 +3473,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_ixresonancedrone": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3384,6 +3490,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Ix Resonance Drone",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3393,9 +3500,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_ixsiegetank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3408,6 +3517,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Ix Siege Tank",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3417,9 +3527,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_neocymek": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3432,6 +3544,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Neo Cymek",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3441,9 +3554,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_rashidan": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3456,6 +3571,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Rashidan",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3464,9 +3580,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_storminfantry": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3479,6 +3597,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Storm Infantry",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3488,9 +3607,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_stormlasher": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3503,6 +3624,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Storm Lasher",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3512,9 +3634,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_promotion_stormraider": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3527,6 +3651,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Storm Raider",
     "prerequisites": [
      "~ixian_constructionyard",
@@ -3536,11 +3661,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "ixian_upgrade_advancedixiantechnology": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3557,6 +3684,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Advanced Ixian Technology",
     "prerequisites": [
      "~ixian_ixresearchcenter",
@@ -3565,9 +3693,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_upgrade_generalpurposearmor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3584,6 +3714,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "General Purpose Armor",
     "prerequisites": [
      "~ixian_ixresearchcenter",
@@ -3591,9 +3722,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_upgrade_heavykodatank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3610,6 +3743,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Koda Tank Upgrade",
     "prerequisites": [
      "~ixian_outpost",
@@ -3617,9 +3751,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_upgrade_heavymissiles": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3636,6 +3772,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Missiles",
     "prerequisites": [
      "~ixian_ixresearchcenter",
@@ -3643,9 +3780,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_upgrade_personalshield": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3662,6 +3801,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Personal Shield",
     "prerequisites": [
      "~ixian_outpost",
@@ -3669,9 +3809,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_upgrade_reinforcedbarrel": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3688,6 +3830,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Reinforced Barrel",
     "prerequisites": [
      "~ixian_ixresearchcenter",
@@ -3695,9 +3838,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_upgrade_tungstenneedleguns": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3714,6 +3859,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Tungsten Needle Guns",
     "prerequisites": [
      "~ixian_outpost",
@@ -3721,9 +3867,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ixian_upgrade_twinbazooka": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3740,6 +3888,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Twin Bazooka Upgrade",
     "prerequisites": [
      "~ixian_outpost",
@@ -3747,9 +3896,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "team_upgrade.d2k_advanced_ixian_technology": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3762,7 +3913,9 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Advanced Ixian Technology"
+    "gatling_spinup": false,
+    "name": "Advanced Ixian Technology",
+    "turreted": false
    }
   },
   "vehicles": {
@@ -3827,6 +3980,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -3840,6 +3994,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "37500"
@@ -3872,7 +4027,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "64"
-    }
+    },
+    "turreted": false
    },
    "duelist_tank.ixian": {
     "armaments": [
@@ -4170,6 +4326,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -4188,6 +4345,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "240000"
@@ -4233,7 +4391,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": true
    },
    "heavy_rocket_raider.ixian": {
     "armaments": [
@@ -4335,6 +4494,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -4353,6 +4513,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "85000"
@@ -4398,7 +4559,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": true
    },
    "ixian_heavykodatank": {
     "armaments": [
@@ -4454,6 +4616,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -4466,6 +4629,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "95000"
@@ -4511,7 +4675,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    },
    "ixian_ixcombatsiege": {
     "armaments": [
@@ -4576,6 +4741,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -4589,6 +4755,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "80000"
@@ -4634,7 +4801,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "ixian_ixmissiletank": {
     "armaments": [
@@ -4671,6 +4839,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -4684,6 +4853,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -4729,7 +4899,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ixian_ixprojector": {
     "armaments": [
@@ -4795,6 +4966,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -4812,6 +4984,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -4862,7 +5035,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ixian_ixsiegetank": {
     "armaments": [
@@ -4938,6 +5112,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -4951,6 +5126,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -4997,7 +5173,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "ixian_kodatank": {
     "armaments": [
@@ -5053,6 +5230,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -5065,6 +5243,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "65000"
@@ -5110,13 +5289,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "13"
-    }
+    },
+    "turreted": true
    },
    "ixian_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5134,6 +5315,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -5175,7 +5357,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "ixian_mongoose": {
     "armaments": [
@@ -5266,6 +5449,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -5279,6 +5463,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -5319,7 +5504,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "ixian_neocymek": {
     "armaments": [
@@ -5412,6 +5598,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -5430,6 +5617,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "300000"
@@ -5476,7 +5664,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": true
    },
    "ixian_shockraider": {
     "armaments": [
@@ -5512,6 +5701,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -5525,6 +5715,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -5571,13 +5762,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": true
    },
    "ixian_spiceharvester": {
     "armor": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -5595,6 +5788,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "200000"
@@ -5640,7 +5834,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": false
    },
    "ixian_stormraider": {
     "armaments": [
@@ -5700,6 +5895,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -5718,6 +5914,7 @@
      "trait": "FirepowerMultiplier@StormEffect",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -5764,7 +5961,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "19"
-    }
+    },
+    "turreted": true
    },
    "rocket_raider.ixian": {
     "armaments": [
@@ -5799,6 +5997,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
@@ -5812,6 +6011,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -5857,7 +6057,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "64"
-    }
+    },
+    "turreted": false
    }
   }
  }

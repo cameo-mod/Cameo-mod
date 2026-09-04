@@ -9,6 +9,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -22,6 +23,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "150000"
@@ -50,7 +52,8 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "japan_japanesesuperbomber": {
     "armaments": [
@@ -124,6 +127,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackBomber",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost",
@@ -137,6 +141,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
@@ -165,13 +170,15 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_badger": {
     "armor": {
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -185,6 +192,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "150000"
@@ -213,7 +221,8 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_cargoplanebomber": {
     "armaments": [
@@ -278,6 +287,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackBomber",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -290,6 +300,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "150000"
@@ -318,13 +329,15 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_cargoplaneparadrop": {
     "armor": {
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -337,6 +350,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "150000"
@@ -365,13 +379,15 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra1_badger": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost",
@@ -385,6 +401,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP",
      "v": "150000"
@@ -413,7 +430,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra1_badger_bomber": {
     "armaments": [
@@ -449,6 +467,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackBomber",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -462,6 +481,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "150000"
@@ -490,13 +510,15 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra1_soviets_badger": {
     "armor": {
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -510,6 +532,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "150000"
@@ -538,7 +561,8 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra1_soviets_spyplane": {
     "armaments": [
@@ -561,6 +585,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": "AttackBomber",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost",
@@ -574,6 +599,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -602,7 +628,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra1_soviets_superspyplane": {
     "armaments": [
@@ -627,6 +654,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackBomber",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -640,6 +668,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "100000"
@@ -668,7 +697,8 @@
     "turn_speed_air": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -677,6 +707,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -693,6 +724,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -726,13 +758,15 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    },
    "ra1_advancedpowerplant": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
@@ -745,6 +779,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
      "v": "250000"
@@ -777,13 +812,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliednavalyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -800,6 +837,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -833,13 +871,15 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    },
    "ra1_oresilo": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
@@ -852,6 +892,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
      "v": "50000"
@@ -884,13 +925,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ra1_powerplant": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
@@ -903,6 +946,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
      "v": "125000"
@@ -934,13 +978,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ra1_soviets_kennel": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -957,6 +1003,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
      "v": "50000"
@@ -990,13 +1037,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ra1_soviets_subpen": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1013,6 +1062,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -1046,7 +1096,8 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -1080,6 +1131,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1093,6 +1145,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "2500"
@@ -1117,7 +1170,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "71"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedrocketsoldier": {
     "armaments": [
@@ -1246,6 +1300,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1259,6 +1314,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "10000"
@@ -1294,7 +1350,8 @@
     "speed": {
      "src": "inherited",
      "v": "55"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_rifleinfantry": {
     "armaments": [
@@ -1425,6 +1482,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1443,6 +1501,7 @@
      "trait": "FirepowerMultiplier@ra1_allies_rifleinfantry",
      "v": 0.47
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP",
      "v": "27000"
@@ -1478,13 +1537,15 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "55"
-    }
+    },
+    "turreted": false
    },
    "ra1_einstein": {
     "armor": {
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1498,6 +1559,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "2500"
@@ -1522,7 +1584,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "71"
-    }
+    },
+    "turreted": false
    },
    "ra1_engineer": {
     "armaments": [
@@ -1562,6 +1625,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost",
@@ -1575,6 +1639,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -1614,7 +1679,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "ra1_general": {
     "armaments": [
@@ -1646,6 +1712,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1659,6 +1726,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "2500"
@@ -1683,13 +1751,15 @@
     "speed": {
      "src": "inherited",
      "v": "56"
-    }
+    },
+    "turreted": false
    },
    "ra1_scientist": {
     "armor": {
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost",
@@ -1703,6 +1773,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "2500"
@@ -1727,7 +1798,8 @@
     "speed": {
      "src": "inherited",
      "v": "56"
-    }
+    },
+    "turreted": false
    },
    "ra1_soviets_molotovconscript": {
     "armaments": [
@@ -1795,6 +1867,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost",
@@ -1809,6 +1882,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.4
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP",
      "v": "11000"
@@ -1840,7 +1914,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "67"
-    }
+    },
+    "turreted": false
    },
    "ra1_technician": {
     "armaments": [
@@ -1872,6 +1947,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1885,6 +1961,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "2500"
@@ -1909,7 +1986,8 @@
     "speed": {
      "src": "inherited",
      "v": "56"
-    }
+    },
+    "turreted": false
    }
   },
   "naval": {
@@ -1934,6 +2012,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
@@ -1947,6 +2026,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "225000"
@@ -1987,7 +2067,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": false
    },
    "japan_japanesespeedboat": {
     "armaments": [
@@ -2119,6 +2200,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
@@ -2132,6 +2214,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "40000"
@@ -2171,7 +2254,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": true
    },
    "japan_yamatobattleship": {
     "armaments": [
@@ -2272,6 +2356,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
@@ -2285,6 +2370,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "250000"
@@ -2325,7 +2411,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "7"
-    }
+    },
+    "turreted": true
    },
    "japan_zerofighter_slave": {
     "armaments": [
@@ -2560,6 +2647,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
@@ -2578,6 +2666,7 @@
      "trait": "FirepowerMultiplier@doublecannons",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "7500"
@@ -2610,7 +2699,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Aircraft.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_cruiser": {
     "armaments": [
@@ -2747,6 +2837,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
@@ -2760,6 +2851,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "225000"
@@ -2800,7 +2892,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "8"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_destroyer": {
     "armaments": [
@@ -2981,6 +3074,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
@@ -2994,6 +3088,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "125000"
@@ -3034,7 +3129,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "17"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_gunboat": {
     "armaments": [
@@ -3157,6 +3253,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
@@ -3170,6 +3267,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "60000"
@@ -3209,13 +3307,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": true
    },
    "ra1_navaltransport": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
@@ -3229,6 +3329,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "100000"
@@ -3268,7 +3369,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra1_soviets_missilesubmarine": {
     "armaments": [
@@ -3307,6 +3409,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
@@ -3325,6 +3428,7 @@
      "trait": "FirepowerMultiplier@MissileSubBuff",
      "v": 2.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "70000"
@@ -3365,7 +3469,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "ra1_soviets_submarine": {
     "armaments": [
@@ -3440,6 +3545,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
@@ -3453,6 +3559,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "100000"
@@ -3492,11 +3599,13 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": true
    }
   },
   "upgrades": {
    "japan_upgrade_nanotechrepairs_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3509,9 +3618,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Nanotech Repairs"
+    "gatling_spinup": false,
+    "name": "Nanotech Repairs",
+    "turreted": false
    },
    "ra1_allies_upgrade_gpssatellitesupport_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3524,9 +3636,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "GPS Satellite Support"
+    "gatling_spinup": false,
+    "name": "GPS Satellite Support",
+    "turreted": false
    },
    "ra1_soviets_upgrade_menofsteel_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3539,9 +3654,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Men Of Steel"
+    "gatling_spinup": false,
+    "name": "Men Of Steel",
+    "turreted": false
    },
    "ra1_soviets_upgrade_nuclearshells_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3554,9 +3672,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Nuclear Tank Shells"
+    "gatling_spinup": false,
+    "name": "Nuclear Tank Shells",
+    "turreted": false
    },
    "ra1_soviets_upgrade_reactoroverload_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3569,9 +3690,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Reactor Overload"
+    "gatling_spinup": false,
+    "name": "Reactor Overload",
+    "turreted": false
    },
    "ra1_soviets_upgrade_scorchedearth_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3584,9 +3708,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Scorched Earth"
+    "gatling_spinup": false,
+    "name": "Scorched Earth",
+    "turreted": false
    },
    "ra1_soviets_upgrade_stalinium_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3599,9 +3726,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Stalinium"
+    "gatling_spinup": false,
+    "name": "Stalinium",
+    "turreted": false
    },
    "ra1_soviets_upgrade_wareconomy_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3614,7 +3744,9 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "War Economy"
+    "gatling_spinup": false,
+    "name": "War Economy",
+    "turreted": false
    }
   },
   "vehicles": {
@@ -3682,6 +3814,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Valued.Cost",
@@ -3695,6 +3828,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -3735,7 +3869,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "21"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_alliedcybertank": {
     "armaments": [
@@ -3809,6 +3944,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Valued.Cost",
@@ -3822,6 +3958,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Health.HP",
      "v": "160000"
@@ -3861,7 +3998,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    }
   }
  }

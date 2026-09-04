@@ -136,6 +136,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Valued.Cost",
@@ -154,6 +155,7 @@
      "trait": "FirepowerMultiplier@Cryo",
      "v": 0.12
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Health.HP",
      "v": "90000"
@@ -197,7 +199,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": false
    },
    "futuretech_harbingergunship": {
     "armaments": [
@@ -474,6 +477,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Valued.Cost",
@@ -492,6 +496,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Health.HP",
      "v": "400000"
@@ -533,7 +538,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": true
    },
    "futuretech_twister": {
     "armaments": [
@@ -663,6 +669,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Valued.Cost",
@@ -676,6 +683,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
@@ -715,7 +723,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": false
    },
    "landcarr_drone.futu": {
     "armaments": [
@@ -757,6 +766,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Valued.Cost",
@@ -775,6 +785,7 @@
      "trait": "FirepowerMultiplier@ra2hornet",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Health.HP",
      "v": "10000"
@@ -807,7 +818,8 @@
     "turn_speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#Aircraft.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -816,6 +828,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -832,6 +845,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -864,13 +878,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "futuretech_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -883,6 +899,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -914,7 +931,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "futuretech_frostbiteturret": {
     "armaments": [
@@ -988,6 +1006,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Valued.Cost",
@@ -1005,6 +1024,7 @@
      "trait": "FirepowerMultiplier@Cryo",
      "v": 0.48
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Health.HP",
      "v": "120000"
@@ -1037,13 +1057,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "7124"
-    }
+    },
+    "turreted": true
    },
    "futuretech_hypercore": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1064,6 +1086,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Health.HP",
      "v": "750000"
@@ -1097,13 +1120,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "futuretech_launchpad": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -1120,6 +1145,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1152,7 +1178,8 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "futuretech_multiturretsystem": {
     "armaments": [
@@ -1324,6 +1351,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Valued.Cost",
@@ -1336,6 +1364,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Health.HP",
      "v": "105000"
@@ -1368,13 +1397,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "9000"
-    }
+    },
+    "turreted": true
    },
    "futuretech_refinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1391,6 +1422,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1423,13 +1455,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "futuretech_robotcontrolcenter": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1446,6 +1480,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1478,13 +1513,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "futuretech_thermalpowerplant": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Valued.Cost",
@@ -1497,6 +1534,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -1528,13 +1566,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "futuretech_transmissioncenter": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1551,6 +1591,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1583,13 +1624,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "futuretech_troopgate": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1606,6 +1649,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1638,13 +1682,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "futuretech_warpgate": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1661,6 +1707,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1693,7 +1740,8 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -1867,6 +1915,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Valued.Cost",
@@ -1880,6 +1929,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "25000"
@@ -1913,7 +1963,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "futuretech_cannondroid": {
     "armaments": [
@@ -2024,6 +2075,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Armor.Type",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Valued.Cost",
@@ -2037,6 +2089,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "80000"
@@ -2079,7 +2132,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "14"
-    }
+    },
+    "turreted": false
    },
    "futuretech_cryolegionnaire": {
     "armaments": [
@@ -2231,6 +2285,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2253,6 +2308,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "360000"
@@ -2286,7 +2342,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "futuretech_enforcer": {
     "armaments": [
@@ -2949,6 +3006,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Valued.Cost",
@@ -2962,6 +3020,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -2993,7 +3052,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": true
    },
    "futuretech_engineer": {
     "armaments": [
@@ -3033,6 +3093,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Valued.Cost",
@@ -3046,6 +3107,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -3085,7 +3147,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "futuretech_javelinsoldier": {
     "armaments": [
@@ -3280,6 +3343,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Valued.Cost",
@@ -3293,6 +3357,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "25000"
@@ -3328,7 +3393,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": true
    },
    "futuretech_missiledroid": {
     "armaments": [
@@ -3401,6 +3467,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Armor.Type",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Valued.Cost",
@@ -3414,6 +3481,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "67500"
@@ -3456,7 +3524,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "futuretech_repairdroid": {
     "armaments": [
@@ -3505,6 +3574,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Armor.Type",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Valued.Cost",
@@ -3518,6 +3588,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -3558,7 +3629,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "futuretech_scoutdroid": {
     "armaments": [
@@ -3628,6 +3700,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Armor.Type",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Valued.Cost",
@@ -3641,6 +3714,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -3681,7 +3755,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    },
    "futuretech_shotgundroid": {
     "armaments": [
@@ -3990,6 +4065,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Armor.Type",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Valued.Cost",
@@ -4003,6 +4079,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "55000"
@@ -4044,13 +4121,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "22"
-    }
+    },
+    "turreted": false
    },
    "futuretech_spyfutu": {
     "armor": {
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Valued.Cost",
@@ -4064,6 +4143,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -4100,11 +4180,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "futuretech_promotion_blackwidow": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4117,6 +4199,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Black Widow",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4126,9 +4209,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_cannondroid": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4141,6 +4226,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Cannon Droid",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4150,9 +4236,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_cryocopter": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4165,6 +4253,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Cryocopter",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4174,9 +4263,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_cryolegionnaire": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4189,6 +4280,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Cryo Legionnaire",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4198,9 +4290,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_futuretank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4213,6 +4307,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Future Tank",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4222,9 +4317,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_harbingergunship": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4237,6 +4334,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Harbinger Gunship",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4246,9 +4344,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_missiledroid": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4261,6 +4361,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Missile Droid",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4270,9 +4371,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_oriontank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4285,6 +4388,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Orion Tank",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4294,9 +4398,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_prospectormk2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4309,6 +4415,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Prospector MK2",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4317,9 +4424,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_robottank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4332,6 +4441,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Robot Tank",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4341,9 +4451,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_salamanderifv": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4356,6 +4468,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Salamander IFV",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4364,9 +4477,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_promotion_shotgundroid": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4379,6 +4494,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Shotgun Droid",
     "prerequisites": [
      "~futuretech_constructionyard",
@@ -4387,11 +4503,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "egcnst_infiltrated.futu": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4404,9 +4522,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Stolen FutureTech Building Plans"
+    "gatling_spinup": false,
+    "name": "Stolen FutureTech Building Plans",
+    "turreted": false
    },
    "futuretech_doctrine_equalizerx1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4423,6 +4544,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Equalizer X1",
     "prerequisites": [
      "~futuretech_transmissioncenter",
@@ -4430,9 +4552,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_doctrine_equalizerx2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4449,6 +4573,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Equalizer X2",
     "prerequisites": [
      "~futuretech_transmissioncenter",
@@ -4458,9 +4583,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "futuretech_doctrine_equalizerx3": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4477,6 +4604,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Equalizer X3",
     "prerequisites": [
      "~futuretech_transmissioncenter",
@@ -4487,7 +4615,8 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -4588,6 +4717,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -4601,6 +4731,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "62500"
@@ -4641,7 +4772,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "futuretech_beehivedronecarrier": {
     "armaments": [
@@ -4666,6 +4798,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -4679,6 +4812,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -4719,7 +4853,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": true
    },
    "futuretech_energizer": {
     "armaments": [
@@ -4780,6 +4915,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -4793,6 +4929,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -4833,7 +4970,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": true
    },
    "futuretech_futuretank": {
     "armaments": [
@@ -4992,6 +5130,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -5014,6 +5153,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "650000"
@@ -5056,7 +5196,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": true
    },
    "futuretech_guardiantank": {
     "armaments": [
@@ -5156,6 +5297,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -5169,6 +5311,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "115000"
@@ -5208,7 +5351,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "17"
-    }
+    },
+    "turreted": true
    },
    "futuretech_gunstrider": {
     "armaments": [
@@ -5267,6 +5411,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -5280,6 +5425,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "320000"
@@ -5320,13 +5466,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "14"
-    }
+    },
+    "turreted": false
    },
    "futuretech_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5344,6 +5492,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -5384,7 +5533,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "futuretech_oriontank": {
     "armaments": [
@@ -5476,6 +5626,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -5489,6 +5640,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "180000"
@@ -5530,7 +5682,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    },
    "futuretech_phalanxwip": {
     "armaments": [
@@ -5631,6 +5784,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -5644,6 +5798,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -5684,7 +5839,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "19"
-    }
+    },
+    "turreted": true
    },
    "futuretech_plasmastrider": {
     "armaments": [
@@ -5785,6 +5941,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -5798,6 +5955,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "240000"
@@ -5838,13 +5996,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "futuretech_prospector": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -5862,6 +6022,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -5906,13 +6067,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "futuretech_prospectormk2": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -5930,6 +6093,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "120000"
@@ -5974,7 +6138,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "futuretech_riptideacv": {
     "armaments": [
@@ -6045,6 +6210,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -6058,6 +6224,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "65000"
@@ -6097,7 +6264,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "21"
-    }
+    },
+    "turreted": true
    },
    "futuretech_robottank": {
     "armaments": [
@@ -6239,6 +6407,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -6252,6 +6421,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -6293,7 +6463,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": true
    },
    "futuretech_salamanderifv": {
     "armaments": [
@@ -7625,6 +7796,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
@@ -7643,6 +7815,7 @@
      "trait": "FirepowerMultiplier@futuretech_salamanderifv",
      "v": 1.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -7683,7 +7856,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": true
    }
   }
  }
