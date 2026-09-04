@@ -100,3 +100,72 @@ Nothing is applied. On approval, `reveals_shroud` for all 27 classes changes in
 `class_anchors.json`, and the values should be pinned in `doc_claims.yaml` as a set — the artillery
 deficits are deliberate and will otherwise read as defects, exactly like the dreadnought range
 (`CLASS_STATUS_BOARD.md` §10).
+
+---
+
+## §5 — ⭐ SOFTENED (maintainer 2026-09-04): *"Approve, but soften the five big moves"*
+
+The ladder's **order and uniqueness are unchanged**; only the SPACING is compressed. The original
+used 500-unit gaps at the top and 250 below; this uses a **uniform 250 step throughout**, which
+pulls the ceiling down without disturbing anything under `heavy_sniper`.
+
+| | original | softened |
+|---|--:|--:|
+| top value | 12,500 | **11,500** |
+| span | 7,500 | **6,500** |
+| `scout` gain | **+7,000** | **+6,250** |
+| `flying_infantry` gain | +6,500 | +6,000 |
+| `scout_vehicle` gain | +4,500 | **+3,500** |
+| distinct values | 27 | **27** |
+| constraint violations | 0 | **0** |
+
+| class | range | sight now | **softened** | move | |
+|---|--:|--:|--:|--:|---|
+| `scout_vehicle` | 4,500 | 8,000 | **11,500** | +3,500 | |
+| `scout` | 5,000 | 5,000 | **11,250** | +6,250 | |
+| `flying_infantry` | 5,000 | 5,000 | **11,000** | +6,000 | |
+| `pure_sniper` | 10,000 | 10,000 | **10,750** | +750 | |
+| `commando` | 8,000 | 8,000 | **10,500** | +2,500 | |
+| `mortar` | 10,000 | 10,000 | **10,250** | +250 | |
+| `artillery` | 15,000 | 9,000 | **10,000** | +1,000 | spotter |
+| `heavy_sniper` | 8,000 | 8,000 | **9,750** | +1,750 | |
+| `artillery_tank` | 12,000 | 9,000 | **9,500** | +500 | spotter |
+| `special_forces` | 6,000 | 6,000 | **9,250** | +3,250 | |
+| `archer` | 7,000 | 7,000 | **9,000** | +2,000 | |
+| `rocket_trooper` | 6,500 | 6,500 | **8,750** | +2,250 | |
+| `tank_destroyer` | 7,500 | 7,500 | **8,500** | +1,000 | |
+| `dreadnought` | 7,000 | 8,000 | **8,250** | +250 | |
+| `anti_air_vehicle` | 6,000 | 7,000 | **8,000** | +1,000 | |
+| `fire_support` | 10,000 | 8,000 | **7,750** | -250 | spotter |
+| `high_tech_tank` | 6,500 | 7,000 | **7,500** | +500 | |
+| `missile_vehicle` | 8,000 | 7,000 | **7,250** | +250 | spotter |
+| `light_tank` | 5,000 | 6,000 | **7,000** | +1,000 | |
+| `mbt` | 5,500 | 6,000 | **6,750** | +750 | |
+| `epic_vehicle` | 8,500 | 8,000 | **6,500** | -1,500 | spotter |
+| `grenadier` | 5,500 | 5,500 | **6,250** | +750 | |
+| `heavy_infantry` | 5,000 | 5,000 | **6,000** | +1,000 | |
+| `line_breaker` | 2,500 | 8,000 | **5,750** | -2,250 | |
+| `closecombat` | 3,500 | 5,000 | **5,500** | +500 | |
+| `melee` | 1,500 | 5,000 | **5,250** | +250 | |
+| `support` | 0 | 5,000 | **5,000** | +0 | |
+
+### ⛔ 250 is the FLOOR — the ladder cannot be compressed further
+
+Measured, not assumed:
+
+| step | top | `scout` gain | violations |
+|--:|--:|--:|---|
+| 150 | 8,900 | +3,750 | **5** — dreadnought, tank_destroyer, heavy_sniper… |
+| 200 | 10,200 | +5,000 | **2** — mortar, pure_sniper |
+| 225 | 10,850 | +5,625 | **1** — mortar |
+| **250** | **11,500** | **+6,250** | **none** ✅ |
+
+**`pure_sniper` and `mortar` both shoot 10,000 and are not spotters, so they must see at least
+10,000.** They sit at positions 23 and 21 of 27, which forces the step to 250.
+
+⚠ **So "softer than this" needs a design decision, not a smaller number.** Either make
+`pure_sniper` and `mortar` spotters — they would then see less than they shoot, which arguably fits
+a sniper and a mortar — or reorder the ladder so they sit higher. The maintainer was offered the
+spotter option and did not take it, so the ladder stops here.
+
+⚠ Still **not applied**: `class_anchors.json` is untouched. This is a proposal.
