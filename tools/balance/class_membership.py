@@ -145,6 +145,44 @@ def _norm(subtype) -> str:
     return re.sub(r"[^A-Za-z0-9]", "", str(subtype or "")).casefold()
 
 
+# ── Stat-identical variants, folded into their parent (maintainer 2026-09-03) ─────────────────
+# *"If they are some sort of weird duplicate then only the main unit should be counted and the
+#   duplicates are counted as the same as the main variant ... since they just inherited the main
+#   variant it doesn't make sense to give them different stats."*
+#
+# THE TEST, and it is mechanical rather than a judgement: does the variant OVERRIDE any balance
+# trait of the actor it inherits — Health, Valued, Mobile, Aircraft, Armor, Armament, Turreted,
+# RevealsShroud, Attack*, Cargo, Passenger? If it overrides none, it cannot differ from its parent
+# and is the parent under another name. Measured over the buildable roster: 45 actors inherit
+# another actor, 37 override at least one balance trait and stay distinct, and these 8 do not.
+#
+# ⚠ THIS IS A COUNTING RULE, NOT A DELETION. The actors stay in the game and in the ledger; they
+# simply stop being counted as separate members of a class, because a class is a PRICING archetype
+# and there is only one thing here to price.
+# ⚠ Re-derive rather than trust: `tools/balance/assign_references.py` recomputes the override set
+# from the resolved rules, so a variant that later gains its own stats leaves this list by itself.
+FOLD_INTO_PARENT = {
+    "ts_gdi_engineer": "TSENGINEER",
+    "ts_nod_engineer": "TSENGINEER",
+    "forgotten_engineer": "TSENGINEER",
+    "ts_gdi_lightinfantry": "TSE1",
+    "wc2_humans_elvenranger": "wc2_humans_elvenarcher",
+    "wc2_orcs_trollberserker": "wc2_orcs_trollaxethrower",
+    "forgotten_tiberiumspike": "OILB.TS",
+    "zerg_creepcolony_defense": "zerg_creepcolony",
+}
+
+
+def fold(actor):
+    """The actor a stat-identical variant should be COUNTED AS. Identity for everything else."""
+    return FOLD_INTO_PARENT.get(actor, actor)
+
+
+def is_folded(actor):
+    """True when this actor is a duplicate that another actor already represents."""
+    return actor in FOLD_INTO_PARENT
+
+
 def subtype_to_anchor(subtype) -> str | None:
     """The class a template implies, or None when nothing legitimately maps.
 

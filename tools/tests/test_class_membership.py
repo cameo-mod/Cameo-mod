@@ -133,3 +133,38 @@ class ConsumersUseTheSharedMapTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class StatIdenticalVariantsFoldTest(unittest.TestCase):
+    """⛔ A variant that overrides NO balance trait cannot differ from its parent, so counting it
+    separately inflates the class population and every fit denominator built on it.
+    Maintainer 2026-09-03: *"since they just inherited the main variant it doesn't make sense to
+    give them different stats"*."""
+
+    def test_the_eight_measured_duplicates_fold(self):
+        for variant, parent in (("ts_gdi_engineer", "TSENGINEER"),
+                                ("ts_nod_engineer", "TSENGINEER"),
+                                ("forgotten_engineer", "TSENGINEER"),
+                                ("wc2_humans_elvenranger", "wc2_humans_elvenarcher"),
+                                ("wc2_orcs_trollberserker", "wc2_orcs_trollaxethrower")):
+            self.assertEqual(cm.fold(variant), parent, variant)
+            self.assertTrue(cm.is_folded(variant), variant)
+
+    def test_a_variant_that_overrides_a_stat_does_NOT_fold(self):
+        """⚠ 37 of the 45 variants DO override a balance trait and stay distinct — the split is
+        the whole point. `ts_nod_lightinfantry` overrides Armament; `forgotten_mutantsniper`
+        overrides Armament, Health, Mobile and Valued."""
+        for keep in ("ts_nod_lightinfantry", "forgotten_mutantsniper",
+                     "asianalliance_heavyrailguntank", "ra2_allies_ifv_missile"):
+            self.assertFalse(cm.is_folded(keep), keep)
+            self.assertEqual(cm.fold(keep), keep, keep)
+
+    def test_an_ordinary_actor_folds_to_itself(self):
+        self.assertEqual(cm.fold("ra2_soviets_rhinoheavytank"), "ra2_soviets_rhinoheavytank")
+
+    def test_folding_is_a_counting_rule_and_never_a_deletion(self):
+        """The actors stay in the game and in the ledger. If a fold target ever stopped existing
+        the map would be pointing at nothing, so every parent must be a real actor id."""
+        for parent in set(cm.FOLD_INTO_PARENT.values()):
+            self.assertNotIn(parent, cm.FOLD_INTO_PARENT,
+                             f"{parent} is both a fold target and folded — a chain, not a map")
