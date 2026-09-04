@@ -349,8 +349,7 @@ def write_review(klass):
             (("STRONG", "FAIR"), "§1 — NAME-backed proposals — confirm or strike", ""),
             (("SHAPE",), "§2 — SHAPE-only proposals", "Same position in its own roster, unrelated "
              "name. Real evidence for the distribution method; your call whether it counts."),
-            (("WEAK",), "§3 — WEAK proposals — expect junk", "Clause 9 forbids a blank, so these "
-             "exist and announce themselves.")):
+            ):
         L += ["---", "", f"## {title}", ""]
         if note:
             L += [note, ""]
@@ -364,6 +363,36 @@ def write_review(klass):
                     L.append(f"| ☐ | {v['confidence']} | `{m}` | {src}{home} | {v['name']} | "
                              f"{v['raw_name']:.2f} | {v['score'][3]:.2f} | {v['score'][4]:.2f} |")
         L.append("")
+    # ⛔ WEAK ROWS ARE STRUCK BEFORE REVIEW (maintainer 2026-09-04: "I strike the WEAK rows, you
+    # check the rest"). They are the greedy taking the best of a bad field — clause 9 forbids a
+    # blank — and reading 62 of them to reject 62 of them is the kind of work that does not survive
+    # a long session.
+    # ⚠ STRUCK, NOT HIDDEN. They are counted per unit below, so a member whose ONLY proposals were
+    # weak is visible as such rather than looking unmatched for no stated reason.
+    weak = collections.defaultdict(list)
+    for m in members:
+        for src, v in (result.get(m) or {}).items():
+            if v["confidence"] == "WEAK":
+                weak[m].append(f"{src}: {v['name']}")
+    if weak:
+        L += ["---", "", "## §3 — WEAK proposals — STRUCK, not reviewed", "",
+              f"**{sum(len(v) for v in weak.values())} rows across {len(weak)} members** were the "
+              "greedy taking the best of a bad field. Struck per the maintainer's ruling so this "
+              "sheet only asks about proposals worth judging.", "",
+              "⚠ Listed so nothing vanishes silently — a member whose only proposals were weak "
+              "should look struck, not unmatched.", "",
+              "| unit | struck | what they were |", "|---|--:|---|"]
+        for m, items in sorted(weak.items(), key=lambda kv: -len(kv[1])):
+            shown = "; ".join(items[:3]) + (" …" if len(items) > 3 else "")
+            L.append(f"| `{m}` | {len(items)} | {shown} |")
+        L.append("")
+        only_weak = [m for m in weak if all(v["confidence"] == "WEAK"
+                                            for v in (result.get(m) or {}).values())]
+        if only_weak:
+            L += ["⛔ **Members left with NOTHING after the strike** — formula-only unless the "
+                  "review rescues them:", ""]
+            L += [f"* `{m}`" for m in sorted(only_weak)] + [""]
+
     out = ROOT / "docs" / "balance" / "review" / f"{klass}_references.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("\n".join(L) + "\n", encoding="utf-8")

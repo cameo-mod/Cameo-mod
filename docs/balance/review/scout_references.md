@@ -221,72 +221,34 @@ Same position in its own roster, unrelated name. Real evidence for the distribut
 
 ---
 
-## §3 — WEAK proposals — expect junk
+## §3 — WEAK proposals — STRUCK, not reviewed
 
-Clause 9 forbids a blank, so these exist and announce themselves.
+**62 rows across 22 members** were the greedy taking the best of a bad field. Struck per the maintainer's ruling so this sheet only asks about proposals worth judging.
 
-| ok? | conf | unit | source | reference unit | name | role | cost |
-|:--:|---|---|---|---|--:|--:|--:|
-| ☐ | WEAK | `asianalliance_asianmilitia` | Crystallized Nexus | Engineer | 0.20 | 0.74 | 0.68 |
-| ☐ | WEAK | `asianalliance_asianmilitia` | OpenE2140 | Android A03 | 0.36 | 0.74 | 0.41 |
-| ☐ | WEAK | `asianalliance_asianmilitia` | CnC Reloaded **(home)** | Animal Alligator | 0.44 | 0.00 | 0.99 |
-| ☐ | WEAK | `asianalliance_asianmilitia` | Mental Omega **(home)** | Animal Hyena | 0.43 | 0.00 | 0.99 |
-| ☐ | WEAK | `forgotten_mutant` | OpenRA Tiberian Dawn | Velociraptor | 0.11 | 0.74 | 0.50 |
-| ☐ | WEAK | `forgotten_mutant` | Valiant Shades | Desolator | 0.13 | 0.70 | 0.57 |
-| ☐ | WEAK | `forgotten_mutant` | OpenRA Tiberian Sun **(home)** | Medic | 0.18 | 0.58 | 0.51 |
-| ☐ | WEAK | `forgotten_mutant` | Mental Omega | Technician | 0.38 | 0.00 | 0.96 |
-| ☐ | WEAK | `forgotten_mutantsoldier` | OpenRA Tiberian Sun **(home)** | Disc Thrower | 0.33 | 0.73 | 0.95 |
-| ☐ | WEAK | `forgotten_mutantsoldier` | OpenRA Red Alert | Zombie | 0.32 | 0.69 | 0.81 |
-| ☐ | WEAK | `forgotten_mutantsoldier` | Mental Omega | Sciencist | 0.27 | 0.00 | 0.97 |
-| ☐ | WEAK | `futuretech_scoutdroid` | CnC Reloaded **(home)** | Secret Service | 0.43 | 0.00 | 0.94 |
-| ☐ | WEAK | `futuretech_scoutdroid` | Mental Omega **(home)** | 18 RMB | 0.13 | 0.00 | 0.97 |
-| ☐ | WEAK | `ixian_lightinfantry` | Generals Alpha | Tank Hunter | 0.43 | 0.62 | 0.69 |
-| ☐ | WEAK | `ixian_lightinfantry` | Mental Omega | Animal Camel | 0.17 | 0.00 | 0.96 |
-| ☐ | WEAK | `latinsyndicate_latinmilitia` | OpenRA Dune 2000 | Grenadier | 0.19 | 0.74 | 0.96 |
-| ☐ | WEAK | `latinsyndicate_latinmilitia` | CnC Reloaded **(home)** | Vladimir | 0.50 | 0.00 | 0.96 |
-| ☐ | WEAK | `latinsyndicate_latinmilitia` | Mental Omega **(home)** | Civilian Texan A | 0.46 | 0.00 | 0.97 |
-| ☐ | WEAK | `light_inf` | Generals Alpha | Missile Defender | 0.22 | 0.62 | 0.69 |
-| ☐ | WEAK | `light_inf` | CnC Reloaded | Tiberian Fiend | 0.38 | 0.00 | 0.95 |
-| ☐ | WEAK | `naxis_coneheadsknights` | CnC Reloaded **(home)** | Yuri Clone | 0.32 | 0.00 | 0.99 |
-| ☐ | WEAK | `naxis_coneheadsknights` | Mental Omega **(home)** | Who's that? | 0.33 | 0.00 | 0.89 |
-| ☐ | WEAK | `naxis_naxiriflerecruit` | CnC Reloaded **(home)** | Fake Venom Soldier | 0.25 | 0.00 | 1.00 |
-| ☐ | WEAK | `naxis_naxiriflerecruit` | Mental Omega **(home)** | Gene Boss Brute | 0.34 | 0.00 | 1.00 |
-| ☐ | WEAK | `naxis_naxiriflesoldier` | Generals Alpha | Pilot | 0.29 | 0.70 | 0.99 |
-| ☐ | WEAK | `naxis_naxiriflesoldier` | OpenE2140 | Android A04 | 0.15 | 0.68 | 0.38 |
-| ☐ | WEAK | `naxis_naxiriflesoldier` | Valiant Shades | spy | 0.10 | 0.68 | 0.42 |
-| ☐ | WEAK | `naxis_naxiriflesoldier` | CnC Reloaded **(home)** | Yuri Slave Worker | 0.45 | 0.00 | 0.98 |
-| ☐ | WEAK | `naxis_naxiriflesoldier` | Mental Omega **(home)** | Virus Boss Brute | 0.20 | 0.00 | 0.99 |
-| ☐ | WEAK | `ordos_lightinfantry` | Shattered Paradise | Shadow Warrior | 0.15 | 0.73 | 0.32 |
-| ☐ | WEAK | `ordos_lightinfantry` | Valiant Shades | Virus | 0.22 | 0.64 | 0.30 |
-| ☐ | WEAK | `ordos_lightinfantry` | Generals Alpha | RPG Trooper | 0.26 | 0.60 | 0.66 |
-| ☐ | WEAK | `ordos_lightinfantry` | Mental Omega | Civilian Snow Thin Male | 0.36 | 0.00 | 0.99 |
-| ☐ | WEAK | `ra1_allies_rifleinfantry` | Shattered Paradise | Skirmisher | 0.35 | 0.74 | 0.85 |
-| ☐ | WEAK | `ra1_allies_rifleinfantry` | Generals Alpha | Flamethrower | 0.40 | 0.69 | 0.62 |
-| ☐ | WEAK | `ra1_allies_rifleinfantry` | Mental Omega | Animal Cow | 0.18 | 0.00 | 0.97 |
-| ☐ | WEAK | `ra1_soviets_ak47conscript` | Generals Alpha | Pathfinder | 0.26 | 0.75 | 0.37 |
-| ☐ | WEAK | `ra1_soviets_ak47conscript` | OpenRA Dune 2000 | Trooper | 0.20 | 0.73 | 0.89 |
-| ☐ | WEAK | `ra1_soviets_ak47conscript` | CnC Reloaded | Civilian Texan A | 0.22 | 0.00 | 0.94 |
-| ☐ | WEAK | `ra1_soviets_rifleinfantry` | Crystallized Nexus | Medic | 0.11 | 0.73 | 0.43 |
-| ☐ | WEAK | `ra1_soviets_rifleinfantry` | Shattered Paradise | Essence Collector | 0.28 | 0.73 | 0.76 |
-| ☐ | WEAK | `ra1_soviets_rifleinfantry` | Generals Alpha | Toxin Rebel | 0.26 | 0.69 | 0.81 |
-| ☐ | WEAK | `ra1_soviets_rifleinfantry` | Mental Omega | Slave Worker | 0.25 | 0.00 | 0.97 |
-| ☐ | WEAK | `ra2_soviets_conscript` | Crystallized Nexus | Rookie | 0.27 | 0.74 | 0.99 |
-| ☐ | WEAK | `ra2_soviets_conscript` | Shattered Paradise | Medic | 0.14 | 0.72 | 0.85 |
-| ☐ | WEAK | `td_gdi_minigunner` | CnC Reloaded | Animal Polar Bear | 0.32 | 0.00 | 0.98 |
-| ☐ | WEAK | `td_gdi_minigunner` | Mental Omega | Psychic Boss Brute | 0.23 | 0.00 | 0.99 |
-| ☐ | WEAK | `td_nod_minigunner` | OpenRA Tiberian Dawn **(home)** | Grenadier | 0.32 | 0.73 | 0.92 |
-| ☐ | WEAK | `td_nod_minigunner` | CnC Reloaded | Animal Monkey | 0.36 | 0.00 | 0.98 |
-| ☐ | WEAK | `tkm_marine` | OpenE2140 | SILVER MAX | 0.27 | 0.71 | 0.59 |
-| ☐ | WEAK | `tkm_marine` | CnC Reloaded **(home)** | Terrorist | 0.27 | 0.00 | 0.98 |
-| ☐ | WEAK | `tkm_marine` | Mental Omega **(home)** | Flak Trooper | 0.35 | 0.00 | 0.98 |
-| ☐ | WEAK | `tkm_rifleman` | Shattered Paradise | Templar | 0.40 | 0.61 | 0.70 |
-| ☐ | WEAK | `tkm_rifleman` | Valiant Shades | Sniper | 0.14 | 0.59 | 0.33 |
-| ☐ | WEAK | `tkm_rifleman` | CnC Reloaded **(home)** | General Pentagon | 0.43 | 0.00 | 0.98 |
-| ☐ | WEAK | `tkm_rifleman` | Mental Omega **(home)** | Civilian Snow Female A | 0.37 | 0.00 | 0.99 |
-| ☐ | WEAK | `ts_gdi_lightinfantry` | Mental Omega | Civilian Texan C | 0.37 | 0.00 | 0.99 |
-| ☐ | WEAK | `ts_nod_lightinfantry` | Mental Omega | Civilian Snow Fat Male | 0.38 | 0.00 | 0.99 |
-| ☐ | WEAK | `zerg_spithid` | OpenRA Red Alert | Warrior Ant | 0.23 | 0.70 | 0.86 |
-| ☐ | WEAK | `zerg_spithid` | Generals Alpha | Flame Tower | 0.12 | 0.60 | 0.50 |
-| ☐ | WEAK | `zerg_spithid` | CnC Reloaded | Yuri Initiate | 0.32 | 0.00 | 0.98 |
-| ☐ | WEAK | `zerg_spithid` | Mental Omega | Archer | 0.15 | 0.00 | 0.97 |
+⚠ Listed so nothing vanishes silently — a member whose only proposals were weak should look struck, not unmatched.
+
+| unit | struck | what they were |
+|---|--:|---|
+| `naxis_naxiriflesoldier` | 5 | CnC Reloaded: Yuri Slave Worker; Generals Alpha: Pilot; Mental Omega: Virus Boss Brute … |
+| `asianalliance_asianmilitia` | 4 | CnC Reloaded: Animal Alligator; Crystallized Nexus: Engineer; Mental Omega: Animal Hyena … |
+| `forgotten_mutant` | 4 | Mental Omega: Technician; OpenRA Tiberian Dawn: Velociraptor; OpenRA Tiberian Sun: Medic … |
+| `ordos_lightinfantry` | 4 | Generals Alpha: RPG Trooper; Mental Omega: Civilian Snow Thin Male; Shattered Paradise: Shadow Warrior … |
+| `ra1_soviets_rifleinfantry` | 4 | Crystallized Nexus: Medic; Generals Alpha: Toxin Rebel; Mental Omega: Slave Worker … |
+| `tkm_rifleman` | 4 | CnC Reloaded: General Pentagon; Mental Omega: Civilian Snow Female A; Shattered Paradise: Templar … |
+| `zerg_spithid` | 4 | CnC Reloaded: Yuri Initiate; Generals Alpha: Flame Tower; Mental Omega: Archer … |
+| `forgotten_mutantsoldier` | 3 | Mental Omega: Sciencist; OpenRA Red Alert: Zombie; OpenRA Tiberian Sun: Disc Thrower |
+| `latinsyndicate_latinmilitia` | 3 | CnC Reloaded: Vladimir; Mental Omega: Civilian Texan A; OpenRA Dune 2000: Grenadier |
+| `ra1_allies_rifleinfantry` | 3 | Generals Alpha: Flamethrower; Mental Omega: Animal Cow; Shattered Paradise: Skirmisher |
+| `ra1_soviets_ak47conscript` | 3 | CnC Reloaded: Civilian Texan A; Generals Alpha: Pathfinder; OpenRA Dune 2000: Trooper |
+| `tkm_marine` | 3 | CnC Reloaded: Terrorist; Mental Omega: Flak Trooper; OpenE2140: SILVER MAX |
+| `futuretech_scoutdroid` | 2 | CnC Reloaded: Secret Service; Mental Omega: 18 RMB |
+| `ixian_lightinfantry` | 2 | Generals Alpha: Tank Hunter; Mental Omega: Animal Camel |
+| `light_inf` | 2 | CnC Reloaded: Tiberian Fiend; Generals Alpha: Missile Defender |
+| `naxis_coneheadsknights` | 2 | CnC Reloaded: Yuri Clone; Mental Omega: Who's that? |
+| `naxis_naxiriflerecruit` | 2 | CnC Reloaded: Fake Venom Soldier; Mental Omega: Gene Boss Brute |
+| `ra2_soviets_conscript` | 2 | Crystallized Nexus: Rookie; Shattered Paradise: Medic |
+| `td_gdi_minigunner` | 2 | CnC Reloaded: Animal Polar Bear; Mental Omega: Psychic Boss Brute |
+| `td_nod_minigunner` | 2 | CnC Reloaded: Animal Monkey; OpenRA Tiberian Dawn: Grenadier |
+| `ts_gdi_lightinfantry` | 1 | Mental Omega: Civilian Texan C |
+| `ts_nod_lightinfantry` | 1 | Mental Omega: Civilian Snow Fat Male |
 
