@@ -280,11 +280,19 @@ def assign(only_class=None):
             #   FAIR    one of the two holds
             #   WEAK    neither — the greedy assigned the best of a bad field (clause 9 forbids
             #           leaving a blank, so the row exists and must announce itself)
+            # ⚠ SHAPE-ONLY IS ITS OWN TIER, added after reading the first review sheet. Folding it
+            # into FAIR made FAIR the biggest tier (138 against 34 STRONG in `scout`) and hid what
+            # those rows are: `asianalliance_asianmilitia` drew "sspy" at name 0.12 / role 0.93,
+            # "Rebel" at 0.12, "Fremen" at 0.11. Each sits in the same place in ITS roster as the
+            # militia does in ours, which is real evidence for a DISTRIBUTION method and is not a
+            # claim that the two are the same unit. The reviewer has to be able to tell them apart.
             bucket, role_score = s[0], s[3]
             if bucket >= 3 or (bucket >= 1 and role_score >= 0.75):
                 conf = "STRONG"
-            elif bucket >= 1 or role_score >= 0.75:
-                conf = "FAIR"
+            elif bucket >= 1:
+                conf = "FAIR"          # a real name overlap, shape unconfirmed
+            elif role_score >= 0.75:
+                conf = "SHAPE"         # same position in its own roster, name says nothing
             else:
                 conf = "WEAK"
             result[cid][source] = {"name": p.get("name"), "score": s,
@@ -293,13 +301,89 @@ def assign(only_class=None):
     return result, skipped, len(scope)
 
 
+def write_review(klass):
+    """The per-class review sheet (§9.9: reviewed one class at a time, matching signed with anchor)."""
+    result, _, _ = assign(klass)
+    led = ledger()
+    cam = {c["id"]: c for c in rd.cameo_rows()}
+    members = sorted(n for n, u in led.items()
+                     if cm.classify(u.get("design") or {})[0] == klass)
+
+    def cost_of(n):
+        v = (led[n].get("cost") or {})
+        v = v.get("v") if isinstance(v, dict) else v
+        try:
+            return float(v)
+        except (TypeError, ValueError):
+            return None
+
+    conf = collections.Counter(m["confidence"] for v in result.values() for m in v.values())
+    name_backed = sum(1 for v in result.values()
+                      if sum(1 for m in v.values() if m["confidence"] in ("STRONG", "FAIR")) >= 2)
+    with_shape = sum(1 for v in result.values()
+                     if sum(1 for m in v.values()
+                            if m["confidence"] in ("STRONG", "FAIR", "SHAPE")) >= 2)
+    L = [f"# `{klass}` — reference assignment for review", "",
+         f"**Generated** by `python tools/balance/assign_references.py --review {klass}`. "
+         "Regenerates — record decisions and re-run rather than hand-editing.", "",
+         "> ⛔ **A PROPOSAL LIST, NOT EVIDENCE.** Until this review is done the class has no grounded",
+         "> members and therefore no anchor (`REFERENCE_METHOD.md` §9.9).", "",
+         "## §0 — State of the class", "", "| | |", "|---|--:|",
+         f"| members | **{len(members)}** |",
+         f"| assigned at least one reference | **{len(result)}** |",
+         f"| **with ≥2 NAME-backed references** | **{name_backed}** |",
+         f"| with ≥2 name-or-shape references | {with_shape} |",
+         f"| members with NO reference at all | **{len(members) - len(result)}** |", "",
+         "Confidence: " + " · ".join(f"**{k} {v}**" if k in ("STRONG", "WEAK") else f"{k} {v}"
+                                     for k, v in sorted(conf.items())), "",
+         "* **STRONG** exact/alias name, or name overlap backed by matching shape",
+         "* **FAIR** a real name overlap, shape unconfirmed",
+         "* **SHAPE** same position in its own roster; the name says nothing — evidence for a "
+         "distribution method, NOT a claim the two are the same unit",
+         "* **WEAK** neither; the greedy assigned the best of a bad field", ""]
+    missing = [m for m in members if m not in result]
+    if missing:
+        L += ["⚠ **No reference at all** — formula-only unless the review rescues them:", ""]
+        L += [f"* `{m}` — cost {cost_of(m) or '?'}" for m in missing] + [""]
+    for tier_set, title, note in (
+            (("STRONG", "FAIR"), "§1 — NAME-backed proposals — confirm or strike", ""),
+            (("SHAPE",), "§2 — SHAPE-only proposals", "Same position in its own roster, unrelated "
+             "name. Real evidence for the distribution method; your call whether it counts."),
+            (("WEAK",), "§3 — WEAK proposals — expect junk", "Clause 9 forbids a blank, so these "
+             "exist and announce themselves.")):
+        L += ["---", "", f"## {title}", ""]
+        if note:
+            L += [note, ""]
+        L += ["| ok? | conf | unit | source | reference unit | name | role | cost |",
+              "|:--:|---|---|---|---|--:|--:|--:|"]
+        for m in members:
+            for src, v in sorted((result.get(m) or {}).items(),
+                                 key=lambda kv: (-kv[1]["score"][0], -kv[1]["score"][3])):
+                if v["confidence"] in tier_set:
+                    home = " **(home)**" if v["home"] else ""
+                    L.append(f"| ☐ | {v['confidence']} | `{m}` | {src}{home} | {v['name']} | "
+                             f"{v['raw_name']:.2f} | {v['score'][3]:.2f} | {v['score'][4]:.2f} |")
+        L.append("")
+    out = ROOT / "docs" / "balance" / "review" / f"{klass}_references.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("\n".join(L) + "\n", encoding="utf-8")
+    print(f"wrote {out.relative_to(ROOT)}")
+    print(f"  members {len(members)} · assigned {len(result)} · "
+          f"NAME-backed >=2: {name_backed} · with shape: {with_shape}")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--class", dest="cls", help="restrict to one class and print its review table")
     ap.add_argument("--write", action="store_true", help="save the assignment as JSON")
     ap.add_argument("--limit", type=int, default=25)
+    ap.add_argument("--review", metavar="CLASS",
+                    help="write docs/balance/review/<class>_references.md for maintainer review")
     args = ap.parse_args()
 
+    if args.review:
+        return write_review(args.review)
     result, skipped, in_scope = assign(args.cls)
     counts = collections.Counter(len(v) for v in result.values())
     print(f"Cameo actors in scope : {in_scope}   exempt: {len(skipped)}")
@@ -313,9 +397,11 @@ def main():
     print(f"assignment confidence : "
           + ", ".join(f"{k} {v} ({v/total:.0%})" for k, v in
                       sorted(conf.items(), key=lambda kv: -kv[1])))
-    strong2 = sum(1 for v in result.values()
-                  if sum(1 for m in v.values() if m["confidence"] != "WEAK") >= 2)
-    print(f"⭐ actors with >=2 NON-WEAK references (the honest floor): {strong2}")
+    for tiers, label in ((("STRONG", "FAIR"), "NAME-backed"),
+                         (("STRONG", "FAIR", "SHAPE"), "name or shape")):
+        n = sum(1 for v in result.values()
+                if sum(1 for m in v.values() if m["confidence"] in tiers) >= 2)
+        print(f"⭐ actors with >=2 {label} references: {n}")
 
     if args.cls:
         print(f"\n── {args.cls} — every member and its one reference per source ──")
