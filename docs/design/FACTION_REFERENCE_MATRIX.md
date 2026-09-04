@@ -142,3 +142,105 @@ tie-breaker the maintainer named for unclear roles.
 
 ⚠ Until step 5, **no class should be signed on reference evidence.** The scout sheet stands
 rejected.
+
+---
+
+# PART II — THE MATRIX (2026-09-04)
+
+**Ruling:** *"Always have at least 2 reference factions from different games for each cameo
+faction!"* — mirrors or not, no measurement first. Applied below.
+
+⚠ **THE MIRROR PROBLEM IS WHY.** Two reference factions from the SAME game may be mirrors of each
+other, and extracting both then yields no extra information — every Cameo unit would land on stats
+identical to its counterpart. `OpenE2140`'s `ucs` and `ed` look exactly like this: both are named
+*Mobile Air Base · Mobile Refinery · Mobile Defense Tower*. **A second GAME, not a second faction,
+is what guarantees uniqueness.**
+
+⚠ And the reference decides only **where a unit sits in its class's distribution.** The balance
+formula still prices it. These are inputs to placement, not final stats.
+
+## §6 — Every faction now available
+
+| source | factions |
+|---|---|
+| Generals Alpha | **`prc`** (China) · **`gla`** (Global Liberation Army) · `usa` |
+| Romanov's Vengeance | `allies` · `soviets` · `psicorps` · `bakupact` + 27 subfactions |
+| Combined Arms | `gdi` · `nod` · `allies` · `soviet` · `yuri` · `scrin` · `talon` · `shadow` |
+| Shattered Paradise | `gdi` · `nod` · `cab` · **`mut`** · `scr` |
+| Crystallized Nexus | `gdi` · `nod` · `gdf` · `steel` · `zocom` |
+| OpenE2140 | **`ucs`** · `ed` |
+| OpenRA TD / TS / RA / D2K | `gdi` · `nod` / `gdi` · `nod` / `allies` · `soviet` / `atreides` · `harkonnen` · `ordos` |
+| Valiant Shades | `allies` · `soviets` |
+| OpenHV | `yi` · `sc` — ⚠ unidentified, Polish-named sci-fi, no obvious Cameo counterpart |
+
+⛔ **A near-miss worth recording: Crystallized Nexus `steel` is STEEL TALONS**, a GDI division
+(Titan, Wolverine, Juggernaut) — **not** Steel Consortium. `gdf` and `zocom` are likewise GDI
+branches, and Combined Arms' `talon` is the same Steel Talons. Name similarity nearly produced
+exactly the class of error this whole redesign exists to remove.
+
+## §7 — The matrix
+
+⭐ = confident · ⚠ = proposed, wants your ruling · ⛔ = no second game exists
+
+### Tier 1 — TD and RA1 (ruled 1/3 each)
+
+| Cameo faction | game A | game B | game C | status |
+|---|---|---|---|---|
+| `tiberiandawn_gdi` | **DTA** gdi | Combined Arms `gdi` | OpenRA TD `gdi` | ⭐ 3 games |
+| `tiberiandawn_nod` | **DTA** nod | Combined Arms `nod` | OpenRA TD `nod` | ⭐ |
+| `redalert_allies` | **DTA** allied | Combined Arms `allies` | OpenRA RA `allies` | ⭐ |
+| `redalert_soviets` | **DTA** soviet | Combined Arms `soviet` | OpenRA RA `soviet` | ⭐ |
+
+⛔ **DTA pending — ask the maintainer 2026-09-05.** Until then each has two games, which still
+satisfies the rule.
+
+### Tier 2 — RA2 (ruled 1/6, achievable 1/4)
+
+| Cameo faction | game A | game B | game C | status |
+|---|---|---|---|---|
+| `redalert2_allies` | Romanov's Vengeance `allies` | Valiant Shades `allies` | MO / CnCR (unrouted) | ⭐ 2 games |
+| `redalert2_soviets` | Romanov's Vengeance `soviets` | Valiant Shades `soviets` | MO / CnCR | ⭐ |
+| `redalert2_yuri` | Romanov's Vengeance `psicorps` | Combined Arms `yuri` | MO / CnCR | ⭐ |
+
+⚠ RV and *Yuri's Revenge on OpenRA* are ONE lineage and already collapsed — they do not count as
+two games. Valiant Shades and Combined Arms are the genuine second voices.
+
+### Tier 3 — TS (ruled 1/4 each)
+
+| Cameo faction | game A | game B | game C | status |
+|---|---|---|---|---|
+| `tiberiansun_gdi` | Shattered Paradise `gdi` | Crystallized Nexus `gdi` | OpenRA TS `gdi` | ⭐ 3 games |
+| `tiberiansun_nod` | Shattered Paradise `nod` | Crystallized Nexus `nod` | OpenRA TS `nod` | ⭐ |
+| `tiberiansun_cabal` | Shattered Paradise `cab` | ⚠ Combined Arms `scrin`? | — | ⚠ needs a 2nd |
+| `tiberiansun_forgotten` | ⭐ Shattered Paradise `mut` | ⚠ Crystallized Nexus `gdf`? | — | ⚠ needs a 2nd |
+
+### Tier 4 — the invented RA2 factions
+
+| Cameo faction | game A | game B | status |
+|---|---|---|---|
+| `redalert2mod_asianalliance` | MO **China** | ⭐ **Generals Alpha `prc`** | ⭐ exactly as ruled |
+| `redalert2mod_syndicate` | MO **Latin Confederation** | ⭐ **Generals Alpha `gla`** | ⭐ GLA is guerrilla / black-market / explosives — the LC archetype |
+| `redalert2mod_futuretech` | ⭐ **OpenE2140 `ucs`** | ⚠ Combined Arms `scrin`? | ⚠ needs a 2nd |
+| `redalert2mod_naxis` | ⚠ OpenE2140 `ed` | ⛔ none | ⛔ and `ed` may mirror `ucs` |
+| `redalert2mod_consortium` | MO **Foehn Revolt** | ⛔ none — `steel` is Steel Talons | ⛔ |
+| `redalert2mod_schwarzermond` | ⛔ Earth **2150** LC not on disk | ⛔ none | ⛔ |
+| `redalert2mod_tkm` | ⛔ unidentified | ⛔ | ⛔ |
+| `redalert_japan` | ⛔ no RA3 mod in the corpus | ⛔ | ⛔ |
+
+### Tier 5 — Dune
+
+| Cameo faction | game A | game B | status |
+|---|---|---|---|
+| `d2k_ordos` | OpenRA D2K `ordos` | OpenRA Dune II `ordos` | ⭐ measured INDEPENDENT (16% agreement) — genuinely two games |
+| `d2k_atreides` · `d2k_harkonnen` | same pair | | ⭐ |
+| `d2k_ixian` | ⛔ House Ix is Emperor-only, not on disk | ⛔ | ⛔ |
+
+## §8 — What is still open
+
+1. ⛔ **MO and CnC Reloaded have no faction column** — hand tables. Every Tier-4 mapping above
+   depends on it. **Biggest blocker.**
+2. ⛔ **DTA** — ask 2026-09-05.
+3. ⚠ **Five factions have no second game**: `consortium`, `schwarzermond`, `naxis`, `tkm`,
+   `redalert_japan`, plus `d2k_ixian`. They are formula-only until one is found.
+4. ⚠ **Three need a second choosing**: `tiberiansun_cabal`, `tiberiansun_forgotten`,
+   `redalert2mod_futuretech`.
