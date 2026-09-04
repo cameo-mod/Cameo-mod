@@ -49,7 +49,7 @@ scrin_drone_ship:
 	Tooltip:
 		Name: actor_scrin_drone_ship.name
 	Buildable:
-		Queue: ScrinAircraft, ScrinCapitalAircraft
+		Queue: ScrinAircraft, ScrinWarpAircraft
 		BuildPaletteOrder: 10
 		Prerequisites: scrin_reactor, scrin_extractor
 		Icon: icon
@@ -62,6 +62,9 @@ scrin_drone_ship:
 		HP: 1000000
 	Armor:
 		Type: Heavy
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	BaseBuilding:
 	Selectable:
 		Bounds: 2048, 2048, 0, -2048
 		DecorationBounds: 2304, 2560, 0, -2048
@@ -69,7 +72,7 @@ scrin_drone_ship:
 		Speed: 61
 		TurnSpeed: 20
 		CruiseAltitude: 768
-		AltitudeVelocity: 26
+		AltitudeVelocity: 35
 		CanForceLand: false
 		Repulsable: false
 		Voice: Move
@@ -92,7 +95,7 @@ scrin_stormrider:
 	Tooltip:
 		Name: actor_scrin_stormrider.name
 	Buildable:
-		Queue: ScrinAircraft, ScrinCapitalAircraft
+		Queue: ScrinAircraft, ScrinWarpAircraft
 		BuildPaletteOrder: 20
 		Prerequisites: scrin_reactor, scrin_extractor
 		Icon: icon
@@ -132,7 +135,8 @@ scrin_devastator_warship:
 	Tooltip:
 		Name: actor_scrin_devastator_warship.name
 	Buildable:
-		Queue: ScrinCapitalAircraft
+		Queue: ScrinWarpAircraft
+		BuildAtProductionType: ScrinCapitalAircraft
 		BuildPaletteOrder: 30
 		Prerequisites: ~scrin_warp_chasm, scrin_technology_assembler
 		Icon: icon
@@ -172,9 +176,10 @@ scrin_planetary_assault_carrier:
 	Tooltip:
 		Name: actor_scrin_planetary_assault_carrier.name
 	Buildable:
-		Queue: ScrinCapitalAircraft
+		Queue: ScrinWarpAircraft
+		BuildAtProductionType: ScrinCapitalAircraft
 		BuildPaletteOrder: 40
-		Prerequisites: ~scrin_warp_chasm, scrin_technology_assembler
+		Prerequisites: ~scrin_warp_chasm, scrin_technology_assembler, scrin_signal_transmitter
 		Icon: icon
 		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
@@ -248,9 +253,10 @@ scrin_mothership:
 	Tooltip:
 		Name: actor_scrin_mothership.name
 	Buildable:
-		Queue: ScrinCapitalAircraft
+		Queue: ScrinWarpAircraft
+		BuildAtProductionType: ScrinCapitalAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~scrin_warp_chasm, scrin_signal_transmitter
+		Prerequisites: ~scrin_warp_chasm, scrin_technology_assembler, scrin_signal_transmitter
 		BuildLimit: 1
 		Icon: icon
 		IconPalette: player_rgba

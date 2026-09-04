@@ -884,7 +884,7 @@ scrin_warp_chasm:
 		Icon: icon
 		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
-		Description: Produces all Scrin vehicles and capital aircraft.
+		Description: Produces all Scrin vehicles and aircraft.
 	Valued:
 		Cost: 3000
 	Power:
@@ -901,8 +901,21 @@ scrin_warp_chasm:
 		Palette: effect
 		RequiresCondition: !build-incomplete
 	MaterializingProduction@SCRINADVANCED:
-		Produces: ScrinAdvancedVehicle, ScrinCapitalAircraft
+		Produces: ScrinAdvancedVehicle, ScrinWarpAircraft, ScrinCapitalAircraft
 		PauseOnCondition: disabled
+	ProductionQueue@SCRINWARPAIRCRAFT:
+		Type: ScrinWarpAircraft
+		DisplayOrder: 4
+		Group: Aircraft
+		AlwaysShowForFactions: scrin
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Building
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
 	ProductionQueue@SCRINADVANCEDVEHICLE:
 		Type: ScrinAdvancedVehicle
 		DisplayOrder: 3
@@ -915,23 +928,10 @@ scrin_warp_chasm:
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		InfiniteBuildLimit: 10
-	ProductionQueue@SCRINCAPITALAIRCRAFT:
-		Type: ScrinCapitalAircraft
-		DisplayOrder: 4
-		Group: Aircraft
-		AlwaysShowForFactions: scrin
-		LowPowerModifier: 300
-		ReadyAudio: UnitReady
-		BlockedAudio: NoBuild
-		LimitedAudio: BuildingInProgress
-		QueuedAudio: Building
-		OnHoldAudio: OnHold
-		CancelledAudio: Cancelled
-		InfiniteBuildLimit: 10
 	ProductionBar@SCRINADVANCEDVEHICLE:
 		ProductionType: ScrinAdvancedVehicle
-	ProductionBar@SCRINCAPITALAIRCRAFT:
-		ProductionType: ScrinCapitalAircraft
+	ProductionBar@SCRINWARPAIRCRAFT:
+		ProductionType: ScrinWarpAircraft
 	RallyPoint:
 		Path: 1,2
 	Exit@SCRINADVANCEDVEHICLE:
@@ -939,9 +939,9 @@ scrin_warp_chasm:
 		SpawnOffset: 0,0,0
 		ExitCell: 1,2
 		ProductionTypes: ScrinAdvancedVehicle
-	Exit@SCRINCAPITALAIRCRAFT:
+	Exit@SCRINWARPAIRCRAFT:
 		SpawnOffset: 0,0,0
-		ProductionTypes: ScrinCapitalAircraft
+		ProductionTypes: ScrinWarpAircraft, ScrinCapitalAircraft
 
 scrin_foundry:
 	Inherits: ^ScrinBuilding
