@@ -437,3 +437,60 @@ The laws hold everywhere else.
 
 > ⛔ **Needs a ruling per row, not a fix.** Each is either a deliberate decision that must be
 > recorded beside its number — as the dreadnought's now is — or a real error. Nothing is changed.
+
+---
+
+## §14 — ⭐ The `_wild` variants are spawn-only, and 3 actors were priced as if buildable
+
+**Maintainer 2026-09-03:** *"forgotten mutant wild is the same as forgotten mutant but unbuildable
+right? I think this is a unit only spawned by support powers? ... maybe we can remove those and
+replace them with the base version instead if they are not too different."*
+
+**Right on both counts, and the family is small: only two.**
+
+### §14.1 — What actually differs
+
+Both are **stat-identical** to their base — same HP, speed, cost, weapon. Only behaviour differs:
+
+| variant | traits it ADDS | traits that DIFFER |
+|---|---|---|
+| `forgotten_mutant_wild` | `AttackWander` | hardcoded description; `RenderSprites.Image` → base sprite |
+| `forgotten_tiberianfiend_wild` | `AttackWander`, `KillsSelf`, `PeriodicExplosion@disappear`, `RejectsOrders` | `AutoTarget.InitialStance: AttackAnything`; `GivesExperience: 0` |
+
+They are **spawned, not produced** — `rules/tiberiansun.yaml` lines 201, 208, 215 and a warhead at
+`weapons/tiberiansun.yaml:1821`.
+
+### §14.2 — ⛔ The machine-readable signal, and the trap beside it
+
+Both carry a prerequisite **naming themselves**, which can never be satisfied. But an almost
+identical spelling means the opposite, and the difference is one character:
+
+| idiom | meaning | actors |
+|---|---|--:|
+| `~!tkm_bigshiee` | **NOT** self — a build-limit one-off, legitimately buildable | **562** |
+| `~forgotten_mutant_wild` | self as its own prerequisite — **can never be built** | **3** |
+
+`_is_balance_buildable` stripped `~` and `!` together before comparing, so it saw one bucket and
+called all 565 buildable. **The three that can never be built were priced, classed and matched as
+if a player could produce them:** `TSENGINEER`, `forgotten_mutant_wild` (in `scout`) and
+`forgotten_tiberianfiend_wild` (in `heavy_infantry`).
+
+⭐ That is what put `forgotten_mutant_wild` in the scout review sheet drawing *"Pilot"*,
+*"Bodybuilder"*, *"Warrior"*, *"Red Devil"*, *"Civilian"* and *"Virus"*. The junk references were a
+symptom; **the unit should never have been in the population.**
+
+**Fixed in `extract_stats.py`** — an actor whose own name appears un-negated in its prerequisites is
+not balance-buildable. ⚠ Takes effect on the next ledger refresh.
+
+### §14.3 — ⚠ Do NOT delete them or swap in the base version
+
+The maintainer's proposed cleanup would break behaviour. The wild variants exist *because* they
+wander, and the fiend also self-destructs, refuses orders and grants no experience. Replacing a
+spawn with the base actor would hand the player a controllable mutant that **gives XP when killed**
+and never despawns. **Excluding them from the balance population is the fix; deleting them is not.**
+
+⚠ Separately: four `_sp` variants (`forgotten_ghoststalker_sp`, `forgotten_mutant_sp`,
+`forgotten_mutantsniper_sp`, `forgotten_mutantsoldier_sp`) are already `buildable: False` and are
+correctly out of the population — **but they still appear as class members**, which is why `scout`
+lists 30 members and only 24 could be matched. Class membership includes non-buildable actors;
+that is a separate defect and is not fixed here.

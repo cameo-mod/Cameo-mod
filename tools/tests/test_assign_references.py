@@ -76,3 +76,32 @@ class TheExemptionsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TheSpawnOnlyIdiomTest(unittest.TestCase):
+    """⛔ `~self` and `~!self` sit side by side in this tree and mean opposite things. Stripping
+    the `!` before comparing — which the check did — collapses 562 legitimate one-offs and 3
+    spawn-only actors into one bucket."""
+
+    def setUp(self):
+        sys.path.insert(0, str(ROOT / "tools" / "audit"))
+        import extract_stats  # noqa: E402
+        self.fn = extract_stats._is_balance_buildable
+
+    def test_self_as_its_own_prerequisite_is_never_buildable(self):
+        b = {"Queue": "Infantry", "Prerequisites": "~forgotten_mutant_wild"}
+        self.assertFalse(self.fn(b, "forgotten_mutant_wild"))
+
+    def test_NOT_self_is_a_build_limit_and_stays_buildable(self):
+        """`~!tkm_bigshiee` means 'not already built' — a one-off, not a spawn-only unit."""
+        b = {"Queue": "Vehicle",
+             "Prerequisites": "~tkm_warfactory, tkm_techcenter, ~!tkm_bigshiee"}
+        self.assertTrue(self.fn(b, "tkm_bigshiee"))
+
+    def test_an_ordinary_unit_is_unaffected(self):
+        b = {"Queue": "Vehicle", "Prerequisites": "~ra2_soviets_warfactory"}
+        self.assertTrue(self.fn(b, "ra2_soviets_rhinoheavytank"))
+
+    def test_the_check_is_skipped_when_no_actor_name_is_given(self):
+        """Back-compat: the old one-argument call must keep working."""
+        self.assertTrue(self.fn({"Queue": "Infantry", "Prerequisites": "~x"}))

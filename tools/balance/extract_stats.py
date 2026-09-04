@@ -823,17 +823,34 @@ def weapon_entry(rs, wname: str) -> dict | None:
 _DISABLING_PREREQS = {"disabled", "wip", "disable", "unavailable", "notbuildable"}
 
 
-def _is_balance_buildable(buildable) -> bool:
+def _is_balance_buildable(buildable, actor: str = "") -> bool:
     """True iff the actor can actually be built (maintainer law 2026-07-22):
     has a Buildable trait with a non-empty Queue and no disabling prerequisite
     (~disabled / ~wip / …). Legacy tokens (E1/E3 — Buildable but no Queue),
-    spawn/veterancy variants (no Buildable), and ~disabled units all fail."""
+    spawn/veterancy variants (no Buildable), and ~disabled units all fail.
+
+    ⛔ AND AN ACTOR THAT IS ITS OWN PREREQUISITE CAN NEVER BE BUILT (2026-09-03). It is the
+    spawn-only idiom, and it is NOT the same as the build-limit idiom beside it:
+
+        ~!tkm_bigshiee            "NOT self"  -> a one-off; legitimately buildable   (562 actors)
+        ~forgotten_mutant_wild    "self"      -> unsatisfiable; spawn-only             (3 actors)
+
+    The `!` is the whole difference, so the check must not strip it. Found when
+    `forgotten_mutant_wild` turned up in the `scout` class drawing six junk references: it is
+    stat-identical to `forgotten_mutant` and differs only by `AttackWander`, and it is spawned
+    from `rules/tiberiansun.yaml` and a warhead rather than produced. Exactly three actors are
+    affected — `TSENGINEER`, `forgotten_mutant_wild`, `forgotten_tiberianfiend_wild` — and they
+    were being priced, classed and matched as if a player could build them.
+    """
     if buildable is None:
         return False
     if not buildable.get("Queue"):
         return False
     prereq = buildable.get("Prerequisites") or ""
-    toks = {t.strip().lstrip("~").strip().lower() for t in prereq.split(",")}
+    raw = [t.strip() for t in prereq.split(",") if t.strip()]
+    if actor and any("!" not in t and t.lstrip("~").strip().lower() == actor.lower() for t in raw):
+        return False
+    toks = {t.lstrip("~").strip().lower() for t in raw}
     return not (toks & _DISABLING_PREREQS)
 
 
@@ -906,7 +923,7 @@ def extract_actor(rs, key: str, section: str,
     # if it can be built in some way. NON-buildable (no Buildable trait, no Queue,
     # or a disabling prereq like ~disabled/~wip) → excluded from balancing AND all
     # audits. Its cost is only an XP-on-kill value; its stats don't matter.
-    u["buildable"] = _is_balance_buildable(buildable)
+    u["buildable"] = _is_balance_buildable(buildable, key)
     # ⛔ TURRET PRESENCE, not a field value (maintainer 2026-09-03). It is the second half of the
     # `dreadnought` definition — "heavy, slow, FRONTAL-FACING (no turret), more range and damage
     # than a regular tank" — and it is what FORMULA_V2 §3b already prices as the tank destroyer's
