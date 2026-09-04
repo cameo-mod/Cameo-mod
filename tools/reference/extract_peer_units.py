@@ -367,6 +367,69 @@ def unit_name(actor_id, node, fluent):
     return raw or actor_id
 
 
+def declared_factions(rules):
+    """{internal name: is a PLAYABLE subfaction} from the mod's own World actor.
+
+    ⛔ THE WHITELIST HAS TO COME FROM THE MOD, NOT FROM A GUESS. Faction tokens sit in the same
+    `Prerequisites` string as unit tokens — Combined Arms writes `~vehicles.soviet` beside
+    `~vehicles.mtnk`, and `mtnk` is a Medium Tank, not a faction. A regex over `word.word` tagged
+    only 20% of CA's roster and would have invented factions out of unit names. Every OpenRA mod
+    declares its factions on `World`, so that list is read and used as the filter.
+
+    ⚠ `Selectable: False` marks a PARENT faction — `allies`, `soviet`, `gdi` — that groups the
+    playable subfactions beneath it. Both are kept: the parent is what a Cameo faction maps to
+    (RA2 Allies), the subfaction is what a unit is usually tagged with (england, france, usa).
+    """
+    world = rules.resolve("World") or rules.resolve("world")
+    if world is None:
+        return {}
+    out = {}
+    for c in world.children:
+        if c.key == "Faction" or c.key.startswith("Faction@"):
+            d = {k.key: k.value for k in c.children}
+            name = (d.get("InternalName") or c.key.split("@")[-1] or "").strip().lower()
+            if not name or name == "random":
+                continue
+            # ⭐ `random-allies` DECLARES that `allies` is a real faction GROUP. Romanov's Vengeance
+            # names 31 subfactions (america, england, russia, cuba…) and gates its units on the
+            # PARENT (`Infantry.Allies`, `Infantry.Soviets`) — parents that appear nowhere else in
+            # the mod except as these random-* entries. Reading them recovers the grouping a Cameo
+            # faction actually maps to, which is RA2 Allies rather than RA2 France.
+            if name.startswith("random-"):
+                out[name[len("random-"):]] = True
+            else:
+                out[name] = (d.get("Selectable", "") or "").strip().lower() != "false"
+    return out
+
+
+def factions_of(node, known):
+    """The faction tokens an actor is gated on, filtered by what the mod actually declares."""
+    b = next((c for c in node.children
+              if c.key == "Buildable" or c.key.startswith("Buildable@")), None)
+    if b is None:
+        return []
+    found = set()
+    for field in ("Queue", "Prerequisites"):
+        for chunk in (b.get(field) or "").split(","):
+            tok = chunk.strip().lstrip("~!").strip().lower()
+            # `Infantry.Allies` -> allies · `~infantry.england` -> england · bare `yuri` -> yuri
+            for part in (tok.split(".")[-1], tok):
+                if not part or part.isdigit():
+                    continue
+                if part in known:
+                    found.add(part)
+                    continue
+                # ⚠ Mods abbreviate their own faction names inconsistently: Shattered Paradise
+                # DECLARES `mut`, `cab`, `scr` and then gates units on `mutant`, `cabal`, `scrin`.
+                # A prefix match in either direction reconciles them; 3 characters is the floor so
+                # short unit tokens cannot masquerade as a faction.
+                for k in known:
+                    if len(part) >= 3 and len(k) >= 3 and (part.startswith(k) or k.startswith(part)):
+                        found.add(k)
+                        break
+    return sorted(found)
+
+
 def extract(mod_id):
     spec = PEERS[mod_id]
     label, cands, rifle_id, expect = spec["label"], spec["root"], spec["rifle"], spec["expect"]
@@ -376,6 +439,7 @@ def extract(mod_id):
         return label, None, f"no checkout found (looked in {', '.join(cands)})"
     rules = miniyaml.Ruleset(root, mod_id)
     fluent = load_fluent(root, mod_id)
+    known_factions = declared_factions(rules)
 
     key = rules._actor_ci.get(rifle_id.lower())
     if not key:
@@ -414,6 +478,10 @@ def extract(mod_id):
         rows.append({
             "id": actor, "name": unit_name(actor, node, fluent),
             "type": unit_type(node), "turn_speed": ts, "turreted": turreted,
+            # ⭐ THE FACTION COLUMN (maintainer 2026-09-04). Reference routing needs it: an Asian
+            # Alliance unit may only draw on Mental Omega China, which is what stops
+            # "Animal Alligator" from ever being a candidate.
+            "faction": "/".join(factions_of(node, known_factions)) or "",
             "limit": int(limit) if (limit and str(limit).strip().isdigit()) else None,
             **wep,
             "hp": int(hp), "cost": int(cost) if cost else None,
@@ -469,14 +537,16 @@ def main():
                 f"{rcost} credits = 1.00×**"]
         if data["note"]:
             out += ["", data["note"]]
-        out += ["", "| id | unit | type | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | "
-                "Turret | Limit | Range | Dmg | Burst | Reload | DPS | vsINF | vsVEH | vsAIR | vsBLD |",
-                "|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|"]
+        out += ["", "| id | unit | type | faction | HP | ×rifle | Cost | ×rifle cost | Speed | "
+                "Turn | Turret | Limit | Range | Dmg | Burst | Reload | DPS | vsINF | vsVEH | "
+                "vsAIR | vsBLD |",
+                "|---|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|"]
         for r in sorted(data["rows"], key=lambda x: -x["x_hp"]):
             xc = f"{r['x_cost']:.2f}" if r["x_cost"] else "—"
             cost = f"{r['cost']:,}" if r["cost"] else "—"
             spd = r["speed"] if r["speed"] else "—"
-            out.append(f"| `{r['id']}` | {r['name']} | {r['type']} | {r['hp']:,} | "
+            out.append(f"| `{r['id']}` | {r['name']} | {r['type']} | "
+                       f"{r.get('faction') or '—'} | {r['hp']:,} | "
                        f"{r['x_hp']:.2f} | {cost} | {xc} | {spd} | "
                        f"{r['turn_speed'] if r['turn_speed'] else '—'} | "
                        f"{'Y' if r['turreted'] else 'n'} | "
