@@ -6406,7 +6406,7 @@
      "category": "Vehicles",
      "class_anchor": "high_tech_tank",
      "special": 1.0,
-     "subtype": "HighTechTank",
+     "subtype": "Dreadnought",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -6450,7 +6450,7 @@
     },
     "sight": {
      "src": "inherited",
-     "v": "7000"
+     "v": "8000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
@@ -7569,7 +7569,6 @@
        "^CabalManticoreMissiles"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"

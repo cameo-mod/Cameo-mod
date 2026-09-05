@@ -6,27 +6,29 @@ A number in prose is true only on the day it is written. These are the claims a 
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
-| `shield_versus_mean` | 189.088 | 189.805 | ✅ |
-| `shield_hp_factor` | 0.528855 | 0.526855 | ✅ |
-| `shield_damage_share` | 0.01432 | 0.0146486 | ✅ |
+| `shield_versus_mean` | 175.919 | 175.919 | ✅ |
+| `shield_hp_factor` | 0.568442 | 0.568442 | ✅ |
+| `shield_damage_share` | 0.0152182 | 0.0152182 | ✅ |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
-| `live_damage_multipliers` | 354 | 354 | ✅ |
-| `multi_main_fired_weapons` | 925 | 925 | ✅ |
-| `percentage_denominator_unset` | 0 | 0 | ✅ |
-| `unmigrated_scout_damage_multiplier` | 15 | 15 | ✅ |
-| `meters_filling_before_death` | 137 | 137 | ✅ |
-| `corrosion_meter_actors` | 785 | 785 | ✅ |
-| `w24_multi_main_fed` | 380 | 380 | ✅ |
-| `physical_state_fired_weapons` | 460 | 460 | ✅ |
+| `live_damage_multipliers` | 356 | 356 | ✅ |
+| `multi_main_fired_weapons` | 243 | — | **- wc2catapultFire: stale weapon_digest** |
+| `percentage_denominator_unset` | 183 | 183 | ✅ |
+| `unmigrated_scout_damage_multiplier` | 18 | 18 | ✅ |
+| `meters_filling_before_death` | 271 | 272 | **MISMATCH** |
+| `corrosion_meter_actors` | 814 | 814 | ✅ |
+| `w24_multi_main_fed` | 429 | 430 | **MISMATCH** |
+| `physical_state_fired_weapons` | 532 | 533 | **MISMATCH** |
 | `plating_row_ties` | 0 | 0 | ✅ |
-| `plating_families` | 46 | 46 | ✅ |
+| `plating_families` | 47 | 47 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
-| `warhead_family_reach` | 1245 | 1245 | ✅ |
-| `unconverted_template_inheritors` | 1162 | 1162 | ✅ |
-| `ledgers_drifted` | 0 | 0 | ✅ |
+| `warhead_family_reach` | 1413 | 1414 | **MISMATCH** |
+| `unconverted_template_inheritors` | 1600 | 1599 | **MISMATCH** |
+| `ledgers_drifted` | 0 | 1 | **MISMATCH** |
 
-_clean_ — every registered claim still matches the tree.
+**FAIL — a document and the tree disagree.**
+
+Fix whichever is wrong, and if the tree is right update `value` in `doc_claims.yaml` **and every doc listed under `docs:`** in the SAME commit. That co-update is the point: it is how the `Shield = top + floor` duplication survived in two documents for weeks.
 
 ## Review cadence (for what a number cannot capture)
 

@@ -136,7 +136,11 @@ The generated workbook binaries are not regenerated or represented as current by
 this code-only follow-up. Workbook generation/import is tested in memory using the
 bundled openpyxl dependency; no Excel recalculation or visual QA is claimed.
 
-### Final follow-up validation
+### Historical consumer-follow-up validation
+
+Current upstream integration status and armament-mode findings are recorded in
+[PR328_UPSTREAM_INTEGRATION.md](PR328_UPSTREAM_INTEGRATION.md). The green results
+below predate that integration and do not supersede its current failures.
 
 - Final-source suite: 81 isolated modules, **781 passed, zero skipped, zero failures**.
   The bundled Python runtime supplies openpyxl, so all workbook tests actually run.

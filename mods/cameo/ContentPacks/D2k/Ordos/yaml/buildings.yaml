@@ -633,6 +633,136 @@ ordos_autogunturret:
 	ActorStatValues:
 		Upgrades: ordos_upgrade_contraband, ordos_upgrade_rapidfirearmorpiercingbelts
 
+ordos_laserturret:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@detect: ^GenericAllDetector
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^1x1Shape
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Armor:
+		Type: Concrete
+	Tooltip:
+		Name: Ordos Laser Turret
+	Valued:
+		Cost: 1100
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter
+		BuildPaletteOrder: 520
+		Description: Advanced defensive turret.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		IconPalette: cameo
+	Health:
+		HP: 75000
+	Armament:
+		Weapon: ordos_laserturret
+		LocalOffset: 600,0,500
+	WithSpriteTurret:
+		Palette: player
+		IsPlayerPalette: True
+		RequiresCondition: !build-incomplete
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	BodyOrientation:
+		QuantizedFacings: 32
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Turreted:
+		TurnSpeed: 16
+		InitialFacing: 2048
+	RenderSprites:
+		Image: ordos_laserturret
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 2, 4
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	Power:
+		Amount: -55
+	RevealsShroud:
+		Range: 7710
+	DetectCloaked:
+		Range: 3855
+	-WithDeathAnimation:
+	ActorStatValues:
+		Upgrades: ordos_upgrade_contraband
+
+ordos_chemturret:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^1x1Shape
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Armor:
+		Type: Concrete
+	Tooltip:
+		Name: Ordos Chemical Mortar Turret
+	Valued:
+		Cost: 1200
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~ordos_constructionyard, ordos_barracks
+		BuildPaletteOrder: 530
+		Description: Long-range chemical mortar.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
+		IconPalette: cameo
+	Health:
+		HP: 75000
+	Armament:
+		Weapon: ordos_chemturret
+		LocalOffset: 600,0,500
+	WithSpriteTurret:
+		Palette: player
+		IsPlayerPalette: True
+		RequiresCondition: !build-incomplete
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	BodyOrientation:
+		QuantizedFacings: 32
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 2048
+	RenderSprites:
+		Image: ordos_chemturret
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 2, 4
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	Power:
+		Amount: -55
+	RevealsShroud:
+		Range: 7710
+	DetectCloaked:
+		Range: 3855
+	-WithDeathAnimation:
+	ActorStatValues:
+		Upgrades: ordos_upgrade_contraband
+
 # flame_turret:
 # 	Inherits: ixian_gunturret
 # 	Inherits@AntiInf: ^PrioritizeInfantry

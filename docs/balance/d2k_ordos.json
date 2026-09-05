@@ -606,8 +606,8 @@
     "name": "Banshee",
     "prerequisites": [
      "~ordos_hightechfactory",
-     "~ordos_promotion_banshees",
-     "ordos_ixresearchcenter"
+     "ordos_ixresearchcenter",
+     "~ordos_promotion_banshees"
     ],
     "queue": [
      "Aircraft",
@@ -1062,8 +1062,8 @@
     "name": "Wraith",
     "prerequisites": [
      "~ordos_hightechfactory",
-     "~ordos_promotion_wraith",
-     "ordos_palace"
+     "ordos_palace",
+     "~ordos_promotion_wraith"
     ],
     "queue": [
      "Aircraft",
@@ -1420,6 +1420,94 @@
      "v": "5000"
     }
    },
+   "ordos_chemturret": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "Chem_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "14000",
+      "reloaddelay": "90",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "ordos_chemturret",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Armor.Type",
+     "v": "Concrete"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AdvancedDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Health.HP",
+     "v": "75000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Ordos Chemical Mortar Turret",
+    "prerequisites": [
+     "~ordos_constructionyard",
+     "ordos_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "7710"
+    }
+   },
    "ordos_constructionyard": {
     "armor": {
      "src": "inherited",
@@ -1633,6 +1721,107 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
+    }
+   },
+   "ordos_laserturret": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7275",
+      "reloaddelay": "55",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "ordos_laserturret",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Armor.Type",
+     "v": "Concrete"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Valued.Cost",
+     "v": "1100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AdvancedDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Health.HP",
+     "v": "75000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Ordos Laser Turret",
+    "prerequisites": [
+     "~ordos_constructionyard",
+     "ordos_ixresearchcenter"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "7710"
     }
    },
    "ordos_lightfactory": {
@@ -2988,7 +3177,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
@@ -2997,13 +3186,11 @@
       "versus_templates": [
        "^Compatibility_Bullet_LightFlat",
        "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light"
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg",
       "weapon_class_source": "template"
@@ -3026,7 +3213,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
@@ -3041,11 +3228,10 @@
       ],
       "warheads": [
        "^Warhead_Laser_Heavy",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light"
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3059,7 +3245,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
@@ -3068,13 +3254,11 @@
       "versus_templates": [
        "^Compatibility_Bullet_LightFlat",
        "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light"
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg",
       "weapon_class_source": "template"
@@ -3098,7 +3282,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
@@ -3113,11 +3297,10 @@
       ],
       "warheads": [
        "^Warhead_Laser_Heavy",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light"
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5069,8 +5252,8 @@
     "name": "Deviator Tank",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
-     "~ordos_promotion_deviatortank",
-     "ordos_palace"
+     "ordos_palace",
+     "~ordos_promotion_deviatortank"
     ],
     "queue": [
      "Vehicle",
@@ -5919,8 +6102,8 @@
     "name": "Laser Tank",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
-     "~ordos_promotion_lasertank",
-     "ordos_ixresearchcenter"
+     "ordos_ixresearchcenter",
+     "~ordos_promotion_lasertank"
     ],
     "queue": [
      "Vehicle",

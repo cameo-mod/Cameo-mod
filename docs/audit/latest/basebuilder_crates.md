@@ -1,6 +1,6 @@
 # audit_basebuilder_crates — faction MCV crate coverage
 
-Real factions: **29** — covered by crate: **28** — missing: **1**
+Real factions: **31** — covered by crate: **29** — missing: **2**
 
 
 ## Covered factions
@@ -12,6 +12,7 @@ Real factions: **29** — covered by crate: **28** — missing: **1**
 | eden | eden | EDEN_CONVEC_STRUCTURE_FACTORY | 10000 |
 | forgotten | forgotten | forgotten_mobileconstructionvehicle | 10000 |
 | futuretech | futuretech | futuretech_mobileconstructionvehicle | 10000 |
+| harkonnen | harkonnen | harkonnen_mobileconstructionvehicle | 10000 |
 | ixian | ixian | ixian_mobileconstructionvehicle | 10000 |
 | japan | japan | japan_japanesemobileconstructionvehicle | 10000 |
 | latinsyndicate | latinsyndicate | latinsyndicate_syndicatemobileconstructionvehicle | 10000 |
@@ -41,6 +42,7 @@ Real factions: **29** — covered by crate: **28** — missing: **1**
 
 | faction |
 |---|
-| harkonnen |
+| atreides |
+| corrino |
 
 

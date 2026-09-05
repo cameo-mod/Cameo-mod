@@ -481,16 +481,11 @@ Support_EMP_Bomb:
 	Inherits: ^Warhead_Tesla_Heavy
 	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Effect_Tesla_Super
+	-Warhead@Tesla_Heavy:
 	Report: mobemp1.aud
 	Range: 25000
 	ReloadDelay: 250
 	Projectile: InstantExplode
-	Warhead@Tesla_Heavy:
-		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
-		Damage: 10000
-		Spread: 2500
-		InvalidTargets: Infantry
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
@@ -500,7 +495,7 @@ Support_EMP_Bomb:
 	Warhead@Tesla_Super:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 10000
+		Damage: 20000
 		Spread: 2500
 		InvalidTargets: Infantry
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
@@ -1282,7 +1277,6 @@ Lunar_Green105mm:
 SyndicateFireballLauncher:
 	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat
 	Inherits: ^Warhead_Flame_Light
-	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Warhead_Flame_Heavy
 	Inherits@4: ^Effect_Flame_Heavy
 	ReloadDelay: 44
@@ -1295,15 +1289,10 @@ SyndicateFireballLauncher:
 		Image: tsflameall
 		Inaccuracy: 555
 		Palette: tseffect
-	Warhead@Flame_Light:
-		Damage: 2000
-	Warhead@Flame_Medium:
-		Damage: 2000
 	Warhead@Flame_Heavy:
 		Damage: 2000
 	-Warhead@Flame_Heavy:
 	-Warhead@Flame_Light:
-	-Warhead@Flame_Medium:
 	Warhead@Flame_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 6000
@@ -1698,8 +1687,6 @@ naxis_sssoldier_smg:
 	Projectile: Bullet
 		Speed: 4000
 		Inaccuracy: 600
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Light:

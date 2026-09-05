@@ -2485,32 +2485,7 @@ KotinCannon:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 
-KotinCannonThermobaric:
-	Inherits@thermobaric: ^Warhead_Thermobaric_Heavy
-	Inherits@flameprojectile: ^Projectile_Flame_Medium
-	Inherits@4: ^Effect_Flame_Medium
-	Inherits@3: KotinCannon
-	Report: tnkfire6.aud
-	-Warhead@CannonHE_Heavy:
-	Warhead@Thermobaric_Heavy:
-		Damage: 16000
-		Versus:
-			Scout: 98
-			Light: 90
-			Medium: 86
-		PhysicalStates:
-			Temperature: 25
-	Warhead@Radiation: CreateTintedCells
-		InvalidTargets: RadiationImmmune
-		Spread: 1000
-		Falloff: 100, 50, 33, 25, 20, 15, 10, 5
-		Level: 30
-		MaxLevel: 2000
-		LayerName: ra2radiation
-	Warhead@Effect: CreateEffect
-		Explosions: nuke_small
-		ImpactSounds: xplosml2.aud
-		ImpactActors: true
+
 
 ra120mmTargetingComputer:
 	Inherits: ra120mm
@@ -4584,3 +4559,31 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
+
+KotinCannonNuclearShell:
+	Inherits@wh: ^Warhead_CannonNuke_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
+	Inherits@fx2: ^Effect_Nuclear_Super
+	ValidTargets: Ground, Water
+	Report: tnkfire6.aud
+	ReloadDelay: 96
+	Range: 6427
+	Burst: 2
+	BurstDelays: 4
+	Projectile: Bullet
+		Speed: 642
+	Warhead@CannonNuke_Heavy:
+		Damage: 16000
+	Warhead@Radiation: CreateTintedCells
+		InvalidTargets: RadiationImmmune
+		Spread: 1000
+		Falloff: 100, 50, 33, 25, 20, 15, 10, 5
+		Level: 30
+		MaxLevel: 2000
+		LayerName: ra2radiation
+	Warhead@Effect: CreateEffect
+		Explosions: nuke_small
+		ImpactSounds: xplosml2.aud
+		ImpactActors: true
+

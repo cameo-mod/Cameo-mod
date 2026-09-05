@@ -4871,7 +4871,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
@@ -4881,16 +4881,14 @@
        "^Compatibility_Flame_MediumFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Flame_Heavy",
-       "^Warhead_Flame_Medium",
        "^Effect_Flame_Medium"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Heavy",
-       "^Warhead_Flame_Medium"
+       "^Warhead_Flame_Heavy"
       ],
       "weapon": "FireballLauncherBuggy2",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",

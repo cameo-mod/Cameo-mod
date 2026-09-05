@@ -1,0 +1,116 @@
+# PR #328: upstream integration and armament-mode boundary
+
+Integrated upstream `e06ed9907` (115 commits beyond the former base). This is a
+tooling integration, not approval to merge PR #328 or change gameplay.
+
+## What changed here
+
+- The workbook and range-tool import conflicts combine upstream's centralized
+  class membership with this PR's per-armament firepower handling. Both broad
+  write guards remain closed. Workbook fingerprints include both helper modules.
+- The JSON-only nominal proposal now requires an actual attack selecting the
+  primary armament. Orders such as AttackMove do not qualify. Disabled, paused
+  or unknown activation at the assumed zero-condition snapshot blocks a proposal.
+  This is not a simulation of actual spawn-time conditions or combat readiness.
+- The new armament-mode report resolves inherited slots and reports each mode's
+  factor, attack selectors, activation uncertainty and other base-YAML references.
+  It never sums primary/garrison slots, removes an armament, or proposes a price.
+- All 33 raw and 33 derived ledgers were regenerated. A comparison with the exact
+  upstream extractor, run against the same current YAML, produced identical raw
+  data after removing only `resolved_firepower_modifiers`, and identical derived
+  sidecars. Derived changes relative to committed upstream are regeneration drift,
+  not a new pricing law or applied actor costs.
+
+## Current roster result
+
+The ledger-listed armed population is **1,000**, up from 950 on the previous base.
+It is not an exhaustive inventory of every concrete actor or every map override.
+
+| Actual armament topology | Actors |
+|---|---:|
+| Fewer than two slots | 338 |
+| Same-weapon primary/garrison pair | 86 |
+| Other repeated same-weapon slots | 23 |
+| Other multiple weapons | 553 |
+
+None of the 86 simple pairs pass the weapon-only model: 49 first stop at folded
+percentage damage, 17 at standalone percentage damage, 8 at GlowImpact, 1 at state
+feedback and 11 at projectile delivery. These are first blockers, not exhaustive
+independent findings. **41 pairs also have other base-YAML references.**
+
+There is therefore no evidence to relax the multi-armament proposal guard. Five
+single-armament actors pass the structural screen; four have reference concerns.
+The Spy remains the one unshared nominal candidate, not a rebalance recommendation.
+
+## Hydra: current versus historical
+
+Upstream `8748c68e4` replaced HydraSpit's four profiles with `BulletChem_Light`;
+subsequent upstream generator work retains 18,000 Damage, PercentageScale 10,000,
+ReloadDelay 15, Range 5979 and the Corrosion map binding at 20. This integration
+preserves that upstream definition. It does not assert that the redesign preserves
+the old weapon's damage, splash, state response or gameplay balance.
+
+The old laboratory and two-stage pilot concern a different, historical weapon.
+Their original JSON and report artifacts remain intact. Tests now explicitly use:
+
+- A fully resolved weapon fixture captured from
+  `819abe10d5858b810c6102a33eeebce42165f6cb`, canonical SHA-256
+  `50c133e219282e45ffe130f8a657d61aba40e732aecd9953a19d9098680e4122`.
+- The archived target/shooter scenario, canonical SHA-256
+  `5591cd280cb6e097795a2bb6e1fccd9850e47b3245754b03fbd83b35b395d398`.
+
+Historical evaluations require explicit complete inputs. Default execution against
+today's weapon rejects the unsupported scenario before writing artifacts. Tests
+retain the old arithmetic evidence separately from the current BulletChem contract.
+No game launch or in-game validation is claimed.
+
+## Validation boundary
+
+Generator synchronization passes for 145 templates. Percentage-runtime checks pass.
+The physical-state audit remains failing with 208 findings. The structure and
+decision audits fail because upstream's reviewed-composite registry no longer
+matches the resolved weapons. No stale digest or changed composite is automatically
+re-approved here; the old structure/decision artifacts must not be read as current.
+
+The [registry drift queue](../audit/latest/composite_registry_drift.json) retains
+all **355 validator findings**. Its overlapping categories include 11 curated
+main-name disagreements, 14 manifest main-name disagreements, 151 changed main
+fingerprints despite unchanged names, and 5 reference/reachability disagreements.
+These are review categories, not approval decisions. Its raw topology counts show
+335 stacked concrete weapons: 242 reachable and 93 currently unreached. No
+reviewed/unreviewed totals are claimed while the registry is invalid.
+
+`tools/audit/report_composite_registry_drift.py --write` writes only the diagnostic
+JSON. A fresh report still returns exit 1 when the registry is blocked; report
+freshness must not turn a failed registry into a green validation.
+
+The final integrated suite completed **88/88 modules, 859 tests run, zero skips,
+22 failed modules**, recorded in
+[`bounded_test_run.json`](../audit/latest/bounded_test_run.json). Setup errors
+prevent some classes from running their test methods; this is not 859 passes.
+Sampled full-suite process-tree peak was 831.6 MB and PC memory peak 44.9%, with an
+84% guard. The new/migrated focused tests pass, but the overall suite remains red.
+A prior green 802-test result applies to the old base, not this integration.
+
+Baseline reproduction was selective, not a second full clean-checkout suite:
+loading the exact `e06ed9907` registry implementation against byte-matching upstream
+YAML/manifest/resolver inputs reproduced all 355 registry findings. Loading that
+revision's extractor and assignment tests reproduced the three two-argument
+`_is_balance_buildable` API errors. Other failed historical contracts remain
+unresolved findings; they are not all declared harmless or upstream-proven here.
+
+Next review should reconcile changed composite decisions against their upstream
+commits, then refresh the registry and dependent reports. That is separate from
+approving weapon changes or removing the nominal solver's safety boundaries.
+
+The 11 curated main-name disagreements group into three concrete review batches:
+
+- Seven Tesla-containing superweapon chains lose a separate `Tesla_Heavy` main:
+  Atomic, NaxiV1Rocket, PulseMissile, RA2Atomic, RAAtomic, SteelIonCannonDamage and
+  TDIonCannonDamage.
+- Three Ixian cannon profiles lose a separate `CannonHE_Medium` main:
+  DuelistTankCannon, HeavyIxianCombatTankCannon and IxianCombatTankCannon.
+- JapanesePlasmaBomb replaces its Chemical/Demolition/Flame trio with Plasma.
+
+These observations describe profile membership only, not damage preservation or
+approval. The other fingerprint/reference findings still require review too.

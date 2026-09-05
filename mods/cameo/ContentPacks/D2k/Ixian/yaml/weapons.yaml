@@ -34,10 +34,8 @@ IxianCombatTankCannon:
 	Warhead@CannonAP_Light:
 		Damage: 4000
 	Warhead@CannonHE_Heavy:
-		Damage: 4000
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 4000
+		Damage: 8000
+	-Warhead@CannonHE_Medium:
 HeavyIxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -53,10 +51,8 @@ HeavyIxianCombatTankCannon:
 	Warhead@CannonAP_Light:
 		Damage: 6000
 	Warhead@CannonHE_Heavy:
-		Damage: 6000
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 6000
+		Damage: 12000
+	-Warhead@CannonHE_Medium:
 DuelistTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -107,10 +103,8 @@ DuelistTankCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 7
 	Warhead@CannonHE_Heavy:
-		Damage: 14000
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 14000
+		Damage: 28000
+	-Warhead@CannonHE_Medium:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
@@ -364,12 +358,10 @@ D2K_155mm3:
 		InaccuracyType: PerCellIncrement
 		Image: d2k_155mm
 		Palette: d2keffect
-	Warhead@Demolition_Light:
-		Damage: 8000
 	Warhead@Concussion_Medium:
 		Damage: 8000
 	Warhead@Demolition_Heavy:
-		Damage: 8000
+		Damage: 16000
 	Warhead@Concrete: DamagesConcrete
 		Damage: 250
 	Warhead@CollapsedD2K_155mm3Concussion_MediumPercentage: AreaDamagePercentage
@@ -545,7 +537,7 @@ D2K_Rocket_Trooper1:
 		Damage: 8000
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 D2K_TowerMissile:
 	Inherits: ^D2KMissile
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
@@ -1070,9 +1062,6 @@ RaiderGuns:
 	Range: 6400
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1120,9 +1109,6 @@ HMG_turret:
 	Range: 7394
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
@@ -1453,10 +1439,9 @@ D2K_RocketsCymek:
 		Damage: 3
 d2k_air_drone_guns:
 	Inherits: ^D2KMissile
-	Inherits@2: ^Warhead_Bullet_Light
-	Inherits@3: ^Warhead_Bullet_Medium
-	Inherits@4: ^Projectile_Bullet_Medium
-	Inherits@5: ^Effect_Bullet_Medium
+	Inherits@2: ^Warhead_Bullet_Medium
+	Inherits@3: ^Projectile_Bullet_Medium
+	Inherits@4: ^Effect_Bullet_Medium
 	ReloadDelay: 28
 	Burst: 4
 	BurstDelays: 2
@@ -1467,12 +1452,9 @@ d2k_air_drone_guns:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 	MinRange: 1300
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
@@ -1491,10 +1473,7 @@ d2k_air_drone_guns_upgrade:
 		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 	MinRange: 1300
 d2k_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -1718,23 +1697,38 @@ d2k_projections:
 		Delay: 10
 
 MongooseRocket:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^Chaingun
-	Inherits@4: ^FlakWeapon
-	Inherits@5: ^TankDestroyerCannon
-	Inherits@6: ^RailgunWeapon
-	Inherits@7: ^MediumMissile
-	Inherits@8: ^D2KRocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 64
 	Range: 6183
 	Report: d2k_buggy_rocket.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
-		Acceleration: 6
-		Speed: 666
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		ContrailLength: 0
+		Shadow: true
+		LaunchAngle: 125
 		MaximumLaunchSpeed: 222
 		MinimumLaunchSpeed: 222
+		Speed: 666
+		CloseEnough: 500
+		Acceleration: 6
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
 	Warhead@MissileAP_Heavy:
@@ -1742,16 +1736,6 @@ MongooseRocket:
 		Damage: 33000
 		PercentageScale: 1212
 		PercentageDenominator: 10000
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
-	-Warhead@TankDestroyerCannon:
-	-Warhead@RailgunWeapon:
-	-Warhead@RailgunExtraDamage:
-	-Warhead@MediumMissile:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -1775,6 +1759,7 @@ MongooseRocket:
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_rocket_explosion
+		ImpactSounds: xplobig4.aud
 		ExplosionPalette: effect75alpha
 	Warhead@EffectWater: CreateEffect
 		Explosions: med_splash

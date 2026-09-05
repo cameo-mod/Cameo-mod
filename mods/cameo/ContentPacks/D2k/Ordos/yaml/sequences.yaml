@@ -840,6 +840,14 @@ ordos_saboteur:
 		Facings: -8
 		Transpose: true
 		Tick: 120
+	shoot:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Start: 2149
+		Facings: -8
+		Transpose: true
+		Tick: 80
 	die1:
 		Filename: DATA.R16
 		Scale: 2
@@ -996,79 +1004,55 @@ ordos_leech:
 		Offset: 0,0
 
 ordos_facedancer:
-	Inherits: ^InfantryOverlays
+	Inherits: ^RA2ArmedInfantry
+		Scale: 1
+	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
-		Scale: 1.47
-		Filename: ordos_facedancer.shp
-	invisible:
-		Filename: DATA.R16
-		Scale: 1.4
-		Remap: 54F94B
-		Start: 38
-	idle:
-		Facings: 8
-		Scale: 1.4
-	stand:
-		Facings: 8
-		Scale: 1.4
+		Scale: 0.61
+		Filename: tleilax_facedancer.png
 	run:
-		Start: 16
-		Length: 6
+		Scale: 1
+		Tick: 48
+		Start: 8
+		Length: 10
 		Facings: 8
-		Scale: 1.4
-	bite:
-		Start: 64
-		Length: 4
+	walk:
+		Scale: 1
+		Tick: 48
+		Start: 8
+		Length: 10
 		Facings: 8
-		Scale: 1.4
-	harvest:
-		Start: 64
-		Length: 4
+	stand:
+		Scale: 1
+	idle1:
+		Scale: 1
+		Start: 88
+	idle2:
+		Scale: 1
+		Start: 103
+	prone-stand:
+		Scale: 1
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
 		Facings: 8
-		Scale: 1.4
-	dock:
-		Start: 64
-		Length: 4
-		Facings: 8
-		Scale: 1.4
-	dock-loop:
-		Start: 64
-		Length: 4
-		Facings: 8
-		Scale: 1.4
+	prone-run:
+		Scale: 1
+		Start: 118
 	die1:
-		Start: 106
-		Length: 7
-		Scale: 1.4
+		Scale: 1
+		Start: 166
 	die2:
-		Start: 106
-		Length: 7
-		Scale: 1.4
-	die3:
-		Start: 106
-		Length: 7
-		Scale: 1.4
-	die4:
-		Start: 106
-		Length: 7
-		Scale: 1.4
-	die5:
-		Filename: shared_sprites|e1.shp
+		Scale: 1
+		Start: 181
+	shoot:
+		Scale: 1
+		Start: 196
+	prone-shoot:
+		Scale: 1
+		Start: 244
+	paradrop:
+		Scale: 1
 		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: shared_sprites|e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: shared_sprites|electro.shp
-		Length: *
-	die-crushed:
-		Start: 106
-		Length: 7
-		Scale: 0.7
 	icon:
 		Filename: ordos_facedancer_icon.shp
 
@@ -1697,3 +1681,77 @@ ordos_upgrade_para:
 ordos_upgrade_heavycombattankrockets:
 	icon:
 		Filename: ordos_upgrade_heavycombattankrockets_icon.png
+
+ordos_laserturret:
+	Defaults:
+		Scale: 1
+		Offset: -2,0
+	invisible:
+		Filename: ordos_lasertur.png
+		Start: 0
+		Length: 1
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 38
+		Length: 1
+		Facings: 1
+	make:
+		Filename: ordos_lasertur.png
+		Start: 0
+		Length: 16
+		Tick: 80
+	turret:
+		Filename: ordos_lasertur.png
+		Start: 16
+		Facings: 64
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4584
+		Length: 7
+		Offset: -16,16
+		Tick: 200
+		ZOffset: 1024
+	icon:
+		Offset: 0,0
+		Filename: ordos_lasertur_icon.png
+
+ordos_chemturret:
+	Defaults:
+		Scale: 1
+		Offset: -2,0
+	invisible:
+		Filename: ordos_chemtur.png
+		Start: 0
+		Length: 1
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 38
+		Length: 1
+		Facings: 1
+	make:
+		Filename: ordos_chemtur.png
+		Start: 0
+		Length: 16
+		Tick: 80
+	turret:
+		Filename: ordos_chemtur.png
+		Start: 16
+		Facings: 64
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4584
+		Length: 7
+		Offset: -16,16
+		Tick: 200
+		ZOffset: 1024
+	icon:
+		Offset: 0,0
+		Filename: ordos_chemtur_icon.png

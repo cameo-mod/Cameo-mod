@@ -6699,7 +6699,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6708,13 +6708,11 @@
       "versus_templates": [
        "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -6732,7 +6730,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6741,13 +6739,11 @@
       "versus_templates": [
        "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -6764,7 +6760,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6773,13 +6769,11 @@
       "versus_templates": [
        "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -6796,7 +6790,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6805,13 +6799,11 @@
       "versus_templates": [
        "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -7591,7 +7583,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "44",
@@ -7599,17 +7591,15 @@
       "versus_templates": [
        "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9527,7 +9517,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "44",
@@ -9535,17 +9525,15 @@
       "versus_templates": [
        "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -2249,7 +2249,7 @@
       "warheads": [
        "^Warhead_Chemical_Heavy"
       ],
-      "weapon": "TSChemsprayUp",
+      "weapon": "TSChemsprayUP",
       "weapon_class_source": "template"
      },
      {
@@ -9590,6 +9590,13 @@
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
         "tag": "Chemical_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "30000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CannonChem_Medium",
         "type": "AreaDamage"
        }
       ],

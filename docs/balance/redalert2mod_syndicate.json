@@ -1217,7 +1217,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -1228,16 +1228,14 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinSentryMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -1252,7 +1250,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "30",
@@ -1263,11 +1261,10 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinSentryMG_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2697,7 +2694,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "44",
@@ -2706,17 +2703,15 @@
       "versus_templates": [
        "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -2731,7 +2726,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "44",
@@ -2742,11 +2737,10 @@
       ],
       "warheads": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SyndicateFireballLauncher_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2762,7 +2756,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5555",
       "reloaddelay": "44",
@@ -2771,17 +2765,15 @@
       "versus_templates": [
        "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2797,7 +2789,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6666",
       "reloaddelay": "44",
@@ -2808,11 +2800,10 @@
       ],
       "warheads": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SyndicateFireballLauncher_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3492,8 +3483,8 @@
     "name": "Narco",
     "prerequisites": [
      "~latinsyndicate_combatbarracks",
-     "~latinsyndicate_promotion_narcos",
-     "latinsyndicate_latinempradar"
+     "latinsyndicate_latinempradar",
+     "~latinsyndicate_promotion_narcos"
     ],
     "queue": [
      "Infantry",
@@ -4219,7 +4210,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -4230,16 +4221,14 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinSentryMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -4254,7 +4243,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "30",
@@ -4265,11 +4254,10 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinSentryMG_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5350,8 +5338,8 @@
     "name": "Demolition Truck",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_demolitiontrucks",
-     "latinsyndicate_latinempradar"
+     "latinsyndicate_latinempradar",
+     "~latinsyndicate_promotion_demolitiontrucks"
     ],
     "queue": [
      "Vehicle",
@@ -5808,8 +5796,8 @@
     "name": "LARS",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_lars",
-     "latinsyndicate_defensebureau"
+     "latinsyndicate_defensebureau",
+     "~latinsyndicate_promotion_lars"
     ],
     "queue": [
      "Vehicle",
@@ -6403,8 +6391,8 @@
     "name": "Latin APC",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_latinapc",
-     "latinsyndicate_spycenter"
+     "latinsyndicate_spycenter",
+     "~latinsyndicate_promotion_latinapc"
     ],
     "queue": [
      "Vehicle",
@@ -6994,8 +6982,8 @@
     "name": "Nuke Truck",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_nuketrucks",
-     "latinsyndicate_spycenter"
+     "latinsyndicate_spycenter",
+     "~latinsyndicate_promotion_nuketrucks"
     ],
     "queue": [
      "Vehicle",
@@ -7157,13 +7145,11 @@
        "^Warhead_Flak_Medium",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
-       "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinBuggyChaingun",
@@ -7224,7 +7210,6 @@
       "warheads": [
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinBuggyChaingun_elite",
@@ -7672,7 +7657,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6550",
       "reloaddelay": "65",
@@ -7684,12 +7669,10 @@
        "^MediumFlameWeapon",
        "^HeavyBomb",
        "^ShrapnelWeapon",
-       "^RA2HeavyCannon",
-       "^RA2MediumCannon"
+       "^RA2HeavyCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "LatinSmokerCannon",
       "weapon_class_source": "template"
@@ -7736,7 +7719,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7550",
       "reloaddelay": "65",
@@ -7747,8 +7730,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "LatinSmokerCannon_elite",
       "weapon_class_source": "template"
@@ -8144,8 +8126,8 @@
     "name": "Topol-M",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_topolm",
-     "latinsyndicate_defensebureau"
+     "latinsyndicate_defensebureau",
+     "~latinsyndicate_promotion_topolm"
     ],
     "queue": [
      "Vehicle",
@@ -8307,13 +8289,11 @@
        "^Warhead_Flak_Medium",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
-       "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinBuggyChaingun",
@@ -8374,7 +8354,6 @@
       "warheads": [
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinBuggyChaingun_elite",

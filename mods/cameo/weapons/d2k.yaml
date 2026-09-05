@@ -206,12 +206,10 @@ PlasBullet:
 	ReloadDelay: 74
 	Range: 10000
 	Report: MORTAR1.WAV
-	Warhead@Demolition_Light:
-		Damage: 12000
 	Warhead@Concussion_Medium:
 		Damage: 12000
 	Warhead@Demolition_Heavy:
-		Damage: 12000
+		Damage: 24000
 	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 12000
@@ -962,7 +960,6 @@ OrniMissile:
 			Medium: 75
 			Heavy: 50
 			Concrete: 125
-	-Warhead@Shrapnel:
 
 	MinRange: 1335
 Crush:
@@ -1355,20 +1352,16 @@ D2K_Personal_Shield_Impact:
 
 LMG:
 	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@wh2: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
 	Range: 4448
 	Report: gun11.aud
 	Warhead@Bullet_Medium:
-		Damage: 2000
-	Warhead@Bullet_Light:
-		Damage: 2000
+		Damage: 4000
 light_inf_lmg:
 	Inherits@finalmain: ^Compatibility_Bullet_LightFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@wh2: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
@@ -1386,7 +1379,6 @@ light_inf_lmg:
 		PercentageScale: 9975
 LMG_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
-	Inherits@2: ^Warhead_Bullet_Light
 	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
@@ -1400,14 +1392,10 @@ LMG_upgrade:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 light_inf_lmg_upgrade:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Bullet_Medium
-	Inherits@2: ^Warhead_Bullet_Light
 	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
@@ -1583,7 +1571,6 @@ Fremen_RPG:
 	MinRange: 975
 HMG:
 	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@wh2: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
@@ -1662,7 +1649,6 @@ HMG_fremen:
 		Falloff: 100, 50
 		Range: 0, 50
 	-Warhead@1Dam:
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
@@ -3050,6 +3036,7 @@ PulseMissile:
 	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Projectile_Lightning_Super
 	Inherits@4: ^Effect_Tesla_Super
+	-Warhead@Tesla_Heavy:
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
 	Warhead@Tesla_Super:
@@ -3057,7 +3044,7 @@ PulseMissile:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
-		Damage: 100000
+		Damage: 200000
 		Delay: 0
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		ValidTargets: Shielded
@@ -3065,13 +3052,6 @@ PulseMissile:
 		Spread: 2000
 		Damage: 50000
 		Delay: 1
-	Warhead@Tesla_Heavy:
-		PercentageScale: 2000
-		ValidTargets: Shielded
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 1000
-		Damage: 100000
-		Delay: 4
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10

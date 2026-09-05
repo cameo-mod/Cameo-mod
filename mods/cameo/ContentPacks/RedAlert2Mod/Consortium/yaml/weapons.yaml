@@ -101,15 +101,13 @@ SteelCloneGunResonanceBounce2_elite:
 SteelVulcan:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^SteelHeavyCannon
-	Inherits@2: ^SteelSmallArms
-	Inherits@3: ^SteelChaingun
+	Inherits@2: ^SteelChaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 6666
 	# Retain the inherited shell template's range-scaled flight behavior.
 	Projectile: ScaledBullet
 	-Warhead@CannonHE_Heavy:
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
@@ -619,9 +617,8 @@ SteelMakoGun_EMP_elite:
 SteelMantaAG:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^SteelLightMissile
-	Inherits@2: ^SteelSmallArms
-	Inherits@3: ^RA2FlakWeapon
-	Inherits@4: ^SteelChaingun
+	Inherits@2: ^RA2FlakWeapon
+	Inherits@3: ^SteelChaingun
 	ReloadDelay: 20
 	Range: 6666
 	ValidTargets: Ground, Water
@@ -638,16 +635,12 @@ SteelMantaAG:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	-Warhead@MissileAP_Light:
@@ -2356,7 +2349,7 @@ SteelInspectorIonCannonDamage:
 		ValidTargets: Ground, Water
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 300
-		Damage: 100000
+		Damage: 200000
 		Delay: 0
 		AffectsParent: False
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
@@ -2366,13 +2359,6 @@ SteelInspectorIonCannonDamage:
 		Spread: 200
 		Damage: 50000
 		Delay: 2
-		AffectsParent: False
-	Warhead@Tesla_Heavy:
-		ValidTargets: Ground, Water
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 300
-		Damage: 100000
-		Delay: 3
 		AffectsParent: False
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
@@ -3076,12 +3062,9 @@ SteelCargoshipCannons:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
-		Damage: 2000
+		Damage: 4000
 ####################################################################################################
 #		Red Alert 2 Steel Support Generator
 ####################################################################################################

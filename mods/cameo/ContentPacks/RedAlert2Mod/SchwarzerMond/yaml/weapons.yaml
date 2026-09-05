@@ -6,6 +6,7 @@ schwarzermond_lunarsoldier_rifle:
 	# SF VERIFIER weapon (maintainer 2026-07-20): SmallArms + Chaingun +
 	# Laser triad, 4000 each = 12000 @ reload 50 = 240 DPS (WC 1.0), exactly
 	# 2x the japan baseline (6000@50, 120). Range 6000, air-capable.
+	# W24: Bullet_Light + Bullet_Medium collapsed to Bullet_Medium 16000.
 	ReloadDelay: 50
 	Range: 6000
 	Report: vpriatta.wav
@@ -14,13 +15,9 @@ schwarzermond_lunarsoldier_rifle:
 		ContrailStartColor: ff2d2d
 		ContrailEndColor: f55105
 		Width: 25
-	Warhead@Bullet_Light:
-		PercentageScale: 5000
-		Damage: 8000
-		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium:
 		PercentageScale: 5000
-		Damage: 8000
+		Damage: 16000
 		ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy:
 		PercentageScale: 5000
@@ -199,10 +196,8 @@ NaxiMP40Laser:
 		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 2000
 	Warhead@Laser_Heavy:

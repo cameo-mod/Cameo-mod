@@ -1106,12 +1106,6 @@ D2K_APC_Rocket:
 		MinimumLaunchSpeed: 222
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
-	Warhead@MissileAP_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1677,10 +1671,23 @@ facedancer_grenade:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure
-	Warhead@Effect: CreateEffect
+		Chance: 15
+	Warhead@Effect:
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLSML4.WAV
+		ExplosionPalette: effect75alpha
 		ImpactActors: false
+		ValidTargets: Ground, Air
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Concrete:
+		Damage: 750
 
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
@@ -1840,9 +1847,6 @@ HMGstealth:
 	Range: 4857
 	StartBurstReport: hmgo1.wav, hmgo2.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -2225,7 +2229,6 @@ LMG_ordos_upgrade:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
@@ -2266,3 +2269,34 @@ light_inf_lmg_ordos_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
+
+ordos_laserturret:
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	ReloadDelay: 55
+	Range: 7275
+	Report: LaserTankAttack.wav
+	Projectile: LaserZap
+		Width: 55
+		ZOffset: 2047
+		Color: 00ffbb
+	Warhead@Laser_Heavy:
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+
+ordos_chemturret:
+	ReloadDelay: 90
+	Range: 14000
+	Report: MORTAR1.WAV
+	Projectile: Bullet
+		Speed: 350
+	Warhead@Chem_Medium: AreaDamage
+		Spread: 500
+		Damage: 40000
+		Versus:
+			Scout: 90
+			Light: 80
+			Medium: 70
+			Heavy: 60
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath

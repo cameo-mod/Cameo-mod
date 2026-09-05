@@ -1,10 +1,10 @@
 # audit_k_linearity — the flat K must not move when Damage moves
 
-Analysed **2039** concrete weapons.
+Analysed **2061** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
-_clean_ — modeled 2184 folded and 2288 standalone applications.
+_clean_ — modeled 1699 folded and 2461 standalone applications.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 
@@ -18,7 +18,7 @@ _clean_ — the identity holds for every analysed weapon; 11 percentage-only wea
 
 ## L3 — weapons with a standalone percentage DPS floor
 
-651 weapon(s) carry a standalone percentage hit; **153** have a floor at or above 25% of output.
+686 weapon(s) carry a standalone percentage hit; **187** have a floor at or above 25% of output.
 
 A price target below the floor is UNREACHABLE by lowering flat Damage — `required_damage()` returns None rather than a wrong positive number. To price these lower, the standalone percentage hit has to shrink.
 
@@ -40,10 +40,13 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `TSTacticalMissileDamage` | 95.3% |
 | `TSTacticalChemMissileDamage` | 95.3% |
 | `RA2APCRocket_AA_elite` | 93.4% |
+| `NaxiMissileUboat` | 93.2% |
 | `MigMissiles_elite` | 93.2% |
 | `MigMissiles_fire_elite` | 93.2% |
 | `MigMissiles_tesla_elite` | 93.2% |
 | `RA2APCRocket_AA` | 93.2% |
+| `BlackEagleMissiles` | 93.0% |
+| `BlackEagleMissiles_elite` | 93.0% |
 | `MigMissiles` | 92.9% |
 | `MigMissiles_fire` | 92.9% |
 | `MigMissiles_tesla` | 92.9% |
@@ -51,46 +54,43 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `RA2APCRocket` | 92.4% |
 | `PhobosLaser` | 86.9% |
 | `TSHSeekerBomb` | 85.7% |
-| `LunarNaxiDroneMissile` | 85.3% |
-| `SCTyrAA` | 84.1% |
-| `D2K_RocketsCymek` | 84.1% |
 
-_... and 123 more._
+_... and 157 more._
 
 ## L4 — folded runtime quantisation residual
 
-382 weapon(s) have a non-zero current folded runtime residual.
+562 weapon(s) have a non-zero current folded runtime residual.
 This residual is included in measured output but excluded from `k_flat` and `dps_floor`; recompute it after snapping a proposed Damage value.
 
 | weapon | context-adjusted residual per shot |
 |---|--:|
-| `FutureMechPlasma_elite` | +1.9195 |
-| `ThermobaricMaverick` | +1.9116 |
-| `FutureMechPlasma` | +1.8494 |
-| `BTRTeslaMachineGun` | +1.7781 |
-| `BTRTeslaMachineGunArc` | +1.7781 |
-| `edenMobileDefenceLaser` | +1.7721 |
-| `AsianChemicalBombs` | +1.7040 |
-| `d2kChainGun_upgrade` | +1.6687 |
-| `NapalmA10Carrier` | +1.6493 |
-| `TSLasergun` | +1.5857 |
-| `TSLaserHarpyClaw` | +1.5849 |
-| `TSLaserHarpyAOEClaw` | +1.5849 |
-| `JHighVWaveforce` | +1.5743 |
-| `BTRTeslaMachineGunArcFragment1` | +1.5713 |
-| `NambuMGWaveforce` | +1.5681 |
-| `LMG_ordos_upgrade` | +1.5489 |
-| `light_inf_lmg_ordos_upgrade` | +1.5388 |
-| `CabalOverkillDroneLaser` | +1.5246 |
-| `d2kCarryallChainGun_upgrade` | +1.5180 |
-| `12MissilesSpawnerScud` | -1.5170 |
-| `JapanSpeedBoatGunWaveforce` | +1.4667 |
-| `RA2120xmm_elite` | +1.4649 |
-| `RA2120xmm_fire_elite` | +1.4649 |
-| `RA2120xmm_tesla_elite` | +1.4649 |
-| `tkmbunkmg` | +1.4463 |
-| `RA2120xmm` | +1.4429 |
-| `RA2120xmm_fire` | +1.4429 |
-| `RA2120xmm_tesla` | +1.4429 |
-| `AsianGrenade_elite` | +1.4078 |
-| `RA2NarcoAKM_elite` | +1.4068 |
+| `AsianTurretPlasma` | +2.3817 |
+| `AsianTwinPlasma_elite` | +2.1340 |
+| `AsianTwinPlasma` | +2.0536 |
+| `Tentacle` | +1.9923 |
+| `FutureMechPlasma_elite` | +1.9191 |
+| `ThermobaricMaverick` | +1.9091 |
+| `AsianSinglePlasma_elite` | +1.8927 |
+| `FutureMechPlasma` | +1.8490 |
+| `AsianSinglePlasma` | +1.8475 |
+| `YakTeslaGun` | +1.8392 |
+| `YakTeslaGunArc` | +1.8392 |
+| `KamovTesla` | +1.8030 |
+| `KamovTeslaArc` | +1.8030 |
+| `BTRTeslaMachineGun` | +1.7786 |
+| `BTRTeslaMachineGunArc` | +1.7786 |
+| `edenMobileDefenceLaser` | +1.7737 |
+| `Napalm` | +1.7342 |
+| `CabalMantisGun` | +1.7322 |
+| `RA2LasherLaser` | +1.7310 |
+| `AsianChemicalBombs` | +1.7046 |
+| `TSTurretLaser` | +1.6735 |
+| `TSCABALPlasmaFire` | +1.6735 |
+| `d2kChainGun_upgrade` | +1.6702 |
+| `RATurretGun` | +1.6678 |
+| `schwarzermond_lunarsoldier_rifle_yellow` | +1.6575 |
+| `schwarzermond_lunarsoldier_rifle_amplified` | +1.6575 |
+| `NapalmA10Carrier` | +1.6475 |
+| `TSLaserTurretLaser` | +1.6397 |
+| `Lunar_YellowUbermenschLaser_elite` | +1.6272 |
+| `Lunar_AmplifiedUbermenschLaser_elite` | +1.6272 |

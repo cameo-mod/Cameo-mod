@@ -64,11 +64,8 @@ NaxiWW2KübelwagenMachinegun:
 		Speed: 10000
 		Width: 100
 		Inaccuracy: 400
-	Warhead@Bullet_Light:
-		Damage: 2000
-		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
@@ -96,11 +93,8 @@ NaxiWW2Machinegun:
 		Speed: 10000
 		Width: 100
 		Inaccuracy: 400
-	Warhead@Bullet_Light:
-		Damage: 4000
-		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium:
-		Damage: 4000
+		Damage: 8000
 		ValidTargets: Ground, Water
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
@@ -112,11 +106,8 @@ NaxiWW2Machinegun_AA:
 	Inherits: NaxiWW2Machinegun
 	Range: 8355
 	ValidTargets: Air
-	Warhead@Bullet_Light:
-		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
@@ -127,13 +118,9 @@ NaxiWW2MachinegunSmall:
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 60
 	Burst: 3
-	Warhead@Bullet_Light:
-		Damage: 2000
-		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 		ValidTargets: Ground, Water
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
@@ -143,11 +130,8 @@ NaxiWW2MachinegunSmall_AA:
 	Inherits: NaxiWW2MachinegunSmall
 	Range: 8355
 	ValidTargets: Air
-	Warhead@Bullet_Light:
-		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
@@ -163,11 +147,8 @@ NaxiWW2MachinegunTop_AA:
 	Range: 7555
 	Report: nax_mgun3.wav
 	ValidTargets: Air
-	Warhead@Bullet_Light:
-		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
@@ -1178,8 +1159,6 @@ NaxPlaneRockets_elite:
 		ContrailStartColor: 996633
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@MissileAP_Medium:
-		Damage: 10000
 	Warhead@MissileAP_Heavy: AreaDamage
 		Damage: 10000
 	-Warhead@MissileAP_Heavy:
@@ -1318,10 +1297,7 @@ NaxShoeRocket:
 		ImpactSounds: snukexpl.wav
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
-		Damage: 8000
-	Warhead@Demolition_Light: AreaDamage
-		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
-		Damage: 8000
+		Damage: 16000
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
@@ -1496,11 +1472,8 @@ NaxiMissileUboat:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Acceleration: 10
-	Warhead@Demolition_Light:
-		Damage: 16000
-		ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Heavy:
-		Damage: 16000
+		Damage: 32000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
 		Damage: 16000

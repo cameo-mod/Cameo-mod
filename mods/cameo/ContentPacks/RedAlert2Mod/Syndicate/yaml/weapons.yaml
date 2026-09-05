@@ -834,7 +834,6 @@ LatinSmokerCannon:
 	Inherits@3: ^HeavyBomb
 	Inherits@4: ^ShrapnelWeapon
 	Inherits@5: ^RA2HeavyCannon
-	Inherits@6: ^RA2MediumCannon
 	ReloadDelay: 65
 	Range: 6550
 	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
@@ -1163,9 +1162,6 @@ LatinBuggyMG:
 		ContrailLength: 8
 		Speed: 3000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1188,8 +1184,7 @@ LatinBuggyChaingun:
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
-	Inherits@3: ^RA2SmallArms
-	Inherits@4: ^RA2Chaingun
+	Inherits@3: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 11
 	Range: 6000
@@ -1315,7 +1310,6 @@ LatinBuggyChaingun:
 			Concrete: 5
 		Falloff: 100, 58, 32, 24
 		Range: 0, 110, 220, 275
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonAP_Light:
 	-Warhead@Flak_Medium:
@@ -1621,8 +1615,7 @@ LatinSentryMG:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^RA2SmallArms
-	Inherits@5: ^RA2Chaingun
+	Inherits@4: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	Range: 6666
 	ReloadDelay: 30
@@ -1641,13 +1634,9 @@ LatinSentryMG:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
@@ -1926,11 +1915,8 @@ RA2APCMachineGun:
 		ContrailLength: 8
 		Speed: 3000
 		Width: 100
-	Warhead@Bullet_Light:
-		PercentageScale: 20000
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium:
+		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	-Warhead@Bullet_Light:

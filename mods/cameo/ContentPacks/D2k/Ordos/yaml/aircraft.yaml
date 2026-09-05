@@ -223,7 +223,7 @@ ordos_banshee:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ordos_hightechfactory, ~ordos_promotion_banshees, ordos_ixresearchcenter
+		Prerequisites: ~ordos_hightechfactory, ordos_ixresearchcenter, ~ordos_promotion_banshees
 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 	Health:
 		HP: 37500
@@ -308,7 +308,7 @@ ordos_wraith:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~ordos_hightechfactory, ~ordos_promotion_wraith, ordos_palace
+		Prerequisites: ~ordos_hightechfactory, ordos_palace, ~ordos_promotion_wraith
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_dieglocke.description

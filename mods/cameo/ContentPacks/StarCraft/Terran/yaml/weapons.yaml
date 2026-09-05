@@ -149,10 +149,6 @@ MatadorFlamer:
 		Image: tsflameall
 		Inaccuracy: 1184
 		Palette: tseffect
-	Warhead@Flame_Light:
-		Damage: 2000
-	Warhead@Flame_Medium:
-		Damage: 2000
 	Warhead@Flame_Heavy:
 		Damage: 2000
 	-Warhead@Flame_Heavy:
@@ -180,7 +176,6 @@ MatadorLaser:
 CycloneRockets:
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: cycloneshoot1.wav, cycloneshoot2.wav, cycloneshoot3.wav
@@ -207,16 +202,13 @@ CycloneRockets:
 		TrailPalette: effect75alpha
 		TrailInterval: 1
 	Warhead@MissileHE_Medium:
-		Damage: 2000
-	Warhead@MissileHE_Light:
-		Damage: 2000
+		Damage: 4000
 	Warhead@Condition: GrantExternalCondition
 		Range: 200
 		Duration: 100
 		Condition: lockon
 		ValidTargets: lockable
 		ValidRelationships: Enemy
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
@@ -833,8 +825,7 @@ VultureGrenade:
 SiegeTankCannon:
 	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
 	Inherits@wh: ^Warhead_CannonHE_Heavy
-	Inherits@wh2: ^Warhead_CannonHE_Medium
-	Inherits@wh3: ^Warhead_CannonAP_Light
+	Inherits@wh2: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 37
@@ -844,7 +835,6 @@ SiegeTankCannon:
 		Speed: 611
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
-	-Warhead@CannonHE_Medium:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 30000

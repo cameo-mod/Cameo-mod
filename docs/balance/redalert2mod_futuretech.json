@@ -3586,7 +3586,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "65",
@@ -3597,12 +3597,10 @@
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium",
-       "^SteelLightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MissileAttackRobotGun",
       "weapon_class_source": "template"
@@ -3620,7 +3618,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "65",
@@ -3631,8 +3629,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MissileAttackRobotGun_elite",
       "weapon_class_source": "template"
@@ -7683,7 +7680,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
@@ -7692,13 +7689,11 @@
       "versus_templates": [
        "^Compatibility_MissileHE_LightFlat",
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile",
       "weapon_class_source": "template"
@@ -7716,7 +7711,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "25",
@@ -7727,8 +7722,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -7745,7 +7739,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
@@ -7755,8 +7749,7 @@
        "RA2ThunderboltMissile"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
       "weapon_class_source": "template"
@@ -7774,7 +7767,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
@@ -7784,8 +7777,7 @@
        "RA2ThunderboltMissile_elite"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
       "weapon_class_source": "template"
@@ -7888,7 +7880,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
@@ -7897,13 +7889,11 @@
       "versus_templates": [
        "^Compatibility_MissileHE_LightFlat",
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile",
       "weapon_class_source": "template"
@@ -7920,7 +7910,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "25",
@@ -7931,8 +7921,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -7948,7 +7937,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "25",
@@ -7958,8 +7947,7 @@
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
       "weapon_class_source": "template"
@@ -7976,7 +7964,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "25",
@@ -7986,8 +7974,7 @@
        "RA2MultiThunderboltMissile_elite"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
       "weapon_class_source": "template"

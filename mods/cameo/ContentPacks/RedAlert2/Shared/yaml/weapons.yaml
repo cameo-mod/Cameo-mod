@@ -1046,7 +1046,6 @@ RA2HoverMissile_AA_elite:
 RA2ThunderboltMissile:
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
-	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -1066,7 +1065,6 @@ RA2ThunderboltMissile:
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
 	-Warhead@MissileHE_Heavy:
-	-Warhead@MissileHE_Light:
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1171,7 +1169,6 @@ RA2MultiHoverMissile_AA_elite:
 RA2MultiThunderboltMissile:
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
-	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -1191,7 +1188,6 @@ RA2MultiThunderboltMissile:
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
 	-Warhead@MissileHE_Heavy:
-	-Warhead@MissileHE_Light:
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -2067,11 +2063,8 @@ RA2HornetMissile:
 		ContrailLength: 25
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Demolition_Heavy:
-		Damage: 2000
+		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
 		Damage: 2000
@@ -2581,9 +2574,6 @@ BlackHawkCannon:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
@@ -2637,9 +2627,6 @@ RA2CRM60:
 	BurstDelays: 2
 	Range: 5660
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
@@ -2813,9 +2800,6 @@ RA2GattlingMG1:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
@@ -2829,13 +2813,9 @@ RA2GattlingMG1_AA:
 	Inherits: RA2GattlingMG1
 	Range: 6750
 	ValidTargets: Air
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Air
-		Damage: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
@@ -2851,13 +2831,9 @@ RA2GattlingMG2_AA:
 	Inherits: RA2GattlingMG2
 	Range: 7500
 	ValidTargets: Air
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Air
-		Damage: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
@@ -2915,12 +2891,9 @@ RA220mmrapid:
 	ReloadDelay: 15
 	Range: 5000
 	Report: vwaratta.wav, vwarattb.wav
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Air, Water
-		Damage: 4000
 	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water
-		Damage: 4000
+		ValidTargets: Ground, Air, Water
+		Damage: 8000
 ####################################################################################################
 #		SuperWeapons
 ####################################################################################################
@@ -3244,12 +3217,10 @@ IvanBomb:
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Report: M203.aud
-	Warhead@Demolition_Light:
-		Damage: 30000
 	Warhead@Concussion_Medium:
 		Damage: 30000
 	Warhead@Demolition_Heavy:
-		Damage: 30000
+		Damage: 60000
 	Warhead@Effect: CreateEffect
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
@@ -3283,20 +3254,16 @@ TanyaAttach:
 TanyaBomb:
 	Inherits: IvanBomb
 	Inherits@wh: ^Warhead_CannonHE_Heavy
-	Inherits@wh2: ^Warhead_CannonHE_Medium
-	Inherits@wh3: ^Warhead_CannonAP_Light
+	Inherits@wh2: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Report: tnkfire6.aud
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
+		Damage: 200000
 	Warhead@Effect: CreateEffect
 		Explosions: self_destruct
 		ExplosionPalette: effect
@@ -3304,10 +3271,7 @@ TanyaBomb:
 
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
-	Warhead@CannonHE_Medium:
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
+		Damage: 200000
 	Warhead@CannonAP_Light:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
@@ -3481,10 +3445,8 @@ TanyaBomb:
 		Range: 0, 233, 466
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
-	-Warhead@CannonHE_Medium:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 600000
@@ -3501,12 +3463,8 @@ SealBomb:
 	Report: tnkfire6.aud
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 20000
-	Warhead@CannonHE_Medium: AreaDamage
-		Damage: 20000
 	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 20000
-	Warhead@Demolition_Light:
-		Damage: 20000
+		Damage: 40000
 	Warhead@Concussion_Medium:
 		Damage: 20000
 	Warhead@Demolition_Heavy:
@@ -3519,10 +3477,8 @@ SealBomb:
 	-Warhead@CollapsedTanyaBombDemolition_LightPercentage:
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
-	-Warhead@CannonHE_Medium:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 120000

@@ -1204,13 +1204,10 @@ RocketsHumvee2AMT_AA:
 	Inherits: RocketsHumvee2AMT
 	Range: 8397
 	ValidTargets: Air
-	Warhead@MissileAP_Light:
-		ValidTargets: Air
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 	-Warhead@MissileAP_Heavy:
 	-Warhead@MissileAP_HeavyFlatCompatibility:
-	-Warhead@MissileAP_Light:
 	Warhead@MissileAA_HeavyFlatCompatibility:
 		ValidTargets: Air
 		Damage: 32000
@@ -1406,9 +1403,6 @@ OfficerMachineGun:
 	BurstDelays: 4
 	Range: 5596
 	Report: mgun11.aud
-	Warhead@Bullet_Light:
-		PercentageScale: 2500
-		Damage: 8000
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
 		Damage: 8000
@@ -1668,7 +1662,6 @@ CommandoSniper:
 CommandoRocketLauncher:
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -1687,16 +1680,12 @@ CommandoRocketLauncher:
 		ContrailEndColorUsePlayerColor: true
 	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Air, Water
-		Damage: 20000
-	Warhead@MissileHE_Light:
-		ValidTargets: Ground, Air, Water
-		Damage: 20000
+		Damage: 40000
 	Warhead@Effect: CreateEffect
 		ValidRelationships: Neutral, Enemy
 		Explosions: blue_building_napalm
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Air, Water
@@ -2094,8 +2083,6 @@ td_gdi_shotgunner_shotgun:
 	Projectile: Bullet
 		Speed: 4000
 		Inaccuracy: 800
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Light:

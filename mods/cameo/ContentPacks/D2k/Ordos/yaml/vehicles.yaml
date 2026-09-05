@@ -1007,7 +1007,7 @@ ordos_lasertank:
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 100
-		Prerequisites: ~ordos_heavy_vehicle_production, ~ordos_promotion_lasertank, ordos_ixresearchcenter
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_ixresearchcenter, ~ordos_promotion_lasertank
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	Valued:
@@ -1070,7 +1070,7 @@ ordos_deviatortank:
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 100
-		Prerequisites: ~ordos_heavy_vehicle_production, ~ordos_promotion_deviatortank, ordos_palace
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_palace, ~ordos_promotion_deviatortank
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	UpdatesPlayerStatistics:

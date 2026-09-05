@@ -5988,7 +5988,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7320",
       "reloaddelay": "35",
@@ -5997,13 +5997,11 @@
       "versus_templates": [
        "^Compatibility_MissileHE_LightFlat",
        "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "CycloneRockets",
       "weapon_class_source": "template"
@@ -6021,7 +6019,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "35",
@@ -6031,8 +6029,7 @@
        "CycloneRockets"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "CycloneRocketsLockOn",
       "weapon_class_source": "template"
@@ -6999,7 +6996,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6114",
       "reloaddelay": "37",
@@ -7008,18 +7005,16 @@
       "versus_templates": [
        "^Compatibility_CannonHE_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "SiegeTankCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",

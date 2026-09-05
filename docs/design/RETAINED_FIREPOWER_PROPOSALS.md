@@ -54,14 +54,17 @@ ammo uptime and actual kill times are not claimed to be simulated.
 
 ## Live coverage: deliberately narrow
 
-The [generated census](../audit/latest/retained_firepower_survey.json) checks 950
-ledger-listed armed actors against active base YAML. Four pass the structural
-screen; three of those have shared/reference concerns. **One passes both screens:**
-`ra1_allies_raspy`, using `SilencedPPK`. The other 949 stay blocked.
+The [generated census](../audit/latest/retained_firepower_survey.json) checks 1,000
+ledger-listed armed actors against active base YAML. Five pass the structural
+screen; four of those have shared/reference concerns. **One passes both screens:**
+`ra1_allies_raspy`, using `SilencedPPK`. The other 999 stay blocked.
 
 The reason counts record each actor's first rejection, not every independent
 problem on that actor. No holds or reviewed exceptions are removed from the wider
-weapon inventories. Hydra remains blocked; its four profiles are unchanged.
+weapon inventories. Hydra remains blocked. Its current upstream BulletChem profile
+is preserved; the old four-profile experiments are now explicitly historical.
+See the [upstream integration report](PR328_UPSTREAM_INTEGRATION.md) for provenance
+and current validation failures.
 
 The supported live example retains all modifiers. Safe local-knob retirement is
 covered with synthetic resolved-inheritance tests, not presented as a proven
@@ -113,7 +116,7 @@ diagnostic JSON only. The multi-armament proposal guard remains closed. Any usef
 future expansion needs a supported damage model, explicit mode-preservation policy
 and sharing review, not a blanket relaxation of slot counting.
 
-## Validation (2026-09-05)
+## Historical validation before upstream integration (2026-09-05)
 
 - Full suite: 82 isolated modules, **802 passed**, zero skipped or failed; includes
   21 new proposal tests. Sampled process-tree peak 1,379.7 MB; PC peak 46.5%.

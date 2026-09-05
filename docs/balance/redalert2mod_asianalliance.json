@@ -252,7 +252,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6100",
       "reloaddelay": "18",
@@ -261,16 +261,14 @@
       "versus_templates": [
        "^Compatibility_Bullet_MediumFlat",
        "^RA2HeavyCannon",
-       "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPelicanMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -285,7 +283,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7100",
       "reloaddelay": "18",
@@ -296,11 +294,10 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPelicanMG_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3151,8 +3148,8 @@
     "name": "ASDF",
     "prerequisites": [
      "~asianalliance_asianbarracks",
-     "~asianalliance_promotion_asdf",
-     "asianalliance_militaryacademy"
+     "asianalliance_militaryacademy",
+     "~asianalliance_promotion_asdf"
     ],
     "queue": [
      "Infantry",
@@ -5088,8 +5085,8 @@
     "name": "Japanese Samurai",
     "prerequisites": [
      "~asianalliance_asianbarracks",
-     "~asianalliance_promotion_samurai",
-     "asianalliance_asianradar"
+     "asianalliance_asianradar",
+     "~asianalliance_promotion_samurai"
     ],
     "queue": [
      "Infantry",
@@ -5503,8 +5500,8 @@
     "name": "Plasma Trooper",
     "prerequisites": [
      "~asianalliance_asianbarracks",
-     "~asianalliance_promotion_plasmatrooper",
-     "asianalliance_asianbattlelab"
+     "asianalliance_asianbattlelab",
+     "~asianalliance_promotion_plasmatrooper"
     ],
     "queue": [
      "Infantry",
@@ -6114,8 +6111,8 @@
     "name": "Veteran Archer",
     "prerequisites": [
      "~asianalliance_asianbarracks",
-     "~asianalliance_promotion_veteranarchers",
-     "asianalliance_asianradar"
+     "asianalliance_asianradar",
+     "~asianalliance_promotion_veteranarchers"
     ],
     "queue": [
      "Infantry",
@@ -8462,7 +8459,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "minrange": "3200",
       "pricing": true,
       "range": "16000",
@@ -8470,11 +8467,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2MediumCannon",
        "^RA2HeavyCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianHowitzerCannon",
@@ -8492,7 +8487,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "minrange": "4000",
       "pricing": true,
       "range": "20000",
@@ -8503,7 +8498,6 @@
        "AsianHowitzerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianHowitzerCannon_elite",
@@ -8538,8 +8532,8 @@
     "name": "Howitzer",
     "prerequisites": [
      "~asianalliance_asianwarfactory",
-     "~asianalliance_promotion_howitzer",
-     "asianalliance_militaryacademy"
+     "asianalliance_militaryacademy",
+     "~asianalliance_promotion_howitzer"
     ],
     "queue": [
      "Vehicle",
@@ -9778,8 +9772,8 @@
     "name": "Type 89 MLRS",
     "prerequisites": [
      "~asianalliance_asianwarfactory",
-     "~asianalliance_promotion_mlrs",
-     "asianalliance_asianbattlelab"
+     "asianalliance_asianbattlelab",
+     "~asianalliance_promotion_mlrs"
     ],
     "queue": [
      "Vehicle",
@@ -10084,8 +10078,8 @@
     "name": "War Turtle",
     "prerequisites": [
      "~asianalliance_asianwarfactory",
-     "~asianalliance_promotion_warturtle",
-     "asianalliance_militaryacademy"
+     "asianalliance_militaryacademy",
+     "~asianalliance_promotion_warturtle"
     ],
     "queue": [
      "Vehicle",
@@ -10317,8 +10311,8 @@
     "name": "Plasma Tank",
     "prerequisites": [
      "~asianalliance_asianwarfactory",
-     "~asianalliance_promotion_plasmatank",
-     "asianalliance_asianbattlelab"
+     "asianalliance_asianbattlelab",
+     "~asianalliance_promotion_plasmatank"
     ],
     "queue": [
      "Vehicle",

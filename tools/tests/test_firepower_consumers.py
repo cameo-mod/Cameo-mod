@@ -34,6 +34,12 @@ def unit():
 
 
 class Consumers(unittest.TestCase):
+    def test_upstream_class_membership_delegation_remains_shared(self):
+        import class_membership
+        for module in (proposal, update_ranges):
+            for subtype in ('LineBreaker', 'MortarInfantry', 'Artillery', None):
+                self.assertEqual(module.subtype_to_anchor(subtype), class_membership.subtype_to_anchor(subtype))
+
     def test_one_arm_consumers_agree(self):
         u = unit()
         self.assertEqual(fit_class.unit_inputs(u)[0][3], 40)
@@ -138,6 +144,18 @@ class WriteBoundaries(unittest.TestCase):
 
 @unittest.skipUnless(openpyxl, 'openpyxl spreadsheet test dependency')
 class WorkbookConsumers(unittest.TestCase):
+    def test_membership_source_participates_in_workbook_fingerprint(self):
+        import build_workbook as build
+        import class_membership
+        self.assertEqual(build.subtype_to_anchor('LineBreaker'), 'line_breaker')
+        before = build.workbook_fingerprint()
+        read_text = pathlib.Path.read_text
+        def changed(path, *args, **kwargs):
+            text = read_text(path, *args, **kwargs)
+            return text + '\n# changed mapping source\n' if path == pathlib.Path(class_membership.__file__) else text
+        with patch.object(pathlib.Path, 'read_text', changed):
+            self.assertNotEqual(build.workbook_fingerprint(), before)
+
     def test_legacy_fraction_and_empty_resolved_list(self):
         import build_workbook as build
         for resolved, expected in ((False, .99), (True, 1)):

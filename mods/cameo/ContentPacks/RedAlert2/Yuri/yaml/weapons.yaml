@@ -11,56 +11,7 @@ RA2LasherCannon:
 	Report: vlasatta.wav
 	Projectile: Bullet
 		Speed: 520
-	Warhead@Grenade: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Inaccuracy: 150
 	Warhead@CannonHE_Medium:
 		PercentageScale: 1659
 		Damage: 12000
@@ -284,7 +235,7 @@ RA2LasherToxicMortar_elite:
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 4000
+		Damage: 8000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Effect: CreateEffect
@@ -760,13 +711,9 @@ RA2GattlingMG3_AA:
 	Inherits: RA2GattlingMG3
 	Range: 8250
 	ValidTargets: Air
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Air
-		Damage: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
@@ -797,10 +744,6 @@ RA2GattlingInf:
 		ContrailLength: 5
 		Speed: 10000
 		Width: 75
-	Warhead@Bullet_Light:
-		PercentageScale: 2500
-		ValidTargets: Ground, Air, Water
-		Damage: 8000
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
 		ValidTargets: Ground, Air, Water
@@ -993,7 +936,7 @@ RA2Chemspray2:
 	Inherits: RA2Chemspray
 	Report: flamer2.aud
 	Warhead@Chemical_Heavy:
-		Damage: 4000
+		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000

@@ -1098,7 +1098,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6643",
       "reloaddelay": "50",
@@ -1107,13 +1107,11 @@
       "versus_templates": [
        "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "RocketsRA",
       "weapon_class_source": "template"
@@ -1130,7 +1128,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6643",
       "reloaddelay": "50",
@@ -1139,13 +1137,11 @@
       "versus_templates": [
        "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "RocketsRA",
       "weapon_class_source": "template"
@@ -2713,7 +2709,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -2723,13 +2719,11 @@
       "versus_templates": [
        "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -2747,7 +2741,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -2757,13 +2751,11 @@
       "versus_templates": [
        "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -3901,22 +3893,15 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5915",
       "reloaddelay": "60",
@@ -3924,13 +3909,11 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "TigerCannon",
       "weapon_class_source": "template"

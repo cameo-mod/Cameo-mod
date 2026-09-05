@@ -540,10 +540,10 @@ RA160mmE_tesla_elite:
 		PercentageScale: 10000
 
 RA2120xmm:
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^RA2HeavyCannon
-	Inherits@fx: ^Effect_Apoc_Explosion_RA2
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx2: ^Effect_Apoc_Explosion_RA2
 	Range: 6992
 	ReloadDelay: 63
 	Burst: 2
@@ -561,7 +561,7 @@ RA2120xmm:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@CannonHE_Heavy:
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 12000
 		PercentageScale: 3325
 	-Warhead@ShrapnelWeapon:
@@ -617,7 +617,7 @@ RA2120xmm_rad:
 		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@CannonHE_Heavy:
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 2000
 		PercentageScale: 10000
 	-Warhead@HeavyChemicalWeapon:
@@ -630,7 +630,19 @@ RA2120xmm_rad:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 RA2120xmm_fire:
-	Inherits: RA2120xmm
+	Inherits@wh: ^Warhead_CannonFire_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Flame_Light
+	Range: 6992
+	ReloadDelay: 63
+	Burst: 2
+	BurstDelays: 5
+	Report: vapoat1a.wav
+	Projectile: Bullet
+		Speed: 699
+		Inaccuracy: 150
+	Warhead@CannonFire_Light: AreaDamage
+		Damage: 12000
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
 		Amount: 2
@@ -638,7 +650,19 @@ RA2120xmm_fire:
 		AimTargetStances: Enemy, Neutral
 
 RA2120xmm_tesla:
-	Inherits: RA2120xmm
+	Inherits@wh: ^Warhead_CannonTesla_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Tesla_Impact_RA2
+	Range: 6992
+	ReloadDelay: 63
+	Burst: 2
+	BurstDelays: 5
+	Report: vapoat1a.wav
+	Projectile: Bullet
+		Speed: 699
+		Inaccuracy: 150
+	Warhead@CannonTesla_Light: AreaDamage
+		Damage: 12000
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: TeslaFragment
 		Amount: 1
@@ -918,8 +942,6 @@ RA2vulcan:
 	Burst: 4
 	BurstDelays: 3
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Light:
@@ -1019,15 +1041,12 @@ IvanAttachAir:
 IvanBombAir:
 	Inherits: IvanBomb
 	Report: M203.aud
-	Warhead@Demolition_Light:
-		ValidTargets: Aircraft
 	Warhead@Concussion_Medium:
 		ValidTargets: Aircraft
 	Warhead@Demolition_Heavy:
 		ValidTargets: Aircraft
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Aircraft
 		Damage: 90000

@@ -71,14 +71,15 @@ refinery.atreides:
 		Remap: 54F94B
 		Start: 4138
 
+
 sonic_tank_husk.atreides:
 	Defaults:
+		Filename: atreides_sonictank.png
 	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1827
-		Facings: -32
+		Start: 0
+		Length: 1
+		Facings: 32
+		Transpose: true
 		ZOffset: -512
 
 combat_tank.atreides:
@@ -110,6 +111,7 @@ combat_tank.atreides:
 		Start: 4281
 		Offset: -30,-24
 
+
 combat_tank_husk.atreides:
 	Defaults:
 	idle:
@@ -127,23 +129,58 @@ combat_tank_husk.atreides:
 		Facings: -32
 		ZOffset: -512
 
+
+atreides_spiceharvester:
+	idle:
+		Filename: atreides_harvester.png
+		Start: 0
+		Length: 1
+		Facings: 8
+	move:
+		Filename: atreides_harvester.png
+		Start: 0
+		Length: 1
+		Facings: 8
+	harvest:
+		Filename: atreides_harvester.png
+		Start: 8
+		Length: 3
+		Facings: 8
+		Tick: 80
+	dock:
+		Filename: atreides_harvester.png
+		Start: 8
+		Length: 3
+		Facings: 8
+		Tick: 80
+	dock-loop:
+		Filename: atreides_harvester.png
+		Start: 8
+		Length: 3
+		Facings: 8
+		Tick: 80
+	icon:
+		Filename: atreides_harvester.png
+		Start: 0
+		Length: 1
+		Facings: 1
+
+
 ornithopter:
 	Defaults:
+		Filename: atreides_ornithopter.png
 	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1955
-		Facings: -32
-		Length: 3
-		Tick: 90
+		Start: 0
+		Length: 8
+		Facings: 32
 		Transpose: true
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4292
-		Offset: -30,-24
+		Tick: 100
+	move:
+		Start: 0
+		Length: 8
+		Facings: 32
+		Transpose: true
+		Tick: 100
 	muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -153,10 +190,177 @@ ornithopter:
 		Facings: -32
 		BlendMode: Additive
 	idle-landed:
+		Start: 0
+		Length: 1
+		Facings: 32
+		Transpose: true
+		Tick: 120
+	icon:
+		Filename: atreides_ornithopter_icon.png
+
+sonic_tank:
+	Defaults:
+		Filename: atreides_sonictank.png
+	idle:
+		Start: 0
+		Length: 8
+		Facings: 32
+		Transpose: true
+		Tick: 100
+	move:
+		Start: 0
+		Length: 8
+		Facings: 32
+		Transpose: true
+		Tick: 100
+	icon:
+		Filename: atreides_sonictank_icon.png
+
+atreides_sandbike:
+	Defaults:
+		Filename: atreides_sandbike.png
+	idle:
+		Start: 0
+		Facings: 32
+	move:
+		Start: 0
+		Facings: 32
+		Tick: 80
+	icon:
+		Filename: atreides_sandbike_icon.png
+
+atreides_apc:
+	Defaults:
+		Filename: atreides_apc.png
+	idle:
+		Start: 0
+		Facings: 32
+	move:
+		Start: 0
+		Facings: 32
+		Tick: 80
+	turret:
+		Filename: atreides_apc_turret.png
+		Start: 0
+		Facings: 32
+	muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
 		Remap: 54F94B
-		Start: 1987
+		Start: 4028
 		Facings: -32
+		Tick: 60
+		BlendMode: Additive
+	icon:
+		Filename: atreides_apc_icon.png
+
+atreides_minotaurus:
+	Defaults:
+		Filename: atreides_minotaurus.png
+	idle:
+		Start: 0
+		Length: 15
+		Facings: 32
+		Transpose: true
+		Tick: 100
+	move:
+		Start: 0
+		Length: 15
+		Facings: 32
+		Transpose: true
+		Tick: 100
+	icon:
+		Filename: atreides_minotaurus_icon.png
+
+atreides_mongoose:
+	Defaults:
+		Filename: atreides_mongoose.png
+	idle:
+		Start: 0
+		Length: 8
+		Facings: 32
+		Transpose: true
+		Tick: 100
+	move:
+		Start: 0
+		Length: 8
+		Facings: 32
+		Transpose: true
+		Tick: 100
+	turret:
+		Filename: atreides_mongoose_turret.png
+		Start: 0
+		Facings: 32
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4028
+		Facings: -32
+		Tick: 60
+		BlendMode: Additive
+	icon:
+		Filename: atreides_mongoose_icon.png
+
+atreides_repairtank:
+	Defaults:
+		Filename: atreides_repairtank.png
+	idle:
+		Start: 0
+		Length: 8
+		Facings: 32
+		Transpose: true
+		Tick: 100
+	move:
+		Start: 0
+		Length: 8
+		Facings: 32
+		Transpose: true
+		Tick: 100
+	icon:
+		Filename: atreides_repairtank_icon.png
+
+atreides_advancedcarryall:
+	Defaults:
+		Filename: atreides_advancedcarryall.png
+	idle:
+		Start: 0
+		Facings: 32
+	move:
+		Start: 0
+		Facings: 32
+		Tick: 80
+	idle-landed:
+		Start: 0
 		Length: 1
+		Facings: 32
 		Tick: 120
+	icon:
+		Filename: atreides_advancedcarryall_icon.png
+
+atreides_airdrone:
+	Defaults:
+		Filename: atreides_airdrone.png
+	idle:
+		Start: 0
+		Facings: 32
+	move:
+		Start: 0
+		Facings: 32
+		Tick: 80
+	icon:
+		Filename: atreides_airdrone_icon.png
+
+gun_turret.atreides:
+	Inherits: flame_turret
+	turret:
+		Filename: invisibleitem.shp
+		Length: *
+		Facings: 1
+
+rocket_turret.atreides:
+	Inherits: flame_turret
+	turret:
+		Filename: invisibleitem.shp
+		Length: *
+		Facings: 1

@@ -968,11 +968,8 @@ TSBikeMissile:
 	Projectile: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
-	Warhead@MissileHE_Light:
-		Damage: 6000
-		ValidTargets: Ground, Water, Air
 	Warhead@MissileHE_Medium:
-		Damage: 6000
+		Damage: 12000
 		ValidTargets: Ground, Water, Air
 	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:

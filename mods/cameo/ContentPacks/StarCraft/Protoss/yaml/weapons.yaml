@@ -398,9 +398,6 @@ GladiusCannon:
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@CannonHE_Medium: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -517,7 +514,6 @@ GladiusCannon:
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Medium:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@PreservedFlat_FlakWeapon:
 	-Warhead@PreservedFlat_HeavyCannon:

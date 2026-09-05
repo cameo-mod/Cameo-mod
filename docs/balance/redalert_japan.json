@@ -144,49 +144,31 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "366",
-        "tag": "Chemical_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "400",
-        "tag": "Flame_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
+        "damage": "30000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "100",
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@UpgradeBombs",
       "versus_templates": [
-       "^Warhead_Chemical_Heavy",
-       "^Warhead_Flame_Heavy",
-       "^Warhead_Demolition_Heavy",
+       "^Warhead_Plasma_Heavy",
        "^Projectile_Chem_Heavy",
        "^Effect_Flame_Heavy",
        "^Effect_Demolition_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy",
-       "^Warhead_Flame_Heavy",
-       "^Warhead_Demolition_Heavy"
+       "^Warhead_Plasma_Heavy"
       ],
       "weapon": "JapanesePlasmaBomb",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4972,22 +4954,15 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5692",
       "reloaddelay": "56",
@@ -4995,13 +4970,11 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Type97Cannon",
       "weapon_class_source": "template"
@@ -8042,8 +8015,8 @@
     "name": "Shogun Executioner",
     "prerequisites": [
      "~japan_japanesewarfactory",
-     "~japan_promotion_shogunexecutioner",
-     "japan_japanesetechcenter"
+     "japan_japanesetechcenter",
+     "~japan_promotion_shogunexecutioner"
     ],
     "queue": [
      "Vehicle",

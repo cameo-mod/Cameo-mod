@@ -1,5 +1,5 @@
 {
-  "ledger_listed_armed_actors": 950,
+  "ledger_listed_armed_actors": 1000,
   "passenger_attack_hosts": [
     {
       "actor": "ARCO",
@@ -3292,11 +3292,11 @@
     }
   ],
   "same_weapon_pair_weapon_only_first_blockers": {
-    "folded percentage damage needs a separate inversion model": 40,
+    "folded percentage damage needs a separate inversion model": 49,
     "non-flat or gameplay side-effect warhead: AreaDamagePercentage": 17,
-    "non-flat or gameplay side-effect warhead: GlowImpact": 5,
-    "physical-state/integrity feedback is unsupported": 2,
-    "unsupported projectile delivery": 8
+    "non-flat or gameplay side-effect warhead: GlowImpact": 8,
+    "physical-state/integrity feedback is unsupported": 1,
+    "unsupported projectile delivery": 11
   },
   "same_weapon_pairs": [
     {
@@ -3379,6 +3379,170 @@
       ],
       "unknown_attack_traits": [],
       "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
+    },
+    {
+      "actor": "atreides_lightinfantry",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament@PRIMARY",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "light_inf_lmg"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "light_inf_lmg"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 11,
+      "other_base_yaml_reference_examples": [
+        "actor:corrino_lightinfantry/Armament@GARRISONED/Weapon",
+        "actor:corrino_lightinfantry/Armament@PRIMARY/Weapon",
+        "actor:harkonnen_lightinfantry/Armament@GARRISONED/Weapon",
+        "actor:harkonnen_lightinfantry/Armament@PRIMARY/Weapon",
+        "actor:ixian_lightinfantry/Armament@GARRISONED/Weapon",
+        "actor:ixian_lightinfantry/Armament@PRIMARY/Weapon",
+        "actor:light_inf/Armament@GARRISONED/Weapon",
+        "actor:light_inf/Armament@PRIMARY/Weapon"
+      ],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
+    },
+    {
+      "actor": "atreides_rockettrooper",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament@PRIMARY",
+          "unconditional_firepower_factor": "11/20",
+          "weapon": "D2K_Rocket_Trooper"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "11/20",
+          "weapon": "D2K_Rocket_Trooper"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 14,
+      "other_base_yaml_reference_examples": [
+        "actor:corrino_sardaukar_bazooka/Armament@GARRISONED/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@PRIMARY/Weapon",
+        "actor:corrino_trooper/Armament@GARRISONED/Weapon",
+        "actor:corrino_trooper/Armament@PRIMARY/Weapon",
+        "actor:harkonnen_rockettrooper/Armament@GARRISONED/Weapon",
+        "actor:harkonnen_rockettrooper/Armament@PRIMARY/Weapon",
+        "actor:harkonnen_sardaukar/Armament@GARRISONED/Weapon",
+        "actor:harkonnen_sardaukar/Armament@PRIMARY/Weapon"
+      ],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: GlowImpact"
     },
     {
       "actor": "cabal_ascended",
@@ -3676,6 +3840,462 @@
       "other_base_yaml_reference_examples": [],
       "unknown_attack_traits": [],
       "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
+    },
+    {
+      "actor": "corrino_lightinfantry",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament@PRIMARY",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "light_inf_lmg"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "light_inf_lmg"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 11,
+      "other_base_yaml_reference_examples": [
+        "actor:atreides_lightinfantry/Armament@GARRISONED/Weapon",
+        "actor:atreides_lightinfantry/Armament@PRIMARY/Weapon",
+        "actor:harkonnen_lightinfantry/Armament@GARRISONED/Weapon",
+        "actor:harkonnen_lightinfantry/Armament@PRIMARY/Weapon",
+        "actor:ixian_lightinfantry/Armament@GARRISONED/Weapon",
+        "actor:ixian_lightinfantry/Armament@PRIMARY/Weapon",
+        "actor:light_inf/Armament@GARRISONED/Weapon",
+        "actor:light_inf/Armament@PRIMARY/Weapon"
+      ],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
+    },
+    {
+      "actor": "corrino_sardaukar_berserker",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament@PRIMARY",
+          "unconditional_firepower_factor": "11/16",
+          "weapon": "corrino_sardaukar_berserker_axe"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "11/16",
+          "weapon": "corrino_sardaukar_berserker_axe"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": "disabled",
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 0,
+      "other_base_yaml_reference_examples": [],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "unsupported projectile delivery"
+    },
+    {
+      "actor": "corrino_sardaukar_javelin",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament@PRIMARY",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "corrino_sardaukar_javelin_spear"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "corrino_sardaukar_javelin_spear"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": "disabled",
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 0,
+      "other_base_yaml_reference_examples": [],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
+    },
+    {
+      "actor": "corrino_sardaukar_laser",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament@PRIMARY",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "corrino_sardaukar_laser"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "corrino_sardaukar_laser"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": "disabled",
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 0,
+      "other_base_yaml_reference_examples": [],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "unsupported projectile delivery"
+    },
+    {
+      "actor": "corrino_sardaukar_sword",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament@PRIMARY",
+          "unconditional_firepower_factor": "11/16",
+          "weapon": "corrino_sardaukar_sword"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "11/16",
+          "weapon": "corrino_sardaukar_sword"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": "disabled",
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 0,
+      "other_base_yaml_reference_examples": [],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "unsupported projectile delivery"
+    },
+    {
+      "actor": "corrino_trooper",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament@PRIMARY",
+          "unconditional_firepower_factor": "11/20",
+          "weapon": "D2K_Rocket_Trooper"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "11/20",
+          "weapon": "D2K_Rocket_Trooper"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 14,
+      "other_base_yaml_reference_examples": [
+        "actor:atreides_rockettrooper/Armament@GARRISONED/Weapon",
+        "actor:atreides_rockettrooper/Armament@PRIMARY/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@GARRISONED/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@PRIMARY/Weapon",
+        "actor:harkonnen_rockettrooper/Armament@GARRISONED/Weapon",
+        "actor:harkonnen_rockettrooper/Armament@PRIMARY/Weapon",
+        "actor:harkonnen_sardaukar/Armament@GARRISONED/Weapon",
+        "actor:harkonnen_sardaukar/Armament@PRIMARY/Weapon"
+      ],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: GlowImpact"
     },
     {
       "actor": "forgotten_mutant",
@@ -4600,6 +5220,170 @@
       "weapon_only_first_blocker": "unsupported projectile delivery"
     },
     {
+      "actor": "harkonnen_lightinfantry",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament@PRIMARY",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "light_inf_lmg"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "light_inf_lmg"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 11,
+      "other_base_yaml_reference_examples": [
+        "actor:atreides_lightinfantry/Armament@GARRISONED/Weapon",
+        "actor:atreides_lightinfantry/Armament@PRIMARY/Weapon",
+        "actor:corrino_lightinfantry/Armament@GARRISONED/Weapon",
+        "actor:corrino_lightinfantry/Armament@PRIMARY/Weapon",
+        "actor:ixian_lightinfantry/Armament@GARRISONED/Weapon",
+        "actor:ixian_lightinfantry/Armament@PRIMARY/Weapon",
+        "actor:light_inf/Armament@GARRISONED/Weapon",
+        "actor:light_inf/Armament@PRIMARY/Weapon"
+      ],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
+    },
+    {
+      "actor": "harkonnen_rockettrooper",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament@PRIMARY",
+          "unconditional_firepower_factor": "11/20",
+          "weapon": "D2K_Rocket_Trooper"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "11/20",
+          "weapon": "D2K_Rocket_Trooper"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 14,
+      "other_base_yaml_reference_examples": [
+        "actor:atreides_rockettrooper/Armament@GARRISONED/Weapon",
+        "actor:atreides_rockettrooper/Armament@PRIMARY/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@GARRISONED/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@PRIMARY/Weapon",
+        "actor:corrino_trooper/Armament@GARRISONED/Weapon",
+        "actor:corrino_trooper/Armament@PRIMARY/Weapon",
+        "actor:harkonnen_sardaukar/Armament@GARRISONED/Weapon",
+        "actor:harkonnen_sardaukar/Armament@PRIMARY/Weapon"
+      ],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: GlowImpact"
+    },
+    {
       "actor": "ixian_rockettrooper",
       "armaments": [
         {
@@ -4668,12 +5452,16 @@
         "FirepowerMultiplier@upsubliminal",
         "FirepowerMultiplier@usabombardament"
       ],
-      "other_base_yaml_reference_count": 4,
+      "other_base_yaml_reference_count": 14,
       "other_base_yaml_reference_examples": [
-        "actor:ordos_rockettrooper/Armament/Weapon",
-        "actor:ordos_rockettrooper/Armament@garrisoned/Weapon",
-        "actor:trooper/Armament/Weapon",
-        "actor:trooper/Armament@garrisoned/Weapon"
+        "actor:atreides_rockettrooper/Armament@GARRISONED/Weapon",
+        "actor:atreides_rockettrooper/Armament@PRIMARY/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@GARRISONED/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@PRIMARY/Weapon",
+        "actor:corrino_trooper/Armament@GARRISONED/Weapon",
+        "actor:corrino_trooper/Armament@PRIMARY/Weapon",
+        "actor:harkonnen_rockettrooper/Armament@GARRISONED/Weapon",
+        "actor:harkonnen_rockettrooper/Armament@PRIMARY/Weapon"
       ],
       "unknown_attack_traits": [],
       "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: GlowImpact"
@@ -5276,12 +6064,16 @@
         "FirepowerMultiplier@upsubliminal",
         "FirepowerMultiplier@usabombardament"
       ],
-      "other_base_yaml_reference_count": 4,
+      "other_base_yaml_reference_count": 14,
       "other_base_yaml_reference_examples": [
-        "actor:ixian_rockettrooper/Armament/Weapon",
-        "actor:ixian_rockettrooper/Armament@garrisoned/Weapon",
-        "actor:trooper/Armament/Weapon",
-        "actor:trooper/Armament@garrisoned/Weapon"
+        "actor:atreides_rockettrooper/Armament@GARRISONED/Weapon",
+        "actor:atreides_rockettrooper/Armament@PRIMARY/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@GARRISONED/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@PRIMARY/Weapon",
+        "actor:corrino_trooper/Armament@GARRISONED/Weapon",
+        "actor:corrino_trooper/Armament@PRIMARY/Weapon",
+        "actor:harkonnen_rockettrooper/Armament@GARRISONED/Weapon",
+        "actor:harkonnen_rockettrooper/Armament@PRIMARY/Weapon"
       ],
       "unknown_attack_traits": [],
       "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: GlowImpact"
@@ -7429,12 +8221,16 @@
         "FirepowerMultiplier@upsubliminal",
         "FirepowerMultiplier@usabombardament"
       ],
-      "other_base_yaml_reference_count": 4,
+      "other_base_yaml_reference_count": 14,
       "other_base_yaml_reference_examples": [
-        "actor:ixian_rockettrooper/Armament/Weapon",
-        "actor:ixian_rockettrooper/Armament@garrisoned/Weapon",
-        "actor:ordos_rockettrooper/Armament/Weapon",
-        "actor:ordos_rockettrooper/Armament@garrisoned/Weapon"
+        "actor:atreides_rockettrooper/Armament@GARRISONED/Weapon",
+        "actor:atreides_rockettrooper/Armament@PRIMARY/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@GARRISONED/Weapon",
+        "actor:corrino_sardaukar_bazooka/Armament@PRIMARY/Weapon",
+        "actor:corrino_trooper/Armament@GARRISONED/Weapon",
+        "actor:corrino_trooper/Armament@PRIMARY/Weapon",
+        "actor:harkonnen_rockettrooper/Armament@GARRISONED/Weapon",
+        "actor:harkonnen_rockettrooper/Armament@PRIMARY/Weapon"
       ],
       "unknown_attack_traits": [],
       "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: GlowImpact"
@@ -7733,6 +8529,162 @@
       ],
       "other_base_yaml_reference_count": 0,
       "other_base_yaml_reference_examples": [],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
+    },
+    {
+      "actor": "wc2_humans_alleria",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "6",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "wc2_humans_alleria_arrow"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "wc2_humans_alleria_arrow"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": "disabled",
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@RMarksmanUpg",
+        "FirepowerMultiplier@WC2ArrowUpg",
+        "FirepowerMultiplier@WC2ArrowUpg2",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 1,
+      "other_base_yaml_reference_examples": [
+        "weapon:wc2_orcs_zuljin_spear/Inherits"
+      ],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
+    },
+    {
+      "actor": "wc2_humans_alleria_elite",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "7",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament",
+          "unconditional_firepower_factor": "1331/2000",
+          "weapon": "wc2_humans_alleria_arrow_elite"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "1331/2000",
+          "weapon": "wc2_humans_alleria_arrow_elite"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": "disabled",
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@RMarksmanUpg",
+        "FirepowerMultiplier@WC2ArrowUpg",
+        "FirepowerMultiplier@WC2ArrowUpg2",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 1,
+      "other_base_yaml_reference_examples": [
+        "weapon:wc2_orcs_zuljin_spear_elite/Inherits"
+      ],
       "unknown_attack_traits": [],
       "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
     },
@@ -8433,6 +9385,156 @@
       "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: AreaDamagePercentage"
     },
     {
+      "actor": "wc2_orcs_zuljin",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "6",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "wc2_orcs_zuljin_spear"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "121/200",
+          "weapon": "wc2_orcs_zuljin_spear"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": "disabled",
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@TAxeUpg",
+        "FirepowerMultiplier@TAxeUpg2",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 0,
+      "other_base_yaml_reference_examples": [],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
+    },
+    {
+      "actor": "wc2_orcs_zuljin_elite",
+      "armaments": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "7",
+          "name": "primary",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [
+            "AttackFrontal"
+          ],
+          "slot": "Armament",
+          "unconditional_firepower_factor": "1331/2000",
+          "weapon": "wc2_orcs_zuljin_spear_elite"
+        },
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "casing_weapon": null,
+          "fire_delay": "0",
+          "name": "garrisoned",
+          "pause_on_condition": null,
+          "requires_condition": null,
+          "selected_by_known_own_attacks": [],
+          "slot": "Armament@GARRISONED",
+          "unconditional_firepower_factor": "1331/2000",
+          "weapon": "wc2_orcs_zuljin_spear_elite"
+        }
+      ],
+      "attack_selectors": [
+        {
+          "activation_at_zero_conditions": "enabled-at-zero-conditions",
+          "names": [
+            "primary",
+            "secondary"
+          ],
+          "pause_on_condition": "disabled",
+          "requires_condition": null,
+          "source": "self",
+          "trait": "AttackFrontal"
+        }
+      ],
+      "conditional_firepower_traits": [
+        "FirepowerMultiplier@Cryticcal",
+        "FirepowerMultiplier@DARKSWARM",
+        "FirepowerMultiplier@Heavy",
+        "FirepowerMultiplier@Light",
+        "FirepowerMultiplier@Medium",
+        "FirepowerMultiplier@POLICECALL",
+        "FirepowerMultiplier@PropagandaEffect",
+        "FirepowerMultiplier@RANK-1",
+        "FirepowerMultiplier@RANK-2",
+        "FirepowerMultiplier@RANK-3",
+        "FirepowerMultiplier@RANK-ELITE",
+        "FirepowerMultiplier@TAxeUpg",
+        "FirepowerMultiplier@TAxeUpg2",
+        "FirepowerMultiplier@WC2BLOODLUST",
+        "FirepowerMultiplier@artilleryjammer",
+        "FirepowerMultiplier@asianalliance_upgrade_wayofthedragon",
+        "FirepowerMultiplier@battlefortresspassenger",
+        "FirepowerMultiplier@chaos",
+        "FirepowerMultiplier@crate-firepower",
+        "FirepowerMultiplier@dragonwaydamage",
+        "FirepowerMultiplier@global_conscription_buff",
+        "FirepowerMultiplier@ra1_soviets_upgrade_menofsteel",
+        "FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics",
+        "FirepowerMultiplier@upsubliminal",
+        "FirepowerMultiplier@usabombardament"
+      ],
+      "other_base_yaml_reference_count": 0,
+      "other_base_yaml_reference_examples": [],
+      "unknown_attack_traits": [],
+      "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
+    },
+    {
       "actor": "yuri_chaosdrone",
       "armaments": [
         {
@@ -8661,7 +9763,7 @@
       "other_base_yaml_reference_count": 0,
       "other_base_yaml_reference_examples": [],
       "unknown_attack_traits": [],
-      "weapon_only_first_blocker": "physical-state/integrity feedback is unsupported"
+      "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
     },
     {
       "actor": "zerg_spithid",
@@ -8810,12 +9912,12 @@
       "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
     }
   ],
-  "same_weapon_pairs_with_other_base_yaml_references": 33,
+  "same_weapon_pairs_with_other_base_yaml_references": 41,
   "scope": "Topology of ledger-listed armed actors resolved from active base YAML. Host inventory covers all concrete active base actors, not only ledger entries. Slot names and host selectors do not establish cargo compatibility, exclusivity or simultaneous fire. Factors exclude conditional modifiers; host conditions, ports, range, reload, armor and runtime uptime are not simulated. Activation is a conservative assumed zero-condition snapshot, not actual spawn state; compound expressions remain unknown. Weapon-only passes are not actor eligibility or proposals. No armaments removed, no damage summed, no gameplay changes.",
   "topology_counts": {
-    "fewer-than-two-slots": 306,
-    "other-multiple-weapons": 549,
+    "fewer-than-two-slots": 338,
+    "other-multiple-weapons": 553,
     "other-same-weapon-slots": 23,
-    "same-weapon-primary-garrison-pair": 72
+    "same-weapon-primary-garrison-pair": 86
   }
 }

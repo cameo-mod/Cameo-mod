@@ -159,11 +159,8 @@ BlackEagleMissiles:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Acceleration: 10
-	Warhead@Demolition_Light:
-		Damage: 16000
-		ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Heavy:
-		Damage: 16000
+		Damage: 32000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
 		Damage: 16000
@@ -875,8 +872,6 @@ GuardianGIMG:
 	Burst: 3
 	BurstDelays: 2
 	Report: vblhatta.wav, vblhattb.wav
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Light:

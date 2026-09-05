@@ -172,7 +172,6 @@ RA2AsianShotgunFanatic1:
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Concussion_Medium
-	Inherits@3: ^RA2SmallArms
 	Inherits@4: ^RA2Chaingun
 	ReloadDelay: 50
 	Range: 5000
@@ -181,10 +180,8 @@ RA2AsianShotgunFanatic1:
 		Damage: 2000
 	Warhead@Concussion_Medium:
 		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
-		Damage: 2000
+		Damage: 4000
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -693,56 +690,7 @@ AsianLynxTankCannon:
 	Report: vlasatta.wav
 	Projectile: Bullet
 		Speed: 535
-	Warhead@Grenade: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Inaccuracy: 150
 	Warhead@CannonHE_Medium:
 		PercentageScale: 1659
 		Damage: 12000
@@ -772,9 +720,6 @@ AsianLynxMG:
 	BurstDelays: 2
 	Range: 5357
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
@@ -801,9 +746,6 @@ AsianKamikazeChaingun:
 	Range: 7000
 	MinRange: 1400
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1411,8 +1353,7 @@ AsianChemicalBombs:
 		PercentageScale: 9975
 
 AsianHowitzerCannon:
-	Inherits: ^RA2MediumCannon
-	Inherits@2: ^RA2HeavyCannon
+	Inherits: ^RA2HeavyCannon
 	ReloadDelay: 160
 	Report: aa_bgart.wav
 	Range: 16000
@@ -1467,7 +1408,6 @@ AsianHowitzerCannon:
 		Amount: 2
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
-	-Warhead@CannonHE_Medium:
 
 AsianHowitzerCannon_elite:
 	Inherits: AsianHowitzerCannon
@@ -1540,9 +1480,6 @@ AsianPulverizerGatling:
 		Speed: 10000
 		Width: 100
 	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
-	Warhead@Bullet_Light:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
@@ -1665,9 +1602,6 @@ AsianSinglePlasma:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@CannonHE_Medium:
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1684,7 +1618,7 @@ AsianSinglePlasma:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@CannonHE_Heavy:
-		Damage: 2000
+		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
@@ -2520,7 +2454,6 @@ AsianPelicanMissile_elite:
 AsianPelicanMG:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2HeavyCannon
-	Inherits@2: ^RA2SmallArms
 	Inherits@3: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 18
@@ -2531,16 +2464,12 @@ AsianPelicanMG:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	# Preserve the shell template's range-scaled speed and inaccuracy after the
 	# mixed projectile inheritance resolves.
 	Projectile: ScaledBullet
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
@@ -2637,19 +2566,13 @@ AsianSubmarineBomb:
 	Warhead@Demolition_Heavy:
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
-		Damage: 50000
+		Damage: 100000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@Demolition_Light: AreaDamage
-		Spread: 2500
-		Falloff: 100, 75, 50, 25, 0
-		Damage: 50000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		ValidTargets: Ground, Water, Ship, Submarine, Underwater
+	-Warhead@Demolition_Light:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: expnew09.wav
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
 		Damage: 100000
@@ -2713,9 +2636,6 @@ ASDFGun:
 	BurstDelays: 2
 	InvalidTargets: Structure, Bridge, wall
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -2933,11 +2853,6 @@ AsianSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 32000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
@@ -2965,7 +2880,6 @@ AsianSniperLockdown:
 		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	-Warhead@SniperMediumMissile:
-	-Warhead@Bullet_Light:
 
 AsianMLRS:
 	Inherits@roleflat: ^Compatibility_MissileAA_MediumFlat
@@ -3082,8 +2996,6 @@ asianalliance_fanatic_shotgun:
 	Projectile: Bullet
 		Speed: 4000
 		Inaccuracy: 800
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Light:

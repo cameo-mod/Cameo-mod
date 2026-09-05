@@ -3,12 +3,12 @@
     "after": {
       "classes": 20,
       "exit_code": 1,
-      "violations": 192
+      "violations": 191
     },
     "before": {
       "classes": 20,
       "exit_code": 1,
-      "violations": 129
+      "violations": 128
     },
     "note": "Unrecalibrated class anchors; findings are model flags, not proven balance defects."
   },
@@ -16,23 +16,23 @@
   "counts": {
     "band_dps": {
       "baseline_errors": 0,
-      "changed_entries": 759,
-      "evaluated_entries": 950
+      "changed_entries": 799,
+      "evaluated_entries": 1000
     },
     "faction_primary_dps": {
-      "baseline_errors": 791,
-      "changed_entries": 855,
-      "evaluated_entries": 950
+      "baseline_errors": 836,
+      "changed_entries": 905,
+      "evaluated_entries": 1000
     },
     "range_dps": {
       "baseline_errors": 0,
-      "changed_entries": 847,
-      "evaluated_entries": 950
+      "changed_entries": 890,
+      "evaluated_entries": 1000
     },
     "workbook_weapon_factors": {
       "baseline_errors": 0,
-      "changed_entries": 889,
-      "evaluated_entries": 950
+      "changed_entries": 932,
+      "evaluated_entries": 1000
     }
   },
   "examples": [
@@ -100,16 +100,16 @@
       "ledger": "starcraft_zerg",
       "values": {
         "band_dps": {
-          "after": 2874.9600000000005,
-          "before": 4800.0
+          "after": 718.7400000000001,
+          "before": 1200.0
         },
         "faction_primary_dps": {
-          "after": 2874.9600000000005,
-          "before": 0.0
+          "after": 718.7400000000001,
+          "before": "AttributeError"
         },
         "range_dps": {
-          "after": 2874.9600000000005,
-          "before": 47.519999999999996
+          "after": 718.7400000000001,
+          "before": 11.879999999999999
         },
         "workbook_weapon_factors": {
           "after": [

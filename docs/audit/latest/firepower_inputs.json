@@ -1,8 +1,40 @@
 {
-  "changed_actor_entries": 730,
+  "changed_actor_entries": 770,
   "rows": [
     {
-      "actor": "combat_tank.atreides",
+      "actor": "atreides_airdrone",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": 796.944444,
+      "old_class_fit_dps": 398.472222,
+      "ratio": 2.0,
+      "section": "aircraft"
+    },
+    {
+      "actor": "atreides_ornithopter",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": 3473.611111,
+      "old_class_fit_dps": 1736.805556,
+      "ratio": 2.0,
+      "section": "aircraft"
+    },
+    {
+      "actor": "atreides_lightinfantry",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": 121.0,
+      "old_class_fit_dps": 200.0,
+      "ratio": 0.605,
+      "section": "infantry"
+    },
+    {
+      "actor": "atreides_rockettrooper",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": 206.25,
+      "old_class_fit_dps": 375.0,
+      "ratio": 0.55,
+      "section": "infantry"
+    },
+    {
+      "actor": "atreides_combattank",
       "ledger": "d2k_atreides",
       "new_class_fit_dps": 160.0,
       "old_class_fit_dps": 320.0,
@@ -10,10 +42,234 @@
       "section": "vehicles"
     },
     {
+      "actor": "atreides_minotaurus",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": 324.324324,
+      "old_class_fit_dps": 648.648649,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "atreides_missiletank",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": 151.111111,
+      "old_class_fit_dps": 302.222222,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "atreides_mongoose",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": 151.111111,
+      "old_class_fit_dps": 302.222222,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "atreides_repairtank",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": -28.125,
+      "old_class_fit_dps": -56.25,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "atreides_sandbike",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": 100.0,
+      "old_class_fit_dps": 200.0,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "atreides_siegetank",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": 324.324324,
+      "old_class_fit_dps": 648.648649,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "atreides_sonictank",
+      "ledger": "d2k_atreides",
+      "new_class_fit_dps": 23.805195,
+      "old_class_fit_dps": 47.61039,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "corrino_gunship",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 1010.0,
+      "old_class_fit_dps": 505.0,
+      "ratio": 2.0,
+      "section": "aircraft"
+    },
+    {
+      "actor": "corrino_lightinfantry",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 121.0,
+      "old_class_fit_dps": 200.0,
+      "ratio": 0.605,
+      "section": "infantry"
+    },
+    {
+      "actor": "corrino_sardaukar_bazooka",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 226.875,
+      "old_class_fit_dps": 375.0,
+      "ratio": 0.605,
+      "section": "infantry"
+    },
+    {
+      "actor": "corrino_sardaukar_berserker",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 55.0,
+      "old_class_fit_dps": 80.0,
+      "ratio": 0.6875,
+      "section": "infantry"
+    },
+    {
+      "actor": "corrino_sardaukar_javelin",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 48.4,
+      "old_class_fit_dps": 80.0,
+      "ratio": 0.605,
+      "section": "infantry"
+    },
+    {
+      "actor": "corrino_sardaukar_laser",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 48.4,
+      "old_class_fit_dps": 80.0,
+      "ratio": 0.605,
+      "section": "infantry"
+    },
+    {
+      "actor": "corrino_sardaukar_sword",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 55.0,
+      "old_class_fit_dps": 80.0,
+      "ratio": 0.6875,
+      "section": "infantry"
+    },
+    {
+      "actor": "corrino_trooper",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 206.25,
+      "old_class_fit_dps": 375.0,
+      "ratio": 0.55,
+      "section": "infantry"
+    },
+    {
+      "actor": "corrino_bmp",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 160.0,
+      "old_class_fit_dps": 320.0,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "corrino_buggy",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 50.0,
+      "old_class_fit_dps": 100.0,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "corrino_combattank",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 72.727273,
+      "old_class_fit_dps": 145.454545,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "corrino_missiletank",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 151.111111,
+      "old_class_fit_dps": 302.222222,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "corrino_siegetank",
+      "ledger": "d2k_corrino",
+      "new_class_fit_dps": 324.324324,
+      "old_class_fit_dps": 648.648649,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "harkonnen_gunship",
+      "ledger": "d2k_harkonnen",
+      "new_class_fit_dps": 1010.0,
+      "old_class_fit_dps": 505.0,
+      "ratio": 2.0,
+      "section": "aircraft"
+    },
+    {
+      "actor": "harkonnen_lightinfantry",
+      "ledger": "d2k_harkonnen",
+      "new_class_fit_dps": 121.0,
+      "old_class_fit_dps": 200.0,
+      "ratio": 0.605,
+      "section": "infantry"
+    },
+    {
+      "actor": "harkonnen_rockettrooper",
+      "ledger": "d2k_harkonnen",
+      "new_class_fit_dps": 206.25,
+      "old_class_fit_dps": 375.0,
+      "ratio": 0.55,
+      "section": "infantry"
+    },
+    {
+      "actor": "harkonnen_sardaukar",
+      "ledger": "d2k_harkonnen",
+      "new_class_fit_dps": 226.875,
+      "old_class_fit_dps": 375.0,
+      "ratio": 0.605,
+      "section": "infantry"
+    },
+    {
       "actor": "combat_tank.harkonnen",
       "ledger": "d2k_harkonnen",
       "new_class_fit_dps": 72.727273,
       "old_class_fit_dps": 145.454545,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "harkonnen_adp",
+      "ledger": "d2k_harkonnen",
+      "new_class_fit_dps": 95.833333,
+      "old_class_fit_dps": 191.666667,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "harkonnen_buzzsaw",
+      "ledger": "d2k_harkonnen",
+      "new_class_fit_dps": 113.888889,
+      "old_class_fit_dps": 227.777778,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "harkonnen_flametank",
+      "ledger": "d2k_harkonnen",
+      "new_class_fit_dps": 1013.508065,
+      "old_class_fit_dps": 2027.016129,
+      "ratio": 0.5,
+      "section": "vehicles"
+    },
+    {
+      "actor": "harkonnen_inkvine",
+      "ledger": "d2k_harkonnen",
+      "new_class_fit_dps": 8.333333,
+      "old_class_fit_dps": 16.666667,
       "ratio": 0.5,
       "section": "vehicles"
     },
@@ -116,8 +372,8 @@
     {
       "actor": "ixian_twinrockettrooper",
       "ledger": "d2k_ixian",
-      "new_class_fit_dps": 499.125,
-      "old_class_fit_dps": 750.0,
+      "new_class_fit_dps": 582.3125,
+      "old_class_fit_dps": 875.0,
       "ratio": 0.6655,
       "section": "infantry"
     },
@@ -692,8 +948,8 @@
     {
       "actor": "ra2_soviets_apocalypsetank",
       "ledger": "redalert2_soviets",
-      "new_class_fit_dps": 395.64867,
-      "old_class_fit_dps": 989.121676,
+      "new_class_fit_dps": 425.060435,
+      "old_class_fit_dps": 1062.651088,
       "ratio": 0.4,
       "section": "vehicles"
     },
@@ -1124,8 +1380,8 @@
     {
       "actor": "steelconsortium_empressstation",
       "ledger": "redalert2mod_consortium",
-      "new_class_fit_dps": 687.5,
-      "old_class_fit_dps": 1000.0,
+      "new_class_fit_dps": 693.0,
+      "old_class_fit_dps": 1008.0,
       "ratio": 0.6875,
       "section": "aircraft"
     },
@@ -4036,8 +4292,8 @@
     {
       "actor": "zerg_hydralisk",
       "ledger": "starcraft_zerg",
-      "new_class_fit_dps": 2874.96,
-      "old_class_fit_dps": 4752.0,
+      "new_class_fit_dps": 718.74,
+      "old_class_fit_dps": 1188.0,
       "ratio": 0.605,
       "section": "infantry"
     },
@@ -5674,6 +5930,38 @@
       "section": "aircraft"
     },
     {
+      "actor": "wc2_humans_alleria",
+      "ledger": "warcraft2_humans",
+      "new_class_fit_dps": 946.956522,
+      "old_class_fit_dps": 1565.217391,
+      "ratio": 0.605,
+      "section": "infantry"
+    },
+    {
+      "actor": "wc2_humans_alleria_elite",
+      "ledger": "warcraft2_humans",
+      "new_class_fit_dps": 1597.2,
+      "old_class_fit_dps": 2400.0,
+      "ratio": 0.6655,
+      "section": "infantry"
+    },
+    {
+      "actor": "wc2_humans_danath",
+      "ledger": "warcraft2_humans",
+      "new_class_fit_dps": 2062.5,
+      "old_class_fit_dps": 3000.0,
+      "ratio": 0.6875,
+      "section": "infantry"
+    },
+    {
+      "actor": "wc2_humans_danath_elite",
+      "ledger": "warcraft2_humans",
+      "new_class_fit_dps": 3630.0,
+      "old_class_fit_dps": 4800.0,
+      "ratio": 0.75625,
+      "section": "infantry"
+    },
+    {
       "actor": "wc2_humans_dwarvenrifleman",
       "ledger": "warcraft2_humans",
       "new_class_fit_dps": 114.583333,
@@ -5778,6 +6066,22 @@
       "section": "infantry"
     },
     {
+      "actor": "wc2_orcs_hellscream",
+      "ledger": "warcraft2_orcs",
+      "new_class_fit_dps": 2062.5,
+      "old_class_fit_dps": 3000.0,
+      "ratio": 0.6875,
+      "section": "infantry"
+    },
+    {
+      "actor": "wc2_orcs_hellscream_elite",
+      "ledger": "warcraft2_orcs",
+      "new_class_fit_dps": 3630.0,
+      "old_class_fit_dps": 4800.0,
+      "ratio": 0.75625,
+      "section": "infantry"
+    },
+    {
       "actor": "wc2_orcs_kodobeast",
       "ledger": "warcraft2_orcs",
       "new_class_fit_dps": 382.105263,
@@ -5815,6 +6119,22 @@
       "new_class_fit_dps": 1008.333333,
       "old_class_fit_dps": 1733.333333,
       "ratio": 0.581731,
+      "section": "infantry"
+    },
+    {
+      "actor": "wc2_orcs_zuljin",
+      "ledger": "warcraft2_orcs",
+      "new_class_fit_dps": 544.5,
+      "old_class_fit_dps": 900.0,
+      "ratio": 0.605,
+      "section": "infantry"
+    },
+    {
+      "actor": "wc2_orcs_zuljin_elite",
+      "ledger": "warcraft2_orcs",
+      "new_class_fit_dps": 798.6,
+      "old_class_fit_dps": 1200.0,
+      "ratio": 0.6655,
       "section": "infantry"
     },
     {

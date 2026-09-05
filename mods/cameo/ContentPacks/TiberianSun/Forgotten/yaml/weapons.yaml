@@ -197,14 +197,10 @@ TSScoopDualChem:
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
-	Warhead@CannonHE_Medium:
-		Damage: 20000
-	Warhead@Chemical_Medium:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@CannonChem_Medium: AreaDamage
+		Damage: 30000
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@Effect: CreateEffect
 		Explosions: med_tibnapalm
 		ImpactSounds: xplobig6.aud
@@ -1905,8 +1901,6 @@ TSMutVulcanTurret:
 	ReloadDelay: 6
 	Range: 6272
 	Report: tsgun4.aud
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Light:
@@ -1937,8 +1931,6 @@ TSBowlerCannon:
 	ReloadDelay: 5
 	Range: 6603
 	Report: chaingn1.aud
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Light:
@@ -2081,12 +2073,9 @@ TSSergGun:
 	ReloadDelay: 8
 	Range: 5611
 	Report: cygun1.aud
-	Warhead@Bullet_Light:
-		PercentageScale: 2500
-		Damage: 8000
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
-		Damage: 8000
+		Damage: 16000
 		ValidTargets: Ground, Water
 # SCOUT-CLASS VERIFICATION WEAPON (law 2026-07-19): exactly 2x the
 # baseline rifle (8000 dmg / 50 rl / 5000 rng, SmallArms, % = 4). The

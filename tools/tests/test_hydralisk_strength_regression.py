@@ -1,4 +1,4 @@
-"""Hydralisk keeps its pre-PR-287 damage and corrosion profile."""
+"""Historical four-profile evidence and upstream's current BulletChem contract."""
 
 from __future__ import annotations
 
@@ -13,6 +13,8 @@ sys.path.insert(0, str(ROOT / "tools/audit"))
 from audit_three_way_split import main_warhead_nodes, main_warheads
 from miniyaml import Ruleset
 from survey_weapon_structure import inventory
+from intentional_composites import curated_decisions
+import hydra_history
 
 
 EXPECTED_MAINS = (
@@ -40,9 +42,9 @@ class HydraliskStrengthRegressionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.rules = Ruleset(ROOT)
-        cls.weapon = cls.rules.resolve_weapon("HydraSpit")
+        cls.weapon = hydra_history.weapon()
 
-    def test_original_four_damage_profiles_are_restored(self):
+    def test_historical_four_damage_profiles_are_preserved_in_fixture(self):
         self.assertEqual(EXPECTED_MAINS, tuple(main_warheads(self.weapon)))
         for node in main_warhead_nodes(self.weapon):
             self.assertEqual("18000", node.get("Damage"), node.key)
@@ -72,10 +74,23 @@ class HydraliskStrengthRegressionTests(unittest.TestCase):
             self.assertEqual("100", node.get("PhysicalStateScale"))
             self.assertEqual("100", node.get("PhysicalStates", "Corrosion"))
 
-    def test_reviewed_exception_stays_visible_in_the_raw_structure_inventory(self):
-        sets = inventory(self.rules)["sets"]
-        self.assertIn("HydraSpit", sets["direct_actor_armament"])
-        self.assertIn("HydraSpit", sets["reviewed_direct_actor_armament"])
+    def test_current_upstream_bulletchem_is_not_hidden_as_an_exception(self):
+        # Upstream 8748c68e4 changed the role/profile; this PR does not revert it.
+        current = self.rules.resolve_weapon('HydraSpit')
+        self.assertEqual(('BulletChem_Light',), tuple(main_warheads(current)))
+        main = current.child('Warhead@BulletChem_Light')
+        self.assertEqual('18000', main.get('Damage'))
+        self.assertEqual('10000', main.get('PercentageScale'))
+        self.assertEqual('15', current.get('ReloadDelay'))
+        self.assertEqual('5979', current.get('Range'))
+        self.assertEqual('20', main.get('PhysicalStates', 'Corrosion'))
+        self.assertIsNone(main.get('PhysicalStateName'))
+        self.assertNotIn('HydraSpit', curated_decisions())
+        # Raw topology only. Registry validity has its own failing audit/tests;
+        # an unrelated stale registry must not stand in for this weapon contract.
+        sets = inventory(self.rules, reviewed_predicate=lambda _name, _mains: False)["sets"]
+        self.assertNotIn("HydraSpit", sets["direct_actor_armament"])
+        self.assertNotIn("HydraSpit", sets["reviewed_direct_actor_armament"])
         self.assertNotIn("HydraSpit", sets["unreviewed_direct_actor_armament"])
 
 

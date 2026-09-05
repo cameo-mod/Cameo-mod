@@ -477,10 +477,8 @@ CabalCyborgChaingun:
 	Report: cygun1.aud
 	ReloadDelay: 60
 	Range: 5800
-	Warhead@Bullet_Light:
-		Damage: 10000
 	Warhead@Bullet_Medium:
-		Damage: 10000
+		Damage: 20000
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ImpactSounds: methit1.aud
@@ -503,10 +501,8 @@ TSDevoutChainguns:
 	Burst: 2
 	BurstDelays: 3
 	Range: 6200
-	Warhead@Bullet_Light:
-		Damage: 12000
 	Warhead@Bullet_Medium:
-		Damage: 12000
+		Damage: 24000
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ImpactSounds: methit1.aud
@@ -710,11 +706,8 @@ CabalReaperMissiles_AA:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 8000
-		ValidTargets: Air
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 8000
+		Damage: 16000
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 8000
@@ -1014,11 +1007,8 @@ CabalHeavyReaperMissiles_AA:
 		Acceleration: 2
 		HomingActivationDelay: 3
 		RangeLimit: 30000
-	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 12000
-		ValidTargets: Air
 	Warhead@MissileHE_Heavy: AreaDamage
-		Damage: 12000
+		Damage: 24000
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
@@ -1882,10 +1872,9 @@ CabalLegionGun:
 		PercentageScale: 10000
 		PhysicalStateScale: 38
 ^CabalManticoreMissiles:
-	Inherits@wh: ^Warhead_MissileHE_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
-	Inherits@wh3: ^Warhead_Demolition_Light
-	Inherits@wh4: ^Warhead_Concussion_Medium
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_Demolition_Light
+	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 30
@@ -1903,10 +1892,8 @@ CabalLegionGun:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 12000
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 12000
+		Damage: 24000
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
 	Warhead@Concussion_Medium: AreaDamage
@@ -1916,8 +1903,6 @@ CabalManticoreMissilesAA:
 	Inherits: ^CabalManticoreMissiles
 	Range: 5358
 	ValidTargets: Air
-	Warhead@MissileHE_Light: AreaDamage
-		ValidTargets: Air
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage
@@ -2038,7 +2023,6 @@ CabalManticoreMissilesAA:
 		Range: 0, 150, 225
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	Warhead@MissileAA_MediumFlatCompatibility:
 		ValidTargets: Air
@@ -2065,8 +2049,6 @@ CabalRocketCyborgRockets:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 6000
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
 	-Warhead@MissileHE_Light:
@@ -2096,8 +2078,6 @@ CabalRocketCyborgRocketsUpgraded:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 6000
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
 	-Warhead@MissileHE_Light:
