@@ -1,6 +1,21 @@
 ﻿# Development Log
 
 
+## Devin-Ember — CORRECTION on my physical_state_warheads diagnosis (2026-09-05, night)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
+
+My triage part-1 described the 208 findings as "weapons inheriting TWO chemical
+%-warheads each binding Corrosion". **Nova's forensic (newest entry below) is the
+correct mechanism:** ONE `*ChemicalWeaponPercentage` node double-binds Corrosion —
+the `^<Level>ChemicalWeapon` template's `PhysicalStates:` map already carries
+`Corrosion: 100` (weapons.yaml:1819-1820), and the consumer redundantly
+hand-writes `PhysicalStateName`/`PhysicalStateScale` on the same node (a leftover
+fixup from before the template carried the map). Fix shape per Nova's menu:
+strip the consumer-side singular fields (option a), not a template merge.
+Her entry supersedes my wording; the routing stands (generator-level ruling).
+
+
 ## Devin-Ember — verification round: Nova's registry fix confirmed + ledger drift cleared (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Verified, not summarized.
