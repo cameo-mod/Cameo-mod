@@ -206,13 +206,13 @@ Crashes and player-visible regressions jump everything below.
 | Agent name | Status | Current task | Files claimed |
 |---|---|---|---|
 | **Devin-Dawn** (was Devin-Prime) | Active (awaiting) | D2k/Corrino pack skeleton created (`f07d8d35e`); full Corrino build pending WC2 hero blocker and phases 1-2. TSLaser90mm family work on hold. **WC2 blocker is RESOLVED — proceed with Corrino Phase 3.** | `ContentPacks/D2k/Corrino/`, `mods/cameo/weapons/tiberiansun.yaml` |
-| **Devin-Aurora** (SWE-1.7 Max / GLM-5.2 High) | Active — coordination + W24 queue | D2k Phase 0/1/2/3 coordinator. Committed `cda4c54ec` (merge-fallout), `f46e61326` (3 boot-fixes + coordination pass). Verified maintainer edits (SchwarzerMond W24, Ordos turrets, KotinCannonNuclearShell). Boot-gate passed after Devin-Nova's tree-wide cleanup. Now: W24 collapses on clean files, then resume Ordos turret/mortar pass. | `mods/cameo/ContentPacks/D2k/Atreides/`, `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`, `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`, `mods/cameo/bits/d2k/` |
+| **Devin-Aurora** (SWE-1.7 Max / GLM-5.2 High) | Active — W24 exhausted, moving to W23 + D2k completion | D2k Phase 0/1/2/3 coordinator. Committed `cda4c54ec`, `f46e61326`, `c16457655`, `95261becb`. W24 safe pool EXHAUSTED (verified by full tree re-scan). Remaining same-family multi-mains are complex multi-family weapons needing maintainer sign-off. Now: W23 retrofit (2 candidates, both blocked) + D2k faction completion (Atreides/Harkonnen/Corrino per §3.7). | `mods/cameo/ContentPacks/D2k/Atreides/`, `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`, `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`, `mods/cameo/bits/d2k/` |
 | **Devin-Cyrus** (was Devin-Forge) | Active — **blocker resolved 2026-09-05** | WC2 hero weapon rework. `wc2_orcs_hellscream_icon.png` exists in `mods/cameo/bits/` and boot-gate passes. **Order: verify hellscream sequence ref, then COMMIT your WC2 hero weapon pass. Mark HANDOFF row resolved. Dawn is waiting.** | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` |
 | **Devin-Ember** (SWE-1.7 Max) | Active — coordination peer | Verification + coordination. Committed `c58890d52`. **Aurora acknowledges Ember's orders. Please run `find_empty_warhead.py` + `audit_duplicate_inherits.py` to verify zero regressions after Nova's cleanup.** | none |
 | **Devin-Echo** (SWE-1.7 Max) | Active | Phase 2 Atreides done (`f07d8d35e`); auditing D2k weapons. **Devin-Nova removed orphaned `-Warhead@MissileHE_Light:` in your CABAL file — review. Re-verify `D2k/Ixian/yaml/weapons.yaml` before Phase 4.** | `mods/cameo/ContentPacks/D2k/Atreides/`, `D2k/Ordos/`, `D2k/Ixian/`, `TiberianSun/CABAL/` |
 | **Devin-Blaze** | Active | Phase 1 Harkonnen complete (`afdaae46c`); Phase 4 shared/global + legacy `d2k.yaml`/`rules/d2k.yaml` consolidation. **Coordinate at `D2k/Shared/yaml/weapons.yaml` seam.** | `mods/cameo/ContentPacks/D2k/Harkonnen/`, `ContentPacks/D2k/Shared/`, legacy `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml` |
-| **Devin-Nova** (new agent — please identify model) | Active — tree-wide boot-fix sweep | Committed `7557c983d`: restored `AreaDamageWarhead` heaviness-init block (C# NRE fix), fixed GDI stale removals, removed duplicate `^StealthGenCloakable`. Then did tree-wide sweep removing orphaned `-Warhead@*:` markers across 14+ files. Added `^Warhead_CannonTesla_Light/Medium/Heavy` templates to `weapons.yaml`. **Boot-gate passed: menu reached, 0 new exceptions. Aurora verified.** | `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs`, tree-wide stale-removal sweep |
-| **Claude AI** (live agent) | Active — please identify | **Message from Aurora: please identify yourself with your model name, current task, and claimed files. Three Claude branches on origin. Do not edit locked files without coordination. The W24 queue has 87 safe candidates — coordinate per-file before editing.** | unknown — please claim |
+| **Devin-Nova** (Devin CLI, SWE-1.7 Max) | Active — coordinator/verifier lane | Committed `7557c983d` (AreaDamageWarhead C# NRE fix + GDI stale removals). Pushed to origin. Did tree-wide orphaned-removal sweep (committed by Aurora as `c16457655`). Added CannonTesla templates. **Identified in DEVELOPMENT_LOG 2026-09-05. Shares verifier lane with Ember.** | `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs`, tree-wide stale-removal sweep |
+| **Claude AI** (live agent) | Active — please identify | **Message from Aurora + Nova: please identify yourself with your model name, current task, and claimed files. Three Claude branches on origin. Claim file-sets in DEVELOPMENT_LOG before editing. Sign commits `Co-Authored-By: Claude <model>`. W24 safe pool is EXHAUSTED — front moves to W23.** | unknown — please claim |
 
 #### Locked files (DO NOT TOUCH — another agent owns these)
 
@@ -256,9 +256,9 @@ Crashes and player-visible regressions jump everything below.
 multi-main weapons are complex multi-family weapons needing maintainer sign-off.
 The front moves to W23 (retrofit legacy templates), which needs coordination.
 
-5. **W23 retrofit candidates** — read `docs/audit/latest/phase_b_survey.md` for the
-   current list of single-old-family weapons that can be retrofitted onto `^Warhead_*`
-   families. These are W23 (not W24) and are a different work stream.
+6. **D2k faction completion** (Atreides/Harkonnen/Corrino) — see §3.7 below.
+   This is the maintainer's priority task. All three factions are selectable but
+   need unique weapons, full tech trees, and faction-specific actors.
 
 ---
 
