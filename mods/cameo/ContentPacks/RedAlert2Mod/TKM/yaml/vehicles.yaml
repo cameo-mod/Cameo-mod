@@ -140,8 +140,6 @@ tkm_as42:
 	GrantConditionOnPrerequisite@tkm_upgrade_incendiaryrocketsupgrade:
 		Condition: tkm_upgrade_incendiaryrocketsupgrade
 		Prerequisites: tkm_upgrade_incendiaryrocketsupgrade
-	ActorStatValues:
-		Upgrades: tkm_upgrade_twinrocketsupgrade, tkm_upgrade_cryorocketsupgrade, tkm_upgrade_incendiaryrocketsupgrade
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
@@ -268,7 +266,6 @@ tkm_technicaltank:
 	WithMuzzleOverlay:
 	AttackTurreted:
 	SelectionDecorations:
-	Selectable:
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
 		ValidTypes: vehicle
@@ -531,7 +528,6 @@ tkm_abrams:
 	WithMuzzleOverlay:
 	AttackTurreted:
 	SelectionDecorations:
-	Selectable:
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
 		ValidTypes: vehicle
@@ -613,7 +609,6 @@ tkm_t72m:
 	WithMuzzleOverlay:
 	AttackTurreted:
 	SelectionDecorations:
-	Selectable:
 	Armament@pointdefense:
 		Name: pointdefense
 		Weapon: TKMPDLaser
@@ -675,7 +670,6 @@ tkm_trenchtruck:
 	RevealsShroud:
 		Range: 6c0
 	SelectionDecorations:
-	Selectable:
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
 		ValidTypes: vehicle
@@ -755,8 +749,6 @@ tkm_tornadoglauncher:
 	Voiced:
 		VoiceSet: TSVehicle
 	WithFacingSpriteBody:
-	ActorStatValues:
-		Upgrades:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -1031,7 +1023,6 @@ tkm_trenchtank:
 	WithMuzzleOverlay:
 	AttackTurreted:
 	SelectionDecorations:
-	Selectable:
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
 		ValidTypes: vehicle

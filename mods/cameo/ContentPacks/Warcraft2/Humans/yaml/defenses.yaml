@@ -8,6 +8,7 @@ wc2_humans_humanscouttower:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
 	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits@plug: ^BuildingPlugProducer
 	Tooltip:
 		Name: Human Scout Tower
 		RequiresCondition: !guard && !cannon

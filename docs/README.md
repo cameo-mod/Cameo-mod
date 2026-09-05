@@ -34,7 +34,7 @@ conflicts with this file, **this file wins** — and fix the copy.
 
 Crashes and player-visible regressions always jump the queue.
 
-### The balance program — 6 documents
+### The balance program — 8 documents
 
 | document | owns |
 |---|---|
@@ -43,6 +43,8 @@ Crashes and player-visible regressions always jump the queue.
 | [`design/FORMULA_V2.md`](design/FORMULA_V2.md) | the formula law: per-class, SUM, bands, uniqueness |
 | [`design/BALANCE_SYNTHESIS.md`](design/BALANCE_SYNTHESIS.md) | the mod-synthesis methodology and its sources |
 | [`design/BALANCE_PIPELINE_ESTIMATE.md`](design/BALANCE_PIPELINE_ESTIMATE.md) | effort estimate for the whole programme |
+| [`design/BALANCE_PIPELINE_GAPS.md`](design/BALANCE_PIPELINE_GAPS.md) | what a one-click run still lacks, plus the verified residue of the 2026-08 outside review round |
+| [`design/RTS_BALANCE_REFERENCE.md`](design/RTS_BALANCE_REFERENCE.md) | *(non-binding)* RTS and multiplayer balance dimensions a stat-consistency model cannot see |
 | [`design/EFFECTIVE_DAMAGE.md`](design/EFFECTIVE_DAMAGE.md) | the area-integrated `effective_damage` metric |
 
 ### Weapons, warheads and defence — 9 documents
@@ -59,13 +61,14 @@ Crashes and player-visible regressions always jump the queue.
 | [`design/SPREAD_FALLOFF_PLAN.md`](design/SPREAD_FALLOFF_PLAN.md) | per-type spread and damage-falloff profiles |
 | [`design/INVENTED_WARHEAD_FAMILIES.md`](design/INVENTED_WARHEAD_FAMILIES.md) | *(generated)* the families with no cross-mod equivalent |
 
-### Systems — 3 documents
+### Systems — 4 documents
 
 | document | owns |
 |---|---|
 | [`design/PHYSICAL_STATE_SYSTEM.md`](design/PHYSICAL_STATE_SYSTEM.md) | the status-meter layer: heat, cryo, corrosion, EMP, sonic |
 | [`design/EMP_INTEGRITY_SYSTEM.md`](design/EMP_INTEGRITY_SYSTEM.md) | EMP / Integrity auto-scaling |
 | [`design/UPSTREAM_MODS.md`](design/UPSTREAM_MODS.md) | absorbing the other OpenRA mods — CA, Crystallized Nexus, Romanov's Vengeance, Shattered Paradise: the engine lineage, why the engine must NOT move to `ca-engine`, and the phased adoption plan |
+| [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) | bot modules, per-ContentPack AI splitting, the dynamic personality manager, the master AI module, and the match-logging / offline-learning loop |
 
 ### Factions and content — 5 documents
 
@@ -144,8 +147,10 @@ machine** — path separators alone make a cross-platform diff dirty.
 wholesale, so anything the suite does not produce is deleted on the next run — which is how
 `latest/superweapon_audit.yaml` disappeared while three documents still linked to it.
 
-⚠ **`design/cameo_balance_v2.xlsx` is TRACKED in git**, despite older notes calling it
-"gitignored". Regenerating it produces a real diff.
+⚠ **The active generated workbooks are TRACKED in git:**
+`design/cameo_balance_by_faction.xlsx` and `design/cameo_balance_by_type.xlsx`.
+`design/cameo_balance_v2.xlsx` is a frozen pre-split prototype; do not treat its
+old formulas as the current balance law.
 
 ## Two gates keep this set honest
 

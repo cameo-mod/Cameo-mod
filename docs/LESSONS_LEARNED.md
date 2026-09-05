@@ -75,6 +75,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 - [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
 - [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
+- [A ContentPack can only ADD to a bot module - and a partial migration fails silently (2026-08-31)](#a-contentpack-can-only-add-to-a-bot-module---and-a-partial-migration-fails-silently-2026-08-31)
 - [Content installer and music filesystem plumbing (2026-08-11)](#content-installer-and-music-filesystem-plumbing-2026-08-11)
 - [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
 - [YAML lint rules learned (2026-07-24)](#yaml-lint-rules-learned-2026-07-24)
@@ -82,6 +83,8 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
 - [`docs/audit/latest/` is environment-bound — an incomplete tree reports LESS and still says PASS (2026-08-23)](#docsauditlatest-is-environment-bound--an-incomplete-tree-reports-less-and-still-says-pass-2026-08-23)
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
+- ["Regenerable" is a claim about a tool, and it needs running (2026-08-28)](#regenerable-is-a-claim-about-a-tool-and-it-needs-running-2026-08-28)
+- ["Not found" is not "not there" — three ways a grep lies (2026-08-28)](#not-found-is-not-not-there--three-ways-a-grep-lies-2026-08-28)
 
 ---
 
@@ -101,6 +104,12 @@ be copied into new instances. Steamroller cannot express zero guerrilla units
 in YAML: the engine's `guerrillaForce == null` short-circuit creates the first
 guerrilla squad regardless of `JoinGuerrilla`, so its documented behavior is
 at most one harasser.
+
+The personality indicator uses a reusable `ObserverConditionNotification`
+trait rather than a personality-specific UI path. It announces once after a
+short delay to spectators and replay viewers through the local chat feed, while
+live players are excluded so opponent strategy is not revealed. Keep this
+observer-only behavior display-local and out of synchronized game state.
 
 ## Opt-in AI unit compositions (2026-08-24)
 
@@ -1031,6 +1040,98 @@ its own `GONE` table, and D4 for its own example anchor. A detector that scans t
 will eventually scan itself and its tests; write the exclusion when you add the check, not after
 it fires.
 
+
+## "Regenerable" is a claim about a tool, and it needs running (2026-08-28)
+
+The 83→43 documentation compaction deleted 40 files. Its commit message said **nothing was
+summarised away** and that every merged file's content lines had been checked for presence
+in the target — verified mechanically, 0 lines lost.
+
+That claim was true, and it covered the wrong set.
+
+It described the files that were **merged**. Alongside them, fifteen files were **deleted
+outright** on the grounds that they were generated and could be rebuilt on demand. That
+second claim was asserted, not tested.
+
+Re-checking it later, by diffing every deleted file's content lines against the whole live
+corpus:
+
+| outcome | count |
+|---|--:|
+| carried across into a merge target | 24 |
+| deleted, regeneration **verified by running the generator** | 13 |
+| deleted, **not regenerable** | 2 |
+
+The two that were not:
+
+* `docs/balance/BALANCE_AUDIT.md` — a per-unit formula-price-vs-cost delta report. Its
+  generator, `tools/balance/_balance_audit_report.py`, raises `ModuleNotFoundError: No
+  module named 'scout_rebalance_proposal_final'`. The module was removed long ago;
+  `propose_class_rebalance.py` even carries a comment saying those modules no longer
+  exist. The script is dead, nothing runs it, and nobody noticed because nobody ran it.
+* `docs/balance/proposal_vehicle_defense_anchors.md` — deleted with thirteen
+  `proposal_*.md` siblings, but it is not one of them. The proposer writes
+  `proposal_<class>_infantry.md`; this name matches no pattern and a repo-wide search
+  finds no generator at all. It was deleted by resemblance.
+
+Both are restored under `docs/history/balance/` with banners, because their numbers
+predate W24 and are provenance rather than current truth.
+
+⭐ **Deleting a generated artifact is safe exactly when the generator runs.** That is one
+command, and skipping it converts a reversible cleanup into permanent loss that a green
+verification report actively conceals — the check that ran measured merges, and the files
+at risk were the ones it did not cover. Run the generator, or keep the file.
+
+⭐ **Group deletions inherit the safety of the group's weakest member.** Fourteen files
+were removed under one justification; thirteen deserved it. A filename that merely looks
+like the others is the one to check individually, because resemblance is not provenance.
+
+## "Not found" is not "not there" — three ways a grep lies (2026-08-28)
+
+Three separate disagreements in one week, between careful people looking at the same
+project, all with the same shape: someone searched, found nothing, and concluded the thing
+did not exist. Every time, it did.
+
+**1. Wrong commit.** Five outside reviews declared seven documents missing —
+`MASTER_REPORT`, `audit/FINDINGS`, `BALANCE_MEGAPLAN`, `PROJECT_CONTEXT` and others. All
+seven had been merged away by the 83→43 compaction. The reviewers were not describing this
+repository; they were describing it on an earlier date, and disagreeing with each other
+about *when* rather than about *what*.
+
+> `git log --all -- <path>` separates **moved** from **never existed**. A path with commits
+> behind it and none at HEAD was relocated, and the report's substance may still be sound.
+
+**2. Wrong load state.** Four USA doctrine conditions in `defaults.yaml` looked like dead
+wiring: nothing on master grants them, so five multipliers hang off conditions that can
+never fire. The provider exists and works — `usacommand` in `rules/generals.yaml`, which
+`mod.yaml` has commented out. Dormant content can be the sole provider for live wiring, so
+the defect is real on master and invisible to anyone working with that pack enabled.
+
+> Check `mod.yaml` before calling wiring dead. State which files were loaded when reporting
+> it.
+
+**3. Wrong namespace.** The same four tokens then vanished from a contributor's tree
+entirely. That tree had renamed 874 actors plus every id that doubles as a string match, so
+`usabombardament` had become `usa_doctrine_bombardmentbattleplan` — locally, and nowhere
+else. Searching master's names against a renamed tree returns nothing, and nothing looks
+identical to deleted.
+
+> Before concluding a rename removed something, search for what it was renamed *to*. A
+> rename map is the fastest way to translate between naming generations.
+
+⭐ **A finding is scoped to a commit, a load state, and a namespace.** All three must be
+established before "I could not find it" becomes "it is not there" — and each failure is
+invisible from inside, because a search that returns nothing looks the same in every case.
+
+⭐ **Trace a mechanism end to end rather than inferring its absence from an empty grep.**
+The load-state case took four links to settle — production grant, prerequisite, condition,
+multiplier — and stopping at any one of them produced a confident wrong answer. Two of the
+three disagreements above were resolved only by walking the whole chain; none was resolved
+by a better search term.
+
+The worked instances, with line numbers, are in
+[`design/BALANCE_PIPELINE_GAPS.md`](design/BALANCE_PIPELINE_GAPS.md) §0–§0b.
+
 ## `Inherits` POSITION is semantic, not cosmetic (2026-08-16)
 
 **The last node wins, and `Inherits` is a node.** `MiniYaml` walks a definition's children
@@ -1112,3 +1213,35 @@ First scan: **665 concrete weapons carry 815 inline effect warhead nodes** (`War
 - Add new effect families to `gen_weapon_template.py` / `weapons.yaml` instead of copy-pasting `CreateEffect` nodes.
 
 **Guard:** `tools/audit/audit_inline_effects.py` is now implemented. Current baseline: **665 concrete weapons carry 815 inline effect nodes**; after auto-detecting superweapons, **628 weapons with 771 nodes** remain as non-exempt debt. Run it after any conversion batch to watch the count fall.
+
+## A ContentPack can only ADD to a bot module - and a partial migration fails silently (2026-08-31)
+
+`ContentPacks/**/yaml/ai.yaml` resolves BEFORE the global `Rules:` block, so
+`cameo|ai/ai.yaml` is the LATER file and wins every leaf collision. Measured with
+`--resolved-rules Player`, one case at a time, against a 1375-row baseline:
+
+| what a pack does | what happens |
+|---|---|
+| adds a NEW dictionary row | unions - 1375 to 1376 rows |
+| sets a scalar the global file also sets | global wins; the pack's value leaves no trace |
+| declares a NEW trait instance (`@suffix`) | works, no warning |
+| removes a trait the global file declares | `YamlException: There are no elements with key ... to remove` |
+
+Three traps follow. First, "split the AI per ContentPack" is a SUBTRACTIVE job on
+`ai/ai.yaml`: whatever the global file still declares is permanently unownable by
+any pack. Second, a half-finished migration is SILENT - the global value simply
+keeps winning, so the yaml looks split and behaves as if it never was. Gate every
+step on a byte-identical resolved-rules dump, not on reading the file. Third,
+"add, never remove": a pack cannot opt out of a global default, and reaching for
+`-TraitName` to do it is a load-time crash. Express opt-out as a value the pack
+ADDS - a condition, a prerequisite token, or a zero-weight row the consumer
+treats as "never".
+
+The corollary for multi-instance modules: `@suffix` instances load fine, so the
+resolver will not stop you creating a second decision authority. Whether that is
+safe is a property of the CONSUMER, not of the yaml -
+`UnitBuilderBotModuleCA` resolves `UnitCompositionsBotModule` with
+`TraitOrDefault`, which throws on the second instance, and a disabled
+`ConditionalTrait` still occupies the trait dictionary - so gating five
+composition modules by condition crashes on the first bot tick instead of
+degrading.

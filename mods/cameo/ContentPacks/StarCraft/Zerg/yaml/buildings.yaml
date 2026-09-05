@@ -226,6 +226,7 @@ zerg_extractor:
 	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@shape: ^3x2Shape
 	Inherits@ref: ^SCRefineryCommon
+	Inherits@plug: ^BuildingPlugProducer
 	Tooltip:
 		Name: Extractor
 	Power:
@@ -515,6 +516,7 @@ zerg_spire:
 	Inherits@BuildingPlugProducer2: ^BuildingPlugProducer
 	Inherits@shape: ^2x2Shape
 	Inherits@bot: ^BotMicromanageable
+	Inherits@plug: ^BuildingPlugProducer
 	Tooltip:
 		Name: Spire
 		RequiresCondition: !spirecondition

@@ -1,4 +1,4 @@
-# BALANCE PROGRAM — the execution plan (rev. 2026-08-23)
+# BALANCE PROGRAM — the execution plan (rev. 2026-08-28)
 
 **This file is the SINGLE SOURCE OF TRUTH for what is done, what is next, and who owns
 what.** It survives compaction, agent handover and session death. Every other document
@@ -35,11 +35,11 @@ warheads later on. If we split it now applying the balance formula will be easy.
 warhead set and their `Versus` profiles. Both are still scheduled to change across most of the
 roster, so pricing first means pricing inputs we are about to replace:
 
-| what is still in flux | measured 2026-08-17 |
+| what is still in flux | measured evidence |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **875 of 1622 = 53.9%** (histogram runs out to 15 mains) |
-| armament slots whose `K` moves when those collapse | **1 547** |
-| fired weapons that reach a `^Warhead_*` family at all | **1256 of 1622 = 77.4%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1124 inheritors) |
+| W24 — directly fired weapons with **more than one** damage main | **243** under the unified predicate; current 2026-08-31 survey (299 including indirectly reached weapons; worst direct stack is 6 mains) |
+| armament slots whose `K` moves when those collapse | **1 547** (2026-08-17 snapshot) |
+| fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** (2026-08-17 snapshot) — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
 Collapsing N mains into 1 preserves the damage SUM (`formula.spread_damage_sum`) but **not
 `K`** — `K` is share-weighted over each warhead's armor profile, so picking ONE family changes
@@ -52,7 +52,7 @@ the question was asked.
 
 **The order:**
 
-1. **W24** — one damage warhead per weapon (DESIGN §11b). 65% non-compliant.
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 243 directly fired weapons remain non-compliant; 299 remain when indirect weapon-graph reachability is included.
 2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
    is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
    merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE
@@ -587,10 +587,106 @@ delivery and price number measured before it lands is measuring the wrong object
 | A1a | Rename the 4 element-first blends to delivery-first (12 templates, 6 files) | ✅ DONE — CannonFire/MissileFire/CannonChem/MissileChem live, safe_rename.py preserves case, splice_templates.py runs full generator and preserves CRLF, verify_generator_sync drift 0, extract_stats --check clean |
 | A1b | Generate MissileNuke / CannonNuke / MissileQuantum / MissileTesla / MissileThermobaric (L/M/H) via gen_weapon_template.py | ✅ DONE — 15 new ^Warhead_* blocks live, verify_generator_sync drift 0, extract_stats regenerated, boot-gated |
 | A2 | Collapse the 7 nuclear weapons onto A1b's families — ONE main each, total preserved | ✅ DONE — `NuclearMaverick`→`MissileHE_Heavy` 40000, `ThermobaricNuclearMaverick`→`MissileThermobaric_Heavy` 42000, `MonsterTank120mm`→`CannonNuke_Heavy` 80000, `TorpTubeThermobaric`→`MissileNuke_Heavy` 32000, `MonsterTank120mmThermobaric`→`CannonFire_Heavy` 120000; SCUDNUKE/…Thermobaric stay on `^Warhead_Nuclear_Super` (already single-main, and genuinely Super-tier — moving to Heavy would be a class demotion). `review_batch_diff` main damage preserved on all 2325 weapons; `find_empty_warhead` 0, `verify_generator_sync` 0, `audit_warhead_split` 939 vs baseline 939, boot-gated. ⚠ Blast shape flattened on all five (`Ticks: 10` → family 6-step falloff): `AreaDamageWarhead.cs:282` splits Damage ACROSS ticks, so the SUM is safe, but the expanding shockwave is gone — restore it in the FAMILY via the generator if nuclear weapons should keep it, never per-weapon. |
-| A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | invariant diff = 0 |
-| A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | ✅ DONE — renamed `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1`, condition `ra1_soviets_upgrade_highexplosiverockets` → `ra1_soviets_upgrade_thermobaricrockets`, fluent keys and icon, `NuclearMaverick` → `Su57Maverick`, `ThermobaricNuclearMaverick` → `Su57MaverickThermobaric`, `MonsterTank120mmThermobaric` → `MonsterTank120mmInferno`; safe_rename.py 90 replacements across 12 files + icon git mv; post-rename validation clean; boot-gated. |
-| A5 | Collapse the 27 single-user templates | template census |
-| A6 | Continue the burn-down: `w24_multi_main_fed` **376**, `multi_main_fired_weapons` **816** | W24 A5/A6 batch: collapsed `ra120mmThermobaric`, `ra120mmThermobaricTargetingComputer`, `ra120mm2Thermobaric`, `ra120mm2ThermobaricTargetingComputer` onto `^Warhead_CannonFire_Heavy`; per-shot damage preserved (24 000 / 48 000); `review_resolve_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `extract_stats --check` 0, `audit_doc_claims` 18/19 green after claim update, boot-gated. This batch adds `HammerTankCannonThermobaric` and `KotinCannonThermobaric` (16000 each, `Temperature: 25`) collapsed onto `^Warhead_CannonFire_Heavy`; `review_resolve_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `extract_stats --check` 0, `audit_doc_claims` 19 green, boot-gated. This batch adds `105mmThermobaric` (12000 `^Warhead_CannonFire_Medium` + `^Projectile_Shell_Medium` + `^Effect_Flame_Medium` + `^Effect_CannonHE_Medium`, napalm effect override), `HammerTankCannon` (12000 `^Warhead_CannonHE_Heavy` + `^Projectile_Shell_Heavy` + `^Effect_CannonHE_Heavy`), and `KotinCannon` (12000 `^Warhead_CannonHE_Heavy` + `^Projectile_Shell_Heavy` + `^Effect_CannonHE_Heavy`; Kotin retains local radiation) and `KotinCannonNuclearShell` (16000 `^Warhead_CannonNuke_Heavy` + `^Projectile_Shell_Heavy` + `^Effect_CannonHE_Heavy` + `^Effect_Nuclear_Super`); `review_resolve_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split` baseline 924→921, `audit_doc_claims` 19 green, `extract_stats` redalert_soviets re-extracted, boot-gated. This A7 batch collapses the RA2 gatling chain (`RA2GattlingMG1`, `RA2GattlingMG1_AA`, `RA2GattlingMG2_AA`, `RA2GattlingMG3_AA`, `RA2GattlingInf`) from two bullet warheads (`Bullet_Light` + `Bullet_Medium`) onto the `^RA2Chaingun` (`^Warhead_Bullet_Medium`) 3-way split; per-shot totals preserved (`RA2GattlingMG1` 4000, `_AA` variants 8000, `RA2GattlingInf` 16000 with `PercentageScale: 2500`); `find_empty_warhead` 0, `extract_stats --check` 0, `audit_warhead_split` baseline 921→908, `audit_doc_claims` 19 green after claim update, boot-gated. Kotin correction: reverted `KotinCannon` to `^Warhead_CannonHE_Heavy` and renamed/reclassified the upgrade from `KotinCannonThermobaric` to `KotinCannonNuclearShell` (`^Warhead_CannonNuke_Heavy`); `review_resolve_diff` clean, `find_empty_warhead` 0, `audit_warhead_split` 908 vs 908, `audit_doc_claims` 19 green, boot-gated. |
+| A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | ✅ DONE — `TS70mmChem` → `^Warhead_CannonChem_Light` at 6000, `TSScoopDualChem` → `^Warhead_CannonChem_Medium` at 30000, and `JapanesePlasmaBomb` → `^Warhead_Plasma_Heavy` at 30000. Main totals and weapon operation are preserved; standard family armour/blast profiles are accepted classification consequences. Upgrade audit records Ratty 0.75× Wood, Scooper 0.80× Wood, and Japanese bomber 0.96× Wood. Static audit-gated; in-game review deferred by maintainer request. |
+| A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | ✅ DONE — renamed the upgrade, condition, icon, UI text, Su-57 weapons, and Monster Tank inferno weapon across active YAML, Fluent, AI, sequences, and the survival-map script. `safe_rename.py` changed 89 references in 12 text files plus the icon; no old identifiers or dangling inheritance targets remain. Weapon values are unchanged. Static audit-gated; in-game review deferred by maintainer request. |
+| A5 | Collapse the 27 single-user templates | ✅ DONE for the active W24-created set — the refreshed upstream-based census found 14 live one-user W24 wrappers rather than the older estimate of 27. All 14 are removed across three isolated batches: five small projectile/effect wrappers, five Rocket Trooper projectiles, then the Tower Missile and `mtank_pri2` projectile/effect pairs. Every sole consumer is exactly equal after full inheritance resolution. Static audit-gated; in-game review deferred by maintainer request. |
+| A6 | Continue the burn-down | 🟢 BELOW-300 MILESTONE REACHED ON PR #320 — the long-lived branch combines the reviewed role cohorts with the Cameo percentage-runtime repair. Folded percentage hits execute exactly once for positional and direct-Actor impacts, and wide intermediates eliminate the old multiplication wraparound. `review_batch_diff.py` checks all 155 active/design health values and fingerprints armor profiles, targeting, relationships, projectiles, effects, physical state, non-damage warheads, and percentage output. Closure isolation detaches descendants before shared parents change. Three rule-driven tranches consolidate 226 reachable definitions (75 energy/ordnance plus 151 blast/legacy-energy definitions). The final 151-definition comparison preserves every flat total and non-damage payload; percentage arithmetic differs by at most one HP from integer rounding. The refreshed survey now reports 287 reachable stacked weapons: 212 are exact reviewed composites pinned to their complete resolved behavior and referrers, while 75 remain genuine armor, geometry, targeting, state, or progression decisions. Across the active ruleset there are 387 raw stacks, including 100 currently unreached definitions. The all-ruleset unreviewed ratchet is 175 and the reachable unreviewed queue is 75. Pricing has not started. |
+
+#### A6 design gate — authorized batch and exact remaining cohort (2026-08-31)
+
+Three independent reviews established the original 29-definition boundary. The maintainer then
+authorized its lowest-dependency 11-definition bundle. A critical upgrade review held back the
+Allied Tank Destroyer, leaving 10 authorized definitions applied across 12 resolved stacks: the two
+Naxis corrosion descendants inherit their parent redesign even though they were not separate rows
+in the original 29. Every converted weapon keeps its nominal flat total, target/relationship
+contract, projectile, effect, cadence and auxiliary payload. Armor effectiveness, collateral
+geometry and application count change intentionally; folded percentage rounding differs by at most
+1 HP at a small exact set of low health values.
+
+**Applied authorized batch — 10 weapon definitions, 12 resolved stacks.**
+
+| weapon definitions | faction / active users | selected single family | intentional gameplay consequence |
+|---|---|---|---|
+| `ASDFKamikazeExplosion` | Asian Alliance Kamikaze and Airstrike Kamikaze | `Demolition_Heavy` | Concentrated, structure-biased suicide blast replaces the mixed demolition/concussion field. |
+| `TSBusMortar` | Forgotten Thumper Bus | `Concussion_Medium` | Broad fragment field replaces the mixed structure/fragment profile. |
+| `ConscriptMolotov` | Soviet Molotov Conscript; live `ConscriptMolotovExplode` death child | `Flame_Light` with state scale 50 | Preserves the current Temperature delivery while moving all damage onto Flame armor/geometry; the demolition field's farther outer reach disappears. The death child must retain its current route. |
+| `tkm_trooper_gp25` | TKM Trooper GP-25/M203 upgrade | `Demolition_Light` with local Temperature scale 50 | Normal explosive-grenade damage identity while retaining Temperature; state delivery moves to the farther-reaching, steeper Demolition falloff. |
+| `NaxiAntiTankCannon`, `NaxiAntiTankCannon_elite`, `NaxiHetzerDestroyer`, `NaxiHetzerDestroyer_elite` | Naxis Anti-Tank Cannon/Old Tank and Hetzer | `CannonAP_Light` | Matches the anti-vehicle/tank-destroyer role; removes HE splash. Corrosion descendants must retain their current resolved routes. |
+| `AsianHowitzerCannon`, `AsianHowitzerCannon_elite` | Asian Alliance Howitzer | `CannonHE_Heavy` | Commits the artillery cannon to the wider Heavy HE profile instead of its current Medium/Heavy blend. |
+
+**Closure isolation and artillery follow-up — 4 more consolidated definitions.**
+
+| weapon definitions | isolation boundary | selected role / result |
+|---|---|---|
+| `AsianHowitzerSplash` | Kirov now triggers the exact legacy alias `RA2KirovHowitzerSplash` | Asian inferno splash becomes pure `Concussion_Medium`; Kirov remains byte-equivalent. |
+| `TS155mm`, `TSAux155mm` | `TS155mm_bluenuke` now inherits the exact abstract legacy payload instead of the ordinary cannon | Standard and auxiliary Nod artillery become pure `Concussion_Medium`; blue-nuke remains unchanged. |
+| `TSInfantryMortar` | `TSInfantryMortarChem` now inherits the exact abstract legacy payload | Ordinary Forgotten mortar becomes pure `Concussion_Medium`; the three-main chemical upgrade remains unchanged. |
+| `GrenadeRA` | Ordinary, death and thermobaric routes now share an abstract legacy payload rather than inheriting through the ordinary weapon | No grenade gameplay change yet; the ordinary grenade can now be redesigned without leaking into its death/thermobaric descendants. |
+
+The Kirov alias adds one concrete definition, so four resolved consolidations reduce the reachable
+stacked backlog by three. The whole-tree report pins the added alias, exact descendant hashes,
+three low-health +1 folded-percentage rounding cases, and the intentional Kirov trigger-name swap.
+
+**Held back after critical review — 1 weapon definition.**
+
+| weapon | reason |
+|---|---|
+| `AlliedTankDestroyerCannon` | Pure `CannonAP_Light` would deepen the paid `AlliedTankDestroyerCannonCryo` replacement's existing losses against Superheavy, Heavy and Concrete from roughly 0.91/0.92/0.93× to 0.75/0.87/0.83×. The base remains unchanged until the Cryo progression is designed with it. |
+
+**Ready for a role decision after isolation — 1 weapon definition.**
+
+| weapon | remaining decision |
+|---|---|
+| `GrenadeRA` | Choose ordinary explosive `Demolition_Light` or retain the current Flame identity. Its death and thermobaric routes are now independently pinned and cannot inherit the decision accidentally. |
+
+**Approved anti-armor defense — 1 weapon definition.**
+
+| weapon | faction / active user | approved contract |
+|---|---|---|
+| `tkmturretcannon` | TKM Tank Turret Bunker | The stationary defense now uses one 16,000-damage `CannonAP_Light` main, prioritizes vehicles, and presents the standard anti-tank-defense description. Its armor curve favors vehicles while retaining 74% damage against unarmored infantry. The fold keeps the old broad 300-range delivery geometry; the derived moving-target reliability is 0.8276 and effective DPS is 569.35, comparable to the TD/RA gun-turret role rather than the unintended 83.60-DPS narrow-geometry result rejected in review. It can therefore repel an isolated infantry unit without becoming an anti-infantry defense. Its structure performance is not a role constraint. |
+
+**Approved air-first support vehicle — 3 weapon definitions and one paid-upgrade route.**
+
+| unit | approved contract |
+|---|---|
+| Forgotten M113 ADATS | The long-range Air-only route now uses one 8,000-damage `Flak_Medium` main; the shorter ground route uses one 8,000-damage `MissileHE_Light` main against Ground/Water. The actor already prioritizes Air and advertises strength against aircraft and light vehicles. Purchasing Chemical Weapons now replaces both base armaments with the existing 12,000-damage `TSChemAdatsMissile` and `TSChemAdatsMissileAA` definitions instead of selecting the unchanged base weapons. The upgrade raises modeled ground and anti-air output by roughly 58% and 50%, respectively. The authored chemical ground route retains its corrosion state, cloud, positional delivery and three percentage companions; the chemical AA route retains its chemical trail and stronger Flak damage but intentionally has no Corrosion state. |
+
+**Preserve the current hybrid — 6 weapon definitions.** The available actor descriptions do not
+support choosing either half as the sole role.
+
+| weapon | faction / active users | why it stays hybrid |
+|---|---|---|
+| `TSBoatcannon` | Forgotten Cannon Tug | The old Concussion proposal produces a large vehicle gain and structure loss. Demolition is closer to its current 2,000 Concussion + 16,000 Demolition weighting, but a pure profile is still an unrequested re-role. |
+| `SheridanCannon` | Allied Sheridan Assault Tank | Its explicit general-purpose infantry/vehicle role is represented by the AP+HE blend. |
+| `HammerTankCannon` | Soviet Hammer Tank | A main battle-tank progression should not silently become pure HE; its thermobaric descendant also inherits the parent route. |
+| `KotinCannon` | Soviet Kotin Nuclear Tank | Same progression problem as Hammer, plus a nuclear-shell upgrade and thermobaric descendant. |
+| `TigerCannon` | Allied Tiger Heavy Tank and Cyber Tank | One shared weapon serves two armored-combat units; pure HE is not corroborated for both. |
+| `Type97Cannon` | Japan Chi-Ha Heavy Tank | No active description supports an HE-only heavy-tank role. |
+
+**Isolate or reconstruct the closure first — 6 weapon definitions.** These parents are shared by
+other factions, delivery modes or excluded upgrade descendants. Editing only the named root would
+quietly change weapons outside this cohort.
+
+| weapon definitions | active users / inherited closure | prerequisite decision |
+|---|---|---|
+| `RA2Terrorist` | Latin Terrorist/bomb cars, RA2 civilian bomb cars, CABAL Enlighted, Eden Starflare Lynx/Tiger; `GLDemolitionExplode`, two GL Terrorist routes, two GL Bomb Truck routes and global `GLBarrelExplode` descendants | Define the shared demolition contract and explicitly preserve or redesign every descendant, including the global structure/barrel death route. |
+| `SCScourgeDroneExplosion`, `ScourgeDroneExplosion`, `SCScourgeExplosion`, `ScourgeExplosion` | Scourge Drone and Zerg Scourge attack/death payloads | Define one AA-suicide contract and protect the paired attack/death behavior; generic Demolition is not enough. |
+| `TSBomb` | GDI Orca Bomber and Strike Orca | Preserve its Ground/Ship damage targeting and separate water-impact effect routing before selecting a generic bomb family. |
+
+`tools/tests/test_authorized_role_profile_consolidation.py` pins the exact 12 resolved changes,
+low-HP percentage deltas, nominal state-scale compensation, the accepted GP-25 Temperature
+armor matrix, and the unchanged Molotov death payload. GP-25's effective meter is intentionally
+reprofiled with the selected Demolition armor and falloff; it is not claimed as state-neutral.
+`tools/tests/test_closure_isolation_consolidation.py` pins the first isolation batch and its exact
+whole-tree comparison. `tools/tests/test_tkm_tank_turret_role.py` pins the approved anti-armor
+profile, vehicle priority, tooltip, unchanged ordinary TKM Bunker role, and exact whole-tree
+comparison. `tools/tests/test_adats_air_first_role.py` pins the ADATS ground/air profiles, Air
+priority, chemical-upgrade replacements, monotonic paid progression, and exact whole-tree
+comparison. `tools/tests/test_deferred_weapon_redesign_boundary.py` pins the remaining
+14-definition boundary, ordered main-profile fingerprint, descendant closure and 11-direct/3-indirect
+reachability split.
+Until a remaining gameplay consequence is authorized, that cohort's current main-damage contract
+stays unchanged. Pricing remains after W24/W23/A5 as required by §0a.
 
 ### Phase B — the physical-state half (parallel to A, different file set)
 
@@ -677,11 +773,13 @@ Commit trailer = the ACTUAL agent (CLAUDE.md rule 10). Never sign as another age
 `effective_dps = Damage_total × (burst / eff_reload) × FirepowerMultiplier × K`, with
 `K = Σ_warheads share_w × versus_w × (reliability_w + secondary_w)`.
 
-The FLAT part of K is independent of the Damage magnitude, so pricing inverts exactly:
+The scalable part of K (flat + chip + folded `PercentageScale`) is independent of the
+Damage magnitude, so pricing inverts exactly:
 `Damage_required = (target_per_shot − pct_absolute_context) / k_flat_context`, snapped to
-the grid. ⚠ **Never invert `k` / `k_context`** — a `%`-of-max-HP twin is ADDITIVE, so those
-two move when Damage moves (E4, fixed 2026-08-17; guard `audit_k_linearity.py`). They remain
-correct measurements. Spec: `EFFECTIVE_DAMAGE.md`.
+the grid. ⚠ **Never invert `k` / `k_context`** — standalone percentage warheads are
+ADDITIVE, and folded basis-point rounding is a current-shot residual. Those two make the
+measurement move with Damage. Folded percentage damage itself is scalable and never a
+floor (E4, corrected 2026-08-25; guard `audit_k_linearity.py`). Spec: `EFFECTIVE_DAMAGE.md`.
 
 **VERIFY:** `python tools/balance/weapon_efficiency.py --families` prints 20 rows.
 
@@ -850,8 +948,10 @@ traced to the ONE factor that moved it. Spec + shapes: `EFFECTIVE_DAMAGE.md` §3
 into the new **`k_flat_context`** and the pricing inversion stays closed-form. **Overkill
 does** depend on Damage, so it is reported BESIDE K and never inside it — folding it in
 would turn the inversion into a fixed-point iteration. `test_weapon_context.py` pins that
-distinction explicitly. ⚠ The `%`-twin is that same defect and WAS folded in until E4
-(2026-08-17) split it out as the additive `pct_absolute_context`.
+distinction explicitly. ⚠ Standalone percentage warheads are additive and live in
+`pct_absolute_context`; folded `AreaDamage.PercentageScale` follows the main Damage and
+lives in `k_flat_context`. The first E4 implementation recognized only specially named
+standalone twins and no folded hits; the type-based model corrected that on 2026-08-25.
 
 ⚠ **Item 5 was based on a field that isn't there.** `AttackDelay` appears **0 times** in
 the tree. Charge-up is an ACTOR trait (`AttackCharged`, `AttackCharges`, `AttackTesla`, …)
@@ -1491,13 +1591,13 @@ actually is" (74 000) and "what we price against" (200 000) is itself informatio
 **DONE WHEN** the twin is continuous in Damage; `reference_hp` is the design constant
 with the measured one still reportable; the family-table shift is recorded in §5.
 
-**✅ DONE** — `formula.percentage_twin()` replaces `per // DAMAGE_STEP`: same 1-per-2000
-design ratio, rounded half-up, floored at 1 for any live warhead, monotone in Damage.
-Rounding is explicit rather than `round()`, whose banker's rounding sends 5000 → 2 but
-7000 → 4. The engine's Damage field for a percentage warhead is an INTEGER percent of
-max HP, so 1 point remains the finest step available — the derivation is continuous, the
-engine's resolution is not, and going finer would need a scale field on
-`AreaDamagePercentageWarhead` (not done; flag it if a design ever needs sub-1% twins).
+**✅ SUPERSEDED BY THE FOLDED RUNTIME MODEL** — the temporary
+`formula.percentage_twin()` solution removed the zero-damage cliff, but still left two
+authored warheads that could drift. The completed family path now keeps one
+`AreaDamage` warhead and derives its percentage hit through `PercentageScale` plus a
+basis-point `PercentageDenominator`. This folded hit scales to zero with flat Damage.
+Standalone `AreaDamagePercentage` and `HealthPercentageDamage` warheads remain valid
+only for bespoke additive effects and are modeled as an absolute DPS floor.
 
 `target_model.REFERENCE_HP = 200_000` is now a plain constant; the measured figure moved
 to `measured_reference_hp()` and is still printed by the family table, the
@@ -2276,7 +2376,11 @@ Prism 0.96 · Bullet 0.92 · Tesla 0.89 · Railgun 0.83 · Laser 0.63`
 CannonAP 1.73 · MissileHE 1.63 · MissileAP 1.58 · Sonic 1.56 · Magic 1.24 ·
 Bullet 0.89 · Prism 0.87 · Tesla 0.81 · Railgun 0.76 · Laser 0.61`
 
-Every family rose, because every family carries a %-twin and each twin is now priced
+> **Historical model snapshot.** These values predate the 2026-08-25 type-based percentage
+> repair, which found folded hits plus standalone nodes whose tags did not end `_Percentage`.
+> Use the regenerated family table and derived sidecars for current comparisons.
+
+Every family rose in that snapshot, because every family carries percentage damage and it was priced
 against 2.7x more HP. What matters is that they rose UNEQUALLY, in proportion to how much
 of the family's output is percentage damage:
 
@@ -2459,7 +2563,8 @@ them** into one sequence so we never lose the order. Each phase links the doc th
 
 **Phases D–G:** `FORMULA_V2` has open terms (spread-pricing, AA/AoE pricing, per-class defense/infantry
 baselines). Ledgers exist (`docs/balance/*.json`, 28 factions) but many predate current laws. Workbooks
-exist (`cameo_armor_system.xlsx` legacy reference, `cameo_balance_v2.xlsx` workbench). Per-faction
+exist (`cameo_armor_system.xlsx` legacy reference plus the active
+`cameo_balance_by_faction.xlsx` / `cameo_balance_by_type.xlsx` workbenches). Per-faction
 synthesize→apply (F) not started. Phase-3 discrepancy triage open (`docs/balance/discrepancies.md`).
 
 ---
@@ -2560,16 +2665,18 @@ verifiers, stat bands, conversion checklist.*
 
 ### 6. PHASE E — the EXCEL / WORKBOOK pipeline
 
-*Dual-write law: price set in `cameo_armor_system.xlsx` first
-(M in its cell; O/P/Q recompute), yaml FOLLOWS; never scale costs directly in yaml. If
-`~$cameo_armor_system.xlsx` exists the workbook is OPEN in Excel — do NOT write it; queue + say so.*
+*Pipeline law: set a price in the raw ledger or an unlocked cell of an active generated
+workbench, import it, then let guarded tooling update yaml; never scale costs directly in yaml.
+Regenerate both active workbenches after the ledger changes. The legacy workbook is not a
+required parallel write.*
 
 - **E1. Legacy reference** `cameo_armor_system.xlsx` remains the design-judgment reference until the
   Phase-3 discrepancy triage completes (`discrepancies.md`).
-- **E2. The v2 workbench** — `tools/balance/build_workbook.py` -> `cameo_balance_v2.xlsx` (gitignored),
-  edit the UNLOCKED input cells, read back with `import_workbook.py`. Also
-  `cameo_balance_by_faction.xlsx` / `cameo_balance_by_type.xlsx` views. Excel is OPTIONAL — you can
-  edit the ledger JSON directly instead.
+- **E2. The active workbenches** — `tools/balance/build_workbook.py` generates the tracked
+  `cameo_balance_by_faction.xlsx` / `cameo_balance_by_type.xlsx`; edit the UNLOCKED input cells
+  and read one back with `import_workbook.py --workbook faction|type`.
+  `cameo_balance_v2.xlsx` is the frozen pre-split prototype. Excel is OPTIONAL — you can edit the
+  ledger JSON directly instead.
 
 ---
 
@@ -2694,7 +2801,7 @@ W1's K coefficient, `armor_exposure.py` and the family surveys are all built on.
 |---|---|
 | `tools/audit/audit_unconverted_templates.py` | which templates are still outside the system (45 / 1196) |
 | `tools/balance/measure_retrofit_gap.py` | how far each legacy ladder sits from its target family, and **which** family by rank correlation |
-| `tools/balance/retrofit_legacy_template.py` | performs one conversion, template + all descendants |
+| `tools/balance/retrofit_legacy_template.py` | **quarantined**: retired separate-percentage-twin writer; always refuses until redesigned for folded percentage |
 | `tools/balance/verify_retrofit.py` | proves resolved behaviour survived (mean output held, no orphans, no geometry drift) |
 | `tools/balance/remove_dead_weapons.py` | deletes loaded-but-unused definitions that bias the census |
 
@@ -2756,8 +2863,8 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `ARMOR_LAYERS.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-fired weapons, **46.6%** comply (755 of 1622); **53.4%** (867 of 1622) carry 2 or more damage
-warheads, worst case **15**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
+directly fired weapons, **243** carry 2 or more damage
+warheads, worst case **6**. Including indirect weapon-graph reachability gives **299**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created
 rather than forcing a bad one (maintainer, 2026-08-16). Two already identified:

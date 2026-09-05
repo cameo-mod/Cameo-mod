@@ -47,8 +47,10 @@ SquadManager implementation. Steamroller is intentionally documented as
 having at most one harasser because the engine always creates the first
 guerrilla squad and YAML cannot express zero guerrilla units.
 
-There is no current in-game personality announcement. A condition-triggered
-notification/observer integration is a follow-up.
+The reusable `ObserverConditionNotification` trait announces each selected
+personality once in the chat feed for spectators and replay viewers after its
+condition activates. Live players are intentionally excluded so the indicator
+does not leak opponent strategy; no live-player UI decoration is intended.
 
 The five personality managers now use optional time-scaled squad-value
 thresholds, preserving their early-game flat-bonus values. Other squad-manager
@@ -120,9 +122,9 @@ its §0a.
 
 | id | debt | measured |
 |---|---|--:|
-| W24 | fired weapons carrying more than one damage main | **816** |
-| W23 | fired weapons reaching a `^Warhead_*` family | **1256** |
-| W23 | direct inheritors of the legacy weapon templates | **1110** |
+| W24 | directly fired weapons carrying more than one damage main | **494** |
+| W23 | fired weapons reaching a `^Warhead_*` family | **1231** |
+| W23 | direct inheritors of the legacy weapon templates | **1162** |
 | W26 | live `DamageMultiplier` declarations | **353** |
 | W11 | class anchors the maintainer has signed off | **0** — so no price is final |
 

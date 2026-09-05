@@ -529,6 +529,7 @@ td_nod_chemicalattackbike:
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detector: ^GenericGroundDetector
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiAir: ^PrioritizeAir

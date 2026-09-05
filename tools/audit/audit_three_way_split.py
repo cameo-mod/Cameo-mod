@@ -42,7 +42,10 @@ EXIT CODE: 1 above the ratchet.
 """
 from __future__ import annotations
 
+import argparse
 import collections
+import contextlib
+import io
 import pathlib
 import sys
 
@@ -51,10 +54,20 @@ if hasattr(sys.stdout, "reconfigure"):          # Windows consoles default to cp
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from miniyaml import Ruleset  # noqa: E402
+from intentional_composites import (  # noqa: E402
+    intentional_composite,
+    reviewed_fingerprints,
+    validated_reviewed_predicate,
+)
 
-# Weapons resolving to >1 main damaging warhead when this was measured (2026-08-22). LOWER ONLY.
+# Weapons resolving to >1 main damaging warhead when this was measured (2026-08-28). LOWER ONLY.
 # 1190 -> 1178 the same day: a MEASUREMENT fix, not converted weapons. See FRIENDLY_FIRE below.
-SPLIT_BASELINE = 1176
+# Hydralisk was deliberately restored as an exact four-profile composite after
+# its single-main fold caused a live 1.6x-2.38x ground-damage regression.
+RAW_SPLIT_BASELINE = 340
+SPLIT_BASELINE = 114
+INTENTIONAL_COMPOSITES = reviewed_fingerprints()
+REPORT = pathlib.Path(__file__).resolve().parents[2] / "docs/audit/latest/three_way_split.md"
 
 # Warhead types that inflict damage on a normal target. Everything else (CreateEffect,
 # LeaveSmudge, GrantExternalCondition, SpawnActor, GlowImpact, ...) is cosmetic or utility and
@@ -84,8 +97,14 @@ def is_friendly_fire(wh) -> bool:
     return "Ally" in rel and "Enemy" not in rel
 
 
-def main_warheads(resolved) -> list[str]:
-    """The main damaging warheads a resolved weapon actually fires."""
+def main_warhead_nodes(resolved):
+    """Positive, non-companion damage warheads a resolved weapon fires.
+
+    OpenRA's DamageWarheadInfo.Damage defaults to zero.  Missing, zero,
+    negative, or symbolic Damage values therefore cannot make a weapon a
+    stacked-main violation.  This predicate is shared with the collapse
+    planner so the survey and its direct-armament subset cannot drift again.
+    """
     out = []
     for wh in resolved.children:
         if not (wh.key.startswith("Warhead@") or wh.key == "Warhead"):
@@ -97,20 +116,26 @@ def main_warheads(resolved) -> list[str]:
         if is_friendly_fire(wh):
             continue
         damage = wh.get("Damage")
-        try:                                    # a Damage: 0 warhead fires nothing
-            if damage is not None and int(str(damage).strip()) == 0:
+        try:
+            if damage is None or int(str(damage).strip()) <= 0:
                 continue
         except ValueError:
-            pass
-        out.append(wh.key.replace("Warhead@", ""))
+            continue
+        out.append(wh)
     return out
 
 
-def main() -> int:
-    rs = Ruleset(pathlib.Path("."))
+def main_warheads(resolved) -> list[str]:
+    """Names of the warheads accepted by :func:`main_warhead_nodes`."""
+    return [wh.key.replace("Warhead@", "") for wh in main_warhead_nodes(resolved)]
+
+
+def run(rs: Ruleset) -> int:
+    reviewed_predicate = validated_reviewed_predicate(rs, main_warhead_nodes)
     hist = collections.Counter()
     combos = collections.Counter()
     rows: list[tuple[str, list[str]]] = []
+    reviewed: list[tuple[str, list[str]]] = []
 
     for name in sorted(rs.weapons):
         if name.startswith("^"):
@@ -121,14 +146,21 @@ def main() -> int:
         mains = main_warheads(resolved)
         hist[len(mains)] += 1
         if len(mains) > 1:
-            rows.append((name, mains))
-            combos[tuple(sorted(mains))] += 1
+            if reviewed_predicate(name, mains):
+                reviewed.append((name, mains))
+            else:
+                rows.append((name, mains))
+                combos[tuple(sorted(mains))] += 1
 
     total = sum(hist.values())
-    print(f"# audit_three_way_split — {len(rows)} of {total} weapons fire more than ONE main warhead\n")
+    raw_count = len(rows) + len(reviewed)
+    print(f"# audit_three_way_split — {raw_count} raw stacked weapons; "
+          f"{len(rows)} remain unreviewed\n")
     print(f"  {hist[1]:5d}  correct — exactly one main warhead")
     print(f"  {hist[0]:5d}  none — utility / effect-only weapons")
-    print(f"  {len(rows):5d}  VIOLATIONS — stacked mains\n")
+    print(f"  {raw_count:5d}  RAW STACKS — structural inventory")
+    print(f"  {len(reviewed):5d}  reviewed — exact intentional composites")
+    print(f"  {len(rows):5d}  UNREVIEWED — classification backlog\n")
 
     print("  mains  weapons")
     for k in sorted(hist):
@@ -140,14 +172,56 @@ def main() -> int:
     for combo, n in combos.most_common(20):
         print(f"| {n} | {' + '.join(combo)} |")
 
-    over = len(rows) > SPLIT_BASELINE
-    print(f"\n{'FAIL' if over else 'WARN'} {len(rows)} violating weapons (ratchet {SPLIT_BASELINE})")
-    if over:
-        print("**A weapon just gained a second main warhead.** Split it into the 3 layers instead "
-              "of raising SPLIT_BASELINE.")
+    print(f"\nReviewed exact composites ({len(reviewed)}):\n")
+    if reviewed:
+        for name, mains in reviewed:
+            print(f"- `{name}`: {' + '.join(sorted(mains))}")
     else:
-        print("Lower `SPLIT_BASELINE` as W24 converts weapons; never raise it.")
+        print("_none_")
+
+    raw_over = raw_count > RAW_SPLIT_BASELINE
+    review_over = len(rows) > SPLIT_BASELINE
+    over = raw_over or review_over
+    print(f"\n{'FAIL' if over else 'WARN'} raw {raw_count}/{RAW_SPLIT_BASELINE}; "
+          f"unreviewed {len(rows)}/{SPLIT_BASELINE}")
+    if raw_over:
+        print("**A weapon just gained a second main warhead.** Split it into the 3 layers instead "
+              "of raising RAW_SPLIT_BASELINE.")
+    elif review_over:
+        print("**A reviewed fingerprint drifted or a new stack needs classification.**")
+    else:
+        print("Lower raw ratchets only for structural consolidation; lower the unreviewed "
+              "ratchet only for exact reviewed decisions.")
     return 1 if over else 0
+
+
+def rendered(rs: Ruleset) -> tuple[str, int]:
+    stream = io.StringIO()
+    with contextlib.redirect_stdout(stream):
+        status = run(rs)
+    return stream.getvalue(), status
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--write", action="store_true")
+    mode.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    text, status = rendered(Ruleset(pathlib.Path(".")))
+    if args.write:
+        REPORT.parent.mkdir(parents=True, exist_ok=True)
+        REPORT.write_text(text, encoding="utf-8", newline="\n")
+        print(f"wrote {REPORT}")
+        return status
+    if args.check:
+        if not REPORT.exists() or REPORT.read_text(encoding="utf-8") != text:
+            print(f"FAIL {REPORT} is stale; run with --write")
+            return 1
+        print(f"PASS {REPORT} matches live rules")
+        return status
+    print(text, end="")
+    return status
 
 
 if __name__ == "__main__":

@@ -624,3 +624,10 @@ label_d2k_map_generator_choice_density_area_very_high =
 
 label-team-name = Team { $team }
 label-no-team = No Team
+
+## ai.yaml bot personalities
+notification-bot-personality-rush = { $bot } is playing Rush: constant early pressure with small, frequent attacks.
+notification-bot-personality-turtle = { $bot } is playing Turtle: heavy defence, attacking only with large armies.
+notification-bot-personality-tech = { $bot } is playing Tech: slow start, teching up before committing forces.
+notification-bot-personality-expansion = { $bot } is playing Expansion: spreads out early and fights over resources.
+notification-bot-personality-steamroller = { $bot } is playing Steamroller: masses one enormous army before attacking.

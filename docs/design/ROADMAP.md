@@ -13,8 +13,9 @@ granular, resumable task queue that the handoff points into._
   (`cdd04e5a1`).
 - [ ] Observe long-match squad-value ramp behavior in-game; this branch makes no
   long-match gameplay claim.
-- [ ] Add an observer-facing notification so players can see the selected
-  personality in-game.
+- [x] Add an observer/replay-only chat notification so spectators can see the
+  selected personality; live players intentionally receive no UI decoration
+  because the indicator would leak opponent strategy.
 - [ ] Consider personality-specific base-builder behavior without duplicating
   the full base-builder configuration.
 
@@ -22,6 +23,44 @@ granular, resumable task queue that the handoff points into._
 
 - [~] Port the opt-in unit-composition mechanism and two TD pilot compositions;
   extend the pilot to other universes and factions as a follow-up.
+
+## AI ARCHITECTURE (2026-08-31)
+
+Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Nothing here is implemented; the
+design document is the deliverable so far. Ordered so each item is independently
+verifiable.
+
+- [x] Measure how ContentPack `ai.yaml` merges with the global AI file
+  (add-only, packs load first, removal is a load-time crash).
+- [ ] **S** Migrate one pack's `UnitsToBuild` rows out of `ai/ai.yaml` into
+  `ContentPacks/TiberianDawn/GDI/yaml/ai.yaml`, gated on a byte-identical
+  `--resolved-rules Player` dump. Mechanical once the first one works.
+- [ ] **M** Repeat per pack, then per dictionary (`UnitLimits`,
+  `BuildingFractions`).
+- [ ] **S** Personality-specific compositions via condition-gated
+  `ProvidesPrerequisite` tokens plus group tokens for OR - zero C#.
+- [ ] **M** Guerrilla as the sixth personality (many small simultaneous raids).
+- [ ] **M** `MasterAiBotModule`: fogged per-enemy signals, main-target scoring,
+  personality choice. Switches travel as a `SetBotPersonality` order resolved by
+  a synced controller trait, because bot logic may not touch synced state.
+- [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
+  cannot attribute losses to a specific opponent).
+- [ ] **M** JSONL match logging: match / decision / outcome records, the episode
+  as the unit of learning. Record-only, no behaviour change - this is the
+  proof-of-concept deliverable.
+- [ ] **M** Offline aggregation tool: personality and composition performance per
+  faction matchup, with a minimum sample threshold.
+- [ ] **L** Bandit-style (UCB1/Thompson) personality priors per matchup, fitted
+  offline and committed as reviewed data.
+- [ ] **L** Headless AI-vs-AI batch harness to produce the data volume.
+- [ ] **DEFERRED** Anything neural - blocked on factions and balance being
+  finished, per the maintainer's own sequencing.
+- [ ] **OPEN DESIGN** Fogged bot observation. Bots currently scan `World.Actors`
+  and filter only cloak, never shroud, so they know the whole map from tick zero.
+  This is the only real cheat left (difficulty is `BotLimits` throttling, not
+  resources), and fixing it will make bots temporarily weaker and requires a
+  scouting module. Maintainer's call - see AI_ARCHITECTURE.md section 9,
+  decision 1.
 
 **Rule zero: crashes and player-visible regressions ALWAYS jump the queue.** Ordering inside a
 section: quickest wins first, then by severity. Effort: **S** < 1 h · **M** = one session ·
@@ -538,7 +577,8 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    - ✅ **Warhead FF twins BUILT + BOOT-GATED 2026-08-02** (`956cf1ecb`) — 19 FriendlyFire twins for the
      7 AoE families (Demolition/Concussion/Flame/Chemical/Nuclear/Sonic/Melee). ExtraDamage twin (energy)
      stays per-weapon (bespoke +vs-shield). All 3 layers now exist (55 wh + 24 proj + 27 fx).
-   - **RETROFIT Phase A (SmallArms/Chaingun pilot) — IN PROGRESS 2026-08-02.** Repoint weapons to
+   - **RETROFIT Phase A (SmallArms/Chaingun pilot) — historical 2026-08-02 record; its
+     2000-grid/FirepowerMultiplier tuning rule is superseded by the current 100-grid/no-FP law.** Repoint weapons to
      `Inherits@wh + @proj + @fx`, renaming `Warhead@<Old>` keys → new key while **PRESERVING each
      weapon's existing on-grid `Damage` verbatim** (damage law = 2000-grid, all mains identical, fine-tune
      ONLY via one unconditional actor `FirepowerMultiplier` — DESIGN.md §nice-number). Handle INTERMEDIATE
@@ -782,8 +822,9 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - **SUM law** — effective damage = Σ offensive SpreadDamage warheads (excl.
   `*ExtraDamage`/`*Percentage`/`*FriendlyFire`), never MAX. Canonical reducer
   `formula.spread_damage_sum` (done: propose_class_rebalance/fit_class/update_ranges route through it).
-- **Two-stage DPS tuning** — coarse: warhead `Damage` on the 2000 grid;
-  fine: `FirepowerMultiplier@<unit>` in 1% steps (1 = ×0.01). Dispatcher must emit both.
+- **DPS tuning** — identical main-warhead `Damage` on the 100 grid, with
+  reload/range used for the remaining fit. Unconditional actor
+  `FirepowerMultiplier` is retired as a fine-tuning knob.
 - **Baseline @ band middle**; **verifier ≡ baseline on range+speed, exactly
   2×HP / 2×DPS / 2.5×cost**; same tech tier as baseline so it cancels.
 - **WC/StarCraft unit costs = multiples of 20** (power = Cost/20).
@@ -830,12 +871,12 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `tier_multiplier` to the derived sidecar. Manual `design.tech_tier` values are
   preserved as overrides.
 - [ ] Build `tools/balance/rebalance_classes.py` dispatcher: SUM price →
-  2000-grid warheads → 1%-step FP-mult → range-solve to band (mult-of-10) →
+  100-grid warheads → range-solve to band (mult-of-10) →
   uniqueness within broad TYPE → Δ (goal ≤1). Consolidates the scout/
   closecombat/SF one-offs (LESSONS §172-176).
 - [x] **Fix uniqueness in code** (done 2026-07-22, commit pending):
   `propose_class_rebalance.resolve_dps_uniqueness` now keys on effective
-  damage-per-shot (Σwarheads×FP); the report checks the 5 raw stats — HP, Speed,
+  damage-per-shot at the baseline actor state; the report checks the 5 raw stats — HP, Speed,
   Range, RAW ReloadDelay, effective-damage-per-shot — with damage-per-shot and
   reload as SEPARATE dimensions (reload dupes flagged, never auto-nudged). STILL
   TODO: apply the same 5-stat metric to the standalone uniqueness AUDIT.
@@ -1431,8 +1472,9 @@ ledger (32 faction files, 2025 actors, raw stats + provenance,
 deterministic, `--check` drift mode). PHASE 2 DONE 2026-07-18:
 `formula.py` (Tiger identity exact, symbolic equivalence vs the
 legacy cell formulas exact, closed-form Range solver) +
-`build_workbook.py` -> cameo_balance_v2.xlsx workbench (gitignored;
-32 faction tabs, weapon sub-rows, live formulas, locked non-input
+`build_workbook.py` -> the tracked `cameo_balance_by_faction.xlsx` and
+`cameo_balance_by_type.xlsx` workbenches (`cameo_balance_v2.xlsx` is the frozen
+pre-split prototype; 32 faction tabs, weapon sub-rows, live formulas, locked non-input
 cells, delta traffic lights). PHASES 3+4 DONE 2026-07-18 — WORKING
 PROTOTYPE: seed_design.py (437 units seeded from the legacy sheet,
 discrepancies.md: 22 cost mismatches, 581 never-priced combat units,
@@ -1445,8 +1487,8 @@ fixed point exact (0 changes on untouched ledger), live demo
 Bonus: the fixed-point test exposed and fixed a resolver cache
 poisoning bug affecting ALL audits. Next: Phase 5 Formula v2 +
 Phase 6 enforcement (balance check into run_all). yaml → per-faction JSON
-ledger (committed) → generated cameo_balance_v2.xlsx (CABAL-tab format,
-formulas live in the sheet, locked cells) → legacy-sheet comparator +
+ledger (committed) → generated faction/type workbooks (formulas live in the
+sheet, locked cells) → legacy-sheet comparator +
 discrepancy triage → gated write-back (apply_balance.py, maintainer
 order only) → drift audit in run_all so hand-edited balance numbers
 become red findings mechanically. Phases 1-3 first (extractor,

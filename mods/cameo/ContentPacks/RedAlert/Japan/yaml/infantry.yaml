@@ -110,6 +110,7 @@ japan_tankbuster:
 		FacingTolerance: 0
 	WithInfantryBody:
 		RequiresCondition: !parachute
+		IdleSequences: idle1, idle2, idle3
 	WithInfantryBody@PARACHUTE:
 		StandSequences: parachute
 		RequiresCondition: parachute
@@ -118,8 +119,6 @@ japan_tankbuster:
 		PlayerPalette: ra2cyborgplayer
 	WithDeathAnimation:
 		DeathSequencePalette: ra2cyborgplayer
-	WithInfantryBody:
-		IdleSequences: idle1, idle2, idle3
 	Voiced:
 		VoiceSet: JapaneseVoice
 	ActorStatValues:
@@ -184,7 +183,6 @@ japan_japaneseflamethrower:
 		ProneOffset: 160,0,-300
 	FireWarheadsOnDeath:
 		Weapon: Flamethrower
-	UpdatesPlayerStatistics:
 	Selectable:
 		Class: ra1_soviets_flamethrower
 	WithDeathAnimation:

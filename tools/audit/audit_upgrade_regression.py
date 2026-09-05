@@ -21,10 +21,11 @@ identical falloff) and the upgrade carries 1.5x the damage, so no damage guard f
 The "upgrade" is +126% against infantry and +4% against the light vehicles a heavy tank exists to
 kill. That is a role change sold as an upgrade.
 
-WHAT IT MEASURES: effective per-shot damage `sum(main Damage x Versus[armor] / 100)` and effective
-DPS (`x Burst / ReloadDelay`) for each half of the pair, per armor class. Flags an armor class
-where the upgrade is WEAKER, and calls the pair ROLE-SHIFTED when it wins on some classes and
-loses on others.
+WHAT IT MEASURES: centered per-shot damage at the shared 200,000-HP reference target,
+including flat damage, folded ``PercentageScale`` damage, and standalone percentage
+warheads. DPS uses the complete burst cycle (every inter-shot ``BurstDelays`` value plus
+``ReloadDelay``). It flags an armor class where the upgrade is WEAKER, and calls the pair
+ROLE-SHIFTED when it wins on some classes and loses on others.
 
 ⚠ NOT EVERY REGRESSION IS A BUG. A specialist upgrade may trade deliberately — an AA variant
 should lose ground damage. This reports for review; `--baseline N` turns on the ratchet.
@@ -38,12 +39,20 @@ import sys
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools" / "audit"))
+sys.path.insert(0, str(ROOT / "tools" / "balance"))
 from cameo_model import Model  # noqa: E402
+import effective_damage as ed  # noqa: E402
+import formula  # noqa: E402
+import percentage_damage as pd  # noqa: E402
+import target_model as tm  # noqa: E402
 
 # The armor classes a ground attacker is normally judged on. Air/ARMOR/HAZMAT are excluded from
 # the VERDICT (an AA or anti-shield upgrade legitimately trades them) but still printed.
 CORE = ("Scout", "Light", "Medium", "Heavy", "Superheavy", "Steel", "None", "Concrete", "Wood")
+AIR = ("Fighter", "Bomber", "Helicopter", "Spaceship")
+FLAT_TYPES = frozenset({"AreaDamage", "SpreadDamage", "TargetDamage"})
 
 
 def _f(v, default=0.0) -> float:
@@ -53,43 +62,208 @@ def _f(v, default=0.0) -> float:
         return default
 
 
+def _enemy_damage(node) -> bool:
+    relationships = (node.get("ValidRelationships") or "").strip()
+    return not ("Ally" in relationships and "Enemy" not in relationships)
+
+
+def _centered_parts(node, direct_actor: bool = False) -> tuple[int, list[int]]:
+    """Centered falloff and each C# per-tick percentage modifier."""
+    fo = radii = None
+    live = True
+    if node.value in {"AreaDamage", "AreaDamagePercentage", "SpreadDamage"}:
+        # Ruleset validation happens even if the projectile later invokes the
+        # direct-Actor DamageWarhead path.
+        fo, radii, live = ed.falloff_and_radii(node)
+        if node.value in {"AreaDamage", "AreaDamagePercentage"}:
+            ticks = ed.area_tick_modifiers(node)
+        else:
+            ticks = [100]
+    if direct_actor:
+        # DamageWarhead's Actor-target path applies one full hit. It does not
+        # enter AreaDamage's positional rings, so Falloff and Ticks are bypassed.
+        return 100, [100]
+    if node.value in {"TargetDamage", "HealthPercentageDamage"}:
+        spread = _f(node.get("Spread"), 0.0)
+        return (100, [100]) if spread > 0 else (0, [100])
+    if not live:
+        return 0, [100]
+    falloff = ed.runtime_falloff(fo, radii, 0)
+    return falloff, ticks
+
+
+def _add_flat_armor_damage(per_armor: dict[str, float], node, damage: int,
+                           versus: dict[str, float], direct_actor: bool = False) -> None:
+    falloff, ticks = _centered_parts(node, direct_actor)
+    for armor in set(CORE) | set(versus):
+        armor_modifier = int(versus.get(armor, 100.0))
+        dealt = sum(
+            damage * falloff * tick * armor_modifier // 100 ** 3
+            for tick in ticks)
+        per_armor[armor] = per_armor.get(armor, 0.0) + dealt
+
+
+def _add_percentage_armor_damage(per_armor: dict[str, float], app: dict,
+                                 reference_hp: int,
+                                 direct_actor: bool = False) -> None:
+    node = app["node"]
+    units = int(app["runtime_units"])
+    denominator = int(app["denominator"])
+    versus = app["versus"]
+    falloff, ticks = _centered_parts(node, direct_actor)
+    for armor in set(CORE) | set(versus):
+        armor_modifier = int(versus.get(armor, 100.0))
+        if node.value == "HealthPercentageDamage":
+            dealt = reference_hp * units * falloff * armor_modifier // 100 ** 3
+        else:
+            dealt = 0
+            for tick in ticks:
+                intermediate = (
+                    reference_hp * falloff * tick * units * armor_modifier // 100 ** 4)
+                dealt += intermediate * 100 // denominator
+        per_armor[armor] = per_armor.get(armor, 0.0) + dealt
+
+
+def cycle_rate(node) -> float:
+    """Projectiles per tick using the engine's complete burst cycle."""
+    raw_reload = node.get("ReloadDelay")
+    reload_ = 1.0 if raw_reload is None or str(raw_reload).strip() == "" else _f(raw_reload)
+    if reload_ <= 0:
+        return 0.0
+    burst = max(int(_f(node.get("Burst"), 1.0) or 1.0), 1)
+    cycle = formula.eff_reload(reload_, burst, node.get("BurstDelays"))
+    return burst / cycle if cycle > 0 else 0.0
+
+
+def _numbers(raw) -> list[int]:
+    if raw is None or str(raw).strip() == "":
+        return []
+    try:
+        return [int(float(part.strip())) for part in str(raw).split(",")]
+    except (TypeError, ValueError):
+        return []
+
+
+def centered_multiplier(node) -> float:
+    """Continuous centered multiplier; per-armor totals truncate each tick."""
+    falloff, ticks = _centered_parts(node)
+    return falloff * sum(ticks) / 10_000.0
+
+
 def weapon_profile(rs, name: str) -> dict | None:
-    """Effective per-shot damage by armor + the cadence needed for DPS."""
+    """Centered runtime damage by armor + the cadence needed for DPS."""
     node = rs.resolve_weapon(name)
     if node is None:
         return None
+    direct_actor = ed.direct_actor_impact(node)
+    impact_multiplier = ed.projectile_impact_multiplier(node)
     per_armor: dict[str, float] = {}
-    total = 0.0
+    utility: set[tuple[str, str]] = set()
     for wh in node.children:
         if not wh.key.startswith("Warhead") or "Concrete" in wh.key:
             continue
-        rel = (wh.get("ValidRelationships") or "").strip()
-        if "Ally" in rel and "Enemy" not in rel:
+        if wh.value in {"AffectsIntegrity", "GrantExternalCondition"}:
+            utility.add((wh.value, wh.get("Condition") or ""))
+        if wh.get("PhysicalStateName") or wh.child("PhysicalStates") is not None:
+            utility.add(("PhysicalState", wh.get("PhysicalStateName") or "map"))
+        if wh.value not in FLAT_TYPES or not _enemy_damage(wh):
             continue
-        d = _f(wh.get("Damage"))
-        if d <= 0 or "Percentage" in wh.key:
+        d = int(_f(wh.get("Damage")))
+        if d <= 0:
             continue
-        total += d
-        versus = next((c for c in wh.children if c.key == "Versus"), None)
-        table = {v.key: _f(v.value, 100.0) for v in versus.children} if versus else {}
-        for armor in set(CORE) | set(table):
-            per_armor[armor] = per_armor.get(armor, 0.0) + d * table.get(armor, 100.0) / 100.0
+        _add_flat_armor_damage(
+            per_armor, wh, d, pd.versus_table(wh), direct_actor)
+
+    reference_hp = tm.reference_hp()
+    for app in pd.percentage_applications(node, reference_hp):
+        wh = app["node"]
+        if "Concrete" in wh.key or not _enemy_damage(wh):
+            continue
+        _add_percentage_armor_damage(
+            per_armor, app, int(reference_hp), direct_actor)
+
+    if abs(impact_multiplier - 1.0) > 1e-9:
+        per_armor = {
+            armor: damage * impact_multiplier
+            for armor, damage in per_armor.items()
+        }
+
+    total = max(per_armor.values(), default=0.0)
     if total <= 0:
         return None
-    reload_ = _f(node.get("ReloadDelay"), 25.0) or 25.0
-    burst = _f(node.get("Burst"), 1.0) or 1.0
-    return {"total": total, "per_armor": per_armor, "rate": burst / reload_}
+    valid_targets = {
+        target.strip() for target in (node.get("ValidTargets") or "").split(",")
+        if target.strip()
+    }
+    air_only = "Air" in valid_targets and not valid_targets.intersection({"Ground", "Water"})
+    return {"total": total, "per_armor": per_armor, "rate": cycle_rate(node),
+            "projectile_impact_multiplier": impact_multiplier, "air_only": air_only,
+            "utility": utility}
+
+
+def armament_profile(rs, names: tuple[str, ...]) -> dict | None:
+    """Combined weapon-only DPS for weapons that fire together through one armament name.
+
+    OpenRA permits multiple ``Armament`` traits with the same ``Name``.  They
+    fire together, so judging only the last trait can turn a multi-beam upgrade
+    into a false downgrade.  Different names (for example ``primary`` and
+    ``garrisoned``) are separate firing modes and must not be combined.
+    """
+    per_armor: dict[str, float] = {}
+    found = False
+    air_only = True
+    utility: set[tuple[str, str]] = set()
+    for name in names:
+        profile = weapon_profile(rs, name)
+        if profile is None:
+            continue
+        found = True
+        air_only = air_only and profile["air_only"]
+        utility.update(profile["utility"])
+        for armor, damage in profile["per_armor"].items():
+            per_armor[armor] = per_armor.get(armor, 0.0) + damage * profile["rate"]
+    return {"per_armor": per_armor, "air_only": air_only,
+            "utility": utility} if found else None
+
+
+def verdict_armors(base_profile: dict, requested_armors):
+    """Judge a replacement on the target role of its base weapon."""
+    return AIR if base_profile["air_only"] else requested_armors
+
+
+def _csv(raw: str | None, default: tuple[str, ...] = ()) -> tuple[str, ...]:
+    if raw is None or not str(raw).strip():
+        return default
+    return tuple(part.strip().lower() for part in str(raw).split(",") if part.strip())
+
+
+def _normal_attack_names(node) -> set[str]:
+    """Return armament names routed by ordinary actor AttackBase traits."""
+    names: set[str] = set()
+    excluded = {"AttackMove", "AttackSounds", "AttackWander", "AttackGarrisoned"}
+    for trait in node.children:
+        trait_type = trait.key.split("@", 1)[0]
+        if not trait_type.startswith("Attack") or trait_type in excluded:
+            continue
+        # OpenRA AttackBaseInfo defaults to primary + secondary.
+        names.update(_csv(trait.get("Armaments"), ("primary", "secondary")))
+    return names
 
 
 def pairs(rs):
-    """(actor, base_weapon, upgrade_weapon, condition) for every gated armament pair."""
+    """Pair condition-swapped weapons by their runtime firing route.
+
+    Same-name replacements are always comparable. Cross-name replacements are
+    paired only when both names are ordinary AttackBase routes, the condition
+    comes from a prerequisite purchase, and one unambiguous half remains.
+    """
     for actor in sorted(rs.actors):
         if actor.startswith("^"):
             continue
         node = rs.resolve(actor)
         if node is None:
             continue
-        by_cond: dict[str, dict[str, str]] = {}
+        armaments = []
         for arm in node.children:
             if not arm.key.startswith("Armament"):
                 continue
@@ -99,10 +273,39 @@ def pairs(rs):
                 continue
             neg = cond.startswith("!")
             key = cond[1:].strip() if neg else cond
-            by_cond.setdefault(key, {})["base" if neg else "up"] = weapon
-        for cond, half in by_cond.items():
-            if "base" in half and "up" in half and half["base"] != half["up"]:
-                yield actor, half["base"], half["up"], cond
+            armament_name = (arm.get("Name") or "primary").strip().lower()
+            armaments.append((key, armament_name, "base" if neg else "up", weapon))
+
+        prerequisite_conditions = {
+            (trait.get("Condition") or "").strip()
+            for trait in node.children
+            if trait.key.split("@", 1)[0] == "GrantConditionOnPrerequisite"
+        }
+        normal_names = _normal_attack_names(node)
+        by_name: dict[tuple[str, str], dict[str, list[str]]] = {}
+        for cond, name, half_name, weapon in armaments:
+            by_name.setdefault((cond, name), {"base": [], "up": []})[half_name].append(weapon)
+
+        unmatched: dict[str, dict[str, list[tuple[str, str]]]] = {}
+        for (cond, name), half in by_name.items():
+            base, up = tuple(half["base"]), tuple(half["up"])
+            if base and up:
+                if base and up and base != up:
+                    yield actor, base, up, cond, name
+                continue
+            if name in normal_names:
+                side = "base" if base else "up"
+                for weapon in base or up:
+                    unmatched.setdefault(cond, {"base": [], "up": []})[side].append((name, weapon))
+
+        for cond, half in unmatched.items():
+            if cond not in prerequisite_conditions:
+                continue
+            if len(half["base"]) == len(half["up"]) == 1:
+                _base_name, base_weapon = half["base"][0]
+                _up_name, up_weapon = half["up"][0]
+                if base_weapon != up_weapon:
+                    yield actor, (base_weapon,), (up_weapon,), cond, "attack"
 
 
 def main() -> int:
@@ -115,32 +318,39 @@ def main() -> int:
     rs = Model().rs
     weaker, shifted, marginal, npairs = [], [], [], 0
 
-    for actor, base_w, up_w, cond in pairs(rs):
-        b, u = weapon_profile(rs, base_w), weapon_profile(rs, up_w)
+    for actor, base_w, up_w, cond, armament_name in pairs(rs):
+        b, u = armament_profile(rs, base_w), armament_profile(rs, up_w)
         if not b or not u:
             continue
         npairs += 1
         losses, gains = [], []
-        for armor in armors:
-            bd = b["per_armor"].get(armor, 0.0) * b["rate"]
-            ud = u["per_armor"].get(armor, 0.0) * u["rate"]
+        # Judge on the role of the weapon being replaced. Becoming all-target
+        # must not hide a regression in an Air-only base weapon.
+        judged_armors = verdict_armors(b, armors)
+        for armor in judged_armors:
+            bd = b["per_armor"].get(armor, 0.0)
+            ud = u["per_armor"].get(armor, 0.0)
             if bd <= 0:
                 continue
             ratio = ud / bd
             (losses if ratio < 0.995 else gains).append((armor, ratio))
-        row = (actor, base_w, up_w, cond, sorted(losses, key=lambda x: x[1]), gains)
+        row = (actor, base_w, up_w, cond, armament_name,
+               sorted(losses, key=lambda x: x[1]), gains)
         if losses:
-            (shifted if gains else weaker).append(row)
+            added_utility = bool(u["utility"] - b["utility"])
+            (shifted if gains or added_utility else weaker).append(row)
             continue
         # No outright loss — but an upgrade that is +4% on the armor the unit exists to fight and
         # +126% on something else has still changed the unit's ROLE and will FEEL like a downgrade.
         # Maintainer 2026-08-19 on MonsterTank: *"the upgrade feels like a downgrade."*
         ratios = [r for _a, r in gains]
         if len(ratios) >= 3 and min(ratios) < 1.10 and max(ratios) / min(ratios) >= 2.0:
-            marginal.append((actor, base_w, up_w, cond,
+            marginal.append((actor, base_w, up_w, cond, armament_name,
                              sorted(gains, key=lambda x: x[1])[:4], max(ratios)))
 
     print("# audit_upgrade_regression — is the upgrade better than what it replaces?\n")
+    print(f"Reference target HP: **{tm.reference_hp():,}**; centered impact; full burst cycle; "
+          "weapon profile only (actor multipliers excluded).\n")
     print(f"Gated armament pairs found: **{npairs}**\n")
 
     def table(rows, title, note):
@@ -151,9 +361,11 @@ def main() -> int:
             return
         print("| actor | base → upgrade | condition | worst losses (upgrade DPS ÷ base DPS) |")
         print("|---|---|---|---|")
-        for actor, bw, uw, cond, losses, _g in rows[:40]:
+        for actor, bw, uw, cond, armament_name, losses, _g in rows[:40]:
             worst = ", ".join(f"{ar} {rt:.2f}x" for ar, rt in losses[:4])
-            print(f"| `{actor}` | `{bw}` → `{uw}` | `{cond}` | {worst} |")
+            base_label, up_label = " + ".join(bw), " + ".join(uw)
+            mode = f" ({armament_name})" if armament_name != "primary" else ""
+            print(f"| `{actor}` | `{base_label}` → `{up_label}` | `{cond}`{mode} | {worst} |")
         if len(rows) > 40:
             print(f"\n_… {len(rows) - 40} more_")
         print()
@@ -173,9 +385,9 @@ def main() -> int:
     if marginal:
         print("| actor | base → upgrade | weakest core gains | best |")
         print("|---|---|---|--:|")
-        for actor, bw, uw, _c, worst, best in marginal[:40]:
+        for actor, bw, uw, _c, _armament_name, worst, best in marginal[:40]:
             w = ", ".join(f"{ar} {rt:.2f}x" for ar, rt in worst)
-            print(f"| `{actor}` | `{bw}` → `{uw}` | {w} | {best:.2f}x |")
+            print(f"| `{actor}` | `{' + '.join(bw)}` → `{' + '.join(uw)}` | {w} | {best:.2f}x |")
         if len(marginal) > 40:
             print(f"\n_… {len(marginal) - 40} more_")
         print()

@@ -1,727 +1,656 @@
 # Development Log
 
-## Devin AI — Volcanic shellmap camera radius fix (2026-08-25)
-
-**Identity:** Devin AI (SWE-1.7 Max).
-
-**What and why:**
-- User reported the volcanic shell map (`shellmap_v3.oramap`) showed only preplaced units and no attack waves.
-- Root cause was not the `attack.lua` logic: the global ruleset was crashing on a stale `-Warhead@CannonHE_Medium` removal in `ContentPacks/RedAlert/Japan/yaml/weapons.yaml` (already fixed in working tree by the W24 collapse pass). That crash prevented any map, including the shellmap, from loading.
-- After the ruleset loaded, the shellmap script ran but the camera stayed in a 6-cell radius around the center, keeping all three bases and the incoming attack waves off-screen. This made the attacks invisible.
-- Fixed the shellmap camera by changing `CameraRadius` in `attack.lua` from `6144` (6 cells) to `46080` (45 cells) so the panning view covers Harkonnen, Soviet and Consortium bases and the frigate/carryall reinforcement routes.
-
-**Decision basis:**
-- Verified `attack.lua` schedules `SovietAttack`, `HarkonnenAttack` and `ConsortiumAttack` with 45 s recurring delays and uses existing waypoints and actor types.
-- Confirmed `shellmap_v3` package contains `rules.yaml`, `weapons.yaml` and the `LuaScript: attack.lua` reference.
-- Compared with `desert-shellmap-2.oramap`, which uses a ~18-cell camera radius; `shellmap_v3` is a 128x128 map, so 6 cells was far too small.
-
-**Verification:**
-- `python tools/audit/find_empty_warhead.py` = 0
-- `python tools/audit/find_orphan_old_keys.py` = 0 real, 133 false positives (baseline)
-- `python tools/audit/find_orphan_old_keys_multi.py` = 0 suspicious
-- `python tools/audit/audit_duplicate_inherits.py` = advisory duplicates only (baseline)
-- `python tools/balance/sweep_areadamage.py` = dry run, 3 `class2d` candidates (advisory, not applied)
-- Boot-gate `launch-game.cmd`: `MenuPostProcessEffect.PostWorldLoaded` reached, no new `exception-*.log`
-- Forced `shellmap_v3` as the only available Shellmap during a test run and confirmed `MenuPostProcessEffect.PostWorldLoaded` with no Lua/Script errors.
-
-**Files changed:**
-- `mods/cameo/maps/shellmap_v3.oramap` (`attack.lua`)
-
-
-## Devin AI — W24 batch: 48 same-family equal-damage collapses across 19 clean files (2026-08-25)
-
-**Identity:** Devin AI (GLM-5.2 High), W24 weapons pass.
-
-**What and why:**
-- Used the resolved-weapon classifier (`rs.resolve_weapon`) to find all same-family multi-main weapons with equal damage across the entire corpus.
-- Filtered out files being actively edited by other agents (Ixian, Ordos, FutureTech, SchwarzerMond, Syndicate, StarCraft/Zerg, rename maps).
-- Applied 48 safe same-family equal-damage collapses (commit `2e605c566`):
-  - TiberianSun/CABAL: CabalReaperMissiles, CabalHeavyReaperMissiles, CabalManticoreMissilesAA (MissileHE)
-  - TiberianSun/GDI: TSZoneHellfireSonic (Sonic)
-  - TiberianDawn/GDI: CommandoRocketLauncher, RocketsHumvee2AMT (Missile)
-  - TiberianDawn/Nod: FireballLauncherBuggy2 (Flame 3-way)
-  - RedAlert2/Shared: IvanBomb, SealBomb, TanyaBomb, RA2HornetMissile (Demolition/CannonHE)
-  - RedAlert2/Soviets: IvanBombAir, RA2vulcan
-  - RedAlert2/Yuri: RA2Chemspray2, RA2LasherToxicMortar_elite
-  - RedAlert/Shared: RAVulcan, JapanSpeedBoatGun, RocketsRA, TigerCannon
-  - StarCraft/Terran: GhostSniperLockdown, SpecterSniperLockdown
-  - StarCraft/Protoss: GladiusCannon
-  - Warcraft2/Humans: wc2ballistaFire
-  - Naxis: NaxShoeRocket, NaxiMissileUboat, NaxPlaneRockets_elite
-  - Consortium: SteelInspectorIonCannonDamage
-  - TKM: VonSniperAP, VonSniperLockdown
-  - Central: IonCannon, PulseMissile, TSBikeMissile, Support_EMP_Bomb, HMG, LMG_upgrade, light_inf_lmg_upgrade, D2K_155mm, D2K_Rocket_Trooper, LatinBuggyRocket, SyndicateFireballLauncher, plymouthStickyDefence
-- Reverted changes to deprecated `mods/cameo/weapons/redalert2.yaml` (not loaded).
-- Applied IvanBomb/SealBomb/TanyaBomb/RA2HornetMissile collapses to the LOADED file (`ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`).
-
-**Verification:**
-- `find_empty_warhead.py` = 0
-- `audit_warhead_split.py` = 716 (lowered baseline 721 -> 716)
-- `audit_doc_claims.py` = all pass (multi_main_fired_weapons 799 matches)
-- Boot-gate: menu reached in ~50s, 0 new exceptions.
-
-**Next:** W24 safe pool nearly exhausted. Remaining candidates are unequal-damage same-family (need analysis) or in user-edited files.
-
-## Devin-Aurora — W24 batch 4: RedAlert/Japan + RedAlert2/Allies + AsianAlliance (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max), W24 weapons pass.
-
-**What and why:**
-- Scanned all remaining unassigned ContentPack weapon files for W24 same-family collapse candidates.
-- Applied 4 safe collapses (commit `5a8669b74`):
-  - Type97Cannon (RedAlert/Japan): CannonHE_Heavy 6000 + CannonHE_Medium 6000 -> CannonHE_Heavy 12000
-  - BlackEagleMissiles (RedAlert2/Allies): Demolition_Light 16000 + Demolition_Heavy 16000 -> Demolition_Heavy 32000
-  - AsianPelicanMissile (AsianAlliance): MissileAP_Heavy 4000 + MissileAP_Medium 4000 -> MissileAP_Heavy 8000
-  - AsianSubmarineBomb (AsianAlliance): Demolition_Light 50000 + Demolition_Heavy 50000 -> Demolition_Heavy 100000
-- Skipped kitchen-sink weapons: GladiusCannon (Protoss), HovercraftPlasmaCannon/ArmoredCarMG_AA (Japan), RA2LasherToxicMortar_elite/RA2CosmonautLaser (Yuri), VonSniperAP/VonSniperLockdown (TKM).
-- Skipped multi-family weapons with children: IvanBomb (3 children), TanyaBomb (4 children), SealBomb (inherits TanyaBomb).
-- Skipped locked files: D2k/Ordos (Devin-Echo), TiberianSun/CABAL (Devin-Echo), Warcraft2/Humans (Devin-Cyrus), RedAlert2/Soviets (active uncommitted WIP from another agent).
-- Skipped W23 retrofit candidates: MachineGunBuggy2_AA (Nod, old-template inherits), RA2HornetMissile (RA2/Shared, old ^RA2MediumMissile template).
-- Remaining RedAlert/Shared weapons (RocketsRA, RAVulcan, TigerCannon, JapanSpeedBoatGun) already have only one family warhead — the scan detected inherited old-template warheads, which is W23 not W24.
-
-**W24 safe candidate pool is now exhausted.** Remaining same-family weapons are either kitchen-sink (need maintainer sign-off), in locked files, or W23 retrofits.
-
-**Verification:**
-- `find_empty_warhead.py` = 0
-- `audit_warhead_split.py` = 721 (at baseline, no regression)
-- Boot-gate: menu reached in 40s, 0 new exceptions.
-
-**Next:** W24 safe pool exhausted. Check HANDOFF.md for next priority (W23 sign-off, A5, or other queue items).
-
-## Devin-Aurora — W24 StarCraft/Zerg InfestedExplosion collapse (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max), W24 weapons pass.
-
-**What and why:**
-- Scanned StarCraft Protoss (39 weapons), Zerg (41 weapons), and TiberianSun/Forgotten (71 weapons) for W24 same-family collapse candidates.
-- Found 1 safe candidate: `InfestedExplosion` (Zerg) — Demolition_Light 50000 + Demolition_Heavy 50000 -> Demolition_Heavy 100000 (commit `05d709355`).
-- Skipped `GladiusCannon` (Protoss) — kitchen-sink weapon with 8+ unrelated warhead families (Flame, Chemical, Shrapnel, Flak, CannonAP), not safe for autonomous W24 collapse.
-- Forgotten: no same-family candidates found.
-- Note: Ixian weapons.yaml working tree was reverted by another agent/user after my commit `40f74a47e`. The commit is still in HEAD; the working tree revert is their WIP and I did not touch it.
-- Note: User fixed the baron_elite sequence with a proper `harkonnen_sardaukar_baron_elite` sequence definition using 16 facings. Boot-gate confirms it works (0 exceptions).
-
-**Verification:**
-- `find_empty_warhead.py` = 0
-- `audit_warhead_split.py` = 759 (at baseline, no regression)
-- Boot-gate: menu reached in 40s, 0 new exceptions.
-
-**Next:** Check HANDOFF.md for remaining unassigned W24 candidates or other queue items.
-
-## Devin-Aurora — W24 batch: FutureTech/Syndicate/SchwarzerMond + Ixian + baron_elite fix (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max), W24 weapons pass.
-
-**What and why:**
-- Completed W24 same-family collapses for 9 RedAlert2Mod weapons across FutureTech, Syndicate, and SchwarzerMond packs (commit `35e69f590`).
-- Completed W24 same-family collapses for 12 D2k/Ixian weapons (commit `40f74a47e`).
-- Fixed boot-blocking `baron_elite.png` sequence error by removing the broken inherited `^RA2ArmedInfantry` template (which expected 300+ frames from a 704x450 grid PNG with only 60 frames). The sequence block was user WIP that was never committed; removing it restored the file to its committed state.
-- The Ixian file was listed as "owned by Devin-Echo" in HANDOFF.md, but that claim was for specific weapons (MongooseRocket/facedancer_grenade), not the whole file. My W24 collapses don't touch those weapons. All recent Ixian commits are mine.
-
-**Verification:**
-- `find_empty_warhead.py` = 0
-- `audit_warhead_split.py` = 767 (at baseline, no regression)
-- Boot-gate: menu reached in 40-50s, 0 new exceptions for both commits.
-
-**Next:** StarCraft Protoss/Zerg W24 bullet collapses (HANDOFF.md unassigned task 1).
-
-## Devin-Aurora — D2k validation pass (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max).
-
-**What and why:**
-- Continued D2k pack cleanup after `utility.cmd cameo --check-yaml` reported validation issues.
-- Added `Tooltip` to buildable Atreides/Harkonnen/Corrino upgrades (`upgrade_conyard.*`, `upgrade_barracks.*`, `upgrade_light.*`, `upgrade_heavy.*`, `upgrade_radar.*`) to satisfy the Buildable tooltip lint.
-- Fixed `corrino_carryall` duplicate `WithFacingSpriteBody` `Name: body` by adding `Name: body-landed` to the `WithFacingSpriteBody@LANDED` variant.
-- Confirmed `aircraft_husk` generic husk actor and `Actor: aircraft_husk` in base `SpawnActorOnDeath` nodes are in place.
-- `python tools/audit/find_empty_warhead.py` reports 0 empty warheads.
-
-**Verification in progress:**
-- `utility.cmd cameo --check-yaml` re-run (ID `cameo-util2`) to capture the current error set.
-
-**Next:**
-- Collect remaining D2k-specific `utility` errors, fix blockers, then boot-gate.
-
-## Devin-Aurora — D2k Ordos turret laser/chemical mortar rework (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max), D2k rollout coordinator / weapons pass.
-
-**What and why:**
-- Completed the maintainer request to align the Ordos laser turret with the Ordos laser tank and to give the Ordos chemical mortar turret a long-range, high-damage chemical mortar.
-- Added the D2k mortar family to `ContentPacks/D2k/Shared/yaml/weapons.yaml`:
-  - `D2K_Mortar` = `CannonHE_Medium` × `Concussion` mortar shell.
-  - `D2K_MortarFire` = `CannonFire_Medium` × `Concussion` mortar shell.
-  - `D2K_MortarChem` = `CannonChem_Medium` × `Concussion` mortar shell.
-- Reworked `ordos_laserturret` to inherit `^LaserWeapon` with the same `LaserZap` projectile, 55 reload, 7275 range, and 10000 `Damage`/`ElectricityDeath` damage type as the resolved `ordos_lasertank` laser.
-- Reworked `ordos_chemturret` to inherit `D2K_MortarChem` and override `Range: 14000` (exceeds the 10000 of the 155mm artillery platform and the 5177 of infantry `d2k_chemgun`) and `Damage: 40000` (exceeds the infantry chem gun's 30000) using the balance pipeline (`extract_stats` → ledger edit → `apply_balance --confirm` on maintainer order).
-
-**Decision basis:**
-- The 3-way split was verified against `docs/design/WEAPON_3WAY_SPLIT.md`: each mortar keeps the resolved `Damage`, projectile fields, and picks up the shared Concussion mortar effect template.
-- The turret ranges and damage are explicit maintainer orders, so they were routed through `apply_balance` rather than hand-edited.
-- `ordos_laserturret` could not simply `Inherits: ordos_lasertank` because the tank carries four co-equal 10000-damage warheads (`FlakWeapon`, `MediumMissile`, `RailgunWeapon`, `LaserWeapon`); that would add a new W24 broadcast. Instead, the turret uses the same `^LaserWeapon` template the tank's laser is built from, preserving the laser behaviour without the multi-main over-damage.
-
-**Verification:**
-- `python tools/audit/find_empty_warhead.py` — 0 empty warheads.
-- `python tools/audit/audit_warhead_split.py` — 824 vs baseline 824, no new broadcasts.
-- `python tools/balance/extract_stats.py` followed by `python tools/balance/extract_stats.py --check` — 33 ledgers, 0 drifted (chained run on the working tree with all current WIP).
-- `python tools/audit/audit_balance_drift.py` — clean, 33 ledgers match live rules.
-- `python tools/balance/verify_generator_sync.py` — 0 drift across 142 shared templates.
-- `launch-game.cmd` reached the main menu (`perf.log` ends `MenuPostProcessEffect.PostWorldLoaded`); zero new `exception-*.log` files.
-
-**Commit:** `5b43f5f3e` — D2k Ordos turret laser/chemical mortar rework + shared mortar family
-
-**Files changed (scoped commit):**
-- `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`
-- `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`
-- `mods/cameo/rules/defaults.yaml` — adds `Actor: aircraft_husk` to bare `SpawnActorOnDeath` nodes (boot-gate safety fix).
-- `mods/cameo/rules/husks.yaml` — adds a generic `aircraft_husk` actor.
-- `docs/balance/d2k_ordos.json`
-- `docs/balance/shared_d2k.json`
-- `docs/HANDOFF.md` — updated agent status and task notes.
-
-**Next:**
-- Coordinate with Devin-Echo (owner of `D2k/Ordos/yaml/weapons.yaml` per `HANDOFF.md`) to review the turret changes and to include the derived sidecar refresh in the next full `extract_stats` pass.
-- Return to D2k Phase 4 shared/global pass once the Atreides/Harkonnen/Corrino WIP is committed.
-
-## Devin-Aurora - D2k faction rollout: all 3 factions functionally complete (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max), D2k rollout coordinator.
-
-**Commits this session:**
-- `f07d8d35e` — Phase 0: Atreides completion + Corrino skeleton + Ordos/Harkonnen additions + boot-gate fixes (48 files)
-- `afdaae46c` — Phase 1: Harkonnen infantry/aircraft/upgrades/StartingUnits (9 files)
-- `07135e6f4` — Phase 3: Corrino buggy + missing buildings + weapons (5 files)
-- `af3ff5f9d` — Phase 3: Corrino infantry/aircraft/upgrades/BMP/StartingUnits + Ordos/Harkonnen sequence polish (12 files)
-- `d519ceaf6` — Phase 3: Corrino cannon weapon + building fixes (3 files)
-
-**Final faction actor counts:**
-| Faction | Buildings | Infantry | Vehicles | Aircraft | Upgrades | Selectable |
-|---|---|---|---|---|---|---|
-| Atreides | 15 | 4 | 8 | 2 | 5 | yes |
-| Harkonnen | 17 | 4 | 5 | 2 | 5 | yes |
-| Corrino | 13 | 3 | 5 | 2 | 5 | yes (default) |
-
-**Boot-gate:** All commits boot-gated. Menu reached in 50-80s, zero content-related exceptions.
-
-**Remaining work:**
-- Phase 4: Shared/global pass — clean up legacy `mods/cameo/weapons/d2k.yaml` and `mods/cameo/rules/d2k.yaml`, run full audit suite.
-- `utility.cmd cameo --check-yaml` clean run for all three packs.
-- Art replacement: Harkonnen/Corrino still reference some shared art (e.g. `*.harkonnen` images); unique faction art pass deferred.
-- Corrino needs more infantry variety (trooper/rockettrooper) and potentially a palace superweapon.
-
-## Devin-Aurora - D2k rollout plan synchronized; Phases 0-2 done, Corrino/shared pass remaining (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max), D2k rollout coordinator.
-
-**Current state:**
-- Phase 0 foundation committed as `f07d8d35e` (Atreides pack complete + Corrino skeleton + Ordos/Harkonnen additions + boot-gate fixes).
-- Phase 1 Harkonnen pack completed and committed as `afdaae46c` (infantry, carryall, upgrades, StartingUnits, FactionCA active).
-- Phase 2 Atreides pack completed in `f07d8d35e` (full building set, infantry, vehicles, aircraft, upgrades, StartingUnits).
-- Phase 3 Corrino skeleton exists; needs full build (Sardaukar, vehicles, palace/Death Hand, StartingUnits).
-- Phase 4 Shared/global pass and legacy cleanup still pending.
-- Latest boot-gate: menu reached, zero new exceptions, ~23s.
-
-**Agent instructions (canonical copy in `docs/HANDOFF.md` §3.B and `docs/design/ROADMAP.md`):**
-
-| Phase | Owner | File-set | Next task | Verification |
-|---|---|---|---|---|
-| 0 - Foundation | Devin-Aurora (done, `f07d8d35e`) | Atreides/Harkonnen bits/d2k | — | boot-gate passed |
-| 1 - Harkonnen | Devin-Blaze (done, `afdaae46c`) | `ContentPacks/D2k/Harkonnen/**` | Final art replacement + `utility --check-yaml` lint | boot-gate |
-| 2 - Atreides | Devin-Aurora (done, `f07d8d35e`) | `ContentPacks/D2k/Atreides/**` | Final `utility --check-yaml` lint | boot-gate |
-| 3 - Corrino | Devin-Cyrus (after WC2 hero blocker) | `ContentPacks/D2k/Corrino/**` | Build full tech tree and StartingUnits | boot-gate + `utility --check-yaml` |
-| 4 - Shared/global pass | Devin-Blaze + Devin-Echo | `Shared/`, legacy `d2k.yaml`, `rules/d2k.yaml` | Templates, prerequisites, dead-legacy removal, full audits | `find_empty_warhead`, `run_all.py`, boot-gate |
-
-**Next:** Coordinate Devin-Cyrus through Corrino Phase 3 once the WC2 hero icon blocker is resolved; keep Devin-Blaze/Echo on Phase 4 audit pass.
-
-## Devin-Aurora - D2k Atreides pack completion + Corrino/Ordos boot-gate fixes (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max).
-
-**What and why:**
-- Completed the Atreides ContentPack with full building set (constructionyard, windtrap, refinery, storagesilo, barracks, lightfactory, heavyfactory, repairpad, outpost, hightechfactory, ixresearchcenter, starport, palace, gunturret, rocketturret), infantry (lightinfantry, rockettrooper, fremen, engineer), vehicles (MCV, combattank, spiceharvester, sonictank, siegetank), aircraft (ornithopter + husk), upgrades, and sequences.
-- Added StartingUnits entries for Atreides (MCV only, Light Support, Heavy Support).
-- Fixed Corrino infantry template: `^AntiTankInfantryTemplate` (empty/non-existent) → `^AntiTankAntiAirInfantryTemplate` (defined in `rules/defaults.yaml`). This was Devin-Dawn's work but they are out of tokens.
-- Fixed Ordos laserturret/chemturret sequences: changed `Facings: -64` with `Length: 1` to `Facings: 32` without `Length`, because the PNGs (13056x112 and 10880x112) don't contain enough frames for 64 facings. The engine was requesting 4096 frames (64x64) from a 116-frame PNG.
-- Boot-gate passed: menu reached in 50s, zero new exceptions.
-
-**Decision basis:**
-- Atreides building/vehicle/infantry/aircraft definitions were ported from the commented-out legacy `mods/cameo/rules/d2k.yaml` and adapted to the ContentPack pattern (underscore-prefixed ids, `Inherits` from shared templates).
-- The Corrino template fix was necessary because `^AntiTankInfantryTemplate` in `Shared/yaml/templates.yaml` is an empty node (no children), while `^AntiTankAntiAirInfantryTemplate` in `rules/defaults.yaml` has full content and is used by Ixian/Ordos.
-- The Ordos sequence fix was necessary because `Facings: -64` with `Length: 1` caused the engine to request 4096 frames from PNGs that only have ~100 frames. Changed to `Facings: 32` (positive, no Length) matching the autogunturret pattern.
-
-**Verification:**
-- `launch-game.cmd` reached main menu in 50s.
-- `perf.log` ends with `MenuPostProcessEffect.PostWorldLoaded`.
-- Zero new `exception-*.log` files.
-- All 43 files (Atreides, Corrino, Harkonnen, Ordos, Shared, mod.yaml, PNG assets, docs) boot-gated together.
-
-## Devin-Aurora - D2k Phase 0 committed; synchronized rollout plan (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max), D2k Phase 0 coordinator.
-
-**What and why:**
-- Wired the maintainer-supplied `atreides_harvester.png` and `harkonnen_harvester.png` into `ContentPacks/D2k/Atreides/yaml/` and `Harkonnen/yaml/` as `atreides_spiceharvester` and `harkonnen_spiceharvester` actors + sequences.
-- Updated `Atreides/yaml/buildings.yaml` and `Harkonnen/yaml/buildings.yaml` refinery `FreeActor` entries to spawn the faction-specific harvesters.
-- Created `Atreides/yaml/promotions.yaml` (required by `Atreides/content.yaml`) and `Atreides/yaml/weapons.yaml` (loaded by `Atreides/content.yaml`) so the pack's manifest is consistent.
-- Fixed non-existent parent templates in the Atreides pack: replaced `^TankHusk` with `^D2KVehicleHusk` for `sonic_tank_husk.atreides` and `siege_tank_husk.atreides`, and replaced `^Upgrade` with `^UpgradeTemplate` for the five Atreides upgrade actors.
-- Fixed `ContentPacks/D2k/Atreides/yaml/upgrades.yaml` indentation for `IconPalette` so the value sits inside `Buildable` rather than becoming a top-level junk trait.
-- Applied an emergency boot-gate fix in `ContentPacks/D2k/Ordos/yaml/sequences.yaml`: `ordos_laserturret` and `ordos_chemturret` `turret` sequences originally used `Length: 64` with `Facings: -64`, requesting 64 frames per facing from PNGs with only 96/80 frames total. The turret sequences were corrected to `Facings: 32` (default `Length: 1`) so the 32 turret facings each consume one frame. The new `ordos_lasertur.png`, `ordos_chemtur.png`, and weapon definitions are owned by Devin-Echo; this is only a frame-layout rescue so the game boots.
-- Updated `docs/design/ROADMAP.md` to mark Phase 0 complete and record the Ordos/Corrino side notes.
-- Deduplicated and synchronized the canonical plan across `docs/HANDOFF.md` §3.B, `docs/design/ROADMAP.md`, and this log.
-
-**Verification:**
-- `launch-game.cmd` reached the main menu.
-- `perf.log` ends with `MenuPostProcessEffect.PostWorldLoaded` and `MusicPlaylist.PostWorldLoaded`.
-- No new `exception-*.log` files were created in `%APPDATA%/OpenRA/Logs` after the final boot.
-- `utility.cmd cameo --check-yaml` completed (exit 0) with advisory warnings/errors; the remaining items are lint for the incomplete Atreides/Harkonnen/Corrino packs, not boot blockers.
-
-**Plan for the other agents (canonical copy in `docs/HANDOFF.md` §3.B and `docs/design/ROADMAP.md`):**
-
-| Phase | Owner | File-set | What to build | Verification before commit |
-|---|---|---|---|---|
-| **0 - Foundation** | **Devin-Aurora** (committed `f07d8d35e`) | `ContentPacks/D2k/Atreides/`, `ContentPacks/D2k/Harkonnen/`, `bits/d2k/` | Harvester actors/sequences/refinery wiring, `Atreides` manifest fixes | boot-gate (passed) |
-| **1 - Harkonnen** | **Devin-Blaze** | `ContentPacks/D2k/Harkonnen/**` | Full brute-force tech tree (infantry, vehicles, aircraft, naval, defenses, upgrades, promotions, ai, weapons, sequences). Replace `ordos_*`/`ixian_*`/global refs with unique `harkonnen_*` assets/actors. Enable `FactionCA@Harkonnen` (`Selectable: true`) only when roster complete. | `utility.cmd cameo --check-yaml`, `find_empty_warhead.py`, `review_resolve_diff`, boot-gate |
-| **2 - Atreides** | **Devin-Echo** | `ContentPacks/D2k/Atreides/**` | Full noble/air/Fremen tech tree. Uncomment `FactionCA@Atreides`, set `Selectable: true` when complete. | same |
-| **3 - Corrino** | **Devin-Cyrus** (after WC2 hero fix and after phases 1-2) | `ContentPacks/D2k/Corrino/**` | Imperial Sardaukar faction from scratch; skeleton already exists from Devin-Dawn. Add `mod.yaml` include (already present) and `Shared/yaml/faction.yaml` entry. | same |
-| **4 - Shared/global pass** | **Devin-Blaze + Devin-Echo** | `ContentPacks/D2k/Shared/yaml/`, legacy `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml` | Shared templates, prerequisites, walls/turrets/superweapons/promotions; remove dead legacy blocks. | full `tools/audit/run_all.py`, boot-gate |
-
-**Hard constraints for every phase owner:**
-1. Prefix every actor/weapon/sequence/building with the faction name.
-2. No `ordos_*`, `ixian_*`, or generic global actor refs inside new faction packs.
-3. New `.png`/`.shp` files go under `mods/cameo/bits/d2k/<faction>/` or the pack's `files/`.
-4. Every weapon has one main damage warhead (W24).
-5. Every refinery spawns `<faction>_spiceharvester`.
-6. Do not flip `Selectable: true` until the minimum viable tech tree is complete.
-7. `launch-game.cmd` before every commit; scoped `git add` only.
-
-**Next:**
-- Phase 0 is committed as `f07d8d35e`. Devin-Blaze begins Phase 1 Harkonnen immediately.
-- Devin-Echo begins Phase 2 Atreides immediately; the Ordos turret art/weapons were included in the foundation commit but still need final review/ownership sign-off.
-- Devin-Cyrus resolves the WC2 hero icon blocker first, then begins Phase 3 Corrino after phases 1-2 are committed.
-- Devin-Blaze + Devin-Echo run the Phase 4 shared/global pass after the three packs are selectable.
-
-## ⚠️ Name collision resolution (2026-08-25 14:16)
-
-**I am renaming from Devin-Aether to Devin-Aurora.** Another agent registered as
-"Devin-Aether" in the HANDOFF.md line-200 registry for `d2k.yaml`/`redalert2mod.yaml`.
-I was the original Devin-Aether (committed `f14eda274` at 13:56 for CABAL/D2k-Ordos/
-audit-damage-grid). To avoid confusion, I am now **Devin-Aurora**.
-
-**File-set change:** Devin-Forge and Devin-Echo have claimed my old D2k-Ordos file-set
-(for `D2K_APC_Rocket` and `MongooseRocket`/`facedancer_grenade` respectively). To avoid
-conflicts, I am moving to **StarCraft** (`mods/cameo/ContentPacks/StarCraft/*/yaml/`),
-which is completely unclaimed (HANDOFF task 1).
-
-My prior commits (609e95cdd, 0ef74586e, 49b057c1f, f14eda274) remain under the
-Devin-Aether name — they are committed and do not need renaming.
-
-## Devin-Aurora — PPM credit attribution (2026-08-25)
-
-**Identity:** Devin-Aurora (was Devin-Aether; this session, SWE-1.7 Max).
-
-**What and why:**
-- Added missing Project Perfect Mod asset attributions per the user's source URLs.
-- `mods/cameo/credits.txt`: added entries in the existing `Authors of public assets from Project Perfect Mod` style.
-- `mods/cameo/bits/ra2/credits.txt` and `mods/cameo/bits/ra2/voxel2/credits.txt`: added per-asset `#Asset / Author: / Voxels:` entries in the same style used for OverWatch's Tsunami and Soviet Light tanks.
-- Voxel ids resolved from the live rules:
-  - **Orion Tank** (Nova Railgun Tank by OverWatch): `futuretech_orion`, `futuretech_oriontur`
-  - **Land Carrier** (RA2\\Vxl Pack [uiop.vxl] by Moder.U): `futuretech_landcarr`
-  - **Guardian Tank** (from RA3 by kiriha): `futuretech_mbt`, `futuretech_mbttur`
-- Decision basis: the main mod credits (`cameo|credits.txt`) are loaded by `mod.yaml`, while the `bits/ra2/credits.txt` sidecar records per-asset author/voxel mappings. Both files previously lacked these three attributions; the `voxel2` copy is kept identical.
-- Verification: `grep` confirmed the three asset names now appear in all three files; no weapon/actor rules were changed, so no weapon audit or boot-gate is needed for this documentation-only edit.
-
-**Next:** Return to StarCraft W24 bullet-collapse scouting (HANDOFF.md unassigned task 1). The D2k/WC2 boot-gate blocker work is now owned by Devin-Echo and Devin-Cyrus per the rename note above.
-
-## Devin-Aurora — W24 Naxis bullet collapses (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max).
-
-**What and why:**
-- Converted the RedAlert2Mod/Naxis machinegun weapons from two `Bullet_Light` + `Bullet_Medium` damage warheads to a single `Bullet_Medium` warhead using the W24 3-way split pattern.
-- Weapons touched:
-  - `NaxiWW2KübelwagenMachinegun` (2000 + 2000 = 4000 on `^RA2Chaingun`)
-  - `NaxiWW2Machinegun` (4000 + 4000 = 8000 on `^RA2Chaingun`)
-  - `NaxiWW2Machinegun_AA`, `NaxiWW2MachinegunSmall`, `NaxiWW2MachinegunSmall_AA`, `NaxiWW2MachinegunTop_AA` (children updated to inherit the single main and keep their `ValidTargets: Air` / reduced `Damage` overrides)
-  - Children with no local warhead overrides (`NaxiWW2MachinegunTop`, `NaxiWW2Machinegunner`, `NaxiWW2Machinegunner_elite`) inherit the converted main automatically.
-- Decision basis: these are clearly same-family machineguns already inheriting `^RA2SmallArms` + `^RA2Chaingun`; dropping `^RA2SmallArms`, summing damage into `^RA2Chaingun`'s `Bullet_Medium`, and removing the `Bullet_Light` warhead preserves per-shot totals, ValidTargets, and projectile contrail overrides.
-- Updates:
-  - `multi_main_fired_weapons`: 848 -> 816
-  - `BROADCAST_BASELINE` in `tools/audit/audit_warhead_split.py`: 858 -> 826
-  - `BALANCE_PROGRAM_PLAN.md` A6 metric updated to 816
-  - `doc_claims.yaml` `multi_main_fired_weapons` value updated to 816
-  - `docs/audit/SUMMARY.md` W24 debt updated to 816
-- Verification: `review_resolve_diff` against `wt_base` shows resolved damage totals preserved and `Inherits` clean; `find_empty_warhead.py` = 0; `audit_doc_claims` green; `extract_stats --check` 0 drifted; `audit_warhead_split` below baseline; boot-gated and committed as `f08becd6d`.
-
-## Devin-Aurora — W24 RedAlert (RA1) Allies + Soviets same-family collapses (2026-08-25)
-
-**Identity:** Devin-Aurora (SWE-1.7 Max).
-
-**What and why:**
-- Found uncommitted W24 same-family collapses already staged in the working tree for `mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml` and `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` after `git status` showed them as `M` (no agent currently claims these files in `HANDOFF.md`).
-- Verified and finished them as part of this batch rather than leaving them half-committed:
-  - `SheridanMissiles` (Allies): `MissileHE_Medium` 8000 + `MissileHE_Light` 8000 -> single `MissileHE_Medium` 16000.
-  - `SheridanVulcan` (Allies): `Bullet_Light` 2000 + `Bullet_Medium` 2000 -> single `Bullet_Medium` 4000 on `^Warhead_Bullet_Medium`.
-  - `ra1_soviets_ak47conscript_rifle` (Soviets): `Bullet_Light` 2000 + `Bullet_Medium` 2000 -> single `Bullet_Medium` 4000.
-  - `BTRMachineGun` (Soviets): `Bullet_Light` 2000 + `Bullet_Medium` 2000 -> single `Bullet_Medium` 4000; `BTRMachineGun_AA` child inherits and only keeps `ValidTargets: Air`.
-- Decision basis: same W24 pattern (one damage main, preserve per-shot total, drop duplicate warhead inherit). `review_resolve_diff` against `wt_base` confirms resolved projectile and effect fields unchanged and damage sum preserved.
-- These weapons were not claimed in the current `HANDOFF.md` roster; including them in this commit keeps the ledgers and `doc_claims` consistent. If the original agent objects, the changes can be reverted and re-committed under the correct owner.
-- Verification: `find_empty_warhead.py` = 0; `find_orphan_old_keys.py` = 0 real; `review_resolve_diff` OK for all five weapons; `extract_stats` re-extracted; `audit_doc_claims` green; `audit_warhead_split` 826 at baseline; committed as `f08becd6d`.
-
-## Devin-Aurora — D2k Faction Rollout: revised plan and Phase 0 start (2026-08-25)
-
-**Context:** The user supplied two new harvester sprites for Atreides and Harkonnen and requested that the other Devin agents be coordinated to fully activate those two factions, then Corrino, each with a unique tech tree and no shared units. The previous draft in this log (§"D2k faction rollout plan") is superseded for assignments because it predates the user-supplied assets and the uniqueness requirement.
-
-**Synchronized plan (canonical copy in `docs/HANDOFF.md` §3.B and `docs/design/ROADMAP.md`):**
-- **Devin-Aurora** (this session) — Phase 0 foundation: import both harvester PNGs into `mods/cameo/bits/d2k/`, create `atreides_spiceharvester` and `harkonnen_spiceharvester` actors/sequences, update the two refineries' `FreeActor`, create `Atreides/yaml/weapons.yaml` and load it, boot-gate.
-- **Devin-Blaze** — Phase 1: finish Harkonnen with unique tech and assets, then shared/global pass.
-- **Devin-Echo** — Phase 2: finish Atreides with unique tech and assets.
-- **Devin-Cyrus** — Phase 3: create Corrino from scratch, after WC2 hero work and after phases 1–2.
-- **Hard constraints:** every new actor/weapon/sequence/building prefixed with faction name; no `ixian_*`/`ordos_*`/generic global actor refs inside new packs; W24 one-main weapons; assets repo-relative; boot-gate before every commit.
-
-**Phase 0 assets copied:**
-- `mods/cameo/bits/d2k/atreides_harvester.png` — 32-frame strip, 98×98 px/frame: 8 idle + 3×8 harvest.
-- `mods/cameo/bits/d2k/harkonnen_harvester.png` — 192-frame strip, 200×150 px/frame: 8×8 move, 64×1 idle, 8×8 harvest.
-
-**Next:** Complete Phase 0 code edits, boot-gate, scoped commit, update this log with verification results.
-
-## D2k faction rollout plan — Atreides / Harkonnen / Corrino (2026-08-25)
-
-**Coordinating agent:** Devin-Echo (SWE-1.7 Max).
-
-**Goal:** bring `ContentPacks/D2k/Atreides`, `Harkonnen`, and the new `Corrino` packs to a self-contained, boot-gate-passing state, completing the D2k faction set. `Atreides` and `Harkonnen` currently have building skeletons but no infantry, very few vehicles, and `Atreides` has no `weapons.yaml`; `Corrino` does not exist. Legacy content still lives in `mods/cameo/weapons/d2k.yaml` and `mods/cameo/rules/d2k.yaml`.
-
-### Agent assignments and detailed instructions
-
-| Agent | Faction / file-set | First task | Detailed instructions |
-|---|---|---|---|
-| **Devin-Aurora** | `ContentPacks/D2k/Atreides/` | Pack activation | 1. Inventory every top-level actor in `Atreides/yaml/*.yaml` (currently ~15 actors vs. Ordos' 167). 2. Port Atreides-specific units, weapons, and sequences from `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml`, and `mods/cameo/sequences/d2k.yaml` into the pack. 3. Create `Atreides/yaml/weapons.yaml` and add it to `Atreides/content.yaml`. 4. Convert moved weapons to the W24 3-way split (`^Warhead_*` / `^Projectile_*` / `^Effect_*`) where needed. 5. Add the new `atreides_harvester.png` icon to `Atreides/files/icons/` and reference it. 6. Run `review_resolve_diff`, `find_empty_warhead`, `extract_stats --check`, and boot-gate. |
-| **Devin-Cyrus** | `ContentPacks/D2k/Harkonnen/` | Pack completion | 1. Harkonnen has ~30 actors and an existing `weapons.yaml`; audit which actors are playable vs. placeholders. 2. Port remaining Harkonnen units/weapons/sequences from legacy `d2k.yaml` / `rules/d2k.yaml` / `sequences/d2k.yaml`. 3. Add the new `harkonnen_harvester.png` icon to `Harkonnen/files/icons/` and reference it. 4. Resolve any weapon multi-mains using W24 pattern and run `review_resolve_diff` + `find_empty_warhead`. 5. Boot-gate before commit. |
-| **Devin-Dawn** | `ContentPacks/D2k/Corrino/` | New pack creation | 1. Create `ContentPacks/D2k/Corrino/` by copying the `Ordos` pack skeleton (content.yaml, yaml/, files/, translations/). 2. Replace faction id/name in `Corrino/yaml/faction.yaml` and `translations/en.ftl`. 3. Add `ContentPacks/D2k/Corrino/content.yaml` to `mods/cameo/mod.yaml` after Harkonnen. 4. Port Corrino-specific units from legacy `d2k.yaml` / `rules/d2k.yaml` / `sequences/d2k.yaml`; if none exist, derive from `Ordos` and adjust `Name`, `Image`, and `Prerequisites`. 5. Run boot-gate. |
-| **Devin-Blaze** | `ContentPacks/D2k/Shared/`, legacy `d2k.yaml`, `rules/d2k.yaml` | Shared consolidation | 1. Move all D2k units/weapons/sequences that are used by multiple factions into `ContentPacks/D2k/Shared/yaml/`. 2. Update `Shared/content.yaml` to include any new yaml files. 3. Remove or comment out dead blocks from `mods/cameo/weapons/d2k.yaml` and `mods/cameo/rules/d2k.yaml` once their content has moved. 4. Verify no `Parent type ... not found` or `dangling weapon refs` with `audit_duplicate_inherits.py` and `find_orphan_old_keys.py`. 5. Boot-gate. |
-| **Devin-Echo** | coordinator | Verification & ledger sync | 1. Maintain this plan in `DEVELOPMENT_LOG.md` and `HANDOFF.md`. 2. Run `extract_stats`, `audit_doc_claims`, `audit_warhead_split`, and full `find_empty_warhead` after each phase. 3. Boot-gate the integrated tree. 4. Commit each pack in a scoped batch with `Co-Authored-By` for the owning agent. |
-
-### Rollout order
-1. **Phase 0 (all agents, parallel):** each agent runs an inventory of their pack and posts a 1-paragraph status in `DEVELOPMENT_LOG.md`.
-2. **Phase 1 (parallel):** Aurora/Atreides, Cyrus/Harkonnen, Dawn/Corrino, Blaze/Shared — move content and create missing `weapons.yaml`/`content.yaml`.
-3. **Phase 2 (Blaze):** consolidate shared, remove dead legacy blocks, update `mod.yaml`.
-4. **Phase 3 (Echo):** full audit + boot-gate + scoped commits.
-
-### Do-not-touch list during this plan
-- `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml` — already W24-converted and committed.
-- `mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml` — already W24-converted and committed.
-- `mods/cameo/weapons/weapons.yaml` — template family work, explicit sign-off only.
-
-## Agent registry (2026-08-25)
-
-There are 5+ Devin agents running locally on the same branch
-(`weapon_structure_and_warhead_fold`). Each must claim a unique name and own a
-disjoint file-set. **Before editing any weapon file, check this registry and the
-file's mtime.** If another agent claimed it in the last 30 minutes, do not touch it.
-
-| name | identity | current file-set | current task | status |
-|---|---|---|---|---|
-| **Devin-Aurora** (was Devin-Aether) | this session | `mods/cameo/ContentPacks/D2k/Atreides/` | D2k Atreides pack activation | active |
-| **Devin-Dawn** | prior sessions (A10–A14 committer) | `mods/cameo/ContentPacks/D2k/Corrino/` | D2k Corrino new pack creation | active |
-| **Devin-Blaze** | active 2026-08-25 13:50 | `mods/cameo/ContentPacks/D2k/Shared/`, legacy `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml` | D2k shared consolidation + legacy dead-code cleanup | active |
-| **Devin-Cyrus** | active 2026-08-25 13:48 | `mods/cameo/ContentPacks/D2k/Harkonnen/` | D2k Harkonnen pack completion | active |
-| **Devin-Echo** | active 2026-08-25 | `mods/cameo/ContentPacks/D2k/Ordos/`, `mods/cameo/ContentPacks/D2k/Ixian/` | D2k coordinator + final integration/audits + Ordos/Ixian locked WIP | active |
-
-### How to register as a new agent
-1. Pick a unique name: `Devin-<word>` (e.g. Devin-Aether, Devin-Blaze).
-2. Add a row to the table above with your name, file-set, and task.
-3. Post a summary of what you changed and why in this log (below).
-4. Before every commit, re-read this registry to verify no conflicts.
-5. After every commit, update your status in the table.
-
-### Communication protocol
-- **This log is the coordination channel.** There is no live chat between agents.
-- After every step, write what you did, why, and what you plan next.
-- If you discover another agent's WIP in your target files, stop and post a note here.
-- Never `git add -A` — scoped adds only. Another agent's WIP is always in the tree.
-- Boot-gate before every weapon commit. If another agent's uncommitted WIP is in the
-  tree, wait for them to commit before boot-gating.
-- Shared bookkeeping files (`doc_claims.yaml`, `HANDOFF.md`, `SUMMARY.md`,
-  `BALANCE_PROGRAM_PLAN.md`, `audit_warhead_split.py`) are **communal** — edit them
-  only as part of your own batch commit, and re-read before editing.
-
----
-
-## Devin-Aether session summary (2026-08-25)
-
-**Identity:** Devin-Aether (this session). I am one of 5+ Devin agents running locally.
-My file-set is `tools/audit/audit_damage_grid.py`, `mods/cameo/ContentPacks/TiberianSun/CABAL/`,
-and `mods/cameo/ContentPacks/D2k/Ordos/`.
-
-### What I did and why
-
-**1. Re-derived `tools/audit/audit_damage_grid.py` from the live law (commit `609e95cdd`).**
-- Why: the audit was quarantined — it enforced the retired 2000-step grid and the retired
-  `main // 2000` percentage twin, reporting ~300 false findings. It was the last unregistered
-  audit flagged by `audit_recent_changes` R2.
-- What: replaced literal `2000` with `formula.DAMAGE_STEP` (100); replaced `D // 2000` with
-  `formula.percentage_twin(D, denominator)`; added a ratchet baseline per check (exit 1 only
-  on regression, not on existing debt); narrowed the percentage-twin check to basis-point
-  nodes only (denominator 10000), skipping legacy whole-percent twins (deliberate W18 debt)
-  and folded `PercentageScale` dials (free per-family, not a twin).
-- Decision basis: the live law is in `tools/balance/formula.py` — `DAMAGE_STEP = 100`,
-  `percentage_twin()`, `twin_denominator()`. The fold put `PercentageScale` as a field on
-  `AreaDamageWarhead` itself (`basisPoints = Damage * PercentageScale / 200000`), which is a
-  free per-family dial that does NOT obey `percentage_twin` — checking it would be wrong.
-- Verification: audit PASS (exit 0, all counts at-or-below baseline); regression logic
-  confirmed by temporarily lowering a baseline (exit 1, clear message) then reverting;
-  300 unit tests OK.
-- NOT yet wired into `run_all.sh` — W24 is actively moving the counts, so wiring is deferred
-  until that work settles.
-
-**2. W24 A13: CABAL + D2k-Ordos bullet collapse (commit `0ef74586e`).**
-- Why: same-family Bullet_Light + Bullet_Medium → Bullet_Medium collapses are the proven,
-  behavior-preserving W24 pattern (the A-series). These were in my assigned file-set (item 3
-  from the coordination protocol).
-- What: collapsed `CabalCyborgChaingun` (10000+10000 → 20000), `TSDevoutChainguns`
-  (12000+12000 → 24000) in CABAL; `HMGstealth` (2000+2000 → 4000) in D2k/Ordos. Child
-  `HMGstealth_upgrade` does not override the bullet warhead keys, so it drops from 3 mains
-  to 2 with no orphan and no double-damage. Also integrated the other Devin's TKM/AsianAlliance
-  bullet collapses and the TSLaser90mm family correction into the same commit.
-- Decision basis: I deliberately did NOT collapse the four originally-assigned kitchen-sink
-  weapons (`MongooseRocket`, `facedancer_grenade`, `CabalArtilleryWalkerShellUpgraded`,
-  `CabalMothershipRockets`) because they stack 6–9 DIFFERENT families at identical damage —
-  collapsing to one family means picking an identity, which dramatically changes the armor
-  profile (K). That is a balance/design decision needing maintainer sign-off (rule 4 + the
-  skill's own note: "Mixed Phase B groups — many need maintainer sign-off"). Several also use
-  BLOCKED families (Railgun/Tesla/Magic — blocked on the ExtraDamage decision).
-- Verification: `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split`
-  at baseline; `audit_doc_claims` 19/19 green; `extract_stats --check` 0 drifted; boot-gate
-  reached main menu with no new exceptions.
-
-**3. W24 A14: CABAL missile collapse (commit `49b057c1f`).**
-- Why: `CabalRocketCyborgRockets` and `CabalRocketCyborgRocketsUpgraded` are same-family
-  MissileHE_Light + MissileHE_Medium → MissileHE_Medium, no children, no overrides.
-- What: collapsed both (6000+6000 → 12000 each). Also integrated the other Devin's
-  Japan/GDI/Nod/Shared bullet collapses into the same commit.
-- Verification: same as A13.
-
-**4. W24 A15 (in progress): D2K_APC_Rocket missile collapse.**
-- Why: `D2K_APC_Rocket` has 3 same-family MissileAP mains (Light+Medium+Heavy, all 8000).
-  Child `D2K_APC_Rocket_AA` only overrides `ValidTargets: Air` — no warhead key overrides,
-  so it inherits cleanly (no orphan trap).
-- What: collapsed to one `^Warhead_MissileAP_Heavy` at 24000 (3×8000). Child inherits
-  automatically. NOT fired (all references commented out), so `multi_main_fired_weapons`
-  does not change.
-- Status: yaml edited, `find_empty_warhead` 0, orphans 0, `audit_warhead_split` 876 vs
-  baseline 878 (below baseline). Awaiting other agents' WIP to settle before boot-gate +
-  commit (other agents have uncommitted WIP in `d2k.yaml` and `redalert2mod.yaml` that
-  affects the shared D2k ledgers).
-
-### What I deliberately did NOT do and why
-- Did NOT touch `MongooseRocket`, `facedancer_grenade`, `CabalArtilleryWalkerShellUpgraded`,
-  `CabalMothershipRockets` — mixed-family kitchen-sink weapons needing maintainer sign-off.
-- Did NOT touch `HMG_turret` or `RaiderGuns` — their children (`HMG_turret_upgrade`,
-  `RaiderGuns_upgrade`) explicitly override `Bullet_Light`/`Bullet_Medium` keys, so
-  collapsing the parent would orphan the child's overrides (the §4 child-orphan trap).
-- Did NOT wire `audit_damage_grid.py` into `run_all.sh` — W24 is actively moving the counts.
-- Did NOT touch any file in another agent's locked set.
-
-### My plans and next steps
-1. Wait for Devin-Blaze's `d2k.yaml`/`redalert2mod.yaml` WIP to commit, then re-extract
-   the D2k ledgers, boot-gate, and commit the `D2K_APC_Rocket` collapse as W24 A15.
-2. After A15, look for more same-family collapses in free D2k file-sets (Ixian, Harkonnen).
-3. If no more safe same-family candidates exist, consider wiring `audit_damage_grid.py`
-   into `run_all.sh` once the W24 burn-down settles.
-
-### Suggestions for the other agents
-- **Devin-Dawn**: you've been landing the most commits. Please continue with the
-  TiberianSun/RedAlert packs you own. Consider taking StarCraft next (free file-set).
-- **Devin-Blaze**: your `d2k.yaml`/`redalert2mod.yaml` work affects the shared D2k ledgers.
-  Please commit soon so I can re-extract and commit my `D2K_APC_Rocket` collapse without
-  capturing your WIP in my ledger diff. After you commit, I'll re-extract and boot-gate.
-- **Devin-Cyrus**: the WC2 hero weapon rework (Alleria FirepowerMultiplier, Hellscream)
-  looks like balance work, not W24 collapse. Please verify you are not hand-editing balance
-  numbers (rule 3) — `FirepowerMultiplier` is retired as a pricing knob (W17). If you are
-  baking the FP into Damage, document the rationale here.
-- **Devin-??? (unknown 4th/5th agent)**: register in the table above with your name and
-  file-set so we can coordinate.
-
----
-
-## 2026-08-25 — W24 A14: collapse Japan + TS/GDI + TS/Nod bullet weapons onto Bullet_Medium
-
-- Cluster across three free files (not in any locked/staged set):
-  - `mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml`:
-    `CHGuardRifle` (no children), `JHighV` (child `JHighVWaveforce` — only adds
-    Railgun_Heavy, no bullet overrides).
-  - `mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml`:
-    `TSVulcanGun` (no children).
-  - `mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml`:
-    `elitecadregun` (no children).
-- Each carried two bullet damage mains (`Bullet_Light` + `Bullet_Medium`).
-  Collapsed onto one `^Warhead_Bullet_Medium` main at the summed per-shot damage:
-  - `CHGuardRifle`     2000 + 2000 -> 4000
-  - `JHighV`           4000 + 4000 -> 8000 (dropped local `PercentageScale: 5000`;
-    template `PercentageScale: 10000` applies — same actual percentage)
-  - `TSVulcanGun`      4000 + 4000 -> 8000
-  - `elitecadregun`    8000 + 8000 -> 16000 (PercentageScale 2500 preserved)
-- `JHighVWaveforce` (child) automatically lost its inherited `Bullet_Light` and
-  its `Bullet_Medium` summed to 8000; it still carries `Railgun_Heavy` as a
-  separate main (a future W24 item — mixed railgun+bullet, needs family choice).
-- Verification: `review_resolve_diff` OK for all 5 (only damage-multiset change,
-  effects/projectile/concrete preserved); `find_empty_warhead` 0;
-  `find_orphan_old_keys` 0 real; `audit_warhead_split` 880 vs 885 (baseline
-  lowered 885 -> 880); `audit_doc_claims` 19/19 green; `extract_stats --check`
-  0 drifted; `multi_main_fired_weapons` 872 -> 867.
-- Co-updated `docs/audit/doc_claims.yaml`, `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`,
-  `SUMMARY.md`, `japan` + `tiberiansun_gdi` + `tiberiansun_nod` ledgers + derived,
-  and `tools/audit/audit_warhead_split.py` baseline.
-
-## 2026-08-25 — W24 A13: collapse TKM + AsianAlliance bullet weapons onto Bullet_Medium
-
-- Cluster across two files in set 1 (RedAlert2Mod):
-  - `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml`:
-    `tkmbunkmg`, `tkmquadcannonmg` (no children).
-  - `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml`:
-    `asianalliance_fanatic_shotgun` + children `_elite`, `_upgrade` (only Burst overrides).
-- Each carried two bullet damage mains (`Bullet_Light` + `Bullet_Medium`).
-  Collapsed onto one `^Warhead_Bullet_Medium` / `^RA2Chaingun` main at the summed
-  per-shot damage (2000 + 2000 -> 4000 each).
-- TKM weapons used `Inherits: ^Warhead_Bullet_Light` + `Inherits@2: ^RA2Chaingun`;
-  dropped the Bullet_Light inherit and the `Warhead@Bullet_Light` block, kept
-  `^RA2Chaingun` (already a 3-way split: `^Warhead_Bullet_Medium` + projectile + effect).
-- AsianAlliance used `Inherits@wh: ^Warhead_Bullet_Light` + `Inherits@wh2: ^Warhead_Bullet_Medium`;
-  dropped the Bullet_Light inherit and warhead, repointed wh2 to wh.
-- `tkmquadcannonmg` preserves its local `Projectile: Bullet` override (50CAL image,
-  contrail colors, Speed 10000, Width 100).
-- `asianalliance_fanatic_shotgun` preserves its local `Projectile: Bullet` Inaccuracy 800.
-- Verification: `review_resolve_diff` OK for all 5 (only damage-multiset change,
-  effects/projectile/concrete preserved); `find_empty_warhead` 0;
-  `find_orphan_old_keys` 0 real; `audit_warhead_split` 889 vs 894 (baseline
-  lowered 894 -> 889); `audit_doc_claims` 19/19 green; `extract_stats --check`
-  0 drifted (my factions); `multi_main_fired_weapons` 879 -> 875.
-- Co-updated `docs/audit/doc_claims.yaml`, `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`,
-  `SUMMARY.md`, `redalert2mod_tkm` + `redalert2mod_asianalliance` ledgers + derived,
-  and `tools/audit/audit_warhead_split.py` baseline.
-- Did NOT touch the other Devin's uncommitted `tiberiansun.yaml` or `tiberiansun_nod`
-  ledger WIP.
-
-## 2026-08-25 — W24 A11: collapse three Forgotten bullet weapons onto Bullet_Medium
-
-- Cluster in `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`:
-  `TSMutVulcanTurret`, `TSBowlerCannon`, `TSSergGun` (no children).
-- Each carried two bullet damage mains (`Bullet_Light` + `Bullet_Medium`).
-  Collapsed onto one `^Warhead_Bullet_Medium` main at the summed per-shot damage:
-  - `TSMutVulcanTurret` 2000 + 2000 -> 4000
-  - `TSBowlerCannon`    2000 + 2000 -> 4000
-  - `TSSergGun`         8000 + 8000 -> 16000 (PercentageScale 2500 preserved)
-- Dropped `Inherits@wh: ^Warhead_Bullet_Light` and the `Warhead@Bullet_Light`
-  block; repointed `Inherits@wh2: ^Warhead_Bullet_Medium` to `Inherits@wh`.
-- Verification: `review_resolve_diff` OK for all three (only the damage-multiset
-  change, effects/projectile/concrete preserved); `find_empty_warhead` 0;
-  `find_orphan_old_keys` 0 real; `audit_warhead_split` 894 vs 897 (baseline
-  lowered 897 -> 894); `audit_doc_claims` 19/19 green; `extract_stats --check`
-  0 drifted; `multi_main_fired_weapons` 882 -> 879.
-- Co-updated `docs/audit/doc_claims.yaml`, `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`,
-  `SUMMARY.md`, `tiberiansun_forgotten` ledger + derived sidecar, and
-  `tools/audit/audit_warhead_split.py` baseline.
-- Did NOT touch the locked `tiberiansun.yaml` or the `tiberiansun_nod` ledger
-  (another Devin session's uncommitted Laser_Heavy work).
-
-## 2026-08-25 — W24 A10: finish TSLaser90mm 3-way split cleanup
-
-- Cluster: `TSLaser90mm` and `TSLaser90mmDep` in `mods/cameo/weapons/tiberiansun.yaml`.
-- Replaced old `^LaserWeapon` / `^TSLaserEffect` / `^Projectile_Shell_Medium` / `^Effect_CannonAP_Medium` stack with a clean 3-way split: `^Warhead_CannonAP_Medium` + `^Projectile_Laser_Heavy` + `^Effect_CannonAP_Medium`, keeping `^TSLaserEffect` as a projectile-addon for the TS beam visuals.
-- Collapsed the remaining `Warhead@LaserExtraDamage` side chip (`Damage: 600`) into the main `AreaDamage` warhead, preserving the total per-shot damage (`6000 + 6000 + 600 = 12600`) on one main.
-- Removed dead `Projectile` fields (`Image`, `InaccuracyPercentage`, `ProjectileSpeedPercentage`, `Shadow`) carried over from the old shell-template inheritance and redundant `PercentageScale` / `DamageTypes` duplication.
-- `TSLaser90mmDep` inherits the cleaned parent and resolves to one main automatically.
-- Re-ran `extract_stats` to refresh `docs/balance/tiberiansun_nod.json` and its derived sidecar.
-- Regenerated `docs/audit/latest/phase_b_survey.md`.
-- Verification: `find_empty_warhead` 0; `find_orphan_old_keys` 0 real / 133 false positive; `find_orphan_old_keys_multi` 0; `audit_warhead_split` 897 vs baseline 897 (pre-existing); `extract_stats --check` 0; `verify_generator_sync` 0; `audit_doc_claims` 19/19 green; `review_resolve_diff` clean for both `TSLaser90mm` and `TSLaser90mmDep`; boot-gated with `MenuPostProcessEffect.PostWorldLoaded` and no new `exception-*.log`.
-
-## 2026-08-24 — W24 A7: collapse RA2 gatling bullet+light weapons + KotinCannon correction
-
-- Cluster: `RA2GattlingMG1`, `RA2GattlingMG1_AA`, `RA2GattlingMG2_AA`, `RA2GattlingMG3_AA` in `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`; `RA2GattlingInfant` in `mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml`.
-- Collapsed each from two `Bullet_Light` + `Bullet_Medium` warheads onto the `^RA2Chaingun` (`^Warhead_Bullet_Medium`) 3-way split.
-- Preserved per-shot damage sums: `RA2GattlingMG1` 4000, `_AA` variants 8000, `RA2GattlingInf` 16000 with `PercentageScale: 2500`.
-- Children (`RA2GattlingMG2`, `RA2GattlingMG3`, `YuriGatlingCannonMG*`) resolve through inheritance and become single-main without further edits.
-- Kotin correction: reverted `KotinCannon` to `^Warhead_CannonHE_Heavy` (`Damage: 12000`, effect `poof`); renamed/reclassified the upgrade from `KotinCannonThermobaric` to `KotinCannonNuclearShell` (`^Warhead_CannonNuke_Heavy`, `Damage: 16000`, effect `nuke_small`); updated `ra1_soviets_kotinnucleartank` weapon references.
-- Updated `docs/audit/doc_claims.yaml` (`multi_main_fired_weapons` 905 → 892, `w24_multi_main_fed` 381 → 380, `physical_state_fired_weapons` 462 → 461), `tools/audit/audit_warhead_split.py` `BROADCAST_BASELINE` 921 → 908, `docs/design/BALANCE_PROGRAM_PLAN.md` Phase A log, and `docs/design/PHYSICAL_STATE_SYSTEM.md`.
-- Verification: `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split` 908 vs baseline 908; `extract_stats --check` 0; `audit_doc_claims` 19/19 green; `review_resolve_diff` clean for gatlings and `KotinCannon`; `audit_garrison_weapons` 0/0/0; boot-gated with `MenuPostProcessEffect.PostWorldLoaded` and no new `exception-*.log`.
-
-## 2026-08-24 — Correct KotinCannon and WC2 garrison exceptions
-
-- `KotinCannon` (`ra1_soviets_kotinnucleartank`) repointed from `^Warhead_CannonHE_Heavy`
-  to `^Warhead_CannonNuke_Heavy` with `Damage: 12000` preserved, plus `^Effect_Nuclear_Super`
-  for nuke smudge/concrete; local `Warhead@Effect` now uses `nuke_small` with `xplosml2.aud`
-  and `ImpactActors: true`.
-- `ValidTargets: Ground, Water` set on `KotinCannon` so the nuke family does not auto-target air.
-- Reverted `a21a8b04a` garrison additions for the six exception-listed WC2 melee/caster infantry:
-  `wc2_humans_footman`, `wc2_humans_warcraft3footman`, `wc2_humans_highelfpriest`,
-  `wc2_humans_highelfsorceress`, `wc2_orcs_grunt`, `wc2_orcs_warcraft3grunt`.
-- Updated `docs/design/garrison_exceptions.yaml` to include the real WC2 actor IDs
-  (`wc2_humans_*` / `wc2_orcs_*`) so `audit_garrison_weapons` keeps G1 at 0.
-- Re-ran `extract_stats`, `audit_garrison_weapons`, `find_empty_warhead`, `find_orphan_old_keys`,
-  `audit_warhead_split`, `audit_doc_claims`; boot-gated, no new exceptions.
-
-## 2026-08-24 — Prerequisite order cleanup (47 actors)
-
-- Reordered `Prerequisites` tokens in 47 buildable actors to satisfy the buildable-order audit
-  (production-building tokens first, then tech/building tokens, then promotion/upgrade/doctrine tokens).
-- Used `cameo_model.Model()` and the same classification logic as `tools/audit/audit_buildable_order.py`
-  to resolve each actor, confirm the `Buildable` block lives in the actor's own file, and compute the
-  correct token order while preserving in-group ordering.
-- Changed 16 ContentPack rules files (no weapon files touched):
-  - `mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml`
-  - `mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml`
-  - `mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml`
-  - `mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml`
-  - `mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml`
-  - `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml`
-  - `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml`
-  - `mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml`
-  - `mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml`
-  - `mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml`
-  - `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml`
-  - `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml`
-  - `mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml`
-  - `mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml`
-  - `mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml`
-  - `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml`
-- Verification: `audit_buildable_order.py` reports `Prerequisite order violations: **0**`;
-  `Build palette order violations` remain **1012** and were intentionally left out of scope.
-- Ran `audit_duplicate_keys.py` (0 new D1/D2 from this change), `find_empty_warhead.py` (0),
-  and `extract_stats.py` (re-extracted; `--check` 0 drifted).
-- Updated `docs/audit/latest/buildable_order.md` and `docs/audit/SUMMARY.md` counts.
-- Boot-gate: `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`.
-
-## 2026-08-24 — D1 non-weapon duplicate Inherits fix
-
-- Fixed 80 D1 duplicate `Inherits` / `Inherits@<suffix>` entries across 40 non-weapon YAML files
-  (buildings, defenses, audio, chrome, and a few rules templates) using `audit_duplicate_keys.py`.
-- Each duplicate was split into two separate `Inherits` lines with unique suffixes, preserving
-  original value order so the later value still wins on field conflicts.
-- Skipped all weapon files (`*weapons.yaml` and `mods/cameo/weapons/*`) as Set B work.
-- Re-ran `audit_duplicate_keys.py`: D1 count **88 -> 6** (0 non-weapon remaining, 6 weapon rows
-  still unresolved for Set B).
-- Lowered `D1_BASELINE` in `tools/audit/audit_duplicate_keys.py` from 88 to 6 and updated
-  `docs/audit/SUMMARY.md`.
-- Re-extracted balance ledgers (`extract_stats.py`), `audit_balance_drift` 0, `audit_doc_claims` 19/19 green.
-- Boot-gate: `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`.
-
-## 2026-08-24 — W24 A6 continued: collapse `HammerTankCannonThermobaric` and `KotinCannonThermobaric`
-
-- Cluster: `HammerTankCannonThermobaric` and `KotinCannonThermobaric` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`.
-- Collapsed each onto `^Warhead_CannonFire_Heavy`, preserving per-shot damage sum (16 000).
-- Set `PhysicalStates: Temperature: 25` on the main warhead to preserve the old one-in-four flame meter feed (4 000 / 16 000 total damage).
-- Inlined `ReloadDelay`, `Range`, `Burst`, `BurstDelays`, `Projectile`, `Report` from the parent `HammerTankCannon` / `KotinCannon`; kept `^Projectile_Shell_Heavy` and `^Effect_Flame_Medium` + `^Effect_CannonHE_Heavy` to preserve projectile and effects.
-- Preserved `KotinCannonThermobaric`'s local `Warhead@Radiation` (CreateTintedCells Level 30 / MaxLevel 2000).
-- Preserved custom ground impact effects (`napalm` / `nuke_small`) and `ImpactActors` (`false` / `true`).
-- Verification: `review_resolve_diff` clean (behavioural invariants preserved); `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split` 924 vs baseline 924; `extract_stats --check` 0; `audit_doc_claims` 19/19 green after updating `multi_main_fired_weapons` 910 -> 908 and `BROADCAST_BASELINE` 926 -> 924.
-- Boot-gate: `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`.
-
-## 2026-08-24 — W24 A5/A6: collapse Soviet 120mm thermobaric cannon variants
-
-- Cluster: `ra120mmThermobaric`, `ra120mmThermobaricTargetingComputer`, `ra120mm2Thermobaric`, `ra120mm2ThermobaricTargetingComputer` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`.
-- Collapsed each onto `^Warhead_CannonFire_Heavy`, preserving per-shot damage sums (24 000 / 48 000).
-- Set `PhysicalStates: Temperature: 33` on the main warhead to preserve the old one-in-three flame meter feed.
-- Kept `^Projectile_Shell_Heavy`, `^Effect_CannonHE_Heavy`, `^Effect_Flame_Heavy`, and removed the ground `Warhead@Effect` to match the pre-collapse resolved effects.
-- Verification: `review_resolve_diff` clean (behavioural invariants preserved); `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split` 926 vs baseline 926; `extract_stats --check` 0; `audit_doc_claims` 19/19 green after updating `multi_main_fired_weapons` 914 -> 910.
-- Boot-gate: `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`.
+## 2026-08-28 — Under-200 mixed-role backlog checkpoint
+
+- Consolidated 15 selected roots and their descendant closure across standard bullet, Tesla,
+  concussion, and chemical roles. Two descendant roots retired with their parents, so the active
+  survey falls by 17 overall, from 214 to 197: 196 mixed roots in 157 groups and one isolated root.
+- The resolved 34-weapon comparison preserves every direct main total, every independently rounded
+  percentage application and profile, every valid-target total, projectile, cadence, report, and
+  top-level behavior. Explicit compatibility slices retain the commando's infantry/open-topped
+  damage, Japanese railgun and shield chip, EMP integrity and Temperature feed, sticky/snare
+  conditions, Mutalisk bounce chain, and authored ground/air damage splits.
+- Standard destination-family armor, blast, allied-damage, wall/BulletImmune, death, and meter
+  profiles are the intended gameplay normalization. The classifier now leaves four legacy-only
+  and 193 human-decision roots; broadcast debt falls from 838 to 818. Pricing and the parked
+  percentage-damage runtime fix remain separate.
+- Independent review caught and repaired an EMP relationship regression before publication. The
+  launch test then exposed redundant inherited-warhead removals in the sticky-foam descendants;
+  those loader-invalid removals were deleted without changing their resolved damage. Verification
+  passes 438 tests (11 optional spreadsheet tests skipped), the focused role-profile comparison,
+  all generated-balance and weapon-structure audits, and a controlled 90-second launch with no
+  crash or exception log. The exact test process was stopped afterward.
+
+## 2026-08-28 — Remaining override-free element roles
+
+- Consolidated ten actual roots without descendant flat-damage overrides: Hydra and Leech spit,
+  Lurker and Queen spines, three Forgotten chemical weapons plus both blue Fiend shards, and Yak
+  napalm. Their destinations are standard light/medium/heavy Chemical, medium chemical missile,
+  and heavy Flame roles.
+- Direct totals and all separate percentage applications remain unchanged. Projectiles, cadence,
+  reports, effects, smoke clouds, Leech infection, Queen broodling spawning, and the old
+  ground/air firing declarations remain intact.
+- Standard family armor, blast, allied-damage, wall, death, physical-state, and damage-target
+  profiles are intentional role-normalization consequences. The active survey falls from 224 to
+  214 roots: 211 mixed weapons in 166 groups and three isolated roots. The classifier now has
+  seven corroborated, 12 legacy-only, and 195 human-decision roots; broadcast debt falls from 845
+  to 838. Pricing and the parked runtime fix remain separate.
+- Independent review approved the resolved comparison: exactly the selected ten weapons changed,
+  with no projectile, cadence, effect, condition, top-level, direct-total, or percentage-profile
+  drift. Verification passes 433 tests (11 optional spreadsheet tests skipped), all balance
+  ledgers, generator, inheritance, empty-warhead, orphan-key, and physical-state checks. The
+  controlled pinned-engine launch stayed alive for 90 seconds with no YAML, exception, fatal, or
+  crash log matches; its exact process was stopped.
+
+## 2026-08-28 — Projectile-role backlog checkpoint
+
+- Consolidated 13 actual retired-family roots, covering 34 resolved parent/child weapons, into
+  standard bullet, concussion, cannon, and high-explosive missile roles.
+- Direct shot totals and all independently rounded percentage applications remain unchanged.
+  Projectiles, cadence, reports, effects, integrity damage, recursive shrapnel chains, and
+  descendant overrides remain in place; the Nike main remains explicitly air-only.
+- Intended standard-family consequences are the new armor/blast profiles, allied-damage rules,
+  death types, and target exclusions. The buggy anti-air child now applies its authored air-only
+  canonical override instead of inheriting ground/water-only legacy damage.
+- The active survey falls from 237 to 224 roots: 221 mixed weapons in 175 groups and three
+  isolated roots. The classifier now has 11 corroborated, 18 legacy-only, and 195 human-decision
+  roots. The broadcast-debt ratchet falls from 878 to 845. Pricing and the parked runtime fix
+  remain separate.
+- Independent review caught and repaired actor-center drift, excess CABAL air damage, and an
+  unintended no-friendly-splash override on the GDI Phalanx. Verification passes 430 tests (11
+  optional spreadsheet tests skipped), all 32 balance ledgers, generator, inheritance,
+  empty-warhead, orphan-key, and physical-state checks. The controlled pinned-engine launch stayed
+  alive for 90 seconds with no YAML, exception, fatal, or crash log matches; its exact process was
+  stopped.
+
+## 2026-08-28 — Percentage-safe chemical and flame role batch
+
+- Consolidated 13 roots covering 15 resolved weapons: four light chemical cannons, three heavy
+  chemical weapons, two heavy flamethrowers, and four light/medium/heavy chemical missiles.
+- Every legacy percentage application remains separate under its original key and retains its
+  armor table, spread, targets, statistics behavior, and physical-state binding. Flat totals,
+  cadence, projectiles, effects, reports, conditions, and the ADATS ground/water-only damage target
+  are preserved.
+- The deliberate role changes are the standard destination families' armor tables, compact blast
+  shapes, wall interaction, half allied damage, death types, and tiered Corrosion/Temperature feed.
+  The whole-tree comparator limits these findings to the 15 selected resolved definitions.
+- The active survey falls from 250 to 237 roots: 234 mixed weapons in 186 groups and three isolated
+  roots. The classifier now has 16 corroborated, 26 legacy-only, and 195 human-decision roots. The
+  broadcast-debt ratchet falls from 890 to 878. Pricing and the parked runtime fix remain separate.
+- Verification passes 424 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers,
+  generator, inheritance, empty-warhead, orphan-key, and physical-state checks. Independent review
+  caught and repaired eleven invalid nonexistent-warhead deletions before publication. The final
+  controlled pinned-engine launch stayed alive for 90 seconds with no YAML, exception, fatal, or
+  crash log matches; its exact test process was stopped.
+
+## 2026-08-27 — Remaining rapid/light laser role batch
+
+- Consolidated seven genuine rapid/light laser roots, covering 19 resolved weapons, onto the
+  standard heavy Laser profile: the M16 laser, elite cadre laser, Nod minigunner laser, Lunar
+  Naxis drone laser, Naxis turret laser, elite Beetle laser, and Tank 2 laser families.
+- Flat totals, every independently rounded percentage application, cadence, projectiles, effects,
+  reports, targets, and the legacy 600-damage shield chip are preserved. The Beetle and Tank 2
+  anti-air children retain their original 4000 air plus 4000 ground/water target split through a
+  ground-only compatibility remainder.
+- The intentional role changes are the standard laser impact and armor profile, half allied
+  damage, Explosion death type, Temperature meter, and removal of the old bullet-immunity
+  exclusion so these energy weapons behave as lasers rather than bullets.
+- The refreshed survey reports 250 remaining concrete roots: 247 mixed weapons in 191 groups and
+  three isolated roots. The conservative classifier leaves 195 roots for human decisions, with
+  25 corroborated and 30 legacy-only suggestions. The broadcast-debt ratchet falls from 897 to
+  890. No prices, pricing rules, runtime source, parked percentage-runtime change, or engine pin
+  are included.
+- Independent adversarial review caught a Naxis percentage-warhead inheritance regression before
+  publication. The original inherited slot was restored, the orphan audit learned to distinguish
+  retained percentage overrides from genuinely orphaned flat keys, and the whole-tree comparator
+  now fingerprints percentage armor, shape, targeting, and statistics behavior. Verification
+  passes 421 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers, generator,
+  inheritance, empty-warhead, orphan-key, and physical-state checks. After the repair, a controlled
+  pinned-engine launch stayed alive for 90 seconds without YAML, exception, fatal, or crash log
+  matches; its exact test process was then stopped.
+
+## 2026-08-27 — Remaining direct-hit sniper follow-up
+
+- Consolidated the GDI heavy sniper, Havoc's commando sniper, and Soviet Dragunov away from
+  their retired flat-damage stacks. The GDI and commando rifles now use the infantry-favoured
+  heavy Bullet profile; Dragunov keeps a heavy anti-armour CannonAP profile and air targeting.
+- Every spatial damage path now uses `Spread: 1` and `Falloff: 100, 0`, including percentage,
+  open-topped passenger, friendly-fire, and Dragunov shield-chip damage. This makes all three
+  weapons direct-hit only instead of allowing inherited splash.
+- Dragunov's folded flat damage is deliberately 200000: it still removes about 84% of a baseline
+  Mammoth Tank's health on a centre hit, but no longer one-shots it and loses the stationary
+  return-fire duel. A regression test locks the direct-hit rule, tank-focused armour profile,
+  no-one-shot result, and losing duel.
+- The refreshed active survey reports 257 remaining concrete roots: 254 mixed weapons in 193
+  groups and three isolated roots. The conservative classifier leaves 202 roots for human
+  decisions, with 25 corroborated and 30 legacy-only suggestions. No prices, pricing rules,
+  runtime source, parked percentage-runtime change, or engine pin are included.
+- Verification passes 417 tests (11 optional spreadsheet tests skipped), all balance-ledger,
+  generator, warhead, inheritance, orphan, physical-state, and classifier checks. Independent
+  adversarial review found no blocker. The first launch caught invalid removals of nonexistent
+  generated slots; after repairing them, the pinned engine stayed alive and responsive for 90
+  seconds with no exception, fatal, crash, or YAML error, then its exact test process was stopped.
+
+## 2026-08-27 — Named heavy-laser bulk consolidation
+
+- Consolidated six laser roots and eight resolved weapons onto the standard heavy Laser profile:
+  Black Hand, normal and elite CABAL Hunter-Killers, the Tiberian Sun laser emplacement,
+  Outpost 2 Eden mobile lasers, and the Ordos laser tank.
+- Flat totals, target-specific totals, every independently rounded percentage application,
+  shield-only compatibility chips, cadence, targets, projectiles, effects, reports, and concrete
+  damage are preserved. Black Hand and the Tiberian Sun emplacement retain their lower air total
+  through a ground-and-water-only remainder.
+- The intentional gameplay classification changes are the standard heavy-Laser armor table,
+  tight `Spread: 64` impact shape, half allied damage, Explosion death type, and Temperature meter.
+  The six roots leave the retired-family survey without changing prices, pricing rules, runtime
+  source, the parked percentage runtime fix, or the engine pin.
+- The refreshed active survey reports 260 remaining concrete roots: 257 mixed weapons in 195
+  groups and three isolated roots. The conservative classification report leaves 205 roots for
+  human decisions, with 25 corroborated and 30 legacy-only suggestions. The uniform-stack guard
+  ratchet is lowered from its stale 923 baseline to the measured 898 remaining weapons.
+- Whole-tree comparison preserves main and percentage totals across all 2345 resolved weapons and
+  limits guarded differences to the eight selected laser definitions. Verification passes 415
+  tests (11 optional spreadsheet tests skipped), all 32 balance ledgers, generator, empty-warhead,
+  orphan-key, and physical-state audits. Independent adversarial review found no blocker. A
+  controlled pinned-engine launch stayed alive and responsive for 90 seconds with no exception,
+  fatal, crash, or YAML error line; its exact test process was then stopped.
+
+## 2026-08-27 — Bulk shotgun and sniper profile consolidation
+
+- Consolidated four shotgun roots (seven resolved weapons) onto the standard medium CannonHE
+  damage profile. Four sniper roots (eleven resolved weapons) now use the infantry-favoured
+  standard heavy Bullet profile while retaining reduced damage against vehicle armor.
+- Separate compatibility slices preserve every old damage application instead of combining
+  equal hits. This keeps per-hit integer rounding, event counts, friendly-fire splits, score
+  accounting, `BulletImmune` exclusions, and every independently rounded percentage path intact.
+  Armour-piercing and lockdown sniper descendants retain their extra bullet hits, relationship
+  restrictions, and electrical damage types.
+- The intentional gameplay change is the selected standard CannonHE profile for shotguns and
+  heavy Bullet armor profile for snipers replacing the retired flat profiles. Every resolved
+  sniper damage warhead uses `Spread: 1` with `Falloff: 100, 0`, removing practical splash.
+  Projectiles, impact effects, reports, concrete damage, cadence, targets, damage strengths,
+  relationship restrictions, and damage types are unchanged.
+- Independent reviewers approved the repaired 18-weapon closure. The whole-tree comparator
+  preserves guarded flat and percentage behavior on all 2345 resolved weapons and reports only
+  those 18 intended profile changes.
+- Repaired two survey blind spots: its active central-file list omitted D2K, StarCraft, and
+  Outpost 2 while retaining inactive files, and its top-level-name parser failed to recognize
+  `^Template` blocks. The corrected survey reports 266 concrete roots after this batch (274 on
+  the same corrected basis before it): 263 mixed weapons in 201 groups and three isolated roots.
+  A new machine-readable classification report conservatively leaves 205 roots for human
+  decisions while prioritizing 31 roots where name and legacy evidence agree and 30 with a
+  legacy-only suggestion. It preserves full family-and-tier identities and records flat and
+  percentage hit inventories, physical-state bindings, descendant closure, and descendant
+  old-key overrides for later proposed-diff review.
+- Verification passes 412 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers,
+  generator, empty-warhead, orphan-key, physical-state, and dangling-inheritance checks. A
+  controlled pinned-engine launch stayed alive and responsive for 105 seconds with no exception
+  or crash line, then its exact test process was stopped. Pricing, runtime source, the parked
+  percentage runtime change, and the engine pin remain outside this work.
+
+## 2026-08-27 — Final low-risk single-family weapon cleanup
+
+- Consolidated four isolated active weapons away from their last retired flat-damage family:
+  the FutureTech cryocopter rocket onto medium missiles, the anti-tank mine onto light
+  demolition, the Waveforce chain gun onto medium bullets, and the Tiberian Sun laser 90mm
+  family onto medium anti-armour cannon damage.
+- Percentage-inert compatibility slices preserve the existing flat totals, enemy/ally target
+  splits, score accounting, and the laser's shield-only chip while adopting each selected
+  standard armour and blast profile. Every pre-existing percentage path remains independent, so
+  runtime rounding is unchanged; projectiles, effects, reports, cryo states, and mine exclusions
+  are untouched.
+- `RA2CRM60H` remains the only isolated candidate because its heavy-cannon and medium-bullet
+  signals conflict and its passenger-only damage needs an explicit classification decision. The
+  refreshed active survey now reports 266 concrete retired-family weapons: 265 mixed weapons in
+  201 groups and this one deferred isolated weapon. Pricing, runtime source, the parked percentage
+  runtime change, and the engine pin remain outside this work.
+- Independent review approved all four conversions after checking the actual resolved diff. The
+  whole-tree comparator preserves every guarded behavior across all 2345 weapons and reports only
+  the intended profile shapes. Verification passes 401 tests (11 optional spreadsheet tests
+  skipped), all ledger, generator, warhead, inheritance, and physical-state audits, and a
+  controlled pinned-engine launch that stayed alive and responsive with no new exception log;
+  its exact test process was then stopped.
+
+## 2026-08-27 — Steel Mako cannon-family consolidation
+
+- Consolidated the Steel Mako cannon root and its elite, EMP, and EMP-elite descendants away from
+  the retired medium-flame flat profile onto their already-selected standard medium CannonHE class.
+- A local percentage-inert CannonHE slice preserves the 2000 no-wall flat hit, allied half damage,
+  score/stat accounting, and Temperature binding. EMP variants retain their electrical damage
+  types; all independent flame, demolition, railgun, cannon, chemical, and tesla percentage paths
+  remain separately rounded.
+- Whole-tree comparison preserves every guarded behavior across all 2345 resolved weapons; only
+  the intended CannonHE blast/profile replacement reports on the four Steel Mako definitions.
+  The active survey now reports 270 concrete retired-family weapons: 265 mixed weapons in 201
+  groups and 5 single-family candidates. No prices, pricing logic, runtime source, parked runtime
+  change, or engine pin changed.
+- Independent review approved the CannonHE classification and compatibility design. Verification
+  passes 401 tests (11 optional spreadsheet tests skipped), all ledger/generator/warhead and
+  physical-state audits, and the full resolver comparison. A controlled pinned-engine launch
+  stayed alive and responsive with no new exception log, then its exact test process was stopped.
+
+## 2026-08-27 — RA2 SCUD missile-family consolidation
+
+- Consolidated the active RA2 SCUD root and its Dreadnought, V3 explosion, radioactive,
+  incendiary, tesla, and elite descendants away from the retired medium-flame flat profile.
+- A local standard heavy-missile compatibility slice preserves the original no-wall damage split.
+  The modern demolition and original heavy-missile hits remain independent, as do all three
+  separately rounded percentage contributions; radioactive and V3 children retain their local
+  18000/10000 payloads exactly.
+- Whole-tree comparison preserves flat damage, all active/design-health percentage results,
+  targets, relationships, score/stat accounting, cadence, projectiles, reports, effects,
+  radiation, shields, concrete, and child overrides across all 2345 resolved weapons. Only the
+  selected heavy-missile blast profile changes on the seven SCUD-family definitions.
+- The refreshed active survey now reports 271 concrete weapons on retired families: 265 mixed
+  weapons in 201 groups and 6 single-family candidates. Prices, pricing logic, engine/runtime
+  source, the parked runtime change, and the engine pin remain untouched.
+- Independent review retained the flame hit's Temperature-state binding and extended the
+  comparator to gate singular and mapped physical-state applications, including the engine's
+  disabled-by-default scale. Verification passes 401 tests (11 optional spreadsheet tests
+  skipped), all ledger/generator/warhead/physical-state audits, and the full resolver comparison.
+  The first launch caught redundant child removals rejected by engine MiniYAML; after removing
+  them, the controlled pinned-engine launch stayed alive and responsive with no new exception log,
+  and its exact test process was stopped.
+
+## 2026-08-27 — Naxis quad-cannon flak consolidation
+
+- Consolidated the active Naxis quad-cannon root and eleven ground, anti-air, elite, portable,
+  Sky Mage, and long-range descendants onto the existing standard medium-flak damage profile.
+- Preserved the original payload split: ground variants retain 7000 enemy and 6000 allied flat
+  damage, while anti-air variants retain 5000 Air damage plus the inherited 2000 Ground/Water
+  splash. Compatibility-only flak slices keep allied damage and its score/stat accounting exact.
+- Kept all four independently rounded percentage contributions, every target relationship,
+  projectile, report, effect, shield/concrete behavior, cadence, range, and descendant override.
+- Extended the whole-tree comparator to gate damage by relationship, target, and
+  `UpdatesUnitStatistics`, closing the blind spot found by independent review. It preserves flat
+  and percentage damage at every active/design health value across all 2345 resolved weapons;
+  only the selected medium-flak blast profile changes on the twelve Naxis definitions.
+- The refreshed active survey now reports 272 concrete weapons on retired families: 265 mixed
+  weapons in 201 groups and 7 single-family candidates. Ledgers were refreshed, but prices,
+  pricing logic, engine/runtime source, the parked runtime change, and the engine pin are untouched.
+- Verification: 398 tests pass (11 optional spreadsheet tests skipped); 32 ledgers match live
+  YAML; generator drift, empty warheads, real orphaned old keys, and dangling inheritance targets
+  are zero; the physical-state audit passes. A controlled pinned-engine launch remained alive and
+  responsive through startup with no new exception log, then its exact test process was stopped.
+
+## 2026-08-27 — MiG missile family consolidation
+
+- Consolidated the active MiG missile root and all ten resolved ground-attack, anti-air,
+  radioactive, incendiary, tesla, and elite variants onto the existing standard medium-missile
+  damage profile.
+- Preserved the original target split: 32000 flat damage on Ground/Ship and 24000 on Water for
+  ground-attack variants, while both anti-air variants retain 32000 Air damage. A compatibility-only
+  8000-point standard-profile slice carries the Ground/Ship difference without entering the
+  generated family library or shared pricing model.
+- Kept the three independently rounded percentage hits and every variant-specific projectile,
+  report, effect, fragment, radiation field, smudge, shield, glow, sound, and concrete behavior.
+- Whole-tree comparison preserves flat and runtime percentage damage at every active/design health
+  value, targeting, cadence, projectiles, and non-damage warheads across all 2345 resolved weapons.
+  Only the selected medium-missile blast profile changes on the ten MiG definitions.
+- The refreshed active survey now reports 273 concrete weapons on retired families: 266 mixed
+  weapons in 202 groups and 7 single-family candidates. Pricing and the parked runtime change remain
+  untouched.
+
+## 2026-08-26 — retrospective compatibility repair and missile cleanup
+
+- Independent review found that the earlier one-target percentage comparison hid current-runtime
+  rounding and unchecked-integer overflow differences at other active health values. It also found
+  lost projectile fields, reports, targeting exclusions, glows, shield durations, smudge chances,
+  and one concrete-damage effect. The affected chemical, flame, thermobaric, shotgun, sniper,
+  railgun, and laser weapon blocks were restored from their exact pre-cleanup snapshots. The older
+  consolidation entries below are retained as history but are superseded by this repair.
+- Strengthened `review_batch_diff.py` to compare the runtime result at all 155 active/design health
+  values and to fail on complete resolved top-level operation, projectile definitions, and
+  non-damage warheads. Blast/profile changes remain visible for maintainer review.
+- Consolidated nine missile roots, covering fourteen resolved weapons, onto their already-present
+  standard missile families. Each now uses one standard damage profile; three retain a separate
+  same-profile slice solely to preserve the part of their old damage that could not hit walls.
+  Explicit deletions remove the old
+  flat mains while their independently rounded percentage and presentation behavior remains active
+  until the parked runtime fix is handled separately.
+- Removed the last retired anti-air damage-family inheritance from the two Waveforce armored-car
+  variants. Their 1000-point flat hit is folded into the existing railgun main, while an explicit
+  compatibility percentage hit preserves the old independently rounded result at every active
+  health value. All non-damage behavior remains exactly resolved as before.
+- Whole-history comparison against the original upstream base preserves flat damage, runtime
+  percentage damage at every tested health, cadence, range, targeting, reports, projectiles,
+  effects, smudges, shields, and concrete. The only reported behavioral changes are the selected
+  missile-family blast/profile changes, the two selected Waveforce blast-profile changes, plus the
+  earlier chemical-cannon blast-profile change. The active survey is now 274 concrete legacy-family
+  weapons, with 267 mixed weapons in 203 groups, and the broadcast guard is 923. The survey now
+  counts only the winning active definition when multiple files repeat a weapon name.
+- Verification: 397 tests pass (11 optional spreadsheet tests skipped); all 32 ledgers match live
+  YAML; empty-warhead and orphan-old-key findings are zero; the physical-state audit passes. The
+  first controlled launch caught one restored reference to a wrapper removed by earlier structural
+  cleanup. Removing that stale reference left the explicit equivalent behavior in place; the next
+  launch stayed alive and responsive through startup with no new exception log, then its exact test
+  process was stopped. The comparator now rejects missing weapon parents before resolving them.
+- No pricing values, engine/runtime source, or engine pin changed.
+
+## 2026-08-26 — W24 A15: laser weapon group consolidated
+
+- Collapsed six explicitly laser-identified roots onto `^Warhead_Laser_Heavy`:
+  `RA2CosmonautLaser`, `LunarNaxiDroneLaser`, `NaxLaserT`,
+  `NaxiBeetleLaser_elite`, `NaxiTank2Laser`, and `TSLaser90mm`. Their targeting,
+  lens-upgrade, amplified, anti-air, and deployed descendants inherit the cleanup,
+  giving nineteen resolved definitions.
+- Whole-tree comparison preserves flat and runtime percentage damage on all 2345
+  weapons. Local `PercentageScale` values with whole-percent denominators retain the
+  legacy 4% and 6% totals, including hidden folded CannonAP percentage damage on the TS
+  laser and six inherited percentage twins on the Cosmonaut laser. They also avoid newly
+  exposing the parked Int32 overflow bug on the active 3,750,000-HP maximum target.
+- The shared `^NaxiLegacyLaserDelivery` mixin preserves the legacy hybrid LaserZap fields,
+  reports, targeting, cadence, water/air/ground effects, smudges, shield effects, and
+  concrete damage without retaining any legacy damage family. The standard heavy Laser
+  armor, blast, friendly-fire, and Temperature profile is the intended classification
+  consequence.
+- Survey debt falls 265 -> 259 weapons (253 -> 248 mixed, 202 -> 200 groups), and the
+  broadcast ratchet tightens 901 -> 889.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS. Independent review restored baseline actor-center targeting
+  and the smaller TS impact glow before approval. The first controlled launch caught one
+  redundant missing-key removal that static resolution tolerated; after removing it, the
+  second launch stayed alive and responsive through startup with no new exception log,
+  then its exact test process was stopped.
+- No pricing values, engine/runtime source, engine pin, cadence, or range changed;
+  runtime percentage totals remain exact for every active targetable HP value.
+
+## 2026-08-26 — W24 A14: Steel railgun pair consolidated
+
+- Collapsed `SteelAirTurret` and `SteelStalkerRailgun` from simultaneous legacy
+  Laser/Railgun damage stacks onto `^Warhead_Railgun_Heavy`. Their EMP, elite, and
+  scatter descendants inherit the cleanup, giving eight resolved definitions.
+- Whole-tree comparison preserves flat and runtime percentage damage on all 2345
+  weapons. The legacy 600-point Laser residual is folded into each new railgun main;
+  local percentage scales preserve every descendant's reference-target total exactly.
+- Resolver comparison preserves targeting, cadence, range, reports, railgun and scatter
+  projectiles, air/ground impacts, smudges, shield effects, and concrete damage. The
+  standard heavy Railgun armor/blast profile replaces the simultaneous Laser/Railgun
+  profiles as the intended classification consequence.
+- Survey debt falls 267 -> 265 weapons (255 -> 253 mixed), and the broadcast ratchet
+  tightens 907 -> 901.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS. Independent review caught and verified the restoration of
+  one inherited `ImpactActors: false`; no blockers remain. A controlled launch remained
+  alive and responsive through startup with no new exception log, then its exact test
+  process was stopped.
+- No pricing, engine/runtime source, engine pin, or percentage-damage runtime behavior
+  changed.
+
+## 2026-08-26 — W24 A13: active sniper family consolidated
+
+- Collapsed `AsianSniper`, `GhostSniper`, `SpecterSniper`, and `VonSniper` onto
+  `^Warhead_Bullet_Heavy`. Their AP, bunker, and
+  lockdown children inherit the cleanup, giving eleven resolved definitions in
+  the batch.
+- Whole-tree comparison preserves flat and runtime percentage damage on all 2345
+  weapons. The AP children preserve 92000 flat damage; the lockdown children keep
+  their Tesla and EMP components separate and unchanged. A local
+  `PercentageScale: 2308` preserves the inherited Ghost/Specter lockdown percentage
+  totals exactly after their sniper components are folded.
+- Resolver comparisons preserve cadence, range, reports, bullet projectiles and
+  contrails, ground/water/air impacts, shield duration and sounds, and 25 concrete
+  damage. The standard heavy Bullet armor profile replaces the five simultaneous legacy
+  CannonHE/Missile/Flak/Bullet profiles. All resolved spatial damage warheads use a
+  one-world-unit impact footprint, removing practical splash while keeping positional
+  projectile hits functional; this is the intended classification consequence.
+- Survey debt falls 271 -> 267 weapons (259 -> 255 mixed, 203 -> 202 groups), and
+  the broadcast ratchet tightens 912 -> 907.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS. A controlled launch remained alive and responsive through
+  startup with no new exception log, then its exact test process was stopped.
+- No pricing, engine/runtime source, engine pin, or percentage-damage runtime
+  behavior changed.
+
+## 2026-08-26 — W24 A12: active shotgun family consolidated
+
+- Collapsed `FutureEnforcerShotgun`, `TSCommandoShotgun`, `TSMutShotgun`, and
+  `TSShotgun` onto one `^Warhead_CannonHE_Medium` damage family each. The FutureTech
+  elite/deployed children inherit the cleanup, giving seven resolved definitions in the
+  batch.
+- Preserved flat totals at 12000/48000/24000/24000 and their exact reference-target
+  percentage totals. Resolver comparisons also preserve cadence, range, reports, the
+  legacy 50CAL projectile and contrail, ground/water/air impacts, shield duration and
+  sounds, smudges, glow, and 25 concrete damage.
+- The standard medium CannonHE armor/blast profile replaces the six simultaneous legacy
+  CannonHE/Grenade/Shrapnel/TankDestroyer/SmallArms/Chaingun profiles. This is the intended
+  classification consequence; no pricing or runtime arithmetic changed.
+- Combined with A11, whole-tree comparison preserves flat and percentage damage on all
+  2345 weapons and reports exactly 14 intended blast-profile replacements. Survey debt
+  falls 275 -> 271 weapons (263 -> 259 mixed, 204 -> 203 groups), and the broadcast
+  ratchet tightens 919 -> 912.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers match
+  live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0; physical-state
+  audit PASS. A controlled launch remained alive and responsive through startup with no new
+  exception log, then its exact test process was stopped.
+
+## 2026-08-26 — W24 A11: Soviet thermobaric missile group consolidated
+
+- Collapsed seven resolved definitions in one coherent batch: `v1rocketsThermobaric`,
+  `HindMissilesThermobaric`, both Mammoth Tusk thermobaric weapons and their targeting-
+  computer children, and `MonsterTankTuskThermobaric`. They now use the medium or heavy
+  `MissileThermobaric` family instead of broadcasting one damage number through three to
+  eight unrelated legacy families.
+- Whole-tree comparison preserves flat and percentage damage on all 2345 weapons. The
+  seven replacements adopt the intended standard thermobaric blast and armor profile;
+  resolver comparisons preserve targeting, cadence, range, reports, projectile operation,
+  contrails, water/air/ground impacts, smudges, ground fire, shield effects, glow, and
+  concrete damage.
+- Preserved the Monster Tank's legacy 106000 flat versus 112000 reference-target percentage
+  totals with a local `PercentageScale: 10566`; this avoids silently normalizing an existing
+  gameplay asymmetry during structural cleanup.
+- Survey debt falls 280 -> 275 weapons (268 -> 263 mixed, 208 -> 204 groups), and the
+  broadcast ratchet tightens 926 -> 919. `ThermobaricMaverick` remains separate because its
+  nuclear effect/upgrade identity needs an explicit classification decision.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers match
+  live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0; physical-state
+  audit PASS. A controlled launch remained alive and responsive through full startup with no
+  new exception log, then its exact test process was stopped.
+- No pricing, engine/runtime source, engine pin, or percentage-damage runtime behavior was
+  changed.
+
+## 2026-08-26 — W24 A10: thermobaric grenade pair consolidated
+
+- Collapsed `GrenadeThermobaric` and its inherited `GrenadeThermobaricExplode`
+  variant onto `^Warhead_Thermobaric_Light`.
+- Preserved 16000 flat damage on the fired grenade and 17000 on the explosion
+  variant. The latter includes a legacy 1000-damage node whose FriendlyFire name
+  had no ally-only relationship filter; the resolved behavior, not the label, is
+  authoritative. Folded percentage damage remains exact through a local scale.
+- Resolver comparisons preserve timing, range, report, grenade trajectory and
+  contrail, water and flame impacts, smudges, ground fire, shield effects, glow,
+  and concrete damage. The standard light Thermobaric armor, blast, friendly-fire,
+  and Temperature profile is the accepted classification consequence.
+- Updated `review_resolve_diff.py` to recognize friendly-fire twins by their actual
+  relationship filter. Whole-tree comparison preserves flat and percentage damage
+  for all 2345 weapons and reports only the two intended blast-profile replacements.
+- Survey debt falls 281 -> 280 weapons (269 -> 268 mixed), and the broadcast ratchet
+  tightens 927 -> 926. Verification: 394 tests passed (11 optional spreadsheet tests
+  skipped); 32 ledgers match live YAML; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, or range was changed. No game was
+  launched per maintainer instruction.
+
+## 2026-08-26 — W24 A9: redundant flame and chemical tier stacks collapsed
+
+- Collapsed `HarakanF` and `MutHFlamer` from paired medium/heavy Flame mains onto
+  `^Warhead_Flame_Heavy` at 4000 and 40000 damage.
+- Collapsed `TSFiendShardUP`, `TSChemsprayUP`, and `TSVisceroidSprayUP` from
+  light+medium+heavy Chemical stacks onto `^Warhead_Chemical_Heavy` at 18000,
+  96000, and 30000 damage.
+- Flat and percentage totals remain exact for all five. Resolver comparisons preserve
+  timing, bursts, reports, projectile operation, custom clouds/effects, smudges, ground
+  fire, shield effects, and concrete damage.
+- Standard Heavy Flame/Chemical armor, blast, friendly-fire, and meter profiles are the
+  accepted tier-classification consequences. The Forgotten heavy-flamethrower correction
+  adds one role-shift row for its later chemical upgrade; upgrade findings are now 74.
+- Whole-tree comparison preserves flat and percentage damage for all 2345 weapons and
+  reports only the five intended blast-profile replacements. Survey debt falls 286 -> 281
+  weapons (274 -> 269 mixed, 209 -> 208 groups), while broadcast debt falls 932 -> 927.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; empty-warhead 0; orphan-old-key real bugs 0; physical-state audit
+  PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched per maintainer instruction.
+
+## 2026-08-26 — W24 A8: medium plasma pair consolidated
+
+- Collapsed `PlasmaFlamer` and `MutFlamerChem` from paired
+  `^MediumFlameWeapon` + `^MediumChemicalWeapon` mains onto the existing
+  `^Warhead_Plasma_Medium` family at 4000 and 42000 damage.
+- Flat totals and folded percentage totals (2% and 21%) are exact. Resolver
+  comparisons preserve cadence, burst operation, reports, projectiles, custom impact
+  visuals, corrosion cloud, smudges, ground fire, shield effects, and concrete damage.
+- The standard Plasma armor, blast, friendly-fire, Temperature, and Corrosion profile
+  is the accepted classification consequence. Upgrade-audit findings fall 75 -> 73 as
+  two old mixed-family role-shift rows disappear.
+- Whole-tree comparison preserves flat and percentage damage for all 2345 weapons;
+  only the two intended blast-profile replacements are reported. Survey debt falls
+  288 -> 286 weapons (276 -> 274 mixed), and the broadcast ratchet tightens 933 -> 932.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; empty-warhead 0; orphan-old-key real bugs 0; physical-state audit
+  PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched per maintainer instruction.
+
+## 2026-08-26 — W24 A7: light chemical-cannon group consolidated
+
+- Collapsed `TSHighVelocityChem`, `TSHighVelocity2Chem`, `TSHighVelocityTurChem`,
+  and `CabalDissolverSpray` from paired `^LightChemicalWeapon` and
+  `^TankDestroyerCannon` mains onto `^Warhead_CannonChem_Light`.
+- Main totals remain 45000, 60000, 72000, and 4000. Folded percentage totals also
+  remain exactly 22%, 31%, 37%, and 2%; the two larger Forgotten weapons retain a
+  legacy extra 1% that had survived through misspelled local override keys.
+- Resolver comparisons preserve cadence, range, reports, projectile type and accuracy,
+  custom corrosion clouds/conditions, smudges, water/air impacts, shield behavior, and
+  concrete damage. The standard CannonChem armor, blast, friendly-fire, and corrosion
+  profile is the accepted classification consequence.
+- Extended `review_batch_diff.py` to compare authored percentage damage using the runtime
+  integer model as well as flat main totals. This caught the inherited 1% hits before the
+  checkpoint and now passes across all 2345 weapons.
+- Survey debt falls 292 -> 288 weapons (280 -> 276 mixed, 210 -> 209 groups), and the
+  W24 broadcast ratchet is tightened from 939 to the current 933.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; empty-warhead 0; orphan-old-key real bugs 0; physical-state audit
+  PASS; generator drift 0; `git diff --check` clean.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched per maintainer instruction.
+
+## 2026-08-26 — W24 A6: Forgotten chemical turret pair consolidated
+
+- Collapsed `TS70mmTurChem` from three 4000-damage mains onto
+  `^Warhead_CannonChem_Light` at 12000, and `TSScoopDualTurChem` from three
+  16000-damage mains onto `^Warhead_CannonChem_Medium` at 48000.
+- Resolver comparisons caught projectile/effect inheritance that the removed old parents
+  had supplied. Those surviving fields were restored locally: Ratty turret inaccuracy,
+  both ground/air explosion sets, Scooper water effect, and both concrete-damage values.
+  Final comparisons preserve projectile behavior, reports, effects, smudges, clouds,
+  shield behavior, and concrete damage.
+- Main totals are preserved. Standard CannonChem armour/blast profiles are the accepted
+  classification consequence: the upgraded broken Ratty turret now bottoms at 0.98x
+  versus Wood; the broken Scooper turret at 0.83x versus Wood and 0.91x versus None.
+- Whole-tree comparison preserves every unchanged-name weapon's main total. The survey
+  falls 294 → 292 (mixed 282 → 280), and W24 broadcast debt falls 936 → 934 versus the
+  939 ratchet.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 balance
+  ledgers match live YAML; empty-warhead 0; orphan-old-key real bugs 0; dangling
+  inheritance targets 0; physical-state audit PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched, and nothing was committed or pushed.
+
+## 2026-08-26 — W24 A5 complete: final D2K one-user wrapper pairs removed
+
+- Removed the dedicated projectile/effect wrappers for `D2K_TowerMissile` and
+  `mtank_pri2`, one weapon at a time. Both now inherit the generic D2K heavy-missile
+  projectile/effect parents and keep their surviving weapon-specific fields locally.
+- Exact resolved comparisons preserve both weapons' complete projectile guidance,
+  trails/contrails, speeds, accuracy, launch behavior, warhead order, explosions, sounds,
+  smudges, shield effects, concrete damage, and Tower Missile ground-fire effect.
+- This clears all 14 live one-user templates created by the W24 batch. The older plan's
+  27-template figure was an historical estimate; the refreshed upstream-based census found
+  14 still live at this checkpoint, and all 14 have now been removed.
+- Whole-tree comparison preserves main-damage totals for every unchanged-name weapon.
+  The only blast-profile differences remain the three accepted A3 family corrections.
+- Final verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 balance
+  ledgers match live YAML; empty-warhead 0; orphan-old-key real bugs 0; dangling inheritance
+  targets 0; physical-state audit PASS; generator drift 0; and W24 broadcast debt remains
+  below its ratchet at 936 versus 939. The old-family survey remains 294 weapons.
+- No pricing, engine/runtime source, pin, cadence, range, or damage was changed. No game
+  was launched, and nothing was committed or pushed.
+- Trialed the next survey pair, `ArmoredCarMGWaveforce` and its AA variant, by removing
+  their apparently shadowed `^HeavyAAWeapon` parent. The resolver exposed a hidden 1000
+  damage plus percentage component, so the trial was fully reverted. Both weapons again
+  resolve exactly to upstream and are deferred to a deliberate multi-main collapse.
+
+## 2026-08-25 — W24 A5: D2K Rocket Trooper projectile wrappers removed
+
+- Removed five one-user projectile wrappers for `D2K_Rocket_Trooper`,
+  `D2K_Rocket_Trooper1`, `D2K_Rocket_Trooper2`, `D2K_Rocket_Trooper_AA`, and
+  `D2K_Rocket_Trooper_AGOnly`. Each weapon now inherits the corresponding generic
+  projectile family and keeps its D2K-specific projectile fields locally.
+- Full inheritance comparisons are exactly equal for all five weapons: projectile type,
+  image, palette, trail, speed, inaccuracy, launch behavior, warheads, effects, and
+  concrete damage are unchanged. This deliberately preserves the unusual AG-only weapon's
+  missile projectile on top of the generic grenade parent.
+- Final verification: all unchanged-name weapons preserve main-damage totals; 394 tests
+  passed (11 optional spreadsheet tests skipped); 32 balance ledgers match live YAML;
+  empty-warhead 0; orphan-old-key real bugs 0; dangling inheritance targets 0;
+  physical-state audit PASS; generator drift 0; W24 broadcast debt remains below its
+  ratchet at 936 versus 939. The old-family survey remains 294 weapons.
+- No pricing, engine/runtime source, pin, weapon operation, or accepted A3 profile was
+  changed. No game was launched, and nothing was committed or pushed.
+
+## 2026-08-25 — W24 A4 naming cleanup + A5 one-user-template pilot
+
+- Aligned the RA1 rocket-upgrade name with its active thermobaric payload, including its
+  condition, icon, player-facing text, AI references, sequences, and survival-map script.
+  Also renamed the Su-57 weapons away from the obsolete nuclear wording and renamed the
+  Monster Tank thermobaric weapon to its active inferno family. `safe_rename.py` changed
+  89 references in 12 text files plus the icon; no old identifiers remain, and weapon
+  values did not change.
+- Removed five templates that each had exactly one consumer: the Juggerboat artillery
+  projectile, Dune siege-mortar projectile and effect, D2K 155mm2 effect, and Fremen RPG
+  blast effect. The surviving fields now live with their sole consumers or use the
+  appropriate generic parent.
+- Full inheritance comparisons are exactly equal for all five consumers. The mortar
+  comparison caught an inheritance-order trap: later `^D2K_Cannon` already overrode the
+  apparent one-user template's speed, inaccuracy, and explosion, so those dead values
+  were not copied into the live weapon.
+- This is a structure-only pilot. No prices, engine/runtime source, weapon damage, or
+  weapon operation were changed. Verification is static-only; no game was launched at
+  maintainer request.
+- Final verification: all 2342 unchanged-name weapons preserve main-damage totals; the three
+  renamed weapons are name-only changes, and the five A5
+  consumers preserve their fully resolved warheads and projectile invariants exactly;
+  394 tests passed (11 optional spreadsheet tests skipped); 32 balance ledgers match the
+  live rules; empty-warhead 0; orphan-old-key real bugs 0; dangling inheritance targets 0;
+  physical-state audit PASS; generator drift 0; and `git diff --check` clean. The refreshed
+  old-family survey remains 294 weapons (12 pure single, 282 mixed in 210 groups). The only
+  Fluent missing-key finding is the pre-existing `upgrade_burninglasers.description`.
+
+## 2026-08-25 — W24 A3: Japanese plasma-bomb consolidation
+
+- Refreshed `phase_b_survey.md` from upstream master `95c7cba27`: 294 concrete
+  weapons remain on old full-stack families (12 pure single, 282 mixed in 210 groups).
+- Trialed the two documented `CannonChem` corrections first, then backed them out when
+  `audit_upgrade_regression.py` added role-shift findings for the Ratty and Scooper tanks.
+- Collapsed `JapanesePlasmaBomb` onto the existing `^Warhead_Plasma_Heavy`. Its 30000
+  main-damage total, cadence, range, targets, projectile, reports, effects, and concrete
+  damage stay fixed. The old chemical/fire/demolition radial profiles become the standard
+  Plasma profile; the upgrade audit reports 0.96x versus Wood. The maintainer accepted
+  family-profile changes that directly result from correcting a weapon classification.
+- Finished A3 by collapsing `TS70mmChem` onto `^Warhead_CannonChem_Light` at 6000
+  and `TSScoopDualChem` onto `^Warhead_CannonChem_Medium` at 30000. Their cadence,
+  range, projectile, reports, effects, and concrete damage stay fixed; their standard
+  Chemical Cannon profiles make the upgraded Ratty 0.75x and Scooper 0.80x versus Wood.
+- `review_batch_diff.py` preserves main damage on all 2345 weapons and reports the three
+  accepted family-profile changes. Verification: 394 tests passed (11 skipped); 32
+  balance ledgers clean; empty-warhead 0; orphan-old-key real bugs 0; physical-state
+  audit PASS; generator drift 0. Pricing and the percentage-damage runtime source remain
+  untouched. Verification is static-only and in-game review is deferred by maintainer request.
 
 ## 2026-08-24 — old-repo reconciliation, no-file-change merge, full verification
 

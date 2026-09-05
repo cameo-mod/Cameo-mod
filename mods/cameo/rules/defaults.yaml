@@ -1576,7 +1576,7 @@
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@VehicleBuffs: ^VehicleBuffs
 	Inherits@upgrade: ^LightWeightArmorPlating
-	Inherits@AdvancedGuerillaTactics2: ^AdvancedGuerillaTactics
+	Inherits@guerillaupgrade: ^AdvancedGuerillaTactics
 	Armor:
 		Type: Scout
 	RevealsShroud:
@@ -1598,7 +1598,7 @@
 	Inherits@detect: ^GenericAllDetector
 	Inherits@VehicleBuffs: ^VehicleBuffs
 	Inherits@upgrade: ^LightWeightArmorPlating
-	Inherits@AdvancedGuerillaTactics3: ^AdvancedGuerillaTactics
+	Inherits@guerillaupgrade: ^AdvancedGuerillaTactics
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -2408,6 +2408,7 @@
 	Inherits@StealthGenCloakable: ^StealthGenCloakable
 	Inherits@LockOn: ^LockOn
 	Inherits@ivan: ^BombAttachable
+	Inherits@stealthgencloak: ^StealthGenCloakable
 	Inherits@shielded: ^ShieldedShieldable
 	Inherits@chrono: ^ChronoBeamable
 	Inherits@base-reveal: ^Base-reveal
@@ -2736,6 +2737,7 @@
 
 ^Submarine:
 	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
 	Cloak@underwater:
 		DetectionTypes: Underwater
 		InitialDelay: 0
@@ -2763,8 +2765,6 @@
 		RequiresCondition: underwater
 	WithColoredSelectionBox@UnderBridge:
 		RequiresCondition: underbridge && !underwater
-	Targetable:
-		TargetTypes: Ground, Water, Ship, Submarine
 	Targetable@Underwater:
 		TargetTypes: Submarine, Underwater
 		RequiresCondition: underwater
@@ -3630,8 +3630,6 @@
 		MaxMoveDelay: 750
 	MapEditorData:
 		Categories: Civilian infantry
-	Passenger:
-		CustomPipType: civilian
 
 ^Monster:
 	Inherits@1: ^ExistsInWorld
@@ -3722,7 +3720,6 @@
 	Voiced:
 		VoiceSet: AntVoice
 	WithDamageOverlay:
-	CombatDebugOverlay:
 	KillsSelf:
 		RequiresCondition: invulnerability
 	Chronoshiftable:
@@ -4085,6 +4082,7 @@
 		RepairStep: 200
 		PlayerExperience: 10
 		RepairingNotification: Repairing
+		RepairCondition: repairing
 	WithDeathAnimation:
 		DeathSequence: dead
 		DeathSequencePalette: ra2player
@@ -4137,6 +4135,8 @@
 		IsPlayerPalette: True
 		Scale: 0.40
 		ScaleWithZoom: True
+		Offsets:
+			powerdown: -10, 0
 	GrantCondition@disable:
 		Condition: disabled
 		RequiresCondition: (empdisable || superfreeze || chronobeamed || diskdrain || being-captured) && !invulnerability
@@ -4178,11 +4178,6 @@
 	GrantConditionOnBotOwner@defensebot:
 		Condition: defensebot
 		Bots: defenseai
-	RepairableBuilding:
-		RepairCondition: repairing
-	WithBuildingRepairDecoration:
-		Offsets:
-			powerdown: -10, 0
 	ActorStatValues:
 		Stats: Armor, Sight, Power
 	WithIdleOverlay@shrouded:
@@ -5563,7 +5558,7 @@
 		LowerValue: -20000
 	WithPhysicalStateColoredOverlay@CryoFreeze:
 		PhysicalStateName: Temperature
-		MinColor: 88BBFF64
+		MinColor: 88BBFF33
 		MaxColor: 4488FF08
 		UpperValue: -200
 		LowerValue: -20000
@@ -5577,7 +5572,7 @@
 	WithPhysicalStateColoredOverlay@Overheating:
 		PhysicalStateName: Temperature
 		MinColor: FF884408
-		MaxColor: FF40207B
+		MaxColor: FF402033
 		UpperValue: 20000
 		LowerValue: 200
 	WithIdleOverlay@overheat:
@@ -5737,15 +5732,9 @@
 	WithColoredOverlay@corroded:
 		RequiresCondition: corroded
 		Color: 44FF4444
-	WithIdleOverlay@corroded:
-		RequiresCondition: corroded
-		Image: explosion
-		Sequence: nax_corr_frag
-		StartSequence: nax_corr_frag
-		Palette: ra2effect
 	# --- Corrosion METER (physical-state axis). ADDITIVE + inert until a weapon feeds it via
 	# AreaDamage PhysicalStateName: Corrosion / PhysicalStateScale. Green tint 200->20000; effects
-	# open at 1% (Corroding); nax_corr_frag pulse at max. Binary `corroded` above kept until the
+	# open at 1% (Corroding). Binary `corroded` above is kept until the
 	# Schwarzer Mond weapons are migrated onto the meter. See docs/design/PHYSICAL_STATE_SYSTEM.md.
 	PhysicalState@Corrosion:
 		Name: Corrosion
@@ -5783,8 +5772,8 @@
 		LowerValue: 20000
 	WithPhysicalStateColoredOverlay@Corrosion:
 		PhysicalStateName: Corrosion
-		MinColor: 44FF4422
-		MaxColor: 00FF0088
+		MinColor: 44FF4404
+		MaxColor: 00FF001A
 		UpperValue: 20000
 		LowerValue: 200
 	ChangesHealthProportionalToPhysicalState@Corrosion:
@@ -5818,14 +5807,6 @@
 		DamageMultiplierAtMaximum: 150
 		UseDeviationFromRelaxed: true
 		RequiresCondition: Corroding
-	WithIdleOverlay@CorrosionPulse:
-		RequiresCondition: CorrosionMax
-		Image: explosion
-		Sequence: nax_corr_frag
-		StartSequence: nax_corr_frag
-		Palette: ra2effect
-		IsDecoration: True
-
 ^AffectedByHealingField:
 	ExternalCondition@HealingField:
 		Condition: HealingField
@@ -6946,7 +6927,7 @@ CPQDEBUGDUMMY:
 	WithStoresResourcesPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
-		PipCount: 7
+		PipCount: 10
 	SpeedMultiplier@HARVBALANCE:
 		RequiresCondition: harv-balance
 		Modifier: 138
@@ -6956,14 +6937,9 @@ CPQDEBUGDUMMY:
 		Stats: Armor, Sight, Speed, None, None, None, Harvester
 	StoresResources:
 		Resources: Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, RA2Copper, RA2Silver, RA2Ore, RA2Gems, SCMinerals, GESupplies, SWPCarbon, SWRCarbon, SWDCarbon, SWPNova, SWCNova, SWPMin, SWCMin, Spice, SCGas, SCGas2, SCGas3, SCMineralsChunk, SCRMinerals, DRWater, DRTaelon, D2Spice, D2SpiceDense, SWFarms, OP2Ore2, OP2Ore
-	DockClientManager:
 	Selectable:
 		Priority: 7
 		DecorationBounds: 1536, 1536
-	WithStoresResourcesPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: true
-		PipCount: 10
 
 ^RearmableAircraft:
 	Rearmable:
@@ -8581,7 +8557,6 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 200
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		BuildLimit: 1
 		IconPalette: cameo
 	Valued:
 		Cost: 5000
@@ -8603,13 +8578,13 @@ CPQDEBUGDUMMY:
 		Range: 10000
 		RequiresCondition: !disabled
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@swlimit:
+		RequiresPrerequisites: global-swlimit
 
 ^PrimarySuperweapon:
 	Inherits: ^Superweapon
 	Valued:
 		Cost: 10000
-	ProvidesPrerequisite@swlimit:
-		RequiresPrerequisites: global-swlimit
 
 ####################################################################################################
 #		Generals

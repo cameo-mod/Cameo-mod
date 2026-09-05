@@ -57,7 +57,7 @@ FLAT_VALUES = {"Light": 45, "Medium": 55, "Heavy": 65}   # main SpreadDamage vs 
 FLAT_PCT = {"Light": 5, "Medium": 8, "Heavy": 10}        # its modest % chip
 # PCT / "%-equalizer" (Magic): tiny flat + a LARGE uniform % of max HP (ignores armor) = giant-killer.
 MAGIC_MAIN = {"Light": 22, "Medium": 27, "Heavy": 32, "Super": 38}   # Magic flat = 1/2 Sonic flat (uniform)
-MAGIC_PCT  = {"Light": 25, "Medium": 40, "Heavy": 50, "Super": 65}   # Magic %-of-maxHP Versus = 5x Sonic %-chip (Damage stays 1-per-2000 grid)
+MAGIC_PCT  = {"Light": 25, "Medium": 40, "Heavy": 50, "Super": 65}   # Magic percentage profile; magnitude follows main Damage through PercentageScale
 
 
 def block_seq(group, direction):
@@ -853,9 +853,9 @@ NON_ARMOR_ROWS = ("Shield",) + tuple(PLATING_CYCLE)
 # lever is the CEILING, not this function — under mean-100 a peak of 2x the average is
 # arithmetic, not policy.
 #
-# ⚠ **Scope: the MAIN warhead only.** The `_Percentage` twin encodes its magnitude IN
-# its Versus rows (`Damage` is a fixed 1-per-2000 grid), so normalising it would multiply
-# every %-effect by ~5x. Rebasing the twins is W18's atomic job.
+# ⚠ **Scope: the MAIN warhead only.** `PercentageVersus` encodes the percentage half's
+# armor profile while `PercentageScale` derives its magnitude from main Damage, so
+# normalising those rows would multiply every percentage effect by ~5x.
 MEAN_TARGET = 100.0
 
 
@@ -1443,17 +1443,6 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
     allr = sorted(CANON16)
     for level in levels:
         li = list(LEVELS).index(level)
-        # W18: the %-twin's Damage is in BASIS POINTS (0.01% steps), read against
-        # `PercentageDenominator: 10000` below. 2000 flat -> 20 = 0.20%.
-        # ⚠ This, the x5 Versus and the denominator are ONE change and must never ship apart:
-        # they cancel exactly (Damage x20, Versus x5, then /100 by the denominator), so the
-        # resolved percentage damage is identical. Ship any one alone and every twin deals a
-        # fifth or five times.
-        # It also removes a LATENT floor bug: `damage // 2000` returned 0 — literally no
-        # percentage damage at all — for any family under 2000 main damage. Measured: no family
-        # is currently below 2000, so nothing was actually losing damage; the trap was waiting
-        # for the first cheap family anyone added.
-        pct_damage = damage // 100
         if versus_override is not None:          # blend family (e.g. Plasma = avg of Flame + Chemical)
             main, pct = versus_override(level)
             main = finish_blend(main, name)      # ordering law, re-derive Heroic/Airborne, un-flatten
@@ -1466,7 +1455,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         elif mode == "pct":                      # Magic: 1/2 Sonic flat + 5x Sonic %-of-maxHP (giant-killer)
             mv = MAGIC_MAIN[level]
             main = [("Shield", mv)] + [(a, mv) for a in allr]
-            pv = MAGIC_PCT[level]                 # %-magnitude in VERSUS (scales with main); Damage stays 1
+            pv = MAGIC_PCT[level]                 # percentage profile; magnitude follows main Damage
             pct = [("Shield", pv)] + [(a, pv) for a in allr]
             hz = None
         else:                                    # standard sloped profile
@@ -1480,12 +1469,10 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             # the even ramp and split them off from the parent they inherit.
             main = (reference_main(profile_family or name, order16, level)
                     or table(order16, step, 100, mfloor, 100 + mfloor))
-            # ⚠ The %-twin stays the 1-step ladder, deliberately. Its window is only
+            # PercentageVersus stays the 1-step ladder, deliberately. Its window is only
             # 16 wide (`ptop` down to `ptop-15`), so 16 armors that must all differ
-            # can ONLY be the even ramp — there is no room left for a shape. Giving
-            # it one needs W18's x5 rebase to open the window, and W18 must land as
-            # one change (denominator + values) or every %-twin deals a fifth or
-            # five times. Until then the twin carries the ORDER, not the shape.
+            # can only be the even ramp — there is no room left for a second shape.
+            # PercentageScale supplies the magnitude; this table carries the armor order.
             pct = table(order16, 1, ptop, pfloor, ptop + pfloor)
             hz = overlays
         # W25 S2 — the class tilt, BEFORE the mean is pinned: the tilt moves output between
@@ -1569,7 +1556,6 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         integ = FAMILY_INTEGRITY_SCALE.get(name)  # ELECTRONICS (EMP) auto-drain — NOT a shield
         if integ:
             main_wh.append(f"\t\tIntegrityScale: {integ}")
-        percentage_state = FAMILY_PHYSICAL_STATE.get(name) if name in {"Flame", "Chemical", "Inferno", "Cryo"} else None
         # ⭐ THE FOLD (UNIFIED_AREADAMAGE_WARHEAD.md). The percentage half is no longer a second
         # warhead — it is four fields on the main one, so an inline weapon carries ONE Damage
         # number and the percentage follows from it instead of being hand-typed alongside and
@@ -1579,7 +1565,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         #
         # ⚠ NO x5 on these Versus values. W18 multiplied the standalone twin's band by 5 to pair
         # with `Damage = flat // 100`; the fold derives its own basis points as
-        # `Damage x PercentageScale / 2000`, which already carries that factor. (D/100)x5V is
+        # `Damage x PercentageScale / 200000`, which already carries that factor. (D/100)x5V is
         # (D/20)xV, so PercentageVersus stays in the natural band.
         #
         # IntegrityScale, PhysicalStateName/Scale and PhysicalStates already sit on the main
@@ -2167,7 +2153,7 @@ def blend_versus(parents):
 # Storm = Ixian Tesla + Magic superweapon blend (maintainer 2026-08-10). The SUPER tier is the 3-way
 # AVERAGE of Tesla_Super main + its full ExtraDamage chip + the new Magic — for BOTH the flat main and
 # the %-twin. Every lower tier is that SUPER profile SCALED by WC[level]/WC[Super]. The %-magnitude lives
-# in Versus (Damage stays the 1-per-2000 grid, so it scales with the weapon).
+# in PercentageVersus while PercentageScale derives magnitude from the main Damage.
 STORM_LEVELS = ["Light", "Medium", "Heavy", "Super"]
 
 

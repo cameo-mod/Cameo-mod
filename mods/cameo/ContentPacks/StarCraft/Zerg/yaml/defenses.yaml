@@ -10,6 +10,7 @@ zerg_creepcolony:
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@weapon: ^ZergMissileWeaponUpgrades
 	Inherits@range: ^GroovedSpinesUpgrade
+	Inherits@plug: ^BuildingPlugProducer
 	-WithTurretSearchlight:
 	Tooltip:
 		Name: Creep Colony

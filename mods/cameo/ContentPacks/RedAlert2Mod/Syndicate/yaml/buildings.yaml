@@ -97,7 +97,6 @@ latinsyndicate_combatbarracks:
 		Range: 6666
 	ActorStatValues:
 		Stats: Armor, Sight, Cargo, Kills, Experience
-	GivesBuildableArea:
 
 latinsyndicate_recyclingrefinery:
 	Inherits: ^RA2Building
@@ -278,12 +277,8 @@ latinsyndicate_spycenter:
 	SupportPowerChargeBar:
 	ProvidesPrerequisite:
 	WithIdleOverlay@lights:
-		Sequence: idle-lights
-		RequiresCondition: !build-incomplete
-	WithIdleOverlay@lights:
 		Sequence: idle-lights2
 		RequiresCondition: !build-incomplete
-	SupportPowerChargeBar:
 	DetonateWeaponPowerCA:
 		AllowMultiple: false
 		OrderName: TraitorsPower
@@ -385,7 +380,6 @@ latinsyndicate_defensebureau:
 		Modifier: 50
 	RevealsShroud:
 		Range: 10000
-	GivesBuildableArea:
 
 latinsyndicate_recyclingcenter:
 	Inherits: ^RA2Building
@@ -552,7 +546,7 @@ latinsyndicate_syndicateservicedepot:
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@repair: ^RepairsUnits
-	Inherits@RepairFacility: ^RepairFacility
+	Inherits@repairfacility: ^RepairFacility
 	HitShape:
 		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
 		Type: Polygon

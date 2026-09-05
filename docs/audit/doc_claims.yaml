@@ -158,35 +158,19 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 798
+    value: 243
     tolerance: 0
     what: >
-      Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
-      must wait for the weapon rebuild (their K is still going to move).
-    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+      Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
+      predicate — W24's scope, and the reason pricing must wait for the weapon rebuild.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
-      import collections, sys, pathlib
-      sys.path[:0] = ['tools/audit', 'tools/balance']
-      import effective_damage as ed
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit']
       from miniyaml import Ruleset
+      from survey_weapon_structure import inventory
       rs = Ruleset(pathlib.Path('.').resolve())
-      fired = collections.Counter()
-      for name in rs.actors:
-          if name.startswith('^'): continue
-          node = rs.resolve(name)
-          if node is None: continue
-          for c in node.children:
-              if c.key == 'Armament' or c.key.startswith('Armament@'):
-                  w = c.get('Weapon')
-                  if w: fired[str(w).strip()] += 1
-      n = 0
-      for w in fired:
-          node = rs.resolve_weapon(w)
-          if node is None: continue
-          mains = [t for t, _wt, _b, _nd in ed.flat_damage_warheads(node)
-                   if 'ExtraDamage' not in t]
-          if len(mains) > 1: n += 1
-      print(n)
+      print(inventory(rs)['counts']['stacked_main_direct_actor_armament'])
 
   - id: percentage_denominator_unset
     value: 0

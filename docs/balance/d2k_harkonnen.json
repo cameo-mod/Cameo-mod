@@ -200,24 +200,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -228,6 +214,7 @@
       "reloaddelay": "132",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "ordos_autogunturret"
       ],
       "warheads": [
@@ -844,10 +831,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1029,8 +1012,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^D2KMissile",
-       "^Projectile_Missile_Heavy_D2K_TowerMissile",
-       "^Effect_MissileAP_Heavy_D2K_TowerMissile"
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileAP_Heavy_D2K"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"

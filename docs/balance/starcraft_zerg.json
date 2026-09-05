@@ -9,10 +9,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
+        "damage": "12000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -23,25 +23,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -51,20 +37,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -72,32 +44,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -108,12 +59,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5230",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
        "^HeavyMissile",
@@ -121,9 +73,11 @@
        "^ShrapnelWeapon",
        "^HeavyBomb"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "BehemothShoot",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -357,18 +311,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "44000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -378,13 +325,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "10",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -392,25 +332,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -421,7 +347,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4444",
       "reloaddelay": "100",
@@ -430,9 +356,11 @@
        "TractorGLAnthraxPurple",
        "MutaliskSpore"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
       "weapon": "SCDevourerAA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -489,11 +417,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "LightFlameWeapon",
+        "damage": "11000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamageCompatibility",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -503,32 +438,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -538,25 +452,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -566,34 +466,22 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5850",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Chemical_Medium",
+       "^Compatibility_Laser_ExtraDamage",
        "^LightFlameWeapon",
        "^MediumMissile",
        "^ShrapnelWeapon",
@@ -601,9 +489,11 @@
        "^MediumChemicalWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
       "weapon": "DreadshroudSpore",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -741,18 +631,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "24000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -762,32 +645,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -798,19 +660,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Concussion_Light",
        "^Grenade",
        "^ShrapnelWeapon",
        "^HeavyBomb"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Concussion_Light"
+      ],
       "weapon": "GuardianShoot",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -867,18 +735,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "32000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -888,13 +749,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -902,25 +756,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -931,20 +771,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4444",
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Chemical_MediumFlat",
+       "^Warhead_Chemical_Medium",
        "^SwordWeapon",
        "^MediumChemicalWeapon",
        "^SmallArms",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
       "weapon": "MutaliskSpore",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1056,10 +900,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "damage": "20000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
         "type": "AreaDamage"
        },
        {
@@ -1070,13 +914,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
@@ -1085,18 +922,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5480",
       "reloaddelay": "78",
       "slot": "Armament@Spines",
       "versus_templates": [
+       "^Warhead_Chemical_Medium",
        "^MediumChemicalWeapon",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
       "weapon": "QueenSpine",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1153,17 +993,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "50000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "damage": "100000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "400",
+        "tag": "MissileAA_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2038,18 +1871,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "25000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_HeavyFlatCompatibility",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2059,39 +1885,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2109,6 +1907,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Compatibility_Melee_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2126,11 +1925,11 @@
       "armament_name": "spore",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
+        "damage": "36000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "6",
@@ -2140,25 +1939,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -2169,20 +1954,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
       "requires": "spore",
       "slot": "Armament@spore",
       "versus_templates": [
+       "^Warhead_Chemical_Medium",
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
       "weapon": "Spore_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2240,18 +2028,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "25000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_HeavyFlatCompatibility",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2261,39 +2042,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2311,6 +2064,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Compatibility_Melee_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2328,11 +2082,11 @@
       "armament_name": "spore",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
+        "damage": "36000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "6",
@@ -2342,25 +2096,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -2371,20 +2111,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
       "requires": "spore",
       "slot": "Armament@spore",
       "versus_templates": [
+       "^Warhead_Chemical_Medium",
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
       "weapon": "Spore_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2441,18 +2184,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "25000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_HeavyFlatCompatibility",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2462,39 +2198,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2512,6 +2220,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Compatibility_Melee_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2529,11 +2238,11 @@
       "armament_name": "spore",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
+        "damage": "36000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "6",
@@ -2543,25 +2252,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -2572,20 +2267,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
       "requires": "spore",
       "slot": "Armament@spore",
       "versus_templates": [
+       "^Warhead_Chemical_Medium",
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
       "weapon": "Spore_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2643,18 +2341,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "25000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_HeavyFlatCompatibility",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2664,39 +2355,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2714,6 +2377,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
+       "^Compatibility_Melee_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2731,11 +2395,11 @@
       "armament_name": "spore",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
+        "damage": "36000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "6",
@@ -2745,25 +2409,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -2774,20 +2424,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
       "requires": "spore",
       "slot": "Armament@spore",
       "versus_templates": [
+       "^Warhead_Chemical_Medium",
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
       "weapon": "Spore_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3378,11 +3031,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3392,25 +3045,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3421,29 +3060,32 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3855",
       "reloaddelay": "15",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
        "^LightMissile",
        "^SmallArms",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
       "weapon": "SpithidSpit",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3453,25 +3095,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3482,19 +3110,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "3855",
       "reloaddelay": "15",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
        "^LightMissile",
        "^SmallArms",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
       "weapon": "SpithidSpit",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3556,10 +3187,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "damage": "16000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
         "type": "AreaDamage"
        },
        {
@@ -3570,32 +3201,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3605,32 +3215,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3640,13 +3229,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
@@ -3654,25 +3236,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3683,12 +3251,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8561",
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Chemical_Medium",
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
        "^Grenade",
@@ -3698,9 +3267,11 @@
        "^Chaingun",
        "^FlakWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
       "weapon": "SwarmlingShoot",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4915,18 +4486,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4936,32 +4500,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4971,13 +4514,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
@@ -4985,25 +4521,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5014,12 +4536,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7120",
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Concussion_Medium",
        "^Grenade",
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -5027,9 +4550,11 @@
        "^Chaingun",
        "^FlakWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "HermitShoot",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -1135,8 +1135,10 @@ EDEN_SPACEPORT:
 	Buildable:
 		BuildPaletteOrder: 130
 		Queue: Building, RABuilding
-		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED, !eden_spaceport_swlimit
 		Description: eden_spaceport.description
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: eden_spaceport_swlimit
 
 EDEN_SOLAR_ARRAY:
 	Inherits: ^OP2BaseSolarArray
@@ -2309,8 +2311,10 @@ PLYMOUTH_SPACEPORT:
 	Buildable:
 		BuildPaletteOrder: 130
 		Queue: Building, RABuilding
-		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED, !plymouth_spaceport_swlimit
 		Description: plymouth_spaceport.description
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: plymouth_spaceport_swlimit
 
 PLYMOUTH_SOLARARRAY:
 	Inherits: ^OP2BaseSolarArray

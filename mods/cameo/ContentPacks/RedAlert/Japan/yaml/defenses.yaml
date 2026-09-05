@@ -7,7 +7,7 @@ japan_japaneseshrine:
 	Tooltip:
 		Name: Japanese Shrine
 	Buildable:
-		Prerequisites: ~japan_japanesetechcenter, ~techlevel.superweapons, !japan_japaneseshrine
+		Prerequisites: ~japan_japanesetechcenter, ~techlevel.superweapons, !japan_japaneseshrine_swlimit
 		Description: actor_mslo.description
 	Building:
 		Footprint: xxx xxx ===
@@ -62,7 +62,7 @@ japan_japaneseshrine:
 		CameraRange: 10000
 	SupportPowerChargeBar:
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: japan_japaneseshrine
+		Prerequisite: japan_japaneseshrine_swlimit
 	RenderSprites:
 		Image: japan_japaneseshrine
 
@@ -219,7 +219,7 @@ japan_waveforceturret:
 	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@shape: ^2x2Shape
 	Inherits@AntiTank: ^PrioritizeVehicle
-	Inherits@PrioritizeTank: ^PrioritizeTank
+	Inherits@AntiTankPriority: ^PrioritizeTank
 	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Buildable:

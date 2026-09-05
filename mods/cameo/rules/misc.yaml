@@ -980,6 +980,8 @@ spicebloom:
 	BodyOrientation:
 		QuantizedFacings: 1
 	RenderSprites:
+		Image: spicebloom
+		Palette: effect50alpha
 	AppearsOnRadar:
 		UseLocation: true
 	Tooltip:
@@ -1014,9 +1016,6 @@ spicebloom:
 	Interactable:
 	RequiresSpecificOwners:
 		ValidOwnerNames: Neutral
-	RenderSprites:
-		Image: spicebloom
-		Palette: effect50alpha
 
 spicebloom.spawnpoint:
 	Interactable:

@@ -37,6 +37,7 @@ plymouthMachineGun:
 	Warhead@Bullet_Light:
 		Damage: 4000
 edenMobileLaser:
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^Chaingun
 	Inherits@3: ^FlakWeapon
@@ -53,30 +54,53 @@ edenMobileLaser:
 		SecondaryBeamWidth: 24
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	TargetActorCenter: false
+	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	Warhead@LegacyLaserExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Spread: 300
+		Damage: 600
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	Warhead@Laser_Heavy:
+		Damage: 8000
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 edenMobileLaserTiger:
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -85,6 +109,7 @@ edenMobileLaserTiger:
 	Inherits: edenMobileLaser
 	ReloadDelay: 16
 	Range: 7030
+	TargetActorCenter: true
 	Projectile: LaserZap
 		Width: 64
 		HitAnim: laserfire
@@ -97,11 +122,19 @@ edenMobileLaserTiger:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 edenMobileDefenceLaser:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits: edenMobileLaserTiger
 	ReloadDelay: 10
 	Range: 6656
+	-Warhead@CannonHE_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		PercentageScale: 1990
 
 edenRailgun:
+	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightChemicalWeapon
@@ -161,6 +194,18 @@ edenRailgun:
 		Damage: 4000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 2
+	-Warhead@HeavyCannon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumCannon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	Warhead@Railgun_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 25000
+		PercentageScale: 0
 
 edenTigerRailgun:
 	Inherits: edenRailgun
@@ -175,6 +220,7 @@ edenDefenceRailgun:
 
 	MinRange: 1435
 eden_EMP:
+	Inherits@collapsewh: ^Warhead_Tesla_Super
 	Inherits: ^TeslaChargedWeapon
 	Inherits@2: ^TeslaWeapon
 	Inherits@3: ^MediumFlameWeapon
@@ -278,9 +324,41 @@ eden_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPCompatibility: AffectsIntegrity
 		Damage: 32000
 		Spread: 1600
+		InvalidTargets: Shielded
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		ValidRelationships: Neutral, Enemy
+	-Warhead@TeslaChargedWeapon:
+	-Warhead@TeslaChargedExtraDamage:
+	-Warhead@TeslaWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyCannon:
+	-Warhead@MediumCannon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyMissile:
+	-Warhead@Tesla_Super_ExtraDamage:
+	-Warhead@EMPUnit:
+	Warhead@Tesla_Super:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 0
+		PercentageScale: 0
+	Warhead@TemperatureCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: wall
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: op2_emp_static
 		ImpactSounds: xplos.aud
@@ -434,6 +512,7 @@ plymouthDefenceRPG:
 
 	MinRange: 1435
 plymouthSticky:
+	Inherits@collapsewh: ^Warhead_Chemical_Light
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^TankDestroyerCannon
 	ValidTargets: Infantry, Vehicle
@@ -446,22 +525,11 @@ plymouthSticky:
 		Image: green_smokey
 		Shadow: true
 		LaunchAngle: 75
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -482,6 +550,13 @@ plymouthSticky:
 		ImpactActors: false
 		ImpactSounds: fireweb1.aud
 		ValidTargets: Ground, Water, Air
+	-Warhead@LightChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
+	Warhead@Chemical_Light:
+		ValidTargets: Ground, Water
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PercentageScale: 0
 
 plymouthStickyTiger:
 	Inherits: ^Warhead_CannonHE_Medium
@@ -490,41 +565,29 @@ plymouthStickyTiger:
 	Inherits@4: ^MediumChemicalWeapon
 	Inherits@5: plymouthSticky
 	ReloadDelay: 45
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@CannonAP_Light: AreaDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
+	-Warhead@MediumChemicalWeapon:
+	Warhead@Chemical_Light:
+		ValidTargets: Ground, Water
+		Damage: 14000
+		PercentageScale: 0
+	Warhead@StickyWildcardCompatibility: AreaDamage
+		Damage: 4000
 
 plymouthStickyDefence:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -535,33 +598,17 @@ plymouthStickyDefence:
 	-Warhead@CannonHE_Medium:
 	ReloadDelay: 65
 	Range: 6656
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@CannonAP_Light: AreaDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -570,19 +617,18 @@ plymouthStickyDefence:
 	Warhead@CannonHE_Heavy:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
+	-Warhead@HeavyChemicalWeapon:
+	Warhead@Chemical_Light:
+		ValidTargets: Ground, Water
+		Damage: 12000
+		PercentageScale: 0
+	Warhead@StickyWildcardCompatibility:
+		Damage: 2000
 
 plymouthRPGMines:
 	Inherits: ^BallisticWeapon
@@ -641,6 +687,7 @@ PLYMineExplosive:
 
 #Also used by Eden
 plymouth_EMP:
+	Inherits@collapsewh: ^Warhead_Tesla_Super
 	Inherits: ^TeslaChargedWeapon
 	Inherits@2: ^TeslaWeapon
 	Inherits@3: ^MediumFlameWeapon
@@ -744,9 +791,41 @@ plymouth_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPCompatibility: AffectsIntegrity
 		Damage: 32000
 		Spread: 1600
+		InvalidTargets: Shielded
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		ValidRelationships: Neutral, Enemy
+	-Warhead@TeslaChargedWeapon:
+	-Warhead@TeslaChargedExtraDamage:
+	-Warhead@TeslaWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyCannon:
+	-Warhead@MediumCannon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyMissile:
+	-Warhead@Tesla_Super_ExtraDamage:
+	-Warhead@EMPUnit:
+	Warhead@Tesla_Super:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 0
+		PercentageScale: 0
+	Warhead@TemperatureCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: wall
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: op2_emp_static
 		ImpactSounds: xplos.aud

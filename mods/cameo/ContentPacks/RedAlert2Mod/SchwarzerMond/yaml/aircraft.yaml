@@ -42,6 +42,7 @@ schwarzermond_drone:
 		Actor: schwarzermond_drone_husk
 	WithMoveAnimation:
 		MoveSequence: move
+		Condition: !Aircraft-Turning
 	AttackAircraft:
 		FacingTolerance: 40
 		PersistentTargeting: false
@@ -77,9 +78,6 @@ schwarzermond_drone:
 	WithMoveAnimation@Turn-R:
 		MoveSequence: move-r
 		RequiresCondition: Aircraft-Turning && Aircraft-Vertical
-	WithMoveAnimation:
-		MoveSequence: move
-		Condition: !Aircraft-Turning
 	Contrail:
 		Offset: -500,0,250
 		TrailLength: 15
@@ -650,7 +648,6 @@ schwarzermond_dieglocke:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@detect: ^GenericAirDetector
-	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@Helium3: ^NaxiHelium3
 	Valued:
 		Cost: 15000

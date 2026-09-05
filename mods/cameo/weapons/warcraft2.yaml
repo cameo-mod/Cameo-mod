@@ -26,6 +26,7 @@ wc2peasantsmack:
 # 3-9 WC2 damage. 3 Base, 6 Pierce.
 
 wc2arrowFire:
+	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -60,8 +61,9 @@ wc2arrowFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@CannonHE_Medium:
+		PercentageScale: 1663
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 24000
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -87,7 +89,15 @@ wc2arrowFire:
 		ImpactSounds: wc2_bowhit.aud
 		ValidTargets: Ground, Water, Air
 
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@ArrowWeapon:
+	-Warhead@CannonHE_MediumFlatCompatibility:
 wc2highArrowFire:
+	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
 	Inherits: ^LaserWeapon
 	Inherits@2: ^HeavyMissile
 	Inherits@3: ^HeavyAAWeapon
@@ -126,7 +136,15 @@ wc2highArrowFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@HeavyMissile:
+	-Warhead@HeavyAAWeapon:
+	Warhead@CannonHE_Medium:
+		Damage: 33000
+		PercentageScale: 1210
 SiegeEngineCannon:
+	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^LightMissile
 	Inherits@3: ^LightChemicalWeapon
@@ -286,6 +304,26 @@ SiegeEngineCannon:
 # 1-6 WC2 damage. 4 Base, 2 Pierce.
 
 	MinRange: 2240
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyCannon:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@LightFlameWeapon:
+	-Warhead@LightMissile:
+	-Warhead@MediumCannon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 140000
+		PercentageScale: 0
 wc2demolitionsquadMelee:
 	Inherits: wc2footmanslice
 
@@ -357,8 +395,6 @@ wc2demolitionsquadExplode:
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
 	Warhead@Glow: GlowImpact
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
@@ -399,7 +435,6 @@ wc2mageBlizzard:
 	ReloadDelay: 50
 	Range: 8000
 	Report: wc2_icestorm.aud
-	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c1
@@ -500,6 +535,7 @@ wc2mageBlizzard_Spread:
 		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
 
 wc2mageBlizzard_Projectile:
+	Inherits@collapsewh: ^Warhead_Cryo_Heavy
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^LightChemicalWeapon
@@ -567,10 +603,21 @@ wc2mageBlizzard_Projectile:
 		Image: wc2_effect_blizzard
 		Explosions: hit
 		ImpactSounds: wc2_firehit.aud
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@LightFlameWeapon:
+	Warhead@Cryo_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
 
 # Super weapon blizzard.
 
 wc2_tower_arrow:
+	Inherits@collapsewh: ^Warhead_Arrow_Heavy
+	-TargetActorCenter:
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^Chaingun
 	Inherits@3: ^ArrowWeapon
@@ -607,6 +654,14 @@ wc2_tower_arrow:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_bowhit.aud
 		ValidTargets: Ground, Water, Air
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@Chaingun:
+	-Warhead@ArrowWeapon:
+	Warhead@Arrow_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 19000
+		PercentageScale: 0
 
 ####################################################################################################
 #		WEAPONS wc2_orcs

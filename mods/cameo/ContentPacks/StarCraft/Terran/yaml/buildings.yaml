@@ -85,6 +85,7 @@ terran_supplydepot:
 	Inherits@shape: ^2x2Shape
 	Inherits@power: ^PowerPlant
 	Inherits@storage: ^StoresResources
+	Inherits@plug: ^BuildingPlugProducer
 	Tooltip:
 		Name: Supply Depot
 	Valued:
@@ -174,6 +175,7 @@ terran_refinery:
 	Inherits@BuildingPlugProducer2: ^BuildingPlugProducer
 	Inherits@shape: ^3x2Shape
 	Inherits@ref: ^SCRefineryCommon
+	Inherits@plug: ^BuildingPlugProducer
 	Tooltip:
 		Name: Refinery
 	Power:

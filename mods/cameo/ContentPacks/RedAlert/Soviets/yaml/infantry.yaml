@@ -734,10 +734,6 @@ ra1_soviets_commissar:
 		ValidRelationships: Ally, Enemy, Neutral
 	AcceptsDeliveredExperience:
 		ValidTypes: infantry
-	WithDecoration@Carryall:
-		Image: d2k_pips
-		Sequence: pickup-indicator
-		ValidRelationships: Ally, Enemy, Neutral
 	GrantExternalConditionToTransport:
 		Condition: ifv-healer
 	Voiced:

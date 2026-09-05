@@ -437,7 +437,7 @@ protoss_archon:
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXP: ^GainsExperienceTD
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@explode: ^UnitExplodeSmallProtoss
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^FrontalEMP

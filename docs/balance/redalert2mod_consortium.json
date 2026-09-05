@@ -11,10 +11,17 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "10000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
         "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
+        "spread": "300",
+        "tag": "LaserExtraDamageCompatibility",
         "type": "SpreadDamage"
        },
        {
@@ -25,38 +32,10 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
         "type": "SpreadDamage"
        },
        {
@@ -65,13 +44,6 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -81,6 +53,9 @@
       "reloaddelay": "80",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy",
+       "^Compatibility_Laser_ExtraDamage",
        "^LaserWeapon",
        "^RA2RailgunWeapon",
        "^SteelMediumCannon",
@@ -88,6 +63,7 @@
        "^SteelLightMissile"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileAP_Light"
@@ -98,10 +74,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "13000",
+        "falloff": "100, 52, 0",
+        "spread": "39",
+        "tag": "Quantum_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -112,32 +88,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -147,32 +102,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -183,6 +117,7 @@
       "requires": "steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Secondary",
       "versus_templates": [
+       "^Compatibility_Quantum_MediumFlat",
        "^LightChemicalWeapon",
        "^TeslaWeapon",
        "SteelMakoGun"
@@ -263,10 +198,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
+        "damage": "16000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -275,27 +210,6 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -306,6 +220,7 @@
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "SteelInfRailgun_elite"
       ],
       "warheads": [
@@ -322,18 +237,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "28000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -343,25 +251,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -371,32 +265,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -406,32 +279,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -441,25 +293,25 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "PreservedFlat_GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -470,6 +322,7 @@
       "requires": "steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "SteelInfRailgun_EMP_elite"
       ],
       "warheads": [
@@ -534,24 +387,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -562,6 +401,7 @@
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelLightMissile",
        "^RA2FlakWeapon",
        "^SteelChaingun"
@@ -627,18 +467,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -648,25 +481,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -676,13 +495,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
@@ -690,39 +502,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -733,6 +517,7 @@
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -749,18 +534,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -770,25 +548,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -798,13 +562,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
@@ -812,39 +569,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -919,7 +648,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -930,6 +659,8 @@
       "reloaddelay": "3",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
+       "^SteelSmallArms",
        "^SteelChaingun"
       ],
       "warheads": [
@@ -998,25 +729,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1026,13 +743,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -1040,7 +750,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -1055,6 +765,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^LightMissile",
        "^SmallArms",
        "^FlakWeapon",
@@ -1071,25 +782,11 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1099,13 +796,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -1113,7 +803,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -1139,17 +829,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "CannonHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1162,6 +845,7 @@
       "requires": "steelconsortium_upgrade_quantumweaponpower && !rank-elite",
       "slot": "Armament@CANNON",
       "versus_templates": [
+       "^Compatibility_CannonHE_MediumFlat",
        "^SteelMediumCannon",
        "^RA2Grenade"
       ],
@@ -1177,17 +861,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
+        "tag": "CannonHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1420,11 +1097,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "24000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
+        "damage": "49600",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "12",
@@ -1434,32 +1111,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -1470,6 +1126,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^LaserWeapon",
        "^RailgunWeapon"
       ],
@@ -1479,6 +1136,13 @@
      },
      {
       "damage_warheads": [
+       {
+        "damage": "33600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
        {
         "damage": "16000",
         "falloff": "100, 55, 0",
@@ -1494,13 +1158,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "16000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
         "falloff": null,
         "spread": "75",
@@ -1508,32 +1165,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -1544,6 +1180,7 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Heavy",
@@ -1557,6 +1194,13 @@
      },
      {
       "damage_warheads": [
+       {
+        "damage": "49600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
        {
         "damage": "24000",
         "falloff": "100, 55, 0",
@@ -1572,13 +1216,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "24000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
         "falloff": null,
         "spread": "75",
@@ -1586,32 +1223,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "12",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -1702,32 +1318,11 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1737,25 +1332,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1765,7 +1346,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "11000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -1781,6 +1362,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Grenade",
        "^MediumFlameWeapon",
        "^FlakWeapon",
@@ -1799,32 +1381,11 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1834,25 +1395,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1862,7 +1409,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "11000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -1967,18 +1514,11 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "15000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -1986,13 +1526,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2024,6 +1557,7 @@
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_MissileAA_MediumFlat",
        "^TeslaWeapon",
        "^ArrowWeapon",
        "^RA2FlakWeapon",
@@ -2042,18 +1576,11 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "34000",
+        "falloff": "100, 51, 0",
+        "spread": "35",
+        "tag": "MissileQuantum_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -2061,13 +1588,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2099,6 +1619,7 @@
       "requires": "steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_MissileQuantum_MediumFlat",
        "ConsortiumMissileSystem"
       ],
       "warheads": [
@@ -2178,18 +1699,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "250000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "1250",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "125000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "2500",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "1127488",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "125",
@@ -2199,32 +1713,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "250000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "1250",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "125",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "2500",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "250000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "1250",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "125",
@@ -2234,32 +1727,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "250000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "1250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "125",
         "falloff": null,
         "spread": "2500",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -2269,6 +1741,7 @@
       "reloaddelay": "750",
       "slot": "Armament@Weapon",
       "versus_templates": [
+       "^Compatibility_Plasma_HeavyFlat",
        "^TeslaChargedWeapon",
        "^MagicWeapon",
        "^LaserWeapon",
@@ -2299,18 +1772,11 @@
       "armament_name": "superweapon",
       "damage_warheads": [
        {
-        "damage": "250000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "1250",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "125000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "2500",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "1127488",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "125",
@@ -2320,32 +1786,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "250000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "1250",
-        "tag": "MagicWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "125",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "2500",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "888",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "444",
-        "tag": "MagicExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "250000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "1250",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "125",
@@ -2355,32 +1800,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "250000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "1250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "125",
         "falloff": null,
         "spread": "2500",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -2400,10 +1824,6 @@
     "armor": {
      "src": "inherited",
      "v": "Steel"
-    },
-    "build_limit": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Buildable.BuildLimit",
-     "v": "1"
     },
     "buildable": true,
     "cost": {
@@ -2430,7 +1850,8 @@
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
      "steelconsortium_consortiumbattlelab",
-     "~techlevel.superweapons"
+     "~techlevel.superweapons",
+     "!steelconsortium_bfg10000_swlimit"
     ],
     "queue": [
      "Defence",
@@ -2850,17 +2271,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2871,6 +2285,7 @@
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelHeavyCannon",
        "^SteelChaingun"
       ],
@@ -2885,17 +2300,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3092,10 +2500,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -3120,7 +2524,7 @@
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
      "steelconsortium_consortiumbattlelab",
-     "!steelconsortium_orbitalcannonactivator",
+     "!steelconsortium_orbitalcannonactivator_swlimit",
      "~techlevel.superweapons"
     ],
     "queue": [
@@ -3166,18 +2570,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3187,25 +2584,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3215,13 +2598,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
@@ -3229,39 +2605,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -3272,6 +2620,7 @@
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@1",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -3289,18 +2638,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3310,25 +2652,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3338,13 +2666,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
@@ -3352,39 +2673,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -3395,6 +2688,7 @@
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@2",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -3412,18 +2706,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3433,25 +2720,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3461,13 +2734,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
@@ -3475,39 +2741,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -3530,18 +2768,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3551,25 +2782,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3579,13 +2796,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
@@ -3593,39 +2803,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -3757,24 +2939,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3786,6 +2954,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
        "^SteelSmallArms"
@@ -3803,24 +2972,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3846,24 +3001,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3875,6 +3016,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
        "^SteelSmallArms"
@@ -3893,24 +3035,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3935,24 +3063,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3979,24 +3093,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4022,24 +3122,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4067,24 +3153,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4263,10 +3335,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4277,32 +3349,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4313,10 +3364,12 @@
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^MediumFlameWeapon",
        "^RA2Grenade",
        "^RA2RailgunWeapon",
-       "^SteelMediumCannon"
+       "^SteelMediumCannon",
+       "^SteelMakoGunCannonCompatibility"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -4331,10 +3384,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4345,32 +3398,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4395,10 +3427,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4409,32 +3441,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4445,10 +3456,12 @@
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^MediumFlameWeapon",
        "^RA2Grenade",
        "^RA2RailgunWeapon",
-       "^SteelMediumCannon"
+       "^SteelMediumCannon",
+       "^SteelMakoGunCannonCompatibility"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -4464,10 +3477,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4478,32 +3491,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4527,10 +3519,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "13000",
+        "falloff": "100, 52, 0",
+        "spread": "39",
+        "tag": "Quantum_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4541,32 +3533,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4576,32 +3547,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4612,6 +3562,7 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradePRIMARY",
       "versus_templates": [
+       "^Compatibility_Quantum_MediumFlat",
        "^LightChemicalWeapon",
        "^TeslaWeapon",
        "SteelMakoGun"
@@ -4629,10 +3580,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "13000",
+        "falloff": "100, 52, 0",
+        "spread": "39",
+        "tag": "Quantum_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4643,32 +3594,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4678,32 +3608,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4728,10 +3637,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "13000",
+        "falloff": "100, 52, 0",
+        "spread": "39",
+        "tag": "Quantum_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4742,32 +3651,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4777,32 +3665,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4813,6 +3680,7 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
+       "^Compatibility_Quantum_MediumFlat",
        "^LightChemicalWeapon",
        "^TeslaWeapon",
        "SteelMakoGun"
@@ -4831,10 +3699,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "13000",
+        "falloff": "100, 52, 0",
+        "spread": "39",
+        "tag": "Quantum_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4845,32 +3713,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4880,32 +3727,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4990,10 +3816,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5002,27 +3828,6 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5033,6 +3838,7 @@
       "requires": "!deployed && !rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
        "^SteelChaingun",
@@ -5052,10 +3858,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5064,27 +3870,6 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5111,18 +3896,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -5132,25 +3910,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -5160,32 +3924,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5195,32 +3938,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -5230,25 +3952,57 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "PreservedFlat_GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 58, 32, 24",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPFlak_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPRailgun_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5259,6 +4013,7 @@
       "requires": "!deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradePRIMARY",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^Grenade",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -5281,18 +4036,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -5302,25 +4050,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -5330,32 +4064,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5365,32 +4078,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -5400,25 +4092,57 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "PreservedFlat_GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 58, 32, 24",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteFlak_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteRailgun_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5464,10 +4188,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5476,27 +4200,6 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5507,6 +4210,7 @@
       "requires": "deployed && !rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@DEPLOYED",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
        "^SteelChaingun",
@@ -5527,10 +4231,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5539,27 +4243,6 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5587,18 +4270,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -5608,25 +4284,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -5636,32 +4298,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5671,32 +4312,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -5706,25 +4326,57 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "PreservedFlat_GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 58, 32, 24",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPFlak_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPRailgun_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5735,6 +4387,7 @@
       "requires": "deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradeDEPLOYED",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^Grenade",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -5758,18 +4411,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -5779,25 +4425,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -5807,32 +4439,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5842,32 +4453,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -5877,25 +4467,57 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "PreservedFlat_GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 58, 32, 24",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteFlak_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteRailgun_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5923,10 +4545,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5935,27 +4557,6 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5966,6 +4567,7 @@
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
        "^SteelChaingun",
@@ -5986,10 +4588,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5998,27 +4600,6 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6046,18 +4627,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -6067,25 +4641,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -6095,32 +4655,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6130,32 +4669,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -6165,25 +4683,57 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "PreservedFlat_GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 58, 32, 24",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPFlak_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPRailgun_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6194,6 +4744,7 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^Grenade",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -6217,18 +4768,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -6238,25 +4782,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -6266,32 +4796,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6301,32 +4810,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -6336,25 +4824,57 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "PreservedFlat_GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 58, 32, 24",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteFlak_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteRailgun_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6435,18 +4955,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -6456,32 +4969,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6491,10 +4983,24 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "PreservedFlat_LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
-        "tag": "RailgunExtraDamage",
+        "tag": "PreservedFlat_RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -6503,9 +5009,10 @@
       "pricing": true,
       "range": "6200",
       "reloaddelay": "8",
-      "requires": "!rank-elite",
+      "requires": "!rank-elite && !steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Tesla_HeavyFlat",
        "^TeslaWeapon",
        "^LaserWeapon",
        "^RailgunWeapon"
@@ -6519,18 +5026,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -6540,32 +5040,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6575,10 +5054,24 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "PreservedFlat_LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
-        "tag": "RailgunExtraDamage",
+        "tag": "PreservedFlat_RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -6587,7 +5080,7 @@
       "pricing": true,
       "range": "7200",
       "reloaddelay": "8",
-      "requires": "rank-elite",
+      "requires": "rank-elite && !steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@ELITE",
       "versus_templates": [
        "SteelRunnerPistols"
@@ -6602,18 +5095,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -6623,32 +5109,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6658,10 +5123,24 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "PreservedFlat_LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
-        "tag": "RailgunExtraDamage",
+        "tag": "PreservedFlat_RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -6670,9 +5149,10 @@
       "pricing": false,
       "range": "6200",
       "reloaddelay": "8",
-      "requires": "!rank-elite",
+      "requires": "!rank-elite && !steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Tesla_HeavyFlat",
        "^TeslaWeapon",
        "^LaserWeapon",
        "^RailgunWeapon"
@@ -6687,18 +5167,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -6708,32 +5181,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6743,10 +5195,24 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "PreservedFlat_LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
-        "tag": "RailgunExtraDamage",
+        "tag": "PreservedFlat_RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -6755,7 +5221,7 @@
       "pricing": false,
       "range": "7200",
       "reloaddelay": "8",
-      "requires": "rank-elite",
+      "requires": "rank-elite && !steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
        "SteelRunnerPistols"
@@ -6769,18 +5235,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -6790,32 +5249,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6825,10 +5263,24 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "PreservedFlat_LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
-        "tag": "RailgunExtraDamage",
+        "tag": "PreservedFlat_RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -6851,18 +5303,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -6872,32 +5317,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6907,10 +5331,24 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "PreservedFlat_LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
-        "tag": "RailgunExtraDamage",
+        "tag": "PreservedFlat_RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -6934,18 +5372,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -6955,32 +5386,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6990,10 +5400,24 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "PreservedFlat_LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
-        "tag": "RailgunExtraDamage",
+        "tag": "PreservedFlat_RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -7017,18 +5441,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -7038,32 +5455,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -7073,10 +5469,24 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "PreservedFlat_LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
-        "tag": "RailgunExtraDamage",
+        "tag": "PreservedFlat_RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        }
       ],
@@ -7684,18 +6094,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7705,25 +6108,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7733,13 +6122,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
@@ -7747,39 +6129,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -7800,18 +6154,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7821,25 +6168,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7849,13 +6182,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
@@ -7863,39 +6189,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -7987,17 +6285,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8008,6 +6299,7 @@
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelHeavyCannon",
        "^SteelChaingun"
       ],
@@ -8122,18 +6414,19 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
+        "damage": "400",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
         "spread": null,
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
+        "tag": "CollapsedSteelHoverMissile_eliteMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
@@ -8144,6 +6437,7 @@
       "requires": "rank-elite",
       "slot": "Armament@AGELITE",
       "versus_templates": [
+       "^Compatibility_MissileAP_LightFlat",
        "SteelHoverMissile",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
@@ -8227,13 +6521,6 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "6000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -8241,10 +6528,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
+        "damage": "60000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -8255,24 +6542,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
        {
@@ -8281,13 +6554,6 @@
         "spread": null,
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": null,
-        "spread": null,
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -8389,17 +6655,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8410,6 +6669,7 @@
       "reloaddelay": "8",
       "slot": "Armament@AG1",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^RA2FlakWeapon",
        "^SteelChaingun"
       ],
@@ -8424,17 +6684,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8445,6 +6698,7 @@
       "reloaddelay": "8",
       "slot": "Armament@AG2",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^RA2FlakWeapon",
        "^SteelChaingun"
       ],
@@ -8459,24 +6713,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8487,6 +6727,7 @@
       "reloaddelay": "12",
       "slot": "Armament@AA1",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^SteelMediumMissile",
        "SteelMantaHunterCannons"
       ],
@@ -8502,24 +6743,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8530,6 +6757,7 @@
       "reloaddelay": "12",
       "slot": "Armament@AA2",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "^SteelMediumMissile",
        "SteelMantaHunterCannons"
       ],
@@ -8545,17 +6773,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8580,17 +6801,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8615,24 +6829,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8658,24 +6858,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8900,10 +7086,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -8914,39 +7100,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -8958,6 +7116,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_CannonHE_HeavyFlat",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -8975,10 +7134,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -8989,39 +7148,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9115,10 +7246,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -9127,27 +7258,6 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9158,6 +7268,7 @@
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
        "^SteelChaingun",
@@ -9177,10 +7288,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -9189,27 +7300,6 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9236,18 +7326,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -9257,25 +7340,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -9285,32 +7354,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -9320,32 +7368,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -9355,25 +7382,57 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "PreservedFlat_GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 58, 32, 24",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPFlak_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMPRailgun_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9384,6 +7443,7 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradePRIMARY",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^Grenade",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -9406,18 +7466,11 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -9427,25 +7480,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -9455,32 +7494,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -9490,32 +7508,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -9525,25 +7522,57 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "PreservedFlat_GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "PreservedFlat_ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "PreservedFlat_TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteBullet_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 58, 32, 24",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteFlak_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 51",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteMissileAP_LightPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "100",
+        "falloff": "100, 50",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedSteelInfRailgun_EMP_eliteRailgun_HeavyPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9665,17 +7694,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "22222",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "1111",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "11111",
+        "damage": "33333",
         "falloff": "100, 50, 20, 0",
-        "spread": "1111",
-        "tag": "CannonHE_Medium",
+        "spread": "300",
+        "tag": "CannonHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9688,6 +7710,7 @@
       "requires": "deployed",
       "slot": "Armament@Deployed",
       "versus_templates": [
+       "^Compatibility_CannonHE_MediumFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -9786,17 +7809,10 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "400",
-        "tag": "Flame_Heavy",
+        "damage": "30000",
+        "falloff": "100, 76, 56, 38, 0",
+        "spread": "346",
+        "tag": "CannonFire_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9809,6 +7825,7 @@
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_CannonFire_HeavyFlat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy",
        "^Projectile_Shell_Heavy",
@@ -9827,17 +7844,10 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "400",
-        "tag": "Flame_Heavy",
+        "damage": "30000",
+        "falloff": "100, 76, 56, 38, 0",
+        "spread": "346",
+        "tag": "CannonFire_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -9865,11 +7875,11 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "75000",
+        "falloff": "100, 52, 0",
+        "spread": "39",
+        "tag": "Quantum_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -9879,20 +7889,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": null,
         "spread": "50",
@@ -9900,39 +7896,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "400",
-        "tag": "Flame_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": null,
         "spread": null,
         "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -9951,6 +7919,7 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Quantum_MediumFlat",
        "^TankDestroyerCannon",
        "^TeslaWeapon",
        "SteelKatyCannons"
@@ -9968,11 +7937,11 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "75000",
+        "falloff": "100, 52, 0",
+        "spread": "39",
+        "tag": "Quantum_MediumFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -9982,20 +7951,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": null,
         "spread": "50",
@@ -10003,39 +7958,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "400",
-        "tag": "Flame_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LightFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": null,
         "spread": null,
         "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -10137,10 +8064,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -10151,32 +8078,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10187,10 +8093,12 @@
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^MediumFlameWeapon",
        "^RA2Grenade",
        "^RA2RailgunWeapon",
-       "^SteelMediumCannon"
+       "^SteelMediumCannon",
+       "^SteelMakoGunCannonCompatibility"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -10205,10 +8113,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -10219,32 +8127,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10268,10 +8155,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "13000",
+        "falloff": "100, 52, 0",
+        "spread": "39",
+        "tag": "Quantum_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -10282,32 +8169,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -10317,32 +8183,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10353,6 +8198,7 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradePRIMARY",
       "versus_templates": [
+       "^Compatibility_Quantum_MediumFlat",
        "^LightChemicalWeapon",
        "^TeslaWeapon",
        "SteelMakoGun"
@@ -10370,10 +8216,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "13000",
+        "falloff": "100, 52, 0",
+        "spread": "39",
+        "tag": "Quantum_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -10384,32 +8230,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -10419,32 +8244,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10530,24 +8334,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10558,6 +8348,7 @@
       "reloaddelay": "20",
       "slot": "Armament@AG1",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelLightMissile",
        "^RA2FlakWeapon",
        "^SteelChaingun"
@@ -10573,24 +8364,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10601,6 +8378,7 @@
       "reloaddelay": "20",
       "slot": "Armament@AG2",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelLightMissile",
        "^RA2FlakWeapon",
        "^SteelChaingun"
@@ -10616,24 +8394,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10644,6 +8408,7 @@
       "reloaddelay": "20",
       "slot": "Armament@AA1",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "SteelMantaAG"
       ],
       "warheads": [
@@ -10657,24 +8422,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10685,6 +8436,7 @@
       "reloaddelay": "20",
       "slot": "Armament@AA2",
       "versus_templates": [
+       "^Compatibility_Flak_MediumFlat",
        "SteelMantaAG"
       ],
       "warheads": [
@@ -10698,24 +8450,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10740,24 +8478,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10782,24 +8506,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10824,24 +8534,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10933,10 +8629,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "60600",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -10947,39 +8643,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 50",
-        "spread": "320",
-        "tag": "SwordWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50",
-        "spread": "160",
-        "tag": "SwordWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "10",
@@ -10997,6 +8665,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Melee_HeavyFlat",
        "^LightChemicalWeapon",
        "^LaserWeapon",
        "^SwordWeapon"
@@ -11008,10 +8677,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
+        "damage": "105600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -11022,39 +8691,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "30000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "15",
@@ -11072,6 +8713,7 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@ELITE",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^HeavyChemicalWeapon",
        "^LaserWeapon",
        "^TeslaWeapon"
@@ -11097,10 +8739,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "30000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
+        "damage": "105600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -11111,39 +8753,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "30000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "15",
@@ -11327,10 +8941,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
+        "damage": "24000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -11339,13 +8953,6 @@
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -11363,6 +8970,7 @@
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -11379,13 +8987,6 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -11393,10 +8994,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
+        "damage": "48000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -11407,24 +9008,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
        {
@@ -11433,13 +9020,6 @@
         "spread": null,
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": null,
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -11474,13 +9054,6 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "6000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -11488,10 +9061,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
+        "damage": "60000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -11502,24 +9075,10 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
        {
@@ -11528,13 +9087,6 @@
         "spread": null,
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": null,
-        "spread": null,
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -11627,11 +9179,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "60000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
+        "damage": "121600",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "30",
@@ -11641,32 +9193,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "60000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11677,6 +9208,7 @@
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^LaserWeapon",
        "^RailgunWeapon"
       ],
@@ -11686,6 +9218,13 @@
      },
      {
       "damage_warheads": [
+       {
+        "damage": "81600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
        {
         "damage": "40000",
         "falloff": "100, 55, 0",
@@ -11701,13 +9240,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "40000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
         "falloff": null,
         "spread": "75",
@@ -11715,32 +9247,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "20",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11751,6 +9262,7 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Quantum_HeavyFlat",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Heavy",
@@ -11764,6 +9276,13 @@
      },
      {
       "damage_warheads": [
+       {
+        "damage": "121600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
        {
         "damage": "60000",
         "falloff": "100, 55, 0",
@@ -11779,13 +9298,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "60000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
         "falloff": null,
         "spread": "75",
@@ -11793,32 +9305,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "60000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "30",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11999,25 +9490,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -12027,25 +9504,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -12055,7 +9518,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "20000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -12069,6 +9532,7 @@
       "reloaddelay": "10",
       "slot": "Armament@1",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^HeavyCannon",
        "^SmallArms",
        "^MediumMissile",

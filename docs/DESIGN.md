@@ -718,10 +718,13 @@ cheapest provider wins).
    You cannot change one stat in isolation — the formula ties all stats
    together, so changing Speed changes the unit's power, which changes the
    correct price or requires adjusting other stats to hold the price. The
-   rebalance MUST land in BOTH the spreadsheet
-   (`docs/design/cameo_armor_system.xlsx`) AND the yaml in the same pass.
-   Never change a stat without updating the spreadsheet and verifying the
-   formula still holds. If the range is beautiful (6.000, 7.500), adjust
+   rebalance MUST move through the raw ledger (`docs/balance/*.json`) or an
+   unlocked cell in one of the two active generated workbenches, then land in
+   yaml through the guarded balance pipeline. Regenerate both
+   `cameo_balance_by_faction.xlsx` and `cameo_balance_by_type.xlsx` in the same
+   pass. The legacy `cameo_armor_system.xlsx` is reference-only and is not a
+   required second write. Never change a stat without updating the ledger and
+   verifying the formula still holds. If the range is beautiful (6.000, 7.500), adjust
    HP/Damage instead of Range. If the new Range would violate promotion
    superiority, adjust HP or Price instead.
 4. Run the relevant audit before and after your change
@@ -1169,20 +1172,21 @@ Implementation: `tools/reference/aggregate_archetype.py` (`HEROIC_FROM`,
 
 **LAW (2026-07-18): balance numbers move ONLY through the balance
 pipeline** — `docs/design/BALANCE_PIPELINE.md` (raw-stat JSON ledger in
-`docs/balance/`, generated workbench `cameo_balance_v2.xlsx`, gated
+`docs/balance/`, generated `cameo_balance_by_faction.xlsx` and
+`cameo_balance_by_type.xlsx` workbenches, gated
 `apply_balance.py`, `audit_balance_drift` enforcement in run_all).
 Hand-editing a stat in yaml is a red audit finding. The subsections
 below remain the FORMULA reference; the legacy workbook stays the
 design-judgment reference until the Phase-3 triage
 (`docs/balance/discrepancies.md`) completes.
 
-_Source of truth: **`docs/design/cameo_armor_system.xlsx`** (the repo
-working copy; design's private master is synced into it; sheets:
+_Historical design-judgment reference: **`docs/design/cameo_armor_system.xlsx`** (sheets:
 Armor Types, Weapon Types, Infantry, Tanks, Vehicles, Aircraft,
 Defenses; Tabelle2/3 are scratch). 333ggg's CABAL concept
-(`Downloads\cabal.xlsx`) uses the same sheet layout. Tooling: openpyxl
-reads AND writes these — formula changes can be re-applied to every
-unit programmatically. Research 2026-07-11; open questions marked ❓._
+(`Downloads\cabal.xlsx`) uses the same sheet layout. It is not the current
+numeric source of truth and must not overwrite the ledger or the generated
+faction/type workbenches. The formulas below document the historical design
+reference. Research 2026-07-11; open questions marked ❓._
 
 **The cost identity.** Every unit sheet computes three cost estimates
 from the stats and averages them; the design workflow INVERTS this:
@@ -1278,15 +1282,17 @@ steps so the house formulas stay integral:
     warhead (the K model now prices what they compensated for), while the 34
     sniper `OpenToppedDamage` ones STAY — those are how a sniper hits
     passengers, not a damage bonus. See BALANCE_PROGRAM_PLAN W19.
-  - **Percentage twin** = **100 flat damage is 0.01% of max health**, so the
-    twin is exactly `Damage / 100` written in BASIS POINTS on an
-    `AreaDamagePercentage` warhead with `PercentageDenominator: 10000`.
-    Percentage-warhead `Versus` values are multiples of **5** in [5, 100]
-    (the x5 rebase of the old 1..17 band, which exactly cancels the 5x
-    weaker base ratio — never change one without the other).
-    The stock `HealthPercentageDamage` cannot express this (whole percent
-    only) and is being migrated away; until then it keeps the OLD law of
-    1 per 2000.
+  - **Folded percentage hit** = the normal family path. `AreaDamage` derives
+    its second hit from the same authored `Damage` through `PercentageScale`
+    and `PercentageDenominator: 10000`; it therefore scales to zero with the
+    main hit and cannot drift as a separately authored twin. Percentage
+    `Versus` values remain multiples of **5** in [5, 100]. Current direct-Actor
+    impacts skip this folded second hit; the pipeline mirrors that shipped
+    behavior until the separate runtime repair is reviewed and merged.
+  - **Standalone percentage warheads** (`AreaDamagePercentage` and
+    `HealthPercentageDamage`) are reserved for bespoke effects whose damage
+    must remain independent of flat `Damage`. They are additive floors, not
+    family twins, and their explicit denominator defines the unit.
   - The ONE code implementation is `formula.distribute_damage` /
     `formula.spread_damage_sum`; guard `audit_warhead_split`.
 - **Only template-inherited warheads may exist.** Every `Warhead@X` on a
@@ -1925,10 +1931,11 @@ range increase over the ground weapon.
 attackers, not light infantry. Their weapon must use laser / missile
 warheads appropriate to their role, never `^SmallArms`.
 
-**Balance workflow.** All CABAL rebalances start in
-`docs/design/cameo_armor_system.xlsx` (or the CABAL concept sheet) and
-land in YAML in the same pass. The workbook wins on mismatch. Promotions
-add `^PromotionUnitBuff` on top of the sheet stats.
+**Balance workflow.** A CABAL concept sheet may supply design judgment, but numeric
+rebalance changes enter the same raw ledger / active faction-or-type workbench pipeline
+as every other faction and land in YAML through the guarded apply step. On mismatch,
+current ledger extraction and generator rules win over the legacy workbook. Promotions
+add `^PromotionUnitBuff` on top of the ledger stats.
 
 **CABAL Avatar — 50% scaled Core Defender (design 2026-07-15).** The
 `cabal_avatar` is a mass-produced variant of the Core Defender, NOT a
@@ -2602,9 +2609,13 @@ and difficulty definitions remain shared. The Steamroller profile is documented
 as having **at most one harasser**: the engine short-circuits creation of the
 first guerrilla squad, and zero guerrilla units is not expressible in YAML.
 
-There is currently no in-game way to reveal which personality a bot drew.
-Cameo has no condition-triggered text-notification trait, and the CN observer
-announcement requires one. In-game personality confirmation is a follow-up.
+When a personality condition becomes active, the reusable
+`ObserverConditionNotification` trait announces the selected profile in the
+chat feed for spectators and replay viewers. Live players do not see this
+indicator because revealing an opponent's strategy would leak information.
+The notification is delayed by 25 ticks by default, appears once per trait
+instance, and is display-only and client-local. It is intentionally chat-only;
+there is no live-player UI decoration for the personality.
 
 `RushInterval` and `RushAttackScanRadius` are deliberately absent from the
 personality blocks. They are stale keys from an older squad manager and are not
@@ -2622,8 +2633,9 @@ behavior has not been observed in-game; that verification is a follow-up.
 Unit compositions are opt-in through `UseCompositions: true` on
 `UnitBuilderBotModuleCA`; existing unit builders continue to use their
 `UnitsToBuild` shares by default. Cameo has no separate baseline composition:
-each personality's `UnitsToBuild` table is the fallback whenever no active
-composition applies.
+the single shared `UnitsToBuild` table on the one unit builder is the fallback
+whenever no active composition applies. Compositions are therefore not
+personality-specific today.
 
 An active composition only biases the production queue categories named by its
 `UnitQueues` field; an empty list applies to every category. The current pilot
@@ -2636,3 +2648,28 @@ Explicit unit requests, including harvester and MCV requests, continue through
 the bypass path and do not use composition share filtering. Only boot
 verification has been performed for this system; no long-match in-game
 composition behavior is claimed.
+
+## 21. AI architecture (forward design)
+
+The forward design for bot modules, per-ContentPack AI splitting, the dynamic
+personality manager, the master AI module, and match logging lives in
+[`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md). Sections 19 and 20
+above remain the binding rules for what ships today; nothing in the
+architecture document is implemented.
+
+Two measured constraints from that document are binding on any AI yaml edit,
+because both fail in ways that reading the yaml will not reveal:
+
+* **A ContentPack can add to a bot module, never override or remove.**
+  `ContentPacks/**/yaml/ai.yaml` resolves BEFORE `cameo|ai/ai.yaml`, so any key
+  the global AI file sets wins permanently, and `-TraitName` removal syntax in
+  a pack for a trait the global file declares is a load-time `YamlException`, not
+  a no-op. Moving faction data into a pack therefore requires deleting it from
+  the global file in the same change, verified by an unchanged
+  `--resolved-rules Player` dump.
+* **`UnitCompositionsBotModule` must stay a single instance.**
+  `UnitBuilderBotModuleCA` resolves it with `TraitOrDefault`, which throws on
+  the second instance, and a disabled `ConditionalTrait` still occupies the
+  trait dictionary - so condition-gating multiple composition modules crashes
+  on the first bot tick rather than degrading. Personality-specific compositions use
+  condition-gated `ProvidesPrerequisite` tokens instead.

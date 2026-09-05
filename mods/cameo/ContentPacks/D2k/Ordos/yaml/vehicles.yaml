@@ -816,7 +816,7 @@ ordos_cobratank:
 		Modifier: 50
 	RangeMultiplier@deployed:
 		RequiresCondition: deployed
-		Modifier: 125
+		Modifier: 160
 	Armament@PRIMARY:
 		Weapon: 120mm_cobra
 		LocalOffset: 600,0,300
@@ -863,9 +863,6 @@ ordos_cobratank:
 		RequireForceMoveCondition: !undeployed
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
-	RangeMultiplier@deployed:
-		Modifier: 160
-		RequiresCondition: deployed
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -932,7 +929,7 @@ ordos_pythontank:
 		Modifier: 50
 	RangeMultiplier@deployed:
 		RequiresCondition: deployed
-		Modifier: 125
+		Modifier: 160
 	Armament@PRIMARY:
 		Weapon: 120mm_python
 		LocalOffset: 750,0,350
@@ -972,9 +969,6 @@ ordos_pythontank:
 		Voice: Move
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
-	RangeMultiplier@deployed:
-		Modifier: 160
-		RequiresCondition: deployed
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -1424,7 +1418,7 @@ ordos_raider:
 		TurnSpeed: 72
 	WithMuzzleOverlay:
 	Armament@damage:
-		Weapon: HMGo
+		Weapon: ordos_raider_hmg
 		LocalOffset: 210,135,75, 210,-135,75
 		MuzzlePalette: d2keffect
 		MuzzleSequence: muzzle

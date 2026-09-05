@@ -190,8 +190,8 @@ tsmonstermaker1:
 		RequiresLobbyCreeps: true
 	SpawnActorOnDeath@monstermaker3:
 		RequiresCondition: monsterbirth
-		Probability: 8
-		Actor: forgotten_tiberianfiend_wild
+		Probability: 5
+		Actor: tsfloater
 		OwnerType: InternalName
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
@@ -199,13 +199,6 @@ tsmonstermaker1:
 		RequiresCondition: monsterbirth
 		Probability: 8
 		Actor: forgotten_tiberianfiend_wild
-		OwnerType: InternalName
-		InternalOwner: Creeps
-		RequiresLobbyCreeps: true
-	SpawnActorOnDeath@monstermaker3:
-		RequiresCondition: monsterbirth
-		Probability: 5
-		Actor: tsfloater
 		OwnerType: InternalName
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
@@ -264,7 +257,7 @@ TSGTCNST:
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Selectable:
-		Bounds: 3072, 2048
+		Bounds: 3072, 2560, 0, 0
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -314,8 +307,6 @@ TSGTCNST:
 		Sequence: idle-front
 	WithBuildingPlacedOverlay:
 		RequiresCondition: !build-incomplete
-	Selectable:
-		Bounds: 3072, 2560, 0, 0
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:

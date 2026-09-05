@@ -33,11 +33,10 @@ ra1_powerplant:
 	WithDeathAnimation:
 		DeathSequence: dead
 		UseDeathTypeSuffix: false
+		DeathSequencePalette: raplayer
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
 		PlayerPalette: raplayer
-	WithDeathAnimation:
-		DeathSequencePalette: raplayer
 
 ra1_advancedpowerplant:
 	Inherits: ^BaseBuilding
@@ -76,12 +75,11 @@ ra1_advancedpowerplant:
 	WithDeathAnimation:
 		DeathSequence: dead
 		UseDeathTypeSuffix: false
+		DeathSequencePalette: raplayer
 	ProvidesPrerequisite@powerplant:
 		Prerequisite: ra1_powerplant
 	RenderSprites:
 		PlayerPalette: raplayer
-	WithDeathAnimation:
-		DeathSequencePalette: raplayer
 
 ra1_soviets_kennel:
 	Inherits: ^BaseBuilding
@@ -238,4 +236,3 @@ ra1_soviets_subpen:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
-

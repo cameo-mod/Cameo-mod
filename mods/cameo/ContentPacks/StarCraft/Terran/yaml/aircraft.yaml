@@ -453,7 +453,7 @@ terran_pythean:
 	Inherits@CLOAK: ^CloakedAircraft
 	Inherits@armor: ^TerranInfantryWeaponUpgrades
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
-	Inherits@TerranShipArmorUpgrades: ^TerranShipArmorUpgrades
+	Inherits@shiparmor: ^TerranShipArmorUpgrades
 	Tooltip:
 		Name: Pythean
 	Valued:
@@ -541,7 +541,7 @@ terran_medivac:
 	Inherits@eject: ^AircraftEjectOnDeath
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^TerranShipArmorUpgrades
-	Inherits@TerranInfantryArmorUpgrades: ^TerranInfantryArmorUpgrades
+	Inherits@infantryarmor: ^TerranInfantryArmorUpgrades
 	Tooltip:
 		Name: Medivac
 	Valued:
@@ -846,7 +846,6 @@ terran_phobos:
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50
 		RequiresCondition: !tacticaljump
-	DeathSounds:
 	AmbientSound:
 		RequiresCondition: tacticaljump
 		SoundFiles: yamatocharge.wav

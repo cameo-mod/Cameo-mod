@@ -162,10 +162,11 @@ balance. Where's the middle ground?
   into the baseline actor stats** so the baseline is WYSIWYG. Changing a baseline stat then reruns
   the whole class rebalance and updates every member.
 - **KEEP (the only allowed global multipliers):** the global **50% firepower reduction** (ironically
-  named *"global buff"*) **+ 150% damage multiplier**. Reason: our fixed **2000-damage-step + 1%
-  percentage** rule made total damage too high, so we cut 50% then added 150% back — but the 150%
-  applies **only to units + defenses**, so **regular buildings are exempt and stay much more
-  durable** than anything else. This asymmetry is intentional and stays.
+  named *"global buff"*) **+ 150% damage multiplier**. Their unit/defense-versus-building
+  asymmetry is now an explicit durability rule: the 150% applies **only to units + defenses**, so
+  **regular buildings are exempt and stay much more durable**. The historical 2000-damage-step +
+  1% actor-firepower tuning mechanism that originally motivated these values is retired; current
+  weapon tuning uses a 100-damage grid and no per-actor FP residual knob.
 - Everything else = resolved into baseline actors.
 
 ---

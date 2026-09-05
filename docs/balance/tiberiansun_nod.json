@@ -11,10 +11,31 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "29000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamageCompatibility",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "30000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "falloff": null,
+        "spread": null,
+        "tag": "ProtonLaserGroundCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -25,41 +46,32 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "30000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5414",
       "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
+       "^Compatibility_Laser_ExtraDamage",
+       "^Compatibility_ProtonLaser_GroundSlice",
        "^TSEnergyBlast",
        "^MediumFlameWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSProton",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -211,17 +223,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -240,6 +245,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses && !ts_nod_upgrade_auxiliaryweapon",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -258,17 +264,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "0",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -315,17 +314,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 50, 25",
         "spread": "300",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -1116,17 +1108,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -1145,6 +1130,7 @@
       "requires": "!ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1161,17 +1147,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -1190,6 +1169,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -1332,10 +1312,6 @@
      "src": "inherited",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1361,7 +1337,7 @@
     "prerequisites": [
      "~ts_nod_constructionyard",
      "ts_nod_techcenter",
-     "!ts_nod_missilesilo",
+     "!ts_nod_missilesilo_swlimit",
      "~techlevel.superweapons"
     ],
     "queue": [
@@ -1854,7 +1830,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1866,6 +1842,8 @@
       "requires": "!ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
@@ -1881,11 +1859,11 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1895,25 +1873,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1926,26 +1890,30 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6677",
       "reloaddelay": "50",
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^SmallArms",
        "^Chaingun",
        "^LaserWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^LegacyLaserChipCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "laserelitecadregun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -1956,7 +1924,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1968,6 +1936,8 @@
       "requires": "!ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
@@ -1984,11 +1954,11 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -1998,25 +1968,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2029,26 +1985,30 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6677",
       "reloaddelay": "50",
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^SmallArms",
        "^Chaingun",
        "^LaserWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^LegacyLaserChipCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "laserelitecadregun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2391,17 +2351,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2420,6 +2373,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -2437,17 +2391,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2466,6 +2413,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADEGARRISONED",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -2919,39 +2867,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2961,25 +2881,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2989,18 +2895,53 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelEnemy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunTankDestroyer",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunChaingun",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
@@ -3017,7 +2958,8 @@
        "^ShrapnelWeapon",
        "^TankDestroyerCannon",
        "^SmallArms",
-       "^Chaingun"
+       "^Chaingun",
+       "^ShotgunCannonHEMediumCompatibility"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3036,39 +2978,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -3078,25 +2992,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -3106,18 +3006,53 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelEnemy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunTankDestroyer",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunChaingun",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
@@ -3134,7 +3069,8 @@
        "^ShrapnelWeapon",
        "^TankDestroyerCannon",
        "^SmallArms",
-       "^Chaingun"
+       "^Chaingun",
+       "^ShotgunCannonHEMediumCompatibility"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3322,7 +3258,7 @@
         "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3334,6 +3270,7 @@
       "reloaddelay": "250",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -3352,7 +3289,7 @@
         "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3364,6 +3301,7 @@
       "reloaddelay": "250",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -3381,7 +3319,7 @@
         "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3393,6 +3331,7 @@
       "reloaddelay": "250",
       "slot": "Armament@TERCERA",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -3410,7 +3349,7 @@
         "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3422,6 +3361,7 @@
       "reloaddelay": "250",
       "slot": "Armament@CUARTA",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -3439,7 +3379,7 @@
         "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_Heavy",
+        "tag": "Demolition_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3451,6 +3391,7 @@
       "reloaddelay": "250",
       "slot": "Armament@QUINTA",
       "versus_templates": [
+       "^Compatibility_Demolition_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -3585,17 +3526,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "9000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "9000",
+        "damage": "18000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3607,6 +3541,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",
@@ -3624,17 +3559,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "damage": "35000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -3645,25 +3573,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumCannonFriendlyFire",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
@@ -3674,6 +3588,7 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -3749,17 +3664,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "18000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "18000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3771,6 +3679,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileAP_HeavyFlat",
        "^RA2Grenade",
        "^RA2HeavyMissile",
        "^Effect_Watersplash_Large_RA2"
@@ -3787,17 +3696,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "18000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "18000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4126,17 +4028,10 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "60000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
         "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -4149,9 +4044,7 @@
       "requires": "(deployed || undeployed) && !ts_nod_upgrade_auxiliaryweapon",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "^Warhead_Concussion_Medium",
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy"
+       "^TS155mmLegacy"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium",
@@ -4164,17 +4057,10 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "60000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
         "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -4293,17 +4179,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4322,6 +4201,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -4432,7 +4312,7 @@
         "damage": "12000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4444,6 +4324,8 @@
       "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
+       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileHE_Medium"
@@ -4459,10 +4341,10 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "16000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "66",
+        "tag": "MissileChem_Medium",
         "type": "AreaDamage"
        },
        {
@@ -4473,13 +4355,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -4487,25 +4362,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "42",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4516,21 +4377,24 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6554",
       "reloaddelay": "40",
       "requires": "ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Warhead_MissileChem_Medium",
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
        "^LightMissile",
        "^MediumMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileChem_Medium"
+      ],
       "weapon": "TSBikeTibMissile",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4914,17 +4778,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_Medium",
+        "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4936,6 +4793,7 @@
       "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",
@@ -4953,17 +4811,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "damage": "35000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4974,25 +4825,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumCannonFriendlyFire",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
@@ -5003,6 +4840,7 @@
       "requires": "ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -5082,18 +4920,11 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "16000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -5101,13 +4932,6 @@
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -5118,44 +4942,33 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
       "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_MissileHE_Medium",
        "^Grenade",
        "^LightMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "TSSAPCMissiles",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "183",
-        "tag": "Chemical_Light",
+        "tag": "Chemical_LightFlatCompatibility",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -5163,13 +4976,6 @@
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -5180,20 +4986,22 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
       "requires": "ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Chemical_LightFlat",
        "^Warhead_Chemical_Light",
        "^Projectile_Chem_Light",
        "^Effect_Chem_Light",
        "TSSAPCMissiles"
       ],
       "warheads": [
-       "^Warhead_Chemical_Light"
+       "^Warhead_Chemical_Light",
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "TSSAPCCoreMissiles",
       "weapon_class_source": "template"
@@ -5365,6 +5173,27 @@
         "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "120",
+        "tag": "TSLaserCannonAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "TSLaserShieldChip",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -5375,10 +5204,12 @@
       "requires": "undeployed && ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "^TSLaserEffect"
+       "^Warhead_CannonAP_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonAP_Medium",
+       "^LaserWeapon",
+       "^TSLaserEffect",
+       "^TSLaser90mmCannonCompatibility"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -5422,6 +5253,27 @@
         "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "120",
+        "tag": "TSLaserCannonAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "TSLaserShieldChip",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -5473,11 +5325,11 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -5485,13 +5337,6 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -5504,25 +5349,28 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6679",
       "reloaddelay": "8",
       "requires": "deployed && ts_nod_upgrade_auxiliaryweapon && ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADESECONDARY",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^FlakWeapon",
        "^LaserWeapon",
        "^TSLaserEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "TSLaser25mmDep",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
