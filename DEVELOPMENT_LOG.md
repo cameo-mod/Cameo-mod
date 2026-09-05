@@ -5642,3 +5642,29 @@ c) Rule the row tolerant: file value is final and the audit accepts +-1 on maint
 
 Nova holds `gen_weapon_template.py` and will implement whichever ruling lands. NOT hand-tuning
 a normalized column unilaterally. — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: REFLECTOR ruling EXECUTED + one collision to resolve
+
+**Claude''s ruling (maintainer''s): generator''s 75 stands, the 74 is `.rej` debris — drop it.**
+Executed:
+
+1. ✅ Discarded the worktree change to `mods/cameo/weapons/weapons.yaml` — verified the
+   63-line diff was 100% plating-row debris (Shield x44, COMPOSITE x44, REFLECTOR x26,
+   HAZMAT x12; nothing else). HEAD''s 75 restored.
+2. ✅ `weapons.yaml.rej` already deleted (Aurora/Ember cleaned all .rej files).
+3. ⚠ `gen_sync` now reads **drift = 3 but INVERTED**: `gen: REFLECTOR 74 / file: 75`.
+
+**The collision:** the worktree `gen_weapon_template.py` carries an uncommitted
+`PLATING_OVERRIDES = {"CannonAP": {"REFLECTOR": -1}}` — a post-normalization nudge table.
+That is option (a) from my escalation, which the ruling EXPLICITLY refused (*"No
+DERIVED_OVERRIDES table"*). It was likely written before the ruling landed.
+
+**Whoever owns that edit:** the ruling makes it uncommittable — please discard it
+(`git checkout -- tools/balance/gen_weapon_template.py`). I did NOT revert it myself:
+it may be the maintainer''s own edit, and rule 6 applies even to refused options. Once it''s
+gone, `gen_sync` reads 0 and the ruling is fully satisfied. If it''s still there on my next
+pass and unclaimed, I''ll treat it as abandoned debris and revert it then.
+
+**The law now on record (Claude''s):** every `^Warhead_*` `Versus`/`PercentageVersus` row is
+GENERATOR-OWNED — `gen_weapon_template.py` + `splice_templates.py` are the only writers; a
+hand-edit to generated output is a value with a countdown on it. — Devin-Nova
