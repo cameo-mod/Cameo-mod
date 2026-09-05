@@ -48,7 +48,7 @@ DECISION_GROUPS = {
          ("IonCannon", "Tesla_Heavy", "Tesla_Super")),
         (("AsianTSIonCannon", "TSIonCannon"),
          ("IonCannon", "TeslaChargedWeapon", "TeslaWeapon",
-          "Tesla_Heavy", "Tesla_Super")),
+          "Tesla_Super")),
     ),
     "status payload": (
 		(("Lunar_GreenGrilleArty", "Lunar_GreenGrilleArty_elite"),
@@ -307,8 +307,6 @@ DECISION_GROUPS = {
           "PreservedFlat_TeslaWeapon")),
     ),
     "maintainer-approved role blend": (
-		(("HydraSpit",),
-		 ("ArrowWeapon", "LightChemicalWeapon", "LightMissile", "SmallArms")),
 		(("SandmarineTuskTwin",),
 		 ("Bullet_Medium", "Concussion_Medium", "Grenade",
 		  "MissileAP_Medium", "MissileHE_Heavy")),
@@ -537,22 +535,6 @@ CATEGORY_OVERLAP = {
 }
 
 ROLE_BLEND_DECISIONS = {
-    "HydraSpit": {
-        "component_purposes": {
-            "ArrowWeapon": "original narrow projectile-impact armor contribution",
-            "LightChemicalWeapon": "original corrosion-bearing chemical contribution",
-            "LightMissile": "original missile armor contribution",
-            "SmallArms": "original small-arms armor contribution",
-        },
-        "rationale": (
-            "Restore the pre-PR-287 Hydralisk profile after the Chemical-Light fold "
-            "raised real ground damage by roughly 1.6x to 2.38x and quadrupled "
-            "the flat corrosion feed. Preserve the exact four-part behavior."
-        ),
-        "review_reference": (
-            "Maintainer regression report: Hydralisk was not previously this strong"
-        ),
-    },
     "SandmarineTuskTwin": {
         "component_purposes": {
             "Bullet_Medium": "close anti-infantry and light-target part of the twin salvo",

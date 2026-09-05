@@ -217,12 +217,12 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 271
+    value: 272
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
       still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
-      able to completely freeze a unit BEFORE it dies"). **118 of 549.**
+      able to completely freeze a unit BEFORE it dies"). **272 bindings (2026-09-05).**
       ⛔ THE EARLIER VALUES (1, 124, 223, 534) ARE ALL VOID, for TWO different reasons, and the
       second one is the important one.
       (a) ARITHMETIC. `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`,
@@ -258,11 +258,12 @@ claims:
                 if r['ratio'] is not None and r['ratio'] <= psp.FULL_EFFECT_BAR))
 
   - id: corrosion_meter_actors
-    value: 814
+    value: 817
     tolerance: 0
     what: >
-      Actors carrying the `Corrosion` meter — 48.7% of the 1609 priced (Health + Valued)
-      actors, against `Temperature`'s 1592 (98.6%). This asymmetry is an EXPOSURE term in E2
+      Actors carrying the `Corrosion` meter — 817 actors (2026-09-05), ~50.8% of priced
+      (Health + Valued) actors, against `Temperature`'s 1592 (98.6%). This asymmetry is an
+      EXPOSURE term in E2
       pricing: a corrosion weapon does nothing at all to 55% of the roster, so it cannot earn
       the same status surcharge as a flame weapon even when its meter fills faster. Nothing in
       the price model saw this before 2026-08-18.
