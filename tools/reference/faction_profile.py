@@ -39,6 +39,19 @@ if hasattr(sys.stdout, "reconfigure"):
 # The stats worth profiling. Anything absent or non-positive is skipped per stat, not per unit,
 # so a unit missing `sight` still contributes its HP.
 STATS = ["hp", "cost", "speed", "w_dps", "w_range", "sight"]
+
+# Sources whose Owner= is too broad to use directly, and which faction tokens each source
+# actually routes — imported as DATA from the route map so there is one copy, not two.
+try:
+    import sys as _sys
+    _sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "balance"))
+    from faction_routes import EXCLUSIVE_ONLY, ROUTES
+    ROUTED_BY_SOURCE: dict[str, set] = {}
+    for _routes in ROUTES.values():
+        for _src, _tokens in _routes:
+            ROUTED_BY_SOURCE.setdefault(_src, set()).update(_tokens)
+except Exception:                     # the profiler must still run standalone
+    EXCLUSIVE_ONLY, ROUTED_BY_SOURCE = {}, {}
 TYPES = ["infantry", "vehicle", "aircraft", "naval", "defense"]
 
 
@@ -95,7 +108,20 @@ def build(rows: list[dict]) -> dict:
         game[(src, t)].append(r)
         game[(src, "overall")].append(r)
         # A unit owned by six countries belongs to six rosters — Owner= is a comma list.
-        for owner in r.get("owners") or []:
+        # ⚠ EXCEPT where Owner= is too broad to mean anything (EXCLUSIVE_ONLY). CnC Reloaded
+        # gives the median unit to 13 of ~23 countries, so its GDI and Nod rosters overlap 76%
+        # and a naive profile would say the two factions are nearly identical. For those sources
+        # a unit only counts toward a faction it owns EXCLUSIVELY among that source's own
+        # routed factions.
+        owners = r.get("owners") or []
+        if src in EXCLUSIVE_ONLY and len(owners) > 1:
+            rivals = ROUTED_BY_SOURCE.get(src, set())
+            mine = [o for o in owners if o in rivals]
+            if len(mine) != 1:
+                owners = []          # shared across routed factions: describes the mod, not a faction
+            else:
+                owners = mine
+        for owner in owners:
             fac[(src, owner, t)].append(r)
             fac[(src, owner, "overall")].append(r)
 

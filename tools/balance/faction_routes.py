@@ -188,6 +188,20 @@ PENDING = {
 # ── No route at all: FORMULA-ONLY, by ruling ──────────────────────────────────────────────────
 # *"They should be formula-only from a grounded class anchor"* — the ruling already made for units
 # with no reference, rather than forcing a bad match, which is what produced the rejected sheet.
+# ── Sources whose `Owner=` is too broad to use directly ───────────────────────────────────────
+# MEASURED 2026-09-05, mean owners per costed unit: DTA Classic 1.3, Mental Omega 4.4, Rise of
+# the East 5.0, **CnC Reloaded 11.6 (median 13 of ~23 countries)**. At that breadth a faction
+# roster stops describing the faction: CnCR's `GDICountry` (453 units) and `NodCountry` (450)
+# SHARE 346 of them, so a naive GDI reference is 76% identical to the Nod one.
+#
+# Maintainer ruling 2026-09-05: for these sources a faction's reference roster is the units it
+# owns that the OPPOSING routed factions of the same source do not — 107 GDI-only, 104 Nod-only.
+# Smaller, but discriminating, which is the entire point of a reference. The shared pool
+# describes the MOD, not any faction inside it.
+EXCLUSIVE_ONLY = {
+    "CnC Reloaded": "median unit owned by 13 of ~23 countries; GDICountry/NodCountry share 76%",
+}
+
 UNROUTED = {
     # ⭐ `tkm` and `japan` LEFT this table on 2026-09-05 — both are routed now. TKM takes Mental
     # Omega ScorpionCell + Rise of the East Iraq (its old note said "Rise of the East is not
