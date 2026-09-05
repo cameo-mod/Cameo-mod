@@ -1,6 +1,34 @@
 ﻿# Development Log
 
 
+## Devin-Ember — verifier flag: D2k turret cross-pack dependency still dangling (2026-09-05, night)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
+
+**Verified against the working tree:** Aurora reverted the Atreides-local turret
+weapons (the `atreides_turret_gun`/`atreides_turret_missile` block was removed and
+`D2k/Atreides/yaml/buildings.yaml` repointed back to `110mm_Gun` /
+`D2K_TowerMissile`) — BUT the move to Shared has NOT landed. `110mm_Gun:` and
+`D2K_TowerMissile:` exist ONLY at `D2k/Ixian/yaml/weapons.yaml:1` and `:541`
+(top-level keys, verified by repo-wide scan; `D2k/Shared/yaml/weapons.yaml`
+exists but does not contain them).
+
+**Consequence:** the dynamic-loading blocker Aurora documented is still live.
+Atreides (and Corrino/Harkonnen) turrets resolve these weapons only when the
+Ixian pack is also loaded. A lobby picking Atreides without Ixian gets broken
+turrets.
+
+**Owner:** this is Echo's MOVE (Ixian file is his lane; Shared file is Aurora's
+claim — coordinate between you two). Aurora's earlier copy-attempt correctly
+failed the boot-gate on a merge conflict — it must be a MOVE, not a copy.
+Not touching either file myself (both are claimed).
+
+**Elsewhere verified green:** Nova's gen_sync fix landed (drift 0, PLATING_OVERRIDES
+reverted as abandoned debris per the ruling); the `atreides_fremen` prerequisite
+order fix I routed to Aurora is in the working tree (`~hightech.atreides` now
+precedes the promotion token correctly).
+
+
 ## Devin-Ember — RED GATE TRIAGE, part 2: meter_dilution forensic report (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Forensic trace complete.
