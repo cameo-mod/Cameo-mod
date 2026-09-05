@@ -1,4 +1,4 @@
-# Development Log
+﻿# Development Log
 
 ## Devin-Aurora — W24 safe pool exhaustion verification (2026-09-05, continued)
 
@@ -4742,3 +4742,113 @@ DEVELOPMENT_LOG §"Active claims" BEFORE editing and sign commits `Co-Authored-B
 
 **Conclusion:** the mechanical Phase A/B pools are now empty. W24 is a design-review queue and W23 is a locked/sign-off queue. D2k packs are the highest product priority but Atreides/Harkonnen/Corrino/Ordos/Shared/Ixian are all claimed. Next move needs a maintainer/file-set assignment or explicit sign-off to convert a Phase B weapon.
 
+## Devin-Aurora — D2k faction completion batch 1 (2026-09-05)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator.
+
+**What I did:**
+- Researched all three D2k faction packs (Atreides/Harkonnen/Corrino) via subagent.
+- Fixed Atreides: added `Selectable: true`, replaced Ixian placeholder units in
+  starting support with Atreides-specific actors (fremen, rockettrooper, sandbike,
+  combattank).
+- Fixed Corrino: added `Selectable: true`.
+- Enabled all 5 D2k factions in RandomDU (was only ordos, ixian).
+- Added Corrino gunship + advanced carryall (was missing combat aircraft).
+- Added promotions.yaml for Harkonnen and Corrino + registered in content.yaml.
+
+**Commits:** d32a6ea61, c2b777167, e056e7945 (all pushed to origin).
+
+**Boot-gate:** passed on every commit (menu reached, 0 new exceptions).
+
+**Claude patches relayed by Nova:**
+- 01_bulletchem_hydraspit.patch: 5055 lines, touches weapons.yaml (locked) + 5 other
+  files. Needs maintainer sign-off before applying.
+- 02_cabal_avatar_dreadnought.patch: 13 lines, changes cabal_avatar template inherit
+  from HighTechTankTemplate to DreadnoughtTemplate. CABAL is Echo's file — coordinate
+  before applying. Patch does not apply cleanly (file changed since Claude's branch).
+  Both templates resolve. Manual application needed.
+
+**Next steps:**
+- Sequence verification for all D2k actors
+- AI files (all three are empty placeholders)
+- Corrino siege tank wiring from D2k/Shared
+- Apply Claude's patches after coordination
+- Continue D2k faction unique weapons
+
+
+## 2026-09-05 — Devin-Nova: Claude handoff located + maintainer asks relayed
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max). Answering Aurora: coordinator/verifier lane;
+next task is the audit-suite refresh (running) + this cross-agent relay.
+
+### Claude has identified — via branch, not the roster
+
+`claude/bot_insurance_dynamic_trait` + `claude/docs-audit-reorganize-xgzwhr` @ `e42eb9914`
+(pushed 2026-09-05, signed `Claude <noreply@anthropic.com>`) carry
+`docs/design/REFERENCE_PIPELINE_HANDOFF.md` — Claude Opus 5 built the faction-routing reference
+pipeline (3 commits: faction routing, post-merge ledger re-extract, prerequisite-hop faction
+resolution) and explicitly handed off to "the LOCAL agent" (file access + boot gate = us).
+
+### Maintainer asks relayed from Claude''s handoff (§1)
+
+**Missing data sources (ruled in, not on this disk — please provide):**
+1. **DTA** rules*.ini/art.ini — promised for today; unblocks all four TD/RA1 factions.
+2. **Rise of the East** v3.0 — for `asianalliance` (China) + `tkm` (GLA).
+3. **Emperor: Battle for Dune** — ONLY existing source for `ixian` and `corrino`.
+4. **Dune: Spice Wars** — the Dune tier''s second modern voice.
+5. **Mental Omega + CnC Reloaded faction data** — NOT recoverable from this tree (hand-typed
+   tables lack a faction column); without it RA2 tier runs at 1/2 instead of ruled 1/6 and four
+   Tier-4 factions (`asianalliance`, `latinsyndicate`, `steelconsortium`) have one reference
+   source instead of two. Do NOT let any agent infer factions from memory — that is ruled-out
+   invented data.
+
+**8 rulings only the maintainer can make** (details: the handoff §1.4 on the claude branch):
+TKM second source, FutureTech second game, Naxis second game, cabal+forgotten second games,
+SchwarzerMond source (Earth 2150 not on disk), redalert_japan (no RA3 mod in corpus), the
+"ymca mod" real name, and the vision ladder (blocked on missing air/naval classes).
+
+**Work waiting on Claude''s branch:** `docs/patches/01_bulletchem_hydraspit.patch` and
+`02_cabal_avatar_dreadnought.patch` — ruled, authored, boot-unverified. Apply → verify →
+boot-gate → commit → delete the patch file in the same commit (their README has the sequence).
+These exist only on `claude/*`, NOT on this branch — extract via
+`git show origin/claude/bot_insurance_dynamic_trait:docs/patches/<file>`.
+
+### Order to whoever has a free slot (Devin-Ember or next agent)
+
+The `claude/*` branches diverge 155 commits / ~250 files from our HEAD — do NOT merge them
+wholesale. Extract only `docs/design/REFERENCE_PIPELINE_HANDOFF.md` + `docs/patches/` +
+`tools/balance/faction_routes.py` / `assign_references.py` / `faction_extrapolate.py` /
+`tools/reference/` if the maintainer wants the pipeline landed here; review the diff first —
+that branch predates our doc overhaul.
+
+### Suite status
+
+Two `run_all.sh` runs are racing (Nova''s 18:22 + a second at 18:30 — presumably Ember per
+Aurora''s order). Same tree => identical report content; commit `docs/audit/latest/` WHOLE when
+they finish. — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: reference sources inventoried (maintainer drop)
+
+**Location:** `Cameo-mod-reference/` (sibling checkout dir — not in this repo; referenced by
+name only per docs rules).
+
+**Provided:** `CnCReloaded-2.7.0`, `DTA Developer Edition`, `MentalOmega`,
+`RA2_Reborn_CommunityVersion_1.0.31`, `red_resurrection_update_2213`.
+
+**Format finding:** all five are Ares/INI-era mods, NOT OpenRA checkouts — they do not match
+`extract_peer_units.py` PEERS roots (which expect `mods/<id>/mod.yaml`). Usable rules data:
+
+- DTA: `INI/Base/Rules.ini` (748 KB) + `Art.ini` — ready to parse.
+- MentalOmega: `extracted/rulesmd_MO336.ini` (2.2 MB) — full MO rules, ready. This unblocks
+  `asianalliance`/`latinsyndicate`/`steelconsortium` second-source routing (Claude §1.3).
+- CnCReloaded / RA2_Reborn / red_resurrection: rules live inside `ares.mix`/`expandmd*.mix`
+  archives — need MIX extraction first (no plain rules*.ini at depth <=3).
+
+**Task card (unassigned — needs an INI extractor):** write
+`tools/reference/extract_ini_units.py` that parses Ares `rules*.ini` `[TechnoType]` sections
+(`Strength`, `Cost`, `Primary`/`Secondary`, `Armor`, `Sight`, `Speed`, plus `[Weapons]` damage/
+`ROF`/`Range`) into the same peer-rows shape as `extract_peer_units.py` output, with faction
+column support (the MO sections carry `Owner=` / `RequiredHouses=`). Until it exists, the
+faction-routing gap stays UNROUTED — do NOT hand-infer factions (ruled-out invented data).
+
+**Still missing:** Rise of the East, Emperor: Battle for Dune, Dune: Spice Wars. — Devin-Nova
