@@ -45,15 +45,16 @@ class WeaponStructureInventoryTests(unittest.TestCase):
         )
 
     def test_current_corrected_baseline(self):
-        self.assertEqual(2346, self.data["counts"]["concrete_weapons"])
+        # Upstream 4deaee086 adds three single-main definitions after PR #320.
+        self.assertEqual(2349, self.data["counts"]["concrete_weapons"])
         self.assertEqual(340, self.data["counts"]["stacked_main_all_concrete"])
         self.assertEqual(190, self.data["counts"]["stacked_main_direct_actor_armament"])
         self.assertEqual(50, self.data["counts"]["stacked_main_indirect_weapon_graph"])
         self.assertEqual(240, self.data["counts"]["stacked_main_transitive_weapon_graph"])
         self.assertEqual(100, self.data["counts"]["stacked_main_unreached"])
-        self.assertEqual(2626, self.data["counts"]["main_warhead_instances_all_concrete"])
+        self.assertEqual(2629, self.data["counts"]["main_warhead_instances_all_concrete"])
         self.assertEqual(597, self.data["counts"]["excess_main_warhead_instances_all_concrete"])
-        self.assertEqual(2200, self.data["counts"]["main_warhead_instances_transitive_weapon_graph"])
+        self.assertEqual(2201, self.data["counts"]["main_warhead_instances_transitive_weapon_graph"])
         self.assertEqual(452, self.data["counts"]["excess_main_warhead_instances_transitive_weapon_graph"])
         self.assertEqual(226, self.data["counts"]["reviewed_stacked_main_all_concrete"])
         self.assertEqual(178, self.data["counts"]["reviewed_stacked_main_direct_actor_armament"])

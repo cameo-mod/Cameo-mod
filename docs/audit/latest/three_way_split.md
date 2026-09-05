@@ -1,6 +1,6 @@
 # audit_three_way_split — 340 raw stacked weapons; 114 remain unreviewed
 
-   1689  correct — exactly one main warhead
+   1692  correct — exactly one main warhead
     317  none — utility / effect-only weapons
     340  RAW STACKS — structural inventory
     226  reviewed — exact intentional composites

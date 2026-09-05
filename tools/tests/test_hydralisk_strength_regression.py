@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "tools/audit"))
 
 from audit_three_way_split import main_warhead_nodes, main_warheads
 from miniyaml import Ruleset
+from survey_weapon_structure import inventory
 
 
 EXPECTED_MAINS = (
@@ -38,7 +39,8 @@ EXPECTED_FLAT_DAMAGE = {
 class HydraliskStrengthRegressionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.weapon = Ruleset(ROOT).resolve_weapon("HydraSpit")
+        cls.rules = Ruleset(ROOT)
+        cls.weapon = cls.rules.resolve_weapon("HydraSpit")
 
     def test_original_four_damage_profiles_are_restored(self):
         self.assertEqual(EXPECTED_MAINS, tuple(main_warheads(self.weapon)))
@@ -55,7 +57,7 @@ class HydraliskStrengthRegressionTests(unittest.TestCase):
                 actual += int(node.get("Damage")) * versus[armor] // 100
             self.assertEqual(expected, actual, armor)
 
-    def test_corrosion_and_percentage_companions_are_not_amplified(self):
+    def test_existing_corrosion_routes_and_percentage_companions_are_preserved(self):
         chemical = self.weapon.child("Warhead@LightChemicalWeapon")
         self.assertEqual("Corrosion", chemical.get("PhysicalStateName"))
         self.assertEqual("100", chemical.get("PhysicalStateScale"))
@@ -63,6 +65,18 @@ class HydraliskStrengthRegressionTests(unittest.TestCase):
                        if node.value == "AreaDamagePercentage"]
         self.assertEqual(4, len(percentages))
         self.assertTrue(all(node.get("Damage") == "1" for node in percentages))
+        # Pin existing delivery; the audit reports these duplicates separately.
+        for tag in ("LightChemicalWeapon", "LightChemicalWeaponPercentage"):
+            node = self.weapon.child("Warhead@" + tag)
+            self.assertEqual("Corrosion", node.get("PhysicalStateName"))
+            self.assertEqual("100", node.get("PhysicalStateScale"))
+            self.assertEqual("100", node.get("PhysicalStates", "Corrosion"))
+
+    def test_reviewed_exception_stays_visible_in_the_raw_structure_inventory(self):
+        sets = inventory(self.rules)["sets"]
+        self.assertIn("HydraSpit", sets["direct_actor_armament"])
+        self.assertIn("HydraSpit", sets["reviewed_direct_actor_armament"])
+        self.assertNotIn("HydraSpit", sets["unreviewed_direct_actor_armament"])
 
 
 if __name__ == "__main__":
