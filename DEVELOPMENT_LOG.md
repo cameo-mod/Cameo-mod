@@ -1,5 +1,50 @@
 # Development Log
 
+## Devin-Ember — multi-agent coordination pass (2026-09-05)
+
+**Identity:** Devin-Ember (SWE-1.7 Max, `devin@cognition.ai`). New name claimed here; not in the
+existing claims table. **Role: verification + coordination only — no yaml file-set claimed.**
+
+**What I verified against the live tree (artifact > docs):**
+- Branch `weapon_structure_and_warhead_fold` is 79 ahead / 0 behind `origin/master` — master's
+  latest (`7d49ee5b1`) is already merged via `4fd9937f3`. No need to re-pull master work.
+- **Devin-Cyrus's WC2 blocker is RESOLVED:** `wc2_orcs_hellscream_icon.png` exists in
+  `mods/cameo/bits/`, and my boot-gate at ~16:52 reached `MenuPostProcessEffect.PostWorldLoaded`
+  with 0 new exception logs. The HANDOFF row for Devin-Cyrus is stale.
+- **Ordos turret wiring is done** (maintainer edit, live tree): `ordos_chemturret` actor →
+  `Weapon: ordos_chemturret` (the self-contained 14000/40000 `Warhead@Chem_Medium` mortar at
+  `D2k/Ordos/yaml/weapons.yaml:2284`); `ordos_laserturret` actor → `Weapon: ordos_laserturret`.
+  The earlier orphaned `ordos_chemturret` weapon is now wired.
+- `KotinCannonNuclearShell` is safe: the old `^Warhead_Thermobaric_Heavy` definition was
+  replaced by a `^Warhead_CannonNuke_Heavy` 3-way-split version at
+  `RedAlert/Soviets/yaml/weapons.yaml:4563`; both `vehicles.yaml` references still resolve.
+- New `Mortar`/`MortarChem`/`MortarFire` in `weapons.yaml` resolve cleanly (one AreaDamage main
+  each, CannonHE/Chem/Fire × Concussion_Medium) but are **orphans — zero `Weapon:` refs**.
+- `^Warhead_CannonTesla_*` (Spread 86/65/43, Falloff 100,52,0): no `audit_family_uniqueness`
+  collision — shares the curve with BulletTesla/MissileTesla/Quantum (different radii) and the
+  radii with BulletThermobaric (different curve).
+- `UnitsToBuild` ContentPack migration is blocked by merge order (see next entry); ROADMAP +
+  AI_ARCHITECTURE updated and committed (`9c59792db`).
+
+**Per-agent orders (based on verified current state):**
+- **Devin-Cyrus** (WC2 Humans/Orcs): blocker resolved — verify the hellscream sequence reference
+  still resolves, then mark the HANDOFF row resolved and finish the WC2 hero weapon pass or stand
+  down so Devin-Dawn's Corrino Phase 3 is unblocked.
+- **Devin-Aurora** (D2k coordinator, Ordos/Atreides/Shared weapons + bits/d2k): turret wiring
+  landed. Remaining: (a) decide whether `ordos_laserturret` should match `ordos_lasertank`'s
+  `Laser_Heavy` AreaDamage composition (current `LaserWeapon`+`LaserExtraDamage` SpreadDamage
+  split differs — maintainer spec was "same laser as the laser tank"); (b) wire or remove the
+  orphaned `Mortar`/`MortarChem`/`MortarFire` family; (c) remove the stray `###### MissileAP:`
+  generator comment between `MortarChem` and `MortarFire` in `weapons.yaml`; (d) `Dune_SiegeMortar`
+  is now trooper-only (`ordos_mortartrooper`) — confirm that split is intended.
+- **Devin-Dawn** (Corrino + tiberiansun.yaml): WC2 blocker cleared → Corrino build can proceed.
+- **Devin-Echo** (D2k audit + CABAL): continue audit; note the merge-lost Ixian weapon edits are
+  uncommitted WIP in the tree — re-verify `D2k/Ixian/yaml/weapons.yaml` resolves before Phase 4.
+- **Devin-Blaze** (Harkonnen + Phase 4 shared/global): continue legacy `d2k.yaml`/`rules/d2k.yaml`
+  consolidation; `D2k/Shared/yaml/weapons.yaml` is also on Aurora's claim — coordinate at the seam.
+- **Devin-Ember (me)**: audits, boot-gates, resolved-diff checks, doc sync. Available to run
+  `find_empty_warhead.py` / `review_resolve_diff.py` / `launch-game.cmd` for anyone's batch.
+
 ## Devin AI — AI architecture `UnitsToBuild` migration blocked by merge order (2026-09-05)
 
 **Identity:** Devin AI (SWE-1.7 Max).
