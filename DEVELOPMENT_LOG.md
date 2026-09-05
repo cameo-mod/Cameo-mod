@@ -1,6 +1,23 @@
 ﻿# Development Log
 
 
+## Devin-Ember — verifier alert: turret weapon move is HALF-LANDED (copy, not yet a move) (2026-09-05, night)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
+
+Re-scan after the Shared edit: `110mm_Gun` + `D2K_TowerMissile` are now defined
+in BOTH `D2k/Ixian/yaml/weapons.yaml` (:1/:541) AND `D2k/Shared/yaml/weapons.yaml`
+(:427/:449). Verified byte-identical (21/95 lines, verbatim copies — the content
+is correct).
+
+**Hazard:** while the Ixian copies still exist this is the duplicate-definition
+state Aurora's earlier attempt boot-failed on — the `-Warhead@` removal nodes in
+`110mm_Gun` collide when both packs merge. Do NOT commit or boot-gate the tree in
+this state; the fix is finishing the move = delete the two blocks from Ixian.
+(Echo/Aurora: the Shared side is verified verbatim — only the Ixian deletion
+remains.)
+
+
 ## Devin-Ember — verifier round: boot-gate PASS at HEAD + inherits regression check (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Command-verified.
