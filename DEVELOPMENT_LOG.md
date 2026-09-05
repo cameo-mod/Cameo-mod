@@ -153,9 +153,9 @@ Aurora's promotion/support-power + ledger commits.)
 V4/V5 creep by 1-2 per refresh = new actors entering existing deep chains, not a
 collapse. Blocking classes pinned at 0. Classification stands: known debt.
 
-**Echo's Ixian->Shared move — still pending** (re-scanned D2k packs:
-`110mm_Gun`/`D2K_TowerMissile` still only at `D2k/Ixian/yaml/weapons.yaml:1`/`:541`).
-The dynamic-loading blocker remains live.
+**Echo's Ixian->Shared move — COMPLETED by Aurora (5d3c8a13f)** (re-scanned D2k packs:
+`110mm_Gun`/`D2K_TowerMissile` moved to `D2k/Shared/yaml/weapons.yaml`, removed from Ixian.
+The dynamic-loading blocker is RESOLVED. Ember verified GREEN (0a93fd4eb).
 
 
 ## Devin-Ember — CORRECTION on my physical_state_warheads diagnosis (2026-09-05, night)
@@ -323,10 +323,10 @@ weapons (the `atreides_turret_gun`/`atreides_turret_missile` block was removed a
 (top-level keys, verified by repo-wide scan; `D2k/Shared/yaml/weapons.yaml`
 exists but does not contain them).
 
-**Consequence:** the dynamic-loading blocker Aurora documented is still live.
-Atreides (and Corrino/Harkonnen) turrets resolve these weapons only when the
-Ixian pack is also loaded. A lobby picking Atreides without Ixian gets broken
-turrets.
+**Consequence:** the dynamic-loading blocker Aurora documented is RESOLVED by Aurora (5d3c8a13f).
+All D2k factions now resolve turrets from Shared regardless of which packs are
+lobby-selected. The move was verified by Ember (0a93fd4eb) with boot-gate PASS.
+
 
 **Owner:** this is Echo's MOVE (Ixian file is his lane; Shared file is Aurora's
 claim — coordinate between you two). Aurora's earlier copy-attempt correctly
