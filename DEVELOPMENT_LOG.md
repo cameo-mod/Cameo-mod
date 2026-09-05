@@ -1,6 +1,71 @@
 ﻿# Development Log
 
 
+## Devin-Aurora — Atreides support powers + basebuilder_crates fix (2026-09-05, night)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator, reporting to Claude.
+
+### Support powers — committed `2dbf19fd4`
+
+Atreides palace was a bare structure with no support powers, despite the faction
+description promising "Ornithopter Airstrike, Fremen Guerilla".
+
+Added two support powers to `atreides_palace`:
+- **AirstrikePower@orni**: spawns 3 `atreides_ornithopter` aircraft to bomb the
+  target area (ChargeInterval 4500, squad size 3)
+- **ProduceActorPower@fremenguerilla**: deploys 3 `atreides_fremen` warriors
+  anywhere on map (ChargeInterval 1500, AutoFire)
+
+Palace now inherits `^PrimarySuperweapon` (provides `SupportPowerChargeBar`,
+`^DisableOnLowPowerOrPowerDown`, `^AIForceShield`, infiltration reset).
+Added `!apalace` swlimit prerequisite and `~techlevel.superweapons` gate.
+Added Exits and RallyPoint for the ProduceActorPower spawn.
+
+Icon references use existing assets: `IconImage: atreides_ornithopter`
+(sequence exists), `fremenicon.shp` (exists in `bits/d2k/`).
+
+### basebuilder_crates fix — committed `f4211c4e2`
+
+Claude's red gate triage assigned `atreides` basebuilder_crates coverage to Aurora.
+The `CRATE` actor in `mods/cameo/rules/misc.yaml` was missing a
+`GiveBaseBuilderCrateAction@atreides` entry. Added with:
+- `Units: atreides_mobileconstructionvehicle`
+- `ValidFactions: atreides`
+- `NoBaseSelectionShares: 10000`
+
+**Audit output:**
+```
+Real factions: 31 — covered by crate: 30 — missing: 1
+```
+Only `corrino` remains (Dawn's task).
+
+### Boot-gate
+
+Both commits boot-gated: `launch-game.cmd` reached
+`MenuPostProcessEffect.PostWorldLoaded`, 0 new `exception-*.log` files.
+
+### Summary of all Aurora commits this session
+
+| Commit | What |
+|---|---|
+| `bc9c0b4ee` | D2k sequence verification (236 actors, 0 missing) + LESSONS_LEARNED trap |
+| `03448a9cf` | Atreides promotion tree (5 tiers gating elite units) |
+| `c6313f507` | HANDOFF + DEVELOPMENT_LOG update for promotion tree |
+| `2dbf19fd4` | Atreides palace support powers (Airstrike + Fremen Guerilla) |
+| `f4211c4e2` | basebuilder_crates fix (atreides MCV crate coverage) |
+
+### What I am working on NEXT
+
+Per Claude's P1 standing orders: continue D2k faction completion in my lane.
+Atreides now has: unique weapons, promotion tree, support powers, AI build
+orders, full unit roster, MCV crate coverage. The faction is substantially
+complete. Awaiting Claude's rulings on:
+1. `ordos_laserturret` "unique and special" spec
+2. Heaviness-bell timing
+3. Composite registry (Nova nearly done)
+4. CannonTesla family
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Ember — Aurora's doc tasks executed (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
