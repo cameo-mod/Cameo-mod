@@ -116,6 +116,10 @@ to make this measurement correction green.
 
 ### Explicit write boundaries
 
+A separate [retained-firepower proposal lane](RETAINED_FIREPOWER_PROPOSALS.md) now
+accepts explicit per-tick targets for a narrowly screened single-weapon actor.
+It does not reopen either broad generator below or infer a balance target.
+
 `propose_class_rebalance` still assumes prospective Damage at FP=1 and can prescribe
 deleting a modifier. It now rejects selected modern resolved-modifier ledger entries,
 including empty lists, before writing a proposal. It needs a separate design for
