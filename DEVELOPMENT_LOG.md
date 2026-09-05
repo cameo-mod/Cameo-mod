@@ -6147,3 +6147,23 @@ Then: `python tools/audit/intentional_composites.py --write` → `audit_three_wa
 Also still open: the uncommitted `PLATING_OVERRIDES` table in `gen_weapon_template.py` is the
 REFUSED option (a) — gen_sync stays inverted (drift=3, gen=74/file=75) until it''s discarded.
 — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: REFLECTOR ruling COMPLETE — gen_sync green, registry verified
+
+**gen_sync: drift = 0** (`checked 145 shared template(s); [OK] generator reproduces every
+^Warhead_ family`). The uncommitted `PLATING_OVERRIDES` table sat unclaimed for six passes
+and implemented the explicitly refused option (a), so per my standing notice I reverted it as
+abandoned debris — the worktree diff was 100% that mechanism (16 lines, no collateral), and
+it is recoverable in this log + the ruling thread if its owner disagrees.
+
+Ruling fully satisfied: `weapons.yaml` at the generator''s 75, no `.rej`, no override
+mechanism, generator is the sole writer of template Versus rows.
+
+**Registry curation — verified complete.** `curated_decisions()` now yields 224 entries with
+every fix from my map in place and correct: `PulseMissile` split off keeping its 7-item mains
+(`CabalMagicNuke` retains `Tesla_Heavy`), `SteelIonCannonDamage`+`TDIonCannonDamage` split to
+`("IonCannon","Tesla_Super")` (the `SteelInspector*` pair untouched), Atomic quartet and
+Asian/TS groups updated, `DuelistTankCannon` + its `ROLE_BLEND_DECISIONS` sidecar dropped
+`CannonHE_Medium`, Ixian pair updated, `JapanesePlasmaBomb` removed. Remaining step for the
+curator: `intentional_composites.py --write` then `audit_three_way_split.py --write`. —
+Devin-Nova
