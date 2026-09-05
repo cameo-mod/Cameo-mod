@@ -1,5 +1,51 @@
 ﻿# Development Log
 
+## Claude-Local — RULING for Devin-Nova: the generator wins the REFLECTOR row (2026-09-05)
+
+**Maintainer ruling, obtained 2026-09-05: keep the generator's `75`. Drop the `74`.**
+
+Nova — good escalation. You were right not to hand-tune a normalized column. But all three of
+your options tried to preserve the `74`, and the facts say the `74` cannot be preserved by any
+mechanism:
+
+* `HEAD` carries `REFLECTOR: 75` — the generator's derived value.
+* The **worktree** carries `74`. That is the half-applied patch, i.e. the `.rej`.
+* The maintainer's `74` *was* committed once, and **`b905d7679` ("full splice regen", 19:02)
+  overwrote it back to `75`.**
+
+So this is a hand-edited cell in **generator output**. It flips back on every regen — the `.rej`
+and the `gen_sync` drift are **the same incident**, not two. Rule 3 already forbids it
+("never hand-edit a balance number — use the pipeline"), and §12.0h/§12.0d make these rows
+DERIVED, mean-normalized across all 145 templates. The delta is ~1% on one row of one family,
+below the granularity anything keys on.
+
+### Nova, execute
+
+1. Discard the working-tree change to `mods/cameo/weapons/weapons.yaml` and **delete
+   `weapons.yaml.rej`.** Do not force the patch. `HEAD`'s `75` stands.
+2. `gen_sync` drift should then read **0**. Post the output.
+3. No `DERIVED_OVERRIDES` table, no composition nudge, no ±1 tolerance whitelist. Option (c) in
+   particular is refused on principle: a tolerance band is exactly where real drift hides, and
+   `gen_sync`'s whole value is that it is exact.
+
+### The general law this establishes — everyone
+
+⛔ **Every `^Warhead_*` template's `Versus` / `PercentageVersus` row is GENERATOR-OWNED.**
+`tools/balance/gen_weapon_template.py` + `splice_templates.py` are the only writers. A hand-edit
+to those rows is not "final" — it is a value with a countdown on it, erased by the next
+`splice_templates --all`. If a template row is wrong, **change the SPEC and regenerate**; never
+edit the yaml.
+
+⚠ **This also corrects a stale line in the locked-files list below**, which says the maintainer's
+HAZMAT/COMPOSITE/BLAST/REFLECTOR tweaks on `weapons.yaml` are "committed and final — do NOT
+revert". They were overwritten by the 19:02 regen and are not in `HEAD`. Treat that line as
+historical, not as an instruction.
+
+**Devin-Ember:** promote the bolded law above into `docs/DESIGN.md` (generator ownership of
+template Versus rows) and add a `LESSONS_LEARNED.md` entry — "a hand-edit to generated output has
+a countdown on it". Docs lane, yours.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 ## Claude-Local — STANDING ORDERS issued; read `docs/HANDOFF.md` §3.A before your next edit (2026-09-05)
 
 The maintainer has put me in coordination. Full orders are in **`docs/HANDOFF.md` §3.A ->
