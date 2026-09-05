@@ -1,6 +1,49 @@
 ﻿# Development Log
 
 
+## Devin-Ember — verification of Claude's findings + live tree state (2026-09-05, late evening)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
+
+**Artifact-checked Claude's four findings against the current tree:**
+
+1. **Non-UTF-8 / silent under-read — NOT present in the current tree.** Scanned all
+   404 live manifest files (weapons/rules/sequences/etc.): 0 decode failures, 0
+   control-byte files. The bad state was transient merge-time debris (the splice
+   regen `b905d7679` rewrote weapons.yaml since). `ordos_chemturret` and
+   `ordos_laserturret` both resolve via miniyaml. Claude's caution stands for future
+   presence/absence checks (`git show <rev>:<file> | grep -a`, never `git grep`) —
+   worth promoting to `docs/LESSONS_LEARNED.md`.
+2. **`weapons.yaml.rej`** — uncommitted failed-patch debris confirmed in tree.
+   It reverts maintainer-final values (REFLECTOR 75->74, COMPOSITE 99->100).
+   Left untouched (locked file's directory); owner should `del` it.
+3. **`^Warhead_CannonTesla_*` split-brain** — confirmed latent: Light has 1 straggler
+   ref (`RedAlert2/Soviets/yaml/weapons.yaml`), Medium/Heavy orphaned. Under the new
+   single-warhead-per-type ruling this wants ONE maintainer decision, not per-file
+   fixes. Not breaking anything (`audit_family_uniqueness` passes).
+4. **Master fast-forward** — `origin/master` now contains the branch's history;
+   confirmed 0 commits behind locally.
+
+**Ordos turret wiring — final verification (maintainer rulings):**
+- `ordos_chemturret`: resolves `Warhead@CannonChem`-family with **Range 14000 /
+  Damage 40000** — the maintainer's "bigger than artillery platform" spec. OK.
+- `ordos_laserturret`: after Aurora's W23 conversion (`9cdfa40dd`) it shares the
+  laser tank's composition — `Laser_Heavy` AreaDamage, Range 7275, same report.
+  **One divergence:** Damage 10000 (turret) vs 40000 (tank). Aurora preserved the
+  authored 10000 per the "Damage verbatim" split law; making it literally the same
+  laser (40000) is a balance change needing explicit maintainer sign-off —
+  rule 3/4, not a mechanical fix. Flagging for a ruling.
+- Generic `Mortar`/`MortarChem`/`MortarFire` templates: still generic-only, no
+  actor references — as the maintainer ordered.
+
+**Standing orders re-verified from HANDOFF:** Aurora = D2k buildout (all three
+factions now selectable with AI build orders); Dawn = Corrino Phase 3; Cyrus =
+commit WC2 pass + stand down; Echo = CABAL review + Ixian re-verify; Blaze =
+D2k Shared consolidation; Nova = composite-registry re-curation (fixes the
+`three_way_split` tool crash) + `gen_weapon_template.py` REFLECTOR 75->74 sync;
+Claude = reference/faction-routing lane (`tools/reference/**` etc.).
+
+
 ## Devin-Ember — audit suite + W24 collapse verification (2026-09-05, evening)
 
 **Identity:** Devin-Ember (SWE-1.7 Max). Verifier lane, sharing with Devin-Nova.
