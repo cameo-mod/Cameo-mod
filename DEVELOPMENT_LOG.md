@@ -1,6 +1,79 @@
 ﻿# Development Log
 
 
+## Devin-Aurora — fleet hierarchy acknowledged + coordination under Claude (2026-09-05, night)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator, reporting to Claude.
+
+**Fleet hierarchy acknowledged:** Maintainer order relayed by Devin-Ember (`0df97723c`):
+*"Claude AI is now your big boss and controls all other AI Agents so you must always
+listen to him and do EXACTLY as he says!"* — **Claude (Opus 5, local) is the fleet
+coordinator.** All agents take direction from Claude. Aurora remains D2k coordinator
+**under Claude's authority.** This entry records the acknowledgment. Claude has not
+yet issued consolidated fleet-wide orders in his coordinator capacity; until he does,
+agents continue their established roles from the last HANDOFF roster, with the
+following updates based on current artifact-verified state.
+
+**Current state verified (2026-09-05 night, HEAD = 0df97723c):**
+- Branch: `weapon_structure_and_warhead_fold`, 3 commits ahead of `origin/master`
+  (master was fast-forwarded to `e06ed9907` — Ember confirmed).
+- `find_empty_warhead.py` = 0 (2894 weapons).
+- `find_orphan_old_keys.py` = 0 real (73 false positives).
+- `verify_generator_sync.py` = drift 3 (from uncommitted WIP in working tree —
+  other agents editing weapons.yaml/gen_weapon_template.py; committed state = 0).
+- W23: ALL DONE. W24: EXHAUSTED (safe mechanical pool).
+- Both Claude patches landed: cabal_avatar (`e1552421f`) + HydraSpit (`8748c68e4`).
+- Nova landed Claude's reference-pipeline tooling (`85bcf3f33`).
+- 74 uncommitted WIP files in working tree (audit reports, balance ledgers, reference
+  docs, weapons.yaml Versus tweaks) — owned by other agents, NOT staged by Aurora.
+- doc_claims fix committed (`c9f95119f`): meters_filling_before_death 271→272,
+  corrosion_meter_actors 814→817, stale HydraSpit composite entry removed.
+
+**Open items awaiting Claude's ruling (fleet coordinator):**
+1. **ordos_laserturret "unique and special"** — maintainer order relayed by Ember.
+   `apply_balance --confirm` is a no-op until W11 ledger targets exist (0 signed-off
+   class anchors today). The distinctive-profile part is a design call. The file is
+   `D2k/Ordos/yaml/weapons.yaml` (Aurora's claim). **Awaiting Claude's ruling on what
+   "unique and special" means mechanically** (own Versus profile? state-metric trait?
+   extra warhead?).
+2. **Heaviness bell curve ruling** (Nova relayed): single warhead per type, no more
+   Light/Medium/Heavy. Does this mean EXISTING level templates should be refolded NOW,
+   or is that a later wave? **Awaiting Claude's direction.**
+3. **Intentional composites registry re-curation** — ~80+ curated decisions have stale
+   mains due to W24/W23 conversions. `audit_three_way_split` crashes on
+   `wc2deathknightFire` stale weapon_digest. **Awaiting Claude's priority call:**
+   is this Nova's task, or should it be delegated?
+4. **CannonTesla family** — Ember confirmed KEEP ruling satisfied. Orphaned Medium/Heavy
+   stay as legitimate family members. Under the single-warhead ruling this wants ONE
+   decision. **Awaiting Claude's ruling.**
+
+**Per-agent orders (under Claude's authority, updated 2026-09-05 night):**
+
+| Agent | Role | Order | Files | Priority |
+|---|---|---|---|---|
+| **Claude** (Opus 5) | **Fleet coordinator** | Issue consolidated fleet-wide orders. Rule on the 4 open items above. All agents await your direction. | all | 1 (now) |
+| **Devin-Aurora** (me) | D2k coordinator (under Claude) | Continue D2k sequence verification + Atreides/Shared buildout. Address ordos_laserturret once Claude rules. Do NOT create new Light/Medium/Heavy families. | `D2k/Atreides/**`, `D2k/Shared/**` | 1 (now) |
+| **Devin-Dawn** | Corrino owner | Corrino Phase 3: complete unique Corrino weapons/units. All factions selectable, AI added. Focus on Corrino-specific content from legacy d2k.yaml. | `D2k/Corrino/**` | 1 (now) |
+| **Devin-Cyrus** | WC2 owner | STAND DOWN: commit WC2 hero pass if not done, mark HANDOFF resolved. | `Warcraft2/**` | 1 (now) |
+| **Devin-Echo** | CABAL/Ixian owner | Review CABAL after cabal_avatar patch. Re-verify D2k/Ixian before Phase 4. | `D2k/Atreides/`, `D2k/Ordos/`, `D2k/Ixian/`, `CABAL/` | 1 (now) |
+| **Devin-Blaze** | D2k Shared owner | D2k Shared consolidation: move shared D2k weapons into `D2k/Shared/yaml/weapons.yaml`. Clean up legacy `d2k.yaml` dead blocks. | `D2k/Shared/`, legacy `d2k.yaml` | 1 (now) |
+| **Devin-Ember** | Verifier | Continue verification + doc sync. Monitor for boot-blockers. Help Nova with composite registry. | none (verifier) | 1 (now) |
+| **Devin-Nova** | Verifier/generator | Composite-registry re-curation (fixes `three_way_split` crash). `gen_weapon_template.py` REFLECTOR 75→74 sync. Help Ember. | `gen_weapon_template.py`, composite registry | 1 (now) |
+
+**What I am working on NOW:** D2k sequence verification — checking that all D2k
+actors have valid sprite references and sequence definitions. Then continuing
+Atreides/Shared buildout. Will address ordos_laserturret once Claude rules on
+the mechanical spec for "unique and special."
+
+**How this affects other agents:**
+- Dawn, Echo, Blaze: continue your D2k faction work. No changes to your file claims.
+- Ember, Nova: the composite registry re-curation remains your priority — it blocks
+  `audit_three_way_split` and the `multi_main_fired_weapons` doc_claims check.
+- Cyrus: commit and stand down — Dawn is waiting on the WC2 blocker resolution.
+- Claude: all agents await your consolidated orders. The 4 open items above need
+  your rulings before further structural weapon work can proceed.
+
+
 ## Devin-Ember — maintainer rulings executed + NEW FLEET HIERARCHY (2026-09-05, late evening)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
@@ -30,6 +103,12 @@ confirm and issue consolidated orders on his next pass.
    `D2k/Ordos/yaml/weapons.yaml`, outside my verifier lane.** Awaiting Claude's
    ruling on what "unique and special" means mechanically (own Versus profile?
    state-metric trait? extra warhead?).
+
+**Maintainer follow-up (same round):** both open items - the
+`ordos_laserturret` "unique and special" mechanic AND my verifier cadence -
+are **deferred to Claude** per the same order. No self-direction; I hold the
+standing verifier lane (audits, boot-gates, doc sync) until Claude issues
+consolidated orders.
 
 **Verifier-lane status:** tree healthy, audits fresh (`fd95873c5`), zero
 crash-class findings. Continuing standing verification + doc sync.
