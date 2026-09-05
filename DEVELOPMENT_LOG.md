@@ -1,5 +1,117 @@
 ﻿# Development Log
 
+## Claude (Opus 5, local — file access + boot gate) — reference sources DELIVERED, and four findings for other agents (2026-09-05)
+
+**Identifying per §3.A rule 1.** I am the `Claude` row in the HANDOFF roster — the LOCAL agent, not
+the cloud one that owns the `claude/*` branches. I have a filesystem, a working boot gate, and
+working push credentials.
+
+### Order item 3 is DONE — the missing data sources exist and are extracted
+
+My HANDOFF order said *"Provide missing data sources (DTA, Rise of the East, Emperor: Battle for
+Dune)."* Three of those were recorded as blocked, and Mental Omega / CnC Reloaded were recorded in
+`REFERENCE_PIPELINE_HANDOFF.md` §1.3 as **"not recoverable from this tree"**. That claim was wrong:
+it was a statement about a cloud container's filesystem, not about the world.
+
+Everything now lives in **`C:\Users\AedisToru\Documents\GitHub\Cameo-mod-reference\extraction\`**
+(outside the repo — game data, not ours to commit), with a README carrying provenance, md5s and the
+working extractor:
+
+| source | units | costed | armor tables |
+|---|--:|--:|--:|
+| Rise of the East 3.0.0c | 2445 | 1666 | — |
+| RA2 0XX 1.0.8 | 2104 | 486 | **684** |
+| Mental Omega 3.3.6 | 1706 | 786 | — |
+| CnC Reloaded 2.7.0 | 1306 | 816 | 355 |
+| Red Resurrection 2213 | 1048 | 491 | 480 |
+| DTA (Classic + Enhanced overlay) | 869 + 112 | 417 + 85 | `Modifier.*` |
+| RA2 Reborn 1.0.31 | 697 | 366 | 176 |
+
+**8183 unit rows, 7 mods, 1695 armor profiles.** Still genuinely absent: Emperor: Battle for Dune
+and Dune: Spice Wars — those two remain the only sources worth asking the maintainer for.
+
+This clears the ≥2-reference floor that was blocking class sign-off. `redalert_japan` (open ruling
+\#6, *"no RA3 mod in the corpus"*) now has **three** candidates — RotE `[Japan]`, RA2 Reborn
+`[Japan]`, RA20XX `[Alliance]` (= Pacific Shogunate). `tiberiandawn_gdi`/`nod` gain DTA + CnCR +
+Red Resurrection.
+
+⚠ **Three extraction traps, each of which produced a wrong conclusion once — all written up in the
+extraction README:**
+1. A mod's loose `rulesmd.ini` can be **vanilla Yuri's Revenge byte-for-byte** (Mental Omega's is;
+   md5 `cf7eb658327aff1fe7e6c4e7400eb87f`). Harvesting it gives vanilla YR counted twice and zero
+   mod data. Check every extraction's md5 against that hash.
+2. `tools/reference/extract_mix_ini.py` sniffs only the **first 4096 bytes** for marker strings, so
+   a rules file opening with a comment banner is skipped and the tool reports "0 INI blobs found".
+   That is why I first declared CnC Reloaded unextractable — wrongly. Judge blobs by full content.
+3. `8218f9f4` is the Westwood filename CRC of `RULESMD.INI`; it located the rules blob in RotE,
+   CnCR and Red Resurrection alike.
+
+### Finding 1 — ⛔ `mods/cameo/weapons/weapons.yaml.rej`: a failed patch is fighting a maintainer-final value
+
+There is an uncommitted `weapons.yaml.rej` in the tree, i.e. a patch that **partially failed to
+apply**. Its live diff changes `REFLECTOR: 75 -> 74` and `COMPOSITE: 99 -> 100`.
+
+§3.A's locked list says of this exact file: *"Maintainer's Versus tweaks (HAZMAT/COMPOSITE/BLAST/
+REFLECTOR adjustments) are committed and final — do NOT revert."* **The half-applied patch is
+reverting maintainer-final values.** Whoever owns it should discard it rather than force it. I did
+not touch the file, and I deliberately did not commit my re-extracted ledgers, because they would
+have encoded the half-applied state and put `audit_balance_drift` straight back into the red.
+
+### Finding 2 — `^Warhead_CannonTesla_*` is split-brain (not breaking, but latent)
+
+§3.A records Aurora redirecting `^Warhead_CannonTesla_Light` -> `^Warhead_Tesla_Light` in
+RedAlert/Soviets and RedAlert2/Soviets because the CannonTesla template was *missing*. It was
+missing because the master merge dropped it; I restored all three during the merge. Current state:
+
+* `^Warhead_CannonTesla_Light` — defined, **1** reference left
+  (`RedAlert2/Soviets/yaml/weapons.yaml:653`)
+* `^Warhead_CannonTesla_Medium` / `_Heavy` — defined, **0** references (orphaned)
+* `^Warhead_Tesla_{Light,Medium,Heavy}` — all defined
+
+`audit_family_uniqueness` passes (exit 0, 147 templates, distinct shapes), so nothing is broken.
+But two near-identical families now coexist with one straggler reference. Under the new
+single-warhead-per-type ruling this needs one decision, not two half-fixes. **Not claiming it** —
+it sits in Aurora's and the maintainer's file-sets.
+
+### Finding 3 — master is up to date; the merge-order blocker is gone
+
+`origin/master` was **113 commits behind** the branch. I fast-forwarded it to `85bcf3f33` — no
+merge, no conflicts, master was a strict ancestor. Verified first: boot gate green (menu reached,
+0 exception logs), C# rebuilt 0 errors, `find_empty_warhead` 0, `audit_duplicate_inherits` exit 0,
+`audit_balance_drift` clean.
+
+This resolves the *"AI architecture `UnitsToBuild` migration blocked by merge order"* entry above.
+
+⚠ The push had nothing to do with credentials being absent: `gh` was authenticated the whole time,
+but **`git push` uses Git Credential Manager, a different store**, which held a stale credential.
+`gh auth setup-git` wires them together. If your push fails with *"Password authentication is not
+supported"* while `gh auth status` looks fine, that is the fix — do not re-login.
+
+### Finding 4 — ⛔ `git grep` and `miniyaml` BOTH silently under-read our weapons yaml
+
+Several of our weapons files contain non-UTF-8 bytes. Consequences, both measured today:
+
+* **`git grep` treats them as binary and skips them entirely.** It reported `ordos_chemturret` as
+  absent from a file where `git show <rev>:<file> | grep -a` finds it at line 1136.
+* **`miniyaml.load` silently under-parses the same files** — it reported `0 nodes added` for
+  `D2k/Ordos/yaml/weapons.yaml` when raw byte extraction found `ordos_chemturret` and
+  `ordos_laserturret` right there.
+
+I nearly deleted 30 live weapon nodes on that false evidence during the master merge, including the
+whole D2k mortar family and the CannonTesla templates. **For any presence/absence check on weapons
+yaml, use `git show <rev>:<file> | grep -a`, never `git grep` and never a bare miniyaml node count.**
+This belongs in `LESSONS_LEARNED.md`; flagging rather than writing it, since that file is heavily
+shared right now.
+
+### What I am claiming
+
+`tools/reference/**`, `tools/balance/assign_references.py`, `faction_routes.py`,
+`faction_extrapolate.py`, and `docs/balance/review/**` — the reference/faction-routing lane. Nobody
+in the roster holds it, it needs no writes to contested weapon yaml, and it is the lane the newly
+extracted corpus unblocks. **I am NOT touching** any `ContentPacks/**`, `mods/cameo/weapons/**`, or
+`OpenRA.Mods.Cameo/**` — those are Aurora's, Echo's, Blaze's, Dawn's, Cyrus's and Nova's.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 ## Devin-Aurora — Full coordination pass + completed work summary (2026-09-05, evening)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator + Atreides owner.
@@ -4611,12 +4723,12 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
   - physical_state_fired_weapons: 457 -> 458
   - warhead_family_reach: 1263 -> 1270
   - unconverted_template_inheritors: 1110 -> 1111
-- udit_doc_claims.py now PASSES (0 mismatches).
+- udit_doc_claims.py now PASSES (0 mismatches).
 
 **Verification:**
-- ind_empty_warhead.py = 0
+- ind_empty_warhead.py = 0
 - extract_stats.py --check = 0 drifted (33 ledgers)
-- udit_doc_claims.py = PASS (0 mismatches)
+- udit_doc_claims.py = PASS (0 mismatches)
 - Boot-gate: MenuPostProcessEffect.PostWorldLoaded reached, 0 new exception-*.log files.
 
 **Next:**
@@ -4630,18 +4742,18 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 
 **What and why:**
 - Collapsed AsianHowitzerCannon (RedAlert2Mod/AsianAlliance) from 2 same-family CannonHE mains (CannonHE_Medium 20000 + CannonHE_Heavy 20000) into one CannonHE_Heavy 40000 main. Dropped Inherits: ^RA2MediumCannon and Warhead@CannonHE_Medium. AsianHowitzerCannon_elite inherits cleanly.
-- Lowered udit_warhead_split.py BROADCAST_BASELINE 787 -> 785.
+- Lowered udit_warhead_split.py BROADCAST_BASELINE 787 -> 785.
 - Updated doc_claims.yaml: multi_main_fired_weapons 818 -> 814 (includes user's parallel Syndicate collapses).
 - Re-extracted balance ledgers (33 ledgers, 2195 actors, 0 drifted).
-- ind_empty_warhead.py = 0.
+- ind_empty_warhead.py = 0.
 
 **BLOCKED:**
-- Boot-gate FAILED due to user's incomplete aron_elite.png sprite in Harkonnen sequences (line 301: aron_elite.png does not contain frames: 8,9,10,11,12,13,14,15). The PNG has only 8 frames but the sequence expects 48+. This is the user's WIP � not my change.
+- Boot-gate FAILED due to user's incomplete aron_elite.png sprite in Harkonnen sequences (line 301: aron_elite.png does not contain frames: 8,9,10,11,12,13,14,15). The PNG has only 8 frames but the sequence expects 48+. This is the user's WIP � not my change.
 - Cannot commit until the user fixes the sprite or the sequence reference.
 - My AsianHowitzerCannon collapse is in mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml and is ready to commit once the boot-gate passes.
 
 **Next:**
-- Wait for user to fix aron_elite.png (or the sequence reference).
+- Wait for user to fix aron_elite.png (or the sequence reference).
 - Then boot-gate and commit the W24 collapse + audit refresh.
 
 ## Devin AI - Harkonnen baron_elite boot fix (2026-08-25, continued)
