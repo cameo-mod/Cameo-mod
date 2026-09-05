@@ -70,6 +70,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "audit"))
 import assign_references as ar        # noqa: E402
 import faction_routes as fr           # noqa: E402
 import reference_distribution as rd   # noqa: E402
+import class_membership as cm         # noqa: E402
 
 ROOT = rd.ROOT
 # ⚠ THE LEADING UNDERSCORE IS A CONVENTION, NOT A STYLE CHOICE. Everything in `derived/` is a
@@ -363,6 +364,70 @@ def _report(peers, cameo, pairs, rates, virt, placements):
           f"{tot['pd'] + tot['placed']} of {tot['cam']} routed Cameo units")
 
 
+def by_class(pairs, placements):
+    """Per-CLASS grounding — the report that says where the anchors can actually be fitted.
+
+    ⛔ THREE ZEROES HERE ARE THE RULES WORKING, NOT HOLES, and each is measured rather than
+    assumed. Reading them as defects is the trap this function exists to prevent:
+
+      * `support` — 105 members, ALL exempt under clause 10 (MCV, engineer, harvester,
+        transports, detectors). They never consume a reference by design.
+      * `commando` and `epic_vehicle` — 27 and 24 members, and **100% of each carries
+        `build_limit`**. The maintainer's population rule (2026-08-30) excludes one-offs from the
+        corpus on BOTH sides: *"Cameo's heroes and epic units must be excluded since they will be
+        balanced separately."* So there is no peer row to match AND no Cameo row to match it to.
+        Both classes reading zero is that ruling, executing.
+
+    What IS a finding is a class with routed members and no grounding for some other reason.
+    """
+    led = ar.ledger()
+    rows = []
+    for klass in sorted({cm.classify(u.get("design") or {})[0] for u in led.values()} - {None}):
+        members = [n for n, u in led.items()
+                   if cm.classify(u.get("design") or {})[0] == klass and u.get("buildable") is True]
+        if not members:
+            continue
+        scope = [m for m in members if not ar.exempt(m, led[m])]
+        routed = [m for m in scope
+                  if fr.faction_of(m) and fr.routes_for(fr.faction_of(m))]
+        rows.append({
+            "class": klass, "members": len(members),
+            "exempt": len(members) - len(scope),
+            "routed": len(routed),
+            "paired": sum(1 for m in routed if m in pairs),
+            "placed": sum(1 for m in routed if m in placements),
+            "two_plus": sum(1 for m in routed if len(pairs.get(m, {})) >= 2),
+            "build_limited": sum(1 for m in members if led[m].get("build_limit")),
+        })
+    rows.sort(key=lambda r: -(r["paired"] + r["placed"]))
+    return rows
+
+
+def _by_class(rows):
+    print(f"  {'class':<18}{'memb':>5}{'exmpt':>6}{'limit':>6}{'routed':>7}{'paired':>7}"
+          f"{'placed':>7}{'>=2':>5}   grounded")
+    tot = collections.Counter()
+    for r in rows:
+        g = r["paired"] + r["placed"]
+        note = ""
+        if r["routed"] and not g:
+            note = ("  ✅ excluded by the population rule (all build-limited)"
+                    if r["build_limited"] == r["members"] else "  ⛔ routed but NOT grounded")
+        elif r["exempt"] == r["members"]:
+            note = "  ✅ wholly exempt (clause 10)"
+        pct = f"{g / r['routed']:.0%}" if r["routed"] else "—"
+        print(f"  {r['class']:<18}{r['members']:>5}{r['exempt']:>6}{r['build_limited']:>6}"
+              f"{r['routed']:>7}{r['paired']:>7}{r['placed']:>7}{r['two_plus']:>5}{pct:>8}{note}")
+        for k in ("members", "exempt", "routed", "paired", "placed", "two_plus"):
+            tot[k] += r[k]
+    print(f"  {'TOTAL':<18}{tot['members']:>5}{tot['exempt']:>6}{'':>6}{tot['routed']:>7}"
+          f"{tot['paired']:>7}{tot['placed']:>7}{tot['two_plus']:>5}")
+    print(f"\n  grounded: {tot['paired']} paired + {tot['placed']} rank-placed = "
+          f"{tot['paired'] + tot['placed']} of {tot['routed']} routed class members")
+    print(f"  ⚠ only {tot['two_plus']} members reach the >=2 reference floor — that does not move "
+          f"until MO / CnC Reloaded / DTA land.")
+
+
 def _rates(rates):
     print(f"  {'faction':<17}{'source':<24}{'stat':<9}{'k':>10}{'n':>5}{'spread':>9}")
     for (fac, src) in sorted(rates):
@@ -378,6 +443,8 @@ def _rates(rates):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--report", action="store_true", help="the roster mismatch, per faction")
+    ap.add_argument("--by-class", action="store_true",
+                    help="per-CLASS grounding: where the anchors can actually be fitted")
     ap.add_argument("--rates", action="store_true", help="the measured exchange rates")
     ap.add_argument("--faction", help="one faction, in full")
     ap.add_argument("--min-pairs", type=int, default=MIN_PAIRS_DEFAULT,
@@ -386,7 +453,9 @@ def main():
     args = ap.parse_args()
 
     peers, cameo, pairs, rates, virt, placements = build(args.min_pairs)
-    if args.rates:
+    if args.by_class:
+        _by_class(by_class(pairs, placements))
+    elif args.rates:
         _rates(rates)
     elif args.faction:
         fac = args.faction

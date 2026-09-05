@@ -434,3 +434,79 @@ your search".
 
 ⚠ **The Dune tier needs this most, and the numbers say so:** `ordos`'s entire exchange rate rests
 on **4 pairs** against 7 reference rows.
+
+
+---
+
+# PART V — THE PREREQUISITE HOP, AND WHERE THE ANCHORS CAN NOW BE FITTED (2026-09-05)
+
+## §17 — ⛔ THE FACTION WAS ONE HOP AWAY, IN THE PREREQUISITE BUILDING
+
+Found by asking why `heavy_sniper` — a **SIGNED** class — had both its members ground to nothing.
+`ra1_soviets` routed to **zero** reference infantry, while OpenRA Red Alert plainly ships Soviet
+infantry.
+
+OpenRA gates most infantry on a BARRACKS, not on a faction:
+
+```
+E2 (Grenadier):  Prerequisites: ~barr, ~techlevel.infonly
+BARR:            Prerequisites: anypower, ~structures.soviet, ~techlevel.infonly
+```
+
+The extractor read only the unit's own line, found no faction token, and returned nothing. It
+already parsed `structures.soviet` → `soviet` correctly — it simply never followed the hop.
+
+⭐ **`factions_of()` now resolves transitively through prerequisite ACTORS**, capped at
+`PREREQ_DEPTH = 2`. The cap is deliberate: follow the chain further and it reaches infrastructure
+both sides build (`anypower` → any power plant), and a faction attached through shared
+infrastructure is worse than no faction at all. A direct gate still wins outright — an inherited
+one is only consulted when the unit's own line says nothing.
+
+| type | tagged before | tagged after |
+|---|--:|--:|
+| infantry | **25%** | **39%** |
+| vehicle | 40% | **52%** |
+| ship | 50% | **84%** |
+| aircraft | 52% | **62%** |
+| defense | 80% | 82% |
+| building | 36% | 37% |
+
+⚠ **Infantry was the worst-tagged type in the corpus** and it is the largest share of most
+classes' populations — which is why the four infantry classes were all sitting at 61–67% grounded.
+
+## §18 — Per-class grounding: `faction_extrapolate.py --by-class`
+
+The report that says where an anchor can actually be fitted. **274 of 335** routed class members
+are now grounded (246 by a 1:1 pair, 28 rank-placed), and the number that gates sign-off —
+members carrying **≥2 references** — went **24 → 95** on the prerequisite hop alone.
+
+⛔ **THREE ZEROES IN THAT TABLE ARE THE RULES WORKING, NOT HOLES.** Reading them as defects is the
+trap the function documents against:
+
+| class | members | why zero |
+|---|--:|---|
+| `support` | 105 | **all exempt** under matching-law clause 10 — MCV, engineer, harvester, transports, detectors never consume a reference |
+| `commando` | 27 | **100% carry `build_limit`** |
+| `epic_vehicle` | 24 | **100% carry `build_limit`** |
+
+The population rule (maintainer, 2026-08-30) excludes one-offs from the corpus on BOTH sides:
+*"Cameo's heroes and epic units must be excluded since they will be balanced separately."* So for
+those two classes there is no peer row to match and no Cameo row to match it to. Zero is that
+ruling executing.
+
+⚠ **After this pass no class is left routed-but-ungrounded.** `heavy_sniper` was the last one and
+it was the symptom that found the bug.
+
+## §19 — ⛔ Mental Omega and CnC Reloaded: the faction data is NOT recoverable here
+
+Checked directly rather than assumed, because it is the biggest blocker in this document:
+
+* neither table has a faction column;
+* neither is ORDERED by faction — rows are sorted by `kind`, then HP;
+* there is **no raw MO or CnCR source anywhere in the tree** (`ORIGINAL_UNITS_RAW.md` is
+  hand-typed; `synthesize_reference.py` reads it and does not generate it).
+
+Deriving the factions from knowledge of the games would be exactly the *"inferred and invented data
+that might be wrong"* the maintainer ruled against. **It is the same class as DTA: the maintainer
+must supply the rules.** Until then MO and CnCR contribute unrouted rows, and the RA2 tier runs at
+1/2 rather than the ruled 1/6.

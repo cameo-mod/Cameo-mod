@@ -402,31 +402,85 @@ def declared_factions(rules):
     return out
 
 
-def factions_of(node, known):
-    """The faction tokens an actor is gated on, filtered by what the mod actually declares."""
-    b = next((c for c in node.children
-              if c.key == "Buildable" or c.key.startswith("Buildable@")), None)
+# How many prerequisite hops to follow when resolving a faction. 2 covers the real chains
+# (unit -> barracks -> `structures.<faction>`); deeper mostly reaches shared infrastructure and
+# risks attaching a faction through a building both sides can build.
+PREREQ_DEPTH = 2
+
+
+def _faction_tokens(text, known):
+    """The faction tokens inside one comma-separated Queue/Prerequisites string."""
+    found = set()
+    for chunk in (text or "").split(","):
+        tok = chunk.strip().lstrip("~!").strip().lower()
+        # `Infantry.Allies` -> allies · `~infantry.england` -> england · bare `yuri` -> yuri
+        for part in (tok.split(".")[-1], tok):
+            if not part or part.isdigit():
+                continue
+            if part in known:
+                found.add(part)
+                continue
+            # ⚠ Mods abbreviate their own faction names inconsistently: Shattered Paradise
+            # DECLARES `mut`, `cab`, `scr` and then gates units on `mutant`, `cabal`, `scrin`.
+            # A prefix match in either direction reconciles them; 3 characters is the floor so
+            # short unit tokens cannot masquerade as a faction.
+            for k in known:
+                if len(part) >= 3 and len(k) >= 3 and (part.startswith(k) or k.startswith(part)):
+                    found.add(k)
+                    break
+    return found
+
+
+def _buildable(node):
+    return next((c for c in node.children
+                 if c.key == "Buildable" or c.key.startswith("Buildable@")), None)
+
+
+def factions_of(node, known, rules=None, _depth=PREREQ_DEPTH, _seen=None):
+    """The faction tokens an actor is gated on, filtered by what the mod actually declares.
+
+    ⛔ THE FACTION IS OFTEN ONE HOP AWAY, IN THE PREREQUISITE BUILDING. OpenRA gates most infantry
+    on a barracks rather than on a faction:
+
+        E2 (Grenadier):  Prerequisites: ~barr, ~techlevel.infonly
+        BARR:            Prerequisites: anypower, ~structures.soviet, ~techlevel.infonly
+
+    Reading only the unit's own line finds no faction and returns nothing, which is why infantry
+    was the WORST-tagged type in the corpus at 25% against defence's 80% — and why
+    `ra1_soviets` routed to ZERO reference infantry while OpenRA Red Alert plainly ships Soviet
+    infantry. `heavy_sniper`, a SIGNED class, had both its members ground to nothing for exactly
+    this reason.
+
+    ⚠ Depth is capped at `PREREQ_DEPTH`. Following the chain forever eventually reaches
+    infrastructure both sides build (`anypower` -> any power plant), and a faction attached
+    through shared infrastructure is worse than no faction at all.
+
+    `rules` is optional so existing callers and tests keep working; without it the resolution is
+    the original single-level read.
+    """
+    b = _buildable(node)
     if b is None:
         return []
     found = set()
     for field in ("Queue", "Prerequisites"):
-        for chunk in (b.get(field) or "").split(","):
-            tok = chunk.strip().lstrip("~!").strip().lower()
-            # `Infantry.Allies` -> allies · `~infantry.england` -> england · bare `yuri` -> yuri
-            for part in (tok.split(".")[-1], tok):
-                if not part or part.isdigit():
-                    continue
-                if part in known:
-                    found.add(part)
-                    continue
-                # ⚠ Mods abbreviate their own faction names inconsistently: Shattered Paradise
-                # DECLARES `mut`, `cab`, `scr` and then gates units on `mutant`, `cabal`, `scrin`.
-                # A prefix match in either direction reconciles them; 3 characters is the floor so
-                # short unit tokens cannot masquerade as a faction.
-                for k in known:
-                    if len(part) >= 3 and len(k) >= 3 and (part.startswith(k) or k.startswith(part)):
-                        found.add(k)
-                        break
+        found |= _faction_tokens(b.get(field), known)
+    # Already decided at this level — do not dilute a direct gate with an inherited one.
+    if found or rules is None or _depth <= 0:
+        return sorted(found)
+    _seen = set() if _seen is None else _seen
+    for chunk in (b.get("Prerequisites") or "").split(","):
+        tok = chunk.strip().lstrip("~!").strip()
+        if not tok or tok.lower() in _seen:
+            continue
+        _seen.add(tok.lower())
+        key = rules._actor_ci.get(tok.lower())
+        if not key:
+            continue
+        try:
+            parent = rules.resolve(key)
+        except Exception:                       # a prerequisite that does not resolve is not fatal
+            continue
+        found |= set(factions_of(parent, known, rules, _depth - 1, _seen))
     return sorted(found)
 
 
@@ -481,7 +535,7 @@ def extract(mod_id):
             # ⭐ THE FACTION COLUMN (maintainer 2026-09-04). Reference routing needs it: an Asian
             # Alliance unit may only draw on Mental Omega China, which is what stops
             # "Animal Alligator" from ever being a candidate.
-            "faction": "/".join(factions_of(node, known_factions)) or "",
+            "faction": "/".join(factions_of(node, known_factions, rules)) or "",
             "limit": int(limit) if (limit and str(limit).strip().isdigit()) else None,
             **wep,
             "hp": int(hp), "cost": int(cost) if cost else None,
