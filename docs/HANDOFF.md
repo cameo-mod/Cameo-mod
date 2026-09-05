@@ -233,22 +233,28 @@ Crashes and player-visible regressions jump everything below.
 
 #### Unassigned tasks for the next available agent (Devin-Blaze or anyone free)
 
-1. **StarCraft Protoss/Zerg bullet collapses** (`mods/cameo/ContentPacks/StarCraft/*/yaml/weapons.yaml`):
-   Search for weapons with 2+ Bullet_Light + Bullet_Medium mains. Convert using the
-   established pattern (sum damage into Bullet_Medium, drop Bullet_Light inherit + warhead).
-   NOT in any locked list. NOT claimed by anyone.
+1. **~~StarCraft Protoss/Zerg bullet collapses~~** — **NO CANDIDATES FOUND.**
+   Re-scanned 2026-09-05 by Devin-Aurora: zero weapons with 2+ same-family
+   damage mains and positive Damage values in any StarCraft weapons.yaml.
 
-2. **~~RedAlert2Mod/Naxis bullet collapses~~** (`mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml`) — **DONE** in this session by Devin-Aurora. Seven machinegun weapons collapsed onto a single `Bullet_Medium` main; `multi_main_fired_weapons` 848 → 816.
+2. **~~RedAlert2Mod/Naxis bullet collapses~~** — **DONE** by Devin-Aurora.
 
-2b. **~~RedAlert (RA1) Allies + Soviets same-family collapses~~** (`mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`) — **DONE** in this session by Devin-Aurora. Uncommitted `SheridanMissiles`, `SheridanVulcan`, `ra1_soviets_ak47conscript_rifle`, `BTRMachineGun` + `_AA` collapsed to one main; per-shot totals preserved.
+2b. **~~RedAlert (RA1) Allies + Soviets same-family collapses~~** — **DONE** by Devin-Aurora.
 
-3. **RedAlert2Mod/Consortium missile/cannon collapses** (`mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml`):
-   Look for multi-main missile or cannon weapons. Check children before editing.
+3. **~~RedAlert2Mod/Consortium missile/cannon collapses~~** — **NO CANDIDATES FOUND.**
+   Re-scanned 2026-09-05 by Devin-Aurora: zero W24 candidates in Consortium.
 
-4. **Audit/RedAlert2 dead-code cleanup** (non-destructive): run a resolver script to
-   list every weapon in `mods/cameo/weapons/redalert2.yaml` that is shadowed by
-   `ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`, then either delete the dead
-   block or mark it with a comment. This is safe work that does not touch live weapons.
+4. **~~Audit/RedAlert2 dead-code cleanup~~** — **DONE.** `mods/cameo/weapons/redalert2.yaml`
+   is marked DEPRECATED (line 4), load entry commented out in `mod.yaml` line 307.
+   Verified dead: 0 unique templates, 0 unique weapons (Devin-Aurora 2026-08-25).
+
+5. **W23 retrofit candidates** — 2 remain (see `docs/audit/latest/phase_b_survey.md`):
+   - `ordos_laserturret` (D2k/Ordos) — blocked on Devin-Echo ownership
+   - `HydraSpit` (StarCraft/Zerg) — blocked on maintainer sign-off (mixed-family)
+
+**W24 safe pool status (2026-09-05): EXHAUSTED.** All remaining same-family
+multi-main weapons are complex multi-family weapons needing maintainer sign-off.
+The front moves to W23 (retrofit legacy templates), which needs coordination.
 
 5. **W23 retrofit candidates** — read `docs/audit/latest/phase_b_survey.md` for the
    current list of single-old-family weapons that can be retrofitted onto `^Warhead_*`
