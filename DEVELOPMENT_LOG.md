@@ -1,5 +1,72 @@
 ﻿# Development Log
 
+## Devin-Aurora — Master coordination pass + maintainer orders (2026-09-05)
+
+**Identity:** Devin-Aurora (GLM-5.2 High). D2k coordinator + Atreides owner.
+
+**Maintainer orders received (2026-09-05):**
+1. **D2k Atreides buildout** is my primary task — fill unique weapons from legacy
+   `d2k.yaml`, set `Selectable: true`, boot-gate, commit.
+2. **HydraSpit/BulletChem patch** — rework locally against current tree (Claude's
+   patch no longer applies cleanly; 95 commits diverged).
+3. **cabal_avatar dreadnought patch** — I apply it (coordinate with Echo who owns
+   CABAL files), boot-gate, commit.
+4. **Coordination** — write comprehensive orders for all agents.
+
+**Current verified state (artifact-checked, not summary-trusted):**
+- Branch: `weapon_structure_and_warhead_fold`, 95 commits ahead of `origin/master`,
+  0 behind. No merge needed.
+- Tree: clean (only DEVELOPMENT_LOG.md modified, rest is untracked scratchpad).
+- `find_empty_warhead.py` = 0 (2891 weapons).
+- W24 safe pool: EXHAUSTED. All remaining same-family multi-mains are complex
+  multi-family weapons needing maintainer sign-off.
+- W23: 1 candidate remains (`HydraSpit`, blocked on BulletChem family creation).
+- `ordos_laserturret` W23 conversion: DONE (`9cdfa40dd`).
+- D2k faction completion status (artifact-checked):
+  - **Atreides**: weapons.yaml = 2 lines (empty stub), `Selectable: true` MISSING.
+    Buildings/vehicles/infantry/aircraft exist but no unique weapons.
+  - **Corrino**: weapons.yaml = 37 lines (5 weapons), `Selectable: true` MISSING.
+    Has Sardaukar weapons + cannon + buggy gun.
+  - **Harkonnen**: weapons.yaml = 92 lines, `Selectable: true` SET.
+    Most complete of the three.
+  - **Ixian** (reference): 1751 lines weapons, complete.
+  - **Ordos** (reference): 2268 lines weapons, complete.
+- Claude branches: `claude/bot_insurance_dynamic_trait` and
+  `claude/docs-audit-reorganize-xgzwhr` are 155 commits diverged. Two patches
+  waiting: `01_bulletchem_hydraspit.patch` (DOES NOT APPLY — tree moved) and
+  `02_cabal_avatar_dreadnought.patch` (needs boot-gate check).
+- `doc_claims.yaml`: updated to post-merge values but referenced docs
+  (DESIGN.md, ARMOR_LAYERS.md, etc.) still carry old numbers.
+- `multi_main_fired_weapons` claim: failing on stale weapon_digest
+  (tooling issue in `intentional_composites.py`).
+
+**Per-agent orders (issued by Devin-Aurora, 2026-09-05):**
+
+| Agent | Order | Files | Priority |
+|---|---|---|---|
+| **Devin-Aurora** (me) | D2k Atreides buildout: unique weapons + Selectable: true | `ContentPacks/D2k/Atreides/**` | 1 (now) |
+| **Devin-Aurora** (me) | HydraSpit/BulletChem rework + cabal_avatar patch | StarCraft/Zerg, CABAL, weapons.yaml | 2 (after Atreides) |
+| **Devin-Dawn** | Corrino Phase 3: set `Selectable: true`, complete Corrino weapons/units | `ContentPacks/D2k/Corrino/**` | 1 (now) |
+| **Devin-Cyrus** | COMMIT WC2 hero weapon pass (Hellscream). Mark HANDOFF resolved. Stand down. | `ContentPacks/Warcraft2/**` | 1 (now) |
+| **Devin-Echo** | 1. Review CABAL file after Nova's orphaned-removal sweep. 2. Re-verify D2k/Ixian before Phase 4. 3. I will coordinate with you on the cabal_avatar patch. | `D2k/Atreides/`, `D2k/Ordos/`, `D2k/Ixian/`, `TiberianSun/CABAL/` | 1 (now) |
+| **Devin-Blaze** | D2k Shared consolidation: move remaining shared D2k content into `ContentPacks/D2k/Shared/`. Clean up legacy `d2k.yaml`/`rules/d2k.yaml` dead blocks. | `ContentPacks/D2k/Shared/`, legacy `d2k.yaml` | 1 (now) |
+| **Devin-Ember** | Run full audit suite on clean tree. Verify `find_empty_warhead` + `audit_duplicate_inherits` + `audit_doc_claims`. Report any regressions. | none (verifier) | 1 (now) |
+| **Devin-Nova** | Continue coordinator/verifier lane. Help Ember with audit suite. Monitor for boot-blockers. | `AreaDamageWarhead.cs`, tree-wide | 1 (now) |
+| **Claude** (Anthropic) | Your patches don't apply cleanly (95 commits diverged). I am reworking HydraSpit locally. Please: 1. Rebase your branches against current `weapon_structure_and_warhead_fold`. 2. Provide the missing data sources (DTA, Rise of the East, Emperor: Battle for Dune). 3. Do NOT merge your branches wholesale — extract specific files only. | `claude/*` branches | 2 (next cloud session) |
+
+**Sequencing rationale:**
+- D2k faction completion is the maintainer's stated priority (HANDOFF §3.7).
+- Atreides is the least complete faction (empty weapons.yaml, no Selectable).
+- HydraSpit/BulletChem unblocks W23's last candidate — but it touches `weapons.yaml`
+  (locked file) and `gen_weapon_template.py`, so it needs careful coordination.
+- cabal_avatar patch touches CABAL files (Echo's domain) — coordinate first.
+- Doc claims sync is lower priority but needed to keep the audit green.
+
+**What I am working on NOW:** D2k Atreides buildout — porting unique Atreides
+weapons (sonic tank, ornithopter, Fremen weapons, etc.) from legacy
+`mods/cameo/weapons/d2k.yaml` into `ContentPacks/D2k/Atreides/yaml/weapons.yaml`,
+then setting `Selectable: true` in faction.yaml, boot-gating, and committing.
+
 ## Devin-Aurora — W24 safe pool exhaustion verification (2026-09-05, continued)
 
 **Identity:** Devin-Aurora (GLM-5.2 High).
