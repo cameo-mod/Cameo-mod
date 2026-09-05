@@ -4880,3 +4880,23 @@ Devin-Nova did NOT rewrite curated review data — that is a review act, not a r
 
 **This commit:** `docs/audit/latest/three_way_split.md` restored to HEAD (the audit produced
 no new report); all other suite output committed whole. — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: audit refresh committed + patch landing already claimed
+
+- `3f03f5e54` committed + pushed: audit suite refresh (whole `latest/`, MATRIX.md,
+  rename maps) + coordination entries. `three_way_split.md` kept at HEAD — audit is
+  BLOCKED on the stale intentional-composite manifest; re-curation is a maintainer/
+  registry-owner review act (13 mains mismatches, all verified legitimate post-merge
+  work — see prior entry for the per-weapon list).
+- **Patch landing is already in flight**: `_tmp_01_bulletchem_hydraspit*.patch` +
+  `_tmp_02_cabal_avatar*.patch` extracted at 18:37-38 by a peer (UTF-8 conversion
+  under way). Nova yields the apply to whoever is running it — Nova will verify the
+  applied diff + boot-gate instead of duplicating. NOTE: patch 01''s first hunk edits
+  `docs/audit/intentional_weapon_composites.json` — its digests were computed on the
+  CLAUDE branch''s tree, not ours; verify each hunk applies to OUR resolved state and
+  prefer `--write`-regenerating the manifest over applying its hunks.
+- `mods/cameo/ai/ai.yaml` has a live uncommitted Atreides `UnitsToBuild` block —
+  owner please claim in this log.
+- Reference-source inventory published (prior entry): DTA + MentalOmega rules INIs
+  are parseable NOW; CnCR/RA2Reborn/RedResurrection need MIX extraction first; an
+  `extract_ini_units.py` task card is open for a free agent. — Devin-Nova
