@@ -1,5 +1,59 @@
 ﻿# Development Log
 
+## Devin-Aurora — Full coordination pass + completed work summary (2026-09-05, evening)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator + Atreides owner.
+
+**Start protocol completed:** Read CLAUDE.md, LESSONS_LEARNED.md, AGENT_WORKSPACE.md,
+HANDOFF.md (full), audit/SUMMARY.md. Verified branch sync, master state, all branches.
+
+**Verified current state (artifact-checked, 2026-09-05 evening):**
+- Branch: `weapon_structure_and_warhead_fold`, 108 commits ahead of `origin/master`, 0 behind.
+- Tree: clean. Branch synced with origin.
+- `find_empty_warhead.py` = 0 (2894 weapons).
+- `verify_generator_sync.py` = drift 0 across 145 templates (maintainer landed BulletChem spec).
+- W23: **ALL DONE** — `ordos_laserturret` (`9cdfa40dd`) + `HydraSpit` (`8748c68e4`).
+- W24: **EXHAUSTED** — no safe mechanical candidates remain.
+- Both Claude patches landed: `cabal_avatar` (`e1552421f`) + `HydraSpit` (`8748c68e4`).
+- D2k faction state (artifact-checked):
+  - **Atreides**: `Selectable: true` SET. weapons.yaml = 155 lines (Sound/Sound2/OrniBomb/OrniBombC/OrniMissile/OrniGun/OrniGunC/Fremen_S ported from legacy d2k.yaml). Buildings 15, infantry 4, vehicles 13, aircraft 4. AI build orders added (18 units).
+  - **Harkonnen**: `Selectable: true` SET. weapons.yaml = 92 lines. Buildings 17, infantry 4, vehicles 11, aircraft 4. AI build orders added (14 units).
+  - **Corrino**: `Selectable: true` SET. weapons.yaml = 37 lines. Buildings 15, infantry 8, vehicles 8, aircraft 4. AI build orders added (16 units). Siege tank + husk added. Gunship + advanced carryall added (using Harkonnen sprites as placeholders).
+  - All 5 D2k factions in RandomDU: atreides, ordos, harkonnen, corrino, ixian.
+  - promotions.yaml exists for all three (Harkonnen + Corrino were placeholders, now registered).
+
+**All commits this session (pushed to origin):**
+| Commit | What |
+|---|---|
+| `9cdfa40dd` | W23: ordos_laserturret 3-way split |
+| `d32a6ea61` | Atreides + Corrino selectable, Ixian placeholders replaced, RandomDU |
+| `c2b777167` | Corrino gunship + advanced carryall |
+| `e056e7945` | promotions.yaml for Harkonnen + Corrino |
+| `1858d0131` | Corrino siege tank + husk |
+| `877ca983b` | D2k faction AI build orders (Atreides/Harkonnen/Corrino) |
+| `e1552421f` | cabal_avatar dreadnought template patch (Claude's patch) |
+| `8748c68e4` | W23: HydraSpit BulletChem + orphaned Shrapnel fix |
+| `fe9e876e2` | Atreides weapons port (BROKEN - only 1 blank line staged) |
+| `876226947` | Atreides weapons port (REAL - 155 lines) |
+| `c685e12fe` | HANDOFF update: W23 ALL DONE, Aurora row current |
+
+**Per-agent orders (updated 2026-09-05 evening):**
+
+| Agent | Status | Order | Files | Priority |
+|---|---|---|---|---|
+| **Devin-Aurora** (me) | Active | D2k sequence verification + Corrino sprite placeholders + remaining D2k content | `D2k/Atreides/**`, `D2k/Shared/**` | 1 (now) |
+| **Devin-Dawn** | Active | Corrino Phase 3: complete Corrino weapons/units. All three factions are selectable, AI added. Focus on unique Corrino content. | `D2k/Corrino/**` | 1 (now) |
+| **Devin-Cyrus** | STAND DOWN | WC2 hero pass should be committed. If not done, commit and mark resolved. | `Warcraft2/**` | 1 (now) |
+| **Devin-Echo** | Active | Review CABAL file (cabal_avatar patch landed). Re-verify D2k/Ixian before Phase 4. | `D2k/Atreides/`, `D2k/Ordos/`, `D2k/Ixian/`, `CABAL/` | 1 (now) |
+| **Devin-Blaze** | Active | D2k Shared consolidation: move shared D2k weapons into `D2k/Shared/yaml/weapons.yaml`. Clean up legacy `d2k.yaml` dead blocks. | `D2k/Shared/`, legacy `d2k.yaml` | 1 (now) |
+| **Devin-Ember** | Active | Run full audit suite on clean tree. Report regressions. | none (verifier) | 1 (now) |
+| **Devin-Nova** | Active | Continue verifier lane. Stale composite registry needs re-curation (14 mains mismatches). Help Ember. | `AreaDamageWarhead.cs`, tree-wide | 1 (now) |
+| **Claude** | Active | Patches landed. Rebase `claude/*` branches. Provide missing data sources (Rise of the East, Emperor: Battle for Dune, Dune: Spice Wars). | `claude/*` branches | 2 (next session) |
+
+**What I am working on NOW:** D2k sequence verification — checking that all D2k
+actors have valid sprite references and sequence definitions. Then replacing
+Corrino's placeholder Harkonnen sprites with Corrino-specific assets.
+
 ## Devin-Aurora — Master coordination pass + maintainer orders (2026-09-05)
 
 **Identity:** Devin-Aurora (GLM-5.2 High). D2k coordinator + Atreides owner.
