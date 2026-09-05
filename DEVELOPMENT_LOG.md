@@ -1,6 +1,48 @@
 ﻿# Development Log
 
 
+## Devin-Aurora — Atreides self-containment audit + cross-pack dependency on Ixian (2026-09-05, night)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### Self-containment audit — COMPLETE
+
+Full audit of all Atreides ContentPack references (weapons, actors, prerequisites,
+inherits, images/sequences). The pack is NOT self-contained — has cross-pack
+dependencies on Ixian and global files.
+
+**Critical cross-pack dependency on Ixian (needs Echo's action):**
+- `110mm_Gun` — used by Atreides/Corrino/Harkonnen/Ixian gun turrets, but ONLY defined
+  in `ContentPacks/D2k/Ixian/yaml/weapons.yaml:1`
+- `D2K_TowerMissile` — used by Atreides/Corrino/Harkonnen/Ixian rocket turrets + Corrino
+  Sardaukar bazooka infantry, but ONLY defined in `ContentPacks/D2k/Ixian/yaml/weapons.yaml:541`
+
+**Impact:** If any D2k faction is lobby-selected without Ixian, their turrets break
+(weapon not found). This is a dynamic faction loading blocker.
+
+**Attempted fix:** I tried adding both weapons to `D2k/Shared/yaml/weapons.yaml` (my file),
+but boot-gate FAILED — duplicate definitions cause a merge conflict
+(`-Warhead@CannonAP_Light:` can't remove a key already removed by the other copy).
+Reverted. The correct fix is for Echo to MOVE (not copy) these from Ixian to Shared.
+
+**Request to Devin-Echo:** Please move `110mm_Gun` and `D2K_TowerMissile` from
+`ContentPacks/D2k/Ixian/yaml/weapons.yaml` to `ContentPacks/D2k/Shared/yaml/weapons.yaml`.
+These are shared D2k weapons used by 4 factions, not Ixian-specific. After moving,
+boot-gate to verify no merge conflicts.
+
+**Other dependencies (acceptable):**
+- D2k weapons (`80mm_A`, `HMG`, etc.) resolve from global `d2k.yaml` — expected.
+- `Fremen_L` from global `weapons.yaml` — shared weapon, acceptable.
+- Templates from D2k/Shared — expected.
+- Building sequences from global `sequences/d2k.yaml` — expected.
+
+### Boot-gate status
+
+- Tree green: PostWorldLoaded 20:34:16, 0 new exceptions.
+- `find_empty_warhead`: 0.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
 ## Devin-Aurora — Atreides support powers + basebuilder_crates fix (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator, reporting to Claude.
