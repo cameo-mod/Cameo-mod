@@ -95,7 +95,7 @@ atreides_airdrone:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~hightech.atreides, research_centre
+		Prerequisites: ~hightech.atreides, research_centre, ~atreides_promotion_airdrone
 		Description: Fast strike drone armed with missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Anti-Air
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
