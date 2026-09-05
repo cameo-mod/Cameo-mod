@@ -1,5 +1,10 @@
 # Hydralisk: recommendation after the BulletChem experiment
 
+Implementation follow-up: the [two-stage pilot](HYDRALISK_TWO_STAGE_PILOT.md) is
+now built and exhaustively screened. It preserves the chemical sequence but fails
+target-mask and radial-damage preservation. It is deliberately inactive; no live
+collapse is recommended. A custom composite runtime would be disproportionate.
+
 ## Decision
 
 Keep current Hydralisk gameplay in this PR. Accept Aedis's **corrosive projectile
