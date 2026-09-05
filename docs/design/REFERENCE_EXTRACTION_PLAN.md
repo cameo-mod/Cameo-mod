@@ -23,6 +23,8 @@ in §0 below.
 | R7 | **Variance is reported three ways**: coefficient of variation, min/max spread, and percentile position of the faction's mean within its own game. |
 | R8 | **Armor extrapolation: interpolate between the peer's OWN declared rungs.** Every value a peer actually declares is a fixed anchor on its ladder; rungs between two anchors are interpolated; beyond the outermost anchor the value is held flat. A peer that declares only ONE rung on a ladder votes flat and is **downgraded to low confidence**. ⛔ Never distribute using Cameo's own §12.0i curve — that would make the "independent" reference partly a measurement of ourselves. |
 | R9 | **Derived corpus is committed under `docs/reference/`; raw game data stays outside the repo** in `Cameo-mod-reference/`. |
+| R10 | **Sequencing: the C&C family is built FIRST** — TD, RA1, TS, RA2 and the RA2-modded factions, from the references we have. Warcraft, StarCraft and Dune factions come later, each from **their own** reference pool (StarCraft mods, WC2 mods, Emperor: Battle for Dune, Spice Wars, the custom D2k mods). Measured and safe: of the **22 classes in use, ZERO are deferred-only** — every class a Warcraft/StarCraft/Dune unit sits in also has C&C members, and C&C members dominate all 16 mixed classes (`mbt` 33:8, `support` 30:4, `fire_support` 26:4). Deferred factions keep global-formula pricing meanwhile; waiting does not make them more wrong. ⛔ **The protection this depends on: anchor values are FROZEN design numbers. Re-fitting an anchor is an explicit maintainer act and must NEVER happen as a side effect of adding a reference source** — a re-fit moves every already-balanced faction underneath itself. ⚠ `archer` (2 C&C members) and `heavy_infantry` (1) are too thin to anchor on C&C evidence alone; leave them formula-only until their own references land. |
+| R11 | **Cameo 1.0 release gate: EVERY faction must be written with the new balance formula, and EVERY faction must have reference data to choose from.** No faction ships 1.0 on formula-only pricing. The per-reference-faction calculated values are what populate each unit class relative to the baseline — so a faction with no reference has nothing to position against. This makes the deferred reference sources (Emperor, Spice Wars, StarCraft, WC2, the custom D2k mods) **release-blocking for 1.0**, not optional enrichment. |
 
 ---
 
@@ -48,7 +50,14 @@ in §0 below.
 Vengeance), `hv` (Hard Vacuum / OpenHV), `e2140` (OpenE2140), `gen` (Generals Alpha), `fnw`,
 `ra2vsh` (Valiant Shades), plus the upstream `ra`, `ra2`, `yr`, `ts`, `cnc`, `d2`, `d2k`.
 
-⛔ **`extract_peer_units.py` does not run today** — see task A1.
+✅ **A1/A2 DONE 2026-09-05** — `extract_peer_units.py` now runs. **9 of 16 peers resolve, 1946 units**:
+Combined Arms 382, Romanov's Vengeance 729, Shattered Paradise 306, Generals Alpha 153,
+Crystallized Nexus 97, OpenRA TD 56, RA 94, TS 73, D2k 56 — the last four from the
+`cameo-engine` clone, which already ships `mods/{cnc,ra,ts,d2k}`.
+
+⏳ Still missing 7, ranked by the armor map's own assessment: **Valiant Shades** (AS-lineage,
+highest confidence, tied with RV), **OpenHV**, **OpenE2140**, OpenRA RA2, Yuri's Revenge on
+OpenRA, Fractured Realms, Dune II (declares NO `Versus` — unit stats only). Non-blocking.
 
 ---
 
@@ -58,13 +67,13 @@ Vengeance), `hv` (Hard Vacuum / OpenHV), `e2140` (OpenE2140), `gen` (Generals Al
 
 | # | task | notes |
 |---|---|---|
-| **A1** | **Port `mod_id` into `tools/audit/miniyaml.py`** | ⛔ BLOCKER. `Ruleset.__init__` takes one arg; `extract_peer_units.py` calls it with two. The change exists on `origin/claude/docs-audit-reorganize-xgzwhr` (27 insertions, `mod_id: str = "cameo"` default, so every existing caller is unaffected). Devin landed the tooling without it. |
-| **A2** | Resolve all 16 peers on disk; report which are missing | `--dry-run`. A missing root is skipped near-silently — read every line. |
+| **A1** | ✅ DONE — **Port `mod_id` into `tools/audit/miniyaml.py`** | ⛔ BLOCKER. `Ruleset.__init__` takes one arg; `extract_peer_units.py` calls it with two. The change exists on `origin/claude/docs-audit-reorganize-xgzwhr` (27 insertions, `mod_id: str = "cameo"` default, so every existing caller is unaffected). Devin landed the tooling without it. |
+| **A2** | ✅ DONE — Resolve all 16 peers on disk; report which are missing | `--dry-run`. A missing root is skipped near-silently — read every line. |
 | **A3** | INI extractor → the same schema as the OpenRA extractor | RA2/YR 11-slot `Verses=`, TS 5-slot, DTA `Modifier.*`. |
 | **A4** | Every stat, both families (R6) | core (HP/cost/speed/range/DPS/armor) + build/economy + combat detail + vision/utility. |
 | **A5** | Every `Versus` / `Verses` / `Modifier.*` row | ⚠ In OpenRA yaml `Versus` is a **node with an EMPTY value whose children are the rows**. `node.get("Versus")` returns empty and yields the false result "0 peers expose Versus". Use `weapon_efficiency.versus_of`. |
 | **A6** | Armor normalisation per R8 | onto the four ladders in `docs/reference/peer_armor_map.yaml`; confidence gates voting; only `high`/`medium` vote. |
-| **A7** | Convert the two UTF-16 reference files to UTF-8 | `PEER_ARMOR_VOCABULARIES.md`, `peer_armor_map.yaml` — PowerShell `>` wrote them; every grep silently under-reads them. |
+| **A7** | ✅ DONE — Convert the two UTF-16 reference files to UTF-8 | `PEER_ARMOR_VOCABULARIES.md`, `peer_armor_map.yaml` — PowerShell `>` wrote them; every grep silently under-reads them. |
 
 ### Phase B — statistics (R5, R7)
 
