@@ -114,3 +114,35 @@ The 11 curated main-name disagreements group into three concrete review batches:
 
 These observations describe profile membership only, not damage preservation or
 approval. The other fingerprint/reference findings still require review too.
+
+## Priority finding: AtomicCore loses a delayed extra hit
+
+Upstream [a92ae850f](https://github.com/cameo-mod/Cameo-mod/commit/a92ae850ff65b65cab015f99e2a5a0fc9e115910)
+does more than collapse two same-family mains. Comparing its parent AtomicCore
+definition with current upstream gives these explicit Tesla stages, all targeting
+`Shielded`:
+
+| Authored Delay | Before raw Damage | Current raw Damage |
+|---|---:|---:|
+| 0 | 100,000 | 200,000 |
+| 2 (`Tesla_Super_ExtraDamage`) | 100,000 | 100,000 |
+| 3 (`Tesla_Heavy`) | 100,000 | removed |
+| 5 (`Tesla_Heavy_ExtraDamage`) | 100,000 | removed |
+| Sum of these explicit Tesla stages | 400,000 | 300,000 |
+
+Thus the explicit raw Tesla-stage budget falls 25%, and a delayed 100,000 main
+contribution moves to the initial stage. **This is not a claim of a 25% reduction
+in total nuclear damage or actual shield damage**: armor, percentage applications,
+defenses, target eligibility and the other nuclear payload remain separate.
+
+The engine's `WeaponInfo.Impact` dispatches all warheads and schedules positive
+Delay values through `DelayedImpact`; `ExtraDamage` is not an engine exemption.
+The structural main-count predicate deliberately excludes that companion name.
+Preserving only the main-warhead total therefore does not establish preservation
+of the complete delivered payload or timing.
+
+Current resolved descendants Atomic, RAAtomic, RA2Atomic, NaxiV1Rocket, DTAtomic
+and ChemTibAtomic all contain the remaining two Tesla stages. This is a concrete
+reason to reconcile the review decisions, not merely refresh their fingerprints.
+Whether the removed hit and altered timing were intended remains a maintainer
+decision. No gameplay restoration is applied by this PR.
