@@ -377,6 +377,11 @@ def peer_rows():
         rows.append({"source": source, "raw_source": source,
                      "id": d.get("id", ""), "name": d.get("unit", ""),
                      "type": d.get("type", "other"),
+                     # ⚠ SAME CLASS OF BUG AS `cost` ABOVE: the faction column was added to the
+                     # document by `extract_peer_units.py` and dropped here on read, so the
+                     # routing ruling had no data to route on. A column that exists upstream and
+                     # is not carried is indistinguishable from a column that was never extracted.
+                     "faction": d.get("faction", ""),
                      "turreted": (d.get("turret", "").lower() == "y"),
                      "hp": hp, "speed": spd, "turn_speed": turn,
                      "turn_ratio": (spd / turn) if (spd and turn) else None,

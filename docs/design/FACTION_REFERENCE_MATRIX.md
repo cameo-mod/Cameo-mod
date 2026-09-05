@@ -1,7 +1,10 @@
 # The faction reference matrix
 
-> ⛔ **A PLAN, NOT AN IMPLEMENTATION.** Nothing is wired. `assign_references.py` still matches by
-> name and shape, which is what produced the rejected scout sheet.
+> ⛔ ~~**A PLAN, NOT AN IMPLEMENTATION.** Nothing is wired.~~ **STRUCK 2026-09-04 — it is wired.**
+> Routing is implemented and default-on in `assign_references.py`; the route map lives in
+> `tools/balance/faction_routes.py`. **Read [PART IV](#part-iv--wired-and-what-the-wiring-measured-2026-09-04-later-session)
+> first** — it carries what the wiring measured, and it corrects the faction ids used in Parts
+> I–III, which do not exist in the tree.
 
 **Maintainer ruling 2026-09-04, after reviewing that sheet:** *"most of the references are
 bullshit… what does the Asian Alliance Militia have to do with the Combined Arms Infiltrator? …
@@ -297,3 +300,137 @@ and every mod-hosting domain is blocked by this environment's egress proxy.
 ⚠ Also unresolved: the maintainer mentions a **Combined Arms fork** — *"the ymca mod … more chaotic
 and less balanced … only try to use it for the scrin"*. Not identified from the name; needs the
 real name or a link before it can be assessed.
+
+---
+
+# PART IV — WIRED, AND WHAT THE WIRING MEASURED (2026-09-04, later session)
+
+⭐ **The banner at the top of this document is now false and is struck below.** Routing is
+implemented, tested and default-on:
+
+| what | where |
+|---|---|
+| the ruled route map, data-only | [`tools/balance/faction_routes.py`](../../tools/balance/faction_routes.py) |
+| routing inside the assignment (clause 11) | `tools/balance/assign_references.py` |
+| the layer for units with no counterpart | [`tools/balance/faction_extrapolate.py`](../../tools/balance/faction_extrapolate.py) |
+| tests | `tools/tests/test_faction_routes.py` (19) · `test_faction_extrapolate.py` (20) |
+
+```sh
+python tools/balance/faction_routes.py            # the matrix with measured row counts
+python tools/balance/faction_routes.py --check    # every ruled route resolves, or exit 1
+python tools/balance/assign_references.py         # routed by default; --no-routing to compare
+python tools/balance/faction_extrapolate.py --report
+```
+
+## §12 — ⛔ THE FACTION IDS IN PARTS I–III ARE NOT THE TREE'S
+
+This document was written with `redalert2mod_asianalliance`, `tiberiandawn_gdi`,
+`tiberiansun_forgotten`. The mod's own `InternalName`s — and every ACTOR PREFIX in every ledger —
+are **`asianalliance`, `td_gdi`, `forgotten`**.
+
+⚠ **Precisely, because the long names are not fiction:** `redalert2mod_asianalliance` is a real
+name in this repo — it is the **ledger file** `docs/balance/redalert2mod_asianalliance.json` and
+the ContentPack it came from. What it is NOT is the faction id, and routing has to key on the
+faction id, because that is what an actor id carries.
+
+⚠ **Get it wrong and it is the `RA2/YR` failure again, one layer up.** A ruling keyed on a name
+that does not appear in an actor id routes nothing, silently, and looks complete while doing so.
+`faction_routes.py` uses the tree's faction ids and `validate()` fails on any that are not
+declared; `--check` is green.
+
+## §13 — ⭐ THE MEASUREMENT THAT JUSTIFIES THE RULING
+
+Of the **1,852** proposals the old matcher produced across the roster:
+
+| | |
+|---|--:|
+| route-LEGAL (the reference is in a faction this Cameo faction is mapped to) | **144 — 7.8%** |
+| route-ILLEGAL | **1,708 — 92.2%** |
+| …of those, previously labelled **STRONG** on a name match | **599** |
+
+⛔ **That is the "bullshit" rate, measured — and 599 of them carried the top confidence label.**
+The name score was doing exactly what it was built to do and was answering the wrong question.
+
+## §14 — What routing costs, stated plainly
+
+| | routed | unrouted (the rejected behaviour) |
+|---|--:|--:|
+| Cameo actors in scope | 447 | 693 |
+| assigned ≥1 reference | 325 | 596 |
+| reaching the ≥2 reference floor | 53 | 454 |
+| STRONG proposals | 140 | 721 |
+
+⚠ **Routing is much stricter and that is the point**, but two costs are real and must not be
+smoothed over: 246 in-scope actors are formula-only because their faction has no route at all, and
+of those that are routed, most now have exactly ONE reference rather than two. The ≥2 floor is not
+reachable for most factions until Mental Omega, CnC Reloaded and DTA land.
+
+## §15 — ⭐ THE ROSTERS DO NOT LINE UP, AND THAT IS WORKABLE
+
+**Maintainer, 2026-09-04:** *"not all reference factions have all the units from our factions or
+they have additional units we don't have. It might even be that only a small portion of the units
+could be mapped but that's still okay because we can use reasoning and our existing stats and the
+unused extra reference units from their factions to somehow extrapolate something that roughly
+makes sense."*
+
+Measured, the mismatch runs in **both** directions: **557 reference rows go unused**, while `ordos`
+has 25 Cameo units against **7** routed reference rows and `yuri` 19 against 15.
+
+**The method, three steps, each measured rather than assumed** (`faction_extrapolate.py`):
+
+1. **The exchange rate.** The pairs that DID match give the scale between the two rosters:
+   `k = geometric mean over pairs of (cameo_stat / reference_stat)`, per stat and per route.
+   That is "use our existing stats", in one number. **104 rates** are measured today across 27
+   (faction, source) routes, each reported with its pair count `n` and its `spread`.
+2. **The whole reference roster becomes Cameo-scale data.** Every routed reference row × `k` is a
+   data point about the SHAPE of the population — including the units the reference faction fields
+   and Cameo does not.
+3. **A unit with no counterpart is placed by rank.** Its percentile inside its own (faction, type)
+   Cameo population is read off the converted reference distribution. Cameo's roster decides the
+   ORDER; the reference decides the SPREAD.
+
+**Result: 361 of 447 routed Cameo units now have grounded placement** — 325 by a 1:1 pair, **36 by
+rank placement**. The remaining 86 are in (faction, type) cells where the reference faction has
+fewer than three usable rows — most of them navies that the reference factions simply do not field.
+
+### ⛔ Four things this got wrong first, each now a guard and a test
+
+1. **Pooling only the LEFTOVERS emptied the pool where it was needed most.** Infantry is where 1:1
+   name matching succeeds, so almost no infantry row is left over — and infantry is 59 of the 122
+   unpaired Cameo units. A distribution is made of all its members; a row does not leave it by
+   having been matched. Fixed: the placement pools the **whole** routed roster.
+2. **With no reference rows the placement is the IDENTITY and does not look like one.** Reading a
+   unit's own percentile off its own roster returns its own value. `ordos` reported 20 such
+   placements as coverage.
+3. **Nearest-point placement collapses a small roster.** OpenE2140 `ed`'s four infantry rows put
+   SIX Naxis infantry, spanning 20,000–96,000 HP, on one value. Fixed by interpolating between
+   reference points in **log** space (the space every aggregate here already uses).
+4. ⛔ **A reference faction can be uninformative for a whole type, and averaging hides it.**
+   OpenE2140 `ed` fields Androids A01–A04 at HP 28/28/28/20 and speed 50/50/50/50. Placing Naxis's
+   nine infantry against that would have **deleted a roster's variety while looking like
+   evidence**. A reference population with fewer than three DISTINCT values now places nothing.
+
+### ⚠ And one that is reported rather than fixed
+
+`spread` is the geometric standard deviation of a rate's per-pair ratios. Where it is large, the
+two rosters do not scale by one number at all — `ts_nod ← Crystallized Nexus` `w_dps` measures
+**324×** on 3 pairs. That is a fact about the pairing, not a number to smooth away, so it is
+printed next to every rate.
+
+## §16 — ⏰ Sources the maintainer is supplying (ask 2026-09-05)
+
+| source | needed for | status |
+|---|---|---|
+| **DTA** | all four TD/RA1 factions | promised 2026-09-05 |
+| **Rise of the East** | Asian Alliance (China) · TKM (GLA) | promised |
+| **Emperor: Battle for Dune** | ⭐ all Dune factions — **and it is the only source for `ixian` and `corrino`**, which were listed as permanently formula-only | ⭐ ruled 2026-09-04 |
+| **Dune: Spice Wars** | the Dune tier's second modern voice | ⭐ ruled 2026-09-04 |
+| **further Dune mods** | the Dune tier | maintainer has them locally |
+
+⭐ **Emperor changes a "never" into a "pending".** `ixian` and `corrino` were both recorded as
+having no counterpart in any source; Emperor fields House Ix and the Imperial/Sardaukar house. That
+was a claim about the corpus, not about the world — the same shape as "not found is a claim about
+your search".
+
+⚠ **The Dune tier needs this most, and the numbers say so:** `ordos`'s entire exchange rate rests
+on **4 pairs** against 7 reference rows.

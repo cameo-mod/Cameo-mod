@@ -743,3 +743,25 @@ reviewed. ⚠ The residual WEAK rows are not a defect to fix: they are clause 9 
 (*"assign, but flag low-confidence"*). `asianalliance_asianmilitia` drawing *"Animal Alligator"*
 from CnC Reloaded is the greedy taking the best of what was left after better-matched militia units
 claimed the good candidates. **It is flagged WEAK, which is the whole point.**
+
+---
+
+## §13 — ⛔ FACTION ROUTING SUPERSEDES OPEN MATCHING (2026-09-04)
+
+**Maintainer, after reviewing the `scout` sheet §9–§12 produced:** *"most of the references are
+bullshit… instead of trying to match something completely unrelated we now try to map reference
+faction to our cameo factions."*
+
+**Everything in §9–§12 still describes the CASCADE — how two candidates are ranked. What changed is
+the CANDIDATE SET.** A Cameo unit may now only see the reference factions its own faction is routed
+to (`tools/balance/faction_routes.py`, clause 11 of the matching law). The cascade then decides
+among those, exactly as before.
+
+⛔ **The measurement that justifies it: of the 1,852 proposals the open matcher produced, 1,708
+(92.2%) were cross-faction — and 599 of those carried the STRONG label.** The name score was doing
+its job and answering the wrong question.
+
+⚠ **Read [`FACTION_REFERENCE_MATRIX.md`](FACTION_REFERENCE_MATRIX.md) PART IV** for the route map,
+what routing costs (447 in scope rather than 693; most units now hold ONE reference, not two), and
+the extrapolation layer that covers units with no counterpart at all. This section exists so that
+nobody reads §9–§12 as current practice without it.

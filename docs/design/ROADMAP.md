@@ -99,6 +99,46 @@ dead wiring that no current audit can see, and its own docstring says the check 
 
 ---
 
+## ⏰ ASK THE MAINTAINER 2026-09-05 — the four reference sources that are promised
+
+Every one is a maintainer ruling whose DATA is missing, so each is a route that exists and reaches
+zero rows. Recorded in `tools/balance/faction_routes.PENDING`, which prints them with
+`python tools/balance/faction_routes.py`.
+
+| source | unblocks | why it cannot be fetched here |
+|---|---|---|
+| **DTA** | all four TD/RA1 factions (the ruled 1/3 third voice) | Ares INI mod, rules inside MIX archives; mod hosts are blocked by the egress proxy |
+| **Rise of the East** | Asian Alliance (China) · TKM (GLA) | same |
+| **Emperor: Battle for Dune** | ⭐ every Dune faction — **and the ONLY source for `ixian` and `corrino`**, both previously recorded as permanently formula-only | not an OpenRA mod |
+| **Dune: Spice Wars** | the Dune tier's second modern voice | a retail game |
+
+⚠ Also still open and NOT a data problem — a ruling: **Mental Omega and CnC Reloaded have no
+faction column.** They are hand-typed tables, and they are game A for four invented factions.
+
+⭐ The Dune tier needs this most, measured: `ordos` has **25 Cameo units against 7 routed reference
+rows**, and its entire exchange rate rests on **4 pairs**.
+
+## ✅ SHIPPED 2026-09-04 — FACTION ROUTING, AND THE LAYER FOR UNITS WITH NO COUNTERPART
+
+Full account: [`FACTION_REFERENCE_MATRIX.md`](FACTION_REFERENCE_MATRIX.md) PART IV.
+
+- [x] `tools/balance/faction_routes.py` — the ruled route map, data-only, validated against the
+  corpus (`--check`). 19 of 24 Cameo factions routed; 5 formula-only by ruling.
+- [x] `assign_references.py` clause 11 — routing is DEFAULT; `--no-routing` reproduces the
+  rejected behaviour for comparison only.
+- [x] `reference_distribution.peer_rows()` now carries the `faction` column — it was in the
+  document and dropped on read, the same bug `cost` had.
+- [x] `tools/balance/faction_extrapolate.py` — exchange rates from the matched pairs, then rank
+  placement for the units with no counterpart. **361 of 447 routed units grounded** (325 paired,
+  36 rank-placed).
+- [x] 39 tests across `test_faction_routes.py` and `test_faction_extrapolate.py`.
+- [ ] ⚠ **No class may be signed on this evidence yet.** Most routed units hold ONE reference, not
+  the ≥2 floor, and that does not change until DTA / MO / CnCR land.
+- [ ] Regenerate the per-class review sheets and re-review. Only `scout` has been regenerated.
+
+⛔ **The measurement that justifies the ruling: 1,708 of 1,852 old proposals (92.2%) were
+cross-faction, and 599 of those carried the STRONG label.**
+
 ## ✅ SHIPPED 2026-09-03 — THE REFERENCE CORPUS IS DE-DUPLICATED (one roster, one vote)
 
 **Maintainer order 2026-09-03:** *"All data needs to be unique and then used as a geometric mean

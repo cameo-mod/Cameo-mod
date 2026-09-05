@@ -20,6 +20,9 @@ assigns nothing. This is the assignment itself. Neither is duplicated — both a
   8. a collapsed lineage offers ONE reference, not several;
   9. every fit is assigned — no blanks; confidence carries the warning;
  10. MCV / engineer / harvester / support / transports / detectors are EXEMPT; armed APCs are not.
+ 11. FACTION ROUTING (2026-09-04, after the scout sheet was rejected): a Cameo unit may only see
+     the reference FACTIONS its own faction is routed to — `faction_routes.ROUTES`. A faction with
+     no route is formula-only rather than matched against a stranger.
 
 WHY GREEDY AND NOT OPTIMAL
 --------------------------
@@ -42,6 +45,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "audit"))
 import class_membership as cm      # noqa: E402
 import explain_unit as eu          # noqa: E402
+import faction_routes as fr        # noqa: E402
 import reference_distribution as rd  # noqa: E402
 
 ROOT = rd.ROOT
@@ -199,7 +203,13 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, pee
             round(raw_name, 3))
 
 
-def assign(only_class=None):
+def assign(only_class=None, routing=True):
+    """{cameo id: {source: proposal}}, plus what was skipped and why.
+
+    ⛔ ROUTING IS THE DEFAULT (clause 11). `routing=False` reproduces the pre-2026-09-04 behaviour
+    — every source visible to every unit — and exists ONLY so the two can be compared. It is the
+    behaviour the maintainer rejected; do not generate a review sheet with it.
+    """
     peers, cameo = rd.peer_rows(), rd.cameo_rows()
     led = ledger()
     cam_rows = [c for c in cameo if c["id"] in led]
@@ -212,6 +222,23 @@ def assign(only_class=None):
             skipped[c["id"]] = why
         else:
             scope.append(c)
+
+    # ── clause 11: route, then match ──────────────────────────────────────────────────────────
+    # ⚠ A UNIT WITH NO ROUTE LEAVES SCOPE ENTIRELY rather than falling back to open matching.
+    # A fallback would put every unrouted faction back where the rejected sheet was, and it would
+    # do it invisibly — the rows would look like ordinary proposals. Formula-only is a ruling, so
+    # it is recorded as one.
+    formula_only = {}
+    if routing:
+        kept = []
+        for c in scope:
+            fac = fr.faction_of(c["id"])
+            if fac and fr.routes_for(fac):
+                kept.append(c)
+            else:
+                formula_only[c["id"]] = (f"no route for faction {fac!r}" if fac
+                                         else "no declared Cameo faction in the id")
+        scope = kept
 
     cam_costs = collections.defaultdict(list)
     for c in scope:
@@ -243,6 +270,14 @@ def assign(only_class=None):
     for p in peers:
         by_source[p["source"]].append(p)
 
+    # the routed pool, computed once per (faction, source) rather than per candidate pair
+    routed_pool = {}
+    if routing:
+        for fac in {fr.faction_of(c["id"]) for c in scope}:
+            for src, toks in fr.routes_for(fac):
+                routed_pool[(fac, src)] = [p for p in by_source.get(src, ())
+                                           if fr.peer_factions(p) & toks]
+
     result = collections.defaultdict(dict)
     for source, plist in sorted(by_source.items()):
         cands = []
@@ -258,7 +293,9 @@ def assign(only_class=None):
                 ccost = None
             cpct = pct_rank(ccost, cam_costs.get(c["type"], []))
             home = source in eu.HOME.get(eu.family_of(c["id"]) or "", [])
-            for p in plist:
+            visible = (routed_pool.get((fr.faction_of(c["id"]), source), ()) if routing
+                       else plist)
+            for p in visible:
                 s = score(c, rec, p, cpct,
                           pct_rank(p.get("cost"), peer_costs.get((source, p["type"]), [])), home,
                           cam_shapes.get(c["id"]), peer_shapes.get(id(p)))
@@ -298,12 +335,14 @@ def assign(only_class=None):
             result[cid][source] = {"name": p.get("name"), "score": s,
                                    "hp": p.get("hp"), "cost": p.get("cost"),
                                    "home": bool(s[1]), "raw_name": s[5], "confidence": conf}
+    assign.formula_only = formula_only
     return result, skipped, len(scope)
 
 
 def write_review(klass):
     """The per-class review sheet (§9.9: reviewed one class at a time, matching signed with anchor)."""
     result, _, _ = assign(klass)
+    routed_out = dict(getattr(assign, "formula_only", {}))
     led = ledger()
     cam = {c["id"]: c for c in rd.cameo_rows()}
     members = sorted(n for n, u in led.items()
@@ -333,7 +372,13 @@ def write_review(klass):
          f"| assigned at least one reference | **{len(result)}** |",
          f"| **with ≥2 NAME-backed references** | **{name_backed}** |",
          f"| with ≥2 name-or-shape references | {with_shape} |",
-         f"| members with NO reference at all | **{len(members) - len(result)}** |", "",
+         f"| members with NO reference at all | **{len(members) - len(result)}** |",
+         f"| of those, FORMULA-ONLY by routing | **{sum(1 for m in members if m in routed_out)}** |",
+         "",
+         "⭐ **Routed.** Every proposal below comes from a reference FACTION this unit's Cameo "
+         "faction is mapped to (`tools/balance/faction_routes.py`), never from the whole corpus. "
+         "A member whose faction has no route is formula-only by ruling, not unmatched by "
+         "accident.", "",
          "Confidence: " + " · ".join(f"**{k} {v}**" if k in ("STRONG", "WEAK") else f"{k} {v}"
                                      for k, v in sorted(conf.items())), "",
          "* **STRONG** exact/alias name, or name overlap backed by matching shape",
@@ -344,7 +389,9 @@ def write_review(klass):
     missing = [m for m in members if m not in result]
     if missing:
         L += ["⚠ **No reference at all** — formula-only unless the review rescues them:", ""]
-        L += [f"* `{m}` — cost {cost_of(m) or '?'}" for m in missing] + [""]
+        L += [f"* `{m}` — cost {cost_of(m) or '?'}"
+              + (f" — ⛔ {routed_out[m]}" if m in routed_out else "")
+              for m in missing] + [""]
     for tier_set, title, note in (
             (("STRONG", "FAIR"), "§1 — NAME-backed proposals — confirm or strike", ""),
             (("SHAPE",), "§2 — SHAPE-only proposals", "Same position in its own roster, unrelated "
@@ -407,15 +454,21 @@ def main():
     ap.add_argument("--class", dest="cls", help="restrict to one class and print its review table")
     ap.add_argument("--write", action="store_true", help="save the assignment as JSON")
     ap.add_argument("--limit", type=int, default=25)
+    ap.add_argument("--no-routing", action="store_true",
+                    help="⛔ compare only: match against every source, the behaviour the "
+                         "maintainer rejected on 2026-09-04")
     ap.add_argument("--review", metavar="CLASS",
                     help="write docs/balance/review/<class>_references.md for maintainer review")
     args = ap.parse_args()
 
     if args.review:
         return write_review(args.review)
-    result, skipped, in_scope = assign(args.cls)
+    result, skipped, in_scope = assign(args.cls, routing=not args.no_routing)
     counts = collections.Counter(len(v) for v in result.values())
-    print(f"Cameo actors in scope : {in_scope}   exempt: {len(skipped)}")
+    fo = getattr(assign, "formula_only", {})
+    print(f"routing               : {'FACTION (clause 11)' if not args.no_routing else 'OFF ⛔ the rejected behaviour'}")
+    print(f"Cameo actors in scope : {in_scope}   exempt: {len(skipped)}   "
+          f"formula-only (no route): {len(fo)}")
     print(f"actors assigned >=1   : {len(result)}")
     print(f"actors reaching the >=2 reference floor: "
           f"{sum(1 for v in result.values() if len(v) >= 2)}")
