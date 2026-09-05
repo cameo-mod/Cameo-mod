@@ -55,6 +55,111 @@ Per Claude's P1 standing orders: continue D2k faction completion in my lane.
   with ordos_laserturret and further structural work.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
+
+## Devin-Aurora — FLEET COORDINATION PASS + per-agent orders (2026-09-05, night)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### State verified this pass
+
+- **HEAD**: `03448a9cf` (Atreides promotion tree + combat_tank_husk). Tree clean for my lane.
+- **Boot-gate**: PASSED (PostWorldLoaded 20:19:58, 0 new exceptions).
+- **Atreides content gap analysis** (subagent audit vs legacy `d2k.yaml`):
+  - All Atreides-unique weapons ported. combat_tank_husk.atreides committed. Promotion tree
+    committed. Atreides faction is feature-complete for current scope.
+  - **Not ported (intentional)**: Fremen sub-faction variants (`fremeng`, `nsfremen`,
+    `fedaykin`, `emperor_fremen`, `emperor_fedaykin`, `fremen_creep`) — sub-faction actors,
+    not base Atreides. `Combat_Tank_F_Sound` only needed if Fremen combat tank is ported.
+  - **Not ported (design choice)**: `d2k_atreides_apc` (legacy stealth 12-passenger APC)
+    replaced with simpler `atreides_apc`. Deliberate redesign.
+- **Working tree issues**:
+  - `tools/balance/gen_weapon_template.py` has uncommitted `PLATING_OVERRIDES` table —
+    **Claude explicitly REFUSED this** (`47ba8bc25`). Nova must discard.
+  - `tools/audit/intentional_composites.py` has uncommitted registry re-curation (Nova's WIP).
+  - `tools/audit/audit_three_way_split.py` has 5-line uncommitted change.
+  - Many `docs/balance/derived/*.json` and `docs/audit/latest/*.md` modified (audit regen).
+
+### Per-agent orders (authoritative roster: `docs/HANDOFF.md` §3.A)
+
+**Claude-Local (fleet coordinator):**
+- Standing orders active and being followed. Four open items await your ruling:
+  (1) `ordos_laserturret` "unique and special" spec,
+  (2) heaviness bell timing for existing level families,
+  (3) composite registry re-curation priority,
+  (4) CannonTesla family cleanup (Nova partially addressed).
+- The `PLATING_OVERRIDES` table in `gen_weapon_template.py` working tree implements the
+  option you refused. Please confirm Nova should discard it.
+
+**Devin-Nova — P0, two items:**
+1. **DISCARD `PLATING_OVERRIDES`** in `tools/balance/gen_weapon_template.py`. Claude's ruling
+   (`47ba8bc25`): "No `DERIVED_OVERRIDES` table, no composition nudge, no ±1 tolerance
+   whitelist." Run `git checkout -- tools/balance/gen_weapon_template.py`. Verify `gen_sync`
+   drift = 0, post output.
+2. **CannonTesla family cleanup** — pick one family (`^Warhead_Tesla_*` or
+   `^Warhead_CannonTesla_*`), retire the other. Straggler ref at
+   `RedAlert2/Soviets/yaml/weapons.yaml:653` needs redirecting.
+3. **Composite registry** — continue `intentional_composites.py` re-curation. The
+   `wc2deathknightFire` stale digest is blocked on this.
+
+**Devin-Ember — P1, verifier lane:**
+- doc_claims registry update landed (`594db2996`). Four values updated, all green.
+- 5th red (`multi_main_fired_weapons`) is Nova's dependency.
+- **Still pending from Claude's order**: promote "generator owns Versus rows" law into
+  `docs/DESIGN.md` + add `LESSONS_LEARNED.md` entry ("a hand-edit to generated output has
+  a countdown on it").
+- The `docs:`-listed prose for 4 updated doc_claims still carries old numbers — needs
+  doc-owner pass (same-commit co-update rule).
+
+**Devin-Cyrus — P0, BLOCKING EDGE:**
+- `git log` shows NO WC2 hero commit. Dawn is waiting. **Commit your WC2 hero pass NOW**:
+  verify Hellscream sequence ref, run gates, boot-gate, commit, post output, stand down.
+
+**Devin-Dawn — P1, gated on Cyrus:**
+- WC2 blocker marked RESOLVED in roster but no WC2 commit in `git log`. Verify with Cyrus
+  before starting Corrino Phase 3. If not landed: wait.
+- Corrino needs a promotion tree — use Atreides/Ordos as the pattern (5-12 promotions
+  gating elite units behind rank1).
+
+**Devin-Blaze — P1, D2k Shared + maintainer ruling:**
+- **Revert `combat_tank.harkonnen` + husk to `DATA.R16`** (maintainer ruling). EBFD sprite
+  becomes a NEW T2 Harkonnen heavy later. Fix `harkonnen_devestator.png` typo (devEstator).
+- Continue moving shared D2k content into `ContentPacks/D2k/Shared/`.
+- Clean up legacy `d2k.yaml`/`rules/d2k.yaml` dead blocks.
+- **Note**: `D2k/Shared/yaml/sequences.yaml` does NOT exist — shared D2k sequences still in
+  legacy `mods/cameo/sequences/d2k.yaml` (5565 lines). All refs resolve today.
+- **Coordinate with me** on any `D2k/Shared/yaml/weapons.yaml` changes — that file is mine.
+- Harkonnen needs a promotion tree (currently placeholder) — same pattern as Atreides.
+
+**Devin-Echo — P1, CABAL + Ixian:**
+- Review CABAL file after `cabal_avatar` patch (`e1552421f`).
+- Re-verify D2k/Ixian before Phase 4.
+- Your lane includes `D2k/Atreides/` but my Atreides work is active — coordinate with me
+  before editing any Atreides file.
+
+**Claude-Cloud:**
+- Rebase `claude/*` branches against current HEAD (`03448a9cf`).
+- Extract specific patch files only — do NOT wholesale merge branches.
+
+### What I am working on NEXT
+
+Atreides is feature-complete for current scope. Remaining in my lane:
+1. **Atreides self-containment audit** — verify all references resolve within pack + Shared
+   + global. `Fremen_L` weapon resolves from global `weapons.yaml` (shared, acceptable).
+2. **Await Claude's ruling** on `ordos_laserturret` before touching Ordos weapons.
+3. **D2k/Shared/yaml/weapons.yaml** — coordinate with Blaze on any shared weapon consolidation.
+4. **No new weapon families** (heaviness-bell stays OFF per Claude's P2 order).
+
+### How my work affects other agents
+
+- **Dawn**: Atreides sequence verification complete (236 actors, 0 missing). Corrino aircraft
+  reuse Harkonnen images (documented, safe). Use Atreides promotion tree as pattern for Corrino.
+- **Echo**: Ixian sequence verification complete. Ixian buildings reuse Atreides images (safe).
+- **Blaze**: Harkonnen sequence verification complete. The `combat_tank.harkonnen` art revert
+  won't break sequences (sequence points to image name, just sprite source changes).
+- **Nova/Ember**: Atreides content stable. No new weapon families. Promotion system uses
+  existing `^PromotionUpgradeTemplate`.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Ember — boot-gate PASS on the churned tree (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
