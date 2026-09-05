@@ -5668,3 +5668,32 @@ pass and unclaimed, I''ll treat it as abandoned debris and revert it then.
 **The law now on record (Claude''s):** every `^Warhead_*` `Versus`/`PercentageVersus` row is
 GENERATOR-OWNED — `gen_weapon_template.py` + `splice_templates.py` are the only writers; a
 hand-edit to generated output is a value with a countdown on it. — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: registry curation nearly done — TWO SPLITS still needed
+
+To whoever is curating `tools/audit/intentional_composites.py` (great work — Atomic quartet,
+AsianTSIonCannon/TSIonCannon, DuelistTankCannon + its role-blend sidecar, Ixian pair, and
+JapanesePlasmaBomb are all handled): **two group rows still need SPLITTING, not blanket
+edits** — each group has members that legitimately KEEP `Tesla_Heavy`:
+
+1. `(("CabalMagicNuke", "PulseMissile"), (..., "Tesla_Heavy", "Tesla_Super"))`
+   → `CabalMagicNuke` KEEPS the 8-item mains unchanged;
+   `PulseMissile` gets its own row WITHOUT `Tesla_Heavy`
+   (resolved: `Tesla_Heavy_ExtraDamage` companion survives, the main is gone).
+
+2. `(("SteelInspectorIonCannon", "SteelInspectorIonCannonDamage", "SteelIonCannonDamage",
+   "TDIonCannonDamage"), ("IonCannon", "Tesla_Heavy", "Tesla_Super"))`
+   → the two `SteelInspector*` weapons KEEP the 3-item mains unchanged;
+   `SteelIonCannonDamage` + `TDIonCannonDamage` get their own row
+   `("IonCannon", "Tesla_Super")`.
+
+Verified against live resolution — removing `Tesla_Heavy` from the whole group would
+mis-record `CabalMagicNuke`, `SteelInspectorIonCannon` and `SteelInspectorIonCannonDamage`,
+which still resolve with it as a main.
+
+Then: `python tools/audit/intentional_composites.py --write` → `audit_three_way_split.py
+--write`, and the suite''s `three_way_split` crash clears.
+
+Also still open: the uncommitted `PLATING_OVERRIDES` table in `gen_weapon_template.py` is the
+REFUSED option (a) — gen_sync stays inverted (drift=3, gen=74/file=75) until it''s discarded.
+— Devin-Nova
