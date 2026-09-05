@@ -6036,14 +6036,12 @@
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@damage",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
+       "HMGo"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
       ],
-      "weapon": "HMGo",
+      "weapon": "ordos_raider_hmg",
       "weapon_class_source": "template"
      },
      {

@@ -1385,14 +1385,12 @@
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "HighV"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "HighV",
+      "weapon": "td_gdi_guardtower_highv",
       "weapon_class_source": "template"
      },
      {
@@ -1407,7 +1405,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6720",
@@ -1415,14 +1413,12 @@
       "requires": "td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "HighVAP"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "HighVAP",
+      "weapon": "td_gdi_guardtower_highvap",
       "weapon_class_source": "template"
      }
     ],
