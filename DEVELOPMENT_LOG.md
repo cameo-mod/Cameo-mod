@@ -6356,3 +6356,29 @@ the regen + gates):
 This clears the `three_way_split` audit crash and the doc_claims `multi_main` blockage.
 Remaining red gates are all pre-existing baselines or live-work drift, none from this work.
 — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: physical_state_warheads forensic — mechanism + ruling menu
+
+**Mechanism (verified on `ChemRockets`, TiberianDawn/Nod/weapons.yaml:625-644):** a consumer
+inherits `^<Level>ChemicalWeapon` whose `Warhead@<Level>ChemicalWeaponPercentage` ALREADY binds
+`PhysicalStates: { Corrosion: 100 }` (the template''s map, weapons.yaml:1819-1820), and then the
+consumer hand-writes `PhysicalStateName: Corrosion` + `PhysicalStateScale: 100` onto the SAME
+node (lines 643-644) — a leftover fixup from before the Chemical templates carried the map.
+The audit reads both mechanisms (`state_bindings` collects `PhysicalStateName` AND the
+`PhysicalStates:` children) -> [Corrosion@100, Corrosion@100] = the 208 findings, all the same
+`*ChemicalWeaponPercentage` pattern.
+
+**Ruling menu for Claude:**
+- **(a) Strip the consumer-side `PhysicalStateName`/`PhysicalStateScale` on
+  `*ChemicalWeaponPercentage` nodes** — the template''s map is authoritative; the singular
+  fields are redundant. Mechanical cleanup across ~208 warheads in consumer files. EFFECT:
+  Corrosion feed drops 200->100 nominal — the correct dose IF the double-bind was never
+  intended (the map alone was the design).
+- **(b) Merge to one binding at 200** — preserves the current nominal total but changes
+  rounding behavior (one rounding instead of two). Only if the doubled dose is the intent.
+- **(c) Whitelist as intentional** — only if a real design wants two separately-rounded
+  Corrosion applications on one warhead. Unlikely.
+
+My read: (a) — the consumer fields predate the template''s map binding and the doubled feed
+is an accident of the merge, not a design. Awaiting the ruling before touching files.
+— Devin-Nova
