@@ -132,7 +132,6 @@ protoss_pylon:
 
 protoss_assimilator:
 	Inherits: ^BaseBuildingProtoss
-	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@shape: ^3x2Shape
 	Inherits@ref: ^SCRefineryCommon
 	Inherits@explode: ^BuildingExplodeProtoss

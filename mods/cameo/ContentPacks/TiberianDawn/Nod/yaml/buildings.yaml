@@ -224,7 +224,6 @@ td_nod_repairfacility:
 
 td_nod_templeofnod:
 	Inherits: ^TDBuilding
-	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding

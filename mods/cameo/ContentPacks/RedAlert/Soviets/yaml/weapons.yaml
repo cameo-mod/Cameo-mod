@@ -31,6 +31,8 @@ ra1_soviets_ak47conscript_rifle:
 	SoundVolume: 0.5
 	ValidTargets: Ground, Water
 	Report: conscriptak.wav
+	Warhead@Bullet_Light:
+		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Light:
@@ -1035,6 +1037,8 @@ BTRMachineGun:
 	BurstDelays: 4
 	Range: 5454
 	Report: mgun11.aud
+	Warhead@Bullet_Light:
+		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Light:
@@ -1047,6 +1051,8 @@ BTRMachineGun_AA:
 	Inherits: BTRMachineGun
 	Range: 8181
 	ValidTargets: Air
+	Warhead@Bullet_Light: AreaDamage
+		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 	-Warhead@Bullet_Light:
@@ -2327,16 +2333,11 @@ Su57MaverickThermobaric:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
-	Inherits@fx2: ^Effect_CannonHE_Medium
-	ReloadDelay: 76
-	Range: 5469
-	Burst: 2
-	BurstDelays: 5
-	Report: cannon1.aud
-	Projectile: Bullet
-		Speed: 546
-	Warhead@CannonFire_Medium:
-		Damage: 12000
+	Inherits: 105mm
+	Warhead@Flame_Medium:
+		Damage: 6000
+	Warhead@CannonHE_Medium:
+		Damage: 6000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
@@ -2386,11 +2387,10 @@ HammerTankCannonThermobaric:
 			Temperature: 25
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
+		ImpactSounds: firebl3.aud
 
 ShtoraLaser:
 	Inherits@collapsewh: ^Warhead_Laser_Light
@@ -2485,7 +2485,7 @@ KotinCannon:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 
-KotinCannonThermobaric:
+KotinCannonNuclearShell:
 	Inherits@thermobaric: ^Warhead_Thermobaric_Heavy
 	Inherits@flameprojectile: ^Projectile_Flame_Medium
 	Inherits@4: ^Effect_Flame_Medium
@@ -2533,10 +2533,12 @@ ra120mmThermobaric:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 641
-	Warhead@CannonFire_Heavy:
-		Damage: 24000
-		PhysicalStates:
-			Temperature: 33
+	Warhead@Flame_Heavy:
+		Damage: 8000
+	Warhead@Demolition_Heavy:
+		Damage: 8000
+	Warhead@CannonHE_Heavy:
+		Damage: 8000
 	-Warhead@Effect:
 	Warhead@Collapsedra120mmThermobaricCannonHE_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -2748,7 +2750,6 @@ MammothTuskThermobaric:
 	Inherits@7: ^MediumMissile
 	Inherits@8: ^HeavyMissile
 	ValidTargets: Ground, Water, Infantry, Monster, Air
-	InvalidTargets: wall
 	ReloadDelay: 91
 	Burst: 2
 	BurstDelays: 12
@@ -2760,47 +2761,98 @@ MammothTuskThermobaric:
 		TrailDelay: 1
 		TrailInterval: 1
 		Speed: 641
-		LaunchAngle: 66
 		MinimumLaunchAngle: 60
 		MaximumLaunchAngle: 60
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
-		ContrailStartWidth: 50
 		ContrailEndColor: 33221100
-		ContrailEndWidth: 100
-		ContrailZOffset: 4000
-	Warhead@MissileThermobaric_Heavy:
-		Damage: 32000
-		InvalidTargets: wall
-		PercentageScale: 1600
-		PhysicalStates:
-			Temperature: 100
+	Warhead@LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
 		GlowScale: 2.0
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
-		ValidTargets: Ground, Water
+		ImpactSounds: firebl3.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: big_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
 		GlowScale: 2.0
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
+		ImpactSounds: firebl3.aud
 
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumFlameWeapon:
@@ -3085,10 +3137,12 @@ ra120mm2Thermobaric:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 666
-	Warhead@CannonFire_Heavy:
-		Damage: 48000
-		PhysicalStates:
-			Temperature: 33
+	Warhead@Flame_Heavy:
+		Damage: 16000
+	Warhead@Demolition_Heavy:
+		Damage: 16000
+	Warhead@CannonHE_Heavy:
+		Damage: 16000
 	-Warhead@Effect:
 	Warhead@Collapsedra120mm2ThermobaricCannonHE_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3588,7 +3642,6 @@ MonsterTankTuskThermobaric:
 	Inherits@7: ^MediumMissile
 	Inherits@8: ^HeavyMissile
 	ValidTargets: Ground, Water, Infantry, Monster, Air
-	InvalidTargets: wall
 	ReloadDelay: 125
 	Burst: 4
 	BurstDelays: 3
@@ -3600,47 +3653,98 @@ MonsterTankTuskThermobaric:
 		TrailDelay: 1
 		TrailInterval: 1
 		Speed: 641
-		LaunchAngle: 66
 		MinimumLaunchAngle: 60
 		MaximumLaunchAngle: 60
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
-		ContrailStartWidth: 50
 		ContrailEndColor: 33221100
-		ContrailEndWidth: 100
-		ContrailZOffset: 4000
-	Warhead@MissileThermobaric_Heavy:
-		Damage: 106000
-		InvalidTargets: wall
-		PercentageScale: 5600
-		PhysicalStates:
-			Temperature: 100
+	Warhead@LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6750
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6750
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
 		GlowScale: 2.0
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
-		ValidTargets: Ground, Water
+		ImpactSounds: firebl3.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: big_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
 		GlowScale: 2.0
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
+		ImpactSounds: firebl3.aud
 
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumFlameWeapon:
@@ -4480,3 +4584,31 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
+
+KotinCannonNuclearShell:
+	Inherits@wh: ^Warhead_CannonNuke_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
+	Inherits@fx2: ^Effect_Nuclear_Super
+	ValidTargets: Ground, Water
+	Report: tnkfire6.aud
+	ReloadDelay: 96
+	Range: 6427
+	Burst: 2
+	BurstDelays: 4
+	Projectile: Bullet
+		Speed: 642
+	Warhead@CannonNuke_Heavy:
+		Damage: 16000
+	Warhead@Radiation: CreateTintedCells
+		InvalidTargets: RadiationImmmune
+		Spread: 1000
+		Falloff: 100, 50, 33, 25, 20, 15, 10, 5
+		Level: 30
+		MaxLevel: 2000
+		LayerName: ra2radiation
+	Warhead@Effect: CreateEffect
+		Explosions: nuke_small
+		ImpactSounds: xplosml2.aud
+		ImpactActors: true
+

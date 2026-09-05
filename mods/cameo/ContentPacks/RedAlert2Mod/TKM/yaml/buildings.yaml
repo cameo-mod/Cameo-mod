@@ -67,7 +67,6 @@ tkm_powerplant:
 		PlayerPalette: playerra2
 tkm_orerefinery:
 	Inherits: ^RA2Building
-	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@sell: ^TKMSpawnActorsOnSell
 	Inherits@ref: ^Refinery
 	Inherits@shape: ^2x2Shape
@@ -204,7 +203,6 @@ tkm_airpad:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TKMSpawnActorsOnSell
 	Inherits@shape: ^4x3Shape
-	Inherits@3x3Shape: ^3x3Shape
 	Inherits@hpad: ^IsAircraftFactory
 	Inherits@shape3x3: ^3x3Shape
 	Valued:

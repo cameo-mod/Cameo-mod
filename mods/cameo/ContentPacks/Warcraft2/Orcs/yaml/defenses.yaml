@@ -1,6 +1,5 @@
 wc2_orcs_orcwatchtower:
 	Inherits: ^Defense
-	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@Template: ^BasicDefenseTemplate
 	-WithTurretSearchlight:
 	Inherits@exp: ^GainsExperienceTDBuilding

@@ -114,7 +114,6 @@ ts_gdi_tiberiumrefinery:
 
 ts_gdi_powerplant:
 	Inherits: ^BaseBuilding
-	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@power: ^PowerPlant

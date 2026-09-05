@@ -2270,3 +2270,33 @@ light_inf_lmg_ordos_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
+
+ordos_laserturret:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 55
+	Range: 7275
+	Report: LaserTankAttack.wav
+	Projectile: LaserZap
+		Width: 55
+		ZOffset: 2047
+		Color: 00ffbb
+	Warhead@LaserWeapon:
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+
+ordos_chemturret:
+	ReloadDelay: 90
+	Range: 14000
+	Report: MORTAR1.WAV
+	Projectile: Bullet
+		Speed: 350
+	Warhead@Chem_Medium: AreaDamage
+		Spread: 500
+		Damage: 40000
+		Versus:
+			Scout: 90
+			Light: 80
+			Medium: 70
+			Heavy: 60
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath

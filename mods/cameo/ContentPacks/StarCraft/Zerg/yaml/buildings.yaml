@@ -223,7 +223,6 @@ zerg_sporecolony_defense:
 
 zerg_extractor:
 	Inherits: ^BaseBuildingZerg
-	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@shape: ^3x2Shape
 	Inherits@ref: ^SCRefineryCommon
 	Inherits@plug: ^BuildingPlugProducer
@@ -513,7 +512,6 @@ zerg_queensnest:
 
 zerg_spire:
 	Inherits: ^BaseBuildingZerg
-	Inherits@BuildingPlugProducer2: ^BuildingPlugProducer
 	Inherits@shape: ^2x2Shape
 	Inherits@bot: ^BotMicromanageable
 	Inherits@plug: ^BuildingPlugProducer
