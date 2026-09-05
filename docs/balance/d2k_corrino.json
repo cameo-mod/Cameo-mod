@@ -4,6 +4,60 @@
  "schema": 2,
  "sections": {
   "aircraft": {
+   "corrino_advancedcarryall": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml#Health.HP",
+     "v": "50000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Corrino Advanced Carryall",
+    "prerequisites": [
+     "~hightech.corrino"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "180"
+    }
+   },
    "corrino_carryall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml#Armor.Type",
@@ -56,6 +110,85 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "180"
+    }
+   },
+   "corrino_gunship": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "3333",
+        "falloff": "100, 33",
+        "spread": "333",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "25",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "OrniGun",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml#Health.HP",
+     "v": "50000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Corrino Gunship",
+    "prerequisites": [
+     "~hightech.corrino"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "192"
     }
    }
   },
@@ -177,7 +310,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "7979",
@@ -636,7 +769,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2135",
       "pricing": true,
@@ -1081,7 +1214,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2135",
       "pricing": true,
@@ -1171,7 +1304,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2135",
       "pricing": false,
@@ -2462,6 +2595,128 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
+    }
+   },
+   "corrino_siegetank": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "74",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Compatibility_CannonHE_MediumFlat",
+       "^D2K155mmLegacy"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "D2K_155mm",
+      "weapon_class_source": "illegal_mix"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Artillery",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml#Health.HP",
+     "v": "40000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Siege Tank",
+    "prerequisites": [
+     "~corrino_vehicle_production",
+     "upgrade_heavy.corrino"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "56"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "4"
     }
    },
    "corrino_spiceharvester": {
