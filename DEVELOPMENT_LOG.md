@@ -1,5 +1,22 @@
 # Development Log
 
+## Devin AI — AI architecture `UnitsToBuild` migration blocked by merge order (2026-09-05)
+
+**Identity:** Devin AI (SWE-1.7 Max).
+
+**What and why:**
+- Picked up the ROADMAP AI ARCHITECTURE task: "Migrate one pack's `UnitsToBuild` rows out of `ai/ai.yaml` into `ContentPacks/TiberianDawn/GDI/yaml/ai.yaml`, gated on a byte-identical `--resolved-rules Player` dump."
+- Verified the baseline: `.\utility.cmd cameo --resolved-rules Player` produces a 592 KB dump with 158 `td_gdi_*` lines and `UnitsToBuild` at line 5465, preserving the YAML insertion order.
+- Ran a one-row merge-order probe: added `td_gdi_testorder: 1` to `ContentPacks/TiberianDawn/GDI/yaml/ai.yaml` under `Player: UnitBuilderBotModuleCA@generic: UnitsToBuild:` and re-dumped. The row landed at the **top** of `UnitsToBuild` (line 3), not in the `UnitsToBuild CNC` section position.
+
+**Finding:** `MiniYaml.MergePartial` (`engine/OpenRA.Game/MiniYaml.cs:590-643`) iterates `existingNodes` (the pack, which loads first) then `overrideNodes` (the global `ai.yaml`), appending new keys in that order. So pack `UnitsToBuild` rows always appear **before** global rows in the resolved dump. Moving `td_gdi_*` rows to a pack reorders them to the top of `UnitsToBuild`, making a byte-identical dump impossible. The resolved *content* (same keys, same values) is still identical — `FieldLoader` builds the same `FrozenDictionary` regardless of YAML order.
+
+**Consequence:** The ROADMAP task's "byte-identical" gate cannot be satisfied by a naive row move. Options: (a) relax the gate to content-identical (same keys + values, order ignored); (b) keep rows in the global file and gate per-faction bot behaviour via `RequiresCondition` on the trait instance instead of per-row ownership. Updated `ROADMAP.md` §AI ARCHITECTURE to record the blocker.
+
+**Verification:** probe row `td_gdi_testorder` confirmed at dump line 3; reverted.
+
+**Files changed:** `docs/design/ROADMAP.md` (finding recorded), `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/ai.yaml` (probe added then reverted — net zero diff).
+
 ## Devin AI — Volcanic shellmap camera radius fix (2026-08-25)
 
 **Identity:** Devin AI (SWE-1.7 Max).

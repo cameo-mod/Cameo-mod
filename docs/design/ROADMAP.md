@@ -33,8 +33,16 @@ verifiable.
 - [x] Measure how ContentPack `ai.yaml` merges with the global AI file
   (add-only, packs load first, removal is a load-time crash).
 - [ ] **S** Migrate one pack's `UnitsToBuild` rows out of `ai/ai.yaml` into
-  `ContentPacks/TiberianDawn/GDI/yaml/ai.yaml`, gated on a byte-identical
-  `--resolved-rules Player` dump. Mechanical once the first one works.
+  `ContentPacks/TiberianDawn/GDI/yaml/ai.yaml`. **BLOCKED on merge order**
+  (Devin AI, 2026-09-05): `MiniYaml.MergePartial` appends ContentPack
+  `UnitsToBuild` rows BEFORE the global `ai.yaml` rows (packs load first),
+  so the `td_gdi_*` rows would jump to the top of `UnitsToBuild` instead of
+  their original interleaved position. A byte-identical
+  `--resolved-rules Player` dump is impossible; the resolved *content*
+  (same keys + values) is identical. The gate must be relaxed to
+  content-identical, or the migration needs a different approach (e.g.
+  keep the rows in the global file and mark them faction-owned via a
+  `RequiresCondition` on the trait, not on the rows).
 - [ ] **M** Repeat per pack, then per dictionary (`UnitLimits`,
   `BuildingFractions`).
 - [ ] **S** Personality-specific compositions via condition-gated
