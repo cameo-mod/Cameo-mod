@@ -6,9 +6,7 @@ _clean_
 
 ## T2 — icons under a nonzero Defaults Offset must set Offset: 0,0
 
-- mods/cameo/ContentPacks/D2k/Harkonnen/yaml/sequences.yaml:169: `harkonnen_devastatorturret` icon inherits the Defaults offset
-- mods/cameo/ContentPacks/D2k/Ordos/yaml/sequences.yaml:1710: `ordos_laserturret` icon inherits the Defaults offset
-- mods/cameo/ContentPacks/D2k/Ordos/yaml/sequences.yaml:1746: `ordos_chemturret` icon inherits the Defaults offset
+_clean_
 
 ### T2b — explicit non-zero icon offsets (maintainer visual pass pending; D2k legacy pattern)
 
@@ -19,4 +17,4 @@ _clean_
 - mods/cameo/sequences/d2k.yaml:495: `hightech.atreides` icon has explicit Offset -30,-24
 - mods/cameo/sequences/d2k.yaml:1363: `hightech.harkonnen` icon has explicit Offset -30,-24
 
-Total blocking findings: 3 (T2b informational: 6)
+Total blocking findings: 0 (T2b informational: 6)

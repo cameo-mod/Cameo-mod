@@ -1,6 +1,6 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **5237** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **526**
+Fluent messages loaded: **5253** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **527**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
@@ -68,6 +68,7 @@ _none found_
 | actor_d2k_munitions |
 | actor_deso |
 | actor_dest |
+| actor_devastator_husk |
 | actor_disk |
 | actor_dlph |
 | actor_dog |
@@ -545,18 +546,18 @@ _none found_
 | faction | fluent/total tooltips | coverage |
 |---|---|---|
 | asianalliance | 0/78 | 0% |
-| atreides | 0/26 | 0% |
+| atreides | 0/30 | 0% |
 | cabal | 0/84 | 0% |
-| corrino | 0/25 | 0% |
+| corrino | 0/32 | 0% |
 | eden | 0/45 | 0% |
 | forgotten | 78/81 | 96% |
 | futuretech | 0/59 | 0% |
-| harkonnen | 0/43 | 0% |
-| ixian | 0/82 | 0% |
+| harkonnen | 3/60 | 5% |
+| ixian | 0/89 | 0% |
 | japan | 1/76 | 1% |
 | latinsyndicate | 0/71 | 0% |
 | naxis | 0/78 | 0% |
-| ordos | 0/94 | 0% |
+| ordos | 0/99 | 0% |
 | plymouth | 0/46 | 0% |
 | protoss | 0/74 | 0% |
 | ra1_allies | 1/74 | 1% |
@@ -569,7 +570,7 @@ _none found_
 | td_nod | 3/74 | 4% |
 | terran | 0/79 | 0% |
 | tkm | 1/75 | 1% |
-| ts_gdi | 0/70 | 0% |
+| ts_gdi | 0/69 | 0% |
 | ts_nod | 1/50 | 2% |
 | wc2_humans | 0/75 | 0% |
 | wc2_orcs | 0/66 | 0% |

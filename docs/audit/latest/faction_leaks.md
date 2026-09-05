@@ -1,6 +1,6 @@
 # audit_faction_leaks — cross-faction leaks (B1)
 
-Factions checked: **31** — L1 leaks: **443**, L3 concrete-inherit leaks: **20**, shared/unattributed buildables: **91**
+Factions checked: **31** — L1 leaks: **460**, L3 concrete-inherit leaks: **20**, shared/unattributed buildables: **91**
 
 
 ## L1 — buildable in faction X but owned by faction Y
@@ -302,16 +302,33 @@ Factions checked: **31** — L1 leaks: **443**, L3 concrete-inherit leaks: **20*
 | latinsyndicate | ptnk.asian | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
 | latinsyndicate | tiger.nax | redalert2mod/naxis | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
 | latinsyndicate | wirbelwind.nax | redalert2mod/naxis | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
+| ordos | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| ordos | atreides_airdrone | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| ordos | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
 | ordos | duelist_tank.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
+| ordos | harkonnen_advancedcarryall | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
+| ordos | harkonnen_gunship | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
 | ordos | heavy_inf.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml |
 | ordos | heavy_rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | ordos | ixian_kodatank | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | ordos | rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
+| ixian | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| ixian | atreides_airdrone | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| ixian | atreides_missiletank | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
+| ixian | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| ixian | corrino_missiletank | d2k/corrino | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
+| ixian | harkonnen_advancedcarryall | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
+| ixian | harkonnen_gunship | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
 | atreides | duelist_tank.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | atreides | heavy_inf.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml |
 | atreides | heavy_rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | atreides | ixian_kodatank | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | atreides | rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
+| harkonnen | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| harkonnen | atreides_airdrone | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| harkonnen | atreides_missiletank | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
+| harkonnen | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| harkonnen | corrino_missiletank | d2k/corrino | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | harkonnen | ordos_upgrade_lightfactory | d2k/ordos | mods/cameo/ContentPacks/D2k/Ordos/yaml/upgrades.yaml |
 | wc2_humans | wc2_humans_alleria | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |
 | wc2_humans | wc2_humans_alleria_elite | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |

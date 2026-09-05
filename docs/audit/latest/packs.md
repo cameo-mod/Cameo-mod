@@ -56,6 +56,7 @@
 | wc2_h | 0 | 2 | mods\cameo\rules\warcraft2.yaml |
 | wc2_o | 0 | 2 | mods\cameo\rules\warcraft2.yaml |
 | win98 | 0 | 2 | mods\cameo\rules\win98.yaml |
+| aircraft | 0 | 1 | mods\cameo\rules\husks.yaml |
 | camea | 0 | 1 | mods\cameo\rules\camea.yaml |
 | cute | 0 | 1 | mods\cameo\rules\valentine.yaml |
 | dummy | 1 | 1 | mods\cameo\rules\redalert2.yaml |
@@ -234,4 +235,4 @@ _clean_
 
 - actor ids violating the lowercase grammar: **1510** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 
-Total findings: 707
+Total findings: 708

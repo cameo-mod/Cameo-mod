@@ -1,4 +1,4 @@
-# audit_duplicate_inherits — 1814 actor(s)/template(s) reach a parent through more than one path
+# audit_duplicate_inherits — 1832 actor(s)/template(s) reach a parent through more than one path
 
 A10Carrier:
   parent ^^ ^externalconditions  (2 paths)
@@ -4328,6 +4328,11 @@ assault.nax:
     -> assault.nax -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> assault.nax -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
+atreides_apc:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> atreides_apc -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> atreides_apc -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 atreides_barracks:
   parent ^^ ^globalbounty  (2 paths)
     -> atreides_barracks -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -4419,6 +4424,38 @@ atreides_lightfactory:
     -> atreides_lightfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> atreides_lightfactory -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
+atreides_minotaurus:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> atreides_minotaurus -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> atreides_minotaurus -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^vehiclebuffs  (2 paths)
+    -> atreides_minotaurus -> ^artillerytemplate -> ^artillerybuffs -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> atreides_minotaurus -> ^artillerytemplate -> Inherits@VehicleBuffs:^VehicleBuffs
+  parent ^^ ^globalbuffs  (2 paths)
+    -> atreides_minotaurus -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> atreides_minotaurus -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+  parent ^^ ^gpssatellitesupport  (2 paths)
+    -> atreides_minotaurus -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> atreides_minotaurus -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+  parent ^^ ^wayofthedragon  (2 paths)
+    -> atreides_minotaurus -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> atreides_minotaurus -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+  parent ^^ ^helium3teamupgrademobile  (2 paths)
+    -> atreides_minotaurus -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> atreides_minotaurus -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+  parent ^^ ^nanotechrepairs  (2 paths)
+    -> atreides_minotaurus -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> atreides_minotaurus -> ^artillerytemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+  parent ^^ ^modernfirecontrolsystems  (2 paths)
+    -> atreides_minotaurus -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> atreides_minotaurus -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+  parent ^^ ^blitzkrieg  (2 paths)
+    -> atreides_minotaurus -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> atreides_minotaurus -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+  parent ^^ ^tiberiumadaptability  (2 paths)
+    -> atreides_minotaurus -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> atreides_minotaurus -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+
 atreides_missiletank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> atreides_missiletank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -4455,6 +4492,11 @@ atreides_mobileconstructionvehicle:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> atreides_mobileconstructionvehicle -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> atreides_mobileconstructionvehicle -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+atreides_mongoose:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> atreides_mongoose -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> atreides_mongoose -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 atreides_outpost:
   parent ^^ ^globalbounty  (2 paths)
@@ -4500,6 +4542,11 @@ atreides_repairpad:
     -> atreides_repairpad -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> atreides_repairpad -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
+atreides_repairtank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> atreides_repairtank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> atreides_repairtank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 atreides_rocketturret:
   parent ^^ ^globalbounty  (2 paths)
     -> atreides_rocketturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -4513,6 +4560,11 @@ atreides_rocketturret:
   parent ^^ ^selectablebuilding  (2 paths)
     -> atreides_rocketturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> atreides_rocketturret -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_sandbike:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> atreides_sandbike -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> atreides_sandbike -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 atreides_siegetank:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -7039,6 +7091,11 @@ conehead2.nax:
     -> conehead2.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> conehead2.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
+corrino_apc:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_apc -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_apc -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 corrino_barracks:
   parent ^^ ^globalbounty  (2 paths)
     -> corrino_barracks -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -7078,6 +7135,20 @@ corrino_constructionyard:
   parent ^^ ^selectablebuilding  (2 paths)
     -> corrino_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> corrino_constructionyard -> ^constructionyard -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_gunturret:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_gunturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_gunturret -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^1x1shape  (2 paths)
+    -> corrino_gunturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> corrino_gunturret -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_gunturret -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_gunturret -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_gunturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_gunturret -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
 corrino_heavyfactory:
   parent ^^ ^globalbounty  (2 paths)
@@ -7129,6 +7200,38 @@ corrino_lightfactory:
     -> corrino_lightfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> corrino_lightfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
+corrino_missiletank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_missiletank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_missiletank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^vehiclebuffs  (2 paths)
+    -> corrino_missiletank -> ^artillerytemplate -> ^artillerybuffs -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> corrino_missiletank -> ^artillerytemplate -> Inherits@VehicleBuffs:^VehicleBuffs
+  parent ^^ ^globalbuffs  (2 paths)
+    -> corrino_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> corrino_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+  parent ^^ ^gpssatellitesupport  (2 paths)
+    -> corrino_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> corrino_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+  parent ^^ ^wayofthedragon  (2 paths)
+    -> corrino_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> corrino_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+  parent ^^ ^helium3teamupgrademobile  (2 paths)
+    -> corrino_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> corrino_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+  parent ^^ ^nanotechrepairs  (2 paths)
+    -> corrino_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> corrino_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+  parent ^^ ^modernfirecontrolsystems  (2 paths)
+    -> corrino_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> corrino_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+  parent ^^ ^blitzkrieg  (2 paths)
+    -> corrino_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> corrino_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+  parent ^^ ^tiberiumadaptability  (2 paths)
+    -> corrino_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> corrino_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+
 corrino_mobileconstructionvehicle:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> corrino_mobileconstructionvehicle -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -7177,6 +7280,20 @@ corrino_repairpad:
   parent ^^ ^selectablebuilding  (2 paths)
     -> corrino_repairpad -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> corrino_repairpad -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_rocketturret:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_rocketturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_rocketturret -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^1x1shape  (2 paths)
+    -> corrino_rocketturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> corrino_rocketturret -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_rocketturret -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_rocketturret -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_rocketturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_rocketturret -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
 corrino_sardaukar_bazooka:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -7275,6 +7392,398 @@ corrino_sardaukar_bazooka:
   parent ^^ ^gravityweighter  (2 paths)
     -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+corrino_sardaukar_berserker:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> corrino_sardaukar_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> corrino_sardaukar_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+corrino_sardaukar_javelin:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> corrino_sardaukar_javelin -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> corrino_sardaukar_javelin -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+corrino_sardaukar_laser:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> corrino_sardaukar_laser -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> corrino_sardaukar_laser -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+corrino_sardaukar_sword:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
 corrino_spiceharvester:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -11868,6 +12377,11 @@ gunb.asian:
     -> gunb.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> gunb.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
+harkonnen_adp:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_adp -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_adp -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 harkonnen_autogunturret:
   parent ^^ ^basebuilding  (2 paths)
     -> harkonnen_autogunturret -> ^d2kdefense -> ^defense -> Inherits:^BaseBuilding
@@ -11969,6 +12483,38 @@ harkonnen_barracks:
     -> harkonnen_barracks -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> harkonnen_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
+harkonnen_buzzsaw:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_buzzsaw -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_buzzsaw -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^vehiclebuffs  (2 paths)
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^artillerybuffs -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> Inherits@VehicleBuffs:^VehicleBuffs
+  parent ^^ ^globalbuffs  (2 paths)
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+  parent ^^ ^gpssatellitesupport  (2 paths)
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+  parent ^^ ^wayofthedragon  (2 paths)
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+  parent ^^ ^helium3teamupgrademobile  (2 paths)
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+  parent ^^ ^nanotechrepairs  (2 paths)
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+  parent ^^ ^modernfirecontrolsystems  (2 paths)
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+  parent ^^ ^blitzkrieg  (2 paths)
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+  parent ^^ ^tiberiumadaptability  (2 paths)
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> harkonnen_buzzsaw -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+
 harkonnen_constructionyard:
   parent ^^ ^globalbounty  (2 paths)
     -> harkonnen_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -11979,6 +12525,11 @@ harkonnen_constructionyard:
   parent ^^ ^selectablebuilding  (2 paths)
     -> harkonnen_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> harkonnen_constructionyard -> ^constructionyard -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+harkonnen_devastatormech:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_devastatormech -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_devastatormech -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 harkonnen_devastatorturret:
   parent ^^ ^basebuilding  (2 paths)
@@ -12066,6 +12617,11 @@ harkonnen_devastatorturret:
   parent ^^ ^selectablecombatbuilding  (2 paths)
     -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basicdefense -> Inherits@selection:^SelectableCombatBuilding
     -> harkonnen_devastatorturret -> ^d2kdefense -> Inherits@selection:^SelectableCombatBuilding
+
+harkonnen_flametank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_flametank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_flametank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 harkonnen_flameturret:
   parent ^^ ^basebuilding  (2 paths)
@@ -12180,6 +12736,38 @@ harkonnen_hightechfactory:
   parent ^^ ^disabledoverlay  (2 paths)
     -> harkonnen_hightechfactory -> ^hightechfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> harkonnen_hightechfactory -> ^hightechfactory -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+harkonnen_inkvine:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_inkvine -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_inkvine -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^vehiclebuffs  (2 paths)
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^artillerybuffs -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> harkonnen_inkvine -> ^artillerytemplate -> Inherits@VehicleBuffs:^VehicleBuffs
+  parent ^^ ^globalbuffs  (2 paths)
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+  parent ^^ ^gpssatellitesupport  (2 paths)
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+  parent ^^ ^wayofthedragon  (2 paths)
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+  parent ^^ ^helium3teamupgrademobile  (2 paths)
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+  parent ^^ ^nanotechrepairs  (2 paths)
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+  parent ^^ ^modernfirecontrolsystems  (2 paths)
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+  parent ^^ ^blitzkrieg  (2 paths)
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+  parent ^^ ^tiberiumadaptability  (2 paths)
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> harkonnen_inkvine -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
 
 harkonnen_ixresearchcenter:
   parent ^^ ^globalbounty  (2 paths)
@@ -33309,7 +33897,7 @@ td_nod_buggy:
     -> td_nod_buggy -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_buggy -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^advancedguerillatactics  (2 paths)
-    -> td_nod_buggy -> ^scoutvehicletemplate -> Inherits@AdvancedGuerillaTactics2:^AdvancedGuerillaTactics
+    -> td_nod_buggy -> ^scoutvehicletemplate -> Inherits@guerillaupgrade:^AdvancedGuerillaTactics
     -> td_nod_buggy -> Inherits@AdvancedGuerillaTactics:^AdvancedGuerillaTactics
 
 td_nod_buggymkii:
@@ -33317,7 +33905,7 @@ td_nod_buggymkii:
     -> td_nod_buggymkii -> td_nod_buggy -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_buggymkii -> td_nod_buggy -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^advancedguerillatactics  (3 paths)
-    -> td_nod_buggymkii -> td_nod_buggy -> ^scoutvehicletemplate -> Inherits@AdvancedGuerillaTactics2:^AdvancedGuerillaTactics
+    -> td_nod_buggymkii -> td_nod_buggy -> ^scoutvehicletemplate -> Inherits@guerillaupgrade:^AdvancedGuerillaTactics
     -> td_nod_buggymkii -> td_nod_buggy -> Inherits@AdvancedGuerillaTactics:^AdvancedGuerillaTactics
     -> td_nod_buggymkii -> Inherits@AdvancedGuerillaTactics:^AdvancedGuerillaTactics
   parent ^^ ^autotargetallassaultmove  (2 paths)
@@ -34253,7 +34841,7 @@ td_nod_mobileconstructionvehicle:
     -> td_nod_mobileconstructionvehicle -> ^tdmcv -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_mobileconstructionvehicle -> ^tdmcv -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^advancedguerillatactics  (2 paths)
-    -> td_nod_mobileconstructionvehicle -> ^tdmcv -> ^supportvehicletemplate -> Inherits@AdvancedGuerillaTactics3:^AdvancedGuerillaTactics
+    -> td_nod_mobileconstructionvehicle -> ^tdmcv -> ^supportvehicletemplate -> Inherits@guerillaupgrade:^AdvancedGuerillaTactics
     -> td_nod_mobileconstructionvehicle -> Inherits@AdvancedGuerillaTactics:^AdvancedGuerillaTactics
 
 td_nod_obeliskoflight:

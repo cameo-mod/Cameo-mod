@@ -122,7 +122,7 @@ _none found_
 | Repairable.HpPerStep | forgotten_nomadbarracks | 32500 | 4250 | 8.5 |
 | Repairable.HpPerStep | futuretech_futuretank | 32500 | 4250 | 8.5 |
 | Repairable.HpPerStep | ra1_soviets_siegemammothtank | 31250 | 4250 | 8.1 |
-| Repairable.HpPerStep | devastator | 31250 | 4250 | 8.1 |
+| Repairable.HpPerStep | harkonnen_devastatormech | 31250 | 4250 | 8.1 |
 | RevealsShroud.Range | steelconsortium_bfg10000 | 25000 | 2048 | 20.2 |
 | RevealsShroud.Range | tkm_radartruck | 21500 | 2048 | 17.1 |
 | RevealsShroud.Range | ixian_ixprojector | 20000 | 2048 | 15.8 |

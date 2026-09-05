@@ -1,14 +1,12 @@
 # Physical-state warhead audit
 
-Active concrete weapons checked: 2349
+Active concrete weapons checked: 2367
 Formula percentage templates checked: 6
 
-## FAIL (216 problem(s))
+## FAIL (210 problem(s))
 
 - 120mm_td: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - 120mm_td: Warhead@LightChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
-- 25mm: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
-- 25mmWaveforce: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - ArtilleryShellUpgrade: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - AsianChemical: Warhead@LightChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - AsianChemical: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
@@ -18,8 +16,6 @@ Formula percentage templates checked: 6
 - AsianChemical_elite: Warhead@HeavyChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - AsianHarbingerPlasma: Warhead@LightChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - AsianHarbingerPlasma: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
-- AsianLynxTankCannon: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
-- AsianLynxTankCannon_elite: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - AsianPulverizerMechaGatling: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - AsianSinglePlasma: Warhead@LightChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - AsianSinglePlasma: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
@@ -134,8 +130,6 @@ Formula percentage templates checked: 6
 - RA2GrandCannonWeapon: Warhead@LightChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - RA2HeavyMirageGun: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - RA2HeavyMirageGun_elite: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
-- RA2LasherCannon: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
-- RA2LasherCannon_elite: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - RA2LasherToxicMortar: Warhead@LightChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - RA2LasherToxicMortar: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - RA2LasherToxicMortar: Warhead@HeavyChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)

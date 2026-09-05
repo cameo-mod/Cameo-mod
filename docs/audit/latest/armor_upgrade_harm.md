@@ -10,10 +10,10 @@ _clean_ — every template carries a row for every plating.
 
 | plating | mean | min | max |
 |---|--:|--:|--:|
-| `HAZMAT` | **69.94** | 34 | 102 |
-| `COMPOSITE` | **70.10** | 36 | 107 |
-| `BLAST` | **70.04** | 36 | 104 |
-| `REFLECTOR` | **70.01** | 42 | 104 |
+| `HAZMAT` | **70.30** | 34 | 102 |
+| `COMPOSITE` | **69.32** | 36 | 107 |
+| `BLAST` | **70.44** | 36 | 104 |
+| `REFLECTOR` | **69.87** | 42 | 104 |
 | `ARMOR` | **70.00** | 70 | 70 |
 
 ## I3 — closure (every family has a counter and an exposure)
