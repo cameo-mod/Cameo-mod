@@ -675,13 +675,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "110000",
-        "falloff": "100, 89, 75, 55, 0",
-        "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
@@ -708,6 +701,13 @@
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "110000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_HeavyFlatCompatibility",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -766,7 +766,6 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Plasma_HeavyFlat",
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
        "^HeavyFlameWeapon",
