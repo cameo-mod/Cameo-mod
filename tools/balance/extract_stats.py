@@ -313,12 +313,31 @@ def weapon_class_from_types(types: list[str]) -> float | None:
     return sum(vals) / len(vals)
 
 
+def resolved_firepower_modifiers(resolved, local):
+    """Raw unconditional traits, including inherited and armament-scoped entries.
+
+    Keep percentages separately: their product is a pricing approximation, not
+    a simulation of engine integer damage rounding. Conditional traits are excluded.
+    """
+    result = []
+    for node in resolved.children_named("FirepowerMultiplier"):
+        if node.get("RequiresCondition"):
+            continue
+        modifier = int(node.get("Modifier") or "100")
+        own = child(local, node.key) if local is not None else None
+        source = (f"{rel(own.file)}#{node.key}.Modifier"
+                  if own is not None and own.get("Modifier") is not None else "inherited")
+        result.append({"trait": node.key, "modifier": modifier, "src": source,
+                       "types": [s.strip() for s in (node.get("Types") or "").split(",") if s.strip()]})
+    return result
+
+
 def firepower_multiplier(resolved, local):
     """Extract a single unconditional, locally-defined FirepowerMultiplier.
 
     Inherited template traits like FirepowerMultiplier@GlobalBuffs are NOT
-    captured, because they are not the per-actor fine-tuning knob.  Only
-    values written directly on the actor block are balance-relevant.
+    captured here, because this legacy field is the per-actor fine-tuning knob.
+    Class-fitting damage inputs use resolved_firepower_modifiers instead.
     Conditional FirepowerMultiplier traits (RequiresCondition) are also
     ignored for pricing because they are situational buffs/debuffs.
     The actor-specific FirepowerMultiplier@<actor> or unqualified
@@ -916,14 +935,15 @@ def extract_actor(rs, key: str, section: str,
             req = c.get("RequiresCondition")
             if req:
                 entry["requires"] = req
-            if c.get("Name"):
-                entry["armament_name"] = c.get("Name")
+            if child(c, "Name") is not None:
+                entry["armament_name"] = c.get("Name") or ""
             arm_name = c.get("Name") or ""
             entry["pricing"] = not ("garrison" in arm_name.lower()) and not (
                 entry.get("extraction_note") == "no_damage_warheads")
             arms.append(entry)
     if arms:
         u["armaments"] = arms
+        u["resolved_firepower_modifiers"] = resolved_firepower_modifiers(resolved, local)
     fp = firepower_multiplier(resolved, local)
     if fp:
         u["firepower_multiplier"] = fp

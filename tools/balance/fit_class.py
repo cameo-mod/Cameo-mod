@@ -59,6 +59,24 @@ def derived_dps_index(du):
     return idx
 
 
+def armament_firepower(u, arm):
+    """Unconditional FirepowerMultiplier product, not rounded runtime damage.
+
+    The legacy field is only a local fine-tuning knob. Retain compatibility for
+    old ledgers, but never multiply it again when resolved entries are present.
+    """
+    if "resolved_firepower_modifiers" not in u:
+        legacy = fnum((u.get("firepower_multiplier") or {}).get("v"))
+        return 1.0 if legacy is None else legacy
+    name = arm.get("armament_name", "primary")
+    result = 1.0
+    for entry in u["resolved_firepower_modifiers"]:
+        types = entry["types"]
+        if not types or (name and name in types):
+            result *= entry["modifier"] / 100.0
+    return result
+
+
 def unit_inputs(u, du=None, use_k=False):
     """((hp, speed, range_wdist, dps, special, unit_class, tech_tier), fallbacks),
     or (None, 0) when the unit has no usable combat stats.
@@ -74,9 +92,6 @@ def unit_inputs(u, du=None, use_k=False):
     hp = fnum((u.get("hp") or {}).get("v"))
     speed = fnum((u.get("speed") or {}).get("v") or (u.get("speed_air") or {}).get("v"))
     d = u.get("design") or {}
-    # Unconditional per-actor FirepowerMultiplier scales EFFECTIVE damage output;
-    # balance prices on effective DPS = raw x FP-mult (cameo-firepower-mult-in-dps). Default 1.0.
-    fp = fnum((u.get("firepower_multiplier") or {}).get("v")) or 1.0
     kidx = derived_dps_index(du) if use_k else {}
     total_dps, best_range = 0.0, 0.0
     fallbacks = 0
@@ -112,11 +127,10 @@ def unit_inputs(u, du=None, use_k=False):
             keyed = kidx.get((arm.get("slot"), arm.get("weapon")))
             if keyed is None:
                 fallbacks += 1
-            total_dps += raw if keyed is None else keyed
+            total_dps += (raw if keyed is None else keyed) * armament_firepower(u, arm)
         else:
-            total_dps += raw
+            total_dps += raw * armament_firepower(u, arm)
         best_range = max(best_range, formula.wdist_value(arm.get("range"), 0.0))
-    total_dps *= fp   # apply the actor-level FirepowerMultiplier to effective DPS
     if hp is None or speed is None or total_dps == 0:
         return None, 0
     # Tech tier: manual design.tech_tier is the maintainer override;
