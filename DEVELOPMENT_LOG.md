@@ -251,6 +251,30 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - **Final boot-gate: PASSED** — `MenuPostProcessEffect.PostWorldLoaded` reached, 0 new
   exception logs.
 
+**Post-sweep verification (Devin-Ember, ~17:45):**
+- Resolved-content check on all 42 deletion targets: **0 regressions** — every removed `-Key:`
+  resolves to nothing in the final weapon (removals were no-ops, whether stale or stripped by
+  later-file defs).
+- `find_empty_warhead.py` = 0; `audit_duplicate_inherits` = diamonds-only baseline.
+- Aurora's `f46e61326` verified: Japan `-Warhead@Bullet_Light` (same fix I made in-tree),
+  CABAL `-Warhead@MissileHE_Light` (confirmed harmless — resolved `CabalManticoreMissilesAA`
+  contains no `Warhead@MissileHE_Light`), RA2/Soviets `^Warhead_CannonTesla_Light` →
+  `^Warhead_Tesla_Light` + 2 `AreaDamage` types + `-Demolition_Light` (all correct).
+- **38 of my stale-removal deletions remain UNCOMMITTED** in 13 claimed files (Ixian ×10,
+  RA2/Shared ×8, Naxis ×4, AsianAlliance ×4, Consortium ×2, Syndicate ×2, Terran ×2,
+  Ordos/Yuri/Protoss/TS-GDI/WC2-Humans/legacy d2k.yaml/legacy redalert2mod.yaml ×1 each).
+  All are verified no-ops. ⚠ **Committed HEAD still contains the stale lines** — a clean
+  checkout would re-hit the crashes. Owners should land these with their next commit, or
+  approve me to commit them as one scoped batch.
+- **Branch scan:** `origin/master` = 0 ahead of HEAD (fully merged). `claude/bot_insurance_
+  dynamic_trait` and `claude/docs-audit-reorganize-xgzwhr` both carry **155 commits / 250
+  files** — a live parallel line updated today; not a duplicate-work risk for current tasks
+  but a large unmerged surface. All `codex/*`, `agent/*`, `devin/*` branches are older
+  (Aug 29 – Sep 4) historical work streams.
+- **⚠ Observed: something auto-stages freshly-modified files** — files I edited appeared in
+  the index seconds after saving (source of both ride-along incidents). Maintainer should
+  check for a git watcher/auto-stage tool; all commits this session were content-verified.
+
 ## Devin AI — AI architecture `UnitsToBuild` migration blocked by merge order (2026-09-05)
 
 **Identity:** Devin AI (SWE-1.7 Max).
