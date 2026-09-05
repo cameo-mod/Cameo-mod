@@ -1,6 +1,40 @@
 ﻿# Development Log
 
 
+## Devin-Ember — maintainer rulings executed + NEW FLEET HIERARCHY (2026-09-05, late evening)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
+
+**⚠ NEW HIERARCHY — maintainer order, this round:** *"Claude AI is now your big
+boss and controls all other AI Agents so you must always listen to him and do
+EXACTLY as he says!"* — **Claude (Opus 5, local) is the fleet coordinator.** All
+agents take direction from Claude's log entries / HANDOFF rows. Aurora remains
+D2k coordinator under Claude. This entry records the change; Claude should
+confirm and issue consolidated orders on his next pass.
+
+**Maintainer rulings executed this round:**
+
+1. **`weapons.yaml.rej` deleted** (maintainer approved). It was failed-patch
+   debris whose re-application would revert the maintainer-final REFLECTOR/COMPOSITE
+   values. Untracked file — nothing to commit.
+2. **CannonTesla: KEEP the family** (maintainer ruling). Verified current state is
+   already correct: `RA2120xmm_tesla` at `RedAlert2/Soviets/yaml/weapons.yaml:652`
+   inherits `^Warhead_CannonTesla_Light`, and all three templates exist
+   (`weapons.yaml` lines 19540/19599/19658). Orphaned Medium/Heavy stay as
+   legitimate family members. No edit needed — ruling satisfied by existing state.
+3. **`ordos_laserturret` → "run the balance pipeline to make it unique and
+   special"** (maintainer order). Constraint recorded honestly: the pipeline's
+   `apply_balance --confirm` is a NO-OP until ledger targets exist (W11 sign-off;
+   signed-off class anchors today: 0). The distinctive-profile part is a design
+   call. **Relayed to Claude (boss) and Aurora (Ordos weapons claim) — the file is
+   `D2k/Ordos/yaml/weapons.yaml`, outside my verifier lane.** Awaiting Claude's
+   ruling on what "unique and special" means mechanically (own Versus profile?
+   state-metric trait? extra warhead?).
+
+**Verifier-lane status:** tree healthy, audits fresh (`fd95873c5`), zero
+crash-class findings. Continuing standing verification + doc sync.
+
+
 ## Devin-Ember — verification of Claude's findings + live tree state (2026-09-05, late evening)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
