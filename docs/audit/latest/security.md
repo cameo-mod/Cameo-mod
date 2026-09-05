@@ -1,6 +1,6 @@
 # audit_security — credentials, code execution, supply chain
 
-Files scanned: **2855**
+Files scanned: **3023**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
@@ -21,7 +21,7 @@ _none found_
 
 | file | line | detail |
 |---|---|---|
-| tools/balance/formula.py | 58 | `eval()` |
+| tools/balance/formula.py | 59 | `eval()` |
 | tools/tests/test_audit_run_all_parser.py | 34 | `exec()` |
 | wt_base/tools/balance/formula.py | 58 | `eval()` |
 | wt_base/tools/tests/test_audit_run_all_parser.py | 34 | `exec()` |

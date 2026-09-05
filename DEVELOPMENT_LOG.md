@@ -4852,3 +4852,31 @@ column support (the MO sections carry `Owner=` / `RequiredHouses=`). Until it ex
 faction-routing gap stays UNROUTED — do NOT hand-infer factions (ruled-out invented data).
 
 **Still missing:** Rise of the East, Emperor: Battle for Dune, Dune: Spice Wars. — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: audit suite refresh — three_way_split BLOCKED by stale composite registry
+
+**Finding:** `audit_three_way_split` hard-fails before writing its report: the
+intentional-composite manifest (`docs/audit/intentional_weapon_composites.json`, curated by
+Blackrobe in PR #320) is stale — 13 reviewed weapons'' `mains` no longer match resolved
+reality, and ~8 more have digest drift. Causes verified as legitimate post-merge work, not
+damage loss:
+
+- `Tesla_Heavy` dropped from ~10 mains lists (`Atomic`, `NaxiV1Rocket`, `PulseMissile`,
+  `RA2Atomic`, `RAAtomic`, `SteelIonCannonDamage`, `TDIonCannonDamage`, `TSIonCannon`,
+  `AsianTSIonCannon`): the flat `Warhead@Tesla_Heavy` was folded — `Tesla_Heavy_ExtraDamage`
+  companions still exist in `weapons.yaml` (lines ~9679/12420).
+- `JapanesePlasmaBomb`: curated 3-mains (Chemical/Demolition/Flame_Heavy) -> resolved 1 main
+  `Plasma_Heavy` — a deliberate W23 3-way conversion; the weapon is no longer a stack at all,
+  so its curated entry must be REMOVED, not updated.
+- `DuelistTankCannon`, `HeavyIxianCombatTankCannon`, `IxianCombatTankCannon`: `CannonHE_Medium`
+  collapsed into `CannonHE_Heavy` (same-family W24 collapse).
+- `mtank_pri`: stale referrers only (benign).
+
+**Action needed (maintainer / registry owner):** re-curate the 13 `mains` lists inside
+`curated_decisions()` in `tools/audit/intentional_composites.py` (or drop entries whose
+weapons are no longer multi-main), then `python tools/audit/intentional_composites.py --write`
+to regenerate digests, then re-run `audit_three_way_split` to regenerate its report.
+Devin-Nova did NOT rewrite curated review data — that is a review act, not a refresh.
+
+**This commit:** `docs/audit/latest/three_way_split.md` restored to HEAD (the audit produced
+no new report); all other suite output committed whole. — Devin-Nova
