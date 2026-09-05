@@ -34,6 +34,13 @@ i.e. where the unit sits in its class's distribution. The balance formula still 
 """
 from __future__ import annotations
 
+import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    # Without this the validator CRASHES printing its own problem report on a
+    # cp1252 console — the failure path was the one path never exercised.
+    sys.stdout.reconfigure(encoding="utf-8")
+
 # ── Cameo's own factions, as the mod declares them ────────────────────────────────────────────
 # Longest-prefix wins: `ra2_allies` must beat `ra2`, `ts_gdi` must beat `ts`.
 CAMEO_FACTIONS = (
@@ -95,34 +102,74 @@ ROUTES = {
     "harkonnen": (("OpenRA Dune 2000", ("harkonnen",)), ("OpenRA Dune II", ("harkonnen",))),
 }
 
+# ── Unblocked 2026-09-05 by the INI extraction ────────────────────────────────────────────────
+# Every route below was PENDING on data that is now on disk and extracted to
+# `docs/reference/ini_corpus.json`. Faction names are the sources' OWN `Owner=` country names,
+# verified against the corpus — not the names the PENDING entries guessed at, several of which
+# did not exist (see the note under PENDING).
+#
+# ⚠ Mental Omega ships SUB-FACTION countries, not the three sides. The maintainer assigned each
+# sub-faction its own Cameo destination (2026-09-05), which covers all twelve MO countries:
+#     Europeans->ra2_allies  USSR->ra2_soviets  PsiCorps+Headquaters->yuri  Chinese->asianalliance
+#     Latin->latinsyndicate  Guild1/2/3->steelconsortium  ScorpionCell->tkm
+#     UnitedStates->futuretech  Pacific->japan
+INI_ROUTES = {
+    "td_gdi":          (("DTA Classic", ("GDI",)),),
+    "td_nod":          (("DTA Classic", ("Nod",)),),
+    "ra1_allies":      (("DTA Classic", ("Allies",)),),
+    "ra1_soviets":     (("DTA Classic", ("Soviet",)),),
+    "ra2_allies":      (("Mental Omega", ("Europeans",)),
+                        ("CnC Reloaded", ("AlliesCountry",))),
+    "ra2_soviets":     (("Mental Omega", ("USSR",)),
+                        ("CnC Reloaded", ("SovietCountry",))),
+    "yuri":            (("Mental Omega", ("PsiCorps", "Headquaters")),
+                        ("CnC Reloaded", ("YuriCountry",))),
+    "ts_gdi":          (("CnC Reloaded", ("GDICountry",)),),
+    "ts_nod":          (("CnC Reloaded", ("NodCountry",)),),
+    "asianalliance":   (("Mental Omega", ("Chinese",)),
+                        ("Rise of the East", ("China",))),
+    "latinsyndicate":  (("Mental Omega", ("Latin",)),),
+    "steelconsortium": (("Mental Omega", ("Guild1", "Guild2", "Guild3")),),
+    "tkm":             (("Mental Omega", ("ScorpionCell",)),
+                        ("Rise of the East", ("Iraq",))),
+    "futuretech":      (("Mental Omega", ("UnitedStates",)),),
+    "japan":           (("Mental Omega", ("Pacific",)),),
+}
+
+for _f, _r in INI_ROUTES.items():
+    ROUTES[_f] = tuple(ROUTES.get(_f, ())) + _r
+
 # ── Ruled, but the source is not in the corpus yet ────────────────────────────────────────────
 # These are NOT speculation: each is a maintainer ruling whose data is missing. Listed so the
 # weighting a faction actually gets today is visible against the weighting it was ruled.
 PENDING = {
-    "td_gdi":      (("DTA", "gdi", "INIs promised 2026-09-05"),),
-    "td_nod":      (("DTA", "nod", "INIs promised 2026-09-05"),),
-    "ra1_allies":  (("DTA", "allied", "INIs promised 2026-09-05"),),
-    "ra1_soviets": (("DTA", "soviet", "INIs promised 2026-09-05"),),
-    "ra2_allies":  (("Mental Omega", "Allied", "no faction column"),
-                    ("CnC Reloaded", "Allied", "no faction column")),
-    "ra2_soviets": (("Mental Omega", "Soviet", "no faction column"),
-                    ("CnC Reloaded", "Soviet", "no faction column")),
-    "yuri":        (("Mental Omega", "Epsilon", "no faction column"),
-                    ("CnC Reloaded", "Yuri", "no faction column")),
-    "ts_gdi":      (("CnC Reloaded", "GDI", "no faction column"),),
-    "ts_nod":      (("CnC Reloaded", "Nod", "no faction column"),),
-    "cabal":       (("CnC Reloaded", "CABAL", "no faction column"),),
-    "forgotten":   (("CnC Reloaded", "Forgotten", "no faction column"),),
-    "asianalliance":   (("Mental Omega", "China", "no faction column"),
-                        ("Rise of the East", "China", "mod not supplied")),
-    "latinsyndicate":  (("Mental Omega", "Latin Confederation", "no faction column"),),
-    "steelconsortium": (("Mental Omega", "Foehn Revolt", "no faction column"),),
-    "tkm":             (("Rise of the East", "GLA", "mod not supplied"),),
+    # ── RESOLVED 2026-09-05. Fifteen entries left this table when the INI corpus landed; the
+    # routes they became are in INI_ROUTES above. Two of the old entries were WRONG about the
+    # world, not merely blocked, and both are recorded here so the mistake is not repeated:
+    #
+    #   * `cabal` and `forgotten` were routed to CnC Reloaded. **CnC Reloaded has no CABAL and no
+    #     Forgotten country.** Its full Owner= list is GDICountry, NodCountry, AlliesCountry,
+    #     SovietCountry, YuriCountry, RobotCountry (+ variants) and the vanilla nation slots.
+    #     Their real source is Shattered Paradise's `cab` / `mut`.
+    #   * `tkm` was routed to "Rise of the East / GLA". **RotE has no GLA country.** Ruled
+    #     2026-09-05: TKM takes Mental Omega ScorpionCell + Rise of the East Iraq.
+    #
+    # The blocker on the rest was never "no faction column" — every INI source carries `Owner=`.
+    # It was that nobody had read the files. See docs/design/REFERENCE_EXTRACTION_PLAN.md §3.5.
+    # (cabal and forgotten are NOT pending — they are already ROUTED to Shattered Paradise
+    # `cab` / `mut` above. What they wanted was a SECOND game, and CnC Reloaded cannot be it:
+    # it has no CABAL and no Forgotten country. They stay in OPEN_SECOND_GAME.)
+
     # ⭐ THE DUNE TIER IS THE THINNEST IN THE CORPUS AND THE MAINTAINER IS FIXING IT (2026-09-04):
     # *"The dune factions will need the OpenRA dune x emperor battle for dune x some different
     # dune mods I have here I need to share with you tomorrow and of course also the spice wars
     # game!"* Measured, the need is real — `ordos` has 25 Cameo units against SEVEN routed
     # reference rows, and its whole exchange rate rests on 4 pairs.
+    #
+    # ⏸ DEFERRED BY RULING R10 (2026-09-05): the C&C family is built first and the Dune, Warcraft
+    # and StarCraft factions come later from their OWN pools. Safe because ZERO of the 22 classes
+    # in use are deferred-only. ⛔ But R11 makes these release-blocking for Cameo 1.0: every
+    # faction must ship on the new formula WITH reference data.
     "ordos":     (("Emperor: Battle for Dune", "Ordos", "mod not supplied"),
                   ("Dune: Spice Wars", "Ordos", "game not supplied"),),
     "atreides":  (("Emperor: Battle for Dune", "Atreides", "mod not supplied"),
@@ -137,21 +184,26 @@ PENDING = {
     "corrino": (("Emperor: Battle for Dune", "Imperial / Sardaukar", "mod not supplied"),),
 }
 
+
 # ── No route at all: FORMULA-ONLY, by ruling ──────────────────────────────────────────────────
 # *"They should be formula-only from a grounded class anchor"* — the ruling already made for units
 # with no reference, rather than forcing a bad match, which is what produced the rejected sheet.
 UNROUTED = {
-    "tkm": "GLA is the ruled archetype, but Generals Alpha's `gla` is spent on Latin Syndicate "
-           "and Rise of the East is not supplied. A distinct second source is OPEN.",
+    # ⭐ `tkm` and `japan` LEFT this table on 2026-09-05 — both are routed now. TKM takes Mental
+    # Omega ScorpionCell + Rise of the East Iraq (its old note said "Rise of the East is not
+    # supplied"; it is, and it has no `gla` country — Iraq is the ruled analogue). Japan takes
+    # Mental Omega Pacific Front, which is a closer archetype than the RA3 Empire its note asked
+    # for and which no mod in the corpus provides.
     "schwarzermond": "Earth 2150 Lunar Corporation is the documented inspiration and is not on "
-                     "disk. OpenE2140 is Earth 2140.",
-    "japan": "RA3 Empire is the documented inspiration; no RA3 mod is in the corpus.",
+                     "disk. OpenE2140 is Earth 2140. ⏰ The maintainer raised Foehn Revolt as a "
+                     "possible partial source (2026-09-05) — not yet ruled.",
     "ixian": "House Ix is Emperor-only. ⏰ UNBLOCKS when the maintainer supplies Emperor: Battle "
              "for Dune — see PENDING.",
     "corrino": "House Corrino appears only as a Dune II/D2K campaign side, with no buildable "
                "roster in the extracted corpus. ⏰ UNBLOCKS with Emperor's Imperial/Sardaukar "
                "house — see PENDING.",
 }
+
 
 # ── Ruled-open: a route exists but the matrix marks the second game as unchosen ───────────────
 # Reported, never silently satisfied. A faction here still routes on what it has.
