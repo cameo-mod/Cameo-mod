@@ -51,6 +51,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Porting from an upstream mod: a NEW NAME is not a NEW MECHANIC (2026-08-23)](#porting-from-an-upstream-mod-a-new-name-is-not-a-new-mechanic-2026-08-23)
 - [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
 - [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
+- [`git grep` and `miniyaml.load` BOTH silently under-read non-UTF-8 weapons yaml (2026-09-05)](#git-grep-and-miniyamlload-both-silently-under-read-non-utf-8-weapons-yaml-2026-09-05)
 
 **Weapon templates, the 3-way split and the effect layer**
 
@@ -1199,6 +1200,31 @@ A W24 collapse can move an upgrade pair onto families with **opposite Versus pro
 ⚠ **A2 was NOT the root cause.** Measured before vs after A2: **54 findings before, 54 after.** A2 deepened the pre-existing `Su57` case from 0.92× to 0.87×. This is pre-existing debt the W24 collapse made visible.
 
 **Rule:** every upgrade must be verified with `python tools/audit/audit_upgrade_regression.py` after any family repoint that touches an armament pair. Do not rely on a damage-preservation check alone.
+
+## `git grep` and `miniyaml.load` BOTH silently under-read non-UTF-8 weapons yaml (2026-09-05)
+
+Several weapons yaml files in this repo contain non-UTF-8 bytes (legacy encoding
+artifacts from upstream mod imports). Two standard tools silently fail on them:
+
+1. **`git grep` treats them as binary and skips them entirely.** It reported
+   `ordos_chemturret` as absent from a file where `git show <rev>:<file> | grep -a`
+   finds it at line 1136. The file is invisible to `git grep`, not just the match.
+2. **`miniyaml.load` silently under-parses the same files** — it reported
+   `0 nodes added` for `D2k/Ordos/yaml/weapons.yaml` when raw byte extraction
+   found `ordos_chemturret` and `ordos_laserturret` right there.
+
+This nearly caused the deletion of 30 live weapon nodes during the master merge,
+including the whole D2k mortar family and the CannonTesla templates.
+
+**Rule:** for any presence/absence check on weapons yaml, use
+`git show <rev>:<file> | grep -a`, never `git grep` and never a bare
+`miniyaml` node count. The `-a` flag forces `grep` to treat the input as text
+regardless of binary byte detection.
+
+**Guard:** no automated guard yet. The splice regen (`b905d7679`) rewrote
+`weapons.yaml` as clean UTF-8, but per-faction ContentPack files may still
+carry legacy encodings. Always verify with `git show ... | grep -a` before
+asserting a weapon or node is absent.
 
 ## Inline effect warheads should be inherited, not inline (2026-08-19)
 
