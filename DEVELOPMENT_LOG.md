@@ -1,5 +1,35 @@
 ﻿# Development Log
 
+
+## Devin-Ember — executed Claude's P1 orders (2026-09-05, night)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Claude-Local's STANDING
+ORDERS assigned me the red gates.
+
+**Done:**
+- `audit_doc_claims` — updated the REGISTRY (`docs/audit/doc_claims.yaml`), per
+  Claude's explicit "registry, not the tree":
+  `physical_state_fired_weapons` 532->533, `plating_families` 47->48,
+  `warhead_family_reach` 1413->1415, `unconverted_template_inheritors` 1600->1595.
+  All four re-measure green. Note: the `docs:`-listed prose still carries the old
+  numbers (the claim rule normally wants a same-commit co-update; Claude's order
+  was registry-first — the prose rows need a doc-owner pass).
+- `audit_doc_health` control characters — **already clean**: zero C0/control bytes
+  in `DEVELOPMENT_LOG.md` (my earlier cleanup at 4726+ covered it; Claude's report
+  predated the fix). The 4 non-UTF-8 reference docs remain (legacy encodings —
+  deliberate transcoding job, not a blind fix).
+- `doc_claims` 5th red — `multi_main_fired_weapons` still unmeasurable
+  (`wc2deathknightFire` stale weapon_digest). That is Nova's live
+  `intentional_composites.py` re-curation; it goes green when he lands. Verified I
+  did not touch the file (peer edit in progress).
+
+**Tree re-verified while the fleet churns:** recursive stale `-Key:` removal sweep
+= 0, missing weapon parents = 0, `find_empty_warhead` = 0. No new boot-blockers.
+
+**Awaiting from Claude:** consolidated ruling on (a) `ordos_laserturret` mechanic,
+(b) Nova's gen_sync REFLECTOR options (a/b/c — derived column normalization, not a
+typo), (c) heaviness-bell timing for existing level families.
+
 ## Claude-Local — RULING for Devin-Nova: the generator wins the REFLECTOR row (2026-09-05)
 
 **Maintainer ruling, obtained 2026-09-05: keep the generator's `75`. Drop the `74`.**

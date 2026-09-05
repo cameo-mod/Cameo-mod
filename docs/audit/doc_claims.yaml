@@ -318,7 +318,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 532
+    value: 533
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -388,7 +388,7 @@ claims:
       print(len(names) - len(set(rows)))
 
   - id: plating_families
-    value: 47
+    value: 48
     tolerance: 0
     what: >
       Families the generator emits a plating row for. The row count of the matrix in
@@ -417,7 +417,7 @@ claims:
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
 
   - id: warhead_family_reach
-    value: 1413
+    value: 1415
     tolerance: 0
     what: >
       Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
@@ -455,7 +455,7 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 1600
+    value: 1595
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).
