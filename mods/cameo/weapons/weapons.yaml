@@ -19713,3 +19713,182 @@ generic_bullet_casing:
 			Helicopter: 7
 			Bomber: 6
 			Fighter: 5
+^Warhead_BulletChem_Heavy:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BulletChem_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 110
+		Damage: 2000
+		Falloff: 100, 82, 61, 38, 0
+		Versus:
+			HAZMAT: 75
+			COMPOSITE: 52
+			BLAST: 70
+			REFLECTOR: 82
+			ARMOR: 70
+			Shield: 201
+			None: 200
+			Flak: 167
+			Plate: 139
+			Scout: 115
+			Light: 106
+			Medium: 101
+			Heavy: 97
+			Superheavy: 96
+			Wood: 87
+			Heroic: 80
+			Steel: 73
+			Concrete: 72
+			Fighter: 71
+			Bomber: 67
+			Helicopter: 64
+			Spaceship: 63
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Corrosion: 50
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Heroic: 23
+			Flak: 22
+			Plate: 22
+			None: 21
+			Scout: 19
+			Light: 18
+			Medium: 18
+			Heavy: 17
+			Superheavy: 17
+			Wood: 16
+			Steel: 15
+			Fighter: 15
+			Concrete: 14
+			Bomber: 14
+			Helicopter: 13
+			Spaceship: 12
+
+^Warhead_BulletChem_Light:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BulletChem_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 55
+		Damage: 2000
+		Falloff: 100, 82, 61, 38, 0
+		Versus:
+			HAZMAT: 75
+			COMPOSITE: 52
+			BLAST: 70
+			REFLECTOR: 82
+			ARMOR: 70
+			Shield: 162
+			None: 191
+			Flak: 155
+			Scout: 146
+			Light: 126
+			Plate: 124
+			Wood: 103
+			Medium: 102
+			Heroic: 95
+			Fighter: 94
+			Heavy: 91
+			Superheavy: 80
+			Steel: 74
+			Bomber: 63
+			Concrete: 58
+			Helicopter: 53
+			Spaceship: 45
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Corrosion: 20
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Heroic: 14
+			Flak: 13
+			Plate: 13
+			None: 12
+			Scout: 10
+			Light: 9
+			Medium: 9
+			Heavy: 8
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Fighter: 6
+			Concrete: 5
+			Bomber: 5
+			Helicopter: 4
+			Spaceship: 3
+
+^Warhead_BulletChem_Medium:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@BulletChem_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 83
+		Damage: 2000
+		Falloff: 100, 82, 61, 38, 0
+		Versus:
+			HAZMAT: 75
+			COMPOSITE: 52
+			BLAST: 70
+			REFLECTOR: 82
+			ARMOR: 70
+			Shield: 182
+			None: 200
+			Flak: 144
+			Plate: 139
+			Scout: 127
+			Light: 119
+			Medium: 106
+			Heavy: 103
+			Wood: 93
+			Superheavy: 89
+			Heroic: 88
+			Steel: 75
+			Fighter: 71
+			Bomber: 69
+			Concrete: 63
+			Helicopter: 62
+			Spaceship: 50
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Corrosion: 33
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Heroic: 18
+			Flak: 17
+			Plate: 17
+			None: 16
+			Scout: 14
+			Light: 13
+			Medium: 13
+			Heavy: 12
+			Superheavy: 12
+			Wood: 11
+			Steel: 10
+			Fighter: 10
+			Concrete: 9
+			Bomber: 9
+			Helicopter: 8
+			Spaceship: 7

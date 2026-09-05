@@ -54,10 +54,7 @@ ShriekStinger:
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 HydraSpit:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^LightMissile
-	Inherits@3: ^SmallArms
-	Inherits@4: ^ArrowWeapon
+	Inherits@wh: ^Warhead_BulletChem_Light
 	ReloadDelay: 15
 	Range: 5979
 	Report: zhyfir00.aud
@@ -71,37 +68,8 @@ HydraSpit:
 		Speed: 2500
 		Width: 25
 		TrailImage: sczhsplash
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
+	Warhead@BulletChem_Light:
 		Damage: 18000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 18000
-	Warhead@LightMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 18000
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@ArrowWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 18000
-	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
