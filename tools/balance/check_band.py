@@ -4,11 +4,48 @@
 For every ledger unit tagged design.class_anchor = <class>, compute its
 class-formula price and the ratio price/cost0, then enforce the baseband law:
 
-  * hard band     50%..400%  of the class baseline cost0
-  * practical floor  ~75%   (formula breaks down below — units too weak/price)
-  * sweet spot   100%..250%  (baseline..verifier) — target >=80% occupancy
+  * hard band     50%..350%  of the class baseline cost0   (= x0.50 .. x2.50 stats)
+  * TARGET band  100%..250%  of cost0 — target >=80% occupancy, anchor ON the floor
+                  (maintainer 2026-08-31: *"the target band should be at 75% to 250% where
+                  most units are located"*, *"the 75% referred to the unit price not the
+                  stats"*, and *"let's use the full band from cost 50% and stats 50% to
+                  cost 3.5x and stats 2.5x"*)
 
-Read-only. Emits a report and a nonzero exit if any member is below 75% or
+⭐ EVERY ONE OF THOSE NUMBERS IS DERIVED, NOT PREFERRED (BALANCE_PIPELINE §8.1a).
+Hold speed and range at the anchor's and write h, d for the HP and DPS multipliers.
+`formula.class_baseline_estimators` is then O=(h+1+1+d)/4, P=(h+d)/2, Q=h*d, and the
+price collapses to a closed form — verified exactly against the module in
+`tools/tests/test_band_law.py`:
+
+    price(h, d) = (3*(h + d) + 4*h*d + 2) / 12       # SYMMETRIC in h and d
+    price(x, x) = (2x + 1)(x + 1) / 6                # both stats moved together
+    x(P)        = (sqrt(1 + 48*P) - 3) / 4           # the inverse
+
+So each ring of the band is just the price of a STAT WINDOW, and the useful ones are exact:
+
+    x = 0.50  ->  0.500   FLOOR       half the anchor's HP and DPS      EXACT BOTH WAYS
+    x = 1.00  ->  1.000   SWEET_LO = the anchor itself                   EXACT BOTH WAYS
+    x = 2.00  ->  2.500   SWEET_HI    double                             EXACT BOTH WAYS
+    x = 2.50  ->  3.500   CEIL        two and a half                     EXACT BOTH WAYS
+
+⚠ THE RINGS ARE COST NUMBERS. The maintainer ruled it explicitly -- *"the 75% referred to
+the unit price not the stats"* -- and it is the right call: a price is what a player reads
+off the build palette, a stat multiplier is not. The stat window is the DERIVED reading,
+and it happens to come out round at four of the five rings, which is why this band beats
+the 4.00 ceiling it replaced (x2.7231 -- round in neither space).
+
+⚠ AND THE RINGS ARE CURVES, NOT BOXES. `3(h+d) + 4hd = 28` is the entire 250% iso-cost
+line, so 2x HP with 2x DPS, 4x HP with 0.84x DPS, and 1x HP with 3.57x DPS all cost
+exactly 250%. That IS the maintainer's *"one of the stats can also be higher if the other
+one is a bit lower"* — in closed form, and symmetric: HP and DPS are interchangeable here.
+
+  The 250% ceiling is a PRICE RATIO. It used to be described as "baseline..verifier",
+  after a nominated second actor pinned at 2.5x cost0 — that verifier was RETIRED on
+  2026-08-29 (HANDOFF §3.0j; maintainer: "they should be regular units like anything
+  else and not have those stiff rules"). The law is unchanged: this check never read a
+  verifier actor, which is exactly why it survived the retirement intact.
+
+Read-only. Emits a report and a nonzero exit if any member is below SWEET_LO (72.9%) or
 above 400% (unless it is a BuildLimit:1 epic/hero, which is band-exempt).
 
 Usage: python tools/balance/check_band.py [--class X] [--md docs/audit/latest/band.md]
@@ -24,7 +61,38 @@ import tier_chain  # noqa: E402
 LEDGER = ROOT / "docs/balance"
 ANCHORS = LEDGER / "class_anchors.json"
 
-FLOOR, SOFT_FLOOR, SWEET_LO, SWEET_HI, CEIL = 0.50, 0.75, 1.00, 2.50, 4.00
+# ⛔ RINGS ARE DECLARED IN **COST**, and every one of them is checked back through
+# price(x, x) = (2x+1)(x+1)/6. Maintainer ruling 2026-08-31, in two parts:
+#   (a) "The 75% referred to the unit PRICE not the stats" -- the rings live in cost space,
+#       which is the space players see, and the stat window is the DERIVED reading.
+#   (b) "the full band from cost 50% and stats 50% to cost 3.5x and stats 2.5x"
+#   (c) "we make the 1.0x to 2.5x the regular Band for 80% of the unit population, the
+#        baseline actor being exactly at 1.0x ... and the extended band for the remaining
+#        20% outlier units is between 0.5x and 3.5x price"
+# ⭐ ALL FOUR RINGS ARE NOW EXACT IN BOTH SPACES AT ONCE -- 0.50/1.00/2.50/3.50 map to
+# x0.50/x1.00/x2.00/x2.50 on HP and DPS together. No ring is round in only one space, and
+# the fifth ring is gone: the target floor IS the anchor.
+#
+# ⛔ THE STRONG CLAIM THIS ENCODES, AND THE MEASUREMENT THAT LICENSED IT. Putting the
+# target floor ON the anchor says a normal class member is never CHEAPER than the class
+# face -- anything below 1.00 is an outlier by construction rather than by measurement.
+# That was challenged as possibly unreachable, and the challenge was right to demand a
+# number. `band_granularity.py --census` answers it: judged against the LIVE anchor actor,
+# **21% of members sit below their anchor** -- essentially exactly the 20% the extended
+# band allots. Judged against the ruled SPEC it is 54%, and that 33-point gap is not the
+# roster, it is the restat debt (see the docstring warning in `zone_census`).
+FLOOR      = 0.50   # = x0.50 stats   EXACT BOTH WAYS
+SWEET_LO   = 1.00   # = x1.00 stats   EXACT BOTH WAYS -- THE ANCHOR ITSELF
+SWEET_HI   = 2.50   # = x2.00 stats   EXACT BOTH WAYS -- the maintainer's own derivation
+CEIL       = 3.50   # = x2.50 stats   EXACT BOTH WAYS
+SOFT_FLOOR = SWEET_LO   # kept: the old name for the same ring
+
+# ⚠ SWEET_LO HAS BEEN WRONG TWICE THIS WEEK AND BOTH WRONG VALUES LOOKED PRINCIPLED.
+#   0.7292 (= 35/48) is the cost of x0.75 STATS -- rejected: "The 75% referred to the unit
+#           price not the stats."
+#   0.75    is a 75% PRICE -- superseded by the four-point ruling below, which puts the
+#           lower target edge ON the anchor.
+# Neither is a bug to re-fix. 1.00 is the ruling and `test_band_law.py` pins it.
 
 
 def fnum(v):

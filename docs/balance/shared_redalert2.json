@@ -9,6 +9,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -25,6 +26,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -58,7 +60,8 @@
     "sight": {
      "src": "inherited",
      "v": "7500"
-    }
+    },
+    "turreted": false
    },
    "YRSLAV": {
     "armaments": [
@@ -122,6 +125,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -134,6 +138,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "10000"
@@ -165,13 +170,15 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "ra2_ambu": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -184,6 +191,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -216,7 +224,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_ambu_demo": {
     "armaments": [
@@ -238,6 +247,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -250,6 +260,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -282,7 +293,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_ambu_driveby": {
     "armaments": [
@@ -319,6 +331,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -331,6 +344,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -363,13 +377,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_awall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -382,6 +398,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "100000"
@@ -393,13 +410,15 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_bcab": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -412,6 +431,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -444,7 +464,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_bcab_demo": {
     "armaments": [
@@ -466,6 +487,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -478,6 +500,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -510,7 +533,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_bcab_driveby": {
     "armaments": [
@@ -547,6 +571,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -559,6 +584,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -591,13 +617,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_bus": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -610,6 +638,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -642,7 +671,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_bus_demo": {
     "armaments": [
@@ -664,6 +694,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -676,6 +707,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -708,7 +740,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_bus_driveby": {
     "armaments": [
@@ -745,6 +778,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -757,6 +791,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -789,7 +824,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_c_abram": {
     "armaments": [
@@ -884,6 +920,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -896,6 +933,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "190000"
@@ -935,7 +973,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "ra2_c_hum": {
     "armaments": [
@@ -1002,6 +1041,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -1014,6 +1054,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "80000"
@@ -1053,7 +1094,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "ra2_c_hum2": {
     "armaments": [
@@ -1120,6 +1162,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -1132,6 +1175,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "80000"
@@ -1171,7 +1215,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "ra2_c_ifv": {
     "armaments": [
@@ -1294,6 +1339,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -1306,6 +1352,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "120000"
@@ -1345,13 +1392,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "ra2_car": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1364,6 +1413,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -1396,7 +1446,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_car_demo": {
     "armaments": [
@@ -1418,6 +1469,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1430,6 +1482,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -1462,7 +1515,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_car_driveby": {
     "armaments": [
@@ -1499,6 +1553,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1511,6 +1566,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -1543,13 +1599,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_cona": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1562,6 +1620,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -1594,7 +1653,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_cona_demo": {
     "armaments": [
@@ -1616,6 +1676,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1628,6 +1689,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -1660,7 +1722,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_cona_driveby": {
     "armaments": [
@@ -1697,6 +1760,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1709,6 +1773,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -1741,13 +1806,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_cop": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1760,6 +1827,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -1792,7 +1860,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_cop_demo": {
     "armaments": [
@@ -1814,6 +1883,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1826,6 +1896,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -1858,7 +1929,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_cop_driveby": {
     "armaments": [
@@ -1895,6 +1967,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1907,6 +1980,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -1939,13 +2013,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_ddbx": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1958,6 +2034,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -1990,7 +2067,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_ddbx_demo": {
     "armaments": [
@@ -2012,6 +2090,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2024,6 +2103,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -2056,7 +2136,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_ddbx_driveby": {
     "armaments": [
@@ -2093,6 +2174,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2105,6 +2187,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -2137,13 +2220,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_euroc": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2156,6 +2241,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -2188,7 +2274,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_euroc_demo": {
     "armaments": [
@@ -2210,6 +2297,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2222,6 +2310,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -2254,7 +2343,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_euroc_driveby": {
     "armaments": [
@@ -2291,6 +2381,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2303,6 +2394,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -2335,13 +2427,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_jeep": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2354,6 +2448,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -2386,7 +2481,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_jeep_demo": {
     "armaments": [
@@ -2408,6 +2504,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2420,6 +2517,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -2452,7 +2550,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_jeep_driveby": {
     "armaments": [
@@ -2489,6 +2588,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2501,6 +2601,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -2533,13 +2634,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_limo": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2552,6 +2655,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -2584,7 +2688,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_limo_demo": {
     "armaments": [
@@ -2606,6 +2711,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2618,6 +2724,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -2650,7 +2757,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_limo_driveby": {
     "armaments": [
@@ -2687,6 +2795,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2699,6 +2808,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -2731,13 +2841,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_ptruck": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2750,6 +2862,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -2782,7 +2895,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_ptruck_demo": {
     "armaments": [
@@ -2804,6 +2918,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2816,6 +2931,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -2848,7 +2964,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_ptruck_driveby": {
     "armaments": [
@@ -2885,6 +3002,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2897,6 +3015,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -2929,13 +3048,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_stang": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2948,6 +3069,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -2980,7 +3102,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_stang_demo": {
     "armaments": [
@@ -3002,6 +3125,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3014,6 +3138,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -3046,7 +3171,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_stang_driveby": {
     "armaments": [
@@ -3083,6 +3209,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3095,6 +3222,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -3127,13 +3255,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_suvb": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3146,6 +3276,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -3178,7 +3309,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_suvb_demo": {
     "armaments": [
@@ -3200,6 +3332,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3212,6 +3345,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -3244,7 +3378,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_suvb_driveby": {
     "armaments": [
@@ -3281,6 +3416,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3293,6 +3429,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -3325,13 +3462,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_suvw": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3344,6 +3483,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -3376,7 +3516,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_suvw_demo": {
     "armaments": [
@@ -3398,6 +3539,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3410,6 +3552,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -3442,7 +3585,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_suvw_driveby": {
     "armaments": [
@@ -3479,6 +3623,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3491,6 +3636,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -3523,13 +3669,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_swall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -3542,6 +3690,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "100000"
@@ -3553,13 +3702,15 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "ra2_taxi": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3572,6 +3723,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -3604,7 +3756,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_taxi_demo": {
     "armaments": [
@@ -3626,6 +3779,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3638,6 +3792,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -3670,7 +3825,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_taxi_driveby": {
     "armaments": [
@@ -3707,6 +3863,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3719,6 +3876,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -3751,13 +3909,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_tractor": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3770,6 +3930,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -3802,7 +3963,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_tractor_demo": {
     "armaments": [
@@ -3824,6 +3986,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3836,6 +3999,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -3868,7 +4032,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_tractor_driveby": {
     "armaments": [
@@ -3905,6 +4070,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3917,6 +4083,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -3949,13 +4116,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_trucka": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3968,6 +4137,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -4000,7 +4170,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_trucka_demo": {
     "armaments": [
@@ -4022,6 +4193,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -4034,6 +4206,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -4066,7 +4239,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_trucka_driveby": {
     "armaments": [
@@ -4103,6 +4277,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -4115,6 +4290,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -4147,13 +4323,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_truckb": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -4166,6 +4344,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -4198,7 +4377,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_truckb_demo": {
     "armaments": [
@@ -4220,6 +4400,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -4232,6 +4413,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -4264,7 +4446,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_truckb_driveby": {
     "armaments": [
@@ -4301,6 +4484,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -4313,6 +4497,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -4345,13 +4530,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_ycab": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -4364,6 +4551,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -4396,7 +4584,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_ycab_demo": {
     "armaments": [
@@ -4418,6 +4607,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -4430,6 +4620,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -4462,7 +4653,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2_ycab_driveby": {
     "armaments": [
@@ -4499,6 +4691,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -4511,6 +4704,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -4543,13 +4737,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2_ywall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -4562,6 +4758,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "100000"
@@ -4573,7 +4770,8 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "ra2asw": {
     "armaments": [
@@ -4610,6 +4808,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -4627,6 +4826,7 @@
      "trait": "FirepowerMultiplier@ScoutShip",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "50000"
@@ -4655,7 +4855,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "210"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "21"
+    },
+    "turreted": false
    },
    "ra2carrier": {
     "armaments": [
@@ -4678,6 +4883,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -4690,6 +4896,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "250000"
@@ -4730,13 +4937,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "ra2cplane": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -4749,6 +4958,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "175000"
@@ -4773,13 +4983,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "150"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "25"
+    },
+    "turreted": false
    },
    "ra2cplanesov": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -4792,6 +5008,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "175000"
@@ -4816,7 +5033,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "150"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "25"
+    },
+    "turreted": false
    },
    "ra2dest": {
     "armaments": [
@@ -4897,6 +5119,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -4909,6 +5132,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "160000"
@@ -4948,7 +5172,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    },
    "ra2dlph": {
     "armaments": [
@@ -5005,6 +5230,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -5017,6 +5243,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "20000"
@@ -5053,7 +5280,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "48"
-    }
+    },
+    "turreted": false
    },
    "ra2dred": {
     "armaments": [
@@ -5081,6 +5309,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -5098,6 +5327,7 @@
      "trait": "FirepowerMultiplier@RANK-1",
      "v": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "250000"
@@ -5138,7 +5368,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "ra2e2.black": {
     "armaments": [
@@ -5230,6 +5461,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -5242,6 +5474,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "25000"
@@ -5277,9 +5510,11 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.Speed",
      "v": "58"
-    }
+    },
+    "turreted": false
    },
    "ra2gacnst.infiltrated": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5292,13 +5527,16 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Stolen Allied Buildings Plans"
+    "gatling_spinup": false,
+    "name": "Stolen Allied Buildings Plans",
+    "turreted": false
    },
    "ra2gayard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -5315,6 +5553,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -5348,7 +5587,8 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    },
    "ra2hornet": {
     "armaments": [
@@ -5390,6 +5630,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -5407,6 +5648,7 @@
      "trait": "FirepowerMultiplier@ra2hornet",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "5000"
@@ -5435,13 +5677,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "225"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "25"
+    },
+    "turreted": false
    },
    "ra2lcrf": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -5454,6 +5702,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "150000"
@@ -5493,7 +5742,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2leopard": {
     "armaments": [
@@ -5588,6 +5838,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -5600,6 +5851,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "230000"
@@ -5639,9 +5891,11 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "ra2nacnst.infiltrated": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5654,13 +5908,16 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Stolen Soviet Buildings Plans"
+    "gatling_spinup": false,
+    "name": "Stolen Soviet Buildings Plans",
+    "turreted": false
    },
    "ra2nayard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -5677,6 +5934,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -5710,13 +5968,15 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    },
    "ra2sapc": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -5729,6 +5989,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "150000"
@@ -5768,7 +6029,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra2shk.bot": {
     "armaments": [
@@ -5791,6 +6053,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -5803,6 +6066,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "48000"
@@ -5827,7 +6091,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.Speed",
      "v": "38"
-    }
+    },
+    "turreted": true
    },
    "ra2shkhero": {
     "armaments": [
@@ -6076,6 +6341,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -6088,6 +6354,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "45000"
@@ -6112,7 +6379,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.Speed",
      "v": "38"
-    }
+    },
+    "turreted": false
    },
    "ra2sidewind": {
     "armaments": [
@@ -6229,6 +6497,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -6241,6 +6510,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "15000"
@@ -6276,7 +6546,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.Speed",
      "v": "45"
-    }
+    },
+    "turreted": false
    },
    "ra2sqd": {
     "armaments": [
@@ -6321,6 +6592,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -6333,6 +6605,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "30000"
@@ -6368,7 +6641,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "48"
-    }
+    },
+    "turreted": true
    },
    "ra2sub": {
     "armaments": [
@@ -6436,6 +6710,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -6448,6 +6723,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "120000"
@@ -6487,9 +6763,11 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "36"
-    }
+    },
+    "turreted": true
    },
    "upra2aegismissiles": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6506,6 +6784,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Aegis Cruiser Ground Missiles",
     "prerequisites": [
      "~ra2_allies_alliedbattlelab",
@@ -6514,7 +6793,8 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "yrbpln": {
     "armaments": [
@@ -6774,6 +7054,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -6791,6 +7072,7 @@
      "trait": "FirepowerMultiplier@ra2_soviets_doctrine_nuclearmunitions",
      "v": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "100000"
@@ -6815,13 +7097,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "250"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "17"
+    },
+    "turreted": false
    },
    "yrhovr": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -6834,6 +7122,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "150000"
@@ -6873,9 +7162,11 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "yrnacnst.infiltrated": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6888,7 +7179,9 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Stolen Yuri Buildings Plans"
+    "gatling_spinup": false,
+    "name": "Stolen Yuri Buildings Plans",
+    "turreted": false
    },
    "yrrobo": {
     "armaments": [
@@ -7030,6 +7323,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -7042,6 +7336,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "50000"
@@ -7074,7 +7369,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": true
    },
    "yrspyp": {
     "armaments": [
@@ -7097,6 +7393,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": "AttackBomber",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
@@ -7109,6 +7406,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "150000"
@@ -7133,13 +7431,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "250"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "28"
+    },
+    "turreted": false
    },
    "yrygyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -7156,6 +7460,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -7189,11 +7494,13 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    }
   },
   "upgrades": {
    "ra2_yuri_upgrade_geneticboost_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7206,9 +7513,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Infantry Stealth Suits"
+    "gatling_spinup": false,
+    "name": "Infantry Stealth Suits",
+    "turreted": false
    },
    "ra2_yuri_upgrade_psychicvision_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7221,9 +7531,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Psychic Vision"
+    "gatling_spinup": false,
+    "name": "Psychic Vision",
+    "turreted": false
    },
    "ra2_yuri_upgrade_stealthsuits_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7236,7 +7549,9 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Infantry Stealth Suits"
+    "gatling_spinup": false,
+    "name": "Infantry Stealth Suits",
+    "turreted": false
    }
   }
  }

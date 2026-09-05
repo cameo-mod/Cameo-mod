@@ -1,0 +1,228 @@
+# counter_matrix.yaml — WHAT CAMEO INTENDS. Design contract, not measurements.
+#
+# Maintainer 2026-08-29, on where rock-paper-scissors lives: *"Both, in that
+# order"* — class-vs-class is the contract; armor-vs-weapon must then deliver it.
+#
+# ⛔ THIS FILE CONTAINS NO STATS AND NO YAML NUMBERS. It states relationships and
+# the BAND each should land in. `tools/audit/audit_counter_matrix.py` measures what
+# the live tree actually does and reports the difference. Nothing here may be
+# copied into a weapon.
+#
+#   INTENT (this file) -> IMPLEMENTATION (warhead family per class) -> MEASURED
+#
+# ⚠ BANDS, NOT POINT VALUES. A relationship is satisfied anywhere inside its band.
+# Point targets would make the audit demand numbers the pricing model has not
+# produced yet, and would freeze values that Formula V2 still has to solve.
+#
+# ⚠ MOST CELLS ARE AN ASSIGNMENT, NOT A NEW NUMBER. Measured 2026-08-29, the AP
+# families ALREADY ascend the vehicle ladder monotonically — `^Warhead_Railgun_Heavy`
+# runs 94 -> 200 (2.13x), `MissileAP_Medium` 114 -> 200 (1.75x), `CannonAP_Heavy`
+# 93 -> 151 (1.62x) — and `Prism_Light` descends 197 -> 67. Both directions already
+# exist. The work is giving each class the family its role needs, which is the
+# `expects_family` field below.
+
+version: 1
+
+# --------------------------------------------------------------------------- #
+# Relation vocabulary — strength alone is not enough (see RTS_BALANCE_REFERENCE)
+# --------------------------------------------------------------------------- #
+relation_types:
+  hard_counter: >
+    A large, deliberate advantage. Use sparingly: a hard counter that also has
+    range and survivability advantages stops being a counter and becomes a
+    shutdown, which removes the matchup from play instead of deciding it.
+  soft_counter: >
+    Favoured, but the loser can still win through numbers, micro or position.
+    The DEFAULT for most cells.
+  generalist: >
+    Adequate against everything, decisive against nothing. `fire_support` and
+    `heavy_infantry` are both this by maintainer ruling, and their difference
+    must come from the platform, not from the counter profile.
+  forbidden: >
+    Cannot target it at all. Stronger and clearer than 0 damage — a sniper does
+    not merely lose to a tank, the tank is outside its target domain.
+  neutral: no intended relationship; whoever is better built wins.
+
+# Bands are multipliers on the MEAN-100 baseline: 1.00 is the average weapon
+# against the average armor. They are wide on purpose.
+bands:
+  hard_counter:  [1.60, 2.50]
+  soft_counter:  [1.20, 1.60]
+  generalist:    [0.90, 1.20]
+  disadvantage:  [0.40, 0.90]
+  negligible:    [0.00, 0.40]
+
+# --------------------------------------------------------------------------- #
+# Class intent. `expects_family` is the implementation path — the warhead family
+# whose EXISTING profile already produces this row's shape.
+# --------------------------------------------------------------------------- #
+classes:
+
+  tank_destroyer:
+    role: dedicated anti-armour; ineffective against infantry
+    expects_family: [CannonAP, MissileAP, Railgun]
+    counters:
+      light_tank:      {relation: soft_counter, note: "weakest rung of the scaling"}
+      mbt:             {relation: hard_counter}
+      high_tech_tank:  {relation: hard_counter, note: "strongest rung"}
+      epic_vehicle:    {relation: hard_counter}
+    weak_against: [scout, scout_vehicle, special_forces]
+    # The maintainer's law: the counter STRENGTHENS with target weight. Stated as
+    # an ordering, not four numbers, so it survives any renumbering.
+    monotonic_by_armor: [Light, Medium, Heavy, Superheavy]
+
+  mbt:
+    role: core frontline ground unit
+    expects_family: [CannonHE, CannonAP]
+    counters:
+      light_tank:      {relation: soft_counter, note: "wins on stats, NOT on a damage bonus — a large multiplier here would make light tanks obsolete"}
+      scout_vehicle:   {relation: soft_counter}
+    weak_against: [tank_destroyer, high_tech_tank, missile_vehicle, rocket_trooper]
+
+  high_tech_tank:
+    role: apex ground brawler; expensive and a priority target
+    expects_family: [CannonAP, Railgun, Laser]
+    counters:
+      mbt:             {relation: soft_counter}
+      light_tank:      {relation: soft_counter}
+    weak_against: [tank_destroyer, missile_vehicle]
+
+  light_tank:
+    role: fast flanker and raider
+    expects_family: [CannonHE, Bullet]
+    counters:
+      scout_vehicle:   {relation: soft_counter}
+      scout:           {relation: soft_counter}
+    weak_against: [mbt, high_tech_tank, tank_destroyer, rocket_trooper]
+
+  scout_vehicle:
+    role: high-mobility infantry sweeper; value is vision and map control, not DPS
+    expects_family: [Bullet]
+    counters:
+      scout:           {relation: soft_counter}
+      support:         {relation: soft_counter}
+    weak_against: [light_tank, mbt, tank_destroyer, rocket_trooper]
+    note: >
+      Maintainer: "counters infantry and nothing else". Its cost cannot come from
+      DPS — scouting, vision and harassment are the product.
+
+  anti_air_vehicle:
+    role: ground-to-air denial, with a SEPARATE air weapon
+    expects_family: [Flak, MissileAA]
+    counters:
+      aircraft:        {relation: hard_counter, note: "+100% damage and +50% range on the dedicated AA armament"}
+    weak_against: [mbt, tank_destroyer, artillery]
+    special:
+      incoming_air_damage: >
+        PROPOSED, not implemented: aircraft weapons do ~50% to AA platforms, via a
+        sixth PLATING overlay (DESIGN §12.0e), not a new class armor. 141 rows, not
+        3807. ⚠ This is the THIRD advantage in the same matchup after +100% damage
+        and +50% range — the audit must report the NET matchup, or AA stops being a
+        counter and becomes a shutdown with no play left for aircraft.
+
+  missile_vehicle:
+    role: mobile rocket_trooper — ONE dual-purpose weapon for ground and air
+    expects_family: [MissileAP, MissileHE]
+    counters:
+      mbt:             {relation: soft_counter}
+      high_tech_tank:  {relation: soft_counter}
+      aircraft:        {relation: soft_counter}
+    weak_against: [scout, support, artillery]
+    note: >
+      Shares rocket_trooper's counter profile by design. The two differ on the
+      PLATFORM — survivability, mobility, range, cost, production — never on which
+      targets they are for.
+
+  rocket_trooper:
+    role: infantry anti-armour and anti-air
+    expects_family: [MissileAP]
+    counters:
+      mbt:             {relation: soft_counter}
+      high_tech_tank:  {relation: soft_counter}
+      aircraft:        {relation: soft_counter}
+    weak_against: [scout, scout_vehicle, heavy_sniper, pure_sniper]
+
+  artillery:
+    role: long-range siege; countered by anything that closes the distance
+    expects_family: [Concussion, Demolition]
+    counters:
+      support:         {relation: hard_counter}
+      scout:           {relation: hard_counter}
+      defenses:        {relation: hard_counter}
+    weak_against: [scout_vehicle, light_tank, aircraft]
+    note: "Maintainer: only counters infantry and defenses."
+
+  fire_support:
+    role: generalist ground damage, decisive against nothing
+    expects_family: [Tesla, Railgun, Concussion]
+    counters: {}
+    generalist_against: [scout, light_tank, mbt, high_tech_tank]
+    weak_against: [aircraft, artillery]
+
+  heavy_infantry:
+    role: generalist ground infantry anchor
+    expects_family: [CannonHE, Bullet]
+    counters: {}
+    generalist_against: [scout, support, light_tank, mbt]
+    weak_against: [pure_sniper, heavy_sniper, artillery]
+    note: >
+      Maintainer: "good against all ground units equally like fire support but
+      nothing good in particular." Same counter profile, different platform.
+
+  pure_sniper:
+    role: anti-infantry execution
+    expects_family: [Sniper]
+    counters:
+      scout:           {relation: hard_counter}
+      support:         {relation: hard_counter}
+      heavy_infantry:  {relation: hard_counter}
+    forbidden_targets: [Vehicle, Air, Structure]
+    note: >
+      FORBIDDEN, not zero damage. A sniper does not lose to a tank — a tank is
+      outside its target domain, and the engine should refuse the order.
+
+  heavy_sniper:
+    role: long-range anti-infantry with some anti-materiel reach
+    expects_family: [Sniper, CannonAP]
+    counters:
+      support:         {relation: hard_counter}
+      heavy_infantry:  {relation: soft_counter}
+    weak_against: [scout_vehicle, light_tank]
+
+  grenadier:
+    role: demolition and infantry-squad disruption
+    expects_family: [Demolition, Concussion]
+    counters:
+      support:         {relation: hard_counter}
+      defenses:        {relation: hard_counter}
+    weak_against: [pure_sniper, scout_vehicle, mbt]
+
+  scout:
+    role: cheap infantry screen and vision
+    expects_family: [Bullet]
+    counters:
+      support:         {relation: soft_counter}
+    weak_against: [scout_vehicle, pure_sniper, grenadier, light_tank]
+    note: "Maintainer: rifle infantry counters other infantry and nothing else."
+
+# --------------------------------------------------------------------------- #
+# Open questions the matrix cannot answer on its own
+# --------------------------------------------------------------------------- #
+open_questions:
+  - id: C1
+    what: Defenses are one bucket here; they need their own classes.
+    detail: >
+      anti_infantry / anti_vehicle / anti_air / general / siege at minimum.
+      A tank beating a pillbox is not the same relationship as artillery beating
+      it — one must enter the defender's range and the other must not.
+  - id: C2
+    what: 1v1 multipliers do not predict army-vs-army outcomes.
+    detail: >
+      Overkill, focus fire, splash and formation width all change the result. The
+      counter report should eventually cover squad and army scale, not just the
+      pairwise row.
+  - id: C3
+    what: Reachability is not modelled.
+    detail: >
+      A counter that arrives two tech tiers too late is not a counter. Declaring
+      the relationship does not prove a player can field it in time.

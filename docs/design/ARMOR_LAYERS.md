@@ -56,7 +56,7 @@ questions and became the plating layer. What is LIVE, with the binding summary i
 | 5 platings `HAZMAT` `COMPOSITE` `BLAST` `REFLECTOR` `ARMOR`, ALL CAPS, full columns in all 94 templates | §D-bis, §G, §H |
 | LAYER SELECTION — a plating replaces the class armor | `AreaDamageWarhead.DamageVersus` |
 | the column law: every plating averages **70** | §I |
-| `effective_HP = HP + shield x 0.529`, measured live | §I |
+| `effective_HP = HP + shield x 0.572`, measured live | §I |
 | 4 upgrades retagged; the generic ones stay multipliers | §G |
 | guards `audit_armor_upgrade_harm.py` + `audit_plating_exclusivity.py` | §F, run_all.sh |
 | `Waveforce` IntegrityScale deleted (could never fire) | §B, §D-bis |
@@ -617,13 +617,13 @@ Two families were credited to the wrong counter in the first draft:
 
 | layer | column mean | 1 point is worth | maintainer's estimate |
 |---|--:|--:|---|
-| `Shield` | **189.09** | **0.529 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. **Confirmed to 9%.** |
+| `Shield` | **174.80** | **0.572 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. **Confirmed to 14%.** |
 | all five platings | **100.0** | **1.000 HP** | "it evens out" — **confirmed exactly**, by construction |
 
 So the pricing rule is:
 
 ```
-effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x0.529 today
+effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x0.572 today
 ```
 
 and a plating contributes **nothing** to effective HP on average — it redistributes only.
@@ -660,7 +660,7 @@ Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.
 
 | # | gap | why it matters | severity |
 |---|---|---|---|
-| **E1** | ✅ **FIXED 2026-08-17 (both halves).** Weapon side: `armor_weights()` now carries a 17th `Shield` row at its measured damage share, and `weighted_versus` iterates the weights instead of `ARMORS`. Unit side: `extract_stats.survivability()` publishes `effective_hp` for actors that SPAWN with a pool. | ⚠ **The "51% of the roster" figure was wrong** — it counted the 1592 actors carrying `Shielded`, but 1318 of those hold an EMPTY capacity behind `shieldgen >= 1`. Only **58** spawn with a pool, so baseline Shield exposure is **1.432%**, and the weapon-side correction is +0.65% (Bullet) to +3.47% (Tesla), not a repricing. The real hole is the unit side: those 58 carry **+57.8% effective HP at zero cost**. Report: `audit_survivability_pricing.py`. | ~~high~~ **done** |
+| **E1** | ✅ **FIXED 2026-08-17 (both halves).** Weapon side: `armor_weights()` now carries a 17th `Shield` row at its measured damage share, and `weighted_versus` iterates the weights instead of `ARMORS`. Unit side: `extract_stats.survivability()` publishes `effective_hp` for actors that SPAWN with a pool. | ⚠ **The "51% of the roster" figure was wrong** — it counted the 1592 actors carrying `Shielded`, but 1318 of those hold an EMPTY capacity behind `shieldgen >= 1`. Only **58** spawn with a pool, so baseline Shield exposure is **1.561%**, and the weapon-side correction is +0.65% (Bullet) to +3.47% (Tesla), not a repricing. The real hole is the unit side: those 58 carry **+57.8% effective HP at zero cost**. Report: `audit_survivability_pricing.py`. | ~~high~~ **done** |
 | **E2** | `PhysicalState` (heat / cold / corrosion) is priced at zero — `extract_stats` contains **0** references to it. | ⚠ **"~89 live bindings" was wrong by 8×. Measured 2026-08-18: 722 bindings on 453 weapons, of which 367 are actually FIRED, carried by 578 armaments** — roughly a quarter of the damaging roster delivers a status meter for free. It is also TWO mechanisms, not one (see below), and the earlier count saw only part of one. Design work exists, the extractor does not. | **high** |
 | **E3** | `IntegrityScale` is priced at zero. | 1233 actors carry the pool; a disable at 50% HP is worth real money. | medium |
 | **E4** | ✅ **CORRECTED 2026-08-25 — percentage damage has two shapes.** Standalone percentage warheads are absolute at the reference HP; folded `PercentageScale` damage derives from the main Damage and is scalable. The first E4 fix recognized only specially named standalone twins and missed most standalone nodes plus every folded hit. | The model now discovers percentage applications by warhead type. `k_flat_context` includes flat, chip and folded damage; `pct_absolute_context`/`dps_floor` contain standalone damage only; folded basis-point rounding is a separate current-shot residual. Full burst cadence also includes every inter-shot delay and the engine default. Guard: `audit_k_linearity.py`; fixtures: `test_percentage_damage_model.py`. | ~~high~~ **done** |
@@ -773,7 +773,7 @@ all — contradicting the maintainer, who was right. Only a POSITIVE token gates
 
 **The two halves, and their true sizes:**
 
-* **Weapon side — small.** Baseline Shield exposure is **1.432%** of all roster raw damage, so
+* **Weapon side — small.** Baseline Shield exposure is **1.561%** of all roster raw damage, so
   adding the row moves a family's `versus` by **+0.65%** (Bullet, `Shield: 165`) to **+3.47%**
   (Tesla, `Shield: 369`). Correctly ordered — energy families pay most, kinetic least — but a
   correction, not a repricing. `armor_weights()` takes the share OUT of the class rows so the
@@ -788,7 +788,7 @@ shield is the prerequisite for retiring that multiplier — they have to land in
 faction is charged twice for the same thing.
 
 **Why the weapon side stayed on the baseline world.** Counting upgrade-granted shields would
-raise the Shield weight from 1.4% to roughly 30% and reprice every energy weapon. That is a
+raise the Shield weight from 1.6% to roughly 30% and reprice every energy weapon. That is a
 design ruling about whether K prices the baseline or the post-upgrade game, so it is left as a
 one-predicate change in `shield_damage_share()` for the maintainer, not decided here.
 

@@ -67,6 +67,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Valued.Cost",
@@ -80,6 +81,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Health.HP",
      "v": "30000"
@@ -116,13 +118,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "160"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "32"
+    },
+    "turreted": false
    },
    "forgotten_carryall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Valued.Cost",
@@ -136,6 +144,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Health.HP",
      "v": "17500"
@@ -172,13 +181,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "149"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "80"
+    },
+    "turreted": false
    },
    "forgotten_chinook": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Valued.Cost",
@@ -192,6 +207,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Health.HP",
      "v": "18000"
@@ -228,7 +244,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "120"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
+    },
+    "turreted": false
    },
    "forgotten_cobracopter": {
     "armaments": [
@@ -293,6 +314,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Valued.Cost",
@@ -306,6 +328,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Health.HP",
      "v": "32500"
@@ -342,7 +365,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "165"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "33"
+    },
+    "turreted": false
    },
    "forgotten_cropplane": {
     "armaments": [
@@ -414,6 +442,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Valued.Cost",
@@ -427,6 +456,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Health.HP",
      "v": "75000"
@@ -464,7 +494,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "160"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "11"
+    },
+    "turreted": false
    },
    "forgotten_locustbomber": {
     "armaments": [
@@ -540,6 +575,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Valued.Cost",
@@ -553,6 +589,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Health.HP",
      "v": "115000"
@@ -590,7 +627,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "180"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "12"
+    },
+    "turreted": false
    },
    "forgotten_wasp": {
     "armaments": [
@@ -628,6 +670,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Valued.Cost",
@@ -641,6 +684,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
@@ -676,7 +720,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "200"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "40"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -685,6 +734,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -701,6 +751,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -733,13 +784,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "forgotten_chemicalplant": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -760,6 +813,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -792,13 +846,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "forgotten_church": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -819,6 +875,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -851,13 +908,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "forgotten_constructionyard": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Valued.Cost",
@@ -870,6 +929,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Health.HP",
      "v": "1000000"
@@ -901,13 +961,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "forgotten_crystalpowerextractor": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Valued.Cost",
@@ -920,6 +982,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Health.HP",
      "v": "150000"
@@ -951,13 +1014,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "forgotten_helipad": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -974,6 +1039,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1006,13 +1072,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "forgotten_navalyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1029,6 +1097,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -1062,13 +1131,15 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    },
    "forgotten_radar": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1085,6 +1156,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1117,13 +1189,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "forgotten_refinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1140,6 +1214,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1172,13 +1247,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "forgotten_servicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1195,6 +1272,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1227,13 +1305,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "forgotten_tiberiumspike": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1254,6 +1334,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1287,13 +1368,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "forgotten_warfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1310,6 +1393,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1342,7 +1426,8 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -1433,6 +1518,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Valued.Cost",
@@ -1446,6 +1532,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Health.HP",
      "v": "90000"
@@ -1478,7 +1565,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7c0"
-    }
+    },
+    "turreted": true
    },
    "forgotten_brokenscoopertankturret": {
     "armaments": [
@@ -1570,6 +1658,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Valued.Cost",
@@ -1583,6 +1672,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Health.HP",
      "v": "200000"
@@ -1615,7 +1705,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7c0"
-    }
+    },
+    "turreted": true
    },
    "forgotten_brokenwarriortankturret": {
     "armaments": [
@@ -1652,6 +1743,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Valued.Cost",
@@ -1665,6 +1757,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Health.HP",
      "v": "125000"
@@ -1697,7 +1790,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7c0"
-    }
+    },
+    "turreted": true
    },
    "forgotten_juggerflakwall": {
     "armaments": [
@@ -1735,6 +1829,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Valued.Cost",
@@ -1748,6 +1843,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Health.HP",
      "v": "75000"
@@ -1780,7 +1876,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "11234"
-    }
+    },
+    "turreted": true
    },
    "forgotten_machineguntower": {
     "armaments": [
@@ -1819,6 +1916,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Valued.Cost",
@@ -1832,6 +1930,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Health.HP",
      "v": "80000"
@@ -1864,13 +1963,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7c0"
-    }
+    },
+    "turreted": true
    },
    "forgotten_silo": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Valued.Cost",
@@ -1884,6 +1985,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Health.HP",
      "v": "200000"
@@ -1916,13 +2018,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "forgotten_veinhole": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": "AttackFollow",
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1940,6 +2044,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1974,7 +2079,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -2143,6 +2249,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -2156,6 +2263,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "64000"
@@ -2188,7 +2296,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "55"
-    }
+    },
+    "turreted": false
    },
    "forgotten_engineer": {
     "armaments": [
@@ -2297,6 +2406,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2310,6 +2420,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "10000"
@@ -2349,7 +2460,8 @@
     "speed": {
      "src": "inherited",
      "v": "55"
-    }
+    },
+    "turreted": false
    },
    "forgotten_ghoststalker": {
     "armaments": [
@@ -2486,6 +2598,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2503,6 +2616,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "100000"
@@ -2536,7 +2650,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "62"
-    }
+    },
+    "turreted": false
    },
    "forgotten_ghoststalker_r4": {
     "armaments": [
@@ -2673,6 +2788,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2686,6 +2802,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "100000"
@@ -2710,7 +2827,8 @@
     "speed": {
      "src": "inherited",
      "v": "62"
-    }
+    },
+    "turreted": false
    },
    "forgotten_ghoststalker_sp": {
     "armaments": [
@@ -2833,6 +2951,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2846,6 +2965,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "100000"
@@ -2870,7 +2990,8 @@
     "speed": {
      "src": "inherited",
      "v": "62"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutant": {
     "armaments": [
@@ -2936,6 +3057,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -2954,6 +3076,7 @@
      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
      "v": 0.3
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "45000"
@@ -2990,7 +3113,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutant_sp": {
     "armaments": [
@@ -3056,6 +3180,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3069,6 +3194,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "45000"
@@ -3097,7 +3223,8 @@
     "speed": {
      "src": "inherited",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutant_wild": {
     "armaments": [
@@ -3163,7 +3290,8 @@
      "src": "inherited",
      "v": "None"
     },
-    "buildable": true,
+    "attack_trait": "AttackFrontal",
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "160"
@@ -3176,6 +3304,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "45000"
@@ -3211,13 +3340,15 @@
     "speed": {
      "src": "inherited",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutanthijacker": {
     "armor": {
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3235,6 +3366,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "25000"
@@ -3267,7 +3399,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "100"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutantmortarman": {
     "armaments": [
@@ -3448,6 +3581,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -3461,6 +3595,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -3493,7 +3628,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutantsergeant": {
     "armaments": [
@@ -3563,6 +3699,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -3581,6 +3718,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.08
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -3613,7 +3751,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "74"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutantsniper": {
     "armaments": [
@@ -3691,6 +3830,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -3704,6 +3844,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "10000"
@@ -3740,7 +3881,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "70"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutantsniper_r4": {
     "armaments": [
@@ -3818,6 +3960,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3831,6 +3974,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "10000"
@@ -3859,7 +4003,8 @@
     "speed": {
      "src": "inherited",
      "v": "70"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutantsniper_sp": {
     "armaments": [
@@ -3937,6 +4082,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -3950,6 +4096,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "10000"
@@ -3978,7 +4125,8 @@
     "speed": {
      "src": "inherited",
      "v": "70"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutantsoldier": {
     "armaments": [
@@ -4042,6 +4190,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -4060,6 +4209,7 @@
      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
      "v": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -4096,7 +4246,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "forgotten_mutantsoldier_sp": {
     "armaments": [
@@ -4160,6 +4311,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -4173,6 +4325,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "40000"
@@ -4201,7 +4354,8 @@
     "speed": {
      "src": "inherited",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "forgotten_rocketinfantry": {
     "armaments": [
@@ -4324,6 +4478,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -4337,6 +4492,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "12000"
@@ -4372,7 +4528,8 @@
     "speed": {
      "src": "inherited",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "forgotten_runnershotgal": {
     "armaments": [
@@ -4602,6 +4759,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -4615,6 +4773,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -4648,7 +4807,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "85"
-    }
+    },
+    "turreted": false
    },
    "forgotten_tiberianfiend": {
     "armaments": [
@@ -4823,6 +4983,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -4836,6 +4997,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "80000"
@@ -4869,7 +5031,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "forgotten_tiberianfiend_wild": {
     "armaments": [
@@ -5044,7 +5207,8 @@
      "src": "inherited",
      "v": "Plate"
     },
-    "buildable": true,
+    "attack_trait": "AttackFrontal",
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -5057,6 +5221,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "80000"
@@ -5088,7 +5253,8 @@
     "speed": {
      "src": "inherited",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "forgotten_viniferafiend": {
     "armaments": [
@@ -5371,6 +5537,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -5384,6 +5551,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "100000"
@@ -5417,7 +5585,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "forgotten_visceroid": {
     "armaments": [
@@ -5584,6 +5753,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -5597,6 +5767,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -5621,7 +5792,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "80"
-    }
+    },
+    "turreted": false
    },
    "forgotten_zombiemutant": {
     "armaments": [
@@ -5685,6 +5857,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Valued.Cost",
@@ -5698,6 +5871,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
      "v": "45000"
@@ -5730,11 +5904,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
      "v": "100"
-    }
+    },
+    "turreted": false
    }
   },
   "misc": {
    "forgotten_upgrade_tiberiumadaptability_proxy_actor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5747,7 +5923,9 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Tiberium Adaptability (Team Upgrade)"
+    "gatling_spinup": false,
+    "name": "Tiberium Adaptability (Team Upgrade)",
+    "turreted": false
    }
   },
   "naval": {
@@ -5902,6 +6080,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Valued.Cost",
@@ -5915,6 +6094,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Health.HP",
      "v": "125000"
@@ -5955,7 +6135,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "17"
-    }
+    },
+    "turreted": true
    },
    "forgotten_juggerboat": {
     "armaments": [
@@ -6082,6 +6263,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Valued.Cost",
@@ -6095,6 +6277,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Health.HP",
      "v": "60000"
@@ -6134,7 +6317,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": true
    },
    "forgotten_lcraft": {
     "armaments": [
@@ -6202,6 +6386,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Valued.Cost",
@@ -6215,6 +6400,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Health.HP",
      "v": "100000"
@@ -6254,11 +6440,13 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    }
   },
   "promotions": {
    "forgotten_promotion_bowler": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6271,6 +6459,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_bowler.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6279,9 +6468,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_chemicalmammothtank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6294,6 +6485,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_chemicalmammothtank.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6303,9 +6495,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_cobracopter": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6318,6 +6512,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_cobracopter.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6326,9 +6521,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_experimentalmammothtank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6341,6 +6538,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_experimentalmammothtank.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6350,9 +6548,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_flametank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6365,6 +6565,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_flametank.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6374,9 +6575,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_ghoststalker": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6389,6 +6592,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_ghoststalker.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6398,9 +6602,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_locustbomber": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6413,6 +6619,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_locustbomber.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6422,9 +6629,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_mlrs": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6437,6 +6646,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_mlrs.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6446,9 +6656,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_runnershotgal": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6461,6 +6673,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_runnershotgal.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6470,9 +6683,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_scoopertank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6485,6 +6700,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_scoopertank.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6494,9 +6710,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_viniferafiend": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6509,6 +6727,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_viniferafiend.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6518,9 +6737,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_promotion_warriortank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6533,6 +6754,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_promotion_warriortank.name",
     "prerequisites": [
      "~fact.forgotten",
@@ -6541,11 +6763,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "forgotten_upgrade_chemicalfuel": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6562,6 +6786,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_upgrade_chemicalfuel.name",
     "prerequisites": [
      "~forgotten_radar",
@@ -6569,9 +6794,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_upgrade_chemicalweapons": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6588,6 +6815,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_upgrade_chemicalweapons.name",
     "prerequisites": [
      "~forgotten_church",
@@ -6595,9 +6823,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_upgrade_friendlywildlife": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6614,6 +6844,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_upgrade_friendlywildlife.name",
     "prerequisites": [
      "~forgotten_radar",
@@ -6621,9 +6852,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_upgrade_genomemapping": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6640,6 +6873,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_upgrade_genomemapping.name",
     "prerequisites": [
      "~forgotten_radar",
@@ -6647,9 +6881,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_upgrade_junkarmor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6666,6 +6902,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_upgrade_junkarmor.name",
     "prerequisites": [
      "~forgotten_church",
@@ -6673,9 +6910,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_upgrade_mutantsoldier": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6692,6 +6931,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_upgrade_mutantsoldier.name",
     "prerequisites": [
      "~forgotten_radar",
@@ -6699,9 +6939,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_upgrade_tiberiumadaptability": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6718,6 +6960,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_upgrade_tiberiumadaptability.name",
     "prerequisites": [
      "~forgotten_church",
@@ -6725,9 +6968,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_upgrade_tiberiumboosters": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6744,6 +6989,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_upgrade_tiberiumboosters.name",
     "prerequisites": [
      "~forgotten_church",
@@ -6751,9 +6997,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "forgotten_upgrade_unity": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6770,6 +7018,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "actor_forgotten_upgrade_unity.name",
     "prerequisites": [
      "~forgotten_church",
@@ -6777,7 +7026,8 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -6818,6 +7068,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -6831,6 +7082,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "80000"
@@ -6870,7 +7122,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "forgotten_bowler": {
     "armaments": [
@@ -6909,6 +7162,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -6922,6 +7176,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -6962,7 +7217,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": true
    },
    "forgotten_chemicalmammothtank": {
     "armaments": [
@@ -7047,6 +7303,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -7064,6 +7321,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "400000"
@@ -7105,7 +7363,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    },
    "forgotten_closhtank": {
     "armaments": [
@@ -7184,6 +7443,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -7197,6 +7457,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "120000"
@@ -7238,7 +7499,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    },
    "forgotten_experimentalmammothtank": {
     "armaments": [
@@ -7365,6 +7627,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -7382,6 +7645,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "1000000"
@@ -7423,7 +7687,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": true
    },
    "forgotten_flametank": {
     "armaments": [
@@ -7532,6 +7797,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -7545,6 +7811,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "200000"
@@ -7586,7 +7853,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    },
    "forgotten_m113adats": {
     "armaments": [
@@ -7739,6 +8007,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -7752,6 +8021,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -7792,7 +8062,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "14"
-    }
+    },
+    "turreted": true
    },
    "forgotten_missilevan": {
     "armaments": [
@@ -7860,6 +8131,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -7873,6 +8145,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "35000"
@@ -7914,7 +8187,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "forgotten_mlrs": {
     "armaments": [
@@ -7982,6 +8256,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -7995,6 +8270,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -8036,13 +8312,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "forgotten_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -8060,6 +8338,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -8100,7 +8379,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "forgotten_nomadbarracks": {
     "armaments": [
@@ -8136,6 +8416,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -8153,6 +8434,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "650000"
@@ -8193,7 +8475,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "13"
-    }
+    },
+    "turreted": true
    },
    "forgotten_raidercar": {
     "armaments": [
@@ -8231,6 +8514,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -8244,6 +8528,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "22500"
@@ -8284,7 +8569,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "36"
-    }
+    },
+    "turreted": true
    },
    "forgotten_rattytank": {
     "armaments": [
@@ -8351,6 +8637,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -8364,6 +8651,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
@@ -8403,7 +8691,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    },
    "forgotten_ruiner": {
     "armaments": [
@@ -8501,6 +8790,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -8514,6 +8804,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "35000"
@@ -8553,7 +8844,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": true
    },
    "forgotten_scarabapc": {
     "armaments": [
@@ -8651,6 +8943,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -8664,6 +8957,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "17500"
@@ -8704,7 +8998,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "forgotten_scoopertank": {
     "armaments": [
@@ -8778,6 +9073,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -8791,6 +9087,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "250000"
@@ -8832,7 +9129,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "13"
-    }
+    },
+    "turreted": true
    },
    "forgotten_tankkiller": {
     "armaments": [
@@ -8913,6 +9211,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -8926,6 +9225,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "85000"
@@ -8967,7 +9267,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": false
    },
    "forgotten_thumperbus": {
     "armaments": [
@@ -9063,6 +9364,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -9076,6 +9378,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "200000"
@@ -9116,13 +9419,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "36"
-    }
+    },
+    "turreted": false
    },
    "forgotten_tiberiumharvester": {
     "armor": {
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -9140,6 +9445,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
@@ -9184,7 +9490,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "forgotten_warriortank": {
     "armaments": [
@@ -9272,6 +9579,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
@@ -9285,6 +9593,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -9326,7 +9635,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    }
   }
  }

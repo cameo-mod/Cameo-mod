@@ -193,6 +193,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Valued.Cost",
@@ -206,6 +207,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Health.HP",
      "v": "122500"
@@ -242,7 +244,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "165"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "11"
+    },
+    "turreted": false
    },
    "japan_skyhawk": {
     "armaments": [
@@ -491,6 +498,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Valued.Cost",
@@ -504,6 +512,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Health.HP",
      "v": "75000"
@@ -540,7 +549,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "125"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
+    },
+    "turreted": false
    },
    "japan_zerofighter": {
     "armaments": [
@@ -723,6 +737,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Valued.Cost",
@@ -741,6 +756,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Health.HP",
      "v": "30000"
@@ -776,7 +792,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "175"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "12"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -785,6 +806,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -801,6 +823,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -833,13 +856,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "japan_japanesebarracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -856,6 +881,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -888,13 +914,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "japan_japaneseconstructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -907,6 +935,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -938,13 +967,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "japan_japaneseorerefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -961,6 +992,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -993,13 +1025,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "japan_japaneseradararray": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1016,6 +1050,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1048,13 +1083,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "japan_japaneseservicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1071,6 +1108,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1103,13 +1141,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "japan_japanesetechcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1126,6 +1166,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1158,13 +1199,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "japan_japanesewarfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1181,6 +1224,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1213,13 +1257,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "japan_waveforcereactor": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml#Valued.Cost",
@@ -1232,6 +1278,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml#Health.HP",
      "v": "175000"
@@ -1263,7 +1310,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c512"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -1512,6 +1560,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Valued.Cost",
@@ -1530,6 +1579,7 @@
      "trait": "FirepowerMultiplier@japan_upgrade_energizedarrows",
      "v": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Health.HP",
      "v": "190000"
@@ -1562,7 +1612,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "9214"
-    }
+    },
+    "turreted": true
    },
    "japan_japanesemgnest": {
     "armaments": [
@@ -1646,6 +1697,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Valued.Cost",
@@ -1659,6 +1711,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Health.HP",
      "v": "110000"
@@ -1691,13 +1744,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6696"
-    }
+    },
+    "turreted": true
    },
    "japan_japaneseshrine": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1715,6 +1770,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1748,7 +1804,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "japan_waveforceturret": {
     "armaments": [
@@ -1774,6 +1831,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Valued.Cost",
@@ -1792,6 +1850,7 @@
      "trait": "FirepowerMultiplier@SplashCompensation",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Health.HP",
      "v": "220000"
@@ -1824,7 +1883,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "9824"
-    }
+    },
+    "turreted": true
    }
   },
   "infantry": {
@@ -2073,6 +2133,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Valued.Cost",
@@ -2086,6 +2147,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -2123,7 +2185,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Mobile.Speed",
      "v": "72"
-    }
+    },
+    "turreted": false
    },
    "japan_exorcist": {
     "armaments": [
@@ -2244,6 +2307,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2261,6 +2325,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
      "v": "75000"
@@ -2299,7 +2364,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "japan_imperialscoutsman": {
     "armaments": [
@@ -2594,6 +2660,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Valued.Cost",
@@ -2612,6 +2679,7 @@
      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
      "v": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
      "v": "15000"
@@ -2647,7 +2715,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "japan_japaneseflamethrower": {
     "armaments": [
@@ -2806,6 +2875,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Valued.Cost",
@@ -2819,6 +2889,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.4
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
      "v": "15000"
@@ -2854,7 +2925,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "japan_rocketangel": {
     "armaments": [
@@ -2937,6 +3009,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Valued.Cost",
@@ -2955,6 +3028,7 @@
      "trait": "FirepowerMultiplier@japan_rocketangel",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
      "v": "24000"
@@ -2994,7 +3068,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Aircraft.Speed",
      "v": "140"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Aircraft.TurnSpeed",
+     "v": "28"
+    },
+    "turreted": false
    },
    "japan_samurai": {
     "armaments": [
@@ -3181,6 +3260,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Valued.Cost",
@@ -3194,6 +3274,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
      "v": "35000"
@@ -3230,7 +3311,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Mobile.Speed",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "japan_tankbuster": {
     "armaments": [
@@ -3455,6 +3537,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Valued.Cost",
@@ -3468,6 +3551,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
      "v": "48000"
@@ -3504,11 +3588,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Mobile.Speed",
      "v": "48"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "japan_promotion_archermaiden": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3521,6 +3607,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Archer Maiden",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3530,9 +3617,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_armoredcar": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3545,6 +3634,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Armored Car",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3553,9 +3643,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_exorcist": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3568,6 +3660,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Exorcist",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3577,9 +3670,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_grenadebuggy": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3592,6 +3687,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Grenade Buggy",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3600,9 +3696,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_heavychihaheavytank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3615,6 +3713,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Heavy Chi-Ha Heavy Tank",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3624,9 +3723,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_hovercraftflametank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3639,6 +3740,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Hovercraft Flametank",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3648,9 +3750,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_rocketangel": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3663,6 +3767,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Rocket Angel",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3672,9 +3777,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_samurai": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3687,6 +3794,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Samurai",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3695,9 +3803,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_shogunexecutioner": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3710,6 +3820,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Shogun Executioner",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3719,9 +3830,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_shrinetank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3734,6 +3847,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Shrine Tank",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3743,9 +3857,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_waveforceartillery": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3758,6 +3874,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Waveforce Artillery",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3767,9 +3884,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "japan_promotion_waveforcetank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3782,6 +3901,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Waveforce Tank",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -3791,11 +3911,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "japan_upgrade_advancedplasmaweapons": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3812,6 +3934,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Advanced Plasma Weapons",
     "prerequisites": [
      "~japan_japanesetechcenter",
@@ -3819,9 +3942,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "japan_upgrade_bushidodiscipline": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3838,6 +3963,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Bushido Discipline",
     "prerequisites": [
      "~japan_japaneseradararray",
@@ -3845,9 +3971,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "japan_upgrade_divinewindprotocol": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3864,6 +3992,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Divine Wind Protocol",
     "prerequisites": [
      "~japan_japaneseradararray",
@@ -3871,9 +4000,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "japan_upgrade_energizedarrows": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3890,6 +4021,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Energized Arrows",
     "prerequisites": [
      "~japan_japanesetechcenter",
@@ -3897,9 +4029,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "japan_upgrade_nanotechrepairs": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3916,6 +4050,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Nanotech Repairs",
     "prerequisites": [
      "~japan_japanesetechcenter",
@@ -3923,9 +4058,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "japan_upgrade_stealthsuitintegration": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3942,6 +4079,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Stealth Suit Integration",
     "prerequisites": [
      "~japan_japanesetechcenter",
@@ -3949,9 +4087,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "japan_upgrade_superiorwarengines": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3968,6 +4108,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Superior War Engines",
     "prerequisites": [
      "~japan_japanesetechcenter",
@@ -3975,9 +4116,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "japan_upgrade_waveforcebullets": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3994,6 +4137,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Waveforce Bullets",
     "prerequisites": [
      "~japan_japaneseradararray",
@@ -4001,7 +4145,8 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -4396,6 +4541,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -4414,6 +4560,7 @@
      "trait": "FirepowerMultiplier@japan_upgrade_waveforcebullets",
      "v": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "42500"
@@ -4454,7 +4601,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": true
    },
    "japan_ballista": {
     "armaments": [
@@ -4589,6 +4737,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -4607,6 +4756,7 @@
      "trait": "FirepowerMultiplier@japan_upgrade_energizedarrows",
      "v": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "65000"
@@ -4647,7 +4797,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": false
    },
    "japan_chihaheavytank": {
     "armaments": [
@@ -4753,6 +4904,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -4766,6 +4918,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "130000"
@@ -4806,13 +4959,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "17"
-    }
+    },
+    "turreted": true
    },
    "japan_coreairfield": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -4830,6 +4985,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -4871,13 +5027,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "japan_corebarracks": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -4895,6 +5053,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -4936,13 +5095,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "japan_corepowerplant": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -4960,6 +5121,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -5001,13 +5163,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "japan_coreradar": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5025,6 +5189,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -5066,13 +5231,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "japan_corerefinery": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5090,6 +5257,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -5131,13 +5299,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "japan_coreservicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5155,6 +5325,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -5196,13 +5367,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "japan_coretechcenter": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5220,6 +5393,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -5261,13 +5435,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "japan_corewarfactory": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5285,6 +5461,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -5326,7 +5503,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "japan_exorcistoitank": {
     "armaments": [
@@ -5769,6 +5947,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -5786,6 +5965,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.4
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "750000"
@@ -5828,7 +6008,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": true
    },
    "japan_grenadebuggy": {
     "armaments": [
@@ -5908,6 +6089,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -5921,6 +6103,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -5961,7 +6144,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": true
    },
    "japan_hovercraftflametank": {
     "armaments": [
@@ -6033,6 +6217,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -6046,6 +6231,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "120000"
@@ -6087,7 +6273,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    },
    "japan_hovercrafttransport": {
     "armaments": [
@@ -6433,6 +6620,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -6451,6 +6639,7 @@
      "trait": "FirepowerMultiplier@doublecannonsandbombs",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "65000"
@@ -6492,7 +6681,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": true
    },
    "japan_igomediumtank": {
     "armaments": [
@@ -6584,6 +6774,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -6597,6 +6788,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "110000"
@@ -6637,13 +6829,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    },
    "japan_japanesemobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -6661,6 +6855,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -6701,13 +6896,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "japan_japaneseoretruck": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -6725,6 +6922,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -6768,7 +6966,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "japan_nanodronebuggy": {
     "armaments": [
@@ -6827,6 +7026,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -6845,6 +7045,7 @@
      "trait": "FirepowerMultiplier@Nanodrones",
      "v": 0.33
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "37500"
@@ -6885,7 +7086,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "japan_oitank": {
     "armaments": [
@@ -7362,6 +7564,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -7375,6 +7578,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "650000"
@@ -7415,7 +7619,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": true
    },
    "japan_scoutcar": {
     "armaments": [
@@ -7493,6 +7698,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -7506,6 +7712,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.333
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -7546,7 +7753,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": true
    },
    "japan_shogunexecutioner": {
     "armaments": [
@@ -7582,6 +7790,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -7599,6 +7808,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.4
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "3000000"
@@ -7640,7 +7850,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": false
    },
    "japan_shrineminitank": {
     "armaments": [
@@ -7675,6 +7886,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -7687,6 +7899,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -7727,7 +7940,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": true
    },
    "japan_waveforceartillery": {
     "armaments": [
@@ -7750,6 +7964,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -7768,6 +7983,7 @@
      "trait": "FirepowerMultiplier@SplashCompensation",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -7809,7 +8025,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "11"
-    }
+    },
+    "turreted": true
    },
    "japan_waveforcetank": {
     "armaments": [
@@ -7983,6 +8200,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Valued.Cost",
@@ -7996,6 +8214,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -8037,7 +8256,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    }
   }
  }

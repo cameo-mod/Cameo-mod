@@ -701,7 +701,7 @@ stays unchanged. Pricing remains after W24/W23/A5 as required by §0a.
 
 | # | work | state |
 |---|---|---|
-| C1 | **W11 class-anchor sign-off — 27/27 unsigned** | ⛔ **hard blocker: no price is final until this lands** |
+| C1 | **W11 class-anchor sign-off — 0 of 27 signed** (three were agent-signed on 2026-08-29 and reverted on 2026-08-30; signing is the maintainer's) | ⛔ **hard blocker: no price is final until this lands** |
 | C2 | W23 — rule on the 33 weapons that collide inside one family; delete the 6 obsolete templates that still bias every census | needs one ruling |
 | C3 | W15 (%-twin + `reference_hp` 200000) → unblocks W17 | ready |
 | C4 | W16 charge-up · W18 basis points · W19 `ExtraDamage` chips | ready |
@@ -2643,7 +2643,7 @@ only (HP/Cost, DPS/Cost, A/B), NOT per-unit.*
 - **C3. Defense + aircraft anchors.** Per-class baselines for defenses + aircraft (memory
   `cameo-formula-future-tasks`). AA class-gating (only some classes get AA).
 
-**Anchor law:** baseline + its verifier must share the same
+**Anchor law:** ⛔ RETIRED 2026-08-29 (HANDOFF §3.0j) — no verifier actor exists; the 100–250% band survives as a price ratio. Historically: baseline + its verifier must share the same
 TechTier M-bucket AND K, or the 2.5× identity breaks (T1=T2=M1.0, T3=0.75, T4/5=0.5; tier from
 tech-building prereqs only; gatling K1.25; charge-up K adjust).
 
@@ -2657,7 +2657,9 @@ verifiers, stat bands, conversion checklist.*
 - **D1. Complete the missing terms**: per-class baselines
   (defenses + infantry), AA pricing, AoE pricing, per-ability specials, the **spread-pricing term**
   (from A4). Bake OUT per-actor multipliers, keep only global 50%+150% (BALANCE_SYNTHESIS law).
-- **D2. Verifier laws** — tier+K match (C3), FirepowerMultiplier in effective DPS (unconditional one
+- **D2. ~~Verifier laws~~** — ⛔ RETIRED 2026-08-29 (HANDOFF §3.0j) — no verifier actor exists; the 100–250% band survives as a price ratio. The tier+K match no longer has a second actor to
+  match against; what SURVIVES from this item is FirepowerMultiplier in effective DPS. Original text:
+  tier+K match (C3), FirepowerMultiplier in effective DPS (unconditional one
   per actor; deploy/undeploy units priced as separate actors —).
 - Code home: `tools/balance/formula.py` (+ `extract_stats.py` provenance).
 
@@ -2779,7 +2781,7 @@ apply_balance` round-trip is a no-op diff — the definition of a converged pipe
 - [ ] A4 Railgun charge-delay downside (= 50% ReloadDelay, armament-level)  · [ ] A4 spread-pricing formula term
 - [ ] A5 / Phase B: collapse the ~350+ remaining mixed-family weapons (dominant-damage; retires inline old keys)
 - [ ] B1 ORIGINAL_UNIT_STATS complete  · [x] B2 extract CnCR + RV (done)  · [ ] B3 faction-identity synthesis
-- [ ] D1 FORMULA_V2 missing terms (spread-pricing, AA/AoE, per-class defense/infantry baselines)  · [ ] D2 verifier laws wired into extract/fit
+- [ ] D1 FORMULA_V2 missing terms (spread-pricing, AA/AoE, per-class defense/infantry baselines)  · [x] D2 ~~verifier laws~~ wired into extract/fit — ⛔ RETIRED 2026-08-29 (HANDOFF §3.0j) — no verifier actor exists; the 100–250% band survives as a price ratio.
 - [ ] C1 vehicle anchors restat  · [ ] C2 infantry anchors (4 templates + lock)  · [ ] C3 defense/aircraft anchors
 - [ ] E workbooks refreshed (or ledger-direct)
 - [ ] F per-class/faction synthesize -> fit -> apply -> audit -> boot -> commit (×all)

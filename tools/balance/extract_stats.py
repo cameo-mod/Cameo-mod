@@ -823,17 +823,34 @@ def weapon_entry(rs, wname: str) -> dict | None:
 _DISABLING_PREREQS = {"disabled", "wip", "disable", "unavailable", "notbuildable"}
 
 
-def _is_balance_buildable(buildable) -> bool:
+def _is_balance_buildable(buildable, actor: str = "") -> bool:
     """True iff the actor can actually be built (maintainer law 2026-07-22):
     has a Buildable trait with a non-empty Queue and no disabling prerequisite
     (~disabled / ~wip / …). Legacy tokens (E1/E3 — Buildable but no Queue),
-    spawn/veterancy variants (no Buildable), and ~disabled units all fail."""
+    spawn/veterancy variants (no Buildable), and ~disabled units all fail.
+
+    ⛔ AND AN ACTOR THAT IS ITS OWN PREREQUISITE CAN NEVER BE BUILT (2026-09-03). It is the
+    spawn-only idiom, and it is NOT the same as the build-limit idiom beside it:
+
+        ~!tkm_bigshiee            "NOT self"  -> a one-off; legitimately buildable   (562 actors)
+        ~forgotten_mutant_wild    "self"      -> unsatisfiable; spawn-only             (3 actors)
+
+    The `!` is the whole difference, so the check must not strip it. Found when
+    `forgotten_mutant_wild` turned up in the `scout` class drawing six junk references: it is
+    stat-identical to `forgotten_mutant` and differs only by `AttackWander`, and it is spawned
+    from `rules/tiberiansun.yaml` and a warhead rather than produced. Exactly three actors are
+    affected — `TSENGINEER`, `forgotten_mutant_wild`, `forgotten_tiberianfiend_wild` — and they
+    were being priced, classed and matched as if a player could build them.
+    """
     if buildable is None:
         return False
     if not buildable.get("Queue"):
         return False
     prereq = buildable.get("Prerequisites") or ""
-    toks = {t.strip().lstrip("~").strip().lower() for t in prereq.split(",")}
+    raw = [t.strip() for t in prereq.split(",") if t.strip()]
+    if actor and any("!" not in t and t.lstrip("~").strip().lower() == actor.lower() for t in raw):
+        return False
+    toks = {t.lstrip("~").strip().lower() for t in raw}
     return not (toks & _DISABLING_PREREQS)
 
 
@@ -859,6 +876,13 @@ def extract_actor(rs, key: str, section: str,
             ("speed", "Mobile", "Speed"),
             ("speed_air", "Aircraft", "Speed"),
             ("turn_speed", "Mobile", "TurnSpeed"),
+            # ⚠ AIRCRAFT KEEP THEIR TURN RATE IN THE `Aircraft` TRAIT, not `Mobile`
+            # (maintainer 2026-08-29), exactly as they keep Speed there. Reading
+            # only Mobile.TurnSpeed made all 168 aircraft in the ledger look like
+            # they had NO turn rate, which is what made the Speed-grid probe miss
+            # every one of them. They have one: 323 actors carry an Aircraft trait
+            # and 318 define both Speed and TurnSpeed.
+            ("turn_speed_air", "Aircraft", "TurnSpeed"),
             ("sight", "RevealsShroud", "Range"),
             ("build_limit", "Buildable", "BuildLimit"),
             ("build_duration", "Buildable", "BuildDuration"),
@@ -899,7 +923,43 @@ def extract_actor(rs, key: str, section: str,
     # if it can be built in some way. NON-buildable (no Buildable trait, no Queue,
     # or a disabling prereq like ~disabled/~wip) → excluded from balancing AND all
     # audits. Its cost is only an XP-on-kill value; its stats don't matter.
-    u["buildable"] = _is_balance_buildable(buildable)
+    u["buildable"] = _is_balance_buildable(buildable, key)
+    # ⛔ TURRET PRESENCE, not a field value (maintainer 2026-09-03). It is the second half of the
+    # `dreadnought` definition — "heavy, slow, FRONTAL-FACING (no turret), more range and damage
+    # than a regular tank" — and it is what FORMULA_V2 §3b already prices as the tank destroyer's
+    # frontal-weapon −0.25 special. The peer extractor has recorded it since day one; Cameo's own
+    # rows carried `None`, so neither the class definition nor the special could be checked on our
+    # own units.
+    # ⚠ Presence, because `Turreted` need not declare any field: a turret with default TurnSpeed
+    # is still a turret, and reading `Turreted.TurnSpeed` would call it turretless.
+    u["turreted"] = any(c.key == "Turreted" or c.key.startswith("Turreted@")
+                        for c in resolved.children)
+    # ⛔ AND `turreted` IS NOT THE FRONTAL-FACING TEST. Corrected 2026-09-03 after it misreported
+    # `ixian_neocymek` as turreted when the unit fires frontally: the discriminator is the ATTACK
+    # trait. `AttackFrontal` makes the BODY face the target (the Cymek allows 20 degrees);
+    # `AttackTurreted` lets the turret track independently. A unit can carry `Turreted` for weapon
+    # tracking and still attack frontally, which is exactly what the Cymek does.
+    # ⚠ Removing such a turret is NOT a cleanup. `Armament.Turret` defaults to "primary" and
+    # `Turreted.Turret` defaults to "primary" (engine Armament.cs:41, Turreted.cs:23, bound at
+    # Armament.cs:222), so an armament that declares no `Turret:` still USES the default turret.
+    # Measured, the attack trait tracks the classes almost perfectly: tank_destroyer 100% frontal,
+    # artillery 89%, line_breaker 88%, dreadnought 80% -- against mbt at 9%.
+    # ⭐ THE GATLING SPIN-UP, which is what makes BASE damage understate a unit (maintainer
+    # 2026-09-03: "For cameo it's just the gatling behavior inherit"). `^GatlingSpinUpTurretBehavior`
+    # and its two descendants replaced the old ^GatlingSpeedUp* stack in W8; every actor carrying
+    # the behaviour has a `gatling`-suffixed trait, which makes the set findable EXACTLY rather
+    # than by the shared-default traits that resolve onto ~1,860 of ~2,000 actors and prove nothing.
+    # Measured: 45 actors, 44 of them buildable.
+    # ⚠ The ramp moves RELOAD and RANGE, not damage per shot: defaults.yaml documents
+    # `ReloadDelayTo 60` (0.95^10) and `RangeTo 122` (1.02^10) over ten stages, so a fully spun-up
+    # gatling sustains ~1/0.6 = 1.67x its base DPS at 1.22x its base range while each shot still
+    # hits for the same amount. A damage-per-shot reading of such a unit is correct and a
+    # STRENGTH judgement built on it is not.
+    u["gatling_spinup"] = any("gatling" in c.key.lower() for c in resolved.children)
+    u["attack_trait"] = next(
+        (c.key.split("@")[0] for c in resolved.children
+         if c.key.split("@")[0].startswith("Attack") and c.key.split("@")[0] != "AttackMove"),
+        None)
     arms = []
     for c in resolved.children:
         if c.key == "Armament" or c.key.startswith("Armament@"):

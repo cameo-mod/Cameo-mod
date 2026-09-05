@@ -59,6 +59,17 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "balance"))
 from miniyaml import Ruleset  # noqa: E402
 import weapon_efficiency as we  # noqa: E402
 
+# ⭐ THE MODEL LIVES IN tools/balance/heaviness.py, not here. It was written and
+# proven in this audit first (deliberately, so WEAPON_HEAVINESS §9.6 step 5 would
+# land against an existing test), then moved out when the generator needed it.
+# Copying it into the generator would have created two implementations of a
+# binding law that can silently diverge; importing means the checker and the
+# applier cannot disagree.
+from heaviness import (  # noqa: E402
+    AXIS_ORDER, BUCKET, LADDERS, LADDERS_OF, LO, OFF_AXIS, SIGMA,
+    belled, centre_of_mass, mu_of,
+)
+
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 # Families with no gradient for the bell to preserve. Measured 2026-08-23: just Magic and Sonic.
@@ -84,11 +95,11 @@ INVERT_BASELINE = 2
 # against the shipped 0.50-0.52. 0.667 is 1/TILT_RATIO — the same 1.5x span `class_tilt` uses —
 # so collapsing three templates into one preserves today's differentiation instead of flattening
 # it. Mismatch against the shipped tilt falls 0.089 -> 0.056 (no tilt at all = 0.139).
-LO = 0.667
+# LO — see heaviness.LO (0.667 = 1/TILT_RATIO).
 # Ruled 2026-08-24 (was an assumed 1.0 inherited from this audit). 0.75 gives the strongest
 # consistent tilt; below ~0.5 the effect starts to INVERT, because only the rung nearest the peak
 # still moves and the ladder's spread stops changing.
-SIGMA = 0.75
+# SIGMA — see heaviness.SIGMA (0.75).
 HEAVINESS = [0.0, 0.5, 1.0, 1.5, 2.0]
 
 LEVELS = ["Light", "Medium", "Heavy", "Super", "Trace"]
@@ -98,17 +109,12 @@ COMPANION = ("Percentage", "ExtraDamage", "ExtraRepair", "Concrete")
 #   §12.0c — the shield ladder is its own compressed scale, not a normal armor
 #   §12.0e — the ALL-CAPS platings REPLACE the class armor rather than sit on the axis
 #   §12.0b — the heroic cell is DERIVED, recomputed from the finished profile
-OFF_AXIS = {"Shield", "Heroic", "HAZMAT", "COMPOSITE", "BLAST", "REFLECTOR", "ARMOR"}
+# OFF_AXIS — see heaviness.OFF_AXIS.
 
 # Direction is only meaningful WITHIN one ladder — comparing None (INF) to Superheavy (VEH) is a
 # cross-ladder relation the tilt is DESIGNED to change. Order is lightest -> heaviest, and it is
 # the canonical one from gen_weapon_template.LADDERS.
-LADDERS = {
-    "INF": ["None", "Flak", "Plate"],
-    "VEH": ["Scout", "Light", "Medium", "Heavy", "Superheavy"],
-    "BLD": ["Wood", "Steel", "Concrete"],
-    "AIR": ["Fighter", "Bomber", "Helicopter", "Spaceship"],
-}
+# LADDERS — see heaviness.LADDERS.
 
 # ⭐ THE x-AXIS — ONE GLOBAL SCALE, 0..2, ruled by the maintainer 2026-08-24.
 #
@@ -139,12 +145,8 @@ LADDERS = {
 # ⛔ This REPLACES two earlier forms, both retired: §12.0d's three coarse buckets (which tied
 # armors inside a ladder) and the per-ladder 0..2 normalisation that replaced them (unique within
 # a ladder, four-way collisions across them).
-AXIS_ORDER = [["Scout"], ["None"], ["Fighter"], ["Light"], ["Wood"], ["Bomber"],
-              ["Medium", "Flak", "Steel"],
-              ["Helicopter"], ["Concrete"], ["Heavy"], ["Spaceship"], ["Plate"], ["Superheavy"]]
-BUCKET = {a: round(i * 2.0 / (len(AXIS_ORDER) - 1), 4)
-          for i, slot in enumerate(AXIS_ORDER) for a in slot}
-LADDERS_OF = {a: name for name, rungs in LADDERS.items() for a in rungs}
+# AXIS_ORDER — see heaviness.AXIS_ORDER.
+# BUCKET — see heaviness.BUCKET.
 
 
 def profiles() -> dict[str, dict[str, float]]:
@@ -170,58 +172,10 @@ def profiles() -> dict[str, dict[str, float]]:
     return out
 
 
-def centre_of_mass(profile: dict[str, float]) -> float | None:
-    """Where on the 0..2 axis the family's strength sits, weighted by its own Versus."""
-    pairs = [(BUCKET[a], v) for a, v in profile.items() if a in BUCKET and v > 0]
-    total = sum(v for _x, v in pairs)
-    return sum(x * v for x, v in pairs) / total if total else None
 
 
-def mu_of(profile: dict[str, float], h: float) -> float | None:
-    """§12.0i: the peak is the BLEND of the requested heaviness and the family's own mass.
-
-    Maintainer ruling 2026-08-24, replacing `centre_of_mass + SHIFT * (h - 1)`. That form anchored
-    the peak to the family and let `h` nudge it by an eighth of the scale, so h=1 did NOT mean
-    "medium" — it meant "wherever this family already sits". A pure `mu = h` was rejected by the
-    earlier §12.0i law 1 for inverting 26 of 42 families, but that was measured BEFORE the rank
-    restore existed (the same omission that produced two false "known inversions"): re-measured
-    with the restore in place, `mu = h` reorders nothing at any sigma. The blend was ruled anyway,
-    so the family keeps a formal say in where its peak sits on top of the restore.
-    """
-    com = centre_of_mass(profile)
-    return None if com is None else (h + com) / 2.0
 
 
-def belled(profile: dict[str, float], mu: float) -> dict[str, float]:
-    """The FULL §12.0i pipeline: bell at `mu`, renormalise, then RESTORE RANK per ladder.
-
-    ⛔ THE RANK RESTORE IS NOT OPTIONAL — it is what makes §12.0d's "can never invert" true.
-    §12.0d: the tilt "is applied to the VALUES and each armor is then given back the RANK it
-    held". An earlier version of this audit skipped that step and only compared a ladder's FIRST
-    and LAST rung, so it missed **127** internal reorderings across 60 family/ladder pairs and
-    reported two endpoint flips as permanent exceptions. With the restore there are **zero**
-    reorderings anywhere, and the two "known inversions" disappear with them.
-
-    The restore permutes values WITHIN a ladder, so the multiset is unchanged and the weighted
-    mean is untouched — §12.0i's price invariance survives it.
-    """
-    out = {}
-    for a, v in profile.items():
-        x = BUCKET.get(a)
-        out[a] = v if x is None else v * (LO + (1 - LO) * math.exp(-((x - mu) ** 2) / (2 * SIGMA ** 2)))
-    before, after = statistics.mean(profile.values()), statistics.mean(out.values())
-    if after:
-        out = {a: v * before / after for a, v in out.items()}
-
-    for rungs in LADDERS.values():
-        present = [a for a in rungs if a in profile and a in out]
-        if len(present) < 2:
-            continue
-        # The rank each armor HELD, and the tilted magnitudes sorted the same way.
-        for armor, value in zip(sorted(present, key=lambda a: profile[a]),
-                                sorted(out[a] for a in present)):
-            out[armor] = value
-    return out
 
 
 def rank_order(profile: dict[str, float], rungs: list[str]) -> list[str] | None:

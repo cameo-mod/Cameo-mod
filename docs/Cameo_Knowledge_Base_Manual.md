@@ -14481,7 +14481,8 @@ After studying this chapter, you should be able to:
 | `OpenRA.Mods.Cameo/Traits/BotModules/DeployBotModule.cs` | Issues deploy orders for `AutoDeployer` traits. |
 | `OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs` | Spawns building plugs for the AI. |
 | `OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs` | Global combat-unit budget shared across all living bots. |
-| `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` | Grants a condition when the bot's stored cash is low for a duration. |
+| `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` | Grants a condition when stored cash is low for a duration. Drove the ten-rung bot passive-income ladder on `^AIConyardCash`; retained for the player's conyard-loss insurance. |
+| `OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs` | **Replaces that ladder**: one Player-actor trait, dynamic threshold and delay, depth-scaled payout, ore-purifier folded in. |
 | `mods/cameo/ai/ai.yaml` | Main AI configuration for all difficulty levels. |
 | `mods/cameo/ai/ai_airforce.yaml` | Specialized air/naval-focused AI configuration. |
 | `OpenRA.Mods.Common/Traits/BotModules/ResourceMapBotModule.cs` | Upstream resource map still used by harvester and base builder. |
@@ -14724,7 +14725,29 @@ As opponents are eliminated, surviving bots are allowed larger armies, but the t
 
 ### BotInsurance
 
-`BotInsurance` in `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` is not a module in the `IBotTick` sense, but it is attached to the bot player actor and grants a condition when the bot's stored resources fall below `Threshold` for `ThresholdDuration` ticks. This condition can be used in YAML to enable emergency behaviors such as power sell, defensive upgrades, or alternative production paths.
+`BotInsurance` in `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` is not a module in the `IBotTick` sense. It grants a condition when the owner's cash stays below `Threshold` (default 1000) for `ThresholdDuration` ticks (default 250, ~10 s at the mod's default 40 ms timestep). Note the two-quantity asymmetry in `Tick` (lines 71-90): the countdown resets on `Cash >= Threshold`, but the grant tests `GetCashAndResources() < Threshold`, so an owner sitting on a full silo counts down and never triggers.
+
+⭐ **What it is actually wired to, because the trait name says nothing about it.** It is not a generic hook for "emergency behaviors" — in this mod it drives **bot passive income**, and it is one of the four AI difficulty cheats. `^AIConyardCash` (`mods/cameo/rules/defaults.yaml:6712`, inherited by 47 construction-yard / HQ actors including `^Conyard`) declares **ten rungs**, one per difficulty, each pairing a `BotInsurance` (thresholds 1000 for `easiest` up to 10000 for `cameogod`, all `ThresholdDuration: 250`) with a `CashTrickler` (`Interval: 1, Amount: 1` = 1 credit/tick) and a `ResourcePurifier` (`Modifier: 5`), gated `RequiresCondition: (<this difficulty or higher>) && <tier>botinsurance`. Rungs switch on independently as cash falls, so the payout ramps from 1 credit/tick to 10 as a `cameogod` bot approaches zero. The rungs live on the conyard, so the ladder multiplies by the number of conyards owned.
+
+The same trait also appears on the `Player` actor at `mods/cameo/rules/player.yaml:246` (`@secondaryinsurance`, `Threshold: 10000`, `ThresholdDuration: 1500`, gated on having no construction yard) for **every** player including humans — that one is a comeback mechanic, not a bot cheat.
+
+⛔ **Known bug:** the four lowest rungs gate on `normalbot`, which `^AIDifficulties` never grants (it grants `mediumbot`); the mod's only `normalbot` grant is on `drpplant1.freedomguard` in `darkreign.yaml:3348` and conditions are per-actor. `mediumbot` appears in none of the ten lists, so a `medium` bot receives no insurance income at all. See `docs/design/AI_RESEARCH_RECONCILIATION.md` §1.
+
+⚠ **Lint:** `ticks` carries `[VerifySync]` but the class does not implement `ISync`, so the sync check never runs on it (`docs/audit/baseline/check_yaml_dedup.txt:11367`).
+
+### DynamicBotInsurance
+
+`DynamicBotInsurance` in `OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs` is the **replacement** for the ten-rung `BotInsurance` + `CashTrickler` + `ResourcePurifier` ladder that used to sit on `^AIConyardCash`. One trait on the `Player:` actor, no conditions at all: it reads `self.Owner.BotType`, finds its index in a `Difficulties` list, and interpolates every scaled value from that index, so adding a difficulty is one more name in one list.
+
+It runs a three-phase machine. **ARMING** — a threshold *tracks* the rolling average of the owner's cash, moving toward `clamp(average, MinThreshold, MaxThreshold)` by at most `ThresholdRatePerTick` a tick, up or down at the same rate. When cash falls **strictly below** the bar, freeze it and compute `delay = average / DelayDivisor`. **DELAYING** — wait that long; recovering above the frozen bar cancels and unfreezes. **PAYING** — grant a payout **scaled by depth below `MaxThreshold`**, accumulated in integer milli-credits so fractional rates are not truncated away, plus the ore-purifier bonus on the same scale, until cash reaches `MaxThreshold`.
+
+⭐ **The purifier logic is folded in deliberately.** The old yaml said `ResourcePurifier:`, and with the assembly order `AS, CA, Cameo, Cnc, D2k, Common` that bare name resolves *past* the vendored `ResourcePurifierCA` into an assembly this repository does not contain — nobody here could say which type was running. Folding it in makes the whole mechanic single-assembly and Cameo-owned.
+
+⚠ **Three laws that look like details and are not**, each pinned by a test in `tools/tests/test_bot_insurance_model.py`: the bar **tracks both ways** (a bar *falling* from `MaxThreshold` is dead mechanics — the trigger is easiest to satisfy at the highest bar); the trigger is **strictly `<`** (with `<=` every bot under the cap eventually insures itself, turning an emergency measure into baseline income); and `MinThreshold` **must exceed zero** (the bar tracks the average, so at a floor of 0 a bankrupt bot drives its own average to 0 and is stranded permanently).
+
+⚠ **Humans are never insured by this trait** — they are simply not in `Difficulties`. One credit/tick is exactly one buildable oil derrick (`Interval: 250, Amount: 250`) and the human derrick cap is 3, so even the `medium` peak exceeds what a player can build. The human safety net is `player.yaml:243-262`.
+
+`tools/balance/bot_insurance_model.py` is an executable reference model mirroring `Tick` line for line; the two must be changed together, and a test parses the C# field defaults to catch drift.
 
 ### BotLimits
 

@@ -117,8 +117,32 @@ def survey() -> list[dict]:
     return rows
 
 
+# ⚠ `^Compatibility_*` templates are the CONVERSION'S OWN SCAFFOLDING, not legacy debt.
+# W23 creates one when a weapon moves onto the family system but still needs a shim for
+# a flat/ExtraDamage profile the family does not yet carry. Counting them as
+# "unconverted legacy templates" made this metric ANTI-CORRELATED WITH PROGRESS: every
+# conversion pushed the headline UP.
+#
+# Measured 2026-08-30, pinning commit 026963fd9 vs HEAD:
+#     total                             1255 -> 1460   (+205)   "regression"
+#     new ^Compatibility_* breadcrumbs           +290
+#     new NON-compatibility templates            +0     <- not one new legacy template
+#     existing templates that GREW                0     <- not one gained an inheritor
+#     real legacy inheritors SHED                -79
+#     templates fully retired                     -6
+#     EXCLUDING breadcrumbs             1255 -> 1170   (-85)    real progress
+#
+# So the ratchet was reporting a regression while the underlying work went the right way
+# by 85 inheritors. The headline now counts LEGACY debt only; the breadcrumbs are counted
+# and listed separately, because they are real work too — they just belong to a different
+# burn-down, and merging the two hides both.
+def is_breadcrumb(row) -> bool:
+    return "Compatibility" in row["template"]
+
+
 def render(rows: list[dict]) -> str:
-    live = [r for r in rows if not r["keep"]]
+    live = [r for r in rows if not r["keep"] and not is_breadcrumb(r)]
+    crumbs = [r for r in rows if not r["keep"] and is_breadcrumb(r)]
     lines = [
         "# Weapon templates still outside the `^Warhead_*` family system",
         "",
@@ -131,6 +155,9 @@ def render(rows: list[dict]) -> str:
         "",
         f"- unconverted templates: **{len(live)}**",
         f"- weapons inheriting them directly: **{sum(r['inheritors'] for r in live)}**",
+        f"- W23 `^Compatibility_*` breadcrumbs (the conversion's own scaffolding, "
+        f"counted SEPARATELY — see the note in the source): **{len(crumbs)}** templates, "
+        f"**{sum(r['inheritors'] for r in crumbs)}** direct inheritors",
         f"- retired-style `*FriendlyFire` twins still present: "
         f"**{sum(r['retired_ff_twins'] for r in live)}**",
         f"- legacy `HealthPercentageDamage` twins: "
@@ -145,6 +172,16 @@ def render(rows: list[dict]) -> str:
         lines.append(f"| `{r['template']}` | {r['inheritors']} | {r['versus_nodes']} | "
                      f"{r['retired_ff_twins']} | {r['legacy_pct_twins']} | "
                      f"{r['target'] or '**undecided**'} |")
+    if crumbs:
+        lines += ["", "## W23 compatibility breadcrumbs — a SEPARATE burn-down", "",
+                  "These are created BY the conversion, so they rise as W23 progresses and "
+                  "fall as the family system grows to carry the profiles they shim. They are "
+                  "not legacy debt and must never be summed into the headline above.", "",
+                  "| breadcrumb | inheritors | target family |", "|---|--:|---|"]
+        for r in sorted(crumbs, key=lambda r: -r["inheritors"]):
+            lines.append(f"| `{r['template']}` | {r['inheritors']} | "
+                         f"{r['target'] or '**undecided**'} |")
+
     keep = [r for r in rows if r["keep"]]
     if keep:
         lines += ["", "## Deliberately outside the system", "",
@@ -164,9 +201,15 @@ def main() -> int:
     args = ap.parse_args()
     out = out_path(args.force_latest)
     rows = survey()
-    live = [r for r in rows if not r["keep"]]
+    # ⚠ The headline is LEGACY debt only. `^Compatibility_*` breadcrumbs are the
+    # conversion's own scaffolding and are reported on their own line — summing them in
+    # made the number rise as the work got DONE. See is_breadcrumb() above.
+    live = [r for r in rows if not r["keep"] and not is_breadcrumb(r)]
+    crumbs = [r for r in rows if not r["keep"] and is_breadcrumb(r)]
     print(f"{len(live)} unconverted templates, "
           f"{sum(r['inheritors'] for r in live)} direct inheritors")
+    print(f"{len(crumbs)} W23 compatibility breadcrumbs, "
+          f"{sum(r['inheritors'] for r in crumbs)} direct inheritors (separate burn-down)")
     for r in live[:15]:
         print(f"  {r['inheritors']:4d}  {r['template']:24s} -> {r['target'] or 'UNDECIDED'}")
     if args.write:

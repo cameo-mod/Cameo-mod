@@ -105,6 +105,14 @@
 		ConstructionYardLimit: 4
 		RefineryLimit: 7
 		HarvesterLimit: 21
+		# Stated explicitly rather than left to the trait default. 100 is what BotLimits.cs:22-28
+		# already defaults to, so this changes NO behaviour -- but brutal was the only tier not
+		# declaring them, and it sat correctly between veryhard's 125 and challenger's 75 purely
+		# because the default happens to fall there. That is monotonic by luck, not by intent.
+		BuildingDelayModifier: 100
+		BuildingIntervalModifier: 100
+		UnitDelayModifier: 100
+		UnitIntervalModifier: 100
 		PrioritizeBarracksBeforeRefinery: true
 		RequiresCondition: brutalbot
 	BotLimits@challenger:

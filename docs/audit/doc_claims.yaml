@@ -28,8 +28,88 @@
 #    how the `Shield = top + floor` duplication survived for weeks.
 
 claims:
+  - id: macro_contrast_cameo
+    value: 1.67
+    tolerance: 0.03
+    what: >
+      Median MACRO CONTRAST (max/min over the INF, VEH and BLD ladder MEANS) across Cameo's
+      MAIN warhead profiles. THE NUMBER THE MAINTAINER REJECTED AT "1.7x". ⛔ It is NOT
+      §9.4's row spread and must never be quoted as it — that one is max/min over the
+      individual ROWS and it passes. Frame: MACRO_LADDERS in audit_versus_profile.py.
+      ⭐ 1.63 -> 1.67 on 2026-08-30 when the maintainer ruled the DERIVED `Heroic` cell out of
+      both spread metrics (WEAPON_HEAVINESS §9.4a): it sat inside the INF mean where the macro
+      axis cannot move it as a rung, damping the metric it is judged on.
+    docs: [docs/design/WEAPON_HEAVINESS.md, docs/audit/SUMMARY.md]
+    measure: |
+      import statistics, sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import audit_versus_profile as a
+      v = [x for x in (a.macro_contrast(p) for p in a.profiles().values()) if x]
+      print(round(statistics.median(v), 4))
+
+  - id: spread_median_families
+    value: 3.63
+    tolerance: 0.03
+    what: >
+      Median §9.4 ROW SPREAD across the 44 judged families (one level each, `armor_rows` minus
+      DERIVED_ROWS, FLAT_BY_DESIGN and HAND_TUNED skipped). ⛔ PINNED BECAUSE ITS ABSENCE CAUSED
+      A REAL ERROR: the audit reported only the OFFENDERS, never a central value, so "4.00x" was
+      quoted from memory — sometimes meaning this per-FAMILY figure, sometimes a per-WEAPON one
+      over a different population. A law with a target and no published central value invites
+      exactly that. Target is 4x, band [2,8]; 3.63 is the SHIPPED state at MACRO_RATIO 1.0.
+    docs: [docs/design/WEAPON_HEAVINESS.md, docs/audit/SUMMARY.md]
+    measure: |
+      import statistics, sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import audit_versus_profile as a
+      d = a.profiles()
+      fams = sorted({f for f, _ in d})
+      out = []
+      for fam in fams:
+          if fam in a.FLAT_BY_DESIGN:
+              continue
+          lvl = next((l for l in a.LEVELS if (fam, l) in d), None)
+          if lvl is None or (fam, lvl) in a.HAND_TUNED:
+              continue
+          rows = [v for k, v in a.armor_rows(d[(fam, lvl)]).items()
+                  if v > 0 and k not in a.DERIVED_ROWS]
+          if rows:
+              out.append(max(rows) / min(rows))
+      print(round(statistics.median(out), 4))
+
+  - id: macro_contrast_peer_median
+    value: 2.56
+    tolerance: 0.05
+    what: >
+      Median macro contrast across the five reference corpora, each measured ON ITS OWN
+      armor frame (audit_versus_profile.py --peers). ⛔ THIS IS THE CLAIM THAT CORRECTS
+      "target 4x": only Mental Omega (4.15x) reaches it, RA2 vanilla (1.73x) is level with
+      Cameo, and an earlier UNPINNED table had RV at 3.00x when it measures 2.00x. A peer
+      number without its frame and its command is a rumour — that is why this is pinned.
+    docs: [docs/design/WEAPON_HEAVINESS.md, docs/LESSONS_LEARNED.md]
+    measure: |
+      import statistics, sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import audit_versus_profile as a
+      print(round(statistics.median(r[2] for r in a.peer_table()), 4))
+
+  - id: macro_ratio_shipped
+    value: 1.0
+    tolerance: 0.0001
+    what: >
+      gen_weapon_template.MACRO_RATIO — the macro-contrast axis. 1.0 is OFF. Turning it on
+      regenerates every ^Warhead_* template, so it is BOOT-GATED and the ratio is a
+      maintainer ruling, not an implementation detail. The sweep is in WEAPON_HEAVINESS
+      §9.7; this pin exists so the default cannot drift on without that ruling.
+    docs: [docs/design/WEAPON_HEAVINESS.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import gen_weapon_template as g
+      print(g.MACRO_RATIO)
+
   - id: shield_versus_mean
-    value: 189.088
+    value: 174.802
     tolerance: 0.01
     what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md, docs/design/ARMOR_LAYERS.md]
@@ -40,7 +120,7 @@ claims:
       print(tm.pseudo_armor_mean('Shield'))
 
   - id: shield_hp_factor
-    value: 0.528855
+    value: 0.572075
     tolerance: 0.01
     what: What one shield point is worth as HP (100 / mean Versus vs Shield).
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
@@ -51,7 +131,7 @@ claims:
       print(tm.shield_hp_factor())
 
   - id: shield_damage_share
-    value: 0.01432
+    value: 0.0156141
     tolerance: 0.05
     what: >
       Fraction of roster raw damage landing on the Shield row at BASELINE. The claim that
@@ -158,11 +238,19 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 243
+    value: 190
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
       predicate — W24's scope, and the reason pricing must wait for the weapon rebuild.
+      ⭐ 494 -> 472 (2026-08-30) -> 190 (#320, percentage damage + live weapon backlog
+      consolidation). This is the DEBT and it going DOWN is progress. Re-pin it downward as
+      W24 batches land; ⛔ never upward without explaining what regressed.
+      ⚠ RE-MEASURED 2026-09-02 when #320 was merged into a feature branch: #320 pinned 243 but
+      its own tree measures 190, so this audit was red on master. Verified as master's number,
+      not the branch's: `git diff origin/master...HEAD -- mods/` is EMPTY, and the only
+      shared tool the measure touches (`miniyaml.py`) differs only by an additive `mod_id`
+      parameter that defaults to "cameo" and is behaviour-identical for it.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import sys, pathlib
@@ -173,11 +261,22 @@ claims:
       print(inventory(rs)['counts']['stacked_main_direct_actor_armament'])
 
   - id: percentage_denominator_unset
-    value: 0
+    value: 183
     tolerance: 0
     what: >
-      W18 has NOT landed. Any nonzero here means the basis-point rebase shipped and every
-      pct_absolute / dps_floor figure in the docs is stale.
+      `PercentageDenominator` declarations across the live weapon manifest. ⭐ THIS PIN WAS A
+      TRIPWIRE AND IT TRIPPED, unnoticed. It read "W18 has NOT landed. Any nonzero here means
+      the basis-point rebase shipped and every pct_absolute / dps_floor figure in the docs is
+      stale" — and W18 DID land: `765cbd446` is an ancestor of HEAD, and 11 declarations now
+      sit in 6 ContentPack weapon files (Ixian 2, RA2 Allies 2, RA2 Shared 1, Naxis 2,
+      Syndicate 1, StarCraft Terran 3).
+      ⚠ The alarming half needs care rather than repetition: the TOOLING is denominator-aware
+      (`formula.py` handles 10000 = basis points explicitly, and `extract_stats` /
+      `percentage_damage` both read the field), so anything RE-MEASURED since W18 is correct.
+      What can still be stale is a pct_absolute / dps_floor figure WRITTEN DOWN before
+      `765cbd446` and never re-derived. That is a smaller and checkable set, not "every figure".
+      The pin now tracks ADOPTION: re-pin as more weapons move onto basis points.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 11 -> 183. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/ARMOR_LAYERS.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import pathlib, sys
@@ -216,7 +315,7 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 137
+    value: 269
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
@@ -246,6 +345,7 @@ claims:
       Add it after W24, not before — it is a second term on the same corrected base.
       The formula lives ONLY in `tools/balance/physical_state_price.py`, which this measure
       imports, so the two can no longer disagree.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 239 -> 269. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/ARMOR_LAYERS.md]
     measure: |
       import sys, pathlib
@@ -283,7 +383,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 380
+    value: 429
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -297,6 +397,7 @@ claims:
       (*"that's exactly why I said you should finish the 3 way weapon split first!"*): weapon
       STRUCTURE before pricing. Pricing a weapon whose structure is wrong measures the wrong
       object — that is exactly how `meters_filling_before_death` came to claim 534.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 419 -> 429. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/WEAPON_3WAY_SPLIT.md, docs/design/PHYSICAL_STATE_SYSTEM.md]
     measure: |
       import sys
@@ -314,7 +415,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 460
+    value: 530
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -322,6 +423,7 @@ claims:
       damage-scaled `PhysicalStateScale`, and a BLEND's `PhysicalStates:` dict — which carries no
       `PhysicalStateName` at all, so keying on that name misses every blend family. Counting one
       shape is how the docs carried "~89 bindings"; counting two gave 367.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 509 -> 530. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/ARMOR_LAYERS.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import sys, pathlib
@@ -400,28 +502,87 @@ claims:
       print(len(fams))
 
   - id: signed_off_class_anchors
-    value: 0
+    value: 8
     tolerance: 0
     what: >
-      Class anchors the maintainer has signed off (W11). While this is 0, NO price is final and
-      apply_balance --confirm has nothing correct to apply.
-    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+      Class anchors the MAINTAINER has signed off (W11). ⭐ 0 -> 8 on 2026-08-30 by explicit
+      maintainer order (commit 0ff427712, "MAINTAINER-ORDERED SIGN-OFF"): archer, closecombat,
+      flying_infantry, grenadier, heavy_sniper, missile_vehicle, mortar, special_forces — the
+      eight ROADMAP listed as already meeting the <=1 bar. ⛔ NOT the same event as the three
+      (dreadnought, heavy_infantry, scout) an agent signed on its own validation tables on
+      2026-08-29 and which were reverted on 2026-08-30; fit_class.py step 4 still reserves
+      signing for the maintainer, because it unblocks apply_balance --confirm for the class.
+      19 of 27 remain unsigned, so most prices are still not final.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import json, pathlib
       d = json.loads(pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
       print(sum(1 for v in d.values()
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
 
+  - id: w23_compatibility_breadcrumbs
+    value: 453
+    tolerance: 0
+    what: >
+      Weapons inheriting a `^Compatibility_*` breadcrumb — the W23 conversion's OWN
+      scaffolding, created when a weapon moves onto the family system but still needs a shim
+      for a flat/ExtraDamage profile no family carries yet. ⚠ NOT legacy debt and NOT summed
+      into unconverted_template_inheritors: doing so made that ratchet ANTI-CORRELATED WITH
+      PROGRESS, rising 1255 -> 1460 while real legacy inheritors FELL by 85. This is its own
+      burn-down and it legitimately rises while W23 runs; it falls as the families grow to
+      carry these profiles. Measured 2026-08-30: 71 templates, 290 inheritors.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 290 -> 454, then 453 once `a073f6cc6` removed GladiusCannon's
+      duplicate inherited compatibility root (the boot blocker) — one inheritor fewer. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
+    measure: |
+      import re, subprocess, sys
+      out = subprocess.run([sys.executable, 'tools/audit/audit_unconverted_templates.py'],
+                           capture_output=True, text=True).stdout
+      print(re.search(r'(\d+) direct inheritors \(separate burn-down\)', out).group(1))
+
+  - id: w24_multi_main_fed_share
+    value: 0.831
+    tolerance: 0.01
+    what: >
+      RATCHET (the REAL one) — the SHARE of damage-scaled metered weapons whose meter is fed by
+      less than 100% of main damage. ⚠ The absolute count `w24_multi_main_fed` is NOT a valid
+      down-only ratchet: its population grows as the roster does, so it rose 380 -> 419 purely
+      because scaled-metered weapons went 427 -> 495. Over the same span the SHARE fell
+      90.4% -> 84.6%, i.e. the work improved while the count "regressed". Track the share.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 0.846 -> 0.831. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
+    docs: [docs/design/WEAPON_3WAY_SPLIT.md, docs/HANDOFF.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      import physical_state_price as psp
+      rs = Model().rs
+      pop = under = 0
+      for w in psp.fired_weapons(rs):
+          _d, binds = psp.weapon_bindings(rs, w)
+          if not any(k == 'scaled' for _m, k, _g in binds):
+              continue
+          total, fed = psp.damage_split(rs, w)
+          if total > 0:
+              pop += 1
+              if fed / total < 0.999:
+                  under += 1
+      print(round(under / pop, 3) if pop else 0)
+
   - id: warhead_family_reach
-    value: 1245
+    value: 1392
     tolerance: 0
     what: >
       Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
+      ⭐ 1245 -> 1391 on 2026-08-30. This one is a BURN-UP, so rising is progress — the mirror
+      of `multi_main_fired_weapons`, which is a burn-DOWN. Reading either without knowing which
+      direction is good is how a metric gets celebrated backwards.
       The rest still route through the legacy templates that `audit_unconverted_templates`
       lists. BALANCE_PROGRAM_PLAN §0a carried "639 of 1620 = 39%" with no recorded method;
       this entry pins BOTH the number and how it is counted (transitive inherit chain over the
       fired-weapon set), so the next reader does not have to guess which was measured.
       ⛔ RATCHET — this may only go UP.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 1391 -> 1392. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import pathlib, sys
@@ -451,11 +612,12 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 1162
+    value: 1155
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).
       ⛔ RATCHET — this may only go DOWN. Was 1343 when BALANCE_PROGRAM_PLAN §0a was written.
+      ⚠ RE-MEASURED 2026-09-02 after merging master (#320, percentage damage activated): 1153 -> 1155. The earlier pin was taken on this branch BEFORE that merge, which is why all eight corpus claims went red at once and none of them because of this branch's own changes — it touches no yaml under mods/.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import re, subprocess, sys
@@ -477,3 +639,755 @@ claims:
                            capture_output=True, text=True).stdout
       m = re.search(r'\*\*(\d+) ledger\(s\) drifted\*\*', out)
       print(m.group(1) if m else 0)
+
+  # --- Harvester economy (docs/design/HARVESTER_BALANCE.md, 2026-08-29) ---
+  - id: harvester_actor_count
+    value: 33
+    tolerance: 0
+    what: Actors carrying a Harvester trait. The harvester exception's whole scope.
+    docs: [docs/design/HARVESTER_BALANCE.md, docs/design/balance_exceptions.yaml]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      print(sum(1 for a in rs.actors
+                if not a.startswith(('^', '_'))
+                and rs.resolve(a) is not None
+                and rs.resolve(a).child('Harvester') is not None))
+
+  - id: harvester_balancer_coverage
+    value: 33
+    tolerance: 0
+    what: >
+      Harvesters carrying HarvesterBalancer + SpeedMultiplier@HARVBALANCE. The
+      +38%-within-5-cells boost is UNIVERSAL; the income model depends on that.
+    docs: [docs/design/HARVESTER_BALANCE.md, docs/design/balance_exceptions.yaml]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      n = 0
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is None or node.child('Harvester') is None:
+              continue
+          if node.child('HarvesterBalancer') is not None and any(
+                  c.key == 'SpeedMultiplier@HARVBALANCE' for c in node.children):
+              n += 1
+      print(n)
+
+  - id: harvester_income_spread
+    value: 4.30
+    tolerance: 0.02
+    what: >
+      Ratio of the best to the worst refinery economy (free fleet, aggregate of
+      6-cell and 30-cell mining). Drives the HARVESTER_BALANCE target bands.
+    docs: [docs/design/HARVESTER_BALANCE.md]
+    measure: |
+      import io, sys, contextlib
+      sys.argv = ['harvester_income.py']
+      sys.path.insert(0, 'tools/balance')
+      import harvester_income as hi
+      buf = io.StringIO()
+      with contextlib.redirect_stdout(buf):
+          hi.main()
+      for line in buf.getvalue().splitlines():
+          if 'SPREAD' in line:
+              print(line.split('SPREAD')[1].strip().rstrip('x'))
+              break
+
+  # --- Balance-formula exceptions (docs/design/balance_exceptions.yaml, 2026-08-29) ---
+  - id: superweapon_weapon_firing_powers
+    value: 40
+    tolerance: 0
+    what: >
+      Weapon-firing support/super power instances. The scope of the superweapon
+      damage audit the maintainer ordered 2026-08-29 (open item X1).
+    docs: [docs/design/balance_exceptions.yaml, docs/DESIGN.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      FIRING = {'DetonateWeaponPower', 'AirstrikePower', 'IonCannonPower',
+                'FireArmamentPower', 'NukePower'}
+      n = 0
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is None:
+              continue
+          n += sum(1 for c in node.children if c.key.split('@')[0] in FIRING)
+      print(n)
+
+  - id: promotion_upgrade_count
+    value: 236
+    tolerance: 0
+    what: >
+      Actors carrying PromotionUpgrade. 12 per faction across 19 factions plus
+      8 for ts_gdi; nine factions have zero. DESIGN.md section 6.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      print(sum(1 for a in rs.actors
+                if not a.startswith(('^', '_'))
+                and rs.resolve(a) is not None
+                and rs.resolve(a).child('PromotionUpgrade') is not None))
+
+  - id: promotion_rank1_only
+    value: 236
+    tolerance: 0
+    what: >
+      Promotions gated on rank1. ALL of them: the tier ladder is chain depth,
+      not veterancy rank. If this drops, someone converted them to rank gates.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      n = 0
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is None or node.child('PromotionUpgrade') is None:
+              continue
+          b = node.child('Buildable')
+          if b is not None and 'rank1' in (b.get('Prerequisites') or ''):
+              n += 1
+      print(n)
+
+  - id: factions_without_promotions
+    value: 9
+    tolerance: 0
+    what: >
+      Playable factions with zero promotions (eden, harkonnen, plymouth,
+      ra2_allies, ra2_soviets, ts_nod, wc2_humans, wc2_orcs, yuri). Maintainer
+      2026-08-29 ordered all of them filled to 12; this drops as that lands.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import sys, collections
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      m = Model()
+      rs = m.rs
+      have = collections.Counter()
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is not None and node.child('PromotionUpgrade') is not None:
+              have[a.split('_promotion_')[0]] += 1
+      print(sum(1 for f in m.real_factions() if have.get(f.internal, 0) == 0))
+
+  # --- Weapon naming, DESIGN.md section 1b (2026-08-29) ---
+  - id: weapon_name_coverage_pct
+    value: 49.2
+    tolerance: 0.02
+    what: >
+      Percent of LIVE weapons whose §1b family token is derivable, i.e. carrying
+      an `Inherits@wh: ^Warhead_*`. This is the W27 progress meter and the gate
+      on the rename: gen_weapon_names.py --write refuses below 95%. It should
+      RISE as the 3-way split lands; a fall means conversions were reverted.
+    docs: [docs/DESIGN.md, docs/HANDOFF.md]
+    measure: |
+      import sys, collections, re, pathlib
+      root = pathlib.Path('.').resolve()
+      sys.path.insert(0, 'tools/audit')
+      sys.path.insert(0, 'tools/rename')
+      from cameo_model import Model
+      import gen_weapon_names as g
+      rs = Model().rs
+      proposals, undecidable, _c = g.plan(rs)
+      total = len(proposals) + len(undecidable)
+      print(round(len(proposals) / total * 100, 1))
+
+  - id: shared_weapon_count
+    value: 283
+    tolerance: 0
+    what: >
+      Live weapons fired by MORE than one actor. They cannot take an actor-scoped
+      name (DemoTruckTargeting has 40 firers), so §1b gives them shared_<namegroup>.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import sys, collections
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      firers = collections.defaultdict(set)
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          n = rs.resolve(a)
+          if n is None:
+              continue
+          for c in n.children:
+              if c.key.split('@')[0] == 'Armament':
+                  w = c.get('Weapon')
+                  if w:
+                      firers[w.strip()].add(a)
+      print(sum(1 for v in firers.values() if len(v) > 1))
+
+  - id: elite_suffix_upgrade_overload
+    value: 124
+    tolerance: 0
+    what: >
+      Weapons ending _elite that are gated on an UPGRADE condition rather than
+      veterancy. DESIGN §16.3 reserves _elite for the RA2 veterancy weapon, so
+      these are the overload §1b forbids adding to. Should fall to 0 as the
+      rename lands.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      rs = Model().rs
+      n = 0
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is None:
+              continue
+          for c in node.children:
+              if c.key.split('@')[0] != 'Armament':
+                  continue
+              w = (c.get('Weapon') or '').strip()
+              rc = (c.get('RequiresCondition') or '')
+              if w.endswith('_elite') and 'upgrade' in rc.lower():
+                  n += 1
+      print(n)
+
+  - id: cross_faction_shared_weapons
+    value: 85
+    tolerance: 0
+    what: >
+      Damage-dealing weapons fired by actors of MORE than one faction. Each is a
+      hard edge in the dependency graph that stops two ContentPacks loading
+      independently (docs/MIGRATION.md), which is why the maintainer ruled
+      2026-08-29 that weapon sharing is a defect. Must reach 0.
+    docs: [docs/DESIGN.md, docs/HANDOFF.md]
+    measure: |
+      import sys, collections
+      sys.path.insert(0, 'tools/audit')
+      from cameo_model import Model
+      m = Model()
+      rs = m.rs
+      facs = {f.internal for f in m.real_factions()}
+
+      def faction_of(a):
+          parts = a.split('_')
+          for n in (2, 1):
+              cand = '_'.join(parts[:n])
+              if cand in facs:
+                  return cand
+          return None
+
+      fired = collections.defaultdict(set)
+      for a in rs.actors:
+          if a.startswith(('^', '_')):
+              continue
+          node = rs.resolve(a)
+          if node is None:
+              continue
+          for c in node.children:
+              if c.key.split('@')[0] == 'Armament':
+                  w = c.get('Weapon')
+                  if w:
+                      fired[w.strip()].add(a)
+      n = 0
+      for w, acts in fired.items():
+          if len(acts) < 2:
+              continue
+          r = rs.resolve_weapon(w)
+          best = 0
+          if r is not None:
+              for c in r.children:
+                  if c.key.split('@')[0] != 'Warhead':
+                      continue
+                  d = c.get('Damage')
+                  if d:
+                      try:
+                          best = max(best, abs(int(str(d).strip())))
+                      except ValueError:
+                          pass
+          if best == 0:
+              continue
+          fs = {faction_of(a) for a in acts} - {None}
+          if len(fs) > 1:
+              n += 1
+      print(n)
+
+  # --- Class anchor readiness (docs/HANDOFF.md 3.0f, 2026-08-29) ---
+  - id: class_anchor_membership_pct
+    value: 18.0
+    tolerance: 0.02
+    what: >
+      Percent of buildable ledger units carrying a design.class_anchor.
+      fit_class.py validates an anchor by pricing every MEMBER of its class, so
+      this is the hard blocker on signing anchors and therefore on pricing.
+      It must RISE; 5 classes still have zero members.
+    docs: [docs/HANDOFF.md]
+    measure: |
+      import glob, json, pathlib
+      tagged = total = 0
+      for path in sorted(glob.glob('docs/balance/*.json')):
+          if 'class_anchors' in path:
+              continue
+          try:
+              doc = json.loads(pathlib.Path(path).read_text(encoding='utf-8'))
+          except (ValueError, OSError):
+              continue
+          for _s, units in (doc.get('sections') or {}).items():
+              if not isinstance(units, dict):
+                  continue
+              for _n, rec in units.items():
+                  if not isinstance(rec, dict) or not rec.get('buildable'):
+                      continue
+                  total += 1
+                  if (rec.get('design') or {}).get('class_anchor'):
+                      tagged += 1
+      print(round(tagged / total * 100, 1))
+
+  - id: class_anchors_signed_off
+    value: 8
+    tolerance: 0
+    what: >
+      Class anchors with signed_off true. apply_balance --confirm is a NO-OP for every class
+      whose anchor is unsigned, so this is the single number that says whether pricing can run
+      at all. 0 -> 8 on 2026-08-30 by maintainer order — see signed_off_class_anchors.
+      (Duplicate id of signed_off_class_anchors, kept because the two carry
+      different `docs:` lists; change BOTH or the audit goes half-red.)
+    docs: [docs/HANDOFF.md, docs/design/BALANCE_PIPELINE.md]
+    measure: |
+      import json, pathlib
+      d = json.loads(pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      print(sum(1 for k, v in d.items()
+                if not k.startswith('_') and v.get('signed_off')))
+
+  - id: anchors_off_ruled_spec
+    value: 21
+    tolerance: 0
+    what: >
+      Class anchors whose ACTOR in yaml does not match the stats the decisions log locked for it
+      (application-law step 2c). ⛔ THIS IS THE LIVE BLOCKER ON THE FIRST PRODUCTION BALANCE RUN,
+      pinned 2026-09-02 because the number it replaced rotted for three days: HANDOFF named the
+      3-way split gate as the blocker at 132 members owing a split, and a re-measure found 6 —
+      the gate had been cleared by other people's merged work while the summary still said it was
+      the wall. `price = cost0 * (h+r+d)/3` makes the anchor the class zero point, so an anchor
+      that is off spec prices its whole class against a wrong denominator, and the |Δ| <= 1
+      reporting cannot show it because it is relative to that same denominator. Worst: line_breaker
+      0.50x (td_nod_flametank hp 100000 vs a ruled 750000), tank_destroyer 2.17x,
+      artillery_tank 1.71x. Only 1 of 26 (`mbt`) satisfies the baseline identity o0=p0=q0=cost0.
+      **This number goes DOWN as step 2c runs; re-pin it, and do not let it rot.**
+    docs: [docs/HANDOFF.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import re, subprocess, sys
+      out = subprocess.run([sys.executable, 'tools/balance/anchor_readiness.py'],
+                           capture_output=True, text=True).stdout
+      m = re.search(r'anchor actor off its ruled stats: \*\*(\d+) of \d+\*\*', out)
+      print(m.group(1) if m else -1)
+
+  - id: class_anchors_without_members
+    value: 5
+    tolerance: 0
+    what: >
+      Classes defined in class_anchors.json with no tagged member anywhere in the
+      ledgers (commando, flying_infantry, grenadier, mortar, pure_sniper).
+      fit_class.py cannot run on these at all. Must reach 0.
+    docs: [docs/HANDOFF.md]
+    measure: |
+      import glob, json, pathlib
+      anchors = json.loads(
+          pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      have = set()
+      for path in sorted(glob.glob('docs/balance/*.json')):
+          if 'class_anchors' in path:
+              continue
+          try:
+              doc = json.loads(pathlib.Path(path).read_text(encoding='utf-8'))
+          except (ValueError, OSError):
+              continue
+          for _s, units in (doc.get('sections') or {}).items():
+              if not isinstance(units, dict):
+                  continue
+              for _n, rec in units.items():
+                  if isinstance(rec, dict):
+                      c = (rec.get('design') or {}).get('class_anchor')
+                      if c:
+                          have.add(c)
+      print(sum(1 for k in anchors if not k.startswith('_') and k not in have))
+
+  - id: class_anchors_band_reachable
+    value: 3
+    tolerance: 0
+    what: >
+      Classes with >=4 priced non-epic members whose TRIMMED (P10..P90) priced spread
+      fits inside the TARGET band (SWEET_HI/SWEET_LO = 2.50/1.00 = 2.50x, BALANCE_PIPELINE 8.1a), i.e.
+      classes for which SOME anchor could reach the ruled >=80% occupancy. ⛔ THE NUMBER
+      THAT SAYS RE-ANCHORING IS NOT THE FIX: members are priced as RATIOS to the anchor,
+      so moving the anchor SLIDES a class along the band and never NARROWS it (pinned by
+      tools/tests/test_band_law.py). `archer` 1.8x, `tank_destroyer` 1.9x, `scout` 2.5x
+      qualify. ⭐ 4 -> 2 on 2026-08-31 when the maintainer ruled the target floor ONTO the
+      anchor (1.00..2.50), then 2 -> 3 when quarantining the IFV family took
+      `scout_vehicle` from 11.7x to 2.3x. ⚠ The measure HONOURS the quarantine registry
+      via tools/balance/exceptions.py, exactly as band_granularity.py does -- if the two
+      disagree, one of them stopped reading the registry. ⚠ Read it
+      NEXT TO the hard band: 14 of 17 classes fit 0.50..3.50 (7.0x) on trimmed spreads.
+      Inside the hard band = a REPRICING job; outside = a SCOPE question.
+      ⚠ READ THE TRIMMED SPREAD, NOT THIS COUNT ALONE: `artillery` measures 324.5x raw and
+      5.9x on P10..P90 because ONE member (futuretech_athenacannon, dps 193600) carries the
+      whole number. `tools/balance/band_granularity.py` reports both and the outlier queue.
+      Must RISE as the roster is priced.
+    docs: [docs/design/ROADMAP.md, docs/design/BALANCE_COMPLETION_BRIEF.md]
+    measure: |
+      import collections, json, pathlib, sys
+      sys.path.insert(0, 'tools/balance')
+      import check_band as cb
+      import exceptions as exc
+      anchors = json.loads(
+          pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      rows = collections.defaultdict(list)
+      for _fn, actor, u, du in cb.collect({}):
+          cls = (u.get('design') or {}).get('class_anchor')
+          if not cls or cls.startswith('_') or cls not in anchors or u.get('build_limit'):
+              continue
+          if not exc.is_priced(actor):
+              continue
+          inp = cb.unit_inputs(u, du)
+          if inp is None or not all(inp[:4]):
+              continue
+          rows[cls].append(inp)
+      width = cb.SWEET_HI / cb.SWEET_LO
+      n = 0
+      for cls, rs in rows.items():
+          if len(rs) < 4:
+              continue
+          base = {'hp0': rs[0][0], 'speed0': rs[0][1], 'range0_wdist': rs[0][2],
+                  'dps0': rs[0][3], 'cost0': 100.0}
+          pr = sorted(x for x in (cb.price_for(cls, {'spec': base}, i, 1.0) for i in rs)
+                      if x and x > 0)
+          if len(pr) < 2:
+              continue
+          # TRIMMED P10..P90, identical to band_granularity.py. Raw max/min is a
+          # lie on a roster that still has data bugs -- it read 2 here while the
+          # tool read 3, purely because `scout_vehicle` is 4.4x raw and 2.3x trimmed.
+          lo, hi = int(0.1 * len(pr)), min(len(pr) - 1, int(0.9 * len(pr)))
+          if pr[hi] / pr[lo] <= width:
+              n += 1
+      print(n)
+
+  - id: peer_cost_step
+    value: 1.143
+    tolerance: 0.01
+    what: >
+      Median ratio between adjacent DISTINCT costs across the armed mobile units of 14
+      shipped OpenRA mods (266 gaps). ⭐ THE COST RESOLUTION A BAND IS MEASURED IN: two
+      units priced closer than this are not distinguishable to a player, so a band of
+      width W holds ln(W)/ln(1.143) rungs -- 9.2 for the 3.43x target band. It is the
+      external, non-preference answer to "how many units fit in a class". Cameo's own
+      grid is 1.041x, FINER than any of the 14, which is a defect not a feature.
+      Carried in code as `band_granularity.PEER_STEP`.
+    docs: [docs/design/BALANCE_PIPELINE.md]
+    measure: |
+      import subprocess, sys, re
+      out = subprocess.run([sys.executable, 'tools/reference/peer_cost_grid.py'],
+                           capture_output=True, text=True).stdout
+      print(re.search(r'median adjacent step over all \d+ gaps: ([0-9.]+)x', out).group(1))
+
+  - id: peer_cost_elasticity
+    value: 0.84
+    tolerance: 0.02
+    what: >
+      `a + b` from regressing log(cost) on log(HP) and log(DPS) over 766 armed mobile units
+      of 14 shipped OpenRA mods, pooled with MOD FIXED EFFECTS. Doubling BOTH stats costs
+      2^0.84 = 1.78x in a game people play. ⭐ THE EXTERNAL CHECK ON THE CAMEO FORMULA,
+      whose combined elasticity is 1.16 over x0.5..x2 -- steeper than 12 of the 14, near
+      Tiberian Sun (1.25), Dune 2000 (1.20) and Shattered Paradise (1.12). A FINDING, not a
+      defect: the steeper curve is why a x2 stat window costs 2.5x here and 1.78x there.
+      ⛔ Never pool these mods WITHOUT fixed effects -- HP scales differ by three orders of
+      magnitude between WC2 and C&C, and the naive pooled fit reads 0.10 at R2 0.08.
+    docs: [docs/design/BALANCE_PIPELINE.md]
+    measure: |
+      import subprocess, sys, re
+      out = subprocess.run([sys.executable, 'tools/reference/peer_cost_grid.py'],
+                           capture_output=True, text=True).stdout
+      row = [l for l in out.splitlines() if 'POOLED, mod fixed effects' in l][0]
+      print(re.findall(r'\*\*([0-9.]+)\*\*', row)[3])
+
+  - id: cameo_distinct_costs
+    value: 105
+    tolerance: 0
+    what: >
+      Distinct cost VALUES across the buildable non-epic priced roster (1341 units, 10..10000
+      credits, median 1200). ⭐ THE NUMBER BEHIND THE GRID RULING: 0.078 distinct prices per
+      unit against Combined Arms' 0.214 and Shattered Paradise's 0.293, at a 1.041x median
+      adjacent step -- finer than any of the 14 peer mods and far below the 1.143x a player
+      can perceive. ⛔ NOT fixed by snapping to a flat 20: 89% of prices are ALREADY multiples
+      of 20, because the over-precision is in the SPACING, not the last digit. The proposed
+      grid keeps 20 as the ATOM and derives the STEP
+      (step = max(20, 20*round(0.143*price/20))), taking this to 55.
+      Re-read with `tools/balance/cost_grid.py`.
+    docs: [docs/design/BALANCE_PIPELINE.md, docs/HANDOFF.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/balance')
+      import check_band as cb
+      vals = set()
+      for _fn, _a, u, _du in cb.collect({}):
+          c = cb.fnum((u.get('cost') or {}).get('v') if isinstance(u.get('cost'), dict)
+                      else u.get('cost'))
+          if c and c > 0 and not u.get('build_limit'):
+              vals.add(c)
+      print(len(vals))
+
+  - id: roster_sigma_log
+    value: 0.870
+    tolerance: 0.02
+    what: >
+      Pooled standard deviation of LOG PRICE across every class with >=8 priced non-epic
+      members, measured against each class's LIVE anchor actor. ⭐ THE ONE NUMBER THAT SIZES
+      THE WHOLE REPRICING JOB. BALANCE_PIPELINE 8.1b: a log-normal holding 80% inside the
+      [1.00, 2.50] target band has sigma(log price) = 0.3575, so the roster is currently
+      ~2.4x too dispersed. ⚠ 1.013 -> 1.017 on 2026-08-31 when the negative-DPS extractor
+      fix removed 8 healers from the offensive channel -- the metric is SENSITIVE to
+      population changes, so always re-read it after an extractor or classification change
+      rather than comparing across them. Every repricing pass must move this DOWN toward 0.357; it is the
+      cheapest progress metric the programme has and the only one that collapses "how much
+      work is left" into a scalar. ⚠ Measured on the LIVE anchor, never the ruled spec --
+      the spec column is inflated by the restat debt (54% vs 21% below-anchor). Re-read with
+      `tools/balance/band_granularity.py`.
+    docs: [docs/design/BALANCE_PIPELINE.md, docs/HANDOFF.md, docs/design/BOOT_GATE_RUNBOOK.md]
+    measure: |
+      import subprocess, sys, re
+      out = subprocess.run([sys.executable, 'tools/balance/band_granularity.py'],
+                           capture_output=True, text=True).stdout
+      print(re.search(r'sigma_log = ([0-9.]+) against', out).group(1))
+
+  - id: buildable_aircraft_unclassified
+    value: 127
+    tolerance: 0
+    what: >
+      Buildable aircraft with no design.class_anchor. The taxonomy has no class
+      an aircraft can hold (flying_infantry is infantry, anti_air_vehicle is a
+      ground class), so none of them is priced by a class anchor and the air half
+      of counter_matrix.yaml cannot be measured. Must fall to 0.
+    docs: [docs/HANDOFF.md, docs/design/balance_exceptions.yaml]
+    measure: |
+      import glob, json, pathlib
+      n = 0
+      for path in sorted(glob.glob('docs/balance/*.json')):
+          if 'class_anchors' in path:
+              continue
+          try:
+              doc = json.loads(pathlib.Path(path).read_text(encoding='utf-8'))
+          except (ValueError, OSError):
+              continue
+          for _a, rec in (doc.get('sections') or {}).get('aircraft', {}).items():
+              if not isinstance(rec, dict) or not rec.get('buildable'):
+                  continue
+              if not (rec.get('design') or {}).get('class_anchor'):
+                  n += 1
+      print(n)
+
+  - id: bot_insurance_unreachable_difficulties
+    value: 0
+    tolerance: 0
+    what: >
+      Bot difficulties that reach NO anti-bankruptcy income at all. The committed
+      `DynamicBotInsurance` trait covers every loaded bot type except deliberately uninsured
+      `campaign`, so this is now 0. The predecessor ladder had a `normalbot`/`mediumbot` wiring
+      hole that left the default medium bot with no income; replacing it on `Player:` removes the
+      per-conyard condition ladder entirely. Enforced continuously by
+      `tools/audit/audit_bot_insurance.py`.
+    docs:
+      - docs/HANDOFF.md
+      - docs/design/AI_RESEARCH_RECONCILIATION.md
+      - docs/design/ROADMAP.md
+      - docs/design/BOOT_GATE_RUNBOOK.md
+      - docs/LESSONS_LEARNED.md
+      - docs/Cameo_Knowledge_Base_Manual.md
+      - docs/audit/SUMMARY.md
+      - docs/patches/README.md
+    measure: |
+      import importlib.util, pathlib, sys
+      spec = importlib.util.spec_from_file_location(
+          'abi', pathlib.Path('tools/audit/audit_bot_insurance.py'))
+      abi = importlib.util.module_from_spec(spec)
+      sys.modules['abi'] = abi
+      spec.loader.exec_module(abi)
+      rules = abi.miniyaml.Ruleset('.')
+      dyn = abi.dynamic_difficulties(rules)
+      if dyn is not None:
+          loaded = abi.loaded_bot_types()
+          print(len([b for b in loaded
+                     if b not in dyn and b not in abi.UNINSURED_BOT_TYPES]))
+      else:
+          rungs = abi.ladder_rungs(rules)
+          print(sum(1 for d in abi.DIFFICULTIES
+                    if not any(abi.evaluate(r, abi.conditions_for(d)) for r in rungs)))
+
+  - id: bot_insurance_rungs
+    value: 10
+    tolerance: 0
+    what: >
+      Difficulty steps in the bot anti-bankruptcy income mechanism. Ten either way: ten yaml
+      rungs on `^AIConyardCash` before the rewrite, now ten `Difficulties` entries in committed
+      `DynamicBotInsurance`. This is AI difficulty cheat axis 3 of 4 and the largest.
+      ⛔ It must never simply be DELETED when the cheats come off: its job is stopping a bot
+      getting permanently stuck at no income. Humans get their own, much smaller floor
+      (`player.yaml:243-262`) and must NOT be given this one — one credit/tick is exactly one
+      oil derrick (Interval 250 / Amount 250) and the human derrick cap is 3, so even the
+      `medium` step would be more than a player can build.
+    docs:
+      - docs/HANDOFF.md
+      - docs/design/AI_RESEARCH_RECONCILIATION.md
+      - docs/Cameo_Knowledge_Base_Manual.md
+      - docs/patches/README.md
+    measure: |
+      import importlib.util, pathlib, sys
+      spec = importlib.util.spec_from_file_location(
+          'abi', pathlib.Path('tools/audit/audit_bot_insurance.py'))
+      abi = importlib.util.module_from_spec(spec)
+      sys.modules['abi'] = abi
+      spec.loader.exec_module(abi)
+      rules = abi.miniyaml.Ruleset('.')
+      dyn = abi.dynamic_difficulties(rules)
+      print(len(dyn) if dyn is not None else len(abi.ladder_rungs(rules)))
+
+  - id: lineage_ts_openra_ts_agreement
+    value: 0.96
+    tolerance: 0.02
+    what: >
+      Share of shared units on which `Tiberian Sun` and `OpenRA Tiberian Sun` agree within 10%
+      after their median scale offset is divided out (`w10`). ⭐ THE EVIDENCE FOR THE 2026-09-03
+      LINEAGE COLLAPSE — 26 of 27 shared units agree within 10% and 25 to three decimals, so OpenRA does NOT
+      rebalance TS as it ports it. Contrast the same measure for TD (0.41) and RA1 (0.35), which
+      is why those two keep separate votes. If this drops below the DUP_W10 cut of 0.85 the
+      collapse is no longer supported and `reference_lineages.RULED_LINEAGES` must be re-read.
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/balance')
+      import lineage_dedup as ld
+      d = ld.corpus()
+      print(round(ld.compare(d['Tiberian Sun'], d['OpenRA Tiberian Sun'])[2], 2))
+    docs:
+      - docs/design/REFERENCE_DEDUP.md
+      - docs/design/BALANCE_SYNTHESIS.md
+      - docs/design/ROADMAP.md
+
+  - id: lineage_ra1_openra_ra_agreement
+    value: 0.35
+    tolerance: 0.05
+    what: >
+      The same `w10` measure for `Red Alert 1` vs `OpenRA Red Alert`. ⛔ THE NUMBER THAT
+      CONTRADICTS THE MAINTAINER'S OWN EXAMPLE ("the original TD and RA1 rules and the OpenRA
+      rules are identical and just scaled"). Scale is not the issue — the median offset is
+      exactly 1.00x — but OpenRA re-tunes the roster after porting it: Tesla Tank 2.2 vs 8.0x
+      rifle, M.A.D. Tank 6 vs 18x. Both sources therefore keep a vote. If this ever rises past
+      DUP_W10 (0.85) the ruling in `reference_lineages.NEAR_DUPLICATES` must be revisited.
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/balance')
+      import lineage_dedup as ld
+      d = ld.corpus()
+      print(round(ld.compare(d['Red Alert 1'], d['OpenRA Red Alert'])[2], 2))
+    docs:
+      - docs/design/REFERENCE_DEDUP.md
+      - docs/design/BALANCE_SYNTHESIS.md
+      - docs/design/ROADMAP.md
+
+  - id: reference_dta_rows
+    value: 0
+    tolerance: 0
+    what: >
+      Reference rows DTA contributes to the synthesis corpus. ⛔ IT IS A REGISTERED SOURCE IN
+      `DOC4_SOURCES` AND IT VOTES ON NOTHING: `ORIGINAL_UNIT_STATS.md`'s DTA section is a 15-row
+      Classic-vs-Enhanced highlight table with no `HP` column, so every row is skipped and the
+      section reads as present. This claim exists so the gap cannot be forgotten — when the DTA
+      roster is extracted properly the value goes UP and this entry is updated in the same commit.
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/balance')
+      import lineage_dedup as ld
+      print(len(ld.corpus().get('DTA', {})))
+    docs:
+      - docs/design/REFERENCE_DEDUP.md
+      - docs/design/ROADMAP.md
+
+  - id: versus_ra2_yr_vanilla_agreement
+    value: 0.98
+    tolerance: 0.02
+    what: >
+      Share of shared Versus cells on which `ra2_vanilla` and `yr_vanilla` agree within 10% in
+      the warhead corpus. ⭐ THE EVIDENCE FOR THE 2026-09-03 RULING that RA2 and YR are one game,
+      not two: 761 cells over 79 warheads, one source wearing two names. `extract_versus.SOURCES`
+      had them under separate "RA2" and "YR" lineages, so vanilla counted as two independent
+      voices in every tally downstream — which is how "six independent RA2-lineage mods" reached
+      seven places in WARHEAD_REFERENCE.md when the true count is three.
+    measure: |
+      import json, pathlib, statistics, math
+      d = json.loads(pathlib.Path('docs/reference/versus_raw.json').read_text(encoding='utf-8'))
+      def prof(s):
+          o = {}
+          for r in d['sources'][s]['rows']:
+              k = ''.join(c for c in (r.get('warhead') or '').lower() if c.isalnum())
+              if k and r.get('versus'):
+                  o.setdefault(k, r['versus'])
+          return o
+      a, b = prof('ra2_vanilla'), prof('yr_vanilla')
+      rs = [a[w][k] / b[w][k] for w in set(a) & set(b) for k in set(a[w]) & set(b[w])
+            if a[w].get(k) and b[w].get(k) and a[w][k] > 0 and b[w][k] > 0]
+      med = statistics.median(rs)
+      print(round(sum(1 for r in rs
+                      if abs(math.log(r / med)) <= math.log(1 / 0.9) + 1e-9) / len(rs), 2))
+    docs:
+      - docs/design/REFERENCE_DEDUP.md
+      - docs/reference/WARHEAD_REFERENCE.md
+
+  - id: dreadnought_range_under_tank_destroyer
+    value: 7000
+    tolerance: 0
+    what: >
+      `class_anchors.dreadnought.spec.range0_wdist`. ⛔ DELIBERATELY LOWER THAN
+      `tank_destroyer`'s 7500, and that is a PLAYTEST RULING, not a defect (maintainer
+      2026-09-03): dreadnoughts were far too strong in in-game testing, mostly because of range,
+      so theirs was cut and the tank destroyer's raised to counter them. The class law is "more
+      range and damage than a REGULAR TANK" -- 7000 against mbt 5500 -- which holds. This claim
+      exists because the number LOOKS like a mistake against the written definition, and the
+      maintainer had themselves forgotten why it was 7000; without it a future reader "fixes" it
+      and silently undoes the balance decision. If it legitimately changes, update
+      CLASS_STATUS_BOARD.md section 10 in the same commit.
+    measure: |
+      import json, pathlib
+      d = json.loads(pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      print(d['dreadnought']['spec']['range0_wdist'])
+    docs:
+      - docs/design/CLASS_STATUS_BOARD.md
+      - docs/balance/class_anchors.json
+
+  - id: tank_destroyer_range_counter
+    value: 7500
+    tolerance: 0
+    what: >
+      `class_anchors.tank_destroyer.spec.range0_wdist`. The DELIBERATE COUNTER to dreadnoughts
+      (maintainer 2026-09-03) and the tank destroyer's ONLY edge over them -- the dreadnought has
+      7.7x the HP, 4.2x the DPS and 0.71x the speed. Reducing it to restore a "dreadnought
+      out-ranges everything" reading would undo the playtest result. Paired with
+      `dreadnought_range_under_tank_destroyer`; the two must move together or not at all.
+    measure: |
+      import json, pathlib
+      d = json.loads(pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      print(d['tank_destroyer']['spec']['range0_wdist'])
+    docs:
+      - docs/design/CLASS_STATUS_BOARD.md
+      - docs/balance/class_anchors.json

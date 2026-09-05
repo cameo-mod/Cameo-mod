@@ -9,6 +9,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -22,6 +23,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -57,7 +59,12 @@
     "speed_air": {
      "src": "inherited",
      "v": "165"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "33"
+    },
+    "turreted": false
    },
    "wc2_humans_gryphonrider": {
     "armaments": [
@@ -122,6 +129,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml#Valued.Cost",
@@ -135,6 +143,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
@@ -166,13 +175,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "145"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "29"
+    },
+    "turreted": false
    },
    "wc2_humans_gyrocoptermachine": {
     "armor": {
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -186,6 +201,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -221,7 +237,12 @@
     "speed_air": {
      "src": "inherited",
      "v": "165"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "33"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -230,6 +251,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -246,6 +268,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -278,13 +301,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_blacksmith": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -301,6 +326,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -333,9 +359,11 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_cannontower_plug": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
@@ -348,6 +376,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Upgraded Guard Tower",
     "prerequisites": [
      "~wc2_humans_townhall",
@@ -356,9 +385,11 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_castle": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
@@ -371,6 +402,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Castle",
     "prerequisites": [
      "~wc2_humans_townhall",
@@ -381,13 +413,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_church": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -404,6 +438,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -436,13 +471,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_elvenlumbermill": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -459,6 +496,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -491,13 +529,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_farm": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
@@ -510,6 +550,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Health.HP",
      "v": "300000"
@@ -541,13 +582,15 @@
     "sight": {
      "src": "inherited",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_gnomishinventor": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -564,6 +607,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -596,13 +640,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_gryphonaviary": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -619,6 +665,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -651,9 +698,11 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_guardtower_plug": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
@@ -666,6 +715,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Upgraded Cannon Tower",
     "prerequisites": [
      "~wc2_humans_townhall",
@@ -674,13 +724,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_humangoldmine": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -701,6 +753,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -734,13 +787,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_humangoldmine_bot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -761,6 +816,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -795,9 +851,11 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_keep": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
@@ -810,6 +868,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Keep",
     "prerequisites": [
      "~wc2_humans_townhall",
@@ -818,13 +877,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_magetower": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -841,6 +902,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -874,13 +936,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_stables": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -897,6 +961,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -929,13 +994,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_sunwell": {
     "armor": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_limit": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -952,6 +1019,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Health.HP",
      "v": "250000"
@@ -984,13 +1052,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "12345"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_townhall": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1007,6 +1077,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1038,7 +1109,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -1129,6 +1201,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Valued.Cost",
@@ -1142,6 +1215,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "100000"
@@ -1174,7 +1248,8 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": true
    },
    "wc2_humans_guardtower": {
     "armaments": [
@@ -1263,6 +1338,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Valued.Cost",
@@ -1276,6 +1352,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "100000"
@@ -1308,7 +1385,8 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": true
    },
    "wc2_humans_humanscouttower": {
     "armaments": [
@@ -1397,6 +1475,7 @@
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Valued.Cost",
@@ -1410,6 +1489,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -1442,13 +1522,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "5000"
-    }
+    },
+    "turreted": true
    },
    "wc2_humans_wall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Valued.Cost",
@@ -1462,6 +1544,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Health.HP",
      "v": "25000"
@@ -1473,7 +1556,8 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    }
   },
   "infantry": {
@@ -1673,6 +1757,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1686,6 +1771,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -1717,7 +1803,8 @@
     "speed": {
      "src": "inherited",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_dwarvenrifleman": {
     "armaments": [
@@ -1855,6 +1942,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontalCharged",
     "buildable": true,
     "charge_up": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#AttackFrontalCharged",
@@ -1878,6 +1966,7 @@
      "trait": "FirepowerMultiplier@rifleman",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
      "v": "24000"
@@ -1909,7 +1998,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
      "v": "64"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_elvenarcher": {
     "armaments": [
@@ -2055,6 +2145,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
@@ -2073,6 +2164,7 @@
      "trait": "FirepowerMultiplier@Arrows",
      "v": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
      "v": "25000"
@@ -2110,7 +2202,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_elvenranger": {
     "armaments": [
@@ -2256,6 +2349,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2269,6 +2363,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -2305,7 +2400,8 @@
     "speed": {
      "src": "inherited",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_footman": {
     "armaments": [
@@ -2341,6 +2437,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
@@ -2359,6 +2456,7 @@
      "trait": "FirepowerMultiplier@WC2SwordUpg",
      "v": 1.3
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -2391,7 +2489,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_highelfpriest": {
     "armaments": [
@@ -2481,6 +2580,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2494,6 +2594,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -2525,7 +2626,8 @@
     "speed": {
      "src": "inherited",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_highelfsorceress": {
     "armaments": [
@@ -2615,6 +2717,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2628,6 +2731,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -2659,7 +2763,8 @@
     "speed": {
      "src": "inherited",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_highelvenarcher": {
     "armaments": [
@@ -2853,6 +2958,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
@@ -2866,6 +2972,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
      "v": "35000"
@@ -2901,7 +3008,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
      "v": "85"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_knight": {
     "armaments": [
@@ -3007,6 +3115,7 @@
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
@@ -3020,6 +3129,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
      "v": "167500"
@@ -3056,7 +3166,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "92"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_mage": {
     "armaments": [
@@ -3254,6 +3365,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -3267,6 +3379,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -3298,7 +3411,8 @@
     "speed": {
      "src": "inherited",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_militiapeasant": {
     "armaments": [
@@ -3334,6 +3448,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -3351,6 +3466,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -3386,7 +3502,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
      "v": "90"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_mortarteam": {
     "armaments": [
@@ -3502,6 +3619,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
@@ -3515,6 +3633,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.6
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -3547,7 +3666,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
      "v": "80"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_warcraft3footman": {
     "armaments": [
@@ -3583,6 +3703,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
@@ -3601,6 +3722,7 @@
      "trait": "FirepowerMultiplier@WC2SwordUpg",
      "v": 1.3
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
      "v": "80000"
@@ -3632,11 +3754,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
      "v": "85"
-    }
+    },
+    "turreted": false
    }
   },
   "upgrades": {
    "wc2_humans_upgrade_armorstrength": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3653,6 +3777,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Armor Strength",
     "prerequisites": [
      "~!wc2_humans_upgrade_armorstrength",
@@ -3660,9 +3785,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_armorstrengthii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3679,6 +3806,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Armor Strength II",
     "prerequisites": [
      "!wc2_humans_upgrade_armorstrengthii",
@@ -3688,9 +3816,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_arrowstrength": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3707,6 +3837,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Arrow Strength",
     "prerequisites": [
      "~!wc2_humans_upgrade_arrowstrength",
@@ -3714,9 +3845,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_arrowstrengthii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3733,6 +3866,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Arrow Strength II",
     "prerequisites": [
      "!wc2_humans_upgrade_arrowstrengthii",
@@ -3742,9 +3876,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_ballistastrength": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3761,6 +3897,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ballista Strength",
     "prerequisites": [
      "~!wc2_humans_upgrade_ballistastrength",
@@ -3768,9 +3905,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_ballistastrengthii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3787,6 +3926,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ballista Strength II",
     "prerequisites": [
      "!wc2_humans_upgrade_ballistastrengthii",
@@ -3796,9 +3936,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_bestfarm": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3815,6 +3957,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Best Farm",
     "prerequisites": [
      "~wc2_humans_upgrade_betterfarm",
@@ -3823,9 +3966,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_betterfarm": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3842,6 +3987,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Better Farm",
     "prerequisites": [
      "~!wc2_humans_upgrade_betterfarm",
@@ -3850,9 +3996,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_blizzard": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3869,6 +4017,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Blizzard",
     "prerequisites": [
      "~!wc2_humans_upgrade_blizzard",
@@ -3877,9 +4026,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_cannondamage": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3896,6 +4047,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Cannon Damage",
     "prerequisites": [
      "~!wc2_humans_upgrade_cannondamage",
@@ -3903,9 +4055,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_cannondamageii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3922,6 +4076,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Cannon Damage II",
     "prerequisites": [
      "!wc2_humans_upgrade_cannondamageii",
@@ -3931,9 +4086,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_exorcism": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3950,6 +4107,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Exorcism",
     "prerequisites": [
      "~wc2_humans_upgrade_paladin",
@@ -3959,9 +4117,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_healing": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3978,6 +4138,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Healing",
     "prerequisites": [
      "~wc2_humans_upgrade_paladin",
@@ -3987,9 +4148,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_highelvenarcher": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4006,6 +4169,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "High Elven Archer",
     "prerequisites": [
      "~!wc2_humans_upgrade_highelvenarcher",
@@ -4015,9 +4179,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_paladin": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4034,6 +4200,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Paladin",
     "prerequisites": [
      "~!wc2_humans_upgrade_paladin",
@@ -4042,9 +4209,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_polymorph": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4061,6 +4230,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Polymorph",
     "prerequisites": [
      "~!wc2_humans_upgrade_polymorph",
@@ -4069,9 +4239,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_ranger": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4088,6 +4260,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ranger",
     "prerequisites": [
      "~!wc2_humans_upgrade_ranger",
@@ -4095,9 +4268,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_rangerlongbow": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4114,6 +4289,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ranger Longbow",
     "prerequisites": [
      "~!wc2_humans_upgrade_rangerlongbow",
@@ -4123,9 +4299,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_rangermarksman": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4142,6 +4320,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ranger Marksman",
     "prerequisites": [
      "~!wc2_humans_upgrade_rangermarksman",
@@ -4151,9 +4330,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_rangerscouting": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4170,6 +4351,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ranger Scouting",
     "prerequisites": [
      "~!wc2_humans_upgrade_rangerscouting",
@@ -4178,9 +4360,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_slow": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4197,6 +4381,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Slow",
     "prerequisites": [
      "~!wc2_humans_upgrade_slow",
@@ -4205,9 +4390,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_swordstrength": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4224,6 +4411,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Sword Strength",
     "prerequisites": [
      "~!wc2_humans_upgrade_swordstrength",
@@ -4231,9 +4419,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_swordstrengthii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4250,6 +4440,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Sword Strength II",
     "prerequisites": [
      "!wc2_humans_upgrade_swordstrengthii",
@@ -4259,9 +4450,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_warcraft3footman": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4278,6 +4471,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Warcraft 3 Footman",
     "prerequisites": [
      "~!wc2_humans_upgrade_warcraft3footman",
@@ -4286,9 +4480,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_humans_upgrade_warcraft3knightwip": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4305,6 +4501,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Warcraft 3 Knight (WIP)",
     "prerequisites": [
      "~!wc2_humans_upgrade_warcraft3knightwip",
@@ -4314,7 +4511,8 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -4357,6 +4555,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Valued.Cost",
@@ -4370,6 +4569,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Health.HP",
      "v": "45000"
@@ -4407,7 +4607,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_demolitionsquad": {
     "armaments": [
@@ -4457,6 +4658,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -4470,6 +4672,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "40000"
@@ -4501,13 +4704,15 @@
     "speed": {
      "src": "inherited",
      "v": "80"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_mobileconstructionvehiclehuman": {
     "armor": {
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -4525,6 +4730,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -4564,7 +4770,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_paladin": {
     "armaments": [
@@ -4670,6 +4877,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -4683,6 +4891,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "167500"
@@ -4721,7 +4930,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "46"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_peasant": {
     "armaments": [
@@ -4755,6 +4965,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -4772,6 +4983,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "40000"
@@ -4808,7 +5020,8 @@
     "speed": {
      "src": "inherited",
      "v": "80"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_siegeengine": {
     "armaments": [
@@ -4953,6 +5166,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontalCharged",
     "buildable": true,
     "charge_up": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#AttackFrontalCharged",
@@ -4971,6 +5185,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
@@ -5008,7 +5223,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    },
    "wc2_humans_warcraft3knight": {
     "armaments": [
@@ -5114,6 +5330,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Valued.Cost",
@@ -5127,6 +5344,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Health.HP",
      "v": "180000"
@@ -5166,7 +5384,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "48"
-    }
+    },
+    "turreted": false
    }
   }
  }

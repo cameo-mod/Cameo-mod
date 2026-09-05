@@ -585,12 +585,29 @@ def aggregate(rows: list[dict], how: str) -> dict[str, float]:
 NON_ARMOR = {"shield", "hazmat", "reflector"}
 
 
+# ⛔ "SIX INDEPENDENT RA2-LINEAGE MODS" WAS AN OVERCOUNT, corrected 2026-09-03 after the pairwise
+# Versus agreement was measured for the first time. Of the six INI sources that share warhead names
+# — ra2_vanilla, yr_vanilla, ra2_reborn, cnc_reloaded, mental_omega, red_resurrection — FOUR carry
+# substantially the same armour table:
+#     ra2_vanilla ~ yr_vanilla    98%      (one game: YR is RA2's expansion)
+#     ra2_reborn  ~ yr_vanilla    97%      RA2 Reborn IS vanilla's table
+#     ra2_reborn  ~ ra2_vanilla   94%
+#     cnc_reloaded ~ ra2_reborn   87%      joins the group transitively
+# Only Mental Omega (52-66% against everything) and Red Resurrection (52-68%) are independent.
+# ⚠ Romanov's Vengeance shares ZERO warhead names with any of them — it is an OpenRA
+# reimplementation that names warheads by calibre (`105mm`, `120mmxrad`) where the Westwood mods
+# name them by role (`ap`, `antiperson`) — so it can be neither confirmed nor collapsed here.
+#
+# ⭐ THE FINDING ITSELF SURVIVES, at reduced strength: three independent voices agreeing on AP is
+# still evidence that the inversion is Westwood's design rather than one mod's quirk. It is the
+# COUNT that was wrong, and it was wrong because the corpus split one game into "RA2" and "YR".
+
 def lawful_profile(profile: dict[str, float], direction: str) -> dict[str, float]:
     """Re-lay a measured profile so it obeys Cameo's ORDERING LAW.
 
     **Why this step has to exist.** The corpus and the law disagree, and both are
-    right about different things. Measured across six independent RA2-lineage
-    mods, the canonical `AP` warhead reads `none 25 · flak 25 · plate 15` — armour
+    right about different things. Measured across THREE independent RA2/YR voices,
+    the canonical `AP` warhead reads `none 25 · flak 25 · plate 15` — armour
     piercing doing LESS to plated infantry than to unplated. That is not noise,
     it is Westwood's design, reproduced by everyone who cloned it. But Cameo's
     ordering law (maintainer 2026-08-01, "the most important part") says an
@@ -966,7 +983,7 @@ def render(concept: str, rows: list[dict]) -> str:
     if violations:
         lines += ["⚠ The raw field median violates the law on: "
                   + "; ".join(f"**{v}**" for v in violations) + ".", "",
-                  "For AP that is not a data error — six independent RA2-lineage mods all",
+                  "For AP that is not a data error — three independent RA2/YR voices all",
                   "write `none 25 · flak 25 · plate 15`, i.e. armour piercing doing LESS to",
                   "plated infantry than to unplated. It is Westwood's design, faithfully",
                   "cloned. Cameo's law inverts it so the weapon stays readable.", ""]

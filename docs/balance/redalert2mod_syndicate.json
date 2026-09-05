@@ -39,6 +39,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Valued.Cost",
@@ -57,6 +58,7 @@
      "trait": "FirepowerMultiplier@FirerateCompensation",
      "v": 0.75
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Health.HP",
      "v": "95000"
@@ -92,7 +94,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "90"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "18"
+    },
+    "turreted": false
    },
    "latinsyndicate_mig21": {
     "armaments": [
@@ -338,6 +345,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Valued.Cost",
@@ -351,6 +359,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
@@ -387,7 +396,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "190"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "12"
+    },
+    "turreted": false
    },
    "latinsyndicate_yakovlev": {
     "armaments": [
@@ -611,6 +625,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Valued.Cost",
@@ -624,6 +639,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Health.HP",
      "v": "40000"
@@ -659,7 +675,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "165"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "11"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -668,6 +689,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -684,6 +706,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -717,13 +740,15 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_airstation": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -740,6 +765,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -772,13 +798,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_bunkertower": {
     "armor": {
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackOpenTopped",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Valued.Cost",
@@ -791,6 +819,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Health.HP",
      "v": "60000"
@@ -823,13 +852,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "10000"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_combatbarracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": "AttackOpenTopped",
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -846,6 +877,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -878,13 +910,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_defensebureau": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackOpenTopped",
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -905,6 +939,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -938,7 +973,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "10000"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_latinaadefender": {
     "armaments": [
@@ -1011,6 +1047,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Valued.Cost",
@@ -1023,6 +1060,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Health.HP",
      "v": "132500"
@@ -1055,13 +1093,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "15000"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_latinempradar": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1082,6 +1122,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1114,7 +1155,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_latinsentrygun": {
     "armaments": [
@@ -1188,6 +1230,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Valued.Cost",
@@ -1201,6 +1244,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Health.HP",
      "v": "113500"
@@ -1233,13 +1277,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_powerstation": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Valued.Cost",
@@ -1257,6 +1303,7 @@
      "trait": "FirepowerMultiplier@ReactorNukeWeak",
      "v": 0.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -1288,13 +1335,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_recyclingcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1315,6 +1364,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1348,13 +1398,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_recyclingrefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1371,6 +1423,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1403,7 +1456,8 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_smlturret": {
     "armaments": [
@@ -1428,6 +1482,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Valued.Cost",
@@ -1440,6 +1495,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Health.HP",
      "v": "300000"
@@ -1472,13 +1528,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "15000"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_spycenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1495,6 +1553,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1527,13 +1586,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_syndicateconstructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1546,6 +1607,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1577,13 +1639,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_syndicatefactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1600,6 +1664,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1632,13 +1697,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_syndicateservicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1655,6 +1722,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1687,13 +1755,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_topolsilo": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1710,6 +1780,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1744,7 +1815,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -1786,6 +1858,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Valued.Cost",
@@ -1799,6 +1872,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -1838,7 +1912,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_freedomfighter": {
     "armaments": [
@@ -2213,6 +2288,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2235,6 +2311,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
      "v": "77000"
@@ -2267,7 +2344,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
      "v": "55"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_grenademonkey": {
     "armaments": [
@@ -2475,6 +2553,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Valued.Cost",
@@ -2488,6 +2567,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.4
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -2519,7 +2599,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
      "v": "80"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_latinflametrooper": {
     "armaments": [
@@ -2658,6 +2739,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Valued.Cost",
@@ -2671,6 +2753,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
      "v": "55000"
@@ -2703,7 +2786,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
      "v": "55"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_latinmilitia": {
     "armaments": [
@@ -2948,6 +3032,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Valued.Cost",
@@ -2966,6 +3051,7 @@
      "trait": "FirepowerMultiplier@latinsyndicate_latinmilitia",
      "v": 0.39
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
      "v": "25000"
@@ -3001,7 +3087,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
      "v": "51"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_narco": {
     "armaments": [
@@ -3266,6 +3353,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Valued.Cost",
@@ -3284,6 +3372,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 1.05
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
      "v": "28000"
@@ -3317,7 +3406,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
      "v": "70"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_tankkiller": {
     "armaments": [
@@ -3434,6 +3524,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Valued.Cost",
@@ -3446,6 +3537,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
      "v": "13000"
@@ -3481,7 +3573,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
      "v": "53"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_terrorist": {
     "armaments": [
@@ -3505,6 +3598,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Valued.Cost",
@@ -3523,6 +3617,7 @@
      "trait": "FirepowerMultiplier@latinsyndicate_upgrade_asianalliancestolentechhotfire",
      "v": 2.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
      "v": "15000"
@@ -3555,7 +3650,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    }
   },
   "naval": {
@@ -3718,6 +3814,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Valued.Cost",
@@ -3731,6 +3828,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Health.HP",
      "v": "47500"
@@ -3770,7 +3868,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "sub.latin": {
     "armaments": [
@@ -3837,6 +3936,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Valued.Cost",
@@ -3855,6 +3955,7 @@
      "trait": "FirepowerMultiplier@latinsyndicate_upgrade_asianalliancestolentechhotfire",
      "v": 2.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Health.HP",
      "v": "240000"
@@ -3895,7 +3996,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "22"
-    }
+    },
+    "turreted": true
    },
    "triton.latin": {
     "armaments": [
@@ -3969,6 +4071,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Valued.Cost",
@@ -3982,6 +4085,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Health.HP",
      "v": "37500"
@@ -4021,11 +4125,13 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "50"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "latinsyndicate_promotion_burritos": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4038,6 +4144,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Burritos",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4047,9 +4154,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_carteltrucks": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4062,6 +4171,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Cartel Trucks",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4071,9 +4181,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_demolitiontrucks": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4086,6 +4198,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Demolition Trucks",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4095,9 +4208,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_lars": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4110,6 +4225,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock LARS",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4119,9 +4235,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_latinapc": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4134,6 +4252,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Latin APC.",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4143,9 +4262,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_mortarbikes": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4158,6 +4279,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Mortar Bikes",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4166,9 +4288,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_narcos": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4181,6 +4305,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Narcos",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4190,9 +4315,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_nuketrucks": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4205,6 +4332,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Nuke Trucks",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4214,9 +4342,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_raiderbuggy": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4229,6 +4359,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Raider Buggy",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4237,9 +4368,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_smokertanks": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4252,6 +4385,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Smoker Tanks",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4261,9 +4395,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_terrorists": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4276,6 +4412,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Terrorists",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4284,9 +4421,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_promotion_topolm": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4299,6 +4438,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock TOPOL M",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -4308,11 +4448,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "cgcnst_infiltrated.latin": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4325,9 +4467,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Stolen Syndicate Buildings Plans"
+    "gatling_spinup": false,
+    "name": "Stolen Syndicate Buildings Plans",
+    "turreted": false
    },
    "latinsyndicate_doctrine_cartelrockets": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4344,6 +4489,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Cartel Rockets",
     "prerequisites": [
      "~latinsyndicate_latinempradar",
@@ -4351,9 +4497,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_doctrine_eliteguerillas": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4370,6 +4518,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Elite Guerillas",
     "prerequisites": [
      "~latinsyndicate_latinempradar",
@@ -4377,9 +4526,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_doctrine_lightposts": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4396,6 +4547,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Lightposts",
     "prerequisites": [
      "~latinsyndicate_latinempradar",
@@ -4403,9 +4555,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4422,6 +4576,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Allied Stolen Tech: Extra Missiles and Miraging",
     "prerequisites": [
      "~latinsyndicate_spycenter",
@@ -4429,9 +4584,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_upgrade_asianalliancestolentechhotfire": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4448,6 +4605,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Asian Alliance Stolen Tech: Hot Fire",
     "prerequisites": [
      "~latinsyndicate_spycenter",
@@ -4455,9 +4613,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_upgrade_cashrecovery": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4474,6 +4634,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Cash Recovery",
     "prerequisites": [
      "~latinsyndicate_spycenter",
@@ -4481,9 +4642,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_upgrade_empcannon": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4500,6 +4663,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Emp Cannon",
     "prerequisites": [
      "~latinsyndicate_latinempradar",
@@ -4507,9 +4671,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_upgrade_sovietstolentechindustrialmethods": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4526,6 +4692,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Soviet Stolen Tech: Industrial Methods",
     "prerequisites": [
      "~latinsyndicate_spycenter",
@@ -4533,9 +4700,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "latinsyndicate_upgrade_yuristolentechchainguns": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4552,6 +4721,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Yuri Stolen Tech: Chainguns",
     "prerequisites": [
      "~latinsyndicate_spycenter",
@@ -4559,9 +4729,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "up_team_cashrecover.latin": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4574,9 +4746,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Cash Recovery"
+    "gatling_spinup": false,
+    "name": "Cash Recovery",
+    "turreted": false
    },
    "up_team_ngbunk2.latin": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4589,7 +4764,9 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Lightposts"
+    "gatling_spinup": false,
+    "name": "Lightposts",
+    "turreted": false
    }
   },
   "vehicles": {
@@ -4713,6 +4890,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -4731,6 +4909,7 @@
      "trait": "FirepowerMultiplier@RANK-1",
      "v": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "35000"
@@ -4772,7 +4951,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_carteltruck": {
     "armaments": [
@@ -4835,6 +5015,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -4848,6 +5029,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "167500"
@@ -4889,13 +5071,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "14"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_collectiontruck": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -4913,6 +5097,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "85000"
@@ -4956,7 +5141,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "23"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_demolitiontruck": {
     "armaments": [
@@ -4978,6 +5164,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -4996,6 +5183,7 @@
      "trait": "FirepowerMultiplier@latinsyndicate_upgrade_asianalliancestolentechhotfire",
      "v": 2.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
@@ -5037,7 +5225,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_diablo": {
     "armaments": [
@@ -5246,6 +5435,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -5259,6 +5449,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "45000"
@@ -5298,7 +5489,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_lars": {
     "armaments": [
@@ -5420,6 +5612,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -5438,6 +5631,7 @@
      "trait": "FirepowerMultiplier@RANK-1",
      "v": 1.25
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "47500"
@@ -5479,7 +5673,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_latinapc": {
     "armaments": [
@@ -6006,6 +6201,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -6019,6 +6215,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "180000"
@@ -6060,7 +6257,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_missiletruck": {
     "armaments": [
@@ -6130,6 +6328,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -6148,6 +6347,7 @@
      "trait": "FirepowerMultiplier@RANK-1",
      "v": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
@@ -6189,7 +6389,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_mortarbike": {
     "armaments": [
@@ -6334,6 +6535,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -6352,6 +6554,7 @@
      "trait": "FirepowerMultiplier@Mortar",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "28000"
@@ -6394,7 +6597,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "56"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_narcohummer": {
     "armaments": [
@@ -6461,6 +6665,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -6474,6 +6679,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "97500"
@@ -6515,7 +6721,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "22"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_nuketruck": {
     "armaments": [
@@ -6537,6 +6744,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -6554,6 +6762,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -6595,7 +6804,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_raiderbuggy": {
     "armaments": [
@@ -6922,6 +7132,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -6940,6 +7151,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "37500"
@@ -6980,7 +7192,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "23"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_rushertank": {
     "armaments": [
@@ -7104,6 +7317,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -7117,6 +7331,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -7157,7 +7372,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "23"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_smokertank": {
     "armaments": [
@@ -7404,6 +7620,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -7422,6 +7639,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.5
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "260000"
@@ -7462,13 +7680,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "19"
-    }
+    },
+    "turreted": true
    },
    "latinsyndicate_syndicatemobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -7486,6 +7706,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -7526,7 +7747,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_topolm": {
     "armaments": [
@@ -7625,6 +7847,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -7642,6 +7865,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -7683,7 +7907,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "latinsyndicate_tortugatank": {
     "armaments": [
@@ -7880,6 +8105,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Valued.Cost",
@@ -7893,6 +8119,7 @@
      "tech_tier": 0.5,
      "unit_class": 1.0
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "875000"
@@ -7933,13 +8160,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": true
    },
    "scrapcar.latin": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -7952,6 +8181,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -7984,13 +8214,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "scrapcar2.latin": {
     "armor": {
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -8003,6 +8235,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -8035,7 +8268,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "scrapcar2_demo.latin": {
     "armaments": [
@@ -8057,6 +8291,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -8070,6 +8305,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -8102,7 +8338,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "scrapcar2_driveby.latin": {
     "armaments": [
@@ -8139,6 +8376,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -8152,6 +8390,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -8184,7 +8423,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "scrapcar_demo.latin": {
     "armaments": [
@@ -8206,6 +8446,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -8219,6 +8460,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "20000"
@@ -8251,7 +8493,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "scrapcar_driveby.latin": {
     "armaments": [
@@ -8288,6 +8531,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -8301,6 +8545,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -8333,7 +8578,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
-    }
+    },
+    "turreted": false
    }
   }
  }

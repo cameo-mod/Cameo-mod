@@ -389,10 +389,14 @@ def main() -> int:
     # ⚠⚠ **MERGE, NEVER REPLACE.** This used to be `anchors[args.cls] = {...}`, which
     # DESTROYED the rest of the entry — measured 2026-08-17 on `mbt`: one run wiped `spec`
     # (cost0/dps0/hp0/range0_wdist/speed0), `armor`, `tech_tier`, `tech_tier_flag`,
-    # `verifier_actor`, `reveals_shroud` and the "★ LOCKED 2026-08-01" provisional note,
-    # leaving six keys behind. Those are the maintainer's DESIGN inputs, not fit outputs —
-    # `formula.class_baseline_price` reads `spec`, and the tier/verifier pair enforces the
-    # 2.5x identity ([[cameo-verifier-tier-k-match]]). The sign-off workflow is "run
+    # `verifier_actor` (retired since — see below), `reveals_shroud` and the "★ LOCKED
+    # 2026-08-01" provisional note, leaving six keys behind. Those are the maintainer's
+    # DESIGN inputs, not fit outputs — `formula.class_baseline_price` reads `spec`.
+    # ⚠ THERE IS NO VERIFIER ANY MORE (maintainer 2026-08-29, HANDOFF §3.0j /
+    # BALANCE_PIPELINE §8.1): "they should be regular units like anything else and not have
+    # those stiff rules". `verifier_actor` is gone from all 27 anchors and every code path;
+    # the 2.5x band law survives as a PRICE RATIO in check_band.py, which never needed a
+    # nominated actor. The sign-off workflow is "run
     # fit_class for each of the 27 classes, then review", so the obvious next step would
     # have silently erased ALL 27 locked specs, with a clean exit 0 and a plausible report.
     entry = dict(anchors.get(args.cls) or {})

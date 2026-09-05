@@ -135,6 +135,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Valued.Cost",
@@ -153,6 +154,7 @@
      "trait": "FirepowerMultiplier@CruiserFighter",
      "v": 0.1
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "37500"
@@ -189,7 +191,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "225"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
+    },
+    "turreted": false
    },
    "scalpelAA.steel": {
     "armaments": [
@@ -339,6 +346,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Valued.Cost",
@@ -352,6 +360,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "10000"
@@ -380,7 +389,12 @@
     "speed_air": {
      "src": "inherited",
      "v": "80"
-    }
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "32"
+    },
+    "turreted": false
    },
    "scalpelMG.steel": {
     "armaments": [
@@ -421,6 +435,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Valued.Cost",
@@ -434,6 +449,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "10000"
@@ -462,7 +478,12 @@
     "speed_air": {
      "src": "inherited",
      "v": "80"
-    }
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "32"
+    },
+    "turreted": false
    },
    "scalpelQuantumCannon.steel": {
     "armaments": [
@@ -599,6 +620,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Valued.Cost",
@@ -612,6 +634,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "10000"
@@ -640,7 +663,12 @@
     "speed_air": {
      "src": "inherited",
      "v": "80"
-    }
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "32"
+    },
+    "turreted": false
    },
    "steelconsortium_cargoship": {
     "armaments": [
@@ -677,6 +705,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Valued.Cost",
@@ -690,6 +719,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
@@ -725,7 +755,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "100"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
+    },
+    "turreted": false
    },
    "steelconsortium_cloudbreaker": {
     "armaments": [
@@ -894,6 +929,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Valued.Cost",
@@ -912,6 +948,7 @@
      "trait": "FirepowerMultiplier@Carrier",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "250000"
@@ -957,7 +994,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "50"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "10"
+    },
+    "turreted": false
    },
    "steelconsortium_empressstation": {
     "armaments": [
@@ -1027,6 +1069,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -1049,6 +1092,7 @@
      "trait": "FirepowerMultiplier@IonCannon",
      "v": 0.1
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "1500000"
@@ -1093,7 +1137,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "25"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "5"
+    },
+    "turreted": false
    },
    "steelconsortium_skyhammer": {
     "armaments": [
@@ -1254,6 +1303,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Valued.Cost",
@@ -1267,6 +1317,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "120000"
@@ -1311,7 +1362,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "120"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
+    },
+    "turreted": true
    },
    "steelconsortium_twister": {
     "armaments": [
@@ -1441,6 +1497,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Valued.Cost",
@@ -1454,6 +1511,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
@@ -1489,7 +1547,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "10"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -1637,6 +1700,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Valued.Cost",
@@ -1649,6 +1713,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "121000"
@@ -1681,7 +1746,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "12000"
-    }
+    },
+    "turreted": true
    },
    "steelconsortium_bfg10000": {
     "armaments": [
@@ -1828,6 +1894,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Valued.Cost",
@@ -1841,6 +1908,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "1000000"
@@ -1875,13 +1943,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "25000"
-    }
+    },
+    "turreted": true
    },
    "steelconsortium_cloningvats": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -1898,6 +1968,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "110000"
@@ -1930,13 +2001,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_consortiumairpad": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -1953,6 +2026,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1985,13 +2059,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_consortiumbattlelab": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -2008,6 +2084,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -2040,13 +2117,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_consortiumconstructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2059,6 +2138,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -2090,13 +2170,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_consortiumpowerplant": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Valued.Cost",
@@ -2109,6 +2191,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "250000"
@@ -2140,13 +2223,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_consortiumradar": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -2163,6 +2248,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -2195,13 +2281,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_consortiumrefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -2218,6 +2306,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -2250,7 +2339,8 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_consortiumsentryturret": {
     "armaments": [
@@ -2335,6 +2425,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Valued.Cost",
@@ -2348,6 +2439,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "88000"
@@ -2380,13 +2472,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    },
    "steelconsortium_consortiumwarfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -2403,6 +2497,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -2435,13 +2530,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_geothermalreactor": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -2462,6 +2559,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "750000"
@@ -2495,13 +2593,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_orbitalcannonactivator": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -2518,6 +2618,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -2552,7 +2653,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_quantumcannon": {
     "armaments": [
@@ -2837,6 +2939,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Valued.Cost",
@@ -2849,6 +2952,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "230000"
@@ -2881,13 +2985,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "8888"
-    }
+    },
+    "turreted": true
    },
    "steelconsortium_steelbarracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -2904,6 +3010,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -2936,7 +3043,8 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -3189,6 +3297,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Valued.Cost",
@@ -3207,6 +3316,7 @@
      "trait": "FirepowerMultiplier@steelconsortium_upgrade_pulseweapons",
      "v": 0.91
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Health.HP",
      "v": "17000"
@@ -3242,7 +3352,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Mobile.Speed",
      "v": "57"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_engineer": {
     "armaments": [
@@ -3282,6 +3393,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Valued.Cost",
@@ -3295,6 +3407,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -3334,7 +3447,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_hoverboardgrenadier": {
     "armaments": [
@@ -3763,6 +3877,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Valued.Cost",
@@ -3781,6 +3896,7 @@
      "trait": "FirepowerMultiplier@Freed",
      "v": 5.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Health.HP",
      "v": "22000"
@@ -3813,7 +3929,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Mobile.Speed",
      "v": "130"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_quantummissiletrooper": {
     "armaments": [
@@ -4907,6 +5024,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Valued.Cost",
@@ -4920,6 +5038,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Health.HP",
      "v": "64000"
@@ -4952,7 +5071,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Mobile.Speed",
      "v": "48"
-    }
+    },
+    "turreted": true
    },
    "steelconsortium_steelrunner": {
     "armaments": [
@@ -5515,6 +5635,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -5532,6 +5653,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Health.HP",
      "v": "60000"
@@ -5564,11 +5686,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Mobile.Speed",
      "v": "90"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "steelconsortium_promotion_barracuda": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5581,6 +5705,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Barracuda",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5589,9 +5714,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_cloudbreaker": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5604,6 +5731,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Cloud Breaker",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5613,9 +5741,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_daggerartillery": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5628,6 +5758,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Dagger Artillery",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5637,9 +5768,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_defenderbot": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5652,6 +5785,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Defender Bot",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5661,9 +5795,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_katytank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5676,6 +5812,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Katy Tank",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5685,9 +5822,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_quantumtank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5700,6 +5839,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Quantum Tank",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5708,9 +5848,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_stalker": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5723,6 +5865,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Stalker",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5732,9 +5875,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_supportlvl1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5747,6 +5892,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Support LVL1",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5755,9 +5901,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_supportlvl2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5770,6 +5918,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Support LVL2",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5779,9 +5928,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_supportlvl3": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5794,6 +5945,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Support LVL3",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5803,9 +5955,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_supportlvl4": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5818,6 +5972,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Support LVL4",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5827,9 +5982,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_promotion_whiterabbit": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5842,6 +5999,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock White Rabbit",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -5851,11 +6009,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "qacst_infiltrated.steel": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5868,9 +6028,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Stolen Consortium Buildings Plans"
+    "gatling_spinup": false,
+    "name": "Stolen Consortium Buildings Plans",
+    "turreted": false
    },
    "steelconsortium_upgrade_empcannon": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5887,6 +6050,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Emp Cannon",
     "prerequisites": [
      "~steelconsortium_consortiumbattlelab",
@@ -5894,9 +6058,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_upgrade_ferrocretecurtain": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5913,6 +6079,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ferrocrete Curtain",
     "prerequisites": [
      "~steelconsortium_consortiumradar",
@@ -5920,9 +6087,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_upgrade_naniteinfusion": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5939,6 +6108,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Nanite Infusion",
     "prerequisites": [
      "~steelconsortium_consortiumradar",
@@ -5946,9 +6116,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_upgrade_pulseweapons": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5965,6 +6137,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Pulse Weapons",
     "prerequisites": [
      "~steelconsortium_consortiumradar",
@@ -5972,9 +6145,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_upgrade_quantumweaponpower": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5991,6 +6166,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Quantum Weapon Power",
     "prerequisites": [
      "~steelconsortium_consortiumbattlelab",
@@ -5998,9 +6174,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_upgrade_resonanceammo": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6017,6 +6195,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Resonance Ammo",
     "prerequisites": [
      "~steelconsortium_consortiumbattlelab",
@@ -6024,9 +6203,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_upgrade_scalpeldefenders": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6043,6 +6224,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Scalpel Defenders",
     "prerequisites": [
      "~steelconsortium_consortiumbattlelab",
@@ -6050,9 +6232,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "steelconsortium_upgrade_shieldresistance": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6069,6 +6253,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Shield Resistance",
     "prerequisites": [
      "~steelconsortium_consortiumbattlelab",
@@ -6076,9 +6261,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "up_team_shielresistance.steel": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6091,7 +6278,9 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Shield Resistance"
+    "gatling_spinup": false,
+    "name": "Shield Resistance",
+    "turreted": false
    }
   },
   "vehicles": {
@@ -6222,6 +6411,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -6235,6 +6425,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "325000"
@@ -6284,7 +6475,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "22"
-    }
+    },
+    "turreted": false
    },
    "cougar.steel": {
     "armaments": [
@@ -6323,6 +6515,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -6336,6 +6529,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -6384,7 +6578,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": true
    },
    "hummer.steel": {
     "armaments": [
@@ -6460,6 +6655,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -6473,6 +6669,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "45000"
@@ -6521,7 +6718,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "44"
-    }
+    },
+    "turreted": false
    },
    "oldqtnk.steel": {
     "armaments": [
@@ -6593,6 +6791,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -6606,6 +6805,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "112500"
@@ -6655,7 +6855,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "steelconsortium_barracuda": {
     "armaments": [
@@ -6896,6 +7097,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -6914,6 +7116,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -6954,13 +7157,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "steelconsortium_consortiumminer": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -6978,6 +7183,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -7021,13 +7227,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_consortiummobileconstructionvehicle": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -7045,6 +7253,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
@@ -7085,7 +7294,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_dagger": {
     "armaments": [
@@ -7186,6 +7396,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontalCharged",
     "buildable": true,
     "charge_up": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#AttackFrontalCharged",
@@ -7204,6 +7415,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -7245,7 +7457,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_defenderbot": {
     "armaments": [
@@ -7607,6 +7820,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -7620,6 +7834,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "210000"
@@ -7669,7 +7884,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_hammerheadartillerytank": {
     "armaments": [
@@ -7754,6 +7970,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -7767,6 +7984,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "52500"
@@ -7807,7 +8025,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_katytank": {
     "armaments": [
@@ -8003,6 +8222,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -8016,6 +8236,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "275000"
@@ -8065,7 +8286,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": true
    },
    "steelconsortium_mako": {
     "armaments": [
@@ -8282,6 +8504,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -8295,6 +8518,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "95000"
@@ -8335,7 +8559,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "34"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_manta": {
     "armaments": [
@@ -8582,6 +8807,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -8600,6 +8826,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "55000"
@@ -8640,7 +8867,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "46"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_megalodon": {
     "armaments": [
@@ -8809,6 +9037,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -8822,6 +9051,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "450000"
@@ -8862,7 +9092,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_poseidontank": {
     "armaments": [
@@ -8898,6 +9129,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -8911,6 +9143,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -8951,7 +9184,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_quantumtank": {
     "armaments": [
@@ -9137,6 +9371,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -9150,6 +9385,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -9190,7 +9426,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "steelconsortium_stalker": {
     "armaments": [
@@ -9351,6 +9588,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -9368,6 +9606,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "140000"
@@ -9417,7 +9656,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_supportshieldgenerator": {
     "armaments": [
@@ -9440,6 +9680,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Valued.Cost",
@@ -9453,6 +9694,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -9501,7 +9743,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "steelconsortium_whiterabbit": {
     "armaments": [
@@ -9568,6 +9811,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -9585,6 +9829,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
@@ -9634,7 +9879,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    }
   }
  }

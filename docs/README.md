@@ -28,9 +28,27 @@ Everything else under `docs/` is either **generated** (regenerate it, never hand
 Then [`design/ROADMAP.md`](design/ROADMAP.md) (the granular queue) and
 [`audit/SUMMARY.md`](audit/SUMMARY.md) (current bug counts).
 
+Plus [`design/ROADMAP.md`](design/ROADMAP.md) and [`audit/SUMMARY.md`](audit/SUMMARY.md) —
+those two complete the **TIER 1** set the gate enforces.
+
 `.windsurf/rules/start-protocol.md` and the `SessionStart` hook
 (`tools/hooks/session_checklist.py`) enforce this order at the IDE and CLI level. If either
 conflicts with this file, **this file wins** — and fix the copy.
+
+⛔ **THE DOCS MAXING AUDIT — the order is no longer advice.** `tools/hooks/read_first_guard.py`
+runs on **every** tool call and DENIES it until all seven Tier-1 documents have been opened this
+session (reads and `git status`/`log`/`diff` are exempt, so the gate can be satisfied). The tiers
+themselves are owned by [`../tools/audit/audit_docs_maxing.py`](../tools/audit/audit_docs_maxing.py),
+which also prints the full manifest of all 117 authored documents and reports a session's coverage:
+
+```sh
+python tools/audit/audit_docs_maxing.py                      # manifest + tiers
+python tools/audit/audit_docs_maxing.py --transcript <path>  # this session's coverage
+```
+
+⚠ It cannot demand the whole set and does not pretend to: 117 files, ~92,700 lines, ~1.9M tokens.
+Tier 1 gates every action, Tier 2 gates an edit in its own subject, Tier 3 is ENUMERATED at
+SessionStart — so a document may go unread, but it can never go unknown.
 
 Crashes and player-visible regressions always jump the queue.
 
@@ -43,9 +61,11 @@ Crashes and player-visible regressions always jump the queue.
 | [`design/FORMULA_V2.md`](design/FORMULA_V2.md) | the formula law: per-class, SUM, bands, uniqueness |
 | [`design/BALANCE_SYNTHESIS.md`](design/BALANCE_SYNTHESIS.md) | the mod-synthesis methodology and its sources |
 | [`design/BALANCE_PIPELINE_ESTIMATE.md`](design/BALANCE_PIPELINE_ESTIMATE.md) | effort estimate for the whole programme |
+| [`design/BALANCE_COMPLETION_BRIEF.md`](design/BALANCE_COMPLETION_BRIEF.md) | the ordered gate list G0–G7 from verified state to a first pricing run, plus the session contract |
 | [`design/BALANCE_PIPELINE_GAPS.md`](design/BALANCE_PIPELINE_GAPS.md) | what a one-click run still lacks, plus the verified residue of the 2026-08 outside review round |
 | [`design/RTS_BALANCE_REFERENCE.md`](design/RTS_BALANCE_REFERENCE.md) | *(non-binding)* RTS and multiplayer balance dimensions a stat-consistency model cannot see |
 | [`design/EFFECTIVE_DAMAGE.md`](design/EFFECTIVE_DAMAGE.md) | the area-integrated `effective_damage` metric |
+| [`design/REFERENCE_PIPELINE_HANDOFF.md`](design/REFERENCE_PIPELINE_HANDOFF.md) | the reference / faction-routing chapter: what is wired, the design decisions, the missing sources to ask for, and the traps. **Subordinate to [`HANDOFF.md`](HANDOFF.md)** |
 
 ### Weapons, warheads and defence — 9 documents
 
@@ -96,7 +116,7 @@ Crashes and player-visible regressions always jump the queue.
 |---|---|
 | [`Cameo_Knowledge_Base_Manual.md`](Cameo_Knowledge_Base_Manual.md) | the engine / custom-trait / C# reference |
 | [`reference/WARHEAD_REFERENCE.md`](reference/WARHEAD_REFERENCE.md) | *(measured)* the corpus: family profiles, versus archetypes, archetype tables |
-| [`balance/anchor_decisions_log.md`](balance/anchor_decisions_log.md) | class-anchor decisions — maintainer-confirmed baselines + verifiers |
+| [`balance/anchor_decisions_log.md`](balance/anchor_decisions_log.md) | class-anchor decisions — maintainer-confirmed baselines (its **verifier** columns are history: retired 2026-08-29, HANDOFF §3.0j) |
 | [`balance/formula_v2_classes.md`](balance/formula_v2_classes.md) | per-class formula working logs |
 | [`design/DECISIONS.md`](design/DECISIONS.md) | small settled decisions scoped to one system |
 | [`design/RESEARCH_NOTES.md`](design/RESEARCH_NOTES.md) | source-game and mod research. Binds nothing. |

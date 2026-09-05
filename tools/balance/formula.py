@@ -520,9 +520,82 @@ def main_spread_warheads(warheads, template_names=None) -> list:
     return [w for w in warheads if _is_main_spread(w)]
 
 
+# The small-arms families, for the `smallarms_only` pricing rule (FORMULA_V2 §3:
+# a cheap scout is priced on its rifle, not on its grenade).
+#
+# ⛔ THIS USED TO TEST `tag.startswith("smallarms")` AND SILENTLY PRICED 15 OF 24
+# SCOUTS AT ZERO DPS. The 3-way split renamed warhead tags to FAMILY names, so a
+# rifle that was `SmallArmsWarhead` became `Bullet_Light`; only 120 of 7618 damage
+# warheads still carry the legacy string. The filter therefore matched nothing for
+# every unit under the 1.5x cost0 threshold, `spread_damage_sum` returned 0, and
+# `propose_class_rebalance` priced those units at 32-63 against costs of 100-200.
+# The data was always correct — reload 50, damage 4000, right there in the ledger.
+#
+# Match on the FAMILY, not on a literal that a migration can rename out from under
+# it. `Bullet` is the post-split small-arms family; the legacy names are kept so
+# the 120 unconverted warheads still price.
+SMALLARMS_FAMILIES = frozenset({"smallarms", "bullet", "minigun", "rifle"})
+
+
+def is_smallarms_tag(tag) -> bool:
+    """Is this warhead tag a small-arms family, before or after the 3-way split?"""
+    family = (tag or "").split("_")[0].lower()
+    return any(family.startswith(f) for f in SMALLARMS_FAMILIES)
+
+
+# ---------------------------------------------------------------------------
+# ⛔ THE TWO CHANNELS: OFFENSIVE DAMAGE vs SUPPORT THROUGHPUT
+# ---------------------------------------------------------------------------
+# A NEGATIVE `Damage` HEALS. That is the engine's convention, not a Cameo one,
+# and `spread_damage_sum` used to add it straight into the offensive total — so
+# eight actors priced as if they SHOT BACKWARDS:
+#
+#     cabal_engineer -650   tkm_battlebus -600   futuretech_repairdroid -508
+#     tkm_engineer   -397   ra1_allies_mechanic -357   terran_medic -183
+#     ra1_allies_medic -40  ts_gdi_medic -40
+#
+# `support` and `line_breaker` could not be priced at all, and the two classes
+# showed up as the only non-bell-shaped ones in `band_granularity.py`.
+#
+# ⛔ CLASSIFY BY THE SIGN, NEVER BY THE TAG NAME. The obvious fix is a tag
+# whitelist — `HealingWeapon`, `RepairWeapon`, `ExtraHealing`, … — and it is the
+# WRONG fix, for exactly the reason spelled out 20 lines above about
+# `smallarms`: a literal is something a migration renames out from under you.
+# Measured on this tree: of 160 negative warheads, **7 carry a generic tag**
+# (`1Dam` on the five WC2 paladin/priest heals, `Percentage` on two Tesla
+# charges). A name filter would have priced five healers as combat units. The
+# sign cannot be renamed.
+#
+# ⭐ AND THE ARMAMENT IS THE RIGHT GRAIN. Measured: **0 of 2,561 armaments mix
+# positive and negative warheads** — 58 armaments across 37 actors are purely
+# supportive. So an armament is unambiguously one channel or the other, and a
+# unit that both heals and shoots does it with two separate armaments.
+
+def armament_channel(warheads, template_names=None) -> str:
+    """``"offensive"`` | ``"support"`` | ``"empty"`` for one armament's warheads.
+
+    Decided on the SIGN of the main damage warheads, at the ARMAMENT grain —
+    see the block above for why both of those choices are load-bearing.
+    """
+    vals = []
+    for w in main_spread_warheads(warheads, template_names):
+        try:
+            vals.append(float(w.get("damage")))
+        except (TypeError, ValueError):
+            continue
+    if any(v > 0 for v in vals):
+        # A mixed armament does not exist in this tree and would be a design
+        # question, not a rounding one. Call it offensive and let the sums below
+        # keep the channels clean rather than inventing a third category.
+        return "offensive"
+    if any(v < 0 for v in vals):
+        return "support"
+    return "empty"
+
+
 def spread_damage_sum(warheads, smallarms_only: bool = False,
                       template_names=None) -> float:
-    """Effective per-shot damage = SUM of the MAIN damage warheads
+    """OFFENSIVE effective per-shot damage = SUM of the MAIN damage warheads
     (maintainer law 2026-07-22; main = template-named SpreadDamage, see
     ``main_spread_warheads``). A multi-warhead weapon deals the ADDED damage
     of all its warheads to a target, so the SUM — never the max — is the price
@@ -530,19 +603,194 @@ def spread_damage_sum(warheads, smallarms_only: bool = False,
     damage for the price of one. `*ExtraDamage` / `*FriendlyFire` /
     `*Percentage` twins are excluded.
 
+    ⛔ **HEALING IS EXCLUDED, AND THE RESULT IS NEVER NEGATIVE.** A negative
+    `Damage` heals (see the block above); it belongs to
+    ``support_throughput_sum``, not here. Before 2026-08-31 it was summed in
+    and eight support actors priced as if they shot backwards. A pure healer
+    now reads **0**, which is the truth about its OFFENSIVE output — ask
+    ``support_throughput_sum`` for what it actually does.
+
     This is the ONE canonical warhead-damage reducer; every pricing tool MUST
     call it so the MAX convention can never creep back in. ``smallarms_only``
     restricts the sum to SmallArms warheads (cheap scouts <=150% of C0 price
     only their SmallArms warhead)."""
     total = 0.0
     for w in main_spread_warheads(warheads, template_names):
-        if smallarms_only and not (w.get("tag") or "").lower().startswith("smallarms"):
+        if smallarms_only and not is_smallarms_tag(w.get("tag")):
             continue
         try:
-            total += float(w.get("damage"))
+            d = float(w.get("damage"))
         except (TypeError, ValueError):
             continue
+        if d > 0:            # ⛔ healing is the other channel — never sum it here
+            total += d
     return total
+
+
+def support_throughput_sum(warheads, template_names=None) -> float:
+    """SUPPORT throughput per shot = the MAGNITUDE of the healing/repair main
+    warheads. **Non-negative by construction**, and 0 for a combat weapon.
+
+    The mirror of ``spread_damage_sum``: together the two partition the main
+    warheads by sign, so no warhead is counted twice and none is dropped. A
+    class that prices non-combat members must declare which channel it consumes
+    — `support` reads THIS one, every combat class reads the other."""
+    total = 0.0
+    for w in main_spread_warheads(warheads, template_names):
+        try:
+            d = float(w.get("damage"))
+        except (TypeError, ValueError):
+            continue
+        if d < 0:
+            total += -d
+    return total
+
+
+# ---------------------------------------------------------------------------
+# THE STAT GRID REGISTRY — one table, with provenance, for every legal step.
+# ---------------------------------------------------------------------------
+# ⚠ WHY THIS EXISTS. The grids were written as literals in whichever function
+# needed them, and three of them had silently drifted from the law by 2026-08-29:
+#
+#   * HP was quantised at 1000 for EVERY class. DESIGN.md is explicit that
+#     vehicles/aircraft/ships step by 2500 and only infantry by 1000, so every
+#     vehicle class was being nudged onto the wrong grid.
+#   * The Speed step was chosen from a defined `Mobile.TurnSpeed`, which covers
+#     vehicles (398 of 403) and ships (48 of 50) but reaches **0 of 168
+#     aircraft** — so an aircraft would have been stepped by 1 against a law that
+#     says 5. Latent only because no aircraft class exists yet (open item X6);
+#     it would have gone live the moment one was added.
+#   * `propose_class_rebalance` carried a class-level `spd_step` argument and a
+#     `VEHICLE_TYPE_CLASSES = {"mbt"}` set that NOTHING READ — the per-row step
+#     always won. A dead knob that looks like it enforces a law is worse than no
+#     knob, because it answers the question "is this handled?" with a lie.
+#
+# The rule that would have caught all three: a step is a LAW, and a law lives in
+# one place with a citation. Anything that quantises reads it from here.
+#
+# ⚠ AND THE KEY IS PER-STAT. Speed's step exists because turn rate is `speed/5`,
+# so it follows LOCOMOTION (`speed_platform`). HP's step exists because self-heal
+# is HP/2500 or HP/1000, so it follows the unit KIND (`hp_platform`). A FutureTech
+# droid drives like a vehicle and heals like infantry, and takes one grid from
+# each. Neither is "what class it is priced in" — a class is a pricing construct.
+
+STAT_GRIDS = {
+    # stat: {platform: (step, source)}
+    "hp": {
+        "infantry": (1000, "DESIGN.md 'HP: 2500-steps ... 1000-steps for infantry'"),
+        "vehicle": (2500, "DESIGN.md 'HP: 2500-steps for vehicles/aircraft/ships'"),
+    },
+    "speed": {
+        "infantry": (1, "FORMULA_V2.md 3 'Infantry: steps of 1'"),
+        "vehicle": (5, "FORMULA_V2.md 3 'Vehicles, aircraft, AND ships: steps of 5"
+                       " (turn rate = speed/5)'"),
+    },
+    "range": {"*": (10, "FORMULA_V2.md 3 'steps of 10'")},
+    "damage": {"*": (100, "DESIGN.md grid table, DAMAGE_STEP (W15)")},
+    "cost": {"*": (10, "DESIGN.md grid table, maintainer 2026-08-29"
+                       " — NOT yet enforced in code (open item X2)")},
+}
+
+# Ledger sections whose members move on the vehicle grid. `naval` and `aircraft`
+# are in here explicitly BECAUSE the turn-rate probe misses them: no aircraft in
+# the tree defines one, and two ships do not either.
+VEHICLE_SECTIONS = frozenset({"vehicles", "aircraft", "naval", "ships"})
+
+
+def speed_platform(section=None, turn_speed=None):
+    """Which SPEED grid this unit moves on.
+
+    ⚠ Keyed on LOCOMOTION, because that is where the step comes from: turn rate
+    is `speed/5`, so anything with a turn rate must sit on a multiple of 5. Two
+    signals, since neither alone is complete — a defined turn rate catches the
+    units that move as vehicles whatever section they are filed under (Cabal
+    cyborgs and FutureTech droids use vehicle locomotion while sitting in
+    `infantry`), and the section catches the rest.
+
+    ⚠ **Aircraft keep their turn rate in the `Aircraft` trait, not `Mobile`**
+    (maintainer 2026-08-29) — exactly as they keep `Speed` there. Reading only
+    `Mobile.TurnSpeed` made all 168 aircraft in the ledger look like they had NO
+    turn rate, and that is what made this probe miss every one of them. They have
+    one: **323 actors carry an `Aircraft` trait and 318 define both Speed and
+    TurnSpeed**. `extract_stats` now records it as `turn_speed_air`, and callers
+    pass whichever is set. The earlier note here said aircraft define no turn
+    rate; that was the extractor's blind spot, not the tree.
+    """
+    if turn_speed:
+        return "vehicle"
+    return "vehicle" if (section or "").lower() in VEHICLE_SECTIONS else "infantry"
+
+
+# Classes whose HP moves on a grid their SECTION would not give them. The HP step
+# is a design judgement about how finely a class's durability should be tunable,
+# not a mechanical consequence of what the unit drives on — so it is the one grid
+# a class may override.
+#
+# `scout_vehicle` -> infantry (maintainer 2026-08-29). ⚠ The tree does not agree
+# yet: all 28 tagged scout vehicles sit on the 2500 grid today and SEVEN of them
+# are not multiples of 1000 (`ra1_allies_ranger` and `forgotten_raidercar` 22500,
+# `tkm_as42` / `tkm_technical` / `ts_gdi_pitbull` / `td_gdi_humvee` 27500,
+# `td_gdi_humveemkii` 37500). The converter will move those seven onto the finer
+# grid. Recorded here because a ruling the data contradicts must say so out loud.
+HP_GRID_BY_CLASS = {
+    "scout_vehicle": "infantry",
+}
+
+
+def hp_platform(section=None, class_anchor=None):
+    """Which HP grid this unit moves on.
+
+    ⚠ Keyed on the SECTION, NOT on locomotion, and the difference is not
+    cosmetic. The HP step exists because of SELF-HEAL — DESIGN.md sets it beside
+    "self-heal HP/2500" for vehicles/aircraft/ships and "self-heal HP/1000" for
+    infantry. A FutureTech droid drives like a vehicle but heals like infantry,
+    so it takes the 1000 grid while still taking the speed-5 grid above.
+
+    Collapsing the two onto one notion of "platform" is a real error and it was
+    measurable: it put `futuretech_scoutdroid` on the 2500 HP grid and pushed the
+    `scout` class from worst |Δ| 22.8 to 32.1 on its own.
+
+    ⚠ `HP_GRID_BY_CLASS` overrides the section. That is deliberate and it is the
+    ONLY grid a class may override — HP is the one whose step is a judgement
+    about tuning resolution rather than a mechanical consequence.
+
+    ⚠ NOT derivable from the tree today. `ChangesHealth.Step` is the quantity the
+    law is written against, and only **7 actors in the entire tree** define one,
+    so self-heal cannot confirm or deny a class's grid. Until that is populated,
+    these are design rulings, not measurements.
+    """
+    if class_anchor and class_anchor in HP_GRID_BY_CLASS:
+        return HP_GRID_BY_CLASS[class_anchor]
+    return "vehicle" if (section or "").lower() in VEHICLE_SECTIONS else "infantry"
+
+
+# ⚠ THE TURN-RATE LAW DOES NOT LIVE HERE, AND MUST NOT BE RE-ADDED.
+#
+# `TurnSpeed` is enforced by `tools/audit/audit_stat_formulas.py` (F8 vehicles, F9
+# turreted, F10 turretless, F17 fighters/bombers = Speed/15 with frontal 2x, F19
+# helicopters/spaceships = Speed/5) and FIXED by `tools/balance/gen_derived_stats.py`,
+# which parses that audit's own output so the checker and the fixer can never
+# disagree. All five read **0 findings**: the roster already complies.
+#
+# A second copy was added here on 2026-08-30 and removed the same day. It was not
+# just redundant, it was WRONG: it scoped by "has a Mobile or Aircraft trait"
+# instead of by unit type plus template inheritance, so it applied the GROUND law
+# to aircraft belonging to no air template and reported 340 violations against a
+# roster with none. The real audit scopes `ut == "air"` AND
+# `inherits_template(FighterTemplate|BomberTemplate|...)`.
+#
+# The lesson, for the third time in one session: GREP FOR THE MECHANISM, NOT JUST
+# THE PHRASE. "TurnSpeed (aircraft)" found one sentence of a two-part law;
+# "fighter" in tools/ would have found the whole thing already implemented.
+
+
+def stat_step(stat, platform="infantry"):
+    """The legal step for `stat` on `platform`. Raises on an unknown stat — a
+    quantiser reaching for a grid that does not exist is a bug, not a default."""
+    grids = STAT_GRIDS[stat]
+    if "*" in grids:
+        return grids["*"][0]
+    return grids[platform][0]
 
 
 # The flat-damage grid. 2000 until 2026-08-11, when the maintainer regridded it 20x finer
@@ -657,6 +905,20 @@ def distribute_damage(new_total, warheads, template_names=None) -> dict[str, int
     for every warhead the law assigns a value to.
     """
     warheads = warheads or []
+
+    # ⛔ NEVER WRITE A DAMAGE TOTAL ONTO A SUPPORT ARMAMENT. `spread_damage_sum`
+    # reads 0 for a healer (healing is the other channel), so a caller that
+    # round-trips "read the total, redistribute it" would silently overwrite
+    # `Damage: -2000` with 0 and DELETE the heal. That is a data-loss bug one
+    # careless `apply_balance` away, and it is invisible in a diff of numbers.
+    # Refuse loudly instead: a support armament is not priced through the damage
+    # grid at all, so reaching here means the caller failed to filter.
+    if armament_channel(warheads, template_names) == "support":
+        raise ValueError(
+            "distribute_damage called on a SUPPORT armament (healing/repair). "
+            "Its output is support_throughput_sum, not spread_damage_sum; "
+            "filter with armament_channel() before pricing.")
+
     mains = main_spread_warheads(warheads, template_names)
     if not mains:
         return {}
@@ -754,10 +1016,19 @@ def class_baseline_estimators(hp, speed, range_wdist, dps_value,
     anchor's own f(C_anchor) would under- or over-price the baseline.  Use
     ``tier_multiplier`` for the unit and divide by the anchor's multiplier.
     """
-    h = hp / hp0
-    s = speed / speed0
-    r = (range_wdist / range0_wdist) * special
-    d = dps_value / dps0
+    # ⚠ A MISSING BASELINE IS NOT A ZERO BASELINE. A class whose spec omits an axis
+    # (`support` carries neither range0_wdist nor dps0 — its members are non-combat)
+    # reached here and took the whole proposal down with a bare ZeroDivisionError.
+    # Treat a missing baseline as "this axis does not price this class": the ratio is 1,
+    # which leaves the term neutral in every degree instead of crashing.
+    h = (hp / hp0) if hp0 else 1.0
+    s = (speed / speed0) if speed0 else 1.0
+    # A class whose spec carries no range baseline (`support`) reached here with
+    # range0_wdist == 0 and crashed the whole proposal with a bare ZeroDivisionError.
+    # Treat a missing baseline as "range is not a pricing axis for this class": r = 1
+    # leaves the term neutral instead of taking the run down.
+    r = ((range_wdist / range0_wdist) if range0_wdist else 1.0) * special
+    d = (dps_value / dps0) if dps0 else 1.0
     o = (h + s + r + d) * cost0 / 4 * tech_tier
     p = ((h * s) + (r * d)) * cost0 / 2 * tech_tier
     q = (h * s * r * d) * cost0 * tech_tier
@@ -798,9 +1069,18 @@ def class_baseline_estimators_3(hp, range_wdist, dps_value,
     At the baseline (h=r=d=1): O = P = Q = cost0 and price = cost0.
     Price is still LINEAR in r (h, d constant), so solve_range stays closed-form.
     """
-    h = hp / hp0
-    r = (range_wdist / range0_wdist) * special
-    d = dps_value / dps0
+    # ⚠ A MISSING BASELINE IS NOT A ZERO BASELINE. A class whose spec omits an axis
+    # (`support` carries neither range0_wdist nor dps0 — its members are non-combat)
+    # reached here and took the whole proposal down with a bare ZeroDivisionError.
+    # Treat a missing baseline as "this axis does not price this class": the ratio is 1,
+    # which leaves the term neutral in every degree instead of crashing.
+    h = (hp / hp0) if hp0 else 1.0
+    # A class whose spec carries no range baseline (`support`) reached here with
+    # range0_wdist == 0 and crashed the whole proposal with a bare ZeroDivisionError.
+    # Treat a missing baseline as "range is not a pricing axis for this class": r = 1
+    # leaves the term neutral instead of taking the run down.
+    r = ((range_wdist / range0_wdist) if range0_wdist else 1.0) * special
+    d = (dps_value / dps0) if dps0 else 1.0
     o = (h + r + d) / 3 * cost0 * tech_tier
     p = (h * r + h * d + r * d) / 3 * cost0 * tech_tier
     q = (h * r * d) * cost0 * tech_tier
@@ -828,8 +1108,13 @@ def solve_class_baseline_range_3(cost, hp, dps_value,
                 + [1/3 + (h+d)/3 + h*d] * cost0 * r   (coeff of r, B3)
         r = (3*cost - A3) / B3
     """
-    h = hp / hp0
-    d = dps_value / dps0
+    # ⚠ A MISSING BASELINE IS NOT A ZERO BASELINE. A class whose spec omits an axis
+    # (`support` carries neither range0_wdist nor dps0 — its members are non-combat)
+    # reached here and took the whole proposal down with a bare ZeroDivisionError.
+    # Treat a missing baseline as "this axis does not price this class": the ratio is 1,
+    # which leaves the term neutral in every degree instead of crashing.
+    h = (hp / hp0) if hp0 else 1.0
+    d = (dps_value / dps0) if dps0 else 1.0
     a3 = ((h + d) / 3 + (h * d) / 3) * cost0 * tech_tier
     b3 = (1.0 / 3 + (h + d) / 3 + h * d) * cost0 * tech_tier
     if b3 == 0:
@@ -857,9 +1142,14 @@ def solve_class_baseline_range(cost, hp, speed, dps_value,
         r = (3*cost - A) / B
         range_wdist = (r / special) * range0_wdist
     """
-    h = hp / hp0
-    s = speed / speed0
-    d = dps_value / dps0
+    # ⚠ A MISSING BASELINE IS NOT A ZERO BASELINE. A class whose spec omits an axis
+    # (`support` carries neither range0_wdist nor dps0 — its members are non-combat)
+    # reached here and took the whole proposal down with a bare ZeroDivisionError.
+    # Treat a missing baseline as "this axis does not price this class": the ratio is 1,
+    # which leaves the term neutral in every degree instead of crashing.
+    h = (hp / hp0) if hp0 else 1.0
+    s = (speed / speed0) if speed0 else 1.0
+    d = (dps_value / dps0) if dps0 else 1.0
     a = (h + s + d) * cost0 / 4 * tech_tier
     c = (h * s) * cost0 / 2 * tech_tier
     b = cost0 / 4 * tech_tier

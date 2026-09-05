@@ -42,6 +42,31 @@ def main():
              "have live uncommitted WIP that a wide add would capture or clobber). "
              "Stage explicit paths instead: `git add <file> [<file> ...]`.")
 
+    # (1b) THE CANONICAL REMOTE IS `cameo-mod/Cameo-mod`, AND ONLY THAT.
+    # `Zeruel87/Cameo-mod` is the ORIGINAL upstream fork and it is ABANDONED. On 2026-08-11 an
+    # agent re-added it as `upstream`, fetched it, and spent a session comparing two stray
+    # commits against a repository nobody has published to since. Anything fetched from there is
+    # historical, not current; anything pushed there is lost. The tileset category
+    # `Zeruel87 Urban` and the `credits.txt` entry are ART CREDIT, not repository pointers --
+    # this rule is about git remotes and URLs only, and must never be used to strip a credit.
+    # Narrow to the verbs that actually REACH the fork. An earlier draft matched any `git`
+    # verb and denied its own author's `git diff --stat` because the same shell line also
+    # wrote the fork's name into a doc — a read-only command cannot contact a remote.
+    _FORK_VERBS = r"remote|fetch|pull|push|clone|ls-remote|submodule|request-pull"
+    # The flag skip `(?:-\S+(?:\s+\S+)?\s+)*` covers GLOBAL flags before the verb,
+    # including the two-token `-c key=value` form: `git -c protocol.version=2 fetch <fork>`
+    # reaches the fork just as surely as a bare `git fetch`. Only flag-SHAPED tokens are
+    # skipped, so a commit message containing the word "push" is not read as the verb.
+    if re.search(r"(?:^|[\n;&|(])\s*git\s+(?:-\S+(?:\s+\S+)?\s+)*(?:"
+                 + _FORK_VERBS + r")\b", cmd) \
+            and re.search(r"Zer" + r"uel87", cmd, re.I):
+        deny("`Zeruel87/Cameo-mod` is the ABANDONED upstream fork. The canonical repository is "
+             "`cameo-mod/Cameo-mod` and nothing else -- do not add it as a remote, fetch it, "
+             "compare against it, or push to it. If you need history that predates this repo, "
+             "read docs/history/ instead. (CLAUDE.md 'The canonical repository'.) "
+             "Note: `Zeruel87 Urban` tileset categories and the credits.txt entry are ART "
+             "CREDIT and must be left alone.")
+
     # (2) NEVER HAND-PARSE VERSUS. A bespoke line-scanner that opens a dict on `Versus:` and
     # scans following `Key: <int>` lines cannot see where the block ENDS, so the
     # `PercentageVersus:` rows that live in the SAME warhead node silently overwrite the real
@@ -72,6 +97,61 @@ def main():
                 capture_output=True, text=True, timeout=15).stdout.split()
         except Exception:
             return  # git unavailable -> don't block
+        # (3a) UNAUTHORIZED SIGN-OFF. Flipping `signed_off` to true in
+        #      class_anchors.json unblocks `apply_balance --confirm` for that class,
+        #      and fit_class.py step 4 reserves it for the MAINTAINER. On 2026-08-29
+        #      an agent signed three anchors on its own validation tables; one of
+        #      them (`scout`) sat at worst |delta| 22.8 against a <=1 bar. Worse, the
+        #      next session "corrected" the docs to match — citing the artifact-wins
+        #      rule against an artifact the agent had written itself.
+        if "docs/balance/class_anchors.json" in staged:
+            try:
+                diff = subprocess.run(
+                    ["git", "-C", str(root), "diff", "--cached", "-U0",
+                     "--", "docs/balance/class_anchors.json"],
+                    capture_output=True, text=True, timeout=15).stdout
+            except Exception:
+                diff = ""
+            added = [ln for ln in diff.splitlines()
+                     if ln.startswith("+") and not ln.startswith("+++")
+                     and re.search(r'"signed_off"\s*:\s*true', ln)]
+            if added and "MAINTAINER-ORDERED SIGN-OFF" not in cmd:
+                deny("You are staging `signed_off: true` in class_anchors.json. That "
+                     "unblocks `apply_balance --confirm` for the class, and fit_class.py "
+                     "step 4 reserves signing for the MAINTAINER — a fit table is "
+                     "evidence FOR a decision, not the decision.\n\n"
+                     "On 2026-08-29 three anchors were self-signed this way; `scout` was "
+                     "among them at worst |delta| 22.8 against a <=1 bar. All reverted.\n\n"
+                     "If the maintainer has actually ordered it, quote them and put the "
+                     "words MAINTAINER-ORDERED SIGN-OFF in the commit message.")
+
+        # (3b) STALE BRANCH. AGENT_WORKSPACE.md git rule 1: "Always fetch, pull, and
+        #      merge before any commit. The remote may have changes from other
+        #      developers." Skipping it is how a branch drifted 16 commits behind
+        #      master and its regenerated ledgers came within one merge of REVERTING
+        #      another contributor's weapon-consolidation work. Advisory text did not
+        #      prevent that; this does. Uses only already-fetched refs — it never
+        #      reaches the network, so it cannot hang or fail closed on a bad link.
+        try:
+            base = subprocess.run(
+                ["git", "-C", str(root), "rev-parse", "--verify", "-q", "origin/master"],
+                capture_output=True, text=True, timeout=15)
+            behind = subprocess.run(
+                ["git", "-C", str(root), "rev-list", "--count", "HEAD..origin/master"],
+                capture_output=True, text=True, timeout=15).stdout.strip()
+        except Exception:
+            base, behind = None, ""
+        if base is not None and base.returncode == 0 and behind.isdigit() and int(behind) > 0:
+            deny(f"Your branch is {behind} commit(s) behind origin/master (as of the last "
+                 "fetch). AGENT_WORKSPACE.md git rule 1: always fetch, pull and merge "
+                 "BEFORE committing — the remote carries other contributors' work.\n\n"
+                 "This is not bookkeeping. A branch that drifted 16 behind regenerated the "
+                 "shared ledgers from a tree missing master's yaml, and came one merge away "
+                 "from reverting another contributor's weapon consolidation.\n\n"
+                 "Run: git fetch origin master && git merge origin/master\n"
+                 "Then REGENERATE anything derived (extract_stats.py for the ledgers) so it "
+                 "reflects the merged tree, and re-run the audits.")
+
         engine_prefixes = ("mods/", "OpenRA.Mods.Cameo/", "engine/")
         eng = [f for f in staged if f.startswith(engine_prefixes)]
 

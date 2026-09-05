@@ -6696,138 +6696,14 @@ CPQDEBUGDUMMY:
 		Condition: produced
 
 ^AIConyardCash:
+	# The ten-rung bot insurance ladder that gave this template its name is gone. It is now
+	# ONE trait, `DynamicBotInsurance`, on the `Player:` actor (mods/cameo/rules/player.yaml).
+	# It sat here, on the construction yard, which multiplied it by conyard count -- the
+	# late-game snowball -- and switched it off entirely when a bot lost its last conyard,
+	# which is the exact "stuck with no income" case it exists to prevent.
+	# The template name is kept because 47 actors inherit it for the two lines below.
 	Inherits@AIDifficulties: ^AIDifficulties
 	Inherits@FS: ^AIForceShield
-	BotInsurance@cameogod:
-		Condition: cameogodbotinsurance
-		Threshold: 10000
-		ThresholdDuration: 250
-	CashTrickler@cameogod:
-		Interval: 1
-		Amount: 1
-		ShowTicks: False
-		RequiresCondition: cameogodbot && cameogodbotinsurance
-	ResourcePurifier@cameogod:
-		Modifier: 5
-		ShowTicks: False
-		RequiresCondition: cameogodbot && cameogodbotinsurance
-	BotInsurance@unbeatable:
-		Condition: unbeatablebotinsurance
-		Threshold: 9000
-		ThresholdDuration: 250
-	CashTrickler@unbeatable:
-		Interval: 1
-		Amount: 1
-		ShowTicks: False
-		RequiresCondition: (unbeatablebot || cameogodbot) && unbeatablebotinsurance
-	ResourcePurifier@unbeatable:
-		Modifier: 5
-		ShowTicks: False
-		RequiresCondition: (unbeatablebot || cameogodbot) && unbeatablebotinsurance
-	BotInsurance@challenger:
-		Condition: challengerbotinsurance
-		Threshold: 8000
-		ThresholdDuration: 250
-	CashTrickler@challenger:
-		Interval: 1
-		Amount: 1
-		ShowTicks: False
-		RequiresCondition: (challengerbot || unbeatablebot || cameogodbot) && challengerbotinsurance
-	ResourcePurifier@challenger:
-		Modifier: 5
-		ShowTicks: False
-		RequiresCondition: (challengerbot || unbeatablebot || cameogodbot) && challengerbotinsurance
-	BotInsurance@brutal:
-		Condition: brutalbotinsurance
-		Threshold: 7000
-		ThresholdDuration: 250
-	CashTrickler@brutal:
-		Interval: 1
-		Amount: 1
-		ShowTicks: False
-		RequiresCondition: (brutalbot || challengerbot || unbeatablebot || cameogodbot) && brutalbotinsurance
-	ResourcePurifier@brutal:
-		Modifier: 5
-		ShowTicks: False
-		RequiresCondition: (brutalbot || challengerbot || unbeatablebot || cameogodbot) && brutalbotinsurance
-	BotInsurance@veryhard:
-		Condition: veryhardbotinsurance
-		Threshold: 6000
-		ThresholdDuration: 250
-	CashTrickler@veryhard:
-		Interval: 1
-		Amount: 1
-		ShowTicks: False
-		RequiresCondition: (veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && veryhardbotinsurance
-	ResourcePurifier@veryhard:
-		Modifier: 5
-		ShowTicks: False
-		RequiresCondition: (veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && veryhardbotinsurance
-	BotInsurance@hard:
-		Condition: hardbotinsurance
-		Threshold: 5000
-		ThresholdDuration: 250
-	CashTrickler@hard:
-		Interval: 1
-		Amount: 1
-		ShowTicks: False
-		RequiresCondition: (hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && hardbotinsurance
-	ResourcePurifier@hard:
-		Modifier: 5
-		ShowTicks: False
-		RequiresCondition: (hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && hardbotinsurance
-	BotInsurance@medium:
-		Condition: mediumbotinsurance
-		Threshold: 4000
-		ThresholdDuration: 250
-	CashTrickler@medium:
-		Interval: 1
-		Amount: 1
-		ShowTicks: False
-		RequiresCondition: (normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && mediumbotinsurance
-	ResourcePurifier@medium:
-		Modifier: 5
-		ShowTicks: False
-		RequiresCondition: (normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && mediumbotinsurance
-	BotInsurance@easy:
-		Condition: easybotinsurance
-		Threshold: 3000
-		ThresholdDuration: 250
-	CashTrickler@easy:
-		Interval: 1
-		Amount: 1
-		ShowTicks: False
-		RequiresCondition: (easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easybotinsurance
-	ResourcePurifier@easy:
-		Modifier: 5
-		ShowTicks: False
-		RequiresCondition: (easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easybotinsurance
-	BotInsurance@veryeasy:
-		Condition: veryeasybotinsurance
-		Threshold: 2000
-		ThresholdDuration: 250
-	CashTrickler@veryeasy:
-		Interval: 1
-		Amount: 1
-		ShowTicks: False
-		RequiresCondition: (veryeasybot || easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && veryeasybotinsurance
-	ResourcePurifier@veryeasy:
-		Modifier: 5
-		ShowTicks: False
-		RequiresCondition: (veryeasybot || easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && veryeasybotinsurance
-	BotInsurance@easiest:
-		Condition: easiestbotinsurance
-		Threshold: 1000
-		ThresholdDuration: 250
-	CashTrickler@easiest:
-		Interval: 1
-		Amount: 1
-		ShowTicks: False
-		RequiresCondition: (easiestbot || veryeasybot || easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easiestbotinsurance
-	ResourcePurifier@easiest:
-		Modifier: 5
-		ShowTicks: False
-		RequiresCondition: (easiestbot || veryeasybot || easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easiestbotinsurance
 
 ^Harvester:
 	# Observer Economy Damage tab — see ^Refinery above.

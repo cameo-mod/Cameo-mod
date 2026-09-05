@@ -70,7 +70,9 @@ for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai 
          survivability_pricing doc_claims doc_health hex_shield_routing \
          impact_glow_preservation dead_warhead_fields family_uniqueness \
          three_way_split tier_weapon_class heaviness_bell versus_profile \
-         meter_dilution ca_drift upstream_adoption engine_freshness; do
+         meter_dilution ca_drift upstream_adoption engine_freshness \
+         bot_insurance chrome_scale_variants chrome_master_freshness class_templates \
+         docs_maxing; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1
@@ -92,11 +94,68 @@ done
 # ⚠ Each script still exits 1 on its own findings, so CI may gate on one deliberately.
 # ⚠ tools/audit/run_all.py parses BOTH loops out of this file — keep the `for a in ...; do`
 #   shape so the two runners cannot drift apart.
-for a in code_duplication test_coverage recent_changes error_handling security; do
+#
+# `support_powers` is advisory for a DIFFERENT reason: its S1 check is red on a
+# real bug (9 support powers whose `Prerequisites:` header line is missing, so
+# the engine silently drops the level map underneath — CLAUDE.md 8b). The fix is
+# a yaml edit and yaml edits need a boot gate, so the finding is reported while
+# the suite stays green. MOVE IT INTO THE BLOCKING LOOP once S1 reads clean;
+# it guards a class grep cannot find. See docs/design/balance_exceptions.yaml.
+# `engine_constraints` is advisory for the same reason: its findings are real
+# (maintainer-ruled limits, 2026-08-29) but every fix is a yaml or pipeline
+# change needing the boot gate — E2 in particular must be a PAIRED reload/damage
+# change through apply_balance, not a sweep. MOVE IT INTO THE BLOCKING LOOP once
+# the roster is inside the limits.
+#
+# `class_redundancy` is advisory because its findings are DESIGN decisions, not
+# defects a script can fix: 70 pairs are the same class, buildable at once, and
+# aimed at the same targets. Each needs a maintainer call (re-class one, gate one
+# behind an upgrade, or differentiate its targeting). It also only sees the 336
+# TAGGED units, so the count will RISE as classification proceeds — that is
+# expected, not a regression.
+#
+# `ifv_conditions` reports REAL yaml defects, not design questions: every IFV
+# default-weapon guard misses the same three conditions (ifv-archer, ifv-grenade,
+# ifv-lightsniper), so those passengers make the vehicle fire its specialist AND
+# its default weapon. Advisory only because the fix is yaml and needs the boot
+# gate. MOVE IT INTO THE BLOCKING LOOP once F1/F3/F4 read clean.
+#
+# `check_band` enforces BALANCE_PIPELINE.md 8.1's baseband + tier-gate law: every unit's
+# class-formula price ratio must sit in the 75%-400% caps, >200% ungated must earn a gate, and
+# the 100-200% ungated band should hold >=80% of units. 8.1 says "wire into run_all.sh" and it
+# never was. Advisory because it is red on real CONTENT, not on a defect in itself: 129
+# violations across 20 classes (mbt 15/42 in the sweet spot, missile_vehicle 1/13), and every
+# fix is a priced yaml change that must go through apply_balance and the boot gate. It also
+# cannot be a per-commit gate while 0 anchors are signed — it is measuring prices nobody has
+# approved yet. MOVE IT INTO THE BLOCKING LOOP once anchors are signed and a first production
+# pass has brought the roster inside the band.
+#
+# `infantry_class_bands` measures FORMULA_V2 §6b's contiguous range bands against the tree:
+# the band DEFINES class membership, so a scout whose weapon reaches 6000 is in the wrong class.
+# Advisory because every finding is one of two maintainer calls — re-class the unit, or move its
+# range, which is a priced change that must go through apply_balance and the boot gate. It also
+# judges ONLY the four classes §6b gives a band; the nine TBD classes are measured and reported
+# without a verdict, so the count will move as those bands get ruled. MOVE IT INTO THE BLOCKING
+# LOOP once the four banded classes read clean.
+#
+# `counter_matrix` compares docs/balance/counter_matrix.yaml (design intent) with
+# what the tree does. Advisory permanently: every finding is a design question —
+# reassign a family, retag a class, or change the intent — and never a build break.
+for a in code_duplication test_coverage recent_changes error_handling security \
+         support_powers engine_constraints class_redundancy ifv_conditions \
+         infantry_class_bands counter_matrix; do
   echo "== audit_$a (advisory)"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"
 done
+
+# `check_band` is ADVISORY and lives in tools/balance/, so it gets its own line rather than a
+# slot in either loop: the cross-tree loop below sets `failed=1` on a non-zero exit, and
+# check_band exits non-zero on real CONTENT (129 violations across 20 classes). Putting it there
+# would turn the whole suite red for prices nobody has approved yet — 0 anchors are signed.
+echo "== check_band (advisory)"
+"$PYTHON" "tools/balance/check_band.py" "$@" > "$OUT/band.md" 2> "$OUT/band.err" || true
+[ -s "$OUT/band.err" ] || rm -f "$OUT/band.err"
 
 # Audits that live in tools/ rather than tools/audit/
 for a in createeffect_image:tools/audit_createeffect_image.py \
