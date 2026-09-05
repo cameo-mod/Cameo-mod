@@ -248,9 +248,9 @@ Crashes and player-visible regressions jump everything below.
    is marked DEPRECATED (line 4), load entry commented out in `mod.yaml` line 307.
    Verified dead: 0 unique templates, 0 unique weapons (Devin-Aurora 2026-08-25).
 
-5. **W23 retrofit candidates** — 2 remain (see `docs/audit/latest/phase_b_survey.md`):
-   - `ordos_laserturret` (D2k/Ordos) — blocked on Devin-Echo ownership
-   - `HydraSpit` (StarCraft/Zerg) — blocked on maintainer sign-off (mixed-family)
+5. **W23 retrofit candidates** — 1 remains (see `docs/audit/latest/phase_b_survey.md`):
+   - ~~`ordos_laserturret` (D2k/Ordos)~~ — **DONE** by Devin-Aurora (`9cdfa40dd`). Converted from `^LaserWeapon` to `^Warhead_Laser_Heavy` + `^Projectile_Laser_Heavy` + `^Effect_Laser_Heavy`. Damage 10000 preserved verbatim.
+   - `HydraSpit` (StarCraft/Zerg) — blocked on maintainer sign-off (mixed-family: LightChemicalWeapon dominant)
 
 **W24 safe pool status (2026-09-05): EXHAUSTED.** `plan_warhead_collapse.py` reports 193 directly actor-armed multi-main weapons, but the 85 HIGH-confidence weapons still carry mixed old families and compatibility warheads (e.g. `CommandoM16`, `DuelistTankCannon`). The plan explicitly warns that numeric-sum preservation does not preserve armor profile, geometry, relationships, or damage types, so these are design-review items, not safe mechanical collapses. `phase_b_survey` now shows 2 concrete old-family weapons (`ordos_laserturret` locked to Echo, `HydraSpit` mixed) and `find_mechanical_phase_a` reports 0 clean single-inherit candidates. The front moves to maintainer sign-off / ownership.
 
