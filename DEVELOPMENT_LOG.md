@@ -1,6 +1,58 @@
 ﻿# Development Log
 
 
+## Devin-Ember — RED GATE TRIAGE, part 1: diagnosis + routing (2026-09-05, night)
+
+**Identity:** Devin-Ember (SWE-1.7 Max). Executing Claude's red-gate assignment.
+Outputs below are report-verified, not summarized.
+
+**`min_range` — 1 finding:** `DebrisMissile` Range 7168 / MinRange 512, expected
+1435. Debris chunks spawn at the impact point — a 1435 min-range would break them.
+Verdict: **needs a whitelist/ruling**, not a fix. Route: whoever owns the debris
+weapons in `weapons.yaml` (generated file -> generator-side exception or audit
+exemption).
+
+**`inherits` — blocking classes CLEAN:** V3 dangling = 0, V2 cross-faction = 0.
+The red is V1 (277 concrete->concrete inherits) + V4 (1942 chains deeper than 3) +
+V5 (102) — all pre-existing structural debt, no ratchet constant in the script.
+Verdict: **known debt**, not a regression; needs the structural cleanup wave, not
+a targeted fix today.
+
+**`buildable_order` — 1 NEW violation + 1073 pre-existing:** the single new
+prerequisite-order failure is `atreides_fremen`: "tech token '~hightech.atreides'
+appears after promotion token" — **Aurora's promotion tree** (`03448a9cf`) put the
+tokens in the wrong order. Route: **Devin-Aurora**, swap the order in
+`D2k/Atreides/yaml/infantry.yaml`. The 1073 palette-order violations are
+pre-existing debt across all factions.
+
+**`physical_state_warheads` — 208, all ONE systemic pattern:** every finding is
+"applies Corrosion through multiple bindings [100, 100] (combined nominal 200;
+runtime rounds each separately)" — weapons inheriting TWO chemical %-warheads
+(e.g. Light+Medium Chemical) each binding Corrosion at scale 100. That is a
+template-design issue in the Chemical percentage families, not 208 separate bugs.
+Route: **generator-level ruling** (Nova / maintainer) — merge the double binding
+or accept the rounding; cannot be fixed per-weapon.
+
+**`weapon_suffixes` — 28 X1 + 10 X2 + 10 X3, mostly legacy:** the NEW debt is the
+D2k faction work: `corrino_sardaukar_bazooka` x2 (**Dawn**), `harkonnen_sardaukar`
+(**Blaze**) — elite armaments reusing `D2K_TowerMissile` without an `_elite`
+variant. If that's intentional (elite infantry sharing the base weapon), it needs
+a whitelist note, not a rename. Rest: RA2/Shared + RA2Mod + TS + legacy
+`rules/redalert2.yaml` naming debt, pre-existing.
+
+**`meter_dilution` — the real regression (32 -> 36):** full 36-actor list pulled
+via `--all`. Net-new offenders since the 32-baseline report (`2300cf9dd`):
+`japan_japanesespeedboat` (9.56x, worst), `cabal_hunterkillermk1` + `_elite`,
+`schwarzermond_drone`, `tkm_iroquois`, `protoss_idol` (+ possibly `tkm_stryker` /
+`naxis_ratte` from the old hidden tail). `cruiser_f.steel` is the only actor that
+LEFT the list. A read-only forensic trace (which weapon, which commit, which lane)
+is running; routing names land when it reports. NOTE: the offenders are
+non-D2k factions — likely no lane owner; may need Claude to assign.
+
+**Report-back per Claude's format:** gate names + the table rows above are the
+actual report output (run 2026-09-05, HEAD `c6313f507`).
+
+
 ## Devin-Aurora — Atreides self-containment audit + cross-pack dependency on Ixian (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
