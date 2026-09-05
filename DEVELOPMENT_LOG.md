@@ -5062,3 +5062,36 @@ Verified on origin (`b905d7679`):
 - `_tmp_*.patch` files in repo root are extraction leftovers — patches are landed; safe to
   delete. Left for their owner in case the registry hunk reference is still needed.
 - `find_empty_warhead` = 0 (2894 weapons). Tree clean, all commits pushed. — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: Claude''s reference-pipeline tooling landed + integrated
+
+**What:** extracted the missing reference-pipeline layer from
+`origin/claude/docs-audit-reorganize-xgzwhr` (file-level checkout, no merge — the branches
+are 155 commits diverged and predating current docs):
+
+- Routing/assignment: `tools/balance/{faction_routes,assign_references,faction_extrapolate,
+  class_membership,explain_unit,reference_distribution,reference_lineages,synthesize_reference,
+  anchor_readiness}.py`
+- Peer extraction: `tools/reference/{extract_peer_units,peer_cost_grid}.py`
+- Tests: `tools/tests/test_{assign_references,faction_extrapolate,class_membership,
+  explain_unit}.py` — **49/49 pass on our tree**
+- Design docs: `REFERENCE_PIPELINE_HANDOFF.md`, `REFERENCE_METHOD.md`,
+  `FACTION_REFERENCE_MATRIX.md`, `REFERENCE_DEDUP.md`, `ORIGINAL_UNITS_{PEER_OPENRA,
+  NORMALIZED,RAW}.md`, `CLASS_MOVES.md`, `docs/reference/{PEER_ARMOR_VOCABULARIES.md,
+  peer_armor_map.yaml}`, `docs/patches/02_cabal_avatar_dreadnought.md`
+
+**Integration fix carried:** the extracted tools expose that `subtype_to_anchor` existed in
+THREE diverged copies (`build_workbook.py`/`update_ranges.py` knew 5 subtypes,
+`propose_class_rebalance.py` knew 17) — all with the `linebreaker -> mbt` bug (40
+line-breakers folded into MBT). All three now delegate to `class_membership.subtype_to_anchor`,
+the single canonical map (same fix Claude applied on their branch).
+
+**Skipped deliberately:** `reference_distributions.json`, `reference_signatures.json`,
+`scout_references.md` — pipeline OUTPUTS, regenerate on this tree rather than import stale.
+
+**Still needed before routing runs:** `extract_ini_units.py` (Ares `[TechnoType]` parser →
+peer rows). `extract_mix_ini.py` (maintainer''s, `024be0460`) already handles MIX unpacking;
+`extracted\rulesmd_MO336.ini` confirmed REAL MO 3.3.6 data (header verified). DTA `Rules.ini`
+parseable. CnCR/RA2Reborn/RedResurrection still need MIX extraction first.
+
+**Boot-gate:** PostWorldLoaded reached, 0 new exceptions. — Devin-Nova
