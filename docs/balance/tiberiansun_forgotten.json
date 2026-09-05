@@ -1795,7 +1795,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6272",
       "reloaddelay": "6",
@@ -1808,6 +1808,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSMutVulcanTurret",
@@ -2054,7 +2055,7 @@
       "warheads": [
        "^Warhead_Chemical_Heavy"
       ],
-      "weapon": "TSChemsprayUp",
+      "weapon": "TSChemsprayUP",
       "weapon_class_source": "template"
      },
      {
@@ -3507,7 +3508,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5611",
       "reloaddelay": "8",
@@ -3520,6 +3521,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSSergGun",
@@ -3537,7 +3539,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5611",
       "reloaddelay": "8",
@@ -3550,6 +3552,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSSergGun",
@@ -6882,7 +6885,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6603",
       "reloaddelay": "5",
@@ -6895,6 +6898,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSBowlerCannon",
@@ -8745,6 +8749,13 @@
         "spread": "275",
         "tag": "Chemical_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "30000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CannonChem_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -8763,7 +8774,8 @@
        "^TSCannonEffect"
       ],
       "warheads": [
-       "^Warhead_CannonChem_Medium"
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_Chemical_Medium"
       ],
       "weapon": "TSScoopDualChem",
       "weapon_class_source": "template"

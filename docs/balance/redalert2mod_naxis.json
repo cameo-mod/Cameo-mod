@@ -365,7 +365,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
@@ -375,6 +375,7 @@
        "NaxPlaneRockets_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxInterceptorRockets",
@@ -449,7 +450,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
@@ -462,6 +463,7 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
@@ -481,7 +483,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
@@ -495,6 +497,7 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
@@ -1616,7 +1619,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7555",
       "reloaddelay": "60",
@@ -1626,6 +1629,7 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunTop",
@@ -2925,7 +2929,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5570",
       "reloaddelay": "60",
@@ -2934,6 +2938,7 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunSmall",
@@ -2952,7 +2957,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8355",
       "reloaddelay": "60",
@@ -2961,6 +2966,7 @@
        "NaxiWW2MachinegunSmall"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunSmall_AA",
@@ -3371,7 +3377,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8970",
       "reloaddelay": "90",
@@ -3381,6 +3387,7 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegunner",
@@ -3400,7 +3407,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9970",
       "reloaddelay": "90",
@@ -3410,6 +3417,7 @@
        "NaxiWW2Machinegunner"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegunner_elite",
@@ -3429,7 +3437,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "8970",
       "reloaddelay": "90",
@@ -3439,6 +3447,7 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegunner",
@@ -3458,7 +3467,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "9970",
       "reloaddelay": "90",
@@ -3468,6 +3477,7 @@
        "NaxiWW2Machinegunner"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegunner_elite",
@@ -5662,7 +5672,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "75",
@@ -5676,6 +5686,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "naxis_sssoldier_smg",
@@ -5694,7 +5705,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "75",
@@ -5704,6 +5715,7 @@
        "naxis_sssoldier_smg"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "naxis_sssoldier_smg_elite",
@@ -5723,7 +5735,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "75",
@@ -5737,6 +5749,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "naxis_sssoldier_smg",
@@ -5756,7 +5769,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "75",
@@ -5766,6 +5779,7 @@
        "naxis_sssoldier_smg"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "naxis_sssoldier_smg_elite",
@@ -6042,7 +6056,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "15000",
       "reloaddelay": "125",
@@ -6056,11 +6070,12 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiMissileUboat",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -7103,7 +7118,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7555",
       "reloaddelay": "60",
@@ -7113,6 +7128,7 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunTop",
@@ -7132,7 +7148,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7555",
       "reloaddelay": "60",
@@ -7142,6 +7158,7 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunTop_AA",
@@ -7684,7 +7701,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5570",
       "reloaddelay": "60",
@@ -7695,6 +7712,7 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegun",
@@ -7713,7 +7731,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8355",
       "reloaddelay": "60",
@@ -7722,6 +7740,7 @@
        "NaxiWW2Machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegun_AA",
@@ -8323,7 +8342,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5757",
       "reloaddelay": "80",
@@ -8334,6 +8353,7 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2KübelwagenMachinegun",

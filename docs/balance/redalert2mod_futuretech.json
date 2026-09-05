@@ -26,7 +26,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "32000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "FutureCryocopterMissileAP_Medium",
@@ -41,7 +41,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5200",
       "reloaddelay": "60",
@@ -54,7 +54,8 @@
        "^FutureCryocopterRocketMissileCompatibility"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "Future_Cryocopter_Rocket",
       "weapon_class_source": "template"
@@ -717,7 +718,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1000",
       "pricing": true,
       "range": "5000",
@@ -732,11 +733,12 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2HornetMissile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3554,7 +3556,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5806",
       "reloaddelay": "40",
@@ -3566,6 +3568,7 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "Future_Wheel_MG",
@@ -3584,7 +3587,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6806",
       "reloaddelay": "25",
@@ -3595,6 +3598,7 @@
        "^SteelChaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "Future_Wheel_MG_elite",
@@ -5968,7 +5972,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "21",
@@ -5979,6 +5983,7 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ACV_Machinegun",
@@ -6286,7 +6291,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "14",
@@ -6298,6 +6303,7 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60",

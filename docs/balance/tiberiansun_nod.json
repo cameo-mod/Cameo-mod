@@ -1835,7 +1835,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6217",
       "reloaddelay": "52",
@@ -1849,6 +1849,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "elitecadregun",
@@ -1929,7 +1930,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6217",
       "reloaddelay": "52",
@@ -1943,6 +1944,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "elitecadregun",
@@ -4317,7 +4319,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6554",
       "reloaddelay": "40",
@@ -4331,6 +4333,7 @@
        "^Effect_MissileHE_Medium"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium"
       ],
       "weapon": "TSBikeMissile",
@@ -5168,10 +5171,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "12600",
+        "damage": "6000",
         "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
+        "spread": "120",
+        "tag": "CannonAP_Medium",
         "type": "AreaDamage"
        },
        {
@@ -5197,7 +5200,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5423",
       "reloaddelay": "32",
@@ -5212,7 +5215,7 @@
        "^TSLaser90mmCannonCompatibility"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy"
+       "^Warhead_CannonAP_Medium"
       ],
       "weapon": "TSLaser90mm",
       "weapon_class_source": "template"
@@ -5248,10 +5251,10 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "12600",
+        "damage": "6000",
         "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
+        "spread": "120",
+        "tag": "CannonAP_Medium",
         "type": "AreaDamage"
        },
        {
@@ -5277,7 +5280,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6754",
       "reloaddelay": "26",
@@ -5287,7 +5290,7 @@
        "TSLaser90mm"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy"
+       "^Warhead_CannonAP_Medium"
       ],
       "weapon": "TSLaser90mmDep",
       "weapon_class_source": "template"

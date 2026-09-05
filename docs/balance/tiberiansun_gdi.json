@@ -670,7 +670,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "533",
         "tag": "Sonic_Heavy",
@@ -1889,7 +1889,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6809",
       "reloaddelay": "48",
@@ -1903,6 +1903,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSVulcanGun",

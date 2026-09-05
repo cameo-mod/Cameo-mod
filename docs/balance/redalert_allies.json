@@ -1837,7 +1837,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "48",
@@ -1851,6 +1851,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RAVulcan",
@@ -1870,7 +1871,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6500",
       "reloaddelay": "48",
@@ -1884,6 +1885,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RAVulcan",
@@ -3496,7 +3498,12 @@
        "^Compatibility_CannonHE_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "^Effect_CannonHE_Medium",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TankDestroyerCannon"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5259,7 +5266,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "58",
@@ -5273,6 +5280,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SheridanVulcan",

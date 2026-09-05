@@ -4066,7 +4066,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4822",
       "reloaddelay": "11",
@@ -4079,6 +4079,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_ak47conscript_rifle",
@@ -4098,7 +4099,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "4822",
       "reloaddelay": "11",
@@ -4111,6 +4112,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_ak47conscript_rifle",
@@ -8225,7 +8227,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
@@ -8238,6 +8240,7 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BTRMachineGun",
@@ -8256,7 +8259,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -8265,6 +8268,7 @@
        "BTRMachineGun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BTRMachineGun_AA",
@@ -9196,7 +9200,7 @@
        "^Warhead_Thermobaric_Heavy",
        "^Projectile_Flame_Medium",
        "^Effect_Flame_Medium",
-       "^Effect_CannonHE_Heavy"
+       "HammerTankCannon"
       ],
       "warheads": [
        "^Warhead_Thermobaric_Heavy",
@@ -9633,10 +9637,11 @@
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
        "^Effect_Flame_Medium",
-       "^Effect_CannonHE_Medium"
+       "105mm"
       ],
       "warheads": [
-       "^Warhead_CannonFire_Medium"
+       "^Warhead_Flame_Medium",
+       "^Warhead_CannonHE_Medium"
       ],
       "weapon": "105mmThermobaric",
       "weapon_class_source": "template"
@@ -9902,9 +9907,9 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 76, 57, 43, 31, 17, 0",
-        "spread": "338",
-        "tag": "Thermobaric_Heavy",
+        "falloff": "100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0",
+        "spread": "400",
+        "tag": "CannonNuke_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -9916,16 +9921,15 @@
       "requires": "ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Thermobaric_Heavy",
-       "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium",
-       "KotinCannon"
+       "^Warhead_CannonNuke_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^Effect_Nuclear_Super"
       ],
       "warheads": [
-       "^Warhead_Thermobaric_Heavy",
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonNuke_Heavy"
       ],
-      "weapon": "KotinCannonThermobaric",
+      "weapon": "KotinCannonNuclearShell",
       "weapon_class_source": "template"
      }
     ],
@@ -10224,7 +10228,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -10235,13 +10239,18 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy",
+       "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonFire_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "ra120mmThermobaric",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -10280,7 +10289,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -10290,10 +10299,12 @@
        "ra120mmThermobaric"
       ],
       "warheads": [
-       "^Warhead_CannonFire_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "ra120mmThermobaricTargetingComputer",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -11498,7 +11509,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
@@ -11509,13 +11520,18 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy",
+       "^Projectile_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonFire_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "ra120mm2Thermobaric",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -11554,7 +11570,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
@@ -11564,10 +11580,12 @@
        "ra120mm2Thermobaric"
       ],
       "warheads": [
-       "^Warhead_CannonFire_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "ra120mm2ThermobaricTargetingComputer",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
