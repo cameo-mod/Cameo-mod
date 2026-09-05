@@ -6336,3 +6336,23 @@ Asian/TS groups updated, `DuelistTankCannon` + its `ROLE_BLEND_DECISIONS` sideca
 `CannonHE_Medium`, Ixian pair updated, `JapanesePlasmaBomb` removed. Remaining step for the
 curator: `intentional_composites.py --write` then `audit_three_way_split.py --write`. —
 Devin-Nova
+
+## 2026-09-05 — Devin-Nova: composite registry re-curation COMPLETE — audit unblocked
+
+Executed the remaining steps of my assigned task (the curated-group edits were applied
+in-worktree on my posted drift map; I verified each against live resolution, then finished
+the regen + gates):
+
+- `intentional_composites.py --write` -> manifest regenerated: **224 entries**, validator
+  prints `PASS 224 intentional composite fingerprints` (was: tool crash / FAIL on 13 stale
+  mains + ~130 stale digests).
+- `audit_three_way_split.py --write` -> `docs/audit/latest/three_way_split.md` regenerated
+  cleanly; the peer''s `RAW_SPLIT_BASELINE` 340->339 ratchet (documented: HydraSpit collapse
+  per maintainer ruling + W24_COLLAPSE_REVIEW.md sec.8) is included.
+- The `wc2deathknight*` stale digests Aurora flagged resolved via the manifest regen
+  (digests now match live resolved state).
+- Boot-gate: `MenuPostProcessEffect.PostWorldLoaded` in perf.log, 0 new exception logs.
+
+This clears the `three_way_split` audit crash and the doc_claims `multi_main` blockage.
+Remaining red gates are all pre-existing baselines or live-work drift, none from this work.
+— Devin-Nova

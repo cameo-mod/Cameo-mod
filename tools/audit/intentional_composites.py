@@ -34,18 +34,23 @@ DECISION_GROUPS = {
           "RA2DemoBomb", "ReactorNuke", "ReactorNukeWeak"),
          ("10Dam_areanuke3", "11Dam_areanuke3", "1Dam_impact",
           "4Dam_areanuke1", "7Dam_areanuke2", "8Dam_areanuke2", "Damage")),
-        (("CabalMagicNuke", "PulseMissile"),
+        (("CabalMagicNuke",),
          ("10Dam_areanuke3", "11Dam_areanuke3", "1Dam_impact",
           "4Dam_areanuke1", "7Dam_areanuke2", "8Dam_areanuke2",
           "Tesla_Heavy", "Tesla_Super")),
+        (("PulseMissile",),
+         ("10Dam_areanuke3", "11Dam_areanuke3", "1Dam_impact",
+          "4Dam_areanuke1", "7Dam_areanuke2", "8Dam_areanuke2",
+          "Tesla_Super")),
         (("supernova_missile_super",),
          ("10Dam_areanukec", "1Dam_impact", "3Dam_areanukea",
           "7Dam_areanukeb")),
         (("Atomic", "NaxiV1Rocket", "RA2Atomic", "RAAtomic"),
-         ("Nuclear_Super", "Tesla_Heavy", "Tesla_Super")),
-        (("SteelInspectorIonCannon", "SteelInspectorIonCannonDamage",
-          "SteelIonCannonDamage", "TDIonCannonDamage"),
+         ("Nuclear_Super", "Tesla_Super")),
+        (("SteelInspectorIonCannon", "SteelInspectorIonCannonDamage"),
          ("IonCannon", "Tesla_Heavy", "Tesla_Super")),
+        (("SteelIonCannonDamage", "TDIonCannonDamage"),
+         ("IonCannon", "Tesla_Super")),
         (("AsianTSIonCannon", "TSIonCannon"),
          ("IonCannon", "TeslaChargedWeapon", "TeslaWeapon",
           "Tesla_Super")),
@@ -146,8 +151,6 @@ DECISION_GROUPS = {
          ("Demolition_Light", "Flame_Medium", "Laser_Heavy")),
         (("WaveTurretImpact",),
          ("RailgunWeapon", "Railgun_Heavy", "Tesla_Heavy")),
-        (("JapanesePlasmaBomb",),
-         ("Chemical_Heavy", "Demolition_Heavy", "Flame_Heavy")),
         (("MedicFlare",),
          ("MediumChemicalWeapon", "PreservedFlat_FlakWeapon",
           "PreservedFlat_LaserWeapon", "PreservedFlat_LightFlameWeapon")),
@@ -319,7 +322,7 @@ DECISION_GROUPS = {
          ("Bullet_Medium", "CannonHE_Heavy", "Concussion_Light")),
         (("GoliathMk2MG",), ("Bullet_Medium", "CannonHE_Heavy")),
         (("DuelistTankCannon",),
-         ("CannonHE_Heavy", "CannonHE_Medium", "PreservedFlat_Grenade",
+         ("CannonHE_Heavy", "PreservedFlat_Grenade",
           "PreservedFlat_HeavyBomb", "PreservedFlat_MediumFlameWeapon",
           "PreservedFlat_TankDestroyerCannon")),
         (("HMG_Duelist_upgrade",), ("Bullet_Medium", "CannonHE_Heavy")),
@@ -329,7 +332,7 @@ DECISION_GROUPS = {
     ),
     "maintainer-curated signature": (
         (("IxianCombatTankCannon", "HeavyIxianCombatTankCannon"),
-         ("CannonAP_Light", "CannonHE_Heavy", "CannonHE_Medium")),
+         ("CannonAP_Light", "CannonHE_Heavy")),
         (("D2K_Rocket_Trooper1", "D2K_Rocket_Trooper_AA"),
          ("Flak_Medium", "MissileAP_Heavy", "MissileAP_Light")),
         (("D2K_Rocket_Trooper2", "D2K_Rocket_Trooper_AGOnly"),
@@ -615,7 +618,6 @@ ROLE_BLEND_DECISIONS = {
     "DuelistTankCannon": {
         "component_purposes": {
             "CannonHE_Heavy": "heavy cannon contribution to the Duelist's vehicle and structure role",
-            "CannonHE_Medium": "medium cannon contribution to the Duelist's versatile ground role",
             "PreservedFlat_Grenade": "separate hostile-target grenade geometry in the Duelist impact",
             "PreservedFlat_HeavyBomb": "separate ground and ship heavy-bomb route in the Duelist impact",
             "PreservedFlat_MediumFlameWeapon": (
@@ -627,7 +629,7 @@ ROLE_BLEND_DECISIONS = {
         },
         "rationale": (
             "The maintainer defined the Ixian Duelist as versatile against vehicles and "
-            "structures with limited air holdoff, but not universally dominant; its six "
+            "structures with limited air holdoff, but not universally dominant; its "
             "resolved mains deliberately retain distinct armor, geometry, relationship, "
             "target, and Temperature-state behavior."
         ),

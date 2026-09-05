@@ -64,7 +64,10 @@ from intentional_composites import (  # noqa: E402
 # 1190 -> 1178 the same day: a MEASUREMENT fix, not converted weapons. See FRIENDLY_FIRE below.
 # Hydralisk was deliberately restored as an exact four-profile composite after
 # its single-main fold caused a live 1.6x-2.38x ground-damage regression.
-RAW_SPLIT_BASELINE = 340
+# 340 -> 339 on 2026-09-02: HydraSpit collapsed from four damage mains onto the new
+# ^Warhead_BulletChem_Light family (maintainer ruling; docs/design/W24_COLLAPSE_REVIEW.md
+# ┬º8). Structural consolidation, which is the only reason this number may move.
+RAW_SPLIT_BASELINE = 339
 SPLIT_BASELINE = 114
 INTENTIONAL_COMPOSITES = reviewed_fingerprints()
 REPORT = pathlib.Path(__file__).resolve().parents[2] / "docs/audit/latest/three_way_split.md"
