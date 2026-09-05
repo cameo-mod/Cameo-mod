@@ -1,6 +1,113 @@
 ﻿# Development Log
 
 
+## Devin-Aurora — FLEET COORDINATION PASS #2 + buildable_order fix (2026-09-05, night)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### What I just did
+
+1. **Fixed buildable_order violation** (commit `98a67eb45`): Ember's red-gate triage
+   routed `atreides_fremen` prereq order violation to me. Fixed by swapping
+   `~hightech.atreides` before `upgrade_barracks` in `infantry.yaml:94`.
+   Audit verified: violation gone. Boot-gate: PostWorldLoaded confirmed, 0 exceptions.
+
+2. **Verified boot-gate is GREEN**: perf.log ends with `MenuPostProcessEffect.PostWorldLoaded`
+   (29935 ms total), no new exception logs. Tree is bootable at HEAD `98a67eb45`.
+
+3. **Reviewed all agents' latest commits and DEVELOPMENT_LOG entries**.
+
+### Current fleet status (HEAD: `98a67eb45`)
+
+**What's DONE since last coordination pass:**
+- Nova: REFLECTOR ruling executed, gen_sync drift=0, PLATING_OVERRIDES reverted (`458f82f97`)
+- Ember: Red-gate triage parts 1+2 complete — 5 audits diagnosed, meter_dilution forensic done (`107c2bcbd`, `3b2a8bbab`)
+- Ember: D2k turret cross-pack dependency flagged as still dangling (`62a674369`)
+- Claude-Local: Peer extraction unblocked — 5→9 peers, 1667→1946 units (`137d994f7`)
+- Aurora: buildable_order violation fixed (`98a67eb45`)
+- Aurora: Atreides self-containment audit complete (`1c123b6c6`)
+- Aurora: Atreides support powers + MCV crate fix (`2dbf19fd4`, `f4211c4e2`)
+
+**What's still OPEN:**
+
+### Per-agent orders (updated)
+
+**Claude-Local (fleet coordinator) — 6 open rulings awaited:**
+1. `ordos_laserturret` "unique and special" mechanical spec
+2. Heaviness bell timing for existing level families
+3. Composite registry re-curation priority
+4. CannonTesla family cleanup (Nova partially done)
+5. `DebrisMissile` min_range whitelist (Ember's triage — needs ruling, not fix)
+6. `physical_state_warheads` 208-findings pattern — generator-level ruling (merge double Chemical binding or accept rounding)
+7. `meter_dilution` 32→36 regression — design question: should non-state guns on state units feed the same meter? (Ember's forensic)
+8. meter_dilution actors in unassigned lanes (japan_japanesespeedboat, schwarzermond_drone, tkm_iroquois/stryker, protoss_idol, naxis_ratte) — need lane assignment
+
+**Devin-Nova — P0/P1:**
+- ✅ REFLECTOR ruling executed, gen_sync drift=0. DONE.
+- ✅ PLATING_OVERRIDES reverted. DONE.
+- **CannonTesla family cleanup** — pick one family, retire the other. Straggler at `RedAlert2/Soviets/yaml/weapons.yaml:653`.
+- **Composite registry re-curation** — continue `intentional_composites.py` work. `wc2deathknightFire` stale digest still blocked.
+- **physical_state_warheads** — 208 findings are a generator-level template issue (double Chemical percentage binding). Needs your ruling or maintainer ruling.
+
+**Devin-Ember — P1, verifier lane:**
+- ✅ Red-gate triage parts 1+2 complete. Excellent work.
+- ✅ doc_claims registry updated. DONE.
+- ✅ Generator-owns-Versus law promoted to DESIGN.md + LESSONS_LEARNED.md. DONE.
+- **Remaining**: monitor for new boot-blockers. The D2k turret cross-pack dependency is still dangling (Echo's move).
+
+**Devin-Cyrus — P0, STILL BLOCKING:**
+- `git log` still shows NO WC2 hero commit from you. **Dawn is still waiting.**
+- **Commit your WC2 hero pass NOW.** Verify Hellscream sequence ref, run gates, boot-gate, commit, post output.
+- Ember's meter_dilution report also routes `wc2_humans_mage`/`archmage` to you (pre-existing, NOT your hero work — armaments unchanged). Just be aware.
+
+**Devin-Dawn — P1, gated on Cyrus:**
+- WC2 blocker STILL not resolved. Verify with Cyrus before starting Corrino Phase 3.
+- Ember's weapon_suffixes audit flags `corrino_sardaukar_bazooka` x2 — your lane. If elite infantry sharing base weapon is intentional, add a whitelist note.
+- Corrino needs a promotion tree — use Atreides/Ordos as the pattern.
+
+**Devin-Blaze — P1, D2k Shared + maintainer ruling:**
+- **Revert `combat_tank.harkonnen` + husk to `DATA.R16`** (maintainer ruling). Still pending.
+- Fix `harkonnen_devestator.png` typo (devEstator).
+- Continue moving shared D2k content into `ContentPacks/D2k/Shared/`.
+- Harkonnen needs a promotion tree (currently placeholder).
+- Ember's weapon_suffixes audit flags `harkonnen_sardaukar` — your lane.
+
+**Devin-Echo — P1, CRITICAL for dynamic faction loading:**
+- **MOVE `110mm_Gun` and `D2K_TowerMissile` from `Ixian/yaml/weapons.yaml` to `Shared/yaml/weapons.yaml`**. This is the #1 priority in your lane. Ember verified the dependency is still dangling. I attempted a copy but it caused merge conflicts — it must be a MOVE (remove from Ixian, add to Shared). I own the Shared file and can help.
+- Review CABAL file after `cabal_avatar` patch.
+- Re-verify D2k/Ixian before Phase 4.
+- Ember's meter_dilution report routes `cabal_hunterkillermk1` + `_elite` to you.
+
+**Claude-Cloud:**
+- Rebase `claude/*` branches against current HEAD (`98a67eb45`).
+- Extract specific patch files only — do NOT wholesale merge branches.
+
+### What I am working on
+
+My Atreides lane is feature-complete for current scope:
+- ✅ Unique weapons ported
+- ✅ Promotion tree (5 tiers)
+- ✅ combat_tank_husk
+- ✅ Support powers (Ornithopter Airstrike + Fremen Guerilla)
+- ✅ MCV crate coverage
+- ✅ buildable_order violation fixed
+- ✅ Self-containment audit complete (cross-pack dep on Ixian documented)
+
+**Next steps in my lane (awaiting dependencies):**
+1. **Await Echo's move** of `110mm_Gun`/`D2K_TowerMissile` to Shared — then verify Atreides turrets resolve from Shared.
+2. **Await Claude's ruling** on `ordos_laserturret` before touching Ordos weapons.
+3. **D2k/Shared/yaml/weapons.yaml** — coordinate with Blaze on shared weapon consolidation.
+4. **No new weapon families** (heaviness-bell stays OFF).
+
+### How my work affects other agents
+
+- **Dawn**: Atreides is the reference faction for promotion trees. Use it as the pattern for Corrino.
+- **Echo**: The turret weapon move is the critical path for dynamic faction loading. I can help with the Shared file.
+- **Blaze**: Harkonnen promotion tree should follow the same 5-tier pattern.
+- **Ember**: The buildable_order violation I fixed was the only NEW one. The remaining 1073 are pre-existing.
+- **Nova**: The physical_state_warheads 208-findings pattern is a generator issue in your lane.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Ember — verifier flag: D2k turret cross-pack dependency still dangling (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
