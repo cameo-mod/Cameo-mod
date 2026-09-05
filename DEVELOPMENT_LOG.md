@@ -4725,5 +4725,20 @@ DEVELOPMENT_LOG §"Active claims" BEFORE editing and sign commits `Co-Authored-B
 - Confirmed the tree boot-gates: launch-game.cmd reaches MenuPostProcessEffect.PostWorldLoaded with zero new exceptions on HEAD 95261becb.
 - Dispatched background subagent 60ae4cbc to convert the next safe W24 broadcast cluster in an unclaimed ContentPack weapon file (avoiding D2k/Warcraft2/CABAL/TiberianSun claimed sets).
 
-**Subagent W24 result (terminated 2026-09-05):** subagent `60ae4cbc` did not find a safe same-family broadcast cluster it could convert without maintainer sign-off. It generated `scratchpad/multimain_all.txt` and `scratchpad/multimain_marked.txt` showing the remaining multi-main weapons are mixed-family or intentional reviewed composites. This confirms `HANDOFF.md` Aurora/Nova assessment that the W24 safe pool is exhausted and the front has moved to W23 / D2k pack completion (both currently blocked on ownership or sign-off).`n`n**My next step:** commit the balance-ledger refresh (extract_stats 0 drift) and the verifier/coordination log updates. Then await maintainer direction on which W23 candidate or D2k pack file-set to take next.
+**Subagent W24 result (terminated 2026-09-05):** subagent `60ae4cbc` did not find a safe same-family broadcast cluster it could convert without maintainer sign-off. It generated `scratchpad/multimain_all.txt` and `scratchpad/multimain_marked.txt` showing the remaining multi-main weapons are mixed-family or intentional reviewed composites. This confirms `HANDOFF.md` Aurora/Nova assessment that the W24 safe pool is exhausted and the front has moved to W23 / D2k pack completion (both currently blocked on ownership or sign-off).
+
+**My next step:** commit the balance-ledger refresh (extract_stats 0 drift) and the verifier/coordination log updates. Then await maintainer direction on which W23 candidate or D2k pack file-set to take next.
+
+---
+
+## Session continuation — W24/W23/D2k assessment
+
+- Re-ran `python tools/balance/plan_warhead_collapse.py`: 193 directly actor-armed multi-main weapons remain; only 26 need a human ruling, but the 85 HIGH-confidence weapons still carry mixed families / extra compatibility warheads (e.g. `CommandoM16`, `DuelistTankCannon`) and the plan explicitly warns that numeric-sum preservation does not preserve armor profile, geometry, relationships, or damage types. Treat these as design-review items, not safe mechanical conversions.
+- Re-ran `python tools/audit/phase_b_survey.py`: still 2 concrete old-family weapons — `ordos_laserturret` (locked to Aurora) and `HydraSpit` (mixed, needs maintainer sign-off for dominant family `LightChemicalWeapon`).
+- Re-ran `python tools/audit/find_mechanical_phase_a.py`: 0 clean single-inherit old-family candidates.
+- Re-ran `python tools/balance/verify_generator_sync.py`: 0 drift (142 shared templates).
+- Re-ran `python tools/balance/extract_stats.py`: 33 ledgers, 0 drifted.
+- Boot-gate passed on current HEAD (2a19b6de4): reached main menu, no new exception logs.
+
+**Conclusion:** the mechanical Phase A/B pools are now empty. W24 is a design-review queue and W23 is a locked/sign-off queue. D2k packs are the highest product priority but Atreides/Harkonnen/Corrino/Ordos/Shared/Ixian are all claimed. Next move needs a maintainer/file-set assignment or explicit sign-off to convert a Phase B weapon.
 

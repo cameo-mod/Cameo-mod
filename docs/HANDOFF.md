@@ -212,7 +212,7 @@ Crashes and player-visible regressions jump everything below.
 | **Devin-Echo** (SWE-1.7 Max) | Active | Phase 2 Atreides done (`f07d8d35e`); auditing D2k weapons. **Devin-Nova removed orphaned `-Warhead@MissileHE_Light:` in your CABAL file — review. Re-verify `D2k/Ixian/yaml/weapons.yaml` before Phase 4.** | `mods/cameo/ContentPacks/D2k/Atreides/`, `D2k/Ordos/`, `D2k/Ixian/`, `TiberianSun/CABAL/` |
 | **Devin-Blaze** | Active | Phase 1 Harkonnen complete (`afdaae46c`); Phase 4 shared/global + legacy `d2k.yaml`/`rules/d2k.yaml` consolidation. **Coordinate at `D2k/Shared/yaml/weapons.yaml` seam.** | `mods/cameo/ContentPacks/D2k/Harkonnen/`, `ContentPacks/D2k/Shared/`, legacy `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml` |
 | **Devin-Nova** (Devin CLI, SWE-1.7 Max) | Active — coordinator/verifier lane | Committed `7557c983d` (AreaDamageWarhead C# NRE fix + GDI stale removals). Pushed to origin. Did tree-wide orphaned-removal sweep (committed by Aurora as `c16457655`). Added CannonTesla templates. **Identified in DEVELOPMENT_LOG 2026-09-05. Shares verifier lane with Ember.** | `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs`, tree-wide stale-removal sweep |
-| **Claude** (Anthropic, SWE-1.7 Max) | Active — verifier/coordination lane | Re-ran quick audits (find_empty_warhead 0, find_orphan_old_keys 0 real, generator sync 0, warhead_split 75 same-family broadcasts), refreshed balance ledgers (0 drift), verified D2k pack structure and Harkonnen mech split. W24 safe pool exhausted per Aurora; W23 and D2k completion blocked on sign-off / ownership. | none (verifier lane) |
+| **Claude** (Anthropic, SWE-1.7 Max) | Active — verifier/coordination lane | Re-ran quick audits (find_empty_warhead 0, find_orphan_old_keys 0 real, generator sync 0, warhead_split 75 same-family broadcasts), refreshed balance ledgers (0 drift), verified D2k pack structure and Harkonnen mech split. Ran `plan_warhead_collapse.py`: 193 multi-main weapons remain, but the 85 HIGH candidates still carry mixed old families and compatibility warheads, so they are design-review items, not safe mechanical collapses. `phase_b_survey` = 2, `find_mechanical_phase_a` = 0. W24 safe pool remains exhausted; W23 and D2k completion blocked on sign-off / ownership. | none (verifier lane) |
 
 #### Locked files (DO NOT TOUCH — another agent owns these)
 
@@ -252,9 +252,7 @@ Crashes and player-visible regressions jump everything below.
    - `ordos_laserturret` (D2k/Ordos) — blocked on Devin-Echo ownership
    - `HydraSpit` (StarCraft/Zerg) — blocked on maintainer sign-off (mixed-family)
 
-**W24 safe pool status (2026-09-05): EXHAUSTED.** All remaining same-family
-multi-main weapons are complex multi-family weapons needing maintainer sign-off.
-The front moves to W23 (retrofit legacy templates), which needs coordination.
+**W24 safe pool status (2026-09-05): EXHAUSTED.** `plan_warhead_collapse.py` reports 193 directly actor-armed multi-main weapons, but the 85 HIGH-confidence weapons still carry mixed old families and compatibility warheads (e.g. `CommandoM16`, `DuelistTankCannon`). The plan explicitly warns that numeric-sum preservation does not preserve armor profile, geometry, relationships, or damage types, so these are design-review items, not safe mechanical collapses. `phase_b_survey` now shows 2 concrete old-family weapons (`ordos_laserturret` locked to Echo, `HydraSpit` mixed) and `find_mechanical_phase_a` reports 0 clean single-inherit candidates. The front moves to maintainer sign-off / ownership.
 
 6. **D2k faction completion** (Atreides/Harkonnen/Corrino) — see §3.7 below.
    This is the maintainer's priority task. All three factions are selectable but
