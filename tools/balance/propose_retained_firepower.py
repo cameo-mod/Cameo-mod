@@ -9,6 +9,7 @@ from fractions import Fraction
 import hashlib
 import json
 import pathlib
+import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -23,6 +24,41 @@ COSMETIC = {'CreateEffect', 'LeaveSmudge'}
 COSMETIC_ACTOR = {'ReloadArmamentsBar', 'WithChargeSpriteBody'}
 PROJECTILES = {'Bullet', 'Missile', 'InstantHit', 'InstantHitWithFakeBullets'}
 ATTACKS = {'AttackFrontal', 'AttackTurreted', 'AttackFollow', 'AttackMove', 'AttackWander'}
+OWN_ATTACKS = {'AttackFrontal', 'AttackTurreted', 'AttackFollow'}
+
+
+def selected_names(attack):
+    """AttackBaseInfo default; an explicitly empty list must stay empty."""
+    field = attack.child('Armaments')
+    return ['primary', 'secondary'] if field is None else [
+        s.strip() for s in field.value.split(',') if s.strip()]
+
+
+def simple_condition_at_zero(expr):
+    """Conservative one-token condition snapshot; None means unknown, not false.
+
+    This is not an as-built condition resolver. Every named condition is assumed
+    zero, and compound/arithmetic expressions deliberately require manual review.
+    """
+    match = re.fullmatch(r'\s*(!\s*)?([A-Za-z_][A-Za-z0-9_.-]*|[01])\s*', expr or '')
+    if match is None:
+        return None
+    value = match[2] == '1'
+    return not value if match[1] else value
+
+
+def attack_activation(attack):
+    requires = attack.get('RequiresCondition')
+    pause = attack.get('PauseOnCondition')
+    enabled = simple_condition_at_zero(requires) if requires else True
+    paused = simple_condition_at_zero(pause) if pause else False
+    if enabled is False:
+        return 'disabled-at-zero-conditions'
+    if paused is True:
+        return 'paused-at-zero-conditions'
+    if enabled is None or paused is None:
+        return 'unknown-condition-expression'
+    return 'enabled-at-zero-conditions'
 
 
 class Unsupported(ValueError):
@@ -106,6 +142,8 @@ def screen(rules, name, retire_trait=None):
     arm_name = arm.get('Name') if arm.child('Name') is not None else 'primary'
     if arm_name != 'primary' or arm.get('RequiresCondition'):
         raise Unsupported('requires an unconditional primary armament')
+    if attack_activation(arm) != 'enabled-at-zero-conditions':
+        raise Unsupported('primary armament is paused or unknown at zero conditions')
     if arm.get('FireDelay') not in (None, '0') or arm.get('CasingWeapon'):
         raise Unsupported('delayed armament or secondary casing weapon')
     for node in before.children:
@@ -117,6 +155,24 @@ def screen(rules, name, retire_trait=None):
             raise Unsupported('unmodeled cadence/ammunition trait: ' + kind)
         if 'Firepower' in kind and kind != 'FirepowerMultiplier':
             raise Unsupported('unmodeled firepower trait: ' + kind)
+    own_attacks = [node for node in before.children
+                   if node.key.split('@')[0] in OWN_ATTACKS and arm_name in selected_names(node)]
+    if not own_attacks:
+        raise Unsupported('primary armament is not selected by a supported own-actor attack')
+    if not any(attack_activation(node) == 'enabled-at-zero-conditions' for node in own_attacks):
+        raise Unsupported('selected own-actor attack is disabled, paused or unknown at zero conditions')
+    weapon_case = screen_weapon(rules, arm)
+    retained = applicable(after, rules.actor(name), arm)
+    old = applicable(before, rules.actor(name), arm)
+    factor = product(retained)
+    if weapon_case['damage'] * product(old) > MAX_DAMAGE:
+        raise Unsupported('current modified damage exceeds Int32 capacity')
+    return dict(weapon_case, before=before, after=after, arm=arm, retired=retired,
+                retained=retained, old_factor=product(old), factor=factor)
+
+
+def screen_weapon(rules, arm):
+    """Weapon-only structural screen, not actor/mode/proposal eligibility."""
     weapon = rules.resolve_weapon(arm.get('Weapon'))
     if weapon is None:
         raise Unsupported('weapon not found')
@@ -158,38 +214,36 @@ def screen(rules, name, retire_trait=None):
         if min(values) < 0 or len(values) not in (1, max(burst - 1, 1)):
             raise Unsupported('invalid burst delays')
     cycle = Fraction(str(formula.eff_reload(reload, burst, delays)))
-    retained = applicable(after, rules.actor(name), arm)
-    old = applicable(before, rules.actor(name), arm)
-    factor = product(retained)
-    if damage * product(old) > MAX_DAMAGE:
-        raise Unsupported('current modified damage exceeds Int32 capacity')
-    return {'before': before, 'after': after, 'arm': arm, 'weapon': weapon,
-            'main': mains[0], 'retired': retired, 'retained': retained,
-            'old_factor': product(old), 'factor': factor, 'cycle': cycle,
+    return {'weapon': weapon, 'main': mains[0], 'cycle': cycle,
             'burst': burst, 'damage': damage}
 
 
-def sharing(rules, selected_actor, selected_arm, weapon_name):
+def reference_index(rules, weapon_names):
     """Conservative base-YAML token scan, including non-armament refs/inheritance.
 
     No claim about map overrides or script-built weapon names. Those still require
     manual review; this tool emits no applicable patch.
     """
-    target = weapon_name.lower()
-    uses = []
+    targets = {name.lower() for name in weapon_names}
+    uses = {name: set() for name in targets}
     for name in rules.actors:
         if name.startswith('^'):
             continue
         for path, node in walk(rules.resolve(name)):
-            if target in {v.strip().lower() for v in node.value.split(',')}:
-                if name.lower() == selected_actor.lower() and path == (selected_arm, 'Weapon'):
-                    continue
-                uses.append('actor:' + name + '/' + '/'.join(path))
+            for target in targets.intersection(v.strip().lower() for v in node.value.split(',')):
+                uses[target].add(('actor', name, path))
     for name in rules.weapons:
         for path, node in walk(rules.weapon(name)):
-            if target in {v.strip().lower() for v in node.value.split(',')}:
-                uses.append('weapon:' + name + '/' + '/'.join(path))
-    return sorted(set(uses))
+            for target in targets.intersection(v.strip().lower() for v in node.value.split(',')):
+                uses[target].add(('weapon', name, path))
+    return uses
+
+
+def sharing(rules, selected_actor, selected_arm, weapon_name):
+    uses = reference_index(rules, [weapon_name])[weapon_name.lower()]
+    return sorted(kind + ':' + name + '/' + '/'.join(path) for kind, name, path in uses
+                  if not (kind == 'actor' and name.lower() == selected_actor.lower()
+                          and path == (selected_arm, 'Weapon')))
 
 
 def solve_grid(target, factor, burst, cycle):
@@ -239,6 +293,7 @@ def propose(rules, name, target, retire_trait=None):
             'prospective_actor_sha256': fingerprint(case['after']),
             'scope': 'Raw flat damage per tick before armor/falloff/defenses and per-hit rounding. '
                      'Conditional modifiers inactive. No price target inferred; no patch/YAML writes. '
+                     'Attack/armament activation checked only at an assumed zero-condition snapshot, not actual spawn state. '
                      'Int32 checks cover raw modified damage, not all target-specific runtime intermediates. '
                      'Map/script references and gameplay effects still require manual review.'}
 

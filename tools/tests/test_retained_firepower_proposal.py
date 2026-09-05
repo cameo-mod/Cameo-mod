@@ -34,6 +34,47 @@ def fixture():
 
 
 class ProposalTests(unittest.TestCase):
+    def test_paused_or_unknown_armament_is_rejected(self):
+        for condition in ('!enabled', 'a && b'):
+            rules = fixture()
+            rules.actors['unit'].child('Armament').children.append(n('PauseOnCondition', condition))
+            with self.assertRaisesRegex(tool.Unsupported, 'armament is paused or unknown'):
+                tool.propose(rules, 'unit', '40')
+
+    def test_disabled_paused_or_unknown_attack_does_not_supply_baseline_fire(self):
+        for field, value in (('RequiresCondition', 'deployed'), ('PauseOnCondition', '!enabled'),
+                             ('RequiresCondition', '!a && !b'), ('PauseOnCondition', 'bad ? expression')):
+            rules = fixture()
+            rules.actors['unit'].child('AttackFrontal').children.append(n(field, value))
+            with self.assertRaisesRegex(tool.Unsupported, 'disabled, paused or unknown'):
+                tool.propose(rules, 'unit', '40')
+
+    def test_zero_snapshot_accepts_simple_unpaused_attack_not_general_readiness(self):
+        rules = fixture()
+        rules.actors['unit'].child('AttackFrontal').children += [n('RequiresCondition', '!disabled'),
+                                                              n('PauseOnCondition', 'emp')]
+        self.assertEqual(tool.propose(rules, 'unit', '40')['proposed_damage'], 1000)
+
+    def test_primary_must_be_selected_by_an_actual_attack(self):
+        for fields in ('secondary', '', 'Primary'):
+            rules = fixture()
+            rules.actors['unit'].child('AttackFrontal').children.append(n('Armaments', fields))
+            with self.assertRaisesRegex(tool.Unsupported, 'not selected'):
+                tool.propose(rules, 'unit', '40')
+
+    def test_attack_move_or_wander_does_not_supply_an_attack(self):
+        for kind in ('AttackMove', 'AttackWander'):
+            rules = fixture()
+            rules.actors['unit'].child('AttackFrontal').key = kind
+            with self.assertRaisesRegex(tool.Unsupported, 'not selected'):
+                tool.propose(rules, 'unit', '40')
+
+    def test_inherited_attack_selector_must_select_primary(self):
+        rules = fixture()
+        rules.actors['^BASE'].children.append(n('AttackFrontal', Armaments='secondary'))
+        with self.assertRaisesRegex(tool.Unsupported, 'not selected'):
+            tool.propose(rules, 'unit', '40')
+
     def test_actor_specific_local_retirement(self):
         rules = fixture()
         rules.actors['unit'].child('FirepowerMultiplier').key = 'FirepowerMultiplier@unit'

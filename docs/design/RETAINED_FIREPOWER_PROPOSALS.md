@@ -26,6 +26,12 @@ multiplier or target-specific runtime intermediate will remain in range.
 
 - Exactly one actual, unconditional primary armament, including unpaid/alternate
   slots in the count. No charge/reload/ammunition mechanism outside the small model.
+- The primary must be selected by a supported own-actor attack. `AttackMove` and
+  `AttackWander` provide orders, not weapon selection. Omitted `Armaments` means
+  `primary, secondary`; an explicit empty list stays empty and names are case-sensitive.
+  Both armament and selected attack must be enabled/unpaused in a conservative
+  zero-condition snapshot. Single-token conditions are supported; compound expressions
+  remain unknown and block. This is not a resolver for actual spawn-time conditions.
 - Exactly one flat main with no extra damage chips, percentage damage, state or
   integrity feedback, delayed ticks, spawning or unrecognized gameplay effects.
   Known cosmetic effects remain unchanged. Projectile delivery is allowlisted;
@@ -83,10 +89,29 @@ Run `tools/balance/retained_firepower_survey.py` to check census freshness;
 
 ## Next boundary
 
-The useful next expansion would need an explicit model for alternate-armament
-scope or percentage damage, not a blanket relaxation of this screen. Shared-weapon
-cloning and class-wide target selection remain separate decisions. Until then,
-the class/range generators remain gated and all gameplay changes require review.
+The [armament-mode survey](../audit/latest/armament_mode_survey.json) separates
+identical primary/garrison weapon pairs from other multiple-armament arrangements.
+It resolves inherited slots, records each slot's unconditional firepower factor,
+known own/passenger attack selectors, activation uncertainty, conditional modifier
+names and the first weapon-only blocker. It does not sum slots or create proposals.
+
+`AttackBase` selects the actor's own armaments by `Armament.Name`.
+`AttackGarrisoned` and `AttackOpenTopped` instead borrow passenger armament objects;
+the passenger's firepower remains relevant. A host can select both names, and host
+conditions, fire ports and passenger compatibility remain runtime constraints.
+Consequently, a `primary`/`garrisoned` pair is a topology observation, not proof of
+mutual exclusivity, simultaneous damage, or a universal garrison combat mode.
+
+Other base-YAML references are indexed once for the pair cohort. Only the pair's
+two exact `Weapon` fields are excluded from its other-reference count; same-actor
+delivery references, other actors and raw weapon inheritance remain visible.
+Maps/scripts still require separate review. A weapon-only screen pass would not
+establish actor/proposal eligibility or authorize modifier retirement.
+
+Run `tools/balance/armament_mode_survey.py` to check freshness; `--write` updates
+diagnostic JSON only. The multi-armament proposal guard remains closed. Any useful
+future expansion needs a supported damage model, explicit mode-preservation policy
+and sharing review, not a blanket relaxation of slot counting.
 
 ## Validation (2026-09-05)
 
