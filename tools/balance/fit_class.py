@@ -30,6 +30,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/balance"))
 import formula  # noqa: E402
 import tier_chain  # noqa: E402
+from firepower import armament_firepower  # re-export for existing callers
 
 LEDGER = ROOT / "docs/balance"
 ANCHORS = LEDGER / "class_anchors.json"
@@ -57,24 +58,6 @@ def derived_dps_index(du):
         if dps_v is not None:
             idx[(arm.get("slot"), arm.get("weapon"))] = dps_v
     return idx
-
-
-def armament_firepower(u, arm):
-    """Unconditional FirepowerMultiplier product, not rounded runtime damage.
-
-    The legacy field is only a local fine-tuning knob. Retain compatibility for
-    old ledgers, but never multiply it again when resolved entries are present.
-    """
-    if "resolved_firepower_modifiers" not in u:
-        legacy = fnum((u.get("firepower_multiplier") or {}).get("v"))
-        return 1.0 if legacy is None else legacy
-    name = arm.get("armament_name", "primary")
-    result = 1.0
-    for entry in u["resolved_firepower_modifiers"]:
-        types = entry["types"]
-        if not types or (name and name in types):
-            result *= entry["modifier"] / 100.0
-    return result
 
 
 def unit_inputs(u, du=None, use_k=False):
