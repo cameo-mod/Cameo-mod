@@ -290,3 +290,62 @@ corrino_missiletank:
 	RenderSprites:
 		Image: missile_tank
 
+corrino_siegetank:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~corrino_vehicle_production, upgrade_heavy.corrino
+		BuildPaletteOrder: 50
+		Description: Siege Artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
+		IconPalette: d2kunit
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Siege Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 40000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 56
+		TurnSpeed: 4
+		Locomotor: wheeled
+	Armament:
+		Weapon: D2K_155mm
+		LocalOffset: 0,-85,256
+	AttackFrontal:
+		FacingTolerance: 0
+	SpawnActorOnDeath:
+		Actor: siege_tank_husk.corrino
+	RevealsShroud:
+		Range: 5c0
+		Type: GroundPosition
+	Selectable:
+		Class: siegetank
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	RenderSprites:
+		Image: siege_tank
+		PlayerPalette: playerd2k
+	MapEditorData:
+		Categories: Vehicle
+
+siege_tank_husk.corrino:
+	Inherits@husk: ^D2KVehicleHusk
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Tooltip:
+		Name: Siege Tank
+	TransformOnCapture:
+		IntoActor: corrino_siegetank
+	RenderSprites:
+		Image: siege_tank
+		PlayerPalette: playerd2k
+
