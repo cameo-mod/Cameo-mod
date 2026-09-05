@@ -1065,7 +1065,6 @@ RA2ThunderboltMissile:
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
 	-Warhead@MissileHE_Heavy:
-	-Warhead@MissileHE_Light:
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1189,7 +1188,6 @@ RA2MultiThunderboltMissile:
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
 	-Warhead@MissileHE_Heavy:
-	-Warhead@MissileHE_Light:
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -2818,7 +2816,6 @@ RA2GattlingMG1_AA:
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
@@ -2837,7 +2834,6 @@ RA2GattlingMG2_AA:
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
@@ -3449,10 +3445,8 @@ TanyaBomb:
 		Range: 0, 233, 466
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
-	-Warhead@CannonHE_Medium:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 600000
@@ -3483,10 +3477,8 @@ SealBomb:
 	-Warhead@CollapsedTanyaBombDemolition_LightPercentage:
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
-	-Warhead@CannonHE_Medium:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 120000

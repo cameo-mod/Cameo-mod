@@ -108,7 +108,6 @@ SteelVulcan:
 	# Retain the inherited shell template's range-scaled flight behavior.
 	Projectile: ScaledBullet
 	-Warhead@CannonHE_Heavy:
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
@@ -642,7 +641,6 @@ SteelMantaAG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	-Warhead@MissileAP_Light:

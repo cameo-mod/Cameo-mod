@@ -650,7 +650,7 @@ RA2120xmm_fire:
 		AimTargetStances: Enemy, Neutral
 
 RA2120xmm_tesla:
-	Inherits@wh: ^Warhead_Tesla_Light
+	Inherits@wh: ^Warhead_CannonTesla_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_Tesla_Impact_RA2
 	Range: 6992

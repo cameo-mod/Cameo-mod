@@ -1408,7 +1408,6 @@ AsianHowitzerCannon:
 		Amount: 2
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
-	-Warhead@CannonHE_Medium:
 
 AsianHowitzerCannon_elite:
 	Inherits: AsianHowitzerCannon
@@ -2471,7 +2470,6 @@ AsianPelicanMG:
 	# Preserve the shell template's range-scaled speed and inaccuracy after the
 	# mixed projectile inheritance resolves.
 	Projectile: ScaledBullet
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
@@ -2575,7 +2573,6 @@ AsianSubmarineBomb:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: expnew09.wav
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
 		Damage: 100000
@@ -2883,7 +2880,6 @@ AsianSniperLockdown:
 		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	-Warhead@SniperMediumMissile:
-	-Warhead@Bullet_Light:
 
 AsianMLRS:
 	Inherits@roleflat: ^Compatibility_MissileAA_MediumFlat

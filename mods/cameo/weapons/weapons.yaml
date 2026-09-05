@@ -19535,3 +19535,181 @@ generic_bullet_casing:
 			Bomber: 15
 			None: 14
 			Fighter: 14
+
+
+^Warhead_CannonTesla_Heavy:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonTesla_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 86
+		Damage: 2000
+		Falloff: 100, 52, 0
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 57
+			BLAST: 84
+			REFLECTOR: 63
+			ARMOR: 70
+			Shield: 271
+			Superheavy: 154
+			Plate: 136
+			Heavy: 135
+			Concrete: 133
+			Medium: 118
+			Steel: 106
+			Spaceship: 104
+			Light: 103
+			Flak: 102
+			Scout: 89
+			Wood: 83
+			None: 81
+			Heroic: 79
+			Helicopter: 70
+			Bomber: 58
+			Fighter: 47
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 50
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 23
+			Medium: 22
+			Heroic: 20
+			Light: 20
+			Plate: 19
+			Scout: 19
+			Concrete: 18
+			Flak: 17
+			Steel: 17
+			None: 16
+			Wood: 16
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+
+^Warhead_CannonTesla_Light:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonTesla_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 43
+		Damage: 2000
+		Falloff: 100, 52, 0
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 57
+			BLAST: 84
+			REFLECTOR: 63
+			ARMOR: 70
+			Shield: 232
+			Superheavy: 133
+			Heavy: 126
+			Plate: 123
+			Concrete: 121
+			Medium: 120
+			Light: 116
+			Scout: 108
+			Flak: 102
+			Steel: 101
+			Heroic: 100
+			None: 85
+			Wood: 82
+			Spaceship: 76
+			Helicopter: 72
+			Bomber: 68
+			Fighter: 65
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 50
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 14
+			Medium: 13
+			Heroic: 11
+			Light: 11
+			Plate: 10
+			Scout: 10
+			Concrete: 9
+			Flak: 8
+			Steel: 8
+			None: 7
+			Wood: 7
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+
+^Warhead_CannonTesla_Medium:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@CannonTesla_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 65
+		Damage: 2000
+		Falloff: 100, 52, 0
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 57
+			BLAST: 84
+			REFLECTOR: 63
+			ARMOR: 70
+			Shield: 247
+			Superheavy: 162
+			Concrete: 146
+			Heavy: 135
+			Medium: 129
+			Plate: 126
+			Light: 112
+			Scout: 103
+			Steel: 101
+			Wood: 96
+			Flak: 87
+			None: 80
+			Heroic: 79
+			Spaceship: 69
+			Helicopter: 68
+			Bomber: 61
+			Fighter: 44
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 50
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 18
+			Medium: 17
+			Heroic: 15
+			Light: 15
+			Plate: 14
+			Scout: 14
+			Concrete: 13
+			Flak: 12
+			Steel: 12
+			None: 11
+			Wood: 11
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5

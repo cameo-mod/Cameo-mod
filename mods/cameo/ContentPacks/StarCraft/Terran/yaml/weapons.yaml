@@ -209,7 +209,6 @@ CycloneRockets:
 		Condition: lockon
 		ValidTargets: lockable
 		ValidRelationships: Enemy
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
@@ -836,7 +835,6 @@ SiegeTankCannon:
 		Speed: 611
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
-	-Warhead@CannonHE_Medium:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 30000
