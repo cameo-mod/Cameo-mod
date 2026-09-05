@@ -561,7 +561,7 @@ RA2120xmm:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@CannonHE_Heavy:
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 12000
 		PercentageScale: 3325
 	-Warhead@ShrapnelWeapon:
@@ -617,7 +617,7 @@ RA2120xmm_rad:
 		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@CannonHE_Heavy:
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 2000
 		PercentageScale: 10000
 	-Warhead@HeavyChemicalWeapon:
@@ -650,7 +650,7 @@ RA2120xmm_fire:
 		AimTargetStances: Enemy, Neutral
 
 RA2120xmm_tesla:
-	Inherits@wh: ^Warhead_CannonTesla_Light
+	Inherits@wh: ^Warhead_Tesla_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_Tesla_Impact_RA2
 	Range: 6992
@@ -1047,7 +1047,6 @@ IvanBombAir:
 		ValidTargets: Aircraft
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Aircraft
 		Damage: 90000

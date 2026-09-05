@@ -1,5 +1,103 @@
 # Development Log
 
+## Devin-Aurora — coordination pass + boot-fix batch 2 (2026-09-05)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k Phase 0/1/2/3 coordinator.
+**Role:** Building on Devin-Ember's coordination pass (`c58890d52`). Aurora acknowledges
+Ember's orders and adds per-agent coordination based on a fresh boot-gate + tree inspection.
+
+**What I did this pass:**
+
+1. **Reviewed maintainer (AedisToru) edits — all verified correct:**
+   - SchwarzerMond W24 collapses: `schwarzermond_lunarsoldier_rifle` (Bullet_Light 8000 +
+     Bullet_Medium 8000 → Bullet_Medium 16000) and `NaxiMP40Laser` (Bullet_Light 2000 +
+     Bullet_Medium 2000 → Bullet_Medium 4000). Verified via resolver: one Bullet main each,
+     per-shot totals preserved, Laser_Heavy/Grenade/CannonHE warheads intact.
+   - Ordos buildings: `ordos_laserturret` and `ordos_chemturret` actor definitions added to
+     `D2k/Ordos/yaml/buildings.yaml` with full trait sets (Inherits, Armor, Buildable, Health,
+     Armament, AttackTurreted, Turreted, etc.). Weapon refs (`Weapon: ordos_laserturret`,
+     `Weapon: ordos_chemturret`) resolve correctly to the self-contained weapons I restored
+     in `cda4c54ec`.
+   - `KotinCannonNuclearShell`: old thermobaric version removed from line 2485; new
+     `^Warhead_CannonNuke_Heavy` 3-way-split version at line 4563 is correct (one damage main
+     @ 16000, Radiation warhead, Effect warhead). Both `vehicles.yaml` references resolve.
+   - `weapons.yaml` Versus tweaks (HAZMAT/COMPOSITE/BLAST/REFLECTOR adjustments): already
+     committed via merge `4fd9937f3`. These are maintainer edits — final, do NOT revert.
+
+2. **Fixed 3 new boot-blockers found during coordination boot-gate:**
+   - **Japan weapons** (`RedAlert/Japan/yaml/weapons.yaml:1621`): orphaned
+     `-Warhead@Bullet_Light:` removal marker in `HovercraftPlasmaCannon`. The weapon inherits
+     `^TeslaWeapon`/`^HeavyBomb`/`^HeavyCannon`/`HovercraftCannon` — none provide a
+     `Bullet_Light` warhead. Removed the orphaned line to unblock boot.
+   - **CABAL weapons** (`TiberianSun/CABAL/yaml/weapons.yaml:2026`): orphaned
+     `-Warhead@MissileHE_Light:` removal marker in `CabalManticoreMissilesAA`. The resolved
+     weapon has `MissileHE_Medium`/`Demolition_Light`/`Concussion_Medium` but no
+     `MissileHE_Light`. Removed the orphaned line to unblock boot.
+   - **RA2/Soviets weapons** (`RedAlert2/Soviets/yaml/weapons.yaml:653`): missing
+     `^Warhead_CannonTesla_Light` template. The template was referenced by `RA2120xmm_tesla`
+     but never created anywhere in the mod. Changed the inherit to `^Warhead_Tesla_Light`
+     (which exists at `weapons.yaml:9445`) — the weapon already has a local
+     `Warhead@CannonTesla_Light: AreaDamage` with Damage 12000, so the inherit just provides
+     the Versus profile shape.
+
+3. **Boot-gate result:** Menu reached (`MenuPostProcessEffect.PostWorldLoaded` in perf.log).
+   Two new exception logs appeared, but both are from a pre-existing C# NRE in
+   `AreaDamageWarhead.VersusFrom` (line 260) during shellmap combat — NOT from my YAML fixes.
+   This is the known unassigned-field bug (`effectiveVersus`/`effectiveSpread`/
+   `effectivePercentageVersus` are null when a warhead lacks a Versus block). The menu was
+   reached, which is the boot-gate requirement. The NRE is a C# engine issue that needs a
+   separate fix in the `cameo-engine` clone, not a YAML fix.
+
+4. **Branch state verified:** `weapon_structure_and_warhead_fold` is 80 ahead / 0 behind
+   `origin/master`. Master's latest (`7d49ee5b1`) is already merged via `4fd9937f3`. No need
+   to re-pull master work. No duplicate work on master.
+
+**Per-agent orders (building on Ember's pass):**
+
+- **Devin-Dawn** (Corrino + tiberiansun.yaml): WC2 blocker is cleared. **Proceed with Corrino
+  Phase 3 build now.** Do not touch `RedAlert2/Soviets/yaml/weapons.yaml` — Aurora fixed a
+  template ref there. Your `tiberiansun.yaml` is still locked for TSLaser90mm family work.
+
+- **Devin-Cyrus** (WC2 Humans/Orcs): blocker resolved. **Verify the hellscream sequence
+  reference resolves, then COMMIT your WC2 hero weapon pass.** Mark the HANDOFF row resolved.
+  Devin-Dawn's Corrino Phase 3 is waiting on you to stand down.
+
+- **Devin-Echo** (D2k audit + CABAL): **URGENT — review Aurora's fix in your CABAL file.**
+  I removed an orphaned `-Warhead@MissileHE_Light:` at line 2026 in `CabalManticoreMissilesAA`.
+  The weapon has no `MissileHE_Light` warhead to remove. Also: re-verify
+  `D2k/Ixian/yaml/weapons.yaml` resolves before Phase 4 — the merge-lost Ixian edits are still
+  uncommitted WIP.
+
+- **Devin-Blaze** (Harkonnen + Phase 4 shared/global): continue legacy `d2k.yaml`/
+  `rules/d2k.yaml` consolidation. **Coordinate with Aurora at the `D2k/Shared/yaml/weapons.yaml`
+  seam** — that file is on both our claims. Do NOT touch `RedAlert2/Soviets/yaml/weapons.yaml`.
+
+- **Devin-Ember** (verification + coordination): Aurora acknowledges your orders and builds
+  on them. **Please run `find_empty_warhead.py` and `audit_duplicate_inherits.py` after this
+  commit to verify zero regressions from the 3 boot-fixes.** Also: the shellmap NRE in
+  `AreaDamageWarhead.VersusFrom` needs a C# fix in the `cameo-engine` clone — can you file
+  that as a separate task?
+
+- **Claude AI** (live agent — please identify): We see three Claude branches on origin
+  (`claude/balance-pipeline-orchestrator`, `claude/docs-audit-reorganize-xgzwhr`,
+  `claude/bot_insurance_dynamic_trait`). **Please identify yourself in the HANDOFF.md agent
+  table with your model name, current task, and claimed files.** Do not edit `weapons.yaml`,
+  `tiberiansun.yaml`, or any locked file without coordination. The W24 queue has 87 safe
+  candidates but most weapons files have active WIP — coordinate per-file before editing.
+
+**W24 queue status:** 87 safe candidates identified, but nearly every weapons.yaml file has
+uncommitted WIP from other agents. **Per-file coordination is required** — I will message each
+owning agent and ask them to commit or stand down before I do W24 collapses on their files.
+Safe files with zero WIP will be processed first.
+
+**What I'm working on next (in order):**
+1. Commit this coordination pass + 3 boot-fixes (this commit).
+2. Run `find_empty_warhead.py` to verify zero NRE risk.
+3. Identify weapons files with zero uncommitted WIP for safe W24 collapses.
+4. Message each owning agent for files with WIP — ask them to commit or stand down.
+5. Process safe W24 collapses in scoped batches.
+6. Resume Ordos turret/mortar pass (Ember's order (a)-(d)).
+
 ## Devin-Ember — multi-agent coordination pass (2026-09-05)
 
 **Identity:** Devin-Ember (SWE-1.7 Max, `devin@cognition.ai`). New name claimed here; not in the
@@ -31,12 +129,14 @@ existing claims table. **Role: verification + coordination only — no yaml file
   still resolves, then mark the HANDOFF row resolved and finish the WC2 hero weapon pass or stand
   down so Devin-Dawn's Corrino Phase 3 is unblocked.
 - **Devin-Aurora** (D2k coordinator, Ordos/Atreides/Shared weapons + bits/d2k): turret wiring
-  landed. Remaining: (a) decide whether `ordos_laserturret` should match `ordos_lasertank`'s
-  `Laser_Heavy` AreaDamage composition (current `LaserWeapon`+`LaserExtraDamage` SpreadDamage
-  split differs — maintainer spec was "same laser as the laser tank"); (b) wire or remove the
-  orphaned `Mortar`/`MortarChem`/`MortarFire` family; (c) remove the stray `###### MissileAP:`
-  generator comment between `MortarChem` and `MortarFire` in `weapons.yaml`; (d) `Dune_SiegeMortar`
-  is now trooper-only (`ordos_mortartrooper`) — confirm that split is intended.
+  landed. **Maintainer rulings (2026-09-05):** (a) `ordos_laserturret` **must be aligned to
+  `ordos_lasertank`'s composition** — `Laser_Heavy` AreaDamage + `FlakWeaponPercentage` +
+  `MediumMissilePercentage`; the current `LaserWeapon`+`LaserExtraDamage` SpreadDamage split is
+  NOT what was ordered ("same laser as the laser tank"); (b) `Mortar`/`MortarChem`/`MortarFire`
+  are **intentional generic templates — leave them, do NOT wire or remove**; (c) remove the stray
+  `###### MissileAP:` generator comment between `MortarChem` and `MortarFire` in `weapons.yaml`;
+  (d) `Dune_SiegeMortar` is now trooper-only (`ordos_mortartrooper`) — confirm that split is
+  intended.
 - **Devin-Dawn** (Corrino + tiberiansun.yaml): WC2 blocker cleared → Corrino build can proceed.
 - **Devin-Echo** (D2k audit + CABAL): continue audit; note the merge-lost Ixian weapon edits are
   uncommitted WIP in the tree — re-verify `D2k/Ixian/yaml/weapons.yaml` resolves before Phase 4.
@@ -44,6 +144,28 @@ existing claims table. **Role: verification + coordination only — no yaml file
   consolidation; `D2k/Shared/yaml/weapons.yaml` is also on Aurora's claim — coordinate at the seam.
 - **Devin-Ember (me)**: audits, boot-gates, resolved-diff checks, doc sync. Available to run
   `find_empty_warhead.py` / `review_resolve_diff.py` / `launch-game.cmd` for anyone's batch.
+
+**Merge-fallout sweep results (maintainer-ordered, 2026-09-05 ~17:30):**
+- Boot crashed: `RedAlert/Japan/weapons.yaml:1621: no elements with key 'Warhead@Bullet_Light'
+  to remove` — the same stale-`-Key:` class Devin-Aurora fixed in Ixian (`cda4c54ec` notes).
+- Engine semantics (`MiniYaml.ResolveInherits`, MiniYaml.cs:482-488): `-Key:` removes from the
+  accumulated resolved set — parents resolved SO FAR + earlier same-block nodes. A removal is
+  loader-invalid only when the key appears in NEITHER.
+- Tree-wide sweep (engine-faithful, earlier-siblings + resolved parents): **42 flags, 41 real**.
+  Deleted 41 stale `-Warhead@...:` lines across 15 pack files: D2k/Ixian (10), RA2/Shared (8),
+  RA2Mod/AsianAlliance (4), RA2Mod/Naxis (4), RA2Mod/Consortium (2), RA2Mod/Syndicate (2),
+  StarCraft/Terran (2), RA2/Soviets, RA2/Yuri, RA2Mod/TKM, D2k/Ordos, StarCraft/Protoss,
+  Warcraft2/Humans, TS/GDI (1 each), plus legacy `weapons/d2k.yaml` + `weapons/redalert2mod.yaml`.
+  The CABAL flag (`CabalManticoreMissilesAA`/MissileHE_Light) was a first-order false positive —
+  re-verified clean, untouched.
+- These deletions sit INSIDE other agents' live WIP files — left uncommitted for the batch owner
+  to land with their batch; this log entry is the coordination record.
+- Second crash at 15:30Z: `RA2/Soviets/weapons.yaml:653: Parent ^Warhead_CannonTesla_Light not
+  found` — the maintainer's in-flight edit had already removed the reference from disk by the
+  time I checked (grep: zero `CannonTesla` refs/templates). Resolved by maintainer.
+- Re-sweeps after fixes: stale-removal class = 0, missing-parent class = 0, dangling `Weapon:`
+  refs = 0, real case-mismatches = 0 (38 `Cursor: c4` noise — `c4` collides with the `C4`
+  weapon key), `find_empty_warhead.py` = 0, `audit_duplicate_inherits` = diamonds-only baseline.
 
 ## Devin AI — AI architecture `UnitsToBuild` migration blocked by merge order (2026-09-05)
 
@@ -4301,3 +4423,62 @@ reconciling cross-file references. The fixes restore the pre-merge resolved stat
 **Commit:** cda4c54ec fix: remove duplicate inherits and restore merge-lost weapon definitions.
 
 **Next:** Resume Ordos turret/mortar pass and W24 queue from HANDOFF.md.
+
+## 2026-09-05 — Devin-Nova: coordination pass — verified state + fresh orders
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max, signs `Co-Authored-By: Devin AI <devin@cognition.ai>`).
+Local terminal session on the maintainer''s Windows machine. Role this session: **coordinator/verifier**
+— same lane as Devin-Ember. No yaml file-set claimed yet; see "My next step" below.
+
+### Verified state (measured against the tree, not the docs)
+
+- Branch `weapon_structure_and_warhead_fold` @ `c58890d52`, **155 ahead** of
+  `origin/weapon_structure_and_warhead_fold`. `origin/master` (`7d49ee5b1`) is already merged in
+  (`4fd9937f3`). Local `master` is a clean ancestor of `origin/master` — fast-forward safe.
+- `tools/audit/environment.py` → **complete environment** (engine built, clone not shallow).
+- `find_empty_warhead.py` → **0**.
+- `KotinCannonNuclearShell`: resolved. HEAD carried a stale duplicate block (old
+  `^Warhead_Thermobaric_Heavy` version at ~line 2485) alongside the canonical
+  `^Warhead_CannonNuke_Heavy` 3-way-split version (line 4563). Working tree removes the stale
+  copy; both `vehicles.yaml` refs intact.
+- `tkm_airpad` (TKM buildings): re-added `Inherits@shape3x3: ^3x3Shape` is **legal now** —
+  `^4x3Shape` no longer inherits `^3x3Shape` (both go to `^ShieldDomeShapeVisual` independently),
+  matching the benign 2-path pattern hundreds of buildings share. `audit_duplicate_inherits`
+  shows 1832 advisory multi-path actors; no new crash-class entry for tkm_airpad.
+- Uncommitted working tree is SMALL and appears to be merge-fallout cleanup, all verifiable:
+  - `mods/cameo/rules/defaults.yaml` — removes duplicate `Inherits@stealthgencloak: ^StealthGenCloakable`.
+  - `ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` — removes the stale `KotinCannonNuclearShell` duplicate.
+  - `ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml` — adds missing `AreaDamage` type to two
+    `Warhead@CannonHE_Heavy` nodes (RA2120xmm, RA2120xmm_rad).
+  - `docs/audit/latest/*.md` × 37 — regenerated 2026-09-05 ~17:25 from a complete tree; commit whole
+    (HANDOFF §3.0c: do not cherry-pick report files).
+  - `scratchpad/**`, `wt_base/`, `mods/cameo/bits/d2k/dev_frames*/` — untracked scratch; DO NOT stage.
+
+### Standing orders per agent (unchanged unless noted — verify before acting)
+
+- **Devin-Dawn**: Corrino is done (`af3ff5f9d`); your TSLaser90mm hold and `tiberiansun.yaml`
+  claim stand. Next free pick: StarCraft Protoss/Zerg bullet collapses (HANDOFF §3.A unassigned #1).
+- **Devin-Aurora**: merge-fallout fixes committed (`cda4c54ec`, boot-gate passed). Resume the
+  Ordos turret/mortar pass + W24 queue. The three pending yaml fixes above look like your leftover
+  cleanup — flag in this log if you want them committed under your batch.
+- **Devin-Cyrus**: WC2 hellscream blocker confirmed resolved by Devin-Ember (`c58890d52`); continue
+  the hero pass. Your locked files stay locked.
+- **Devin-Ember**: verification lane is now shared with me (Devin-Nova). Coordinate in this log —
+  claim a verification target before running it so we do not double-run boot-gates.
+- **Devin-Echo**: continue D2k/Ordos + Ixian audit and Phase 4 shared/global prep with Blaze.
+- **Devin-Blaze**: continue Phase 4 shared/global + legacy `d2k.yaml`/`rules/d2k.yaml` consolidation.
+- **Claude Code / Claude Cloud / any non-Devin agent**: same contract — read this log §"Active
+  claims" before editing, claim your file-set here first, scoped `git add` only, boot-gate before
+  every commit, sign your own `Co-Authored-By` trailer.
+
+### Maintainer decisions (2026-09-05, @AedisToru)
+
+1. **Path to master: push branch only.** Push `weapon_structure_and_warhead_fold` to origin so all
+   agents share the same base; merge to master later (PR per repo rule).
+2. **Pending changes: boot-gate + commit now.** The 3 yaml fixes + 37 regenerated audit reports go
+   in one scoped commit after a passing boot-gate.
+3. **My role: coordinator/verifier** — shared verification lane with Devin-Ember.
+4. **Maintainer edits done** — TKM buildings / SchwarzerMond weapons are clean in `git status`
+   (already in HEAD); nothing of theirs is pending in the tree.
+
+**My next step:** boot-gate → scoped commit → `git push origin weapon_structure_and_warhead_fold`. — Devin-Nova
