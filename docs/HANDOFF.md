@@ -13,6 +13,7 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 | know how the bots are meant to work, and what is only designed | [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) |
 | know the current bug counts | [`audit/SUMMARY.md`](audit/SUMMARY.md) |
 | find which document owns a topic | [`README.md`](README.md) |
+| pick up the REFERENCE / faction-routing work | [`design/REFERENCE_PIPELINE_HANDOFF.md`](design/REFERENCE_PIPELINE_HANDOFF.md) — the topic chapter. It is subordinate to this file |
 
 ---
 

@@ -65,6 +65,7 @@ Crashes and player-visible regressions always jump the queue.
 | [`design/BALANCE_PIPELINE_GAPS.md`](design/BALANCE_PIPELINE_GAPS.md) | what a one-click run still lacks, plus the verified residue of the 2026-08 outside review round |
 | [`design/RTS_BALANCE_REFERENCE.md`](design/RTS_BALANCE_REFERENCE.md) | *(non-binding)* RTS and multiplayer balance dimensions a stat-consistency model cannot see |
 | [`design/EFFECTIVE_DAMAGE.md`](design/EFFECTIVE_DAMAGE.md) | the area-integrated `effective_damage` metric |
+| [`design/REFERENCE_PIPELINE_HANDOFF.md`](design/REFERENCE_PIPELINE_HANDOFF.md) | the reference / faction-routing chapter: what is wired, the design decisions, the missing sources to ask for, and the traps. **Subordinate to [`HANDOFF.md`](HANDOFF.md)** |
 
 ### Weapons, warheads and defence — 9 documents
 
