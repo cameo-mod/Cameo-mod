@@ -2271,7 +2271,9 @@ light_inf_lmg_ordos_upgrade:
 		PercentageScale: 9984
 
 ordos_laserturret:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 55
 	Range: 7275
 	Report: LaserTankAttack.wav
@@ -2279,8 +2281,7 @@ ordos_laserturret:
 		Width: 55
 		ZOffset: 2047
 		Color: 00ffbb
-	Warhead@LaserWeapon:
-		ValidTargets: Ground, Water, Air
+	Warhead@Laser_Heavy:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
