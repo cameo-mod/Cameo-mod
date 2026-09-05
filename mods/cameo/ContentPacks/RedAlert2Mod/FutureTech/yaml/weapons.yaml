@@ -12,7 +12,6 @@ ACV_Machinegun:
 Future_Cryocopter_Rocket:
 	Inherits: ^Grenade
 	Inherits@2: ^D2KRocket
-	Inherits@3: ^SteelMediumMissile
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 4
@@ -30,10 +29,7 @@ Future_Cryocopter_Rocket:
 		Damage: 8
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 32000
 	Warhead@PhysicalStateCryo1: ApplyPhysicalState
 		PhysicalStateName: Temperature
 		Amount: -16000
@@ -958,7 +954,6 @@ MissileAttackRobotGun:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
-	Inherits@2: ^SteelLightMissile
 	Inherits@3: ^Effect_Grey_Explosion_Small_RA2
 	Range: 8000
 	ReloadDelay: 65
@@ -966,9 +961,7 @@ MissileAttackRobotGun:
 	BurstDelays: 5
 	Report: vifvatta.wav
 	Warhead@MissileAP_Medium:
-		Damage: 12000
-	Warhead@MissileAP_Light: AreaDamage
-		Damage: 12000
+		Damage: 24000
 MissileAttackRobotGun_elite:
 	Inherits: MissileAttackRobotGun
 	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2

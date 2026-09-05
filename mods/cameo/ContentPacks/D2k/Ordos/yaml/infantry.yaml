@@ -39,6 +39,8 @@ ordos_antiairtrooper:
 		Weapon: D2K_Rocket_Trooper_AGOnly
 	AttackFrontal:
 		FacingTolerance: 0
+	WithInfantryBody:
+		StandSequences: stand
 	Voiced:
 		VoiceSet: EBFDAATroop
 	RenderSprites:
@@ -241,6 +243,8 @@ ordos_mortartrooper:
 		Weapon: Dune_SiegeMortar
 	AttackFrontal:
 		FacingTolerance: 0
+	WithInfantryBody:
+		StandSequences: stand
 	Voiced:
 		VoiceSet: EBFDAATroop
 	RenderSprites:

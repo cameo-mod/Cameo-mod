@@ -420,6 +420,7 @@ Support_EMP_Bomb:
 	Inherits: ^Warhead_Tesla_Heavy
 	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Effect_Tesla_Super
+	-Warhead@Tesla_Heavy:
 	Report: mobemp1.aud
 	Range: 25000
 	ReloadDelay: 250

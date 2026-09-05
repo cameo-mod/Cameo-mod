@@ -543,7 +543,6 @@ LatinSmokerCannon:
 	Inherits@3: ^HeavyBomb
 	Inherits@4: ^ShrapnelWeapon
 	Inherits@5: ^RA2HeavyCannon
-	Inherits@6: ^RA2MediumCannon
 	ReloadDelay: 65
 	Range: 6550
 	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
@@ -575,9 +574,7 @@ LatinSmokerCannon:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@CannonHE_Heavy:
-		Damage: 2000
-	Warhead@CannonHE_Medium:
-		Damage: 2000
+		Damage: 4000
 LatinSmokerCannon_elite:
 	Inherits: LatinSmokerCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -836,8 +833,7 @@ LatinBuggyChaingun:
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
-	Inherits@3: ^RA2SmallArms
-	Inherits@4: ^RA2Chaingun
+	Inherits@3: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 11
 	Range: 6000
@@ -856,12 +852,9 @@ LatinBuggyChaingun:
 		Damage: 2000
 	Warhead@Flak_Medium:
 		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 LatinBuggyChaingun_elite:
 	Inherits: LatinBuggyChaingun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
@@ -939,8 +932,7 @@ LatinSentryMG:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^RA2SmallArms
-	Inherits@5: ^RA2Chaingun
+	Inherits@4: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	Range: 6666
 	ReloadDelay: 30
@@ -959,12 +951,9 @@ LatinSentryMG:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 LatinSentryMG_elite:
 	Inherits: LatinSentryMG
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav

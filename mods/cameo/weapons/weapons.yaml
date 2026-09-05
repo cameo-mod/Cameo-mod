@@ -11410,10 +11410,9 @@ Pistol:
 ###############################################
 
 ^AtomicCore:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Tesla_Super
-	Inherits@3: ^Projectile_Lightning_Super
-	Inherits@4: ^Effect_Tesla_Super
+	Inherits: ^Warhead_Tesla_Super
+	Inherits@2: ^Projectile_Lightning_Super
+	Inherits@3: ^Effect_Tesla_Super
 	Inherits@nuke: ^Warhead_Nuclear_Super
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
@@ -11422,7 +11421,7 @@ Pistol:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
-		Damage: 100000
+		Damage: 200000
 		Delay: 0
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
@@ -11431,20 +11430,6 @@ Pistol:
 		Spread: 1000
 		Damage: 100000
 		Delay: 2
-	Warhead@Tesla_Heavy:
-		PercentageScale: 2000
-		ValidTargets: Shielded
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 1000
-		Damage: 100000
-		Delay: 3
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		ValidTargets: Shielded
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 1000
-		Damage: 100000
-		Delay: 5
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: nukexplo.aud
@@ -11523,6 +11508,7 @@ IonCannon:
 	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Projectile_Lightning_Super
 	Inherits@4: ^Effect_Tesla_Super
+	-Warhead@Tesla_Heavy:
 	Report: tesla1.aud
 	ValidTargets: Ground, Water, Air
 	Warhead@Tesla_Super:

@@ -1,5 +1,33 @@
 # Development Log
 
+## Devin AI — Volcanic shellmap camera radius fix (2026-08-25)
+
+**Identity:** Devin AI (SWE-1.7 Max).
+
+**What and why:**
+- User reported the volcanic shell map (`shellmap_v3.oramap`) showed only preplaced units and no attack waves.
+- Root cause was not the `attack.lua` logic: the global ruleset was crashing on a stale `-Warhead@CannonHE_Medium` removal in `ContentPacks/RedAlert/Japan/yaml/weapons.yaml` (already fixed in working tree by the W24 collapse pass). That crash prevented any map, including the shellmap, from loading.
+- After the ruleset loaded, the shellmap script ran but the camera stayed in a 6-cell radius around the center, keeping all three bases and the incoming attack waves off-screen. This made the attacks invisible.
+- Fixed the shellmap camera by changing `CameraRadius` in `attack.lua` from `6144` (6 cells) to `46080` (45 cells) so the panning view covers Harkonnen, Soviet and Consortium bases and the frigate/carryall reinforcement routes.
+
+**Decision basis:**
+- Verified `attack.lua` schedules `SovietAttack`, `HarkonnenAttack` and `ConsortiumAttack` with 45 s recurring delays and uses existing waypoints and actor types.
+- Confirmed `shellmap_v3` package contains `rules.yaml`, `weapons.yaml` and the `LuaScript: attack.lua` reference.
+- Compared with `desert-shellmap-2.oramap`, which uses a ~18-cell camera radius; `shellmap_v3` is a 128x128 map, so 6 cells was far too small.
+
+**Verification:**
+- `python tools/audit/find_empty_warhead.py` = 0
+- `python tools/audit/find_orphan_old_keys.py` = 0 real, 133 false positives (baseline)
+- `python tools/audit/find_orphan_old_keys_multi.py` = 0 suspicious
+- `python tools/audit/audit_duplicate_inherits.py` = advisory duplicates only (baseline)
+- `python tools/balance/sweep_areadamage.py` = dry run, 3 `class2d` candidates (advisory, not applied)
+- Boot-gate `launch-game.cmd`: `MenuPostProcessEffect.PostWorldLoaded` reached, no new `exception-*.log`
+- Forced `shellmap_v3` as the only available Shellmap during a test run and confirmed `MenuPostProcessEffect.PostWorldLoaded` with no Lua/Script errors.
+
+**Files changed:**
+- `mods/cameo/maps/shellmap_v3.oramap` (`attack.lua`)
+
+
 ## Devin AI — W24 batch: 48 same-family equal-damage collapses across 19 clean files (2026-08-25)
 
 **Identity:** Devin AI (GLM-5.2 High), W24 weapons pass.

@@ -1193,10 +1193,9 @@ CabalLegionGun:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 ^CabalManticoreMissiles:
-	Inherits@wh: ^Warhead_MissileHE_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
-	Inherits@wh3: ^Warhead_Demolition_Light
-	Inherits@wh4: ^Warhead_Concussion_Medium
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_Demolition_Light
+	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 30
@@ -1214,10 +1213,8 @@ CabalLegionGun:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 12000
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 12000
+		Damage: 24000
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
 	Warhead@Concussion_Medium: AreaDamage

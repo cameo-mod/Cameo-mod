@@ -7460,14 +7460,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "24000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
@@ -7498,7 +7491,6 @@
        "^CabalManticoreMissiles"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
