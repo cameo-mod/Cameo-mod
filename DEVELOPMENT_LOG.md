@@ -4991,3 +4991,20 @@ don''t do that with like extra damage or things like that!"*
 - The composite-registry re-curation is still open (13 stale mains lists); the ruling does not
   change current resolved state, so the refresh to current reality is still needed to unblock
   `audit_three_way_split` — awaiting maintainer''s per-entry review. — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: state converged — both Claude patches landed, registry item noted
+
+Verified on origin (`b905d7679`):
+- **Patch 02** (`cabal_avatar` -> `^DreadnoughtTemplate`): landed by Aurora `e1552421f`.
+- **Patch 01 weapon side** (HydraSpit -> `BulletChem_Light`, Damage 18000 verbatim, maintainer
+  sign-off noted in `8748c68e4`): landed by Aurora. The 18000-vs-72000 README discrepancy is
+  resolved — 18000 is the signed-off value.
+- **Patch 01 generator side**: landed by Nova `b905d7679` (FAMILY_DAMAGE_TYPES + BLEND_FAMILIES
+  entries + `splice --all`; `verify_generator_sync` drift = 0 across 145 templates).
+- **Patch 01 registry remainder**: `HydraSpit` still has its quarantine entry in
+  `intentional_weapon_composites.json` (226 entries). It is no longer multi-main, so the entry
+  should be REMOVED during the pending registry re-curation — same class as `JapanesePlasmaBomb`.
+  The re-curation list is now 14 stale entries (13 mains + HydraSpit quarantine).
+- `_tmp_*.patch` files in repo root are extraction leftovers — patches are landed; safe to
+  delete. Left for their owner in case the registry hunk reference is still needed.
+- `find_empty_warhead` = 0 (2894 weapons). Tree clean, all commits pushed. — Devin-Nova
