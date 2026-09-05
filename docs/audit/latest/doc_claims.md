@@ -6,25 +6,25 @@ A number in prose is true only on the day it is written. These are the claims a 
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
-| `shield_versus_mean` | 175.919 | 175.919 | ✅ |
-| `shield_hp_factor` | 0.568442 | 0.568442 | ✅ |
-| `shield_damage_share` | 0.0152182 | 0.0152182 | ✅ |
+| `shield_versus_mean` | 175.919 | 176.598 | ✅ |
+| `shield_hp_factor` | 0.568442 | 0.566258 | ✅ |
+| `shield_damage_share` | 0.0152182 | 0.0151578 | ✅ |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 356 | 356 | ✅ |
-| `multi_main_fired_weapons` | 243 | — | **- wc2catapultFire: stale weapon_digest** |
+| `multi_main_fired_weapons` | 243 | — | **- wc2deathknightFire: stale weapon_digest** |
 | `percentage_denominator_unset` | 183 | 183 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 18 | 18 | ✅ |
-| `meters_filling_before_death` | 271 | 272 | **MISMATCH** |
-| `corrosion_meter_actors` | 814 | 814 | ✅ |
-| `w24_multi_main_fed` | 429 | 430 | **MISMATCH** |
+| `meters_filling_before_death` | 272 | 272 | ✅ |
+| `corrosion_meter_actors` | 817 | 817 | ✅ |
+| `w24_multi_main_fed` | 429 | 429 | ✅ |
 | `physical_state_fired_weapons` | 532 | 533 | **MISMATCH** |
 | `plating_row_ties` | 0 | 0 | ✅ |
-| `plating_families` | 47 | 47 | ✅ |
+| `plating_families` | 47 | 48 | **MISMATCH** |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
-| `warhead_family_reach` | 1413 | 1414 | **MISMATCH** |
-| `unconverted_template_inheritors` | 1600 | 1599 | **MISMATCH** |
-| `ledgers_drifted` | 0 | 1 | **MISMATCH** |
+| `warhead_family_reach` | 1413 | 1415 | **MISMATCH** |
+| `unconverted_template_inheritors` | 1600 | 1595 | **MISMATCH** |
+| `ledgers_drifted` | 0 | 0 | ✅ |
 
 **FAIL — a document and the tree disagree.**
 

@@ -1,9 +1,9 @@
 # Weapon uniqueness (DESIGN.md §10 — faction identity)
 
-damaging armament weapons checked: 1457; W1 same-faction 39, W2 cross-faction 38, W3 carrier-only 95
+damaging armament weapons checked: 1458; W1 same-faction 40, W2 cross-faction 39, W3 carrier-only 95
 
 
-## W1 — same faction, distinct actors, identical weapon (39)
+## W1 — same faction, distinct actors, identical weapon (40)
 
 | weapon | faction(s) | actors |
 |---|---|---|
@@ -13,11 +13,12 @@ damaging armament weapons checked: 1457; W1 same-faction 39, W2 cross-faction 38
 | cabalengineerrepairbeam | cabal | cabal_engineer, cabal_repairdrone |
 | d2k_apc_rocket | ordos | ordos_apc, ordos_dustdrone |
 | d2k_apc_rocket_aa | ordos | ordos_banshee, ordos_laboratorycrawler |
-| d2k_bazooka2 | atreides, ixian, ordos | heavy_rocket_raider.ixian, rocket_raider.ixian |
+| d2k_bazooka2 | ixian, ordos | heavy_rocket_raider.ixian, rocket_raider.ixian |
 | d2k_rocket_trooper | atreides, corrino, harkonnen, ixian, ordos | atreides_rockettrooper, corrino_sardaukar_bazooka, corrino_trooper, harkonnen_rockettrooper, harkonnen_sardaukar, ixian_rockettrooper, ordos_rockettrooper, trooper |
 | devbullet | harkonnen | devastator, harkonnen_devastatormech |
 | futuremicrotorpedos | futuretech | futuretech_phalanxwip, futuretech_riptideacv |
 | harkonnenflameturret | harkonnen | harkonnen_flametank, harkonnen_flameturret |
+| hmg | atreides | atreides_apc, atreides_sandbike |
 | incendiaryyakchaingun | ra1_soviets | ra1_soviets_nuclearyak, ra1_soviets_yakscoutplane |
 | jimraynormachinegun | terran | terran_jimraynor, terran_pythean |
 | laboratory_bioball | ordos | ordos_banshee, ordos_laboratorycrawler |
@@ -48,7 +49,7 @@ damaging armament weapons checked: 1457; W1 same-faction 39, W2 cross-faction 38
 | yakchaingun | ra1_soviets | ra1_soviets_nuclearyak, ra1_soviets_yakscoutplane |
 
 
-## W2 — identical weapon across factions (38)
+## W2 — identical weapon across factions (39)
 
 | weapon | families | factions | actors |
 |---|---|---|---|
@@ -66,7 +67,8 @@ damaging armament weapons checked: 1457; W1 same-faction 39, W2 cross-faction 38
 | tsengineerpistol | 3 | forgotten, ts_gdi, ts_nod | forgotten_engineer, ts_gdi_engineer, ts_nod_engineer |
 | 80mm_a | 2 | atreides, corrino | atreides_combattank, corrino_bmp |
 | bigflamer | 2 | ra1_soviets, td_nod | ra1_soviets_gorynychtank, td_nod_flametank |
-| d2k_bazooka2 | 2 | atreides, ixian, ordos | heavy_rocket_raider.ixian, rocket_raider.ixian |
+| d2k_155mm | 2 | atreides, corrino | atreides_siegetank, corrino_siegetank |
+| d2k_bazooka2 | 2 | ixian, ordos | heavy_rocket_raider.ixian, rocket_raider.ixian |
 | light_inf_lmg_upgrade | 2 | atreides, corrino, harkonnen, ixian, ordos | ixian_lightinfantry, light_inf |
 | naxlasert | 2 | schwarzermond, terran | schwarzermond_lasertower, terran_sentinel |
 | naxsturmarty | 2 | naxis, schwarzermond | naxis_sturmtiger, schwarzermond_sturmcannon |
@@ -99,7 +101,7 @@ damaging armament weapons checked: 1457; W1 same-faction 39, W2 cross-faction 38
 | chaingun | ra1_soviets_hindattackhelicopter, ra1_soviets_kamovattackhelicopter |
 | dragunovsniper | futuretech_salamanderifv, ra1_soviets_dragunovantimaterialsniper, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | drplasmatankweapon | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
-| fremen_l | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
+| fremen_l | atreides_fremen, futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | grenade | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair, td_gdi_grenadier |
 | hindmissiles | ra1_soviets_hindattackhelicopter, ra1_soviets_kamovattackhelicopter |
 | ifvchronobeam | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |

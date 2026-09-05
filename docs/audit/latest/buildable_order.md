@@ -1,8 +1,8 @@
 # audit_buildable_order — buildable actor order checks
 
-Buildable combat actors checked: **892**
+Buildable combat actors checked: **895**
 Prerequisite order violations: **1**
-Build palette order violations: **1080**
+Build palette order violations: **1071**
 
 
 ## Prerequisite order violations
@@ -52,24 +52,13 @@ Build palette order violations: **1080**
 | asianalliance | Vehicle | asianalliance_warturtle | 3 | 5000 | 80 | should be before asianalliance_oiltruck (tier/cost order) |
 | atreides | Infantry | light_inf | 3 | 150 | 10 | should be before atreides_rockettrooper (tier/cost order) |
 | atreides | Infantry | trooper | 3 | 300 | 20 | should be before atreides_engineer (tier/cost order) |
-| atreides | Infantry | heavy_inf.ixian | 3 | 400 | 10 | should be before atreides_rockettrooper (tier/cost order) |
 | atreides | RAInfantry | light_inf | 3 | 150 | 10 | should be before atreides_rockettrooper (tier/cost order) |
 | atreides | RAInfantry | trooper | 3 | 300 | 20 | should be before atreides_engineer (tier/cost order) |
-| atreides | RAInfantry | heavy_inf.ixian | 3 | 400 | 10 | should be before atreides_rockettrooper (tier/cost order) |
-| atreides | RAVehicle | duelist_tank.ixian | 2 | 1800 | 40 | should be before atreides_apc (tier/cost order) |
+| atreides | RAVehicle | atreides_spiceharvester | 2 | 500 | 10 | should be before atreides_sandbike (tier/cost order) |
 | atreides | RAVehicle | atreides_siegetank | 3 | 600 | 50 | should be before atreides_repairtank (tier/cost order) |
-| atreides | RAVehicle | ixian_kodatank | 3 | 800 | 40 | should be before atreides_apc (tier/cost order) |
-| atreides | RAVehicle | rocket_raider.ixian | 3 | 1200 | 10 | should be before atreides_combattank (tier/cost order) |
-| atreides | RAVehicle | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before atreides_combattank (tier/cost order) |
-| atreides | Starport | duelist_tank.ixian | 2 | 1800 | 40 | should be before atreides_apc (tier/cost order) |
-| atreides | Starport | ixian_kodatank | 3 | 800 | 40 | should be before atreides_apc (tier/cost order) |
-| atreides | Starport | rocket_raider.ixian | 3 | 1200 | 10 | should be before atreides_combattank (tier/cost order) |
-| atreides | Starport | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before atreides_combattank (tier/cost order) |
-| atreides | Vehicle | duelist_tank.ixian | 2 | 1800 | 40 | should be before atreides_apc (tier/cost order) |
+| atreides | Starport | atreides_spiceharvester | 2 | 500 | 10 | should be before atreides_sandbike (tier/cost order) |
+| atreides | Vehicle | atreides_spiceharvester | 2 | 500 | 10 | should be before atreides_sandbike (tier/cost order) |
 | atreides | Vehicle | atreides_siegetank | 3 | 600 | 50 | should be before atreides_repairtank (tier/cost order) |
-| atreides | Vehicle | ixian_kodatank | 3 | 800 | 40 | should be before atreides_apc (tier/cost order) |
-| atreides | Vehicle | rocket_raider.ixian | 3 | 1200 | 10 | should be before atreides_combattank (tier/cost order) |
-| atreides | Vehicle | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before atreides_combattank (tier/cost order) |
 | cabal | Aircraft | cabal_hunterkillermk1 | 2 | 1500 | 20 | should be before cabal_repairdrone (tier/cost order) |
 | cabal | Aircraft | cabal_hunterkillermk1_elite | 2 | 3000 | 21 | should be before cabal_repairdrone (tier/cost order) |
 | cabal | Aircraft | cabal_hunterdronecarrier | 3 | 4000 | 20 | should be before cabal_repairdrone (tier/cost order) |
@@ -131,9 +120,11 @@ Build palette order violations: **1080**
 | corrino | RAVehicle | corrino_spiceharvester | 2 | 500 | 10 | should be before corrino_buggy (tier/cost order) |
 | corrino | RAVehicle | corrino_combattank | 2 | 600 | 40 | should be before corrino_apc (tier/cost order) |
 | corrino | RAVehicle | corrino_bmp | 3 | 400 | 30 | should be before corrino_apc (tier/cost order) |
+| corrino | RAVehicle | corrino_siegetank | 3 | 600 | 50 | should be before corrino_mobileconstructionvehicle (tier/cost order) |
 | corrino | Vehicle | corrino_spiceharvester | 2 | 500 | 10 | should be before corrino_buggy (tier/cost order) |
 | corrino | Vehicle | corrino_combattank | 2 | 600 | 40 | should be before corrino_apc (tier/cost order) |
 | corrino | Vehicle | corrino_bmp | 3 | 400 | 30 | should be before corrino_apc (tier/cost order) |
+| corrino | Vehicle | corrino_siegetank | 3 | 600 | 50 | should be before corrino_mobileconstructionvehicle (tier/cost order) |
 | eden | RAVehicle | eden_lynx_laser | 2 | 750 | 30 | should be before eden_lynx_starflare (tier/cost order) |
 | eden | RAVehicle | eden_lynx_railgun | 2 | 900 | 50 | should be before eden_lynx_starflare (tier/cost order) |
 | eden | RAVehicle | eden_cargotruck_empty | 2 | 1000 | 10 | should be before eden_lynx_starflare (tier/cost order) |

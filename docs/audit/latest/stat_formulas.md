@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **666** across 1985 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **668** across 1988 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (44)
@@ -53,7 +53,7 @@ Violations: **666** across 1985 roster actors (reference-clean units: gdiarcher,
 | ts_nod_subterraneanapc | HpPerStep 2637 | expected 875 (HP 17500/20) |
 
 
-## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (127)
+## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (129)
 
 | actor | actual | expected |
 |---|---|---|
@@ -62,6 +62,7 @@ Violations: **666** across 1985 roster actors (reference-clean units: gdiarcher,
 | atreides_missiletank | Step 10 | expected 20 (HP 50000/2500) |
 | atreides_repairtank | Step 10 | expected 24 (HP 60000/2500) |
 | atreides_rockettrooper | Step 10 | expected 40 (HP 40000/1000) |
+| atreides_sandbike | Step 10 | expected 12 (HP 30000/2500) |
 | atreides_siegetank | Step 10 | expected 16 (HP 40000/2500) |
 | atreides_spiceharvester | Step 80 | expected 72 (HP 180000/2500) |
 | cabal_beholder | Step 50 | expected 125 (HP 125000/1000) |
@@ -74,6 +75,7 @@ Violations: **666** across 1985 roster actors (reference-clean units: gdiarcher,
 | corrino_sardaukar_javelin | Step 50 | expected 120 (HP 120000/1000) |
 | corrino_sardaukar_laser | Step 50 | expected 120 (HP 120000/1000) |
 | corrino_sardaukar_sword | Step 50 | expected 120 (HP 120000/1000) |
+| corrino_siegetank | Step 10 | expected 16 (HP 40000/2500) |
 | corrino_spiceharvester | Step 80 | expected 72 (HP 180000/2500) |
 | corrino_trooper | Step 10 | expected 40 (HP 40000/1000) |
 | eden_tiger_acidcloud | Step 10 | expected 24 (HP 60000/2500) |
@@ -202,7 +204,7 @@ Violations: **666** across 1985 roster actors (reference-clean units: gdiarcher,
 | wc2_humans_militiapeasant | infantry declares Repairable locally |  |
 
 
-_266 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
+_267 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
 
 
 ## F4 — upgrade shield RegenAmount ≠ 2×SelfHealing Step  (69)
@@ -484,14 +486,16 @@ _266 further infantry inherit Repairable from the infantry base template (^Defau
 | harkonnen_adp | Turreted 48 vs Mobile 20 | must match |
 
 
-## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (8)
+## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (10)
 
 | actor | actual | expected |
 |---|---|---|
 | atreides_missiletank | TurnSpeed 80 (Speed 64) | expected 26 = 2 x Speed/5 (turretless) |
 | atreides_repairtank | TurnSpeed 16 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
+| atreides_sandbike | TurnSpeed 24 (Speed 90) | expected 36 = 2 x Speed/5 (turretless) |
 | combat_tank.harkonnen | TurnSpeed 13 (Speed 65) | expected 26 = 2 x Speed/5 (turretless) |
 | corrino_missiletank | TurnSpeed 80 (Speed 64) | expected 26 = 2 x Speed/5 (turretless) |
+| corrino_siegetank | TurnSpeed 4 (Speed 56) | expected 22 = 2 x Speed/5 (turretless) |
 | devastator | TurnSpeed 48 (Speed 33) | expected 14 = 2 x Speed/5 (turretless) |
 | harkonnen_buzzsaw | TurnSpeed 48 (Speed 43) | expected 18 = 2 x Speed/5 (turretless) |
 | harkonnen_flametank | TurnSpeed 13 (Speed 65) | expected 26 = 2 x Speed/5 (turretless) |
@@ -533,8 +537,8 @@ _none found_
 | actor | actual | expected |
 |---|---|---|
 | ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
-| ordos: ordos_chemturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: ordos_artilleryplatform | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| ordos: ordos_chemturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | schwarzermond: schwarzermond_lasertower | prereqs: schwarzermond_barracks, schwarzermond_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 
 
@@ -543,7 +547,7 @@ _none found_
 _none found_
 
 
-## F15 — Light Support composition (Tier-1 only, ~2000, 5:1 inf:veh)  (73)
+## F15 — Light Support composition (Tier-1 only, ~2000, 5:1 inf:veh)  (72)
 
 | actor | actual | expected |
 |---|---|---|
@@ -597,8 +601,7 @@ _none found_
 | ordos: ordos_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | ixian: ixian_L | total cost 3300 | target ~2000 (±15%) |
 | ixian: ixian_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| atreides: atreides_L | total cost 3300 | target ~2000 (±15%) |
-| atreides: atreides_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| atreides: atreides_L | trooper (cost 300) x2 vs atreides_rockettrooper (cost 200) x1 | pricier units must not outnumber cheaper ones |
 | harkonnen: harkonnen_L | total cost 1100 | target ~2000 (±15%) |
 | harkonnen: harkonnen_L | 5 infantry : 0 vehicles | light set should include a vehicle |
 | harkonnen: harkonnen_L | trooper (cost 300) x2 vs harkonnen_rockettrooper (cost 200) x1 | pricier units must not outnumber cheaper ones |
@@ -622,7 +625,7 @@ _none found_
 | eden: defaulteden | eden_lynx_railgun (cost 900) x2 vs eden_scout (cost 300) x1 | pricier units must not outnumber cheaper ones |
 
 
-## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (116)
+## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (115)
 
 | actor | actual | expected |
 |---|---|---|
@@ -717,13 +720,12 @@ _none found_
 | ordos: ordos_h | all units are Tier 1 | heavy support should mix all tiers |
 | ixian: ixian_h | total cost 7100 | target ~10000 (±15%) |
 | ixian: ixian_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
-| atreides: atreides_h | total cost 7100 | target ~10000 (±15%) |
-| atreides: atreides_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| atreides: atreides_h | total cost 2600 | target ~10000 (±15%) |
+| atreides: atreides_h | 7 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | harkonnen: harkonnen_h | total cost 2650 | target ~10000 (±15%) |
 | harkonnen: harkonnen_h | 6 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| corrino: corrino_h | total cost 3000 | target ~10000 (±15%) |
+| corrino: corrino_h | total cost 3300 | target ~10000 (±15%) |
 | corrino: corrino_h | 6 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| corrino: corrino_h | corrino_sardaukar_bazooka (cost 600) x2 vs corrino_buggy (cost 300) x1 | pricier units must not outnumber cheaper ones |
 | terran: heavyterran | 4 infantry : 3 vehicles | want ~5 infantry per vehicle |
 | terran: heavyterran | terran_marine (cost 689) x2 vs terran_firebat (cost 500) x1 | pricier units must not outnumber cheaper ones |
 | terran: heavyterran | terran_marine (cost 689) x2 vs terran_medic (cost 600) x1 | pricier units must not outnumber cheaper ones |

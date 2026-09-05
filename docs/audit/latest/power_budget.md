@@ -1,6 +1,6 @@
 # audit_power_budget — worst-case stacked multipliers (R2)
 
-Units above the 2.0× effective-power budget: **831**
+Units above the 2.0× effective-power budget: **828**
 
 
 ## Breaches (damage× × surv× = power×), largest first
@@ -584,7 +584,6 @@ Units above the 2.0× effective-power budget: **831**
 | schwarzermond | schwarzermond_noidharvester | 2.28 | 1.67 | 3.79 | FirepowerMultiplier@schwarzermond_upgrade_moonpropaganda=110; FirepowerMultiplier@schwarzermond_upgrade_helium3=115; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | td_gdi | td_gdi_grenadier | 2.38 | 1.59 | 3.78 | FirepowerMultiplier@td_gdi_upgrade_longrangesensors=105; FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment=110; ReloadDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment=90; DamageMultiplier@td_gdi_upgrade_cuttingedgeequipment=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | td_gdi | td_gdi_shotgunner | 2.38 | 1.59 | 3.78 | FirepowerMultiplier@td_gdi_upgrade_longrangesensors=105; FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment=110; ReloadDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment=90; DamageMultiplier@td_gdi_upgrade_cuttingedgeequipment=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| atreides | heavy_inf.ixian | 2.07 | 1.82 | 3.77 | DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_sardaukar_berserker | 2.07 | 1.82 | 3.77 | DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_sardaukar_sword | 2.07 | 1.82 | 3.77 | DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
 | forgotten | forgotten_closhtank | 2.07 | 1.82 | 3.77 | DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
@@ -759,12 +758,9 @@ Units above the 2.0× effective-power budget: **831**
 | atreides | atreides_lightinfantry | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | atreides_repairtank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | atreides_rockettrooper | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| atreides | atreides_sandbike | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | atreides_siegetank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| atreides | duelist_tank.ixian | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| atreides | heavy_rocket_raider.ixian | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| atreides | ixian_kodatank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | light_inf | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| atreides | rocket_raider.ixian | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | atreides | trooper | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_bmp | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_buggy | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
@@ -773,6 +769,7 @@ Units above the 2.0× effective-power budget: **831**
 | corrino | corrino_sardaukar_bazooka | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_sardaukar_javelin | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_sardaukar_laser | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| corrino | corrino_siegetank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | corrino_trooper | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | light_inf | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | corrino | trooper | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |

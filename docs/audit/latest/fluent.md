@@ -546,9 +546,9 @@ _none found_
 | faction | fluent/total tooltips | coverage |
 |---|---|---|
 | asianalliance | 0/78 | 0% |
-| atreides | 0/30 | 0% |
+| atreides | 0/27 | 0% |
 | cabal | 0/84 | 0% |
-| corrino | 0/32 | 0% |
+| corrino | 0/33 | 0% |
 | eden | 0/45 | 0% |
 | forgotten | 78/81 | 96% |
 | futuretech | 0/59 | 0% |

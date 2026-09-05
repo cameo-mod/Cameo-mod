@@ -1,6 +1,6 @@
 # audit_upgrades — inverted / dead upgrade effects (B3)
 
-Upgrade items found: **609** — inverted-direction traits: **0**, exact deferred traits: **1**, dead upgrades: **11**, dead wiring tokens: **20**, without intent entries: **572**
+Upgrade items found: **609** — inverted-direction traits: **0**, exact deferred traits: **1**, dead upgrades: **10**, dead wiring tokens: **20**, without intent entries: **572**
 
 
 ## Inverted-direction stat traits gated on upgrade conditions
@@ -24,7 +24,6 @@ _none found_
 | upgrade_conyard.atreides | (own name only) | mods/cameo/ContentPacks/D2k/Atreides/yaml/upgrades.yaml |
 | upgrade_conyard.corrino | (own name only) | mods/cameo/ContentPacks/D2k/Corrino/yaml/upgrades.yaml |
 | upgrade_conyard.harkonnen | (own name only) | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/upgrades.yaml |
-| upgrade_heavy.corrino | (own name only) | mods/cameo/ContentPacks/D2k/Corrino/yaml/upgrades.yaml |
 | upgrade_heavy.harkonnen | (own name only) | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/upgrades.yaml |
 | upgrade_light.harkonnen | (own name only) | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/upgrades.yaml |
 | upgrade_radar.atreides | (own name only) | mods/cameo/ContentPacks/D2k/Atreides/yaml/upgrades.yaml |
@@ -36,7 +35,7 @@ _none found_
 
 | token | #consumer traits | sample consumers |
 |---|---|---|
-| base-reveal | 1662 | a10, a10carrier, alien.nax, apparition.ixian |
+| base-reveal | 1665 | a10, a10carrier, alien.nax, apparition.ixian |
 | classicproductionqueues | 170 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianconstructionyard, asianalliance_asianwarfactory |
 | derricklimit_is_0 | 1 | player |
 | derricklimit_is_3 | 1 | player |
@@ -49,11 +48,11 @@ _none found_
 | stardecoration | 2 | corrino_barracks, corrino_lightfactory |
 | upemptesla | 3 | ra2_soviets_teslatrooper, ra2shk.bot, ra2shkhero |
 | upra2deso | 335 | alien.nax, asianalliance_alligator, asianalliance_asdf, asianalliance_asiancommando |
-| upsubliminal | 1140 | a10, a10carrier, alien.nax, apparition.ixian |
-| upsubliminal2 | 1140 | a10, a10carrier, alien.nax, apparition.ixian |
-| usabombardament | 1140 | a10, a10carrier, alien.nax, apparition.ixian |
-| usaholdtheline | 1140 | a10, a10carrier, alien.nax, apparition.ixian |
-| usasearchndestroy | 1140 | a10, a10carrier, alien.nax, apparition.ixian |
+| upsubliminal | 1143 | a10, a10carrier, alien.nax, apparition.ixian |
+| upsubliminal2 | 1143 | a10, a10carrier, alien.nax, apparition.ixian |
+| usabombardament | 1143 | a10, a10carrier, alien.nax, apparition.ixian |
+| usaholdtheline | 1143 | a10, a10carrier, alien.nax, apparition.ixian |
+| usasearchndestroy | 1143 | a10, a10carrier, alien.nax, apparition.ixian |
 | usaupcounter | 2 | ra1_allies_alliedchinooktransport, ra1_soviets_hiptransport |
 | usaupsupplylines | 34 | asianalliance_militaryacademy, cabal_core, forgotten_tiberiumspike, futuretech_hypercore |
 

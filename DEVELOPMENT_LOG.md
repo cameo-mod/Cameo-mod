@@ -1,5 +1,74 @@
 ﻿# Development Log
 
+
+## Devin-Ember — audit suite + W24 collapse verification (2026-09-05, evening)
+
+**Identity:** Devin-Ember (SWE-1.7 Max). Verifier lane, sharing with Devin-Nova.
+Fulfilling Aurora's order: "run full audit suite on clean tree, report regressions."
+
+**Full `run_all.py` on the complete tree (engine built, full clone — reports went to
+`latest/`, not `degraded/`):**
+
+PASS — all crash/blocking classes clean:
+- `empty_warhead` = 0 (2894 weapons), `orphans` dangling weapon refs = 0,
+  `ai` undefined refs = 0, `asset_files` A1/A2 = 0, `sequences` S1/S2 = 0,
+  `duplicate_inherits` = diamonds-only (no same-node crash class),
+  `balance_drift` clean (33 ledgers), `consistency_report` 73/0,
+  `phase_b_survey` = 0 old-family weapons, `unique_traits`/`template_conformance`/
+  `promotion_gating`/`nuclear_flash_bindings`/`ts_death_palette` all clean,
+  `engine_freshness` pin == built VERSION.
+
+FAIL — all pre-existing tracked debt or live-edit drift, NONE from the merge-fallout work:
+- `three_way_split`: the AUDIT TOOL crashes — `intentional_composites.py:442`
+  `ValueError` on `wc2deathknightFire` stale weapon_digest. This is the stale
+  composite-registry re-curation already assigned to **Devin-Nova** (14 mains
+  mismatches). Not a content regression.
+- `gen_sync` drift = 3: `^Warhead_CannonAP_{Heavy,Light,Medium}` REFLECTOR 75(gen)
+  vs 74(file). This is the maintainer's LIVE Versus tweak (75->74 landed during the
+  run). Generator spec needs the same values — **Devin-Nova** owns
+  `gen_weapon_template.py`; do NOT revert the file values (maintainer ruling: final).
+- `doc_claims` 4 drifts (all +fresh landed content, will keep moving):
+  `physical_state_fired_weapons` 532->533, `plating_families` 47->48,
+  `warhead_family_reach` 1413->1415, `unconverted_template_inheritors` 1600->1595.
+  Per claim rule: update `value` + every listed doc IN ONE COMMIT. Flagging for
+  whichever doc-owner commits next — chasing them mid-sprint just re-drifts.
+  `multi_main_fired_weapons` couldn't measure (same stale-digest tooling issue).
+- `doc_health` 12: **8 control chars in this file FIXED by me** (0x07/0x08/0x0c
+  around lines 4614-4644, old pasted console output). Remaining: 4 non-UTF8
+  reference docs (FACTION_REFERENCE_MATRIX, RTS_BALANCE_REFERENCE,
+  PEER_ARMOR_VOCABULARIES, WARHEAD_REFERENCE — legacy encodings, need deliberate
+  transcoding not blind fix) + 1 broken markdown link.
+- `physical_state_warheads` 208, `meter_dilution` 36, `weapon_suffixes` 28/10/10,
+  `warhead_split` broadcast 75 vs baseline 90 (improving), `power_budget` 828,
+  `duplicate_keys` 260 merged — all pre-existing ratchet/baseline debt.
+- Advisories (non-gating): code_duplication, test_coverage, recent_changes,
+  error_handling, security.
+
+**W24 collapse audit (maintainer order via Ember):** verified `a92ae850f` +
+`95261becb` hunk-by-hunk. **9 of 10 collapse sites preserve damage sums exactly**
+(e.g. MissileAP_Light 12000+12000 -> 24000; Bullet_Light 8000+8000 -> 16000).
+The 10th, `^AtomicCore`, is NOT a pure collapse: it removed the whole Tesla_Heavy
+level (100k main + 100k ExtraDamage) and doubled Tesla_Super (100k->200k);
+IonCannon got the matching `-Warhead@Tesla_Heavy:` removal (legal — parent still
+provides it). Net flat sum 400k->300k = deliberate level-removal consistent with
+the NEW maintainer ruling ("no light/medium/heavy — heaviness bell"), not an error.
+
+**Earlier directives — status:**
+- 38 stale-removal deletions: **landed** — Aurora committed them as `c16457655`
+  (with the CannonTesla templates). Verified 0 resolved-content regressions.
+- claude/* collision check: `claude/bot_insurance_dynamic_trait` touches 250 files,
+  **0 overlap** with live WIP. The 155-commit line is a separate pipeline workstream
+  (ledgers/reference tooling), not a collision risk.
+- "Auto-stager" mystery: resolved — **multiple live agent sessions share this
+  working tree** (Aurora/Nova run git adds on it). Not a rogue hook. Everyone should
+  keep verifying `git diff --cached --name-only` immediately before commit; ride-
+  alongs this session were all content-verified before being allowed to stay.
+
+**Verdict: the tree is healthy.** Zero crash-class findings, zero new regressions
+attributable to the merge-fallout sweep or today's collapse/retrofit commits. All
+gating failures are known baselines or live-edit drift owned elsewhere.
+
+
 ## Claude (Opus 5, local — file access + boot gate) — reference sources DELIVERED, and four findings for other agents (2026-09-05)
 
 **Identifying per §3.A rule 1.** I am the `Claude` row in the HANDOFF roster — the LOCAL agent, not

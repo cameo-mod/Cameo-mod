@@ -52,11 +52,9 @@ _at or below baseline_ — pre-existing **W24** debt (75 weapons), not a regress
 _... and 35 more._
 
 
-## Review — exact gameplay restorations (1)
+## Review — exact gameplay restorations (0)
 
-| weapon | mains | per_warhead | total |
-|---|---|---|---|
-| HydraSpit | 4 | 18000 | 72000 |
+_none found_
 
 
 ## Review — routing-revealed composites (0)
@@ -71,7 +69,7 @@ _none found_
 None. ✅
 
 
-## Review — high uniform stacks (informational, 21)
+## Review — high uniform stacks (informational, 20)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 
@@ -84,7 +82,6 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | D2K_Rocket_Trooper_AA | 3 | 10000 | 30000 |
 | D2K_Rocket_Trooper_AGOnly | 3 | 10000 | 30000 |
 | DredMissile | 3 | 30000 | 90000 |
-| HydraSpit | 4 | 18000 | 72000 |
 | IdolCannon | 4 | 10000 | 40000 |
 | OIBigPlasmaCannon | 3 | 8000 | 24000 |
 | RA2Comet | 3 | 20000 | 60000 |

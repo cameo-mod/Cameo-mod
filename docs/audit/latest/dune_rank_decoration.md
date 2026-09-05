@@ -1,6 +1,6 @@
 # D2k rank decoration audit
 
-D2k actors with GainsExperience but WITHOUT DuneRankDecoration: **5**
+D2k actors with GainsExperience but WITHOUT DuneRankDecoration: **6**
 
 | File | Line | Actor |
 |---|---|---|
@@ -8,4 +8,5 @@ D2k actors with GainsExperience but WITHOUT DuneRankDecoration: **5**
 | ContentPacks/D2k/Atreides/yaml/vehicles.yaml | 151 | atreides_missiletank |
 | ContentPacks/D2k/Atreides/yaml/vehicles.yaml | 199 | atreides_siegetank |
 | ContentPacks/D2k/Corrino/yaml/vehicles.yaml | 246 | corrino_missiletank |
+| ContentPacks/D2k/Corrino/yaml/vehicles.yaml | 293 | corrino_siegetank |
 | ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml | 137 | devastator |

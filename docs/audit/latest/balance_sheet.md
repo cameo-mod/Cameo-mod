@@ -23,7 +23,7 @@
 | Twin Rocket Trooper | ixian_twinrockettrooper | Damage 48000 vs game 58240 |
 | Lunar Rocket | schwarzermond_lunarrocket | Damage 12000 vs game 16554 |
 | Madcap | terran_madcap | Damage 6000 vs game 36200 |
-| Hydralisk | zerg_hydralisk | Damage 8000 vs game 72104 |
+| Hydralisk | zerg_hydralisk | Damage 8000 vs game 18000 |
 | High Templar | protoss_hightemplar | Damage 8000 vs game 104000; Reload 8 vs game 64 |
 | Elven Archer | wc2_humans_elvenarcher | Damage 18000 vs game 24110 |
 | Asian Tank Killer | asianalliance_asiantankkiller | Damage 34000 vs game 68200 |

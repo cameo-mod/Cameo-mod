@@ -1,4 +1,4 @@
-# audit_duplicate_inherits — 1832 actor(s)/template(s) reach a parent through more than one path
+# audit_duplicate_inherits — 1833 actor(s)/template(s) reach a parent through more than one path
 
 A10Carrier:
   parent ^^ ^externalconditions  (2 paths)
@@ -7784,6 +7784,44 @@ corrino_sardaukar_sword:
   parent ^^ ^gravityweighter  (2 paths)
     -> corrino_sardaukar_sword -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> corrino_sardaukar_sword -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+corrino_siegetank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_siegetank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_siegetank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^vehiclebuffs  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> ^artillerybuffs -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> corrino_siegetank -> ^artillerytemplate -> Inherits@VehicleBuffs:^VehicleBuffs
+  parent ^^ ^globalbuffs  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> corrino_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+  parent ^^ ^gpssatellitesupport  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> corrino_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+  parent ^^ ^wayofthedragon  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> corrino_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+  parent ^^ ^helium3teamupgrademobile  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> corrino_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+  parent ^^ ^nanotechrepairs  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> corrino_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+  parent ^^ ^modernfirecontrolsystems  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> corrino_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+  parent ^^ ^blitzkrieg  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> corrino_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+  parent ^^ ^tiberiumadaptability  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> corrino_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+  parent ^^ ^prioritizebuilding  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> Inherits@AntiBuil:^PrioritizeBuilding
+    -> corrino_siegetank -> Inherits@AntiBuil:^PrioritizeBuilding
+  parent ^^ ^prioritizeinfantry  (2 paths)
+    -> corrino_siegetank -> ^artillerytemplate -> Inherits@AntiInf:^PrioritizeInfantry
+    -> corrino_siegetank -> Inherits@AntiInf:^PrioritizeInfantry
 
 corrino_spiceharvester:
   parent ^^ ^acceptscloakcrate  (2 paths)

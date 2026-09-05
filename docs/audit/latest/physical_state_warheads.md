@@ -3,7 +3,7 @@
 Active concrete weapons checked: 2367
 Formula percentage templates checked: 6
 
-## FAIL (210 problem(s))
+## FAIL (208 problem(s))
 
 - 120mm_td: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - 120mm_td: Warhead@LightChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
@@ -69,8 +69,6 @@ Formula percentage templates checked: 6
 - GradHeavyRockets: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - HarrierMissiles: Warhead@HeavyChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - HarrierMissiles_elite: Warhead@HeavyChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
-- HydraSpit: Warhead@LightChemicalWeapon: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
-- HydraSpit: Warhead@LightChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - ixian_airdrone: Warhead@LightChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - JapanMaidenBowEnergized: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)
 - JapanSuperBomb: Warhead@MediumChemicalWeaponPercentage: applies Corrosion through multiple bindings [100, 100] (combined nominal scale 200; runtime rounds each separately)

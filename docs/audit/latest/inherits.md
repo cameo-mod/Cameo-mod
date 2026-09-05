@@ -1,14 +1,14 @@
 # audit_inherits — §10.3 invariant violations (B2)
 
-Actors+templates scanned: **4077**
+Actors+templates scanned: **4081**
 
 | violation | meaning | count |
 |---|---|---|
 | V1 | concrete actor inherits from concrete actor | 277 |
 | V2 | inherit crosses faction ownership | 0 |
 | V3 | dangling inherit target (BLOCKING) | 0 |
-| V4 | chain depth > 3 | 1939 |
-| V5 | > 2 -Trait removals (warning) | 100 |
+| V4 | chain depth > 3 | 1941 |
+| V5 | > 2 -Trait removals (warning) | 102 |
 
 
 ## V3 — dangling inherit targets (blocking)
@@ -703,6 +703,7 @@ _none found_
 | corrino_sardaukar_javelin | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml |
 | corrino_sardaukar_laser | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml |
 | corrino_sardaukar_sword | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml |
+| corrino_siegetank | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | corrino_spiceharvester | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | corrino_starport | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/buildings.yaml |
 | corrino_storagesilo | 6 | mods/cameo/ContentPacks/D2k/Corrino/yaml/buildings.yaml |
@@ -1703,6 +1704,7 @@ _none found_
 | scrapcar_driveby.latin | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml |
 | siege_tank | 5 | mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml |
 | siege_tank_husk.atreides | 4 | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
+| siege_tank_husk.corrino | 4 | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | sietch_creep | 5 | mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml |
 | sietch_creep_disabled | 5 | mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml |
 | sonic_tank_husk.atreides | 4 | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
@@ -2274,6 +2276,8 @@ _none found_
 | cabal_orbdrone_slave | 3 | -UpdatesPlayerStatistics, -ActorLostNotification, -MapEditorData | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml |
 | cabal_plasmaturret | 3 | -WithVoxelBody, -Cloak@TDcloak, -ActorStatValues | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml |
 | cabal_rocketcyborg | 3 | -DamagedByTerrain, -SpawnActorOnDeath, -TakeCover | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml |
+| corrino_advancedcarryall | 4 | -SpawnActorOnDeath, -WithFacingSpriteBody, -WithDeathAnimation, -RevealsShroud@lockon | mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml |
+| corrino_gunship | 3 | -SpawnActorOnDeath, -WithDeathAnimation, -RevealsShroud@lockon | mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml |
 | cruiser_f.steel | 5 | -Selectable, -UpdatesPlayerStatistics, -ActorLostNotification, -WithShadow, -MapEditorData | mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml |
 | farasha_drone_ixian | 3 | -ActorLostNotification, -UpdatesPlayerStatistics, -MapEditorData | mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml |
 | forgotten_apache_husk | 3 | -WithShadow, -Cloak@TDcloak, -Cloak@TScloak | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/husks.yaml |

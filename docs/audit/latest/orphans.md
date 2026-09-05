@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **2891** — orphans: **367**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **16**
+Live weapons: **2894** — orphans: **367**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **16**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
@@ -172,8 +172,8 @@ _none found_
 | NaxiV1Rocket | mods/cameo/weapons/redalert2mod.yaml |
 | NaxisBlackBomb | mods/cameo/weapons/redalert2mod.yaml |
 | OP2bombchassisTargeting | mods/cameo/weapons/outpost2.yaml |
-| OrniBombC | mods/cameo/weapons/d2k.yaml |
-| OrniGunC | mods/cameo/weapons/d2k.yaml |
+| OrniBombC | mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml |
+| OrniGunC | mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml |
 | PDLaser | mods/cameo/weapons/weapons.yaml |
 | Patriot | mods/cameo/weapons/weapons.yaml |
 | PhoenixRocket | mods/cameo/weapons/d2k.yaml |
@@ -243,7 +243,7 @@ _none found_
 | ScrapCarSpawner | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml |
 | Short8Inch | mods/cameo/weapons/weapons.yaml |
 | SmallHeliCrash | mods/cameo/weapons/weapons.yaml |
-| Sound2 | mods/cameo/weapons/d2k.yaml |
+| Sound2 | mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml |
 | Spit | mods/cameo/weapons/weapons.yaml |
 | Spit_AA | mods/cameo/weapons/weapons.yaml |
 | SteelSupportSpawner1 | mods/cameo/weapons/redalert2mod.yaml |

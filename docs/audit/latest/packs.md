@@ -136,6 +136,7 @@ Fully converted prefixes (93): air, asianalliance, atreides, banshee, bbomb, bbo
 | D2k/Corrino | upgrade_light.corrino | corrino |
 | D2k/Corrino | upgrade_heavy.corrino | corrino |
 | D2k/Corrino | upgrade_radar.corrino | corrino |
+| D2k/Corrino | siege_tank_husk.corrino | corrino |
 | D2k/Harkonnen | carryall_husk.harkonnen | harkonnen |
 | D2k/Harkonnen | upgrade_conyard.harkonnen | harkonnen |
 | D2k/Harkonnen | upgrade_barracks.harkonnen | harkonnen |
@@ -235,4 +236,4 @@ _clean_
 
 - actor ids violating the lowercase grammar: **1510** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 
-Total findings: 708
+Total findings: 709

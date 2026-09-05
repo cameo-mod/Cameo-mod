@@ -1,13 +1,20 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **371**
+Files scanned: **386**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 76 | 30 |
+| E2 | handler discards the error | 87 | 30 |
 | E3 | open() without encoding= | 92 | 90 |
 | E4 | subprocess call without check= | 20 | 9 |
+
+
+## Files that do not parse
+
+| file | line | error |
+|---|---|---|
+| tools/tests/test_assign_references.py | 0 | source code string cannot contain null bytes |
 
 
 ## E1 — 2 finding(s)
@@ -18,7 +25,7 @@ Files scanned: **371**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 76 finding(s)
+## E2 — 87 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -39,7 +46,7 @@ Files scanned: **371**
 | tools/audit/audit_rank_decoration.py | 49 | handler body discards the error |
 | tools/audit/audit_rank_decoration.py | 68 | handler body discards the error |
 | tools/audit/audit_scaled_bullet_overrides.py | 41 | handler body discards the error |
-| tools/audit/audit_three_way_split.py | 122 | handler body discards the error |
+| tools/audit/audit_three_way_split.py | 125 | handler body discards the error |
 | tools/audit/audit_tier_weapon_class.py | 76 | handler body discards the error |
 | tools/audit/audit_unique_traits.py | 73 | handler body discards the error |
 | tools/audit/audit_upgrades.py | 158 | handler body discards the error |
@@ -56,8 +63,14 @@ Files scanned: **371**
 | tools/audit/review_resolve_diff.py | 62 | handler body discards the error |
 | tools/audit_ce_image_usage.py | 29 | handler body discards the error |
 | tools/audit_createeffect_image.py | 19 | handler body discards the error |
+| tools/balance/anchor_readiness.py | 136 | handler body discards the error |
+| tools/balance/anchor_readiness.py | 324 | handler body discards the error |
+| tools/balance/anchor_readiness.py | 396 | handler body discards the error |
 | tools/balance/armor_exposure.py | 105 | handler body discards the error |
 | tools/balance/armor_exposure.py | 141 | handler body discards the error |
+| tools/balance/assign_references.py | 72 | handler body discards the error |
+| tools/balance/assign_references.py | 249 | handler body discards the error |
+| tools/balance/class_membership.py | 224 | handler body discards the error |
 | tools/balance/compensate_retrofit.py | 113 | handler body discards the error |
 | tools/balance/compensate_retrofit.py | 121 | handler body discards the error |
 | tools/balance/consolidate_adjacent_family_stacks.py | 65 | handler body discards the error |
@@ -73,7 +86,10 @@ Files scanned: **371**
 | tools/balance/gen_derived_stats.py | 95 | handler body discards the error |
 | tools/balance/measure_retrofit_gap.py | 134 | handler body discards the error |
 | tools/balance/plan_firepower_retirement.py | 81 | handler body discards the error |
-| tools/balance/propose_class_rebalance.py | 282 | handler body discards the error |
+| tools/balance/propose_class_rebalance.py | 265 | handler body discards the error |
+| tools/balance/reference_distribution.py | 437 | handler body discards the error |
+| tools/balance/reference_distribution.py | 448 | handler body discards the error |
+| tools/balance/reference_distribution.py | 461 | handler body discards the error |
 | tools/balance/report_versus_change.py | 74 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 219 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 322 | handler body discards the error |
@@ -82,6 +98,7 @@ Files scanned: **371**
 | tools/balance/retrofit_legacy_template.py | 536 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 547 | handler body discards the error |
 | tools/balance/shield_uniqueness.py | 63 | handler body discards the error |
+| tools/balance/synthesize_reference.py | 360 | handler body discards the error |
 | tools/balance/target_model.py | 416 | handler body discards the error |
 | tools/balance/tier_chain.py | 48 | handler body discards the error |
 | tools/balance/tier_chain.py | 119 | handler body discards the error |
@@ -91,6 +108,7 @@ Files scanned: **371**
 | tools/balance/verify_retrofit.py | 87 | handler body discards the error |
 | tools/hooks/bash_guard.py | 103 | handler body discards the error |
 | tools/reference/aggregate_archetype.py | 873 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 481 | handler body discards the error |
 | tools/reference/extract_versus.py | 175 | handler body discards the error |
 | tools/rename/apply.py | 178 | handler body discards the error |
 | tools/rename/safe_rename.py | 132 | handler body discards the error |
@@ -226,7 +244,8 @@ Files scanned: **371**
 
 ## FAIL
 
-- E2: 76 > baseline 30
+- E2: 87 > baseline 30
 - E3: 92 > baseline 90
 - E4: 20 > baseline 9
+- 1 file(s) do not parse
 

@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (5 file(s)) | 48 | >= 24 |
-| T2 | `def test_*` in tools/tests (80 file(s)) | 758 | >= 177 |
-| T3 | modules with no test mentioning them | 263 | <= 224 |
+| T2 | `def test_*` in tools/tests (84 file(s)) | 804 | >= 177 |
+| T3 | modules with no test mentioning them | 264 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (263)
+## T3 — untested modules (264)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -241,6 +241,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/_show_audit_summaries.py | _show_audit_summaries |
 | python | tools/balance/_write_weapon_class.py | _write_weapon_class |
 | python | tools/balance/armor_exposure.py | armor_exposure |
+| python | tools/balance/assign_references.py | assign_references |
 | python | tools/balance/audit_below_divider.py | audit_below_divider |
 | python | tools/balance/compensate_retrofit.py | compensate_retrofit |
 | python | tools/balance/consolidate_compatibility_profiles.py | consolidate_compatibility_profiles |
@@ -272,8 +273,8 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/strip_orphan_report.py | strip_orphan_report |
 | python | tools/balance/strip_weapon_versus.py | strip_weapon_versus |
 | python | tools/balance/sweep_areadamage.py | sweep_areadamage |
+| python | tools/balance/synthesize_reference.py | synthesize_reference |
 | python | tools/balance/tier_chain.py | tier_chain |
-| python | tools/balance/update_ranges.py | update_ranges |
 | python | tools/balance/verify_generator_sync.py | verify_generator_sync |
 | python | tools/balance/verify_retrofit.py | verify_retrofit |
 | python | tools/packs/extract_shared.py | extract_shared |
@@ -286,5 +287,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 263 untested > baseline 224
+- T3: 264 untested > baseline 224
 
