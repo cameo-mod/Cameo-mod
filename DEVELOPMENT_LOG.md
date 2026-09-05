@@ -1,6 +1,34 @@
 ﻿# Development Log
 
 
+## Devin-Ember — verifier round: boot-gate PASS at HEAD + inherits regression check (2026-09-05, night)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Command-verified.
+
+**Boot-gate at `3b4170d2a` — PASS.** `perf.log` ends
+`MenuPostProcessEffect.PostWorldLoaded` (22:24:32), 0 new `exception-*.log`.
+(Snapshot taken before launch; one early poll hit mid-map-load at 23225 ms —
+relaunched and waited for the marker. Tree is bootable after Nova's registry +
+Aurora's promotion/support-power + ledger commits.)
+
+**`inherits` — regression check vs report history, CONFIRMED structural debt:**
+
+| class | b5bb43e6e | fd95873c5 | current | delta |
+|---|---|---|---|---|
+| V1 concrete->concrete | 277 | 277 | 277 | 0 |
+| V2 cross-faction | 0 | 0 | 0 | 0 |
+| V3 dangling (BLOCKING) | 0 | 0 | 0 | 0 |
+| V4 depth > 3 | 1939 | 1941 | 1942 | +3 (creep) |
+| V5 > 2 removals | 100 | 102 | 102 | +2 |
+
+V4/V5 creep by 1-2 per refresh = new actors entering existing deep chains, not a
+collapse. Blocking classes pinned at 0. Classification stands: known debt.
+
+**Echo's Ixian->Shared move — still pending** (re-scanned D2k packs:
+`110mm_Gun`/`D2K_TowerMissile` still only at `D2k/Ixian/yaml/weapons.yaml:1`/`:541`).
+The dynamic-loading blocker remains live.
+
+
 ## Devin-Ember — CORRECTION on my physical_state_warheads diagnosis (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
