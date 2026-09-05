@@ -1,6 +1,40 @@
 ﻿# Development Log
 
 
+## Devin-Ember — RED GATE TRIAGE, part 2: meter_dilution forensic report (2026-09-05, night)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Forensic trace complete.
+
+**Mechanism of the 32 -> 36 regression:** NOT new actors — W23 template repoints
+landed `PhysicalStateName`-bearing `^Warhead_*` families (Laser_Heavy Temperature,
+Compatibility_Cryo_*, Flame_*, Chemical_* Corrosion) onto weapons of multi-gun
+actors. The actor became a "state carrier" overnight, and its unconditional
+non-state siblings became diluting. `cruiser_f.steel` left the list; 5-6 entered.
+
+| actor | diluting weapon (non-state, unconditional) | state weapon | pack | route |
+|---|---|---|---|---|
+| `japan_japanesespeedboat` (9.56x) | `DepthCharge` x2 | `JapanSpeedBoatGun`(+Waveforce variant) | RedAlert/Shared | unassigned - Claude assigns |
+| `cabal_hunterkillermk1` + `_elite` | `TSHellfireTwin` (multi-warhead stack) | `CabalHunterKillerLasers[_elite]` -> `^Warhead_Laser_Heavy` | TiberianSun/CABAL | **Devin-Echo** |
+| `schwarzermond_drone` | `LunarNaxiDroneMissile` | `LunarNaxiDroneLaser` -> `^Warhead_Laser_Heavy` | RA2Mod (actor SM / weapons Naxis) | unassigned - Claude assigns |
+| `tkm_iroquois` | `HueyGun` | `HueyCryoMissiles` -> `^Compatibility_Cryo_MediumFlat` | RA2Mod/TKM | unassigned |
+| `tkm_stryker` | `tkmstrykermg` | `tkmstrykerfirerockets` -> `^Warhead_Flame_Medium` | RA2Mod/TKM | unassigned |
+| `protoss_idol` | `WaveforceCannonChargedLaser` + `DistortedBeam1` | `DistortedBeam2` (Chemical+Flame, counts as 2) | StarCraft/Protoss | unassigned |
+| `naxis_ratte` | `NaxQuadCannon_AA_elite` flak + new `CannonHE_HeavyFlatCompatibility` warhead | `NaxRatteCannon` (LightChemical -> Corrosion) | RA2Mod/Naxis | unassigned |
+| `wc2_humans_mage` / `archmage` | `wc2mageFire` (unconditional via Armament@GARRISONED) | `wc2mageFireballVisible` + `wc2mageBlizzard` | Warcraft2/Humans | **Devin-Cyrus** (pre-existing, NOT his hero work - armaments unchanged) |
+
+**The design question the fix needs (route to Claude):** "make every weapon on a
+state unit feed the same meter" is only right when the second gun thematically
+feeds that meter (a Cryo missile's sibling bullet gun filling the Temperature
+meter is questionable). Two correct-shaped fixes per actor: (a) bind the diluting
+gun to the same PhysicalState, or (b) rule the state assignment off the repointed
+weapon. Ratchet stays at 32 - do NOT raise.
+
+**Commit-level provenance:** the trace identified weapons/files/lanes precisely;
+the exact introducing commit per actor needs `git log -p -S <weapon>` runs, which
+the read-only tracer could not execute. Available on request - but the mechanism
+is the actionable answer: it is the W23/W24 wave, faction by faction.
+
+
 ## Devin-Ember — RED GATE TRIAGE, part 1: diagnosis + routing (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max). Executing Claude's red-gate assignment.
