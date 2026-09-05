@@ -4220,3 +4220,39 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 **Commit:** `d1a312b31` feat(d2k_harkonnen): add custom harkonnen_sardaukar_baron_elite sprite atlas.
 
 **Note:** Working tree still has Ixian weapon edits that needed a structural fix (`-Warhead@Bullet_Light:` removal lines referencing non-existent nodes were removed to allow boot). I left the rest of the Ixian WIP uncommitted.
+
+## 2026-09-05 — Devin-Aurora: merge-fallout boot-fixes (cda4c54ec)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High).
+**Scope:** Fix boot-blockers introduced by merge 4fd9937f3 (origin/master into weapon_structure_and_warhead_fold).
+
+**Problem:** After the merge, the game could not reach the main menu due to four classes of errors:
+
+1. **24 duplicate Inherits@ entries** across 16 files — the same parent template
+   inherited twice at the same node (e.g. ^StealthGenCloakable, ^BuildingPlugProducer,
+   ^StandardBuildTimeSpeedReduction, ^3x3Shape, ^AntiAirDefenseTemplate, etc.).
+   The engine's ResolveInherits throws on direct duplicates.
+
+2. **Missing weapon KotinCannonNuclearShell** — the merge reverted the weapons.yaml
+   rename from commit 4a1479b50 (KotinCannonThermobaric -> KotinCannonNuclearShell)
+   but kept the vehicles.yaml reference to the new name. The maintainer supplied a
+   proper definition with ^Warhead_CannonNuke_Heavy inheritance.
+
+3. **Missing weapons ordos_chemturret and ordos_laserturret** — the merge dropped
+   these from the Ordos weapons file. Restored self-contained definitions
+   (ordos_chemturret no longer inherits from the also-merge-lost D2K_MortarChem).
+
+4. **Case-mismatched weapon references:** RA2Scud -> RA2SCUD, RA2Scud_rad ->
+   RA2SCUD_rad, claw -> Claw, TSChemsprayUp -> TSChemsprayUP.
+
+**Rationale:** All four classes are direct merge-fallout — the merge resolution
+dropped local-branch content in favor of origin/master or vice versa without
+reconciling cross-file references. The fixes restore the pre-merge resolved state.
+
+**Verification:**
+- Boot-gate: launch-game.cmd reached MenuPostProcessEffect.PostWorldLoaded.
+- Zero new exception-*.log files in %APPDATA%/OpenRA/Logs.
+
+**Commit:** cda4c54ec fix: remove duplicate inherits and restore merge-lost weapon definitions.
+
+**Next:** Resume Ordos turret/mortar pass and W24 queue from HANDOFF.md.
