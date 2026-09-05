@@ -249,9 +249,10 @@ atreides_starport:
 atreides_palace:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^2x2Shape
 	Buildable:
-		Prerequisites: ~hightech.atreides, ~research_centre
+		Prerequisites: ~hightech.atreides, ~research_centre, !apalace, ~techlevel.superweapons
 		Description: Unlocks superweapons and elite units.
 		IconPalette: d2kunit
 	Tooltip:
@@ -264,6 +265,63 @@ atreides_palace:
 		Image: palace.atreides
 	ProvidesPrerequisite@palace:
 		Prerequisite: palace
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: apalace
+	AirstrikePower@orni:
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		IconImage: atreides_ornithopter
+		IconPalette: d2kunit
+		ChargeInterval: 4500
+		UnitTypes:
+			1: atreides_ornithopter
+		SquadSizes:
+			1: 3
+		QuantizedFacings: 32
+		Names:
+			1: Ornithopter Airstrike
+		Descriptions:
+			1: Ornithopters hit the target with bombs and heavy machine guns
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: EnemyPlanesApproaching
+		DisplayBeacon: True
+		AllowMultiple: False
+		DisplayRadarPing: True
+		CameraActor: camera
+		CameraRemoveDelay: 150
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		OrderName: ornistrike
+		SupportPowerPaletteOrder: 10
+	ProduceActorPower@fremenguerilla:
+		Name: Fremen Guerilla
+		Description: Deploys 3 Fremen warriors anywhere on map
+		Icon: fremenicon
+		IconPalette: d2kunit
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Actors: atreides_fremen, atreides_fremen, atreides_fremen
+		Type: Fremen
+		ChargeInterval: 1500
+		AutoFire: true
+		OrderName: callatrfremen
+		SupportPowerPaletteOrder: 20
+		LaunchSound: A_FSEL1.AUD
+	Exit@1:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,2
+	Exit@2:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,3
+	Exit@3:
+		SpawnOffset: -704,768,0
+		ExitCell: 0,3
+	RallyPoint:
+	Production@Fremen:
+		Produces: Fremen
 
 atreides_gunturret:
 	Inherits: ^D2KBuilding
