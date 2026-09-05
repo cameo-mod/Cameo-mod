@@ -1,6 +1,6 @@
 # Cameo — THE HANDOFF
 
-**2026-08-25 update (Devin AI):** The volcanic shellmap (`shellmap_v3.oramap`) camera was too tight (6-cell radius), hiding the scripted attack waves. The `attack.lua` camera radius has been widened to 45 cells, the global ruleset stale `-Warhead@CannonHE_Medium` crash is resolved, and boot-gate passes with no new exceptions. See `DEVELOPMENT_LOG.md` § "Volcanic shellmap camera radius fix" for evidence and verification.
+**2026-08-25 update (Devin AI):** The volcanic shellmap (`shellmap_v3.oramap`) camera was too tight (6-cell radius), hiding the scripted attack waves. The `attack.lua` camera radius has been widened to 45 cells. The boot-blocking stale removal `-Warhead@CannonHE_MediumPercentage` in `weapons/outpost2.yaml` is resolved in `a92ae850`, and boot-gate passes with no new exceptions. See `DEVELOPMENT_LOG.md` § "Volcanic shellmap camera radius fix" for evidence and verification.
 
 **This is the single entry point for anyone picking up work on Cameo — human or agent.**
 Written 2026-08-23, re-verified against master at `e60aab63`. It supersedes every previous handoff document;
