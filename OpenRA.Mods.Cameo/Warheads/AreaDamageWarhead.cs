@@ -177,6 +177,29 @@ namespace OpenRA.Mods.Cameo.Warheads
 			if (PercentageDenominator <= 0)
 				throw new YamlException("PercentageDenominator must be positive.");
 
+			// §12.0i — continuous heaviness. Heaviness = 0 keeps authored values verbatim.
+			if (Heaviness == 0)
+			{
+				effectiveSpread = Spread;
+				effectiveVersus = Versus;
+				effectivePercentageVersus = PercentageVersus.Count > 0 ? PercentageVersus : Versus;
+			}
+			else
+			{
+				var h = Heaviness / 1000.0;
+
+				// Spread scale: linear interpolation of the existing LEVEL_RADIUS_SCALE points
+				// Light h=0 -> 2/3, Medium h=1 -> 1, Heavy h=2 -> 4/3. Super/Trace are outside the
+				// currently ruled h range and stay unhandled until the maintainer rules them.
+				var spreadScale = (h + 2.0) / 3.0;
+				effectiveSpread = new WDist((int)(Spread.Length * spreadScale));
+
+				effectiveVersus = HeavinessBell.Transform(Versus, h);
+				effectivePercentageVersus = PercentageVersus.Count > 0
+					? HeavinessBell.Transform(PercentageVersus, h)
+					: effectiveVersus;
+			}
+
 			if (Range != null)
 			{
 				if (Range.Length != 1 && Range.Length != Falloff.Length)

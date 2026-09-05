@@ -1,5 +1,24 @@
 # Development Log
 
+## Devin-Aurora — GDI stale removal fix (2026-09-05, continued)
+
+**Identity:** Devin-Aurora (GLM-5.2 High).
+
+**What and why:**
+- Boot-gate found a stale `-Warhead@MissileAP_Light:` removal in `RocketsHumvee2AMT_AA`
+  (TiberianDawn/GDI/yaml/weapons.yaml:1211). The parent `RocketsHumvee2AMT` already removes
+  `Warhead@MissileAP_Light` at line 1197, so the child's removal is orphaned and crashes
+  the engine's `ResolveInherits`.
+- Also includes a stale `-Warhead@MissileHE_Light:` removal in `CommandoRocketLauncher`
+  (line 1687) — same class of bug, found by another agent in the same file.
+- `find_empty_warhead.py` = 0 after fix.
+
+**Verification:**
+- Boot-gate: `MenuPostProcessEffect.PostWorldLoaded` reached (290s), 0 new exception-*.log.
+
+**Files changed:**
+- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml`
+
 ## Devin-Aurora — coordination pass + boot-fix batch 2 (2026-09-05)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k Phase 0/1/2/3 coordinator.
@@ -166,6 +185,17 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Re-sweeps after fixes: stale-removal class = 0, missing-parent class = 0, dangling `Weapon:`
   refs = 0, real case-mismatches = 0 (38 `Cursor: c4` noise — `c4` collides with the `C4`
   weapon key), `find_empty_warhead.py` = 0, `audit_duplicate_inherits` = diamonds-only baseline.
+- **Third crash (in-game, shellmap):** `NullReferenceException` at
+  `AreaDamageWarhead.VersusFrom` (`AreaDamageWarhead.cs:260`) — `effectiveVersus` was never
+  assigned. Root cause: merge `4fd9937f3` dropped the `// §12.0i — continuous heaviness`
+  assignment block from `RulesetLoaded` (introduced by `7704fcf67`/`557e679dc`), leaving
+  `effectiveSpread`/`effectiveVersus`/`effectivePercentageVersus` declared-but-null. Every
+  AreaDamage hit NRE'd — a clean rebuild made ALL combat crash, not just new content.
+  The block was restored on disk (identical to `557e679dc`'s version); I rebuilt
+  (`dotnet build -c Release -p:TargetPlatform=win-x64`, 0 errors) and committed the file so
+  the fix cannot be lost to a clean rebuild.
+- **Final boot-gate: PASSED** — `MenuPostProcessEffect.PostWorldLoaded` reached, 0 new
+  exception logs.
 
 ## Devin AI — AI architecture `UnitsToBuild` migration blocked by merge order (2026-09-05)
 
@@ -4481,4 +4511,17 @@ Local terminal session on the maintainer''s Windows machine. Role this session: 
 4. **Maintainer edits done** — TKM buildings / SchwarzerMond weapons are clean in `git status`
    (already in HEAD); nothing of theirs is pending in the tree.
 
-**My next step:** boot-gate → scoped commit → `git push origin weapon_structure_and_warhead_fold`. — Devin-Nova
+### P0 found + fixed during boot-gate (2026-09-05)
+
+A concurrent boot attempt (17:32, another agent/user) crashed on the shellmap with
+`NullReferenceException` in `AreaDamageWarhead.VersusFrom` (AreaDamageWarhead.cs:260 —
+`table.Count` on a null `effectiveVersus`). Root cause: merge `4fd9937f3` kept master's new
+`PercentageDenominator` guard but **dropped the branch's §12.0i heaviness-init block**, so
+`effectiveVersus`/`effectivePercentageVersus`/`effectiveSpread` were declared but never assigned
+→ NRE on the first `AreaDamage` impact. Restored the init block verbatim from `4fd9937f3^1`
+(kept the master's guard). `HeavinessBell.cs` was already present; `dotnet build` clean.
+
+**Verification:** rebuilt `engine/bin/OpenRA.Mods.Cameo.dll`; `launch-game.cmd` reached the main
+menu — `perf.log` ends with `MenuPostProcessEffect.PostWorldLoaded` (~30.5s), **zero** new
+`exception-*.log`. Committing the C# fix + the three merge-fallout yaml fixes + the audit
+refresh in scoped commits, then pushing the branch per maintainer order. — Devin-Nova

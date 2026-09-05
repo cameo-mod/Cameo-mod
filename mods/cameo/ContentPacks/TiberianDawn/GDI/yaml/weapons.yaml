@@ -1208,7 +1208,6 @@ RocketsHumvee2AMT_AA:
 		ValidTargets: Air
 	-Warhead@MissileAP_Heavy:
 	-Warhead@MissileAP_HeavyFlatCompatibility:
-	-Warhead@MissileAP_Light:
 	Warhead@MissileAA_HeavyFlatCompatibility:
 		ValidTargets: Air
 		Damage: 32000
@@ -1687,7 +1686,6 @@ CommandoRocketLauncher:
 		Explosions: blue_building_napalm
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Air, Water

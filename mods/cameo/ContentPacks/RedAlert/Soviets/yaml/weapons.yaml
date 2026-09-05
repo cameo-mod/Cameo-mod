@@ -2485,32 +2485,7 @@ KotinCannon:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 
-KotinCannonNuclearShell:
-	Inherits@thermobaric: ^Warhead_Thermobaric_Heavy
-	Inherits@flameprojectile: ^Projectile_Flame_Medium
-	Inherits@4: ^Effect_Flame_Medium
-	Inherits@3: KotinCannon
-	Report: tnkfire6.aud
-	-Warhead@CannonHE_Heavy:
-	Warhead@Thermobaric_Heavy:
-		Damage: 16000
-		Versus:
-			Scout: 98
-			Light: 90
-			Medium: 86
-		PhysicalStates:
-			Temperature: 25
-	Warhead@Radiation: CreateTintedCells
-		InvalidTargets: RadiationImmmune
-		Spread: 1000
-		Falloff: 100, 50, 33, 25, 20, 15, 10, 5
-		Level: 30
-		MaxLevel: 2000
-		LayerName: ra2radiation
-	Warhead@Effect: CreateEffect
-		Explosions: nuke_small
-		ImpactSounds: xplosml2.aud
-		ImpactActors: true
+
 
 ra120mmTargetingComputer:
 	Inherits: ra120mm
