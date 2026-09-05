@@ -91,7 +91,7 @@ atreides_fremen:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 80
-		Prerequisites: ~atreides_barracks, upgrade_barracks, ~hightech.atreides, ~atreides_promotion_fremen
+		Prerequisites: ~atreides_barracks, ~hightech.atreides, upgrade_barracks, ~atreides_promotion_fremen
 		Icon: phantomicon
 		IconPalette: windows256
 		Description: Fast Elite infantry units armed with assault rifles and machine guns. When grouped, they can take down buildings extremely quickly.\nDetector\n  Strong vs Buildings\n  Weak vs Infantry, Vehicles\n  Special Ability: Invisibility
