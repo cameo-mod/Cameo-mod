@@ -71,6 +71,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Valued.Cost",
@@ -84,6 +85,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
@@ -108,7 +110,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "250"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
+    },
+    "turreted": false
    },
    "A10Carrier": {
     "armaments": [
@@ -208,6 +215,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Valued.Cost",
@@ -221,6 +229,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Health.HP",
      "v": "10000"
@@ -249,7 +258,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "200"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "12"
+    },
+    "turreted": false
    },
    "gdirigdrone": {
     "armaments": [
@@ -332,6 +346,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Valued.Cost",
@@ -345,6 +360,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
@@ -373,13 +389,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "120"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "48"
+    },
+    "turreted": true
    },
    "td_gdi_chinooktransport": {
     "armor": {
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Valued.Cost",
@@ -393,6 +415,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -428,7 +451,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "30"
+    },
+    "turreted": false
    },
    "td_gdi_firehawk": {
     "armaments": [
@@ -557,6 +585,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Valued.Cost",
@@ -575,6 +604,7 @@
      "trait": "FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment",
      "v": 1.2
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Health.HP",
      "v": "180000"
@@ -612,7 +642,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "180"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "12"
+    },
+    "turreted": false
    },
    "td_gdi_orca": {
     "armaments": [
@@ -764,6 +799,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Valued.Cost",
@@ -777,6 +813,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Health.HP",
      "v": "32500"
@@ -812,7 +849,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "175"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "35"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -821,6 +863,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -837,6 +880,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -870,13 +914,15 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_advancedcommunicationscenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -893,6 +939,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -925,7 +972,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_advancedguardtower": {
     "armaments": [
@@ -1096,6 +1144,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml#Valued.Cost",
@@ -1109,6 +1158,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.325
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml#Health.HP",
      "v": "140000"
@@ -1141,13 +1191,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "8772"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1164,6 +1216,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1196,13 +1249,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_communicationscenter": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1219,6 +1274,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1251,13 +1307,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1270,6 +1328,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1301,7 +1360,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_guardtower": {
     "armaments": [
@@ -1325,14 +1385,12 @@
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "HighV"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "HighV",
+      "weapon": "td_gdi_guardtower_highv",
       "weapon_class_source": "template"
      },
      {
@@ -1347,7 +1405,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6720",
@@ -1355,14 +1413,12 @@
       "requires": "td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Bullet_Medium",
-       "^Effect_Bullet_Medium"
+       "HighVAP"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "HighVAP",
+      "weapon": "td_gdi_guardtower_highvap",
       "weapon_class_source": "template"
      }
     ],
@@ -1370,6 +1426,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml#Valued.Cost",
@@ -1382,6 +1439,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml#Health.HP",
      "v": "60000"
@@ -1414,13 +1472,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6720"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_helipad": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -1437,6 +1497,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1469,9 +1530,11 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_ioncannonuplink": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1488,6 +1551,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ion Cannon Uplink",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -1497,13 +1561,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_repairfacility": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1520,6 +1586,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1552,7 +1619,8 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_skyshield": {
     "armaments": [
@@ -1618,6 +1686,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml#Valued.Cost",
@@ -1631,6 +1700,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.225
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml#Health.HP",
      "v": "93000"
@@ -1663,13 +1733,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "13800"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_tiberiumrefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1686,6 +1758,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1718,13 +1791,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_weaponsfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1741,6 +1816,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1773,7 +1849,8 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -1906,6 +1983,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1919,6 +1997,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "31000"
@@ -1950,7 +2029,8 @@
     "speed": {
      "src": "inherited",
      "v": "63"
-    }
+    },
+    "turreted": false
    },
    "E3": {
     "armaments": [
@@ -2071,6 +2151,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -2084,6 +2165,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "9000"
@@ -2116,7 +2198,8 @@
     "speed": {
      "src": "inherited",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_commando": {
     "armaments": [
@@ -2331,6 +2414,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2348,6 +2432,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "80000"
@@ -2381,7 +2466,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_empgrenadier": {
     "armaments": [
@@ -2597,6 +2683,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Valued.Cost",
@@ -2615,6 +2702,7 @@
      "trait": "FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment",
      "v": 1.2
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "32000"
@@ -2647,7 +2735,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_grenadier": {
     "armaments": [
@@ -2711,6 +2800,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Valued.Cost",
@@ -2724,6 +2814,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.4
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "8000"
@@ -2756,7 +2847,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_havoc": {
     "armaments": [
@@ -3126,6 +3218,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3148,6 +3241,7 @@
      "trait": "FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment",
      "v": 1.2
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "100000"
@@ -3181,7 +3275,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_heavysniper": {
     "armaments": [
@@ -3349,6 +3444,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Valued.Cost",
@@ -3362,6 +3458,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "25000"
@@ -3395,7 +3492,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "78"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_minigunner": {
     "armaments": [
@@ -3526,6 +3624,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -3544,6 +3643,7 @@
      "trait": "FirepowerMultiplier@td_gdi_minigunner",
      "v": 0.24
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "31000"
@@ -3579,7 +3679,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "63"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_officer": {
     "armaments": [
@@ -3716,6 +3817,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Valued.Cost",
@@ -3734,6 +3836,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.08
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "32000"
@@ -3767,7 +3870,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "79"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_rocketsoldier": {
     "armaments": [
@@ -3888,6 +3992,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -3901,6 +4006,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "9000"
@@ -3937,7 +4043,8 @@
     "speed": {
      "src": "inherited",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_shotgunner": {
     "armaments": [
@@ -4011,6 +4118,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Valued.Cost",
@@ -4029,6 +4137,7 @@
      "trait": "FirepowerMultiplier@td_gdi_upgrade_armorpiercingbullets",
      "v": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -4061,7 +4170,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_sonicmissilesoldier": {
     "armaments": [
@@ -4203,6 +4313,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Valued.Cost",
@@ -4216,6 +4327,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "25000"
@@ -4248,7 +4360,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    }
   },
   "naval": {
@@ -4328,6 +4441,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Valued.Cost",
@@ -4341,6 +4455,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Health.HP",
      "v": "167500"
@@ -4381,7 +4496,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": true
    },
    "CNCPT": {
     "armaments": [
@@ -4503,6 +4619,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Valued.Cost",
@@ -4516,6 +4633,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Health.HP",
      "v": "75000"
@@ -4555,13 +4673,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "LST": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Valued.Cost",
@@ -4575,6 +4695,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Health.HP",
      "v": "75000"
@@ -4614,7 +4735,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "gdicarrier": {
     "armaments": [
@@ -4637,6 +4759,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Valued.Cost",
@@ -4650,6 +4773,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Health.HP",
      "v": "300000"
@@ -4690,11 +4814,13 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "td_gdi_promotion_assaultapc": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4707,6 +4833,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Assault APC",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4716,9 +4843,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_empgrenadier": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4731,6 +4860,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock EMP Grenadier",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4739,9 +4869,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_firehawk": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4754,6 +4886,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Firehawk",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4763,9 +4896,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_gdidefenserig": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4778,6 +4913,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock GDI Defense Rig",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4787,9 +4923,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_gdiofficer": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4802,6 +4940,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock GDI Officer",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4811,9 +4950,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_havocandexosuit": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4826,6 +4967,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Havoc and Exosuit",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4835,9 +4977,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_humveemkii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4850,6 +4994,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Humvee Mk. II",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4858,9 +5003,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_mammothtankmk3": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4873,6 +5020,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Mammoth Tank Mk3",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4882,9 +5030,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_missilesoldier": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4897,6 +5047,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Missile Soldier",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4906,9 +5057,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_predatortank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4921,6 +5074,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Predator Tank",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4930,9 +5084,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_shotgunner": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4945,6 +5101,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Shotgunner",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4953,9 +5110,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_promotion_sniper": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4968,6 +5127,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Sniper",
     "prerequisites": [
      "~td_gdi_constructionyard",
@@ -4977,11 +5137,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "td_gdi_upgrade_a10airstrike": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4998,6 +5160,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock A10 Airstrike",
     "prerequisites": [
      "~td_gdi_communicationscenter",
@@ -5005,9 +5168,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_upgrade_advancedmissiletargeting": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5024,6 +5189,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Advanced Missile Targeting",
     "prerequisites": [
      "~td_gdi_advancedcommunicationscenter",
@@ -5031,9 +5197,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_upgrade_armorpiercingbullets": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5050,6 +5218,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Armor Piercing Bullets",
     "prerequisites": [
      "~td_gdi_communicationscenter",
@@ -5057,9 +5226,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_upgrade_cuttingedgeequipment": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5076,6 +5247,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Cutting Edge Equipment",
     "prerequisites": [
      "~td_gdi_advancedcommunicationscenter",
@@ -5083,9 +5255,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_upgrade_heavyaircraftarmorplating": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5102,6 +5276,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Aircraft Armor Plating",
     "prerequisites": [
      "~td_gdi_advancedcommunicationscenter",
@@ -5109,9 +5284,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_upgrade_highvelocitycannons": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5128,6 +5305,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "High Velocity Cannons",
     "prerequisites": [
      "~td_gdi_advancedcommunicationscenter",
@@ -5135,9 +5313,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_upgrade_lightweightarmorplating": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5154,6 +5334,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Lightweight Armor Plating",
     "prerequisites": [
      "~td_gdi_advancedcommunicationscenter",
@@ -5161,9 +5342,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "td_gdi_upgrade_longrangesensors": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5180,6 +5363,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Long Range Sensors",
     "prerequisites": [
      "~td_gdi_communicationscenter",
@@ -5187,9 +5371,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "team_upgrade.up_lightweightarmorplating": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5202,7 +5388,9 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Lightweight Armor Plating"
+    "gatling_spinup": false,
+    "name": "Lightweight Armor Plating",
+    "turreted": false
    }
   },
   "vehicles": {
@@ -5270,6 +5458,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -5283,6 +5472,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "47500"
@@ -5324,7 +5514,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_archerartillery": {
     "armaments": [
@@ -5406,6 +5597,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -5419,6 +5611,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "35000"
@@ -5459,7 +5652,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "14"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_assaultapc": {
     "armaments": [
@@ -5584,6 +5778,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -5597,6 +5792,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "250000"
@@ -5638,7 +5834,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_battletank": {
     "armaments": [
@@ -5788,6 +5985,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -5806,6 +6004,7 @@
      "trait": "FirepowerMultiplier@td_gdi_upgrade_armorpiercingbullets",
      "v": 1.05
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -5846,7 +6045,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_boxer": {
     "armaments": [
@@ -5992,6 +6192,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -6010,6 +6211,7 @@
      "trait": "FirepowerMultiplier@ra1_allies_alliedheavyaatank",
      "v": 0.5
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "110000"
@@ -6050,7 +6252,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_defenserig": {
     "armaments": [
@@ -6449,6 +6652,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -6466,6 +6670,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "400000"
@@ -6507,7 +6712,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_exosuit": {
     "armaments": [
@@ -6552,6 +6758,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -6570,6 +6777,7 @@
      "trait": "FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment",
      "v": 1.2
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -6611,7 +6819,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_humvee": {
     "armaments": [
@@ -6680,6 +6889,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -6693,6 +6903,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.333
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "27500"
@@ -6733,7 +6944,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_humveemkii": {
     "armaments": [
@@ -6972,6 +7184,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -6990,6 +7203,7 @@
      "trait": "FirepowerMultiplier@Upgrade",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "37500"
@@ -7030,7 +7244,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "23"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_mammothtank": {
     "armaments": [
@@ -7161,6 +7376,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -7174,6 +7390,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "225000"
@@ -7215,7 +7432,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_mammothtankmkiii": {
     "armaments": [
@@ -7346,6 +7564,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -7359,6 +7578,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "500000"
@@ -7400,7 +7620,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "11"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_mlrs": {
     "armaments": [
@@ -7470,6 +7691,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -7483,6 +7705,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -7523,13 +7746,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -7547,6 +7772,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -7587,7 +7813,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "td_gdi_predatortank": {
     "armaments": [
@@ -7753,6 +7980,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
@@ -7771,6 +7999,7 @@
      "trait": "FirepowerMultiplier@td_gdi_upgrade_armorpiercingbullets",
      "v": 1.05
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "170000"
@@ -7811,13 +8040,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "14"
-    }
+    },
+    "turreted": true
    },
    "td_gdi_tiberiumharvester": {
     "armor": {
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -7835,6 +8066,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "150000"
@@ -7879,7 +8111,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "12"
-    }
+    },
+    "turreted": false
    }
   }
  }

@@ -9,6 +9,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Valued.Cost",
@@ -22,6 +23,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
@@ -57,7 +59,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "125"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
+    },
+    "turreted": false
    },
    "ra1_allies_blackhawk": {
     "armaments": [
@@ -180,6 +187,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Valued.Cost",
@@ -198,6 +206,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
@@ -233,7 +242,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "130"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "26"
+    },
+    "turreted": false
    },
    "ra1_allies_longbow": {
     "armaments": [
@@ -312,6 +326,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Valued.Cost",
@@ -325,6 +340,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
      "v": "35000"
@@ -361,7 +377,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "30"
+    },
+    "turreted": false
    },
    "ra1_allies_rapierjumpjet": {
     "armaments": [
@@ -508,6 +529,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Valued.Cost",
@@ -526,6 +548,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
      "v": "77500"
@@ -563,7 +586,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "210"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "14"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -572,6 +600,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -588,6 +617,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -620,13 +650,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedconstructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -639,6 +671,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -670,13 +703,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedhelipad": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -693,6 +728,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -725,13 +761,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedorerefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -748,6 +786,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -780,13 +819,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedradardome": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -803,6 +844,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -835,13 +877,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedservicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -858,6 +902,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -890,13 +935,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedtechcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -913,6 +960,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -945,13 +993,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedwarfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -968,6 +1018,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1000,13 +1051,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_reinforcementpad": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1027,6 +1080,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1061,7 +1115,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -1132,6 +1187,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Valued.Cost",
@@ -1145,6 +1201,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Health.HP",
      "v": "62500"
@@ -1177,7 +1234,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "11412"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_alliedgunturret": {
     "armaments": [
@@ -1216,6 +1274,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Valued.Cost",
@@ -1229,6 +1288,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -1261,7 +1321,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "8683"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_bastionartillerybunker": {
     "armaments": [
@@ -1368,6 +1429,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Valued.Cost",
@@ -1381,6 +1443,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Health.HP",
      "v": "350000"
@@ -1413,13 +1476,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "10184"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_camopillbox": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackGarrisoned",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Valued.Cost",
@@ -1433,6 +1498,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Health.HP",
      "v": "122500"
@@ -1465,13 +1531,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7640"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_chronosphere": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1489,6 +1557,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1522,13 +1591,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_gapgenerator": {
     "armor": {
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1550,6 +1621,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Health.HP",
      "v": "50000"
@@ -1583,13 +1655,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_pillbox": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackGarrisoned",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Valued.Cost",
@@ -1603,6 +1677,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Health.HP",
      "v": "90000"
@@ -1636,7 +1711,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6570"
-    }
+    },
+    "turreted": true
    }
   },
   "infantry": {
@@ -1775,6 +1851,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
@@ -1788,6 +1865,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
      "v": "10000"
@@ -1820,7 +1898,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_machinegunner": {
     "armaments": [
@@ -1957,6 +2036,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
@@ -1975,6 +2055,7 @@
      "trait": "FirepowerMultiplier",
      "v": 0.93
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
      "v": "19000"
@@ -2007,7 +2088,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
      "v": "49"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_mechanic": {
     "armaments": [
@@ -2109,6 +2191,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
@@ -2122,6 +2205,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
      "v": "7500"
@@ -2154,7 +2238,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_medic": {
     "armaments": [
@@ -2252,6 +2337,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
@@ -2265,6 +2351,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
      "v": "10000"
@@ -2296,7 +2383,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_raspy": {
     "armaments": [
@@ -2328,6 +2416,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
@@ -2341,6 +2430,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -2377,7 +2467,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_tanya": {
     "armaments": [
@@ -2554,6 +2645,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2571,6 +2663,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
      "v": "44000"
@@ -2603,11 +2696,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
      "v": "77"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "ra1_allies_promotion_bastion": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2620,6 +2715,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Bastion",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2629,9 +2725,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_camopillbox": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2644,6 +2742,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Camo Pillbox",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2652,9 +2751,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_chronotank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2667,6 +2768,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Chrono Tank",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2676,9 +2778,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_gapgeneratorandradarjammer": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2691,6 +2795,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Gap Generator and Radar Jammer",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2700,9 +2805,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_machinegunner": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2715,6 +2822,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Machine Gunner",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2723,9 +2831,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_phasetransport": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2738,6 +2848,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Phase Transport",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2747,9 +2858,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_rapierjumpjet": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2762,6 +2875,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Rapier Jumpjet",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2771,9 +2885,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_reconranger": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2786,6 +2902,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Recon Ranger.",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2794,9 +2911,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_reinforcementpad": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2809,6 +2928,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Reinforcement Pad",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2818,9 +2938,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_sheridan": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2833,6 +2955,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Sheridan",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2842,9 +2965,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_tankdestroyer": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2857,6 +2982,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Tank Destroyer",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2866,9 +2992,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_promotion_tigerheavytank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2881,6 +3009,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Tiger Heavy Tank",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -2890,11 +3019,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "ra1_allies_upgrade_advancedradarsystems": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2911,6 +3042,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Advanced Radar Systems",
     "prerequisites": [
      "~ra1_allies_alliedradardome",
@@ -2918,9 +3050,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_upgrade_airsuperioritydoctrine": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2937,6 +3071,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Air Superiority Doctrine",
     "prerequisites": [
      "~ra1_allies_alliedtechcenter",
@@ -2944,9 +3079,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_upgrade_chronoarmor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2963,6 +3100,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Chrono Armor",
     "prerequisites": [
      "~ra1_allies_alliedtechcenter",
@@ -2970,9 +3108,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_upgrade_cryomissiles": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2989,6 +3129,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Cryo Missiles",
     "prerequisites": [
      "~ra1_allies_alliedtechcenter",
@@ -2996,9 +3137,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_upgrade_gpssatellitesupport": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3015,6 +3158,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "GPS Satellite Support",
     "prerequisites": [
      "~ra1_allies_alliedtechcenter",
@@ -3023,9 +3167,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_upgrade_infantryarmorplating": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3042,6 +3188,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Infantry Armor Plating",
     "prerequisites": [
      "~ra1_allies_alliedradardome",
@@ -3049,9 +3196,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_upgrade_lasertargetingsystems": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3068,6 +3217,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Laser Targeting Systems",
     "prerequisites": [
      "~ra1_allies_alliedtechcenter",
@@ -3075,9 +3225,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ra1_allies_upgrade_reinforcedstructures": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3094,6 +3246,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Reinforced Structures",
     "prerequisites": [
      "~ra1_allies_alliedradardome",
@@ -3101,7 +3254,8 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -3212,6 +3366,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -3225,6 +3380,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "20000"
@@ -3265,7 +3421,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedheavyaatank": {
     "armaments": [
@@ -3381,6 +3538,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -3399,6 +3557,7 @@
      "trait": "FirepowerMultiplier@ra1_allies_alliedheavyaatank",
      "v": 0.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -3439,7 +3598,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_alliedlighttank": {
     "armaments": [
@@ -3516,6 +3676,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -3534,6 +3695,7 @@
      "trait": "FirepowerMultiplier@HighExplosionShell",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -3574,7 +3736,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_alliedmediumtank": {
     "armaments": [
@@ -3639,6 +3802,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -3652,6 +3816,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "90000"
@@ -3692,13 +3857,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_alliedmobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -3716,6 +3883,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -3756,13 +3924,15 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedoretruck": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -3780,6 +3950,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "100000"
@@ -3823,7 +3994,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "18"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedtankdestroyer": {
     "armaments": [
@@ -3897,6 +4069,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -3910,6 +4083,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "120000"
@@ -3951,7 +4125,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_alliedtigerheavytank": {
     "armaments": [
@@ -4025,6 +4200,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -4038,6 +4214,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "160000"
@@ -4078,7 +4255,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_chronotank": {
     "armaments": [
@@ -4351,6 +4529,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -4368,6 +4547,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.4
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -4409,13 +4589,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_minelayer": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -4429,6 +4611,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
@@ -4469,7 +4652,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_mobilegapgenerator": {
     "armaments": [
@@ -4491,6 +4675,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -4512,6 +4697,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -4553,7 +4739,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_mobileradarjammer": {
     "armaments": [
@@ -4576,6 +4763,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -4602,6 +4790,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -4643,7 +4832,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ra1_allies_phasetransport": {
     "armaments": [
@@ -4769,6 +4959,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -4782,6 +4973,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
@@ -4823,7 +5015,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_ranger": {
     "armaments": [
@@ -4892,6 +5085,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -4905,6 +5099,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "22500"
@@ -4944,7 +5139,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "35"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_reconranger": {
     "armaments": [
@@ -5112,6 +5308,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -5125,6 +5322,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -5165,7 +5363,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": true
    },
    "ra1_allies_sheridanassaulttank": {
     "armaments": [
@@ -5367,6 +5566,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -5385,6 +5585,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "85000"
@@ -5425,7 +5626,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "17"
-    }
+    },
+    "turreted": true
    }
   }
  }

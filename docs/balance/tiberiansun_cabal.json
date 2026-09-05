@@ -54,6 +54,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
@@ -66,6 +67,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "30000"
@@ -99,7 +101,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "180"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "36"
+    },
+    "turreted": false
    },
    "cabal_hunterdrone": {
     "armaments": [
@@ -145,6 +152,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
@@ -157,6 +165,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "15000"
@@ -185,7 +194,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "180"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "32"
+    },
+    "turreted": false
    },
    "cabal_hunterdronecarrier": {
     "armaments": [
@@ -281,6 +295,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
@@ -293,6 +308,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "300000"
@@ -330,7 +346,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "50"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "10"
+    },
+    "turreted": true
    },
    "cabal_hunterkillermk1": {
     "armaments": [
@@ -462,6 +483,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
@@ -475,6 +497,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "35000"
@@ -510,7 +533,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "160"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "32"
+    },
+    "turreted": false
    },
    "cabal_hunterkillermk1_elite": {
     "armaments": [
@@ -657,6 +685,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
@@ -670,6 +699,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "40000"
@@ -706,7 +736,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "170"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "34"
+    },
+    "turreted": false
    },
    "cabal_mothership": {
     "armaments": [
@@ -823,6 +858,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -840,6 +876,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.3
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "500000"
@@ -877,7 +914,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "50"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "10"
+    },
+    "turreted": false
    },
    "cabal_orbdrone": {
     "armaments": [
@@ -927,6 +969,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
@@ -939,6 +982,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
@@ -972,7 +1016,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "140"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "28"
+    },
+    "turreted": false
    },
    "cabal_orbdrone_slave": {
     "armaments": [
@@ -1022,6 +1071,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
@@ -1034,6 +1084,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -1063,7 +1114,12 @@
     "speed_air": {
      "src": "inherited",
      "v": "140"
-    }
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "28"
+    },
+    "turreted": false
    },
    "cabal_overkillgunship": {
     "armaments": [
@@ -1140,6 +1196,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
@@ -1152,6 +1209,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "45000"
@@ -1189,7 +1247,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "30"
+    },
+    "turreted": false
    },
    "cabal_repairdrone": {
     "armaments": [
@@ -1237,6 +1300,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
@@ -1249,6 +1313,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
@@ -1285,7 +1350,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "140"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "28"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -1312,6 +1382,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": "AttackTurreted",
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1328,6 +1399,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1360,13 +1432,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": true
    },
    "cabal_cyborgfactory": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1383,6 +1457,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1415,13 +1490,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "cabal_helipad": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -1438,6 +1515,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1470,13 +1548,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "cabal_mechfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1493,6 +1573,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1525,13 +1606,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "cabal_navalyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1548,6 +1631,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -1581,13 +1665,15 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    },
    "cabal_powerplant": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Valued.Cost",
@@ -1600,6 +1686,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Health.HP",
      "v": "160000"
@@ -1631,13 +1718,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "cabal_radar": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1654,6 +1743,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1686,13 +1776,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "cabal_refinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1709,6 +1801,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1741,13 +1834,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "cabal_servicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1764,6 +1859,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1796,13 +1892,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "cabal_techcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1823,6 +1921,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1855,7 +1954,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -1947,6 +2047,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackCharges",
     "buildable": true,
     "charge_up": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#AttackCharges",
@@ -1965,6 +2066,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "300000"
@@ -1997,9 +2099,11 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7c0"
-    }
+    },
+    "turreted": false
    },
    "cabal_missilesilo": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -2017,6 +2121,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "CABAL Missile Silo",
     "prerequisites": [
      "~cabal_core",
@@ -2026,7 +2131,8 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_obeliskofdarkness": {
     "armaments": [
@@ -2069,6 +2175,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackCharges",
     "buildable": true,
     "charge_up": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#AttackCharges",
@@ -2087,6 +2194,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "120000"
@@ -2119,13 +2227,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "12c0"
-    }
+    },
+    "turreted": false
    },
    "cabal_pillbox": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackGarrisoned",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Valued.Cost",
@@ -2139,6 +2249,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "85000"
@@ -2171,7 +2282,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6583"
-    }
+    },
+    "turreted": true
    },
    "cabal_plasmaturret": {
     "armaments": [
@@ -2213,6 +2325,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Valued.Cost",
@@ -2226,6 +2339,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "60000"
@@ -2258,13 +2372,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7c0"
-    }
+    },
+    "turreted": true
    },
    "cabal_silo": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Valued.Cost",
@@ -2278,6 +2394,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -2310,13 +2427,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "cabal_stealthgenerator": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2334,6 +2453,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -2366,7 +2486,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6c0"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -2546,6 +2667,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
@@ -2559,6 +2681,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "70000"
@@ -2607,7 +2730,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "cabal_cyborgcommando": {
     "armaments": [
@@ -2862,6 +2986,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2879,6 +3004,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "250000"
@@ -2928,7 +3054,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "cabal_cyborgcommandov2": {
     "armaments": [
@@ -3183,6 +3310,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3200,6 +3328,7 @@
      "tech_tier": 0.5,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "400000"
@@ -3249,7 +3378,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "cabal_cyborginfantry": {
     "armaments": [
@@ -3319,6 +3449,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
@@ -3332,6 +3463,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "45000"
@@ -3380,7 +3512,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "cabal_devout": {
     "armaments": [
@@ -3454,6 +3587,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
@@ -3467,6 +3601,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "80000"
@@ -3515,7 +3650,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "cabal_dissolver": {
     "armaments": [
@@ -3565,6 +3701,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
@@ -3578,6 +3715,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -3625,7 +3763,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "cabal_eliminator800": {
     "armaments": [
@@ -3690,6 +3829,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
@@ -3708,6 +3848,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.05
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "85000"
@@ -3755,7 +3896,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "cabal_engineer": {
     "armaments": [
@@ -3818,6 +3960,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
@@ -3831,6 +3974,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -3878,7 +4022,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "cabal_enlighted": {
     "armaments": [
@@ -4065,6 +4210,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
@@ -4078,6 +4224,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "80000"
@@ -4126,7 +4273,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "cabal_hackercyborg": {
     "armaments": [
@@ -4214,6 +4362,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
@@ -4227,6 +4376,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -4274,7 +4424,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    },
    "cabal_rocketcyborg": {
     "armaments": [
@@ -4382,6 +4533,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
@@ -4395,6 +4547,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "45000"
@@ -4443,7 +4596,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    }
   },
   "naval": {
@@ -4550,6 +4704,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Valued.Cost",
@@ -4562,6 +4717,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
      "v": "60000"
@@ -4601,13 +4757,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "cabal_lcraft": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Valued.Cost",
@@ -4620,6 +4778,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
      "v": "100000"
@@ -4659,7 +4818,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "cabal_plasmasub": {
     "armaments": [
@@ -4717,6 +4877,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Valued.Cost",
@@ -4734,6 +4895,7 @@
      "trait": "FirepowerMultiplier@BallisticMissileSubBuff",
      "v": 2.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
      "v": "200000"
@@ -4774,7 +4936,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "cabal_radar_cruiser": {
     "armaments": [
@@ -4840,6 +5003,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -4852,6 +5016,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
      "v": "200000"
@@ -4892,11 +5057,13 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": true
    }
   },
   "promotions": {
    "cabal_promotion_ascended": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4909,6 +5076,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Ascended",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -4918,9 +5086,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_beholder": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4933,6 +5103,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Beholder",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -4942,9 +5113,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_coredefender": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4957,6 +5130,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Core Defender",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -4966,9 +5140,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_cyborgassassin": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4981,6 +5157,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Cyborg Assassin",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -4989,9 +5166,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_cyborgcommandov2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5004,6 +5183,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Cyborg Commando V2",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -5013,9 +5193,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_devout": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5028,6 +5210,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Devout",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -5036,9 +5219,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_hunterdronecarrier": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5051,6 +5236,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Hunter Drone Carrier",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -5060,9 +5246,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_manticore": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5075,6 +5263,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Heavy Reaper",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -5084,9 +5273,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_mothership": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5099,6 +5290,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Mothership",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -5108,9 +5300,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_overkillgunship": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5123,6 +5317,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Overkill Gunship",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -5132,9 +5327,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_spidercnc4": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5147,6 +5344,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Spider CNC4",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -5155,9 +5353,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_promotion_widow": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5170,6 +5370,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Widow",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -5179,11 +5380,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "cabal_upgrade_backupsystems": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5200,6 +5403,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Backup Systems",
     "prerequisites": [
      "~cabal_techcenter",
@@ -5207,9 +5411,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_cyberneticplating": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5226,6 +5432,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Cybernetic Plating",
     "prerequisites": [
      "~cabal_techcenter",
@@ -5233,9 +5440,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_darkarmament": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5252,6 +5461,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Dark Armament",
     "prerequisites": [
      "~cabal_radar",
@@ -5259,9 +5469,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_dataworm": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5278,6 +5490,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Data Worm",
     "prerequisites": [
      "~cabal_techcenter",
@@ -5285,9 +5498,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_firewallprotocol": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5304,6 +5519,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Firewall Protocol",
     "prerequisites": [
      "~cabal_techcenter",
@@ -5311,9 +5527,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_fullassimilation": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5330,6 +5548,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Full Assimilation",
     "prerequisites": [
      "~cabal_techcenter",
@@ -5337,9 +5556,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_handof": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5356,6 +5577,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Hand of CABAL",
     "prerequisites": [
      "~cabal_techcenter",
@@ -5363,9 +5585,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_mobilitymatrix": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5382,6 +5606,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Mobility Matrix",
     "prerequisites": [
      "~cabal_radar",
@@ -5389,9 +5614,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_networkedcombatprotocols": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5408,6 +5635,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Networked Combat Protocols",
     "prerequisites": [
      "~cabal_radar",
@@ -5415,9 +5643,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_neuraluplink": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5434,6 +5664,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Neural Uplink",
     "prerequisites": [
      "~cabal_techcenter",
@@ -5441,9 +5672,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_neutronnuclearcatalyst": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5460,6 +5693,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Neutron Nuclear Catalyst",
     "prerequisites": [
      "~cabal_radar",
@@ -5467,9 +5701,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_overchargedservos": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5486,6 +5722,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Overcharged Servos",
     "prerequisites": [
      "~cabal_techcenter",
@@ -5493,9 +5730,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_radarhack": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5512,6 +5751,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Radar Hack",
     "prerequisites": [
      "~cabal_radar",
@@ -5519,9 +5759,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_reclamationprotocols": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5538,6 +5780,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Reclamation Protocols",
     "prerequisites": [
      "~cabal_techcenter",
@@ -5545,9 +5788,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "cabal_upgrade_reinforcedchassis": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5564,6 +5809,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Reinforced Chassis",
     "prerequisites": [
      "~cabal_techcenter",
@@ -5571,7 +5817,8 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -5730,6 +5977,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -5743,6 +5991,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -5783,7 +6032,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    },
    "cabal_avatar": {
     "armaments": [
@@ -5860,6 +6110,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -5873,6 +6124,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "1000000"
@@ -5914,7 +6166,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "10"
-    }
+    },
+    "turreted": false
    },
    "cabal_beholder": {
     "armaments": [
@@ -5980,6 +6233,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -5993,6 +6247,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -6034,7 +6289,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "cabal_berserker": {
     "armaments": [
@@ -6072,6 +6328,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -6089,6 +6346,7 @@
      "tech_tier": 0.5,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "800000"
@@ -6129,13 +6387,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "cabal_constructionyard": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -6149,6 +6409,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "1000000"
@@ -6180,7 +6441,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "cabal_coredefender": {
     "armaments": [
@@ -6257,6 +6519,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -6274,6 +6537,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.3
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "2000000"
@@ -6315,7 +6579,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "cabal_cyborgreaper": {
     "armaments": [
@@ -6488,6 +6753,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -6501,6 +6767,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
@@ -6545,7 +6812,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": false
    },
    "cabal_heavyreaper": {
     "armaments": [
@@ -6704,6 +6972,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -6717,6 +6986,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -6761,7 +7031,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": false
    },
    "cabal_laserspider": {
     "armaments": [
@@ -6804,6 +7075,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -6817,6 +7089,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -6857,7 +7130,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    },
    "cabal_manticore": {
     "armaments": [
@@ -6965,6 +7239,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -6978,6 +7253,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -7018,7 +7294,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": false
    },
    "cabal_mantis": {
     "armaments": [
@@ -7064,6 +7341,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -7077,6 +7355,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "35000"
@@ -7116,13 +7395,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "48"
-    }
+    },
+    "turreted": false
    },
    "cabal_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -7140,6 +7421,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -7180,7 +7462,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "cabal_ravager": {
     "armaments": [
@@ -7245,6 +7528,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -7258,6 +7542,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
@@ -7305,13 +7590,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "52"
-    }
+    },
+    "turreted": false
    },
    "cabal_scarabapc": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -7325,6 +7612,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
@@ -7365,7 +7653,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "cabal_spidercnc4": {
     "armaments": [
@@ -7408,6 +7697,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -7421,6 +7711,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -7461,7 +7752,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    },
    "cabal_tarantula": {
     "armaments": [
@@ -7527,6 +7819,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -7540,6 +7833,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "110000"
@@ -7580,13 +7874,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "14"
-    }
+    },
+    "turreted": true
    },
    "cabal_tiberiumharvester": {
     "armor": {
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -7604,6 +7900,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
@@ -7648,7 +7945,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "cabal_widow": {
     "armaments": [
@@ -7694,6 +7992,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
@@ -7707,6 +8006,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "120000"
@@ -7748,7 +8048,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    }
   }
  }

@@ -1,0 +1,5055 @@
+diff --git a/docs/audit/intentional_weapon_composites.json b/docs/audit/intentional_weapon_composites.json
+index b42a750f9..566c31cf2 100644
+--- a/docs/audit/intentional_weapon_composites.json
++++ b/docs/audit/intentional_weapon_composites.json
+@@ -7,7 +7,7 @@
+         "Flak_MediumFlatCompatibility": "authored target, armor, relationship, or state route Flak_MediumFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "1a5de2d4c6217da21ad2a60d3289fc80f47f711d12a0bee6d3800aa836fe9d44",
++      "main_digest": "982e32808a2f5481f95d90871e927afaf4e58873365355f68fad40ad1b1f60a7",
+       "mains": [
+         "Flak_Medium",
+         "Flak_MediumFlatCompatibility"
+@@ -23,7 +23,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "2f92854fcea4db333274fe0f811fc1a5b8b44c5bb91780addad41c6087aa07f2"
++      "weapon_digest": "ac13f14deeb056b84de1b659ad309148930f5f0b13d0f89aaa4f60ec9d4c4ae2"
+     },
+     "AAGunBoatFlak_elite": {
+       "category": "target-routed composite",
+@@ -32,7 +32,7 @@
+         "Flak_MediumFlatCompatibility": "authored target, armor, relationship, or state route Flak_MediumFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "1a5de2d4c6217da21ad2a60d3289fc80f47f711d12a0bee6d3800aa836fe9d44",
++      "main_digest": "982e32808a2f5481f95d90871e927afaf4e58873365355f68fad40ad1b1f60a7",
+       "mains": [
+         "Flak_Medium",
+         "Flak_MediumFlatCompatibility"
+@@ -48,7 +48,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "212937b8a97bc22aadd2699c59928dea2e7feaf0b772e2f22c5d4edc5086075f"
++      "weapon_digest": "b8e023789628cc36c42cc5755ae9af38830542e6fd327f887949ec73ef4c8ffe"
+     },
+     "ATMine": {
+       "category": "target-routed composite",
+@@ -57,7 +57,7 @@
+         "Demolition_Light": "authored target, armor, relationship, or state route Demolition_Light"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "486c46f8594aa309dd66f2b4c5447af120dce77bf2b5de6732aa15c141e75f02",
++      "main_digest": "517f6d47be596bacecd5e9fb87a0d74623178f4e28f8d18126cc850f0dd37bfd",
+       "mains": [
+         "ATMineDemolition_Light",
+         "Demolition_Light"
+@@ -78,7 +78,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "e6c3a0cadaab3d4e40b7f7c57af94fa17ae387634bbd367bb15919f3f9576a42"
++      "weapon_digest": "c6e3f90a83f6eeb279dea8e68632cfb0135dcfc3b4855261f15e37ae2573147e"
+     },
+     "AphidCryo_AA": {
+       "category": "status payload",
+@@ -87,7 +87,7 @@
+         "MissileCryo_Heavy": "special energy, status, or effect payload MissileCryo_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "3b7dd3f082b9415738f110f4b406c873c93d7a4bacd1bdc209fb9b5d355f1ffb",
++      "main_digest": "9f7ed9883df83c040e0818c5f4aaa470ba7b1c7019432a63060df6c8835a26b7",
+       "mains": [
+         "CryoBlast_Medium",
+         "MissileCryo_Heavy"
+@@ -103,7 +103,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "c80f7499aa7b65d1c981c406620436d4f2fbb3b4d5740992c85fd42b46bd80ea"
++      "weapon_digest": "d7689bd93d66531d8cdf0347caaf448e829fa2a6e060d56888f38ac2ea88138f"
+     },
+     "ArcherArtilleryShell": {
+       "category": "target-routed composite",
+@@ -112,7 +112,7 @@
+         "Concussion_Heavy": "authored target, armor, relationship, or state route Concussion_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "0f9e6ead219ac250b27c467a63235d0e63de4449d09c96ab927400b0fb88e3c9",
++      "main_digest": "1abd64b479de5812e5e16a72f2c5930c4f9625ac08692b3d0e30ef4114b8d34b",
+       "mains": [
+         "CollapseTargetCompatibility1",
+         "Concussion_Heavy"
+@@ -133,7 +133,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "f09014479356e597e513d01e439674f3e42b654f8f425520ebce3ebee4b18cea"
++      "weapon_digest": "3f3363509fd5c905a6ad4a90ed6ffb9ff27a29ef22a393c98d85b30b441d21c5"
+     },
+     "ArmoredCarMGAAWaveforce": {
+       "category": "target-routed composite",
+@@ -142,7 +142,7 @@
+         "Railgun_Heavy": "authored target, armor, relationship, or state route Railgun_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "4be3ea7f6f3326a77631666e08a32bc4df6e3216b7b56806ce4f5dc05b213d5c",
++      "main_digest": "99a8bc32665f294cbffc8c64745d91b8183476fed3609dbe44c5b211911e3143",
+       "mains": [
+         "Bullet_Medium",
+         "Railgun_Heavy"
+@@ -158,7 +158,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "840dc6dcf3188381802f56c7b4123aaf6aabd888dad7ffbd22f9c2e2743719bb"
++      "weapon_digest": "41600d8d74eb37a6eee89482d03e8a5764b78d47e6a42b0a37f295c54fede4b4"
+     },
+     "ArmoredCarMGWaveforce": {
+       "category": "effect-delivery composite",
+@@ -167,7 +167,7 @@
+         "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "4ce931b001b3b2c151784afe0a98892df8950f5b6cbcb1b8907b3d2749b1fc53",
++      "main_digest": "30d816cd00ba91fdc2bf8caf4bb8ed46066bc9f1b9f78a473c435126c43aae21",
+       "mains": [
+         "Bullet_Medium",
+         "Railgun_Heavy"
+@@ -183,7 +183,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: overlapping effect delivery",
+-      "weapon_digest": "2052939577b4fffb3b502fffec90da1fff4f61ce329c791d8f456cb887fc22ce"
++      "weapon_digest": "a14297fe4b5bd88f1b366104b964d7f048eec611e56368df2993c26c2c59c223"
+     },
+     "ArtilleryShellUpgrade": {
+       "category": "target-routed composite",
+@@ -192,7 +192,7 @@
+         "Concussion_Heavy": "authored target, armor, relationship, or state route Concussion_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "d22fa27517f6ca3a6458c9f1c5b7080124f62632bf25064270c4b0fc0a1a6640",
++      "main_digest": "fdd906d6766d1a5aa32c92dae5c7841b6d5d43cec6ac67e51a15f77118b70b5f",
+       "mains": [
+         "CollapseTargetCompatibility1",
+         "Concussion_Heavy"
+@@ -213,7 +213,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "567fc08c8d0947c49e48338287d0d50088385b607774c98bf9a0953420eec9d9"
++      "weapon_digest": "a13018c544ea32faab6b963ffbf7ab2d24b79deebf7a9a4b9b62e1dcdc4873b1"
+     },
+     "AsianChaosMine": {
+       "category": "status payload",
+@@ -222,7 +222,7 @@
+         "Chemical_Heavy": "special energy, status, or effect payload Chemical_Heavy"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "8d4751a2859fac4b952753fb08c698f7bcb038ee285f35a5b67f464e5d46310b",
++      "main_digest": "dd8c299d9281a2b454981a92b2edd2e70d4d223e435d9b7260fe08a94b6ede27",
+       "mains": [
+         "CannonAP_Light",
+         "Chemical_Heavy"
+@@ -238,7 +238,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "3ce0c998f013cbc13efdfb1e6974b660eb31405018ad74927a6f7d6187692ca7"
++      "weapon_digest": "2d2db37734826f112139e28f8ecd1bed4704bf1607820e02cfab31512b1d2a56"
+     },
+     "AsianPhoenixRocket": {
+       "category": "status payload",
+@@ -248,7 +248,7 @@
+         "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "b60e8018b57f8829deedaf448544fabbb5e23080366bc4c9c3a92a1c7326b155",
++      "main_digest": "b89878a99ea66733c5eba1467b3fd174f5699eb49f68fd0dfcde550ededb96d1",
+       "mains": [
+         "Demolition_Light",
+         "Flame_Medium",
+@@ -265,7 +265,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "e4db5029db72504c5f6f2674668b5d959527313beaea0ef0968adf4f15d96616"
++      "weapon_digest": "6455b0ebee615432cc504fe9ca22d0636b61e0805e9858f5248bc1dca1e972e2"
+     },
+     "AsianPhoenixRocket_elite": {
+       "category": "status payload",
+@@ -275,7 +275,7 @@
+         "MissileAP_Heavy": "primary conventional delivery or impact MissileAP_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "b60e8018b57f8829deedaf448544fabbb5e23080366bc4c9c3a92a1c7326b155",
++      "main_digest": "b89878a99ea66733c5eba1467b3fd174f5699eb49f68fd0dfcde550ededb96d1",
+       "mains": [
+         "Demolition_Light",
+         "Flame_Medium",
+@@ -292,7 +292,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "7f541904710e64861857e8a9fe5a9bb622b48f16a8e4555c6200f6a5143b8bb4"
++      "weapon_digest": "7a84b401ab62fca3c43df78afb928b9471023c16ffe340d31579834f3acf57e7"
+     },
+     "AsianSniper": {
+       "category": "target-routed composite",
+@@ -302,7 +302,7 @@
+         "SniperSmallArms": "authored target, armor, relationship, or state route SniperSmallArms"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "41652c278b4047d16a3b0d80e08dab3d94b8de57be11c79b5821d4c61d3e75a6",
++      "main_digest": "da6ec1cd3d1f114dd87364b5f998575d3032ed44e93b128ffbea0b574069f21d",
+       "mains": [
+         "Bullet_Heavy",
+         "SniperChaingun",
+@@ -324,7 +324,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "a7c6ae9762211de1318dbb9e6d83ba362091a0b11391e2bfbed4418b93adf719"
++      "weapon_digest": "5280204fbfc13418f2b6c62c3a690e2fb5787f4cb754f835ef60035154c68f28"
+     },
+     "AsianSniperAP": {
+       "category": "target-routed composite",
+@@ -335,7 +335,7 @@
+         "SniperSmallArms": "authored target, armor, relationship, or state route SniperSmallArms"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "992158025e482fcd5662ae84fe9c15b4af97af68041079a42e58e084057c006d",
++      "main_digest": "a3a7266587204d3d639e483cd087ca4ceb5986361f382796d1b191acb9924000",
+       "mains": [
+         "Bullet_Heavy",
+         "Bullet_Medium",
+@@ -358,7 +358,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "fe53281309e334c5a7c1d623343e69ca527f48f48d31c63929c141d6c10f68ec"
++      "weapon_digest": "f82105b33db78b36f6139f7f0442b68b09975bed8cbf9577ad1d0951253698ee"
+     },
+     "AsianSniperLockdown": {
+       "category": "status payload",
+@@ -371,7 +371,7 @@
+         "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "e025d6402bc01f24ad614eccdb4e15285df9d51f24fb540eb1300e9a8077cb0c",
++      "main_digest": "8274bd6af1bee2ac824cc94f0caa007a47462c0df6842ea5b9e962d7974efce4",
+       "mains": [
+         "Bullet_Heavy",
+         "Bullet_Medium",
+@@ -391,7 +391,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "328711f0d0032c29b913654fa670df586e7fca3264943fd35656bb2cd2229f44"
++      "weapon_digest": "92121c7a50c5055a04932953fae21bb8e4f793f1003076d3a31321b9278b2081"
+     },
+     "AsianTSIonCannon": {
+       "category": "staged superweapon",
+@@ -458,7 +458,7 @@
+         "CannonHE_Heavy": "retained authored heavy-impact component of the accepted Atreus profile"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "6768831057f94955289bdf90d2f51f3e382c59c1aab033f0faa30d16f90e85c1",
++      "main_digest": "7c3c4586b0c7ab3682645ac00fe95f7c058f3157c8e5d95546db5f8f1829b083",
+       "mains": [
+         "Bullet_Medium",
+         "CannonHE_Heavy"
+@@ -474,7 +474,7 @@
+         }
+       ],
+       "review_reference": "Maintainer unit decision: Protoss Atreus is good enough as authored",
+-      "weapon_digest": "835d898fe049ef146c236c1a517742d68e1e12012b816dceb2aff09d8f2e142b"
++      "weapon_digest": "395ba2f8c989d0ebb5a82a317875bf771cc60ee601d7fabc138a3f37079705d6"
+     },
+     "BCLaser": {
+       "category": "status payload",
+@@ -483,7 +483,7 @@
+         "Laser_HeavyFlatCompatibility": "primary conventional delivery or impact Laser_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "9645af58e03084480d3dbc87cd7732aa760ca1781dfe66fe2c8ff8c708ac7931",
++      "main_digest": "ab27a7893d9461b1ee00495b46733d861c30d835d5fe5808a6afef7390360e4f",
+       "mains": [
+         "CannonHE_Heavy",
+         "Laser_HeavyFlatCompatibility"
+@@ -504,7 +504,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "4b5f50827a297129dbdbce2a78b974ba1d1226cec8873a817bd38c2a84109fd5"
++      "weapon_digest": "cc9675c7ad5ab389a14d09997518e48287ae947b6a1c53eb1012485c5800d8a5"
+     },
+     "BCYamatoCannon": {
+       "category": "status payload",
+@@ -513,7 +513,7 @@
+         "Plasma_HeavyFlatCompatibility": "primary conventional delivery or impact Plasma_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "f84f8c478d3eaab9ed93dc4982626df7177c36d9c4589e0f5b925490690af104",
++      "main_digest": "baaec744048b3bdd2ad719d25f149ece263358f011122707d79648ff1809edb8",
+       "mains": [
+         "CannonHE_Heavy",
+         "Plasma_HeavyFlatCompatibility"
+@@ -539,7 +539,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "a55903d599272cda86f96657f1bac2bd954a73be40671ae37a5bd10e374632c4"
++      "weapon_digest": "8f6707ff9918a2f18ed28176ccc07691c251c0b4712b14ba0a72f89fa30e5839"
+     },
+     "BallistaMultiShot": {
+       "category": "target-routed composite",
+@@ -548,7 +548,7 @@
+         "CollapseTargetCompatibility1": "authored target, armor, relationship, or state route CollapseTargetCompatibility1"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "da3b7cd5ba6e56afcac649245360f977255edc9a290d1939abd1de4f3c6b9b47",
++      "main_digest": "051e7d0d532ec400b01a6b54fba0be127f794b0530b82aef21af59c54b145fa9",
+       "mains": [
+         "Arrow_Medium",
+         "CollapseTargetCompatibility1"
+@@ -564,7 +564,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "64e14d5044b287df167eb2b366ae08b9db4b2ca73e4e2fdf986c59712ae32cf2"
++      "weapon_digest": "7967f45976a6bcecc5ff874243b1aa4b15ef70c9cc4968fb4df980d23240fb8a"
+     },
+     "BallistaSingleShotAirEnergized": {
+       "category": "target-routed composite",
+@@ -575,7 +575,7 @@
+         "MissileAP_Light": "authored target, armor, relationship, or state route MissileAP_Light"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "148ac8a1e918059d0dcd87290896b51642162c51fb3465d643a338053421fa4c",
++      "main_digest": "53bbf959d61b5a0b613910ced4417a64cd1053233db6b06d42ddc586f0747292",
+       "mains": [
+         "Arrow_Light",
+         "Arrow_LightFlatCompatibility",
+@@ -593,7 +593,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "583c42bdb9c2593bea23c5c3522f0e987d9d36d6d46efa54c477f2ca9ab5f022"
++      "weapon_digest": "dc7aa59b2ba5cad265ec7600afab785760fc818e98fa79f2bfeedf89d389cbaf"
+     },
+     "BallistaTowerMultiShot": {
+       "category": "target-routed composite",
+@@ -602,7 +602,7 @@
+         "CollapseTargetCompatibility1": "authored target, armor, relationship, or state route CollapseTargetCompatibility1"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "da3b7cd5ba6e56afcac649245360f977255edc9a290d1939abd1de4f3c6b9b47",
++      "main_digest": "051e7d0d532ec400b01a6b54fba0be127f794b0530b82aef21af59c54b145fa9",
+       "mains": [
+         "Arrow_Medium",
+         "CollapseTargetCompatibility1"
+@@ -618,7 +618,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "904c5828c1a1afb3ff494b52d81e1c5935a1d8f1f471b6146339c7acc9303a39"
++      "weapon_digest": "e451e867a17c190e4ae87409ce519fc26e1d3cd79d17fb76b4c59504489e4104"
+     },
+     "BikeRockets": {
+       "category": "target-routed composite",
+@@ -682,7 +682,7 @@
+         "MissileHE_HeavyGroundBonus": "authored target, armor, relationship, or state route MissileHE_HeavyGroundBonus"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "87535574814156811cdef44a741c31f7620ab44e71416101f9b54f09cb02e9c5",
++      "main_digest": "e02d0742bc6c69ebc30b181e5f9e4a44c7b2d7a5dfca876bb9cf9b22381e1ad7",
+       "mains": [
+         "MissileHE_Heavy",
+         "MissileHE_HeavyGroundBonus"
+@@ -703,7 +703,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "9275b367d291fc431687def5b308b93807b9e685cefdc2d59bcecf1ee68d8210"
++      "weapon_digest": "6a71975fbbd0e99dd22a4def4d06902dd07021e95c574e51ecd7cc1cb3616130"
+     },
+     "CabalMagicNuke": {
+       "category": "staged superweapon",
+@@ -749,7 +749,7 @@
+         "Chemical_Light": "special energy, status, or effect payload Chemical_Light"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "bb6b13d06367dd3c935e87a8e30359bd2f9423f7f2cc25107308f1e1779a988b",
++      "main_digest": "b2b1d13a3f3f1f426aba79ae45741337835ad8d22c2371dc21b977eee1f1f2f8",
+       "mains": [
+         "ChemRocketCompatibility",
+         "Chemical_Light"
+@@ -770,7 +770,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "05269f62ef9e806e86817116b450b6fe30ca344cd87e1de56f715cef41abda09"
++      "weapon_digest": "7b973efbb15d3acea8b0c764cf3c49b09b1bbd2f4cfaabf8b7cafe9ce0ec665e"
+     },
+     "ChemRocketsExplosion": {
+       "category": "status payload",
+@@ -779,7 +779,7 @@
+         "Chemical_Light": "special energy, status, or effect payload Chemical_Light"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "d48a16a6953a48f0348c267e054f16299c5c150c10794d488111381842bb6605",
++      "main_digest": "2361707c11349b317708d02d24ecbe4466cb0ddcfb83c748a66908ac9d15c499",
+       "mains": [
+         "ChemRocketCompatibility",
+         "Chemical_Light"
+@@ -795,7 +795,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "f8548f2e673655009c81e719dfd7f99f77c05170b611be8c47e5e1d2627f69bc"
++      "weapon_digest": "df42248f97f23b7d2e50ffabfb5715c7407e04eef37201eee6ccdb025291312b"
+     },
+     "CommandoM16": {
+       "category": "target-routed composite",
+@@ -804,7 +804,7 @@
+         "SniperCompatibility": "authored target, armor, relationship, or state route SniperCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "7f569acd624a395daa1f1224d0c52acde0603023d675eee3c0f6aa4c1718c336",
++      "main_digest": "bd5d2769b91ab820d86ac4f6048ae8ff3820f07ed017db73eb54e116bc3d3890",
+       "mains": [
+         "Bullet_Medium",
+         "SniperCompatibility"
+@@ -825,7 +825,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "affaada543b98dd43ba30c34732eb573934bb1201e8553b5a0ccde902b683f6f"
++      "weapon_digest": "08e823a84502edd8cf7ff5df6cef3c68d9334577c389f834323d2fa2bddfe992"
+     },
+     "CommandoSniper": {
+       "category": "target-routed composite",
+@@ -834,7 +834,7 @@
+         "SniperChaingun": "authored target, armor, relationship, or state route SniperChaingun"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "f0913240157540d636c6d00a6af13c640319a6cf0758886041feed8e0fb93930",
++      "main_digest": "be3c29909227f65a3c08fee32a856b7b51728a6a47d5169514965d16fe5f6396",
+       "mains": [
+         "Bullet_Heavy",
+         "SniperChaingun"
+@@ -855,7 +855,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "2f1c19e8c8fdabed16fa14d929010fb538ec94b173072c61febd280a911086d6"
++      "weapon_digest": "a509c77243bb47480a4e878e6d8a3ae06bc6f96faa1adade69c35d7c67697415"
+     },
+     "ConsortiumMissileSystem": {
+       "category": "status payload",
+@@ -865,7 +865,7 @@
+         "MissileAP_Medium": "primary conventional delivery or impact MissileAP_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "d89555ef1264592869c5832941be6bca34f0cc59d0caef2e6eb5602d9d023e1c",
++      "main_digest": "593654840fb4843fd6c523837955cb3cb3afee5c59f9cf792a53e7dfd9f10d45",
+       "mains": [
+         "Flak_Medium",
+         "MissileAA_MediumFlatCompatibility",
+@@ -882,7 +882,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "0d5b4b95a984972d4700511bf203f21f6ab90be768b4a329f550205c76d916dd"
++      "weapon_digest": "724d46c366cdb5ce3bb304c3bd389216bdbac3fb133d7f9ef99a37ab4f3858f6"
+     },
+     "ConsortiumMissileSystem_EMP": {
+       "category": "status payload",
+@@ -892,7 +892,7 @@
+         "MissileQuantum_MediumFlatCompatibility": "special energy, status, or effect payload MissileQuantum_MediumFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "f75ff18f1bff605feb65cd665eca4a6093b027cb72f8c96b7208dfad461808ee",
++      "main_digest": "7a4038167fc0c0fc2e994ff2ee1524e79dfd8aede2ec82caca85d2b18c4c976e",
+       "mains": [
+         "Flak_Medium",
+         "MissileAP_Medium",
+@@ -909,7 +909,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "157143239bc1a573462248968ea84f6096d815a1f643cf0e99ff4bf06507cbdd"
++      "weapon_digest": "4383aee3b25738ed8f1b135c3c4b272675a903e79c255902afe2de035c555b37"
+     },
+     "D2K_155mm2": {
+       "category": "target-routed composite",
+@@ -918,7 +918,7 @@
+         "CollapseTargetCompatibility1": "authored target, armor, relationship, or state route CollapseTargetCompatibility1"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "8e5ae9b0e59fc7c1b61a88443a64ec7e0858b5221216900daaa97832812a9378",
++      "main_digest": "e5cc4daa571003cbc8809883325e7d83373d957ff668021f8aefb68f3288292b",
+       "mains": [
+         "CannonHE_Heavy",
+         "CollapseTargetCompatibility1"
+@@ -934,7 +934,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "dfe176a0d5fb2d6153d6e52756cf31e2d2c8ddc5d14db77e0f4a94deaf876fc0"
++      "weapon_digest": "cd9737d650f630558cdebdc56d07160b72b2310d9dceaa4875fbf3b3b3ed6a3d"
+     },
+     "D2K_Rocket_Trooper1": {
+       "category": "maintainer-curated signature",
+@@ -944,7 +944,7 @@
+         "MissileAP_Light": "authored D2K signature layer MissileAP_Light retained by the explicit exception"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "fdb56fb8b164a9fb10097a1c388cc39f00c519518cf3c62f8e28452efa426a83",
++      "main_digest": "d10d12c9cfcaa683d29a8c70bedddbee2c75ca7ce79ee3cf3da132a933694e3c",
+       "mains": [
+         "Flak_Medium",
+         "MissileAP_Heavy",
+@@ -966,7 +966,7 @@
+         }
+       ],
+       "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+-      "weapon_digest": "5d3595fbd70c041b65618d4694d36dddd36fd10af4519ef06c543540229b9cb0"
++      "weapon_digest": "1fe35e0382bde63d30ddc5b6f3bb80dda0d2399dfd706ff4f2963cb9c6092192"
+     },
+     "D2K_Rocket_Trooper2": {
+       "category": "maintainer-curated signature",
+@@ -976,7 +976,7 @@
+         "Railgun_Heavy": "authored D2K signature layer Railgun_Heavy retained by the explicit exception"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "62856b742bf13dd02258c0a4d575b5ffeca5f46e5587ac3dffbb2b7223f5b7fc",
++      "main_digest": "664b53a480abcf17066843527050e15caffe7c4e72a71880196f5ad70f31e88a",
+       "mains": [
+         "CannonHE_Medium",
+         "Demolition_Light",
+@@ -998,7 +998,7 @@
+         }
+       ],
+       "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+-      "weapon_digest": "2af133a1f0adab18797a509a110c48ccc468c54821420aaa696529dacc0f41ce"
++      "weapon_digest": "2c9a4cbb60bab5d1e2c863ed86c99138b1408177e85ab9898c8827fca0b1a6c4"
+     },
+     "D2K_Rocket_Trooper_AA": {
+       "category": "maintainer-curated signature",
+@@ -1008,7 +1008,7 @@
+         "MissileAP_Light": "authored D2K signature layer MissileAP_Light retained by the explicit exception"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "fb07a2f26fdbce835fd57d93d6b400f3c1a4668a2561405d2d63903d2a09cc8a",
++      "main_digest": "a68fc46d27e28eada7d7d07f477d6b6ebcaede667c066bf105f12f2d07e98bd7",
+       "mains": [
+         "Flak_Medium",
+         "MissileAP_Heavy",
+@@ -1030,7 +1030,7 @@
+         }
+       ],
+       "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+-      "weapon_digest": "7043e5f3d1b995da23f2b3d32a3df0f3428121ca5a89c8b93923768bf1fd83b5"
++      "weapon_digest": "d287de0484fd4be296584d56828c1c6763dbd9434cc8ffaeb8739e1381c05e31"
+     },
+     "D2K_Rocket_Trooper_AGOnly": {
+       "category": "maintainer-curated signature",
+@@ -1040,7 +1040,7 @@
+         "Railgun_Heavy": "authored D2K signature layer Railgun_Heavy retained by the explicit exception"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "e11ae42c5c11d2dff17ebdf6306e6c673b99bcd9d8cc6148cd954fd25169de19",
++      "main_digest": "eec4aaac4ddf4acb0f4f29301f1a78199b81a3d817af7e6a8d4053f9e894987f",
+       "mains": [
+         "CannonHE_Medium",
+         "Demolition_Light",
+@@ -1062,7 +1062,7 @@
+         }
+       ],
+       "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+-      "weapon_digest": "617d0b7297d6788fce2a9e48903537504376aa7516f53ba98cc0c71c86d3e84f"
++      "weapon_digest": "f0a12fb2bf7d17bf50e5cd98ef4bfcd1bf35f7ffe378ef14bf020b338f18f3ec"
+     },
+     "DRPlasmaTankWeapon": {
+       "category": "target-routed composite",
+@@ -1127,7 +1127,7 @@
+         "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "3ac116c3633bf09d9e07575d49212c95492cc09c1cb0af0b2db01f115e52baf7",
++      "main_digest": "b1cc261fdaf152f66c8cea146feee4c60d52f675e1eb29871fa61430a37d2408",
+       "mains": [
+         "Demolition_Light",
+         "MissileAP_Heavy",
+@@ -1149,7 +1149,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "9eda2d6aca5ce3372fc5ff5422cd778265f70c7627db22113ac58dc86af1e7e5"
++      "weapon_digest": "dab4918fde0deefc14c1d6bf91063a23532b2e445982571cc49cd826cebc56f4"
+     },
+     "DuelistTankCannon": {
+       "category": "maintainer-approved role blend",
+@@ -1162,7 +1162,7 @@
+         "PreservedFlat_TankDestroyerCannon": "anti-armor contribution to the Duelist's vehicle role"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "ed4113752cb11af16b97cf126a19ab04bf7397adb4798afa194fa72d876bd330",
++      "main_digest": "1f320a4f2fbb542ec2af2b09af55ae203509f0788d5df03bea0f277b875de5f2",
+       "mains": [
+         "CannonHE_Heavy",
+         "CannonHE_Medium",
+@@ -1182,7 +1182,7 @@
+         }
+       ],
+       "review_reference": "Maintainer unit decision: preserve the Ixian Duelist's versatile role",
+-      "weapon_digest": "3f32d59b3277c86a8b8e1780f767f1e37a98b3d08270a3aeee5eab35a00792aa"
++      "weapon_digest": "8dfdbff33bb4e6d7d3699066b7bd5bc6ed688f53b39de7be65f28d9b3393d2e3"
+     },
+     "EMPGrenade": {
+       "category": "status payload",
+@@ -1252,7 +1252,7 @@
+         "CannonHE_Heavy": "retained authored heavy-impact component of the accepted Epigraph profile"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "32f67e3e3d3821036e6bbb5a5d0d67aaa76e4a0921dfa25bf4b3f48c17bfc2de",
++      "main_digest": "fdf66dd3e5f7c2bed3bef0b517a4987b75064932a2daec7762cc3233c02774fa",
+       "mains": [
+         "Bullet_MediumFlatCompatibility",
+         "CannonHE_Heavy"
+@@ -1273,7 +1273,7 @@
+         }
+       ],
+       "review_reference": "Maintainer unit decision: Protoss Epigraph is good enough as authored",
+-      "weapon_digest": "9fbc207b1afbfa51b6bde1b59cf5732f793358f175c5984ea21e13ed5d026cb3"
++      "weapon_digest": "7a793157bce1e3f25ce638020ec496b9d5d030114954b9b5bc5381af18ce8474"
+     },
+     "ExecutionerDeath": {
+       "category": "staged superweapon",
+@@ -1317,7 +1317,7 @@
+         "Flame_Light": "separate 16000-damage close burn applying Temperature at scale 100"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "d77d688d240623a06df923a6d17ea60ce239dffd2e82c13da6041b1264f6261f",
++      "main_digest": "0d723f324df556352d2f6c3a836182fa48e8cd5f53246f962f4f5bc45a29bea8",
+       "mains": [
+         "Demolition_Light",
+         "Flame_Light"
+@@ -1333,7 +1333,7 @@
+         }
+       ],
+       "review_reference": "Resolved state review: Devastator wide blast and close burning debris",
+-      "weapon_digest": "72fbc09e4583fbd3d78ae82eeb380e5857f832ce780370d9252c6a542b4b0990"
++      "weapon_digest": "ceb18b04c9983826e380129fc508636f3257fb664f8b76bf63e09b2acaa0a760"
+     },
+     "Fremen_RPG": {
+       "category": "target-routed composite",
+@@ -1370,7 +1370,7 @@
+         "ShotgunTankDestroyer": "authored target, armor, relationship, or state route ShotgunTankDestroyer"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "3e13da8dd2f451c7866ff4957769b926ba14b0354bd52e2e787c533f05ff52bf",
++      "main_digest": "61a3191f4a3da38f5064c7a97d4c65a92ee119bdbd9ecbd9690b3c62cae22d47",
+       "mains": [
+         "CannonHE_Medium",
+         "ShotgunChaingun",
+@@ -1389,7 +1389,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "ae2c022485ac297e79618fd53ff7b883a16d5dfec700871a4b727ef060234863"
++      "weapon_digest": "6f92893202e23fda96220f78d55aa57e37a8da02460a0e2f3955a5a0020b0940"
+     },
+     "FutureEnforcerShotgunDeployed": {
+       "category": "target-routed composite",
+@@ -1401,7 +1401,7 @@
+         "ShotgunTankDestroyer": "authored target, armor, relationship, or state route ShotgunTankDestroyer"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "3e13da8dd2f451c7866ff4957769b926ba14b0354bd52e2e787c533f05ff52bf",
++      "main_digest": "61a3191f4a3da38f5064c7a97d4c65a92ee119bdbd9ecbd9690b3c62cae22d47",
+       "mains": [
+         "CannonHE_Medium",
+         "ShotgunChaingun",
+@@ -1425,7 +1425,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "ec73ea458aae2802751ceb2332d6d00b96db7c163edb38d980e82e7421988a73"
++      "weapon_digest": "c02578c1e3a34fb8fcfb79ee805472ad885999a96f4d25a422faade13fab49a7"
+     },
+     "FutureEnforcerShotgunDeployed_elite": {
+       "category": "target-routed composite",
+@@ -1437,7 +1437,7 @@
+         "ShotgunTankDestroyer": "authored target, armor, relationship, or state route ShotgunTankDestroyer"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "3e13da8dd2f451c7866ff4957769b926ba14b0354bd52e2e787c533f05ff52bf",
++      "main_digest": "61a3191f4a3da38f5064c7a97d4c65a92ee119bdbd9ecbd9690b3c62cae22d47",
+       "mains": [
+         "CannonHE_Medium",
+         "ShotgunChaingun",
+@@ -1461,7 +1461,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "4c48be8cd801668e63d01d27652a6d19b898d871261bddb3894f03ad75d6e90f"
++      "weapon_digest": "da6a21404f192581a6968d7be0e69a41d84e00cc9badf38f08823b65a13fadf8"
+     },
+     "FutureEnforcerShotgun_elite": {
+       "category": "target-routed composite",
+@@ -1473,7 +1473,7 @@
+         "ShotgunTankDestroyer": "authored target, armor, relationship, or state route ShotgunTankDestroyer"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "3e13da8dd2f451c7866ff4957769b926ba14b0354bd52e2e787c533f05ff52bf",
++      "main_digest": "61a3191f4a3da38f5064c7a97d4c65a92ee119bdbd9ecbd9690b3c62cae22d47",
+       "mains": [
+         "CannonHE_Medium",
+         "ShotgunChaingun",
+@@ -1492,7 +1492,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "39eb128e91ccd44e9a9472f148466a3420bb39d096e0bf2b4618752dcd7c03cc"
++      "weapon_digest": "7e054543825358f44faff549597f6479f00cdb279e6057fb0e18afb5c965795e"
+     },
+     "FutureHarbingerCannon": {
+       "category": "status payload",
+@@ -1501,7 +1501,7 @@
+         "Plasma_HeavyFlatCompatibility": "primary conventional delivery or impact Plasma_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "3a853a1d7b486ad4125df2f77778a40a357b8d2f359bef316e76aafaa3437868",
++      "main_digest": "d17a8a192568af5e9efebc8ac7cc09b214c4c384c5c9f714b62a7c976e4999ef",
+       "mains": [
+         "CannonHE_Heavy",
+         "Plasma_HeavyFlatCompatibility"
+@@ -1517,7 +1517,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "958355ce5acbe814ddd1a34acbb4acf562d551653ec3912292d148506e50f438"
++      "weapon_digest": "4768a76c6e1430699cce8a49ad3bf25c478b6910f672ec9557807b55da268a53"
+     },
+     "FutureHarbingerCannon_elite": {
+       "category": "status payload",
+@@ -1526,7 +1526,7 @@
+         "Plasma_HeavyFlatCompatibility": "primary conventional delivery or impact Plasma_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "3a853a1d7b486ad4125df2f77778a40a357b8d2f359bef316e76aafaa3437868",
++      "main_digest": "d17a8a192568af5e9efebc8ac7cc09b214c4c384c5c9f714b62a7c976e4999ef",
+       "mains": [
+         "CannonHE_Heavy",
+         "Plasma_HeavyFlatCompatibility"
+@@ -1542,7 +1542,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "6f69186e7a9943a4e2e2f7dce14511370c5c57f79b14df9ce00e50d82c0a1d20"
++      "weapon_digest": "002fd27c1a2954a855e80b9107058f5438b11f85678765c8b0ccf5b48bc48275"
+     },
+     "FutureTankCannons": {
+       "category": "target-routed composite",
+@@ -1551,7 +1551,7 @@
+         "CannonHE_HeavyFlatCompatibility": "authored target, armor, relationship, or state route CannonHE_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "f0eb6bf4c90a6a5a9338060f30f024770bbd2be6018a9b2106ef3f913e6c07a9",
++      "main_digest": "677c51b79644d8a5bc181951ffe0ad281010ea699a183dd16a7016d0abf8fdb7",
+       "mains": [
+         "CannonHE_Heavy",
+         "CannonHE_HeavyFlatCompatibility"
+@@ -1567,7 +1567,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "8578fb39f709e6072ae63d853ae2bbd918e992b98cc2f6ecdba33f02a937c793"
++      "weapon_digest": "4d9719fcd5a273620b8b993c69a07627969e81b34623904545e0c5fb597cea06"
+     },
+     "FutureTankCannons_elite": {
+       "category": "target-routed composite",
+@@ -1576,7 +1576,7 @@
+         "CannonHE_HeavyFlatCompatibility": "authored target, armor, relationship, or state route CannonHE_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "f0eb6bf4c90a6a5a9338060f30f024770bbd2be6018a9b2106ef3f913e6c07a9",
++      "main_digest": "677c51b79644d8a5bc181951ffe0ad281010ea699a183dd16a7016d0abf8fdb7",
+       "mains": [
+         "CannonHE_Heavy",
+         "CannonHE_HeavyFlatCompatibility"
+@@ -1592,7 +1592,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "aae042778b3ede5fb82c9e50b8d5281b9c0a5cab45524769d13b407a389b7920"
++      "weapon_digest": "6a0eb346550b029c98b7984f8cdc995ede4d1a057a10f5c14d8b1524703e221e"
+     },
+     "Future_Cryocopter_Rocket": {
+       "category": "target-routed composite",
+@@ -1627,7 +1627,7 @@
+         "SniperSmallArms": "authored target, armor, relationship, or state route SniperSmallArms"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "98f149849c2f16163b5a4eb92e64217a801cee4164846c34bd87bafffade3d65",
++      "main_digest": "7dc198229db3122e9d385301fad2ff8705e3512adf96c5d4b1fd8278e63958f3",
+       "mains": [
+         "Bullet_Heavy",
+         "SniperChaingun",
+@@ -1649,7 +1649,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "155f9650b51ebbe17b8b88e36f8d85f51a9b1a05d15e3daff800019e0147992d"
++      "weapon_digest": "eb5ad7faa40b72b7a154598029c7418a4b015907214fcaf2ce67279081a98e42"
+     },
+     "GLBarrelExplode": {
+       "category": "target-routed composite",
+@@ -1658,7 +1658,7 @@
+         "Demolition_HeavyFlatCompatibility": "authored target, armor, relationship, or state route Demolition_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "869c0160f04f2ddb610ae413539b41f8c8737c38640856db704cce44480a8ecb",
++      "main_digest": "440f3fe6ea7d71732e97a8708f35b7591fb36adbd40f040b36f7b88b3f2ce0ea",
+       "mains": [
+         "1Dam",
+         "Demolition_HeavyFlatCompatibility"
+@@ -4479,7 +4479,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "3a3f40044273a16a3e3166cdb0c066f69c1b7862788ab0ec219bedf2be2e7f7b"
++      "weapon_digest": "d04baa5510999d3e67781dc790e4764bc80cf6880db0319a60ff225da2a31352"
+     },
+     "GhostSniper": {
+       "category": "target-routed composite",
+@@ -4489,7 +4489,7 @@
+         "SniperSmallArms": "authored target, armor, relationship, or state route SniperSmallArms"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "d1bd7feeee29616ca1ad3bd68e6823689a60b8401160fd869426841b13bfae29",
++      "main_digest": "9758cf374378e3f86fe58ab19d40a4662c01fccc8d872c998ef19b23252c30b8",
+       "mains": [
+         "Bullet_Heavy",
+         "SniperChaingun",
+@@ -4511,7 +4511,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "eeebed1816528a62e9d97dddf8d6f4af224cd1e1e81130ed5693c74513358b8e"
++      "weapon_digest": "f0444b2f91f14431fbe895cb26da829ef9b7ed8363543e7d96678e7028a8037e"
+     },
+     "GhostSniperLockdown": {
+       "category": "status payload",
+@@ -4524,7 +4524,7 @@
+         "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "af667f4813c293e983b749d721ac95ab2bfbb339edb2e8217fb50b02931fae6d",
++      "main_digest": "30182fb2e7346a32c9af14793c9d855ce0fec2d2bb5599782ac3e2c6880fb620",
+       "mains": [
+         "Bullet_Heavy",
+         "Bullet_Medium",
+@@ -4544,7 +4544,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "4ac06a204c87a6ec9e17e26fc57e3600877e94e863385a2e8f2dadad2af8c7e0"
++      "weapon_digest": "719919b69cc5239bd5e4b1b72a25ebf51ab0866d63fe89e455bb0977d2cdc0ca"
+     },
+     "GoliathMG": {
+       "category": "maintainer-approved role blend",
+@@ -4554,7 +4554,7 @@
+         "Concussion_Light": "authored light-concussion contribution to the Mk1 secondary ground attack"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "85f6e6bda1b4734f33b8cc024b42f198e04050a95cd6e027f60546f4f57e1dad",
++      "main_digest": "403b5c3ac225cf4162b6a66c0702c779088dd40a47537c77859531d5a4c99d26",
+       "mains": [
+         "Bullet_Medium",
+         "CannonHE_Heavy",
+@@ -4576,7 +4576,7 @@
+         }
+       ],
+       "review_reference": "Maintainer progression decision: preserve Goliath Mk1 ground behavior",
+-      "weapon_digest": "3881f6e1bfdc2a564f3c417fc35d3d9808b66c7b17b21542bdecc4779f333ec0"
++      "weapon_digest": "8d328907a450543577c0f9d8885973b3de487148b905fceea7b3ebd3764c5c9b"
+     },
+     "GoliathMk2MG": {
+       "category": "maintainer-approved role blend",
+@@ -4585,7 +4585,7 @@
+         "CannonHE_Heavy": "authored heavy-impact contribution to the improved Mk2 ground attack"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "4813372b74f5f45c8de1a10007187d6312ea3854de6618288c8b1e16c1061dec",
++      "main_digest": "4cece0ce291eefb7defb5aeb701ca4571f844b4cf84a1716646bbb930da33ea2",
+       "mains": [
+         "Bullet_Medium",
+         "CannonHE_Heavy"
+@@ -4606,7 +4606,7 @@
+         }
+       ],
+       "review_reference": "Maintainer progression decision: preserve approved Goliath Mk2 role",
+-      "weapon_digest": "4b28aab514f5ea3499ba09aaaed87d63d1a41ab3dce83307c23eeccaffe13659"
++      "weapon_digest": "27d70ad81e316eeed40291b7c41d4ff8eca2c58b949fb7582f436cd52b66197b"
+     },
+     "HMG_Duelist_upgrade": {
+       "category": "maintainer-approved role blend",
+@@ -4615,7 +4615,7 @@
+         "CannonHE_Heavy": "heavy-impact contribution to the Duelist's upgraded secondary gun"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "41dad031ce3ab775c66725b1f58d611896925b56fb8506c0927be26430d0f26d",
++      "main_digest": "2cbc514686864cf6a9e398af838fc70bd6419d69983ac8bd5cb8538790a051cd",
+       "mains": [
+         "Bullet_Medium",
+         "CannonHE_Heavy"
+@@ -4631,7 +4631,7 @@
+         }
+       ],
+       "review_reference": "Maintainer unit decision: preserve the Ixian Duelist's limited air holdoff",
+-      "weapon_digest": "95a125988f0c27881c7768b912ec651ab25814e5772d76c21f6f10767590f7da"
++      "weapon_digest": "7d48f69b78cff21c94b1363ff832257a70724eadbfd45a6157f56d124b741ec4"
+     },
+     "HMGo_upgrade": {
+       "category": "status payload",
+@@ -4641,7 +4641,7 @@
+         "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "f1f1e65777eacb159a709048a9114d510b8111516851df385cf550129f8c3b7f",
++      "main_digest": "3260ac42cdd79436c61a74d415caf6664b25106fa1aceac1a8ece9ce8af8bf3a",
+       "mains": [
+         "Bullet_Light",
+         "Bullet_Medium",
+@@ -4658,7 +4658,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "7ed670469edae39c0080b007c44f1b37953ba7bafb3c71ebf9acec0129038fa2"
++      "weapon_digest": "e00fe001fbaa43aef11289aa790e226ec4fb43df6014226453f522de45e560f1"
+     },
+     "HMGstealth_upgrade": {
+       "category": "status payload",
+@@ -4667,7 +4667,7 @@
+         "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "2bcf55b64bfa1db0329a5134fde5e5796a60f0e38ec693482e26cdece08e6e50",
++      "main_digest": "4a746c08c5ce3ea0d7fb4823933e300c75782206872409a5f983bee9d8214b16",
+       "mains": [
+         "Bullet_MediumFlatCompatibility",
+         "Laser_Heavy"
+@@ -4683,7 +4683,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "790e1df804ddbd0fef179c914d46215e412df4caa1c2e77ca32ad243ad57c938"
++      "weapon_digest": "9f539820c487f66427d2b182bff8261a0dda7cd325f0e3e2a17bcc4a388e448d"
+     },
+     "HeavyIxianCombatTankCannon": {
+       "category": "maintainer-curated signature",
+@@ -4693,7 +4693,7 @@
+         "CannonHE_Medium": "authored D2K signature layer CannonHE_Medium retained by the explicit exception"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "dd51f9f87f01ab43a7c56bf0f985a2350ca542ee8cf5881d85e75ede385ab275",
++      "main_digest": "1b01662fa41d2b90ce5ed20545ae3e5911bd7e6be7ee7964f60a0f5f07d5b1b2",
+       "mains": [
+         "CannonAP_Light",
+         "CannonHE_Heavy",
+@@ -4710,7 +4710,7 @@
+         }
+       ],
+       "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+-      "weapon_digest": "027d6215bbc639d2691a551597a06e36bee4db9806684b91de4715fee4e41074"
++      "weapon_digest": "1eceb26f810d8b2b2a0b5c6f9acb480ea44ab897591b29b6dccf141f2c67a755"
+     },
+     "HellfireCryo": {
+       "category": "status payload",
+@@ -4719,7 +4719,7 @@
+         "MissileCryo_Heavy": "special energy, status, or effect payload MissileCryo_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "3b7dd3f082b9415738f110f4b406c873c93d7a4bacd1bdc209fb9b5d355f1ffb",
++      "main_digest": "9f7ed9883df83c040e0818c5f4aaa470ba7b1c7019432a63060df6c8835a26b7",
+       "mains": [
+         "CryoBlast_Medium",
+         "MissileCryo_Heavy"
+@@ -4735,7 +4735,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "7d6811e763516aebcf67ce0dc957ebd7abfd568e0753b97041f34a4e16caa699"
++      "weapon_digest": "6099806e2c9edfc3af05241ec36f793dcb9f0fbf736306ebbc3149d64203b02d"
+     },
+     "HermitExplode": {
+       "category": "staged superweapon",
+@@ -4777,40 +4777,6 @@
+       "review_reference": "Resolved family review: authored stage timing and geometry",
+       "weapon_digest": "921dc0623ab5a88f0a8c3aab128f54bee99e9c5e43a875e4492f56b997112d4a"
+     },
+-    "HydraSpit": {
+-      "category": "maintainer-approved role blend",
+-      "component_purposes": {
+-        "ArrowWeapon": "original narrow projectile-impact armor contribution",
+-        "LightChemicalWeapon": "original corrosion-bearing chemical contribution",
+-        "LightMissile": "original missile armor contribution",
+-        "SmallArms": "original small-arms armor contribution"
+-      },
+-      "expected_reachability": "direct",
+-      "main_digest": "6a2237d3536d7eb2edd2cdb86ac3463626e64841fc4c593ddd96f80c25662114",
+-      "mains": [
+-        "ArrowWeapon",
+-        "LightChemicalWeapon",
+-        "LightMissile",
+-        "SmallArms"
+-      ],
+-      "overlap_justification": "Overlap is intentional and limited to this exact weapon: each authored armor contribution is part of the approved broad unit role.",
+-      "rationale": "Restore the pre-PR-287 Hydralisk profile after the Chemical-Light fold raised real ground damage by roughly 1.6x to 2.38x and quadrupled the flat corrosion feed. Preserve the exact four-part behavior.",
+-      "referrer_digest": "5c5210e755e7c2688c1edc9e445dd039dd1b1e08332bbf64ef2462b276c20175",
+-      "referrers": [
+-        {
+-          "kind": "actor",
+-          "name": "zerg_hydralisk",
+-          "path": "Armament@GARRISONED/Weapon"
+-        },
+-        {
+-          "kind": "actor",
+-          "name": "zerg_hydralisk",
+-          "path": "Armament@PRIMARY/Weapon"
+-        }
+-      ],
+-      "review_reference": "Maintainer regression report: Hydralisk was not previously this strong",
+-      "weapon_digest": "35eea1dfd33886ecc1efd73388d5bfe33c6111c816577fe2860bde30b0fa399e"
+-    },
+     "IxianCombatTankCannon": {
+       "category": "maintainer-curated signature",
+       "component_purposes": {
+@@ -4819,7 +4785,7 @@
+         "CannonHE_Medium": "authored D2K signature layer CannonHE_Medium retained by the explicit exception"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "0a944ad8b9c380b11b9decebeea52d613d7a1d1b39bcdb39f306287514dc4387",
++      "main_digest": "606289af7203d96683ce733038ad16e73fc5d66c5f8f7f803aace5922d24d905",
+       "mains": [
+         "CannonAP_Light",
+         "CannonHE_Heavy",
+@@ -4836,7 +4802,7 @@
+         }
+       ],
+       "review_reference": "Maintainer design: WEAPON_3WAY_SPLIT two-warhead-cap exception allow-list",
+-      "weapon_digest": "dba9552c7c3a114cfe42ab2f3b2962b3586d022b53b59301f527ade5d6880492"
++      "weapon_digest": "5f4e89089eea277a0e44a56d7299858e04a2e33013ca4a310a2402a380398e31"
+     },
+     "JapanMaidenBowEnergized": {
+       "category": "target-routed composite",
+@@ -4846,7 +4812,7 @@
+         "CannonHE_Medium": "authored target, armor, relationship, or state route CannonHE_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "4038ed1a25c477d03843a4b71f66483110e6120f150f3222e04ce812af814543",
++      "main_digest": "67ca0ec57e00d5aa5f580cbf0baa583563256c49a3d4054d86fd2df85ab50e07",
+       "mains": [
+         "Arrow_Light",
+         "Arrow_LightFlatCompatibility",
+@@ -4868,7 +4834,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "642b26d30bd407fb35f4ff79e8a95783b3682997a653a902c1185019fa608782"
++      "weapon_digest": "336ad9d182c5f255d48623f6b3931783f0e878334794ffceae764357b1e3c233"
+     },
+     "JapaneseHovercraftFlakAAkWaveforce": {
+       "category": "effect-delivery composite",
+@@ -4877,7 +4843,7 @@
+         "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "867c8be3b050564ace9870f2ea89030a5ee81b6d4fb2dbf6147194903f22f255",
++      "main_digest": "d49e9f4354df30ccd293d1c3ebfa90cd85a9cfd8305a5529394b24c798ec7205",
+       "mains": [
+         "Flak_MediumFlatCompatibility",
+         "Railgun_Heavy"
+@@ -4893,7 +4859,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: overlapping effect delivery",
+-      "weapon_digest": "e487608d7cf2b9859d6341b1a254db357da69dd22d403bda3ac7cd30560008c9"
++      "weapon_digest": "8bf2fbd5e7924be5f0039bb2c73d5967ac7b614332b16e02faff8dd5b7fab496"
+     },
+     "JapaneseHovercraftFlakWaveforce": {
+       "category": "effect-delivery composite",
+@@ -4902,7 +4868,7 @@
+         "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "d8c6f7549d96c5fb11c9b6599e1f952e0a6f109d9a1dc67efe464318633ec320",
++      "main_digest": "00d83570de6a30de4d467e14a49c37a81f817242bd4ddb191788fc7444780fc8",
+       "mains": [
+         "Flak_MediumFlatCompatibility",
+         "Railgun_Heavy"
+@@ -4918,7 +4884,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: overlapping effect delivery",
+-      "weapon_digest": "db858af86de534eee8e75ea6c88900c8852b4d7642da649b72835120b1d45148"
++      "weapon_digest": "bef2c1fc2c79f9be47a772455aca62e190588ed7b2c3ff535dcfa38c76e2cabd"
+     },
+     "JapanesePlasmaBomb": {
+       "category": "status payload",
+@@ -4928,7 +4894,7 @@
+         "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "eb53a3cda3c166923b901ecaa05a44299858597ff4af9e105866dd8c46230747",
++      "main_digest": "845f695908861105ebf3447b2cd3ca851c30d1a70b9bf9ab562592ed428600d4",
+       "mains": [
+         "Chemical_Heavy",
+         "Demolition_Heavy",
+@@ -4945,7 +4911,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "7bb78682b9e8e25b34c3e78d2cbdacef885b61a01a1c366af567686c931c4cdc"
++      "weapon_digest": "990df8112a2199c7a2fd3bfcd30833186a451205ff68ea59155432a72f18286d"
+     },
+     "KodiakCannonSonic": {
+       "category": "status payload",
+@@ -4954,7 +4920,7 @@
+         "Sonic_Heavy": "special energy, status, or effect payload Sonic_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "0ec9e6bf8df35d9f610e01f5635e20faf61a89194318cca0082ab27ad3b4314f",
++      "main_digest": "7af928280f33a9e781d617a5a749588e2cbe2dbde5a790128b55bd691ca9bacc",
+       "mains": [
+         "CannonHE_Heavy",
+         "Sonic_Heavy"
+@@ -4970,7 +4936,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "511df8a01e5939d815053641705c9a35f1b2b11ab3e283dc067b8d262f6baaed"
++      "weapon_digest": "9ab876106a2c0d0a571c603549b7d2e0dea081c922531e3d7e5d7145efff2543"
+     },
+     "Laboratory_Bioball": {
+       "category": "status payload",
+@@ -4981,7 +4947,7 @@
+         "Demolition_Light": "primary conventional delivery or impact Demolition_Light"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "50956282f8bdd6a763aa2588eccd69a96ea3d9d8e8e8690eaa5572188fa38c72",
++      "main_digest": "1c77d0223b17f89b34ad672b1796821396f8d35b4e8855eee73cab4ee5257b0e",
+       "mains": [
+         "CannonHE_Heavy",
+         "Chemical_Medium",
+@@ -5004,7 +4970,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "2fdd2a78577741897a4b867386c93d3eef87c93e6ef18de2b1884b00d48e8b6e"
++      "weapon_digest": "6833a4b89bbf7b81aef5f6ecffcf91e47d285aa718e281bbaeba484481428c70"
+     },
+     "LaserObeliskBurning": {
+       "category": "status payload",
+@@ -5038,7 +5004,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "22d1c9bc7ed3c350fba7f1aa76fa89c6de45742aeeaaa4c53e52980714e9697d",
++      "main_digest": "5d764ee356caa2cbd67430b6a250e240c25fae0b9e49cc69afdc0005f3c17621",
+       "mains": [
+         "CannonHE_Heavy",
+         "Tesla_Heavy"
+@@ -5054,7 +5020,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "ec1b99133d94a7507dc6d81655034a857467a240b3fdbc29a0a458553cf5b5b1"
++      "weapon_digest": "5158da14e72a0336f934d2c5b914a916439bbe9e1d5809c387dd78b67ea12158"
+     },
+     "Lunar_GreenGrilleArty_elite": {
+       "category": "status payload",
+@@ -5063,7 +5029,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "22d1c9bc7ed3c350fba7f1aa76fa89c6de45742aeeaaa4c53e52980714e9697d",
++      "main_digest": "5d764ee356caa2cbd67430b6a250e240c25fae0b9e49cc69afdc0005f3c17621",
+       "mains": [
+         "CannonHE_Heavy",
+         "Tesla_Heavy"
+@@ -5079,7 +5045,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "c3d8c84df64a61bd2a9105d042e4052f8ab3544ef2975879917753ecaaa74d14"
++      "weapon_digest": "fce5927222755bfb901a61f5e4484ba670e57390b99ff0d1d8e6fdec593373de"
+     },
+     "Lunar_GreenSturmArty": {
+       "category": "status payload",
+@@ -5088,7 +5054,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "f6e5f911119eafb0c2c4ea2dbacc14ea75911cf8dc0f7d162495e856b0d97df0",
++      "main_digest": "f163666f58d619dcea7a3d6796ff95f1a0eb130d8eb5b2fbb192a790e10b06a5",
+       "mains": [
+         "Demolition_Heavy",
+         "Tesla_Heavy"
+@@ -5104,7 +5070,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "c14ac7035d81adc3ef6d997caea804bcf2aaf6053f6e7792876d3daaccb121cd"
++      "weapon_digest": "8f797245b766e2dd98adb5b856f6f9e2fc6bccac876e6552bbd152dcd733bb83"
+     },
+     "Lunar_GreenTigerCannon": {
+       "category": "status payload",
+@@ -5113,7 +5079,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "7d6fa58022a7861cb322e1b2809e623a675af7d538b57046a3425385906e754b",
++      "main_digest": "5214d44bef9fd6b503520f15e024c41f83ebdfbcff4b50de102dd6929324d0e9",
+       "mains": [
+         "CannonHE_Medium",
+         "Tesla_Heavy"
+@@ -5129,7 +5095,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "a37e815422c512030e7537d8d0597a60326ef8da85ed4c48b80be7549d15405d"
++      "weapon_digest": "c8e733238a1ff2602cdfa278a3533df1201d620e78ac64d85c5b7f30452d720f"
+     },
+     "Lunar_GreenTigerCannon_elite": {
+       "category": "status payload",
+@@ -5138,7 +5104,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "7d6fa58022a7861cb322e1b2809e623a675af7d538b57046a3425385906e754b",
++      "main_digest": "5214d44bef9fd6b503520f15e024c41f83ebdfbcff4b50de102dd6929324d0e9",
+       "mains": [
+         "CannonHE_Medium",
+         "Tesla_Heavy"
+@@ -5154,7 +5120,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "c8a2f12f469256c90652a5ceaf55d58629cd96ae78e504af8a9ae2218ad296fa"
++      "weapon_digest": "8afc912fcb0af840d3a5f01c61cccdef8304f1f40b46a273a1bf62dce49477d4"
+     },
+     "MedicFlare": {
+       "category": "status payload",
+@@ -5197,7 +5163,7 @@
+         "MissileAP_Medium": "primary conventional delivery or impact MissileAP_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "0240b1c8c574539f473ed555c9245521f5f8c71179811c6e3bee96a68a588371",
++      "main_digest": "11eb24a26dc4f6671c7d975e5adf1e85d59d340b95f6e2947935628ea62ff56c",
+       "mains": [
+         "Chemical_Medium",
+         "MissileAP_Medium"
+@@ -5218,7 +5184,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "652411399bd09a43bcf39e53bccb78055e458f42d8cecb41244b3976db8916ff"
++      "weapon_digest": "9c65e1e09608d6b9e9d93e1aa3237b2cd2f7d56d93268bf489f7c9bb3298abff"
+     },
+     "MigMissiles_rad_elite": {
+       "category": "status payload",
+@@ -5227,7 +5193,7 @@
+         "MissileAP_Medium": "primary conventional delivery or impact MissileAP_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "0240b1c8c574539f473ed555c9245521f5f8c71179811c6e3bee96a68a588371",
++      "main_digest": "11eb24a26dc4f6671c7d975e5adf1e85d59d340b95f6e2947935628ea62ff56c",
+       "mains": [
+         "Chemical_Medium",
+         "MissileAP_Medium"
+@@ -5243,7 +5209,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "637750b21abdd085082da3d1c0dce4996d3afa247e3ae1b2727208453689739b"
++      "weapon_digest": "c1266974b20aa40cef2833ae7357a93711b4f057a0e4f904f14371e1080320ed"
+     },
+     "MiniNova": {
+       "category": "staged superweapon",
+@@ -5364,7 +5330,7 @@
+         "MissileHE_Heavy": "authored target, armor, relationship, or state route MissileHE_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "7403f6be1eb859db4bd43d64f57e4c3075782f866e29648bb4847246a7fcbca8",
++      "main_digest": "278c812d73d97e9ff23a2fee5e3c5abe3dc3434031bd4530773bdac32da3fa2a",
+       "mains": [
+         "Concussion_Light",
+         "MissileHE_Heavy"
+@@ -5380,7 +5346,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "d26f3160ae8c8aceb453652478a06bf5a13ee359b953623502dc5d5e3e997d71"
++      "weapon_digest": "6593ab768a767fcafc67322c39c3131683949ec5341eadccd2bc18041c3be777"
+     },
+     "NodTorpTubeBlackMarket": {
+       "category": "target-routed composite",
+@@ -5389,7 +5355,7 @@
+         "MissileHE_Heavy": "authored target, armor, relationship, or state route MissileHE_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "ae22c4977437836c4ebb9e24fad96de43c33647c1eda30c3abd6e1ef1a442e9e",
++      "main_digest": "4a9534ffba7394ec3b4dd50c3d6347b8cdda437c54c72361af276a98a75f9d2b",
+       "mains": [
+         "Demolition_Heavy",
+         "MissileHE_Heavy"
+@@ -5405,7 +5371,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "668b71d4b67c82aa71a78e44958651024b7293a4afa84e9b18ad085c5001a1e7"
++      "weapon_digest": "798a28fe06c60c34ac5e4c56b3f1f030311602a7ceca68618ee855a0b01987dd"
+     },
+     "OIBigPlasmaCannon": {
+       "category": "status payload",
+@@ -5415,7 +5381,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "7327ea9901011c75fbc4fc5306a8557aad5646909b9bb305084979405f158c4f",
++      "main_digest": "4a65fae6ed95fc672affad429e4d506b91173a271e6517bb00f88c2cc148929b",
+       "mains": [
+         "CannonHE_Heavy",
+         "Railgun_Heavy",
+@@ -5432,7 +5398,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "ac1fd68764fb51fd719228a569481400657967b0259b9dcee82f7dd028499751"
++      "weapon_digest": "02f81034b54cefe1fd69404930cdf258d50a3487ca49cc60a9979514118f56d6"
+     },
+     "PLYMineExplosive": {
+       "category": "target-routed composite",
+@@ -5467,7 +5433,7 @@
+         "Quantum_MediumFlatCompatibility": "special energy, status, or effect payload Quantum_MediumFlatCompatibility"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "47858bb462994df0044be171b3f1cfb9bca32189839613dbfbeeeea67daeb6a7",
++      "main_digest": "0be2435a618b2fecd08a0d1e0777da4c31a1d376f04c901325484aee83a69e55",
+       "mains": [
+         "CannonAP_Light",
+         "CannonHE_Medium",
+@@ -5484,7 +5450,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "c2cd4057f0b3e02701a17d8ef22cd3389db29c3c3303fa8d0d950c5262cca0ee"
++      "weapon_digest": "7ed0a693e0849db0d94c37f0804578f59d3fbd86ff566f7c245e706f384f7e2c"
+     },
+     "PositronBounce2": {
+       "category": "status payload",
+@@ -5494,7 +5460,7 @@
+         "Quantum_MediumFlatCompatibility": "special energy, status, or effect payload Quantum_MediumFlatCompatibility"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "34a671d248d26f728ee0bfd7e108b56b38e82a01d10882f361b8363e8ecb42b2",
++      "main_digest": "e422dae54326a732837246dc7b8a3045cbd3d4ed1005bedb9f43d8484f77e46f",
+       "mains": [
+         "CannonAP_Light",
+         "CannonHE_Medium",
+@@ -5511,7 +5477,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "8dec30818ec0cf200c820dc4dfa04b5e7c7cb08f66c817dac3b1ec73aa15e374"
++      "weapon_digest": "ca91490eb5ccffb16230ce0bfc7f9d438c2d14ff93570130e9eaf771c26be5e8"
+     },
+     "PulseMissile": {
+       "category": "staged superweapon",
+@@ -5557,7 +5523,7 @@
+         "Nuclear_Super": "special energy, status, or effect payload Nuclear_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "ec7e725fdb4892eedad12ad89f833ff3855407bce474be2485c983e10df155d5",
++      "main_digest": "ec6a7fad1e2f688de2cdad811fe67d170d9d5ebf1469190a4eeba50fa58854c8",
+       "mains": [
+         "Chemical_LightFlatCompatibility",
+         "Nuclear_Super"
+@@ -5573,7 +5539,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "008101fe5dc1f42421e626f54be75b4fd4475b5d1d37dac7e7a8734850cf9ced"
++      "weapon_digest": "da1848c5746de61bdc9a3222c435bb10ea0143e27adb1ef2a135a62f98f4d229"
+     },
+     "RA2120xmm_rad": {
+       "category": "status payload",
+@@ -5583,7 +5549,7 @@
+         "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "7c42803cd6117dad7c75b1f2295efff9eb6095daf43a1b5ca9300506f035d7fe",
++      "main_digest": "8bb6607787a2257adbf53dc1e654a1ed9a3bbfc35caff547a00b9d64c0024b5e",
+       "mains": [
+         "CannonAP_Light",
+         "CannonChem_HeavyFlatCompatibility",
+@@ -5600,7 +5566,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "3f8f3192d7a13256ec6164c96873209c42b1e7c8ac477bc77ab84e316f4e7282"
++      "weapon_digest": "4b670a1374e455334ab292858bfea7c5d64cde0fb1d20bc01e0fe89cfd1c9dfe"
+     },
+     "RA2120xmm_rad_elite": {
+       "category": "status payload",
+@@ -5610,7 +5576,7 @@
+         "CannonHE_Heavy": "primary conventional delivery or impact CannonHE_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "7c42803cd6117dad7c75b1f2295efff9eb6095daf43a1b5ca9300506f035d7fe",
++      "main_digest": "8bb6607787a2257adbf53dc1e654a1ed9a3bbfc35caff547a00b9d64c0024b5e",
+       "mains": [
+         "CannonAP_Light",
+         "CannonChem_HeavyFlatCompatibility",
+@@ -5627,7 +5593,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "ff8ce4ddb41d9f6b3c038b051f56000f6b0507719dbd856c284c73afec0cf8a3"
++      "weapon_digest": "ed7df942db43a274345100d985399484ec6c533065daac13e8d69d7d2910af63"
+     },
+     "RA2Atomic": {
+       "category": "staged superweapon",
+@@ -5674,7 +5640,7 @@
+         "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "d6242952725a41272374ccf9617ebdb57dbd6d81d7387e3e5d59ba55489bdbd2",
++      "main_digest": "a4efaef3ae5e40428ad78739dc919a3b0c6cce1c6dc6f5ca3310ca9f7577cc22",
+       "mains": [
+         "Demolition_Light",
+         "Flame_Medium",
+@@ -5691,7 +5657,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "16c716e4464e536e36ad9d69c99837c4d4c41cb4b249034bd8444aba1543cac3"
++      "weapon_digest": "f04b4873d7b061a358729bea14e089c8635dee013ad061cecb8465a7be579657"
+     },
+     "RA2Comet_elite": {
+       "category": "status payload",
+@@ -5701,7 +5667,7 @@
+         "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "d6242952725a41272374ccf9617ebdb57dbd6d81d7387e3e5d59ba55489bdbd2",
++      "main_digest": "a4efaef3ae5e40428ad78739dc919a3b0c6cce1c6dc6f5ca3310ca9f7577cc22",
+       "mains": [
+         "Demolition_Light",
+         "Flame_Medium",
+@@ -5718,7 +5684,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "24e700cce7dd0742c7f1b3f5b12871c6e74243dd630ff2b3e1d996991cfbd4f0"
++      "weapon_digest": "a257141781e94012b7f515772d209758617a1b41c509006a316026573299b3a1"
+     },
+     "RA2DemoBomb": {
+       "category": "staged superweapon",
+@@ -5842,7 +5808,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "da8488148c096cf028536c76ca97870dc7b2e2dd988ca464c5fbda0db93957b6",
++      "main_digest": "a211356a990bf414bea60bbe3c46326fa4152e3c56a64252207461f50a1b5ea0",
+       "mains": [
+         "Magic_Heavy",
+         "Tesla_Heavy"
+@@ -5858,7 +5824,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "c6cafd1d6631d0ae7f34efe029461312a7a522972709bcc543c393ff9c82c6ac"
++      "weapon_digest": "8087b901f9492fe094d8b5108198fe2909826107c931458ec20ec40db9e892f7"
+     },
+     "RA2FreedomRocket_elite": {
+       "category": "percentage-scope compatibility",
+@@ -5897,7 +5863,7 @@
+         "Nuclear_Super": "special energy, status, or effect payload Nuclear_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "933fce8ef23890547abae219e57e2d2a82dab6226c29486196f612d1f3bfa021",
++      "main_digest": "1f5f6d8605090767863739b9d42fc565910aaf09ddc748da9ad03b9e7e50e66a",
+       "mains": [
+         "Demolition_Heavy",
+         "Nuclear_Super"
+@@ -5913,7 +5879,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "7db4cee86e8472032b551a99f8349f8aa4287bc11357852380f026fea75c56df"
++      "weapon_digest": "7f093a497afc6db5adc13fa4d317530c203d4e5bc69b09696edb7457c7509a61"
+     },
+     "RA2KirovBomb_nuclear_elite": {
+       "category": "status payload",
+@@ -5922,7 +5888,7 @@
+         "Nuclear_Super": "special energy, status, or effect payload Nuclear_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "b57c9cdacf28d2c963adbd91f0e0474f603329704af66cc4f56c773e8d5688d1",
++      "main_digest": "e5f1d3fa4c1c6946daa318a2ee4881e85cbe5749136468a7d30b3277012de372",
+       "mains": [
+         "Demolition_Heavy",
+         "Nuclear_Super"
+@@ -5938,7 +5904,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "9a17588d0c572032babe1d5b19fa6d5a77387b14908593ecff4b754f7fcb732d"
++      "weapon_digest": "be3db885f934da26d661e502285ff98dc1606db6f8f38cda7f955bd176af6d34"
+     },
+     "RA2KirovBomb_rad": {
+       "category": "status payload",
+@@ -5947,7 +5913,7 @@
+         "Demolition_Heavy": "primary conventional delivery or impact Demolition_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "e54a7174db0e5510c8720809018efe142fe2bdf5182a912c23a0ef4c356b1551",
++      "main_digest": "bbf19160708df07ce853fb87c6fc367a3a376bffcf5f1edae439be4ca6a5687f",
+       "mains": [
+         "Chemical_Heavy",
+         "Demolition_Heavy"
+@@ -5963,7 +5929,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "b72261c660e9d8d6fe3896f7a2b438b513c6825555c1a48b683577dd26249448"
++      "weapon_digest": "78ee762c9186c011d649b7982f4e29b081afe49a65a6a67d1daa43bba98c30a5"
+     },
+     "RA2KirovBomb_tesla": {
+       "category": "status payload",
+@@ -5972,7 +5938,7 @@
+         "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "13eee429a48dde034bbc621032cbdb4130041ad51204348a62d1bfff67a0cdf8",
++      "main_digest": "37f13fe28b98acd6dd6ea9b4bbab0730129ac6f82c8c61b7515828c58a7f42c4",
+       "mains": [
+         "Demolition_Heavy",
+         "Tesla_Super"
+@@ -5988,7 +5954,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "f7bf6766acfe2f22ee4ef912f01f24c28e725b8aaa19f2c89fe7de6fef70610f"
++      "weapon_digest": "3a4e1511abbe388b8842d0f96a7c83f14752127d9f580cd06c1e6aa288417dbc"
+     },
+     "RA2LasherToxicMortar_elite": {
+       "category": "status payload",
+@@ -5997,7 +5963,7 @@
+         "CannonHE_Medium": "primary conventional delivery or impact CannonHE_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "d846e10aa1410c6b2b9f7714346a714855b4d443da06fb16ff2a968253e2120e",
++      "main_digest": "4a51cdc48a7527a4d69356881afe8547ae0c78a5fa36d7ac166eb2a81497e6b0",
+       "mains": [
+         "CannonChem_MediumFlatCompatibility",
+         "CannonHE_Medium"
+@@ -6013,7 +5979,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "5e7e940b5c8283a7cf919068646a9f3da962da3dd6f449d1de0d76ca04c555aa"
++      "weapon_digest": "3aaf77350a97cc40f59ec0578a6c4bc0fff7e022258b525bc3c57045a62fe86b"
+     },
+     "RA2Robotmm": {
+       "category": "status payload",
+@@ -6114,7 +6080,7 @@
+         "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "3ac116c3633bf09d9e07575d49212c95492cc09c1cb0af0b2db01f115e52baf7",
++      "main_digest": "b1cc261fdaf152f66c8cea146feee4c60d52f675e1eb29871fa61430a37d2408",
+       "mains": [
+         "Demolition_Light",
+         "MissileAP_Heavy",
+@@ -6151,7 +6117,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "928b4e6c01972ea69ca21e656005889e11f3afcef76e5bb5703fedbdbfb2d9e7"
++      "weapon_digest": "78aac67920c9ae17235a962fc3cba8c67c3b6e4b73b2f7d01a200fbe85bcc7ba"
+     },
+     "RA2SCUDELITE": {
+       "category": "status payload",
+@@ -6162,7 +6128,7 @@
+         "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "ea4652fc25e3da614318a1ed114aa676deb8ff7dbb1a74e7db1584d73937521f",
++      "main_digest": "94d131cc39c29bebd155cd51c1dd8e4d7ee3fcfd995b9a7977072be0c79054d8",
+       "mains": [
+         "Demolition_Light",
+         "MissileAP_Heavy",
+@@ -6185,7 +6151,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "be45bbe905b374f47b2f7ff9b24d17cd21ea4a822b5cb4b53cc0fda2e1734b5c"
++      "weapon_digest": "7bcb5ba51fb7b239dc381d04329191d9613b49c410615160572e0fd24b377ea0"
+     },
+     "RA2SCUD_fire": {
+       "category": "status payload",
+@@ -6195,7 +6161,7 @@
+         "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "3ac116c3633bf09d9e07575d49212c95492cc09c1cb0af0b2db01f115e52baf7",
++      "main_digest": "b1cc261fdaf152f66c8cea146feee4c60d52f675e1eb29871fa61430a37d2408",
+       "mains": [
+         "Demolition_Light",
+         "MissileAP_Heavy",
+@@ -6227,7 +6193,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "4399828b08d181492c80ccaf41ed57c5cc4dffa26d1c7750207bc57a1e14797f"
++      "weapon_digest": "021dd32511726c398a09632861ceb4ec90111aa8149525cb3cf1a4f46e7d38c8"
+     },
+     "RA2SCUD_rad": {
+       "category": "status payload",
+@@ -6238,7 +6204,7 @@
+         "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "413107f1a5a0e18a9501b5c81b658ab84938764c31d8d394cbf19f1e513659cb",
++      "main_digest": "ce03db5e9173020ef68cce06805c4080faca0dd67576d235e5e975f255d96a7c",
+       "mains": [
+         "Demolition_Light",
+         "MissileAP_Heavy",
+@@ -6266,7 +6232,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "12dc08e9b0e9411efc14990e878ae7e0850d3e2b26a134192ab2361df4de1ffd"
++      "weapon_digest": "6acc4e5b71a95165d507e43fc65c5f6348acfb6f12ac8b1972f9df6eed2a3df8"
+     },
+     "RA2SCUD_tesla": {
+       "category": "status payload",
+@@ -6276,7 +6242,7 @@
+         "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "3ac116c3633bf09d9e07575d49212c95492cc09c1cb0af0b2db01f115e52baf7",
++      "main_digest": "b1cc261fdaf152f66c8cea146feee4c60d52f675e1eb29871fa61430a37d2408",
+       "mains": [
+         "Demolition_Light",
+         "MissileAP_Heavy",
+@@ -6308,7 +6274,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "60058be843850e9be8e0ab5cc5768770ac7c0f9aec57f00399d259c078b51337"
++      "weapon_digest": "8b7495ae8096997c547cda7a265393d38444b9ff302e67d03a37ac31703b69a5"
+     },
+     "RA2Virusgun2": {
+       "category": "target-routed composite",
+@@ -6317,7 +6283,7 @@
+         "Sniper_LightFlatCompatibility": "authored target, armor, relationship, or state route Sniper_LightFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "fc0941ff631781e18790b04318ed0d99233b26f2b4395c9ae8efc3bb70d28605",
++      "main_digest": "ea288502c5b448ee200c46da8dbebf7a44b49d93d84bab98999f66e3e6e28035",
+       "mains": [
+         "Flak_Medium",
+         "Sniper_LightFlatCompatibility"
+@@ -6338,7 +6304,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "70673a3dc62ca931dd05f376371253fb8908476cab633e22fc95d02c30c14857"
++      "weapon_digest": "e7dc7f29ff00fa242ff6827a7f3c3fc565f94f496837fefe65bbe952445d5be1"
+     },
+     "RA2Virusgun3": {
+       "category": "target-routed composite",
+@@ -6348,7 +6314,7 @@
+         "Sniper_LightFlatCompatibility": "authored target, armor, relationship, or state route Sniper_LightFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "30f8f77abcc7dcc73aee81c368804131e7de553b8a386b540bcb8864ac31f94b",
++      "main_digest": "6d9bfd2b498bd800be7e9f80e515efead8003c4ff385faf640750992bd9a6343",
+       "mains": [
+         "Flak_Medium",
+         "MissileAP_Medium",
+@@ -6370,7 +6336,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "9aca274e962f7e46f45b3a52c1bc04fb60f1f3d2bb9f8479a2052b0ffca14dd8"
++      "weapon_digest": "83a5c157d48add5dc22242e86740875f0829ef0bedb934f7a6e07b2bdb808dbd"
+     },
+     "RA2Virusgun_elite": {
+       "category": "target-routed composite",
+@@ -6380,7 +6346,7 @@
+         "Sniper_LightFlatCompatibility": "authored target, armor, relationship, or state route Sniper_LightFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "30f8f77abcc7dcc73aee81c368804131e7de553b8a386b540bcb8864ac31f94b",
++      "main_digest": "6d9bfd2b498bd800be7e9f80e515efead8003c4ff385faf640750992bd9a6343",
+       "mains": [
+         "Flak_Medium",
+         "MissileAP_Medium",
+@@ -6402,7 +6368,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "c6a3ada76a4ceca9a0aee03c6d2087ea0488276a849c86137f418af4bcb030ec"
++      "weapon_digest": "edda393865d5df25952405d8736a4ab6a5145eb1767ac4519b316201594c5768"
+     },
+     "RAAtomic": {
+       "category": "staged superweapon",
+@@ -6480,7 +6446,7 @@
+         "RashidanGroundCompatibility": "authored target, armor, relationship, or state route RashidanGroundCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "78f85077ef39faefe472132d86f787736207e11fd400a5fd7d97e9b9c94a1765",
++      "main_digest": "ba440ae1b9cb350eb2bb44c741be463094e414715a42a767e1a08eccf9cc9a2e",
+       "mains": [
+         "Bullet_MediumFlatCompatibility",
+         "RashidanGroundCompatibility"
+@@ -6501,7 +6467,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "ea594afce19da63cc80a503c56b1a6857136de8aa1a052b7a44f93571705142a"
++      "weapon_digest": "9cbfaeec6505a95f9d0d2481aa3d1e2836ecd8029a5a692b75adef0fa2429dc2"
+     },
+     "ReactorNuke": {
+       "category": "staged superweapon",
+@@ -6615,7 +6581,7 @@
+         "MissileHE_Heavy": "primary conventional delivery or impact MissileHE_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "d95ddb101915430116a6923531ea95542a4b5d82ba746c6df40501fde8bf0b8a",
++      "main_digest": "a3ffb3e2b855f83f685d7002a201891566218b138f996ad3efe73c7c16a0e6ca",
+       "mains": [
+         "Flame_Heavy",
+         "MissileHE_Heavy"
+@@ -6636,7 +6602,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "69d1051aaac0943c327142eae27b185af6e999bea866c183ce7dcf89afa92ee0"
++      "weapon_digest": "cac662eef9fdff5b1654b8340db41896b9ac079d3649fb3626e1ff38eb0cf15e"
+     },
+     "SCUDTesla": {
+       "category": "status payload",
+@@ -6648,7 +6614,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "613272f2ecceed89c0d089b8bba7b8e5829271640322d761d6ea7b4b1b72edca",
++      "main_digest": "6d1a050ecefb232195fe6f9a7ac0754c6679938fee3f38e3aabfc79513e7a67c",
+       "mains": [
+         "Flame_Heavy",
+         "HeavyFlameWeapon",
+@@ -6672,7 +6638,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "f38fbd05fef66d0c755a92329d8295a8b5495b66a6415ee4f5089d331ad974bb"
++      "weapon_digest": "e5c068985d486807abc55d624c0f699cd6b1a63f61e25d40d3f12844bd2e2c74"
+     },
+     "SCUDThermobaric": {
+       "category": "status payload",
+@@ -6684,7 +6650,7 @@
+         "MissileHE_Heavy": "primary conventional delivery or impact MissileHE_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "5f4a423970325f7df00ffb0de7f29fff6a98008a1d2810a85a9ae982a2158909",
++      "main_digest": "9aee48b0f23d16aae4eca1c7776e162be5329ea62108ee307106a40839762331",
+       "mains": [
+         "Demolition_Heavy",
+         "Flame_Heavy",
+@@ -6708,7 +6674,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "67b38541f27b3d6849adce3e30fc1de26094b1f963956a5b97e75cd3bf3259cc"
++      "weapon_digest": "fefcd68953ec347a527a0e032adca16eebee6d20c83a5ff9ae2912fdaafc4baa"
+     },
+     "SaboDeath": {
+       "category": "target-routed composite",
+@@ -6778,7 +6744,7 @@
+         "MissileHE_HeavyFlatCompatibility": "primary conventional delivery or impact MissileHE_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "f943972dcfe80021b1058df16991bd682b045ca50c5ed484e97ff8f12c9a43d0",
++      "main_digest": "4419c65fca372fee41d740dbaaf6484c1797f1508fd516774bdc7502e2b95b00",
+       "mains": [
+         "Flame_Light",
+         "MissileAP_Light",
+@@ -6810,7 +6776,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "0e78a6610f840298772b53b457726153d4c9254d7006a8885cf1eb5192611b79"
++      "weapon_digest": "c8eb4faae700955b67407bf2b06d129918fa9b4b00f5cfb8f0573707ad13ca74"
+     },
+     "SandmarineTuskTwin": {
+       "category": "maintainer-approved role blend",
+@@ -6822,7 +6788,7 @@
+         "MissileHE_Heavy": "heavy explosive core of the twin missile salvo"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "842f1664b8bc2ccf4c520923813c50c121e6a24580cff7f1141accf629df7d80",
++      "main_digest": "7da1410281c6ee19ca2122e56eed998fbb049edb99ba7f68dfb1d423acd3e431",
+       "mains": [
+         "Bullet_Medium",
+         "Concussion_Medium",
+@@ -6856,7 +6822,7 @@
+         }
+       ],
+       "review_reference": "Maintainer decision: preserve Sand Marine and Big Shiee generalist ground role",
+-      "weapon_digest": "1c4ea58bbeb6b1be978a612d26a03686dff5b8584eb78ca0c1c4e0cdb8a3c3d6"
++      "weapon_digest": "68eda4a48a1c80bd6be1068fce9fda72b5a31dd9f966deafcac6f33eda4556df"
+     },
+     "ShotgunAttackRobotGun": {
+       "category": "target-routed composite",
+@@ -6866,7 +6832,7 @@
+         "CannonHE_Medium": "authored target, armor, relationship, or state route CannonHE_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "703c8cef3f74e7132f0d43f726c3045ccb15e83d5d7b76a4b235daa6903259b9",
++      "main_digest": "8c272a4d78c993adec42ce9b6ebd31f041c5fa61fb28123629fdebecf56561a2",
+       "mains": [
+         "Bullet_LightFlatCompatibility",
+         "Bullet_Medium",
+@@ -6888,7 +6854,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "76cbc1a1ca43603e95c8ac02511d9db88013785069ed9c43491959f3d55177f4"
++      "weapon_digest": "bb2175e0cef6956d03354132dff9f79e856259c79ce5a29199c5f96424d59288"
+     },
+     "ShotgunAttackRobotGun_elite": {
+       "category": "target-routed composite",
+@@ -6898,7 +6864,7 @@
+         "CannonHE_Medium": "authored target, armor, relationship, or state route CannonHE_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "703c8cef3f74e7132f0d43f726c3045ccb15e83d5d7b76a4b235daa6903259b9",
++      "main_digest": "8c272a4d78c993adec42ce9b6ebd31f041c5fa61fb28123629fdebecf56561a2",
+       "mains": [
+         "Bullet_LightFlatCompatibility",
+         "Bullet_Medium",
+@@ -6920,7 +6886,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "0f98e8d7edbb934cf4166dabc84210f1f74e3f77f539afcc3151b2171a91f827"
++      "weapon_digest": "42594d9c10160ad52d4980a8a29222a04908120790c236573d931871f2a152f1"
+     },
+     "SkyHawkChainGun": {
+       "category": "target-routed composite",
+@@ -6929,7 +6895,7 @@
+         "Demolition_Light": "authored target, armor, relationship, or state route Demolition_Light"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "2c59e66ee0458247092c9fbf38ff13606bc5dfce6fc66b49e833eb0694485e97",
++      "main_digest": "557ce8338f54387956c8f29d7556215851fe4f1f9d90f71050fea7adfb896bd8",
+       "mains": [
+         "Bullet_Medium",
+         "Demolition_Light"
+@@ -6945,7 +6911,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "86073b8e9e7d34a70b96c3881e4cf8283879807c942464ce43cb3481a98bb450"
++      "weapon_digest": "aa7a46ed2135494667c9b8e13ae650c51f8020c34313e43e2de0bc9ffe44ff0b"
+     },
+     "SkyHawkChainGunWaveforce": {
+       "category": "target-routed composite",
+@@ -6955,7 +6921,7 @@
+         "Railgun_Heavy": "authored target, armor, relationship, or state route Railgun_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "0ff704f289eab5bbba7f6ba787f08d3cdb9a7d89e9b7a4ecd984448353380c35",
++      "main_digest": "20349abadad186261c4c4d23a90fdee69067d44c393f889de9e25357495e8f06",
+       "mains": [
+         "Bullet_Medium",
+         "Demolition_Light",
+@@ -6972,7 +6938,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "f4b9d5e395ac7fdafba869d5a9a50e03bfbc1d4ef37dd7c3f698a63bf7075fb3"
++      "weapon_digest": "72d50a79c2462db3a6350ec9eee5170a1cf240b3e9136e1b66b0020b28e65c30"
+     },
+     "SkyHawkPlasmaCannon": {
+       "category": "status payload",
+@@ -6981,7 +6947,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "98c70b58fee3df2735608eca898a098e849d1b011c3c7467bf67224791daea72",
++      "main_digest": "ff7b120241ece971caebe8a2f07bedabe05c5f3e29db869d3b9811e06172420d",
+       "mains": [
+         "CannonAP_Light",
+         "Tesla_Heavy"
+@@ -6997,7 +6963,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "489b8224e43d03e0a76e5f14798a9aef64200f2c51f81362a9f0f2fbc29b2c19"
++      "weapon_digest": "7771869aae1f77666fde549a22bc2f15dcda5bbe4694db8429bb191832503382"
+     },
+     "SonicZap": {
+       "category": "target-routed composite",
+@@ -7006,7 +6972,7 @@
+         "Magic_Heavy": "authored target, armor, relationship, or state route Magic_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "0b15dc4a00abe1002cbf78e2d373f05cfaeb693efd948bed365adf9efb27d187",
++      "main_digest": "b9c2a5bccdc8c1353a0f8d81d774ae638f841eb428d229bb7b083408c277cc70",
+       "mains": [
+         "ExtraSquidDamage",
+         "Magic_Heavy"
+@@ -7022,7 +6988,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "47a1e495110810ed4ae6838994c03c4f9d8cd5334284fd98e50a87be65ada1a9"
++      "weapon_digest": "2597e2250078913253b77c1bad29340491c7fc9df255b3c8f76eb0620d93472a"
+     },
+     "SpecterSniper": {
+       "category": "target-routed composite",
+@@ -7032,7 +6998,7 @@
+         "SniperSmallArms": "authored target, armor, relationship, or state route SniperSmallArms"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "eafa9ba7f896c2c02a3ff3f8e01a51916e34a33a797a38cf2fb53b490cfd6b55",
++      "main_digest": "ee6a3fadfbb97b709408f7d78e0bc86ccdcc7a022a4724c959a17e6c830ed8cc",
+       "mains": [
+         "Bullet_Heavy",
+         "SniperChaingun",
+@@ -7054,7 +7020,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "ae774831df546d25977b32dc94868aff25b0b953fe9cacdc681b9ccd7deff356"
++      "weapon_digest": "a146016cb46cc196d7fd2c61abd146591490916b4bd654372363a26b858ef205"
+     },
+     "SpecterSniperLockdown": {
+       "category": "status payload",
+@@ -7067,7 +7033,7 @@
+         "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "43d0c370c94b9fe0a3b98178f12771277a863a9e4134193a281992643aecf97b",
++      "main_digest": "e7021e9e7b1ac168867f46cfbe3827c25c6636ddda05acfedd8030282cf939c4",
+       "mains": [
+         "Bullet_Heavy",
+         "Bullet_Medium",
+@@ -7087,7 +7053,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "4a504edf0084a0ad62c172277f2ccc4c9b7eeed244b171bf17780f0049412f64"
++      "weapon_digest": "f69b671eab75e9bd22cb1230cf0993e6ffa4992d102f28a1857c9c8506ba94cc"
+     },
+     "SteelAirTurretEScatter": {
+       "category": "status payload",
+@@ -7096,7 +7062,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "5305e49270dcf22b173bb97273fedd24cf20663f1c9c9878ffb6e60bdb0be035",
++      "main_digest": "8ba3e3847aeff2264d11c5b3bbadf61eeb3646da872d193dd9f37138a6785b67",
+       "mains": [
+         "Quantum_HeavyFlatCompatibility",
+         "Tesla_Heavy"
+@@ -7112,7 +7078,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "9783dead9ce9c4b1c73dc1dc15db63e9bbc6e830e6388a4a9f1598ab9bdd7592"
++      "weapon_digest": "f4d778bc4191d871328107d5df299cdc97fc54e319464fa69def7bb08efd613b"
+     },
+     "SteelAirTurret_EMP": {
+       "category": "status payload",
+@@ -7121,7 +7087,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "6e0b288423aa0ae36de28063bf61595d9b853ee9bb896b4a9a4e3f7cb95021e9",
++      "main_digest": "5310b9271718dd9fe813f8a1207700f456b86efe0b1f4fcb8d483f2ec78e1173",
+       "mains": [
+         "Quantum_HeavyFlatCompatibility",
+         "Tesla_Heavy"
+@@ -7137,7 +7103,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "7fc67d42cdb24301b5116af233417ba150721429a712e649c36627ab145cae6c"
++      "weapon_digest": "32dcc9ded139f51d6cb62a39004a5c5a800d554ca0c4a27fbdddc83673d28ad2"
+     },
+     "SteelAirTurret_elite": {
+       "category": "status payload",
+@@ -7146,7 +7112,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "c509951eb95294d84b8aa2fe53e27eff36975f219b6e69b348cc5f14df235603",
++      "main_digest": "8eec8af961a605775752322231267aadc30b195db11f4157ac8493ef2ddac6ff",
+       "mains": [
+         "Quantum_HeavyFlatCompatibility",
+         "Tesla_Heavy"
+@@ -7162,7 +7128,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "1b270d7bad0046faf058528e9ba8edc7d528aae583f9d64c45104fc8f640924a"
++      "weapon_digest": "786cae65aa03d165f04de69a4bc34be792ced24cd2e23ce54f05b62cdb186b27"
+     },
+     "SteelInspectorIonCannon": {
+       "category": "staged superweapon",
+@@ -7252,7 +7218,7 @@
+         "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "72f38392f0ace673635d8ad8dce512bf4e63de2ba5826bfa148740296ca0a6df",
++      "main_digest": "155254a1e1adddb3c3ea5d33775747af32ef115a7eefd8582a0ec21168d68249",
+       "mains": [
+         "Quantum_HeavyFlatCompatibility",
+         "Railgun_Heavy"
+@@ -7268,7 +7234,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "edde24baa23f4a0b710cc56eb2650c3bb3e584a99f0a33ef6ff42690f0ff0c47"
++      "weapon_digest": "a9e56e3f25de86cbf1eb0edbe4f4faa5b6002463faa2db48f0290c9debc0d16c"
+     },
+     "SteelStalkerRailgunEScatter": {
+       "category": "status payload",
+@@ -7277,7 +7243,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "45691713cfcd5f228f5c4075fc0fbe505d7058a882a7560850258396c74107aa",
++      "main_digest": "35861cb8c8492182a5a198847bcdd8a3fe7691a7d29e234e0bb5385f52fe45bc",
+       "mains": [
+         "Quantum_HeavyFlatCompatibility",
+         "Tesla_Heavy"
+@@ -7293,7 +7259,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "e2997b601be3951d149b00f93f07cdaa00bc22cfe0257299f50f7bd41ac29653"
++      "weapon_digest": "bac7064e6da1291d01e2eaa701828afcde45da9cea814d20713cee98a4e27687"
+     },
+     "SteelStalkerRailgun_EMP": {
+       "category": "status payload",
+@@ -7302,7 +7268,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "7f46f86c185638afb52479b97141b4178ea996e776b34315baa53a647601e26d",
++      "main_digest": "b299a609047843335e7d56e0c081a4b749a5a41e7d79548c220f1ecb940ac962",
+       "mains": [
+         "Quantum_HeavyFlatCompatibility",
+         "Tesla_Heavy"
+@@ -7318,7 +7284,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "51e8f5ef6de2fd398b15ed5f804e71175942bfc0d417bcf4f1fb69aab6acd05f"
++      "weapon_digest": "14f8fd17b0a1298d2999d4c5a596fffddad15b0cc07b2f99cd64711eca4e1648"
+     },
+     "SteelStalkerRailgun_elite": {
+       "category": "status payload",
+@@ -7327,7 +7293,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "0fc5435941f278ab44b8e6e3576ba69c4e5cb5bff33121945f9a87939a10d052",
++      "main_digest": "8764568014f21787af3ff4b7d0a8e1fc94d06b376b3369a25d213f431d606e3c",
+       "mains": [
+         "Quantum_HeavyFlatCompatibility",
+         "Tesla_Heavy"
+@@ -7343,7 +7309,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "8b7a83b31184c63546bb26d27f096c1b76919ee3fa082e2f8caf372a2259e710"
++      "weapon_digest": "75fbb4339c5211f350eff5e0c497605fc9961fc21476426e4fcfe9a15197acb1"
+     },
+     "SyndicateFireballLauncherExplode": {
+       "category": "status payload",
+@@ -7412,7 +7378,7 @@
+         "Sonic_Heavy": "special energy, status, or effect payload Sonic_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "b90c4a7a30d0a067a33dd7d7fadfe8e0d55142afe15290c7918a7a9cc6226afb",
++      "main_digest": "a775ea5de45feac7e54abc278b591247b1d75f911aef7c7ecf0955d067e7c412",
+       "mains": [
+         "Demolition_HeavyFlatCompatibility",
+         "Sonic_Heavy"
+@@ -7428,7 +7394,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "9330a491520784e51ff5d9ae2f23fff72a7297355a7a2d3661bfb08182734e9f"
++      "weapon_digest": "fb075f5b76fc618a4a68913f8d02e1bc9d8e585c9bdc2b93a61dbc6308736eb7"
+     },
+     "TSCABALEnlightedLaser": {
+       "category": "target-routed composite",
+@@ -7492,7 +7458,7 @@
+         "CannonHE_Medium": "primary conventional delivery or impact CannonHE_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "6a803f7ce6545def45263713636034d32e7c7ce3553c92f10a60a6a2d4632935",
++      "main_digest": "1ee61ec73f1358fd18ccf2a9a04df4c560bae8ce500279d1dd1886e964fa3ba7",
+       "mains": [
+         "CannonChem_Heavy",
+         "CannonHE_Medium"
+@@ -7508,7 +7474,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "c422d8d9700554fadb3ba47c644d2092d7d4140fc682a0bd5916ca800cbd83bd"
++      "weapon_digest": "993c395bd1b2c1ee93d7620beeacec8618eb1cc5efa8a58cf64aa5ea497b9432"
+     },
+     "TSCommandoShotgun": {
+       "category": "target-routed composite",
+@@ -7520,7 +7486,7 @@
+         "ShotgunTankDestroyer": "authored target, armor, relationship, or state route ShotgunTankDestroyer"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "cb27a0f473e48a8130124243591aacf872a0e22bd06b12ec70085af295a8b8ff",
++      "main_digest": "95695013cf20ffc6a74f1bc5cf7240a9abc750a247989557b216aaaf2744f521",
+       "mains": [
+         "CannonHE_Medium",
+         "ShotgunChaingun",
+@@ -7544,7 +7510,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "1d318ee597c18bde256aa47348e6542ae0f375a0e4f7e423510724ff1b57e8fd"
++      "weapon_digest": "006304d8f02b9f63db92a9ee5ebb0cb537a6e8602beee0c13167eb9e98d77058"
+     },
+     "TSCropBombChem": {
+       "category": "status payload",
+@@ -7553,7 +7519,7 @@
+         "Demolition_Heavy": "primary conventional delivery or impact Demolition_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "e933594de8413eba0069ce756a3e75002d036e095069f635afbb0ab276340efa",
++      "main_digest": "57827444f71fcf593bfca59a5a6ffbb4f2ba7321befead044c8c72a4d4f2062f",
+       "mains": [
+         "Chemical_Heavy",
+         "Demolition_Heavy"
+@@ -7569,7 +7535,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "b7077b2340d38ec7430f7f57d0e51f67ae8a41258d6323c1e6d81bb816d652fa"
++      "weapon_digest": "9a7f4964eb80e4cc93fda537a29a55606d4f3050c0040bb115891f4eddd3d99f"
+     },
+     "TSGrenadeSonic": {
+       "category": "status payload",
+@@ -7578,7 +7544,7 @@
+         "Sonic_Light": "special energy, status, or effect payload Sonic_Light"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "31d596da14ccee5d11f8bc5859c6874dd7f1a8ca370dc127e587aeaa21160f3a",
++      "main_digest": "e8db6c6d76f324067b45c4e796cabf427a9e0df38a85ce7e53de7f709ce62d72",
+       "mains": [
+         "Concussion_Light",
+         "Sonic_Light"
+@@ -7599,7 +7565,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "9242043afe67e9d8c6281e0e4b1835a5490785504374e53a28da2b8706ae1370"
++      "weapon_digest": "e0cd4738d615a9e808301541f16d4df20cd0eddf2f1ea9f14f58a3a4ca0d5849"
+     },
+     "TSHellfireSonic": {
+       "category": "status payload",
+@@ -7608,7 +7574,7 @@
+         "Sonic_Medium": "special energy, status, or effect payload Sonic_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "b53f1079460d04e7a5806bc472e9cdc10a6678352628659bf24a0e8da02eb339",
++      "main_digest": "5c6a96a359d0ed9d3c2d81f49630096bff933860da36c709a6253edef4f204d4",
+       "mains": [
+         "MissileAP_Heavy",
+         "Sonic_Medium"
+@@ -7624,7 +7590,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "3729d4dc0613e394b50895de7520feb77e4a22b7bd4fa7f245a392a712279653"
++      "weapon_digest": "818bc82a2f5d1ca6451ec4b9fc654f2e616139709f763b320f9a8d515de5751a"
+     },
+     "TSIonCannon": {
+       "category": "staged superweapon",
+@@ -7665,7 +7631,7 @@
+         "TSLaserShieldChip": "authored target, armor, relationship, or state route TSLaserShieldChip"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "5673a626766e25728fc1ec1fc97cc2f27c2c9050cc3677fc53fae6826d0c88dc",
++      "main_digest": "2da5f1f0e012578a5b86e2a9e0f5c126decb241044faccf397026080ef7483cd",
+       "mains": [
+         "CannonAP_Medium",
+         "TSLaserCannonAP_Medium",
+@@ -7682,7 +7648,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "6862a5d5e15241aa58c899b6c8a89f0539b69d9f6323334b70941321301ded41"
++      "weapon_digest": "c7006a31a13fe9568e1f5be0c3a3bd83773f75ef5e4717661bb44d2a080933ad"
+     },
+     "TSLaser90mmDep": {
+       "category": "target-routed composite",
+@@ -7692,7 +7658,7 @@
+         "TSLaserShieldChip": "authored target, armor, relationship, or state route TSLaserShieldChip"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "5673a626766e25728fc1ec1fc97cc2f27c2c9050cc3677fc53fae6826d0c88dc",
++      "main_digest": "2da5f1f0e012578a5b86e2a9e0f5c126decb241044faccf397026080ef7483cd",
+       "mains": [
+         "CannonAP_Medium",
+         "TSLaserCannonAP_Medium",
+@@ -7709,7 +7675,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "9f14e0935fe901bd865effc14e8c3a02639e3c8fca52f8e86a32b15bfce6cb71"
++      "weapon_digest": "67604953c7415615bbcb5bf8b50bf984551a6c2688007de0f76963e897d208b7"
+     },
+     "TSLaserObeliskLaserFire": {
+       "category": "status payload",
+@@ -7718,7 +7684,7 @@
+         "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "680a3146b14c71c27926d3b68f24876446cb281ab7c478262689bd9e0f819574",
++      "main_digest": "9d0af71a112c2cd090a4a6e9ee402e21cf8fdd0ad90e7250ca949d63ea570a61",
+       "mains": [
+         "CannonAP_Light",
+         "Laser_Heavy"
+@@ -7734,7 +7700,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "5ce8c4be85c32f4254439f1766147831eb9c96480405dfd644b10db5aeec9eb4"
++      "weapon_digest": "a51f990ba3fb73469bc0ba0b31bb1e7acb47758bf53b0aa0134e2803c6f42c1d"
+     },
+     "TSLocustBombChem": {
+       "category": "status payload",
+@@ -7743,7 +7709,7 @@
+         "Demolition_Heavy": "primary conventional delivery or impact Demolition_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "8bc47c7f3fdb8c84cbe0faebf6dd16a973e815ca864f071b7ab46dc10b2914bf",
++      "main_digest": "cabe07c4a6623b67e46c5551fa223a9f7494419c8b9e6b8e7197526d39e7434a",
+       "mains": [
+         "Chemical_Heavy",
+         "Demolition_Heavy"
+@@ -7759,7 +7725,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "631fde0f87918d9364cb13e3963f200165d0771d1d531a17c477cea309ab1871"
++      "weapon_digest": "c46595326d97bb6e972c43a6b891e1353f3ab78b3e495a49245c1dc2e7a32227"
+     },
+     "TSMutShotgun": {
+       "category": "target-routed composite",
+@@ -7771,7 +7737,7 @@
+         "ShotgunTankDestroyer": "authored target, armor, relationship, or state route ShotgunTankDestroyer"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "b9b6725d872c897622040fa882a9adc42cc7fde0435edfb1e299010c8cdd330a",
++      "main_digest": "7022f51dc50cbc9f0c8ccaacf87800fcd4dd0e00006110439a50a1bd40b60ad3",
+       "mains": [
+         "CannonHE_Medium",
+         "ShotgunChaingun",
+@@ -7795,7 +7761,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "12e3ba307f549bc3ac0985e697ef3c21519824a1b8ccff05a1bb57cc4c63f2f8"
++      "weapon_digest": "4864640dbf9ffddbddf4028e3012728b7b1611c629b845c799a28a87f8286b4d"
+     },
+     "TSObeliskLaserFire": {
+       "category": "status payload",
+@@ -7804,7 +7770,7 @@
+         "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "eb11529787065dfd88adbe1942e3ea92973b59d6fc545af8316d05de7cfd93a7",
++      "main_digest": "16763bad3cacd0fd1b12e550395f96ebc801e073ba08bb04fe793dcbc3398862",
+       "mains": [
+         "CannonAP_Light",
+         "Laser_Heavy"
+@@ -7820,7 +7786,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "c6a32f0c1d9d2f3cb88ddc8ea3eae7eb6b6c73fd6e4ea808df6b14235d837960"
++      "weapon_digest": "0134bc3f34dd9a3f993792aee71f87653f958cb6a8985e87115cbaae7e7d3acf"
+     },
+     "TSProton": {
+       "category": "target-routed composite",
+@@ -7854,7 +7820,7 @@
+         "Railgun_HeavyFlatCompatibility": "authored target, armor, relationship, or state route Railgun_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "203154b78c6a50c9956bd060d2394fac59ed262fc2e9138b31eb243d211751b9",
++      "main_digest": "bbeeff8e2e9f972114b0b7d5bd9886da2c86e958a95f0416c83972420f09a27a",
+       "mains": [
+         "CannonHE_Heavy",
+         "Railgun_HeavyFlatCompatibility"
+@@ -7870,7 +7836,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "1eb4c9adae56b1bf940fc5ec0033c1b498fd90f2162352594eba5dfb8cad4950"
++      "weapon_digest": "d92024304f5f8948d09e026132acb561656d88c4e818fe85b64861cf78146733"
+     },
+     "TSShotgun": {
+       "category": "target-routed composite",
+@@ -7882,7 +7848,7 @@
+         "ShotgunTankDestroyer": "authored target, armor, relationship, or state route ShotgunTankDestroyer"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "b9b6725d872c897622040fa882a9adc42cc7fde0435edfb1e299010c8cdd330a",
++      "main_digest": "7022f51dc50cbc9f0c8ccaacf87800fcd4dd0e00006110439a50a1bd40b60ad3",
+       "mains": [
+         "CannonHE_Medium",
+         "ShotgunChaingun",
+@@ -7906,7 +7872,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "1ebd0b7b075905ec9a3959730aa81e4e6242a3e086101d743df51178db99d282"
++      "weapon_digest": "f95a9441163f20fd62a3c0e3050612247a8a897cfecaf3ad603de1d1fa35a058"
+     },
+     "TSZoneHellfireSonic": {
+       "category": "status payload",
+@@ -8020,7 +7986,7 @@
+         "MissileHE_Heavy": "authored target, armor, relationship, or state route MissileHE_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "03204f2006fb1bba458774ddc68e227d61bd2dc0fdeb15c6f369f4420dc4f134",
++      "main_digest": "ac47f63dcd32eaa89f4c7c86066db6aa367cedd1c0dec80b5e2681d2d365c615",
+       "mains": [
+         "Concussion_Light",
+         "MissileHE_Heavy"
+@@ -8036,7 +8002,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "22a4f16fe9bb5c5461c038c939801439c169e72bd9328aa2bb11aa62f29bb74f"
++      "weapon_digest": "1fd54b9657868c5e87819d13e4eb0f9bc4192b76690ea04dd0393ecd9fec66dc"
+     },
+     "V3Explode": {
+       "category": "status payload",
+@@ -8046,7 +8012,7 @@
+         "RA2SCUDMissileAP_Heavy_NoWall": "primary conventional delivery or impact RA2SCUDMissileAP_Heavy_NoWall"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "ff067361e93655d9f574338acc183d3cfa548cf48cb1c15702656f5c3472d388",
++      "main_digest": "6b9d69be934269e77088fccaa85fd1a5ef60e80356256a64ba9c2b5d66964178",
+       "mains": [
+         "Demolition_Light",
+         "MissileAP_Heavy",
+@@ -8103,7 +8069,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "ed83820550efba27a4968b62917c381fdc9f35822c4d077df9e8ee34acc31753"
++      "weapon_digest": "353a67178e0521d5866fbb8f76e57c754557a99ad04ada8866238dce36569548"
+     },
+     "ViperMissilesFire": {
+       "category": "status payload",
+@@ -8114,7 +8080,7 @@
+         "MissileAP_Medium": "primary conventional delivery or impact MissileAP_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "232190258720a96dd4d511d19cd117405b658f205eb2e608c9301be5bcd84d69",
++      "main_digest": "4da6bea847fbf19ce9964dc1bfcd44d9a51bf108ee79843ac5a5392496d42afa",
+       "mains": [
+         "Concussion_Medium",
+         "Flame_Light",
+@@ -8132,7 +8098,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "2d2ddfa22672819f2b87b632d679a9b38736f5a3fbed6c1cdee37a42b3ded855"
++      "weapon_digest": "e3df31ba5dbfb37cfd411caa22ad6c9a639f0bbc19df08ede9a3f0265f2fa169"
+     },
+     "VolkovMagneticWeapon": {
+       "category": "status payload",
+@@ -8141,7 +8107,7 @@
+         "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "5ca9fb3e00c66a470672c960cec63276d1cee20ec4959793e5816fc04d48aff3",
++      "main_digest": "ac887b6d0227ee7a06833a04c6d61b116f17e1a8dc479dd8b469f192c8c54de5",
+       "mains": [
+         "CannonHE_Heavy",
+         "Railgun_HeavyFlatCompatibility"
+@@ -8162,7 +8128,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "b25890d151f6daaee535ff92487f7e9a801e7326b3ee31dcc5ea68b9226d1bcd"
++      "weapon_digest": "750b4298521032a256f2dd972dd666d917d436d938f62c06f7049a8b12ee4477"
+     },
+     "VolkovMagneticWeaponIncendiary": {
+       "category": "status payload",
+@@ -8172,7 +8138,7 @@
+         "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "fbfaa210bec853e8e018224fb78e13e2a7ff0534464f5873fe6c702a6a4e414e",
++      "main_digest": "fd8451003102d37fd998829bd37c5d3a5e8a05942ec81eb6d7905cd6094b0b3f",
+       "mains": [
+         "CannonHE_Heavy",
+         "Flame_Medium",
+@@ -8194,7 +8160,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "e24fdcac59be3ac684dfbeb5a740ff6fadeb9ea5cd4e0964a8e901eb342f1cf4"
++      "weapon_digest": "a803e487dda3b389647c8705b85f7051e251d5918550bd5b86a90144c01a4524"
+     },
+     "VolkovMagneticWeaponIncendiaryNuclearShells": {
+       "category": "status payload",
+@@ -8205,7 +8171,7 @@
+         "MediumChemicalWeapon": "special energy, status, or effect payload MediumChemicalWeapon"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "a0f12994728a7f49709cf473f65858f2ee8746677a928a4447316decb1b04927",
++      "main_digest": "30cbf1647c201eb666ad09dbc7b4006c0f64de561a1f3dbf9bb670034ea79418",
+       "mains": [
+         "CannonHE_Heavy",
+         "CannonNuke_HeavyFlatCompatibility",
+@@ -8228,7 +8194,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "5a3886b34e4535f96e3bba13277443eeae0f851bf3d1677849a7ba53c80a1aed"
++      "weapon_digest": "9f8adbd97acb91bc48b40f8bf811602648f7629c81c53bf104a033142a1c0202"
+     },
+     "VolkovMagneticWeaponIncendiaryTesla": {
+       "category": "status payload",
+@@ -8239,7 +8205,7 @@
+         "Quantum_HeavyFlatCompatibility": "special energy, status, or effect payload Quantum_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "0b52f5591d261ebcf29ab92c5ed44e0a801a08dd4bdb5b0e1ccd03dc001357dd",
++      "main_digest": "193717e362b4a3be7587b28d8797435281d8067ede0bc8a4b3000052c0515187",
+       "mains": [
+         "CannonHE_Heavy",
+         "Grenade",
+@@ -8262,7 +8228,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "ffe70a400967d97f8323de8b6c86330c2264e5f1c315660dce10a50cf0000add"
++      "weapon_digest": "abe19ed62d2329832deb150076075fc345b991c2cea3edb7cbf46cace19780b9"
+     },
+     "VolkovMagneticWeaponIncendiaryTeslaFragment1": {
+       "category": "status payload",
+@@ -8273,7 +8239,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "b0371d7ac88b56328a7b8244b7fca2e2110ed2ee62d83f4ee43c901be69d493e",
++      "main_digest": "2dd57ef1106fd5d45cbd5996833639d6cf0fd97c243746812311871aff2c37c4",
+       "mains": [
+         "CannonHE_Heavy",
+         "MediumFlameWeapon",
+@@ -8291,7 +8257,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "1f625f18726e0df0c6e660144a8bd5366e6b50822585fe70d4e6952946922908"
++      "weapon_digest": "6348135dd9ae47ab07e404147f4339b732d4aef6b813fe5744830b347d0ee6f8"
+     },
+     "VolkovMagneticWeaponIncendiaryTeslaFragment2": {
+       "category": "status payload",
+@@ -8302,7 +8268,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "01c6c4967851bbd2ac90d7b4af66a21f781dd14cba4d7d22711daca5eba7aa2c",
++      "main_digest": "794ae80022a07544238f956ca7676de5cd17ab915f41c39568b7404f4d219f04",
+       "mains": [
+         "CannonHE_Heavy",
+         "MediumFlameWeapon",
+@@ -8320,7 +8286,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "45fb3ace1aec0e9c206e32a5c2d94eeeebbacd984256e799d8eadd285afe32f2"
++      "weapon_digest": "17dfaf8416fdf65c537a7dfe7a8300540acd652f3999e1c9118bebebd1b7bce8"
+     },
+     "VolkovMagneticWeaponNuclearShells": {
+       "category": "status payload",
+@@ -8330,7 +8296,7 @@
+         "Railgun_HeavyFlatCompatibility": "special energy, status, or effect payload Railgun_HeavyFlatCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "4c8f0764520ed86fbdd31fa2daf90ce61dc2f9ad5d9ae736a4ff4c2273fd39ee",
++      "main_digest": "adf983b0c58bb86cb63280cd287305abcf312a3c7bcd471dd37ca856c40a154b",
+       "mains": [
+         "CannonHE_Heavy",
+         "Nuclear_Super",
+@@ -8352,7 +8318,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "b7d20ece0f5bfa8ae075051cadc25a98849d391070464a8c8d3abc222e8181f2"
++      "weapon_digest": "41f5ce31cc90141ad2b77ddf7b52a671fdbb1f9013be5676e72edc02fe0c7f16"
+     },
+     "VolkovMagneticWeaponTesla": {
+       "category": "status payload",
+@@ -8362,7 +8328,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "0b2888707c421833a2384a4db0e9421c9116d3fa9d0e75b4ca40028a67ae61c2",
++      "main_digest": "6ab3018041d95b062d9712d4f60a7140d1070f64e5deb7d490ffe2860df2555a",
+       "mains": [
+         "CannonHE_Heavy",
+         "Railgun_HeavyFlatCompatibility",
+@@ -8384,7 +8350,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "ad30c7a64d920c0217feac53aba3354c5b7e0469d3aec289a19571fbeb303adf"
++      "weapon_digest": "f640db2ac8aec93132b50f1467551bdafeaceaa413ad5dd28ff4c7b8f8d858fd"
+     },
+     "VolkovMagneticWeaponTeslaFragment1": {
+       "category": "status payload",
+@@ -8394,7 +8360,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "a782d01171479f2b3f6f0209289cc7cfb6233bb4927edd7c1a83cbf8c3450fbf",
++      "main_digest": "0ccf0896fb49b37ec83cacfaec1901b59e0695f2850017b2f7d8d4d1acc96000",
+       "mains": [
+         "CannonHE_Heavy",
+         "Railgun_HeavyFlatCompatibility",
+@@ -8411,7 +8377,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "aa2d8d63650b56e0adf062e2ca014347c9c2d0be724e5cc049ebad816b41a61b"
++      "weapon_digest": "c85f8e3c41bf659fecac17e0eb594b5060f99ec2806bee0aa1476f5bed44a647"
+     },
+     "VolkovMagneticWeaponTeslaFragment2": {
+       "category": "status payload",
+@@ -8421,7 +8387,7 @@
+         "Tesla_Heavy": "special energy, status, or effect payload Tesla_Heavy"
+       },
+       "expected_reachability": "indirect",
+-      "main_digest": "9075e0f648afae38c2191407ad31aef869751a29d4a60415b23a18b50a99472f",
++      "main_digest": "d16345de6b8a1c11e96fa40a9fcc00f0a772f3c802166b187b5f4f44b2ac0112",
+       "mains": [
+         "CannonHE_Heavy",
+         "Railgun_HeavyFlatCompatibility",
+@@ -8438,7 +8404,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "0c76d3e508923f17521a75a80cb40163a8c790c133e1c66dcc028a86723992dc"
++      "weapon_digest": "f9f7d961317d729abec513cfd57afa63a438b964e1ef9e7008bf741b4f21f911"
+     },
+     "VonSniper": {
+       "category": "target-routed composite",
+@@ -8448,7 +8414,7 @@
+         "SniperSmallArms": "authored target, armor, relationship, or state route SniperSmallArms"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "41652c278b4047d16a3b0d80e08dab3d94b8de57be11c79b5821d4c61d3e75a6",
++      "main_digest": "da6ec1cd3d1f114dd87364b5f998575d3032ed44e93b128ffbea0b574069f21d",
+       "mains": [
+         "Bullet_Heavy",
+         "SniperChaingun",
+@@ -8470,7 +8436,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "dbac61c14eebc10559b6763a5765f1a32487298a5b82803d4cca0646900b2de2"
++      "weapon_digest": "35bc4195519712062e0347aed7ff2e5ee7fd740b7fa13d1fbc74e46acad010f4"
+     },
+     "VonSniperAP": {
+       "category": "target-routed composite",
+@@ -8481,7 +8447,7 @@
+         "SniperSmallArms": "authored target, armor, relationship, or state route SniperSmallArms"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "992158025e482fcd5662ae84fe9c15b4af97af68041079a42e58e084057c006d",
++      "main_digest": "a3a7266587204d3d639e483cd087ca4ceb5986361f382796d1b191acb9924000",
+       "mains": [
+         "Bullet_Heavy",
+         "Bullet_Medium",
+@@ -8504,7 +8470,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "4a86ade1a2a7d6b813aac039431434e73bae5bbdb039852f20e883e15ae1f1d6"
++      "weapon_digest": "7e0f696eb1245cd17768fbbad7901e9b45105d67b3f9adb1ae3ad6777d4173c7"
+     },
+     "VonSniperLockdown": {
+       "category": "status payload",
+@@ -8517,7 +8483,7 @@
+         "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "e025d6402bc01f24ad614eccdb4e15285df9d51f24fb540eb1300e9a8077cb0c",
++      "main_digest": "8274bd6af1bee2ac824cc94f0caa007a47462c0df6842ea5b9e962d7974efce4",
+       "mains": [
+         "Bullet_Heavy",
+         "Bullet_Medium",
+@@ -8537,7 +8503,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "2eb4b42c6f8406a6bbb05edc8852030ee75fe48e597b37d2c4dea1949316c623"
++      "weapon_digest": "23fd83aeb3e9e4ee67fdec59cbe1c8e065defe863ba45b22ddc75a5fdbead005"
+     },
+     "WaveArtilleryImpact": {
+       "category": "effect-delivery composite",
+@@ -8613,7 +8579,7 @@
+         "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "c1b35bc2804fd2ae62e8ae5fcb5c91ba7eb74ab3a45ca92dcb1c0767e527a8ce",
++      "main_digest": "cdef6e379266bfcbb11aaa6f7818a4940939418289fa183e441727422afa2568",
+       "mains": [
+         "MissileHE_Heavy",
+         "Railgun_Heavy"
+@@ -8629,7 +8595,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: overlapping effect delivery",
+-      "weapon_digest": "fd65306732f42e55e156ee021a3ee9203296523a7acc012224ccd8d3a75a9f4e"
++      "weapon_digest": "6e0b708d9f3d2ef21632b83fa59f9ef6cb0486fbcb8c6bc16f7f9fbce2476e79"
+     },
+     "WaveforceCannonChargedLaser": {
+       "category": "effect-delivery composite",
+@@ -8638,7 +8604,7 @@
+         "Railgun_Heavy": "special energy, status, or effect payload Railgun_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "533f1f168e1113346ac4766a8087e8b141a01b747102b1db19dea1ff4642af06",
++      "main_digest": "b0124a26eaf7e5804085e6b76f350af69e5af2d759ba9a414532682bb470acda",
+       "mains": [
+         "MissileHE_Heavy",
+         "Railgun_Heavy"
+@@ -8659,7 +8625,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: overlapping effect delivery",
+-      "weapon_digest": "bcd38ab504a80c2df24e936c74dc2f651408075f863e6fc2d2de132d19504562"
++      "weapon_digest": "a5e426c49b547cf429df166fa466072951cb2c70b4cdca57ef0ee7e1391e9bd0"
+     },
+     "WaveforceCannonDistortedBeam2": {
+       "category": "status payload",
+@@ -8668,7 +8634,7 @@
+         "Flame_Heavy": "primary conventional delivery or impact Flame_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "238dc15deb859c56b87ec07f57e9c90eced29ab9abaeccc238d52bc2dde012c8",
++      "main_digest": "30982e4ea297bde03164cab9bab0d8fffeebe7257c68aa499f9329b8351b1020",
+       "mains": [
+         "Chemical_Heavy",
+         "Flame_Heavy"
+@@ -8689,7 +8655,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "7d3d19a414f8f162c36139fae260570982bc53971812e3f7f643d14705d3e7aa"
++      "weapon_digest": "24a22d1e3aa736230f335a70a830f2808e7a0b450f137f7db71d472d56fb2336"
+     },
+     "YakTeslaBomb": {
+       "category": "status payload",
+@@ -8728,7 +8694,7 @@
+         "ZeroFighterBullet_Medium": "primary conventional delivery or impact ZeroFighterBullet_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "dfe66789b45da686d87e3981a5858aec756502f55e8e61e17f09e0894868b3ec",
++      "main_digest": "b9fa7198ed074a6fd6f40c1db243ba52eeba2c1668a732651fb274bdd351b9f2",
+       "mains": [
+         "Bullet_Medium",
+         "Railgun_Heavy",
+@@ -8760,7 +8726,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: overlapping effect delivery",
+-      "weapon_digest": "d2e862e1c8993df140f619e0ecd400496ee36e070ff1a58b56822c1136b2b726"
++      "weapon_digest": "7d5713eb47927f3930d7630257840d3e72b15627debbaefeb3ae80ab7d761c3a"
+     },
+     "autogun_tank": {
+       "category": "maintainer-approved role blend",
+@@ -8770,7 +8736,7 @@
+         "MissileAP_Heavy": "limited vehicle and aircraft contribution to the autogun profile"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "a5477ec3e02840bf26387b9f9aeceab52319aa2974d299ec8c01dbba5f1b3b3f",
++      "main_digest": "9d310bed1326fc7e3ee0c94600f55b5b7d61305ddf729a87b10c79d17860a374",
+       "mains": [
+         "Bullet_MediumFlatCompatibility",
+         "CannonHE_Heavy",
+@@ -8787,7 +8753,7 @@
+         }
+       ],
+       "review_reference": "Maintainer unit decision: preserve the Ordos autogun-tank role",
+-      "weapon_digest": "5f501edfdab114708063fa3ad32b4458a35cf884f99c792f221f5c53690312cb"
++      "weapon_digest": "3a01ae4a25b78eb2a726eb0d82dfa8af62d33b0b6411974543f8bac34304ce57"
+     },
+     "autogun_tank_small": {
+       "category": "maintainer-approved role blend",
+@@ -8797,7 +8763,7 @@
+         "MissileAP_Heavy": "limited vehicle and aircraft contribution to the autogun profile"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "a5477ec3e02840bf26387b9f9aeceab52319aa2974d299ec8c01dbba5f1b3b3f",
++      "main_digest": "9d310bed1326fc7e3ee0c94600f55b5b7d61305ddf729a87b10c79d17860a374",
+       "mains": [
+         "Bullet_MediumFlatCompatibility",
+         "CannonHE_Heavy",
+@@ -8814,7 +8780,7 @@
+         }
+       ],
+       "review_reference": "Maintainer unit decision: preserve the Ordos autogun-tank role",
+-      "weapon_digest": "3fc0c572fde96501a3fdc6369adf35193971cd86a15588e310f86a787374b314"
++      "weapon_digest": "448c151f9c6551b9f4b30ac1af4156618cdec51c7937aaf4a047795ddc1f9298"
+     },
+     "edenMobileLaserTiger": {
+       "category": "status payload",
+@@ -8823,7 +8789,7 @@
+         "Laser_Heavy": "primary conventional delivery or impact Laser_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "a1d8029c77e8192bbc6b0de1da2bb195bad75a41bd848b10864df8e4cdf3979c",
++      "main_digest": "2da64d5ecd09525f9fa2fa03a508bc2b6e677365d62baca351ff17d8c2312926",
+       "mains": [
+         "CannonHE_Medium",
+         "Laser_Heavy"
+@@ -8839,7 +8805,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "ba81cda8d0e26778c295598883f13871e61e941db79d157dedf2e42b5ef7e30a"
++      "weapon_digest": "8b32dbc97c8b5d8be8fa2b4da176bff504346bcbe4616ccedac4f0d319a02ede"
+     },
+     "edenTiger_EMP": {
+       "category": "status payload",
+@@ -8973,7 +8939,7 @@
+         "Demolition_Heavy": "authored target, armor, relationship, or state route Demolition_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "101b7e167d686b60bd08aee4bee6f20eb2fcc02bb5e3da724adb50f4208f0fae",
++      "main_digest": "1c58c38b674f333c2f3f210a98d3a3388e8730077857c879c967c9e43a7073e9",
+       "mains": [
+         "CollapseTargetCompatibility1",
+         "Demolition_Heavy"
+@@ -8989,7 +8955,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "12ddc8b5d12b363504562149c61aec1c56ff0f4cdfb51fb4c8b544094354a4a0"
++      "weapon_digest": "ebb5327914d12ae78850d09989be553b13dd21c30b046e0d169ef1fe7fd18549"
+     },
+     "japan_imperialscoutsman_rifle": {
+       "category": "target-routed composite",
+@@ -8999,7 +8965,7 @@
+         "RailgunShieldCompatibility": "authored target, armor, relationship, or state route RailgunShieldCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "24a4194fdbdbdb6754e24e5872a841c19b296243df3df4a2ecd8ce553024fa5e",
++      "main_digest": "d223e411a530ef27db240164a9c7714b5493ccaf881c427c7f34875ede067471",
+       "mains": [
+         "Bullet_Medium",
+         "RailgunCompatibility",
+@@ -9021,7 +8987,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "d8c68d4c13f9a0884a18b2ff459d799eaded1ffacd639bb6adf131f3cd3b3fd7"
++      "weapon_digest": "a5923c7181fb737fc903ff29b0e2a6db98a18f975737dc9a50965f8388e8cfb4"
+     },
+     "japan_imperialscoutsman_rifle_waveforce": {
+       "category": "target-routed composite",
+@@ -9032,7 +8998,7 @@
+         "Railgun_Heavy": "authored target, armor, relationship, or state route Railgun_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "72101572d761ce6ecab2200c9920033aa580b963bd6b12b99cf358da48d05553",
++      "main_digest": "c946b3266822eb084bc23baecf40aa47f2dfc666ef17ca12e88db9c5add4c1a6",
+       "mains": [
+         "Bullet_Medium",
+         "RailgunCompatibility",
+@@ -9055,7 +9021,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "4ebc6ecba6bb268b33af9be3998e773de73291984e8c877372841b1a549d0e68"
++      "weapon_digest": "e13ebcb672494611f79f51d089802218a8cf29e380882cac716157ec4d6a7022"
+     },
+     "mtank_pri": {
+       "category": "target-routed composite",
+@@ -9115,7 +9081,7 @@
+         "CannonHE_Heavy": "limited heavier impact that keeps the turret from being helpless"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "c05fe82415a4fa92e8dbf4414dee4179acb1719e93c2d78947765aee5bed1369",
++      "main_digest": "7c1f259c18f9031186f2e901640344d13078249a2b6253c000d5dc3e7e06679a",
+       "mains": [
+         "Bullet_Light",
+         "Bullet_Medium",
+@@ -9137,7 +9103,7 @@
+         }
+       ],
+       "review_reference": "Maintainer decision: preserve the Ordos autogun role across its inherited variants",
+-      "weapon_digest": "a383d797865512ad0fb81c6d61ab0f52edffb79ce2d4642459efdb4abb786313"
++      "weapon_digest": "bcdb77c5d5c2c11b5f28e604d29d7c2d6cf2e19a6504ebc0177526aee73b72a1"
+     },
+     "plymouthStickyDefence": {
+       "category": "status payload",
+@@ -9148,7 +9114,7 @@
+         "StickyWildcardCompatibility": "primary conventional delivery or impact StickyWildcardCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "32a0d04d1cab742d853b5e2636d0201294afa1488ba8a859e38e148d89cb5122",
++      "main_digest": "55e52950bf841a44f2385a6ec00e5c04612f904a7ea69f90ea1b2872badf3ebb",
+       "mains": [
+         "CannonHE_Heavy",
+         "CannonHE_Medium",
+@@ -9166,7 +9132,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "c21e6e7648a5bed448e117a3555dfddf105c6d6105e71a551d3da2921b9ed4bb"
++      "weapon_digest": "101f39320fc9ae50d93ef9b872d78335b023b292644bba7e4005b0da46b3f517"
+     },
+     "plymouthStickyTiger": {
+       "category": "status payload",
+@@ -9176,7 +9142,7 @@
+         "StickyWildcardCompatibility": "primary conventional delivery or impact StickyWildcardCompatibility"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "ae56337705c803479648893ed53e00bb57f88d10cdbb05eb35e74b2a4c38fbe2",
++      "main_digest": "2eaae0e193103efbe185bbcf5d8ad96e347d1e8aa1717c7dd86e65407264715e",
+       "mains": [
+         "CannonHE_Medium",
+         "Chemical_Light",
+@@ -9193,7 +9159,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "bf4c35d05ff1b658271864085816d2d9f731a20ab2ee4eba5e24288551482a95"
++      "weapon_digest": "1019d6a7511a9e0d3488cf262f800806aea7faa7fe36775608854c39f5e6ea41"
+     },
+     "plymouth_EMP": {
+       "category": "status payload",
+@@ -9316,7 +9282,7 @@
+         "MissileAP_Light": "primary conventional delivery or impact MissileAP_Light"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "b14b09320be34ab89edd477d4c9052d3b6f681b4427092e73c82d2dfb0e74d53",
++      "main_digest": "84ccf02369e516e9f63a61316d3f1f5712ae3d9931ae6e22e6efadbe27dfbcf5",
+       "mains": [
+         "Flame_Light",
+         "MissileAP_Light"
+@@ -9342,7 +9308,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "c7b07cbded67b4bf8caba8d5b088bc63389dbfe899a1b9e95c153942369e5004"
++      "weapon_digest": "29b2460fccc84e6f8fa76397e4b16f8e1d2f154fb6ed3f53f74478286ed25993"
+     },
+     "tkmkatyushalalauncherrocketsfire": {
+       "category": "status payload",
+@@ -9352,7 +9318,7 @@
+         "MissileAP_Light": "primary conventional delivery or impact MissileAP_Light"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "ce7ebdc8658b904b6da6e921f601725c0e415c1be23861676573a05f02b52707",
++      "main_digest": "5b28a0b746911fe177790eee3d30911897cc8be07d166de1dcd48683bc0a671d",
+       "mains": [
+         "Concussion_Medium",
+         "Flame_Light",
+@@ -9369,7 +9335,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "aa5ab49e7db79e8ba5ba9c395e35bf1a9d55451be1926d6f9b94cfba8eb4d2ec"
++      "weapon_digest": "32985cb82b6303e5ae7008ed0888b16ec4de3563c8c09a4c24f8768b45ebe36d"
+     },
+     "tkmstrykerfirerockets": {
+       "category": "status payload",
+@@ -9378,7 +9344,7 @@
+         "MissileAP_Medium": "primary conventional delivery or impact MissileAP_Medium"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "59656513de1c3cd1ed0f9c0d6230bd3a59f30de9c63ad33bb0f321da5a27a4f7",
++      "main_digest": "1901d1bde6c5d6d207e0af002faad9429a9282d49c2e49a174d4b72779a900cf",
+       "mains": [
+         "Flame_Medium",
+         "MissileAP_Medium"
+@@ -9394,7 +9360,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "6314f00f0af663755e05311a571f9faadb7e93657a2082b34179c0538e0f2ae2"
++      "weapon_digest": "114767509789e0852a29be364438e2522a0a7195daf19c84be7de207cbba6286"
+     },
+     "v1rocketsThermobaric": {
+       "category": "target-routed composite",
+@@ -9403,7 +9369,7 @@
+         "Thermobaric_Heavy": "authored target, armor, relationship, or state route Thermobaric_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "64c59fdea8714ba45fd717eb853d42f834d32e4a5bcdeead2aed5b9a456c8e90",
++      "main_digest": "0172f554484656009b286d15200b7fb02afa5591e120d4195387711f5c1d5a22",
+       "mains": [
+         "CollapseTargetCompatibility1",
+         "Thermobaric_Heavy"
+@@ -9424,7 +9390,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "f9467306baf10a2c5ccfd7013c73e9fd9053083141b3205eb8b7b8c35a79a674"
++      "weapon_digest": "bb954164b85e41265a2d73d5aec59b13b990edb3f65b3c2b434834940c4932e8"
+     },
+     "wc2_dwarf_Rifle": {
+       "category": "target-routed composite",
+@@ -9433,7 +9399,7 @@
+         "CollapseTargetCompatibility1": "authored target, armor, relationship, or state route CollapseTargetCompatibility1"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "318ca38070ac0cd072fd81c3c5e40acf7c6039cd7f78737d6b66ae2e82516f6a",
++      "main_digest": "28ef68a2aa467f26d9151add5e0a462f76219ed186b5d410744a9b719f9175d6",
+       "mains": [
+         "Bullet_Medium",
+         "CollapseTargetCompatibility1"
+@@ -9454,7 +9420,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "648f0134d1f0cde919b6d5b98357c7582ab9f9b705750b84ca0162eefeefd861"
++      "weapon_digest": "ec6e64fb29fe490664c4ea193f3cc746ac34a0b10e2f0ede43cb4ee071ddca58"
+     },
+     "wc2catapultFire": {
+       "category": "target-routed composite",
+@@ -9463,7 +9429,7 @@
+         "Concussion_Heavy": "authored target, armor, relationship, or state route Concussion_Heavy"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "e2e79266b74bdf2e4709daf2433685333a8006ea60270c7683d4c4ae62e981a0",
++      "main_digest": "3749a7b9d6df93cd42bf68f0266eca5033edb34c51b917a22a814ad2be906f67",
+       "mains": [
+         "CollapseTargetCompatibility1",
+         "Concussion_Heavy"
+@@ -9479,7 +9445,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: target and armor routing",
+-      "weapon_digest": "4a8563d111ba9f44a337775f7a10db450b6b3b29fdb0a74ae817019bbeab1394"
++      "weapon_digest": "02a4c439b2528cc0fa3b92f8b988eece8220d471555f192915909d18322739d7"
+     },
+     "wc2deathknightDeathCoil": {
+       "category": "status payload",
+@@ -9488,7 +9454,7 @@
+         "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "eb7595136dc1d4aebcd848993ac52af9f5c754faef903624e9a6ee12e7c5f618",
++      "main_digest": "f82dc1923da8fe5711d43553f9382e3c1e3b11398158ae28fc307e99855ae50a",
+       "mains": [
+         "Flame_Heavy",
+         "Tesla_Super"
+@@ -9504,7 +9470,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "97b84ce9a4de215ce75fada84b60abf3d8aec163efaec8903330dede50f67040"
++      "weapon_digest": "b6b0749085d8d9ee0838621e51761593b078de9a0e17dfbb4d84c30cfa79202b"
+     },
+     "wc2deathknightDeathCoilScatter_Left": {
+       "category": "status payload",
+@@ -9513,7 +9479,7 @@
+         "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "eb7595136dc1d4aebcd848993ac52af9f5c754faef903624e9a6ee12e7c5f618",
++      "main_digest": "f82dc1923da8fe5711d43553f9382e3c1e3b11398158ae28fc307e99855ae50a",
+       "mains": [
+         "Flame_Heavy",
+         "Tesla_Super"
+@@ -9529,7 +9495,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "8a13ffe80adab2fae74478caba233d39a1c978145eb15b2a51015a58daba1548"
++      "weapon_digest": "cec267adff84c16f70abfb7cb3b457b051146c8057b9c10c26eca092c31c1f22"
+     },
+     "wc2deathknightDeathCoilScatter_Right": {
+       "category": "status payload",
+@@ -9538,7 +9504,7 @@
+         "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "eb7595136dc1d4aebcd848993ac52af9f5c754faef903624e9a6ee12e7c5f618",
++      "main_digest": "f82dc1923da8fe5711d43553f9382e3c1e3b11398158ae28fc307e99855ae50a",
+       "mains": [
+         "Flame_Heavy",
+         "Tesla_Super"
+@@ -9554,7 +9520,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "3f7170528a68f50b16910a7db6b92d2cb696d522fa0919478e7bcadb4074b73d"
++      "weapon_digest": "72aeb4da293ec905f35a4e2172db6d52a34136fd40797dd013a93bec5329aa53"
+     },
+     "wc2deathknightFire": {
+       "category": "status payload",
+@@ -9563,7 +9529,7 @@
+         "Tesla_Super": "special energy, status, or effect payload Tesla_Super"
+       },
+       "expected_reachability": "direct",
+-      "main_digest": "eb7595136dc1d4aebcd848993ac52af9f5c754faef903624e9a6ee12e7c5f618",
++      "main_digest": "f82dc1923da8fe5711d43553f9382e3c1e3b11398158ae28fc307e99855ae50a",
+       "mains": [
+         "Flame_Heavy",
+         "Tesla_Super"
+@@ -9584,7 +9550,7 @@
+         }
+       ],
+       "review_reference": "Resolved family review: primary hit plus status payload",
+-      "weapon_digest": "86f1a928f4f865721ce1d0fc2bcee8369ee6e09f187517ef6b2202fa78387112"
++      "weapon_digest": "1703278cdcc61a6d9077cb59b10357f6c3e71b0bac086895b0db9ec930a7e890"
+     }
+   },
+   "schema_version": 1
+diff --git a/mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml b/mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml
+index 7d7c9ec12..ace209a77 100644
+--- a/mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml
++++ b/mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml
+@@ -54,10 +54,19 @@ ShriekStinger:
+ 		ImpactSounds: zulhit00.aud,zulhit01.aud
+ 
+ HydraSpit:
+-	Inherits: ^LightChemicalWeapon
+-	Inherits@2: ^LightMissile
+-	Inherits@3: ^SmallArms
+-	Inherits@4: ^ArrowWeapon
++	# W24 COLLAPSE, 2026-09-02. Was four damage mains at 18,000 each -- ^LightChemicalWeapon +
++	# ^LightMissile + ^SmallArms + ^ArrowWeapon -- an inheritance pileup, not a design. It is now
++	# ONE main on the ^Warhead_BulletChem_Light family created for exactly this weapon (maintainer:
++	# *"a new BulletChem that is like Bullet x Chemical ... more damage against infantry and aircraft
++	# with a little bit damage against tanks from the chemical side"*). Raw per-shot total 72,000 is
++	# preserved per BALANCE_PROGRAM_PLAN §1b; the resolved per-armor movement is measured in full in
++	# docs/design/W24_COLLAPSE_REVIEW.md §8 and is accepted by maintainer ruling.
++	# ⚠ Projectile layer is ^Projectile_Chem_Light (Projectile: Bullet), NOT ^Projectile_Bullet_Light
++	# -- the latter is HITSCAN (InstantHitWithFakeBullets) and would delete the visible travelling
++	# spore. Speed/Image/contrails/trail stay as local overrides.
++	Inherits@wh: ^Warhead_BulletChem_Light
++	Inherits@proj: ^Projectile_Chem_Light
++	Inherits@fx: ^Effect_Chem_Light
+ 	ReloadDelay: 15
+ 	Range: 5979
+ 	Report: zhyfir00.aud
+@@ -71,37 +80,8 @@ HydraSpit:
+ 		Speed: 2500
+ 		Width: 25
+ 		TrailImage: sczhsplash
+-	Warhead@LightChemicalWeapon: AreaDamage
+-		ValidRelationships: Ally, Neutral, Enemy
+-		FriendlyFireDamage: 50
+-		FriendlyFireSpread: 50
+-		ValidTargets: Ground, Water, Air
+-		Damage: 18000
+-		PhysicalStateName: Corrosion
+-		PhysicalStateScale: 100
+-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+-		ValidTargets: Ground, Water, Air
+-		Damage: 1
+-		PhysicalStateName: Corrosion
+-		PhysicalStateScale: 100
+-	Warhead@LightMissile: SpreadDamage
+-		ValidTargets: Ground, Water, Air
+-		Damage: 18000
+-	Warhead@LightMissilePercentage: AreaDamagePercentage
+-		ValidTargets: Ground, Water, Air
+-		Damage: 1
+-	Warhead@SmallArms: SpreadDamage
+-		ValidTargets: Ground, Water, Air
+-		Damage: 18000
+-	Warhead@SmallArmsPercentage: AreaDamagePercentage
+-		ValidTargets: Ground, Water, Air
+-		Damage: 1
+-	Warhead@ArrowWeapon: SpreadDamage
+-		ValidTargets: Ground, Water, Air
+-		Damage: 18000
+-	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
+-		ValidTargets: Ground, Water, Air
+-		Damage: 1
++	Warhead@BulletChem_Light:
++		Damage: 72000
+ 	Warhead@Effect: CreateEffect
+ 		Explosions: sczhsplash
+ 	Warhead@EffectAir: CreateEffect
+diff --git a/mods/cameo/weapons/weapons.yaml b/mods/cameo/weapons/weapons.yaml
+index 26664df61..b23508b90 100644
+--- a/mods/cameo/weapons/weapons.yaml
++++ b/mods/cameo/weapons/weapons.yaml
+@@ -3037,8 +3037,8 @@ DefuseKit:
+ 		Damage: 2000
+ 		Falloff: 100, 0
+ 		Versus:
+-			HAZMAT: 99
+-			COMPOSITE: 42
++			HAZMAT: 98
++			COMPOSITE: 43
+ 			BLAST: 68
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -3095,8 +3095,8 @@ DefuseKit:
+ 		Damage: 2000
+ 		Falloff: 100, 0
+ 		Versus:
+-			HAZMAT: 99
+-			COMPOSITE: 42
++			HAZMAT: 98
++			COMPOSITE: 43
+ 			BLAST: 68
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -3153,12 +3153,12 @@ DefuseKit:
+ 		Damage: 2000
+ 		Falloff: 100, 0
+ 		Versus:
+-			HAZMAT: 99
+-			COMPOSITE: 42
++			HAZMAT: 98
++			COMPOSITE: 43
+ 			BLAST: 68
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 173
++			Shield: 174
+ 			None: 200
+ 			Flak: 182
+ 			Plate: 162
+@@ -3215,7 +3215,7 @@ DefuseKit:
+ 			HAZMAT: 92
+ 			COMPOSITE: 41
+ 			BLAST: 72
+-			REFLECTOR: 75
++			REFLECTOR: 74
+ 			ARMOR: 70
+ 			Shield: 132
+ 			Superheavy: 139
+@@ -3273,7 +3273,7 @@ DefuseKit:
+ 			HAZMAT: 92
+ 			COMPOSITE: 41
+ 			BLAST: 72
+-			REFLECTOR: 75
++			REFLECTOR: 74
+ 			ARMOR: 70
+ 			Shield: 144
+ 			Superheavy: 172
+@@ -3331,7 +3331,7 @@ DefuseKit:
+ 			HAZMAT: 92
+ 			COMPOSITE: 41
+ 			BLAST: 72
+-			REFLECTOR: 75
++			REFLECTOR: 74
+ 			ARMOR: 70
+ 			Shield: 160
+ 			Superheavy: 151
+@@ -3388,7 +3388,7 @@ DefuseKit:
+ 		Falloff: 100, 50, 20, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 99
++			COMPOSITE: 100
+ 			BLAST: 40
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -3447,7 +3447,7 @@ DefuseKit:
+ 		Falloff: 100, 50, 20, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 99
++			COMPOSITE: 100
+ 			BLAST: 40
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -3502,11 +3502,11 @@ DefuseKit:
+ 		Falloff: 100, 50, 20, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 99
++			COMPOSITE: 100
+ 			BLAST: 40
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 168
++			Shield: 169
+ 			Wood: 136
+ 			Scout: 130
+ 			None: 121
+@@ -3564,7 +3564,7 @@ DefuseKit:
+ 			BLAST: 58
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 171
++			Shield: 172
+ 			None: 200
+ 			Fighter: 197
+ 			Bomber: 196
+@@ -3614,8 +3614,8 @@ DefuseKit:
+ 		Damage: 0
+ 		Falloff: 100, 0
+ 		Versus:
+-			HAZMAT: 99
+-			COMPOSITE: 42
++			HAZMAT: 98
++			COMPOSITE: 43
+ 			BLAST: 68
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -3788,7 +3788,7 @@ DefuseKit:
+ 		Falloff: 100, 50, 20, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 99
++			COMPOSITE: 100
+ 			BLAST: 40
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -3922,11 +3922,11 @@ DefuseKit:
+ 		Falloff: 100, 50, 20, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 99
++			COMPOSITE: 100
+ 			BLAST: 40
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 168
++			Shield: 169
+ 			Wood: 136
+ 			Scout: 130
+ 			None: 121
+@@ -4680,8 +4680,8 @@ DefuseKit:
+ 		Damage: 2000
+ 		Falloff: 100, 45, 15, 0
+ 		Versus:
+-			HAZMAT: 77
+-			COMPOSITE: 88
++			HAZMAT: 76
++			COMPOSITE: 89
+ 			BLAST: 45
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -4738,8 +4738,8 @@ DefuseKit:
+ 		Damage: 2000
+ 		Falloff: 100, 45, 15, 0
+ 		Versus:
+-			HAZMAT: 77
+-			COMPOSITE: 88
++			HAZMAT: 76
++			COMPOSITE: 89
+ 			BLAST: 45
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -4796,12 +4796,12 @@ DefuseKit:
+ 		Damage: 2000
+ 		Falloff: 100, 45, 15, 0
+ 		Versus:
+-			HAZMAT: 77
+-			COMPOSITE: 88
++			HAZMAT: 76
++			COMPOSITE: 89
+ 			BLAST: 45
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 169
++			Shield: 170
+ 			Scout: 129
+ 			Wood: 128
+ 			Light: 126
+@@ -4856,7 +4856,7 @@ DefuseKit:
+ 		Falloff: 100, 70, 30, 0
+ 		Versus:
+ 			HAZMAT: 87
+-			COMPOSITE: 67
++			COMPOSITE: 68
+ 			BLAST: 56
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -4914,7 +4914,7 @@ DefuseKit:
+ 		Falloff: 100, 70, 30, 0
+ 		Versus:
+ 			HAZMAT: 87
+-			COMPOSITE: 67
++			COMPOSITE: 68
+ 			BLAST: 56
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -4972,11 +4972,11 @@ DefuseKit:
+ 		Falloff: 100, 70, 30, 0
+ 		Versus:
+ 			HAZMAT: 87
+-			COMPOSITE: 67
++			COMPOSITE: 68
+ 			BLAST: 56
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 172
++			Shield: 173
+ 			Spaceship: 161
+ 			Superheavy: 150
+ 			Helicopter: 138
+@@ -5093,7 +5093,7 @@ DefuseKit:
+ 			BLAST: 58
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 171
++			Shield: 172
+ 			None: 200
+ 			Fighter: 197
+ 			Bomber: 196
+@@ -5151,7 +5151,7 @@ DefuseKit:
+ 			BLAST: 58
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 190
++			Shield: 192
+ 			Fighter: 200
+ 			Bomber: 176
+ 			None: 157
+@@ -5834,7 +5834,7 @@ DefuseKit:
+ 			BLAST: 66
+ 			REFLECTOR: 99
+ 			ARMOR: 70
+-			Shield: 205
++			Shield: 208
+ 			None: 200
+ 			Wood: 194
+ 			Flak: 165
+@@ -5894,7 +5894,7 @@ DefuseKit:
+ 			BLAST: 66
+ 			REFLECTOR: 99
+ 			ARMOR: 70
+-			Shield: 214
++			Shield: 217
+ 			None: 200
+ 			Wood: 198
+ 			Flak: 155
+@@ -5954,7 +5954,7 @@ DefuseKit:
+ 			BLAST: 66
+ 			REFLECTOR: 99
+ 			ARMOR: 70
+-			Shield: 225
++			Shield: 228
+ 			None: 191
+ 			Wood: 187
+ 			Flak: 162
+@@ -6013,9 +6013,9 @@ DefuseKit:
+ 			HAZMAT: 51
+ 			COMPOSITE: 62
+ 			BLAST: 72
+-			REFLECTOR: 96
++			REFLECTOR: 95
+ 			ARMOR: 70
+-			Shield: 191
++			Shield: 193
+ 			Plate: 141
+ 			Superheavy: 140
+ 			Heavy: 138
+@@ -6073,9 +6073,9 @@ DefuseKit:
+ 			HAZMAT: 51
+ 			COMPOSITE: 62
+ 			BLAST: 72
+-			REFLECTOR: 96
++			REFLECTOR: 95
+ 			ARMOR: 70
+-			Shield: 210
++			Shield: 213
+ 			Superheavy: 183
+ 			Plate: 176
+ 			Heavy: 155
+@@ -6133,9 +6133,9 @@ DefuseKit:
+ 			HAZMAT: 51
+ 			COMPOSITE: 62
+ 			BLAST: 72
+-			REFLECTOR: 96
++			REFLECTOR: 95
+ 			ARMOR: 70
+-			Shield: 223
++			Shield: 226
+ 			Superheavy: 166
+ 			Plate: 162
+ 			Heavy: 147
+@@ -6199,7 +6199,7 @@ DefuseKit:
+ 			BLAST: 72
+ 			REFLECTOR: 104
+ 			ARMOR: 70
+-			Shield: 167
++			Shield: 168
+ 			None: 200
+ 			Flak: 159
+ 			Wood: 157
+@@ -6259,7 +6259,7 @@ DefuseKit:
+ 			BLAST: 72
+ 			REFLECTOR: 104
+ 			ARMOR: 70
+-			Shield: 188
++			Shield: 190
+ 			None: 200
+ 			Flak: 159
+ 			Wood: 157
+@@ -6319,7 +6319,7 @@ DefuseKit:
+ 			BLAST: 72
+ 			REFLECTOR: 104
+ 			ARMOR: 70
+-			Shield: 206
++			Shield: 209
+ 			None: 200
+ 			Wood: 152
+ 			Flak: 145
+@@ -6378,7 +6378,7 @@ DefuseKit:
+ 			BLAST: 88
+ 			REFLECTOR: 73
+ 			ARMOR: 70
+-			Shield: 235
++			Shield: 238
+ 			None: 194
+ 			Wood: 155
+ 			Flak: 152
+@@ -6562,7 +6562,7 @@ DefuseKit:
+ 			BLAST: 50
+ 			REFLECTOR: 83
+ 			ARMOR: 70
+-			Shield: 179
++			Shield: 180
+ 			Wood: 199
+ 			None: 196
+ 			Steel: 157
+@@ -6622,7 +6622,7 @@ DefuseKit:
+ 			BLAST: 50
+ 			REFLECTOR: 83
+ 			ARMOR: 70
+-			Shield: 194
++			Shield: 196
+ 			Wood: 200
+ 			None: 191
+ 			Steel: 143
+@@ -6682,7 +6682,7 @@ DefuseKit:
+ 			BLAST: 50
+ 			REFLECTOR: 83
+ 			ARMOR: 70
+-			Shield: 212
++			Shield: 215
+ 			Wood: 154
+ 			None: 150
+ 			Steel: 148
+@@ -6739,7 +6739,7 @@ DefuseKit:
+ 		Falloff: 100, 52, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 61
++			COMPOSITE: 62
+ 			BLAST: 90
+ 			REFLECTOR: 58
+ 			ARMOR: 70
+@@ -6800,7 +6800,7 @@ DefuseKit:
+ 		Falloff: 100, 52, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 61
++			COMPOSITE: 62
+ 			BLAST: 90
+ 			REFLECTOR: 58
+ 			ARMOR: 70
+@@ -6861,7 +6861,7 @@ DefuseKit:
+ 		Falloff: 100, 52, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 61
++			COMPOSITE: 62
+ 			BLAST: 90
+ 			REFLECTOR: 58
+ 			ARMOR: 70
+@@ -6924,9 +6924,9 @@ DefuseKit:
+ 		Falloff: 100, 81, 61, 38, 0
+ 		Versus:
+ 			HAZMAT: 61
+-			COMPOSITE: 64
++			COMPOSITE: 65
+ 			BLAST: 82
+-			REFLECTOR: 74
++			REFLECTOR: 73
+ 			ARMOR: 70
+ 			Shield: 239
+ 			Plate: 146
+@@ -6985,9 +6985,9 @@ DefuseKit:
+ 		Falloff: 100, 81, 61, 38, 0
+ 		Versus:
+ 			HAZMAT: 61
+-			COMPOSITE: 64
++			COMPOSITE: 65
+ 			BLAST: 82
+-			REFLECTOR: 74
++			REFLECTOR: 73
+ 			ARMOR: 70
+ 			Shield: 259
+ 			Plate: 166
+@@ -7046,9 +7046,9 @@ DefuseKit:
+ 		Falloff: 100, 81, 61, 38, 0
+ 		Versus:
+ 			HAZMAT: 61
+-			COMPOSITE: 64
++			COMPOSITE: 65
+ 			BLAST: 82
+-			REFLECTOR: 74
++			REFLECTOR: 73
+ 			ARMOR: 70
+ 			Shield: 282
+ 			Superheavy: 164
+@@ -7109,7 +7109,7 @@ DefuseKit:
+ 		Falloff: 100, 75, 49, 24, 0
+ 		Versus:
+ 			HAZMAT: 76
+-			COMPOSITE: 74
++			COMPOSITE: 75
+ 			BLAST: 58
+ 			REFLECTOR: 70
+ 			ARMOR: 70
+@@ -7166,11 +7166,11 @@ DefuseKit:
+ 		Falloff: 100, 75, 49, 24, 0
+ 		Versus:
+ 			HAZMAT: 76
+-			COMPOSITE: 74
++			COMPOSITE: 75
+ 			BLAST: 58
+ 			REFLECTOR: 70
+ 			ARMOR: 70
+-			Shield: 180
++			Shield: 181
+ 			Superheavy: 146
+ 			Spaceship: 139
+ 			Helicopter: 137
+@@ -7223,11 +7223,11 @@ DefuseKit:
+ 		Falloff: 100, 75, 49, 24, 0
+ 		Versus:
+ 			HAZMAT: 76
+-			COMPOSITE: 74
++			COMPOSITE: 75
+ 			BLAST: 58
+ 			REFLECTOR: 70
+ 			ARMOR: 70
+-			Shield: 204
++			Shield: 207
+ 			Superheavy: 178
+ 			Heavy: 154
+ 			Spaceship: 124
+@@ -7282,11 +7282,11 @@ DefuseKit:
+ 		Falloff: 100, 74, 54, 36, 0
+ 		Versus:
+ 			HAZMAT: 58
+-			COMPOSITE: 82
++			COMPOSITE: 83
+ 			BLAST: 56
+ 			REFLECTOR: 84
+ 			ARMOR: 70
+-			Shield: 208
++			Shield: 211
+ 			Wood: 198
+ 			Scout: 161
+ 			None: 158
+@@ -7342,11 +7342,11 @@ DefuseKit:
+ 		Falloff: 100, 74, 54, 36, 0
+ 		Versus:
+ 			HAZMAT: 58
+-			COMPOSITE: 82
++			COMPOSITE: 83
+ 			BLAST: 56
+ 			REFLECTOR: 84
+ 			ARMOR: 70
+-			Shield: 221
++			Shield: 224
+ 			Wood: 200
+ 			None: 172
+ 			Steel: 141
+@@ -7402,11 +7402,11 @@ DefuseKit:
+ 		Falloff: 100, 74, 54, 36, 0
+ 		Versus:
+ 			HAZMAT: 58
+-			COMPOSITE: 82
++			COMPOSITE: 83
+ 			BLAST: 56
+ 			REFLECTOR: 84
+ 			ARMOR: 70
+-			Shield: 231
++			Shield: 234
+ 			Wood: 151
+ 			Steel: 136
+ 			None: 133
+@@ -7467,7 +7467,7 @@ DefuseKit:
+ 			BLAST: 70
+ 			REFLECTOR: 83
+ 			ARMOR: 70
+-			Shield: 197
++			Shield: 199
+ 			Superheavy: 155
+ 			Heavy: 150
+ 			Medium: 148
+@@ -7527,7 +7527,7 @@ DefuseKit:
+ 			BLAST: 70
+ 			REFLECTOR: 83
+ 			ARMOR: 70
+-			Shield: 215
++			Shield: 218
+ 			Superheavy: 192
+ 			Heavy: 167
+ 			Medium: 148
+@@ -7587,7 +7587,7 @@ DefuseKit:
+ 			BLAST: 70
+ 			REFLECTOR: 83
+ 			ARMOR: 70
+-			Shield: 226
++			Shield: 229
+ 			Superheavy: 173
+ 			Heavy: 153
+ 			Medium: 134
+@@ -7644,11 +7644,11 @@ DefuseKit:
+ 		Falloff: 100, 82, 61, 38, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 51
++			COMPOSITE: 52
+ 			BLAST: 72
+ 			REFLECTOR: 85
+ 			ARMOR: 70
+-			Shield: 196
++			Shield: 198
+ 			Superheavy: 131
+ 			Heavy: 129
+ 			Medium: 128
+@@ -7704,11 +7704,11 @@ DefuseKit:
+ 		Falloff: 100, 82, 61, 38, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 51
++			COMPOSITE: 52
+ 			BLAST: 72
+ 			REFLECTOR: 85
+ 			ARMOR: 70
+-			Shield: 213
++			Shield: 216
+ 			Superheavy: 177
+ 			Heavy: 148
+ 			Plate: 139
+@@ -7764,11 +7764,11 @@ DefuseKit:
+ 		Falloff: 100, 82, 61, 38, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 51
++			COMPOSITE: 52
+ 			BLAST: 72
+ 			REFLECTOR: 85
+ 			ARMOR: 70
+-			Shield: 224
++			Shield: 227
+ 			Superheavy: 159
+ 			Plate: 145
+ 			Heavy: 141
+@@ -7825,7 +7825,7 @@ DefuseKit:
+ 		Falloff: 100, 70, 45, 25, 10, 0
+ 		Versus:
+ 			HAZMAT: 65
+-			COMPOSITE: 74
++			COMPOSITE: 75
+ 			BLAST: 97
+ 			REFLECTOR: 45
+ 			ARMOR: 70
+@@ -7884,7 +7884,7 @@ DefuseKit:
+ 		Falloff: 100, 70, 45, 25, 10, 0
+ 		Versus:
+ 			HAZMAT: 65
+-			COMPOSITE: 74
++			COMPOSITE: 75
+ 			BLAST: 97
+ 			REFLECTOR: 45
+ 			ARMOR: 70
+@@ -7943,7 +7943,7 @@ DefuseKit:
+ 		Falloff: 100, 70, 45, 25, 10, 0
+ 		Versus:
+ 			HAZMAT: 65
+-			COMPOSITE: 74
++			COMPOSITE: 75
+ 			BLAST: 97
+ 			REFLECTOR: 45
+ 			ARMOR: 70
+@@ -8002,7 +8002,7 @@ DefuseKit:
+ 		Falloff: 100, 70, 45, 25, 10, 0
+ 		Versus:
+ 			HAZMAT: 65
+-			COMPOSITE: 74
++			COMPOSITE: 75
+ 			BLAST: 97
+ 			REFLECTOR: 45
+ 			ARMOR: 70
+@@ -8066,7 +8066,7 @@ DefuseKit:
+ 			BLAST: 53
+ 			REFLECTOR: 84
+ 			ARMOR: 70
+-			Shield: 207
++			Shield: 210
+ 			Wood: 200
+ 			None: 166
+ 			Scout: 165
+@@ -8126,7 +8126,7 @@ DefuseKit:
+ 			BLAST: 53
+ 			REFLECTOR: 84
+ 			ARMOR: 70
+-			Shield: 220
++			Shield: 223
+ 			Wood: 199
+ 			None: 189
+ 			Steel: 139
+@@ -8186,7 +8186,7 @@ DefuseKit:
+ 			BLAST: 53
+ 			REFLECTOR: 84
+ 			ARMOR: 70
+-			Shield: 230
++			Shield: 233
+ 			Wood: 152
+ 			None: 146
+ 			Flak: 141
+@@ -8242,7 +8242,7 @@ DefuseKit:
+ 		Damage: 2000
+ 		Falloff: 100, 0
+ 		Versus:
+-			HAZMAT: 94
++			HAZMAT: 93
+ 			COMPOSITE: 53
+ 			BLAST: 63
+ 			REFLECTOR: 69
+@@ -8300,7 +8300,7 @@ DefuseKit:
+ 		Damage: 2000
+ 		Falloff: 100, 0
+ 		Versus:
+-			HAZMAT: 94
++			HAZMAT: 93
+ 			COMPOSITE: 53
+ 			BLAST: 63
+ 			REFLECTOR: 69
+@@ -8358,7 +8358,7 @@ DefuseKit:
+ 		Damage: 2000
+ 		Falloff: 100, 0
+ 		Versus:
+-			HAZMAT: 94
++			HAZMAT: 93
+ 			COMPOSITE: 53
+ 			BLAST: 63
+ 			REFLECTOR: 69
+@@ -8418,7 +8418,7 @@ DefuseKit:
+ 		Falloff: 100, 0
+ 		Versus:
+ 			HAZMAT: 102
+-			COMPOSITE: 35
++			COMPOSITE: 36
+ 			BLAST: 72
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -8476,7 +8476,7 @@ DefuseKit:
+ 		Falloff: 100, 0
+ 		Versus:
+ 			HAZMAT: 102
+-			COMPOSITE: 35
++			COMPOSITE: 36
+ 			BLAST: 72
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -8534,7 +8534,7 @@ DefuseKit:
+ 		Falloff: 100, 0
+ 		Versus:
+ 			HAZMAT: 102
+-			COMPOSITE: 35
++			COMPOSITE: 36
+ 			BLAST: 72
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -8595,9 +8595,9 @@ DefuseKit:
+ 			HAZMAT: 61
+ 			COMPOSITE: 78
+ 			BLAST: 86
+-			REFLECTOR: 56
++			REFLECTOR: 55
+ 			ARMOR: 70
+-			Shield: 219
++			Shield: 222
+ 			Bomber: 100
+ 			Concrete: 100
+ 			Fighter: 100
+@@ -8653,9 +8653,9 @@ DefuseKit:
+ 			HAZMAT: 61
+ 			COMPOSITE: 78
+ 			BLAST: 86
+-			REFLECTOR: 56
++			REFLECTOR: 55
+ 			ARMOR: 70
+-			Shield: 229
++			Shield: 232
+ 			Bomber: 100
+ 			Concrete: 100
+ 			Fighter: 100
+@@ -8711,7 +8711,7 @@ DefuseKit:
+ 			HAZMAT: 61
+ 			COMPOSITE: 78
+ 			BLAST: 86
+-			REFLECTOR: 56
++			REFLECTOR: 55
+ 			ARMOR: 70
+ 			Shield: 244
+ 			Bomber: 100
+@@ -8769,7 +8769,7 @@ DefuseKit:
+ 			HAZMAT: 61
+ 			COMPOSITE: 78
+ 			BLAST: 86
+-			REFLECTOR: 56
++			REFLECTOR: 55
+ 			ARMOR: 70
+ 			Shield: 265
+ 			Bomber: 100
+@@ -8828,7 +8828,7 @@ DefuseKit:
+ 			HAZMAT: 63
+ 			COMPOSITE: 101
+ 			BLAST: 41
+-			REFLECTOR: 75
++			REFLECTOR: 74
+ 			ARMOR: 70
+ 			Shield: 143
+ 			Wood: 200
+@@ -8886,7 +8886,7 @@ DefuseKit:
+ 			HAZMAT: 63
+ 			COMPOSITE: 101
+ 			BLAST: 41
+-			REFLECTOR: 75
++			REFLECTOR: 74
+ 			ARMOR: 70
+ 			Shield: 157
+ 			Wood: 200
+@@ -8944,9 +8944,9 @@ DefuseKit:
+ 			HAZMAT: 63
+ 			COMPOSITE: 101
+ 			BLAST: 41
+-			REFLECTOR: 75
++			REFLECTOR: 74
+ 			ARMOR: 70
+-			Shield: 177
++			Shield: 178
+ 			Wood: 195
+ 			Steel: 164
+ 			None: 154
+@@ -9001,7 +9001,7 @@ DefuseKit:
+ 		Falloff: 100, 72, 50, 32, 18, 8, 0
+ 		Versus:
+ 			HAZMAT: 68
+-			COMPOSITE: 106
++			COMPOSITE: 107
+ 			BLAST: 36
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -9059,7 +9059,7 @@ DefuseKit:
+ 		Falloff: 100, 72, 50, 32, 18, 8, 0
+ 		Versus:
+ 			HAZMAT: 68
+-			COMPOSITE: 106
++			COMPOSITE: 107
+ 			BLAST: 36
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -9117,11 +9117,11 @@ DefuseKit:
+ 		Falloff: 100, 72, 50, 32, 18, 8, 0
+ 		Versus:
+ 			HAZMAT: 68
+-			COMPOSITE: 106
++			COMPOSITE: 107
+ 			BLAST: 36
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 186
++			Shield: 188
+ 			None: 134
+ 			Wood: 127
+ 			Scout: 122
+@@ -9180,7 +9180,7 @@ DefuseKit:
+ 			BLAST: 58
+ 			REFLECTOR: 59
+ 			ARMOR: 70
+-			Shield: 222
++			Shield: 225
+ 			Bomber: 100
+ 			Concrete: 100
+ 			Fighter: 100
+@@ -9244,7 +9244,7 @@ DefuseKit:
+ 			BLAST: 58
+ 			REFLECTOR: 59
+ 			ARMOR: 70
+-			Shield: 233
++			Shield: 236
+ 			Bomber: 100
+ 			Concrete: 100
+ 			Fighter: 100
+@@ -13965,7 +13965,7 @@ generic_bullet_casing:
+ 			BLAST: 84
+ 			REFLECTOR: 80
+ 			ARMOR: 70
+-			Shield: 217
++			Shield: 220
+ 			None: 200
+ 			Wood: 194
+ 			Scout: 154
+@@ -14025,7 +14025,7 @@ generic_bullet_casing:
+ 			BLAST: 84
+ 			REFLECTOR: 80
+ 			ARMOR: 70
+-			Shield: 227
++			Shield: 230
+ 			None: 200
+ 			Wood: 197
+ 			Flak: 144
+@@ -14146,7 +14146,7 @@ generic_bullet_casing:
+ 			BLAST: 50
+ 			REFLECTOR: 76
+ 			ARMOR: 70
+-			Shield: 216
++			Shield: 219
+ 			Wood: 160
+ 			Scout: 141
+ 			Steel: 132
+@@ -14204,7 +14204,7 @@ generic_bullet_casing:
+ 			BLAST: 50
+ 			REFLECTOR: 76
+ 			ARMOR: 70
+-			Shield: 187
++			Shield: 189
+ 			Wood: 188
+ 			Scout: 185
+ 			Steel: 149
+@@ -14262,7 +14262,7 @@ generic_bullet_casing:
+ 			BLAST: 50
+ 			REFLECTOR: 76
+ 			ARMOR: 70
+-			Shield: 198
++			Shield: 200
+ 			Wood: 170
+ 			Scout: 151
+ 			Light: 125
+@@ -14320,7 +14320,7 @@ generic_bullet_casing:
+ 			BLAST: 65
+ 			REFLECTOR: 77
+ 			ARMOR: 70
+-			Shield: 211
++			Shield: 214
+ 			Superheavy: 157
+ 			Heavy: 137
+ 			Concrete: 135
+@@ -14378,7 +14378,7 @@ generic_bullet_casing:
+ 			BLAST: 65
+ 			REFLECTOR: 77
+ 			ARMOR: 70
+-			Shield: 178
++			Shield: 179
+ 			Superheavy: 159
+ 			Heavy: 156
+ 			Medium: 146
+@@ -14436,7 +14436,7 @@ generic_bullet_casing:
+ 			BLAST: 65
+ 			REFLECTOR: 77
+ 			ARMOR: 70
+-			Shield: 193
++			Shield: 195
+ 			Superheavy: 183
+ 			Heavy: 162
+ 			Medium: 144
+@@ -14492,7 +14492,7 @@ generic_bullet_casing:
+ 			HAZMAT: 83
+ 			COMPOSITE: 53
+ 			BLAST: 79
+-			REFLECTOR: 65
++			REFLECTOR: 64
+ 			ARMOR: 70
+ 			Shield: 242
+ 			Superheavy: 182
+@@ -14553,9 +14553,9 @@ generic_bullet_casing:
+ 			HAZMAT: 83
+ 			COMPOSITE: 53
+ 			BLAST: 79
+-			REFLECTOR: 65
++			REFLECTOR: 64
+ 			ARMOR: 70
+-			Shield: 218
++			Shield: 221
+ 			Superheavy: 154
+ 			Heavy: 153
+ 			Medium: 144
+@@ -14614,9 +14614,9 @@ generic_bullet_casing:
+ 			HAZMAT: 83
+ 			COMPOSITE: 53
+ 			BLAST: 79
+-			REFLECTOR: 65
++			REFLECTOR: 64
+ 			ARMOR: 70
+-			Shield: 228
++			Shield: 231
+ 			Superheavy: 184
+ 			Heavy: 162
+ 			Medium: 143
+@@ -14673,7 +14673,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 52, 0
+ 		Versus:
+ 			HAZMAT: 78
+-			COMPOSITE: 58
++			COMPOSITE: 59
+ 			BLAST: 83
+ 			REFLECTOR: 61
+ 			ARMOR: 70
+@@ -14732,11 +14732,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 52, 0
+ 		Versus:
+ 			HAZMAT: 78
+-			COMPOSITE: 58
++			COMPOSITE: 59
+ 			BLAST: 83
+ 			REFLECTOR: 61
+ 			ARMOR: 70
+-			Shield: 232
++			Shield: 235
+ 			Superheavy: 154
+ 			Heavy: 151
+ 			Medium: 140
+@@ -14791,7 +14791,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 52, 0
+ 		Versus:
+ 			HAZMAT: 78
+-			COMPOSITE: 58
++			COMPOSITE: 59
+ 			BLAST: 83
+ 			REFLECTOR: 61
+ 			ARMOR: 70
+@@ -14849,12 +14849,12 @@ generic_bullet_casing:
+ 		Damage: 2000
+ 		Falloff: 100, 74, 51, 36, 23, 13, 0
+ 		Versus:
+-			HAZMAT: 67
+-			COMPOSITE: 91
++			HAZMAT: 66
++			COMPOSITE: 92
+ 			BLAST: 46
+ 			REFLECTOR: 75
+ 			ARMOR: 70
+-			Shield: 192
++			Shield: 194
+ 			Wood: 138
+ 			Steel: 136
+ 			Concrete: 122
+@@ -14909,8 +14909,8 @@ generic_bullet_casing:
+ 		Damage: 2000
+ 		Falloff: 100, 74, 51, 36, 23, 13, 0
+ 		Versus:
+-			HAZMAT: 67
+-			COMPOSITE: 91
++			HAZMAT: 66
++			COMPOSITE: 92
+ 			BLAST: 46
+ 			REFLECTOR: 75
+ 			ARMOR: 70
+@@ -14969,12 +14969,12 @@ generic_bullet_casing:
+ 		Damage: 2000
+ 		Falloff: 100, 74, 51, 36, 23, 13, 0
+ 		Versus:
+-			HAZMAT: 67
+-			COMPOSITE: 91
++			HAZMAT: 66
++			COMPOSITE: 92
+ 			BLAST: 46
+ 			REFLECTOR: 75
+ 			ARMOR: 70
+-			Shield: 175
++			Shield: 176
+ 			Wood: 184
+ 			None: 148
+ 			Steel: 130
+@@ -15030,11 +15030,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 82, 64, 42, 0
+ 		Versus:
+ 			HAZMAT: 69
+-			COMPOSITE: 59
++			COMPOSITE: 60
+ 			BLAST: 67
+ 			REFLECTOR: 84
+ 			ARMOR: 70
+-			Shield: 209
++			Shield: 212
+ 			None: 200
+ 			Flak: 199
+ 			Plate: 170
+@@ -15090,11 +15090,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 82, 64, 42, 0
+ 		Versus:
+ 			HAZMAT: 69
+-			COMPOSITE: 59
++			COMPOSITE: 60
+ 			BLAST: 67
+ 			REFLECTOR: 84
+ 			ARMOR: 70
+-			Shield: 170
++			Shield: 171
+ 			None: 200
+ 			Flak: 162
+ 			Wood: 159
+@@ -15150,11 +15150,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 82, 64, 42, 0
+ 		Versus:
+ 			HAZMAT: 69
+-			COMPOSITE: 59
++			COMPOSITE: 60
+ 			BLAST: 67
+ 			REFLECTOR: 84
+ 			ARMOR: 70
+-			Shield: 189
++			Shield: 191
+ 			None: 200
+ 			Flak: 157
+ 			Wood: 145
+@@ -15214,7 +15214,7 @@ generic_bullet_casing:
+ 			BLAST: 55
+ 			REFLECTOR: 72
+ 			ARMOR: 70
+-			Shield: 176
++			Shield: 177
+ 			None: 200
+ 			Flak: 179
+ 			Plate: 154
+@@ -15447,7 +15447,7 @@ generic_bullet_casing:
+ 			BLAST: 83
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 234
++			Shield: 237
+ 			None: 193
+ 			Flak: 151
+ 			Scout: 149
+@@ -15561,11 +15561,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 80, 62, 46, 32, 17, 0
+ 		Versus:
+ 			HAZMAT: 78
+-			COMPOSITE: 68
++			COMPOSITE: 69
+ 			BLAST: 58
+ 			REFLECTOR: 75
+ 			ARMOR: 70
+-			Shield: 195
++			Shield: 197
+ 			None: 200
+ 			Flak: 184
+ 			Plate: 157
+@@ -15621,7 +15621,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 80, 62, 46, 32, 17, 0
+ 		Versus:
+ 			HAZMAT: 78
+-			COMPOSITE: 68
++			COMPOSITE: 69
+ 			BLAST: 58
+ 			REFLECTOR: 75
+ 			ARMOR: 70
+@@ -15681,11 +15681,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 80, 62, 46, 32, 17, 0
+ 		Versus:
+ 			HAZMAT: 78
+-			COMPOSITE: 68
++			COMPOSITE: 69
+ 			BLAST: 58
+ 			REFLECTOR: 75
+ 			ARMOR: 70
+-			Shield: 174
++			Shield: 175
+ 			None: 200
+ 			Flak: 154
+ 			Wood: 136
+@@ -15745,7 +15745,7 @@ generic_bullet_casing:
+ 			BLAST: 84
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 199
++			Shield: 202
+ 			None: 195
+ 			Flak: 168
+ 			Plate: 141
+@@ -15805,7 +15805,7 @@ generic_bullet_casing:
+ 			BLAST: 84
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 162
++			Shield: 163
+ 			None: 188
+ 			Scout: 154
+ 			Flak: 147
+@@ -15865,7 +15865,7 @@ generic_bullet_casing:
+ 			BLAST: 84
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 181
++			Shield: 183
+ 			None: 200
+ 			Flak: 143
+ 			Plate: 137
+@@ -15921,11 +15921,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 61, 28, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 70
++			COMPOSITE: 71
+ 			BLAST: 78
+ 			REFLECTOR: 61
+ 			ARMOR: 70
+-			Shield: 200
++			Shield: 203
+ 			Scout: 137
+ 			Wood: 134
+ 			Light: 125
+@@ -15981,11 +15981,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 61, 28, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 70
++			COMPOSITE: 71
+ 			BLAST: 78
+ 			REFLECTOR: 61
+ 			ARMOR: 70
+-			Shield: 163
++			Shield: 164
+ 			Scout: 164
+ 			Wood: 145
+ 			Light: 133
+@@ -16041,11 +16041,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 61, 28, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 70
++			COMPOSITE: 71
+ 			BLAST: 78
+ 			REFLECTOR: 61
+ 			ARMOR: 70
+-			Shield: 182
++			Shield: 184
+ 			Scout: 159
+ 			Wood: 154
+ 			Light: 131
+@@ -16105,7 +16105,7 @@ generic_bullet_casing:
+ 			BLAST: 78
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 203
++			Shield: 206
+ 			Scout: 140
+ 			Light: 130
+ 			Medium: 122
+@@ -16165,7 +16165,7 @@ generic_bullet_casing:
+ 			BLAST: 78
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 166
++			Shield: 167
+ 			Scout: 167
+ 			Light: 147
+ 			Medium: 127
+@@ -16225,7 +16225,7 @@ generic_bullet_casing:
+ 			BLAST: 78
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 185
++			Shield: 187
+ 			Scout: 169
+ 			Light: 139
+ 			Medium: 137
+@@ -16285,7 +16285,7 @@ generic_bullet_casing:
+ 			BLAST: 59
+ 			REFLECTOR: 65
+ 			ARMOR: 70
+-			Shield: 201
++			Shield: 204
+ 			Wood: 154
+ 			None: 139
+ 			Steel: 132
+@@ -16345,7 +16345,7 @@ generic_bullet_casing:
+ 			BLAST: 59
+ 			REFLECTOR: 65
+ 			ARMOR: 70
+-			Shield: 164
++			Shield: 165
+ 			Wood: 171
+ 			None: 160
+ 			Steel: 134
+@@ -16405,7 +16405,7 @@ generic_bullet_casing:
+ 			BLAST: 59
+ 			REFLECTOR: 65
+ 			ARMOR: 70
+-			Shield: 183
++			Shield: 185
+ 			Wood: 179
+ 			None: 166
+ 			Scout: 122
+@@ -16461,11 +16461,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 68, 44, 26, 12, 0
+ 		Versus:
+ 			HAZMAT: 74
+-			COMPOSITE: 67
++			COMPOSITE: 68
+ 			BLAST: 79
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 202
++			Shield: 205
+ 			Fighter: 160
+ 			None: 146
+ 			Bomber: 141
+@@ -16521,11 +16521,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 68, 44, 26, 12, 0
+ 		Versus:
+ 			HAZMAT: 74
+-			COMPOSITE: 67
++			COMPOSITE: 68
+ 			BLAST: 79
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 165
++			Shield: 166
+ 			None: 175
+ 			Fighter: 167
+ 			Bomber: 144
+@@ -16581,11 +16581,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 68, 44, 26, 12, 0
+ 		Versus:
+ 			HAZMAT: 74
+-			COMPOSITE: 67
++			COMPOSITE: 68
+ 			BLAST: 79
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 184
++			Shield: 186
+ 			None: 179
+ 			Fighter: 153
+ 			Bomber: 151
+@@ -16641,7 +16641,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 0
+ 		Versus:
+ 			HAZMAT: 102
+-			COMPOSITE: 35
++			COMPOSITE: 36
+ 			BLAST: 72
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -16694,8 +16694,8 @@ generic_bullet_casing:
+ 		Damage: 0
+ 		Falloff: 100, 0
+ 		Versus:
+-			HAZMAT: 99
+-			COMPOSITE: 42
++			HAZMAT: 98
++			COMPOSITE: 43
+ 			BLAST: 68
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -16751,7 +16751,7 @@ generic_bullet_casing:
+ 			HAZMAT: 92
+ 			COMPOSITE: 41
+ 			BLAST: 72
+-			REFLECTOR: 75
++			REFLECTOR: 74
+ 			ARMOR: 70
+ 			Shield: 132
+ 			Superheavy: 139
+@@ -16803,11 +16803,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 82, 61, 38, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 51
++			COMPOSITE: 52
+ 			BLAST: 72
+ 			REFLECTOR: 85
+ 			ARMOR: 70
+-			Shield: 224
++			Shield: 227
+ 			Superheavy: 159
+ 			Plate: 145
+ 			Heavy: 141
+@@ -16861,9 +16861,9 @@ generic_bullet_casing:
+ 			HAZMAT: 51
+ 			COMPOSITE: 62
+ 			BLAST: 72
+-			REFLECTOR: 96
++			REFLECTOR: 95
+ 			ARMOR: 70
+-			Shield: 210
++			Shield: 213
+ 			Superheavy: 183
+ 			Plate: 176
+ 			Heavy: 155
+@@ -16915,7 +16915,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 72, 50, 32, 18, 8, 0
+ 		Versus:
+ 			HAZMAT: 68
+-			COMPOSITE: 106
++			COMPOSITE: 107
+ 			BLAST: 36
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -17083,7 +17083,7 @@ generic_bullet_casing:
+ 			HAZMAT: 63
+ 			COMPOSITE: 101
+ 			BLAST: 41
+-			REFLECTOR: 75
++			REFLECTOR: 74
+ 			ARMOR: 70
+ 			Shield: 143
+ 			Wood: 200
+@@ -17137,7 +17137,7 @@ generic_bullet_casing:
+ 			HAZMAT: 63
+ 			COMPOSITE: 101
+ 			BLAST: 41
+-			REFLECTOR: 75
++			REFLECTOR: 74
+ 			ARMOR: 70
+ 			Shield: 157
+ 			Wood: 200
+@@ -17359,7 +17359,7 @@ generic_bullet_casing:
+ 			HAZMAT: 61
+ 			COMPOSITE: 78
+ 			BLAST: 86
+-			REFLECTOR: 56
++			REFLECTOR: 55
+ 			ARMOR: 70
+ 			Shield: 244
+ 			Bomber: 100
+@@ -17410,7 +17410,7 @@ generic_bullet_casing:
+ 		Damage: 0
+ 		Falloff: 100, 0
+ 		Versus:
+-			HAZMAT: 94
++			HAZMAT: 93
+ 			COMPOSITE: 53
+ 			BLAST: 63
+ 			REFLECTOR: 69
+@@ -17465,7 +17465,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 70, 30, 0
+ 		Versus:
+ 			HAZMAT: 87
+-			COMPOSITE: 67
++			COMPOSITE: 68
+ 			BLAST: 56
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -17523,7 +17523,7 @@ generic_bullet_casing:
+ 			BLAST: 70
+ 			REFLECTOR: 83
+ 			ARMOR: 70
+-			Shield: 226
++			Shield: 229
+ 			Superheavy: 173
+ 			Heavy: 153
+ 			Medium: 134
+@@ -17574,12 +17574,12 @@ generic_bullet_casing:
+ 		Damage: 0
+ 		Falloff: 100, 45, 15, 0
+ 		Versus:
+-			HAZMAT: 77
+-			COMPOSITE: 88
++			HAZMAT: 76
++			COMPOSITE: 89
+ 			BLAST: 45
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 169
++			Shield: 170
+ 			Scout: 129
+ 			Wood: 128
+ 			Light: 126
+@@ -17629,7 +17629,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 52, 0
+ 		Versus:
+ 			HAZMAT: 78
+-			COMPOSITE: 58
++			COMPOSITE: 59
+ 			BLAST: 83
+ 			REFLECTOR: 61
+ 			ARMOR: 70
+@@ -17684,7 +17684,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 52, 0
+ 		Versus:
+ 			HAZMAT: 78
+-			COMPOSITE: 58
++			COMPOSITE: 59
+ 			BLAST: 83
+ 			REFLECTOR: 61
+ 			ARMOR: 70
+@@ -17834,7 +17834,7 @@ generic_bullet_casing:
+ 			BLAST: 88
+ 			REFLECTOR: 73
+ 			ARMOR: 70
+-			Shield: 235
++			Shield: 238
+ 			None: 194
+ 			Wood: 155
+ 			Flak: 152
+@@ -18052,9 +18052,9 @@ generic_bullet_casing:
+ 		Falloff: 100, 81, 61, 38, 0
+ 		Versus:
+ 			HAZMAT: 61
+-			COMPOSITE: 64
++			COMPOSITE: 65
+ 			BLAST: 82
+-			REFLECTOR: 74
++			REFLECTOR: 73
+ 			ARMOR: 70
+ 			Shield: 282
+ 			Superheavy: 164
+@@ -18115,9 +18115,9 @@ generic_bullet_casing:
+ 			HAZMAT: 63
+ 			COMPOSITE: 101
+ 			BLAST: 41
+-			REFLECTOR: 75
++			REFLECTOR: 74
+ 			ARMOR: 70
+-			Shield: 177
++			Shield: 178
+ 			Wood: 195
+ 			Steel: 164
+ 			None: 154
+@@ -18167,7 +18167,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 52, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 61
++			COMPOSITE: 62
+ 			BLAST: 90
+ 			REFLECTOR: 58
+ 			ARMOR: 70
+@@ -18228,7 +18228,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 0
+ 		Versus:
+ 			HAZMAT: 102
+-			COMPOSITE: 35
++			COMPOSITE: 36
+ 			BLAST: 72
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -18282,11 +18282,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 82, 61, 38, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 51
++			COMPOSITE: 52
+ 			BLAST: 72
+ 			REFLECTOR: 85
+ 			ARMOR: 70
+-			Shield: 213
++			Shield: 216
+ 			Superheavy: 177
+ 			Heavy: 148
+ 			Plate: 139
+@@ -18342,7 +18342,7 @@ generic_bullet_casing:
+ 			BLAST: 50
+ 			REFLECTOR: 76
+ 			ARMOR: 70
+-			Shield: 216
++			Shield: 219
+ 			Wood: 160
+ 			Scout: 141
+ 			Steel: 132
+@@ -18392,7 +18392,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 70, 30, 0
+ 		Versus:
+ 			HAZMAT: 87
+-			COMPOSITE: 67
++			COMPOSITE: 68
+ 			BLAST: 56
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -18448,9 +18448,9 @@ generic_bullet_casing:
+ 			HAZMAT: 83
+ 			COMPOSITE: 53
+ 			BLAST: 79
+-			REFLECTOR: 65
++			REFLECTOR: 64
+ 			ARMOR: 70
+-			Shield: 228
++			Shield: 231
+ 			Superheavy: 184
+ 			Heavy: 162
+ 			Medium: 143
+@@ -18503,7 +18503,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 52, 0
+ 		Versus:
+ 			HAZMAT: 71
+-			COMPOSITE: 61
++			COMPOSITE: 62
+ 			BLAST: 90
+ 			REFLECTOR: 58
+ 			ARMOR: 70
+@@ -18594,7 +18594,7 @@ generic_bullet_casing:
+ 			BLAST: 50
+ 			REFLECTOR: 83
+ 			ARMOR: 70
+-			Shield: 179
++			Shield: 180
+ 			Wood: 199
+ 			None: 196
+ 			Steel: 157
+@@ -18652,9 +18652,9 @@ generic_bullet_casing:
+ 			HAZMAT: 51
+ 			COMPOSITE: 62
+ 			BLAST: 72
+-			REFLECTOR: 96
++			REFLECTOR: 95
+ 			ARMOR: 70
+-			Shield: 223
++			Shield: 226
+ 			Superheavy: 166
+ 			Plate: 162
+ 			Heavy: 147
+@@ -18705,8 +18705,8 @@ generic_bullet_casing:
+ 		Damage: 0
+ 		Falloff: 100, 45, 15, 0
+ 		Versus:
+-			HAZMAT: 77
+-			COMPOSITE: 88
++			HAZMAT: 76
++			COMPOSITE: 89
+ 			BLAST: 45
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -18768,7 +18768,7 @@ generic_bullet_casing:
+ 			BLAST: 66
+ 			REFLECTOR: 99
+ 			ARMOR: 70
+-			Shield: 205
++			Shield: 208
+ 			None: 200
+ 			Wood: 194
+ 			Flak: 165
+@@ -18887,7 +18887,7 @@ generic_bullet_casing:
+ 			BLAST: 58
+ 			REFLECTOR: 59
+ 			ARMOR: 70
+-			Shield: 233
++			Shield: 236
+ 			Bomber: 100
+ 			Concrete: 100
+ 			Fighter: 100
+@@ -18944,7 +18944,7 @@ generic_bullet_casing:
+ 			BLAST: 66
+ 			REFLECTOR: 99
+ 			ARMOR: 70
+-			Shield: 225
++			Shield: 228
+ 			None: 191
+ 			Wood: 187
+ 			Flak: 162
+@@ -19000,7 +19000,7 @@ generic_bullet_casing:
+ 			BLAST: 50
+ 			REFLECTOR: 83
+ 			ARMOR: 70
+-			Shield: 194
++			Shield: 196
+ 			Wood: 200
+ 			None: 191
+ 			Steel: 143
+@@ -19054,7 +19054,7 @@ generic_bullet_casing:
+ 		Falloff: 100, 72, 50, 32, 18, 8, 0
+ 		Versus:
+ 			HAZMAT: 68
+-			COMPOSITE: 106
++			COMPOSITE: 107
+ 			BLAST: 36
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -19116,7 +19116,7 @@ generic_bullet_casing:
+ 			BLAST: 66
+ 			REFLECTOR: 99
+ 			ARMOR: 70
+-			Shield: 214
++			Shield: 217
+ 			None: 200
+ 			Wood: 198
+ 			Flak: 155
+@@ -19172,9 +19172,9 @@ generic_bullet_casing:
+ 			HAZMAT: 51
+ 			COMPOSITE: 62
+ 			BLAST: 72
+-			REFLECTOR: 96
++			REFLECTOR: 95
+ 			ARMOR: 70
+-			Shield: 191
++			Shield: 193
+ 			Plate: 141
+ 			Superheavy: 140
+ 			Heavy: 138
+@@ -19230,7 +19230,7 @@ generic_bullet_casing:
+ 			BLAST: 50
+ 			REFLECTOR: 83
+ 			ARMOR: 70
+-			Shield: 212
++			Shield: 215
+ 			Wood: 154
+ 			None: 150
+ 			Steel: 148
+@@ -19344,11 +19344,11 @@ generic_bullet_casing:
+ 		Falloff: 100, 70, 30, 0
+ 		Versus:
+ 			HAZMAT: 87
+-			COMPOSITE: 67
++			COMPOSITE: 68
+ 			BLAST: 56
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+-			Shield: 172
++			Shield: 173
+ 			Spaceship: 161
+ 			Superheavy: 150
+ 			Helicopter: 138
+@@ -19397,8 +19397,8 @@ generic_bullet_casing:
+ 		Damage: 0
+ 		Falloff: 100, 45, 15, 0
+ 		Versus:
+-			HAZMAT: 77
+-			COMPOSITE: 88
++			HAZMAT: 76
++			COMPOSITE: 89
+ 			BLAST: 45
+ 			REFLECTOR: 69
+ 			ARMOR: 70
+@@ -19460,7 +19460,7 @@ generic_bullet_casing:
+ 			BLAST: 53
+ 			REFLECTOR: 84
+ 			ARMOR: 70
+-			Shield: 230
++			Shield: 233
+ 			Wood: 152
+ 			None: 146
+ 			Flak: 141
+@@ -19516,7 +19516,7 @@ generic_bullet_casing:
+ 			BLAST: 78
+ 			REFLECTOR: 60
+ 			ARMOR: 70
+-			Shield: 203
++			Shield: 206
+ 			Scout: 140
+ 			Light: 130
+ 			Medium: 122
+@@ -19556,3 +19556,184 @@ generic_bullet_casing:
+ 			Bomber: 15
+ 			None: 14
+ 			Fighter: 14
++
++
++^Warhead_BulletChem_Heavy:
++	ValidTargets: Ground, Water, Air
++	ReloadDelay: 25
++	Range: 5120
++	TargetActorCenter: true
++	Warhead@BulletChem_Heavy: AreaDamage
++		ValidRelationships: Ally, Neutral, Enemy
++		FriendlyFireDamage: 50
++		FriendlyFireSpread: 50
++		ValidTargets: Ground, Water, Air
++		Spread: 110
++		Damage: 2000
++		Falloff: 100, 82, 61, 38, 0
++		Versus:
++			HAZMAT: 75
++			COMPOSITE: 52
++			BLAST: 70
++			REFLECTOR: 82
++			ARMOR: 70
++			Shield: 201
++			None: 200
++			Flak: 167
++			Plate: 139
++			Scout: 115
++			Light: 106
++			Medium: 101
++			Heavy: 97
++			Superheavy: 96
++			Wood: 87
++			Heroic: 80
++			Steel: 73
++			Concrete: 72
++			Fighter: 71
++			Bomber: 67
++			Helicopter: 64
++			Spaceship: 63
++		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
++		PhysicalStates:
++			Corrosion: 50
++		PercentageScale: 10000
++		PercentageSpread: 50
++		PercentageVersus:
++			Shield: 35
++			Heroic: 23
++			Flak: 22
++			Plate: 22
++			None: 21
++			Scout: 19
++			Light: 18
++			Medium: 18
++			Heavy: 17
++			Superheavy: 17
++			Wood: 16
++			Steel: 15
++			Fighter: 15
++			Concrete: 14
++			Bomber: 14
++			Helicopter: 13
++			Spaceship: 12
++
++^Warhead_BulletChem_Light:
++	ValidTargets: Ground, Water, Air
++	ReloadDelay: 25
++	Range: 5120
++	TargetActorCenter: true
++	Warhead@BulletChem_Light: AreaDamage
++		ValidRelationships: Ally, Neutral, Enemy
++		FriendlyFireDamage: 50
++		FriendlyFireSpread: 50
++		ValidTargets: Ground, Water, Air
++		Spread: 55
++		Damage: 2000
++		Falloff: 100, 82, 61, 38, 0
++		Versus:
++			HAZMAT: 75
++			COMPOSITE: 52
++			BLAST: 70
++			REFLECTOR: 82
++			ARMOR: 70
++			Shield: 162
++			None: 191
++			Flak: 155
++			Scout: 146
++			Light: 126
++			Plate: 124
++			Wood: 103
++			Medium: 102
++			Heroic: 95
++			Fighter: 94
++			Heavy: 91
++			Superheavy: 80
++			Steel: 74
++			Bomber: 63
++			Concrete: 58
++			Helicopter: 53
++			Spaceship: 45
++		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
++		PhysicalStates:
++			Corrosion: 20
++		PercentageScale: 10000
++		PercentageSpread: 50
++		PercentageVersus:
++			Shield: 17
++			Heroic: 14
++			Flak: 13
++			Plate: 13
++			None: 12
++			Scout: 10
++			Light: 9
++			Medium: 9
++			Heavy: 8
++			Superheavy: 8
++			Wood: 7
++			Steel: 6
++			Fighter: 6
++			Concrete: 5
++			Bomber: 5
++			Helicopter: 4
++			Spaceship: 3
++
++^Warhead_BulletChem_Medium:
++	ValidTargets: Ground, Water, Air
++	ReloadDelay: 25
++	Range: 5120
++	TargetActorCenter: true
++	Warhead@BulletChem_Medium: AreaDamage
++		ValidRelationships: Ally, Neutral, Enemy
++		FriendlyFireDamage: 50
++		FriendlyFireSpread: 50
++		ValidTargets: Ground, Water, Air
++		Spread: 83
++		Damage: 2000
++		Falloff: 100, 82, 61, 38, 0
++		Versus:
++			HAZMAT: 75
++			COMPOSITE: 52
++			BLAST: 70
++			REFLECTOR: 82
++			ARMOR: 70
++			Shield: 182
++			None: 200
++			Flak: 144
++			Plate: 139
++			Scout: 127
++			Light: 119
++			Medium: 106
++			Heavy: 103
++			Wood: 93
++			Superheavy: 89
++			Heroic: 88
++			Steel: 75
++			Fighter: 71
++			Bomber: 69
++			Concrete: 63
++			Helicopter: 62
++			Spaceship: 50
++		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
++		PhysicalStates:
++			Corrosion: 33
++		PercentageScale: 10000
++		PercentageSpread: 50
++		PercentageVersus:
++			Shield: 25
++			Heroic: 18
++			Flak: 17
++			Plate: 17
++			None: 16
++			Scout: 14
++			Light: 13
++			Medium: 13
++			Heavy: 12
++			Superheavy: 12
++			Wood: 11
++			Steel: 10
++			Fighter: 10
++			Concrete: 9
++			Bomber: 9
++			Helicopter: 8
++			Spaceship: 7
+\ No newline at end of file
+diff --git a/tools/audit/audit_three_way_split.py b/tools/audit/audit_three_way_split.py
+index 3f1f0130f..5f1fa3f32 100644
+--- a/tools/audit/audit_three_way_split.py
++++ b/tools/audit/audit_three_way_split.py
+@@ -64,7 +64,10 @@ from intentional_composites import (  # noqa: E402
+ # 1190 -> 1178 the same day: a MEASUREMENT fix, not converted weapons. See FRIENDLY_FIRE below.
+ # Hydralisk was deliberately restored as an exact four-profile composite after
+ # its single-main fold caused a live 1.6x-2.38x ground-damage regression.
+-RAW_SPLIT_BASELINE = 340
++# 340 -> 339 on 2026-09-02: HydraSpit collapsed from four damage mains onto the new
++# ^Warhead_BulletChem_Light family (maintainer ruling; docs/design/W24_COLLAPSE_REVIEW.md
++# §8). Structural consolidation, which is the only reason this number may move.
++RAW_SPLIT_BASELINE = 339
+ SPLIT_BASELINE = 114
+ INTENTIONAL_COMPOSITES = reviewed_fingerprints()
+ REPORT = pathlib.Path(__file__).resolve().parents[2] / "docs/audit/latest/three_way_split.md"
+diff --git a/tools/audit/intentional_composites.py b/tools/audit/intentional_composites.py
+index eca130f0e..368bd99b8 100644
+--- a/tools/audit/intentional_composites.py
++++ b/tools/audit/intentional_composites.py
+@@ -307,8 +307,14 @@ DECISION_GROUPS = {
+           "PreservedFlat_TeslaWeapon")),
+     ),
+     "maintainer-approved role blend": (
+-		(("HydraSpit",),
+-		 ("ArrowWeapon", "LightChemicalWeapon", "LightMissile", "SmallArms")),
++		# ⛔ HydraSpit REMOVED 2026-09-02. It was quarantined here after PR #287's
++		# Chemical-Light fold ("Hydralisk was not previously this strong"), and the
++		# four-main stack was restored. The maintainer has now SUPERSEDED that:
++		# *"it's more important to reduce everything down to a single warhead and we can
++		# then make new warheads ... a new BulletChem that is like Bullet x Chemical"*.
++		# The weapon is one main on ^Warhead_BulletChem_Light and is no longer a raw
++		# stack, so leaving it here makes `--write` refuse. Provenance and the measured
++		# before/after: docs/design/W24_COLLAPSE_REVIEW.md §8.
+ 		(("SandmarineTuskTwin",),
+ 		 ("Bullet_Medium", "Concussion_Medium", "Grenade",
+ 		  "MissileAP_Medium", "MissileHE_Heavy")),
+@@ -537,22 +543,6 @@ CATEGORY_OVERLAP = {
+ }
+ 
+ ROLE_BLEND_DECISIONS = {
+-    "HydraSpit": {
+-        "component_purposes": {
+-            "ArrowWeapon": "original narrow projectile-impact armor contribution",
+-            "LightChemicalWeapon": "original corrosion-bearing chemical contribution",
+-            "LightMissile": "original missile armor contribution",
+-            "SmallArms": "original small-arms armor contribution",
+-        },
+-        "rationale": (
+-            "Restore the pre-PR-287 Hydralisk profile after the Chemical-Light fold "
+-            "raised real ground damage by roughly 1.6x to 2.38x and quadrupled "
+-            "the flat corrosion feed. Preserve the exact four-part behavior."
+-        ),
+-        "review_reference": (
+-            "Maintainer regression report: Hydralisk was not previously this strong"
+-        ),
+-    },
+     "SandmarineTuskTwin": {
+         "component_purposes": {
+             "Bullet_Medium": "close anti-infantry and light-target part of the twin salvo",
+diff --git a/tools/balance/gen_weapon_template.py b/tools/balance/gen_weapon_template.py
+index 59e165eec..8f9bf112e 100644
+--- a/tools/balance/gen_weapon_template.py
++++ b/tools/balance/gen_weapon_template.py
+@@ -2016,6 +2016,7 @@ FAMILY_DAMAGE_TYPES = {
+     "MissileThermobaric": "Prone75Percent, TriggerProne, FireDeath, Incendiary",
+     "CannonChem": "Prone75Percent, TriggerProne, TiberiumDeath",
+     "MissileChem":"Prone75Percent, TriggerProne, TiberiumDeath",
++    "BulletChem": "Prone75Percent, TriggerProne, TiberiumDeath",
+     # Storm is handled at its own call site (Prone100Percent + Tesla).
+ }
+ 
+@@ -2122,6 +2123,21 @@ BLEND_FAMILIES = {
+     "BulletThermobaric": (["Bullet", "Bullet", "Bullet", "Demolition", "Concussion", "Flame"],
+                           {"Temperature": _m(1 / 6)}, L3),
+     "BulletTesla": (["Bullet", "Tesla"],      None, L3),
++    # BulletChem = Bullet x Chemical (maintainer 2026-09-02, for the Hydralisk W24 collapse):
++    # *"a new BulletChem that is like Bullet x Chemical so it's more similar to what it was
++    # before but more damage against infantry and aircraft with a little bit damage against
++    # tanks from the chemical side"*. It is the BULLET delivery member of the element+delivery
++    # Chem set, alongside CannonChem and MissileChem, and it exists because HydraSpit stacked
++    # ^SmallArms (Bullet) + ^LightChemicalWeapon + ^LightMissile + ^ArrowWeapon: no single
++    # existing family reproduces a corrosive small-arms round, so collapsing it to plain
++    # Chemical moved every ground matchup (see docs/design/W24_COLLAPSE_REVIEW.md).
++    # ⚠ Corrosion follows the CHEM convention, not the Bullet-blend one. CannonChem and
++    # MissileChem ramp {Light 20, Medium 33, Heavy 50}; the Bullet blends use the flat
++    # per-parent average `_m(0.50)` = 50. The two AGREE at Heavy (Chemical 100 over 2
++    # parents), so the ramp is the same rule with a level curve, and being the third member
++    # of the Chem set outranks being the fifth member of the Bullet set.
++    "BulletChem":  (["Bullet", "Chemical"],
++                    {"Corrosion": {"Light": 20, "Medium": 33, "Heavy": 50}}, L3),
+     "Waveforce": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"],
+                   {"Temperature": _m(0.35), "Corrosion": _m(0.20)}, L3),
+     # PhotonCannon = the maintainer's 3-way — Waveforce 25% / CannonHE 25% / MissileAA 50% — and

@@ -81,6 +81,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "10"
@@ -98,6 +99,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "500000"
@@ -126,7 +128,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "156"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
+    },
+    "turreted": false
    },
    "ordos_advancedcarryall": {
     "armaments": [
@@ -205,6 +212,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Valued.Cost",
@@ -218,6 +226,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "200000"
@@ -253,7 +262,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "156"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
+    },
+    "turreted": false
    },
    "ordos_airmine": {
     "armaments": [
@@ -332,6 +346,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Valued.Cost",
@@ -345,6 +360,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
@@ -380,7 +396,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "35"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "2"
+    },
+    "turreted": false
    },
    "ordos_banshee": {
     "armaments": [
@@ -560,6 +581,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Valued.Cost",
@@ -573,6 +595,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "37500"
@@ -614,7 +637,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "165"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "33"
+    },
+    "turreted": false
    },
    "ordos_eyeinthesky": {
     "armaments": [
@@ -695,6 +723,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Valued.Cost",
@@ -708,6 +737,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "150000"
@@ -748,7 +778,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "180"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "12"
+    },
+    "turreted": false
    },
    "ordos_swarmerdrone": {
     "armaments": [
@@ -827,6 +862,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Valued.Cost",
@@ -840,6 +876,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "20000"
@@ -879,7 +916,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "260"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "17"
+    },
+    "turreted": false
    },
    "ordos_wraith": {
     "armaments": [
@@ -946,6 +988,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -963,6 +1006,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "375000"
@@ -1004,7 +1048,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "45"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "9"
+    },
+    "turreted": true
    }
   },
   "buildings": {
@@ -1081,6 +1130,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Valued.Cost",
@@ -1094,6 +1144,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.325
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Health.HP",
      "v": "125000"
@@ -1126,7 +1177,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "10000"
-    }
+    },
+    "turreted": true
    },
    "ordos_autogunturret": {
     "armaments": [
@@ -1182,6 +1234,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Valued.Cost",
@@ -1195,6 +1248,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.325
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#Health.HP",
      "v": "75000"
@@ -1227,13 +1281,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "7710"
-    }
+    },
+    "turreted": true
    },
    "ordos_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1250,6 +1306,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1282,13 +1339,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "ordos_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1301,6 +1360,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1332,13 +1392,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ordos_heavyfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1355,6 +1417,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1387,13 +1450,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "ordos_hightechfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -1410,6 +1475,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1442,13 +1508,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "ordos_ixresearchcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1465,6 +1533,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1497,13 +1566,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ordos_lightfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1520,6 +1591,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1552,13 +1624,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "ordos_outpost": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1575,6 +1649,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1607,13 +1682,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ordos_palace": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1630,6 +1707,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1664,13 +1742,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "ordos_refineryordos": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1687,6 +1767,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1719,13 +1800,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "ordos_repairpad": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1742,6 +1825,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1774,13 +1858,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "ordos_starport": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1801,6 +1887,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1834,13 +1921,15 @@
     "sight": {
      "src": "inherited",
      "v": "3c768"
-    }
+    },
+    "turreted": false
    },
    "ordos_storagesilo": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1853,6 +1942,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -1885,13 +1975,15 @@
     "sight": {
      "src": "inherited",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "ordos_windtrap": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1904,6 +1996,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1935,7 +2028,8 @@
     "sight": {
      "src": "inherited",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -2142,6 +2236,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Valued.Cost",
@@ -2155,6 +2250,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "15000"
@@ -2191,7 +2287,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Mobile.Speed",
      "v": "45"
-    }
+    },
+    "turreted": false
    },
    "ordos_chemicaltrooper": {
     "armaments": [
@@ -2255,6 +2352,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Valued.Cost",
@@ -2268,6 +2366,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -2304,7 +2403,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Mobile.Speed",
      "v": "45"
-    }
+    },
+    "turreted": false
    },
    "ordos_contaminator": {
     "armaments": [
@@ -2368,6 +2468,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Valued.Cost",
@@ -2381,6 +2482,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "75000"
@@ -2417,7 +2519,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "ordos_facedancer": {
     "armaments": [
@@ -2595,6 +2698,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2612,6 +2716,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "90000"
@@ -2648,7 +2753,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "ordos_leech": {
     "armaments": [
@@ -2678,6 +2784,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Valued.Cost",
@@ -2691,6 +2798,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "50000"
@@ -2731,7 +2839,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "ordos_lightinfantry": {
     "armaments": [
@@ -2882,6 +2991,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Valued.Cost",
@@ -2900,6 +3010,7 @@
      "trait": "FirepowerMultiplier@ordos_lightinfantry",
      "v": 0.67
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "28000"
@@ -2935,7 +3046,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Mobile.Speed",
      "v": "62"
-    }
+    },
+    "turreted": false
    },
    "ordos_mortartrooper": {
     "armaments": [
@@ -3079,6 +3191,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Valued.Cost",
@@ -3092,6 +3205,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.6
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -3124,7 +3238,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Mobile.Speed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "ordos_rockettrooper": {
     "armaments": [
@@ -3246,6 +3361,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Valued.Cost",
@@ -3259,6 +3375,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "12000"
@@ -3295,7 +3412,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Mobile.Speed",
      "v": "48"
-    }
+    },
+    "turreted": false
    },
    "ordos_saboteur": {
     "armaments": [
@@ -3318,6 +3436,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Valued.Cost",
@@ -3331,6 +3450,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "12000"
@@ -3366,11 +3486,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Mobile.Speed",
      "v": "100"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "ordos_promotion_banshees": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3383,6 +3505,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Banshees",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3392,9 +3515,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_chemicaltrooper": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3407,6 +3532,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Chemical Trooper",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3415,9 +3541,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_contaminator": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3430,6 +3558,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Contaminator",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3439,9 +3568,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_deviatortank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3454,6 +3585,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Deviator Tank",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3463,9 +3595,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_dustdrone": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3478,6 +3612,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Dust Drone",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3486,9 +3621,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_laboratorycrawler": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3501,6 +3638,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Laboratory Crawler",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3510,9 +3648,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_lasertank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3525,6 +3665,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Laser Tank",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3534,9 +3675,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_leecher": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3549,6 +3692,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Leecher",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3558,9 +3702,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_mortartroopers": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3573,6 +3719,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Mortar Troopers",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3581,9 +3728,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_python": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3596,6 +3745,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Python",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3605,9 +3755,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_stealthraider": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3620,6 +3772,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Stealth Raider",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3629,9 +3782,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_promotion_wraith": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3644,6 +3799,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Wraith",
     "prerequisites": [
      "~ordos_constructionyard",
@@ -3653,11 +3809,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "ordos_upgrade_antiairtrooper": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3674,6 +3832,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Anti Air Trooper Upgrade",
     "prerequisites": [
      "~ordos_outpost",
@@ -3681,9 +3840,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_upgrade_biologicalwarfare": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3700,6 +3861,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Biological Warfare",
     "prerequisites": [
      "~ordos_ixresearchcenter",
@@ -3707,9 +3869,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_upgrade_contraband": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3726,6 +3890,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Contraband",
     "prerequisites": [
      "~ordos_ixresearchcenter",
@@ -3733,9 +3898,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_upgrade_heavyautoguntank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3752,6 +3919,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Autogun Tank Upgrade",
     "prerequisites": [
      "~ordos_ixresearchcenter",
@@ -3760,9 +3928,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_upgrade_heavycombattank": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3779,6 +3949,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Combat Tank Upgrade",
     "prerequisites": [
      "~ordos_outpost",
@@ -3786,9 +3957,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_upgrade_heavycombattankrockets": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3805,6 +3978,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Combat Tank Rockets Upgrade",
     "prerequisites": [
      "~ordos_outpost",
@@ -3814,9 +3988,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_upgrade_hoverdrive": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3833,6 +4009,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Hover Drive",
     "prerequisites": [
      "~ordos_ixresearchcenter",
@@ -3840,9 +4017,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_upgrade_lasercartridges": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3859,6 +4038,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Laser Cartridges",
     "prerequisites": [
      "~ordos_outpost",
@@ -3866,9 +4046,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_upgrade_lightfactory": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/upgrades.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -3889,6 +4071,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Light Factory Upgrade",
     "prerequisites": [
      "~light_factory",
@@ -3897,9 +4080,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_upgrade_rapidfirearmorpiercingbelts": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3916,6 +4101,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Rapid Fire Armor-Piercing Belts",
     "prerequisites": [
      "~ordos_ixresearchcenter",
@@ -3923,9 +4109,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "ordos_upgrade_shields": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3942,6 +4130,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ordos Shields",
     "prerequisites": [
      "~ordos_ixresearchcenter",
@@ -3949,7 +4138,8 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -4016,6 +4206,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -4029,6 +4220,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "67500"
@@ -4075,7 +4267,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "21"
-    }
+    },
+    "turreted": true
    },
    "ordos_cobratank": {
     "armaments": [
@@ -4213,6 +4406,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -4226,6 +4420,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "45000"
@@ -4272,7 +4467,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": true
    },
    "ordos_combatautoguntank": {
     "armaments": [
@@ -4352,6 +4548,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -4370,6 +4567,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.25
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "95000"
@@ -4416,7 +4614,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": true
    },
    "ordos_combattank": {
     "armaments": [
@@ -4450,6 +4649,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -4463,6 +4663,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "85000"
@@ -4508,7 +4709,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "17"
-    }
+    },
+    "turreted": true
    },
    "ordos_deviatorartillery": {
     "armaments": [
@@ -4576,6 +4778,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -4589,6 +4792,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "55000"
@@ -4634,7 +4838,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "22"
-    }
+    },
+    "turreted": false
    },
    "ordos_deviatortank": {
     "armaments": [
@@ -4690,6 +4895,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -4703,6 +4909,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "85000"
@@ -4749,7 +4956,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "23"
-    }
+    },
+    "turreted": true
    },
    "ordos_dustdrone": {
     "armaments": [
@@ -4814,6 +5022,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -4827,6 +5036,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "32500"
@@ -4872,7 +5082,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "58"
-    }
+    },
+    "turreted": false
    },
    "ordos_heavyautoguntank": {
     "armaments": [
@@ -4960,6 +5171,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -4978,6 +5190,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.4
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "160000"
@@ -5023,7 +5236,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "ordos_heavycombattank": {
     "armaments": [
@@ -5087,6 +5301,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -5100,6 +5315,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "115000"
@@ -5145,7 +5361,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "ordos_laboratorycrawler": {
     "armaments": [
@@ -5325,6 +5542,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -5338,6 +5556,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "137500"
@@ -5384,7 +5603,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "42"
-    }
+    },
+    "turreted": false
    },
    "ordos_lasertank": {
     "armaments": [
@@ -5464,6 +5684,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -5477,6 +5698,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "105000"
@@ -5523,13 +5745,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "21"
-    }
+    },
+    "turreted": true
    },
    "ordos_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -5547,6 +5771,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -5588,7 +5813,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "ordos_pythontank": {
     "armaments": [
@@ -5724,6 +5950,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -5737,6 +5964,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
@@ -5783,7 +6011,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "8"
-    }
+    },
+    "turreted": true
    },
    "ordos_raider": {
     "armaments": [
@@ -5807,14 +6036,12 @@
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@damage",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
+       "HMGo"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
       ],
-      "weapon": "HMGo",
+      "weapon": "ordos_raider_hmg",
       "weapon_class_source": "template"
      },
      {
@@ -5877,6 +6104,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -5890,6 +6118,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -5935,13 +6164,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "72"
-    }
+    },
+    "turreted": false
    },
    "ordos_spiceharvester": {
     "armor": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -5959,6 +6190,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "200000"
@@ -6004,7 +6236,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
-    }
+    },
+    "turreted": false
    },
    "ordos_stealthraider": {
     "armaments": [
@@ -6093,6 +6326,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -6106,6 +6340,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "60000"
@@ -6151,7 +6386,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "72"
-    }
+    },
+    "turreted": false
    },
    "ordos_tankdestroyer": {
     "armaments": [
@@ -6210,6 +6446,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Valued.Cost",
@@ -6223,6 +6460,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
      "v": "80000"
@@ -6268,7 +6506,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "36"
-    }
+    },
+    "turreted": false
    }
   }
  }

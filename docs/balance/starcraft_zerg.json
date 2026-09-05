@@ -84,6 +84,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -101,6 +102,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "600000"
@@ -132,7 +134,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "30"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "6"
+    },
+    "turreted": false
    },
    "zerg_broodweaver": {
     "armaments": [
@@ -180,6 +187,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
@@ -193,6 +201,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
@@ -224,7 +233,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "45"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "9"
+    },
+    "turreted": false
    },
    "zerg_corruptor": {
     "armaments": [
@@ -260,6 +274,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
@@ -273,6 +288,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -304,7 +320,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "100"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
+    },
+    "turreted": false
    },
    "zerg_devourer": {
     "armaments": [
@@ -367,6 +388,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
@@ -380,6 +402,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "250000"
@@ -410,7 +433,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "90"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "18"
+    },
+    "turreted": false
    },
    "zerg_dreadshroud": {
     "armaments": [
@@ -500,6 +528,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
@@ -513,6 +542,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "60000"
@@ -544,7 +574,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "120"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
+    },
+    "turreted": false
    },
    "zerg_gorekraken": {
     "armaments": [
@@ -580,6 +615,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
@@ -593,6 +629,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "350000"
@@ -624,7 +661,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "70"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "14"
+    },
+    "turreted": false
    },
    "zerg_guardian": {
     "armaments": [
@@ -685,6 +727,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
@@ -698,6 +741,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "150000"
@@ -728,7 +772,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "50"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "10"
+    },
+    "turreted": false
    },
    "zerg_mutalisk": {
     "armaments": [
@@ -795,6 +844,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
@@ -813,6 +863,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "40000"
@@ -843,13 +894,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "160"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "32"
+    },
+    "turreted": false
    },
    "zerg_overlord": {
     "armor": {
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
@@ -863,6 +920,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
@@ -893,7 +951,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "30"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "6"
+    },
+    "turreted": false
    },
    "zerg_queen": {
     "armaments": [
@@ -943,6 +1006,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
@@ -956,6 +1020,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
@@ -986,7 +1051,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "100"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
+    },
+    "turreted": false
    },
    "zerg_scourge": {
     "armaments": [
@@ -1021,6 +1091,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
@@ -1034,6 +1105,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
@@ -1064,7 +1136,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "200"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "13"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -1073,6 +1150,7 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1089,6 +1167,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -1121,13 +1200,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "zerg_evolutionchamber": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "625"
@@ -1144,6 +1225,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -1175,13 +1257,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "zerg_extractor": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1198,6 +1282,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1229,9 +1314,11 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "zerg_greaterspire": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1248,6 +1335,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Greater Spire",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1256,13 +1344,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_hatchery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1279,6 +1369,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1310,9 +1401,11 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "zerg_hive": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
@@ -1325,6 +1418,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Hive",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1333,13 +1427,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_hydraliskden": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1356,6 +1452,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "150000"
@@ -1388,13 +1485,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "zerg_infestedcommandcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -1411,6 +1510,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -1443,9 +1543,11 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "zerg_lair": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
@@ -1458,6 +1560,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Lair",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1466,13 +1569,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_nyduscanal": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
@@ -1485,6 +1590,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "25000"
@@ -1517,13 +1623,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "7c0"
-    }
+    },
+    "turreted": false
    },
    "zerg_overmind": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1544,6 +1652,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1577,13 +1686,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "zerg_queensnest": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1600,6 +1711,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "150000"
@@ -1632,13 +1744,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "zerg_spawningpool": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "375"
@@ -1655,6 +1769,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "125000"
@@ -1686,13 +1801,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "zerg_spire": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1709,6 +1826,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "150000"
@@ -1741,9 +1859,11 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "zerg_sporecolony_defense": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
@@ -1756,6 +1876,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Spore Colony",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1763,9 +1884,11 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_sunkencolony": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
@@ -1778,6 +1901,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Sunken Colony",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1785,13 +1909,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_ultraliskcavern": {
     "armor": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1808,6 +1934,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "200000"
@@ -1840,9 +1967,11 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "zerg_vespenegascollector": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
@@ -1855,6 +1984,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Vespene Gas Collector",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1862,7 +1992,8 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    }
   },
   "defenses": {
@@ -1977,6 +2108,7 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": "AttackOmni",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Valued.Cost",
@@ -1990,6 +2122,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Health.HP",
      "v": "80000"
@@ -2021,7 +2154,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "zerg_creepcolony_defense": {
     "armaments": [
@@ -2134,6 +2268,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": "AttackOmni",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2146,6 +2281,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "80000"
@@ -2177,7 +2313,8 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "zerg_sporecolony": {
     "armaments": [
@@ -2290,6 +2427,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": "AttackOmni",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Valued.Cost",
@@ -2303,6 +2441,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "80000"
@@ -2334,7 +2473,8 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "zerg_sunkencolony_defense": {
     "armaments": [
@@ -2447,6 +2587,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": "AttackOmni",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Valued.Cost",
@@ -2459,6 +2600,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "80000"
@@ -2490,7 +2632,8 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -2528,6 +2671,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
@@ -2541,6 +2685,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
      "v": "80000"
@@ -2579,7 +2724,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "zerg_hydralisk": {
     "armaments": [
@@ -2739,6 +2885,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
@@ -2757,6 +2904,7 @@
      "trait": "FirepowerMultiplier",
      "v": 0.99
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
      "v": "80000"
@@ -2795,7 +2943,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "zerg_infestedterranbomber": {
     "armaments": [
@@ -2817,6 +2966,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
@@ -2830,6 +2980,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
      "v": "60000"
@@ -2861,7 +3012,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
      "v": "90"
-    }
+    },
+    "turreted": false
    },
    "zerg_kerrigan": {
     "armaments": [
@@ -2897,6 +3049,7 @@
      "src": "inherited",
      "v": "Heroic"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -2914,6 +3067,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
      "v": "300000"
@@ -2944,7 +3098,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "zerg_shriek": {
     "armaments": [
@@ -2980,6 +3135,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
@@ -2993,6 +3149,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
      "v": "14000"
@@ -3024,7 +3181,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Aircraft.Speed",
      "v": "195"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Aircraft.TurnSpeed",
+     "v": "39"
+    },
+    "turreted": false
    },
    "zerg_spithid": {
     "armaments": [
@@ -3132,6 +3294,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
@@ -3145,6 +3308,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -3180,7 +3344,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
      "v": "110"
-    }
+    },
+    "turreted": false
    },
    "zerg_swarmling": {
     "armaments": [
@@ -3278,6 +3443,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
@@ -3291,6 +3457,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -3323,7 +3490,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Aircraft.Speed",
      "v": "80"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Aircraft.TurnSpeed",
+     "v": "16"
+    },
+    "turreted": false
    },
    "zerg_talon": {
     "armaments": [
@@ -3359,6 +3531,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
@@ -3372,6 +3545,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
      "v": "32000"
@@ -3403,7 +3577,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
      "v": "160"
-    }
+    },
+    "turreted": false
    },
    "zerg_ultralisk": {
     "armaments": [
@@ -3439,6 +3614,7 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
@@ -3452,6 +3628,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
      "v": "400000"
@@ -3486,7 +3663,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    },
    "zerg_zergling": {
     "armaments": [
@@ -3522,6 +3700,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
@@ -3540,6 +3719,7 @@
      "trait": "FirepowerMultiplier@zergling",
      "v": 1.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
      "v": "11000"
@@ -3571,11 +3751,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
      "v": "110"
-    }
+    },
+    "turreted": false
    }
   },
   "promotions": {
    "zerg_promotion_behemoth": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3588,6 +3770,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Behemoth",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3597,9 +3780,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_broodweaver": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3612,6 +3797,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Broodweaver",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3620,9 +3806,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_corruptor": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3635,6 +3823,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Corruptor",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3644,9 +3833,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_dreadshroud": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3659,6 +3850,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Dreadshroud",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3668,9 +3860,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_gorekraken": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3683,6 +3877,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Gorekraken",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3692,9 +3887,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_goremaw": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3707,6 +3904,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Goremaw",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3716,9 +3914,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_hermit": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3731,6 +3931,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Hermit",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3740,9 +3941,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_shriek": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3755,6 +3958,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Shriek",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3764,9 +3968,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_spithid": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3779,6 +3985,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Spithid",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3788,9 +3995,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_sporemaw": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3803,6 +4012,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Sporemaw",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3811,9 +4021,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_swarmling": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3826,6 +4038,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Swarmling",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3835,9 +4048,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_promotion_talon": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3850,6 +4065,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Talon",
     "prerequisites": [
      "~zerg_hatchery",
@@ -3858,11 +4074,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "zerg_upgrade_adrenalglands": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3879,6 +4097,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Adrenal Glands",
     "prerequisites": [
      "~zerg_evolutionchamber",
@@ -3886,9 +4105,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_carapacelevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3905,6 +4126,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Carapace Level 1",
     "prerequisites": [
      "~zerg_evolutionchamber",
@@ -3912,9 +4134,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_carapacelevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3931,6 +4155,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Carapace Level 2",
     "prerequisites": [
      "zerg_evolutionchamber",
@@ -3940,9 +4165,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_flyerattackslevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3959,6 +4186,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Flyer Attacks Level 1",
     "prerequisites": [
      "~zerg_spire",
@@ -3966,9 +4194,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_flyerattackslevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3985,6 +4215,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Flyer Attacks Level 2",
     "prerequisites": [
      "zerg_spire",
@@ -3994,9 +4225,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_flyercarapacelevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4013,6 +4246,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Flyer Carapace Level 1",
     "prerequisites": [
      "~zerg_spire",
@@ -4020,9 +4254,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_flyercarapacelevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4039,6 +4275,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Flyer Carapace Level 2",
     "prerequisites": [
      "zerg_spire",
@@ -4048,9 +4285,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_groovedspines": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4067,6 +4306,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Grooved Spines",
     "prerequisites": [
      "~zerg_hydraliskden",
@@ -4074,9 +4314,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_meleeattackslevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4093,6 +4335,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Melee Attacks Level 1",
     "prerequisites": [
      "~zerg_evolutionchamber",
@@ -4100,9 +4343,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_meleeattackslevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4119,6 +4364,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Melee Attacks Level 2",
     "prerequisites": [
      "zerg_evolutionchamber",
@@ -4128,9 +4374,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_metabolicboost": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4147,6 +4395,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Metabolic Boost",
     "prerequisites": [
      "~zerg_spawningpool",
@@ -4155,9 +4404,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_missileattackslevel1": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4174,6 +4425,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Missile Attacks Level 1",
     "prerequisites": [
      "~zerg_evolutionchamber",
@@ -4181,9 +4433,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_missileattackslevel2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4200,6 +4454,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Missile Attacks Level 2",
     "prerequisites": [
      "zerg_evolutionchamber",
@@ -4209,9 +4464,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "zerg_upgrade_pneumatizedcarapace": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4228,6 +4485,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Pneumatized Carapace",
     "prerequisites": [
      "~zerg_hatchery",
@@ -4235,7 +4493,8 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -4271,6 +4530,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -4288,6 +4548,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "45000"
@@ -4330,7 +4591,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "zerg_goremaw": {
     "armaments": [
@@ -4366,6 +4628,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Valued.Cost",
@@ -4379,6 +4642,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
@@ -4415,13 +4679,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "zerg_hatcherydrone": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -4439,6 +4705,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -4477,7 +4744,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "zerg_hermit": {
     "armaments": [
@@ -4561,6 +4829,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -4583,6 +4852,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.4
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Health.HP",
      "v": "375000"
@@ -4618,7 +4888,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "zerg_lurker": {
     "armaments": [
@@ -4659,6 +4930,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Valued.Cost",
@@ -4672,6 +4944,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -4708,7 +4981,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    },
    "zerg_sporemaw": {
     "armaments": [
@@ -4772,6 +5046,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Valued.Cost",
@@ -4785,6 +5060,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
@@ -4820,7 +5096,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    }
   }
  }

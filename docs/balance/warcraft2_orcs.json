@@ -69,6 +69,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Valued.Cost",
@@ -82,6 +83,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Health.HP",
      "v": "150000"
@@ -113,13 +115,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "125"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
+    },
+    "turreted": false
    },
    "wc2_orcs_goblinzeppelin": {
     "armor": {
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -133,6 +141,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "25000"
@@ -168,7 +177,12 @@
     "speed_air": {
      "src": "inherited",
      "v": "165"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "33"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -177,6 +191,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -193,6 +208,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -225,13 +241,15 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -248,6 +266,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -280,13 +299,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_blacksmith": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -303,6 +324,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -335,9 +357,11 @@
     "sight": {
      "src": "inherited",
      "v": "5c0"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_cannontower_plug": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
@@ -350,6 +374,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Upgraded Cannon Tower",
     "prerequisites": [
      "~wc2_orcs_greathall",
@@ -358,13 +383,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_dragonroost": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "375"
@@ -381,6 +408,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -413,9 +441,11 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_fortress": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
@@ -428,6 +458,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Fortress",
     "prerequisites": [
      "~wc2_orcs_greathall",
@@ -438,13 +469,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_golbinalchemist": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "500"
@@ -461,6 +494,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -493,13 +527,15 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_greathall": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -516,6 +552,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -547,9 +584,11 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_guardtower_plug": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
@@ -562,6 +601,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Upgraded Guard Tower",
     "prerequisites": [
      "~wc2_orcs_greathall",
@@ -570,13 +610,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_ogremound": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -593,6 +635,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -625,13 +668,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_orcgoldmine": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -652,6 +697,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -685,13 +731,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_orcgoldmine_bot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -712,6 +760,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -746,13 +795,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_pigfarm": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
@@ -765,6 +816,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Health.HP",
      "v": "250000"
@@ -796,9 +848,11 @@
     "sight": {
      "src": "inherited",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_stronghold": {
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
@@ -811,6 +865,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Stronghold",
     "prerequisites": [
      "~wc2_orcs_greathall",
@@ -819,13 +874,15 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_templeofthedamned": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -842,6 +899,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -875,13 +933,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_trolllumbermill": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -898,6 +958,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -930,7 +991,8 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    }
   },
   "defenses": {
@@ -1021,6 +1083,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Valued.Cost",
@@ -1034,6 +1097,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "100000"
@@ -1066,7 +1130,8 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": true
    },
    "wc2_orcs_guardtower": {
     "armaments": [
@@ -1155,6 +1220,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Valued.Cost",
@@ -1168,6 +1234,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "100000"
@@ -1200,7 +1267,8 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": true
    },
    "wc2_orcs_orcwatchtower": {
     "armaments": [
@@ -1289,6 +1357,7 @@
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Valued.Cost",
@@ -1302,6 +1371,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Health.HP",
      "v": "100000"
@@ -1334,13 +1404,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "5000"
-    }
+    },
+    "turreted": true
    },
    "wc2_orcs_wall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Valued.Cost",
@@ -1354,6 +1426,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Health.HP",
      "v": "25000"
@@ -1365,7 +1438,8 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    }
   },
   "infantry": {
@@ -1659,6 +1733,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -1672,6 +1747,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "50000"
@@ -1703,7 +1779,8 @@
     "speed": {
      "src": "inherited",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_grunt": {
     "armaments": [
@@ -1739,6 +1816,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
@@ -1757,6 +1835,7 @@
      "trait": "FirepowerMultiplier@WC2AxeUpg",
      "v": 1.3
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
      "v": "65000"
@@ -1789,7 +1868,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.Speed",
      "v": "65"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_kodobeast": {
     "armaments": [
@@ -1919,6 +1999,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
@@ -1932,6 +2013,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
      "v": "125000"
@@ -1975,7 +2057,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "25"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_ogre": {
     "armaments": [
@@ -2081,6 +2164,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
@@ -2094,6 +2178,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
      "v": "200000"
@@ -2130,7 +2215,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "68"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_trollaxethrower": {
     "armaments": [
@@ -2260,6 +2346,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
@@ -2273,6 +2360,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
      "v": "30000"
@@ -2309,7 +2397,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_trollberserker": {
     "armaments": [
@@ -2439,6 +2528,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -2452,6 +2542,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "30000"
@@ -2489,7 +2580,8 @@
     "speed": {
      "src": "inherited",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_trollheadhunter": {
     "armaments": [
@@ -2675,6 +2767,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
@@ -2688,6 +2781,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -2723,7 +2817,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.Speed",
      "v": "75"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_warcraft3grunt": {
     "armaments": [
@@ -2759,6 +2854,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
@@ -2777,6 +2873,7 @@
      "trait": "FirepowerMultiplier@WC2AxeUpg",
      "v": 1.3
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
      "v": "120000"
@@ -2808,11 +2905,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.Speed",
      "v": "70"
-    }
+    },
+    "turreted": false
    }
   },
   "upgrades": {
    "wc2_orcs_upgrade_armorstrength": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2829,6 +2928,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Armor Strength",
     "prerequisites": [
      "~!wc2_orcs_upgrade_armorstrength",
@@ -2836,9 +2936,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_armorstrengthii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2855,6 +2957,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Armor Strength II",
     "prerequisites": [
      "!wc2_orcs_upgrade_armorstrengthii",
@@ -2864,9 +2967,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_axestrength": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2883,6 +2988,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Axe Strength",
     "prerequisites": [
      "~!wc2_orcs_upgrade_axestrength",
@@ -2890,9 +2996,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_axestrengthii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2909,6 +3017,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Axe Strength II",
     "prerequisites": [
      "!wc2_orcs_upgrade_axestrengthii",
@@ -2918,9 +3027,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_berserker": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2937,6 +3048,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Berserker",
     "prerequisites": [
      "~!wc2_orcs_upgrade_berserker",
@@ -2944,9 +3056,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_berserkerlightaxes": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2963,6 +3077,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Berserker Light Axes",
     "prerequisites": [
      "~!wc2_orcs_upgrade_berserkerlightaxes",
@@ -2972,9 +3087,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_berserkerregeneration": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2991,6 +3108,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Berserker Regeneration",
     "prerequisites": [
      "~!wc2_orcs_upgrade_berserkerregeneration",
@@ -3000,9 +3118,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_berserkerscouting": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3019,6 +3139,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Berserker Scouting",
     "prerequisites": [
      "~!wc2_orcs_upgrade_berserkerscouting",
@@ -3027,9 +3148,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_bestfarm": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3046,6 +3169,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Best Farm",
     "prerequisites": [
      "~wc2_orcs_upgrade_betterfarm",
@@ -3054,9 +3178,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_betterfarm": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3073,6 +3199,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Better Farm",
     "prerequisites": [
      "~!wc2_orcs_upgrade_betterfarm",
@@ -3081,9 +3208,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_bloodlust": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3100,6 +3229,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Bloodlust",
     "prerequisites": [
      "~wc2_orcs_upgrade_ogremage",
@@ -3109,9 +3239,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_cannondamage": {
+    "attack_trait": null,
     "build_limit": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -3128,6 +3260,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Cannon Damage",
     "prerequisites": [
      "~!wc2_orcs_upgrade_cannondamage",
@@ -3135,9 +3268,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_cannondamageii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3154,6 +3289,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Cannon Damage II",
     "prerequisites": [
      "!wc2_orcs_upgrade_cannondamageii",
@@ -3163,9 +3299,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_catapultstrength": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3182,6 +3320,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Catapult Strength",
     "prerequisites": [
      "~!wc2_orcs_upgrade_catapultstrength",
@@ -3189,9 +3328,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_catapultstrengthii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3208,6 +3349,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Catapult Strength II",
     "prerequisites": [
      "!wc2_orcs_upgrade_catapultstrengthii",
@@ -3217,9 +3359,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_deathanddecay": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3236,6 +3380,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Death and Decay",
     "prerequisites": [
      "~!wc2_orcs_upgrade_deathanddecay",
@@ -3244,9 +3389,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_haste": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3263,6 +3410,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Haste",
     "prerequisites": [
      "~!wc2_orcs_upgrade_haste",
@@ -3271,9 +3419,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_ogremage": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3290,6 +3440,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ogre-Mage",
     "prerequisites": [
      "~!wc2_orcs_upgrade_ogremage",
@@ -3298,9 +3449,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_raisedead": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3317,6 +3470,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Raise Dead",
     "prerequisites": [
      "~!wc2_orcs_upgrade_raisedead",
@@ -3325,9 +3479,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_runes": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3344,6 +3500,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Runes",
     "prerequisites": [
      "~wc2_orcs_upgrade_ogremage",
@@ -3353,9 +3510,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_throwingaxestrength": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3372,6 +3531,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Throwing Axe Strength",
     "prerequisites": [
      "~!wc2_orcs_upgrade_throwingaxestrength",
@@ -3379,9 +3539,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_throwingaxestrengthii": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3398,6 +3560,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Throwing Axe Strength II",
     "prerequisites": [
      "!wc2_orcs_upgrade_throwingaxestrengthii",
@@ -3407,9 +3570,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_trollheadhunter": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3426,6 +3591,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Troll Headhunter",
     "prerequisites": [
      "~!wc2_orcs_upgrade_trollheadhunter",
@@ -3435,9 +3601,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "wc2_orcs_upgrade_warcraft3grunt": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3454,6 +3622,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Warcraft 3 Grunt",
     "prerequisites": [
      "~!wc2_orcs_upgrade_warcraft3grunt",
@@ -3462,7 +3631,8 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -3538,6 +3708,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Valued.Cost",
@@ -3551,6 +3722,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -3588,7 +3760,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_goblinsappers": {
     "armaments": [
@@ -3638,6 +3811,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -3651,6 +3825,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "40000"
@@ -3682,13 +3857,15 @@
     "speed": {
      "src": "inherited",
      "v": "80"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_mobileconstructionvehicleorc": {
     "armor": {
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -3706,6 +3883,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -3745,7 +3923,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_ogremage": {
     "armaments": [
@@ -3851,6 +4030,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "inherited",
@@ -3864,6 +4044,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -3901,7 +4082,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "34"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_peon": {
     "armaments": [
@@ -3935,6 +4117,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -3952,6 +4135,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "40000"
@@ -3988,7 +4172,8 @@
     "speed": {
      "src": "inherited",
      "v": "80"
-    }
+    },
+    "turreted": false
    },
    "wc2_orcs_siegeengine": {
     "armaments": [
@@ -4133,6 +4318,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontalCharged",
     "buildable": true,
     "charge_up": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#AttackFrontalCharged",
@@ -4151,6 +4337,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
@@ -4188,7 +4375,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
-    }
+    },
+    "turreted": false
    }
   }
  }

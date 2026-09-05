@@ -65,6 +65,28 @@ gated by their respective tech prerequisites; broader composition coverage is
 still a follow-up. Explicit unit requests continue to bypass composition
 shares.
 
+## ⛔ Known blind spot: O3 dead conditions are counted MOD-GLOBALLY (2026-09-01)
+
+`audit_orphans.py` O3 reports conditions granted-never-consumed and consumed-never-granted across
+the **whole mod**. Conditions in OpenRA are **per-actor**, so a grant on actor A satisfying nothing
+for a consumer on actor B is dead wiring O3 cannot see. Its own docstring says the check is
+approximate (`audit_orphans.py:10-11`); this is the concrete shape of that approximation.
+
+**A live instance, found 2026-09-01 by reading yaml rather than by any audit:** the bot
+passive-income ladder on `^AIConyardCash` (`defaults.yaml:6712`) gates its four lowest rungs on
+`normalbot`, which `^AIDifficulties` never grants — the mod's only `normalbot` grant is on a Dark
+Reign building. `medium` bots therefore get **zero** insurance income while `easy` gets 3 rungs and
+`hard` gets 5. O3 stayed silent because `normalbot` is both granted and consumed *somewhere*.
+Details and the fix: [`../design/ROADMAP.md`](../design/ROADMAP.md) "medium BOTS GET ZERO INSURANCE
+INCOME"; the count is pinned as `bot_insurance_unreachable_difficulties` in `doc_claims.yaml`.
+
+⭐ **Closed for this ladder, still open in general.** `audit_bot_insurance.py` (new, in
+`run_all.sh`) evaluates each rung's `RequiresCondition` per player kind rather than counting
+condition names, and enforces two laws: rung count may never decrease as difficulty rises, and
+no difficulty may reach zero rungs. The committed `DynamicBotInsurance` replacement instead
+checks that every loaded bot type is covered by its `Difficulties` list.
+The general per-actor reachability audit is still queued.
+
 ## Counts by bug class
 
 | class | what | count | report |
@@ -89,6 +111,7 @@ shares.
 | E | elite / rank wiring | 197 missing elite armaments · 21 ungated ELITE blocks · 52 decoration issues | `missing_elite.md`, `elite_gating.md`, `rank_decoration.md` |
 | Q | build order | prerequisite-order violations across 841 buildables | `buildable_order.md` |
 | D | duplicate keys | **88 D1 dropped inherits** · 439 D2 merged duplicates | `duplicate_keys.md` |
+| C | infantry class bands (FORMULA_V2 §6b) | 29 of 256 units outside their own class's band · 6 with two class templates | `infantry_class_bands.md` (advisory) |
 
 ## Green — and must stay green
 
@@ -99,14 +122,41 @@ promotion wiring clean · `MinRange` clean · duplicate uniquely-resolved traits
 armor-plating invariants clean · plating exclusivity clean · physical-state warheads PASS ·
 cross-document consistency 73/0 · display text 0 active findings ·
 **documentation structure 0** (`doc_health.md`, D1–D8) · **balance-ledger drift 0** ·
-**doc claims 19 of 19 match** · **generator sync drift 0** (136 shared templates, no-op
-regenerate).
+**generator sync drift 0** (**139** shared templates, no-op regenerate — 139, not 136, since the
+2026-08-30 heaviness-bell switch regenerated the set).
+
+⚠ **`doc claims` is NO LONGER 19 of 19.** It read 11 drifted on 2026-08-30; **6 were resolved and
+5 remain**, deliberately.
+
+✅ **Resolved.** `ledgers_drifted` (32 → **0**) by a pipeline re-extract — the ledger was behind
+the yaml that actually ships, including real values (`missile_tank` hp 47500→50000, speed 95→64).
+`signed_off_class_anchors` / `class_anchors_signed_off` (0 → **8**, maintainer-ordered, verified
+against `0ff427712`). `multi_main_fired_weapons` (494 → **472** — a burn-DOWN, so lower is
+progress). `warhead_family_reach` (1245 → **1391** — a burn-UP, so higher is progress).
+`percentage_denominator_unset` (0 → **11**) — that pin was a TRIPWIRE for "W18 shipped" and it had
+tripped unnoticed; W18 is an ancestor of HEAD.
+
+⛔ **Left red ON PURPOSE — 5 pins, because re-pinning them is a judgement, not a measurement:**
+
+| pin | pinned | measures | why it is not just re-pinned |
+|---|--:|--:|---|
+| `shield_versus_mean` | 189.088 | 174.802 | feeds `shield_hp_factor`, which is a PRICING input |
+| `shield_hp_factor` | 0.528855 | 0.572075 | derived from the above — what one shield point is worth as HP |
+| `shield_damage_share` | 0.01432 | 0.0156 | roster damage landing on the Shield row |
+| `physical_state_fired_weapons` | 460 | 509 | scope of the meter layer; direction of good unrecorded |
+| `meters_filling_before_death` | 137 | 239 | a dilution symptom — rising may be the DEFECT, not progress |
+
+⭐ **Blanket re-pinning is how a guard gets switched off.** The three `shield_*` numbers move
+prices, and `meters_filling_before_death` may be measuring a regression — a pin whose direction of
+good is unrecorded must not be quietly dragged to match the tree. Each needs the owner's call, and
+the claim updated with every document under its `docs:` list in the same commit.
 
 ## Red right now
 
 | check | state | what to do |
 |---|---|---|
 | **level ladder** | **WARN — 9 broken, at ratchet 9** (7 inverted, 2 flat) | no longer failing: `a9f31258` fixed `Demolition`. Still blocked on a maintainer ruling. Full measured table + the diagnosis: [`../design/ROADMAP.md`](../design/ROADMAP.md) "BROKEN LADDERS". These are balance numbers: pipeline only, and **never raise the ratchet**. |
+| **bot insurance** | **PASS — every loaded bot type is insured or deliberately excluded** | `audit_bot_insurance.py` validates the committed `DynamicBotInsurance` coverage list. |
 | duplicate keys D1 | 88 dropped inherits | each one silently drops a template — same family as the `Parent type X was already inherited` boot crash |
 | warhead-split ratchet | at baseline | pre-existing W24 debt, not a regression; lower the baseline as W24 lands |
 

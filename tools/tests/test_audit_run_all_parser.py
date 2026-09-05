@@ -48,11 +48,53 @@ class ParsesTheRealShellScript(unittest.TestCase):
                    if not (ROOT / "tools" / "audit" / f"audit_{a}.py").is_file()]
         self.assertEqual(missing, [])
 
+    # Maintainer ruling 2026-08-24: the periodic.json scans must not gate the per-commit run.
+    SCHEDULED = ["code_duplication", "error_handling", "recent_changes",
+                 "security", "test_coverage"]
+
+    # Audits that are advisory for a DIFFERENT reason than the scheduled cadence: they are red
+    # on a real, known finding whose fix needs the boot gate, so they report while the suite
+    # stays green. Each one must carry a comment in run_all.sh saying what has to land before
+    # it moves into the blocking loop — an entry here is a promise, not a parking space.
+    PENDING_FIX = {
+        # 9 support powers whose `Prerequisites:` header line is missing (CLAUDE.md 8b).
+        # Blocking once S1 reads clean.
+        "support_powers",
+        # Maintainer-ruled engine limits (2026-08-29). Red on a real roster gap;
+        # E2 needs a paired reload/damage change through the pipeline, not a sweep.
+        "engine_constraints",
+        # Findings are design decisions (re-class, gate, or differentiate), and the
+        # count rises as classification proceeds. Never a per-commit gate.
+        "class_redundancy",
+        # Real yaml defects (double-firing IFV guards, dead armaments) whose fix
+        # needs the boot gate. Blocking once F1/F3/F4 read clean.
+        "ifv_conditions",
+        # Intent-vs-implementation report. Advisory PERMANENTLY — a mismatch may be
+        # wrong implementation OR wrong intent, and only a human decides which.
+        "counter_matrix",
+        # FORMULA_V2 §6b's range bands: a unit outside its own class's band is either
+        # re-classed or re-ranged, and re-ranging is a priced change needing the boot
+        # gate. Blocking once the four banded classes read clean.
+        "infantry_class_bands",
+    }
+
     def test_the_advisory_list_is_the_scheduled_family(self):
-        # Maintainer ruling 2026-08-24: the periodic.json scans must not gate the per-commit run.
-        self.assertEqual(sorted(self.advisory),
-                         ["code_duplication", "error_handling", "recent_changes",
-                          "security", "test_coverage"])
+        self.assertEqual(sorted(set(self.advisory) - self.PENDING_FIX),
+                         self.SCHEDULED)
+
+    def test_every_pending_fix_audit_is_actually_advisory(self):
+        """A name may not sit in PENDING_FIX after it has been promoted to blocking."""
+        stale = self.PENDING_FIX - set(self.advisory)
+        self.assertEqual(stale, set(),
+                         f"no longer advisory — drop from PENDING_FIX: {stale}")
+
+    def test_every_pending_fix_audit_is_explained_in_run_all(self):
+        """The exception is only legible if run_all.sh says why. Require the name in a comment."""
+        text = (ROOT / "tools" / "audit" / "run_all.sh").read_text(encoding="utf-8")
+        comments = "\n".join(l for l in text.splitlines() if l.lstrip().startswith("#"))
+        missing = [a for a in self.PENDING_FIX if a not in comments]
+        self.assertEqual(missing, [],
+                         f"advisory exception with no explanation in run_all.sh: {missing}")
 
     def test_advisory_and_gating_do_not_overlap(self):
         self.assertEqual(set(self.gating) & set(self.advisory), set())

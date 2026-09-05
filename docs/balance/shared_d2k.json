@@ -9,6 +9,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "10"
@@ -26,6 +27,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Health.HP",
      "v": "200000"
@@ -61,13 +63,19 @@
     "speed_air": {
      "src": "inherited",
      "v": "156"
-    }
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "24"
+    },
+    "turreted": false
    },
    "carryall.paradrop": {
     "armor": {
      "src": "inherited",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "10"
@@ -85,6 +93,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -113,13 +122,19 @@
     "speed_air": {
      "src": "inherited",
      "v": "156"
-    }
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "24"
+    },
+    "turreted": false
    },
    "carryall.reinforce": {
     "armor": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "build_limit": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "10"
@@ -137,6 +152,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Health.HP",
      "v": "500000"
@@ -165,13 +181,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "156"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
+    },
+    "turreted": false
    },
    "frigate": {
     "armor": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Armor.Type",
      "v": "Spaceship"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -184,6 +206,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Health.HP",
      "v": "500000"
@@ -208,13 +231,19 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "189"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "4"
+    },
+    "turreted": false
    },
    "frigate.paradrop": {
     "armor": {
      "src": "inherited",
      "v": "Spaceship"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -227,6 +256,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -251,7 +281,12 @@
     "speed_air": {
      "src": "inherited",
      "v": "189"
-    }
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "4"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -260,6 +295,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -276,6 +312,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -309,9 +346,11 @@
     "sight": {
      "src": "inherited",
      "v": "7500"
-    }
+    },
+    "turreted": false
    },
    "concreteabuilding": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "125"
@@ -328,6 +367,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Concrete Slab",
     "prerequisites": [
      "~construction_yard",
@@ -336,9 +376,11 @@
     "queue": [
      "Building",
      "RABuilding"
-    ]
+    ],
+    "turreted": false
    },
    "concreteadefense": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "125"
@@ -355,6 +397,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Concrete Slab",
     "prerequisites": [
      "~construction_yard",
@@ -363,9 +406,11 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "concretebbuilding": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "125"
@@ -382,6 +427,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Large Concrete Slab",
     "prerequisites": [
      "~upgrade_conyard"
@@ -389,9 +435,11 @@
     "queue": [
      "Building",
      "RABuilding"
-    ]
+    ],
+    "turreted": false
    },
    "concretebdefense": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "125"
@@ -408,6 +456,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Large Concrete Slab",
     "prerequisites": [
      "~upgrade_conyard"
@@ -415,13 +464,15 @@
     "queue": [
      "Defence",
      "RADefence"
-    ]
+    ],
+    "turreted": false
    },
    "wall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "62"
@@ -438,6 +489,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Health.HP",
      "v": "26000"
@@ -453,7 +505,8 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "1c768"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -495,6 +548,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
@@ -508,6 +562,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
      "v": "5000"
@@ -547,7 +602,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "fremen_creep": {
     "armaments": [
@@ -633,6 +689,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
@@ -646,6 +703,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
      "v": "25000"
@@ -674,7 +732,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    },
    "light_inf": {
     "armaments": [
@@ -815,6 +874,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
@@ -833,6 +893,7 @@
      "trait": "FirepowerMultiplier@light_inf",
      "v": 0.91
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -870,7 +931,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "54"
-    }
+    },
+    "turreted": false
    },
    "trooper": {
     "armaments": [
@@ -992,6 +1054,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
@@ -1005,6 +1068,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
      "v": "12000"
@@ -1044,11 +1108,13 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "48"
-    }
+    },
+    "turreted": false
    }
   },
   "upgrades": {
    "d2k_spice_sifter_upgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1065,6 +1131,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Efficient Filtering",
     "prerequisites": [
      "~research_centre",
@@ -1072,9 +1139,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "d2k_wind_trap_upgrade": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -1091,6 +1160,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Advanced Wind Traps",
     "prerequisites": [
      "~outpost.d2k",
@@ -1098,9 +1168,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "upgrade_barracks": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1121,6 +1193,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Barracks Upgrade",
     "prerequisites": [
      "~d2k_barracks",
@@ -1129,9 +1202,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "upgrade_conyard": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1152,6 +1227,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Construction Yard Upgrade",
     "prerequisites": [
      "~d2k_construction_yard",
@@ -1160,9 +1236,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "upgrade_heavy": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1183,6 +1261,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Factory Upgrade",
     "prerequisites": [
      "~heavy_factory",
@@ -1191,9 +1270,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "upgrade_hightech": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1214,6 +1295,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "High Tech Factory Upgrade",
     "prerequisites": [
      "~high_tech_factory",
@@ -1222,7 +1304,8 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    }
   },
   "vehicles": {
@@ -1294,6 +1377,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Valued.Cost",
@@ -1307,6 +1391,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -1348,7 +1433,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "48"
-    }
+    },
+    "turreted": true
    }
   }
  }

@@ -60,31 +60,37 @@ BACKUP = pathlib.Path("G:/BackUp/AedisToru/Desktop")
 
 SOURCES = [
     # (id, game/lineage, kind, path, engine)
+    # ⛔ RA2 AND YR ARE ONE LINEAGE, NOT TWO (maintainer 2026-09-03): *"RA2 and YR are the same!
+    # YR is just the add on for RA2 ... But Romanov's Vengeance is already YR but scaled to
+    # OpenRA!"* Measured before relabelling: `ra2_vanilla` and `yr_vanilla` agree on **98%** of
+    # shared Versus cells (761 cells over 79 warheads) — they are one source wearing two names.
+    # Splitting them into "RA2" and "YR" made the vanilla table look like two independent voices
+    # in every lineage count downstream.
     ("combined_arms", "TD+RA1", "openra", DOWNLOADS / "CAmod-master", None),
     ("shattered_paradise", "TS", "openra", DOWNLOADS / "Shattered-Paradise-SDK-bleed", None),
-    ("romanovs_vengeance", "RA2", "openra", DOWNLOADS / "Romanovs-Vengeance-master", None),
+    ("romanovs_vengeance", "RA2/YR", "openra", DOWNLOADS / "Romanovs-Vengeance-master", None),
     ("openra_ra", "RA1", "openra", DOWNLOADS / "OpenRA-bleed/mods/ra", None),
     ("openra_td", "TD", "openra", DOWNLOADS / "OpenRA-bleed/mods/cnc", None),
     ("openra_ts", "TS", "openra", DOWNLOADS / "OpenRA-bleed/mods/ts", None),
     ("openra_d2k", "D2K", "openra", DOWNLOADS / "OpenRA-bleed/mods/d2k", None),
-    ("ra2_vanilla", "RA2", "ini", DOWNLOADS / "RA2inis/rules.ini", "yr"),
-    ("yr_vanilla", "YR", "ini", DOWNLOADS / "YRinis/rulesmd.ini", "yr"),
-    ("cnc_reloaded", "YR", "ini",
+    ("ra2_vanilla", "RA2/YR", "ini", DOWNLOADS / "RA2inis/rules.ini", "yr"),
+    ("yr_vanilla", "RA2/YR", "ini", DOWNLOADS / "YRinis/rulesmd.ini", "yr"),
+    ("cnc_reloaded", "RA2/YR", "ini",
      DOWNLOADS / "CnCReloaded-2.7.0/Tools/Map Editor/rulesmd.ini", "yr"),
     # ⚠ NOT `MentalOmega/rulesmd.ini` — that loose file is vanilla Yuri's Revenge byte
     # for byte (both md5 cf7eb658327aff1fe7e6c4e7400eb87f, 31061 lines, 116 Verses).
     # Harvesting it double-counts vanilla YR and yields zero Mental Omega data. The real
     # ruleset ("Mental Omega 3.3.6 RULES CONTROL FILE", 751 Verses) lives inside
     # expandmo99.mix; extract it with tools/reference/extract_mix_ini.py.
-    ("mental_omega", "YR", "ini", BACKUP / "MentalOmega/extracted/rulesmd_MO336.ini", "yr"),
+    ("mental_omega", "RA2/YR", "ini", BACKUP / "MentalOmega/extracted/rulesmd_MO336.ini", "yr"),
     # Added 2026-08-15 on 333ggg's recommendation. Both hide their real rules inside a
     # MIX exactly like Mental Omega, so both are extracted with extract_mix_ini.py first:
     #   Red Resurrection : rr_update_2213/expandmd99.mix          -> 499 Verses
     #   RA2 Reborn       : .../Resources/INI.mix                  -> 359 Verses
     # The blob names are CRC-derived, not meaningful; the sniffer picks the rules blob.
-    ("red_resurrection", "YR", "ini",
+    ("red_resurrection", "RA2/YR", "ini",
      DOWNLOADS / "_extracted_rr/expandmd99_8218f9f4.ini", "yr"),
-    ("ra2_reborn", "YR", "ini",
+    ("ra2_reborn", "RA2/YR", "ini",
      DOWNLOADS / "_extracted_reborn/INI_c5d7f6ce.ini", "yr"),
     # DTA ships its live balance in the injected GlobalCode, NOT in Rules.ini — every
     # `Verses=` in Rules.ini/Enhance.ini is commented out (186 of them, kept as design

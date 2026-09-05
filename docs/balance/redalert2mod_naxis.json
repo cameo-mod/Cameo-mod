@@ -9,6 +9,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Valued.Cost",
@@ -22,6 +23,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Health.HP",
      "v": "175000"
@@ -46,7 +48,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
+    },
+    "turreted": false
    },
    "horten_bomber.nax": {
     "armaments": [
@@ -120,6 +127,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
+    "attack_trait": "AttackBomber",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Valued.Cost",
@@ -133,6 +141,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Health.HP",
      "v": "150000"
@@ -157,7 +166,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "175"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
+    },
+    "turreted": false
    },
    "naxis_bf109": {
     "armaments": [
@@ -235,6 +249,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Valued.Cost",
@@ -248,6 +263,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": true,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Health.HP",
      "v": "60000"
@@ -285,7 +301,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "115"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "8"
+    },
+    "turreted": false
    },
    "naxis_interceptor": {
     "armaments": [
@@ -386,6 +407,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Valued.Cost",
@@ -404,6 +426,7 @@
      "trait": "FirepowerMultiplier@MultiWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Health.HP",
      "v": "10000"
@@ -432,7 +455,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "160"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
+    },
+    "turreted": false
    },
    "naxis_me262": {
     "armaments": [
@@ -577,6 +605,7 @@
      "src": "inherited",
      "v": "Fighter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Valued.Cost",
@@ -595,6 +624,7 @@
      "trait": "FirepowerMultiplier@DualWeapon",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Health.HP",
      "v": "75000"
@@ -631,7 +661,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "155"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "10"
+    },
+    "turreted": false
    },
    "naxis_transportzeppelin": {
     "armaments": [
@@ -904,6 +939,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Valued.Cost",
@@ -922,6 +958,7 @@
      "trait": "FirepowerMultiplier@FirerateCompensation",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Health.HP",
      "v": "1250000"
@@ -959,7 +996,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "35"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "7"
+    },
+    "turreted": false
    }
   },
   "buildings": {
@@ -968,6 +1010,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -984,6 +1027,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "600000"
@@ -1017,13 +1061,15 @@
     "sight": {
      "src": "inherited",
      "v": "12000"
-    }
+    },
+    "turreted": false
    },
    "naxis_academy": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1040,6 +1086,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1072,7 +1119,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "naxis_airfield": {
     "armaments": [
@@ -1095,6 +1143,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "750"
@@ -1111,6 +1160,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Health.HP",
      "v": "600000"
@@ -1143,13 +1193,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "12000"
-    }
+    },
+    "turreted": true
    },
    "naxis_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "250"
@@ -1166,6 +1218,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "200000"
@@ -1198,13 +1251,15 @@
     "sight": {
      "src": "inherited",
      "v": "5000"
-    }
+    },
+    "turreted": false
    },
    "naxis_beerfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -1225,6 +1280,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -1258,13 +1314,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "naxis_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "buildable": false,
     "cost": {
      "src": "inherited",
@@ -1277,6 +1335,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1308,7 +1367,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "naxis_flak88": {
     "armaments": [
@@ -1442,6 +1502,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Valued.Cost",
@@ -1455,6 +1516,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Health.HP",
      "v": "160000"
@@ -1487,9 +1549,11 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    },
    "naxis_machinegunbunkeraddon": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1506,6 +1570,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Machinegun Bunker Addon",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -1514,9 +1579,11 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_miniflakbunkeraddon": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1533,6 +1600,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Mini Flak Bunker Addon",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -1541,9 +1609,11 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_mortarbunkeraddon": {
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -1560,6 +1630,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Mortar Bunker Addon",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -1568,7 +1639,8 @@
     ],
     "queue": [
      "BuildingAddons"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_naxibunker": {
     "armaments": [
@@ -1703,6 +1775,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "attack_trait": "AttackOpenTopped",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Valued.Cost",
@@ -1715,6 +1788,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Health.HP",
      "v": "90000"
@@ -1747,13 +1821,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    },
    "naxis_naxirocketsilo": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "1500"
@@ -1770,6 +1846,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "1000000"
@@ -1804,13 +1881,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "naxis_naxpetrolplant": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "attack_trait": null,
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Valued.Cost",
@@ -1823,6 +1902,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Health.HP",
      "v": "175000"
@@ -1854,13 +1934,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
-    }
+    },
+    "turreted": false
    },
    "naxis_orerefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1877,6 +1959,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -1909,13 +1992,15 @@
     "sight": {
      "src": "inherited",
      "v": "6000"
-    }
+    },
+    "turreted": false
    },
    "naxis_radar": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "750"
@@ -1932,6 +2017,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "250000"
@@ -1964,7 +2050,8 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "naxis_rifletower": {
     "armaments": [
@@ -2002,6 +2089,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Valued.Cost",
@@ -2014,6 +2102,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Health.HP",
      "v": "78000"
@@ -2046,13 +2135,15 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
-    }
+    },
+    "turreted": true
    },
    "naxis_sausagefactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -2073,6 +2164,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -2106,13 +2198,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "naxis_techcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -2129,6 +2223,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "500000"
@@ -2161,13 +2256,15 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
-    }
+    },
+    "turreted": false
    },
    "naxis_warfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "500"
@@ -2184,6 +2281,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "400000"
@@ -2216,7 +2314,8 @@
     "sight": {
      "src": "inherited",
      "v": "8000"
-    }
+    },
+    "turreted": false
    }
   },
   "infantry": {
@@ -2403,6 +2502,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -2421,6 +2521,7 @@
      "trait": "FirepowerMultiplier",
      "v": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "15000"
@@ -2453,7 +2554,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "40"
-    }
+    },
+    "turreted": false
    },
    "conehead2.nax": {
     "armaments": [
@@ -2604,6 +2706,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -2617,6 +2720,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "40000"
@@ -2653,7 +2757,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "90"
-    }
+    },
+    "turreted": false
    },
    "frank.nax": {
     "armaments": [
@@ -2746,6 +2851,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -2761,6 +2867,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "85000"
@@ -2792,7 +2899,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "61"
-    }
+    },
+    "turreted": false
    },
    "naxis_antitankcannon": {
     "armaments": [
@@ -2860,6 +2968,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -2873,6 +2982,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "17500"
@@ -2912,7 +3022,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "naxis_bmwbike": {
     "armaments": [
@@ -2977,6 +3088,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -2990,6 +3102,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "22000"
@@ -3030,7 +3143,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.TurnSpeed",
      "v": "25"
-    }
+    },
+    "turreted": true
    },
    "naxis_coneheadsknights": {
     "armaments": [
@@ -3124,6 +3238,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -3137,6 +3252,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -3173,7 +3289,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "90"
-    }
+    },
+    "turreted": false
    },
    "naxis_naxiflamer": {
     "armaments": [
@@ -3296,6 +3413,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -3309,6 +3427,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "24000"
@@ -3341,7 +3460,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "48"
-    }
+    },
+    "turreted": false
    },
    "naxis_naximachinegunners": {
     "armaments": [
@@ -3488,6 +3608,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -3501,6 +3622,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "60000"
@@ -3533,7 +3655,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "55"
-    }
+    },
+    "turreted": true
    },
    "naxis_naximercenarysniper": {
     "armaments": [
@@ -3684,6 +3807,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -3697,6 +3821,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "8000"
@@ -3729,7 +3854,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "naxis_naxiriflerecruit": {
     "armaments": [
@@ -3852,6 +3978,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -3870,6 +3997,7 @@
      "trait": "FirepowerMultiplier@naxis_naxiriflerecruit",
      "v": 0.67
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "21000"
@@ -3905,7 +4033,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "48"
-    }
+    },
+    "turreted": false
    },
    "naxis_naxiriflesoldier": {
     "armaments": [
@@ -4028,6 +4157,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -4046,6 +4176,7 @@
      "trait": "FirepowerMultiplier@naxis_naxiriflesoldier",
      "v": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -4081,7 +4212,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "naxis_panzerfausttrooper": {
     "armaments": [
@@ -4352,6 +4484,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -4365,6 +4498,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "36000"
@@ -4396,7 +4530,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "46"
-    }
+    },
+    "turreted": false
    },
    "naxis_panzerschreck": {
     "armaments": [
@@ -4667,6 +4802,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -4680,6 +4816,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "96000"
@@ -4712,7 +4849,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "42"
-    }
+    },
+    "turreted": false
    },
    "naxis_portableflak": {
     "armaments": [
@@ -4995,6 +5133,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -5008,6 +5147,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "12000"
@@ -5043,7 +5183,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "55"
-    }
+    },
+    "turreted": true
    },
    "naxis_skymage": {
     "armaments": [
@@ -5306,6 +5447,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "attack_trait": "AttackAircraft",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -5324,6 +5466,7 @@
      "trait": "FirepowerMultiplier@FirerateCompensation",
      "v": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "48000"
@@ -5356,7 +5499,12 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Aircraft.Speed",
      "v": "160"
-    }
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Aircraft.TurnSpeed",
+     "v": "32"
+    },
+    "turreted": false
    },
    "naxis_slave": {
     "armaments": [
@@ -5420,6 +5568,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -5433,6 +5582,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "10000"
@@ -5469,7 +5619,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
-    }
+    },
+    "turreted": false
    },
    "naxis_slaveoverseer": {
     "armaments": [
@@ -5606,6 +5757,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -5619,6 +5771,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -5655,7 +5808,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "90"
-    }
+    },
+    "turreted": false
    },
    "naxis_sssoldier": {
     "armaments": [
@@ -5790,6 +5944,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -5808,6 +5963,7 @@
      "trait": "FirepowerMultiplier",
      "v": 0.95
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "63000"
@@ -5840,7 +5996,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "55"
-    }
+    },
+    "turreted": false
    },
    "undead.nax": {
     "armaments": [
@@ -5963,6 +6120,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
@@ -5978,6 +6136,7 @@
      "tech_tier": null,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "15000"
@@ -6013,7 +6172,8 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
-    }
+    },
+    "turreted": false
    }
   },
   "naval": {
@@ -6082,6 +6242,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Valued.Cost",
@@ -6100,6 +6261,7 @@
      "trait": "FirepowerMultiplier@BallisticMissileSubBuff",
      "v": 2.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Health.HP",
      "v": "200000"
@@ -6140,7 +6302,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "nax_bitsmark": {
     "armaments": [
@@ -6278,6 +6441,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Valued.Cost",
@@ -6291,6 +6455,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Health.HP",
      "v": "335000"
@@ -6331,7 +6496,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "8"
-    }
+    },
+    "turreted": true
    },
    "tuboat.nax": {
     "armaments": [
@@ -6371,6 +6537,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Valued.Cost",
@@ -6384,6 +6551,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Health.HP",
      "v": "120000"
@@ -6423,11 +6591,13 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": true
    }
   },
   "promotions": {
    "naxis_promotion_betterparatanks": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6440,6 +6610,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Better Paratanks",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6449,9 +6620,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_promotion_bossestanks": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6464,6 +6637,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Bosses Tanks",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6473,9 +6647,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_promotion_donnerschlagmodelandotheradvancedmissiles": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6488,6 +6664,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Donnerschlag Model and other advanced Missiles",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6497,9 +6674,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_promotion_generationiitanks": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6512,6 +6691,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Generation II tanks",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6520,9 +6700,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_promotion_heavyvehicles": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6535,6 +6717,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Heavy Vehicles",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6544,9 +6727,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_promotion_partisans": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6559,6 +6744,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Partisans",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6567,9 +6753,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_promotion_sarubiamodel": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6582,6 +6770,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Sarubia Model",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6590,9 +6779,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_promotion_shoekarnandking": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6605,6 +6796,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Shoe, Karn, and King",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6614,9 +6806,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_promotion_shrek": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6629,6 +6823,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Shrek",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6638,9 +6833,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_promotion_theratte": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6653,6 +6850,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "The Ratte",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6662,11 +6860,13 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    }
   },
   "upgrades": {
    "conyard_infiltrated.nax": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6679,9 +6879,12 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Stolen Naxis Buildings Plans"
+    "gatling_spinup": false,
+    "name": "Stolen Naxis Buildings Plans",
+    "turreted": false
    },
    "naxis_promotion_hortenbomberstrike": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6694,6 +6897,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Horten Bomber Strike",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6703,9 +6907,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_promotion_hortenbomberstrike_2": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6718,6 +6924,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Horten Bomber Strike",
     "prerequisites": [
      "~naxis_constructionyard",
@@ -6727,9 +6934,11 @@
     ],
     "queue": [
      "Promotions"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_upgrade_atlantikwall": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6746,6 +6955,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Atlantikwall",
     "prerequisites": [
      "~naxis_radar",
@@ -6753,9 +6963,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_upgrade_blitzkrieg": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6772,6 +6984,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Blitzkrieg",
     "prerequisites": [
      "~naxis_techcenter",
@@ -6779,9 +6992,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_upgrade_massopticsintegration": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6798,6 +7013,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Mass Optics Integration",
     "prerequisites": [
      "~naxis_techcenter",
@@ -6805,9 +7021,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_upgrade_me262": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6824,6 +7042,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Unlock Me 262",
     "prerequisites": [
      "~naxis_radar",
@@ -6831,9 +7050,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_upgrade_ostfrontexperience": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6850,6 +7071,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Ostfront Experience",
     "prerequisites": [
      "~naxis_radar",
@@ -6857,9 +7079,11 @@
     ],
     "queue": [
      "Upgrades"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_upgrade_tankarsenalrenovation": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6876,6 +7100,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Tank Arsenal Renovation",
     "prerequisites": [
      "~naxis_techcenter",
@@ -6883,9 +7108,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "naxis_upgrade_wunderwaffe": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6902,6 +7129,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Wunderwaffe",
     "prerequisites": [
      "~naxis_techcenter",
@@ -6909,9 +7137,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "up_resurrection.nax": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6928,6 +7158,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "name": "Resurrection",
     "prerequisites": [
      "~naxis_techcenter",
@@ -6935,9 +7166,11 @@
     ],
     "queue": [
      "Research"
-    ]
+    ],
+    "turreted": false
    },
    "up_team_blitzkrieg.nax": {
+    "attack_trait": null,
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6950,7 +7183,9 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "name": "Blitzkrieg"
+    "gatling_spinup": false,
+    "name": "Blitzkrieg",
+    "turreted": false
    }
   },
   "vehicles": {
@@ -7051,6 +7286,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -7069,6 +7305,7 @@
      "trait": "FirepowerMultiplier@tiger.nax",
      "v": 1.2
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "130000"
@@ -7110,7 +7347,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
-    }
+    },
+    "turreted": true
    },
    "car.nax": {
     "armaments": [
@@ -7179,6 +7417,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -7192,6 +7431,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "47500"
@@ -7233,7 +7473,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "17"
-    }
+    },
+    "turreted": true
    },
    "naxis_brummbar": {
     "armaments": [
@@ -7309,6 +7550,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -7321,6 +7563,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "90000"
@@ -7362,7 +7605,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "naxis_donnerschlag": {
     "armaments": [
@@ -7404,6 +7648,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -7422,6 +7667,7 @@
      "trait": "FirepowerMultiplier@RANK-1",
      "v": 1.25
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "80000"
@@ -7463,7 +7709,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "16"
-    }
+    },
+    "turreted": false
    },
    "naxis_engineeringtruck": {
     "armaments": [
@@ -7512,6 +7759,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -7525,6 +7773,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -7565,7 +7814,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "naxis_grille": {
     "armaments": [
@@ -7640,6 +7890,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -7653,6 +7904,7 @@
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
@@ -7694,7 +7946,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "32"
-    }
+    },
+    "turreted": false
    },
    "naxis_halftrack": {
     "armaments": [
@@ -7761,6 +8014,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -7774,6 +8028,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "115000"
@@ -7813,7 +8068,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "46"
-    }
+    },
+    "turreted": false
    },
    "naxis_hetzer": {
     "armaments": [
@@ -7882,6 +8138,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -7895,6 +8152,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
@@ -7936,7 +8194,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "30"
-    }
+    },
+    "turreted": false
    },
    "naxis_imperialturbotank": {
     "armaments": [
@@ -8035,6 +8294,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -8048,6 +8308,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "82500"
@@ -8088,7 +8349,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "44"
-    }
+    },
+    "turreted": false
    },
    "naxis_jagdpanzer": {
     "armaments": [
@@ -8162,6 +8424,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -8175,6 +8438,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -8216,7 +8480,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "naxis_kingtigerheavytank": {
     "armaments": [
@@ -8282,6 +8547,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -8295,6 +8561,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "200000"
@@ -8335,7 +8602,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "naxis_kubelwagen": {
     "armaments": [
@@ -8374,6 +8642,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -8386,6 +8655,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -8425,7 +8695,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "23"
-    }
+    },
+    "turreted": true
    },
    "naxis_maus": {
     "armaments": [
@@ -8569,6 +8840,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -8582,6 +8854,7 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "600000"
@@ -8623,13 +8896,15 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": true
    },
    "naxis_naximobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": null,
     "build_duration": {
      "src": "inherited",
      "v": "1500"
@@ -8647,6 +8922,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "inherited",
      "v": "300000"
@@ -8688,7 +8964,8 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
-    }
+    },
+    "turreted": false
    },
    "naxis_nokana": {
     "armaments": [
@@ -8859,6 +9136,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -8876,6 +9154,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "450000"
@@ -8917,7 +9196,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "24"
-    }
+    },
+    "turreted": false
    },
    "naxis_nop03sarubia": {
     "armaments": [
@@ -8941,6 +9221,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -8954,6 +9235,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "62500"
@@ -8995,7 +9277,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "26"
-    }
+    },
+    "turreted": false
    },
    "naxis_oldtank": {
     "armaments": [
@@ -9033,6 +9316,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -9046,6 +9330,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "110000"
@@ -9086,7 +9371,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": false
    },
    "naxis_ratte": {
     "armaments": [
@@ -9313,6 +9599,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Buildable.BuildLimit",
      "v": "1"
@@ -9330,6 +9617,7 @@
      "tech_tier": 0.75,
      "unit_class": 0.4
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "2000000"
@@ -9371,7 +9659,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "7"
-    }
+    },
+    "turreted": true
    },
    "naxis_shoekarn": {
     "armaments": [
@@ -9527,6 +9816,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -9540,6 +9830,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
@@ -9581,7 +9872,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "15"
-    }
+    },
+    "turreted": true
    },
    "naxis_sturmtiger": {
     "armaments": [
@@ -9621,6 +9913,7 @@
      "src": "inherited",
      "v": "Superheavy"
     },
+    "attack_trait": "AttackFrontal",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -9634,6 +9927,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "250000"
@@ -9675,7 +9969,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
-    }
+    },
+    "turreted": false
    },
    "panzer.nax": {
     "armaments": [
@@ -9741,6 +10036,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -9754,6 +10050,7 @@
      "tech_tier": null,
      "unit_class": null
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -9794,7 +10091,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "tiger.nax": {
     "armaments": [
@@ -9860,6 +10158,7 @@
      "src": "inherited",
      "v": "Heavy"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -9873,6 +10172,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
@@ -9913,7 +10213,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
-    }
+    },
+    "turreted": true
    },
    "wirbelwind.nax": {
     "armaments": [
@@ -10186,6 +10487,7 @@
      "src": "inherited",
      "v": "Medium"
     },
+    "attack_trait": "AttackTurreted",
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Valued.Cost",
@@ -10199,6 +10501,7 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
+    "gatling_spinup": false,
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
      "v": "87500"
@@ -10239,7 +10542,8 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "17"
-    }
+    },
+    "turreted": true
    }
   }
  }

@@ -6,7 +6,8 @@
     "SHELL's current directory, so a single `cd` into a subdirectory made every",
     "subsequent Bash call fail with 'can't open file .../tools/hooks/bash_guard.py'",
     "- the guard blocked the tool it was protecting, and the only way out was to",
-    "create a stub at the wrong path. Keep these absolute."
+    "create a stub at the wrong path. Keep these absolute.",
+    "read_first_guard.py matches * because its TIER 1 gate (the docs maxing audit) must see EVERY tool call, not only edits: the maintainer's order is that no action at all precedes loading the reading order. It exempts reads and git status/log/diff itself, so the gate stays satisfiable."
   ],
   "hooks": {
     "SessionStart": [
@@ -23,12 +24,30 @@
     ],
     "PreToolUse": [
       {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/tools/hooks/read_first_guard.py\""
+          }
+        ]
+      },
+      {
         "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
             "command": "python \"$CLAUDE_PROJECT_DIR/tools/hooks/bash_guard.py\"",
             "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/tools/hooks/prior_art_guard.py\""
           }
         ]
       }

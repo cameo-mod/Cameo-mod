@@ -113,6 +113,15 @@ The hard question the maintainer posed: we can't plug-and-play mod numbers (diff
 
 1. **Extract** every mod's FULL stats (§4), **normalized to that mod's basic rifleman** → a common
    *relative* scale (ratios, not raw numbers).
+1b. ⛔ **DE-DUPLICATE the corpus — one roster, one vote.** *(maintainer order 2026-09-03: "All data
+   needs to be unique and then used as a geometric mean for the design.")* This step comes BEFORE
+   the mean, because the geometric mean has no defence against a roster that votes five times:
+   measured, the RA2 lineage casts a **median 50% of all votes** on the 128 multi-source units it
+   touches, and collapsing it moves the synthesized HP target by **>10% on 52%** of them.
+   ⚠ The test is scale-free by construction, so *"identical and just scaled"* reads as a duplicate.
+   ⭐ Measured verdicts: **TS ~ OpenRA TS is a duplicate (96%)**; **TD ~ OpenRA TD (41%)** and
+   **RA1 ~ OpenRA RA (35%)** are NOT — OpenRA re-tunes those two as it ports them. Full method,
+   findings and the rulings: **`REFERENCE_DEDUP.md`** + `tools/balance/lineage_dedup.py`.
 2. **Synthesize a target relative-profile** per Cameo class/faction by pooling the relevant sources
    (§2, weighted by relevance) **+ old Cameo Layer-2** (current stats — keep what works) **+ the
    original game**. Reason/extrapolate to a coherent relative target; fill gaps by role-analogy.
@@ -124,6 +133,15 @@ The hard question the maintainer posed: we can't plug-and-play mod numbers (diff
 6. Result: the **formula still does the pricing/spreading** (keeps Cameo's system); the **mods set
    the anchors** (grounds the previously-arbitrary anchor picks in real, synthesized data). We
    never write a mod's HP into a unit — we write synthesized-normalized targets into the *anchors*.
+
+⚠ **The aggregation operator is the GEOMETRIC mean, everywhere, and not by preference.** Every
+value pooled here is a *ratio*, and in ratio space a source running 2× high and one running 2× low
+must cancel to 1.0 — only the geometric mean does that (the arithmetic mean returns 1.25 and biases
+every target upward). It is also the only mean under which "convert to the Cameo scale, then
+average" and "average, then convert" agree, which is what makes step 3 safe to do in either order.
+⛔ **Raw stats are NEVER averaged across sources** — 125 HP and 12,500 HP are the same design intent
+at different scales and their mean belongs to no game. Only the dimensionless coordinates are
+pooled. (`synthesize_reference.geometric_mean`, `reference_distribution.py`.)
 
 **Formula may need changes:** anchor **ratios** should come from synthesized mod data (tighter than
 today — see §6); the **DPS side** must be reworked around the weapon-template binding (§8).
@@ -738,6 +756,15 @@ to 200×" over-indexed on base HP; the base spread wants only *modest* tightenin
   ability modifier is 1.25×** and should be **~2.0×**. Fix the ability price, not the HP.
 
 ### 18.4 The maintainer's COST-BAND proposal — assessment (asked: "what do you think?")
+
+> ⛔ **THE VERIFIER IS RETIRED (maintainer, 2026-08-29).** *"We no longer have to have those
+> verifiers. They should be regular units like anything else and not have those stiff rules."*
+> `verifier_actor` is gone from all 27 anchors and from every code path. Wherever this document
+> names a verifier actor, or a "2× HP + 2× DPS → 2.5× cost" second calibration point, read it as
+> **history**: each class now has ONE fixed point, its baseline, and every other member is an
+> ordinary unit priced by the formula. **The 100%–250% band law is NOT retired** — `check_band.py`
+> enforces it on price RATIOS, which never needed a nominated actor. Full ruling and the three
+> measurements behind it: `docs/HANDOFF.md` §3.0j and `docs/design/BALANCE_PIPELINE.md` §8.1.
 
 **Proposal:** run the formula so **every unit sits within 50%–400% of its class-baseline COST** (hard
 caps), with the **verifier at exactly 2.5× cost**. E.g. scout baseline 100 → hard floor 50, hard

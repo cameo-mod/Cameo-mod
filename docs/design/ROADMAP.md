@@ -24,7 +24,353 @@ granular, resumable task queue that the handoff points into._
 - [~] Port the opt-in unit-composition mechanism and two TD pilot compositions;
   extend the pilot to other universes and factions as a follow-up.
 
+## ⛔ P1 — `medium` BOTS GET ZERO INSURANCE INCOME (2026-09-01, needs a boot machine)
+
+**Found while verifying the maintainer's "bot insurance" correction.** Full anatomy:
+[`AI_RESEARCH_RECONCILIATION.md`](AI_RESEARCH_RECONCILIATION.md) §1.
+
+`^AIConyardCash` (`mods/cameo/rules/defaults.yaml:6712`) is the bot passive-income ladder: ten rungs
+of `BotInsurance` + `CashTrickler` + `ResourcePurifier`, one per difficulty. The four lowest rungs
+gate on **`normalbot`**:
+
+```
+defaults.yaml:6801  RequiresCondition: (normalbot || hardbot || ...) && mediumbotinsurance
+defaults.yaml:6805  (same)
+defaults.yaml:6814  RequiresCondition: (easybot || normalbot || ...) && easybotinsurance
+defaults.yaml:6818  (same)
+defaults.yaml:6827  RequiresCondition: (veryeasybot || easybot || normalbot || ...) && veryeasybotinsurance
+defaults.yaml:6831  (same)
+defaults.yaml:6840  RequiresCondition: (easiestbot || veryeasybot || easybot || normalbot || ...) && easiestbotinsurance
+defaults.yaml:6844  (same)
+```
+
+`^AIDifficulties` (`mods/cameo/ai/ai.yaml:16-18`) grants **`mediumbot`**, never `normalbot`. The
+mod's only `normalbot` grant is `GrantConditionOnBotOwner@medium` on the Dark Reign building
+`drpplant1.freedomguard` (`mods/cameo/rules/darkreign.yaml:3348`), and conditions are per-actor, so
+the conyard never sees it.
+
+**Effect, by exhaustion of all ten `RequiresCondition` lists: `mediumbot` appears in none of them.**
+
+| difficulty | rungs reachable |
+|---|--:|
+| easiest | 1 |
+| veryeasy | 2 |
+| easy | 3 |
+| **medium** | **0** ⛔ |
+| hard | 5 |
+| veryhard | 6 |
+| brutal | 7 |
+| challenger | 8 |
+| unbeatable | 9 |
+| cameogod | 10 |
+
+- [x] **DONE 2026-09-02** — `DynamicBotInsurance` replaces the ten-rung conyard ladder with one
+  Player trait, keeping humans excluded. It scales by bot-type index (tracking rate 1→10, delay
+  divisor 10→100, peak credits/tick 1→10, purifier 5%→50%) and retains the old payout granularity
+  through depth scaling. The source compiled, the bot coverage audit passed, and Cameo booted to
+  the main menu. Match tuning of the conservative net-worth curve remains a gameplay follow-up.
+- [x] **RULED 2026-09-01** — humans get NO bot insurance. One rung is 1 credit/tick and a buildable
+  oil derrick is also 1 credit/tick (`Interval: 250, Amount: 250`), against a human derrick cap of
+  3 (`player.yaml:279`). An earlier draft that granted human parity was reverted.
+- [ ] **XS** — `BotInsurance` marks `ticks` `[VerifySync]` without implementing `ISync`
+  (`docs/audit/baseline/check_yaml_dedup.txt:11367`). C# change ⇒ rebuild ⇒ boot gate.
+- [ ] **S** — upstream CA gates insurance to *"2 minutes into the game"*
+  (`docs/research/ca-staleness-audit.md:348`); Cameo's copy has no game-time gate. Decide whether to
+  adopt it.
+
+⛔ **And the audit gap that let this survive.** `audit_orphans.py` O3 counts conditions
+**mod-globally**: `normalbot` is granted somewhere (`darkreign.yaml:3349`) and consumed somewhere
+(`defaults.yaml:6801`), so it is neither "granted never consumed" nor "consumed never granted" and
+the check is silent. **Conditions are per-ACTOR.** A grant on actor A and a consume on actor B is
+dead wiring that no current audit can see, and its own docstring says the check is approximate
+(`audit_orphans.py:10-11`).
+
+- [x] **DONE 2026-09-01** — **`tools/audit/audit_bot_insurance.py`**, wired into `run_all.sh`.
+  Closes the gap for this ladder specifically by EVALUATING each rung's `RequiresCondition` per
+  player kind instead of counting condition names. Two laws: rung count may never decrease as
+  difficulty rises, and no difficulty may reach zero rungs. **It is RED on master right now** —
+  that is the bug above, and it goes green the moment patch 01 lands.
+- [ ] **M** — the general case, still open: **per-actor condition reachability**. For every resolved actor, collect the
+  conditions its traits GRANT and the conditions its traits REQUIRE, and report every requirement
+  no trait on that same actor can ever grant (ignoring `ExternalCondition`, which is granted from
+  off-actor by design). Read through `miniyaml.Ruleset.resolve` — ⛔ never hand-parse (CLAUDE.md
+  rule 8e). Expect a large first-run list; land it as a LOWER-ONLY ratchet like
+  `audit_dead_warhead_fields.py`, not as a fix-everything pass.
+
+---
+
+## ⏰ ASK THE MAINTAINER 2026-09-05 — the four reference sources that are promised
+
+Every one is a maintainer ruling whose DATA is missing, so each is a route that exists and reaches
+zero rows. Recorded in `tools/balance/faction_routes.PENDING`, which prints them with
+`python tools/balance/faction_routes.py`.
+
+| source | unblocks | why it cannot be fetched here |
+|---|---|---|
+| **DTA** | all four TD/RA1 factions (the ruled 1/3 third voice) | Ares INI mod, rules inside MIX archives; mod hosts are blocked by the egress proxy |
+| **Rise of the East** | Asian Alliance (China) · TKM (GLA) | same |
+| **Emperor: Battle for Dune** | ⭐ every Dune faction — **and the ONLY source for `ixian` and `corrino`**, both previously recorded as permanently formula-only | not an OpenRA mod |
+| **Dune: Spice Wars** | the Dune tier's second modern voice | a retail game |
+
+⚠ Also still open and NOT a data problem — a ruling: **Mental Omega and CnC Reloaded have no
+faction column.** They are hand-typed tables, and they are game A for four invented factions.
+
+⭐ The Dune tier needs this most, measured: `ordos` has **25 Cameo units against 7 routed reference
+rows**, and its entire exchange rate rests on **4 pairs**.
+
+## ✅ SHIPPED 2026-09-04 — FACTION ROUTING, AND THE LAYER FOR UNITS WITH NO COUNTERPART
+
+Full account: [`FACTION_REFERENCE_MATRIX.md`](FACTION_REFERENCE_MATRIX.md) PART IV.
+
+- [x] `tools/balance/faction_routes.py` — the ruled route map, data-only, validated against the
+  corpus (`--check`). 19 of 24 Cameo factions routed; 5 formula-only by ruling.
+- [x] `assign_references.py` clause 11 — routing is DEFAULT; `--no-routing` reproduces the
+  rejected behaviour for comparison only.
+- [x] `reference_distribution.peer_rows()` now carries the `faction` column — it was in the
+  document and dropped on read, the same bug `cost` had.
+- [x] `tools/balance/faction_extrapolate.py` — exchange rates from the matched pairs, then rank
+  placement for the units with no counterpart. **361 of 447 routed units grounded** (325 paired,
+  36 rank-placed).
+- [x] 39 tests across `test_faction_routes.py` and `test_faction_extrapolate.py`.
+- [ ] ⚠ **No class may be signed on this evidence yet.** Most routed units hold ONE reference, not
+  the ≥2 floor, and that does not change until DTA / MO / CnCR land.
+- [ ] Regenerate the per-class review sheets and re-review. Only `scout` has been regenerated.
+
+⛔ **The measurement that justifies the ruling: 1,708 of 1,852 old proposals (92.2%) were
+cross-faction, and 599 of those carried the STRONG label.**
+
+## ✅ SHIPPED 2026-09-03 — THE REFERENCE CORPUS IS DE-DUPLICATED (one roster, one vote)
+
+**Maintainer order 2026-09-03:** *"All data needs to be unique and then used as a geometric mean
+for the design and then normalized to the new cameo scale."*
+
+Applied. Full method, findings and rulings: **[`REFERENCE_DEDUP.md`](REFERENCE_DEDUP.md)**.
+Measure it with `python tools/balance/lineage_dedup.py`.
+
+* ⭐ The order was right and the effect is large: the RA2 lineage cast a **median 50% of all votes**
+  on the 128 multi-source units it touches, an outright majority on 45. One vote moves the
+  synthesized HP target **>10% on 52%** of them, up to **1.77×**.
+* ⛔ It was **half applied** — the rifle layer collapsed nothing, because 2026-08-30's *"every
+  source votes once, no collapsing"* was read as covering duplicates. It is about sources that
+  **disagree**. Both rules now hold.
+* ⛔ **A live bug fixed by consolidation:** `LINEAGE_MEMBERS` listed `"RA2/YR"`; the parser labels
+  that source `"RA2/YR (raw INI)"`, so the member never matched and voted all along. The three
+  drifted copies of the rulings are now one (`tools/balance/reference_lineages.py`), and
+  `lineage_dedup.py` fails when a ruled label is absent from the corpus.
+* ⭐ **The maintainer's own example came out half wrong, and that is the useful half.** Scale is not
+  the issue — TD~OpenRA TD and RA1~OpenRA RA both sit at a median offset of exactly **1.00×**. They
+  disagree *after* normalisation: **41%** and **35%** within 10% (Tesla Tank 2.2 vs **8.0×** rifle,
+  M.A.D. Tank 6 vs **18×**). OpenRA re-tunes TD and RA1 as it ports them, so both keep their votes.
+  **`Tiberian Sun` ~ `OpenRA Tiberian Sun` is the real duplicate (96%, 25 of 27 identical)** and is
+  newly collapsed.
+
+### ⛔ P1 — DTA IS A NAMED SOURCE AND CONTRIBUTES ZERO ROWS
+
+`DOC4_SOURCES` registers `Dawn of the Tiberium Age`, and `lineage_dedup.corpus()` finds **0 rows**
+for it. `ORIGINAL_UNIT_STATS.md`'s DTA section is a 15-row Classic-vs-Enhanced **highlight table
+with no `HP` column**, so every row is skipped and the section reads as present while voting on
+nothing. The full extract went to a scratchpad CSV on a local path and never landed in the repo.
+
+⚠ **This matters for TD/RA1 specifically.** DTA is one of only three sources covering that
+crossover, and it is exactly where OpenRA's rebalance means the originals cannot speak alone.
+**Needs:** the DTA roster extracted into `ORIGINAL_UNIT_STATS.md` in the per-unit table shape the
+parser reads (`| Unit | HP | Cost | Spd |`), HP ÷10 for the TS engine.
+
+### ⚠ P2 — THE RA2 FAMILY IS STILL OVER-REPRESENTED AFTER THE COLLAPSE
+
+Nine of the 26 source labels descend from one game family (vanilla ×3, OpenRA ×2, RV, CnC
+Reloaded, Mental Omega, Valiant Shades). The collapse removes five; the remaining four are genuine
+rebalances and keep their votes **by rule**. So an RA2-era Cameo unit still hears four RA2 voices
+against one each from TD, RA1 and TS. Not a bug — but a weighting the maintainer should see before
+the anchors are signed, since §2's cross-reference principle pools every appearance.
+
+⚠ Two partials sit just under the cut and are judgement calls: `CnC Reloaded` ~ `Yuri's Revenge`
+(**81%**, 44 of 57 shared units *exactly* equal to vanilla RA2) and `Valiant Shades` ~
+`OpenRA RA2 official` (**79%** at a **0.52×** offset — the corpus's closest near-miss to
+"identical and just scaled").
+
+---
+
+## ⛔ P1 — THE PRICING MODEL IGNORES `AmmoPool` (2026-09-02, maintainer-found)
+
+**Maintainer, 2026-09-02:** *"I'm pretty sure you miscalculated that one by adding the ammo limited
+weapon to the regular weapon right? It can only shoot that really powerful gun once in a while."*
+**Verified — correct, and it is systemic.**
+
+`fit_class.py:117` does `total_dps += raw` for EVERY armament, and neither `fit_class.py` nor
+`formula.py` mentions `AmmoPool` anywhere. A weapon with 12 rounds is priced as if it fires
+forever.
+
+| unit | primary | ammo-limited weapon | ratio | ammo | % of priced DPS |
+|---|--:|--:|--:|--:|--:|
+| `terran_ghost` | `GhostSniper` 10,000 | `GhostSniperLockdown` **144,000** | 14.4x | 12 | **94%** |
+| `terran_specter` | `SpecterSniper` 20,000 | `SpecterSniperLockdown` **288,000** | 14.4x | 12 | **94%** |
+
+That is why both read **+514%** and **+523%** against the `special_forces` formula — the two worst
+rows in the whole class table, and they are a measurement artifact, not a design problem.
+
+⚠ **107 buildable units carry an `AmmoPool` AND 2+ damaging armaments.** On the worst, the
+ammo-limited weapon is 68-100% of priced DPS: `td_nod_reconbike` 100%, `A10Carrier` 96%,
+`ra1_soviets_nuclearyak` 87%, `terran_phobos` 86%, `japan_zerofighter_slave` 83%,
+`terran_battlecruiser` 79%, `cabal_hunterdronecarrier` 77%.
+
+⭐ **THE SAME BUG IS ALREADY DOCUMENTED ONE FUNCTION ABOVE, FOR CHARGE WEAPONS**
+(`fit_class.py:99-104`): *"A Tesla Coil's weapon reloads every 3 ticks, so reading the weapon alone
+prices the coil as firing 20 times a second when it fires 3 zaps per 106 ticks — DPS overstated
+11.8x, and DPS drives the price."* `charge_attack_cycle` fixes that case. Ammo is the same shape
+and has no equivalent.
+
+### The full mechanic (maintainer, 2026-09-02) — four inputs, not one
+
+*"Check the ammo consumption for each weapon! And not only the ammo consumption but also the ammo
+regeneration to calculate how often the weapon is actually able to fire and if two weapons share
+the same ammo pool calculate what will happen if both of them use it."*
+
+⭐ **All four are already in the yaml, and `terran_ghost` shows every one of them:**
+
+```
+Armament@lockdown:  Weapon: GhostSniperLockdown
+    AmmoUsage: 6                  <- 1. CONSUMPTION: 6 of 12 rounds per shot
+    PauseOnCondition: ammo < 12   <- 4. GATE: only fires at a FULL pool
+Armament@PRIMARY:   Weapon: GhostSniper
+    PauseOnCondition: !ammo       <- the fallback, fires while any ammo remains
+AmmoPool:      Ammo: 12   AmmoCondition: ammo     <- 3. SHARED by both armaments
+ReloadAmmoPool: Delay: 44   Count: 1              <- 2. REGENERATION: +1 per 44 ticks
+```
+
+The lockdown shot drops the pool 12 -> 6, which trips its own `ammo < 12` gate; it cannot fire
+again until regeneration restores six rounds = **264 ticks**. The model prices it at its
+`ReloadDelay` of **22**. That is the maintainer's reading exactly — *"the big weapon is only used
+at the beginning and the small weapon is used on low ammo"* — and it is 12x.
+
+**Measured across the roster:**
+
+| | count |
+|---|--:|
+| buildable units with an `AmmoPool` | **138** |
+| with per-armament `AmmoUsage` != 1 | **35** |
+| with an ammo `PauseOnCondition` gate | **111** |
+| with `ReloadAmmoPool` regeneration | 98 |
+| ⛔ with NO regeneration at all — must rearm at a pad/depot | **40** |
+
+| unit | ammo | regen/tick | model dmg/tick | sustained | overstated |
+|---|--:|--:|--:|--:|--:|
+| `latinsyndicate_yakovlev` | 8 | 0.0250 | 3,300 | 200 | **16.5x** |
+| `ra1_soviets_gatlingtank` | 4 | 0.0400 | 2,400 | 160 | **15.0x** |
+| `terran_ghost` | 12 | 0.0227 | 7,000 | 545 | **12.8x** |
+| `ts_gdi_riottrooper` | 6 | 0.0025 | 609 | 70 | 8.7x |
+| `terran_specter` | 12 | 0.0152 | 9,333 | 1,091 | 8.6x |
+| `japan_armoredcar` | 12 | 0.0833 | 9,000 | 1,667 | 5.4x |
+
+- [ ] **M** — teach the DPS model the SUSTAINED rate, not the burst rate. The shape:
+  1. every shot costs `AmmoUsage` (default 1) from the pool it is bound to;
+  2. the pool refills at `ReloadAmmoPool.Count / Delay` ammo per tick — or not at all, and then
+     the ceiling is a rearm round trip the actor does not describe;
+  3. armaments sharing a pool COMPETE for the same ammo, so their rates are not independent;
+  4. `PauseOnCondition` on the ammo condition decides which weapon may fire at which pool level.
+  **Sustained ceiling = regen_rate x (damage per ammo of the mix actually used).** Burst above
+  that is available only until the pool drains, so it is a duration, not a rate.
+  ⚠ Mirror `charge_attack_cycle`'s shape — a cycle length and a shot count, never a raw rate.
+- [ ] ⚠ **The 40 with no regeneration need a separate ruling.** Their sustained rate depends on
+  travel time to a rearm pad, which is a map property, not an actor stat. Either they get a
+  modelled rearm cycle or they are excluded from DPS pricing and hand-tuned like `support`.
+- [ ] ⚠ **Until it lands, no class containing one of the 107 can be signed** — the fit is measuring
+  a weapon the unit cannot actually sustain. That includes `special_forces` (ghost, specter).
+- [ ] ⚠ **A second defect found alongside:** `terran_ghost` and `terran_specter` each declare
+  `Armament@lockdown` and `Armament@PRIMARY` with **no `Name:` on either**, so both default to
+  `primary`. Two armaments sharing a name is its own problem — check whether the AmmoPool binds
+  what it is meant to bind.
+
+---
+
+## ⛔ P1 — W24's COLLAPSE RULE IS VERIFIED ON THE WRONG INVARIANT (2026-09-02)
+
+**Raised by Blackrobe, verified in full:** [`W24_COLLAPSE_REVIEW.md`](W24_COLLAPSE_REVIEW.md).
+Collapsing a multi-main weapon while preserving its summed `Damage` preserves the raw number and
+moves the resolved one. On `HydraSpit` (4 mains x 18,000, four DIFFERENT `Versus` ladders) a
+72,000 collapse to `^Warhead_Chemical_Light` multiplies mean effective damage by **1.48x**, with
+per-armor ratios from **0.62x to 2.38x**. `review_resolve_diff.py` certifies it as neutral because
+its docstring says new-template `Versus` tables are *"NOT flagged"* — the gate is blind to the only
+thing that changed.
+
+⭐ `BALANCE_PROGRAM_PLAN.md` §1b's "preserve the SUM anyway" is a deliberate staging decision, not
+an oversight. Its justification is the BROADCAST finding (576 of 934 weapons have every main at the
+same damage). The unstated precondition is that those mains also share a PROFILE — and HydraSpit is
+the counterexample: equal damage, four different ladders.
+
+- [ ] **M** — classify every multi-main weapon by SHAPE: true broadcast (same Damage AND same
+  Versus, sum-preservation is neutral) / profile pileup (equal Damage, different Versus, needs the
+  `measure_retrofit_gap` mean-ratio rescale in the same commit) / real multi-warhead design
+  (per-weapon maintainer call).
+- [ ] **M** — extend `review_resolve_diff.py` with a resolved PER-ARMOR comparison (Damage x Versus
+  over all 20 rows, the AA rows, widest `Spread`, physical-state feed, standalone percentage count).
+- [ ] **S** — ⛔ INDEPENDENT LIVE DEFECT: `audit_physical_state_warheads.py` models
+  `PhysicalStateName` and `PhysicalStates` as alternatives (`scaled_states()` returns a SET). The
+  runtime applies BOTH — `AreaDamageWarhead.cs:512` and the field's own `[Desc]`: *"applied IN
+  ADDITION to"*. **216 warheads on 172 weapons (156 of them fired) bind the same state twice**, so
+  ~200 warheads push Corrosion at double rate while the audit says PASS.
+- [ ] **S** — put the unconditional `FirepowerMultiplier` stacks on the board. `terran_marine`
+  resolves to **0.1876x** always-on firepower (GlobalBuffs 50 x InfantryBuff 110 x
+  AntiTankAntiAirInfantryBuff 110 x TripleShot 31), `zerg_hydralisk` to **0.599x** — a 3.19x gap
+  that W17 made invisible to pricing while it stays fully live in play.
+- [x] **RULED 2026-09-02** — the maintainer accepts the drift: *"I will review all factions
+  manually one by one actor before we release anything. For now it's more important to reduce
+  everything down to a single warhead and we can then make new warheads."* So §1b's
+  sum-preservation stands, the shape classifier is downgraded from a gate to a REPORT, and the
+  per-armor comparison becomes the worksheet that makes the manual review cheap. The two audit
+  items above are unaffected — they are live defects, not balance questions.
+- [x] **DONE (patch) 2026-09-02** — `^Warhead_BulletChem_{Light,Medium,Heavy}`, the bullet-delivery
+  member of the Chem set (`["Bullet", "Chemical"]`), for the `HydraSpit` collapse. Generated, not
+  hand-written; `verify_generator_sync` 142 templates drift 0, `audit_family_uniqueness` OK,
+  `heaviness_bell` 0 inversions / 0 drift, `find_empty_warhead` 0. ⛔ Needs a boot machine:
+  [`../patches/README.md`](../patches/README.md) `01_bulletchem_family.patch`.
+- [x] **RULED 2026-09-02** — air rows accepted as the blend produces them (`Fighter` x1.71 and
+  `Bomber` x1.18 up; `Helicopter` x1.02 flat, `Spaceship` x0.92 down). Neither parent has anti-air,
+  so only a third air-tilted parent could lift those two rows; not taken.
+- [x] **DONE (patch) 2026-09-02** — `HydraSpit` repointed onto `^Warhead_BulletChem_Light` +
+  `^Projectile_Chem_Light` + `^Effect_Chem_Light`. ONE damage main at the preserved raw 72,000; all
+  four standalone percentage twins gone, replaced by the family fold. Splash SHRINKS (radius 700
+  -> 220) and Corrosion is nearly preserved (x1.17, not the x4.00 a Chemical collapse would have
+  caused) — both better than the review predicted. ⚠ The percentage half rises **x9.6** (0.45% ->
+  4.32% of max HP vs `None`), because the old hand-typed twins never tracked the weapon's real
+  damage; a local `PercentageScale: 1042` would restore the old floor if wanted.
+- [x] **DONE 2026-09-02** — `plan_warhead_collapse.py --impact` (+ `--risky`) adds the resolved
+  per-armor half the naming plan never had. ⛔ It changes the premise: of 190 directly-armed
+  multi-main weapons only **1** is a true broadcast (same damage AND same `Versus`), 43 are the
+  HydraSpit pileup shape and 113 are mixed. And the mean is the wrong statistic — median mean
+  ratio **1.00x** while the median per-armor SPREAD is **2.78x**, max **9.73x**, with **108
+  weapons over 2x**. Sum-preservation keeps each weapon's average and rewrites who it beats.
+  ⭐ Sort the manual faction review by SPREAD, not by mean: by mean, only HydraSpit stands out.
+- [ ] ⛔ **WATCH IN PLAY.** This fold was tried once before and REVERTED — `intentional_composites.py`
+  quarantined `HydraSpit` with *"Hydralisk was not previously this strong"* and measured the same
+  numbers this review did (1.6x-2.38x ground, quadrupled corrosion). The 2026-09-02 ruling
+  supersedes that quarantine because the target is now `BulletChem`, not `Chemical`. If it reads
+  too strong again, this is the decision to revisit.
+
+---
+
 ## AI ARCHITECTURE (2026-08-31)
+
+Unit classification: [`UNIT_CLASSIFICATION_PROGRAM.md`](UNIT_CLASSIFICATION_PROGRAM.md)
+— twelve maintainer rulings, three workstreams. ⭐ Classifying every buildable unit
+(workstream A) BLOCKS the KeepsDistance rework and the weapon splits.
+
+Class moves: [`CLASS_MOVES.md`](CLASS_MOVES.md) — one section per class, each a proposal until
+the maintainer approves it. ⭐ §6 is the whole infantry roster measured against `FORMULA_V2.md`
+§6b's range bands by the new `tools/audit/audit_infantry_class_bands.py` (advisory in
+`run_all.sh`): **256 units, 29 outside their own class's band**, plus six units carrying two
+class templates — one of which is §6b's own special-forces baseline. ⛔ Three things need a
+maintainer ruling before any of it can be applied: §6b's self-contradiction at exactly 5500
+(§6.2), the units whose 2026-07-20 verdict and measured range name different classes (§6.1), and
+the **bands for the nine TBD classes** (§6.4), without which §6b's contiguity promise cannot hold.
+
+Baseline actors: [`BASELINE_ACTOR_REVIEW.md`](BASELINE_ACTOR_REVIEW.md) — the binding spec
+for re-selecting every class anchor (cheapest member, maintainer-confirmed) and repricing
+every member on the coarse-first 50/20/10 grid. ⛔ Five orphan classes await a ruling in §4.
+
+Effort: [`AI_MODULE_REWORK_ESTIMATE.md`](AI_MODULE_REWORK_ESTIMATE.md) — phases 0-2 are
+4-6 sessions and 2 boot gates and are worth committing to; phases 3-7 cannot be estimated
+until phase 2's logs exist, and the document says why rather than inventing a total.
 
 Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Nothing here is implemented; the
 design document is the deliverable so far. Ordered so each item is independently
@@ -84,6 +430,336 @@ first. Faction reference: [`FACTIONS.md`](../FACTIONS.md).
 an open checkbox was moved.
 
 ---
+
+## ▶ W24 BATCH 01 IS PREPPED AND WAITING FOR A BOOT MACHINE (2026-08-30)
+
+**[`docs/balance/w24_batch_01_cannonhe.md`](../balance/w24_batch_01_cannonhe.md)** — 4 weapons
+(`TigerCannon`, `HammerTankCannon`, `KotinCannon`, `Type97Cannon`) collapsing
+`^Warhead_CannonHE_Heavy` + `^Warhead_CannonHE_Medium` into one main, per-shot totals preserved
+(16000 / 12000 / 12000 / 12000). Exact diff, the `Versus` and `Spread` evidence for the sign-off,
+the verification order, and the scoped `git add` are all in that file. Chosen as batch 01 because
+both mains are already `^Warhead_*` families (a collapse, not a conversion), the two profiles are
+the CLOSEST pair in the whole 472-weapon scope, and none of the four carries a percentage twin.
+
+⚠ It needs your sign-off, not just a boot: collapsing to Heavy widens `Spread` 300→400 on half
+the shot and moves the profile (biggest gaps `Spaceship 65↔41`, `Fighter 76↔98`).
+
+**Batches 02 and 03 are prepped too, in risk order — do them in this order, not in parallel:**
+
+| batch | file | weapons | why it is later |
+|---|---|--:|---|
+| 01 | [`w24_batch_01_cannonhe.md`](../balance/w24_batch_01_cannonhe.md) | 4 | lowest risk — same family, adjacent levels |
+| 02 | [`w24_batch_02_demolition.md`](../balance/w24_batch_02_demolition.md) | 4 | large profile shift (`Scout 81↔144`, `Steel 164↔105`); `TSBoatcannon` is the in-batch canary at 89% Demolition already |
+| 03 | [`w24_batch_03_missilehe.md`](../balance/w24_batch_03_missilehe.md) | 3 | widest gap in the set (`None 79↔151`) **and the first cluster that should SPLIT** — the two Tusks to MissileHE, `GradRockets` to Concussion, because a Grad is area saturation, not a precision missile |
+
+## ✅ SHIPPED 2026-08-30 — THE DOCS MAXING AUDIT
+
+Maintainer order: *"Always load all the documents into your context and memory and make sure it
+will always do that every start, so it should be like a hook. Call it the docs maxing audit. Make
+it illegal for any AI agent to perform any actions before loading the entire documentation into
+the context."*
+
+* `tools/audit/audit_docs_maxing.py` — owns the tiers, prints the manifest of all **117** authored
+  documents, and reports a session's coverage from its transcript. In `run_all.sh`.
+* `tools/hooks/read_first_guard.py` — now matches **every** tool, not `Write|Edit`. TIER 1: no
+  action until all seven reading-order documents are opened. Reads and `git status`/`log`/`diff`
+  are exempt, or the gate would be a deadlock.
+* `tools/hooks/session_checklist.py` — appends the full manifest at SessionStart.
+* Recorded as **RULE 0** in `CLAUDE.md`, in `docs/README.md` and in `AGENT_WORKSPACE.md` step 0.
+
+⚠ **The literal order cannot be met and the implementation says so.** 117 files, ~92,700 lines,
+~1.9M tokens: no context holds it. Tier 1 gates every action, Tier 2 gates an edit in its own
+subject, Tier 3 is ENUMERATED every session — a document can go unread, never unknown.
+
+## ⛔ P1 — BOOT-GATED WORK OWED FROM THE 2026-08-30 BALANCE SESSION
+
+Queued per `AGENT_WORKSPACE.md` git rule 3 (record work in ROADMAP before committing).
+
+0. ⛔ **FLIP THE EMITTER TO THE HEAVINESS BELL.** Everything is built, measured and tested; the
+   only thing missing is a boot machine. `TILT_MODEL` is deliberately still `"class"` so the tree
+   stays self-consistent and no unrelated splice can ship the switch by accident. On a boot
+   machine, in this order:
+
+   ```sh
+   # ⭐ ONE regeneration, both changes. MACRO_RATIO=1.50 is the recorded consensus (see the
+   # macro-ratio call below); --macro= forwards through the splice exactly like --tilt=.
+   python tools/balance/splice_templates.py --all --tilt=bell --macro=1.50
+   python tools/balance/consolidate_exact_profile_duplicates.py --print-hashes
+   python tools/balance/consolidate_explicit_family_state_profiles.py --print-hashes
+   #   -> paste the 3 TeslaArmorDischarge* + 4 BRANCH_HASHES + 3 PINNED_HASHES that moved
+   python -m unittest discover -s tools/tests -t tools/tests -q   # expect the 1 known failure
+   python tools/balance/verify_generator_sync.py --tilt=bell      # expect drift 0
+   python tools/audit/find_empty_warhead.py                       # expect 0
+   python tools/audit/audit_versus_profile.py                     # margins + both metrics
+   launch-game.cmd                                                # rule 1
+   #   -> set TILT_MODEL = "bell" AND MACRO_RATIO = 1.50 in gen_weapon_template.py
+   #   -> then RE-EXTRACT: the macro axis moves K by ~1.75% (worst +5.3%), so every price
+   #      behind the ledger is stale. See WEAPON_HEAVINESS §9.7a.
+   python tools/balance/extract_stats.py
+   bash tools/audit/run_all.sh          # from a COMPLETE tree only (CLAUDE.md rule 8)
+   #   -> commit yaml + ledger + the two constants TOGETHER
+   ```
+
+   Expected result, already measured by doing it and reverting: 135 of 139 templates move, mean
+   4.49% per row, 0 ladder inversions, MEAN-100 held, §9.4 band unchanged at 132/139, every
+   `_Super` byte-identical. `tools/tests/` must come back to its **one** pre-existing failure
+   (`test_ledger_split`); anything more means something else moved.
+
+The rest below did not touch yaml; each still needs a boot-gated machine.
+
+1. **`^ScoutVehicleTemplate` self-heal switch — the missed half of a LOCKED ruling.**
+   `anchor_decisions_log.md` locked scout vehicles onto the **infantry HP granularity**
+   on 2026-07-26 and flags a companion requirement **"HARD RULE — do not forget"**:
+   switch the template from `^VehicleBuffs` (Step 10 / Delay 1 / DamageCooldown 10) to
+   the `^InfantryBuffs` timing (Delay 2 / DamageCooldown 20 / StartIfBelow 100), and set
+   each scout actor's `ChangesHealth@SelfHealing.Step = HP/1000`. The converter now uses
+   the 1000 grid; **without this the ruling is only half applied.**
+2. **7 scout vehicles off the 1000 HP grid** — `ra1_allies_ranger`, `forgotten_raidercar`
+   (22500); `tkm_as42`, `tkm_technical`, `ts_gdi_pitbull`, `td_gdi_humvee` (27500);
+   `td_gdi_humveemkii` (37500).
+3. **9 actors carry a `Speed` off the 5 grid, 8 buildable** — `japan_nanodronebuggy` 77,
+   `ra1_allies_minelayer` 128, `ts_nod_mobilestealthgenerator` 56, `tuboat.nax` 78,
+   `siege_tank` 43 (not buildable). ⚠ **These are NOT turn-law violations** —
+   `audit_stat_formulas` F8/F10/F19 read 0 and are right to. F8/F10 check the DERIVED
+   value (`TurnSpeed == round(Speed/5)`), so an off-grid Speed with a consistently
+   rounded TurnSpeed passes. **The Speed GRID has no checker at all** — the natural home
+   is a new rule inside `audit_stat_formulas`, never a second audit.
+4. **9 support powers missing their `Prerequisites:` header** (`audit_support_powers` S1).
+5. **IFV default-weapon guards** miss `ifv-archer`, `ifv-grenade`, `ifv-lightsniper`, so
+   those passengers fire the specialist AND the default weapon (`audit_ifv_conditions` F3).
+
+## ⛔ P0 — THE SIGN-OFF QUEUE DISAGREES WITH WHAT WAS SIGNED (2026-08-30)
+
+Full evidence and the ordered gate list: [`BALANCE_COMPLETION_BRIEF.md`](BALANCE_COMPLETION_BRIEF.md).
+
+`anchor_readiness.py` ranks by **PRICING error** — how far the class formula's price sits from the
+unit's actual cost. Measured against the eight signed classes:
+
+| signed class | scored | median \|Δ\| | worst | verdict |
+|---|--:|--:|--:|---|
+| `flying_infantry` · `grenadier` · `mortar` | **1** each | 0–6% | ≤6% | ⚠ too few to judge |
+| `closecombat` · `archer` | 4 | 12–14% | 74–82% | ⚠ review outliers first |
+| `heavy_sniper` | 3 | 22% | 334% | ⚠ review outliers first |
+| `missile_vehicle` | 13 | **30%** | 373% | ⛔ **anchor does not describe its members** |
+| `special_forces` | 15 | **57%** | 523% | ⛔ **anchor does not describe its members** |
+
+And the three the tool calls **ready to sign today** — `dreadnought` 2%, `scout` 4%,
+`heavy_infantry` 7% — are exactly the three an agent self-signed on 2026-08-29 and which were
+correctly reverted. None is signed.
+
+⚠ **The two-metric confusion, for the third time this session.** The eight were signed against the
+≤1 bar quoted above in the P1 item (`closecombat` 0.1, `mortar` 0.1 …). Those are NOT these
+percentages — a different measure. Neither number is wrong; quoting one while meaning the other is.
+⛔ **An anchor prices ITSELF at 0% by construction**, so a one-member class reading 0% is not
+evidence of anything.
+
+**This does not re-open the maintainer's sign-off.** It says `apply_balance --confirm` on the
+current set would price `special_forces` and `missile_vehicle` through anchors their own readiness
+tool flags. Re-read the queue before the APPLY — it does not block the bell/macro flip.
+
+## ⛔ P0 — THE INFANTRY CLASSES HAVE NO POPULATIONS (2026-08-30)
+
+⛔ **This supersedes "build the infantry ladder", which was the obvious next move until it was
+measured.** `anchor_readiness.py` now reports anchor INTEGRITY, and it is worse than placeholders:
+
+| | measured |
+|---|--:|
+| anchors tagged into the class they anchor | **17 of 27** |
+| anchors carrying **no class tag at all** | **10** |
+| classes with **ZERO tagged members** | **5** — `commando` `flying_infantry` `grenadier` `mortar` `pure_sniper` |
+| of those five, **SIGNED** | **3** — `flying_infantry` `grenadier` `mortar` |
+
+⭐ **`special_forces` puts only 20% of its own members in the sweet spot §8.1 requires 80% of them
+to occupy** (`anchor_readiness.py --propose-anchors`), and THAT is its 57% median pricing error.
+The zero point is an outlier at the bottom of the population it defines, so every member is
+measured against a ruler planted in the wrong place.
+
+⛔ **But re-anchoring alone cannot fix it, and that is the larger finding.** Members are priced as
+RATIOS to the anchor, so moving the anchor SLIDES a class along the band and never NARROWS it
+(pinned by `tools/tests/test_band_law.py`). ⭐ **The two band widths SORT the remaining work.** On
+trimmed spreads, **14 of 17 classes already fit the HARD band (3.50/0.50 = 7.0x) and only 2 fit the
+target band (2.50/1.00 = 2.50x)**. Inside the hard band = a REPRICING job, which is what the
+pipeline exists to do. Outside it — `scout_vehicle` 11.1x, `support` 10.1x, `artillery_tank` 8.3x —
+= a SCOPE question: those members may not belong in one class at all. `support` is outside for a
+third reason entirely: it carries six of the eight negative-DPS extractor bugs.
+
+⛔ **READ THE TRIMMED SPREAD, NEVER THE RAW ONE.** `artillery` measures **324.5x raw** and **5.9x**
+on P10..P90 — ONE member, `futuretech_athenacannon` at DPS **193,600** (24x the next artillery),
+carries the entire number. Across the board the honest gap is **1.1x-3.2x**, not orders of
+magnitude: `mbt` 6.1x, `line_breaker` 4.2x, `special_forces` 5.8x, `scout_vehicle` 11.1x.
+That is a tractable repricing job. **`tools/balance/band_granularity.py`** reports raw, trimmed,
+the outlier queue and the data bugs; ⛔ it also found **8 members with NEGATIVE DPS**
+(`tkm_battlebus` -600, `cabal_engineer` -650, six medics/mechanics) where a heal armament is being
+summed as damage by `formula.spread_damage_sum` — an extractor bug, not a pricing one, and it must
+be fixed before those classes are priced at all.
+
+⭐ **The band is NOT the constraint, and that is now measured against 14 shipped mods.** At the
+peer cost resolution of **1.143x** (`tools/reference/peer_cost_grid.py`, 266 adjacent-cost gaps) the
+3.43x band holds **9.2 distinct rungs**, and `mbt`'s 42 members come from **22 factions** — 4.6 per
+rung, against Combined Arms' observed 4.67 units per distinct cost. Every class Cameo has fits.
+⛔ **The price grid: 20 is the right ATOM and the wrong STEP** (`tools/balance/cost_grid.py`).
+Prices run 10-10,000 (a 1000x range, median **1,200**) and **89% are already multiples of 20**, so a
+flat-20 snap changes almost nothing. A flat 20 is one perceptible notch only near 140 credits, and
+6% of the roster is at or below 200. Keep the atom, derive the step:
+`step(price) = max(20, 20 * round(0.143 * price / 20))` -- 20 at 140, **160 at the median**, 700 at
+5,000. **105 distinct prices -> 55**; 92% of units move by a median 2.0%. A snap is a REPRICING and
+goes through the ledger + `apply_balance --confirm` + boot gate.
+
+⛔ **AND THE RESTAT MAY BE OVER-SPECIFIED — new, and it changes what step 3 should do.**
+`band_granularity.py` runs the below-anchor census twice: **54%** of members price below their
+anchor against the ruled SPEC, **21%** against the LIVE anchor actor. The 33-point gap is the restat
+debt, and its direction is the warning: the specs price as if the anchor were far stronger than the
+actor carrying it (`tiger.nax` live at 100k HP against a spec of **240k**). Applying the LOCKED
+table as written would make each anchor stronger than the class it anchors and push a further third
+of the roster below the target floor. **Re-derive the specs so the anchor lands ON 1.00 before
+applying them**, then re-run the census as the check.
+
+⭐ **Two free wins are available now, both maintainer calls, neither applied:** `tank_destroyer`
+`naxis_hetzer` 60% -> `ra1_allies_alliedtankdestroyer` **100%**; and `scout`, whose signed anchor
+`naxis_naxiriflesoldier` **is not a priced member of its own class**, -> `ra1_allies_rifleinfantry`
+**83%** (over target, and the archetypal scout-tier rifleman on the role axis too).
+
+**You cannot engineer a ladder for classes that have no members.** The vehicle ladder worked
+because those classes have real populations (`mbt` 40, `scout_vehicle` 27, `high_tech_tank` 25).
+**Classification comes first; the ladder is DERIVED from the populations, not invented ahead of
+them.** So the order is: tag the roster → re-select the off-centre anchors → derive the ladder →
+re-fit → re-queue for sign-off.
+
+⚠ **And it reframes "8 signed":** three of the eight price ZERO units. Signing them changed nothing
+in effect, but readiness was never 8 — five have any members, and two of those five are the ⛔ ones.
+
+⚠ Before re-anchoring a VEHICLE class, note that its anchor is still pre-restat, so its percentile
+is measured on stats the design already intends to replace. Those entries are a symptom of the
+unapplied restat below; apply it first, then re-read.
+
+## ⛔ P0 — THE INFANTRY CLASSES HAVE NO ENGINEERED LADDER EITHER (2026-08-30)
+
+Full review: [`BALANCE_COMPLETION_BRIEF.md`](BALANCE_COMPLETION_BRIEF.md) §1c.
+
+The 2026-08-01 LOCKED table engineered **13 vehicle classes** and its four claims all verify
+against `class_anchors.json`: HP in clean 10k steps, Cost/HP/Speed/DPS/Range all unique, A+B spread
+**1.922×** (≤2.0), DPS/Cost 0.50–2.00. **The vehicle anchors make sense.**
+
+The other **14 classes have no such table.** Their `provisional` fields read:
+
+* `dps0/cost0 placeholders — test in-game` — `archer`, `grenadier`, `melee`, `rocket_trooper`
+* **`— none —`** — `closecombat`, `scout`, `special_forces`, `support`
+* one-off notes (weights frozen, verifier blocked, "derived from the RA2 sniper") — 6 more
+
+⛔ **Seven of the eight signed classes are in the un-engineered half** — `archer`, `closecombat`,
+`flying_infantry`, `grenadier`, `heavy_sniper`, `mortar`, `special_forces`. Only `missile_vehicle`
+comes from the LOCKED table, and it is the one flagged ⛔ at 30% pricing error. **The engineered
+half is unsigned and the placeholder half is signed.** That is the reverse of what the evidence
+supports, and it is why `special_forces` reads 57%.
+
+**The work:** build the infantry ladder the way the vehicle one was built — a fixed class order, a
+capped A+B spread, unique base stats, HP on a stated grid — then re-fit and re-queue for sign-off.
+No boot needed. This is the single largest gap in the pricing model.
+
+## ⛔ P0 — 19 OF 27 ANCHOR ACTORS ARE PRE-RESTAT (2026-08-30)
+
+⭐ **This is UNAPPLIED WORK, not a broken design.** `class_anchors.json`'s `mbt` entry says it in
+its own comment — *"NEW 2026-07-31 restat (was legacy Tiger 100k/100/200/5000)"* — and the live
+`tiger.nax` still reads hp 100000 / speed 100. `spec` is the TARGET; the LOCKED table itself says
+*"HP/Speed/Cost/armor restat can proceed now"*. It never was.
+
+Three different problems wear the same label, and they need different fixes:
+
+| kind | examples | fix |
+|---|---|---|
+| **unapplied restat** | `line_breaker` hp 100k→750k (**7.5×**), `dreadnought` 300k→1.15M, `high_tech_tank` 225k→700k, `epic_vehicle` 1M→4M, `fire_support` 30k→120k | pipeline only — ledger → `apply_balance --confirm`, boot-gated |
+| **near-miss** | `archer` speed 72≠70, `heavy_sniper` 78≠80, `scout_vehicle` hp 20k≠30k | fold into the same apply |
+| ⚠ **suspected SPEC bug** | `flying_infantry` speed **80** vs the rocketeer's **180**; its note says "speed0 from air-speed", but over 168 buildable aircraft the median is **150** and only 36 fly at ≤80 | **maintainer ruling** — do not restat an actor to a spec that may itself be wrong. This class is SIGNED. |
+
+⛔ Reconcile spec against actor **before** fitting. Fitting around a mismatch freezes a wrong zero
+point into every price in that class.
+
+## ⛔ P0 — 82% OF THE BUILDABLE ROSTER HAS NO CLASS (2026-08-30)
+
+**336 of 1870 buildable actors are class-tagged (18.0%).** The formula cannot price an actor with
+no class, and must never infer one from numeric similarity: `anchor_readiness` lists eight class
+pairs that are *statistically indistinguishable* (`anti_air_vehicle` ↔ `missile_vehicle` 0.024,
+`archer` ↔ `flying_infantry` 0.048, `rocket_trooper` ↔ `special_forces` 0.053 …) and are separated
+only by **what they shoot at**. Coverage is a classification job, not a fitting job — and it is the
+hard ceiling on how much of the roster can ever be priced.
+
+⚠ Related, same section of the readiness report: several anchor ACTORS do not match their ruled
+specs (`mbt`/`tiger.nax` hp 100000≠240000; `missile_vehicle`/`ts_gdi_hovermlrs` hp 30000≠160000 —
+and that class is signed). The anchor is its class formula's ZERO POINT; reconcile spec against
+actor before fitting, per `anchor_decisions_log.md`, rather than fitting around it.
+
+## ⛔ P1 — MAINTAINER CALL: PICK `MACRO_RATIO` (2026-08-30)
+
+✅ **The `Heroic` question is RULED** (WEAPON_HEAVINESS §9.4a, maintainer 2026-08-30): the derived
+cell is **calculated but not measured** — it stays in MEAN-100 and leaves both spread metrics.
+Premise verified against the tree first: **32 wearers, 30 with `BuildLimit: 1`, 2 non-buildable
+hero variants, ZERO buildable-unlimited units.** That ruling is what opened the ratio range.
+
+The axis is **built, tested and shipping INERT** at `MACRO_RATIO = 1.0`. Measured with
+`audit_versus_profile`'s own post-ruling §9.4 definition:
+
+| `MACRO_RATIO` | §9.4 median | worst | in band | macro contrast |
+|--:|--:|--:|--:|--:|
+| **1.00** (ships) | 3.63× | 5.71× | **100%** | 1.67× |
+| **1.15** | **4.03×** ← smallest that reaches the 4× target | 5.94× | **100%** | 1.84× |
+| 1.25 | 4.08× | 6.45× | **100%** | 1.90× |
+| 1.35 | 4.17× | 6.45× | **100%** | 1.95× |
+| **1.50** | 4.26× | 7.07× | **100%** | **2.00×** ← Romanov's Vengeance parity |
+| 1.75 | 4.52× | 8.25× | 95% ⛔ | 2.08× |
+
+⭐ **CONSENSUS 2026-08-30: `1.50`.** Five independent reviews converged on it, and the two
+verifications they asked for both came back clean or bounded (§9.7a, §9.7b): the rounding seam does
+not threaten it (12% floor headroom, 11% ceiling), and the pricing drift is measured rather than
+assumed. Recorded here; the constant still SHIPS AT 1.0 for the same reason `TILT_MODEL` does — a
+splice by anyone, for any unrelated family, would otherwise ship it without a decision.
+
+⛔ **AND THE FLIP NOW NEEDS A RE-EXTRACT.** Measured in §9.7a: the axis is arithmetic-mean-neutral
+(MEAN-100 holds) but **not weighted-mean-neutral** — `armor_weights()` weights by ENGAGEMENT share
+(INF 0.345 · VEH 0.394 · BLD 0.148 · AIR 0.098), so K moves **1.75% on average and +5.3% on
+`Cryo_Heavy`** at 1.50. Every price behind the ledger is stale by that much after the flip.
+`extract_stats.py` → ledger → audits in the SAME boot session, before anything is priced.
+
+**The two defensible picks:**
+
+* **`1.15`** — minimum intervention. §9.4 lands on its 4× target and nothing else moves much.
+* **`1.50`** — the largest fully-safe ratio, and the first to reach macro **2.00×**, which is
+  *exactly* Romanov's Vengeance's like-for-like figure. RV is the closest peer Cameo has:
+  `peer_armor_map.yaml` records Cameo's armor set as descending from the same Attacque Superior
+  lineage ("the highest-confidence mapping in the file"). At 1.50, Cameo reads like its own
+  armor ancestor with §9.4 at 4.26× and zero offenders.
+
+⛔ **1.75 breaks §9.4** (95%, worst 8.25×). The safe range ends at 1.50.
+
+Flipping it is boot-gated — it regenerates every `^Warhead_*` template — so decide it together
+with item 0's bell flip and regenerate the tree once, not twice.
+
+⚠ Follow-up, not a blocker: `fit_band_floor` targets ≥2× in floats but the emit rounds to
+integers, so a family can land at 1.9855× (`CannonAP_Light` = 137/69). A round-aware floor would
+remove the non-monotonic in-band column.
+
+## ⛔ P1 — MAINTAINER CALLS THAT BLOCK PRICING (2026-08-30)
+
+1. **`scout_vehicle` `hp0`:** `class_anchors.json` says **30000**; `anchor_decisions_log.md`
+   LOCKED **20000** ("½ the LightTank → fragile"). Predates this session; README makes the
+   log the source of truth, so the JSON is the one that looks wrong.
+2. ✅ **DONE — the eight classes meeting ≤1 are SIGNED** (`0ff427712`, on explicit maintainer
+   order): `archer`, `closecombat`, `flying_infantry`, `grenadier`, `heavy_sniper`,
+   `missile_vehicle`, `mortar`, `special_forces`. **`class_anchors_signed_off` is 8 of 27.**
+   ⛔ Do not confuse this with the three (`dreadnought`, `heavy_infantry`, `scout`) an agent
+   self-signed on 2026-08-29 and which were reverted on 2026-08-30 — signing is the
+   maintainer's, and `bash_guard` still blocks the flip without an explicit order.
+   **19 remain unsigned, so most prices are still not final.**
+3. **Transcribe the RULED defense system** into `class_anchors.json` and wire
+   `formula.class_baseline_price_3` (the 3-input, speed-less form) into
+   `propose_class_rebalance` / `fit_class` — it has **zero callers** today. The formula,
+   its verifier convention (2.5×HP + 2.5×DPS → exactly 4.0×) and per-template anchors WITH
+   NUMBERS are already ruled in `anchor_decisions_log.md`; this is transcription, not
+   design. Its own open items: name the hybrid AA template, resolve the Advanced
+   verifier's Obelisk-Prime charge-K clash, and settle Super at 4000 vs 2500.
+4. **Bombers need the SORTIE-cycle formula** (`anchor_decisions_log.md`, "REARMABLE
+   AIRCRAFT"): a returning bomber's weapon `ReloadDelay` (~250 placeholder) is not its
+   damage cadence. ⚠ Do NOT price fighters or bombers with the ground formula meanwhile —
+   only helicopters and spaceships share it.
 
 ## ⭐ START HERE — [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md)
 
@@ -429,9 +1105,23 @@ The blockers previously listed here were measured with a broken hand parser that
 
 **What is genuinely still open:**
 
-1. Make the class tilt **CONTINUOUS** — driven by `h` from `tier_chain` (already computed and
-   stored per actor) instead of four discrete levels. This is the whole remaining idea.
-2. Collapse the level templates to **one per family + a per-weapon `h`**.
+1. ◐ **BUILT AND MEASURED 2026-08-30; the flip awaits a boot machine (item 0 above).**
+   `gen_weapon_template.shape_profile()` dispatches to §12.0i's bell or to the retired
+   `class_tilt`; both paths are complete and tested. The switch was performed for real — 139
+   templates spliced, full suite and `tools/tests/` run — and then `weapons.yaml` was REVERTED,
+   because it is engine content. Measured: 0 ladder inversions, MEAN-100 intact, §9.4 band
+   unchanged at 132/139, every `_Super` byte-identical because `Super` is off the axis. Details:
+   `WEAPON_HEAVINESS.md` §9.6b.
+   ⛔ And it cost six broken contracts before it was clean: `^Compatibility_*Flat` templates are
+   frozen COPIES of the canonical warhead body, 51 of 54 went stale, and two PAID UPGRADES came
+   out weaker than the weapons they replace. `splice_templates.py` now refreshes them in the same
+   pass; see `LESSONS_LEARNED.md`.
+   What remains of this item is the C# half — a per-weapon `Heaviness` field on
+   `AreaDamageWarhead` (it lives in `OpenRA.Mods.Cameo/Warheads/`, so it is IN this repo) so `h`
+   becomes continuous per weapon instead of pinned per level by `H_OF_LEVEL`.
+2. Collapse the level templates to **one per family + a per-weapon `h`**. ⚠ Blocked on 1's C#
+   half: the template must then carry the BASE profile and the bell must run at RUNTIME, or the
+   shaping is applied twice.
 3. ✅ CLEARED — the 4 orientation flips were **one real flip** (`Cryo`) plus 3 false positives from
    comparing `None` (INF ladder) against `Superheavy` (VEH); §12.0d only orders WITHIN a ladder.
    `Cryo` flipped because its blend tiebreak was decided per LEVEL on a one-point margin — the
@@ -533,7 +1223,8 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    `td_gdi_defenserig` (Superheavy — already correct), `cabal_ravager` (Plate) — decide per-unit whether
    the base-state armor should match class.
 1. **[BLOCKED on maintainer confirm + `--confirm`] Apply VEHICLE stats** — once the REVISION table is
-   confirmed: baselines → `apply_balance --confirm` (fit_class scales members 0.5–4.0×, verifier 2.5×) →
+   confirmed: baselines → `apply_balance --confirm` (fit_class scales members 0.5–4.0×; the 2.5×
+   point is a PRICE RATIO, not an actor — ⛔ RETIRED 2026-08-29 (HANDOFF §3.0j) — no verifier actor exists; the 100–250% band survives as a price ratio.) →
    self-heal Step → epic 4×HP + MonsterTank DPS→10000 → re-extract → audits + BOOT →
    commit yaml+ledger. THEN **infantry** (build the same big class table first, then apply). NOTE: the
    HP/Speed/Cost/DPS restat of the 13 baselines + per-member synthesis is still pending here; DPS/range
@@ -811,7 +1502,7 @@ exempt from the R2 check.
 ## Balance — universal class-formula program (2026-07-22, ACTIVE)
 
 **Goal:** ONE balance formula for every class; a class is re-weighted only
-by dropping in a **baseline actor** + **verifier actor** (the two calibrate
+by dropping in a **baseline actor** ~~+ **verifier actor**~~ (⛔ RETIRED 2026-08-29 (HANDOFF §3.0j) — no verifier actor exists; the 100–250% band survives as a price ratio.) (the two calibrate
 the weights). `UnitClass` scalar is deprecated → set to 1.0 once all anchors
 are picked, then delete. Order: infantry → tanks/vehicles → aircraft →
 defenses → naval. All DPS/cost below are PROVISIONAL (maintainer tunes

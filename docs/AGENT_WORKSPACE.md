@@ -26,6 +26,13 @@ This repository is the shared source of truth for maintainers and every AI agent
 
 ## Required operating sequence
 
+⛔ **0. THE DOCS MAXING AUDIT — hook-enforced, and it precedes everything below.** No tool action
+is permitted until `docs/README.md`, `docs/LESSONS_LEARNED.md`, this file, `docs/HANDOFF.md`,
+`docs/DESIGN.md`, `docs/design/ROADMAP.md` and `docs/audit/SUMMARY.md` have been OPENED this
+session. Reads and `git status`/`log`/`diff` are exempt. Manifest and coverage:
+`python tools/audit/audit_docs_maxing.py`. Step 1 below is that same order, restated; the hook is
+what makes skipping it impossible rather than merely discouraged.
+
 1. Read in this order before touching rules or assets: `docs/LESSONS_LEARNED.md` → this file → `docs/HANDOFF.md` → `docs/DESIGN.md` (the sections your change touches) → `docs/design/ROADMAP.md` → `docs/audit/SUMMARY.md`, then the relevant section of `docs/Cameo_Knowledge_Base_Manual.md`. **`docs/README.md` defines that order and wins over any copy of it, including this one.**
 2. Record a newly discovered crash, regression, or suspected discrepancy in `docs/design/ROADMAP.md` before proposing a fix.
 3. Treat release builds, engine logs, resolved-ruleset diffs, and current audit output as evidence. Do not promote an old raw `.txt` result to a live finding without rerunning its audit.

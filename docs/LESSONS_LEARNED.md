@@ -10,6 +10,142 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 
 ---
 
+## A boot-less environment can still land engine work — as a patch, not as a hack (2026-09-01)
+
+⛔ **The conundrum.** A cloud container has no `engine/` build and no `%APPDATA%/OpenRA/Logs`, so
+the boot gate (CLAUDE.md rule 1, enforced on `git commit` by `bash_guard.py`) is **unsatisfiable
+there by construction**. Every yaml fix found in such a session hits the same wall.
+
+**The three wrong answers**, all of which have a certain logic and all of which are wrong:
+
+1. *Disable or edit the hook.* The gate exists because the Python resolver does not catch junk
+   trait nodes and only the engine does. A gate switched off for convenience is a gate that was
+   never load-bearing.
+2. *Leave it uncommitted in the working tree.* The container is ephemeral. The work dies with it,
+   and the next session re-derives it — this project has paid that bill more than once.
+3. *Commit it anyway and let someone boot later.* That is exactly the failure the gate prevents,
+   and it puts unverified content on a branch other people build on.
+
+⭐ **The right answer: `docs/patches/`.** Author the change, verify it as far as a boot-less
+environment honestly can, and commit it as a `git apply`-able patch plus a README section stating
+what was verified, what was NOT, and the exact apply-verify-boot-commit sequence. The work
+survives, the gate holds, and the person with a boot machine spends one command instead of a
+session. Delete the patch in the same commit that lands it, so the directory never accumulates
+changes that are already in the tree.
+
+**What "verify as far as you honestly can" means, concretely** — all of this needs no boot:
+
+* `git apply --check` against the real tree, then apply, then restore, so you know it lands;
+* resolve the affected actors through **`miniyaml.Ruleset`** before and after, on a hard-linked
+  shadow tree, and diff the trait lists — never hand-parse (rule 8e);
+* write the **audit that would have caught the bug**, and show it red before and green after;
+* state the residue. The `ResourcePurifier` relocation in patch 02 could not be verified because
+  the yaml names a type that resolves past the vendored `ResourcePurifierCA` into an assembly this
+  repository does not contain. That is written down as a blocker, not smoothed over.
+
+⚠ **The shadow tree trick, because the obvious version corrupts the repository.** `cp -al` gives
+you a whole hard-linked copy for free, but the files then SHARE inodes with the originals, and
+`cp` over one truncates the original in place. **`rm` the file first, then copy.** And never
+`git checkout -- .` to clean up (rule 6) — restore only the paths you touched, by name.
+
+
+## A shallow clone makes `git log` lie by omission (2026-09-02)
+
+⛔ **The incident.** Investigating the "150% UI scale breaks faction icons" report, `git log` on
+`flags_3x.png` returned exactly one commit — a weapons commit that had swept the file up
+incidentally. It looked like the asset had barely been touched. **That was an artifact of the
+clone, not a fact about the file.** A cloud container clones shallow, and
+`git rev-parse --is-shallow-repository` said `true`.
+
+After `git fetch --unshallow` the real history was 4,193 commits, and the file's own log showed the
+thing that actually mattered: **the bug had been found and fixed once, by Blackrobe on 2026-06-09,
+and reverted the same day.** The correct 1536px sheet was sitting in history the whole time. Acting
+on the shallow log would have meant re-creating an asset that already existed, and never learning
+that a previous fix had been rejected — which turned out to be the most important fact in the
+investigation.
+
+⭐ **The rule: before any `git log`, `git blame`, `git tag` or "when did this change" reasoning,
+check `git rev-parse --is-shallow-repository`.** If it says `true`, `git fetch --unshallow` first.
+Tags are missing too — this clone had none of its 67 tags until the fetch, so "is it in the latest
+release" was unanswerable and would have been guessed.
+
+⚠ **And the generalisation, which is the same shape as "'Not found' is a claim about your
+search":** an empty or thin result from a tool is a statement about the tool's reach, not about the
+world. `git log` with no results, a grep with no hits, and an audit with no findings all fail the
+same way — silently, and looking exactly like good news.
+
+
+## "Not found" is a claim about your search, not about the tree (2026-09-01)
+
+⛔ **The incident.** The maintainer said the bots have *"a passive income that increases with
+difficulty"*. I searched every `mods/cameo/**/*.yaml` for `CashTrickler`, `GrantCash` and income
+traits gated on a bot condition, found nothing, and wrote **"NOT FOUND in this mod"** into two
+documents — hedged as *"recorded as not-found, not as false"*, which is the right hedge and was
+still not enough, because a reader acts on the headline. The maintainer then supplied the name:
+**bot insurance**. One grep for `insurance` found `OpenRA.Mods.Cameo/Traits/BotInsurance.cs` and a
+ten-rung ladder in `mods/cameo/rules/defaults.yaml:6712` that is the single largest AI cheat in the
+mod.
+
+⭐ **Why the concept search could not have worked.** The thing *is* a `CashTrickler`. But it is
+gated on conditions called `easiestbotinsurance` … `cameogodbotinsurance` — no economic word
+anywhere in the name — granted by a trait whose own `[Desc]` says only *"Grants a condition to this
+actor when the player has stored resources"*, and it lives on the **construction yard**, not on the
+`Player` actor or in `ai.yaml`. Every filter I applied was a filter it legitimately passes through.
+Even the Knowledge Base Manual's entry for it described it as a generic hook for *"emergency
+behaviors such as power sell"* and never mentioned that the mod wires it to income.
+
+**The rules, in the order they would have saved the time:**
+
+1. **When a person who knows the tree tells you a thing exists, the prior is that it exists.** Ask
+   for the name before concluding it does not. A maintainer's memory of their own mod outranks your
+   grep of it.
+2. **Grep the NAME, not only the concept.** Concept greps assume the author named the thing after
+   what it does. This one is named after the *situation it insures against*, which is a perfectly
+   normal way to name a feature and invisible to every keyword you would pick.
+3. **Search by wiring, not by vocabulary.** The mechanical version of rule 2: enumerate every
+   `CashTrickler` / `GrantCash` / `ResourcePurifier` in the mod and print *what condition each one
+   requires*, then read the list. That finds it in one pass with no guess about naming, and it is
+   the check `audit_doc_claims.py` now runs (`bot_insurance_rungs`).
+4. **Say what you searched, not just what you found.** "No trait matching `<pattern>` under
+   `<paths>`" is checkable and invites correction. "NOT FOUND in this mod" is neither.
+
+⚠ **And the near-miss.** Verifying the correction turned up a live bug — the four lowest rungs gate
+on `normalbot`, a condition `^AIDifficulties` never grants, so `medium` bots get **zero** insurance
+income while `easy` gets three rungs and `hard` gets five. It had been in the tree unnoticed
+precisely because nobody had ever read the ladder end to end. **The verification is worth more than
+the correction.**
+
+
+## A registry nothing reads, and a reader that fails silently (2026-08-31)
+
+⛔ **Two versions of the same bug, one nested inside the other.**
+
+`docs/design/balance_exceptions.yaml` is the maintainer's answer to "is this actor in the
+formula?". Its `limits:` section had a consumer. Its `categories:` section had **none** — so
+writing `in_formula: false` changed no measurement and no price. A quarantine that no tool
+reads answers *"is this handled?"* with a lie, which is exactly what `formula.py` already
+documents about `VEHICLE_TYPE_CLASSES = {"mbt"}`, a class-level knob that nothing read while
+the per-row step always won. **Fix: one reader (`tools/balance/exceptions.py`), and a test
+that asserts a CONSUMER honours it — not merely that the file parses.**
+
+⛔ **Then the reader did it again, quieter.** It did `import yaml` and returned `{}` on
+ImportError. That worked from the CLI and quarantined **nothing** under `pytest`, because
+pytest here runs on a uv-managed interpreter with no PyYAML. Six tests failed and said so;
+without them the registry would have looked live while doing nothing on every machine
+without PyYAML — possibly including the Windows one.
+
+⭐ **The rule: an unreadable input must be LOUD, never empty.** `_registry()` now raises on an
+unreadable file, uses PyYAML when importable, and falls back to a strict minimal parser
+otherwise. ⚠ And a hand parser is only acceptable *with a check on it* — rule 8e's disaster
+was a hand parser with nothing verifying it, which opened a block and never closed it. So
+`test_the_fallback_parser_agrees_with_PyYAML` compares the two wherever both exist, and the
+fallback closes its list the moment indentation returns to its level, which is the exact line
+whose absence caused that incident.
+
+⚠ **Generalise past yaml:** "the tool ran and found nothing" and "the tool could not look"
+must never produce the same output. Check which one you have before believing a clean result.
+
+
 ## Required reading order for every new task
 
 **`docs/README.md` is the canonical definition of the reading order.** The list below is a
@@ -29,14 +165,152 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 ---
 
+## ⛔ A GUARD WRITTEN FROM ONE INCIDENT COVERS ONE INCIDENT (2026-08-30)
+
+`read_first_guard.py` was built after a session ran on class anchors without opening
+`anchor_decisions_log.md`. It worked — and then the **same class of failure recurred in a topic
+its map did not name.** A full armor-tilt investigation ran without `WEAPON_HEAVINESS.md`, whose
+**§9.4 already ruled the 2×–8× band with a 4× target** and already recorded 37 of 42 families
+inside it. Hours went into re-deriving a law, and a fresh measurement (macro contrast 1.7×) was
+reported as a defect when the law it supposedly violated was being **met exactly** (row spread
+4.00×, 80% in band). In the same pass two external reviews asserted `Jumpjet = Plate × Scout`;
+`ARMOR_LAYERS.md` line 1714 says **`jumpjet = fighter × scout`** — and nothing required that file
+to be open either.
+
+**The guard's `TOPICAL` map had exactly ONE entry.** Not because armor work was judged safe, but
+because nobody had generalised it past the incident that prompted it. A guard authored from a
+single failure encodes that failure, not the class of failure.
+
+**Now:** the map names four documents, each the one that would have prevented a specific dated
+mistake, with the vocabulary that mistake used —
+`anchor_decisions_log.md` (anchors, baselines, sign-off) ·
+`WEAPON_HEAVINESS.md` (tilt, spread, the band, MEAN-100, the bell) ·
+`ARMOR_LAYERS.md` (armor, Versus, the DERIVED armors Heroic and Jumpjet, plating) ·
+`BALANCE_PROGRAM_PLAN.md` (W24/W23/W27, order of operations, structure debt).
+Pinned by `tools/tests/test_read_first_guard.py::TheTopicalMapCoversMoreThanOneIncident`, which
+tests the TOPICS rather than the mechanism so the map cannot silently shrink back.
+
+⚠ **And a note the test itself taught:** *"armor tilt"* correctly triggers **both** armor
+documents. The first draft of that test expected `WEAPON_HEAVINESS` alone to unblock the edit and
+failed — correctly. An agent holding only half of that pair is precisely the agent who re-derives
+§9.4 while getting a derived armor row wrong. When a guard and an expectation disagree, check
+which one is describing reality before "fixing" the guard.
+
+## ⛔ ANCHOR WORK STARTS AT THE ANCHOR DECISIONS LOG (2026-08-30)
+
+**`docs/balance/anchor_decisions_log.md`.** `docs/README.md` line 129 says `class_anchors.json` is **maintained via** that log, which makes it
+the source of truth for every class baseline — and it is 1181 lines of LOCKED rulings with real
+numbers. A session spent entirely on class anchors never opened it, and paid for it three times:
+
+* `scout_vehicle`'s **infantry HP granularity** was reported as a fresh ruling. It had been
+  **LOCKED 2026-07-26**, with the reasoning (self-heal `Step = HP/1000` vs the vehicle `HP/2500`)
+  and a companion requirement flagged **"HARD RULE — do not forget"**: switch
+  `^ScoutVehicleTemplate` from `^VehicleBuffs` to the `^InfantryBuffs` self-heal timing. Changing
+  the grid without that is half the ruling.
+* The **3-input defense formula** was reported as "documented nowhere, no anchor". The log has the
+  formula, its verified numerics (2× one input → 1.667×; 2× all → 4.667×), the **4.0× verifier
+  convention** `(2·2.5+1)²/9`, a 7-template roster and per-template anchors with numbers.
+* The **bomber** problem was reported as a gap. The log's "REARMABLE AIRCRAFT" section already
+  ruled it: effective DPS must come from the **SORTIE cycle**, not the weapon `ReloadDelay`.
+
+⛔ **And never set `signed_off: true` yourself.** `fit_class.py` step 4 reserves it for the
+maintainer, because signing unblocks `apply_balance --confirm` for that class. Three anchors were
+agent-signed on 2026-08-29 and reverted on 2026-08-30.
+
+⚠ **The subtlest trap in that sequence:** the next session found the docs saying "0 signed", checked
+the artifact, saw 3, and "corrected" the docs — following the artifact-wins rule correctly and
+getting the wrong answer, because the artifact was the previous session's own unauthorized edit.
+**A document agreeing with an artifact you wrote is an echo, not corroboration.** When the artifact
+is young and the document is old, ask who moved.
+
+## ⛔ THE CANONICAL REPO IS `cameo-mod/Cameo-mod`; THE OLD FORK IS DEAD (2026-08-30)
+
+`github.com/Zeruel87/Cameo-mod` is the ORIGINAL upstream fork and it is **abandoned**. It is
+still reachable, still has a `master`, and still answers `git fetch` — which is exactly what
+makes it dangerous: it looks like a live upstream. On 2026-08-11 it was re-added as `upstream`
+and a session was spent reconciling two stray commits against a tree nobody publishes to
+(`DEVELOPMENT_LOG.md` 657-670). Anything fetched from it is history; anything pushed to it is
+lost. `docs/design/BALANCE_PIPELINE_GAPS.md` already lists "the repository is Zeruel87/Cameo-mod"
+as a corrected-claim row — this is the same error arriving by a different route.
+
+**The rule:** one remote, `origin` -> `cameo-mod/Cameo-mod`. History that predates this
+repository lives in `docs/history/`, not on the fork. Enforced by `tools/hooks/bash_guard.py`
+rule 1b (denies any `git` command naming the fork). Residual hole to know about: the guard
+matches the fork NAME, so a remote already added under a neutral alias would still fetch — it
+blocks the `git remote add`, which is where the alias gets created.
+
+**And the mirror-image trap:** two appearances of the old author name are ART CREDIT, not
+repository pointers, and a well-meaning sweep that strips them does real damage —
+`Zeruel87 Urban` is a TILESET CATEGORY id in `mods/cameo/tilesets/*.yaml` (every map placing
+those tiles resolves it by name) and `mods/cameo/credits.txt` names a human being. Grep for
+the URL, never for the name.
+
+**One live pointer is still in shipped content:** `mods/cameo/mod.yaml:5` sets
+`WebIcon32: https://raw.githubusercontent.com/Zeruel87/Cameo-mod/master/packaging/artwork/icon_32x32.png`
+— the running game fetches its icon from the abandoned fork. Boot-gated one-line fix; see
+HANDOFF §3.3b.
+
+## ⛔ GREP `tools/` BEFORE WRITING A TOOL — not just `docs/` (2026-08-30)
+
+The reading order above is about DOCUMENTS. Three times in one session work was redone because the
+thing that already existed was **code**:
+
+* `audit_turn_rate.py` re-checked a law `audit_stat_formulas.py` (F8/F9/F10/F17/F19) had enforced
+  for months, already in `run_all.sh`, already at **0 findings**, already auto-fixed by
+  `gen_derived_stats.py`. The duplicate mis-scoped its cohort and published **340 findings against a
+  clean roster** into DESIGN.md and HANDOFF.md.
+* `formula.turn_speed_for` became a SECOND copy of that law — the same defect as the dead `spd_step`
+  knob removed two commits earlier.
+* The fighter/bomber `Speed/15` rule was "discovered" when it sits in `DESIGN.md:537`, a second
+  table 1100 lines from the one that was grepped.
+
+**Two habits, both cheap:**
+
+1. **Grep the MECHANISM, not the phrase.** `"TurnSpeed (aircraft)"` found one sentence of a
+   two-part law. `grep -ril fighter tools/` would have found the whole thing implemented and
+   passing. A law is usually written twice in prose and once in code; the code is the one that runs.
+2. **A fresh measurement that contradicts a PASSING audit is wrong until proven otherwise.** This is
+   CLAUDE.md §8e in a new costume. 340 violations against a suite that reports zero should stop you
+   on sight — go and read the passing check's SCOPE first. In that case the real audit scoped
+   `ut == "air"` **and** template inheritance; the duplicate scoped "has a Mobile or Aircraft trait"
+   and applied the ground law to aircraft in no air template.
+
+⭐ Enforced, not just written down: **`tools/hooks/prior_art_guard.py`** (PreToolUse on `Write`)
+denies creating a new `.py` under `tools/` while an existing tool carries the same concept tokens,
+and names it. One `PRIOR ART:` line in the new file releases the block — it forces the check, not
+obedience. Pinned by `tools/tests/test_prior_art_guard.py`.
+
+⚠ And a scope lesson from the same investigation, worth its own line: **`audit_stat_formulas` F8/F10
+check the DERIVED value, not the grid.** `TurnSpeed == round(Speed/5)` passes for a Speed that is
+not a multiple of 5 (`japan_nanodronebuggy` Speed 77 → TurnSpeed 15). Nine ledger actors sit off the
+Speed grid and no audit covers it. "The audit is green" answers only the question the audit asks.
+
+---
+
 ## Contents
 
 **Crash classes — these end a boot, and most gates cannot see them**
 
+- [A boot-less environment can still land engine work — as a patch, not as a hack (2026-09-01)](#a-boot-less-environment-can-still-land-engine-work--as-a-patch-not-as-a-hack-2026-09-01)
+- [A shallow clone makes `git log` lie by omission (2026-09-02)](#a-shallow-clone-makes-git-log-lie-by-omission-2026-09-02)
+- ["Not found" is a claim about your search, not about the tree (2026-09-01)](#not-found-is-a-claim-about-your-search-not-about-the-tree-2026-09-01)
+- [A registry nothing reads, and a reader that fails silently (2026-08-31)](#a-registry-nothing-reads-and-a-reader-that-fails-silently-2026-08-31)
+- [A test can encode a WEAKER property than the law and then defend the bug (2026-08-30)](#a-test-can-encode-a-weaker-property-than-the-law-and-then-defend-the-bug-2026-08-30)
+- [Two corpora measured on DIFFERENT frames are not comparable — the frame was worth 17% (2026-08-30)](#two-corpora-measured-on-different-frames-are-not-comparable--the-frame-was-worth-17-2026-08-30)
+- [⛔ A GUARD WRITTEN FROM ONE INCIDENT COVERS ONE INCIDENT (2026-08-30)](#-a-guard-written-from-one-incident-covers-one-incident-2026-08-30)
+- [⛔ THE CANONICAL REPO IS `cameo-mod/Cameo-mod`; THE OLD FORK IS DEAD (2026-08-30)](#-the-canonical-repo-is-cameo-modcameo-mod-the-old-fork-is-dead-2026-08-30)
+- [A `^Compatibility_*Flat` template is a frozen COPY, and regenerating its canonical desynchronises it (2026-08-30)](#a-compatibilityflat-template-is-a-frozen-copy-and-regenerating-its-canonical-desynchronises-it-2026-08-30)
+- [Pinned resolved-behaviour HASHES move when a law legitimately moves — re-pin, with the reason (2026-08-30)](#pinned-resolved-behaviour-hashes-move-when-a-law-legitimately-moves--re-pin-with-the-reason-2026-08-30)
+- [A DERIVED cell has to be recomputed on EVERY exit — an early return is where that is forgotten (2026-08-30)](#a-derived-cell-has-to-be-recomputed-on-every-exit--an-early-return-is-where-that-is-forgotten-2026-08-30)
 - [`Parent type X was already inherited` — the crash class nothing but the boot could see (2026-08-17)](#parent-type-x-was-already-inherited--the-crash-class-nothing-but-the-boot-could-see-2026-08-17)
 - [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
 - [ClassicProductionQueueProperties crash on actors with no queue (2026-07-31)](#classicproductionqueueproperties-crash-on-actors-with-no-queue-2026-07-31)
 - [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
+
+**Redoing work that already exists — the most expensive class, because nothing goes red**
+
+- [⛔ ANCHOR WORK STARTS AT THE ANCHOR DECISIONS LOG (2026-08-30)](#-anchor-work-starts-at-the-anchor-decisions-log-2026-08-30)
+- [⛔ GREP `tools/` BEFORE WRITING A TOOL — not just `docs/` (2026-08-30)](#-grep-tools-before-writing-a-tool--not-just-docs-2026-08-30)
 
 **Silent-corruption classes — valid yaml, clean boot, wrong game**
 
@@ -83,6 +357,8 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
 - [`docs/audit/latest/` is environment-bound — an incomplete tree reports LESS and still says PASS (2026-08-23)](#docsauditlatest-is-environment-bound--an-incomplete-tree-reports-less-and-still-says-pass-2026-08-23)
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
+- [Three ways I measured zero, and the tree said otherwise (2026-09-02)](#three-ways-i-measured-zero-and-the-tree-said-otherwise-2026-09-02)
+- [A green test runner that runs none of the tests (2026-09-02)](#a-green-test-runner-that-runs-none-of-the-tests-2026-09-02)
 - ["Regenerable" is a claim about a tool, and it needs running (2026-08-28)](#regenerable-is-a-claim-about-a-tool-and-it-needs-running-2026-08-28)
 - ["Not found" is not "not there" — three ways a grep lies (2026-08-28)](#not-found-is-not-not-there--three-ways-a-grep-lies-2026-08-28)
 
@@ -1180,6 +1456,160 @@ A naive 3-way split onto `^Projectile_Missile_*` drops those colors and `review_
 
 ---
 
+## Two corpora measured on DIFFERENT frames are not comparable — the frame was worth 17% (2026-08-30)
+
+`audit_versus_profile.py` carried a peer table — Romanov's Vengeance 3.00×, OpenRA Red Alert
+2.67×, Combined Arms 2.35× — and a conclusion drawn from it: *"OpenRA RA has the SAME row spread
+as Cameo yet 47% more macro contrast, so Cameo is not short of gradient — it spends it WITHIN
+ladders instead of BETWEEN them."* That sentence set the design direction for the next session.
+
+**It was wrong three ways, and the numbers had no recorded source.**
+
+1. **Unattributed.** No command, no dataset, no date. When they were finally re-derived from the
+   committed `docs/reference/versus_raw.json`, **RV came out 2.00× (not 3.00×) and CA 2.93× (not
+   2.35×)**. Only OpenRA RA was close.
+2. **Measured on different FRAMES.** Macro contrast is `max/min` over ladder MEANS. Averaging 4–5
+   rows into a mean pulls it toward the profile mean; averaging ONE row does not. OpenRA RA ships
+   five armor classes in total, so its "INF mean" *is* its `none` row, while Cameo averages
+   `None + Flak + Plate + Heroic`. Measured on the **identical** 139 Cameo templates, changing only
+   the frame moves the answer **1.63× → 1.91×**. About a third of the "47% gap" was the estimator.
+   ⚠ The comment even contained the sentence *"averaging four or five rows into a ladder mean
+   necessarily compresses"* — and then compared against mods with one row per ladder anyway.
+   Knowing the mechanism did not stop the comparison.
+3. **The inference did not follow.** Cameo's macro SHARE of its total spread is 60–73%, inside the
+   peer range of 64–90% — so "spends its gradient in the wrong place" was never supported by the
+   data that was supposed to show it.
+
+**The generalisations:**
+
+* **A cross-corpus number needs its FRAME in the same breath as its value.** "RV is 2.00×" is not a
+  fact; "RV is 2.00× over `none/flak/plate | light/medium/heavy/drone | wood/steel/concrete`" is.
+  Two corpora with different armor vocabularies have no shared metric until you build one, and the
+  honest construction is to measure **each peer on its own frame and yourself on that same frame** —
+  which is what `--peers` now does.
+* **A number without a re-measure command is a rumour**, however carefully it was once measured.
+  That is precisely what `docs/audit/doc_claims.yaml` exists for, and these three were never pinned.
+  Anything that steers a decision goes in the registry, in the same commit that measures it.
+* **"Target 4×" turned out to describe ONE mod** (Mental Omega, 4.15×) out of five. The field median
+  is ~2.6×, and RA2 vanilla at 1.73× is level with Cameo. Check whether a target is the field's
+  median or its outlier before adopting it as a goal.
+
+## A `^Compatibility_*Flat` template is a frozen COPY, and regenerating its canonical desynchronises it (2026-08-30)
+
+⛔ **`^Compatibility_<Family>_<Level>Flat` is not a shim that points at `^Warhead_<Family>_<Level>`
+— it is a VERBATIM COPY of that template's main warhead body**, pinned into `weapons.yaml` by the
+3-way-split consolidators so a retrofitted weapon keeps exactly the profile it had. Only two fields
+differ: `Damage: 0` and `PercentageScale: 0`, which the weapon supplies.
+
+So **regenerating a `^Warhead_*` template silently desynchronises every copy of it**, and no tool
+noticed: the consolidators skip anything already consolidated (`already = COMPATIBILITY_KEY in
+mains …`) because they are ONE-SHOT migrations, not regenerators. Measured when the emitter
+switched to §12.0i's bell: **54 of 54 copies matched their canonical before the splice, 3 of 54
+after.**
+
+**The damage was real, not cosmetic.** Two PAID-UPGRADE contracts broke outright —
+`OfficerMachineGunAP` and `TS30mmRail` came out WEAKER than the weapons they are bought to
+replace — because the base weapon reads the frozen copy while its upgrade reads the live template.
+A player would have paid for a downgrade. Nothing in the audit suite sees this: the guards check
+each profile against the LAWS (MEAN-100, the spread band, ladder order), and both the stale copy
+and the fresh template obey every law. Only `tools/tests/` compared the two to each other.
+
+**The fix is structural: `splice_templates.py` now refreshes the copies in the same pass that moves
+the canonical**, scoped to the templates that run actually rewrote (so a HAND_TUNED canonical like
+`^Warhead_Nuclear_Super`, whose copy has genuinely diverged in shape, is left alone rather than
+tripping the fail-closed guard every time).
+
+Three things generalise past this one file:
+
+* **Search for COPIES of anything you regenerate.** "Nothing else references this template" is a
+  claim about `Inherits`, and a copy has no `Inherits` to find. Ask instead: does any node hold
+  the same VALUES?
+* **A one-shot migration tool is not a regenerator, and its `--apply` will not repair its own
+  output.** Re-running it is a no-op by design. Whatever it froze has to be refreshed by the tool
+  that moves the source.
+* **Run `tools/tests/` before believing a bulk regenerate is clean.** The audit suite scored this
+  change perfect — 0 inversions, MEAN-100 intact, spread band unchanged, `verify_generator_sync`
+  drift 0 — while six contracts were broken. Laws are checked per profile; the tests are what check
+  profiles against EACH OTHER. Always take a BASELINE run first: this tree has one pre-existing
+  failure (`test_ledger_split`), and without knowing that, "5 failures, 2 errors" is unreadable.
+
+## Pinned resolved-behaviour HASHES move when a law legitimately moves — re-pin, with the reason (2026-08-30)
+
+`consolidate_exact_profile_duplicates.py` and `consolidate_explicit_family_state_profiles.py` carry
+hardcoded SHA-256 pins of resolved weapons (`PRESERVED_HASHES`, `BRANCH_HASHES`, `PINNED_HASHES`),
+the proof their one-shot conversions preserved behaviour. Regenerating the `^Warhead_*` templates
+moves them, and there is no way to tell "the law moved" from "I broke something" except by looking.
+
+What made it readable here was WHICH pins moved: the 3 `TeslaArmorDischarge*` and all 4
+`BRANCH_HASHES` changed, while the other 8 `PRESERVED_HASHES` and all 3 `FLAK_*` did not. The
+unchanged ones exclude the mains from the hash; the changed ones include template-derived rows.
+That split is the evidence that only profiles moved and no routing did — and it is worth writing
+down in the constant's own comment, because the next reader has no other way to reconstruct it.
+
+⛔ **Never re-pin to make a red test green.** Refresh with `--print-hashes` (added to both modules
+so it is no longer a hand edit), and record the ruling that moved them in the same commit.
+
+## A test can encode a WEAKER property than the law and then defend the bug (2026-08-30)
+
+One commit after `rederive_products()` was extracted so every shaper path would end in §12.0b's
+re-derivation, a NEW stage — `macro_spread` — was added that moves `Plate` (INF) and `Scout` (VEH),
+the two INPUTS to `Heroic`, and did not re-derive it. The same bug, in a new stage, one commit later.
+
+⛔ **There was a unit test for exactly this cell, and it passed.** It asserted:
+
+    self.assertEqual(before["Heroic"], after["Heroic"])     # "not scaled as a rung"
+
+which is a WEAKER property than the law. §12.0b does not say `Heroic` is unchanged — it says
+`Heroic` is **recomputed from the finished profile**. "Unchanged" and "correctly re-derived" agree
+only while the inputs stay still, and this stage moves them. So the test encoded the symptom it
+happened to observe on the day it was written, and then actively defended the defect.
+
+**What actually caught it** was measuring the audit's own §9.4 metric, where `Heroic` sits inside
+the INF ladder mean: a frozen row visibly damped the metric the axis exists to move. A number that
+would not budge, not a red test.
+
+Three things generalise:
+
+* **Assert the MECHANISM, not a symptom.** The corrected test computes
+  `after["Plate"] * after["Scout"] / peak` and compares — it now fails if the re-derivation is
+  skipped OR done wrongly, which the equality check could never do.
+* **When a fix turns a test red, ask which one matches the LAW before "fixing" the test.** Here
+  the fix was right and the test was wrong; the previous instance of this question (an armor-tilt
+  edit needing both armor docs) went the other way. The question has to be asked either way.
+* **Extracting a shared helper does not stop the bug recurring — only calling it does.** A helper
+  that the next new stage forgets is a helper that documents the law without enforcing it. Worth
+  asking, whenever a pipeline gains a stage: which of the shared FINAL steps does it owe?
+
+⚠ The consequence here was not cosmetic. With `Heroic` correctly re-derived it falls as roughly the
+SQUARE of the macro ratio on families whose favoured ladder is neither INF nor VEH, because it draws
+one input from each — so `MissileAA` breaks §9.4's 8× ceiling at ratio 1.20 where the buggy version
+looked safe past 1.50. The bug had made an unsafe setting look recommendable, and four independent
+reviews had recommended it.
+
+## A DERIVED cell has to be recomputed on EVERY exit — an early return is where that is forgotten (2026-08-30)
+
+Wiring §12.0i's bell into `gen_weapon_template.py` replaced `class_tilt`. `Super` is off the
+heaviness axis (it is the FLAT generalist — a spread instruction, not a peak location), so the new
+`shape_profile()` gave it a short path: flatten, return. The old path had ended with §12.0b's
+product re-derivation (`Heroic = Plate x Scout / PEAK`); the short one did not.
+
+**The entire symptom was one row: `^Warhead_Tesla_Super`'s `Heroic` came out 102 instead of 103**
+— in the ONE level the switch was supposed to leave byte-identical, at a magnitude a rounding
+boundary could hide. Nothing failed, nothing warned, and the only reason it was caught is that the
+switch had a stated invariant ("every `_Super` template is unchanged") which was actually MEASURED
+rather than asserted.
+
+Two things generalise:
+
+* **A "derived LAST" law needs ONE implementation that every path ends in, not a copy at the end
+  of each path.** The re-derivation existed twice, and the third path simply did not get a copy.
+  It is now `rederive_products()`, called from `class_tilt`, `heaviness_bell` and the `Super`
+  branch alike.
+* **State the invariant your change is supposed to preserve, then measure THAT, not just the
+  totals.** "mean |delta| 4.49%" was true and clean with the bug in place; "of which `_Super`: 1"
+  is what exposed it. A per-cohort counter next to the aggregate is cheap and it is the only thing
+  that saw this.
+
 ## Tooling fixes discovered during W24 A1a (2026-08-22)
 
 - tools/rename/safe_rename.py lower-cased every replacement. It now preserves the exact case written in the rename map, so mixed-case OpenRA ids stay canonical.
@@ -1245,3 +1675,89 @@ safe is a property of the CONSUMER, not of the yaml -
 `ConditionalTrait` still occupies the trait dictionary - so gating five
 composition modules by condition crashes on the first bot tick instead of
 degrading.
+
+## A green test runner that runs none of the tests (2026-09-02)
+
+`tools/tests/README.md` said "stdlib `unittest` only", and `audit_test_coverage.py` and
+`docs/audit/PERIODIC.md` both document
+
+```sh
+python -m unittest discover -s tools/tests -t tools/tests
+```
+
+as *the* way to run the suite. It is true for 81 of the 89 files. The other eight are written
+pytest-style — bare `def test_*` functions, seven of them also using `@pytest.mark.parametrize`,
+`pytest.approx` or `pytest.raises`. `unittest discover` collects `TestCase` subclasses and nothing
+else, so it runs **zero** of their ~105 assertions.
+
+⛔ **Both failure modes are silent in the direction that matters.**
+
+| shape | what discovery reports |
+|---|---|
+| `import pytest` at the top | one `_FailedTest` import error — looks like an environment problem, not a hole |
+| bare functions, no pytest import | `Ran 0 tests … OK` — **completely silent** |
+
+⚠ **The coverage audit cannot catch it.** `audit_test_coverage.py` counts `def test_*` by regex
+and never executes anything, so a file satisfies the floor while running not one assertion. A
+number that comes from counting source lines is not evidence that any of them ran.
+
+⛔ **The wrong fix is to change the command.** `load_tests` + `unittest.FunctionTestCase` does wire
+bare functions into discovery — it was written and it worked on the one file that does not import
+pytest — but on the other seven the import fails before any hook can run, so the shim is dead
+weight that *looks* like a fix. The right answer was to state the real dependency: those eight need
+`pytest`, and the README now says so with the file list.
+
+⭐ **How it surfaced, which is the transferable part.** The PR-325 patch applier (since
+retired, when the series landed as source in `a073f6cc6`) invoked
+`python -m pytest`; a later session found no pytest in the container and "corrected" it to the
+documented stdlib command. That edit turned a command that fails loudly into one that passes
+having tested nothing. The tell was `Ran 0 tests in 0.000s OK` on a file with nine tests in it —
+**a runner that reports zero and succeeds is a failure, not a pass.** Always read the count, not
+the verdict.
+
+⚠ And `.pytest_cache/` mtime is a usable artifact: it showed pytest genuinely had run on
+2026-08-31, with `lastfailed` naming the same single pre-existing failure that had been reported.
+The suite had been green; only the interpreter changed underneath it.
+
+## Three ways I measured zero, and the tree said otherwise (2026-09-02)
+
+The maintainer had to correct the same claim twice: *"You keep saying that these classes have zero
+members but it's not true! Check the unit templates defined in the defaults yaml."* They were right
+each time, and the three failures had three different causes — but one shape.
+
+| # | what I ran | what it reported | what was actually wrong |
+|---|---|--:|---|
+| 1 | bespoke scan of `docs/balance/*.json` for `design.class_anchor` | **0 members in all 27 classes** | the ledger nests actors under `doc["sections"][section]`; my loop read the top level and found nothing. `check_band.collect()` had the correct shape all along |
+| 2 | same scan, reading `anchor["cost0"]` | `support` has **no cost0** | `check_band.cost0_of()` prefers `spec.cost0` and falls back to the top-level one. `support` has `spec.cost0 = 500` |
+| 3 | inheritance traversal for `^GrenadierInfantryTemplate` | **0 concrete actors** | `rs.inherits_of()` takes a **Node**, not a name. It raised `AttributeError` on every actor — and my `except Exception: continue` swallowed all 3,117 of them |
+
+⛔ **THE THIRD IS THE DANGEROUS ONE, AND IT IS A CODE SMELL WITH A NAME.** A bare
+`try: ... except Exception: continue` inside a counting loop converts *every* failure into a zero
+and prints the zero as a measurement. There is no error, no traceback, no missing-data marker —
+just a confident, wrong number in a table. **Never wrap the body of a census in a bare except.**
+Count the failures and print them, or let it raise.
+
+⭐ **AND THE REAL FINDING WAS UNDERNEATH ALL THREE: the class taxonomy lives in yaml, not in the
+ledger.** Membership is `Inherits@Template:` — a KEYED inherit, which is why a traversal that only
+follows the bare `Inherits:` sees nothing:
+
+```
+td_gdi_grenadier:
+    Inherits: ^Soldier
+    Inherits@Template: ^GrenadierInfantryTemplate     <-- the class
+```
+
+Measured through `miniyaml` over every `Inherits*` key, `^GrenadierInfantryTemplate` has **7**
+inheritors, `^MortarInfantryTemplate` **5**, `^FlyingInfantryTemplate` **11**,
+`^SniperInfantryTemplate` **26**, `^HeroInfantryTemplate` **33** — against **0, 0, 0, 0, 0** tagged
+in the ledger. Only **8 of 27** classes agree between the two sources; the ledger under-tags by as
+much as **+48** (`heavy_infantry`: 50 structural, 2 tagged).
+
+⚠ **Which does NOT make the template count automatically right.** The 21 MBTs the ledger omits are
+`EDEN_*`/`PLYMOUTH_*` imports, `*_backup` variants and `ra2_c_*` — plausibly excluded on purpose.
+Two sources, two scopes: the template says *what a unit structurally IS*, the ledger says *what the
+balance programme prices*. The drift is a question for the maintainer, not a bug to auto-fix.
+
+⚠ **"Not found" was already a lesson here** ("*Not found is a claim about your search*"). It
+recurred because that entry is about grep. Extend it: **a COUNT of zero is also a claim about your
+search.** Before reporting a zero, name one member you expect and prove the query finds it.

@@ -1,10 +1,15 @@
 {
- "_doc": "Formula v2 class anchors (BALANCE_PIPELINE.md §5, DESIGN §12 second iteration). Each class prices by normalized deviation from its anchor: Cost = cost0 * (O/O0 + P/P0 + Q/Q0) / 3 — exact at the anchor. Anchors are MAINTAINER picks, validated by tools/balance/fit_class.py before sign-off. reveals_shroud (maintainer 2026-07-22) = baseline range floored to 5000 for scout/closecombat/melee. Infantry anchors locked 2026-07-22 (DPS/cost provisional, tested in-game later). Classes without an entry keep the global Tiger formula.",
+ "_doc": "Formula v2 class anchors (BALANCE_PIPELINE.md \u00a75, DESIGN \u00a712 second iteration). Each class prices by normalized deviation from its anchor: Cost = cost0 * (O/O0 + P/P0 + Q/Q0) / 3 \u2014 exact at the anchor. Anchors are MAINTAINER picks, validated by tools/balance/fit_class.py before sign-off. reveals_shroud (maintainer 2026-07-22) = baseline range floored to 5000 for scout/closecombat/melee. Infantry anchors locked 2026-07-22 (DPS/cost provisional, tested in-game later). Classes without an entry keep the global Tiger formula. | verifier_actor REMOVED 2026-08-29 (maintainer): a verifier is a regular member, not a frozen second calibration point. The 2.5x baseband law lives in check_band.py, on price RATIOS.",
  "anti_air_vehicle": {
   "anchor_actor": "latinsyndicate_diablo",
   "armor": "Medium",
   "comment": "Dedicated AA; keeps a SEPARATE FREE air weapon (+50% range/+100% dmg) priced only on the ground weapon. K note: gatling members = 1.25.",
+  "cost0": 1200.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 1718.0,
+  "p0": 4005.0,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 4252.5,
   "reveals_shroud": 7000,
   "signed_off": false,
   "spec": {
@@ -15,15 +20,19 @@
    "speed0": 110
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "steelconsortium_barracuda"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "archer": {
   "anchor_actor": "japan_archermaiden",
   "comment": "ARCHER = projectile-arc, HITS AIR, arrow speed = maxRange/10 (uses the tracking MISSILE projectile). Verifier asianalliance_veteranarcher fitted to 40000/70/7000/400/1250 (2x/2x/2.5x).",
-  "provisional": "dps0/cost0 placeholders — test in-game",
+  "cost0": 500.0,
+  "fit_comment": "MAINTAINER-ORDERED SIGN-OFF 2026-08-30 - worst |delta| among non-anchor members at or under the <=1 goal in proposal_archer.md. Anchor is the FITTED one (option B of HANDOFF 3.0t): the anchor actor has not been restatted to spec, so this freezes the current roster as the class zero point.",
+  "o0": 663.0,
+  "p0": 943.2,
+  "provisional": "dps0/cost0 placeholders \u2014 test in-game",
+  "q0": 259.2,
   "reveals_shroud": 7000,
-  "signed_off": false,
+  "signed_off": true,
   "spec": {
    "cost0": 500,
    "dps0": 200,
@@ -31,14 +40,18 @@
    "range0_wdist": 7000,
    "speed0": 70
   },
-  "tech_tier": 1.0,
-  "verifier_actor": "asianalliance_veteranarcher"
+  "tech_tier": 1.0
  },
  "artillery": {
   "anchor_actor": "ra1_allies_alliedartillery",
   "armor": "Light",
   "comment": "Long-range indirect siege. Verifier Brummbaer (T2, NOT V2 which is T3). latinsyndicate_burrito is Artillery too (long range, no air).",
+  "cost0": 600.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 534.5,
+  "p0": 1025.25,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 240.3,
   "reveals_shroud": 9000,
   "signed_off": false,
   "spec": {
@@ -49,14 +62,18 @@
    "speed0": 75
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "naxis_brummbar"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "artillery_tank": {
   "anchor_actor": "ixian_ixcombatsiege",
   "armor": "Medium",
   "comment": "Tanky turreted artillery.",
+  "cost0": 1200.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 967.44,
+  "p0": 1298.32,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 1334.1696,
   "reveals_shroud": 9000,
   "signed_off": false,
   "spec": {
@@ -67,28 +84,36 @@
    "speed0": 85
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "schwarzermond_lunargrille"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "closecombat": {
   "anchor_actor": "td_gdi_shotgunner",
   "comment": "LIVING BASELINE td_gdi_shotgunner 50000/75/3500 SA+CG burst5 bd0 ReloadDelay 70 (WC .875) => eff DPS 250 = 200. Round-number fix (maintainer 2026-07-22): reload 75->70 lands DPS on 250 (4000x5/70x.875=250.0) with damage staying 2000+2000 on the grid, NO FP multiplier. VERIFIER asianalliance_fanatic 2x HP + 2x bursts (burst10, same ReloadDelay 70) @ 500 (4000x10/70x.875=500.0, identity exact). Band [2500,4500). All members use SmallArms+Chaingun; SoundVolume = 1/burst; BurstDelays 0; damage split 2000+2000 per shot in 2000-steps. Tier factor 0.75=T3.",
+  "cost0": 200.0,
   "dps_convention": "SmallArms + Chaingun warhead damages summed, WC 0.875",
+  "fit_comment": "MAINTAINER-ORDERED SIGN-OFF 2026-08-30 - worst |delta| among non-anchor members at or under the <=1 goal in proposal_closecombat.md. Anchor is the FITTED one (option B of HANDOFF 3.0t): the anchor actor has not been restatted to spec, so this freezes the current roster as the class zero point.",
+  "o0": 675.7143,
+  "p0": 550.0,
+  "q0": 300.0,
   "reveals_shroud": 5000,
-  "signed_off": false,
+  "signed_off": true,
   "spec": {
    "cost0": 200,
    "dps0": 250,
    "hp0": 50000,
    "range0_wdist": 3500,
    "speed0": 75
-  },
-  "verifier_actor": "asianalliance_fanatic"
+  }
  },
  "commando": {
   "anchor_actor": "td_gdi_commando",
   "comment": "HERO/COMMANDO = KEEP AS-IS for now (they work well). Baseline td_gdi_commando (most iconic, 80000/65/~8000/1200/3000). No clean verifier => baseline-only unless one is found by reasoning. Auto-formula applies but the weights stay frozen at current values for now.",
-  "provisional": "weights FROZEN — keep commandos as-is for now",
+  "cost0": 3000.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 880.0637,
+  "p0": 2140.2967,
+  "provisional": "weights FROZEN \u2014 keep commandos as-is for now",
+  "q0": 2139.8997,
   "reveals_shroud": 8000,
   "signed_off": false,
   "spec": {
@@ -98,16 +123,21 @@
    "range0_wdist": 8000,
    "speed0": 65
   },
-  "tech_tier": 0.5,
-  "verifier_actor": null
+  "tech_tier": 0.5
  },
  "dreadnought": {
   "anchor_actor": "terran_warhound",
   "armor": "Superheavy",
-  "comment": "Heavy long-range assault walker.",
+  "comment": "Heavy long-range assault walker. RANGE 7000 IS A DELIBERATE PLAYTEST NERF (maintainer 2026-09-03): dreadnoughts were far too strong in in-game testing, mostly because of range, so theirs was reduced and tank_destroyer's raised to 7500 to COUNTER them. The class law is 'more range and damage than a REGULAR TANK' (7000 vs mbt 5500 = 1.27x), which holds; the 'more range than a tank destroyer' clause is superseded by this ruling. Do NOT 'fix' this back - see CLASS_STATUS_BOARD.md section 10.",
+  "cost0": 4500.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 1810.9679,
+  "p0": 3492.9224,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 8337.3905,
   "reveals_shroud": 8000,
   "signed_off": false,
+  "signed_off_note": "REVERTED 2026-08-30 \u2014 signed by an agent on its own evidence. fit_class.py step 4 reserves this for the maintainer, and signing unblocks apply_balance --confirm for the class. Re-sign deliberately.",
   "spec": {
    "cost0": 3000,
    "dps0": 3750,
@@ -116,14 +146,18 @@
    "speed0": 50
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "ixian_neocymek"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "epic_vehicle": {
   "anchor_actor": "ra1_soviets_monstertank",
   "armor": "Superheavy",
   "comment": "BuildLimit 1, not band-limited. 4x raw HP (EpicBuff removed 43df39235). DPS = cannon+tusk summed (both ground+air, same eff-reload).",
+  "cost0": 10000.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 1470.4487,
+  "p0": 2888.1853,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 21133.6678,
   "reveals_shroud": 8000,
   "signed_off": false,
   "spec": {
@@ -134,14 +168,18 @@
    "speed0": 60
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": null
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "fire_support": {
   "anchor_actor": "latinsyndicate_missiletruck",
   "armor": "Light",
   "comment": "Fragile long-range GROUND-ONLY siege sniper. Verifier TBD at curation (pure-ground T1/T2 K1.0). DPS DOUBLED so not dominated by missile_vehicle.",
+  "cost0": 1000.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 768.6218,
+  "p0": 1359.9166,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 584.6857,
   "reveals_shroud": 8000,
   "signed_off": false,
   "spec": {
@@ -152,15 +190,19 @@
    "speed0": 90
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": null
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "flying_infantry": {
   "anchor_actor": "ra2_allies_rocketeer",
-  "comment": "FLYING/OVER-TERRAIN INFANTRY = KEEP WEIGHTS AS-IS for now (all very different, hard to balance) — the auto-formula still applies but weights stay frozen. Baseline ra2_allies_rocketeer. Verifier yuri_cosmonaut is PROBLEMATIC (extractor treats it as Tier 4 tech; very different speed) and may end up baseline-only — reason a proper verifier later. Flying units read the air-speed field for speed0.",
+  "comment": "FLYING/OVER-TERRAIN INFANTRY = KEEP WEIGHTS AS-IS for now (all very different, hard to balance) \u2014 the auto-formula still applies but weights stay frozen. Baseline ra2_allies_rocketeer. Verifier yuri_cosmonaut is PROBLEMATIC (extractor treats it as Tier 4 tech; very different speed) and may end up baseline-only \u2014 reason a proper verifier later. Flying units read the air-speed field for speed0.",
+  "cost0": 600.0,
+  "fit_comment": "MAINTAINER-ORDERED SIGN-OFF 2026-08-30 - worst |delta| among non-anchor members at or under the <=1 goal in proposal_flying_infantry.md. Anchor is the FITTED one (option B of HANDOFF 3.0t): the anchor actor has not been restatted to spec, so this freezes the current roster as the class zero point.",
+  "o0": 761.713,
+  "p0": 605.6186,
   "provisional": "weights FROZEN for now; verifier unresolved; speed0 from air-speed field",
+  "q0": 319.8898,
   "reveals_shroud": 5000,
-  "signed_off": false,
+  "signed_off": true,
   "spec": {
    "cost0": 600,
    "dps0": 250,
@@ -168,15 +210,19 @@
    "range0_wdist": 5000,
    "speed0": 80
   },
-  "tech_tier": 1.0,
-  "verifier_actor": "yuri_cosmonaut"
+  "tech_tier": 1.0
  },
  "grenadier": {
   "anchor_actor": "td_gdi_grenadier",
-  "comment": "Baseline td_gdi_grenadier (classic GDI grenadier @200). Verifier ra1_soviets_molotovconscript (the UPGRADED Soviet grenadier — perfect sibling) fitted to 16000/75/5500/240/500 (2x/2x/2.5x). Range 5500 = between scout-top (5500) and SF; grenadier is a ROLE class (grenade arc), not range-band-defined, so the SF-range overlap is fine.",
-  "provisional": "dps0/cost0 placeholders — test in-game",
+  "comment": "Baseline td_gdi_grenadier (classic GDI grenadier @200). Verifier ra1_soviets_molotovconscript (the UPGRADED Soviet grenadier \u2014 perfect sibling) fitted to 16000/75/5500/240/500 (2x/2x/2.5x). Range 5500 = between scout-top (5500) and SF; grenadier is a ROLE class (grenade arc), not range-band-defined, so the SF-range overlap is fine.",
+  "cost0": 200.0,
+  "fit_comment": "MAINTAINER-ORDERED SIGN-OFF 2026-08-30 - worst |delta| among non-anchor members at or under the <=1 goal in proposal_grenadier.md. Anchor is the FITTED one (option B of HANDOFF 3.0t): the anchor actor has not been restatted to spec, so this freezes the current roster as the class zero point.",
+  "o0": 316.333,
+  "p0": 381.2267,
+  "provisional": "dps0/cost0 placeholders \u2014 test in-game",
+  "q0": 44.5952,
   "reveals_shroud": 5500,
-  "signed_off": false,
+  "signed_off": true,
   "spec": {
    "cost0": 200,
    "dps0": 120,
@@ -184,15 +230,20 @@
    "range0_wdist": 5500,
    "speed0": 75
   },
-  "tech_tier": 1.0,
-  "verifier_actor": "ra1_soviets_molotovconscript"
+  "tech_tier": 1.0
  },
  "heavy_infantry": {
   "anchor_actor": "ra1_soviets_shocktrooper",
   "comment": "HEAVY INFANTRY = extremely tanky LATE-GAME breakthrough unit, balanced around a HIGH tech requirement (Tier 4 => 0.5x tech multiplier). RESTAT ra1_soviets_shocktrooper to: HP 50000, speed 50, range 5000, weapon 50000 Damage @ 50 ReloadDelay. NEW WORK: add a Tier-4 DUMMY BUILDING using the forward-command-center sprite (PLACEHOLDER name, e.g. ra1_soviets_experimentaltechcenter) that unlocks it; RA1 Soviets tech ladder becomes T3 = tech center, T4 = experimental tech center. Verifier ra1_soviets_zapper (the tesla-trooper upgrade, SAME faction) restatted to 100000/50/5000/2000/[2.5x cost0], and moved to the SAME Tier 4 so the tech multiplier cancels in the verifier identity.",
+  "cost0": 600.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 535.56,
+  "p0": 736.2,
   "provisional": "cost0 placeholder (formula-derived ~750 at these stats); DPS from 50000dmg@50; test in-game",
+  "q0": 223.296,
   "reveals_shroud": 5000,
   "signed_off": false,
+  "signed_off_note": "REVERTED 2026-08-30 \u2014 signed by an agent on its own evidence. fit_class.py step 4 reserves this for the maintainer, and signing unblocks apply_balance --confirm for the class. Re-sign deliberately.",
   "spec": {
    "cost0": 800,
    "dps0": 1000,
@@ -200,15 +251,19 @@
    "range0_wdist": 5000,
    "speed0": 50
   },
-  "tech_tier": 0.5,
-  "verifier_actor": "ra1_soviets_zapper"
+  "tech_tier": 0.5
  },
  "heavy_sniper": {
   "anchor_actor": "td_gdi_heavysniper",
   "comment": "HEAVY SNIPER = ALL GROUND, NO air (loses to pure snipers as the trade). Verifier candidate yuri_virus (alt: ts_nod_toxintrooper) NEEDS WARHEAD REWORK: inherit sniper + chaingun + railgun templates (equal warhead values); the 1st virus upgrade adds a LIGHT chemical warhead (same value), the 2nd upgrade adds a MEDIUM chemical warhead (same value). The spawned GAS counts as a SPECIAL (K += 0.25 => 1.25x). BLOCKED until the catch-all-specials investigation lands (granted-condition effects AND fireshrapnel-spawned warheads/gas must all be detected).",
+  "cost0": 700.0,
+  "fit_comment": "MAINTAINER-ORDERED SIGN-OFF 2026-08-30 - worst |delta| among non-anchor members at or under the <=1 goal in proposal_heavy_sniper.md. Anchor is the FITTED one (option B of HANDOFF 3.0t): the anchor actor has not been restatted to spec, so this freezes the current roster as the class zero point.",
+  "o0": 751.1823,
+  "p0": 1193.3991,
   "provisional": "dps0/cost0 placeholders; verifier BLOCKED on warhead rework + specials audit",
+  "q0": 442.0813,
   "reveals_shroud": 8000,
-  "signed_off": false,
+  "signed_off": true,
   "spec": {
    "cost0": 700,
    "dps0": 400,
@@ -216,14 +271,18 @@
    "range0_wdist": 8000,
    "speed0": 80
   },
-  "tech_tier": 0.75,
-  "verifier_actor": "yuri_virus"
+  "tech_tier": 0.75
  },
  "high_tech_tank": {
   "anchor_actor": "td_gdi_mammothtank",
   "armor": "Superheavy",
   "comment": "Baseline = TD GDI Mammoth (2026-07-31, was RA1 Soviet Mammoth). RA1 Soviet Mammoth demoted to mid variant spd60/cost2500. Verifier Siege Mammoth (maintainer confirmed shares tier+K).",
+  "cost0": 1600.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 911.73,
+  "p0": 1141.92,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 1989.684,
   "reveals_shroud": 7000,
   "signed_off": false,
   "spec": {
@@ -234,14 +293,18 @@
    "speed0": 65
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "ra1_soviets_siegemammothtank"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "light_tank": {
   "anchor_actor": "ra1_allies_alliedlighttank",
   "armor": "Medium",
   "comment": "Cheap fast light cannon; weak vs heavy tanks.",
+  "cost0": 500.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 690.9622,
+  "p0": 546.1622,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 367.3946,
   "reveals_shroud": 6000,
   "signed_off": false,
   "spec": {
@@ -252,15 +315,14 @@
    "speed0": 125
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "td_nod_lighttankmkii"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "line_breaker": {
   "anchor_actor": "td_nod_flametank",
   "armor": "Superheavy",
   "comment": "Slow super-juggernaut, SHORTEST range 2500 (easiest to kite) -> intentionally the HIGHEST cost-effectiveness.",
   "cost0": 800.0,
-  "fit_comment": "candidate — maintainer sign-off pending",
+  "fit_comment": "o0/p0/q0 RESTORED 2026-08-30 to the pre-fit values. An agent refit recomputed them from TODAY'S yaml, but anchor_decisions_log.md LOCKED this class on 2026-07-26 at HP 200000 / DPS 666.7 / cost0 1200 and the yaml has not been restatted to that design yet. build_workbook and check_band price against o0/p0/q0, so refitting them to un-restatted yaml silently moves the target. Refit deliberately, after the restat.",
   "o0": 1403.88,
   "p0": 1226.5557,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
@@ -275,19 +337,18 @@
    "speed0": 80
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "td_nod_flametankmkii"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "mbt": {
   "anchor_actor": "tiger.nax",
   "armor": "Heavy",
   "comment": "Main battle tank. Tiger/King Tiger pair. NEW 2026-07-31 restat (was legacy Tiger 100k/100/200/5000 o0=p0=q0=800). Global-Tiger FALLBACK lives in formula.estimators(), NOT this entry, so this restat is safe.",
   "cost0": 800.0,
-  "fit_comment": "candidate — maintainer sign-off pending",
-  "o0": 946.79,
-  "p0": 1093.58,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 800.0,
+  "p0": 800.0,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
-  "q0": 1387.16,
+  "q0": 800.0,
   "reveals_shroud": 6000,
   "signed_off": false,
   "spec": {
@@ -298,13 +359,17 @@
    "speed0": 95
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "naxis_kingtigerheavytank"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "melee": {
   "anchor_actor": "asianalliance_alligator",
-  "comment": "MELEE RANGE IS PRICED like every other class (maintainer 2026-07-22 CORRECTION; the earlier 'unpriced/fixed-ratio-1' note in FORMULA_V2 was WRONG and nobody authored it). Ranges cluster 1250-1750; bigger units get more reach (grunt > footman) so it prices normally, just with small spread. Baseline asianalliance_alligator (SwordWeapon) + verifier yuri_brute, BOTH scaled to a common in-between speed 90; anchor range 1500 = band middle [1250,1750] (alligator was 108, brute 80). Verifier target = 54000 HP / 90 speed / 1500 range / 600 DPS / 700 cost (2xHP, 2xDPS, same speed+range, 2.5x cost). cost0=280 chosen so the WC/SC-side verifier lands on 700 (a multiple of 20 — WC/SC power = Cost/20).",
-  "provisional": "dps0/cost0 placeholders — test in-game",
+  "comment": "MELEE RANGE IS PRICED like every other class (maintainer 2026-07-22 CORRECTION; the earlier 'unpriced/fixed-ratio-1' note in FORMULA_V2 was WRONG and nobody authored it). Ranges cluster 1250-1750; bigger units get more reach (grunt > footman) so it prices normally, just with small spread. Baseline asianalliance_alligator (SwordWeapon) + verifier yuri_brute, BOTH scaled to a common in-between speed 90; anchor range 1500 = band middle [1250,1750] (alligator was 108, brute 80). Verifier target = 54000 HP / 90 speed / 1500 range / 600 DPS / 700 cost (2xHP, 2xDPS, same speed+range, 2.5x cost). cost0=280 chosen so the WC/SC-side verifier lands on 700 (a multiple of 20 \u2014 WC/SC power = Cost/20).",
+  "cost0": 300.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 550.5423,
+  "p0": 253.0185,
+  "provisional": "dps0/cost0 placeholders \u2014 test in-game",
+  "q0": 96.542,
   "reveals_shroud": 5000,
   "signed_off": false,
   "spec": {
@@ -314,16 +379,20 @@
    "range0_wdist": 1500,
    "speed0": 90
   },
-  "tech_tier": 1.0,
-  "verifier_actor": "yuri_brute"
+  "tech_tier": 1.0
  },
  "missile_vehicle": {
   "anchor_actor": "ts_gdi_hovermlrs",
   "armor": "Light",
   "comment": "ONE weapon hits ground AND air (priced once, no air bonus). The perfect all-rounder -> intentionally the LOWEST cost-effectiveness. Members: missile-MLRS family + Nod bikes (43df39235).",
+  "cost0": 900.0,
+  "fit_comment": "MAINTAINER-ORDERED SIGN-OFF 2026-08-30 - worst |delta| among non-anchor members at or under the <=1 goal in proposal_missile_vehicle.md. Anchor is the FITTED one (option B of HANDOFF 3.0t): the anchor actor has not been restatted to spec, so this freezes the current roster as the class zero point.",
+  "o0": 899.3012,
+  "p0": 1247.8588,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 552.8922,
   "reveals_shroud": 7000,
-  "signed_off": false,
+  "signed_off": true,
   "spec": {
    "cost0": 1200,
    "dps0": 1200,
@@ -332,15 +401,19 @@
    "speed0": 100
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "terran_cyclone"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "mortar": {
   "anchor_actor": "forgotten_mutantmortarman",
   "comment": "MORTAR = long-range (~10000) SLOW indirect-fire infantry, SEPARATE from grenadiers (short-range/fast). Maintainer 2026-07-25: split back out of grenadier. Baseline forgotten_mutantmortarman (kept near current: HP 30000, cost 500, range ~10000). Verifier ordos_mortartrooper fitted to 2x HP / 2x DPS / 2.5x cost, same range+speed as anchor. RA1 Soviet ra1_soviets_mortarsoldier should keep the LONGEST range in the class. dps0 = 400 (clean, ~anchor eff-DPS 409; test in-game).",
+  "cost0": 500.0,
+  "fit_comment": "MAINTAINER-ORDERED SIGN-OFF 2026-08-30 - worst |delta| among non-anchor members at or under the <=1 goal in proposal_mortar.md. Anchor is the FITTED one (option B of HANDOFF 3.0t): the anchor actor has not been restatted to spec, so this freezes the current roster as the class zero point.",
+  "o0": 956.8364,
+  "p0": 1635.2727,
   "provisional": "dps0/cost0 near current anchor; verifier needs the 2x/2x/2.5x restat; test in-game",
+  "q0": 472.5818,
   "reveals_shroud": 10000,
-  "signed_off": false,
+  "signed_off": true,
   "spec": {
    "cost0": 500,
    "dps0": 400,
@@ -348,13 +421,17 @@
    "range0_wdist": 10000,
    "speed0": 50
   },
-  "tech_tier": 1.0,
-  "verifier_actor": "ordos_mortartrooper"
+  "tech_tier": 1.0
  },
  "pure_sniper": {
   "anchor_actor": "naxis_naximercenarysniper",
   "comment": "PURE sniper = targets ONLY infantry (anti-inf); the big per-shot stat compensates the target restriction. Verifier = ra2_allies_sniper cleaned to (22000/60/10000/600/800, Tier 3); ONLY the baseline naxis_naximercenarysniper is ADJUSTED to be exactly HALF of it (11000/60/10000/300/320), same Tier 3 so the tier cancels. Deliberately NOT the RA1 allied sniper (it is Tier 2 AND stealthed = carries a special multiplier => a dirty verifier).",
+  "cost0": 250.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 332.5991,
+  "p0": 329.659,
   "provisional": "dps0/cost0 derived from the RA2 sniper; test in-game",
+  "q0": 30.6999,
   "reveals_shroud": 10000,
   "signed_off": false,
   "spec": {
@@ -364,13 +441,17 @@
    "range0_wdist": 10000,
    "speed0": 60
   },
-  "tech_tier": 0.75,
-  "verifier_actor": "ra2_allies_sniper"
+  "tech_tier": 0.75
  },
  "rocket_trooper": {
   "anchor_actor": "ra1_allies_alliedrocketsoldier",
   "comment": "ROCKET TROOPER = dedicated AA+AT launcher, light+medium rocket mix. Verifier cabal_rocketcyborg (triple-rocket => SUM the 3 rocket warheads) fitted to 20000/55/6500/400/750 (2x/2x/2.5x). SIDE FIX: raise td_nod + td_gdi rocket troopers 200 -> 300 (currently too weak at 200).",
-  "provisional": "dps0/cost0 placeholders — test in-game",
+  "cost0": 300.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 795.72,
+  "p0": 1084.88,
+  "provisional": "dps0/cost0 placeholders \u2014 test in-game",
+  "q0": 116.9168,
   "reveals_shroud": 6500,
   "signed_off": false,
   "spec": {
@@ -380,28 +461,37 @@
    "range0_wdist": 6500,
    "speed0": 55
   },
-  "tech_tier": 1.0,
-  "verifier_actor": "cabal_rocketcyborg"
+  "tech_tier": 1.0
  },
  "scout": {
   "anchor_actor": "naxis_naxiriflesoldier",
   "comment": "LIVING BASELINE: naxis_naxiriflesoldier 20000/60/5000/4000@50 SA ground-only (WC .75, DPS 60) = 100 (took over from japan_imperialscoutsman, which moved to special_forces 2026-07-20; anchor values unchanged). VERIFIER: forgotten_mutantsoldier 2x/2x @ 250 (identity exact). Bands: range 4500-5500 hard, speed +/-20% prov.; price envelope 50-250; cost<=150 SA only (.75), else SA+CG (.875). Scouts never hit air.",
+  "cost0": 100.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 440.0,
+  "p0": 208.0,
+  "q0": 38.4,
   "reveals_shroud": 5000,
   "signed_off": false,
+  "signed_off_note": "REVERTED 2026-08-30 \u2014 signed by an agent on its own evidence. fit_class.py step 4 reserves this for the maintainer, and signing unblocks apply_balance --confirm for the class. Re-sign deliberately.",
   "spec": {
    "cost0": 100,
    "dps0": 60,
    "hp0": 20000,
    "range0_wdist": 5000,
    "speed0": 60
-  },
-  "verifier_actor": "forgotten_mutantsoldier"
+  }
  },
  "scout_vehicle": {
   "anchor_actor": "td_nod_buggy",
   "armor": "Scout",
   "comment": "Fast recon. MG/autocannon. Never the AA (that's anti_air_vehicle).",
+  "cost0": 300.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 406.7928,
+  "p0": 416.1168,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 290.2694,
   "reveals_shroud": 8000,
   "signed_off": false,
   "spec": {
@@ -412,15 +502,19 @@
    "speed0": 200
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "terran_vulture"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  },
  "special_forces": {
   "anchor_actor": "japan_imperialscoutsman",
   "comment": "LIVING BASELINE japan_imperialscoutsman 15000/50/6000, DPS 240 (baseline DOUBLED from 120, maintainer 2026-07-22). Weapon = SmallArms+Chaingun+Railgun-AP, each warhead 4000 => SUM 12000 @ reload 50 => DPS 240 (WC 1.0), air-capable, bullet projectile = 200. Fragile long-range versatile anti-air/anti-armor specialist (contrast the 50000-HP closecombat brawler). Band 5500-6500 (r0 6000). Air is the CLASS trait, never a per-unit special. ^SpecialForcesInfantryTemplate. NOTE: current yaml still holds the MAX-era 12000-per-warhead build (SUM 36000, 3x hot); the closecombat+SF reconversion pass re-splits it to 4000x3.",
+  "cost0": 200.0,
   "dps_convention": "light+medium+heavy warhead triad SUMMED (maintainer SUM law 2026-07-22): each warhead carries its own damage and the weapon's effective damage is their sum (SA+Chaingun+Railgun on the baseline; CannonAP+Flak+Laser or SA+Chaingun+Laser on members), WC 1.0. *ExtraDamage / *Percentage / *FriendlyFire warheads are EXCLUDED from the sum. Never set every warhead equal to the intended total.",
+  "fit_comment": "MAINTAINER-ORDERED SIGN-OFF 2026-08-30 - worst |delta| among non-anchor members at or under the <=1 goal in proposal_special_forces.md. Anchor is the FITTED one (option B of HANDOFF 3.0t): the anchor actor has not been restatted to spec, so this freezes the current roster as the class zero point.",
+  "o0": 630.0,
+  "p0": 654.0,
+  "q0": 93.6,
   "reveals_shroud": 6000,
-  "signed_off": false,
+  "signed_off": true,
   "spec": {
    "cost0": 200,
    "dps0": 240,
@@ -428,8 +522,7 @@
    "range0_wdist": 6000,
    "speed0": 50
   },
-  "verifier_actor": "schwarzermond_lunarsoldier",
-  "verifier_comment": "T1 (no tech penalty) clean tripwire: schwarzermond_lunarsoldier 30000/50/6000 SA+Chaingun+Laser each warhead 8000 => SUM 24000 @ 50 => DPS 480 (2x HP + 2x DPS, same rng/spd) = 500.00 exact. Makes SM basic infantry strong on purpose (in-game test flagged). NOTE: td_nod_lasertrooper is NOT the verifier - it is Tier 4 (temple prime, 0.5x factor), re-priced as a 4x/4x=750 heavy SF trooper (each warhead 16000 => SUM 48000 => DPS 960)."
+  "verifier_comment": "RETIRED 2026-08-29 (HANDOFF 3.0j) - there is no verifier actor; kept as provenance for how this baseline was calibrated. T1 (no tech penalty) clean tripwire: schwarzermond_lunarsoldier 30000/50/6000 SA+Chaingun+Laser each warhead 8000 => SUM 24000 @ 50 => DPS 480 (2x HP + 2x DPS, same rng/spd) = 500.00 exact. Makes SM basic infantry strong on purpose (in-game test flagged). NOTE: td_nod_lasertrooper is NOT the verifier - it is Tier 4 (temple prime, 0.5x factor), re-priced as a 4x/4x=750 heavy SF trooper (each warhead 16000 => SUM 48000 => DPS 960)."
  },
  "support": {
   "ability_priced": true,
@@ -444,14 +537,18 @@
    "range0_wdist": 0,
    "speed0": 50
   },
-  "tech_tier": 1.0,
-  "verifier_actor": null
+  "tech_tier": 1.0
  },
  "tank_destroyer": {
   "anchor_actor": "naxis_hetzer",
   "armor": "Heavy",
-  "comment": "Frontal anti-tank, KeepsDistance. DPS/Cost 1.50.",
+  "comment": "Frontal anti-tank, KeepsDistance. DPS/Cost 1.50. RANGE 7500 IS THE DELIBERATE COUNTER to dreadnoughts (maintainer 2026-09-03) - it is the tank destroyer's ONLY edge over them (dreadnought has 7.7x the HP, 4.2x the DPS, 0.71x the speed). Do NOT reduce it to restore a 'dreadnought out-ranges everything' reading - see CLASS_STATUS_BOARD.md section 10.",
+  "cost0": 1300.0,
+  "fit_comment": "candidate \u2014 maintainer sign-off pending",
+  "o0": 1085.28,
+  "p0": 1651.4,
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
+  "q0": 1604.7,
   "reveals_shroud": 7500,
   "signed_off": false,
   "spec": {
@@ -462,7 +559,6 @@
    "speed0": 70
   },
   "tech_tier": 1.0,
-  "tech_tier_flag": "DEFAULT 1.0 — per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K",
-  "verifier_actor": "ra2_allies_tankdestroyer"
+  "tech_tier_flag": "DEFAULT 1.0 \u2014 per-class tier needs confirmation (high_tech/dreadnought/epic likely 0.75/0.5); baseline+verifier must SHARE tier+K [RETIRED 2026-08-29 (HANDOFF 3.0j): there is no verifier actor - only the tier confirmation is still open]"
  }
 }

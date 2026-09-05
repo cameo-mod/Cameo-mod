@@ -35,6 +35,17 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
 
 ## 2. Baselines & verifiers (fixed points at both envelope ends)
 
+> ⛔ **THE VERIFIER IS RETIRED (maintainer, 2026-08-29).** *"We no longer have to have those
+> verifiers. They should be regular units like anything else and not have those stiff rules."*
+> `verifier_actor` is gone from all 27 anchors and from every code path. Wherever this document
+> names a verifier actor, or a "2× HP + 2× DPS → 2.5× cost" second calibration point, read it as
+> **history**: each class now has ONE fixed point, its baseline, and every other member is an
+> ordinary unit priced by the formula. **The 100%–250% band law is NOT retired** — `check_band.py`
+> enforces it on price RATIOS, which never needed a nominated actor. Full ruling and the three
+> measurements behind it: `docs/HANDOFF.md` §3.0j and `docs/design/BALANCE_PIPELINE.md` §8.1.
+
+
+
 - Every class gets a **living baseline unit in game** (round stats,
   price = C₀ exactly) — the testable reference.
 - Every class gets a **verification unit**: exactly 2×HP + 2×damage,
@@ -433,6 +444,8 @@ infantry classes.
 | battlefortress | slow "bunker on tracks": high HP, troop-carry/garrison, short range — NEW template |
 | anti-air vehicle | dedicated mobile AA (flak/missile) — NEW template |
 | tank destroyer | AP glass-cannon vs heavy armour; frontal weapon (−0.25 special); range/speed on the 2×-bullet-speed convention — NEW template |
+| **dreadnought** | ⭐ **DEFINED 2026-09-03 (maintainer):** heavy, SLOW, **frontal-facing (no turret)**, with **more range and damage than a regular tank** — *"like tank destroyers but with more range and armor and slower"*. Mechs are an EXAMPLE, not the definition. ⚠ RA2, TD and RA1 vanilla field no unit fitting it; the only vanilla C&C match is the **TS GDI Mammoth Mk II**. ⛔ **The "more range than a TANK DESTROYER" half of that phrasing is SUPERSEDED by a playtest ruling (2026-09-03):** dreadnoughts were far too strong in testing, mostly because of range, so `range0` was cut to 7,000 and `tank_destroyer`'s raised to 7,500 to counter them. The class law is **more range than a REGULAR TANK** — 7,000 against `mbt` 5,500 — and that holds. Do not "restore" the tank-destroyer comparison; see `CLASS_STATUS_BOARD.md` §10. |
+| **epic vehicle** | ⛔ **EXEMPT from the balance pipeline** (maintainer, re-confirmed 2026-09-03) — build-limited vehicles, balanced separately. Same standing as `support`. |
 
 Vehicle-only specials attach here (§3b future scope): frontal-facing
 (non-turreted) weapon = −0.25. Long charge delay is NO LONGER a special —

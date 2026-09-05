@@ -7,6 +7,23 @@ import json
 CHECKLIST = """\
 CAMEO — orient before acting this session (verify against the artifacts, don't trust summaries):
 
+⛔⛔ PRIORITY 0 — FINISH THE BALANCE PIPELINE BEFORE ANY SINGLE-UNIT WORK.
+   Maintainer order, 2026-09-02: *"We need to finish the balancing pipeline. Finish all the class
+   anchors. Apply all the correct unit templates for each actor. Working on a single unit is not
+   getting us any closer... we need to work on the TOP LEVEL first, like a system design."*
+   The two open top-level items, in order:
+     1. CLASS ANCHORS -- 8 of 27 signed, and only 336 of 1870 buildable units carry a class tag
+        (18%). Every anchor is fitted against 18% of its own population, and 17 of 27 anchors are
+        not even members of the class they anchor. `python tools/balance/anchor_readiness.py`
+     2. UNIT TEMPLATES -- every buildable actor needs EXACTLY ONE `Inherits@Template:`.
+        `python tools/audit/audit_class_templates.py`
+   ⚠ THE DRIFT TEST, apply it to your own next action: *"does this move a NUMBER for one unit,
+   or does it move the SYSTEM?"* Investigating one weapon, one warhead, one actor is the trap --
+   it feels productive and it does not advance the pipeline. If a single-unit fix is genuinely
+   needed, WRITE IT DOWN in docs/design/ROADMAP.md and keep going on the top level.
+   ⭐ This block exists because it happened: 2026-09-02 went into one weapon (HydraSpit) and its
+   warhead family while both items above sat untouched.
+
 MUST-READ, in order: CLAUDE.md · docs/LESSONS_LEARNED.md · docs/AGENT_WORKSPACE.md ·
 docs/HANDOFF.md · **docs/DESIGN.md** · docs/design/ROADMAP.md · docs/audit/SUMMARY.md.
 docs/README.md defines that order and wins over any copy of it.
@@ -33,6 +50,31 @@ question that feels novel usually is not. The rulings most often re-invented:
                        DESIGNED to change. Comparing them proves nothing.
   §12.0b HEROIC        a DERIVED cell: Heroic = Plate x Scout / PEAK. Never tilt it; recompute it.
 
+⛔ WORKING ON CLASS ANCHORS, A CLASS FORMULA, OR A BASELINE? READ
+`docs/balance/anchor_decisions_log.md` FIRST. It is the SOURCE OF TRUTH for anchors —
+docs/README.md says class_anchors.json is "maintained via" it — and it holds LOCKED per-class
+baselines with real numbers, verifier conventions, and the 3-input DEFENSE formula (HP, Range,
+DPS — no speed term) plus the rearmable-aircraft SORTIE-cycle ruling. On 2026-08-30 a whole
+session ran on class anchors without opening it: scout_vehicle's infantry HP granularity was
+reported as a new ruling when it had been LOCKED since 2026-07-26, complete with a companion
+"HARD RULE" (switch ^ScoutVehicleTemplate to the infantry self-heal timing) that was missed.
+
+⛔ NEVER SET `signed_off: true` YOURSELF. fit_class.py step 4 reserves it for the maintainer,
+because signing unblocks `apply_balance --confirm` for that class. On 2026-08-29 an agent signed
+three anchors on its own validation tables; they were reverted on 2026-08-30. And note the trap
+in the aftermath: the next session "corrected" a document to match the artifact — but the
+artifact was the agent's own edit. A document agreeing with an artifact you wrote is an ECHO,
+not corroboration.
+
+⛔ GREP `tools/` BEFORE WRITING A TOOL, NOT JUST `docs/`. On 2026-08-30 a new audit was written
+for a law `audit_stat_formulas.py` (F8/F9/F10/F17/F19) had enforced for months — already in
+run_all.sh, already at 0 findings, already auto-fixed by gen_derived_stats.py. The duplicate
+mis-scoped its cohort and published 340 findings against a CLEAN roster into DESIGN.md. Grep the
+MECHANISM, not the phrase: "TurnSpeed (aircraft)" found one sentence of a two-part law;
+`grep -ril fighter tools/` would have found the whole thing implemented. And a fresh measurement
+that contradicts a PASSING audit is WRONG until proven otherwise — read that audit's SCOPE first.
+[hook-enforced: prior_art_guard denies a new tools/*.py that duplicates an existing tool]
+
 ⛔ NEVER HAND-PARSE YAML. Read through `miniyaml.Ruleset.resolve_weapon` / `.resolve`, and pull
 Versus with `weapon_efficiency.versus_of(node)`. A bespoke line-scanner opened a dict on `Versus:`
 and never CLOSED it, so the `PercentageVersus:` rows sitting in the SAME warhead node overwrote the
@@ -44,6 +86,14 @@ OPEN guard was right, the CLOSE was missing. Guarded by tools/audit/audit_versus
 ⚠ A RESULT THAT CONTRADICTS A BINDING LAW IS A CONTRADICTION, NOT A FINDING. If the generator
 implements a law and verify_generator_sync reports 0 drift, "nothing conforms" means YOUR MEASURE
 is broken. Check the measurement before writing it up.
+
+⛔ ONE REPOSITORY: `cameo-mod/Cameo-mod`. `Zeruel87/Cameo-mod` is the ABANDONED original
+fork -- it still answers `git fetch`, which is what makes it dangerous. Never add it as a
+remote, fetch it, compare against it or push to it; on 2026-08-11 a session went into
+reconciling two stray commits against that dead tree. Pre-repo history lives in docs/history/.
+[hook-enforced: bash_guard 1b]  BUT `Zeruel87 Urban` (a TILESET CATEGORY id in
+mods/cameo/tilesets/*.yaml) and the credits.txt entry are ART CREDIT -- never sweep the NAME,
+only the URL. The engine soft-fork `cameo-mod/OpenRA` is a different, LIVE repository.
 
 HARD RULES (several are enforced by hooks — see .claude/settings.json):
  1. Never commit without booting to the main menu (perf.log ends
@@ -102,6 +152,46 @@ TWO THINGS YOU CANNOT RESOLVE FROM THE REPO:
    authority; promote anything binding into DESIGN.md.
 """
 
+# ⭐ THE DOCS MAXING AUDIT (maintainer order, 2026-08-30). The manifest is appended
+# to every SessionStart so the whole authored documentation set is at least ENUMERATED
+# before anything happens, and the TIER 1 gate in `read_first_guard.py` then refuses
+# every non-read action until the seven reading-order documents are actually opened.
+# Generated here rather than pasted: a hand-maintained file list goes stale the first
+# time someone adds a document, and a stale manifest is how "I didn't know it existed"
+# comes back.
+def _docs_maxing():
+    import pathlib as _pl
+    import sys as _sys
+    root = _pl.Path(__file__).resolve().parents[1]
+    _sys.path.insert(0, str(root / "audit"))
+    try:
+        import audit_docs_maxing as dm
+    except Exception:
+        return ""
+    lines = ["", "=" * 78,
+             "DOCS MAXING AUDIT — enumerate everything, then open the gate documents.",
+             "=" * 78,
+             "⛔ TIER 1 — NO TOOL ACTION IS PERMITTED until every one of these has been",
+             "   OPENED this session (hook-enforced: tools/hooks/read_first_guard.py).",
+             "   Reads and `git status`/`log`/`diff` are exempt, so the gate is satisfiable."]
+    for d in dm.TIER1:
+        lines.append(f"     sed -n '1,400p' {d}")
+    lines.append("⛔ TIER 2 — the document that OWNS your subject blocks an EDIT in it:")
+    for d in dm.TIER2:
+        lines.append(f"     {d}")
+    rest = [d for d in dm.authored_docs() if d not in dm.TIER1 and d not in dm.TIER2]
+    lines.append(f"TIER 3 — {len(rest)} further authored documents. Know THAT they exist and")
+    lines.append("   what each owns; open the one that covers your area before working in it.")
+    lines.append("   The authored set is ~92,000 lines / ~1.9M tokens — it does NOT fit a")
+    lines.append("   context window, which is why the gate is Tier 1 and not all of it.")
+    for d in rest:
+        lines.append(f"     {d}")
+    lines.append("   Full report + this session's coverage:")
+    lines.append("     python tools/audit/audit_docs_maxing.py --transcript <transcript>")
+    lines.append("=" * 78)
+    return "\n".join(lines)
+
+
 print(json.dumps({"hookSpecificOutput": {
     "hookEventName": "SessionStart",
-    "additionalContext": CHECKLIST}}))
+    "additionalContext": CHECKLIST + _docs_maxing()}}))

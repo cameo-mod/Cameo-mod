@@ -29,6 +29,8 @@ import json
 import math
 import pathlib
 import statistics
+
+import heaviness
 import sys
 
 LADDERS = {  # lightest -> heaviest
@@ -925,6 +927,51 @@ def tilt_exponent(level, pos, n):
     return 0.0                               # Super: no tilt, flattened instead
 
 
+def rederive_products(out):
+    """§12.0b — recompute the DERIVED cells LAST, from the finished profile.
+
+    `Heroic = Plate * Scout / PEAK` (and `Airborne = Helicopter * Scout / PEAK`) are
+    PRODUCTS, not rungs: a derived value computed before the last cell moves is not
+    derived, it is stale. Every shaper therefore ends here.
+
+    ⛔ Shared because it was ONCE MISSED. When the bell was first wired in, `Super`
+    took a short path that flattened and returned WITHOUT re-deriving, and the only
+    symptom was `^Warhead_Tesla_Super`'s `Heroic` landing 102 where it should have
+    been 103 — one row, one point, in a level the switch was supposed to leave
+    byte-identical. One implementation, called from every path, is the fix.
+    """
+    peak = max(v for a, v in out.items()
+               if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
+    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
+                                  ("Airborne", ("Helicopter", "Scout"))):
+        if name in out and first in out and second in out and peak > 0:
+            out[name] = out[first] * out[second] / peak
+    return out
+
+
+def super_flatten(out):
+    """`Super` is the GENERALIST: compress the body toward the band's flat end (§12.0d).
+
+    Factored out of `class_tilt` so the bell path can reuse it verbatim. It is an
+    ORTHOGONAL knob to the peak: the tilt/bell decides WHERE a profile leans, this
+    decides HOW FAR the whole ladder spreads. `heaviness.py` models the first only,
+    which is why the second still lives here.
+
+    Never flattens to EQUAL values — the no-ties law still binds; "flat" means
+    "lowest spread in the band", not "uniform".
+    """
+    body = [v for a, v in out.items() if a not in NON_ARMOR_ROWS and v > 0]
+    if not body:
+        return out
+    lo, hi = min(body), max(body)
+    if lo > 0 and hi / lo > SUPER_RATIO:
+        g = statistics.geometric_mean(body)
+        alpha = math.log(SUPER_RATIO) / math.log(hi / lo)
+        out = {a: (v if a in NON_ARMOR_ROWS else g * (max(v, 1.0) / g) ** alpha)
+               for a, v in out.items()}
+    return out
+
+
 def class_tilt(rows, level):
     """Apply the level's class tilt to a MAIN profile, preserving every ladder's order."""
     vals = dict(rows)
@@ -949,22 +996,217 @@ def class_tilt(rows, level):
         for slot, i in enumerate(order):
             out[rungs[i]] = sorted(tilted, reverse=True)[slot]
     if level == "Super":
-        # The generalist: compress toward the band's flat end about the geometric mean.
-        body = [v for a, v in out.items() if a not in NON_ARMOR_ROWS and v > 0]
-        lo, hi = min(body), max(body)
-        if lo > 0 and hi / lo > SUPER_RATIO:
-            g = statistics.geometric_mean(body)
-            alpha = math.log(SUPER_RATIO) / math.log(hi / lo)
-            out = {a: (v if a in NON_ARMOR_ROWS else g * (max(v, 1.0) / g) ** alpha)
-                   for a, v in out.items()}
-    # Re-derive the products LAST, from the finished profile (§12.0b) — a derived value
-    # computed before the last cell moves is not derived, it is stale.
-    peak = max(v for a, v in out.items()
-               if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
-    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
-                                  ("Airborne", ("Helicopter", "Scout"))):
-        if name in out and first in out and second in out and peak > 0:
-            out[name] = out[first] * out[second] / peak
+        out = super_flatten(out)
+    out = rederive_products(out)
+    return [(a, out[a]) for a, _ in rows]
+
+
+def heaviness_bell(rows, h):
+    """DESIGN §12.0i: the CONTINUOUS successor to `class_tilt`, at heaviness `h`.
+
+    `class_tilt` takes a discrete Light/Medium/Heavy/Super level and tilts toward
+    one coarse end of every ladder. This takes a continuous `h` in 0..2 and peaks
+    the profile on ONE GLOBAL armor axis, so h=0 is the lightest rung of every
+    ladder, h=1 the middle of all four at once, and h=2 the heaviest.
+
+    ⭐ The model is `tools/balance/heaviness.py`, shared with
+    `audit_heaviness_bell.py`. It is deliberately NOT reimplemented here: a binding
+    law with two implementations diverges, and this one is checked by that audit.
+
+    Same contract as `class_tilt`: takes and returns the row list in its original
+    order, preserves every ladder's rank, and re-derives the products LAST from the
+    finished profile (§12.0b) — a derived value computed before the last cell moves
+    is not derived, it is stale.
+
+    ⭐ WIRED INTO THE EMITTER 2026-08-30 (WEAPON_HEAVINESS.md §9.6 step 5). This is
+    now the DEFAULT shaper; `class_tilt` is kept reachable through `--tilt=class`
+    so the retired model stays measurable against the shipped one instead of being
+    deleted and re-derived from a document later.
+    """
+    vals = dict(rows)
+    live = [v for a, v in rows if a not in NON_ARMOR_ROWS]
+    if not live or max(live) <= min(live):
+        return rows          # Sonic / Magic are flat BY DESIGN; a bell would destroy that
+
+    # Only the on-axis class armors take part; the off-axis set keeps its own laws
+    # (§12.0c Shield, §12.0e platings, §12.0b the derived cells).
+    base = {a: float(v) for a, v in rows
+            if a not in NON_ARMOR_ROWS and a not in heaviness.OFF_AXIS
+            and a in heaviness.BUCKET}
+    if len(base) < 2:
+        return rows
+    mu = heaviness.mu_of(base, h)
+    if mu is None:
+        return rows
+
+    out = dict(vals)
+    out.update(heaviness.belled(base, mu))
+
+    out = rederive_products(out)
+    return [(a, out[a]) for a, _ in rows]
+
+
+# ⭐ THE LEVEL -> HEAVINESS MAP — DESIGN §12.0i, wired 2026-08-30.
+#
+# The bell REPLACES `class_tilt`'s discrete Light/Medium/Heavy tilt. Until step 7 of
+# WEAPON_HEAVINESS.md §9.6 collapses the three templates into one plus a C#-side `h`,
+# the emitter still writes one template per level, so each level is pinned to the
+# heaviness it MEANS on the global 13-slot axis:
+#
+#   h = 0  the lightest rung of every ladder   (Light; `Trace` is the sub-Light tier
+#          and rode with Light under `class_tilt` — it keeps riding with it here, so
+#          the switch changes nothing about which family sits where)
+#   h = 1  the middle rung of all four ladders at once   (Medium)
+#   h = 2  the heaviest rung of every ladder             (Heavy)
+#
+# ⛔ `Super` is NOT on the axis and gets `None` — no bell at all. §12.0d makes Super
+# the FLAT GENERALIST, which is a SPREAD instruction, not a peak location, and the
+# bell has no way to express it: it moves a peak along a ladder and renormalises, so
+# it can never flatten one. `super_flatten` remains the whole of Super's shaping,
+# exactly as it was under `class_tilt`, and every ^Warhead_*_Super template is
+# therefore byte-identical across the switch.
+#
+# Once step 7 lands, `h` becomes a per-WEAPON continuous field and this table is the
+# thing it replaces. Nothing here restricts `h` to {0,1,2} — the bell is defined for
+# any real `h`, including the sub-Light `h < 0` that `Trace`'s WeaponClass 0.5 hints
+# at; the discrete map is a DEPLOYMENT constraint of the current emitter, not a law.
+H_OF_LEVEL = {"Light": 0.0, "Trace": 0.0, "Medium": 1.0, "Heavy": 2.0, "Super": None}
+
+# Which shaper the emitter uses.
+#
+# ⛔ THE DEFAULT IS STILL `class`, AND THAT IS DELIBERATE — it is not an unfinished
+# switch. Flipping it regenerates every `^Warhead_*` template in `weapons.yaml`, which
+# is ENGINE CONTENT and cannot land without CLAUDE.md rule 1's boot gate. Leaving the
+# default on `bell` with the yaml un-spliced would be worse than either state: the tree
+# would fail `verify_generator_sync`, and the next contributor to run
+# `splice_templates.py --all` for an unrelated family would ship the whole switch
+# without ever deciding to.
+#
+# `--tilt=bell` runs the ruled §12.0i model. Everything it needs is here, measured and
+# tested (WEAPON_HEAVINESS.md §9.6b); the flip is three commands on a boot machine and
+# they are written out as item 0 of ROADMAP's "P1 — BOOT-GATED WORK OWED".
+TILT_MODEL = "class"
+
+
+def shape_profile(rows, level):
+    """Apply the ruling shaper for `level`: §12.0i's bell, or the retired class tilt.
+
+    Both have the identical contract — row order in, row order out, every ladder's
+    rank preserved, §12.0b's products re-derived last — so this is a pure swap and
+    everything downstream (`fit_band_floor`, `mean_normalise`, `shield_for`) is
+    unaffected by which one ran.
+    """
+    if TILT_MODEL == "class":
+        return class_tilt(rows, level)
+    h = H_OF_LEVEL.get(level)
+    if h is None:                     # Super: flatten only, never belled — see above
+        out = rederive_products(super_flatten(dict(rows)))
+        return [(a, out[a]) for a, _ in rows]
+    return heaviness_bell(rows, h)
+
+
+# --------------------------------------------------------------------------- #
+# THE MACRO-CONTRAST AXIS — the THIRD profile knob (2026-08-30)
+# --------------------------------------------------------------------------- #
+# A profile already has two knobs and they are both WITHIN-ladder:
+#
+#   LEVEL / heaviness   WHERE along a ladder the family peaks   (`shape_profile`)
+#   MACRO PRIORITY      WHICH macro type leads the row order    (`build_order`)
+#
+# Neither controls HOW FAR the preferred macro type pulls away from the rest, and
+# that is the metric the maintainer rejected at 1.7x. `build_order` interleaves the
+# blocks of a combined group round-robin, so a family good against several macro
+# types lands its strong rows in more than one ladder and the ladder MEANS converge.
+#
+# ⛔ THIS COULD NOT LIVE IN `table()`, WHICH IS WHERE IT LOOKS LIKE IT BELONGS.
+# Measured before writing a line: **53 of 57** family x level combinations take a
+# MEASURED corpus profile from `reference_main`, and only `Nuclear` falls through to
+# `table()`'s even ramp. A knob in the ramp would have reached one family. So it is a
+# PIPELINE STAGE on the common path, exactly like the tilt — and being on the common
+# path is what makes it cover the blends and the inherit families too.
+#
+# ⭐ IT AMPLIFIES THE FAMILY'S OWN PREFERENCE, IT DOES NOT IMPOSE ONE. The ranks come
+# from the finished profile's own ladder means, never from a table of which family
+# should like which target. So a measured profile, a designed one and a blend are all
+# treated the same way, and the axis can never contradict a family's measured
+# identity — it can only sharpen it.
+#
+# WHY IT IS SAFE AGAINST THE THREE LAWS THAT BIND HERE:
+#   §12.0d  a ladder is scaled by ONE factor, so nothing inside it can reorder. The
+#           rank restore the tilt needs is unnecessary here — it holds by construction.
+#           CROSS-ladder order does change, which §12.0d explicitly permits ("None (INF)
+#           vs Superheavy (VEH) is a CROSS-ladder relation the tilt is DESIGNED to change").
+#   §12.0h  `mean_normalise` runs after it, so MEAN-100 and price invariance survive.
+#   §9.4    it WIDENS the row spread, so it is bounded by the 2x-8x band. `MACRO_RATIO`
+#           is the tunable and the band is the ceiling — see `--macro-sweep`.
+#
+# ⭐ GENERALISTS ARE EXEMPT WITHOUT A SPECIAL CASE, which is the part worth keeping.
+# Ties share a rank and therefore share a factor: `Laser` is one combined block over all
+# four ladders, so its ladder means are near-equal, it ranks near-tied and barely moves.
+# `Sonic`/`Magic` are the FLAT/PCT branches whose rows are all equal, so the
+# "no gradient" guard returns them untouched. Nobody has to remember to exclude them.
+MACRO_RATIO = 1.0    # 1.0 = OFF. See the sweep before changing it; it is boot-gated.
+
+
+def macro_means(vals):
+    """{ladder: mean of its live rungs} — derived cells and non-armors excluded."""
+    out = {}
+    for name, rungs in LADDERS.items():
+        live = [vals[a] for a in rungs
+                if a in vals and a not in DERIVED_ARMORS and a not in NON_ARMOR_ROWS]
+        if live:
+            out[name] = statistics.fmean(live)
+    return out
+
+
+def macro_spread(rows, ratio=None):
+    """Push the macro LADDER MEANS apart by `ratio`, without touching any ladder's order.
+
+    `ratio` is the multiplicative widening between the MOST and LEAST favoured ladder
+    mean: 2.0 doubles the gap. The exponent shape mirrors `tilt_exponent` — `t - 0.5`
+    over the rank range — so the two axes are visibly the same kind of object rather
+    than two unrelated tricks.
+
+    Tied ladders take the AVERAGE rank and therefore an identical factor, which is what
+    makes a generalist inert without naming it.
+    """
+    ratio = MACRO_RATIO if ratio is None else ratio
+    if ratio <= 1.0:
+        return rows
+    vals = dict(rows)
+    means = macro_means(vals)
+    if len(means) < 2 or max(means.values()) <= min(means.values()):
+        return rows          # flat, or only one ladder present — nothing to spread
+    # Average ranks, so a tie shares a factor instead of an arbitrary order deciding it.
+    order = sorted(means, key=lambda k: means[k])
+    ranks = {}
+    i = 0
+    while i < len(order):
+        j = i
+        while j + 1 < len(order) and means[order[j + 1]] == means[order[i]]:
+            j += 1
+        for k in range(i, j + 1):
+            ranks[order[k]] = (i + j) / 2.0
+        i = j + 1
+    span = max(ranks.values())
+    if span <= 0:
+        return rows
+    out = dict(vals)
+    for name, rungs in LADDERS.items():
+        if name not in ranks:
+            continue
+        factor = ratio ** (ranks[name] / span - 0.5)
+        for a in rungs:
+            if a in out and a not in DERIVED_ARMORS and a not in NON_ARMOR_ROWS:
+                out[a] = out[a] * factor
+    # ⛔ §12.0b — RE-DERIVE LAST. This stage moves `Plate` (INF) and `Scout` (VEH), the two
+    # inputs to `Heroic`, so a `Heroic` left alone here is STALE: the exact failure
+    # `rederive_products` was extracted for one commit earlier, reintroduced in a new stage.
+    # The unit tests did NOT catch it — they assert Heroic is not scaled AS A RUNG, which is
+    # still true and still right. What caught it was measuring the audit's own §9.4 metric,
+    # where `Heroic` sits INSIDE the INF ladder mean: a frozen row was damping the very
+    # metric this axis exists to move.
+    out = rederive_products(out)
     return [(a, out[a]) for a, _ in rows]
 
 
@@ -1352,10 +1594,15 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             # PercentageScale supplies the magnitude; this table carries the armor order.
             pct = table(order16, 1, ptop, pfloor, ptop + pfloor)
             hz = overlays
-        # W25 S2 — the class tilt, BEFORE the mean is pinned: the tilt moves output between
-        # armors and would otherwise leave the mean off 100. Order-preserving by
-        # construction (see class_tilt), so the two-level ordering law is untouched.
-        main = class_tilt(main, level)
+        # W25 S2 — the heaviness shaper (§12.0i's bell since 2026-08-30, `class_tilt`
+        # before it), BEFORE the mean is pinned: it moves output between armors and
+        # would otherwise leave the mean off 100. Order-preserving by construction
+        # (both paths rank-restore), so the two-level ordering law is untouched.
+        main = shape_profile(main, level)
+        # THE MACRO-CONTRAST AXIS — after the within-ladder shaper, before the band floor
+        # and the mean, both of which have to see the final ladder. Inert at
+        # MACRO_RATIO 1.0, which is what ships until the sweep is ruled on.
+        main = macro_spread(main)
         # DESIGN 12.0 rule 5 — the 2x band floor, applied to EVERY family and AFTER the tilt.
         # See fit_band_floor: the blend-only copy inside finish_blend missed CannonAP entirely
         # and let the tilt undo it for Cryo.
@@ -2043,7 +2290,22 @@ def storm_versus(level):
 
 
 def _generate():
+    global TILT_MODEL
     argv = sys.argv[1:]
+    global MACRO_RATIO
+    for a in argv:
+        # `--macro=` is how the macro-contrast axis is SWEPT without editing the source.
+        # It is a boot-gated knob: changing it regenerates every template, so the
+        # maintainer needs to see the ratio -> (macro contrast, row spread) curve and
+        # rule on a number rather than inherit one an agent picked.
+        if a.startswith("--macro="):
+            MACRO_RATIO = float(a.split("=", 1)[1])
+            if not 1.0 <= MACRO_RATIO <= 4.0:
+                sys.exit("--macro= takes a ratio in [1.0, 4.0]; 1.0 is OFF")
+        if a.startswith("--tilt="):
+            TILT_MODEL = a.split("=", 1)[1]
+            if TILT_MODEL not in ("bell", "class"):
+                sys.exit("--tilt= takes `bell` (DESIGN 12.0i, default) or `class` (retired)")
     if "--list" in argv:
         for nm, (bl, d, air, lv) in WEAPONS.items():
             print(f"{nm:11s} {macro_summary(bl):26s} dir={d:5s} air={str(air):5s} {','.join(lv)}")

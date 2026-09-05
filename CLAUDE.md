@@ -2,6 +2,23 @@
 
 ## ⚡ START HERE — read before acting (the rest of this file is the full contract)
 
+⛔⛔ PRIORITY 0 — FINISH THE BALANCE PIPELINE BEFORE ANY SINGLE-UNIT WORK.
+   Maintainer order, 2026-09-02: *"We need to finish the balancing pipeline. Finish all the class
+   anchors. Apply all the correct unit templates for each actor. Working on a single unit is not
+   getting us any closer... we need to work on the TOP LEVEL first, like a system design."*
+   The two open top-level items, in order:
+     1. CLASS ANCHORS -- 8 of 27 signed, and only 336 of 1870 buildable units carry a class tag
+        (18%). Every anchor is fitted against 18% of its own population, and 17 of 27 anchors are
+        not even members of the class they anchor. `python tools/balance/anchor_readiness.py`
+     2. UNIT TEMPLATES -- every buildable actor needs EXACTLY ONE `Inherits@Template:`.
+        `python tools/audit/audit_class_templates.py`
+   ⚠ THE DRIFT TEST, apply it to your own next action: *"does this move a NUMBER for one unit,
+   or does it move the SYSTEM?"* Investigating one weapon, one warhead, one actor is the trap --
+   it feels productive and it does not advance the pipeline. If a single-unit fix is genuinely
+   needed, WRITE IT DOWN in docs/design/ROADMAP.md and keep going on the top level.
+   ⭐ This block exists because it happened: 2026-09-02 went into one weapon (HydraSpit) and its
+   warhead family while both items above sat untouched.
+
 **Don't trust, verify.** Before asserting anything is done / pending / blocked / missing,
 check the artifact itself — grep the data, `ls` the file (incl. `~/Downloads`), run the tool,
 boot-gate the tree. When a summary (ROADMAP line, handoff, memory, status table) disagrees with
@@ -19,6 +36,17 @@ For weapon work also: `docs/design/WEAPON_3WAY_SPLIT.md`, `docs/design/WEAPON_TY
 3-axis gameplay/physics/uniqueness). Effort planning: `docs/design/BALANCE_PIPELINE_ESTIMATE.md`.
 ⚠ The dated handoffs in `docs/history/handoffs/` are provenance ONLY — read them for technique,
 never for status.
+
+⛔ **RULE 0 — THE DOCS MAXING AUDIT (maintainer order, 2026-08-30).** *"Make it illegal for any
+AI agent to perform any actions before loading the entire documentation into the context."*
+**No tool action is permitted until the SEVEN reading-order documents below have been OPENED this
+session** — hook-enforced by `tools/hooks/read_first_guard.py` on EVERY tool call, not just edits.
+Reading is exempt (you cannot open a document without a tool) and so is `git status`/`log`/`diff`,
+so the gate is satisfiable; everything else is denied by name. Honest limit, stated because a gate
+built on a false premise gets switched off: the authored set is **117 files, ~92,700 lines, ~1.9M
+tokens** and does NOT fit any context window. So it is tiered — Tier 1 gates everything, Tier 2
+gates an edit in its own subject, Tier 3 is enumerated at SessionStart so nothing can be unknown.
+Manifest and this session's coverage: `python tools/audit/audit_docs_maxing.py [--transcript <path>]`.
 
 **Ten hard rules** (rules 1–2 are enforced by hooks in `.claude/settings.json`):
 1. **Boot-gate every commit** of engine content — `launch-game.cmd` must reach the main menu
@@ -104,6 +132,27 @@ never for status.
     `Co-Authored-By: Devin AI <devin@cognition.ai>`) and must NOT append the Claude trailer — the
     git author is a shared repo identity, so the trailer is the only provenance signal and a wrong
     one pollutes history. If you are not Claude, do not sign as Claude.
+
+## The canonical repository
+
+**`github.com/cameo-mod/Cameo-mod` is the ONLY repository for this project.** Its `master` is
+the trunk; work lands there through a PR from a feature branch.
+
+⛔ **`github.com/Zeruel87/Cameo-mod` is the ABANDONED original fork.** Do not add it as a remote,
+fetch it, compare against it, or push to it — it has had no publishing activity since the
+project moved, so anything read from it is history and anything written to it is lost. On
+2026-08-11 it was re-added as `upstream` and a session went into comparing two stray commits
+against a dead tree (`DEVELOPMENT_LOG.md` lines 657-670). Enforced by `bash_guard.py` rule 1b.
+For history that predates this repository, read `docs/history/` — never the fork.
+
+Related repositories in the same org are real and separate, and none of them is a mirror of
+this one: **`cameo-mod/OpenRA`** (the engine soft-fork — see rule 7 and §"Changing the engine";
+`engine/` in this tree is its BUILD OUTPUT, not source) and **`cameo-mod/cameo_ifv`**.
+
+⚠ **Two appearances of the old name are ART CREDIT and must never be "cleaned up":** the
+`Zeruel87 Urban` tileset categories in `mods/cameo/tilesets/*.yaml` (a terrain category id —
+renaming it breaks every map that places those tiles) and the author entry in
+`mods/cameo/credits.txt`. This rule is about git remotes and URLs, not about attribution.
 
 **Work queue:** `docs/design/ROADMAP.md` (crashes jump the queue). **Effort estimate for the whole
 balance program:** `docs/design/BALANCE_PIPELINE_ESTIMATE.md`.

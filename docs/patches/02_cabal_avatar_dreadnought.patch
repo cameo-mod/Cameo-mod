@@ -1,0 +1,13 @@
+diff --git a/mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml b/mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml
+index 1368d8139..e3db03207 100644
+--- a/mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml
++++ b/mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml
+@@ -805,7 +805,7 @@ cabal_heavyreaper:
+ 
+ cabal_avatar:
+ 	Inherits: ^Vehicle
+-	Inherits@Template: ^HighTechTankTemplate
++	Inherits@Template: ^DreadnoughtTemplate
+ 	Inherits@EXPERIENCE: ^GainsExperienceTD
+ 	Inherits@decoration: ^CABALRankDecoration
+ 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
