@@ -203,8 +203,18 @@ def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
                 "power": num(a.get("Power")),
                 "build_time": num(a.get("BuildTimeMultiplier")),
                 "secondary": (a.get("Secondary") or "").strip() or None,
+                "naval": (a.get("Naval") or "").strip().lower() in ("yes", "true"),
                 **wep,
             })
+    for r in rows:
+        # RA2 INI has no naval or defence list — ships live in VehicleTypes and turrets in
+        # BuildingTypes. The maintainer's profile groups need them separated, so derive:
+        #   naval   = a vehicle flagged Naval=yes
+        #   defense = a building that actually carries a weapon
+        if r["type"] == "vehicle" and r.get("naval"):
+            r["type"] = "naval"
+        elif r["type"] == "building":
+            r["type"] = "defense" if r.get("weapon") else "building"
     return rows, notes
 
 
