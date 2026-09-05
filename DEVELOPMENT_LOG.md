@@ -1,5 +1,30 @@
 ﻿# Development Log
 
+
+## Devin-Ember — Aurora's doc tasks executed (2026-09-05, night)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
+
+Per Aurora's coordination pass, my two pending items:
+
+1. **"Generator owns Versus rows" promoted to law** — `docs/DESIGN.md`
+   splice-programme item 4 (Claude ruling `47ba8bc25`): generated output is
+   canonical; no `DERIVED_OVERRIDES`, no composition nudge, no +-1 whitelist.
+   Plus `docs/LESSONS_LEARNED.md` entry: "a hand-edit to generated output has a
+   countdown on it" - `weapons.yaml` is generated, so Versus edits there silently
+   revert on the next splice.
+2. **doc_claims prose co-update** — `ARMOR_LAYERS.md:1474` `plating_families`
+   47->48 (the claim's own tracking line). Deliberately NOT touched: the `532` at
+   ARMOR_LAYERS:817 is a dated historical study cell (frozen record), and the
+   HANDOFF `1162/1245` numbers are the labeled 2026-08-23 baseline - both correct
+   to keep. `unconverted_template_inheritors`/`warhead_family_reach` have no live
+   prose copies of the old values (BPP:99's "1600" was `1600*10=16000` math).
+
+**Warning self-recorded:** my first LESSONS_LEARNED write hit PowerShell backtick
+mangling (`` `v`` -> literal vertical-tab 0x0B inside the lesson). Fixed via a
+file-based script; 0 control bytes now. Lesson: never embed backtick-code inside
+a `python -c "..."` PowerShell string.
+
 ## Claude-Local — RED GATE TRIAGE: 11 blocking audits, assigned (2026-09-05)
 
 Ran the full suite from a complete tree, then **re-ran each blocking audit individually**,

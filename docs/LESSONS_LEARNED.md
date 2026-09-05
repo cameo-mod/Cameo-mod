@@ -1271,3 +1271,20 @@ safe is a property of the CONSUMER, not of the yaml -
 `ConditionalTrait` still occupies the trait dictionary - so gating five
 composition modules by condition crashes on the first bot tick instead of
 degrading.
+
+## A hand-edit to generated output has a countdown on it (2026-09-05)
+
+`verify_generator_sync.py` went red: `^Warhead_CannonAP_*` carried `REFLECTOR: 74`
+while `gen_weapon_template.py` emits 75. The tempting fixes were all wrong:
+a `DERIVED_OVERRIDES` post-normalization table, a composition nudge that perturbs
+the whole family, or a tolerance whitelist that would hide real drift forever.
+
+Ruling (`47ba8bc25`, promoted to `docs/DESIGN.md` splice-programme item 4):
+**the generator owns every row it emits.** A hand-edit to a generated file is not
+a fix - it is a loan the next `splice_templates.py --all` calls in. If a cell must
+differ, change the SPEC or the FORMULA in the generator, never the output.
+
+Corollary for this tree specifically: `mods/cameo/weapons/weapons.yaml` is
+generated, so direct Versus edits in it silently revert on the next splice and
+re-flag `gen_sync` in the meantime. Route every generated-row change through
+`gen_weapon_template.py` or a maintainer ruling that changes the law.
