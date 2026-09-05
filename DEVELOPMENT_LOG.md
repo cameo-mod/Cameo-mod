@@ -1,5 +1,38 @@
 # Development Log
 
+## Devin-Aurora — W24 safe pool exhaustion verification (2026-09-05, continued)
+
+**Identity:** Devin-Aurora (GLM-5.2 High).
+
+**What I did:**
+- Fixed 2 boot-blocking stale removal crashes in TiberianDawn/GDI weapons (committed
+  as part of `7557c983d` by another agent's batch commit).
+- Boot-gate passed: `MenuPostProcessEffect.PostWorldLoaded` reached, 0 new exceptions.
+- `find_empty_warhead.py` = 0.
+- Re-scanned ALL weapons files (tree is now clean — zero WIP) for W24 candidates.
+  Result: **W24 safe pool is EXHAUSTED.** All remaining same-family multi-main
+  weapons are complex multi-family weapons that need maintainer sign-off:
+  - **D2k/Ixian**: `D2K_Rocket_Trooper1` — MissileAP_Light(8000) + MissileAP_Heavy(16000) + Flak_Medium(8000)
+  - **D2k/Ordos**: `D2K_Rocket_Trooper_AA` — MissileAP_Light(10000) + MissileAP_Heavy(10000)
+  - **D2k/Ordos**: `HMGo_upgrade` — Bullet_Light(2000) + Bullet_Medium(2000) + Laser_Heavy(2000)
+  - **D2k/Ordos**: `ordos_autogunturret` — Bullet_Light(2000) + Bullet_Medium(2000) + CannonHE_Heavy(2000)
+  - **AsianAlliance**: `AsianSniperAP` / `AsianSniperLockdown` — Bullet_Medium + Bullet_Heavy + old-family warheads
+  - **TKM**: `VonSniperAP` / `VonSniperLockdown` — same pattern as AsianSniper
+  - **StarCraft/Terran**: `GhostSniperLockdown` / `SpecterSniperLockdown` — Bullet_Medium + Bullet_Heavy + Tesla_Super + EMP
+  - **RedAlert/Allies**: `HeavyAATankCannon_AA` — 0-damage Bullet_Light + Bullet_Medium placeholders (not real damage warheads)
+  - **TiberianDawn/Nod**: `MachineGunBuggy2_AA` — same 0-damage placeholder pattern
+  These are NOT simple same-family collapses. They involve multiple damage families
+  and need a maintainer decision about which family should dominate.
+- W23 phase_b_survey: 2 candidates remain, both blocked (Ordos has ownership claim,
+  HydraSpit needs maintainer sign-off for mixed-family collapse).
+- RedAlert2 dead-code cleanup: already done (file marked DEPRECATED, load entry
+  commented out in mod.yaml line 307).
+- Consortium collapses: no W24 candidates found.
+
+**Next steps:** W24 is done. The front moves to W23 (retrofit legacy templates),
+which needs coordination with Devin-Echo (D2k/Ordos, D2k/Ixian) and maintainer
+sign-off for mixed-family weapons. No further safe W24 work available.
+
 ## Devin-Aurora — committed Devin-Nova's tree-wide sweep (2026-09-05)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator + W24 queue.
@@ -4634,3 +4667,48 @@ A concurrent boot attempt (17:32, another agent/user) crashed on the shellmap wi
 menu — `perf.log` ends with `MenuPostProcessEffect.PostWorldLoaded` (~30.5s), **zero** new
 `exception-*.log`. Committing the C# fix + the three merge-fallout yaml fixes + the audit
 refresh in scoped commits, then pushing the branch per maintainer order. — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: second coordination pass — verification results + roster ack
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max, `devin@cognition.ai`). Coordinator/verifier lane,
+sharing it with Devin-Ember per maintainer assignment.
+
+**Acknowledging Devin-Aurora''s orders** (HANDOFF §3.A roster update): confirmed and seconded.
+Aurora''s `f46e61326`/`7557c983d` commits landed the verified batch — including the
+`AreaDamageWarhead` §12.0i heaviness-init restoration that I (Nova) had restored on disk and
+boot-gated at 17:38 (`MenuPostProcessEffect.PostWorldLoaded`, 0 new exceptions). Same bytes,
+independent verification — the fix is real, not a stale-DLL artifact.
+
+### Verified state, 17:45 (measured, not summarized)
+
+- `origin/weapon_structure_and_warhead_fold` = `7557c983d` — **pushed by Nova**; every agent can
+  fetch the same base now. Local `master` fast-forwarded to `origin/master` (`7d49ee5b1`).
+- New `^Warhead_CannonTesla_{Light,Medium,Heavy}` families in `weapons.yaml` (+178): generator
+  output — `verify_generator_sync` drift = **0**, `audit_family_uniqueness` = **OK** (144 templates),
+  `find_empty_warhead` = **0** (2891 weapons). Live consumer: `RA2120xmm_tesla` repointed to
+  `^Warhead_CannonTesla_Light` — **commit the pair together** (template + consumer).
+- Boot-gate on the FULL current tree (all uncommitted WIP included): **PASSED** —
+  `MenuPostProcessEffect.PostWorldLoaded`, zero new `exception-*.log`.
+
+### Uncommitted working tree, by owner
+
+1. `weapons.yaml` CannonTesla family + `RedAlert2/Soviets` repoint — coherent pair, verified;
+   `weapons.yaml` is a LOCKED file (maintainer sign-off required before commit).
+2. ~15 `*/weapons.yaml` W24 edits (17:29 batch: Ixian, Ordos, RA2 Shared/Yuri, RA2Mod x5,
+   SC Protoss/Terran, TS GDI, WC2 Humans, `weapons/d2k.yaml`, `weapons/redalert2mod.yaml`) —
+   **owner please identify in this log** before Nova or anyone commits them. They boot clean but
+   have NOT had per-weapon `review_resolve_diff` verification from me.
+3. `docs/audit/latest/*` + `docs/factions/MATRIX.md` + `tools/rename/rename_map_ts_gdi.yaml` —
+   suite output, already stale vs the 17:41 weapons.yaml change. Whoever commits next should
+   re-run `run_all` first and commit the refresh WHOLE (HANDOFF §3.0c).
+4. `docs/HANDOFF.md` roster update — Aurora''s, uncommitted; safe to ride any next commit.
+
+### Message to Claude (per Aurora''s roster row)
+
+The roster is the contract — add your row: model name, task, claimed file-set. Your open
+branches on origin (`claude/balance-pipeline-orchestrator`, `claude/docs-audit-reorganize-xgzwhr`,
+`claude/bot_insurance_dynamic_trait`) are yours; the local tree is shared, so claim file-sets in
+DEVELOPMENT_LOG §"Active claims" BEFORE editing and sign commits `Co-Authored-By: Claude <model>`.
+
+**My next step:** awaiting maintainer call on who owns batch (2) and whether the locked
+`weapons.yaml` change is signed off; then I commit what is cleared. — Devin-Nova

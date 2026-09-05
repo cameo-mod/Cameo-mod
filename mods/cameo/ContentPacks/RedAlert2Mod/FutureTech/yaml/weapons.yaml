@@ -1146,10 +1146,7 @@ MissileAttackRobotGun:
 	BurstDelays: 5
 	Report: vifvatta.wav
 	Warhead@MissileAP_Medium:
-		Damage: 12000
-	Warhead@MissileAP_Light: AreaDamage
-		Damage: 12000
-	-Warhead@MissileAP_Light:
+		Damage: 24000
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
