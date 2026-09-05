@@ -1,5 +1,6 @@
 World:
 	FactionCA@Atreides:
+		Selectable: true
 		Name: Atreides DU
 		InternalName: atreides
 		Game: Dune Universe
@@ -15,7 +16,7 @@ World:
 		ClassName: Light Support
 		Factions: atreides
 		BaseActor: atreides_mobileconstructionvehicle
-		SupportActors: light_inf, light_inf, heavy_inf.ixian, trooper, trooper, rocket_raider.ixian, ixian_kodatank
+		SupportActors: light_inf, light_inf, atreides_fremen, trooper, trooper, atreides_rockettrooper, atreides_sandbike
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5
 	StartingUnits@atreides_h:
@@ -23,6 +24,6 @@ World:
 		ClassName: Heavy Support
 		Factions: atreides
 		BaseActor: atreides_mobileconstructionvehicle
-		SupportActors: light_inf, light_inf, heavy_inf.ixian, trooper, trooper, rocket_raider.ixian, heavy_rocket_raider.ixian, ixian_kodatank, duelist_tank.ixian
+		SupportActors: light_inf, light_inf, atreides_fremen, trooper, trooper, atreides_rockettrooper, atreides_rockettrooper, atreides_sandbike, atreides_combattank
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5
