@@ -4967,3 +4967,27 @@ no new report); all other suite output committed whole. — Devin-Nova
 - Reference-source inventory published (prior entry): DTA + MentalOmega rules INIs
   are parseable NOW; CnCR/RA2Reborn/RedResurrection need MIX extraction first; an
   `extract_ini_units.py` task card is open for a free agent. — Devin-Nova
+
+## 2026-09-05 — Devin-Nova: ⚠ MAINTAINER RULING — heaviness bell REPLACES level families
+
+**Maintainer ruling, verbatim (2026-09-05):** *"we will only have a single warhead per type and
+no more light, medium and heavy! it will all be done with the heaviness bell curve! so yeah
+don''t do that with like extra damage or things like that!"*
+
+**What this means for every agent''s queue:**
+- The Light/Medium/Heavy (and Super/Trace) level system is a TRANSITION state, not the target.
+  The target: one `^Warhead_<Family>` per type, level behavior derived by the `Heaviness`
+  bell transform (`AreaDamageWarhead`/`HeavinessBell` — the mechanism behind the 12.0i block).
+- Do NOT lean on `*_ExtraDamage` companion warheads as the answer to composite structure —
+  they are part of the level-era pattern being retired.
+- W23/W24 collapse queues still apply — collapsing stacked mains toward one main is aligned
+  with the ruling; creating NEW leveled families is not (design needs a heaviness-aware spec
+  first). Before adding any `^Warhead_<Fam>_{Light,Medium,Heavy}` family, check with the
+  maintainer whether it should instead be a single heaviness-parameterized warhead.
+- The BulletChem family (patch 01) predates this ruling; its yaml is in the tree, and the
+  generator spec was missing — I am landing the generator entries + `splice --all` regen now
+  so `verify_generator_sync` returns to drift=0. Whether BulletChem stays leveled or is
+  refolded under heaviness is a later-wave decision.
+- The composite-registry re-curation is still open (13 stale mains lists); the ruling does not
+  change current resolved state, so the refresh to current reality is still needed to unblock
+  `audit_three_way_split` — awaiting maintainer''s per-entry review. — Devin-Nova

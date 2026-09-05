@@ -1894,6 +1894,7 @@ FAMILY_DAMAGE_TYPES = {
     "MissileThermobaric": "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "CannonChem": "Prone75Percent, TriggerProne, TiberiumDeath",
     "MissileChem":"Prone75Percent, TriggerProne, TiberiumDeath",
+    "BulletChem": "Prone75Percent, TriggerProne, TiberiumDeath",
     # Storm is handled at its own call site (Prone100Percent + Tesla).
 }
 
@@ -2000,6 +2001,21 @@ BLEND_FAMILIES = {
     "BulletThermobaric": (["Bullet", "Bullet", "Bullet", "Demolition", "Concussion", "Flame"],
                           {"Temperature": _m(1 / 6)}, L3),
     "BulletTesla": (["Bullet", "Tesla"],      None, L3),
+    # BulletChem = Bullet x Chemical (maintainer 2026-09-02, for the Hydralisk W24 collapse):
+    # "a new BulletChem that is like Bullet x Chemical so it's more similar to what it was
+    # before but more damage against infantry and aircraft with a little bit damage against
+    # tanks from the chemical side". It is the BULLET delivery member of the element+delivery
+    # Chem set, alongside CannonChem and MissileChem, and it exists because HydraSpit stacked
+    # ^SmallArms (Bullet) + ^LightChemicalWeapon + ^LightMissile + ^ArrowWeapon: no single
+    # existing family reproduces a corrosive small-arms round, so collapsing it to plain
+    # Chemical moved every ground matchup (see docs/design/W24_COLLAPSE_REVIEW.md).
+    # Corrosion follows the CHEM convention, not the Bullet-blend one. CannonChem and
+    # MissileChem ramp {Light 20, Medium 33, Heavy 50}; the Bullet blends use the flat
+    # per-parent average _m(0.50) = 50. The two AGREE at Heavy (Chemical 100 over 2
+    # parents), so the ramp is the same rule with a level curve, and being the third member
+    # of the Chem set outranks being the fifth member of the Bullet set.
+    "BulletChem":  (["Bullet", "Chemical"],
+                    {"Corrosion": {"Light": 20, "Medium": 33, "Heavy": 50}}, L3),
     "Waveforce": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"],
                   {"Temperature": _m(0.35), "Corrosion": _m(0.20)}, L3),
     # PhotonCannon = the maintainer's 3-way — Waveforce 25% / CannonHE 25% / MissileAA 50% — and
