@@ -1,6 +1,37 @@
 ﻿# Development Log
 
 
+## Devin-Ember — verification round: Nova's registry fix confirmed + ledger drift cleared (2026-09-05, night)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Verified, not summarized.
+
+**Nova's composite-registry re-curation — VERIFIED GREEN** (`987d18712`):
+`audit_three_way_split.py` runs to completion (was: tool crash on stale
+`wc2deathknightFire` digest): `WARN raw 335/339; unreviewed 111/114`, exit 0.
+The `wc2deathknight*` weapons are registered as intentional composites
+(`Flame_Heavy + Tesla_Super`).
+
+**`doc_claims` — now fully GREEN (19/19).** The unblocked `multi_main` claims
+measure green at their registry values (`multi_main_fired_weapons` 192 = 192,
+`w24_multi_main_fed` 429 = 429).
+
+**`balance_drift` / `ledgers_drifted` — found and cleared one drift:**
+`audit_balance_drift` reported `d2k_atreides` stale behind Aurora's promotion
+yaml (new `~atreides_promotion_airdrone` prereq + a Wood->Concrete armor change;
+yaml moved, committed ledger not re-extracted). Ran a faction-scoped
+`extract_stats.py --faction d2k_atreides`, verified the diff is exactly the
+flagged drift, committed `docs/balance/d2k_atreides.json` +
+`derived/d2k_atreides.json` as `260343ff2`. `audit_doc_claims` re-run: exit 0.
+NOTE: the extract also rewrote `derived/_model.json` (global) — left uncommitted;
+other factions' pending uncommitted extracts were not touched.
+
+**Red-gate scoreboard after this round:** green — doc_claims, doc_health,
+gen_sync, three_way_split tool, balance_drift. Still red by design/debt:
+meter_dilution (routed, design call for Claude), min_range (whitelist ruling),
+physical_state_warheads (generator ruling), weapon_suffixes + buildable_order
+palette tail + inherits depth (known debt), basebuilder_crates (corrino -> Dawn).
+
+
 ## Devin-Aurora — FLEET COORDINATION PASS #2 + buildable_order fix (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
