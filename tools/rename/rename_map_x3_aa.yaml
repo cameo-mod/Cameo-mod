@@ -1,0 +1,19 @@
+# X3 AA suffix migration (Ruling 12 bucket A + bucket B sibling test).
+# Bucket A: names already ending "AA" without the underscore - pure renames.
+# Bucket B: sibling test applied (2026-09-06, measured): every candidate has a
+# ground-capable sibling weapon on the SAME actor, so none is a dedicated-AA
+# exemption; _AA moves to the suffix per DESIGN.md section 1
+# (<base>_<variant>_EMP_AA_elite). LaserBuggy2 pair keeps the glued compound
+# style of its ground siblings (LaserBuggy2Inferno / LaserBuggy2Burning).
+actors:
+  CabalLaserBoatLaserAA: CabalLaserBoatLaser_AA
+  CabalManticoreMissilesAA: CabalManticoreMissiles_AA
+  DRBionWeaponAA: DRBionWeapon_AA
+  TSChemAdatsMissileAA: TSChemAdatsMissile_AA
+  BallistaSingleShotAir: BallistaSingleShotAir_AA
+  BallistaSingleShotAirEnergized: BallistaSingleShotAirEnergized_AA
+  GoliathMk2Rockets: GoliathMk2Rockets_AA
+  LaserBuggy2_AAInferno: LaserBuggy2Inferno_AA
+  LaserBuggy2_AABurning: LaserBuggy2Burning_AA
+  TSMammothTusk2: TSMammothTusk2_AA
+files:

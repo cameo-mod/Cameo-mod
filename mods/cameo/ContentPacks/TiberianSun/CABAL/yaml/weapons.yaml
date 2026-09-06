@@ -1524,7 +1524,7 @@ CabalLaserBoatLaser:
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
-CabalLaserBoatLaserAA:
+CabalLaserBoatLaser_AA:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -1870,7 +1870,7 @@ CabalLegionGun:
 		Damage: 12000
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 12000
-CabalManticoreMissilesAA:
+CabalManticoreMissiles_AA:
 	Inherits@finalmain: ^Compatibility_MissileAA_MediumFlat
 	Inherits: ^CabalManticoreMissiles
 	Range: 5358
