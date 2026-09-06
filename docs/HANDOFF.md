@@ -141,6 +141,34 @@ the method, the faction-specific traps, the gates, and the report format. Read
 ⚠ **Agent-to-agent chatter lives OUTSIDE the repository**, in `../Cameo-mod-fleet/`.
 `DEVELOPMENT_LOG.md` keeps one entry per COMPLETED work item plus lessons learned — nothing else.
 
+## ⛔⛔ TOP OF THE QUEUE 2026-09-07 — revert the ra1_soviets rename
+
+**All 32 actor renames `ad7c5e232` applied made the id LONGER and WORSE. Not one
+improvement in the set.** Full write-up and the revert procedure:
+[`design/RA1_SOVIETS_RENAME_REVERT.md`](design/RA1_SOVIETS_RENAME_REVERT.md).
+
+```
+ra1_soviets_barracks              -> ra1_soviets_sovietbarracks
+ra1_soviets_constructionyard      -> ra1_soviets_sovietconstructionyard
+ra1_soviets_attackdog             -> ra1_soviets_actordogname      (a FLUENT KEY)
+ra1_soviets_doctrine_conscription -> ..._doctrine_conscriptiondoctrine
+ra1_soviets_upgrade_hammertank    -> ..._upgrade_hammertankupgrade
+```
+
+The tech markers are **duplicated** — `doctrine_X` became `doctrine_Xdoctrine`. That is
+what a mechanical rename looks like when nobody reads three lines of the proposal.
+
+**The cause is already fixed** (`c9437f4f8` defects C and E), so the corrected generator
+now proposes the ORIGINAL ids — the revert target is what the tool produces, not a
+judgement call. It has already cost: 7 broken `.oramap` files including both shellmaps
+(two tester crashes), 236 deleted removal nodes, and 69 of the 345 N4 findings.
+
+⛔ **Do not batch this with another rename.** It touches both shellmaps; boot gate is
+mandatory.
+
+**The rule it earns: a rename that makes an id LONGER is a regression until proven
+otherwise.** A batch that raises N4 has failed, whatever its compliance percentage says.
+
 ## ⭐ NEW WORK SPECIFIED 2026-09-07 — two maintainer orders, neither built
 
 Both are written up in full, with the state verified rather than assumed. Neither is a
