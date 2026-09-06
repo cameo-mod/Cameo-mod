@@ -295,10 +295,41 @@ def exclusivity_cells(src):
     return cells
 
 
+# ⭐ THE UNIVERSAL-POOL CARVE-OUT (maintainer ruling 2026-09-06).
+# A unit owned by EVERY routed country of its source is one of two very different things, and the
+# partition rule was treating them alike:
+#
+#   shared INFRASTRUCTURE — Mental Omega's Allied Tech Center, Ore Refinery, War Factory, Nuclear
+#     Reactor. Every side builds one. It says nothing about any faction and is rightly removed.
+#
+#   a universal COMBAT unit — Rise of the East gives its Soviet Mammoth Tank, Asian Emperor
+#     Overlord Tank, Allied Juggernaut and Yuri Specter Squad to all fifteen countries. Removing
+#     them cost `asianalliance` and `tkm` THE TWO HEAVIEST TANKS IN THE ROSTER — the top of the
+#     HP and cost range, which is the part of a distribution a reference is least able to spare.
+#
+# ⚠ The maintainer asked the right question and the answer was NOT "only harvesters". So: a
+# universal unit that MOVES is readmitted; a universal STRUCTURE is not. Mobility is the test
+# because a structure everyone builds is infrastructure by definition, while a vehicle everyone
+# fields is still a data point about what a 2,600-credit heavy tank looks like.
+# ⚠ "Universal" means ALL of the source's ROUTED countries. A unit owned by SOME of them is
+# partially shared, which is the case the partition exists for, and stays removed — e.g. Mental
+# Omega's 61-unit non-Foehn pool, and CnC Reloaded's Core Defender (19 of 21 countries, but not
+# Nod, so it is not universal).
+MOBILE_TYPES = {"infantry", "vehicle", "aircraft", "ship"}
+
+
+def is_universal(row, src):
+    """Owned by EVERY routed country of `src` — the mod's common pool, not a faction's."""
+    routed = ROUTED_TOKENS.get(src, set())
+    return bool(routed) and routed <= peer_factions(row)
+
+
 def is_shared(row, src):
     """True when this row's routed owners straddle more than one cell — it describes the MOD."""
     owned = peer_factions(row) & ROUTED_TOKENS.get(src, set())
-    return not any(owned <= cell for cell in exclusivity_cells(src))
+    if any(owned <= cell for cell in exclusivity_cells(src)):
+        return False
+    return not (is_universal(row, src) and row.get("type") in MOBILE_TYPES)
 
 UNROUTED = {
     # ⭐ `tkm` and `japan` LEFT this table on 2026-09-05 — both are routed now. TKM takes Mental
