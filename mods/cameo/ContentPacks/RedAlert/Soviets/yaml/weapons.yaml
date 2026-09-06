@@ -809,12 +809,8 @@ GradHeavyRockets:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 4000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
@@ -1820,13 +1816,9 @@ YakTeslaBomb:
 		FriendlyFireSpread: 50
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 20
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1910,8 +1902,6 @@ YakTeslaBomb:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStates:
 			Corrosion: 100
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@PreservedFlat_HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2020,13 +2010,9 @@ YakNuclearBomb:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 50000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 25
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2431,13 +2417,9 @@ ShtoraLaser:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -3062,12 +3044,8 @@ ra120mm2:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 8
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3348,13 +3326,9 @@ MammothTusk2:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -3762,13 +3736,9 @@ VolkovMagneticWeapon:
 		FriendlyFireSpread: 50
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -3812,14 +3782,10 @@ VolkovMagneticWeaponTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -3868,12 +3834,8 @@ VolkovMagneticWeaponTeslaFragment1:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -3911,12 +3873,8 @@ VolkovMagneticWeaponTeslaFragment2:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -3965,13 +3923,9 @@ VolkovMagneticWeaponNuclearShells:
 		FriendlyFireSpread: 50
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -4030,14 +3984,10 @@ VolkovMagneticWeaponIncendiaryTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -4106,12 +4056,8 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -4160,12 +4106,8 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -4239,13 +4181,9 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 		FriendlyFireSpread: 50
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -4298,12 +4236,8 @@ ParaBombNuke:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 100000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 50
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

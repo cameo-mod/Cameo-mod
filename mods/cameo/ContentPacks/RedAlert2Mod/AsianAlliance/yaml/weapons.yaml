@@ -1225,39 +1225,27 @@ AsianChemical:
 		FriendlyFireSpread: 50
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
@@ -1323,8 +1311,6 @@ AsianChemicalBombs:
 		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -1504,13 +1490,9 @@ AsianPulverizerMechaGatling:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
@@ -1569,13 +1551,9 @@ AsianSinglePlasma:
 		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1595,13 +1573,9 @@ AsianSinglePlasma:
 		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1688,8 +1662,6 @@ AsianSinglePlasma:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Corrosion: 100
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@PreservedFlat_LightFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1752,8 +1724,6 @@ AsianSinglePlasma:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Corrosion: 100
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@PreservedFlat_MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1962,14 +1932,10 @@ AsianHarbingerPlasma:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1992,14 +1958,10 @@ AsianHarbingerPlasma:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air

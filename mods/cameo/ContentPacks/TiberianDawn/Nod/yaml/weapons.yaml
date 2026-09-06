@@ -171,12 +171,8 @@ ArtilleryShellUpgrade:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 6000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -640,8 +636,6 @@ ChemRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
@@ -672,8 +666,6 @@ ChemRocketsExplosion:
 		Damage: 3
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Chemical_Light:
@@ -709,8 +701,6 @@ ChemicalBikeRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -762,8 +752,6 @@ ChemicalStealthTankMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -846,13 +834,9 @@ ChemicalHonestJohn:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 30000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	-Warhead@Effect1:
 	Warhead@Effect: CreateEffect
 		Explosions: big_tibnapalm
@@ -1049,12 +1033,8 @@ LightTank2Cannon:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 4000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
@@ -1371,12 +1351,8 @@ SpecterArtilleryShellUpgrade:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

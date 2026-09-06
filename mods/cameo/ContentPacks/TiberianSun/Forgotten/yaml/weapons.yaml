@@ -97,12 +97,8 @@ TS70mmTurChem:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -150,8 +146,6 @@ TSChem120mmx:
 		PercentageScale: 8929
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 15
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 5
 		Duration: 50
@@ -281,12 +275,8 @@ TSScoopDualTurChem:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 8
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -327,8 +317,6 @@ TSHighVelocityChem:
 		Damage: 15
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 7
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -445,12 +433,8 @@ TSBusMortarChem:
 		Damage: 16
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 16
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 16
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -777,8 +761,6 @@ TSChemBoatcannon:
 		Spread: 400
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 4
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@HeavyBomb:
@@ -981,8 +963,6 @@ TSMammothTuskChem:
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -1062,13 +1042,9 @@ TSChemRuinerMissile:
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		ValidTargets: Ground, Water, Air
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 		ValidTargets: Ground, Water, Air
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 9
 		ValidTargets: Ground, Water, Air
@@ -1315,12 +1291,8 @@ MutFlamerChem:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 14000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 7
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -1398,23 +1370,15 @@ MutHFlamerChem:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 4
 		Duration: 50
@@ -1477,18 +1441,12 @@ TSFiendShardUP:
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -1538,13 +1496,9 @@ TSFiendShardBlue:
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@3Eff: CreateEffect
 		Explosions: sczhsplash
 		ImpactActors: false
@@ -1588,18 +1542,12 @@ TSFiendShardBlueUP:
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
@@ -1661,16 +1609,10 @@ TSChemsprayUP:
 	Range: 3183
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 16
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 16
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 16
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
 		Duration: 50
@@ -1707,16 +1649,10 @@ TSVisceroidSprayUP:
 	Range: 1618
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50

@@ -572,13 +572,9 @@ SteelMakoGun_EMP:
 		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1212,14 +1208,10 @@ SteelInfRailgun_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1387,8 +1379,6 @@ SteelInfRailgun_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStates:
 			Corrosion: 100
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@PreservedFlat_MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1885,13 +1875,9 @@ SteelMegaSword:
 		FriendlyFireSpread: 50
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1938,13 +1924,9 @@ SteelMegaSword_EMP:
 		FriendlyFireSpread: 50
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 15
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1990,13 +1972,9 @@ SteelMegaSword_elite:
 		FriendlyFireSpread: 50
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 15
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -2216,12 +2194,8 @@ SteelQuantumTurretRail:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2274,12 +2248,8 @@ SteelQuantumTurretRail_EMP:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2526,13 +2496,9 @@ SteelKatyCannons_EMP:
 		FriendlyFireSpread: 50
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

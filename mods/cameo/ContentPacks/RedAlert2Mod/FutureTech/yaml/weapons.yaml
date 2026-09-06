@@ -1247,12 +1247,8 @@ FutureMechPlasma:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
 	Warhead@Effect: CreateEffect
@@ -1356,14 +1352,10 @@ FutureTankCannons:
 		ValidTargets: Ground, Water, Air
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1476,12 +1468,8 @@ FutureHarbingerCannon:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

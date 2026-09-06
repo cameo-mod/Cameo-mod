@@ -877,39 +877,27 @@ SiegeTankSiegeCannon:
 		FriendlyFireSpread: 50
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1413,13 +1401,9 @@ WyvernRockets:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1524,13 +1508,9 @@ BCLaser:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1604,12 +1584,8 @@ BCYamatoCannon:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 8
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1702,13 +1678,9 @@ PhobosLaser:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1840,13 +1812,9 @@ MedicFlare:
 		FriendlyFireSpread: 50
 		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
 		Damage: 2000

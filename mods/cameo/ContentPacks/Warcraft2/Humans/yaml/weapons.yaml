@@ -342,13 +342,9 @@ MortarTeamArtilleryShell:
 		FriendlyFireSpread: 50
 		Damage: 20000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

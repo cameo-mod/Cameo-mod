@@ -142,8 +142,6 @@ MutaliskSpore:
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -188,8 +186,6 @@ MutaBounce1:
 		Damage: 2
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
@@ -218,8 +214,6 @@ MutaBounce2:
 		Damage: 1
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
@@ -338,13 +332,9 @@ DreadshroudSpore:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -391,8 +381,6 @@ SCDevourerAA:
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 10
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -406,8 +394,6 @@ SCDevourerAA:
 		FriendlyFireSpread: 50
 		ValidTargets: Air
 		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		ValidTargets: Air
 		Explosions: purplesplash
@@ -438,8 +424,6 @@ SCDevourerAA:
 		Damage: 44000
 		PercentageScale: 0
 
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 37
 ScourgeExplosion:
 	Inherits: SCScourgeExplosion
 	Range: 2000
@@ -728,14 +712,10 @@ SwarmlingShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -856,8 +836,6 @@ QueenSpine:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Broodling
 		ValidTargets: Ground, Water, Air
@@ -942,8 +920,6 @@ LurkerSpinesImpact:
 		Damage: 1
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
@@ -1034,13 +1010,9 @@ BehemothShoot:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000

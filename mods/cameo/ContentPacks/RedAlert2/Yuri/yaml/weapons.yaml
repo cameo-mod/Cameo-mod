@@ -91,39 +91,27 @@ RA2LasherToxicMortar:
 		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -197,34 +185,22 @@ RA2LasherToxicMortar_elite:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 4000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
@@ -794,16 +770,12 @@ RA2Virusgun:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 6
 		Spread: 1
 		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
 		ImpactSounds: firebl3.aud
@@ -850,12 +822,8 @@ RA2Virusgun2:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Ship, Garrisoned
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship, Garrisoned
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 150

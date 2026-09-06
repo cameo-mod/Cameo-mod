@@ -207,13 +207,9 @@ PlasmaFlamer:
 		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: blue_small_napalm
 	-Warhead@MediumChemicalWeapon:
@@ -486,14 +482,10 @@ JapanMaidenBowEnergized:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -618,14 +610,10 @@ BallistaSingleShotAirEnergized:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -724,13 +712,9 @@ BallistaMultiShot:
 		FriendlyFireSpread: 50
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@ArrowWeapon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -803,13 +787,9 @@ BallistaMultiShotEnergized:
 		FriendlyFireSpread: 50
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -914,14 +894,10 @@ RocketAngelRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1898,13 +1874,9 @@ OISmallPlasmaCannon:
 		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -2337,14 +2309,10 @@ NanoSmokeAG:
 		Spread: 333
 		Damage: 3333
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Spread: 333
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

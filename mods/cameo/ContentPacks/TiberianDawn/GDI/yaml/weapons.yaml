@@ -840,13 +840,9 @@ MissileSoldierWeapon:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000

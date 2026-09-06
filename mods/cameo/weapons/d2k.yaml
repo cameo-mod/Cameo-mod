@@ -882,8 +882,6 @@ LeechSpit:
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
@@ -2043,15 +2041,11 @@ ixian_airdrone:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000

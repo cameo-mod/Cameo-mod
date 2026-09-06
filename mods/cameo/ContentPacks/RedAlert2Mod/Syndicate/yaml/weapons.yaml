@@ -1103,13 +1103,9 @@ RA2MortarBike:
 		FriendlyFireSpread: 50
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1768,14 +1764,10 @@ RA2TOPOLCuba:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		Falloff: 100, 85, 70, 55, 40, 25, 10
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		Falloff: 100, 85, 70, 55, 40, 25, 10
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 20000

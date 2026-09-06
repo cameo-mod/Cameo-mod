@@ -95,8 +95,6 @@ HarrierMissiles:
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -699,12 +697,8 @@ RA2GrandCannonWeapon:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 50000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Demolition_Light:
 		Damage: 50000
 	Warhead@EffectWater: CreateEffect
@@ -762,13 +756,9 @@ RA2HeavyMirageGun:
 		FriendlyFireSpread: 50
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonAP_Light:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
