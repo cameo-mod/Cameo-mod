@@ -7,7 +7,7 @@
 
 ### Finding
 
-The udit_buildable_order audit reports 38+ findings across D2k factions. The root
+The audit_buildable_order audit reports 38+ findings across D2k factions. The root
 cause is NOT wrong BPO values within a single faction -- it is that ALL D2k factions
 share the same queues (Vehicle, Aircraft, Infantry, RAVehicle, RAAircraft, RAInfantry)
 without Factions: restrictions. This means every actor in every D2k faction's queue
@@ -15,13 +15,13 @@ competes for BPO position with every other actor in the same queue across ALL fa
 
 ### Examples
 
-- treides_ornithopter (BPO 20, cost 1500) appears in Harkonnen's Aircraft queue
+- atreides_ornithopter (BPO 20, cost 1500) appears in Harkonnen's Aircraft queue
   alongside harkonnen_advancedcarryall (BPO 30, cost 800). The audit says
   atreides_ornithopter "should be before" harkonnen_advancedcarryall because
   tier 2 cost 1500 > 800, but BPO 20 < 30.
 
 - light_inf (BPO 10, tier 3, cost 150) in Shared infantry conflicts with
-  treides_lightinfantry (BPO 10, tier 2, cost 150) in Atreides infantry.
+  atreides_lightinfantry (BPO 10, tier 2, cost 150) in Atreides infantry.
   Same BPO, different tiers -- tier 3 should come after tier 2.
 
 - ordos_facedancer (BPO 20, cost 5000) conflicts with engineer (BPO 30, cost 500)
