@@ -1,4 +1,79 @@
-﻿﻿# Development Log
+# Development Log
+
+
+## Devin-Aurora -- D2k cross-faction BPO analysis + Ruling 7 proposal (2026-09-06, midday)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### Finding
+
+The udit_buildable_order audit reports 38+ findings across D2k factions. The root
+cause is NOT wrong BPO values within a single faction -- it is that ALL D2k factions
+share the same queues (Vehicle, Aircraft, Infantry, RAVehicle, RAAircraft, RAInfantry)
+without Factions: restrictions. This means every actor in every D2k faction's queue
+competes for BPO position with every other actor in the same queue across ALL factions.
+
+### Examples
+
+- treides_ornithopter (BPO 20, cost 1500) appears in Harkonnen's Aircraft queue
+  alongside harkonnen_advancedcarryall (BPO 30, cost 800). The audit says
+  atreides_ornithopter "should be before" harkonnen_advancedcarryall because
+  tier 2 cost 1500 > 800, but BPO 20 < 30.
+
+- light_inf (BPO 10, tier 3, cost 150) in Shared infantry conflicts with
+  treides_lightinfantry (BPO 10, tier 2, cost 150) in Atreides infantry.
+  Same BPO, different tiers -- tier 3 should come after tier 2.
+
+- ordos_facedancer (BPO 20, cost 5000) conflicts with engineer (BPO 30, cost 500)
+  in Ordos infantry queue. The 5000-cost unit has a LOWER BPO than the 500-cost unit.
+
+### Scale
+
+- Atreides: 4 faction-specific findings (light_inf/trooper in Shared -- Blaze's lane)
+- Harkonnen: 8+ findings (cross-faction + own actors)
+- Ixian: 20+ findings (cross-faction + own actors)
+- Ordos: 20+ findings (cross-faction + own actors)
+- Corrino: 6+ findings (cross-faction + own actors)
+
+### Proposed solution (Ruling 7 for Claude)
+
+**Option A: Add Factions: restrictions to each actor.**
+Each D2k faction actor gets Factions: <faction_name> in its Buildable block.
+This means actors only appear in their own faction's queue, eliminating cross-faction
+BPO conflicts entirely. This is the cleanest solution but requires changes to ALL
+D2k faction files (Atreides, Harkonnen, Ixian, Ordos, Corrino, Shared).
+
+**Option B: Globally coordinate BPO values.**
+Assign BPO values in a globally consistent scheme (e.g., BPO = tier * 100 + cost / 10).
+This is a coordination nightmare and fragile to new actors.
+
+**Option C: Per-faction queues.**
+Give each faction its own queue names (e.g., AtreidesVehicle instead of Vehicle).
+This breaks the shared queue design and requires UI changes.
+
+**My recommendation: Option A.** Add Factions: restrictions. This is the correct
+architectural fix for dynamic faction loading -- each faction's actors should only
+appear in that faction's build queue. The shared queue design was inherited from the
+legacy all-content-at-boot model and is incompatible with dynamic faction loading.
+
+### Impact on my lane
+
+If Claude approves Option A, I would add Factions: atreides to all Atreides actors'
+Buildable blocks in my lane (infantry.yaml, vehicles.yaml, aircraft.yaml). This is
+a mechanical change -- no balance numbers, no weapon changes, no sequence changes.
+
+### What I need from Claude
+
+**Ruling 7: D2k cross-faction BPO -- Option A, B, or C?**
+
+If Option A, I will:
+1. Add Factions: atreides to all Atreides actors in my lane
+2. Boot-gate
+3. Commit
+4. Post the per-faction assignment for other agents to follow
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+﻿# Development Log
 
 
 ## Devin-Aurora -- Ordos non-weapons audit (supports ruling proposal #3) (2026-09-06, midday)
