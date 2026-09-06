@@ -1,6 +1,102 @@
 # Development Log
 
 
+## Claude-Local (Opus 5) -- CODEMOD SPEC for the three-inherit law, and one correction to it (2026-09-06, night)
+
+**Identity:** Claude-Local, Opus 5. The maintainer ruled: **renaming first for the agents, the
+weapon codemod is MINE.** Nobody hand-converts weapon shape — you rename, I script.
+
+### The target shape, confirmed
+
+```
+SomeWeapon:
+	Inherits@wh:   ^Warhead_<Family>_<Level>
+	Inherits@proj: ^Projectile_<Kind>_<Level>
+	Inherits@fx:   ^Effect_<Kind>_<Level>
+	Damage: <one number>          # everything folded into the one AreaDamage main
+	Projectile:                   # ONLY fields that differ from the template
+		<deltas>
+	Warhead@Shrapnel: FireShrapnel      # stays — references a specific child weapon
+	Warhead@Cond: GrantExternalCondition # stays — per-weapon mechanic
+```
+
+### ⚠ THE CORRECTION — "put each weapon's local effects into a new effect template" backfires
+
+The maintainer's instinct is right; the literal form is not, and I measured it before agreeing:
+
+| grouping | distinct results |
+|---|--:|
+| 687 weapons' local effect blocks, grouped by exact VALUES | **451** |
+| ... after normalising numeric `Damage` | 442 |
+| ... of those, used by exactly ONE weapon | **335** |
+| grouped by SHAPE (which warheads, which fields, values ignored) | **146** |
+
+**One template per local effect set = 451 templates for 687 weapons.** That is not a template
+system, it is the same yaml with an extra indirection layer, and it makes the tree BIGGER —
+the opposite of the stated goal.
+
+**Why the value-grouping explodes, and the fix.** The variation is concentrated in exactly two
+fields: `CreateEffect.Explosions` (**170** distinct values) and `CreateEffect.ImpactSounds`
+(**113**). Those are the weapon's ART IDENTITY — which explosion sprite, which sound — and they
+are genuinely per-weapon. Everything else is shape, and the shape is shared: the seven
+commonest shapes already cover ~350 of the 687 weapons.
+
+**So: the template carries the SHAPE and the defaults; the weapon keeps at most two art lines.**
+
+```
+SomeWeapon:
+	Inherits@fx: ^Effect_Explosion_Medium
+	Warhead@Effect:
+		Explosions: <its own sprite>      # art identity, stays
+		ImpactSounds: <its own sound>     # art identity, stays
+```
+
+That lands at roughly **15–25 effect templates**, not 451, and every weapon shrinks to three
+inherits plus two art lines. The 75 single-use shapes collapse into the nearest common shape
+once the two art fields move to overrides.
+
+### ⚠ SECOND CAUTION — do not "fill out the projectile fields" on every weapon
+
+`LESSONS_LEARNED` records a trap that cost weeks: **a "derive unless overridden" default is
+invisible when something upstream always overrides.** `ScaledBullet` derived shell
+Inaccuracy/Speed from Range and reached ZERO weapons, because the templates also wrote
+literals and an explicit yaml value always wins.
+
+Writing projectile fields onto every weapon would re-create that bug permanently and on
+purpose. **The projectile template owns the fields; the weapon writes a delta only where the
+resolved value genuinely differs.** That is both smaller and keeps derivation alive. I will
+assert the DERIVED value on a real resolved weapon after each batch, never merely that the
+knob is present.
+
+### The codemod's contract, so it can be reviewed
+
+1. **Behaviour preserved exactly** — resolved `Damage` verbatim, resolved projectile fields
+   merged from every inherit (the Frankenstein merge, rule 5).
+2. **VERBATIM, never SUM**, on every collapse.
+3. `review_resolve_diff.py` before/after on every weapon; a batch lands only if the diff is
+   the intended shape change and nothing else.
+4. `find_empty_warhead` = 0 and a boot gate per batch.
+5. Ratchets in `audit_weapon_shape` walk DOWN in the same commit as the batch.
+6. ⛔ **Never touch a weapon in `audit_split_definitions` S1** until its duplicate is deleted —
+   editing one of two live copies is what made the HMG collapse do nothing.
+
+### Weapons that legitimately carry FEWER than three inherits — the maintainer asked for examples
+
+They exist and they are exactly what the maintainer guessed. Of 1,353 weapons missing a
+template inherit, only **94** are legitimate:
+
+| category | count | examples |
+|---|--:|---|
+| **A** no damage AND no projectile — dummy / marker | **10** | `RemovableDebuffDummy`, `GLAnthraxBlue`, `GLAnthraxLarge` (smoke spawners) |
+| **B** no damage, has a projectile — delivery only | **72** | `SpyPlaneTargeting2` (grants a condition), `TSDroppod2/3/4` (fire shrapnel) |
+| **C** damage but NO projectile — detonates in place | **12** | `MADTankDetonate`, `ReactorNuke`, `MiniNuke`, `ExecutionerDeath` |
+| **D** has damage AND a projectile, just written inline | **1,259** | `td_gdi_guardtower_highv`, `RocketsAMT`, `BoxerCannonAG` |
+
+**A, B and C are fine and stay as they are — three is a MAXIMUM, not a minimum.** D is the
+real backlog and it is mine.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
 ## ⭐⛔ NEW BINDING LAW — ONE WARHEAD, THREE INHERITS. And the renaming finally gets owners. (2026-09-06, night)
 
 **Identity:** Claude-Local, Opus 5. Fleet coordinator. **Everyone stop and read this — it
