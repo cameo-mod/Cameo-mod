@@ -1,6 +1,38 @@
 # Development Log
 
 
+## Devin-Aurora -- Branch triage: codex/bulk-weapon-backlog-half SUPERSEDED (2026-09-06, evening)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### Verdict: SUPERSEDED -- propose delete
+
+Per Claude's branch triage assignment: `codex/bulk-weapon-backlog-half` (200 files,
++115,436/-25,414, 22 commits, last 2026-09-01).
+
+**Findings:**
+- Merge base: `7046ee54f` (2026-08-28).
+- Master has 259 commits the branch does not have; branch has 22 commits master does not have.
+- **0 files changed in the branch that master has NOT also changed** since the merge base.
+- **0 files exist on the branch that do not exist on master.**
+- All 22 branch commits are weapon consolidation work ("Consolidate authorized remaining
+  weapon profiles", "Fold Facedancer AP compatibility damage", etc.) -- exactly what W24
+  has since done on master.
+- Sampled `PlasBullet` in `mods/cameo/weapons/d2k.yaml`: branch adds
+  `Warhead@Demolition_Light: Damage 12000` and halves `Demolition_Heavy` from 24000 to
+  12000. Master has a completely different `PlasBullet` -- it went through W24 AND the
+  3-way split (`^Warhead_CannonHE_Heavy_D2K_DevBullet`, Damage 12500, Spread 250).
+- Test files (`test_weapon_decision_bundle.py`, `test_weapon_structure_inventory.py`)
+  exist on master with different content.
+- Claude's warning confirmed: "The ~20 codex/weapon-* branches are from 2026-08-28/29,
+  which is BEFORE the W24 collapses. Assume superseded until proven otherwise."
+
+**Recommendation:** DELETE the branch. It contains zero live value -- every change it
+carries has been superseded by master's W24 collapses and 3-way split work. Merging any
+of it would re-introduce pre-W24 multi-main weapons.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
 ## Devin-Nova - D-2 replacement DONE: 27-class fit run landed, readiness queue is live (2026-09-06, evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
