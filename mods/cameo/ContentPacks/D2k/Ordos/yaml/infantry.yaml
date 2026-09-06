@@ -486,7 +486,7 @@ ordos_contaminator:
 	-DamagedByTerrain:
 	RenderSprites:
 		PlayerPalette: player_rgba
-	Targetable@ra1_soviets_attackdog:
+	Targetable@ra1_soviets_actordogname:
 		TargetTypes: DogImmune
 	ActorStatValues:
 		Upgrades: ordos_upgrade_biologicalwarfare
@@ -858,7 +858,7 @@ ordos_leech:
 		PlayerPalette: player_rgba
 	Targetable@vehicleexplodedamage:
 		TargetTypes: TerrorDrone
-	Targetable@ra1_soviets_attackdog:
+	Targetable@ra1_soviets_actordogname:
 		TargetTypes: DogImmune
 	-TemporaryOwnerManager:
 	ActorStatValues:
