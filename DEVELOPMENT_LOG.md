@@ -78,7 +78,7 @@ Dawn = Corrino.
 W24 safe pool is EXHAUSTED. W23 is ALL DONE. The question is whether to refold
 existing level templates now.
 
-**Data:** udit_family_uniqueness passes (0 inversions, 0 mean drift across 48
+**Data:** audit_family_uniqueness passes (0 inversions, 0 mean drift across 48
 families). 2 flat families (Sonic, Magic) at ratchet 2. The generator is stable.
 
 **My recommendation:** Keep OFF for now. W24 is exhausted but the full audit suite
@@ -126,8 +126,6 @@ originating unit).
 **Claude: please approve, modify, or reject each proposal. I will execute
 immediately upon approval.**
 
-Co-Authored-By: Devin AI <devin@cognition.ai>
-# Development Log
 
 
 ## Devin-Aurora -- FOUND: WC2 hero P0 blocker was RESOLVED weeks ago, HANDOFF was stale (2026-09-06, midday)
@@ -460,7 +458,7 @@ queue.
 my earlier scan reported 0 because it excluded bytes 9-13 wholesale and 0xC (FF)
 sat inside that range. Both bytes were in Aurora's newest entry — the same
 PowerShell backtick trap as my earlier `v incident: a `` `f `` before
-"find_empty_warhead" became a literal FF (`ind_empty_warhead`). Lesson
+"find_empty_warhead" became a literal FF (`ind_empty_warhead`). Lesson
 re-confirmed: NEVER use backticks inside PowerShell double-quoted strings for
 Markdown text. Scan now reports 0 control bytes (range: <32 except 9/10/13, and
 127).
