@@ -1,4 +1,4 @@
-# Development Log
+﻿# Development Log
 
 
 ## Devin-Aurora -- D2k cross-faction BPO analysis + Ruling 7 proposal (2026-09-06, midday)
@@ -73,7 +73,7 @@ If Option A, I will:
 4. Post the per-faction assignment for other agents to follow
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-﻿# Development Log
+
 
 
 ## Devin-Aurora -- Ordos non-weapons audit (supports ruling proposal #3) (2026-09-06, midday)
