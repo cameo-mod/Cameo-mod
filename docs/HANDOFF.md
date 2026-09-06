@@ -52,7 +52,7 @@ crashed** — a boot gate proves the rules PARSE, never that they are RIGHT. Rev
 
 | new gate | catches | ratchet |
 |---|---|---|
-| `audit_shrapnel_chains.py` | a FireShrapnel chain that never ends | S1a **0**; S1b 44 self-cycles, pre-existing — **probably real infinite loops**, see below; needs a ruling |
+| `audit_shrapnel_chains.py` | a FireShrapnel chain that never ends | S1a **0**; S1b **0** — 44 self-cycles were the same damage; fixed in `7b63045fd` |
 | `audit_map_actors.py` | a map placing an actor the rules do not define (boot gate is blind: it fails when the map is STARTED) | M1 **0** |
 | `bash_guard.py` rule 4 | deleting a `-Key@...` without `RESOLVE-VERIFIED` in the message | — |
 
@@ -61,37 +61,20 @@ N2 0 against the true 25 / 16 — an exact zero is always suspect), and the boot
 hook read the MAIN checkout's index from every worktree, which would have waved
 through engine content committed from a worktree. Both now have self-tests.
 
-⚠ **Open, and it needs a maintainer call: the 44 S1b self-cycles are probably NOT
-benign.** They were first called chain lightning bounded by available targets. That was
-reasoned from field names; reading `OpenRA.Mods.AS/Warheads/FireShrapnelWarhead.cs` says
-otherwise. `ThrowWithoutTarget` defaults to **true**, so with no actor in range the
-warhead throws at a random position anyway and fires whenever
-`weapon.IsValidAgainst(pos)` holds — and every one of these carries
-`ValidTargets: Ground, Water`, which a bare terrain position satisfies. **By the code
-they never terminate:** one impact spawns one more, forever, wandering the map.
+✅ **RESOLVED 2026-09-07 — they were not old debt, and they are fixed.**
+`ad7c5e232` (labelled a *rename*) also stripped **236 removal nodes** out of
+`RedAlert/Soviets/yaml/weapons.yaml`, and the tesla fragments' `-Warhead@TeslaArc:`
+terminators were among them. Restoring all 236 (`7b63045fd`) took **S1b 44 → 0**;
+the ratchet is now 0. Every FireShrapnel chain in the mod terminates: 193 weapons,
+193 chains, zero cycles of either kind. No in-game test needed.
 
-They all predate `d818aec40`, so this is old debt rather than a regression, and they are
-deliberately NOT auto-fixed — "it has shipped like this for a long time" is evidence
-worth weighing, and the remedy is a design choice (a hop cap, `ThrowWithoutTarget: false`
-on the terminal fragment, or a distinct non-recursive terminal weapon).
-**Maintainer ruling 2026-09-07: leave them, and test in-game.** Master merges with
-S1a = 0 and S1b ratcheted at 44. Nobody "fixes" these until the ruling is revisited.
-
-⚠ **The in-game test, when you have a minute.** Skirmish, open ground, one target:
-
-1. Build any of these and fire the tesla arc at a single isolated enemy unit:
-   Kamov attack helicopter (`KamovTeslaArc`), Mammoth tank tesla tusk
-   (`MammothTuskTesla`), Tesla Maverick, a BTR with the tesla machine gun, or the
-   portable tesla (`PortaTeslaArc_EMP`).
-2. Kill the target, or fire at open ground with nothing nearby.
-3. **Watch for arcs that keep spawning after there is nothing left to hit.** By the
-   code, each impact throws one more at a random point within range, forever.
-
-If it visibly loops → it is a real bug and the fix is one of: `ThrowWithoutTarget:
-false` on the terminal fragment, a hop cap, or a distinct non-recursive terminal
-weapon. If it does NOT loop → something outside the yaml stops it, and that finding
-gets written down here so nobody re-derives this analysis a third time.
-
+⚠ **I was wrong about these twice, and the second time is the instructive one.** First
+I called them benign chain lightning — reasoned from field names, not the code. Then I
+called them pre-existing debt because *"all 44 predate `d818aec40`"*. That was literally
+true and still the wrong conclusion: **the bisect stopped at the first commit that showed
+the problem instead of walking back until it disappeared.** One commit further back was
+the actual cause. When bisecting, walk back until the symptom is GONE, not until it
+first appears.
 
 Full write-up for agents: `../Cameo-mod-fleet/BRIEF_2026-09-07_what_broke_and_the_new_gates.md`.
 

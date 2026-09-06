@@ -46,6 +46,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
 - [⛔ An override is a CANCELLATION — never judge it by the node it sits in (2026-09-06)](#-an-override-is-a-cancellation--never-judge-it-by-the-node-it-sits-in-2026-09-06)
+- [Walk the bisect back until the symptom is GONE, not until it appears (2026-09-07)](#walk-the-bisect-back-until-the-symptom-is-gone-not-until-it-appears)
 - [⛔ Fix the TOOL, not its output — six defects hid behind one patched map (2026-09-06)](#-fix-the-tool-not-its-output--six-defects-hid-behind-one-patched-map-2026-09-06)
 - [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
@@ -1446,6 +1447,27 @@ half, none of them reachable by fixing a map:
 it clears today's damage and guarantees tomorrow's. Fix the generator, regenerate, and
 diff the regenerated output against the hand-patched one — if they differ, the tool is
 still wrong.
+
+### Walk the bisect back until the symptom is GONE, not until it appears
+
+The removal-node damage happened TWICE and the first pass only found the second one.
+`d818aec40` (the 2248-node sweep) was found, reverted, and measured against its own
+parent `d818aec40^`. Forty-four self-cycling FireShrapnel chains were still present at
+that parent, so they were written up as pre-existing debt and left alone.
+
+They were not. One commit further back, `ad7c5e232` — whose subject line reads
+*"feat(rename): ra1_soviets faction rename"* — had stripped **236 removal nodes** out of
+one weapons file, taking multi-main weapons 396 to 461 and destroying every tesla-arc
+terminator. Restoring them took the self-cycles 44 to 0 and W5 459 to 394, below the
+figure that preceded either commit.
+
+**The rule: a measurement at the parent of the commit you already found proves nothing
+about older commits.** Walk back until the symptom disappears.
+
+⚠ **And note the disguise.** The earlier, larger damage was inside a commit that
+announced itself as a *rename*. Nobody hunting a weapons regression would have opened
+it, and its own message described only the rename. **Judge a commit by its DIFF, never
+by its subject line** — `git show <sha> --stat` costs one command.
 
 ### The check that could not see the thing it was built to find
 
