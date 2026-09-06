@@ -52,10 +52,11 @@ export PYTHONIOENCODING=utf-8
 # NOTE: "elite_naming" is intentionally excluded — audit_elite_naming.py is
 # deprecated, fully superseded by audit_weapon_suffixes.py X1 section
 # (same check: rank-elite gated armaments not ending _elite).
-# NOTE: "damage_grid" is intentionally excluded — audit_damage_grid.py still
-# encodes the RETIRED 2000-step grid and the `main // 2000` percentage twin.
-# The live law is formula.DAMAGE_STEP (= 100) + formula.percentage_twin().
-# Re-derive it from `formula` before wiring it in; see docs/HANDOFF.md.
+# NOTE: "damage_grid" is intentionally excluded — audit_damage_grid.py WAS
+# re-derived 2026-08-25 from the live law (formula.DAMAGE_STEP = 100 +
+# formula.percentage_twin); it is excluded not because it is stale but because
+# its counts are moving targets while W24 collapses and the fold are in flight.
+# Wire it in once that work settles; see docs/HANDOFF.md and the audit header.
 for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai ai_personalities sequences \
          metadata outliers orphans assets fluent power_budget stat_formulas \
          weapon_uniqueness garrison_weapons asset_files promotion_gating min_range \
