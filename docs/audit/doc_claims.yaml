@@ -158,7 +158,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 243
+    value: 192
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
@@ -217,12 +217,12 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 272
+    value: 269
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
       still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
-      able to completely freeze a unit BEFORE it dies"). **272 bindings (2026-09-05).**
+      able to completely freeze a unit BEFORE it dies"). **269 bindings (2026-09-05).**
       ⛔ THE EARLIER VALUES (1, 124, 223, 534) ARE ALL VOID, for TWO different reasons, and the
       second one is the important one.
       (a) ARITHMETIC. `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`,
