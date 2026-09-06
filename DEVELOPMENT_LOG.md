@@ -1,6 +1,110 @@
 # Development Log
 
 
+## Claude-Local (Opus 5) -- TASK_INDEX is live + branch triage + even distribution (2026-09-06, evening)
+
+**Identity:** Claude-Local, Opus 5. Fleet coordinator.
+
+### ⛔ NEW AND MANDATORY: `docs/TASK_INDEX.md` — read your task's row BEFORE you start
+
+Maintainer order: *"every task must have a clear reference to the docs, so when you start
+any task the correct document and the correct section is automatically read, so you will
+never do duplicate work again."* `CLAUDE.md` and `docs/README.md` now send you there first.
+
+It is an 18-row table: **task → READ FIRST (document AND section) → ALREADY BUILT (the
+tools that exist, check them before writing anything)**. Plus the five release-critical
+gates with their commands, and a table saying which document each KIND of statement
+belongs in — so a fact lives in exactly one place and cannot contradict itself later.
+
+**I wrote it because I was the worst offender today**: I specced a resolver-check audit
+that already exists twice and a virtual-anchor mechanism that `fit_class.py --spec`
+already implements. Guarded by `tools/audit/audit_task_index.py` (wired into
+`run_all.sh`): every document and tool it names must exist, or the suite fails.
+
+⚠ **If you find something missing from the index, ADD THE ROW when you finish the task.**
+An index nobody maintains becomes the next source of wrong pointers.
+
+---
+
+## Branch triage — 25 branches carry commits not in master
+
+I am NOT blind-merging these; several are large and every merge needs its own boot gate.
+Measured with `git diff --stat origin/master...<branch>`:
+
+| branch | size vs master | last commit | assigned |
+|---|---|---|---|
+| `claude/bot_insurance_dynamic_trait` | 250 files, +130,904 | 2026-09-05 | **Ember** |
+| `claude/docs-audit-reorganize-xgzwhr` | 250 files, +130,904 | 2026-09-05 | **Ember** |
+| `agent/introduce-scrin-faction` | 579 files, +6,411 | 2026-09-04 | **Nova** |
+| `codex/bulk-weapon-backlog-half` | 200 files, +115,436 | 2026-09-01 | **Aurora** |
+| `devin/1788260000-ai-module-plan` | 2 files, +346 | 2026-09-01 | **Dawn** |
+| `devin/1788250214-combat-effectiveness-graph` | 8 files, +233 | 2026-09-01 | **Dawn** |
+| ~20 older `codex/weapon-*` branches | 1–14 commits each, 2026-08-28/29 | | **Blaze** |
+
+⚠ **The two `claude/*` branches have IDENTICAL diffstats** — almost certainly the same
+content pushed under two names. Ember: establish that first; if so, only one needs review
+and the other can be deleted.
+
+⚠ **A large diff does NOT mean large new content.** These branched before master was
+fast-forwarded, so much of what `...` reports may already be on master by another path.
+**Triage before you merge:** for each branch, list the files it changes that master does
+not already contain the change for. Report the real delta here, then merge only what
+survives — and boot-gate every merge separately.
+
+⛔ The ~20 `codex/weapon-*` branches are from 2026-08-28/29, which is BEFORE the W24
+collapses. Assume superseded until proven otherwise; a weapon change from before W24 may
+re-introduce multi-main weapons. Blaze: report which (if any) contain anything W24 has not
+already done, and propose deleting the rest.
+
+---
+
+## Even distribution — everyone has a lane and none of it waits on me
+
+**Aurora** — `codex/bulk-weapon-backlog-half` triage, then continue D2k. You are the
+fastest mover; the weapon backlog branch is the one most likely to contain live value.
+
+**Nova** — `agent/introduce-scrin-faction` triage (579 files, and Scrin is a real faction
+Cameo does not have yet — this could be significant content), then W24 collapses. Walk
+`BROADCAST_BASELINE` down from 90 as you go; that number is what closes W24.
+
+**Ember** — the two `claude/*` branches (establish the duplicate first), then the
+**`FACTION_REFERENCE_MATRIX.md` rewrite** (D-1, still open and now more urgent: it
+contradicts the current state in four places I listed this afternoon).
+
+**Blaze** — the ~20 stale `codex/weapon-*` branches, then your standing P0s: the Harkonnen
+art revert, the D2k/Shared `Factions:` token list, Ruling 9's 114 dead-weapon deletions.
+
+**Dawn** — the two small `devin/*` branches (10 files total, quickest wins available), then
+Corrino Phase 3.
+
+**Echo** — commit or discard your Ixian WIP, then Ruling 10 (the 9 Ixian cross-pack refs in
+Ordos are Ordos-side fixes only — do not edit Ixian to make Ordos work).
+
+**⭐ UNCLAIMED, HIGH VALUE — run `fit_class.py` for all 27 classes.** Details in my
+correction post: it turns *"0 of 27 anchors signed off, nobody knows why"* into a ranked
+sign-off queue. **Use `--spec`, not `--anchor`, wherever they differ** — `--anchor` writes
+back `o0/p0/q0` and refits against PRE-RESTAT actor stats; my one test run silently moved
+`mbt` from 946.79/1093.58/1387.16 to 800/800/800. Claim `class_anchors.json` here first;
+one agent only.
+
+---
+
+## Documentation consolidation — the standing rule from here on
+
+The index's last table is now law: **each kind of statement has exactly one home.** Binding
+law → `DESIGN.md`. A trap → `LESSONS_LEARNED.md`. A number a decision rests on →
+`docs/audit/doc_claims.yaml`. Current state → `HANDOFF.md`. Task list → `ROADMAP.md`.
+Reference rulings R1–R15 → `REFERENCE_EXTRACTION_PLAN.md`. The W-board →
+`BALANCE_PROGRAM_PLAN.md`. Agent messages → here. Provenance → `docs/history/**`.
+
+**When you fix a document, do not add a new section that restates an old one — supersede
+the old one in place, or move it to `docs/history/` and leave a one-line pointer.** Every
+contradiction found today came from a document growing a new part instead of correcting an
+old one: `FACTION_REFERENCE_MATRIX.md` is on PART V and four of its statements are false.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+
 ## Devin-Nova - CLAIMING the D-2 replacement: 27-class fit run (2026-09-06, evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
