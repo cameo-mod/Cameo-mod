@@ -1,6 +1,59 @@
 # Development Log
 
 
+## Devin-Aurora -- D-3 W24 D2k candidates measured + ruling request (2026-09-06, evening)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+Per D-3 ("anyone with capacity -- W24 COLLAPSES") and your instruction "If a task turns
+on a PREMISE that could be wrong, bring me the measurement and let me rule": the D2k W24
+candidates need a family-survivor ruling. Collapsing N mains into 1 preserves the damage
+SUM but changes K (armor interaction), so picking the surviving family is judgment, not
+volume.
+
+### D2k W24 broadcast weapons (4 total, 3 in my lane)
+
+**1. D2K_Rocket_Trooper_AA (Ordos -- my lane)**
+- Used by: ordos_antiairtrooper
+- 3 mains, all 10000 vs Air only, total 30000
+- Families: Flak_Medium, MissileAP_Light, MissileAP_Heavy
+- **Ruling needed: which family survives?** Recommend MissileAP_Heavy (heaviest anti-armor
+  missile family, most appropriate for an AA rocket trooper).
+
+**2. D2K_Rocket_Trooper_AGOnly (Ordos -- my lane)**
+- Used by: ordos_antiairtrooper
+- 4 mains: Demolition_Light (10000), Railgun_Heavy (10000), Railgun_Heavy_ExtraDamage (1000),
+  CannonHE_Medium (10000) -- all vs Ground/Water, total 31000
+- Families: Demolition_Light, Railgun_Heavy, CannonHE_Medium
+- **Ruling needed: which family survives?** Recommend CannonHE_Medium (general-purpose HE).
+
+**3. D2K_Rocket_Trooper2 (Ixian -- Echo's lane, NOT MINE)**
+- Used by: ixian_twinrockettrooper
+- 4 mains: Demolition_Light (8000), Railgun_Heavy (8000), Railgun_Heavy_ExtraDamage (1000),
+  CannonHE_Medium (8000) -- total 25000
+- Routed to Echo.
+
+**4. d2k_grenade (Ordos -- my lane, HAS INHERITORS)**
+- Used by: 0 actors directly, BUT 2 weapons inherit from it:
+  `Laboratory_Bioball` (Ordos) and a weapon in `weapons/sc2k.yaml` (legacy global)
+- 3 mains, all 10000 vs Ground/Water/Air, total 30000
+- Families: Demolition_Light, Concussion_Medium, CannonHE_Heavy
+- **Ruling needed: which family survives?** Recommend CannonHE_Heavy (general-purpose HE).
+  ⚠ Collapsing d2k_grenade affects its children — must verify with review_resolve_diff.
+
+### What I will do after the ruling
+
+For each ruled weapon:
+1. Replace the multi-main inherits with a single `^Warhead_<survivor>` inherit
+2. Set the surviving main's Damage to the SUM (preserving total)
+3. Keep the percentage twin
+4. Run `review_resolve_diff.py` before/after
+5. Run `find_empty_warhead.py` (must be 0)
+6. Boot-gate
+7. Walk `BROADCAST_BASELINE` down by the number collapsed
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
 ## Devin-Nova - W24 broadcast collapse: per-file ownership map (the "who collapses what" question) (2026-09-06, evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
