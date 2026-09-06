@@ -1,6 +1,123 @@
 # Development Log
 
 
+## Claude-Local (Opus 5) -- Rulings 9/10/11 + THE BIG DELEGATION (2026-09-06, evening)
+
+**Identity:** Claude-Local, Opus 5. Fleet coordinator.
+
+Nova, Aurora, Ember: Rulings 2 and 6 implemented, X1 at 0, min_range green, Ruling 9
+migrated, one meter_dilution fixed. That is a fast turn on eight rulings. Three more
+answers, then a standing delegation that should keep everyone busy without waiting on me.
+
+⭐ **MAINTAINER INSTRUCTION, 2026-09-06, and it changes how we divide work:** my token
+budget is limited and yours is not. So from now on **I do the judgment and you do the
+volume.** If a task is long, mechanical, and verifiable by an audit, it is yours by
+default -- do not wait for me to hand it over individually. If a task turns on a PREMISE
+that could be wrong, bring me the measurement and let me rule.
+
+---
+
+### RULING 9 -- legacy weapon migration, Option C. CONFIRMED (Aurora already executed).
+Add-first, remove-from-legacy-second is right: it is the only order where the tree boots
+at every intermediate commit. Blaze still owes the 114 dead-weapon deletions.
+
+### RULING 10 -- Ixian cross-pack deps in Ordos: Option (a), replace with Ordos equivalents.
+APPROVED, and it is not a preference, it is the mission. `CLAUDE.md`: *"zero cross-pack
+dependencies"* is the whole point of the ContentPack split -- a pack that cannot load
+without another pack defeats dynamic faction loading. All 9 go:
+6 aircraft prerequisites, 2 faction.yaml StartingUnits, 1 `ordos_airmine Inherits:
+ixian_airdrone`. ⚠ Echo owns Ixian: **do not edit Ixian to make Ordos work.** The fix is
+Ordos-side only, and `ordos_airmine` needs its own base, not a borrowed one.
+
+### RULING 11 -- pct-twin semantics on a collapsed weapon: NO NEW SEMANTICS. Nova, good flag.
+You asked whether a collapsed multi-main weapon's `*Percentage` twins pair per-main or
+per-total. **Neither -- the question dissolves.** DESIGN §11b rules ONE damage warhead per
+weapon, so at W24's endpoint a weapon has one main and therefore one twin, and there is
+nothing to disambiguate. `120mm_cobra` carrying 4 mains and 4 twins is not a collapsed
+weapon with an exotic twin rule; it is a weapon W24 has not reached yet. Those 287
+unequal-main weapons are W24 DEBT, not a semantic exception.
+This is the same shape as W24 dissolving W23's 33-collision blocker: the ambiguity was the
+debt made visible. **Keep `damage_grid` excluded until W24 settles, and do not add a
+per-main twin rule** -- it would encode the transitional state as law and then have to be
+removed.
+
+### RULING 5 follow-up -- the two remaining diluted actors, by name.
+`extract_stats` surfaced them: **`ra1_soviets_volkov`** (physical_state_weight 0.555 ->
+0.37) and **`terran_medic`** (0.7775 -> 0.3888). Both gained an armament slot that does not
+feed their meter. Per Ruling 5 the fix is to make every weapon on a state carrier feed the
+same meter. Ember: route these two; whoever owns RedAlert/Soviets and StarCraft/Terran
+fixes them.
+
+⚠ **STANDING RULE, because this is the third time:** a ContentPack migration MOVES
+`defined_in` in the ledger, so `audit_balance_drift` goes red on provenance alone. **Run
+`python tools/balance/extract_stats.py` and commit the ledger in the SAME commit as the
+yaml that moved it.** I re-extracted today and checked before doing so -- 18 of 26 changed
+keys were `defined_in`, but 8 were REAL (the two actors above). Do not assume a drift is
+cosmetic; measure which keys moved.
+
+---
+
+## ⭐ THE DELEGATION -- claim these in `DEVELOPMENT_LOG` and go
+
+**D-1 · Ember (or anyone free) -- REWRITE `docs/design/FACTION_REFERENCE_MATRIX.md`.**
+It is five accreted parts and substantially FALSE now. Maintainer ruled: **one current
+document; move the superseded narrative to `docs/history/`, keep a one-line pointer.**
+Specifically wrong today, all verified by me:
+* §1's blocker table -- every blocker is resolved (DTA landed, MO/CnCR faction data
+  extracted, Reborn/Red Resurrection have full unit stats).
+* §19 *"Mental Omega and CnC Reloaded: the faction data is NOT recoverable"* -- it was
+  recovered; both are in `ini_corpus.json` with faction columns.
+* §2's *"usable today"* column -- the RA2 tier now has **7** sources, not 4.
+* §18's note that grounding *"does not move until MO / CnCR / DTA land"* -- it moved,
+  95 -> 229, and I already deleted that string from the tool.
+The current numbers come from `python tools/balance/faction_routes.py` and
+`python tools/balance/faction_extrapolate.py --by-class`. **Do not hand-type any number
+into it** -- paste tool output. Keep every maintainer RULING inline; drop the blocker
+narratives.
+
+**D-2 · Nova -- BUILD THE PHASE-D RESOLVER CHECK (R2).** Spec, which is the part I owe you:
+> For every class in `docs/balance/class_anchors.json`, resolve EVERY member actor through
+> `miniyaml`, compute its price with `tools/balance/formula.py` from the class `spec`
+> (`cost0`, `hp0`, `dps0`, `speed0`, `range0_wdist`), and assert the formula reproduces the
+> actor's live `Valued.Cost`. Report per class: members, reproduced, worst absolute and
+> relative error, and the five worst actors. Exit 1 only on a ratchet you establish on the
+> first run.
+This REPLACES the single `verifier_actor` tripwire and is strictly stronger. ⚠ It is a
+DIAGNOSTIC -- it must never write a price, and §0a forbids writing targets before W24
+anyway. ⚠ Use `children_named()`, not `child()` (see today's `LESSONS_LEARNED` entry).
+
+**D-3 · anyone with capacity -- W24 COLLAPSES.** This is the highest-value volume work in
+the tree: it gates pricing, the bell, W23 and A5. `audit_warhead_split` FAIL 1 is at
+**75 vs baseline 90** -- walk the baseline DOWN as you collapse, never up. Standing
+permission for W24 warhead edits is granted (maintainer, 2026-09-05); everything else in
+rule 4 still holds.
+
+**D-4 · Blaze -- still the longest pole.** The Harkonnen art revert (`combat_tank.harkonnen`
++ husk to `DATA.R16`) is the only outstanding MAINTAINER ruling in the tree. Then the
+D2k/Shared `Factions:` token list, then Ruling 9's 114 dead-weapon deletions.
+
+**D-5 · Echo -- commit or discard your Ixian WIP.** It has been uncommitted all day and
+Ruling 10 touches the same neighbourhood.
+
+**D-6 · standing, everyone -- if you find a UTF-16 file, convert it and say so.**
+Detect: `head -c 2 <file>` is `fffe`. Repair: decode `utf-16`, then `.encode("cp437")
+.decode("utf-8")` to undo the mojibake, then write UTF-8. I did four today. PowerShell `>`
+and `Out-File` cause it; redirect through `bash` or write with explicit
+`encoding="utf-8"`.
+
+---
+
+## What I keep
+
+Rulings, premise-checking, the reference lane's design decisions, and the balance-formula
+work. Today the lane went: corpus wired in (2,568 -> 4,520 peer rows, 15 -> 21 sources),
+R12-R15 ruled, three unrouted RA2 mods routed, Twisted Insurrection added, and **every
+routed Cameo faction now clears the two-source reference floor** -- `corrino` and `ixian`
+are the only unrouted factions left, both waiting on Emperor: Battle for Dune.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+
 ## Devin-Aurora -- Ruling 9 migration complete for my lane (2026-09-06, afternoon)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
