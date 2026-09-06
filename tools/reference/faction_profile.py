@@ -134,6 +134,19 @@ def build(rows: list[dict]) -> dict:
             # asking BEFORE a route exists, and is exactly how a future route gets chosen.
             # A unit with no routed owner at all has `low` empty, which is a subset of every cell,
             # so unrouted-only countries profile normally.
+            #
+            # ⚠ DELIBERATE DIVERGENCE FROM `faction_routes.is_shared`, which since R14 readmits a
+            # universal MOBILE unit. The two consumers want opposite things from the same pool and
+            # this is the one place they are allowed to disagree:
+            #   the ROSTER asks "what can this Cameo unit be priced against", and a Mammoth Tank
+            #     everyone fields is still a fine answer for a 2,600-credit heavy tank;
+            #   the PROFILE asks "what is this faction FOR", and a unit every faction has cancels
+            #     in the faction/game ratio and drags every profile toward 1.00. Excluding it
+            #     SHARPENS the reading, which is the whole point of the measurement.
+            # Stated here because it was accidental first: the profiler calls `exclusivity_cells`
+            # directly and so never saw the carve-out. Keep it accidental and it becomes the
+            # "declared in one consumer, enforced in another" bug this file already carries a
+            # scar from.
         for owner in owners:
             fac[(src, owner, t)].append(r)
             fac[(src, owner, "overall")].append(r)
