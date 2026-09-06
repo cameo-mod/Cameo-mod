@@ -88,6 +88,30 @@ FLUENT_LEAK = re.compile(r"(actor|meta)[a-z0-9]*name")
 SPRITE_EXT = {".shp", ".png", ".tga", ".r8", ".r16", ".vxl", ".hva", ".dds"}
 
 
+def self_test(id_re):
+    """The N1/N2 detector must be able to SEE a doubled id.  It once could not.
+
+    The first cut of this audit matched each id with a CONSUMING separator,
+    `(?:^|_)<id>(?:_|$)`.  re.finditer resumed after the consumed `_`, so in
+    `ra1_soviets_btr80_ra1_soviets_btr80_new_btr` the second occurrence could no
+    longer match its required `(?:^|_)` prefix - and the doubled id this check
+    exists to find was structurally invisible.  It reported N1 4 / N2 0 where the
+    truth was 25 / 16, and an exact zero looked like a clean bill of health.
+    Had that run set the baselines, N2 would have been ratcheted at 0: a check
+    incapable of failing, with 16 real findings hidden behind a green PASS.
+
+    The fix is the lookahead `(?=_|$)`, which consumes nothing.  This guard fails
+    loudly if anyone rewrites the pattern back into a consuming form.
+    """
+    probe = "ra1_soviets_btr80_ra1_soviets_btr80_new_btr"
+    n = len(id_re.findall(probe))
+    if n < 2:
+        raise AssertionError(
+            f"id_re found {n} occurrence(s) in {probe!r}, expected 2 or more. "
+            "The pattern must not CONSUME the trailing separator - use `(?=_|$)`, "
+            "not `(?:_|$)`, or N1/N2 silently stop detecting doubled ids.")
+
+
 def faction_of_id(actor_id, slugs):
     for s in slugs:                       # slugs are longest-first
         if actor_id.startswith(s + "_"):
@@ -111,6 +135,7 @@ def main():
     # ONE alternation, longest-first, so the longest id wins at each position.
     # Scanning 28k files x 3200 ids separately takes minutes; this takes seconds.
     id_re = re.compile(r"(?:^|_)(" + "|".join(re.escape(i) for i in ids) + r")(?=_|$)")
+    self_test(id_re)
 
     hits = collections.defaultdict(list)
 

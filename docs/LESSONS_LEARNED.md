@@ -1446,6 +1446,45 @@ it clears today's damage and guarantees tomorrow's. Fix the generator, regenerat
 diff the regenerated output against the hand-patched one — if they differ, the tool is
 still wrong.
 
+### The check that could not see the thing it was built to find
+
+A near-miss from the same day, caught only because a slow first run finished in the
+background an hour later and **disagreed with the shipped version**.
+
+The first cut of `audit_naming_damage.py` matched each actor id with a **consuming**
+separator, `(?:^|_)<id>(?:_|$)`. `re.finditer` resumes after the consumed `_`, so in
+`ra1_soviets_btr80_ra1_soviets_btr80_new_btr` the second occurrence could no longer
+match its required `(?:^|_)` prefix. **The doubled id the check exists to detect was
+structurally invisible to it.** It reported `N1 4 / N2 0` where the truth was `25 / 16`.
+
+`N2 = 0` — an exact zero, over a population whose members had been listed by eye ten
+minutes earlier. **Had that run set the baselines, N2 would have been ratcheted at 0:
+a check incapable of failing, with 16 real findings hidden behind a green PASS.** The
+correct count only existed because an unrelated performance rewrite had replaced the
+consuming separator with a lookahead `(?=_|$)`, which consumes nothing — the accuracy
+fix was accidental.
+
+Two rules fall out:
+
+* **A detector needs a positive self-test on a KNOWN-BAD input**, not just a plausible
+  count. `audit_naming_damage.self_test()` now asserts the pattern finds two
+  occurrences in a hand-written doubled stem, and fails loudly if anyone rewrites it
+  back into a consuming form.
+* **A guard must validate the thing being acted on, not the thing it lives next to.**
+  The same hour, `tools/hooks/bash_guard.py` was found resolving the repository from
+  its OWN file path, so it always inspected the MAIN checkout's index. Once the fleet
+  moved to `git worktree`s that was wrong in both directions: it refused a docs-only
+  commit in a worktree because another agent had 73 sprite files staged in the main
+  tree, and — the direction that matters — it would have waved through engine content
+  committed from a worktree whenever the main index happened to be clean. A boot gate
+  that reads the wrong index is not a weaker gate, it is **no gate**. Fixed to resolve
+  the worktree from the command's `cwd` (and from `git -C <dir>`), with
+  `tools/hooks/test_bash_guard.py` asserting the invariant across every worktree.
+* **When two runs of the same tool disagree, do not assume the newer one is right
+  because it is newer.** Diff the logic and prove which is correct. Here the older run
+  was the stale one AND the wrong one, but that had to be demonstrated in four lines of
+  `re.finditer`, not assumed.
+
 ### The second half: a bad id does not stay local
 
 `ra1_soviets_actordogname` was not confined to the sprite folder. It reached
