@@ -1,6 +1,82 @@
 # Development Log
 
 
+## Claude-Local (Opus 5) -- CORRECTION to D-2, and the real Phase-D blocker (2026-09-06, evening)
+
+**Identity:** Claude-Local, Opus 5. Fleet coordinator.
+
+⛔ **NOVA: DO NOT BUILD D-2. I asked you to write a tool that already exists — twice.**
+That is my error, not yours, and it is the exact failure the maintainer called out today:
+*"check the documentation what has already been done before, since you often do duplicate
+work."* I checked afterwards instead of first. Retracting it before you spend a day on it.
+
+What already exists:
+* **`tools/balance/fit_class.py`** — *"validates an anchor by pricing every MEMBER of its
+  class from that anchor's spec, writing a sign-off report."* That IS R2's resolver check.
+* **`tools/balance/check_band.py`** — already prices every ledger unit tagged
+  `design.class_anchor` and enforces the 50–400% baseband with a 75% practical floor.
+* **`tools/balance/anchor_readiness.py`** — already answers *"which class anchors can be
+  signed off, and why not"*, ranked by pricing error.
+* **`fit_class.py --spec hp,speed,range_wdist,damage,reload,cost0`** — a VIRTUAL anchor,
+  *"a round-number model unit that need not exist in game"*. **That is R1 already
+  implemented.** Phase D does not need a new mechanism; it needs the mechanism used.
+
+## ⭐ THE ACTUAL PHASE-D BLOCKER, and it is much smaller than it looked
+
+`anchor_readiness` reports all 27 classes as *"not fitted — no anchor, or the anchor has no
+stats"* with **0 scored members**. That is not a design problem. `residuals()` reads
+`docs/balance/formula_v2_<class>.md`, and **only `formula_v2_classes.md` exists** — a design
+note the tool deliberately skips. So:
+
+> **0 of 27 anchors are signed off because `fit_class.py` has never been run per class.**
+> The readiness tool has been reading report files that were never generated.
+
+I proved the chain end to end on one class. `python tools/balance/fit_class.py --class mbt
+--anchor tiger.nax` wrote `docs/balance/formula_v2_mbt.md`, and `anchor_readiness` then
+scored it immediately: **39 members, median |Δ| 15%, 41% within 10%, worst 348%, verdict
+"⚠ close — review the outliers, then sign"**.
+
+§0a explicitly permits this: *"Still safe BEFORE the split: `fit_class` as a DIAGNOSTIC — it
+writes a validation report... Reading where costs stand today costs nothing and informs the
+anchor choice. What must wait is WRITING targets and applying them."*
+
+## ⛔⛔ AND A TRAP I HIT ON THAT ONE TEST RUN — READ BEFORE YOU RUN ANY OTHERS
+
+`fit_class --anchor <actor>` **writes back** `o0`/`p0`/`q0` into `class_anchors.json`. My
+single `mbt` run moved them from **946.79 / 1093.58 / 1387.16 → 800 / 800 / 800**, because
+it refits against the LIVE actor and `tiger.nax` is still PRE-RESTAT (`hp 100000` against a
+spec of `240000`, range 6000 vs 5500, speed 100 vs 95). **Fitting against the actor silently
+drags the anchor back to stats the design already replaced.** I reverted it.
+
+`anchor_readiness` warns about exactly this and I read the warning only after tripping it:
+*"for the 13 classes on the 2026-08-01 LOCKED table the anchor actor is still PRE-RESTAT."*
+
+**THE RULE, therefore:**
+1. **Use `--spec`, not `--anchor`,** for any class whose `spec` differs from its
+   `anchor_actor`'s live stats. The readiness report's last table names them —
+   `mbt` and `line_breaker` are confirmed, and it lists the actor-vs-spec deltas.
+2. **`class_anchors.json` is a SHARED file and `fit_class` writes to it.** One agent runs
+   these, not three. Claim it in this log before you start.
+3. **Diff `class_anchors.json` after every run.** If `o0`/`p0`/`q0` moved, you fitted
+   against the actor and you must revert.
+4. Commit the `formula_v2_<class>.md` reports; they are the deliverable. Do **not** set
+   `signed_off` — that is a maintainer act (W11).
+
+## D-2 REPLACED — run the fit, do not build a fitter
+
+**Whoever claims it:** run `fit_class.py` for all 27 classes under the rule above, commit the
+27 `docs/balance/formula_v2_*.md` reports, then paste `anchor_readiness.py` output here. That
+turns "0 of 27 signed off, nobody knows why" into a ranked, evidence-backed sign-off queue for
+the maintainer. It is long, mechanical, verifiable, and blocked on nothing.
+
+⚠ **Expect W24 to limit the score.** `mbt` already shows one member unpriceable —
+`japan_chihaheavytank via Type97PlasmaCannon (3 mains)`. Multi-main weapons cannot be priced,
+so every weapon W24 collapses adds scored members here. That is the concrete link between
+W24 and sign-off, and it is a second reason D-3 is the highest-value work in the tree.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+
 ## Claude-Local (Opus 5) -- Rulings 9/10/11 + THE BIG DELEGATION (2026-09-06, evening)
 
 **Identity:** Claude-Local, Opus 5. Fleet coordinator.
