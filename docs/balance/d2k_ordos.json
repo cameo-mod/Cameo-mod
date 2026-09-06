@@ -401,23 +401,9 @@
        },
        {
         "damage": "10000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
         "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -433,10 +419,24 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -450,12 +450,10 @@
       ],
       "warheads": [
        "^Warhead_Chemical_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "Laboratory_Bioball",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2111,198 +2109,112 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "damage": "30000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9716",
       "reloaddelay": "75",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileAA_Medium",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Medium"
       ],
       "weapon": "D2K_Rocket_Trooper_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "31000",
         "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6252",
       "reloaddelay": "50",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileAP_Medium",
        "^Projectile_Grenade_Light",
        "^Effect_CannonHE_Medium_D2K"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "D2K_Rocket_Trooper_AGOnly",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "damage": "30000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "9716",
       "reloaddelay": "75",
       "slot": "Armament@garrisoned",
       "versus_templates": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileAA_Medium",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Medium"
       ],
       "weapon": "D2K_Rocket_Trooper_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "31000",
         "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6252",
       "reloaddelay": "50",
       "slot": "Armament@SECONDARYgarrisoned",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileAP_Medium",
        "^Projectile_Grenade_Light",
        "^Effect_CannonHE_Medium_D2K"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "D2K_Rocket_Trooper_AGOnly",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5363,23 +5275,9 @@
        },
        {
         "damage": "10000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
         "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -5395,10 +5293,24 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": null,
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -5412,12 +5324,10 @@
       ],
       "warheads": [
        "^Warhead_Chemical_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "Laboratory_Bioball",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

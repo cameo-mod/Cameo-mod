@@ -1014,9 +1014,7 @@ Dune_SiegeMortar:
 		PercentageScale: 0
 
 D2K_Rocket_Trooper_AGOnly:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Railgun_Heavy
-	Inherits@wh3: ^Warhead_CannonHE_Medium
+	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_CannonHE_Medium_D2K
 	ReloadDelay: 50
@@ -1036,18 +1034,11 @@ D2K_Rocket_Trooper_AGOnly:
 		ProjectileSpeedPercentage: 10
 		LaunchAngle: 66
 		Shadow: true
-	Warhead@Demolition_Light:
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@Railgun_Heavy:
-		Damage: 10000
-	Warhead@CannonHE_Medium:
-		ValidTargets: Ground, Water
-		Damage: 10000
+		Damage: 31000
 D2K_Rocket_Trooper_AA:
-	Inherits@wh: ^Warhead_Flak_Medium
-	Inherits@wh2: ^Warhead_MissileAP_Light
-	Inherits@wh3: ^Warhead_MissileAP_Heavy
+	Inherits@wh: ^Warhead_MissileAA_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 75
@@ -1069,15 +1060,9 @@ D2K_Rocket_Trooper_AA:
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
 		Acceleration: 8
-	Warhead@MissileAP_Light:
+	Warhead@MissileAA_Medium:
 		ValidTargets: Air
-		Damage: 10000
-	Warhead@Flak_Medium:
-		ValidTargets: Air
-		Damage: 10000
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Air
-		Damage: 10000
+		Damage: 30000
 D2K_APC_Rocket:
 	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_MissileAP_Light
@@ -1450,13 +1435,9 @@ LeechJump:
 		DamageTypes: DefaultDeath, DroneInfection
 
 d2k_grenade:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Concussion_Medium
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
 	ReloadDelay: 60
 	Range: 6000
 	MinRange: 1200
@@ -1474,17 +1455,9 @@ d2k_grenade:
 		ContrailEndColor: 33221100
 		ContrailStartWidth: 24
 		ContrailEndWidth: 12
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		ValidTargets: Ground, Water
+		Damage: 30000
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater
@@ -1519,19 +1492,10 @@ Laboratory_Bioball:
 		ContrailEndColor: 33442211
 		ContrailStartWidth: 52
 		ContrailEndWidth: 13
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@Concussion_Medium:
+	Warhead@Concussion_Medium: AreaDamage
 		PercentageScale: 12000
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@CannonHE_Heavy: AreaDamage
-		PercentageScale: 12000
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 30000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
