@@ -3,6 +3,7 @@ import pathlib
 import json
 import sys
 import unittest
+import tempfile
 from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -63,6 +64,27 @@ class SplitGateTests(unittest.TestCase):
 
 
 class AnchorMembershipTests(unittest.TestCase):
+    def test_unreadable_ledger_does_not_silently_reduce_population(self):
+        with tempfile.TemporaryDirectory() as directory:
+            ledger = pathlib.Path(directory)
+            (ledger / "broken.json").write_text("{", encoding="utf-8")
+            with patch.object(readiness, "LEDGER", ledger):
+                with self.assertRaisesRegex(ValueError, "readiness unavailable"):
+                    readiness.load_units()
+
+    def test_coverage_separates_structures_and_reports_unclassified_rows(self):
+        units = [("f", "s", str(i), {"buildable": buildable, "design": {"subtype": subtype}})
+                 for i, (subtype, buildable) in enumerate([
+                     ("MainBattleTank", True), ("Building", True),
+                     ("Helicopter", True), ("Misc", True), ("MainBattleTank", False)])]
+        counts = readiness.coverage_counts(units)
+        self.assertEqual(counts["buildable_rows"], 4)
+        self.assertEqual(counts["non_structural_rows"], 3)
+        self.assertEqual(counts["classified_rows"], 1)
+        self.assertEqual(counts["no-template"], 1)
+        self.assertEqual(counts["no-class-exists"], 1)
+        self.assertEqual(readiness.coverage_counts([])["buildable_rows"], 0)
+
     def test_unfitted_anchor_still_gets_stat_review(self):
         rows = readiness.anchor_actor_vs_spec(
             {"mbt": {"anchor_actor": "actor", "spec": {"hp0": 100, "cost0": 500}}},

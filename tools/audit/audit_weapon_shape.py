@@ -224,7 +224,7 @@ def main() -> int:
                    "conversion backlog. **Lower each baseline as you convert; never raise "
                    "one.**\n")
 
-    print("\n".join(out))
+    print("\n".join(out).rstrip())
     return 1 if failed else 0
 
 

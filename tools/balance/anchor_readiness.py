@@ -133,8 +133,8 @@ def load_units():
             continue
         try:
             doc = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
-        except (ValueError, OSError):
-            continue
+        except (ValueError, OSError) as exc:
+            raise ValueError(f"readiness unavailable: cannot read {path}: {exc}") from exc
         for section, units in (doc.get("sections") or {}).items():
             if not isinstance(units, dict):
                 continue
@@ -142,6 +142,20 @@ def load_units():
                 if isinstance(rec, dict):
                     out.append((doc.get("ledger", ""), section, name, rec))
     return out
+
+
+def coverage_counts(units):
+    """Report ledger-row coverage without calling structures unclassified units."""
+    counts = collections.Counter()
+    for _f, _s, _n, rec in units:
+        if not rec.get("buildable"):
+            continue
+        cls, reason = class_membership.classify(rec.get("design") or {})
+        counts["buildable_rows"] += 1
+        counts[reason] += 1
+        counts["classified_rows"] += bool(cls)
+        counts["non_structural_rows"] += reason != "not-a-unit"
+    return counts
 
 
 def distance(feat, spec):
@@ -364,7 +378,8 @@ def main():
     tagged = [(f, s, n, r) for f, s, n, r in units
               if class_membership.classify(r.get("design") or {})[0]]
 
-    buildable = sum(1 for _f, _s, _n, r in units if r.get("buildable"))
+    coverage = coverage_counts(units)
+    buildable = coverage["buildable_rows"]
     classes = [c for c in anchors if not c.startswith("_")]
     signed = [c for c in classes if anchors[c].get("signed_off")]
 
@@ -378,6 +393,12 @@ def main():
     print(f"tagged with a class  : {tagged_buildable} of the buildable "
           f"({tagged_buildable / buildable * 100 if buildable else 0:.1f}%); {len(tagged)} including "
           "non-buildable\n")
+    candidates = coverage["non_structural_rows"]
+    print(f"excluding structure/upgrade rows: {tagged_buildable} of {candidates} "
+          f"({100 * tagged_buildable / candidates if candidates else 0:.1f}%) classified")
+    print(f"remaining buildable gaps: {coverage['no-template']} without a unit template; "
+          f"{coverage['no-class-exists']} without a defined class; "
+          f"{coverage['unmapped']} unmapped templates. These are rows, not deduplicated units.\n")
 
     # --- ⛔ ANCHOR INTEGRITY — measured 2026-08-30, and it outranks the fit table ---- #
     #
@@ -739,6 +760,7 @@ def main():
     if args.json:
         pathlib.Path(args.json).write_text(
             json.dumps({"rows": rows,
+                        "coverage": dict(coverage),
                         "split_gate_error": gate_err,
                         "closest_anchor_pairs": [
                             {"a": a, "b": b, "d": round(d, 4)}
