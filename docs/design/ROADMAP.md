@@ -1888,6 +1888,12 @@ types, creating a unified wall+turret defense system across the mod.
 
 ## Phase D — SP-ification of the other TS factions (after CABAL)
 - TS GDI, Nod, Forgotten, then Scrin — SP-recipe weapons/effects, workbook stats.
+- [x] Scrin faction foundation (prepared on branch `scrin-prepared` from
+  `agent/introduce-scrin-faction`): selectable faction, 52 scrin_* actors,
+  independent Kane's Wrath-derived sprites, weapons converted to the 3-way
+  split.
+- [ ] Maintainer decision: merge `scrin-prepared` (Ruling 15 — merge is the
+  maintainer's call, not an agent's).
 
 ## Phase E — Platform & engine (background, L)
 - [x] **Port `AttackGarrisonedSP`** (one fire port per passenger) + convert all

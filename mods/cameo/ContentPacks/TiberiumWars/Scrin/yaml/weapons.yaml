@@ -1,0 +1,502 @@
+# Scrin gameplay weapons, converted to the current weapon schema.
+# Versus profiles live in the pack-local ^Warhead_Scrin* templates below
+# (rule: Versus lives only in ^Warhead_* templates; per-weapon Damage/Spread
+# stay verbatim on the weapon as overrides). Mechanic warheads (HeatDistortion,
+# SpawnActor, Shockwave, TargetDamage, Dummy, repair) stay inline - they are
+# not damage-family warheads.
+
+# Pack-local warhead templates. Each carries one authored Versus profile so a
+# weapon only says which profile it fires, never re-derives it.
+^Warhead_ScrinBeam:
+	Warhead@ScrinBeam: SpreadDamage
+		Spread: 42
+		Versus:
+			None: 100
+			Wood: 80
+			Light: 85
+			Medium: 65
+			Heavy: 45
+			Concrete: 35
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		ValidTargets: Ground, Water
+
+^Warhead_ScrinShard:
+	Warhead@ScrinShard: SpreadDamage
+		Spread: 42
+		Versus:
+			None: 125
+			Wood: 100
+			Light: 90
+			Medium: 55
+			Heavy: 35
+			Concrete: 25
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		ValidTargets: Ground, Water
+
+^Warhead_ScrinHeavyBeam:
+	Warhead@ScrinHeavyBeam: SpreadDamage
+		Spread: 64
+		Versus:
+			None: 45
+			Wood: 70
+			Light: 90
+			Medium: 115
+			Heavy: 135
+			Concrete: 110
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		ValidTargets: Ground, Water
+
+^Warhead_ScrinAcid:
+	Warhead@ScrinAcid: SpreadDamage
+		Spread: 96
+		Versus:
+			None: 125
+			Wood: 115
+			Light: 95
+			Medium: 65
+			Heavy: 45
+			Concrete: 35
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		ValidTargets: Ground, Water
+
+^Warhead_ScrinCorrosion:
+	Warhead@ScrinCorrosion: AreaDamage
+		Spread: 96
+		Versus:
+			None: 125
+			Wood: 115
+			Light: 95
+			Medium: 65
+			Heavy: 45
+			Concrete: 35
+		DamageTypes: Prone50Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Corrosion: 100
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+
+^Warhead_ScrinCapital:
+	Warhead@ScrinCapital: SpreadDamage
+		Spread: 128
+		Versus:
+			None: 70
+			Wood: 100
+			Light: 110
+			Medium: 120
+			Heavy: 130
+			Concrete: 100
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		ValidTargets: Ground, Water
+
+# Shared beam base: weapon-side fields only. The damage warhead comes from
+# ^Warhead_ScrinBeam via Inherits@wh; children may swap the wh inherit.
+^ScrinBeamBase:
+	Inherits@wh: ^Warhead_ScrinBeam
+	ReloadDelay: 25
+	Range: 5c0
+	TargetActorCenter: true
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 40
+		Duration: 4
+		Color: 44FF88
+		ZOffset: 2047
+		SecondaryBeam: true
+		SecondaryBeamWidth: 16
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 22443388
+	Warhead@ScrinBeam:
+		Damage: 2500
+
+ScrinLightBeam:
+	Inherits: ^ScrinBeamBase
+
+ScrinLightBeamAA:
+	Inherits: ^ScrinBeamBase
+	ValidTargets: Ground, Water, Air
+	Warhead@ScrinBeam:
+		ValidTargets: Ground, Water, Air
+
+ScrinGunWalkerBeam:
+	Inherits: ScrinLightBeamAA
+	Report: weapon-gunwalker-1.aud, weapon-gunwalker-2.aud, weapon-gunwalker-3.aud
+
+ScrinShardBeam:
+	Inherits: ^ScrinBeamBase
+	Inherits@wh: ^Warhead_ScrinShard
+	-Warhead@ScrinBeam:
+	Report: weapon-shard-1.aud, weapon-shard-2.aud, weapon-shard-3.aud
+	ReloadDelay: 36
+	Burst: 3
+	BurstDelays: 4
+	Range: 6c0
+	Projectile:
+		Width: 52
+		Color: 88FF44
+	Warhead@ScrinShard:
+		Damage: 2200
+
+ScrinHeavyBeam:
+	Inherits: ^ScrinBeamBase
+	Inherits@wh: ^Warhead_ScrinHeavyBeam
+	-Warhead@ScrinBeam:
+	ReloadDelay: 65
+	Range: 7c0
+	Projectile:
+		Width: 82
+		Duration: 7
+		Color: 66FFCC
+		SecondaryBeamWidth: 28
+	Warhead@ScrinHeavyBeam:
+		Damage: 11000
+
+ScrinAcidBeam:
+	Inherits: ^ScrinBeamBase
+	Inherits@wh: ^Warhead_ScrinAcid
+	-Warhead@ScrinBeam:
+	Report: weapon-corrupter-1.aud, weapon-corrupter-2.aud, weapon-corrupter-3.aud
+	ReloadDelay: 30
+	Range: 5c512
+	Projectile:
+		Width: 68
+		Duration: 8
+		Color: 33FF66
+	Warhead@ScrinAcid:
+		Damage: 4200
+
+ScrinAirZap:
+	Inherits: ^ScrinBeamBase
+	Report: weapon-stormrider-1.aud, weapon-stormrider-2.aud, weapon-stormrider-3.aud
+	ReloadDelay: 28
+	Range: 6c0
+	ValidTargets: Ground, Water, Air
+	Projectile:
+		Width: 54
+		Color: 66AAFF
+	Warhead@ScrinBeam:
+		Damage: 4200
+		ValidTargets: Ground, Water, Air
+
+ScrinCapitalBeam:
+	Inherits: ^ScrinBeamBase
+	Inherits@wh: ^Warhead_ScrinCapital
+	-Warhead@ScrinBeam:
+	ReloadDelay: 75
+	Range: 8c0
+	ValidTargets: Ground, Water, Air
+	Projectile:
+		Width: 96
+		Duration: 10
+		Color: 8855FF
+		SecondaryBeamWidth: 36
+	Warhead@ScrinCapital:
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+
+# Combined Arms-derived projectile delivery and effect treatment. Damage,
+# ranges, and reload cadence continue to inherit Cameo's current pilot values.
+ScrinDisintegratorBeam:
+	Inherits: ScrinLightBeam
+	Report: weapon-disintegrator-1.aud, weapon-disintegrator-2.aud, weapon-disintegrator-3.aud
+	-Projectile:
+	Projectile: LaserZapCA
+		Width: 30
+		Duration: 3
+		Color: 00FFCCAA
+		SecondaryBeam: true
+		SecondaryBeamWidth: 50
+		SecondaryBeamColor: 00FFCC30
+		Blockable: true
+
+ScrinShockDiscs:
+	Inherits: ScrinHeavyBeam
+	Report: weapon-shock-disc-1.aud, weapon-shock-disc-2.aud, weapon-shock-disc-3.aud
+	-Projectile:
+	Projectile: Missile
+		Image: scrin_fx_plasma_disc_small
+		Palette: scrin_projectiles
+		TrailImage: smokey
+		TrailPalette: scrin_projectile_trail
+		Speed: 550
+		Inaccuracy: 0c128
+		LockOnInaccuracy: 0
+		Blockable: false
+		Jammable: true
+		HorizontalRateOfTurn: 30
+		RangeLimit: 8c0
+		MinimumLaunchAngle: 80
+		MaximumLaunchAngle: 112
+		VerticalRateOfTurn: 60
+	Warhead@2Eff: CreateEffect
+		Explosions: small_explosion
+		ImpactSounds: impact-seeker-disc-1.aud, impact-seeker-disc-2.aud
+
+ScrinSeekerDiscs:
+	Inherits: ScrinLightBeamAA
+	Report: weapon-seeker-disc-1.aud, weapon-seeker-disc-2.aud, weapon-seeker-disc-3.aud
+	-Projectile:
+	Projectile: Missile
+		Image: scrin_fx_plasma_disc_small
+		Palette: scrin_projectiles
+		TrailImage: smokey
+		TrailPalette: scrin_projectile_trail
+		Speed: 550
+		Inaccuracy: 0c256
+		LockOnInaccuracy: 0
+		Blockable: false
+		Jammable: true
+		HorizontalRateOfTurn: 30
+		RangeLimit: 7c0
+		MinimumLaunchAngle: 80
+		MaximumLaunchAngle: 112
+		VerticalRateOfTurn: 60
+	Warhead@2Eff: CreateEffect
+		Explosions: small_explosion
+		ImpactSounds: impact-seeker-disc-1.aud, impact-seeker-disc-2.aud
+
+ScrinDevourerBeam:
+	Inherits: ScrinHeavyBeam
+	Report: weapon-devourer-1.aud, weapon-devourer-2.aud, weapon-devourer-3.aud
+	-Projectile:
+	Projectile: PlasmaBeam
+		Duration: 8
+		Colors: 55FF99EE, 22AA55CC
+		InnerLightness: 180
+		OuterLightness: 100
+		Radius: 2
+		Blockable: false
+		ImpactTicks: 0, 1, 2, 3, 4, 5, 6, 7
+
+ScrinCorrupterSpew:
+	Inherits: ScrinAcidBeam
+	Inherits@wh: ^Warhead_ScrinCorrosion
+	-Warhead@ScrinAcid:
+	-Report:
+	StartBurstReport: weapon-corrupter-1.aud, weapon-corrupter-2.aud, weapon-corrupter-3.aud
+	ReloadDelay: 54
+	Burst: 1
+	-Projectile:
+	Projectile: Bullet
+		Speed: 3000
+		Blockable: false
+	Warhead@ScrinCorrosion:
+		Damage: 15000
+	Warhead@2Eff: CreateEffect
+		Explosions: chemball
+
+ScrinDevastatorDiscs:
+	Inherits: ScrinCapitalBeam
+	Report: weapon-devastator-1.aud, weapon-devastator-2.aud, weapon-devastator-3.aud
+	-Projectile:
+	Projectile: Bullet
+		Image: scrin_fx_plasma_disc_large
+		Palette: scrin_projectiles
+		TrailImage: smokey
+		TrailPalette: scrin_projectile_trail
+		Speed: 260
+		LaunchAngle: 50
+		Inaccuracy: 1c768
+		Blockable: false
+	Warhead@2Eff: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: impact-devastator-1.aud, impact-devastator-2.aud
+
+ScrinMothershipDiscs:
+	Inherits: ScrinCapitalBeam
+	ReloadDelay: 160
+	Range: 10c0
+	Report: weapon-mothership-1.aud
+	-Projectile:
+	Projectile: Bullet
+		Image: scrin_fx_plasma_torpedo_small
+		Palette: scrin_projectiles
+		Speed: 280
+		LaunchAngle: 0
+		Inaccuracy: 0c512
+		Shadow: true
+		ShadowColor: 00000033
+		Blockable: false
+	Warhead@2Eff: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: pbomb-hit1.aud, pbomb-hit2.aud
+	Warhead@ScrinCapital:
+		Spread: 384
+		Damage: 42000
+
+# Combined-Arms-inspired Tripod beam behavior, independently tuned for Cameo.
+# A synchronized three-shot burst preserves the existing per-volley damage
+# while using the fixed visual pose's center, right, and left hardpoints.
+ScrinTripodLaser:
+	Inherits@wh: ^Warhead_ScrinHeavyBeam
+	Report: weapon-tripod-1.aud, weapon-tripod-2.aud, weapon-tripod-3.aud
+	ReloadDelay: 75
+	Burst: 3
+	BurstDelays: 13, 12
+	Range: 7c0
+	TargetActorCenter: true
+	ValidTargets: Ground, Water
+	Projectile: PlasmaBeam
+		Duration: 19
+		Colors: 3399FFEE, 0066CCEE
+		InnerLightness: 170
+		OuterLightness: 130
+		Radius: 2
+		Blockable: false
+		RecalculateColors: true
+		CenterBeam: true
+		CenterBeamWidth: 45
+		CenterBeamColor: EEF8FFFF
+		StartOffset: -150,300,0
+		FollowingOffset: 20,-40,0
+		ImpactTicks: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+		MaxFacingDeviation: 192
+	Warhead@ScrinHeavyBeam:
+		Damage: 193
+	Warhead@2Eff: CreateEffect
+		Explosions: small_explosion
+
+ScrinReaperTripodLaser:
+	Inherits: ScrinTripodLaser
+	Inherits@wh: ^Warhead_ScrinCapital
+	-Warhead@ScrinHeavyBeam:
+	Report: weapon-reaper-tripod-1.aud, weapon-reaper-tripod-2.aud, weapon-reaper-tripod-3.aud
+	ReloadDelay: 75
+	Range: 8c0
+	ValidTargets: Ground, Water, Air
+	Projectile:
+		Colors: 338800EE, 008800EE
+		InnerLightness: 170
+		OuterLightness: 130
+		CenterBeam: true
+		CenterBeamWidth: 45
+		CenterBeamColor: EEFFEEFF
+	Warhead@ScrinCapital:
+		Damage: 282
+		ValidTargets: Ground, Water, Air
+
+ScrinMothershipBeam:
+	Inherits: ScrinCapitalBeam
+	Report: weapon-hexapod-1.aud, weapon-hexapod-2.aud, weapon-hexapod-3.aud
+	ReloadDelay: 160
+	Range: 10c0
+	Projectile:
+		Width: 150
+		Duration: 16
+		Color: AA66FF
+		SecondaryBeamWidth: 60
+	Warhead@ScrinCapital:
+		Spread: 384
+		Damage: 42000
+	Warhead@2Eff: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: impact-hexapod-1.aud, impact-hexapod-2.aud, impact-hexapod-3.aud
+
+ScrinCarrierLaunch:
+	Report: weapon-pac-launch-1.aud, weapon-pac-launch-2.aud, weapon-pac-launch-3.aud
+	ReloadDelay: 100
+	Range: 9c0
+	ValidTargets: Ground, Water, Air
+	Projectile: InstantHit
+	Warhead@Dummy: Dummy
+
+ScrinMindControl:
+	Report: weapon-mindcontrol-1.aud, weapon-mindcontrol-2.aud, weapon-mindcontrol-3.aud
+	ReloadDelay: 75
+	Range: 7c0
+	TargetActorCenter: true
+	ValidTargets: MindControl
+	InvalidTargets: Hero, MCImmune
+	Projectile: LaserZap
+		Width: 45
+		Duration: 10
+		Color: AA55FF
+		ZOffset: 2047
+	Warhead@1Dam: TargetDamage
+		Damage: 0
+
+ScrinRepairBeam:
+	Inherits: ^RepairWeapon
+	Report: weapon-repair-1.aud, weapon-repair-2.aud
+	ReloadDelay: 30
+	Range: 5c512
+	ValidTargets: SpecialRepair, Repairing, Repair, lockdowned, plagued, ivanattached
+	Projectile: LaserZap
+		Width: 50
+		Duration: 8
+		Color: 55FF99
+		ZOffset: 2047
+	Warhead@RepairWeapon: SpreadDamage
+		Damage: -1400
+
+ScrinDefenseBeam:
+	Inherits: ScrinLightBeamAA
+	ReloadDelay: 22
+	Range: 7c0
+	Warhead@ScrinBeam:
+		Damage: 5200
+
+ScrinBuzzerHiveBeam:
+	Inherits: ScrinDefenseBeam
+	Report: weapon-buzzer-hive-1.aud, weapon-buzzer-hive-2.aud, weapon-buzzer-hive-3.aud
+
+ScrinPhotonCannonBeam:
+	Inherits: ScrinDefenseBeam
+	Report: weapon-photon-cannon-1.aud, weapon-photon-cannon-2.aud, weapon-photon-cannon-3.aud
+
+ScrinLightningSpikeBeam:
+	Inherits: ScrinDefenseBeam
+	Report: weapon-lightning-spike-1.aud, weapon-lightning-spike-2.aud, weapon-lightning-spike-3.aud
+
+ScrinDefenseHeavyBeam:
+	Inherits: ScrinHeavyBeam
+	Report: weapon-plasma-battery-1.aud, weapon-plasma-battery-2.aud, weapon-plasma-battery-3.aud
+	ReloadDelay: 55
+	Range: 9c0
+	ValidTargets: Ground, Water, Air
+	Warhead@ScrinHeavyBeam:
+		Damage: 12500
+		ValidTargets: Ground, Water, Air
+
+ScrinStormColumnBeam:
+	Inherits: ScrinCapitalBeam
+	Report: weapon-storm-column-1.aud, weapon-storm-column-2.aud, weapon-storm-column-3.aud
+	ReloadDelay: 45
+	Range: 10c0
+	Warhead@ScrinCapital:
+		Damage: 18000
+
+ScrinRiftInit:
+	ValidTargets: Ground, Water
+	Projectile: InstantExplode
+	# Match Cameo's nuclear terrain distortion radius and strength, but keep its
+	# fade bounded to the Rift's ten-second lifetime.
+	Warhead@Distortion: HeatDistortion
+		# Keep the refraction concentrated tightly inside the visible orb.
+		RadiusScale: 0.5
+		StrengthScale: 2.0
+		# 0.5 s fade-in + 9 s steady hold + 0.5 s fade-out.
+		FadeFrames: 60
+		FadeInFrames: 30
+		HoldFrames: 540
+	Warhead@Spawn: SpawnActor
+		Actors: scrin_rift_weapon_effect
+		Range: 1
+		ForceGround: true
+		ValidTargets: Ground, Water
+		ImpactActors: false
+
+ScrinRiftShockwavePulse:
+	ReloadDelay: 250
+	Burst: 10
+	# PeriodicExplosion adds one tick to each delay: 24 is exactly one second
+	# at the engine's 40 ms timestep.
+	BurstDelays: 24, 24, 24, 24, 24, 24, 24, 24, 24
+	Warhead@InverseShockwave: Shockwave
+		# Cameo's active renderer has a 500 px base radius. Terrain uses 48 px
+		# tiles, so 0.768 starts the ring at 384 px = 8 tiles.
+		RadiusScale: 0.768
+		StrengthScale: 1.0
+		Reverse: true
+		ReverseEndRadiusFraction: 0
+		FadeFrames: 60
+		FadeInFrames: 6

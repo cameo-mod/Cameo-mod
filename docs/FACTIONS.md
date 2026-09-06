@@ -1581,6 +1581,23 @@ faction drawn from Dune-universe lore (House Ix), not a playable Westwood factio
 
 ---
 
+## Tiberium Wars
+
+### Scrin
+
+| Attribute | Value |
+|---|---|
+| **Internal Name** | `scrin` (actors: `scrin_*`) |
+| **Display Name** | Scrin |
+| **Source Game** | Command & Conquer 3: Tiberium Wars / Kane's Wrath (2007-2008) |
+| **ContentPack** | `ContentPacks/TiberiumWars/Scrin/` (self-contained: rules, weapons, sequences, sprites, sounds, voices, translations) |
+| **Roster** | 49 buildable actors — buildings, infantry, vehicles, aircraft (foundation roster; Kane's Wrath-derived independently rendered sprites) |
+| **Starting Units** | `scrin_drone_ship` base + light/heavy support classes |
+| **AI Wired** | No |
+| **Selectable** | Yes (prepared on branch `scrin-prepared`; merge pending maintainer decision, Ruling 15) |
+
+---
+
 ## Meta-Factions
 
 These are not playable factions but random-select groups that choose from their member factions at game start.
