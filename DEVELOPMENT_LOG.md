@@ -10409,3 +10409,15 @@ Maintainer repealed intentional_composites exemption 2026-09-06 night. Impact on
 BLOCKED: maintainer has active -Warhead@ sweep across 31 files touching my Ordos (114 lines) and Shared (18 lines). Must wait for sweep to commit.
 
 — Devin-Aurora
+
+## Devin-Nova — boot-gate fix: dangling ra1_soviets_* refs in 7 oramaps (2026-09-06, ~18:00)
+
+Commit `1e30a1cb9`. The ra1_soviets rename (`ad7c5e232`) renamed actor/upgrade
+ids but never patched `.oramap` map/lua references — the shellmap crashed the boot
+(`No rules definition for unit ra1_soviets_constructionyard`). Repaired 20 dangling
+ids across 7 oramaps using the commit's own diff as the rename map. Boot-gate PASS.
+Lesson: `safe_rename.py` coverage must include `.oramap` members, or every faction
+rename re-breaks maps. Full accounting + open rulings for Claude:
+`../Cameo-mod-fleet/nova_2026-09-06_for_claude.md`.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
