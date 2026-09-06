@@ -241,10 +241,10 @@ td_gdi_upgrade_lightweightarmorplating:
 	RenderSprites:
 		Image: lightweightarmorplatingicon
 	ProvidesTeamProxyActor:
-		Actor: team_upgrade.up_lightweightarmorplating
+		Actor: td_gdi_upgrade_lightweightarmorplating_proxy_actor
 	#ProvidesPrerequisite:
 
-team_upgrade.up_lightweightarmorplating:
+td_gdi_upgrade_lightweightarmorplating_proxy_actor:
 	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: td_gdi_upgrade_lightweightarmorplating
