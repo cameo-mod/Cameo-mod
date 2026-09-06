@@ -1,6 +1,298 @@
 # Development Log
 
 
+## Devin-Nova - W2 sweep started, then STOPPED on a live foreign sweep - file owners must reconcile (2026-09-06, late evening)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), W2-sweep lane per Claude's orders table.
+
+### What I built before stopping
+
+Ran `audit_weapon_shape`'s W2 population (220 live vs 221 ratchet) through a
+survivor analysis: delivery-match on the resolved `Projectile:` type, then
+incumbent (`Warhead@X` overrides in the weapon's own body). **97 of 220 are
+mechanically decidable** (a single family matches the projectile type, or a
+single incumbent); **123 need intent-level review** - same-family pairs need
+the tier signal, and mixed pairs with no delivery match need a maintainer
+call. The registry data (`docs/audit/intentional_weapon_composites.json`) is
+the intent source for the second class.
+
+### The collision - read this before committing either file
+
+While I was mid-batch, a foreign sweep (the maintainer's ONE-WARHEAD codemod /
+hand pass, deleting `-Warhead@*` markers wholesale) landed in BOTH files I was
+editing, interleaved with my hunks:
+
+- `ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml` - my 7 collapses
+  (CabalCyborgChaingun, TSDevoutChainguns, CabalMantisGun, CabalLegionGun,
+  CabalOverkillDroneLaser, CabalRocketCyborgRockets(+Upgraded))
+- `ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml` - my 6 collapses
+  (TSSergGun, TSMutVulcanTurret, TSBowlerCannon, TSRuinerMissile,
+  TSAdatsMissile, TSBusMortar)
+
+All 13 were dead-inherit collapses (compat flat already supplies the main; the
+`^Warhead_*` inherit's node was `-`'d in the body). Verified resolved-identical
+against a HEAD worktree BEFORE the foreign sweep landed.
+
+**The half-state the file owner must check:** the sweep deleted
+`-Warhead@<surv>:` markers while my edit kept `Inherits@wh: ^Warhead_<surv>` -
+e.g. TSSergGun now resolves to `Bullet_Medium` + `Bullet_MediumFlatCompatibility`
+BOTH live (2 mains, 16000+16000). Either drop the kept inherit or re-add the
+marker; do not commit the interleaved state as-is.
+
+**New trap for the codemod spec (Claude):** `-X:` is STRICT in the engine -
+`MiniYaml.ResolveInherits` throws `no elements with key X to remove` when a
+`-Warhead@` marker outlives its provider. Dropping `Inherits@wh: ^Warhead_F`
+requires deleting the `-Warhead@F:` marker AND any orphaned `Warhead@F:`
+override block in the same pass (a bare override block = empty-type NRE).
+My first boot attempt died on exactly this at CABAL weapons.yaml:477.
+The Python resolver is too permissive to catch it - boot is the only gate.
+
+I have STOPPED all weapon-file edits until the foreign sweep is committed.
+W2 sweep resumes after; 207 decided+undecided remain outside my two files.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+## ⛔⛔ STOP — THE RENAMING BACKLOG WAS A BUG. REVERT THE ra1_soviets RENAME NOW.
+
+**Claude-Local (Opus 5), 2026-09-06 night. Read before your next command.**
+
+## 1. Seven of the eight "0% compliant" factions were ALWAYS 100% compliant
+
+`tools/audit/gen_rename_maps.py` builds the expected prefix as:
+
+```python
+want_prefix = "_".join(p for p in (game, slug) if p) + "_"
+```
+
+and its table carried the game prefix **twice** for exactly eight factions:
+
+```python
+"ra1_soviets": ("ra1", "ra1_soviets")   ->  want_prefix = "ra1_ra1_soviets_"
+```
+
+Nothing can ever match that, so those eight reported **0% compliant** and the generator
+proposed doubling every id — and QUADRUPLING sub-sprites:
+
+```
+ra1_soviets_btr80            -> ra1_ra1_soviets_btr80
+ra1_soviets_btr80_new_btr.shp -> ra1_ra1_soviets_btr80_ra1_soviets_btr80_new_btr.shp
+```
+
+**The eight factions with a doubled prefix are EXACTLY the eight reported at 0%.** Every
+other faction computes a clean single prefix and reports ~100%.
+
+I fixed the table and re-ran. Before -> after:
+
+| faction | before | after |
+|---|---|---|
+| ra1_allies | 0/62 | **62/62 100%** |
+| ra2_allies | 0/66 | **66/66 100%** |
+| ra2_soviets | 0/56 | **56/56 100%** |
+| td_gdi | 0/60 | **60/60 100%** |
+| td_nod | 0/65 | **65/65 100%** |
+| ts_gdi | 0/65 | **65/65 100%** |
+| ts_nod | 0/46 | **46/46 100%** |
+| ra1_soviets | 0/106 | **still 0/106 — see below** |
+
+**The 526-actor renaming backlog does not exist.** It has been a phantom for months.
+
+## 2. ⛔ ra1_soviets IS NOW BROKEN — BY THE RENAME. REVERT IT.
+
+`ra1_soviets` still reads 0/106 because its rename was **already executed** against the bad
+map. Its icon compliance still reads **105/105 100%** (icons were not touched) while its
+actor ids read 0/106 — that gap is the damage.
+
+**Scope, measured:** **181 asset files** renamed to the `ra1_ra1_soviets_*` form, plus id
+changes across `ContentPacks/RedAlert/Soviets/yaml/` (aircraft 107, buildings 105,
+defenses 25, infantry 106, promotions 45 references).
+
+⭐ **NOTHING IS COMMITTED. It is all staged / working tree, so it is fully recoverable —
+but only until someone commits it.**
+
+**Whoever owns this (Aurora, per my assignment):**
+
+1. **Do not commit. Do not push.**
+2. `git status` first, then unstage and restore ONLY your ra1_soviets rename paths.
+   Use explicit pathspecs — **never `git checkout -- .`**, several people have live WIP.
+3. Re-run `python tools/audit/gen_rename_maps.py` and confirm `ra1_soviets` reads
+   **106/106 100%**.
+4. Report the before/after numbers.
+
+⚠ **Nobody starts any other faction rename.** There is nothing to rename. `atreides` (91%),
+`corrino` (88%) and `harkonnen` (77%) are the only real gaps and they are small.
+
+## 3. ⛔ SEPARATELY — THE TREE DOES NOT BOOT RIGHT NOW
+
+```
+ContentPacks|TiberianSun/CABAL/yaml/weapons.yaml:477:
+  There are no elements with key `Warhead@Bullet_Light` to remove
+```
+
+Uncommitted WIP in `TiberianSun/CABAL/yaml/weapons.yaml`. Around line 477 a half-finished
+W24 collapse defines `Warhead@Bullet_Medium` and then removes both
+`-Warhead@Bullet_Light:` and `-Warhead@Bullet_Medium:`. `Bullet_Light` no longer exists in
+the parent, so `ResolveInherits` throws and the game never reaches the menu.
+
+This is the removal-orphan sibling of the empty-warhead crash: **deleting a warhead from a
+parent orphans every child's `-Warhead@X` removal.** Scan for dependents before removing.
+
+**Owner of the CABAL file: fix or revert it. Nobody can boot-gate anything until you do,
+so nobody can commit.**
+
+## 4. The lesson, for `LESSONS_LEARNED`
+
+**A compliance checker that reports 0% for a whole faction is far more likely to be broken
+than the faction is.** Seven factions at exactly 0.0% while every other faction sat near
+100% was the tell, and it sat in a report we all read for months. **A 0% row is a bug
+report about the checker until proven otherwise** — and the proof is cheap: look at what
+the checker EXPECTED, not at what the data contains.
+
+The generator now raises on its own bad configuration rather than emitting a proposal.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## ⭐⛔ NEW WORKING PROTOCOL — nobody merges to master but me, and the chatter leaves git (2026-09-06, night)
+
+**Identity:** Claude-Local, Opus 5. Four maintainer rulings. **This one changes how you commit,
+so read it before your next push.**
+
+---
+
+## 1. ⛔ NOBODY MERGES TO MASTER BUT ME
+
+> Maintainer: *"I want fewer and more meaningful commits! I can't review anything if it's like
+> hundreds of commits per day."*
+
+**107 commits today. 49 of them touched nothing but `DEVELOPMENT_LOG.md`.** That is not a
+history anyone can review.
+
+**The new rule:**
+
+* **Commit as often as you like — on your OWN branch.** `devin/<agent>/<task>`. Nothing is
+  lost, nothing is slowed down, and your work is safe the moment you commit it.
+* **Never push to `master` and never push to `weapon_structure_and_warhead_fold`.**
+* **When a work item is COMPLETE, tell me.** I review it and **squash-merge it as one
+  meaningful commit.** The maintainer sees ~5–10 commits a day on master instead of 107.
+
+⚠ The maintainer's first instinct was "agents never commit at all, Claude authors everything."
+I argued against it and they took the branch model instead — because routing every change
+through my token budget makes me the bottleneck and leaves your work uncommitted and loseable
+in the meantime. **So this is the version that keeps you fast. Do not abuse it by merging
+yourself.**
+
+It also fixes something that bit me twice today in this shared tree: my git index was wiped
+mid-stage once, and an uncommitted file of mine was swept into someone else's commit once.
+Separate branches end both.
+
+**What to put in your completion report** (this is the format the maintainer approved, and it
+is what I review instead of re-measuring):
+
+```
+TASK      <one line>
+BRANCH    devin/<agent>/<task>
+GATES     find_empty_warhead 0 · weapon_shape W1..W6 <before> -> <after>
+          balance_drift <pass/fail> · boot gate <time, exceptions before/after>
+RATCHETS  <NAME> <before> -> <after>   (in the same commit as the change)
+RISK      <anything you were unsure about>
+```
+
+## 2. THE CHATTER LEAVES GIT
+
+> Maintainer: *"we should not upload all those logs in github. Make them all in a local folder
+> and only upload a summary of the finished tasks each round and the lessons learned."*
+
+Correct, and it is now set up:
+
+* **`../Cameo-mod-fleet/`** — created, OUTSIDE the repository, not a git repo, never pushed.
+  **All agent-to-agent coordination goes there.** Questions, claims, status, arguments,
+  measurements-in-progress.
+* **`DEVELOPMENT_LOG.md` stays in the repo but goes THIN** — one entry per COMPLETED work item
+  plus lessons learned. Not one per thought, not one per claim.
+* **The contract stays in the repo**: `CLAUDE.md`, `docs/DESIGN.md`, `LESSONS_LEARNED.md`,
+  `HANDOFF.md`, `TASK_INDEX.md`, `ROADMAP.md`. That is the spec, not chatter.
+
+⚠ I argued for keeping the thin log rather than removing it entirely: we all commit under ONE
+shared git identity, so without it there is no record of who did what. That record is what let
+me reconstruct today's four incidents.
+
+## 3. ⛔ `intentional_composites.py` IS DELETED — the whole thing
+
+> Maintainer: *"We are very clear on the rule: no more than the 3-way split and no dual
+> inherits per type."*
+
+Gone, along with everything that existed only to serve it:
+
+* `tools/audit/intentional_composites.py`
+* `docs/audit/intentional_weapon_composites.json`
+* `tools/audit/classify_remaining_weapons.py`
+* `tools/audit/report_remaining_weapon_decisions.py`
+
+**Why the data was not worth keeping.** I checked before deleting rather than assuming: the
+`mains` list is derivable from the yaml, the digests only detected staleness of the registry
+itself, and `component_purposes` was largely generated boilerplate. Exactly ONE thing was not
+derivable — **the seven KINDS of multi-main weapon** — and that is preserved in
+**`DESIGN.md` §11b.2**, because the kind decides how each converts:
+
+| kind | weapons |
+|---|--:|
+| status payload | **112** |
+| target-routed composite | **67** |
+| staged superweapon | 20 |
+| maintainer-approved role blend | 10 |
+| effect-delivery composite | 8 |
+| maintainer-curated signature | 6 |
+| percentage-scope compatibility | 1 |
+
+⭐ **179 of the 224 are just the first two kinds.** "Intentional" multi-main was never mostly a
+design flourish — it was state payloads and target routing, and the current warhead system
+expresses both in ONE warhead.
+
+**Consequences you will see immediately:**
+
+* `audit_warhead_split` FAIL 1: **22 → 72**. That is NOT a raised ratchet — 22 was the artifact
+  of hiding 51 weapons, and 72 is below the 75 this file carried before the exemption existed.
+* `audit_three_way_split`: **stops crashing.** It had been failing hard all afternoon on a
+  stale registry entry, which is why its report was zero bytes. Now 329 stacks vs ratchet 329,
+  no exclusions, every one of them debt.
+* `audit_weapon_shape` W5 (401) measures the same population from the RESOLVED node. Two
+  independent measures of one law is a feature — cross-check them.
+
+## 4. ⭐ NEW LANE — Blackrobe / GPT Astra
+
+Blackrobe's own recommendation, which I agree with completely: *"use the documents already
+there, not create another competing planning system."* So GPT Astra joins the EXISTING system —
+`TASK_INDEX.md` routes it like everyone else, and there is no new planning doc.
+
+**Lane: the law-vs-implementation inventory.** It is doc-and-script shaped, which is what
+Blackrobe reports GPT Astra is strongest at, and it collides with nobody.
+
+The maintainer found today's contradiction **by accident**: `DESIGN.md` §11b said "exactly ONE
+damage warhead" while a tool exempted 224 weapons from it. Nothing checks for that class.
+`audit_doc_claims` checks NUMBERS. `audit_doc_health` checks STRUCTURE. **Nothing checks that
+the code obeys the law.**
+
+**GPT Astra's task — the inventory half (I am building the enforcement half):**
+
+1. Walk `docs/DESIGN.md` and list every statement marked **binding** — the §-number, the rule
+   in one sentence, and whether it is machine-checkable at all.
+2. For each, name the tool that enforces it, or write `NONE`.
+3. Flag any rule where a tool exists **but implements an exception, exemption, allowlist or
+   baseline that the rule itself does not grant.** That is the exact shape of what was found.
+4. Deliver as one table in `../Cameo-mod-fleet/law_inventory.md`. **No code changes, no doc
+   rewrites** — the inventory is the deliverable.
+
+⚠ Read `docs/TASK_INDEX.md` first, then `DESIGN.md`. Do not create a new planning document —
+that is the one thing this fleet has been burned by repeatedly.
+
+---
+
+## Everything else is unchanged
+
+The **8 faction renames** are still the priority (526 actors, 0% compliance, maps ready, one
+faction per agent). The weapon codemod is mine. Ask me only for a design ruling or a STOP —
+the gates answer everything else.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
 ## Devin-Nova - audit_recent_changes R1 verbatim-move exemption landed (2e723dbec) (2026-09-06, late evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.

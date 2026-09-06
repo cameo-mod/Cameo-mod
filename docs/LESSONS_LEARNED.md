@@ -43,6 +43,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)](#-never-hand-parse-yaml--a-sibling-node-silently-overwrote-every-versus-number-2026-08-22)
 - [⛔ `Node.child()` is an EXACT match — 97% of the mod's producers were invisible (2026-09-06)](#-nodechild-is-an-exact-match--97-of-the-mods-producers-were-invisible-2026-09-06)
 - [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
+- [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
 - [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
@@ -165,6 +166,48 @@ the threshold behavior.
 - Weapon children that need a different concrete value should override with a
   single `Warhead@Concrete:` key; matching keys merge, so only the last value
   survives.
+
+## ⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)
+
+`gen_rename_maps.py` reported **eight factions at exactly 0% naming compliance** — 526 actors
+— while every other faction sat at 96–100%. That report was read as a renaming backlog and
+chased **for months**. It was a two-word data-entry bug.
+
+The expected prefix is built as `"_".join(p for p in (game, slug) if p) + "_"`, and the table
+carried the game prefix **twice** for exactly those eight factions:
+
+```python
+"ra1_soviets": ("ra1", "ra1_soviets")   # -> want_prefix "ra1_ra1_soviets_"
+```
+
+Nothing can match that, so compliance was structurally pinned at 0 and the generator proposed
+**doubling every id** and **quadrupling sub-sprites**
+(`ra1_soviets_btr80_new_btr.shp` → `ra1_ra1_soviets_btr80_ra1_soviets_btr80_new_btr.shp`).
+Emptying the `game` slot for those eight moved seven of them from **0% to 100%** in one run.
+The eighth read 0% only because its rename had already been executed against the bad map —
+181 files and several hundred yaml references, caught while still uncommitted.
+
+**The tells, in order of how cheap they are to check:**
+
+1. **Exactly 0.0%, not 3% or 11%.** Real non-compliance is ragged. A clean zero across a whole
+   population means the predicate can never be true.
+2. **The set of failures is suspiciously structural.** All eight were the factions whose slug
+   already contained their game prefix — a property of the CONFIG, not of the data.
+3. **The baseline faction failed its own baseline.** The report is headed *"RA1-Soviet
+   baseline"* and `ra1_soviets` scored 0/106. A convention's own reference case cannot fail it.
+4. **A sibling metric disagreed.** Icon compliance for the same faction read **105/105 100%**
+   while actor ids read 0/106. Two metrics over one roster disagreeing that hard is the
+   checker, not the roster.
+
+**So: read what the checker EXPECTED before reading what the data contains.** One line —
+printing `want_prefix` per faction — would have exposed this at any point in the last months.
+
+⚠ And **never act on a generated proposal without eyeballing a sample of it.** The map
+literally said `ra1_soviets_btr80: ra1_ra1_soviets_btr80`. One glance at three lines of that
+file would have stopped 181 renames.
+
+`gen_rename_maps.py` now raises `AssertionError` on its own bad configuration instead of
+emitting a proposal.
 
 ## ⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)
 

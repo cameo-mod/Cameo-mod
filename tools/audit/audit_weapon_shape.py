@@ -69,7 +69,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 # (An earlier throwaway scan said 602/237/30/72; its regex was looser. Always set
 #  a ratchet from the audit that enforces it, never from a scratch measurement.)
 W1_BASELINE = 583   # more than 3 inherits
-W2_BASELINE = 221   # dual ^Warhead_ inherit
+W2_BASELINE = 213   # dual ^Warhead_ inherit
 W3_BASELINE = 21    # dual ^Projectile_ inherit
 W4_BASELINE = 61    # dual ^Effect_ inherit
 W5_BASELINE = 401   # more than one resolved MAIN warhead

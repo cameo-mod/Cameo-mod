@@ -879,6 +879,28 @@ projectile — and it must not be bulk-converted or ratcheted without a per-weap
 fingerprint of a refactor that duplicated one warhead across families; the multiplication was
 the bug. See the HydraSpit precedent (`8748c68e4`) and the note below.
 
+### 11b.2 The SEVEN kinds of multi-main weapon (the codemod's taxonomy)
+
+`tools/audit/intentional_composites.py` was DELETED on 2026-09-06 — an exemption list cannot
+coexist with §11b. Before deleting it, its one piece of non-derivable content was preserved
+here: its 224 entries were not one problem but **seven**, and the split decides how each is
+converted. Everything else in that file was redundant (`mains` is derivable from the yaml)
+or self-referential (digests that only detected staleness of the registry itself).
+
+| kind | weapons | what it actually is | conversion |
+|---|--:|---|---|
+| status payload | **112** | a damage main plus a state/meter warhead riding along | fold the payload into the one main; the meter stays if it is a `GrantExternalCondition` |
+| target-routed composite | **67** | one weapon, several mains split by `ValidTargets` / armor route | ONE main; the routing belongs in the warhead template's Versus row, not in extra warheads |
+| staged superweapon | **20** | multi-stage detonation (rings, delays) | `AreaDamage` already does rings and delays — one main with the ring profile |
+| maintainer-approved role blend | **10** | a deliberate two-role gun (MG + cannon) | pick the family matching the resolved `Projectile:`; the second role becomes a separate weapon if it must survive |
+| effect-delivery composite | **8** | a main plus a warhead that exists only to draw something | the drawing half moves into `^Effect_*` |
+| maintainer-curated signature | **6** | a hand-picked main set (the `D2K_Rocket_Trooper*` pairs) | convert like any other; read the old set for intent when picking the survivor |
+| percentage-scope compatibility | **1** | a `*Percentage` twin scoped differently from its main | already legal — the twin is not a second main |
+
+⚠ **179 of the 224 are just the first two kinds.** The bulk of "intentional" multi-main was
+never a design flourish; it was state payloads and target routing, both of which the current
+warhead system expresses in ONE warhead.
+
 ### Collapsing a multi-warhead weapon
 
 1. **Sum is preserved.** The survivor's `Damage` = Σ of the old warheads' damage, each
