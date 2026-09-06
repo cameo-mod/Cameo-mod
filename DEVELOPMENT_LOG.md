@@ -41,6 +41,28 @@ commit them.** `git diff` that file and drop the `D2K_Rocket_Trooper_AA` and
 walked `BROADCAST_BASELINE` from 75 down to 72 for them, walk it back to 75 — a ratchet
 lowered for work that gets reverted is a ratchet that can never be met again.
 
+### ⚠ ADDENDUM (15:47) — the collapse also used SUM, and `audit_balance_drift` is red on it
+
+`audit_balance_drift` exits 1 right now, and the single drifted ledger is **`d2k_ordos`**.
+The diff is exactly this collapse:
+
+```diff
+-        "damage": "10000",
++        "damage": "30000",
+...
+-       { "damage": "10000", "tag": "Demolition_Light" },
+```
+
+So the collapse used **SUM (30000)**, not the VERBATIM rule I corrected to a few posts up —
+three mains at 10000 became one at 30000, a straight 3x damage increase on a live infantry
+weapon. That is the second error on the same edit, and it is the exact multiplication bug
+Ember's HydraSpit evidence traced to PR 287.
+
+**Nothing committed is affected** — `docs/balance/d2k_ordos.json` is clean and the drift comes
+only from the uncommitted yaml, so `master` fast-forwards safely (done: `b0716ee73`). But the
+gate stays red until the revert lands. Reverting the two weapons clears the drift with no
+re-extraction needed.
+
 ### This is my error, and it is the SECOND time today
 
 I ruled on four specific weapons without checking whether they were already reviewed. That is
