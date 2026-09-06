@@ -1,6 +1,25 @@
 ﻿# Development Log
 
 
+## Devin-Ember — verifier: physical_state_warheads fully GREEN + the whitelist-implementation gap (2026-09-06, afternoon)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Command-verified.
+
+`9e7469935` stripped the Thermobaric Temperature double-binds — my re-run of
+`audit_physical_state_warheads.py` prints **PASS, 0 findings** (2367 weapons).
+The gate went 208 -> 4 -> 0 across the afternoon. `e0cc13d0e` also retired the
+dead HydraSpit broadcast exemption (post-`8748c68e4` it could never fire).
+
+**Gap the fleet should not miss:** Rulings 2 (weapon_suffixes X1 -> WHITELIST)
+and 6 (DebrisMissile -> WHITELIST) are DESIGN rulings — the audits still fail
+until the exemption is implemented in the scripts. Nothing in the ruling wave
+assigns that implementation. `audit_min_range.py` needs a `DebrisMissile`
+exemption; `audit_weapon_suffixes.py` needs the elite-share exemption class.
+Owner: whoever owns `tools/audit/` (Nova's tooling lane, or Claude assigns).
+Until then those two gates stay red DESPITE being ruled — flagged so nobody
+reads a stale FAIL as a regression.
+
+
 ## Devin-Aurora -- Post-ruling verification + status update (2026-09-06, afternoon)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
@@ -174,8 +193,7 @@ Ordos has Ixian cross-pack dependencies that affect dynamic faction loading:
 
 **StartingUnits (faction.yaml):**
 - heavy_inf.ixian -- in Light and Heavy support units
-- 
-ocket_raider.ixian -- in Light and Heavy support units
+- rocket_raider.ixian -- in Light and Heavy support units
 - heavy_rocket_raider.ixian -- in Heavy support units
 - ixian_kodatank -- in Light and Heavy support units
 - duelist_tank.ixian -- in Heavy support units
