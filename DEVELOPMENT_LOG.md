@@ -1,5 +1,20 @@
 # Development Log
 
+## Codex - Safe balance apply completion (2026-09-07)
+
+Repaired the existing writer rather than adding a parallel pricing framework.
+It now preflights the complete plan, checks fresh provenance and shared consumers,
+stages extraction outside proposal ledgers, verifies the full requested raw roster,
+and checks validation exit codes before success. Failure/interrupt recovery preserves
+transaction-owned bytes and refuses to overwrite concurrent edits.
+
+35 focused tests pass. Full suite: 800 tests, zero skips, 43 failed modules;
+failure identities match merged PR 328 exactly. Real staged extraction reproduces
+all 67 artifacts semantically without touching live ledgers. Canonical audits
+complete with existing failures and no empty reports. Independent review approved
+the scoped repair. No gameplay values were applied and no game was launched for
+this tools-only commit. Dossier: `docs/audit/ASTRA_REVIEW.md`.
+
 ## Codex - PR 328 current-upstream integration and scoped review (2026-09-06)
 
 Integrated `56c14d9db` without changing its gameplay, engine, or class anchors.

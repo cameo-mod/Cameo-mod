@@ -171,6 +171,7 @@ class Manifest:
     weapons: list[pathlib.Path] = field(default_factory=list)
     sequences: list[pathlib.Path] = field(default_factory=list)
     fluent: list[pathlib.Path] = field(default_factory=list)
+    sources: list[pathlib.Path] = field(default_factory=list)
 
 
 def load_manifest(repo_root: pathlib.Path, mod_id: str = "cameo") -> Manifest:
@@ -191,6 +192,7 @@ def load_manifest(repo_root: pathlib.Path, mod_id: str = "cameo") -> Manifest:
                     continue
                 seen_includes.add(inc)
                 if inc.exists():
+                    man.sources.append(inc)
                     absorb(load(inc), inc.parent)
                 continue
             target = section_map.get(top.key)
@@ -206,6 +208,7 @@ def load_manifest(repo_root: pathlib.Path, mod_id: str = "cameo") -> Manifest:
                     target.append(p)
 
     mod_yaml = repo_root / "mods" / mod_id / "mod.yaml"
+    man.sources.append(mod_yaml)
     absorb(load(mod_yaml), mod_yaml.parent)
     return man
 

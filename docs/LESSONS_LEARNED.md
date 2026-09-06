@@ -509,6 +509,15 @@ The `^D2KRocket` archetype inherits `^Projectile_Missile_Heavy`, which does **no
 
 ### Balance tooling discipline
 
+- **A child command starting is not proof that it succeeded.** The old balance
+  writer saved YAML despite planning errors, passed an obsolete positional path
+  to `extract_stats.py`, and ignored its failure. The repaired writer stages
+  extraction, checks subprocess results and verifies requested raw values before
+  publishing ledgers. Failed confirmations restore transaction-owned bytes and
+  preserve proposal ledgers. Tests in `tools/tests/test_apply_balance.py` inject
+  extraction, audit, write and interruption failures; a no-op dry run alone would
+  never have caught this defect.
+
 - **Always syntax-check a script before running it** — `python -m py_compile <script>` catches typos that would otherwise leave the pipeline half-finished.
 - Then run Python balance scripts through `tools/balance/run_with_guard.py` (syntax pre-check + 60 s timeout guard) or, when the guard is not yet available, `python -m py_compile` + the script directly.
 - `propose_class_rebalance.py` is now the generalized dispatcher for ALL 14 classes (reads `class_anchors.json`, uses the SUM engine `formula.spread_damage_sum`). It only prices units already tagged `design.class_anchor`; membership tagging is still pending, so classify a class's units before trusting its full roster output. The old per-class `*_rebalance_proposal_final.py` one-offs are superseded and slated for archival.

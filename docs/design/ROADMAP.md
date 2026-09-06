@@ -3,6 +3,19 @@
 _Entry point for a new session: **[`docs/HANDOFF.md`](../HANDOFF.md)**. This file is the
 granular, resumable task queue that the handoff points into._
 
+## Balance apply failure safety (2026-09-07)
+
+- [x] Repair `apply_balance.py` confirmation: reject incomplete plans, validate
+  provenance/shared consumers, stage extraction outside proposal ledgers, propagate
+  failed subprocesses, and restore transaction-owned writes on failure.
+- [x] Add failure-injection regressions and verify an unchanged live faction dry run.
+
+The former writer could save YAML despite planning errors, invoke the extractor
+with an obsolete positional argument, and report success after subprocess failure.
+The repair is independently reviewed; balance targets still require the normal
+sign-off and boot gates. Evidence and delivery status are in
+`docs/audit/ASTRA_REVIEW.md`.
+
 ## AI PERSONALITY SELECTOR (2026-08-21)
 
 - [x] Add synchronized random Rush/Turtle/Tech/Expansion/Steamroller selection

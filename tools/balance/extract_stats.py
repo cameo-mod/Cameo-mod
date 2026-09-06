@@ -1121,10 +1121,14 @@ def main() -> int:
     ap.add_argument("--check", action="store_true",
                     help="diff against the committed ledger; exit 1 on drift")
     ap.add_argument("--faction", help="ledger-name substring filter")
+    ap.add_argument("--output-dir", type=pathlib.Path,
+                    help="stage generated raw/derived ledgers here; still read design inputs from docs/balance")
     ap.add_argument("--check-weapon-classes", action="store_true",
                     help="fail if any weapon references a class template missing "
                          "from docs/balance/weapon_classes.yaml (the sidecar)")
     args = ap.parse_args()
+    if args.output_dir and args.check:
+        ap.error("--output-dir cannot be combined with --check")
 
     ledgers, sidecars = build_both(Model(), args.faction)
 
@@ -1149,7 +1153,9 @@ def main() -> int:
     # Both trees are checked, but they are reported apart because they answer
     # different questions: raw drift = the GAME changed (someone hand-edited yaml),
     # model drift = a TOOL changed (re-run the extractor and commit the sidecar).
-    targets = [("raw", OUT, ledgers), ("model", DERIVED_OUT, sidecars)]
+    output = args.output_dir if args.output_dir is not None else OUT
+    derived_output = output / "derived"
+    targets = [("raw", output, ledgers), ("model", derived_output, sidecars)]
 
     if args.check:
         drift = 0
@@ -1180,10 +1186,10 @@ def main() -> int:
                 n = sum(len(s) for s in doc["sections"].values())
                 total += n
                 print(f"  {name}.json: {n} actors")
-    (DERIVED_OUT / "_model.json").write_text(serialize(model_constants()),
+    (derived_output / "_model.json").write_text(serialize(model_constants()),
                                              encoding="utf-8", newline="\n")
-    print(f"wrote {len(ledgers)} ledgers, {total} actors -> {rel(OUT)}")
-    print(f"wrote {len(sidecars)} derived sidecars -> {rel(DERIVED_OUT)}")
+    print(f"wrote {len(ledgers)} ledgers, {total} actors -> {output}")
+    print(f"wrote {len(sidecars)} derived sidecars -> {derived_output}")
 
     # `_model.json` above is GLOBAL — its armor census and weights are measured
     # across the whole roster — but a filtered run only rewrites the sidecars it
