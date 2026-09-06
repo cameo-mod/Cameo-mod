@@ -1,6 +1,70 @@
-# Development Log
+﻿# Development Log
 
 
+## Devin-Aurora -- Ordos non-weapons audit (supports ruling proposal #3) (2026-09-06, midday)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+**Purpose:** Detailed audit of Ordos non-weapons files to support my proposal to assign
+them to Aurora. This is read-only investigation -- no files were modified.
+
+### Ordos pack summary
+
+| File | Actors | Active cross-pack | Legacy Image refs | BPO issues |
+|---|---:|---|---|---|
+| buildings.yaml | 17 | none | conyard.ordos, barracks.ordos, heavy.ordos | 510,520,530,550 |
+| infantry.yaml | 9 | none | light_inf, trooper | 10x3, 20x4, 100, 130 |
+| vehicles.yaml | 17 | none | d2k_mcv | 10x3, 40x4, 50x4, 100x4 |
+| aircraft.yaml | 13 | ixian_upgrade (2 actors) | none | 30x4, 120x2 |
+| upgrades.yaml | 11 | none | none | 50, 60 |
+| promotions.yaml | 12 | none | none | 109-120 unique |
+| templates.yaml | 0 | none | n/a | n/a |
+| ai.yaml | 0 | none | n/a | n/a |
+| faction.yaml | 0 | 5 Ixian actors in StartingUnits | n/a | n/a |
+| naval.yaml | 0 | none | n/a | n/a |
+| sequences.yaml | 53 | 13 shared_sprites refs | n/a | n/a |
+| **TOTAL** | **133** | **3 active deps (all Ixian)** | **6 legacy** | **many ties** |
+
+### Active cross-pack dependencies (all Ixian)
+
+1. ircraft.yaml:817-823 -- ixian_upgrade_advancedixiantechnology prerequisite on carryall_reinforce.ordos
+2. ircraft.yaml:893-899 -- same prerequisite on ordos_advancedcarryall
+3. action.yaml:18,26 -- 5 Ixian actor refs in StartingUnits (heavy_inf.ixian, rocket_raider.ixian, ixian_kodatank, etc.)
+
+### Legacy global Image references (resolve in mods/cameo/sequences/d2k.yaml)
+
+- buildings.yaml: conyard.ordos, barracks.ordos, heavy.ordos
+- infantry.yaml: light_inf, trooper
+- vehicles.yaml: d2k_mcv
+
+These 6 Image refs need to be moved to Ordos/sequences.yaml or D2k/Shared/sequences.yaml
+for full ContentPack self-containment.
+
+### faction.yaml status
+
+- Selectable: NOT defined (uses engine default -- likely false)
+- StartingUnits: 3 classes (MCV Only, Light Support, Heavy Support)
+- Both starting unit lists depend on Ixian actors
+
+### dev_frames investigation
+
+- mods/cameo/bits/d2k/dev_frames/ and dev_frames2/ are untracked scratch
+- Not referenced by any YAML file
+- DEVELOPMENT_LOG already says "DO NOT stage" them
+- Recommendation: leave alone (not mine to delete without maintainer confirmation)
+
+### Impact on ruling proposal #3
+
+If Claude assigns Ordos non-weapons to Aurora, the work would be:
+1. Move 6 legacy Image refs to Ordos/sequences.yaml or Shared/sequences.yaml
+2. Fix Ixian cross-pack deps (coordinate with Echo)
+3. Fix BPO ties (coordinate with Ember's triage)
+4. Set Selectable: true on faction.yaml if Ordos should be selectable
+5. Move shared_sprites refs to Shared/sequences.yaml
+
+This is a significant but well-defined work package.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Aurora -- RULING PROPOSALS for Claude (boss) (2026-09-06, midday)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
