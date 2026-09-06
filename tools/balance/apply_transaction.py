@@ -1,7 +1,9 @@
 """Small, recoverable file transaction for the balance writer.
 
-No game process may read the intermediate YAML. This is exception-safe, not a
-filesystem-wide atomic commit or a replacement for the required boot gate.
+No game process may read the intermediate YAML, and no other writer may modify
+the affected files. This is exception-safe, not a filesystem-wide atomic commit
+or a replacement for the required boot gate. Optimistic byte checks are not an
+OS lock or atomic compare-and-swap: another writer can race a check and replace.
 """
 from __future__ import annotations
 
@@ -30,7 +32,10 @@ def atomic_write(path: pathlib.Path, data: bytes) -> None:
 
 
 class Transaction:
-    """Compare before replacing; rollback only bytes that this transaction owns."""
+    """Detect changes optimistically; preserve changes observed during rollback.
+
+    Requires exclusive file ownership: byte comparisons do not lock out writers.
+    """
 
     def __init__(self, originals: dict[pathlib.Path, bytes]):
         self.originals = originals

@@ -48,7 +48,8 @@ Temporary fixtures and synthetic output moved out of game folders for recovery.
 
 Adapted PR 323's observer graph in its own commit and repaired the unrelated
 upstream Soviet actor IDs that prevented the mandatory shellmap boot. Independent
-review approved the integration; observer graph visual review remains pending.
+review approved the integration; visual review was still pending at that checkpoint
+(the final runtime follow-up in ASTRA_REVIEW.md records the later checks).
 Expanded the existing AI module contract, prepared five distinct external research
 briefs (answers not yet received), and clarified record-only versus future phases.
 Readiness coverage now reports its non-structural denominator honestly; no anchors
@@ -60,7 +61,8 @@ Repaired the existing writer rather than adding a parallel pricing framework.
 It now preflights the complete plan, checks fresh provenance and shared consumers,
 stages extraction outside proposal ledgers, verifies the full requested raw roster,
 and checks validation exit codes before success. Failure/interrupt recovery preserves
-transaction-owned bytes and refuses to overwrite concurrent edits.
+transaction-owned bytes and preserves detected external edits. These are optimistic
+checks, not an OS lock or atomic compare-and-swap; exclusive file ownership is required.
 
 35 focused tests pass. Full suite: 800 tests, zero skips, 43 failed modules;
 failure identities match merged PR 328 exactly. Real staged extraction reproduces

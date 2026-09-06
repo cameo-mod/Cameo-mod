@@ -1,11 +1,14 @@
 # audit_doc_claims — do the documents still match the tree?
 
-Registry: `docs/audit/doc_claims.yaml` — **19** claims.
+Registry: `docs/audit/doc_claims.yaml` — **22** claims.
 
 A number in prose is true only on the day it is written. These are the claims a DECISION rests on, re-measured every run.
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
+| `ai_contract_distinct_module_types` | 21 | 21 | ✅ |
+| `ai_contract_player_module_instances` | 36 | 36 | ✅ |
+| `ai_contract_world_module_instances` | 1 | 1 | ✅ |
 | `shield_versus_mean` | 175.919 | 176.598 | ✅ |
 | `shield_hp_factor` | 0.568442 | 0.566258 | ✅ |
 | `shield_damage_share` | 0.0152182 | 0.0151465 | ✅ |

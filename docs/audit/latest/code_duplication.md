@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **400** (min 5 statements), C# files: **349** (min 8 lines)
+Python files: **407** (min 5 statements), C# files: **352** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|

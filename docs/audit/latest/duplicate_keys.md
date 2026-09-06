@@ -1,6 +1,6 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **650** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **261**
+Files scanned: **650** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **260**
 
 
 ## D1 — duplicate inheritance labels with different parent values
@@ -63,7 +63,6 @@ _none found_
 | mods/cameo/chrome/settings_display.yaml | 66, 269 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@SPACER |
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/sequences.yaml | 520, 521 | hightech.ordos | Defaults |
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/sequences.yaml | 966, 990 | ordos_leech | die4 |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1155, 1241 | D2K_APC_Rocket_AA | Warhead@MissileAA_MediumFlatCompatibility |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/sequences.yaml | 11, 37 | ra2_allies_alliedconstructionyard | dead |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3731, 3737 | yrslav | cheer |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3870, 3874 | ra2howi | muzzle |
@@ -319,7 +318,4 @@ _none found_
 | mods/cameo/weapons/starwars.yaml | 843, 847 | SWNapalm2 | Burst |
 | mods/cameo/weapons/starwars.yaml | 867, 871 | SWNapalm3 | Burst |
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
-
-
-**FAIL** — D2 count 261 exceeds the baseline 260: a new duplicate key was introduced.
 

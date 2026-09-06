@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (5 file(s)) | 48 | >= 24 |
-| T2 | `def test_*` in tools/tests (89 file(s)) | 887 | >= 177 |
-| T3 | modules with no test mentioning them | 267 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (8 file(s)) | 76 | >= 24 |
+| T2 | `def test_*` in tools/tests (95 file(s)) | 947 | >= 177 |
+| T3 | modules with no test mentioning them | 264 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (267)
+## T3 — untested modules (264)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -162,14 +162,12 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/QuotaProductionPaletteWidget.cs | QuotaProductionPaletteWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/RoundedImageWidget.cs | RoundedImageWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/ScaledImageWidget.cs | ScaledImageWidget |
-| C# | OpenRA.Mods.Cameo/Widgets/ScrollableLineGraphWidget.cs | ScrollableLineGraphWidget, ScrollableLineGraphSeries |
 | python | tools/audit/audit_ai.py | audit_ai |
 | python | tools/audit/audit_ai_personalities.py | audit_ai_personalities |
 | python | tools/audit/audit_armament_naming.py | audit_armament_naming |
 | python | tools/audit/audit_armor_upgrade_harm.py | audit_armor_upgrade_harm |
 | python | tools/audit/audit_asset_files.py | audit_asset_files |
 | python | tools/audit/audit_assets.py | audit_assets |
-| python | tools/audit/audit_balance_drift.py | audit_balance_drift |
 | python | tools/audit/audit_balance_sheet.py | audit_balance_sheet |
 | python | tools/audit/audit_basebuilder_crates.py | audit_basebuilder_crates |
 | python | tools/audit/audit_buildable_order.py | audit_buildable_order |
@@ -180,7 +178,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_damage_grid.py | audit_damage_grid |
 | python | tools/audit/audit_dead_warhead_fields.py | audit_dead_warhead_fields |
 | python | tools/audit/audit_display_text.py | audit_display_text |
-| python | tools/audit/audit_doc_claims.py | audit_doc_claims |
 | python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
 | python | tools/audit/audit_duplicate_inherits.py | audit_duplicate_inherits |
 | python | tools/audit/audit_effect_warhead_names.py | audit_effect_warhead_names |
@@ -290,5 +287,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 267 untested > baseline 224
+- T3: 264 untested > baseline 224
 

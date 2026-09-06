@@ -31,7 +31,7 @@ these paths; no live balance target was applied to validate it.
 
 Implemented: complete preflight, unambiguous fresh provenance, explicit
 shared-consumer checks, staged extraction, exact raw-ledger agreement, checked
-validation, and rollback that does not overwrite concurrent edits. Regression
+validation, and optimistic rollback checks that preserve detected external edits. Regression
 tests exercise failure paths and preserve unrelated pending proposals.
 
 Validation:
@@ -67,7 +67,11 @@ Validation:
 Revert: revert the dedicated safe-apply commit; no live YAML needs reverting.
 Limits: exception-safe, not filesystem-wide atomic; no concurrent game reader;
 hard kills retain printed recovery originals; map/script references still require
-review. Existing unrelated upstream test/audit failures are not waived.
+review. Byte comparisons are not an OS lock or atomic compare-and-swap: another
+writer can race between checking and replacing a file. Run only with exclusive
+ownership of the affected files, as BALANCE_PIPELINE requires. The concurrency
+tests prove detection/recovery cases, not race-free simultaneous writing.
+Existing unrelated upstream test/audit failures are not waived.
 
 ## Completed: readiness reporting and ruled Heavy Sniper membership
 
@@ -141,8 +145,9 @@ The repaired tree passed the menu boot described above. Independent source revie
 approved the graph and map changes; the implementer's own review was not counted
 as the independent approval. No live prices, weapons or AI decisions change.
 
-Still pending: visual review of signed labels, scrolling and clipping in an actual
-observer match. A menu boot is loading proof, not graph visual approval. Revert
+At this initial checkpoint, signed labels, scrolling and clipping had not yet
+been reviewed in an actual observer match. See the runtime follow-up below;
+a menu boot alone is loading proof, not graph visual approval. Revert
 the dedicated observer-graph commit to remove this feature.
 
 ## Completed on this branch: record-only match telemetry and AI contracts
@@ -280,15 +285,15 @@ explicit UTF-8. Revert the dedicated cleanup/guard commits to undo these repairs
 ## Final automated checkpoint (2026-09-07)
 
 - Full isolated Python suite: 93/93 modules, 823 tests run, zero skipped, 42 failed
-  modules; 479.6 seconds, 928.9 MB sampled process-tree peak, 66.3% PC peak.
+  modules; final rerun 510.7 seconds, 884.7 MB sampled process-tree peak, 62.0% PC peak.
   Merged PR 328's report has 766 tests, 88 modules and 43 failed modules.
   Independent method-identity comparison finds zero newly failing methods and
   four resolved failure identities. This is not an 823-pass claim: setup/import
   failures and upstream structural/role-contract debt remain visible in the JSON.
 - All 76 Cameo C# tests pass. The latest C# sources match the freshly built and
   runtime-verified DLLs; no engine source or pin changes were made.
-- Complete canonical audits: exit 1, 628.5 seconds, 1,120.0 MB process-tree peak,
-  66.2% PC peak, no empty report files. Percentage-runtime passes, 33 ledgers have
+- Complete canonical audits: final rerun exit 1, 781.8 seconds, 1,119.3 MB process-tree
+  peak, 61.9% PC peak, no empty report files. Percentage-runtime passes, 33 ledgers have
   zero drift, and generated templates remain synchronized. Raw document and
   structural findings remain failures; no registry exemptions were restored.
 - Fresh structure check fails honestly at 967 reachable stacks against 240 and
@@ -302,8 +307,9 @@ explicit UTF-8. Revert the dedicated cleanup/guard commits to undo these repairs
 - Independent final source/scope review found no new blocker and confirmed the
   unchanged-assertion repairs. Coordinator review remains required before merge.
 
-PR 321 remains unchanged. Its four overlapping paths at this checkpoint are
-LESSONS_LEARNED, doc_claims, and the Atreides/Harkonnen ledgers. The latter overlap
+PR 321 remains unchanged. After the document reconciliation, its five overlapping
+paths are DESIGN, LESSONS_LEARNED, doc_claims, and the Atreides/Harkonnen ledgers.
+The document changes need manual reconciliation against current authority. The ledgers overlap
 only our engineer subtype metadata: preserve both sides' intended metadata and
 regenerate, rather than choosing an entire ledger. No shared runtime implementation
 file conflict was found. PR 323 also remains unchanged; its graph adaptation is
@@ -333,3 +339,91 @@ The three classified engineers do not settle the remaining 52 no-template and
 199 no-class buildable unit-like rows. Broader air/naval/economy taxonomy choices
 remain open. External research briefs are prepared but answers are not available.
 Coordinator review of PR 329 is the next publication gate, not automatic merge.
+
+### Per-class sign-off disposition at this checkpoint
+
+Command: `python tools/balance/anchor_readiness.py` (complete invocation, exit 0).
+Every class is held under the structure-before-pricing gate, with the observed
+stacked-main member counts below. These denominators are all class-tagged ledger
+members, including non-buildable rows, not the buildable-only coverage denominator.
+Counts are review evidence, not an instruction to collapse those weapons blindly.
+
+| Class | Members with stacked mains / tagged members | Decision |
+|---|---:|---|
+| anti_air_vehicle | 13 / 14 | Hold: unresolved weapon structure |
+| archer | 2 / 4 | Hold: unresolved weapon structure |
+| artillery | 22 / 35 | Hold: unresolved weapon structure |
+| artillery_tank | 7 / 14 | Hold: unresolved weapon structure |
+| closecombat | 3 / 5 | Hold: unresolved weapon structure |
+| commando | 15 / 30 | Hold: unresolved weapon structure |
+| dreadnought | 4 / 5 | Hold: unresolved weapon structure |
+| epic_vehicle | 16 / 24 | Hold: unresolved weapon structure |
+| fire_support | 13 / 31 | Hold: unresolved weapon structure |
+| flying_infantry | 6 / 11 | Hold: unresolved weapon structure; speed input unavailable |
+| grenadier | 6 / 7 | Hold: unresolved weapon structure |
+| heavy_infantry | 25 / 41 | Hold: unresolved weapon structure |
+| heavy_sniper | 3 / 3 | Hold: unresolved weapon structure; only two scored members |
+| high_tech_tank | 20 / 26 | Hold: unresolved weapon structure |
+| light_tank | 9 / 16 | Hold: unresolved weapon structure |
+| line_breaker | 15 / 33 | Hold: unresolved weapon structure; fitted/spec cost differs |
+| mbt | 26 / 51 | Hold: unresolved weapon structure; actor restat deferred |
+| melee | 8 / 49 | Hold: unresolved weapon structure |
+| missile_vehicle | 10 / 14 | Hold: unresolved weapon structure |
+| mortar | 4 / 5 | Hold: unresolved weapon structure |
+| pure_sniper | 3 / 16 | Hold: unresolved weapon structure |
+| rocket_trooper | 15 / 45 | Hold: unresolved weapon structure |
+| scout | 12 / 33 | Hold: unresolved weapon structure |
+| scout_vehicle | 43 / 52 | Hold: unresolved weapon structure |
+| special_forces | 13 / 16 | Hold: unresolved weapon structure |
+| support | 32 / 115 | Hold: unresolved structure; no fit, ability-pricing review needed |
+| tank_destroyer | 4 / 5 | Hold: unresolved weapon structure |
+
+This records a reason for each refusal, not 27 rejected anchor identities. The
+diagnostic HP percentiles and price residuals do not authorize replacing anchors.
+Twenty-five classes lack a fitted or target cost baseline in the current report;
+23 anchor actors are off their recorded specs. No `fit_class --anchor` write-back
+or `signed_off` mutation was performed to conceal those prerequisites.
+
+### Brief delivery status
+
+| Task | Result in this bounded run |
+|---|---|
+| A: foundation | Formula/round-trip verified; audit defects recorded; unsafe writer repaired and real nonzero throwaway apply verified |
+| B: coverage | Ruled Heavy Sniper metadata and three engineer roles repaired; all anchors are members; broader taxonomy remains open |
+| C: anchor sign-off | All 27 explicitly held with measured reasons above; no unsupported approval |
+| D: faction pricing | Not applied: no signed class; writer implementation is now exercised, not merely a no-op dry run |
+| E: physical states | Existing implementation and 22 regressions verified; stale gap claim reconciled, no duplicate pricing path |
+| F: weapon shape | One behaviour-equivalent source-key repair; broad role/profile conversions not attempted |
+| G: reference synthesis | Not completed; no new per-class reference targets or corpus-grounded anchor percentiles claimed |
+| H: AI integration | Graph adaptation, record-only telemetry, scoped module contracts and five research briefs delivered for review; external answers and later decision phases pending |
+
+## Final runtime follow-up
+
+A three-minute scripted match completed with 24 real kills and a final human
+value trade of +600 (1,500 destroyed, 900 lost). Its valid replay was inspected
+through Computer Use at 1024x768: the graph showed +300, then -600, then +600,
+with flat segments and both sides of the zero line visible. The original selector
+label clipped; it was shortened to `Combat Value (graph)`. Its fresh menu gate
+passed with no new exceptions. The replay produced no additional match record.
+
+An earlier interrupted long fixture left an unreadable replay and is NOT a pass.
+A subsequent full long fixture completed normally after 21 simulated minutes:
+31,501 ticks at 40 ms, all 80 real kills, human Won with 5,000 value destroyed and
+3,000 lost; opponent Lost with the reciprocal accounting. Exactly one completed
+record was written, no new exceptions, 1,300.7 seconds wall time, 63.1% PC peak.
+It generated a complete 411,828-byte replay for the final scrolling inspection.
+The rebuilt replay shows the shortened selector label fully within its button and
+the long match's -2,000 segment correctly below zero at 1024x768.
+
+The final provenance-comment correction does not change graph logic. Following
+the build skill, both pin preflights passed before a fresh build: zero errors,
+eight existing engine warnings, 46.5 seconds, 966.0 MB process tree, 44.2% PC peak.
+All 76 C# tests then passed again with zero skips. The runtime Cameo DLL timestamp
+advanced and its unique telemetry description was verified by UTF-8 byte scan.
+
+Final automated report provenance: canonical refresh through source checkpoint
+`a6db521f1`; later source edits are explanatory comments/docstrings only, with
+writer's 35 focused tests and all 76 C# tests rerun. Reports are not CI approval.
+The recent-changes report retains 32 review-only attribution findings, including
+truthful Codex trailers under Blackrobe's author identity; zero R3 findings block.
+No attribution was changed to pretend another agent authored this work.

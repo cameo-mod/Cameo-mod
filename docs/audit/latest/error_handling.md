@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **400**
+Files scanned: **407**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 88 | 30 |
+| E2 | handler discards the error | 86 | 30 |
 | E3 | open() without encoding= | 92 | 90 |
-| E4 | subprocess call without check= | 20 | 9 |
+| E4 | subprocess call without check= | 18 | 9 |
 
 
 ## E1 — 2 finding(s)
@@ -18,7 +18,7 @@ Files scanned: **400**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 88 finding(s)
+## E2 — 86 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -51,20 +51,18 @@ Files scanned: **400**
 | tools/audit/audit_weapon_suffixes.py | 350 | handler body discards the error |
 | tools/audit/audit_weapon_uniqueness.py | 99 | handler body discards the error |
 | tools/audit/gen_damage_matrix.py | 52 | handler body discards the error |
-| tools/audit/miniyaml.py | 203 | handler body discards the error |
+| tools/audit/miniyaml.py | 210 | handler body discards the error |
 | tools/audit/phase_b_survey.py | 40 | handler body discards the error |
 | tools/audit/review_batch_diff.py | 80 | handler body discards the error |
 | tools/audit/review_resolve_diff.py | 62 | handler body discards the error |
 | tools/audit_ce_image_usage.py | 29 | handler body discards the error |
 | tools/audit_createeffect_image.py | 19 | handler body discards the error |
-| tools/balance/anchor_readiness.py | 136 | handler body discards the error |
-| tools/balance/anchor_readiness.py | 324 | handler body discards the error |
-| tools/balance/anchor_readiness.py | 396 | handler body discards the error |
+| tools/balance/anchor_readiness.py | 424 | handler body discards the error |
 | tools/balance/armor_exposure.py | 105 | handler body discards the error |
 | tools/balance/armor_exposure.py | 141 | handler body discards the error |
 | tools/balance/assign_references.py | 72 | handler body discards the error |
 | tools/balance/assign_references.py | 249 | handler body discards the error |
-| tools/balance/class_membership.py | 224 | handler body discards the error |
+| tools/balance/class_membership.py | 225 | handler body discards the error |
 | tools/balance/compensate_retrofit.py | 113 | handler body discards the error |
 | tools/balance/compensate_retrofit.py | 121 | handler body discards the error |
 | tools/balance/consolidate_adjacent_family_stacks.py | 65 | handler body discards the error |
@@ -74,8 +72,8 @@ Files scanned: **400**
 | tools/balance/consolidate_same_family_stacks.py | 136 | handler body discards the error |
 | tools/balance/design_invented_profiles.py | 172 | handler body discards the error |
 | tools/balance/design_invented_profiles.py | 186 | handler body discards the error |
-| tools/balance/extract_stats.py | 239 | handler body discards the error |
-| tools/balance/extract_stats.py | 1042 | handler body discards the error |
+| tools/balance/extract_stats.py | 244 | handler body discards the error |
+| tools/balance/extract_stats.py | 1047 | handler body discards the error |
 | tools/balance/formula.py | 543 | handler body discards the error |
 | tools/balance/gen_derived_stats.py | 95 | handler body discards the error |
 | tools/balance/measure_retrofit_gap.py | 134 | handler body discards the error |
@@ -210,7 +208,7 @@ Files scanned: **400**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 20 finding(s)
+## E4 — 18 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -220,8 +218,6 @@ Files scanned: **400**
 | tools/audit/run_all.py | 114 | `subprocess.run()` without check= |
 | tools/audit/run_all.py | 138 | `subprocess.run()` without check= |
 | tools/audit/run_all.py | 164 | `subprocess.run()` without check= |
-| tools/balance/apply_balance.py | 271 | `subprocess.run()` without check= |
-| tools/balance/apply_balance.py | 273 | `subprocess.run()` without check= |
 | tools/balance/check_determinism.py | 94 | `subprocess.run()` without check= |
 | tools/balance/compensate_retrofit.py | 170 | `subprocess.run()` without check= |
 | tools/balance/gen_derived_stats.py | 60 | `subprocess.run()` without check= |
@@ -238,7 +234,7 @@ Files scanned: **400**
 
 ## FAIL
 
-- E2: 88 > baseline 30
+- E2: 86 > baseline 30
 - E3: 92 > baseline 90
-- E4: 20 > baseline 9
+- E4: 18 > baseline 9
 

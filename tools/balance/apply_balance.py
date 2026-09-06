@@ -17,7 +17,9 @@ Changed stats whose src is "inherited" REFUSE the entire plan (editing a
 template affects the whole class — that is Phase 5 knob territory).
 Confirmation stages fresh extraction away from proposal ledgers, verifies all
 raw roster requests, and publishes only changed derived artifacts after checked
-validation. Failures roll back transaction-owned bytes, not concurrent edits.
+validation. Failures use optimistic byte checks to preserve detected external
+edits during rollback. Exclusive file ownership is required; this is not an OS
+lock or atomic compare-and-swap against simultaneous writers.
 
 Usage:
     python tools/balance/apply_balance.py [--faction tkm]           # dry run
