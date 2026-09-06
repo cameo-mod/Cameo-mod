@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
 """PreToolUse Bash guard for Cameo-mod. Reads the hook JSON on stdin and enforces
-two hard rules deterministically (so they don't depend on the model remembering):
+four hard rules deterministically (so they don't depend on the model remembering):
 
   1. SCOPED ADDS ONLY — block `git add -A` / `--all` / `.` (the maintainer + Devin
      have live uncommitted WIP; a wide add captures or clobbers it).
-  2. BOOT-GATE BEFORE COMMITTING ENGINE CONTENT — block `git commit` when a staged
+  2. NEVER HAND-PARSE `Versus:` — a line-scanner cannot see where the block ends.
+  3. BOOT-GATE BEFORE COMMITTING ENGINE CONTENT — block `git commit` when a staged
      file under mods/ , OpenRA.Mods.Cameo/ , or engine/ is newer than the last
      successful boot (perf.log ending in MenuPostProcessEffect.PostWorldLoaded).
      Docs/tools-only commits are exempt (no engine content parsed at boot).
+  4. DELETING A REMOVAL NODE NEEDS EVIDENCE — `-Key@X:` in a child CANCELS what an
+     ANCESTOR defines, so it looks dead while being load-bearing. Requires
+     RESOLVE-VERIFIED in the commit message. A boot gate cannot see this class:
+     it shipped once already (the mutalisk bounced forever).
+
+⚠ Rules 3 and 4 resolve the repo from the COMMAND's cwd, not from this file, so they
+work in every `git worktree`. See tools/hooks/test_bash_guard.py.
 
 Emits a PreToolUse permissionDecision. No output = allow.
 """
@@ -114,6 +122,56 @@ def main():
                 capture_output=True, text=True, timeout=15).stdout.split()
         except Exception:
             return  # git unavailable -> don't block
+        # (4) DELETING A REMOVAL NODE IS A BEHAVIOUR CHANGE, NOT A CLEANUP.
+        #     `-Warhead@X:` in a child CANCELS something an ANCESTOR defines. It looks
+        #     dead because the node it sits in does not define X — that is the whole
+        #     point of it. d818aec40 deleted 2248 of them as "stale" and resurrected
+        #     every cancelled warhead: 461 -> 1103 weapons with more than one main
+        #     warhead, and 14 deleted `-Warhead@shrapnel:` terminators turned the
+        #     mutalisk's 3-bounce spore into an infinite loop. NOTHING CRASHED, so the
+        #     boot gate passed and it shipped.
+        #     This does not forbid the edit — it demands the evidence.
+        removed_nodes = []
+        try:
+            diff = subprocess.run(
+                ["git", "-C", str(root), "diff", "--cached", "-U0", "--", "*.yaml"],
+                capture_output=True, text=True, timeout=30).stdout
+            removed_nodes = re.findall(r"^-\s*-([A-Za-z]\w*)@", diff, re.M)
+        except Exception:
+            pass
+        if removed_nodes:
+            msg = ""
+            m_m = re.search(r"-m\s+(\"[^\"]*\"|'[^']*')", cmd)
+            if m_m:
+                msg = m_m.group(1)
+            m_f = re.search(r"-F\s+(\S+)", cmd)
+            if m_f:
+                try:
+                    fp = pathlib.Path(m_f.group(1).strip("\"'"))
+                    if not fp.is_absolute():
+                        fp = root / fp
+                    msg = fp.read_text(encoding="utf-8", errors="replace")
+                except Exception:
+                    pass
+            if "RESOLVE-VERIFIED" not in msg:
+                kinds = ", ".join(sorted(set(removed_nodes))[:5])
+                deny(
+                    f"This commit deletes {len(removed_nodes)} removal node(s) "
+                    f"(-{kinds}@...) from yaml. A `-Key@X:` in a child CANCELS "
+                    "something an ANCESTOR defines - it looks dead precisely because "
+                    "the node it sits in does not define X. Deleting 2248 of them on "
+                    "2026-09-06 resurrected every cancelled warhead (461 -> 1103 "
+                    "multi-main weapons) and turned the mutalisk's 3-bounce spore into "
+                    "an infinite loop. Nothing crashed, so the boot gate passed and it "
+                    "shipped. "
+                    "Before committing: for EACH deleted node, resolve the parent chain "
+                    "and keep it unless NO ancestor defines that key. Then run "
+                    "`python tools/audit/review_resolve_diff.py` (before/after resolve), "
+                    "`python tools/audit/audit_shrapnel_chains.py` (S1a must stay 0) and "
+                    "`python tools/audit/audit_weapon_shape.py` (W5 must not rise), and "
+                    "put RESOLVE-VERIFIED in the commit message with what you checked. "
+                    "A boot gate cannot see this class of bug.")
+
         engine_prefixes = ("mods/", "OpenRA.Mods.Cameo/", "engine/")
         eng = [f for f in staged if f.startswith(engine_prefixes)]
 
