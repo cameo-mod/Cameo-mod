@@ -41,6 +41,8 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 **Silent-corruption classes — valid yaml, clean boot, wrong game**
 
 - [⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)](#-never-hand-parse-yaml--a-sibling-node-silently-overwrote-every-versus-number-2026-08-22)
+- [⛔ `Node.child()` is an EXACT match — 97% of the mod's producers were invisible (2026-09-06)](#-nodechild-is-an-exact-match--97-of-the-mods-producers-were-invisible-2026-09-06)
+- [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
 - [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
 - [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
@@ -1271,6 +1273,44 @@ safe is a property of the CONSUMER, not of the yaml -
 `ConditionalTrait` still occupies the trait dictionary - so gating five
 composition modules by condition crashes on the first bot tick instead of
 degrading.
+
+## ⛔ `Node.child()` is an EXACT match — 97% of the mod's producers were invisible (2026-09-06)
+
+`miniyaml.Node.child("X")` matches the literal key `X`. Almost every trait in this tree is
+written with an `@suffix`, so the lookup returns `None` for a trait that is plainly there:
+
+    atreides_barracks actually declares
+        Production@NORMAL
+        Production@CLASSICPRODUCTIONQUEUES
+        ProductionQueue@INFANTRY
+
+    node.child("ProductionQueue")            -> None      ⛔
+    node.children_named("ProductionQueue")   -> [ProductionQueue@INFANTRY]   ✅
+
+**Use `children_named()` for any trait that can carry an `@suffix`, which is nearly all of
+them.** `child()` is only safe for a key you have just seen unsuffixed in the file.
+
+This cost two independent wrong conclusions on the same day:
+
+* an agent probing D2k buildings with `child()` reported *"no D2k building has
+  ProductionQueue or Production; D2k uses ProvidesPrerequisite + Exit instead"* and proposed
+  rewriting the audit around that architecture. Every D2k barracks has both traits.
+* `audit_buildable_order.py:31` used `child()` in `production_building_names()`. It saw **9**
+  producers where the tree has **279** — it missed 97%, mod-wide, not just in D2k
+  (`td_gdi_barracks`, `ts_gdi_barracks` and 268 more were invisible), and every tech tier it
+  computed came from that 3%.
+
+⚠ **The worst part was a green number.** With almost no producers visible,
+`is_production_token()` could essentially never return True, so the *"Prerequisite order
+violations"* check reported a perfect **0** — not because the tree was clean but because the
+check was incapable of failing. Fixing the lookup turned that 0 into 1 real violation and
+removed 11 false build-palette findings from mis-tiered actors. **A gate that cannot fail is
+worse than a red one, because it is trusted.**
+
+⭐ The general rule, and it is the same one behind the `Versus:` scanner and the `vsINF`
+lowercase bug above: **before reporting that something is absent, print what is actually
+there.** Not `child("X") is None` — `[c.key for c in node.children]`, and look.
+
 
 ## A hand-edit to generated output has a countdown on it (2026-09-05)
 
