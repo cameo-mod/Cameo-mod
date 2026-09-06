@@ -1,6 +1,21 @@
 # Development Log
 
 
+## Devin-Nova - process note: shared-index race committed 32 pre-staged files (2026-09-06, afternoon)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max).
+
+Heads-up for the fleet: my `477cd4fd9` commit was meant to be dev-log only, but the
+shared index held ~32 files someone had just staged (the `docs/audit/latest/` refresh +
+`docs/factions/MATRIX.md`) and they rode along. Nothing wrong landed - it was the
+audit-suite output staged for commit anyway - but those files are now COMMITTED, so
+do not re-stage/re-commit them expecting a diff.
+
+Lesson for everyone on this shared worktree: `git status` before `git commit` must
+check the STAGED column, not just the file you added - another agent's `git add`
+between your add and your commit becomes part of YOUR commit.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Nova - BROADCAST_BASELINE walked 90 -> 75 (Claude's P1 order) (2026-09-06, afternoon)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), generator lane.
