@@ -1,4 +1,4 @@
-atreides_mobileconstructionvehicle:
+﻿atreides_mobileconstructionvehicle:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
@@ -7,6 +7,7 @@ atreides_mobileconstructionvehicle:
 	Buildable:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport
+		BuildPaletteOrder: 90
 		Prerequisites: ~atreides_vehicle_production, atreides_mcv_production
 		Description: Deploys into a Construction Yard.\n  Unarmed
 		IconPalette: d2kunit
@@ -116,7 +117,7 @@ atreides_sonictank:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~heavy.atreides_combat, research_centre, ~atreides_promotion_sonictank
-		BuildPaletteOrder: 80
+		BuildPaletteOrder: 130
 		Description: Fires devastating sonic waves.\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks, Artillery
 		IconPalette: d2kunit
 	Valued:
@@ -225,7 +226,7 @@ atreides_siegetank:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~atreides_vehicle_production, upgrade_heavy.atreides
-		BuildPaletteOrder: 110
+		BuildPaletteOrder: 100
 		Description: Siege Artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit
 	Valued:
@@ -333,7 +334,7 @@ atreides_apc:
 	Buildable:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport
-		BuildPaletteOrder: 45
+		BuildPaletteOrder: 70
 		Prerequisites: ~atreides_vehicle_production, ~heavy.atreides_combat
 		Description: Armored personnel carrier.\n  Strong vs Infantry\n  Can transport infantry
 		IconPalette: d2kunit
@@ -385,7 +386,7 @@ atreides_repairtank:
 	Buildable:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport
-		BuildPaletteOrder: 55
+		BuildPaletteOrder: 80
 		Prerequisites: ~atreides_vehicle_production, ~heavy.atreides_combat
 		Description: Repairs friendly vehicles.\n  Support
 		IconPalette: d2kunit
@@ -431,7 +432,7 @@ atreides_minotaurus:
 	Buildable:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport
-		BuildPaletteOrder: 65
+		BuildPaletteOrder: 120
 		Prerequisites: ~atreides_vehicle_production, ~heavy.missile_tank, research_centre, ~atreides_promotion_minotaurus
 		Description: Heavy artillery.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry
 		IconPalette: d2kunit
@@ -476,7 +477,7 @@ atreides_mongoose:
 	Buildable:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport
-		BuildPaletteOrder: 57
+		BuildPaletteOrder: 110
 		Prerequisites: ~atreides_vehicle_production, ~heavy.missile_tank, research_centre, ~atreides_promotion_mongoose
 		Description: Turreted missile vehicle.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 		IconPalette: d2kunit
