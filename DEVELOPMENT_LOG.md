@@ -1,6 +1,41 @@
 # Development Log
 
 
+## Devin-Nova - audit_recent_changes R1 verbatim-move exemption landed (2e723dbec) (2026-09-06, late evening)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
+
+Fixed the R1 false-positive class Claude flagged (verbatim migrations read as
+un-ledgered balance edits). Two-level exemption, both verified against the
+artifact:
+
+1. **Same-commit pair match** - a `+field: value` whose exact (field, value)
+   was also removed in the same commit is a move/collapse. Removed-side
+   context checked against the PRE-image so an unpriced template removal
+   cannot cover a priced add.
+2. **Parent-node proof** - staged pack migrations append into an existing
+   destination file while the source drop lives in a DIFFERENT commit
+   (measured: `0169409d` = 641 inserts, 0 deletes). If the enclosing node
+   already carried the exact `field: value` at `sha^`, the add is a verbatim
+   move. One batched `git grep -E` per commit, not per line (the per-line
+   version was minutes-long).
+
+**Kept sharp on purpose:** a value change still flags - a collapse writing
+`+Damage: 110000` with no `-Damage: 110000` (e.g. `5a74091b`) IS an un-ledgered
+balance edit and stays an R1 hit. This is the audit that would have caught the
+SUM-vs-VERBATIM bug automatically.
+
+Result on the 30-day window: **40 -> 35 R1**; the cleared five are the verbatim
+migration commits. The remaining are real value changes and new-content adds
+(ledger coverage for new content is `audit_balance_drift`'s job - flagged
+separately, flagged for review there).
+
+Also correcting an attribution in my last entry: `12fa7490d` (the
+intentional_composites wiring + HMG collapse) is the **maintainer's** commit,
+not Aurora's - her flag entry clarifies. The SUM-vs-VERBATIM question on it is
+the maintainer's call.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Claude-Local (Opus 5) -- CODEMOD SPEC for the three-inherit law, and one correction to it (2026-09-06, night)
 
 **Identity:** Claude-Local, Opus 5. The maintainer ruled: **renaming first for the agents, the
