@@ -54,6 +54,8 @@ tkmjuggap:
 	Range: 4792
 	Report: mgun11.aud
 	ValidTargets: Ground, Water
+	-Warhead@Bullet_Light:
+	-Warhead@Demolition_Light:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -71,6 +73,8 @@ tkmbunkmg:
 		Damage: 2000
 	Warhead@Bullet_Light:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -177,7 +181,7 @@ tkmakap:
 		PercentageScale: 3333
 		Burst: 3
 		Damage: 6000
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
 tkmkord:
@@ -250,7 +254,7 @@ ThermoF:
 		Image: tsflameall
 		Inaccuracy: 680
 		Palette: tseffect
-	Warhead@Flame_Medium: AreaDamage
+	Warhead@Flame_Medium:
 		Damage: 2000
 tkmm203:
 	Inherits: ^Warhead_Demolition_Light
@@ -268,7 +272,7 @@ tkmm203:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Flame_Light:
 		Damage: 4000
@@ -342,6 +346,8 @@ TKMQuadCannonAG:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -367,8 +373,10 @@ tkmturretcannon:
 		Speed: 850
 	Warhead@CannonAP_Light:
 		Damage: 8000
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Medium:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -385,7 +393,7 @@ tkmltgun:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 524
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 tkm2a46gun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -397,7 +405,7 @@ tkm2a46gun:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 524
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 TKMZazaCannonAG:
 	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
@@ -424,6 +432,8 @@ TKMZazaCannonAG:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -452,6 +462,8 @@ TKMAATurretCannon:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
+	-Warhead@Flak_Medium:
+	-Warhead@MissileHE_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 4000
@@ -540,6 +552,8 @@ t30shell:
 	# 	Amount: 4
 	# 	AimChance: 0
 	# 	AimTargetStances: Enemy, Neutral
+	-Warhead@Demolition_Heavy:
+	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -565,7 +579,7 @@ HueyCryoMissiles:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 15
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Concussion_Medium:
@@ -585,6 +599,9 @@ HueyCryoMissiles:
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
 	Warhead@Cryo_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -602,7 +619,7 @@ HueyTwinMissiles:
 	Range: 5528
 	MinRange: 1105
 	Report: missile6.aud
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Concussion_Medium:
@@ -616,6 +633,9 @@ HueyTwinMissiles:
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -643,8 +663,10 @@ sandmarinemortar:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 120000
-	Warhead@Flame_Medium: AreaDamage
+	Warhead@Flame_Medium:
 		Damage: 120000
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Medium:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 240000
@@ -674,8 +696,10 @@ bigshieemortar:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 80000
-	Warhead@Flame_Medium: AreaDamage
+	Warhead@Flame_Medium:
 		Damage: 80000
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Medium:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 160000
@@ -788,6 +812,8 @@ tkmkatyushalalauncherrocketstwin:
 SandmarineTusk:
 	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
 	Inherits: ^SandmarineTuskLegacy
+	-Warhead@Concussion_Medium:
+	-Warhead@MissileHE_Heavy:
 	Warhead@MissileHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -810,6 +836,8 @@ BigShieeTusk:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 40000
+	-Warhead@Concussion_Medium:
+	-Warhead@MissileHE_Heavy:
 	Warhead@MissileHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -852,10 +880,12 @@ SandmarineTuskTwin:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
 		Damage: 4000
+	-Warhead@FlakWeapon:
 SandmarineTuskCryo:
 	Inherits@finalmain: ^Compatibility_MissileCryo_HeavyFlat
 	Inherits: SandmarineTusk
 	Inherits@2: ^CryoMissileProjectile
+	-Warhead@MissileHE_HeavyFlatCompatibility:
 	Warhead@MissileCryo_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -877,6 +907,8 @@ SandmarineTuskFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	-Warhead@MissileHE_Heavy:
+	-Warhead@Concussion_Medium:
 	Warhead@MissileHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -914,6 +946,8 @@ SandmarineTuskFire:
 ViperMissiles:
 	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^ViperMissilesLegacy
+	-Warhead@Concussion_Medium:
+	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
@@ -987,6 +1021,7 @@ VonSniper:
 		Speed: 2500
 		Width: 100
 		Inaccuracy: 0
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
@@ -997,16 +1032,19 @@ VonSniper:
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
@@ -1018,6 +1056,8 @@ VonSniper:
 	Warhead@SniperChaingun:
 		Damage: 18000
 		PercentageScale: 0
+	-Warhead@SniperFlak:
+	-Warhead@SniperMediumMissile:
 VonSniperAP:
 	Inherits: VonSniper
 	ReloadDelay: 50
@@ -1059,6 +1099,9 @@ VonSniperAP:
 	Warhead@SniperChaingun:
 		Damage: 38000
 		PercentageScale: 0
+	-Warhead@SniperFlak:
+	-Warhead@SniperMediumMissile:
+	-Warhead@Bullet_Light:
 VonSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
@@ -1136,6 +1179,7 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@SniperMediumMissile:
 
 tkmm16ap:
 	Inherits: ^RA2Chaingun
@@ -1162,10 +1206,11 @@ tkm_trooper_gp25:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 12000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
+	-Warhead@Flame_Light:
 tkmstrykerfirerockets:
 	Inherits: ^Warhead_MissileAP_Medium
 	Inherits@2: ^Warhead_Flame_Medium
@@ -1181,7 +1226,7 @@ tkmstrykerfirerockets:
 	Warhead@MissileAP_Medium:
 		Damage: 24000
 		ValidTargets: Ground, Water, Trees, Air
-	Warhead@Flame_Medium: AreaDamage
+	Warhead@Flame_Medium:
 		Damage: 6000
 		ValidTargets: Ground, Water, Air
 VanSniper:
@@ -1216,7 +1261,7 @@ tkmt72cannon:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 546
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 5000
 		Damage: 20000
 tkmabramscannon:
@@ -1231,7 +1276,7 @@ tkmabramscannon:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 546
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 5000
 		Damage: 20000
 tkmquadcannonmg:
@@ -1254,6 +1299,8 @@ tkmquadcannonmg:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1294,6 +1341,10 @@ HeavyAATankCannontkm:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Air, Air
 		Damage: 1
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
 	Warhead@Flak_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1323,6 +1374,10 @@ tkmheavyaaturret:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	-Warhead@LightMissile:
+	-Warhead@FlakWeapon:
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1338,7 +1393,7 @@ tkmrh120gun:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 524
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 12000
 tkmtrenchcannon:
 	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
@@ -1356,6 +1411,8 @@ tkmtrenchcannon:
 		Damage: 20000
 	Warhead@CannonHE_Heavy:
 		Damage: 20000
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 40000
@@ -1420,3 +1477,4 @@ FlakbusAA:
 		ValidTargets: Air
 		Damage: 32000
 		PercentageScale: 9997
+	-Warhead@MissileHE_Medium:

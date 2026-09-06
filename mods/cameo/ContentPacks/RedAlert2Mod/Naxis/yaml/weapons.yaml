@@ -26,6 +26,9 @@ NaxBrummbarArty:
 		Damage: 14000
 	Warhead@Concussion_Medium:
 		Damage: 14000
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Heavy:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 42000
@@ -64,6 +67,8 @@ NaxiWW2KübelwagenMachinegun:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -91,6 +96,8 @@ NaxiWW2Machinegun:
 	Warhead@Bullet_Medium:
 		Damage: 8000
 		ValidTargets: Ground, Water
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -101,6 +108,7 @@ NaxiWW2Machinegun_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 8000
@@ -113,6 +121,7 @@ NaxiWW2MachinegunSmall:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -123,6 +132,7 @@ NaxiWW2MachinegunSmall_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 4000
@@ -139,6 +149,7 @@ NaxiWW2MachinegunTop_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 8000
@@ -276,17 +287,23 @@ LunarNaxiDroneLaser:
 	Projectile: LaserZap
 		Width: 25
 	TargetActorCenter: false
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Laser_Heavy:
 		Damage: 8000
 		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 LunarNaxiDroneMissile:
 	Inherits: ^HeavyMissile
@@ -325,6 +342,11 @@ LunarNaxiDroneMissile:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Light_WallExcludedExtraDamage:
 		Damage: 2000
+	-Warhead@HeavyMissile:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@FlakWeapon:
+	-Warhead@ArrowWeapon:
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -469,10 +491,17 @@ NaxiShrek:
 	Warhead@MissileAP_Medium:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 1665
+	-Warhead@MissileAP_Medium:
 NaxiShrek_elite:
 	Inherits: NaxiShrek
 	Report: bazook1.aud
@@ -561,10 +590,17 @@ NaxiShrekCons:
 	Warhead@MissileAP_Medium:
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 36000
 		PercentageScale: 1664
+	-Warhead@MissileAP_Medium:
 NaxiShrekCons_elite:
 	Inherits: NaxiShrekCons
 	Report: bazook1.aud
@@ -596,6 +632,7 @@ NaxiHetzerDestroyer:
 		Speed: 713
 	Warhead@CannonAP_Light:
 		Damage: 40000
+	-Warhead@CannonHE_Medium:
 NaxiHetzerDestroyer_elite:
 	Inherits: NaxiHetzerDestroyer
 	Inherits@Elite: ^RA2EliteEffects
@@ -623,6 +660,9 @@ NaxiJadgDestroyer:
 		Damage: 20000
 	Warhead@CannonAP_Light:
 		Damage: 20000
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 60000
@@ -656,6 +696,7 @@ NaxiAntiTankCannon:
 		Speed: 3333
 	Warhead@CannonAP_Light:
 		Damage: 28000
+	-Warhead@CannonHE_Medium:
 NaxiAntiTankCannon_elite:
 	Inherits: NaxiAntiTankCannon
 	Range: 8361
@@ -720,12 +761,19 @@ NaxMausCannon:
 		Damage: 10000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 5
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 60000
 		PercentageScale: 1665
+	-Warhead@CannonHE_Medium:
 NaxMausCannon_elite:
 	Inherits: NaxMausCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -769,12 +817,15 @@ NaxRatteCannon:
 		Damage: 50000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 25
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 50000
+	-Warhead@HeavyBomb:
+	-Warhead@LightChemicalWeapon:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 150000
 		PercentageScale: 3333
+	-Warhead@CannonHE_Medium:
 NaxRatteCannon_elite:
 	Inherits: NaxRatteCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -893,12 +944,16 @@ NaxQuadCannon:
 		-LaunchAngle:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+	-Warhead@HeavyMissile:
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
@@ -941,6 +996,8 @@ NaxQuadCannon_AA:
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
+	-Warhead@Flak_Medium:
+	-Warhead@NaxFlakGroundWater:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 7000
@@ -1057,6 +1114,9 @@ NaxPlanegun_elite:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Light:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -1085,6 +1145,8 @@ NaxPlaneRockets_elite:
 		TrailDelay: 1
 	Warhead@MissileAP_Heavy: AreaDamage
 		Damage: 10000
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -1098,6 +1160,9 @@ NaxInterceptorRockets:
 		ValidTargets: Air
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_HeavyFlatCompatibility:
 		ValidTargets: Air
 		Damage: 20000
@@ -1171,6 +1236,10 @@ NaxiInterceptorGun:
 			Spaceship: 10
 		UpdatesUnitStatistics: false
 
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
+	-Warhead@SmallArms:
+	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Spread: 1
@@ -1189,6 +1258,7 @@ NaxShoeRocket:
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2MediumMissile
 	Inherits@4: ^Effect_Terrorist_Explosion_RA2
+	-Warhead@Effect1:
 	Report: vaegatta.wav, vaegattb.wav
 	ReloadDelay: 250
 	Range: 12000
@@ -1299,6 +1369,9 @@ NaxShoeRocket:
 			None: 5
 		Falloff: 100, 50
 		Range: 0, 32
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 24000
@@ -1310,7 +1383,7 @@ NaxTigerCannon:
 	Projectile: Bullet
 		Speed: 500
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 NaxTigerCannon_elite:
 	Inherits: NaxTigerCannon
@@ -1326,7 +1399,7 @@ KingNaxTigerCannon:
 	Projectile: Bullet
 		Speed: 500
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 20000
 KingNaxTigerCannon_elite:
 	Inherits: KingNaxTigerCannon
@@ -1473,6 +1546,9 @@ NaxiMissileUboat:
 			None: 5
 		Falloff: 100, 50
 		Range: 0, 32
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
