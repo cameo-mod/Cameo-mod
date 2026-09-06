@@ -69,9 +69,9 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 # (An earlier throwaway scan said 602/237/30/72; its regex was looser. Always set
 #  a ratchet from the audit that enforces it, never from a scratch measurement.)
 W1_BASELINE = 583   # more than 3 inherits
-W2_BASELINE = 213   # dual ^Warhead_ inherit
-W3_BASELINE = 21    # dual ^Projectile_ inherit
-W4_BASELINE = 61    # dual ^Effect_ inherit
+W2_BASELINE = 211   # dual ^Warhead_ inherit (213->211: D2K_Rocket_Trooper AA+AGOnly collapsed by maintainer ffdec98b7)
+W3_BASELINE = 12    # dual ^Projectile_ inherit (21->12: same collapse)
+W4_BASELINE = 52    # dual ^Effect_ inherit (61->52: same collapse)
 W5_BASELINE = 401   # more than one resolved MAIN warhead
 W6_BASELINE = 694   # weapons declaring an effect warhead locally
                     # 687 -> 694: the TOP_LEVEL regex was fixed to match
