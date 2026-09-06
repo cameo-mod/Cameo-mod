@@ -19,8 +19,10 @@ tool or which agent produced it.  Every count is a LOWER-ONLY ratchet.
                          (Tooltip/Name `actor_dog.name` -> ra1_soviets_actordogname)
   N4 REDUNDANT_WORD      the faction is named twice, once as slug once as adjective
                          (ra1_allies_alliedaagun, japan_japanesebarracks)
-  N5 DOTTED_ID           an actor id with a dotted suffix that is NOT a sanctioned
-                         variant.  DESIGN line 71 sanctions `.husk` ONLY.
+  N5 DOTTED_FACTION      an actor id whose DOT SUFFIX names a faction, putting the
+                         faction where the grammar requires a variant.  DESIGN's dot
+                         rule (2026-09-06): a dot marks a VARIANT of the base actor
+                         (`camera.spysat`, `.husk`) and may NEVER carry a faction.
   N6 HYPHEN              DESIGN rule 9: underscore is the only separator.
 
 Usage: python tools/audit/audit_naming_damage.py [--list N1,N4] [--faction ra1_soviets]
@@ -46,12 +48,15 @@ N1_BASELINE = 25
 N2_BASELINE = 16
 N3_BASELINE = 5
 N4_BASELINE = 345
-N5_BASELINE = 161
+N5_BASELINE = 109
 N6_BASELINE = 1
 
-# DESIGN.md line 71: "Variants are structural suffixes ... plus dotted variants
-# (`.husk`)".  `.husk` is the ONLY dotted form the grammar sanctions.
-SANCTIONED_DOT = re.compile(r"^husk[a-z0-9]*$")
+# DESIGN.md "The dot rule" (maintainer ruling 2026-09-06): a dot marks a VARIANT of
+# the base actor named before it, and is LEGAL - `.husk`, `.spysat`, `.emp`,
+# `.infiltrated`, `.colorpicker`, `.rank_3`.  What is NOT legal is a dot carrying a
+# FACTION: `ptnk.asian` puts in the suffix what the grammar requires as the prefix.
+# So the test is not "which suffixes are sanctioned" but "does this suffix name a
+# faction" - DOT_FACTION below is the whole of it.
 
 # faction slug -> the human adjective(s) that must not be repeated after it
 REDUNDANT_WORD = {
@@ -118,9 +123,9 @@ def main():
         if FLUENT_LEAK.search(la):
             hits["N3"].append((fac or "?", a))
         if "." in la:
-            suffix = la.rsplit(".", 1)[1]
-            if not SANCTIONED_DOT.match(suffix):
-                hits["N5"].append((fac or DOT_FACTION.get(suffix) or "?", a))
+            owner = DOT_FACTION.get(la.rsplit(".", 1)[1])
+            if owner:            # the dot carries a FACTION - renaming debt
+                hits["N5"].append((fac or owner, a))
         if fac:
             rest = la[len(fac) + 1:]
             if rest.startswith(REDUNDANT_WORD[fac]):
@@ -149,7 +154,7 @@ def main():
               "N2": "CROSS_FACTION (file carries two factions' ids)",
               "N3": "FLUENT_LEAK (a fluent key became an id)",
               "N4": "REDUNDANT_WORD (faction named twice)",
-              "N5": "DOTTED_ID (dotted suffix, .husk excepted)",
+              "N5": "DOTTED_FACTION (dot carries a faction, not a variant)",
               "N6": "HYPHEN (DESIGN rule 9)"}
     base = {"N1": N1_BASELINE, "N2": N2_BASELINE, "N3": N3_BASELINE,
             "N4": N4_BASELINE, "N5": N5_BASELINE, "N6": N6_BASELINE}
