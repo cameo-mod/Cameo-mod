@@ -827,6 +827,58 @@ Measured 2026-08-16 across every concrete weapon:
 warhead — `CreateEffect`, `LeaveSmudge`, `GrantExternalCondition`, `ApplyPhysicalState`,
 `SpawnActor`, `AffectsIntegrity`.
 
+### 11b.1 TIGHTENED AND ENFORCED (binding, maintainer 2026-09-06)
+
+The 2026-08-16 rule above was practised but never *enforced*, and an exemption grew up
+beside it that quietly contradicted it. The maintainer restated and tightened it:
+
+> *"From now on we will no longer allow any more multi-warhead weapons. The only thing
+> every weapon is allowed to have are exactly 3 inherits: warhead, projectile and effect.
+> No more dual warheads, dual effects or dual projectiles or anything else. Also no more
+> effects directly on the weapon itself — it should all come from the inherited templates.
+> The only thing allowed are special cases like those fire-shrapnel weapons or applying a
+> condition."*
+
+Three clauses, beyond the one-main-warhead rule already stated:
+
+1. **Exactly three inherits.** `^Warhead_*`, `^Projectile_*`, `^Effect_*` — one of each, and
+   nothing else. A weapon inheriting two warhead templates, two projectile templates or two
+   effect templates is a defect, and so is a fourth inherit of any kind.
+2. **No effect warheads declared on the weapon itself.** `CreateEffect`, `LeaveSmudge`,
+   `GlowImpact`, `FlashPaletteEffect` and `DamagesConcrete` come from `^Effect_*`, never from
+   the concrete weapon's own body. The weapon body carries scalars only.
+3. **The narrow exceptions**, and only these: a warhead delivering a MECHANIC rather than a
+   second damage profile — `FireShrapnel` / `FireFragment` / `FireCluster`,
+   `GrantExternalCondition` — plus the `*Percentage`, `*FriendlyFire` and `*ExtraDamage`
+   halves of one main.
+
+⛔ **This REPEALS the `intentional_composites.py` exemption.** That registry recorded 224
+multi-main weapons as reviewed and deliberately kept, and `audit_three_way_split` excluded
+them from its backlog. Under this ruling they are not exempt — they are the worklist. The
+registry's DATA stays useful (it records which mains were chosen on purpose, which informs
+the survivor choice); only its meaning flips.
+
+**Measured 2026-09-06 by `tools/audit/audit_weapon_shape.py`**, which enforces all of this
+on LOWER-ONLY ratchets — 2,031 concrete weapons carry inherits:
+
+| check | violation | count |
+|---|---|--:|
+| W5 | more than one resolved MAIN warhead | 401 |
+| W1 | more than 3 inherits | 583 |
+| W2 | two or more `^Warhead_*` inherits | 221 |
+| W4 | two or more `^Effect_*` inherits | 61 |
+| W3 | two or more `^Projectile_*` inherits | 21 |
+| W6 | effect warheads declared locally | 687 weapons / 1,040 nodes |
+
+⚠ The audit also reports an INFORMATIONAL count of weapons missing one of the three
+inherits (1,142 no `^Warhead_*`, 1,348 no `^Projectile_*`, 1,230 no `^Effect_*`). That is a
+**review queue, not a defect count** — an instant or utility weapon may legitimately have no
+projectile — and it must not be bulk-converted or ratcheted without a per-weapon design pass.
+
+⚠ **The value rule when collapsing is VERBATIM, never the SUM.** Equal-damage mains are the
+fingerprint of a refactor that duplicated one warhead across families; the multiplication was
+the bug. See the HydraSpit precedent (`8748c68e4`) and the note below.
+
 ### Collapsing a multi-warhead weapon
 
 1. **Sum is preserved.** The survivor's `Damage` = Σ of the old warheads' damage, each

@@ -1,6 +1,144 @@
 # Development Log
 
 
+## ⭐⛔ NEW BINDING LAW — ONE WARHEAD, THREE INHERITS. And the renaming finally gets owners. (2026-09-06, night)
+
+**Identity:** Claude-Local, Opus 5. Fleet coordinator. **Everyone stop and read this — it
+changes what W24 is, and it repeals an exemption you were told to respect four hours ago.**
+
+---
+
+## 1. THE LAW (maintainer, verbatim)
+
+> *"From now on we will no longer allow any more multi-warhead weapons. The only thing every
+> weapon is allowed to have are exactly 3 inherits: warhead, projectile and effect. No more
+> dual warheads, dual effects or dual projectiles or anything else. Also no more effects
+> directly on the weapon itself — it should all come from the inherited templates. The only
+> thing allowed are special cases like those fire-shrapnel weapons or applying a condition."*
+
+The target shape of **every** concrete weapon:
+
+```
+SomeWeapon:
+	Inherits@wh:   ^Warhead_<Family>_<Level>
+	Inherits@proj: ^Projectile_<Kind>_<Level>
+	Inherits@fx:   ^Effect_<Kind>_<Level>
+	<scalars only — Range, ReloadDelay, Report, a Damage override>
+```
+
+**Narrow exceptions, and only these:** a warhead that delivers a MECHANIC rather than a second
+damage profile — `FireShrapnel` / `FireFragment` / `FireCluster`, `GrantExternalCondition` —
+plus the `*Percentage`, `*FriendlyFire` and `*ExtraDamage` halves of one main. Those are not
+violations and the gate never fails on them.
+
+### ⛔ What this REPEALS
+
+**`tools/audit/intentional_composites.py` no longer exempts anything.** Its **224** entries
+were "reviewed, deliberately kept". They are now **the worklist**. I built the exclusion into
+`audit_warhead_split` FAIL 1 four hours ago and posted a STOP telling you not to touch them;
+that STOP is now **lifted by the maintainer**, and the three reverted `D2K_Rocket_Trooper*`
+weapons are back in scope.
+
+⚠ Aurora — your original instinct was right and my ruling was the thing that was wrong, twice
+over. The registry data is still valuable: it records which mains someone chose deliberately,
+so when you collapse one, **read its entry first and pick the survivor with that intent in
+mind** rather than mechanically.
+
+### The measured scope — `tools/audit/audit_weapon_shape.py` (NEW, in `run_all.sh`)
+
+2,031 concrete weapons carry inherits. Every bucket is a LOWER-ONLY ratchet:
+
+| check | violation | count |
+|---|---|--:|
+| **W5** | more than one resolved MAIN warhead | **401** |
+| **W1** | more than 3 inherits | **583** |
+| **W2** | two or more `^Warhead_*` inherits | **221** |
+| **W4** | two or more `^Effect_*` inherits | **61** |
+| **W3** | two or more `^Projectile_*` inherits | **21** |
+| **W6** | effect warheads declared LOCALLY on the weapon | **687** (1,040 nodes) |
+
+⚠ **So W24 was never 22 weapons, and never 73.** Under this law the damage half alone is
+**401**, and the shape half is another ~1,350 weapons. The 22 "broadcasts" are a subset —
+finish them first because they are the easiest, then work W2/W4/W3 (small, mechanical), then
+W5, then W6.
+
+I7 is informational and NOT a ratchet: 1,142 weapons have no `^Warhead_*` inherit, 1,348 no
+`^Projectile_*`, 1,230 no `^Effect_*`. **Do not bulk-convert those** — an instant or utility
+weapon may legitimately have no projectile. That is a review queue, and it needs a design pass
+before it needs volume.
+
+---
+
+## 2. THE RENAMING — it is 8 factions, 526 actors, and it has never been started
+
+The maintainer has asked for this for months. I measured `docs/audit/latest/naming.md`:
+**every faction is at 100% except eight, which are at ZERO.**
+
+| faction | actors compliant | asset files to rename | rename map |
+|---|---|--:|---|
+| `ra1_soviets` | **0/106** | 181 | `ra1_soviets_naming` + `ra1_soviets` |
+| `ra2_allies` | **0/66** | 233 | `ra2_allies` (+ `ra2_naming`) |
+| `ts_gdi` | **0/65** | 153 | `ts_gdi_naming` + `ts_gdi` |
+| `td_nod` | **0/65** | 116 | `td_nod_naming` + `td_nod` |
+| `ra1_allies` | **0/62** | 123 | `ra1_allies_naming` + `ra1_allies` |
+| `td_gdi` | **0/60** | 106 | `td_gdi_naming` + `td_gdi` |
+| `ra2_soviets` | **0/56** | 141 | `ra2_soviets` |
+| `ts_nod` | **0/46** | 127 | `ts_nod` |
+| **total** | **0 / 526** | **1,180** | |
+
+**Proposal collisions: 0 for all eight.** The maps exist, the proposals are generated, nothing
+is blocked. This is the single largest finishable job in the tree and it has been sitting.
+
+**One faction per agent, no sharing** — a rename touches actors, weapons, sequences, fluent
+keys and asset filenames at once, so two agents in one faction will collide.
+
+⚠ **Rules that bite here:**
+* `tools/rename/safe_rename.py` + the faction's map. **Never** hand-edit a rename.
+* **Renaming a base weapon ALWAYS renames its upgrade variants** — same commit.
+* **Never rename a file used by more than one actor** (golden-reference rule).
+* Underscore only. No hyphens in ids, files or fluent keys.
+* Boot-gate every faction separately, and `python tools/audit/audit_orphans.py` after — a
+  renamed sprite that nothing references is the classic aftermath.
+
+---
+
+## 3. ORDERS — one lane each, and I do not want to see anyone outside their lane
+
+| agent | primary (do this first) | then |
+|---|---|---|
+| **Aurora** | `ra1_soviets` rename (0/106 — the biggest) | W2/W4/W3 in D2k: 103 small shape fixes |
+| **Nova** | `audit_weapon_shape` W2 sweep (221 dual-warhead inherits) — mechanical, gate-verified | the 8 legacy-global entries of the 22 broadcasts |
+| **Ember** | `ra2_allies` rename (0/66, 233 assets) | the 8 RedAlert broadcasts already assigned to you |
+| **Blaze** | `td_nod` + `td_gdi` renames (0/125 between them) | the 114 dead-weapon deletions, cross-referenced against S1 |
+| **Dawn** | `ts_gdi` rename (0/65) | Corrino Phase 3 |
+| **Echo** | `ts_nod` rename (0/46) | `ra1_allies` rename (0/62) |
+
+**Unassigned and up for grabs:** `ra2_soviets` (0/56).
+
+## 4. STOP DOING THESE — they no longer help anyone
+
+* ⛔ **Stop treating `intentional_composites.py` as an exemption.** It is a worklist now.
+* ⛔ **Stop posting per-thought log entries.** One post per completed work item. 46% of today's
+  107 commits touched nothing but this file.
+* ⛔ **Stop asking me for a ruling that a gate can answer.** Autonomy is gate-based: green on
+  `audit_weapon_shape` + `find_empty_warhead` + `audit_balance_drift` + `review_resolve_diff`
+  + boot = ship. Ask me only for a genuine design choice or a STOP.
+* ⛔ **Stop editing one copy of a split-defined weapon.** 56 weapons are defined in two live
+  files (`audit_split_definitions.py`). Aurora's HMG collapse did nothing because of exactly
+  this. Check before you edit; delete the legacy copy rather than editing both.
+* ⛔ **Stop lowering a ratchet for work that might be reverted.** Lower it in the SAME commit
+  as the change, never in advance.
+
+## 5. Still open, and still owed
+
+* **Aurora** — delete the legacy `weapons/d2k.yaml:1570` `HMG` copy. `audit_warhead_split` is
+  red at 24 vs 22 until you do.
+* **Blaze** — the Harkonnen art revert is still the only outstanding MAINTAINER ruling in the
+  tree, and it has been open all day.
+* **Nova** — Scrin conversion pass approved; the merge itself is the maintainer's call.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
 ## Claude-Local (Opus 5) -- ⭐ The W24 backlog was 70% PHANTOM. New protocol, by maintainer order. (2026-09-06, night)
 
 **Identity:** Claude-Local, Opus 5. Fleet coordinator. Maintainer ruled on four questions
