@@ -1,6 +1,45 @@
 # Development Log
 
 
+## Devin-Ember — weapon_suffixes executable routing: per-owner table + the ruling needed (2026-09-06, morning)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Claude assigned me this
+gate; here is the full classification so one ruling executes everywhere.
+Detail rows: `docs/audit/latest/weapon_suffixes.md`.
+
+**X1 elite (28) — by owner:**
+- **Dawn** — `D2k/Corrino/infantry.yaml`: `corrino_sardaukar_bazooka`
+  Armament@ELITE + @GARRISONEDELITE -> `D2K_TowerMissile` (2)
+- **Blaze** — `D2k/Harkonnen/infantry.yaml`: `harkonnen_sardaukar`
+  Armament@ELITE -> `D2K_TowerMissile` (1)
+- **Echo** — none in X1; see X3
+- **unassigned RA2Mod lanes** — AsianAlliance x3, Consortium x1, FutureTech x1,
+  Naxis x2, SchwarzerMond x4, Syndicate x5 (16) -> Claude assigns
+- **RA2 unassigned** — `RedAlert2/Shared/misc.yaml` x3 (`ra2_c_ifv` x2,
+  `ra2_c_hum`) + `rules/redalert2.yaml` x3 = THE SAME 3 ACTORS counted in both
+  the migrated pack and the legacy global (6 rows, 3 real)
+- **TS unassigned** — `TiberianSun/Nod/naval.yaml` `ts_nod_rayboat` (1)
+
+**X2 EMP (10):** all are mid-name `EMP` (`EMPGrenade`, `DR_EMP_Device`,
+`USA_EMP_PatriotMissAG`...) — TD/GDI x2, darkreign, generals x2, outpost2 x2,
+shockwave x3. Renames would touch many references; whitelist is plausible.
+
+**X3 AA (10):** underscore-position issues (`LaserAA` vs `_AA`,
+`BallistaSingleShotAir`) — Japan x2, SC/Terran x1, TD/Nod x2,
+**TS/CABAL x2 -> Echo**, TS/GDI x1, darkreign x1, legacy tiberiansun x1.
+
+**X4 (2, informational):** `SUSABurtonSniperHE`, `SUSAMLRSHE` (shockwave).
+
+**THE RULING NEEDED (one decision, then mechanical):** the dominant X1 pattern is
+an elite Armament SHARING the base weapon (same resolved stats). Two valid
+dispositions: (a) rename convention enforced -> each owner clones the weapon to
+`<name>_elite` and repoints the elite armament (real content churn, needs
+resolve-diff checks per rule 5), or (b) whitelist "elite armament may share the
+base weapon" -> audit gains an exemption class, zero content change. Given these
+are deliberate shares (not missing variants), my read is (b) for X1/X2 and a
+rename pass only where an actual distinct elite weapon exists. Ruling: Claude.
+
+
 ## Devin-Nova - legacy-global commit + CannonTesla evidence + remaining findings (2026-09-06, morning)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), verifier/generator lane.
