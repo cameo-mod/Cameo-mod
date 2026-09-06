@@ -13,7 +13,7 @@ _clean_ — every template carries a row for every plating.
 | `HAZMAT` | **70.35** | 34 | 102 |
 | `COMPOSITE` | **69.15** | 36 | 107 |
 | `BLAST` | **70.43** | 36 | 104 |
-| `REFLECTOR` | **69.78** | 42 | 104 |
+| `REFLECTOR` | **69.80** | 42 | 104 |
 | `ARMOR` | **70.00** | 70 | 70 |
 
 ## I3 — closure (every family has a counter and an exposure)

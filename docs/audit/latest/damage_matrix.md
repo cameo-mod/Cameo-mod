@@ -15,7 +15,7 @@ ARMOR, Bomber, COMPOSITE, Concrete, Fighter, Flak, HAZMAT, Heavy, Helicopter, He
 | ARMOR | 2827 | 70% | 70 | 70 |
 | BLAST | 2827 | 69% | 36 | 104 |
 | Bomber | 5542 | 45% | 1 | 196 |
-| COMPOSITE | 2827 | 69% | 36 | 107 |
+| COMPOSITE | 2827 | 69% | 35 | 107 |
 | Concrete | 5788 | 55% | 0 | 200 |
 | Fighter | 5542 | 45% | 1 | 200 |
 | Flak | 5542 | 70% | 1 | 250 |

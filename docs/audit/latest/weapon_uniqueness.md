@@ -1,9 +1,9 @@
 # Weapon uniqueness (DESIGN.md §10 — faction identity)
 
-damaging armament weapons checked: 1458; W1 same-faction 40, W2 cross-faction 39, W3 carrier-only 95
+damaging armament weapons checked: 1458; W1 same-faction 39, W2 cross-faction 38, W3 carrier-only 95
 
 
-## W1 — same faction, distinct actors, identical weapon (40)
+## W1 — same faction, distinct actors, identical weapon (39)
 
 | weapon | faction(s) | actors |
 |---|---|---|
@@ -33,7 +33,6 @@ damaging armament weapons checked: 1458; W1 same-faction 40, W2 cross-faction 39
 | naxplanegun_elite | naxis | naxis_bf109, naxis_me262 |
 | naxquadcannon_aa_elite | naxis | naxis_naxibunker, naxis_ratte |
 | ornigun | harkonnen, ixian, ordos | atreides_ornithopter, harkonnen_gunship |
-| ornimissile | harkonnen, ixian, ordos | atreides_airdrone, atreides_ornithopter |
 | pdlaserbike | td_nod | td_nod_chemicalattackbike, td_nod_reconbike |
 | rocketsra | ra1_soviets | ra1_allies_alliedrocketsoldier, ra1_soviets_rocketsoldier |
 | spore_aa | zerg | zerg_creepcolony, zerg_creepcolony_defense, zerg_sporecolony, zerg_sunkencolony_defense |
@@ -49,7 +48,7 @@ damaging armament weapons checked: 1458; W1 same-faction 40, W2 cross-faction 39
 | yakchaingun | ra1_soviets | ra1_soviets_nuclearyak, ra1_soviets_yakscoutplane |
 
 
-## W2 — identical weapon across factions (39)
+## W2 — identical weapon across factions (38)
 
 | weapon | families | factions | actors |
 |---|---|---|---|
@@ -73,7 +72,6 @@ damaging armament weapons checked: 1458; W1 same-faction 40, W2 cross-faction 39
 | naxlasert | 2 | schwarzermond, terran | schwarzermond_lasertower, terran_sentinel |
 | naxsturmarty | 2 | naxis, schwarzermond | naxis_sturmtiger, schwarzermond_sturmcannon |
 | ornigun | 2 | harkonnen, ixian, ordos | atreides_ornithopter, harkonnen_gunship |
-| ornimissile | 2 | harkonnen, ixian, ordos | atreides_airdrone, atreides_ornithopter |
 | plymouthrpgmines | 2 | eden, plymouth | eden_lynx_acidcloud, plymouth_lynx_esg |
 | plymouthtigerrpgmines | 2 | eden, plymouth | eden_tiger_acidcloud, plymouth_tiger_esg |
 | ra2rtruckrocket | 2 | futuretech, latinsyndicate | futuretech_phalanxwip, latinsyndicate_missiletruck |

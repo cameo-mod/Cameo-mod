@@ -128,6 +128,7 @@ Fully converted prefixes (93): air, asianalliance, atreides, banshee, bbomb, bbo
 | D2k/Atreides | upgrade_light.atreides | atreides |
 | D2k/Atreides | upgrade_heavy.atreides | atreides |
 | D2k/Atreides | upgrade_radar.atreides | atreides |
+| D2k/Atreides | combat_tank_husk.atreides | atreides |
 | D2k/Atreides | sonic_tank_husk.atreides | atreides |
 | D2k/Atreides | siege_tank_husk.atreides | atreides |
 | D2k/Corrino | carryall_husk.corrino | corrino |
@@ -236,4 +237,4 @@ _clean_
 
 - actor ids violating the lowercase grammar: **1510** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 
-Total findings: 709
+Total findings: 710

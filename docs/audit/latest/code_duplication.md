@@ -1,13 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **386** (min 5 statements), C# files: **349** (min 8 lines)
-
-
-## Files that do not parse (not scanned)
-
-| file | line | error |
-|---|---|---|
-| tools/tests/test_assign_references.py | 0 | source code string cannot contain null bytes |
+Python files: **389** (min 5 statements), C# files: **349** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|

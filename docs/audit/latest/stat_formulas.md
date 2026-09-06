@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **668** across 1988 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **669** across 1993 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (44)
@@ -362,7 +362,7 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | yuri_psychictower | DetectCloaked 5000 | expected 4000 (range/2) |
 
 
-## F7 — defense Power.Amount ≠ -Cost/20  (98)
+## F7 — defense Power.Amount ≠ -Cost/20  (99)
 
 | actor | actual | expected |
 |---|---|---|
@@ -370,6 +370,7 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | asianalliance_asiansentryflamer | Power -25 | expected -40 (-Cost/20) |
 | asianalliance_chaosstorminductor | Power -200 | expected -250 (-Cost/20) |
 | asianalliance_concretebarrier | Power missing | expected -10 |
+| atreides_palace | Power -200 | expected -500 (-Cost/20) |
 | atreides_storagesilo | Power -10 | expected -7 (-Cost/20) |
 | brik | Power missing | expected -10 |
 | corrino_storagesilo | Power -10 | expected -7 (-Cost/20) |
@@ -536,9 +537,9 @@ _none found_
 
 | actor | actual | expected |
 |---|---|---|
-| ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: ordos_artilleryplatform | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: ordos_chemturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | schwarzermond: schwarzermond_lasertower | prereqs: schwarzermond_barracks, schwarzermond_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 
 

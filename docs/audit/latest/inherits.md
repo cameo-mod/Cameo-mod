@@ -1,13 +1,13 @@
 # audit_inherits — §10.3 invariant violations (B2)
 
-Actors+templates scanned: **4081**
+Actors+templates scanned: **4087**
 
 | violation | meaning | count |
 |---|---|---|
 | V1 | concrete actor inherits from concrete actor | 277 |
 | V2 | inherit crosses faction ownership | 0 |
 | V3 | dangling inherit target (BLOCKING) | 0 |
-| V4 | chain depth > 3 | 1941 |
+| V4 | chain depth > 3 | 1942 |
 | V5 | > 2 -Trait removals (warning) | 102 |
 
 
@@ -677,6 +677,7 @@ _none found_
 | cgyard.latin | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml |
 | cobra.steel | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml |
 | combat_tank.harkonnen | 5 | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml |
+| combat_tank_husk.atreides | 4 | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
 | conehead2.nax | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml |
 | corrino_apc | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | corrino_barracks | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/buildings.yaml |

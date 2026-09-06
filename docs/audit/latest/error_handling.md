@@ -1,6 +1,6 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **386**
+Files scanned: **389**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
@@ -8,13 +8,6 @@ Files scanned: **386**
 | E2 | handler discards the error | 87 | 30 |
 | E3 | open() without encoding= | 92 | 90 |
 | E4 | subprocess call without check= | 20 | 9 |
-
-
-## Files that do not parse
-
-| file | line | error |
-|---|---|---|
-| tools/tests/test_assign_references.py | 0 | source code string cannot contain null bytes |
 
 
 ## E1 — 2 finding(s)
@@ -57,7 +50,7 @@ Files scanned: **386**
 | tools/audit/audit_weapon_suffixes.py | 297 | handler body discards the error |
 | tools/audit/audit_weapon_uniqueness.py | 99 | handler body discards the error |
 | tools/audit/gen_damage_matrix.py | 52 | handler body discards the error |
-| tools/audit/miniyaml.py | 187 | handler body discards the error |
+| tools/audit/miniyaml.py | 203 | handler body discards the error |
 | tools/audit/phase_b_survey.py | 40 | handler body discards the error |
 | tools/audit/review_batch_diff.py | 80 | handler body discards the error |
 | tools/audit/review_resolve_diff.py | 62 | handler body discards the error |
@@ -87,9 +80,9 @@ Files scanned: **386**
 | tools/balance/measure_retrofit_gap.py | 134 | handler body discards the error |
 | tools/balance/plan_firepower_retirement.py | 81 | handler body discards the error |
 | tools/balance/propose_class_rebalance.py | 265 | handler body discards the error |
-| tools/balance/reference_distribution.py | 437 | handler body discards the error |
-| tools/balance/reference_distribution.py | 448 | handler body discards the error |
-| tools/balance/reference_distribution.py | 461 | handler body discards the error |
+| tools/balance/reference_distribution.py | 555 | handler body discards the error |
+| tools/balance/reference_distribution.py | 566 | handler body discards the error |
+| tools/balance/reference_distribution.py | 579 | handler body discards the error |
 | tools/balance/report_versus_change.py | 74 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 219 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 322 | handler body discards the error |
@@ -247,5 +240,4 @@ Files scanned: **386**
 - E2: 87 > baseline 30
 - E3: 92 > baseline 90
 - E4: 20 > baseline 9
-- 1 file(s) do not parse
 

@@ -1,4 +1,4 @@
-# audit_meter_dilution — 36 actors fire a state weapon alongside unconditional non-state weapons
+# audit_meter_dilution — 34 actors fire a state weapon alongside unconditional non-state weapons
 
 | actor | guns | with state | state guns' share | dilution |
 |---|--:|--:|--:|--:|
@@ -33,19 +33,19 @@
 | `wc2_humans_archmage` | 3 | 2 | 72.0% | **1.39x** |
 | `wc2_humans_mage` | 3 | 2 | 72.0% | **1.39x** |
 
-_(6 more — pass `--all`)_
+_(4 more — pass `--all`)_
 
 ## distribution
 
-- 1.0-1.5x: **11**
+- 1.0-1.5x: **9**
 - 1.5-2.0x: **12**
 - 2.0-3.0x: **4**
 - 3.0x+: **9**
 
-## condition-gated actors the model cannot judge — 200
+## condition-gated actors the model cannot judge — 190
 
 Every armament is gated, so no two can be shown to fire together. This is the IFV
 shape, DEFERRED by maintainer ruling; it needs a variant-aware model, not a count.
 
-FAIL 36 diluted actors (ratchet 32)
+FAIL 34 diluted actors (ratchet 32)
 **A state carrier gained a non-feeding gun.** The fix is to make every weapon on a state unit feed the same meter, not to raise the ratchet.

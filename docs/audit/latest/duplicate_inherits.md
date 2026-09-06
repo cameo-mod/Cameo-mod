@@ -4519,6 +4519,10 @@ atreides_palace:
   parent ^^ ^selectablebuilding  (2 paths)
     -> atreides_palace -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> atreides_palace -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^disabledoverlay  (3 paths)
+    -> atreides_palace -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> atreides_palace -> ^primarysuperweapon -> ^superweapon -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> atreides_palace -> ^primarysuperweapon -> ^superweapon -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 atreides_refinery:
   parent ^^ ^globalbounty  (2 paths)

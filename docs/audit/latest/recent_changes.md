@@ -1,19 +1,20 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **219**, files touched: **1086**
+Commits reviewed: **266**, files touched: **1037**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 28 | yes |
+| R1 | balance yaml edited without the ledger | 29 | yes |
 | R2 | audit script never run by run_all.sh | 4 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 22 | partly |
-| R4 | engine/mod.config change (needs boot gate) | 1 | no |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 23 | partly |
+| R4 | engine/mod.config change (needs boot gate) | 0 | no |
 
 
-## R1 — hand-edited balance numbers (28)
+## R1 — hand-edited balance numbers (29)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| 5d3c8a13 | 2026-09-05 | fix(D2k/Shared): move 110mm_Gun + D2K_TowerMissi | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed |
 | 87622694 | 2026-09-05 | feat: port Atreides-unique weapons from legacy d | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
 | 1858d013 | 2026-09-05 | feat: add Corrino siege tank + husk, update heav | Cost, HP, Range, Speed |
 | c2b77716 | 2026-09-05 | feat: add Corrino gunship and advanced carryall | Cost, HP, Range, Speed |
@@ -54,10 +55,12 @@ Commits reviewed: **219**, files touched: **1086**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (22)
+## R3 — commits without provenance (23)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 979d172c | 2026-09-05 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| c6313f50 | 2026-09-05 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 3256bb36 | 2026-08-31 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | d3f188d0 | 2026-08-31 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | c91de468 | 2026-08-31 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
@@ -79,35 +82,32 @@ Commits reviewed: **219**, files touched: **1086**
 | 1d18d5d4 | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 4ec4fd1c | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 20f15194 | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
-| 026963fd | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 
 
-## R4 — engine/config changes to re-verify (1)
+## R4 — engine/config changes to re-verify (0)
 
-| commit | date | note |
-|---|---|---|
-| f1c64e93 | 2026-08-22 | mod.config changed (rebuild + boot gate required) |
+_none found_
 
 
 ## R5 — most-churned files (re-read these first)
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 78 |
-| docs/HANDOFF.md | 51 |
-| docs/design/BALANCE_PROGRAM_PLAN.md | 44 |
+| DEVELOPMENT_LOG.md | 123 |
+| docs/HANDOFF.md | 56 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 43 |
 | tools/audit/audit_warhead_split.py | 40 |
-| docs/balance/derived/redalert_soviets.json | 35 |
-| docs/audit/doc_claims.yaml | 30 |
-| docs/balance/derived/d2k_ixian.json | 30 |
-| docs/balance/derived/tiberiansun_forgotten.json | 30 |
-| docs/balance/derived/tiberiansun_nod.json | 30 |
-| docs/audit/SUMMARY.md | 30 |
-| docs/balance/derived/tiberiansun_gdi.json | 28 |
-| docs/balance/derived/redalert2_yuri.json | 27 |
-| docs/balance/derived/redalert2mod_asianalliance.json | 27 |
-| docs/balance/derived/redalert2mod_futuretech.json | 27 |
-| docs/balance/derived/redalert_japan.json | 27 |
+| docs/balance/derived/redalert_soviets.json | 34 |
+| docs/audit/doc_claims.yaml | 31 |
+| docs/balance/derived/d2k_ixian.json | 29 |
+| docs/balance/derived/tiberiansun_forgotten.json | 29 |
+| docs/audit/SUMMARY.md | 29 |
+| docs/balance/derived/tiberiansun_nod.json | 28 |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 27 |
+| docs/balance/derived/tiberiansun_gdi.json | 27 |
+| docs/balance/derived/redalert2_yuri.json | 26 |
+| docs/balance/derived/redalert2mod_asianalliance.json | 26 |
+| docs/balance/derived/redalert2mod_futuretech.json | 26 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -121,10 +121,10 @@ Commits reviewed: **219**, files touched: **1086**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 28 R1 and 0 R3 of 28/22 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 29 R1 and 0 R3 of 29/23 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 28 R1, 4 R2, 0 R3 blocking finding(s)
+- 29 R1, 4 R2, 0 R3 blocking finding(s)
 

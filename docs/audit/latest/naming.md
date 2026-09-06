@@ -6,7 +6,7 @@
 | faction | compliant | % | proposal collisions | asset files to rename |
 |---|---|---|---|---|
 | asianalliance | 73/73 | 100% | 0 | 116 |
-| atreides | 17/19 | 89% | 0 | 4 |
+| atreides | 21/23 | 91% | 0 | 12 |
 | cabal | 80/80 | 100% | 0 | 147 |
 | corrino | 22/25 | 88% | 0 | 9 |
 | eden | 43/43 | 100% | 0 | 2 |
@@ -43,7 +43,7 @@
 | faction | icons compliant | % |
 |---|---|---|
 | asianalliance | 71/72 | 98% |
-| atreides | 3/4 | 75% |
+| atreides | 6/7 | 85% |
 | cabal | 80/80 | 100% |
 | corrino | 1/1 | 100% |
 | eden | 43/43 | 100% |

@@ -1,15 +1,13 @@
 # audit_buildable_order — buildable actor order checks
 
 Buildable combat actors checked: **895**
-Prerequisite order violations: **1**
-Build palette order violations: **1071**
+Prerequisite order violations: **0**
+Build palette order violations: **1068**
 
 
 ## Prerequisite order violations
 
-| actor | queue | prerequisites | problem |
-|---|---|---|---|
-| atreides_fremen | Infantry, RAInfantry | ~atreides_barracks, upgrade_barracks, ~hightech.atreides | tech token '~hightech.atreides' appears after promotion token |
+_none found_
 
 
 ## Build palette order violations
@@ -54,11 +52,6 @@ Build palette order violations: **1071**
 | atreides | Infantry | trooper | 3 | 300 | 20 | should be before atreides_engineer (tier/cost order) |
 | atreides | RAInfantry | light_inf | 3 | 150 | 10 | should be before atreides_rockettrooper (tier/cost order) |
 | atreides | RAInfantry | trooper | 3 | 300 | 20 | should be before atreides_engineer (tier/cost order) |
-| atreides | RAVehicle | atreides_spiceharvester | 2 | 500 | 10 | should be before atreides_sandbike (tier/cost order) |
-| atreides | RAVehicle | atreides_siegetank | 3 | 600 | 50 | should be before atreides_repairtank (tier/cost order) |
-| atreides | Starport | atreides_spiceharvester | 2 | 500 | 10 | should be before atreides_sandbike (tier/cost order) |
-| atreides | Vehicle | atreides_spiceharvester | 2 | 500 | 10 | should be before atreides_sandbike (tier/cost order) |
-| atreides | Vehicle | atreides_siegetank | 3 | 600 | 50 | should be before atreides_repairtank (tier/cost order) |
 | cabal | Aircraft | cabal_hunterkillermk1 | 2 | 1500 | 20 | should be before cabal_repairdrone (tier/cost order) |
 | cabal | Aircraft | cabal_hunterkillermk1_elite | 2 | 3000 | 21 | should be before cabal_repairdrone (tier/cost order) |
 | cabal | Aircraft | cabal_hunterdronecarrier | 3 | 4000 | 20 | should be before cabal_repairdrone (tier/cost order) |
@@ -242,11 +235,11 @@ Build palette order violations: **1071**
 | futuretech | Vehicle | futuretech_robottank | 3 | 1600 | 225 | should be before futuretech_energizer (tier/cost order) |
 | futuretech | Vehicle | futuretech_oriontank | 3 | 2400 | 435 | should be before futuretech_energizer (tier/cost order) |
 | harkonnen | Aircraft | harkonnen_gunship | 2 | 1200 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
-| harkonnen | Aircraft | atreides_ornithopter | 2 | 1500 | 10 | should be before atreides_advancedcarryall (tier/cost order) |
+| harkonnen | Aircraft | atreides_ornithopter | 2 | 1500 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
 | harkonnen | Infantry | light_inf | 3 | 150 | 10 | should be before harkonnen_rockettrooper (tier/cost order) |
 | harkonnen | Infantry | trooper | 3 | 300 | 20 | should be before harkonnen_engineer (tier/cost order) |
 | harkonnen | RAAircraft | harkonnen_gunship | 2 | 1200 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
-| harkonnen | RAAircraft | atreides_ornithopter | 2 | 1500 | 10 | should be before atreides_advancedcarryall (tier/cost order) |
+| harkonnen | RAAircraft | atreides_ornithopter | 2 | 1500 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
 | harkonnen | RAInfantry | light_inf | 3 | 150 | 10 | should be before harkonnen_rockettrooper (tier/cost order) |
 | harkonnen | RAInfantry | trooper | 3 | 300 | 20 | should be before harkonnen_engineer (tier/cost order) |
 | harkonnen | RAVehicle | harkonnen_spiceharvester | 2 | 600 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
@@ -264,8 +257,8 @@ Build palette order violations: **1071**
 | harkonnen | Vehicle | harkonnen_mobileconstructionvehicle | 2 | 5000 | 100 | should be before harkonnen_devastatormech (tier/cost order) |
 | harkonnen | Vehicle | missile_tank | 3 | 750 | 60 | should be before harkonnen_buzzsaw (tier/cost order) |
 | ixian | Aircraft | harkonnen_gunship | 2 | 1200 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
-| ixian | Aircraft | atreides_ornithopter | 2 | 1500 | 10 | should be before atreides_advancedcarryall (tier/cost order) |
-| ixian | Aircraft | ixian_airdrone | 2 | 1800 | 10 | should be before atreides_advancedcarryall (tier/cost order) |
+| ixian | Aircraft | atreides_ornithopter | 2 | 1500 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
+| ixian | Aircraft | ixian_airdrone | 2 | 1800 | 10 | should be before harkonnen_advancedcarryall (tier/cost order) |
 | ixian | Aircraft | ixian_railgundrone | 3 | 2000 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
 | ixian | Aircraft | ixian_empbomber | 3 | 2400 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
 | ixian | Aircraft | ixian_resonancedrone | 3 | 2500 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
@@ -277,8 +270,8 @@ Build palette order violations: **1071**
 | ixian | Infantry | ixian_twinrockettrooper | 3 | 600 | 20 | should be before engineer (tier/cost order) |
 | ixian | Infantry | ixian_storminfantry | 3 | 800 | 10 | should be before engineer (tier/cost order) |
 | ixian | RAAircraft | harkonnen_gunship | 2 | 1200 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
-| ixian | RAAircraft | atreides_ornithopter | 2 | 1500 | 10 | should be before atreides_advancedcarryall (tier/cost order) |
-| ixian | RAAircraft | ixian_airdrone | 2 | 1800 | 10 | should be before atreides_advancedcarryall (tier/cost order) |
+| ixian | RAAircraft | atreides_ornithopter | 2 | 1500 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
+| ixian | RAAircraft | ixian_airdrone | 2 | 1800 | 10 | should be before harkonnen_advancedcarryall (tier/cost order) |
 | ixian | RAAircraft | ixian_railgundrone | 3 | 2000 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
 | ixian | RAAircraft | ixian_empbomber | 3 | 2400 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
 | ixian | RAAircraft | ixian_resonancedrone | 3 | 2500 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
@@ -442,9 +435,9 @@ Build palette order violations: **1071**
 | naxis | Vehicle | naxis_sturmtiger | 3 | 2500 | 60 | should be before naxis_naximobileconstructionvehicle (tier/cost order) |
 | naxis | Vehicle | naxis_nokana | 3 | 3000 | 80 | should be before naxis_naximobileconstructionvehicle (tier/cost order) |
 | naxis | Vehicle | naxis_maus | 3 | 4200 | 60 | should be before naxis_naximobileconstructionvehicle (tier/cost order) |
-| ordos | Aircraft | atreides_advancedcarryall | 2 | 800 | 20 | should be before ordos_airmine (tier/cost order) |
+| ordos | Aircraft | atreides_advancedcarryall | 2 | 800 | 10 | should be before ordos_airmine (tier/cost order) |
 | ordos | Aircraft | harkonnen_gunship | 2 | 1200 | 20 | should be before ordos_airmine (tier/cost order) |
-| ordos | Aircraft | atreides_ornithopter | 2 | 1500 | 10 | should be before ordos_airmine (tier/cost order) |
+| ordos | Aircraft | atreides_ornithopter | 2 | 1500 | 20 | should be before ordos_airmine (tier/cost order) |
 | ordos | Aircraft | ordos_eyeinthesky | 2 | 2500 | 30 | should be before ordos_advancedcarryall (tier/cost order) |
 | ordos | Aircraft | ordos_banshee | 3 | 2250 | 30 | should be before ordos_advancedcarryall (tier/cost order) |
 | ordos | Infantry | engineer | 2 | 500 | 30 | should be before ordos_saboteur (tier/cost order) |
@@ -452,14 +445,15 @@ Build palette order violations: **1071**
 | ordos | Infantry | light_inf | 3 | 150 | 10 | should be before ordos_saboteur (tier/cost order) |
 | ordos | Infantry | ordos_rockettrooper | 3 | 300 | 20 | should be before ordos_saboteur (tier/cost order) |
 | ordos | Infantry | trooper | 3 | 300 | 20 | should be before ordos_saboteur (tier/cost order) |
+| ordos | Infantry | atreides_fremen | 3 | 400 | 80 | should be before ordos_saboteur (tier/cost order) |
 | ordos | Infantry | heavy_inf.ixian | 3 | 400 | 10 | should be before ordos_saboteur (tier/cost order) |
 | ordos | Infantry | ordos_chemicaltrooper | 3 | 400 | 10 | should be before ordos_saboteur (tier/cost order) |
 | ordos | Infantry | ordos_antiairtrooper | 3 | 450 | 20 | should be before ordos_saboteur (tier/cost order) |
 | ordos | Infantry | ordos_contaminator | 3 | 500 | 10 | should be before ordos_saboteur (tier/cost order) |
 | ordos | Infantry | ordos_mortartrooper | 3 | 600 | 20 | should be before ordos_saboteur (tier/cost order) |
-| ordos | RAAircraft | atreides_advancedcarryall | 2 | 800 | 20 | should be before ordos_airmine (tier/cost order) |
+| ordos | RAAircraft | atreides_advancedcarryall | 2 | 800 | 10 | should be before ordos_airmine (tier/cost order) |
 | ordos | RAAircraft | harkonnen_gunship | 2 | 1200 | 20 | should be before ordos_airmine (tier/cost order) |
-| ordos | RAAircraft | atreides_ornithopter | 2 | 1500 | 10 | should be before ordos_airmine (tier/cost order) |
+| ordos | RAAircraft | atreides_ornithopter | 2 | 1500 | 20 | should be before ordos_airmine (tier/cost order) |
 | ordos | RAAircraft | ordos_eyeinthesky | 2 | 2500 | 30 | should be before ordos_advancedcarryall (tier/cost order) |
 | ordos | RAAircraft | ordos_banshee | 3 | 2250 | 30 | should be before ordos_advancedcarryall (tier/cost order) |
 | ordos | RAInfantry | engineer | 2 | 500 | 30 | should be before ordos_saboteur (tier/cost order) |
@@ -467,6 +461,7 @@ Build palette order violations: **1071**
 | ordos | RAInfantry | light_inf | 3 | 150 | 10 | should be before ordos_saboteur (tier/cost order) |
 | ordos | RAInfantry | ordos_rockettrooper | 3 | 300 | 20 | should be before ordos_saboteur (tier/cost order) |
 | ordos | RAInfantry | trooper | 3 | 300 | 20 | should be before ordos_saboteur (tier/cost order) |
+| ordos | RAInfantry | atreides_fremen | 3 | 400 | 80 | should be before ordos_saboteur (tier/cost order) |
 | ordos | RAInfantry | heavy_inf.ixian | 3 | 400 | 10 | should be before ordos_saboteur (tier/cost order) |
 | ordos | RAInfantry | ordos_chemicaltrooper | 3 | 400 | 10 | should be before ordos_saboteur (tier/cost order) |
 | ordos | RAInfantry | ordos_antiairtrooper | 3 | 450 | 20 | should be before ordos_saboteur (tier/cost order) |
