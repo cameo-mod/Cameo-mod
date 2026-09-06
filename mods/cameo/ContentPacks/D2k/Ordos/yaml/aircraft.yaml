@@ -820,13 +820,13 @@ carryall_reinforce.ordos:
 		Type: Circle
 			Radius: 256
 	RejectsOrders:
-	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
-		Condition: ixian_upgrade_advancedixiantechnology
-		Prerequisites: ixian_upgrade_advancedixiantechnology
+	GrantConditionOnPrerequisite@ordos_upgrade_stealthtechnology:
+		Condition: ordos_upgrade_stealthtechnology
+		Prerequisites: ordos_upgrade_stealthtechnology
 	Cloak:
 		InitialDelay: 80
 		CloakDelay: 80
-		RequiresCondition: ixian_upgrade_advancedixiantechnology
+		RequiresCondition: ordos_upgrade_stealthtechnology
 	FireProjectilesOnDeath:
 		Weapons: Debris, Debris2, Debris3, Debris4
 		Pieces: 3, 6
@@ -897,13 +897,13 @@ ordos_advancedcarryall:
 		Type: Circle
 			Radius: 256
 	RejectsOrders:
-	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
-		Condition: ixian_upgrade_advancedixiantechnology
-		Prerequisites: ixian_upgrade_advancedixiantechnology
+	GrantConditionOnPrerequisite@ordos_upgrade_stealthtechnology:
+		Condition: ordos_upgrade_stealthtechnology
+		Prerequisites: ordos_upgrade_stealthtechnology
 	Cloak:
 		InitialDelay: 80
 		CloakDelay: 80
-		RequiresCondition: ixian_upgrade_advancedixiantechnology
+		RequiresCondition: ordos_upgrade_stealthtechnology
 	FireProjectilesOnDeath:
 		Weapons: Debris, Debris2, Debris3, Debris4
 		Pieces: 3, 6

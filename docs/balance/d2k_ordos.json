@@ -319,7 +319,13 @@
       "reloaddelay": "132",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "ixian_airdrone"
+       "^Compatibility_MissileAP_HeavyFlat",
+       "^TankDestroyerCannon",
+       "^LightChemicalWeapon",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^HeavyBomb",
+       "^D2KMissile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -4105,6 +4111,48 @@
     "queue": [
      "Research"
     ]
+   },
+   "ordos_upgrade_stealthtechnology": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/upgrades.yaml#Valued.Cost",
+     "v": "12500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Upgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Stealth Technology",
+    "prerequisites": [
+     "~ordos_ixresearchcenter",
+     "ordos_upgrade_shields",
+     "!ordos_upgrade_stealthtechnology"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "team_upgrade.ordos_stealthtechnology": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": false,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Stealth Technology"
    }
   },
   "vehicles": {
