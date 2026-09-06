@@ -74,6 +74,24 @@ They all predate `d818aec40`, so this is old debt rather than a regression, and 
 deliberately NOT auto-fixed — "it has shipped like this for a long time" is evidence
 worth weighing, and the remedy is a design choice (a hop cap, `ThrowWithoutTarget: false`
 on the terminal fragment, or a distinct non-recursive terminal weapon).
+**Maintainer ruling 2026-09-07: leave them, and test in-game.** Master merges with
+S1a = 0 and S1b ratcheted at 44. Nobody "fixes" these until the ruling is revisited.
+
+⚠ **The in-game test, when you have a minute.** Skirmish, open ground, one target:
+
+1. Build any of these and fire the tesla arc at a single isolated enemy unit:
+   Kamov attack helicopter (`KamovTeslaArc`), Mammoth tank tesla tusk
+   (`MammothTuskTesla`), Tesla Maverick, a BTR with the tesla machine gun, or the
+   portable tesla (`PortaTeslaArc_EMP`).
+2. Kill the target, or fire at open ground with nothing nearby.
+3. **Watch for arcs that keep spawning after there is nothing left to hit.** By the
+   code, each impact throws one more at a random point within range, forever.
+
+If it visibly loops → it is a real bug and the fix is one of: `ThrowWithoutTarget:
+false` on the terminal fragment, a hop cap, or a distinct non-recursive terminal
+weapon. If it does NOT loop → something outside the yaml stops it, and that finding
+gets written down here so nobody re-derives this analysis a third time.
+
 
 Full write-up for agents: `../Cameo-mod-fleet/BRIEF_2026-09-07_what_broke_and_the_new_gates.md`.
 
