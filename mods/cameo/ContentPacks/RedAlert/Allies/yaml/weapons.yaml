@@ -171,8 +171,7 @@ ChainGunMH60Cryo:
 		Damage: 8000
 
 AlliedTankDestroyerCannon:
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_CannonAP_Light
+	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 60
@@ -180,8 +179,6 @@ AlliedTankDestroyerCannon:
 	Report: tank5.aud
 	Projectile: Bullet
 		Speed: 1362
-	Warhead@CannonHE_Medium:
-		Damage: 12000
 	Warhead@CannonAP_Light:
 		Damage: 12000
 AlliedTankDestroyerCannonCryo:
@@ -197,8 +194,7 @@ AlliedTankDestroyerCannonCryo:
 		Damage: 24000
 		ValidTargets: Ground, Water
 SheridanCannon:
-	Inherits@wh: ^Warhead_CannonAP_Light
-	Inherits@wh2: ^Warhead_CannonHE_Medium
+	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 64
@@ -206,8 +202,6 @@ SheridanCannon:
 	Report: cannon2.aud
 	Projectile: Bullet
 		Speed: 502
-	Warhead@CannonAP_Light:
-		Damage: 8000
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 SheridanCannonCryo:
@@ -311,8 +305,7 @@ RapierBombsCryo:
 		Explosions: cryo_artillery
 
 Aphid_AA:
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Heavy
+	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
 	ReloadDelay: 62
@@ -332,9 +325,6 @@ Aphid_AA:
 		ContrailStartColor: 996633
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
