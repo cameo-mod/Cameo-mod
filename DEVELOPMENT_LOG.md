@@ -10462,3 +10462,12 @@ Maintainer repealed intentional_composites exemption 2026-09-06 night. Impact on
 BLOCKED: maintainer has active -Warhead@ sweep across 31 files touching my Ordos (114 lines) and Shared (18 lines). Must wait for sweep to commit.
 
 — Devin-Aurora
+# 2026-09-07 — Astra: readiness command and Heavy Sniper class correction
+
+Repaired the readiness crash on the removed composite-exemption API, retained raw
+stack counts, failed closed for unknown weapon inputs, and separated diagnostic
+residuals from sign-off. Applied the existing Heavy Sniper role ruling to its
+ledger metadata only: no actor stats/template changes. Nine readiness tests and
+13 membership tests pass; extraction reports 33 ledgers with zero drift. All 27
+anchors now belong to their declared class; zero anchors signed. Evidence and
+remaining pricing gates: `docs/audit/ASTRA_REVIEW.md`.

@@ -63,3 +63,31 @@ Revert: revert the dedicated safe-apply commit; no live YAML needs reverting.
 Limits: exception-safe, not filesystem-wide atomic; no concurrent game reader;
 hard kills retain printed recovery originals; map/script references still require
 review. Existing unrelated upstream test/audit failures are not waived.
+
+## Completed: readiness reporting and ruled Heavy Sniper membership
+
+The readiness command crashed because it called the removed
+`intentional_composite` exemption. It now uses the shared resolved main-warhead
+predicate without subtracting reviewed exceptions, and reports unavailable
+weapons or active-rule resolution failures rather than silently clearing them.
+Low pricing residuals and absence of stacked mains no longer claim sign-off or
+complete structural clearance. Missing baseline/stat data is explicit, and all
+27 anchor actors are inspected even when their fitted baseline is absent.
+
+The sole ledger edit sets `td_gdi_heavysniper.design.class_anchor` to
+`heavy_sniper`, implementing the existing FORMULA_V2 section 6b heavy-sniper
+override. It preserves the live SniperInfantry template, every numeric stat and
+weapon. This is metadata classification, not a gameplay rebalance.
+
+Validation: nine focused readiness tests pass; the existing 13 class-membership
+tests pass; the real readiness command completes, with 27/27 anchors in class
+and zero signed anchors. Its buildable denominator is explicitly 1956 ledger
+rows, including structures/upgrades: 632 classified rows is not claimed as unit
+coverage. Every class still has a raw stacked-main finding. Extraction check:
+33 ledgers, zero drift; 778.3 MB peak process memory and 51.0% PC memory.
+Independent review challenged and corrected missing-stat handling and misleading
+formula/sign-off wording. Candidate ranking remains diagnostic, not clearance.
+
+No anchors are signed and no faction is repriced: unresolved weapon structure
+and unapproved/missing anchor inputs remain prerequisites, not waived gates.
+Revert the dedicated readiness/classification commit to undo this item.
