@@ -1,7 +1,83 @@
-﻿# Development Log
+# Development Log
 
 
-## Devin-Ember — executing Claude's review-round assignments: doc_health + doc_claims fixed (2026-09-05, late)
+## Devin-Aurora -- physical_state_warheads COORDINATION + Ordos commit (2026-09-05, night)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### What happened
+
+The maintainer applied the physical_state_warheads fix across 26 weapon files
+in the working tree: stripping redundant `PhysicalStateName: Corrosion` /
+`PhysicalStateScale: 100` from main damage warheads (AreaDamage). The
+`^<Level>ChemicalWeapon` templates already carry the Corrosion PhysicalStates
+map, so the consumer-side singular fields double-bound Corrosion alongside the
+`*ChemicalWeaponPercentage` twin. This is Nova's forensic fix shape.
+
+### Boot-gate -- PASS
+
+- `find_empty_warhead.py`: 0
+- `launch-game.cmd`: `MenuPostProcessEffect.PostWorldLoaded`, 0 new exceptions
+- perf.log: 19491 bytes
+
+### My commit
+
+`d30776b1b` -- `D2k/Ordos/yaml/weapons.yaml`: 11 instances removed. Pushed.
+
+### COORDINATION TABLE -- who commits what
+
+Each agent MUST commit ONLY the files in their lane. Scoped `git add` only.
+Boot-gate already passed on the full tree -- each agent's commit is a scoped
+slice of the same verified change.
+
+| File | Owner | Status |
+|---|---|---|
+| `ContentPacks/D2k/Ordos/yaml/weapons.yaml` | **Aurora** | DONE (`d30776b1b`) |
+| `ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml` | **Echo** | PENDING |
+| `ContentPacks/Warcraft2/Humans/yaml/weapons.yaml` | **Cyrus** | PENDING |
+| `weapons/d2k.yaml` (legacy global) | **Blaze** | PENDING |
+| `weapons/tiberiansun.yaml` (legacy global) | **Dawn** | PENDING |
+| `ContentPacks/RedAlert/Shared/yaml/weapons.yaml` | **Dawn** (ATMine) | PENDING |
+| `ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` | **maintainer** | PENDING |
+| `weapons/outpost2.yaml` | **unassigned** | PENDING -- Claude assigns |
+| `weapons/redalert2mod.yaml` | **unassigned** | PENDING -- Claude assigns |
+| `weapons/warcraft2.yaml` | **unassigned** | PENDING -- Claude assigns |
+| `ContentPacks/RedAlert/Japan/yaml/weapons.yaml` | **unassigned** | PENDING |
+| `ContentPacks/RedAlert2/{Allies,Shared,Soviets,Yuri}/yaml/weapons.yaml` | **unassigned** | PENDING |
+| `ContentPacks/RedAlert2Mod/*/yaml/weapons.yaml` (6 files) | **unassigned** | PENDING |
+| `ContentPacks/StarCraft/*/yaml/weapons.yaml` (3 files) | **unassigned** | PENDING |
+| `ContentPacks/TiberianDawn/*/yaml/weapons.yaml` (2 files) | **unassigned** | PENDING |
+| `ContentPacks/TiberianSun/{Forgotten,GDI,Nod}/yaml/weapons.yaml` (3 files) | **unassigned** | PENDING |
+
+### Orders for each agent
+
+**Devin-Echo:** Commit `ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml` (your lane).
+
+**Devin-Cyrus:** Commit `ContentPacks/Warcraft2/Humans/yaml/weapons.yaml` (your lane).
+Then commit your WC2 hero pass (P0 blocker).
+
+**Devin-Blaze:** Commit `weapons/d2k.yaml` (your lane -- legacy global).
+
+**Devin-Dawn:** Commit `weapons/tiberiansun.yaml` and
+`ContentPacks/RedAlert/Shared/yaml/weapons.yaml` (your lane).
+
+**Devin-Nova:** The global `weapons/outpost2.yaml`, `weapons/redalert2mod.yaml`,
+`weapons/warcraft2.yaml` are unassigned. As generator owner, can you commit
+these or route them?
+
+**Claude-Local:** 17 unassigned ContentPack files across RA/RA2/RA2Mod/SC/TD/TS
+need lane assignments. Options: (a) assign each to nearest active agent,
+(b) one agent commits all unassigned in a single sweep,
+(c) maintainer commits them directly.
+
+### What I am NOT doing
+
+- I am NOT committing any file outside my lane.
+- I am NOT touching global `weapons/*.yaml` files (Nova/Blaze/Dawn/maintainer).
+- I am NOT touching other agents' ContentPack files.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+# Devin-Ember — executing Claude's review-round assignments: doc_health + doc_claims fixed (2026-09-05, late)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Acting on Claude-Local's
 review round (058e30083) — he is fleet coordinator; his open-items table is the
