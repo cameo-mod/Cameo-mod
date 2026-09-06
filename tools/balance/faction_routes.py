@@ -144,10 +144,78 @@ INI_ROUTES = {
     # 2026-09-06 routes it; `cabal` had ONE source (Shattered Paradise `cab`, 44 rows) and has
     # been the only routed faction below the two-reference floor.
     "cabal":           (("CnC Reloaded", ("RobotCountry", "RobotCountry2")),),
+
 }
 
-for _f, _r in INI_ROUTES.items():
-    ROUTES[_f] = tuple(ROUTES.get(_f, ())) + _r
+# ── The three RA2 mods that were extracted and never routed (maintainer, 2026-09-06) ──────────
+# ⛔ THIS IS A SEPARATE DICT ON PURPOSE. Written as more keys inside `INI_ROUTES` it silently
+# DELETED Mental Omega's and CnC Reloaded's RA2 routes: a Python dict literal keeps only the LAST
+# value for a repeated key, so `"ra2_allies":` appearing twice is not a merge, it is an
+# overwrite — and nothing warns. Caught by re-measuring and seeing MO and CnCR vanish from
+# ra2_allies, ra2_soviets and yuri. `_assert_no_duplicate_keys()` below now fails on it.
+RA2_MOD_ROUTES = {
+    # ⭐ RA2 Reborn and Red Resurrection were RULED INTO the RA2 tier at 1/6 each long ago and
+    # blocked on one thing only: "carry NO unit stats — they exist only in versus_raw.json as
+    # warhead armour profiles". The INI extraction removed that blocker and nobody noticed, so
+    # three whole sources sat in the corpus contributing nothing. RA2 0XX is ruled in here too.
+    # With these the RA2 factions reach the ruled SIX voices instead of running at 1/4.
+    #
+    # ⚠ ALL THREE ARE SIDE-BASED, MEASURED, NOT ASSUMED. Countries inside a side are byte-
+    # identical rosters, so the country name is a label and the SIDE is the faction:
+    #     RA2 Reborn        Allied 198 (Alliance/Americans/Australia/British/French/Germans/Japan)
+    #                       Soviet 183 · Yuri 184 · a FOURTH 181 (China/NorthKorea/Venezuela/
+    #                       Yugoslavia)
+    #     Red Resurrection  Allied 206 · Soviet 202 · Yuri 147
+    #     RA2 0XX           Allied 125 · Soviet 124 · Yuri 93
+    # ⛔ So RA2 Reborn's `Japan` is NOT a Japanese roster — it is the Allied roster wearing a
+    # label, 100% identical to `Americans`. It is deliberately NOT routed to Cameo's `japan`.
+    "ra2_allies":      (("RA2 Reborn", ("Alliance", "Americans", "Australia", "British",
+                                        "French", "Germans", "Japan")),
+                        ("Red Resurrection", ("Alliance", "Americans", "British", "French",
+                                              "Germans")),
+                        ("RA2 0XX", ("Alliance", "Americans", "British", "French", "Germans"))),
+    "ra2_soviets":     (("RA2 Reborn", ("Africans", "Arabs", "Confederation", "Russians")),
+                        ("Red Resurrection", ("Africans", "Arabs", "Confederation", "Russians")),
+                        ("RA2 0XX", ("Africans", "Arabs", "Confederation", "Russians"))),
+    "yuri":            (("RA2 Reborn", ("YuriCountry", "YuriFalk", "YuriGreen", "YuriPacific")),
+                        ("Red Resurrection", ("YuriCountry",)),
+                        ("RA2 0XX", ("YuriCountry",))),
+
+    # ⭐ RA2 Reborn's FOURTH side goes to BOTH (maintainer 2026-09-06). China + NorthKorea carry
+    # the Asian Alliance reading and Venezuela the Latin Syndicate one, and R3 explicitly allows a
+    # reference faction to appear in several combinations. ⚠ It is ONE roster, so both Cameo
+    # factions receive the same 181 units — accepted deliberately, and it is why neither is routed
+    # to it alone.
+    "asianalliance":   (("RA2 Reborn", ("China", "NorthKorea", "Venezuela", "Yugoslavia")),),
+    "latinsyndicate":  (("RA2 Reborn", ("China", "NorthKorea", "Venezuela", "Yugoslavia")),),
+}
+
+def _assert_no_duplicate_keys(*paths):
+    """A route dict written with a repeated key is an OVERWRITE, not a merge, and Python is
+    silent about it. Parse this file's own source and refuse to import if any route literal
+    repeats a key — the failure mode that deleted two sources' routes on 2026-09-06."""
+    import ast
+    import pathlib as _pathlib
+    tree = ast.parse(_pathlib.Path(__file__).read_text(encoding="utf-8"))
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Assign):
+            continue
+        names = {t.id for t in node.targets if isinstance(t, ast.Name)}
+        if not (names & set(paths)) or not isinstance(node.value, ast.Dict):
+            continue
+        keys = [k.value for k in node.value.keys if isinstance(k, ast.Constant)]
+        dupes = {k for k in keys if keys.count(k) > 1}
+        if dupes:
+            raise AssertionError(
+                f"{', '.join(names)} repeats {sorted(dupes)} — a repeated key OVERWRITES the "
+                f"earlier routes instead of adding to them. Put additions in their own dict.")
+
+
+_assert_no_duplicate_keys("ROUTES", "INI_ROUTES", "RA2_MOD_ROUTES")
+
+for _extra in (INI_ROUTES, RA2_MOD_ROUTES):
+    for _f, _r in _extra.items():
+        ROUTES[_f] = tuple(ROUTES.get(_f, ())) + _r
 
 # ⛔ CASE-FOLD THE TOKENS, ONCE, HERE. `peer_factions()` lowercases the corpus column so that
 # DOC5's `nod` and an INI mod's `NodCountry` are comparable at all — but the routes above are
@@ -247,6 +315,10 @@ EXCLUSIVE_ONLY = {
     # without thinning either roster the way it would for Mental Omega.
     "Rise of the East": "clean per-country pools make exclusivity cheap; drops the 36% "
                         "asianalliance/tkm roster overlap to near zero",
+    "RA2 Reborn": "side-based; countries inside a side are byte-identical and the all-countries "
+                  "pool is 158 of 246 units",
+    "Red Resurrection": "side-based; the all-countries pool is 140 of 287 units",
+    "RA2 0XX": "side-based; `Germans` differs from `Americans` by ONE unit and `Alliance` by zero",
 }
 
 # {source: every faction token that source routes to ANY Cameo faction} — the rivals an
@@ -283,6 +355,28 @@ for _f, _r in ROUTES.items():
 # also keeps the maintainer's multi-token routes intact (guild1/2/3 -> steelconsortium is one
 # cell, so a unit owned by all three is not "shared").
 EXCLUSIVITY_GROUPS = {
+    # Same shape as Mental Omega and for the same measured reason: each mod's LARGEST owner-set
+    # signature is the all-countries pool (Reborn 158 of 246, Red Resurrection 140 of 287, RA2 0XX
+    # 73 of 190), which without a partition feeds ra2_allies, ra2_soviets and yuri identically.
+    # ⚠ RA2 0XX's per-country variation was checked and is NOISE, not grain: `Germans` differs
+    # from `Americans` by ONE unit (an "EU Gladiator DCA" defence) and `Alliance` by zero. Routing
+    # it at country grain would invent a distinction the mod does not make.
+    "RA2 Reborn": (
+        ("alliance", "americans", "australia", "british", "french", "germans", "japan"),
+        ("africans", "arabs", "confederation", "russians"),
+        ("yuricountry", "yurifalk", "yurigreen", "yuripacific"),
+        ("china", "northkorea", "venezuela", "yugoslavia"),
+    ),
+    "Red Resurrection": (
+        ("alliance", "americans", "british", "french", "germans"),
+        ("africans", "arabs", "confederation", "russians"),
+        ("yuricountry",),
+    ),
+    "RA2 0XX": (
+        ("alliance", "americans", "british", "french", "germans"),
+        ("africans", "arabs", "confederation", "russians"),
+        ("yuricountry",),
+    ),
     "Mental Omega": (
         ("europeans", "pacific", "unitedstates"),          # Allied
         ("chinese", "latin", "ussr"),                      # Soviet

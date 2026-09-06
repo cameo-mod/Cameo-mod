@@ -424,8 +424,14 @@ def _by_class(rows):
           f"{tot['paired']:>7}{tot['placed']:>7}{tot['two_plus']:>5}")
     print(f"\n  grounded: {tot['paired']} paired + {tot['placed']} rank-placed = "
           f"{tot['paired'] + tot['placed']} of {tot['routed']} routed class members")
-    print(f"  ⚠ only {tot['two_plus']} members reach the >=2 reference floor — that does not move "
-          f"until MO / CnC Reloaded / DTA land.")
+    # ⚠ THIS LINE USED TO SAY the count "does not move until MO / CnC Reloaded / DTA land".
+    # They landed — the INI extraction brought in all three plus RA2 Reborn, Red Resurrection,
+    # RA2 0XX and Rise of the East — and the sentence stayed, telling every reader the number was
+    # still blocked. A hardcoded blocker in a REPORT outlives the blocker itself; name the
+    # measured shortfall instead, so the text cannot rot while the number moves.
+    short = [r for r in rows if r["routed"] and r["two_plus"] < r["routed"]]
+    print(f"  ⚠ only {tot['two_plus']} of {tot['routed']} routed members reach the >=2 reference "
+          f"floor; {len(short)} classes are still short of it.")
 
 
 def _rates(rates):
