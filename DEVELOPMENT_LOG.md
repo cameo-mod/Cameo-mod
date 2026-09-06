@@ -59,7 +59,7 @@ main - part of the broadcast artifact. EMPUnit: AffectsIntegrity on the MagicOrb
 (mechanic warhead - flagging since it is not one of the four enumerated exceptions).
 
 Resolver before/after diff on all six: only the dropped mains removed, nothing else changed.
-ind_empty_warhead = 0. udit_warhead_split live count 72 -> 64 (two more cleared by
+find_empty_warhead = 0. audit_warhead_split live count 72 -> 64 (two more cleared by
 concurrent work). audit_split_definitions clean for all six (the legacy missiles.yaml
 Aphid_AA/SCUD copies are dead - file not in mod.yaml Weapons manifest).
 

@@ -15,8 +15,25 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 | know how the bots are meant to work, and what is only designed | [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) |
 | know the current bug counts | [`audit/SUMMARY.md`](audit/SUMMARY.md) |
 | find which document owns a topic | [`README.md`](README.md) |
+| **you are the Blackrobe GPT-6 Astra Agent** | ⭐ [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md) — your complete single-prompt instruction set |
 
 ---
+
+## ⭐ AGENT ASSIGNMENTS — who is doing what (2026-09-06)
+
+| agent | lane |
+|---|---|
+| **Blackrobe GPT-6 Astra** | ⭐ **FINISH THE BALANCE PIPELINE.** Full brief: [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md). Branch `astra/balance-pipeline`, never master. Has **full authority including `apply_balance --confirm`**, conditional on one commit per decision and a review dossier at `audit/ASTRA_REVIEW.md`. |
+| **Devin fleet** (Aurora, Nova, Ember, Blaze, Dawn, Echo) | the **144 dotted-suffix actor renames** (`frank.nax` → `naxis_frank`), one faction each; then weapon-shape conversion batches |
+| **Claude-Local (Opus 5)** | rulings, review, squash-merges to master, and the gates |
+
+⚠ **Nobody merges to master except Claude-Local.** Agents commit freely on their own branch
+and report a completed work item; Claude reviews and squash-merges one meaningful commit. The
+maintainer must be able to read master — 107 commits in one day, 49 of them touching only
+`DEVELOPMENT_LOG.md`, is not reviewable.
+
+⚠ **Agent-to-agent chatter lives OUTSIDE the repository**, in `../Cameo-mod-fleet/`.
+`DEVELOPMENT_LOG.md` keeps one entry per COMPLETED work item plus lessons learned — nothing else.
 
 ## 0. The one rule that makes all the others work
 
