@@ -134,6 +134,16 @@ INI_ROUTES = {
                         ("Rise of the East", ("Iraq",))),
     "futuretech":      (("Mental Omega", ("UnitedStates",)),),
     "japan":           (("Mental Omega", ("Pacific",)),),
+    # ⭐ CnC Reloaded DOES ship a playable CABAL faction and I recorded the opposite for weeks.
+    # `RobotCountry`/`RobotCountry2` own 138 buildable units, 23 of them Robot-EXCLUSIVE, and the
+    # mod NAMES 55 of them `CABAL's ...` — a complete roster: MCV, Construction Yard, Refinery,
+    # Reactor, Cybernetic Factory, Naval Factory, Flame Tower, Viper Turret, EMP Column, Cyborg
+    # Commando, Awakened, Devout, Ascended, Leviathan, Basilisk, Pacificator, Deathclaw.
+    # ⛔ MY ERROR WAS SAMPLING: I checked DEVOUT and ASCENDED, saw `Owner=` all 21 countries,
+    # and concluded the faction was "announced, not shipped". Two units. Maintainer ruling
+    # 2026-09-06 routes it; `cabal` had ONE source (Shattered Paradise `cab`, 44 rows) and has
+    # been the only routed faction below the two-reference floor.
+    "cabal":           (("CnC Reloaded", ("RobotCountry", "RobotCountry2")),),
 }
 
 for _f, _r in INI_ROUTES.items():
@@ -317,6 +327,36 @@ def exclusivity_cells(src):
 # Nod, so it is not universal).
 MOBILE_TYPES = {"infantry", "vehicle", "aircraft", "ship"}
 
+# ── A SOURCE'S OWN NAMING BEATS A PERMISSIVE `Owner=` (maintainer ruling 2026-09-06) ──────────
+# CnC Reloaded names 55 units `CABAL's ...` and gives 43 of them to all 21 countries. `Owner=`
+# would therefore call them shared and throw the whole faction away, while the mod itself says
+# in the unit's NAME exactly whose they are. Between a permissive ownership list and a
+# deliberate name, the name is the stronger identity signal — a modder writes "CABAL's Refinery"
+# on purpose and copies an `Owner=` line out of habit.
+#
+# ⭐ A CLAIM IS EXCLUSIVE AND OVERRIDES EVERYTHING. A claimed unit is admitted to its claimant
+# and to NOBODY ELSE, whatever `Owner=` says — that is the whole point of taking faction identity
+# seriously. So CABAL's Cyborg Commando stops being a reference for ra2_allies, ts_gdi and the
+# rest, which it had no business being.
+# ⚠ Prefix match on the unit's DISPLAY NAME, case-insensitive. Keep the prefixes narrow enough
+# that they cannot catch another faction's unit.
+NAME_CLAIMS = {
+    "CnC Reloaded": (
+        (("cabal", "core defender", "deployed core defender"), "cabal"),
+    ),
+}
+
+
+def claimed_by(row, src):
+    """The Cameo faction this source's own naming claims the row for, or None."""
+    name = (row.get("name") or "").strip().lower()
+    if not name:
+        return None
+    for prefixes, faction in NAME_CLAIMS.get(src, ()):
+        if name.startswith(prefixes):
+            return faction
+    return None
+
 
 def is_universal(row, src):
     """Owned by EVERY routed country of `src` — the mod's common pool, not a faction's."""
@@ -414,6 +454,12 @@ def allows(faction, row):
     Combined Arms row would be visible to every Cameo faction at once. A route is a claim about
     identity; a missing tag is the absence of one.
     """
+    # A NAME CLAIM SHORT-CIRCUITS BOTH WAYS: the claimant gets the row, everyone else is
+    # refused it, and no exclusivity or ownership test is consulted.
+    claim = claimed_by(row, row.get("source"))
+    if claim is not None:
+        return claim == faction and row.get("source") in routed_sources(faction)
+
     for src, toks in ROUTES.get(faction, ()):
         if row.get("source") != src:
             continue
