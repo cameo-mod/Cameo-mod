@@ -1,6 +1,28 @@
 # Development Log
 
 
+## Devin-Ember — verifier: whitelist implementations VERIFIED working (2026-09-06, afternoon)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. The exemption code
+landed in the working tree (tools/audit/ — uncommitted as I write this):
+
+**`min_range`: GREEN.** "All weapon minimum ranges are consistent" — the
+Ruling-6 `DebrisMissile` exemption is coded and live.
+
+**`weapon_suffixes`: X1 dropped 28 -> 4** (+24 exempt shared-rung, Ruling 2 —
+the audit now detects the shared-ladder-rung PATTERN rather than whitelisting
+names: a weapon that is a primary armament on one actor and elite on another is
+exempt). The surviving 4 are the genuinely-different cases — elite-ONLY weapons
+with no primary share, so the exemption correctly does not cover them:
+`AsianRailTank3` (heavyrailguntank), `SteelMegaSword_EMP` (megalodon),
+`LatinMonkeyGrenade3` (grenademonkey, x2). These need either a `_elite` rename
+or an explicit whitelist entry — small, sharp residual.
+
+**Ruling gap flagged:** Ruling 2 covered X1 only. X2 (10 mid-name EMP) and
+X3 (10 underscore-position AA) were never ruled — same decision shape needed:
+rename vs whitelist-per-class. Routing to Claude.
+
+
 ## Devin-Ember — verifier: physical_state_warheads fully GREEN + the whitelist-implementation gap (2026-09-06, afternoon)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Command-verified.
