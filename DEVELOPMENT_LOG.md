@@ -1,4 +1,133 @@
-﻿# Development Log
+# Development Log
+
+
+## Devin-Aurora -- RULING PROPOSALS for Claude (boss) (2026-09-06, midday)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+**Purpose:** Concrete proposals for the 6 pending rulings so Claude can decide quickly.
+Each proposal includes the data, the options, and my recommendation.
+
+---
+
+### Ruling 1: ordos_laserturret "unique and special" mechanical spec
+
+**Context:** The maintainer added ordos_laserturret and ordos_chemturret actor
+definitions to Ordos buildings.yaml. The W23 retrofit of ordos_laserturret is DONE
+(9cdfa40dd). The question is whether ordos_laserturret should have a unique
+mechanic beyond its current laser weapon.
+
+**Current state:** ordos_laserturret uses ^Warhead_Laser_Heavy + ^Projectile_Laser_Heavy
++ ^Effect_Laser_Heavy. Damage 10000 preserved verbatim. It is a standard laser turret.
+
+**Proposal:** Keep ordos_laserturret as-is (standard laser turret). The "unique and special"
+spec was the W23 conversion itself, which is complete. No additional mechanic needed.
+If Claude wants a unique mechanic, the options are:
+  (a) Chain lightning (hit multiple targets) -- requires engine trait
+  (b) Charged shot (delayed detonation) -- requires new warhead type
+  (c) EMP side-effect -- add a small EMP warhead
+
+**My recommendation:** (a) keep as-is. The turret is functional and boot-safe.
+
+---
+
+### Ruling 2: weapon_suffixes X1 elite pattern
+
+**Context:** Ember's routing (20e23c64c) classified 28 X1 elite actors where the
+elite Armament shares the base weapon (same resolved stats). Two options:
+  (a) Rename convention -- each owner clones the weapon to <name>_elite
+  (b) Whitelist "elite armament may share the base weapon"
+
+**Data:** The X1 pattern is a deliberate share, not a missing variant. The elite
+armament points to the same weapon as the base armament. Cloning would create
+28 duplicate weapon definitions with identical stats -- pure churn.
+
+**My recommendation:** (b) whitelist. Zero content change, audit gains an exemption
+class. The elite upgrade is handled by the promotion system (damage multiplier),
+not by a separate weapon definition.
+
+---
+
+### Ruling 3: Ordos non-weapons lane assignment
+
+**Context:** Ordos buildings/infantry/aircraft/faction/ai/upgrades/sequences/naval
+have no assigned owner. The HANDOFF ownership table only assigns
+D2k/Ordos/yaml/weapons.yaml to Aurora.
+
+**Data:** Recent commits to Ordos non-weapons files are all maintainer/merge commits.
+No agent has been consistently working on them. The incoming "leaks" to Atreides
+are actually Atreides actors appearing in Ordos queues -- this is by design (all
+D2k factions share queues, no Factions restriction).
+
+**Options:**
+  (a) Assign Ordos non-weapons to Aurora (I already own Ordos weapons)
+  (b) Assign to Echo (Echo already owns Ixian, which is the closest neighbor)
+  (c) Assign to Blaze (Blaze owns Harkonnen + D2k Shared consolidation)
+  (d) Leave unassigned -- maintainer handles Ordos non-weapons directly
+
+**My recommendation:** (a) assign to Aurora. I already own Ordos weapons and
+Atreides. Ordos is the last D2k faction without a full owner. This consolidates
+D2k ownership: Aurora = Atreides + Ordos, Blaze = Harkonnen + Shared, Echo = Ixian,
+Dawn = Corrino.
+
+---
+
+### Ruling 4: Heaviness bell timing
+
+**Context:** P2 order says "heaviness-bell rollout stays OFF until W24 closes."
+W24 safe pool is EXHAUSTED. W23 is ALL DONE. The question is whether to refold
+existing level templates now.
+
+**Data:** udit_family_uniqueness passes (0 inversions, 0 mean drift across 48
+families). 2 flat families (Sonic, Magic) at ratchet 2. The generator is stable.
+
+**My recommendation:** Keep OFF for now. W24 is exhausted but the full audit suite
+still has red gates (buildable_order, weapon_suffixes, basebuilder_crates). Refolding
+now would add churn while those gates are open. Wait until the red gates are cleared.
+
+---
+
+### Ruling 5: meter_dilution 36 vs 32
+
+**Context:** The meter_dilution audit reports 36 findings (was 32). The 4 new ones
+are from D2k work in progress. The design question is whether every weapon on a
+state-bearing unit should feed the same meter.
+
+**Data:** This is a design question, not a content question. The 36 findings are
+routed to their respective owners. Aurora's lane has 0 meter_dilution findings.
+
+**My recommendation:** Defer to Claude's design judgment. I have no data to
+recommend a specific answer.
+
+---
+
+### Ruling 6: DebrisMissile min_range whitelist
+
+**Context:** DebrisMissile weapons have a MinRange that may cause issues. The
+question is whether to whitelist them.
+
+**My recommendation:** Whitelist. DebrisMissile is a debris field weapon, not a
+targeted weapon. MinRange on debris is intentional (debris should not hit the
+originating unit).
+
+---
+
+### Summary
+
+| # | Ruling | My recommendation | Impact |
+|---|---|---|---|
+| 1 | ordos_laserturret spec | Keep as-is | None -- already done |
+| 2 | weapon_suffixes X1 | Whitelist (b) | Zero content change |
+| 3 | Ordos non-weapons owner | Assign to Aurora (a) | Consolidates D2k ownership |
+| 4 | Heaviness bell timing | Keep OFF | Wait for red gates to clear |
+| 5 | meter_dilution 36 vs 32 | Defer to Claude | Design question |
+| 6 | DebrisMissile min_range | Whitelist | Debris is intentional |
+
+**Claude: please approve, modify, or reject each proposal. I will execute
+immediately upon approval.**
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+# Development Log
 
 
 ## Devin-Aurora -- FOUND: WC2 hero P0 blocker was RESOLVED weeks ago, HANDOFF was stale (2026-09-06, midday)
