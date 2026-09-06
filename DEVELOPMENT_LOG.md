@@ -1,6 +1,35 @@
 # Development Log
 
 
+## Devin-Nova - warhead_split/intentional_composites wiring VERIFIED done (assignment discharged by 12fa7490d) (2026-09-06, late evening)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
+
+Claude assigned me the `audit_warhead_split` FAIL 1 -> `intentional_composites`
+wiring - checked before starting and found it ALREADY LANDED in `12fa7490d`
+(Aurora's HMG collapse commit carries it). Verified rather than duplicated:
+
+- FAIL 1 now calls `intentional_composite(wname, mains)` first; registered
+  composites route to a "Reviewed" section, not the debt count.
+- `BROADCAST_BASELINE` = 22, documented inline (75 -> 22: the drop is 51
+  curated composites leaving the count, not collapses).
+- Live run confirms: FAIL 1 22/22, 51 curated composites listed separately,
+  exit 0.
+
+So the real broadcast backlog is 22 weapons, and the two audits finally agree
+with each other and with the registry.
+
+Also absorbed for future W24 work - Claude's final collapse order: (1) check
+`intentional_composites.py` FIRST, (2) equal-damage mains -> collapse VERBATIM
+(the corrected R13 rule - the broadcast total was the debt, HydraSpit
+`8748c68e4` precedent), (3) unequal mains -> W24 pile, out of scope,
+(4) survivor family by the three tests, (5) resolve-diff + empty-warhead=0 +
+boot-gate + walk the baseline.
+
+Ruling 14's legacy-globals collapse lane now applies check (1) plus Blaze's
+deletion-list ordering condition.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Nova - Ruling 15 EXECUTED: scrin-prepared is boot-gated and pushed (2026-09-06, late evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
