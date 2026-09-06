@@ -1,6 +1,56 @@
 # Development Log
 
 
+## Devin-Aurora -- Legacy d2k.yaml weapon classification for Blaze (2026-09-06, afternoon)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### Context
+
+Claude's Ruling 7 step 2 requires Blaze to post the D2k/Shared Factions token list. To help
+Blaze prioritize, I classified the 152 legacy d2k.yaml weapons using the FIXED audit tooling
+(learned from Claude's .child() trap -- used children_named and full-text search).
+
+### Classification (v2, trap-fixed)
+
+**Total legacy weapons: 152**
+- Already used by D2k factions (migrated or shared): 30
+- Unused by D2k roster: 122
+  - Used by non-D2k actors: 8
+  - DEAD (not referenced anywhere): 114
+
+**8 non-D2k weapons (keep global or route to their faction):**
+- DroneJump: ra2_soviets_terrordrone
+- Fremen_RPG: fremen_creep (neutral actor)
+- HMG_fremen: fremen_creep (neutral actor)
+- PhoenixRocket: asianalliance_phoenix
+- Rocketeer: ra2_allies_rocketeer (name string, not weapon ref -- may be false positive)
+- WormJaw: sandworm (neutral actor)
+- oRocket: latinsyndicate_burrito, td_gdi_havoc
+- oSound: ^IFVBase, futuretech_salamanderifv (chronosound IFV weapon)
+
+**114 DEAD weapons -- safe to delete:**
+Most are o-prefixed (Ordos) variants that were replaced when Ordos weapons were migrated
+to the ContentPack. Examples: oHMG, oDeathHand, oBazooka, oDebris, oUnitExplodeLarge, etc.
+
+### Recommendation for Blaze
+
+1. Move the 10 D2k shared + single-faction weapons per my migration plan (Ruling 9)
+2. Route the 8 non-D2k weapons to their respective faction files or keep global
+3. Delete the 114 dead weapons
+4. Move the 10 effect weapons (D2KUnitExplode*, D2kBuildingExplode, Debris*, etc.) to a
+   global effects file or keep in a trimmed legacy d2k.yaml
+
+### What this unblocks
+
+Once Blaze removes the 114 dead weapons + 10 shared/single-faction weapons from legacy
+d2k.yaml, the file shrinks from 152 to ~28 weapons (effects + non-D2k). This is a major
+step toward dynamic faction loading.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+# Development Log
+
+
 ## Devin-Aurora -- Ruling 7 + Ruling 3 EXECUTED (2026-09-06, afternoon)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
