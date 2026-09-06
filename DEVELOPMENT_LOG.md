@@ -1,6 +1,71 @@
 # Development Log
 
 
+
+## Devin-Ember - 6/8 RedAlert broadcasts collapsed + verified; UNCOMMITTED until sweeps settle (2026-09-06, late evening)
+
+**Identity:** Devin-Ember (Devin CLI, SWE-1.7 Max), broadcast-collapse lane per Claude's night orders.
+
+Ack Claude's STOP: the phantom-naming bug is confirmed - I independently hit the same
+doubled-prefix diagnosis in FACTION_SLUG minutes before his entry landed (my fix attempt
+raced his in-tree fix). ra2_allies rename order is therefore moot; I went straight to the
+second half of my lane.
+
+### Done and verified at resolver level (NOT committed - see hold below)
+
+Collapsed to a single delivery-matched main, VERBATIM damage, per the night ruling:
+
+| weapon | file | survivor | dropped |
+|---|---|---|---|
+| AlliedTankDestroyerCannon | RedAlert/Allies | CannonAP_Light (fx/proj match) 12000 | CannonHE_Medium |
+| SheridanCannon | RedAlert/Allies | CannonHE_Medium (fx/proj match) 8000 | CannonAP_Light |
+| Aphid_AA | RedAlert/Allies | MissileHE_Heavy (fx/proj match) 8000 | Concussion_Medium |
+| MagicOrb | RedAlert/Shared | Tesla_Heavy 12000 | Magic_Heavy |
+| MagicOrb2 | RedAlert/Shared | Tesla_Heavy 4000 | Magic_Heavy |
+| Type97PlasmaCannon | RedAlert/Japan | Tesla_Heavy 4000 | Railgun_Heavy, CannonHE_Heavy |
+
+Survivor notes: MagicOrb pair + Type97 keep Tesla_Heavy specifically because every authored
+block carries Tesla DamageTypes AND the authored Warhead@Tesla_Heavy_ExtraDamage half draws
+its Versus/Falloff/ValidTargets defaults from the ^Warhead_Tesla_Heavy template - keeping
+Tesla preserves that coupling intact (post-collapse resolved diff shows zero field loss on the
+kept extra). Type97 also loses the template-supplied Railgun_Heavy_ExtraDamage (1000) with its
+main - part of the broadcast artifact. EMPUnit: AffectsIntegrity on the MagicOrb pair kept
+(mechanic warhead - flagging since it is not one of the four enumerated exceptions).
+
+Resolver before/after diff on all six: only the dropped mains removed, nothing else changed.
+ind_empty_warhead = 0. udit_warhead_split live count 72 -> 64 (two more cleared by
+concurrent work). audit_split_definitions clean for all six (the legacy missiles.yaml
+Aphid_AA/SCUD copies are dead - file not in mod.yaml Weapons manifest).
+
+### NOT committed - deliberate hold
+
+The three files carry the maintainer's uncommitted -Warhead@* marker-deletion sweep
+interleaved with my hunks, and Nova's entry documents boot-breaking half-states elsewhere
+(CABAL/Forgotten). A scoped git add cannot separate hunks inside one file, and
+extract_stats now would bake the sweep's contaminated resolved state into ledgers. Holding
+until the sweep/revert state resolves. File owners reconciling the sweep: my hunks are the
+Inherits@wh/proj/fx retags + removed duplicate mains listed above - keep them.
+
+### Flagged for Claude (design/lane question, not gate-answerable)
+
+**SCUDIrak + V2ExplodeIrak are dead children of the LIVE SCUD broadcast** (Soviets pack:
+MissileHE_Heavy + Flame_Heavy, 2x60000). SCUD has 8 children incl. live Soviet weapons
+(SCUDThermobaric, SCUDTesla, SCUDNUKE*) and a live legacy-global child at weapons.yaml:13143.
+Collapsing the parent is a cross-lane, behavior-changing act on Soviets content; restructuring
+the two dead children off SCUD means copying ~30 lines each. Options: (a) collapse SCUD parent -
+needs a lane ruling + child diffs for all 8; (b) orphan the two dead children; (c) delete them
+as dead content. I take no position beyond 'not silently'.
+
+### Also on record
+
+- My X3 AA renames (validated map 	ools/rename/rename_map_x3_aa.yaml, 10 weapons) were wiped
+  from the working tree uncommitted; audit is red at X3=10 again. Map is intact - re-apply is
+  one safe_rename.py run when the tree settles.
+- W5 reads 1070 vs ratchet 401 - consistent with the marker-deletion sweep resurrecting
+  negated mains tree-wide; that count belongs to the sweep owner, not to collapse work.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
 ## Devin-Nova - CORRECTION on 9b67da411: it swept staged foreign WIP (2026-09-06, late evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max).
