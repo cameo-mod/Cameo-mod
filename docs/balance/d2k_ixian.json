@@ -59,6 +59,26 @@
      "v": "100"
     },
     "name": "Alfayrus",
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@BomberBuff",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -282,6 +302,32 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 200,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@RearmableAircraft",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@BomberBuff",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -319,6 +365,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "30000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "15",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -326,11 +379,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "30000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "15",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "30000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "1500",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "3000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "15",
@@ -391,6 +465,38 @@
     "queue": [
      "Aircraft",
      "RAAircraft"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 200,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@RearmableAircraft",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@BomberBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -462,11 +568,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "1000",
+        "tag": "HeavyFlameWeapon",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -476,11 +603,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -512,11 +653,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "1000",
+        "tag": "HeavyFlameWeapon",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -526,11 +688,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -586,6 +762,26 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -627,10 +823,31 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "18000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
         "tag": "RailgunExtraDamageCompatibility",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
        {
@@ -641,6 +858,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "75",
@@ -648,11 +872,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -711,6 +956,32 @@
     "queue": [
      "Aircraft",
      "RAAircraft"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -813,6 +1084,32 @@
     "queue": [
      "Aircraft",
      "RAAircraft"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -1011,6 +1308,27 @@
         "spread": "80",
         "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "80",
+        "tag": "CannonAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
@@ -1070,6 +1388,20 @@
     "queue": [
      "Defence",
      "RADefence"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -1265,6 +1597,20 @@
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -1293,10 +1639,31 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -1355,6 +1722,20 @@
     "queue": [
      "Defence",
      "RADefence"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -1655,6 +2036,20 @@
      "Defence",
      "RADefence"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1847,6 +2242,20 @@
      "Defence",
      "RADefence"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -1991,11 +2400,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2005,11 +2428,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2051,11 +2488,46 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2065,11 +2537,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2155,11 +2641,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2169,11 +2669,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2216,11 +2730,46 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2230,11 +2779,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2337,6 +2900,32 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@MeleeBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -2524,6 +3113,32 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 100,
+      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 113,
+      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#FirepowerMultiplier@ixian_lightinfantry.Modifier",
+      "trait": "FirepowerMultiplier@ixian_lightinfantry",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -2695,6 +3310,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -2809,6 +3444,20 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -2922,6 +3571,26 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -3176,6 +3845,32 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -3800,6 +4495,32 @@
      "v": "100"
     },
     "name": "Apparition",
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@MeleeBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3837,11 +4558,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "14000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "7",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "7",
@@ -3851,6 +4593,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "14000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "7",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
@@ -3858,11 +4607,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "14000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "7",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "14000",
@@ -3936,11 +4699,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3950,11 +4734,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3964,11 +4762,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4006,6 +4818,13 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "0",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "600",
         "falloff": null,
         "spread": "300",
@@ -4020,11 +4839,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4041,11 +4881,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4055,11 +4916,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4069,11 +4944,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4150,6 +5039,20 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+      "trait": "FirepowerMultiplier@DualWeapon",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4217,6 +5120,20 @@
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -4245,10 +5162,31 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -4315,6 +5253,26 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+      "trait": "FirepowerMultiplier@DualWeapon",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4360,6 +5318,13 @@
         "falloff": "100, 0",
         "spread": "80",
         "tag": "CannonAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -4421,6 +5386,20 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4459,6 +5438,27 @@
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
         "tag": "Concussion_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
@@ -4543,6 +5543,14 @@
      "Vehicle",
      "RAVehicle",
      "Starport"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -4638,6 +5646,14 @@
      "Vehicle",
      "RAVehicle",
      "Starport"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -4768,6 +5784,14 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4815,11 +5839,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "12000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "6",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
        },
        {
         "damage": "6",
@@ -4829,11 +5874,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "12000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "6",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -4907,6 +5973,20 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4952,6 +6032,13 @@
         "falloff": "100, 0",
         "spread": "80",
         "tag": "CannonAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -5012,6 +6099,14 @@
      "Vehicle",
      "RAVehicle",
      "Starport"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -5219,6 +6314,20 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5282,6 +6391,20 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5289,11 +6412,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -5371,6 +6508,26 @@
      "Vehicle",
      "RAVehicle",
      "Starport"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+      "trait": "FirepowerMultiplier@DualWeapon",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -5466,6 +6623,14 @@
      "Vehicle",
      "RAVehicle",
      "Starport"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -5660,6 +6825,26 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@StormEffect.Modifier",
+      "trait": "FirepowerMultiplier@StormEffect",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -5752,6 +6937,14 @@
      "Vehicle",
      "RAVehicle",
      "Starport"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",

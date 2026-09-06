@@ -130,6 +130,14 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 200,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@RearmableAircraft",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -274,6 +282,14 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 200,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@RearmableAircraft",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -412,6 +428,27 @@
         "spread": "80",
         "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "80",
+        "tag": "CannonAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
@@ -464,6 +501,7 @@
      "~atreides_constructionyard",
      "atreides_barracks"
     ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -919,6 +957,7 @@
      "~atreides_constructionyard",
      "atreides_barracks"
     ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1220,6 +1259,7 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -1332,6 +1372,26 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -1501,6 +1561,26 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 100,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@RocketTrooperInfantryBuff",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -1842,6 +1922,7 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1927,6 +2008,14 @@
      "Vehicle",
      "RAVehicle",
      "Starport"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -2053,6 +2142,14 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2148,6 +2245,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -2312,6 +2417,14 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2418,6 +2531,14 @@
      "RAVehicle",
      "Starport"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2506,6 +2627,14 @@
      "Vehicle",
      "RAVehicle",
      "Starport"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -2629,6 +2758,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2719,6 +2856,14 @@
      "Vehicle",
      "RAVehicle",
      "Starport"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",

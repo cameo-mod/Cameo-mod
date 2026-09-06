@@ -1,5 +1,26 @@
 # Development Log
 
+## Codex - PR 328 current-upstream integration and scoped review (2026-09-06)
+
+Integrated `56c14d9db` without changing its gameplay, engine, or class anchors.
+Retired the deleted composite-registry diagnostic (historical output archived),
+repaired shared survey imports without exemptions or raised ratchets, and retained
+resolved firepower consumer fixes and spawn-only roster eligibility correction.
+
+Paired full tests: PR 766 tests / 43 failed modules; clean upstream 650 / 50.
+All 137 tests in twelve PR-added/modified modules pass. No new failing module;
+twelve newly executable failing methods expose pre-existing import-blocked
+profile/ratchet contracts. Both canonical audit runs complete with exit 1; no PR
+zero-byte reports. Percentage-runtime, 33-ledger zero drift, 145-template sync,
+and four diagnostic freshness checks pass. Independent review recommends a scoped
+merge, not a globally green balance pipeline. Two minor static flags were repaired
+and their 43 focused tests rerun successfully. The trusted fixed-SHA historical
+code-execution diagnostic remains visible in the raw security audit.
+
+See `docs/design/PR328_UPSTREAM_INTEGRATION.md` for the full baseline comparison,
+limitations and superseded snapshots. No game launched. Peak measured PC memory
+55.0%. Aedis's implementation brief is the separately authorized next phase.
+
 
 ## Devin-Aurora - DuneRankDecoration fix + audit status update (2026-09-06, evening)
 
@@ -5121,6 +5142,23 @@ the NEW maintainer ruling ("no light/medium/heavy — heaviness bell"), not an e
 attributable to the merge-fallout sweep or today's collapse/retrofit commits. All
 gating failures are known baselines or live-edit drift owned elsewhere.
 
+
+## Codex — PR 328 buildability repair completed locally (2026-09-06)
+
+Scoped to `tools/balance/extract_stats.py`, `tools/tests/test_assign_references.py`
+and the PR 328 integration note. Repair the missing self-prerequisite classification
+documented in `docs/design/REFERENCE_PIPELINE_HANDOFF.md` §10, and the test-file
+entry point that hides its regression cases during direct execution. No gameplay,
+reference matching, class anchors, composite approvals or agent-owned codemods.
+Latest upstream inspected: `77beaef41`; implementation starts on PR head `9a47d4703`.
+No publication or merge in this follow-up.
+The fix and regenerated Forgotten ledgers are ready for integration review. The
+14 assignment tests pass via discovery and direct execution, independently reviewed.
+Full suite: 88 modules, 862 tests run, 15 dependency skips, 21 failed modules (down
+from 22, no new failing module). Separate bundled-Python consumer/workbook reruns:
+27 passes, zero skips. All 33 ledgers verify with zero drift; percentage-runtime,
+generator synchronization and diff checks pass. No gameplay files changed.
+See `docs/design/PR328_UPSTREAM_INTEGRATION.md` for the scope and remaining blockers.
 
 ## Claude (Opus 5, local — file access + boot gate) — reference sources DELIVERED, and four findings for other agents (2026-09-05)
 

@@ -16,11 +16,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "LightFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -30,11 +44,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -44,11 +79,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -112,6 +168,26 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -205,6 +281,32 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -285,6 +387,32 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -318,11 +446,39 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "24000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 50",
         "spread": "160",
         "tag": "SwordWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
@@ -332,6 +488,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": null,
         "spread": "50",
@@ -339,11 +502,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": null,
+        "tag": "MutaliskCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "16000",
+        "falloff": null,
+        "spread": null,
+        "tag": "DevourerChemicalAirCompatibility",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
@@ -391,6 +575,26 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -431,11 +635,25 @@
         "type": "SpreadDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "LightFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -445,11 +663,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -459,6 +698,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
@@ -466,11 +712,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
@@ -524,6 +784,32 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -605,6 +891,32 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -638,6 +950,34 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "233",
+        "tag": "Concussion_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -645,11 +985,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -709,6 +1070,26 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -742,11 +1123,39 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "16000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "Chemical_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 50",
         "spread": "160",
         "tag": "SwordWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -756,6 +1165,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": null,
         "spread": "50",
@@ -763,11 +1179,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "16000",
+        "falloff": null,
+        "spread": null,
+        "tag": "MutaliskCompatibility",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
@@ -823,6 +1253,32 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     },
+     {
+      "modifier": 25,
+      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+      "trait": "FirepowerMultiplier@MultiWeapon",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -907,11 +1363,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -967,6 +1437,26 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -997,6 +1487,20 @@
         "falloff": "100, 70, 30, 0",
         "spread": "400",
         "tag": "MissileAA_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -1044,6 +1548,26 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 115,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FighterBuff",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -1878,6 +2402,20 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "125",
@@ -1885,11 +2423,39 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -1932,6 +2498,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "6",
         "falloff": null,
         "spread": "200",
@@ -1939,11 +2512,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "6",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -2006,6 +2593,20 @@
      "Building",
      "RABuilding"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2035,6 +2636,20 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "125",
@@ -2042,11 +2657,39 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2089,6 +2732,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "6",
         "falloff": null,
         "spread": "200",
@@ -2096,11 +2746,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "6",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -2162,6 +2826,20 @@
      "Defence",
      "RADefence"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2191,6 +2869,20 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "125",
@@ -2198,11 +2890,39 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2245,6 +2965,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "6",
         "falloff": null,
         "spread": "200",
@@ -2252,11 +2979,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "6",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -2319,6 +3060,20 @@
      "Defence",
      "RADefence"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2348,6 +3103,20 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "125",
@@ -2355,11 +3124,39 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "3",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2402,6 +3199,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "6",
         "falloff": null,
         "spread": "200",
@@ -2409,11 +3213,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "6",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "6",
@@ -2474,6 +3292,20 @@
     "queue": [
      "Defence",
      "RADefence"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -2551,6 +3383,26 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -2668,6 +3520,32 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 99,
+      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+      "trait": "FirepowerMultiplier",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2741,6 +3619,26 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@MeleeBuff",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -2825,6 +3723,26 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HeroBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2905,6 +3823,38 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FlyingInfantry",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2938,6 +3888,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -2945,11 +3902,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2988,6 +3959,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -2995,11 +3973,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3057,6 +4049,32 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3094,11 +4112,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -3108,11 +4140,39 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3122,11 +4182,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3136,11 +4210,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -3203,6 +4291,38 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FlyingInfantry",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -3284,6 +4404,32 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@MeleeBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3362,6 +4508,14 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -3451,6 +4605,32 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@MeleeBuff",
+      "types": []
+     },
+     {
+      "modifier": 150,
+      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#FirepowerMultiplier@zergling.Modifier",
+      "trait": "FirepowerMultiplier@zergling",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -4203,6 +5383,20 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 25,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@repair",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4291,6 +5485,20 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -4393,11 +5601,39 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4407,11 +5643,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4421,11 +5671,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4494,6 +5758,26 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     },
+     {
+      "modifier": 40,
+      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+      "trait": "FirepowerMultiplier@MultiWeapon",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -4584,6 +5868,14 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -4696,6 +5988,20 @@
     ],
     "queue": [
      "SCZergInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",

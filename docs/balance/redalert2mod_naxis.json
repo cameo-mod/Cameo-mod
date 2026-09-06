@@ -187,6 +187,7 @@
      "v": "150000"
     },
     "name": "Horten Bomber Plane",
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -356,6 +357,26 @@
     "queue": [
      "Aircraft",
      "RAAircraft"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 115,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FighterBuff",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -553,6 +574,32 @@
      "v": "100"
     },
     "name": "Interceptor",
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 115,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FighterBuff",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+      "trait": "FirepowerMultiplier@MultiWeapon",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -821,6 +868,38 @@
     "queue": [
      "Aircraft",
      "RAAircraft"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 115,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FighterBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+      "trait": "FirepowerMultiplier@DualWeapon",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -1292,6 +1371,32 @@
      "RAAircraft",
      "Vehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#FirepowerMultiplier@FirerateCompensation.Modifier",
+      "trait": "FirepowerMultiplier@FirerateCompensation",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1479,6 +1584,20 @@
     "queue": [
      "Building",
      "RABuilding"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -1895,6 +2014,20 @@
      "Defence",
      "RADefence"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2212,6 +2345,20 @@
      "Defence",
      "RADefence"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2510,6 +2657,20 @@
     "queue": [
      "Defence",
      "RADefence"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -2914,6 +3075,32 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 100,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@CloseCombatInfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+      "trait": "FirepowerMultiplier",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3110,6 +3297,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3253,6 +3460,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@MeleeBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3382,6 +3609,14 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -3529,6 +3764,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3671,6 +3914,26 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -3843,6 +4106,20 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -4092,6 +4369,20 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4288,6 +4579,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 120,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@SniperInfantryBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4459,6 +4770,32 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 100,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 67,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier@naxis_naxiriflerecruit.Modifier",
+      "trait": "FirepowerMultiplier@naxis_naxiriflerecruit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -4635,6 +4972,32 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 100,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 100,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier@naxis_naxiriflesoldier.Modifier",
+      "trait": "FirepowerMultiplier@naxis_naxiriflesoldier",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -5151,6 +5514,20 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5663,6 +6040,20 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6162,6 +6553,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -6621,6 +7032,38 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FlyingInfantry",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier@FirerateCompensation.Modifier",
+      "trait": "FirepowerMultiplier@FirerateCompensation",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6729,6 +7172,26 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@MeleeBuff",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -6915,6 +7378,26 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "inherited",
@@ -7105,6 +7588,32 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 100,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@CloseCombatInfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 95,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+      "trait": "FirepowerMultiplier",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7274,6 +7783,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -7421,6 +7950,20 @@
     "queue": [
      "Naval",
      "RANaval"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 200,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#FirepowerMultiplier@BallisticMissileSubBuff.Modifier",
+      "trait": "FirepowerMultiplier@BallisticMissileSubBuff",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -7661,6 +8204,14 @@
      "Naval",
      "RANaval"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7752,6 +8303,20 @@
     "queue": [
      "Naval",
      "RANaval"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@ScoutShip",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -8438,6 +9003,20 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 120,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#FirepowerMultiplier@tiger.nax.Modifier",
+      "trait": "FirepowerMultiplier@tiger.nax",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8588,6 +9167,20 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -8760,6 +9353,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8860,6 +9461,20 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -8962,6 +9577,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -9091,6 +9714,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -9239,6 +9870,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9375,6 +10014,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -9549,6 +10196,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9719,6 +10374,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9838,6 +10501,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9941,6 +10612,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -10237,6 +10916,20 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -10579,6 +11272,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -10656,6 +11357,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -10754,6 +11463,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -11168,6 +11885,20 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -11399,6 +12130,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -11492,6 +12231,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -11612,6 +12359,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -11730,6 +12485,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -12198,6 +12961,20 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
