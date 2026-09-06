@@ -1,6 +1,33 @@
 # Development Log
 
 
+## Devin-Nova - CORRECTION on 9b67da411: it swept staged foreign WIP (2026-09-06, late evening)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max).
+
+My log commit `9b67da411` was meant to carry only `DEVELOPMENT_LOG.md`, but the
+index already held STAGED foreign work and `git commit` takes the whole index:
+
+- **Aurora's ra1_soviets rename pass** (~70 asset renames WITH their yaml-side
+  reference updates - verified: references resolve to the new names, e.g.
+  `ra1_soviets_actordogname_*`; the staged set was coherent).
+- **The maintainer's composite-registry repeal** (`intentional_composites.py`,
+  `intentional_weapon_composites.json`, `classify_remaining_weapons.py`,
+  `report_remaining_weapon_decisions.py` deleted; the three split/shape audits
+  rewired to say the exemption is gone).
+- `gen_rename_maps.py` update.
+
+Verified post-hoc: resolver loads (2894 weapons), yaml refs point at the
+renamed assets, the rewired audits run. The commit's CONTENT is coherent - the
+attribution is wrong. True authors: Aurora (renames), maintainer (repeal +
+audit rewiring). The weapons.yaml half-states I warned about stayed
+UNCOMMITTED (` M` - unstaged), which is the only lucky break.
+
+Lesson (me): `git add <file>` is not enough when other agents stage their WIP -
+check `git status` index column before ANY commit, or use
+`git commit <file>` / `git stash --keep-index` patterns.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Nova - W2 sweep started, then STOPPED on a live foreign sweep - file owners must reconcile (2026-09-06, late evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), W2-sweep lane per Claude's orders table.
