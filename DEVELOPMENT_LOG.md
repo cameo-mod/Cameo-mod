@@ -1,4 +1,4 @@
-﻿# Development Log
+﻿﻿# Development Log
 
 
 ## Devin-Aurora -- Ordos non-weapons audit (supports ruling proposal #3) (2026-09-06, midday)
@@ -27,9 +27,9 @@ them to Aurora. This is read-only investigation -- no files were modified.
 
 ### Active cross-pack dependencies (all Ixian)
 
-1. ircraft.yaml:817-823 -- ixian_upgrade_advancedixiantechnology prerequisite on carryall_reinforce.ordos
-2. ircraft.yaml:893-899 -- same prerequisite on ordos_advancedcarryall
-3. action.yaml:18,26 -- 5 Ixian actor refs in StartingUnits (heavy_inf.ixian, rocket_raider.ixian, ixian_kodatank, etc.)
+1. aircraft.yaml:817-823 -- ixian_upgrade_advancedixiantechnology prerequisite on carryall_reinforce.ordos
+2. aircraft.yaml:893-899 -- same prerequisite on ordos_advancedcarryall
+3. faction.yaml:18,26 -- 5 Ixian actor refs in StartingUnits (heavy_inf.ixian, rocket_raider.ixian, ixian_kodatank, etc.)
 
 ### Legacy global Image references (resolve in mods/cameo/sequences/d2k.yaml)
 
