@@ -37,6 +37,32 @@ and report a completed work item; Claude reviews and squash-merges one meaningfu
 maintainer must be able to read master — 107 commits in one day, 49 of them touching only
 `DEVELOPMENT_LOG.md`, is not reviewable.
 
+### ⛔ 2026-09-07 — four bugs shipped past every gate; three new audits + one hook rule
+
+**The maintainer found the worst one by playing**: the mutalisk's fire shrapnel bounced
+forever. Root cause for two of the four, and it is now `CLAUDE.md` rule 8g:
+
+> **`-Key@X:` in a child CANCELS what an ANCESTOR defines.** It looks dead precisely
+> because the node it sits in does not define X.
+
+`d818aec40` deleted 2248 of them as "stale": multi-main weapons **461 → 1103**, and 14
+deleted `-Warhead@shrapnel:` terminators made the spore loop forever. **Nothing
+crashed** — a boot gate proves the rules PARSE, never that they are RIGHT. Reverted in
+`ad6fc66b8`, ledger re-extracted in `a6525d6fb`.
+
+| new gate | catches | ratchet |
+|---|---|---|
+| `audit_shrapnel_chains.py` | a FireShrapnel chain that never ends | S1a **0**; S1b 44 self-cycles (chain lightning, pre-existing, **needs a ruling — do not "fix"**) |
+| `audit_map_actors.py` | a map placing an actor the rules do not define (boot gate is blind: it fails when the map is STARTED) | M1 **0** |
+| `bash_guard.py` rule 4 | deleting a `-Key@...` without `RESOLVE-VERIFIED` in the message | — |
+
+Also fixed: `audit_naming_damage`'s regex could not see a doubled id (reported N1 4 /
+N2 0 against the true 25 / 16 — an exact zero is always suspect), and the boot-gate
+hook read the MAIN checkout's index from every worktree, which would have waved
+through engine content committed from a worktree. Both now have self-tests.
+
+Full write-up for agents: `../Cameo-mod-fleet/BRIEF_2026-09-07_what_broke_and_the_new_gates.md`.
+
 ### ⭐ Naming — the real state, measured 2026-09-06 (replaces every earlier count)
 
 `python tools/audit/audit_naming_damage.py` is the source of truth and is now in
