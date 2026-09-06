@@ -1,4 +1,4 @@
-﻿# Atreides faction-specific weapons.
+# Atreides faction-specific weapons.
 # Ported from legacy mods/cameo/weapons/d2k.yaml to make the Atreides ContentPack
 # self-contained. These override the legacy definitions (ContentPacks load after
 # the global weapons file). Shared D2k weapons (light_inf_lmg, D2K_Rocket_Trooper,
@@ -169,4 +169,51 @@ Fremen_S:
 	Warhead@2Eff: CreateEffect
 		Explosions: d2k_small_explosion
 
+# Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
+# These weapons are only used by Atreides actors.
 
+D2KRepair:
+	Inherits: Heal
+	ReloadDelay: 80
+	Report: fixit1.aud
+	ValidTargets: Repair, lockdowned, ivanattached, Repairing
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Spread: 250
+		Damage: -1500
+		ValidRelationships: Ally
+		ValidTargets: Repair, Repairing
+		Versus:
+			None: 125
+			Light: 100
+			Medium: 75
+			Heavy: 60
+			Concrete: 60
+			Wood: 100
+	Warhead@2Defuse: DetachDelayedWeapon
+		Types: ivanbomb
+		ValidTargets: ivanattached
+		ValidRelationships: Ally
+	Warhead@3Defuse: DetachDelayedWeapon
+		Types: lockdown
+		ValidTargets: lockdowned
+		ValidRelationships: Ally
+
+HMG:
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
+	ReloadDelay: 20
+	Range: 3072
+	Report: 20MMGUN1.WAV
+	Warhead@1Dam: SpreadDamage
+		Damage: 2000
+		Versus:
+			None: 100
+			Wood: 30
+			Light: 50
+			Medium: 15
+			Heavy: 10
+			Concrete: 15
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1800
