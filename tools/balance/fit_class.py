@@ -30,6 +30,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/balance"))
 import formula  # noqa: E402
 import tier_chain  # noqa: E402
+from firepower import armament_firepower  # re-export for existing callers
 import class_membership  # noqa: E402
 
 LEDGER = ROOT / "docs/balance"
@@ -75,9 +76,6 @@ def unit_inputs(u, du=None, use_k=False):
     hp = fnum((u.get("hp") or {}).get("v"))
     speed = fnum((u.get("speed") or {}).get("v") or (u.get("speed_air") or {}).get("v"))
     d = u.get("design") or {}
-    # Unconditional per-actor FirepowerMultiplier scales EFFECTIVE damage output;
-    # balance prices on effective DPS = raw x FP-mult (cameo-firepower-mult-in-dps). Default 1.0.
-    fp = fnum((u.get("firepower_multiplier") or {}).get("v")) or 1.0
     kidx = derived_dps_index(du) if use_k else {}
     total_dps, best_range = 0.0, 0.0
     fallbacks = 0
@@ -113,11 +111,10 @@ def unit_inputs(u, du=None, use_k=False):
             keyed = kidx.get((arm.get("slot"), arm.get("weapon")))
             if keyed is None:
                 fallbacks += 1
-            total_dps += raw if keyed is None else keyed
+            total_dps += (raw if keyed is None else keyed) * armament_firepower(u, arm)
         else:
-            total_dps += raw
+            total_dps += raw * armament_firepower(u, arm)
         best_range = max(best_range, formula.wdist_value(arm.get("range"), 0.0))
-    total_dps *= fp   # apply the actor-level FirepowerMultiplier to effective DPS
     if hp is None or speed is None or total_dps == 0:
         return None, 0
     # Tech tier: manual design.tech_tier is the maintainer override;

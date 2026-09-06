@@ -2,8 +2,14 @@
 # §9.1 grammar (RA1-Soviet baseline); NOT applied — see §9.6
 actors:
 	carryall: ixian_autonomouscarryall
+	duelist_tank.ixian: ixian_ixduelisttank
+	heavy_inf.ixian: ixian_rashidan
+	heavy_rocket_raider.ixian: ixian_heavyixraider
+	rocket_raider.ixian: ixian_ixraider
 files:
+	d2k_duelist_tank_icon.shp: ixian_ixduelisttank_icon.shp
 	d2k_mercenary_inf_icon.shp: ixian_lightinfantry_d2k_mercenary_inf_icon.shp
+	ix_raider.png: ixian_heavyixraider_ix_raider.png
 	ixian_heavykodatank.png: ixian_upgrade_heavykodatank_ixian_heavykodatank.png
 	ixian_heavykodatank_turret.png: ixian_upgrade_heavykodatank_ixian_heavykodatank_turret.png
 	ixian_kodatank.png: ixian_upgrade_generalpurposearmor_ixian_kodatank.png
@@ -11,6 +17,7 @@ files:
 	ixian_kodatank_turret.png: ixian_upgrade_generalpurposearmor_ixian_kodatank_turret.png
 	ixian_promotion_farasha_icon.png: ixian_farasha_icon.png
 	ixian_promotion_farasha_ixfarashaspritesheet.png: ixian_farasha_ixian_promotion_farasha_ixfarashaspritesheet.png
+	ixian_promotion_heavyixraider_icon.shp: ixian_heavyixraider_icon.shp
 	ixian_promotion_ixianempbomber_icon.png: ixian_empbomber_icon.png
 	ixian_promotion_ixianempbomber_ixheavydrone.png: ixian_empbomber_ixian_promotion_ixianempbomber_ixheavydrone.png
 	ixian_promotion_ixprojector_icon.shp: ixian_ixprojector_icon.shp
@@ -23,6 +30,8 @@ files:
 	ixian_promotion_neocymek_icon.png: ixian_neocymek_icon.png
 	ixian_promotion_neocymek_ixcymekaaturretspritesheet.png: ixian_neocymek_ixian_promotion_neocymek_ixcymekaaturretspritesheet.png
 	ixian_promotion_neocymek_ixcymekspritesheet.png: ixian_neocymek_ixian_promotion_neocymek_ixcymekspritesheet.png
+	ixian_promotion_rashidan_icon.png: ixian_rashidan_icon.png
+	ixian_promotion_rashidan_ixheavytrooper.png: ixian_rashidan_ixian_promotion_rashidan_ixheavytrooper.png
 	ixian_promotion_storminfantry_d2k_shockgunner.shp: ixian_storminfantry_ixian_promotion_storminfantry_d2k_shockgunner.shp
 	ixian_promotion_storminfantry_icon.png: ixian_storminfantry_icon.png
 	ixian_promotion_stormlasher_d2k_storm_lasher.shp: ixian_stormlasher_ixian_promotion_stormlasher_d2k_storm_lasher.shp
