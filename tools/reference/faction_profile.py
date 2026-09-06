@@ -125,11 +125,15 @@ def build(rows: list[dict]) -> dict:
             # so a unit's reference roster and its faction profile can never disagree again.
             routed = ROUTED_TOKENS.get(src, set())
             low = {o.lower() for o in owners} & routed
-            cells = exclusivity_cells(src)
-            if not any(low <= cell for cell in cells):
+            if not any(low <= cell for cell in exclusivity_cells(src)):
                 owners = []          # straddles the partition: describes the mod, not a faction
-            else:
-                owners = [o for o in owners if o.lower() in routed]
+            # ⚠ AND THEN EVERY OWNER IS CREDITED, ROUTED OR NOT. Narrowing to routed countries
+            # here deleted 26 faction profiles outright — Rise of the East's Japan, USA, Germany,
+            # Russia and the rest — for the sole reason that no Cameo faction points at them YET.
+            # The profiler answers "what is this reference faction FOR"; that question is worth
+            # asking BEFORE a route exists, and is exactly how a future route gets chosen.
+            # A unit with no routed owner at all has `low` empty, which is a subset of every cell,
+            # so unrouted-only countries profile normally.
         for owner in owners:
             fac[(src, owner, t)].append(r)
             fac[(src, owner, "overall")].append(r)

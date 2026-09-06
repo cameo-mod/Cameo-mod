@@ -18,7 +18,7 @@ Coordinates are pooled across sources with the **geometric** mean (they are rati
 
 ## Lineage de-duplication
 
-Maintainer ruling: one vote per **balance lineage**, not per file. Collapsed into `Romanov's Vengeance`: `OpenRA RA2 official`, `Yuri's Revenge on OpenRA`.
+Maintainer ruling: one vote per **balance lineage**, not per file. Collapsed into `Romanov's Vengeance`: `DTA Classic`, `OpenRA RA2 official`, `Yuri's Revenge on OpenRA`.
 
 Measured first: those five vanilla copies agree with each other on **96%** of shared units (118/123), which is what makes them one lineage. ⚠ But RV is **not** a faithful copy — on the 86 units where the others agree and RV is present, RV is the **sole dissenter on 39 (45%)**: Kirov 32× vs 16×, Aegis Cruiser 3.2× vs 6.4×, Flak Track 2.4× vs 1.4×. Electing RV as the lineage's voice therefore adopts RV's rebalance on those units rather than vanilla's consensus. Defensible — RV is the live, resolvable OpenRA codebase — but not a no-op.
 
@@ -35,9 +35,6 @@ Measured first: those five vanilla copies agree with each other on **96%** of sh
 | Crystallized Nexus | overall | hp | 61 | 80 | 200 | 238 | 1,000 |
 | Crystallized Nexus | vehicle | hp | 29 | 100 | 200 | 255 | 1,000 |
 | Crystallized Nexus | infantry | hp | 14 | 80 | 105 | 114 | 200 |
-| DTA Classic | overall | hp | 150 | 100 | 2,700 | 1,965 | 6,000 |
-| DTA Classic | vehicle | hp | 58 | 750 | 1,675 | 2,181 | 6,000 |
-| DTA Classic | infantry | hp | 23 | 120 | 500 | 437 | 1,000 |
 | DTA Enhanced | overall | hp | 160 | 100 | 2,900 | 2,244 | 10,000 |
 | DTA Enhanced | vehicle | hp | 70 | 1,100 | 2,000 | 2,478 | 10,000 |
 | DTA Enhanced | infantry | hp | 22 | 250 | 500 | 574 | 2,700 |
@@ -119,10 +116,10 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 
 | stat | HIGH-confidence rows | median ratio | geo-mean ratio | within 2× |
 |---|--:|--:|--:|--:|
-| hp | 224 | 1.26× | 1.25× | 71% |
-| speed | 196 | 0.95× | 0.95× | 97% |
-| turn_speed | 100 | 0.99× | 0.85× | 85% |
-| turn_ratio | 100 | 0.78× | 0.91× | 87% |
+| hp | 216 | 1.26× | 1.28× | 72% |
+| speed | 191 | 0.95× | 0.95× | 97% |
+| turn_speed | 99 | 0.98× | 0.85× | 85% |
+| turn_ratio | 99 | 0.78× | 0.90× | 87% |
 
 ⭐ **The turn law reproduces itself out of the reference data.** `turn_ratio` is `speed / turn_speed` — the divisor in Cameo's own law (turreted ground `Speed/5`, turretless `2×Speed/5`, helicopters and spaceships `Speed/5`, planes `Speed/15`). The reference consensus lands the Apocalypse at **5 → 5** and the Nod Buggy at **5 → 5**, and the whole HIGH-confidence population at a median of ~1.0×. Cameo legislated that divisor; thirteen independent rosters agree with it. That is a law confirmed from outside, not an artifact of the measurement.
 
@@ -132,12 +129,12 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 
 | actor | type | stat | now | target | ratio | sources | confidence |
 |---|---|---|--:|--:|--:|--:|---|
-| `cabal_radar_cruiser` | ship | w_damage | 1 | 24,730 | 24730.30× | 5 | HIGH |
-| `td_nod_reconbike` | vehicle | w_damage | 1 | 14,053 | 14052.90× | 4 | HIGH |
+| `cabal_radar_cruiser` | ship | w_damage | 1 | 21,407 | 21407.00× | 4 | HIGH |
+| `td_nod_reconbike` | vehicle | w_damage | 1 | 14,571 | 14570.80× | 3 | HIGH |
 | `td_nod_lighttankmkii` | vehicle | w_damage | 1 | 12,717 | 12717.20× | 4 | HIGH |
-| `td_nod_reconbike` | vehicle | w_dps | 0 | 444 | 11110.00× | 4 | HIGH |
+| `td_nod_reconbike` | vehicle | w_dps | 0 | 449 | 11235.00× | 3 | HIGH |
 | `td_nod_lighttankmkii` | vehicle | w_dps | 0 | 390 | 9755.00× | 4 | HIGH |
-| `cabal_radar_cruiser` | ship | w_dps | 0 | 248 | 1486.20× | 5 | HIGH |
+| `cabal_radar_cruiser` | ship | w_dps | 0 | 207 | 1241.40× | 4 | HIGH |
 | `futuretech_athenacannon` | vehicle | w_dps | 193,696 | 290 | 0.00× | 1 | LOW |
 | `terran_sciencevessel` | aircraft | w_damage | 150,000 | 314 | 0.00× | 1 | LOW |
 | `terran_sciencevessel` | aircraft | dps_vs_VEH | 555 | 1 | 0.00× | 1 | LOW |
@@ -146,7 +143,7 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `yuri_magnetron` | vehicle | w_damage | 3,000 | 646,956 | 215.65× | 4 | HIGH |
 | `futuretech_athenacannon` | vehicle | dps_vs_INF | 48,770 | 303 | 0.01× | 1 | LOW |
 | `steelconsortium_megalodon` | vehicle | dps_vs_INF | 1,347 | 9 | 0.01× | 1 | LOW |
-| `ts_nod_missilesilo` | defense | w_reload | 50 | 5,890 | 117.80× | 2 | MEDIUM |
+| `ts_nod_missilesilo` | defense | w_reload | 50 | 5,999 | 119.98× | 1 | LOW |
 | `yuri_magnetron` | vehicle | dps_vs_VEH | 277 | 31,690 | 114.53× | 3 | HIGH |
 | `futuretech_athenacannon` | vehicle | dps_vs_BLD | 47,963 | 455 | 0.01× | 1 | LOW |
 | `yuri_magnetron` | vehicle | w_burst | 100 | 1 | 0.01× | 1 | LOW |
@@ -165,10 +162,10 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `protoss_archon` | vehicle | dps_vs_INF | 4,202 | 147 | 0.03× | 1 | LOW |
 | `forgotten_mlrs` | vehicle | dps_vs_BLD | 2,240 | 83 | 0.04× | 1 | LOW |
 | `tkm_viper` | aircraft | dps_vs_VEH | 3,143 | 121 | 0.04× | 1 | LOW |
+| `cabal_radar_cruiser` | ship | w_reload | 6 | 154 | 25.63× | 4 | HIGH |
 | `terran_valkyrie` | aircraft | w_damage | 8,003 | 317 | 0.04× | 1 | LOW |
 | `ra1_soviets_grad` | vehicle | dps_vs_BLD | 1,021 | 42 | 0.04× | 1 | LOW |
 | `zerg_devourer` | aircraft | dps_vs_BLD | 92 | 2,198 | 23.85× | 1 | LOW |
-| `cabal_radar_cruiser` | ship | w_reload | 6 | 143 | 23.77× | 5 | HIGH |
 | `ra1_soviets_grad` | vehicle | w_dps | 853 | 37 | 0.04× | 1 | LOW |
 | `atreides_ornithopter` | aircraft | dps_vs_VEH | 1,042 | 24,041 | 23.08× | 1 | LOW |
 | `cabal_mantis` | vehicle | dps_vs_INF | 180 | 4,120 | 22.94× | 1 | LOW |
@@ -189,7 +186,7 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `terran_goliathmk2` | vehicle | w_damage | 8,002 | 128,563 | 16.07× | 1 | LOW |
 | `atreides_ornithopter` | aircraft | dps_vs_INF | 1,458 | 23,115 | 15.85× | 1 | LOW |
 | `terran_sentinel` | defense | w_reload | 20 | 1 | 0.07× | 1 | LOW |
-| `ts_nod_missilesilo` | defense | w_range | 10,238,976 | 669,582 | 0.07× | 2 | MEDIUM |
+| `ts_nod_missilesilo` | defense | w_range | 10,238,976 | 666,142 | 0.07× | 1 | LOW |
 | `ra1_soviets_grad` | vehicle | dps_vs_INF | 595 | 40 | 0.07× | 1 | LOW |
 | `ra2_allies_nighthawk` | aircraft | w_reload | 3 | 44 | 14.57× | 3 | HIGH |
 | `terran_marine` | infantry | dps_vs_VEH | 2,586 | 178 | 0.07× | 2 | MEDIUM |
@@ -198,12 +195,12 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `yuri_gatlingtrooper` | infantry | dps_vs_BLD | 871 | 65 | 0.07× | 1 | LOW |
 | `forgotten_warriortank` | vehicle | w_reload | 55 | 4 | 0.07× | 1 | LOW |
 | `terran_goliathmk2` | vehicle | w_burst | 4 | 0 | 0.07× | 1 | LOW |
+| `tkm_medictruck` | vehicle | w_reload | 5 | 66 | 13.30× | 8 | HIGH |
 | `yuri_gatlingtrooper` | infantry | dps_vs_INF | 1,600 | 121 | 0.08× | 1 | LOW |
 | `ixian_storminfantry` | infantry | w_burst | 1 | 13 | 13.20× | 1 | LOW |
 | `ixian_stormraider` | vehicle | w_burst | 1 | 13 | 13.20× | 1 | LOW |
 | `protoss_archon` | vehicle | dps_vs_VEH | 2,995 | 228 | 0.08× | 1 | LOW |
 | `ixian_stormraider` | vehicle | w_damage | 40,000 | 3,070 | 0.08× | 1 | LOW |
-| `tkm_medictruck` | vehicle | w_reload | 5 | 65 | 13.02× | 9 | HIGH |
 | `ra2_allies_tankdestroyer` | vehicle | dps_vs_INF | 458 | 35 | 0.08× | 4 | HIGH |
 | `terran_marine` | infantry | dps_vs_INF | 4,500 | 347 | 0.08× | 2 | MEDIUM |
 | `ra2_allies_nighthawk` | aircraft | dps_vs_VEH | 1,149 | 89 | 0.08× | 3 | HIGH |
@@ -241,7 +238,6 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `ra1_allies_mechanic` | infantry | w_burst | 10 | 1 | 0.10× | 3 | HIGH |
 | `ra2_soviets_siegechopper` | aircraft | dps_vs_INF | 2,000 | 201 | 0.10× | 3 | HIGH |
 | `cabal_mantis` | vehicle | dps_vs_BLD | 187 | 1,854 | 9.90× | 1 | LOW |
-| `ra2_soviets_teslacoil` | defense | w_dps | 32,000 | 3,299 | 0.10× | 8 | HIGH |
 | `td_gdi_mlrs` | vehicle | dps_vs_VEH | 433 | 47 | 0.11× | 1 | LOW |
 | `ra1_soviets_grad` | vehicle | w_damage | 16,000 | 1,747 | 0.11× | 1 | LOW |
 | `naxis_engineeringtruck` | vehicle | w_burst | 10 | 1 | 0.11× | 3 | HIGH |
@@ -252,6 +248,7 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `futuretech_phalanxwip` | vehicle | w_burst | 8 | 1 | 0.11× | 1 | LOW |
 | `corrino_buggy` | vehicle | dps_vs_INF | 92 | 809 | 8.84× | 1 | LOW |
 | `ra1_allies_gunboat` | ship | dps_vs_INF | 915 | 105 | 0.12× | 3 | HIGH |
+| `td_nod_venom` | aircraft | dps_vs_INF | 197 | 1,681 | 8.53× | 1 | LOW |
 
 ## Not in this layer, by scoping
 

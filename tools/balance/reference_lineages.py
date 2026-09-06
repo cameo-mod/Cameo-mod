@@ -43,6 +43,15 @@ RULED_LINEAGES = {
     # ⚠ This changes nothing in the chassis layer, where only the representative is present; it
     # takes the Westwood TS table out of the RIFLE layer, where both were voting.
     "OpenRA Tiberian Sun": {"Tiberian Sun"},
+    # 2026-09-06. DTA Enhanced IS DTA Classic plus `Enhance.ini`, which is how the game loads it,
+    # so the two are one roster and were voting twice from the moment the INI corpus was wired in.
+    # Measured on the 863 shared ids: identical hp 88%, cost 84%, speed 92%, damage 80%, range 85%,
+    # median ratio exactly 1.000 on every stat — the same agreement profile as the RA2 lineage.
+    # ⭐ ENHANCED is elected on the game's OWN default: DTA ships the ruleset as a lobby dropdown
+    # (`Items=Classic,Enhanced`, `DefaultIndex=1`), so Enhanced is what a player actually gets.
+    # Maintainer ruling 2026-09-06. ⚠ Not a no-op — it adopts the overlay's ~10-20% rebalanced
+    # rows for td_gdi, td_nod, ra1_allies and ra1_soviets, whose routes move with it.
+    "DTA Enhanced": {"DTA Classic"},
 }
 
 # One extraction of one mod superseded by a better extraction of the SAME mod. Not a lineage —

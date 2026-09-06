@@ -1,6 +1,2302 @@
 {
  "CnC Reloaded": {
+  "Africans": {
+   "defense": {
+    "game_n": 41,
+    "n": 3,
+    "stats": {
+     "cost": {
+      "cv": 0.217,
+      "faction_geomean": 1310.37,
+      "game_cv": 0.428,
+      "game_geomean": 984.1,
+      "game_spread": 6.67,
+      "percentile": 58.5,
+      "ratio": 1.332,
+      "spread": 1.5
+     },
+     "hp": {
+      "cv": 0.289,
+      "faction_geomean": 584.8,
+      "game_cv": 0.564,
+      "game_geomean": 481.47,
+      "game_spread": 26.67,
+      "percentile": 63.2,
+      "ratio": 1.215,
+      "spread": 1.6
+     },
+     "sight": {
+      "cv": 0.247,
+      "faction_geomean": 6.84,
+      "game_cv": 0.202,
+      "game_geomean": 7.67,
+      "game_spread": 2.0,
+      "percentile": 19.5,
+      "ratio": 0.892,
+      "spread": 1.6
+     },
+     "w_dps": {
+      "cv": 0.06,
+      "faction_geomean": 2.41,
+      "game_cv": 0.813,
+      "game_geomean": 0.62,
+      "game_spread": 1250.0,
+      "percentile": 80.5,
+      "ratio": 3.921,
+      "spread": 1.11
+     },
+     "w_range": {
+      "cv": 0.333,
+      "faction_geomean": 8.38,
+      "game_cv": 0.629,
+      "game_geomean": 8.18,
+      "game_spread": 30.0,
+      "percentile": 53.7,
+      "ratio": 1.024,
+      "spread": 1.71
+     }
+    }
+   },
+   "infantry": {
+    "game_n": 58,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.451,
+      "faction_geomean": 389.81,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 27.6,
+      "ratio": 0.963,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.191,
+      "faction_geomean": 133.27,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 50.0,
+      "ratio": 0.848,
+      "spread": 1.57
+     },
+     "sight": {
+      "cv": 0.086,
+      "faction_geomean": 5.19,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 34.5,
+      "ratio": 0.865,
+      "spread": 1.2
+     },
+     "speed": {
+      "cv": 0.118,
+      "faction_geomean": 3.78,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 8.6,
+      "ratio": 0.831,
+      "spread": 1.33
+     },
+     "w_dps": {
+      "cv": 1.288,
+      "faction_geomean": 1.72,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 88.2,
+      "ratio": 4.29,
+      "spread": 13.33
+     },
+     "w_range": {
+      "cv": 0.482,
+      "faction_geomean": 3.0,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 17.3,
+      "ratio": 0.701,
+      "spread": 3.0
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.45,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 3.33
+     },
+     "hp": {
+      "cv": 0.519,
+      "faction_geomean": 388.83,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 51.4,
+      "ratio": 0.916,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.238,
+      "faction_geomean": 6.2,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.001,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.275,
+      "faction_geomean": 5.64,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.048,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 0.582,
+      "faction_geomean": 0.63,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 48.0,
+      "ratio": 1.857,
+      "spread": 8.25
+     },
+     "w_range": {
+      "cv": 1.087,
+      "faction_geomean": 9.09,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 66.7,
+      "ratio": 0.946,
+      "spread": 30.0
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 25,
+    "stats": {
+     "cost": {
+      "cv": 0.562,
+      "faction_geomean": 944.61,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 44.8,
+      "ratio": 1.082,
+      "spread": 30.0
+     },
+     "hp": {
+      "cv": 0.902,
+      "faction_geomean": 340.61,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 58.4,
+      "ratio": 1.172,
+      "spread": 17.39
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 6.23,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 0.966,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.458,
+      "faction_geomean": 5.09,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.008,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.077,
+      "faction_geomean": 0.98,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 50.0,
+      "ratio": 1.434,
+      "spread": 1200.0
+     },
+     "w_range": {
+      "cv": 1.11,
+      "faction_geomean": 6.19,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 58.3,
+      "ratio": 0.981,
+      "spread": 30.0
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 11,
+    "stats": {
+     "cost": {
+      "cv": 0.499,
+      "faction_geomean": 1255.57,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 52.8,
+      "ratio": 1.134,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.927,
+      "faction_geomean": 418.89,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 57.5,
+      "ratio": 1.34,
+      "spread": 13.33
+     },
+     "sight": {
+      "cv": 0.177,
+      "faction_geomean": 6.62,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.042,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.522,
+      "faction_geomean": 5.51,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.139,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 0.962,
+      "faction_geomean": 0.76,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 28.3,
+      "ratio": 0.83,
+      "spread": 750.0
+     },
+     "w_range": {
+      "cv": 0.632,
+      "faction_geomean": 5.79,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 43.9,
+      "ratio": 0.937,
+      "spread": 12.0
+     }
+    }
+   }
+  },
+  "Alliance": {
+   "infantry": {
+    "game_n": 58,
+    "n": 7,
+    "stats": {
+     "cost": {
+      "cv": 0.577,
+      "faction_geomean": 727.64,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 69.0,
+      "ratio": 1.798,
+      "spread": 7.5
+     },
+     "hp": {
+      "cv": 0.109,
+      "faction_geomean": 114.39,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 22.4,
+      "ratio": 0.728,
+      "spread": 1.25
+     },
+     "sight": {
+      "cv": 0.205,
+      "faction_geomean": 7.01,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 74.1,
+      "ratio": 1.169,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.402,
+      "faction_geomean": 4.59,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 60.3,
+      "ratio": 1.011,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 2.013,
+      "faction_geomean": 0.34,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 21.6,
+      "ratio": 0.855,
+      "spread": 1250.0
+     },
+     "w_range": {
+      "cv": 0.156,
+      "faction_geomean": 4.78,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 50.0,
+      "ratio": 1.118,
+      "spread": 1.5
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.465,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 4.0
+     },
+     "hp": {
+      "cv": 0.537,
+      "faction_geomean": 436.45,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 57.1,
+      "ratio": 1.028,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.216,
+      "faction_geomean": 6.19,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.0,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.266,
+      "faction_geomean": 5.5,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.022,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 1.776,
+      "faction_geomean": 0.17,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 24.0,
+      "ratio": 0.507,
+      "spread": 1000.0
+     },
+     "w_range": {
+      "cv": 0.844,
+      "faction_geomean": 14.53,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 70.0,
+      "ratio": 1.512,
+      "spread": 7.5
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 18,
+    "stats": {
+     "cost": {
+      "cv": 0.586,
+      "faction_geomean": 973.55,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 45.2,
+      "ratio": 1.115,
+      "spread": 15.0
+     },
+     "hp": {
+      "cv": 0.849,
+      "faction_geomean": 258.62,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 45.7,
+      "ratio": 0.89,
+      "spread": 10.0
+     },
+     "sight": {
+      "cv": 0.211,
+      "faction_geomean": 6.41,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 0.994,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.454,
+      "faction_geomean": 5.17,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.023,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.823,
+      "faction_geomean": 0.37,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 19.3,
+      "ratio": 0.537,
+      "spread": 1875.0
+     },
+     "w_range": {
+      "cv": 1.131,
+      "faction_geomean": 7.33,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 72.6,
+      "ratio": 1.161,
+      "spread": 11.25
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.563,
+      "faction_geomean": 1425.2,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 62.2,
+      "ratio": 1.287,
+      "spread": 4.29
+     },
+     "hp": {
+      "cv": 0.67,
+      "faction_geomean": 432.42,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 58.3,
+      "ratio": 1.384,
+      "spread": 5.71
+     },
+     "sight": {
+      "cv": 0.204,
+      "faction_geomean": 5.88,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 18.9,
+      "ratio": 0.927,
+      "spread": 1.75
+     },
+     "speed": {
+      "cv": 0.621,
+      "faction_geomean": 5.65,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.168,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 0.261,
+      "faction_geomean": 1.19,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 66.3,
+      "ratio": 1.308,
+      "spread": 1.71
+     },
+     "w_range": {
+      "cv": 0.091,
+      "faction_geomean": 5.48,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 34.7,
+      "ratio": 0.887,
+      "spread": 1.2
+     }
+    }
+   }
+  },
   "AlliesCountry": {
+   "infantry": {
+    "game_n": 58,
+    "n": 7,
+    "stats": {
+     "cost": {
+      "cv": 0.577,
+      "faction_geomean": 727.64,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 69.0,
+      "ratio": 1.798,
+      "spread": 7.5
+     },
+     "hp": {
+      "cv": 0.109,
+      "faction_geomean": 114.39,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 22.4,
+      "ratio": 0.728,
+      "spread": 1.25
+     },
+     "sight": {
+      "cv": 0.205,
+      "faction_geomean": 7.01,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 74.1,
+      "ratio": 1.169,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.402,
+      "faction_geomean": 4.59,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 60.3,
+      "ratio": 1.011,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 2.013,
+      "faction_geomean": 0.34,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 21.6,
+      "ratio": 0.855,
+      "spread": 1250.0
+     },
+     "w_range": {
+      "cv": 0.156,
+      "faction_geomean": 4.78,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 50.0,
+      "ratio": 1.118,
+      "spread": 1.5
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.465,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 4.0
+     },
+     "hp": {
+      "cv": 0.537,
+      "faction_geomean": 436.45,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 57.1,
+      "ratio": 1.028,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.216,
+      "faction_geomean": 6.19,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.0,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.266,
+      "faction_geomean": 5.5,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.022,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 1.776,
+      "faction_geomean": 0.17,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 24.0,
+      "ratio": 0.507,
+      "spread": 1000.0
+     },
+     "w_range": {
+      "cv": 0.844,
+      "faction_geomean": 14.53,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 70.0,
+      "ratio": 1.512,
+      "spread": 7.5
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 22,
+    "stats": {
+     "cost": {
+      "cv": 0.568,
+      "faction_geomean": 948.31,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 44.8,
+      "ratio": 1.086,
+      "spread": 15.0
+     },
+     "hp": {
+      "cv": 0.848,
+      "faction_geomean": 248.14,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 44.9,
+      "ratio": 0.854,
+      "spread": 10.0
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 6.71,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 1.04,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.437,
+      "faction_geomean": 5.33,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.055,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.808,
+      "faction_geomean": 0.43,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 19.7,
+      "ratio": 0.631,
+      "spread": 1875.0
+     },
+     "w_range": {
+      "cv": 1.112,
+      "faction_geomean": 7.06,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 72.6,
+      "ratio": 1.119,
+      "spread": 11.25
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 9,
+    "stats": {
+     "cost": {
+      "cv": 0.6,
+      "faction_geomean": 1128.3,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 43.3,
+      "ratio": 1.019,
+      "spread": 5.0
+     },
+     "hp": {
+      "cv": 0.795,
+      "faction_geomean": 311.0,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 50.4,
+      "ratio": 0.995,
+      "spread": 6.67
+     },
+     "sight": {
+      "cv": 0.214,
+      "faction_geomean": 6.83,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.077,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.507,
+      "faction_geomean": 5.85,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.21,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 0.34,
+      "faction_geomean": 1.05,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 45.7,
+      "ratio": 1.146,
+      "spread": 3.0
+     },
+     "w_range": {
+      "cv": 0.132,
+      "faction_geomean": 5.71,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 38.8,
+      "ratio": 0.923,
+      "spread": 1.4
+     }
+    }
+   }
+  },
+  "AlliesCountry2": {
+   "infantry": {
+    "game_n": 58,
+    "n": 7,
+    "stats": {
+     "cost": {
+      "cv": 0.577,
+      "faction_geomean": 727.64,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 69.0,
+      "ratio": 1.798,
+      "spread": 7.5
+     },
+     "hp": {
+      "cv": 0.109,
+      "faction_geomean": 114.39,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 22.4,
+      "ratio": 0.728,
+      "spread": 1.25
+     },
+     "sight": {
+      "cv": 0.205,
+      "faction_geomean": 7.01,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 74.1,
+      "ratio": 1.169,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.402,
+      "faction_geomean": 4.59,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 60.3,
+      "ratio": 1.011,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 2.013,
+      "faction_geomean": 0.34,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 21.6,
+      "ratio": 0.855,
+      "spread": 1250.0
+     },
+     "w_range": {
+      "cv": 0.156,
+      "faction_geomean": 4.78,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 50.0,
+      "ratio": 1.118,
+      "spread": 1.5
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.465,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 4.0
+     },
+     "hp": {
+      "cv": 0.537,
+      "faction_geomean": 436.45,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 57.1,
+      "ratio": 1.028,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.216,
+      "faction_geomean": 6.19,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.0,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.266,
+      "faction_geomean": 5.5,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.022,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 1.776,
+      "faction_geomean": 0.17,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 24.0,
+      "ratio": 0.507,
+      "spread": 1000.0
+     },
+     "w_range": {
+      "cv": 0.844,
+      "faction_geomean": 14.53,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 70.0,
+      "ratio": 1.512,
+      "spread": 7.5
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 22,
+    "stats": {
+     "cost": {
+      "cv": 0.568,
+      "faction_geomean": 948.31,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 44.8,
+      "ratio": 1.086,
+      "spread": 15.0
+     },
+     "hp": {
+      "cv": 0.848,
+      "faction_geomean": 248.14,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 44.9,
+      "ratio": 0.854,
+      "spread": 10.0
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 6.71,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 1.04,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.437,
+      "faction_geomean": 5.33,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.055,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.808,
+      "faction_geomean": 0.43,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 19.7,
+      "ratio": 0.631,
+      "spread": 1875.0
+     },
+     "w_range": {
+      "cv": 1.112,
+      "faction_geomean": 7.06,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 72.6,
+      "ratio": 1.119,
+      "spread": 11.25
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 9,
+    "stats": {
+     "cost": {
+      "cv": 0.6,
+      "faction_geomean": 1128.3,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 43.3,
+      "ratio": 1.019,
+      "spread": 5.0
+     },
+     "hp": {
+      "cv": 0.795,
+      "faction_geomean": 311.0,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 50.4,
+      "ratio": 0.995,
+      "spread": 6.67
+     },
+     "sight": {
+      "cv": 0.214,
+      "faction_geomean": 6.83,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.077,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.507,
+      "faction_geomean": 5.85,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.21,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 0.34,
+      "faction_geomean": 1.05,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 45.7,
+      "ratio": 1.146,
+      "spread": 3.0
+     },
+     "w_range": {
+      "cv": 0.132,
+      "faction_geomean": 5.71,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 38.8,
+      "ratio": 0.923,
+      "spread": 1.4
+     }
+    }
+   }
+  },
+  "Americans": {
+   "infantry": {
+    "game_n": 58,
+    "n": 7,
+    "stats": {
+     "cost": {
+      "cv": 0.577,
+      "faction_geomean": 727.64,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 69.0,
+      "ratio": 1.798,
+      "spread": 7.5
+     },
+     "hp": {
+      "cv": 0.109,
+      "faction_geomean": 114.39,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 22.4,
+      "ratio": 0.728,
+      "spread": 1.25
+     },
+     "sight": {
+      "cv": 0.205,
+      "faction_geomean": 7.01,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 74.1,
+      "ratio": 1.169,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.402,
+      "faction_geomean": 4.59,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 60.3,
+      "ratio": 1.011,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 2.013,
+      "faction_geomean": 0.34,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 21.6,
+      "ratio": 0.855,
+      "spread": 1250.0
+     },
+     "w_range": {
+      "cv": 0.156,
+      "faction_geomean": 4.78,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 50.0,
+      "ratio": 1.118,
+      "spread": 1.5
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.465,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 4.0
+     },
+     "hp": {
+      "cv": 0.537,
+      "faction_geomean": 436.45,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 57.1,
+      "ratio": 1.028,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.216,
+      "faction_geomean": 6.19,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.0,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.266,
+      "faction_geomean": 5.5,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.022,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 1.776,
+      "faction_geomean": 0.17,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 24.0,
+      "ratio": 0.507,
+      "spread": 1000.0
+     },
+     "w_range": {
+      "cv": 0.844,
+      "faction_geomean": 14.53,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 70.0,
+      "ratio": 1.512,
+      "spread": 7.5
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 22,
+    "stats": {
+     "cost": {
+      "cv": 0.568,
+      "faction_geomean": 948.31,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 44.8,
+      "ratio": 1.086,
+      "spread": 15.0
+     },
+     "hp": {
+      "cv": 0.848,
+      "faction_geomean": 248.14,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 44.9,
+      "ratio": 0.854,
+      "spread": 10.0
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 6.71,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 1.04,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.437,
+      "faction_geomean": 5.33,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.055,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.808,
+      "faction_geomean": 0.43,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 19.7,
+      "ratio": 0.631,
+      "spread": 1875.0
+     },
+     "w_range": {
+      "cv": 1.112,
+      "faction_geomean": 7.06,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 72.6,
+      "ratio": 1.119,
+      "spread": 11.25
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 9,
+    "stats": {
+     "cost": {
+      "cv": 0.6,
+      "faction_geomean": 1128.3,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 43.3,
+      "ratio": 1.019,
+      "spread": 5.0
+     },
+     "hp": {
+      "cv": 0.795,
+      "faction_geomean": 311.0,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 50.4,
+      "ratio": 0.995,
+      "spread": 6.67
+     },
+     "sight": {
+      "cv": 0.214,
+      "faction_geomean": 6.83,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.077,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.507,
+      "faction_geomean": 5.85,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.21,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 0.34,
+      "faction_geomean": 1.05,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 45.7,
+      "ratio": 1.146,
+      "spread": 3.0
+     },
+     "w_range": {
+      "cv": 0.132,
+      "faction_geomean": 5.71,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 38.8,
+      "ratio": 0.923,
+      "spread": 1.4
+     }
+    }
+   }
+  },
+  "Arabs": {
+   "defense": {
+    "game_n": 41,
+    "n": 3,
+    "stats": {
+     "cost": {
+      "cv": 0.217,
+      "faction_geomean": 1310.37,
+      "game_cv": 0.428,
+      "game_geomean": 984.1,
+      "game_spread": 6.67,
+      "percentile": 58.5,
+      "ratio": 1.332,
+      "spread": 1.5
+     },
+     "hp": {
+      "cv": 0.289,
+      "faction_geomean": 584.8,
+      "game_cv": 0.564,
+      "game_geomean": 481.47,
+      "game_spread": 26.67,
+      "percentile": 63.2,
+      "ratio": 1.215,
+      "spread": 1.6
+     },
+     "sight": {
+      "cv": 0.247,
+      "faction_geomean": 6.84,
+      "game_cv": 0.202,
+      "game_geomean": 7.67,
+      "game_spread": 2.0,
+      "percentile": 19.5,
+      "ratio": 0.892,
+      "spread": 1.6
+     },
+     "w_dps": {
+      "cv": 0.06,
+      "faction_geomean": 2.41,
+      "game_cv": 0.813,
+      "game_geomean": 0.62,
+      "game_spread": 1250.0,
+      "percentile": 80.5,
+      "ratio": 3.921,
+      "spread": 1.11
+     },
+     "w_range": {
+      "cv": 0.333,
+      "faction_geomean": 8.38,
+      "game_cv": 0.629,
+      "game_geomean": 8.18,
+      "game_spread": 30.0,
+      "percentile": 53.7,
+      "ratio": 1.024,
+      "spread": 1.71
+     }
+    }
+   },
+   "infantry": {
+    "game_n": 58,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.451,
+      "faction_geomean": 389.81,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 27.6,
+      "ratio": 0.963,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.191,
+      "faction_geomean": 133.27,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 50.0,
+      "ratio": 0.848,
+      "spread": 1.57
+     },
+     "sight": {
+      "cv": 0.086,
+      "faction_geomean": 5.19,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 34.5,
+      "ratio": 0.865,
+      "spread": 1.2
+     },
+     "speed": {
+      "cv": 0.118,
+      "faction_geomean": 3.78,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 8.6,
+      "ratio": 0.831,
+      "spread": 1.33
+     },
+     "w_dps": {
+      "cv": 1.288,
+      "faction_geomean": 1.72,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 88.2,
+      "ratio": 4.29,
+      "spread": 13.33
+     },
+     "w_range": {
+      "cv": 0.482,
+      "faction_geomean": 3.0,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 17.3,
+      "ratio": 0.701,
+      "spread": 3.0
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.45,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 3.33
+     },
+     "hp": {
+      "cv": 0.519,
+      "faction_geomean": 388.83,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 51.4,
+      "ratio": 0.916,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.238,
+      "faction_geomean": 6.2,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.001,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.275,
+      "faction_geomean": 5.64,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.048,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 0.582,
+      "faction_geomean": 0.63,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 48.0,
+      "ratio": 1.857,
+      "spread": 8.25
+     },
+     "w_range": {
+      "cv": 1.087,
+      "faction_geomean": 9.09,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 66.7,
+      "ratio": 0.946,
+      "spread": 30.0
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 25,
+    "stats": {
+     "cost": {
+      "cv": 0.562,
+      "faction_geomean": 944.61,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 44.8,
+      "ratio": 1.082,
+      "spread": 30.0
+     },
+     "hp": {
+      "cv": 0.902,
+      "faction_geomean": 340.61,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 58.4,
+      "ratio": 1.172,
+      "spread": 17.39
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 6.23,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 0.966,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.458,
+      "faction_geomean": 5.09,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.008,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.077,
+      "faction_geomean": 0.98,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 50.0,
+      "ratio": 1.434,
+      "spread": 1200.0
+     },
+     "w_range": {
+      "cv": 1.11,
+      "faction_geomean": 6.19,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 58.3,
+      "ratio": 0.981,
+      "spread": 30.0
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 11,
+    "stats": {
+     "cost": {
+      "cv": 0.499,
+      "faction_geomean": 1255.57,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 52.8,
+      "ratio": 1.134,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.927,
+      "faction_geomean": 418.89,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 57.5,
+      "ratio": 1.34,
+      "spread": 13.33
+     },
+     "sight": {
+      "cv": 0.177,
+      "faction_geomean": 6.62,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.042,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.522,
+      "faction_geomean": 5.51,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.139,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 0.962,
+      "faction_geomean": 0.76,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 28.3,
+      "ratio": 0.83,
+      "spread": 750.0
+     },
+     "w_range": {
+      "cv": 0.632,
+      "faction_geomean": 5.79,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 43.9,
+      "ratio": 0.937,
+      "spread": 12.0
+     }
+    }
+   }
+  },
+  "British": {
+   "infantry": {
+    "game_n": 58,
+    "n": 7,
+    "stats": {
+     "cost": {
+      "cv": 0.577,
+      "faction_geomean": 727.64,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 69.0,
+      "ratio": 1.798,
+      "spread": 7.5
+     },
+     "hp": {
+      "cv": 0.109,
+      "faction_geomean": 114.39,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 22.4,
+      "ratio": 0.728,
+      "spread": 1.25
+     },
+     "sight": {
+      "cv": 0.205,
+      "faction_geomean": 7.01,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 74.1,
+      "ratio": 1.169,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.402,
+      "faction_geomean": 4.59,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 60.3,
+      "ratio": 1.011,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 2.013,
+      "faction_geomean": 0.34,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 21.6,
+      "ratio": 0.855,
+      "spread": 1250.0
+     },
+     "w_range": {
+      "cv": 0.156,
+      "faction_geomean": 4.78,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 50.0,
+      "ratio": 1.118,
+      "spread": 1.5
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.465,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 4.0
+     },
+     "hp": {
+      "cv": 0.537,
+      "faction_geomean": 436.45,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 57.1,
+      "ratio": 1.028,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.216,
+      "faction_geomean": 6.19,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.0,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.266,
+      "faction_geomean": 5.5,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.022,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 1.776,
+      "faction_geomean": 0.17,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 24.0,
+      "ratio": 0.507,
+      "spread": 1000.0
+     },
+     "w_range": {
+      "cv": 0.844,
+      "faction_geomean": 14.53,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 70.0,
+      "ratio": 1.512,
+      "spread": 7.5
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 22,
+    "stats": {
+     "cost": {
+      "cv": 0.568,
+      "faction_geomean": 948.31,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 44.8,
+      "ratio": 1.086,
+      "spread": 15.0
+     },
+     "hp": {
+      "cv": 0.848,
+      "faction_geomean": 248.14,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 44.9,
+      "ratio": 0.854,
+      "spread": 10.0
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 6.71,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 1.04,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.437,
+      "faction_geomean": 5.33,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.055,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.808,
+      "faction_geomean": 0.43,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 19.7,
+      "ratio": 0.631,
+      "spread": 1875.0
+     },
+     "w_range": {
+      "cv": 1.112,
+      "faction_geomean": 7.06,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 72.6,
+      "ratio": 1.119,
+      "spread": 11.25
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 9,
+    "stats": {
+     "cost": {
+      "cv": 0.6,
+      "faction_geomean": 1128.3,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 43.3,
+      "ratio": 1.019,
+      "spread": 5.0
+     },
+     "hp": {
+      "cv": 0.795,
+      "faction_geomean": 311.0,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 50.4,
+      "ratio": 0.995,
+      "spread": 6.67
+     },
+     "sight": {
+      "cv": 0.214,
+      "faction_geomean": 6.83,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.077,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.507,
+      "faction_geomean": 5.85,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.21,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 0.34,
+      "faction_geomean": 1.05,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 45.7,
+      "ratio": 1.146,
+      "spread": 3.0
+     },
+     "w_range": {
+      "cv": 0.132,
+      "faction_geomean": 5.71,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 38.8,
+      "ratio": 0.923,
+      "spread": 1.4
+     }
+    }
+   }
+  },
+  "Confederation": {
+   "defense": {
+    "game_n": 41,
+    "n": 3,
+    "stats": {
+     "cost": {
+      "cv": 0.217,
+      "faction_geomean": 1310.37,
+      "game_cv": 0.428,
+      "game_geomean": 984.1,
+      "game_spread": 6.67,
+      "percentile": 58.5,
+      "ratio": 1.332,
+      "spread": 1.5
+     },
+     "hp": {
+      "cv": 0.289,
+      "faction_geomean": 584.8,
+      "game_cv": 0.564,
+      "game_geomean": 481.47,
+      "game_spread": 26.67,
+      "percentile": 63.2,
+      "ratio": 1.215,
+      "spread": 1.6
+     },
+     "sight": {
+      "cv": 0.247,
+      "faction_geomean": 6.84,
+      "game_cv": 0.202,
+      "game_geomean": 7.67,
+      "game_spread": 2.0,
+      "percentile": 19.5,
+      "ratio": 0.892,
+      "spread": 1.6
+     },
+     "w_dps": {
+      "cv": 0.06,
+      "faction_geomean": 2.41,
+      "game_cv": 0.813,
+      "game_geomean": 0.62,
+      "game_spread": 1250.0,
+      "percentile": 80.5,
+      "ratio": 3.921,
+      "spread": 1.11
+     },
+     "w_range": {
+      "cv": 0.333,
+      "faction_geomean": 8.38,
+      "game_cv": 0.629,
+      "game_geomean": 8.18,
+      "game_spread": 30.0,
+      "percentile": 53.7,
+      "ratio": 1.024,
+      "spread": 1.71
+     }
+    }
+   },
+   "infantry": {
+    "game_n": 58,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.451,
+      "faction_geomean": 389.81,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 27.6,
+      "ratio": 0.963,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.191,
+      "faction_geomean": 133.27,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 50.0,
+      "ratio": 0.848,
+      "spread": 1.57
+     },
+     "sight": {
+      "cv": 0.086,
+      "faction_geomean": 5.19,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 34.5,
+      "ratio": 0.865,
+      "spread": 1.2
+     },
+     "speed": {
+      "cv": 0.118,
+      "faction_geomean": 3.78,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 8.6,
+      "ratio": 0.831,
+      "spread": 1.33
+     },
+     "w_dps": {
+      "cv": 1.288,
+      "faction_geomean": 1.72,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 88.2,
+      "ratio": 4.29,
+      "spread": 13.33
+     },
+     "w_range": {
+      "cv": 0.482,
+      "faction_geomean": 3.0,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 17.3,
+      "ratio": 0.701,
+      "spread": 3.0
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.45,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 3.33
+     },
+     "hp": {
+      "cv": 0.519,
+      "faction_geomean": 388.83,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 51.4,
+      "ratio": 0.916,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.238,
+      "faction_geomean": 6.2,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.001,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.275,
+      "faction_geomean": 5.64,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.048,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 0.582,
+      "faction_geomean": 0.63,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 48.0,
+      "ratio": 1.857,
+      "spread": 8.25
+     },
+     "w_range": {
+      "cv": 1.087,
+      "faction_geomean": 9.09,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 66.7,
+      "ratio": 0.946,
+      "spread": 30.0
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 25,
+    "stats": {
+     "cost": {
+      "cv": 0.562,
+      "faction_geomean": 944.61,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 44.8,
+      "ratio": 1.082,
+      "spread": 30.0
+     },
+     "hp": {
+      "cv": 0.902,
+      "faction_geomean": 340.61,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 58.4,
+      "ratio": 1.172,
+      "spread": 17.39
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 6.23,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 0.966,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.458,
+      "faction_geomean": 5.09,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.008,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.077,
+      "faction_geomean": 0.98,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 50.0,
+      "ratio": 1.434,
+      "spread": 1200.0
+     },
+     "w_range": {
+      "cv": 1.11,
+      "faction_geomean": 6.19,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 58.3,
+      "ratio": 0.981,
+      "spread": 30.0
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 11,
+    "stats": {
+     "cost": {
+      "cv": 0.499,
+      "faction_geomean": 1255.57,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 52.8,
+      "ratio": 1.134,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.927,
+      "faction_geomean": 418.89,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 57.5,
+      "ratio": 1.34,
+      "spread": 13.33
+     },
+     "sight": {
+      "cv": 0.177,
+      "faction_geomean": 6.62,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.042,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.522,
+      "faction_geomean": 5.51,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.139,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 0.962,
+      "faction_geomean": 0.76,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 28.3,
+      "ratio": 0.83,
+      "spread": 750.0
+     },
+     "w_range": {
+      "cv": 0.632,
+      "faction_geomean": 5.79,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 43.9,
+      "ratio": 0.937,
+      "spread": 12.0
+     }
+    }
+   }
+  },
+  "French": {
    "infantry": {
     "game_n": 58,
     "n": 7,
@@ -588,6 +2884,594 @@
     }
    }
   },
+  "GDICountry2": {
+   "defense": {
+    "game_n": 41,
+    "n": 4,
+    "stats": {
+     "cost": {
+      "cv": 0.408,
+      "faction_geomean": 930.6,
+      "game_cv": 0.428,
+      "game_geomean": 984.1,
+      "game_spread": 6.67,
+      "percentile": 39.0,
+      "ratio": 0.946,
+      "spread": 3.0
+     },
+     "hp": {
+      "cv": 0.231,
+      "faction_geomean": 433.07,
+      "game_cv": 0.564,
+      "game_geomean": 481.47,
+      "game_spread": 26.67,
+      "percentile": 31.6,
+      "ratio": 0.899,
+      "spread": 1.71
+     },
+     "sight": {
+      "cv": 0.153,
+      "faction_geomean": 8.18,
+      "game_cv": 0.202,
+      "game_geomean": 7.67,
+      "game_spread": 2.0,
+      "percentile": 73.2,
+      "ratio": 1.067,
+      "spread": 1.43
+     },
+     "w_dps": {
+      "cv": 0.502,
+      "faction_geomean": 0.85,
+      "game_cv": 0.813,
+      "game_geomean": 0.62,
+      "game_spread": 1250.0,
+      "percentile": 36.6,
+      "ratio": 1.387,
+      "spread": 2.95
+     },
+     "w_range": {
+      "cv": 0.47,
+      "faction_geomean": 10.45,
+      "game_cv": 0.629,
+      "game_geomean": 8.18,
+      "game_spread": 30.0,
+      "percentile": 61.0,
+      "ratio": 1.277,
+      "spread": 3.09
+     }
+    }
+   },
+   "infantry": {
+    "game_n": 58,
+    "n": 3,
+    "stats": {
+     "cost": {
+      "cv": 0.217,
+      "faction_geomean": 524.15,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 39.7,
+      "ratio": 1.296,
+      "spread": 1.5
+     },
+     "hp": {
+      "cv": 0.098,
+      "faction_geomean": 134.58,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 50.0,
+      "ratio": 0.857,
+      "spread": 1.2
+     },
+     "sight": {
+      "cv": 0.143,
+      "faction_geomean": 6.95,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 65.5,
+      "ratio": 1.16,
+      "spread": 1.33
+     },
+     "speed": {
+      "cv": 0.247,
+      "faction_geomean": 4.58,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 60.3,
+      "ratio": 1.008,
+      "spread": 1.5
+     },
+     "w_dps": {
+      "cv": 0.364,
+      "faction_geomean": 0.65,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 39.2,
+      "ratio": 1.623,
+      "spread": 1.69
+     },
+     "w_range": {
+      "cv": 0.451,
+      "faction_geomean": 3.45,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 17.3,
+      "ratio": 0.807,
+      "spread": 2.73
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.347,
+      "faction_geomean": 1175.84,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 65.7,
+      "ratio": 1.148,
+      "spread": 2.06
+     },
+     "hp": {
+      "cv": 0.713,
+      "faction_geomean": 551.23,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 60.0,
+      "ratio": 1.299,
+      "spread": 4.83
+     },
+     "sight": {
+      "cv": 0.072,
+      "faction_geomean": 6.19,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 0.999,
+      "spread": 1.17
+     },
+     "speed": {
+      "cv": 0.364,
+      "faction_geomean": 4.28,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 20.0,
+      "ratio": 0.796,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 0.509,
+      "faction_geomean": 0.93,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 76.0,
+      "ratio": 2.752,
+      "spread": 2.51
+     },
+     "w_range": {
+      "cv": 0.929,
+      "faction_geomean": 14.42,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 70.0,
+      "ratio": 1.5,
+      "spread": 5.62
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 26,
+    "stats": {
+     "cost": {
+      "cv": 0.673,
+      "faction_geomean": 1066.68,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 53.3,
+      "ratio": 1.222,
+      "spread": 10.0
+     },
+     "hp": {
+      "cv": 1.287,
+      "faction_geomean": 400.06,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 63.7,
+      "ratio": 1.377,
+      "spread": 32.0
+     },
+     "sight": {
+      "cv": 0.152,
+      "faction_geomean": 7.11,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 69.3,
+      "ratio": 1.103,
+      "spread": 1.67
+     },
+     "speed": {
+      "cv": 0.362,
+      "faction_geomean": 4.37,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 47.6,
+      "ratio": 0.865,
+      "spread": 4.5
+     },
+     "w_dps": {
+      "cv": 3.175,
+      "faction_geomean": 0.97,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 50.0,
+      "ratio": 1.415,
+      "spread": 1200.0
+     },
+     "w_range": {
+      "cv": 0.875,
+      "faction_geomean": 7.88,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 72.6,
+      "ratio": 1.249,
+      "spread": 24.59
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 14,
+    "stats": {
+     "cost": {
+      "cv": 0.689,
+      "faction_geomean": 1247.33,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 51.2,
+      "ratio": 1.127,
+      "spread": 8.0
+     },
+     "hp": {
+      "cv": 1.386,
+      "faction_geomean": 440.5,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 58.3,
+      "ratio": 1.409,
+      "spread": 26.67
+     },
+     "sight": {
+      "cv": 0.136,
+      "faction_geomean": 7.22,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 71.7,
+      "ratio": 1.138,
+      "spread": 1.5
+     },
+     "speed": {
+      "cv": 0.402,
+      "faction_geomean": 4.35,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 52.8,
+      "ratio": 0.9,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 2.665,
+      "faction_geomean": 1.1,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 57.6,
+      "ratio": 1.208,
+      "spread": 1200.0
+     },
+     "w_range": {
+      "cv": 0.414,
+      "faction_geomean": 7.26,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 75.5,
+      "ratio": 1.174,
+      "spread": 3.4
+     }
+    }
+   }
+  },
+  "Germans": {
+   "infantry": {
+    "game_n": 58,
+    "n": 7,
+    "stats": {
+     "cost": {
+      "cv": 0.577,
+      "faction_geomean": 727.64,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 69.0,
+      "ratio": 1.798,
+      "spread": 7.5
+     },
+     "hp": {
+      "cv": 0.109,
+      "faction_geomean": 114.39,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 22.4,
+      "ratio": 0.728,
+      "spread": 1.25
+     },
+     "sight": {
+      "cv": 0.205,
+      "faction_geomean": 7.01,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 74.1,
+      "ratio": 1.169,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.402,
+      "faction_geomean": 4.59,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 60.3,
+      "ratio": 1.011,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 2.013,
+      "faction_geomean": 0.34,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 21.6,
+      "ratio": 0.855,
+      "spread": 1250.0
+     },
+     "w_range": {
+      "cv": 0.156,
+      "faction_geomean": 4.78,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 50.0,
+      "ratio": 1.118,
+      "spread": 1.5
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.465,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 4.0
+     },
+     "hp": {
+      "cv": 0.537,
+      "faction_geomean": 436.45,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 57.1,
+      "ratio": 1.028,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.216,
+      "faction_geomean": 6.19,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.0,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.266,
+      "faction_geomean": 5.5,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.022,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 1.776,
+      "faction_geomean": 0.17,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 24.0,
+      "ratio": 0.507,
+      "spread": 1000.0
+     },
+     "w_range": {
+      "cv": 0.844,
+      "faction_geomean": 14.53,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 70.0,
+      "ratio": 1.512,
+      "spread": 7.5
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 22,
+    "stats": {
+     "cost": {
+      "cv": 0.568,
+      "faction_geomean": 948.31,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 44.8,
+      "ratio": 1.086,
+      "spread": 15.0
+     },
+     "hp": {
+      "cv": 0.848,
+      "faction_geomean": 248.14,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 44.9,
+      "ratio": 0.854,
+      "spread": 10.0
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 6.71,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 1.04,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.437,
+      "faction_geomean": 5.33,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.055,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.808,
+      "faction_geomean": 0.43,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 19.7,
+      "ratio": 0.631,
+      "spread": 1875.0
+     },
+     "w_range": {
+      "cv": 1.112,
+      "faction_geomean": 7.06,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 72.6,
+      "ratio": 1.119,
+      "spread": 11.25
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 9,
+    "stats": {
+     "cost": {
+      "cv": 0.6,
+      "faction_geomean": 1128.3,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 43.3,
+      "ratio": 1.019,
+      "spread": 5.0
+     },
+     "hp": {
+      "cv": 0.795,
+      "faction_geomean": 311.0,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 50.4,
+      "ratio": 0.995,
+      "spread": 6.67
+     },
+     "sight": {
+      "cv": 0.214,
+      "faction_geomean": 6.83,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.077,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.507,
+      "faction_geomean": 5.85,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.21,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 0.34,
+      "faction_geomean": 1.05,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 45.7,
+      "ratio": 1.146,
+      "spread": 3.0
+     },
+     "w_range": {
+      "cv": 0.132,
+      "faction_geomean": 5.71,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 38.8,
+      "ratio": 0.923,
+      "spread": 1.4
+     }
+    }
+   }
+  },
   "NodCountry": {
    "defense": {
     "game_n": 41,
@@ -910,6 +3794,1050 @@
     }
    }
   },
+  "NodCountry2": {
+   "defense": {
+    "game_n": 41,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.366,
+      "faction_geomean": 1095.11,
+      "game_cv": 0.428,
+      "game_geomean": 984.1,
+      "game_spread": 6.67,
+      "percentile": 53.7,
+      "ratio": 1.113,
+      "spread": 3.0
+     },
+     "hp": {
+      "cv": 0.424,
+      "faction_geomean": 517.46,
+      "game_cv": 0.564,
+      "game_geomean": 481.47,
+      "game_spread": 26.67,
+      "percentile": 55.3,
+      "ratio": 1.075,
+      "spread": 3.4
+     },
+     "sight": {
+      "cv": 0.142,
+      "faction_geomean": 9.12,
+      "game_cv": 0.202,
+      "game_geomean": 7.67,
+      "game_spread": 2.0,
+      "percentile": 75.6,
+      "ratio": 1.189,
+      "spread": 1.43
+     },
+     "w_dps": {
+      "cv": 0.832,
+      "faction_geomean": 1.66,
+      "game_cv": 0.813,
+      "game_geomean": 0.62,
+      "game_spread": 1250.0,
+      "percentile": 70.7,
+      "ratio": 2.705,
+      "spread": 6.94
+     },
+     "w_range": {
+      "cv": 0.4,
+      "faction_geomean": 11.3,
+      "game_cv": 0.629,
+      "game_geomean": 8.18,
+      "game_spread": 30.0,
+      "percentile": 63.4,
+      "ratio": 1.381,
+      "spread": 3.6
+     }
+    }
+   },
+   "infantry": {
+    "game_n": 58,
+    "n": 7,
+    "stats": {
+     "cost": {
+      "cv": 0.954,
+      "faction_geomean": 109.69,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 6.9,
+      "ratio": 0.271,
+      "spread": 1400.0
+     },
+     "hp": {
+      "cv": 0.411,
+      "faction_geomean": 184.23,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 65.5,
+      "ratio": 1.173,
+      "spread": 3.25
+     },
+     "sight": {
+      "cv": 0.485,
+      "faction_geomean": 4.63,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 5.2,
+      "ratio": 0.772,
+      "spread": 4.5
+     },
+     "speed": {
+      "cv": 0.185,
+      "faction_geomean": 4.79,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 60.3,
+      "ratio": 1.054,
+      "spread": 1.5
+     },
+     "w_dps": {
+      "cv": 0.344,
+      "faction_geomean": 0.6,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 35.3,
+      "ratio": 1.498,
+      "spread": 2.51
+     },
+     "w_range": {
+      "cv": 0.2,
+      "faction_geomean": 4.92,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 50.0,
+      "ratio": 1.15,
+      "spread": 1.5
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.276,
+      "faction_geomean": 1165.23,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 65.7,
+      "ratio": 1.138,
+      "spread": 1.89
+     },
+     "hp": {
+      "cv": 0.45,
+      "faction_geomean": 372.04,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 51.4,
+      "ratio": 0.877,
+      "spread": 2.73
+     },
+     "sight": {
+      "cv": 0.161,
+      "faction_geomean": 6.73,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.087,
+      "spread": 1.33
+     },
+     "speed": {
+      "cv": 0.161,
+      "faction_geomean": 5.14,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 0.956,
+      "spread": 1.5
+     },
+     "w_dps": {
+      "cv": 0.494,
+      "faction_geomean": 0.71,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 64.0,
+      "ratio": 2.096,
+      "spread": 2.4
+     },
+     "w_range": {
+      "cv": 0.907,
+      "faction_geomean": 14.49,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 70.0,
+      "ratio": 1.508,
+      "spread": 6.43
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 40,
+    "stats": {
+     "cost": {
+      "cv": 0.485,
+      "faction_geomean": 813.07,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 37.0,
+      "ratio": 0.931,
+      "spread": 3000.0
+     },
+     "hp": {
+      "cv": 0.552,
+      "faction_geomean": 377.33,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 61.4,
+      "ratio": 1.299,
+      "spread": 10.0
+     },
+     "sight": {
+      "cv": 0.256,
+      "faction_geomean": 6.63,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 1.028,
+      "spread": 5.0
+     },
+     "speed": {
+      "cv": 0.395,
+      "faction_geomean": 4.98,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 47.6,
+      "ratio": 0.987,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.831,
+      "faction_geomean": 1.16,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 63.3,
+      "ratio": 1.699,
+      "spread": 5000.0
+     },
+     "w_range": {
+      "cv": 0.882,
+      "faction_geomean": 7.21,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 72.6,
+      "ratio": 1.143,
+      "spread": 11.25
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 23,
+    "stats": {
+     "cost": {
+      "cv": 0.394,
+      "faction_geomean": 1296.6,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 52.8,
+      "ratio": 1.171,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.493,
+      "faction_geomean": 439.54,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 58.3,
+      "ratio": 1.406,
+      "spread": 7.41
+     },
+     "sight": {
+      "cv": 0.159,
+      "faction_geomean": 6.87,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.083,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.464,
+      "faction_geomean": 5.01,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.035,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.593,
+      "faction_geomean": 1.33,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 71.7,
+      "ratio": 1.452,
+      "spread": 5000.0
+     },
+     "w_range": {
+      "cv": 0.475,
+      "faction_geomean": 6.17,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 63.3,
+      "ratio": 0.997,
+      "spread": 4.5
+     }
+    }
+   }
+  },
+  "RobotCountry": {
+   "naval": {
+    "game_n": 35,
+    "n": 3,
+    "stats": {
+     "cost": {
+      "cv": 0.079,
+      "faction_geomean": 731.86,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 17.1,
+      "ratio": 0.715,
+      "spread": 1.14
+     },
+     "hp": {
+      "cv": 0.124,
+      "faction_geomean": 306.79,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 45.7,
+      "ratio": 0.723,
+      "spread": 1.27
+     },
+     "sight": {
+      "cv": 0.108,
+      "faction_geomean": 5.31,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 20.0,
+      "ratio": 0.858,
+      "spread": 1.2
+     },
+     "speed": {
+      "cv": 0.102,
+      "faction_geomean": 5.65,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.049,
+      "spread": 1.2
+     },
+     "w_dps": {
+      "cv": 0.865,
+      "faction_geomean": 0.05,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 12.0,
+      "ratio": 0.158,
+      "spread": 2265.88
+     },
+     "w_range": {
+      "cv": 0.56,
+      "faction_geomean": 3.86,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 10.0,
+      "ratio": 0.402,
+      "spread": 3.75
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 25,
+    "stats": {
+     "cost": {
+      "cv": 0.679,
+      "faction_geomean": 567.45,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 17.0,
+      "ratio": 0.65,
+      "spread": 3000.0
+     },
+     "hp": {
+      "cv": 0.653,
+      "faction_geomean": 276.38,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 46.4,
+      "ratio": 0.951,
+      "spread": 333.33
+     },
+     "sight": {
+      "cv": 0.178,
+      "faction_geomean": 5.98,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 20.7,
+      "ratio": 0.927,
+      "spread": 3.5
+     },
+     "speed": {
+      "cv": 0.3,
+      "faction_geomean": 4.81,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 47.6,
+      "ratio": 0.952,
+      "spread": 3.33
+     },
+     "w_dps": {
+      "cv": 2.005,
+      "faction_geomean": 0.21,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 15.1,
+      "ratio": 0.302,
+      "spread": 32100.0
+     },
+     "w_range": {
+      "cv": 0.46,
+      "faction_geomean": 7.16,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 72.6,
+      "ratio": 1.135,
+      "spread": 8.12
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 20,
+    "stats": {
+     "cost": {
+      "cv": 0.589,
+      "faction_geomean": 747.88,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 18.9,
+      "ratio": 0.676,
+      "spread": 3000.0
+     },
+     "hp": {
+      "cv": 0.648,
+      "faction_geomean": 275.74,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 45.7,
+      "ratio": 0.882,
+      "spread": 333.33
+     },
+     "sight": {
+      "cv": 0.094,
+      "faction_geomean": 6.42,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.012,
+      "spread": 1.4
+     },
+     "speed": {
+      "cv": 0.331,
+      "faction_geomean": 4.73,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 52.8,
+      "ratio": 0.978,
+      "spread": 3.33
+     },
+     "w_dps": {
+      "cv": 1.962,
+      "faction_geomean": 0.23,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 10.9,
+      "ratio": 0.253,
+      "spread": 2500.0
+     },
+     "w_range": {
+      "cv": 0.395,
+      "faction_geomean": 8.35,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 78.6,
+      "ratio": 1.35,
+      "spread": 2.6
+     }
+    }
+   }
+  },
+  "RobotCountry2": {
+   "naval": {
+    "game_n": 35,
+    "n": 3,
+    "stats": {
+     "cost": {
+      "cv": 0.079,
+      "faction_geomean": 731.86,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 17.1,
+      "ratio": 0.715,
+      "spread": 1.14
+     },
+     "hp": {
+      "cv": 0.124,
+      "faction_geomean": 306.79,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 45.7,
+      "ratio": 0.723,
+      "spread": 1.27
+     },
+     "sight": {
+      "cv": 0.108,
+      "faction_geomean": 5.31,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 20.0,
+      "ratio": 0.858,
+      "spread": 1.2
+     },
+     "speed": {
+      "cv": 0.102,
+      "faction_geomean": 5.65,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.049,
+      "spread": 1.2
+     },
+     "w_dps": {
+      "cv": 0.865,
+      "faction_geomean": 0.05,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 12.0,
+      "ratio": 0.158,
+      "spread": 2265.88
+     },
+     "w_range": {
+      "cv": 0.56,
+      "faction_geomean": 3.86,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 10.0,
+      "ratio": 0.402,
+      "spread": 3.75
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 25,
+    "stats": {
+     "cost": {
+      "cv": 0.679,
+      "faction_geomean": 567.45,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 17.0,
+      "ratio": 0.65,
+      "spread": 3000.0
+     },
+     "hp": {
+      "cv": 0.653,
+      "faction_geomean": 276.38,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 46.4,
+      "ratio": 0.951,
+      "spread": 333.33
+     },
+     "sight": {
+      "cv": 0.178,
+      "faction_geomean": 5.98,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 20.7,
+      "ratio": 0.927,
+      "spread": 3.5
+     },
+     "speed": {
+      "cv": 0.3,
+      "faction_geomean": 4.81,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 47.6,
+      "ratio": 0.952,
+      "spread": 3.33
+     },
+     "w_dps": {
+      "cv": 2.005,
+      "faction_geomean": 0.21,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 15.1,
+      "ratio": 0.302,
+      "spread": 32100.0
+     },
+     "w_range": {
+      "cv": 0.46,
+      "faction_geomean": 7.16,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 72.6,
+      "ratio": 1.135,
+      "spread": 8.12
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 20,
+    "stats": {
+     "cost": {
+      "cv": 0.589,
+      "faction_geomean": 747.88,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 18.9,
+      "ratio": 0.676,
+      "spread": 3000.0
+     },
+     "hp": {
+      "cv": 0.648,
+      "faction_geomean": 275.74,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 45.7,
+      "ratio": 0.882,
+      "spread": 333.33
+     },
+     "sight": {
+      "cv": 0.094,
+      "faction_geomean": 6.42,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.012,
+      "spread": 1.4
+     },
+     "speed": {
+      "cv": 0.331,
+      "faction_geomean": 4.73,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 52.8,
+      "ratio": 0.978,
+      "spread": 3.33
+     },
+     "w_dps": {
+      "cv": 1.962,
+      "faction_geomean": 0.23,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 10.9,
+      "ratio": 0.253,
+      "spread": 2500.0
+     },
+     "w_range": {
+      "cv": 0.395,
+      "faction_geomean": 8.35,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 78.6,
+      "ratio": 1.35,
+      "spread": 2.6
+     }
+    }
+   }
+  },
+  "Russians": {
+   "defense": {
+    "game_n": 41,
+    "n": 3,
+    "stats": {
+     "cost": {
+      "cv": 0.217,
+      "faction_geomean": 1310.37,
+      "game_cv": 0.428,
+      "game_geomean": 984.1,
+      "game_spread": 6.67,
+      "percentile": 58.5,
+      "ratio": 1.332,
+      "spread": 1.5
+     },
+     "hp": {
+      "cv": 0.289,
+      "faction_geomean": 584.8,
+      "game_cv": 0.564,
+      "game_geomean": 481.47,
+      "game_spread": 26.67,
+      "percentile": 63.2,
+      "ratio": 1.215,
+      "spread": 1.6
+     },
+     "sight": {
+      "cv": 0.247,
+      "faction_geomean": 6.84,
+      "game_cv": 0.202,
+      "game_geomean": 7.67,
+      "game_spread": 2.0,
+      "percentile": 19.5,
+      "ratio": 0.892,
+      "spread": 1.6
+     },
+     "w_dps": {
+      "cv": 0.06,
+      "faction_geomean": 2.41,
+      "game_cv": 0.813,
+      "game_geomean": 0.62,
+      "game_spread": 1250.0,
+      "percentile": 80.5,
+      "ratio": 3.921,
+      "spread": 1.11
+     },
+     "w_range": {
+      "cv": 0.333,
+      "faction_geomean": 8.38,
+      "game_cv": 0.629,
+      "game_geomean": 8.18,
+      "game_spread": 30.0,
+      "percentile": 53.7,
+      "ratio": 1.024,
+      "spread": 1.71
+     }
+    }
+   },
+   "infantry": {
+    "game_n": 58,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.451,
+      "faction_geomean": 389.81,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 27.6,
+      "ratio": 0.963,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.191,
+      "faction_geomean": 133.27,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 50.0,
+      "ratio": 0.848,
+      "spread": 1.57
+     },
+     "sight": {
+      "cv": 0.086,
+      "faction_geomean": 5.19,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 34.5,
+      "ratio": 0.865,
+      "spread": 1.2
+     },
+     "speed": {
+      "cv": 0.118,
+      "faction_geomean": 3.78,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 8.6,
+      "ratio": 0.831,
+      "spread": 1.33
+     },
+     "w_dps": {
+      "cv": 1.288,
+      "faction_geomean": 1.72,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 88.2,
+      "ratio": 4.29,
+      "spread": 13.33
+     },
+     "w_range": {
+      "cv": 0.482,
+      "faction_geomean": 3.0,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 17.3,
+      "ratio": 0.701,
+      "spread": 3.0
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.45,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 3.33
+     },
+     "hp": {
+      "cv": 0.519,
+      "faction_geomean": 388.83,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 51.4,
+      "ratio": 0.916,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.238,
+      "faction_geomean": 6.2,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.001,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.275,
+      "faction_geomean": 5.64,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.048,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 0.582,
+      "faction_geomean": 0.63,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 48.0,
+      "ratio": 1.857,
+      "spread": 8.25
+     },
+     "w_range": {
+      "cv": 1.087,
+      "faction_geomean": 9.09,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 66.7,
+      "ratio": 0.946,
+      "spread": 30.0
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 25,
+    "stats": {
+     "cost": {
+      "cv": 0.562,
+      "faction_geomean": 944.61,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 44.8,
+      "ratio": 1.082,
+      "spread": 30.0
+     },
+     "hp": {
+      "cv": 0.902,
+      "faction_geomean": 340.61,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 58.4,
+      "ratio": 1.172,
+      "spread": 17.39
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 6.23,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 0.966,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.458,
+      "faction_geomean": 5.09,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.008,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.077,
+      "faction_geomean": 0.98,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 50.0,
+      "ratio": 1.434,
+      "spread": 1200.0
+     },
+     "w_range": {
+      "cv": 1.11,
+      "faction_geomean": 6.19,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 58.3,
+      "ratio": 0.981,
+      "spread": 30.0
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 11,
+    "stats": {
+     "cost": {
+      "cv": 0.499,
+      "faction_geomean": 1255.57,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 52.8,
+      "ratio": 1.134,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.927,
+      "faction_geomean": 418.89,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 57.5,
+      "ratio": 1.34,
+      "spread": 13.33
+     },
+     "sight": {
+      "cv": 0.177,
+      "faction_geomean": 6.62,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.042,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.522,
+      "faction_geomean": 5.51,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.139,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 0.962,
+      "faction_geomean": 0.76,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 28.3,
+      "ratio": 0.83,
+      "spread": 750.0
+     },
+     "w_range": {
+      "cv": 0.632,
+      "faction_geomean": 5.79,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 43.9,
+      "ratio": 0.937,
+      "spread": 12.0
+     }
+    }
+   }
+  },
   "SovietCountry": {
    "defense": {
     "game_n": 41,
@@ -1161,6 +5089,328 @@
       "game_spread": 45.0,
       "percentile": 58.3,
       "ratio": 0.981,
+      "spread": 30.0
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 11,
+    "stats": {
+     "cost": {
+      "cv": 0.499,
+      "faction_geomean": 1255.57,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 52.8,
+      "ratio": 1.134,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.927,
+      "faction_geomean": 418.89,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 57.5,
+      "ratio": 1.34,
+      "spread": 13.33
+     },
+     "sight": {
+      "cv": 0.177,
+      "faction_geomean": 6.62,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 52.8,
+      "ratio": 1.042,
+      "spread": 2.0
+     },
+     "speed": {
+      "cv": 0.522,
+      "faction_geomean": 5.51,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.139,
+      "spread": 3.0
+     },
+     "w_dps": {
+      "cv": 0.962,
+      "faction_geomean": 0.76,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 28.3,
+      "ratio": 0.83,
+      "spread": 750.0
+     },
+     "w_range": {
+      "cv": 0.632,
+      "faction_geomean": 5.79,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 43.9,
+      "ratio": 0.937,
+      "spread": 12.0
+     }
+    }
+   }
+  },
+  "SovietCountry2": {
+   "defense": {
+    "game_n": 41,
+    "n": 4,
+    "stats": {
+     "cost": {
+      "cv": 0.182,
+      "faction_geomean": 1355.4,
+      "game_cv": 0.428,
+      "game_geomean": 984.1,
+      "game_spread": 6.67,
+      "percentile": 58.5,
+      "ratio": 1.377,
+      "spread": 1.5
+     },
+     "hp": {
+      "cv": 0.239,
+      "faction_geomean": 582.34,
+      "game_cv": 0.564,
+      "game_geomean": 481.47,
+      "game_spread": 26.67,
+      "percentile": 63.2,
+      "ratio": 1.209,
+      "spread": 1.6
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 7.11,
+      "game_cv": 0.202,
+      "game_geomean": 7.67,
+      "game_spread": 2.0,
+      "percentile": 39.0,
+      "ratio": 0.928,
+      "spread": 1.6
+     },
+     "w_dps": {
+      "cv": 0.064,
+      "faction_geomean": 2.46,
+      "game_cv": 0.813,
+      "game_geomean": 0.62,
+      "game_spread": 1250.0,
+      "percentile": 80.5,
+      "ratio": 4.004,
+      "spread": 1.17
+     },
+     "w_range": {
+      "cv": 0.303,
+      "faction_geomean": 8.01,
+      "game_cv": 0.629,
+      "game_geomean": 8.18,
+      "game_spread": 30.0,
+      "percentile": 53.7,
+      "ratio": 0.979,
+      "spread": 1.71
+     }
+    }
+   },
+   "infantry": {
+    "game_n": 58,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.451,
+      "faction_geomean": 389.81,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 27.6,
+      "ratio": 0.963,
+      "spread": 6.0
+     },
+     "hp": {
+      "cv": 0.191,
+      "faction_geomean": 133.27,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 50.0,
+      "ratio": 0.848,
+      "spread": 1.57
+     },
+     "sight": {
+      "cv": 0.086,
+      "faction_geomean": 5.19,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 34.5,
+      "ratio": 0.865,
+      "spread": 1.2
+     },
+     "speed": {
+      "cv": 0.118,
+      "faction_geomean": 3.78,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 8.6,
+      "ratio": 0.831,
+      "spread": 1.33
+     },
+     "w_dps": {
+      "cv": 1.288,
+      "faction_geomean": 1.72,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 88.2,
+      "ratio": 4.29,
+      "spread": 13.33
+     },
+     "w_range": {
+      "cv": 0.482,
+      "faction_geomean": 3.0,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 17.3,
+      "ratio": 0.701,
+      "spread": 3.0
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 6,
+    "stats": {
+     "cost": {
+      "cv": 0.45,
+      "faction_geomean": 995.28,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 51.4,
+      "ratio": 0.972,
+      "spread": 3.33
+     },
+     "hp": {
+      "cv": 0.519,
+      "faction_geomean": 388.83,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 51.4,
+      "ratio": 0.916,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.238,
+      "faction_geomean": 6.2,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 1.001,
+      "spread": 1.8
+     },
+     "speed": {
+      "cv": 0.275,
+      "faction_geomean": 5.64,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.048,
+      "spread": 2.0
+     },
+     "w_dps": {
+      "cv": 0.582,
+      "faction_geomean": 0.63,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 48.0,
+      "ratio": 1.857,
+      "spread": 8.25
+     },
+     "w_range": {
+      "cv": 1.087,
+      "faction_geomean": 9.09,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 66.7,
+      "ratio": 0.946,
+      "spread": 30.0
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 26,
+    "stats": {
+     "cost": {
+      "cv": 0.547,
+      "faction_geomean": 961.56,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 45.2,
+      "ratio": 1.102,
+      "spread": 30.0
+     },
+     "hp": {
+      "cv": 0.877,
+      "faction_geomean": 347.54,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 58.8,
+      "ratio": 1.196,
+      "spread": 17.39
+     },
+     "sight": {
+      "cv": 0.207,
+      "faction_geomean": 6.29,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 51.1,
+      "ratio": 0.975,
+      "spread": 2.25
+     },
+     "speed": {
+      "cv": 0.458,
+      "faction_geomean": 5.09,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.008,
+      "spread": 4.0
+     },
+     "w_dps": {
+      "cv": 1.029,
+      "faction_geomean": 1.03,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 52.8,
+      "ratio": 1.503,
+      "spread": 1200.0
+     },
+     "w_range": {
+      "cv": 1.095,
+      "faction_geomean": 6.22,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 58.3,
+      "ratio": 0.987,
       "spread": 30.0
      }
     }
@@ -1494,6 +5744,406 @@
       "percentile": 63.3,
       "ratio": 1.023,
       "spread": 2.2
+     }
+    }
+   }
+  },
+  "YuriCountry2": {
+   "infantry": {
+    "game_n": 58,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.391,
+      "faction_geomean": 509.4,
+      "game_cv": 0.672,
+      "game_geomean": 404.58,
+      "game_spread": 2000.0,
+      "percentile": 39.7,
+      "ratio": 1.259,
+      "spread": 3.5
+     },
+     "hp": {
+      "cv": 0.326,
+      "faction_geomean": 147.7,
+      "game_cv": 0.526,
+      "game_geomean": 157.1,
+      "game_spread": 8.0,
+      "percentile": 50.0,
+      "ratio": 0.94,
+      "spread": 2.0
+     },
+     "sight": {
+      "cv": 0.228,
+      "faction_geomean": 7.06,
+      "game_cv": 0.292,
+      "game_geomean": 5.99,
+      "game_spread": 6.0,
+      "percentile": 74.1,
+      "ratio": 1.178,
+      "spread": 1.5
+     },
+     "speed": {
+      "cv": 0.194,
+      "faction_geomean": 4.54,
+      "game_cv": 0.292,
+      "game_geomean": 4.54,
+      "game_spread": 3.0,
+      "percentile": 60.3,
+      "ratio": 0.998,
+      "spread": 1.5
+     },
+     "w_dps": {
+      "cv": 0.143,
+      "faction_geomean": 1.5,
+      "game_cv": 1.692,
+      "game_geomean": 0.4,
+      "game_spread": 40125.0,
+      "percentile": 80.4,
+      "ratio": 3.736,
+      "spread": 1.33
+     },
+     "w_range": {
+      "cv": 0.825,
+      "faction_geomean": 3.23,
+      "game_cv": 0.48,
+      "game_geomean": 4.28,
+      "game_spread": 11.67,
+      "percentile": 17.3,
+      "ratio": 0.756,
+      "spread": 7.14
+     }
+    }
+   },
+   "naval": {
+    "game_n": 35,
+    "n": 5,
+    "stats": {
+     "cost": {
+      "cv": 0.45,
+      "faction_geomean": 1063.55,
+      "game_cv": 0.372,
+      "game_geomean": 1023.95,
+      "game_spread": 4.0,
+      "percentile": 65.7,
+      "ratio": 1.039,
+      "spread": 2.86
+     },
+     "hp": {
+      "cv": 0.703,
+      "faction_geomean": 466.24,
+      "game_cv": 0.582,
+      "game_geomean": 424.37,
+      "game_spread": 7.25,
+      "percentile": 60.0,
+      "ratio": 1.099,
+      "spread": 4.0
+     },
+     "sight": {
+      "cv": 0.177,
+      "faction_geomean": 6.13,
+      "game_cv": 0.175,
+      "game_geomean": 6.19,
+      "game_spread": 2.25,
+      "percentile": 68.6,
+      "ratio": 0.989,
+      "spread": 1.6
+     },
+     "speed": {
+      "cv": 0.098,
+      "faction_geomean": 5.58,
+      "game_cv": 0.225,
+      "game_geomean": 5.38,
+      "game_spread": 4.0,
+      "percentile": 42.9,
+      "ratio": 1.036,
+      "spread": 1.2
+     },
+     "w_dps": {
+      "cv": 0.635,
+      "faction_geomean": 0.8,
+      "game_cv": 1.481,
+      "game_geomean": 0.34,
+      "game_spread": 21400.0,
+      "percentile": 64.0,
+      "ratio": 2.353,
+      "spread": 3.39
+     },
+     "w_range": {
+      "cv": 1.209,
+      "faction_geomean": 10.32,
+      "game_cv": 1.006,
+      "game_geomean": 9.61,
+      "game_spread": 30.0,
+      "percentile": 66.7,
+      "ratio": 1.074,
+      "spread": 7.5
+     }
+    }
+   },
+   "overall": {
+    "game_n": 270,
+    "n": 20,
+    "stats": {
+     "cost": {
+      "cv": 0.572,
+      "faction_geomean": 1021.97,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 53.3,
+      "ratio": 1.171,
+      "spread": 15.0
+     },
+     "hp": {
+      "cv": 0.902,
+      "faction_geomean": 373.33,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 61.4,
+      "ratio": 1.285,
+      "spread": 20.0
+     },
+     "sight": {
+      "cv": 0.239,
+      "faction_geomean": 7.14,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 69.3,
+      "ratio": 1.107,
+      "spread": 2.5
+     },
+     "speed": {
+      "cv": 0.566,
+      "faction_geomean": 5.28,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 65.9,
+      "ratio": 1.046,
+      "spread": 5.0
+     },
+     "w_dps": {
+      "cv": 2.561,
+      "faction_geomean": 1.26,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 67.0,
+      "ratio": 1.84,
+      "spread": 111.11
+     },
+     "w_range": {
+      "cv": 1.213,
+      "faction_geomean": 5.83,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 43.5,
+      "ratio": 0.924,
+      "spread": 32.14
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 10,
+    "stats": {
+     "cost": {
+      "cv": 0.446,
+      "faction_geomean": 1418.95,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 62.2,
+      "ratio": 1.282,
+      "spread": 5.0
+     },
+     "hp": {
+      "cv": 0.785,
+      "faction_geomean": 531.12,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 66.1,
+      "ratio": 1.699,
+      "spread": 13.33
+     },
+     "sight": {
+      "cv": 0.236,
+      "faction_geomean": 7.75,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 71.7,
+      "ratio": 1.221,
+      "spread": 2.5
+     },
+     "speed": {
+      "cv": 0.697,
+      "faction_geomean": 5.54,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 70.1,
+      "ratio": 1.146,
+      "spread": 5.0
+     },
+     "w_dps": {
+      "cv": 2.285,
+      "faction_geomean": 1.35,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 71.7,
+      "ratio": 1.473,
+      "spread": 111.11
+     },
+     "w_range": {
+      "cv": 0.298,
+      "faction_geomean": 6.33,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 63.3,
+      "ratio": 1.023,
+      "spread": 2.2
+     }
+    }
+   }
+  },
+  "alliance": {
+   "overall": {
+    "game_n": 270,
+    "n": 4,
+    "stats": {
+     "cost": {
+      "cv": 0.315,
+      "faction_geomean": 842.57,
+      "game_cv": 0.824,
+      "game_geomean": 872.92,
+      "game_spread": 13000.0,
+      "percentile": 37.0,
+      "ratio": 0.965,
+      "spread": 2.0
+     },
+     "hp": {
+      "cv": 0.296,
+      "faction_geomean": 205.98,
+      "game_cv": 1.218,
+      "game_geomean": 290.56,
+      "game_spread": 2000.0,
+      "percentile": 40.1,
+      "ratio": 0.709,
+      "spread": 2.0
+     },
+     "sight": {
+      "cv": 0.061,
+      "faction_geomean": 8.24,
+      "game_cv": 0.239,
+      "game_geomean": 6.45,
+      "game_spread": 6.0,
+      "percentile": 89.3,
+      "ratio": 1.278,
+      "spread": 1.12
+     },
+     "speed": {
+      "cv": 0.407,
+      "faction_geomean": 6.12,
+      "game_cv": 0.505,
+      "game_geomean": 5.05,
+      "game_spread": 8.5,
+      "percentile": 78.6,
+      "ratio": 1.212,
+      "spread": 2.5
+     },
+     "w_dps": {
+      "cv": 0.467,
+      "faction_geomean": 0.92,
+      "game_cv": 2.299,
+      "game_geomean": 0.69,
+      "game_spread": 160500.0,
+      "percentile": 49.5,
+      "ratio": 1.339,
+      "spread": 2.86
+     },
+     "w_range": {
+      "cv": 0.167,
+      "faction_geomean": 5.94,
+      "game_cv": 0.892,
+      "game_geomean": 6.31,
+      "game_spread": 45.0,
+      "percentile": 43.5,
+      "ratio": 0.942,
+      "spread": 1.4
+     }
+    }
+   },
+   "vehicle": {
+    "game_n": 127,
+    "n": 4,
+    "stats": {
+     "cost": {
+      "cv": 0.315,
+      "faction_geomean": 842.57,
+      "game_cv": 0.87,
+      "game_geomean": 1107.11,
+      "game_spread": 13000.0,
+      "percentile": 28.3,
+      "ratio": 0.761,
+      "spread": 2.0
+     },
+     "hp": {
+      "cv": 0.296,
+      "faction_geomean": 205.98,
+      "game_cv": 1.353,
+      "game_geomean": 312.54,
+      "game_spread": 2000.0,
+      "percentile": 38.6,
+      "ratio": 0.659,
+      "spread": 2.0
+     },
+     "sight": {
+      "cv": 0.061,
+      "faction_geomean": 8.24,
+      "game_cv": 0.224,
+      "game_geomean": 6.35,
+      "game_spread": 2.5,
+      "percentile": 92.9,
+      "ratio": 1.298,
+      "spread": 1.12
+     },
+     "speed": {
+      "cv": 0.407,
+      "faction_geomean": 6.12,
+      "game_cv": 0.493,
+      "game_geomean": 4.84,
+      "game_spread": 7.5,
+      "percentile": 78.0,
+      "ratio": 1.265,
+      "spread": 2.5
+     },
+     "w_dps": {
+      "cv": 0.467,
+      "faction_geomean": 0.92,
+      "game_cv": 2.355,
+      "game_geomean": 0.91,
+      "game_spread": 12500.0,
+      "percentile": 42.4,
+      "ratio": 1.005,
+      "spread": 2.86
+     },
+     "w_range": {
+      "cv": 0.167,
+      "faction_geomean": 5.94,
+      "game_cv": 0.474,
+      "game_geomean": 6.19,
+      "game_spread": 18.0,
+      "percentile": 43.9,
+      "ratio": 0.961,
+      "spread": 1.4
      }
     }
    }
@@ -22515,40 +27165,40 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 19,
+    "n": 18,
     "stats": {
      "cost": {
-      "cv": 0.548,
-      "faction_geomean": 358.84,
+      "cv": 0.563,
+      "faction_geomean": 356.68,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 37.8,
-      "ratio": 0.923,
+      "ratio": 0.917,
       "spread": 5.31
      },
      "hp": {
-      "cv": 0.228,
-      "faction_geomean": 153.92,
+      "cv": 0.235,
+      "faction_geomean": 153.59,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 45.9,
-      "ratio": 0.968,
+      "ratio": 0.965,
       "spread": 1.88
      },
      "sight": {
-      "cv": 0.22,
-      "faction_geomean": 5.68,
+      "cv": 0.226,
+      "faction_geomean": 5.66,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 33.7,
-      "ratio": 0.907,
+      "ratio": 0.904,
       "spread": 2.25
      },
      "speed": {
-      "cv": 0.082,
+      "cv": 0.085,
       "faction_geomean": 6.98,
       "game_cv": 0.116,
       "game_geomean": 6.96,
@@ -22558,23 +27208,23 @@
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 3.399,
-      "faction_geomean": 1.16,
+      "cv": 0.345,
+      "faction_geomean": 0.89,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 81.1,
-      "ratio": 1.487,
-      "spread": 135.0
+      "percentile": 52.2,
+      "ratio": 1.146,
+      "spread": 3.6
      },
      "w_range": {
-      "cv": 0.258,
-      "faction_geomean": 5.73,
+      "cv": 0.266,
+      "faction_geomean": 5.69,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 44.1,
-      "ratio": 1.069,
+      "ratio": 1.061,
       "spread": 5.46
      }
     }
@@ -22647,132 +27297,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 70,
+    "n": 66,
     "stats": {
      "cost": {
-      "cv": 0.644,
-      "faction_geomean": 829.37,
+      "cv": 0.63,
+      "faction_geomean": 802.25,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
       "percentile": 52.0,
-      "ratio": 1.084,
+      "ratio": 1.049,
       "spread": 21.88
      },
      "hp": {
-      "cv": 0.752,
-      "faction_geomean": 310.93,
+      "cv": 0.742,
+      "faction_geomean": 301.16,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
       "percentile": 56.0,
-      "ratio": 1.034,
+      "ratio": 1.002,
       "spread": 1750.0
      },
      "sight": {
-      "cv": 0.248,
-      "faction_geomean": 6.41,
+      "cv": 0.247,
+      "faction_geomean": 6.38,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 0.976,
+      "ratio": 0.972,
       "spread": 3.33
      },
      "speed": {
       "cv": 0.479,
-      "faction_geomean": 6.45,
+      "faction_geomean": 6.58,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.939,
+      "ratio": 0.957,
       "spread": 10.0
      },
      "w_dps": {
-      "cv": 3.8,
-      "faction_geomean": 0.88,
+      "cv": 4.382,
+      "faction_geomean": 0.8,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 52.9,
-      "ratio": 1.089,
+      "percentile": 42.0,
+      "ratio": 0.992,
       "spread": 12000.0
      },
      "w_range": {
-      "cv": 2.654,
-      "faction_geomean": 7.34,
+      "cv": 2.713,
+      "faction_geomean": 7.24,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 71.2,
-      "ratio": 1.074,
+      "ratio": 1.06,
       "spread": 139.34
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 39,
+    "n": 36,
     "stats": {
      "cost": {
-      "cv": 0.443,
-      "faction_geomean": 1139.56,
+      "cv": 0.41,
+      "faction_geomean": 1078.89,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 64.9,
-      "ratio": 1.128,
-      "spread": 5.2
+      "percentile": 53.4,
+      "ratio": 1.068,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.543,
-      "faction_geomean": 336.15,
+      "cv": 0.437,
+      "faction_geomean": 313.27,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 50.0,
-      "ratio": 0.982,
-      "spread": 1200.0
+      "percentile": 47.1,
+      "ratio": 0.915,
+      "spread": 1000.0
      },
      "sight": {
-      "cv": 0.238,
-      "faction_geomean": 6.41,
+      "cv": 0.233,
+      "faction_geomean": 6.35,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 0.956,
+      "ratio": 0.948,
       "spread": 3.33
      },
      "speed": {
-      "cv": 0.607,
-      "faction_geomean": 6.27,
+      "cv": 0.604,
+      "faction_geomean": 6.47,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 54.9,
-      "ratio": 0.917,
+      "ratio": 0.946,
       "spread": 10.0
      },
      "w_dps": {
-      "cv": 2.049,
-      "faction_geomean": 0.93,
+      "cv": 2.029,
+      "faction_geomean": 0.92,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
-      "percentile": 50.0,
-      "ratio": 0.946,
+      "percentile": 49.3,
+      "ratio": 0.933,
       "spread": 550.0
      },
      "w_range": {
-      "cv": 0.589,
-      "faction_geomean": 7.19,
+      "cv": 0.582,
+      "faction_geomean": 6.97,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 67.7,
-      "ratio": 1.046,
+      "percentile": 54.7,
+      "ratio": 1.014,
       "spread": 10.0
      }
     }
@@ -22781,66 +27431,66 @@
   "CobraCell": {
    "infantry": {
     "game_n": 98,
-    "n": 21,
+    "n": 20,
     "stats": {
      "cost": {
-      "cv": 0.561,
-      "faction_geomean": 305.9,
+      "cv": 0.578,
+      "faction_geomean": 301.83,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 34.7,
-      "ratio": 0.787,
+      "ratio": 0.776,
       "spread": 8.0
      },
      "hp": {
-      "cv": 0.296,
-      "faction_geomean": 141.81,
+      "cv": 0.304,
+      "faction_geomean": 140.96,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 40.8,
-      "ratio": 0.891,
+      "ratio": 0.886,
       "spread": 2.67
      },
      "sight": {
-      "cv": 0.255,
-      "faction_geomean": 6.34,
+      "cv": 0.26,
+      "faction_geomean": 6.36,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 67.3,
-      "ratio": 1.014,
+      "ratio": 1.017,
       "spread": 2.0
      },
      "speed": {
-      "cv": 0.111,
-      "faction_geomean": 7.1,
+      "cv": 0.114,
+      "faction_geomean": 7.11,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 86.7,
-      "ratio": 1.021,
+      "ratio": 1.022,
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 2.683,
-      "faction_geomean": 1.45,
+      "cv": 3.552,
+      "faction_geomean": 1.15,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 88.9,
-      "ratio": 1.861,
+      "percentile": 81.1,
+      "ratio": 1.475,
       "spread": 200.0
      },
      "w_range": {
-      "cv": 0.326,
-      "faction_geomean": 4.84,
+      "cv": 0.334,
+      "faction_geomean": 4.77,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 16.1,
-      "ratio": 0.903,
+      "ratio": 0.889,
       "spread": 4.37
      }
     }
@@ -22913,132 +27563,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 66,
+    "n": 62,
     "stats": {
      "cost": {
-      "cv": 0.69,
-      "faction_geomean": 617.0,
+      "cv": 0.611,
+      "faction_geomean": 584.3,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
-      "percentile": 32.8,
-      "ratio": 0.807,
-      "spread": 26.0
+      "percentile": 26.9,
+      "ratio": 0.764,
+      "spread": 25.0
      },
      "hp": {
-      "cv": 0.778,
-      "faction_geomean": 255.54,
+      "cv": 0.713,
+      "faction_geomean": 243.9,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
-      "percentile": 49.2,
-      "ratio": 0.85,
-      "spread": 13.33
+      "percentile": 45.8,
+      "ratio": 0.811,
+      "spread": 11.11
      },
      "sight": {
-      "cv": 0.258,
-      "faction_geomean": 6.58,
+      "cv": 0.259,
+      "faction_geomean": 6.57,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 1.003,
+      "ratio": 1.0,
       "spread": 5.0
      },
      "speed": {
       "cv": 0.603,
-      "faction_geomean": 6.79,
+      "faction_geomean": 6.94,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.988,
+      "ratio": 1.01,
       "spread": 13.33
      },
      "w_dps": {
-      "cv": 3.553,
-      "faction_geomean": 0.95,
+      "cv": 4.013,
+      "faction_geomean": 0.87,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 54.7,
-      "ratio": 1.173,
+      "percentile": 51.4,
+      "ratio": 1.073,
       "spread": 10000.0
      },
      "w_range": {
-      "cv": 0.517,
-      "faction_geomean": 6.19,
+      "cv": 0.489,
+      "faction_geomean": 6.04,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 53.5,
-      "ratio": 0.907,
+      "ratio": 0.884,
       "spread": 10.93
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 38,
+    "n": 35,
     "stats": {
      "cost": {
-      "cv": 0.581,
-      "faction_geomean": 832.48,
+      "cv": 0.483,
+      "faction_geomean": 766.03,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 35.6,
-      "ratio": 0.824,
-      "spread": 8.67
+      "percentile": 25.9,
+      "ratio": 0.758,
+      "spread": 8.33
      },
      "hp": {
-      "cv": 0.678,
-      "faction_geomean": 311.34,
+      "cv": 0.556,
+      "faction_geomean": 287.68,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 47.1,
-      "ratio": 0.909,
-      "spread": 6.67
+      "percentile": 42.0,
+      "ratio": 0.84,
+      "spread": 5.56
      },
      "sight": {
       "cv": 0.268,
-      "faction_geomean": 6.65,
+      "faction_geomean": 6.61,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 0.992,
+      "ratio": 0.986,
       "spread": 5.0
      },
      "speed": {
-      "cv": 0.776,
-      "faction_geomean": 6.54,
+      "cv": 0.772,
+      "faction_geomean": 6.78,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 54.9,
-      "ratio": 0.955,
+      "ratio": 0.99,
       "spread": 13.33
      },
      "w_dps": {
-      "cv": 2.458,
-      "faction_geomean": 0.78,
+      "cv": 2.463,
+      "faction_geomean": 0.76,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
-      "percentile": 36.1,
-      "ratio": 0.793,
+      "percentile": 34.7,
+      "ratio": 0.774,
       "spread": 3000.0
      },
      "w_range": {
-      "cv": 0.507,
-      "faction_geomean": 7.26,
+      "cv": 0.479,
+      "faction_geomean": 7.05,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 68.9,
-      "ratio": 1.056,
+      "percentile": 67.7,
+      "ratio": 1.026,
       "spread": 10.93
      }
     }
@@ -23103,66 +27753,66 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 24,
+    "n": 23,
     "stats": {
      "cost": {
-      "cv": 0.433,
-      "faction_geomean": 480.52,
+      "cv": 0.434,
+      "faction_geomean": 484.37,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 51.0,
-      "ratio": 1.236,
+      "ratio": 1.246,
       "spread": 6.07
      },
      "hp": {
-      "cv": 0.346,
-      "faction_geomean": 168.26,
+      "cv": 0.352,
+      "faction_geomean": 168.63,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 52.0,
-      "ratio": 1.058,
+      "ratio": 1.06,
       "spread": 3.14
      },
      "sight": {
-      "cv": 0.295,
-      "faction_geomean": 6.7,
+      "cv": 0.298,
+      "faction_geomean": 6.74,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 67.3,
-      "ratio": 1.071,
+      "ratio": 1.076,
       "spread": 4.0
      },
      "speed": {
-      "cv": 0.124,
-      "faction_geomean": 6.58,
+      "cv": 0.127,
+      "faction_geomean": 6.56,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 21.4,
-      "ratio": 0.946,
+      "ratio": 0.943,
       "spread": 1.8
      },
      "w_dps": {
-      "cv": 3.645,
-      "faction_geomean": 0.59,
+      "cv": 0.94,
+      "faction_geomean": 0.47,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 21.1,
-      "ratio": 0.754,
-      "spread": 18750.0
+      "percentile": 14.4,
+      "ratio": 0.605,
+      "spread": 877.5
      },
      "w_range": {
-      "cv": 0.367,
-      "faction_geomean": 5.45,
+      "cv": 0.377,
+      "faction_geomean": 5.41,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 32.3,
-      "ratio": 1.016,
+      "ratio": 1.008,
       "spread": 6.01
      }
     }
@@ -23235,132 +27885,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 68,
+    "n": 64,
     "stats": {
      "cost": {
-      "cv": 0.572,
-      "faction_geomean": 814.5,
+      "cv": 0.527,
+      "faction_geomean": 786.17,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
-      "percentile": 52.0,
-      "ratio": 1.065,
-      "spread": 18.57
+      "percentile": 42.1,
+      "ratio": 1.028,
+      "spread": 17.86
      },
      "hp": {
-      "cv": 0.733,
-      "faction_geomean": 299.32,
+      "cv": 0.703,
+      "faction_geomean": 288.95,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
       "percentile": 53.3,
-      "ratio": 0.996,
-      "spread": 15.58
+      "ratio": 0.961,
+      "spread": 13.64
      },
      "sight": {
-      "cv": 0.264,
+      "cv": 0.265,
       "faction_geomean": 6.97,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 1.061,
+      "ratio": 1.062,
       "spread": 4.0
      },
      "speed": {
       "cv": 0.745,
-      "faction_geomean": 6.82,
+      "faction_geomean": 6.98,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.992,
+      "ratio": 1.015,
       "spread": 12.33
      },
      "w_dps": {
-      "cv": 3.027,
-      "faction_geomean": 0.66,
+      "cv": 2.539,
+      "faction_geomean": 0.59,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 30.1,
-      "ratio": 0.812,
-      "spread": 18750.0
+      "percentile": 24.6,
+      "ratio": 0.731,
+      "spread": 8333.33
      },
      "w_range": {
-      "cv": 2.806,
-      "faction_geomean": 6.96,
+      "cv": 2.88,
+      "faction_geomean": 6.84,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 59.9,
-      "ratio": 1.019,
+      "ratio": 1.001,
       "spread": 139.34
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 34,
+    "n": 31,
     "stats": {
      "cost": {
-      "cv": 0.489,
-      "faction_geomean": 1056.32,
+      "cv": 0.438,
+      "faction_geomean": 984.04,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 53.4,
-      "ratio": 1.045,
-      "spread": 5.2
+      "percentile": 41.4,
+      "ratio": 0.974,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.606,
-      "faction_geomean": 355.38,
+      "cv": 0.508,
+      "faction_geomean": 329.22,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 51.1,
-      "ratio": 1.038,
-      "spread": 15.58
+      "percentile": 48.3,
+      "ratio": 0.961,
+      "spread": 12.99
      },
      "sight": {
-      "cv": 0.237,
-      "faction_geomean": 7.29,
+      "cv": 0.235,
+      "faction_geomean": 7.3,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 56.9,
-      "ratio": 1.087,
+      "ratio": 1.09,
       "spread": 2.5
      },
      "speed": {
-      "cv": 0.899,
-      "faction_geomean": 7.03,
+      "cv": 0.887,
+      "faction_geomean": 7.38,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 73.4,
-      "ratio": 1.028,
+      "ratio": 1.078,
       "spread": 12.33
      },
      "w_dps": {
-      "cv": 2.071,
+      "cv": 2.022,
       "faction_geomean": 1.16,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
       "percentile": 71.5,
-      "ratio": 1.173,
+      "ratio": 1.174,
       "spread": 933.33
      },
      "w_range": {
-      "cv": 0.511,
-      "faction_geomean": 7.49,
+      "cv": 0.478,
+      "faction_geomean": 7.26,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
       "percentile": 68.9,
-      "ratio": 1.091,
+      "ratio": 1.057,
       "spread": 5.71
      }
     }
@@ -23425,30 +28075,30 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 20,
+    "n": 19,
     "stats": {
      "cost": {
-      "cv": 0.504,
-      "faction_geomean": 378.27,
+      "cv": 0.515,
+      "faction_geomean": 377.16,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 38.8,
-      "ratio": 0.973,
+      "ratio": 0.97,
       "spread": 6.07
      },
      "hp": {
-      "cv": 0.221,
-      "faction_geomean": 164.08,
+      "cv": 0.226,
+      "faction_geomean": 164.29,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 51.0,
-      "ratio": 1.031,
+      "ratio": 1.033,
       "spread": 2.14
      },
      "sight": {
-      "cv": 0.255,
+      "cv": 0.261,
       "faction_geomean": 5.96,
       "game_cv": 0.267,
       "game_geomean": 6.26,
@@ -23458,33 +28108,33 @@
       "spread": 2.25
      },
      "speed": {
-      "cv": 0.114,
+      "cv": 0.117,
       "faction_geomean": 6.96,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 21.4,
-      "ratio": 1.001,
+      "ratio": 1.0,
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 2.73,
-      "faction_geomean": 1.02,
+      "cv": 3.596,
+      "faction_geomean": 0.8,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 78.9,
-      "ratio": 1.308,
+      "percentile": 41.1,
+      "ratio": 1.03,
       "spread": 1280.0
      },
      "w_range": {
-      "cv": 0.22,
-      "faction_geomean": 5.69,
+      "cv": 0.226,
+      "faction_geomean": 5.64,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 44.1,
-      "ratio": 1.06,
+      "ratio": 1.052,
       "spread": 4.37
      }
     }
@@ -23557,112 +28207,112 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 74,
+    "n": 70,
     "stats": {
      "cost": {
-      "cv": 0.636,
-      "faction_geomean": 849.91,
+      "cv": 0.624,
+      "faction_geomean": 824.84,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
       "percentile": 52.0,
-      "ratio": 1.111,
+      "ratio": 1.079,
       "spread": 25.0
      },
      "hp": {
-      "cv": 0.737,
-      "faction_geomean": 351.76,
+      "cv": 0.733,
+      "faction_geomean": 343.75,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
-      "percentile": 58.8,
-      "ratio": 1.17,
+      "percentile": 58.2,
+      "ratio": 1.143,
       "spread": 15.62
      },
      "sight": {
-      "cv": 0.234,
-      "faction_geomean": 6.52,
+      "cv": 0.233,
+      "faction_geomean": 6.5,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 0.993,
+      "ratio": 0.99,
       "spread": 2.5
      },
      "speed": {
-      "cv": 0.846,
-      "faction_geomean": 6.99,
+      "cv": 0.845,
+      "faction_geomean": 7.15,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
-      "percentile": 41.8,
-      "ratio": 1.016,
+      "percentile": 77.3,
+      "ratio": 1.039,
       "spread": 13.33
      },
      "w_dps": {
-      "cv": 3.49,
-      "faction_geomean": 1.01,
+      "cv": 3.733,
+      "faction_geomean": 0.94,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 70.3,
-      "ratio": 1.242,
+      "percentile": 53.3,
+      "ratio": 1.154,
       "spread": 8000.0
      },
      "w_range": {
-      "cv": 3.991,
-      "faction_geomean": 7.44,
+      "cv": 4.033,
+      "faction_geomean": 7.36,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 71.2,
-      "ratio": 1.09,
+      "ratio": 1.078,
       "spread": 273.22
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 41,
+    "n": 38,
     "stats": {
      "cost": {
-      "cv": 0.449,
-      "faction_geomean": 1183.27,
+      "cv": 0.434,
+      "faction_geomean": 1126.84,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
       "percentile": 64.9,
-      "ratio": 1.171,
-      "spread": 5.2
+      "ratio": 1.115,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.58,
-      "faction_geomean": 420.7,
+      "cv": 0.558,
+      "faction_geomean": 400.57,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 68.4,
-      "ratio": 1.228,
-      "spread": 8.0
+      "percentile": 64.9,
+      "ratio": 1.17,
+      "spread": 6.67
      },
      "sight": {
-      "cv": 0.206,
-      "faction_geomean": 6.93,
+      "cv": 0.2,
+      "faction_geomean": 6.91,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 1.034,
+      "ratio": 1.032,
       "spread": 2.5
      },
      "speed": {
-      "cv": 0.995,
-      "faction_geomean": 6.98,
+      "cv": 0.982,
+      "faction_geomean": 7.26,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
-      "percentile": 54.9,
-      "ratio": 1.02,
+      "percentile": 73.4,
+      "ratio": 1.061,
       "spread": 13.33
      },
      "w_dps": {
@@ -23672,18 +28322,18 @@
       "game_geomean": 0.99,
       "game_spread": 4000.0,
       "percentile": 66.7,
-      "ratio": 1.113,
+      "ratio": 1.11,
       "spread": 205.33
      },
      "w_range": {
-      "cv": 0.504,
-      "faction_geomean": 7.18,
+      "cv": 0.473,
+      "faction_geomean": 6.99,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 67.7,
-      "ratio": 1.045,
-      "spread": 10.0
+      "percentile": 54.7,
+      "ratio": 1.017,
+      "spread": 9.0
      }
     }
    }
@@ -23747,66 +28397,66 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 18,
+    "n": 17,
     "stats": {
      "cost": {
-      "cv": 0.494,
-      "faction_geomean": 437.58,
+      "cv": 0.5,
+      "faction_geomean": 439.9,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 44.9,
-      "ratio": 1.126,
+      "ratio": 1.132,
       "spread": 6.07
      },
      "hp": {
-      "cv": 0.198,
-      "faction_geomean": 169.09,
+      "cv": 0.202,
+      "faction_geomean": 169.64,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 52.0,
-      "ratio": 1.063,
+      "ratio": 1.066,
       "spread": 1.93
      },
      "sight": {
-      "cv": 0.236,
-      "faction_geomean": 6.51,
+      "cv": 0.24,
+      "faction_geomean": 6.54,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 67.3,
-      "ratio": 1.04,
+      "ratio": 1.045,
       "spread": 2.0
      },
      "speed": {
-      "cv": 0.115,
-      "faction_geomean": 7.29,
+      "cv": 0.117,
+      "faction_geomean": 7.31,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 86.7,
-      "ratio": 1.048,
+      "ratio": 1.051,
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 2.621,
-      "faction_geomean": 0.86,
+      "cv": 3.226,
+      "faction_geomean": 0.65,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 52.2,
-      "ratio": 1.109,
-      "spread": 4125.0
+      "percentile": 24.4,
+      "ratio": 0.839,
+      "spread": 2750.0
      },
      "w_range": {
-      "cv": 0.346,
-      "faction_geomean": 5.41,
+      "cv": 0.359,
+      "faction_geomean": 5.35,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 32.3,
-      "ratio": 1.009,
+      "ratio": 0.997,
       "spread": 4.92
      }
     }
@@ -23879,132 +28529,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 62,
+    "n": 58,
     "stats": {
      "cost": {
-      "cv": 0.607,
-      "faction_geomean": 851.2,
+      "cv": 0.583,
+      "faction_geomean": 821.08,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
-      "percentile": 54.5,
-      "ratio": 1.113,
-      "spread": 18.57
+      "percentile": 52.0,
+      "ratio": 1.074,
+      "spread": 17.86
      },
      "hp": {
-      "cv": 0.862,
-      "faction_geomean": 332.94,
+      "cv": 0.874,
+      "faction_geomean": 322.59,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
-      "percentile": 58.2,
-      "ratio": 1.108,
+      "percentile": 56.3,
+      "ratio": 1.073,
       "spread": 16.07
      },
      "sight": {
       "cv": 0.248,
-      "faction_geomean": 6.42,
+      "faction_geomean": 6.39,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 0.977,
+      "ratio": 0.973,
       "spread": 5.0
      },
      "speed": {
-      "cv": 0.287,
-      "faction_geomean": 6.73,
+      "cv": 0.276,
+      "faction_geomean": 6.89,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.978,
+      "ratio": 1.003,
       "spread": 4.0
      },
      "w_dps": {
-      "cv": 2.818,
-      "faction_geomean": 0.89,
+      "cv": 2.648,
+      "faction_geomean": 0.81,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 52.9,
-      "ratio": 1.099,
-      "spread": 33750.0
+      "percentile": 42.0,
+      "ratio": 0.996,
+      "spread": 22500.0
      },
      "w_range": {
-      "cv": 2.79,
-      "faction_geomean": 6.69,
+      "cv": 2.861,
+      "faction_geomean": 6.55,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
-      "percentile": 58.9,
-      "ratio": 0.98,
+      "percentile": 57.9,
+      "ratio": 0.959,
       "spread": 170.0
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 34,
+    "n": 31,
     "stats": {
      "cost": {
-      "cv": 0.508,
-      "faction_geomean": 1137.43,
+      "cv": 0.499,
+      "faction_geomean": 1067.22,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 64.9,
-      "ratio": 1.126,
-      "spread": 5.2
+      "percentile": 53.4,
+      "ratio": 1.056,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.852,
-      "faction_geomean": 391.74,
+      "cv": 0.898,
+      "faction_geomean": 366.34,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 56.9,
-      "ratio": 1.144,
+      "percentile": 51.1,
+      "ratio": 1.07,
       "spread": 12.0
      },
      "sight": {
-      "cv": 0.266,
-      "faction_geomean": 6.42,
+      "cv": 0.265,
+      "faction_geomean": 6.36,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 0.958,
+      "ratio": 0.949,
       "spread": 5.0
      },
      "speed": {
-      "cv": 0.363,
-      "faction_geomean": 6.43,
+      "cv": 0.349,
+      "faction_geomean": 6.68,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 54.9,
-      "ratio": 0.939,
+      "ratio": 0.976,
       "spread": 4.0
      },
      "w_dps": {
-      "cv": 2.146,
+      "cv": 2.109,
       "faction_geomean": 1.07,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
-      "percentile": 66.7,
-      "ratio": 1.09,
+      "percentile": 66.0,
+      "ratio": 1.085,
       "spread": 1500.0
      },
      "w_range": {
-      "cv": 0.614,
-      "faction_geomean": 6.19,
+      "cv": 0.594,
+      "faction_geomean": 5.91,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 50.9,
-      "ratio": 0.901,
+      "percentile": 23.0,
+      "ratio": 0.86,
       "spread": 13.33
      }
     }
@@ -24069,30 +28719,30 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 20,
+    "n": 19,
     "stats": {
      "cost": {
-      "cv": 0.504,
-      "faction_geomean": 378.27,
+      "cv": 0.515,
+      "faction_geomean": 377.16,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 38.8,
-      "ratio": 0.973,
+      "ratio": 0.97,
       "spread": 6.07
      },
      "hp": {
-      "cv": 0.221,
-      "faction_geomean": 164.08,
+      "cv": 0.226,
+      "faction_geomean": 164.29,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 51.0,
-      "ratio": 1.031,
+      "ratio": 1.033,
       "spread": 2.14
      },
      "sight": {
-      "cv": 0.255,
+      "cv": 0.261,
       "faction_geomean": 5.96,
       "game_cv": 0.267,
       "game_geomean": 6.26,
@@ -24102,33 +28752,33 @@
       "spread": 2.25
      },
      "speed": {
-      "cv": 0.114,
+      "cv": 0.117,
       "faction_geomean": 6.96,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 21.4,
-      "ratio": 1.001,
+      "ratio": 1.0,
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 2.73,
-      "faction_geomean": 1.02,
+      "cv": 3.596,
+      "faction_geomean": 0.8,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 78.9,
-      "ratio": 1.308,
+      "percentile": 41.1,
+      "ratio": 1.03,
       "spread": 1280.0
      },
      "w_range": {
-      "cv": 0.22,
-      "faction_geomean": 5.69,
+      "cv": 0.226,
+      "faction_geomean": 5.64,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 44.1,
-      "ratio": 1.06,
+      "ratio": 1.052,
       "spread": 4.37
      }
     }
@@ -24201,112 +28851,112 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 74,
+    "n": 70,
     "stats": {
      "cost": {
-      "cv": 0.636,
-      "faction_geomean": 849.91,
+      "cv": 0.624,
+      "faction_geomean": 824.84,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
       "percentile": 52.0,
-      "ratio": 1.111,
+      "ratio": 1.079,
       "spread": 25.0
      },
      "hp": {
-      "cv": 0.737,
-      "faction_geomean": 351.76,
+      "cv": 0.733,
+      "faction_geomean": 343.75,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
-      "percentile": 58.8,
-      "ratio": 1.17,
+      "percentile": 58.2,
+      "ratio": 1.143,
       "spread": 15.62
      },
      "sight": {
-      "cv": 0.234,
-      "faction_geomean": 6.52,
+      "cv": 0.233,
+      "faction_geomean": 6.5,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 0.993,
+      "ratio": 0.99,
       "spread": 2.5
      },
      "speed": {
-      "cv": 0.846,
-      "faction_geomean": 6.99,
+      "cv": 0.845,
+      "faction_geomean": 7.15,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
-      "percentile": 41.8,
-      "ratio": 1.016,
+      "percentile": 77.3,
+      "ratio": 1.039,
       "spread": 13.33
      },
      "w_dps": {
-      "cv": 3.49,
-      "faction_geomean": 1.01,
+      "cv": 3.733,
+      "faction_geomean": 0.94,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 70.3,
-      "ratio": 1.242,
+      "percentile": 53.3,
+      "ratio": 1.154,
       "spread": 8000.0
      },
      "w_range": {
-      "cv": 3.991,
-      "faction_geomean": 7.44,
+      "cv": 4.033,
+      "faction_geomean": 7.36,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 71.2,
-      "ratio": 1.09,
+      "ratio": 1.078,
       "spread": 273.22
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 41,
+    "n": 38,
     "stats": {
      "cost": {
-      "cv": 0.449,
-      "faction_geomean": 1183.27,
+      "cv": 0.434,
+      "faction_geomean": 1126.84,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
       "percentile": 64.9,
-      "ratio": 1.171,
-      "spread": 5.2
+      "ratio": 1.115,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.58,
-      "faction_geomean": 420.7,
+      "cv": 0.558,
+      "faction_geomean": 400.57,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 68.4,
-      "ratio": 1.228,
-      "spread": 8.0
+      "percentile": 64.9,
+      "ratio": 1.17,
+      "spread": 6.67
      },
      "sight": {
-      "cv": 0.206,
-      "faction_geomean": 6.93,
+      "cv": 0.2,
+      "faction_geomean": 6.91,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 1.034,
+      "ratio": 1.032,
       "spread": 2.5
      },
      "speed": {
-      "cv": 0.995,
-      "faction_geomean": 6.98,
+      "cv": 0.982,
+      "faction_geomean": 7.26,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
-      "percentile": 54.9,
-      "ratio": 1.02,
+      "percentile": 73.4,
+      "ratio": 1.061,
       "spread": 13.33
      },
      "w_dps": {
@@ -24316,18 +28966,18 @@
       "game_geomean": 0.99,
       "game_spread": 4000.0,
       "percentile": 66.7,
-      "ratio": 1.113,
+      "ratio": 1.11,
       "spread": 205.33
      },
      "w_range": {
-      "cv": 0.504,
-      "faction_geomean": 7.18,
+      "cv": 0.473,
+      "faction_geomean": 6.99,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 67.7,
-      "ratio": 1.045,
-      "spread": 10.0
+      "percentile": 54.7,
+      "ratio": 1.017,
+      "spread": 9.0
      }
     }
    }
@@ -24391,40 +29041,40 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 19,
+    "n": 18,
     "stats": {
      "cost": {
-      "cv": 0.548,
-      "faction_geomean": 358.84,
+      "cv": 0.563,
+      "faction_geomean": 356.68,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 37.8,
-      "ratio": 0.923,
+      "ratio": 0.917,
       "spread": 5.31
      },
      "hp": {
-      "cv": 0.228,
-      "faction_geomean": 153.92,
+      "cv": 0.235,
+      "faction_geomean": 153.59,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 45.9,
-      "ratio": 0.968,
+      "ratio": 0.965,
       "spread": 1.88
      },
      "sight": {
-      "cv": 0.22,
-      "faction_geomean": 5.68,
+      "cv": 0.226,
+      "faction_geomean": 5.66,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 33.7,
-      "ratio": 0.907,
+      "ratio": 0.904,
       "spread": 2.25
      },
      "speed": {
-      "cv": 0.082,
+      "cv": 0.085,
       "faction_geomean": 6.98,
       "game_cv": 0.116,
       "game_geomean": 6.96,
@@ -24434,23 +29084,23 @@
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 3.399,
-      "faction_geomean": 1.16,
+      "cv": 0.345,
+      "faction_geomean": 0.89,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 81.1,
-      "ratio": 1.487,
-      "spread": 135.0
+      "percentile": 52.2,
+      "ratio": 1.146,
+      "spread": 3.6
      },
      "w_range": {
-      "cv": 0.258,
-      "faction_geomean": 5.73,
+      "cv": 0.266,
+      "faction_geomean": 5.69,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 44.1,
-      "ratio": 1.069,
+      "ratio": 1.061,
       "spread": 5.46
      }
     }
@@ -24523,132 +29173,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 70,
+    "n": 66,
     "stats": {
      "cost": {
-      "cv": 0.644,
-      "faction_geomean": 829.37,
+      "cv": 0.63,
+      "faction_geomean": 802.25,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
       "percentile": 52.0,
-      "ratio": 1.084,
+      "ratio": 1.049,
       "spread": 21.88
      },
      "hp": {
-      "cv": 0.752,
-      "faction_geomean": 310.93,
+      "cv": 0.742,
+      "faction_geomean": 301.16,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
       "percentile": 56.0,
-      "ratio": 1.034,
+      "ratio": 1.002,
       "spread": 1750.0
      },
      "sight": {
-      "cv": 0.248,
-      "faction_geomean": 6.41,
+      "cv": 0.247,
+      "faction_geomean": 6.38,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 0.976,
+      "ratio": 0.972,
       "spread": 3.33
      },
      "speed": {
       "cv": 0.479,
-      "faction_geomean": 6.45,
+      "faction_geomean": 6.58,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.939,
+      "ratio": 0.957,
       "spread": 10.0
      },
      "w_dps": {
-      "cv": 3.8,
-      "faction_geomean": 0.88,
+      "cv": 4.382,
+      "faction_geomean": 0.8,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 52.9,
-      "ratio": 1.089,
+      "percentile": 42.0,
+      "ratio": 0.992,
       "spread": 12000.0
      },
      "w_range": {
-      "cv": 2.654,
-      "faction_geomean": 7.34,
+      "cv": 2.713,
+      "faction_geomean": 7.24,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 71.2,
-      "ratio": 1.074,
+      "ratio": 1.06,
       "spread": 139.34
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 39,
+    "n": 36,
     "stats": {
      "cost": {
-      "cv": 0.443,
-      "faction_geomean": 1139.56,
+      "cv": 0.41,
+      "faction_geomean": 1078.89,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 64.9,
-      "ratio": 1.128,
-      "spread": 5.2
+      "percentile": 53.4,
+      "ratio": 1.068,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.543,
-      "faction_geomean": 336.15,
+      "cv": 0.437,
+      "faction_geomean": 313.27,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 50.0,
-      "ratio": 0.982,
-      "spread": 1200.0
+      "percentile": 47.1,
+      "ratio": 0.915,
+      "spread": 1000.0
      },
      "sight": {
-      "cv": 0.238,
-      "faction_geomean": 6.41,
+      "cv": 0.233,
+      "faction_geomean": 6.35,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 0.956,
+      "ratio": 0.948,
       "spread": 3.33
      },
      "speed": {
-      "cv": 0.607,
-      "faction_geomean": 6.27,
+      "cv": 0.604,
+      "faction_geomean": 6.47,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 54.9,
-      "ratio": 0.917,
+      "ratio": 0.946,
       "spread": 10.0
      },
      "w_dps": {
-      "cv": 2.049,
-      "faction_geomean": 0.93,
+      "cv": 2.029,
+      "faction_geomean": 0.92,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
-      "percentile": 50.0,
-      "ratio": 0.946,
+      "percentile": 49.3,
+      "ratio": 0.933,
       "spread": 550.0
      },
      "w_range": {
-      "cv": 0.589,
-      "faction_geomean": 7.19,
+      "cv": 0.582,
+      "faction_geomean": 6.97,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 67.7,
-      "ratio": 1.046,
+      "percentile": 54.7,
+      "ratio": 1.014,
       "spread": 10.0
      }
     }
@@ -24713,66 +29363,66 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 24,
+    "n": 23,
     "stats": {
      "cost": {
-      "cv": 0.433,
-      "faction_geomean": 480.52,
+      "cv": 0.434,
+      "faction_geomean": 484.37,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 51.0,
-      "ratio": 1.236,
+      "ratio": 1.246,
       "spread": 6.07
      },
      "hp": {
-      "cv": 0.346,
-      "faction_geomean": 168.26,
+      "cv": 0.352,
+      "faction_geomean": 168.63,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 52.0,
-      "ratio": 1.058,
+      "ratio": 1.06,
       "spread": 3.14
      },
      "sight": {
-      "cv": 0.295,
-      "faction_geomean": 6.7,
+      "cv": 0.298,
+      "faction_geomean": 6.74,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 67.3,
-      "ratio": 1.071,
+      "ratio": 1.076,
       "spread": 4.0
      },
      "speed": {
-      "cv": 0.124,
-      "faction_geomean": 6.58,
+      "cv": 0.127,
+      "faction_geomean": 6.56,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 21.4,
-      "ratio": 0.946,
+      "ratio": 0.943,
       "spread": 1.8
      },
      "w_dps": {
-      "cv": 3.645,
-      "faction_geomean": 0.59,
+      "cv": 0.94,
+      "faction_geomean": 0.47,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 21.1,
-      "ratio": 0.754,
-      "spread": 18750.0
+      "percentile": 14.4,
+      "ratio": 0.605,
+      "spread": 877.5
      },
      "w_range": {
-      "cv": 0.367,
-      "faction_geomean": 5.45,
+      "cv": 0.377,
+      "faction_geomean": 5.41,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 32.3,
-      "ratio": 1.016,
+      "ratio": 1.008,
       "spread": 6.01
      }
     }
@@ -24845,132 +29495,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 68,
+    "n": 64,
     "stats": {
      "cost": {
-      "cv": 0.572,
-      "faction_geomean": 814.5,
+      "cv": 0.527,
+      "faction_geomean": 786.17,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
-      "percentile": 52.0,
-      "ratio": 1.065,
-      "spread": 18.57
+      "percentile": 42.1,
+      "ratio": 1.028,
+      "spread": 17.86
      },
      "hp": {
-      "cv": 0.733,
-      "faction_geomean": 299.32,
+      "cv": 0.703,
+      "faction_geomean": 288.95,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
       "percentile": 53.3,
-      "ratio": 0.996,
-      "spread": 15.58
+      "ratio": 0.961,
+      "spread": 13.64
      },
      "sight": {
-      "cv": 0.264,
+      "cv": 0.265,
       "faction_geomean": 6.97,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 1.061,
+      "ratio": 1.062,
       "spread": 4.0
      },
      "speed": {
       "cv": 0.745,
-      "faction_geomean": 6.82,
+      "faction_geomean": 6.98,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.992,
+      "ratio": 1.015,
       "spread": 12.33
      },
      "w_dps": {
-      "cv": 3.027,
-      "faction_geomean": 0.66,
+      "cv": 2.539,
+      "faction_geomean": 0.59,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 30.1,
-      "ratio": 0.812,
-      "spread": 18750.0
+      "percentile": 24.6,
+      "ratio": 0.731,
+      "spread": 8333.33
      },
      "w_range": {
-      "cv": 2.806,
-      "faction_geomean": 6.96,
+      "cv": 2.88,
+      "faction_geomean": 6.84,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 59.9,
-      "ratio": 1.019,
+      "ratio": 1.001,
       "spread": 139.34
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 34,
+    "n": 31,
     "stats": {
      "cost": {
-      "cv": 0.489,
-      "faction_geomean": 1056.32,
+      "cv": 0.438,
+      "faction_geomean": 984.04,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 53.4,
-      "ratio": 1.045,
-      "spread": 5.2
+      "percentile": 41.4,
+      "ratio": 0.974,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.606,
-      "faction_geomean": 355.38,
+      "cv": 0.508,
+      "faction_geomean": 329.22,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 51.1,
-      "ratio": 1.038,
-      "spread": 15.58
+      "percentile": 48.3,
+      "ratio": 0.961,
+      "spread": 12.99
      },
      "sight": {
-      "cv": 0.237,
-      "faction_geomean": 7.29,
+      "cv": 0.235,
+      "faction_geomean": 7.3,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 56.9,
-      "ratio": 1.087,
+      "ratio": 1.09,
       "spread": 2.5
      },
      "speed": {
-      "cv": 0.899,
-      "faction_geomean": 7.03,
+      "cv": 0.887,
+      "faction_geomean": 7.38,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 73.4,
-      "ratio": 1.028,
+      "ratio": 1.078,
       "spread": 12.33
      },
      "w_dps": {
-      "cv": 2.071,
+      "cv": 2.022,
       "faction_geomean": 1.16,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
       "percentile": 71.5,
-      "ratio": 1.173,
+      "ratio": 1.174,
       "spread": 933.33
      },
      "w_range": {
-      "cv": 0.511,
-      "faction_geomean": 7.49,
+      "cv": 0.478,
+      "faction_geomean": 7.26,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
       "percentile": 68.9,
-      "ratio": 1.091,
+      "ratio": 1.057,
       "spread": 5.71
      }
     }
@@ -25035,66 +29685,66 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 18,
+    "n": 17,
     "stats": {
      "cost": {
-      "cv": 0.494,
-      "faction_geomean": 437.58,
+      "cv": 0.5,
+      "faction_geomean": 439.9,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 44.9,
-      "ratio": 1.126,
+      "ratio": 1.132,
       "spread": 6.07
      },
      "hp": {
-      "cv": 0.198,
-      "faction_geomean": 169.09,
+      "cv": 0.202,
+      "faction_geomean": 169.64,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 52.0,
-      "ratio": 1.063,
+      "ratio": 1.066,
       "spread": 1.93
      },
      "sight": {
-      "cv": 0.236,
-      "faction_geomean": 6.51,
+      "cv": 0.24,
+      "faction_geomean": 6.54,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 67.3,
-      "ratio": 1.04,
+      "ratio": 1.045,
       "spread": 2.0
      },
      "speed": {
-      "cv": 0.115,
-      "faction_geomean": 7.29,
+      "cv": 0.117,
+      "faction_geomean": 7.31,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 86.7,
-      "ratio": 1.048,
+      "ratio": 1.051,
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 2.621,
-      "faction_geomean": 0.86,
+      "cv": 3.226,
+      "faction_geomean": 0.65,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 52.2,
-      "ratio": 1.109,
-      "spread": 4125.0
+      "percentile": 24.4,
+      "ratio": 0.839,
+      "spread": 2750.0
      },
      "w_range": {
-      "cv": 0.346,
-      "faction_geomean": 5.41,
+      "cv": 0.359,
+      "faction_geomean": 5.35,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 32.3,
-      "ratio": 1.009,
+      "ratio": 0.997,
       "spread": 4.92
      }
     }
@@ -25167,132 +29817,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 62,
+    "n": 58,
     "stats": {
      "cost": {
-      "cv": 0.607,
-      "faction_geomean": 851.2,
+      "cv": 0.583,
+      "faction_geomean": 821.08,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
-      "percentile": 54.5,
-      "ratio": 1.113,
-      "spread": 18.57
+      "percentile": 52.0,
+      "ratio": 1.074,
+      "spread": 17.86
      },
      "hp": {
-      "cv": 0.862,
-      "faction_geomean": 332.94,
+      "cv": 0.874,
+      "faction_geomean": 322.59,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
-      "percentile": 58.2,
-      "ratio": 1.108,
+      "percentile": 56.3,
+      "ratio": 1.073,
       "spread": 16.07
      },
      "sight": {
       "cv": 0.248,
-      "faction_geomean": 6.42,
+      "faction_geomean": 6.39,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 0.977,
+      "ratio": 0.973,
       "spread": 5.0
      },
      "speed": {
-      "cv": 0.287,
-      "faction_geomean": 6.73,
+      "cv": 0.276,
+      "faction_geomean": 6.89,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.978,
+      "ratio": 1.003,
       "spread": 4.0
      },
      "w_dps": {
-      "cv": 2.818,
-      "faction_geomean": 0.89,
+      "cv": 2.648,
+      "faction_geomean": 0.81,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 52.9,
-      "ratio": 1.099,
-      "spread": 33750.0
+      "percentile": 42.0,
+      "ratio": 0.996,
+      "spread": 22500.0
      },
      "w_range": {
-      "cv": 2.79,
-      "faction_geomean": 6.69,
+      "cv": 2.861,
+      "faction_geomean": 6.55,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
-      "percentile": 58.9,
-      "ratio": 0.98,
+      "percentile": 57.9,
+      "ratio": 0.959,
       "spread": 170.0
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 34,
+    "n": 31,
     "stats": {
      "cost": {
-      "cv": 0.508,
-      "faction_geomean": 1137.43,
+      "cv": 0.499,
+      "faction_geomean": 1067.22,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 64.9,
-      "ratio": 1.126,
-      "spread": 5.2
+      "percentile": 53.4,
+      "ratio": 1.056,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.852,
-      "faction_geomean": 391.74,
+      "cv": 0.898,
+      "faction_geomean": 366.34,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 56.9,
-      "ratio": 1.144,
+      "percentile": 51.1,
+      "ratio": 1.07,
       "spread": 12.0
      },
      "sight": {
-      "cv": 0.266,
-      "faction_geomean": 6.42,
+      "cv": 0.265,
+      "faction_geomean": 6.36,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 0.958,
+      "ratio": 0.949,
       "spread": 5.0
      },
      "speed": {
-      "cv": 0.363,
-      "faction_geomean": 6.43,
+      "cv": 0.349,
+      "faction_geomean": 6.68,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 54.9,
-      "ratio": 0.939,
+      "ratio": 0.976,
       "spread": 4.0
      },
      "w_dps": {
-      "cv": 2.146,
+      "cv": 2.109,
       "faction_geomean": 1.07,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
-      "percentile": 66.7,
-      "ratio": 1.09,
+      "percentile": 66.0,
+      "ratio": 1.085,
       "spread": 1500.0
      },
      "w_range": {
-      "cv": 0.614,
-      "faction_geomean": 6.19,
+      "cv": 0.594,
+      "faction_geomean": 5.91,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 50.9,
-      "ratio": 0.901,
+      "percentile": 23.0,
+      "ratio": 0.86,
       "spread": 13.33
      }
     }
@@ -25301,66 +29951,66 @@
   "ScarabCell": {
    "infantry": {
     "game_n": 98,
-    "n": 21,
+    "n": 20,
     "stats": {
      "cost": {
-      "cv": 0.561,
-      "faction_geomean": 305.9,
+      "cv": 0.578,
+      "faction_geomean": 301.83,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 34.7,
-      "ratio": 0.787,
+      "ratio": 0.776,
       "spread": 8.0
      },
      "hp": {
-      "cv": 0.296,
-      "faction_geomean": 141.81,
+      "cv": 0.304,
+      "faction_geomean": 140.96,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 40.8,
-      "ratio": 0.891,
+      "ratio": 0.886,
       "spread": 2.67
      },
      "sight": {
-      "cv": 0.255,
-      "faction_geomean": 6.34,
+      "cv": 0.26,
+      "faction_geomean": 6.36,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 67.3,
-      "ratio": 1.014,
+      "ratio": 1.017,
       "spread": 2.0
      },
      "speed": {
-      "cv": 0.111,
-      "faction_geomean": 7.1,
+      "cv": 0.114,
+      "faction_geomean": 7.11,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 86.7,
-      "ratio": 1.021,
+      "ratio": 1.022,
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 2.683,
-      "faction_geomean": 1.45,
+      "cv": 3.552,
+      "faction_geomean": 1.15,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 88.9,
-      "ratio": 1.861,
+      "percentile": 81.1,
+      "ratio": 1.475,
       "spread": 200.0
      },
      "w_range": {
-      "cv": 0.326,
-      "faction_geomean": 4.84,
+      "cv": 0.334,
+      "faction_geomean": 4.77,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 16.1,
-      "ratio": 0.903,
+      "ratio": 0.889,
       "spread": 4.37
      }
     }
@@ -25433,132 +30083,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 65,
+    "n": 61,
     "stats": {
      "cost": {
-      "cv": 0.696,
-      "faction_geomean": 614.54,
+      "cv": 0.617,
+      "faction_geomean": 581.3,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
-      "percentile": 32.8,
-      "ratio": 0.804,
-      "spread": 26.0
+      "percentile": 26.9,
+      "ratio": 0.76,
+      "spread": 25.0
      },
      "hp": {
-      "cv": 0.787,
-      "faction_geomean": 253.33,
+      "cv": 0.722,
+      "faction_geomean": 241.46,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
-      "percentile": 49.2,
-      "ratio": 0.843,
-      "spread": 13.33
+      "percentile": 45.5,
+      "ratio": 0.803,
+      "spread": 11.11
      },
      "sight": {
-      "cv": 0.26,
-      "faction_geomean": 6.56,
+      "cv": 0.261,
+      "faction_geomean": 6.55,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 1.0,
+      "ratio": 0.997,
       "spread": 5.0
      },
      "speed": {
       "cv": 0.605,
-      "faction_geomean": 6.8,
+      "faction_geomean": 6.96,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.99,
+      "ratio": 1.012,
       "spread": 13.33
      },
      "w_dps": {
-      "cv": 3.53,
-      "faction_geomean": 0.96,
+      "cv": 3.991,
+      "faction_geomean": 0.87,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 54.7,
-      "ratio": 1.178,
+      "percentile": 51.4,
+      "ratio": 1.076,
       "spread": 10000.0
      },
      "w_range": {
-      "cv": 0.52,
-      "faction_geomean": 6.19,
+      "cv": 0.492,
+      "faction_geomean": 6.04,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 53.5,
-      "ratio": 0.907,
+      "ratio": 0.884,
       "spread": 10.93
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 37,
+    "n": 34,
     "stats": {
      "cost": {
-      "cv": 0.586,
-      "faction_geomean": 833.37,
+      "cv": 0.49,
+      "faction_geomean": 765.05,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 35.6,
-      "ratio": 0.825,
-      "spread": 8.67
+      "percentile": 25.9,
+      "ratio": 0.757,
+      "spread": 8.33
      },
      "hp": {
-      "cv": 0.69,
-      "faction_geomean": 308.26,
+      "cv": 0.566,
+      "faction_geomean": 283.92,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 47.1,
-      "ratio": 0.9,
-      "spread": 6.67
+      "percentile": 40.8,
+      "ratio": 0.829,
+      "spread": 5.56
      },
      "sight": {
-      "cv": 0.271,
-      "faction_geomean": 6.61,
+      "cv": 0.272,
+      "faction_geomean": 6.57,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 0.987,
+      "ratio": 0.981,
       "spread": 5.0
      },
      "speed": {
-      "cv": 0.782,
-      "faction_geomean": 6.55,
+      "cv": 0.778,
+      "faction_geomean": 6.8,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 54.9,
-      "ratio": 0.957,
+      "ratio": 0.994,
       "spread": 13.33
      },
      "w_dps": {
-      "cv": 2.446,
-      "faction_geomean": 0.78,
+      "cv": 2.45,
+      "faction_geomean": 0.76,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
-      "percentile": 36.1,
-      "ratio": 0.793,
+      "percentile": 34.7,
+      "ratio": 0.774,
       "spread": 3000.0
      },
      "w_range": {
-      "cv": 0.509,
-      "faction_geomean": 7.3,
+      "cv": 0.481,
+      "faction_geomean": 7.09,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 68.9,
-      "ratio": 1.062,
+      "percentile": 67.7,
+      "ratio": 1.032,
       "spread": 10.93
      }
     }
@@ -25567,66 +30217,66 @@
   "ScorpionCell": {
    "infantry": {
     "game_n": 98,
-    "n": 21,
+    "n": 20,
     "stats": {
      "cost": {
-      "cv": 0.561,
-      "faction_geomean": 305.9,
+      "cv": 0.578,
+      "faction_geomean": 301.83,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 34.7,
-      "ratio": 0.787,
+      "ratio": 0.776,
       "spread": 8.0
      },
      "hp": {
-      "cv": 0.296,
-      "faction_geomean": 141.81,
+      "cv": 0.304,
+      "faction_geomean": 140.96,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 40.8,
-      "ratio": 0.891,
+      "ratio": 0.886,
       "spread": 2.67
      },
      "sight": {
-      "cv": 0.255,
-      "faction_geomean": 6.34,
+      "cv": 0.26,
+      "faction_geomean": 6.36,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 67.3,
-      "ratio": 1.014,
+      "ratio": 1.017,
       "spread": 2.0
      },
      "speed": {
-      "cv": 0.111,
-      "faction_geomean": 7.1,
+      "cv": 0.114,
+      "faction_geomean": 7.11,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 86.7,
-      "ratio": 1.021,
+      "ratio": 1.022,
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 2.683,
-      "faction_geomean": 1.45,
+      "cv": 3.552,
+      "faction_geomean": 1.15,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 88.9,
-      "ratio": 1.861,
+      "percentile": 81.1,
+      "ratio": 1.475,
       "spread": 200.0
      },
      "w_range": {
-      "cv": 0.326,
-      "faction_geomean": 4.84,
+      "cv": 0.334,
+      "faction_geomean": 4.77,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 16.1,
-      "ratio": 0.903,
+      "ratio": 0.889,
       "spread": 4.37
      }
     }
@@ -25699,132 +30349,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 66,
+    "n": 62,
     "stats": {
      "cost": {
-      "cv": 0.69,
-      "faction_geomean": 617.0,
+      "cv": 0.611,
+      "faction_geomean": 584.3,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
-      "percentile": 32.8,
-      "ratio": 0.807,
-      "spread": 26.0
+      "percentile": 26.9,
+      "ratio": 0.764,
+      "spread": 25.0
      },
      "hp": {
-      "cv": 0.778,
-      "faction_geomean": 255.54,
+      "cv": 0.713,
+      "faction_geomean": 243.9,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
-      "percentile": 49.2,
-      "ratio": 0.85,
-      "spread": 13.33
+      "percentile": 45.8,
+      "ratio": 0.811,
+      "spread": 11.11
      },
      "sight": {
-      "cv": 0.258,
-      "faction_geomean": 6.58,
+      "cv": 0.259,
+      "faction_geomean": 6.57,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 1.003,
+      "ratio": 1.0,
       "spread": 5.0
      },
      "speed": {
       "cv": 0.603,
-      "faction_geomean": 6.79,
+      "faction_geomean": 6.94,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.988,
+      "ratio": 1.01,
       "spread": 13.33
      },
      "w_dps": {
-      "cv": 3.553,
-      "faction_geomean": 0.95,
+      "cv": 4.013,
+      "faction_geomean": 0.87,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 54.7,
-      "ratio": 1.173,
+      "percentile": 51.4,
+      "ratio": 1.073,
       "spread": 10000.0
      },
      "w_range": {
-      "cv": 0.517,
-      "faction_geomean": 6.19,
+      "cv": 0.489,
+      "faction_geomean": 6.04,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 53.5,
-      "ratio": 0.907,
+      "ratio": 0.884,
       "spread": 10.93
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 38,
+    "n": 35,
     "stats": {
      "cost": {
-      "cv": 0.581,
-      "faction_geomean": 832.48,
+      "cv": 0.483,
+      "faction_geomean": 766.03,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 35.6,
-      "ratio": 0.824,
-      "spread": 8.67
+      "percentile": 25.9,
+      "ratio": 0.758,
+      "spread": 8.33
      },
      "hp": {
-      "cv": 0.678,
-      "faction_geomean": 311.34,
+      "cv": 0.556,
+      "faction_geomean": 287.68,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 47.1,
-      "ratio": 0.909,
-      "spread": 6.67
+      "percentile": 42.0,
+      "ratio": 0.84,
+      "spread": 5.56
      },
      "sight": {
       "cv": 0.268,
-      "faction_geomean": 6.65,
+      "faction_geomean": 6.61,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 0.992,
+      "ratio": 0.986,
       "spread": 5.0
      },
      "speed": {
-      "cv": 0.776,
-      "faction_geomean": 6.54,
+      "cv": 0.772,
+      "faction_geomean": 6.78,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 54.9,
-      "ratio": 0.955,
+      "ratio": 0.99,
       "spread": 13.33
      },
      "w_dps": {
-      "cv": 2.458,
-      "faction_geomean": 0.78,
+      "cv": 2.463,
+      "faction_geomean": 0.76,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
-      "percentile": 36.1,
-      "ratio": 0.793,
+      "percentile": 34.7,
+      "ratio": 0.774,
       "spread": 3000.0
      },
      "w_range": {
-      "cv": 0.507,
-      "faction_geomean": 7.26,
+      "cv": 0.479,
+      "faction_geomean": 7.05,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 68.9,
-      "ratio": 1.056,
+      "percentile": 67.7,
+      "ratio": 1.026,
       "spread": 10.93
      }
     }
@@ -25889,66 +30539,66 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 24,
+    "n": 23,
     "stats": {
      "cost": {
-      "cv": 0.433,
-      "faction_geomean": 480.52,
+      "cv": 0.434,
+      "faction_geomean": 484.37,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 51.0,
-      "ratio": 1.236,
+      "ratio": 1.246,
       "spread": 6.07
      },
      "hp": {
-      "cv": 0.346,
-      "faction_geomean": 168.26,
+      "cv": 0.352,
+      "faction_geomean": 168.63,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 52.0,
-      "ratio": 1.058,
+      "ratio": 1.06,
       "spread": 3.14
      },
      "sight": {
-      "cv": 0.295,
-      "faction_geomean": 6.7,
+      "cv": 0.298,
+      "faction_geomean": 6.74,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 67.3,
-      "ratio": 1.071,
+      "ratio": 1.076,
       "spread": 4.0
      },
      "speed": {
-      "cv": 0.124,
-      "faction_geomean": 6.58,
+      "cv": 0.127,
+      "faction_geomean": 6.56,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 21.4,
-      "ratio": 0.946,
+      "ratio": 0.943,
       "spread": 1.8
      },
      "w_dps": {
-      "cv": 3.645,
-      "faction_geomean": 0.59,
+      "cv": 0.94,
+      "faction_geomean": 0.47,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 21.1,
-      "ratio": 0.754,
-      "spread": 18750.0
+      "percentile": 14.4,
+      "ratio": 0.605,
+      "spread": 877.5
      },
      "w_range": {
-      "cv": 0.367,
-      "faction_geomean": 5.45,
+      "cv": 0.377,
+      "faction_geomean": 5.41,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 32.3,
-      "ratio": 1.016,
+      "ratio": 1.008,
       "spread": 6.01
      }
     }
@@ -26021,132 +30671,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 68,
+    "n": 64,
     "stats": {
      "cost": {
-      "cv": 0.572,
-      "faction_geomean": 814.5,
+      "cv": 0.527,
+      "faction_geomean": 786.17,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
-      "percentile": 52.0,
-      "ratio": 1.065,
-      "spread": 18.57
+      "percentile": 42.1,
+      "ratio": 1.028,
+      "spread": 17.86
      },
      "hp": {
-      "cv": 0.733,
-      "faction_geomean": 299.32,
+      "cv": 0.703,
+      "faction_geomean": 288.95,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
       "percentile": 53.3,
-      "ratio": 0.996,
-      "spread": 15.58
+      "ratio": 0.961,
+      "spread": 13.64
      },
      "sight": {
-      "cv": 0.264,
+      "cv": 0.265,
       "faction_geomean": 6.97,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 1.061,
+      "ratio": 1.062,
       "spread": 4.0
      },
      "speed": {
       "cv": 0.745,
-      "faction_geomean": 6.82,
+      "faction_geomean": 6.98,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.992,
+      "ratio": 1.015,
       "spread": 12.33
      },
      "w_dps": {
-      "cv": 3.027,
-      "faction_geomean": 0.66,
+      "cv": 2.539,
+      "faction_geomean": 0.59,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 30.1,
-      "ratio": 0.812,
-      "spread": 18750.0
+      "percentile": 24.6,
+      "ratio": 0.731,
+      "spread": 8333.33
      },
      "w_range": {
-      "cv": 2.806,
-      "faction_geomean": 6.96,
+      "cv": 2.88,
+      "faction_geomean": 6.84,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 59.9,
-      "ratio": 1.019,
+      "ratio": 1.001,
       "spread": 139.34
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 34,
+    "n": 31,
     "stats": {
      "cost": {
-      "cv": 0.489,
-      "faction_geomean": 1056.32,
+      "cv": 0.438,
+      "faction_geomean": 984.04,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 53.4,
-      "ratio": 1.045,
-      "spread": 5.2
+      "percentile": 41.4,
+      "ratio": 0.974,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.606,
-      "faction_geomean": 355.38,
+      "cv": 0.508,
+      "faction_geomean": 329.22,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 51.1,
-      "ratio": 1.038,
-      "spread": 15.58
+      "percentile": 48.3,
+      "ratio": 0.961,
+      "spread": 12.99
      },
      "sight": {
-      "cv": 0.237,
-      "faction_geomean": 7.29,
+      "cv": 0.235,
+      "faction_geomean": 7.3,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 56.9,
-      "ratio": 1.087,
+      "ratio": 1.09,
       "spread": 2.5
      },
      "speed": {
-      "cv": 0.899,
-      "faction_geomean": 7.03,
+      "cv": 0.887,
+      "faction_geomean": 7.38,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 73.4,
-      "ratio": 1.028,
+      "ratio": 1.078,
       "spread": 12.33
      },
      "w_dps": {
-      "cv": 2.071,
+      "cv": 2.022,
       "faction_geomean": 1.16,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
       "percentile": 71.5,
-      "ratio": 1.173,
+      "ratio": 1.174,
       "spread": 933.33
      },
      "w_range": {
-      "cv": 0.511,
-      "faction_geomean": 7.49,
+      "cv": 0.478,
+      "faction_geomean": 7.26,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
       "percentile": 68.9,
-      "ratio": 1.091,
+      "ratio": 1.057,
       "spread": 5.71
      }
     }
@@ -26211,30 +30861,30 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 20,
+    "n": 19,
     "stats": {
      "cost": {
-      "cv": 0.504,
-      "faction_geomean": 378.27,
+      "cv": 0.515,
+      "faction_geomean": 377.16,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 38.8,
-      "ratio": 0.973,
+      "ratio": 0.97,
       "spread": 6.07
      },
      "hp": {
-      "cv": 0.221,
-      "faction_geomean": 164.08,
+      "cv": 0.226,
+      "faction_geomean": 164.29,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 51.0,
-      "ratio": 1.031,
+      "ratio": 1.033,
       "spread": 2.14
      },
      "sight": {
-      "cv": 0.255,
+      "cv": 0.261,
       "faction_geomean": 5.96,
       "game_cv": 0.267,
       "game_geomean": 6.26,
@@ -26244,33 +30894,33 @@
       "spread": 2.25
      },
      "speed": {
-      "cv": 0.114,
+      "cv": 0.117,
       "faction_geomean": 6.96,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 21.4,
-      "ratio": 1.001,
+      "ratio": 1.0,
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 2.73,
-      "faction_geomean": 1.02,
+      "cv": 3.596,
+      "faction_geomean": 0.8,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 78.9,
-      "ratio": 1.308,
+      "percentile": 41.1,
+      "ratio": 1.03,
       "spread": 1280.0
      },
      "w_range": {
-      "cv": 0.22,
-      "faction_geomean": 5.69,
+      "cv": 0.226,
+      "faction_geomean": 5.64,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 44.1,
-      "ratio": 1.06,
+      "ratio": 1.052,
       "spread": 4.37
      }
     }
@@ -26343,112 +30993,112 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 74,
+    "n": 70,
     "stats": {
      "cost": {
-      "cv": 0.636,
-      "faction_geomean": 849.91,
+      "cv": 0.624,
+      "faction_geomean": 824.84,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
       "percentile": 52.0,
-      "ratio": 1.111,
+      "ratio": 1.079,
       "spread": 25.0
      },
      "hp": {
-      "cv": 0.737,
-      "faction_geomean": 351.76,
+      "cv": 0.733,
+      "faction_geomean": 343.75,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
-      "percentile": 58.8,
-      "ratio": 1.17,
+      "percentile": 58.2,
+      "ratio": 1.143,
       "spread": 15.62
      },
      "sight": {
-      "cv": 0.234,
-      "faction_geomean": 6.52,
+      "cv": 0.233,
+      "faction_geomean": 6.5,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 0.993,
+      "ratio": 0.99,
       "spread": 2.5
      },
      "speed": {
-      "cv": 0.846,
-      "faction_geomean": 6.99,
+      "cv": 0.845,
+      "faction_geomean": 7.15,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
-      "percentile": 41.8,
-      "ratio": 1.016,
+      "percentile": 77.3,
+      "ratio": 1.039,
       "spread": 13.33
      },
      "w_dps": {
-      "cv": 3.49,
-      "faction_geomean": 1.01,
+      "cv": 3.733,
+      "faction_geomean": 0.94,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 70.3,
-      "ratio": 1.242,
+      "percentile": 53.3,
+      "ratio": 1.154,
       "spread": 8000.0
      },
      "w_range": {
-      "cv": 3.991,
-      "faction_geomean": 7.44,
+      "cv": 4.033,
+      "faction_geomean": 7.36,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 71.2,
-      "ratio": 1.09,
+      "ratio": 1.078,
       "spread": 273.22
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 41,
+    "n": 38,
     "stats": {
      "cost": {
-      "cv": 0.449,
-      "faction_geomean": 1183.27,
+      "cv": 0.434,
+      "faction_geomean": 1126.84,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
       "percentile": 64.9,
-      "ratio": 1.171,
-      "spread": 5.2
+      "ratio": 1.115,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.58,
-      "faction_geomean": 420.7,
+      "cv": 0.558,
+      "faction_geomean": 400.57,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 68.4,
-      "ratio": 1.228,
-      "spread": 8.0
+      "percentile": 64.9,
+      "ratio": 1.17,
+      "spread": 6.67
      },
      "sight": {
-      "cv": 0.206,
-      "faction_geomean": 6.93,
+      "cv": 0.2,
+      "faction_geomean": 6.91,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 1.034,
+      "ratio": 1.032,
       "spread": 2.5
      },
      "speed": {
-      "cv": 0.995,
-      "faction_geomean": 6.98,
+      "cv": 0.982,
+      "faction_geomean": 7.26,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
-      "percentile": 54.9,
-      "ratio": 1.02,
+      "percentile": 73.4,
+      "ratio": 1.061,
       "spread": 13.33
      },
      "w_dps": {
@@ -26458,18 +31108,18 @@
       "game_geomean": 0.99,
       "game_spread": 4000.0,
       "percentile": 66.7,
-      "ratio": 1.113,
+      "ratio": 1.11,
       "spread": 205.33
      },
      "w_range": {
-      "cv": 0.504,
-      "faction_geomean": 7.18,
+      "cv": 0.473,
+      "faction_geomean": 6.99,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 67.7,
-      "ratio": 1.045,
-      "spread": 10.0
+      "percentile": 54.7,
+      "ratio": 1.017,
+      "spread": 9.0
      }
     }
    }
@@ -26533,66 +31183,66 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 18,
+    "n": 17,
     "stats": {
      "cost": {
-      "cv": 0.494,
-      "faction_geomean": 437.58,
+      "cv": 0.5,
+      "faction_geomean": 439.9,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 44.9,
-      "ratio": 1.126,
+      "ratio": 1.132,
       "spread": 6.07
      },
      "hp": {
-      "cv": 0.198,
-      "faction_geomean": 169.09,
+      "cv": 0.202,
+      "faction_geomean": 169.64,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 52.0,
-      "ratio": 1.063,
+      "ratio": 1.066,
       "spread": 1.93
      },
      "sight": {
-      "cv": 0.236,
-      "faction_geomean": 6.51,
+      "cv": 0.24,
+      "faction_geomean": 6.54,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 67.3,
-      "ratio": 1.04,
+      "ratio": 1.045,
       "spread": 2.0
      },
      "speed": {
-      "cv": 0.115,
-      "faction_geomean": 7.29,
+      "cv": 0.117,
+      "faction_geomean": 7.31,
       "game_cv": 0.116,
       "game_geomean": 6.96,
       "game_spread": 1.8,
       "percentile": 86.7,
-      "ratio": 1.048,
+      "ratio": 1.051,
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 2.621,
-      "faction_geomean": 0.86,
+      "cv": 3.226,
+      "faction_geomean": 0.65,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 52.2,
-      "ratio": 1.109,
-      "spread": 4125.0
+      "percentile": 24.4,
+      "ratio": 0.839,
+      "spread": 2750.0
      },
      "w_range": {
-      "cv": 0.346,
-      "faction_geomean": 5.41,
+      "cv": 0.359,
+      "faction_geomean": 5.35,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 32.3,
-      "ratio": 1.009,
+      "ratio": 0.997,
       "spread": 4.92
      }
     }
@@ -26665,132 +31315,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 63,
+    "n": 59,
     "stats": {
      "cost": {
-      "cv": 0.602,
-      "faction_geomean": 854.67,
+      "cv": 0.577,
+      "faction_geomean": 825.16,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
-      "percentile": 54.5,
-      "ratio": 1.118,
-      "spread": 18.57
+      "percentile": 52.0,
+      "ratio": 1.079,
+      "spread": 17.86
      },
      "hp": {
-      "cv": 0.86,
-      "faction_geomean": 332.39,
+      "cv": 0.872,
+      "faction_geomean": 322.19,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
-      "percentile": 58.2,
-      "ratio": 1.106,
+      "percentile": 56.3,
+      "ratio": 1.072,
       "spread": 16.07
      },
      "sight": {
-      "cv": 0.247,
-      "faction_geomean": 6.44,
+      "cv": 0.246,
+      "faction_geomean": 6.41,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 0.981,
+      "ratio": 0.977,
       "spread": 5.0
      },
      "speed": {
-      "cv": 0.284,
-      "faction_geomean": 6.75,
+      "cv": 0.273,
+      "faction_geomean": 6.91,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.981,
+      "ratio": 1.005,
       "spread": 4.0
      },
      "w_dps": {
-      "cv": 2.847,
-      "faction_geomean": 0.85,
+      "cv": 2.677,
+      "faction_geomean": 0.77,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 48.9,
-      "ratio": 1.042,
-      "spread": 33750.0
+      "percentile": 37.7,
+      "ratio": 0.943,
+      "spread": 22500.0
      },
      "w_range": {
-      "cv": 2.785,
-      "faction_geomean": 6.7,
+      "cv": 2.856,
+      "faction_geomean": 6.56,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
-      "percentile": 58.9,
-      "ratio": 0.98,
+      "percentile": 57.9,
+      "ratio": 0.96,
       "spread": 170.0
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 35,
+    "n": 32,
     "stats": {
      "cost": {
-      "cv": 0.503,
-      "faction_geomean": 1136.34,
+      "cv": 0.492,
+      "faction_geomean": 1068.23,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 64.9,
-      "ratio": 1.125,
-      "spread": 5.2
+      "percentile": 53.4,
+      "ratio": 1.057,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.853,
-      "faction_geomean": 388.76,
+      "cv": 0.896,
+      "faction_geomean": 364.06,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 56.9,
-      "ratio": 1.135,
+      "percentile": 51.1,
+      "ratio": 1.063,
       "spread": 12.0
      },
      "sight": {
-      "cv": 0.263,
-      "faction_geomean": 6.46,
+      "cv": 0.262,
+      "faction_geomean": 6.4,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 0.964,
+      "ratio": 0.956,
       "spread": 5.0
      },
      "speed": {
-      "cv": 0.357,
-      "faction_geomean": 6.47,
+      "cv": 0.342,
+      "faction_geomean": 6.72,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 54.9,
-      "ratio": 0.945,
+      "ratio": 0.981,
       "spread": 4.0
      },
      "w_dps": {
-      "cv": 2.19,
-      "faction_geomean": 0.97,
+      "cv": 2.156,
+      "faction_geomean": 0.96,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
       "percentile": 51.4,
-      "ratio": 0.98,
+      "ratio": 0.968,
       "spread": 1500.0
      },
      "w_range": {
-      "cv": 0.606,
-      "faction_geomean": 6.22,
+      "cv": 0.585,
+      "faction_geomean": 5.94,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 50.9,
-      "ratio": 0.905,
+      "percentile": 23.0,
+      "ratio": 0.864,
       "spread": 13.33
      }
     }
@@ -26855,40 +31505,40 @@
    },
    "infantry": {
     "game_n": 98,
-    "n": 18,
+    "n": 17,
     "stats": {
      "cost": {
-      "cv": 0.543,
-      "faction_geomean": 343.21,
+      "cv": 0.56,
+      "faction_geomean": 340.13,
       "game_cv": 0.518,
       "game_geomean": 388.75,
       "game_spread": 8.5,
       "percentile": 36.7,
-      "ratio": 0.883,
+      "ratio": 0.875,
       "spread": 5.31
      },
      "hp": {
-      "cv": 0.231,
-      "faction_geomean": 154.73,
+      "cv": 0.238,
+      "faction_geomean": 154.43,
       "game_cv": 0.279,
       "game_geomean": 159.08,
       "game_spread": 3.67,
       "percentile": 45.9,
-      "ratio": 0.973,
+      "ratio": 0.971,
       "spread": 1.88
      },
      "sight": {
-      "cv": 0.185,
-      "faction_geomean": 5.53,
+      "cv": 0.19,
+      "faction_geomean": 5.51,
       "game_cv": 0.267,
       "game_geomean": 6.26,
       "game_spread": 4.0,
       "percentile": 33.7,
-      "ratio": 0.884,
+      "ratio": 0.88,
       "spread": 2.25
      },
      "speed": {
-      "cv": 0.076,
+      "cv": 0.079,
       "faction_geomean": 7.04,
       "game_cv": 0.116,
       "game_geomean": 6.96,
@@ -26898,23 +31548,23 @@
       "spread": 1.5
      },
      "w_dps": {
-      "cv": 3.399,
-      "faction_geomean": 1.16,
+      "cv": 0.345,
+      "faction_geomean": 0.89,
       "game_cv": 3.788,
       "game_geomean": 0.78,
       "game_spread": 25000.0,
-      "percentile": 81.1,
-      "ratio": 1.487,
-      "spread": 135.0
+      "percentile": 52.2,
+      "ratio": 1.146,
+      "spread": 3.6
      },
      "w_range": {
-      "cv": 0.258,
-      "faction_geomean": 5.73,
+      "cv": 0.266,
+      "faction_geomean": 5.69,
       "game_cv": 0.315,
       "game_geomean": 5.37,
       "game_spread": 6.01,
       "percentile": 44.1,
-      "ratio": 1.069,
+      "ratio": 1.061,
       "spread": 5.46
      }
     }
@@ -26987,132 +31637,132 @@
    },
    "overall": {
     "game_n": 323,
-    "n": 69,
+    "n": 65,
     "stats": {
      "cost": {
-      "cv": 0.646,
-      "faction_geomean": 829.8,
+      "cv": 0.632,
+      "faction_geomean": 802.29,
       "game_cv": 0.617,
       "game_geomean": 764.78,
       "game_spread": 35.0,
       "percentile": 52.0,
-      "ratio": 1.085,
+      "ratio": 1.049,
       "spread": 21.88
      },
      "hp": {
-      "cv": 0.746,
-      "faction_geomean": 314.54,
+      "cv": 0.736,
+      "faction_geomean": 304.73,
       "game_cv": 0.778,
       "game_geomean": 300.62,
       "game_spread": 1800.0,
       "percentile": 56.0,
-      "ratio": 1.046,
+      "ratio": 1.014,
       "spread": 1750.0
      },
      "sight": {
-      "cv": 0.247,
-      "faction_geomean": 6.38,
+      "cv": 0.246,
+      "faction_geomean": 6.35,
       "game_cv": 0.252,
       "game_geomean": 6.57,
       "game_spread": 6.0,
       "percentile": 48.6,
-      "ratio": 0.971,
+      "ratio": 0.967,
       "spread": 3.33
      },
      "speed": {
       "cv": 0.481,
-      "faction_geomean": 6.46,
+      "faction_geomean": 6.59,
       "game_cv": 0.657,
       "game_geomean": 6.88,
       "game_spread": 13.33,
       "percentile": 41.8,
-      "ratio": 0.94,
+      "ratio": 0.958,
       "spread": 10.0
      },
      "w_dps": {
-      "cv": 3.8,
-      "faction_geomean": 0.88,
+      "cv": 4.382,
+      "faction_geomean": 0.8,
       "game_cv": 3.745,
       "game_geomean": 0.81,
       "game_spread": 67500.0,
-      "percentile": 52.9,
-      "ratio": 1.089,
+      "percentile": 42.0,
+      "ratio": 0.992,
       "spread": 12000.0
      },
      "w_range": {
-      "cv": 2.654,
-      "faction_geomean": 7.34,
+      "cv": 2.713,
+      "faction_geomean": 7.24,
       "game_cv": 3.291,
       "game_geomean": 6.83,
       "game_spread": 333.33,
       "percentile": 71.2,
-      "ratio": 1.074,
+      "ratio": 1.06,
       "spread": 139.34
      }
     }
    },
    "vehicle": {
     "game_n": 174,
-    "n": 39,
+    "n": 36,
     "stats": {
      "cost": {
-      "cv": 0.443,
-      "faction_geomean": 1139.56,
+      "cv": 0.41,
+      "faction_geomean": 1078.89,
       "game_cv": 0.475,
       "game_geomean": 1010.53,
       "game_spread": 8.67,
-      "percentile": 64.9,
-      "ratio": 1.128,
-      "spread": 5.2
+      "percentile": 53.4,
+      "ratio": 1.068,
+      "spread": 5.0
      },
      "hp": {
-      "cv": 0.543,
-      "faction_geomean": 336.15,
+      "cv": 0.437,
+      "faction_geomean": 313.27,
       "game_cv": 0.659,
       "game_geomean": 342.45,
       "game_spread": 1800.0,
-      "percentile": 50.0,
-      "ratio": 0.982,
-      "spread": 1200.0
+      "percentile": 47.1,
+      "ratio": 0.915,
+      "spread": 1000.0
      },
      "sight": {
-      "cv": 0.238,
-      "faction_geomean": 6.41,
+      "cv": 0.233,
+      "faction_geomean": 6.35,
       "game_cv": 0.243,
       "game_geomean": 6.7,
       "game_spread": 5.0,
       "percentile": 40.8,
-      "ratio": 0.956,
+      "ratio": 0.948,
       "spread": 3.33
      },
      "speed": {
-      "cv": 0.607,
-      "faction_geomean": 6.27,
+      "cv": 0.604,
+      "faction_geomean": 6.47,
       "game_cv": 0.81,
       "game_geomean": 6.84,
       "game_spread": 13.33,
       "percentile": 54.9,
-      "ratio": 0.917,
+      "ratio": 0.946,
       "spread": 10.0
      },
      "w_dps": {
-      "cv": 2.049,
-      "faction_geomean": 0.93,
+      "cv": 2.029,
+      "faction_geomean": 0.92,
       "game_cv": 2.304,
       "game_geomean": 0.99,
       "game_spread": 4000.0,
-      "percentile": 50.0,
-      "ratio": 0.946,
+      "percentile": 49.3,
+      "ratio": 0.933,
       "spread": 550.0
      },
      "w_range": {
-      "cv": 0.589,
-      "faction_geomean": 7.19,
+      "cv": 0.582,
+      "faction_geomean": 6.97,
       "game_cv": 0.523,
       "game_geomean": 6.87,
       "game_spread": 13.33,
-      "percentile": 67.7,
-      "ratio": 1.046,
+      "percentile": 54.7,
+      "ratio": 1.014,
       "spread": 10.0
      }
     }

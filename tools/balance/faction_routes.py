@@ -114,10 +114,10 @@ ROUTES = {
 #     Latin->latinsyndicate  Guild1/2/3->steelconsortium  ScorpionCell->tkm
 #     UnitedStates->futuretech  Pacific->japan
 INI_ROUTES = {
-    "td_gdi":          (("DTA Classic", ("GDI",)),),
-    "td_nod":          (("DTA Classic", ("Nod",)),),
-    "ra1_allies":      (("DTA Classic", ("Allies",)),),
-    "ra1_soviets":     (("DTA Classic", ("Soviet",)),),
+    "td_gdi":          (("DTA Enhanced", ("GDI",)),),
+    "td_nod":          (("DTA Enhanced", ("Nod",)),),
+    "ra1_allies":      (("DTA Enhanced", ("Allies",)),),
+    "ra1_soviets":     (("DTA Enhanced", ("Soviet",)),),
     "ra2_allies":      (("Mental Omega", ("Europeans",)),
                         ("CnC Reloaded", ("AlliesCountry",))),
     "ra2_soviets":     (("Mental Omega", ("USSR",)),
@@ -231,6 +231,12 @@ EXCLUSIVE_ONLY = {
                     "81% of the ra2_soviets roster is also the yuri roster",
     "Mental Omega": "ships sub-faction countries and gives most units to all of them; 97% of the "
                     "asianalliance roster is also the latinsyndicate roster",
+    # Maintainer ruling 2026-09-06. RotE's 36% asianalliance/tkm overlap sits INSIDE the honest
+    # C&C band, so this is not a rot fix — it is a cheap one: RotE has large per-country pools
+    # (china 208 units, iraq 288 before the buildable filter), so exclusivity buys discrimination
+    # without thinning either roster the way it would for Mental Omega.
+    "Rise of the East": "clean per-country pools make exclusivity cheap; drops the 36% "
+                        "asianalliance/tkm roster overlap to near zero",
 }
 
 # {source: every faction token that source routes to ANY Cameo faction} — the rivals an
