@@ -1,6 +1,51 @@
 # Development Log
 
 
+## Devin-Nova - Ruling 15 EXECUTED: scrin-prepared is boot-gated and pushed (2026-09-06, late evening)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
+
+Branch `scrin-prepared` @ `ffcd40692` carries agent/introduce-scrin-faction's
+content onto current HEAD, converted + integrated + boot-gated. **Merge is the
+maintainer's yes/no** - it is prepared, not merged.
+
+**What the conversion actually did** (`ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml`):
+six pack-local `^Warhead_Scrin*` templates carry the authored Versus profiles
+verbatim (ScrinBeam / ScrinShard / ScrinHeavyBeam / ScrinAcid / ScrinCorrosion /
+ScrinCapital). I deliberately did NOT remap onto the generated `^Warhead_*`
+families: those carry `PercentageScale` twins + the ~20-armor ladder, which
+would have silently doubled damage and replaced the authored tuning - that is
+a balance decision, not a conversion. Per-weapon Damage kept verbatim; bespoke
+projectiles (plasma discs, beams) stay inline; mechanic warheads (Rift's
+HeatDistortion/SpawnActor/Shockwave, MindControl, repair, Dummy) unchanged.
+Resolved verified through `miniyaml` (profile swaps clean, no orphaned nodes);
+`find_empty_warhead` = 0; `audit_faction_leaks` = zero scrin findings.
+
+**The engine pin is REQUIRED, not optional** - R15's evidence clause triggered:
+`WithActorMaterialization` fails to build under master's pin (5 CS errors:
+`SpriteMaterialization`, `WithMaterialization`, `ReplaceColorPreserveAlpha`
+missing). The branch's pin `2b3da9e5` = master's `462fc1fc` + exactly two
+landed cameo-engine commits: #104 (sprite materialization rendering) and #105
+(actor-specific idle-overlay sequences, which the Scrin hexshield
+`StartSequence` overlays use). `mod.config` carries the bump with this evidence.
+
+**Dropped per R15:** StarCraft/Protoss overlays (unrelated, collides with live
+hexshield routing).
+
+**Boot-gate PASSED** from the isolated worktree (`Cameo-mod-scrin`): menu
+reached (`PostWorldLoaded`), zero new exceptions. One boot-caught bug fixed on
+the way: my notification-prefix splice duplicated `scrin: scr_` because the
+whole-dir checkout already carried it - dedup'd.
+
+**Stale-doc corrections inside the commit:** the branch's own FACTIONS.md said
+"not selectable, structures only" - the artifact is Selectable:true with 52
+scrin_* actors + 3 StartingUnits classes; FACTIONS.md/ROADMAP updated to match
+the artifact.
+
+Ruling 14 (legacy-globals collapse) is next: it waits on Blaze's 114-weapon
+deletion list per the ordering condition.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Aurora -- d2k_grenade W24 entanglement flag (2026-09-06, late evening)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
