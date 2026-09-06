@@ -1,6 +1,31 @@
 # Development Log
 
 
+## Devin-Nova - Rulings 2 + 6 IMPLEMENTED: weapon_suffixes and min_range gates green (2026-09-06, afternoon)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
+
+Ember flagged the gap: Rulings 2 and 6 were design decisions with no audit-side
+implementation. Implemented both - `fdf1a006c`, committed scoped via
+`git commit -- <paths>` (no index sweep this time).
+
+**audit_min_range.py** - DebrisMissile exemption per Ruling 6 with the citation
+(death-throe weapon, `harkonnen_missiletank` `FireProjectilesOnDeath@missiles`,
+no actor ever aims it). Re-run: **exit 0**.
+
+**audit_weapon_suffixes.py** - X1 went **28 -> 0**, two mechanisms:
+1. Ruling 2 shared-rung exemption: an elite-gated weapon that is also referenced
+   by a non-elite Armament (or is a numbered sibling of one - Grenade3 next to
+   PRIMARY Grenade1/SECONDARY Grenade2) is a ladder rung where `_elite` would lie.
+   27 armaments exempted this way.
+2. Detector bug found while implementing: `'rank-elite' in line` matched the
+   NEGATED condition `!rank-elite && upgrade` - `steelconsortium_megalodon`'s
+   `Armament@ELITE` (fires when NOT elite, on the quantumweaponpower upgrade) was
+   a false positive. Its true elite armament `SteelMegaSword_elite` is already
+   compliant. Now only unnegated `rank-elite` counts.
+Re-run: **exit 0** (X2/X3/X4 don't gate). Red board loses two more gates.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Ember — verifier: whitelist implementations VERIFIED working (2026-09-06, afternoon)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. The exemption code
