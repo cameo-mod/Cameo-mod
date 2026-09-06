@@ -48,25 +48,67 @@ piffs                -> EXPLSML1.WAV / kaboom12.aud / kaboom15.aud
 small_explosion_air  -> kaboom25.aud / xplos.aud
 ```
 
-### The reported symptom, located
+### The reported symptom, located — and it is CROSS-GAME
 
-The Dune rocket trooper is not a vague complaint — it is one line:
+The maintainer's correction, 2026-09-07: *"`xplobig4.aud` is not a D2K sound at all!
+That's a sound from Tiberian Dawn!"* — correct, and confirmed against the reference.
+
+`tools/audit/extract_reference_effects.py` reads the upstream mods that ship in
+`engine/mods/` and prints what each game actually pairs. The tell is unmistakable:
 
 ```
-D2K_Rocket_Trooper          Warhead@Effect  visual d2k_tiny_explosion
-                                            sound  xplobig4.aud      <- BIG sound,
-                                                                        TINY sprite
-D2K_Rocket_Trooper2         Warhead@Effect  visual d2k_small_napalm  sound kaboom12.aud
-D2K_Rocket_Trooper_AA       Warhead@Effect  visual d2k_small_explosion
-                                            sound  EXPLSML1.WAV      <- a RA/TD sound
-                                                                        on a D2k visual
+d2k    EXPLSML1.WAV  EXPLMD2.WAV  EXPLLG3.WAV   uppercase .WAV, EXPL* family
+cnc    xplos.aud  xplobig4.aud  flamer2.aud     .aud
+ra     kaboom12.aud  firebl3.aud  splash9.aud   .aud
 ```
 
-Four variants of one unit, four different pairings, one of them a big-explosion sound on
-a tiny-explosion sprite and another borrowing a sound from a different game. Nothing is
-enforcing that the two halves belong together, which is exactly what this spec fixes.
+`xplobig4.aud` is **Tiberian Dawn's** sound for `big_frag`, `med_frag` and `small_poof`.
+So the Dune rocket trooper plays a big TD explosion over a tiny Dune sprite:
 
-**Start here when building:** these five weapons are the acceptance test.
+```
+D2K_Rocket_Trooper      d2k_tiny_explosion  + xplobig4.aud   ⛔ TD sound on a D2k visual
+D2K_Rocket_Trooper2     d2k_small_napalm    + kaboom12.aud   ⛔ RA sound on a D2k visual
+D2K_Rocket_Trooper_AA   d2k_small_explosion + EXPLSML1.WAV   ✅ correct — this IS the
+                                                                canonical d2k pairing
+```
+
+⚠ **I got the third one wrong first time** and called `EXPLSML1.WAV` "a RA/TD sound".
+It is not: the reference shows `small_explosion -> EXPLSML1.WAV` is exactly what Dune
+2000 ships. **Read the reference before judging a pairing** — the extension alone
+(`.WAV` vs `.aud`) already separates d2k from cnc/ra.
+
+## The canonical pairings, extracted not invented
+
+`python tools/audit/extract_reference_effects.py` prints the live table from
+`engine/mods/`. **Run it rather than trusting a copy** — the numbers below are a snapshot
+of 2026-09-07 and the tool is the authority.
+
+```
+=== d2k  -  10 visuals, 3 used with more than one sound
+    building                   EXPLHG1.WAV, EXPLLG2.WAV, EXPLLG3.WAV, EXPLSML2.WAV, EXPLSML4.WAV  <-- AMBIGUOUS
+    devastator                 EXPLLG5.WAV
+    large_explosion            EXPLLG2.WAV, EXPLSML4.WAV  <-- AMBIGUOUS
+    med_explosion              EXPLMD2.WAV, EXPLSML2.WAV  <-- AMBIGUOUS
+    nuke                       EXPLLG2.WAV
+    self_destruct              EXPLSML1.WAV
+    shockwave                  EXPLMD4.WAV
+    small_explosion            EXPLSML1.WAV
+    small_napalm               EXPLSML2.WAV
+    wall_explosion             EXPLHG1.WAV
+
+Pair a visual only with a sound from ITS OWN mod. Cross-game pairing is the defect this table exists to prevent.
+```
+
+⚠ **The reference is not unanimous, and that is the real finding.** Three of the ten d2k
+visuals are used with more than one sound *in Dune 2000 itself* — `building` alone spans
+five. So the job is **not** a mechanical merge:
+
+* where a visual has exactly one sound in the reference, that pairing is settled — take it;
+* where it has several, **that is a design decision for the maintainer**, and it must be
+  presented with usage counts, not resolved by picking the first one.
+
+**Start with Dune 2000**, per the maintainer: smallest set, it is the reported symptom,
+and its sounds are unmistakable so a mistake is obvious by ear.
 
 ## The design
 
@@ -82,6 +124,14 @@ name, carrying BOTH halves.** The name is the contract:
 * `^<game>_<effect_file_stem>` — no invented names. **Read the actual sprite/sequence
   names and use them**; interpret only where a filename is unreadable, and record the
   interpretation in this file.
+* ⛔ **Name the effect for WHAT IT IS, never for the weapon that fires it.**
+  `^d2k_napalm_small`, not `^Effect_HeavyFlame`. A role name is what let a "medium
+  explosion" template pick up whatever sound was nearest; a name taken from the sprite
+  cannot drift, because the sprite is the thing being named.
+* ⛔ **NEVER pair a visual from one game with a sound from another.** Every template's
+  two halves come from the same mod. This is the defect the maintainer heard, and
+  `extract_reference_effects.py` exists to make the correct pairing checkable rather
+  than a matter of taste.
 * Every template sets the visual **and** `ImpactSounds` together. Neither half is ever
   set on a weapon.
 * This slots straight into the ONE-WARHEAD / THREE-INHERIT law (DESIGN §11b.1): the
