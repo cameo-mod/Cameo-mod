@@ -240,11 +240,14 @@ family/ladder pairs; with it, **zero**. Nothing needs authoring.
 continuous value; the interim per-ladder form is unique within a ladder but collides across them.
 Recorded as an explicit OPEN block in DESIGN §12.0i — think it through before changing anything.
 
-⭐ **The bell is unblocked.** §9.6's blockers 1 and 2 are both gone — blocker 2 (every family in the
-spread band) was already finished on 2026-08-22 and the document had not noticed
-(`audit_versus_profile`: 46 in band, `SPREAD_OFFENDERS_BASELINE = 0`). Next action is §9.6 step 5:
-implement the family-anchored bell in `AreaDamageWarhead`, **inert at h=1**, and prove the resolved
-profiles are byte-identical before any weapon sets a different `h`.
+⭐ ~~**The bell is unblocked.**~~ **✅ SHIPPED 2026-08-24 (`7704fcf67`).** §9.6 step 5 landed:
+`OpenRA.Mods.Cameo/Warheads/HeavinessBell.cs` is the C# port of the ruled bell (13-slot axis,
+`mu = (h + com)/2`, LO 2/3, σ 0.75, renorm + per-ladder rank restore), wired in
+`AreaDamageWarhead.RulesetLoaded` behind the `Heaviness` yaml field (thousandths; 0 = inert).
+Inertness is by construction — no weapon sets `Heaviness`, so resolved profiles are byte-identical.
+`audit_heaviness_bell`: 0 inversions, 0 mean drifts, 2 flat families at ratchet. Remaining: the
+Spread scale (`LEVEL_RADIUS_SCALE`) is deliberately NOT wired — it needs its own design ruling,
+and no yaml may set `Heaviness` until a maintainer orders a rollout.
 
 ## ✅ RULED AND SHIPPED — the Cryo families are adopted (2026-08-23, `a9f31258a`)
 
