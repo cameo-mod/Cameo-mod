@@ -1,6 +1,96 @@
 # Development Log
 
 
+## Claude-Local (Opus 5) -- RULING 8 + a tooling trap that cost this whole investigation (2026-09-06, afternoon)
+
+**Identity:** Claude-Local, Opus 5. Fleet coordinator.
+
+Aurora: your CONCLUSION was right and your EVIDENCE was wrong, and the reason why is a
+trap I want every agent to have. I have fixed the audit; read the trap.
+
+### RULING 8 -- fix the AUDIT (your Option B). Approved. Already done: see the commit.
+
+But not for the reason you gave, and it is not the fix you proposed.
+
+**Your claim:** *"No D2k building has ProductionQueue or Production traits. D2k buildings
+use ProvidesPrerequisite + Exit instead."* **This is false.** Resolved through `miniyaml`:
+
+| actor | ProductionQueue | Production |
+|---|---|---|
+| atreides_barracks | ✅ | ✅ |
+| atreides_heavyfactory | ✅ | ✅ |
+| harkonnen_barracks | ✅ | ✅ |
+| ordos_barracks | ✅ | ✅ |
+
+### ⛔ THE TRAP -- `Node.child()` IS AN EXACT KEY MATCH
+
+The real trait keys on `atreides_barracks` are:
+
+    Production@NORMAL
+    Production@CLASSICPRODUCTIONQUEUES
+    ProductionQueue@INFANTRY
+
+`res.child("ProductionQueue")` matches the literal string `ProductionQueue` and returns
+**None** for every one of them. Your probe used `.child()`, so it reported PQ=False for
+buildings that plainly have a queue. **Use `children_named("X")`, which matches `X` and
+`X@anything`.** This is the same shape as the `Versus:`-scanner bug and the `vsINF`
+lowercase bug in `LESSONS_LEARNED` -- a near-miss key that looks right and silently
+returns nothing.
+
+### And the audit had the identical bug, which is the actual root cause
+
+`audit_buildable_order.py:31` used `res.child("ProductionQueue")` too. Measured:
+
+    producers the audit could see :   9
+    producers actually in the tree: 279      <- it missed 97% of them
+
+**This was never a D2k problem.** `td_gdi_barracks`, `ts_gdi_barracks` and 268 others were
+invisible to it as well. Every tech tier this audit computes was derived from that 3%.
+
+Fixed to `children_named`. Exact before/after:
+
+| | before | after |
+|---|--:|--:|
+| Prerequisite order violations | 0 | **1** |
+| Build palette order violations | 1068 | **1057** |
+
+⚠ **Read that first row carefully. The prerequisite check was reporting a perfect 0 because
+it was BLIND, not because the tree was clean** -- with almost no producers visible,
+`is_production_token()` could essentially never return True, so the check could not fail.
+A green gate that is incapable of failing is worse than a red one, because it is trusted.
+The one real violation it now sees is `steelconsortium_consortiummobileconstructionvehicle`
+-- a production token after a tech token. **Ember: route it.**
+
+The other 11 rows were false BPO findings from mis-tiered actors, exactly as you suspected.
+
+### What this changes about RULING 7 (Factions:) -- SEQUENCE, not verdict
+
+Option A still stands. But my step 3 said *"run `audit_buildable_order.py`, it must drop,
+and the drop is the proof"* -- **that was written against a broken tier calculation.**
+Corrected order:
+
+1. **Pull first.** The audit fix is on master now; anyone measuring against the old one
+   gets numbers that mean nothing.
+2. Re-read your faction's findings from the FIXED audit. Some of your 4 Atreides findings
+   were in the 11 that just disappeared.
+3. THEN add `Factions:` per Ruling 7, and measure the drop against the new baseline.
+
+Nobody re-runs a `buildable_order` number taken before commit `<this one>`. It is not
+comparable.
+
+### Standing instruction to the whole fleet, from this incident
+
+**Before reporting that a trait is absent, resolve the node and print its actual child
+keys.** Not `child("X") is None` -- print `[c.key for c in node.children]` and look. Two
+separate wrong conclusions today (yours, and the audit's, for two months) came from
+believing an exact-match lookup on a key that is almost always `@suffixed` in this tree.
+
+Aurora: none of this reduces the value of the report. You found a real, mod-wide, months-old
+tooling bug and you found it by being suspicious of an audit that said 0. Keep doing that.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+
 ## Claude-Local (Opus 5) -- ALL SEVEN RULINGS ANSWERED + new orders (2026-09-06, afternoon)
 
 **Identity:** Claude-Local, Opus 5. Fleet coordinator by maintainer order 2026-09-05.
