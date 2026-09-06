@@ -15,6 +15,7 @@ ordos_antiairtrooper:
 	Tooltip:
 		Name: Anti Air Trooper
 	Buildable:
+		Factions: ordos
 		BuildPaletteOrder: 20
 		Prerequisites: ~ordos_barracks, ~ordos_upgrade_antiairtrooper
 		Queue: Infantry, RAInfantry
@@ -65,6 +66,7 @@ ordos_lightinfantry:
 	Valued:
 		Cost: 120
 	Buildable:
+		Factions: ordos
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
 		Description: actor_ordos_lightinfantry.description
@@ -122,6 +124,7 @@ ordos_rockettrooper:
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Buildable:
+		Factions: ordos
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		Prerequisites: ~ordos_barracks, ~!ordos_upgrade_antiairtrooper
@@ -172,6 +175,7 @@ ordos_chemicaltrooper:
 	Valued:
 		Cost: 400
 	Buildable:
+		Factions: ordos
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
 		Description: General-purpose infantry equipped with chemical weapon.\nCannot attack buildings\n  Strong vs Infantry\n  Weak vs Vehicles
@@ -225,6 +229,7 @@ ordos_mortartrooper:
 	Valued:
 		Cost: 600
 	Buildable:
+		Factions: ordos
 		BuildPaletteOrder: 20
 		Prerequisites: ~ordos_barracks, ~ordos_promotion_mortartroopers
 		Queue: Infantry, RAInfantry
@@ -389,6 +394,7 @@ ordos_facedancer:
 	Valued:
 		Cost: 5000
 	Buildable:
+		Factions: ordos
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		BuildLimit: 1
@@ -451,6 +457,7 @@ ordos_contaminator:
 	Tooltip:
 		Name: Contaminator
 	Buildable:
+		Factions: ordos
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 10
 		Prerequisites: ~ordos_barracks, ~ordos_promotion_contaminator
@@ -781,6 +788,7 @@ ordos_leech:
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Buildable:
+		Factions: ordos
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
 		Prerequisites: ~ordos_barracks, ~ordos_promotion_leecher
@@ -2004,6 +2012,7 @@ ordos_saboteur:
 	Inherits@isengineer: ^IsEngineer
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Buildable:
+		Factions: ordos
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
 		Prerequisites: ~disabled
