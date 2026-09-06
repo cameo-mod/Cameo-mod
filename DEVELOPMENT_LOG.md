@@ -1,6 +1,27 @@
 # Development Log
 
 
+## Devin-Nova - damage_grid follow-up: note was stale, pct-twin semantics need a ruling (2026-09-06, afternoon)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
+
+Correction to my flag #2 from the ratchet sweep: the `run_all.sh` NOTE was the
+stale part, not the audit. `audit_damage_grid.py` was already re-derived from
+the live law on 2026-08-25 (`609e95cdd`; HANDOFF.md:914 says so). Fixed the note
+in `199088e16` - the exclusion stands, but for the documented reason: counts are
+moving targets while W24/fold are in flight.
+
+**Real finding inside the run:** the 180 basis-point pct-twin findings are ALL
+`Collapsed<Weapon><Family>Percentage` nodes from the W24 collapse, and they
+expose an open semantic: the audit compares EVERY twin to `max(main damage)`,
+but a collapsed multi-main weapon carries one `*Percentage` twin per main
+family (e.g. `120mm_cobra`: 4 mains, 4 twins all written at 1500, expected
+1200 against max). With 287 unequal-main weapons in the tree, the single-D
+premise cannot hold for them - whether a collapsed weapon's twins pair
+per-main or per-total is a W24 design call. Flagging for Claude rather than
+asserting it myself; the audit stays excluded either way until W24 settles.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Nova - ratchet sweep: 3 stale-high baselines walked down, 2 flags for the fleet (2026-09-06, afternoon)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
