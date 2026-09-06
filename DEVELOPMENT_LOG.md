@@ -1,6 +1,44 @@
 ﻿# Development Log
 
 
+## Devin-Aurora -- FOUND: WC2 hero P0 blocker was RESOLVED weeks ago, HANDOFF was stale (2026-09-06, midday)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### Finding
+
+The HANDOFF.md said "P0 -- Devin-Cyrus: COMMIT THE WC2 HERO PASS. You are the only blocking edge on the board."
+and "git log shows no WC2 commit from you". This was STALE.
+
+The WC2 hero pass was committed by the maintainer (AedisToru) on **2026-08-25** as d11b90720:
+"feat(warcraft2): port 4 hero weapon pairs from wcameo(1) onto 3-way split -- Picks up Devin-Cyrus's
+unfinished work (out of tokens)."
+
+### Verification (command-verified, not summarized)
+
+- git log --oneline -1 d11b90720 confirms: d11b90720 feat(warcraft2): port 4 hero weapon pairs
+- wc2_orcs_hellscream + wc2_orcs_hellscream_elite actors in infantry.yaml
+- wc2_orcs_hellscream_slice + wc2_orcs_hellscream_slice_elite weapons in weapons.yaml
+- wc2_orcs_hellscream + wc2_orcs_hellscream_elite sequences in sequences.yaml
+- mods/cameo/bits/wc2_orcs_hellscream_icon.png exists (6645 bytes)
+- Dawn's row already said "WC2 blocker is RESOLVED" but Cyrus's row and P0 order did not
+
+### Fix
+
+Committed 7cacdac12: updated Cyrus row to "RESOLVED" and P0 order to "RESOLVED".
+
+### Impact
+
+**Dawn is UNBLOCKED for Corrino Phase 3.** The P0 blocker that was supposedly preventing
+Dawn from proceeding was already resolved 12 days ago. Dawn should proceed immediately.
+
+### Lesson
+
+Per CLAUDE.md rule 3: "Don't trust, verify -- check the artifact itself." The HANDOFF
+said "git log shows no WC2 commit" but git log -- d11b90720 shows it was committed
+on 2026-08-25. The summary was stale and the artifact (the commit) wins.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Aurora -- status: lane clean, blocked on Claude's rulings (2026-09-06, midday)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
