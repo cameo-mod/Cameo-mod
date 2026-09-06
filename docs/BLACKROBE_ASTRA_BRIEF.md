@@ -571,6 +571,147 @@ and any anchor the research says is misplaced is named with the replacement it s
 that unblocks it** — a 106% median error is usually a misplaced anchor, and this is how you
 prove it rather than guess.
 
+### ⭐ TASK H — THE AI BOT MODULES: inherit Devin Cloud's work and carry it forward
+
+**Why this is yours now.** Devin Cloud built the module architecture and then ran out of usage
+quota mid-merge. The design is good and it should not be restarted — **inherit it, do not
+re-derive it.** The maintainer's order: *"Astra should just continue the new Bot Module
+architecture as well and also merge those pull requests that he made."*
+
+**Read first — this is done work, not a blank page:**
+
+| where | what it holds |
+|---|---|
+| `docs/design/AI_ARCHITECTURE.md` **§10** | the per-module build plan: one authority per decision (10.1), what Cameo loads today (10.2), the single shared snapshot (10.3), the one synced piece (10.4), cadence (10.5), **the phase order (10.6)**, failure modes the shape avoids (10.7) |
+| `docs/design/AI_ARCHITECTURE.md` **§11** | the reconciliation of the FIRST five-agent research round — what came back, **claims rejected with what falsifies them**, recommendations adopted, and what was rejected as a design change |
+| `docs/design/AI_ARCHITECTURE.md` §0–§9 | goal, verified facts, ContentPack splitting, observation model, personality manager, master module, logging/learning, risks, prior outside research, open decisions |
+| `docs/design/ROADMAP.md` | the AI phase entries |
+
+⭐ **Both sections landed on master as PR #324 on 2026-09-06 and are already merged.** Start
+from them.
+
+#### H.1 — Merge PR #323, the only piece still outstanding
+
+```
+gh pr view 323 --repo cameo-mod/Cameo-mod
+```
+
+⚠ `gh` may default to the wrong remote in this checkout — **always pass
+`--repo cameo-mod/Cameo-mod`**, or `gh pr view 323` returns "Could not resolve".
+
+**Observer: Combat Effectiveness graph** — value destroyed minus value lost, over time.
+Branch `devin/1788250214-combat-effectiveness-graph`, **+233/−12**, status
+**CONFLICTING / DIRTY**.
+
+Files: `OpenRA.Mods.Cameo/Traits/Player/CombatEffectivenessStatistics.cs`,
+`OpenRA.Mods.Cameo/Widgets/ScrollableLineGraphWidget.cs`,
+`OpenRA.Mods.Cameo/Widgets/Logic/CameoObserverStatsLogic.cs`,
+`OpenRA.Mods.Cameo.Test/ScrollableLineGraphWidgetTest.cs`,
+`mods/cameo/chrome/ingame_observer.yaml`, `mods/cameo/fluent/en.ftl`,
+`mods/cameo/rules/player.yaml`, `docs/LESSONS_LEARNED.md`.
+
+⚠ **This one touches C#, so it is NOT a docs merge:**
+
+1. Resolve the conflict on a branch. Master has moved a long way since 2026-09-01 — expect the
+   conflicts in `en.ftl` and `player.yaml`, which many agents touch.
+2. **Rebuild before booting:**
+   `DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release --nologo -p:TargetPlatform=win-x64`
+   The build deploys to `engine/bin`, which is what the game LOADS. The tracked
+   `mods/cameo/OpenRA.Mods.Cameo.dll` copy does **not** auto-update, and a stale DLL crashes
+   the boot with `Cannot locate type: …Info`.
+3. Boot-gate (Part 0.4). Then merge.
+4. ⚠ **Do not merge it if you cannot boot-gate it.** A C# merge that has not booted is exactly
+   the class of change that takes the whole tree down for six other agents.
+
+⭐ **Technique already proven here:** observer UI can be verified without playing a match by
+launching with `Launch.Replay=<file>`. That is how the spectator set was verified live. Use it
+rather than trying to reproduce a battle.
+
+#### H.2 — Write the full module interaction specification
+
+§10 gives the plan and the phase order. What it does **not** yet give in full is the
+**interaction contract** — the maintainer asked specifically for *"what each module owns, what
+it reads, how they talk to each other, and where the synced/unsynced boundary sits."*
+
+Extend `AI_ARCHITECTURE.md` (do **not** create a new document) with, for **each of the 20
+loaded modules**:
+
+* **owns** — the decisions it alone may make. §10.1 is "one authority per decision"; make it
+  explicit per module.
+* **reads** — what it consumes from the shared snapshot (§10.3), read-only.
+* **publishes** — what other modules may consume from it, and at what cadence (§10.5).
+* **synced or unsynced** — with the justification. ⚠ §10.4 already establishes that the
+  personality switch needs **one small synced trait**, because the existing
+  `GrantConditionOnOrders` would clear the personality the moment the bot places a building.
+  **Anything affecting simulation state must be synced or it desyncs multiplayer.** This is the
+  single highest-risk axis in the whole design.
+* **failure mode** — what happens when it has no data, is starved of cadence, or disagrees with
+  another module. §10.7 lists the failure modes the shape was chosen to avoid; extend it.
+
+Deliver a table plus one paragraph per module, and one text diagram of the data flow.
+**Keep §11's rejected claims rejected** — do not quietly re-adopt something the first research
+round already falsified.
+
+#### H.3 — The SECOND research round: five agents, no overlap
+
+The maintainer has **Perplexity, Grok, ChatGPT, Copilot and Gemini** available and wants them
+used. **A round already happened and is reconciled in §11 — do not repeat it.** Read §11.1
+("what actually came back") and §11.2 ("claims rejected, with what falsifies them") FIRST, then
+write briefs that go where the first round did not.
+
+Write five **differentiated** briefs to `docs/design/AI_RESEARCH_BRIEFS_ROUND2.md`, one per
+agent, each answering a question the others are not asked. This split worked last time, and it
+works because **it makes the answers merge instead of repeating each other**:
+
+| agent | its lane |
+|---|---|
+| **Perplexity** | the literature — published RTS-AI work, what has been tried and measured |
+| **Grok** | read the OTHER mods' code — how CA, AS, Mental Omega, Shattered Paradise and Generals Alpha actually implement bot decisioning |
+| **ChatGPT** | the decision mathematics — bandits, priors, the counter-demand model, and fitting them on few matches |
+| **Copilot** | desync and feasibility — what can and cannot be done unsynced in OpenRA, and the cost of each synced trait |
+| **Gemini** | the yaml and the migration — how this lands across 24 ContentPacks with zero cross-pack dependencies |
+
+**Each brief must state:** the question, what is already settled (with the §-number, so nobody
+re-answers it), what would count as evidence, and what would falsify the answer.
+
+⚠ **Then reconcile, do not average.** §11 got this right and it is the standard to hold:
+**keep disagreements explicit and record what falsifies each rejected claim.** Five agents
+blended into one mush is worse than one good answer, because it hides which parts are actually
+load-bearing.
+
+#### H.4 — Then build, in the phase order §10.6 already fixed
+
+**Do not re-order these.** The order was chosen so each phase ships on its own:
+
+1. **Match logging, record-only** — no behaviour change. Gets the learning loop data before any
+   decision code exists, and exercises the log schema while it is still cheap to change.
+   ⭐ **This is your next implementation step, and it is deliberately the safest one.**
+2. `MasterAiBotModule`, observe-only — builds and publishes the snapshot, decides nothing.
+3. `BotPersonalityController` + dynamic switching — the first behaviour change, difficulty-gated.
+4. Main target selection, consumed by the squad managers and support powers.
+5. Counter demand and hints — `ProvidesPrerequisite` tokens, **zero C#**.
+6. Fogged observation + `ScoutBotModule` — **deliberately last**, because it makes the bots
+   temporarily weaker and invalidates any tuning done against omniscient signals.
+7. Offline learning — aggregate logs, fit bandit priors per (faction, personality, enemy
+   strategy), commit as reviewed data. **Nothing neural until balance is frozen.**
+
+⭐ **Phases 1 and 2 are pure additions with no gameplay effect and can proceed while the balance
+pipeline is still moving.** That is why this task can run alongside Tasks A–G rather than after
+them.
+
+⚠ **Personality-tagged compositions need ZERO C#.** A condition-gated player-level
+`ProvidesPrerequisite` already ships at `mods/cameo/rules/ai.yaml:176`. Do not write a trait for
+something the yaml already does — check it before building anything for phase 5.
+
+**Done when:** #323 is merged (or documented as un-mergeable, with the reason), the interaction
+contract exists per module in `AI_ARCHITECTURE.md`, the five round-two briefs are written and
+their answers reconciled with disagreements kept explicit, and **phase 1 (record-only match
+logging) is implemented, boot-gated and merged.**
+
+⚠ **Priority note:** the balance pipeline (Tasks A–G) remains your primary mission. This task
+exists because phases 1–2 cost nothing in gameplay risk and the design work is already done —
+not because it outranks pricing. If you must choose, **price a faction first.**
+
 ---
 
 ## PART 7 — HOW TO WORK. SPECIFIC SUGGESTIONS.
@@ -635,6 +776,9 @@ In order of value:
 4. **E2 closed** so status effects are priced at all.
 5. **A review dossier** at `docs/audit/ASTRA_REVIEW.md` the maintainer can audit in an hour.
 6. Weapon-shape ratchets lowered, with the boot gate green at every step.
+7. **AI phase 1 (record-only match logging) shipped**, PR #323 merged, and the module
+   interaction contract written — see Task H. Phases 1–2 carry no gameplay risk, so they
+   can run alongside the pricing work.
 
 **If you achieve only #1, this will have been the most valuable single contribution to the
 project so far.**
