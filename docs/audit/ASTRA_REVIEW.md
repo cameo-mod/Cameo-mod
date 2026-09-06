@@ -85,7 +85,7 @@ override. It preserves the live SniperInfantry template, every numeric stat and
 weapon. This is metadata classification, not a gameplay rebalance.
 
 Validation: nine focused readiness tests pass; the existing 13 class-membership
-tests pass; the real readiness command completes, with 27/27 anchors in class
+tests pass; helper/data inspection finds 27/27 anchors in class
 and zero signed anchors. Its buildable denominator is explicitly 1956 ledger
 rows, including structures/upgrades: 632 classified rows is not claimed as unit
 coverage. Every class still has a raw stacked-main finding. Extraction check:
@@ -251,3 +251,60 @@ No duplicate weight path or second coefficient was introduced. Model limitations
 including relaxation and changing weapon structure, remain limitations rather than
 grounds to apply unsupported prices. Current measured reports take precedence over
 the brief's historical binding counts.
+
+## Completed: fail-closed ledger claims and equivalent source cleanup
+
+The `ledgers_drifted` prose measurement previously interpreted any missing drift
+marker as zero, including a failed child audit. It now requires a successful,
+unique, positive-population clean marker or a consistent explicit drift result.
+Unknown output, contradictory markers, zero ledgers and child failures stay
+unavailable. Three test methods exercise 15 scenarios using the actual registry
+measurement. No documented target or audit ratchet was raised.
+
+`D2K_APC_Rocket_AA` repeated the same compatibility warhead key in two source
+blocks. Their disjoint fields are now together in the first block. Comparing all
+2,894 active resolved weapon definitions, including values and child order,
+finds zero changes. The focused inheritance regression passes and duplicate-key
+findings decrease from 261 to the existing ceiling of 260. This is weapon YAML
+source cleanup, not a damage, targeting or physical-state rebalance. Extraction
+still reports 33 ledgers with zero drift. The post-edit menu gate passed in 36.1
+seconds with no new exceptions (63.6% sampled PC memory).
+
+Two existing regression references now use the exact upstream Soviet Barracks
+rename already repaired in the packaged maps. Their assertions are unchanged;
+all ten weapon-correctness follow-up tests pass. The missing Kotin weapon test is
+not mechanically renamed: upstream also changed its profile and operation, so its
+remaining failure needs a separate role review. Two readiness test reads now use
+explicit UTF-8. Revert the dedicated cleanup/guard commits to undo these repairs.
+
+## Final automated checkpoint (2026-09-07)
+
+- Full isolated Python suite: 93/93 modules, 823 tests run, zero skipped, 42 failed
+  modules; 479.6 seconds, 928.9 MB sampled process-tree peak, 66.3% PC peak.
+  Merged PR 328's report has 766 tests, 88 modules and 43 failed modules.
+  Independent method-identity comparison finds zero newly failing methods and
+  four resolved failure identities. This is not an 823-pass claim: setup/import
+  failures and upstream structural/role-contract debt remain visible in the JSON.
+- All 76 Cameo C# tests pass. The latest C# sources match the freshly built and
+  runtime-verified DLLs; no engine source or pin changes were made.
+- Complete canonical audits: exit 1, 628.5 seconds, 1,120.0 MB process-tree peak,
+  66.2% PC peak, no empty report files. Percentage-runtime passes, 33 ledgers have
+  zero drift, and generated templates remain synchronized. Raw document and
+  structural findings remain failures; no registry exemptions were restored.
+- Fresh structure check fails honestly at 967 reachable stacks against 240 and
+  3,577 excess mains against 452. The retired decision-report module is absent;
+  its stale test remains an explicit import failure, not a current decision audit
+  pass. Older generated decision artifacts must not be treated as current approval.
+- Error-handling raw counts improve: discarded errors 88 to 86, unchecked child
+  calls 20 to 18; missing-encoding findings remain 92, not hidden by a raised limit.
+  All three new AI inventory claims measure exactly (21 types, 36 Player modules,
+  one World module); other pre-existing document mismatches remain visible.
+- Independent final source/scope review found no new blocker and confirmed the
+  unchanged-assertion repairs. Coordinator review remains required before merge.
+
+PR 321 remains unchanged. Its four overlapping paths at this checkpoint are
+LESSONS_LEARNED, doc_claims, and the Atreides/Harkonnen ledgers. The latter overlap
+only our engineer subtype metadata: preserve both sides' intended metadata and
+regenerate, rather than choosing an entire ledger. No shared runtime implementation
+file conflict was found. PR 323 also remains unchanged; its graph adaptation is
+contained here with attribution.

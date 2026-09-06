@@ -1,5 +1,17 @@
 # Development Log
 
+## Codex - Fail-closed audit and equivalent weapon source cleanup (2026-09-07)
+
+Ledger claim measurement can no longer report zero drift after a failed audit;
+three regression methods cover 15 output/exit scenarios. The Ordos APC AA weapon's
+duplicate compatibility key is merged without changing any of 2,894 resolved
+weapon definitions. Duplicate findings fall 261 to the unchanged limit of 260;
+33 ledgers remain drift-free. Fresh menu boot passes without new exceptions.
+Two exact Soviet Barracks test references follow the upstream rename, retaining
+their assertions. Final Python run: 823 tests, zero skipped, 42 failed modules
+versus 43 upstream, no newly failing methods; all 76 C# tests pass. Overall audits
+remain red and no unsupported prices or anchor approvals were applied.
+
 ## Codex - Active engineer roles and complete readiness output (2026-09-07)
 
 The three D2K engineers now extract as EngineerInfantry from their exact active

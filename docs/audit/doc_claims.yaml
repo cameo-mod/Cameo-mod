@@ -518,7 +518,13 @@ claims:
     docs: [docs/HANDOFF.md, docs/design/BALANCE_PIPELINE.md]
     measure: |
       import re, subprocess, sys
-      out = subprocess.run([sys.executable, 'tools/audit/audit_balance_drift.py'],
-                           capture_output=True, text=True).stdout
-      m = re.search(r'\*\*(\d+) ledger\(s\) drifted\*\*', out)
-      print(m.group(1) if m else 0)
+      result = subprocess.run([sys.executable, 'tools/audit/audit_balance_drift.py'],
+                              capture_output=True, text=True, timeout=540)
+      drift = re.findall(r'^\*\*(\d+) ledger\(s\) drifted\*\*', result.stdout, re.MULTILINE)
+      clean = re.findall(r'^_clean_ .* (\d+) ledgers match the live rules exactly\.$', result.stdout, re.MULTILINE)
+      if result.returncode == 0 and len(clean) == 1 and int(clean[0]) > 0 and not drift:
+          print(0)
+      elif result.returncode == 1 and len(drift) == 1 and int(drift[0]) > 0 and not clean:
+          print(int(drift[0]))
+      else:
+          raise SystemExit(f'balance drift measurement unavailable: unexpected output/exit {result.returncode}')

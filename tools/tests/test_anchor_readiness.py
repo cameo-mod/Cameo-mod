@@ -78,7 +78,7 @@ class AnchorMembershipTests(unittest.TestCase):
                     patch.object(readiness, "anchor_actor_vs_spec", return_value=spec_rows), \
                     redirect_stdout(output):
                 self.assertEqual(0, readiness.main())
-            data = json.loads(report.read_text())
+            data = json.loads(report.read_text(encoding="utf-8"))
             self.assertIsNone(data["split_gate_error"])
             self.assertTrue(data["rows"])
             self.assertTrue(all(isinstance(row, dict) and "class" in row and "scored" in row
@@ -119,7 +119,7 @@ class AnchorMembershipTests(unittest.TestCase):
         self.assertFalse(rows[0][7])
 
     def test_every_anchor_belongs_to_its_declared_class(self):
-        anchors = json.loads((ROOT / "docs/balance/class_anchors.json").read_text())
+        anchors = json.loads((ROOT / "docs/balance/class_anchors.json").read_text(encoding="utf-8"))
         units = {name: record for _, _, name, record in readiness.load_units()}
         for cls, anchor in anchors.items():
             if cls.startswith("_"):
