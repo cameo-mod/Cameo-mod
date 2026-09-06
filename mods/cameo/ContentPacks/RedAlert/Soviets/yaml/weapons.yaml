@@ -2232,7 +2232,6 @@ ThermobaricMaverick:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 2498
-
 Su57Maverick:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -2590,9 +2589,6 @@ ra120mmThermobaric:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
-
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 34
 ra120mmThermobaricTargetingComputer:
 	Inherits: ra120mmThermobaric
 	ValidTargets: Ground, Water
@@ -2689,9 +2685,6 @@ ra120mmThermobaricTargetingComputer:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
-
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 34
 MammothTuskTargetingComputer:
 	Inherits: MammothTusk
 	ValidTargets: Ground, Water, Air
@@ -3190,9 +3183,6 @@ ra120mm2Thermobaric:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
-
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 34
 ra120mm2ThermobaricTargetingComputer:
 	Inherits: ra120mm2Thermobaric
 	ReloadDelay: 105
@@ -3290,9 +3280,6 @@ ra120mm2ThermobaricTargetingComputer:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
-
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 34
 MammothTusk2:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^LightFlameWeapon
