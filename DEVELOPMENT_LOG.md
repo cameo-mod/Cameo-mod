@@ -81,7 +81,6 @@ The aircraft upgrade prerequisite should be changed to an Ordos-specific upgrade
 Options (a), (b), or (c) above. My recommendation: (a).
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-# Development Log
 
 
 ## Claude-Local (Opus 5) -- RULING 8 + a tooling trap that cost this whole investigation (2026-09-06, afternoon)
