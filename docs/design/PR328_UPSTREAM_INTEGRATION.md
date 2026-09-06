@@ -1,5 +1,51 @@
 # PR #328: upstream integration and armament-mode boundary
 
+## Local follow-up: spawn-only roster classification (2026-09-06)
+
+Fetched upstream `77beaef41`, 171 commits beyond this PR's integrated base.
+Those commits are **not integrated** here. The snapshot and validation sections
+below describe the PR worktree, not current upstream gameplay. Upstream's handoff
+assigns the weapon codemod to Claude and composite-registry review to Nova/Ember;
+this repair does not overlap those decisions or authorize merging PR 328.
+
+The extractor lacked the actor-name parameter required by the existing
+`test_assign_references.py` regressions and the self-prerequisite rule in
+`REFERENCE_PIPELINE_HANDOFF.md` §10. It now excludes a positive exact self
+prerequisite from offline roster eligibility while preserving negated self gates.
+The actor key is passed by `extract_actor`, including for inherited Buildable
+traits. This is the documented Cameo roster heuristic, not general prerequisite
+reachability simulation. Costs, HP, weapons and runtime YAML are unchanged.
+
+Both direct execution and unittest discovery now execute all 14 assignment tests;
+the misplaced `unittest.main()` previously hid the last class during direct runs.
+An independent reviewer ran the direct test file and found no blocking defect.
+
+Comparison over 2,198 ledger rows changes only `forgotten_mutant_wild` and
+`forgotten_tiberianfiend_wild` from buildable to non-buildable; all 100 exact
+negated-self cases previously eligible remain eligible. Generator-produced diffs
+contain exactly these two flags and removal of their four derived tier fields.
+The global model fingerprint is unchanged. Full raw/derived ledger verification
+passes for all 33 ledgers after the focused regeneration. Percentage-runtime and
+145-template generator synchronization checks pass on this PR worktree.
+
+This changes later pricing/reference populations intentionally; it does not apply
+prices. The follow-up full suite completed **88/88 modules, 862 tests run, 15
+skipped, 21 failed modules** in 481 seconds, recorded in
+[`bounded_test_run.json`](../audit/latest/bounded_test_run.json). Compared with
+the previous recorded run, there are no newly failing modules and the assignment
+module is repaired. Remaining failures are not waived or automatically classified
+as harmless. Structure and decision audits still fail on the invalid registry.
+
+The default Python lacks openpyxl: four consumer tests and eleven workbook tests
+were skipped in that run. Both modules were separately rerun with the bundled
+Python: **16 consumer + 11 workbook tests pass, zero skips**. This supplemental
+result does not turn the red full-suite report green. Sampled full-suite peak was
+879.8 MB for its process tree and 50.5% PC memory, with an 84% PC guard. Diff checks
+pass; no game was launched. Publication and latest-upstream integration remain
+pending.
+
+## Previous upstream integration snapshot
+
 Integrated upstream `e06ed9907` (115 commits beyond the former base). This is a
 tooling integration, not approval to merge PR #328 or change gameplay.
 
@@ -84,9 +130,9 @@ reviewed/unreviewed totals are claimed while the registry is invalid.
 JSON. A fresh report still returns exit 1 when the registry is blocked; report
 freshness must not turn a failed registry into a green validation.
 
-The final integrated suite completed **88/88 modules, 859 tests run, zero skips,
-22 failed modules**, recorded in
-[`bounded_test_run.json`](../audit/latest/bounded_test_run.json). Setup errors
+The previous integrated suite completed **88/88 modules, 859 tests run, zero skips,
+22 failed modules** at PR head `9a47d4703`. The current report is superseded by the
+local follow-up run described above. Setup errors
 prevent some classes from running their test methods; this is not 859 passes.
 Sampled full-suite process-tree peak was 831.6 MB and PC memory peak 44.9%, with an
 84% guard. The new/migrated focused tests pass, but the overall suite remains red.

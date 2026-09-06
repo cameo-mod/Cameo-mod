@@ -842,18 +842,22 @@ def weapon_entry(rs, wname: str) -> dict | None:
 _DISABLING_PREREQS = {"disabled", "wip", "disable", "unavailable", "notbuildable"}
 
 
-def _is_balance_buildable(buildable) -> bool:
+def _is_balance_buildable(buildable, actor_name: str | None = None) -> bool:
     """True iff the actor can actually be built (maintainer law 2026-07-22):
     has a Buildable trait with a non-empty Queue and no disabling prerequisite
     (~disabled / ~wip / …). Legacy tokens (E1/E3 — Buildable but no Queue),
-    spawn/veterancy variants (no Buildable), and ~disabled units all fail."""
+    spawn/veterancy variants (no Buildable), and ~disabled units all fail.
+    A positive self prerequisite is Cameo's spawn-only idiom; a negated self
+    prerequisite is a build-limit gate and must remain eligible. This is a
+    roster filter, not a complete simulation of the prerequisite system."""
     if buildable is None:
         return False
     if not buildable.get("Queue"):
         return False
     prereq = buildable.get("Prerequisites") or ""
     toks = {t.strip().lstrip("~").strip().lower() for t in prereq.split(",")}
-    return not (toks & _DISABLING_PREREQS)
+    return not (toks & _DISABLING_PREREQS) and (
+        actor_name is None or actor_name.strip().lower() not in toks)
 
 
 def extract_actor(rs, key: str, section: str,
@@ -918,7 +922,7 @@ def extract_actor(rs, key: str, section: str,
     # if it can be built in some way. NON-buildable (no Buildable trait, no Queue,
     # or a disabling prereq like ~disabled/~wip) → excluded from balancing AND all
     # audits. Its cost is only an XP-on-kill value; its stats don't matter.
-    u["buildable"] = _is_balance_buildable(buildable)
+    u["buildable"] = _is_balance_buildable(buildable, key)
     arms = []
     for c in resolved.children:
         if c.key == "Armament" or c.key.startswith("Armament@"):

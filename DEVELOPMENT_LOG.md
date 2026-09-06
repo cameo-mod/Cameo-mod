@@ -1,5 +1,22 @@
 ﻿# Development Log
 
+## Codex — PR 328 buildability repair completed locally (2026-09-06)
+
+Scoped to `tools/balance/extract_stats.py`, `tools/tests/test_assign_references.py`
+and the PR 328 integration note. Repair the missing self-prerequisite classification
+documented in `docs/design/REFERENCE_PIPELINE_HANDOFF.md` §10, and the test-file
+entry point that hides its regression cases during direct execution. No gameplay,
+reference matching, class anchors, composite approvals or agent-owned codemods.
+Latest upstream inspected: `77beaef41`; implementation starts on PR head `9a47d4703`.
+No publication or merge in this follow-up.
+The fix and regenerated Forgotten ledgers are ready for integration review. The
+14 assignment tests pass via discovery and direct execution, independently reviewed.
+Full suite: 88 modules, 862 tests run, 15 dependency skips, 21 failed modules (down
+from 22, no new failing module). Separate bundled-Python consumer/workbook reruns:
+27 passes, zero skips. All 33 ledgers verify with zero drift; percentage-runtime,
+generator synchronization and diff checks pass. No gameplay files changed.
+See `docs/design/PR328_UPSTREAM_INTEGRATION.md` for the scope and remaining blockers.
+
 ## Claude (Opus 5, local — file access + boot gate) — reference sources DELIVERED, and four findings for other agents (2026-09-05)
 
 **Identifying per §3.A rule 1.** I am the `Claude` row in the HANDOFF roster — the LOCAL agent, not
