@@ -1,0 +1,32 @@
+# Dotted-suffix rename: <name>.asian -> asianalliance_<name> (fleet task 2026-09-06)
+# 27 actor ids, verified against docs/audit/latest/packs.md P2 + tree grep.
+actors:
+	bomber_husk.asian: asianalliance_bomber_husk
+	bomber_minebomb.asian: asianalliance_bomber_minebomb
+	bomber_minebomb2.asian: asianalliance_bomber_minebomb2
+	cgcnst_infiltrated.asian: asianalliance_cgcnst_infiltrated
+	cgpnch.asian: asianalliance_cgpnch
+	cgyard.asian: asianalliance_cgyard
+	chaomine.asian: asianalliance_chaomine
+	gunb.asian: asianalliance_gunb
+	harbinger_husk.asian: asianalliance_harbinger_husk
+	kami.asian: asianalliance_kami
+	kami_asdf.asian: asianalliance_kami_asdf
+	kami_chemical.asian: asianalliance_kami_chemical
+	kami_chemical_husk.asian: asianalliance_kami_chemical_husk
+	kami_husk.asian: asianalliance_kami_husk
+	karrier.asian: asianalliance_karrier
+	ksub.asian: asianalliance_ksub
+	lsub.asian: asianalliance_lsub
+	panth.asian: asianalliance_panth
+	pelican_husk.asian: asianalliance_pelican_husk
+	phoenix_husk.asian: asianalliance_phoenix_husk
+	ptnk.asian: asianalliance_ptnk
+	quasfrig.asian: asianalliance_quasfrig
+	tankmine.asian: asianalliance_tankmine
+	tsun.asian: asianalliance_tsun
+	# up_* ids are UPGRADES per section 9 grammar (faction_upgrade_name), not literal keeps.
+	# Proxy actors take the name of the upgrade they serve (cf. ra1_soviets_upgrade_menofsteel_proxy_actor).
+	up_tsunami.asian: asianalliance_upgrade_tsunami
+	up_dragonway_proxy_actor.asian: asianalliance_upgrade_wayofthedragon_proxy_actor
+	up_team_diplomacy_proxy_actor.asian: asianalliance_upgrade_asiandiplomacy_proxy_actor

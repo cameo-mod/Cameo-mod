@@ -57,7 +57,7 @@ asianalliance_phoenix:
 		RequiresSelection: True
 		PipCount: 2
 	SpawnActorOnDeath:
-		Actor: phoenix_husk.asian
+		Actor: asianalliance_phoenix_husk
 	#GrantConditionOnMovement@Turn:
 	#	Condition: Aircraft-Turning
 	#	ValidMovementTypes: Turn
@@ -167,7 +167,7 @@ asianalliance_pelican:
 	SelectionDecorations:
 	WithMuzzleOverlay:
 	SpawnActorOnDeath:
-		Actor: pelican_husk.asian
+		Actor: asianalliance_pelican_husk
 	LeavesTrails:
 		Offsets: -427,0,0
 		Image: smokey
@@ -242,7 +242,7 @@ asianalliance_harbinger:
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 100, -100, 50, -50
 	SpawnActorOnDeath:
-		Actor: harbinger_husk.asian
+		Actor: asianalliance_harbinger_husk
 	Contrail@1:
 		Offset: -512,0,256
 		TrailLength: 15
@@ -265,7 +265,7 @@ asianalliance_harbinger:
 	ActorStatValues:
 		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
 
-kami.asian:
+asianalliance_kami:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -293,7 +293,7 @@ kami.asian:
 	Armament@PRIMARY:
 		Weapon: AsianKamikazeImpactTargeting
 	SpawnActorOnDeath:
-		Actor: kami_husk.asian
+		Actor: asianalliance_kami_husk
 		RequiresCondition: airborne && !diving
 	DiveOnAttack:
 		Speed: 300
@@ -339,8 +339,8 @@ kami.asian:
 		TrailLength: 15
 	-Voiced:
 
-kami_chemical.asian:
-	Inherits: kami.asian
+asianalliance_kami_chemical:
+	Inherits: asianalliance_kami
 	Valued:
 		Cost: 225
 	Health:
@@ -367,13 +367,13 @@ kami_chemical.asian:
 		RequiresSelection: true
 		PipCount: 9
 	RenderSprites:
-		Image: kami.asian
+		Image: asianalliance_kami
 	SpawnActorOnDeath:
-		Actor: kami_chemical_husk.asian
+		Actor: asianalliance_kami_chemical_husk
 		RequiresCondition: airborne
 
-kami_asdf.asian:
-	Inherits: kami.asian
+asianalliance_kami_asdf:
+	Inherits: asianalliance_kami
 	Valued:
 		Cost: 50
 	Tooltip:
@@ -385,13 +385,13 @@ kami_asdf.asian:
 	AirstrikeSlaveCA:
 	GivesExperienceToMaster:
 	RenderSprites:
-		Image: kami.asian
+		Image: asianalliance_kami
 
 #######################################
 # RA2 Asian Husks
 #######################################
 
-kami_husk.asian:
+asianalliance_kami_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Kamikaze
@@ -407,7 +407,7 @@ kami_husk.asian:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: kami.asian
+		Image: asianalliance_kami
 		PlayerPalette: playerra2
 	FireWarheadsOnDeathCA@Chemical:
 		Weapon: AsianSmallOilBomb
@@ -415,7 +415,7 @@ kami_husk.asian:
 	FirepowerMultiplier@Explodes:
 		Modifier: 50
 
-kami_chemical_husk.asian:
+asianalliance_kami_chemical_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Chemical Attack Plane
@@ -431,7 +431,7 @@ kami_chemical_husk.asian:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: kami.asian
+		Image: asianalliance_kami
 		PlayerPalette: playerra2
 	FireWarheadsOnDeathCA@Chemical:
 		Weapon: ReactorNukeWeak
@@ -439,7 +439,7 @@ kami_chemical_husk.asian:
 	FirepowerMultiplier@Explodes:
 		Modifier: 25
 
-phoenix_husk.asian:
+asianalliance_phoenix_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Phoenix
@@ -458,7 +458,7 @@ phoenix_husk.asian:
 		Image: asianalliance_phoenix
 		PlayerPalette: playerra2
 
-harbinger_husk.asian:
+asianalliance_harbinger_husk:
 	Inherits: ^PlaneHusk
 	Inherits@Voxel: ^RenderVoxel
 	Tooltip:
@@ -480,7 +480,7 @@ harbinger_husk.asian:
 	RenderVoxels:
 		Image: asianalliance_harbinger
 
-pelican_husk.asian:
+asianalliance_pelican_husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Pelican
@@ -491,7 +491,7 @@ pelican_husk.asian:
 		Image: asianalliance_pelican
 		PlayerPalette: playerra2
 
-bomber_minebomb.asian:
+asianalliance_bomber_minebomb:
 	Inherits: ^AirstrikePlane
 	Selectable:
 		DecorationBounds: 1536, 1536
@@ -520,7 +520,7 @@ bomber_minebomb.asian:
 		Position: BottomLeft
 		RequiresSelection: True
 	SpawnActorOnDeath:
-		Actor: bomber_husk.asian
+		Actor: asianalliance_bomber_husk
 	Cloak:
 		CloakDelay: 25
 		CloakSound: trans1.aud
@@ -530,12 +530,12 @@ bomber_minebomb.asian:
 		Image: aa_bomber
 		PlayerPalette: playerra2
 
-bomber_minebomb2.asian:
-	Inherits: bomber_minebomb.asian
+asianalliance_bomber_minebomb2:
+	Inherits: asianalliance_bomber_minebomb
 	Armament:
 		Weapon: AsianMineBomb2
 
-bomber_husk.asian:
+asianalliance_bomber_husk:
 	Inherits: BADR.Husk
 	RenderSprites:
 		Image: aa_bomber

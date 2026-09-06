@@ -695,7 +695,7 @@
      "v": "180"
     }
    },
-   "bomber_minebomb.asian": {
+   "asianalliance_bomber_minebomb": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -756,7 +756,7 @@
      "v": "250"
     }
    },
-   "bomber_minebomb2.asian": {
+   "asianalliance_bomber_minebomb2": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -817,7 +817,7 @@
      "v": "250"
     }
    },
-   "kami.asian": {
+   "asianalliance_kami": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -901,7 +901,7 @@
      "v": "160"
     }
    },
-   "kami_asdf.asian": {
+   "asianalliance_kami_asdf": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -985,7 +985,7 @@
      "v": "160"
     }
    },
-   "kami_chemical.asian": {
+   "asianalliance_kami_chemical": {
     "armaments": [
      {
       "burst": "3",
@@ -3017,7 +3017,7 @@
      "v": "5c0"
     }
    },
-   "cgpnch.asian": {
+   "asianalliance_cgpnch": {
     "armaments": [
      {
       "damage_warheads": [
@@ -3341,7 +3341,7 @@
     },
     "name": "Punisher",
     "prerequisites": [
-     "~cgyard.asian"
+     "~asianalliance_cgyard"
     ],
     "queue": [
      "Defence",
@@ -3378,7 +3378,7 @@
      "v": "12000"
     }
    },
-   "cgyard.asian": {
+   "asianalliance_cgyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -8026,7 +8026,7 @@
    }
   },
   "naval": {
-   "gunb.asian": {
+   "asianalliance_gunb": {
     "armaments": [
      {
       "armament_name": "secondary",
@@ -8337,7 +8337,7 @@
     },
     "name": "Asian Gun Boat",
     "prerequisites": [
-     "~cgyard.asian"
+     "~asianalliance_cgyard"
     ],
     "queue": [
      "Naval",
@@ -8382,7 +8382,7 @@
      "v": "36"
     }
    },
-   "karrier.asian": {
+   "asianalliance_karrier": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -8426,9 +8426,9 @@
     },
     "name": "Kamikaze Carrier",
     "prerequisites": [
-     "~cgyard.asian",
+     "~asianalliance_cgyard",
      "asianalliance_asianbattlelab",
-     "~!up_tsunami.asian"
+     "~!asianalliance_upgrade_tsunami"
     ],
     "queue": [
      "Naval",
@@ -8467,7 +8467,7 @@
      "v": "11"
     }
    },
-   "ksub.asian": {
+   "asianalliance_ksub": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -8510,7 +8510,7 @@
     },
     "name": "Kamikaze Submarine",
     "prerequisites": [
-     "~cgyard.asian"
+     "~asianalliance_cgyard"
     ],
     "queue": [
      "Naval",
@@ -8555,7 +8555,7 @@
      "v": "50"
     }
    },
-   "lsub.asian": {
+   "asianalliance_lsub": {
     "armaments": [
      {
       "burst": "2",
@@ -8616,7 +8616,7 @@
     },
     "name": "Leviathan",
     "prerequisites": [
-     "~cgyard.asian",
+     "~asianalliance_cgyard",
      "asianalliance_asianradar"
     ],
     "queue": [
@@ -8662,7 +8662,7 @@
      "v": "24"
     }
    },
-   "panth.asian": {
+   "asianalliance_panth": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -8749,7 +8749,7 @@
     },
     "name": "Enforcer Transport",
     "prerequisites": [
-     "~cgyard.asian"
+     "~asianalliance_cgyard"
     ],
     "queue": [
      "Naval",
@@ -8794,7 +8794,7 @@
      "v": "12"
     }
    },
-   "quasfrig.asian": {
+   "asianalliance_quasfrig": {
     "armaments": [
      {
       "burst": "3",
@@ -9407,7 +9407,7 @@
     },
     "name": "Quasar Frigate",
     "prerequisites": [
-     "~cgyard.asian",
+     "~asianalliance_cgyard",
      "asianalliance_asianradar"
     ],
     "queue": [
@@ -9447,7 +9447,7 @@
      "v": "30"
     }
    },
-   "tsun.asian": {
+   "asianalliance_tsun": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -9491,9 +9491,9 @@
     },
     "name": "Tsunami Carrier",
     "prerequisites": [
-     "~cgyard.asian",
+     "~asianalliance_cgyard",
      "asianalliance_militaryacademy",
-     "~up_tsunami.asian"
+     "~asianalliance_upgrade_tsunami"
     ],
     "queue": [
      "Naval",
@@ -10112,7 +10112,7 @@
      "Research"
     ]
    },
-   "cgcnst_infiltrated.asian": {
+   "asianalliance_cgcnst_infiltrated": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -10127,7 +10127,7 @@
     },
     "name": "Stolen Asian Buildings Plans"
    },
-   "up_dragonway_proxy_actor.asian": {
+   "asianalliance_upgrade_wayofthedragon_proxy_actor": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -10142,7 +10142,7 @@
     },
     "name": "Way of the Dragon"
    },
-   "up_team_diplomacy_proxy_actor.asian": {
+   "asianalliance_upgrade_asiandiplomacy_proxy_actor": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -10157,7 +10157,7 @@
     },
     "name": "Asian Diplomacy"
    },
-   "up_tsunami.asian": {
+   "asianalliance_upgrade_tsunami": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -10177,8 +10177,8 @@
     "name": "Tsunami Carrier Upgrade",
     "prerequisites": [
      "~asianalliance_militaryacademy",
-     "~cgyard.asian",
-     "!up_tsunami.asian"
+     "~asianalliance_cgyard",
+     "!asianalliance_upgrade_tsunami"
     ],
     "queue": [
      "Upgrades"
@@ -13043,7 +13043,7 @@
      "v": "30"
     }
    },
-   "ptnk.asian": {
+   "asianalliance_ptnk": {
     "armaments": [
      {
       "burst": "2",

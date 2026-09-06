@@ -478,7 +478,7 @@ asianalliance_pulsar:
 		Filename: asianalliance_pulsar_icon.shp
 		Offset: 0,0
 
-cgpnch.asian:
+asianalliance_cgpnch:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,4
@@ -775,14 +775,14 @@ asianalliance_advancedcommunicationcenter:
 		Filename: asianalliance_advancedcommunicationcenter_aa_cgionc_icon.shp
 		Offset: 0,0
 
-chaomine.asian:
+asianalliance_chaomine:
 	idle:
 		Filename: aa_chaomine.shp
 		ZOffset: -512
 	icon:
 		Filename: asianalliance_upgrade_clusterbombs_aa_chaomine_icon.shp
 
-tankmine.asian:
+asianalliance_tankmine:
 	idle:
 		Filename: asianalliance_upgrade_clusterbombs_aa_tankmine.shp
 		ZOffset: -512
@@ -791,7 +791,7 @@ tankmine.asian:
 	icon2:
 		Filename: asianalliance_upgrade_clusterbombs_aa_chaomine_icon.shp
 
-cgyard.asian:
+asianalliance_cgyard:
 	Defaults:
 		Offset: 0,-12
 	idle:
@@ -1399,7 +1399,7 @@ asianalliance_howitzer:
 	icon:
 		Filename: asianalliance_promotion_howitzer_icon.shp
 
-panth.asian:
+asianalliance_panth:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_panth.shp
@@ -1473,7 +1473,7 @@ asianalliance_pulverizer:
 	icon:
 		Filename: asianalliance_pulverizer_icon.shp
 
-ptnk.asian:
+asianalliance_ptnk:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: asianalliance_promotion_plasmatank_aa_ptnk.shp
@@ -1713,7 +1713,7 @@ asianalliance_harbinger:
 	icon:
 		Filename: asianalliance_harbinger_icon.shp
 
-quasfrig.asian:
+asianalliance_quasfrig:
 	Defaults:
 		Filename: aa_quasfrig.shp
 	idle:
@@ -1725,7 +1725,7 @@ quasfrig.asian:
 		Filename: aa_pulsmuzz.shp
 		Length: *
 
-gunb.asian:
+asianalliance_gunb:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_gunb.shp
@@ -1735,7 +1735,7 @@ gunb.asian:
 	icon:
 		Filename: aa_gunb_icon.shp
 
-karrier.asian:
+asianalliance_karrier:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_karrier.shp
@@ -1745,7 +1745,7 @@ karrier.asian:
 	icon:
 		Filename: aa_karrioricon.shp
 
-kami.asian:
+asianalliance_kami:
 	Defaults:
 		Scale: 0.8
 	idle:
@@ -1766,7 +1766,7 @@ kami.asian:
 	icon:
 		Filename: asianalliance_phoenix_icon.shp
 
-tsun.asian:
+asianalliance_tsun:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_tsun.shp
@@ -1776,7 +1776,7 @@ tsun.asian:
 	icon:
 		Filename: aa_tsun_icon.shp
 
-ksub.asian:
+asianalliance_ksub:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_ksub.shp
@@ -1798,7 +1798,7 @@ asianalliance_warturtle:
 		Filename: aa_pulsmuzz.shp
 		Length: *
 
-lsub.asian:
+asianalliance_lsub:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_lsub.shp

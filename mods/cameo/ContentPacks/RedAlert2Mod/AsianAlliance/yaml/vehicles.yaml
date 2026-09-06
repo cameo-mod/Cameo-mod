@@ -1,7 +1,7 @@
-tankmine.asian:
+asianalliance_tankmine:
 	Inherits: ^Mine
 	RenderSprites:
-		Image: tankmine.asian
+		Image: asianalliance_tankmine
 		PlayerPalette: playerra2
 	FireWarheadsOnDeath:
 		Weapon: RA2sabot_elite
@@ -19,10 +19,10 @@ tankmine.asian:
 	Health:
 		HP: 20000
 
-chaomine.asian:
+asianalliance_chaomine:
 	Inherits: ^Mine
 	RenderSprites:
-		Image: chaomine.asian
+		Image: asianalliance_chaomine
 		PlayerPalette: playerra2
 	FireWarheadsOnDeath:
 		Weapon: AsianChaosTurret
@@ -443,7 +443,7 @@ asianalliance_pulverizer:
 	ActorStatValues:
 		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_heavypulverizerweapons
 
-ptnk.asian:
+asianalliance_ptnk:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

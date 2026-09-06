@@ -263,7 +263,7 @@ anchor: `tiger.nax` (cost0 800, O0 946.79, P0 1093.58, Q0 1387.16)
 | `ordos_combatautoguntank` | 1500 | 916 | -39% ❗ |
 | `ordos_heavycombattank` | 950 | 1063 | +12% ⚠ |
 | `protoss_dragoon` | 1200 | 438 | -63% ❗ |
-| `ptnk.asian` | 2400 | 3485 | +45% ❗ |
+| `asianalliance_ptnk` | 2400 | 3485 | +45% ❗ |
 | `ra1_allies_alliedcybertank` | 1300 | 1381 | +6% |
 | `ra1_allies_alliedmediumtank` | 700 | 698 | -0% |
 | `ra1_allies_alliedtigerheavytank` | 1300 | 1381 | +6% |

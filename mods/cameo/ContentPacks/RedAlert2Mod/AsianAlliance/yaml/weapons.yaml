@@ -2194,14 +2194,14 @@ AsianMineSpawner:
 	Range: 7000
 	ReloadDelay: 35
 	Projectile: Bullet
-		Image: tankmine.asian
+		Image: asianalliance_tankmine
 		Sequences: idle
 		Blockable: false
 		Speed: 250
 		Palette: playerra2
 		IsPlayerPalette: true
 	Warhead@1: SpawnActorOrWeapon
-		Actors: tankmine.asian
+		Actors: asianalliance_tankmine
 		Weapon: AsianTankMine
 		Range: 3
 		ValidTargets: Ground, Water, Air
@@ -2221,14 +2221,14 @@ AsianMineSpawner2:
 	Range: 7000
 	ReloadDelay: 35
 	Projectile: Bullet
-		Image: chaomine.asian
+		Image: asianalliance_chaomine
 		Sequences: idle
 		Blockable: false
 		Speed: 250
 		Palette: playerra2
 		IsPlayerPalette: true
 	Warhead@1: SpawnActorOrWeapon
-		Actors: chaomine.asian
+		Actors: asianalliance_chaomine
 		Weapon: AsianChaosMine
 		Range: 3
 		ValidTargets: Ground, Water, Air
