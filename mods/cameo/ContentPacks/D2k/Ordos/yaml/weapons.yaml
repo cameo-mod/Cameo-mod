@@ -2280,3 +2280,644 @@ ordos_chemturret:
 			Medium: 70
 			Heavy: 60
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+
+# Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
+# These weapons are only used by Ordos actors.
+
+D2K_alshabah_autocannon:
+	Inherits: ^D2K_Cannon
+	Range: 5555
+	ReloadDelay: 15
+	Warhead@1Dam: SpreadDamage
+		Damage: 3333
+		Versus:
+			None: 85
+			Wood: 65
+			Light: 145
+			Medium: 125
+			Heavy: 105
+			Concrete: 45
+
+Emperor_Sardaukar_E:
+	Inherits: ^D2K_Cannon
+	ReloadDelay: 60
+	Report: d2k_gauss.wav
+	Range: 6000
+	Warhead@1Dam: SpreadDamage
+		Damage: 9000
+		Versus:
+			None: 90
+			Wood: 80
+			Light: 120
+			Medium: 110
+			Heavy: 100
+			Concrete: 60
+
+PlasBullet:
+	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
+	Inherits@proj: ^Projectile_Shell_Heavy_D2K_DevBullet
+	Inherits@fx: ^Effect_CannonHE_Heavy_D2K_DevBullet
+	ReloadDelay: 75
+	Range: 6666
+	Report: TANKHVY1.WAV
+	Projectile: Bullet
+		Speed: 250
+		Image: oneblastbullet
+	Warhead@CannonHE_Heavy_D2K_DevBullet:
+		Damage: 12500
+		Spread: 250
+
+^D2K155mmLegacy:
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@wh3: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
+	Inherits@fx: ^Effect_Demolition_Heavy_D2K_155mm
+	Inherits@4: ^D2K_Cannon
+	ReloadDelay: 74
+	Range: 10000
+	Report: MORTAR1.WAV
+	Warhead@Concussion_Medium:
+		Damage: 12000
+	Warhead@Demolition_Heavy:
+		Damage: 24000
+	Warhead@CannonHE_Medium:
+		PercentageScale: 10000
+		Damage: 12000
+	Warhead@Concrete: DamagesConcrete
+		Damage: 5625
+
+D2K_SiegeQuad:
+	Inherits: ^D2K155mmLegacy
+	Range: 7680
+	Report: d2khc.wav
+	ReloadDelay: 100
+	Projectile: Bullet
+		Speed: 228
+
+D2K_Rocket_Buggy:
+	Inherits: ^D2KRocket
+	ReloadDelay: 28
+	Report: d2k_buggy_rocket.wav
+	Warhead@1Dam: SpreadDamage
+		Damage: 5500
+
+D2K_Combat_Fleet:
+	Inherits: ^D2KRocket
+	Range: 10240
+	Burst: 10
+	BurstDelays: 2
+	ReloadDelay: 50
+
+d2k_tyrant:
+	Inherits: ^D2KMissile
+	ReloadDelay: 130
+	Burst: 1
+	Range: 6144
+	Report: tyrantshot.wav
+	ValidTargets: Ground
+	Projectile: Missile
+		RangeLimit: 6c512
+		Speed: 400
+		LockOnProbability: 0
+		HorizontalRateOfTurn: 20
+	Warhead@1Dam: SpreadDamage
+		Damage: 27500
+		ValidTargets: Ground
+		Versus:
+			None: 15
+			Wood: 40
+			Light: 130
+			Medium: 115
+			Heavy: 100
+			Concrete: 30
+
+	MinRange: 1230
+
+Rocket_stealth:
+	Inherits: ^D2KMissile
+	ReloadDelay: 150
+	Report: d2k_buggy_rocket.wav
+	Burst: 2
+	BurstDelays: 15
+	Range: 9216
+	Projectile: Bullet
+		Inaccuracy: 64
+	Warhead@1Dam: SpreadDamage
+		Damage: 12500
+
+	MinRange: 1845
+
+Rocket_stealth_AA:
+	Inherits: Rocket_stealth
+	Burst: 2
+	BurstDelays: 15
+	Report: d2k_buggy_rocket.wav
+	Range: 11000
+	MinRange: 2200
+	ValidTargets: Air
+	-Projectile:
+	Projectile: Missile
+		Inaccuracy: 0
+		Image: d2k_rpg
+		HorizontalRateOfTurn: 96
+		VerticalRateOfTurn: 320
+		TrailImage: large_trail
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 384
+		RangeLimit: 12c614
+	Warhead@1Dam: SpreadDamage
+		Spread: 1c0
+		ValidTargets: Air
+		Damage: 10000
+
+d2k_APCo_AG:
+	Inherits: Rocket_stealth
+	Burst: 1
+	ReloadDelay: 175
+	Warhead@1Dam: SpreadDamage
+		Damage: 6000
+
+	MinRange: 1845
+
+d2k_APCo_AA:
+	Inherits: Rocket_stealth_AA
+	Burst: 1
+	ReloadDelay: 175
+	Warhead@1Dam: SpreadDamage
+		Damage: 4500
+############################
+#       OTHER
+############################
+
+D2K_Annihilator:
+	ReloadDelay: 50
+	Range: 6656
+	Report: tesla1.aud
+	Projectile: LightningZap
+	Warhead@1Dam: SpreadDamage
+		Spread: 42
+		Damage: 15000
+		Versus:
+			None: 175
+			Light: 125
+			Medium: 105
+			Heavy: 85
+			Wood: 90
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
+
+D2K_Annihilator_AA:
+	Inherits: MammothTusk
+	Range: 10240
+	Burst: 6
+	BurstDelays: 3
+	ReloadDelay: 100
+	ValidTargets: Air
+	Projectile: Missile
+		Speed: 280
+		RangeLimit: 12c0
+	Warhead@1Dam: SpreadDamage
+		Spread: 256
+		Damage: 4500
+		ValidTargets: Air
+
+Sound2:
+	Inherits: Sound
+	Range: 5632
+	ReloadDelay: 40
+	Projectile: AreaBeam
+		Speed: 0c256
+		Duration: 2
+		Width: 0c256
+	Warhead@1Dam: SpreadDamage
+		Damage: 4000
+	Warhead@2Dam: SpreadDamage
+		Damage: 400
+	Warhead@Concrete: DamagesConcrete
+		Damage: 800
+
+WormSwallow:
+	ReloadDelay: 150
+	Report: WORM.WAV
+	Range: 1792
+	InvalidTargets: Structure, Air, DevourImmune
+	Projectile: InstantHit
+	Warhead@1Dam: AreaDamagePercentage
+		Spread: 1c0
+		Damage: 100
+		InvalidTargets: Structure, Air, DevourImmune
+
+OrniBombC:
+	Inherits: OrniBomb
+	Range: 2500
+
+SardDeath:
+	Warhead@1Dam: SpreadDamage
+		Damage: 3000
+		Spread: 0c256
+		Falloff: 100, 0
+		Versus:
+			None: 100
+			Wood: 60
+			Light: 90
+			Medium: 75
+			Heavy: 60
+			Concrete: 45
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+	Warhead@3Eff: CreateEffect
+		Explosions: d2k_small_napalm
+		ImpactSounds: EXPLSML2.WAV
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+	Warhead@Concrete: DamagesConcrete
+		Damage: 450
+
+M_LMG:
+	Inherits: ^MG
+	ReloadDelay: 30
+	ValidTargets: Infantry
+	Warhead@1Dam: SpreadDamage
+		Damage: 2000
+
+M_LMG_H:
+	Inherits: M_LMG
+	Report: hmgo1.wav, hmgo2.wav
+	ReloadDelay: 30
+	InvalidTargets: Vehicle, Structure
+	ValidTargets: Infantry
+	Warhead@1Dam: SpreadDamage
+		InvalidTargets: Vehicle, Structure
+		ValidTargets: Infantry
+
+M_HMG_H:
+	Inherits: M_HMG
+	ReloadDelay: 50
+
+d2k25mm:
+	Inherits: ^D2K_Cannon
+	Report: TURRET1.WAV
+	ReloadDelay: 30
+	Range: 3328
+	InvalidTargets: Air
+	Warhead@1Dam: SpreadDamage
+		Damage: 2000
+		Versus:
+			None: 110
+			Wood: 50
+			Light: 100
+			Medium: 60
+			Heavy: 40
+			Concrete: 20
+		InvalidTargets: Air
+
+HMG_tleilaxu:
+	Inherits: HMG
+	ReloadDelay: 80
+	Burst: 6
+	BurstDelays: 2
+	Range: 4096
+	Warhead@1Dam: SpreadDamage
+		Damage: 2500
+		Versus:
+			None: 150
+			Wood: 100
+			Light: 110
+			Medium: 75
+			Heavy: 60
+			Concrete: 50
+
+d2k_sardaukar_elite:
+	Inherits: ordos_autogunturret
+	Burst: 5
+	BurstDelays: 1
+	ReloadDelay: 11
+	ValidTargets: Ground, Air
+	Projectile: InstantHit
+		Inaccuracy: 0c768
+	Warhead@1Dam: SpreadDamage
+		Damage: 825
+		Spread: 0c182
+		ValidTargets: Ground, Air
+		Versus:
+			None: 115
+			Wood: 15
+			Light: 90
+			Medium: 75
+			Heavy: 50
+			Concrete: 10
+
+OrniGunC:
+	Inherits: OrniGun
+	Range: 6000
+	ValidTargets: Ground, Air
+	Warhead@1Dam: SpreadDamage
+		ValidTargets: Ground, Air
+		Damage: 800
+
+	MinRange: 1200
+
+Rocketeer:
+	Inherits: ^MG
+	Range: 4608
+	Warhead@1Dam: SpreadDamage
+		Damage: 1500
+		DamageTypes: TriggerProne, SmallExplosionDeath
+		ValidTargets: Ground, Air
+		Versus:
+			None: 140
+			Wood: 30
+			Light: 40
+			Medium: 20
+			Heavy: 10
+			Concrete: 15
+
+Rocketeer_o:
+	Inherits: HMG
+	ReloadDelay: 18
+	Range: 2560
+	ValidTargets: Ground
+	Warhead@1Dam: SpreadDamage
+		Damage: 2250
+		DamageTypes: TriggerProne, SmallExplosionDeath
+		ValidTargets: Ground
+		Versus:
+			None: 120
+			Wood: 90
+			Light: 100
+			Medium: 90
+			Heavy: 60
+			Concrete: 35
+
+Rocketeer_t:
+	Inherits: Rocketeer_o
+	Burst: 4
+	Range: 3840
+	BurstDelays: 4
+	ReloadDelay: 40
+	ValidTargets: Ground, Air
+	Warhead@1Dam: SpreadDamage
+		ValidTargets: Ground, Air
+
+D2KBuggyExplosion:
+	ValidTargets: Ground, Air
+	Warhead@1Dam: SpreadDamage
+		Spread: 0c768
+		Falloff: 100, 90, 80, 60, 40, 10, 0
+		ValidTargets: Ground, Air
+		Damage: 12000
+		Versus:
+			None: 150
+			Wood: 90
+			Light: 150
+			Medium: 120
+			Heavy: 100
+			Concrete: 60
+		AffectsParent: true
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath, SuppressDrone
+	Warhead@2Eff: CreateEffect
+		Explosions: d2k_large_explosion
+		ImpactSounds: EXPLSML4.WAV
+		ExplosionPalette: effect75alpha
+
+D2KSniperRifle:
+	Report: TURRET1.WAV
+	ReloadDelay: 120
+	Range: 12288
+	ValidTargets: Ground, Air
+	InvalidTargets: Water, Structure, wall, Husk
+	Projectile: Bullet
+		Speed: 1c768
+		Inaccuracy: 0c384
+	Warhead@1Dam: SpreadDamage
+		Spread: 0c128
+		Damage: 10000
+		Versus:
+			None: 100
+			Wood: 20
+			Light: 75
+			Medium: 15
+			Heavy: 5
+			Concrete: 5
+		ValidTargets: Infantry, Vehicle, Tank, Air
+		InvalidTargets: Structure, wall, Husk, Water
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: d2k_piffs
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+
+D2KMarksmanRifle:
+	Inherits: D2KSniperRifle
+	ReloadDelay: 45
+	Range: 6656
+	Report: d2k_marksman.wav
+	InvalidTargets: Water
+	Projectile: Bullet
+		Speed: 1c768
+		Inaccuracy: 0c256
+	Warhead@1Dam: SpreadDamage
+		Spread: 0c128
+		Damage: 7000
+		ValidTargets: Ground, Air
+		InvalidTargets: Water
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+
+emperor_sardaukar_chief_c4:
+	Inherits: GenericC4
+	Warhead@1: AttachDelayedWeapon
+		TriggerTime: 175
+
+d2kFlameTurret:
+	Inherits: d2kFlamegun
+	ReloadDelay: 10
+	Range: 4352
+	Projectile: Bullet
+		Blockable: false
+	Warhead@1Dam: SpreadDamage
+		Damage: 800
+
+d2k_laser_qafza:
+	Inherits: d2k_laser
+	Report: obelray1.aud
+	StartBurstReport: d2k_laser.wav
+	Burst: 1
+	ReloadDelay: 12
+	Range: 6144
+	Warhead@1Dam: SpreadDamage
+		Damage: 2500
+		Versus:
+			None: 100
+			Light: 100
+			Medium: 60
+			Heavy: 45
+			Wood: 30
+			Concrete: 15
+
+d2k_laser_qafza_aa:
+	Inherits: d2k_laser_qafza
+	Report: obelray1.aud
+	Range: 8192
+	ValidTargets: Air
+	Warhead@1Dam: SpreadDamage
+		ValidTargets: Air
+
+D2K_buzzsaw:
+	ValidTargets: Infantry
+	ReloadDelay: 1
+	Range: 1280
+	TargetActorCenter: true
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 900
+		ValidTargets: Infantry
+		DamageTypes: DefaultDeath
+
+d2k_airdefenseplatform:
+	Inherits: HMG_turret
+	Range: 6144
+	Burst: 2
+	BurstDelays: 0
+	ReloadDelay: 8
+	ValidTargets: Ground, Air, Water
+	StartBurstReport: autoguntrt.wav
+	Warhead@1Dam: SpreadDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 3000
+		Versus:
+			None: 100
+			Wood: 50
+			Light: 90
+			Medium: 90
+			Heavy: 90
+			Concrete: 30
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
+
+D2KTheVoice:
+	ReloadDelay: 200
+	Report: d2k_the_voice.wav
+	Range: 6144
+	TargetActorCenter: true
+	ValidTargets: MindControl
+	InvalidTargets: Hero, MCImmune
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 0
+
+D2KGomJabbar:
+	Report: d2k_gom_jabbar.wav
+	ReloadDelay: 50
+	Range: 1250
+	ValidTargets: Infantry
+	Projectile: InstantHit
+	Warhead@1Dam: AreaDamagePercentage
+		Damage: 100
+		DamageTypes: DefaultDeath
+		ValidTargets: Infantry
+		Spread: 0c256
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 100
+
+d2k_aircraft_eater:
+	Report: d2k_aircraft_eater.wav
+	ValidTargets: Air
+	ReloadDelay: 500
+	Range: 1024
+	Projectile: InstantHit
+	Warhead@1Dam: AreaDamagePercentage
+		Damage: 100
+		DamageTypes: DefaultDeath
+		ValidTargets: Air
+		Spread: 0c768
+		Versus:
+			None: 200
+			Wood: 200
+			Light: 200
+			Medium: 200
+			Heavy: 200
+			Concrete: 200
+
+d2k_sard_heatblade:
+	ReloadDelay: 30
+	Range: 1536
+	Projectile: InstantHit
+	InvalidTargets: Infantry
+	Warhead@1: CreateEffect
+		Delay: 3
+		ImpactSounds: d2k_sardaukar_assassin_blade.wav
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+		Delay: 3
+		Damage: 2025
+		Versus:
+			None: 150
+			Wood: 60
+			Light: 100
+			Medium: 75
+			Heavy: 60
+			Concrete: 30
+		DamageTypes: DefaultDeath
+
+d2k_sard_crossbow:
+	ReloadDelay: 35
+	Range: 5120
+	Report: d2k_sardaukar_assassin_crossbow.wav
+	Projectile: InstantHit
+	ValidTargets: Infantry
+	Warhead@1Dam: SpreadDamage
+		Spread: 256
+		Falloff: 100, 50, 25, 0
+		Damage: 4000
+		ValidTargets: Infantry
+		Versus:
+			None: 200
+			Light: 150
+			Medium: 150
+			Heavy: 100
+		DamageTypes: TriggerProne, BulletDeath
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure
+	Warhead@1Con: GrantExternalCondition
+		Condition: poisoned
+		Duration: 750
+		Range: 60
+###################################################
+#       OG DUNE 2000
+###################################################
+
+^OCannon:
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
+	ReloadDelay: 50
+	Range: 4096
+	Report: MEDTANK1.WAV
+	Projectile: Bullet
+		Speed: 562
+		Inaccuracy: 380
+		Image: 120mm
+	Warhead@CannonHE_Medium:
+		PercentageScale: 14953
+		Damage: 5350
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure
+	Warhead@3Eff: CreateEffect
+		Explosions: d2k_small_napalm
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 540
