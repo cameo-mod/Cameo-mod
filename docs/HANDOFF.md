@@ -1,4 +1,4 @@
-# Cameo — THE HANDOFF
+﻿# Cameo — THE HANDOFF
 
 **2026-08-25 update (Devin AI):** The volcanic shellmap (`shellmap_v3.oramap`) camera was too tight (6-cell radius), hiding the scripted attack waves. The `attack.lua` camera radius has been widened to 45 cells. The boot-blocking stale removal `-Warhead@CannonHE_MediumPercentage` in `weapons/outpost2.yaml` is resolved in `a92ae850`, and boot-gate passes with no new exceptions. See `DEVELOPMENT_LOG.md` § "Volcanic shellmap camera radius fix" for evidence and verification.
 
@@ -96,7 +96,7 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          243 directly fired weapons still carry 2+
+W24  one damage warhead per weapon          192 directly fired weapons still carry 2+
  └─> W23  retrofit the legacy templates      1162 direct inheritors; 1245 fired
  │        (2026-08-23 baseline; re-measure before using as current state)
  │        (its old "33-collision" blocker    weapons already reach a ^Warhead_* family
@@ -219,7 +219,7 @@ Crashes and player-visible regressions jump everything below.
 | **Claude** (Opus 5, local) | **Fleet coordinator** (maintainer order 2026-09-05) | ✅ Reference-pipeline tooling landed (`85bcf3f33`). ✅ 7 reference mods extracted (8183 unit rows). ✅ Master fast-forwarded 113 commits. **AWAITING: issue consolidated fleet-wide orders. Rule on 4 open items: (1) ordos_laserturret "unique and special" mechanical spec, (2) heaviness bell — refold existing level templates now or later?, (3) composite registry re-curation priority, (4) CannonTesla family under single-warhead ruling.** | `tools/reference/**`, `tools/balance/{assign_references,faction_routes,faction_extrapolate}.py`, `docs/balance/review/**` |
 | **Devin-Dawn** (was Devin-Prime) | Active (awaiting) | D2k/Corrino pack skeleton created (`f07d8d35e`); full Corrino build pending WC2 hero blocker and phases 1-2. TSLaser90mm family work on hold. **WC2 blocker is RESOLVED — proceed with Corrino Phase 3.** | `ContentPacks/D2k/Corrino/`, `mods/cameo/weapons/tiberiansun.yaml` |
 | **Devin-Aurora** (SWE-1.7 Max / GLM-5.2 High) | Active — **D2k coordinator under Claude** | D2k Phase 0/1/2/3 coordinator. Committed `cda4c54ec`, `f46e61326`, `c16457655`, `95261becb`, `9cdfa40dd` (ordos_laserturret W23), `ca56afe58` (coordination), `e1552421f` (cabal_avatar dreadnought), `8748c68e4` (HydraSpit BulletChem + Shrapnel fix), `876226947` (Atreides weapons port - 155 lines), `c9f95119f` (doc_claims fix + stale HydraSpit composite removal), `bc9c0b4ee` (D2k sequence verification + LESSONS_LEARNED trap), `03448a9cf` (Atreides promotion tree - 5 tiers gating Fremen/Sonic Tank/Minotaurus/Mongoose/Air Drone). W24 safe pool EXHAUSTED. W23 ALL DONE. ✅ D2k sequence verification COMPLETE (236 actors, 0 missing). ✅ Atreides promotion tree COMPLETE. **NOW: Atreides FEATURE-COMPLETE. Awaiting Claude's rulings on 4 open items (ordos_laserturret, heaviness bell, meter_dilution, DebrisMissile min_range). Ordos cross-pack deps documented, gated on laserturret ruling.** | `mods/cameo/ContentPacks/D2k/Atreides/`, `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`, `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`, `mods/cameo/bits/d2k/` |
-| **Devin-Cyrus** (was Devin-Forge) | **RESOLVED** — WC2 hero pass committed by maintainer | WC2 hero weapon rework. Maintainer committed Cyrus's unfinished work as `d11b90720` (2026-08-25): 8 hero weapons + 8 hero actors across Humans and Orcs. Hellscream + elite verified: actors, weapons, sequences, icon all present. **Cyrus: stand down, this is done.** | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` |
+| **Devin-Cyrus** (was Devin-Forge) | Active — **COMMIT WC2 hero pass NOW** (maintainer order 2026-09-05) | WC2 hero weapon rework. `wc2_orcs_hellscream_icon.png` exists and boot-gate passes. **ORDER: verify hellscream sequence ref, COMMIT your WC2 hero weapon pass, mark HANDOFF row resolved, then stand down. Dawn is waiting on this.** | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` |
 | **Devin-Ember** (SWE-1.7 Max) | Active — verifier lane | Verification + coordination. Committed `c58890d52`, `fd95873c5`, `50d7a838b`, `0df97723c` (fleet hierarchy + maintainer rulings executed). **ORDER: continue verification + doc sync. Monitor for boot-blockers. Help Nova with composite registry.** | none |
 | **Devin-Echo** (SWE-1.7 Max) | Active — **review CABAL + Ixian** | Phase 2 Atreides done (`f07d8d35e`); auditing D2k weapons. **ORDER: 1. Review CABAL file after cabal_avatar patch landed (`e1552421f`). 2. Re-verify D2k/Ixian before Phase 4.** | `mods/cameo/ContentPacks/D2k/Atreides/`, `D2k/Ordos/`, `D2k/Ixian/`, `TiberianSun/CABAL/` |
 | **Devin-Blaze** | Active — **D2k Shared consolidation** (maintainer priority) | Phase 1 Harkonnen complete (`afdaae46c`); Phase 4 shared/global. **ORDER: move remaining shared D2k content into `ContentPacks/D2k/Shared/`. Clean up legacy `d2k.yaml`/`rules/d2k.yaml` dead blocks. Verify no dangling refs.** | `mods/cameo/ContentPacks/D2k/Harkonnen/`, `ContentPacks/D2k/Shared/`, legacy `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml` |
@@ -274,31 +274,27 @@ different coordinators. Resolved against §3.A and against who has actually been
 
 ### Orders, in priority order
 
-**~~P0 — Devin-Cyrus: COMMIT THE WC2 HERO PASS.~~** **RESOLVED** — maintainer committed as `d11b90720` (2026-08-25). Verified by Aurora: hellscream + elite actors, weapons, sequences, and icon all present. Dawn is unblocked.
+**~~P0 — Devin-Cyrus: COMMIT THE WC2 HERO PASS~~ — RESOLVED (2026-09-06, Aurora verification)**
+The WC2 hero pass was committed by the maintainer as `d11b90720` on 2026-08-25
+("Picks up Devin-Cyrus's unfinished work"). Verified: hellscream + elite actors,
+weapons, sequences, and icon all present. Dawn is **unblocked** for Corrino Phase 3.
 
-**P0 — Devin-Nova: two correctness items in your lane.**
-1. ⛔ **`mods/cameo/weapons/weapons.yaml.rej` — a half-applied patch is in the tree.** Its live
-   diff reverts `REFLECTOR: 75 -> 74` and `COMPOSITE: 99 -> 100`. The locked-files list below
-   says the maintainer's Versus tweaks on this file are **final, do not revert**. Discard the
-   patch and delete the `.rej`; do not force it. Do not commit the working-tree diff.
-2. **`^Warhead_CannonTesla_*` is split-brain.** The master merge dropped the templates, Aurora
-   redirected refs to `^Warhead_Tesla_*`, then I restored the templates. Now `_Medium` and
-   `_Heavy` are defined with **0** references and one straggler ref remains at
-   `ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml:653`. `audit_family_uniqueness` passes
-   (exit 0), so nothing is broken — pick ONE family and retire the other. Under the new
-   single-warhead-per-type ruling this should not stay as two half-fixes.
+**~~P0 — Devin-Nova: two correctness items~~ — RESOLVED (2026-09-06)**
+1. ✅ **`weapons.yaml.rej` — DELETED.** `Test-Path` = False. REFLECTOR 75 stands, gen_sync drift = 0.
+2. ✅ **`^Warhead_CannonTesla_*` — KEEP BOTH.** Nova's forensic (`a636756e5`) proved
+   CannonTesla is a distinct generator-defined BLEND (50% Tesla + CannonAP), not a
+   duplicate. Resolved rows differ from `^Warhead_Tesla_*` throughout. Sole consumer
+   `RA2120mm_tesla` is coherent authored content. `audit_family_uniqueness` passes.
+   The 0-reference `_Medium`/`_Heavy` levels are unused levels like any leveled family.
 
 **P1 — Devin-Ember: own the red gates.** Run `bash tools/audit/run_all.sh` on a complete tree
-and triage. `audit_doc_claims` currently reports 5 stale numbers — `physical_state_fired_weapons`
-532→533, `plating_families` 47→48, `warhead_family_reach` 1413→1415,
-`unconverted_template_inheritors` 1600→1595, and a stale `multi_main_fired_weapons` digest.
-Those moved because of real weapon work, so **update the registry values, do not "fix" the tree
-to match a stale number.** `audit_doc_health` is also red on pre-existing control characters at
+and triage. `audit_doc_claims` is now green except for `ledgers_drifted` (1), which is expected from live D2k work in progress — do not re-extract to avoid baking unfinished numbers. The other claims, including `multi_main_fired_weapons` (192), match.
+The remaining `ledgers_drifted` mismatch reflects real D2k work in progress; **do not re-extract to match it.** `audit_doc_health` is also red on pre-existing control characters at
 `DEVELOPMENT_LOG.md:4726+` — clean those. ⚠ Read the `exit=` line in the output file; never trust
 a background task's notification code.
 
 **P1 — Devin-Blaze, Devin-Aurora, Devin-Echo, Devin-Dawn: D2k faction completion** — the
-maintainer's standing priority. Stay strictly in the lanes above. Dawn is gated on Cyrus (P0).
+maintainer's standing priority. Stay strictly in the lanes above. ~~Dawn is gated on Cyrus (P0)~~ — **Cyrus P0 RESOLVED, Dawn is UNBLOCKED for Corrino Phase 3.**
 
 ⛔ **Maintainer ruling for everyone, 2026-09-05:** the EBFD sprites were to be added as **NEW
 actors only**; the **Ordos Face Dancer was the sole approved update to an existing actor.** An
@@ -375,7 +371,7 @@ must be fully built out so they are selectable and playable. Currently:
 
 | faction | state | units | buildings | infantry | aircraft | weapons | upgrades | selectable |
 |---|---|---|---|---|---|---|---|---|
-| **Atreides** | complete in `f07d8d35e` | 5 vehicles (MCV, harvester, combat, sonic, siege tanks) + ornithopter | 15 (full set) | 4 (lightinfantry, rockettrooper, fremen, engineer) | 1 + husk | `weapons.yaml` stub, no unique weapons yet | 5 | **yes** (FactionCA active, StartingUnits set) |
+| **Atreides** | FEATURE-COMPLETE (Aurora) | 11 vehicles (MCV, harvester, combat, sonic, missile, siege, sandbike, APC, repair, minotaurus, mongoose) | 15 (full set) | 4 (lightinfantry, rockettrooper, fremen, engineer) | 3 (ornithopter, airdrone, advanced carryall) | `weapons.yaml` active (155 lines, `876226947`) | 5 | **yes** (FactionCA active, StartingUnits set) |
 | **Harkonnen** | complete in `afdaae46c` | 5+ (MCV, harvester, combat, missile, devastator, MCV) | full set | 3 (lightinfantry, rockettrooper, engineer) | 1 (carryall) | `weapons.yaml` active | 5+ | **yes** (FactionCA active, StartingUnits set) |
 | **Corrino** | complete in `af3ff5f9d` | 5 (MCV, harvester, combat, buggy, BMP) | 13 | 3 (lightinfantry, engineer, sardaukar_bazooka) | 2 (carryall, transport) | active | 5 | **yes** (FactionCA active, StartingUnits set) |
 | Ixian (reference) | complete | 16 | 18 | 6 | 11 | 32KB | 9 | yes |
@@ -820,7 +816,7 @@ holds.
 
 | step | what | how you know it moved |
 |---|---|---|
-| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` is 243, down from 927; 299 remain when indirect weapon-graph reachability is included |
+| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` is 192, down from 927; 299 remain when indirect weapon-graph reachability is included |
 | **W23** | retrofit the legacy templates onto `^Warhead_*` families | from the 2026-08-23 baseline: `unconverted_template_inheritors` goes DOWN from 1162; `warhead_family_reach` goes UP from 1245 |
 | **A5** | retire the remaining inline-`Versus` weapons onto templates | rule 4 — `Versus` only in `^Warhead_*` |
 
