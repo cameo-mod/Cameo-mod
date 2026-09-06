@@ -6,7 +6,7 @@ TS70mm:
 	Report: tnkfire6.aud
 	ReloadDelay: 24
 	Range: 5566
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
 TS70mmChem:
 	Inherits@wh: ^Warhead_CannonChem_Light
@@ -61,12 +61,10 @@ TS70mmTur:
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
 	Warhead@CannonAP_Light:
 		Damage: 4000
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Medium:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -85,7 +83,7 @@ TS70mmTurChem:
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		PercentageScale: 3325
 		Damage: 12000
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -110,9 +108,6 @@ TS70mmTurChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
-	-Warhead@LightChemicalWeapon:
-	-Warhead@TankDestroyerCannon:
-	-Warhead@CannonHE_MediumFlatCompatibility:
 TS120mmx:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -123,10 +118,9 @@ TS120mmx:
 	ReloadDelay: 52
 	Burst: 2
 	BurstDelays: 4
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 63600
 		PercentageScale: 9434
-	-Warhead@1Dam:
 TSChem120mmx:
 	Inherits@chemical: ^Warhead_CannonChem_Heavy
 	Inherits: ^Warhead_CannonHE_Medium
@@ -141,7 +135,7 @@ TSChem120mmx:
 	BurstDelays: 4
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 15
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 33600
 		PercentageScale: 8929
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
@@ -156,10 +150,6 @@ TSChem120mmx:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@1Dam:
 	Warhead@CannonChem_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 60000
@@ -175,7 +165,7 @@ TSScoopDual:
 	Burst: 2
 	BurstDelays: 2
 	Range: 6224
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 20000
 TSScoopDualChem:
 	Inherits@finalmain: ^Compatibility_Chemical_MediumFlat
@@ -216,8 +206,6 @@ TSScoopDualChem:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	-Warhead@CannonHE_Medium:
-	-Warhead@Chemical_Medium:
 	Warhead@Chemical_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 30000
@@ -241,8 +229,6 @@ TSScoopDualTur:
 		Damage: 16000
 	Warhead@Concussion_Medium:
 		Damage: 16000
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Concussion_Medium:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 32000
@@ -288,10 +274,6 @@ TSScoopDualTurChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_HeavyFlatCompatibility:
 TSHighVelocity:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonAP_Light
@@ -329,8 +311,6 @@ TSHighVelocityChem:
 		InvalidTargets: Water
 
 	TargetActorCenter: false
-	-Warhead@LightChemicalWeapon:
-	-Warhead@TankDestroyerCannon:
 	Warhead@CannonChem_Light:
 		Damage: 45000
 		PercentageScale: 0
@@ -371,8 +351,6 @@ TSHighVelocity2Chem:
 		InvalidTargets: Water
 
 	TargetActorCenter: false
-	-Warhead@LightChemicalWeapon:
-	-Warhead@TankDestroyerCannon:
 	Warhead@CannonChem_Light:
 		Damage: 60000
 		PercentageScale: 0
@@ -407,7 +385,6 @@ TSBusMortar:
 		TrailImage: black_smokey
 	Warhead@Concussion_Medium:
 		Damage: 64000
-	-Warhead@Demolition_Heavy:
 TSBusMortarChem:
 	Inherits@collapsewh: ^Warhead_Chemical_Heavy
 	Inherits: ^ShrapnelWeapon
@@ -445,11 +422,6 @@ TSBusMortarChem:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyChemicalWeapon:
 	Warhead@Chemical_Heavy:
 		Damage: 128000
 		PercentageScale: 0
@@ -482,7 +454,6 @@ TSInfantryMortar:
 	Inherits: ^TSInfantryMortarLegacy
 	Warhead@Concussion_Medium:
 		Damage: 32000
-	-Warhead@Demolition_Heavy:
 
 TSInfantryMortarChem:
 	Inherits@finalmain: ^Compatibility_Chemical_MediumFlat
@@ -591,9 +562,6 @@ TSInfantryMortarChem:
 			Spaceship: 10
 		Falloff: 100, 45, 18
 		Range: 0, 466, 932
-	-Warhead@Chemical_Medium:
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
 	Warhead@Chemical_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 48000
@@ -625,8 +593,6 @@ TS120mmxChem:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	-Warhead@Chemical_Heavy:
-	-Warhead@Demolition_Heavy:
 	Warhead@Chemical_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -761,10 +727,6 @@ TSChemBoatcannon:
 		Spread: 400
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 4
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Chemical_Medium:
 		Damage: 25000
 		PercentageScale: 0
@@ -975,8 +937,6 @@ TSMammothTuskChem:
 		InvalidTargets: Water
 
 	TargetActorCenter: false
-	-Warhead@HeavyMissile:
-	-Warhead@HeavyChemicalWeapon:
 	Warhead@MissileChem_Heavy:
 		Damage: 40000
 		PercentageScale: 0
@@ -1014,14 +974,12 @@ TSRuinerMissile:
 	Range: 5919
 	ReloadDelay: 50
 	Report: misl1.aud
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 18000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileHE_Medium:
 		Damage: 18000
 		ValidTargets: Ground, Water, Air
-	-Warhead@Demolition_Light:
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
@@ -1061,11 +1019,6 @@ TSChemRuinerMissile:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumMissile:
 	Warhead@MissileChem_Medium:
 		Damage: 54000
 		PercentageScale: 0
@@ -1239,11 +1192,9 @@ TSAdatsMissile:
 	Warhead@Flak_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@MissileHE_Light:
+	Warhead@MissileHE_Light: AreaDamage
 		Damage: 4000
 		ValidTargets: Ground, Water
-	-Warhead@Flak_Medium:
-	-Warhead@MissileHE_Light:
 	Warhead@MissileHE_LightFlatCompatibility:
 		Damage: 8000
 		PercentageScale: 9988
@@ -1253,7 +1204,6 @@ TSAdatsMissile_AA:
 	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Range: 8409
 	ValidTargets: Air
-	-Warhead@MissileHE_LightFlatCompatibility:
 	Warhead@Flak_MediumFlatCompatibility:
 		Damage: 8000
 		PercentageScale: 9988
@@ -1265,7 +1215,7 @@ MutFlamer:
 	ReloadDelay: 50
 	Range: 2386
 	Report: flamtnk1.aud
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 28000
 MutFlamerChem:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
@@ -1304,8 +1254,6 @@ MutFlamerChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water
 		Damage: 42000
@@ -1328,8 +1276,6 @@ MutHFlamer:
 		PhysicalStateScale: 100
 
 	TargetActorCenter: false
-	-Warhead@MediumFlameWeapon:
-	-Warhead@HeavyFlameWeapon:
 	Warhead@Flame_Heavy:
 		Damage: 40000
 		PercentageScale: 0
@@ -1390,10 +1336,6 @@ MutHFlamerChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
-	-Warhead@MediumFlameWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyChemicalWeapon:
 	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 60000
@@ -1463,9 +1405,6 @@ TSFiendShardUP:
 		ValidTargets: Ground, Air
 
 	TargetActorCenter: false
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyChemicalWeapon:
 	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
@@ -1503,12 +1442,6 @@ TSFiendShardBlue:
 		Explosions: sczhsplash
 		ImpactActors: false
 		ValidTargets: Ground, Air
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -1565,14 +1498,6 @@ TSFiendShardBlueUP:
 		Explosions: sczhsplash
 		ImpactActors: false
 		ValidTargets: Ground, Air
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@HeavyBomb:
 	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
@@ -1625,9 +1550,6 @@ TSChemsprayUP:
 		InvalidTargets: Water
 
 	TargetActorCenter: false
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyChemicalWeapon:
 	Warhead@Chemical_Heavy:
 		Damage: 96000
 		PercentageScale: 0
@@ -1665,9 +1587,6 @@ TSVisceroidSprayUP:
 		InvalidTargets: Water
 
 	TargetActorCenter: false
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyChemicalWeapon:
 	Warhead@Chemical_Heavy:
 		Damage: 30000
 		PercentageScale: 0
@@ -1791,23 +1710,16 @@ TSMutShotgun:
 	Range: 3112
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
-	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 2
-	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ShotgunGrenadeEnemy:
@@ -1825,7 +1737,6 @@ TSMutShotgun:
 		Damage: 4000
 	Warhead@ShotgunChaingun:
 		Damage: 4000
-	-Warhead@ShotgunGrenadeEnemy:
 
 TSMutVulcanTurret:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
@@ -1839,8 +1750,6 @@ TSMutVulcanTurret:
 	Report: tsgun4.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1869,8 +1778,6 @@ TSBowlerCannon:
 	Report: chaingn1.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1900,8 +1807,6 @@ TSMutApcCannon:
 	Range: 6147
 	ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -2018,8 +1923,6 @@ TSSergGun:
 # verification unit proves the class formula: 2x HP + 2x damage at
 # same range/speed must price at exactly 250% (O 1.5x, P 2x, Q 4x).
 # MutAPRifle stays for its other users.
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000

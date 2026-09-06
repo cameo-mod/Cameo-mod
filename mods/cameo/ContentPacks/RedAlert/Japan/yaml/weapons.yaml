@@ -15,8 +15,6 @@ CHGuardRifle:
 # the scout anchor together with the Imperial Scoutsman's 20000/50/100.
 # Dedicated (never shared): CHGuardRifle serves civilians/other rules
 # and must not carry baseline duty.
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -42,10 +40,6 @@ japan_imperialscoutsman_rifle:
 		Damage: 1
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@SmallArms:
-	-Warhead@Chaingun:
-	-Warhead@RailgunWeapon:
-	-Warhead@RailgunExtraDamage:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -143,10 +137,6 @@ TankBusterBeamCannon:
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 
-	-Warhead@TankDestroyerCannon:
-	-Warhead@MediumCannon:
-	-Warhead@RailgunWeapon:
-	-Warhead@RailgunExtraDamage:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 15000
@@ -212,8 +202,6 @@ PlasmaFlamer:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_small_napalm
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
 	Warhead@Plasma_Medium:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -234,7 +222,7 @@ HeavyFlamer:
 		Image: fb3
 		LaunchAngle: 90
 		Inaccuracy: 900
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 2000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
@@ -268,8 +256,6 @@ HeavyPlasmaFlamer:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building_napalm
-	-Warhead@Chemical_Heavy:
-	-Warhead@Flame_Heavy:
 	Warhead@Flame_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -306,10 +292,6 @@ SamuraiBladeCharged:
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	-Warhead@SwordWeapon:
-	-Warhead@SwordWeaponFriendlyFire:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@PreservedFlat_SwordWeapon: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
@@ -536,13 +518,6 @@ JapanMaidenBowEnergized:
 		Explosions: drneutronexp
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Air
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Arrow_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 33000
@@ -643,13 +618,6 @@ BallistaSingleShotAirEnergized:
 		Spread: 500
 
 	MinRange: 1845
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Arrow_LightFlatCompatibility:
 		ValidTargets: Air
 		Damage: 110000
@@ -726,11 +694,6 @@ BallistaMultiShot:
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground, Water
 
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@LightFlameWeapon:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@ArrowWeapon:
 	Warhead@Arrow_Medium:
 		ValidTargets: Ground, Water
 		Damage: 30000
@@ -813,11 +776,6 @@ BallistaMultiShotEnergized:
 		Explosions: purplesplash
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground, Water
-	-Warhead@ArrowWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Arrow_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 45000
@@ -944,14 +902,6 @@ RocketAngelRockets:
 		Explosions: drplasmaex2
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Air
-	-Warhead@ArrowWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyMissile:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@MissileAA_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 13000
@@ -1137,8 +1087,6 @@ NambuMGWaveforce:
 	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Railgun_Heavy:
 	Warhead@Waveforce_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1154,8 +1102,6 @@ ZeroFighterArrows:
 		Damage: 18000
 	Warhead@Arrow_Light:
 		Damage: 18000
-	-Warhead@Arrow_Light:
-	-Warhead@MissileHE_Medium:
 	Warhead@Arrow_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
@@ -1192,15 +1138,10 @@ ZeroFighterArrowsEnergized:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 		Spread: 800
-	-Warhead@MediumFlameWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Arrow_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 4442
-	-Warhead@Arrow_Light:
-	-Warhead@MissileHE_Medium:
 
 SkyHawkChainGun:
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -1299,8 +1240,6 @@ SkyHawkArrows:
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
-	-Warhead@Arrow_Light:
-	-Warhead@MissileHE_Medium:
 	Warhead@Arrow_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 64000
@@ -1359,16 +1298,10 @@ SkyHawkArrowsEnergized:
 		Explosions: drneutronexp
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Air
-	-Warhead@MediumFlameWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Arrow_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 72000
 		PercentageScale: 4444
-	-Warhead@Arrow_Light:
-	-Warhead@Arrow_LightFlatCompatibility:
-	-Warhead@MissileHE_Medium:
 
 155mm:
 	Inherits@collapsewh: ^Warhead_Concussion_Heavy
@@ -1398,11 +1331,6 @@ SkyHawkArrowsEnergized:
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
-	-Warhead@HeavyCannon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@Concussion_Heavy:
 		Damage: 30000
 		PercentageScale: 0
@@ -1472,14 +1400,6 @@ HovercraftCannon:
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
-	-Warhead@Chaingun:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumCannon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@SmallArms:
-	-Warhead@TankDestroyerCannon:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -1575,26 +1495,12 @@ HovercraftPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyCannon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Plasma_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 27000
 		PercentageScale: 0
-	-Warhead@Bullet_MediumFlatCompatibility:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_Medium:
-	-Warhead@CannonAP_Light:
-	-Warhead@Bullet_Medium:
 
 JapaneseHovercraftFlak:
 	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
@@ -1612,8 +1518,6 @@ JapaneseHovercraftFlak:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -1626,8 +1530,6 @@ JapaneseHovercraftFlakAA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	-Warhead@Bullet_Light:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 4000
@@ -1659,7 +1561,7 @@ Type89Cannon:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 524
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 10000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -1702,15 +1604,10 @@ Type89PlasmaCannon:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building
-	-Warhead@HeavyCannon:
-	-Warhead@TankDestroyerCannon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Plasma_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 15000
 		PercentageScale: 0
-	-Warhead@CannonHE_Medium:
 
 Type97Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
@@ -1847,7 +1744,7 @@ OISmallCannon:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 539
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -1900,12 +1797,6 @@ OISmallPlasmaCannon:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building
-	-Warhead@HeavyCannon:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@RailgunExtraDamage:
-	-Warhead@RailgunWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Plasma_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 10000
@@ -1973,7 +1864,7 @@ OIFlamer:
 		Image: fb3
 		LaunchAngle: 62
 		Inaccuracy: 850
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 2000
 OIPlasmaFlamer:
 	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat
@@ -2001,8 +1892,6 @@ OIPlasmaFlamer:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building_napalm
-	-Warhead@Chemical_Heavy:
-	-Warhead@Flame_Heavy:
 	Warhead@Flame_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -2036,7 +1925,7 @@ BuggyGrenade:
 		ContrailLength: 11
 		ContrailStartWidth: 99
 		ContrailEndWidth: 33
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 60000
 BuggyPlasmaGrenade:
 	Inherits@roleflat: ^Compatibility_Plasma_LightFlat
@@ -2065,20 +1954,16 @@ BuggyPlasmaGrenade:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
-	-Warhead@HeavyBomb:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Plasma_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 60000
 		PercentageScale: 3332
-	-Warhead@Demolition_Light:
 
 JapaneseHeavyBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
@@ -2158,8 +2043,6 @@ JHighV:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -2176,8 +2059,6 @@ JHighVWaveforce:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 7488
-	-Warhead@Bullet_MediumFlatCompatibility:
-	-Warhead@Railgun_Heavy:
 	Warhead@Waveforce_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -2255,11 +2136,6 @@ NanoArtilleryAG:
 		ImpactActors: false
 		AirThreshold: 7777
 		ValidTargets: Air, Ground, Water
-	-Warhead@HeavyCannon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@Concussion_Heavy:
 		Damage: 23331
 		FriendlyFireDamage: 100
@@ -2336,10 +2212,6 @@ NanoSmokeAG:
 		ImpactActors: false
 		AirThreshold: 7777
 		ValidTargets: Air, Ground, Water
-	-Warhead@LightFlameWeapon:
-	-Warhead@MagicExtraDamage:
-	-Warhead@MagicWeapon:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Chemical_MediumFlatCompatibility:
 		ValidTargets: Infantry, Vehicle, Building
 		Damage: 10887
@@ -2460,7 +2332,6 @@ WaveTurretImpact:
 		Range: 1500
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
-	-Warhead@TeslaWeapon:
 
 ArmoredCarMG:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
@@ -2504,15 +2375,6 @@ ArmoredCarMG:
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
-	-Warhead@ArrowWeapon:
-	-Warhead@TankDestroyerCannon:
-	-Warhead@SmallArms:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumCannon:
-	-Warhead@MediumMissile:
-	-Warhead@FlakWeapon:
-	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 16000

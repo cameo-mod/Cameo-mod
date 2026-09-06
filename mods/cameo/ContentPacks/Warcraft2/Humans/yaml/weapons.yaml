@@ -55,10 +55,6 @@ wc2_dwarf_Rifle:
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
 
-	-Warhead@RailgunWeapon:
-	-Warhead@RailgunExtraDamage:
-	-Warhead@MediumMissile:
-	-Warhead@TankDestroyerCannon:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -301,7 +297,6 @@ wc2ballistaFire:
 	Warhead@Demolition_Heavy:
 		Damage: 90000
 		PercentageScale: 9999
-	-Warhead@Concussion_Medium:
 	Warhead@Effect: CreateEffect
 		Image: wc2_catapult_impact
 		Explosions: idle
@@ -332,7 +327,7 @@ MortarTeamArtilleryShell:
 		ContrailEndColor: FF884422
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		PercentageScale: 2499
 		Damage: 80000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -372,11 +367,6 @@ MortarTeamArtilleryShell:
 		Explosions: idle
 		ImpactSounds: explode.aud
 
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_MediumFlatCompatibility:
 wc2gryphonFireVisible:
 	Inherits@roleflat: ^Compatibility_MissileTesla_MediumFlat
 	Inherits: ^LightMissile
@@ -438,8 +428,6 @@ wc2gryphonFireVisible:
 		Falloff: 100, 75, 50, 25
 		Damage: 10000
 		Spread: 1000
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
@@ -453,11 +441,6 @@ wc2gryphonFireVisible:
 		ValidTargets: Ground, Water, Air
 
 # 5-9 WC2 damage. 0 Base, 9 Pierce.
-	-Warhead@HeavyBomb:
-	-Warhead@LightMissile:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@TeslaChargedExtraDamage:
-	-Warhead@TeslaChargedWeapon:
 	Warhead@MissileTesla_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 45000

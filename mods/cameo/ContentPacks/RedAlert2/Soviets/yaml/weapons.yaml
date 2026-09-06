@@ -164,10 +164,8 @@ RA2120mm_rad:
 	Inherits@rad: ^RA2RadShell
 	Warhead@Chemical_Medium:
 		Damage: 6000
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 6000
-	-Warhead@CannonHE_Medium:
-	-Warhead@Chemical_Medium:
 	Warhead@Chemical_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 12000
@@ -236,13 +234,11 @@ RA2120mm_tesla_elite:
 		TrailInterval: 1
 	Warhead@Concussion_Medium:
 		Damage: 60000
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 60000
 RA160mm:
 	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
 	Inherits: ^RA160mmLegacy
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
 	Warhead@Concussion_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 120000
@@ -261,7 +257,7 @@ RA160mm:
 		Damage: 36000
 	Warhead@Concussion_Medium:
 		Damage: 36000
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 36000
 RA160mm_rad:
 	Inherits@finalmain: ^Compatibility_Chemical_LightFlat
@@ -352,9 +348,6 @@ RA160mm_rad:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	-Warhead@Chemical_Light:
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
 	Warhead@Chemical_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 108000
@@ -371,7 +364,6 @@ RA160mm_fire:
 		Amount: 1
 		AimChance: 0
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Concussion_MediumFlatCompatibility:
 	Warhead@CannonFire_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 120000
@@ -389,7 +381,6 @@ RA160mm_tesla:
 		Amount: 1
 		AimChance: 100
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Concussion_MediumFlatCompatibility:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 120000
@@ -505,9 +496,6 @@ RA160mmE_rad_elite:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	-Warhead@Chemical_Light:
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
 	Warhead@Chemical_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 108000
@@ -564,9 +552,6 @@ RA2120xmm:
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 12000
 		PercentageScale: 3325
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@TankDestroyerCannon:
 RA2120xmm_rad:
 	Inherits@roleflat: ^Compatibility_CannonChem_HeavyFlat
 	Inherits: ^LightChemicalWeapon
@@ -608,15 +593,10 @@ RA2120xmm_rad:
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 2000
 		PercentageScale: 10000
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@CannonChem_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 12000
 		PercentageScale: 0
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 RA2120xmm_fire:
 	Inherits@wh: ^Warhead_CannonFire_Light
 	Inherits@proj: ^Projectile_Shell_Light
@@ -932,8 +912,6 @@ RA2vulcan:
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -976,7 +954,6 @@ RA2FlakTrackGun_elite:
 	Range: 6528
 	Burst: 2
 	BurstDelays: 3
-	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -1011,8 +988,6 @@ RA2FlakTrackAAGun:
 		PercentageScale: 2488
 		Damage: 8000
 		ValidTargets: Air
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 RA2FlakTrackAAGun_elite:
 	Inherits: RA2FlakTrackAAGun
 	Range: 9292
@@ -1033,8 +1008,6 @@ IvanBombAir:
 		ValidTargets: Aircraft
 	Warhead@Demolition_Heavy:
 		ValidTargets: Aircraft
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Aircraft
 		Damage: 90000

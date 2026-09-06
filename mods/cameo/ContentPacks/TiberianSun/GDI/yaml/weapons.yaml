@@ -15,8 +15,6 @@ TS30mm:
 	Warhead@Flak_Medium:
 		PercentageScale: 2500
 		Damage: 8000
-	-Warhead@Flak_Medium:
-	-Warhead@MissileHE_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -50,10 +48,6 @@ TS30mmRail:
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 
-	-Warhead@MediumMissile:
-	-Warhead@FlakWeapon:
-	-Warhead@RailgunWeapon:
-	-Warhead@RailgunExtraDamage:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
@@ -71,12 +65,10 @@ TS120mmRail:
 	Report: bigggun1.aud
 	ReloadDelay: 44
 	Range: 6201
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 8000
 	Warhead@Railgun_Heavy:
 		Damage: 8000
-	-Warhead@CannonHE_Medium:
-	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -93,7 +85,7 @@ TS120mmTal:
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 24000
 TS120mmTalRail:
 	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
@@ -105,12 +97,10 @@ TS120mmTalRail:
 	Report: bigggun1.aud
 	ReloadDelay: 50
 	Range: 6201
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 18000
 	Warhead@Railgun_Heavy:
 		Damage: 18000
-	-Warhead@CannonHE_Medium:
-	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 36000
@@ -133,8 +123,6 @@ TSRPGTower:
 		Damage: 16000
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Concussion_Medium:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 32000
@@ -160,10 +148,6 @@ TSRPGTowerRail:
 		Damage: 16000
 	Warhead@HRailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 8
-	-Warhead@RailgunExtraDamage:
-	-Warhead@RailgunWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 33000
@@ -272,12 +256,6 @@ KodiakCannon:
 		ValidTargets: Ground, Water
 		Damage: 4
 
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@RailgunWeapon:
-	-Warhead@RailgunExtraDamage:
-	-Warhead@HeavyMissile:
-	-Warhead@HeavyBomb:
-	-Warhead@CannonHE_HeavyFlatCompatibility:
 KodiakCannonSonic:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@wh2: ^Warhead_Sonic_Heavy
@@ -582,10 +560,6 @@ TSHoverMissile:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	-Warhead@FlakWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -628,10 +602,6 @@ TSDestroyerMissiles:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	-Warhead@FlakWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -776,8 +746,6 @@ TSBomb:
 		ImpactSounds: ssplash3.aud
 		ValidTargets: Water
 		InvalidTargets: Vehicle
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Ship
 		Damage: 20000
@@ -799,7 +767,6 @@ TSBombSonic:
 	Warhead@Sonic_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
-	-Warhead@Demolition_Heavy:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Ship
 		Damage: 20000
@@ -857,23 +824,16 @@ TSShotgun:
 	Range: 4002
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
-	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 2
-	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ShotgunGrenadeEnemy:
@@ -891,7 +851,6 @@ TSShotgun:
 		Damage: 4000
 	Warhead@ShotgunChaingun:
 		Damage: 4000
-	-Warhead@ShotgunGrenadeEnemy:
 
 TSJumpCannon:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
@@ -911,8 +870,6 @@ TSJumpCannon:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 		Speed: 4000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
@@ -938,8 +895,6 @@ TSAssaultCannonSonic:
 	Warhead@Sonic_Medium: AreaDamage
 		PercentageScale: 5000
 		Damage: 4000
-	-Warhead@Flak_Medium:
-	-Warhead@Sonic_Medium:
 	Warhead@Sonic_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -976,8 +931,6 @@ TSAssaultCannonTalSonic:
 	Warhead@Sonic_Medium: AreaDamage
 		PercentageScale: 2500
 		Damage: 8000
-	-Warhead@Bullet_Medium:
-	-Warhead@Sonic_Medium:
 	Warhead@Sonic_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -996,8 +949,6 @@ TSVulcanGun:
 	Range: 6809
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1019,8 +970,6 @@ TSVulcanGunSonic:
 	Warhead@Sonic_Medium: AreaDamage
 		PercentageScale: 2500
 		Damage: 8000
-	-Warhead@Bullet_Medium:
-	-Warhead@Sonic_Medium:
 	Warhead@Sonic_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -1062,8 +1011,6 @@ TSAAPCCannon:
 	Range: 6263
 	ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1170,7 +1117,6 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Delay: 114
 	Warhead@IonCannonAirPercentage: AreaDamagePercentage
 		Delay: 115
-	-Warhead@2Smu_impact:
 
 TSIonBeamMini:
 	Inherits: ^TSIonBeam

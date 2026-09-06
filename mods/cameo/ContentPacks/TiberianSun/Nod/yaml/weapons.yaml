@@ -35,7 +35,7 @@ TSCadreGrenade:
 		LaunchAngle: 66
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 36000
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
@@ -52,7 +52,7 @@ TSRaiderGrenade:
 		LaunchAngle: 66
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 36000
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
@@ -95,9 +95,6 @@ TSProton:
 	Warhead@2Eff: CreateEffect
 		Explosions: small_frag
 
-	-Warhead@MediumFlameWeapon:
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 29000
@@ -152,11 +149,9 @@ TSStankTusk:
 	Warhead@MissileHE_Medium:
 		Damage: 10000
 		ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 10000
 		ValidTargets: Ground, Water, Air
-	-Warhead@CannonHE_Medium:
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -179,12 +174,10 @@ TSSBoatTusk:
 		PercentageScale: 11111
 		Damage: 9000
 		ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		PercentageScale: 11111
 		Damage: 9000
 		ValidTargets: Ground, Water, Air
-	-Warhead@CannonHE_Medium:
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
@@ -220,20 +213,16 @@ TSStankTibTusk:
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 10000
 		ValidTargets: Ground, Water, Air
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		Damage: 5000
 		ValidTargets: Ground, Water, Air
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@MediumCannonFriendlyFire:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 35000
 		PercentageScale: 2855
-	-Warhead@CannonHE_Medium:
 
 TSNODRedEye:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
@@ -282,7 +271,7 @@ TSFireballLauncher:
 		Palette: tseffect
 		Inaccuracy: 384
 		LaunchAngle: 0
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 8000
 TSLasergun:
 	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
@@ -302,8 +291,6 @@ TSLasergun:
 		Damage: 2000
 	Warhead@Laser_Heavy:
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -322,23 +309,16 @@ TSCommandoShotgun:
 	Range: 4146
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 4
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 4
-	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 8000
-	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 4
-	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@ShotgunGrenadeEnemy:
@@ -356,7 +336,6 @@ TSCommandoShotgun:
 		Damage: 8000
 	Warhead@ShotgunChaingun:
 		Damage: 8000
-	-Warhead@ShotgunGrenadeEnemy:
 
 elitecadregun:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
@@ -373,8 +352,6 @@ elitecadregun:
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
 		Damage: 8000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -397,20 +374,15 @@ laserelitecadregun:
 	Range: 6677
 	ValidTargets: Ground, Air
 	TargetActorCenter: false
-	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Laser_Heavy:
 		Damage: 6000
 		PercentageScale: 0
-	-Warhead@Laser_Heavy_ExtraDamage:
 
 ChamBlade:
 	Inherits@wh: ^Warhead_Sniper_Light
@@ -560,8 +532,6 @@ TSLaserHarpyClaw:
 	Warhead@Laser_Heavy:
 		Damage: 4000
 		ValidTargets: Ground, Air
-	-Warhead@Bullet_Medium:
-	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Air
 		Damage: 8000
@@ -583,7 +553,6 @@ TSLaserHarpyMultiClaw:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 0
 		ValidTargets: Ground, Air
-	-Warhead@Bullet_Medium:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Air
 		Damage: 4000
@@ -600,7 +569,6 @@ TSLaserHarpyAOEClaw:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Spread: 300
 		Falloff: 100, 50, 25
-	-Warhead@Bullet_Medium:
 	Warhead@Laser_HeavyFlatCompatibility:
 		Spread: 300
 		Falloff: 100, 50, 25
@@ -632,4 +600,3 @@ TSToxinRifle:
 		Inaccuracy: 0
 	Warhead@Chemical_Light:
 		Damage: 16000
-	-Warhead@Effect:

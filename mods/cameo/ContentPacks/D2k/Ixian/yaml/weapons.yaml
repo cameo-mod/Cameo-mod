@@ -14,7 +14,6 @@ IxianCombatTankCannon:
 		Damage: 4000
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
-	-Warhead@CannonHE_Medium:
 HeavyIxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -31,7 +30,6 @@ HeavyIxianCombatTankCannon:
 		Damage: 6000
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
-	-Warhead@CannonHE_Medium:
 DuelistTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -83,18 +81,10 @@ DuelistTankCannon:
 		Damage: 7
 	Warhead@CannonHE_Heavy:
 		Damage: 28000
-	-Warhead@CannonHE_Medium:
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLMD2.WAV
 		ExplosionPalette: effect75alpha
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyBomb:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@TankDestroyerCannon:
 	Warhead@PreservedFlat_Grenade: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
@@ -279,8 +269,6 @@ D2K_155mm2:
 		Damage: 12000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 6
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLMD2.WAV
@@ -295,12 +283,6 @@ D2K_155mm2:
 		Scale: 0.8
 		FadeFrames: 15
 
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 36000
@@ -427,9 +409,6 @@ D2K_155mm3:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Concussion_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 24000
@@ -475,12 +454,12 @@ D2K_Rocket_Trooper2:
 		ProjectileSpeedPercentage: 10
 		LaunchAngle: 66
 		Shadow: true
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@Railgun_Heavy:
 		Damage: 8000
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 D2K_Rocket_Trooper1:
@@ -635,21 +614,14 @@ IxRailgunDroneBullet:
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	-Warhead@FlakWeapon:
-	-Warhead@TankDestroyerCannon:
-	-Warhead@RailgunWeapon:
-	-Warhead@RailgunExtraDamage:
-	-Warhead@Railgun_Heavy_ExtraDamage:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
 		PercentageScale: 0
-	-Warhead@CannonHE_Medium:
-	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -730,10 +702,6 @@ IxianBomb_EMP:
 		ImpactSounds: mobemp1.aud
 		ImpactActors: false
 		AffectsParent: true
-	-Warhead@HeavyBomb:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@TeslaChargedExtraDamage:
-	-Warhead@TeslaChargedWeapon:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 105000
@@ -833,10 +801,6 @@ RashidanGun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	-Warhead@LightMissile:
-	-Warhead@MediumMissile:
-	-Warhead@SmallArms:
-	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -924,9 +888,6 @@ RashidanGun_upgrade:
 			Heroic: 10
 		Falloff: 100, 45, 30
 		Range: 0, 200, 300
-	-Warhead@Bullet_Medium:
-	-Warhead@CannonHE_Heavy:
-	-Warhead@MissileHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -949,8 +910,6 @@ RaiderGuns:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -974,13 +933,10 @@ RaiderGuns_upgrade:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
-	-Warhead@CannonHE_Heavy:
 HMG_turret:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -996,8 +952,6 @@ HMG_turret:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -1025,13 +979,10 @@ HMG_turret_upgrade:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
-	-Warhead@CannonHE_Heavy:
 HMG_Duelist:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^LightMissile
@@ -1068,13 +1019,6 @@ HMG_Duelist:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	-Warhead@LightMissile:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@SmallArms:
-	-Warhead@MediumMissile:
-	-Warhead@FlakWeapon:
-	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		Damage: 12000
 		PercentageScale: 0
@@ -1105,13 +1049,9 @@ HMG_Duelist_upgrade:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
-	-Warhead@HeavyMissile:
 	Warhead@Bullet_Medium:
 		Damage: 16000
 		PercentageScale: 0
-	-Warhead@Bullet_MediumFlatCompatibility:
 d2kStormLasher:
 	# Ixian superweapon-class storm. Wired to Storm blend (2026-08-10).
 	# Was 150k Tesla + 150k Magic = 300k total → single 300k Storm.
@@ -1308,10 +1248,6 @@ D2K_RocketsCymek:
 		Damage: 24000
 		PercentageScale: 2500
 		PercentageDenominator: 10000
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@FlakWeapon:
-	-Warhead@HeavyMissile:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
@@ -1463,11 +1399,6 @@ ixian_farasha:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@RailgunExtraDamage:
-	-Warhead@RailgunWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Laser_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -1502,10 +1433,6 @@ d2k_farasha_aa:
 		ValidTargets: Air
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@RailgunWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Laser_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 8000
@@ -1555,7 +1482,6 @@ d2k_basq_AA:
 	Inherits: d2k_basq
 	ValidTargets: Air
 	Range: 6666
-	-Warhead@EffectAir:
 	Warhead@Flak_Light:
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
