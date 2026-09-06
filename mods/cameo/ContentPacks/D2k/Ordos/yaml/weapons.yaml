@@ -2648,15 +2648,8 @@ HMG_tleilaxu:
 	Burst: 6
 	BurstDelays: 2
 	Range: 4096
-	Warhead@1Dam: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2500
-		Versus:
-			None: 150
-			Wood: 100
-			Light: 110
-			Medium: 75
-			Heavy: 60
-			Concrete: 50
 
 d2k_sardaukar_elite:
 	Inherits: ordos_autogunturret
@@ -2708,17 +2701,9 @@ Rocketeer_o:
 	ReloadDelay: 18
 	Range: 2560
 	ValidTargets: Ground
-	Warhead@1Dam: SpreadDamage
+	Warhead@Bullet_Medium:
 		Damage: 2250
-		DamageTypes: TriggerProne, SmallExplosionDeath
 		ValidTargets: Ground
-		Versus:
-			None: 120
-			Wood: 90
-			Light: 100
-			Medium: 90
-			Heavy: 60
-			Concrete: 35
 
 Rocketeer_t:
 	Inherits: Rocketeer_o
@@ -2727,8 +2712,6 @@ Rocketeer_t:
 	BurstDelays: 4
 	ReloadDelay: 40
 	ValidTargets: Ground, Air
-	Warhead@1Dam: SpreadDamage
-		ValidTargets: Ground, Air
 
 D2KBuggyExplosion:
 	ValidTargets: Ground, Air

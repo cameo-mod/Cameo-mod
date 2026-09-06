@@ -1567,25 +1567,6 @@ Fremen_RPG:
 		Damage: 625
 
 	MinRange: 975
-HMG:
-	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@proj: ^Projectile_Bullet_Light
-	Inherits@fx: ^Effect_Bullet_Light
-	ReloadDelay: 20
-	Range: 3072
-	Report: 20MMGUN1.WAV
-	Warhead@1Dam: SpreadDamage
-		Damage: 2000
-		Versus:
-			None: 100
-			Wood: 30
-			Light: 50
-			Medium: 15
-			Heavy: 10
-			Concrete: 15
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1800
-
 HMG_fremen:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: HMG
@@ -1646,7 +1627,6 @@ HMG_fremen:
 			Superheavy: 5
 		Falloff: 100, 50
 		Range: 0, 50
-	-Warhead@1Dam:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
@@ -1655,30 +1635,13 @@ HMG_fremen:
 
 		FriendlyFireDamage: 67
 		FriendlyFireSpread: 67
-HMG_tleilaxu:
-	Inherits: HMG
-	ReloadDelay: 80
-	Burst: 6
-	BurstDelays: 2
-	Range: 4096
-	Warhead@1Dam: SpreadDamage
-		Damage: 2500
-		Versus:
-			None: 150
-			Wood: 100
-			Light: 110
-			Medium: 75
-			Heavy: 60
-			Concrete: 50
-
 HMGh:
 	Inherits: HMG
 	ValidTargets: Ground, Vehicle
 	Burst: 2
 	BurstDelays: 1
 	ReloadDelay: 50
-	Warhead@1Dam: SpreadDamage
-		Damage: 2000
+	Warhead@Bullet_Medium:
 		ValidTargets: Ground
 		InvalidTargets: Infantry
 
@@ -1756,33 +1719,6 @@ Rocketeer:
 			Medium: 20
 			Heavy: 10
 			Concrete: 15
-
-Rocketeer_o:
-	Inherits: HMG
-	ReloadDelay: 18
-	Range: 2560
-	ValidTargets: Ground
-	Warhead@1Dam: SpreadDamage
-		Damage: 2250
-		DamageTypes: TriggerProne, SmallExplosionDeath
-		ValidTargets: Ground
-		Versus:
-			None: 120
-			Wood: 90
-			Light: 100
-			Medium: 90
-			Heavy: 60
-			Concrete: 35
-
-Rocketeer_t:
-	Inherits: Rocketeer_o
-	Burst: 4
-	Range: 3840
-	BurstDelays: 4
-	ReloadDelay: 40
-	ValidTargets: Ground, Air
-	Warhead@1Dam: SpreadDamage
-		ValidTargets: Ground, Air
 
 DroneJump:
 	ReloadDelay: 45
