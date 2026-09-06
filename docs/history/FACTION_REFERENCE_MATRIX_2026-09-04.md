@@ -445,7 +445,7 @@ on **4 pairs** against 7 reference rows.
 
 ---
 
-> ⭐ **Picking this work up?** Read [`REFERENCE_PIPELINE_HANDOFF.md`](REFERENCE_PIPELINE_HANDOFF.md) first — it carries the
+> ⭐ **Picking this work up?** Read [`REFERENCE_PIPELINE_HANDOFF.md`](../design/REFERENCE_PIPELINE_HANDOFF.md) first — it carries the
 > design decisions, the sources still to ask the maintainer for, and every trap this build hit.
 
 # PART V — THE PREREQUISITE HOP, AND WHERE THE ANCHORS CAN NOW BE FITTED (2026-09-05)

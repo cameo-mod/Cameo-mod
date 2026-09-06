@@ -1,6 +1,230 @@
 # Development Log
 
 
+## Claude-Local (Opus 5) -- ⛔ STOP: Ruling 13's four worked examples are WITHDRAWN. They are maintainer-curated composites. (2026-09-06, late evening)
+
+**Identity:** Claude-Local, Opus 5. Fleet coordinator. **Read this before your next commit if
+you are touching any `D2K_Rocket_Trooper*` weapon.**
+
+### The stop
+
+**`D2K_Rocket_Trooper_AA`, `D2K_Rocket_Trooper_AGOnly`, `D2K_Rocket_Trooper1` and
+`D2K_Rocket_Trooper2` are NOT W24 debt.** They are registered in
+`tools/audit/intentional_composites.py` under the category **`"maintainer-curated
+signature"`** — reviewed, deliberate multi-main weapons — and they are registered as PAIRS
+that must carry the same main set:
+
+```
+"maintainer-curated signature": (
+    (("IxianCombatTankCannon", "HeavyIxianCombatTankCannon"),
+     ("CannonAP_Light", "CannonHE_Heavy")),
+    (("D2K_Rocket_Trooper1", "D2K_Rocket_Trooper_AA"),
+     ("Flak_Medium", "MissileAP_Heavy", "MissileAP_Light")),
+    (("D2K_Rocket_Trooper2", "D2K_Rocket_Trooper_AGOnly"),
+     ("CannonHE_Medium", "Demolition_Light", "Railgun_Heavy")),
+)
+```
+
+**Measured in the working tree, 15:40, uncommitted:**
+
+| weapon | registry says | live now |
+|---|---|---|
+| `D2K_Rocket_Trooper1` | Flak_Medium, MissileAP_Heavy, MissileAP_Light | **unchanged (3)** |
+| `D2K_Rocket_Trooper_AA` | *(same three — it is Trooper1's pair)* | **collapsed to `MissileAA_Medium`** |
+| `D2K_Rocket_Trooper2` | CannonHE_Medium, Demolition_Light, Railgun_Heavy | **unchanged (3 + twin)** |
+| `D2K_Rocket_Trooper_AGOnly` | *(same three — it is Trooper2's pair)* | **collapsed to `MissileAP_Medium`** |
+
+**Both curated pairs are now half-collapsed.** Whoever is holding
+`mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`: **revert those two weapons and do not
+commit them.** `git diff` that file and drop the `D2K_Rocket_Trooper_AA` and
+`D2K_Rocket_Trooper_AGOnly` hunks; everything else in your diff is fine. If you already
+walked `BROADCAST_BASELINE` from 75 down to 72 for them, walk it back to 75 — a ratchet
+lowered for work that gets reverted is a ratchet that can never be met again.
+
+### This is my error, and it is the SECOND time today
+
+I ruled on four specific weapons without checking whether they were already reviewed. That is
+precisely what I wrote `docs/TASK_INDEX.md` to prevent this afternoon, and I did it anyway,
+two hours later, in the same session. **Add this to your reading before any W24 collapse:**
+
+> **`tools/audit/intentional_composites.py` is the list of multi-main weapons that have
+> ALREADY been reviewed and deliberately KEPT.** Check it before you collapse anything.
+> `python tools/audit/intentional_composites.py --snapshot` shows the live state.
+
+I am adding it to the TASK_INDEX weapon-structure row in this same commit.
+
+### The systemic cause, which is worth more than the four weapons
+
+**`audit_warhead_split.py` does not import `intentional_composites` at all.** Its FAIL 1
+"broadcast fingerprint / every MAIN identical" list therefore includes maintainer-curated
+composites as if they were debt — `D2K_Rocket_Trooper2` is sitting in FAIL 1 right now while
+the registry says it is reviewed and intentional. `audit_three_way_split` DOES consult the
+registry (that is where its "224 reviewed — exact intentional composites" line comes from).
+
+So the two audits disagree about the same weapons, and FAIL 1 — the list we are all working
+from — is the one that is wrong. That disagreement is what produced Aurora's four candidates,
+my ruling, and the half-collapsed pairs. It will keep producing them.
+
+**Assigned to Nova (tooling lane):** make `audit_warhead_split` FAIL 1 consult
+`intentional_composites.reviewed_fingerprints()` the way `audit_three_way_split` does, and
+subtract the registered composites from the count. Then re-establish `BROADCAST_BASELINE` at
+the new lower number in the same commit and say what it moved from and to. Excluding reviewed
+weapons LOWERS the count, so this is a legal ratchet move; nothing about it raises anything.
+
+### And it explains the zero-byte report — I was wrong about that too
+
+I wrote earlier that `docs/audit/latest/three_way_split.md` being 0 bytes was *"a real bug in
+how `run_all.sh` invokes it"*. **It is not.** `run_all.sh` captures stderr to a sidecar, and
+`docs/audit/latest/three_way_split.err` holds the answer:
+
+```
+ValueError: intentional composite registry is stale or invalid:
+- D2K_Rocket_Trooper_AA: stale expected_reachability
+- D2K_Rocket_Trooper_AA: stale mains
+- D2K_Rocket_Trooper_AA: stale main_digest
+- D2K_Rocket_Trooper_AA: stale weapon_digest
+```
+
+The audit **hard-failed on purpose**, because a curated composite had been changed underneath
+it. The empty report was the guard working, not a runner bug. My earlier hand-run succeeded
+only because it ran before the collapse landed.
+
+⚠ **So the `.err` sidecar is where a zero-byte report explains itself.** When you find one:
+`cat docs/audit/latest/<name>.err` BEFORE concluding anything. I skipped that step and
+guessed; the sidecar had the whole answer sitting next to the empty file.
+
+⚠ And **do not "fix" this by running `intentional_composites.py --write`.** That would stamp
+the collapse into the registry as if the maintainer had curated it. `--write` is for when a
+curated weapon legitimately changes and the maintainer has said so. Revert the weapons; the
+registry is already correct.
+
+### What still stands from Ruling 13
+
+The **three survivor tests** are unaffected and remain the rule for genuine debt: delivery
+must match the resolved `Projectile:`, level must match the actor's tech tier, prefer an
+incumbent family. The **VERBATIM value rule** (this morning's correction, Ember's evidence)
+also stands. What is withdrawn is only my application of them to four weapons that were never
+debt in the first place.
+
+The order of checks for any W24 collapse, final form:
+
+1. **Is it in `intentional_composites.py`?** If yes, STOP. It is reviewed. Not your call.
+2. Are its mains **equal-damage**? If yes it is a fold artifact → collapse, **verbatim** value.
+3. Unequal mains → Ruling 11: W24 debt pile, not in scope.
+4. Survivor family: the three tests.
+5. `review_resolve_diff.py`, `find_empty_warhead.py` = 0, boot gate, then walk the baseline
+   down by exactly what you collapsed.
+
+### Boot gate, for the record
+
+I boot-gated the tree at **15:36:07** — menu reached, `perf.log` carries
+`MenuPostProcessEffect.PostWorldLoaded`, **0** `exception-*.log`, process killed. That was with
+the half-collapsed troopers in the tree, so the revert does not need a fresh gate to be safe;
+it needs one to be committed.
+
+⚠ One correction to my own method while I am at it: my first gate script counted exception
+logs with `ls | grep -c "^exception"`, which matched a stray `exceptions_before.txt` someone
+left in `%APPDATA%/OpenRA/Logs` and reported a crash that never happened. **Match
+`^exception-.*\.log$`, or use PowerShell's `-Filter "exception-*.log"`.** A boot gate that can
+report a false failure is as bad as one that can report a false pass.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## Claude-Local (Opus 5) -- CORRECTION to Ruling 13: the value rule is VERBATIM, not SUM (2026-09-06, late evening)
+
+**Identity:** Claude-Local, Opus 5. Fleet coordinator.
+
+Nova flagged the collision, Ember produced the evidence, Aurora withdrew her own
+recommendation before I had ruled. All three were right and I was wrong. Correcting it
+immediately, because people are collapsing weapons on it right now.
+
+### RULING 13 amended -- clause 4 of the collapse procedure
+
+> ~~Damage = the SUM, verbatim.~~
+> **Damage = the surviving main's own written value, VERBATIM. Never the sum.**
+
+**Why I was wrong.** I endorsed Aurora's SUM without checking the provenance of the
+multi-main state, which is the one thing that decides the question. Ember measured the
+signed precedent end to end: `8748c68e4` (HydraSpit, maintainer-signed) went from 4 mains at
+**18000 each** to ONE `^Warhead_BulletChem_Light` at **18000** -- and
+`audit_warhead_split.py`'s own retired exemption comment records that PR 287 *"accidentally
+multiplied Hydralisk's ground damage"*. **The N-fold WAS the bug.** Summing would re-create
+by hand the exact defect the signed fix removed, on 75 weapons at once.
+
+**The general rule, stated so it does not need re-litigating:**
+
+* **Equal-damage mains = a FOLD ARTIFACT.** N mains carrying the SAME `Damage` and the same
+  `ValidTargets` is the fingerprint of a refactor that duplicated one warhead across
+  families. The original single value is the design; the multiplication is the accident.
+  **Collapse to that value verbatim.** This is the entire W24 FAIL-1 "broadcast" population
+  -- the earlier batches are even named for it (*"batch collapse 52 same-family
+  **equal-damage** multi-main weapons"*).
+* **Unequal-damage mains = possible AUTHORED composite**, where the design might really be
+  the total. **Not in scope, and not to be guessed at.** Ruling 11 already put those 287
+  weapons in the W24 debt pile; they stay there until someone brings a signed example.
+
+Everything else in Ruling 13 stands unchanged: the three survivor tests (delivery matches
+the resolved `Projectile:`, level matches the tech tier, prefer an incumbent family), and
+`review_resolve_diff.py` before/after on every one. Under §12.0h MEAN-100 the family choice
+cannot move average damage, so with VERBATIM the collapse is close to damage-neutral by
+construction -- which is the strongest argument that it was the right convention all along.
+
+**Nova's separate point is accepted and not answered by this:** a weapon deliberately built
+so that its output IS the total would need its own ruling. Nothing in the current slice is
+signed as one, so nobody should be looking for it. Bring me a signed example if you find it.
+
+Good process, all three of you. A flagged collision, a measured precedent and a withdrawn
+recommendation beat a coordinator's fast answer, and that is exactly the shape I asked for.
+
+### Two live-tree notes from the same half hour
+
+**1. `find_empty_warhead` went 0 -> 1 and back to 0 while I was measuring it.**
+`Laboratory_Bioball` carried a bare `Warhead@Demolition_Light:` whose type source had gone
+-- the classic orphaned-override boot NRE. HEAD's committed report said 0, the tree said 1.
+By the time I had the fix written the owner had already restored
+`Warhead@Demolition_Light: AreaDamage`, so I wrote nothing. Two things worth keeping:
+
+* **A gate reading is a snapshot of a tree several people are writing to.** Re-measure
+  before you report a gate red, and say what time you measured.
+* **The right fix for an orphaned override is to restore its TYPE, not to delete the
+  block** -- restoring the type is behaviour-neutral and clears the crash; deleting a main
+  is a W24 design decision that belongs to the lane owner. Whoever fixed it chose correctly.
+
+**2. `docs/audit/latest/` is NOT being refreshed by me after all.** My full
+`bash tools/audit/run_all.sh` finished (`exit=1`, which is the advisory-audit exit, not a
+gate failure) and cleared seven of the eight zero-byte reports. I am leaving the refresh
+UNCOMMITTED because the tree is hot: `darkreign`, `generals`, `outpost2`, `shockwave`,
+`TiberianDawn/GDI` and `D2k/Ordos` weapon and rules files are all being edited right now
+(Ruling 12's EMP renames, by the look of it). Reports generated mid-rename would be stale
+before they landed. **Whoever finishes the rename sweep last: regenerate `latest/` WHOLE and
+commit it, and run the zero-byte check first.**
+`docs/audit/latest/three_way_split.md` is still 0 bytes after a clean suite run even though
+the audit produces 19 KB by hand -- that one is a real bug in how `run_all.sh` invokes it,
+and it is worth ten minutes from whoever owns the runner.
+
+### Documentation, since it is the maintainer's standing priority
+
+* `audit_doc_health` is **fully green for the first time: all eight checks at 0.** D1 was
+  **7,924**. Ember's D-1 rewrite was correct in substance -- I re-ran both tools and every
+  pasted number matches (`4520` peer rows / `21` sources / `22 of 24` routed / `410`-`352`-
+  `269` grounding) -- but the file had two UTF-16LE blocks and five smaller runs pasted
+  inside it, 7,918 NUL bytes in a 20 KB document. Repaired in place, content preserved.
+  ⚠ **Ember: that is the D-6 hazard landing in your own output.** Capture tool output through
+  `bash`, or `python ... | tee`, never a PowerShell redirect.
+* D3's last broken link is gone. ⚠ **Correcting myself before anyone acts on it:** I first
+  read this as `REFERENCE_PIPELINE_HANDOFF.md` being missing from the repo. It is not — it has
+  been tracked at `docs/design/REFERENCE_PIPELINE_HANDOFF.md` since `85bcf3f33`. The actual
+  defect was one wrong RELATIVE path: `docs/history/FACTION_REFERENCE_MATRIX_2026-09-04.md`
+  linked it as a sibling instead of `../design/`. Repointed, and I added a scope header saying
+  the file holds PROCEDURE and TRAPS while rulings R1-R15 stay in
+  `REFERENCE_EXTRACTION_PLAN.md`, so it cannot become a second source of law. Its §8 -- nine
+  real bugs, each with the guard and test that now catches it -- is the part worth your time,
+  and `TASK_INDEX.md` now routes the reference lane to it.
+* `weapon_suffixes` X4 is 0: the two findings were `HE` = High Explosive, not the deprecated
+  elite `E`. Fixed in the detector, evidence in Ruling 12.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
 ## Devin-Nova - periodic scans discharged: recent_changes + security stamped; worktree-scan bug fixed (2026-09-06, evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.

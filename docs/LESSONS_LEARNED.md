@@ -42,6 +42,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 - [⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)](#-never-hand-parse-yaml--a-sibling-node-silently-overwrote-every-versus-number-2026-08-22)
 - [⛔ `Node.child()` is an EXACT match — 97% of the mod's producers were invisible (2026-09-06)](#-nodechild-is-an-exact-match--97-of-the-mods-producers-were-invisible-2026-09-06)
+- [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
 - [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
@@ -164,6 +165,50 @@ the threshold behavior.
 - Weapon children that need a different concrete value should override with a
   single `Warhead@Concrete:` key; matching keys merge, so only the last value
   survives.
+
+## ⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)
+
+Rule 8 already warns that regenerating `docs/audit/latest/` from an INCOMPLETE tree makes a
+dozen audits scan a smaller corpus, report FEWER findings and still say PASS. This is the
+same damage from a different cause, and it slips past the defence rule 8 built.
+
+**What happened.** A `run_all.sh` run was interrupted. It left **eight reports at 0 bytes** —
+`balance_sheet`, `dead_warhead_fields`, `display_text`, `duplicate_inherits`,
+`hex_shield_routing`, `impact_glow_preservation`, `meter_dilution`, `three_way_split` — plus
+`weapon_suffixes.md` truncated to 289 bytes. `git diff --stat docs/audit/latest/` read
+**24 files, −52,063 lines**. Committing that would have deleted the evidence base with a
+board that looked perfect: the truncated `weapon_suffixes.md` reported **X1–X5 all zero**
+when the real numbers were X2 = 10 and X3 = 10.
+
+**Why the existing guard does not catch it.** `tools/audit/environment.py` printed
+`complete environment` — the tree was fine, so `run_all` correctly wrote to `latest/` rather
+than diverting to `degraded/`. The corpus never shrank; the RUN did. And an emptied file is
+an ordinary modification in `git status`, indistinguishable at a glance from a report that
+legitimately went from findings to none.
+
+**The check, before any commit that touches `docs/audit/latest/`:**
+
+```sh
+find docs/audit/latest -name "*.md" -size 0     # must print nothing
+```
+
+**⛔ READ THE `.err` SIDECAR FIRST — it is sitting right next to the empty file.**
+`run_all.sh` writes each audit's stderr to `docs/audit/latest/<name>.err` and deletes it when
+empty, so a zero-byte report with a surviving `.err` beside it has already explained itself. I
+guessed "a bug in how run_all invokes it" for `three_way_split.md` when
+`three_way_split.err` held the real answer — `ValueError: intentional composite registry is
+stale or invalid`, a HARD FAILURE ON PURPOSE because a maintainer-curated composite had been
+changed underneath it. The empty report was the guard working. Two different causes produce
+the same zero-byte file, and only the sidecar tells them apart:
+
+* **`.err` present** — the audit ran and refused. Read it; it is usually a real finding.
+* **`.err` absent** — the run was interrupted. Regenerate.
+
+**And the diagnosis rule.** A large deletion count in `docs/audit/latest/` is a red flag, not
+a success. Before believing that findings dropped, re-run one of the emptied audits by hand
+and compare its corpus line — `dead_warhead_fields` prints `scanned N resolved warhead nodes`
+and `N` must not move unless the tree really changed. All eight audits here ran clean by hand
+at exit 0, which is what proved the reports, not the audits, were the damaged thing.
 
 ## ⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)
 
