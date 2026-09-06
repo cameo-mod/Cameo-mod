@@ -1,5 +1,15 @@
 # Development Log
 
+## Codex - Reconcile conflicting weapon-conversion directions (2026-09-07)
+
+Removed the stale exemption/snapshot routing from TASK_INDEX and aligned DESIGN's
+older SUM paragraph, the old four-inherit split plan and program-plan instructions
+with current DESIGN section 11b.1. Historical examples remain labeled as history;
+no new survivor family or payload policy is invented. Independent review confirmed
+these contradictions. Ambiguous staged/routed conversions remain review decisions,
+not grounds for automatic arithmetic changes. Scope and open decisions are recorded
+in ASTRA_REVIEW.md; this is not a claim that every repo document is reconciled.
+
 ## Codex - Fail-closed audit and equivalent weapon source cleanup (2026-09-07)
 
 Ledger claim measurement can no longer report zero drift after a failed audit;

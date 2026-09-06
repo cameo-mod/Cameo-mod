@@ -41,10 +41,11 @@ roster, so pricing first means pricing inputs we are about to replace:
 | armament slots whose `K` moves when those collapse | **1 547** (2026-08-17 snapshot) |
 | fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** (2026-08-17 snapshot) — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
-Collapsing N mains into 1 preserves the damage SUM (`formula.spread_damage_sum`) but **not
-`K`** — `K` is share-weighted over each warhead's armor profile, so picking ONE family changes
-the profile and therefore the price. Retrofitting a legacy template onto a family changes it
-again.
+Changing the warhead structure can change both delivered damage and **`K`** — `K`
+is share-weighted over each warhead's armor profile, so picking ONE family changes
+the profile and therefore the price. Use the current conversion policy in DESIGN
+§11b.1; do not infer behaviour preservation merely from a raw damage sum.
+Retrofitting a legacy template onto a family changes pricing inputs again.
 
 ⚠ **The anchor table already said so.** `class_anchors.json` → `mbt.provisional`: *"DPS restat
 DEFERRED to the cannon/weapon rebuild."* The decision to wait was written into the data before
@@ -309,7 +310,14 @@ inherits.
 ⚠ **Which makes DESIGN §11b's "collapsing preserves the SUM" ambiguous here.** Preserving 30 000
 locks the accident in as intent; collapsing to 2 000 is a 15× nerf.
 
-**RECOMMENDATION — preserve the SUM anyway, and let the pricing pass fix the magnitude.** Not
+**Historical recommendation — SUPERSEDED by DESIGN §11b.1 (2026-09-06).**
+The following former argument to preserve the SUM and let pricing fix magnitude
+is retained as history, not an operational instruction. In particular, preserving
+a raw sum does not establish behaviour neutrality across different profiles,
+targets, delays or area shapes. Current conversions follow §11b.1 and require a
+reviewed payload comparison where the simple duplicated-main case does not apply.
+
+**Former recommendation: preserve the SUM anyway.** Not
 because 30 000 is right, but because:
 * it keeps W24 a **behaviour-neutral refactor**, which is the only version that can be VERIFIED —
   `dump_resolved`/`review_resolve_diff` must diff empty, and a boot gate then means something;
@@ -2866,8 +2874,11 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 directly fired weapons, **243** carry 2 or more damage
 warheads, worst case **6**. Including indirect weapon-graph reachability gives **299**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
-conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created
-rather than forcing a bad one (maintainer, 2026-08-16). Two already identified:
+conversion. This paragraph's counts and examples are historical. The former blanket
+SUM instruction is superseded by DESIGN §11b.1; use its current value policy and
+review non-identical or staged payloads rather than assuming equivalence. Where no
+family fits, propose a NEW family rather than forcing a bad one (maintainer,
+2026-08-16). Two historically identified examples:
 `Waveforce` (Plasma × Quantum) for the Japanese energy rifles, and `Plasma` for
 `GladiusCannon`, which inherits `PhotonCannon`.
 

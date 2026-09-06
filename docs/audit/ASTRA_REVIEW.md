@@ -308,3 +308,28 @@ only our engineer subtype metadata: preserve both sides' intended metadata and
 regenerate, rather than choosing an entire ledger. No shared runtime implementation
 file conflict was found. PR 323 also remains unchanged; its graph adaptation is
 contained here with attribution.
+
+## Completed: remove conflicting operational document directions
+
+Independent review confirmed four concrete authority/routing contradictions:
+TASK_INDEX combined the retired registry with a keep-exemption instruction and a
+nonexistent snapshot option; DESIGN's older collapse paragraph prescribed SUM
+below the newer VERBATIM ruling; the split plan still taught two warheads/four
+inherits; and the program plan still recommended SUM for duplicated mains.
+
+These now point to the current DESIGN section 11b.1. Older implementation plans
+and dated examples remain explicitly historical, not executable directions. The
+text distinguishes a retained per-main value from the former raw aggregate and
+does not call either arithmetic shortcut proof of unchanged delivered behaviour.
+No new family choice, damage value or staged-payload policy is inferred. This is
+a scoped contradiction repair, not certification of every document in the repo.
+
+## NEEDS A MAINTAINER RULING
+
+The safe choice for this run is no live repricing and no speculative weapon
+collapse. All 27 anchors remain unsigned; unequal, target-routed, delayed or
+companion payload conversions require reviewed intent, not a bulk sum/drop rule.
+The three classified engineers do not settle the remaining 52 no-template and
+199 no-class buildable unit-like rows. Broader air/naval/economy taxonomy choices
+remain open. External research briefs are prepared but answers are not available.
+Coordinator review of PR 329 is the next publication gate, not automatic merge.

@@ -903,9 +903,12 @@ warhead system expresses in ONE warhead.
 
 ### Collapsing a multi-warhead weapon
 
-1. **Sum is preserved.** The survivor's `Damage` = Σ of the old warheads' damage, each
-   first mapped through its own family ratio (`formula.spread_damage_sum`, the SUM law).
-   Collapsing must never change what the weapon deals in total.
+1. **Follow the current value rule in §11b.1.** Its VERBATIM rule supersedes the older
+   blanket instruction to sum duplicated equal-damage mains. Keeping one authored
+   main's value is not the same as preserving the former raw aggregate damage, and
+   must not be described as behaviour-neutral. Unequal, target-routed, delayed or
+   companion payloads still need a reviewed conversion: neither automatic summing
+   nor silently dropping a payload establishes equivalent delivered behaviour.
 2. **Pick the family that matches the weapon's IDENTITY**, not the one with the largest
    damage — check what it actually is (its projectile, its lore, its role).
 3. ⚠ **If no existing family fits, CREATE A NEW ONE — do not force a bad fit.**
