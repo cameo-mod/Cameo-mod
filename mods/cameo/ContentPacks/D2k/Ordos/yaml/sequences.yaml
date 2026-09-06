@@ -1942,4 +1942,49 @@ heavy.ordos:
 		Start: 4353
 		Offset: -30,-24
 
+# Migrated from legacy mods/cameo/sequences/d2k.yaml (Ruling 9 sequences)
 
+minipower.ordos:
+	Inherits: minipower.atreides
+	idle:
+		Filename: d2k_mini_windtrap.shp
+		Start: 2
+	damaged-idle:
+		Filename: d2k_mini_windtrap.shp
+		Start: 3
+	icon:
+		Filename: d2k_mini_windtrap_icon.shp
+		Start: 1
+
+d2k_munitions.ordos:
+	Inherits: d2k_munitions.atreides
+	idle:
+		Filename: ixian_munitionssilo_d2k_munitions.shp
+		Start: 4
+	damaged-idle:
+		Filename: ixian_munitionssilo_d2k_munitions.shp
+		Start: 5
+	icon:
+		Filename: ixian_munitionssilo_icon.shp
+		Start: 1
+
+####################################################
+#		   MISC
+####################################################
+
+faction.ordos:
+	idle:
+		Filename: ordosicon.shp
+	icon:
+		Filename: ordosicon.shp
+
+ordos_eye_bombs:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2253
+		Facings: -8
+		Transpose: true
+		ZOffset: 1023
