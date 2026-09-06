@@ -7,7 +7,7 @@ anchor: `SPEC(20000,60,5000,60,1,100)` (cost0 100, O0 420.00, P0 168.00, Q0 28.8
 | `E1` | 100 | 253 | +153% ❗ |
 | `asianalliance_asianmilitia` | 110 | 133 | +21% ⚠ |
 | `atreides_lightinfantry` | 150 | 330 | +120% ❗ |
-| `conehead2.nax` | 500 | 602 | +20% ⚠ |
+| `naxis_conehead2` | 500 | 602 | +20% ⚠ |
 | `corrino_lightinfantry` | 150 | 330 | +120% ❗ |
 | `forgotten_mutant` | 160 | 157 | -2% |
 | `forgotten_mutant_sp` | 160 | 389 | +143% ❗ |
@@ -35,5 +35,5 @@ anchor: `SPEC(20000,60,5000,60,1,100)` (cost0 100, O0 420.00, P0 168.00, Q0 28.8
 | `tkm_rifleman` | 120 | 137 | +14% ⚠ |
 | `ts_gdi_lightinfantry` | 120 | 160 | +33% ❗ |
 | `ts_nod_lightinfantry` | 120 | 195 | +63% ❗ |
-| `undead.nax` | 100 | 107 | +7% |
+| `naxis_undead` | 100 | 107 | +7% |
 | `zerg_spithid` | 300 | 853 | +184% ❗ |

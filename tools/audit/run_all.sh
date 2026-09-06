@@ -60,11 +60,12 @@ export PYTHONIOENCODING=utf-8
 for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai ai_personalities sequences \
          metadata outliers orphans assets fluent power_budget stat_formulas \
          weapon_uniqueness garrison_weapons asset_files promotion_gating min_range \
-         basebuilder_crates buildable_order display_text rename_safety \
+         basebuilder_crates buildable_order display_text rename_safety naming_damage \
+         map_actors \
          missing_elite elite_gating rank_decoration \
          dune_rank_decoration effect_warhead_names weapon_suffixes \
          balance_sheet consistency_report packs balance_drift \
-         duplicate_keys split_definitions weapon_shape \
+         duplicate_keys split_definitions weapon_shape shrapnel_chains \
          template_conformance multiplier_modifiers nuclear_flash_bindings \
          ts_death_palette warhead_split physical_state_warheads \
          unique_traits armor_upgrade_harm plating_exclusivity k_linearity percentage_runtime \

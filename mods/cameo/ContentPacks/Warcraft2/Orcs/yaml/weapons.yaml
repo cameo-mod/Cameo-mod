@@ -194,6 +194,12 @@ wc2catapultFire:
 		Explosions: idle
 		ImpactSounds: explode.aud
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
 	Warhead@Concussion_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 90000

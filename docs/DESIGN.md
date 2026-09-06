@@ -69,6 +69,17 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   _ai _water _EMP _AA _upgraded _slave _air _backup _segment _bomber
   _paradrop _chrono _hmg _mg _missile _repair _empty _plug _bot _defense
   _deployed` plus dotted variants (`.husk`) and paradrop twins (`para`).
+- **The dot rule** (maintainer ruling 2026-09-06). A dot marks a **VARIANT of the
+  base actor named before it** — `camera.spysat`, `powerproxy.emp`,
+  `ra2gacnst.infiltrated`, `carryall.paradrop`, `fact.colorpicker`, `hack.rank_3`
+  are all legal, exactly as `.husk` always was. ⛔ **A dot may NEVER carry a
+  faction.** `ptnk.asian` and `rocket_raider.ixian` put the faction in the suffix
+  where the grammar requires it as the PREFIX, and those are the only dotted ids
+  that are renaming debt: `ptnk.asian` -> `asianalliance_plasmatank`. The rule is
+  what makes the two cases distinguishable by a tool rather than by taste, and
+  `audit_naming_damage.py` N5 enforces exactly it. (Before this ruling, all 398
+  dotted ids read as backlog; 237 were husks, 52 were variants, and only 109 were
+  ever real.)
 - **Tooltip ↔ id consistency**: the id's name group derives from the
   Tooltip Name and both stay in sync. No two actors of a faction may share
   a Tooltip Name (audit_metadata M1). New display names are a **design

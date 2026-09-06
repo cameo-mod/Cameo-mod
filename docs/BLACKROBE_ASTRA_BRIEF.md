@@ -11,6 +11,51 @@
 
 ---
 
+## ⛔ ADDENDUM 2026-09-07 — read this before Part 0; four things changed under you
+
+**1. Use a `git worktree`, not `git checkout -b`.** Part 0.1 still says
+`git checkout -b astra/balance-pipeline`. The main checkout is SHARED — a checkout there
+moves every other agent's working directory and destroys their uncommitted work. It
+happened twice on 2026-09-06. Do this instead:
+
+```
+git fetch origin
+git worktree add C:/tmp/astra-balance -b astra/balance-pipeline origin/master
+cd C:/tmp/astra-balance
+```
+
+⚠ A worktree has **no `engine/`** (it is gitignored, main-checkout only), so it cannot
+boot-gate until you link it:
+`cmd /c mklink /J C:/tmp/astra-balance/engine <main-checkout>/engine` (use backslashes if cmd complains)
+
+Full model: `../Cameo-mod-fleet/WORKTREE_PROTOCOL.md`. One repository, many working
+directories — you are isolated in FILES, never in history, so every commit and branch is
+visible repo-wide with no push.
+
+**2. `master` has moved a long way.** Branch from `origin/master`, not from
+`weapon_structure_and_warhead_fold`. Everything from the 2026-09-06/07 bug hunt is on
+master now.
+
+**3. Four new gates exist, and one of them will stop a commit of yours.**
+`bash_guard.py` **rule 4** refuses any commit whose yaml diff deletes a `-Key@...`
+removal node unless the message contains `RESOLVE-VERIFIED`. That is not bureaucracy:
+deleting those nodes twice cost ~800 weapons and made the mutalisk's shrapnel bounce
+forever. Also new: `audit_shrapnel_chains`, `audit_map_actors`, `audit_naming_damage` —
+all in `run_all.sh`.
+
+**4. The rule behind all of it, now `CLAUDE.md` rule 8g:** `-Key@X:` in a child CANCELS
+what an ANCESTOR defines. It looks dead precisely because the node it sits in does not
+define X. **Never judge an override by the node it sits in** — and the same trap exists
+one layer up in C#: a field absent from the concrete warhead type may be on its BASE
+class (that one nearly shipped friendly fire onto a sniper rifle).
+
+**Your mission is unchanged and still outranks everything else: finish the balance
+pipeline.** Two new specs were written on 2026-09-07
+(`design/EFFECT_SOUND_TEMPLATES.md`, `design/COLORPICKER_PREVIEW.md`) — they are
+self-contained and explicitly **below** pricing. Do not start them instead of Tasks A–G.
+
+---
+
 ## PART 0 — THE RULES OF ENGAGEMENT. READ THIS PART TWICE.
 
 ### 0.1 Your branch, and the one thing you must never do

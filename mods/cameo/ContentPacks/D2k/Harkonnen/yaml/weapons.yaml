@@ -16,7 +16,7 @@ HarkonnenFlameTurret:
 		LaunchAngle: 10, 20
 		Image: tsflameall
 		Palette: tseffect
-	Warhead@Flame_Medium: AreaDamage
+	Warhead@Flame_Medium:
 		PercentageScale: 3183
 		Damage: 25135
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
@@ -26,6 +26,9 @@ harkonnen_autogunturret:
 	ReloadDelay: 132
 	Burst: 26
 	BurstDelays: 2
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -63,7 +66,7 @@ ExplosiveDebris:
 		LaunchAngle: 150, 220
 		Inaccuracy: 2c512
 		BounceCount: 1
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		PercentageScale: 53333
 		Damage: 3000
 		Spread: 1c562

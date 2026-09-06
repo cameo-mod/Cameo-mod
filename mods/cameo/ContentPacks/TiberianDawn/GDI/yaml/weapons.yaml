@@ -77,7 +77,7 @@ GrenadeExplode:
 	Inherits@2: ^Projectile_Grenade_Light
 	Inherits@3: ^Effect_Demolition_Light
 	Report: M203.aud
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 8000
 RocketsAMT:
 	Inherits: Rockets
@@ -125,6 +125,8 @@ APCGun:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -137,6 +139,8 @@ APCGun_AA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 4000
@@ -192,6 +196,13 @@ BoxerCannonAG:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@LightMissile:
+	-Warhead@MediumCannon:
+	-Warhead@SmallArms:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 12000
@@ -228,6 +239,11 @@ BoxerCannon_AA:
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
+	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@LightMissile:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 12000
@@ -268,6 +284,10 @@ SkyshieldCannon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 1
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
 	Warhead@Flak_Heavy:
 		ValidTargets: Air
 		Damage: 8000
@@ -328,7 +348,14 @@ ArcherArtilleryShell:
 		Damage: 14000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 7
+	-Warhead@Effect:
 
+	-Warhead@MediumCannon:
+	-Warhead@HeavyCannon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
 	Warhead@Concussion_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 56000
@@ -373,7 +400,7 @@ MachineGunAPH:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 543
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -388,7 +415,7 @@ MachineGunAPH:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 1086
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 16000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -524,6 +551,14 @@ OrcaMissiles:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	-Warhead@HeavyCannon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumMissile:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -570,6 +605,8 @@ Napalm:
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Heavy:
 	Warhead@Flame_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 12000
@@ -614,6 +651,8 @@ NapalmA10Carrier:
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Heavy:
 	Warhead@Flame_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -744,6 +783,15 @@ TowerMissile:
 		ImpactSounds: xplobig4.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumMissile:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -821,6 +869,13 @@ MissileSoldierWeapon:
 		Explosions: blue_building_napalm
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@HeavyMissile:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 51000
@@ -882,6 +937,19 @@ Grenade_EMP:
 		InvalidTargets: Shielded
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 		ValidRelationships: Neutral, Enemy
+	-Warhead@TeslaChargedWeapon:
+	-Warhead@TeslaChargedExtraDamage:
+	-Warhead@TeslaWeapon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyCannon:
+	-Warhead@MediumCannon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyMissile:
+	-Warhead@Tesla_Super_ExtraDamage:
+	-Warhead@EMPUnit:
 	Warhead@Tesla_Super:
 		ValidTargets: Ground, Water
 		Damage: 32000
@@ -975,21 +1043,26 @@ GDISniperRifle:
 		Speed: 2500
 		Width: 100
 		-LaunchAngle:
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -1002,6 +1075,7 @@ GDISniperRifle:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
+	-Warhead@SniperMediumMissile:
 	Warhead@SniperFlak:
 		Damage: 8000
 	Warhead@SniperSmallArms:
@@ -1043,6 +1117,7 @@ GDISniperRifle:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
+	-Warhead@SniperFlak:
 
 MachineGunHumvee2:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -1114,6 +1189,8 @@ RocketsHumvee2AMT:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 16000
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Light:
 	Warhead@MissileAP_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 32000
@@ -1125,6 +1202,8 @@ RocketsHumvee2AMT_AA:
 	ValidTargets: Air
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_HeavyFlatCompatibility:
 	Warhead@MissileAA_HeavyFlatCompatibility:
 		ValidTargets: Air
 		Damage: 32000
@@ -1154,6 +1233,14 @@ TDShotgun:
 		Damage: 1
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@MediumCannon:
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1172,7 +1259,7 @@ GDIPredatorTankCannon:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 588
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -1187,7 +1274,7 @@ GDIPredatorTankCannonHV:
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 1176
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 16000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -1315,6 +1402,8 @@ OfficerMachineGun:
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
 		Damage: 8000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -1414,6 +1503,13 @@ GDIRigPhalanx:
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
+	-Warhead@TankDestroyerCannon:
+	-Warhead@SmallArms:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumCannon:
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		Damage: 24000
 		PercentageScale: 0
@@ -1504,6 +1600,8 @@ CommandoSniper:
 		Width: 111
 		Inaccuracy: 11
 	TargetActorCenter: false
+	-Warhead@SniperWeapon:
+	-Warhead@SniperWeaponExtraDamage:
 	Warhead@LegacySniperOpenToppedDamage: OpenToppedDamage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Amount: 1
@@ -1533,6 +1631,7 @@ CommandoSniper:
 		Damage: 10
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 10
 		Spread: 1
@@ -1545,6 +1644,9 @@ CommandoSniper:
 		Falloff: 100, 0
 		Damage: 20000
 		PercentageScale: 0
+	-Warhead@SniperMediumMissile:
+	-Warhead@SniperFlak:
+	-Warhead@SniperSmallArms:
 	Warhead@SniperChaingun:
 		Damage: 20000
 		FriendlyFireDamage: 100
@@ -1580,6 +1682,7 @@ CommandoRocketLauncher:
 		Explosions: blue_building_napalm
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
+	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Air, Water
 		Damage: 40000
@@ -1605,6 +1708,10 @@ CommandoGrenadeLauncher:
 		ValidTargets: Ground, Ship
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@Concussion_Medium:
 		Damage: 40000
 		PercentageScale: 0
@@ -1661,6 +1768,9 @@ CommandoM16:
 		Damage: 2
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 2
+	-Warhead@SniperWeapon:
+	-Warhead@SniperWeaponExtraDamage:
+	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1778,10 +1888,16 @@ FirehawkBomb:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 
+	-Warhead@HeavyBomb:
+	-Warhead@NuclearWarhead:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumFlameWeapon:
 	Warhead@Nuclear_Super:
 		ValidTargets: Ground, Ship
 		Damage: 40000
 		PercentageScale: 0
+	-Warhead@Nuclear_Super_Percentage:
 
 ##########################
 # TIBERIAN DAWN EXPANSION
@@ -1912,6 +2028,8 @@ TDIonCannonDamage:
 		Falloff: 1000, 800, 600, 400, 200, 0
 	Warhead@IonCannonPercentage: AreaDamagePercentage
 		Spread: 4000
+	-Warhead@2Smu_impact:
+	-Warhead@5Smu_area2:
 
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): GDI
 # minigunner â€” burst 4, disciplined cadence. Paired AP variant per the
@@ -1963,6 +2081,8 @@ td_gdi_shotgunner_shotgun:
 		Inaccuracy: 800
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000

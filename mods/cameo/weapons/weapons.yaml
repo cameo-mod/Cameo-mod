@@ -11811,7 +11811,7 @@ DefuseKit:
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Light
 	ValidTargets: Ground, Water, Air
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 20000
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
@@ -11837,19 +11837,20 @@ DefuseKit:
 
 ^DamagingExplosion:
 	Inherits: ^Explosion
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 40000
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
 
 ^DamagingExplosionHE:
 	Inherits: ^Explosion
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 60000
 	Warhead@Effect: CreateEffect
 
 RockExplode:
 	Inherits: ^DamagingExplosionHE
+	-Warhead@Demolition_Light:
 	Warhead@Effect2: CreateEffect
 		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
 		ImpactActors: false
@@ -12011,7 +12012,7 @@ BuildingExplode:
 
 Napalm_Crate:
 	Inherits: ^DamagingExplosionHE
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		PercentageScale: 120000
 		Spread: 170
 		Damage: 5000
@@ -12076,6 +12077,7 @@ Patriot:
 		Damage: 3333
 		ValidTargets: Air
 		Versus:
+	-Warhead@2Smu:
 	Warhead@4EffAir: CreateEffect
 		Explosions: poof
 
@@ -12398,6 +12400,7 @@ IonCannon:
 	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Projectile_Lightning_Super
 	Inherits@4: ^Effect_Tesla_Super
+	-Warhead@Tesla_Heavy:
 	Report: tesla1.aud
 	ValidTargets: Ground, Water, Air
 	Warhead@Tesla_Super:
@@ -12543,6 +12546,8 @@ FakeHealtAPC:
 GLBarrelExplode:
 	Inherits@roleflat: ^Compatibility_Demolition_HeavyFlat
 	Inherits: GLTerroristExplosive
+	-Warhead@Demolition_Heavy:
+	-Warhead@Concussion_Medium:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 100000
@@ -12695,7 +12700,6 @@ TSPulseCannon_EMP:
 		InvalidTargets: Infantry
 	Warhead@2Con: AffectsIntegrity
 		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
 		Damage: 500000
 		Spread: 10000
 		InvalidTargets: Infantry
@@ -12730,7 +12734,7 @@ CHFlame:
 	Inherits@fx: ^Effect_Flame_Medium
 	Projectile: InstantExplode
 	ReloadDelay: 11
-	Warhead@Flame_Medium: AreaDamage
+	Warhead@Flame_Medium:
 		Spread: 250
 		Falloff: 100, 75, 50, 25
 		Damage: 2000
@@ -12966,6 +12970,13 @@ TSTurretLaserFire:
 		Damage: 1000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyCannon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@LightFlameWeapon:
+	-Warhead@SmallArms:
 	Warhead@Laser_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 6600
@@ -13723,7 +13734,6 @@ GLRebelToxin:
 	Warhead@Clear: SpreadDamage
 		Spread: 0c512
 		Damage: 500
-		Amount: 2
 		ValidTargets: Garrisoned
 		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
 

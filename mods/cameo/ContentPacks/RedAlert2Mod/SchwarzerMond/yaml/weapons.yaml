@@ -23,6 +23,9 @@ schwarzermond_lunarsoldier_rifle:
 		PercentageScale: 5000
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -55,15 +58,20 @@ NaxiBeetleLaser_elite:
 	Projectile: LaserZap
 		Width: 25
 	TargetActorCenter: false
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
@@ -71,6 +79,7 @@ NaxiBeetleLaser_elite:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 NaxiBeetleLaser_AA_elite:
 	Inherits: NaxiBeetleLaser_elite
@@ -99,7 +108,7 @@ LunarPanzerCannon:
 	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
 	Projectile: Bullet
 		Speed: 512
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 10000
 LunarPanzerCannon_elite:
 	Inherits: LunarPanzerCannon
@@ -124,15 +133,20 @@ NaxiTank2Laser:
 	Projectile: LaserZap
 		Width: 25
 	TargetActorCenter: false
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
@@ -140,6 +154,7 @@ NaxiTank2Laser:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 NaxiTank2Laser_AA:
 	Inherits: NaxiTank2Laser
@@ -329,6 +344,12 @@ NaxiMP40Laser:
 			Scout: 10
 		Falloff: 100, 50
 		Range: 0, 32
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Light:
+	-Warhead@Grenade:
+	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -340,6 +361,11 @@ NaxiMP40Laser_elite:
 	Range: 5384
 	Burst: 10
 	BurstDelays: 3
+	-Warhead@CollapsedNaxiMP40LaserBullet_LightPercentage:
+	-Warhead@CollapsedNaxiMP40LaserBullet_MediumPercentage:
+	-Warhead@CollapsedNaxiMP40LaserCannonHE_HeavyPercentage:
+	-Warhead@CollapsedNaxiMP40LaserConcussion_LightPercentage:
+	-Warhead@CollapsedNaxiMP40LaserLaser_HeavyPercentage:
 	Warhead@CollapsedNaxiMP40Laser_eliteBullet_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -508,6 +534,9 @@ LunarNaxiJadgDestroyer:
 		Damage: 30000
 	Warhead@CannonAP_Light:
 		Damage: 30000
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 90000
@@ -557,9 +586,13 @@ LunarTigerCannon:
 		Damage: 2
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 2494
 		Damage: 16000
+	-Warhead@HeavyBomb:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@CannonHE_MediumFlatCompatibility:
 LunarTigerCannon_elite:
 	Inherits: LunarTigerCannon
 	Range: 6105
@@ -597,6 +630,9 @@ NaxHaenebuQuadCannon:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Concussion_Light:
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Heavy:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -651,6 +687,9 @@ DalekCannon:
 		Explosions: blue_building
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
+	-Warhead@Laser_Heavy:
+	-Warhead@Railgun_Heavy:
+	-Warhead@Tesla_Heavy:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 300000
@@ -677,6 +716,9 @@ DalekCannon_elite:
 	Warhead@Scatter: FireShrapnel
 		Weapon: DalekCannonScatterE
 		Amount: 6
+	-Warhead@Laser_Heavy:
+	-Warhead@Railgun_Heavy:
+	-Warhead@Tesla_Heavy:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 600000
@@ -706,11 +748,15 @@ DalekCannonScatter:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
+	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
+	-Warhead@Laser_Heavy:
+	-Warhead@Railgun_Heavy:
+	-Warhead@Tesla_Heavy:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 200000
@@ -723,6 +769,7 @@ DalekCannonScatterE:
 	Warhead@Tesla_Heavy:
 		PercentageScale: 5000
 	Range: 4530
+	-Warhead@Tesla_Heavy:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 200000
@@ -751,7 +798,7 @@ BlackHoleMaker:
 	Warhead@Laser_Heavy:
 		Damage: 60000
 	Warhead@1Actor: SpawnActor
-		Actors: hole_small.nax2
+		Actors: schwarzermond_hole_small
 		#OwnerType: InternalName
 		#InternalOwner: Creeps
 		Range: 5
@@ -854,6 +901,9 @@ NaxCorrosionRocket:
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: !corroded
+	-Warhead@Concussion_Light:
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -1104,7 +1154,7 @@ UbermenschLaser:
 	Burst: 2
 	BurstDelays: 3
 	ValidTargets: Ground, Water
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 4000
 	Warhead@TeslaWeapon: SpreadDamage
@@ -1114,6 +1164,8 @@ UbermenschLaser:
 		Damage: 2000
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		Damage: 2
+	-Warhead@CannonHE_Medium:
+	-Warhead@TeslaWeapon:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -1153,6 +1205,7 @@ NaxiCowDrop:
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
+	-Warhead@Effect1:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
 		Duration: 512
@@ -1327,6 +1380,8 @@ Lunar_GreenJadgDestroyer:
 			Fighter: 10
 		Falloff: 100, 55
 		Range: 0, 93
+	-Warhead@CannonAP_LightFlatCompatibility:
+	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 120000
@@ -1458,6 +1513,8 @@ Lunar_GreenJadgDestroyer_elite:
 			Fighter: 10
 		Falloff: 100, 55
 		Range: 0, 93
+	-Warhead@CannonAP_LightFlatCompatibility:
+	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 120000
@@ -1588,6 +1645,11 @@ Lunar_YellowMP40Laser:
 		ContrailStartColor: f3e021AA
 		ContrailEndColor: f3e021AA
 		Width: 25
+	-Warhead@CollapsedNaxiMP40LaserBullet_LightPercentage:
+	-Warhead@CollapsedNaxiMP40LaserBullet_MediumPercentage:
+	-Warhead@CollapsedNaxiMP40LaserCannonHE_HeavyPercentage:
+	-Warhead@CollapsedNaxiMP40LaserConcussion_LightPercentage:
+	-Warhead@CollapsedNaxiMP40LaserLaser_HeavyPercentage:
 	Warhead@CollapsedLunar_YellowMP40LaserBullet_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1741,6 +1803,11 @@ Lunar_YellowMP40Laser_elite:
 	Inherits: NaxiMP40Laser_elite
 	Burst: 11
 	BurstDelays: 3
+	-Warhead@CollapsedNaxiMP40Laser_eliteBullet_LightPercentage:
+	-Warhead@CollapsedNaxiMP40Laser_eliteBullet_MediumPercentage:
+	-Warhead@CollapsedNaxiMP40Laser_eliteCannonHE_HeavyPercentage:
+	-Warhead@CollapsedNaxiMP40Laser_eliteConcussion_LightPercentage:
+	-Warhead@CollapsedNaxiMP40Laser_eliteLaser_HeavyPercentage:
 	Warhead@CollapsedLunar_YellowMP40Laser_eliteBullet_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1898,6 +1965,11 @@ Lunar_AmplifiedMP40Laser:
 		ContrailStartColor: f3e021AA
 		ContrailEndColor: f3e021AA
 		Width: 25
+	-Warhead@CollapsedNaxiMP40LaserBullet_LightPercentage:
+	-Warhead@CollapsedNaxiMP40LaserBullet_MediumPercentage:
+	-Warhead@CollapsedNaxiMP40LaserCannonHE_HeavyPercentage:
+	-Warhead@CollapsedNaxiMP40LaserConcussion_LightPercentage:
+	-Warhead@CollapsedNaxiMP40LaserLaser_HeavyPercentage:
 	Warhead@CollapsedLunar_AmplifiedMP40LaserBullet_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2051,6 +2123,11 @@ Lunar_AmplifiedMP40Laser_elite:
 	Inherits: NaxiMP40Laser_elite
 	Burst: 12
 	BurstDelays: 3
+	-Warhead@CollapsedNaxiMP40Laser_eliteBullet_LightPercentage:
+	-Warhead@CollapsedNaxiMP40Laser_eliteBullet_MediumPercentage:
+	-Warhead@CollapsedNaxiMP40Laser_eliteCannonHE_HeavyPercentage:
+	-Warhead@CollapsedNaxiMP40Laser_eliteConcussion_LightPercentage:
+	-Warhead@CollapsedNaxiMP40Laser_eliteLaser_HeavyPercentage:
 	Warhead@CollapsedLunar_AmplifiedMP40Laser_eliteBullet_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2333,6 +2410,11 @@ Naxis_Komet:
 		Explosions: med_frag
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Ground, Ship
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@MediumMissile:
 	Warhead@Flak_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
