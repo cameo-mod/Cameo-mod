@@ -24,7 +24,12 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 | agent | lane |
 |---|---|
 | **Blackrobe GPT-6 Astra** | ⭐ **FINISH THE BALANCE PIPELINE** (Tasks A–G) **and inherit the AI bot modules** (Task H — Devin Cloud ran out of quota mid-merge). Full brief: [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md). Branch `astra/balance-pipeline`, never master. Has **full authority including `apply_balance --confirm`**, conditional on one commit per decision and a review dossier at `audit/ASTRA_REVIEW.md`. |
-| **Devin fleet** (Aurora, Nova, Ember, Blaze, Dawn, Echo) | **naming damage repair**, one faction-set each — see the section below and the full brief at `../Cameo-mod-fleet/BRIEF_2026-09-06_naming_damage.md`; then weapon-shape conversion batches |
+| **Aurora** | `ra1_allies` + `ra2_allies` + `ts_gdi` — **128 items**, incl. the 16 Allies sprites wearing Soviet names → `../Cameo-mod-fleet/TASK_2026-09-06_aurora.md` |
+| **Ember** | `asianalliance` — **100 items**; first action is to rebase and push the finished `.asian` branch → `TASK_2026-09-06_ember.md` |
+| **Nova** | `ra1_soviets` — **94 items**, incl. the fluent-key leak and the 19 doubled filenames → `TASK_2026-09-06_nova.md` |
+| **Dawn** | `latinsyndicate` + `steelconsortium` + `wc2_*` + `zerg` — **79 items** → `TASK_2026-09-06_dawn.md` |
+| **Echo** | `ixian` + `ordos` + `d2k` + `japan` — **68 items** + the mod's last hyphen → `TASK_2026-09-06_echo.md` |
+| **Blaze** | `atreides` + `corrino` + `harkonnen` + `futuretech` + `yuri` — **32 items**, incl. **14 of the 15 actor-id renames left in the whole mod** → `TASK_2026-09-06_blaze.md` |
 | **Claude-Local (Opus 5)** | rulings, review, squash-merges to master, and the gates |
 
 ⚠ **Nobody merges to master except Claude-Local.** Agents commit freely on their own branch
@@ -86,6 +91,11 @@ Devin Cloud designed the module architecture and stopped mid-merge when its quot
 * Next implementation step is **phase 1: record-only match logging.** Phases 1–2 carry no
   gameplay effect and may run while the balance pipeline is still moving; **phase 6 (fog) is
   deliberately last** because it weakens the bots and invalidates any tuning done before it.
+
+⚠ **If you are a Devin agent, your task file is `../Cameo-mod-fleet/TASK_2026-09-06_<you>.md`**
+and the index is `TASKS_ACTIVE.md`. Each task file is self-contained: your complete item list,
+the method, the faction-specific traps, the gates, and the report format. Read
+`BRIEF_2026-09-06_naming_damage.md` once for context before you start.
 
 ⚠ **Agent-to-agent chatter lives OUTSIDE the repository**, in `../Cameo-mod-fleet/`.
 `DEVELOPMENT_LOG.md` keeps one entry per COMPLETED work item plus lessons learned — nothing else.
