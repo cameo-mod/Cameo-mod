@@ -1001,9 +1001,9 @@ D2K_Rocket_Trooper_AGOnly:
 		ValidTargets: Ground, Water
 		Damage: 10000
 D2K_Rocket_Trooper_AA:
-	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
+	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
 	ReloadDelay: 75
 	Range: 9716
 	Report: ROCKET1.WAV
@@ -1023,7 +1023,7 @@ D2K_Rocket_Trooper_AA:
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
 		Acceleration: 8
-	Warhead@MissileAP_Heavy:
+	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 10000
 D2K_APC_Rocket:
