@@ -72,17 +72,22 @@ def _strip_comment(text: str) -> str:
 
 def load(path: str | pathlib.Path) -> list[Node]:
     """Parse one MiniYAML file into a list of top-level Nodes."""
+    text = pathlib.Path(path).read_text(encoding="utf-8-sig", errors="replace")
+    return load_text(text, str(path))
+
+
+def load_text(text: str, source: str = "<memory>") -> list[Node]:
+    """Parse an archive member or supplied text using the same MiniYAML reader."""
     root: list[Node] = []
     stack: list[tuple[int, Node | None]] = [(-1, None)]
-    text = pathlib.Path(path).read_text(encoding="utf-8-sig", errors="replace")
-    for lineno, raw in enumerate(text.splitlines(), 1):
+    for lineno, raw in enumerate(text.lstrip("\ufeff").splitlines(), 1):
         stripped_full = _strip_comment(raw)
         if not stripped_full.strip():
             continue
         indent = len(stripped_full) - len(stripped_full.lstrip("\t "))
         body = stripped_full.strip()
         key, _, val = body.partition(":")
-        node = Node(key.strip(), val.strip(), [], str(path), lineno)
+        node = Node(key.strip(), val.strip(), [], source, lineno)
         while stack and stack[-1][0] >= indent:
             stack.pop()
         parent = stack[-1][1]

@@ -91,3 +91,26 @@ formula/sign-off wording. Candidate ranking remains diagnostic, not clearance.
 No anchors are signed and no faction is repriced: unresolved weapon structure
 and unapproved/missing anchor inputs remain prerequisites, not waived gates.
 Revert the dedicated readiness/classification commit to undo this item.
+
+## Completed: packaged shellmap rename fallout repair
+
+The required graph boot test failed with `No rules definition for unit
+ra1_soviets_barracks`. This was reproduced against the unchanged upstream map
+payloads: desert-shellmap-2 had 15 missing placed actors and shellmap_v3 had ten.
+The exact replacements are actor-key renames from upstream `ad7c5e232`, not new
+naming decisions. The related Lua spawns and map-local rule overrides needed the
+same correction; survival's script also retained four renamed upgrade actors.
+
+Reference-only archive edits: desert-shellmap-2 (22 replacements), shellmap_v3
+(45), survival (15), total 82. ZIP member order, timestamps, compression metadata,
+archive comments and every unchanged member's bytes are preserved. No map terrain,
+damage, cost, HP, durability or spawn timing changed. Original archives were saved
+outside the worktree for recovery; the main checkout and its maps were not touched.
+
+The shared MiniYAML reader now accepts archive text via `load_text`, using the
+same parser as file loading. Eleven parser tests and two packaged-shellmap tests
+pass. The tests check every packaged shellmap's placed actor references and Soviet
+actor literals in those scripts plus survival; they do not claim full Lua execution.
+Menu boot after repair: `MenuPostProcessEffect.PostWorldLoaded`, zero new exception
+logs, 43.2 seconds, peak PC memory 69.2%. The owned test game was stopped immediately
+after proof. Revert the dedicated map-reference commit to undo this repair.

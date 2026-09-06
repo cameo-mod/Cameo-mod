@@ -1425,3 +1425,12 @@ Corollary for this tree specifically: `mods/cameo/weapons/weapons.yaml` is
 generated, so direct Versus edits in it silently revert on the next splice and
 re-flag `gen_sync` in the meantime. Route every generated-row change through
 `gen_weapon_template.py` or a maintainer ruling that changes the law.
+# A random menu boot does not validate every packaged shellmap
+
+A faction rename can update its source definitions while old references survive
+inside other archive members. The 2026-09-07 boot failed on a Soviet barracks;
+fixing only that placement would have left Lua reinforcements and map-local rules
+broken. Follow every member of the affected archives, compare against the exact
+rename commit, and resolve placed actors against active rules. Preserve unchanged
+member bytes and ZIP metadata. A successful random menu boot remains one runtime
+sample; `test_shellmap_actor_references.py` covers all packaged shellmap placements.

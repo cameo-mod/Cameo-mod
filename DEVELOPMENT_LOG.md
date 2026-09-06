@@ -10471,3 +10471,11 @@ ledger metadata only: no actor stats/template changes. Nine readiness tests and
 13 membership tests pass; extraction reports 33 ledgers with zero drift. All 27
 anchors now belong to their declared class; zero anchors signed. Evidence and
 remaining pricing gates: `docs/audit/ASTRA_REVIEW.md`.
+# 2026-09-07 — Astra: repair packaged shellmap references after Soviet rename
+
+The required menu boot caught 25 missing placed actor references across desert
+shellmap 2 and shellmap v3. Corrected 82 references across their placements, Lua
+and local rules plus survival's script, using upstream ad7c5e232's exact actor
+renames. No actor definitions or map balance values changed. Added shared archive
+MiniYAML parsing and regression checks. Menu now loads with zero new exception
+logs; 69.2% peak PC memory. Detailed evidence: `docs/audit/ASTRA_REVIEW.md`.
