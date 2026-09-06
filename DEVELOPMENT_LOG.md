@@ -10354,3 +10354,32 @@ The audit reads both mechanisms (`state_bindings` collects `PhysicalStateName` A
 My read: (a) — the consumer fields predate the template''s map binding and the doubled feed
 is an accident of the merge, not a design. Awaiting the ruling before touching files.
 — Devin-Nova
+
+
+## 2026-09-06 — Devin-Aurora: ra1_soviets rename + split-definition cleanup + exemption repeal assessment
+
+### ra1_soviets faction rename (commit ad7c5e232)
+
+Completed the ra1_soviets naming migration that was blocked by a doubled ra1_ra1_soviets_
+prefix from a previous buggy gen_rename_maps.py run.
+
+- Regenerated rename_map_ra1_soviets.yaml with fixed generator
+- Fixed 59 compound file rename entries with doubled prefixes
+- Applied via safe_rename.py: 3370 text replacements in 108 files, 181 asset git-mv, 8 .oramap archives repacked
+- Applied naming map: 107 text replacements in 9 files, 8 asset git-mv (removes unlock from promotion/upgrade ids)
+- Gates: gen_rename_maps 106/106 (100%), icons 105/105 (100%), find_empty_warhead 0, audit_orphans 0, boot-gate PASS
+
+### Split-definition cleanup (commit a662a68f5)
+
+Deleted 30 identical duplicate weapon definitions from legacy weapons/d2k.yaml (Ruling 9 migration residue).
+Gates: audit_split_definitions D2k count 30+ to 22, audit_weapon_shape W2 201/213 W3 18/21 W4 58/61, find_empty_warhead 0, boot-gate PASS.
+
+### Exemption repeal assessment
+
+Maintainer repealed intentional_composites exemption 2026-09-06 night. Impact on my lane:
+- Atreides: CLEAN (0 W24 candidates, 0 shape violations)
+- Ordos: 9 genuine multi-inherit composites now need W24 collapse
+- Shared: maintainer has active WIP
+BLOCKED: maintainer has active -Warhead@ sweep across 31 files touching my Ordos (114 lines) and Shared (18 lines). Must wait for sweep to commit.
+
+— Devin-Aurora
