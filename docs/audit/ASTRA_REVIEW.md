@@ -114,3 +114,28 @@ actor literals in those scripts plus survival; they do not claim full Lua execut
 Menu boot after repair: `MenuPostProcessEffect.PostWorldLoaded`, zero new exception
 logs, 43.2 seconds, peak PC memory 69.2%. The owned test game was stopped immediately
 after proof. Revert the dedicated map-reference commit to undo this repair.
+
+## Completed: observer combat-value graph integration from PR 323
+
+Adapted Devin AI's graph implementation from PR 323 head
+`053e7eeac6f930ef3e178e964a3091d2527cc81a`. The original PR is open/conflicting;
+its only merge conflict with this branch was the accumulated lessons document.
+This follow-up carries the feature for coordinator review; it does not merge or
+modify the original PR. Original authorship is preserved in the commit trailer.
+
+Integration corrections: enum and dropdown ordering now agree for hotkeys; the
+axis says value destroyed minus value lost, not enemy-only damage (the pinned
+PlayerStatistics accounting can include non-neutral friendly victims). Signed
+scaling retains positive-only behavior and continues sampling zero/flat results.
+New tests cover ranges, cadence, initial/signed/flat samples and panel indices.
+
+Fresh `make.ps1 all`: zero errors; eight existing engine warnings. The updated
+Cameo DLL timestamp and its unique UTF-8 description marker were verified. All
+63 Cameo C# tests passed before the separate telemetry tests were introduced.
+The repaired tree passed the menu boot described above. Independent source review
+approved the graph and map changes; the implementer's own review was not counted
+as the independent approval. No live prices, weapons or AI decisions change.
+
+Still pending: visual review of signed labels, scrolling and clipping in an actual
+observer match. A menu boot is loading proof, not graph visual approval. Revert
+the dedicated observer-graph commit to remove this feature.

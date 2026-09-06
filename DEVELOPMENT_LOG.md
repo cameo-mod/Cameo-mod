@@ -10479,3 +10479,11 @@ and local rules plus survival's script, using upstream ad7c5e232's exact actor
 renames. No actor definitions or map balance values changed. Added shared archive
 MiniYAML parsing and regression checks. Menu now loads with zero new exception
 logs; 69.2% peak PC memory. Detailed evidence: `docs/audit/ASTRA_REVIEW.md`.
+# 2026-09-07 — Astra: integrate PR 323 observer combat-value graph
+
+Adapted Devin AI's PR 323 graph for coordinator review, preserving attribution.
+Fixed enum/dropdown hotkey alignment and the accounting label; added signed-axis
+and sampling regressions. Fresh DLL verified, 63 C# tests pass, and the menu boot
+passes after the separately committed packaged-map repair. Independent source
+review approved; live observer visual layout remains pending. No gameplay balance
+or bot-decision changes. Evidence: `docs/audit/ASTRA_REVIEW.md`.
