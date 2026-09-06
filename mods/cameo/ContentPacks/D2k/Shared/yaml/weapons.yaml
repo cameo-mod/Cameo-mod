@@ -581,3 +581,17 @@ D2KUnitExplodeLarge:
 		ImpactSounds: EXPLLG2.WAV, fey_expllg1.wav, fey_expllg3.wav, fey_expllg4.wav, fey_expllg5.wav
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
+
+# Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
+# Used by multiple D2k factions.
+
+80mm_A:
+	Inherits: ^D2K_Cannon
+
+D2KUnitExplodeMed:
+	Inherits: ^DamagingExplosion
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_building
+		ImpactSounds: EXPLSML2.WAV
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
