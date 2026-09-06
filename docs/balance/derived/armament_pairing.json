@@ -3500,7 +3500,7 @@
      "rate": 800.0,
      "role": "air",
      "slot": "Armament@AIR",
-     "weapon": "BallistaSingleShotAir",
+     "weapon": "BallistaSingleShotAir_AA",
      "weapon_burst": 1,
      "weapon_burst_delays": [],
      "weapon_reload": 200.0
@@ -3538,7 +3538,7 @@
      "rate": 850.3,
      "role": "air",
      "slot": "Armament@UpgradeAIR",
-     "weapon": "BallistaSingleShotAirEnergized",
+     "weapon": "BallistaSingleShotAirEnergized_AA",
      "weapon_burst": 1,
      "weapon_burst_delays": [],
      "weapon_reload": 200.0
@@ -3552,7 +3552,7 @@
     "RA2 Reborn": {
      "cameo_unpaired": [
       "BallistaTowerMultiShot",
-      "BallistaSingleShotAir"
+      "BallistaSingleShotAir_AA"
      ],
      "kind": "ini",
      "pairs": [],
@@ -42050,7 +42050,7 @@
   "japan_ballistatower": [
    {
     "role": "air",
-    "weapon": "BallistaSingleShotAir"
+    "weapon": "BallistaSingleShotAir_AA"
    },
    {
     "role": "ground",

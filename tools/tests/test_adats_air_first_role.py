@@ -65,7 +65,7 @@ class ADATSAirFirstRoleTests(unittest.TestCase):
         expected = {
             "TSChemAdatsMissile": (
                 "MissileChem_Light", "12000", "Ground, Water"),
-            "TSChemAdatsMissileAA": (
+            "TSChemAdatsMissile_AA": (
                 "Flak_MediumFlatCompatibility", "12000", "Air"),
         }
         for name, (profile, damage, targets) in expected.items():
@@ -88,7 +88,7 @@ class ADATSAirFirstRoleTests(unittest.TestCase):
                 "LightMissilePercentage"):
             self.assertEqual("2", chemical.child(f"Warhead@{tag}").get("Damage"))
 
-        chemical_aa = self.rules.resolve_weapon("TSChemAdatsMissileAA")
+        chemical_aa = self.rules.resolve_weapon("TSChemAdatsMissile_AA")
         self.assertFalse(any(
             node.get("PhysicalStateName") == "Corrosion"
             for node in chemical_aa.children
@@ -108,7 +108,7 @@ class ADATSAirFirstRoleTests(unittest.TestCase):
             "Armament@UPGRADE": (
                 "TSChemAdatsMissile", "forgotten_upgrade_chemicalweapons"),
             "Armament@UPGRADEAA": (
-                "TSChemAdatsMissileAA", "forgotten_upgrade_chemicalweapons"),
+                "TSChemAdatsMissile_AA", "forgotten_upgrade_chemicalweapons"),
         }, armaments)
         priorities = {
             child.key for child in actor.children
@@ -149,7 +149,7 @@ class ADATSAirFirstRoleTests(unittest.TestCase):
                 continue
             seen.add(child)
             pending.extend(children.get(child, set()))
-        self.assertEqual({"TSAdatsMissile_AA", "TSChemAdatsMissileAA"}, seen)
+        self.assertEqual({"TSAdatsMissile_AA", "TSChemAdatsMissile_AA"}, seen)
         self.assertNotIn("TSChemAdatsMissile", seen)
 
     def test_paid_upgrade_improves_both_firing_routes(self):
@@ -174,7 +174,7 @@ class ADATSAirFirstRoleTests(unittest.TestCase):
 
     def test_whole_tree_comparison_is_exact_and_bounded(self):
         self.assertEqual({
-            "TSAdatsMissile", "TSAdatsMissile_AA", "TSChemAdatsMissileAA",
+            "TSAdatsMissile", "TSAdatsMissile_AA", "TSChemAdatsMissile_AA",
         }, set(self.comparison["changed"]))
         self.assertEqual([], self.comparison["added"])
         self.assertEqual([], self.comparison["removed"])
@@ -198,7 +198,7 @@ class ADATSAirFirstRoleTests(unittest.TestCase):
             "changed": {
                 "TSAdatsMissile": ["armor_profile", "blast_shape"],
                 "TSAdatsMissile_AA": ["armor_profile", "blast_shape"],
-                "TSChemAdatsMissileAA": [
+                "TSChemAdatsMissile_AA": [
                     "armor_profile", "blast_shape", "percentage_damage"],
             },
             "percentage_rounding": {
