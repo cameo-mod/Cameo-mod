@@ -507,6 +507,70 @@ weeks because templates also wrote literals. The template owns the fields; the w
 delta only where the resolved value genuinely differs. **Assert the DERIVED value on a real
 resolved weapon**, never merely that the knob is present.
 
+### ⭐ TASK G — THE DEEP RESEARCH: turn the reference corpus into per-class TARGETS
+
+**This is the research half of the pipeline, and it is the piece nobody has done.** Everything
+before it prices units *relative to an anchor we chose*. This task asks the harder question:
+**is the anchor itself right?** — grounded in what 21 real shipped games actually did.
+
+**Read, in this order:**
+
+| document | what it holds |
+|---|---|
+| `docs/design/BALANCE_SYNTHESIS.md` | the plan for synthesising sources into class anchors — **this is the spec for this task** |
+| `docs/design/ORIGINAL_UNIT_STATS.md` | the cross-game reference library (data-mining is DONE) |
+| `docs/design/ORIGINAL_UNITS_RAW.md` / `_NORMALIZED.md` / `_PEER_OPENRA.md` | raw → normalised → OpenRA-peer stat tables |
+| `docs/design/REFERENCE_EXTRACTION_PLAN.md` | rulings **R1–R15** governing how a reference may be used |
+| `docs/design/UPSTREAM_MODS.md` | the five upstream mods, their lineage, and what is adoptable |
+| `docs/balance/anchor_decisions_log.md` | why each of the 13 locked vehicle anchors was chosen |
+| `docs/balance/discrepancies.md` | the Phase-3 triage still open against the legacy workbook |
+
+**The data, all committed** (Part 2.5): `docs/reference/ini_corpus.json`, `versus_raw.json`,
+`armor_normalized.json`, `faction_profiles.json`, `family_profiles.json`.
+**Tools that already exist:** `faction_routes.py`, `faction_extrapolate.py --by-class`,
+`assign_references.py`, `reference_distribution.py`, `normalize_armor.py`, `faction_profile.py`.
+
+**The research questions, in priority order:**
+
+1. **Does each of the 27 class anchors sit where the reference corpus says its class sits?**
+   For each class, build the peer distribution from the routed sources and place the anchor in
+   it. An anchor at the 5th or 95th percentile of its own class's real-world peers is a bad
+   zero point, and that is a *far* better explanation for a 106% median pricing error than
+   "the units are wrong".
+2. **Which classes cannot be grounded, and why?** Currently **269 of 410** routed class members
+   reach the ≥2-source floor. Name the classes that fall short and say whether the cause is
+   missing sources, a bad route, or a class that no source game actually has.
+3. **R4 synthesis — the actual deliverable.** Convert the grounded distributions into
+   **per-class stat targets** (HP, DPS, speed, range bands) with the source rows behind each.
+   That is what turns `class_anchors.json` from "someone picked a unit" into "this is where
+   this class sits across 21 games".
+4. **Cross-game rock-paper-scissors.** The mandate is that RPS holds *across* games — a Dune
+   2000 tank must lose to the right Red Alert counter. Use `versus_raw.json` (2,494 profiles
+   from 14 mods) to check whether Cameo's armor/warhead matrix reproduces the counter
+   relationships the source games actually shipped, and report where it inverts.
+
+⚠ **The two unroutable factions are `corrino` and `ixian`**, waiting on *Emperor: Battle for
+Dune*, which nobody has. **Do not attempt to acquire it.** Treat those two as formula-only and
+say so.
+
+⚠ **Cluster, never average.** Averaging across sources destroys exactly the variety this is
+meant to preserve: one reference faction can be uninformative for a whole type (OpenE2140's
+`ed` fields four infantry at HP 28/28/28/20), and placing nine Naxis infantry against that
+would have *deleted a roster's variety while looking like evidence*. Interpolate in **log**
+space — nearest-point placement collapsed six Naxis infantry spanning 20,000–96,000 HP onto one
+value.
+
+⚠ **Never invent faction data from game knowledge.** If a source is not in the corpus, it is
+not evidence. This is ruling R-series law and it has been violated before.
+
+**Done when:** `docs/design/BALANCE_SYNTHESIS.md` carries per-class targets with the source rows
+behind each, every anchor has a percentile placement inside its own class's peer distribution,
+and any anchor the research says is misplaced is named with the replacement it suggests.
+
+⭐ **If Task C's sign-off stalls because the errors are too large to accept, THIS is the task
+that unblocks it** — a 106% median error is usually a misplaced anchor, and this is how you
+prove it rather than guess.
+
 ---
 
 ## PART 7 — HOW TO WORK. SPECIFIC SUGGESTIONS.
