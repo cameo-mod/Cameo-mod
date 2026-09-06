@@ -14,7 +14,7 @@ anchor: `SPEC(27000,90,1500,300,1,280)` (cost0 280, O0 594.00, P0 277.20, Q0 87.
 | `forgotten_runnershotgal` | 750 | 1187 | +58% ❗ |
 | `forgotten_visceroid` | 500 | 562 | +12% ⚠ |
 | `forgotten_zombiemutant` | 500 | 707 | +41% ❗ |
-| `frank.nax` | 500 | 536 | +7% |
+| `naxis_frank` | 500 | 536 | +7% |
 | `futuretech_blackwidow` | 1200 | 2128 | +77% ❗ |
 | `futuretech_enforcer` | 300 | 429 | +43% ❗ |
 | `heavy_inf.ixian` | 400 | 622 | +56% ❗ |

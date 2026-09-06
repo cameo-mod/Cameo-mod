@@ -4,7 +4,7 @@
  "schema": 2,
  "sections": {
   "aircraft": {
-   "cplane.nax": {
+   "naxis_cplane": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
@@ -48,7 +48,7 @@
      "v": "150"
     }
    },
-   "horten_bomber.nax": {
+   "naxis_horten_bomber": {
     "armaments": [
      {
       "damage_warheads": [
@@ -963,7 +963,7 @@
    }
   },
   "buildings": {
-   "naval.nax": {
+   "naxis_naval": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -2220,7 +2220,7 @@
    }
   },
   "infantry": {
-   "alien.nax": {
+   "naxis_alien": {
     "armaments": [
      {
       "burst": "2",
@@ -2455,7 +2455,7 @@
      "v": "40"
     }
    },
-   "conehead2.nax": {
+   "naxis_conehead2": {
     "armaments": [
      {
       "damage_warheads": [
@@ -2655,7 +2655,7 @@
      "v": "90"
     }
    },
-   "frank.nax": {
+   "naxis_frank": {
     "armaments": [
      {
       "damage_warheads": [
@@ -5842,7 +5842,7 @@
      "v": "55"
     }
    },
-   "undead.nax": {
+   "naxis_undead": {
     "armaments": [
      {
       "damage_warheads": [
@@ -6017,7 +6017,7 @@
    }
   },
   "naval": {
-   "muboat.nax": {
+   "naxis_muboat": {
     "armaments": [
      {
       "burst": "2",
@@ -6110,7 +6110,7 @@
     },
     "name": "Heavy Missile U boat",
     "prerequisites": [
-     "~naval.nax",
+     "~naxis_naval",
      "naxis_techcenter"
     ],
     "queue": [
@@ -6293,7 +6293,7 @@
     },
     "name": "Bitsmark Cruiser",
     "prerequisites": [
-     "~naval.nax",
+     "~naxis_naval",
      "naxis_techcenter"
     ],
     "queue": [
@@ -6325,7 +6325,7 @@
      "v": "8"
     }
    },
-   "tuboat.nax": {
+   "naxis_tuboat": {
     "armaments": [
      {
       "burst": "2",
@@ -6386,7 +6386,7 @@
     },
     "name": "Torpedo U boat",
     "prerequisites": [
-     "~naval.nax"
+     "~naxis_naval"
     ],
     "queue": [
      "Naval",
@@ -6658,7 +6658,7 @@
    }
   },
   "upgrades": {
-   "conyard_infiltrated.nax": {
+   "naxis_conyard_infiltrated": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6903,7 +6903,7 @@
      "Research"
     ]
    },
-   "up_resurrection.nax": {
+   "naxis_up_resurrection": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6929,7 +6929,7 @@
      "Research"
     ]
    },
-   "up_team_blitzkrieg.nax": {
+   "naxis_up_team_blitzkrieg": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6946,7 +6946,7 @@
    }
   },
   "vehicles": {
-   "assault.nax": {
+   "naxis_assault": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -7055,8 +7055,8 @@
      "unit_class": null
     },
     "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#FirepowerMultiplier@tiger.nax.Modifier",
-     "trait": "FirepowerMultiplier@tiger.nax",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#FirepowerMultiplier@naxis_tiger.Modifier",
+     "trait": "FirepowerMultiplier@naxis_tiger",
      "v": 1.2
     },
     "hp": {
@@ -7102,7 +7102,7 @@
      "v": "18"
     }
    },
-   "car.nax": {
+   "naxis_car": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -9665,7 +9665,7 @@
      "v": "12"
     }
    },
-   "panzer.nax": {
+   "naxis_panzer": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -9784,7 +9784,7 @@
      "v": "20"
     }
    },
-   "tiger.nax": {
+   "naxis_tiger": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -9903,7 +9903,7 @@
      "v": "20"
     }
    },
-   "wirbelwind.nax": {
+   "naxis_wirbelwind": {
     "armaments": [
      {
       "armament_name": "primary",

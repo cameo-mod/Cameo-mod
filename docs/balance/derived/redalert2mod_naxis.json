@@ -4,12 +4,12 @@
  "schema": 2,
  "sections": {
   "aircraft": {
-   "cplane.nax": {
+   "naxis_cplane": {
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
     "shield_pool": 175000.0
    },
-   "horten_bomber.nax": {
+   "naxis_horten_bomber": {
     "armaments": [
      {
       "avg_versus": 1.0883,
@@ -383,7 +383,7 @@
    }
   },
   "buildings": {
-   "naval.nax": {
+   "naxis_naval": {
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
     "shield_pool": 600000.0,
@@ -660,7 +660,7 @@
    }
   },
   "infantry": {
-   "alien.nax": {
+   "naxis_alien": {
     "armaments": [
      {
       "avg_versus": 0.9648,
@@ -774,7 +774,7 @@
     "shield_gated_on_upgrade": false,
     "shield_pool": 15000.0
    },
-   "conehead2.nax": {
+   "naxis_conehead2": {
     "armaments": [
      {
       "avg_versus": 1.0115,
@@ -873,7 +873,7 @@
     "shield_gated_on_upgrade": true,
     "shield_pool": 40000.0
    },
-   "frank.nax": {
+   "naxis_frank": {
     "armaments": [
      {
       "avg_versus": 1.1354,
@@ -2394,7 +2394,7 @@
     "tier_chain_cost": 14300.0,
     "tier_multiplier": 0.6322
    },
-   "undead.nax": {
+   "naxis_undead": {
     "armaments": [
      {
       "avg_versus": 1.1163,
@@ -2495,7 +2495,7 @@
    }
   },
   "naval": {
-   "muboat.nax": {
+   "naxis_muboat": {
     "armaments": [
      {
       "avg_versus": 1.0167,
@@ -2637,7 +2637,7 @@
     "tier_chain_cost": 20300.0,
     "tier_multiplier": 0.4331
    },
-   "tuboat.nax": {
+   "naxis_tuboat": {
     "armaments": [
      {
       "avg_versus": 0.9921,
@@ -2753,7 +2753,7 @@
    }
   },
   "vehicles": {
-   "assault.nax": {
+   "naxis_assault": {
     "armaments": [
      {
       "avg_versus": 1.0883,
@@ -2834,7 +2834,7 @@
     "shield_gated_on_upgrade": false,
     "shield_pool": 130000.0
    },
-   "car.nax": {
+   "naxis_car": {
     "armaments": [
      {
       "avg_versus": 1.1291,
@@ -3806,7 +3806,7 @@
     "tier_chain_cost": 18300.0,
     "tier_multiplier": 0.4839
    },
-   "panzer.nax": {
+   "naxis_panzer": {
     "armaments": [
      {
       "avg_versus": 1.0883,
@@ -3859,7 +3859,7 @@
     "shield_gated_on_upgrade": false,
     "shield_pool": 100000.0
    },
-   "tiger.nax": {
+   "naxis_tiger": {
     "armaments": [
      {
       "avg_versus": 1.0883,
@@ -3914,7 +3914,7 @@
     "tier_chain_cost": 10800.0,
     "tier_multiplier": 0.8639
    },
-   "wirbelwind.nax": {
+   "naxis_wirbelwind": {
     "armaments": [
      {
       "avg_versus": 0.9739,

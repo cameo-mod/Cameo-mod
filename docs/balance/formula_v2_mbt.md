@@ -5,7 +5,7 @@ anchor: `SPEC(240000,95,5500,600,1,800)` (cost0 800, O0 1490.00, P0 2232.00, Q0 
 | unit | cost (actual) | class-formula price | delta |
 |---|---|---|---|
 | `asianalliance_lynxtank` | 850 | 305 | -64% ❗ |
-| `assault.nax` | 900 | 1056 | +17% ⚠ |
+| `naxis_assault` | 900 | 1056 | +17% ⚠ |
 | `atreides_combattank` | 600 | 280 | -53% ❗ |
 | `atreides_sonictank` | 1000 | 132 | -87% ❗ |
 | `cabal_tarantula` | 1000 | 331 | -67% ❗ |
@@ -46,7 +46,7 @@ anchor: `SPEC(240000,95,5500,600,1,800)` (cost0 800, O0 1490.00, P0 2232.00, Q0 
 | `td_gdi_battletank` | 900 | 307 | -66% ❗ |
 | `td_gdi_predatortank` | 1250 | 397 | -68% ❗ |
 | `terran_matador` | 1700.0 | (no combat stats) | |
-| `tiger.nax` | 800 | 274 | -66% ❗ |
+| `naxis_tiger` | 800 | 274 | -66% ❗ |
 | `tkm_abrams` | 1000 | 231 | -77% ❗ |
 | `tkm_t72m` | 900 | 306 | -66% ❗ |
 | `tkm_technicaltank` | 700 | 225 | -68% ❗ |
