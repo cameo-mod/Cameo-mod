@@ -59,7 +59,7 @@ REVIEW_DMG = 8000
 # consulting `intentional_composites.py`. 51 of the 73 weapons it was reporting as
 # W24 debt are maintainer-curated composites that were never debt, so the real
 # broadcast backlog is 22, not 73. Lower as W24 collapses weapons; never raise.
-BROADCAST_BASELINE = 22
+BROADCAST_BASELINE = 21
 
 # The two former routing-revealed exceptions were consolidated into their
 # selected Flak and Bullet profiles. Keep the registry empty so a future
