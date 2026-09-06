@@ -1,6 +1,23 @@
 # Development Log
 
 
+## Devin-Nova - boot-gate PASS at HEAD a6dcb56b1 (2026-09-06, afternoon)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
+
+Fresh boot on the current tree after the afternoon's commit wave (Thermobaric
+strip `9e7469935`, Aurora's `Factions:` tags + Ordos sequences, Ruling 2/6 audit
+implementations): `perf.log` ends `MenuPostProcessEffect.PostWorldLoaded`,
+**0 new exception-*.log** (baseline 0, after 0). Tree boots clean.
+
+Also verified: `audit_min_range.py` exemption audit - all 43 exempted violators
+accounted for (spawner/SCUD/fragment classes, superweapon ranges, intentional
+numeric pairs, elite-variant inheritance, DebrisMissile Ruling 6). The four
+`impact` patterns are dormant but intentional - the weapons exist with MinRange
+deliberately removed; removing the dormant patterns could mask a future
+regression, so they stay.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Ember — verifier UPDATE: X1 now 0 — my "4 residual" note is already stale (2026-09-06, afternoon)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
