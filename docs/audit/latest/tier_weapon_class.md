@@ -58,5 +58,5 @@ VIOLATIONS by shape:
 
 _(8 more)_
 
-WARN 48 budget violations (ratchet 218)
+WARN 48 budget violations (ratchet 48)
 Lower `TIER_BASELINE` as weapons are brought onto the law; never raise it.

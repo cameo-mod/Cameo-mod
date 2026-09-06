@@ -18,7 +18,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `meters_filling_before_death` | 269 | 269 | ✅ |
 | `corrosion_meter_actors` | 817 | 817 | ✅ |
 | `w24_multi_main_fed` | 429 | 429 | ✅ |
-| `physical_state_fired_weapons` | 533 | 533 | ✅ |
+| `physical_state_fired_weapons` | 533 | 534 | **MISMATCH** |
 | `plating_row_ties` | 0 | 0 | ✅ |
 | `plating_families` | 48 | 48 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
@@ -26,7 +26,9 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `unconverted_template_inheritors` | 1595 | 1595 | ✅ |
 | `ledgers_drifted` | 0 | 0 | ✅ |
 
-_clean_ — every registered claim still matches the tree.
+**FAIL — a document and the tree disagree.**
+
+Fix whichever is wrong, and if the tree is right update `value` in `doc_claims.yaml` **and every doc listed under `docs:`** in the SAME commit. That co-update is the point: it is how the `Shield = top + floor` duplication survived in two documents for weeks.
 
 ## Review cadence (for what a number cannot capture)
 

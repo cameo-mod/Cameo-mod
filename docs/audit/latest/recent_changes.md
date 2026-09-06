@@ -1,12 +1,12 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **266**, files touched: **1037**
+Commits reviewed: **309**, files touched: **974**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
 | R1 | balance yaml edited without the ledger | 29 | yes |
 | R2 | audit script never run by run_all.sh | 4 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 23 | partly |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 22 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 0 | no |
 
 
@@ -55,7 +55,7 @@ Commits reviewed: **266**, files touched: **1037**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (23)
+## R3 — commits without provenance (22)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
@@ -81,7 +81,6 @@ Commits reviewed: **266**, files touched: **1037**
 | 5f0f2828 | 2026-08-24 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | 1d18d5d4 | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 4ec4fd1c | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
-| 20f15194 | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 
 
 ## R4 — engine/config changes to re-verify (0)
@@ -93,17 +92,17 @@ _none found_
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 123 |
-| docs/HANDOFF.md | 56 |
-| docs/design/BALANCE_PROGRAM_PLAN.md | 43 |
-| tools/audit/audit_warhead_split.py | 40 |
+| DEVELOPMENT_LOG.md | 149 |
+| docs/HANDOFF.md | 60 |
+| tools/audit/audit_warhead_split.py | 42 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 41 |
 | docs/balance/derived/redalert_soviets.json | 34 |
-| docs/audit/doc_claims.yaml | 31 |
+| docs/audit/doc_claims.yaml | 29 |
 | docs/balance/derived/d2k_ixian.json | 29 |
 | docs/balance/derived/tiberiansun_forgotten.json | 29 |
-| docs/audit/SUMMARY.md | 29 |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 28 |
 | docs/balance/derived/tiberiansun_nod.json | 28 |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 27 |
+| docs/audit/SUMMARY.md | 28 |
 | docs/balance/derived/tiberiansun_gdi.json | 27 |
 | docs/balance/derived/redalert2_yuri.json | 26 |
 | docs/balance/derived/redalert2mod_asianalliance.json | 26 |
@@ -121,7 +120,7 @@ _none found_
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 29 R1 and 0 R3 of 29/23 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 29 R1 and 0 R3 of 29/22 findings are in scope; the rest predate the gate.
 
 
 ## FAIL

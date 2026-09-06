@@ -3,9 +3,8 @@
 Active concrete weapons checked: 2367
 Formula percentage templates checked: 6
 
-## FAIL (4 problem(s))
+## PASS
 
-- ra120mm2Thermobaric: Warhead@Thermobaric_HeavyFlatCompatibility: applies Temperature through multiple bindings [34, 33] (combined nominal scale 67; runtime rounds each separately)
-- ra120mm2ThermobaricTargetingComputer: Warhead@Thermobaric_HeavyFlatCompatibility: applies Temperature through multiple bindings [34, 33] (combined nominal scale 67; runtime rounds each separately)
-- ra120mmThermobaric: Warhead@Thermobaric_HeavyFlatCompatibility: applies Temperature through multiple bindings [34, 33] (combined nominal scale 67; runtime rounds each separately)
-- ra120mmThermobaricTargetingComputer: Warhead@Thermobaric_HeavyFlatCompatibility: applies Temperature through multiple bindings [34, 33] (combined nominal scale 67; runtime rounds each separately)
+- Flame and Chemical fold percentage damage into the main AreaDamage warhead, and it
+  feeds the matching physical-state meter.
+- No active weapon double-applies a meter through scaled and fixed warheads.

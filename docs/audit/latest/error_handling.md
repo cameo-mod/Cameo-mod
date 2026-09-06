@@ -5,7 +5,7 @@ Files scanned: **389**
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 87 | 30 |
+| E2 | handler discards the error | 88 | 30 |
 | E3 | open() without encoding= | 92 | 90 |
 | E4 | subprocess call without check= | 20 | 9 |
 
@@ -18,7 +18,7 @@ Files scanned: **389**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 87 finding(s)
+## E2 — 88 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -45,9 +45,10 @@ Files scanned: **389**
 | tools/audit/audit_upgrades.py | 158 | handler body discards the error |
 | tools/audit/audit_upstream_adoption.py | 97 | handler body discards the error |
 | tools/audit/audit_upstream_adoption.py | 138 | handler body discards the error |
-| tools/audit/audit_weapon_suffixes.py | 119 | handler body discards the error |
-| tools/audit/audit_weapon_suffixes.py | 185 | handler body discards the error |
-| tools/audit/audit_weapon_suffixes.py | 297 | handler body discards the error |
+| tools/audit/audit_weapon_suffixes.py | 110 | handler body discards the error |
+| tools/audit/audit_weapon_suffixes.py | 157 | handler body discards the error |
+| tools/audit/audit_weapon_suffixes.py | 223 | handler body discards the error |
+| tools/audit/audit_weapon_suffixes.py | 345 | handler body discards the error |
 | tools/audit/audit_weapon_uniqueness.py | 99 | handler body discards the error |
 | tools/audit/gen_damage_matrix.py | 52 | handler body discards the error |
 | tools/audit/miniyaml.py | 203 | handler body discards the error |
@@ -214,7 +215,7 @@ Files scanned: **389**
 | file | line | detail |
 |---|---|---|
 | tools/audit/audit_doc_claims.py | 104 | `subprocess.run()` without check= |
-| tools/audit/audit_doc_health.py | 130 | `subprocess.run()` without check= |
+| tools/audit/audit_doc_health.py | 139 | `subprocess.run()` without check= |
 | tools/audit/audit_engine_freshness.py | 52 | `subprocess.run()` without check= |
 | tools/audit/run_all.py | 114 | `subprocess.run()` without check= |
 | tools/audit/run_all.py | 138 | `subprocess.run()` without check= |
@@ -237,7 +238,7 @@ Files scanned: **389**
 
 ## FAIL
 
-- E2: 87 > baseline 30
+- E2: 88 > baseline 30
 - E3: 92 > baseline 90
 - E4: 20 > baseline 9
 

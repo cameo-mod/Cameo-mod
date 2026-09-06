@@ -6,23 +6,19 @@ Documents scanned: **224**
 
 | code | what | count |
 |---|---|--:|
-| D1 | literal control characters | 5 |
+| D1 | literal control characters | 0 |
 | D2 | mojibake (UTF-8 read as cp1252) | 0 |
 | D3 | markdown link to a missing file | 1 |
 | D4 | same-file anchor with no heading | 0 |
 | D5 | reference to a moved/removed document | 0 |
 | D6 | duplicate section id in DESIGN.md | 0 |
-| D7 | Contents index missing a section | 1 |
+| D7 | Contents index missing a section | 0 |
 | D8 | citation names a different section's law | 0 |
 
 
-## D1 — Control characters (5)
+## D1 — Control characters (0)
 
-- `DEVELOPMENT_LOG.md`:334 — control character 0xc
-- `docs\balance\review\scout_references.md` — not valid UTF-8
-- `docs\design\FACTION_REFERENCE_MATRIX.md` — not valid UTF-8
-- `docs\design\RTS_BALANCE_REFERENCE.md` — not valid UTF-8
-- `docs\reference\WARHEAD_REFERENCE.md` — not valid UTF-8
+_clean_
 
 
 ## D2 — Mojibake (0)
@@ -50,9 +46,9 @@ _clean_
 _clean_
 
 
-## D7 — Contents index out of date (1)
+## D7 — Contents index out of date (0)
 
-- `docs/LESSONS_LEARNED.md` — Contents omits `A hand-edit to generated output has a countdown on it (2026-09-05)`
+_clean_
 
 
 ## D8 — Citation points at the wrong law (0)
@@ -60,4 +56,4 @@ _clean_
 _clean_
 
 
-**FAIL — 7 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.
+**FAIL — 1 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.

@@ -267,5 +267,5 @@ Reviewed exact composites (224):
 - `wc2deathknightDeathCoilScatter_Right`: Flame_Heavy + Tesla_Super
 - `wc2deathknightFire`: Flame_Heavy + Tesla_Super
 
-WARN raw 335/339; unreviewed 111/114
+WARN raw 335/335; unreviewed 111/111
 Lower raw ratchets only for structural consolidation; lower the unreviewed ratchet only for exact reviewed decisions.

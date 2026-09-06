@@ -1,7 +1,7 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint / every MAIN identical (75 vs baseline 90)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (75 vs baseline 75)
 
 _at or below baseline_ — pre-existing **W24** debt (75 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
