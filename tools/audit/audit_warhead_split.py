@@ -63,14 +63,10 @@ ROUTING_REVEALED_BROADCASTS = {}
 
 # Exact behavior restoration, not a newly authored broadcast.  PR 287 folded
 # these four profiles and accidentally multiplied Hydralisk's ground damage.
-RESTORED_GAMEPLAY_BROADCASTS = {
-    "HydraSpit": (
-        ("ArrowWeapon", 18000),
-        ("LightChemicalWeapon", 18000),
-        ("LightMissile", 18000),
-        ("SmallArms", 18000),
-    ),
-}
+# (The HydraSpit entry was retired 2026-09-06: after `8748c68e4` it resolves to a
+# single BulletChem main, so the exemption could never fire and would only have
+# masked a future re-broadcast.)
+RESTORED_GAMEPLAY_BROADCASTS = {}
 
 
 def _int(v) -> int:
