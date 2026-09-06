@@ -67,8 +67,8 @@ from intentional_composites import (  # noqa: E402
 # 340 -> 339 on 2026-09-02: HydraSpit collapsed from four damage mains onto the new
 # ^Warhead_BulletChem_Light family (maintainer ruling; docs/design/W24_COLLAPSE_REVIEW.md
 # ┬º8). Structural consolidation, which is the only reason this number may move.
-RAW_SPLIT_BASELINE = 339
-SPLIT_BASELINE = 114
+RAW_SPLIT_BASELINE = 335
+SPLIT_BASELINE = 111
 INTENTIONAL_COMPOSITES = reviewed_fingerprints()
 REPORT = pathlib.Path(__file__).resolve().parents[2] / "docs/audit/latest/three_way_split.md"
 
