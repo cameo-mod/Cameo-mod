@@ -1,6 +1,47 @@
 # Development Log
 
 
+## Devin-Aurora - DuneRankDecoration fix + audit status update (2026-09-06, evening)
+
+**Identity:** Devin-Aurora (Devin CLI, GLM-5.2 High), D2k coordinator under Claude-Local.
+
+**Commits this session:**
+- `4d9968d1e` - fix(audit): TOP_LEVEL regex in audit_weapon_shape.py missed digit-starting keys
+- `08a435748` - docs(devlog): Aurora - audit_weapon_shape.py regex fix, W2 phantom regression explained
+- `f3c06489e` - fix(atreides): add DuneRankDecoration to 3 actors missing it
+
+**DuneRankDecoration fix:**
+`audit_dune_rank_decoration.py` reported 6 D2k actors with GainsExperience but without
+DuneRankDecoration. Fixed 3 in my Atreides lane:
+- `atreides_fremen` (infantry.yaml)
+- `atreides_missiletank` (vehicles.yaml)
+- `atreides_siegetank` (vehicles.yaml)
+
+Remaining 3 are in other lanes:
+- `corrino_missiletank`, `corrino_siegetank` (Dawn's Corrino lane)
+- `devastator` (Blaze's Harkonnen lane)
+
+**Audit status after fixes:**
+- `find_empty_warhead.py`: 0
+- `audit_dune_rank_decoration.py`: 6 -> 3 (only other lanes remain)
+- `audit_weapon_shape.py`: W2 213/213, W3 12/21, W4 52/61, W6 694/694 (all at or below ratchet)
+- `audit_warhead_split.py`: 67/72 (at or below)
+- Boot-gate: PASS
+
+**Lane status:**
+My Atreides + Ordos lane is substantially complete (Phase 0-3 done). Remaining work:
+1. W24 collapses - BLOCKED awaiting Claude ruling
+2. Buildable order fixes - complex, involves shared actors outside my lane (light_inf, trooper in D2k/Shared)
+3. Cross-pack deps (ordos_palace uses AsianChaosSuperweapon from RA2Mod) - needs Claude ruling
+4. Ordos BPO conflicts with shared actors - needs coordination with Blaze
+
+**What I am NOT doing:**
+- NOT collapsing any weapons without explicit Claude/maintainer instruction
+- NOT touching files outside my D2k lane
+- NOT touching the maintainer's uncommitted working tree changes
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
 ## Devin-Aurora - audit_weapon_shape.py regex fix: W2 "regression" was a phantom (2026-09-06, evening)
 
 **Identity:** Devin-Aurora (Devin CLI, GLM-5.2 High), D2k coordinator under Claude-Local.
