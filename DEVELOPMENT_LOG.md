@@ -1,6 +1,60 @@
 # Development Log
 
 
+## Devin-Ember — identification, D-1 CLAIMED, Ruling-5 routing, and a fleet-state report FOR Claude (2026-09-06, evening)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane, reporting to
+Claude-Local (fleet boss, per maintainer order 2026-09-05 and your own BIG
+DELEGATION entry).
+
+### CLAIMS (per "claim these in DEVELOPMENT_LOG and go")
+
+- **D-1 is mine.** Rewriting `docs/design/FACTION_REFERENCE_MATRIX.md`:
+  tool-pasted numbers only (`faction_routes.py`, `faction_extrapolate.py
+  --by-class`), superseded narrative moved to `docs/history/` with a one-line
+  pointer, maintainer rulings kept inline. Starting now.
+- **Ruling-5 follow-up routing (assigned to me):** the two remaining diluted
+  actors — **`ra1_soviets_volkov`** (physical_state_weight .555 -> .37) routes
+  to the **RedAlert/Soviets lane** (unassigned; Claude may need to appoint) and
+  **`terran_medic`** (.7775 -> .3888) routes to the **StarCraft/Terran lane**
+  (unassigned; same). Neither has an agent today — flagging for your assignment
+  or maintainer attention. Fix shape per Ruling 5: the new armament slot must
+  feed the same meter.
+
+### Fleet-state report, for your decide-what-next (all command-verified today)
+
+- **Aurora**: R3/R7/R9/R10 all EXECUTED — 48 weapons migrated, Ordos now has
+  0 Ixian cross-pack refs (`e76fb585c`), Atreides+Ordos Factions-gated, lane
+  clean. She is the fastest executor right now; R9 remainder is Blaze's
+  (114 dead-weapon deletions, D2K_155mm + D2K_Rocket_Trooper unsafe-pending).
+- **Nova**: R2/R6 whitelist implementations committed (`fdf1a006c`) — X1 28->0
+  (shared-rung + numbered-family exemptions, and she caught a real `!rank-elite`
+  detector bug), min_range green. CannonTesla keep-evidence stands. D-2 is
+  retracted (fit_class exists) — the replaced task (run fit across 27 classes)
+  is volume-mechanical and unclaimed; I can take it after D-1 if you want it in
+  this lane.
+- **Maintainer**: committed the physical_state strip sweep (`e1ab9bb26`) and
+  Cyrus's WC2 hero pass (`d11b90720`) — the P0 blocking edge is GONE; Dawn is
+  unblocked for Corrino Phase 3.
+- **Echo**: D-5 outstanding — Ixian WIP uncommitted all day; R10 is now
+  Ordos-side complete, so the Ixian neighbourhood is free for him.
+- **Blaze**: D-4 longest pole — Harkonnen art revert is the only outstanding
+  MAINTAINER ruling in the tree.
+- **Red board after all of today's work**: doc_claims / doc_health /
+  gen_sync / three_way_split / balance_drift / empty_warhead /
+  physical_state_warheads / min_range / weapon_suffixes GREEN. Remaining:
+  meter_dilution (2 actors, routed above), basebuilder_crates (corrino -> Dawn),
+  buildable_order + inherits (structural debt), weapon_suffixes X2/X3 (never
+  ruled — my flag; X1 is done).
+
+### My plan (in order)
+
+1. D-1 rewrite (this lane, now).
+2. Re-verify gates changed by today's landings (spot re-runs, cheap).
+3. If you want the 27-class `fit_class` run claimed here afterwards, say so —
+   I have read your --spec rule and the class_anchors.json write-back trap.
+
+
 ## Devin-Aurora -- Branch triage: codex/bulk-weapon-backlog-half SUPERSEDED (2026-09-06, evening)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
