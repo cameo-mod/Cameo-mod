@@ -45,6 +45,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
 - [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
+- [⛔ An override is a CANCELLATION — never judge it by the node it sits in (2026-09-06)](#-an-override-is-a-cancellation--never-judge-it-by-the-node-it-sits-in-2026-09-06)
 - [⛔ Fix the TOOL, not its output — six defects hid behind one patched map (2026-09-06)](#-fix-the-tool-not-its-output--six-defects-hid-behind-one-patched-map-2026-09-06)
 - [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
@@ -1506,3 +1507,44 @@ RESULT instead — six pathologies, six lower-only ratchets, whoever produced th
 Related: `docs/LESSONS_LEARNED.md` "A hand-edit to generated output has a countdown on
 it", and the exactly-0.0% tell in `tools/audit/gen_rename_maps.py`'s FACTION_SLUG
 comment.
+
+## ⛔ An override is a CANCELLATION — never judge it by the node it sits in (2026-09-06)
+
+`d818aec40` deleted 2248 `-Warhead@*` nodes as "stale". They were not stale. A
+`-Warhead@X` in a child **cancels a warhead an ANCESTOR defines**, and deleting it
+brings that warhead back.
+
+Measured with the audit's own resolver, at `d818aec40^` vs after:
+
+| | |
+|---|---|
+| weapons resolving to >1 MAIN warhead | **461 → 1103** |
+| newly multi-main | **644** |
+| same weapon, different main set | **161** |
+
+```
+IxianCombatTankCannon   cancelled CannonHE_Medium, then defined CannonHE_Heavy.
+                        Without the cancellation it fires BOTH on every shot.
+harkonnen_autogunturret cancelled Bullet_Light, Bullet_Medium, CannonHE_Heavy.
+25mmWaveforce           2 mains -> 8, gaining LightFlameWeapon, MediumChemical,
+                        ShrapnelWeapon, TankDestroyerCannon.
+```
+
+**Why they looked stale:** the check asked whether *the same node* also defines
+`Warhead@X`. It does not — that is the whole point of a cancellation — so every one
+of them read as dead.
+
+**The rule: resolve the node and check the ANCESTORS before deleting any override.**
+For a `-Warhead@X`, keep it unless **no ancestor defines `Warhead@X`**. The same trap
+wears other clothes: a child's `Modifier: 100` is almost always a cancellation of an
+inherited multiplier, not a no-op — W26's "20 no-ops" were 19 cancellations.
+
+**And a boot gate cannot catch this.** Nothing crashed; the game starts perfectly with
+a tank that also throws grenades. A boot gate proves the rules PARSE, never that they
+are RIGHT. For any bulk edit to resolved behaviour the gate is
+`tools/audit/review_resolve_diff.py` on a sample — five weapons would have caught this
+in minutes, and it was not run.
+
+⚠ **A bulk delete is the wrong shape for this class of cleanup entirely.** Whatever
+genuinely-dead nodes existed among those 2248 are still there after the revert; they
+have to be found per-node, by resolving each parent chain.
