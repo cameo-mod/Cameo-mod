@@ -31,6 +31,7 @@ from __future__ import annotations
 import sys
 
 from cameo_model import Model
+from intentional_composites import intentional_composite
 from report import h1, h2, table
 
 REVIEW_DMG = 8000
@@ -54,7 +55,11 @@ REVIEW_DMG = 8000
 # FIRED by a concrete actor, while this audit scans EVERY concrete weapon
 # (`rs.weapons`), fired or not. Two populations, both correct for their own
 # question — don't reconcile them by changing one.
-BROADCAST_BASELINE = 75
+# 2026-09-06: 75 -> 22. The drop is NOT 53 collapses — it is this audit finally
+# consulting `intentional_composites.py`. 51 of the 73 weapons it was reporting as
+# W24 debt are maintainer-curated composites that were never debt, so the real
+# broadcast backlog is 22, not 73. Lower as W24 collapses weapons; never raise.
+BROADCAST_BASELINE = 22
 
 # The two former routing-revealed exceptions were consolidated into their
 # selected Flak and Bullet profiles. Keep the registry empty so a future
@@ -104,6 +109,7 @@ def main() -> int:
     rs = m.rs
 
     broadcast_rows = []   # FAIL 1 (uniform main warheads)
+    curated_rows = []     # REVIEWED composites — registry says keep them
     routing_revealed_rows = []  # known composites unmasked by target-route repair
     restored_gameplay_rows = []  # exact profiles restored to repair regressions
     ff_rows = []          # FAIL 2
@@ -127,7 +133,16 @@ def main() -> int:
                 wname, str(len(mains)), str(main_dmgs[0]),
                 str(main_dmgs[0] * len(mains))]
             fingerprint = tuple(sorted(mains))
-            if ROUTING_REVEALED_BROADCASTS.get(wname) == fingerprint:
+            # ⛔ REVIEWED FIRST. `intentional_composites.py` is the registry of
+            # multi-main weapons a maintainer looked at and deliberately KEPT.
+            # Until 2026-09-06 this audit never consulted it, so FAIL 1 listed
+            # curated composites as debt while audit_three_way_split correctly
+            # excluded them — the two guards disagreed, and agents worked from
+            # this one. Four `D2K_Rocket_Trooper*` weapons were collapsed on the
+            # strength of that list (and reverted in `4675d33ac`).
+            if intentional_composite(wname, [t for t, _ in mains]):
+                curated_rows.append(row)
+            elif ROUTING_REVEALED_BROADCASTS.get(wname) == fingerprint:
                 routing_revealed_rows.append(row)
             elif RESTORED_GAMEPLAY_BROADCASTS.get(wname) == fingerprint:
                 restored_gameplay_rows.append(row)
@@ -165,6 +180,15 @@ def main() -> int:
     out.append(table(["weapon", "mains", "per_warhead", "total"], broadcast_rows[:40]))
     if len(broadcast_rows) > 40:
         out.append(f"\n_... and {len(broadcast_rows) - 40} more._\n")
+
+    out.append(h2(f"Reviewed — maintainer-curated composites, NOT debt "
+                  f"({len(curated_rows)})"))
+    out.append(
+        "Registered in `tools/audit/intentional_composites.py`. These are multi-main by "
+        "DESIGN and are excluded from the FAIL 1 count. **Do not collapse one** — read the "
+        "registry before any W24 work (`python tools/audit/intentional_composites.py "
+        "--snapshot`).\n")
+    out.append(table(["weapon", "mains", "per_warhead", "total"], curated_rows))
 
     out.append(h2(f"Review — exact gameplay restorations ({len(restored_gameplay_rows)})"))
     out.append(table(
