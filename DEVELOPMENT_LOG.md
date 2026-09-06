@@ -1,6 +1,50 @@
 # Development Log
 
 
+## Devin-Aurora -- Ruling 9 phase 1: Atreides weapon migration (2026-09-06, afternoon)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### Context
+
+Ruling 9 (legacy weapon migration): migrate D2k weapons from legacy
+`mods/cameo/weapons/d2k.yaml` to ContentPack files.
+
+### What was done
+
+Migrated 2 Atreides-only weapons from legacy to
+`ContentPacks/D2k/Atreides/yaml/weapons.yaml`:
+- `D2KRepair` (repair vehicle weapon, only used by Atreides)
+- `HMG` (HMG turret, only used by Atreides)
+
+Both are verbatim copies. Legacy definitions remain for now (Blaze will
+remove dead weapons in a later phase).
+
+### Shared weapons deferred
+
+Also attempted to migrate 3 Shared weapons (`D2K_155mm`,
+`D2K_Rocket_Trooper`, `mtank_pri`) to
+`ContentPacks/D2k/Shared/yaml/weapons.yaml` but reverted.
+
+**Root cause:** the audit's `find_empty_warhead.py` resolve order
+processes central files (including legacy `d2k.yaml`) BEFORE
+ContentPacks. The legacy `-Warhead@` removals remove the warheads,
+then the ContentPack bare `Warhead@` nodes re-add them as empty-type
+(because the inherited type was already removed). This causes 3
+empty-type warheads that would NRE at boot.
+
+**Lesson:** Shared weapons with `-Warhead@` collapse removals cannot
+be safely duplicated in ContentPacks while the legacy definitions still
+exist. They must be migrated in a single step: add to ContentPack +
+remove from legacy. Since legacy `d2k.yaml` is Blaze's lane, this
+requires coordination.
+
+### Verification
+
+- `find_empty_warhead`: 0
+- Boot-gate: PASS (MenuPostProcessEffect.PostWorldLoaded, no new exceptions)
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Aurora -- meter_dilution fix: D2K_APC_Rocket_AA feeds Temperature meter (2026-09-06, afternoon)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
