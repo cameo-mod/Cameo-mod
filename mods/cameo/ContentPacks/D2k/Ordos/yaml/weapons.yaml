@@ -1192,6 +1192,8 @@ D2K_APC_Rocket_AA:
 	Inherits@finalmain: ^Compatibility_MissileAA_MediumFlat
 	Inherits: D2K_APC_Rocket
 	ValidTargets: Air
+	Warhead@MissileAA_MediumFlatCompatibility:
+		PhysicalStateName: Temperature
 	Warhead@CollapsedMissileAP_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

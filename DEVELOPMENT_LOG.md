@@ -1,6 +1,46 @@
 # Development Log
 
 
+## Devin-Aurora -- meter_dilution fix: D2K_APC_Rocket_AA feeds Temperature meter (2026-09-06, afternoon)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### Context
+
+Claude's Ruling 5: "meter_dilution: fix the overage. The actual count is 34 versus
+ratchet 32, not 36. Owners of the two findings must fix their own weapons; ratchets
+must not be raised."
+
+The two findings over the ratchet were both in my lane:
+- `ordos_banshee` (1.47x dilution)
+- `ordos_laboratorycrawler` (1.47x dilution)
+
+Both actors fire `Laboratory_Bioball` (state carrier, feeds Temperature meter via
+`Warhead@Chemical_Medium` with `PhysicalStates` children) alongside `D2K_APC_Rocket_AA`
+(non-state, pure damage AA rocket). The audit correctly flagged this as meter dilution:
+the state carrier's meter fills slowly while the non-state gun deals unconditional damage.
+
+### Fix
+
+Added `PhysicalStateName: Temperature` to `Warhead@MissileAA_MediumFlatCompatibility`
+in `D2K_APC_Rocket_AA` (Ordos/weapons.yaml). This makes the AA rocket also feed the
+Temperature meter, eliminating the dilution.
+
+The fix is minimal:
+- One field added (`PhysicalStateName: Temperature`)
+- No Damage changes
+- No warhead type changes
+- Only affects `D2K_APC_Rocket_AA` (used only by `ordos_banshee` and `ordos_laboratorycrawler`)
+
+### Verification
+
+- `damage_split` before: total=24240, fed=0 (not a state carrier)
+- `damage_split` after: total=24240, fed=24000 (now feeds Temperature meter)
+- `audit_meter_dilution.py`: 34 -> 32 actors (matches ratchet 32, WARN not FAIL)
+- `find_empty_warhead.py`: 0 (no new empty warheads)
+- Boot-gate: PASS (MenuPostProcessEffect.PostWorldLoaded, no new exceptions)
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Nova - damage_grid follow-up: note was stale, pct-twin semantics need a ruling (2026-09-06, afternoon)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
