@@ -339,7 +339,7 @@ unmistakable faction mirrors:
 |---|--:|--:|---|
 | `scout` | 6 | 4 | `ra1_allies_rifleinfantry`, `ra1_soviets_rifleinfantry`, `td_gdi_minigunner`, `td_nod_minigunner` — **all 100cr** |
 | `melee` | 4 | 3 | `ra1_soviets_attackdog`, `ra2_allies_attackdog`, `ra2_soviets_attackdog` — **all 200cr** |
-| `mbt` | 42 | **35** | 4 at 800cr incl. `tiger.nax` (the anchor) |
+| `mbt` | 42 | **35** | 4 at 800cr incl. `naxis_tiger` (the anchor) |
 | `scout_vehicle` | 28 | **23** | 8 at 500cr |
 | `epic_vehicle` | 24 | 18 | 6 at 5,000cr |
 | `high_tech_tank` | 26 | 16 | 4 at 1,600cr |
@@ -510,7 +510,7 @@ closecombat means (§6b: "shotgun/SMG", 2500 spray → 4500 long shotgun):
 | `zerg_defiler` | 9,000 | above | §6b verdict: **casters → support class** |
 | `yuri_clone` | 7,000 | above | needs a ruling — no verdict covers it |
 | `naxis_slaveoverseer` | 5,621 | special forces | ⚠ §6b verdict says **naxi slaveoverseer → scout (lose air)** — so the RANGE moves, not the class |
-| `undead.nax` | 5,621 | special forces | same weapon as the above; also a naming-rule defect (`.` not `_`) |
+| `naxis_undead` | 5,621 | special forces | same weapon as the above; also a naming-rule defect (`.` not `_`) |
 | `ra1_allies_rifleinfantry` | 5,500 | ⚠ **the boundary** | see §6.2 |
 | `TSE1` / `ts_gdi_lightinfantry` / `ts_nod_lightinfantry` | 4,062 | closecombat | ⚠ these are the TS riflemen — rifles are the SCOUT archetype, so the class is right and the RANGE is 438 short of the band |
 | `zerg_spithid` | 3,855 | closecombat | §6b verdict says **zerg spithid → scout (lose air)** — again the range moves |
@@ -548,7 +548,7 @@ per-unit special."* Sixteen of the nineteen are scouts, and the 2026-07-20 sweep
 `TSE1` · `asianalliance_asianmilitia` · `ixian_lightinfantry` · `latinsyndicate_latinmilitia` ·
 `light_inf` · `naxis_slaveoverseer` · `ordos_lightinfantry` · `ra2_allies_gi` ·
 `ra2_soviets_conscript` · `ra2e2.black` · `tkm_marine` · `ts_gdi_lightinfantry` ·
-`ts_nod_lightinfantry` · `undead.nax` · `zerg_defiler` · `zerg_spithid` (scout)
+`ts_nod_lightinfantry` · `naxis_undead` · `zerg_defiler` · `zerg_spithid` (scout)
 
 ⚠ The D2k light-infantry ladder (`light_inf`, `ordos_lightinfantry`, `ixian_lightinfantry`) is
 named in §6b's own price ladder as scout class, and all three hit air. That is the largest block

@@ -920,7 +920,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   first — the current subtype rosters pull in snipers/casters/spies/core-combat
   units (scout: spies+zerg_defiler; SF: dragunov sniper, terran_*, zerg_hydralisk).
   PROGRESS 2026-07-22: **closecombat 3/4 at Δ≤1** — shotgunner/fanatic anchors
-  (Δ0), naxis_sssoldier (range 4500, FP 95%, Δ−0.8). `alien.nax` DEFERRED (Δ+67):
+  (Δ0), naxis_sssoldier (range 4500, FP 95%, Δ−0.8). `naxis_alien` DEFERRED (Δ+67):
   its weapon `NaxiAlienPistol` is defined in shared `mods/cameo/weapons/redalert2mod.yaml`
   and inherited cross-pack (Naxis + SchwarzerMond) — editing it would leak.
 - [ ] **Shared-weapon ownership pass** (systemic, found 2026-07-22): many members

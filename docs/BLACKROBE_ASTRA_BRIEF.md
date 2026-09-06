@@ -297,7 +297,7 @@ yaml commits landed without a re-extract.
 
 ⛔ **`fit_class --anchor <actor>` WRITES BACK `o0`/`p0`/`q0` into `class_anchors.json`.** A
 single test run silently moved `mbt` from 946.79/1093.58/1387.16 to 800/800/800, because it
-refits against the LIVE actor and `tiger.nax` is still PRE-RESTAT (hp 100000 against a spec of
+refits against the LIVE actor and `naxis_tiger` is still PRE-RESTAT (hp 100000 against a spec of
 240000). **Use `--spec`, not `--anchor`, wherever the two differ, and diff
 `class_anchors.json` after every run.**
 
@@ -385,7 +385,7 @@ global loads later it is the copy whose fields win today.
 | **G3** | **Only 32.4% of buildable units are tagged into a class** (634 of 1,958). An untagged unit cannot be priced at all. | `anchor_readiness` |
 | **G4** | **One anchor is not a member of its own class** — `heavy_sniper` → `td_gdi_heavysniper` is not tagged `pure_sniper`. The zero point sits outside the population it defines. | `anchor_readiness` |
 | **G5** | **E2: `extract_stats` reads no PhysicalState**, so ~89 live status-effect bindings are priced at **zero**. Cryo, EMP, radiation and burn carriers are all underpriced. | `docs/design/PHYSICAL_STATE_SYSTEM.md` |
-| **G6** | **13 pre-restat anchors.** For the classes locked on 2026-08-01 the anchor ACTOR still carries pre-restat stats; `mbt`'s spec says hp 240000 while `tiger.nax` has 100000. Fitting against the actor drags the anchor backwards. | `class_anchors.json`, `anchor_readiness` last table |
+| **G6** | **13 pre-restat anchors.** For the classes locked on 2026-08-01 the anchor ACTOR still carries pre-restat stats; `mbt`'s spec says hp 240000 while `naxis_tiger` has 100000. Fitting against the actor drags the anchor backwards. | `class_anchors.json`, `anchor_readiness` last table |
 | **G7** | **W24/W23/A5 unfinished** — 401 multi-main weapons, 45 legacy templates with 1,196 inheritors, 297 legacy inline `Versus` weapons. §0a says these gate pricing. | Part 5.3 |
 
 ---

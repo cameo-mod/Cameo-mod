@@ -1111,7 +1111,7 @@ consequential than the flag:
    carrying any `requires` at all. But `!rank-elite` is the BASE weapon, not an
    upgrade gate — as is `!forgotten_upgrade_chemicalweapons`, and so on. **371 of 863
    actors with priced armaments came out at zero DPS** and dropped out of class fits
-   entirely, `tiger.nax` — the recorded `mbt` anchor — among them, which is why fitting
+   entirely, `naxis_tiger` — the recorded `mbt` anchor — among them, which is why fitting
    `mbt` failed outright. Replaced with `formula.condition_holds_by_default()`: evaluate
    the condition with every named condition FALSE, i.e. *the weapon the unit fires as
    built*. Coverage **57% → 96%**; the 37 still at zero genuinely have no as-built weapon
@@ -1135,7 +1135,7 @@ against K. What would settle it is running `--compare-k` on a class whose costs 
 maintainer already considers CORRECT, and checking whether K pulls those towards or
 away from them.
 
-**VERIFY:** `python tools/balance/fit_class.py --class mbt --anchor tiger.nax --compare-k`
+**VERIFY:** `python tools/balance/fit_class.py --class mbt --anchor naxis_tiger --compare-k`
 → report in `docs/balance/derived/`, `class_anchors.json` untouched. Sign-off still owed
 in `anchor_decisions_log.md` before `--use-k` becomes the default.
 

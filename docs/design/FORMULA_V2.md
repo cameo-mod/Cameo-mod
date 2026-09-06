@@ -136,7 +136,7 @@ already capture.
 | Gatling spin-up / ramp | `^GatlingSpeedUpUnitBehavior` | Gatling Trooper, Eliminator 800 |
 | Sniper instakill / lockdown | lockdown attach or instakill-vs-infantry weapon | Ghost, Allied Sniper |
 | Point-defense | point-defense trait (intercepts incoming projectiles) | Laser Commando, TD Nod Light Tank Mk2 |
-| Spawns an attacking sub-actor | `Warhead@…: SpawnActor` dropping an actor with its own weapon (black hole, mines, drone) | Parzival (BlackHoleMaker → hole_small.nax2) → K 1.25 |
+| Spawns an attacking sub-actor | `Warhead@…: SpawnActor` dropping an actor with its own weapon (black hole, mines, drone) | Parzival (BlackHoleMaker → schwarzermond_hole_small) → K 1.25 |
 | Friendly aura buff | a proximity buff aura (firepower/speed/armour to nearby allies) — often VERY strong, RE-TIER to Major+ | TD GDI Officer **propaganda** |
 | Debuff warhead / designator | snare (slow), blind (vision/accuracy cut), or target-designator (marks for bonus damage) | zerg corruptor (snare), latin smoker tank (blind), GDI Predator (targeting laser) |
 

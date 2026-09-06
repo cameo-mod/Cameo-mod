@@ -24,7 +24,7 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 | agent | lane |
 |---|---|
 | **Blackrobe GPT-6 Astra** | ⭐ **FINISH THE BALANCE PIPELINE** (Tasks A–G) **and inherit the AI bot modules** (Task H — Devin Cloud ran out of quota mid-merge). Full brief: [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md). Branch `astra/balance-pipeline`, never master. Has **full authority including `apply_balance --confirm`**, conditional on one commit per decision and a review dossier at `audit/ASTRA_REVIEW.md`. |
-| **Devin fleet** (Aurora, Nova, Ember, Blaze, Dawn, Echo) | the **144 dotted-suffix actor renames** (`frank.nax` → `naxis_frank`), one faction each; then weapon-shape conversion batches |
+| **Devin fleet** (Aurora, Nova, Ember, Blaze, Dawn, Echo) | the **144 dotted-suffix actor renames** (`naxis_frank` → `naxis_frank`), one faction each; then weapon-shape conversion batches |
 | **Claude-Local (Opus 5)** | rulings, review, squash-merges to master, and the gates |
 
 ⚠ **Nobody merges to master except Claude-Local.** Agents commit freely on their own branch
