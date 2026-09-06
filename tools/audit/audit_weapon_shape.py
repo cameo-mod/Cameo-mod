@@ -72,7 +72,9 @@ W1_BASELINE = 583   # more than 3 inherits
 W2_BASELINE = 211   # dual ^Warhead_ inherit (213->211: D2K_Rocket_Trooper AA+AGOnly collapsed by maintainer ffdec98b7)
 W3_BASELINE = 12    # dual ^Projectile_ inherit (21->12: same collapse)
 W4_BASELINE = 52    # dual ^Effect_ inherit (61->52: same collapse)
-W5_BASELINE = 401   # more than one resolved MAIN warhead
+W5_BASELINE = 394   # more than one resolved MAIN warhead (was 401; 394 after the
+                    # ad7c5e232 removal-node restore, which was the last of the
+                    # resurrected-warhead damage)
 W6_BASELINE = 694   # weapons declaring an effect warhead locally
                     # 687 -> 694: the TOP_LEVEL regex was fixed to match
                     # digit-starting keys (120mm_*, 8Inch, etc.), exposing

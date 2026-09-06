@@ -59,14 +59,12 @@ from report import h1, h2, table
 # S1a is a hard defect and stays at zero: `d818aec40` took it from 0 to 65 and the
 # maintainer found the mutalisk bouncing forever in play.
 S1A_BASELINE = 0    # multi-node cycles (A -> B -> A)
-# S1b is a LOWER-ONLY ratchet at the measured pre-existing count.  Every one is a
-# tesla-arc fragment whose shrapnel names itself.  ⚠ CORRECTION: these were first
-# called "chain lightning, bounded by targets" from the field names alone.  The
-# warhead source says otherwise - ThrowWithoutTarget defaults TRUE and every one of
-# them has ValidTargets: Ground, Water, which a bare position satisfies - so by the
-# code they never terminate.  Left at 44 and NOT auto-fixed: the maintainer owns the
-# call, because "it has always been like this" is evidence worth weighing too.
-S1B_BASELINE = 44   # self-cycles (A -> A)
+# S1b was ratcheted at 44 self-cycling tesla-arc fragments, first called benign chain
+# lightning and then called pre-existing debt.  BOTH readings were wrong, and the second
+# one only because the bisect stopped at d818aec40^ instead of walking back one more
+# commit: the terminators were deleted by ad7c5e232 (a RENAME that also stripped 236
+# removal nodes).  Restoring them took S1b 44 -> 0.  Ratchet is now 0 with the rest.
+S1B_BASELINE = 0    # self-cycles (A -> A)
 S2_BASELINE = 0     # dangling shrapnel targets
 MAX_DEPTH = 6       # bounces; the longest legitimate chain in the tree is 3
 
