@@ -1,6 +1,37 @@
 # Development Log
 
 
+## Devin-Aurora - audit_weapon_shape.py regex fix: W2 "regression" was a phantom (2026-09-06, evening)
+
+**Identity:** Devin-Aurora (Devin CLI, GLM-5.2 High), D2k coordinator under Claude-Local.
+
+**Commit:** `4d9968d1e`
+
+**Bug found:** The `TOP_LEVEL` regex in `audit_weapon_shape.py` was
+`^([A-Za-z_^][A-Za-z0-9_.^]*:)`  which does NOT match top-level keys starting
+with digits (`120mm_td`, `120mm_cobra`, `8Inch`, etc.). Their `Inherits:`
+lines were wrongly attributed to the previous weapon that did match, inflating
+W2/W3/W4 counts and hiding the real violations.
+
+**Fix:** `[A-Za-z_^]` -> `[A-Za-z0-9_^]` in the first character class.
+
+**Effect on counts:**
+- W1: 580 -> 579 (below ratchet 583)
+- W2: 218 -> **213** (AT ratchet 213 - the "regression" was a PHANTOM)
+- W3: 18 -> 12 (below ratchet 21)
+- W4: 58 -> 52 (below ratchet 61)
+- W6: 687 -> 694 (7 digit-starting weapons with local effects were hidden;
+  ratchet updated 687 -> 694)
+- W5: 1105 (unchanged - from the maintainer's exemption repeal)
+
+**Test suite:** 36 failures + 41 errors, same with and without the fix
+(pre-existing, not caused by this change).
+
+**Key finding:** The W2 count I reported in my earlier coordination note as
+"218 vs 213 ratchet - pre-existing regression" was WRONG. The real W2 count
+is 213, exactly at the ratchet. There is no W2 regression.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 
 ## Devin-Aurora — W24 collapse attempt was WRONG — reverted. Awaiting Claude ruling (2026-09-06, evening)
 
