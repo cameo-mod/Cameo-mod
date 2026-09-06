@@ -52,7 +52,7 @@ crashed** — a boot gate proves the rules PARSE, never that they are RIGHT. Rev
 
 | new gate | catches | ratchet |
 |---|---|---|
-| `audit_shrapnel_chains.py` | a FireShrapnel chain that never ends | S1a **0**; S1b 44 self-cycles (chain lightning, pre-existing, **needs a ruling — do not "fix"**) |
+| `audit_shrapnel_chains.py` | a FireShrapnel chain that never ends | S1a **0**; S1b 44 self-cycles, pre-existing — **probably real infinite loops**, see below; needs a ruling |
 | `audit_map_actors.py` | a map placing an actor the rules do not define (boot gate is blind: it fails when the map is STARTED) | M1 **0** |
 | `bash_guard.py` rule 4 | deleting a `-Key@...` without `RESOLVE-VERIFIED` in the message | — |
 
@@ -60,6 +60,20 @@ Also fixed: `audit_naming_damage`'s regex could not see a doubled id (reported N
 N2 0 against the true 25 / 16 — an exact zero is always suspect), and the boot-gate
 hook read the MAIN checkout's index from every worktree, which would have waved
 through engine content committed from a worktree. Both now have self-tests.
+
+⚠ **Open, and it needs a maintainer call: the 44 S1b self-cycles are probably NOT
+benign.** They were first called chain lightning bounded by available targets. That was
+reasoned from field names; reading `OpenRA.Mods.AS/Warheads/FireShrapnelWarhead.cs` says
+otherwise. `ThrowWithoutTarget` defaults to **true**, so with no actor in range the
+warhead throws at a random position anyway and fires whenever
+`weapon.IsValidAgainst(pos)` holds — and every one of these carries
+`ValidTargets: Ground, Water`, which a bare terrain position satisfies. **By the code
+they never terminate:** one impact spawns one more, forever, wandering the map.
+
+They all predate `d818aec40`, so this is old debt rather than a regression, and they are
+deliberately NOT auto-fixed — "it has shipped like this for a long time" is evidence
+worth weighing, and the remedy is a design choice (a hop cap, `ThrowWithoutTarget: false`
+on the terminal fragment, or a distinct non-recursive terminal weapon).
 
 Full write-up for agents: `../Cameo-mod-fleet/BRIEF_2026-09-07_what_broke_and_the_new_gates.md`.
 

@@ -18,10 +18,20 @@ exists once a shot is fired.  This audit is the gate that applies.
 
 Checks:
   S1a MULTI-NODE CYCLE  A -> B -> A.  ALWAYS a bug: a terminator was lost.
-  S1b SELF-CYCLE        A -> A.  Chain lightning arcs from target to target and
-                        stops when none are left, so a self-reference is bounded
-                        by the battlefield rather than infinite.  Ratcheted at the
-                        measured 44 pending a design ruling - NOT called a defect.
+  S1b SELF-CYCLE        A -> A.  44 of these, ALL predating d818aec40.  They were
+                        first assumed to be chain lightning bounded by available
+                        targets.  READING THE WARHEAD SOURCE SAYS OTHERWISE, and the
+                        correction is recorded here because the first reading was
+                        reasoned from field NAMES rather than from the code:
+                          FireShrapnelWarhead.ThrowWithoutTarget defaults to TRUE,
+                          so when no actor is in range it throws at a random position
+                          anyway, and fires whenever weapon.IsValidAgainst(pos) holds.
+                          Every one of these carries ValidTargets: Ground, Water,
+                          which a bare terrain position satisfies.
+                        By the code they therefore do NOT terminate: one impact spawns
+                        one more, forever, wandering the map.  Ratcheted at 44 and
+                        NOT auto-fixed - the maintainer owns whether these are a real
+                        defect or something outside the yaml stops them.
   S2 DANGLING   a FireShrapnel naming a weapon that does not exist
   S3 DEEP       a chain longer than MAX_DEPTH - legal, but worth a human look
 
@@ -49,10 +59,13 @@ from report import h1, h2, table
 # S1a is a hard defect and stays at zero: `d818aec40` took it from 0 to 65 and the
 # maintainer found the mutalisk bouncing forever in play.
 S1A_BASELINE = 0    # multi-node cycles (A -> B -> A)
-# S1b is a LOWER-ONLY ratchet at the measured pre-existing count, not an assertion
-# that all 44 are wrong.  Every one is a tesla-arc fragment whose shrapnel names
-# itself, which is how chain lightning is expressed: it stops when no target is
-# left in range.  Needs a design ruling before anyone "fixes" them.
+# S1b is a LOWER-ONLY ratchet at the measured pre-existing count.  Every one is a
+# tesla-arc fragment whose shrapnel names itself.  ⚠ CORRECTION: these were first
+# called "chain lightning, bounded by targets" from the field names alone.  The
+# warhead source says otherwise - ThrowWithoutTarget defaults TRUE and every one of
+# them has ValidTargets: Ground, Water, which a bare position satisfies - so by the
+# code they never terminate.  Left at 44 and NOT auto-fixed: the maintainer owns the
+# call, because "it has always been like this" is evidence worth weighing too.
 S1B_BASELINE = 44   # self-cycles (A -> A)
 S2_BASELINE = 0     # dangling shrapnel targets
 MAX_DEPTH = 6       # bounces; the longest legitimate chain in the tree is 3
