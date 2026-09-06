@@ -3556,7 +3556,7 @@
 	DeathSounds@NORMAL:
 		RequiresCondition: !chronobeamed
 	SpawnActorOnDeath@ZombieInfect:
-		Actor: undead.nax
+		Actor: naxis_undead
 		Probability: 100
 		OwnerType: Killer
 		DeathType: ZombieInfection
