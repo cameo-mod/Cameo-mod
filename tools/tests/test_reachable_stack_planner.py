@@ -18,13 +18,14 @@ from survey_weapon_structure import inventory  # noqa: E402
 class ReachableStackPlannerTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data = planner.build()
+        rules = Ruleset(ROOT)
+        cls.data = planner.build(rules)
         cls.names = [
             member["name"]
             for group in cls.data["groups"]
             for member in group["members"]
         ]
-        cls.inventory = inventory(Ruleset(ROOT))
+        cls.inventory = inventory(rules)
 
     def test_every_reachable_stack_occurs_exactly_once(self):
         self.assertEqual(self.data["reachable_stacked"], len(self.names))

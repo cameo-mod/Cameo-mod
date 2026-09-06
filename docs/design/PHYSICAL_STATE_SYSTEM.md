@@ -69,11 +69,10 @@ target's life still ahead of it, comfortably inside the 0.75 bar.
 
 | mechanism | bindings | reach full effect before 25% HP |
 |---|--:|--:|
-| damage-scaled (heat + corrosion) | 527 | **111** |
-| discrete apply (cryo) | 22 | 7 |
-| **total** | **549** | **118 (21.5%)** |
+| damage-scaled (heat + corrosion) | 562 | **146** |
+| **total** | **562** | **146 (26.0%)** |
 
-⛔ **`meters_filling_before_death` = 118 of 549 — NOT the 534 (97.3%) this section claimed until
+⛔ **`meters_filling_before_death` = 146 of 562 — NOT the 534 (97.3%) this section claimed until
 2026-08-19.** The correction is one term, and it is W24's term. Everything above assumes the
 damage that FILLS the meter is the damage that KILLS the target. It is not: a damage-scaled
 binding fills from the ONE warhead carrying `PhysicalStateName`, while the target dies to every
@@ -96,7 +95,7 @@ parts relate*.
 ⛔ **This is why `BALANCE_PROGRAM_PLAN` §0a puts weapon STRUCTURE before pricing** — restated by
 the maintainer 2026-08-19: *"that's exactly why I said you should finish the 3 way weapon split
 first!"* Pricing a weapon whose structure is wrong measures the wrong object. The burn-down is
-pinned as `w24_multi_main_fed` (380, ratchet-down-only).
+pinned as `w24_multi_main_fed` (374, ratchet-down-only).
 
 ⚠ **RELAXATION is still excluded** and moves this number down further: `RelaxationDelay 25` +
 `RelaxationLinear 5` + `RelaxationScaled 50` bleeds ~642 meter/shot at `ReloadDelay 60` (23% of

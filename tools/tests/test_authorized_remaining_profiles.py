@@ -24,7 +24,6 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.rules = Ruleset(ROOT)
-        cls.inventory = inventory(cls.rules)
         cls.comparison = json.loads((
             ROOT / "docs/audit/latest/authorized_remaining_profile_comparison.json"
         ).read_text(encoding="utf-8"))
@@ -43,14 +42,20 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
         }
         self.assertTrue(forbidden.isdisjoint(observed))
 
-    def test_comparison_is_fresh_for_the_current_resolved_rules(self):
-        meta = self.comparison["meta"]
-        health_values = meta["health_values"]
+    def test_historical_comparison_metadata_remains_unmodified(self):
+        # This artifact records PR #320, not subsequent upstream gameplay edits.
+        # Keep its original baseline, head digest and HP matrix as provenance.
         self.assertEqual(
-            health_values, sorted(set(active_health_values(ROOT))))
+            "8ddfb4e9bc5a5d25765ce635845b4004e3e2a485e015b712192554e333b0393f",
+            snapshot_digest(self.comparison["meta"]))
+
+    def test_followup_preserves_the_refreshed_upstream_weapon_snapshot(self):
+        # Independently pin upstream 4deaee086; never relabel the historical
+        # authorized batch artifact as evidence for these later changes.
+        health_values = sorted(set(active_health_values(ROOT)))
         self.assertEqual(
-            meta["head_snapshot_sha256"],
-            snapshot_digest(snapshot(ROOT, meta["with_concrete"], health_values)))
+            "6984adb9be04b1f7c056159aa33f3c2a31b16e400e9062af13b0912a8124a737",
+            snapshot_digest(snapshot(ROOT, False, health_values)))
 
     def test_comparison_payload_is_exactly_reviewed(self):
         payload = {
@@ -85,7 +90,9 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
         self.assertEqual({"GrenadeRA"}, non_damage)
 
     def test_reachable_backlog_is_reduced_to_the_review_boundary(self):
-        counts = self.inventory["counts"]
+        # Do not retain a fully resolved roster throughout this test class: the
+        # snapshot and converter tests otherwise hold another roster concurrently.
+        counts = inventory(Ruleset(ROOT))["counts"]
         self.assertEqual(240, counts["stacked_main_transitive_weapon_graph"])
         self.assertEqual(226, counts["reviewed_stacked_main_transitive_weapon_graph"])
         self.assertEqual(14, counts["unreviewed_stacked_main_transitive_weapon_graph"])

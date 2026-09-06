@@ -16,7 +16,7 @@ HarkonnenFlameTurret:
 		LaunchAngle: 10, 20
 		Image: tsflameall
 		Palette: tseffect
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		PercentageScale: 3183
 		Damage: 25135
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
@@ -26,9 +26,6 @@ harkonnen_autogunturret:
 	ReloadDelay: 132
 	Burst: 26
 	BurstDelays: 2
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
-	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -66,7 +63,7 @@ ExplosiveDebris:
 		LaunchAngle: 150, 220
 		Inaccuracy: 2c512
 		BounceCount: 1
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		PercentageScale: 53333
 		Damage: 3000
 		Spread: 1c562
@@ -75,3 +72,22 @@ ExplosiveDebris:
 		ImpactSounds: EXPLSML4.WAV
 	Warhead@Concrete: DamagesConcrete
 		Damage: 4500
+
+harkonnen_devastatorturret:
+	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
+	Inherits@proj: ^Projectile_Shell_Heavy_D2K_DevBullet
+	Inherits@fx: ^Effect_CannonHE_Heavy_D2K_DevBullet
+	ReloadDelay: 120
+	Range: 7c0
+	Report: TANKHVY1.WAV
+	Projectile: Bullet
+		Speed: 333
+		Image: doubleblastbullet
+		Palette: d2keffect
+harkonnen_inkvine_weapon:
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
+	Inherits@fx: ^Effect_Demolition_Heavy_D2K_155mm
+	ReloadDelay: 120
+	Range: 10000
+	Report: MORTAR1.WAV

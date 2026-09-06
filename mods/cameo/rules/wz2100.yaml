@@ -305,9 +305,9 @@ Player:
 	GrantExternalConditionToOwner@OilDerricksOwned:
 		Condition: OilDerricksOwned
 	Inherits: OILB.Building
+	Inherits@BaseBuilding: ^BaseBuilding
 	-RenderSprites:
 	-HitShape:
-	Inherits: ^BaseBuilding
 	Inherits@2: ^CashTricklerMultipliers
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@AP: ^2100BuildingArmorUpgrades
@@ -836,7 +836,7 @@ Player:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@AP: ^2100BuildingArmorUpgrades
-	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@ra1_soviets_sovietbarracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
@@ -1191,7 +1191,7 @@ Player:
 
 2100WCMG:
 	Inherits@AUTOTARGET: ^2100WallTurreted
-	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@AutoTargetAll: ^AutoTargetAll
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -1212,7 +1212,7 @@ Player:
 	WithMuzzleOverlay:
 2100WCL:
 	Inherits@AUTOTARGET: ^2100WallTurreted
-	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@AutoTargetGround: ^AutoTargetGround
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -1230,7 +1230,7 @@ Player:
 
 2100WCM:
 	Inherits@AUTOTARGET: ^2100WallTurreted
-	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@AutoTargetGround2: ^AutoTargetGround
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -1250,7 +1250,7 @@ Player:
 
 2100WCH:
 	Inherits@AUTOTARGET: ^2100WallTurreted
-	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@AutoTargetGround3: ^AutoTargetGround
 	Valued:
 		Cost: 1000
 	Tooltip:

@@ -41,6 +41,10 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 **Silent-corruption classes — valid yaml, clean boot, wrong game**
 
 - [⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)](#-never-hand-parse-yaml--a-sibling-node-silently-overwrote-every-versus-number-2026-08-22)
+- [⛔ `Node.child()` is an EXACT match — 97% of the mod's producers were invisible (2026-09-06)](#-nodechild-is-an-exact-match--97-of-the-mods-producers-were-invisible-2026-09-06)
+- [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
+- [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
+- [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
 - [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
 - [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
@@ -51,6 +55,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Porting from an upstream mod: a NEW NAME is not a NEW MECHANIC (2026-08-23)](#porting-from-an-upstream-mod-a-new-name-is-not-a-new-mechanic-2026-08-23)
 - [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
 - [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
+- [`git grep` and `miniyaml.load` BOTH silently under-read non-UTF-8 weapons yaml (2026-09-05)](#git-grep-and-miniyamlload-both-silently-under-read-non-utf-8-weapons-yaml-2026-09-05)
 
 **Weapon templates, the 3-way split and the effect layer**
 
@@ -161,6 +166,92 @@ the threshold behavior.
 - Weapon children that need a different concrete value should override with a
   single `Warhead@Concrete:` key; matching keys merge, so only the last value
   survives.
+
+## ⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)
+
+`gen_rename_maps.py` reported **eight factions at exactly 0% naming compliance** — 526 actors
+— while every other faction sat at 96–100%. That report was read as a renaming backlog and
+chased **for months**. It was a two-word data-entry bug.
+
+The expected prefix is built as `"_".join(p for p in (game, slug) if p) + "_"`, and the table
+carried the game prefix **twice** for exactly those eight factions:
+
+```python
+"ra1_soviets": ("ra1", "ra1_soviets")   # -> want_prefix "ra1_ra1_soviets_"
+```
+
+Nothing can match that, so compliance was structurally pinned at 0 and the generator proposed
+**doubling every id** and **quadrupling sub-sprites**
+(`ra1_soviets_btr80_new_btr.shp` → `ra1_ra1_soviets_btr80_ra1_soviets_btr80_new_btr.shp`).
+Emptying the `game` slot for those eight moved seven of them from **0% to 100%** in one run.
+The eighth read 0% only because its rename had already been executed against the bad map —
+181 files and several hundred yaml references, caught while still uncommitted.
+
+**The tells, in order of how cheap they are to check:**
+
+1. **Exactly 0.0%, not 3% or 11%.** Real non-compliance is ragged. A clean zero across a whole
+   population means the predicate can never be true.
+2. **The set of failures is suspiciously structural.** All eight were the factions whose slug
+   already contained their game prefix — a property of the CONFIG, not of the data.
+3. **The baseline faction failed its own baseline.** The report is headed *"RA1-Soviet
+   baseline"* and `ra1_soviets` scored 0/106. A convention's own reference case cannot fail it.
+4. **A sibling metric disagreed.** Icon compliance for the same faction read **105/105 100%**
+   while actor ids read 0/106. Two metrics over one roster disagreeing that hard is the
+   checker, not the roster.
+
+**So: read what the checker EXPECTED before reading what the data contains.** One line —
+printing `want_prefix` per faction — would have exposed this at any point in the last months.
+
+⚠ And **never act on a generated proposal without eyeballing a sample of it.** The map
+literally said `ra1_soviets_btr80: ra1_ra1_soviets_btr80`. One glance at three lines of that
+file would have stopped 181 renames.
+
+`gen_rename_maps.py` now raises `AssertionError` on its own bad configuration instead of
+emitting a proposal.
+
+## ⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)
+
+Rule 8 already warns that regenerating `docs/audit/latest/` from an INCOMPLETE tree makes a
+dozen audits scan a smaller corpus, report FEWER findings and still say PASS. This is the
+same damage from a different cause, and it slips past the defence rule 8 built.
+
+**What happened.** A `run_all.sh` run was interrupted. It left **eight reports at 0 bytes** —
+`balance_sheet`, `dead_warhead_fields`, `display_text`, `duplicate_inherits`,
+`hex_shield_routing`, `impact_glow_preservation`, `meter_dilution`, `three_way_split` — plus
+`weapon_suffixes.md` truncated to 289 bytes. `git diff --stat docs/audit/latest/` read
+**24 files, −52,063 lines**. Committing that would have deleted the evidence base with a
+board that looked perfect: the truncated `weapon_suffixes.md` reported **X1–X5 all zero**
+when the real numbers were X2 = 10 and X3 = 10.
+
+**Why the existing guard does not catch it.** `tools/audit/environment.py` printed
+`complete environment` — the tree was fine, so `run_all` correctly wrote to `latest/` rather
+than diverting to `degraded/`. The corpus never shrank; the RUN did. And an emptied file is
+an ordinary modification in `git status`, indistinguishable at a glance from a report that
+legitimately went from findings to none.
+
+**The check, before any commit that touches `docs/audit/latest/`:**
+
+```sh
+find docs/audit/latest -name "*.md" -size 0     # must print nothing
+```
+
+**⛔ READ THE `.err` SIDECAR FIRST — it is sitting right next to the empty file.**
+`run_all.sh` writes each audit's stderr to `docs/audit/latest/<name>.err` and deletes it when
+empty, so a zero-byte report with a surviving `.err` beside it has already explained itself. I
+guessed "a bug in how run_all invokes it" for `three_way_split.md` when
+`three_way_split.err` held the real answer — `ValueError: intentional composite registry is
+stale or invalid`, a HARD FAILURE ON PURPOSE because a maintainer-curated composite had been
+changed underneath it. The empty report was the guard working. Two different causes produce
+the same zero-byte file, and only the sidecar tells them apart:
+
+* **`.err` present** — the audit ran and refused. Read it; it is usually a real finding.
+* **`.err` absent** — the run was interrupted. Regenerate.
+
+**And the diagnosis rule.** A large deletion count in `docs/audit/latest/` is a red flag, not
+a success. Before believing that findings dropped, re-run one of the emptied audits by hand
+and compare its corpus line — `dead_warhead_fields` prints `scanned N resolved warhead nodes`
+and `N` must not move unless the tree really changed. All eight audits here ran clean by hand
+at exit 0, which is what proved the reports, not the audits, were the damaged thing.
 
 ## ⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)
 
@@ -1200,6 +1291,31 @@ A W24 collapse can move an upgrade pair onto families with **opposite Versus pro
 
 **Rule:** every upgrade must be verified with `python tools/audit/audit_upgrade_regression.py` after any family repoint that touches an armament pair. Do not rely on a damage-preservation check alone.
 
+## `git grep` and `miniyaml.load` BOTH silently under-read non-UTF-8 weapons yaml (2026-09-05)
+
+Several weapons yaml files in this repo contain non-UTF-8 bytes (legacy encoding
+artifacts from upstream mod imports). Two standard tools silently fail on them:
+
+1. **`git grep` treats them as binary and skips them entirely.** It reported
+   `ordos_chemturret` as absent from a file where `git show <rev>:<file> | grep -a`
+   finds it at line 1136. The file is invisible to `git grep`, not just the match.
+2. **`miniyaml.load` silently under-parses the same files** — it reported
+   `0 nodes added` for `D2k/Ordos/yaml/weapons.yaml` when raw byte extraction
+   found `ordos_chemturret` and `ordos_laserturret` right there.
+
+This nearly caused the deletion of 30 live weapon nodes during the master merge,
+including the whole D2k mortar family and the CannonTesla templates.
+
+**Rule:** for any presence/absence check on weapons yaml, use
+`git show <rev>:<file> | grep -a`, never `git grep` and never a bare
+`miniyaml` node count. The `-a` flag forces `grep` to treat the input as text
+regardless of binary byte detection.
+
+**Guard:** no automated guard yet. The splice regen (`b905d7679`) rewrote
+`weapons.yaml` as clean UTF-8, but per-faction ContentPack files may still
+carry legacy encodings. Always verify with `git show ... | grep -a` before
+asserting a weapon or node is absent.
+
 ## Inline effect warheads should be inherited, not inline (2026-08-19)
 
 Maintainer ruling: **Effect warheads (`Warhead@Effect*`) should live in `^Effect_*` templates and be inherited, not declared inline on a concrete weapon.** The only legitimate exception is superweapons, which may need multiple bespoke animations.
@@ -1245,3 +1361,58 @@ safe is a property of the CONSUMER, not of the yaml -
 `ConditionalTrait` still occupies the trait dictionary - so gating five
 composition modules by condition crashes on the first bot tick instead of
 degrading.
+
+## ⛔ `Node.child()` is an EXACT match — 97% of the mod's producers were invisible (2026-09-06)
+
+`miniyaml.Node.child("X")` matches the literal key `X`. Almost every trait in this tree is
+written with an `@suffix`, so the lookup returns `None` for a trait that is plainly there:
+
+    atreides_barracks actually declares
+        Production@NORMAL
+        Production@CLASSICPRODUCTIONQUEUES
+        ProductionQueue@INFANTRY
+
+    node.child("ProductionQueue")            -> None      ⛔
+    node.children_named("ProductionQueue")   -> [ProductionQueue@INFANTRY]   ✅
+
+**Use `children_named()` for any trait that can carry an `@suffix`, which is nearly all of
+them.** `child()` is only safe for a key you have just seen unsuffixed in the file.
+
+This cost two independent wrong conclusions on the same day:
+
+* an agent probing D2k buildings with `child()` reported *"no D2k building has
+  ProductionQueue or Production; D2k uses ProvidesPrerequisite + Exit instead"* and proposed
+  rewriting the audit around that architecture. Every D2k barracks has both traits.
+* `audit_buildable_order.py:31` used `child()` in `production_building_names()`. It saw **9**
+  producers where the tree has **279** — it missed 97%, mod-wide, not just in D2k
+  (`td_gdi_barracks`, `ts_gdi_barracks` and 268 more were invisible), and every tech tier it
+  computed came from that 3%.
+
+⚠ **The worst part was a green number.** With almost no producers visible,
+`is_production_token()` could essentially never return True, so the *"Prerequisite order
+violations"* check reported a perfect **0** — not because the tree was clean but because the
+check was incapable of failing. Fixing the lookup turned that 0 into 1 real violation and
+removed 11 false build-palette findings from mis-tiered actors. **A gate that cannot fail is
+worse than a red one, because it is trusted.**
+
+⭐ The general rule, and it is the same one behind the `Versus:` scanner and the `vsINF`
+lowercase bug above: **before reporting that something is absent, print what is actually
+there.** Not `child("X") is None` — `[c.key for c in node.children]`, and look.
+
+
+## A hand-edit to generated output has a countdown on it (2026-09-05)
+
+`verify_generator_sync.py` went red: `^Warhead_CannonAP_*` carried `REFLECTOR: 74`
+while `gen_weapon_template.py` emits 75. The tempting fixes were all wrong:
+a `DERIVED_OVERRIDES` post-normalization table, a composition nudge that perturbs
+the whole family, or a tolerance whitelist that would hide real drift forever.
+
+Ruling (`47ba8bc25`, promoted to `docs/DESIGN.md` splice-programme item 4):
+**the generator owns every row it emits.** A hand-edit to a generated file is not
+a fix - it is a loan the next `splice_templates.py --all` calls in. If a cell must
+differ, change the SPEC or the FORMULA in the generator, never the output.
+
+Corollary for this tree specifically: `mods/cameo/weapons/weapons.yaml` is
+generated, so direct Versus edits in it silently revert on the next splice and
+re-flag `gen_sync` in the meantime. Route every generated-row change through
+`gen_weapon_template.py` or a maintainer ruling that changes the law.
