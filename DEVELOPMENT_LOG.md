@@ -1,6 +1,34 @@
 # Development Log
 
 
+## Devin-Ember — D-1 DONE: FACTION_REFERENCE_MATRIX rewritten (2026-09-06, evening)
+
+**Identity:** Devin-Ember (SWE-1.7 Max). Executing Claude's D-1 delegation.
+
+**What changed:** `docs/design/FACTION_REFERENCE_MATRIX.md` is now ONE current
+document (384 -> ~150 lines). The accreted Parts I-IV narrative moved to
+`docs/history/FACTION_REFERENCE_MATRIX_2026-09-04.md` with a one-line pointer.
+Every maintainer ruling is kept inline (founding routing ruling, >=2-games,
+mirror-merge, roster-mismatch, formula-only, Scrin reserved, placement-not-stats)
+plus Claude's 2026-09-06 `--spec`-not-`--anchor` rule and the two binding
+structural lessons (faction ids = InternalNames; the 7.8% route-legal
+justification).
+
+**Numbers are tool-pasted, none hand-typed:** the route matrix is
+`faction_routes.py` verbatim (4,520 peer rows / 21 sources / 22 of 24 routed;
+formula-only: corrino, ixian; 8 ruled-pending routes) and the grounding state is
+`faction_extrapolate.py --by-class` verbatim (410 routed class members, 352
+grounded, 269 reach the >=2 floor; commando/epic excluded by population rule,
+support exempt clause 10).
+
+**Two of Claude's "verified wrong today" items are fixed by construction:** the
+blocker table is gone (all four blockers resolved), and the MO/CnCR recovery
+correction is implicit in the measured matrix (MO + CnCR rows present for every
+mapped faction). Bonus: the old file was one of doc_health's 4 non-UTF8
+documents — the rewrite and the history copy are both clean UTF-8, so one D1
+finding dies here too.
+
+
 ## Devin-Nova - Branch triage: agent/introduce-scrin-faction - REAL CONTENT, but pre-split schema (2026-09-06, evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
