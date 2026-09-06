@@ -73,7 +73,10 @@ W2_BASELINE = 213   # dual ^Warhead_ inherit
 W3_BASELINE = 21    # dual ^Projectile_ inherit
 W4_BASELINE = 61    # dual ^Effect_ inherit
 W5_BASELINE = 401   # more than one resolved MAIN warhead
-W6_BASELINE = 687   # weapons declaring an effect warhead locally
+W6_BASELINE = 694   # weapons declaring an effect warhead locally
+                    # 687 -> 694: the TOP_LEVEL regex was fixed to match
+                    # digit-starting keys (120mm_*, 8Inch, etc.), exposing
+                    # 7 weapons previously hidden. LOWER ONLY.
 
 MAIN_TYPES = ("SpreadDamage", "AreaDamage")
 EFFECT_TYPES = {
@@ -83,7 +86,7 @@ EFFECT_TYPES = {
 # Suffixes that mark a warhead as a HALF of one main, not a second main.
 NOT_A_MAIN = ("percentage", "friendlyfire", "extradamage")
 
-TOP_LEVEL = re.compile(r"^([A-Za-z_^][A-Za-z0-9_.^]*):")
+TOP_LEVEL = re.compile(r"^([A-Za-z0-9_^][A-Za-z0-9_.^]*):")
 INHERIT = re.compile(r"^\t(Inherits(?:@[A-Za-z0-9_]+)?):\s*(\S+)")
 WARHEAD = re.compile(r"^\t(Warhead@[A-Za-z0-9_]+):\s*(\S*)")
 
