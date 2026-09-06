@@ -1,6 +1,57 @@
 # Development Log
 
 
+## Devin-Aurora -- Ruling 9 migration complete for my lane (2026-09-06, afternoon)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+### Summary
+
+Ruling 9 (legacy weapon migration) is COMPLETE for my lane. All Atreides-only
+and Ordos-only weapons have been migrated from legacy `mods/cameo/weapons/d2k.yaml`
+to ContentPack files.
+
+### What was migrated
+
+**Atreides weapons (2 new + 8 already present):**
+- `D2KRepair`, `HMG` (migrated this session)
+- `Sound`, `OrniBomb`, `OrniMissile`, `Fremen_S`, `OrniGun`, `OrniGunC`,
+  `OrniBombC` (already in Atreides weapons.yaml before this session)
+
+**Ordos weapons (41 new):**
+- `D2K_alshabah_autocannon`, `Emperor_Sardaukar_E`, `PlasBullet`,
+  `D2K_SiegeQuad`, `D2K_Rocket_Buggy`, `D2K_Combat_Fleet`,
+  `d2k_tyrant`, `Rocket_stealth`, `Rocket_stealth_AA`,
+  `d2k_APCo_AG`, `d2k_APCo_AA`, `D2K_Annihilator`, `D2K_Annihilator_AA`,
+  `Sound2`, `WormSwallow`, `OrniBombC`, `SardDeath`,
+  `M_LMG`, `M_LMG_H`, `M_HMG_H`, `d2k25mm`,
+  `HMG_tleilaxu`, `d2k_sardaukar_elite`, `OrniGunC`,
+  `Rocketeer`, `Rocketeer_o`, `Rocketeer_t`,
+  `D2KBuggyExplosion`, `D2KSniperRifle`, `D2KMarksmanRifle`,
+  `emperor_sardaukar_chief_c4`, `d2kFlameTurret`,
+  `d2k_laser_qafza`, `d2k_laser_qafza_aa`, `D2K_buzzsaw`,
+  `d2k_airdefenseplatform`, `D2KTheVoice`, `D2KGomJabbar`,
+  `d2k_aircraft_eater`, `d2k_sard_heatblade`, `d2k_sard_crossbow`
+
+**Shared weapons (3 new):**
+- `mtank_pri` (Atreides + Corrino + Harkonnen + Ixian)
+- `D2KUnitExplodeSmall` (Atreides + Ixian + Ordos)
+- `D2KUnitExplodeLarge` (all 5 D2k factions)
+
+### What remains in legacy (not my lane)
+
+- `D2K_155mm`, `D2K_Rocket_Trooper`: Shared weapons with `-Warhead@` collapse
+  removals. Cannot be safely duplicated while legacy exists. Need Blaze to remove
+  legacy defs in a single step.
+- 114 dead weapons: Blaze's lane to remove.
+- Harkonnen/Ixian/Corrino weapons: other agents' lanes.
+
+### Verification
+
+- `find_empty_warhead`: 0
+- Boot-gate: PASS (all 4 commits boot-gated individually)
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Aurora -- Ruling 9 phase 1: Atreides weapon migration (2026-09-06, afternoon)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
