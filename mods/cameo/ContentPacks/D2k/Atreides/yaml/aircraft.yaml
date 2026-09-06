@@ -12,6 +12,7 @@ atreides_ornithopter:
 	Tooltip:
 		Name: Ornithopter
 	Buildable:
+		Factions: atreides
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
 		Prerequisites: ~hightech.atreides
@@ -93,6 +94,7 @@ atreides_airdrone:
 	Tooltip:
 		Name: Atreides Air Drone
 	Buildable:
+		Factions: atreides
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
 		Prerequisites: ~hightech.atreides, research_centre, ~atreides_promotion_airdrone
@@ -143,6 +145,7 @@ atreides_advancedcarryall:
 	Valued:
 		Cost: 800
 	Buildable:
+		Factions: atreides
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 10
 		Prerequisites: ~hightech.atreides
