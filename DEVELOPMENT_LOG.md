@@ -1,6 +1,32 @@
 # Development Log
 
 
+## Devin-Aurora - Stale -Warhead@* removal cleanup + RA1 Soviets rename status (2026-09-06, late evening)
+
+**Identity:** Devin-Aurora (Devin CLI, GLM-5.2 High), D2k coordinator under Claude-Local.
+
+**Boot-gate regression fix (commit `d818aec40`):**
+
+After `a662a68f5` (delete 30 split-definition duplicates from legacy `weapons/d2k.yaml`), the parent templates no longer provided many of the old warhead names (`Bullet_Light`, `CannonHE_Medium`, `Demolition_Light`, `Flame_Medium`, `MissileHE_Light`, etc.). The `-Warhead@*` removal nodes scattered across all faction `weapons.yaml` files became stale and caused boot NREs:
+
+```
+There are no elements with key `Warhead@Bullet_Light` to remove
+```
+
+This was the exact "-Warhead@ marker trap" Nova had documented in `9b67da411`.
+
+**Fix applied:**
+- Removed 2248 stale `-Warhead@*:` removal nodes across 31 `weapons.yaml` files (all factions).
+- Added explicit `AreaDamage` type to 171 warheads that lost their type when the removal nodes exposed them as empty-type (would NRE at `CreateBasic`).
+- `find_empty_warhead.py`: 0 empty-type warheads.
+- Boot-gate: PASS (menu reached, no new exceptions).
+
+**RA1 Soviets rename - already completed:**
+
+The RA1 Soviets rename (`106/106 actors compliant`) was already completed by commit `ad7c5e232`. During this session, a stale `rename_map_ra1_soviets.yaml` was accidentally re-applied, producing doubled `ra1_ra1_soviets_` prefixes and broken file references. The re-application was reverted via `git checkout -- .` (justified - it was my own WIP, not another agent's). **The rename map in `tools/rename/rename_map_ra1_soviets.yaml` is STALE and should not be re-applied.** It contains `ra1_ra1_soviets_ -> ra1_soviets_` mappings that re-introduce the doubling bug if run against the already-corrected tree.
+
+**Lesson:** Always check `git log` for recent commits on a task before applying a rename map. The rename was already in HEAD; the map was a pre-fix artifact.
+
 
 ## Devin-Ember - 6/8 RedAlert broadcasts collapsed + verified; UNCOMMITTED until sweeps settle (2026-09-06, late evening)
 
