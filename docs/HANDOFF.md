@@ -141,6 +141,35 @@ the method, the faction-specific traps, the gates, and the report format. Read
 ⚠ **Agent-to-agent chatter lives OUTSIDE the repository**, in `../Cameo-mod-fleet/`.
 `DEVELOPMENT_LOG.md` keeps one entry per COMPLETED work item plus lessons learned — nothing else.
 
+## ⭐ NEW WORK SPECIFIED 2026-09-07 — two maintainer orders, neither built
+
+Both are written up in full, with the state verified rather than assumed. Neither is a
+naming-lane task; both are self-contained and neither outranks the balance pipeline.
+
+### 1. Paired effect+sound templates — [`design/EFFECT_SOUND_TEMPLATES.md`](design/EFFECT_SOUND_TEMPLATES.md)
+
+One inherit must carry the visual **and** its sound, named after the source game and the
+effect's own file name (`^d2k_big_explosion`), so the two can never drift apart.
+
+Measured: **6987** CreateEffect warheads, only **4008** carry both halves, and **68**
+sprites are each used with more than one sound. The reported symptom is located exactly —
+`D2K_Rocket_Trooper` pairs the visual `d2k_tiny_explosion` with the sound
+`xplobig4.aud` (a BIG explosion sound on a TINY sprite), and its four variants have four
+different pairings, one of them borrowing a RA/TD sound for a D2k visual. Those five
+weapons are the acceptance test.
+
+### 2. Colour-picker preview for every faction — [`design/COLORPICKER_PREVIEW.md`](design/COLORPICKER_PREVIEW.md)
+
+⚠ **The believed state was wrong.** TD/RA/Japan were not "done": `fact.colorpicker`,
+`rafact.colorpicker` and `rafactj.colorpicker` exist but are **dead — nothing references
+them**, there is **no `FactionPreviewActors` block anywhere**, and every faction currently
+previews a Soviet mammoth tank.
+
+The engine already has `FactionPreviewActors` (zero C# needed), but using it as-is means
+~31 clone actors. The better build is a **`RenderSprites` shadow in `OpenRA.Mods.Cameo`**
+honouring `ActorPreviewType.ColorPicker`, so any actor is its own preview — **route
+confirmed open**, since neither AS nor CA defines `RenderSprites`. No engine fork.
+
 ## 0. The one rule that makes all the others work
 
 **Don't trust — verify.** Before you assert that anything is done, pending, blocked or missing:
