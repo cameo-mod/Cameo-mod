@@ -1,6 +1,34 @@
 # Development Log
 
 
+## Devin-Nova - ratchet sweep: 3 stale-high baselines walked down, 2 flags for the fleet (2026-09-06, afternoon)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
+
+Applied the BROADCAST_BASELINE convention tree-wide (commit `1d5b4fb78`):
+every ratcheted audit re-measured, and baselines sitting above the measured
+count were walked down - a stale-high baseline is silent regression room.
+
+**Walked down (all re-run exit 0):**
+- `three_way_split`: RAW 339->335, UNREVIEWED 114->111
+- `tier_weapon_class`: TIER 218->48 (the count had collapsed far below it)
+- `duplicate_keys`: D1 35->0 (D2 stays 260/260)
+
+**At baseline, untouched:** dead_warhead_fields 15/15, heaviness_bell 2/2,
+versus_profile 2/0/0.
+
+**Flags:**
+1. `survey_weapon_structure` (NON-gating survey): raw reachable stacks rose
+   240->242 - two new raw stacks, likely today's content wave. Not a suite
+   gate, but whoever authored the new stacks should look.
+2. `audit_damage_grid.py` is DEPRECATED (encodes the retired 2000-step grid;
+   its "180 pct-twin" run is a dead-law artifact, not a regression). run_all.sh
+   excludes it pending re-derivation from `formula` - that is an open tooling
+   task if anyone wants it; I have not taken it unassigned.
+3. `meter_dilution` still 34 vs ratchet 32 - per Ruling 5 the two overage
+   owners fix their own; the ratchet must NOT rise.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Nova - boot-gate PASS at HEAD a6dcb56b1 (2026-09-06, afternoon)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
