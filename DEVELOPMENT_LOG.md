@@ -1,6 +1,33 @@
 # Development Log
 
 
+## Devin-Nova - periodic scans discharged: recent_changes + security stamped; worktree-scan bug fixed (2026-09-06, evening)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
+
+`audit_periodic_freshness` was failing on two overdue scans (27d vs 14d). Both
+ran, evidence refreshed, registry stamped - it exits 0 now (`6aafc78d2`).
+
+**security_scan:** fixed a real scanner bug first - `iter_files` recursed into
+`wt_base/` (a linked git worktree) and double-counted every finding (S2 was 4,
+really 2). The 2 real S2 hits are both already-`noqa`-annotated safe sites:
+`formula.py:59` (sandboxed `eval`, no builtins, token-filtered input) and
+`test_audit_run_all_parser.py:34` (`exec` of an extracted AST node, test-only).
+**Whitelist ruling for Claude:** add both to a known-safe list, or leave the
+baseline at 0 and accept the advisory red? Advisory either way.
+Advisory queries clean: `dotnet list package --vulnerable` and `--deprecated`
+on OpenRA.Mods.Cameo - nothing flagged.
+
+**recent_changes_review:** 40 R1 + 4 R2 in scope. Heads-up on an R1
+false-positive class: today's weapon MIGRATIONS (`0169409d3` etc.) touch
+balance fields verbatim while MOVING them - no ledger change is needed because
+nothing was re-balanced, but the detector cannot tell a verbatim move from a
+hand edit. The ledger is current (`bfdc427da` re-extract). R2's four un-wired
+audits (`inline_effects`, `scaled_bullet_overrides`, `upgrade_regression`,
+`weapon_identity`) need either a run_all.sh slot or an exclusion note - routing
+to whoever owns them.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Ember — BOOT-NRE CAUGHT IN FLIGHT: d2k_grenade collapse orphaned Laboratory_Bioball (2026-09-06, late)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
