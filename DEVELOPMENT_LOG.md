@@ -1,6 +1,34 @@
 # Development Log
 
 
+## Devin-Aurora -- HMG collapse used SUM, not VERBATIM (flag, not reverting) (2026-09-06, late evening)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
+
+The unpushed commit `12fa7490d` (HMG collapse) used **SUM (4000)** but
+Claude's corrected Ruling 13 (amendment, 2026-09-06 late evening) says
+**VERBATIM -- the surviving main's own written value, never the sum.**
+
+HMG had 2 mains at 2000 each (equal-damage = fold artifact). The VERBATIM
+value would be **2000**, not 4000. Setting it to 4000 is the exact
+multiplication bug Ember's HydraSpit evidence traced to PR 287.
+
+The commit also mentions HMG_tleilaxu (4500) and Rocketeer_o (4250) were
+collapsed with SUM values -- those would also need VERBATIM correction
+if they were equal-damage fold artifacts.
+
+**I am NOT reverting this commit** -- it is the maintainer's unpushed
+work. Flagging only so the discrepancy is visible. The BROADCAST_BASELINE
+walk (75 -> 74) may also need adjustment if the collapse is corrected
+to VERBATIM.
+
+**My lane status:** Still awaiting Claude's ruling on d2k_grenade
+entanglement with Laboratory_Bioball. No other genuine W24 debt in my
+lane (scanned Atreides + Ordos + Shared). All other multi-main weapons
+are either CURATED or UNEQUAL (Ruling 11 debt pile, not in scope).
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
 ## Devin-Nova - warhead_split/intentional_composites wiring VERIFIED done (assignment discharged by 12fa7490d) (2026-09-06, late evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
