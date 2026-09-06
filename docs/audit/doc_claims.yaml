@@ -158,11 +158,13 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 192
+    value: 856
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
       predicate — W24's scope, and the reason pricing must wait for the weapon rebuild.
+      Updated 2026-09-06: intentional_composites exemption repealed; all multi-main weapons
+      now count as debt (was 192 with exemption filter, 856 without).
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import sys, pathlib
@@ -285,7 +287,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 429
+    value: 455
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -297,6 +299,9 @@ claims:
       A rise means a new multi-main weapon shipped with a meter on only part of its damage.
       2026-09-05: measured 429 after origin/master merge 4fd9937f3 — the merge brought in
       new weapons from master, resetting the ratchet baseline. Previous value 376.
+      2026-09-06: measured 455 after intentional_composites exemption repeal — the reviewed
+      predicate now returns False for all weapons, so previously-exempt composites are counted.
+      This is a one-time baseline reset, not a regression.
       Ordering, from `BALANCE_PROGRAM_PLAN` §0a and restated by the maintainer 2026-08-19
       (*"that's exactly why I said you should finish the 3 way weapon split first!"*): weapon
       STRUCTURE before pricing. Pricing a weapon whose structure is wrong measures the wrong
