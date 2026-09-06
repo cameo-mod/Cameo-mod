@@ -977,11 +977,9 @@ Dune_SiegeMortar:
 		PercentageScale: 0
 
 D2K_Rocket_Trooper_AGOnly:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Railgun_Heavy
-	Inherits@wh3: ^Warhead_CannonHE_Medium
-	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_CannonHE_Medium_D2K
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 50
 	Range: 6252
 	Report: ROCKET1.WAV
@@ -999,18 +997,11 @@ D2K_Rocket_Trooper_AGOnly:
 		ProjectileSpeedPercentage: 10
 		LaunchAngle: 66
 		Shadow: true
-	Warhead@Demolition_Light: AreaDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@Railgun_Heavy:
-		Damage: 10000
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 10000
 D2K_Rocket_Trooper_AA:
-	Inherits@wh: ^Warhead_Flak_Medium
-	Inherits@wh2: ^Warhead_MissileAP_Light
-	Inherits@wh3: ^Warhead_MissileAP_Heavy
+	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 75
@@ -1032,12 +1023,6 @@ D2K_Rocket_Trooper_AA:
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
 		Acceleration: 8
-	Warhead@MissileAP_Light:
-		ValidTargets: Air
-		Damage: 10000
-	Warhead@Flak_Medium:
-		ValidTargets: Air
-		Damage: 10000
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 10000
