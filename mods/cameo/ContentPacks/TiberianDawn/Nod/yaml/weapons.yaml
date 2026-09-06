@@ -11,20 +11,15 @@ M16Laser:
 	Projectile: LaserZap
 		Width: 25
 	TargetActorCenter: false
-	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Laser_Heavy:
 		Damage: 6000
 		PercentageScale: 0
-	-Warhead@Laser_Heavy_ExtraDamage:
 
 FlamethrowerExplode:
 	Inherits: Flamethrower
@@ -171,12 +166,8 @@ ArtilleryShellUpgrade:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 6000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -196,16 +187,7 @@ ArtilleryShellUpgrade:
 		Damage: 6000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 3
-	-Warhead@Effect:
 
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumCannon:
-	-Warhead@HeavyBomb:
 	Warhead@Concussion_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 30000
@@ -280,11 +262,6 @@ BikeRockets:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 2
 
-	-Warhead@TankDestroyerCannon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@FlakWeapon:
-	-Warhead@LightMissile:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -310,7 +287,7 @@ PDLaserBike:
 	Report: tnkfire3.aud
 	Projectile: Bullet
 		Speed: 499
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 6000
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
@@ -469,12 +446,6 @@ TurretGun:
 		Damage: 3
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 3
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumCannon:
-	-Warhead@TankDestroyerCannon:
 	Warhead@Concussion_Medium:
 		Damage: 19000
 		PercentageScale: 0
@@ -492,13 +463,9 @@ TurretGunBlackMarket:
 		Damage: 6000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 3
-	-Warhead@Effect:
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyCannon:
 	Warhead@Concussion_Medium:
 		Damage: 31000
 		PercentageScale: 0
-	-Warhead@Concussion_MediumFlatCompatibility:
 Dragon:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -640,8 +607,6 @@ ChemRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
@@ -652,10 +617,6 @@ ChemRockets:
 	Warhead@EffectAir: CreateEffect
 		Explosions: chemball
 		ImpactSounds: xplos.aud
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@LightMissile:
 	Warhead@Chemical_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -672,8 +633,6 @@ ChemRocketsExplosion:
 		Damage: 3
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Chemical_Light:
@@ -709,8 +668,6 @@ ChemicalBikeRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -729,10 +686,6 @@ ChemicalBikeRockets:
 		ValidTargets: Air
 
 	TargetActorCenter: false
-	-Warhead@TankDestroyerCannon:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@FlakWeapon:
-	-Warhead@MediumMissile:
 	Warhead@MissileChem_Medium:
 		Damage: 32000
 		PercentageScale: 0
@@ -762,8 +715,6 @@ ChemicalStealthTankMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -781,10 +732,6 @@ ChemicalStealthTankMissiles:
 		ValidTargets: Air
 
 	TargetActorCenter: false
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumMissile:
 	Warhead@MissileChem_Medium:
 		Damage: 30000
 		PercentageScale: 0
@@ -846,24 +793,15 @@ ChemicalHonestJohn:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 30000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	-Warhead@Effect1:
 	Warhead@Effect: CreateEffect
 		Explosions: big_tibnapalm
 		GlowScale: 2.0
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
 		ImpactSounds: xplobig6.aud
-	-Warhead@HeavyMissile:
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@HeavyChemicalWeapon:
 	Warhead@MissileChem_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 120000
@@ -890,9 +828,6 @@ MachineGunBuggy2:
 		ValidTargets: Ground, Water
 		Damage: 1
 	-TargetActorCenter:
-	-Warhead@HeavyCannon:
-	-Warhead@SmallArms:
-	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 6000
@@ -1026,11 +961,8 @@ FireballLauncherBuggy2:
 		Palette: tseffect
 	Warhead@Flame_Heavy:
 		Damage: 2000
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 2000
-	-Warhead@Flame_Heavy:
-	-Warhead@Flame_Light:
-	-Warhead@Flame_Medium:
 	Warhead@Flame_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 6000
@@ -1049,12 +981,8 @@ LightTank2Cannon:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 4000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
@@ -1063,9 +991,7 @@ LightTank2Cannon:
 		Explosions: chemball
 		ImpactSounds: xplos.aud
 
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumCannon:
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 8000
 		PercentageScale: 0
 LightTank2Missiles:
@@ -1141,14 +1067,10 @@ BlackHandLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 	TargetActorCenter: false
-	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 4
-	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 4
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
 	Warhead@LegacyLaserExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -1180,7 +1102,6 @@ BlackHandLaser:
 	Warhead@Laser_Heavy:
 		Damage: 96000
 		PercentageScale: 0
-	-Warhead@Laser_Heavy_ExtraDamage:
 	Warhead@LaserHeavyGroundRemainder: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1230,13 +1151,13 @@ BlackHandFlamer:
 		Image: tsflameall
 		Inaccuracy: 555
 		Palette: tseffect
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 4000
 BlackHandFlamerExplode:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 12000
 BHRedDarts:
 	Inherits@collapsewh: ^Warhead_Tesla_Super
@@ -1284,15 +1205,6 @@ BHRedDarts:
 		Spread: 1
 		InvalidTargets: Shielded
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
-	-Warhead@TeslaChargedWeapon:
-	-Warhead@TeslaChargedExtraDamage:
-	-Warhead@TankDestroyerCannon:
-	-Warhead@Chaingun:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumMissile:
-	-Warhead@Tesla_Super_ExtraDamage:
-	-Warhead@EMPUnit:
 	Warhead@Tesla_Super:
 		ValidTargets: Ground, Water, Air
 		Damage: 22000
@@ -1330,7 +1242,7 @@ BHRedDarts:
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
 		Image: bhreddragon
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 16000
 	Warhead@Concussion_Medium:
 		Damage: 16000
@@ -1341,8 +1253,6 @@ BHRedDarts:
 SpecterArtilleryShell:
 	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
 	Inherits: ^SpecterArtilleryShellLegacy
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
 	Warhead@Concussion_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 32000
@@ -1362,7 +1272,7 @@ SpecterArtilleryShellUpgrade:
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 4000
 	Warhead@Concussion_Medium:
 		Damage: 4000
@@ -1371,12 +1281,8 @@ SpecterArtilleryShellUpgrade:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1404,19 +1310,10 @@ SpecterArtilleryShellUpgrade:
 		Damage: 4000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 2
-	-Warhead@Effect:
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyCannon:
-	-Warhead@MediumCannon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@TankDestroyerCannon:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 2497
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
 
 VenomLaser:
 	Inherits@wh: ^Warhead_Laser_Medium
@@ -1553,11 +1450,9 @@ NodTorpTube:
 	Warhead@MissileHE_Heavy:
 		Damage: 8000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
-	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
@@ -1667,17 +1562,12 @@ td_nod_minigunner_minigun_laser:
 	Projectile: LaserZap
 		Width: 25
 	TargetActorCenter: false
-	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Laser_Heavy:
 		Damage: 6000
 		PercentageScale: 0
-	-Warhead@Laser_Heavy_ExtraDamage:

@@ -1,74 +1,22 @@
 # Weapon suffix audit (DESIGN.md §1)
 
-X1 elite weapons not ending _elite: **28**
-X2 EMP weapons not ending _EMP: **10**
+X1 elite weapons not ending _elite: **0** (+27 exempt shared-rung weapons, Ruling 2)
+X2 EMP weapons not ending _EMP: **0**
 X3 AA weapons not ending _AA: **10**
-X4 deprecated E suffix (informational): **2**
+X4 deprecated E suffix (informational): **0**
 X5 suffix ordering violations: **0**
-
-## X1 — Elite weapons not following _elite convention
-| File | Line | Actor | Trait | Weapon |
-|---|---|---|---|---|
-| ContentPacks/D2k/Corrino/yaml/infantry.yaml | 35 | corrino_sardaukar_bazooka | Armament@ELITE | D2K_TowerMissile |
-| ContentPacks/D2k/Corrino/yaml/infantry.yaml | 45 | corrino_sardaukar_bazooka | Armament@GARRISONEDELITE | D2K_TowerMissile |
-| ContentPacks/D2k/Harkonnen/yaml/infantry.yaml | 139 | harkonnen_sardaukar | Armament@ELITE | D2K_TowerMissile |
-| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2272 | ra2_c_ifv | Armament@elite | RA2GattlingMG2 |
-| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2290 | ra2_c_ifv | Armament@eliteAA | RA2GattlingMG2_AA |
-| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2350 | ra2_c_hum | Armament@elite | RA2GattlingMG2 |
-| ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml | 244 | asianalliance_asianflametrooper | Armament@ELITE | AsianFlamerTurret |
-| ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml | 196 | gunb.asian | Armament@AntiSubElite | DepthCharge |
-| ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml | 850 | asianalliance_railguntank | Armament@ELITE | AsianRailTank2 |
-| ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml | 893 | asianalliance_heavyrailguntank | Armament@ELITE | AsianRailTank3 |
-| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 1205 | steelconsortium_megalodon | Armament@ELITE | SteelMegaSword_EMP |
-| ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml | 484 | futuretech_phalanxwip | Armament@PRIMARYELITE | RA2RTruckRocket |
-| ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml | 1086 | conehead2.nax | Armament@ELITE | RA2PortaTesla |
-| ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml | 1096 | conehead2.nax | Armament@GARRISONEDELITE | RA2PortaTesla |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 174 | schwarzermond_spacezeppelin | Armament@eliteUP | Lunar_YellowBeetleLaser |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 188 | schwarzermond_spacezeppelin | Armament@eliteAA_UP | Lunar_YellowBeetleLaser_AA |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 202 | schwarzermond_spacezeppelin | Armament@eliteAMP | Lunar_AmplifiedBeetleLaser |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 216 | schwarzermond_spacezeppelin | Armament@eliteAA_AMP | Lunar_AmplifiedBeetleLaser_AA |
-| ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml | 169 | latinsyndicate_grenademonkey | Armament@ELITE | LatinMonkeyGrenade3 |
-| ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml | 181 | latinsyndicate_grenademonkey | Armament@GARRISONEDELITE | LatinMonkeyGrenade3 |
-| ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml | 175 | rammax.latin | Armament@ELITE | Rammax_Sabot |
-| ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 974 | latinsyndicate_missiletruck | Armament@PRIMARYELITE | RA2RTruckRocket |
-| ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 1045 | latinsyndicate_burrito | Armament@PRIMARYELITE | RA2RBurritoRocket |
-| ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 1114 | latinsyndicate_lars | Armament@PRIMARYELITE | RA2LarsRocket |
-| ContentPacks/TiberianSun/Nod/yaml/naval.yaml | 193 | ts_nod_rayboat | Armament@ELITE | TSStankTibTusk |
-| rules/redalert2.yaml | 2590 | ra2_c_ifv | Armament@elite | RA2GattlingMG2 |
-| rules/redalert2.yaml | 2608 | ra2_c_ifv | Armament@eliteAA | RA2GattlingMG2_AA |
-| rules/redalert2.yaml | 2668 | ra2_c_hum | Armament@elite | RA2GattlingMG2 |
-
-## X2 — EMP weapons not following _EMP convention
-| File | Line | Weapon |
-|---|---|---|
-| ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 888 | EMPGrenade |
-| ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 986 | EMPGrenadeExplode |
-| weapons/darkreign.yaml | 1324 | DR_EMP_Device |
-| weapons/generals.yaml | 1592 | USA_EMP_PatriotMissAG |
-| weapons/generals.yaml | 1617 | USA_EMP_PatriotMissAA |
-| weapons/outpost2.yaml | 386 | eden_EMP_GP |
-| weapons/outpost2.yaml | 842 | plymouth_EMP_Tiger |
-| weapons/shockwave.yaml | 1196 | SUSA_EMP_MissileDefenderAG |
-| weapons/shockwave.yaml | 1205 | SUSA_EMP_MissileDefenderStructure |
-| weapons/shockwave.yaml | 1224 | SUSA_EMP_MissileDefenderGarrisoned |
 
 ## X3 — AA-only weapons not following _AA convention
 | File | Line | Weapon | ValidTargets |
 |---|---|---|---|
-| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 559 | BallistaSingleShotAir | Air |
-| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 567 | BallistaSingleShotAirEnergized | Air |
-| ContentPacks/StarCraft/Terran/yaml/weapons.yaml | 1120 | GoliathMk2Rockets | Air |
-| ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1000 | LaserBuggy2_AAInferno | Air |
-| ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1006 | LaserBuggy2_AABurning | Air |
-| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1541 | CabalLaserBoatLaserAA | Air |
-| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1901 | CabalManticoreMissilesAA | Air |
-| ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 644 | TSMammothTusk2 | Air |
+| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 526 | BallistaSingleShotAir | Air |
+| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 534 | BallistaSingleShotAirEnergized | Air |
+| ContentPacks/StarCraft/Terran/yaml/weapons.yaml | 1036 | GoliathMk2Rockets | Air |
+| ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 935 | LaserBuggy2_AAInferno | Air |
+| ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 941 | LaserBuggy2_AABurning | Air |
+| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1460 | CabalLaserBoatLaserAA | Air |
+| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1791 | CabalManticoreMissilesAA | Air |
+| ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 610 | TSMammothTusk2 | Air |
 | weapons/darkreign.yaml | 404 | DRBionWeaponAA | Air |
-| weapons/tiberiansun.yaml | 1181 | TSChemAdatsMissileAA |  |
-
-## X4 — Weapons with deprecated E suffix (informational)
-| File | Line | Weapon |
-|---|---|---|
-| weapons/shockwave.yaml | 78 | SUSABurtonSniperHE |
-| weapons/shockwave.yaml | 232 | SUSAMLRSHE |
+| weapons/tiberiansun.yaml | 1169 | TSChemAdatsMissileAA |  |
 

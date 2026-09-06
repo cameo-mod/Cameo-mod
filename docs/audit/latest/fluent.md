@@ -546,18 +546,18 @@ _none found_
 | faction | fluent/total tooltips | coverage |
 |---|---|---|
 | asianalliance | 0/78 | 0% |
-| atreides | 0/30 | 0% |
+| atreides | 0/32 | 0% |
 | cabal | 0/84 | 0% |
-| corrino | 0/32 | 0% |
+| corrino | 0/33 | 0% |
 | eden | 0/45 | 0% |
 | forgotten | 78/81 | 96% |
 | futuretech | 0/59 | 0% |
-| harkonnen | 3/60 | 5% |
-| ixian | 0/89 | 0% |
+| harkonnen | 3/61 | 4% |
+| ixian | 0/90 | 0% |
 | japan | 1/76 | 1% |
 | latinsyndicate | 0/71 | 0% |
 | naxis | 0/78 | 0% |
-| ordos | 0/99 | 0% |
+| ordos | 0/96 | 0% |
 | plymouth | 0/46 | 0% |
 | protoss | 0/74 | 0% |
 | ra1_allies | 1/74 | 1% |

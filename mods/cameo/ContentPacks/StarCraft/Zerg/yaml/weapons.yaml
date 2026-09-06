@@ -107,9 +107,6 @@ SpithidSpit:
 	Warhead@EffectAir: CreateEffect
 		Explosions: sczhsplash
 	-TargetActorCenter:
-	-Warhead@LightMissile:
-	-Warhead@SmallArms:
-	-Warhead@ArrowWeapon:
 	Warhead@Bullet_Light:
 		Damage: 6000
 		PercentageScale: 0
@@ -142,8 +139,6 @@ MutaliskSpore:
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -162,11 +157,6 @@ MutaliskSpore:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	-Warhead@SwordWeapon:
-	-Warhead@SwordWeaponFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@SmallArms:
-	-Warhead@ArrowWeapon:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -174,8 +164,6 @@ MutaliskSpore:
 	Warhead@MutaliskCompatibility: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	-Warhead@Chemical_Medium:
-	-Warhead@MutaliskCompatibility:
 	Warhead@Chemical_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
@@ -188,8 +176,6 @@ MutaBounce1:
 		Damage: 2
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
@@ -203,9 +189,6 @@ MutaBounce1:
 		Damage: 4000
 	Warhead@shrapnel: FireShrapnel
 		Weapon: MutaBounce2
-	-Warhead@Chemical_Medium:
-	-Warhead@MutaWildcardCompatibility:
-	-Warhead@MutaliskCompatibility:
 	Warhead@Chemical_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -218,8 +201,6 @@ MutaBounce2:
 		Damage: 1
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
@@ -231,10 +212,6 @@ MutaBounce2:
 		Damage: 10000
 	Warhead@MutaWildcardCompatibility: AreaDamage
 		Damage: 2000
-	-Warhead@shrapnel:
-	-Warhead@Chemical_Medium:
-	-Warhead@MutaWildcardCompatibility:
-	-Warhead@MutaliskCompatibility:
 	Warhead@Chemical_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -338,13 +315,9 @@ DreadshroudSpore:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -365,14 +338,6 @@ DreadshroudSpore:
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
 
-	-Warhead@LightFlameWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@FlakWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 11000
@@ -391,8 +356,6 @@ SCDevourerAA:
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 10
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -406,13 +369,10 @@ SCDevourerAA:
 		FriendlyFireSpread: 50
 		ValidTargets: Air
 		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		ValidTargets: Air
 		Explosions: purplesplash
 		ImpactSounds: sc_devourer_hit.aud
-	-Warhead@shrapnel:
 	Warhead@Cloud: SpawnSmokeParticle
 		Sequences: purple_toxins
 		Weapon: AnthraxCloudPurpleLarge
@@ -430,16 +390,11 @@ SCDevourerAA:
 		Duration: 100
 		ValidTargets: corrodible
 		ValidRelationships: Enemy
-	-Warhead@Chemical_Medium:
-	-Warhead@DevourerChemicalAirCompatibility:
-	-Warhead@MutaliskCompatibility:
 	Warhead@Chemical_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 44000
 		PercentageScale: 0
 
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 37
 ScourgeExplosion:
 	Inherits: SCScourgeExplosion
 	Range: 2000
@@ -462,8 +417,6 @@ SCScourgeExplosion:
 		Explosions: scscourgeexplosion
 		ValidTargets: Air
 		ImpactSounds: zavdth00.aud
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
 	Warhead@MissileAA_HeavyFlatCompatibility:
 		ValidTargets: Air
 		Damage: 100000
@@ -502,23 +455,14 @@ GuardianShoot:
 		Damage: 4
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 4
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_med_explosion
 		ImpactSounds: zguhit00.aud
 		ExplosionPalette: ra_temperat
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@Concussion_Medium:
-	-Warhead@Concussion_Light:
 	Warhead@Concussion_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
 SporemawShoot:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -629,8 +573,6 @@ HermitShoot:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: aa_plasgreeexp
 		ExplosionPalette: ra2effect
@@ -648,14 +590,6 @@ HermitShoot:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	-Warhead@MediumMissile:
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -682,7 +616,6 @@ HermitShoot3:
 HermitShoot4:
 	Inherits: HermitShoot
 	Range: 1424
-	-Warhead@shrapnel:
 
 BroodweaverLeech:
 	Inherits: ^HealingWeapon
@@ -728,14 +661,10 @@ SwarmlingShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -807,8 +736,6 @@ SwarmlingShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
 		ImpactSounds: firebl3.aud
@@ -819,16 +746,6 @@ SwarmlingShoot:
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
 
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
-	-Warhead@MediumMissile:
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -856,8 +773,6 @@ QueenSpine:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Broodling
 		ValidTargets: Ground, Water, Air
@@ -873,8 +788,6 @@ QueenSpine:
 		ImpactActors: false
 		ImpactSounds: zquhit00.aud,zquhit01.aud
 		ValidTargets: Ground, Water, Air
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@ArrowWeapon:
 	Warhead@Chemical_Medium:
 		InvalidTargets: Broodling
 		ValidTargets: Ground, Water, Air
@@ -942,8 +855,6 @@ LurkerSpinesImpact:
 		Damage: 1
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
@@ -953,9 +864,6 @@ LurkerSpinesImpact:
 		Explosions: sczlspine
 		ImpactSounds: zquhit00.aud,zquhit01.aud
 		ValidTargets: Ground, Water, Air
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@SwordWeapon:
-	-Warhead@SwordWeaponFriendlyFire:
 	Warhead@Chemical_Medium:
 		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -978,9 +886,6 @@ InfestedExplosion:
 		Explosions: self_destruct
 		ImpactSounds: ExploLrg.aud
 		ImpactActors: true
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 150000
@@ -1034,13 +939,9 @@ BehemothShoot:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1071,7 +972,6 @@ BehemothShoot:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	-Warhead@Effect1:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_med_explosion
 		ImpactSounds: zguhit00.aud
@@ -1083,14 +983,6 @@ BehemothShoot:
 		Explosions: sczhsplash
 		ImpactSounds: zguhit00.aud
 
-	-Warhead@LightFlameWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyMissile:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -1165,9 +1057,6 @@ Spore_AA:
 		ImpactSounds: zluhit00.aud
 		ImpactActors: false
 		ValidTargets: Air
-	-Warhead@MediumMissile:
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
@@ -1188,18 +1077,12 @@ Tentacle:
 		Damage: 3
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 3
-	-Warhead@CannonHE_Heavy:
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: sctentacle
 		ImpactSounds: zluhit00.aud
 		ImpactActors: false
-	-Warhead@Chaingun:
-	-Warhead@RailgunExtraDamage:
-	-Warhead@RailgunWeapon:
-	-Warhead@SwordWeapon:
-	-Warhead@SwordWeaponFriendlyFire:
 	Warhead@Melee_HeavyFlatCompatibility:
 		ValidTargets: Ground
 		Damage: 25000

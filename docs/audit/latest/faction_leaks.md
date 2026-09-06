@@ -1,6 +1,6 @@
 # audit_faction_leaks — cross-faction leaks (B1)
 
-Factions checked: **31** — L1 leaks: **460**, L3 concrete-inherit leaks: **20**, shared/unattributed buildables: **91**
+Factions checked: **31** — L1 leaks: **453**, L3 concrete-inherit leaks: **20**, shared/unattributed buildables: **91**
 
 
 ## L1 — buildable in faction X but owned by faction Y
@@ -69,54 +69,40 @@ Factions checked: **31** — L1 leaks: **460**, L3 concrete-inherit leaks: **20*
 | ra1_allies | ra1_allies_upgrade_infantryarmorplating | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/upgrades.yaml |
 | ra1_allies | ra1_allies_upgrade_lasertargetingsystems | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/upgrades.yaml |
 | ra1_allies | ra1_allies_upgrade_reinforcedstructures | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_airfield | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_actordogname | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets | ra1_soviets_ak47conscript | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets | ra1_soviets_armoredyak | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
-| ra1_soviets | ra1_soviets_attackdog | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
-| ra1_soviets | ra1_soviets_barracks | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_btr80 | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_commissar | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
-| ra1_soviets | ra1_soviets_constructionyard | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_cyberdog | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
-| ra1_soviets | ra1_soviets_doctrine_conscription | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_doctrine_heavyarmor | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_doctrine_industrialefficiency | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_doctrine_inferno | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_doctrine_nuclearwar | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_doctrine_teslaandexperimentaltech | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_doctrine_conscriptiondoctrine | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_doctrine_heavyarmordoctrine | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_doctrine_industrialefficiencydoctrine | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_doctrine_infernodoctrine | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_doctrine_nuclearwardoctrine | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_doctrine_teslaandexperimentaltechdoctrine | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_dragunovantimaterialsniper | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets | ra1_soviets_firerocketsoldier | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets | ra1_soviets_flaktruck | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets | ra1_soviets_flamethrower | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets | ra1_soviets_flametower | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
 | ra1_soviets | ra1_soviets_gatlingtank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_gorynychtank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_grad | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets | ra1_soviets_grenadier | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets | ra1_soviets_hammertank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_heatraytank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets | ra1_soviets_heavyindustrialminer | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets | ra1_soviets_heavytank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_heavyteslatank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_hindattackhelicopter | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets | ra1_soviets_hiptransport | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets | ra1_soviets_ironcurtain | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
 | ra1_soviets | ra1_soviets_kamovattackhelicopter | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets | ra1_soviets_kotinnucleartank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets | ra1_soviets_largefactory | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_largesovietairfield | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_madtank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets | ra1_soviets_mammothtank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_migattackbomber | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
-| ra1_soviets | ra1_soviets_missilesilo | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
-| ra1_soviets | ra1_soviets_mobileconstructionvehicle | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_monstertank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets | ra1_soviets_mortarsoldier | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets | ra1_soviets_nuclearv2launcher | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_nuclearyak | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets | ra1_soviets_nukedemotruck | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets | ra1_soviets_orerefinery | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
-| ra1_soviets | ra1_soviets_oretruck | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_promotion_cyberdog | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/promotions.yaml |
 | ra1_soviets | ra1_soviets_promotion_gatlingtank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/promotions.yaml |
 | ra1_soviets | ra1_soviets_promotion_hurricanerocketpods | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/promotions.yaml |
@@ -129,17 +115,32 @@ Factions checked: **31** — L1 leaks: **460**, L3 concrete-inherit leaks: **20*
 | ra1_soviets | ra1_soviets_promotion_supersonicnuclearbomber | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/promotions.yaml |
 | ra1_soviets | ra1_soviets_promotion_superspyplane | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/promotions.yaml |
 | ra1_soviets | ra1_soviets_promotion_volkov | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/promotions.yaml |
-| ra1_soviets | ra1_soviets_radardome | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_rifleinfantry | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
-| ra1_soviets | ra1_soviets_rocketsoldier | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
-| ra1_soviets | ra1_soviets_samsite | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
-| ra1_soviets | ra1_soviets_servicedepot | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_shocktrooper | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets | ra1_soviets_siegemammothtank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets | ra1_soviets_sovietairfield | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_sovietbarracks | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_sovietconstructionyard | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_sovietflamethrower | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ra1_soviets | ra1_soviets_sovietgrenadier | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ra1_soviets | ra1_soviets_sovietheavyindustrialminer | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets | ra1_soviets_sovietheavytank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets | ra1_soviets_sovietlargefactory | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_sovietmammothtank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets | ra1_soviets_sovietmissilesilo | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
+| ra1_soviets | ra1_soviets_sovietmobileconstructionvehicle | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets | ra1_soviets_sovietmortarsoldier | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ra1_soviets | ra1_soviets_sovietorerefinery | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_sovietoretruck | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets | ra1_soviets_sovietradardome | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_sovietrocketsoldier | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ra1_soviets | ra1_soviets_sovietsamsite | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
+| ra1_soviets | ra1_soviets_sovietservicedepot | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_soviettechcenter | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_sovietwarfactory | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_stalinfist | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_su57attackbomber | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets | ra1_soviets_supersonicnuclearbomber | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
-| ra1_soviets | ra1_soviets_techcenter | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_teslacoil | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
 | ra1_soviets | ra1_soviets_teslatank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_teslayak | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
@@ -147,19 +148,19 @@ Factions checked: **31** — L1 leaks: **460**, L3 concrete-inherit leaks: **20*
 | ra1_soviets | ra1_soviets_upgrade_armoredyak | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_autoloaders | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_commissar | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_upgrade_hammertank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_upgrade_hammertankupgrade | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_hazmatsuits | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_heatraytank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_upgrade_heavyteslatank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_upgrade_heavyteslatankupgrade | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_incendiarybullets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_upgrade_kotinnucleartank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_upgrade_kotinnucleartankupgrade | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_massproduction | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_menofsteel | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_nucleartankshells | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_nuclearyak | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_reactoroverload | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_scorchedearth | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_upgrade_shtoradefensesystem | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_upgrade_shtoradefensesystemupgrade | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_stalinium | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_teslaarcing | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_teslarockets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
@@ -172,7 +173,6 @@ Factions checked: **31** — L1 leaks: **460**, L3 concrete-inherit leaks: **20*
 | ra1_soviets | ra1_soviets_v1rockettruck | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_v2rocketlauncher | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets | ra1_soviets_volkov | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
-| ra1_soviets | ra1_soviets_warfactory | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_yakscoutplane | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets | ra1_soviets_zapper | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ts_gdi | asianalliance_concretebarrier | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
@@ -303,31 +303,24 @@ Factions checked: **31** — L1 leaks: **460**, L3 concrete-inherit leaks: **20*
 | latinsyndicate | tiger.nax | redalert2mod/naxis | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
 | latinsyndicate | wirbelwind.nax | redalert2mod/naxis | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
 | ordos | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
-| ordos | atreides_airdrone | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| ordos | atreides_fremen | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml |
 | ordos | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
-| ordos | duelist_tank.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
+| ordos | atreides_palace | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml |
 | ordos | harkonnen_advancedcarryall | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
 | ordos | harkonnen_gunship | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
-| ordos | heavy_inf.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml |
-| ordos | heavy_rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
-| ordos | ixian_kodatank | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
-| ordos | rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | ixian | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
-| ixian | atreides_airdrone | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| ixian | atreides_fremen | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml |
 | ixian | atreides_missiletank | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
 | ixian | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| ixian | atreides_palace | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml |
 | ixian | corrino_missiletank | d2k/corrino | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | ixian | harkonnen_advancedcarryall | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
 | ixian | harkonnen_gunship | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
-| atreides | duelist_tank.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
-| atreides | heavy_inf.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml |
-| atreides | heavy_rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
-| atreides | ixian_kodatank | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
-| atreides | rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | harkonnen | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
-| harkonnen | atreides_airdrone | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| harkonnen | atreides_fremen | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml |
 | harkonnen | atreides_missiletank | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
 | harkonnen | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
+| harkonnen | atreides_palace | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml |
 | harkonnen | corrino_missiletank | d2k/corrino | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | harkonnen | ordos_upgrade_lightfactory | d2k/ordos | mods/cameo/ContentPacks/D2k/Ordos/yaml/upgrades.yaml |
 | wc2_humans | wc2_humans_alleria | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |
@@ -473,9 +466,9 @@ Factions checked: **31** — L1 leaks: **460**, L3 concrete-inherit leaks: **20*
 
 | faction | actor | inherit target | target owner | file |
 |---|---|---|---|---|
-| ra1_soviets | ra1_soviets_heavyindustrialminer | ra1_soviets_oretruck | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets | ra1_soviets_largefactory | ra1_soviets_warfactory | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
-| ra1_soviets | ra1_soviets_largesovietairfield | ra1_soviets_airfield | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_largesovietairfield | ra1_soviets_sovietairfield | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets | ra1_soviets_sovietheavyindustrialminer | ra1_soviets_sovietoretruck | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets | ra1_soviets_sovietlargefactory | ra1_soviets_sovietwarfactory | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_battlefortress_chrono | ra2_allies_battlefortress | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies | ra2_allies_battlefortress_empty | ra2_allies_battlefortress | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies | ra2_allies_ifv_chrono | ra2_allies_ifv_mg | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |

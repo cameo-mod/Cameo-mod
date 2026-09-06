@@ -1755,3 +1755,236 @@ ordos_chemturret:
 	icon:
 		Offset: 0,0
 		Filename: ordos_chemtur_icon.png
+
+# --- Migrated from legacy sequences/d2k.yaml (Ruling 3, 2026-09-06) ---
+barracks.ordos:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3093
+		Offset: -32,64
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4477
+		Length: 8
+		Offset: -32,64
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4485
+		Length: 9
+		Offset: -32,64
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3094
+		Offset: -32,64
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 617, 618, 637, 638
+		Length: 4
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 649, 650, 669, 670
+		Length: 4
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4325
+		Offset: -30,-24
+
+
+conyard.ordos:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3127
+		Offset: -48,64
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4373
+		Length: 30
+		Offset: -48,64
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4403
+		Length: 12
+		Offset: -48,64
+		Tick: 170
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3128
+		Offset: -48,64
+	crane-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4728
+		Length: 14
+		Offset: -48,64
+		Tick: 80
+		ZOffset: 1023
+	damaged-crane-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4728
+		Length: 14
+		Offset: -48,64
+		Tick: 80
+		ZOffset: 1023
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4312
+		Offset: -30,-24
+
+
+heavy.ordos:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3086
+		Offset: -48,80
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4592
+		Length: 9
+		Offset: -48,80
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4601
+		Length: 9
+		Offset: -48,80
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3086
+		Offset: -48,80
+	idle-top:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3087
+		Offset: -48,80
+		ZOffset: 896
+	damaged-idle-top:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3088
+		Offset: -48,80
+		ZOffset: 896
+	production-welding:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4958
+		Length: 10
+		Offset: -48,80
+		Tick: 200
+		BlendMode: Additive
+		ZOffset: 1024
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4353
+		Offset: -30,-24
+
+# Migrated from legacy mods/cameo/sequences/d2k.yaml (Ruling 9 sequences)
+
+minipower.ordos:
+	Inherits: minipower.atreides
+	idle:
+		Filename: d2k_mini_windtrap.shp
+		Start: 2
+	damaged-idle:
+		Filename: d2k_mini_windtrap.shp
+		Start: 3
+	icon:
+		Filename: d2k_mini_windtrap_icon.shp
+		Start: 1
+
+d2k_munitions.ordos:
+	Inherits: d2k_munitions.atreides
+	idle:
+		Filename: ixian_munitionssilo_d2k_munitions.shp
+		Start: 4
+	damaged-idle:
+		Filename: ixian_munitionssilo_d2k_munitions.shp
+		Start: 5
+	icon:
+		Filename: ixian_munitionssilo_icon.shp
+		Start: 1
+
+####################################################
+#		   MISC
+####################################################
+
+faction.ordos:
+	idle:
+		Filename: ordosicon.shp
+	icon:
+		Filename: ordosicon.shp
+
+ordos_eye_bombs:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2253
+		Facings: -8
+		Transpose: true
+		ZOffset: 1023

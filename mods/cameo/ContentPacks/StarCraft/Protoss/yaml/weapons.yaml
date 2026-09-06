@@ -63,11 +63,6 @@ PositronGrenade:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@SmallArms:
-	-Warhead@TankDestroyerCannon:
 	Warhead@Quantum_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 40000
@@ -101,14 +96,10 @@ PositronBounce1:
 		Damage: 2
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PositronBounce2
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@Quantum_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
-	-Warhead@Bullet_Light:
 
 PositronBounce2:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
@@ -136,15 +127,10 @@ PositronBounce2:
 		PercentageScale: 0
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@shrapnel:
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@Quantum_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 0
-	-Warhead@Bullet_Light:
 
 InterceptorLauncher:
 	ReloadDelay: 100
@@ -200,10 +186,6 @@ InterceptorLauncher:
 		ImpactSounds: phohit00.wav
 		ValidTargets: Ground, Air
 		ImpactActors: false
-	-Warhead@FlakWeapon:
-	-Warhead@HeavyCannon:
-	-Warhead@MediumCannon:
-	-Warhead@TankDestroyerCannon:
 	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 250
@@ -300,10 +282,6 @@ InterceptorLauncher:
 PhotonCannon:
 	Inherits@finalmain: ^Compatibility_Plasma_HeavyFlat
 	Inherits: ^PhotonCannonLegacy
-	-Warhead@PreservedFlat_FlakWeapon:
-	-Warhead@PreservedFlat_HeavyCannon:
-	-Warhead@PreservedFlat_MediumCannon:
-	-Warhead@PreservedFlat_TankDestroyerCannon:
 	Warhead@Plasma_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
@@ -356,13 +334,9 @@ GladiusCannon:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -411,16 +385,10 @@ GladiusCannon:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@LightFlameWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Plasma_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 110000
 		PercentageScale: 0
-	-Warhead@FlakWeapon:
 	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 250
@@ -513,12 +481,6 @@ GladiusCannon:
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Heavy:
-	-Warhead@PreservedFlat_FlakWeapon:
-	-Warhead@PreservedFlat_HeavyCannon:
-	-Warhead@PreservedFlat_MediumCannon:
-	-Warhead@PreservedFlat_TankDestroyerCannon:
 
 ArbiterCannon:
 	Inherits: PhotonCannon
@@ -550,8 +512,6 @@ GlaveCanon:
 		Inaccuracy: 0
 		CloseEnough: 822
 		AllowSnapping: true
-	-Warhead@Demolition_Light:
-	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -697,11 +657,6 @@ ScarabLaunch:
 		ImpactSounds: psahit00.aud
 		Explosions: blueartexp
 
-	-Warhead@HeavyBomb:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumMissile:
-	-Warhead@CannonHE_HeavyFlatCompatibility:
 ScarabLaunchDummy:
 	ReloadDelay: 90
 	Range: 7777
@@ -799,7 +754,7 @@ CorsairFlash:
 		ContrailEndWidth: 15
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Air
 		Damage: 2000
 	Warhead@Flak_Medium:
@@ -807,8 +762,6 @@ CorsairFlash:
 		Damage: 2000
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
-	-Warhead@Demolition_Light:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 4000
@@ -949,14 +902,6 @@ VoidRayBeam:
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
 		Volume: 0.5
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
-	-Warhead@LaserExtraDamage:
-	-Warhead@LaserWeapon:
-	-Warhead@LightMissile:
-	-Warhead@SmallArms:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Prism_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 13600
@@ -1070,14 +1015,6 @@ StarshipSovereignBeam:
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
 		Volume: 0.5
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
-	-Warhead@LaserExtraDamage:
-	-Warhead@LaserWeapon:
-	-Warhead@LightMissile:
-	-Warhead@SmallArms:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 13600
@@ -1112,7 +1049,7 @@ UnitExplodeSmallProtoss:
 
 SCWorkerExplodeProtoss:
 	Inherits: UnitExplodeSmallProtoss
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
 ScoutMG:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
@@ -1136,8 +1073,6 @@ ScoutMG:
 		ContrailEndColor: 88BBFF44
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
-	-Warhead@Demolition_Light:
-	-Warhead@Flak_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -1208,13 +1143,9 @@ EpigraphMG:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyAAWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1243,16 +1174,6 @@ EpigraphMG:
 	Warhead@EffectAir: CreateEffect
 		Explosions: cryo_blast
 
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ArrowWeapon:
-	-Warhead@LightMissile:
-	-Warhead@MediumMissile:
-	-Warhead@HeavyMissile:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyAAWeapon:
-	-Warhead@FlakWeapon:
-	-Warhead@Chaingun:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
@@ -1290,9 +1211,6 @@ ManifoldMG:
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
 		ValidTargets: Ground, Water
-	-Warhead@Bullet_Medium:
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Concussion_Light:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 6000
@@ -1310,9 +1228,6 @@ ManifoldMG_AA:
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		ValidTargets: Air
-	-Warhead@Bullet_Medium:
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Concussion_Light:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 6000
@@ -1375,11 +1290,6 @@ AtreusMG:
 		Explosions: steel_bluepiffs
 		ValidTargets: Ground, Water, Air
 
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumMissile:
-	-Warhead@FlakWeapon:
-	-Warhead@Bullet_MediumFlatCompatibility:
 PatriarchShoot:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^Grenade
@@ -1424,8 +1334,6 @@ PatriarchShoot:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: scblueexplosion
 		ImpactSounds: ptesto00
@@ -1439,14 +1347,6 @@ PatriarchShoot:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	-Warhead@MediumMissile:
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -1473,4 +1373,3 @@ PatriarchShoot3:
 PatriarchShoot4:
 	Inherits: PatriarchShoot
 	Range: 1000
-	-Warhead@shrapnel:

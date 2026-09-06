@@ -45,6 +45,20 @@
         "spread": "400",
         "tag": "Flame_HeavyFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -170,6 +184,20 @@
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -565,11 +593,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_Super_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "5",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "1000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -579,11 +628,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "5",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -718,11 +788,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "450",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -732,11 +816,39 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -746,11 +858,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -792,11 +918,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "450",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -806,11 +946,39 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -820,11 +988,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1053,11 +1235,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1067,11 +1270,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1081,6 +1305,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "250",
@@ -1088,11 +1319,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1137,11 +1382,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1151,11 +1417,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1165,6 +1452,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "250",
@@ -1172,11 +1466,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1702,11 +2010,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -1716,11 +2038,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2611,11 +2947,46 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": null,
         "spread": "100",
         "tag": "TeslaChargedWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2625,11 +2996,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2639,11 +3031,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "450",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "300",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2653,11 +3059,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2701,7 +3121,7 @@
       "warheads": [
        "^Warhead_Tesla_Super"
       ],
-      "weapon": "EMPGrenade",
+      "weapon": "Grenade_EMP",
       "weapon_class_source": "illegal_mix"
      },
      {
@@ -2715,11 +3135,46 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": null,
         "spread": "100",
         "tag": "TeslaChargedWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2729,11 +3184,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2743,11 +3219,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "450",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "300",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2757,11 +3247,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2805,7 +3309,7 @@
       "warheads": [
        "^Warhead_Tesla_Super"
       ],
-      "weapon": "EMPGrenade",
+      "weapon": "Grenade_EMP",
       "weapon_class_source": "illegal_mix"
      }
     ],
@@ -3032,6 +3536,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "40",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "10",
         "falloff": "100, 0",
         "spread": "1",
@@ -3039,11 +3550,39 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "10",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperMediumMissile",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperSmallArms",
+        "type": "AreaDamage"
        },
        {
         "damage": "20000",
@@ -3079,6 +3618,13 @@
         "spread": "150",
         "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -3109,11 +3655,39 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "10",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "10",
@@ -3153,11 +3727,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "40",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "5",
         "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -3202,6 +3790,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "40",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "10",
         "falloff": "100, 0",
         "spread": "1",
@@ -3209,11 +3804,39 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "10",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperMediumMissile",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperSmallArms",
+        "type": "AreaDamage"
        },
        {
         "damage": "20000",
@@ -3250,6 +3873,13 @@
         "spread": "150",
         "tag": "MissileHE_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -3281,11 +3911,39 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "10",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "10",
@@ -3326,11 +3984,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "40",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "5",
         "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -3479,11 +4151,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -3493,6 +4186,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 0",
         "spread": "1",
@@ -3500,11 +4200,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperMediumMissile",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
        },
        {
         "damage": "8000",
@@ -3559,11 +4280,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -3573,6 +4315,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 0",
         "spread": "1",
@@ -3580,11 +4329,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperMediumMissile",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
        },
        {
         "damage": "8000",
@@ -3929,6 +4699,20 @@
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -3962,6 +4746,20 @@
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -4333,6 +5131,20 @@
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -4365,6 +5177,20 @@
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -4483,11 +5309,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "5",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "LightChemicalWeapon",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -4497,6 +5337,20 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "5",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -4504,11 +5358,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "5",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -4550,11 +5425,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "5",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "LightChemicalWeapon",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -4564,6 +5453,20 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "5",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
@@ -4571,11 +5474,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "5",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "5",
@@ -5674,6 +6598,20 @@
         "spread": "110",
         "tag": "Flak_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -5704,6 +6642,20 @@
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
+        "tag": "Flak_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -5804,11 +6756,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "14000",
+        "falloff": null,
+        "spread": "300",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "7",
         "falloff": null,
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14000",
+        "falloff": null,
+        "spread": "450",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "7",
@@ -5818,6 +6784,13 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "14000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "7",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -5825,11 +6798,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "14000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "7",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
        },
        {
         "damage": "7",
@@ -6356,11 +7350,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6370,11 +7378,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "300",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6384,11 +7413,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6427,11 +7470,32 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "12000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6441,11 +7505,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "300",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6455,11 +7540,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -6725,11 +7824,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6739,11 +7852,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "300",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6753,11 +7887,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6800,11 +7948,25 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6814,11 +7976,32 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "300",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6828,11 +8011,25 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -7461,6 +8658,20 @@
         "spread": "85",
         "tag": "MissileAP_HeavyFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -7492,6 +8703,27 @@
         "falloff": "100, 70, 30, 0",
         "spread": "400",
         "tag": "MissileAA_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "32000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        }
       ],

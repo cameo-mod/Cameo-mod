@@ -3,6 +3,7 @@ upgrade_conyard.atreides:
 	Tooltip:
 		Name: Construction Yard Upgrade
 	Buildable:
+		Factions: atreides
 		Queue: Upgrades
 		BuildPaletteOrder: 10
 		Prerequisites: ~atreides_constructionyard, ~outpost
@@ -16,6 +17,7 @@ upgrade_barracks.atreides:
 	Tooltip:
 		Name: Barracks Upgrade
 	Buildable:
+		Factions: atreides
 		Queue: Upgrades
 		BuildPaletteOrder: 20
 		Prerequisites: ~atreides_barracks
@@ -29,6 +31,7 @@ upgrade_light.atreides:
 	Tooltip:
 		Name: Light Factory Upgrade
 	Buildable:
+		Factions: atreides
 		Queue: Upgrades
 		BuildPaletteOrder: 30
 		Prerequisites: ~atreides_lightfactory
@@ -42,6 +45,7 @@ upgrade_heavy.atreides:
 	Tooltip:
 		Name: Heavy Factory Upgrade
 	Buildable:
+		Factions: atreides
 		Queue: Upgrades
 		BuildPaletteOrder: 40
 		Prerequisites: ~atreides_heavyfactory
@@ -55,6 +59,7 @@ upgrade_radar.atreides:
 	Tooltip:
 		Name: Radar Upgrade
 	Buildable:
+		Factions: atreides
 		Queue: Upgrades
 		BuildPaletteOrder: 50
 		Prerequisites: ~outpost

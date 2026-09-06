@@ -123,7 +123,8 @@
     "name": "Atreides Air Drone",
     "prerequisites": [
      "~hightech.atreides",
-     "research_centre"
+     "research_centre",
+     "~atreides_promotion_airdrone"
     ],
     "queue": [
      "Aircraft",
@@ -427,9 +428,30 @@
         "spread": "80",
         "tag": "CannonAP_LightFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "80",
+        "tag": "CannonAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "7979",
@@ -726,9 +748,17 @@
    "atreides_palace": {
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
     },
-    "buildable": false,
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
     "design": {
      "class_anchor": null,
      "special": null,
@@ -738,7 +768,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "1000000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -747,7 +777,13 @@
     "name": "Atreides Palace",
     "prerequisites": [
      "~hightech.atreides",
-     "~research_centre"
+     "~research_centre",
+     "!apalace",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
     ],
     "shield_flat": {
      "src": "inherited",
@@ -763,7 +799,7 @@
     },
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "10000"
     }
    },
    "atreides_refinery": {
@@ -877,7 +913,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2135",
       "pricing": true,
@@ -1215,8 +1251,9 @@
     "name": "Desert Phantom",
     "prerequisites": [
      "~atreides_barracks",
+     "~hightech.atreides",
      "upgrade_barracks",
-     "~hightech.atreides"
+     "~atreides_promotion_fremen"
     ],
     "queue": [
      "Infantry",
@@ -1571,6 +1608,127 @@
     }
    }
   },
+  "promotions": {
+   "atreides_promotion_airdrone": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Air Drone",
+    "prerequisites": [
+     "~atreides_constructionyard",
+     "!atreides_promotion_airdrone",
+     "atreides_promotion_sonictank",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "atreides_promotion_fremen": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Fremen",
+    "prerequisites": [
+     "~atreides_constructionyard",
+     "!atreides_promotion_fremen",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "atreides_promotion_minotaurus": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Minotaurus",
+    "prerequisites": [
+     "~atreides_constructionyard",
+     "!atreides_promotion_minotaurus",
+     "atreides_promotion_sonictank",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "atreides_promotion_mongoose": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Mongoose",
+    "prerequisites": [
+     "~atreides_constructionyard",
+     "!atreides_promotion_mongoose",
+     "atreides_promotion_minotaurus",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "atreides_promotion_sonictank": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Sonic Tank",
+    "prerequisites": [
+     "~atreides_constructionyard",
+     "!atreides_promotion_sonictank",
+     "atreides_promotion_fremen",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   }
+  },
   "upgrades": {
    "upgrade_barracks.atreides": {
     "build_limit": {
@@ -1710,16 +1868,9 @@
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3072",
@@ -1809,7 +1960,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5120",
@@ -1983,7 +2134,8 @@
     "prerequisites": [
      "~atreides_vehicle_production",
      "~heavy.missile_tank",
-     "research_centre"
+     "research_centre",
+     "~atreides_promotion_minotaurus"
     ],
     "queue": [
      "Vehicle",
@@ -2044,7 +2196,7 @@
         "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2050",
       "pricing": true,
@@ -2212,7 +2364,7 @@
         "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2050",
       "pricing": true,
@@ -2257,7 +2409,8 @@
     "prerequisites": [
      "~atreides_vehicle_production",
      "~heavy.missile_tank",
-     "research_centre"
+     "research_centre",
+     "~atreides_promotion_mongoose"
     ],
     "queue": [
      "Vehicle",
@@ -2330,7 +2483,7 @@
         "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
@@ -2421,16 +2574,9 @@
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3072",
@@ -2703,7 +2849,8 @@
     "name": "Sonic Tank",
     "prerequisites": [
      "~heavy.atreides_combat",
-     "research_centre"
+     "research_centre",
+     "~atreides_promotion_sonictank"
     ],
     "queue": [
      "Vehicle",

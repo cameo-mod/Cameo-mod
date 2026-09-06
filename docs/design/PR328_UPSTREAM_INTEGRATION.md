@@ -1,5 +1,102 @@
 # PR #328: upstream integration and armament-mode boundary
 
+## Current integration: retired exemptions (2026-09-06)
+
+The current merge incorporates upstream `56c14d9db`. This section supersedes the
+older snapshots below. Upstream deleted the intentional-composite exemption
+registry under the one-warhead ruling. PR 328 therefore retires its live registry
+drift command and that command's tests; it does not restore the deleted approval
+mechanism. The last diagnostic is retained only as
+[`pr328_composite_registry_drift_pre_retirement.json`](../history/audits/pr328_composite_registry_drift_pre_retirement.json).
+Its counts are historical, not current findings or exemptions. The old live
+command and its tests were removed; the archived evidence is recoverable in git.
+
+The shared reachability survey also imported the removed validator, preventing
+the percentage-runtime audit from starting. Its inventory now reports raw stacks
+without exemptions. Legacy reviewed partition fields remain empty with an explicit
+policy label; callers cannot supply a callback to restore exemptions. Raw counts,
+reachability and lower-only ratchets are unchanged. Three synthetic regressions
+cover direct/transitive/unreached counts and rejection of exemption injection.
+The percentage-runtime audit now runs and passes (186 direct weapons, 296 folded
+applications, zero dispatch-structure findings); 145-template generator sync passes.
+
+The Hydra regression still verifies its complete historical four-profile fixture
+and current BulletChem fields, but now checks the raw resolved main count directly
+instead of importing the removed exemption machinery. Independent review identified
+both compatibility issues and confirmed the nominal guard and armament-mode tests
+pass. The completed paired test/audit comparison below supports a scoped merge;
+it does not certify that upstream's entire balance pipeline is green.
+
+All 33 raw and derived ledgers were regenerated from the integrated active content
+(2,205 ledger actors). The merge retains upstream's centralized class-membership
+import alongside the PR's per-armament firepower import. Gameplay files and engine
+configuration remain identical to the integrated upstream revision.
+
+Automated same-rules comparison loaded the exact upstream extractor from
+`56c14d9db` and ran both versions against one integrated Ruleset. Across all 33
+raw/derived ledger pairs, differences are exactly 1,000 new resolved-modifier
+lists, two spawn-only eligibility flags and their four removed derived tier fields.
+There are no other differences. Thus regenerated armor, damage, physical-state,
+survivability and tier-model outputs are not silently changed by this PR.
+
+### Final test comparison for this integration
+
+Both runs used the bundled Python with openpyxl and the sequential bounded runner
+(`-MaxMemoryMB 2048 -MaxSystemMemoryPercent 84 -TotalTimeoutSeconds 1800`).
+The baseline was a clean detached checkout of `56c14d9db`, not a reconstruction
+of its results from the PR's tests.
+
+| Test tree | Modules completed | Tests run | Skipped | Failed modules |
+|---|---:|---:|---:|---:|
+| Upstream `56c14d9db` | 83 | 650 | 0 | 50 |
+| Integrated PR 328 | 88 | 766 | 0 | 43 |
+
+All 137 tests in the twelve PR-added/modified test modules pass. The current full
+report is [`bounded_test_run.json`](../audit/latest/bounded_test_run.json).
+No module newly fails. Seven baseline failures are repaired: assignment tests,
+four Hydra modules, physical-state binding regression and scaled-bullet overrides.
+
+**Method-level qualification:** fixing the survey import exposes twelve failing
+methods that baseline could not execute: five in `authorized_remaining_profiles`,
+four in `corroborated_role_profile_consolidation`, one in `reachable_stack_planner`
+and two in `weapon_structure_inventory`. These modules were all import-blocked
+upstream. The additional output exposes old profile/ratchet disagreements; it is
+not a claim that no new failure messages appear. No other new failure identities
+were found. The independent reviewer reproduced this comparison and conditionally
+approved the scoped repair after completing the paired audit comparison.
+No historical profile expectation or raw-stack ratchet was raised to pass.
+
+### Final canonical audit comparison
+
+Both `bash tools/audit/run_all.sh` runs completed with exit 1: integrated PR
+716.6 seconds, clean upstream 721.0 seconds. Their sampled process-tree peaks
+were 1,119.4 and 1,119.3 MB; peak PC memory was 55.0% for both, below the 84%
+guard. These are completed red runs, not interrupted or globally passing runs.
+
+The PR has no zero-byte Markdown reports. Upstream's percentage-runtime report
+is empty with an import-error sidecar; the PR repairs that import and reports
+zero dispatch findings. Ledger drift is repaired from 31 baseline ledgers to
+zero. Raw stack findings remain fully visible. Document-health checks find no
+issues in either tree. The six refreshed rename proposals are byte-identical
+between both runs; no renames are applied. Other gameplay audit differences
+were checked against the identical source and refreshed ledger inputs.
+
+Independent review found two minor PR-added error-handling flags, now repaired:
+explicit absolute-path provenance fallback and explicit encoding forwarding in
+a test wrapper. Their 43 focused tests were rerun and pass; error-handling counts
+now match upstream. The security audit deliberately retains one additional
+`exec` finding: the historical consumer comparison executes trusted repository
+modules at the fixed SHA `ffc753fb0a6430fa518869ba94027aef4cd8e7ba`, with module
+names selected by a literal tuple. It does not accept a ref/source from the user.
+This reviewed diagnostic boundary is documented, not hidden by an exemption.
+
+The engine-freshness audit cannot measure the external engine clone in this
+environment and explicitly says so; this is not a clean engine result. No engine
+or live gameplay files differ from upstream, and no game was launched for this
+tools/docs-only PR. Final ledger verification and all four PR report freshness
+checks pass. The independent reviewer recommends the scoped merge, with existing
+upstream failures retained as implementation follow-up rather than waived.
+
 ## Local follow-up: spawn-only roster classification (2026-09-06)
 
 Fetched upstream `77beaef41`, 171 commits beyond this PR's integrated base.
@@ -118,7 +215,7 @@ decision audits fail because upstream's reviewed-composite registry no longer
 matches the resolved weapons. No stale digest or changed composite is automatically
 re-approved here; the old structure/decision artifacts must not be read as current.
 
-The [registry drift queue](../audit/latest/composite_registry_drift.json) retains
+The [historical registry drift queue](../history/audits/pr328_composite_registry_drift_pre_retirement.json) retains
 all **355 validator findings**. Its overlapping categories include 11 curated
 main-name disagreements, 14 manifest main-name disagreements, 151 changed main
 fingerprints despite unchanged names, and 5 reference/reachability disagreements.
@@ -126,9 +223,9 @@ These are review categories, not approval decisions. Its raw topology counts sho
 335 stacked concrete weapons: 242 reachable and 93 currently unreached. No
 reviewed/unreviewed totals are claimed while the registry is invalid.
 
-`tools/audit/report_composite_registry_drift.py --write` writes only the diagnostic
-JSON. A fresh report still returns exit 1 when the registry is blocked; report
-freshness must not turn a failed registry into a green validation.
+The now-retired `report_composite_registry_drift.py --write` command wrote only
+diagnostic JSON. At this historical checkpoint, a fresh blocked report still
+returned exit 1. It must not be resumed against the current, retired registry.
 
 The previous integrated suite completed **88/88 modules, 859 tests run, zero skips,
 22 failed modules** at PR head `9a47d4703`. The current report is superseded by the
@@ -145,9 +242,9 @@ revision's extractor and assignment tests reproduced the three two-argument
 `_is_balance_buildable` API errors. Other failed historical contracts remain
 unresolved findings; they are not all declared harmless or upstream-proven here.
 
-Next review should reconcile changed composite decisions against their upstream
-commits, then refresh the registry and dependent reports. That is separate from
-approving weapon changes or removing the nominal solver's safety boundaries.
+Historical next step (superseded by the registry retirement above): reconcile
+changed composite decisions against their upstream commits and refresh the registry.
+Do not perform that obsolete step or restore exemptions on current upstream.
 
 The 11 curated main-name disagreements group into three concrete review batches:
 

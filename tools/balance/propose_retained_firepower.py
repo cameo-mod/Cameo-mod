@@ -112,7 +112,8 @@ def prospective_actor(rules, name, retire_trait):
     try:
         source = source.relative_to(ROOT)
     except ValueError:
-        pass
+        # Synthetic/external source provenance stays absolute when outside ROOT.
+        source = pathlib.Path(own.file)
     return actor, after, {'trait': retire_trait, 'modifier': int(resolved.get('Modifier')),
                           'source': source.as_posix()}
 

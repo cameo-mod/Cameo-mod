@@ -72,12 +72,6 @@ HarrierMissiles:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Medium_WallExcludedExtraDamage:
 		Damage: 8000
-	-Warhead@LightFlameWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@HeavyAAWeapon:
-	-Warhead@FlakWeapon:
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -95,8 +89,6 @@ HarrierMissiles:
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -249,9 +241,6 @@ BlackEagleMissiles:
 			None: 5
 		Falloff: 100, 50
 		Range: 0, 32
-	-Warhead@Demolition_Heavy:
-	-Warhead@Demolition_Light:
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
@@ -267,9 +256,6 @@ BlackEagleMissiles_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	-Warhead@CollapsedBlackEagleMissilesDemolition_HeavyPercentage:
-	-Warhead@CollapsedBlackEagleMissilesDemolition_LightPercentage:
-	-Warhead@CollapsedBlackEagleMissilesMissileAP_MediumPercentage:
 	Warhead@CollapsedBlackEagleMissiles_eliteDemolition_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -400,16 +386,6 @@ BlackEagleThunderboltMissiles:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Light_WallExcludedExtraDamage:
 		Damage: 6000
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyMissile:
-	-Warhead@HeavyAAWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@FlakWeapon:
-	-Warhead@ArrowWeapon:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
@@ -580,7 +556,6 @@ PrismScatter2:
 		Duration: 12
 	Warhead@Laser_Heavy:
 		Damage: 2000
-	-Warhead@3:
 
 PrismScatterE:
 	Inherits: PrismScatter
@@ -614,10 +589,10 @@ RA2Comet:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFFFF
 		SecondaryBeamUsePlayerColor: false
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 20000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 20000
 	Warhead@Laser_Heavy:
 		Damage: 20000
@@ -699,25 +674,14 @@ RA2GrandCannonWeapon:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 50000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 50000
 	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
-	-Warhead@HeavyBomb:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Demolition_Light:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 300000
@@ -762,27 +726,17 @@ RA2HeavyMirageGun:
 		FriendlyFireSpread: 50
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonAP_Light:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@RailgunExtraDamage:
-	-Warhead@RailgunWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 33000
 		PercentageScale: 2422
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	-Warhead@CannonAP_Light:
 RA2HeavyMirageGun_elite:
 	Inherits: RA2HeavyMirageGun
 	Inherits@Elite: ^RA2EliteEffects
@@ -874,8 +828,6 @@ GuardianGIMG:
 	Report: vblhatta.wav, vblhattb.wav
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -982,16 +934,11 @@ ra2roktgun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	-Warhead@EffectAir:
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
-	-Warhead@FlakWeapon:
-	-Warhead@LightMissile:
-	-Warhead@SmallArms:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
 		PercentageScale: 2488
-	-Warhead@Bullet_Medium:

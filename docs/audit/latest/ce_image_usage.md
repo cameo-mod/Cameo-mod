@@ -4,13 +4,13 @@ tsdig: ALSO-USED (3)
   mods\cameo\sequences\tiberiansun.yaml:1246: 		Filename: tsdig.shp
 tsioncannon: ALSO-USED (11)
   mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\buildings.yaml:1044: 		Effect: tsioncannon
-  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:2311: 		RingImage: tsioncannon
+  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:2176: 		RingImage: tsioncannon
   mods\cameo\ContentPacks\RedAlert2Mod\Consortium\yaml\buildings.yaml:384: 		Effect: tsioncannon
   mods\cameo\ContentPacks\StarCraft\Protoss\yaml\buildings.yaml:600: 		Effect: tsioncannon
   mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\buildings.yaml:254: 		Effect: tsioncannon
 ionsfx: ALSO-USED (3)
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2003: 		Image: ionsfx
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2007: 		TrailImage: ionsfx
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1883: 		Image: ionsfx
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1887: 		TrailImage: ionsfx
   mods\cameo\sequences\misc.yaml:3465: 		Filename: ionsfx.shp
 tspodring: ALSO-USED (3)
   mods\cameo\sequences\misc.yaml:2629: 	tspodring:
@@ -20,12 +20,12 @@ tsmcnealmechdrop: ALSO-USED (1)
   mods\cameo\weapons\heroes.yaml:799: 		Image: tsmcnealmechdrop
 tsdroppod: ALSO-USED (2)
   mods\cameo\ContentPacks\TiberianSun\GDI\yaml\aircraft.yaml:499: 		Image: tsdroppod
-  mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1295: 		Image: tsdroppod
+  mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1237: 		Image: tsdroppod
 hakurei_giphy: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1104: 		Image: hakurei_giphy
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1030: 		Image: hakurei_giphy
   mods\cameo\sequences\misc.yaml:4534: 		Filename: hakurei_giphy.shp
 hakurei_dream: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1093: 		Image: hakurei_dream
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1019: 		Image: hakurei_dream
   mods\cameo\sequences\misc.yaml:4526: 		Filename: hakurei_dream.shp
 ra2corpse: CE-ONLY
 wc2_effect_sparkle: ALSO-USED (5)
@@ -35,11 +35,11 @@ wc2_effect_sparkle: ALSO-USED (5)
   mods\cameo\sequences\warcraft2.yaml:473: 		Filename: wc2_effect_sparkle.shp
   mods\cameo\sequences\warcraft2.yaml:485: 		Filename: wc2_effect_sparkle.shp
 wc2_effect_sparkle_circle: ALSO-USED (1)
-  mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:152: 		Image: wc2_effect_sparkle_circle
+  mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:148: 		Image: wc2_effect_sparkle_circle
 wc2_effect_heal: ALSO-USED (1)
   mods\cameo\sequences\warcraft2.yaml:365: 		Filename: wc2_effect_heal.shp
 wc2_exorcism: ALSO-USED (2)
-  mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:264: 	Report: wc2_exorcism.aud
+  mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:260: 	Report: wc2_exorcism.aud
   mods\cameo\sequences\warcraft2.yaml:373: 		Filename: wc2_exorcism.shp
 wc2_catapult_impact: ALSO-USED (1)
   mods\cameo\sequences\warcraft2.yaml:552: 		Filename: wc2_catapult_impact.shp
@@ -47,12 +47,12 @@ wc2_building_collapse: ALSO-USED (1)
   mods\cameo\sequences\misc.yaml:3062: 	wc2_building_collapse:
 wc2_lightng: ALSO-USED (2)
   mods\cameo\sequences\warcraft2.yaml:392: 		Filename: wc2_lightng.shp
-  mods\cameo\weapons\warcraft2.yaml:419: 		Image: wc2_lightng
+  mods\cameo\weapons\warcraft2.yaml:407: 		Image: wc2_lightng
 wc2_effect_blizzard: ALSO-USED (4)
   mods\cameo\ContentPacks\Warcraft2\Humans\yaml\buildings.yaml:575: 		Effect: wc2_effect_blizzard
-  mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:362: 		Image: wc2_effect_blizzard
+  mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:356: 		Image: wc2_effect_blizzard
   mods\cameo\sequences\warcraft2.yaml:459: 		Filename: wc2_effect_blizzard.shp
-  mods\cameo\weapons\warcraft2.yaml:547: 		Image: wc2_effect_blizzard
+  mods\cameo\weapons\warcraft2.yaml:535: 		Image: wc2_effect_blizzard
 wc2_catapult_stone_projectile_medium: ALSO-USED (1)
   mods\cameo\sequences\warcraft2.yaml:416: 		Filename: wc2_catapult_stone_projectile_medium.shp
 wc2_effect_death_and_decay: ALSO-USED (2)
@@ -60,7 +60,7 @@ wc2_effect_death_and_decay: ALSO-USED (2)
   mods\cameo\sequences\warcraft2.yaml:514: 		Filename: wc2_effect_death_and_decay.shp
 wc2_effect_daemon_attack: ALSO-USED (2)
   mods\cameo\sequences\warcraft2.yaml:541: 		Filename: wc2_effect_daemon_attack.shp
-  mods\cameo\weapons\warcraft2.yaml:888: 		Image: wc2_effect_daemon_attack
+  mods\cameo\weapons\warcraft2.yaml:872: 		Image: wc2_effect_daemon_attack
 wc2_cannon_impact: ALSO-USED (1)
   mods\cameo\sequences\warcraft2.yaml:559: 		Filename: wc2_cannon_impact.shp
 wh40kcapsule: ALSO-USED (1)

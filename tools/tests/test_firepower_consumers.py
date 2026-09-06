@@ -150,8 +150,8 @@ class WorkbookConsumers(unittest.TestCase):
         self.assertEqual(build.subtype_to_anchor('LineBreaker'), 'line_breaker')
         before = build.workbook_fingerprint()
         read_text = pathlib.Path.read_text
-        def changed(path, *args, **kwargs):
-            text = read_text(path, *args, **kwargs)
+        def changed(path, encoding=None, errors=None):
+            text = read_text(path, encoding=encoding, errors=errors)
             return text + '\n# changed mapping source\n' if path == pathlib.Path(class_membership.__file__) else text
         with patch.object(pathlib.Path, 'read_text', changed):
             self.assertNotEqual(build.workbook_fingerprint(), before)

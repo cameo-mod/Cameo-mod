@@ -1,14 +1,14 @@
 # audit_inherits — §10.3 invariant violations (B2)
 
-Actors+templates scanned: **4077**
+Actors+templates scanned: **4089**
 
 | violation | meaning | count |
 |---|---|---|
 | V1 | concrete actor inherits from concrete actor | 277 |
 | V2 | inherit crosses faction ownership | 0 |
 | V3 | dangling inherit target (BLOCKING) | 0 |
-| V4 | chain depth > 3 | 1939 |
-| V5 | > 2 -Trait removals (warning) | 100 |
+| V4 | chain depth > 3 | 1942 |
+| V5 | > 2 -Trait removals (warning) | 102 |
 
 
 ## V3 — dangling inherit targets (blocking)
@@ -141,10 +141,10 @@ _none found_
 | ra1_allies_chronovortexfade | ra1_allies_chronovortex | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/misc.yaml |
 | ra1_badger_bomber | ra1_badger | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | ra1_soviets_badger | ra1_badger | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| ra1_soviets_heavyindustrialminer | ra1_soviets_oretruck | redalert/soviets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets_largefactory | ra1_soviets_warfactory | redalert/soviets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
-| ra1_soviets_largesovietairfield | ra1_soviets_airfield | redalert/soviets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
-| ra1_soviets_mammothtank.colorpicker | ra1_soviets_mammothtank | ? | redalert/soviets | mods/cameo/rules/misc.yaml |
+| ra1_soviets_largesovietairfield | ra1_soviets_sovietairfield | redalert/soviets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_sovietheavyindustrialminer | ra1_soviets_sovietoretruck | redalert/soviets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets_sovietlargefactory | ra1_soviets_sovietwarfactory | redalert/soviets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_sovietmammothtank.colorpicker | ra1_soviets_sovietmammothtank | ? | redalert/soviets | mods/cameo/rules/misc.yaml |
 | ra1_soviets_superspyplane | ra1_soviets_spyplane | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | ra2_allies_battlefortress_chrono | ra2_allies_battlefortress | redalert2/allies | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies_battlefortress_empty | ra2_allies_battlefortress | redalert2/allies | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
@@ -677,6 +677,7 @@ _none found_
 | cgyard.latin | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml |
 | cobra.steel | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml |
 | combat_tank.harkonnen | 5 | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml |
+| combat_tank_husk.atreides | 4 | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
 | conehead2.nax | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml |
 | corrino_apc | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | corrino_barracks | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/buildings.yaml |
@@ -703,6 +704,7 @@ _none found_
 | corrino_sardaukar_javelin | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml |
 | corrino_sardaukar_laser | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml |
 | corrino_sardaukar_sword | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml |
+| corrino_siegetank | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | corrino_spiceharvester | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | corrino_starport | 5 | mods/cameo/ContentPacks/D2k/Corrino/yaml/buildings.yaml |
 | corrino_storagesilo | 6 | mods/cameo/ContentPacks/D2k/Corrino/yaml/buildings.yaml |
@@ -1242,29 +1244,22 @@ _none found_
 | ra1_oresilo | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
 | ra1_powerplant | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
 | ra1_scientist | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
-| ra1_soviets_airfield | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_actordogname | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_ak47conscript | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_armoredyak | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
-| ra1_soviets_attackdog | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_badger | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| ra1_soviets_barracks | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_btr80 | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_commissar | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
-| ra1_soviets_constructionyard | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_cyberdog | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_dragunovantimaterialsniper | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_firerocketsoldier | 6 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_flaktruck | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets_flamethrower | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_flametower | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
 | ra1_soviets_gatlingtank | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_gorynychtank | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_grad | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets_grenadier | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_hammertank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_heatraytank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets_heavyindustrialminer | 6 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets_heavytank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_heavyteslatank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_hindattackhelicopter | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets_hiptransport | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
@@ -1273,43 +1268,50 @@ _none found_
 | ra1_soviets_kamovattackhelicopter | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets_kennel | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
 | ra1_soviets_kotinnucleartank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets_largefactory | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_largesovietairfield | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_madtank | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets_mammothtank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets_mammothtank.colorpicker | 6 | mods/cameo/rules/misc.yaml |
 | ra1_soviets_migattackbomber | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
-| ra1_soviets_missilesilo | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
 | ra1_soviets_missilesubmarine | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
-| ra1_soviets_mobileconstructionvehicle | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_molotovconscript | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | ra1_soviets_monstertank | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets_mortarsoldier | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_nuclearv2launcher | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_nuclearyak | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
-| ra1_soviets_orerefinery | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
-| ra1_soviets_oretruck | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
-| ra1_soviets_radardome | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_rifleinfantry | 6 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
-| ra1_soviets_rocketsoldier | 6 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
-| ra1_soviets_samsite | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
-| ra1_soviets_servicedepot | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_shocktrooper | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_siegemammothtank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets_sovietairfield | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_sovietbarracks | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_sovietconstructionyard | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_sovietflamethrower | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ra1_soviets_sovietgrenadier | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ra1_soviets_sovietheavyindustrialminer | 6 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets_sovietheavytank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets_sovietlargefactory | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_sovietmammothtank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets_sovietmammothtank.colorpicker | 6 | mods/cameo/rules/misc.yaml |
+| ra1_soviets_sovietmissilesilo | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
+| ra1_soviets_sovietmobileconstructionvehicle | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets_sovietmortarsoldier | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ra1_soviets_sovietorerefinery | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_sovietoretruck | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets_sovietradardome | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_sovietrocketsoldier | 6 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ra1_soviets_sovietsamsite | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
+| ra1_soviets_sovietservicedepot | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_soviettechcenter | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_sovietwarfactory | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_stalinfist | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_su57attackbomber | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets_submarine | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | ra1_soviets_subpen | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
 | ra1_soviets_supersonicnuclearbomber | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets_superspyplane | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| ra1_soviets_techcenter | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_teslacoil | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
 | ra1_soviets_teslatank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_teslayak | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets_v1rockettruck | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_v2rocketlauncher | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_volkov | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
-| ra1_soviets_warfactory | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_yakscoutplane | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets_zapper | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_technician | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
@@ -1703,6 +1705,7 @@ _none found_
 | scrapcar_driveby.latin | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml |
 | siege_tank | 5 | mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml |
 | siege_tank_husk.atreides | 4 | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
+| siege_tank_husk.corrino | 4 | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | sietch_creep | 5 | mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml |
 | sietch_creep_disabled | 5 | mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml |
 | sonic_tank_husk.atreides | 4 | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
@@ -2274,6 +2277,8 @@ _none found_
 | cabal_orbdrone_slave | 3 | -UpdatesPlayerStatistics, -ActorLostNotification, -MapEditorData | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml |
 | cabal_plasmaturret | 3 | -WithVoxelBody, -Cloak@TDcloak, -ActorStatValues | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml |
 | cabal_rocketcyborg | 3 | -DamagedByTerrain, -SpawnActorOnDeath, -TakeCover | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml |
+| corrino_advancedcarryall | 4 | -SpawnActorOnDeath, -WithFacingSpriteBody, -WithDeathAnimation, -RevealsShroud@lockon | mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml |
+| corrino_gunship | 3 | -SpawnActorOnDeath, -WithDeathAnimation, -RevealsShroud@lockon | mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml |
 | cruiser_f.steel | 5 | -Selectable, -UpdatesPlayerStatistics, -ActorLostNotification, -WithShadow, -MapEditorData | mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml |
 | farasha_drone_ixian | 3 | -ActorLostNotification, -UpdatesPlayerStatistics, -MapEditorData | mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml |
 | forgotten_apache_husk | 3 | -WithShadow, -Cloak@TDcloak, -Cloak@TScloak | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/husks.yaml |

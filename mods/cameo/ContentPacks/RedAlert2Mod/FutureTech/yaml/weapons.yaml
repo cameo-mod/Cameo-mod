@@ -11,8 +11,6 @@ ACV_Machinegun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -93,13 +91,9 @@ Future_Cryocopter_Rocket:
 	Range: 5200
 	Report: vifvatta.wav
 	TargetActorCenter: true
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
-	-Warhead@MissileAP_Heavy:
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
@@ -233,15 +227,6 @@ Future_Cryocopter_Cryo:
 		Explosions: cryo_blast
 		ImpactSounds: phohit00.wav
 		Volume: 0.25
-	-Warhead@Smudge:
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
-	-Warhead@LaserExtraDamage:
-	-Warhead@LaserWeapon:
-	-Warhead@LightMissile:
-	-Warhead@SmallArms:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Cryo_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 12600
@@ -368,14 +353,6 @@ CryoLegionnaireAttack:
 		ImpactSounds: phohit00.wav
 		ValidTargets: Ground, Water
 		Volume: 0.25
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
-	-Warhead@LaserExtraDamage:
-	-Warhead@LaserWeapon:
-	-Warhead@LightMissile:
-	-Warhead@SmallArms:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Cryo_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 13600
@@ -411,20 +388,16 @@ FutureMicrotorpedos:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		PercentageScale: 20000
 		Damage: 6000
 	Warhead@MissileAP_Heavy:
 		PercentageScale: 20000
 		Damage: 6000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
-	-Warhead@EffectAir:
-	-Warhead@Demolition_Light:
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAP_HeavyFlatCompatibility:
 		ValidTargets: Water, Underwater, Bridge, Structure
 		Damage: 12000
@@ -548,14 +521,6 @@ AthenaLaser:
 		FadeInFrames: 3
 
 	MinRange: 3200
-	-Warhead@Chaingun:
-	-Warhead@FlakWeapon:
-	-Warhead@LaserExtraDamage:
-	-Warhead@LaserWeapon:
-	-Warhead@LightMissile:
-	-Warhead@SmallArms:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 193600
@@ -649,8 +614,6 @@ Future_MultiMissile:
 		Damage: 4000
 	Warhead@MissileAP_Light:
 		Damage: 4000
-	-Warhead@Arrow_Light:
-	-Warhead@MissileAP_Light:
 	Warhead@MissileAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -836,14 +799,6 @@ Future_MultiMissile_Sigma:
 		ImpactSounds: xplos.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
-	-Warhead@FlakWeapon:
-	-Warhead@MagicExtraDamage:
-	-Warhead@MagicWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@TeslaChargedExtraDamage:
-	-Warhead@TeslaChargedWeapon:
 	Warhead@MissileTesla_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 55888
@@ -863,29 +818,21 @@ FutureEnforcerShotgun:
 	Range: 3000
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 2000
-	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@ShotgunShrapnelEnemy:
 		Damage: 4000
 		PercentageScale: 0
-	-Warhead@ShotgunGrenadeEnemy:
 
 FutureEnforcerShotgun_elite:
 	Inherits: FutureEnforcerShotgun
@@ -1004,8 +951,6 @@ Future_Wheel_MG:
 	Report: heavy_mgun1_3.wav
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1018,7 +963,6 @@ Future_Wheel_MG_elite:
 	Burst: 8
 	Projectile: Bullet
 		Speed: 4000
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1054,7 +998,7 @@ ShotgunAttackRobotGun:
 		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 2000
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
@@ -1066,12 +1010,6 @@ ShotgunAttackRobotGun:
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@SmallArms:
-	-Warhead@TankDestroyerCannon:
 	Warhead@Bullet_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -1113,17 +1051,13 @@ CannonAttackRobotGun:
 		PhysicalStateScale: 100
 	Warhead@Railgun_Heavy:
 		Damage: 2000
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		PercentageScale: 3317
 		Damage: 6000
 	Warhead@Effect: CreateEffect
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
-	-Warhead@TankDestroyerCannon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@CannonHE_Medium:
-	-Warhead@Railgun_Heavy:
 	Warhead@CannonHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -1147,7 +1081,6 @@ MissileAttackRobotGun:
 	Report: vifvatta.wav
 	Warhead@MissileAP_Medium:
 		Damage: 24000
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -1209,10 +1142,6 @@ FutureMechGatling:
 		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	-Warhead@TankDestroyerCannon:
-	-Warhead@LightMissile:
-	-Warhead@FlakWeapon:
-	-Warhead@Bullet_MediumFlatCompatibility:
 FutureMechPlasma:
 	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
 	Inherits@collapsewh: ^Warhead_Plasma_Heavy
@@ -1247,12 +1176,8 @@ FutureMechPlasma:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
 	Warhead@Effect: CreateEffect
@@ -1262,15 +1187,10 @@ FutureMechPlasma:
 		ValidTargets: Ground, Water, Air
 		ExplosionPalette: ra2effect
 
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Plasma_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 0
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Plasma_Heavy:
 	Warhead@Plasma_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 30000
@@ -1293,7 +1213,7 @@ GuardianTankCannon:
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Projectile: Bullet
 		Speed: 782
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 12000
 GuardianTankCannon_elite:
 	Inherits: GuardianTankCannon
@@ -1356,14 +1276,10 @@ FutureTankCannons:
 		ValidTargets: Ground, Water, Air
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1422,14 +1338,6 @@ FutureTankCannons:
 		Explosions: drneutronexp
 		ImpactSounds: AUFutur_Wea1FireV3a.wav,AUFutur_Wea1FireV3b.wav,AUFutur_Wea1FireV3c.wav,AUFutur_Wea1FireV3d.wav,AUFutur_Wea1FireV3e.wav
 		ValidTargets: Ground, Water, Air
-	-Warhead@MagicExtraDamage:
-	-Warhead@MagicWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 550888
@@ -1476,12 +1384,8 @@ FutureHarbingerCannon:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1536,20 +1440,6 @@ FutureHarbingerCannon:
 	Warhead@Effect: CreateEffect
 		Explosions: scblueexplosion
 		ImpactSounds: AUGunship_cannonExplo1A.wav,AUGunship_cannonExplo1B.wav,AUGunship_cannonExplo1C.wav,AUGunship_cannonExplo1D.wav,AUGunship_cannonExplo1E.wav,AUGunship_cannonExplo1F.wav,AUGunship_cannonExplo1G.wav,AUGunship_cannonExplo1H.wav,AUGunship_cannonExplo2A.wav,AUGunship_cannonExplo2B.wav,AUGunship_cannonExplo2C.wav,AUGunship_cannonExplo2D.wav,AUGunship_cannonExplo2E.wav,AUGunship_cannonExplo2F.wav,AUGunship_cannonExplo2G.wav,AUGunship_cannonExplo2H.wav
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@HeavyMissile:
-	-Warhead@LaserExtraDamage:
-	-Warhead@LaserWeapon:
-	-Warhead@MagicExtraDamage:
-	-Warhead@MagicWeapon:
-	-Warhead@RailgunExtraDamage:
-	-Warhead@RailgunWeapon:
-	-Warhead@TeslaChargedExtraDamage:
-	-Warhead@TeslaChargedWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Plasma_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 42488
@@ -1629,8 +1519,6 @@ OrionRailgun:
 		Damage: 30000
 	Warhead@Effect: CreateEffect
 		ImpactSounds: gexp14a.wav
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 60000
@@ -1653,8 +1541,6 @@ OrionRailgun_elite:
 		Damage: 30
 	Warhead@CannonHE_Heavy:
 		Damage: 60000
-	-Warhead@CannonHE_Heavy:
-	-Warhead@RailgunWeapon:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 150000

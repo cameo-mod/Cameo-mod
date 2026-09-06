@@ -29,13 +29,22 @@ from report import h1, h2, table
 
 # internal faction id -> (game prefix or "", faction slug)  per §9.1/§9.2.
 # Game prefix ONLY where the faction name actually collides across games.
+# ⛔ THE GAME PREFIX GOES IN THE `game` SLOT **OR** IN THE SLUG — NEVER BOTH.
+# `want_prefix` below joins them: ("ra1", "ra1_soviets") produced `ra1_ra1_soviets_`,
+# which NOTHING can match, so all eight factions whose slug already carried their game
+# prefix reported **0% compliant** and this generator proposed doubling every id
+# (`ra1_soviets_btr80` -> `ra1_ra1_soviets_btr80`) and QUADRUPLING sub-sprites
+# (`ra1_soviets_btr80_new_btr.shp` ->
+#  `ra1_ra1_soviets_btr80_ra1_soviets_btr80_new_btr.shp`).
+# That fake 0% was read as a 526-actor renaming backlog for months. Fixed 2026-09-06 by
+# emptying the `game` slot wherever the slug already begins with it.
 FACTION_SLUG = {
-    "td_gdi": ("td", "td_gdi"), "td_nod": ("td", "td_nod"),
-    "ts_gdi": ("ts", "ts_gdi"), "ts_nod": ("ts", "ts_nod"),
+    "td_gdi": ("", "td_gdi"), "td_nod": ("", "td_nod"),
+    "ts_gdi": ("", "ts_gdi"), "ts_nod": ("", "ts_nod"),
     "cabal": ("", "cabal"), "forgotten": ("", "forgotten"),
-    "ra1_allies": ("ra1", "ra1_allies"), "ra1_soviets": ("ra1", "ra1_soviets"),
+    "ra1_allies": ("", "ra1_allies"), "ra1_soviets": ("", "ra1_soviets"),
     "modjapan": ("", "japan"),
-    "ra2_allies": ("ra2", "ra2_allies"), "ra2_soviets": ("ra2", "ra2_soviets"),
+    "ra2_allies": ("", "ra2_allies"), "ra2_soviets": ("", "ra2_soviets"),
     "yuri": ("", "yuri"),
     "asianalliance": ("", "asianalliance"), "steelconsortium": ("", "steelconsortium"),
     "latinsyndicate": ("", "latinsyndicate"), "naxis": ("", "naxis"),
@@ -131,6 +140,11 @@ def main() -> int:
 
     for fac in factions:
         game, slug = FACTION_SLUG.get(fac, ("", slugify(fac)))
+        if game and slug.startswith(game + "_"):
+            raise AssertionError(
+                f"FACTION_SLUG[{fac!r}] doubles its game prefix: "
+                f"game={game!r} slug={slug!r} would want {game}_{slug}_. "
+                "Put the game prefix in the `game` slot OR in the slug, never both.")
         want_prefix = "_".join(p for p in (game, slug) if p) + "_"
         others: set[str] = set()
         for g, r in rosters.items():

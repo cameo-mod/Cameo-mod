@@ -12,8 +12,9 @@ atreides_ornithopter:
 	Tooltip:
 		Name: Ornithopter
 	Buildable:
+		Factions: atreides
 		Queue: Aircraft, RAAircraft
-		BuildPaletteOrder: 10
+		BuildPaletteOrder: 20
 		Prerequisites: ~hightech.atreides
 		Description: Fast strike aircraft armed with bombs and missiles.\n  Strong vs Buildings, Vehicles\n  Weak vs Anti-Air
 		IconPalette: d2kunit
@@ -93,9 +94,10 @@ atreides_airdrone:
 	Tooltip:
 		Name: Atreides Air Drone
 	Buildable:
+		Factions: atreides
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~hightech.atreides, research_centre
+		Prerequisites: ~hightech.atreides, research_centre, ~atreides_promotion_airdrone
 		Description: Fast strike drone armed with missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Anti-Air
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
@@ -143,8 +145,9 @@ atreides_advancedcarryall:
 	Valued:
 		Cost: 800
 	Buildable:
+		Factions: atreides
 		Queue: Aircraft, RAAircraft
-		BuildPaletteOrder: 20
+		BuildPaletteOrder: 10
 		Prerequisites: ~hightech.atreides
 		Description: Advanced transport aircraft.\n  Unarmed
 		IconPalette: d2kunit

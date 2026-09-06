@@ -12,6 +12,7 @@ atreides_lightinfantry:
 	Valued:
 		Cost: 150
 	Buildable:
+		Factions: atreides
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
 		Description: Basic infantry armed with a light machine gun.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
@@ -52,6 +53,7 @@ atreides_rockettrooper:
 	Valued:
 		Cost: 200
 	Buildable:
+		Factions: atreides
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
 		Description: Anti-tank infantry armed with rockets.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
@@ -89,9 +91,10 @@ atreides_fremen:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Factions: atreides
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 80
-		Prerequisites: ~atreides_barracks, upgrade_barracks, ~hightech.atreides
+		Prerequisites: ~atreides_barracks, ~hightech.atreides, upgrade_barracks, ~atreides_promotion_fremen
 		Icon: phantomicon
 		IconPalette: windows256
 		Description: Fast Elite infantry units armed with assault rifles and machine guns. When grouped, they can take down buildings extremely quickly.\nDetector\n  Strong vs Buildings\n  Weak vs Infantry, Vehicles\n  Special Ability: Invisibility
@@ -143,6 +146,7 @@ atreides_engineer:
 	Valued:
 		Cost: 250
 	Buildable:
+		Factions: atreides
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Infiltrates and captures enemy buildings.\n  Strong vs Buildings\n  Weak vs Everything

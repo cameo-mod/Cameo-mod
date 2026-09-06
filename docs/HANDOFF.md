@@ -15,8 +15,43 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 | know how the bots are meant to work, and what is only designed | [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) |
 | know the current bug counts | [`audit/SUMMARY.md`](audit/SUMMARY.md) |
 | find which document owns a topic | [`README.md`](README.md) |
+| **you are the Blackrobe GPT-6 Astra Agent** | ⭐ [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md) — your complete single-prompt instruction set |
 
 ---
+
+## ⭐ AGENT ASSIGNMENTS — who is doing what (2026-09-06)
+
+| agent | lane |
+|---|---|
+| **Blackrobe GPT-6 Astra** | ⭐ **FINISH THE BALANCE PIPELINE** (Tasks A–G) **and inherit the AI bot modules** (Task H — Devin Cloud ran out of quota mid-merge). Full brief: [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md). Branch `astra/balance-pipeline`, never master. Has **full authority including `apply_balance --confirm`**, conditional on one commit per decision and a review dossier at `audit/ASTRA_REVIEW.md`. |
+| **Devin fleet** (Aurora, Nova, Ember, Blaze, Dawn, Echo) | the **144 dotted-suffix actor renames** (`frank.nax` → `naxis_frank`), one faction each; then weapon-shape conversion batches |
+| **Claude-Local (Opus 5)** | rulings, review, squash-merges to master, and the gates |
+
+⚠ **Nobody merges to master except Claude-Local.** Agents commit freely on their own branch
+and report a completed work item; Claude reviews and squash-merges one meaningful commit. The
+maintainer must be able to read master — 107 commits in one day, 49 of them touching only
+`DEVELOPMENT_LOG.md`, is not reviewable.
+
+### AI bot modules — state as of 2026-09-06
+
+Devin Cloud designed the module architecture and stopped mid-merge when its quota ran out.
+**The design is landed, not lost:**
+
+* **PR #324 is MERGED** — [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) **§10** (the
+  per-module build plan, the shared snapshot, the one synced piece, and the 7-phase build
+  order) and **§11** (the reconciliation of the first five-agent research round, with rejected
+  claims and what falsifies each).
+* **PR #323 is OPEN and CONFLICTING** — Observer Combat Effectiveness graph, +233/−12, and it
+  touches C#, so it needs a `dotnet build` and a boot gate, not just a merge. **Assigned to
+  Astra, Task H.1.**
+* ⚠ `gh` defaults to the wrong remote in this checkout — always pass
+  `--repo cameo-mod/Cameo-mod`.
+* Next implementation step is **phase 1: record-only match logging.** Phases 1–2 carry no
+  gameplay effect and may run while the balance pipeline is still moving; **phase 6 (fog) is
+  deliberately last** because it weakens the bots and invalidates any tuning done before it.
+
+⚠ **Agent-to-agent chatter lives OUTSIDE the repository**, in `../Cameo-mod-fleet/`.
+`DEVELOPMENT_LOG.md` keeps one entry per COMPLETED work item plus lessons learned — nothing else.
 
 ## 0. The one rule that makes all the others work
 
@@ -96,7 +131,7 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          243 directly fired weapons still carry 2+
+W24  one damage warhead per weapon          192 directly fired weapons still carry 2+
  └─> W23  retrofit the legacy templates      1162 direct inheritors; 1245 fired
  │        (2026-08-23 baseline; re-measure before using as current state)
  │        (its old "33-collision" blocker    weapons already reach a ^Warhead_* family
@@ -203,17 +238,116 @@ Crashes and player-visible regressions jump everything below.
 
 #### Agent roster and current assignments
 
+> ⭐ **THIS IS THE ONLY AUTHORITATIVE ROSTER.** Three other ownership tables exist
+> lower in this file (D2k faction completion, §3.C, §3.6); all three are marked
+> SUPERSEDED and contradict this one. Claim file-sets from HERE and nowhere else.
+
+> **⚠ FLEET HIERARCHY (maintainer order 2026-09-05):** *"Claude AI is now your big
+> boss and controls all other AI Agents so you must always listen to him and do
+> EXACTLY as he says!"* — **Claude (Opus 5, local) is the fleet coordinator.** All
+> agents take direction from Claude. Aurora remains D2k coordinator **under Claude's
+> authority.** Claude has not yet issued consolidated fleet-wide orders in his
+> coordinator capacity; until he does, agents continue their established roles below.
+
 | Agent name | Status | Current task | Files claimed |
 |---|---|---|---|
+| **Claude** (Opus 5, local) | **Fleet coordinator** (maintainer order 2026-09-05) | ✅ Reference-pipeline tooling landed (`85bcf3f33`). ✅ 7 reference mods extracted (8183 unit rows). ✅ Master fast-forwarded 113 commits. **AWAITING: issue consolidated fleet-wide orders. Rule on 4 open items: (1) ordos_laserturret "unique and special" mechanical spec, (2) heaviness bell — refold existing level templates now or later?, (3) composite registry re-curation priority, (4) CannonTesla family under single-warhead ruling.** | `tools/reference/**`, `tools/balance/{assign_references,faction_routes,faction_extrapolate}.py`, `docs/balance/review/**` |
 | **Devin-Dawn** (was Devin-Prime) | Active (awaiting) | D2k/Corrino pack skeleton created (`f07d8d35e`); full Corrino build pending WC2 hero blocker and phases 1-2. TSLaser90mm family work on hold. **WC2 blocker is RESOLVED — proceed with Corrino Phase 3.** | `ContentPacks/D2k/Corrino/`, `mods/cameo/weapons/tiberiansun.yaml` |
-| **Devin-Aurora** (SWE-1.7 Max / GLM-5.2 High) | Active — **D2k Atreides buildout continuing** | D2k Phase 0/1/2/3 coordinator. Committed `cda4c54ec`, `f46e61326`, `c16457655`, `95261becb`, `9cdfa40dd` (ordos_laserturret W23), `ca56afe58` (coordination), `e1552421f` (cabal_avatar dreadnought), `8748c68e4` (HydraSpit BulletChem + Shrapnel fix), `876226947` (Atreides weapons port - 155 lines: Sound/Sound2/OrniBomb/OrniMissile/OrniGun/Fremen_S). W24 safe pool EXHAUSTED. W23 HydraSpit DONE. **NOW: D2k sequence verification + Corrino sprite placeholders + remaining D2k faction content.** | `mods/cameo/ContentPacks/D2k/Atreides/`, `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`, `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`, `mods/cameo/bits/d2k/` |
-| **Devin-Cyrus** (was Devin-Forge) | Active — **COMMIT WC2 hero pass NOW** (maintainer order 2026-09-05) | WC2 hero weapon rework. `wc2_orcs_hellscream_icon.png` exists and boot-gate passes. **ORDER: verify hellscream sequence ref, COMMIT your WC2 hero weapon pass, mark HANDOFF row resolved, then stand down. Dawn is waiting on this.** | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` |
-| **Devin-Ember** (SWE-1.7 Max) | Active — **run full audit suite** (Aurora order 2026-09-05) | Verification + coordination. Committed `c58890d52`. **ORDER: run `find_empty_warhead.py` + `audit_duplicate_inherits.py` + `audit_doc_claims.py` + full `run_all.sh` on the clean tree. Report any regressions. Help Nova with verifier lane.** | none |
-| **Devin-Echo** (SWE-1.7 Max) | Active — **review CABAL + Ixian, coordinate with Aurora on cabal_avatar** | Phase 2 Atreides done (`f07d8d35e`); auditing D2k weapons. **ORDER: 1. Review CABAL file after Nova's orphaned-removal sweep. 2. Re-verify D2k/Ixian before Phase 4. 3. Aurora will coordinate with you on the cabal_avatar dreadnought patch (your file-set).** | `mods/cameo/ContentPacks/D2k/Atreides/`, `D2k/Ordos/`, `D2k/Ixian/`, `TiberianSun/CABAL/` |
+| **Devin-Aurora** (SWE-1.7 Max / GLM-5.2 High) | Active — **D2k coordinator under Claude** | D2k Phase 0/1/2/3 coordinator. ✅ Ruling 7 EXECUTED: Factions: atreides (37 blocks) + Factions: ordos (72 blocks). ✅ Ruling 3 EXECUTED: Ordos Selectable + 3 sequence migrations. ✅ Ruling 5 EXECUTED: meter_dilution fix. ✅ Ruling 9 COMPLETE for my lane: 2 Atreides + 41 Ordos + 3 Shared weapons migrated; 13 Atreides + 4 Ordos sequences migrated. ✅ Ruling 10 EXECUTED: 0 Ixian cross-pack refs in Ordos. ✅ Ruling 13 W24: d2k_grenade re-collapsed correctly (`f901513a7`) — VERBATIM 10000, Concussion_Medium survivor. HMG collapse done by maintainer (`a16ee55fc`). ✅ **ra1_soviets rename** (`ad7c5e232`): 106/106 actors compliant, 105/105 icons, 181 asset git-mv, 8 .oramap repacked, boot-gate PASS. ✅ **Split-definition cleanup** (`a662a68f5`): 30 identical duplicate blocks deleted from legacy `weapons/d2k.yaml`; W2 201/213, W3 18/21, W4 58/61 (all below ratchet); boot-gate PASS. ⛔ **W24 collapse attempt on D2K_Rocket_Trooper_AA + AGOnly was WRONG — reverted.** The maintainer's `d818aec40` showed the correct approach is NOT to collapse but to remove stale `-Warhead@` markers and fix empty-type warheads. **AWAITING Claude ruling on how to handle multi-warhead weapons under the ONE-WARHEAD law. Do NOT collapse any more weapons without explicit Claude/maintainer instruction.** | `mods/cameo/ContentPacks/D2k/Atreides/`, `mods/cameo/ContentPacks/D2k/Ordos/`, `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`, `mods/cameo/bits/d2k/` |
+| **Devin-Cyrus** (was Devin-Forge) | **RESOLVED** — WC2 hero pass committed by maintainer | WC2 hero weapon rework. Maintainer committed Cyrus's unfinished work as `d11b90720` (2026-08-25): 8 hero weapons + 8 hero actors across Humans and Orcs. Hellscream + elite verified: actors, weapons, sequences, icon all present. **Cyrus: stand down, this is done.** | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` |
+| **Devin-Ember** (SWE-1.7 Max) | Active — **W24 broadcast lane (RedAlert)** | Per Claude's night orders: ra2_allies rename was PHANTOM (FACTION_SLUG bug, fixed in-tree). Executed 6/8 assigned broadcast collapses — VERBATIM, delivery-matched survivors, resolver-diffed clean, `find_empty_warhead`=0, count 72→64 — **held UNCOMMITTED** until the maintainer's `-Warhead@` sweep + ra1_soviets revert settle (hunks interleave in the same files). Flagged: SCUDIrak/V2ExplodeIrak are dead children of the LIVE `SCUD` broadcast (cross-lane, needs Claude ruling). X3 AA rename map intact (`rename_map_x3_aa.yaml`) but its tree edits were wiped — re-apply pending. Log: `60509d3a7`. | `ContentPacks/RedAlert/{Allies,Shared,Japan}/yaml/weapons.yaml` (6 collapsed weapons only) |
+| **Devin-Echo** (SWE-1.7 Max) | Active — **review CABAL + Ixian** | Phase 2 Atreides done (`f07d8d35e`); auditing D2k weapons. **ORDER: 1. Review CABAL file after cabal_avatar patch landed (`e1552421f`). 2. Re-verify D2k/Ixian before Phase 4.** | `mods/cameo/ContentPacks/D2k/Atreides/`, `D2k/Ordos/`, `D2k/Ixian/`, `TiberianSun/CABAL/` |
 | **Devin-Blaze** | Active — **D2k Shared consolidation** (maintainer priority) | Phase 1 Harkonnen complete (`afdaae46c`); Phase 4 shared/global. **ORDER: move remaining shared D2k content into `ContentPacks/D2k/Shared/`. Clean up legacy `d2k.yaml`/`rules/d2k.yaml` dead blocks. Verify no dangling refs.** | `mods/cameo/ContentPacks/D2k/Harkonnen/`, `ContentPacks/D2k/Shared/`, legacy `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml` |
-| **Devin-Nova** (Devin CLI, SWE-1.7 Max) | Active — coordinator/verifier lane | Committed `7557c983d` (AreaDamageWarhead C# NRE fix + GDI stale removals). Tree-wide orphaned-removal sweep (committed by Aurora as `c16457655`). Committed `b905d7679` (BulletChem generator spec + full splice regen). **Relayed new maintainer ruling 2026-09-05: heaviness bell curve replaces Light/Medium/Heavy level families.** ORDER: continue verifier lane with Ember. Monitor for boot-blockers. Help with audit suite refresh. | `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs`, tree-wide stale-removal sweep, `tools/balance/gen_weapon_template.py` |
-| **Claude-Cloud** (Anthropic, cloud container) | Active — **rebase your branches** (Aurora order 2026-09-05) | Patches (`01_bulletchem_hydraspit.patch`, `02_cabal_avatar_dreadnought.patch`) no longer apply — tree moved 95 commits. ORDER: rebase `claude/*` against current branch; extract specific files only, do NOT merge wholesale. ⚠ Its `REFERENCE_PIPELINE_HANDOFF.md` §1.3 claim that MO/CnCR data is *"not recoverable"* is **WRONG** — see Claude-Local below. | `claude/*` branches |
-| **Claude-Local** (Opus 5, this machine — filesystem + boot gate + push) | Active — **reference/faction-routing lane** | ✅ **Order item 3 (missing data sources) DONE 2026-09-05**: 7 mods extracted to `Cameo-mod-reference/extraction/` — 8183 unit rows, 1695 armor profiles (RotE, RA20XX, Mental Omega, CnC Reloaded, Red Resurrection, DTA Classic+Enhanced, RA2 Reborn). Only Emperor: Battle for Dune and Dune: Spice Wars remain missing. Clears the ≥2-reference floor; `redalert_japan` now has 3 candidates. ✅ **Fast-forwarded `master` 113 commits to `85bcf3f33`** (boot-gated, drift clean) — resolves the UnitsToBuild merge-order blocker. See `DEVELOPMENT_LOG.md` top entry for 4 findings incl. the `weapons.yaml.rej` conflict and the `git grep`/miniyaml under-read trap. | `tools/reference/**`, `tools/balance/{assign_references,faction_routes,faction_extrapolate}.py`, `docs/balance/review/**` |
+| **Devin-Nova** (Devin CLI, SWE-1.7 Max) | Active — verifier/generator lane | Committed `7557c983d` (AreaDamageWarhead C# NRE fix), `b905d7679` (BulletChem generator spec), `85bcf3f33` (Claude's reference-pipeline tooling). **Relayed heaviness bell ruling.** ORDER: composite-registry re-curation (fixes `three_way_split` crash on `wc2deathknightFire` stale digest). `gen_weapon_template.py` REFLECTOR 75→74 sync. Help Ember. | `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs`, `tools/balance/gen_weapon_template.py` |
+| **Claude-Cloud** (Anthropic, cloud container) | Active — **rebase your branches** | Patches landed locally by Aurora. ORDER: rebase `claude/*` against current branch; extract specific files only, do NOT merge wholesale. | `claude/*` branches |
+
+
+---
+
+## ⭐ STANDING ORDERS — issued by Claude-Local, 2026-09-05 (maintainer put me in coordination)
+
+The maintainer has asked me to coordinate this team and to review work as it completes.
+These orders supersede any conflicting instruction in a SUPERSEDED table lower in this file.
+
+### How we work (read once, then follow it)
+
+1. **Your lane is exclusive.** Every incident today came from two agents needing one file —
+   not from missing review. If your task needs a file outside your lane, **do not edit it**:
+   post the request in `DEVELOPMENT_LOG.md` and I will reassign or arbitrate.
+2. **You do NOT wait for me to commit.** Seven agents queued behind one reviewer has a
+   throughput of one. Verify with the mechanical gates and commit:
+   `find_empty_warhead.py` = 0, `audit_duplicate_inherits.py` exit 0,
+   `audit_warhead_split.py` at or below its ratchet, `audit_balance_drift` clean,
+   **and the boot gate** (`launch-game.cmd` reaching the main menu, no new `exception-*.log`).
+   Scoped `git add <files>` only. Sign with your OWN `Co-Authored-By:`.
+3. **When you finish, say so in `DEVELOPMENT_LOG.md` and paste the OUTPUT of your verify
+   commands, not a summary of it.** I re-run them independently. I am not being pedantic:
+   today produced four confidently-wrong claims, including two of my own
+   ("MO is not recoverable", "CnC Reloaded is unextractable"). Claims here decay in hours.
+4. **Never re-extract or hand-edit a balance number.** `extract_stats.py` -> ledger ->
+   `apply_balance --confirm` (maintainer order only).
+5. ⛔ **`git grep` and `miniyaml` BOTH silently under-read our weapons yaml** — several files
+   carry non-UTF-8 bytes, so `git grep` skips them as binary and a miniyaml node count comes
+   back short. For any presence/absence check use `git show <rev>:<file> | grep -a`.
+   This nearly cost 30 live weapon nodes during the master merge.
+
+### Ownership, de-conflicted (this replaces the overlapping claims)
+
+Three stale tables in this file assigned D2k/Harkonnen to **two** agents and named **two**
+different coordinators. Resolved against §3.A and against who has actually been committing:
+
+| agent | lane — EXCLUSIVE | explicitly NOT yours |
+|---|---|---|
+| **Devin-Dawn** | `ContentPacks/D2k/Corrino/**`, `mods/cameo/weapons/tiberiansun.yaml` | Harkonnen, Atreides |
+| **Devin-Aurora** | `ContentPacks/D2k/Atreides/**`, `ContentPacks/D2k/Ordos/**`, `bits/d2k/**`, `D2k/Shared/yaml/weapons.yaml` | the rest of `D2k/Shared/` (Blaze), Ixian (Echo) |
+| **Devin-Cyrus** | `ContentPacks/Warcraft2/Humans/**`, `Warcraft2/Orcs/**` | **D2k/Harkonnen — that is Blaze's, despite the stale tables** |
+| **Devin-Echo** | `ContentPacks/D2k/Ixian/**`, `TiberianSun/CABAL/**` | Atreides, Ordos (Aurora's) |
+| **Devin-Blaze** | `ContentPacks/D2k/Harkonnen/**`, `D2k/Shared/**` except `yaml/weapons.yaml`, legacy `weapons/d2k.yaml`, `rules/d2k.yaml` | — |
+| **Devin-Nova** | `OpenRA.Mods.Cameo/Warheads/**`, `tools/balance/gen_weapon_template.py`, `mods/cameo/weapons/weapons.yaml` | — |
+| **Devin-Ember** | `ContentPacks/RedAlert/{Allies,Shared,Japan}/yaml/weapons.yaml` — assigned broadcast collapses only | other agents' in-flight sweeps in those files |
+| **Claude-Local** | `tools/reference/**`, `tools/balance/{assign_references,faction_routes,faction_extrapolate}.py`, `docs/balance/review/**` | all `ContentPacks/**`, all `mods/cameo/weapons/**` |
+
+### Orders, in priority order
+
+**~~P0 — Devin-Cyrus: COMMIT THE WC2 HERO PASS~~ — RESOLVED (2026-09-06, Aurora verification)**
+The WC2 hero pass was committed by the maintainer as `d11b90720` on 2026-08-25
+("Picks up Devin-Cyrus's unfinished work"). Verified: hellscream + elite actors,
+weapons, sequences, and icon all present. Dawn is **unblocked** for Corrino Phase 3.
+
+**~~P0 — Devin-Nova: two correctness items~~ — RESOLVED (2026-09-06)**
+1. ✅ **`weapons.yaml.rej` — DELETED.** `Test-Path` = False. REFLECTOR 75 stands, gen_sync drift = 0.
+2. ✅ **`^Warhead_CannonTesla_*` — KEEP BOTH.** Nova's forensic (`a636756e5`) proved
+   CannonTesla is a distinct generator-defined BLEND (50% Tesla + CannonAP), not a
+   duplicate. Resolved rows differ from `^Warhead_Tesla_*` throughout. Sole consumer
+   `RA2120mm_tesla` is coherent authored content. `audit_family_uniqueness` passes.
+   The 0-reference `_Medium`/`_Heavy` levels are unused levels like any leveled family.
+
+**P1 — Devin-Ember: own the red gates.** Run `bash tools/audit/run_all.sh` on a complete tree
+and triage. `audit_doc_claims` is now **fully green (19/19)** — `ledgers_drifted` is 0 after the D2k re-extract, and `meters_filling_before_death` (269) and `multi_main_fired_weapons` (192) both match the committed tree. `audit_doc_health` D1 control chars in `DEVELOPMENT_LOG.md` are CLEAN (Aurora cleaned them 2026-09-06). Remaining D1 findings are 4 non-UTF-8 files in Claude-Local's reference docs (`scout_references.md`, `FACTION_REFERENCE_MATRIX.md`, `RTS_BALANCE_REFERENCE.md`, `WARHEAD_REFERENCE.md`) — route to Claude. ⚠ Read the `exit=` line in the output file; never trust
+a background task's notification code.
+
+**P1 — Devin-Blaze, Devin-Aurora, Devin-Echo, Devin-Dawn: D2k faction completion** — the
+maintainer's standing priority. Stay strictly in the lanes above. ~~Dawn is gated on Cyrus (P0)~~ — **Cyrus P0 RESOLVED, Dawn is UNBLOCKED for Corrino Phase 3.**
+
+⛔ **Maintainer ruling for everyone, 2026-09-05:** the EBFD sprites were to be added as **NEW
+actors only**; the **Ordos Face Dancer was the sole approved update to an existing actor.** An
+audit found six pre-existing actors had their art changed — `combat_tank.harkonnen` was
+repointed from `DATA.R16` to `harkonnen_assaulttank.png` with **no new actor created**, and its
+husk followed. Ruled: **revert `combat_tank.harkonnen` + husk to `DATA.R16`** and wire
+`harkonnen_assaulttank.png` to a genuinely new T2 Harkonnen heavy when the balance pipeline can
+price it. `harkonnen_devestator.png` also carries a typo (devEstator). **Blaze owns this.**
+
+**P2 — nobody claim these yet:** the heaviness-bell rollout stays OFF until W24 closes
+(maintainer, today). Do NOT create new leveled families; do NOT flip `USE_BELL`.
+
+### What I am doing, so nobody duplicates it
+
+The reference/faction-routing lane. **Order item 3 is delivered:** 7 reference mods extracted to
+`Cameo-mod-reference/extraction/` — 8183 unit rows, 1695 armor profiles (Rise of the East,
+RA20XX, Mental Omega, CnC Reloaded, Red Resurrection, DTA Classic+Enhanced, RA2 Reborn). The
+`REFERENCE_PIPELINE_HANDOFF.md` §1.3 claim that MO/CnCR data is "not recoverable" was wrong.
+Next: an INI->corpus extractor so those rows reach `assign_references.py`, then per-class review
+sheets. I also fast-forwarded `master` 113 commits — the UnitsToBuild merge-order blocker is gone.
 
 #### Locked files (DO NOT TOUCH — another agent owns these)
 
@@ -270,7 +404,7 @@ must be fully built out so they are selectable and playable. Currently:
 
 | faction | state | units | buildings | infantry | aircraft | weapons | upgrades | selectable |
 |---|---|---|---|---|---|---|---|---|
-| **Atreides** | complete in `f07d8d35e` | 5 vehicles (MCV, harvester, combat, sonic, siege tanks) + ornithopter | 15 (full set) | 4 (lightinfantry, rockettrooper, fremen, engineer) | 1 + husk | `weapons.yaml` stub, no unique weapons yet | 5 | **yes** (FactionCA active, StartingUnits set) |
+| **Atreides** | FEATURE-COMPLETE (Aurora) | 11 vehicles (MCV, harvester, combat, sonic, missile, siege, sandbike, APC, repair, minotaurus, mongoose) | 15 (full set) | 4 (lightinfantry, rockettrooper, fremen, engineer) | 3 (ornithopter, airdrone, advanced carryall) | `weapons.yaml` active (155 lines, `876226947`) | 5 | **yes** (FactionCA active, StartingUnits set) |
 | **Harkonnen** | complete in `afdaae46c` | 5+ (MCV, harvester, combat, missile, devastator, MCV) | full set | 3 (lightinfantry, rockettrooper, engineer) | 1 (carryall) | `weapons.yaml` active | 5+ | **yes** (FactionCA active, StartingUnits set) |
 | **Corrino** | complete in `af3ff5f9d` | 5 (MCV, harvester, combat, buggy, BMP) | 13 | 3 (lightinfantry, engineer, sardaukar_bazooka) | 2 (carryall, transport) | active | 5 | **yes** (FactionCA active, StartingUnits set) |
 | Ixian (reference) | complete | 16 | 18 | 6 | 11 | 32KB | 9 | yes |
@@ -291,6 +425,12 @@ them in faction packs. Reference them via `ProvidesPrerequisite` and `Buildable:
 Prerequisites: ~d2k_barracks` etc.
 
 #### Agent assignments for D2k faction completion
+
+
+> ⛔ **SUPERSEDED — this ownership table is STALE. The single authoritative roster is
+> §3.A "Agent roster and current assignments".** It is kept only as provenance; it
+> contradicts §3.A on who owns D2k/Harkonnen and on who the coordinator is. Do NOT
+> claim a file-set from this table.
 
 | agent | faction | file-set | scope of work |
 |---|---|---|---|
@@ -474,6 +614,12 @@ When a weapon has `Bullet_Light` + `Bullet_Medium` as two damage mains:
 ### 3.C - D2k Atreides / Harkonnen / Corrino (legacy draft - superseded by §3.B)
 
 **Coordinating agent:** Devin-Echo. See full plan and per-agent instructions in `DEVELOPMENT_LOG.md` §"D2k faction rollout plan — Atreides / Harkonnen / Corrino".
+
+
+> ⛔ **SUPERSEDED — this ownership table is STALE. The single authoritative roster is
+> §3.A "Agent roster and current assignments".** It is kept only as provenance; it
+> contradicts §3.A on who owns D2k/Harkonnen and on who the coordinator is. Do NOT
+> claim a file-set from this table.
 
 | Agent | Pack | Key deliverable | Verification before commit |
 |---|---|---|---|
@@ -703,7 +849,7 @@ holds.
 
 | step | what | how you know it moved |
 |---|---|---|
-| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` is 243, down from 927; 299 remain when indirect weapon-graph reachability is included |
+| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` is 192, down from 927; 299 remain when indirect weapon-graph reachability is included |
 | **W23** | retrofit the legacy templates onto `^Warhead_*` families | from the 2026-08-23 baseline: `unconverted_template_inheritors` goes DOWN from 1162; `warhead_family_reach` goes UP from 1245 |
 | **A5** | retire the remaining inline-`Versus` weapons onto templates | rule 4 — `Versus` only in `^Warhead_*` |
 
@@ -872,6 +1018,12 @@ file-set. **Before editing any weapon file, check its mtime and the registry.** 
 another agent claimed it in the last 30 minutes, do not touch it.
 
 **Agent registry** (maintained in `DEVELOPMENT_LOG.md` → "Agent registry", mirrored here):
+
+
+> ⛔ **SUPERSEDED — this ownership table is STALE. The single authoritative roster is
+> §3.A "Agent roster and current assignments".** It is kept only as provenance; it
+> contradicts §3.A on who owns D2k/Harkonnen and on who the coordinator is. Do NOT
+> claim a file-set from this table.
 
 | name | identity | current file-set | current task |
 |---|---|---|---|

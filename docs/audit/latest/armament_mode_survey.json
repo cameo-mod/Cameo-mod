@@ -3292,9 +3292,10 @@
     }
   ],
   "same_weapon_pair_weapon_only_first_blockers": {
-    "folded percentage damage needs a separate inversion model": 49,
-    "non-flat or gameplay side-effect warhead: AreaDamagePercentage": 17,
-    "non-flat or gameplay side-effect warhead: GlowImpact": 8,
+    "folded percentage damage needs a separate inversion model": 50,
+    "non-flat or gameplay side-effect warhead: AffectsIntegrity": 2,
+    "non-flat or gameplay side-effect warhead: AreaDamagePercentage": 15,
+    "non-flat or gameplay side-effect warhead: GlowImpact": 7,
     "physical-state/integrity feedback is unsupported": 1,
     "unsupported projectile delivery": 11
   },
@@ -5993,7 +5994,7 @@
       "other_base_yaml_reference_count": 0,
       "other_base_yaml_reference_examples": [],
       "unknown_attack_traits": [],
-      "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: GlowImpact"
+      "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
     },
     {
       "actor": "ordos_rockettrooper",
@@ -6537,7 +6538,7 @@
       "weapon_only_first_blocker": "folded percentage damage needs a separate inversion model"
     },
     {
-      "actor": "ra1_soviets_rocketsoldier",
+      "actor": "ra1_soviets_sovietrocketsoldier",
       "armaments": [
         {
           "activation_at_zero_conditions": "enabled-at-zero-conditions",
@@ -6627,7 +6628,7 @@
           ],
           "slot": "Armament",
           "unconditional_firepower_factor": "363/500",
-          "weapon": "EMPGrenade"
+          "weapon": "Grenade_EMP"
         },
         {
           "activation_at_zero_conditions": "enabled-at-zero-conditions",
@@ -6639,7 +6640,7 @@
           "selected_by_known_own_attacks": [],
           "slot": "Armament@GARRISONED",
           "unconditional_firepower_factor": "363/500",
-          "weapon": "EMPGrenade"
+          "weapon": "Grenade_EMP"
         }
       ],
       "attack_selectors": [
@@ -6685,10 +6686,10 @@
       ],
       "other_base_yaml_reference_count": 1,
       "other_base_yaml_reference_examples": [
-        "weapon:EMPGrenadeExplode/Inherits"
+        "weapon:GrenadeExplode_EMP/Inherits"
       ],
       "unknown_attack_traits": [],
-      "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: AreaDamagePercentage"
+      "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: AffectsIntegrity"
     },
     {
       "actor": "td_gdi_grenadier",
@@ -7541,7 +7542,7 @@
       "other_base_yaml_reference_count": 0,
       "other_base_yaml_reference_examples": [],
       "unknown_attack_traits": [],
-      "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: AreaDamagePercentage"
+      "weapon_only_first_blocker": "non-flat or gameplay side-effect warhead: AffectsIntegrity"
     },
     {
       "actor": "terran_jimraynor",

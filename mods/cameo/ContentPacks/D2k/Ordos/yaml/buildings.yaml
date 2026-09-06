@@ -13,6 +13,7 @@ ordos_constructionyard:
 ordos_windtrap:
 	Inherits: ^WindTrap
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard
 		Description: Provides power to the base.
 	RenderSprites:
@@ -81,9 +82,10 @@ ordos_barracks:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
-	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@ra1_soviets_sovietbarracks: ^IsBarrack
 	Inherits@shape: ^2x2Shape
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_windtrap
 		Description: Trains infantry units.
 		IconPalette: d2kunit
@@ -271,6 +273,7 @@ ordos_refineryordos:
 	Tooltip:
 		Name: Refinery
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_windtrap
 		Description: Processes ore into credits.
 	FreeActor:
@@ -296,6 +299,7 @@ ordos_refineryordos:
 ordos_storagesilo:
 	Inherits: ^D2KSilo
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		Description: Stores excess resources.
 	RenderSprites:
@@ -308,6 +312,7 @@ ordos_lightfactory:
 	RenderSprites:
 		Image: light.ordos
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		Description: template_factory.description
 		IconPalette: player
@@ -321,6 +326,7 @@ ordos_heavyfactory:
 	RenderSprites:
 		Image: heavy.ordos
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		Description: template_factory.description
 		IconPalette: player
@@ -336,6 +342,7 @@ ordos_repairpad:
 	Inherits@repair: ^RepairsUnits
 	Inherits@repairfacility: ^RepairFacility
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_heavyfactory
 		Description: Repairs nearby vehicles.
 		IconPalette: d2kunit
@@ -379,6 +386,7 @@ ordos_outpost:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x3Shape
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		Description: Expands buildable area and provides radar.
 		IconPalette: d2kunit
@@ -447,6 +455,7 @@ ordos_outpost:
 ordos_hightechfactory:
 	Inherits: ^HighTechFactory
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_outpost
 		Description: Produces advanced vehicles.
 	RenderSprites:
@@ -458,6 +467,7 @@ ordos_hightechfactory:
 ordos_ixresearchcenter:
 	Inherits: ^ResearchCentre
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_outpost
 		Description: Unlocks advanced technology.
 	RenderSprites:
@@ -469,6 +479,7 @@ ordos_ixresearchcenter:
 ordos_starport:
 	Inherits: ^Starport
 	Buildable:
+		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter, derricklimit
 		Description: Purchase units from off-world suppliers.
 	ProvidesPrerequisite@starport_light_factory:
@@ -501,6 +512,7 @@ ordos_artilleryplatform:
 	Valued:
 		Cost: 1200
 	Buildable:
+		Factions: ordos
 		Queue: Defence, RADefence
 		Prerequisites: ~ordos_constructionyard, ordos_barracks
 		BuildPaletteOrder: 550
@@ -576,6 +588,7 @@ ordos_autogunturret:
 	Valued:
 		Cost: 1100
 	Buildable:
+		Factions: ordos
 		Queue: Defence, RADefence
 		Prerequisites: ~ordos_constructionyard, ordos_barracks
 		BuildPaletteOrder: 510
@@ -653,6 +666,7 @@ ordos_laserturret:
 	Valued:
 		Cost: 1100
 	Buildable:
+		Factions: ordos
 		Queue: Defence, RADefence
 		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter
 		BuildPaletteOrder: 520
@@ -718,6 +732,7 @@ ordos_chemturret:
 	Valued:
 		Cost: 1200
 	Buildable:
+		Factions: ordos
 		Queue: Defence, RADefence
 		Prerequisites: ~ordos_constructionyard, ordos_barracks
 		BuildPaletteOrder: 530
@@ -791,6 +806,7 @@ ordos_palace:
 	Inherits@shape: ^3x3Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Buildable:
+		Factions: ordos
 		Queue: Building, RABuilding
 		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter, !opalace, ~techlevel.superweapons
 		Description: This structure unlocks support powers.

@@ -1,11 +1,11 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **371**
+Files scanned: **400**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 76 | 30 |
+| E2 | handler discards the error | 88 | 30 |
 | E3 | open() without encoding= | 92 | 90 |
 | E4 | subprocess call without check= | 20 | 9 |
 
@@ -18,7 +18,7 @@ Files scanned: **371**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 76 finding(s)
+## E2 — 88 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -39,25 +39,32 @@ Files scanned: **371**
 | tools/audit/audit_rank_decoration.py | 49 | handler body discards the error |
 | tools/audit/audit_rank_decoration.py | 68 | handler body discards the error |
 | tools/audit/audit_scaled_bullet_overrides.py | 41 | handler body discards the error |
-| tools/audit/audit_three_way_split.py | 122 | handler body discards the error |
+| tools/audit/audit_three_way_split.py | 119 | handler body discards the error |
 | tools/audit/audit_tier_weapon_class.py | 76 | handler body discards the error |
 | tools/audit/audit_unique_traits.py | 73 | handler body discards the error |
 | tools/audit/audit_upgrades.py | 158 | handler body discards the error |
 | tools/audit/audit_upstream_adoption.py | 97 | handler body discards the error |
 | tools/audit/audit_upstream_adoption.py | 138 | handler body discards the error |
-| tools/audit/audit_weapon_suffixes.py | 119 | handler body discards the error |
-| tools/audit/audit_weapon_suffixes.py | 185 | handler body discards the error |
-| tools/audit/audit_weapon_suffixes.py | 297 | handler body discards the error |
+| tools/audit/audit_weapon_suffixes.py | 115 | handler body discards the error |
+| tools/audit/audit_weapon_suffixes.py | 162 | handler body discards the error |
+| tools/audit/audit_weapon_suffixes.py | 228 | handler body discards the error |
+| tools/audit/audit_weapon_suffixes.py | 350 | handler body discards the error |
 | tools/audit/audit_weapon_uniqueness.py | 99 | handler body discards the error |
 | tools/audit/gen_damage_matrix.py | 52 | handler body discards the error |
-| tools/audit/miniyaml.py | 187 | handler body discards the error |
+| tools/audit/miniyaml.py | 203 | handler body discards the error |
 | tools/audit/phase_b_survey.py | 40 | handler body discards the error |
 | tools/audit/review_batch_diff.py | 80 | handler body discards the error |
 | tools/audit/review_resolve_diff.py | 62 | handler body discards the error |
 | tools/audit_ce_image_usage.py | 29 | handler body discards the error |
 | tools/audit_createeffect_image.py | 19 | handler body discards the error |
+| tools/balance/anchor_readiness.py | 136 | handler body discards the error |
+| tools/balance/anchor_readiness.py | 324 | handler body discards the error |
+| tools/balance/anchor_readiness.py | 396 | handler body discards the error |
 | tools/balance/armor_exposure.py | 105 | handler body discards the error |
 | tools/balance/armor_exposure.py | 141 | handler body discards the error |
+| tools/balance/assign_references.py | 72 | handler body discards the error |
+| tools/balance/assign_references.py | 249 | handler body discards the error |
+| tools/balance/class_membership.py | 224 | handler body discards the error |
 | tools/balance/compensate_retrofit.py | 113 | handler body discards the error |
 | tools/balance/compensate_retrofit.py | 121 | handler body discards the error |
 | tools/balance/consolidate_adjacent_family_stacks.py | 65 | handler body discards the error |
@@ -68,12 +75,15 @@ Files scanned: **371**
 | tools/balance/design_invented_profiles.py | 172 | handler body discards the error |
 | tools/balance/design_invented_profiles.py | 186 | handler body discards the error |
 | tools/balance/extract_stats.py | 239 | handler body discards the error |
-| tools/balance/extract_stats.py | 1018 | handler body discards the error |
+| tools/balance/extract_stats.py | 1042 | handler body discards the error |
 | tools/balance/formula.py | 543 | handler body discards the error |
 | tools/balance/gen_derived_stats.py | 95 | handler body discards the error |
 | tools/balance/measure_retrofit_gap.py | 134 | handler body discards the error |
 | tools/balance/plan_firepower_retirement.py | 81 | handler body discards the error |
-| tools/balance/propose_class_rebalance.py | 282 | handler body discards the error |
+| tools/balance/propose_class_rebalance.py | 265 | handler body discards the error |
+| tools/balance/reference_distribution.py | 555 | handler body discards the error |
+| tools/balance/reference_distribution.py | 566 | handler body discards the error |
+| tools/balance/reference_distribution.py | 579 | handler body discards the error |
 | tools/balance/report_versus_change.py | 74 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 219 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 322 | handler body discards the error |
@@ -82,6 +92,7 @@ Files scanned: **371**
 | tools/balance/retrofit_legacy_template.py | 536 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 547 | handler body discards the error |
 | tools/balance/shield_uniqueness.py | 63 | handler body discards the error |
+| tools/balance/synthesize_reference.py | 360 | handler body discards the error |
 | tools/balance/target_model.py | 416 | handler body discards the error |
 | tools/balance/tier_chain.py | 48 | handler body discards the error |
 | tools/balance/tier_chain.py | 119 | handler body discards the error |
@@ -91,6 +102,7 @@ Files scanned: **371**
 | tools/balance/verify_retrofit.py | 87 | handler body discards the error |
 | tools/hooks/bash_guard.py | 103 | handler body discards the error |
 | tools/reference/aggregate_archetype.py | 873 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 481 | handler body discards the error |
 | tools/reference/extract_versus.py | 175 | handler body discards the error |
 | tools/rename/apply.py | 178 | handler body discards the error |
 | tools/rename/safe_rename.py | 132 | handler body discards the error |
@@ -203,7 +215,7 @@ Files scanned: **371**
 | file | line | detail |
 |---|---|---|
 | tools/audit/audit_doc_claims.py | 104 | `subprocess.run()` without check= |
-| tools/audit/audit_doc_health.py | 130 | `subprocess.run()` without check= |
+| tools/audit/audit_doc_health.py | 139 | `subprocess.run()` without check= |
 | tools/audit/audit_engine_freshness.py | 52 | `subprocess.run()` without check= |
 | tools/audit/run_all.py | 114 | `subprocess.run()` without check= |
 | tools/audit/run_all.py | 138 | `subprocess.run()` without check= |
@@ -226,7 +238,7 @@ Files scanned: **371**
 
 ## FAIL
 
-- E2: 76 > baseline 30
+- E2: 88 > baseline 30
 - E3: 92 > baseline 90
 - E4: 20 > baseline 9
 

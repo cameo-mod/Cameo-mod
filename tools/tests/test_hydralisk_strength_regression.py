@@ -12,8 +12,6 @@ sys.path.insert(0, str(ROOT / "tools/audit"))
 
 from audit_three_way_split import main_warhead_nodes, main_warheads
 from miniyaml import Ruleset
-from survey_weapon_structure import inventory
-from intentional_composites import curated_decisions
 import hydra_history
 
 
@@ -85,13 +83,9 @@ class HydraliskStrengthRegressionTests(unittest.TestCase):
         self.assertEqual('5979', current.get('Range'))
         self.assertEqual('20', main.get('PhysicalStates', 'Corrosion'))
         self.assertIsNone(main.get('PhysicalStateName'))
-        self.assertNotIn('HydraSpit', curated_decisions())
-        # Raw topology only. Registry validity has its own failing audit/tests;
-        # an unrelated stale registry must not stand in for this weapon contract.
-        sets = inventory(self.rules, reviewed_predicate=lambda _name, _mains: False)["sets"]
-        self.assertNotIn("HydraSpit", sets["direct_actor_armament"])
-        self.assertNotIn("HydraSpit", sets["reviewed_direct_actor_armament"])
-        self.assertNotIn("HydraSpit", sets["unreviewed_direct_actor_armament"])
+        # The exemption registry was retired upstream. Inspect the raw resolved
+        # topology, without rebuilding the removed approval mechanism.
+        self.assertEqual(1, len(main_warhead_nodes(current)))
 
 
 if __name__ == "__main__":

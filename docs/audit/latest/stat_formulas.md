@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **666** across 1985 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **667** across 1994 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (44)
@@ -53,7 +53,7 @@ Violations: **666** across 1985 roster actors (reference-clean units: gdiarcher,
 | ts_nod_subterraneanapc | HpPerStep 2637 | expected 875 (HP 17500/20) |
 
 
-## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (127)
+## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (129)
 
 | actor | actual | expected |
 |---|---|---|
@@ -62,6 +62,7 @@ Violations: **666** across 1985 roster actors (reference-clean units: gdiarcher,
 | atreides_missiletank | Step 10 | expected 20 (HP 50000/2500) |
 | atreides_repairtank | Step 10 | expected 24 (HP 60000/2500) |
 | atreides_rockettrooper | Step 10 | expected 40 (HP 40000/1000) |
+| atreides_sandbike | Step 10 | expected 12 (HP 30000/2500) |
 | atreides_siegetank | Step 10 | expected 16 (HP 40000/2500) |
 | atreides_spiceharvester | Step 80 | expected 72 (HP 180000/2500) |
 | cabal_beholder | Step 50 | expected 125 (HP 125000/1000) |
@@ -74,6 +75,7 @@ Violations: **666** across 1985 roster actors (reference-clean units: gdiarcher,
 | corrino_sardaukar_javelin | Step 50 | expected 120 (HP 120000/1000) |
 | corrino_sardaukar_laser | Step 50 | expected 120 (HP 120000/1000) |
 | corrino_sardaukar_sword | Step 50 | expected 120 (HP 120000/1000) |
+| corrino_siegetank | Step 10 | expected 16 (HP 40000/2500) |
 | corrino_spiceharvester | Step 80 | expected 72 (HP 180000/2500) |
 | corrino_trooper | Step 10 | expected 40 (HP 40000/1000) |
 | eden_tiger_acidcloud | Step 10 | expected 24 (HP 60000/2500) |
@@ -202,7 +204,7 @@ Violations: **666** across 1985 roster actors (reference-clean units: gdiarcher,
 | wc2_humans_militiapeasant | infantry declares Repairable locally |  |
 
 
-_266 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
+_267 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
 
 
 ## F4 — upgrade shield RegenAmount ≠ 2×SelfHealing Step  (69)
@@ -248,8 +250,8 @@ _266 further infantry inherit Repairable from the infantry base template (^Defau
 | ordos_rockettrooper | RegenAmount 10 | expected 24 (2 x SelfHealing 12) |
 | plymouth_cargotruck_empty | RegenAmount 10 | expected 96 (2 x SelfHealing 48) |
 | ra1_allies_alliedoretruck | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
-| ra1_soviets_heavyindustrialminer | RegenAmount 10 | expected 108 (2 x SelfHealing 54) |
-| ra1_soviets_oretruck | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
+| ra1_soviets_sovietheavyindustrialminer | RegenAmount 10 | expected 108 (2 x SelfHealing 54) |
+| ra1_soviets_sovietoretruck | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
 | ra2_allies_chronominer | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
 | ra2_soviets_warminer | RegenAmount 10 | expected 100 (2 x SelfHealing 50) |
 | schwarzermond_noidharvester | RegenAmount 10 | expected 60 (2 x SelfHealing 30) |
@@ -360,7 +362,7 @@ _266 further infantry inherit Repairable from the infantry base template (^Defau
 | yuri_psychictower | DetectCloaked 5000 | expected 4000 (range/2) |
 
 
-## F7 — defense Power.Amount ≠ -Cost/20  (98)
+## F7 — defense Power.Amount ≠ -Cost/20  (99)
 
 | actor | actual | expected |
 |---|---|---|
@@ -368,6 +370,7 @@ _266 further infantry inherit Repairable from the infantry base template (^Defau
 | asianalliance_asiansentryflamer | Power -25 | expected -40 (-Cost/20) |
 | asianalliance_chaosstorminductor | Power -200 | expected -250 (-Cost/20) |
 | asianalliance_concretebarrier | Power missing | expected -10 |
+| atreides_palace | Power -200 | expected -500 (-Cost/20) |
 | atreides_storagesilo | Power -10 | expected -7 (-Cost/20) |
 | brik | Power missing | expected -10 |
 | corrino_storagesilo | Power -10 | expected -7 (-Cost/20) |
@@ -411,7 +414,7 @@ _266 further infantry inherit Repairable from the infantry base template (^Defau
 | ra1_allies_chronosphere | Power -200 | expected -500 (-Cost/20) |
 | ra1_oresilo | Power -10 | expected -7 (-Cost/20) |
 | ra1_soviets_ironcurtain | Power -200 | expected -250 (-Cost/20) |
-| ra1_soviets_missilesilo | Power -200 | expected -500 (-Cost/20) |
+| ra1_soviets_sovietmissilesilo | Power -200 | expected -500 (-Cost/20) |
 | ra2_allies_chronosphere | Power -200 | expected -250 (-Cost/20) |
 | ra2_allies_concretebarrier | Power missing | expected -10 |
 | ra2_allies_grandcannon | Power -200 | expected -250 (-Cost/20) |
@@ -484,14 +487,16 @@ _266 further infantry inherit Repairable from the infantry base template (^Defau
 | harkonnen_adp | Turreted 48 vs Mobile 20 | must match |
 
 
-## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (8)
+## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (10)
 
 | actor | actual | expected |
 |---|---|---|
 | atreides_missiletank | TurnSpeed 80 (Speed 64) | expected 26 = 2 x Speed/5 (turretless) |
 | atreides_repairtank | TurnSpeed 16 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
+| atreides_sandbike | TurnSpeed 24 (Speed 90) | expected 36 = 2 x Speed/5 (turretless) |
 | combat_tank.harkonnen | TurnSpeed 13 (Speed 65) | expected 26 = 2 x Speed/5 (turretless) |
 | corrino_missiletank | TurnSpeed 80 (Speed 64) | expected 26 = 2 x Speed/5 (turretless) |
+| corrino_siegetank | TurnSpeed 4 (Speed 56) | expected 22 = 2 x Speed/5 (turretless) |
 | devastator | TurnSpeed 48 (Speed 33) | expected 14 = 2 x Speed/5 (turretless) |
 | harkonnen_buzzsaw | TurnSpeed 48 (Speed 43) | expected 18 = 2 x Speed/5 (turretless) |
 | harkonnen_flametank | TurnSpeed 13 (Speed 65) | expected 26 = 2 x Speed/5 (turretless) |
@@ -543,7 +548,7 @@ _none found_
 _none found_
 
 
-## F15 — Light Support composition (Tier-1 only, ~2000, 5:1 inf:veh)  (73)
+## F15 — Light Support composition (Tier-1 only, ~2000, 5:1 inf:veh)  (71)
 
 | actor | actual | expected |
 |---|---|---|
@@ -593,12 +598,10 @@ _none found_
 | futuretech: defaultfuturetech | 0 infantry : 7 vehicles | want ~5 infantry per vehicle |
 | futuretech: defaultfuturetech | futuretech_cannondroid, futuretech_missiledroid, futuretech_scoutdroid | light support must be Tier-1 only (producer-building prereqs only) |
 | tkm: defaulttstkm | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| ordos: ordos_L | total cost 3240 | target ~2000 (±15%) |
-| ordos: ordos_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| ordos: ordos_L | total cost 3060 | target ~2000 (±15%) |
 | ixian: ixian_L | total cost 3300 | target ~2000 (±15%) |
 | ixian: ixian_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| atreides: atreides_L | total cost 3300 | target ~2000 (±15%) |
-| atreides: atreides_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| atreides: atreides_L | trooper (cost 300) x2 vs atreides_rockettrooper (cost 200) x1 | pricier units must not outnumber cheaper ones |
 | harkonnen: harkonnen_L | total cost 1100 | target ~2000 (±15%) |
 | harkonnen: harkonnen_L | 5 infantry : 0 vehicles | light set should include a vehicle |
 | harkonnen: harkonnen_L | trooper (cost 300) x2 vs harkonnen_rockettrooper (cost 200) x1 | pricier units must not outnumber cheaper ones |
@@ -622,7 +625,7 @@ _none found_
 | eden: defaulteden | eden_lynx_railgun (cost 900) x2 vs eden_scout (cost 300) x1 | pricier units must not outnumber cheaper ones |
 
 
-## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (116)
+## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (115)
 
 | actor | actual | expected |
 |---|---|---|
@@ -643,7 +646,7 @@ _none found_
 | ra1_allies: heavyallies | all units are Tier 1 | heavy support should mix all tiers |
 | ra1_soviets: heavysoviet | total cost 5000 | target ~10000 (±15%) |
 | ra1_soviets: heavysoviet | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
-| ra1_soviets: heavysoviet | ra1_soviets_heavytank (cost 1000) x2 vs ra1_soviets_flaktruck (cost 800) x1 | pricier units must not outnumber cheaper ones |
+| ra1_soviets: heavysoviet | ra1_soviets_sovietheavytank (cost 1000) x2 vs ra1_soviets_flaktruck (cost 800) x1 | pricier units must not outnumber cheaper ones |
 | ra1_soviets: heavysoviet | all units are Tier 1 | heavy support should mix all tiers |
 | japan: heavyjapan | total cost 6100 | target ~10000 (±15%) |
 | japan: heavyjapan | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
@@ -712,18 +715,17 @@ _none found_
 | tkm: heavytstkm | tkm_technical (cost 400) x4 vs tkm_rifleman (cost 120) x3 | pricier units must not outnumber cheaper ones |
 | tkm: heavytstkm | tkm_technical (cost 400) x4 vs tkm_rocketeer (cost 200) x2 | pricier units must not outnumber cheaper ones |
 | tkm: heavytstkm | all units are Tier 1 | heavy support should mix all tiers |
-| ordos: ordos_h | total cost 7040 | target ~10000 (±15%) |
-| ordos: ordos_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| ordos: ordos_h | total cost 6510 | target ~10000 (±15%) |
+| ordos: ordos_h | 6 infantry : 3 vehicles | want ~5 infantry per vehicle |
 | ordos: ordos_h | all units are Tier 1 | heavy support should mix all tiers |
 | ixian: ixian_h | total cost 7100 | target ~10000 (±15%) |
 | ixian: ixian_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
-| atreides: atreides_h | total cost 7100 | target ~10000 (±15%) |
-| atreides: atreides_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| atreides: atreides_h | total cost 2600 | target ~10000 (±15%) |
+| atreides: atreides_h | 7 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | harkonnen: harkonnen_h | total cost 2650 | target ~10000 (±15%) |
 | harkonnen: harkonnen_h | 6 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| corrino: corrino_h | total cost 3000 | target ~10000 (±15%) |
+| corrino: corrino_h | total cost 3300 | target ~10000 (±15%) |
 | corrino: corrino_h | 6 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| corrino: corrino_h | corrino_sardaukar_bazooka (cost 600) x2 vs corrino_buggy (cost 300) x1 | pricier units must not outnumber cheaper ones |
 | terran: heavyterran | 4 infantry : 3 vehicles | want ~5 infantry per vehicle |
 | terran: heavyterran | terran_marine (cost 689) x2 vs terran_firebat (cost 500) x1 | pricier units must not outnumber cheaper ones |
 | terran: heavyterran | terran_marine (cost 689) x2 vs terran_medic (cost 600) x1 | pricier units must not outnumber cheaper ones |
@@ -749,11 +751,9 @@ _none found_
 _none found_
 
 
-## F18 — weapons targeting Air whose gameplay payload can't hit Air  (1)
+## F18 — weapons targeting Air whose gameplay payload can't hit Air  (0)
 
-| actor | actual | expected |
-|---|---|---|
-| tsserggun | Warhead@Bullet_MediumFlatCompatibility | targets Air but no gameplay payload hits Air (used by forgotten_mutantsergeant) |
+_none found_
 
 
 ## F19 — helicopter/spaceship TurnSpeed ≠ Speed/5  (0)

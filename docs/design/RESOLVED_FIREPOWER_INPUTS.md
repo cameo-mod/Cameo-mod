@@ -20,9 +20,9 @@ not a missing value. Old ledger fixtures without the new field retain compatibil
 
 ## Impact
 
-The [generated comparison](../audit/latest/firepower_inputs.json) finds 730 changed
+The [generated comparison](../audit/latest/firepower_inputs.json) finds 770 changed
 actor entries with usable class-fit inputs across the roster. These are input
-corrections, not 730 balance defects or recommended price changes.
+corrections, not 770 balance defects or recommended price changes.
 
 Examples of unconditional products:
 
@@ -93,14 +93,15 @@ into the base actor row. Resolved factors are locked per-weapon diagnostic cells
 not imported actor knobs. The workbook fingerprint includes the shared helper.
 
 The [consumer census](../audit/latest/firepower_consumers.json) compares the first
-PR328 commit with this follow-up across 950 armed ledger entries:
+PR328 commit's consumer implementation with this follow-up across 1,000 armed
+ledger entries on the `56c14d9db` integration:
 
 | Consumer | Changed entries | Baseline errors included in changes |
 |---|---:|---:|
-| Band DPS input | 759 | 0 |
-| Faction primary-weapon DPS input | 855 | 791 |
-| Range DPS input | 847 | 0 |
-| Workbook weapon-row factors | 889 | 0 |
+| Band DPS input | 799 | 0 |
+| Faction primary-weapon DPS input | 905 | 836 |
+| Range DPS input | 890 | 0 |
+| Workbook weapon-row factors | 932 | 0 |
 
 These counts include corrected condition selection and schema handling; they are
 not all attributable to inherited firepower alone. Workbook counts concern factors,
@@ -109,7 +110,7 @@ other consumers sum their selected priced armaments. Charge-cycle/model differen
 remain outside this follow-up. No reference anchors or derived pricing data were
 recalibrated, and no proposed cost was applied.
 
-The band checker remains failing: 192 flags across 20 classes versus 129 on the
+The band checker remains failing: 169 flags across 20 classes versus 131 on the
 baseline, using the same unrecalibrated anchors. The report retains both exit codes
 and counts. Do not treat those flags as proven unit defects or lower the thresholds
 to make this measurement correction green.

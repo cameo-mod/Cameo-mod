@@ -213,6 +213,27 @@
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
@@ -1053,7 +1074,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2135",
       "pricing": true,
@@ -1742,7 +1763,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2135",
       "pricing": true,
@@ -2888,7 +2909,7 @@
         "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2050",
       "pricing": true,

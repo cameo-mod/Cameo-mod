@@ -3,12 +3,12 @@
     "after": {
       "classes": 20,
       "exit_code": 1,
-      "violations": 191
+      "violations": 169
     },
     "before": {
       "classes": 20,
       "exit_code": 1,
-      "violations": 128
+      "violations": 131
     },
     "note": "Unrecalibrated class anchors; findings are model flags, not proven balance defects."
   },
@@ -71,16 +71,16 @@
       "ledger": "starcraft_terran",
       "values": {
         "band_dps": {
-          "after": 675.1800000000001,
-          "before": 3600.0
+          "after": 1350.3600000000001,
+          "before": 7200.0
         },
         "faction_primary_dps": {
-          "after": 675.1800000000001,
+          "after": 1350.3600000000001,
           "before": "AttributeError"
         },
         "range_dps": {
-          "after": 675.1800000000001,
-          "before": 11.16
+          "after": 1350.3600000000001,
+          "before": 22.32
         },
         "workbook_weapon_factors": {
           "after": [
@@ -130,7 +130,7 @@
       "values": {
         "band_dps": {
           "after": 22.78571428571429,
-          "before": 664.5962732919255
+          "before": 925.4658385093168
         },
         "faction_primary_dps": {
           "after": 22.78571428571429,
@@ -138,7 +138,7 @@
         },
         "range_dps": {
           "after": 22.78571428571429,
-          "before": 1.9273291925465839
+          "before": 2.6838509316770183
         },
         "workbook_weapon_factors": {
           "after": [
@@ -162,16 +162,16 @@
       "ledger": "tiberiansun_cabal",
       "values": {
         "band_dps": {
-          "after": 320.29411764705884,
-          "before": 1160.9907120743032
+          "after": 533.8235294117648,
+          "before": 1934.984520123839
         },
         "faction_primary_dps": {
-          "after": 320.29411764705884,
+          "after": 533.8235294117648,
           "before": "AttributeError"
         },
         "range_dps": {
-          "after": 320.29411764705884,
-          "before": 1160.9907120743032
+          "after": 533.8235294117648,
+          "before": 1934.984520123839
         },
         "workbook_weapon_factors": {
           "after": [

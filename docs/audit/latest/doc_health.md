@@ -1,12 +1,12 @@
 # audit_doc_health — is the documentation structurally sound?
 
-Documents scanned: **212**
+Documents scanned: **257**
 
 `audit_doc_claims.py` checks whether the NUMBERS are still true. This checks whether the documents themselves are intact.
 
 | code | what | count |
 |---|---|--:|
-| D1 | literal control characters | 8 |
+| D1 | literal control characters | 0 |
 | D2 | mojibake (UTF-8 read as cp1252) | 0 |
 | D3 | markdown link to a missing file | 0 |
 | D4 | same-file anchor with no heading | 0 |
@@ -16,15 +16,9 @@ Documents scanned: **212**
 | D8 | citation names a different section's law | 0 |
 
 
-## D1 — Control characters (8)
+## D1 — Control characters (0)
 
-- `DEVELOPMENT_LOG.md`:4493 — control character 0x7
-- `DEVELOPMENT_LOG.md`:4496 — control character 0xc
-- `DEVELOPMENT_LOG.md`:4498 — control character 0x7
-- `DEVELOPMENT_LOG.md`:4512 — control character 0x7
-- `DEVELOPMENT_LOG.md`:4515 — control character 0xc
-- `DEVELOPMENT_LOG.md`:4518 — control character 0x8
-- `DEVELOPMENT_LOG.md`:4523 — control character 0x8
+_clean_
 
 
 ## D2 — Mojibake (0)
@@ -62,4 +56,4 @@ _clean_
 _clean_
 
 
-**FAIL — 8 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.
+**PASS** — no structural defects.

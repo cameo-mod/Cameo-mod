@@ -1,8 +1,8 @@
-# audit_family_uniqueness — 144 family/level templates
+# audit_family_uniqueness — 147 family/level templates
 
-  Heavy     46 distinct shapes   OK
-  Light     47 distinct shapes   OK
-  Medium    46 distinct shapes   OK
+  Heavy     47 distinct shapes   OK
+  Light     48 distinct shapes   OK
+  Medium    47 distinct shapes   OK
   Super      4 distinct shapes   OK
   Trace      1 distinct shapes   OK
 

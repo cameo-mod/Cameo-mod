@@ -34,6 +34,13 @@ i.e. where the unit sits in its class's distribution. The balance formula still 
 """
 from __future__ import annotations
 
+import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    # Without this the validator CRASHES printing its own problem report on a
+    # cp1252 console — the failure path was the one path never exercised.
+    sys.stdout.reconfigure(encoding="utf-8")
+
 # ── Cameo's own factions, as the mod declares them ────────────────────────────────────────────
 # Longest-prefix wins: `ra2_allies` must beat `ra2`, `ts_gdi` must beat `ts`.
 CAMEO_FACTIONS = (
@@ -95,34 +102,198 @@ ROUTES = {
     "harkonnen": (("OpenRA Dune 2000", ("harkonnen",)), ("OpenRA Dune II", ("harkonnen",))),
 }
 
+# ── Unblocked 2026-09-05 by the INI extraction ────────────────────────────────────────────────
+# Every route below was PENDING on data that is now on disk and extracted to
+# `docs/reference/ini_corpus.json`. Faction names are the sources' OWN `Owner=` country names,
+# verified against the corpus — not the names the PENDING entries guessed at, several of which
+# did not exist (see the note under PENDING).
+#
+# ⚠ Mental Omega ships SUB-FACTION countries, not the three sides. The maintainer assigned each
+# sub-faction its own Cameo destination (2026-09-05), which covers all twelve MO countries:
+#     Europeans->ra2_allies  USSR->ra2_soviets  PsiCorps+Headquaters->yuri  Chinese->asianalliance
+#     Latin->latinsyndicate  Guild1/2/3->steelconsortium  ScorpionCell->tkm
+#     UnitedStates->futuretech  Pacific->japan
+INI_ROUTES = {
+    "td_gdi":          (("DTA Enhanced", ("GDI",)),),
+    "td_nod":          (("DTA Enhanced", ("Nod",)),),
+    "ra1_allies":      (("DTA Enhanced", ("Allies",)),),
+    "ra1_soviets":     (("DTA Enhanced", ("Soviet",)),),
+    "ra2_allies":      (("Mental Omega", ("Europeans",)),
+                        ("CnC Reloaded", ("AlliesCountry",))),
+    "ra2_soviets":     (("Mental Omega", ("USSR",)),
+                        ("CnC Reloaded", ("SovietCountry",))),
+    "yuri":            (("Mental Omega", ("PsiCorps", "Headquaters")),
+                        ("CnC Reloaded", ("YuriCountry",))),
+    "ts_gdi":          (("CnC Reloaded", ("GDICountry",)),),
+    "ts_nod":          (("CnC Reloaded", ("NodCountry",)),),
+    "asianalliance":   (("Mental Omega", ("Chinese",)),
+                        ("Rise of the East", ("China",))),
+    "latinsyndicate":  (("Mental Omega", ("Latin",)),),
+    "steelconsortium": (("Mental Omega", ("Guild1", "Guild2", "Guild3")),),
+    "tkm":             (("Mental Omega", ("ScorpionCell",)),
+                        ("Rise of the East", ("Iraq",))),
+    "futuretech":      (("Mental Omega", ("UnitedStates",)),),
+    "japan":           (("Mental Omega", ("Pacific",)),),
+    # ⭐ CnC Reloaded DOES ship a playable CABAL faction and I recorded the opposite for weeks.
+    # `RobotCountry`/`RobotCountry2` own 138 buildable units, 23 of them Robot-EXCLUSIVE, and the
+    # mod NAMES 55 of them `CABAL's ...` — a complete roster: MCV, Construction Yard, Refinery,
+    # Reactor, Cybernetic Factory, Naval Factory, Flame Tower, Viper Turret, EMP Column, Cyborg
+    # Commando, Awakened, Devout, Ascended, Leviathan, Basilisk, Pacificator, Deathclaw.
+    # ⛔ MY ERROR WAS SAMPLING: I checked DEVOUT and ASCENDED, saw `Owner=` all 21 countries,
+    # and concluded the faction was "announced, not shipped". Two units. Maintainer ruling
+    # 2026-09-06 routes it; `cabal` had ONE source (Shattered Paradise `cab`, 44 rows) and has
+    # been the only routed faction below the two-reference floor.
+    "cabal":           (("CnC Reloaded", ("RobotCountry", "RobotCountry2")),),
+
+}
+
+# ── The three RA2 mods that were extracted and never routed (maintainer, 2026-09-06) ──────────
+# ⛔ THIS IS A SEPARATE DICT ON PURPOSE. Written as more keys inside `INI_ROUTES` it silently
+# DELETED Mental Omega's and CnC Reloaded's RA2 routes: a Python dict literal keeps only the LAST
+# value for a repeated key, so `"ra2_allies":` appearing twice is not a merge, it is an
+# overwrite — and nothing warns. Caught by re-measuring and seeing MO and CnCR vanish from
+# ra2_allies, ra2_soviets and yuri. `_assert_no_duplicate_keys()` below now fails on it.
+RA2_MOD_ROUTES = {
+    # ⭐ RA2 Reborn and Red Resurrection were RULED INTO the RA2 tier at 1/6 each long ago and
+    # blocked on one thing only: "carry NO unit stats — they exist only in versus_raw.json as
+    # warhead armour profiles". The INI extraction removed that blocker and nobody noticed, so
+    # three whole sources sat in the corpus contributing nothing. RA2 0XX is ruled in here too.
+    # With these the RA2 factions reach the ruled SIX voices instead of running at 1/4.
+    #
+    # ⚠ ALL THREE ARE SIDE-BASED, MEASURED, NOT ASSUMED. Countries inside a side are byte-
+    # identical rosters, so the country name is a label and the SIDE is the faction:
+    #     RA2 Reborn        Allied 198 (Alliance/Americans/Australia/British/French/Germans/Japan)
+    #                       Soviet 183 · Yuri 184 · a FOURTH 181 (China/NorthKorea/Venezuela/
+    #                       Yugoslavia)
+    #     Red Resurrection  Allied 206 · Soviet 202 · Yuri 147
+    #     RA2 0XX           Allied 125 · Soviet 124 · Yuri 93
+    # ⛔ So RA2 Reborn's `Japan` is NOT a Japanese roster — it is the Allied roster wearing a
+    # label, 100% identical to `Americans`. It is deliberately NOT routed to Cameo's `japan`.
+    "ra2_allies":      (("RA2 Reborn", ("Alliance", "Americans", "Australia", "British",
+                                        "French", "Germans", "Japan")),
+                        ("Red Resurrection", ("Alliance", "Americans", "British", "French",
+                                              "Germans")),
+                        ("RA2 0XX", ("Alliance", "Americans", "British", "French", "Germans"))),
+    "ra2_soviets":     (("RA2 Reborn", ("Africans", "Arabs", "Confederation", "Russians")),
+                        ("Red Resurrection", ("Africans", "Arabs", "Confederation", "Russians")),
+                        ("RA2 0XX", ("Africans", "Arabs", "Confederation", "Russians"))),
+    "yuri":            (("RA2 Reborn", ("YuriCountry", "YuriFalk", "YuriGreen", "YuriPacific")),
+                        ("Red Resurrection", ("YuriCountry",)),
+                        ("RA2 0XX", ("YuriCountry",))),
+
+    # ⭐ RA2 Reborn's FOURTH side goes to BOTH (maintainer 2026-09-06). China + NorthKorea carry
+    # the Asian Alliance reading and Venezuela the Latin Syndicate one, and R3 explicitly allows a
+    # reference faction to appear in several combinations. ⚠ It is ONE roster, so both Cameo
+    # factions receive the same 181 units — accepted deliberately, and it is why neither is routed
+    # to it alone.
+    "asianalliance":   (("RA2 Reborn", ("China", "NorthKorea", "Venezuela", "Yugoslavia")),),
+    "latinsyndicate":  (("RA2 Reborn", ("China", "NorthKorea", "Venezuela", "Yugoslavia")),),
+
+    # ── Twisted Insurrection (maintainer supplied it 2026-09-06 as the named fix for `forgotten`)
+    # ⭐ `Forsaken` IS the Forgotten: 13 exclusive units — Reaver, Atlas, Mastodon Tank, Drifter
+    # IFV, Brawler Tank, Mistfire, Wyvern, Trapper Cycle, Fiend, Tauros, Skirmisher, Warrior,
+    # Martyr. `forgotten` had ONE source (Shattered Paradise `mut`) and is the last Cameo faction
+    # with a real lineage to clear the two-source floor.
+    # ⚠ Unlike the RA2 mods this source is genuinely PER-HOUSE, not side-based: GDI 35 exclusive,
+    # Nod 44, GT 40, Phoenix 17, Forsaken 13. Its only shared pairs are GDI+Phoenix (30) and
+    # Nod+Sons (22) — TI's own splinter factions — which the partition below keeps together.
+    # TI's `GT`, `Phoenix` and `Sons` are its own inventions with no Cameo counterpart; left out.
+    "forgotten":       (("Twisted Insurrection", ("Forsaken",)),),
+    "ts_gdi":          (("Twisted Insurrection", ("GDI", "Phoenix")),),
+    "ts_nod":          (("Twisted Insurrection", ("Nod", "Sons")),),
+
+    # ── ⚠ THE THREE LOOSE ROUTES (maintainer ruling 2026-09-06: "use the closest thematic source
+    # and accept the looseness"). These are Cameo INVENTIONS with no counterpart in any INI- or
+    # yaml-extractable RTS, measured rather than assumed:
+    #     japan          WWII Imperial Japan — Chi-Ha, I-Go, O-I, ballista, archer maiden
+    #     naxis          WWII German — Bf109, Me262, Horten, Brummbär, Wirbelwind, Tiger, SS
+    #     schwarzermond  Nazi occult / lunar — Haunebu II+III, Die Glocke, Komet, Lunar Panzer
+    # No source in the corpus has a WWII-German or WWII-Japanese faction at all.
+    #
+    # ⛔ SO THESE ROUTES ARE HONESTLY WEAK AND THE WEAKNESS IS THE POINT OF THIS COMMENT. RA2
+    # Reborn's `Japan` is its ALLIED roster wearing a label — 100% identical to `Americans` — and
+    # RA2 0XX's `Germans` differs from `Americans` by one defence structure. They contribute a
+    # second game's view of a comparable power level, NOT a national identity. Do not read a
+    # faction profile built on them as saying anything about Japanese or German design.
+    # ⏰ REPLACE ON SIGHT: japan/naxis want a WWII RTS; schwarzermond wants Earth 2150 Lunar
+    # Corporation, which is its documented inspiration and is NOT on disk (searched 2026-09-06:
+    # Documents, Downloads, Desktop, both Program Files, C:\Games, D:, E:, the Steam library).
+    "japan":           (("RA2 Reborn", ("Japan",)),),
+    "naxis":           (("RA2 0XX", ("Germans",)),),
+    # schwarzermond takes the combination the maintainer asked for: Mental Omega's Foehn (shared
+    # with steelconsortium, which R3 permits) plus OpenE2140 — the right SERIES, wrong game.
+    "schwarzermond":   (("Mental Omega", ("Guild1", "Guild2", "Guild3")),
+                        ("OpenE2140", ("ucs",))),
+}
+
+def _assert_no_duplicate_keys(*paths):
+    """A route dict written with a repeated key is an OVERWRITE, not a merge, and Python is
+    silent about it. Parse this file's own source and refuse to import if any route literal
+    repeats a key — the failure mode that deleted two sources' routes on 2026-09-06."""
+    import ast
+    import pathlib as _pathlib
+    tree = ast.parse(_pathlib.Path(__file__).read_text(encoding="utf-8"))
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Assign):
+            continue
+        names = {t.id for t in node.targets if isinstance(t, ast.Name)}
+        if not (names & set(paths)) or not isinstance(node.value, ast.Dict):
+            continue
+        keys = [k.value for k in node.value.keys if isinstance(k, ast.Constant)]
+        dupes = {k for k in keys if keys.count(k) > 1}
+        if dupes:
+            raise AssertionError(
+                f"{', '.join(names)} repeats {sorted(dupes)} — a repeated key OVERWRITES the "
+                f"earlier routes instead of adding to them. Put additions in their own dict.")
+
+
+_assert_no_duplicate_keys("ROUTES", "INI_ROUTES", "RA2_MOD_ROUTES")
+
+for _extra in (INI_ROUTES, RA2_MOD_ROUTES):
+    for _f, _r in _extra.items():
+        ROUTES[_f] = tuple(ROUTES.get(_f, ())) + _r
+
+# ⛔ CASE-FOLD THE TOKENS, ONCE, HERE. `peer_factions()` lowercases the corpus column so that
+# DOC5's `nod` and an INI mod's `NodCountry` are comparable at all — but the routes above are
+# written in each source's OWN casing, because that is what a human verifies against the rules
+# file. Comparing the two directly matched nothing: every one of the 15 INI routes resolved to
+# ZERO rows in `allows()` while `--check` reported the token as missing and listed it, lowercased,
+# in the very same line ("has no faction token 'Chinese' (has: chinese, ...)"). The declarations
+# keep their readable casing; the comparison is normalised.
+ROUTES = {_f: tuple((_src, tuple(_t.lower() for _t in _toks)) for _src, _toks in _r)
+          for _f, _r in ROUTES.items()}
+
 # ── Ruled, but the source is not in the corpus yet ────────────────────────────────────────────
 # These are NOT speculation: each is a maintainer ruling whose data is missing. Listed so the
 # weighting a faction actually gets today is visible against the weighting it was ruled.
 PENDING = {
-    "td_gdi":      (("DTA", "gdi", "INIs promised 2026-09-05"),),
-    "td_nod":      (("DTA", "nod", "INIs promised 2026-09-05"),),
-    "ra1_allies":  (("DTA", "allied", "INIs promised 2026-09-05"),),
-    "ra1_soviets": (("DTA", "soviet", "INIs promised 2026-09-05"),),
-    "ra2_allies":  (("Mental Omega", "Allied", "no faction column"),
-                    ("CnC Reloaded", "Allied", "no faction column")),
-    "ra2_soviets": (("Mental Omega", "Soviet", "no faction column"),
-                    ("CnC Reloaded", "Soviet", "no faction column")),
-    "yuri":        (("Mental Omega", "Epsilon", "no faction column"),
-                    ("CnC Reloaded", "Yuri", "no faction column")),
-    "ts_gdi":      (("CnC Reloaded", "GDI", "no faction column"),),
-    "ts_nod":      (("CnC Reloaded", "Nod", "no faction column"),),
-    "cabal":       (("CnC Reloaded", "CABAL", "no faction column"),),
-    "forgotten":   (("CnC Reloaded", "Forgotten", "no faction column"),),
-    "asianalliance":   (("Mental Omega", "China", "no faction column"),
-                        ("Rise of the East", "China", "mod not supplied")),
-    "latinsyndicate":  (("Mental Omega", "Latin Confederation", "no faction column"),),
-    "steelconsortium": (("Mental Omega", "Foehn Revolt", "no faction column"),),
-    "tkm":             (("Rise of the East", "GLA", "mod not supplied"),),
+    # ── RESOLVED 2026-09-05. Fifteen entries left this table when the INI corpus landed; the
+    # routes they became are in INI_ROUTES above. Two of the old entries were WRONG about the
+    # world, not merely blocked, and both are recorded here so the mistake is not repeated:
+    #
+    #   * `cabal` and `forgotten` were routed to CnC Reloaded. **CnC Reloaded has no CABAL and no
+    #     Forgotten country.** Its full Owner= list is GDICountry, NodCountry, AlliesCountry,
+    #     SovietCountry, YuriCountry, RobotCountry (+ variants) and the vanilla nation slots.
+    #     Their real source is Shattered Paradise's `cab` / `mut`.
+    #   * `tkm` was routed to "Rise of the East / GLA". **RotE has no GLA country.** Ruled
+    #     2026-09-05: TKM takes Mental Omega ScorpionCell + Rise of the East Iraq.
+    #
+    # The blocker on the rest was never "no faction column" — every INI source carries `Owner=`.
+    # It was that nobody had read the files. See docs/design/REFERENCE_EXTRACTION_PLAN.md §3.5.
+    # (cabal and forgotten are NOT pending — they are already ROUTED to Shattered Paradise
+    # `cab` / `mut` above. What they wanted was a SECOND game, and CnC Reloaded cannot be it:
+    # it has no CABAL and no Forgotten country. They stay in OPEN_SECOND_GAME.)
+
     # ⭐ THE DUNE TIER IS THE THINNEST IN THE CORPUS AND THE MAINTAINER IS FIXING IT (2026-09-04):
     # *"The dune factions will need the OpenRA dune x emperor battle for dune x some different
     # dune mods I have here I need to share with you tomorrow and of course also the spice wars
     # game!"* Measured, the need is real — `ordos` has 25 Cameo units against SEVEN routed
     # reference rows, and its whole exchange rate rests on 4 pairs.
+    #
+    # ⏸ DEFERRED BY RULING R10 (2026-09-05): the C&C family is built first and the Dune, Warcraft
+    # and StarCraft factions come later from their OWN pools. Safe because ZERO of the 22 classes
+    # in use are deferred-only. ⛔ But R11 makes these release-blocking for Cameo 1.0: every
+    # faction must ship on the new formula WITH reference data.
     "ordos":     (("Emperor: Battle for Dune", "Ordos", "mod not supplied"),
                   ("Dune: Spice Wars", "Ordos", "game not supplied"),),
     "atreides":  (("Emperor: Battle for Dune", "Atreides", "mod not supplied"),
@@ -137,21 +308,220 @@ PENDING = {
     "corrino": (("Emperor: Battle for Dune", "Imperial / Sardaukar", "mod not supplied"),),
 }
 
+
 # ── No route at all: FORMULA-ONLY, by ruling ──────────────────────────────────────────────────
 # *"They should be formula-only from a grounded class anchor"* — the ruling already made for units
 # with no reference, rather than forcing a bad match, which is what produced the rejected sheet.
+# ── Sources whose `Owner=` is too broad to use directly ───────────────────────────────────────
+# MEASURED 2026-09-05, mean owners per costed unit: DTA Classic 1.3, Mental Omega 4.4, Rise of
+# the East 5.0, **CnC Reloaded 11.6 (median 13 of ~23 countries)**. At that breadth a faction
+# roster stops describing the faction: CnCR's `GDICountry` (453 units) and `NodCountry` (450)
+# SHARE 346 of them, so a naive GDI reference is 76% identical to the Nod one.
+#
+# Maintainer ruling 2026-09-05: for these sources a faction's reference roster is the units it
+# owns that the OPPOSING routed factions of the same source do not — 107 GDI-only, 104 Nod-only.
+# Smaller, but discriminating, which is the entire point of a reference. The shared pool
+# describes the MOD, not any faction inside it.
+#
+# ⚠ RE-MEASURED 2026-09-06 once the corpus was wired into `reference_distribution` — the first
+# time the overlap could be measured where it actually MATTERS, between the CAMEO factions a
+# source feeds rather than between its own countries. Worst pair overlap (Jaccard) per source:
+#
+#     Mental Omega     97%   asianalliance / latinsyndicate     mean 5.8 owners
+#     CnC Reloaded     81%   ra2_soviets / yuri                 mean 11.8
+#     OpenRA Tib.Dawn  45%   td_gdi / td_nod                    mean 1.5
+#     Rise of the East 36%   asianalliance / tkm                mean 5.3
+#     DTA Classic      33%   td_gdi / td_nod                    mean 1.6
+#     everything else  <=13%
+#
+# ⭐ THE 33-45% BAND IS NOT ROT — it is what a C&C roster honestly looks like: OpenRA Tiberian
+# Dawn and DTA give both sides the same harvester, MCV and power plant. The pathology is the top
+# two, and MENTAL OMEGA IS WORSE THAN THE CASE THAT ESTABLISHED THE RULE: at 97%, Cameo's Asian
+# Alliance and Latin Syndicate would have received the same reference roster with 3% to tell them
+# apart. MO is therefore added under the SAME 2026-09-05 ruling, not a new one.
+# Rise of the East stays a full voice: 36% sits inside the honest band despite its 5.3 mean.
+EXCLUSIVE_ONLY = {
+    "CnC Reloaded": "median unit owned by 13 of ~23 countries; GDICountry/NodCountry share 76%; "
+                    "81% of the ra2_soviets roster is also the yuri roster",
+    "Mental Omega": "ships sub-faction countries and gives most units to all of them; 97% of the "
+                    "asianalliance roster is also the latinsyndicate roster",
+    # Maintainer ruling 2026-09-06. RotE's 36% asianalliance/tkm overlap sits INSIDE the honest
+    # C&C band, so this is not a rot fix — it is a cheap one: RotE has large per-country pools
+    # (china 208 units, iraq 288 before the buildable filter), so exclusivity buys discrimination
+    # without thinning either roster the way it would for Mental Omega.
+    "Rise of the East": "clean per-country pools make exclusivity cheap; drops the 36% "
+                        "asianalliance/tkm roster overlap to near zero",
+    "RA2 Reborn": "side-based; countries inside a side are byte-identical and the all-countries "
+                  "pool is 158 of 246 units",
+    "Red Resurrection": "side-based; the all-countries pool is 140 of 287 units",
+    "RA2 0XX": "side-based; `Germans` differs from `Americans` by ONE unit and `Alliance` by zero",
+    "Twisted Insurrection": "per-house, but GDI+Phoenix and Nod+Sons are splinter pairs that "
+                            "share a roster and must not read as two factions",
+}
+
+# {source: every faction token that source routes to ANY Cameo faction} — the rivals an
+# EXCLUSIVE_ONLY unit must NOT also belong to. Derived from ROUTES so it cannot drift.
+ROUTED_TOKENS = {}
+for _f, _r in ROUTES.items():
+    for _src, _toks in _r:
+        ROUTED_TOKENS.setdefault(_src, set()).update(_toks)
+
+
+# ── What "exclusive" MEANS depends on how the source groups its countries ─────────────────────
+# ⭐ MEASURED 2026-09-06 by signature — the distinct sets of routed countries that own a unit.
+# The two EXCLUSIVE_ONLY sources are built completely differently and one rule cannot serve both:
+#
+#   CnC Reloaded  has real per-faction pools — nodcountry 86 units, gdicountry 61, sovietcountry
+#                 42, alliescountry 41, yuricountry 32 — under a 284-unit universal pool. Country
+#                 exclusivity is the right cut and yields 32-86 discriminating units per faction.
+#
+#   Mental Omega  has almost NO per-country pool: 3 to 7 units each, out of ~233 owned. What it
+#                 actually models is the SIDE, and the signature says so exactly —
+#                     108  all twelve countries          (the mod's common pool)
+#                      61  the nine non-Foehn            (Allied + Soviet + Epsilon)
+#                      60  chinese, latin, ussr          SOVIET
+#                      58  europeans, pacific, us        ALLIED
+#                      49  guild1, guild2, guild3        FOEHN
+#                      41  headquaters, psicorps, sc     EPSILON
+#                 Country exclusivity here is not strict, it is EMPTY: it cut `japan` to 6 units
+#                 and `yuri` to 9. The nine Cameo factions routed to MO countries are drawing on
+#                 a source that only distinguishes four sides.
+#
+# So the cut is declared as a PARTITION of each source's routed tokens, and a unit is admitted
+# only when every routed country owning it falls inside ONE cell of that partition. Absent a
+# declaration the cells are the per-Cameo-faction token sets, which is country exclusivity and
+# also keeps the maintainer's multi-token routes intact (guild1/2/3 -> steelconsortium is one
+# cell, so a unit owned by all three is not "shared").
+EXCLUSIVITY_GROUPS = {
+    # Same shape as Mental Omega and for the same measured reason: each mod's LARGEST owner-set
+    # signature is the all-countries pool (Reborn 158 of 246, Red Resurrection 140 of 287, RA2 0XX
+    # 73 of 190), which without a partition feeds ra2_allies, ra2_soviets and yuri identically.
+    # ⚠ RA2 0XX's per-country variation was checked and is NOISE, not grain: `Germans` differs
+    # from `Americans` by ONE unit (an "EU Gladiator DCA" defence) and `Alliance` by zero. Routing
+    # it at country grain would invent a distinction the mod does not make.
+    "RA2 Reborn": (
+        ("alliance", "americans", "australia", "british", "french", "germans", "japan"),
+        ("africans", "arabs", "confederation", "russians"),
+        ("yuricountry", "yurifalk", "yurigreen", "yuripacific"),
+        ("china", "northkorea", "venezuela", "yugoslavia"),
+    ),
+    "Red Resurrection": (
+        ("alliance", "americans", "british", "french", "germans"),
+        ("africans", "arabs", "confederation", "russians"),
+        ("yuricountry",),
+    ),
+    "RA2 0XX": (
+        ("alliance", "americans", "british", "french", "germans"),
+        ("africans", "arabs", "confederation", "russians"),
+        ("yuricountry",),
+    ),
+    # TI is per-house, so the cells are its own splinter groupings rather than sides.
+    "Twisted Insurrection": (
+        ("gdi", "phoenix"),
+        ("nod", "sons"),
+        ("forsaken",),
+    ),
+    "Mental Omega": (
+        ("europeans", "pacific", "unitedstates"),          # Allied
+        ("chinese", "latin", "ussr"),                      # Soviet
+        ("headquaters", "psicorps", "scorpioncell"),       # Epsilon
+        ("guild1", "guild2", "guild3"),                    # Foehn
+    ),
+}
+
+
+def exclusivity_cells(src):
+    """The partition of `src`'s routed tokens that defines "not shared" for that source."""
+    declared = EXCLUSIVITY_GROUPS.get(src)
+    if declared:
+        return [frozenset(g) for g in declared]
+    cells = []
+    for _, routes in ROUTES.items():
+        toks = {t for s_, ts in routes if s_ == src for t in ts}
+        if toks:
+            cells.append(frozenset(toks))
+    return cells
+
+
+# ⭐ THE UNIVERSAL-POOL CARVE-OUT (maintainer ruling 2026-09-06).
+# A unit owned by EVERY routed country of its source is one of two very different things, and the
+# partition rule was treating them alike:
+#
+#   shared INFRASTRUCTURE — Mental Omega's Allied Tech Center, Ore Refinery, War Factory, Nuclear
+#     Reactor. Every side builds one. It says nothing about any faction and is rightly removed.
+#
+#   a universal COMBAT unit — Rise of the East gives its Soviet Mammoth Tank, Asian Emperor
+#     Overlord Tank, Allied Juggernaut and Yuri Specter Squad to all fifteen countries. Removing
+#     them cost `asianalliance` and `tkm` THE TWO HEAVIEST TANKS IN THE ROSTER — the top of the
+#     HP and cost range, which is the part of a distribution a reference is least able to spare.
+#
+# ⚠ The maintainer asked the right question and the answer was NOT "only harvesters". So: a
+# universal unit that MOVES is readmitted; a universal STRUCTURE is not. Mobility is the test
+# because a structure everyone builds is infrastructure by definition, while a vehicle everyone
+# fields is still a data point about what a 2,600-credit heavy tank looks like.
+# ⚠ "Universal" means ALL of the source's ROUTED countries. A unit owned by SOME of them is
+# partially shared, which is the case the partition exists for, and stays removed — e.g. Mental
+# Omega's 61-unit non-Foehn pool, and CnC Reloaded's Core Defender (19 of 21 countries, but not
+# Nod, so it is not universal).
+MOBILE_TYPES = {"infantry", "vehicle", "aircraft", "ship"}
+
+# ── A SOURCE'S OWN NAMING BEATS A PERMISSIVE `Owner=` (maintainer ruling 2026-09-06) ──────────
+# CnC Reloaded names 55 units `CABAL's ...` and gives 43 of them to all 21 countries. `Owner=`
+# would therefore call them shared and throw the whole faction away, while the mod itself says
+# in the unit's NAME exactly whose they are. Between a permissive ownership list and a
+# deliberate name, the name is the stronger identity signal — a modder writes "CABAL's Refinery"
+# on purpose and copies an `Owner=` line out of habit.
+#
+# ⭐ A CLAIM IS EXCLUSIVE AND OVERRIDES EVERYTHING. A claimed unit is admitted to its claimant
+# and to NOBODY ELSE, whatever `Owner=` says — that is the whole point of taking faction identity
+# seriously. So CABAL's Cyborg Commando stops being a reference for ra2_allies, ts_gdi and the
+# rest, which it had no business being.
+# ⚠ Prefix match on the unit's DISPLAY NAME, case-insensitive. Keep the prefixes narrow enough
+# that they cannot catch another faction's unit.
+NAME_CLAIMS = {
+    "CnC Reloaded": (
+        (("cabal", "core defender", "deployed core defender"), "cabal"),
+    ),
+}
+
+
+def claimed_by(row, src):
+    """The Cameo faction this source's own naming claims the row for, or None."""
+    name = (row.get("name") or "").strip().lower()
+    if not name:
+        return None
+    for prefixes, faction in NAME_CLAIMS.get(src, ()):
+        if name.startswith(prefixes):
+            return faction
+    return None
+
+
+def is_universal(row, src):
+    """Owned by EVERY routed country of `src` — the mod's common pool, not a faction's."""
+    routed = ROUTED_TOKENS.get(src, set())
+    return bool(routed) and routed <= peer_factions(row)
+
+
+def is_shared(row, src):
+    """True when this row's routed owners straddle more than one cell — it describes the MOD."""
+    owned = peer_factions(row) & ROUTED_TOKENS.get(src, set())
+    if any(owned <= cell for cell in exclusivity_cells(src)):
+        return False
+    return not (is_universal(row, src) and row.get("type") in MOBILE_TYPES)
+
 UNROUTED = {
-    "tkm": "GLA is the ruled archetype, but Generals Alpha's `gla` is spent on Latin Syndicate "
-           "and Rise of the East is not supplied. A distinct second source is OPEN.",
-    "schwarzermond": "Earth 2150 Lunar Corporation is the documented inspiration and is not on "
-                     "disk. OpenE2140 is Earth 2140.",
-    "japan": "RA3 Empire is the documented inspiration; no RA3 mod is in the corpus.",
+    # ⭐ `tkm` and `japan` LEFT this table on 2026-09-05 — both are routed now. TKM takes Mental
+    # Omega ScorpionCell + Rise of the East Iraq (its old note said "Rise of the East is not
+    # supplied"; it is, and it has no `gla` country — Iraq is the ruled analogue). Japan takes
+    # Mental Omega Pacific Front, which is a closer archetype than the RA3 Empire its note asked
+    # for and which no mod in the corpus provides.
     "ixian": "House Ix is Emperor-only. ⏰ UNBLOCKS when the maintainer supplies Emperor: Battle "
              "for Dune — see PENDING.",
     "corrino": "House Corrino appears only as a Dune II/D2K campaign side, with no buildable "
                "roster in the extracted corpus. ⏰ UNBLOCKS with Emperor's Imperial/Sardaukar "
                "house — see PENDING.",
 }
+
 
 # ── Ruled-open: a route exists but the matrix marks the second game as unchosen ───────────────
 # Reported, never silently satisfied. A faction here still routes on what it has.
@@ -219,9 +589,31 @@ def allows(faction, row):
     Combined Arms row would be visible to every Cameo faction at once. A route is a claim about
     identity; a missing tag is the absence of one.
     """
+    # A NAME CLAIM SHORT-CIRCUITS BOTH WAYS: the claimant gets the row, everyone else is
+    # refused it, and no exclusivity or ownership test is consulted.
+    claim = claimed_by(row, row.get("source"))
+    if claim is not None:
+        return claim == faction and row.get("source") in routed_sources(faction)
+
     for src, toks in ROUTES.get(faction, ()):
-        if row.get("source") == src and (peer_factions(row) & frozenset(toks)):
-            return True
+        if row.get("source") != src:
+            continue
+        mine = peer_factions(row) & frozenset(toks)
+        if not mine:
+            continue
+        # ⛔ THE EXCLUSIVITY RULE, ENFORCED HERE AND NOT ONLY DECLARED. `EXCLUSIVE_ONLY` was
+        # honoured by `faction_profile.py` and ignored by this function, so the ruling shaped the
+        # faction PROFILES while the reference ROSTERS — the thing units are actually priced
+        # against — kept the shared pool. A unit owned by several of a source's routed factions
+        # describes the mod, not any faction in it, so it is admitted to none of them.
+        # ⚠ RIVALS ARE THE OTHER *CAMEO* FACTIONS, NOT THE OTHER SOURCE COUNTRIES. Counting
+        # source countries cancels the maintainer's own multi-token routes: PsiCorps AND
+        # Headquaters are both `yuri`, Guild1/2/3 are all `steelconsortium`, and a unit owned by
+        # two of them is not shared with anybody — it is the SAME Cameo faction twice. Measured
+        # first: the country-counting version cut `japan` from 233 rows to 6 and `yuri` to 59.
+        if src in EXCLUSIVE_ONLY and is_shared(row, src):
+            continue
+        return True
     return False
 
 

@@ -12,8 +12,6 @@ IncendiaryM1Carbine:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Flame_Light:
 	Warhead@Flame_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -35,8 +33,6 @@ ra1_soviets_ak47conscript_rifle:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -71,7 +67,7 @@ CommissarPistol:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 8000
 	Warhead@Flame_Light:
 		Damage: 8000
@@ -91,18 +87,16 @@ GrenadeRA:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 16000
 
 GrenadeRAExplode:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits: ^GrenadeRALegacy
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 4000
 	Warhead@Flame_Light:
 		Damage: 4000
-	-Warhead@Demolition_Light:
-	-Warhead@Flame_Light:
 	Warhead@Flame_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -120,7 +114,7 @@ GrenadeThermobaric:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 4000
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -135,15 +129,10 @@ GrenadeThermobaric:
 		PhysicalStateScale: 100
 	Warhead@Flame_Light:
 		Damage: 4000
-	-Warhead@MediumFlameWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Thermobaric_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 4994
-	-Warhead@Demolition_Light:
-	-Warhead@Flame_Light:
 GrenadeThermobaricExplode:
 	Inherits: GrenadeThermobaric
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -180,15 +169,10 @@ GrenadeThermobaricExplode:
 		Damage: 1
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	-Warhead@MediumFlameWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Thermobaric_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 4994
-	-Warhead@Grenade:
-	-Warhead@LightFlameWeapon:
 
 FireRockets:
 	Inherits@wh: ^Warhead_MissileFire_Light
@@ -249,7 +233,7 @@ FireballLauncher:
 		Image: FB1
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 18000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
@@ -270,7 +254,7 @@ FireballLauncherThermobaric:
 		Image: FB1
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 20000
 FireballGun:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -285,7 +269,7 @@ FireballGun:
 		Image: FB1
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
@@ -295,7 +279,7 @@ FireballGun:
 
 FireballGunExplode:
 	Inherits: FireballGun
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 4000
 FireballGunThermobaric:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -310,11 +294,11 @@ FireballGunThermobaric:
 		Image: FB1
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 8000
 FireballGunThermobaricExplode:
 	Inherits: FireballGunThermobaric
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 4000
 SiegeMortar:
 	Inherits: ^Warhead_Thermobaric_Medium
@@ -402,7 +386,6 @@ PortaTeslaFragment:
 		Damage: 5000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc:
 
 ZapperPortaTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -438,7 +421,6 @@ ZapperPortaTeslaFragment:
 		Damage: 8000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
-	-Warhead@TeslaArc:
 
 PointDefenseTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -498,7 +480,6 @@ TTankZapArcTeslaFragment2_EMP:
 		Damage: 5000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc:
 
 TTankZap2:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -559,7 +540,6 @@ TTankZap2ArcTeslaFragment2_EMP:
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc:
 
 TeslaZap:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -616,7 +596,6 @@ TeslaZapArcTeslaFragment2_EMP:
 		Damage: 4000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc:
 
 ^Projectile_Inferno_Heavy_HeatRayBeam:
 	Projectile: RadBeam
@@ -695,8 +674,6 @@ v1rockets:
 		TrailInterval: 1
 		Speed: 300
 		LaunchAngle: 60
-	-Warhead@MissileHE_Medium:
-	-Warhead@Demolition_Light:
 	Warhead@MissileHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 24000
@@ -748,10 +725,6 @@ v1rocketsThermobaric:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 
-	-Warhead@MediumMissile:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyFlameWeapon:
 	Warhead@Thermobaric_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -786,8 +759,6 @@ GradRockets:
 		TrailInterval: 1
 		Speed: 300
 		LaunchAngle: 60
-	-Warhead@MissileHE_Heavy:
-	-Warhead@Concussion_Medium:
 	Warhead@MissileHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -809,18 +780,12 @@ GradHeavyRockets:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 4000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 2
-	-Warhead@HeavyBomb:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@MissileHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -1004,8 +969,6 @@ FLAK-23-AG:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -1018,8 +981,6 @@ FLAK-23-AA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	-Warhead@Bullet_Medium:
-	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 4000
@@ -1041,8 +1002,6 @@ BTRMachineGun:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1055,8 +1014,6 @@ BTRMachineGun_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	-Warhead@Bullet_Light:
-	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 4000
@@ -1088,8 +1045,6 @@ BTRTeslaMachineGun:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
-	-Warhead@MissileAP_Light:
-	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1111,7 +1066,6 @@ BTRTeslaMachineGunArc:
 BTRTeslaMachineGunArcFragment1:
 	Inherits: BTRTeslaMachineGunArc
 	Range: 2727
-	-Warhead@TeslaArc:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1142,7 +1096,6 @@ BTRTeslaMachineGunArc_AA:
 BTRTeslaMachineGunArcFragment1AA:
 	Inherits: BTRTeslaMachineGunArc_AA
 	Range: 4090
-	-Warhead@TeslaArc:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1175,8 +1128,6 @@ IncendiaryChainGun:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flame_Light:
 	Warhead@Flame_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1192,7 +1143,7 @@ HindMissiles:
 	ReloadDelay: 16
 	Range: 5528
 	Report: missile6.aud
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Concussion_Medium:
@@ -1206,9 +1157,6 @@ HindMissiles:
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
-	-Warhead@Concussion_Medium:
-	-Warhead@Demolition_Light:
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -1290,18 +1238,10 @@ HindMissilesThermobaric:
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
 
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumMissile:
 	Warhead@Thermobaric_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Thermobaric_Medium:
 	Warhead@Thermobaric_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -1367,15 +1307,10 @@ HindMissilesNuclear:
 		Explosions: nuke_small
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@NuclearWarhead:
-	-Warhead@TankDestroyerCannon:
 	Warhead@Nuclear_Super:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
-	-Warhead@Nuclear_Super_Percentage:
 
 KamovMissilesTesla:
 	Inherits@roleflat: ^Compatibility_MissileTesla_MediumFlat
@@ -1470,14 +1405,6 @@ KamovMissilesTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@MissileTesla_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 11000
@@ -1508,8 +1435,6 @@ KamovTesla:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
-	-Warhead@MissileAP_Light:
-	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
@@ -1551,8 +1476,6 @@ KamovTeslaArcFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@LightMissile:
-	-Warhead@TeslaWeapon:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
@@ -1575,9 +1498,6 @@ KamovTeslaArcFragment2:
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc:
-	-Warhead@LightMissile:
-	-Warhead@TeslaWeapon:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
@@ -1623,8 +1543,6 @@ IncendiaryYakChainGun:
 		Damage: 4000
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flame_Light:
 	Warhead@Flame_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1665,8 +1583,6 @@ YakTeslaGun:
 		Damage: 4000
 
 	MinRange: 1400
-	-Warhead@MissileAP_Light:
-	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -1707,8 +1623,6 @@ YakTeslaArcFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@LightMissile:
-	-Warhead@TeslaWeapon:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -1731,9 +1645,6 @@ YakTeslaArcFragment2:
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
-	-Warhead@TeslaArc:
-	-Warhead@LightMissile:
-	-Warhead@TeslaWeapon:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -1768,17 +1679,11 @@ YakNapalm:
 		Damage: 5
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	-Warhead@Effect1:
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@HeavyFlameWeapon:
 	Warhead@Flame_Heavy:
 		Damage: 40000
 		PercentageScale: 0
@@ -1820,13 +1725,9 @@ YakTeslaBomb:
 		FriendlyFireSpread: 50
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 20
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1848,12 +1749,6 @@ YakTeslaBomb:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Effect1:
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@PreservedFlat_HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Ship
 		Spread: 800
@@ -1910,8 +1805,6 @@ YakTeslaBomb:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStates:
 			Corrosion: 100
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@PreservedFlat_HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2020,13 +1913,9 @@ YakNuclearBomb:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 50000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 25
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2052,10 +1941,6 @@ YakNuclearBomb:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@NuclearWarhead:
 	Warhead@Nuclear_SuperFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 200000
@@ -2121,8 +2006,6 @@ TeslaMaverick:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@MissileAP_Medium:
-	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
@@ -2151,8 +2034,6 @@ TeslaMaverickFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@MissileAP_Medium:
-	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -2170,9 +2051,6 @@ TeslaMaverickFragment2:
 		Damage: 4000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc:
-	-Warhead@MissileAP_Medium:
-	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -2233,20 +2111,14 @@ ThermobaricMaverick:
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
 
-	-Warhead@NuclearWarhead:
-	-Warhead@HeavyMissile:
-	-Warhead@MediumFlameWeapon:
 	Warhead@Thermobaric_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 0
-	-Warhead@MissileAP_Medium:
-	-Warhead@Thermobaric_Heavy:
 	Warhead@Thermobaric_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 2498
-
 Su57Maverick:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -2323,7 +2195,7 @@ Su57MaverickThermobaric:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 546
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 10000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -2334,9 +2206,9 @@ Su57MaverickThermobaric:
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
 	Inherits: 105mm
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 6000
-	Warhead@CannonHE_Medium:
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 6000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
@@ -2344,8 +2216,6 @@ Su57MaverickThermobaric:
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
-	-Warhead@CannonHE_Medium:
-	-Warhead@Flame_Medium:
 	Warhead@Flame_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 12000
@@ -2376,7 +2246,6 @@ HammerTankCannonThermobaric:
 	Inherits@4: ^Effect_Flame_Medium
 	Inherits@3: HammerTankCannon
 	Report: tnkfire6.aud
-	-Warhead@CannonHE_Heavy:
 	Warhead@Thermobaric_Heavy:
 		Damage: 16000
 		Versus:
@@ -2431,13 +2300,9 @@ ShtoraLaser:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -2451,11 +2316,6 @@ ShtoraLaser:
 		ValidTargets: Ground, Water, Air
 		#ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
 
-	-Warhead@LightFlameWeapon:
-	-Warhead@FlakWeapon:
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Laser_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2514,7 +2374,6 @@ ra120mmThermobaric:
 		Damage: 8000
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
-	-Warhead@Effect:
 	Warhead@Collapsedra120mmThermobaricCannonHE_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2601,22 +2460,13 @@ ra120mmThermobaric:
 			Spaceship: 10
 		Falloff: 100, 90, 78
 		Range: 0, 400, 800
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Demolition_Heavy:
-	-Warhead@Flame_Heavy:
 	Warhead@Thermobaric_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
-
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 34
 ra120mmThermobaricTargetingComputer:
 	Inherits: ra120mmThermobaric
 	ValidTargets: Ground, Water
-	-Warhead@Collapsedra120mmThermobaricCannonHE_HeavyPercentage:
-	-Warhead@Collapsedra120mmThermobaricDemolition_HeavyPercentage:
-	-Warhead@Collapsedra120mmThermobaricFlame_HeavyPercentage:
 	Warhead@Collapsedra120mmThermobaricTargetingComputerCannonHE_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2707,9 +2557,6 @@ ra120mmThermobaricTargetingComputer:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
-
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 34
 MammothTuskTargetingComputer:
 	Inherits: MammothTusk
 	ValidTargets: Ground, Water, Air
@@ -2829,16 +2676,6 @@ MammothTuskThermobaric:
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 
-	-Warhead@LightFlameWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@FlakWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumMissile:
-	-Warhead@HeavyMissile:
 	Warhead@Thermobaric_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
@@ -2927,12 +2764,6 @@ MammothTuskTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyMissile:
-	-Warhead@LightFlameWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@MissileTesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Infantry, Monster, Air
 		Damage: 36000
@@ -2982,12 +2813,6 @@ MammothTuskTeslaFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyMissile:
-	-Warhead@LightFlameWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@MissileTesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
@@ -3026,13 +2851,6 @@ MammothTuskTeslaFragment2:
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyMissile:
-	-Warhead@LightFlameWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@MissileTesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 9000
@@ -3062,12 +2880,8 @@ ra120mm2:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 8
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3087,9 +2901,6 @@ ra120mm2:
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Ground
 
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@CannonHE_HeavyFlatCompatibility:
 ra120mm2TargetingComputer:
 	Inherits: ra120mm2
 	ReloadDelay: 105
@@ -3118,7 +2929,6 @@ ra120mm2Thermobaric:
 		Damage: 16000
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	-Warhead@Effect:
 	Warhead@Collapsedra120mm2ThermobaricCannonHE_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3205,23 +3015,14 @@ ra120mm2Thermobaric:
 			Spaceship: 10
 		Falloff: 100, 90, 78
 		Range: 0, 400, 800
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Demolition_Heavy:
-	-Warhead@Flame_Heavy:
 	Warhead@Thermobaric_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
-
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 34
 ra120mm2ThermobaricTargetingComputer:
 	Inherits: ra120mm2Thermobaric
 	ReloadDelay: 105
 	ValidTargets: Ground, Water
-	-Warhead@Collapsedra120mm2ThermobaricCannonHE_HeavyPercentage:
-	-Warhead@Collapsedra120mm2ThermobaricDemolition_HeavyPercentage:
-	-Warhead@Collapsedra120mm2ThermobaricFlame_HeavyPercentage:
 	Warhead@Collapsedra120mm2ThermobaricTargetingComputerCannonHE_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3312,9 +3113,6 @@ ra120mm2ThermobaricTargetingComputer:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
-
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 34
 MammothTusk2:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^LightFlameWeapon
@@ -3348,13 +3146,9 @@ MammothTusk2:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -3365,9 +3159,6 @@ MammothTusk2:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
-	-Warhead@LightFlameWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyMissile:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
@@ -3438,9 +3229,6 @@ MammothTusk2Thermobaric:
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyMissile:
 	Warhead@Thermobaric_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
@@ -3510,8 +3298,6 @@ MonsterTankTusk:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	-Warhead@Demolition_Heavy:
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
@@ -3595,12 +3381,6 @@ MonsterTankTuskTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyMissile:
-	-Warhead@LightFlameWeapon:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@MissileTesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Infantry, Monster, Air
 		Damage: 120250
@@ -3721,16 +3501,6 @@ MonsterTankTuskThermobaric:
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 
-	-Warhead@LightFlameWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@FlakWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumMissile:
-	-Warhead@HeavyMissile:
 	Warhead@Thermobaric_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 106000
@@ -3762,13 +3532,9 @@ VolkovMagneticWeapon:
 		FriendlyFireSpread: 50
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -3781,9 +3547,6 @@ VolkovMagneticWeapon:
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: kaboom25.aud
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 20000
@@ -3812,14 +3575,10 @@ VolkovMagneticWeaponTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -3848,9 +3607,6 @@ VolkovMagneticWeaponTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -3868,12 +3624,8 @@ VolkovMagneticWeaponTeslaFragment1:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -3893,9 +3645,6 @@ VolkovMagneticWeaponTeslaFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -3911,12 +3660,8 @@ VolkovMagneticWeaponTeslaFragment2:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -3930,10 +3675,6 @@ VolkovMagneticWeaponTeslaFragment2:
 		Damage: 1000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -3965,13 +3706,9 @@ VolkovMagneticWeaponNuclearShells:
 		FriendlyFireSpread: 50
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -3991,9 +3728,6 @@ VolkovMagneticWeaponNuclearShells:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -4005,7 +3739,7 @@ VolkovMagneticWeaponIncendiary:
 	Inherits@fx: ^Effect_Flame_Medium
 	Inherits: VolkovMagneticWeapon
 	Inherits@2: ^IncendiaryBulletProjectile
-	Warhead@Flame_Medium:
+	Warhead@Flame_Medium: AreaDamage
 		Damage: 10000
 VolkovMagneticWeaponIncendiaryTesla:
 	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
@@ -4030,14 +3764,10 @@ VolkovMagneticWeaponIncendiaryTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -4085,10 +3815,6 @@ VolkovMagneticWeaponIncendiaryTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@MediumFlameWeapon:
-	-Warhead@Railgun_HeavyFlatCompatibility:
-	-Warhead@TeslaExtraDamage:
-	-Warhead@TeslaWeapon:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -4106,12 +3832,8 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -4142,9 +3864,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -4160,12 +3879,8 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -4190,10 +3905,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 		Damage: 1000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
 	Warhead@Railgun_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -4239,13 +3950,9 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 		FriendlyFireSpread: 50
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -4265,9 +3972,6 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
-	-Warhead@MediumFlameWeapon:
-	-Warhead@NuclearWarhead:
-	-Warhead@Railgun_HeavyFlatCompatibility:
 	Warhead@CannonNuke_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 60000
@@ -4298,12 +4002,8 @@ ParaBombNuke:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 100000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 50
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -4323,10 +4023,6 @@ ParaBombNuke:
 		AffectsParent: false
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom22.aud
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@NuclearWarhead:
 	Warhead@Nuclear_SuperFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 400000
@@ -4372,10 +4068,6 @@ Nike:
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Air
 	-TargetActorCenter:
-	-Warhead@FlakWeapon:
-	-Warhead@HeavyMissile:
-	-Warhead@MediumMissile:
-	-Warhead@LightMissile:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Air
 		Damage: 16000
@@ -4414,8 +4106,6 @@ IncendiaryRAGatlingTankCannon:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Medium:
-	-Warhead@Flame_Light:
 	Warhead@Flame_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -4426,7 +4116,6 @@ IncendiaryRAGatlingTankCannon_AA:
 	ValidTargets: Air
 	Warhead@Flame_Light:
 		ValidTargets: Air
-	-Warhead@Flame_Light:
 	Warhead@Flame_LightFlatCompatibility:
 		ValidTargets: Air
 		Damage: 4000
@@ -4462,7 +4151,6 @@ TeslaRAGatlingTankCannonArc:
 TeslaRAGatlingTankCannonArcFragment1:
 	Inherits: TeslaRAGatlingTankCannonArc
 	Range: 2500
-	-Warhead@TeslaArc:
 
 TeslaRAGatlingTankCannon_AA:
 	Inherits: TeslaRAGatlingTankCannon
@@ -4481,7 +4169,6 @@ TeslaRAGatlingTankCannonArc_AA:
 TeslaRAGatlingTankCannonArcFragment1AA:
 	Inherits: TeslaRAGatlingTankCannonArc_AA
 	Range: 3750
-	-Warhead@TeslaArc:
 
 MADTankDetonate:
 	Inherits@wh: ^Warhead_Nuclear_Super
@@ -4553,8 +4240,6 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	-Warhead@Bullet_Light:
-	-Warhead@Flame_Light:
 	Warhead@Flame_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000

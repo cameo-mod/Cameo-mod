@@ -28,6 +28,9 @@ def baseline(name):
     source = subprocess.check_output(['git', 'show', f'{BASE}:{path}'], cwd=ROOT, text=True, encoding='utf-8')
     module = types.ModuleType('_baseline_' + name)
     module.__file__ = str(ROOT / path)
+    # Trusted repository code at the fixed BASE SHA, selected by build's literal
+    # module tuple. This deliberately remains visible to the raw security audit;
+    # never substitute a user-supplied ref or downloaded source here.
     exec(compile(source, module.__file__, 'exec'), module.__dict__)
     return module
 
