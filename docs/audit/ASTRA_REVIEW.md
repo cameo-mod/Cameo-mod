@@ -58,6 +58,11 @@ Validation:
   Generated audit snapshots will be refreshed for the complete follow-up PR.
 - Independent review approved the writer scope after challenging deletion,
   interruption, concurrent-edit and Windows temporary-file cases.
+- A second independent real integration test in a disposable copy applied one
+  Heavy Sniper HP edit (25000 to 26000) with `--confirm`, then checked all 33
+  ledgers with zero drift. Exactly one YAML line changed. Percentage-model
+  sidecars changed consistently with the population HP input. This was not an
+  approved or applied live balance change. Peak process tree 1594.6 MB, PC 51.4%.
 
 Revert: revert the dedicated safe-apply commit; no live YAML needs reverting.
 Limits: exception-safe, not filesystem-wide atomic; no concurrent game reader;
@@ -139,3 +144,69 @@ as the independent approval. No live prices, weapons or AI decisions change.
 Still pending: visual review of signed labels, scrolling and clipping in an actual
 observer match. A menu boot is loading proof, not graph visual approval. Revert
 the dedicated observer-graph commit to remove this feature.
+
+## Completed on this branch: record-only match telemetry and AI contracts
+
+Implemented Aedis H.4 phase one, not adaptive AI. The active Player observer reads
+existing personality conditions; the active World recorder writes one bounded,
+versioned local JSONL file at completed-match notification. Records contain slots,
+factions, bot identifiers, team/alliance metadata, initial/final personality status,
+outcomes and existing accounting totals. No orders, conditions, prices or decision
+logic are changed. Disk failures are non-fatal and do not recurse into disk logging.
+
+The rules fingerprint covers ordered raw Rules/Weapons inputs at world load,
+including map overrides; it is explicitly not a whole-runtime hash. Module MVIDs
+cover Game/Cameo/Common only. Records are capped at 256 KiB, published without
+overwriting old files, and contain no player display names or account identifiers.
+Each client may record a match: consumers must deduplicate and inspect metadata.
+Completed-world coverage excludes shellmaps, replays, editors and loaded saves;
+abandoned matches without GameOver, episode histories and pairwise attribution
+remain unavailable. Unknown values stay unknown rather than becoming zero.
+
+Validation:
+
+- All 76 Cameo C# tests pass, including 13 new telemetry cases covering serialization,
+  limits, failure handling, fingerprints, eligibility and personality ambiguity.
+- Fresh build: zero errors, eight existing engine warnings; bounded tree 967.7 MB,
+  PC 48.6%. Runtime DLL freshness checked before the game tests.
+- A temporary deterministic playable map completed normally: one match record,
+  human Won, medium bot Lost, observed personality, expected 100 value lost, 101
+  ticks at 40 ms, populated source fingerprint; zero new exception logs.
+- The normally completed match's replay exited normally, produced no new record
+  and no exception/desync report. This is a short single-client regression, not
+  multiplayer stress certification. An earlier force-stopped recording produced
+  an incomplete replay and is not counted as a replay pass.
+- Final menu/shellmap boot with telemetry enabled: required menu marker, zero new
+  exceptions and no match records; 41.9 seconds. Maximum PC memory across these
+  runtime checks was 71.6%, below the 84% guard and user's 90% ceiling.
+- Test fixture, two synthetic records, two test replays and benchmark CSVs were
+  moved out of game directories into the owned temporary evidence folder. They
+  remain recoverable; no Jungle archive or real match record was removed.
+- Independent source review challenged the hash scope and disk-error fallback;
+  those limitations and the non-recursive failure path were corrected.
+
+H.2 extends the existing AI_ARCHITECTURE document with ownership, current inputs,
+future read-only hints, cadence, synchronization and failure contracts for the
+measured scoped module inventory. H.3's five differentiated round-two briefs are
+written; external services have not been contacted and answers are still pending.
+Conflicting learning-stage numbering and stale current PR status were clarified.
+This is not completion of all Task H acceptance gates or a merge approval.
+
+Revert the dedicated telemetry/AI-contract commit to remove these additions.
+Next runtime work is the observe-only master after review, not dynamic switching.
+
+## Additional readiness and neighboring-PR review
+
+Coverage now separates structures/upgrades from buildable unit-like ledger rows:
+632 classified out of 886 non-structural buildable rows (71.3%); 55 have no usable
+template, 199 lack a class in the current taxonomy. The all-buildable denominator
+remains visible (1956). These are ledger rows, including variants, not deduplicated
+units. This is a denominator correction, not hundreds of new classifications.
+Unreadable ledgers fail closed. Eleven readiness and 13 class-membership tests pass.
+All 27 anchors are assigned to their stated classes, but none are signed and every
+class still has a raw stacked-main finding; no prices are authorized by coverage.
+
+PR 321 remains open at `e42eb9914972346f77a931385da62d741f22ae35`.
+Its old stat/converter/insurance proposals are not imported. Shared document files
+need reconciliation if both PRs proceed, but no shared runtime implementation file
+conflict was found in this checkpoint. The original PR was not changed or merged.

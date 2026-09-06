@@ -1,5 +1,23 @@
 # Development Log
 
+## Codex - Record-only match telemetry and AI integration (2026-09-07)
+
+Implemented Aedis's first AI delivery phase: bounded local completed-match JSONL,
+existing personality observation, explicit missing values and limited source/code
+fingerprints. No AI decisions, orders, balance numbers or network uploads change.
+76 Cameo C# tests pass; fresh build has zero errors. A deterministic test match
+recorded expected outcomes/accounting; its normal-exit replay wrote no duplicate;
+menu boot wrote no match record. No new exceptions, peak PC memory 71.6%.
+Temporary fixtures and synthetic output moved out of game folders for recovery.
+
+Adapted PR 323's observer graph in its own commit and repaired the unrelated
+upstream Soviet actor IDs that prevented the mandatory shellmap boot. Independent
+review approved the integration; observer graph visual review remains pending.
+Expanded the existing AI module contract, prepared five distinct external research
+briefs (answers not yet received), and clarified record-only versus future phases.
+Readiness coverage now reports its non-structural denominator honestly; no anchors
+were signed or factions repriced. Full evidence: `docs/audit/ASTRA_REVIEW.md`.
+
 ## Codex - Safe balance apply completion (2026-09-07)
 
 Repaired the existing writer rather than adding a parallel pricing framework.
