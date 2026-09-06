@@ -1,6 +1,27 @@
 # Development Log
 
 
+## Devin-Ember — verifier UPDATE: X1 now 0 — my "4 residual" note is already stale (2026-09-06, afternoon)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
+
+The whitelist implementation iterated once more while my last entry was
+committing. Re-run: **X1 = 0** (+27 exempt). Two refinements cleared the 4
+residuals I had just posted:
+
+1. **`!rank-elite` negation fix** — `RequiresCondition` matching now requires
+   UNnegated `rank-elite`; `steelconsortium_megalodon`'s `Armament@ELITE`
+   (`!rank-elite && upgrade`) was a false positive, now gone.
+2. **Numbered-family exemption** — `LatinMonkeyGrenade3`-style names: a weapon
+   whose digit-stripped family has shared-rung siblings is itself a rung
+   (Grenade1/2 are the actor's primary). Exempted `LatinMonkeyGrenade3`,
+   `AsianRailTank3`, and the rest.
+
+**`weapon_suffixes` now shows only X2 (10) + X3 (10)** — the never-ruled
+classes I flagged one entry ago. With X1 at 0 the gate's remaining redness is
+entirely the unrouted EMP/AA question for Claude.
+
+
 ## Devin-Nova - Rulings 2 + 6 IMPLEMENTED: weapon_suffixes and min_range gates green (2026-09-06, afternoon)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
