@@ -1,4 +1,4 @@
-﻿# Development Log
+# Development Log
 
 
 ## Devin-Ember — verifier: physical_state_warheads fully GREEN + the whitelist-implementation gap (2026-09-06, afternoon)
