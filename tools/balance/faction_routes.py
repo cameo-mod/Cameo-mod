@@ -188,6 +188,42 @@ RA2_MOD_ROUTES = {
     # to it alone.
     "asianalliance":   (("RA2 Reborn", ("China", "NorthKorea", "Venezuela", "Yugoslavia")),),
     "latinsyndicate":  (("RA2 Reborn", ("China", "NorthKorea", "Venezuela", "Yugoslavia")),),
+
+    # ── Twisted Insurrection (maintainer supplied it 2026-09-06 as the named fix for `forgotten`)
+    # ⭐ `Forsaken` IS the Forgotten: 13 exclusive units — Reaver, Atlas, Mastodon Tank, Drifter
+    # IFV, Brawler Tank, Mistfire, Wyvern, Trapper Cycle, Fiend, Tauros, Skirmisher, Warrior,
+    # Martyr. `forgotten` had ONE source (Shattered Paradise `mut`) and is the last Cameo faction
+    # with a real lineage to clear the two-source floor.
+    # ⚠ Unlike the RA2 mods this source is genuinely PER-HOUSE, not side-based: GDI 35 exclusive,
+    # Nod 44, GT 40, Phoenix 17, Forsaken 13. Its only shared pairs are GDI+Phoenix (30) and
+    # Nod+Sons (22) — TI's own splinter factions — which the partition below keeps together.
+    # TI's `GT`, `Phoenix` and `Sons` are its own inventions with no Cameo counterpart; left out.
+    "forgotten":       (("Twisted Insurrection", ("Forsaken",)),),
+    "ts_gdi":          (("Twisted Insurrection", ("GDI", "Phoenix")),),
+    "ts_nod":          (("Twisted Insurrection", ("Nod", "Sons")),),
+
+    # ── ⚠ THE THREE LOOSE ROUTES (maintainer ruling 2026-09-06: "use the closest thematic source
+    # and accept the looseness"). These are Cameo INVENTIONS with no counterpart in any INI- or
+    # yaml-extractable RTS, measured rather than assumed:
+    #     japan          WWII Imperial Japan — Chi-Ha, I-Go, O-I, ballista, archer maiden
+    #     naxis          WWII German — Bf109, Me262, Horten, Brummbär, Wirbelwind, Tiger, SS
+    #     schwarzermond  Nazi occult / lunar — Haunebu II+III, Die Glocke, Komet, Lunar Panzer
+    # No source in the corpus has a WWII-German or WWII-Japanese faction at all.
+    #
+    # ⛔ SO THESE ROUTES ARE HONESTLY WEAK AND THE WEAKNESS IS THE POINT OF THIS COMMENT. RA2
+    # Reborn's `Japan` is its ALLIED roster wearing a label — 100% identical to `Americans` — and
+    # RA2 0XX's `Germans` differs from `Americans` by one defence structure. They contribute a
+    # second game's view of a comparable power level, NOT a national identity. Do not read a
+    # faction profile built on them as saying anything about Japanese or German design.
+    # ⏰ REPLACE ON SIGHT: japan/naxis want a WWII RTS; schwarzermond wants Earth 2150 Lunar
+    # Corporation, which is its documented inspiration and is NOT on disk (searched 2026-09-06:
+    # Documents, Downloads, Desktop, both Program Files, C:\Games, D:, E:, the Steam library).
+    "japan":           (("RA2 Reborn", ("Japan",)),),
+    "naxis":           (("RA2 0XX", ("Germans",)),),
+    # schwarzermond takes the combination the maintainer asked for: Mental Omega's Foehn (shared
+    # with steelconsortium, which R3 permits) plus OpenE2140 — the right SERIES, wrong game.
+    "schwarzermond":   (("Mental Omega", ("Guild1", "Guild2", "Guild3")),
+                        ("OpenE2140", ("ucs",))),
 }
 
 def _assert_no_duplicate_keys(*paths):
@@ -319,6 +355,8 @@ EXCLUSIVE_ONLY = {
                   "pool is 158 of 246 units",
     "Red Resurrection": "side-based; the all-countries pool is 140 of 287 units",
     "RA2 0XX": "side-based; `Germans` differs from `Americans` by ONE unit and `Alliance` by zero",
+    "Twisted Insurrection": "per-house, but GDI+Phoenix and Nod+Sons are splinter pairs that "
+                            "share a roster and must not read as two factions",
 }
 
 # {source: every faction token that source routes to ANY Cameo faction} — the rivals an
@@ -376,6 +414,12 @@ EXCLUSIVITY_GROUPS = {
         ("alliance", "americans", "british", "french", "germans"),
         ("africans", "arabs", "confederation", "russians"),
         ("yuricountry",),
+    ),
+    # TI is per-house, so the cells are its own splinter groupings rather than sides.
+    "Twisted Insurrection": (
+        ("gdi", "phoenix"),
+        ("nod", "sons"),
+        ("forsaken",),
     ),
     "Mental Omega": (
         ("europeans", "pacific", "unitedstates"),          # Allied
@@ -471,9 +515,6 @@ UNROUTED = {
     # supplied"; it is, and it has no `gla` country — Iraq is the ruled analogue). Japan takes
     # Mental Omega Pacific Front, which is a closer archetype than the RA3 Empire its note asked
     # for and which no mod in the corpus provides.
-    "schwarzermond": "Earth 2150 Lunar Corporation is the documented inspiration and is not on "
-                     "disk. OpenE2140 is Earth 2140. ⏰ The maintainer raised Foehn Revolt as a "
-                     "possible partial source (2026-09-05) — not yet ruled.",
     "ixian": "House Ix is Emperor-only. ⏰ UNBLOCKS when the maintainer supplies Emperor: Battle "
              "for Dune — see PENDING.",
     "corrino": "House Corrino appears only as a Dune II/D2K campaign side, with no buildable "

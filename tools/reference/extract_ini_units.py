@@ -51,6 +51,10 @@ SOURCES = {
     "DTA Classic":       {"file": "rules_DTA_Classic.ini", "engine": "ts"},
     "DTA Enhanced":      {"file": "rules_DTA_Classic.ini", "engine": "ts",
                           "overlay": "rules_DTA_Enhance_overlay.ini"},
+    # ⭐ Twisted Insurrection is the named fix for Cameo's `forgotten`: it is a Tiberian Sun mod
+    # and it ships a MUTANT faction — its houses are GDI, Nod, GT, **Forsaken**, Phoenix, Sons.
+    # ⚠ It declares them under `[Houses]`, not `[Countries]` like every other source here.
+    "Twisted Insurrection": {"file": "rules_TwistedInsurrection.ini", "engine": "ts"},
 }
 
 # Which list section declares which unit type. `type` matches extract_peer_units' vocabulary.
@@ -173,7 +177,10 @@ def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
             notes.append(f"{label}: applied overlay {spec['overlay']}")
 
     engine = spec["engine"]
-    countries = set(listed(ini, "Countries"))
+    # ⚠ `[Countries]` is the RA2/YR spelling; Tiberian Sun mods use `[Houses]`. Reading only the
+    # first left `countries` empty for a TS source, which silently disabled the filter below
+    # rather than failing — the owners were kept unvalidated. Read both.
+    countries = set(listed(ini, "Countries")) | set(listed(ini, "Houses"))
     rows: list[dict] = []
     for list_sec, utype in TYPE_LISTS.items():
         for actor in listed(ini, list_sec):

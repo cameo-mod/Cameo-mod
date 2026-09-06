@@ -82,6 +82,9 @@ Measured first: those five vanilla copies agree with each other on **96%** of sh
 | Shattered Paradise | overall | hp | 153 | 6,400 | 30,000 | 30,840 | 300,000 |
 | Shattered Paradise | vehicle | hp | 67 | 8,000 | 35,000 | 36,744 | 300,000 |
 | Shattered Paradise | infantry | hp | 32 | 6,400 | 15,000 | 17,867 | 60,000 |
+| Twisted Insurrection | overall | hp | 118 | 20 | 285 | 258 | 1,400 |
+| Twisted Insurrection | vehicle | hp | 53 | 130 | 300 | 324 | 1,400 |
+| Twisted Insurrection | infantry | hp | 32 | 45 | 100 | 116 | 550 |
 | Valiant Shades | overall | hp | 117 | 25,000 | 200,000 | 241,623 | 2,000,000 |
 | Valiant Shades | vehicle | hp | 63 | 100,000 | 210,000 | 322,708 | 2,000,000 |
 | Valiant Shades | infantry | hp | 31 | 25,000 | 125,000 | 100,251 | 200,000 |
@@ -118,12 +121,12 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 |---|--:|--:|--:|--:|
 | hp | 216 | 1.26× | 1.28× | 72% |
 | speed | 191 | 0.95× | 0.95× | 97% |
-| turn_speed | 99 | 0.98× | 0.85× | 85% |
-| turn_ratio | 99 | 0.78× | 0.90× | 87% |
+| turn_speed | 100 | 0.97× | 0.84× | 83% |
+| turn_ratio | 100 | 0.78× | 0.91× | 87% |
 
 ⭐ **The turn law reproduces itself out of the reference data.** `turn_ratio` is `speed / turn_speed` — the divisor in Cameo's own law (turreted ground `Speed/5`, turretless `2×Speed/5`, helicopters and spaceships `Speed/5`, planes `Speed/15`). The reference consensus lands the Apocalypse at **5 → 5** and the Nod Buggy at **5 → 5**, and the whole HIGH-confidence population at a median of ~1.0×. Cameo legislated that divisor; thirteen independent rosters agree with it. That is a law confirmed from outside, not an artifact of the measurement.
 
-## Reference targets — 374 Cameo actors with a signature
+## Reference targets — 379 Cameo actors with a signature
 
 `now` is the live ledger value; `target` is the reference consensus re-projected onto Cameo's distributions. Confidence is the number of independent sources that matched: HIGH ≥3, MEDIUM 2, LOW 1. A LOW row is one mod's opinion, not the genre's.
 
@@ -143,6 +146,7 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `yuri_magnetron` | vehicle | w_damage | 3,000 | 646,956 | 215.65× | 4 | HIGH |
 | `futuretech_athenacannon` | vehicle | dps_vs_INF | 48,770 | 303 | 0.01× | 1 | LOW |
 | `steelconsortium_megalodon` | vehicle | dps_vs_INF | 1,347 | 9 | 0.01× | 1 | LOW |
+| `steelconsortium_manta` | vehicle | w_dps | 400 | 49,459 | 123.65× | 1 | LOW |
 | `ts_nod_missilesilo` | defense | w_reload | 50 | 5,999 | 119.98× | 1 | LOW |
 | `yuri_magnetron` | vehicle | dps_vs_VEH | 277 | 31,690 | 114.53× | 3 | HIGH |
 | `futuretech_athenacannon` | vehicle | dps_vs_BLD | 47,963 | 455 | 0.01× | 1 | LOW |
@@ -182,10 +186,10 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `ra2_allies_nighthawk` | aircraft | dps_vs_BLD | 1,089 | 59 | 0.05× | 3 | HIGH |
 | `zerg_scourge` | aircraft | dps_vs_BLD | 3,400 | 190 | 0.06× | 2 | MEDIUM |
 | `forgotten_ruiner` | vehicle | dps_vs_INF | 466 | 26 | 0.06× | 2 | MEDIUM |
+| `steelconsortium_manta` | vehicle | w_reload | 20 | 1 | 0.06× | 1 | LOW |
 | `steelconsortium_megalodon` | vehicle | w_damage | 60,630 | 3,662 | 0.06× | 1 | LOW |
 | `terran_goliathmk2` | vehicle | w_damage | 8,002 | 128,563 | 16.07× | 1 | LOW |
 | `atreides_ornithopter` | aircraft | dps_vs_INF | 1,458 | 23,115 | 15.85× | 1 | LOW |
-| `terran_sentinel` | defense | w_reload | 20 | 1 | 0.07× | 1 | LOW |
 | `ts_nod_missilesilo` | defense | w_range | 10,238,976 | 666,142 | 0.07× | 1 | LOW |
 | `ra1_soviets_grad` | vehicle | dps_vs_INF | 595 | 40 | 0.07× | 1 | LOW |
 | `ra2_allies_nighthawk` | aircraft | w_reload | 3 | 44 | 14.57× | 3 | HIGH |
@@ -193,10 +197,9 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `ra1_soviets_v2rocketlauncher` | vehicle | dps_vs_VEH | 950 | 70 | 0.07× | 2 | MEDIUM |
 | `ra2_soviets_siegechopper` | aircraft | w_reload | 3 | 41 | 13.57× | 3 | HIGH |
 | `yuri_gatlingtrooper` | infantry | dps_vs_BLD | 871 | 65 | 0.07× | 1 | LOW |
-| `forgotten_warriortank` | vehicle | w_reload | 55 | 4 | 0.07× | 1 | LOW |
 | `terran_goliathmk2` | vehicle | w_burst | 4 | 0 | 0.07× | 1 | LOW |
-| `tkm_medictruck` | vehicle | w_reload | 5 | 66 | 13.30× | 8 | HIGH |
 | `yuri_gatlingtrooper` | infantry | dps_vs_INF | 1,600 | 121 | 0.08× | 1 | LOW |
+| `tkm_medictruck` | vehicle | w_reload | 5 | 66 | 13.26× | 9 | HIGH |
 | `ixian_storminfantry` | infantry | w_burst | 1 | 13 | 13.20× | 1 | LOW |
 | `ixian_stormraider` | vehicle | w_burst | 1 | 13 | 13.20× | 1 | LOW |
 | `protoss_archon` | vehicle | dps_vs_VEH | 2,995 | 228 | 0.08× | 1 | LOW |
@@ -231,6 +234,7 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `ra1_allies_cruiser` | ship | dps_vs_BLD | 1,035 | 99 | 0.10× | 2 | MEDIUM |
 | `ts_gdi_cruiser` | ship | dps_vs_BLD | 1,035 | 99 | 0.10× | 2 | MEDIUM |
 | `ts_nod_cruiser` | ship | dps_vs_BLD | 1,035 | 99 | 0.10× | 2 | MEDIUM |
+| `forgotten_warriortank` | vehicle | w_damage | 40,000 | 3,835 | 0.10× | 1 | LOW |
 | `zerg_scourge` | aircraft | dps_vs_VEH | 4,504 | 433 | 0.10× | 2 | MEDIUM |
 | `ra2_allies_sniper` | infantry | dps_vs_VEH | 418 | 40 | 0.10× | 6 | HIGH |
 | `tkm_sniper` | infantry | dps_vs_VEH | 411 | 40 | 0.10× | 6 | HIGH |
@@ -248,7 +252,6 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 | `futuretech_phalanxwip` | vehicle | w_burst | 8 | 1 | 0.11× | 1 | LOW |
 | `corrino_buggy` | vehicle | dps_vs_INF | 92 | 809 | 8.84× | 1 | LOW |
 | `ra1_allies_gunboat` | ship | dps_vs_INF | 915 | 105 | 0.12× | 3 | HIGH |
-| `td_nod_venom` | aircraft | dps_vs_INF | 197 | 1,681 | 8.53× | 1 | LOW |
 
 ## Not in this layer, by scoping
 
