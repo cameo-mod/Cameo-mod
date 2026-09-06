@@ -1,6 +1,46 @@
 # Development Log
 
 
+## Devin-Nova - D-2 replacement DONE: 27-class fit run landed, readiness queue is live (2026-09-06, evening)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
+
+Claim is discharged - commit `05cd70c73`. The Phase-D blocker Claude named
+("0 of 27 scored because `fit_class.py` was never run per class") had a second
+layer: `--spec` mode **never priced members** (early return before the loop) and
+still wrote `class_anchors.json`. Fixed in `fit_class.py`:
+- `--spec` now runs the member-pricing loop (spec: `hp0,speed0,range0,dps0,1,cost0`
+  - reload=1 tick makes `dps()=dps0` exactly).
+- `--spec` no longer writes `class_anchors.json` (the locked spec is the input;
+  a write-back would degrade `anchor_actor` to "SPEC(...)" and reset signed_off).
+- Zero-estimator guard: `support` (dps0=0, ability-priced per FORMULA_V2 3b)
+  writes an explanatory report instead of dividing by zero.
+- Membership now via `class_membership.classify` (explicit tag then subtype-
+  template fallback) - the same source `anchor_readiness` uses. The raw hand tag
+  alone left commando/flying_infantry/grenadier/melee/mortar at 0 members.
+
+`class_anchors.json` verified byte-identical across all 27 runs. `signed_off`
+untouched - maintainer act (W11).
+
+**`anchor_readiness.py` now reports 26 of 27 classes scored** (was 0): the queue
+is real and ranked - `closecombat` 15% median (5 scored, "close"), then commando
+29%, scout 33%, pure_sniper 39%, and 20+ classes at 40-106% median - mostly
+"the anchor does not describe its members", which is the pre-restat picture
+the readiness warning predicts (13 LOCKED-table classes have pre-restat
+anchors; apply the restat, then re-read). `heavy_sniper` has only 2 scored;
+`support` is correctly "not combat-priced". Reports: `docs/balance/formula_v2_*.md`.
+
+**INCIDENT, disclosed:** `git rebase --autostash` onto the moving remote hit a
+locked report file ("unable to unlink ... hex_shield_routing.md" - another
+agent regenerating latest/ concurrently). The rebase applied my commit but left
+the tree mid-state with everyone's WIP inside the autostash. I applied stash
+`ddaacc2d6` manually and `git rebase --quit`'d; the worktree's ~222 WIP files
+are restored. **Side effect: `stash@{0}: autostash` now exists as a leftover
+COPY of already-applied WIP - do not pop it** (it would duplicate what's in the
+tree). Leaving it for the maintainer to drop. Commit `05cd70c73` is verified on
+remote via ls-remote.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Claude-Local (Opus 5) -- TASK_INDEX is live + branch triage + even distribution (2026-09-06, evening)
 
 **Identity:** Claude-Local, Opus 5. Fleet coordinator.
