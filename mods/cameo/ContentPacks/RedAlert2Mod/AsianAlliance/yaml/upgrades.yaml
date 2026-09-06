@@ -2,7 +2,7 @@
 #		Upgrades Asian Alliance
 ####################################################################################################
 
-cgcnst_infiltrated.asian:
+asianalliance_cgcnst_infiltrated:
 	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Asian Buildings Plans
@@ -66,7 +66,7 @@ asianalliance_upgrade_clusterbombs:
 		Description: Allows the use of the Cluster Bombs support power from the Asian Alliance Airfield.
 		Prerequisites: ~asianalliance_asianradar, !asianalliance_upgrade_clusterbombs
 	RenderSprites:
-		Image: tankmine.asian
+		Image: asianalliance_tankmine
 	ProvidesPrerequisite:
 
 asianalliance_upgrade_chaosbombs:
@@ -79,18 +79,18 @@ asianalliance_upgrade_chaosbombs:
 		Description: Allows the use of the Chaos Bombs support power from the Asian Alliance Airfield.
 		Prerequisites: ~asianalliance_asianradar, asianalliance_militaryacademy, asianalliance_upgrade_clusterbombs, !asianalliance_upgrade_chaosbombs
 	RenderSprites:
-		Image: tankmine.asian
+		Image: asianalliance_tankmine
 	ProvidesPrerequisite:
 
-up_tsunami.asian:
+asianalliance_upgrade_tsunami:
 	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Tsunami Carrier Upgrade
 	Buildable:
 		Description: Upgrades Kamikaze Carrier to Tsunami Carrier.
-		Prerequisites: ~asianalliance_militaryacademy, ~cgyard.asian, !up_tsunami.asian
+		Prerequisites: ~asianalliance_militaryacademy, ~asianalliance_cgyard, !asianalliance_upgrade_tsunami
 	RenderSprites:
-		Image: tsun.asian
+		Image: asianalliance_tsun
 	ProvidesPrerequisite:
 
 asianalliance_upgrade_dragonfire:
@@ -136,9 +136,9 @@ asianalliance_upgrade_wayofthedragon:
 	RenderSprites:
 		Image: asianalliance_upgrade_wayofthedragon
 	ProvidesTeamProxyActor:
-		Actor: up_dragonway_proxy_actor.asian
+		Actor: asianalliance_upgrade_wayofthedragon_proxy_actor
 
-up_dragonway_proxy_actor.asian:
+asianalliance_upgrade_wayofthedragon_proxy_actor:
 	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Way of the Dragon
@@ -160,9 +160,9 @@ asianalliance_upgrade_asiandiplomacy:
 	RenderSprites:
 		Image: asianalliance_upgrade_asiandiplomacy
 	ProvidesTeamProxyActor:
-		Actor: up_team_diplomacy_proxy_actor.asian
+		Actor: asianalliance_upgrade_asiandiplomacy_proxy_actor
 
-up_team_diplomacy_proxy_actor.asian:
+asianalliance_upgrade_asiandiplomacy_proxy_actor:
 	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Asian Diplomacy

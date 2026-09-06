@@ -29,7 +29,7 @@ asianalliance_asianconstructionyard:
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: cgcnst_infiltrated.asian
+		Proxy: asianalliance_cgcnst_infiltrated
 		Types: TechStealerInfiltrate
 
 asianalliance_asianpetrolplant:
@@ -344,7 +344,7 @@ asianalliance_asianairforcecommand:
 		Prerequisites:
 			1: asianalliance_upgrade_clusterbombs
 			2: asianalliance_upgrade_chaosbombs
-		IconImage: tankmine.asian
+		IconImage: asianalliance_tankmine
 		Icons:
 			1: icon
 			2: icon2
@@ -359,8 +359,8 @@ asianalliance_asianairforcecommand:
 		CameraActor: camera
 		CameraRemoveDelay: 150
 		UnitTypes:
-			1: bomber_minebomb.asian
-			2: bomber_minebomb2.asian
+			1: asianalliance_bomber_minebomb
+			2: asianalliance_bomber_minebomb2
 		QuantizedFacings: 16
 		DisplayBeacon: true
 		BeaconPosters:
@@ -577,7 +577,7 @@ asianalliance_asiansentryflamer:
 	ActorStatValues:
 		Upgrades: asianalliance_upgrade_dragonfire
 
-cgpnch.asian:
+asianalliance_cgpnch:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -587,7 +587,7 @@ cgpnch.asian:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgyard.asian
+		Prerequisites: ~asianalliance_cgyard
 		Description: actor_cgpnch.description
 	Valued:
 		Cost: 1200
@@ -1122,7 +1122,7 @@ asianalliance_chaosstorminductor:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: asianalliance_chaosstorminductor_swlimit
 
-cgyard.asian:
+asianalliance_cgyard:
 	Inherits: ^RA2Building
 	Inherits@shipyard: ^IsShipyard
 	Inherits@shape: ^3x3Shape
