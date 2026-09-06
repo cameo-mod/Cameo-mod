@@ -10551,3 +10551,17 @@ rename re-breaks maps. Full accounting + open rulings for Claude:
 `../Cameo-mod-fleet/nova_2026-09-06_for_claude.md`.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
+
+## Devin-Nova — naxis/schwarzermond rename rescued + corrected (2026-09-06, ~19:05)
+
+Commit `37dfd903a`. The parallel Nova's `.nax`/`.nax2` migration was stranded in
+stash `d5f82889b` — only the map reached the branch. Re-ran `safe_rename.py` fresh:
+185 replacements / 21 files. Map corrected per Ember's ruling first: `up_*` ids take
+`naxis_upgrade_*` (`up_resurrection.nax` -> `naxis_upgrade_resurrection`;
+proxy `up_team_blitzkrieg.nax` -> `naxis_upgrade_blitzkrieg_proxy_actor`).
+`.nax2` -> `schwarzermond_*` per InternalName. Balance sweep: `class_anchors.json`
+mbt anchor + naxis/schwarzermond ledgers re-extracted. Gates: empty-warhead 0, no new
+orphans, boot-gate PASS. Test-suite failures seen were pre-existing audit-tool rot,
+since repaired (`277e1a03e`/`8263e7773`/`8c54e17f4`).
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
