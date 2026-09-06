@@ -24,13 +24,50 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 | agent | lane |
 |---|---|
 | **Blackrobe GPT-6 Astra** | ⭐ **FINISH THE BALANCE PIPELINE** (Tasks A–G) **and inherit the AI bot modules** (Task H — Devin Cloud ran out of quota mid-merge). Full brief: [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md). Branch `astra/balance-pipeline`, never master. Has **full authority including `apply_balance --confirm`**, conditional on one commit per decision and a review dossier at `audit/ASTRA_REVIEW.md`. |
-| **Devin fleet** (Aurora, Nova, Ember, Blaze, Dawn, Echo) | the **144 dotted-suffix actor renames** (`frank.nax` → `naxis_frank`), one faction each; then weapon-shape conversion batches |
+| **Devin fleet** (Aurora, Nova, Ember, Blaze, Dawn, Echo) | **naming damage repair**, one faction-set each — see the section below and the full brief at `../Cameo-mod-fleet/BRIEF_2026-09-06_naming_damage.md`; then weapon-shape conversion batches |
 | **Claude-Local (Opus 5)** | rulings, review, squash-merges to master, and the gates |
 
 ⚠ **Nobody merges to master except Claude-Local.** Agents commit freely on their own branch
 and report a completed work item; Claude reviews and squash-merges one meaningful commit. The
 maintainer must be able to read master — 107 commits in one day, 49 of them touching only
 `DEVELOPMENT_LOG.md`, is not reviewable.
+
+### ⭐ Naming — the real state, measured 2026-09-06 (replaces every earlier count)
+
+`python tools/audit/audit_naming_damage.py` is the source of truth and is now in
+`run_all.sh`. Six pathologies, six **lower-only** ratchets, all currently PASS:
+
+| code | pathology | count | lane |
+|---|---|---|---|
+| N1 | a filename carries one actor id **twice** | 25 | Nova 19, Aurora 4, Dawn 2 |
+| N2 | a filename carries **two factions'** ids | 16 | Aurora — all 16 are RA1-Allies sprites wearing Soviet names |
+| N3 | a **fluent key** became an actor id | 5 | Nova |
+| N4 | the faction named **twice** (`ra1_allies_alliedaagun`) | 345 | split per faction |
+| N5 | dotted id that is not a sanctioned `.husk` | 161 | split per faction |
+| N6 | a hyphen (rule 9) | 1 | Echo |
+
+**Three earlier numbers were wrong and are retired:**
+
+* the **526-actor backlog** was a doubled game prefix in one config table — seven of eight
+  factions jumped **0% → 100%** when it was fixed;
+* the **144 dotted renames** undercounted; the real figure is **161**, and separately
+  **234 `.husk` ids are LEGAL** (`DESIGN.md` line 71 sanctions dotted `.husk` variants), so
+  the raw 398 must never be quoted as backlog;
+* **`.nax` / `.nax2` are DONE** — 0 remain. Nova landed them.
+
+Actor-id work left in `gen_rename_maps` is **15 actors total**: `atreides` 21/23,
+`corrino` 22/25, `harkonnen` 27/35, `ixian` 60/65. Every other faction reads 100%.
+
+⚠ **A 100% row there is not proof a faction is clean.** That report sees only
+faction-exclusive **buildable** actors, and `startswith(prefix)` is satisfied by
+`ra1_soviets_sovietairfield` too. `asianalliance` reads 73/73 while holding 27 dotted and
+73 redundant-word ids. Use `audit_naming_damage.py` for the real number.
+
+⛔ **`gen_rename_maps.py --files` is opt-in and `--out` is mandatory practice.** Six defects
+were found in its file half on 2026-09-06 (commit `c9437f4f8`); a regenerate proposed **842
+file renames, 92 corrupt**, now **44, none corrupt**. Without `--out` a run **overwrites every
+`tools/rename/rename_map_*.yaml`**, including hand-corrected ones. See `LESSONS_LEARNED.md`
+"Fix the TOOL, not its output".
 
 ### AI bot modules — state as of 2026-09-06
 

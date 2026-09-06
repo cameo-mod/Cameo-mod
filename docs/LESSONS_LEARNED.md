@@ -45,6 +45,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
 - [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
+- [⛔ Fix the TOOL, not its output — six defects hid behind one patched map (2026-09-06)](#-fix-the-tool-not-its-output--six-defects-hid-behind-one-patched-map-2026-09-06)
 - [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
 - [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
@@ -1416,3 +1417,53 @@ Corollary for this tree specifically: `mods/cameo/weapons/weapons.yaml` is
 generated, so direct Versus edits in it silently revert on the next splice and
 re-flag `gen_sync` in the meantime. Route every generated-row change through
 `gen_weapon_template.py` or a maintainer ruling that changes the law.
+
+## ⛔ Fix the TOOL, not its output — six defects hid behind one patched map (2026-09-06)
+
+The doubled-game-prefix bug in `gen_rename_maps.py` (`("ra1", "ra1_soviets")` wanting
+`ra1_ra1_soviets_`, which nothing can match) was found and fixed on 2026-09-06. The
+faction that had already been renamed with the broken proposal was repaired by
+**hand-editing 59 entries in `tools/rename/rename_map_ra1_soviets.yaml`** and
+re-applying. The commit message says so plainly: *"Fixed 59 file rename entries with
+doubled compound filenames (corrected to simple prefix replacement)."*
+
+**The generator was never given that same correction.** A regenerate the same day
+proposed **842 file renames, 92 of them corrupt** — the identical shape, waiting for
+the next faction. Five further defects of the same family were sitting in the file
+half, none of them reachable by fixing a map:
+
+| defect | what it minted |
+|---|---|
+| PREPEND instead of REPLACE | `ra1_soviets_btr80_ra1_soviets_btr80_new_btr.shp` |
+| shared assets exempt only above **3** users | 16 RA1-Allies sprites wearing `ra1_soviets_*` names |
+| fluent-key guard tested `actor-` but keys also use `actor_` | actor id `ra1_soviets_actordogname` from `actor_dog.name` |
+| `owner_of()` returns a pack path, `FACTION_SLUG` is keyed by `.internal` | would rename every compliant id to `redalert_soviets_*` |
+| dedupe stripped the slug but never the English adjective | `ra1_soviets_sovietairfield`, `japan_japanesebarracks` (345 live) |
+| package-qualified refs treated as filenames | `cabal_cyborgfactory_cabal_icons\|…png`, unloadable |
+
+**The rule: when a generated artifact is wrong, the artifact is a SYMPTOM.** Patching
+it clears today's damage and guarantees tomorrow's. Fix the generator, regenerate, and
+diff the regenerated output against the hand-patched one — if they differ, the tool is
+still wrong.
+
+### The second half: a bad id does not stay local
+
+`ra1_soviets_actordogname` was not confined to the sprite folder. It reached
+`ai/ai.yaml` `GuerrillaTypes` (5 lines), an `InitialUnits:` list in
+`RedAlert/Soviets/yaml/aircraft.yaml`, and a `Targetable@` suffix inside
+**`ContentPacks/D2k/Ordos/yaml/infantry.yaml`** — a faction with no relationship to
+RA1. Renames propagate through text replacement into places the renamer never looked.
+
+### And a check that could not see the damage
+
+`gen_rename_maps.py` reports per-faction compliance over **faction-exclusive
+BUILDABLE actors only**. Husks, upgrade markers, proxy actors and variants are
+invisible to it, and `startswith(prefix)` is satisfied by `ra1_soviets_sovietairfield`
+just as well as by `ra1_soviets_airfield`. `asianalliance` read **73/73, 100%** while
+holding 27 dotted ids and 73 redundant-word ids. **A compliance percentage measures
+the predicate, not the goal.** `tools/audit/audit_naming_damage.py` now reads the
+RESULT instead — six pathologies, six lower-only ratchets, whoever produced them.
+
+Related: `docs/LESSONS_LEARNED.md` "A hand-edit to generated output has a countdown on
+it", and the exactly-0.0% tell in `tools/audit/gen_rename_maps.py`'s FACTION_SLUG
+comment.
