@@ -1,6 +1,46 @@
 # Development Log
 
 
+## Devin-Ember — D-3 slice claimed + the ruling package: why my 13 broadcast weapons are NOT mechanical (2026-09-06, evening)
+
+**Identity:** Devin-Ember (SWE-1.7 Max). Claiming my slice of D-3 per Nova's
+ownership map (RedAlert/Allies, RedAlert2/Shared, RA2Mod/AsianAlliance) — and
+immediately reporting that this slice needs YOUR rulings, per your own law:
+"if a task turns on a PREMISE that could be wrong, bring me the measurement and
+let me rule." Every weapon below has competing resolved families; a name-only
+choice could be wrong. Value precedent (`8748c68e4` HydraSpit): the surviving
+single main keeps its per-warhead Damage verbatim; the broadcast total was the
+doubled debt.
+
+**RedAlert/Allies (4):**
+
+| weapon | resolved mains (Damage each) | plan grade | the premise |
+|---|---|---|---|
+| `AlliedTankDestroyerCannon` | CannonHE_Medium 12000 + CannonAP_Light 12000 | NAME -> CannonHE | a tank DESTROYER reads AP, not HE — tool picked HE on the word "cannon". Rule? |
+| `AphidCryo_AA` | CryoBlast_Medium 8000 + MissileCryo_Heavy 8000 | NAME -> Cryo | both mains are already cryo-subfamilies; which survives — blast (short) or missile (launch)? |
+| `HellfireCryo` | same pair @8000 | NAME -> Cryo | same choice |
+| `Aphid_AA` | Concussion_Medium 16000 + MissileHE_Heavy 16000 | **NONE** | aphid = helicopter rocket pod, reads MissileHE; but no name-word decides. Your call. |
+
+**RedAlert2/Shared (6): NOT collapses — legacy full-stack.** `RA2SCUD`,
+`RA2SCUDELITE`, `RA2SCUD_fire`, `RA2SCUD_tesla`, `V3Explode`, `DredMissile`
+inherit legacy stacks (`^MediumFlameWeapon` + `^RA2Grenade` + `^RA2HeavyMissile`
++ compat) that RESOLVE to equal-damage mains. These need the §1b
+resolve-and-inline + W23 conversion + then a family choice (plan table says
+`SCUD` -> MissileHE), i.e. a full conversion batch, not a fingerprint fix.
+
+**RA2Mod/AsianAlliance (3):**
+
+| weapon | structure | the premise |
+|---|---|---|
+| `AsianPhoenixRocket` (+_elite) | Flame_Medium 30000 + Demolition_Light 30000 mains (plan: NAME->MissileHE from "rocket", but the converted stack carries no Missile family at all) | phoenix = incendiary missile; Flame or Demolition, not MissileHE? |
+| `AsianChaosMine` | single Chemical_Heavy main BUT inherits TWO concrete weapon parents (`AsianChaosTurret`, `AsianTankMine`) — resolved broadcast comes from double weapon inheritance | collapse = choose a parent stack, then W24 it |
+
+**Requested: a blanket rule I can execute under volume delegation** — e.g.
+"delivery projectile decides the family" (missile-shaped -> MissileCryo) or
+"name-word wins even over stack". With that one rule, all 13 execute
+mechanically; without it, each row is a coin flip I should not spend.
+
+
 ## Devin-Aurora -- D-3 W24 D2k candidates measured + ruling request (2026-09-06, evening)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
