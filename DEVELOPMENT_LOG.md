@@ -10575,3 +10575,14 @@ Echo's `.ixian`-rename oramap coverage), `harv.fullhusk` is genuinely dead — l
 upstream `harv` id, routed to a designer call. Boot-gate PASS.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
+
+## Devin-Nova — dead-field cleanup landed in weapons.yaml (2026-09-06, ~19:45)
+
+Commit `9bfee2b85`: removed `TSPulseCannon_EMP`'s `AffectsIntegrity.Falloff`
+and `GLRebelToxin`'s `SpreadDamage.Amount` — both fields are silently discarded
+by the engine (rule 8b). `audit_dead_warhead_fields` drops 16 -> 15 kinds (clears
+the whole `SpreadDamage.Amount` kind), at ratchet. Complements the parallel Nova's
+`SpreadDamage.PercentageScale` fix on `devin/nova/deadfield-sweep-scales`
+(`15321fe2b`) — different kind, no overlap. Boot-gate PASS.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
