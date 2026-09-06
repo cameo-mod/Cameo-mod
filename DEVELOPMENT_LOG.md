@@ -48,7 +48,6 @@ d2k.yaml, the file shrinks from 152 to ~28 weapons (effects + non-D2k). This is 
 step toward dynamic faction loading.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-# Development Log
 
 
 ## Devin-Aurora -- Ruling 7 + Ruling 3 EXECUTED (2026-09-06, afternoon)
