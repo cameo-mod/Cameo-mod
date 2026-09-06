@@ -413,7 +413,12 @@ A subsequent full long fixture completed normally after 21 simulated minutes:
 record was written, no new exceptions, 1,300.7 seconds wall time, 63.1% PC peak.
 It generated a complete 411,828-byte replay for the final scrolling inspection.
 The rebuilt replay shows the shortened selector label fully within its button and
-the long match's -2,000 segment correctly below zero at 1024x768.
+the long match's -2,000 segment correctly below zero at 1024x768. After replay
+completion, Computer Use verified the default 40-sample viewport: the left arrow
+changed the visible minute range from 1–21 to 0–20, and the right arrow restored
+1–21. The +2,000 plateau remained readable. This covers those arrow controls,
+signed plotting and label fit at 1024x768, not thumb dragging, every resolution
+or multiplayer stress. The replay added no match record and no new exception.
 
 The final provenance-comment correction does not change graph logic. Following
 the build skill, both pin preflights passed before a fresh build: zero errors,
@@ -427,3 +432,13 @@ writer's 35 focused tests and all 76 C# tests rerun. Reports are not CI approval
 The recent-changes report retains 32 review-only attribution findings, including
 truthful Codex trailers under Blackrobe's author identity; zero R3 findings block.
 No attribution was changed to pretend another agent authored this work.
+
+The final post-build menu gate passed in 41.2 seconds with zero new exceptions
+and no new match records (64.6% PC peak). Owned test processes were closed.
+Thirty graph-test artifacts were moved out of game folders, recoverably: two
+maps, six replays (including interrupted attempts), two synthetic match records
+and 20 benchmark CSVs. They are in
+`%TEMP%/astra_graph_evidence_2b672d603a8e4de29bf5154b37caec45`.
+Earlier telemetry smoke evidence remains in its separate owned temporary folder.
+No real match record, user map or dirty-main edit was removed. Highest sampled
+PC memory across the run remained 71.6%, below the 84% guard and 90% user ceiling.

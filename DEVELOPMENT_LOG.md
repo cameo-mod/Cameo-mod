@@ -1,5 +1,15 @@
 # Development Log
 
+## Codex - Complete runtime graph validation (2026-09-07)
+
+A 21-minute scripted match completed normally with all 80 kills, exact reciprocal
+value accounting and no new exceptions. Its replay verified positive/negative
+trade, flat history, the shortened selector label and both scroll arrows at
+1024x768 (1–21 minutes to 0–20 and back). Replay recording exclusion also held.
+The final rebuild and all 76 C# tests pass. Raw Python/audit failures remain in
+the published evidence; no prices or anchor sign-offs were forced. Detailed
+runtime scope and cleanup evidence are in ASTRA_REVIEW.md.
+
 ## Codex - Reconcile conflicting weapon-conversion directions (2026-09-07)
 
 Removed the stale exemption/snapshot routing from TASK_INDEX and aligned DESIGN's
