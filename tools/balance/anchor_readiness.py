@@ -693,9 +693,9 @@ def main():
             print("| class | members with stacked mains | of tagged | largest stack |")
             print("|---|--:|--:|---|")
             for cls in sorted(debt, key=lambda c: -len(debt[c])):
-                rows = sorted(debt[cls], key=lambda r: -r[2])
-                a, w, n = rows[0]
-                print(f"| `{cls}` | {len(rows)} | {counted[cls]} | "
+                stack_rows = sorted(debt[cls], key=lambda r: -r[2])
+                a, w, n = stack_rows[0]
+                print(f"| `{cls}` | {len(stack_rows)} | {counted[cls]} | "
                       f"`{a}` via `{w}` ({n} mains) |")
         clean = sorted(c for c in counted if not debt.get(c))
         print(f"\n**{len(clean)} class(es) have no observed stacked-main finding"
@@ -725,8 +725,10 @@ def main():
                 continue
             note = ", ".join(off) if off else ("not in a ledger" if not seen else "on spec")
             rs = f"{ratio:.2f}x" if ratio is not None else "-"
-            print(f"| `{cls}` | `{actor}` | {fitted:g} | "
-                  f"{want:g} | {rs} | {note} |".replace("None", "-"))
+            fitted_text = f"{fitted:g}" if fitted is not None else "unavailable"
+            wanted_text = f"{want:g}" if want is not None else "unavailable"
+            print(f"| `{cls}` | `{actor}` | {fitted_text} | "
+                  f"{wanted_text} | {rs} | {note} |")
 
     print("\n## Anchors that are statistically indistinguishable\n")
     print("Separated by what they SHOOT AT, not by their stats. No stat-based "

@@ -210,3 +210,44 @@ PR 321 remains open at `e42eb9914972346f77a931385da62d741f22ae35`.
 Its old stat/converter/insurance proposals are not imported. Shared document files
 need reconciliation if both PRs proceed, but no shared runtime implementation file
 conflict was found in this checkpoint. The original PR was not changed or merged.
+
+## Completed: exact active D2K engineer classification
+
+Task B review identified three unequivocal missed roles: `atreides_engineer`,
+`corrino_engineer` and `harkonnen_engineer` inherit `^EngineerInfantryTemplate` from
+the active D2K shared pack. The extractor's defaults-only registry missed that
+template. Formula V2 section 6b explicitly assigns engineers to support.
+
+The existing extractor now recognizes this exact template when active; arbitrary
+pack template names are not inferred as roles. The shared class map maps
+EngineerInfantry to support. Three inheritance regressions pass (live actors,
+inherited role with no cache mutation, missing/unrelated template rejection).
+Independent review also ran nine resolved-firepower and 14 assignment regressions.
+Full extraction comparison across 67 artifacts changes exactly three subtype
+strings in the D2K raw ledgers, no numeric value or derived artifact.
+
+Before/after: support members 112 to 115; other classes unchanged. Buildable
+classified rows 632 to 635, out of 886 non-structural rows (71.3% to 71.7%);
+no-template buildable rows 55 to 52. This is a small real classification repair,
+not completion of Task B's wider coverage objective. Air/naval/economy taxonomy
+gaps and subjective roles are deliberately not guessed. Revert the dedicated
+engineer-classification commit and its three ledger strings to undo it.
+
+The final live readiness invocation also exposed two CLI-only defects missed by
+the earlier helper tests: formatting missing cost baselines raised TypeError, and
+the stacked-main table reused `rows`, replacing the JSON fit rows with the last
+class's weapon list. Both are repaired with command-level JSON regression coverage.
+The previous statement that the CLI completed was too broad: helper/data results
+were valid, but the final missing-baseline table failed. The corrected full command
+is rerun as part of final validation; unavailable baselines stay explicit.
+
+## Brief reconciliation: physical-state pricing is already implemented
+
+Task E's claim that status-effect delivery is priced at zero is stale in this base.
+`physical_state_price.py`, `formula.physical_state_price_multiplier`, extraction's
+derived physical-state fields, and `fit_class.price_unit` already implement the
+documented bounded delivery multiplier. The existing 22 physical-state tests pass.
+No duplicate weight path or second coefficient was introduced. Model limitations,
+including relaxation and changing weapon structure, remain limitations rather than
+grounds to apply unsupported prices. Current measured reports take precedence over
+the brief's historical binding counts.

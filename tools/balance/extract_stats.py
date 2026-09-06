@@ -191,14 +191,19 @@ def _parent_inherits(rs, name: str):
 
 
 def actor_subtype(rs, local, section: str) -> str:
-    """Derive the unit subtype from the defaults.yaml role template chain.
+    """Derive the subtype from recognized active role templates.
 
     Walks the actor's inheritance chain and returns the nearest
-    ^<Name>Template it inherits from defaults.yaml.  Units that do not
+    role template from defaults.yaml or the explicit active D2K engineer role. Units that do not
     inherit a role template get a generic section label rather than
     "Unclassified".
     """
-    roles = defaults_role_templates()
+    roles = dict(defaults_role_templates())
+    # This role lives in the active D2K pack, not defaults.yaml. Engineers are
+    # explicitly support units (FORMULA_V2 §6b); do not infer arbitrary pack
+    # *Template names, which can describe behavior rather than a unit role.
+    if rs.actor("^EngineerInfantryTemplate") is not None:
+        roles["^EngineerInfantryTemplate"] = "EngineerInfantry"
     # Start from the actor's own Inherits and walk upward breadth-first so
     # the nearest (most specific) role template wins.
     queue = list(_parent_inherits(rs, local.key)) if local is not None else []

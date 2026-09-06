@@ -1,9 +1,11 @@
 """Readiness uses raw resolved structure, and never clears unknown weapons."""
 import pathlib
 import json
+import io
 import sys
 import unittest
 import tempfile
+from contextlib import redirect_stdout
 from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -64,6 +66,27 @@ class SplitGateTests(unittest.TestCase):
 
 
 class AnchorMembershipTests(unittest.TestCase):
+    def test_cli_renders_missing_baselines_and_still_writes_json(self):
+        spec_rows = [
+            ("mbt", "actor", True, None, 500, None, ["hp unavailable"], False),
+            ("support", "other", True, 500, None, None, ["hp unavailable"], False),
+        ]
+        output = io.StringIO()
+        with tempfile.TemporaryDirectory() as directory:
+            report = pathlib.Path(directory) / "readiness.json"
+            with patch.object(sys, "argv", ["anchor_readiness", "--json", str(report)]), \
+                    patch.object(readiness, "anchor_actor_vs_spec", return_value=spec_rows), \
+                    redirect_stdout(output):
+                self.assertEqual(0, readiness.main())
+            data = json.loads(report.read_text())
+            self.assertIsNone(data["split_gate_error"])
+            self.assertTrue(data["rows"])
+            self.assertTrue(all(isinstance(row, dict) and "class" in row and "scored" in row
+                                for row in data["rows"]))
+            self.assertIn("support", {row["class"] for row in data["rows"]})
+        self.assertIn("| unavailable | 500 |", output.getvalue())
+        self.assertIn("| 500 | unavailable |", output.getvalue())
+
     def test_unreadable_ledger_does_not_silently_reduce_population(self):
         with tempfile.TemporaryDirectory() as directory:
             ledger = pathlib.Path(directory)

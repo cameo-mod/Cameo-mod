@@ -98,6 +98,7 @@ SUBTYPE_TO_CLASS: dict[str, str] = {
     "archerinfantry": "archer",
     "rockettrooperinfantry": "rocket_trooper",
     "supportinfantry": "support",
+    "engineerinfantry": "support",             # active D2K role; FORMULA_V2 §6b engineers
     "heroinfantry": "commando",
     "flyinginfantry": "flying_infantry",
     "medic": "support",                         # 3/3

@@ -1,5 +1,19 @@
 # Development Log
 
+## Codex - Active engineer roles and complete readiness output (2026-09-07)
+
+The three D2K engineers now extract as EngineerInfantry from their exact active
+pack template and classify as support, as Formula V2 already rules. Exactly three
+ledger subtype strings change; no numbers or gameplay change. Independent review
+approved the scope; three new inheritance tests plus existing assignment/firepower
+checks pass. Buildable unit-like coverage: 632/886 to 635/886 (71.7%).
+
+The full readiness CLI exposed a missing-baseline formatting crash and a reused
+variable that replaced JSON fit rows with a weapon list. Twelve readiness tests,
+including command-level JSON coverage, now pass; the real command exits zero and
+emits all 27 class rows. Zero anchors are signed. This corrects the earlier overly
+broad CLI-completion statement; detailed source evidence is in ASTRA_REVIEW.md.
+
 ## Codex - Record-only match telemetry and AI integration (2026-09-07)
 
 Implemented Aedis's first AI delivery phase: bounded local completed-match JSONL,
