@@ -1450,13 +1450,9 @@ LeechJump:
 		DamageTypes: DefaultDeath, DroneInfection
 
 d2k_grenade:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Concussion_Medium
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
 	ReloadDelay: 60
 	Range: 6000
 	MinRange: 1200
@@ -1474,16 +1470,8 @@ d2k_grenade:
 		ContrailEndColor: 33221100
 		ContrailStartWidth: 24
 		ContrailEndWidth: 12
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 10000
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Smudge: LeaveSmudge
@@ -1519,11 +1507,11 @@ Laboratory_Bioball:
 		ContrailEndColor: 33442211
 		ContrailStartWidth: 52
 		ContrailEndWidth: 13
-	Warhead@Demolition_Light:
+	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@Concussion_Medium:
+	Warhead@Concussion_Medium: AreaDamage
 		PercentageScale: 12000
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -2660,8 +2648,15 @@ HMG_tleilaxu:
 	Burst: 6
 	BurstDelays: 2
 	Range: 4096
-	Warhead@Bullet_Medium:
-		Damage: 4500
+	Warhead@1Dam: SpreadDamage
+		Damage: 2500
+		Versus:
+			None: 150
+			Wood: 100
+			Light: 110
+			Medium: 75
+			Heavy: 60
+			Concrete: 50
 
 d2k_sardaukar_elite:
 	Inherits: ordos_autogunturret
@@ -2713,9 +2708,17 @@ Rocketeer_o:
 	ReloadDelay: 18
 	Range: 2560
 	ValidTargets: Ground
-	Warhead@Bullet_Medium:
-		Damage: 4250
+	Warhead@1Dam: SpreadDamage
+		Damage: 2250
+		DamageTypes: TriggerProne, SmallExplosionDeath
 		ValidTargets: Ground
+		Versus:
+			None: 120
+			Wood: 90
+			Light: 100
+			Medium: 90
+			Heavy: 60
+			Concrete: 35
 
 Rocketeer_t:
 	Inherits: Rocketeer_o
