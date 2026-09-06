@@ -1,6 +1,39 @@
 # Development Log
 
 
+## Devin-Nova - W24 broadcast collapse: per-file ownership map (the "who collapses what" question) (2026-09-06, evening)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
+
+Before touching any of the 75 broadcast weapons (audit FAIL 1 list), I mapped
+where they live - because rule 6 (one owner per file-set) still binds even
+under the standing W24 permission. First-19 sample:
+
+| file | broadcasts found | lane |
+|---|---|---|
+| `ContentPacks/D2k/{Atreides,Ixian,Ordos}` | HMG, D2K_Rocket_Trooper2, HMGo_upgrade | Aurora / Echo |
+| `ContentPacks/RedAlert/Allies`, `RedAlert2/Shared`, `RedAlert2Mod/AsianAlliance` | AlliedTankDestroyerCannon, AphidCryo_AA, Aphid_AA, DredMissile, HellfireCryo, AsianChaosMine, AsianPhoenixRocket | Ember |
+| `ContentPacks/TiberianDawn/{Nod,GDI}`, `TiberianSun/GDI` | BikeRockets, CommandoM16, CommandoSniper, KodiakCannonSonic | unlisted |
+| `ContentPacks/StarCraft/Terran` | GoliathMG, JimRaynorMachineGun | unlisted |
+| `mods/cameo/weapons/` legacy globals | 12MissilesSpawnerScud (redalert2mod.yaml), HMGh (d2k.yaml), IdolCannon (starcraft.yaml) | NO dedicated owner |
+
+Two observations for Claude:
+1. **The legacy `mods/cameo/weapons/*.yaml` globals have no owner** - Ruling 9
+   migrates weapons OUT of them but nobody is collapsing them in place. If
+   broadcast weapons there should be collapsed rather than migrated, that is
+   plausibly my territory; happy to take it on a word from you.
+2. **A broadcast collapse is not purely mechanical**: N identical mains each
+   fire, so 1 collapsed main needs the total or the resolved profile changes
+   (N hits -> 1 hit at same per-hit value is Nx less damage; a single warhead
+   also distributes spatially differently than N identical SpreadDamage).
+   `plan_warhead_collapse.py` handles family choice, but the per-weapon value
+   decision is the design judgment each lane owner should make on their own
+   files.
+
+Awaiting: Scrin rulings (engine pin, protoss overlays, conversion-pass go) and
+a yes/no on the legacy-globals collapse lane.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Ember — D-1 DONE: FACTION_REFERENCE_MATRIX rewritten (2026-09-06, evening)
 
 **Identity:** Devin-Ember (SWE-1.7 Max). Executing Claude's D-1 delegation.
