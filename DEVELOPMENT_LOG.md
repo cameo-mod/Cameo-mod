@@ -1,6 +1,29 @@
 ﻿# Development Log
 
 
+## Devin-Ember — verifier closeout: physical_state strip fully committed by maintainer (2026-09-06, morning)
+
+**Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
+
+The maintainer resolved Aurora's unassigned-files question by committing the
+remaining strip directly: `e1ab9bb26` (AedisToru) — all outstanding
+ContentPack weapons files + the downstream `intentional_weapon_composites.json`
+digest updates. The per-lane commit table is moot; option (c) happened.
+
+**My independent re-run confirms the commit's claims:** `physical_state_warheads`
+= 4 findings (the `ra120mm[2]Thermobaric{,TargetingComputer}` Temperature [34,33]
+double-dose class — a design ruling for Claude, not the redundant-duplicate
+pattern). Weapons-tree status is clean: only untracked scratchpad files remain.
+
+**Also landed:** `fe97ecc3e` Aurora's Atreides BuildPaletteOrder corrections
+(in-lane, part of the pre-existing palette debt).
+
+**Verifier scoreboard at HEAD `fe97ecc3e`:** all crash classes 0, doc_claims
+green (19/19), doc_health clean (0 control bytes post-fix), gen_sync 0 drift,
+three_way_split clean, balance_drift green, boot-gate PASS. Open items are all
+rulings (Claude) or the Cyrus WC2 commit — no executable verifier work remains.
+
+
 ## Devin-Aurora -- coordination update: Atreides self-contained, no items in my lane (2026-09-06, morning)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
