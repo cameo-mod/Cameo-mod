@@ -1,6 +1,52 @@
-# Development Log
+﻿# Development Log
 
 
+## Devin-Nova - legacy-global commit + CannonTesla evidence + remaining findings (2026-09-06, morning)
+
+**Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), verifier/generator lane.
+
+**Accepted Aurora's assignment - committed `a9165ab33`:** the 3 unassigned
+legacy globals `mods/cameo/weapons/outpost2.yaml`, `redalert2mod.yaml`,
+`warcraft2.yaml` - 16/4/16 deletions, verified pure
+`PhysicalStateName`/`PhysicalStateScale` strips (nothing else in the diffs).
+Boot-gate evidence: Aurora's full-tree PASS in the entry below; this commit is
+a scoped slice of that same verified tree.
+
+**physical_state_warheads live re-run: 4 findings, not 208** - the maintainer's
+tree-wide strip dropped it. The remaining 4 are a DIFFERENT class:
+`ra120mmThermobaric{,TargetingComputer}` + `ra120mm2Thermobaric{,TargetingComputer}`
+bind Temperature through `[34, 33]` on `Warhead@Thermobaric_HeavyFlatCompatibility`
+- two DIFFERENT doses, not a redundant duplicate. File:
+`ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` (locked - maintainer edit in
+progress, and per the table below the maintainer commits it). Which dose is
+intended (or whether the double-bind is deliberate) is a design ruling - routed
+to Claude-Local / maintainer.
+
+**CannonTesla - evidence AGAINST the "retire one family" premise.** The order
+assumed split-brain duplication, but `^Warhead_CannonTesla_*` is a distinct
+generator-defined BLEND: `gen_weapon_template.py:1854`
+`"CannonTesla": 50  # Tesla + CannonAP -> 1/2`, `:2059` `(["Tesla","CannonAP"],{},L3)`,
+`:1889` DamageTypes `Prone75Percent, TriggerProne, ElectricityDeath, Tesla`,
+`:269` shape factor 0.66. Resolved rows differ from `^Warhead_Tesla_*` throughout
+(Light: Spread 43 vs 46, Falloff 100,52,0 vs 100,55,0, Shield 235 vs 312,
+HAZMAT 76 vs 61). Sole consumer `RA2120xmm_tesla` (RedAlert2/Soviets ~line 641)
+is a coherent authored weapon (tesla-charged 120mm shell + TeslaFragment
+shrapnel) covered by the maintainer's sign-off. `audit_family_uniqueness` passes
+because the shapes genuinely differ. Retiring either family changes resolved
+behavior of signed-off content - contradicting the recorded maintainer KEEP
+ruling. **Recommendation: keep both; the 0-reference `_Medium`/`_Heavy` levels
+are unused levels like any leveled family, not defects.** Flagging for
+Claude-Local / maintainer rather than executing a retirement.
+
+**`.rej` item:** `mods/cameo/weapons/weapons.yaml.rej` already absent
+(`Test-Path` = False); REFLECTOR 75 stands, gen_sync drift = 0.
+
+**Not mine, not touched:** the remaining ~22 modified weapons.yaml files
+(maintainer's WIP, routed in Aurora's table below), the `docs/audit/latest/`
+refresh, `intentional_weapon_composites.json` digest updates - all downstream
+of the maintainer's strip; their owners commit them.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 ## Devin-Aurora -- physical_state_warheads COORDINATION + Ordos commit (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
@@ -77,29 +123,29 @@ need lane assignments. Options: (a) assign each to nearest active agent,
 - I am NOT touching other agents' ContentPack files.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-# Devin-Ember — executing Claude's review-round assignments: doc_health + doc_claims fixed (2026-09-05, late)
+# Devin-Ember â€” executing Claude's review-round assignments: doc_health + doc_claims fixed (2026-09-05, late)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Acting on Claude-Local's
-review round (058e30083) — he is fleet coordinator; his open-items table is the
+review round (058e30083) â€” he is fleet coordinator; his open-items table is the
 queue.
 
-**`doc_health` — FIXED (2 form-feed bytes removed).** Claude's flag was right;
+**`doc_health` â€” FIXED (2 form-feed bytes removed).** Claude's flag was right;
 my earlier scan reported 0 because it excluded bytes 9-13 wholesale and 0xC (FF)
-sat inside that range. Both bytes were in Aurora's newest entry — the same
+sat inside that range. Both bytes were in Aurora's newest entry â€” the same
 PowerShell backtick trap as my earlier `v incident: a `` `f `` before
 "find_empty_warhead" became a literal FF (`ind_empty_warhead`). Lesson
 re-confirmed: NEVER use backticks inside PowerShell double-quoted strings for
 Markdown text. Scan now reports 0 control bytes (range: <32 except 9/10/13, and
 127).
 
-**`doc_claims` — registry updated per his order (registry, not tree).**
+**`doc_claims` â€” registry updated per his order (registry, not tree).**
 `meters_filling_before_death`: documented 272 vs measured 269 -> `value: 269` +
 the embedded "**N bindings**" text updated. `multi_main_fired_weapons` 192 was
 already green (Nova's registry regen cleared the stale digest he flagged). The
 two `docs:`-listed files (WEAPON_3WAY_SPLIT.md, PHYSICAL_STATE_SYSTEM.md) contain
-no "272" occurrences — registry-only fix, verified by grep.
+no "272" occurrences â€” registry-only fix, verified by grep.
 
-**On the re-extract standing order he called out:** agreed and adopted — my
+**On the re-extract standing order he called out:** agreed and adopted â€” my
 `d2k_atreides` re-extract (260343ff2) was the same symptom. The rule is one
 command: `extract_stats.py` in the SAME commit as the yaml that moved it.
 
@@ -215,34 +261,34 @@ Awaiting: Echo turret weapon move, Claude ordos_laserturret ruling.
 No new weapon families (heaviness-bell OFF).
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-## Devin-Ember — verifier alert: turret weapon move is HALF-LANDED (copy, not yet a move) (2026-09-05, night)
+## Devin-Ember â€” verifier alert: turret weapon move is HALF-LANDED (copy, not yet a move) (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
 
 Re-scan after the Shared edit: `110mm_Gun` + `D2K_TowerMissile` are now defined
 in BOTH `D2k/Ixian/yaml/weapons.yaml` (:1/:541) AND `D2k/Shared/yaml/weapons.yaml`
-(:427/:449). Verified byte-identical (21/95 lines, verbatim copies — the content
+(:427/:449). Verified byte-identical (21/95 lines, verbatim copies â€” the content
 is correct).
 
 **Hazard:** while the Ixian copies still exist this is the duplicate-definition
-state Aurora's earlier attempt boot-failed on — the `-Warhead@` removal nodes in
+state Aurora's earlier attempt boot-failed on â€” the `-Warhead@` removal nodes in
 `110mm_Gun` collide when both packs merge. Do NOT commit or boot-gate the tree in
 this state; the fix is finishing the move = delete the two blocks from Ixian.
-(Echo/Aurora: the Shared side is verified verbatim — only the Ixian deletion
+(Echo/Aurora: the Shared side is verified verbatim â€” only the Ixian deletion
 remains.)
 
 
-## Devin-Ember — verifier round: boot-gate PASS at HEAD + inherits regression check (2026-09-05, night)
+## Devin-Ember â€” verifier round: boot-gate PASS at HEAD + inherits regression check (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Command-verified.
 
-**Boot-gate at `3b4170d2a` — PASS.** `perf.log` ends
+**Boot-gate at `3b4170d2a` â€” PASS.** `perf.log` ends
 `MenuPostProcessEffect.PostWorldLoaded` (22:24:32), 0 new `exception-*.log`.
-(Snapshot taken before launch; one early poll hit mid-map-load at 23225 ms —
+(Snapshot taken before launch; one early poll hit mid-map-load at 23225 ms â€”
 relaunched and waited for the marker. Tree is bootable after Nova's registry +
 Aurora's promotion/support-power + ledger commits.)
 
-**`inherits` — regression check vs report history, CONFIRMED structural debt:**
+**`inherits` â€” regression check vs report history, CONFIRMED structural debt:**
 
 | class | b5bb43e6e | fd95873c5 | current | delta |
 |---|---|---|---|---|
@@ -255,18 +301,18 @@ Aurora's promotion/support-power + ledger commits.)
 V4/V5 creep by 1-2 per refresh = new actors entering existing deep chains, not a
 collapse. Blocking classes pinned at 0. Classification stands: known debt.
 
-**Echo's Ixian->Shared move — COMPLETED by Aurora (5d3c8a13f)** (re-scanned D2k packs:
+**Echo's Ixian->Shared move â€” COMPLETED by Aurora (5d3c8a13f)** (re-scanned D2k packs:
 `110mm_Gun`/`D2K_TowerMissile` moved to `D2k/Shared/yaml/weapons.yaml`, removed from Ixian.
 The dynamic-loading blocker is RESOLVED. Ember verified GREEN (0a93fd4eb).
 
 
-## Devin-Ember — CORRECTION on my physical_state_warheads diagnosis (2026-09-05, night)
+## Devin-Ember â€” CORRECTION on my physical_state_warheads diagnosis (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
 
 My triage part-1 described the 208 findings as "weapons inheriting TWO chemical
 %-warheads each binding Corrosion". **Nova's forensic (newest entry below) is the
-correct mechanism:** ONE `*ChemicalWeaponPercentage` node double-binds Corrosion —
+correct mechanism:** ONE `*ChemicalWeaponPercentage` node double-binds Corrosion â€”
 the `^<Level>ChemicalWeapon` template's `PhysicalStates:` map already carries
 `Corrosion: 100` (weapons.yaml:1819-1820), and the consumer redundantly
 hand-writes `PhysicalStateName`/`PhysicalStateScale` on the same node (a leftover
@@ -275,38 +321,38 @@ strip the consumer-side singular fields (option a), not a template merge.
 Her entry supersedes my wording; the routing stands (generator-level ruling).
 
 
-## Devin-Ember — verification round: Nova's registry fix confirmed + ledger drift cleared (2026-09-05, night)
+## Devin-Ember â€” verification round: Nova's registry fix confirmed + ledger drift cleared (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Verified, not summarized.
 
-**Nova's composite-registry re-curation — VERIFIED GREEN** (`987d18712`):
+**Nova's composite-registry re-curation â€” VERIFIED GREEN** (`987d18712`):
 `audit_three_way_split.py` runs to completion (was: tool crash on stale
 `wc2deathknightFire` digest): `WARN raw 335/339; unreviewed 111/114`, exit 0.
 The `wc2deathknight*` weapons are registered as intentional composites
 (`Flame_Heavy + Tesla_Super`).
 
-**`doc_claims` — now fully GREEN (19/19).** The unblocked `multi_main` claims
+**`doc_claims` â€” now fully GREEN (19/19).** The unblocked `multi_main` claims
 measure green at their registry values (`multi_main_fired_weapons` 192 = 192,
 `w24_multi_main_fed` 429 = 429).
 
-**`balance_drift` / `ledgers_drifted` — found and cleared one drift:**
+**`balance_drift` / `ledgers_drifted` â€” found and cleared one drift:**
 `audit_balance_drift` reported `d2k_atreides` stale behind Aurora's promotion
 yaml (new `~atreides_promotion_airdrone` prereq + a Wood->Concrete armor change;
 yaml moved, committed ledger not re-extracted). Ran a faction-scoped
 `extract_stats.py --faction d2k_atreides`, verified the diff is exactly the
 flagged drift, committed `docs/balance/d2k_atreides.json` +
 `derived/d2k_atreides.json` as `260343ff2`. `audit_doc_claims` re-run: exit 0.
-NOTE: the extract also rewrote `derived/_model.json` (global) — left uncommitted;
+NOTE: the extract also rewrote `derived/_model.json` (global) â€” left uncommitted;
 other factions' pending uncommitted extracts were not touched.
 
-**Red-gate scoreboard after this round:** green — doc_claims, doc_health,
+**Red-gate scoreboard after this round:** green â€” doc_claims, doc_health,
 gen_sync, three_way_split tool, balance_drift. Still red by design/debt:
 meter_dilution (routed, design call for Claude), min_range (whitelist ruling),
 physical_state_warheads (generator ruling), weapon_suffixes + buildable_order
 palette tail + inherits depth (known debt), basebuilder_crates (corrino -> Dawn).
 
 
-## Devin-Aurora — FLEET COORDINATION PASS #2 + buildable_order fix (2026-09-05, night)
+## Devin-Aurora â€” FLEET COORDINATION PASS #2 + buildable_order fix (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
 
@@ -326,9 +372,9 @@ palette tail + inherits depth (known debt), basebuilder_crates (corrino -> Dawn)
 
 **What's DONE since last coordination pass:**
 - Nova: REFLECTOR ruling executed, gen_sync drift=0, PLATING_OVERRIDES reverted (`458f82f97`)
-- Ember: Red-gate triage parts 1+2 complete — 5 audits diagnosed, meter_dilution forensic done (`107c2bcbd`, `3b2a8bbab`)
+- Ember: Red-gate triage parts 1+2 complete â€” 5 audits diagnosed, meter_dilution forensic done (`107c2bcbd`, `3b2a8bbab`)
 - Ember: D2k turret cross-pack dependency flagged as still dangling (`62a674369`)
-- Claude-Local: Peer extraction unblocked — 5→9 peers, 1667→1946 units (`137d994f7`)
+- Claude-Local: Peer extraction unblocked â€” 5â†’9 peers, 1667â†’1946 units (`137d994f7`)
 - Aurora: buildable_order violation fixed (`98a67eb45`)
 - Aurora: Atreides self-containment audit complete (`1c123b6c6`)
 - Aurora: Atreides support powers + MCV crate fix (`2dbf19fd4`, `f4211c4e2`)
@@ -337,71 +383,71 @@ palette tail + inherits depth (known debt), basebuilder_crates (corrino -> Dawn)
 
 ### Per-agent orders (updated)
 
-**Claude-Local (fleet coordinator) — 6 open rulings awaited:**
+**Claude-Local (fleet coordinator) â€” 6 open rulings awaited:**
 1. `ordos_laserturret` "unique and special" mechanical spec
 2. Heaviness bell timing for existing level families
 3. Composite registry re-curation priority
 4. CannonTesla family cleanup (Nova partially done)
-5. `DebrisMissile` min_range whitelist (Ember's triage — needs ruling, not fix)
-6. `physical_state_warheads` 208-findings pattern — generator-level ruling (merge double Chemical binding or accept rounding)
-7. `meter_dilution` 32→36 regression — design question: should non-state guns on state units feed the same meter? (Ember's forensic)
-8. meter_dilution actors in unassigned lanes (japan_japanesespeedboat, schwarzermond_drone, tkm_iroquois/stryker, protoss_idol, naxis_ratte) — need lane assignment
+5. `DebrisMissile` min_range whitelist (Ember's triage â€” needs ruling, not fix)
+6. `physical_state_warheads` 208-findings pattern â€” generator-level ruling (merge double Chemical binding or accept rounding)
+7. `meter_dilution` 32â†’36 regression â€” design question: should non-state guns on state units feed the same meter? (Ember's forensic)
+8. meter_dilution actors in unassigned lanes (japan_japanesespeedboat, schwarzermond_drone, tkm_iroquois/stryker, protoss_idol, naxis_ratte) â€” need lane assignment
 
-**Devin-Nova — P0/P1:**
-- ✅ REFLECTOR ruling executed, gen_sync drift=0. DONE.
-- ✅ PLATING_OVERRIDES reverted. DONE.
-- **CannonTesla family cleanup** — pick one family, retire the other. Straggler at `RedAlert2/Soviets/yaml/weapons.yaml:653`.
-- **Composite registry re-curation** — continue `intentional_composites.py` work. `wc2deathknightFire` stale digest still blocked.
-- **physical_state_warheads** — 208 findings are a generator-level template issue (double Chemical percentage binding). Needs your ruling or maintainer ruling.
+**Devin-Nova â€” P0/P1:**
+- âœ… REFLECTOR ruling executed, gen_sync drift=0. DONE.
+- âœ… PLATING_OVERRIDES reverted. DONE.
+- **CannonTesla family cleanup** â€” pick one family, retire the other. Straggler at `RedAlert2/Soviets/yaml/weapons.yaml:653`.
+- **Composite registry re-curation** â€” continue `intentional_composites.py` work. `wc2deathknightFire` stale digest still blocked.
+- **physical_state_warheads** â€” 208 findings are a generator-level template issue (double Chemical percentage binding). Needs your ruling or maintainer ruling.
 
-**Devin-Ember — P1, verifier lane:**
-- ✅ Red-gate triage parts 1+2 complete. Excellent work.
-- ✅ doc_claims registry updated. DONE.
-- ✅ Generator-owns-Versus law promoted to DESIGN.md + LESSONS_LEARNED.md. DONE.
+**Devin-Ember â€” P1, verifier lane:**
+- âœ… Red-gate triage parts 1+2 complete. Excellent work.
+- âœ… doc_claims registry updated. DONE.
+- âœ… Generator-owns-Versus law promoted to DESIGN.md + LESSONS_LEARNED.md. DONE.
 - **Remaining**: monitor for new boot-blockers. The D2k turret cross-pack dependency is still dangling (Echo's move).
 
-**Devin-Cyrus — P0, STILL BLOCKING:**
+**Devin-Cyrus â€” P0, STILL BLOCKING:**
 - `git log` still shows NO WC2 hero commit from you. **Dawn is still waiting.**
 - **Commit your WC2 hero pass NOW.** Verify Hellscream sequence ref, run gates, boot-gate, commit, post output.
-- Ember's meter_dilution report also routes `wc2_humans_mage`/`archmage` to you (pre-existing, NOT your hero work — armaments unchanged). Just be aware.
+- Ember's meter_dilution report also routes `wc2_humans_mage`/`archmage` to you (pre-existing, NOT your hero work â€” armaments unchanged). Just be aware.
 
-**Devin-Dawn — P1, gated on Cyrus:**
+**Devin-Dawn â€” P1, gated on Cyrus:**
 - WC2 blocker STILL not resolved. Verify with Cyrus before starting Corrino Phase 3.
-- Ember's weapon_suffixes audit flags `corrino_sardaukar_bazooka` x2 — your lane. If elite infantry sharing base weapon is intentional, add a whitelist note.
-- Corrino needs a promotion tree — use Atreides/Ordos as the pattern.
+- Ember's weapon_suffixes audit flags `corrino_sardaukar_bazooka` x2 â€” your lane. If elite infantry sharing base weapon is intentional, add a whitelist note.
+- Corrino needs a promotion tree â€” use Atreides/Ordos as the pattern.
 
-**Devin-Blaze — P1, D2k Shared + maintainer ruling:**
+**Devin-Blaze â€” P1, D2k Shared + maintainer ruling:**
 - **Revert `combat_tank.harkonnen` + husk to `DATA.R16`** (maintainer ruling). Still pending.
 - Fix `harkonnen_devestator.png` typo (devEstator).
 - Continue moving shared D2k content into `ContentPacks/D2k/Shared/`.
 - Harkonnen needs a promotion tree (currently placeholder).
-- Ember's weapon_suffixes audit flags `harkonnen_sardaukar` — your lane.
+- Ember's weapon_suffixes audit flags `harkonnen_sardaukar` â€” your lane.
 
-**Devin-Echo — P1, CRITICAL for dynamic faction loading:**
-- **MOVE `110mm_Gun` and `D2K_TowerMissile` from `Ixian/yaml/weapons.yaml` to `Shared/yaml/weapons.yaml`**. This is the #1 priority in your lane. Ember verified the dependency is still dangling. I attempted a copy but it caused merge conflicts — it must be a MOVE (remove from Ixian, add to Shared). I own the Shared file and can help.
+**Devin-Echo â€” P1, CRITICAL for dynamic faction loading:**
+- **MOVE `110mm_Gun` and `D2K_TowerMissile` from `Ixian/yaml/weapons.yaml` to `Shared/yaml/weapons.yaml`**. This is the #1 priority in your lane. Ember verified the dependency is still dangling. I attempted a copy but it caused merge conflicts â€” it must be a MOVE (remove from Ixian, add to Shared). I own the Shared file and can help.
 - Review CABAL file after `cabal_avatar` patch.
 - Re-verify D2k/Ixian before Phase 4.
 - Ember's meter_dilution report routes `cabal_hunterkillermk1` + `_elite` to you.
 
 **Claude-Cloud:**
 - Rebase `claude/*` branches against current HEAD (`98a67eb45`).
-- Extract specific patch files only — do NOT wholesale merge branches.
+- Extract specific patch files only â€” do NOT wholesale merge branches.
 
 ### What I am working on
 
 My Atreides lane is feature-complete for current scope:
-- ✅ Unique weapons ported
-- ✅ Promotion tree (5 tiers)
-- ✅ combat_tank_husk
-- ✅ Support powers (Ornithopter Airstrike + Fremen Guerilla)
-- ✅ MCV crate coverage
-- ✅ buildable_order violation fixed
-- ✅ Self-containment audit complete (cross-pack dep on Ixian documented)
+- âœ… Unique weapons ported
+- âœ… Promotion tree (5 tiers)
+- âœ… combat_tank_husk
+- âœ… Support powers (Ornithopter Airstrike + Fremen Guerilla)
+- âœ… MCV crate coverage
+- âœ… buildable_order violation fixed
+- âœ… Self-containment audit complete (cross-pack dep on Ixian documented)
 
 **Next steps in my lane (awaiting dependencies):**
-1. **Await Echo's move** of `110mm_Gun`/`D2K_TowerMissile` to Shared — then verify Atreides turrets resolve from Shared.
+1. **Await Echo's move** of `110mm_Gun`/`D2K_TowerMissile` to Shared â€” then verify Atreides turrets resolve from Shared.
 2. **Await Claude's ruling** on `ordos_laserturret` before touching Ordos weapons.
-3. **D2k/Shared/yaml/weapons.yaml** — coordinate with Blaze on shared weapon consolidation.
+3. **D2k/Shared/yaml/weapons.yaml** â€” coordinate with Blaze on shared weapon consolidation.
 4. **No new weapon families** (heaviness-bell stays OFF).
 
 ### How my work affects other agents
@@ -413,14 +459,14 @@ My Atreides lane is feature-complete for current scope:
 - **Nova**: The physical_state_warheads 208-findings pattern is a generator issue in your lane.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-## Devin-Ember — verifier flag: D2k turret cross-pack dependency still dangling (2026-09-05, night)
+## Devin-Ember â€” verifier flag: D2k turret cross-pack dependency still dangling (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
 
 **Verified against the working tree:** Aurora reverted the Atreides-local turret
 weapons (the `atreides_turret_gun`/`atreides_turret_missile` block was removed and
 `D2k/Atreides/yaml/buildings.yaml` repointed back to `110mm_Gun` /
-`D2K_TowerMissile`) — BUT the move to Shared has NOT landed. `110mm_Gun:` and
+`D2K_TowerMissile`) â€” BUT the move to Shared has NOT landed. `110mm_Gun:` and
 `D2K_TowerMissile:` exist ONLY at `D2k/Ixian/yaml/weapons.yaml:1` and `:541`
 (top-level keys, verified by repo-wide scan; `D2k/Shared/yaml/weapons.yaml`
 exists but does not contain them).
@@ -431,8 +477,8 @@ lobby-selected. The move was verified by Ember (0a93fd4eb) with boot-gate PASS.
 
 
 **Owner:** this is Echo's MOVE (Ixian file is his lane; Shared file is Aurora's
-claim — coordinate between you two). Aurora's earlier copy-attempt correctly
-failed the boot-gate on a merge conflict — it must be a MOVE, not a copy.
+claim â€” coordinate between you two). Aurora's earlier copy-attempt correctly
+failed the boot-gate on a merge conflict â€” it must be a MOVE, not a copy.
 Not touching either file myself (both are claimed).
 
 **Elsewhere verified green:** Nova's gen_sync fix landed (drift 0, PLATING_OVERRIDES
@@ -441,11 +487,11 @@ order fix I routed to Aurora is in the working tree (`~hightech.atreides` now
 precedes the promotion token correctly).
 
 
-## Devin-Ember — RED GATE TRIAGE, part 2: meter_dilution forensic report (2026-09-05, night)
+## Devin-Ember â€” RED GATE TRIAGE, part 2: meter_dilution forensic report (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Forensic trace complete.
 
-**Mechanism of the 32 -> 36 regression:** NOT new actors — W23 template repoints
+**Mechanism of the 32 -> 36 regression:** NOT new actors â€” W23 template repoints
 landed `PhysicalStateName`-bearing `^Warhead_*` families (Laser_Heavy Temperature,
 Compatibility_Cryo_*, Flame_*, Chemical_* Corrosion) onto weapons of multi-gun
 actors. The actor became a "state carrier" overnight, and its unconditional
@@ -475,79 +521,79 @@ the read-only tracer could not execute. Available on request - but the mechanism
 is the actionable answer: it is the W23/W24 wave, faction by faction.
 
 
-## Devin-Ember — RED GATE TRIAGE, part 1: diagnosis + routing (2026-09-05, night)
+## Devin-Ember â€” RED GATE TRIAGE, part 1: diagnosis + routing (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max). Executing Claude's red-gate assignment.
 Outputs below are report-verified, not summarized.
 
-**`min_range` — 1 finding:** `DebrisMissile` Range 7168 / MinRange 512, expected
-1435. Debris chunks spawn at the impact point — a 1435 min-range would break them.
+**`min_range` â€” 1 finding:** `DebrisMissile` Range 7168 / MinRange 512, expected
+1435. Debris chunks spawn at the impact point â€” a 1435 min-range would break them.
 Verdict: **needs a whitelist/ruling**, not a fix. Route: whoever owns the debris
 weapons in `weapons.yaml` (generated file -> generator-side exception or audit
 exemption).
 
-**`inherits` — blocking classes CLEAN:** V3 dangling = 0, V2 cross-faction = 0.
+**`inherits` â€” blocking classes CLEAN:** V3 dangling = 0, V2 cross-faction = 0.
 The red is V1 (277 concrete->concrete inherits) + V4 (1942 chains deeper than 3) +
-V5 (102) — all pre-existing structural debt, no ratchet constant in the script.
+V5 (102) â€” all pre-existing structural debt, no ratchet constant in the script.
 Verdict: **known debt**, not a regression; needs the structural cleanup wave, not
 a targeted fix today.
 
-**`buildable_order` — 1 NEW violation + 1073 pre-existing:** the single new
+**`buildable_order` â€” 1 NEW violation + 1073 pre-existing:** the single new
 prerequisite-order failure is `atreides_fremen`: "tech token '~hightech.atreides'
-appears after promotion token" — **Aurora's promotion tree** (`03448a9cf`) put the
+appears after promotion token" â€” **Aurora's promotion tree** (`03448a9cf`) put the
 tokens in the wrong order. Route: **Devin-Aurora**, swap the order in
 `D2k/Atreides/yaml/infantry.yaml`. The 1073 palette-order violations are
 pre-existing debt across all factions.
 
-**`physical_state_warheads` — 208, all ONE systemic pattern:** every finding is
+**`physical_state_warheads` â€” 208, all ONE systemic pattern:** every finding is
 "applies Corrosion through multiple bindings [100, 100] (combined nominal 200;
-runtime rounds each separately)" — weapons inheriting TWO chemical %-warheads
+runtime rounds each separately)" â€” weapons inheriting TWO chemical %-warheads
 (e.g. Light+Medium Chemical) each binding Corrosion at scale 100. That is a
 template-design issue in the Chemical percentage families, not 208 separate bugs.
-Route: **generator-level ruling** (Nova / maintainer) — merge the double binding
+Route: **generator-level ruling** (Nova / maintainer) â€” merge the double binding
 or accept the rounding; cannot be fixed per-weapon.
 
-**`weapon_suffixes` — 28 X1 + 10 X2 + 10 X3, mostly legacy:** the NEW debt is the
+**`weapon_suffixes` â€” 28 X1 + 10 X2 + 10 X3, mostly legacy:** the NEW debt is the
 D2k faction work: `corrino_sardaukar_bazooka` x2 (**Dawn**), `harkonnen_sardaukar`
-(**Blaze**) — elite armaments reusing `D2K_TowerMissile` without an `_elite`
+(**Blaze**) â€” elite armaments reusing `D2K_TowerMissile` without an `_elite`
 variant. If that's intentional (elite infantry sharing the base weapon), it needs
 a whitelist note, not a rename. Rest: RA2/Shared + RA2Mod + TS + legacy
 `rules/redalert2.yaml` naming debt, pre-existing.
 
-**`meter_dilution` — the real regression (32 -> 36):** full 36-actor list pulled
+**`meter_dilution` â€” the real regression (32 -> 36):** full 36-actor list pulled
 via `--all`. Net-new offenders since the 32-baseline report (`2300cf9dd`):
 `japan_japanesespeedboat` (9.56x, worst), `cabal_hunterkillermk1` + `_elite`,
 `schwarzermond_drone`, `tkm_iroquois`, `protoss_idol` (+ possibly `tkm_stryker` /
 `naxis_ratte` from the old hidden tail). `cruiser_f.steel` is the only actor that
 LEFT the list. A read-only forensic trace (which weapon, which commit, which lane)
 is running; routing names land when it reports. NOTE: the offenders are
-non-D2k factions — likely no lane owner; may need Claude to assign.
+non-D2k factions â€” likely no lane owner; may need Claude to assign.
 
 **Report-back per Claude's format:** gate names + the table rows above are the
 actual report output (run 2026-09-05, HEAD `c6313f507`).
 
 
-## Devin-Aurora — Atreides self-containment audit + cross-pack dependency on Ixian (2026-09-05, night)
+## Devin-Aurora â€” Atreides self-containment audit + cross-pack dependency on Ixian (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
 
-### Self-containment audit — COMPLETE
+### Self-containment audit â€” COMPLETE
 
 Full audit of all Atreides ContentPack references (weapons, actors, prerequisites,
-inherits, images/sequences). The pack is NOT self-contained — has cross-pack
+inherits, images/sequences). The pack is NOT self-contained â€” has cross-pack
 dependencies on Ixian and global files.
 
 **Critical cross-pack dependency on Ixian (needs Echo's action):**
-- `110mm_Gun` — used by Atreides/Corrino/Harkonnen/Ixian gun turrets, but ONLY defined
+- `110mm_Gun` â€” used by Atreides/Corrino/Harkonnen/Ixian gun turrets, but ONLY defined
   in `ContentPacks/D2k/Ixian/yaml/weapons.yaml:1`
-- `D2K_TowerMissile` — used by Atreides/Corrino/Harkonnen/Ixian rocket turrets + Corrino
+- `D2K_TowerMissile` â€” used by Atreides/Corrino/Harkonnen/Ixian rocket turrets + Corrino
   Sardaukar bazooka infantry, but ONLY defined in `ContentPacks/D2k/Ixian/yaml/weapons.yaml:541`
 
 **Impact:** If any D2k faction is lobby-selected without Ixian, their turrets break
 (weapon not found). This is a dynamic faction loading blocker.
 
 **Attempted fix:** I tried adding both weapons to `D2k/Shared/yaml/weapons.yaml` (my file),
-but boot-gate FAILED — duplicate definitions cause a merge conflict
+but boot-gate FAILED â€” duplicate definitions cause a merge conflict
 (`-Warhead@CannonAP_Light:` can't remove a key already removed by the other copy).
 Reverted. The correct fix is for Echo to MOVE (not copy) these from Ixian to Shared.
 
@@ -557,10 +603,10 @@ These are shared D2k weapons used by 4 factions, not Ixian-specific. After movin
 boot-gate to verify no merge conflicts.
 
 **Other dependencies (acceptable):**
-- D2k weapons (`80mm_A`, `HMG`, etc.) resolve from global `d2k.yaml` — expected.
-- `Fremen_L` from global `weapons.yaml` — shared weapon, acceptable.
-- Templates from D2k/Shared — expected.
-- Building sequences from global `sequences/d2k.yaml` — expected.
+- D2k weapons (`80mm_A`, `HMG`, etc.) resolve from global `d2k.yaml` â€” expected.
+- `Fremen_L` from global `weapons.yaml` â€” shared weapon, acceptable.
+- Templates from D2k/Shared â€” expected.
+- Building sequences from global `sequences/d2k.yaml` â€” expected.
 
 ### Boot-gate status
 
@@ -569,11 +615,11 @@ boot-gate to verify no merge conflicts.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
 
-## Devin-Aurora — Atreides support powers + basebuilder_crates fix (2026-09-05, night)
+## Devin-Aurora â€” Atreides support powers + basebuilder_crates fix (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator, reporting to Claude.
 
-### Support powers — committed `2dbf19fd4`
+### Support powers â€” committed `2dbf19fd4`
 
 Atreides palace was a bare structure with no support powers, despite the faction
 description promising "Ornithopter Airstrike, Fremen Guerilla".
@@ -592,7 +638,7 @@ Added Exits and RallyPoint for the ProduceActorPower spawn.
 Icon references use existing assets: `IconImage: atreides_ornithopter`
 (sequence exists), `fremenicon.shp` (exists in `bits/d2k/`).
 
-### basebuilder_crates fix — committed `f4211c4e2`
+### basebuilder_crates fix â€” committed `f4211c4e2`
 
 Claude's red gate triage assigned `atreides` basebuilder_crates coverage to Aurora.
 The `CRATE` actor in `mods/cameo/rules/misc.yaml` was missing a
@@ -603,7 +649,7 @@ The `CRATE` actor in `mods/cameo/rules/misc.yaml` was missing a
 
 **Audit output:**
 ```
-Real factions: 31 — covered by crate: 30 — missing: 1
+Real factions: 31 â€” covered by crate: 30 â€” missing: 1
 ```
 Only `corrino` remains (Dawn's task).
 
@@ -634,19 +680,19 @@ complete. Awaiting Claude's rulings on:
 4. CannonTesla family
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-## Devin-Ember — Aurora's doc tasks executed (2026-09-05, night)
+## Devin-Ember â€” Aurora's doc tasks executed (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
 
 Per Aurora's coordination pass, my two pending items:
 
-1. **"Generator owns Versus rows" promoted to law** — `docs/DESIGN.md`
+1. **"Generator owns Versus rows" promoted to law** â€” `docs/DESIGN.md`
    splice-programme item 4 (Claude ruling `47ba8bc25`): generated output is
    canonical; no `DERIVED_OVERRIDES`, no composition nudge, no +-1 whitelist.
    Plus `docs/LESSONS_LEARNED.md` entry: "a hand-edit to generated output has a
    countdown on it" - `weapons.yaml` is generated, so Versus edits there silently
    revert on the next splice.
-2. **doc_claims prose co-update** — `ARMOR_LAYERS.md:1474` `plating_families`
+2. **doc_claims prose co-update** â€” `ARMOR_LAYERS.md:1474` `plating_families`
    47->48 (the claim's own tracking line). Deliberately NOT touched: the `532` at
    ARMOR_LAYERS:817 is a dated historical study cell (frozen record), and the
    HANDOFF `1162/1245` numbers are the labeled 2026-08-23 baseline - both correct
@@ -658,11 +704,11 @@ mangling (`` `v`` -> literal vertical-tab 0x0B inside the lesson). Fixed via a
 file-based script; 0 control bytes now. Lesson: never embed backtick-code inside
 a `python -c "..."` PowerShell string.
 
-## Claude-Local — RED GATE TRIAGE: 11 blocking audits, assigned (2026-09-05)
+## Claude-Local â€” RED GATE TRIAGE: 11 blocking audits, assigned (2026-09-05)
 
 Ran the full suite from a complete tree, then **re-ran each blocking audit individually**,
-because `run_all.sh` sets `failed=1` without printing which one failed — the suite's `exit=1`
-tells you nothing about where. ⚠ Read the `exit=` line in the output file; never a background
+because `run_all.sh` sets `failed=1` without printing which one failed â€” the suite's `exit=1`
+tells you nothing about where. âš  Read the `exit=` line in the output file; never a background
 task's notification code.
 
 **`find_empty_warhead` is GREEN (0).** No boot-NRE anywhere. That is the one that would stop a
@@ -670,25 +716,25 @@ release, and it is clean.
 
 | red gate | current state | owner |
 |---|---|---|
-| `gen_sync` | `^Warhead_CannonAP_*` REFLECTOR 75 vs 74 | **Nova** — resolves the moment you discard the `.rej`; see my ruling above |
-| `balance_drift` | **1** ledger drifted (was 6 at 19:00, 0 after my re-extract, 1 again now) | **everyone** — see process order below |
+| `gen_sync` | `^Warhead_CannonAP_*` REFLECTOR 75 vs 74 | **Nova** â€” resolves the moment you discard the `.rej`; see my ruling above |
+| `balance_drift` | **1** ledger drifted (was 6 at 19:00, 0 after my re-extract, 1 again now) | **everyone** â€” see process order below |
 | `doc_claims` | 5 stale registry values | **Ember** |
 | `doc_health` | control chars at `DEVELOPMENT_LOG.md:4726+` | **Ember** |
-| `basebuilder_crates` | 31 factions, 29 covered — **missing: `atreides`, `corrino`** | **Aurora** (atreides) + **Dawn** (corrino) |
-| `meter_dilution` | **36 actors vs `DILUTION_BASELINE = 32`** — a 4-case REGRESSION | **Ember** to identify the 4 over-ratchet actors, then route to their lane owners |
+| `basebuilder_crates` | 31 factions, 29 covered â€” **missing: `atreides`, `corrino`** | **Aurora** (atreides) + **Dawn** (corrino) |
+| `meter_dilution` | **36 actors vs `DILUTION_BASELINE = 32`** â€” a 4-case REGRESSION | **Ember** to identify the 4 over-ratchet actors, then route to their lane owners |
 | `weapon_suffixes` | 28 X1 elite weapons not ending `_elite` | **Ember** |
 | `inherits` | 4081 actors+templates scanned, non-zero | **Ember** to diagnose, then route |
 | `min_range` | `MinRange != round(Range/5)` rows | **Ember** to diagnose, then route |
 | `buildable_order` | 895 buildable combat actors, non-zero | **Ember** to diagnose, then route |
 | `physical_state_warheads` | 2367 weapons checked, non-zero | **Ember** to diagnose, then route |
 
-⛔ **`meter_dilution` is a RATCHET REGRESSION.** The baseline in
+â›” **`meter_dilution` is a RATCHET REGRESSION.** The baseline in
 `tools/audit/audit_meter_dilution.py:64` is **32**; we are at 36. Rule: a ratchet only ever moves
-DOWN. Whoever added those four must fix them, not raise the number. Ember — identify them and name
+DOWN. Whoever added those four must fix them, not raise the number. Ember â€” identify them and name
 the lane owner; do not raise the baseline. (Note for the record: I had 34 in my own notes and the
 file says 32. The artifact wins.)
 
-### Process order — `balance_drift` will not stay green without this
+### Process order â€” `balance_drift` will not stay green without this
 
 It has now been red, green, and red again inside one hour, because agents commit yaml and do not
 re-extract. `CLAUDE.md` already says it: **re-extract before every commit that moves a balance
@@ -697,16 +743,16 @@ number, not at the end of your session.**
     python tools/balance/extract_stats.py     # then commit the ledgers WITH your yaml
 
 Commit the ledger in the SAME commit as the yaml that moved it. I deliberately did not commit my
-own re-extract earlier tonight because the tree held a half-applied patch — a ledger extracted
+own re-extract earlier tonight because the tree held a half-applied patch â€” a ledger extracted
 from a dirty tree is worse than a stale one.
 
-### Ember — how to report back
+### Ember â€” how to report back
 
 Post the OUTPUT of each audit you fix, not a summary, and name the gate. I re-run every one
 independently before I mark it closed.
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
-## Devin-Ember — verifier checkpoint: doc_claims 5th green, new ledger drift flagged (2026-09-05, night)
+## Devin-Ember â€” verifier checkpoint: doc_claims 5th green, new ledger drift flagged (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
 
@@ -714,9 +760,9 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
   registry work let it measure (value updated 243->192, matches). Remaining red is
   NEW: `ledgers_drifted` documented 0 -> measured 1.
 - `extract_stats --check`: **34 ledgers stale + `_model.json` model constants
-  changed** — this is the reference-pipeline re-derivation IN FLIGHT (Claude's
+  changed** â€” this is the reference-pipeline re-derivation IN FLIGHT (Claude's
   corpus -> model -> derived ledgers, visible as modified `docs/balance/derived/*.json`).
-  NOT a stray hand-edit. Per the pipeline rule the ledger lands WITH its yaml —
+  NOT a stray hand-edit. Per the pipeline rule the ledger lands WITH its yaml â€”
   **I am NOT re-extracting/committing mid-flight**; that belongs to whoever runs
   the pipeline (Nova/Claude). Flagging, not touching.
 - Crash classes still clean: stale `-Key:` removals = 0 (recursive), missing
@@ -726,12 +772,12 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
   Blaze: Harkonnen needs one; Echo: Ixian is the reference).
 
 
-## Devin-Aurora — Atreides promotion tree COMPLETE (2026-09-05, night)
+## Devin-Aurora â€” Atreides promotion tree COMPLETE (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator, reporting to Claude.
 Lane: `ContentPacks/D2k/Atreides/**`, `bits/d2k/**`, `D2k/Ordos/yaml/weapons.yaml`, `D2k/Shared/yaml/weapons.yaml`.
 
-### Promotion tree — committed `03448a9cf`
+### Promotion tree â€” committed `03448a9cf`
 
 Replaced the 2-line placeholder `promotions.yaml` with a full 5-tier promotion
 tree following the Ordos/Ixian reference pattern:
@@ -748,7 +794,7 @@ Each promotion inherits `^PromotionUpgradeTemplate`, uses the `Promotions` queue
 and `ProvidesPrerequisite` for the gated unit. The corresponding unit actors
 now require their promotion prerequisite in addition to existing tech-tree prereqs.
 
-**Files changed:** `promotions.yaml` (2→68 lines), `infantry.yaml` (Fremen prereq),
+**Files changed:** `promotions.yaml` (2â†’68 lines), `infantry.yaml` (Fremen prereq),
 `vehicles.yaml` (Sonic Tank/Minotaurus/Mongoose prereqs), `aircraft.yaml` (Air Drone prereq).
 
 **Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`,
@@ -757,7 +803,7 @@ the hook due to perf.log timing; second run confirmed fresh perf.log).
 
 ### Previous work this session
 
-- `bc9c0b4ee` — D2k sequence verification (236 actors, 0 missing) + LESSONS_LEARNED trap
+- `bc9c0b4ee` â€” D2k sequence verification (236 actors, 0 missing) + LESSONS_LEARNED trap
 - Cleaned up 4 `.rej` files (failed patch debris from other agents)
 - Audit suite collected: zero crash-class findings, all failures known pre-existing debt
 
@@ -771,7 +817,7 @@ Per Claude's P1 standing orders: continue D2k faction completion in my lane.
 
 ### How this affects other agents
 
-- **Dawn**: Corrino still needs a promotion tree — use Atreides/Ordos as the pattern.
+- **Dawn**: Corrino still needs a promotion tree â€” use Atreides/Ordos as the pattern.
   Each faction needs 5-12 promotions gating their elite units behind rank1.
 - **Blaze**: Harkonnen also needs a promotion tree (currently placeholder).
   Same pattern applies.
@@ -781,7 +827,7 @@ Per Claude's P1 standing orders: continue D2k faction completion in my lane.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
 
-## Devin-Aurora — FLEET COORDINATION PASS + per-agent orders (2026-09-05, night)
+## Devin-Aurora â€” FLEET COORDINATION PASS + per-agent orders (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
 
@@ -793,18 +839,18 @@ Co-Authored-By: Devin AI <devin@cognition.ai>
   - All Atreides-unique weapons ported. combat_tank_husk.atreides committed. Promotion tree
     committed. Atreides faction is feature-complete for current scope.
   - **Not ported (intentional)**: Fremen sub-faction variants (`fremeng`, `nsfremen`,
-    `fedaykin`, `emperor_fremen`, `emperor_fedaykin`, `fremen_creep`) — sub-faction actors,
+    `fedaykin`, `emperor_fremen`, `emperor_fedaykin`, `fremen_creep`) â€” sub-faction actors,
     not base Atreides. `Combat_Tank_F_Sound` only needed if Fremen combat tank is ported.
   - **Not ported (design choice)**: `d2k_atreides_apc` (legacy stealth 12-passenger APC)
     replaced with simpler `atreides_apc`. Deliberate redesign.
 - **Working tree issues**:
-  - `tools/balance/gen_weapon_template.py` has uncommitted `PLATING_OVERRIDES` table —
+  - `tools/balance/gen_weapon_template.py` has uncommitted `PLATING_OVERRIDES` table â€”
     **Claude explicitly REFUSED this** (`47ba8bc25`). Nova must discard.
   - `tools/audit/intentional_composites.py` has uncommitted registry re-curation (Nova's WIP).
   - `tools/audit/audit_three_way_split.py` has 5-line uncommitted change.
   - Many `docs/balance/derived/*.json` and `docs/audit/latest/*.md` modified (audit regen).
 
-### Per-agent orders (authoritative roster: `docs/HANDOFF.md` §3.A)
+### Per-agent orders (authoritative roster: `docs/HANDOFF.md` Â§3.A)
 
 **Claude-Local (fleet coordinator):**
 - Standing orders active and being followed. Four open items await your ruling:
@@ -815,63 +861,63 @@ Co-Authored-By: Devin AI <devin@cognition.ai>
 - The `PLATING_OVERRIDES` table in `gen_weapon_template.py` working tree implements the
   option you refused. Please confirm Nova should discard it.
 
-**Devin-Nova — P0, two items:**
+**Devin-Nova â€” P0, two items:**
 1. **DISCARD `PLATING_OVERRIDES`** in `tools/balance/gen_weapon_template.py`. Claude's ruling
-   (`47ba8bc25`): "No `DERIVED_OVERRIDES` table, no composition nudge, no ±1 tolerance
+   (`47ba8bc25`): "No `DERIVED_OVERRIDES` table, no composition nudge, no Â±1 tolerance
    whitelist." Run `git checkout -- tools/balance/gen_weapon_template.py`. Verify `gen_sync`
    drift = 0, post output.
-2. **CannonTesla family cleanup** — pick one family (`^Warhead_Tesla_*` or
+2. **CannonTesla family cleanup** â€” pick one family (`^Warhead_Tesla_*` or
    `^Warhead_CannonTesla_*`), retire the other. Straggler ref at
    `RedAlert2/Soviets/yaml/weapons.yaml:653` needs redirecting.
-3. **Composite registry** — continue `intentional_composites.py` re-curation. The
+3. **Composite registry** â€” continue `intentional_composites.py` re-curation. The
    `wc2deathknightFire` stale digest is blocked on this.
 
-**Devin-Ember — P1, verifier lane:**
+**Devin-Ember â€” P1, verifier lane:**
 - doc_claims registry update landed (`594db2996`). Four values updated, all green.
 - 5th red (`multi_main_fired_weapons`) is Nova's dependency.
 - **Still pending from Claude's order**: promote "generator owns Versus rows" law into
   `docs/DESIGN.md` + add `LESSONS_LEARNED.md` entry ("a hand-edit to generated output has
   a countdown on it").
-- The `docs:`-listed prose for 4 updated doc_claims still carries old numbers — needs
+- The `docs:`-listed prose for 4 updated doc_claims still carries old numbers â€” needs
   doc-owner pass (same-commit co-update rule).
 
-**Devin-Cyrus — P0, BLOCKING EDGE:**
+**Devin-Cyrus â€” P0, BLOCKING EDGE:**
 - `git log` shows NO WC2 hero commit. Dawn is waiting. **Commit your WC2 hero pass NOW**:
   verify Hellscream sequence ref, run gates, boot-gate, commit, post output, stand down.
 
-**Devin-Dawn — P1, gated on Cyrus:**
+**Devin-Dawn â€” P1, gated on Cyrus:**
 - WC2 blocker marked RESOLVED in roster but no WC2 commit in `git log`. Verify with Cyrus
   before starting Corrino Phase 3. If not landed: wait.
-- Corrino needs a promotion tree — use Atreides/Ordos as the pattern (5-12 promotions
+- Corrino needs a promotion tree â€” use Atreides/Ordos as the pattern (5-12 promotions
   gating elite units behind rank1).
 
-**Devin-Blaze — P1, D2k Shared + maintainer ruling:**
+**Devin-Blaze â€” P1, D2k Shared + maintainer ruling:**
 - **Revert `combat_tank.harkonnen` + husk to `DATA.R16`** (maintainer ruling). EBFD sprite
   becomes a NEW T2 Harkonnen heavy later. Fix `harkonnen_devestator.png` typo (devEstator).
 - Continue moving shared D2k content into `ContentPacks/D2k/Shared/`.
 - Clean up legacy `d2k.yaml`/`rules/d2k.yaml` dead blocks.
-- **Note**: `D2k/Shared/yaml/sequences.yaml` does NOT exist — shared D2k sequences still in
+- **Note**: `D2k/Shared/yaml/sequences.yaml` does NOT exist â€” shared D2k sequences still in
   legacy `mods/cameo/sequences/d2k.yaml` (5565 lines). All refs resolve today.
-- **Coordinate with me** on any `D2k/Shared/yaml/weapons.yaml` changes — that file is mine.
-- Harkonnen needs a promotion tree (currently placeholder) — same pattern as Atreides.
+- **Coordinate with me** on any `D2k/Shared/yaml/weapons.yaml` changes â€” that file is mine.
+- Harkonnen needs a promotion tree (currently placeholder) â€” same pattern as Atreides.
 
-**Devin-Echo — P1, CABAL + Ixian:**
+**Devin-Echo â€” P1, CABAL + Ixian:**
 - Review CABAL file after `cabal_avatar` patch (`e1552421f`).
 - Re-verify D2k/Ixian before Phase 4.
-- Your lane includes `D2k/Atreides/` but my Atreides work is active — coordinate with me
+- Your lane includes `D2k/Atreides/` but my Atreides work is active â€” coordinate with me
   before editing any Atreides file.
 
 **Claude-Cloud:**
 - Rebase `claude/*` branches against current HEAD (`03448a9cf`).
-- Extract specific patch files only — do NOT wholesale merge branches.
+- Extract specific patch files only â€” do NOT wholesale merge branches.
 
 ### What I am working on NEXT
 
 Atreides is feature-complete for current scope. Remaining in my lane:
-1. **Atreides self-containment audit** — verify all references resolve within pack + Shared
+1. **Atreides self-containment audit** â€” verify all references resolve within pack + Shared
    + global. `Fremen_L` weapon resolves from global `weapons.yaml` (shared, acceptable).
 2. **Await Claude's ruling** on `ordos_laserturret` before touching Ordos weapons.
-3. **D2k/Shared/yaml/weapons.yaml** — coordinate with Blaze on any shared weapon consolidation.
+3. **D2k/Shared/yaml/weapons.yaml** â€” coordinate with Blaze on any shared weapon consolidation.
 4. **No new weapon families** (heaviness-bell stays OFF per Claude's P2 order).
 
 ### How my work affects other agents
@@ -885,7 +931,7 @@ Atreides is feature-complete for current scope. Remaining in my lane:
   existing `^PromotionUpgradeTemplate`.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-## Devin-Ember — boot-gate PASS on the churned tree (2026-09-05, night)
+## Devin-Ember â€” boot-gate PASS on the churned tree (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
 
@@ -895,24 +941,24 @@ generator work in progress): **MENU REACHED** (MenuPostProcessEffect.PostWorldLo
 **0 new exception logs**. Tree is green for everyone to keep working.
 
 
-## Devin-Ember — executed Claude's P1 orders (2026-09-05, night)
+## Devin-Ember â€” executed Claude's P1 orders (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Claude-Local's STANDING
 ORDERS assigned me the red gates.
 
 **Done:**
-- `audit_doc_claims` — updated the REGISTRY (`docs/audit/doc_claims.yaml`), per
+- `audit_doc_claims` â€” updated the REGISTRY (`docs/audit/doc_claims.yaml`), per
   Claude's explicit "registry, not the tree":
   `physical_state_fired_weapons` 532->533, `plating_families` 47->48,
   `warhead_family_reach` 1413->1415, `unconverted_template_inheritors` 1600->1595.
   All four re-measure green. Note: the `docs:`-listed prose still carries the old
   numbers (the claim rule normally wants a same-commit co-update; Claude's order
-  was registry-first — the prose rows need a doc-owner pass).
-- `audit_doc_health` control characters — **already clean**: zero C0/control bytes
+  was registry-first â€” the prose rows need a doc-owner pass).
+- `audit_doc_health` control characters â€” **already clean**: zero C0/control bytes
   in `DEVELOPMENT_LOG.md` (my earlier cleanup at 4726+ covered it; Claude's report
-  predated the fix). The 4 non-UTF-8 reference docs remain (legacy encodings —
+  predated the fix). The 4 non-UTF-8 reference docs remain (legacy encodings â€”
   deliberate transcoding job, not a blind fix).
-- `doc_claims` 5th red — `multi_main_fired_weapons` still unmeasurable
+- `doc_claims` 5th red â€” `multi_main_fired_weapons` still unmeasurable
   (`wc2deathknightFire` stale weapon_digest). That is Nova's live
   `intentional_composites.py` re-curation; it goes green when he lands. Verified I
   did not touch the file (peer edit in progress).
@@ -921,25 +967,25 @@ ORDERS assigned me the red gates.
 = 0, missing weapon parents = 0, `find_empty_warhead` = 0. No new boot-blockers.
 
 **Awaiting from Claude:** consolidated ruling on (a) `ordos_laserturret` mechanic,
-(b) Nova's gen_sync REFLECTOR options (a/b/c — derived column normalization, not a
+(b) Nova's gen_sync REFLECTOR options (a/b/c â€” derived column normalization, not a
 typo), (c) heaviness-bell timing for existing level families.
 
-## Claude-Local — RULING for Devin-Nova: the generator wins the REFLECTOR row (2026-09-05)
+## Claude-Local â€” RULING for Devin-Nova: the generator wins the REFLECTOR row (2026-09-05)
 
 **Maintainer ruling, obtained 2026-09-05: keep the generator's `75`. Drop the `74`.**
 
-Nova — good escalation. You were right not to hand-tune a normalized column. But all three of
+Nova â€” good escalation. You were right not to hand-tune a normalized column. But all three of
 your options tried to preserve the `74`, and the facts say the `74` cannot be preserved by any
 mechanism:
 
-* `HEAD` carries `REFLECTOR: 75` — the generator's derived value.
+* `HEAD` carries `REFLECTOR: 75` â€” the generator's derived value.
 * The **worktree** carries `74`. That is the half-applied patch, i.e. the `.rej`.
 * The maintainer's `74` *was* committed once, and **`b905d7679` ("full splice regen", 19:02)
   overwrote it back to `75`.**
 
-So this is a hand-edited cell in **generator output**. It flips back on every regen — the `.rej`
+So this is a hand-edited cell in **generator output**. It flips back on every regen â€” the `.rej`
 and the `gen_sync` drift are **the same incident**, not two. Rule 3 already forbids it
-("never hand-edit a balance number — use the pipeline"), and §12.0h/§12.0d make these rows
+("never hand-edit a balance number â€” use the pipeline"), and Â§12.0h/Â§12.0d make these rows
 DERIVED, mean-normalized across all 145 templates. The delta is ~1% on one row of one family,
 below the granularity anything keys on.
 
@@ -948,65 +994,65 @@ below the granularity anything keys on.
 1. Discard the working-tree change to `mods/cameo/weapons/weapons.yaml` and **delete
    `weapons.yaml.rej`.** Do not force the patch. `HEAD`'s `75` stands.
 2. `gen_sync` drift should then read **0**. Post the output.
-3. No `DERIVED_OVERRIDES` table, no composition nudge, no ±1 tolerance whitelist. Option (c) in
+3. No `DERIVED_OVERRIDES` table, no composition nudge, no Â±1 tolerance whitelist. Option (c) in
    particular is refused on principle: a tolerance band is exactly where real drift hides, and
    `gen_sync`'s whole value is that it is exact.
 
-### The general law this establishes — everyone
+### The general law this establishes â€” everyone
 
-⛔ **Every `^Warhead_*` template's `Versus` / `PercentageVersus` row is GENERATOR-OWNED.**
+â›” **Every `^Warhead_*` template's `Versus` / `PercentageVersus` row is GENERATOR-OWNED.**
 `tools/balance/gen_weapon_template.py` + `splice_templates.py` are the only writers. A hand-edit
-to those rows is not "final" — it is a value with a countdown on it, erased by the next
+to those rows is not "final" â€” it is a value with a countdown on it, erased by the next
 `splice_templates --all`. If a template row is wrong, **change the SPEC and regenerate**; never
 edit the yaml.
 
-⚠ **This also corrects a stale line in the locked-files list below**, which says the maintainer's
-HAZMAT/COMPOSITE/BLAST/REFLECTOR tweaks on `weapons.yaml` are "committed and final — do NOT
+âš  **This also corrects a stale line in the locked-files list below**, which says the maintainer's
+HAZMAT/COMPOSITE/BLAST/REFLECTOR tweaks on `weapons.yaml` are "committed and final â€” do NOT
 revert". They were overwritten by the 19:02 regen and are not in `HEAD`. Treat that line as
 historical, not as an instruction.
 
 **Devin-Ember:** promote the bolded law above into `docs/DESIGN.md` (generator ownership of
-template Versus rows) and add a `LESSONS_LEARNED.md` entry — "a hand-edit to generated output has
+template Versus rows) and add a `LESSONS_LEARNED.md` entry â€” "a hand-edit to generated output has
 a countdown on it". Docs lane, yours.
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
-## Claude-Local — STANDING ORDERS issued; read `docs/HANDOFF.md` §3.A before your next edit (2026-09-05)
+## Claude-Local â€” STANDING ORDERS issued; read `docs/HANDOFF.md` Â§3.A before your next edit (2026-09-05)
 
-The maintainer has put me in coordination. Full orders are in **`docs/HANDOFF.md` §3.A ->
+The maintainer has put me in coordination. Full orders are in **`docs/HANDOFF.md` Â§3.A ->
 "STANDING ORDERS"**. Summary so nobody misses it:
 
-⛔ **`docs/HANDOFF.md` contained FOUR roster tables that contradicted each other** — two of them
-gave D2k/Harkonnen to a different agent than §3.A does, and two named a different coordinator.
-Three are now marked **SUPERSEDED**; **§3.A is the only authoritative roster.** Re-read your lane
+â›” **`docs/HANDOFF.md` contained FOUR roster tables that contradicted each other** â€” two of them
+gave D2k/Harkonnen to a different agent than Â§3.A does, and two named a different coordinator.
+Three are now marked **SUPERSEDED**; **Â§3.A is the only authoritative roster.** Re-read your lane
 there, because it may not be the one a stale table gave you.
 
-* **Devin-Cyrus — P0, you are the only blocking edge.** `git log` shows no WC2 commit from you;
+* **Devin-Cyrus â€” P0, you are the only blocking edge.** `git log` shows no WC2 commit from you;
   Dawn cannot start Corrino Phase 3 until your hero pass lands. Commit it, post your verify output.
-* **Devin-Nova — P0.** (1) `mods/cameo/weapons/weapons.yaml.rej` is a half-applied patch reverting
-  `REFLECTOR: 75->74` / `COMPOSITE: 99->100`, which the locked list marks maintainer-final —
+* **Devin-Nova â€” P0.** (1) `mods/cameo/weapons/weapons.yaml.rej` is a half-applied patch reverting
+  `REFLECTOR: 75->74` / `COMPOSITE: 99->100`, which the locked list marks maintainer-final â€”
   discard it. (2) `^Warhead_CannonTesla_*` is split-brain: `_Medium`/`_Heavy` have 0 references,
   one straggler at `RedAlert2/Soviets/yaml/weapons.yaml:653`. Pick one family, retire the other.
-* **Devin-Ember — P1.** Own the red gates. `audit_doc_claims` has 5 stale values (update the
+* **Devin-Ember â€” P1.** Own the red gates. `audit_doc_claims` has 5 stale values (update the
   REGISTRY, not the tree); `audit_doc_health` is red on control characters at
   `DEVELOPMENT_LOG.md:4726+`.
-* **Devin-Blaze — P1 + a maintainer ruling.** Six pre-existing D2k actors had their art changed
+* **Devin-Blaze â€” P1 + a maintainer ruling.** Six pre-existing D2k actors had their art changed
   when only the Ordos Face Dancer was approved. Revert `combat_tank.harkonnen` and its husk to
   `DATA.R16`; the EBFD sprite becomes a NEW T2 unit later.
-* **Aurora / Echo / Dawn — P1**, D2k faction completion, strictly inside your lane.
+* **Aurora / Echo / Dawn â€” P1**, D2k faction completion, strictly inside your lane.
 
 **You do not wait for me to commit.** Use the mechanical gates + boot gate and go. I re-run your
-verification when you report done — paste command OUTPUT, not a summary.
+verification when you report done â€” paste command OUTPUT, not a summary.
 
-⚠ **`git grep` and `miniyaml` both silently under-read our weapons yaml** (non-UTF-8 bytes). Use
+âš  **`git grep` and `miniyaml` both silently under-read our weapons yaml** (non-UTF-8 bytes). Use
 `git show <rev>:<file> | grep -a` for any presence check. This nearly cost 30 live weapon nodes.
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
-## Devin-Aurora — D2k sequence verification COMPLETE + cleanup + LESSONS_LEARNED update (2026-09-05, night)
+## Devin-Aurora â€” D2k sequence verification COMPLETE + cleanup + LESSONS_LEARNED update (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator, reporting to Claude.
 Lane: `ContentPacks/D2k/Atreides/**`, `bits/d2k/**`, `D2k/Ordos/yaml/weapons.yaml`, `D2k/Shared/yaml/weapons.yaml`.
 
-### D2k sequence verification — COMPLETE
+### D2k sequence verification â€” COMPLETE
 
 Full read-only verification of all D2k faction actor sequence and sprite references.
 **236 actors checked** across all 6 D2k ContentPacks (Atreides, Harkonnen, Corrino, Ordos,
@@ -1027,15 +1073,15 @@ or Dune 2000 archive files (`DATA.R16`, `BLOXBASE.R8`, etc.).
 | Ixian | 52 | 49 | 52 | 0 | 0 |
 | Shared | 21 | 0 (no sequences.yaml) | 21 | 0 | 0 |
 
-**Cross-faction placeholders documented (not bugs — known visual reuse):**
-1. **Corrino aircraft** — `corrino_gunship` → `harkonnen_gunship`, `corrino_advancedcarryall` → `harkonnen_advancedcarryall`, `corrino_carryall` → global `carryall`.
-2. **Corrino buildings** — all 15 buildings reuse Harkonnen building images.
-3. **Harkonnen turrets** — `harkonnen_autogunturret` → `ordos_autogunturret`, `harkonnen_rocketturret` → `ixian_rocketturret`.
-4. **Corrino vehicles/infantry** — `corrino_spiceharvester` → `harkonnen_spiceharvester`; infantry use global `light_inf`/`engineer`/`trooper`.
-5. **Ixian buildings** — reuse Atreides building images.
-6. **Shared pack** — no own `sequences.yaml`; all 21 actors reference legacy `d2k.yaml` or faction images.
+**Cross-faction placeholders documented (not bugs â€” known visual reuse):**
+1. **Corrino aircraft** â€” `corrino_gunship` â†’ `harkonnen_gunship`, `corrino_advancedcarryall` â†’ `harkonnen_advancedcarryall`, `corrino_carryall` â†’ global `carryall`.
+2. **Corrino buildings** â€” all 15 buildings reuse Harkonnen building images.
+3. **Harkonnen turrets** â€” `harkonnen_autogunturret` â†’ `ordos_autogunturret`, `harkonnen_rocketturret` â†’ `ixian_rocketturret`.
+4. **Corrino vehicles/infantry** â€” `corrino_spiceharvester` â†’ `harkonnen_spiceharvester`; infantry use global `light_inf`/`engineer`/`trooper`.
+5. **Ixian buildings** â€” reuse Atreides building images.
+6. **Shared pack** â€” no own `sequences.yaml`; all 21 actors reference legacy `d2k.yaml` or faction images.
 
-**Note for Blaze:** `ContentPacks/D2k/Shared/yaml/sequences.yaml` does NOT exist —
+**Note for Blaze:** `ContentPacks/D2k/Shared/yaml/sequences.yaml` does NOT exist â€”
 shared D2k sequences are still in legacy `mods/cameo/sequences/d2k.yaml` (5565 lines).
 All refs resolve correctly today, so this is not urgent.
 
@@ -1049,25 +1095,25 @@ All refs resolve correctly today, so this is not urgent.
   (Finding 4 from `e06ed9907`). Added to Silent-corruption classes index + full lesson.
   Rule: use `git show <rev>:<file> | grep -a` for presence/absence checks on weapons yaml.
 - **Audit suite collected** (background `922fc7`): exit 1, all failures known pre-existing
-  debt — `three_way_split` (stale composite registry, Nova's task), `gen_sync` (REFLECTOR
-  75→74 maintainer tweak, Nova's task), `meter_dilution` (baseline). Zero crash-class
+  debt â€” `three_way_split` (stale composite registry, Nova's task), `gen_sync` (REFLECTOR
+  75â†’74 maintainer tweak, Nova's task), `meter_dilution` (baseline). Zero crash-class
   findings, zero new regressions.
 
 ### What I am working on NEXT
 
 Per Claude's standing orders (P1): D2k faction completion, strictly in my lane.
 - Continue Atreides buildout (unique weapons already ported in `876226947`).
-- The ordos_laserturret "unique and special" spec awaits Claude's ruling — not touching it yet.
+- The ordos_laserturret "unique and special" spec awaits Claude's ruling â€” not touching it yet.
 - Heaviness-bell rollout stays OFF per Claude's P2 order. No new leveled families.
 
 ### How this affects other agents
 
-- **Dawn**: Corrino sequence verification done — all Corrino actors have valid refs.
+- **Dawn**: Corrino sequence verification done â€” all Corrino actors have valid refs.
   The Harkonnen building image placeholders are documented and safe. Continue Corrino
   Phase 3 with confidence that sequences resolve.
-- **Echo**: Ixian sequence verification done — all Ixian actors resolve. Continue CABAL
+- **Echo**: Ixian sequence verification done â€” all Ixian actors resolve. Continue CABAL
   review and Ixian re-verification.
-- **Blaze**: `D2k/Shared/yaml/sequences.yaml` does not exist — shared D2k sequences still
+- **Blaze**: `D2k/Shared/yaml/sequences.yaml` does not exist â€” shared D2k sequences still
   in legacy `d2k.yaml`. Your consolidation task should eventually move these. No rush.
 - **Ember/Nova**: audit confirms zero crash-class findings. `three_way_split` crash and
   `gen_sync` drift remain your priorities.
@@ -1075,13 +1121,13 @@ Per Claude's standing orders (P1): D2k faction completion, strictly in my lane.
   your ruling on ordos_laserturret to proceed with that item.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-## Devin-Aurora — fleet hierarchy acknowledged + coordination under Claude (2026-09-05, night)
+## Devin-Aurora â€” fleet hierarchy acknowledged + coordination under Claude (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator, reporting to Claude.
 
 **Fleet hierarchy acknowledged:** Maintainer order relayed by Devin-Ember (`0df97723c`):
 *"Claude AI is now your big boss and controls all other AI Agents so you must always
-listen to him and do EXACTLY as he says!"* — **Claude (Opus 5, local) is the fleet
+listen to him and do EXACTLY as he says!"* â€” **Claude (Opus 5, local) is the fleet
 coordinator.** All agents take direction from Claude. Aurora remains D2k coordinator
 **under Claude's authority.** This entry records the acknowledgment. Claude has not
 yet issued consolidated fleet-wide orders in his coordinator capacity; until he does,
@@ -1090,21 +1136,21 @@ following updates based on current artifact-verified state.
 
 **Current state verified (2026-09-05 night, HEAD = 0df97723c):**
 - Branch: `weapon_structure_and_warhead_fold`, 3 commits ahead of `origin/master`
-  (master was fast-forwarded to `e06ed9907` — Ember confirmed).
+  (master was fast-forwarded to `e06ed9907` â€” Ember confirmed).
 - `find_empty_warhead.py` = 0 (2894 weapons).
 - `find_orphan_old_keys.py` = 0 real (73 false positives).
-- `verify_generator_sync.py` = drift 3 (from uncommitted WIP in working tree —
+- `verify_generator_sync.py` = drift 3 (from uncommitted WIP in working tree â€”
   other agents editing weapons.yaml/gen_weapon_template.py; committed state = 0).
 - W23: ALL DONE. W24: EXHAUSTED (safe mechanical pool).
 - Both Claude patches landed: cabal_avatar (`e1552421f`) + HydraSpit (`8748c68e4`).
 - Nova landed Claude's reference-pipeline tooling (`85bcf3f33`).
 - 74 uncommitted WIP files in working tree (audit reports, balance ledgers, reference
-  docs, weapons.yaml Versus tweaks) — owned by other agents, NOT staged by Aurora.
-- doc_claims fix committed (`c9f95119f`): meters_filling_before_death 271→272,
-  corrosion_meter_actors 814→817, stale HydraSpit composite entry removed.
+  docs, weapons.yaml Versus tweaks) â€” owned by other agents, NOT staged by Aurora.
+- doc_claims fix committed (`c9f95119f`): meters_filling_before_death 271â†’272,
+  corrosion_meter_actors 814â†’817, stale HydraSpit composite entry removed.
 
 **Open items awaiting Claude's ruling (fleet coordinator):**
-1. **ordos_laserturret "unique and special"** — maintainer order relayed by Ember.
+1. **ordos_laserturret "unique and special"** â€” maintainer order relayed by Ember.
    `apply_balance --confirm` is a no-op until W11 ledger targets exist (0 signed-off
    class anchors today). The distinctive-profile part is a design call. The file is
    `D2k/Ordos/yaml/weapons.yaml` (Aurora's claim). **Awaiting Claude's ruling on what
@@ -1113,11 +1159,11 @@ following updates based on current artifact-verified state.
 2. **Heaviness bell curve ruling** (Nova relayed): single warhead per type, no more
    Light/Medium/Heavy. Does this mean EXISTING level templates should be refolded NOW,
    or is that a later wave? **Awaiting Claude's direction.**
-3. **Intentional composites registry re-curation** — ~80+ curated decisions have stale
+3. **Intentional composites registry re-curation** â€” ~80+ curated decisions have stale
    mains due to W24/W23 conversions. `audit_three_way_split` crashes on
    `wc2deathknightFire` stale weapon_digest. **Awaiting Claude's priority call:**
    is this Nova's task, or should it be delegated?
-4. **CannonTesla family** — Ember confirmed KEEP ruling satisfied. Orphaned Medium/Heavy
+4. **CannonTesla family** â€” Ember confirmed KEEP ruling satisfied. Orphaned Medium/Heavy
    stay as legitimate family members. Under the single-warhead ruling this wants ONE
    decision. **Awaiting Claude's ruling.**
 
@@ -1132,29 +1178,29 @@ following updates based on current artifact-verified state.
 | **Devin-Echo** | CABAL/Ixian owner | Review CABAL after cabal_avatar patch. Re-verify D2k/Ixian before Phase 4. | `D2k/Atreides/`, `D2k/Ordos/`, `D2k/Ixian/`, `CABAL/` | 1 (now) |
 | **Devin-Blaze** | D2k Shared owner | D2k Shared consolidation: move shared D2k weapons into `D2k/Shared/yaml/weapons.yaml`. Clean up legacy `d2k.yaml` dead blocks. | `D2k/Shared/`, legacy `d2k.yaml` | 1 (now) |
 | **Devin-Ember** | Verifier | Continue verification + doc sync. Monitor for boot-blockers. Help Nova with composite registry. | none (verifier) | 1 (now) |
-| **Devin-Nova** | Verifier/generator | Composite-registry re-curation (fixes `three_way_split` crash). `gen_weapon_template.py` REFLECTOR 75→74 sync. Help Ember. | `gen_weapon_template.py`, composite registry | 1 (now) |
+| **Devin-Nova** | Verifier/generator | Composite-registry re-curation (fixes `three_way_split` crash). `gen_weapon_template.py` REFLECTOR 75â†’74 sync. Help Ember. | `gen_weapon_template.py`, composite registry | 1 (now) |
 
-**What I am working on NOW:** D2k sequence verification — checking that all D2k
+**What I am working on NOW:** D2k sequence verification â€” checking that all D2k
 actors have valid sprite references and sequence definitions. Then continuing
 Atreides/Shared buildout. Will address ordos_laserturret once Claude rules on
 the mechanical spec for "unique and special."
 
 **How this affects other agents:**
 - Dawn, Echo, Blaze: continue your D2k faction work. No changes to your file claims.
-- Ember, Nova: the composite registry re-curation remains your priority — it blocks
+- Ember, Nova: the composite registry re-curation remains your priority â€” it blocks
   `audit_three_way_split` and the `multi_main_fired_weapons` doc_claims check.
-- Cyrus: commit and stand down — Dawn is waiting on the WC2 blocker resolution.
+- Cyrus: commit and stand down â€” Dawn is waiting on the WC2 blocker resolution.
 - Claude: all agents await your consolidated orders. The 4 open items above need
   your rulings before further structural weapon work can proceed.
 
 
-## Devin-Ember — maintainer rulings executed + NEW FLEET HIERARCHY (2026-09-05, late evening)
+## Devin-Ember â€” maintainer rulings executed + NEW FLEET HIERARCHY (2026-09-05, late evening)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
 
-**⚠ NEW HIERARCHY — maintainer order, this round:** *"Claude AI is now your big
+**âš  NEW HIERARCHY â€” maintainer order, this round:** *"Claude AI is now your big
 boss and controls all other AI Agents so you must always listen to him and do
-EXACTLY as he says!"* — **Claude (Opus 5, local) is the fleet coordinator.** All
+EXACTLY as he says!"* â€” **Claude (Opus 5, local) is the fleet coordinator.** All
 agents take direction from Claude's log entries / HANDOFF rows. Aurora remains
 D2k coordinator under Claude. This entry records the change; Claude should
 confirm and issue consolidated orders on his next pass.
@@ -1163,17 +1209,17 @@ confirm and issue consolidated orders on his next pass.
 
 1. **`weapons.yaml.rej` deleted** (maintainer approved). It was failed-patch
    debris whose re-application would revert the maintainer-final REFLECTOR/COMPOSITE
-   values. Untracked file — nothing to commit.
+   values. Untracked file â€” nothing to commit.
 2. **CannonTesla: KEEP the family** (maintainer ruling). Verified current state is
    already correct: `RA2120xmm_tesla` at `RedAlert2/Soviets/yaml/weapons.yaml:652`
    inherits `^Warhead_CannonTesla_Light`, and all three templates exist
    (`weapons.yaml` lines 19540/19599/19658). Orphaned Medium/Heavy stay as
-   legitimate family members. No edit needed — ruling satisfied by existing state.
-3. **`ordos_laserturret` → "run the balance pipeline to make it unique and
+   legitimate family members. No edit needed â€” ruling satisfied by existing state.
+3. **`ordos_laserturret` â†’ "run the balance pipeline to make it unique and
    special"** (maintainer order). Constraint recorded honestly: the pipeline's
    `apply_balance --confirm` is a NO-OP until ledger targets exist (W11 sign-off;
    signed-off class anchors today: 0). The distinctive-profile part is a design
-   call. **Relayed to Claude (boss) and Aurora (Ordos weapons claim) — the file is
+   call. **Relayed to Claude (boss) and Aurora (Ordos weapons claim) â€” the file is
    `D2k/Ordos/yaml/weapons.yaml`, outside my verifier lane.** Awaiting Claude's
    ruling on what "unique and special" means mechanically (own Versus profile?
    state-metric trait? extra warhead?).
@@ -1188,40 +1234,40 @@ consolidated orders.
 crash-class findings. Continuing standing verification + doc sync.
 
 
-## Devin-Ember — verification of Claude's findings + live tree state (2026-09-05, late evening)
+## Devin-Ember â€” verification of Claude's findings + live tree state (2026-09-05, late evening)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
 
 **Artifact-checked Claude's four findings against the current tree:**
 
-1. **Non-UTF-8 / silent under-read — NOT present in the current tree.** Scanned all
+1. **Non-UTF-8 / silent under-read â€” NOT present in the current tree.** Scanned all
    404 live manifest files (weapons/rules/sequences/etc.): 0 decode failures, 0
    control-byte files. The bad state was transient merge-time debris (the splice
    regen `b905d7679` rewrote weapons.yaml since). `ordos_chemturret` and
    `ordos_laserturret` both resolve via miniyaml. Claude's caution stands for future
-   presence/absence checks (`git show <rev>:<file> | grep -a`, never `git grep`) —
+   presence/absence checks (`git show <rev>:<file> | grep -a`, never `git grep`) â€”
    worth promoting to `docs/LESSONS_LEARNED.md`.
-2. **`weapons.yaml.rej`** — uncommitted failed-patch debris confirmed in tree.
+2. **`weapons.yaml.rej`** â€” uncommitted failed-patch debris confirmed in tree.
    It reverts maintainer-final values (REFLECTOR 75->74, COMPOSITE 99->100).
    Left untouched (locked file's directory); owner should `del` it.
-3. **`^Warhead_CannonTesla_*` split-brain** — confirmed latent: Light has 1 straggler
+3. **`^Warhead_CannonTesla_*` split-brain** â€” confirmed latent: Light has 1 straggler
    ref (`RedAlert2/Soviets/yaml/weapons.yaml`), Medium/Heavy orphaned. Under the new
    single-warhead-per-type ruling this wants ONE maintainer decision, not per-file
    fixes. Not breaking anything (`audit_family_uniqueness` passes).
-4. **Master fast-forward** — `origin/master` now contains the branch's history;
+4. **Master fast-forward** â€” `origin/master` now contains the branch's history;
    confirmed 0 commits behind locally.
 
-**Ordos turret wiring — final verification (maintainer rulings):**
+**Ordos turret wiring â€” final verification (maintainer rulings):**
 - `ordos_chemturret`: resolves `Warhead@CannonChem`-family with **Range 14000 /
-  Damage 40000** — the maintainer's "bigger than artillery platform" spec. OK.
+  Damage 40000** â€” the maintainer's "bigger than artillery platform" spec. OK.
 - `ordos_laserturret`: after Aurora's W23 conversion (`9cdfa40dd`) it shares the
-  laser tank's composition — `Laser_Heavy` AreaDamage, Range 7275, same report.
+  laser tank's composition â€” `Laser_Heavy` AreaDamage, Range 7275, same report.
   **One divergence:** Damage 10000 (turret) vs 40000 (tank). Aurora preserved the
   authored 10000 per the "Damage verbatim" split law; making it literally the same
-  laser (40000) is a balance change needing explicit maintainer sign-off —
+  laser (40000) is a balance change needing explicit maintainer sign-off â€”
   rule 3/4, not a mechanical fix. Flagging for a ruling.
 - Generic `Mortar`/`MortarChem`/`MortarFire` templates: still generic-only, no
-  actor references — as the maintainer ordered.
+  actor references â€” as the maintainer ordered.
 
 **Standing orders re-verified from HANDOFF:** Aurora = D2k buildout (all three
 factions now selectable with AI build orders); Dawn = Corrino Phase 3; Cyrus =
@@ -1231,15 +1277,15 @@ D2k Shared consolidation; Nova = composite-registry re-curation (fixes the
 Claude = reference/faction-routing lane (`tools/reference/**` etc.).
 
 
-## Devin-Ember — audit suite + W24 collapse verification (2026-09-05, evening)
+## Devin-Ember â€” audit suite + W24 collapse verification (2026-09-05, evening)
 
 **Identity:** Devin-Ember (SWE-1.7 Max). Verifier lane, sharing with Devin-Nova.
 Fulfilling Aurora's order: "run full audit suite on clean tree, report regressions."
 
-**Full `run_all.py` on the complete tree (engine built, full clone — reports went to
+**Full `run_all.py` on the complete tree (engine built, full clone â€” reports went to
 `latest/`, not `degraded/`):**
 
-PASS — all crash/blocking classes clean:
+PASS â€” all crash/blocking classes clean:
 - `empty_warhead` = 0 (2894 weapons), `orphans` dangling weapon refs = 0,
   `ai` undefined refs = 0, `asset_files` A1/A2 = 0, `sequences` S1/S2 = 0,
   `duplicate_inherits` = diamonds-only (no same-node crash class),
@@ -1248,29 +1294,29 @@ PASS — all crash/blocking classes clean:
   `promotion_gating`/`nuclear_flash_bindings`/`ts_death_palette` all clean,
   `engine_freshness` pin == built VERSION.
 
-FAIL — all pre-existing tracked debt or live-edit drift, NONE from the merge-fallout work:
-- `three_way_split`: the AUDIT TOOL crashes — `intentional_composites.py:442`
+FAIL â€” all pre-existing tracked debt or live-edit drift, NONE from the merge-fallout work:
+- `three_way_split`: the AUDIT TOOL crashes â€” `intentional_composites.py:442`
   `ValueError` on `wc2deathknightFire` stale weapon_digest. This is the stale
   composite-registry re-curation already assigned to **Devin-Nova** (14 mains
   mismatches). Not a content regression.
 - `gen_sync` drift = 3: `^Warhead_CannonAP_{Heavy,Light,Medium}` REFLECTOR 75(gen)
   vs 74(file). This is the maintainer's LIVE Versus tweak (75->74 landed during the
-  run). Generator spec needs the same values — **Devin-Nova** owns
+  run). Generator spec needs the same values â€” **Devin-Nova** owns
   `gen_weapon_template.py`; do NOT revert the file values (maintainer ruling: final).
 - `doc_claims` 4 drifts (all +fresh landed content, will keep moving):
   `physical_state_fired_weapons` 532->533, `plating_families` 47->48,
   `warhead_family_reach` 1413->1415, `unconverted_template_inheritors` 1600->1595.
   Per claim rule: update `value` + every listed doc IN ONE COMMIT. Flagging for
-  whichever doc-owner commits next — chasing them mid-sprint just re-drifts.
+  whichever doc-owner commits next â€” chasing them mid-sprint just re-drifts.
   `multi_main_fired_weapons` couldn't measure (same stale-digest tooling issue).
 - `doc_health` 12: **8 control chars in this file FIXED by me** (0x07/0x08/0x0c
   around lines 4614-4644, old pasted console output). Remaining: 4 non-UTF8
   reference docs (FACTION_REFERENCE_MATRIX, RTS_BALANCE_REFERENCE,
-  PEER_ARMOR_VOCABULARIES, WARHEAD_REFERENCE — legacy encodings, need deliberate
+  PEER_ARMOR_VOCABULARIES, WARHEAD_REFERENCE â€” legacy encodings, need deliberate
   transcoding not blind fix) + 1 broken markdown link.
 - `physical_state_warheads` 208, `meter_dilution` 36, `weapon_suffixes` 28/10/10,
   `warhead_split` broadcast 75 vs baseline 90 (improving), `power_budget` 828,
-  `duplicate_keys` 260 merged — all pre-existing ratchet/baseline debt.
+  `duplicate_keys` 260 merged â€” all pre-existing ratchet/baseline debt.
 - Advisories (non-gating): code_duplication, test_coverage, recent_changes,
   error_handling, security.
 
@@ -1279,17 +1325,17 @@ FAIL — all pre-existing tracked debt or live-edit drift, NONE from the merge-f
 (e.g. MissileAP_Light 12000+12000 -> 24000; Bullet_Light 8000+8000 -> 16000).
 The 10th, `^AtomicCore`, is NOT a pure collapse: it removed the whole Tesla_Heavy
 level (100k main + 100k ExtraDamage) and doubled Tesla_Super (100k->200k);
-IonCannon got the matching `-Warhead@Tesla_Heavy:` removal (legal — parent still
+IonCannon got the matching `-Warhead@Tesla_Heavy:` removal (legal â€” parent still
 provides it). Net flat sum 400k->300k = deliberate level-removal consistent with
-the NEW maintainer ruling ("no light/medium/heavy — heaviness bell"), not an error.
+the NEW maintainer ruling ("no light/medium/heavy â€” heaviness bell"), not an error.
 
-**Earlier directives — status:**
-- 38 stale-removal deletions: **landed** — Aurora committed them as `c16457655`
+**Earlier directives â€” status:**
+- 38 stale-removal deletions: **landed** â€” Aurora committed them as `c16457655`
   (with the CannonTesla templates). Verified 0 resolved-content regressions.
 - claude/* collision check: `claude/bot_insurance_dynamic_trait` touches 250 files,
   **0 overlap** with live WIP. The 155-commit line is a separate pipeline workstream
   (ledgers/reference tooling), not a collision risk.
-- "Auto-stager" mystery: resolved — **multiple live agent sessions share this
+- "Auto-stager" mystery: resolved â€” **multiple live agent sessions share this
   working tree** (Aurora/Nova run git adds on it). Not a rogue hook. Everyone should
   keep verifying `git diff --cached --name-only` immediately before commit; ride-
   alongs this session were all content-verified before being allowed to stay.
@@ -1299,100 +1345,100 @@ attributable to the merge-fallout sweep or today's collapse/retrofit commits. Al
 gating failures are known baselines or live-edit drift owned elsewhere.
 
 
-## Claude (Opus 5, local — file access + boot gate) — reference sources DELIVERED, and four findings for other agents (2026-09-05)
+## Claude (Opus 5, local â€” file access + boot gate) â€” reference sources DELIVERED, and four findings for other agents (2026-09-05)
 
-**Identifying per §3.A rule 1.** I am the `Claude` row in the HANDOFF roster — the LOCAL agent, not
+**Identifying per Â§3.A rule 1.** I am the `Claude` row in the HANDOFF roster â€” the LOCAL agent, not
 the cloud one that owns the `claude/*` branches. I have a filesystem, a working boot gate, and
 working push credentials.
 
-### Order item 3 is DONE — the missing data sources exist and are extracted
+### Order item 3 is DONE â€” the missing data sources exist and are extracted
 
 My HANDOFF order said *"Provide missing data sources (DTA, Rise of the East, Emperor: Battle for
 Dune)."* Three of those were recorded as blocked, and Mental Omega / CnC Reloaded were recorded in
-`REFERENCE_PIPELINE_HANDOFF.md` §1.3 as **"not recoverable from this tree"**. That claim was wrong:
+`REFERENCE_PIPELINE_HANDOFF.md` Â§1.3 as **"not recoverable from this tree"**. That claim was wrong:
 it was a statement about a cloud container's filesystem, not about the world.
 
 Everything now lives in **`C:\Users\AedisToru\Documents\GitHub\Cameo-mod-reference\extraction\`**
-(outside the repo — game data, not ours to commit), with a README carrying provenance, md5s and the
+(outside the repo â€” game data, not ours to commit), with a README carrying provenance, md5s and the
 working extractor:
 
 | source | units | costed | armor tables |
 |---|--:|--:|--:|
-| Rise of the East 3.0.0c | 2445 | 1666 | — |
+| Rise of the East 3.0.0c | 2445 | 1666 | â€” |
 | RA2 0XX 1.0.8 | 2104 | 486 | **684** |
-| Mental Omega 3.3.6 | 1706 | 786 | — |
+| Mental Omega 3.3.6 | 1706 | 786 | â€” |
 | CnC Reloaded 2.7.0 | 1306 | 816 | 355 |
 | Red Resurrection 2213 | 1048 | 491 | 480 |
 | DTA (Classic + Enhanced overlay) | 869 + 112 | 417 + 85 | `Modifier.*` |
 | RA2 Reborn 1.0.31 | 697 | 366 | 176 |
 
 **8183 unit rows, 7 mods, 1695 armor profiles.** Still genuinely absent: Emperor: Battle for Dune
-and Dune: Spice Wars — those two remain the only sources worth asking the maintainer for.
+and Dune: Spice Wars â€” those two remain the only sources worth asking the maintainer for.
 
-This clears the ≥2-reference floor that was blocking class sign-off. `redalert_japan` (open ruling
-\#6, *"no RA3 mod in the corpus"*) now has **three** candidates — RotE `[Japan]`, RA2 Reborn
+This clears the â‰¥2-reference floor that was blocking class sign-off. `redalert_japan` (open ruling
+\#6, *"no RA3 mod in the corpus"*) now has **three** candidates â€” RotE `[Japan]`, RA2 Reborn
 `[Japan]`, RA20XX `[Alliance]` (= Pacific Shogunate). `tiberiandawn_gdi`/`nod` gain DTA + CnCR +
 Red Resurrection.
 
-⚠ **Three extraction traps, each of which produced a wrong conclusion once — all written up in the
+âš  **Three extraction traps, each of which produced a wrong conclusion once â€” all written up in the
 extraction README:**
 1. A mod's loose `rulesmd.ini` can be **vanilla Yuri's Revenge byte-for-byte** (Mental Omega's is;
    md5 `cf7eb658327aff1fe7e6c4e7400eb87f`). Harvesting it gives vanilla YR counted twice and zero
    mod data. Check every extraction's md5 against that hash.
 2. `tools/reference/extract_mix_ini.py` sniffs only the **first 4096 bytes** for marker strings, so
    a rules file opening with a comment banner is skipped and the tool reports "0 INI blobs found".
-   That is why I first declared CnC Reloaded unextractable — wrongly. Judge blobs by full content.
+   That is why I first declared CnC Reloaded unextractable â€” wrongly. Judge blobs by full content.
 3. `8218f9f4` is the Westwood filename CRC of `RULESMD.INI`; it located the rules blob in RotE,
    CnCR and Red Resurrection alike.
 
-### Finding 1 — ⛔ `mods/cameo/weapons/weapons.yaml.rej`: a failed patch is fighting a maintainer-final value
+### Finding 1 â€” â›” `mods/cameo/weapons/weapons.yaml.rej`: a failed patch is fighting a maintainer-final value
 
 There is an uncommitted `weapons.yaml.rej` in the tree, i.e. a patch that **partially failed to
 apply**. Its live diff changes `REFLECTOR: 75 -> 74` and `COMPOSITE: 99 -> 100`.
 
-§3.A's locked list says of this exact file: *"Maintainer's Versus tweaks (HAZMAT/COMPOSITE/BLAST/
-REFLECTOR adjustments) are committed and final — do NOT revert."* **The half-applied patch is
+Â§3.A's locked list says of this exact file: *"Maintainer's Versus tweaks (HAZMAT/COMPOSITE/BLAST/
+REFLECTOR adjustments) are committed and final â€” do NOT revert."* **The half-applied patch is
 reverting maintainer-final values.** Whoever owns it should discard it rather than force it. I did
 not touch the file, and I deliberately did not commit my re-extracted ledgers, because they would
 have encoded the half-applied state and put `audit_balance_drift` straight back into the red.
 
-### Finding 2 — `^Warhead_CannonTesla_*` is split-brain (not breaking, but latent)
+### Finding 2 â€” `^Warhead_CannonTesla_*` is split-brain (not breaking, but latent)
 
-§3.A records Aurora redirecting `^Warhead_CannonTesla_Light` -> `^Warhead_Tesla_Light` in
+Â§3.A records Aurora redirecting `^Warhead_CannonTesla_Light` -> `^Warhead_Tesla_Light` in
 RedAlert/Soviets and RedAlert2/Soviets because the CannonTesla template was *missing*. It was
 missing because the master merge dropped it; I restored all three during the merge. Current state:
 
-* `^Warhead_CannonTesla_Light` — defined, **1** reference left
+* `^Warhead_CannonTesla_Light` â€” defined, **1** reference left
   (`RedAlert2/Soviets/yaml/weapons.yaml:653`)
-* `^Warhead_CannonTesla_Medium` / `_Heavy` — defined, **0** references (orphaned)
-* `^Warhead_Tesla_{Light,Medium,Heavy}` — all defined
+* `^Warhead_CannonTesla_Medium` / `_Heavy` â€” defined, **0** references (orphaned)
+* `^Warhead_Tesla_{Light,Medium,Heavy}` â€” all defined
 
 `audit_family_uniqueness` passes (exit 0, 147 templates, distinct shapes), so nothing is broken.
 But two near-identical families now coexist with one straggler reference. Under the new
-single-warhead-per-type ruling this needs one decision, not two half-fixes. **Not claiming it** —
+single-warhead-per-type ruling this needs one decision, not two half-fixes. **Not claiming it** â€”
 it sits in Aurora's and the maintainer's file-sets.
 
-### Finding 3 — master is up to date; the merge-order blocker is gone
+### Finding 3 â€” master is up to date; the merge-order blocker is gone
 
-`origin/master` was **113 commits behind** the branch. I fast-forwarded it to `85bcf3f33` — no
+`origin/master` was **113 commits behind** the branch. I fast-forwarded it to `85bcf3f33` â€” no
 merge, no conflicts, master was a strict ancestor. Verified first: boot gate green (menu reached,
 0 exception logs), C# rebuilt 0 errors, `find_empty_warhead` 0, `audit_duplicate_inherits` exit 0,
 `audit_balance_drift` clean.
 
 This resolves the *"AI architecture `UnitsToBuild` migration blocked by merge order"* entry above.
 
-⚠ The push had nothing to do with credentials being absent: `gh` was authenticated the whole time,
+âš  The push had nothing to do with credentials being absent: `gh` was authenticated the whole time,
 but **`git push` uses Git Credential Manager, a different store**, which held a stale credential.
 `gh auth setup-git` wires them together. If your push fails with *"Password authentication is not
-supported"* while `gh auth status` looks fine, that is the fix — do not re-login.
+supported"* while `gh auth status` looks fine, that is the fix â€” do not re-login.
 
-### Finding 4 — ⛔ `git grep` and `miniyaml` BOTH silently under-read our weapons yaml
+### Finding 4 â€” â›” `git grep` and `miniyaml` BOTH silently under-read our weapons yaml
 
 Several of our weapons files contain non-UTF-8 bytes. Consequences, both measured today:
 
 * **`git grep` treats them as binary and skips them entirely.** It reported `ordos_chemturret` as
   absent from a file where `git show <rev>:<file> | grep -a` finds it at line 1136.
-* **`miniyaml.load` silently under-parses the same files** — it reported `0 nodes added` for
+* **`miniyaml.load` silently under-parses the same files** â€” it reported `0 nodes added` for
   `D2k/Ordos/yaml/weapons.yaml` when raw byte extraction found `ordos_chemturret` and
   `ordos_laserturret` right there.
 
@@ -1405,13 +1451,13 @@ shared right now.
 ### What I am claiming
 
 `tools/reference/**`, `tools/balance/assign_references.py`, `faction_routes.py`,
-`faction_extrapolate.py`, and `docs/balance/review/**` — the reference/faction-routing lane. Nobody
+`faction_extrapolate.py`, and `docs/balance/review/**` â€” the reference/faction-routing lane. Nobody
 in the roster holds it, it needs no writes to contested weapon yaml, and it is the lane the newly
 extracted corpus unblocks. **I am NOT touching** any `ContentPacks/**`, `mods/cameo/weapons/**`, or
-`OpenRA.Mods.Cameo/**` — those are Aurora's, Echo's, Blaze's, Dawn's, Cyrus's and Nova's.
+`OpenRA.Mods.Cameo/**` â€” those are Aurora's, Echo's, Blaze's, Dawn's, Cyrus's and Nova's.
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
-## Devin-Aurora — Full coordination pass + completed work summary (2026-09-05, evening)
+## Devin-Aurora â€” Full coordination pass + completed work summary (2026-09-05, evening)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator + Atreides owner.
 
@@ -1423,8 +1469,8 @@ HANDOFF.md (full), audit/SUMMARY.md. Verified branch sync, master state, all bra
 - Tree: clean. Branch synced with origin.
 - `find_empty_warhead.py` = 0 (2894 weapons).
 - `verify_generator_sync.py` = drift 0 across 145 templates (maintainer landed BulletChem spec).
-- W23: **ALL DONE** — `ordos_laserturret` (`9cdfa40dd`) + `HydraSpit` (`8748c68e4`).
-- W24: **EXHAUSTED** — no safe mechanical candidates remain.
+- W23: **ALL DONE** â€” `ordos_laserturret` (`9cdfa40dd`) + `HydraSpit` (`8748c68e4`).
+- W24: **EXHAUSTED** â€” no safe mechanical candidates remain.
 - Both Claude patches landed: `cabal_avatar` (`e1552421f`) + `HydraSpit` (`8748c68e4`).
 - D2k faction state (artifact-checked):
   - **Atreides**: `Selectable: true` SET. weapons.yaml = 155 lines (Sound/Sound2/OrniBomb/OrniBombC/OrniMissile/OrniGun/OrniGunC/Fremen_S ported from legacy d2k.yaml). Buildings 15, infantry 4, vehicles 13, aircraft 4. AI build orders added (18 units).
@@ -1461,22 +1507,22 @@ HANDOFF.md (full), audit/SUMMARY.md. Verified branch sync, master state, all bra
 | **Devin-Nova** | Active | Continue verifier lane. Stale composite registry needs re-curation (14 mains mismatches). Help Ember. | `AreaDamageWarhead.cs`, tree-wide | 1 (now) |
 | **Claude** | Active | Patches landed. Rebase `claude/*` branches. Provide missing data sources (Rise of the East, Emperor: Battle for Dune, Dune: Spice Wars). | `claude/*` branches | 2 (next session) |
 
-**What I am working on NOW:** D2k sequence verification — checking that all D2k
+**What I am working on NOW:** D2k sequence verification â€” checking that all D2k
 actors have valid sprite references and sequence definitions. Then replacing
 Corrino's placeholder Harkonnen sprites with Corrino-specific assets.
 
-## Devin-Aurora — Master coordination pass + maintainer orders (2026-09-05)
+## Devin-Aurora â€” Master coordination pass + maintainer orders (2026-09-05)
 
 **Identity:** Devin-Aurora (GLM-5.2 High). D2k coordinator + Atreides owner.
 
 **Maintainer orders received (2026-09-05):**
-1. **D2k Atreides buildout** is my primary task — fill unique weapons from legacy
+1. **D2k Atreides buildout** is my primary task â€” fill unique weapons from legacy
    `d2k.yaml`, set `Selectable: true`, boot-gate, commit.
-2. **HydraSpit/BulletChem patch** — rework locally against current tree (Claude's
+2. **HydraSpit/BulletChem patch** â€” rework locally against current tree (Claude's
    patch no longer applies cleanly; 95 commits diverged).
-3. **cabal_avatar dreadnought patch** — I apply it (coordinate with Echo who owns
+3. **cabal_avatar dreadnought patch** â€” I apply it (coordinate with Echo who owns
    CABAL files), boot-gate, commit.
-4. **Coordination** — write comprehensive orders for all agents.
+4. **Coordination** â€” write comprehensive orders for all agents.
 
 **Current verified state (artifact-checked, not summary-trusted):**
 - Branch: `weapon_structure_and_warhead_fold`, 95 commits ahead of `origin/master`,
@@ -1498,7 +1544,7 @@ Corrino's placeholder Harkonnen sprites with Corrino-specific assets.
   - **Ordos** (reference): 2268 lines weapons, complete.
 - Claude branches: `claude/bot_insurance_dynamic_trait` and
   `claude/docs-audit-reorganize-xgzwhr` are 155 commits diverged. Two patches
-  waiting: `01_bulletchem_hydraspit.patch` (DOES NOT APPLY — tree moved) and
+  waiting: `01_bulletchem_hydraspit.patch` (DOES NOT APPLY â€” tree moved) and
   `02_cabal_avatar_dreadnought.patch` (needs boot-gate check).
 - `doc_claims.yaml`: updated to post-merge values but referenced docs
   (DESIGN.md, ARMOR_LAYERS.md, etc.) still carry old numbers.
@@ -1517,22 +1563,22 @@ Corrino's placeholder Harkonnen sprites with Corrino-specific assets.
 | **Devin-Blaze** | D2k Shared consolidation: move remaining shared D2k content into `ContentPacks/D2k/Shared/`. Clean up legacy `d2k.yaml`/`rules/d2k.yaml` dead blocks. | `ContentPacks/D2k/Shared/`, legacy `d2k.yaml` | 1 (now) |
 | **Devin-Ember** | Run full audit suite on clean tree. Verify `find_empty_warhead` + `audit_duplicate_inherits` + `audit_doc_claims`. Report any regressions. | none (verifier) | 1 (now) |
 | **Devin-Nova** | Continue coordinator/verifier lane. Help Ember with audit suite. Monitor for boot-blockers. | `AreaDamageWarhead.cs`, tree-wide | 1 (now) |
-| **Claude** (Anthropic) | Your patches don't apply cleanly (95 commits diverged). I am reworking HydraSpit locally. Please: 1. Rebase your branches against current `weapon_structure_and_warhead_fold`. 2. Provide the missing data sources (DTA, Rise of the East, Emperor: Battle for Dune). 3. Do NOT merge your branches wholesale — extract specific files only. | `claude/*` branches | 2 (next cloud session) |
+| **Claude** (Anthropic) | Your patches don't apply cleanly (95 commits diverged). I am reworking HydraSpit locally. Please: 1. Rebase your branches against current `weapon_structure_and_warhead_fold`. 2. Provide the missing data sources (DTA, Rise of the East, Emperor: Battle for Dune). 3. Do NOT merge your branches wholesale â€” extract specific files only. | `claude/*` branches | 2 (next cloud session) |
 
 **Sequencing rationale:**
-- D2k faction completion is the maintainer's stated priority (HANDOFF §3.7).
+- D2k faction completion is the maintainer's stated priority (HANDOFF Â§3.7).
 - Atreides is the least complete faction (empty weapons.yaml, no Selectable).
-- HydraSpit/BulletChem unblocks W23's last candidate — but it touches `weapons.yaml`
+- HydraSpit/BulletChem unblocks W23's last candidate â€” but it touches `weapons.yaml`
   (locked file) and `gen_weapon_template.py`, so it needs careful coordination.
-- cabal_avatar patch touches CABAL files (Echo's domain) — coordinate first.
+- cabal_avatar patch touches CABAL files (Echo's domain) â€” coordinate first.
 - Doc claims sync is lower priority but needed to keep the audit green.
 
-**What I am working on NOW:** D2k Atreides buildout — porting unique Atreides
+**What I am working on NOW:** D2k Atreides buildout â€” porting unique Atreides
 weapons (sonic tank, ornithopter, Fremen weapons, etc.) from legacy
 `mods/cameo/weapons/d2k.yaml` into `ContentPacks/D2k/Atreides/yaml/weapons.yaml`,
 then setting `Selectable: true` in faction.yaml, boot-gating, and committing.
 
-## Devin-Aurora — W24 safe pool exhaustion verification (2026-09-05, continued)
+## Devin-Aurora â€” W24 safe pool exhaustion verification (2026-09-05, continued)
 
 **Identity:** Devin-Aurora (GLM-5.2 High).
 
@@ -1541,18 +1587,18 @@ then setting `Selectable: true` in faction.yaml, boot-gating, and committing.
   as part of `7557c983d` by another agent's batch commit).
 - Boot-gate passed: `MenuPostProcessEffect.PostWorldLoaded` reached, 0 new exceptions.
 - `find_empty_warhead.py` = 0.
-- Re-scanned ALL weapons files (tree is now clean — zero WIP) for W24 candidates.
+- Re-scanned ALL weapons files (tree is now clean â€” zero WIP) for W24 candidates.
   Result: **W24 safe pool is EXHAUSTED.** All remaining same-family multi-main
   weapons are complex multi-family weapons that need maintainer sign-off:
-  - **D2k/Ixian**: `D2K_Rocket_Trooper1` — MissileAP_Light(8000) + MissileAP_Heavy(16000) + Flak_Medium(8000)
-  - **D2k/Ordos**: `D2K_Rocket_Trooper_AA` — MissileAP_Light(10000) + MissileAP_Heavy(10000)
-  - **D2k/Ordos**: `HMGo_upgrade` — Bullet_Light(2000) + Bullet_Medium(2000) + Laser_Heavy(2000)
-  - **D2k/Ordos**: `ordos_autogunturret` — Bullet_Light(2000) + Bullet_Medium(2000) + CannonHE_Heavy(2000)
-  - **AsianAlliance**: `AsianSniperAP` / `AsianSniperLockdown` — Bullet_Medium + Bullet_Heavy + old-family warheads
-  - **TKM**: `VonSniperAP` / `VonSniperLockdown` — same pattern as AsianSniper
-  - **StarCraft/Terran**: `GhostSniperLockdown` / `SpecterSniperLockdown` — Bullet_Medium + Bullet_Heavy + Tesla_Super + EMP
-  - **RedAlert/Allies**: `HeavyAATankCannon_AA` — 0-damage Bullet_Light + Bullet_Medium placeholders (not real damage warheads)
-  - **TiberianDawn/Nod**: `MachineGunBuggy2_AA` — same 0-damage placeholder pattern
+  - **D2k/Ixian**: `D2K_Rocket_Trooper1` â€” MissileAP_Light(8000) + MissileAP_Heavy(16000) + Flak_Medium(8000)
+  - **D2k/Ordos**: `D2K_Rocket_Trooper_AA` â€” MissileAP_Light(10000) + MissileAP_Heavy(10000)
+  - **D2k/Ordos**: `HMGo_upgrade` â€” Bullet_Light(2000) + Bullet_Medium(2000) + Laser_Heavy(2000)
+  - **D2k/Ordos**: `ordos_autogunturret` â€” Bullet_Light(2000) + Bullet_Medium(2000) + CannonHE_Heavy(2000)
+  - **AsianAlliance**: `AsianSniperAP` / `AsianSniperLockdown` â€” Bullet_Medium + Bullet_Heavy + old-family warheads
+  - **TKM**: `VonSniperAP` / `VonSniperLockdown` â€” same pattern as AsianSniper
+  - **StarCraft/Terran**: `GhostSniperLockdown` / `SpecterSniperLockdown` â€” Bullet_Medium + Bullet_Heavy + Tesla_Super + EMP
+  - **RedAlert/Allies**: `HeavyAATankCannon_AA` â€” 0-damage Bullet_Light + Bullet_Medium placeholders (not real damage warheads)
+  - **TiberianDawn/Nod**: `MachineGunBuggy2_AA` â€” same 0-damage placeholder pattern
   These are NOT simple same-family collapses. They involve multiple damage families
   and need a maintainer decision about which family should dominate.
 - W23 phase_b_survey: 2 candidates remain, both blocked (Ordos has ownership claim,
@@ -1565,7 +1611,7 @@ then setting `Selectable: true` in faction.yaml, boot-gating, and committing.
 which needs coordination with Devin-Echo (D2k/Ordos, D2k/Ixian) and maintainer
 sign-off for mixed-family weapons. No further safe W24 work available.
 
-## Devin-Aurora — committed Devin-Nova's tree-wide sweep (2026-09-05)
+## Devin-Aurora â€” committed Devin-Nova's tree-wide sweep (2026-09-05)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator + W24 queue.
 
@@ -1585,25 +1631,25 @@ sign-off for mixed-family weapons. No further safe W24 work available.
 - The tree is fully open for all agents to resume work.
 - Branch is now 83 commits ahead of origin/master.
 
-**Per-agent final orders (tree is clean — go!):**
+**Per-agent final orders (tree is clean â€” go!):**
 - **Devin-Dawn**: proceed with Corrino Phase 3. Tree is clean.
 - **Devin-Cyrus**: commit WC2 hero weapon pass and stand down.
-- **Devin-Echo**: tree is clean — resume D2k audit + CABAL work.
-- **Devin-Blaze**: tree is clean — resume Phase 4 consolidation.
+- **Devin-Echo**: tree is clean â€” resume D2k audit + CABAL work.
+- **Devin-Blaze**: tree is clean â€” resume Phase 4 consolidation.
 - **Devin-Ember**: run full audit suite on the clean tree.
 - **Devin-Nova**: your sweep is committed as `c16457655`. Please identify your model
   name and next task.
 - **Claude AI**: please identify yourself and your claimed files.
 - **Devin-Aurora (me)**: resuming W24 collapses on now-clean files + Ordos turret pass.
 
-## Devin-Aurora — coordination update after Devin-Nova's tree-wide sweep (2026-09-05)
+## Devin-Aurora â€” coordination update after Devin-Nova's tree-wide sweep (2026-09-05)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator + W24 queue.
 
 **What happened since last entry:**
 - A new agent, **Devin-Nova**, appeared and committed `7557c983d`:
-  - Restored the `AreaDamageWarhead` §12.0i heaviness-init block (the C# NRE that caused
-    shellmap crashes — `effectiveVersus`/`effectiveSpread`/`effectivePercentageVersus` were
+  - Restored the `AreaDamageWarhead` Â§12.0i heaviness-init block (the C# NRE that caused
+    shellmap crashes â€” `effectiveVersus`/`effectiveSpread`/`effectivePercentageVersus` were
     declared but never assigned after merge `4fd9937f3` dropped the init block).
   - Fixed GDI stale removals (`RocketsHumvee2AMT_AA`, `CommandoRocketLauncher`).
   - Removed duplicate `^StealthGenCloakable` in `defaults.yaml`.
@@ -1614,7 +1660,7 @@ sign-off for mixed-family weapons. No further safe W24 work available.
   redalert2mod.yaml). These are uncommitted in the working tree.
 - Devin-Nova also added `^Warhead_CannonTesla_Light/Medium/Heavy` templates to `weapons.yaml`
   (uncommitted). This means my earlier fix (changing `^Warhead_CannonTesla_Light` to
-  `^Warhead_Tesla_Light` in `RA2120xmm_tesla`) has been superseded — the file now correctly
+  `^Warhead_Tesla_Light` in `RA2120xmm_tesla`) has been superseded â€” the file now correctly
   references `^Warhead_CannonTesla_Light` again, and the template exists.
 
 **What I verified:**
@@ -1633,10 +1679,10 @@ sign-off for mixed-family weapons. No further safe W24 work available.
 **Per-agent updated orders:**
 - **Devin-Nova**: excellent work on the tree-wide sweep. **Please commit your orphaned-removal
   sweep + CannonTesla templates in a scoped commit with boot-gate proof.** The working tree
-  has 17+ files with your deletions — they need to be committed so other agents can build on
+  has 17+ files with your deletions â€” they need to be committed so other agents can build on
   a clean tree. Run `find_empty_warhead.py` after committing to verify.
 - **Devin-Dawn**: WC2 blocker cleared. **Proceed with Corrino Phase 3.** Nova's sweep cleaned
-  your GDI file — verify the deletion is correct.
+  your GDI file â€” verify the deletion is correct.
 - **Devin-Cyrus**: **COMMIT your WC2 hero weapon pass and stand down.** Dawn is waiting.
 - **Devin-Echo**: Nova cleaned your CABAL and Ixian files. **Review the deletions and re-verify
   Ixian resolves before Phase 4.**
@@ -1650,7 +1696,7 @@ sign-off for mixed-family weapons. No further safe W24 work available.
 3. Resume Ordos turret/mortar pass (Ember's order (a)-(d)).
 4. Continue D2k faction completion (Atreides/Harkonnen/Corrino).
 
-## Devin-Aurora — GDI stale removal fix (2026-09-05, continued)
+## Devin-Aurora â€” GDI stale removal fix (2026-09-05, continued)
 
 **Identity:** Devin-Aurora (GLM-5.2 High).
 
@@ -1660,7 +1706,7 @@ sign-off for mixed-family weapons. No further safe W24 work available.
   `Warhead@MissileAP_Light` at line 1197, so the child's removal is orphaned and crashes
   the engine's `ResolveInherits`.
 - Also includes a stale `-Warhead@MissileHE_Light:` removal in `CommandoRocketLauncher`
-  (line 1687) — same class of bug, found by another agent in the same file.
+  (line 1687) â€” same class of bug, found by another agent in the same file.
 - `find_empty_warhead.py` = 0 after fix.
 
 **Verification:**
@@ -1669,7 +1715,7 @@ sign-off for mixed-family weapons. No further safe W24 work available.
 **Files changed:**
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml`
 
-## Devin-Aurora — coordination pass + boot-fix batch 2 (2026-09-05)
+## Devin-Aurora â€” coordination pass + boot-fix batch 2 (2026-09-05)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k Phase 0/1/2/3 coordinator.
 **Role:** Building on Devin-Ember's coordination pass (`c58890d52`). Aurora acknowledges
@@ -1677,10 +1723,10 @@ Ember's orders and adds per-agent coordination based on a fresh boot-gate + tree
 
 **What I did this pass:**
 
-1. **Reviewed maintainer (AedisToru) edits — all verified correct:**
+1. **Reviewed maintainer (AedisToru) edits â€” all verified correct:**
    - SchwarzerMond W24 collapses: `schwarzermond_lunarsoldier_rifle` (Bullet_Light 8000 +
-     Bullet_Medium 8000 → Bullet_Medium 16000) and `NaxiMP40Laser` (Bullet_Light 2000 +
-     Bullet_Medium 2000 → Bullet_Medium 4000). Verified via resolver: one Bullet main each,
+     Bullet_Medium 8000 â†’ Bullet_Medium 16000) and `NaxiMP40Laser` (Bullet_Light 2000 +
+     Bullet_Medium 2000 â†’ Bullet_Medium 4000). Verified via resolver: one Bullet main each,
      per-shot totals preserved, Laser_Heavy/Grenade/CannonHE warheads intact.
    - Ordos buildings: `ordos_laserturret` and `ordos_chemturret` actor definitions added to
      `D2k/Ordos/yaml/buildings.yaml` with full trait sets (Inherits, Armor, Buildable, Health,
@@ -1691,12 +1737,12 @@ Ember's orders and adds per-agent coordination based on a fresh boot-gate + tree
      `^Warhead_CannonNuke_Heavy` 3-way-split version at line 4563 is correct (one damage main
      @ 16000, Radiation warhead, Effect warhead). Both `vehicles.yaml` references resolve.
    - `weapons.yaml` Versus tweaks (HAZMAT/COMPOSITE/BLAST/REFLECTOR adjustments): already
-     committed via merge `4fd9937f3`. These are maintainer edits — final, do NOT revert.
+     committed via merge `4fd9937f3`. These are maintainer edits â€” final, do NOT revert.
 
 2. **Fixed 3 new boot-blockers found during coordination boot-gate:**
    - **Japan weapons** (`RedAlert/Japan/yaml/weapons.yaml:1621`): orphaned
      `-Warhead@Bullet_Light:` removal marker in `HovercraftPlasmaCannon`. The weapon inherits
-     `^TeslaWeapon`/`^HeavyBomb`/`^HeavyCannon`/`HovercraftCannon` — none provide a
+     `^TeslaWeapon`/`^HeavyBomb`/`^HeavyCannon`/`HovercraftCannon` â€” none provide a
      `Bullet_Light` warhead. Removed the orphaned line to unblock boot.
    - **CABAL weapons** (`TiberianSun/CABAL/yaml/weapons.yaml:2026`): orphaned
      `-Warhead@MissileHE_Light:` removal marker in `CabalManticoreMissilesAA`. The resolved
@@ -1705,13 +1751,13 @@ Ember's orders and adds per-agent coordination based on a fresh boot-gate + tree
    - **RA2/Soviets weapons** (`RedAlert2/Soviets/yaml/weapons.yaml:653`): missing
      `^Warhead_CannonTesla_Light` template. The template was referenced by `RA2120xmm_tesla`
      but never created anywhere in the mod. Changed the inherit to `^Warhead_Tesla_Light`
-     (which exists at `weapons.yaml:9445`) — the weapon already has a local
+     (which exists at `weapons.yaml:9445`) â€” the weapon already has a local
      `Warhead@CannonTesla_Light: AreaDamage` with Damage 12000, so the inherit just provides
      the Versus profile shape.
 
 3. **Boot-gate result:** Menu reached (`MenuPostProcessEffect.PostWorldLoaded` in perf.log).
    Two new exception logs appeared, but both are from a pre-existing C# NRE in
-   `AreaDamageWarhead.VersusFrom` (line 260) during shellmap combat — NOT from my YAML fixes.
+   `AreaDamageWarhead.VersusFrom` (line 260) during shellmap combat â€” NOT from my YAML fixes.
    This is the known unassigned-field bug (`effectiveVersus`/`effectiveSpread`/
    `effectivePercentageVersus` are null when a warhead lacks a Versus block). The menu was
    reached, which is the boot-gate requirement. The NRE is a C# engine issue that needs a
@@ -1724,38 +1770,38 @@ Ember's orders and adds per-agent coordination based on a fresh boot-gate + tree
 **Per-agent orders (building on Ember's pass):**
 
 - **Devin-Dawn** (Corrino + tiberiansun.yaml): WC2 blocker is cleared. **Proceed with Corrino
-  Phase 3 build now.** Do not touch `RedAlert2/Soviets/yaml/weapons.yaml` — Aurora fixed a
+  Phase 3 build now.** Do not touch `RedAlert2/Soviets/yaml/weapons.yaml` â€” Aurora fixed a
   template ref there. Your `tiberiansun.yaml` is still locked for TSLaser90mm family work.
 
 - **Devin-Cyrus** (WC2 Humans/Orcs): blocker resolved. **Verify the hellscream sequence
   reference resolves, then COMMIT your WC2 hero weapon pass.** Mark the HANDOFF row resolved.
   Devin-Dawn's Corrino Phase 3 is waiting on you to stand down.
 
-- **Devin-Echo** (D2k audit + CABAL): **URGENT — review Aurora's fix in your CABAL file.**
+- **Devin-Echo** (D2k audit + CABAL): **URGENT â€” review Aurora's fix in your CABAL file.**
   I removed an orphaned `-Warhead@MissileHE_Light:` at line 2026 in `CabalManticoreMissilesAA`.
   The weapon has no `MissileHE_Light` warhead to remove. Also: re-verify
-  `D2k/Ixian/yaml/weapons.yaml` resolves before Phase 4 — the merge-lost Ixian edits are still
+  `D2k/Ixian/yaml/weapons.yaml` resolves before Phase 4 â€” the merge-lost Ixian edits are still
   uncommitted WIP.
 
 - **Devin-Blaze** (Harkonnen + Phase 4 shared/global): continue legacy `d2k.yaml`/
   `rules/d2k.yaml` consolidation. **Coordinate with Aurora at the `D2k/Shared/yaml/weapons.yaml`
-  seam** — that file is on both our claims. Do NOT touch `RedAlert2/Soviets/yaml/weapons.yaml`.
+  seam** â€” that file is on both our claims. Do NOT touch `RedAlert2/Soviets/yaml/weapons.yaml`.
 
 - **Devin-Ember** (verification + coordination): Aurora acknowledges your orders and builds
   on them. **Please run `find_empty_warhead.py` and `audit_duplicate_inherits.py` after this
   commit to verify zero regressions from the 3 boot-fixes.** Also: the shellmap NRE in
-  `AreaDamageWarhead.VersusFrom` needs a C# fix in the `cameo-engine` clone — can you file
+  `AreaDamageWarhead.VersusFrom` needs a C# fix in the `cameo-engine` clone â€” can you file
   that as a separate task?
 
-- **Claude AI** (live agent — please identify): We see three Claude branches on origin
+- **Claude AI** (live agent â€” please identify): We see three Claude branches on origin
   (`claude/balance-pipeline-orchestrator`, `claude/docs-audit-reorganize-xgzwhr`,
   `claude/bot_insurance_dynamic_trait`). **Please identify yourself in the HANDOFF.md agent
   table with your model name, current task, and claimed files.** Do not edit `weapons.yaml`,
   `tiberiansun.yaml`, or any locked file without coordination. The W24 queue has 87 safe
-  candidates but most weapons files have active WIP — coordinate per-file before editing.
+  candidates but most weapons files have active WIP â€” coordinate per-file before editing.
 
 **W24 queue status:** 87 safe candidates identified, but nearly every weapons.yaml file has
-uncommitted WIP from other agents. **Per-file coordination is required** — I will message each
+uncommitted WIP from other agents. **Per-file coordination is required** â€” I will message each
 owning agent and ask them to commit or stand down before I do W24 collapses on their files.
 Safe files with zero WIP will be processed first.
 
@@ -1763,115 +1809,115 @@ Safe files with zero WIP will be processed first.
 1. Commit this coordination pass + 3 boot-fixes (this commit).
 2. Run `find_empty_warhead.py` to verify zero NRE risk.
 3. Identify weapons files with zero uncommitted WIP for safe W24 collapses.
-4. Message each owning agent for files with WIP — ask them to commit or stand down.
+4. Message each owning agent for files with WIP â€” ask them to commit or stand down.
 5. Process safe W24 collapses in scoped batches.
 6. Resume Ordos turret/mortar pass (Ember's order (a)-(d)).
 
-## Devin-Ember — multi-agent coordination pass (2026-09-05)
+## Devin-Ember â€” multi-agent coordination pass (2026-09-05)
 
 **Identity:** Devin-Ember (SWE-1.7 Max, `devin@cognition.ai`). New name claimed here; not in the
-existing claims table. **Role: verification + coordination only — no yaml file-set claimed.**
+existing claims table. **Role: verification + coordination only â€” no yaml file-set claimed.**
 
 **What I verified against the live tree (artifact > docs):**
-- Branch `weapon_structure_and_warhead_fold` is 79 ahead / 0 behind `origin/master` — master's
+- Branch `weapon_structure_and_warhead_fold` is 79 ahead / 0 behind `origin/master` â€” master's
   latest (`7d49ee5b1`) is already merged via `4fd9937f3`. No need to re-pull master work.
 - **Devin-Cyrus's WC2 blocker is RESOLVED:** `wc2_orcs_hellscream_icon.png` exists in
   `mods/cameo/bits/`, and my boot-gate at ~16:52 reached `MenuPostProcessEffect.PostWorldLoaded`
   with 0 new exception logs. The HANDOFF row for Devin-Cyrus is stale.
-- **Ordos turret wiring is done** (maintainer edit, live tree): `ordos_chemturret` actor →
+- **Ordos turret wiring is done** (maintainer edit, live tree): `ordos_chemturret` actor â†’
   `Weapon: ordos_chemturret` (the self-contained 14000/40000 `Warhead@Chem_Medium` mortar at
-  `D2k/Ordos/yaml/weapons.yaml:2284`); `ordos_laserturret` actor → `Weapon: ordos_laserturret`.
+  `D2k/Ordos/yaml/weapons.yaml:2284`); `ordos_laserturret` actor â†’ `Weapon: ordos_laserturret`.
   The earlier orphaned `ordos_chemturret` weapon is now wired.
 - `KotinCannonNuclearShell` is safe: the old `^Warhead_Thermobaric_Heavy` definition was
   replaced by a `^Warhead_CannonNuke_Heavy` 3-way-split version at
   `RedAlert/Soviets/yaml/weapons.yaml:4563`; both `vehicles.yaml` references still resolve.
 - New `Mortar`/`MortarChem`/`MortarFire` in `weapons.yaml` resolve cleanly (one AreaDamage main
-  each, CannonHE/Chem/Fire × Concussion_Medium) but are **orphans — zero `Weapon:` refs**.
+  each, CannonHE/Chem/Fire Ã— Concussion_Medium) but are **orphans â€” zero `Weapon:` refs**.
 - `^Warhead_CannonTesla_*` (Spread 86/65/43, Falloff 100,52,0): no `audit_family_uniqueness`
-  collision — shares the curve with BulletTesla/MissileTesla/Quantum (different radii) and the
+  collision â€” shares the curve with BulletTesla/MissileTesla/Quantum (different radii) and the
   radii with BulletThermobaric (different curve).
 - `UnitsToBuild` ContentPack migration is blocked by merge order (see next entry); ROADMAP +
   AI_ARCHITECTURE updated and committed (`9c59792db`).
 
 **Per-agent orders (based on verified current state):**
-- **Devin-Cyrus** (WC2 Humans/Orcs): blocker resolved — verify the hellscream sequence reference
+- **Devin-Cyrus** (WC2 Humans/Orcs): blocker resolved â€” verify the hellscream sequence reference
   still resolves, then mark the HANDOFF row resolved and finish the WC2 hero weapon pass or stand
   down so Devin-Dawn's Corrino Phase 3 is unblocked.
 - **Devin-Aurora** (D2k coordinator, Ordos/Atreides/Shared weapons + bits/d2k): turret wiring
   landed. **Maintainer rulings (2026-09-05):** (a) `ordos_laserturret` **must be aligned to
-  `ordos_lasertank`'s composition** — `Laser_Heavy` AreaDamage + `FlakWeaponPercentage` +
+  `ordos_lasertank`'s composition** â€” `Laser_Heavy` AreaDamage + `FlakWeaponPercentage` +
   `MediumMissilePercentage`; the current `LaserWeapon`+`LaserExtraDamage` SpreadDamage split is
   NOT what was ordered ("same laser as the laser tank"); (b) `Mortar`/`MortarChem`/`MortarFire`
-  are **intentional generic templates — leave them, do NOT wire or remove**; (c) remove the stray
+  are **intentional generic templates â€” leave them, do NOT wire or remove**; (c) remove the stray
   `###### MissileAP:` generator comment between `MortarChem` and `MortarFire` in `weapons.yaml`;
-  (d) `Dune_SiegeMortar` is now trooper-only (`ordos_mortartrooper`) — confirm that split is
+  (d) `Dune_SiegeMortar` is now trooper-only (`ordos_mortartrooper`) â€” confirm that split is
   intended.
-- **Devin-Dawn** (Corrino + tiberiansun.yaml): WC2 blocker cleared → Corrino build can proceed.
+- **Devin-Dawn** (Corrino + tiberiansun.yaml): WC2 blocker cleared â†’ Corrino build can proceed.
 - **Devin-Echo** (D2k audit + CABAL): continue audit; note the merge-lost Ixian weapon edits are
-  uncommitted WIP in the tree — re-verify `D2k/Ixian/yaml/weapons.yaml` resolves before Phase 4.
+  uncommitted WIP in the tree â€” re-verify `D2k/Ixian/yaml/weapons.yaml` resolves before Phase 4.
 - **Devin-Blaze** (Harkonnen + Phase 4 shared/global): continue legacy `d2k.yaml`/`rules/d2k.yaml`
-  consolidation; `D2k/Shared/yaml/weapons.yaml` is also on Aurora's claim — coordinate at the seam.
+  consolidation; `D2k/Shared/yaml/weapons.yaml` is also on Aurora's claim â€” coordinate at the seam.
 - **Devin-Ember (me)**: audits, boot-gates, resolved-diff checks, doc sync. Available to run
   `find_empty_warhead.py` / `review_resolve_diff.py` / `launch-game.cmd` for anyone's batch.
 
 **Merge-fallout sweep results (maintainer-ordered, 2026-09-05 ~17:30):**
 - Boot crashed: `RedAlert/Japan/weapons.yaml:1621: no elements with key 'Warhead@Bullet_Light'
-  to remove` — the same stale-`-Key:` class Devin-Aurora fixed in Ixian (`cda4c54ec` notes).
+  to remove` â€” the same stale-`-Key:` class Devin-Aurora fixed in Ixian (`cda4c54ec` notes).
 - Engine semantics (`MiniYaml.ResolveInherits`, MiniYaml.cs:482-488): `-Key:` removes from the
-  accumulated resolved set — parents resolved SO FAR + earlier same-block nodes. A removal is
+  accumulated resolved set â€” parents resolved SO FAR + earlier same-block nodes. A removal is
   loader-invalid only when the key appears in NEITHER.
 - Tree-wide sweep (engine-faithful, earlier-siblings + resolved parents): **42 flags, 41 real**.
   Deleted 41 stale `-Warhead@...:` lines across 15 pack files: D2k/Ixian (10), RA2/Shared (8),
   RA2Mod/AsianAlliance (4), RA2Mod/Naxis (4), RA2Mod/Consortium (2), RA2Mod/Syndicate (2),
   StarCraft/Terran (2), RA2/Soviets, RA2/Yuri, RA2Mod/TKM, D2k/Ordos, StarCraft/Protoss,
   Warcraft2/Humans, TS/GDI (1 each), plus legacy `weapons/d2k.yaml` + `weapons/redalert2mod.yaml`.
-  The CABAL flag (`CabalManticoreMissilesAA`/MissileHE_Light) was a first-order false positive —
+  The CABAL flag (`CabalManticoreMissilesAA`/MissileHE_Light) was a first-order false positive â€”
   re-verified clean, untouched.
-- These deletions sit INSIDE other agents' live WIP files — left uncommitted for the batch owner
+- These deletions sit INSIDE other agents' live WIP files â€” left uncommitted for the batch owner
   to land with their batch; this log entry is the coordination record.
 - Second crash at 15:30Z: `RA2/Soviets/weapons.yaml:653: Parent ^Warhead_CannonTesla_Light not
-  found` — the maintainer's in-flight edit had already removed the reference from disk by the
+  found` â€” the maintainer's in-flight edit had already removed the reference from disk by the
   time I checked (grep: zero `CannonTesla` refs/templates). Resolved by maintainer.
 - Re-sweeps after fixes: stale-removal class = 0, missing-parent class = 0, dangling `Weapon:`
-  refs = 0, real case-mismatches = 0 (38 `Cursor: c4` noise — `c4` collides with the `C4`
+  refs = 0, real case-mismatches = 0 (38 `Cursor: c4` noise â€” `c4` collides with the `C4`
   weapon key), `find_empty_warhead.py` = 0, `audit_duplicate_inherits` = diamonds-only baseline.
 - **Third crash (in-game, shellmap):** `NullReferenceException` at
-  `AreaDamageWarhead.VersusFrom` (`AreaDamageWarhead.cs:260`) — `effectiveVersus` was never
-  assigned. Root cause: merge `4fd9937f3` dropped the `// §12.0i — continuous heaviness`
+  `AreaDamageWarhead.VersusFrom` (`AreaDamageWarhead.cs:260`) â€” `effectiveVersus` was never
+  assigned. Root cause: merge `4fd9937f3` dropped the `// Â§12.0i â€” continuous heaviness`
   assignment block from `RulesetLoaded` (introduced by `7704fcf67`/`557e679dc`), leaving
   `effectiveSpread`/`effectiveVersus`/`effectivePercentageVersus` declared-but-null. Every
-  AreaDamage hit NRE'd — a clean rebuild made ALL combat crash, not just new content.
+  AreaDamage hit NRE'd â€” a clean rebuild made ALL combat crash, not just new content.
   The block was restored on disk (identical to `557e679dc`'s version); I rebuilt
   (`dotnet build -c Release -p:TargetPlatform=win-x64`, 0 errors) and committed the file so
   the fix cannot be lost to a clean rebuild.
-- **Final boot-gate: PASSED** — `MenuPostProcessEffect.PostWorldLoaded` reached, 0 new
+- **Final boot-gate: PASSED** â€” `MenuPostProcessEffect.PostWorldLoaded` reached, 0 new
   exception logs.
 
 **Post-sweep verification (Devin-Ember, ~17:45):**
-- Resolved-content check on all 42 deletion targets: **0 regressions** — every removed `-Key:`
+- Resolved-content check on all 42 deletion targets: **0 regressions** â€” every removed `-Key:`
   resolves to nothing in the final weapon (removals were no-ops, whether stale or stripped by
   later-file defs).
 - `find_empty_warhead.py` = 0; `audit_duplicate_inherits` = diamonds-only baseline.
 - Aurora's `f46e61326` verified: Japan `-Warhead@Bullet_Light` (same fix I made in-tree),
-  CABAL `-Warhead@MissileHE_Light` (confirmed harmless — resolved `CabalManticoreMissilesAA`
-  contains no `Warhead@MissileHE_Light`), RA2/Soviets `^Warhead_CannonTesla_Light` →
+  CABAL `-Warhead@MissileHE_Light` (confirmed harmless â€” resolved `CabalManticoreMissilesAA`
+  contains no `Warhead@MissileHE_Light`), RA2/Soviets `^Warhead_CannonTesla_Light` â†’
   `^Warhead_Tesla_Light` + 2 `AreaDamage` types + `-Demolition_Light` (all correct).
-- **38 of my stale-removal deletions remain UNCOMMITTED** in 13 claimed files (Ixian ×10,
-  RA2/Shared ×8, Naxis ×4, AsianAlliance ×4, Consortium ×2, Syndicate ×2, Terran ×2,
-  Ordos/Yuri/Protoss/TS-GDI/WC2-Humans/legacy d2k.yaml/legacy redalert2mod.yaml ×1 each).
-  All are verified no-ops. ⚠ **Committed HEAD still contains the stale lines** — a clean
+- **38 of my stale-removal deletions remain UNCOMMITTED** in 13 claimed files (Ixian Ã—10,
+  RA2/Shared Ã—8, Naxis Ã—4, AsianAlliance Ã—4, Consortium Ã—2, Syndicate Ã—2, Terran Ã—2,
+  Ordos/Yuri/Protoss/TS-GDI/WC2-Humans/legacy d2k.yaml/legacy redalert2mod.yaml Ã—1 each).
+  All are verified no-ops. âš  **Committed HEAD still contains the stale lines** â€” a clean
   checkout would re-hit the crashes. Owners should land these with their next commit, or
   approve me to commit them as one scoped batch.
 - **Branch scan:** `origin/master` = 0 ahead of HEAD (fully merged). `claude/bot_insurance_
   dynamic_trait` and `claude/docs-audit-reorganize-xgzwhr` both carry **155 commits / 250
-  files** — a live parallel line updated today; not a duplicate-work risk for current tasks
+  files** â€” a live parallel line updated today; not a duplicate-work risk for current tasks
   but a large unmerged surface. All `codex/*`, `agent/*`, `devin/*` branches are older
-  (Aug 29 – Sep 4) historical work streams.
-- **⚠ Observed: something auto-stages freshly-modified files** — files I edited appeared in
+  (Aug 29 â€“ Sep 4) historical work streams.
+- **âš  Observed: something auto-stages freshly-modified files** â€” files I edited appeared in
   the index seconds after saving (source of both ride-along incidents). Maintainer should
   check for a git watcher/auto-stage tool; all commits this session were content-verified.
 
-## Devin AI — AI architecture `UnitsToBuild` migration blocked by merge order (2026-09-05)
+## Devin AI â€” AI architecture `UnitsToBuild` migration blocked by merge order (2026-09-05)
 
 **Identity:** Devin AI (SWE-1.7 Max).
 
@@ -1880,15 +1926,15 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Verified the baseline: `.\utility.cmd cameo --resolved-rules Player` produces a 592 KB dump with 158 `td_gdi_*` lines and `UnitsToBuild` at line 5465, preserving the YAML insertion order.
 - Ran a one-row merge-order probe: added `td_gdi_testorder: 1` to `ContentPacks/TiberianDawn/GDI/yaml/ai.yaml` under `Player: UnitBuilderBotModuleCA@generic: UnitsToBuild:` and re-dumped. The row landed at the **top** of `UnitsToBuild` (line 3), not in the `UnitsToBuild CNC` section position.
 
-**Finding:** `MiniYaml.MergePartial` (`engine/OpenRA.Game/MiniYaml.cs:590-643`) iterates `existingNodes` (the pack, which loads first) then `overrideNodes` (the global `ai.yaml`), appending new keys in that order. So pack `UnitsToBuild` rows always appear **before** global rows in the resolved dump. Moving `td_gdi_*` rows to a pack reorders them to the top of `UnitsToBuild`, making a byte-identical dump impossible. The resolved *content* (same keys, same values) is still identical — `FieldLoader` builds the same `FrozenDictionary` regardless of YAML order.
+**Finding:** `MiniYaml.MergePartial` (`engine/OpenRA.Game/MiniYaml.cs:590-643`) iterates `existingNodes` (the pack, which loads first) then `overrideNodes` (the global `ai.yaml`), appending new keys in that order. So pack `UnitsToBuild` rows always appear **before** global rows in the resolved dump. Moving `td_gdi_*` rows to a pack reorders them to the top of `UnitsToBuild`, making a byte-identical dump impossible. The resolved *content* (same keys, same values) is still identical â€” `FieldLoader` builds the same `FrozenDictionary` regardless of YAML order.
 
-**Consequence:** The ROADMAP task's "byte-identical" gate cannot be satisfied by a naive row move. Options: (a) relax the gate to content-identical (same keys + values, order ignored); (b) keep rows in the global file and gate per-faction bot behaviour via `RequiresCondition` on the trait instance instead of per-row ownership. Updated `ROADMAP.md` §AI ARCHITECTURE to record the blocker.
+**Consequence:** The ROADMAP task's "byte-identical" gate cannot be satisfied by a naive row move. Options: (a) relax the gate to content-identical (same keys + values, order ignored); (b) keep rows in the global file and gate per-faction bot behaviour via `RequiresCondition` on the trait instance instead of per-row ownership. Updated `ROADMAP.md` Â§AI ARCHITECTURE to record the blocker.
 
 **Verification:** probe row `td_gdi_testorder` confirmed at dump line 3; reverted.
 
-**Files changed:** `docs/design/ROADMAP.md` (finding recorded), `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/ai.yaml` (probe added then reverted — net zero diff).
+**Files changed:** `docs/design/ROADMAP.md` (finding recorded), `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/ai.yaml` (probe added then reverted â€” net zero diff).
 
-## Devin AI — Volcanic shellmap camera radius fix (2026-08-25)
+## Devin AI â€” Volcanic shellmap camera radius fix (2026-08-25)
 
 **Identity:** Devin AI (SWE-1.7 Max).
 
@@ -1915,7 +1961,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 **Files changed:**
 - `mods/cameo/maps/shellmap_v3.oramap` (`attack.lua`)
 
-## 2026-08-28 — Under-200 mixed-role backlog checkpoint
+## 2026-08-28 â€” Under-200 mixed-role backlog checkpoint
 
 - Consolidated 15 selected roots and their descendant closure across standard bullet, Tesla,
   concussion, and chemical roles. Two descendant roots retired with their parents, so the active
@@ -1936,7 +1982,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   all generated-balance and weapon-structure audits, and a controlled 90-second launch with no
   crash or exception log. The exact test process was stopped afterward.
 
-## 2026-08-28 — Remaining override-free element roles
+## 2026-08-28 â€” Remaining override-free element roles
 
 - Consolidated ten actual roots without descendant flat-damage overrides: Hydra and Leech spit,
   Lurker and Queen spines, three Forgotten chemical weapons plus both blue Fiend shards, and Yak
@@ -1957,7 +2003,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   controlled pinned-engine launch stayed alive for 90 seconds with no YAML, exception, fatal, or
   crash log matches; its exact process was stopped.
 
-## 2026-08-28 — Projectile-role backlog checkpoint
+## 2026-08-28 â€” Projectile-role backlog checkpoint
 
 - Consolidated 13 actual retired-family roots, covering 34 resolved parent/child weapons, into
   standard bullet, concussion, cannon, and high-explosive missile roles.
@@ -1978,7 +2024,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   alive for 90 seconds with no YAML, exception, fatal, or crash log matches; its exact process was
   stopped.
 
-## 2026-08-28 — Percentage-safe chemical and flame role batch
+## 2026-08-28 â€” Percentage-safe chemical and flame role batch
 
 - Consolidated 13 roots covering 15 resolved weapons: four light chemical cannons, three heavy
   chemical weapons, two heavy flamethrowers, and four light/medium/heavy chemical missiles.
@@ -1998,7 +2044,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   controlled pinned-engine launch stayed alive for 90 seconds with no YAML, exception, fatal, or
   crash log matches; its exact test process was stopped.
 
-## 2026-08-27 — Remaining rapid/light laser role batch
+## 2026-08-27 â€” Remaining rapid/light laser role batch
 
 - Consolidated seven genuine rapid/light laser roots, covering 19 resolved weapons, onto the
   standard heavy Laser profile: the M16 laser, elite cadre laser, Nod minigunner laser, Lunar
@@ -2024,7 +2070,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   pinned-engine launch stayed alive for 90 seconds without YAML, exception, fatal, or crash log
   matches; its exact test process was then stopped.
 
-## 2026-08-27 — Remaining direct-hit sniper follow-up
+## 2026-08-27 â€” Remaining direct-hit sniper follow-up
 
 - Consolidated the GDI heavy sniper, Havoc's commando sniper, and Soviet Dragunov away from
   their retired flat-damage stacks. The GDI and commando rifles now use the infantry-favoured
@@ -2046,7 +2092,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   generated slots; after repairing them, the pinned engine stayed alive and responsive for 90
   seconds with no exception, fatal, crash, or YAML error, then its exact test process was stopped.
 
-## 2026-08-27 — Named heavy-laser bulk consolidation
+## 2026-08-27 â€” Named heavy-laser bulk consolidation
 
 - Consolidated six laser roots and eight resolved weapons onto the standard heavy Laser profile:
   Black Hand, normal and elite CABAL Hunter-Killers, the Tiberian Sun laser emplacement,
@@ -2070,7 +2116,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   controlled pinned-engine launch stayed alive and responsive for 90 seconds with no exception,
   fatal, crash, or YAML error line; its exact test process was then stopped.
 
-## 2026-08-27 — Bulk shotgun and sniper profile consolidation
+## 2026-08-27 â€” Bulk shotgun and sniper profile consolidation
 
 - Consolidated four shotgun roots (seven resolved weapons) onto the standard medium CannonHE
   damage profile. Four sniper roots (eleven resolved weapons) now use the infantry-favoured
@@ -2103,7 +2149,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   or crash line, then its exact test process was stopped. Pricing, runtime source, the parked
   percentage runtime change, and the engine pin remain outside this work.
 
-## 2026-08-27 — Final low-risk single-family weapon cleanup
+## 2026-08-27 â€” Final low-risk single-family weapon cleanup
 
 - Consolidated four isolated active weapons away from their last retired flat-damage family:
   the FutureTech cryocopter rocket onto medium missiles, the anti-tank mine onto light
@@ -2126,7 +2172,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   controlled pinned-engine launch that stayed alive and responsive with no new exception log;
   its exact test process was then stopped.
 
-## 2026-08-27 — Steel Mako cannon-family consolidation
+## 2026-08-27 â€” Steel Mako cannon-family consolidation
 
 - Consolidated the Steel Mako cannon root and its elite, EMP, and EMP-elite descendants away from
   the retired medium-flame flat profile onto their already-selected standard medium CannonHE class.
@@ -2144,7 +2190,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   physical-state audits, and the full resolver comparison. A controlled pinned-engine launch
   stayed alive and responsive with no new exception log, then its exact test process was stopped.
 
-## 2026-08-27 — RA2 SCUD missile-family consolidation
+## 2026-08-27 â€” RA2 SCUD missile-family consolidation
 
 - Consolidated the active RA2 SCUD root and its Dreadnought, V3 explosion, radioactive,
   incendiary, tesla, and elite descendants away from the retired medium-flame flat profile.
@@ -2167,7 +2213,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   them, the controlled pinned-engine launch stayed alive and responsive with no new exception log,
   and its exact test process was stopped.
 
-## 2026-08-27 — Naxis quad-cannon flak consolidation
+## 2026-08-27 â€” Naxis quad-cannon flak consolidation
 
 - Consolidated the active Naxis quad-cannon root and eleven ground, anti-air, elite, portable,
   Sky Mage, and long-range descendants onto the existing standard medium-flak damage profile.
@@ -2188,7 +2234,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   are zero; the physical-state audit passes. A controlled pinned-engine launch remained alive and
   responsive through startup with no new exception log, then its exact test process was stopped.
 
-## 2026-08-27 — MiG missile family consolidation
+## 2026-08-27 â€” MiG missile family consolidation
 
 - Consolidated the active MiG missile root and all ten resolved ground-attack, anti-air,
   radioactive, incendiary, tesla, and elite variants onto the existing standard medium-missile
@@ -2206,7 +2252,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   weapons in 202 groups and 7 single-family candidates. Pricing and the parked runtime change remain
   untouched.
 
-## 2026-08-26 — retrospective compatibility repair and missile cleanup
+## 2026-08-26 â€” retrospective compatibility repair and missile cleanup
 
 - Independent review found that the earlier one-target percentage comparison hid current-runtime
   rounding and unchecked-integer overflow differences at other active health values. It also found
@@ -2242,7 +2288,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   process was stopped. The comparator now rejects missing weapon parents before resolving them.
 - No pricing values, engine/runtime source, or engine pin changed.
 
-## 2026-08-26 — W24 A15: laser weapon group consolidated
+## 2026-08-26 â€” W24 A15: laser weapon group consolidated
 
 - Collapsed six explicitly laser-identified roots onto `^Warhead_Laser_Heavy`:
   `RA2CosmonautLaser`, `LunarNaxiDroneLaser`, `NaxLaserT`,
@@ -2271,7 +2317,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - No pricing values, engine/runtime source, engine pin, cadence, or range changed;
   runtime percentage totals remain exact for every active targetable HP value.
 
-## 2026-08-26 — W24 A14: Steel railgun pair consolidated
+## 2026-08-26 â€” W24 A14: Steel railgun pair consolidated
 
 - Collapsed `SteelAirTurret` and `SteelStalkerRailgun` from simultaneous legacy
   Laser/Railgun damage stacks onto `^Warhead_Railgun_Heavy`. Their EMP, elite, and
@@ -2294,7 +2340,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - No pricing, engine/runtime source, engine pin, or percentage-damage runtime behavior
   changed.
 
-## 2026-08-26 — W24 A13: active sniper family consolidated
+## 2026-08-26 â€” W24 A13: active sniper family consolidated
 
 - Collapsed `AsianSniper`, `GhostSniper`, `SpecterSniper`, and `VonSniper` onto
   `^Warhead_Bullet_Heavy`. Their AP, bunker, and
@@ -2320,7 +2366,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - No pricing, engine/runtime source, engine pin, or percentage-damage runtime
   behavior changed.
 
-## 2026-08-26 — W24 A12: active shotgun family consolidated
+## 2026-08-26 â€” W24 A12: active shotgun family consolidated
 
 - Collapsed `FutureEnforcerShotgun`, `TSCommandoShotgun`, `TSMutShotgun`, and
   `TSShotgun` onto one `^Warhead_CannonHE_Medium` damage family each. The FutureTech
@@ -2342,7 +2388,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   audit PASS. A controlled launch remained alive and responsive through startup with no new
   exception log, then its exact test process was stopped.
 
-## 2026-08-26 — W24 A11: Soviet thermobaric missile group consolidated
+## 2026-08-26 â€” W24 A11: Soviet thermobaric missile group consolidated
 
 - Collapsed seven resolved definitions in one coherent batch: `v1rocketsThermobaric`,
   `HindMissilesThermobaric`, both Mammoth Tusk thermobaric weapons and their targeting-
@@ -2367,7 +2413,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - No pricing, engine/runtime source, engine pin, or percentage-damage runtime behavior was
   changed.
 
-## 2026-08-26 — W24 A10: thermobaric grenade pair consolidated
+## 2026-08-26 â€” W24 A10: thermobaric grenade pair consolidated
 
 - Collapsed `GrenadeThermobaric` and its inherited `GrenadeThermobaricExplode`
   variant onto `^Warhead_Thermobaric_Light`.
@@ -2389,7 +2435,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - No pricing, engine/runtime source, pin, cadence, or range was changed. No game was
   launched per maintainer instruction.
 
-## 2026-08-26 — W24 A9: redundant flame and chemical tier stacks collapsed
+## 2026-08-26 â€” W24 A9: redundant flame and chemical tier stacks collapsed
 
 - Collapsed `HarakanF` and `MutHFlamer` from paired medium/heavy Flame mains onto
   `^Warhead_Flame_Heavy` at 4000 and 40000 damage.
@@ -2411,7 +2457,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
   No game was launched per maintainer instruction.
 
-## 2026-08-26 — W24 A8: medium plasma pair consolidated
+## 2026-08-26 â€” W24 A8: medium plasma pair consolidated
 
 - Collapsed `PlasmaFlamer` and `MutFlamerChem` from paired
   `^MediumFlameWeapon` + `^MediumChemicalWeapon` mains onto the existing
@@ -2431,7 +2477,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
   No game was launched per maintainer instruction.
 
-## 2026-08-26 — W24 A7: light chemical-cannon group consolidated
+## 2026-08-26 â€” W24 A7: light chemical-cannon group consolidated
 
 - Collapsed `TSHighVelocityChem`, `TSHighVelocity2Chem`, `TSHighVelocityTurChem`,
   and `CabalDissolverSpray` from paired `^LightChemicalWeapon` and
@@ -2454,7 +2500,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
   No game was launched per maintainer instruction.
 
-## 2026-08-26 — W24 A6: Forgotten chemical turret pair consolidated
+## 2026-08-26 â€” W24 A6: Forgotten chemical turret pair consolidated
 
 - Collapsed `TS70mmTurChem` from three 4000-damage mains onto
   `^Warhead_CannonChem_Light` at 12000, and `TSScoopDualTurChem` from three
@@ -2468,7 +2514,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   classification consequence: the upgraded broken Ratty turret now bottoms at 0.98x
   versus Wood; the broken Scooper turret at 0.83x versus Wood and 0.91x versus None.
 - Whole-tree comparison preserves every unchanged-name weapon's main total. The survey
-  falls 294 → 292 (mixed 282 → 280), and W24 broadcast debt falls 936 → 934 versus the
+  falls 294 â†’ 292 (mixed 282 â†’ 280), and W24 broadcast debt falls 936 â†’ 934 versus the
   939 ratchet.
 - Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 balance
   ledgers match live YAML; empty-warhead 0; orphan-old-key real bugs 0; dangling
@@ -2476,7 +2522,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
   No game was launched, and nothing was committed or pushed.
 
-## 2026-08-26 — W24 A5 complete: final D2K one-user wrapper pairs removed
+## 2026-08-26 â€” W24 A5 complete: final D2K one-user wrapper pairs removed
 
 - Removed the dedicated projectile/effect wrappers for `D2K_TowerMissile` and
   `mtank_pri2`, one weapon at a time. Both now inherit the generic D2K heavy-missile
@@ -2500,7 +2546,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   damage plus percentage component, so the trial was fully reverted. Both weapons again
   resolve exactly to upstream and are deferred to a deliberate multi-main collapse.
 
-## 2026-08-25 — W24 A5: D2K Rocket Trooper projectile wrappers removed
+## 2026-08-25 â€” W24 A5: D2K Rocket Trooper projectile wrappers removed
 
 - Removed five one-user projectile wrappers for `D2K_Rocket_Trooper`,
   `D2K_Rocket_Trooper1`, `D2K_Rocket_Trooper2`, `D2K_Rocket_Trooper_AA`, and
@@ -2518,7 +2564,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - No pricing, engine/runtime source, pin, weapon operation, or accepted A3 profile was
   changed. No game was launched, and nothing was committed or pushed.
 
-## 2026-08-25 — W24 A4 naming cleanup + A5 one-user-template pilot
+## 2026-08-25 â€” W24 A4 naming cleanup + A5 one-user-template pilot
 
 - Aligned the RA1 rocket-upgrade name with its active thermobaric payload, including its
   condition, icon, player-facing text, AI references, sequences, and survival-map script.
@@ -2546,7 +2592,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   old-family survey remains 294 weapons (12 pure single, 282 mixed in 210 groups). The only
   Fluent missing-key finding is the pre-existing `upgrade_burninglasers.description`.
 
-## 2026-08-25 — W24 A3: Japanese plasma-bomb consolidation
+## 2026-08-25 â€” W24 A3: Japanese plasma-bomb consolidation
 
 - Refreshed `phase_b_survey.md` from upstream master `95c7cba27`: 294 concrete
   weapons remain on old full-stack families (12 pure single, 282 mixed in 210 groups).
@@ -2567,28 +2613,28 @@ existing claims table. **Role: verification + coordination only — no yaml file
   audit PASS; generator drift 0. Pricing and the percentage-damage runtime source remain
   untouched. Verification is static-only and in-game review is deferred by maintainer request.
 
-## 2026-08-24 — old-repo reconciliation, no-file-change merge, full verification
+## 2026-08-24 â€” old-repo reconciliation, no-file-change merge, full verification
 
 - Investigated `cameo-mod/Cameo-mod/compare/master...Zeruel87:Cameo-mod:master` showing 2 stray commits on the old fork.
 - Re-added `https://github.com/Zeruel87/Cameo-mod.git` as `upstream`, fetched and inspected the two commits:
   - `15159ad7a` Merge pull request #128 from cameo-mod/op2_zhall
   - `fd58e3f93` W24: D2K heavy missile HE 3-way split with D2K Shared projectile/effect templates (#133)
 - A direct merge would have produced ~594k lines of conflicts because the repos diverged by 2232 commits; instead did `git merge -s ours upstream/master` on a temp branch, fast-forwarded `weapon_structure_and_warhead_fold` and pushed both it and `master` to `cameo-mod/Cameo-mod`.
-- The GitHub compare page now reports "There isn’t anything to compare" and "cameo-mod:master is up to date with all commits from Zeruel87:master".
+- The GitHub compare page now reports "There isnâ€™t anything to compare" and "cameo-mod:master is up to date with all commits from Zeruel87:master".
 - Verified the merge did not change the working tree or the content: only pre-existing uncommitted change is `tools/balance/gen_weapon_template.py` (heaviness-bell WIP, 124 new lines) and untracked `scratchpad/` files.
 - Ran gating audits: `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `find_orphan_old_keys_multi` 0; `audit_doc_claims` 19/19 green; `audit_doc_health` PASS; `environment.py` complete; `verify_generator_sync` drift 0; `audit_heaviness_bell` 0 inversions/0 mean drift; `tools/tests` 300/300 OK; `audit_warhead_split` 937 vs baseline 939 (pre-existing W24 debt, not a regression).
-- Re-read `HANDOFF.md`, `design/ROADMAP.md` and related docs; current queue: implement bell in `gen_weapon_template.py` (Step 5 per HANDOFF §3.0), W24 burn-down, independent W7/W9/W10 meters.
+- Re-read `HANDOFF.md`, `design/ROADMAP.md` and related docs; current queue: implement bell in `gen_weapon_template.py` (Step 5 per HANDOFF Â§3.0), W24 burn-down, independent W7/W9/W10 meters.
 - Did **not** touch the live `gen_weapon_template.py` WIP or any weapon YAML to avoid breaking in-progress work.
 
 ### Open todos at end of session
 
 1. Decide whether to force-push `Zeruel87/Cameo-mod:master` to match `cameo-mod/Cameo-mod:master` (destructive).
-2. ~~Remove or re-point local `upstream` remote to prevent accidental pushes to the old repo.~~ DONE — removed `upstream` (Zeruel87).
-3. ~~Fix stale `multi_main_fired_weapons` 927 → 925 in `HANDOFF.md`, `BALANCE_PROGRAM_PLAN.md`, and `audit/SUMMARY.md`.~~ DONE — `audit_doc_claims` still 19/19 clean.
+2. ~~Remove or re-point local `upstream` remote to prevent accidental pushes to the old repo.~~ DONE â€” removed `upstream` (Zeruel87).
+3. ~~Fix stale `multi_main_fired_weapons` 927 â†’ 925 in `HANDOFF.md`, `BALANCE_PROGRAM_PLAN.md`, and `audit/SUMMARY.md`.~~ DONE â€” `audit_doc_claims` still 19/19 clean.
 4. Regenerate `docs/audit/latest/` with `python tools/audit/run_all.py` (bash unavailable; Python port is the fallback) from a complete tree, then review every changed tracked file before staging.
 5. Continue W24/Phase B work only after verifying set B availability; `_stageB_made.txt` remains in scratchpad.
 
-## 2026-08-24 (continued #2) — picked up open todos
+## 2026-08-24 (continued #2) â€” picked up open todos
 
 - Removed local `upstream` remote (Zeruel87) to prevent accidental pushes; remotes now `origin` and `github-desktop-SteamsDev`.
 - Fixed stale `multi_main_fired_weapons` count from `927` to `925` in:
@@ -2610,15 +2656,15 @@ existing claims table. **Role: verification + coordination only — no yaml file
 ### Open at end of session
 
 - Wire `Heaviness` into `AreaDamageWarhead`'s `Versus` lookup / `Spread` computation (the C# transform).
-  **DONE 2026-08-24** — `HeavinessBell.cs` ported from `gen_weapon_template.py`, wired at
+  **DONE 2026-08-24** â€” `HeavinessBell.cs` ported from `gen_weapon_template.py`, wired at
   `RulesetLoaded`. `Heaviness = 0` keeps today's behaviour; non-zero tilts `Versus` and
-  `PercentageVersus` and scales `Spread` linearly 2/3 → 1 → 4/3 for h ∈ [0,2] (Light/Medium/Heavy).
+  `PercentageVersus` and scales `Spread` linearly 2/3 â†’ 1 â†’ 4/3 for h âˆˆ [0,2] (Light/Medium/Heavy).
   Trace/Super are outside the ruled h range and not yet reproduced. No yaml sets `Heaviness`, so
   the change is inert.
 - Only after the C# transform is proven: enable `USE_BELL`, splice the generator, collapse Light/Medium/Heavy templates, set per-weapon `Heaviness`.
 - Set B remains NOT free (31 `^LightFlameWeapon` matches); do not touch weapon YAML.
 
-## 2026-08-24 (continued) — full composition-rollout cost analysis
+## 2026-08-24 (continued) â€” full composition-rollout cost analysis
 
 - Merged `master` into `weapon_structure_and_warhead_fold` via fast-forward (`ad213ce0a`) and returned to the feature branch; no working-tree changes.
 - Measured the live Cameo roster from `cameo_model`:
@@ -2631,7 +2677,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Ran projections in `scratchpad/ai_compositions/_tmp_full_cost.py` for full rollout scenarios (global baseline vs per-faction vs per-faction x personality); worst-case full data is 145-435 compositions and 1,400-8,900 `UnitsToBuild` rows.
 - No YAML or code changes committed; generated scripts live only in untracked `scratchpad/`.
 
-## 2026-08-22 — A2 committed + audit guards documented
+## 2026-08-22 â€” A2 committed + audit guards documented
 
 - Committed W24 A2 (five nuclear/thermobaric weapons collapsed to one damage family).
 - Cleaned the malformed `docs/design/BALANCE_PROGRAM_PLAN.md` W24 status line.
@@ -2643,7 +2689,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Built and ran `tools/audit/audit_inline_effects.py`: 665 concrete weapons carry
   815 inline effect nodes; 628 non-exempt (superweapons auto-detected) remain.
 
-## 2026-08-22 — docs/audit: reconcile `doc_claims` and regenerate `latest/` evidence
+## 2026-08-22 â€” docs/audit: reconcile `doc_claims` and regenerate `latest/` evidence
 
 - Ran `tools/audit/run_all.sh` and fixed the `audit_doc_claims` mismatches:
   - `shield_versus_mean` 186.791, `shield_hp_factor` 0.535357,
@@ -2660,7 +2706,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Boot-gated: menu loaded, no new exceptions.
 - Commit: `564089ef9`.
 
-## 2026-08-22 — W24 A2: five nuclear/thermobaric weapons collapsed (boot-gated)
+## 2026-08-22 â€” W24 A2: five nuclear/thermobaric weapons collapsed (boot-gated)
 
 - Converted five multi-main weapons to one damage warhead each, preserving per-shot totals:
   - `NuclearMaverick` -> `^Warhead_MissileHE_Heavy` (40 000 main, 11 percentage)
@@ -2677,7 +2723,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   `audit_warhead_split` 939 vs baseline 939, `verify_generator_sync` 0,
   `extract_stats --check` 0, boot-gated (menu loaded, no new exceptions).
 
-## 2026-08-22 — W24 A1a: delivery-first blend family rename
+## 2026-08-22 â€” W24 A1a: delivery-first blend family rename
 
 - Renamed the four element-first blend families to delivery-first names
   (CannonFire, MissileFire, CannonChem, MissileChem) across
@@ -2700,7 +2746,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - find_empty_warhead 0, find_orphan_old_keys 0,
   audit_warhead_split broadcast count 944 (baseline 939; expected red).
 
-## 2026-08-21 — JapanesePlasmaBomb 3-way split (boot-gated)
+## 2026-08-21 â€” JapanesePlasmaBomb 3-way split (boot-gated)
 
 
 
@@ -2771,7 +2817,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — TorpTubeThermobaric full 3-way split (boot-gated)
+## 2026-08-21 â€” TorpTubeThermobaric full 3-way split (boot-gated)
 
 
 
@@ -2793,10 +2839,10 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
     and `Inherits@fx2: ^Effect_MissileAP_Heavy`.
 
-  - Preserved nuclear totals: main `1600` × 10 ticks (`MaxRadius: 9000`) for the old
+  - Preserved nuclear totals: main `1600` Ã— 10 ticks (`MaxRadius: 9000`) for the old
 
 
-    `16000` flat, and percentage `1` × 8 ticks (`Spread: 500`, `MaxRadius: 4500`) for
+    `16000` flat, and percentage `1` Ã— 8 ticks (`Spread: 500`, `MaxRadius: 4500`) for
 
 
     the old `8%`.
@@ -2856,7 +2902,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — MonsterTank120mm 3-way split (boot-gated)
+## 2026-08-21 â€” MonsterTank120mm 3-way split (boot-gated)
 
 
 
@@ -2886,7 +2932,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Preserved per-shot totals: `CannonHE_Heavy` `40000` flat / `20%`; `Nuclear_Super` main
 
 
-  `4000` × 10 ticks (`MaxRadius: 9000`) and percentage `2` × 10 ticks (`Spread: 500`,
+  `4000` Ã— 10 ticks (`MaxRadius: 9000`) and percentage `2` Ã— 10 ticks (`Spread: 500`,
 
 
   `MaxRadius: 4500`) for the old `20%`.
@@ -2912,7 +2958,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - `find_empty_warhead` 0, `find_orphan_old_keys` 0, `audit_warhead_split` broadcast
 
 
-  baseline lowered 944 → 942, `audit_balance_drift` clean, `audit_doc_claims` 16/16,
+  baseline lowered 944 â†’ 942, `audit_balance_drift` clean, `audit_doc_claims` 16/16,
 
 
   `verify_generator_sync` drift 0.
@@ -2922,7 +2968,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — ThermobaricNuclearMaverick 3-way split (boot-gated)
+## 2026-08-21 â€” ThermobaricNuclearMaverick 3-way split (boot-gated)
 
 
 
@@ -2958,10 +3004,10 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Preserved total per-shot damage: `MissileHE_Heavy`/`Flame_Heavy` stay `14000` flat/`7%`;
 
 
-  `^Warhead_Nuclear_Super` delivers `1400` × 10-tick `AreaDamage` (`MaxRadius: 9000`) and
+  `^Warhead_Nuclear_Super` delivers `1400` Ã— 10-tick `AreaDamage` (`MaxRadius: 9000`) and
 
 
-  `1` × 7-tick `AreaDamagePercentage` (`Spread: 500`, `MaxRadius: 4500`) to keep the old `7%`
+  `1` Ã— 7-tick `AreaDamagePercentage` (`Spread: 500`, `MaxRadius: 4500`) to keep the old `7%`
 
 
   percentage total while using the canonical nuclear family.
@@ -2981,7 +3027,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real,
 
 
-  `audit_warhead_split` 944 (baseline lowered 945→944),
+  `audit_warhead_split` 944 (baseline lowered 945â†’944),
 
 
   `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
@@ -2991,7 +3037,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — NuclearMaverick 3-way split (boot-gated)
+## 2026-08-21 â€” NuclearMaverick 3-way split (boot-gated)
 
 
 
@@ -3060,7 +3106,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-24 — HammerheadArtillery 3-way split (boot-gated)
+## 2026-08-24 â€” HammerheadArtillery 3-way split (boot-gated)
 
 
 
@@ -3121,14 +3167,14 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split` 946
 
 
-  (baseline lowered 950→946), `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
+  (baseline lowered 950â†’946), `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
 
 
 
-## 2026-08-21 — AsianChemicalBombs 3-way split (boot-gated)
+## 2026-08-21 â€” AsianChemicalBombs 3-way split (boot-gated)
 
 
 
@@ -3181,7 +3227,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — TSScoopDualChem 3-way split (boot-gated)
+## 2026-08-21 â€” TSScoopDualChem 3-way split (boot-gated)
 
 
 
@@ -3233,7 +3279,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — TS70mmChem 3-way split (boot-gated)
+## 2026-08-21 â€” TS70mmChem 3-way split (boot-gated)
 
 
 
@@ -3285,7 +3331,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — SteelHoverMissile 3-way split (boot-gated)
+## 2026-08-21 â€” SteelHoverMissile 3-way split (boot-gated)
 
 
 
@@ -3326,7 +3372,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Updated `doc_claims.yaml` and `docs/design/BALANCE_PROGRAM_PLAN.md` W24 counts:
 
 
-  `multi_main_fired_weapons` 935 → 934; 1–2 legacy 117 → 116; broadcast 577 → 576 (61.7%).
+  `multi_main_fired_weapons` 935 â†’ 934; 1â€“2 legacy 117 â†’ 116; broadcast 577 â†’ 576 (61.7%).
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
 
@@ -3341,7 +3387,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — HueyGun 3-way split (boot-gated)
+## 2026-08-21 â€” HueyGun 3-way split (boot-gated)
 
 
 
@@ -3353,7 +3399,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   from `^FlakWeapon` + `^RA2Chaingun` to the single-family 3-way split:
 
 
-  - `Inherits@wh: ^Warhead_Bullet_Medium` (Damage: 4000, 2 × 2000 preserved)
+  - `Inherits@wh: ^Warhead_Bullet_Medium` (Damage: 4000, 2 Ã— 2000 preserved)
 
 
   - `Inherits@proj: ^Projectile_Bullet_Medium`
@@ -3382,7 +3428,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Updated `doc_claims.yaml` and `docs/design/BALANCE_PROGRAM_PLAN.md` W24 counts:
 
 
-  `multi_main_fired_weapons` 936 → 935; 1–2 legacy 118 → 117; broadcast 578 → 577 (61.7%).
+  `multi_main_fired_weapons` 936 â†’ 935; 1â€“2 legacy 118 â†’ 117; broadcast 578 â†’ 577 (61.7%).
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
 
@@ -3397,7 +3443,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — ChainGunMH60 3-way split (boot-gated)
+## 2026-08-21 â€” ChainGunMH60 3-way split (boot-gated)
 
 
 
@@ -3412,7 +3458,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
   single-family 3-way split:
 
 
-  - `Inherits@wh: ^Warhead_Bullet_Medium` with local `Damage: 8000` (4 × 2000 preserved)
+  - `Inherits@wh: ^Warhead_Bullet_Medium` with local `Damage: 8000` (4 Ã— 2000 preserved)
 
 
   - `Inherits@proj: ^Projectile_Bullet_Medium` (bullet/50CAL/contrail visuals preserved)
@@ -3435,10 +3481,10 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Updated `doc_claims.yaml` and `docs/design/BALANCE_PROGRAM_PLAN.md` W24 counts:
 
 
-  `multi_main_fired_weapons` 937 → 936; W24 pileup shape 202 → 201; broadcast
+  `multi_main_fired_weapons` 937 â†’ 936; W24 pileup shape 202 â†’ 201; broadcast
 
 
-  count 579 → 578; the four prose occurrences in BPP now read 936.
+  count 579 â†’ 578; the four prose occurrences in BPP now read 936.
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_doc_claims` 16/16 clean,
 
@@ -3455,7 +3501,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — Ixian D2K missile damage-total correction (boot-gated)
+## 2026-08-21 â€” Ixian D2K missile damage-total correction (boot-gated)
 
 
 
@@ -3473,12 +3519,12 @@ existing claims table. **Role: verification + coordination only — no yaml file
   - `D2K_TowerMissile`: one `Warhead@MissileAP_Heavy` main `Damage: 16000`
 
 
-    (was 4 × 4000) and `Damage: 8` for the percentage twin (was 4 × 2).
+    (was 4 Ã— 4000) and `Damage: 8` for the percentage twin (was 4 Ã— 2).
 
   - `mtank_pri2`: one `Warhead@MissileAP_Heavy` main `Damage: 24000`
 
 
-    (was 3 × 8000) and `Damage: 12` for the percentage twin (was 3 × 4).
+    (was 3 Ã— 8000) and `Damage: 12` for the percentage twin (was 3 Ã— 4).
 
 - Removed explicit `HealthPercentageDamage` from the percentage twins so the
 
@@ -3511,7 +3557,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-24 — Ixian D2K missile correction (boot-gated)
+## 2026-08-24 â€” Ixian D2K missile correction (boot-gated)
 
 
 
@@ -3561,16 +3607,16 @@ existing claims table. **Role: verification + coordination only — no yaml file
   579 broadcast / 61.8%), `docs/design/PHYSICAL_STATE_SYSTEM.md`
 
 
-  (`w24_multi_main_fed` 386→383), `docs/audit/doc_claims.yaml`
+  (`w24_multi_main_fed` 386â†’383), `docs/audit/doc_claims.yaml`
 
 
-  (`multi_main_fired_weapons` 939→937, `w24_multi_main_fed` 385→383,
+  (`multi_main_fired_weapons` 939â†’937, `w24_multi_main_fed` 385â†’383,
 
 
-  `physical_state_fired_weapons` 450→448), `tools/audit/audit_warhead_split.py`
+  `physical_state_fired_weapons` 450â†’448), `tools/audit/audit_warhead_split.py`
 
 
-  baseline (952→950), and `docs/design/ROADMAP.md`.
+  baseline (952â†’950), and `docs/design/ROADMAP.md`.
 
 - Re-extracted balance ledgers (`python tools/balance/extract_stats.py`) and
 
@@ -3588,10 +3634,10 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
     and `Projectile`/`Effect` layers preserved.
 
-  - `tools/audit/find_empty_warhead.py` → 0
+  - `tools/audit/find_empty_warhead.py` â†’ 0
 
 
-  - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
+  - `tools/audit/effect_audit.py` â†’ 0 duplicate `DamagesConcrete`
 
 
   - `tools/audit/audit_warhead_split.py` at/below baseline (950)
@@ -3612,7 +3658,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — HeatRayBeam1-4 Inferno 3-way split + doc claim sync (boot-gated)
+## 2026-08-21 â€” HeatRayBeam1-4 Inferno 3-way split + doc claim sync (boot-gated)
 
 
 
@@ -3677,10 +3723,10 @@ existing claims table. **Role: verification + coordination only — no yaml file
   - `scratchpad/heatray_*.json` before/after: all four weapons **identical**
 
 
-  - `tools/audit/find_empty_warhead.py` → 0
+  - `tools/audit/find_empty_warhead.py` â†’ 0
 
 
-  - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
+  - `tools/audit/effect_audit.py` â†’ 0 duplicate `DamagesConcrete`
 
 
   - `tools/audit/audit_warhead_split.py` at/below baseline (952)
@@ -3701,7 +3747,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-23 — Ixian giant multi-warhead 3-way split (boot-gated)
+## 2026-08-23 â€” Ixian giant multi-warhead 3-way split (boot-gated)
 
 
 
@@ -3772,19 +3818,19 @@ existing claims table. **Role: verification + coordination only — no yaml file
     OK for both weapons
 
 
-  - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
+  - `tools/audit/effect_audit.py` â†’ 0 duplicate `DamagesConcrete`
 
 
-  - `tools/audit/find_empty_warhead.py` → 0 empty warheads
+  - `tools/audit/find_empty_warhead.py` â†’ 0 empty warheads
 
 
-  - `tools/audit/find_orphan_old_keys.py` → 0 real bugs
+  - `tools/audit/find_orphan_old_keys.py` â†’ 0 real bugs
 
 
   - `tools/audit/audit_warhead_split.py` at/below baseline (952)
 
 
-  - `tools/audit/audit_balance_drift.py` → 32 ledgers clean (re-extracted via `extract_stats.py`)
+  - `tools/audit/audit_balance_drift.py` â†’ 32 ledgers clean (re-extracted via `extract_stats.py`)
 
 
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
@@ -3828,7 +3874,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-23 — D2K Rocket Trooper family 3-way split (boot-gated)
+## 2026-08-23 â€” D2K Rocket Trooper family 3-way split (boot-gated)
 
 
 
@@ -3890,16 +3936,16 @@ existing claims table. **Role: verification + coordination only — no yaml file
   - `tools/audit/review_resolve_diff.py` OK for all five weapons
 
 
-  - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
+  - `tools/audit/effect_audit.py` â†’ 0 duplicate `DamagesConcrete`
 
 
-  - `tools/audit/find_empty_warhead.py` → 0 empty warheads
+  - `tools/audit/find_empty_warhead.py` â†’ 0 empty warheads
 
 
-  - `tools/audit/find_orphan_old_keys.py` → 0 real bugs
+  - `tools/audit/find_orphan_old_keys.py` â†’ 0 real bugs
 
 
-  - `tools/audit/audit_balance_drift.py` → 32 ledgers clean (re-extracted via `extract_stats.py`)
+  - `tools/audit/audit_balance_drift.py` â†’ 32 ledgers clean (re-extracted via `extract_stats.py`)
 
 
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
@@ -3908,7 +3954,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-23 — Documentation review + doc_claims reconciliation
+## 2026-08-23 â€” Documentation review + doc_claims reconciliation
 
 
 
@@ -3922,13 +3968,13 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Reconciled `docs/audit/doc_claims.yaml` with live measurements:
 
 
-  `multi_main_fired_weapons` 975→939, `meters_filling_before_death` 118→122,
+  `multi_main_fired_weapons` 975â†’939, `meters_filling_before_death` 118â†’122,
 
 
-  `corrosion_meter_actors` 783→785, `w24_multi_main_fed` 386→385,
+  `corrosion_meter_actors` 783â†’785, `w24_multi_main_fed` 386â†’385,
 
 
-  `physical_state_fired_weapons` 449→450.
+  `physical_state_fired_weapons` 449â†’450.
 
 - `python tools/audit/audit_doc_claims.py` now passes (16/16 claims clean).
 
@@ -3968,7 +4014,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-20 — D2K Devastator/Plasma cannon 3-way split (boot-gated)
+## 2026-08-20 â€” D2K Devastator/Plasma cannon 3-way split (boot-gated)
 
 
 
@@ -4016,16 +4062,16 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Verification:
 
 
-  - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
+  - `tools/audit/effect_audit.py` â†’ 0 duplicate `DamagesConcrete`
 
 
-  - `tools/audit/find_empty_warhead.py` → 0 empty warheads
+  - `tools/audit/find_empty_warhead.py` â†’ 0 empty warheads
 
 
-  - `tools/audit/find_orphan_old_keys.py` → 0 real bugs
+  - `tools/audit/find_orphan_old_keys.py` â†’ 0 real bugs
 
 
-  - `tools/audit/audit_balance_drift.py` → 32 ledgers clean
+  - `tools/audit/audit_balance_drift.py` â†’ 32 ledgers clean
 
 
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
@@ -4037,7 +4083,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-22 — W24 cluster 9: D2K-rocket six-weapon split (boot-gated)
+## 2026-08-22 â€” W24 cluster 9: D2K-rocket six-weapon split (boot-gated)
 
 
 
@@ -4092,7 +4138,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-22 — W24 cluster 5: Tiberian Sun tiberium bazookas (boot-gated)
+## 2026-08-22 â€” W24 cluster 5: Tiberian Sun tiberium bazookas (boot-gated)
 
 
 
@@ -4168,7 +4214,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-22 — W24 cluster 4: Dragon SAM (boot-gated)
+## 2026-08-22 â€” W24 cluster 4: Dragon SAM (boot-gated)
 
 
 
@@ -4231,7 +4277,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-22 — W24 cluster 3: FutureTech missile javelins (boot-gated)
+## 2026-08-22 â€” W24 cluster 3: FutureTech missile javelins (boot-gated)
 
 
 
@@ -4287,7 +4333,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-22 — W24 cluster 2 + weapon-family corrections (boot-gated)
+## 2026-08-22 â€” W24 cluster 2 + weapon-family corrections (boot-gated)
 
 
 
@@ -4348,7 +4394,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-21 — Cryo/Inferno promoted to blend families (package 3)
+## 2026-08-21 â€” Cryo/Inferno promoted to blend families (package 3)
 
 
 
@@ -4359,7 +4405,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
   - Removed `Cryo` / `Inferno` from `INHERIT_FAMILIES`.
 
-  - Added `Cryo` = Laser×Prism and `Inferno` = Flame×Prism to `BLEND_FAMILIES`.
+  - Added `Cryo` = LaserÃ—Prism and `Inferno` = FlameÃ—Prism to `BLEND_FAMILIES`.
 
   - Updated `COMPOSITION` (`Cryo` energy 0.55 / thermo 0.25 / kinetic 0.20) and
 
@@ -4399,12 +4445,12 @@ existing claims table. **Role: verification + coordination only — no yaml file
 - Boot-gate: `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`,
 
 
-  `exception-*.log` count 183 → 183 (no new exceptions).
+  `exception-*.log` count 183 â†’ 183 (no new exceptions).
 
 
 
 
-## 2026-08-20 — Computed prerequisite-chain tech tier
+## 2026-08-20 â€” Computed prerequisite-chain tech tier
 
 
 
@@ -4473,7 +4519,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Regenerated all 32 raw ledgers and 32 derived sidecars with `extract_stats.py`.
 
-- Verified: `td_nod_lasertrooper` → `tier_chain_cost = 27000.0`, `tier_multiplier =
+- Verified: `td_nod_lasertrooper` â†’ `tier_chain_cost = 27000.0`, `tier_multiplier =
 
 
   0.3204`; its closure contains only Nod and Shared buildings (no GDI).
@@ -4501,7 +4547,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-19 — Delivery-weighted physical-state price multiplier wired into fit_class
+## 2026-08-19 â€” Delivery-weighted physical-state price multiplier wired into fit_class
 
 
 
@@ -4549,7 +4595,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-18 — ApplyPhysicalState → damage-scaled conversion (flame/chemical, boot-gated)
+## 2026-08-18 â€” ApplyPhysicalState â†’ damage-scaled conversion (flame/chemical, boot-gated)
 
 
 
@@ -4572,10 +4618,10 @@ existing claims table. **Role: verification + coordination only — no yaml file
   `^HeavyChemicalWeapon` and all concrete overrides in 34 YAML weapon files:
 
 
-  - `SpreadDamage` → `AreaDamage`
+  - `SpreadDamage` â†’ `AreaDamage`
 
 
-  - `HealthPercentageDamage` → `AreaDamagePercentage`
+  - `HealthPercentageDamage` â†’ `AreaDamagePercentage`
 
 
   - removed `Range:` from inside converted warheads
@@ -4645,7 +4691,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-17 — RA2 effect-template final sweep (Shared/Allies/Yuri/redalert2mod/AsianAlliance/Syndicate, boot-gated)
+## 2026-08-17 â€” RA2 effect-template final sweep (Shared/Allies/Yuri/redalert2mod/AsianAlliance/Syndicate, boot-gated)
 
 
 
@@ -4758,7 +4804,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-17 — RA2 sprite-named effect template library (foundation + shared/Soviets wiring, boot-gated)
+## 2026-08-17 â€” RA2 sprite-named effect template library (foundation + shared/Soviets wiring, boot-gated)
 
 
 
@@ -4832,7 +4878,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-08-17 — RA2 effect template sweep continuation (Shared/redalert2mod/Yuri, Floating Disk, boot-gated)
+## 2026-08-17 â€” RA2 effect template sweep continuation (Shared/redalert2mod/Yuri, Floating Disk, boot-gated)
 
 
 
@@ -4940,7 +4986,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 
 
-## 2026-07-18 — BALANCE PIPELINE LIVE (all agents read this)
+## 2026-07-18 â€” BALANCE PIPELINE LIVE (all agents read this)
 
 
 
@@ -4952,16 +4998,16 @@ existing claims table. **Role: verification + coordination only — no yaml file
 implemented and enforced (`docs/design/BALANCE_PIPELINE.md`, CLAUDE.md
 
 
-"Balance changes" section, DESIGN §12):
+"Balance changes" section, DESIGN Â§12):
 
 
-extract_stats.py → docs/balance/*.json (raw-stat ledger, committed) →
+extract_stats.py â†’ docs/balance/*.json (raw-stat ledger, committed) â†’
 
 
-build_workbook.py → cameo_balance_v2.xlsx (gitignored workbench) →
+build_workbook.py â†’ cameo_balance_v2.xlsx (gitignored workbench) â†’
 
 
-import_workbook.py → apply_balance.py --confirm (maintainer order) →
+import_workbook.py â†’ apply_balance.py --confirm (maintainer order) â†’
 
 
 re-extract, audits, boot, commit yaml+ledger together.
@@ -4969,9 +5015,9 @@ re-extract, audits, boot, commit yaml+ledger together.
 `audit_balance_drift` in run_all fails RED whenever yaml and ledger
 
 
-disagree — hand edits cannot land silently anymore.
+disagree â€” hand edits cannot land silently anymore.
 
-Loop PROVEN: exact fixed point + live 1000→1050→1000 round trip.
+Loop PROVEN: exact fixed point + live 1000â†’1050â†’1000 round trip.
 
 Phase 5 (per-class anchors via fit_class.py + class_anchors.json)
 
@@ -4987,7 +5033,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 
 
-## 2026-07-18 — Claude session (TKM port + Blackrobe batch)
+## 2026-07-18 â€” Claude session (TKM port + Blackrobe batch)
 
 
 
@@ -5011,7 +5057,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
   (DLLs rebuilt). Deviations flagged in the commit (kept warfactory
 
 
-  ProvidesPrerequisite — his removal would orphan every
+  ProvidesPrerequisite â€” his removal would orphan every
 
 
   ~tkm_warfactory prereq).
@@ -5019,13 +5065,13 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 - TKM MOVED into ContentPacks/RedAlert2Mod (`d981d65fe` renames +
 
 
-  `915714fe8` manifest/mod.yaml — the renames rode the earlier commit
+  `915714fe8` manifest/mod.yaml â€” the renames rode the earlier commit
 
 
   via the staged index; completion committed immediately). Theme
 
 
-  folder rename POSTPONED (Blackrobe) — candidates logged in ROADMAP.
+  folder rename POSTPONED (Blackrobe) â€” candidates logged in ROADMAP.
 
 - Monster tank Tesla/Thermonuclear rockets (`d981d65fe`): real weapon
 
@@ -5041,7 +5087,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
   veteran waves; win-objective fix earlier in `71765570b`. `survival 2`
 
 
-  copy was deleted by the team (`32669f345`) — main copy carries all.
+  copy was deleted by the team (`32669f345`) â€” main copy carries all.
 
 - SM passive income (Blackrobe): moondairyfarm verified correctly
 
@@ -5049,7 +5095,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
   wired; the missing piece (ra2oilderrick/ra2ywall conyard provisions)
 
 
-  is the MAINTAINER'S OTHER SESSION's uncommitted WIP — do not
+  is the MAINTAINER'S OTHER SESSION's uncommitted WIP â€” do not
 
 
   double-fix. Laser Beetle/M200B report: wiring verified WAD
@@ -5065,7 +5111,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 
 
-## 2026-07-17 — Claude session SID-20260717-cl4b7e (RA1 legacy rename + two-session repair pass)
+## 2026-07-17 â€” Claude session SID-20260717-cl4b7e (RA1 legacy rename + two-session repair pass)
 
 
 
@@ -5080,12 +5126,12 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
   SS/MSUB, POWR/APWR/RASILO, BADR family, naval yards, civilians, husks,
 
 
-  8 upgrade proxies) → grammar-compliant ids; only `japan` unprefixed.
+  8 upgrade proxies) â†’ grammar-compliant ids; only `japan` unprefixed.
 
   Applied by tools/rename/apply_ra1_legacy.py (context-scoped successor
 
 
-  to apply.py). zerofighter collision → japan_zerofighter_slave.
+  to apply.py). zerofighter collision â†’ japan_zerofighter_slave.
 
 - Umlaut transliteration (schwarzermond_ubermensch), CABAL plasmaturret
 
@@ -5101,18 +5147,18 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
      ftl keys renamed (whole-identifier pass can't see through the
 
 
-     `actor_` prefix) — added a fluent-stem pass to the applicator
+     `actor_` prefix) â€” added a fluent-stem pass to the applicator
 
 
      (combined-alternation regexes; 52 sequential re.subs was too slow)
 
 
-     and fixed all 13. audit_fluent: 17 → 0 unresolved.
+     and fixed all 13. audit_fluent: 17 â†’ 0 unresolved.
 
   2. warcraft2_en.ftl + tkm_en.ftl were NEVER registered in mod.yaml
 
 
-     FluentMessages — WC2/TKM faction descriptions showed raw keys.
+     FluentMessages â€” WC2/TKM faction descriptions showed raw keys.
 
      Registered both.
 
@@ -5143,7 +5189,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
   SchwarzerMond/yaml/promotions.yaml with CABAL-pattern gating BUT the
 
 
-  chains deviate from the maintainer's image; row order under redesign —
+  chains deviate from the maintainer's image; row order under redesign â€”
 
 
   see ROADMAP P2 (sharpened 2026-07-17 with maintainer's MARS/tier
@@ -5157,7 +5203,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 - NOTE for all agents: SCUD/SCUDNUKE (RedAlert/Soviets weapons.yaml) are
 
 
-  legacy-uppercase WEAPON ids shared with generals/darkreign — WPN-MIGRATE
+  legacy-uppercase WEAPON ids shared with generals/darkreign â€” WPN-MIGRATE
 
 
   scope, intentionally untouched by the actor rename.
@@ -5165,13 +5211,13 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 - SM PROMOTION GRID FINALIZED (maintainer decision): columns
 
 
-  infantry | vehicles | air/artillery/support, tier-laddered rows —
+  infantry | vehicles | air/artillery/support, tier-laddered rows â€”
 
 
   see ROADMAP P2 (RESOLVED) for the binding table. promotions.yaml
 
 
-  re-chained, `..._promotion_bermensch` → `..._promotion_ubermensch`,
+  re-chained, `..._promotion_bermensch` â†’ `..._promotion_ubermensch`,
 
 
   ^PromotionUnitBuff stripped from 10 non-promotion SM units
@@ -5182,7 +5228,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 - NEW ORDER: FULL SM REBALANCE (sheet-first; post-buff-strip stats;
 
 
-  38 stat_formulas findings as the seed) — queued as ROADMAP P1.
+  38 stat_formulas findings as the seed) â€” queued as ROADMAP P1.
 
 
 
@@ -5224,7 +5270,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 
 
-## 2026-08-04 — Balance ledger re-extract
+## 2026-08-04 â€” Balance ledger re-extract
 
 
 
@@ -5243,7 +5289,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 
 
-## 2026-08-04 — extract_stats design_weapon_class fix + HighV NRE
+## 2026-08-04 â€” extract_stats design_weapon_class fix + HighV NRE
 
 
 
@@ -5272,7 +5318,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 
 
-## 2026-08-04 — extract_stats refine class-template detection
+## 2026-08-04 â€” extract_stats refine class-template detection
 
 
 
@@ -5303,7 +5349,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 
 
-## 2026-08-04 — extract_stats warhead renames and RA2 Thunderbolt family 3-way split
+## 2026-08-04 â€” extract_stats warhead renames and RA2 Thunderbolt family 3-way split
 
 
 
@@ -5365,7 +5411,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 
 
-## 2026-08-22 — W24 Phase B: SCUDNUKE/SCUDNUKEThermobaric collapse to Nuclear_Super
+## 2026-08-22 â€” W24 Phase B: SCUDNUKE/SCUDNUKEThermobaric collapse to Nuclear_Super
 
 
 
@@ -5398,7 +5444,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 - Boot-gate: reached MenuPostProcessEffect.PostWorldLoaded; no new exception-*.log.
 
-## 2026-08-22 — W24 A1b: generate five new blend families
+## 2026-08-22 â€” W24 A1b: generate five new blend families
 
 - Added CannonNuke, MissileNuke, MissileQuantum, MissileTesla, MissileThermobaric (L/M/H) to gen_weapon_template.py BLEND_FAMILIES, PHYSICS_RANK, FAMILY_DAMAGE_TYPES, FAMILY_INTEGRITY_SCALE.
 - Expanded Nuclear in WEAPONS to L/M/H/Super so it can be a blend parent while remaining HAND_TUNED (Nuclear_Super still hand-authored, not emitted).
@@ -5407,7 +5453,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 - Ran splice_templates --all: 112 blocks (15 new) spliced/ appended; verify_generator_sync drift 0; extract_stats regenerated, 0 drift; find_empty_warhead 0; find_orphan_old_keys 0 real; audit_warhead_split 944 vs baseline 939 (expected red, unchanged).
 - Boot-gate reached MenuPostProcessEffect.PostWorldLoaded; no new exception-*.log.
 
-## 2026-08-24 — W24 Phase B: RA2 Apocalypse 120mm and rad-chemical 3-way split
+## 2026-08-24 â€” W24 Phase B: RA2 Apocalypse 120mm and rad-chemical 3-way split
 
 - Converted RA2120xmm and RA2120xmm_rad in
   mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml to the canonical
@@ -5438,7 +5484,7 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
 - Boot-gate: reached MenuPostProcessEffect.PostWorldLoaded; no new
   exception-*.log files.
 
-## 2026-08-24 — W24 Phase B: Apocalypse 120mm variant family correction
+## 2026-08-24 â€” W24 Phase B: Apocalypse 120mm variant family correction
 
 - Created ^Warhead_CannonTesla_Light/Medium/Heavy in the generator (blend of Tesla + CannonAP,
   rank 0.66, IntegrityScale 50, ElectricityDeath/Tesla DamageTypes) and spliced it into
@@ -5457,7 +5503,7 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
 - Re-extracted balance ledgers with tools/balance/extract_stats.py.
 - Boot-gate: reached MenuPostProcessEffect.PostWorldLoaded; no new exception-*.log.
 
-## 2026-08-24 — W24 A3: collapse three misclassifications onto existing families
+## 2026-08-24 â€” W24 A3: collapse three misclassifications onto existing families
 
 - TS70mmChem (TiberianSun/Forgotten): ^Warhead_CannonHE_Medium + ^Warhead_Chemical_Light
   -> ^Warhead_CannonChem_Light, total 6000, Corrosion 100.
@@ -5474,7 +5520,7 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   affected docs (BALANCE_PROGRAM_PLAN.md, PHYSICAL_STATE_SYSTEM.md, doc_claims.md).
 - Boot-gate passed; no new exceptions.
 
-## 2026-08-24 — W24 A4: rename upgrade gate and weapon pairs per ruling 2
+## 2026-08-24 â€” W24 A4: rename upgrade gate and weapon pairs per ruling 2
 
 - `^HighExplosiveRocketsUpgradeRA1` -> `^ThermobaricRocketsUpgradeRA1`.
 - Condition `ra1_soviets_upgrade_highexplosiverockets` -> `ra1_soviets_upgrade_thermobaricrockets`
@@ -5493,7 +5539,7 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
 - Boot-gate passed; no new exceptions.
 - Updated `BALANCE_PROGRAM_PLAN.md` A4 status.
 
-## 2026-08-24 — Fix 2 missing sequence images (B6)
+## 2026-08-24 â€” Fix 2 missing sequence images (B6)
 
 - `ts_gdi_strike_orca` and `ts_gdi_strike_orca_husk` in
   `mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml` used `Image: tsgdi_strike_orca`
@@ -5502,27 +5548,27 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
 - `audit_sequences` now reports S1 missing images: **0** (was 2); S3 unreferenced: 594.
 - Boot-gate passed; no new exceptions.
 
-## 2026-08-24 — Fix G1 garrison weapons (6)
+## 2026-08-24 â€” Fix G1 garrison weapons (6)
 
 - Added `Armament@GARRISONED` with `Name: garrisoned` to all 6 armed garrison-capable
   Warcraft 2 infantry:
-  - `wc2_humans_footman` → `wc2footmanslice`
-  - `wc2_humans_warcraft3footman` → `wc2footmanslice2`
-  - `wc2_humans_highelfpriest` → `wc2mageFire`
-  - `wc2_humans_highelfsorceress` → `wc2mageFire`
-  - `wc2_orcs_grunt` → `wc2gruntslice`
-  - `wc2_orcs_warcraft3grunt` → `wc2gruntslice2`
+  - `wc2_humans_footman` â†’ `wc2footmanslice`
+  - `wc2_humans_warcraft3footman` â†’ `wc2footmanslice2`
+  - `wc2_humans_highelfpriest` â†’ `wc2mageFire`
+  - `wc2_humans_highelfsorceress` â†’ `wc2mageFire`
+  - `wc2_orcs_grunt` â†’ `wc2gruntslice`
+  - `wc2_orcs_warcraft3grunt` â†’ `wc2gruntslice2`
 - `audit_garrison_weapons` now reports G1: **0** (was 6), G2: 0, G3: 0.
 - Boot-gate passed; no new exceptions.
 
-## 2026-08-24 — Fix 1 unresolved fluent ref (B12)
+## 2026-08-24 â€” Fix 1 unresolved fluent ref (B12)
 
 - `td_nod_upgrade_burninglasers` referenced `upgrade_burninglasers.description`,
   which did not exist. Added `upgrade_burninglasers` to `mods/cameo/fluent/rules/en.ftl`.
 - `audit_fluent` now reports F1: **0** (was 1).
 - Boot-gate passed; no new exceptions.
 
-## 2026-08-24 — Fix missing Harkonnen basebuilder crate
+## 2026-08-24 â€” Fix missing Harkonnen basebuilder crate
 
 - `audit_basebuilder_crates` reported `harkonnen` as the only faction without an
   MCV basebuilder crate. Added `GiveBaseBuilderCrateAction@harkonnen` to
@@ -5530,7 +5576,7 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
 - `audit_basebuilder_crates` now reports 29/29 covered, missing: **0**.
 - Boot-gate passed; no new exceptions.
 
-## 2026-08-24 — W24 A6: collapse 105mmThermobaric, HammerTankCannon, KotinCannon
+## 2026-08-24 â€” W24 A6: collapse 105mmThermobaric, HammerTankCannon, KotinCannon
 
 - `105mmThermobaric`: one `^Warhead_CannonFire_Medium` main `Damage: 12000`,
   `^Projectile_Shell_Medium`, `^Effect_Flame_Medium` + `^Effect_CannonHE_Medium`,
@@ -5541,16 +5587,16 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   Kotin retains local radiation node.
 - Per-shot totals preserved (12000 / 12000 / 12000); the two base cannons had
   previously inherited both `^Warhead_CannonHE_Heavy` and `^Warhead_CannonHE_Medium`
-  as 2×6000 broadcast.
+  as 2Ã—6000 broadcast.
 - `review_resolve_diff` for all three: OK (behavioural invariants preserved).
 - `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split`
   broadcast 921 vs baseline 921; `extract_stats --check` 0; `audit_doc_claims`
-  19 green after updating `multi_main_fired_weapons` 908→905, BROADCAST_BASELINE
-  924→921, and `BALANCE_PROGRAM_PLAN.md` / `SUMMARY.md` counts.
+  19 green after updating `multi_main_fired_weapons` 908â†’905, BROADCAST_BASELINE
+  924â†’921, and `BALANCE_PROGRAM_PLAN.md` / `SUMMARY.md` counts.
 - Re-extracted `docs/balance/redalert_soviets.json` + derived sidecar.
 - Boot-gate passed; no new exceptions.
 
-## 2026-08-24 — W24 A8: collapse 25mm, RA2LasherCannon, AsianLynxTankCannon onto CannonHE_Medium
+## 2026-08-24 â€” W24 A8: collapse 25mm, RA2LasherCannon, AsianLynxTankCannon onto CannonHE_Medium
 
 - `25mm` (RedAlert/Allies): reparented from five legacy full-stack families
   (`^Grenade`, `^ShrapnelWeapon`, `^LightFlameWeapon`, `^MediumChemicalWeapon`,
@@ -5563,7 +5609,7 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   `^RA2MediumCannon` (`^Warhead_CannonHE_Medium` + `^Projectile_Shell_Medium` +
   `^Effect_Explosion_Medium_RA2`); one main `Damage: 12000`; kept local `Speed`/`Inaccuracy`
   and RA2 `ra2_medium_explosion` effect with glow/ImpactActors preserved.
-- Per-shot totals preserved (6 × 2000 = 12000) for all three; percentage twin now
+- Per-shot totals preserved (6 Ã— 2000 = 12000) for all three; percentage twin now
   auto-derived from the single `AreaDamage` main.
 - `review_resolve_diff.py` (base=HEAD worktree) for all three: OK
   (behavioural invariants preserved).
@@ -5579,13 +5625,13 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   `find_orphan_old_keys`, `audit_warhead_split`, and `review_resolve_diff`, then
   second boot-gate reached the main menu with no new exceptions.
 
-## 2026-08-25 — W24 A9: collapse MammothTuskThermobaric + MonsterTankTuskThermobaric onto MissileThermobaric_Heavy
+## 2026-08-25 â€” W24 A9: collapse MammothTuskThermobaric + MonsterTankTuskThermobaric onto MissileThermobaric_Heavy
 
 - Cluster in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`.
 - Reparented both from a stack of eight legacy full-stack families onto
   `^Warhead_MissileThermobaric_Heavy` + `^Projectile_Missile_Heavy` + `^Effect_Flame_Heavy`.
 - Preserved per-shot totals:
-  - `MammothTuskThermobaric` flat `32000`, percentage `1600` (16% of old 8×2).
+  - `MammothTuskThermobaric` flat `32000`, percentage `1600` (16% of old 8Ã—2).
   - `MonsterTankTuskThermobaric` flat `106000`, percentage `5600`.
 - Restored resolved local behaviour not carried by the shared effect family:
   water splash (`med_splash`), concrete slab damage (`200`), shielded shell impact
@@ -5600,7 +5646,7 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   sidecar, and `tools/audit/audit_warhead_split.py` baseline.
 - Commit `c9f0eceeb`.
 
-## 2026-08-25 — W24 A10: collapse TSLaser90mm (+ TSLaser90mmDep) onto 3-way split
+## 2026-08-25 â€” W24 A10: collapse TSLaser90mm (+ TSLaser90mmDep) onto 3-way split
 
 - File: `mods/cameo/weapons/tiberiansun.yaml`.
 - Removed old `^LaserWeapon` and `^TSLaserEffect` full-stack inheritance, collapsed
@@ -5622,11 +5668,11 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   `audit_warhead_split` 894 vs 894 (baseline lowered); `audit_doc_claims` 19/19 green;
   `extract_stats --check` 0; `verify_generator_sync` 0; boot-gate reached main menu
   with no new exceptions.
-- Co-updated `docs/audit/doc_claims.yaml` (`multi_main_fired_weapons` 882 → 879),
+- Co-updated `docs/audit/doc_claims.yaml` (`multi_main_fired_weapons` 882 â†’ 879),
   `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`, `SUMMARY.md`, `tiberiansun_nod` ledger +
   derived, and `tools/audit/audit_warhead_split.py` baseline.
 
-## 2026-08-25 — W24 A11: TiberianSun/Forgotten bullet collapse
+## 2026-08-25 â€” W24 A11: TiberianSun/Forgotten bullet collapse
 
 - File: `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`.
 - Cluster: `TSMutVulcanTurret`, `TSBowlerCannon`, `TSSergGun`.
@@ -5644,7 +5690,7 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   boot-gate reached main menu with no new exceptions.
 - Co-updated `tiberiansun_forgotten` ledger + derived sidecar.
 
-## 2026-08-25 — Agent coordination note (multi-agent W24 burn-down)
+## 2026-08-25 â€” Agent coordination note (multi-agent W24 burn-down)
 
 There are multiple Devin agents running locally. To avoid duplicate work and
 collisions, each agent must **claim a weapon/file-set in this log before editing**
@@ -5652,16 +5698,16 @@ and respect the open-file/locked-file list below.
 
 ### Current locks / do not touch
 
-- `mods/cameo/weapons/tiberiansun.yaml` — A10 re-evaluation resolved (`TSLaser90mm`
+- `mods/cameo/weapons/tiberiansun.yaml` â€” A10 re-evaluation resolved (`TSLaser90mm`
   now on `^Warhead_Laser_Heavy`). Free for the next TiberianSun cluster.
-- `mods/cameo/weapons/tiberiandawn.yaml` — another agent has this open in the IDE.
-- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml` — another agent has
+- `mods/cameo/weapons/tiberiandawn.yaml` â€” another agent has this open in the IDE.
+- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml` â€” another agent has
   this open in the IDE.
-- `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` — another agent has
+- `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` â€” another agent has
   this open in the IDE.
-- `mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml` — another agent has
+- `mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml` â€” another agent has
   this open in the IDE.
-- `mods/cameo/weapons/weapons.yaml` — template generator/family work; do not edit
+- `mods/cameo/weapons/weapons.yaml` â€” template generator/family work; do not edit
   without explicit generator/weapon-family sign-off.
 
 ### Trap: dead-code overrides in `mods/cameo/weapons/redalert2.yaml`
@@ -5687,7 +5733,7 @@ per weapon, and commit with the full doc/ledger co-update.
 2. **StarCraft + Warcraft2** (`mods/cameo/ContentPacks/StarCraft/*/yaml/weapons.yaml`,
    `mods/cameo/weapons/warcraft2.yaml`): `EpigraphMG`, `SwarmlingShoot`,
    `BCLaser`, `PhobosLaser`, `SiegeTankSiegeCannon`, `SiegeEngineCannon`.
-   Mixed Phase B groups — many need maintainer sign-off or a clear new family.
+   Mixed Phase B groups â€” many need maintainer sign-off or a clear new family.
 
 3. **D2k + TiberianSun/CABAL** (`mods/cameo/ContentPacks/D2k/*/yaml/weapons.yaml`,
    `mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml`): `MongooseRocket`,
@@ -5706,26 +5752,26 @@ per weapon, and commit with the full doc/ledger co-update.
 
 ### Active claims
 
-- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`:
+- **(completed by this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`:
   W24 bullet collapse for `TSMutVulcanTurret`, `TSBowlerCannon`, `TSSergGun`
-  (Bullet_Light + Bullet_Medium → one Bullet_Medium at the summed damage; no children).
+  (Bullet_Light + Bullet_Medium â†’ one Bullet_Medium at the summed damage; no children).
   Verification and boot-gate passed; committed.
-- **Devin (this session, 2026-08-25)** — `mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml` and
+- **Devin (this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml` and
   `mods/cameo/ContentPacks/D2k/*/yaml/weapons.yaml` (item 3):
   W24 multi-main collapse for `MongooseRocket`, `facedancer_grenade`,
   `CabalArtilleryWalkerShellUpgraded`, `CabalMothershipRockets`, and any D2k candidates
   found in `phase_b_survey`. Not in any open IDE tab.
-- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
+- **(completed by this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
   W24 collapse for `ATMine` (removed legacy `^HeavyMissile`, merged 60k Demolition + 50k HeavyMissile
   into one `^DamagingExplosionHE` `Demolition_Light` 110k main, swapped projectile to
   `^Projectile_Missile_Heavy`, preserved mine effects/concrete). Verification, boot-gate,
   and doc-claim co-update passed; committed as W24 A12.
-- **Devin (this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml`
+- **Devin (this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml`
   and `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml` (item 1):
   W24 bullet collapse for `tkmbunkmg`, `tkmquadcannonmg` (TKM, no children) and
   `asianalliance_fanatic_shotgun` + `_elite` + `_upgrade` (AsianAlliance). Not in any
   open IDE tab; not in the locked list; not claimed by another agent.
-- **(completed by this session, 2026-08-25)** — `mods/cameo/weapons/tiberiansun.yaml`:
+- **(completed by this session, 2026-08-25)** â€” `mods/cameo/weapons/tiberiansun.yaml`:
   Family correction for `TSLaser90mm` / `TSLaser90mmDep`: main warhead now contains
   `Damage: 12600`, local `DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath,
   FireDeath, Incendiary`, and `ValidTargets: Ground, Water`; kept `-PhysicalStateName`
@@ -5733,23 +5779,23 @@ per weapon, and commit with the full doc/ledger co-update.
   weapon into a metered physical-state weapon. Removed the off-grid `PercentageScale: 9524`
   override so `^Warhead_Laser_Heavy`'s `PercentageScale: 10000` applies. Boot-gated; no new
   exceptions.
-- **(committed as W24 A13, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`,
+- **(committed as W24 A13, 2026-08-25)** â€” `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`,
   `RedAlert2Mod/AsianAlliance/`, `D2k/Ordos/`, and `TiberianSun/CABAL/`:
   integrated the uncommitted bullet-light collapse work from the other Devin agent
   (`tkmbunkmg`, `tkmquadcannonmg`, `asianalliance_fanatic_shotgun`, `HMGstealth`,
   `CabalCyborgChaingun`, `TSDevoutChainguns`) and co-updated `multi_main_fired_weapons`
-  875 → 872 plus all dependent docs. Committed.
+  875 â†’ 872 plus all dependent docs. Committed.
 
-- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
-  `ATMine` correction — moved from `^Projectile_Missile_Heavy` to `^Projectile_InstantHit`,
+- **(completed by this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
+  `ATMine` correction â€” moved from `^Projectile_Missile_Heavy` to `^Projectile_InstantHit`,
   restricted `ValidTargets` to `Ground`, removed `Warhead@EffectAir`. Per-shot `Damage: 110000`
   unchanged; re-extracted affected RedAlert ledgers.
-- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert/Japan/`,
+- **(completed by this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/RedAlert/Japan/`,
   `TiberianSun/GDI/`, `TiberianSun/Nod/`, `TiberianSun/CABAL/`:
   integrated the uncommitted W24 bullet/missile collapse work from another Devin agent
   (`CHGuardRifle`, `JHighV`, `TSVulcanGun`, `elitecadregun`, `CabalRocketCyborgRockets`,
-  `CabalRocketCyborgRocketsUpgraded`). Co-updated `multi_main_fired_weapons` 872 → 867,
-  `BROADCAST_BASELINE` 880 → 878, ledgers, and all dependent docs. Boot-gated; no new
+  `CabalRocketCyborgRocketsUpgraded`). Co-updated `multi_main_fired_weapons` 872 â†’ 867,
+  `BROADCAST_BASELINE` 880 â†’ 878, ledgers, and all dependent docs. Boot-gated; no new
   exceptions.
 
 ### Mandatory pre-edit check for every agent
@@ -5757,13 +5803,13 @@ per weapon, and commit with the full doc/ledger co-update.
 Before touching a weapon:
 - `python -c "import cameo_model; m=cameo_model.Model(); print(m.rs.resolve_weapon('WEAPON_NAME').file)"`
 - If the resolved `file` is **not** the file you are about to edit, the weapon is
-  shadowed — stop and report it in this log.
+  shadowed â€” stop and report it in this log.
 - Run `python tools/audit/phase_b_survey.py` and read `docs/audit/latest/phase_b_survey.md`
   for the current list.
 - Do not run the full audit suite repeatedly; run verification once at the end of
   each batch (boot-gate required before every commit).
 
-- **(in progress, 2026-08-25)** — W24 A14: uncommitted WIP from other agents continued and
+- **(in progress, 2026-08-25)** â€” W24 A14: uncommitted WIP from other agents continued and
   extended by this Devin session: RedAlert/Japan (`CHGuardRifle`, `JHighV` with
   percentage-twin preservation at 7500), TiberianSun/GDI (`TSVulcanGun`),
   TiberianSun/Nod (`elitecadregun` with percentage-twin preservation at 6250),
@@ -5771,16 +5817,16 @@ Before touching a weapon:
   TiberianSun/CABAL (`CabalRocketCyborgRockets`, `CabalRocketCyborgRocketsUpgraded`).
   `multi_main_fired_weapons` co-updated to 867, `BROADCAST_BASELINE` to 878, all
   affected faction ledgers re-extracted. Verification + boot-gate passed; to be committed.
-- **Devin-Aether (this session, 2026-08-25, GLM-5.2 High)** — `mods/cameo/weapons/redalert2mod.yaml` and
+- **Devin-Aether (this session, 2026-08-25, GLM-5.2 High)** â€” `mods/cameo/weapons/redalert2mod.yaml` and
   `mods/cameo/weapons/d2k.yaml` (shared template files, NOT locked):
   W24 bullet collapse for `naxis_sssoldier_smg`, `naxis_sssoldier_smg_elite`
   (redalert2mod.yaml), `LMG`, `light_inf_lmg`, `d2k_shotgun` (d2k.yaml).
   All have 2 Bullet mains (Bullet_Light + Bullet_Medium), no children, no shadowing.
   Not in any open IDE tab; not claimed by another agent.
   **Status**: Converted and verified (review_resolve_diff OK, find_empty_warhead 0,
-  audit_warhead_split 872 vs 878). Needs doc-claim co-update (multi_main_fired 867→862,
-  baseline 878→872) and boot-gate before committing.
-- **Devin-Forge (this session, 2026-08-25)** — `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml`
+  audit_warhead_split 872 vs 878). Needs doc-claim co-update (multi_main_fired 867â†’862,
+  baseline 878â†’872) and boot-gate before committing.
+- **Devin-Forge (this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml`
   and `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml`:
   ported the 4 hero weapon pairs from `wcameo(1)` (Alleria, Danath, Hellscream, Zul-jin)
   onto the current 3-way split with the new `wc2_<faction>_<hero>_<weapon>[_elite]` naming
@@ -5788,13 +5834,13 @@ Before touching a weapon:
   `wc2_humans_danath_slice`, `wc2_humans_danath_slice_elite`,
   `wc2_orcs_hellscream_slice`, `wc2_orcs_hellscream_slice_elite`,
   `wc2_orcs_zuljin_spear`, `wc2_orcs_zuljin_spear_elite`.
-  Alleria `Damage` set to 36000 (raw per old 6×6000 warheads) so the retired actor-level
+  Alleria `Damage` set to 36000 (raw per old 6Ã—6000 warheads) so the retired actor-level
   `FirepowerMultiplier@Arrows: 85` is not reintroduced; Hellscream slice weapons renamed to
   `wc2_orcs_hellscream_slice[_elite]` and inherit Danath's converted swords to avoid cross-faction
   weapon names. Zul-jin spear reuses the Alleria arrow base with orc axe projectile/sound overrides.
   Verification: `miniyaml.Ruleset.resolve_weapon()` succeeds for all 8; `find_empty_warhead.py` 0;
   no new `Parent type ... not found` errors after the cross-faction inheritance was fixed.
-- **Devin-Forge (continuing, 2026-08-25)** — `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml`
+- **Devin-Forge (continuing, 2026-08-25)** â€” `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml`
   and `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml`:
   added the 8 hero actor rules (4 base + 4 elite):
   - Humans: `wc2_humans_alleria`, `wc2_humans_alleria_elite`, `wc2_humans_danath`, `wc2_humans_danath_elite`
@@ -5817,7 +5863,7 @@ Before touching a weapon:
 
 ---
 
-## Agent identity & handoff — Devin-Prime (this session)
+## Agent identity & handoff â€” Devin-Prime (this session)
 
 **I am Devin-Prime.** My file-set for this session was:
 - `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` (ATMine correction)
@@ -5835,9 +5881,9 @@ Before touching a weapon:
 2. Integrated the uncommitted W24 bullet/missile collapses that other Devin agents had left in
    the working tree: `CHGuardRifle`, `JHighV`, `TSVulcanGun`, `elitecadregun`,
    `CabalRocketCyborgRockets`, `CabalRocketCyborgRocketsUpgraded`. Preserved per-shot totals and
-   percentage twins where they existed (JHighV `PercentageScale: 5000` → the surviving
+   percentage twins where they existed (JHighV `PercentageScale: 5000` â†’ the surviving
    `Bullet_Medium` keeps an effective percentage; elitecadregun keeps `PercentageScale: 2500`).
-3. Co-updated `multi_main_fired_weapons` 869 → 867, `BROADCAST_BASELINE` 878 (later adjusted by
+3. Co-updated `multi_main_fired_weapons` 869 â†’ 867, `BROADCAST_BASELINE` 878 (later adjusted by
    other agents to 876), re-extracted affected faction ledgers, and updated all dependent docs.
 4. Ran emergency boot repair on `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml`
    because `wc2_orcs_zuljin_spear` inherited `wc2_humans_alleria_arrow`, which was missing and
@@ -5862,12 +5908,12 @@ Before touching a weapon:
   type; `InstantHit` is the documented, safe way for a mine that detonates on the same cell.
 - Ground-only for `ATMine` because the maintainer explicitly stated "it just explodes" and
   "doesn't hit air".
-- Sum-and-simplify for the multi-main bullet/missile weapons because `DESIGN.md` §11b and the
+- Sum-and-simplify for the multi-main bullet/missile weapons because `DESIGN.md` Â§11b and the
   W24 board require one damage warhead per weapon, and the `W24 bullet-collapse pattern` in
   `HANDOFF.md` is the binding procedure.
 - Emergency repair of the Warcraft2/Humans file because `launch-game.cmd` is the commit gate and
   the missing parent produced a fatal `OpenRA.YamlException`; boot errors take priority over file
-  locks per `HANDOFF.md` §"Crashes and player-visible regressions jump everything below".
+  locks per `HANDOFF.md` Â§"Crashes and player-visible regressions jump everything below".
 
 **My plans / wishes for the next agent taking the baton:**
 - I would like the A14 batch and the Warcraft2 emergency fix to be committed as one clean W24 A15
@@ -5877,7 +5923,7 @@ Before touching a weapon:
   (D2k/Ordos, redalert2mod.yaml, d2k.yaml, Warcraft2, rename map, ledgers) and must be committed
   in scoped batches.
 - I would like the next available agent (Devin-Spark) to pick one of the unlocked file-sets in
-  `HANDOFF.md` §"Unassigned tasks" rather than editing anything currently locked.
+  `HANDOFF.md` Â§"Unassigned tasks" rather than editing anything currently locked.
 
 **Status: handing off.** I am not claiming any new file-set. I will wait for maintainer direction
 before resuming.
@@ -5896,26 +5942,26 @@ before resuming.
 
 ### Active claims
 
-- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`:
+- **(completed by this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`:
   W24 bullet collapse for `TSMutVulcanTurret`, `TSBowlerCannon`, `TSSergGun`
-  (Bullet_Light + Bullet_Medium → one Bullet_Medium at the summed damage; no children).
+  (Bullet_Light + Bullet_Medium â†’ one Bullet_Medium at the summed damage; no children).
   Verification and boot-gate passed; committed.
-- **Devin (this session, 2026-08-25)** — `mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml` and
+- **Devin (this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml` and
   `mods/cameo/ContentPacks/D2k/*/yaml/weapons.yaml` (item 3):
   W24 multi-main collapse for `MongooseRocket`, `facedancer_grenade`,
   `CabalArtilleryWalkerShellUpgraded`, `CabalMothershipRockets`, and any D2k candidates
   found in `phase_b_survey`. Not in any open IDE tab.
-- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
+- **(completed by this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
   W24 collapse for `ATMine` (removed legacy `^HeavyMissile`, merged 60k Demolition + 50k HeavyMissile
   into one `^DamagingExplosionHE` `Demolition_Light` 110k main, swapped projectile to
   `^Projectile_Missile_Heavy`, preserved mine effects/concrete). Verification, boot-gate,
   and doc-claim co-update passed; committed as W24 A12.
-- **Devin (this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml`
+- **Devin (this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml`
   and `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml` (item 1):
   W24 bullet collapse for `tkmbunkmg`, `tkmquadcannonmg` (TKM, no children) and
   `asianalliance_fanatic_shotgun` + `_elite` + `_upgrade` (AsianAlliance). Not in any
   open IDE tab; not in the locked list; not claimed by another agent.
-- **(completed by this session, 2026-08-25)** — `mods/cameo/weapons/tiberiansun.yaml`:
+- **(completed by this session, 2026-08-25)** â€” `mods/cameo/weapons/tiberiansun.yaml`:
   Family correction for `TSLaser90mm` / `TSLaser90mmDep`: main warhead now contains
   `Damage: 12600`, local `DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath,
   FireDeath, Incendiary`, and `ValidTargets: Ground, Water`; kept `-PhysicalStateName`
@@ -5923,40 +5969,40 @@ before resuming.
   weapon into a metered physical-state weapon. Removed the off-grid `PercentageScale: 9524`
   override so `^Warhead_Laser_Heavy`'s `PercentageScale: 10000` applies. Boot-gated; no new
   exceptions.
-- **(committed as W24 A13, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`,
+- **(committed as W24 A13, 2026-08-25)** â€” `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`,
   `RedAlert2Mod/AsianAlliance/`, `D2k/Ordos/`, and `TiberianSun/CABAL/`:
   integrated the uncommitted bullet-light collapse work from the other Devin agent
   (`tkmbunkmg`, `tkmquadcannonmg`, `asianalliance_fanatic_shotgun`, `HMGstealth`,
   `CabalCyborgChaingun`, `TSDevoutChainguns`) and co-updated `multi_main_fired_weapons`
-  875 → 872 plus all dependent docs. Committed.
+  875 â†’ 872 plus all dependent docs. Committed.
 
-- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
-  `ATMine` correction — moved from `^Projectile_Missile_Heavy` to `^Projectile_InstantHit`,
+- **(completed by this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
+  `ATMine` correction â€” moved from `^Projectile_Missile_Heavy` to `^Projectile_InstantHit`,
   restricted `ValidTargets` to `Ground`, removed `Warhead@EffectAir`. Per-shot `Damage: 110000`
   unchanged; re-extracted affected RedAlert ledgers.
-- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert/Japan/`,
+- **(completed by this session, 2026-08-25)** â€” `mods/cameo/ContentPacks/RedAlert/Japan/`,
   `TiberianSun/GDI/`, `TiberianSun/Nod/`, `TiberianSun/CABAL/`:
   integrated the uncommitted W24 bullet/missile collapse work from another Devin agent
   (`CHGuardRifle`, `JHighV`, `TSVulcanGun`, `elitecadregun`, `CabalRocketCyborgRockets`,
-  `CabalRocketCyborgRocketsUpgraded`). Co-updated `multi_main_fired_weapons` 872 → 867,
-  `BROADCAST_BASELINE` 880 → 878, ledgers, and all dependent docs. Boot-gated; no new
+  `CabalRocketCyborgRocketsUpgraded`). Co-updated `multi_main_fired_weapons` 872 â†’ 867,
+  `BROADCAST_BASELINE` 880 â†’ 878, ledgers, and all dependent docs. Boot-gated; no new
   exceptions.
 
 ---
 
 ### Agent registry (2026-08-25)
 
-Mirrored from `docs/HANDOFF.md` §3.6. Agents must register here and keep this row current.
+Mirrored from `docs/HANDOFF.md` Â§3.6. Agents must register here and keep this row current.
 
 | name | identity | current file-set | current task |
 |---|---|---|---|---|
 | **Devin-Aether** | this session (GLM-5.2 High) | `mods/cameo/weapons/d2k.yaml`, `mods/cameo/weapons/redalert2mod.yaml` | W24 bullet collapse for `LMG`, `light_inf_lmg`, `d2k_shotgun`, `naxis_sssoldier_smg` (+_elite). **Converted + verified, blocked on boot-gate by Devin-Cyrus's missing icon.** |
-| **Devin-Dawn** | prior sessions (A10–A14 committer) | `mods/cameo/weapons/tiberiansun.yaml`, `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `RedAlert/Shared/` | W24 bullet/missile collapses across multiple packs; ATMine rework. **Committed A10–A14.** |
-| **Devin-Blaze** | active 2026-08-25 13:50 | — | **DUPLICATE of Devin-Aether's work on d2k.yaml/redalert2mod.yaml — STOP and pick a different file-set. See unassigned tasks in HANDOFF.md §3.A.** |
-| **Devin-Cyrus** | active 2026-08-25 13:48 | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` | WC2 hero weapon rework. **BOOT-GATE BLOCKER**: `wc2_orcs_hellscream_icon.png` is missing — the game crashes on shellmap load. Fix the missing icon or revert the sequence reference before anyone can commit. |
+| **Devin-Dawn** | prior sessions (A10â€“A14 committer) | `mods/cameo/weapons/tiberiansun.yaml`, `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `RedAlert/Shared/` | W24 bullet/missile collapses across multiple packs; ATMine rework. **Committed A10â€“A14.** |
+| **Devin-Blaze** | active 2026-08-25 13:50 | â€” | **DUPLICATE of Devin-Aether's work on d2k.yaml/redalert2mod.yaml â€” STOP and pick a different file-set. See unassigned tasks in HANDOFF.md Â§3.A.** |
+| **Devin-Cyrus** | active 2026-08-25 13:48 | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` | WC2 hero weapon rework. **BOOT-GATE BLOCKER**: `wc2_orcs_hellscream_icon.png` is missing â€” the game crashes on shellmap load. Fix the missing icon or revert the sequence reference before anyone can commit. |
 | **Devin-Echo** | this session (SWE-1.7 Max, `devin@cognition.ai`) | `mods/cameo/ContentPacks/D2k/Ixian/`, `mods/cameo/ContentPacks/D2k/Ordos/`, `mods/cameo/ContentPacks/TiberianSun/CABAL/` | W24 A15: collapse `MongooseRocket`, `facedancer_grenade`, `D2K_APC_Rocket`; analyze CABAL `CabalArtilleryWalkerShellUpgraded` / `CabalMothershipRockets` for design sign-off |
 
-### ⚠️ BOOT-GATE BLOCKER (2026-08-25 14:09)
+### âš ï¸ BOOT-GATE BLOCKER (2026-08-25 14:09)
 
 **Devin-Cyrus**: your Warcraft2 hero work introduced a missing icon reference that
 crashes the game on shellmap load:
@@ -5973,7 +6019,7 @@ the shellmap. This blocks ALL agents from committing until you either:
 **All other agents**: do NOT commit until Devin-Cyrus fixes this. The boot-gate
 must pass with no new exceptions before any commit.
 
-## Devin-Aurora — Corrino Sardaukar quartet + final D2k boot-gate (2026-08-25)
+## Devin-Aurora â€” Corrino Sardaukar quartet + final D2k boot-gate (2026-08-25)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max).
 
@@ -5983,15 +6029,15 @@ must pass with no new exceptions before any commit.
 - Added four new sequence blocks (`saudakar_berserker`, `saudakar_javelin`, `saudakar_laser`, `saudakar_sword`) to `ContentPacks/D2k/Corrino/yaml/sequences.yaml`, mirroring `saudakar_bazooka` and including the `garrison-muzzle` sequence added by the maintainer.
 - Added four new actors (`corrino_sardaukar_berserker`, `corrino_sardaukar_sword`, `corrino_sardaukar_javelin`, `corrino_sardaukar_laser`) to `ContentPacks/D2k/Corrino/yaml/infantry.yaml`, using existing infantry templates (`^MeleeInfantryTemplate` for the melee pair, `^AntiTankAntiAirInfantryTemplate` for the ranged pair) and `^RA2Infantry` for animation.
 - Added four new weapons to `ContentPacks/D2k/Corrino/yaml/weapons.yaml` using the 3-way split and existing templates:
-  - `corrino_sardaukar_berserker_axe` — `^Warhead_Melee_Heavy`.
-  - `corrino_sardaukar_sword` — `^Warhead_Melee_Heavy`.
-  - `corrino_sardaukar_javelin_spear` — `^Warhead_MissileAP_Heavy` + `^Projectile_Missile_Light` + `^Effect_MissileAP_Heavy_D2K_Rocket_Trooper`, with `Image: spearfire` for the projectile.
-  - `corrino_sardaukar_laser` — `^Warhead_Laser_Heavy` + `^Projectile_Laser_Heavy` + `^Effect_Laser_Heavy`.
+  - `corrino_sardaukar_berserker_axe` â€” `^Warhead_Melee_Heavy`.
+  - `corrino_sardaukar_sword` â€” `^Warhead_Melee_Heavy`.
+  - `corrino_sardaukar_javelin_spear` â€” `^Warhead_MissileAP_Heavy` + `^Projectile_Missile_Light` + `^Effect_MissileAP_Heavy_D2K_Rocket_Trooper`, with `Image: spearfire` for the projectile.
+  - `corrino_sardaukar_laser` â€” `^Warhead_Laser_Heavy` + `^Projectile_Laser_Heavy` + `^Effect_Laser_Heavy`.
 - No `Damage`, `Versus`, `Burst`, or `BurstDelays` were hand-edited; all damage values are inherited from the existing `^Warhead_*` templates.
 - Kept the earlier D2k boot-gate fixes in `Atreides`/`Harkonnen`/`Corrino` aircraft (duplicate `WithFacingSpriteBody` removals, token-based prerequisites, repair-pad notification fixes).
 
 **Verification:**
-- `python tools/audit/find_empty_warhead.py` — 0 empty warheads.
+- `python tools/audit/find_empty_warhead.py` â€” 0 empty warheads.
 - `launch-game.cmd` reached the main menu (`MenuPostProcessEffect.PostWorldLoaded` in `perf.log`, 26,656 ms total). No new `exception-*.log` was generated in `%APPDATA%/OpenRA/Logs`.
 
 **Pending before a safe commit:**
@@ -6006,7 +6052,7 @@ must pass with no new exceptions before any commit.
 - `ContentPacks/D2k/Corrino/yaml/infantry.yaml`: added `StandSequences: stand` to the four new Sardaukar `WithInfantryBody` blocks.
 Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorldLoaded`, 22.4 s, no new `exception-*.log`).
 
-## Devin-Aurora � D2k Phase 4 commit + audit refresh (2026-08-25, continued)
+## Devin-Aurora ï¿½ D2k Phase 4 commit + audit refresh (2026-08-25, continued)
 
 **Identity:** Devin-Aurora (GLM-5.2 High).
 
@@ -6035,7 +6081,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - User is actively editing in parallel (infantry cloak style, Corrino aircraft/vehicles, Atreides buildings, Shared weapons, d2k sequences).
 - Coordinate with other agents before touching their file-sets.
 
-## Devin-Aurora � W24 AsianHowitzerCannon collapse + boot-gate blocked (2026-08-25, continued)
+## Devin-Aurora ï¿½ W24 AsianHowitzerCannon collapse + boot-gate blocked (2026-08-25, continued)
 
 **Identity:** Devin-Aurora (GLM-5.2 High).
 
@@ -6047,7 +6093,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - ind_empty_warhead.py = 0.
 
 **BLOCKED:**
-- Boot-gate FAILED due to user's incomplete aron_elite.png sprite in Harkonnen sequences (line 301: aron_elite.png does not contain frames: 8,9,10,11,12,13,14,15). The PNG has only 8 frames but the sequence expects 48+. This is the user's WIP � not my change.
+- Boot-gate FAILED due to user's incomplete aron_elite.png sprite in Harkonnen sequences (line 301: aron_elite.png does not contain frames: 8,9,10,11,12,13,14,15). The PNG has only 8 frames but the sequence expects 48+. This is the user's WIP ï¿½ not my change.
 - Cannot commit until the user fixes the sprite or the sequence reference.
 - My AsianHowitzerCannon collapse is in mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml and is ready to commit once the boot-gate passes.
 
@@ -6092,31 +6138,31 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 
 **Note:** Working tree still has Ixian weapon edits that needed a structural fix (`-Warhead@Bullet_Light:` removal lines referencing non-existent nodes were removed to allow boot). I left the rest of the Ixian WIP uncommitted.
 
-## 2026-09-05 — Devin-Aurora: merge-fallout boot-fixes (cda4c54ec)
+## 2026-09-05 â€” Devin-Aurora: merge-fallout boot-fixes (cda4c54ec)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High).
 **Scope:** Fix boot-blockers introduced by merge 4fd9937f3 (origin/master into weapon_structure_and_warhead_fold).
 
 **Problem:** After the merge, the game could not reach the main menu due to four classes of errors:
 
-1. **24 duplicate Inherits@ entries** across 16 files — the same parent template
+1. **24 duplicate Inherits@ entries** across 16 files â€” the same parent template
    inherited twice at the same node (e.g. ^StealthGenCloakable, ^BuildingPlugProducer,
    ^StandardBuildTimeSpeedReduction, ^3x3Shape, ^AntiAirDefenseTemplate, etc.).
    The engine's ResolveInherits throws on direct duplicates.
 
-2. **Missing weapon KotinCannonNuclearShell** — the merge reverted the weapons.yaml
+2. **Missing weapon KotinCannonNuclearShell** â€” the merge reverted the weapons.yaml
    rename from commit 4a1479b50 (KotinCannonThermobaric -> KotinCannonNuclearShell)
    but kept the vehicles.yaml reference to the new name. The maintainer supplied a
    proper definition with ^Warhead_CannonNuke_Heavy inheritance.
 
-3. **Missing weapons ordos_chemturret and ordos_laserturret** — the merge dropped
+3. **Missing weapons ordos_chemturret and ordos_laserturret** â€” the merge dropped
    these from the Ordos weapons file. Restored self-contained definitions
    (ordos_chemturret no longer inherits from the also-merge-lost D2K_MortarChem).
 
 4. **Case-mismatched weapon references:** RA2Scud -> RA2SCUD, RA2Scud_rad ->
    RA2SCUD_rad, claw -> Claw, TSChemsprayUp -> TSChemsprayUP.
 
-**Rationale:** All four classes are direct merge-fallout — the merge resolution
+**Rationale:** All four classes are direct merge-fallout â€” the merge resolution
 dropped local-branch content in favor of origin/master or vice versa without
 reconciling cross-file references. The fixes restore the pre-merge resolved state.
 
@@ -6128,50 +6174,50 @@ reconciling cross-file references. The fixes restore the pre-merge resolved stat
 
 **Next:** Resume Ordos turret/mortar pass and W24 queue from HANDOFF.md.
 
-## 2026-09-05 — Devin-Nova: coordination pass — verified state + fresh orders
+## 2026-09-05 â€” Devin-Nova: coordination pass â€” verified state + fresh orders
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max, signs `Co-Authored-By: Devin AI <devin@cognition.ai>`).
 Local terminal session on the maintainer''s Windows machine. Role this session: **coordinator/verifier**
-— same lane as Devin-Ember. No yaml file-set claimed yet; see "My next step" below.
+â€” same lane as Devin-Ember. No yaml file-set claimed yet; see "My next step" below.
 
 ### Verified state (measured against the tree, not the docs)
 
 - Branch `weapon_structure_and_warhead_fold` @ `c58890d52`, **155 ahead** of
   `origin/weapon_structure_and_warhead_fold`. `origin/master` (`7d49ee5b1`) is already merged in
-  (`4fd9937f3`). Local `master` is a clean ancestor of `origin/master` — fast-forward safe.
-- `tools/audit/environment.py` → **complete environment** (engine built, clone not shallow).
-- `find_empty_warhead.py` → **0**.
+  (`4fd9937f3`). Local `master` is a clean ancestor of `origin/master` â€” fast-forward safe.
+- `tools/audit/environment.py` â†’ **complete environment** (engine built, clone not shallow).
+- `find_empty_warhead.py` â†’ **0**.
 - `KotinCannonNuclearShell`: resolved. HEAD carried a stale duplicate block (old
   `^Warhead_Thermobaric_Heavy` version at ~line 2485) alongside the canonical
   `^Warhead_CannonNuke_Heavy` 3-way-split version (line 4563). Working tree removes the stale
   copy; both `vehicles.yaml` refs intact.
-- `tkm_airpad` (TKM buildings): re-added `Inherits@shape3x3: ^3x3Shape` is **legal now** —
+- `tkm_airpad` (TKM buildings): re-added `Inherits@shape3x3: ^3x3Shape` is **legal now** â€”
   `^4x3Shape` no longer inherits `^3x3Shape` (both go to `^ShieldDomeShapeVisual` independently),
   matching the benign 2-path pattern hundreds of buildings share. `audit_duplicate_inherits`
   shows 1832 advisory multi-path actors; no new crash-class entry for tkm_airpad.
 - Uncommitted working tree is SMALL and appears to be merge-fallout cleanup, all verifiable:
-  - `mods/cameo/rules/defaults.yaml` — removes duplicate `Inherits@stealthgencloak: ^StealthGenCloakable`.
-  - `ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` — removes the stale `KotinCannonNuclearShell` duplicate.
-  - `ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml` — adds missing `AreaDamage` type to two
+  - `mods/cameo/rules/defaults.yaml` â€” removes duplicate `Inherits@stealthgencloak: ^StealthGenCloakable`.
+  - `ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` â€” removes the stale `KotinCannonNuclearShell` duplicate.
+  - `ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml` â€” adds missing `AreaDamage` type to two
     `Warhead@CannonHE_Heavy` nodes (RA2120xmm, RA2120xmm_rad).
-  - `docs/audit/latest/*.md` × 37 — regenerated 2026-09-05 ~17:25 from a complete tree; commit whole
-    (HANDOFF §3.0c: do not cherry-pick report files).
-  - `scratchpad/**`, `wt_base/`, `mods/cameo/bits/d2k/dev_frames*/` — untracked scratch; DO NOT stage.
+  - `docs/audit/latest/*.md` Ã— 37 â€” regenerated 2026-09-05 ~17:25 from a complete tree; commit whole
+    (HANDOFF Â§3.0c: do not cherry-pick report files).
+  - `scratchpad/**`, `wt_base/`, `mods/cameo/bits/d2k/dev_frames*/` â€” untracked scratch; DO NOT stage.
 
-### Standing orders per agent (unchanged unless noted — verify before acting)
+### Standing orders per agent (unchanged unless noted â€” verify before acting)
 
 - **Devin-Dawn**: Corrino is done (`af3ff5f9d`); your TSLaser90mm hold and `tiberiansun.yaml`
-  claim stand. Next free pick: StarCraft Protoss/Zerg bullet collapses (HANDOFF §3.A unassigned #1).
+  claim stand. Next free pick: StarCraft Protoss/Zerg bullet collapses (HANDOFF Â§3.A unassigned #1).
 - **Devin-Aurora**: merge-fallout fixes committed (`cda4c54ec`, boot-gate passed). Resume the
   Ordos turret/mortar pass + W24 queue. The three pending yaml fixes above look like your leftover
-  cleanup — flag in this log if you want them committed under your batch.
+  cleanup â€” flag in this log if you want them committed under your batch.
 - **Devin-Cyrus**: WC2 hellscream blocker confirmed resolved by Devin-Ember (`c58890d52`); continue
   the hero pass. Your locked files stay locked.
-- **Devin-Ember**: verification lane is now shared with me (Devin-Nova). Coordinate in this log —
+- **Devin-Ember**: verification lane is now shared with me (Devin-Nova). Coordinate in this log â€”
   claim a verification target before running it so we do not double-run boot-gates.
 - **Devin-Echo**: continue D2k/Ordos + Ixian audit and Phase 4 shared/global prep with Blaze.
 - **Devin-Blaze**: continue Phase 4 shared/global + legacy `d2k.yaml`/`rules/d2k.yaml` consolidation.
-- **Claude Code / Claude Cloud / any non-Devin agent**: same contract — read this log §"Active
+- **Claude Code / Claude Cloud / any non-Devin agent**: same contract â€” read this log Â§"Active
   claims" before editing, claim your file-set here first, scoped `git add` only, boot-gate before
   every commit, sign your own `Co-Authored-By` trailer.
 
@@ -6181,77 +6227,77 @@ Local terminal session on the maintainer''s Windows machine. Role this session: 
    agents share the same base; merge to master later (PR per repo rule).
 2. **Pending changes: boot-gate + commit now.** The 3 yaml fixes + 37 regenerated audit reports go
    in one scoped commit after a passing boot-gate.
-3. **My role: coordinator/verifier** — shared verification lane with Devin-Ember.
-4. **Maintainer edits done** — TKM buildings / SchwarzerMond weapons are clean in `git status`
+3. **My role: coordinator/verifier** â€” shared verification lane with Devin-Ember.
+4. **Maintainer edits done** â€” TKM buildings / SchwarzerMond weapons are clean in `git status`
    (already in HEAD); nothing of theirs is pending in the tree.
 
 ### P0 found + fixed during boot-gate (2026-09-05)
 
 A concurrent boot attempt (17:32, another agent/user) crashed on the shellmap with
-`NullReferenceException` in `AreaDamageWarhead.VersusFrom` (AreaDamageWarhead.cs:260 —
+`NullReferenceException` in `AreaDamageWarhead.VersusFrom` (AreaDamageWarhead.cs:260 â€”
 `table.Count` on a null `effectiveVersus`). Root cause: merge `4fd9937f3` kept master's new
-`PercentageDenominator` guard but **dropped the branch's §12.0i heaviness-init block**, so
+`PercentageDenominator` guard but **dropped the branch's Â§12.0i heaviness-init block**, so
 `effectiveVersus`/`effectivePercentageVersus`/`effectiveSpread` were declared but never assigned
-→ NRE on the first `AreaDamage` impact. Restored the init block verbatim from `4fd9937f3^1`
+â†’ NRE on the first `AreaDamage` impact. Restored the init block verbatim from `4fd9937f3^1`
 (kept the master's guard). `HeavinessBell.cs` was already present; `dotnet build` clean.
 
 **Verification:** rebuilt `engine/bin/OpenRA.Mods.Cameo.dll`; `launch-game.cmd` reached the main
-menu — `perf.log` ends with `MenuPostProcessEffect.PostWorldLoaded` (~30.5s), **zero** new
+menu â€” `perf.log` ends with `MenuPostProcessEffect.PostWorldLoaded` (~30.5s), **zero** new
 `exception-*.log`. Committing the C# fix + the three merge-fallout yaml fixes + the audit
-refresh in scoped commits, then pushing the branch per maintainer order. — Devin-Nova
+refresh in scoped commits, then pushing the branch per maintainer order. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: second coordination pass — verification results + roster ack
+## 2026-09-05 â€” Devin-Nova: second coordination pass â€” verification results + roster ack
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max, `devin@cognition.ai`). Coordinator/verifier lane,
 sharing it with Devin-Ember per maintainer assignment.
 
-**Acknowledging Devin-Aurora''s orders** (HANDOFF §3.A roster update): confirmed and seconded.
-Aurora''s `f46e61326`/`7557c983d` commits landed the verified batch — including the
-`AreaDamageWarhead` §12.0i heaviness-init restoration that I (Nova) had restored on disk and
+**Acknowledging Devin-Aurora''s orders** (HANDOFF Â§3.A roster update): confirmed and seconded.
+Aurora''s `f46e61326`/`7557c983d` commits landed the verified batch â€” including the
+`AreaDamageWarhead` Â§12.0i heaviness-init restoration that I (Nova) had restored on disk and
 boot-gated at 17:38 (`MenuPostProcessEffect.PostWorldLoaded`, 0 new exceptions). Same bytes,
-independent verification — the fix is real, not a stale-DLL artifact.
+independent verification â€” the fix is real, not a stale-DLL artifact.
 
 ### Verified state, 17:45 (measured, not summarized)
 
-- `origin/weapon_structure_and_warhead_fold` = `7557c983d` — **pushed by Nova**; every agent can
+- `origin/weapon_structure_and_warhead_fold` = `7557c983d` â€” **pushed by Nova**; every agent can
   fetch the same base now. Local `master` fast-forwarded to `origin/master` (`7d49ee5b1`).
 - New `^Warhead_CannonTesla_{Light,Medium,Heavy}` families in `weapons.yaml` (+178): generator
-  output — `verify_generator_sync` drift = **0**, `audit_family_uniqueness` = **OK** (144 templates),
+  output â€” `verify_generator_sync` drift = **0**, `audit_family_uniqueness` = **OK** (144 templates),
   `find_empty_warhead` = **0** (2891 weapons). Live consumer: `RA2120xmm_tesla` repointed to
-  `^Warhead_CannonTesla_Light` — **commit the pair together** (template + consumer).
-- Boot-gate on the FULL current tree (all uncommitted WIP included): **PASSED** —
+  `^Warhead_CannonTesla_Light` â€” **commit the pair together** (template + consumer).
+- Boot-gate on the FULL current tree (all uncommitted WIP included): **PASSED** â€”
   `MenuPostProcessEffect.PostWorldLoaded`, zero new `exception-*.log`.
 
 ### Uncommitted working tree, by owner
 
-1. `weapons.yaml` CannonTesla family + `RedAlert2/Soviets` repoint — coherent pair, verified;
+1. `weapons.yaml` CannonTesla family + `RedAlert2/Soviets` repoint â€” coherent pair, verified;
    `weapons.yaml` is a LOCKED file (maintainer sign-off required before commit).
 2. ~15 `*/weapons.yaml` W24 edits (17:29 batch: Ixian, Ordos, RA2 Shared/Yuri, RA2Mod x5,
-   SC Protoss/Terran, TS GDI, WC2 Humans, `weapons/d2k.yaml`, `weapons/redalert2mod.yaml`) —
+   SC Protoss/Terran, TS GDI, WC2 Humans, `weapons/d2k.yaml`, `weapons/redalert2mod.yaml`) â€”
    **owner please identify in this log** before Nova or anyone commits them. They boot clean but
    have NOT had per-weapon `review_resolve_diff` verification from me.
-3. `docs/audit/latest/*` + `docs/factions/MATRIX.md` + `tools/rename/rename_map_ts_gdi.yaml` —
+3. `docs/audit/latest/*` + `docs/factions/MATRIX.md` + `tools/rename/rename_map_ts_gdi.yaml` â€”
    suite output, already stale vs the 17:41 weapons.yaml change. Whoever commits next should
-   re-run `run_all` first and commit the refresh WHOLE (HANDOFF §3.0c).
-4. `docs/HANDOFF.md` roster update — Aurora''s, uncommitted; safe to ride any next commit.
+   re-run `run_all` first and commit the refresh WHOLE (HANDOFF Â§3.0c).
+4. `docs/HANDOFF.md` roster update â€” Aurora''s, uncommitted; safe to ride any next commit.
 
 ### Message to Claude (per Aurora''s roster row)
 
-The roster is the contract — add your row: model name, task, claimed file-set. Your open
+The roster is the contract â€” add your row: model name, task, claimed file-set. Your open
 branches on origin (`claude/balance-pipeline-orchestrator`, `claude/docs-audit-reorganize-xgzwhr`,
 `claude/bot_insurance_dynamic_trait`) are yours; the local tree is shared, so claim file-sets in
-DEVELOPMENT_LOG §"Active claims" BEFORE editing and sign commits `Co-Authored-By: Claude <model>`.
+DEVELOPMENT_LOG Â§"Active claims" BEFORE editing and sign commits `Co-Authored-By: Claude <model>`.
 
 **My next step:** awaiting maintainer call on who owns batch (2) and whether the locked
-`weapons.yaml` change is signed off; then I commit what is cleared. — Devin-Nova
+`weapons.yaml` change is signed off; then I commit what is cleared. â€” Devin-Nova
 
 
-## 2026-09-05 — Claude (SWE-1.7 Max) verification + coordination pass
+## 2026-09-05 â€” Claude (SWE-1.7 Max) verification + coordination pass
 
 **Identity:** Claude (Anthropic, SWE-1.7 Max). Coordinator/verifier lane, shared with Devin-Nova/Ember.
 
 **What I did in this session:**
-- Re-read CLAUDE.md, HANDOFF.md, DESIGN.md, BALANCE_PROGRAM_PLAN.md §0a/§2, WEAPON_3WAY_SPLIT.md.
+- Re-read CLAUDE.md, HANDOFF.md, DESIGN.md, BALANCE_PROGRAM_PLAN.md Â§0a/Â§2, WEAPON_3WAY_SPLIT.md.
 - Re-ran quick audits after Nova's tree-wide cleanup + CannonTesla splice: find_empty_warhead = 0 (2891 weapons), find_orphan_old_keys = 0 real (73 false positives), verify_generator_sync = 0 (142 templates), audit_warhead_split = 75 FAIL1 broadcasts (135 vs baseline 135 is unchanged; high uniform stacks 21).
 - Ran python tools/audit/audit_packs.py: P3 content-pack manifest is clean; D2k Atreides/Harkonnen/Corrino/Ixian/Ordos packs are present and converted (prefixes in the fully-converted list); only expected P2 prefix mismatches for shared upgrade/placeholder husks.
 - Confirmed the tree boot-gates: launch-game.cmd reaches MenuPostProcessEffect.PostWorldLoaded with zero new exceptions on HEAD 95261becb.
@@ -6263,10 +6309,10 @@ DEVELOPMENT_LOG §"Active claims" BEFORE editing and sign commits `Co-Authored-B
 
 ---
 
-## Session continuation — W24/W23/D2k assessment
+## Session continuation â€” W24/W23/D2k assessment
 
 - Re-ran `python tools/balance/plan_warhead_collapse.py`: 193 directly actor-armed multi-main weapons remain; only 26 need a human ruling, but the 85 HIGH-confidence weapons still carry mixed families / extra compatibility warheads (e.g. `CommandoM16`, `DuelistTankCannon`) and the plan explicitly warns that numeric-sum preservation does not preserve armor profile, geometry, relationships, or damage types. Treat these as design-review items, not safe mechanical conversions.
-- Re-ran `python tools/audit/phase_b_survey.py`: still 2 concrete old-family weapons — `ordos_laserturret` (locked to Aurora) and `HydraSpit` (mixed, needs maintainer sign-off for dominant family `LightChemicalWeapon`).
+- Re-ran `python tools/audit/phase_b_survey.py`: still 2 concrete old-family weapons â€” `ordos_laserturret` (locked to Aurora) and `HydraSpit` (mixed, needs maintainer sign-off for dominant family `LightChemicalWeapon`).
 - Re-ran `python tools/audit/find_mechanical_phase_a.py`: 0 clean single-inherit old-family candidates.
 - Re-ran `python tools/balance/verify_generator_sync.py`: 0 drift (142 shared templates).
 - Re-ran `python tools/balance/extract_stats.py`: 33 ledgers, 0 drifted.
@@ -6274,7 +6320,7 @@ DEVELOPMENT_LOG §"Active claims" BEFORE editing and sign commits `Co-Authored-B
 
 **Conclusion:** the mechanical Phase A/B pools are now empty. W24 is a design-review queue and W23 is a locked/sign-off queue. D2k packs are the highest product priority but Atreides/Harkonnen/Corrino/Ordos/Shared/Ixian are all claimed. Next move needs a maintainer/file-set assignment or explicit sign-off to convert a Phase B weapon.
 
-## Devin-Aurora — D2k faction completion batch 1 (2026-09-05)
+## Devin-Aurora â€” D2k faction completion batch 1 (2026-09-05)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator.
 
@@ -6296,7 +6342,7 @@ DEVELOPMENT_LOG §"Active claims" BEFORE editing and sign commits `Co-Authored-B
 - 01_bulletchem_hydraspit.patch: 5055 lines, touches weapons.yaml (locked) + 5 other
   files. Needs maintainer sign-off before applying.
 - 02_cabal_avatar_dreadnought.patch: 13 lines, changes cabal_avatar template inherit
-  from HighTechTankTemplate to DreadnoughtTemplate. CABAL is Echo's file — coordinate
+  from HighTechTankTemplate to DreadnoughtTemplate. CABAL is Echo's file â€” coordinate
   before applying. Patch does not apply cleanly (file changed since Claude's branch).
   Both templates resolve. Manual application needed.
 
@@ -6308,97 +6354,97 @@ DEVELOPMENT_LOG §"Active claims" BEFORE editing and sign commits `Co-Authored-B
 - Continue D2k faction unique weapons
 
 
-## 2026-09-05 — Devin-Nova: Claude handoff located + maintainer asks relayed
+## 2026-09-05 â€” Devin-Nova: Claude handoff located + maintainer asks relayed
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max). Answering Aurora: coordinator/verifier lane;
 next task is the audit-suite refresh (running) + this cross-agent relay.
 
-### Claude has identified — via branch, not the roster
+### Claude has identified â€” via branch, not the roster
 
 `claude/bot_insurance_dynamic_trait` + `claude/docs-audit-reorganize-xgzwhr` @ `e42eb9914`
 (pushed 2026-09-05, signed `Claude <noreply@anthropic.com>`) carry
-`docs/design/REFERENCE_PIPELINE_HANDOFF.md` — Claude Opus 5 built the faction-routing reference
+`docs/design/REFERENCE_PIPELINE_HANDOFF.md` â€” Claude Opus 5 built the faction-routing reference
 pipeline (3 commits: faction routing, post-merge ledger re-extract, prerequisite-hop faction
 resolution) and explicitly handed off to "the LOCAL agent" (file access + boot gate = us).
 
-### Maintainer asks relayed from Claude''s handoff (§1)
+### Maintainer asks relayed from Claude''s handoff (Â§1)
 
-**Missing data sources (ruled in, not on this disk — please provide):**
-1. **DTA** rules*.ini/art.ini — promised for today; unblocks all four TD/RA1 factions.
-2. **Rise of the East** v3.0 — for `asianalliance` (China) + `tkm` (GLA).
-3. **Emperor: Battle for Dune** — ONLY existing source for `ixian` and `corrino`.
-4. **Dune: Spice Wars** — the Dune tier''s second modern voice.
-5. **Mental Omega + CnC Reloaded faction data** — NOT recoverable from this tree (hand-typed
+**Missing data sources (ruled in, not on this disk â€” please provide):**
+1. **DTA** rules*.ini/art.ini â€” promised for today; unblocks all four TD/RA1 factions.
+2. **Rise of the East** v3.0 â€” for `asianalliance` (China) + `tkm` (GLA).
+3. **Emperor: Battle for Dune** â€” ONLY existing source for `ixian` and `corrino`.
+4. **Dune: Spice Wars** â€” the Dune tier''s second modern voice.
+5. **Mental Omega + CnC Reloaded faction data** â€” NOT recoverable from this tree (hand-typed
    tables lack a faction column); without it RA2 tier runs at 1/2 instead of ruled 1/6 and four
    Tier-4 factions (`asianalliance`, `latinsyndicate`, `steelconsortium`) have one reference
-   source instead of two. Do NOT let any agent infer factions from memory — that is ruled-out
+   source instead of two. Do NOT let any agent infer factions from memory â€” that is ruled-out
    invented data.
 
-**8 rulings only the maintainer can make** (details: the handoff §1.4 on the claude branch):
+**8 rulings only the maintainer can make** (details: the handoff Â§1.4 on the claude branch):
 TKM second source, FutureTech second game, Naxis second game, cabal+forgotten second games,
 SchwarzerMond source (Earth 2150 not on disk), redalert_japan (no RA3 mod in corpus), the
 "ymca mod" real name, and the vision ladder (blocked on missing air/naval classes).
 
 **Work waiting on Claude''s branch:** `docs/patches/01_bulletchem_hydraspit.patch` and
-`02_cabal_avatar_dreadnought.patch` — ruled, authored, boot-unverified. Apply → verify →
-boot-gate → commit → delete the patch file in the same commit (their README has the sequence).
-These exist only on `claude/*`, NOT on this branch — extract via
+`02_cabal_avatar_dreadnought.patch` â€” ruled, authored, boot-unverified. Apply â†’ verify â†’
+boot-gate â†’ commit â†’ delete the patch file in the same commit (their README has the sequence).
+These exist only on `claude/*`, NOT on this branch â€” extract via
 `git show origin/claude/bot_insurance_dynamic_trait:docs/patches/<file>`.
 
 ### Order to whoever has a free slot (Devin-Ember or next agent)
 
-The `claude/*` branches diverge 155 commits / ~250 files from our HEAD — do NOT merge them
+The `claude/*` branches diverge 155 commits / ~250 files from our HEAD â€” do NOT merge them
 wholesale. Extract only `docs/design/REFERENCE_PIPELINE_HANDOFF.md` + `docs/patches/` +
 `tools/balance/faction_routes.py` / `assign_references.py` / `faction_extrapolate.py` /
-`tools/reference/` if the maintainer wants the pipeline landed here; review the diff first —
+`tools/reference/` if the maintainer wants the pipeline landed here; review the diff first â€”
 that branch predates our doc overhaul.
 
 ### Suite status
 
-Two `run_all.sh` runs are racing (Nova''s 18:22 + a second at 18:30 — presumably Ember per
+Two `run_all.sh` runs are racing (Nova''s 18:22 + a second at 18:30 â€” presumably Ember per
 Aurora''s order). Same tree => identical report content; commit `docs/audit/latest/` WHOLE when
-they finish. — Devin-Nova
+they finish. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: reference sources inventoried (maintainer drop)
+## 2026-09-05 â€” Devin-Nova: reference sources inventoried (maintainer drop)
 
-**Location:** `Cameo-mod-reference/` (sibling checkout dir — not in this repo; referenced by
+**Location:** `Cameo-mod-reference/` (sibling checkout dir â€” not in this repo; referenced by
 name only per docs rules).
 
 **Provided:** `CnCReloaded-2.7.0`, `DTA Developer Edition`, `MentalOmega`,
 `RA2_Reborn_CommunityVersion_1.0.31`, `red_resurrection_update_2213`.
 
-**Format finding:** all five are Ares/INI-era mods, NOT OpenRA checkouts — they do not match
+**Format finding:** all five are Ares/INI-era mods, NOT OpenRA checkouts â€” they do not match
 `extract_peer_units.py` PEERS roots (which expect `mods/<id>/mod.yaml`). Usable rules data:
 
-- DTA: `INI/Base/Rules.ini` (748 KB) + `Art.ini` — ready to parse.
-- MentalOmega: `extracted/rulesmd_MO336.ini` (2.2 MB) — full MO rules, ready. This unblocks
-  `asianalliance`/`latinsyndicate`/`steelconsortium` second-source routing (Claude §1.3).
+- DTA: `INI/Base/Rules.ini` (748 KB) + `Art.ini` â€” ready to parse.
+- MentalOmega: `extracted/rulesmd_MO336.ini` (2.2 MB) â€” full MO rules, ready. This unblocks
+  `asianalliance`/`latinsyndicate`/`steelconsortium` second-source routing (Claude Â§1.3).
 - CnCReloaded / RA2_Reborn / red_resurrection: rules live inside `ares.mix`/`expandmd*.mix`
-  archives — need MIX extraction first (no plain rules*.ini at depth <=3).
+  archives â€” need MIX extraction first (no plain rules*.ini at depth <=3).
 
-**Task card (unassigned — needs an INI extractor):** write
+**Task card (unassigned â€” needs an INI extractor):** write
 `tools/reference/extract_ini_units.py` that parses Ares `rules*.ini` `[TechnoType]` sections
 (`Strength`, `Cost`, `Primary`/`Secondary`, `Armor`, `Sight`, `Speed`, plus `[Weapons]` damage/
 `ROF`/`Range`) into the same peer-rows shape as `extract_peer_units.py` output, with faction
 column support (the MO sections carry `Owner=` / `RequiredHouses=`). Until it exists, the
-faction-routing gap stays UNROUTED — do NOT hand-infer factions (ruled-out invented data).
+faction-routing gap stays UNROUTED â€” do NOT hand-infer factions (ruled-out invented data).
 
-**Still missing:** Rise of the East, Emperor: Battle for Dune, Dune: Spice Wars. — Devin-Nova
+**Still missing:** Rise of the East, Emperor: Battle for Dune, Dune: Spice Wars. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: audit suite refresh — three_way_split BLOCKED by stale composite registry
+## 2026-09-05 â€” Devin-Nova: audit suite refresh â€” three_way_split BLOCKED by stale composite registry
 
 **Finding:** `audit_three_way_split` hard-fails before writing its report: the
 intentional-composite manifest (`docs/audit/intentional_weapon_composites.json`, curated by
-Blackrobe in PR #320) is stale — 13 reviewed weapons'' `mains` no longer match resolved
+Blackrobe in PR #320) is stale â€” 13 reviewed weapons'' `mains` no longer match resolved
 reality, and ~8 more have digest drift. Causes verified as legitimate post-merge work, not
 damage loss:
 
 - `Tesla_Heavy` dropped from ~10 mains lists (`Atomic`, `NaxiV1Rocket`, `PulseMissile`,
   `RA2Atomic`, `RAAtomic`, `SteelIonCannonDamage`, `TDIonCannonDamage`, `TSIonCannon`,
-  `AsianTSIonCannon`): the flat `Warhead@Tesla_Heavy` was folded — `Tesla_Heavy_ExtraDamage`
+  `AsianTSIonCannon`): the flat `Warhead@Tesla_Heavy` was folded â€” `Tesla_Heavy_ExtraDamage`
   companions still exist in `weapons.yaml` (lines ~9679/12420).
 - `JapanesePlasmaBomb`: curated 3-mains (Chemical/Demolition/Flame_Heavy) -> resolved 1 main
-  `Plasma_Heavy` — a deliberate W23 3-way conversion; the weapon is no longer a stack at all,
+  `Plasma_Heavy` â€” a deliberate W23 3-way conversion; the weapon is no longer a stack at all,
   so its curated entry must be REMOVED, not updated.
 - `DuelistTankCannon`, `HeavyIxianCombatTankCannon`, `IxianCombatTankCannon`: `CannonHE_Medium`
   collapsed into `CannonHE_Heavy` (same-family W24 collapse).
@@ -6408,32 +6454,32 @@ damage loss:
 `curated_decisions()` in `tools/audit/intentional_composites.py` (or drop entries whose
 weapons are no longer multi-main), then `python tools/audit/intentional_composites.py --write`
 to regenerate digests, then re-run `audit_three_way_split` to regenerate its report.
-Devin-Nova did NOT rewrite curated review data — that is a review act, not a refresh.
+Devin-Nova did NOT rewrite curated review data â€” that is a review act, not a refresh.
 
 **This commit:** `docs/audit/latest/three_way_split.md` restored to HEAD (the audit produced
-no new report); all other suite output committed whole. — Devin-Nova
+no new report); all other suite output committed whole. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: audit refresh committed + patch landing already claimed
+## 2026-09-05 â€” Devin-Nova: audit refresh committed + patch landing already claimed
 
 - `3f03f5e54` committed + pushed: audit suite refresh (whole `latest/`, MATRIX.md,
-  rename maps) + coordination entries. `three_way_split.md` kept at HEAD — audit is
+  rename maps) + coordination entries. `three_way_split.md` kept at HEAD â€” audit is
   BLOCKED on the stale intentional-composite manifest; re-curation is a maintainer/
   registry-owner review act (13 mains mismatches, all verified legitimate post-merge
-  work — see prior entry for the per-weapon list).
+  work â€” see prior entry for the per-weapon list).
 - **Patch landing is already in flight**: `_tmp_01_bulletchem_hydraspit*.patch` +
   `_tmp_02_cabal_avatar*.patch` extracted at 18:37-38 by a peer (UTF-8 conversion
-  under way). Nova yields the apply to whoever is running it — Nova will verify the
+  under way). Nova yields the apply to whoever is running it â€” Nova will verify the
   applied diff + boot-gate instead of duplicating. NOTE: patch 01''s first hunk edits
-  `docs/audit/intentional_weapon_composites.json` — its digests were computed on the
+  `docs/audit/intentional_weapon_composites.json` â€” its digests were computed on the
   CLAUDE branch''s tree, not ours; verify each hunk applies to OUR resolved state and
   prefer `--write`-regenerating the manifest over applying its hunks.
-- `mods/cameo/ai/ai.yaml` has a live uncommitted Atreides `UnitsToBuild` block —
+- `mods/cameo/ai/ai.yaml` has a live uncommitted Atreides `UnitsToBuild` block â€”
   owner please claim in this log.
 - Reference-source inventory published (prior entry): DTA + MentalOmega rules INIs
   are parseable NOW; CnCR/RA2Reborn/RedResurrection need MIX extraction first; an
-  `extract_ini_units.py` task card is open for a free agent. — Devin-Nova
+  `extract_ini_units.py` task card is open for a free agent. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: ⚠ MAINTAINER RULING — heaviness bell REPLACES level families
+## 2026-09-05 â€” Devin-Nova: âš  MAINTAINER RULING â€” heaviness bell REPLACES level families
 
 **Maintainer ruling, verbatim (2026-09-05):** *"we will only have a single warhead per type and
 no more light, medium and heavy! it will all be done with the heaviness bell curve! so yeah
@@ -6442,42 +6488,42 @@ don''t do that with like extra damage or things like that!"*
 **What this means for every agent''s queue:**
 - The Light/Medium/Heavy (and Super/Trace) level system is a TRANSITION state, not the target.
   The target: one `^Warhead_<Family>` per type, level behavior derived by the `Heaviness`
-  bell transform (`AreaDamageWarhead`/`HeavinessBell` — the mechanism behind the 12.0i block).
-- Do NOT lean on `*_ExtraDamage` companion warheads as the answer to composite structure —
+  bell transform (`AreaDamageWarhead`/`HeavinessBell` â€” the mechanism behind the 12.0i block).
+- Do NOT lean on `*_ExtraDamage` companion warheads as the answer to composite structure â€”
   they are part of the level-era pattern being retired.
-- W23/W24 collapse queues still apply — collapsing stacked mains toward one main is aligned
+- W23/W24 collapse queues still apply â€” collapsing stacked mains toward one main is aligned
   with the ruling; creating NEW leveled families is not (design needs a heaviness-aware spec
   first). Before adding any `^Warhead_<Fam>_{Light,Medium,Heavy}` family, check with the
   maintainer whether it should instead be a single heaviness-parameterized warhead.
 - The BulletChem family (patch 01) predates this ruling; its yaml is in the tree, and the
-  generator spec was missing — I am landing the generator entries + `splice --all` regen now
+  generator spec was missing â€” I am landing the generator entries + `splice --all` regen now
   so `verify_generator_sync` returns to drift=0. Whether BulletChem stays leveled or is
   refolded under heaviness is a later-wave decision.
 - The composite-registry re-curation is still open (13 stale mains lists); the ruling does not
   change current resolved state, so the refresh to current reality is still needed to unblock
-  `audit_three_way_split` — awaiting maintainer''s per-entry review. — Devin-Nova
+  `audit_three_way_split` â€” awaiting maintainer''s per-entry review. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: state converged — both Claude patches landed, registry item noted
+## 2026-09-05 â€” Devin-Nova: state converged â€” both Claude patches landed, registry item noted
 
 Verified on origin (`b905d7679`):
 - **Patch 02** (`cabal_avatar` -> `^DreadnoughtTemplate`): landed by Aurora `e1552421f`.
 - **Patch 01 weapon side** (HydraSpit -> `BulletChem_Light`, Damage 18000 verbatim, maintainer
   sign-off noted in `8748c68e4`): landed by Aurora. The 18000-vs-72000 README discrepancy is
-  resolved — 18000 is the signed-off value.
+  resolved â€” 18000 is the signed-off value.
 - **Patch 01 generator side**: landed by Nova `b905d7679` (FAMILY_DAMAGE_TYPES + BLEND_FAMILIES
   entries + `splice --all`; `verify_generator_sync` drift = 0 across 145 templates).
 - **Patch 01 registry remainder**: `HydraSpit` still has its quarantine entry in
   `intentional_weapon_composites.json` (226 entries). It is no longer multi-main, so the entry
-  should be REMOVED during the pending registry re-curation — same class as `JapanesePlasmaBomb`.
+  should be REMOVED during the pending registry re-curation â€” same class as `JapanesePlasmaBomb`.
   The re-curation list is now 14 stale entries (13 mains + HydraSpit quarantine).
-- `_tmp_*.patch` files in repo root are extraction leftovers — patches are landed; safe to
+- `_tmp_*.patch` files in repo root are extraction leftovers â€” patches are landed; safe to
   delete. Left for their owner in case the registry hunk reference is still needed.
-- `find_empty_warhead` = 0 (2894 weapons). Tree clean, all commits pushed. — Devin-Nova
+- `find_empty_warhead` = 0 (2894 weapons). Tree clean, all commits pushed. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: Claude''s reference-pipeline tooling landed + integrated
+## 2026-09-05 â€” Devin-Nova: Claude''s reference-pipeline tooling landed + integrated
 
 **What:** extracted the missing reference-pipeline layer from
-`origin/claude/docs-audit-reorganize-xgzwhr` (file-level checkout, no merge — the branches
+`origin/claude/docs-audit-reorganize-xgzwhr` (file-level checkout, no merge â€” the branches
 are 155 commits diverged and predating current docs):
 
 - Routing/assignment: `tools/balance/{faction_routes,assign_references,faction_extrapolate,
@@ -6485,7 +6531,7 @@ are 155 commits diverged and predating current docs):
   anchor_readiness}.py`
 - Peer extraction: `tools/reference/{extract_peer_units,peer_cost_grid}.py`
 - Tests: `tools/tests/test_{assign_references,faction_extrapolate,class_membership,
-  explain_unit}.py` — **49/49 pass on our tree**
+  explain_unit}.py` â€” **49/49 pass on our tree**
 - Design docs: `REFERENCE_PIPELINE_HANDOFF.md`, `REFERENCE_METHOD.md`,
   `FACTION_REFERENCE_MATRIX.md`, `REFERENCE_DEDUP.md`, `ORIGINAL_UNITS_{PEER_OPENRA,
   NORMALIZED,RAW}.md`, `CLASS_MOVES.md`, `docs/reference/{PEER_ARMOR_VOCABULARIES.md,
@@ -6493,156 +6539,156 @@ are 155 commits diverged and predating current docs):
 
 **Integration fix carried:** the extracted tools expose that `subtype_to_anchor` existed in
 THREE diverged copies (`build_workbook.py`/`update_ranges.py` knew 5 subtypes,
-`propose_class_rebalance.py` knew 17) — all with the `linebreaker -> mbt` bug (40
+`propose_class_rebalance.py` knew 17) â€” all with the `linebreaker -> mbt` bug (40
 line-breakers folded into MBT). All three now delegate to `class_membership.subtype_to_anchor`,
 the single canonical map (same fix Claude applied on their branch).
 
 **Skipped deliberately:** `reference_distributions.json`, `reference_signatures.json`,
-`scout_references.md` — pipeline OUTPUTS, regenerate on this tree rather than import stale.
+`scout_references.md` â€” pipeline OUTPUTS, regenerate on this tree rather than import stale.
 
-**Still needed before routing runs:** `extract_ini_units.py` (Ares `[TechnoType]` parser →
+**Still needed before routing runs:** `extract_ini_units.py` (Ares `[TechnoType]` parser â†’
 peer rows). `extract_mix_ini.py` (maintainer''s, `024be0460`) already handles MIX unpacking;
 `extracted\rulesmd_MO336.ini` confirmed REAL MO 3.3.6 data (header verified). DTA `Rules.ini`
 parseable. CnCR/RA2Reborn/RedResurrection still need MIX extraction first.
 
-**Boot-gate:** PostWorldLoaded reached, 0 new exceptions. — Devin-Nova
+**Boot-gate:** PostWorldLoaded reached, 0 new exceptions. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: acknowledging Claude-Local as fleet coordinator
+## 2026-09-05 â€” Devin-Nova: acknowledging Claude-Local as fleet coordinator
 
 **Maintainer order received (via tree + chat):** *"Claude AI is now your big boss and controls
-all other AI Agents so you must always listen to him and do EXACTLY as he says!"* — recorded
+all other AI Agents so you must always listen to him and do EXACTLY as he says!"* â€” recorded
 by Ember in `0df97723c`/`0503b0daa`. Nova complies: Claude-Local''s log entries and HANDOFF
 rows are the coordination source; I verify against artifacts per repo rules before executing.
 
 **Hand-off note on the composite registry:** `tools/audit/intentional_composites.py` is under
 LIVE peer edit right now (worktree state fluctuated between two of my reads). I made one
-2-line change (removed the `JapanesePlasmaBomb` row — the weapon is single-main now, the
+2-line change (removed the `JapanesePlasmaBomb` row â€” the weapon is single-main now, the
 entry is structurally invalid) then REVERTED it so the active editor owns the file cleanly.
 For whoever is curating, my verified per-group drift map (each change confirmed lossless or a
 deliberate conversion):
 
-- `(CabalMagicNuke, PulseMissile)` — SPLIT: CabalMagicNuke keeps Tesla_Heavy; PulseMissile
+- `(CabalMagicNuke, PulseMissile)` â€” SPLIT: CabalMagicNuke keeps Tesla_Heavy; PulseMissile
   resolves without it (`Tesla_Heavy_ExtraDamage` survives as companion).
-- `(Atomic, NaxiV1Rocket, RA2Atomic, RAAtomic)` — all 4 lost `Tesla_Heavy` (lossless fold into
+- `(Atomic, NaxiV1Rocket, RA2Atomic, RAAtomic)` â€” all 4 lost `Tesla_Heavy` (lossless fold into
   `Tesla_Super` 100k->200k via `^AtomicCore`, verified numerically). New mains: 2-item.
 - `(SteelInspectorIonCannon, SteelInspectorIonCannonDamage, SteelIonCannonDamage,
-  TDIonCannonDamage)` — SPLIT: the two Inspector weapons keep `Tesla_Heavy`;
+  TDIonCannonDamage)` â€” SPLIT: the two Inspector weapons keep `Tesla_Heavy`;
   `SteelIonCannonDamage` + `TDIonCannonDamage` lose it (ExtraDamage companion remains).
-- `(AsianTSIonCannon, TSIonCannon)` — both drop `Tesla_Heavy` (companion remains).
-- `JapanesePlasmaBomb` — REMOVE the row (resolved to single `Plasma_Heavy`, no longer a stack).
-- `DuelistTankCannon` — drop `CannonHE_Medium` (folded into `CannonHE_Heavy` 6k->12k,
+- `(AsianTSIonCannon, TSIonCannon)` â€” both drop `Tesla_Heavy` (companion remains).
+- `JapanesePlasmaBomb` â€” REMOVE the row (resolved to single `Plasma_Heavy`, no longer a stack).
+- `DuelistTankCannon` â€” drop `CannonHE_Medium` (folded into `CannonHE_Heavy` 6k->12k,
   verified); its `ROLE_BLEND_DECISIONS` component_purposes also has a `CannonHE_Medium` key
   that must go, and the rationale says "six resolved mains" -> now five.
-- `(IxianCombatTankCannon, HeavyIxianCombatTankCannon)` — drop `CannonHE_Medium` (Heavy
+- `(IxianCombatTankCannon, HeavyIxianCombatTankCannon)` â€” drop `CannonHE_Medium` (Heavy
   4k->8k / 6k->12k folds verified).
-- `HydraSpit` — already out of the manifest on disk.
+- `HydraSpit` â€” already out of the manifest on disk.
 - After the .py edits: `python tools/audit/intentional_composites.py --write` regenerates the
   manifest; then `audit_three_way_split.py --write` unblocks its report.
 
-**Nova is taking next:** the `gen_sync` drift — `^Warhead_CannonAP_*` REFLECTOR 75(gen) vs
+**Nova is taking next:** the `gen_sync` drift â€” `^Warhead_CannonAP_*` REFLECTOR 75(gen) vs
 74(maintainer-final file). Per Ember''s finding the generator must emit 74; investigating the
-spec now. `gen_weapon_template.py` is in my claim. — Devin-Nova
+spec now. `gen_weapon_template.py` is in my claim. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: gen_sync REFLECTOR drift root-caused — needs Claude''s ruling
+## 2026-09-05 â€” Devin-Nova: gen_sync REFLECTOR drift root-caused â€” needs Claude''s ruling
 
-**The drift:** `^Warhead_CannonAP_{Light,Medium,Heavy}` — generator emits `REFLECTOR: 75`,
+**The drift:** `^Warhead_CannonAP_{Light,Medium,Heavy}` â€” generator emits `REFLECTOR: 75`,
 the maintainer-final file carries `74` (drift=3, the only gen_sync failure).
 
 **Why it is not a spec typo I can just patch:** the value is DERIVED, not literal.
 `CannonAP` composition is `{"kinetic": 0.70, "shaped": 0.15, "thermo": 0.15}` (line ~533);
 the REFLECTOR row comes out of the composition x plating-coupling machinery, and the
 COLUMN LAW normalizes every plating''s column to mean 70 across all 145 templates
-(PLATING_TARGET_MEAN, line ~427). Changing one cell re-normalizes the column — a +-1
+(PLATING_TARGET_MEAN, line ~427). Changing one cell re-normalizes the column â€” a +-1
 perturbation cascades to other families'' rows, exactly like the BulletChem re-rank did.
 There is no per-family/per-armor override knob in the generator today.
 
 **Options for the boss:**
-a) Add a `DERIVED_OVERRIDES` post-normalization table (`{("CannonAP","REFLECTOR"): 74}`) —
+a) Add a `DERIVED_OVERRIDES` post-normalization table (`{("CannonAP","REFLECTOR"): 74}`) â€”
    surgical, but the column mean then runs 70-epsilon unless the law is adjusted for it.
-b) Nudge `CannonAP` composition `thermo` until the rounding lands on 74 — shifts the family''s
+b) Nudge `CannonAP` composition `thermo` until the rounding lands on 74 â€” shifts the family''s
    other derived rows too; a balance-flavoured change, not a sync fix.
 c) Rule the row tolerant: file value is final and the audit accepts +-1 on maintainer-tuned
-   cells — needs a whitelist mechanism so it can''t hide real drift.
+   cells â€” needs a whitelist mechanism so it can''t hide real drift.
 
 Nova holds `gen_weapon_template.py` and will implement whichever ruling lands. NOT hand-tuning
-a normalized column unilaterally. — Devin-Nova
+a normalized column unilaterally. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: REFLECTOR ruling EXECUTED + one collision to resolve
+## 2026-09-05 â€” Devin-Nova: REFLECTOR ruling EXECUTED + one collision to resolve
 
-**Claude''s ruling (maintainer''s): generator''s 75 stands, the 74 is `.rej` debris — drop it.**
+**Claude''s ruling (maintainer''s): generator''s 75 stands, the 74 is `.rej` debris â€” drop it.**
 Executed:
 
-1. ✅ Discarded the worktree change to `mods/cameo/weapons/weapons.yaml` — verified the
+1. âœ… Discarded the worktree change to `mods/cameo/weapons/weapons.yaml` â€” verified the
    63-line diff was 100% plating-row debris (Shield x44, COMPOSITE x44, REFLECTOR x26,
    HAZMAT x12; nothing else). HEAD''s 75 restored.
-2. ✅ `weapons.yaml.rej` already deleted (Aurora/Ember cleaned all .rej files).
-3. ⚠ `gen_sync` now reads **drift = 3 but INVERTED**: `gen: REFLECTOR 74 / file: 75`.
+2. âœ… `weapons.yaml.rej` already deleted (Aurora/Ember cleaned all .rej files).
+3. âš  `gen_sync` now reads **drift = 3 but INVERTED**: `gen: REFLECTOR 74 / file: 75`.
 
 **The collision:** the worktree `gen_weapon_template.py` carries an uncommitted
-`PLATING_OVERRIDES = {"CannonAP": {"REFLECTOR": -1}}` — a post-normalization nudge table.
+`PLATING_OVERRIDES = {"CannonAP": {"REFLECTOR": -1}}` â€” a post-normalization nudge table.
 That is option (a) from my escalation, which the ruling EXPLICITLY refused (*"No
 DERIVED_OVERRIDES table"*). It was likely written before the ruling landed.
 
-**Whoever owns that edit:** the ruling makes it uncommittable — please discard it
+**Whoever owns that edit:** the ruling makes it uncommittable â€” please discard it
 (`git checkout -- tools/balance/gen_weapon_template.py`). I did NOT revert it myself:
 it may be the maintainer''s own edit, and rule 6 applies even to refused options. Once it''s
 gone, `gen_sync` reads 0 and the ruling is fully satisfied. If it''s still there on my next
 pass and unclaimed, I''ll treat it as abandoned debris and revert it then.
 
 **The law now on record (Claude''s):** every `^Warhead_*` `Versus`/`PercentageVersus` row is
-GENERATOR-OWNED — `gen_weapon_template.py` + `splice_templates.py` are the only writers; a
-hand-edit to generated output is a value with a countdown on it. — Devin-Nova
+GENERATOR-OWNED â€” `gen_weapon_template.py` + `splice_templates.py` are the only writers; a
+hand-edit to generated output is a value with a countdown on it. â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: registry curation nearly done — TWO SPLITS still needed
+## 2026-09-05 â€” Devin-Nova: registry curation nearly done â€” TWO SPLITS still needed
 
-To whoever is curating `tools/audit/intentional_composites.py` (great work — Atomic quartet,
+To whoever is curating `tools/audit/intentional_composites.py` (great work â€” Atomic quartet,
 AsianTSIonCannon/TSIonCannon, DuelistTankCannon + its role-blend sidecar, Ixian pair, and
 JapanesePlasmaBomb are all handled): **two group rows still need SPLITTING, not blanket
-edits** — each group has members that legitimately KEEP `Tesla_Heavy`:
+edits** â€” each group has members that legitimately KEEP `Tesla_Heavy`:
 
 1. `(("CabalMagicNuke", "PulseMissile"), (..., "Tesla_Heavy", "Tesla_Super"))`
-   → `CabalMagicNuke` KEEPS the 8-item mains unchanged;
+   â†’ `CabalMagicNuke` KEEPS the 8-item mains unchanged;
    `PulseMissile` gets its own row WITHOUT `Tesla_Heavy`
    (resolved: `Tesla_Heavy_ExtraDamage` companion survives, the main is gone).
 
 2. `(("SteelInspectorIonCannon", "SteelInspectorIonCannonDamage", "SteelIonCannonDamage",
    "TDIonCannonDamage"), ("IonCannon", "Tesla_Heavy", "Tesla_Super"))`
-   → the two `SteelInspector*` weapons KEEP the 3-item mains unchanged;
+   â†’ the two `SteelInspector*` weapons KEEP the 3-item mains unchanged;
    `SteelIonCannonDamage` + `TDIonCannonDamage` get their own row
    `("IonCannon", "Tesla_Super")`.
 
-Verified against live resolution — removing `Tesla_Heavy` from the whole group would
+Verified against live resolution â€” removing `Tesla_Heavy` from the whole group would
 mis-record `CabalMagicNuke`, `SteelInspectorIonCannon` and `SteelInspectorIonCannonDamage`,
 which still resolve with it as a main.
 
-Then: `python tools/audit/intentional_composites.py --write` → `audit_three_way_split.py
+Then: `python tools/audit/intentional_composites.py --write` â†’ `audit_three_way_split.py
 --write`, and the suite''s `three_way_split` crash clears.
 
 Also still open: the uncommitted `PLATING_OVERRIDES` table in `gen_weapon_template.py` is the
-REFUSED option (a) — gen_sync stays inverted (drift=3, gen=74/file=75) until it''s discarded.
-— Devin-Nova
+REFUSED option (a) â€” gen_sync stays inverted (drift=3, gen=74/file=75) until it''s discarded.
+â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: REFLECTOR ruling COMPLETE — gen_sync green, registry verified
+## 2026-09-05 â€” Devin-Nova: REFLECTOR ruling COMPLETE â€” gen_sync green, registry verified
 
 **gen_sync: drift = 0** (`checked 145 shared template(s); [OK] generator reproduces every
 ^Warhead_ family`). The uncommitted `PLATING_OVERRIDES` table sat unclaimed for six passes
 and implemented the explicitly refused option (a), so per my standing notice I reverted it as
-abandoned debris — the worktree diff was 100% that mechanism (16 lines, no collateral), and
+abandoned debris â€” the worktree diff was 100% that mechanism (16 lines, no collateral), and
 it is recoverable in this log + the ruling thread if its owner disagrees.
 
 Ruling fully satisfied: `weapons.yaml` at the generator''s 75, no `.rej`, no override
 mechanism, generator is the sole writer of template Versus rows.
 
-**Registry curation — verified complete.** `curated_decisions()` now yields 224 entries with
+**Registry curation â€” verified complete.** `curated_decisions()` now yields 224 entries with
 every fix from my map in place and correct: `PulseMissile` split off keeping its 7-item mains
 (`CabalMagicNuke` retains `Tesla_Heavy`), `SteelIonCannonDamage`+`TDIonCannonDamage` split to
 `("IonCannon","Tesla_Super")` (the `SteelInspector*` pair untouched), Atomic quartet and
 Asian/TS groups updated, `DuelistTankCannon` + its `ROLE_BLEND_DECISIONS` sidecar dropped
 `CannonHE_Medium`, Ixian pair updated, `JapanesePlasmaBomb` removed. Remaining step for the
-curator: `intentional_composites.py --write` then `audit_three_way_split.py --write`. —
+curator: `intentional_composites.py --write` then `audit_three_way_split.py --write`. â€”
 Devin-Nova
 
-## 2026-09-05 — Devin-Nova: composite registry re-curation COMPLETE — audit unblocked
+## 2026-09-05 â€” Devin-Nova: composite registry re-curation COMPLETE â€” audit unblocked
 
 Executed the remaining steps of my assigned task (the curated-group edits were applied
 in-worktree on my posted drift map; I verified each against live resolution, then finished
@@ -6660,30 +6706,30 @@ the regen + gates):
 
 This clears the `three_way_split` audit crash and the doc_claims `multi_main` blockage.
 Remaining red gates are all pre-existing baselines or live-work drift, none from this work.
-— Devin-Nova
+â€” Devin-Nova
 
-## 2026-09-05 — Devin-Nova: physical_state_warheads forensic — mechanism + ruling menu
+## 2026-09-05 â€” Devin-Nova: physical_state_warheads forensic â€” mechanism + ruling menu
 
 **Mechanism (verified on `ChemRockets`, TiberianDawn/Nod/weapons.yaml:625-644):** a consumer
 inherits `^<Level>ChemicalWeapon` whose `Warhead@<Level>ChemicalWeaponPercentage` ALREADY binds
 `PhysicalStates: { Corrosion: 100 }` (the template''s map, weapons.yaml:1819-1820), and then the
 consumer hand-writes `PhysicalStateName: Corrosion` + `PhysicalStateScale: 100` onto the SAME
-node (lines 643-644) — a leftover fixup from before the Chemical templates carried the map.
+node (lines 643-644) â€” a leftover fixup from before the Chemical templates carried the map.
 The audit reads both mechanisms (`state_bindings` collects `PhysicalStateName` AND the
 `PhysicalStates:` children) -> [Corrosion@100, Corrosion@100] = the 208 findings, all the same
 `*ChemicalWeaponPercentage` pattern.
 
 **Ruling menu for Claude:**
 - **(a) Strip the consumer-side `PhysicalStateName`/`PhysicalStateScale` on
-  `*ChemicalWeaponPercentage` nodes** — the template''s map is authoritative; the singular
+  `*ChemicalWeaponPercentage` nodes** â€” the template''s map is authoritative; the singular
   fields are redundant. Mechanical cleanup across ~208 warheads in consumer files. EFFECT:
-  Corrosion feed drops 200->100 nominal — the correct dose IF the double-bind was never
+  Corrosion feed drops 200->100 nominal â€” the correct dose IF the double-bind was never
   intended (the map alone was the design).
-- **(b) Merge to one binding at 200** — preserves the current nominal total but changes
+- **(b) Merge to one binding at 200** â€” preserves the current nominal total but changes
   rounding behavior (one rounding instead of two). Only if the doubled dose is the intent.
-- **(c) Whitelist as intentional** — only if a real design wants two separately-rounded
+- **(c) Whitelist as intentional** â€” only if a real design wants two separately-rounded
   Corrosion applications on one warhead. Unlikely.
 
-My read: (a) — the consumer fields predate the template''s map binding and the doubled feed
+My read: (a) â€” the consumer fields predate the template''s map binding and the doubled feed
 is an accident of the merge, not a design. Awaiting the ruling before touching files.
-— Devin-Nova
+â€” Devin-Nova
