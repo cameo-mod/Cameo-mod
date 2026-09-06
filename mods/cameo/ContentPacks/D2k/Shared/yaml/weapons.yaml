@@ -562,3 +562,22 @@ mtank_pri:
 		Damage: 1000
 
 	MinRange: 2050
+
+# Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
+# Used by multiple D2k factions (explosion/death weapons).
+
+D2KUnitExplodeSmall:
+	Inherits: ^Explosion
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_self_destruct
+		ImpactSounds: EXPLSML1.WAV
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+
+D2KUnitExplodeLarge:
+	Inherits: ^DamagingExplosionHE
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_large_explosion
+		ImpactSounds: EXPLLG2.WAV, fey_expllg1.wav, fey_expllg3.wav, fey_expllg4.wav, fey_expllg5.wav
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
