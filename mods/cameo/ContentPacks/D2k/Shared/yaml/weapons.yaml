@@ -541,3 +541,24 @@ D2K_TowerMissile:
 		Color: FFB84D
 		Scale: 0.8
 		FadeFrames: 15
+
+# Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
+# Used by Atreides, Corrino, Harkonnen.
+
+mtank_pri:
+	Inherits: ^D2KMissile
+	ReloadDelay: 150
+	Burst: 4
+	BurstDelays: 25
+	Range: 10240
+	ValidTargets: Ground, Air
+	Projectile: Missile
+		RangeLimit: 30c0
+		HorizontalRateOfTurn: 100
+	Warhead@1Dam: SpreadDamage
+		Damage: 15000
+		ValidTargets: Ground, Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1000
+
+	MinRange: 2050
