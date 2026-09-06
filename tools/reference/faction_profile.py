@@ -45,13 +45,12 @@ STATS = ["hp", "cost", "speed", "w_dps", "w_range", "sight"]
 try:
     import sys as _sys
     _sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "balance"))
-    from faction_routes import EXCLUSIVE_ONLY, ROUTES
-    ROUTED_BY_SOURCE: dict[str, set] = {}
-    for _routes in ROUTES.values():
-        for _src, _tokens in _routes:
-            ROUTED_BY_SOURCE.setdefault(_src, set()).update(_tokens)
+    from faction_routes import EXCLUSIVE_ONLY, ROUTED_TOKENS, exclusivity_cells
 except Exception:                     # the profiler must still run standalone
-    EXCLUSIVE_ONLY, ROUTED_BY_SOURCE = {}, {}
+    EXCLUSIVE_ONLY, ROUTED_TOKENS = {}, {}
+
+    def exclusivity_cells(src):       # noqa: D103
+        return []
 TYPES = ["infantry", "vehicle", "aircraft", "naval", "defense"]
 
 
@@ -99,7 +98,10 @@ def build(rows: list[dict]) -> dict:
     fac: dict[tuple, list[dict]] = collections.defaultdict(list)
 
     for r in rows:
-        if not r.get("cost"):
+        # ⚠ Cost alone was never the buildability test — these mods price internal dummies at 1
+        # credit. `buildable` is the extractor's TechLevel/Selectable verdict and it also removes
+        # the elite/upgraded duplicate actors, which a profile would otherwise count twice.
+        if not r.get("cost") or r.get("build_limit") or not r.get("buildable", True):
             continue
         t = r.get("type")
         if t not in TYPES:
@@ -115,12 +117,19 @@ def build(rows: list[dict]) -> dict:
         # routed factions.
         owners = r.get("owners") or []
         if src in EXCLUSIVE_ONLY and len(owners) > 1:
-            rivals = ROUTED_BY_SOURCE.get(src, set())
-            mine = [o for o in owners if o in rivals]
-            if len(mine) != 1:
-                owners = []          # shared across routed factions: describes the mod, not a faction
+            # ⛔ ONE RULE, ONE COPY. This used to demand a unit be owned by EXACTLY ONE routed
+            # country, which is the wrong cut for a source that groups its countries into sides:
+            # Mental Omega has only 3-7 country-exclusive units out of ~233 owned, so the profiler
+            # measured MO factions on n=3 and dropped 26 factions for being too thin. The cut now
+            # comes from `faction_routes.exclusivity_cells` — the same partition `allows()` uses,
+            # so a unit's reference roster and its faction profile can never disagree again.
+            routed = ROUTED_TOKENS.get(src, set())
+            low = {o.lower() for o in owners} & routed
+            cells = exclusivity_cells(src)
+            if not any(low <= cell for cell in cells):
+                owners = []          # straddles the partition: describes the mod, not a faction
             else:
-                owners = mine
+                owners = [o for o in owners if o.lower() in routed]
         for owner in owners:
             fac[(src, owner, t)].append(r)
             fac[(src, owner, "overall")].append(r)

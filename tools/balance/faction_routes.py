@@ -139,6 +139,16 @@ INI_ROUTES = {
 for _f, _r in INI_ROUTES.items():
     ROUTES[_f] = tuple(ROUTES.get(_f, ())) + _r
 
+# ⛔ CASE-FOLD THE TOKENS, ONCE, HERE. `peer_factions()` lowercases the corpus column so that
+# DOC5's `nod` and an INI mod's `NodCountry` are comparable at all — but the routes above are
+# written in each source's OWN casing, because that is what a human verifies against the rules
+# file. Comparing the two directly matched nothing: every one of the 15 INI routes resolved to
+# ZERO rows in `allows()` while `--check` reported the token as missing and listed it, lowercased,
+# in the very same line ("has no faction token 'Chinese' (has: chinese, ...)"). The declarations
+# keep their readable casing; the comparison is normalised.
+ROUTES = {_f: tuple((_src, tuple(_t.lower() for _t in _toks)) for _src, _toks in _r)
+          for _f, _r in ROUTES.items()}
+
 # ── Ruled, but the source is not in the corpus yet ────────────────────────────────────────────
 # These are NOT speculation: each is a maintainer ruling whose data is missing. Listed so the
 # weighting a faction actually gets today is visible against the weighting it was ruled.
@@ -198,9 +208,91 @@ PENDING = {
 # owns that the OPPOSING routed factions of the same source do not — 107 GDI-only, 104 Nod-only.
 # Smaller, but discriminating, which is the entire point of a reference. The shared pool
 # describes the MOD, not any faction inside it.
+#
+# ⚠ RE-MEASURED 2026-09-06 once the corpus was wired into `reference_distribution` — the first
+# time the overlap could be measured where it actually MATTERS, between the CAMEO factions a
+# source feeds rather than between its own countries. Worst pair overlap (Jaccard) per source:
+#
+#     Mental Omega     97%   asianalliance / latinsyndicate     mean 5.8 owners
+#     CnC Reloaded     81%   ra2_soviets / yuri                 mean 11.8
+#     OpenRA Tib.Dawn  45%   td_gdi / td_nod                    mean 1.5
+#     Rise of the East 36%   asianalliance / tkm                mean 5.3
+#     DTA Classic      33%   td_gdi / td_nod                    mean 1.6
+#     everything else  <=13%
+#
+# ⭐ THE 33-45% BAND IS NOT ROT — it is what a C&C roster honestly looks like: OpenRA Tiberian
+# Dawn and DTA give both sides the same harvester, MCV and power plant. The pathology is the top
+# two, and MENTAL OMEGA IS WORSE THAN THE CASE THAT ESTABLISHED THE RULE: at 97%, Cameo's Asian
+# Alliance and Latin Syndicate would have received the same reference roster with 3% to tell them
+# apart. MO is therefore added under the SAME 2026-09-05 ruling, not a new one.
+# Rise of the East stays a full voice: 36% sits inside the honest band despite its 5.3 mean.
 EXCLUSIVE_ONLY = {
-    "CnC Reloaded": "median unit owned by 13 of ~23 countries; GDICountry/NodCountry share 76%",
+    "CnC Reloaded": "median unit owned by 13 of ~23 countries; GDICountry/NodCountry share 76%; "
+                    "81% of the ra2_soviets roster is also the yuri roster",
+    "Mental Omega": "ships sub-faction countries and gives most units to all of them; 97% of the "
+                    "asianalliance roster is also the latinsyndicate roster",
 }
+
+# {source: every faction token that source routes to ANY Cameo faction} — the rivals an
+# EXCLUSIVE_ONLY unit must NOT also belong to. Derived from ROUTES so it cannot drift.
+ROUTED_TOKENS = {}
+for _f, _r in ROUTES.items():
+    for _src, _toks in _r:
+        ROUTED_TOKENS.setdefault(_src, set()).update(_toks)
+
+
+# ── What "exclusive" MEANS depends on how the source groups its countries ─────────────────────
+# ⭐ MEASURED 2026-09-06 by signature — the distinct sets of routed countries that own a unit.
+# The two EXCLUSIVE_ONLY sources are built completely differently and one rule cannot serve both:
+#
+#   CnC Reloaded  has real per-faction pools — nodcountry 86 units, gdicountry 61, sovietcountry
+#                 42, alliescountry 41, yuricountry 32 — under a 284-unit universal pool. Country
+#                 exclusivity is the right cut and yields 32-86 discriminating units per faction.
+#
+#   Mental Omega  has almost NO per-country pool: 3 to 7 units each, out of ~233 owned. What it
+#                 actually models is the SIDE, and the signature says so exactly —
+#                     108  all twelve countries          (the mod's common pool)
+#                      61  the nine non-Foehn            (Allied + Soviet + Epsilon)
+#                      60  chinese, latin, ussr          SOVIET
+#                      58  europeans, pacific, us        ALLIED
+#                      49  guild1, guild2, guild3        FOEHN
+#                      41  headquaters, psicorps, sc     EPSILON
+#                 Country exclusivity here is not strict, it is EMPTY: it cut `japan` to 6 units
+#                 and `yuri` to 9. The nine Cameo factions routed to MO countries are drawing on
+#                 a source that only distinguishes four sides.
+#
+# So the cut is declared as a PARTITION of each source's routed tokens, and a unit is admitted
+# only when every routed country owning it falls inside ONE cell of that partition. Absent a
+# declaration the cells are the per-Cameo-faction token sets, which is country exclusivity and
+# also keeps the maintainer's multi-token routes intact (guild1/2/3 -> steelconsortium is one
+# cell, so a unit owned by all three is not "shared").
+EXCLUSIVITY_GROUPS = {
+    "Mental Omega": (
+        ("europeans", "pacific", "unitedstates"),          # Allied
+        ("chinese", "latin", "ussr"),                      # Soviet
+        ("headquaters", "psicorps", "scorpioncell"),       # Epsilon
+        ("guild1", "guild2", "guild3"),                    # Foehn
+    ),
+}
+
+
+def exclusivity_cells(src):
+    """The partition of `src`'s routed tokens that defines "not shared" for that source."""
+    declared = EXCLUSIVITY_GROUPS.get(src)
+    if declared:
+        return [frozenset(g) for g in declared]
+    cells = []
+    for _, routes in ROUTES.items():
+        toks = {t for s_, ts in routes if s_ == src for t in ts}
+        if toks:
+            cells.append(frozenset(toks))
+    return cells
+
+
+def is_shared(row, src):
+    """True when this row's routed owners straddle more than one cell — it describes the MOD."""
+    owned = peer_factions(row) & ROUTED_TOKENS.get(src, set())
+    return not any(owned <= cell for cell in exclusivity_cells(src))
 
 UNROUTED = {
     # ⭐ `tkm` and `japan` LEFT this table on 2026-09-05 — both are routed now. TKM takes Mental
@@ -286,8 +378,24 @@ def allows(faction, row):
     identity; a missing tag is the absence of one.
     """
     for src, toks in ROUTES.get(faction, ()):
-        if row.get("source") == src and (peer_factions(row) & frozenset(toks)):
-            return True
+        if row.get("source") != src:
+            continue
+        mine = peer_factions(row) & frozenset(toks)
+        if not mine:
+            continue
+        # ⛔ THE EXCLUSIVITY RULE, ENFORCED HERE AND NOT ONLY DECLARED. `EXCLUSIVE_ONLY` was
+        # honoured by `faction_profile.py` and ignored by this function, so the ruling shaped the
+        # faction PROFILES while the reference ROSTERS — the thing units are actually priced
+        # against — kept the shared pool. A unit owned by several of a source's routed factions
+        # describes the mod, not any faction in it, so it is admitted to none of them.
+        # ⚠ RIVALS ARE THE OTHER *CAMEO* FACTIONS, NOT THE OTHER SOURCE COUNTRIES. Counting
+        # source countries cancels the maintainer's own multi-token routes: PsiCorps AND
+        # Headquaters are both `yuri`, Guild1/2/3 are all `steelconsortium`, and a unit owned by
+        # two of them is not shared with anybody — it is the SAME Cameo faction twice. Measured
+        # first: the country-counting version cut `japan` from 233 rows to 6 and `yuri` to 59.
+        if src in EXCLUSIVE_ONLY and is_shared(row, src):
+            continue
+        return True
     return False
 
 

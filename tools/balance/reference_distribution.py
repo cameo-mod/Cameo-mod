@@ -281,11 +281,121 @@ def project(coord, agg):
 DOC1_SOURCES = {"Mental Omega", "CnC Reloaded"}
 
 
+# ── The INI corpus: the eight Westwood/Ares mods, machine-extracted ───────────────────────────
+# `tools/reference/extract_ini_units.py` reads the rules files directly, so these eight sources
+# arrive complete instead of hand-typed. This is the loader that was missing: the routes in
+# `faction_routes.py` have named these sources since 2026-09-05 and `--check` reported every one
+# of them as "not in the de-duplicated corpus", because nothing here read the file.
+#
+# ⭐ IT SUPERSEDES DOCUMENT 1 FOR THE SOURCES IT COVERS, and that is not bookkeeping.
+# `ORIGINAL_UNITS_RAW.md` carries Mental Omega and CnC Reloaded as HAND-TYPED tables written when
+# no extraction existed. Measured against the extracted corpus (2026-09-06):
+#
+#     CnC Reloaded  309 of 316 rows matched by name, median HP ratio 1.000, 6 rows off by <5%
+#     Mental Omega  263 of 306 rows matched by name, median HP ratio 1.000, but 99 rows disagree
+#
+# and the MO disagreements are TYPOS, checked against the rules file itself: the table gives the
+# Lionheart Bomber 10,000 HP where `[LIONH] Strength=800` (12.5x), and the Dunerider 10 HP where
+# `[DUNE] Strength=150` (0.07x). A 12.5x row is not noise — it lands in the tail that `d_max` and
+# `p95` are computed from, which is precisely where a distribution is most easily poisoned.
+# So DOC1 yields per source, computed rather than hardcoded: add a source to the extractor and its
+# hand-typed table stands down automatically.
+INI_CORPUS = ROOT / "docs" / "reference" / "ini_corpus.json"
+INI_ARMOR = ROOT / "docs" / "reference" / "armor_normalized.json"
+
+# ⚠ VOCABULARY MISMATCH, AND IT IS SILENT. The corpus types naval units `naval`; the populations
+# here are named `ship` (POPULATIONS, and `CAMEO_SECTION_TYPE` maps Cameo's own `naval` section to
+# `ship` for exactly the same reason). A row typed `naval` matches no population, is excluded from
+# `overall` because it is not in COMBAT_TYPES, and is measured against nothing at all — the same
+# failure mode as the armed buildings filed under `building`, which cost 94 rows.
+INI_TYPE = {"infantry": "infantry", "vehicle": "vehicle", "aircraft": "aircraft",
+            "naval": "ship", "defense": "defense", "building": "building"}
+
+# A6 (`REFERENCE_EXTRACTION_PLAN.md`): "confidence gates voting; only high/medium vote." A ladder
+# normalised from a SINGLE declared rung is held flat across every rung by R8 and marked `low`;
+# letting it vote would enter a value the peer never declared.
+ARMOR_VOTING_CONFIDENCE = {"high", "medium"}
+
+
+def _ini_armor_index():
+    """(source, actor id) -> {ladder: mean Versus FRACTION}, high/medium confidence only."""
+    if not INI_ARMOR.exists():
+        return {}
+    out = {}
+    for line in INI_ARMOR.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        r = json.loads(line)
+        ladders = {}
+        for lad, spec in (r.get("ladders") or {}).items():
+            if spec.get("confidence") not in ARMOR_VOTING_CONFIDENCE:
+                continue
+            vals = [v for v in (spec.get("values") or {}).values() if isinstance(v, (int, float))]
+            if not vals:
+                continue
+            # ⚠ Westwood writes Verses as a PERCENT (100 = full damage) and can write it negative
+            # (a healing warhead). DOC5's `vs*` columns are FRACTIONS. Convert, and clamp the
+            # negatives to 0 — `eligible()` requires dps_vs_* > 0, so a heal is an abstention.
+            ladders[lad] = max(0.0, statistics.fmean(vals) / 100.0)
+        if ladders:
+            out[(r.get("source"), r.get("id"))] = ladders
+    return out
+
+
+def ini_rows():
+    """The eight Westwood/Ares mods in the peer-row shape, from `ini_corpus.json`."""
+    if not INI_CORPUS.exists():
+        ini_rows.sources = set()
+        return []
+    armor = _ini_armor_index()
+    out, sources = [], set()
+    for line in INI_CORPUS.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        r = json.loads(line)
+        sources.add(r["source"])
+        kind = INI_TYPE.get(r.get("type"))
+        if kind is None:
+            continue
+        # THE POPULATION RULE, in full for the first time on these sources. DOC1 could only
+        # approximate it — it has no build-limit column, so a hero could sit in the tail — and
+        # said so. The corpus carries `build_limit`, so the epic/hero exclusion is exact here.
+        # `buildable` is the extractor's TechLevel/Selectable verdict — see its comment. Without
+        # it a costed 10,000,000 HP dummy sits in the arithmetic mean of a 443-unit population.
+        if not r.get("cost") or r.get("build_limit") or not r.get("buildable", True):
+            continue
+        spd, turn = r.get("speed"), r.get("turn_speed")
+        dps = r.get("w_dps")
+        row = {"source": r["source"], "raw_source": r["source"],
+               "id": r.get("id", ""), "name": r.get("name", ""),
+               "type": kind,
+               # `Owner=` is a comma list; the extractor already joined it with "/" and the route
+               # layer splits on that separator (`peer_factions`).
+               "faction": r.get("faction", ""),
+               "turreted": r.get("turreted"),
+               "hp": r.get("hp"), "speed": spd,
+               "turn_speed": turn,
+               "turn_ratio": (spd / turn) if (spd and turn) else None,
+               "cost": r.get("cost"),
+               "w_range": r.get("w_range"), "w_damage": r.get("w_damage"),
+               "w_burst": r.get("w_burst"), "w_reload": r.get("w_reload"),
+               "w_dps": dps}
+        vs = armor.get((r["source"], r.get("id"))) or {}
+        for lad in LADDERS:
+            frac = vs.get(lad)
+            row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None
+        out.append(row)
+    ini_rows.sources = sources
+    return out
+
+
 def doc1_rows():
     """Mental Omega and CnC Reloaded in the peer-row shape, from Document 1."""
     out = []
+    superseded = getattr(ini_rows, "sources", set())
+    doc1_rows.superseded = sorted(DOC1_SOURCES & superseded)
     for source, r in syn.parse_doc1():
-        if source not in DOC1_SOURCES:
+        if source not in DOC1_SOURCES or source in superseded:
             continue
         kind = (r.get("kind") or "").strip().lower()
         if kind not in COMBAT_TYPES and kind != "defense":
@@ -386,8 +496,16 @@ def peer_rows():
                      "hp": hp, "speed": spd, "turn_speed": turn,
                      "turn_ratio": (spd / turn) if (spd and turn) else None,
                      "cost": cost, **wep})
-    # Document 1's INI mods join here so they pass through the SAME lineage de-duplication and
-    # land in the same distributions. Appended rather than merged: they are separate sources.
+    # The extracted INI corpus joins here, and it is read FIRST: `doc1_rows()` asks it which
+    # sources it covers, so the order is a dependency, not a preference.
+    for row in ini_rows():
+        if row["source"] in LINEAGE_MEMBERS:
+            dropped_lineage.add(row["source"])
+            continue
+        rows.append(row)
+    # Document 1's remaining hand-typed mods join here so they pass through the SAME lineage
+    # de-duplication and land in the same distributions. Appended rather than merged: they are
+    # separate sources.
     for row in doc1_rows():
         if row["source"] in LINEAGE_MEMBERS:
             dropped_lineage.add(row["source"])

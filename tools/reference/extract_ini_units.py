@@ -197,6 +197,13 @@ def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
                 "speed": num(a.get("Speed")),
                 "armor": (a.get("Armor") or "").strip() or None,
                 "sight": num(a.get("Sight")),
+                # ⭐ `ROT` is the Westwood rate of turn and it is the CHASSIS stat every INI
+                # source was abstaining on — `reference_distribution` scores `turn_speed` and
+                # `turn_ratio`, and with no ROT column all eight sources contributed nothing to
+                # either. Higher is faster in both Westwood and OpenRA, and every coordinate is
+                # built inside ONE source, so the two scales never have to meet.
+                "turn_speed": num(a.get("ROT")),
+                "turreted": (a.get("Turret") or "").strip().lower() in ("yes", "true"),
                 "tech_level": num(a.get("TechLevel")),
                 "prerequisite": a.get("Prerequisite"),
                 "build_limit": num(a.get("BuildLimit")),
@@ -204,6 +211,26 @@ def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
                 "build_time": num(a.get("BuildTimeMultiplier")),
                 "secondary": (a.get("Secondary") or "").strip() or None,
                 "naval": (a.get("Naval") or "").strip().lower() in ("yes", "true"),
+                # ⛔ `cost > 0` IS NOT A BUILDABILITY TEST IN THESE MODS. They price internal
+                # dummies at 1 credit, and the result poisons exactly the tail a distribution is
+                # most sensitive to: CnC Reloaded's `TSCARRYALL_DUMMY` ("Call Carryall from the
+                # sky", Selectable=no, Armor=unkillable_armor) is a costed 10,000,000 HP row
+                # against a real ceiling of 6,000 — a 1,667x outlier sitting in the arithmetic
+                # mean of a 443-unit population. Two of the engine's OWN flags settle it:
+                #   TechLevel = -1        Westwood for "the player can never build this". It also
+                #                         removes the elite/upgraded DUPLICATES these mods ship as
+                #                         separate actors (RotE's `RANGER_E`, `MINDUP_E`), which
+                #                         would otherwise double-count their own base unit.
+                #   Selectable = no  /  IsSelectableCombatant = no
+                #                         not something a player commands.
+                # Measured max HP before -> after: CnCR 10,000,000 -> 6,000, RotE 15,000 -> 2,000,
+                # RA2 0XX 9,999 -> 3,000, MO 6,000 -> 2,500. DTA's `civilian` roster goes to zero,
+                # which is the right answer. The rows are KEPT and FLAGGED rather than dropped —
+                # R6 says collect everything; the population rule belongs to the consumer.
+                "buildable": not (
+                    (num(a.get("TechLevel")) is not None and num(a.get("TechLevel")) < 0)
+                    or (a.get("Selectable") or "").strip().lower() == "no"
+                    or (a.get("IsSelectableCombatant") or "").strip().lower() == "no"),
                 **wep,
             })
     for r in rows:
@@ -256,7 +283,10 @@ def main() -> int:
         # One row per line: a changed unit is a one-line diff, and it greps. An indented
         # 10k-row array is neither reviewable nor small.
         lines = [
-            json.dumps({k: v for k, v in r.items() if v not in (None, "", [])},
+            # `buildable` is named explicitly because it is the one field whose FALSE is the
+            # signal — a row that survives the filter is worth nothing without it.
+            json.dumps({k: v for k, v in r.items()
+                        if k == "buildable" or v not in (None, "", [])},
                        sort_keys=True, separators=(",", ":"))
             for r in all_rows
         ]

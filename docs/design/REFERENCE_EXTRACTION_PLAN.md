@@ -69,29 +69,46 @@ OpenRA, Fractured Realms, Dune II (declares NO `Versus` — unit stats only). No
 |---|---|---|
 | **A1** | ✅ DONE — **Port `mod_id` into `tools/audit/miniyaml.py`** | ⛔ BLOCKER. `Ruleset.__init__` takes one arg; `extract_peer_units.py` calls it with two. The change exists on `origin/claude/docs-audit-reorganize-xgzwhr` (27 insertions, `mod_id: str = "cameo"` default, so every existing caller is unaffected). Devin landed the tooling without it. |
 | **A2** | ✅ DONE — Resolve all 16 peers on disk; report which are missing | `--dry-run`. A missing root is skipped near-silently — read every line. |
-| **A3** | INI extractor → the same schema as the OpenRA extractor | RA2/YR 11-slot `Verses=`, TS 5-slot, DTA `Modifier.*`. |
-| **A4** | Every stat, both families (R6) | core (HP/cost/speed/range/DPS/armor) + build/economy + combat detail + vision/utility. |
-| **A5** | Every `Versus` / `Verses` / `Modifier.*` row | ⚠ In OpenRA yaml `Versus` is a **node with an EMPTY value whose children are the rows**. `node.get("Versus")` returns empty and yields the false result "0 peers expose Versus". Use `weapon_efficiency.versus_of`. |
-| **A6** | Armor normalisation per R8 | onto the four ladders in `docs/reference/peer_armor_map.yaml`; confidence gates voting; only `high`/`medium` vote. |
+| **A3** | ✅ DONE — INI extractor → the same schema as the OpenRA extractor | RA2/YR 11-slot `Verses=`, TS 5-slot, DTA `Modifier.*`. |
+| **A4** | ✅ DONE — Every stat, both families (R6) | core (HP/cost/speed/range/DPS/armor) + build/economy + combat detail + vision/utility. |
+| **A5** | ✅ DONE — Every `Versus` / `Verses` / `Modifier.*` row | ⚠ In OpenRA yaml `Versus` is a **node with an EMPTY value whose children are the rows**. `node.get("Versus")` returns empty and yields the false result "0 peers expose Versus". Use `weapon_efficiency.versus_of`. |
+| **A6** | ✅ DONE — Armor normalisation per R8 | onto the four ladders in `docs/reference/peer_armor_map.yaml`; confidence gates voting; only `high`/`medium` vote. |
 | **A7** | ✅ DONE — Convert the two UTF-16 reference files to UTF-8 | `PEER_ARMOR_VOCABULARIES.md`, `peer_armor_map.yaml` — PowerShell `>` wrote them; every grep silently under-reads them. |
 
 ### Phase B — statistics (R5, R7)
 
 | # | task |
 |---|---|
-| **B1** | Per-source, per-faction rosters, split by type: infantry / vehicle / aircraft / naval / defense |
-| **B2** | Faction "average actor": geometric mean per type **and** overall |
-| **B3** | The same aggregate for the **whole source game**, per type — the comparison group |
-| **B4** | Faction profile = B2 ÷ B3, per type and overall, each an independent value |
-| **B5** | Variance: CV, min/max spread, percentile position — faction vs its own game |
+| **B1** | ✅ DONE — Per-source, per-faction rosters, split by type: infantry / vehicle / aircraft / naval / defense |
+| **B2** | ✅ DONE — Faction "average actor": geometric mean per type **and** overall |
+| **B3** | ✅ DONE — The same aggregate for the **whole source game**, per type — the comparison group |
+| **B4** | ✅ DONE — Faction profile = B2 ÷ B3, per type and overall, each an independent value |
+| **B5** | ✅ DONE — Variance: CV, min/max spread, percentile position — faction vs its own game |
 
 ### Phase C — the mapping matrix
 
 | # | task |
 |---|---|
-| **C1** | For each of the 29 real Cameo factions, assign its reference combination (R3, R4) |
-| **C2** | Record it as reviewable data next to `faction_routes.py`, with the reason per pairing |
-| **C3** | Verify every Cameo faction reaches the ≥2-reference floor, or is explicitly `UNROUTED` (formula-only) |
+| **C1** | ✅ DONE — For each of the 29 real Cameo factions, assign its reference combination (R3, R4) |
+| **C2** | ✅ DONE — Record it as reviewable data next to `faction_routes.py`, with the reason per pairing |
+| **C3** | ✅ DONE — Verify every Cameo faction reaches the ≥2-reference floor, or is explicitly `UNROUTED` (formula-only) |
+
+### Phase A/B/C — CLOSED 2026-09-06 by wiring the corpus into the distribution layer
+
+`ini_corpus.json` existed from 2026-09-05 but nothing READ it: `reference_distribution.peer_rows()`
+parsed two markdown documents only, so `faction_routes.py --check` reported all fifteen INI routes
+as *"source not in the de-duplicated corpus"* and `allows()` admitted zero rows for them. The
+loader is `reference_distribution.ini_rows()`. Corpus **2,568 -> 4,523 peer rows, 15 -> 21 sources**;
+Cameo actors with a reference signature **324 -> 374**.
+
+Four things that had to be settled to land it, each measured rather than assumed:
+
+| what | finding |
+|---|---|
+| **DOC1 vs the extraction** | `ORIGINAL_UNITS_RAW.md`'s hand-typed Mental Omega / CnC Reloaded tables are the same data, less of it, with typos: median HP ratio 1.000 but MO's Lionheart Bomber reads 10,000 HP against `[LIONH] Strength=800`. DOC1 now stands down per source, automatically, for anything the extractor covers — it currently supplies **zero** rows. The one signature lost (`terran_ghost`) matched an MO row for a unit MO does not have. |
+| **`cost > 0` is not a buildability test** | these mods price internal dummies at 1 credit. CnC Reloaded's `TSCARRYALL_DUMMY` is a costed **10,000,000 HP** row against a real ceiling of 6,000. `TechLevel = -1` + `Selectable/IsSelectableCombatant = no` are the engine's own flags and fix every tail (RotE 15,000 -> 2,000, RA2 0XX 9,999 -> 3,000). They also drop the elite/upgraded DUPLICATE actors these mods ship, which were double-counting their own base unit. |
+| **route tokens were never case-folded** | `peer_factions()` lowercases the corpus; the INI routes are written in each source's own casing. All fifteen matched nothing while `--check` printed the token it wanted next to the same token, lowercased, in the same line. |
+| **"exclusive" means different things per source** | CnC Reloaded has real per-faction pools (nod 86, gdi 61, soviet 42, allies 41, yuri 32). **Mental Omega has almost none — 3 to 7 per country** — because it models four SIDES; country exclusivity cut `japan` to 6 units. Exclusivity is now a declared PARTITION per source, and `faction_routes` and `faction_profile` share one copy of it. Worst Cameo-faction roster overlap **97% -> 49%**. |
 
 ### Phase D — virtual anchors (R1, R2)
 
