@@ -10565,3 +10565,13 @@ orphans, boot-gate PASS. Test-suite failures seen were pre-existing audit-tool r
 since repaired (`277e1a03e`/`8263e7773`/`8c54e17f4`).
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
+
+## Devin-Nova — _d2k_Centerbase dangling actor fix + map-dangler correction (2026-09-06, ~19:30)
+
+Commit `296d83622`: `ixian_koda_tank` -> `ixian_kodatank` (8 actors) — the id
+never resolved. Corrected my earlier "4 dangling map refs" count: `duelist_tank.ixian`
+and `heavy_inf.ixian` are VALID today (suffix-stripping false positives; they become
+Echo's `.ixian`-rename oramap coverage), `harv.fullhusk` is genuinely dead — legacy
+upstream `harv` id, routed to a designer call. Boot-gate PASS.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
