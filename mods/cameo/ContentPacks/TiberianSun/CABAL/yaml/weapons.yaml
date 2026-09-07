@@ -231,12 +231,8 @@ TSCABALObeliskLaserFire:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 70000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 35
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
@@ -372,12 +368,8 @@ TSCABALEnlightedLaser:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 70000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 35
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
@@ -477,10 +469,8 @@ CabalCyborgChaingun:
 	Report: cygun1.aud
 	ReloadDelay: 60
 	Range: 5800
-	Warhead@Bullet_Light:
-		Damage: 10000
 	Warhead@Bullet_Medium:
-		Damage: 10000
+		Damage: 20000
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ImpactSounds: methit1.aud
@@ -503,10 +493,8 @@ TSDevoutChainguns:
 	Burst: 2
 	BurstDelays: 3
 	Range: 6200
-	Warhead@Bullet_Light:
-		Damage: 12000
 	Warhead@Bullet_Medium:
-		Damage: 12000
+		Damage: 24000
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ImpactSounds: methit1.aud
@@ -710,11 +698,8 @@ CabalReaperMissiles_AA:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 8000
-		ValidTargets: Air
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 8000
+		Damage: 16000
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 8000
@@ -1014,11 +999,8 @@ CabalHeavyReaperMissiles_AA:
 		Acceleration: 2
 		HomingActivationDelay: 3
 		RangeLimit: 30000
-	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 12000
-		ValidTargets: Air
 	Warhead@MissileHE_Heavy: AreaDamage
-		Damage: 12000
+		Damage: 24000
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
@@ -1272,12 +1254,8 @@ CabalArtilleryWalkerShellUpgraded:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 42000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 21
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		Damage: 42000
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
@@ -1589,8 +1567,6 @@ CabalDissolverSpray:
 		Inaccuracy: 512
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@corroded: GrantExternalCondition
@@ -1642,12 +1618,8 @@ CabalCommandoPlasma:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 50000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1693,12 +1665,8 @@ CabalCommandoPlasmaMk2:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 50000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1749,12 +1717,8 @@ CabalSubmarinePlasma:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 25000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 12
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1882,10 +1846,9 @@ CabalLegionGun:
 		PercentageScale: 10000
 		PhysicalStateScale: 38
 ^CabalManticoreMissiles:
-	Inherits@wh: ^Warhead_MissileHE_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
-	Inherits@wh3: ^Warhead_Demolition_Light
-	Inherits@wh4: ^Warhead_Concussion_Medium
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh2: ^Warhead_Demolition_Light
+	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	ReloadDelay: 30
@@ -1903,10 +1866,8 @@ CabalLegionGun:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 12000
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 12000
+		Damage: 24000
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
 	Warhead@Concussion_Medium: AreaDamage
@@ -1916,8 +1877,6 @@ CabalManticoreMissilesAA:
 	Inherits: ^CabalManticoreMissiles
 	Range: 5358
 	ValidTargets: Air
-	Warhead@MissileHE_Light: AreaDamage
-		ValidTargets: Air
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage
@@ -2038,7 +1997,6 @@ CabalManticoreMissilesAA:
 		Range: 0, 150, 225
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	Warhead@MissileAA_MediumFlatCompatibility:
 		ValidTargets: Air
@@ -2065,8 +2023,6 @@ CabalRocketCyborgRockets:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 6000
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
 	-Warhead@MissileHE_Light:
@@ -2096,8 +2052,6 @@ CabalRocketCyborgRocketsUpgraded:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 6000
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
 	-Warhead@MissileHE_Light:
@@ -2162,13 +2116,9 @@ CabalMothershipRockets:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3005,12 +2955,8 @@ CabalCommandoPlasmaNeutron:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 50000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
@@ -3077,12 +3023,8 @@ CabalCommandoPlasmaMk2Neutron:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 50000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage

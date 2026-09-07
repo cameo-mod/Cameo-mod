@@ -162,6 +162,32 @@
      "v": "100"
     },
     "name": "Cruiser Fighter",
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@BomberBuff",
+      "types": []
+     },
+     {
+      "modifier": 10,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#FirepowerMultiplier@CruiserFighter.Modifier",
+      "trait": "FirepowerMultiplier@CruiserFighter",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
      "v": "!disabled"
@@ -361,6 +387,26 @@
      "v": "100"
     },
     "name": "Anti Air Scalpel",
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 115,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FighterBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -403,13 +449,11 @@
       "versus_templates": [
        "^Compatibility_Bullet_MediumFlat",
        "^SteelLightMissile",
-       "^SteelSmallArms",
        "^RA2FlakWeapon",
        "^SteelChaingun"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -443,6 +487,26 @@
      "v": "100"
     },
     "name": "Scalpel",
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 115,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FighterBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -621,6 +685,26 @@
      "v": "100"
     },
     "name": "Quantum Scalpel",
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 115,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FighterBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -705,6 +789,26 @@
     "queue": [
      "Aircraft",
      "RAAircraft"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -930,6 +1034,32 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#FirepowerMultiplier@Carrier.Modifier",
+      "trait": "FirepowerMultiplier@Carrier",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
      "v": "!disabled"
@@ -964,9 +1094,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "100000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "300",
+        "damage": "2000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
        },
@@ -978,7 +1108,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "100000",
+        "damage": "200000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "300",
         "tag": "Tesla_Super",
@@ -1065,6 +1195,32 @@
     "queue": [
      "Aircraft",
      "RAAircraft"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     },
+     {
+      "modifier": 10,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#FirepowerMultiplier@IonCannon.Modifier",
+      "trait": "FirepowerMultiplier@IonCannon",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
@@ -1284,6 +1440,26 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HelicopterBuff",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
      "v": "!disabled"
@@ -1469,6 +1645,26 @@
     "queue": [
      "Aircraft",
      "RAAircraft"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AircraftBuffs",
+      "types": []
+     },
+     {
+      "modifier": 115,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@FighterBuff",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -1666,6 +1862,20 @@
      "Defence",
      "RADefence"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1859,6 +2069,20 @@
     "queue": [
      "Defence",
      "RADefence"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -2282,7 +2506,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
@@ -2290,16 +2514,14 @@
       "versus_templates": [
        "^Compatibility_Bullet_MediumFlat",
        "^SteelHeavyCannon",
-       "^SteelSmallArms",
        "^SteelChaingun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcan",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -2313,7 +2535,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
@@ -2324,11 +2546,10 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcanResonance",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2364,6 +2585,20 @@
     "queue": [
      "Defence",
      "RADefence"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -2866,6 +3101,20 @@
      "Defence",
      "RADefence"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@DefenseBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3219,6 +3468,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3307,6 +3576,7 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
@@ -3793,6 +4063,32 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 120,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GrenadierInfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 550,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#FirepowerMultiplier@Freed.Modifier",
+      "trait": "FirepowerMultiplier@Freed",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -4933,6 +5229,20 @@
      "Infantry",
      "RAInfantry"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5544,6 +5854,26 @@
     "queue": [
      "Infantry",
      "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HeroBuff",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -6253,6 +6583,20 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
      "v": "!disabled"
@@ -6299,7 +6643,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
@@ -6307,16 +6651,14 @@
       "versus_templates": [
        "^Compatibility_Bullet_MediumFlat",
        "^SteelHeavyCannon",
-       "^SteelSmallArms",
        "^SteelChaingun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcan",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6352,6 +6694,20 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
@@ -6490,6 +6846,20 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
      "v": "!disabled"
@@ -6623,6 +6993,20 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
@@ -6931,6 +7315,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+      "trait": "FirepowerMultiplier@DualWeapon",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7215,12 +7619,26 @@
     "name": "Dagger",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
-     "~steelconsortium_promotion_daggerartillery",
-     "steelconsortium_consortiumbattlelab"
+     "steelconsortium_consortiumbattlelab",
+     "~steelconsortium_promotion_daggerartillery"
     ],
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -7631,12 +8049,26 @@
     "name": "Defender Bot",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
-     "~steelconsortium_promotion_defenderbot",
-     "steelconsortium_consortiumradar"
+     "steelconsortium_consortiumradar",
+     "~steelconsortium_promotion_defenderbot"
     ],
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
@@ -7783,6 +8215,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -8027,12 +8467,26 @@
     "name": "Katy Tank",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
-     "~steelconsortium_promotion_katytank",
-     "steelconsortium_consortiumbattlelab"
+     "steelconsortium_consortiumbattlelab",
+     "~steelconsortium_promotion_katytank"
     ],
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
@@ -8312,6 +8766,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8358,13 +8820,11 @@
       "versus_templates": [
        "^Compatibility_Bullet_MediumFlat",
        "^SteelLightMissile",
-       "^SteelSmallArms",
        "^RA2FlakWeapon",
        "^SteelChaingun"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -8390,13 +8850,11 @@
       "versus_templates": [
        "^Compatibility_Bullet_MediumFlat",
        "^SteelLightMissile",
-       "^SteelSmallArms",
        "^RA2FlakWeapon",
        "^SteelChaingun"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -8425,7 +8883,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -8454,7 +8911,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -8483,7 +8939,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -8512,7 +8967,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -8541,7 +8995,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -8570,7 +9023,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -8616,6 +9068,20 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+      "trait": "FirepowerMultiplier@DualWeapon",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -8839,6 +9305,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8927,6 +9401,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -9167,6 +9649,20 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
+    ],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9379,12 +9875,38 @@
     "name": "Stalker",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
-     "~steelconsortium_promotion_stalker",
-     "steelconsortium_consortiumbattlelab"
+     "steelconsortium_consortiumbattlelab",
+     "~steelconsortium_promotion_stalker"
     ],
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HeroBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
@@ -9469,6 +9991,14 @@
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
@@ -9596,12 +10126,38 @@
     "name": "White Rabbit",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
-     "~steelconsortium_promotion_whiterabbit",
-     "steelconsortium_consortiumbattlelab"
+     "steelconsortium_consortiumbattlelab",
+     "~steelconsortium_promotion_whiterabbit"
     ],
     "queue": [
      "Vehicle",
      "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@HeroBuff",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     }
     ],
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",

@@ -39,6 +39,39 @@ HighV:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
+
+td_gdi_guardtower_highv:
+	Inherits: HighV
+	Projectile: Bullet
+		-Image:
+		ProjectileStreakLength: 960
+		ProjectileStreakLengthVariation: 96
+		ProjectileStreakWidth: 45
+		ProjectileStreakColor: FFF4C2
+		ProjectileStreakTailWidth: 6
+		ProjectileStreakHeadWidth: 24
+		ProjectileStreakHeadTaperLength: 192
+		ProjectileStreakTailColor: FFB060
+		ProjectileStreakTailColorAlpha: 176
+		ContrailLength: 0
+		Speed: 4000
+
+td_gdi_guardtower_highvap:
+	Inherits: HighVAP
+	Projectile: Bullet
+		-Image:
+		ProjectileStreakLength: 960
+		ProjectileStreakLengthVariation: 96
+		ProjectileStreakWidth: 45
+		ProjectileStreakColor: FFF4C2
+		ProjectileStreakTailWidth: 6
+		ProjectileStreakHeadWidth: 24
+		ProjectileStreakHeadTaperLength: 192
+		ProjectileStreakTailColor: FFB060
+		ProjectileStreakTailColorAlpha: 176
+		ContrailLength: 0
+		Speed: 4000
+
 GrenadeExplode:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Projectile_Grenade_Light
@@ -271,9 +304,11 @@ ArcherArtilleryShell:
 	Range: 14000
 	MinRange: 2800
 	Report: tnkfire2.aud
+	-InvalidTargets:
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 280
+		Blockable: false
 		Inaccuracy: 700
 		LaunchAngle: 70
 		ContrailLength: 28
@@ -805,13 +840,9 @@ MissileSoldierWeapon:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -850,7 +881,7 @@ MissileSoldierWeapon:
 		Damage: 51000
 		PercentageScale: 0
 
-EMPGrenade:
+Grenade_EMP:
 	Inherits@collapsewh: ^Warhead_Tesla_Super
 	Inherits: ^TeslaChargedWeapon
 	Inherits@2: ^TeslaWeapon
@@ -948,8 +979,8 @@ EMPGrenade:
 		ImpactActors: false
 		ValidTargets: Ground, Ship
 
-EMPGrenadeExplode:
-	Inherits: EMPGrenade
+GrenadeExplode_EMP:
+	Inherits: Grenade_EMP
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
@@ -1169,13 +1200,10 @@ RocketsHumvee2AMT_AA:
 	Inherits: RocketsHumvee2AMT
 	Range: 8397
 	ValidTargets: Air
-	Warhead@MissileAP_Light:
-		ValidTargets: Air
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 	-Warhead@MissileAP_Heavy:
 	-Warhead@MissileAP_HeavyFlatCompatibility:
-	-Warhead@MissileAP_Light:
 	Warhead@MissileAA_HeavyFlatCompatibility:
 		ValidTargets: Air
 		Damage: 32000
@@ -1371,9 +1399,6 @@ OfficerMachineGun:
 	BurstDelays: 4
 	Range: 5596
 	Report: mgun11.aud
-	Warhead@Bullet_Light:
-		PercentageScale: 2500
-		Damage: 8000
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
 		Damage: 8000
@@ -1633,7 +1658,6 @@ CommandoSniper:
 CommandoRocketLauncher:
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -1652,16 +1676,12 @@ CommandoRocketLauncher:
 		ContrailEndColorUsePlayerColor: true
 	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Air, Water
-		Damage: 20000
-	Warhead@MissileHE_Light:
-		ValidTargets: Ground, Air, Water
-		Damage: 20000
+		Damage: 40000
 	Warhead@Effect: CreateEffect
 		ValidRelationships: Neutral, Enemy
 		Explosions: blue_building_napalm
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Air, Water
@@ -2059,8 +2079,6 @@ td_gdi_shotgunner_shotgun:
 	Projectile: Bullet
 		Speed: 4000
 		Inaccuracy: 800
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	-Warhead@Bullet_Light:

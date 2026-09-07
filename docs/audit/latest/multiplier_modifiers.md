@@ -1,6 +1,6 @@
 # audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1812
+*Multiplier trait families seen: 1813
 
 | trait family |
 |---|
@@ -321,9 +321,9 @@
 | `DamageMultiplier@ra1_allies_upgrade_chronoarmor` |
 | `DamageMultiplier@ra1_allies_upgrade_infantryarmorplating` |
 | `DamageMultiplier@ra1_allies_upgrade_reinforcedstructures` |
-| `DamageMultiplier@ra1_soviets_doctrine_conscription` |
-| `DamageMultiplier@ra1_soviets_doctrine_heavyarmor` |
-| `DamageMultiplier@ra1_soviets_doctrine_inferno` |
+| `DamageMultiplier@ra1_soviets_doctrine_conscriptiondoctrine` |
+| `DamageMultiplier@ra1_soviets_doctrine_heavyarmordoctrine` |
+| `DamageMultiplier@ra1_soviets_doctrine_infernodoctrine` |
 | `DamageMultiplier@ra1_soviets_upgrade_afterburners` |
 | `DamageMultiplier@ra1_soviets_upgrade_menofsteel` |
 | `DamageMultiplier@ra1_soviets_upgrade_stalinium` |
@@ -427,6 +427,7 @@
 | `DamageMultiplier@upgrade_conyard` |
 | `DamageMultiplier@upgrade_heavy` |
 | `DamageMultiplier@upgrade_hightech` |
+| `DamageMultiplier@upgrade_light` |
 | `DamageMultiplier@upmigarmor` |
 | `DamageMultiplier@upschheliarmor` |
 | `DamageMultiplier@upschrazerbomberarmor` |
@@ -570,7 +571,6 @@
 | `FirepowerMultiplier@HelicopterBuff` |
 | `FirepowerMultiplier@HeroBuff` |
 | `FirepowerMultiplier@HighExplosionShell` |
-| `FirepowerMultiplier@HighExplosiveRockets` |
 | `FirepowerMultiplier@InfantryBuff` |
 | `FirepowerMultiplier@IonCannon` |
 | `FirepowerMultiplier@KamikazeCritical` |
@@ -632,6 +632,7 @@
 | `FirepowerMultiplier@TAxeUpg` |
 | `FirepowerMultiplier@TAxeUpg2` |
 | `FirepowerMultiplier@TankHunter` |
+| `FirepowerMultiplier@ThermobaricRockets` |
 | `FirepowerMultiplier@TripleBeam` |
 | `FirepowerMultiplier@TripleShot` |
 | `FirepowerMultiplier@Upgrade` |
@@ -743,17 +744,17 @@
 | `FirepowerMultiplier@ra1_allies_upgrade_cryomissiles` |
 | `FirepowerMultiplier@ra1_allies_upgrade_lasertargetingsystems` |
 | `FirepowerMultiplier@ra1_soviets_ak47conscript` |
-| `FirepowerMultiplier@ra1_soviets_doctrine_conscription` |
-| `FirepowerMultiplier@ra1_soviets_doctrine_inferno` |
-| `FirepowerMultiplier@ra1_soviets_doctrine_nuclearwar` |
-| `FirepowerMultiplier@ra1_soviets_doctrine_teslaandexperimentaltech` |
+| `FirepowerMultiplier@ra1_soviets_doctrine_conscriptiondoctrine` |
+| `FirepowerMultiplier@ra1_soviets_doctrine_infernodoctrine` |
+| `FirepowerMultiplier@ra1_soviets_doctrine_nuclearwardoctrine` |
+| `FirepowerMultiplier@ra1_soviets_doctrine_teslaandexperimentaltechdoctrine` |
 | `FirepowerMultiplier@ra1_soviets_rifleinfantry` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_afterburners` |
-| `FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_menofsteel` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_nucleartankshells` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_reactoroverload` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_scorchedearth` |
+| `FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_unstableisotopes` |
 | `FirepowerMultiplier@ra2_allies_gi` |
 | `FirepowerMultiplier@ra2_allies_upgrade_advancedaeronautics` |
@@ -1049,8 +1050,8 @@
 | `ProductionCostMultiplier@powersow` |
 | `ProductionCostMultiplier@protoss` |
 | `ProductionCostMultiplier@ra1_allies_upgrade_reinforcedstructures` |
-| `ProductionCostMultiplier@ra1_soviets_doctrine_conscription` |
-| `ProductionCostMultiplier@ra1_soviets_doctrine_industrialefficiency` |
+| `ProductionCostMultiplier@ra1_soviets_doctrine_conscriptiondoctrine` |
+| `ProductionCostMultiplier@ra1_soviets_doctrine_industrialefficiencydoctrine` |
 | `ProductionCostMultiplier@ra1_soviets_upgrade_wareconomy` |
 | `ProductionCostMultiplier@rubinelle` |
 | `ProductionCostMultiplier@scaledprices` |
@@ -1136,8 +1137,8 @@
 | `ProductionTimeMultiplier@powersow` |
 | `ProductionTimeMultiplier@protoss` |
 | `ProductionTimeMultiplier@ra1_allies_upgrade_reinforcedstructures` |
-| `ProductionTimeMultiplier@ra1_soviets_doctrine_conscription` |
-| `ProductionTimeMultiplier@ra1_soviets_doctrine_industrialefficiency` |
+| `ProductionTimeMultiplier@ra1_soviets_doctrine_conscriptiondoctrine` |
+| `ProductionTimeMultiplier@ra1_soviets_doctrine_industrialefficiencydoctrine` |
 | `ProductionTimeMultiplier@ra1_soviets_upgrade_wareconomy` |
 | `ProductionTimeMultiplier@selectglademo` |
 | `ProductionTimeMultiplier@selectglatoxin` |
@@ -1272,7 +1273,7 @@
 | `RangeMultiplier@ra1_allies_upgrade_gpssatellitesupport` |
 | `RangeMultiplier@ra1_soviets_promotion_infantrysuperoptics` |
 | `RangeMultiplier@ra1_soviets_upgrade_afterburners` |
-| `RangeMultiplier@ra1_soviets_upgrade_highexplosiverockets` |
+| `RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets` |
 | `RangeMultiplier@ra2_allies_upgrade_eliterocketeer` |
 | `RangeMultiplier@ra2_allies_upgrade_infiltratorstraining` |
 | `RangeMultiplier@ra2_allies_upgrade_intensifiedprismbeams` |
@@ -1546,7 +1547,7 @@
 | `RevealsShroudMultiplier@ra1_allies_upgrade_airsuperioritydoctrine` |
 | `RevealsShroudMultiplier@ra1_allies_upgrade_gpssatellitesupport` |
 | `RevealsShroudMultiplier@ra1_soviets_promotion_infantrysuperoptics` |
-| `RevealsShroudMultiplier@ra1_soviets_upgrade_highexplosiverockets` |
+| `RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets` |
 | `RevealsShroudMultiplier@ra2_allies_upgrade_infiltratorstraining` |
 | `RevealsShroudMultiplier@ra2_allies_upgrade_tanklasertargeting` |
 | `RevealsShroudMultiplier@ra2_allies_upgrade_thunderboltmissiles` |
@@ -1711,7 +1712,7 @@
 | `SpeedMultiplier@piperunnermove` |
 | `SpeedMultiplier@ra1_allies_upgrade_airsuperioritydoctrine` |
 | `SpeedMultiplier@ra1_allies_upgrade_chronoarmor` |
-| `SpeedMultiplier@ra1_soviets_doctrine_nuclearwar` |
+| `SpeedMultiplier@ra1_soviets_doctrine_nuclearwardoctrine` |
 | `SpeedMultiplier@ra1_soviets_upgrade_afterburners` |
 | `SpeedMultiplier@ra1_soviets_upgrade_stalinium` |
 | `SpeedMultiplier@ra1_soviets_upgrade_unstableisotopes` |
