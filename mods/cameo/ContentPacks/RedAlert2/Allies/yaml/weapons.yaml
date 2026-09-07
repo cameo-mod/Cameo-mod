@@ -613,7 +613,7 @@ RA2Comet:
 		SecondaryBeamColor: FFFFFFFF
 		SecondaryBeamUsePlayerColor: false
 	Warhead@Demolition_Light:
-		Damage: 20000
+		Damage: 60000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Flame_Medium:
 		Damage: 20000
@@ -626,6 +626,8 @@ RA2Comet:
 		Amount: 4
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Flame_Medium:
+	-Warhead@Laser_Heavy:
 
 RA2Comet_elite:
 	Inherits: RA2Comet

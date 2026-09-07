@@ -1918,7 +1918,7 @@ TorpTube:
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
 	Warhead@Concussion_Light:
-		Damage: 16000
+		Damage: 32000
 	Warhead@MissileHE_Heavy:
 		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure
@@ -1932,6 +1932,7 @@ TorpTube:
 		ImpactSounds: splash9.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
+	-Warhead@MissileHE_Heavy:
 
 TorpTubeThermobaric:
 	Inherits@wh: ^Warhead_MissileNuke_Heavy
