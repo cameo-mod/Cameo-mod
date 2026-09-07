@@ -2566,12 +2566,14 @@ AsianPhoenixRocket:
 		Acceleration: 5
 	Warhead@Flame_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 20000
+		Damage: 60000
 	Warhead@Demolition_Light:
 		Damage: 20000
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Heavy:
 AsianPhoenixRocket_elite:
 	Inherits: AsianPhoenixRocket
 	Range: 7500

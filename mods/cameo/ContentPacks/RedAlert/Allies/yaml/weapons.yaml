@@ -131,10 +131,11 @@ HellfireCryo:
 	Report: missile6.aud
 	Warhead@CryoBlast_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 	Warhead@MissileCryo_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
+	-Warhead@MissileCryo_Heavy:
 
 ChainGunMH60:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -366,10 +367,11 @@ AphidCryo_AA:
 		TrailDelay: 1
 	Warhead@CryoBlast_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 	Warhead@MissileCryo_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
+	-Warhead@MissileCryo_Heavy:
 
 ReconRangerRecoillessGun:
 	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat

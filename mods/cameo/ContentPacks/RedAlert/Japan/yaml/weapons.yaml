@@ -1744,7 +1744,7 @@ WaveforceCannon:
 		Damage: 10000
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: blueartexp
@@ -1758,6 +1758,7 @@ WaveforceCannon:
 		ImpactSounds: psahit00.aud
 		Explosions: blueartexp
 		ValidTargets: Air
+	-Warhead@Railgun_Heavy:
 
 OISmallCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -1864,7 +1865,7 @@ OIBigPlasmaCannon:
 		ContrailLength: 15
 		Width: 60
 	Warhead@Tesla_Heavy:
-		Damage: 8000
+		Damage: 24000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 4000
@@ -1878,6 +1879,8 @@ OIBigPlasmaCannon:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
+	-Warhead@Railgun_Heavy:
+	-Warhead@CannonHE_Heavy:
 
 OIFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium

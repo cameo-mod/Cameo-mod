@@ -853,7 +853,7 @@ WaveforceCannonChargedLaser:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
@@ -868,6 +868,7 @@ WaveforceCannonChargedLaser:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 		ValidTargets: Air
+	-Warhead@Railgun_Heavy:
 
 WaveforceCannonDistortedBeam1:
 	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
@@ -948,7 +949,7 @@ WaveforceCannonDistortedBeam2:
 		Inaccuracy: 100
 	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -967,6 +968,7 @@ WaveforceCannonDistortedBeam2:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 		ValidTargets: Air
+	-Warhead@Flame_Heavy:
 
 ra120mm:
 	Inherits@collapsewh: ^Warhead_CannonHE_Heavy
