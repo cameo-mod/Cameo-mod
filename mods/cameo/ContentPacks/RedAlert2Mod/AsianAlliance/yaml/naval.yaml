@@ -231,7 +231,7 @@ asianalliance_lsub:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~asianalliance_cgyard, asianalliance_asianradar
+		Prerequisites: ~asianalliance_cgyard, asianalliance_radar
 		Queue: Naval, RANaval
 		Description: actor_ra2sub.description
 	Mobile:
@@ -285,7 +285,7 @@ asianalliance_quasfrig:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~asianalliance_cgyard, asianalliance_asianradar
+		Prerequisites: ~asianalliance_cgyard, asianalliance_radar
 		Queue: Naval, RANaval
 		Description: actor_aaquasfrig.description
 	Mobile:
@@ -349,7 +349,7 @@ asianalliance_karrier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~asianalliance_cgyard, asianalliance_asianbattlelab, ~!asianalliance_upgrade_tsunami
+		Prerequisites: ~asianalliance_cgyard, asianalliance_battlelab, ~!asianalliance_upgrade_tsunami
 		Queue: Naval, RANaval
 		Description: actor_aacarrier.description
 	Selectable:
