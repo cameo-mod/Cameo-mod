@@ -262,31 +262,6 @@ SamuraiBladeCharged:
 	-Warhead@SwordWeaponFriendlyFire:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@PreservedFlat_SwordWeapon: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water
-		Falloff: 100, 50
-		Spread: 320
-		Damage: 10000
-		Versus:
-			Shield: 125
-			None: 100
-			Flak: 95
-			Plate: 90
-			Heroic: 85
-			Scout: 80
-			Light: 75
-			Medium: 70
-			Heavy: 65
-			Superheavy: 60
-			Steel: 55
-			Concrete: 50
-			Wood: 45
-			Fighter: 40
-			Bomber: 35
-			Helicopter: 30
-			Spaceship: 25
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@PreservedFlat_SwordWeaponFriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
@@ -341,7 +316,7 @@ SamuraiBladeCharged:
 	Warhead@PreservedFlat_TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
-		Damage: 10000
+		Damage: 20000
 		Versus:
 			REFLECTOR: 50
 			Shield: 150
@@ -1163,7 +1138,8 @@ SkyHawkChainGun:
 		Speed: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
+	-Warhead@Demolition_Light:
 SkyHawkChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: SkyHawkChainGun
