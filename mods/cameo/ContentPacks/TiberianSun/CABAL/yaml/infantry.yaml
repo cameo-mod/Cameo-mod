@@ -37,8 +37,6 @@ cabal_engineer:
 	Mobile:
 		TurnSpeed: 12
 		Speed: 40
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -110,8 +108,6 @@ cabal_cyborginfantry:
 		PauseOnCondition: disabled
 	Health:
 		HP: 45000
-	ChangesHealth@SelfHealing:
-		Step: 45
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -185,8 +181,6 @@ cabal_rocketcyborg:
 		PauseOnCondition: disabled
 	Health:
 		HP: 45000
-	ChangesHealth@SelfHealing:
-		Step: 45
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -296,8 +290,6 @@ cabal_devout:
 		PauseOnCondition: disabled
 	Health:
 		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -408,8 +400,6 @@ cabal_ascended:
 		PauseOnCondition: disabled
 	Health:
 		HP: 70000
-	ChangesHealth@SelfHealing:
-		Step: 70
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -520,8 +510,6 @@ cabal_enlighted:
 		PauseOnCondition: disabled
 	Health:
 		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -639,8 +627,6 @@ cabal_hackercyborg:
 		PauseOnCondition: disabled
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -779,8 +765,6 @@ cabal_cyborgcommando:
 		PauseOnCondition: disabled
 	Health:
 		HP: 250000
-	ChangesHealth@SelfHealing:
-		Step: 250
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -867,8 +851,6 @@ cabal_cyborgcommandov2:
 		PauseOnCondition: disabled
 	Health:
 		HP: 400000
-	ChangesHealth@SelfHealing:
-		Step: 400
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -949,8 +931,6 @@ cabal_eliminator800:
 		DamageInterval: 1
 	Health:
 		HP: 85000
-	ChangesHealth@SelfHealing:
-		Step: 85
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -1049,8 +1029,6 @@ cabal_dissolver:
 		TurnSpeed: 16
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored

@@ -89,8 +89,6 @@ ts_gdi_discthrower:
 		Speed: 60
 	Health:
 		HP: 12000
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Armament@PRIMARY:
 		Weapon: TSGrenade
 		LocalOffset: 0,0,427
@@ -156,8 +154,6 @@ ts_gdi_falconenforcer:
 		Speed: 62
 	Health:
 		HP: 45000
-	ChangesHealth@SelfHealing:
-		Step: 45
 	Armament@PRIMARY:
 		Weapon: TS30mm
 		LocalOffset: 0,0,427
@@ -214,8 +210,6 @@ ts_gdi_riottrooper:
 		Speed: 60
 	Health:
 		HP: 54000
-	ChangesHealth@SelfHealing:
-		Step: 54
 	Armament@PRIMARY:
 		Weapon: TSShotgun
 		LocalOffset: 0,0,427
@@ -363,8 +357,6 @@ ts_gdi_jumpjetinfantry:
 		Voice: Move
 	Health:
 		HP: 34000
-	ChangesHealth@SelfHealing:
-		Step: 34
 	Armament@PRIMARY:
 		Weapon: TSJumpCannon
 		LocalOffset: 128,0,256
@@ -432,8 +424,6 @@ ts_gdi_railguncommando:
 		Speed: 60
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Armament@PRIMARY:
 		Weapon: TSCommandoRailgun
 		LocalOffset: 256,43,256

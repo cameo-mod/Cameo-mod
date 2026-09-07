@@ -81,8 +81,6 @@ ts_gdi_pitbull:
 		HP: 27500
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 11
 	Turreted:
 		TurnSpeed: 30
 		Offset: -85,0,192
@@ -133,8 +131,6 @@ ts_gdi_amphibiousapc:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Armor:
 		Type: Heavy
 	Turreted:
@@ -200,8 +196,6 @@ ts_gdi_mobileemp:
 		HP: 150000
 	Repairable:
 		HpPerStep: 7500
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Turreted:
 	AttackTurreted:
 	Armament:
@@ -249,8 +243,6 @@ ts_gdi_titan:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Turreted:
 		TurnSpeed: 15
 	Armament@PRIMARY:
@@ -320,8 +312,6 @@ ts_gdi_titanmkii:
 		HP: 120000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Turreted:
 		TurnSpeed: 15
 		Offset: -45,0,392
@@ -383,8 +373,6 @@ ts_gdi_juggernautmkii:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	# Turreted:
 	# 	TurnSpeed: 14 #3
 	# 	Offset: -45,0,392
@@ -453,8 +441,6 @@ ts_gdi_juggernaut:
 		HP: 35000
 	Repairable:
 		HpPerStep: 1750
-	ChangesHealth@SelfHealing:
-		Step: 14
 	Mobile:
 		Locomotor: tracked
 		Speed: 71
@@ -570,8 +556,6 @@ ts_gdi_hovermlrs:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Turreted:
 		TurnSpeed: 16
 	Armament:
@@ -627,8 +611,6 @@ ts_gdi_wolverine:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 12
 	AttackFrontal:
 		FacingTolerance: 0
 	Armament@PRIMARY:
@@ -693,8 +675,6 @@ ts_gdi_wolverinemkii:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	AttackFrontal:
 		FacingTolerance: 0
 	Armament@PRIMARY:
@@ -772,8 +752,6 @@ ts_gdi_mammothprototype:
 	#	DamageCooldown: 25
 	Repairable:
 		HpPerStep: 40000
-	ChangesHealth@SelfHealing:
-		Step: 320
 	Armament@RAILGUN:
 		Name: railgun
 		Weapon: TSMechRailgun
@@ -872,8 +850,6 @@ ts_gdi_mammothmkii:
 		HP: 1200000
 	Repairable:
 		HpPerStep: 60000
-	ChangesHealth@SelfHealing:
-		Step: 480
 	Armament@RAILGUN:
 		Name: railgun
 		Weapon: TSMechRailgunII
@@ -971,8 +947,6 @@ ts_gdi_disruptor:
 		HP: 250000
 	Repairable:
 		HpPerStep: 12500
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Turreted:
 		TurnSpeed: 10
 	Armament@PRIMARY:

@@ -32,8 +32,6 @@ steelconsortium_katytank:
 		HP: 275000
 	Repairable:
 		HpPerStep: 13750
-	ChangesHealth@SelfHealing:
-		Step: 220
 	Shielded:
 		MaxPercentageStrength: 200
 		DamageRegenDelay: 125
@@ -128,8 +126,6 @@ steelconsortium_defenderbot:
 		HP: 210000
 	Repairable:
 		HpPerStep: 10500
-	ChangesHealth@SelfHealing:
-		Step: 84
 	Armor:
 		Type: Medium
 	Shielded:
@@ -218,8 +214,6 @@ steelconsortium_stalker:
 		HP: 140000
 	# Repairable:
 	# 	HpPerStep: 6875
-	ChangesHealth@SelfHealing:
-		Step: 140
 	# DamageMultiplier@shielded removed with its parent (W26/R1) — see the note on
 	# steelconsortium_whiterabbit below; `Modifier` is [FieldLoader.Require], so a bare
 	# override left behind is a boot crash, not a no-op.
@@ -310,8 +304,6 @@ steelconsortium_whiterabbit:
 		HP: 150000
 	# Repairable:
 	# 	HpPerStep: 7500
-	ChangesHealth@SelfHealing:
-		Step: 150
 	# DamageMultiplier@shielded removed with its parent (W26/R1). It only widened the
 	# condition to drop `&& !shieldpermanent` and inherited Modifier: 150 — and `Modifier` is
 	# [FieldLoader.Require], so leaving this override behind would CRASH THE BOOT with a
@@ -397,8 +389,6 @@ cougar.steel:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Shielded:
 		MaxPercentageStrength: 200
 		InitialPercentageStrength: 200
@@ -455,8 +445,6 @@ hummer.steel:
 		HP: 45000
 	Repairable:
 		HpPerStep: 2250
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Armor:
 		Type: Medium
 	Shielded:
@@ -522,8 +510,6 @@ oldqtnk.steel:
 		HP: 112500
 	Repairable:
 		HpPerStep: 5625
-	ChangesHealth@SelfHealing:
-		Step: 45
 	Shielded:
 		MaxPercentageStrength: 100
 		InitialPercentageStrength: 100
@@ -585,8 +571,6 @@ cobra.steel:
 		HP: 325000
 	Repairable:
 		HpPerStep: 6500
-	ChangesHealth@SelfHealing:
-		Step: 130
 	Shielded:
 		MaxPercentageStrength: 50
 		InitialPercentageStrength: 50
@@ -645,8 +629,6 @@ steelconsortium_supportshieldgenerator:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Shielded:
 		MaxPercentageStrength: 200
 		DamageRegenDelay: 250
@@ -701,8 +683,6 @@ steelconsortium_consortiummobileconstructionvehicle:
 		HP: 150000
 	Repairable:
 		HpPerStep: 7500
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Armor:
 		Type: Light
 	Transforms:
@@ -747,8 +727,6 @@ steelconsortium_consortiumminer:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armor:
 		Type: Medium
 	Mobile:
@@ -809,8 +787,6 @@ steelconsortium_mako:
 		HP: 95000
 	Repairable:
 		HpPerStep: 4750
-	ChangesHealth@SelfHealing:
-		Step: 38
 	Armament@PRIMARY:
 		Weapon: SteelMakoGun
 		LocalOffset: 500,200,0
@@ -886,8 +862,6 @@ steelconsortium_quantumtank:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Turreted:
 		TurnSpeed: 20
 	Armament:
@@ -966,8 +940,6 @@ steelconsortium_manta:
 		HP: 55000
 	Repairable:
 		HpPerStep: 2750
-	ChangesHealth@SelfHealing:
-		Step: 22
 	Armament@AG1:
 		Weapon: SteelMantaAG
 		LocalOffset: 300,100,0
@@ -1067,8 +1039,6 @@ steelconsortium_barracuda:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Turreted:
 		TurnSpeed: 16
 	Armament@AG1:
@@ -1197,8 +1167,6 @@ steelconsortium_megalodon:
 		HP: 450000
 	Repairable:
 		HpPerStep: 22500
-	ChangesHealth@SelfHealing:
-		Step: 180
 	Armament@PRIMARY:
 		Weapon: SteelMegaSword
 		RequiresCondition: !rank-elite
@@ -1257,8 +1225,6 @@ steelconsortium_hammerheadartillerytank:
 		HP: 52500
 	Repairable:
 		HpPerStep: 2625
-	ChangesHealth@SelfHealing:
-		Step: 21
 	Armament@Undeployed:
 		Weapon: HammerheadTankCannon
 		LocalOffset: 200,0,100
@@ -1382,8 +1348,6 @@ steelconsortium_poseidontank:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@1:
 		Weapon: SteelFortressWeapons
 	RenderRangeCircle:
@@ -1446,8 +1410,6 @@ steelconsortium_dagger:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament@PRIMARY:
 		Weapon: SteelDaggerCannon
 		LocalOffset: 450,0,150

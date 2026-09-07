@@ -30,8 +30,6 @@ cabal_overkillgunship:
 		CanSlide: false
 	Health:
 		HP: 45000
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Armament@LEFT:
 		Weapon: CabalOverkillGunshipLaser
 		LocalOffset: 0,-512,0
@@ -91,8 +89,6 @@ cabal_hunterkillermk1:
 		TakeOffOnResupply: true
 	Health:
 		HP: 35000
-	ChangesHealth@SelfHealing:
-		Step: 14
 	Armament@PRIMARY:
 		Weapon: CabalHunterKillerLasers
 		LocalOffset: 0,0,0
@@ -154,8 +150,6 @@ cabal_hunterdronecarrier:
 		HP: 300000
 	Repairable:
 		HpPerStep: 15000
-	ChangesHealth@SelfHealing:
-		Step: 120
 	CarrierMaster:
 		ArmamentNames: primary
 		Actors: cabal_orbdrone_slave, cabal_orbdrone_slave, cabal_orbdrone_slave
@@ -250,8 +244,6 @@ cabal_hunterdrone:
 	HasParent:
 	Health:
 		HP: 15000
-	ChangesHealth@SelfHealing:
-		Step: 8
 	Armament@PRIMARY:
 		Weapon: CabalOverkillDroneLaser
 		LocalOffset: 150,0,0
@@ -295,8 +287,6 @@ cabal_orbdrone:
 		Speed: 140
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 25
 	Armament@PRIMARY:
 		Weapon: CabalWaspLaser
 		LocalOffset: 512,-512,512, 512,512,512
@@ -358,8 +348,6 @@ cabal_cyborgassassin:
 		Voice: Move
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@PRIMARY:
 		Weapon: CabalWaspLaserStriker
 		LocalOffset: 512,-512,512, 512,512,512
@@ -409,8 +397,6 @@ cabal_mothership:
 		Description: actor_cabal_mothership.description
 	Health:
 		HP: 500000
-	ChangesHealth@SelfHealing:
-		Step: 200
 	Aircraft:
 		Speed: 50
 		TurnSpeed: 10
@@ -460,8 +446,6 @@ cabal_hunterkillermk1_elite:
 		TakeOffOnResupply: true
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Armament@PRIMARY:
 		Weapon: CabalHunterKillerLasers_elite
 		LocalOffset: 0,0,0
@@ -524,8 +508,6 @@ cabal_repairdrone:
 		CruiseAltitude: 1200
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament@PRIMARY:
 		Weapon: CabalEngineerRepairBeam
 		LocalOffset: 0,0,0

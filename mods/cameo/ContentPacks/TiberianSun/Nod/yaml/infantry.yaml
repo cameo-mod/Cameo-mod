@@ -100,8 +100,6 @@ ts_nod_elitecadre:
 		Speed: 55
 	Health:
 		HP: 21000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: elitecadregun
 		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
@@ -175,8 +173,6 @@ ts_nod_toxintrooper:
 		Speed: 55
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSToxinRifle
 		LocalOffset: 128,0,256
@@ -219,8 +215,6 @@ ts_nod_shadowteam:
 		Speed: 60
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSShadowTeamPistols
 		LocalOffset: 128,0,256
@@ -282,8 +276,6 @@ ts_nod_shadowteam_air:
 	TakeOffOnMake:
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSShadowTeamTargeting
 		LocalOffset: 128,0,256
@@ -353,8 +345,6 @@ ts_nod_shotguncommando:
 		Speed: 80
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Armament@PRIMARY:
 		Weapon: TSCommandoShotgun
 		LocalOffset: 128,0,256

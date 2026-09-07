@@ -56,8 +56,6 @@ steelconsortium_twister:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: SteelTwisterMissiles
@@ -164,8 +162,6 @@ steelconsortium_cargoship:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@PRIMARY:
 		Weapon: SteelCargoshipCannons
 		LocalOffset: -150,-400,-25, -150,400,-25
@@ -301,8 +297,6 @@ steelconsortium_empressstation:
 		CanSlide: False
 	Health:
 		HP: 1500000
-	ChangesHealth@SelfHealing:
-		Step: 600
 	Shielded:
 		MaxPercentageStrength: 100
 		DamageRegenDelay: 125
@@ -363,8 +357,6 @@ steelconsortium_skyhammer:
 		HP: 120000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Shielded:
 		MaxPercentageStrength: 200
 		DamageRegenDelay: 125
@@ -458,8 +450,6 @@ steelconsortium_cloudbreaker:
 		HP: 250000
 	Repairable:
 		HpPerStep: 12500
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Shielded:
 		MaxPercentageStrength: 100
 		DamageRegenDelay: 125
@@ -550,8 +540,6 @@ cruiser_f.steel:
 		TakeUpCellWhenLand: false
 	Health:
 		HP: 37500
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Shielded:
 		MaxPercentageStrength: 200
 		DamageRegenDelay: 125

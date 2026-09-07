@@ -32,8 +32,6 @@ ts_gdi_orcafighter:
 		HP: 62500
 	Repairable:
 		HpPerStep: 3125
-	ChangesHealth@SelfHealing:
-		Step: 25
 	Armament@PRIMARY:
 		Weapon: TSHellfire
 		LocalOffset: 0,0,0
@@ -106,8 +104,6 @@ ts_gdi_zoneorcafighter:
 		HP: 70000
 	Repairable:
 		HpPerStep: 3500
-	ChangesHealth@SelfHealing:
-		Step: 28
 	Armament@PRIMARY:
 		Weapon: TSZoneHellfire
 		LocalOffset: 0,0,0
@@ -174,8 +170,6 @@ ts_gdi_hammerhead:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Cargo:
 		ExclusiveDeploy: true
 		DeployType: opentopped
@@ -277,8 +271,6 @@ ts_gdi_orcabomber:
 		HP: 152500
 	Repairable:
 		HpPerStep: 7625
-	ChangesHealth@SelfHealing:
-		Step: 61
 	Armament@PRIMARY:
 		Weapon: TSBomb
 		LocalOffset: 0,0,0
@@ -400,8 +392,6 @@ ts_gdi_kodiakcommandship:
 		HP: 900000
 	Repairable:
 		HpPerStep: 45000
-	ChangesHealth@SelfHealing:
-		Step: 360
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: KodiakCannon

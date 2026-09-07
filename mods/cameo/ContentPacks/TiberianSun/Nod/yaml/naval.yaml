@@ -21,8 +21,6 @@ ts_nod_hover:
 		RequiresCondition: !notmobile && !disabled
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armor:
 		Type: Heavy
 	RevealsShroud:
@@ -65,8 +63,6 @@ ts_nod_cruiser:
 		TurnSpeed: 8
 	Health:
 		HP: 350000
-	ChangesHealth@SelfHealing:
-		Step: 90
 	Armor:
 		Type: Superheavy
 	Turreted@PRIMARY:
@@ -179,8 +175,6 @@ ts_nod_rayboat:
 		TurnSpeed: 45
 	Health:
 		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Armor:
 		Type: Light
 	Turreted:
@@ -237,8 +231,6 @@ ts_nod_submarine:
 		TurnSpeed: 36
 	Health:
 		HP: 140000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Armor:
 		Type: Heavy
 	Turreted:
