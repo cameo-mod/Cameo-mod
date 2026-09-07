@@ -80,6 +80,10 @@ the fog sequencing.
 - [ ] **S** Personality-specific compositions via condition-gated
   `ProvidesPrerequisite` tokens plus group tokens for OR - zero C#.
 - [ ] **M** Guerrilla as the sixth personality (many small simultaneous raids).
+- [x] **M** Phase 2 observe-only `MasterAiBotModule` and situation logging:
+  [`BotSituation.cs`](../../OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs),
+  [`AiSituationLogWriter.cs`](../../OpenRA.Mods.Cameo/Traits/AiSituationLogWriter.cs).
+  Pre-fog, record-only; no orders, conditions, or synced-state changes.
 - [ ] **M** `MasterAiBotModule`: fogged per-enemy signals, main-target scoring,
   personality choice. Switches travel as a `SetBotPersonality` order resolved by
   a synced controller trait, because bot logic may not touch synced state.

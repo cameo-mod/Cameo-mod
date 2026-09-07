@@ -854,9 +854,10 @@ allow it.
 1. **Match logging, record-only.** No behaviour change. Writes the match record (§6.2) including
    the fixed personality and the outcome. Value: the learning loop has data before any decision
    code exists, and the log schema gets exercised while it is still cheap to change.
-2. **`MasterAiBotModule`, observe-only.** Builds and publishes the snapshot; decides nothing, and
-   no module reads it yet. Logged per rebuild. This is where the signal derivations get validated
-   against replays cheaply — a wrong detector is visible in the log without touching gameplay.
+2. **`MasterAiBotModule`, observe-only (implemented).** Builds and publishes the snapshot; decides
+   nothing, and no module reads it yet. Logged per rebuild. This is intentionally pre-fog, and the
+   score omits `w_hurt` until phase 4 adds pairwise attribution. The signal derivations can be
+   validated against replays cheaply without touching gameplay.
 3. **`BotPersonalityController` + dynamic switching.** The first behaviour change. Difficulty-gated
    so the lower tiers keep today's fixed personality.
 4. **Main target selection**, consumed by the squad managers and support powers.

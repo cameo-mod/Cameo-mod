@@ -12,11 +12,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using OpenRA.Graphics;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -35,16 +32,12 @@ namespace OpenRA.Mods.Cameo.Traits
 
 	public class AiMatchLogWriter : IWorldLoaded, IGameOver, ITick
 	{
-		enum AppendResult { Appended, RetryableFailure, Failed }
-
 		readonly AiMatchLogWriterInfo info;
 
 		string fallbackGameUid;
 		string pendingText;
-		string filePath;
-		string mutexName;
+		AiLogFileAppender appender;
 		bool written;
-		int attempts;
 		int nextAttemptTick;
 
 		public AiMatchLogWriter(AiMatchLogWriterInfo info)
@@ -55,13 +48,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		void IWorldLoaded.WorldLoaded(World world, WorldRenderer worldRenderer)
 		{
 			fallbackGameUid = Guid.NewGuid().ToString("N");
-			filePath = Path.Combine(Platform.SupportDir, "Logs", info.FileName);
-			var canonicalPath = Path.GetFullPath(filePath);
-			if (OperatingSystem.IsWindows())
-				canonicalPath = canonicalPath.ToUpperInvariant();
-
-			mutexName = "OpenRA-CameoAiMatchLog-" + Convert.ToHexString(
-				SHA256.HashData(Encoding.UTF8.GetBytes(canonicalPath)));
+			appender = new AiLogFileAppender(info.FileName);
 		}
 
 		void ITick.Tick(Actor self)
@@ -110,55 +97,11 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void TryAppend(int worldTick)
 		{
-			attempts++;
-			var result = Append(pendingText);
-			if (result != AppendResult.RetryableFailure || attempts >= 8)
+			var result = appender.TryAppend(pendingText, worldTick, out nextAttemptTick);
+			if (result != AiLogAppendResult.RetryableFailure || appender.IsTerminal)
 			{
 				written = true;
 				return;
-			}
-
-			nextAttemptTick = worldTick + Math.Min(1 << Math.Min(attempts - 1, 5), 30);
-		}
-
-		AppendResult Append(string text)
-		{
-			Mutex mutex = null;
-			try
-			{
-				mutex = new Mutex(false, mutexName);
-				try
-				{
-					if (!mutex.WaitOne(TimeSpan.FromMilliseconds(100)))
-						return AppendResult.RetryableFailure;
-				}
-				catch (AbandonedMutexException)
-				{
-				}
-
-				try
-				{
-					Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-					File.AppendAllText(filePath, text, new UTF8Encoding(false));
-					return AppendResult.Appended;
-				}
-				catch
-				{
-					return AppendResult.Failed;
-				}
-				finally
-				{
-					try { mutex.ReleaseMutex(); }
-					catch { }
-				}
-			}
-			catch
-			{
-				return AppendResult.Failed;
-			}
-			finally
-			{
-				mutex?.Dispose();
 			}
 		}
 
