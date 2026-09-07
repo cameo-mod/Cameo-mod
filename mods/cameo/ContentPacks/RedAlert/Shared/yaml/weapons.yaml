@@ -745,7 +745,7 @@ ZeroFighterChainGun:
 			Spaceship: 57
 			Superheavy: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ZeroFighterBullet_MediumFriendly: AreaDamage
+	Warhead@ZeroFighterBullet_MediumFriendlyFire: AreaDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -783,15 +783,12 @@ ZeroFighterChainGunWaveforce:
 	Inherits@3: ZeroFighterChainGun
 	Inherits@4: ^WaveforceBulletProjectile
 	Inherits@compat: ^ZeroFighterWaveforceBulletCompatibility
-	Warhead@Bullet_Medium:
-		PercentageScale: 6667
-	Projectile: Bullet
-		-LaunchAngle:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 9000
+		PercentageScale: 6667
+	-Warhead@Bullet_Medium:
+	-Warhead@ZeroFighterBullet_Medium:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
