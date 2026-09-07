@@ -3,6 +3,19 @@
 _Entry point for a new session: **[`docs/HANDOFF.md`](../HANDOFF.md)**. This file is the
 granular, resumable task queue that the handoff points into._
 
+## Balance apply failure safety (2026-09-07)
+
+- [x] Repair `apply_balance.py` confirmation: reject incomplete plans, validate
+  provenance/shared consumers, stage extraction outside proposal ledgers, propagate
+  failed subprocesses, and restore transaction-owned writes on failure.
+- [x] Add failure-injection regressions and verify an unchanged live faction dry run.
+
+The former writer could save YAML despite planning errors, invoke the extractor
+with an obsolete positional argument, and report success after subprocess failure.
+The repair is independently reviewed; balance targets still require the normal
+sign-off and boot gates. Evidence and delivery status are in
+`docs/audit/ASTRA_REVIEW.md`.
+
 ## AI PERSONALITY SELECTOR (2026-08-21)
 
 - [x] Add synchronized random Rush/Turtle/Tech/Expansion/Steamroller selection
@@ -26,8 +39,9 @@ granular, resumable task queue that the handoff points into._
 
 ## AI ARCHITECTURE (2026-08-31)
 
-Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Nothing here is implemented; the
-design document is the deliverable so far. Ordered so each item is independently
+Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Record-only completed-match telemetry
+is implemented on the follow-up branch; adaptive decision behavior remains proposed.
+Ordered so each item is independently
 verifiable. §10 of the design is the module-by-module build plan: what every loaded
 bot module owns, what it reads from the master's snapshot, and the phase order
 (logging → observe-only master → switching → targeting → hints → fog → learning),
@@ -58,9 +72,11 @@ the fog sequencing.
   a synced controller trait, because bot logic may not touch synced state.
 - [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
   cannot attribute losses to a specific opponent).
-- [ ] **M** JSONL match logging: match / decision / outcome records, the episode
-  as the unit of learning. Record-only, no behaviour change - this is the
-  proof-of-concept deliverable.
+- [x] **M** Phase-one JSONL completed-match logging, active Player/World observation
+  traits with no decision changes. Runtime match, replay exclusion and menu gates
+  are documented in `docs/audit/ASTRA_REVIEW.md`; pending coordinator publication review.
+- [ ] **M** Decision / outcome episode records and pairwise composition attribution.
+  Match outcomes alone do not implement the episode-based learning contract.
 - [ ] **M** Offline aggregation tool: personality and composition performance per
   faction matchup, with a minimum sample threshold.
 - [ ] **L** Bandit-style (UCB1/Thompson) personality priors per matchup, fitted
