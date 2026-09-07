@@ -8087,17 +8087,17 @@ CPQDEBUGDUMMY:
 	Power:
 		Amount: -10
 	RallyPoint:
-		ForceSetType: ra1_soviets_actordogname
+		ForceSetType: ra1_soviets_attackdog
 	Production@NORMAL:
-		Produces: Infantry, ra1_soviets_actordogname
+		Produces: Infantry, ra1_soviets_attackdog
 		RequiresCondition: !classicproductionqueues
 	Production@CLASSICPRODUCTIONQUEUES:
-		Produces: RAInfantry, ra1_soviets_actordogname
+		Produces: RAInfantry, ra1_soviets_attackdog
 		RequiresCondition: classicproductionqueues
 	Production:
-		Produces: ra1_soviets_actordogname
+		Produces: ra1_soviets_attackdog
 	ProductionQueue@INFANTRY:
-		Type: ra1_soviets_actordogname
+		Type: ra1_soviets_attackdog
 		DisplayOrder: 2
 		Group: Infantry
 		LowPowerModifier: 300
@@ -8112,27 +8112,27 @@ CPQDEBUGDUMMY:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: -1,1
-		ProductionTypes: ra1_soviets_actordogname, Infantry, RAInfantry
+		ProductionTypes: ra1_soviets_attackdog, Infantry, RAInfantry
 		Priority: 3
 	Exit@1:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: 0,1
-		ProductionTypes: ra1_soviets_actordogname, Infantry, RAInfantry
+		ProductionTypes: ra1_soviets_attackdog, Infantry, RAInfantry
 		Priority: 2
 	Exit@2:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: -1,0
-		ProductionTypes: ra1_soviets_actordogname, Infantry, RAInfantry
+		ProductionTypes: ra1_soviets_attackdog, Infantry, RAInfantry
 		Priority: 2
 	CommandBarBlacklist:
 		DisableStop: false
 	ProductionBar@INFANTRY:
-		ProductionType: ra1_soviets_actordogname
+		ProductionType: ra1_soviets_attackdog
 		RequiresCondition: !classicproductionqueues
 	ProductionBar@RAINFANTRY:
-		ProductionType: ra1_soviets_actordogname
+		ProductionType: ra1_soviets_attackdog
 		RequiresCondition: classicproductionqueues
 
 ^IsWeaponFactory:

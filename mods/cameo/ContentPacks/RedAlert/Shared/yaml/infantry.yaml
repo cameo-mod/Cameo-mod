@@ -22,7 +22,7 @@ ra1_allies_rifleinfantry:
 	FirepowerMultiplier@ra1_allies_rifleinfantry:
 		Modifier: 47
 	Buildable:
-		Prerequisites: ~ra1_allies_alliedbarracks
+		Prerequisites: ~ra1_allies_barracks
 		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY:
 		Weapon: ra1_allies_rifleinfantry_carbine
@@ -108,7 +108,7 @@ ra1_soviets_molotovconscript:
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscriptiondoctrine, ra1_soviets_upgrade_vengeance, ra1_soviets_upgrade_menofsteel
 
-ra1_allies_alliedrocketsoldier:
+ra1_allies_rocketsoldier:
 	Inherits: ^RA1AlliesAlliedRocketSoldier
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
@@ -117,7 +117,7 @@ ra1_allies_alliedrocketsoldier:
 	Tooltip:
 		Name: Allied Rocket Soldier
 	Buildable:
-		Prerequisites: ~ra1_allies_alliedbarracks
+		Prerequisites: ~ra1_allies_barracks
 		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Armament@PRIMARY:
 		Weapon: RocketsRA

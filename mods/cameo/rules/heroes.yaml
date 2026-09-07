@@ -704,7 +704,7 @@ ra1_soviets_volkov:
 	GrantConditionOnPrerequisite@poweroff:
 		Prerequisites: !volkovcontrol
 		Condition: nocc
-	MobSpawnerMaster@ra1_soviets_actordogname:
+	MobSpawnerMaster@ra1_soviets_attackdog:
 		Actors: CHITZKOI
 		Offset: 0,0,0
 		RespawnTicks: 5000
@@ -753,7 +753,7 @@ RA2HTANY:
 	Buildable:
 		Queue: Heroes
 		BuildPaletteOrder: 120
-		Prerequisites: ra2_allies_alliedbattlelab, ~anyalliesallra, !1hero
+		Prerequisites: ra2_allies_battlelab, ~anyalliesallra, !1hero
 		BuildLimit: 1
 		Description: Elite amphibious commando infantry with dual laser guns, C4 and Knife.\nCan plant timed bombs on vehicles\nCan demolish buildings with C4\nCan use Chrono teleportation\nMaximum 1 can be trained\n Strong vs Infantry, Buildings, Vehicles\n Weak vs Aircraft\n\nTip:\nClick or use F key to switch weaponry\nUse Alt+Click for chrono teleportation
 		Icon: iconchrono

@@ -1,0 +1,36 @@
+# Nova naming-damage repair: ra1_soviets N3 (fluent-leak actordogname -> attackdog)
+# and N1 (18 doubled-token filenames). 2026-09-07.
+# N3 sprite entries appear twice: once under the pre-actor disk basename (for the
+# git mv) and once under the post-actor text form (to collapse the doubled ref
+# the actor substitution produces).
+actors:
+	ra1_soviets_actordogname: ra1_soviets_attackdog
+files:
+	# --- N3 sprites (disk names, pre-actor-rename) ---
+	ra1_soviets_actordogname.shp: ra1_soviets_attackdog.shp
+	ra1_soviets_actordogname_icon.shp: ra1_soviets_attackdog_icon.shp
+	ra1_soviets_actordogname_ra1_soviets_attackdog_dogbullt.shp: ra1_soviets_attackdog_dogbullt.shp
+	ra1_soviets_actordogname_ra1_soviets_attackdog_electdog.shp: ra1_soviets_attackdog_electdog.shp
+	# --- N3 doubled refs as they appear in text AFTER the actor pass ---
+	ra1_soviets_attackdog_ra1_soviets_attackdog_dogbullt.shp: ra1_soviets_attackdog_dogbullt.shp
+	ra1_soviets_attackdog_ra1_soviets_attackdog_electdog.shp: ra1_soviets_attackdog_electdog.shp
+	# --- N1 doubled-token filenames ---
+	ra1_soviets_btr80_ra1_soviets_btr80_new_btr.shp: ra1_soviets_btr80_new_btr.shp
+	ra1_soviets_btr80_ra1_soviets_btr80_apcmuz.shp: ra1_soviets_btr80_apcmuz.shp
+	ra1_soviets_flametower_ra1_soviets_flametower_fturmake.shp: ra1_soviets_flametower_fturmake.shp
+	ra1_soviets_grad_ra1_soviets_grad_gradturret.png: ra1_soviets_grad_gradturret.png
+	ra1_soviets_hiptransport_ra1_soviets_hiptransport_hindrotor.shp: ra1_soviets_hiptransport_hindrotor.shp
+	ra1_soviets_hiptransport_ra1_soviets_hiptransport_glhipmissx2.shp: ra1_soviets_hiptransport_glhipmissx2.shp
+	ra1_soviets_hiptransport_ra1_soviets_hiptransport_glhipmissx4.shp: ra1_soviets_hiptransport_glhipmissx4.shp
+	ra1_soviets_hiptransport_ra1_soviets_hiptransport_glhipmissx8.shp: ra1_soviets_hiptransport_glhipmissx8.shp
+	ra1_soviets_ironcurtain_ra1_soviets_ironcurtain_make.shp: ra1_soviets_ironcurtain_make.shp
+	ra1_soviets_kamovattackhelicopter_ra1_soviets_kamovattackhelicopter_kamovrotor.shp: ra1_soviets_kamovattackhelicopter_kamovrotor.shp
+	ra1_soviets_largesovietairfield_ra1_soviets_largesovietairfield_largeairfield_flag.shp: ra1_soviets_largesovietairfield_largeairfield_flag.shp
+	ra1_soviets_largesovietairfield_ra1_soviets_largesovietairfield_largeairfield_light.shp: ra1_soviets_largesovietairfield_largeairfield_light.shp
+	ra1_soviets_largesovietairfield_ra1_soviets_largesovietairfield_largeairfield_make.shp: ra1_soviets_largesovietairfield_largeairfield_make.shp
+	ra1_soviets_promotion_parabombslevel3_ra1_soviets_promotion_parabombslevel3_badr.shp: ra1_soviets_promotion_parabombslevel3_badr.shp
+	ra1_soviets_teslacoil_ra1_soviets_teslacoil_make.shp: ra1_soviets_teslacoil_make.shp
+	# mixed-id pairs: owner is the sequence actor, not the prepended id
+	ra1_soviets_supersonicnuclearbomber_ra1_soviets_promotion_supersonicnuclearbomber_u2.shp: ra1_soviets_supersonicnuclearbomber_u2.shp
+	ra1_soviets_upgrade_heavyteslatankupgrade_ra1_soviets_heavyteslatank_heavyteslachass.png: ra1_soviets_heavyteslatank_heavyteslachass.png
+	ra1_soviets_upgrade_heavyteslatankupgrade_ra1_soviets_heavyteslatank_teslaballweap.png: ra1_soviets_heavyteslatank_teslaballweap.png

@@ -31,7 +31,7 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
-		BaseActor: ra2_allies_alliedmobileconstructionvehicle
+		BaseActor: ra2_allies_mobileconstructionvehicle
 	StartingUnits@mcvra2soviets:
 		Class: none
 		ClassName: MCV Only
@@ -46,13 +46,13 @@ World:
 		Class: light
 		ClassName: Light Support
 		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
-		BaseActor: ra2_allies_alliedmobileconstructionvehicle
+		BaseActor: ra2_allies_mobileconstructionvehicle
 		SupportActors: ra2_allies_gi,ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_ifv,ra2_allies_grizzlytank
 	StartingUnits@heavyra2allies:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
-		BaseActor: ra2_allies_alliedmobileconstructionvehicle
+		BaseActor: ra2_allies_mobileconstructionvehicle
 		SupportActors: ra2_allies_gi,ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_ifv,ra2_allies_grizzlytank,ra2_allies_grizzlytank,ra2_allies_grizzlytank,ra2_allies_tankdestroyer,ra2_allies_ifv
 	StartingUnits@defaultra2soviets:
 		Class: light
@@ -529,9 +529,9 @@ ra2gacnst.infiltrated:
 	Buildable:
 		Description:
 	RenderSprites:
-		Image: ra2_allies_alliedconstructionyard
+		Image: ra2_allies_constructionyard
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: ra2_allies_alliedconstructionyard
+		Prerequisite: ra2_allies_constructionyard
 dummy_dock:
 	Interactable:
 	Reservable:
@@ -554,7 +554,7 @@ ra2gayard:
 	Tooltip:
 		Name: Allied Naval Yard
 	Buildable:
-		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedorerefinery, ~globalnaval
+		Prerequisites: ~ra2_allies_constructionyard, ra2_allies_orerefinery, ~globalnaval
 		Description: Allied Naval Yard
 	Building:
 		Footprint: =+= +++ =+=
@@ -1133,7 +1133,7 @@ ra2dlph:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2gayard, ra2_allies_alliedbattlelab
+		Prerequisites: ~ra2gayard, ra2_allies_battlelab
 		Queue: Naval, RANaval
 		Description: actor_dlph.description
 	Mobile:
@@ -1330,7 +1330,7 @@ ra2carrier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra2gayard, ra2_allies_alliedbattlelab
+		Prerequisites: ~ra2gayard, ra2_allies_battlelab
 		Queue: Naval, RANaval
 		Description: actor_ra2carrier.description
 	Selectable:
@@ -4383,7 +4383,7 @@ upra2aegismissiles:
 		BuildPaletteOrder: 70
 		Queue: Research
 		Description: Allows Aegis Cruisers to target ground targets.
-		Prerequisites: ~ra2_allies_alliedbattlelab, ~ra2gayard, !upra2aegismissiles
+		Prerequisites: ~ra2_allies_battlelab, ~ra2gayard, !upra2aegismissiles
 	RenderSprites:
 		Image: ra2_allies_aegiscruiser
 	ProvidesPrerequisite:

@@ -113,9 +113,9 @@ ra2gacnst.infiltrated:
 	Buildable:
 		Description:
 	RenderSprites:
-		Image: ra2_allies_alliedconstructionyard
+		Image: ra2_allies_constructionyard
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: ra2_allies_alliedconstructionyard
+		Prerequisite: ra2_allies_constructionyard
 dummy_dock:
 	Interactable:
 	Reservable:
@@ -138,7 +138,7 @@ ra2gayard:
 	Tooltip:
 		Name: Allied Naval Yard
 	Buildable:
-		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedorerefinery, ~globalnaval
+		Prerequisites: ~ra2_allies_constructionyard, ra2_allies_orerefinery, ~globalnaval
 		Description: Allied Naval Yard
 	Building:
 		Footprint: =+= +++ =+=
@@ -826,7 +826,7 @@ ra2dlph:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2gayard, ra2_allies_alliedbattlelab
+		Prerequisites: ~ra2gayard, ra2_allies_battlelab
 		Queue: Naval, RANaval
 		Description: actor_dlph.description
 	Mobile:
@@ -1022,7 +1022,7 @@ ra2carrier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra2gayard, ra2_allies_alliedbattlelab
+		Prerequisites: ~ra2gayard, ra2_allies_battlelab
 		Queue: Naval, RANaval
 		Description: actor_ra2carrier.description
 	Selectable:
@@ -3926,7 +3926,7 @@ upra2aegismissiles:
 		BuildPaletteOrder: 70
 		Queue: Research
 		Description: Allows Aegis Cruisers to target ground targets.
-		Prerequisites: ~ra2_allies_alliedbattlelab, ~ra2gayard, !upra2aegismissiles
+		Prerequisites: ~ra2_allies_battlelab, ~ra2gayard, !upra2aegismissiles
 	RenderSprites:
 		Image: ra2_allies_aegiscruiser
 	ProvidesPrerequisite:

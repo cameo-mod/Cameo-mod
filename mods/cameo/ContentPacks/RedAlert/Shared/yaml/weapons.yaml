@@ -1169,7 +1169,7 @@ ChronoReinforcementsSpawner:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: ra1_allies_ranger, ra1_allies_alliedlighttank, ra1_allies_alliedmediumtank, ra1_allies_sheridanassaulttank, ra1_allies_alliedtigerheavytank, ra1_allies_alliedtankdestroyer, ra1_allies_alliedartillery, ra1_allies_alliedapc
+		Actors: ra1_allies_ranger, ra1_allies_lighttank, ra1_allies_mediumtank, ra1_allies_sheridanassaulttank, ra1_allies_tigerheavytank, ra1_allies_tankdestroyer, ra1_allies_artillery, ra1_allies_apc
 		Range: 5
 		Image: ra2_allies_chronominer
 		Sequence: warpout
@@ -1182,7 +1182,7 @@ ChronoAI:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: ra1_allies_ranger, ra1_allies_alliedlighttank, ra1_allies_alliedmediumtank, ra1_allies_sheridanassaulttank, ra1_allies_alliedtigerheavytank, ra1_allies_alliedtankdestroyer, ra1_allies_alliedartillery, ra1_allies_alliedapc
+		Actors: ra1_allies_ranger, ra1_allies_lighttank, ra1_allies_mediumtank, ra1_allies_sheridanassaulttank, ra1_allies_tigerheavytank, ra1_allies_tankdestroyer, ra1_allies_artillery, ra1_allies_apc
 		Range: 5
 		ValidTargets: Air, Ground, Water
 

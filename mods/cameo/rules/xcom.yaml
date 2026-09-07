@@ -1063,7 +1063,7 @@ xcom_barracks:
 	Valued:
 		Cost: 500
 	RenderSprites:
-		Image: ra2_allies_alliedbarracks
+		Image: ra2_allies_barracks
 
 xcom_officer_training_school:
 	Inherits: ^ResearchedUpgradeTemplate
@@ -1135,7 +1135,7 @@ xcom_satellite_uplink:
 	Valued:
 		Cost: 1000
 	RenderSprites:
-		Image: ra1_allies_alliedtechcenter
+		Image: ra1_allies_techcenter
 
 xcom_satellite_nexus:
 	Inherits: ^ResearchedUpgradeTemplate
@@ -1314,7 +1314,7 @@ xcom_builder:
 		Condition: moving
 
 xcom_buildable_turret:
-	Inherits: ra1_allies_alliedgunturret
+	Inherits: ra1_allies_gunturret
 	Buildable:
 		Queue: Builder
 		Prerequisites: ~xcomhq
@@ -1326,4 +1326,4 @@ xcom_buildable_turret:
 		Amount: 0
 	InstantlyPlaced:
 	RenderSprites:
-		Image: ra1_allies_alliedgunturret
+		Image: ra1_allies_gunturret

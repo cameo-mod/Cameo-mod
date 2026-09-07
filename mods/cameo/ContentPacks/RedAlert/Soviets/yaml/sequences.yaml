@@ -1,6 +1,6 @@
 ra1_soviets_mortarsoldier:
 	Defaults:
-		Filename: ra1_soviets_promotion_unlockmortarsoldier_ra1_soviets_promotion_mortarsoldier_mortarsoldier.shp
+		Filename: ra1_soviets_promotion_mortarsoldier_mortarsoldier.shp
 		Scale: 1.6
 	stand:
 		Facings: 8
@@ -114,9 +114,9 @@ ra1_soviets_flamethrower:
 	icon:
 		Filename: ra1_soviets_flamethrower_icon.png
 
-ra1_soviets_actordogname:
+ra1_soviets_attackdog:
 	Defaults:
-		Filename: ra1_soviets_actordogname.shp
+		Filename: ra1_soviets_attackdog.shp
 	stand:
 		Facings: 8
 	walk:
@@ -158,11 +158,11 @@ ra1_soviets_actordogname:
 		Start: 251
 		Length: 14
 	die6:
-		Filename: ra1_soviets_actordogname_ra1_soviets_attackdog_electdog.shp
+		Filename: ra1_soviets_attackdog_electdog.shp
 		Scale: 2
 		Length: *
 	die7:
-		Filename: ra1_soviets_actordogname_ra1_soviets_attackdog_electdog.shp
+		Filename: ra1_soviets_attackdog_electdog.shp
 		Scale: 2
 		Length: *
 	die-crushed:
@@ -171,14 +171,14 @@ ra1_soviets_actordogname:
 		Tick: 1600
 		ZOffset: -511
 	shoot:
-		Filename: ra1_soviets_actordogname_ra1_soviets_attackdog_dogbullt.shp
+		Filename: ra1_soviets_attackdog_dogbullt.shp
 		Length: 4
 		Facings: 8
 	icon:
-		Filename: ra1_soviets_actordogname_icon.shp
+		Filename: ra1_soviets_attackdog_icon.shp
 
 ra1_soviets_cyberdog:
-	Inherits: ra1_soviets_actordogname
+	Inherits: ra1_soviets_attackdog
 	Defaults:
 		Filename: ra1_soviets_promotion_cyberdog.shp
 		Scale: 1.25
@@ -570,7 +570,7 @@ ra1_soviets_grad:
 				FlipX: True
 				Frames: 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 	turret:
-		Filename: ra1_soviets_grad_ra1_soviets_grad_gradturret.png
+		Filename: ra1_soviets_grad_gradturret.png
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
@@ -623,15 +623,15 @@ ra1_soviets_teslatank:
 
 ra1_soviets_heavyteslatank:
 	Defaults:
-		Filename: ra1_soviets_upgrade_heavyteslatankupgrade_ra1_soviets_heavyteslatank_heavyteslachass.png
+		Filename: ra1_soviets_heavyteslatank_heavyteslachass.png
 	idle:
 		Facings: 64
 		#Offset: -2,8
 	spinner:
-		Filename: ra1_soviets_upgrade_heavyteslatankupgrade_ra1_soviets_heavyteslatank_teslaballweap.png
+		Filename: ra1_soviets_heavyteslatank_teslaballweap.png
 		Length: 32
 	small_spinner:
-		Filename: ra1_soviets_upgrade_heavyteslatankupgrade_ra1_soviets_heavyteslatank_teslaballweap.png
+		Filename: ra1_soviets_heavyteslatank_teslaballweap.png
 		Length: 32
 		Scale: 0.5
 	icon:
@@ -639,7 +639,7 @@ ra1_soviets_heavyteslatank:
 
 ra1_soviets_heatraytank:
 	Defaults:
-		Filename: ra1_soviets_upgrade_unlockheatraytank_ra1_soviets_upgrade_heatraytank_sovietlasertankspritesheet.png
+		Filename: ra1_soviets_upgrade_heatraytank_sovietlasertankspritesheet.png
 	idle:
 		Facings: 32
 		#Offset: -2,8
@@ -686,7 +686,7 @@ ra1_soviets_madtank:
 
 ra1_soviets_gatlingtank:
 	Defaults:
-		Filename: ra1_soviets_promotion_unlockgatlingtank_ra1_soviets_promotion_gatlingtank_ragattlingtank.shp
+		Filename: ra1_soviets_promotion_gatlingtank_ragattlingtank.shp
 	idle:
 		Facings: 64
 	turret:
@@ -701,7 +701,7 @@ ra1_soviets_gatlingtank:
 
 ra1_soviets_btr80:
 	Defaults:
-		Filename: ra1_soviets_btr80_ra1_soviets_btr80_new_btr.shp
+		Filename: ra1_soviets_btr80_new_btr.shp
 	idle:
 		Scale: 1.555
 		Facings: 64
@@ -710,7 +710,7 @@ ra1_soviets_btr80:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: ra1_soviets_btr80_ra1_soviets_btr80_apcmuz.shp
+		Filename: ra1_soviets_btr80_apcmuz.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -892,27 +892,27 @@ ra1_soviets_largesovietairfield:
 		ZOffset: -1023
 		Offset: 0,-6
 	active:
-		Filename: ra1_soviets_largesovietairfield_ra1_soviets_largesovietairfield_largeairfield_light.shp
+		Filename: ra1_soviets_largesovietairfield_largeairfield_light.shp
 		Length: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	damaged-active:
-		Filename: ra1_soviets_largesovietairfield_ra1_soviets_largesovietairfield_largeairfield_light.shp
+		Filename: ra1_soviets_largesovietairfield_largeairfield_light.shp
 		Start: 8
 		Length: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	flag:
-		Filename: ra1_soviets_largesovietairfield_ra1_soviets_largesovietairfield_largeairfield_flag.shp
+		Filename: ra1_soviets_largesovietairfield_largeairfield_flag.shp
 		Length: 8
 		ShadowStart: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	make:
-		Filename: ra1_soviets_largesovietairfield_ra1_soviets_largesovietairfield_largeairfield_make.shp
+		Filename: ra1_soviets_largesovietairfield_largeairfield_make.shp
 		Length: *
 		Offset: 0,-6
 	dead:
@@ -962,7 +962,7 @@ ra1_soviets_flametower:
 		Start: 1
 		Offset: 0,-2
 	make:
-		Filename: ra1_soviets_flametower_ra1_soviets_flametower_fturmake.shp
+		Filename: ra1_soviets_flametower_fturmake.shp
 		Length: *
 		Offset: 0,-2
 	dead:
@@ -979,7 +979,7 @@ ra1_soviets_teslacoil:
 	damaged-idle:
 		Start: 10
 	make:
-		Filename: ra1_soviets_teslacoil_ra1_soviets_teslacoil_make.shp
+		Filename: ra1_soviets_teslacoil_make.shp
 		Length: *
 	active:
 		Start: 1
@@ -1012,7 +1012,7 @@ ra1_soviets_ironcurtain:
 		Offset: 0,-0
 	dead:
 	make:
-		Filename: ra1_soviets_ironcurtain_ra1_soviets_ironcurtain_make.shp
+		Filename: ra1_soviets_ironcurtain_make.shp
 		Length: *
 		Offset: 0,-0
 	bib:
@@ -1077,7 +1077,7 @@ ra1_soviets_migattackbomber:
 
 ra1_soviets_supersonicnuclearbomber:
 	Defaults:
-		Filename: ra1_soviets_supersonicnuclearbomber_ra1_soviets_promotion_supersonicnuclearbomber_u2.shp
+		Filename: ra1_soviets_supersonicnuclearbomber_u2.shp
 		Scale: 1.25
 	idle:
 		Facings: 16
@@ -1100,7 +1100,7 @@ ra1_soviets_yakscoutplane:
 
 ra1_soviets_teslayak:
 	Defaults:
-		Filename: ra1_soviets_upgrade_unlockteslayak_ra1_soviets_teslayak_soviets_yaktesla.png
+		Filename: ra1_soviets_teslayak_soviets_yaktesla.png
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1113,7 +1113,7 @@ ra1_soviets_teslayak:
 
 ra1_soviets_armoredyak:
 	Defaults:
-		Filename: ra1_soviets_upgrade_unlockarmoredyak_ra1_soviets_armoredyak_soviets_yakarmored.png
+		Filename: ra1_soviets_armoredyak_soviets_yakarmored.png
 	idle:
 		Facings: 16
 		Length: 3
@@ -1147,10 +1147,10 @@ ra1_soviets_hindattackhelicopter:
 		Facings: 32
 		InterpolatedFacings: 64
 	rotor:
-		Filename: ra1_soviets_hiptransport_ra1_soviets_hiptransport_hindrotor.shp
+		Filename: ra1_soviets_hiptransport_hindrotor.shp
 		Length: 4
 	slow-rotor:
-		Filename: ra1_soviets_hiptransport_ra1_soviets_hiptransport_hindrotor.shp
+		Filename: ra1_soviets_hiptransport_hindrotor.shp
 		Start: 4
 		Length: 8
 	muzzle:
@@ -1168,25 +1168,25 @@ ra1_soviets_kamovattackhelicopter:
 		Facings: 64
 		# InterpolatedFacings: 64
 	rotor:
-		Filename: ra1_soviets_kamovattackhelicopter_ra1_soviets_kamovattackhelicopter_kamovrotor.shp
+		Filename: ra1_soviets_kamovattackhelicopter_kamovrotor.shp
 		Frames: 0,1,2,3
 		Scale: 1.5
 		Length: 4
 	rotor2:
-		Filename: ra1_soviets_kamovattackhelicopter_ra1_soviets_kamovattackhelicopter_kamovrotor.shp
+		Filename: ra1_soviets_kamovattackhelicopter_kamovrotor.shp
 		Frames: 3,2,1,0
 		Scale: 1.5
 		Length: 4
 		FlipX: True
 		FlipY: True
 	slow-rotor:
-		Filename: ra1_soviets_kamovattackhelicopter_ra1_soviets_kamovattackhelicopter_kamovrotor.shp
+		Filename: ra1_soviets_kamovattackhelicopter_kamovrotor.shp
 		Frames: 4,5,6,7,8,9,10
 		Scale: 1.5
 		# Start: 4
 		Length: 7
 	slow-rotor2:
-		Filename: ra1_soviets_kamovattackhelicopter_ra1_soviets_kamovattackhelicopter_kamovrotor.shp
+		Filename: ra1_soviets_kamovattackhelicopter_kamovrotor.shp
 		Frames: 10,9,8,7,6,5,4
 		Scale: 1.5
 		# Start: 4
@@ -1207,11 +1207,11 @@ ra1_soviets_hiptransport:
 	idle:
 		Facings: 64
 	rotor:
-		Filename: ra1_soviets_hiptransport_ra1_soviets_hiptransport_hindrotor.shp
+		Filename: ra1_soviets_hiptransport_hindrotor.shp
 		Length: 4
 		Scale: 1.75
 	slow-rotor:
-		Filename: ra1_soviets_hiptransport_ra1_soviets_hiptransport_hindrotor.shp
+		Filename: ra1_soviets_hiptransport_hindrotor.shp
 		Start: 4
 		Length: 8
 		Scale: 1.75
@@ -1222,11 +1222,11 @@ ra1_soviets_hiptransport:
 	icon:
 		Filename: ra1_soviets_hiptransport_icon.png
 	pscchhip1:
-		Filename: ra1_soviets_hiptransport_ra1_soviets_hiptransport_glhipmissx2.shp
+		Filename: ra1_soviets_hiptransport_glhipmissx2.shp
 	pscchhip2:
-		Filename: ra1_soviets_hiptransport_ra1_soviets_hiptransport_glhipmissx4.shp
+		Filename: ra1_soviets_hiptransport_glhipmissx4.shp
 	pscchhip3:
-		Filename: ra1_soviets_hiptransport_ra1_soviets_hiptransport_glhipmissx8.shp
+		Filename: ra1_soviets_hiptransport_glhipmissx8.shp
 
 ra1_soviets_su57attackbomber:
 	Defaults:
@@ -1279,11 +1279,11 @@ ra1_soviets_hammertank:
 		Scale: 0.5
 	idle:
 		Scale: 1
-		Filename: ra1_soviets_upgrade_hammertankupgrade_ra1_soviets_upgrade_hammertank_soviethammertankchassis.png
+		Filename: ra1_soviets_upgrade_hammertank_soviethammertankchassis.png
 		Facings: 32
 	turret:
 		Scale: 1
-		Filename: ra1_soviets_upgrade_hammertankupgrade_ra1_soviets_upgrade_hammertank_soviethammertankturret.png
+		Filename: ra1_soviets_upgrade_hammertank_soviethammertankturret.png
 		Facings: 32
 	muzzle:
 		Filename: gunfire2.shp
@@ -1297,11 +1297,11 @@ ra1_soviets_kotinnucleartank:
 		Scale: 0.9
 	idle:
 		Scale: 1
-		Filename: ra1_soviets_upgrade_kotinnucleartankupgrade_ra1_soviets_upgrade_kotinnucleartank_kotinchassisspritesheet.png
+		Filename: ra1_soviets_upgrade_kotinnucleartank_kotinchassisspritesheet.png
 		Facings: 64
 	turret:
 		Scale: 1
-		Filename: ra1_soviets_upgrade_kotinnucleartankupgrade_ra1_soviets_upgrade_kotinnucleartank_kotinturret2spritesheet.png
+		Filename: ra1_soviets_upgrade_kotinnucleartank_kotinturret2spritesheet.png
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
@@ -1313,12 +1313,12 @@ ra1_soviets_kotinnucleartank:
 ra1_soviets_monstertank:
 	Defaults:
 	idle:
-		Filename: ra1_soviets_promotion_unlockmonstertank_ra1_soviets_promotion_monstertank_blackmamchassisspritesheet.png
+		Filename: ra1_soviets_promotion_monstertank_blackmamchassisspritesheet.png
 		Facings: 64
 		ZOffset: 512
 		Scale: 1.6
 	turret:
-		Filename: ra1_soviets_promotion_unlockmonstertank_ra1_soviets_promotion_monstertank_blackmamturretspritesheet.png
+		Filename: ra1_soviets_promotion_monstertank_blackmamturretspritesheet.png
 		Facings: 64
 		ZOffset: 512
 		Scale: 1.8

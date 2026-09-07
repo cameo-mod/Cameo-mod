@@ -1,4 +1,4 @@
-ra1_soviets_actordogname:
+ra1_soviets_attackdog:
 	Inherits: ^DefaultInfantry
 	Inherits@2: ^AffectedByTiberium
 	Inherits@detect: ^GenericGroundDetector
@@ -15,7 +15,7 @@ ra1_soviets_actordogname:
 		Cost: 200
 	Tooltip:
 		Name: actor_dog.name
-		GenericName: ra1_soviets_actordogname
+		GenericName: ra1_soviets_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:

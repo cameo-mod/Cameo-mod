@@ -1,150 +1,150 @@
-ra2_allies_alliedconstructionyard:
+ra2_allies_constructionyard:
 	Defaults:
 		Offset: 2,-26
 	idle:
-		Filename: ra2_allies_alliedconstructionyard_ggcnst.shp
+		Filename: ra2_allies_constructionyard_ggcnst.shp
 		ShadowStart: 3
 	make:
-		Filename: ra2_allies_alliedconstructionyard_make.shp
+		Filename: ra2_allies_constructionyard_make.shp
 		Length: 29
 		ShadowStart: 29
 	dead:
-		Filename: ra2_allies_alliedconstructionyard_ggcnst.shp
+		Filename: ra2_allies_constructionyard_ggcnst.shp
 	build:
 		Filename: invisibleitem.shp
 	damaged-idle:
-		Filename: ra2_allies_alliedconstructionyard_ggcnst.shp
+		Filename: ra2_allies_constructionyard_ggcnst.shp
 		Start: 1
 		ShadowStart: 4
 	idle-fans:
-		Filename: ra2_allies_alliedconstructionyard_ggcnst_a.shp
+		Filename: ra2_allies_constructionyard_ggcnst_a.shp
 		Length: 6
 		Tick: 150
 	damaged-idle-fans:
-		Filename: ra2_allies_alliedconstructionyard_ggcnst_a.shp
+		Filename: ra2_allies_constructionyard_ggcnst_a.shp
 		Start: 5
 		Length: 6
 		Tick: 150
 	crane-overlay:
-		Filename: ra2_allies_alliedconstructionyard_ggcnst_b.shp
+		Filename: ra2_allies_constructionyard_ggcnst_b.shp
 		Length: 20
 		Tick: 150
 	damaged-crane-overlay:
-		Filename: ra2_allies_alliedconstructionyard_ggcnst_b.shp
+		Filename: ra2_allies_constructionyard_ggcnst_b.shp
 		Start: 20
 		Length: 20
 		Tick: 150
 	dead:
-		Filename: ra2_allies_alliedconstructionyard_ggcnstdm.shp
+		Filename: ra2_allies_constructionyard_ggcnstdm.shp
 		Length: 30
 		ShadowStart: 30
 		Tick: 90
 	icon:
-		Filename: ra2_allies_alliedconstructionyard_icon.png
+		Filename: ra2_allies_constructionyard_icon.png
 		Offset: 0,0
 
-ra2_allies_alliedbarracks:
+ra2_allies_barracks:
 	Defaults:
 		Offset: -15,10
 	build:
 		Filename: invisibleitem.shp
 	idle:
-		Filename: ra2_allies_alliedbarracks_ggpile.shp
+		Filename: ra2_allies_barracks_ggpile.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_allies_alliedbarracks_ggpile.shp
+		Filename: ra2_allies_barracks_ggpile.shp
 		Start: 1
 		ShadowStart: 4
 	idle-flag:
-		Filename: ra2_allies_alliedbarracks_ggpile_a.shp
+		Filename: ra2_allies_barracks_ggpile_a.shp
 		Length: 16
 	damaged-idle-flag:
-		Filename: ra2_allies_alliedbarracks_ggpile_a.shp
+		Filename: ra2_allies_barracks_ggpile_a.shp
 		Start: 16
 		Length: 16
 		ShadowStart: 48
 	make:
-		Filename: ra2_allies_alliedbarracks_make.shp
+		Filename: ra2_allies_barracks_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_allies_alliedbarracks_ggpiledm.shp # SHP broken & unused
+		Filename: ra2_allies_barracks_ggpiledm.shp # SHP broken & unused
 		Length: 25
 		ShadowStart: 25
 		Tick: 75
 		Offset: 10,15
 	icon:
-		Filename: ra2_allies_alliedbarracks_icon.shp
+		Filename: ra2_allies_barracks_icon.shp
 		Offset: 0,0
 
-ra2_allies_alliedpowerplant:
+ra2_allies_powerplant:
 	Defaults:
 		Offset: 0,-2
 	idle:
-		Filename: ra2_allies_alliedpowerplant_ggpowr.shp
+		Filename: ra2_allies_powerplant_ggpowr.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_allies_alliedpowerplant_ggpowr.shp
+		Filename: ra2_allies_powerplant_ggpowr.shp
 		Start: 1
 		ShadowStart: 4
 	idle-glow:
-		Filename: ra2_allies_alliedpowerplant_ggpowr_a.shp
+		Filename: ra2_allies_powerplant_ggpowr_a.shp
 		Length: 8
 		ShadowStart: 16
 		Tick: 150
 	damaged-idle-glow:
-		Filename: ra2_allies_alliedpowerplant_ggpowr_a.shp
+		Filename: ra2_allies_powerplant_ggpowr_a.shp
 		Start: 8
 		Length: 8
 		ShadowStart: 24
 		Tick: 150
 	make:
-		Filename: ra2_allies_alliedpowerplant_make.shp
+		Filename: ra2_allies_powerplant_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_allies_alliedpowerplant_ggpowr.shp
+		Filename: ra2_allies_powerplant_ggpowr.shp
 		Start: 1
 	icon:
-		Filename: ra2_allies_alliedpowerplant_icon.shp
+		Filename: ra2_allies_powerplant_icon.shp
 		Offset: 0,0
 
-ra2_allies_alliedorerefinery:
+ra2_allies_orerefinery:
 	Defaults:
 		Offset: -10,-26
 	idle:
-		Filename: ra2_allies_alliedorerefinery_ggrefn.shp
+		Filename: ra2_allies_orerefinery_ggrefn.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_allies_alliedorerefinery_ggrefn.shp
+		Filename: ra2_allies_orerefinery_ggrefn.shp
 		Start: 1
 		ShadowStart: 4
 	make:
-		Filename: ra2_allies_alliedorerefinery_make.shp
+		Filename: ra2_allies_orerefinery_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_allies_alliedorerefinery_ggrefn.shp
+		Filename: ra2_allies_orerefinery_ggrefn.shp
 		Start: 1
 	idle-drill:
-		Filename: ra2_allies_alliedorerefinery_ggrefnl1.shp
+		Filename: ra2_allies_orerefinery_ggrefnl1.shp
 		Length: 6
 		Tick: 1500
 	idle-bib:
-		Filename: ra2_allies_alliedorerefinery_bib.shp
+		Filename: ra2_allies_orerefinery_bib.shp
 		ShadowStart: 2
 		ZOffset: -512
 	damaged-idle-bib:
-		Filename: ra2_allies_alliedorerefinery_bib.shp
+		Filename: ra2_allies_orerefinery_bib.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -512
 	docking-overlay:
-		Filename: ra2_allies_alliedorerefinery_ggrefnor.shp
+		Filename: ra2_allies_orerefinery_ggrefnor.shp
 		Length: 20
 		ShadowStart: 20
 	icon:
-		Filename: ra2_allies_alliedorerefinery_icon.shp
+		Filename: ra2_allies_orerefinery_icon.shp
 		Offset: 0,0
 
 ra2_allies_airforcecommandhq:
@@ -208,81 +208,81 @@ ra2_allies_airforcecommandhq:
 		Filename: ra2_allies_airforcecommandhq_p_airborne.shp
 		Offset: 0,0
 
-ra2_allies_alliedwarfactory:
+ra2_allies_warfactory:
 	Defaults:
 		Offset: -18,-28
 	idle:
-		Filename: ra2_allies_alliedwarfactory_ggweap.shp
+		Filename: ra2_allies_warfactory_ggweap.shp
 		ShadowStart: 3
 		ZOffset: -1024
 	damaged-idle:
-		Filename: ra2_allies_alliedwarfactory_ggweap.shp
+		Filename: ra2_allies_warfactory_ggweap.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1024
 	build-door:
-		Filename: ra2_allies_alliedwarfactory_ggweap_1.shp
+		Filename: ra2_allies_warfactory_ggweap_1.shp
 		ShadowStart: 2
 	damaged-build-door:
-		Filename: ra2_allies_alliedwarfactory_ggweap_1.shp
+		Filename: ra2_allies_warfactory_ggweap_1.shp
 		Start: 1
 		ShadowStart: 3
 	build-top:
-		Filename: ra2_allies_alliedwarfactory_ggweap_2.shp
+		Filename: ra2_allies_warfactory_ggweap_2.shp
 		ShadowStart: 2
 		ZOffset: 1024
 	damaged-build-top:
-		Filename: ra2_allies_alliedwarfactory_ggweap_2.shp
+		Filename: ra2_allies_warfactory_ggweap_2.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: 1024
 	#TODO: ggweap_3 and ggweap_4 are used for producing flying actors
 	build-air-open:
-		Filename: ra2_allies_alliedwarfactory_ggweap_3.shp
+		Filename: ra2_allies_warfactory_ggweap_3.shp
 		ShadowStart: 2
 	damaged-air-open:
-		Filename: ra2_allies_alliedwarfactory_ggweap_3.shp
+		Filename: ra2_allies_warfactory_ggweap_3.shp
 		Start: 1
 		ShadowStart: 3
 	build-air-inside:
-		Filename: ra2_allies_alliedwarfactory_ggweap_4.shp
+		Filename: ra2_allies_warfactory_ggweap_4.shp
 		ShadowStart: 2
 	damaged-air-inside:
-		Filename: ra2_allies_alliedwarfactory_ggweap_4.shp
+		Filename: ra2_allies_warfactory_ggweap_4.shp
 		Start: 1
 		ShadowStart: 3
 	bib:
-		Filename: ra2_allies_alliedwarfactory_bib.shp
+		Filename: ra2_allies_warfactory_bib.shp
 		ShadowStart: 2
 		ZOffset: -1024
 	damaged-bib:
-		Filename: ra2_allies_alliedwarfactory_bib.shp
+		Filename: ra2_allies_warfactory_bib.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1024
 	idle-flag:
-		Filename: ra2_allies_alliedwarfactory_ggweap_a.shp
+		Filename: ra2_allies_warfactory_ggweap_a.shp
 		Length: 14
 		ShadowStart: 31
 	damaged-idle-flag:
-		Filename: ra2_allies_alliedwarfactory_ggweap_a.shp
+		Filename: ra2_allies_warfactory_ggweap_a.shp
 		Start: 15
 		Length: 14
 		ShadowStart: 45
 	overlay-fan:
-		Filename: ra2_allies_alliedwarfactory_ggweap_b.shp
+		Filename: ra2_allies_warfactory_ggweap_b.shp
 		Length: 5
 		ShadowStart: 6
 	make:
-		Filename: ra2_allies_alliedwarfactory_make.shp
+		Filename: ra2_allies_warfactory_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_allies_alliedwarfactory_ggweap.shp
+		Filename: ra2_allies_warfactory_ggweap.shp
 		Start: 1
 		ZOffset: -1024
 	icon:
-		Filename: ra2_allies_alliedwarfactory_icon.shp
+		Filename: ra2_allies_warfactory_icon.shp
 		Offset: 0,0
 
 ra2_allies_orepurifier:
@@ -317,48 +317,48 @@ ra2_allies_orepurifier:
 		Filename: ra2_allies_orepurifier_icon.shp
 		Offset: 0,0
 
-ra2_allies_alliedservicedepot:
+ra2_allies_servicedepot:
 	Defaults:
 		Offset: 0,-24
 	idle:
-		Filename: ra2_allies_alliedservicedepot_ggdept_d.shp
+		Filename: ra2_allies_servicedepot_ggdept_d.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: ra2_allies_alliedservicedepot_ggdept_d.shp
+		Filename: ra2_allies_servicedepot_ggdept_d.shp
 		Start: 1
 		ShadowStart: 3
 	idle-side:
-		Filename: ra2_allies_alliedservicedepot_ggdept.shp
+		Filename: ra2_allies_servicedepot_ggdept.shp
 		ShadowStart: 3
 	damaged-idle-side:
-		Filename: ra2_allies_alliedservicedepot_ggdept.shp
+		Filename: ra2_allies_servicedepot_ggdept.shp
 		Start: 1
 		Length: 2
 		ShadowStart: 4
 	bib:
-		Filename: ra2_allies_alliedservicedepot_bib.shp
+		Filename: ra2_allies_servicedepot_bib.shp
 		ShadowStart: 3
 		ZOffset: -512
 	make:
-		Filename: ra2_allies_alliedservicedepot_make.shp
+		Filename: ra2_allies_servicedepot_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_allies_alliedservicedepot_ggdept_d.shp
+		Filename: ra2_allies_servicedepot_ggdept_d.shp
 		Start: 1
 	repair:
-		Filename: ra2_allies_alliedservicedepot_ggdept_c.shp
+		Filename: ra2_allies_servicedepot_ggdept_c.shp
 		Length: 10
 		ShadowStart: 20
 		Tick: 180
 	damaged-repair:
-		Filename: ra2_allies_alliedservicedepot_ggdept_c.shp
+		Filename: ra2_allies_servicedepot_ggdept_c.shp
 		Start: 10
 		Length: 10
 		ShadowStart: 30
 		Tick: 180
 	icon:
-		Filename: ra2_allies_alliedservicedepot_icon.shp
+		Filename: ra2_allies_servicedepot_icon.shp
 		Offset: 0,0
 
 ra2_allies_pillbox:
@@ -486,34 +486,34 @@ ra2_allies_prismtower:
 		Filename: ra2_allies_prismtower_icon.shp
 		Offset: 0,0
 
-ra2_allies_alliedbattlelab:
+ra2_allies_battlelab:
 	Defaults:
 		Offset: -8,-14
 	idle:
-		Filename: ra2_allies_alliedbattlelab_ggtech.shp
+		Filename: ra2_allies_battlelab_ggtech.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_allies_alliedbattlelab_ggtech.shp
+		Filename: ra2_allies_battlelab_ggtech.shp
 		Start: 1
 		ShadowStart: 4
 	idle-lights:
-		Filename: ra2_allies_alliedbattlelab_ggtech_a.shp
+		Filename: ra2_allies_battlelab_ggtech_a.shp
 		Length: 12
 		ShadowStart: 24
 	damaged-idle-lights:
-		Filename: ra2_allies_alliedbattlelab_ggtech_a.shp
+		Filename: ra2_allies_battlelab_ggtech_a.shp
 		Start: 12
 		Length: 12
 		ShadowStart: 36
 	make:
-		Filename: ra2_allies_alliedbattlelab_make.shp
+		Filename: ra2_allies_battlelab_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_allies_alliedbattlelab_ggtech.shp
+		Filename: ra2_allies_battlelab_ggtech.shp
 		Start: 1
 	icon:
-		Filename: ra2_allies_alliedbattlelab_icon.shp
+		Filename: ra2_allies_battlelab_icon.shp
 		Offset: 0,0
 
 ra2_allies_spysatelliteuplink:
@@ -1078,13 +1078,13 @@ ra2_allies_battlefortress:
 	icon:
 		Filename: ra2_allies_battlefortress_chrono_icon.shp
 
-ra2_allies_alliedmobileconstructionvehicle:
+ra2_allies_mobileconstructionvehicle:
 	Defaults:
-		Filename: ra2_allies_alliedmobileconstructionvehicle_ra2mcv.shp
+		Filename: ra2_allies_mobileconstructionvehicle_ra2mcv.shp
 	idle:
 		Facings: 64
 	icon:
-		Filename: ra2_allies_alliedmobileconstructionvehicle_icon.shp
+		Filename: ra2_allies_mobileconstructionvehicle_icon.shp
 
 ra2_allies_aegiscruiser:
 	idle:

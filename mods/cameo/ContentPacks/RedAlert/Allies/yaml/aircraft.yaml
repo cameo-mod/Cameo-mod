@@ -11,7 +11,7 @@ ra1_allies_blackhawk:
 	Inherits@eject: ^AircraftEjectOnDeath
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra1_allies_alliedhelipad
+		Prerequisites: ~ra1_allies_helipad
 		Queue: Aircraft, RAAircraft
 		Description: actor_mh60.description
 	Valued:
@@ -134,7 +134,7 @@ ra1_allies_longbow:
 	Inherits@eject: ^AircraftEjectOnDeath
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra1_allies_alliedhelipad, ra1_allies_alliedtechcenter
+		Prerequisites: ~ra1_allies_helipad, ra1_allies_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_raheli.description
 	Valued:
@@ -184,7 +184,7 @@ ra1_allies_longbow:
 	SpawnActorOnDeath:
 		Actor: HELI.Husk
 	EjectOnDeath:
-		PilotActor: ra1_allies_alliedrocketsoldier
+		PilotActor: ra1_allies_rocketsoldier
 	LeavesTrails:
 		Offsets: -427,0,0
 		Image: smokey
@@ -233,7 +233,7 @@ ra1_allies_longbow:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
 
-ra1_allies_alliedchinooktransport:
+ra1_allies_chinooktransport:
 	Inherits: ^Helicopter
 	Inherits@Template: ^UnarmedTransportHelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -248,12 +248,12 @@ ra1_allies_alliedchinooktransport:
 		Cost: 3600
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~ra1_allies_alliedhelipad
+		Prerequisites: ~ra1_allies_helipad
 		BuildPaletteOrder: 10
 		Description: actor_tran.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ra1_allies_alliedchinooktransport
+		OverrideActor: ra1_allies_chinooktransport
 	Aircraft:
 		TurnSpeed: 25
 		Speed: 125
@@ -284,24 +284,24 @@ ra1_allies_alliedchinooktransport:
 		RequiresCondition: !airborne
 		PauseOnCondition: disabled
 	Cargo:
-		InitialUnits: ra1_allies_rifleinfantry, ra1_allies_alliedrocketsoldier, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner, ra1_allies_rifleinfantry, ra1_allies_alliedrocketsoldier, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner
+		InitialUnits: ra1_allies_rifleinfantry, ra1_allies_rocketsoldier, ra1_allies_sniper, ra1_allies_medic, ra1_allies_machinegunner, ra1_allies_rifleinfantry, ra1_allies_rocketsoldier, ra1_allies_sniper, ra1_allies_medic, ra1_allies_machinegunner
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
 		AfterLoadDelay: 0
 		BeforeUnloadDelay: 0
 		AfterUnloadDelay: 10
 	SpawnActorOnDeath:
-		Actor: ra1_allies_alliedchinooktransport_husk
+		Actor: ra1_allies_chinooktransport_husk
 	EjectOnDeath:
 		PilotActor: ra1_allies_rifleinfantry
 	SelectionDecorations:
 	Selectable:
-		Class: ra1_allies_alliedchinooktransport
+		Class: ra1_allies_chinooktransport
 		DecorationBounds: 1920, 1920
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
-		Image: ra1_allies_alliedchinooktransport
+		Image: ra1_allies_chinooktransport
 		PlayerPalette: raplayer
 	FireWarheadsOnDeath:
 		Weapon: LargeHeliExplode
@@ -325,7 +325,7 @@ ra1_allies_rapierjumpjet:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_allies_alliedhelipad, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_rapierjumpjet
+		Prerequisites: ~ra1_allies_helipad, ra1_allies_techcenter, ~ra1_allies_promotion_rapierjumpjet
 		Description: actor_rapierjumpjet.description
 	Valued:
 		Cost: 1300
@@ -385,7 +385,7 @@ ra1_allies_rapierjumpjet:
 	SpawnActorOnDeath:
 		Actor: ra1_allies_rapierjumpjet_husk
 	EjectOnDeath:
-		PilotActor: ra1_allies_alliedsniper
+		PilotActor: ra1_allies_sniper
 	LeavesTrails:
 		Offsets: -1000,0,200
 		MovingInterval: 2

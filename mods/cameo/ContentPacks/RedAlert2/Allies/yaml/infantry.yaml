@@ -13,13 +13,13 @@ ra2_allies_attackdog:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: ~ra2_allies_alliedbarracks
+		Prerequisites: ~ra2_allies_barracks
 		Description: actor_dog.description
 	Valued:
 		Cost: 200
 	Tooltip:
 		Name: Attack Dog
-		GenericName: ra1_soviets_actordogname
+		GenericName: ra1_soviets_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
@@ -126,7 +126,7 @@ ra2_allies_gi:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~ra2_allies_alliedbarracks
+		Prerequisites: ~ra2_allies_barracks
 		Queue: Infantry, RAInfantry
 		Description: actor_ra2e1.description
 	Mobile:
@@ -263,7 +263,7 @@ ra2_allies_guardiangi:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra2_allies_alliedbarracks
+		Prerequisites: ~ra2_allies_barracks
 		Queue: Infantry, RAInfantry
 		Description: actor_ggi.description
 	Mobile:
@@ -414,7 +414,7 @@ ra2_allies_chronolegionnaire:
 		Name: Chrono Legionnaire
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~ra2_allies_alliedbarracks, ra2_allies_alliedbattlelab
+		Prerequisites: ~ra2_allies_barracks, ra2_allies_battlelab
 		Queue: Infantry, RAInfantry
 		Description: actor_cleg.description
 	Mobile:
@@ -505,7 +505,7 @@ ra2_allies_sniper:
 		Name: Sniper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2_allies_alliedbarracks, ra2_allies_alliedbattlelab
+		Prerequisites: ~ra2_allies_barracks, ra2_allies_battlelab
 		Queue: Infantry, RAInfantry
 		Description: actor_ra2snipe.description
 	Mobile:
@@ -563,7 +563,7 @@ ra2_allies_engineer:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra2_allies_alliedbarracks
+		Prerequisites: ~ra2_allies_barracks
 		Queue: Infantry, RAInfantry
 		Description: Captures and repairs structures.\n  Unarmed
 	Mobile:
@@ -639,7 +639,7 @@ ra2_allies_tanyaii:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~ra2_allies_alliedbarracks, ra2_allies_alliedbattlelab
+		Prerequisites: ~ra2_allies_barracks, ra2_allies_battlelab
 		BuildLimit: 1
 		Description: template_commando.description
 	Valued:

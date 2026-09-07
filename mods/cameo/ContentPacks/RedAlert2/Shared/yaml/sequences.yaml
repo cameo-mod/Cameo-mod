@@ -593,7 +593,7 @@ ra2_ctoutp:
 		Filename: ra2_ctoutp_bib.shp
 		ZOffset: -512
 	make:
-		Filename: ra2_allies_alliedservicedepot_make.shp
+		Filename: ra2_allies_servicedepot_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
@@ -613,7 +613,7 @@ ra2_ctoutp:
 		Filename: ra2_ctoutp_f.shp
 		Length: 16
 	icon:
-		Filename: ra2_allies_alliedservicedepot_icon.shp
+		Filename: ra2_allies_servicedepot_icon.shp
 		Offset: 0,0
 
 ra2_ctoutp.husk:
@@ -643,7 +643,7 @@ ra2_ctoutp.husk:
 		Filename: ra2_ctoutp_bib.shp
 		ZOffset: -512
 	make:
-		Filename: ra2_allies_alliedservicedepot_make.shp
+		Filename: ra2_allies_servicedepot_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
@@ -663,7 +663,7 @@ ra2_ctoutp.husk:
 		Filename: ra2_ctoutp_f.shp
 		Length: 16
 	icon:
-		Filename: ra2_allies_alliedservicedepot_icon.shp
+		Filename: ra2_allies_servicedepot_icon.shp
 		Offset: 0,0
 
 ra2ctfarm01: #farm barn (2x2)
@@ -3000,7 +3000,7 @@ ra2_lt_sgn04: #street lamp (1x1)
 	dead:
 		ShadowStart: 1
 
-ra2_ctmsc01: #hot ra1_soviets_actordogname cart (1x1)
+ra2_ctmsc01: #hot ra1_soviets_attackdog cart (1x1)
 	Defaults:
 		Filename: ra2_ctmsc01.shp
 	idle:
@@ -3889,7 +3889,7 @@ ra2arty:
 		Length: 5
 
 ra2amcv.Bot:
-	Inherits: ra2_allies_alliedmobileconstructionvehicle
+	Inherits: ra2_allies_mobileconstructionvehicle
 
 ra2smcv.Bot:
 	Inherits: ra2_soviets_mobileconstructionvehicle
