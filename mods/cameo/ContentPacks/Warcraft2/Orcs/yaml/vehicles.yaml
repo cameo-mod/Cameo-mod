@@ -88,8 +88,6 @@ wc2_orcs_catapult:
 		Amount: -40
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -138,8 +136,6 @@ wc2_orcs_siegeengine:
 		Amount: -90
 	Health:
 		HP: 70000
-	ChangesHealth@SelfHealing:
-		Step: 28
 	Mobile:
 		Speed: 70
 		TurnSpeed: 28

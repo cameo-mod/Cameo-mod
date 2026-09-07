@@ -70,8 +70,6 @@ protoss_dragoon:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Shielded:
 		RegenAmount: 60
 	Armament:
@@ -130,8 +128,6 @@ protoss_manifold:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Shielded:
 		RegenAmount: 20
 	Armor:
@@ -206,8 +202,6 @@ protoss_analogue:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Shielded:
 		RegenAmount: 48
 	Armor:
@@ -289,8 +283,6 @@ protoss_idol:
 		HP: 350000
 	Repairable:
 		HpPerStep: 17500
-	ChangesHealth@SelfHealing:
-		Step: 140
 	Shielded:
 		RegenAmount: 280
 	Armament@Upgrade1:
@@ -381,8 +373,6 @@ protoss_reaver:
 		HP: 275000
 	Repairable:
 		HpPerStep: 13750
-	ChangesHealth@SelfHealing:
-		Step: 110
 	Shielded:
 		RegenAmount: 220
 	Armament@primary:
@@ -463,8 +453,6 @@ protoss_archon:
 		HP: 350000
 	Repairable:
 		HpPerStep: 17500
-	ChangesHealth@SelfHealing:
-		Step: 140
 	Shielded:
 		RegenAmount: 280
 	Targetable:
@@ -566,8 +554,6 @@ protoss_atreus:
 		Locomotor: wheeled
 	Health:
 		HP: 250000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Shielded:
 		RegenAmount: 200
 	AttackFrontal:
@@ -632,8 +618,6 @@ protoss_positron:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Shielded:
 		RegenAmount: 48
 	Armament:

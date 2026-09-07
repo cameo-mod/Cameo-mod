@@ -25,8 +25,6 @@ terran_marine:
 		Speed: 61
 	Health:
 		HP: 41000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament@PRIMARY:
 		Weapon: MarineMG
 		LocalOffset: 128,0,256
@@ -79,8 +77,6 @@ terran_reaper:
 		Locomotor: fakeaircraft
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Armament@PRIMARY:
 		Weapon: ReaperPistols
 		LocalOffset: 128,-128,256
@@ -153,8 +149,6 @@ terran_madcap:
 		Speed: 60
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Armament@PRIMARY:
 		Weapon: MadcapGun
 		LocalOffset: 128,0,256
@@ -207,8 +201,6 @@ terran_firebat:
 		Speed: 52
 	Health:
 		HP: 52000
-	ChangesHealth@SelfHealing:
-		Step: 52
 	Armament@1:
 		Weapon: FirebatF
 		LocalOffset: 341,-120,128
@@ -273,8 +265,6 @@ terran_harakan:
 		Speed: 56
 	Health:
 		HP: 78000
-	ChangesHealth@SelfHealing:
-		Step: 78
 	Armament@1:
 		Weapon: HarakanF
 		LocalOffset: 341,-120,128
@@ -337,8 +327,6 @@ terran_marauder:
 		Speed: 45
 	Health:
 		HP: 90000
-	ChangesHealth@SelfHealing:
-		Step: 90
 	Armament@1:
 		Weapon: MarauderMissiles
 		LocalOffset: 341,125,128
@@ -387,8 +375,6 @@ terran_ghost:
 		Speed: 75
 	Health:
 		HP: 44000
-	ChangesHealth@SelfHealing:
-		Step: 45
 	Armament@lockdown:
 		Weapon: GhostSniperLockdown
 		LocalOffset: 128,0,256
@@ -461,8 +447,6 @@ terran_specter:
 		Speed: 80
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@lockdown:
 		Weapon: SpecterSniperLockdown
 		LocalOffset: 128,0,256
@@ -532,8 +516,6 @@ terran_medic:
 		Speed: 60
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Passenger:
 		CustomPipType: yellow
 	-Armament@Dummy:
@@ -601,8 +583,6 @@ terran_jimraynor:
 		Speed: 65
 	Health:
 		HP: 200000
-	ChangesHealth@SelfHealing:
-		Step: 200
 	Armament@PRIMARY:
 		Weapon: JimRaynorMachineGun
 		LocalOffset: 225,0,350

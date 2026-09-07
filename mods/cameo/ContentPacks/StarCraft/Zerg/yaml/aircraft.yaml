@@ -32,8 +32,6 @@ zerg_overlord:
 		AfterUnloadDelay: 0
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Power:
 		Amount: 200
 	StoresResources:
@@ -120,8 +118,6 @@ zerg_broodweaver:
 		AltitudeVelocity: 1500
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	-RenderRangeCircle:
 	Armament:
 		Weapon: BroodweaverLeech
@@ -222,8 +218,6 @@ zerg_dreadshroud:
 		IdealSeparation: 1000
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Armament:
 		Weapon: DreadshroudSpore
 	AttackAircraft:
@@ -272,8 +266,6 @@ zerg_corruptor:
 		IdealSeparation: 1000
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament:
 		Weapon: CorruptorSpore
 		LocalOffset: 0,0,0
@@ -327,8 +319,6 @@ zerg_mutalisk:
 		IdealSeparation: 640
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Armament:
 		Weapon: MutaliskSpore
 		LocalOffset: 0,0,0
@@ -390,8 +380,6 @@ zerg_devourer:
 		RepulsionSpeed: 18
 	Health:
 		HP: 250000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Armament:
 		Weapon: SCDevourerAA
 		LocalOffset: 0,0,0
@@ -447,8 +435,6 @@ zerg_scourge:
 		CruiseAltitude: 1280
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	AttackAircraft:
 		FacingTolerance: 512
 	Armament@PRIMARY:
@@ -495,8 +481,6 @@ zerg_queen:
 		RepulsionSpeed: 20
 	Health:
 		HP: 125000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
@@ -554,8 +538,6 @@ zerg_guardian:
 		RepulsionSpeed: 10
 	Health:
 		HP: 150000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Armament:
 		Weapon: GuardianShoot
 		LocalOffset: 400,0,0
@@ -601,8 +583,6 @@ zerg_gorekraken:
 		IdealSeparation: 700
 	Health:
 		HP: 350000
-	ChangesHealth@SelfHealing:
-		Step: 150
 	Armament:
 		Weapon: GorekrakenClaw
 		LocalOffset: 400,0,0
@@ -661,8 +641,6 @@ zerg_behemoth:
 		HP: 600000
 	Repairable:
 		HpPerStep: 30000
-	ChangesHealth@SelfHealing:
-		Step: 240
 	-Integrity:
 	-GrantCondition@electronics:
 	Cargo:

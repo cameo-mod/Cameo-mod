@@ -32,8 +32,6 @@ terran_wraith:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: WraithLaser
 		LocalOffset: 400,0,0
@@ -118,8 +116,6 @@ terran_sundog:
 		HP: 160000
 	Repairable:
 		HpPerStep: 8000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Armament@PRIMARY:
 		Weapon: SunDogLaser
 		LocalOffset: 400,0,0
@@ -201,8 +197,6 @@ terran_valkyrie:
 		HP: 120000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Armament@SECONDARY1:
 		Weapon: ValkyrieRockets
 		LocalOffset: 400,400,0
@@ -263,8 +257,6 @@ terran_wyvern:
 		HP: 180000
 	Repairable:
 		HpPerStep: 9000
-	ChangesHealth@SelfHealing:
-		Step: 72
 	Armament@SECONDARY1:
 		Weapon: WyvernRockets
 		LocalOffset: 400,400,0
@@ -323,8 +315,6 @@ terran_raven:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament@repair:
 		Weapon: RavenRepair
 		TargetRelationships: Ally
@@ -404,8 +394,6 @@ terran_dropship:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 8
@@ -478,8 +466,6 @@ terran_pythean:
 		HP: 400000
 	Repairable:
 		HpPerStep: 20000
-	ChangesHealth@SelfHealing:
-		Step: 160
 	Cargo:
 		ExclusiveDeploy: true
 		DeployType: opentopped
@@ -564,8 +550,6 @@ terran_medivac:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament:
 		Weapon: MedicHeal
 		TargetRelationships: Ally
@@ -640,8 +624,6 @@ terran_battlecruiser:
 		HP: 500000
 	Repairable:
 		HpPerStep: 25000
-	ChangesHealth@SelfHealing:
-		Step: 200
 	Armament:
 		Name: primary
 		Weapon: BCLaser
@@ -773,8 +755,6 @@ terran_phobos:
 		HP: 1000000
 	Repairable:
 		HpPerStep: 50000
-	ChangesHealth@SelfHealing:
-		Step: 400
 	CarrierMaster:
 		Actors: scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone
 		RearmTicks: 100
@@ -908,8 +888,6 @@ terran_sciencevessel:
 		HP: 200000
 	Repairable:
 		HpPerStep: 10000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Armament@IronCourtain:
 		Weapon: ScienceVesselDefenseMatrix
 		LocalOffset: 1,0,11

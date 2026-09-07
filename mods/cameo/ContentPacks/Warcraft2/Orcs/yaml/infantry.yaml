@@ -13,8 +13,6 @@ wc2_orcs_grunt:
 		Amount: -30
 	Health:
 		HP: 65000
-	ChangesHealth@SelfHealing:
-		Step: 65
 	Mobile:
 		Speed: 65
 	Buildable:
@@ -56,8 +54,6 @@ wc2_orcs_warcraft3grunt:
 		Amount: -55
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 120
 	Mobile:
 		Speed: 70
 	Buildable:
@@ -108,8 +104,6 @@ wc2_orcs_trollaxethrower:
 		Amount: -25
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Mobile:
 		Speed: 60
 	Buildable:
@@ -177,8 +171,6 @@ wc2_orcs_trollheadhunter:
 		Amount: -50
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Mobile:
 		Speed: 75
 	Buildable:
@@ -222,8 +214,6 @@ wc2_orcs_kodobeast:
 		Amount: -50
 	Health:
 		HP: 125000
-	ChangesHealth@SelfHealing:
-		Step: 125
 	Mobile:
 		Speed: 60
 	Buildable:
@@ -276,8 +266,6 @@ wc2_orcs_ogre:
 		Amount: -90
 	Health:
 		HP: 200000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Mobile:
 		Speed: 85
 		TurnSpeed: 68
@@ -522,8 +510,6 @@ wc2_orcs_hellscream:
 		HP: 150000
 	Armor:
 		Type: Heroic
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 90
 	Buildable:
@@ -560,8 +546,6 @@ wc2_orcs_hellscream_elite:
 		HP: 250000
 	Armor:
 		Type: Heroic
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Mobile:
 		Speed: 90
 	Buildable:
@@ -601,8 +585,6 @@ wc2_orcs_zuljin:
 		HP: 50000
 	Armor:
 		Type: Heroic
-	ChangesHealth@SelfHealing:
-		Step: 25
 	Mobile:
 		Speed: 100
 	Buildable:
@@ -644,8 +626,6 @@ wc2_orcs_zuljin_elite:
 		HP: 75000
 	Armor:
 		Type: Heroic
-	ChangesHealth@SelfHealing:
-		Step: 35
 	Mobile:
 		Speed: 100
 	Buildable:

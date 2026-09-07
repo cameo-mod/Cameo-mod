@@ -643,8 +643,6 @@
 		BuildPaletteOrder: 20
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Mobile:
 		Speed: 80
 	#Food
@@ -664,8 +662,6 @@
 		BuildPaletteOrder: 10
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 65
 	#Food
@@ -691,8 +687,6 @@
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Selectable:
 		DecorationBounds: 2048, 2048
 	Power:

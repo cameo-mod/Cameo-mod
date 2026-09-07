@@ -29,8 +29,6 @@ zerg_zergling:
 		Speed: 110
 	Health:
 		HP: 11000
-	ChangesHealth@SelfHealing:
-		Step: 11
 	Armament:
 		Weapon: ZerglingClaw
 		FireDelay: 3
@@ -81,8 +79,6 @@ zerg_talon:
 		Locomotor: fakeaircraft
 	Health:
 		HP: 32000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Armament:
 		Weapon: TalonClaw
 		FireDelay: 3
@@ -129,8 +125,6 @@ zerg_hydralisk:
 		TurnSpeed: 30
 	Health:
 		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	HitShape:
 		-Type:
 	Armament@PRIMARY:
@@ -186,8 +180,6 @@ zerg_spithid:
 		Speed: 110
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	HitShape:
 		-Type:
 	Armament@PRIMARY:
@@ -244,8 +236,6 @@ zerg_swarmling:
 		IdealSeparation: 640
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament:
 		Weapon: SwarmlingShoot
 		LocalOffset: 0,0,0
@@ -494,8 +484,6 @@ zerg_shriek:
 		IdealSeparation: 640
 	Health:
 		HP: 14000
-	ChangesHealth@SelfHealing:
-		Step: 14
 	Armament:
 		Weapon: ShriekStinger
 		LocalOffset: 0,0,0
@@ -551,8 +539,6 @@ zerg_ultralisk:
 		Locomotor: tracked
 	Health:
 		HP: 400000
-	ChangesHealth@SelfHealing:
-		Step: 160
 	Armor:
 		Type: Heavy
 	Armament:
@@ -603,8 +589,6 @@ zerg_infestedterranbomber:
 		Speed: 90
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	AttackFrontal:
 		FacingTolerance: 512
 	Armament@PRIMARY:
@@ -659,8 +643,6 @@ zerg_defiler:
 		TurnSpeed: 20
 	Health:
 		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Armament:
 		Weapon: DefilerPlague
 		LocalOffset: 341,-120,128
@@ -716,8 +698,6 @@ zerg_kerrigan:
 		Speed: 75
 	Health:
 		HP: 300000
-	ChangesHealth@SelfHealing:
-		Step: 300
 	AutoTarget:
 		ScanRadius: 10
 		InitialStance: AttackAnything
