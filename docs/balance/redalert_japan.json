@@ -4842,7 +4842,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "12000",
         "falloff": "100, 55, 0",
         "spread": "93",
         "tag": "Tesla_Heavy",
@@ -4856,25 +4856,11 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
