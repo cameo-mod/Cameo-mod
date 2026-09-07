@@ -1,5 +1,26 @@
 # Development Log
 
+## Devin-Nova - ra1_soviets naming-damage lane COMPLETE: N1=0, N2=0, N3=0 (2026-09-07)
+
+- **N4** (commit `2f7591201`): 21 `ra1_soviets_soviet*` actor ids -> `ra1_soviets_*`;
+  34 byte-identical duplicate assets removed; 74 text refs updated.
+- **N3** (commit `fec59e9bf`; text/add sides swept into foreign `118309caa`):
+  `ra1_soviets_actordogname` -> `ra1_soviets_attackdog`; fluent key `actor_dog`
+  already exists in `fluent/rules/en.ftl` - leaked id was pure defect. 4 sprites,
+  127 refs in 25 files.
+- **N1**: 18 doubled-token filenames + 11 stacked-id files the audit misses
+  (ids differ: `unlock*`/`upgrade_*` prepend segments stripped; targets verified
+  against `rename_map_ra1_soviets_naming.yaml` + owning sequence blocks).
+- Residual: N4=16 = Aurora cross-faction `ra1_allies_*` (not mine); N5=1 =
+  `.colorpicker` convention pending design ruling.
+- **INCIDENT - staged-index race:** foreign commit `118309caa` landed in the same
+  minute as my staged work and swept the M-edits + A-sides + maps; my commit holds
+  only the 33 delete-sides. Net HEAD verified correct (all refs resolve,
+  boot-gate PASS). Prevention: stage+commit atomically; never leave staged
+  changes in the shared index across a boot-gate.
+- Fleet post: `Cameo-mod-fleet/nova_2026-09-07_n4_status_and_questions.md`.
+
+
 ## Codex - PR 328 current-upstream integration and scoped review (2026-09-06)
 
 Integrated `56c14d9db` without changing its gameplay, engine, or class anchors.
