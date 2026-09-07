@@ -10730,3 +10730,22 @@ the whole `SpreadDamage.Amount` kind), at ratchet. Complements the parallel Nova
 (`15321fe2b`) — different kind, no overlap. Boot-gate PASS.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
+
+## Codex — PR #329 upstream integration and safe balance inputs (2026-09-07)
+
+Integrated upstream `648f62f7c6`, retaining restored warhead removal nodes and
+the Ordos APC AA duplicate-key repair. Its complete resolved weapon is identical
+to upstream. Corrected Bastion's five-soldier tooltip and Laser Tower's omitted
+aircraft targeting, with two resolved-rule regressions. The balance writer now
+rejects wrong engine scalar types, overflow and invalid burst cadence before
+touching YAML (39 tests). Readiness includes aircraft speed, cell-based ranges
+and full burst cycles, and refuses malformed delays instead of inventing DPS
+(16 tests). No numeric gameplay stats or anchor approvals changed.
+
+Independent review challenged the edge cases; its malformed-delay finding was
+fixed before publication. Build and all 76 Cameo C# tests pass. Integrated game
+boot is pending; earlier replay evidence predates this merge. The full-suite
+upstream comparison and current audit limitations are recorded in the existing
+`docs/audit/ASTRA_REVIEW.md` dossier. PR #329 remains open/unmerged.
+
+Co-Authored-By: Codex <noreply@openai.com>

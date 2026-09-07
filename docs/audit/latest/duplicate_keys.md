@@ -1,6 +1,6 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **650** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **260**
+Files scanned: **650** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **258**
 
 
 ## D1 — duplicate inheritance labels with different parent values
@@ -16,7 +16,7 @@ _none found_
 | Voiced | 15 |
 | RevealsShroud | 14 |
 | Prerequisites | 11 |
-| Defaults | 10 |
+| Defaults | 9 |
 | HitShape | 8 |
 | Selectable | 7 |
 | muzzle | 6 |
@@ -61,8 +61,6 @@ _none found_
 | mods/cameo/chrome/ingame_observer.yaml | 316, 320 | Container@OBSERVER_WIDGETS > Children > Image@REPLAY_PLAYER | Visible |
 | mods/cameo/chrome/settings_display.yaml | 26, 80, 110, 141, 165, 191, 206, 228, 283, 344, 386, 399, 431, 444, 457, 470, 483, 496, 509 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@ROW |
 | mods/cameo/chrome/settings_display.yaml | 66, 269 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@SPACER |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/sequences.yaml | 520, 521 | hightech.ordos | Defaults |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/sequences.yaml | 966, 990 | ordos_leech | die4 |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/sequences.yaml | 11, 37 | ra2_allies_alliedconstructionyard | dead |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3731, 3737 | yrslav | cheer |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3870, 3874 | ra2howi | muzzle |
@@ -318,4 +316,7 @@ _none found_
 | mods/cameo/weapons/starwars.yaml | 843, 847 | SWNapalm2 | Burst |
 | mods/cameo/weapons/starwars.yaml | 867, 871 | SWNapalm3 | Burst |
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
+
+
+D2 count 258 is below the baseline 260 — lower D2_BASELINE in this script to lock the fix in.
 

@@ -442,3 +442,78 @@ and 20 benchmark CSVs. They are in
 Earlier telemetry smoke evidence remains in its separate owned temporary folder.
 No real match record, user map or dirty-main edit was removed. Highest sampled
 PC memory across the run remained 71.6%, below the 84% guard and 90% user ceiling.
+
+## September 7 follow-up: upstream integration and writer safety
+
+This section supersedes earlier checkpoint counts, not the limitations attached
+to the earlier runtime evidence. PR #329 remains open for coordinator review.
+
+- Integrated upstream `648f62f7c6d8760232a2a5a4c161d545ca07bedf`, including
+  the merged headquarters protection from #330 and upstream warhead restorations.
+  Both append-only log conflicts retain both sides. The Ordos APC AA weapon keeps
+  its restored cancellation node and our duplicate-key cleanup. Its complete
+  resolved tree, including child order, equals upstream; the focused behavioural
+  comparison also passes. No engine pin changed.
+- Corrected the reported Bastion capacity text to five soldiers and the
+  Schwarzer Mond Laser Tower description to state that it can attack aircraft.
+  Existing laser and upgrade wording is retained. Two resolved-inheritance tests
+  check the capacity, loaded translation key and all three air-targeting weapons.
+- Balance writes now validate each field's engine type, not merely whether text
+  resembles a numeric scalar. Fractional integer fields, integer overflow, WDist
+  in integer fields and invalid burst cadence are refused before YAML writes.
+  Signed healing damage and the `BuildDuration=-1` sentinel remain supported.
+  Writer coverage is 39 tests, including unchanged-file and no-subprocess checks
+  when a proposal contains both a valid edit and a later invalid edit.
+- Readiness now reads aircraft speed, parses cell-based range and accounts for
+  the complete burst cycle. Explicit malformed delay arrays are unavailable,
+  not silently defaulted or truncated. Its 16 tests cover these paths. This is
+  peak nominal single-armament DPS, not live aggregate damage or a matchup model;
+  activation conditions, charge traits and actor modifiers remain unmodeled.
+  No numeric unit stats, prices or anchor approvals were changed.
+- Regenerated `firepower_inputs.json` with its existing generator against the
+  verified current ledgers. It still covers 770 changed actor entries; previously
+  stored DPS values predated upstream weapon changes. All nine firepower-input
+  tests pass after regeneration. The report does not propose new actor costs.
+- Regenerated the raw weapon inventory: 2,367 concrete definitions, 327 stacks
+  (239 reachable: 189 direct plus 50 indirect; 88 unreached), and 432 excess mains
+  in the reachable graph. Existing raw ratchets pass. Upstream's generator now
+  labels the exemption policy retired and counts every stack; no exception was
+  hidden. The old test's fixed checkpoint expectations remain failing, rather
+  than being mechanically updated as an implicit gameplay approval.
+
+The independent reviewer challenged both changes and found the malformed-delay
+fallback; it was corrected and regression-tested before publication. Together
+with the two tooltip tests, the focused set contains 57 passing tests.
+
+The integrated build passed with zero errors and eight existing engine warnings.
+All 76 Cameo C# tests passed with zero skips, and the fresh runtime DLL contains
+the telemetry description marker. The earlier menu/replay evidence predates this
+upstream merge: **an integrated game boot is still pending**. No game was launched
+for this follow-up, and those older tests are not claimed as new runtime proof.
+
+The upstream comparison worktree has the same tracked tree as `648f62f7c6`.
+Its bounded suite completed 807 tests in 89 modules, 44 skipped, with 38 failing
+test identities in 30 modules. The final integrated run completed 874 tests in
+95 modules, 44 skipped, with 33 failing identities in 28 modules. All 33 are
+shared with upstream: no new failing identity and five removed failures, not
+an all-green claim. Import failures from retired audit symbols, stale actor
+identities, role contracts and fixed-count expectations remain visible.
+The final run took 497.8 seconds, with a sampled process-tree peak of 871.3 MB
+and PC-memory peak of 52.7%; the upstream comparison peaked at 57.7% PC memory.
+Each suite used the 2 GB process-tree limit and 84% PC-memory guard.
+
+The raw and derived ledger check passes for all 33 ledgers with zero drift.
+Upstream's new map audit reports zero dangling actors across 363 maps; shrapnel
+auditing reports zero cycles or dangling children across 193 chains. The naming
+audit passes its existing ratchets but retains its raw findings. Canonical audits
+remain red overall; no thresholds or reviewed exceptions were adjusted to hide
+debt. All 27 class anchors remain unsigned; this follow-up does not authorize
+faction repricing.
+
+The final canonical refresh completed through source checkpoint `dcd26b4cb` in
+the complete local environment, without an override. No Markdown report is
+empty. It exits nonzero for retained findings; the recent-history audit alone
+retains 22 ledger-history findings and four unwired-audit findings, with zero
+blocking attribution findings. Its stderr also records historical actor lookups
+with no prior definition, not a successful historical lookup for every actor.
+Upstream master was rechecked after the refresh and remains `648f62f7c6`.

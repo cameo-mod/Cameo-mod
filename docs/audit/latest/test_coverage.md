@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (8 file(s)) | 76 | >= 24 |
-| T2 | `def test_*` in tools/tests (95 file(s)) | 947 | >= 177 |
-| T3 | modules with no test mentioning them | 264 | <= 224 |
+| T2 | `def test_*` in tools/tests (97 file(s)) | 960 | >= 177 |
+| T3 | modules with no test mentioning them | 267 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (264)
+## T3 — untested modules (267)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -190,11 +190,13 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_hex_shield_routing.py | audit_hex_shield_routing |
 | python | tools/audit/audit_inherits.py | audit_inherits |
 | python | tools/audit/audit_inline_effects.py | audit_inline_effects |
+| python | tools/audit/audit_map_actors.py | audit_map_actors |
 | python | tools/audit/audit_metadata.py | audit_metadata |
 | python | tools/audit/audit_meter_dilution.py | audit_meter_dilution |
 | python | tools/audit/audit_min_range.py | audit_min_range |
 | python | tools/audit/audit_missing_elite.py | audit_missing_elite |
 | python | tools/audit/audit_multiplier_modifiers.py | audit_multiplier_modifiers |
+| python | tools/audit/audit_naming_damage.py | audit_naming_damage |
 | python | tools/audit/audit_nuclear_flash_bindings.py | audit_nuclear_flash_bindings |
 | python | tools/audit/audit_orphans.py | audit_orphans |
 | python | tools/audit/audit_outliers.py | audit_outliers |
@@ -206,6 +208,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_rank_decoration.py | audit_rank_decoration |
 | python | tools/audit/audit_rename_safety.py | audit_rename_safety |
 | python | tools/audit/audit_sequences.py | audit_sequences |
+| python | tools/audit/audit_shrapnel_chains.py | audit_shrapnel_chains |
 | python | tools/audit/audit_split_definitions.py | audit_split_definitions |
 | python | tools/audit/audit_survivability_pricing.py | audit_survivability_pricing |
 | python | tools/audit/audit_task_index.py | audit_task_index |
@@ -217,13 +220,13 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_unique_traits.py | audit_unique_traits |
 | python | tools/audit/audit_upgrade_coverage.py | audit_upgrade_coverage |
 | python | tools/audit/audit_weapon_identity.py | audit_weapon_identity |
-| python | tools/audit/audit_weapon_shape.py | audit_weapon_shape |
 | python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
 | python | tools/audit/audit_weapon_uniqueness.py | audit_weapon_uniqueness |
 | python | tools/audit/check_effect_audio.py | check_effect_audio |
 | python | tools/audit/dump_resolved.py | dump_resolved |
 | python | tools/audit/effect_audit.py | effect_audit |
 | python | tools/audit/environment.py | environment |
+| python | tools/audit/extract_reference_effects.py | extract_reference_effects |
 | python | tools/audit/find_empty_warhead.py | find_empty_warhead |
 | python | tools/audit/find_mechanical_phase_a.py | find_mechanical_phase_a |
 | python | tools/audit/find_orphan_old_keys.py | find_orphan_old_keys |
@@ -287,5 +290,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 264 untested > baseline 224
+- T3: 267 untested > baseline 224
 

@@ -16,28 +16,28 @@ ContentPack-migration residue. **Fix by deleting the LEGACY copy** once the pack
 
 | weapon | defined at |
 |---|---|
-| `ChemTibAtomic` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1214` · `weapons/tiberiandawn.yaml:226` |
-| `RocketsG` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1335` · `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1339` · `weapons/weapons.yaml:12035` |
-| `SardDeath` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2494` · `weapons/d2k.yaml:1034` |
+| `ChemTibAtomic` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1250` · `weapons/tiberiandawn.yaml:226` |
+| `RocketsG` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1371` · `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1375` · `weapons/weapons.yaml:12036` |
+| `SardDeath` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2567` · `weapons/d2k.yaml:1034` |
 | `Sound` | `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` · `weapons/d2k.yaml:644` |
-| `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2464` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:63` · `weapons/d2k.yaml:691` |
-| `WormSwallow` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2479` · `weapons/d2k.yaml:781` |
-| `^D2K155mmLegacy` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2308` · `weapons/d2k.yaml:156` |
-| `^OCannon` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2862` · `weapons/d2k.yaml:1856` |
-| `d2k25mm` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2539` · `weapons/d2k.yaml:1231` |
-| `d2kFlameTurret` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2696` · `weapons/d2k.yaml:1473` |
-| `d2k_APCo_AA` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2422` · `weapons/d2k.yaml:541` |
-| `d2k_APCo_AG` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2413` · `weapons/d2k.yaml:533` |
-| `d2k_aircraft_eater` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2794` · `weapons/d2k.yaml:1788` |
-| `d2k_airdefenseplatform` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2741` · `weapons/d2k.yaml:1765` |
-| `d2k_laser_qafza` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2705` · `weapons/d2k.yaml:1691` |
-| `d2k_laser_qafza_aa` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2722` · `weapons/d2k.yaml:1708` |
-| `d2k_sard_crossbow` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2834` · `weapons/d2k.yaml:1828` |
-| `d2k_sard_heatblade` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2813` · `weapons/d2k.yaml:1807` |
-| `d2k_sardaukar_elite` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2565` · `weapons/d2k.yaml:1394` |
-| `d2k_tyrant` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2350` · `weapons/d2k.yaml:494` |
-| `emperor_sardaukar_chief_c4` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2691` · `weapons/d2k.yaml:1442` |
-| `mtank_pri` | `ContentPacks/D2k/Shared/yaml/weapons.yaml:530` · `weapons/d2k.yaml:477` |
+| `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2537` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:63` · `weapons/d2k.yaml:691` |
+| `WormSwallow` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2552` · `weapons/d2k.yaml:781` |
+| `^D2K155mmLegacy` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2381` · `weapons/d2k.yaml:156` |
+| `^OCannon` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2935` · `weapons/d2k.yaml:1856` |
+| `d2k25mm` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2612` · `weapons/d2k.yaml:1231` |
+| `d2kFlameTurret` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2769` · `weapons/d2k.yaml:1473` |
+| `d2k_APCo_AA` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2495` · `weapons/d2k.yaml:541` |
+| `d2k_APCo_AG` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2486` · `weapons/d2k.yaml:533` |
+| `d2k_aircraft_eater` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2867` · `weapons/d2k.yaml:1788` |
+| `d2k_airdefenseplatform` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2814` · `weapons/d2k.yaml:1765` |
+| `d2k_laser_qafza` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2778` · `weapons/d2k.yaml:1691` |
+| `d2k_laser_qafza_aa` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2795` · `weapons/d2k.yaml:1708` |
+| `d2k_sard_crossbow` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2907` · `weapons/d2k.yaml:1828` |
+| `d2k_sard_heatblade` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2886` · `weapons/d2k.yaml:1807` |
+| `d2k_sardaukar_elite` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2638` · `weapons/d2k.yaml:1394` |
+| `d2k_tyrant` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2423` · `weapons/d2k.yaml:494` |
+| `emperor_sardaukar_chief_c4` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2764` · `weapons/d2k.yaml:1442` |
+| `mtank_pri` | `ContentPacks/D2k/Shared/yaml/weapons.yaml:548` · `weapons/d2k.yaml:477` |
 
 
 ## S2 — defined twice within the same tier (4)
@@ -45,8 +45,8 @@ ContentPack-migration residue. **Fix by deleting the LEGACY copy** once the pack
 | weapon | defined at |
 |---|---|
 | `Flamethrower` | `weapons/tiberiandawn.yaml:72` · `weapons/starcraft.yaml:1` |
-| `OrniBombC` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2490` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:89` |
-| `OrniGunC` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2585` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:151` |
+| `OrniBombC` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2563` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:89` |
+| `OrniGunC` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2658` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:151` |
 | `ZClaw3` | `weapons/tiberiansun.yaml:1213` · `weapons/tiberiansun.yaml:1855` |
 
 

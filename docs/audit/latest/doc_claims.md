@@ -15,23 +15,21 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 356 | 356 | ✅ |
-| `multi_main_fired_weapons` | 192 | 856 | **MISMATCH** |
+| `multi_main_fired_weapons` | 189 | 189 | ✅ |
 | `percentage_denominator_unset` | 183 | 183 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 18 | 18 | ✅ |
-| `meters_filling_before_death` | 269 | 216 | **MISMATCH** |
+| `meters_filling_before_death` | 269 | 269 | ✅ |
 | `corrosion_meter_actors` | 817 | 817 | ✅ |
-| `w24_multi_main_fed` | 429 | 455 | **MISMATCH** |
-| `physical_state_fired_weapons` | 533 | 539 | **MISMATCH** |
+| `w24_multi_main_fed` | 429 | 429 | ✅ |
+| `physical_state_fired_weapons` | 534 | 534 | ✅ |
 | `plating_row_ties` | 0 | 0 | ✅ |
 | `plating_families` | 48 | 48 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1415 | 1415 | ✅ |
-| `unconverted_template_inheritors` | 1595 | 1601 | **MISMATCH** |
+| `unconverted_template_inheritors` | 1601 | 1601 | ✅ |
 | `ledgers_drifted` | 0 | 0 | ✅ |
 
-**FAIL — a document and the tree disagree.**
-
-Fix whichever is wrong, and if the tree is right update `value` in `doc_claims.yaml` **and every doc listed under `docs:`** in the SAME commit. That co-update is the point: it is how the `Shield = top + floor` duplication survived in two documents for weeks.
+_clean_ — every registered claim still matches the tree.
 
 ## Review cadence (for what a number cannot capture)
 

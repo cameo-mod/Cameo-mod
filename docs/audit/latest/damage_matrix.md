@@ -1,6 +1,6 @@
 # gen_damage_matrix — armor classes & Versus aggregates (§8.1)
 
-Armor types in live actors: **21**, warheads with Versus tables: **9623**
+Armor types in live actors: **21**, warheads with Versus tables: **5800**
 
 
 ## Armor types referenced by actors
@@ -12,28 +12,28 @@ ARMOR, Bomber, COMPOSITE, Concrete, Fighter, Flak, HAZMAT, Heavy, Helicopter, He
 
 | armor type | #warheads naming it | mean Versus | min | max |
 |---|---|---|---|---|
-| ARMOR | 4089 | 70% | 70 | 70 |
-| BLAST | 4089 | 66% | 36 | 104 |
-| Bomber | 9354 | 49% | 1 | 196 |
-| COMPOSITE | 4089 | 69% | 35 | 107 |
-| Concrete | 9597 | 60% | 0 | 200 |
-| Fighter | 9354 | 51% | 1 | 200 |
-| Flak | 9354 | 77% | 1 | 250 |
-| HAZMAT | 5228 | 69% | 25 | 102 |
-| Heavy | 9609 | 66% | 0 | 200 |
-| Helicopter | 9354 | 48% | 1 | 177 |
-| Heroic | 9354 | 56% | 1 | 300 |
-| Light | 9611 | 68% | 1 | 200 |
-| Medium | 9571 | 67% | 0 | 200 |
-| None | 9602 | 84% | 1 | 1000 |
-| Plate | 9354 | 75% | 1 | 275 |
-| REFLECTOR | 5005 | 65% | 42 | 104 |
-| Scout | 9355 | 68% | 1 | 200 |
-| Shield | 9246 | 130% | 9 | 400 |
-| Spaceship | 9354 | 47% | 1 | 191 |
-| Steel | 9354 | 62% | 1 | 175 |
-| Superheavy | 9358 | 67% | 1 | 200 |
-| Wood | 9614 | 68% | 0 | 200 |
+| ARMOR | 2818 | 70% | 70 | 70 |
+| BLAST | 2818 | 69% | 36 | 104 |
+| Bomber | 5533 | 45% | 1 | 196 |
+| COMPOSITE | 2818 | 68% | 35 | 107 |
+| Concrete | 5774 | 55% | 0 | 200 |
+| Fighter | 5533 | 45% | 1 | 200 |
+| Flak | 5533 | 70% | 1 | 250 |
+| HAZMAT | 2921 | 73% | 25 | 102 |
+| Heavy | 5786 | 63% | 0 | 200 |
+| Helicopter | 5533 | 44% | 1 | 177 |
+| Heroic | 5533 | 49% | 1 | 300 |
+| Light | 5788 | 62% | 1 | 200 |
+| Medium | 5748 | 62% | 0 | 200 |
+| None | 5779 | 76% | 1 | 1000 |
+| Plate | 5533 | 69% | 1 | 275 |
+| REFLECTOR | 3217 | 66% | 42 | 104 |
+| Scout | 5534 | 60% | 1 | 200 |
+| Shield | 5425 | 122% | 9 | 400 |
+| Spaceship | 5533 | 44% | 1 | 191 |
+| Steel | 5533 | 57% | 1 | 175 |
+| Superheavy | 5537 | 64% | 1 | 200 |
+| Wood | 5791 | 61% | 0 | 200 |
 | harvester | 30 | 42% | 25 | 100 |
 | invulnerable | 30 | 0% | 0 | 0 |
 | wall | 28 | 52% | 5 | 100 |
