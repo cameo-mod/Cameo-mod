@@ -87,8 +87,6 @@ zerg_sporemaw:
 		TurnSpeed: 32
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament@PRIMARY:
 		Weapon: SporemawShoot
 		LocalOffset: 0,0,200
@@ -146,8 +144,6 @@ zerg_hermit:
 		TurnSpeed: 20
 	Health:
 		HP: 375000
-	ChangesHealth@SelfHealing:
-		Step: 150
 	Armament:
 		Weapon: HermitShoot
 		FireDelay: 3
@@ -209,8 +205,6 @@ zerg_goremaw:
 		Locomotor: tracked
 	Health:
 		HP: 150000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Armament:
 		Weapon: GoremawClaw
 		FireDelay: 3
@@ -271,8 +265,6 @@ zerg_lurker:
 		TurnSpeed: 18
 	Health:
 		HP: 125000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	-HitShape:
 	HitShape:
 	GrantConditionOnDeploy:

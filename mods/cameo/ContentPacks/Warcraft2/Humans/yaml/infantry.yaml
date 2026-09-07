@@ -16,8 +16,6 @@ wc2_humans_militiapeasant:
 		HP: 20000
 	Repairable:
 		HpPerStep: 1000
-	ChangesHealth@SelfHealing:
-		Step: 8
 	Harvester:
 		BaleLoadDelay: 4
 		BaleUnloadDelay: 1
@@ -65,8 +63,6 @@ wc2_humans_footman:
 		Amount: -25
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 75
 	Buildable:
@@ -108,8 +104,6 @@ wc2_humans_warcraft3footman:
 		Amount: -45
 	Health:
 		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Mobile:
 		Speed: 85
 	Buildable:
@@ -168,8 +162,6 @@ wc2_humans_elvenarcher:
 		Amount: -30
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 25
 	Mobile:
 		Speed: 75
 	Buildable:
@@ -239,8 +231,6 @@ wc2_humans_highelvenarcher:
 		Amount: -55
 	Health:
 		HP: 35000
-	ChangesHealth@SelfHealing:
-		Step: 35
 	Mobile:
 		Speed: 85
 	Buildable:
@@ -287,8 +277,6 @@ wc2_humans_dwarvenrifleman:
 		Amount: -30
 	Health:
 		HP: 24000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Mobile:
 		Speed: 64
 	Buildable:
@@ -355,8 +343,6 @@ wc2_humans_knight:
 		Amount: -80
 	Health:
 		HP: 167500
-	ChangesHealth@SelfHealing:
-		Step: 67
 	Armor:
 		Type: Medium
 	Mobile:
@@ -414,8 +400,6 @@ wc2_humans_mortarteam:
 		Amount: -40
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Mobile:
 		Speed: 80
 		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
@@ -979,8 +963,6 @@ wc2_humans_alleria:
 		HP: 50000
 	Armor:
 		Type: Heroic
-	ChangesHealth@SelfHealing:
-		Step: 25
 	Mobile:
 		Speed: 100
 	Buildable:
@@ -1024,8 +1006,6 @@ wc2_humans_alleria_elite:
 		HP: 75000
 	Armor:
 		Type: Heroic
-	ChangesHealth@SelfHealing:
-		Step: 35
 	Mobile:
 		Speed: 100
 	Buildable:
@@ -1065,8 +1045,6 @@ wc2_humans_danath:
 		HP: 150000
 	Armor:
 		Type: Heroic
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 90
 	Buildable:
@@ -1103,8 +1081,6 @@ wc2_humans_danath_elite:
 		HP: 250000
 	Armor:
 		Type: Heroic
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Mobile:
 		Speed: 90
 	Buildable:

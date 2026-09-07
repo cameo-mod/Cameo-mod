@@ -93,8 +93,6 @@ terran_vulture:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament:
 		Weapon: VultureGrenade
 		LocalOffset: 600,0,0
@@ -166,8 +164,6 @@ terran_siegetank:
 		HP: 150000
 	Repairable:
 		HpPerStep: 7500
-	ChangesHealth@SelfHealing:
-		Step: 60
 	RevealOnFire:
 		ArmamentNames: primary, deployed
 	Armor:
@@ -306,8 +302,6 @@ terran_matador:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	RevealOnFire:
 		ArmamentNames: primary, deployed
 	Armor:
@@ -433,8 +427,6 @@ terran_cyclone:
 		HP: 90000
 	Repairable:
 		HpPerStep: 4500
-	ChangesHealth@SelfHealing:
-		Step: 36
 	Turreted:
 		TurnSpeed: 23
 		Offset: -16,0,64
@@ -512,8 +504,6 @@ terran_goliath:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Turreted:
 		TurnSpeed: 18
 		Offset: 0,0,0
@@ -583,8 +573,6 @@ terran_goliathmk2:
 		HP: 175000
 	Repairable:
 		HpPerStep: 8750
-	ChangesHealth@SelfHealing:
-		Step: 70
 	Turreted:
 		TurnSpeed: 15
 		Offset: 0,0,0
@@ -652,8 +640,6 @@ terran_warhound:
 		HP: 300000
 	Repairable:
 		HpPerStep: 15000
-	ChangesHealth@SelfHealing:
-		Step: 120
 	Armament@Cannon:
 		Name: primary
 		Weapon: SCTyr
