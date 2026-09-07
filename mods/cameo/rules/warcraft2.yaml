@@ -299,8 +299,6 @@ Player:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Armor:
 		Type: Light
 	Buildable:
@@ -1341,8 +1339,6 @@ wc2_orc_skeleton:
 		Amount: 0
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Mobile:
 		Speed: 100
 	Armament:

@@ -605,8 +605,6 @@ XCOMHQ:
 		BuildSounds: tscupd00.aud
 	Health:
 		HP: 10000000
-	ChangesHealth@SelfHealing:
-		Step: 1000
 	RepairableBuilding:
 		RepairPercent: 50
 		RepairInterval: 1
@@ -891,8 +889,6 @@ medium_gun_turret.xcom:
 		Delay: 10
 	Health:
 		HP: 125000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	BodyOrientation:
 		QuantizedFacings: 32
 	WithMuzzleOverlay:
@@ -971,8 +967,6 @@ large_gun_turret.xcom:
 		Delay: 10
 	Health:
 		HP: 150000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	BodyOrientation:
 		QuantizedFacings: 32
 	Armament@PRIMARY:
@@ -1173,8 +1167,6 @@ xcom_drmn:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	WithDockingAnimation:
 	Voiced:
 		VoiceSet: AsianDroneVoice
@@ -1275,8 +1267,6 @@ xcom_builder:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armor:
 		Type: Medium
 	Mobile:

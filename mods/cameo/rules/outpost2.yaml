@@ -1456,8 +1456,6 @@ EDEN_CARGOTRUCK_EMPTY:
 		HP: 110000
 	Repairable:
 		HpPerStep: 5500
-	ChangesHealth@SelfHealing:
-		Step: 44
 	Armor:
 		Type: Medium
 	Mobile:
@@ -1509,8 +1507,6 @@ EDEN_SCOUT:
 		HP: 32500
 	Repairable:
 		HpPerStep: 1625
-	ChangesHealth@SelfHealing:
-		Step: 13
 	Turreted:
 		TurnSpeed: 28
 		Offset: -43,0,128
@@ -1547,8 +1543,6 @@ EDEN_LYNX_LASER:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Voiced:
 		VoiceSet: lynxVoice
 	Armor:
@@ -1587,8 +1581,6 @@ EDEN_TIGER_LASER:
 		HP: 150000
 	Repairable:
 		HpPerStep: 7500
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
@@ -1625,8 +1617,6 @@ EDEN_LYNX_RAILGUN:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Voiced:
 		VoiceSet: lynxVoice
 	Armor:
@@ -1664,8 +1654,6 @@ EDEN_TIGER_RAILGUN:
 		HP: 120000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
@@ -1703,8 +1691,6 @@ EDEN_LYNX_EMP:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Voiced:
 		VoiceSet: lynxVoice
 	Armor:
@@ -1746,8 +1732,6 @@ EDEN_TIGER_EMP:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
@@ -1857,8 +1841,6 @@ EDEN_LYNX_STARFLARE:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Voiced:
 		VoiceSet: lynxVoice
 	Armor:
@@ -1910,8 +1892,6 @@ EDEN_TIGER_STARFLARE:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
@@ -1962,8 +1942,6 @@ EDEN_LYNX_THORSHAMMER:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Voiced:
 		VoiceSet: lynxVoice
 	Armor:
@@ -2001,8 +1979,6 @@ EDEN_TIGER_THORSHAMMER:
 		HP: 160000
 	Repairable:
 		HpPerStep: 8000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
@@ -2560,8 +2536,6 @@ PLYMOUTH_CARGOTRUCK_EMPTY:
 		HP: 120000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Armor:
 		Type: Medium
 	Mobile:
@@ -2613,8 +2587,6 @@ PLYMOUTH_SCOUT:
 		HP: 35000
 	Repairable:
 		HpPerStep: 1750
-	ChangesHealth@SelfHealing:
-		Step: 14
 	Turreted:
 		TurnSpeed: 27
 		Offset: -43,0,128
