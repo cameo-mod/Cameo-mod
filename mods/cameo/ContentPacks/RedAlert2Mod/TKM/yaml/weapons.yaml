@@ -1039,7 +1039,7 @@ VonSniper:
 		Spread: 1
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 30000
 	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1066,6 +1066,8 @@ VonSniper:
 		PercentageScale: 0
 	-Warhead@SniperFlak:
 	-Warhead@SniperMediumMissile:
+	-Warhead@SniperSmallArms:
+	-Warhead@SniperChaingun:
 VonSniperAP:
 	Inherits: VonSniper
 	ReloadDelay: 50
@@ -1081,7 +1083,7 @@ VonSniperAP:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Bullet_Heavy: AreaDamage
-		Damage: 16000
+		Damage: 80000
 	Warhead@Bullet_Light: AreaDamage
 		Spread: 1
 		Falloff: 100, 0
@@ -1110,6 +1112,8 @@ VonSniperAP:
 	-Warhead@SniperFlak:
 	-Warhead@SniperMediumMissile:
 	-Warhead@Bullet_Light:
+	-Warhead@SniperChaingun:
+	-Warhead@Bullet_Medium:
 VonSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
@@ -1127,7 +1131,7 @@ VonSniperLockdown:
 		Spread: 1
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
-		Damage: 32000
+		Damage: 192000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		Spread: 1
@@ -1188,6 +1192,10 @@ VonSniperLockdown:
 		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	-Warhead@SniperMediumMissile:
+	-Warhead@SniperFlak:
+	-Warhead@SniperChaingun:
+	-Warhead@Bullet_Heavy:
+	-Warhead@Bullet_Medium:
 
 tkmm16ap:
 	Inherits: ^RA2Chaingun
