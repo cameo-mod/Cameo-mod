@@ -273,7 +273,7 @@ def _main() -> int:
                     if "#" not in src or src != rslot.get("src"):
                         problems.append(f"{actor}.{field}: missing or stale provenance")
                         continue
-                    if not scalar_value(slot.get("v")):
+                    if not scalar_value(slot.get("v"), field):
                         problems.append(f"{actor}.{field}: unsupported scalar value")
                         continue
                     relfile, anchor = src.split("#", 1)
@@ -307,12 +307,17 @@ def _main() -> int:
                     if wname != rarm.get("weapon") or wfile != rarm.get("defined_in"):
                         problems.append(f"{actor}/{wname}: missing or stale armament provenance")
                         continue
+                    if arm != rarm:
+                        cadence_error = weapon_cadence_error(arm)
+                        if cadence_error:
+                            problems.append(f"{actor}/{wname}: {cadence_error}")
+                            continue
                     for lkey, ykey in WEAPON_FIELDS.items():
                         if lkey not in arm:
                             continue
                         if str(arm.get(lkey)) == str(rarm.get(lkey)):
                             continue
-                        if not scalar_value(arm[lkey]):
+                        if not scalar_value(arm[lkey], lkey):
                             problems.append(f"{actor}/{wname}.{ykey}: unsupported scalar value")
                             continue
                         if already_planned((wfile, wname, ykey), arm[lkey]):
@@ -332,7 +337,7 @@ def _main() -> int:
                     for w in arm.get("damage_warheads", []):
                         if str(w.get("damage")) == str((rwh.get(w["tag"]) or {}).get("damage")):
                             continue
-                        if not scalar_value(w.get("damage")):
+                        if not scalar_value(w.get("damage"), "damage"):
                             problems.append(f"{actor}/{wname}/{w['tag']}: unsupported scalar value")
                             continue
                         if already_planned((wfile, wname, w["tag"], "Damage"), w["damage"]):
@@ -458,10 +463,59 @@ def main() -> int:
         return 1
 
 
-def scalar_value(value) -> bool:
-    """Only numeric/WDist/list scalars; never allow YAML structure injection."""
-    return not isinstance(value, bool) and isinstance(value, (int, float, str)) and bool(
-        re.fullmatch(r"[+-]?\d+(?:\.\d+)?(?:c\d+)?(?:, *[+-]?\d+)*", str(value)))
+def int32_value(value) -> bool:
+    """Engine integer fields do not accept floats, distances, lists or overflow."""
+    if isinstance(value, bool) or not isinstance(value, (int, str)):
+        return False
+    text = str(value)
+    return (len(text) <= 11 and re.fullmatch(r"[+-]?[0-9]+", text) is not None
+            and -(2 ** 31) <= int(text) < 2 ** 31)
+
+
+def scalar_value(value, field) -> bool:
+    """Validate writable scalars against engine types, before touching YAML.
+
+    WAngle (turn_speed) uses an Int32 representation. WDist supports raw world
+    units or cells/subcells; reject overflow instead of allowing engine wrapping.
+    Signed healing damage and the BuildDuration=-1 sentinel remain legitimate.
+    """
+    if field in ("sight", "range", "minrange"):
+        if int32_value(value):
+            return True
+        if not isinstance(value, str):
+            return False
+        parts = value.lower().split("c")
+        if len(parts) != 2 or not all(int32_value(part) for part in parts):
+            return False
+        cells, subcells = map(int, parts)
+        subcells = -subcells if cells < 0 else subcells
+        return (-(2 ** 31) <= cells * 1024 < 2 ** 31
+                and -(2 ** 31) <= subcells < 2 ** 31
+                and -(2 ** 31) <= cells * 1024 + subcells < 2 ** 31)
+    if field == "burstdelays":
+        if not isinstance(value, (str, int)) or isinstance(value, bool):
+            return False
+        return all(int32_value(part.strip()) for part in str(value).split(","))
+    if field in (*UNIT_FIELDS, "reloaddelay", "burst", "damage"):
+        return int32_value(value)
+    return False
+
+
+def weapon_cadence_error(arm):
+    """Mirror armament load constraints and reject empty burst-delay arrays."""
+    reload_ = arm.get("reloaddelay", 1)
+    burst = arm.get("burst", 1)
+    delays = arm.get("burstdelays", "5")
+    if not int32_value(reload_) or int(reload_) <= 0:
+        return "ReloadDelay must be a positive Int32"
+    if not int32_value(burst) or int(burst) <= 0:
+        return "Burst must be a positive Int32"
+    if not scalar_value(delays, "burstdelays"):
+        return "BurstDelays must be a nonempty Int32 list"
+    count = len(str(delays).split(","))
+    if int(burst) > 1 and count not in (1, int(burst) - 1):
+        return "BurstDelays must have one entry or Burst - 1 entries"
+    return None
 
 
 def apply_checked(editors, ledger_bytes, desired, source_bytes=None) -> bool:

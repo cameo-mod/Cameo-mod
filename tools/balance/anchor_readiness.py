@@ -61,6 +61,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 import class_membership  # noqa: E402
+import formula  # noqa: E402
 
 LEDGER = ROOT / "docs" / "balance"
 TICKS_PER_SECOND = 25
@@ -81,19 +82,24 @@ def fnum(v):
     if v is None:
         return None
     try:
-        return float(str(v).strip())
+        value = float(str(v).strip())
+        return value if math.isfinite(value) else None
     except (TypeError, ValueError):
         return None
 
 
 def unit_dps(unit):
-    """Peak single-armament DPS: damage / reload * ticks. None when unarmed."""
+    """Peak nominal single-armament DPS, with full burst cadence.
+
+    This diagnostic is not summed live output, a matchup model, or a sign-off:
+    activation conditions, charge traits and actor modifiers are not modeled.
+    """
     best = None
     for arm in unit.get("armaments") or []:
         if not arm.get("pricing"):
             continue
         reload_ = fnum(arm.get("reloaddelay"))
-        if not reload_:
+        if reload_ is None or reload_ <= 0:
             continue
         damage = 0.0
         for wh in arm.get("damage_warheads") or []:
@@ -104,7 +110,16 @@ def unit_dps(unit):
                 damage += d
         if damage <= 0:
             continue
-        dps = damage / reload_ * TICKS_PER_SECOND
+        burst = fnum(arm.get("burst", 1))
+        if burst is None or burst < 1 or not burst.is_integer():
+            continue
+        if "burstdelays" in arm:
+            delays = formula.burst_delay_values(arm["burstdelays"])
+            if not delays or (burst > 1 and len(delays) not in (1, int(burst) - 1)):
+                continue
+        if formula.eff_reload(reload_, int(burst), arm.get("burstdelays")) <= 0:
+            continue
+        dps = formula.dps(damage, reload_, int(burst), arm.get("burstdelays")) * TICKS_PER_SECOND
         best = dps if best is None else max(best, dps)
     return best
 
@@ -112,7 +127,7 @@ def unit_dps(unit):
 def unit_range(unit):
     best = None
     for arm in unit.get("armaments") or []:
-        r = fnum(arm.get("range"))
+        r = formula.wdist_value(arm.get("range"))
         if r:
             best = r if best is None else max(best, r)
     return best
@@ -122,7 +137,9 @@ def features(unit):
     return {"hp": fnum((unit.get("hp") or {}).get("v")),
             "dps": unit_dps(unit),
             "range": unit_range(unit),
-            "speed": fnum((unit.get("speed") or {}).get("v"))}
+            "speed": fnum((unit.get("speed") or {}).get("v")
+                          if (unit.get("speed") or {}).get("v") is not None
+                          else (unit.get("speed_air") or {}).get("v"))}
 
 
 def load_units():

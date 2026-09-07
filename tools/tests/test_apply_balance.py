@@ -196,6 +196,69 @@ class ApplyTests(unittest.TestCase):
         self.assertIn("unsupported scalar", text)
         child.assert_not_called()
 
+    def test_invalid_engine_values_refuse_without_writes(self):
+        cases = [("cost", value) for value in (150.5, "1c0", "2, 3", True, 2 ** 31, -(2 ** 31) - 1)]
+        cases += [("hp", "1c0"), ("reloaddelay", "2, 3"),
+                  ("reloaddelay", 0), ("burst", 0), ("damage", "1.5"),
+                  ("range", "1.5c0"), ("range", "2097152c0"),
+                  ("burstdelays", ""), ("burstdelays", "1.5")]
+        for field, value in cases:
+            with self.subTest(field=field, value=value):
+                self.desired = copy.deepcopy(self.fresh)
+                unit = self.desired["test"]["sections"]["infantry"]["unit"]
+                # A valid first edit must not leak out when a later edit is refused.
+                unit["cost"]["v"] = 150
+                if field in ("cost", "hp"):
+                    unit[field]["v"] = value
+                elif field == "damage":
+                    unit["armaments"][0]["damage_warheads"][0]["damage"] = value
+                else:
+                    unit["armaments"][0][field] = value
+                self.write_ledgers()
+                before = {p: p.read_bytes() for p in self.root.rglob("*") if p.is_file()}
+                code, text, child = self.run_apply("--confirm")
+                self.assertEqual(1, code, text)
+                self.assertIn("REFUSED", text)
+                child.assert_not_called()
+                self.assertEqual(before, {p: p.read_bytes() for p in self.root.rglob("*") if p.is_file()})
+
+    def test_changed_burst_revalidates_unchanged_delay_list(self):
+        self.unit["armaments"][0].update(burst="3", burstdelays="2, 3")
+        self.desired = copy.deepcopy(self.fresh)
+        self.desired["test"]["sections"]["infantry"]["unit"]["armaments"][0]["burst"] = "4"
+        self.write_ledgers()
+        code, text, child = self.run_apply("--confirm")
+        self.assertEqual(1, code, text)
+        self.assertIn("Burst - 1", text)
+        child.assert_not_called()
+        self.assertEqual(self.original, self.yaml.read_bytes())
+
+    def test_engine_scalar_types_and_bounds(self):
+        int_fields = [f for f in apply.UNIT_FIELDS if f != "sight"] + ["burst", "reloaddelay", "damage"]
+        for field in int_fields:
+            for value in (-2 ** 31, 2 ** 31 - 1, "-1", "0", "+120"):
+                with self.subTest(field=field, value=value):
+                    self.assertTrue(apply.scalar_value(value, field))
+            for value in (True, 1.0, "1.0", "1c0", "1,2", "１２", float("nan"),
+                          float("inf"), 2 ** 31, -2 ** 31 - 1, "9" * 100):
+                with self.subTest(field=field, value=value):
+                    self.assertFalse(apply.scalar_value(value, field))
+        for field in ("sight", "range", "minrange"):
+            for value in ("1C0", "-1c2", "-1c-2", "2097151c1023", "-2097152c0", 2048):
+                self.assertTrue(apply.scalar_value(value, field), (field, value))
+            for value in ("1.5c0", "2097152c0", "2097151c1024", "-2097152c1", "0c2147483648"):
+                self.assertFalse(apply.scalar_value(value, field), (field, value))
+        self.assertTrue(apply.scalar_value("0, 5, -1", "burstdelays"))
+        self.assertFalse(apply.scalar_value("1,", "burstdelays"))
+        self.assertFalse(apply.scalar_value("1, 2147483648", "burstdelays"))
+        self.assertFalse(apply.scalar_value(1, "unknown_field"))
+
+    def test_valid_weapon_cadence_uses_engine_defaults(self):
+        self.assertIsNone(apply.weapon_cadence_error({}))
+        self.assertIsNone(apply.weapon_cadence_error({"burst": "3", "burstdelays": "2, 3"}))
+        self.assertIsNone(apply.weapon_cadence_error({"burst": "8"}))
+        self.assertIsNone(apply.weapon_cadence_error({"burst": "8", "burstdelays": "5"}))
+
     def test_duplicate_block_is_rejected(self):
         self.yaml.write_bytes(self.original + self.original.removeprefix(b"\xef\xbb\xbf"))
         self.change_cost()

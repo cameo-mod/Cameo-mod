@@ -16,6 +16,47 @@ import audit_three_way_split as split
 import miniyaml
 
 
+class ReadinessFeatureTests(unittest.TestCase):
+    def test_aircraft_speed_is_not_silently_omitted(self):
+        self.assertEqual(125, readiness.features({"speed_air": {"v": 125}})["speed"])
+        self.assertEqual(0, readiness.features({"speed": {"v": 0}, "speed_air": {"v": 125}})["speed"])
+        self.assertIsNone(readiness.features({})["speed"])
+
+    def test_range_accepts_world_distance_notation(self):
+        self.assertEqual(5120, readiness.unit_range({"armaments": [{"range": "5c0"}]}))
+        self.assertIsNone(readiness.unit_range({"armaments": [{"range": "unknown"}]}))
+
+    def test_nominal_dps_uses_full_burst_and_excludes_percentage_twins(self):
+        arm = {"pricing": True, "reloaddelay": "20", "burst": "3",
+               "burstdelays": "5", "damage_warheads": [
+                   {"type": "AreaDamage", "damage": 100},
+                   {"type": "AreaDamagePercentage", "damage": 100}]}
+        self.assertEqual(250, readiness.unit_dps({"armaments": [arm]}))
+        arm["burstdelays"] = "2, 3"
+        self.assertEqual(300, readiness.unit_dps({"armaments": [arm]}))
+        del arm["burstdelays"]
+        self.assertEqual(250, readiness.unit_dps({"armaments": [arm]}))
+        arm["burst"] = "1"
+        self.assertEqual(125, readiness.unit_dps({"armaments": [arm]}))
+        arm["pricing"] = False
+        self.assertIsNone(readiness.unit_dps({"armaments": [arm]}))
+
+    def test_invalid_cadence_is_not_replaced_by_defaults(self):
+        arm = {"pricing": True, "reloaddelay": "20",
+               "damage_warheads": [{"type": "AreaDamage", "damage": 100}]}
+        self.assertEqual(125, readiness.unit_dps({"armaments": [arm]}))
+        for value in (0, -1, "bad", "NaN", "inf", 1.5):
+            with self.subTest(burst=value):
+                self.assertIsNone(readiness.unit_dps({"armaments": [{**arm, "burst": value}]}))
+        for value in (0, -1, "bad", "NaN", "inf"):
+            with self.subTest(reload=value):
+                self.assertIsNone(readiness.unit_dps({"armaments": [{**arm, "reloaddelay": value}]}))
+        for value in (None, "", "bad", "1.5", "1, 2, 3", [], "NaN", "inf"):
+            with self.subTest(delays=value):
+                self.assertIsNone(readiness.unit_dps({"armaments": [
+                    {**arm, "burst": 3, "burstdelays": value}]}))
+
+
 class SplitGateTests(unittest.TestCase):
     def gate(self, weapon="Composite"):
         return readiness.three_way_split_gate(
