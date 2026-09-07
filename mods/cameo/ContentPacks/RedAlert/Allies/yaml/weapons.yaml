@@ -182,9 +182,10 @@ AlliedTankDestroyerCannon:
 	Projectile: Bullet
 		Speed: 1362
 	Warhead@CannonHE_Medium:
-		Damage: 12000
+		Damage: 24000
 	Warhead@CannonAP_Light:
 		Damage: 12000
+	-Warhead@CannonAP_Light:
 AlliedTankDestroyerCannonCryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Light
@@ -208,9 +209,10 @@ SheridanCannon:
 	Projectile: Bullet
 		Speed: 502
 	Warhead@CannonAP_Light:
-		Damage: 8000
+		Damage: 16000
 	Warhead@CannonHE_Medium:
 		Damage: 8000
+	-Warhead@CannonHE_Medium:
 SheridanCannonCryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
