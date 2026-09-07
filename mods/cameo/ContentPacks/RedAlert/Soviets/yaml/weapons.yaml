@@ -182,7 +182,7 @@ GrenadeThermobaricExplode:
 		PhysicalStateScale: 100
 	Warhead@Thermobaric_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 16000
+		Damage: 8000
 		PercentageScale: 4994
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
@@ -1528,7 +1528,7 @@ KamovTeslaArcFragment1:
 		AimTargetStances: Enemy, Neutral
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 48000
+		Damage: 16000
 		PercentageScale: 6665
 	-Warhead@LightMissile:
 	-Warhead@TeslaWeapon:
@@ -1552,7 +1552,7 @@ KamovTeslaArcFragment2:
 		Damage: 4000
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 40000
+		Damage: 8000
 		PercentageScale: 7998
 	-Warhead@TeslaArc:
 	-Warhead@LightMissile:
@@ -1684,7 +1684,7 @@ YakTeslaArcFragment1:
 		AimTargetStances: Enemy, Neutral
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 8000
 		PercentageScale: 6663
 	-Warhead@LightMissile:
 	-Warhead@TeslaWeapon:
@@ -1708,7 +1708,7 @@ YakTeslaArcFragment2:
 		Damage: 1000
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 20000
+		Damage: 4000
 		PercentageScale: 7995
 	-Warhead@TeslaArc:
 	-Warhead@LightMissile:
