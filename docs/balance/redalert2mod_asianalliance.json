@@ -117,8 +117,8 @@
     },
     "name": "Harbinger",
     "prerequisites": [
-     "~asianalliance_asianairforcecommand",
-     "asianalliance_asianbattlelab"
+     "~asianalliance_airforcecommand",
+     "asianalliance_battlelab"
     ],
     "queue": [
      "Aircraft",
@@ -314,7 +314,7 @@
     },
     "name": "Pelican",
     "prerequisites": [
-     "~asianalliance_asianairforcecommand"
+     "~asianalliance_airforcecommand"
     ],
     "queue": [
      "Aircraft",
@@ -453,8 +453,8 @@
     },
     "name": "Phoenix",
     "prerequisites": [
-     "~asianalliance_asianairforcecommand",
-     "asianalliance_asianbattlelab"
+     "~asianalliance_airforcecommand",
+     "asianalliance_battlelab"
     ],
     "queue": [
      "Aircraft",
@@ -494,7 +494,7 @@
      "v": "12"
     }
    },
-   "bomber_minebomb.asian": {
+   "asianalliance_bomber_minebomb": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -559,7 +559,7 @@
      "v": "25"
     }
    },
-   "bomber_minebomb2.asian": {
+   "asianalliance_bomber_minebomb2": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -624,7 +624,7 @@
      "v": "25"
     }
    },
-   "kami.asian": {
+   "asianalliance_kami": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -697,7 +697,7 @@
      "v": "16"
     }
    },
-   "kami_asdf.asian": {
+   "asianalliance_kami_asdf": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -770,7 +770,7 @@
      "v": "16"
     }
    },
-   "kami_chemical.asian": {
+   "asianalliance_kami_chemical": {
     "armaments": [
      {
       "burst": "3",
@@ -920,8 +920,8 @@
     },
     "name": "Advanced Communication Center",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianbattlelab",
+     "~asianalliance_constructionyard",
+     "asianalliance_battlelab",
      "!asianalliance_advancedcommunicationcenter_swlimit",
      "~techlevel.superweapons"
     ],
@@ -946,7 +946,7 @@
      "v": "10000"
     }
    },
-   "asianalliance_asianairforcecommand": {
+   "asianalliance_airforcecommand": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
@@ -977,8 +977,8 @@
     },
     "name": "Asian Airforce Command",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianradar"
+     "~asianalliance_constructionyard",
+     "asianalliance_radar"
     ],
     "queue": [
      "Building",
@@ -1001,7 +1001,7 @@
      "v": "6000"
     }
    },
-   "asianalliance_asianbarracks": {
+   "asianalliance_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
@@ -1032,8 +1032,8 @@
     },
     "name": "Asian Barracks",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianpetrolplant"
+     "~asianalliance_constructionyard",
+     "asianalliance_petrolplant"
     ],
     "queue": [
      "Building",
@@ -1056,7 +1056,7 @@
      "v": "5000"
     }
    },
-   "asianalliance_asianbattlelab": {
+   "asianalliance_battlelab": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -1087,8 +1087,8 @@
     },
     "name": "Asian Battle Lab",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianradar"
+     "~asianalliance_constructionyard",
+     "asianalliance_radar"
     ],
     "queue": [
      "Building",
@@ -1111,7 +1111,7 @@
      "v": "10000"
     }
    },
-   "asianalliance_asianconstructionyard": {
+   "asianalliance_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -1161,7 +1161,7 @@
      "v": "10000"
     }
    },
-   "asianalliance_asianorerefinery": {
+   "asianalliance_orerefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -1192,8 +1192,8 @@
     },
     "name": "Asian Ore Refinery",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianpetrolplant"
+     "~asianalliance_constructionyard",
+     "asianalliance_petrolplant"
     ],
     "queue": [
      "Building",
@@ -1216,7 +1216,7 @@
      "v": "6000"
     }
    },
-   "asianalliance_asianpetrolplant": {
+   "asianalliance_petrolplant": {
     "armor": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
@@ -1243,7 +1243,7 @@
     },
     "name": "Asian Petrol Plant",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard"
+     "~asianalliance_constructionyard"
     ],
     "queue": [
      "Building",
@@ -1266,7 +1266,7 @@
      "v": "4c0"
     }
    },
-   "asianalliance_asianradar": {
+   "asianalliance_radar": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
@@ -1297,8 +1297,8 @@
     },
     "name": "Asian Radar",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianorerefinery"
+     "~asianalliance_constructionyard",
+     "asianalliance_orerefinery"
     ],
     "queue": [
      "Building",
@@ -1321,7 +1321,7 @@
      "v": "10000"
     }
    },
-   "asianalliance_asiansentryflamer": {
+   "asianalliance_sentryflamer": {
     "armaments": [
      {
       "burst": "6",
@@ -1379,8 +1379,8 @@
     },
     "name": "Asian Sentry Flamer",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianbarracks"
+     "~asianalliance_constructionyard",
+     "asianalliance_barracks"
     ],
     "queue": [
      "Defence",
@@ -1408,7 +1408,7 @@
      "v": "6666"
     }
    },
-   "asianalliance_asianservicedepot": {
+   "asianalliance_servicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -1439,8 +1439,8 @@
     },
     "name": "Asian Service Depot",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianwarfactory"
+     "~asianalliance_constructionyard",
+     "asianalliance_warfactory"
     ],
     "queue": [
      "Building",
@@ -1463,7 +1463,7 @@
      "v": "5000"
     }
    },
-   "asianalliance_asianwarfactory": {
+   "asianalliance_warfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -1494,8 +1494,8 @@
     },
     "name": "Asian War Factory",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianorerefinery"
+     "~asianalliance_constructionyard",
+     "asianalliance_orerefinery"
     ],
     "queue": [
      "Building",
@@ -1549,8 +1549,8 @@
     },
     "name": "Chaos Storm Inductor",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianbattlelab",
+     "~asianalliance_constructionyard",
+     "asianalliance_battlelab",
      "~techlevel.superweapons",
      "!asianalliance_chaosstorminductor_swlimit"
     ],
@@ -1622,7 +1622,7 @@
     },
     "name": "Chaos Tower",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_militaryacademy"
     ],
     "queue": [
@@ -1745,7 +1745,7 @@
     },
     "name": "Hyperion Projector",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_militaryacademy"
     ],
     "queue": [
@@ -1809,8 +1809,8 @@
     },
     "name": "Military Academy",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianbattlelab",
+     "~asianalliance_constructionyard",
+     "asianalliance_battlelab",
      "derricklimit"
     ],
     "queue": [
@@ -1942,7 +1942,7 @@
     },
     "name": "Plasma Cannon",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_militaryacademy"
     ],
     "queue": [
@@ -2137,8 +2137,8 @@
     },
     "name": "Pulsar",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianradar"
+     "~asianalliance_constructionyard",
+     "asianalliance_radar"
     ],
     "queue": [
      "Defence",
@@ -2238,8 +2238,8 @@
     },
     "name": "Rail Tower",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianbattlelab"
+     "~asianalliance_constructionyard",
+     "asianalliance_battlelab"
     ],
     "queue": [
      "Defence",
@@ -2340,7 +2340,7 @@
     },
     "name": "Spitfire",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_militaryacademy"
     ],
     "queue": [
@@ -2404,8 +2404,8 @@
     },
     "name": "Tank Reactor",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianbattlelab"
+     "~asianalliance_constructionyard",
+     "asianalliance_battlelab"
     ],
     "queue": [
      "Building",
@@ -2428,7 +2428,7 @@
      "v": "5c0"
     }
    },
-   "cgpnch.asian": {
+   "asianalliance_cgpnch": {
     "armaments": [
      {
       "damage_warheads": [
@@ -2597,7 +2597,7 @@
     },
     "name": "Punisher",
     "prerequisites": [
-     "~cgyard.asian"
+     "~asianalliance_cgyard"
     ],
     "queue": [
      "Defence",
@@ -2625,7 +2625,7 @@
      "v": "12000"
     }
    },
-   "cgyard.asian": {
+   "asianalliance_cgyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -2656,8 +2656,8 @@
     },
     "name": "Asian Naval Yard",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
-     "asianalliance_asianorerefinery",
+     "~asianalliance_constructionyard",
+     "asianalliance_orerefinery",
      "~globalnaval"
     ],
     "queue": [
@@ -2765,7 +2765,7 @@
     },
     "name": "Alligator",
     "prerequisites": [
-     "~asianalliance_asianbarracks"
+     "~asianalliance_barracks"
     ],
     "queue": [
      "Infantry",
@@ -2988,7 +2988,7 @@
     },
     "name": "ASDF",
     "prerequisites": [
-     "~asianalliance_asianbarracks",
+     "~asianalliance_barracks",
      "asianalliance_militaryacademy",
      "~asianalliance_promotion_asdf"
     ],
@@ -3029,7 +3029,7 @@
      "v": "58"
     }
    },
-   "asianalliance_asiancommando": {
+   "asianalliance_commando": {
     "armaments": [
      {
       "damage_warheads": [
@@ -3397,7 +3397,7 @@
     },
     "name": "Asian Commando",
     "prerequisites": [
-     "~asianalliance_asianbarracks",
+     "~asianalliance_barracks",
      "asianalliance_militaryacademy"
     ],
     "queue": [
@@ -3430,7 +3430,7 @@
      "v": "75"
     }
    },
-   "asianalliance_asianflametrooper": {
+   "asianalliance_flametrooper": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -3639,8 +3639,8 @@
     },
     "name": "Asian Flame Trooper",
     "prerequisites": [
-     "~asianalliance_asianbarracks",
-     "asianalliance_asianradar"
+     "~asianalliance_barracks",
+     "asianalliance_radar"
     ],
     "queue": [
      "Infantry",
@@ -3679,7 +3679,7 @@
      "v": "53"
     }
    },
-   "asianalliance_asianmilitia": {
+   "asianalliance_militia": {
     "armaments": [
      {
       "damage_warheads": [
@@ -3932,8 +3932,8 @@
      "unit_class": 1.0
     },
     "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier@asianalliance_asianmilitia.Modifier",
-     "trait": "FirepowerMultiplier@asianalliance_asianmilitia",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier@asianalliance_militia.Modifier",
+     "trait": "FirepowerMultiplier@asianalliance_militia",
      "v": 0.83
     },
     "hp": {
@@ -3942,7 +3942,7 @@
     },
     "name": "Asian Militia",
     "prerequisites": [
-     "~asianalliance_asianbarracks"
+     "~asianalliance_barracks"
     ],
     "queue": [
      "Infantry",
@@ -3957,8 +3957,8 @@
      },
      {
       "modifier": 83,
-      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier@asianalliance_asianmilitia.Modifier",
-      "trait": "FirepowerMultiplier@asianalliance_asianmilitia",
+      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier@asianalliance_militia.Modifier",
+      "trait": "FirepowerMultiplier@asianalliance_militia",
       "types": []
      }
     ],
@@ -3991,7 +3991,7 @@
      "v": "53"
     }
    },
-   "asianalliance_asiantankkiller": {
+   "asianalliance_tankkiller": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -4233,7 +4233,7 @@
     },
     "name": "Asian Tank Killer",
     "prerequisites": [
-     "~asianalliance_asianbarracks"
+     "~asianalliance_barracks"
     ],
     "queue": [
      "Infantry",
@@ -4326,7 +4326,7 @@
     },
     "name": "Engineer",
     "prerequisites": [
-     "~asianalliance_asianbarracks"
+     "~asianalliance_barracks"
     ],
     "queue": [
      "Infantry",
@@ -4578,7 +4578,7 @@
     },
     "name": "Fanatic",
     "prerequisites": [
-     "~asianalliance_asianbarracks",
+     "~asianalliance_barracks",
      "~asianalliance_promotion_fanatic"
     ],
     "queue": [
@@ -4728,8 +4728,8 @@
     },
     "name": "Japanese Samurai",
     "prerequisites": [
-     "~asianalliance_asianbarracks",
-     "asianalliance_asianradar",
+     "~asianalliance_barracks",
+     "asianalliance_radar",
      "~asianalliance_promotion_samurai"
     ],
     "queue": [
@@ -5122,8 +5122,8 @@
     },
     "name": "Plasma Trooper",
     "prerequisites": [
-     "~asianalliance_asianbarracks",
-     "asianalliance_asianbattlelab",
+     "~asianalliance_barracks",
+     "asianalliance_battlelab",
      "~asianalliance_promotion_plasmatrooper"
     ],
     "queue": [
@@ -5298,8 +5298,8 @@
     },
     "name": "Shinobi",
     "prerequisites": [
-     "~asianalliance_asianbarracks",
-     "asianalliance_asianradar"
+     "~asianalliance_barracks",
+     "asianalliance_radar"
     ],
     "queue": [
      "Infantry",
@@ -5697,8 +5697,8 @@
     },
     "name": "Veteran Archer",
     "prerequisites": [
-     "~asianalliance_asianbarracks",
-     "asianalliance_asianradar",
+     "~asianalliance_barracks",
+     "asianalliance_radar",
      "~asianalliance_promotion_veteranarchers"
     ],
     "queue": [
@@ -5737,7 +5737,7 @@
    }
   },
   "naval": {
-   "gunb.asian": {
+   "asianalliance_gunb": {
     "armaments": [
      {
       "armament_name": "secondary",
@@ -5978,7 +5978,7 @@
     },
     "name": "Asian Gun Boat",
     "prerequisites": [
-     "~cgyard.asian"
+     "~asianalliance_cgyard"
     ],
     "queue": [
      "Naval",
@@ -6014,7 +6014,7 @@
      "v": "36"
     }
    },
-   "karrier.asian": {
+   "asianalliance_karrier": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -6058,9 +6058,9 @@
     },
     "name": "Kamikaze Carrier",
     "prerequisites": [
-     "~cgyard.asian",
-     "asianalliance_asianbattlelab",
-     "~!up_tsunami.asian"
+     "~asianalliance_cgyard",
+     "asianalliance_battlelab",
+     "~!asianalliance_upgrade_tsunami"
     ],
     "queue": [
      "Naval",
@@ -6096,7 +6096,7 @@
      "v": "11"
     }
    },
-   "ksub.asian": {
+   "asianalliance_ksub": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -6139,7 +6139,7 @@
     },
     "name": "Kamikaze Submarine",
     "prerequisites": [
-     "~cgyard.asian"
+     "~asianalliance_cgyard"
     ],
     "queue": [
      "Naval",
@@ -6175,7 +6175,7 @@
      "v": "50"
     }
    },
-   "lsub.asian": {
+   "asianalliance_lsub": {
     "armaments": [
      {
       "burst": "2",
@@ -6236,8 +6236,8 @@
     },
     "name": "Leviathan",
     "prerequisites": [
-     "~cgyard.asian",
-     "asianalliance_asianradar"
+     "~asianalliance_cgyard",
+     "asianalliance_radar"
     ],
     "queue": [
      "Naval",
@@ -6273,7 +6273,7 @@
      "v": "24"
     }
    },
-   "panth.asian": {
+   "asianalliance_panth": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -6368,7 +6368,7 @@
     },
     "name": "Enforcer Transport",
     "prerequisites": [
-     "~cgyard.asian"
+     "~asianalliance_cgyard"
     ],
     "queue": [
      "Naval",
@@ -6404,7 +6404,7 @@
      "v": "12"
     }
    },
-   "quasfrig.asian": {
+   "asianalliance_quasfrig": {
     "armaments": [
      {
       "burst": "3",
@@ -6711,8 +6711,8 @@
     },
     "name": "Quasar Frigate",
     "prerequisites": [
-     "~cgyard.asian",
-     "asianalliance_asianradar"
+     "~asianalliance_cgyard",
+     "asianalliance_radar"
     ],
     "queue": [
      "Naval",
@@ -6748,7 +6748,7 @@
      "v": "30"
     }
    },
-   "tsun.asian": {
+   "asianalliance_tsun": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -6792,9 +6792,9 @@
     },
     "name": "Tsunami Carrier",
     "prerequisites": [
-     "~cgyard.asian",
+     "~asianalliance_cgyard",
      "asianalliance_militaryacademy",
-     "~up_tsunami.asian"
+     "~asianalliance_upgrade_tsunami"
     ],
     "queue": [
      "Naval",
@@ -6847,7 +6847,7 @@
     },
     "name": "Unlock ASDF",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_promotion_veteranarchers",
      "!asianalliance_promotion_asdf",
      "rank1"
@@ -6871,7 +6871,7 @@
     },
     "name": "Unlock Fanatic",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "!asianalliance_promotion_fanatic",
      "rank1"
     ],
@@ -6894,7 +6894,7 @@
     },
     "name": "Unlock Flame Tank",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "!asianalliance_promotion_flametank",
      "rank1"
     ],
@@ -6917,7 +6917,7 @@
     },
     "name": "Unlock Heavy Railgun Tank",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_promotion_pulverizermecha",
      "!asianalliance_promotion_heavyrailguntank",
      "rank1"
@@ -6941,7 +6941,7 @@
     },
     "name": "Unlock Howitzer",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_promotion_plasmatank",
      "!asianalliance_promotion_howitzer",
      "rank1"
@@ -6965,7 +6965,7 @@
     },
     "name": "Unlock MLRS",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_promotion_fanatic",
      "!asianalliance_promotion_mlrs",
      "rank1"
@@ -6989,7 +6989,7 @@
     },
     "name": "Unlock Plasma Tank",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_promotion_plasmatrooper",
      "!asianalliance_promotion_plasmatank",
      "rank1"
@@ -7013,7 +7013,7 @@
     },
     "name": "Unlock Plasma Trooper",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_promotion_flametank",
      "!asianalliance_promotion_plasmatrooper",
      "rank1"
@@ -7037,7 +7037,7 @@
     },
     "name": "Unlock Pulverizer Mecha",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_promotion_mlrs",
      "!asianalliance_promotion_pulverizermecha",
      "rank1"
@@ -7061,7 +7061,7 @@
     },
     "name": "Unlock Samurai",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "!asianalliance_promotion_samurai",
      "rank1"
     ],
@@ -7084,7 +7084,7 @@
     },
     "name": "Unlock Veteran Archers",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_promotion_samurai",
      "!asianalliance_promotion_veteranarchers",
      "rank1"
@@ -7108,7 +7108,7 @@
     },
     "name": "Unlock War Turtle",
     "prerequisites": [
-     "~asianalliance_asianconstructionyard",
+     "~asianalliance_constructionyard",
      "asianalliance_promotion_asdf",
      "!asianalliance_promotion_warturtle",
      "rank1"
@@ -7138,7 +7138,7 @@
     },
     "name": "Asian Phalanx",
     "prerequisites": [
-     "~asianalliance_asianradar",
+     "~asianalliance_radar",
      "!asianalliance_doctrine_asianphalanx"
     ],
     "queue": [
@@ -7164,7 +7164,7 @@
     },
     "name": "Heavy Pulverizer Weapons",
     "prerequisites": [
-     "~asianalliance_asianradar",
+     "~asianalliance_radar",
      "!asianalliance_doctrine_heavypulverizerweapons"
     ],
     "queue": [
@@ -7190,7 +7190,7 @@
     },
     "name": "Modernized Infantry Equipment",
     "prerequisites": [
-     "~asianalliance_asianradar",
+     "~asianalliance_radar",
      "!asianalliance_doctrine_modernizedinfantryequipment"
     ],
     "queue": [
@@ -7216,7 +7216,7 @@
     },
     "name": "Asian Diplomacy",
     "prerequisites": [
-     "~asianalliance_asianbattlelab",
+     "~asianalliance_battlelab",
      "asianalliance_militaryacademy",
      "!asianalliance_upgrade_asiandiplomacy"
     ],
@@ -7243,7 +7243,7 @@
     },
     "name": "Banzai Mode",
     "prerequisites": [
-     "~asianalliance_asianbattlelab",
+     "~asianalliance_battlelab",
      "asianalliance_militaryacademy",
      "!asianalliance_upgrade_banzaimode"
     ],
@@ -7270,7 +7270,7 @@
     },
     "name": "Celestial Power",
     "prerequisites": [
-     "~asianalliance_asianbattlelab",
+     "~asianalliance_battlelab",
      "!asianalliance_upgrade_celestialpower"
     ],
     "queue": [
@@ -7296,7 +7296,7 @@
     },
     "name": "Unlock Chaos Bombs",
     "prerequisites": [
-     "~asianalliance_asianradar",
+     "~asianalliance_radar",
      "asianalliance_militaryacademy",
      "asianalliance_upgrade_clusterbombs",
      "!asianalliance_upgrade_chaosbombs"
@@ -7324,7 +7324,7 @@
     },
     "name": "Unlock Cluster Bombs",
     "prerequisites": [
-     "~asianalliance_asianradar",
+     "~asianalliance_radar",
      "!asianalliance_upgrade_clusterbombs"
     ],
     "queue": [
@@ -7350,7 +7350,7 @@
     },
     "name": "Dragon Fire",
     "prerequisites": [
-     "~asianalliance_asianbattlelab",
+     "~asianalliance_battlelab",
      "!asianalliance_upgrade_dragonfire"
     ],
     "queue": [
@@ -7376,7 +7376,7 @@
     },
     "name": "Unlock Mass Paradrop",
     "prerequisites": [
-     "~asianalliance_asianradar",
+     "~asianalliance_radar",
      "!asianalliance_upgrade_massparadrop"
     ],
     "queue": [
@@ -7402,7 +7402,7 @@
     },
     "name": "Way of the Dragon",
     "prerequisites": [
-     "~asianalliance_asianbattlelab",
+     "~asianalliance_battlelab",
      "asianalliance_militaryacademy",
      "!asianalliance_upgrade_wayofthedragon"
     ],
@@ -7410,7 +7410,7 @@
      "Research"
     ]
    },
-   "cgcnst_infiltrated.asian": {
+   "asianalliance_cgcnst_infiltrated": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7425,7 +7425,7 @@
     },
     "name": "Stolen Asian Buildings Plans"
    },
-   "up_dragonway_proxy_actor.asian": {
+   "asianalliance_upgrade_wayofthedragon_proxy_actor": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7440,7 +7440,7 @@
     },
     "name": "Way of the Dragon"
    },
-   "up_team_diplomacy_proxy_actor.asian": {
+   "asianalliance_upgrade_asiandiplomacy_proxy_actor": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7455,7 +7455,7 @@
     },
     "name": "Asian Diplomacy"
    },
-   "up_tsunami.asian": {
+   "asianalliance_upgrade_tsunami": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7475,8 +7475,8 @@
     "name": "Tsunami Carrier Upgrade",
     "prerequisites": [
      "~asianalliance_militaryacademy",
-     "~cgyard.asian",
-     "!up_tsunami.asian"
+     "~asianalliance_cgyard",
+     "!asianalliance_upgrade_tsunami"
     ],
     "queue": [
      "Upgrades"
@@ -7484,7 +7484,7 @@
    }
   },
   "vehicles": {
-   "asianalliance_asianflametank": {
+   "asianalliance_flametank": {
     "armaments": [
      {
       "burst": "6",
@@ -7575,7 +7575,7 @@
     },
     "name": "Asian Flame Tank",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
+     "~asianalliance_warfactory",
      "~asianalliance_promotion_flametank"
     ],
     "queue": [
@@ -7623,7 +7623,7 @@
      "v": "34"
     }
    },
-   "asianalliance_asianmobileconstructionvehicle": {
+   "asianalliance_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
@@ -7655,8 +7655,8 @@
     },
     "name": "Asian Mobile Construction Vehicle",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
-     "asianalliance_asianservicedepot"
+     "~asianalliance_warfactory",
+     "asianalliance_servicedepot"
     ],
     "queue": [
      "Vehicle",
@@ -7731,7 +7731,7 @@
     },
     "name": "Dragonfly",
     "prerequisites": [
-     "~asianalliance_asianwarfactory"
+     "~asianalliance_warfactory"
     ],
     "queue": [
      "Vehicle",
@@ -7802,7 +7802,7 @@
     },
     "name": "Drone Miner",
     "prerequisites": [
-     "~asianalliance_asianorerefinery"
+     "~asianalliance_orerefinery"
     ],
     "queue": [
      "Vehicle",
@@ -7943,8 +7943,8 @@
     },
     "name": "Heavy Railgun Tank",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
-     "asianalliance_asianbattlelab",
+     "~asianalliance_warfactory",
+     "asianalliance_battlelab",
      "~asianalliance_promotion_heavyrailguntank"
     ],
     "queue": [
@@ -8071,7 +8071,7 @@
     },
     "name": "Howitzer",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
+     "~asianalliance_warfactory",
      "asianalliance_militaryacademy",
      "~asianalliance_promotion_howitzer"
     ],
@@ -8337,7 +8337,7 @@
     },
     "name": "Lynx Tank",
     "prerequisites": [
-     "~asianalliance_asianwarfactory"
+     "~asianalliance_warfactory"
     ],
     "queue": [
      "Vehicle",
@@ -8420,8 +8420,8 @@
     },
     "name": "Oil Truck",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
-     "asianalliance_asianradar",
+     "~asianalliance_warfactory",
+     "asianalliance_radar",
      "asianalliance_tankreactor"
     ],
     "queue": [
@@ -8549,8 +8549,8 @@
     },
     "name": "Pulverizer",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
-     "asianalliance_asianradar",
+     "~asianalliance_warfactory",
+     "asianalliance_radar",
      "~!asianalliance_promotion_pulverizermecha"
     ],
     "queue": [
@@ -8708,8 +8708,8 @@
     },
     "name": "Pulverizer Mecha",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
-     "asianalliance_asianbattlelab",
+     "~asianalliance_warfactory",
+     "asianalliance_battlelab",
      "~asianalliance_promotion_pulverizermecha"
     ],
     "queue": [
@@ -9049,7 +9049,7 @@
     },
     "name": "Quasar",
     "prerequisites": [
-     "~asianalliance_asianwarfactory"
+     "~asianalliance_warfactory"
     ],
     "queue": [
      "Vehicle",
@@ -9190,8 +9190,8 @@
     },
     "name": "Railgun Tank",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
-     "asianalliance_asianbattlelab",
+     "~asianalliance_warfactory",
+     "asianalliance_battlelab",
      "~!asianalliance_promotion_heavyrailguntank"
     ],
     "queue": [
@@ -9308,8 +9308,8 @@
     },
     "name": "Type 89 MLRS",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
-     "asianalliance_asianbattlelab",
+     "~asianalliance_warfactory",
+     "asianalliance_battlelab",
      "~asianalliance_promotion_mlrs"
     ],
     "queue": [
@@ -9510,8 +9510,8 @@
     },
     "name": "Viper",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
-     "asianalliance_asianradar"
+     "~asianalliance_warfactory",
+     "asianalliance_radar"
     ],
     "queue": [
      "Vehicle",
@@ -9618,7 +9618,7 @@
     },
     "name": "War Turtle",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
+     "~asianalliance_warfactory",
      "asianalliance_militaryacademy",
      "~asianalliance_promotion_warturtle"
     ],
@@ -9660,7 +9660,7 @@
      "v": "30"
     }
    },
-   "ptnk.asian": {
+   "asianalliance_ptnk": {
     "armaments": [
      {
       "burst": "2",
@@ -9846,8 +9846,8 @@
     },
     "name": "Plasma Tank",
     "prerequisites": [
-     "~asianalliance_asianwarfactory",
-     "asianalliance_asianbattlelab",
+     "~asianalliance_warfactory",
+     "asianalliance_battlelab",
      "~asianalliance_promotion_plasmatank"
     ],
     "queue": [
