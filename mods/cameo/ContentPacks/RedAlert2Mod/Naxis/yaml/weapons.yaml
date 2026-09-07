@@ -31,7 +31,7 @@ NaxBrummbarArty:
 	-Warhead@Demolition_Heavy:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 42000
+		Damage: 56000
 		PercentageScale: 9998
 NaxBrummbarArty_elite:
 	Inherits: NaxBrummbarArty
@@ -336,7 +336,7 @@ LunarNaxiDroneMissile:
 		ContrailEndColor: FFFFFF
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 12000
 		PercentageScale: 2000
 		PercentageDenominator: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath

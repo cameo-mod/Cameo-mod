@@ -604,7 +604,7 @@ HueyCryoMissiles:
 	-Warhead@MissileAP_Medium:
 	Warhead@Cryo_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 8000
 		PercentageScale: 9984
 HueyTwinMissiles:
 	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
@@ -638,7 +638,7 @@ HueyTwinMissiles:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 8000
 		PercentageScale: 9984
 sandmarinemortar:
 	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat

@@ -1183,7 +1183,7 @@ HindMissiles:
 		ImpactActors: false
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 8000
 		PercentageScale: 9984
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
@@ -2327,7 +2327,7 @@ ShtoraLaser:
 
 	Warhead@Laser_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 7000
 		PercentageScale: 0
 	-Warhead@LightFlameWeapon:
 	-Warhead@FlakWeapon:
