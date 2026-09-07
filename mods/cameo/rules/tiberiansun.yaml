@@ -376,8 +376,6 @@ TSE1:
 		Speed: 60
 	Health:
 		HP: 16000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Armament@PRIMARY:
 		Weapon: TSMinigun
 		LocalOffset: 128,0,256
@@ -413,8 +411,6 @@ TSENGINEER:
 		Speed: 55
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Voiced:
 		VoiceSet: TSEngineer
 	Armament@PRIMARY:
@@ -449,8 +445,6 @@ TSE3:
 		Speed: 50
 	Health:
 		HP: 12000
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Armament@PRIMARY:
 		Weapon: TSBazooka
 		LocalOffset: 256,43,341
