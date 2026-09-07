@@ -1,19 +1,19 @@
-asianalliance_asianconstructionyard:
+asianalliance_constructionyard:
 	Defaults:
 		Offset: 2,-26
 	idle:
-		Filename: asianalliance_asianconstructionyard_aa_cgcnst.shp
+		Filename: asianalliance_constructionyard_aa_cgcnst.shp
 		ShadowStart: 3
 	make:
-		Filename: asianalliance_asianconstructionyard_aa_make.shp
+		Filename: asianalliance_constructionyard_aa_make.shp
 		Length: 32
 		ShadowStart: 32
 	dead:
-		Filename: asianalliance_asianconstructionyard_aa_cgcnst.shp
+		Filename: asianalliance_constructionyard_aa_cgcnst.shp
 	build:
 		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
-		Filename: asianalliance_asianconstructionyard_aa_cgcnst.shp
+		Filename: asianalliance_constructionyard_aa_cgcnst.shp
 		Start: 1
 		ShadowStart: 4
 	idle-fans:
@@ -21,59 +21,59 @@ asianalliance_asianconstructionyard:
 	damaged-idle-fans:
 		Filename: shared_sprites|invisibleitem.shp
 	crane-overlay:
-		Filename: asianalliance_asianconstructionyard_aa_cgcnst_b.shp
+		Filename: asianalliance_constructionyard_aa_cgcnst_b.shp
 		Length: 32
 		Tick: 150
 	damaged-crane-overlay:
-		Filename: asianalliance_asianconstructionyard_aa_cgcnst_b.shp
+		Filename: asianalliance_constructionyard_aa_cgcnst_b.shp
 		Length: 32
 		Tick: 150
 	dead:
-		Filename: asianalliance_asianconstructionyard_aa_cgcnst.shp
+		Filename: asianalliance_constructionyard_aa_cgcnst.shp
 		Start: 1
 	icon:
-		Filename: asianalliance_asianconstructionyard_icon.shp
+		Filename: asianalliance_constructionyard_icon.shp
 		Offset: 0,0
 
-asianalliance_asianpetrolplant:
+asianalliance_petrolplant:
 	Defaults:
 		Offset: 0,-2
 	idle:
-		Filename: asianalliance_asianpetrolplant_aa_cgapwr.shp
+		Filename: asianalliance_petrolplant_aa_cgapwr.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: asianalliance_asianpetrolplant_aa_cgapwr.shp
+		Filename: asianalliance_petrolplant_aa_cgapwr.shp
 		Start: 1
 		ShadowStart: 4
 	idle-glow:
-		Filename: asianalliance_asianpetrolplant_aa_cgapwr_a.shp
+		Filename: asianalliance_petrolplant_aa_cgapwr_a.shp
 		Length: 64
 		Tick: 150
 	damaged-idle-glow:
-		Filename: asianalliance_asianpetrolplant_aa_cgapwr_a.shp
+		Filename: asianalliance_petrolplant_aa_cgapwr_a.shp
 		Length: 64
 		Tick: 150
 	make:
-		Filename: asianalliance_asianpetrolplant_aa_make.shp
+		Filename: asianalliance_petrolplant_aa_make.shp
 		Length: 32
 		ShadowStart: 32
 	dead:
-		Filename: asianalliance_asianpetrolplant_aa_cgapwr.shp
+		Filename: asianalliance_petrolplant_aa_cgapwr.shp
 		Start: 1
 	icon:
-		Filename: asianalliance_asianpetrolplant_icon.shp
+		Filename: asianalliance_petrolplant_icon.shp
 		Offset: 0,0
 
-asianalliance_asianbarracks:
+asianalliance_barracks:
 	Defaults:
 		Offset: 0,-16
 	build:
 		Filename: shared_sprites|invisibleitem.shp
 	idle:
-		Filename: asianalliance_asianbarracks_aa_cgbrck.shp
+		Filename: asianalliance_barracks_aa_cgbrck.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: asianalliance_asianbarracks_aa_cgbrck.shp
+		Filename: asianalliance_barracks_aa_cgbrck.shp
 		Start: 1
 		ShadowStart: 4
 	idle-flag:
@@ -87,118 +87,118 @@ asianalliance_asianbarracks:
 		ShadowStart: 48
 		Offset: -10,-16
 	make:
-		Filename: asianalliance_asianbarracks_aa_make.shp
+		Filename: asianalliance_barracks_aa_make.shp
 		Length: 32
 		ShadowStart: 32
 	dead:
-		Filename: asianalliance_asianbarracks_aa_cgbrck.shp
+		Filename: asianalliance_barracks_aa_cgbrck.shp
 		Start: 1
 		ShadowStart: 4
 	icon:
-		Filename: asianalliance_asianbarracks_icon.shp
+		Filename: asianalliance_barracks_icon.shp
 		Offset: 0,0
 
-asianalliance_asianorerefinery:
+asianalliance_orerefinery:
 	Defaults:
 		Offset: 1,-12
 	idle:
-		Filename: asianalliance_asianorerefinery_aa_cgrefn.shp
+		Filename: asianalliance_orerefinery_aa_cgrefn.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: asianalliance_asianorerefinery_aa_cgrefn.shp
+		Filename: asianalliance_orerefinery_aa_cgrefn.shp
 		Start: 1
 		ShadowStart: 4
 	make:
-		Filename: asianalliance_asianorerefinery_aa_make.shp
+		Filename: asianalliance_orerefinery_aa_make.shp
 		Length: 20
 	idle-bib:
-		Filename: asianalliance_asianorerefinery_aa_bib.shp
+		Filename: asianalliance_orerefinery_aa_bib.shp
 		ZOffset: -512
 	damaged-idle-bib:
-		Filename: asianalliance_asianorerefinery_aa_bib.shp
+		Filename: asianalliance_orerefinery_aa_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -512
 	dead:
-		Filename: asianalliance_asianorerefinery_aa_cgrefn.shp
+		Filename: asianalliance_orerefinery_aa_cgrefn.shp
 		Start: 1
 	resources:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: asianalliance_asianorerefinery_icon.shp
+		Filename: asianalliance_orerefinery_icon.shp
 		Offset: 0,0
 
-asianalliance_asianwarfactory:
+asianalliance_warfactory:
 	Defaults:
 		Offset: -18,-28
 	idle:
-		Filename: asianalliance_asianwarfactory_aa_cgweap.shp
+		Filename: asianalliance_warfactory_aa_cgweap.shp
 		ShadowStart: 3
 		ZOffset: -1024
 	damaged-idle:
-		Filename: asianalliance_asianwarfactory_aa_cgweap.shp
+		Filename: asianalliance_warfactory_aa_cgweap.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1024
 	build-ramp:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_1.shp
+		Filename: asianalliance_warfactory_aa_cgweap_1.shp
 		ShadowStart: 2
 	damaged-build-ramp:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_1.shp
+		Filename: asianalliance_warfactory_aa_cgweap_1.shp
 		Start: 1
 		ShadowStart: 3
 	build-top:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_2.shp
+		Filename: asianalliance_warfactory_aa_cgweap_2.shp
 		ShadowStart: 2
 		ZOffset: 1024
 	damaged-build-top:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_2.shp
+		Filename: asianalliance_warfactory_aa_cgweap_2.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: 1024
 	build-door:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_1.shp
+		Filename: asianalliance_warfactory_aa_cgweap_1.shp
 		ShadowStart: 2
 	damaged-build-door:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_1.shp
+		Filename: asianalliance_warfactory_aa_cgweap_1.shp
 		Start: 1
 		ShadowStart: 3
 	#TODO: ggweap_3 and ggweap_4 are used for producing flying actors
 	build-air-open:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_3.shp
+		Filename: asianalliance_warfactory_aa_cgweap_3.shp
 		ShadowStart: 2
 	damaged-air-open:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_3.shp
+		Filename: asianalliance_warfactory_aa_cgweap_3.shp
 		Start: 1
 		ShadowStart: 3
 	build-air-inside:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_4.shp
+		Filename: asianalliance_warfactory_aa_cgweap_4.shp
 		ShadowStart: 2
 	damaged-air-inside:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_4.shp
+		Filename: asianalliance_warfactory_aa_cgweap_4.shp
 		Start: 1
 		ShadowStart: 3
 	bib:
-		Filename: asianalliance_asianwarfactory_aa_bib.shp
+		Filename: asianalliance_warfactory_aa_bib.shp
 		ShadowStart: 2
 		ZOffset: -1024
 	damaged-bib:
-		Filename: asianalliance_asianwarfactory_aa_bib.shp
+		Filename: asianalliance_warfactory_aa_bib.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1024
 	idle-flag:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_a.shp
+		Filename: asianalliance_warfactory_aa_cgweap_a.shp
 		Length: 8
 	damaged-idle-flag:
-		Filename: asianalliance_asianwarfactory_aa_cgweap_a.shp
+		Filename: asianalliance_warfactory_aa_cgweap_a.shp
 		Length: 8
 	overlay-fan:
 		Filename: ra2_allies_alliedwarfactory_ggweap_b.shp
 		Length: 5
 		ShadowStart: 6
 	make:
-		Filename: asianalliance_asianwarfactory_aa_make.shp
+		Filename: asianalliance_warfactory_aa_make.shp
 		Length: 32
 		ShadowStart: 32
 	dead:
@@ -206,174 +206,174 @@ asianalliance_asianwarfactory:
 		Start: 1
 		ZOffset: -1024
 	icon:
-		Filename: asianalliance_asianwarfactory_icon.shp
+		Filename: asianalliance_warfactory_icon.shp
 		Offset: 0,0
 
-asianalliance_asianservicedepot:
+asianalliance_servicedepot:
 	Defaults:
 		Offset: 0,-24
 	idle:
-		Filename: asianalliance_asianservicedepot_aa_cgdept.shp
+		Filename: asianalliance_servicedepot_aa_cgdept.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: asianalliance_asianservicedepot_aa_cgdept.shp
+		Filename: asianalliance_servicedepot_aa_cgdept.shp
 		Start: 1
 		ShadowStart: 3
 	idle-side:
-		Filename: asianalliance_asianservicedepot_aa_cgdept.shp
+		Filename: asianalliance_servicedepot_aa_cgdept.shp
 		ShadowStart: 3
 	damaged-idle-side:
-		Filename: asianalliance_asianservicedepot_aa_cgdept.shp
+		Filename: asianalliance_servicedepot_aa_cgdept.shp
 		Start: 1
 		Length: 2
 		ShadowStart: 4
 	bib:
-		Filename: asianalliance_asianservicedepot_aa_bib.shp
+		Filename: asianalliance_servicedepot_aa_bib.shp
 		ShadowStart: 3
 		ZOffset: -512
 	make:
-		Filename: asianalliance_asianservicedepot_aa_make.shp
+		Filename: asianalliance_servicedepot_aa_make.shp
 		Length: 32
 		ShadowStart: 32
 	dead:
-		Filename: asianalliance_asianservicedepot_aa_cgdept.shp
+		Filename: asianalliance_servicedepot_aa_cgdept.shp
 		Start: 1
 	repair:
-		Filename: asianalliance_asianservicedepot_aa_cgdept_a.shp
+		Filename: asianalliance_servicedepot_aa_cgdept_a.shp
 		Length: 8
 		ShadowStart: 8
 		Tick: 180
 	damaged-repair:
-		Filename: asianalliance_asianservicedepot_aa_cgdept_a.shp
+		Filename: asianalliance_servicedepot_aa_cgdept_a.shp
 		Length: 8
 		ShadowStart: 8
 		Tick: 180
 	icon:
-		Filename: asianalliance_asianservicedepot_icon.shp
+		Filename: asianalliance_servicedepot_icon.shp
 		Offset: 0,0
 
-asianalliance_asianradar:
+asianalliance_radar:
 	Defaults:
 		Offset: 0,-8
 	idle:
-		Filename: asianalliance_asianradar_aa_cgradr.shp
+		Filename: asianalliance_radar_aa_cgradr.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: asianalliance_asianradar_aa_cgradr.shp
+		Filename: asianalliance_radar_aa_cgradr.shp
 		Start: 1
 		ShadowStart: 4
 	critical-idle:
-		Filename: asianalliance_asianradar_aa_cgradr.shp
+		Filename: asianalliance_radar_aa_cgradr.shp
 		Start: 2
 	idle-dish:
-		Filename: asianalliance_asianradar_aa_cgradr_a.shp
+		Filename: asianalliance_radar_aa_cgradr_a.shp
 		ShadowStart: 32
 		Length: 32
 		Tick: 150
 	damaged-idle-dish:
-		Filename: asianalliance_asianradar_aa_cgradr_a.shp
+		Filename: asianalliance_radar_aa_cgradr_a.shp
 		ShadowStart: 32
 		Length: 32
 		Tick: 150
 	idle-flag:
-		Filename: asianalliance_asianradar_aa_cgradr_b.shp
+		Filename: asianalliance_radar_aa_cgradr_b.shp
 		ShadowStart: 20
 		Length: 20
 		Tick: 150
 	damaged-idle-flag:
-		Filename: asianalliance_asianradar_aa_cgradr_b.shp
+		Filename: asianalliance_radar_aa_cgradr_b.shp
 		ShadowStart: 20
 		Length: 20
 		Tick: 150
 	make:
-		Filename: asianalliance_asianradar_aa_make.shp
+		Filename: asianalliance_radar_aa_make.shp
 		Length: 30
 		ShadowStart: 30
 	dead:
-		Filename: asianalliance_asianradar_aa_cgradr.shp
+		Filename: asianalliance_radar_aa_cgradr.shp
 		Start: 1
 	icon:
-		Filename: asianalliance_asianradar_icon.shp
+		Filename: asianalliance_radar_icon.shp
 		Offset: 0,0
 
-asianalliance_asianbattlelab:
+asianalliance_battlelab:
 	Defaults:
 		Offset: -8,-14
 	idle:
-		Filename: asianalliance_asianbattlelab_aa_cgtech.shp
+		Filename: asianalliance_battlelab_aa_cgtech.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: asianalliance_asianbattlelab_aa_cgtech.shp
+		Filename: asianalliance_battlelab_aa_cgtech.shp
 		Start: 1
 		ShadowStart: 4
 	idle-lights:
-		Filename: asianalliance_asianbattlelab_aa_cgtech_a.shp
+		Filename: asianalliance_battlelab_aa_cgtech_a.shp
 		Length: 50
 		ShadowStart: 50
 	damaged-idle-ights:
-		Filename: asianalliance_asianbattlelab_aa_cgtech_a.shp
+		Filename: asianalliance_battlelab_aa_cgtech_a.shp
 		Length: 50
 		ShadowStart: 50
 	make:
-		Filename: asianalliance_asianbattlelab_aa_make.shp
+		Filename: asianalliance_battlelab_aa_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: asianalliance_asianbattlelab_aa_cgtech.shp
+		Filename: asianalliance_battlelab_aa_cgtech.shp
 		Start: 1
 	icon:
-		Filename: asianalliance_asianbattlelab_icon.shp
+		Filename: asianalliance_battlelab_icon.shp
 		Offset: 0,0
 
-asianalliance_asianairforcecommand:
+asianalliance_airforcecommand:
 	Defaults:
 		Offset: 5,-22 #12
 	idle:
-		Filename: asianalliance_asianairforcecommand_aa_cgairf.shp
+		Filename: asianalliance_airforcecommand_aa_cgairf.shp
 		Length: 1
 	damaged-idle:
-		Filename: asianalliance_asianairforcecommand_aa_cgairf.shp
+		Filename: asianalliance_airforcecommand_aa_cgairf.shp
 		Start: 1
 		Length: 2
 	idlebottom:
-		Filename: asianalliance_asianairforcecommand_aa_bib.shp
+		Filename: asianalliance_airforcecommand_aa_bib.shp
 		Length: 1
 		ZOffset: -1c512
 	damage-idle-bottom:
-		Filename: asianalliance_asianairforcecommand_aa_bib.shp
+		Filename: asianalliance_airforcecommand_aa_bib.shp
 		Start: 1
 		Length: 1
 		ZOffset: -1c512
 	idle-dish:
-		Filename: asianalliance_asianairforcecommand_aa_cgairf_a.shp
+		Filename: asianalliance_airforcecommand_aa_cgairf_a.shp
 		Length: 16
 		Tick: 120
 		ZOffset: -512
 	damaged-idle-dish:
-		Filename: asianalliance_asianairforcecommand_aa_cgairf_a.shp
+		Filename: asianalliance_airforcecommand_aa_cgairf_a.shp
 		Length: 16
 		Tick: 120
 		ZOffset: -512
 	idle-mid:
-		Filename: asianalliance_asianairforcecommand_aa_cgairf_b.shp
+		Filename: asianalliance_airforcecommand_aa_cgairf_b.shp
 		Length: 2
 		Tick: 120
 		ZOffset: -1c512
 	damage-idle-mid:
-		Filename: asianalliance_asianairforcecommand_aa_cgairf_b.shp
+		Filename: asianalliance_airforcecommand_aa_cgairf_b.shp
 		Length: 2
 		Tick: 120
 		ZOffset: -1c512
 	make:
-		Filename: asianalliance_asianairforcecommand_aa_make.shp
+		Filename: asianalliance_airforcecommand_aa_make.shp
 		Length: 32
 		ShadowStart: 32
 	dead:
-		Filename: asianalliance_asianairforcecommand_aa_cgairf.shp
+		Filename: asianalliance_airforcecommand_aa_cgairf.shp
 		Start: 1
 		Length: 2
 	icon:
-		Filename: asianalliance_asianairforcecommand_icon.shp
+		Filename: asianalliance_airforcecommand_icon.shp
 		Offset: 0,0
 
 asianalliance_railtower:
@@ -415,31 +415,31 @@ asianalliance_railtower:
 		Filename: asianalliance_railtower_icon.shp
 		Offset: 0,0
 
-asianalliance_asiansentryflamer:
+asianalliance_sentryflamer:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,2
 	idle:
-		Filename: asianalliance_asiansentryflamer_aa_cgflam.shp
+		Filename: asianalliance_sentryflamer_aa_cgflam.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: asianalliance_asiansentryflamer_aa_cgflam.shp
+		Filename: asianalliance_sentryflamer_aa_cgflam.shp
 		Start: 1
 		ShadowStart: 4
 	critical-idle:
-		Filename: asianalliance_asiansentryflamer_aa_cgflam.shp
+		Filename: asianalliance_sentryflamer_aa_cgflam.shp
 		Start: 2
 	make:
-		Filename: asianalliance_asiansentryflamer_aa_make.shp
+		Filename: asianalliance_sentryflamer_aa_make.shp
 		Length: 18
 	dead:
-		Filename: asianalliance_asiansentryflamer_aa_cgflam.shp
+		Filename: asianalliance_sentryflamer_aa_cgflam.shp
 		Start: 1
 	turret:
-		Filename: asianalliance_asiansentryflamer_aa_cgflam_tur.shp
+		Filename: asianalliance_sentryflamer_aa_cgflam_tur.shp
 		Facings: 32
 	icon:
-		Filename: asianalliance_asiansentryflamer_icon.shp
+		Filename: asianalliance_sentryflamer_icon.shp
 		Offset: 0,0
 
 asianalliance_pulsar:
@@ -478,7 +478,7 @@ asianalliance_pulsar:
 		Filename: asianalliance_pulsar_icon.shp
 		Offset: 0,0
 
-cgpnch.asian:
+asianalliance_cgpnch:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,4
@@ -493,7 +493,7 @@ cgpnch.asian:
 		Filename: aa_cgpnch.shp
 		Start: 2
 	make:
-		Filename: asianalliance_asiansentryflamer_aa_make.shp
+		Filename: asianalliance_sentryflamer_aa_make.shp
 		Length: 9
 	dead:
 		Filename: aa_cgpnch.shp
@@ -775,14 +775,14 @@ asianalliance_advancedcommunicationcenter:
 		Filename: asianalliance_advancedcommunicationcenter_aa_cgionc_icon.shp
 		Offset: 0,0
 
-chaomine.asian:
+asianalliance_chaomine:
 	idle:
 		Filename: aa_chaomine.shp
 		ZOffset: -512
 	icon:
 		Filename: asianalliance_upgrade_clusterbombs_aa_chaomine_icon.shp
 
-tankmine.asian:
+asianalliance_tankmine:
 	idle:
 		Filename: asianalliance_upgrade_clusterbombs_aa_tankmine.shp
 		ZOffset: -512
@@ -791,7 +791,7 @@ tankmine.asian:
 	icon2:
 		Filename: asianalliance_upgrade_clusterbombs_aa_chaomine_icon.shp
 
-cgyard.asian:
+asianalliance_cgyard:
 	Defaults:
 		Offset: 0,-12
 	idle:
@@ -859,10 +859,10 @@ asianalliance_concretebarrier:
 #		Red Alert 2 Asian Alliance Troops
 ####################################################################################################
 
-asianalliance_asianmilitia:
+asianalliance_militia:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: asianalliance_asianmilitia_aa_gren.shp
+		Filename: asianalliance_militia_aa_gren.shp
 	run:
 		Tick: 120
 	paradrop:
@@ -905,7 +905,7 @@ asianalliance_asianmilitia:
 		InterpolatedFacings: 32
 		Length: 3
 	icon:
-		Filename: asianalliance_asianmilitia_icon.shp
+		Filename: asianalliance_militia_icon.shp
 
 asianalliance_fanatic:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
@@ -1215,20 +1215,20 @@ asianalliance_asdf:
 	icon:
 		Filename: asianalliance_promotion_asdf_icon.png
 
-asianalliance_asiancommando:
+asianalliance_commando:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: ra2_allies_sniper.shp
 	paradrop:
 		Start: 292
 	icon:
-		Filename: asianalliance_asiancommando_icon.png
+		Filename: asianalliance_commando_icon.png
 
-asianalliance_asiantankkiller:
+asianalliance_tankkiller:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Scale: 0.9
-		Filename: asianalliance_asiantankkiller_aa_tkiller.shp
+		Filename: asianalliance_tankkiller_aa_tkiller.shp
 	run:
 		Tick: 120
 	prone-run:
@@ -1241,7 +1241,7 @@ asianalliance_asiantankkiller:
 	prone-shoot:
 		Tick: 106
 	icon:
-		Filename: asianalliance_asiantankkiller_icon.shp
+		Filename: asianalliance_tankkiller_icon.shp
 
 asianalliance_plasmatrooper:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
@@ -1267,10 +1267,10 @@ asianalliance_plasmatrooper:
 		Start: 116
 		Tick: 106
 
-asianalliance_asianflametrooper:
+asianalliance_flametrooper:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
-		Filename: asianalliance_asianflametrooper_aa_flam.shp
+		Filename: asianalliance_flametrooper_aa_flam.shp
 	idle:
 	shoot:
 		ShadowStart: 326
@@ -1300,7 +1300,7 @@ asianalliance_asianflametrooper:
 		ShadowStart: 281
 	cheer:
 	icon:
-		Filename: asianalliance_asianflametrooper_icon.shp
+		Filename: asianalliance_flametrooper_icon.shp
 	shoot:
 		Start: 116
 		Length: 10
@@ -1399,7 +1399,7 @@ asianalliance_howitzer:
 	icon:
 		Filename: asianalliance_promotion_howitzer_icon.shp
 
-panth.asian:
+asianalliance_panth:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_panth.shp
@@ -1425,13 +1425,13 @@ asianalliance_oiltruck:
 	icon:
 		Filename: asianalliance_oiltruck_icon.shp
 
-asianalliance_asianmobileconstructionvehicle:
+asianalliance_mobileconstructionvehicle:
 	Defaults:
-		Filename: asianalliance_asianmobileconstructionvehicle_aa_acv.shp
+		Filename: asianalliance_mobileconstructionvehicle_aa_acv.shp
 	idle:
 		Facings: 64
 	icon:
-		Filename: asianalliance_asianmobileconstructionvehicle_icon.shp
+		Filename: asianalliance_mobileconstructionvehicle_icon.shp
 
 asianalliance_droneminer:
 	Defaults:
@@ -1473,7 +1473,7 @@ asianalliance_pulverizer:
 	icon:
 		Filename: asianalliance_pulverizer_icon.shp
 
-ptnk.asian:
+asianalliance_ptnk:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: asianalliance_promotion_plasmatank_aa_ptnk.shp
@@ -1589,7 +1589,7 @@ asianalliance_dragonfly:
 	icon:
 		Filename: asianalliance_dragonfly_icon.shp
 
-asianalliance_asianflametank:
+asianalliance_flametank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: asianalliance_promotion_flametank_aa_ftnk.shp
@@ -1713,7 +1713,7 @@ asianalliance_harbinger:
 	icon:
 		Filename: asianalliance_harbinger_icon.shp
 
-quasfrig.asian:
+asianalliance_quasfrig:
 	Defaults:
 		Filename: aa_quasfrig.shp
 	idle:
@@ -1725,7 +1725,7 @@ quasfrig.asian:
 		Filename: aa_pulsmuzz.shp
 		Length: *
 
-gunb.asian:
+asianalliance_gunb:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_gunb.shp
@@ -1735,7 +1735,7 @@ gunb.asian:
 	icon:
 		Filename: aa_gunb_icon.shp
 
-karrier.asian:
+asianalliance_karrier:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_karrier.shp
@@ -1745,7 +1745,7 @@ karrier.asian:
 	icon:
 		Filename: aa_karrioricon.shp
 
-kami.asian:
+asianalliance_kami:
 	Defaults:
 		Scale: 0.8
 	idle:
@@ -1766,7 +1766,7 @@ kami.asian:
 	icon:
 		Filename: asianalliance_phoenix_icon.shp
 
-tsun.asian:
+asianalliance_tsun:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_tsun.shp
@@ -1776,7 +1776,7 @@ tsun.asian:
 	icon:
 		Filename: aa_tsun_icon.shp
 
-ksub.asian:
+asianalliance_ksub:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_ksub.shp
@@ -1798,7 +1798,7 @@ asianalliance_warturtle:
 		Filename: aa_pulsmuzz.shp
 		Length: *
 
-lsub.asian:
+asianalliance_lsub:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_lsub.shp
