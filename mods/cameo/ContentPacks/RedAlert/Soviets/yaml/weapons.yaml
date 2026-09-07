@@ -833,9 +833,10 @@ SCUD:
 		Shadow: True
 		LaunchAngle: 75
 	Warhead@MissileHE_Heavy:
-		Damage: 60000
+		Damage: 120000
 	Warhead@Flame_Heavy:
 		Damage: 60000
+	-Warhead@Flame_Heavy:
 SCUDThermobaric:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
@@ -863,7 +864,6 @@ SCUDThermobaric:
 	Warhead@Demolition_Heavy:
 		Damage: 120000
 	-Warhead@MissileHE_Heavy:
-	-Warhead@Flame_Heavy:
 SCUDTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -898,7 +898,6 @@ SCUDTesla:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	-Warhead@MissileHE_Heavy:
-	-Warhead@Flame_Heavy:
 
 SCUDNUKE:
 	Inherits@wh: ^Warhead_Nuclear_Super
