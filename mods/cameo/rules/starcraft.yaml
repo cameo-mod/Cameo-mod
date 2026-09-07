@@ -376,8 +376,6 @@ SCSPIDERMINE:
 		PlayerPalette: playerra2
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 4
 	AutoTarget:
 		ScanRadius: 4
 		InitialStance: AttackAnything
@@ -537,8 +535,6 @@ SCWRAITHDRONE:
 		TargetTypes: Air
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: WraithDroneLaser
 		LocalOffset: 200,0,0
@@ -871,8 +867,6 @@ SCINTERCEPTOR:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Shielded:
 		RegenAmount: 24
 	Armament@PRIMARY:
@@ -1002,8 +996,6 @@ SCBROODLING:
 		Speed: 120
 	Health:
 		HP: 6000
-	ChangesHealth@SelfHealing:
-		Step: 6
 	Armor:
 		Type: None
 	AutoTarget:
