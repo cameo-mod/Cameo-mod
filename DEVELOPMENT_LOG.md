@@ -9928,6 +9928,37 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - Re-balanced the `devastator` vs `harkonnen_devastatormech` image references and kept Harkonnen translation strings in sync.
 - Re-extracted `docs/balance/d2k_harkonnen.json`.
 
+## NOVA (A2 / LANE-2) W24 batches 14-16 + ledger refresh (2026-09-08)
+
+**Identity:** A2 / NOVA (SWE 1.7). Branch `devin/nova/w24-lane2`, worktree `C:/tmp/nova-lane2`.
+
+**What and why:**
+- Batch 14: collapsed SCUD family (`SCUD` -> MissileHE_Heavy 120000; removed orphan `-Flame_Heavy` from `SCUDThermobaric` and `SCUDTesla`). `V2ExplodeIrak`/`SCUDIrak` resolve to single main automatically. `GLASCUD` (legacy file) deferred.
+- Batch 15: collapsed sniper chains in `AsianAlliance` and `TKM` (`AsianSniper`/`VonSniper` -> Bullet_Heavy 30000; `AsianSniperAP`/`VonSniperAP` -> Bullet_Heavy 80000 [SHIPPED, restoring from drifted 92000]; `AsianSniperLockdown`/`VonSniperLockdown` -> Tesla_Super 192000 [SHIPPED, restoring from drifted 204000]). Parent and child edits in one batch to avoid orphans.
+- Batch 16: removed zero-damage `Warhead@Bullet_Light` placeholder from `AAGunBoatFlak`; `AAGunBoatFlak_elite` now also one main.
+- Re-extracted and committed balance ledgers (`docs/balance/*.json` + `docs/balance/derived/*.json`) after all batches. `audit_balance_drift.py` clean.
+
+**Verification:**
+- `find_empty_warhead.py` = 0
+- `audit_orphan_removals.py` = 0
+- `find_orphan_old_keys.py` = 0 real
+- `audit_release_drift.py` D1 82 <= 133, D2 34 <= 62, D3 15 <= 27, D4 335 <= 335, D5 39 <= 43
+- `audit_weapon_shape.py` W5 332 <= 394
+- `verify_generator_sync.py` = 0
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log` files after each batch and after ledger extraction.
+
+**Commits pushed:**
+- `0da5f6d5f` w24: collapse SCUD family under rule A
+- `0aadee929` w24: collapse sniper chains under rule A
+- `6e4362dd5` w24: remove zero-damage Bullet_Light placeholder from AAGunBoatFlak
+- `68a896199` ledgers: re-extract balance sidecars after W24 batches 13-16
+
+**Remaining blockers (need rulings):**
+- Waveforce no-@wh 6 (`ArmoredCarMG*Waveforce`, `SkyHawkChainGunWaveforce`, `JapaneseHovercraftFlak*Waveforce`, `japan_imperialscoutsman_rifle_waveforce`)
+- Planner-NONE 7 (`JapanMaidenBowEnergized`, `RA2Comet`/`RA2Comet_elite`, `Aphid_AA`, `BallistaTowerMultiShot`, `RA2DiskDrain`, `TorpTube`)
+- `GLASCUD` in legacy `mods/cameo/weapons/weapons.yaml`
+
+
 **Verification:**
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 - `find_empty_warhead.py` = 0.
@@ -10624,3 +10655,4 @@ the whole `SpreadDamage.Amount` kind), at ratchet. Complements the parallel Nova
 (`15321fe2b`) — different kind, no overlap. Boot-gate PASS.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
+
