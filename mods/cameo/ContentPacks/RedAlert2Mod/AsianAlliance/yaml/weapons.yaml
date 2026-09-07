@@ -24,8 +24,10 @@ AsianGrenade:
 		Speed: 456
 	Warhead@Concussion_Medium:
 		Damage: 4000
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
+	-Warhead@CannonHE_Medium:
+	-Warhead@Concussion_Medium:
 	Warhead@Concussion_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -62,8 +64,10 @@ asianalliance_asianmilitia_grenade:
 		Speed: 456
 	Warhead@Concussion_Medium:
 		Damage: 4000
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
+	-Warhead@CannonHE_Medium:
+	-Warhead@Concussion_Medium:
 	Warhead@Concussion_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -172,7 +176,7 @@ RA2AsianShotgunFanatic1:
 	ReloadDelay: 50
 	Range: 5000
 	Report: aa_sshtgatt.wav
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 2000
 	Warhead@Concussion_Medium:
 		Damage: 2000
@@ -300,6 +304,9 @@ AsianMaidenBow:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 		ExplosionPalette: ra2effect
+	-Warhead@ArrowWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@Arrow_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -458,6 +465,11 @@ AsianMaidenBow:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
+	-Warhead@Plasma_HeavyFlatCompatibility:
+	-Warhead@PreservedFlat_FlakWeapon:
+	-Warhead@PreservedFlat_MagicWeapon:
+	-Warhead@PreservedFlat_MediumMissile:
+	-Warhead@PreservedFlat_TeslaWeapon:
 
 AsianMaidenBow_elite:
 	Inherits: AsianMaidenBow
@@ -466,6 +478,7 @@ AsianMaidenBow_elite:
 	Burst: 6
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Spread: 125
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@Arrow_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -624,6 +637,10 @@ AsianMaidenBow_elite:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
+	-Warhead@PreservedFlat_FlakWeapon:
+	-Warhead@PreservedFlat_MagicWeapon:
+	-Warhead@PreservedFlat_MediumMissile:
+	-Warhead@PreservedFlat_TeslaWeapon:
 AsianNinjaStar:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -653,6 +670,7 @@ AsianCrocBite:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
+	-Warhead@Effect:
 
 AsianCrocBite_elite:
 	Inherits: AsianCrocBite
@@ -673,10 +691,18 @@ AsianLynxTankCannon:
 	Projectile: Bullet
 		Speed: 535
 		Inaccuracy: 150
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 1659
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@CannonHE_MediumFlatCompatibility:
 AsianLynxTankCannon_elite:
 	Inherits: AsianLynxTankCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -697,6 +723,8 @@ AsianLynxMG:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -721,6 +749,8 @@ AsianKamikazeChaingun:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -813,6 +843,12 @@ AsianPhotonCannon:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk
+	-Warhead@FlakWeapon:
+	-Warhead@MagicExtraDamage:
+	-Warhead@MagicWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
 	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 250
@@ -967,6 +1003,10 @@ AsianPhotonCannon:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
+	-Warhead@PreservedFlat_FlakWeapon:
+	-Warhead@PreservedFlat_MagicWeapon:
+	-Warhead@PreservedFlat_MediumMissile:
+	-Warhead@PreservedFlat_TeslaWeapon:
 	Warhead@Plasma_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -977,6 +1017,7 @@ AsianPhotonCannon_EMP:
 	Inherits: AsianPhotonCannon
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1004,6 +1045,7 @@ AsianQuasarAG_EMP:
 	Inherits: AsianQuasarAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1022,6 +1064,7 @@ AsianQuasar_AA:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Inaccuracy: 250
+	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@MissileAA_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1032,6 +1075,7 @@ AsianQuasar_EMP_AA:
 	Inherits: AsianQuasar_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@MissileAA_MediumFlatCompatibility:
 	Warhead@MissileQuantum_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1050,6 +1094,7 @@ AsianPunisherAG:
 		MaximumLaunchSpeed: 240
 		MinimumLaunchSpeed: 240
 		Inaccuracy: 240
+	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1060,6 +1105,7 @@ AsianPunisherAG_EMP:
 	Inherits: AsianPunisherAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@MissileAP_MediumFlatCompatibility:
 	Warhead@MissileQuantum_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1089,6 +1135,7 @@ AsianQuasarBoatAG_EMP:
 	Inherits: AsianQuasarBoatAG
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1109,6 +1156,7 @@ AsianQuasarBoat_AA:
 		MaximumLaunchSpeed: 256
 		MinimumLaunchSpeed: 256
 		Inaccuracy: 250
+	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@MissileAA_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1119,6 +1167,7 @@ AsianQuasarBoat_EMP_AA:
 	Inherits: AsianQuasarBoat_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	-Warhead@MissileAA_MediumFlatCompatibility:
 	Warhead@MissileQuantum_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1152,7 +1201,7 @@ AsianChemical:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		TrailInterval: 1
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -1197,6 +1246,8 @@ AsianChemical:
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	-Warhead@Effect1:
+	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: aa_plasgreeexp
 		ExplosionPalette: ra2effect
@@ -1211,10 +1262,17 @@ AsianChemical:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Chemical_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 1663
+	-Warhead@Demolition_Light:
 
 AsianChemical_elite:
 	Inherits: AsianChemical
@@ -1253,7 +1311,7 @@ AsianChemicalBombs:
 		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Effect: CreateEffect
@@ -1273,6 +1331,8 @@ AsianChemicalBombs:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
+	-Warhead@CannonHE_Medium:
+	-Warhead@Chemical_Heavy:
 	Warhead@Chemical_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -1375,6 +1435,8 @@ AsianSmallOilBomb:
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 40000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	-Warhead@Effect1:
+	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: expnew09.wav
 	Warhead@FireShrapnel: FireShrapnel
@@ -1409,6 +1471,9 @@ AsianPulverizerGatling:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Air, Water
 		Damage: 6000
@@ -1435,9 +1500,12 @@ AsianPulverizerMechaGatling:
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumMissile:
 	Warhead@Bullet_Medium:
 		Damage: 6000
 		PercentageScale: 3317
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Air, Water
 		Damage: 10000
@@ -1531,6 +1599,13 @@ AsianSinglePlasma:
 		Amount: 1
 		AimChance: 0
 		AimTargetStances: Enemy, Neutral
+	-Warhead@HeavyBomb:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@PreservedFlat_HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Ship
 		Spread: 800
@@ -1733,6 +1808,14 @@ AsianSinglePlasma:
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_Medium:
+	-Warhead@PreservedFlat_HeavyBomb:
+	-Warhead@PreservedFlat_LightChemicalWeapon:
+	-Warhead@PreservedFlat_LightFlameWeapon:
+	-Warhead@PreservedFlat_MediumChemicalWeapon:
+	-Warhead@PreservedFlat_MediumFlameWeapon:
+	-Warhead@PreservedFlat_ShrapnelWeapon:
 	Warhead@Plasma_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -1879,7 +1962,7 @@ AsianHarbingerPlasma:
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1916,10 +1999,20 @@ AsianHarbingerPlasma:
 		ValidTargets: Ground, Water, Air
 		ImpactActors: false
 
+	-Warhead@LightFlameWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
 	Warhead@Plasma_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
+	-Warhead@CannonHE_Medium:
+	-Warhead@MissileAP_Medium:
+	-Warhead@Plasma_Medium:
 	Warhead@Plasma_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -2054,6 +2147,8 @@ AAHyperionMagnet:
 		ApplyDamageModifiers: false
 		Range: 500
 		ValidTargets: Air
+	-Warhead@EffectAir:
+	-Warhead@Smudge:
 
 AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	Inherits: IonCannon
@@ -2141,6 +2236,8 @@ AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Delay: 16
 	Warhead@IonCannonAirPercentage: AreaDamagePercentage
 		Delay: 17
+	-Warhead@2Smu_impact:
+	-Warhead@5Smu_area2:
 
 AsianIonBeamMiniStart:
 	Inherits: ^AsianIonBeam
@@ -2290,6 +2387,9 @@ AsianPelicanMissile:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
+	-Warhead@Concussion_Light:
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -2332,6 +2432,8 @@ AsianPelicanMG:
 	# Preserve the shell template's range-scaled speed and inaccuracy after the
 	# mixed projectile inheritance resolves.
 	Projectile: ScaledBullet
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2429,8 +2531,10 @@ AsianSubmarineBomb:
 		Damage: 100000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
+	-Warhead@Demolition_Light:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: expnew09.wav
+	-Warhead@Demolition_Heavy:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
 		Damage: 100000
@@ -2459,10 +2563,10 @@ AsianPhoenixRocket:
 		Speed: 650
 		HorizontalRateOfTurn: 30
 		Acceleration: 5
-	Warhead@Flame_Medium: AreaDamage
+	Warhead@Flame_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 20000
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -2497,6 +2601,8 @@ ASDFGun:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -2514,6 +2620,7 @@ ASDFGun2:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 		Speed: 4000
+	-Warhead@Railgun_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2549,6 +2656,7 @@ ASDFKamikazeExplosion:
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpcraa.wav
+	-Warhead@Concussion_Medium:
 
 AsianSniper:
 	Inherits: ^Warhead_Bullet_Heavy
@@ -2573,6 +2681,7 @@ AsianSniper:
 		Speed: 2500
 		Width: 100
 		Inaccuracy: 0
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
@@ -2583,16 +2692,19 @@ AsianSniper:
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
@@ -2604,6 +2716,8 @@ AsianSniper:
 	Warhead@SniperChaingun:
 		Damage: 18000
 		PercentageScale: 0
+	-Warhead@SniperFlak:
+	-Warhead@SniperMediumMissile:
 
 AsianSniperAP:
 	Inherits: AsianSniper
@@ -2646,6 +2760,9 @@ AsianSniperAP:
 	Warhead@SniperChaingun:
 		Damage: 38000
 		PercentageScale: 0
+	-Warhead@SniperFlak:
+	-Warhead@SniperMediumMissile:
+	-Warhead@Bullet_Light:
 
 AsianSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -2724,6 +2841,7 @@ AsianSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@SniperMediumMissile:
 
 AsianMLRS:
 	Inherits@roleflat: ^Compatibility_MissileAA_MediumFlat
@@ -2758,16 +2876,20 @@ AsianMLRS:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyMissile:
 	Warhead@MissileAA_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 4988
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
 AsianSpitfireRockets:
 	Inherits: AsianMLRS
 	Inherits@fx: ^Effect_Explosion_Large_RA2
@@ -2789,7 +2911,7 @@ AsianSpitfireRockets:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		PercentageScale: 5000
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -2797,10 +2919,14 @@ AsianSpitfireRockets:
 		PercentageScale: 5000
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyMissile:
 	Warhead@MissileAA_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 2494
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
 AsianKamikazeImpactTargeting:
 	ReloadDelay: 25
 	Range: 7500
@@ -2834,6 +2960,8 @@ asianalliance_fanatic_shotgun:
 		Inaccuracy: 800
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000

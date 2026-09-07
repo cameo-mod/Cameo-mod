@@ -7,7 +7,7 @@ corrino_cannon:
 	Inherits@fx: ^Effect_CannonHE_Medium_D2K
 	ReloadDelay: 55
 	Report: MEDTANK1.WAV
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 2500
 		Damage: 8000
 

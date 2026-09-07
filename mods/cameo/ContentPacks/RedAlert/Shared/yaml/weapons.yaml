@@ -67,7 +67,7 @@ OreExplosion:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
-	Warhead@Flame_Medium: AreaDamage
+	Warhead@Flame_Medium:
 		Damage: 40000
 	Warhead@Resource: CreateResource
 		AddsResourceType: Ore
@@ -169,17 +169,20 @@ ConscriptMolotov:
 		Palette: ra_temperat
 		Weapon: CHFlame
 		InvalidTargets: Water
+	-Warhead@Demolition_Light:
 
 ConscriptMolotovExplode:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits: ConscriptMolotov
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Flame_Light:
 		Damage: 4000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 25
+	-Warhead@Demolition_Light:
+	-Warhead@Flame_Light:
 	Warhead@Flame_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -195,8 +198,10 @@ RocketsRA:
 	Report: missile6.aud
 	Warhead@MissileHE_Medium:
 		Damage: 10000
-	Warhead@MissileHE_Light: AreaDamage
+	Warhead@MissileHE_Light:
 		Damage: 10000
+	-Warhead@MissileHE_Light:
+	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -221,26 +226,32 @@ DragunovSniper:
 	ReloadDelay: 85
 	Range: 5804
 	TargetActorCenter: false
+	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@LightMissile:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@HeavyCannon:
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -631,6 +642,8 @@ APCGunAllies:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -643,6 +656,8 @@ APCGunAllies_AA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
 		Damage: 4000
@@ -662,6 +677,8 @@ RAVulcan:
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
 		Damage: 8000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -773,6 +790,8 @@ ZeroFighterChainGunWaveforce:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -900,6 +919,9 @@ WaveforceCannonDistortedBeam1:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 		ValidTargets: Air
+	-Warhead@HeavyCannon:
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
 	Warhead@Waveforce_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 25000
@@ -972,6 +994,11 @@ ra120mm:
 		Explosions: small_building
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Ground
+	-Warhead@HeavyCannon:
+	-Warhead@MediumCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 24000
@@ -1032,6 +1059,8 @@ MammothTusk:
 ParaBomb:
 	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
 	Inherits: ^ParaBombLegacy
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Heavy:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 40000
@@ -1109,6 +1138,13 @@ JapanSuperBomb:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@HeavyBomb:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
@@ -1502,6 +1538,7 @@ ATMine:
 	Inherits@2: ^HeavyMissile
 	Inherits@compat: ^ATMineDemolitionCompatibility
 	Report: mineblo1.aud
+	-Warhead@HeavyMissile:
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		InvalidTargets: Mine
@@ -1883,9 +1920,11 @@ TorpTube:
 	Warhead@MissileHE_Heavy:
 		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure
+	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
+	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
@@ -1925,6 +1964,9 @@ TorpTubeThermobaric:
 		ValidRelationships: Enemy
 		AffectsParent: true
 		Damage: 32000
+	-Warhead@Glow:
+	-Warhead@Smudge:
+	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
@@ -1951,7 +1993,7 @@ DepthCharge:
 	Projectile: Bullet
 		Speed: 125
 		Image: BOMB
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 60000
 		ValidTargets: Submarine, Ship, Underwater
 	Warhead@EffectWater: CreateEffect
@@ -2028,8 +2070,10 @@ DepthChargeCryo:
 		ContrailEndColor: FFFFFF
 	Warhead@Demolition_Heavy:
 		Damage: 40000
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 40000
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
 	Warhead@Demolition_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -2112,6 +2156,8 @@ JapanSpeedBoatGun:
 	Report: vgatlo5a.wav, vgatlo5b.wav
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -2125,6 +2171,8 @@ JapanSpeedBoatGunWaveforce:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Railgun_Heavy:
 	Warhead@Waveforce_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2156,6 +2204,8 @@ YamatoCannon:
 		Damage: 20000
 	Warhead@CannonHE_Heavy:
 		Damage: 20000
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Demolition_Heavy:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 40000
@@ -2287,11 +2337,17 @@ ra1_allies_chronovortex:
 		Range: 12345
 		ValidRelationships: Enemy, Neutral, Ally
 		ValidTargets: Ground, Water, Air
+	-Warhead@Effect:
+	-Warhead@Effect1:
 	# The Scorch smudge layer spawns animated flames (scorch_flames); strip the inherited
 	# Scorch smudges so this cryo superweapon doesn't leave a patch of fire on impact.
+	-Warhead@Smudge:
 
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Allied
 # rifle infantry â€” burst 3, accurate, longest scout reach. Cryo pair.
+	-Warhead@HeavyBomb:
+	-Warhead@MagicExtraDamage:
+	-Warhead@MagicWeapon:
 	Warhead@Magic_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 4888

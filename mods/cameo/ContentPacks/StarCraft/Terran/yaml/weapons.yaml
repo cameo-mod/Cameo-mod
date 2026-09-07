@@ -22,6 +22,9 @@ MarineMG:
 		PercentageScale: 1667
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
@@ -77,6 +80,9 @@ MadcapGun:
 		PercentageScale: 1667
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
@@ -95,7 +101,7 @@ FirebatF:
 		Image: tsflameall
 		Inaccuracy: 680
 		Palette: tseffect
-	Warhead@Flame_Medium: AreaDamage
+	Warhead@Flame_Medium:
 		Damage: 2000
 HarakanF:
 	Inherits@collapsewh: ^Warhead_Flame_Heavy
@@ -121,6 +127,8 @@ HarakanF:
 		PhysicalStateScale: 100
 
 	TargetActorCenter: false
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@MediumFlameWeapon:
 	Warhead@Flame_Heavy:
 		Damage: 4000
 		PercentageScale: 0
@@ -143,6 +151,9 @@ MatadorFlamer:
 		Palette: tseffect
 	Warhead@Flame_Heavy:
 		Damage: 2000
+	-Warhead@Flame_Heavy:
+	-Warhead@Flame_Light:
+	-Warhead@Flame_Medium:
 	Warhead@Flame_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 6000
@@ -198,6 +209,7 @@ CycloneRockets:
 		Condition: lockon
 		ValidTargets: lockable
 		ValidRelationships: Enemy
+	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -245,10 +257,13 @@ MarauderMissiles:
 		ValidTargets: Ground, Water
 		Damage: 5
 
+	-Warhead@TankDestroyerCannon:
+	-Warhead@MediumMissile:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 3330
+	-Warhead@CannonHE_Heavy:
 
 SCTyr:
 	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
@@ -308,6 +323,11 @@ SCTyr:
 		Explosions: ra2_medium_explosion, ra2_medium_clsn, ra2_large_twlt
 		ImpactSounds: gexp14a.wav, expnew09.wav, gexpapoa.wav
 
+	-Warhead@LightFlameWeapon:
+	-Warhead@Chaingun:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@CannonHE_HeavyFlatCompatibility:
 SCTyrAA:
 	Inherits: ^Grenade
 	Inherits@2: ^FlakWeapon
@@ -339,6 +359,10 @@ SCTyrAA:
 		Damage: 16000
 		PercentageScale: 2500
 		PercentageDenominator: 10000
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyMissile:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -388,7 +412,7 @@ ReaperGrenade:
 		InaccuracyType: PerCellIncrement
 		Image: d2k_grenade
 		Shadow: true
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageCalculationType: ClosestTargetablePosition
@@ -408,6 +432,9 @@ ReaperGrenade:
 		ImpactSounds: EXPLMD2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
 	Warhead@Demolition_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -436,6 +463,7 @@ GhostSniper:
 		Speed: 2500
 		Width: 100
 		Inaccuracy: 0
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -446,16 +474,19 @@ GhostSniper:
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -474,6 +505,8 @@ GhostSniper:
 		Damage: 6000
 
 		PercentageScale: 0
+	-Warhead@SniperFlak:
+	-Warhead@SniperMediumMissile:
 GhostSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
@@ -566,6 +599,8 @@ GhostSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 24000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@SniperMediumMissile:
+	-Warhead@Bullet_Light:
 
 SpecterSniper:
 	Inherits: ^Warhead_Bullet_Heavy
@@ -590,6 +625,7 @@ SpecterSniper:
 		Speed: 2500
 		Width: 100
 		Inaccuracy: 0
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -600,16 +636,19 @@ SpecterSniper:
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		Spread: 1
 		Falloff: 100, 0
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -628,6 +667,8 @@ SpecterSniper:
 		Damage: 12000
 
 		PercentageScale: 0
+	-Warhead@SniperFlak:
+	-Warhead@SniperMediumMissile:
 SpecterSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
@@ -720,6 +761,8 @@ SpecterSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 48000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@SniperMediumMissile:
+	-Warhead@Bullet_Light:
 
 VultureGrenade:
 	Inherits@roleflat: ^Compatibility_Demolition_LightFlat
@@ -760,7 +803,7 @@ VultureGrenade:
 		Damage: 2000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
@@ -768,10 +811,16 @@ VultureGrenade:
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@SmallArms:
+	-Warhead@TankDestroyerCannon:
 	Warhead@Demolition_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 1995
+	-Warhead@CannonHE_Medium:
 
 SiegeTankCannon:
 	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
@@ -784,6 +833,8 @@ SiegeTankCannon:
 	Report: TTaFir00.aud
 	Projectile: Bullet
 		Speed: 611
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 30000
@@ -928,12 +979,29 @@ SiegeTankSiegeCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	-Warhead@Effect1:
 	Warhead@Effect: CreateEffect
 		Explosions: scsiegetanksiegeexplosion
 		ImpactSounds: ExploLrg.aud
 		ExplosionPalette: greyscale
 
 	MinRange: 2355
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyCannon:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@LightFlameWeapon:
+	-Warhead@LightMissile:
+	-Warhead@MediumCannon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
 	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 140000
@@ -1033,6 +1101,10 @@ GoliathMk2MG:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Bullet_MediumFlatCompatibility:
 GoliathMk2Rockets:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K_Rocket
@@ -1268,6 +1340,9 @@ ValkyrieRockets:
 		Damage: 8000
 		PercentageScale: 2500
 		PercentageDenominator: 10000
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyAAWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
@@ -1360,6 +1435,14 @@ WyvernRockets:
 		PercentageScale: 1422
 		ValidTargets: Ground, Water, Air
 		Damage: 14000
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAP_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -1447,6 +1530,16 @@ BCLaser:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@HeavyAAWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@HeavyMissile:
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@NuclearWarhead:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@RailgunWeapon:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 33600
@@ -1512,6 +1605,15 @@ BCYamatoCannon:
 		Explosions: nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
+	-Warhead@HeavyAAWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@HeavyMissile:
+	-Warhead@LaserWeapon:
+	-Warhead@Laser_HeavyFlatCompatibility:
+	-Warhead@NuclearWarhead:
+	-Warhead@RailgunWeapon:
 	Warhead@Plasma_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 129600
@@ -1604,10 +1706,22 @@ PhobosLaser:
 		ImpactActors: false
 		ValidTargets: Air
 
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	-Warhead@HeavyMissile:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyChemicalWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@Laser_Heavy_ExtraDamage:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 42000
 		PercentageScale: 0
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
@@ -1712,6 +1826,10 @@ MedicFlare:
 		Duration: 60
 		Range: 1200
 		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
+	-Warhead@FlakWeapon:
+	-Warhead@LaserExtraDamage:
+	-Warhead@LaserWeapon:
+	-Warhead@LightFlameWeapon:
 	Warhead@PreservedFlat_FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 250

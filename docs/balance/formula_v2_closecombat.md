@@ -4,7 +4,7 @@ anchor: `SPEC(50000,75,3500,250,1,200)` (cost0 200, O0 640.00, P0 500.00, Q0 262
 
 | unit | cost (actual) | class-formula price | delta |
 |---|---|---|---|
-| `alien.nax` | 110 | 393 | +258% ❗ |
+| `naxis_alien` | 110 | 393 | +258% ❗ |
 | `asianalliance_fanatic` | 500 | 562 | +12% ⚠ |
 | `futuretech_shotgundroid` | 400 | 115 | -71% ❗ |
 | `naxis_sssoldier` | 240 | 203 | -15% ⚠ |

@@ -127,6 +127,22 @@ def main_warheads(resolved) -> list[str]:
     return [wh.key.replace("Warhead@", "") for wh in main_warhead_nodes(resolved)]
 
 
+def validated_reviewed_predicate(rs, main_warhead_nodes_fn):
+    """Return a predicate (name, mains) -> bool that is True for weapons that
+    were reviewed and deliberately kept as multi-main composites.
+
+    The ``intentional_composites`` exemption was DELETED 2026-09-06 by
+    maintainer ruling ("no more than the 3-way split and no dual inherits
+    per type"). Nothing is exempt anymore — every multi-main weapon is debt.
+    This stub returns a predicate that always says "not reviewed" so that
+    ``survey_weapon_structure.inventory`` and ``audit_doc_claims`` continue
+    to work without the deleted ``intentional_composites.py`` module.
+    """
+    def _predicate(name, mains):
+        return False
+    return _predicate
+
+
 def run(rs: Ruleset) -> int:
     hist = collections.Counter()
     combos = collections.Counter()

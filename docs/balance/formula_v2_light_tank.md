@@ -11,7 +11,7 @@ anchor: `SPEC(100000,125,5000,200,1,400)` (cost0 400, O0 850.00, P0 900.00, Q0 1
 | `japan_shrineminitank` | 1600 | 547 | -66% ❗ |
 | `latinsyndicate_rushertank` | 650 | 287 | -56% ❗ |
 | `ordos_combattank` | 650 | 287 | -56% ❗ |
-| `panzer.nax` | 600 | 339 | -43% ❗ |
+| `naxis_panzer` | 600 | 339 | -43% ❗ |
 | `ra1_allies_alliedlighttank` | 500 | 238 | -52% ❗ |
 | `ra1_allies_sheridanassaulttank` | 600 | 318 | -47% ❗ |
 | `schwarzermond_lunarpanzer` | 650 | 287 | -56% ❗ |

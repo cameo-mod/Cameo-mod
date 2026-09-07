@@ -49,6 +49,9 @@
 
 ^Effect_MissileHE_Heavy_D2K:
 	Inherits: ^Effect_MissileHE_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
 	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -67,6 +70,9 @@
 
 ^Effect_MissileAP_Heavy_D2K:
 	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
 	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -82,6 +88,9 @@
 
 ^Effect_MissileAP_Heavy_D2K_Rocket:
 	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
 	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -99,6 +108,9 @@
 
 ^Effect_MissileAP_Heavy_D2K_Rocket_Blast:
 	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
 	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -270,6 +282,9 @@
 
 ^Effect_MissileAP_Heavy_D2K_OMissile:
 	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
 	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -423,6 +438,9 @@
 	Report: TURRET1.WAV
 	Projectile: Bullet
 		Speed: 797
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@CannonHE_Medium:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 30000

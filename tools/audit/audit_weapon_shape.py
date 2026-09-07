@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""audit_weapon_shape.py — THE ONE-WARHEAD / THREE-INHERIT LAW.
+"""audit_weapon_shape.py ΓÇö THE ONE-WARHEAD / THREE-INHERIT LAW.
 
-⭐ MAINTAINER RULING, 2026-09-06 (night). Binding, and it SUPERSEDES the
+Γ¡É MAINTAINER RULING, 2026-09-06 (night). Binding, and it SUPERSEDES the
 "intentional composite" exemption:
 
     "From now on we will no longer allow any more multi-warhead weapons. The only
      thing every weapon is allowed to have are exactly 3 inherits: warhead,
      projectile and effect. No more dual warheads, dual effects or dual projectiles
-     or anything else. Also no more effects directly on the weapon itself — it
+     or anything else. Also no more effects directly on the weapon itself ΓÇö it
      should all come from the inherited templates. The only thing allowed are
      special cases like those fire-shrapnel weapons or applying a condition."
 
@@ -19,18 +19,18 @@ So the target shape of EVERY concrete weapon is exactly:
         Inherits@fx:   ^Effect_<Kind>_<Level>
         <scalars only: Range, ReloadDelay, Report, Damage override, ...>
 
-⛔ WHAT THIS REPEALS. `tools/audit/intentional_composites.py` recorded 224 multi-main
+Γ¢ö WHAT THIS REPEALS. `tools/audit/intentional_composites.py` recorded 224 multi-main
 weapons as REVIEWED AND DELIBERATELY KEPT. Under this ruling they are no longer
-exempt — they are the WORKLIST. The registry is still the right data (it says which
+exempt ΓÇö they are the WORKLIST. The registry is still the right data (it says which
 multi-main shapes were deliberate and what their mains are); only its MEANING flips,
 from "leave alone" to "convert, and mind that someone chose these mains on purpose."
 
-⚠ LEGITIMATE EXCEPTIONS, and they are narrow. A warhead is NOT a violation when it
+ΓÜá LEGITIMATE EXCEPTIONS, and they are narrow. A warhead is NOT a violation when it
 delivers a MECHANIC rather than a second damage profile:
-  * `FireShrapnel` / `FireFragment` / `FireCluster` — spawn-another-weapon mechanics.
-  * `GrantExternalCondition` — applies a condition (shields, status meters).
-  * `AreaDamagePercentage` / `*Percentage` twins — the percentage half of one main.
-  * `*FriendlyFire` / `*ExtraDamage` — the baked halves of one main.
+  * `FireShrapnel` / `FireFragment` / `FireCluster` ΓÇö spawn-another-weapon mechanics.
+  * `GrantExternalCondition` ΓÇö applies a condition (shields, status meters).
+  * `AreaDamagePercentage` / `*Percentage` twins ΓÇö the percentage half of one main.
+  * `*FriendlyFire` / `*ExtraDamage` ΓÇö the baked halves of one main.
 These are counted and shown, never failed on.
 
 Buckets, each on its own LOWER-ONLY ratchet:
@@ -43,7 +43,7 @@ Buckets, each on its own LOWER-ONLY ratchet:
   W6  effect warheads declared LOCALLY on a concrete weapon
   I7  informational: weapons missing one of the three template inherits
 
-⚠ I7 is INFORMATIONAL ON PURPOSE. A weapon with no `^Projectile_*` may legitimately
+ΓÜá I7 is INFORMATIONAL ON PURPOSE. A weapon with no `^Projectile_*` may legitimately
 be an instant/utility weapon, so the number is a review queue, not a defect count.
 Do not turn it into a ratchet without a per-weapon pass.
 """
@@ -69,11 +69,16 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 # (An earlier throwaway scan said 602/237/30/72; its regex was looser. Always set
 #  a ratchet from the audit that enforces it, never from a scratch measurement.)
 W1_BASELINE = 583   # more than 3 inherits
-W2_BASELINE = 213   # dual ^Warhead_ inherit
-W3_BASELINE = 21    # dual ^Projectile_ inherit
-W4_BASELINE = 61    # dual ^Effect_ inherit
-W5_BASELINE = 401   # more than one resolved MAIN warhead
-W6_BASELINE = 687   # weapons declaring an effect warhead locally
+W2_BASELINE = 211   # dual ^Warhead_ inherit (213->211: D2K_Rocket_Trooper AA+AGOnly collapsed by maintainer ffdec98b7)
+W3_BASELINE = 12    # dual ^Projectile_ inherit (21->12: same collapse)
+W4_BASELINE = 52    # dual ^Effect_ inherit (61->52: same collapse)
+W5_BASELINE = 394   # more than one resolved MAIN warhead (was 401; 394 after the
+                    # ad7c5e232 removal-node restore, which was the last of the
+                    # resurrected-warhead damage)
+W6_BASELINE = 694   # weapons declaring an effect warhead locally
+                    # 687 -> 694: the TOP_LEVEL regex was fixed to match
+                    # digit-starting keys (120mm_*, 8Inch, etc.), exposing
+                    # 7 weapons previously hidden. LOWER ONLY.
 
 MAIN_TYPES = ("SpreadDamage", "AreaDamage")
 EFFECT_TYPES = {
@@ -83,7 +88,7 @@ EFFECT_TYPES = {
 # Suffixes that mark a warhead as a HALF of one main, not a second main.
 NOT_A_MAIN = ("percentage", "friendlyfire", "extradamage")
 
-TOP_LEVEL = re.compile(r"^([A-Za-z_^][A-Za-z0-9_.^]*):")
+TOP_LEVEL = re.compile(r"^([A-Za-z0-9_^][A-Za-z0-9_.^]*):")
 INHERIT = re.compile(r"^\t(Inherits(?:@[A-Za-z0-9_]+)?):\s*(\S+)")
 WARHEAD = re.compile(r"^\t(Warhead@[A-Za-z0-9_]+):\s*(\S*)")
 
@@ -148,13 +153,13 @@ def main() -> int:
         pr = [p for p in parents if p.startswith("^Projectile_")]
         fx = [p for p in parents if p.startswith("^Effect_")]
         if len(parents) > 3:
-            w1.append([f"`{name}`", str(len(parents)), " · ".join(f"`{p}`" for p in parents[:4])])
+            w1.append([f"`{name}`", str(len(parents)), " ┬╖ ".join(f"`{p}`" for p in parents[:4])])
         if len(wh) > 1:
-            w2.append([f"`{name}`", " · ".join(f"`{p}`" for p in wh)])
+            w2.append([f"`{name}`", " ┬╖ ".join(f"`{p}`" for p in wh)])
         if len(pr) > 1:
-            w3.append([f"`{name}`", " · ".join(f"`{p}`" for p in pr)])
+            w3.append([f"`{name}`", " ┬╖ ".join(f"`{p}`" for p in pr)])
         if len(fx) > 1:
-            w4.append([f"`{name}`", " · ".join(f"`{p}`" for p in fx)])
+            w4.append([f"`{name}`", " ┬╖ ".join(f"`{p}`" for p in fx)])
         if not wh:
             missing["^Warhead_*"] += 1
         if not pr:
@@ -162,9 +167,9 @@ def main() -> int:
         if not fx:
             missing["^Effect_*"] += 1
     for name, nodes in sorted(local_fx.items()):
-        w6.append([f"`{name}`", str(len(nodes)), " · ".join(f"`{n}`" for n in nodes[:3])])
+        w6.append([f"`{name}`", str(len(nodes)), " ┬╖ ".join(f"`{n}`" for n in nodes[:3])])
 
-    w5 = [[f"`{k}`", str(len(v)), " · ".join(f"`{x}`" for x in v[:4])]
+    w5 = [[f"`{k}`", str(len(v)), " ┬╖ ".join(f"`{x}`" for x in v[:4])]
           for k, v in sorted(multi.items())]
 
     counts = {
@@ -176,28 +181,28 @@ def main() -> int:
         "W6": (len(w6), W6_BASELINE, "effect warheads declared LOCALLY"),
     }
 
-    out = [h1("Weapon shape — the ONE-WARHEAD / THREE-INHERIT law")]
+    out = [h1("Weapon shape ΓÇö the ONE-WARHEAD / THREE-INHERIT law")]
     out.append(
         "**Maintainer ruling, 2026-09-06.** Every concrete weapon ends with exactly three "
-        "inherits — `^Warhead_*`, `^Projectile_*`, `^Effect_*` — one main warhead, and no "
+        "inherits ΓÇö `^Warhead_*`, `^Projectile_*`, `^Effect_*` ΓÇö one main warhead, and no "
         "effect warheads of its own. Mechanic warheads (`FireShrapnel`, "
         "`GrantExternalCondition`) and the `*Percentage` / `*FriendlyFire` / `*ExtraDamage` "
         "halves of one main are NOT violations.\n")
     out.append(
-        "⛔ This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its "
-        "224 entries are no longer 'reviewed, keep' — they are the worklist. The registry "
+        "Γ¢ö This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its "
+        "224 entries are no longer 'reviewed, keep' ΓÇö they are the worklist. The registry "
         "data stays useful: it says which mains someone chose on purpose.\n")
     out.append(f"concrete weapons with inherits: **{len(inherits)}**\n")
     out.append("| check | what | count | ratchet |\n|---|---|--:|--:|")
     for code, (n, base, what) in counts.items():
-        flag = " ⛔" if n > base else ""
+        flag = " Γ¢ö" if n > base else ""
         out.append(f"| {code} | {what} | **{n}**{flag} | {base} |")
     out.append("")
-    out.append("| I7 informational — missing template | weapons |\n|---|--:|")
+    out.append("| I7 informational ΓÇö missing template | weapons |\n|---|--:|")
     for k, v in sorted(missing.items()):
         out.append(f"| no `{k}` inherit | {v} |")
     out.append(
-        "\n_I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may "
+        "\n_I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon may "
         "legitimately have no projectile. Do not ratchet it without a per-weapon pass._\n")
 
     for code, rows, cols in (
@@ -209,18 +214,18 @@ def main() -> int:
         ("W6", w6, ["weapon", "nodes", "first three"]),
     ):
         n, base, what = counts[code]
-        out.append(h2(f"{code} — {what} ({n} vs ratchet {base})"))
+        out.append(h2(f"{code} ΓÇö {what} ({n} vs ratchet {base})"))
         out.append(table(cols, rows[:40]))
         if len(rows) > 40:
             out.append(f"\n_... and {len(rows) - 40} more._\n")
 
     failed = [c for c, (n, base, _) in counts.items() if n > base]
     if failed:
-        out.append(f"\n**FAIL — {', '.join(failed)} rose above baseline.** A weapon was given "
+        out.append(f"\n**FAIL ΓÇö {', '.join(failed)} rose above baseline.** A weapon was given "
                    "a second warhead, projectile or effect. The law allows exactly three "
                    "inherits and one main.\n")
     else:
-        out.append("\n_all buckets at or below their ratchets_ — this is the pre-existing "
+        out.append("\n_all buckets at or below their ratchets_ ΓÇö this is the pre-existing "
                    "conversion backlog. **Lower each baseline as you convert; never raise "
                    "one.**\n")
 

@@ -45,6 +45,9 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
 - [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
+- [⛔ An override is a CANCELLATION — never judge it by the node it sits in (2026-09-06)](#-an-override-is-a-cancellation--never-judge-it-by-the-node-it-sits-in-2026-09-06)
+- [Walk the bisect back until the symptom is GONE, not until it appears (2026-09-07)](#walk-the-bisect-back-until-the-symptom-is-gone-not-until-it-appears)
+- [⛔ Fix the TOOL, not its output — six defects hid behind one patched map (2026-09-06)](#-fix-the-tool-not-its-output--six-defects-hid-behind-one-patched-map-2026-09-06)
 - [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
 - [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
@@ -1434,3 +1437,154 @@ broken. Follow every member of the affected archives, compare against the exact
 rename commit, and resolve placed actors against active rules. Preserve unchanged
 member bytes and ZIP metadata. A successful random menu boot remains one runtime
 sample; `test_shellmap_actor_references.py` covers all packaged shellmap placements.
+
+## ⛔ Fix the TOOL, not its output — six defects hid behind one patched map (2026-09-06)
+
+The doubled-game-prefix bug in `gen_rename_maps.py` (`("ra1", "ra1_soviets")` wanting
+`ra1_ra1_soviets_`, which nothing can match) was found and fixed on 2026-09-06. The
+faction that had already been renamed with the broken proposal was repaired by
+**hand-editing 59 entries in `tools/rename/rename_map_ra1_soviets.yaml`** and
+re-applying. The commit message says so plainly: *"Fixed 59 file rename entries with
+doubled compound filenames (corrected to simple prefix replacement)."*
+
+**The generator was never given that same correction.** A regenerate the same day
+proposed **842 file renames, 92 of them corrupt** — the identical shape, waiting for
+the next faction. Five further defects of the same family were sitting in the file
+half, none of them reachable by fixing a map:
+
+| defect | what it minted |
+|---|---|
+| PREPEND instead of REPLACE | `ra1_soviets_btr80_ra1_soviets_btr80_new_btr.shp` |
+| shared assets exempt only above **3** users | 16 RA1-Allies sprites wearing `ra1_soviets_*` names |
+| fluent-key guard tested `actor-` but keys also use `actor_` | actor id `ra1_soviets_actordogname` from `actor_dog.name` |
+| `owner_of()` returns a pack path, `FACTION_SLUG` is keyed by `.internal` | would rename every compliant id to `redalert_soviets_*` |
+| dedupe stripped the slug but never the English adjective | `ra1_soviets_sovietairfield`, `japan_japanesebarracks` (345 live) |
+| package-qualified refs treated as filenames | `cabal_cyborgfactory_cabal_icons\|…png`, unloadable |
+
+**The rule: when a generated artifact is wrong, the artifact is a SYMPTOM.** Patching
+it clears today's damage and guarantees tomorrow's. Fix the generator, regenerate, and
+diff the regenerated output against the hand-patched one — if they differ, the tool is
+still wrong.
+
+### Walk the bisect back until the symptom is GONE, not until it appears
+
+The removal-node damage happened TWICE and the first pass only found the second one.
+`d818aec40` (the 2248-node sweep) was found, reverted, and measured against its own
+parent `d818aec40^`. Forty-four self-cycling FireShrapnel chains were still present at
+that parent, so they were written up as pre-existing debt and left alone.
+
+They were not. One commit further back, `ad7c5e232` — whose subject line reads
+*"feat(rename): ra1_soviets faction rename"* — had stripped **236 removal nodes** out of
+one weapons file, taking multi-main weapons 396 to 461 and destroying every tesla-arc
+terminator. Restoring them took the self-cycles 44 to 0 and W5 459 to 394, below the
+figure that preceded either commit.
+
+**The rule: a measurement at the parent of the commit you already found proves nothing
+about older commits.** Walk back until the symptom disappears.
+
+⚠ **And note the disguise.** The earlier, larger damage was inside a commit that
+announced itself as a *rename*. Nobody hunting a weapons regression would have opened
+it, and its own message described only the rename. **Judge a commit by its DIFF, never
+by its subject line** — `git show <sha> --stat` costs one command.
+
+### The check that could not see the thing it was built to find
+
+A near-miss from the same day, caught only because a slow first run finished in the
+background an hour later and **disagreed with the shipped version**.
+
+The first cut of `audit_naming_damage.py` matched each actor id with a **consuming**
+separator, `(?:^|_)<id>(?:_|$)`. `re.finditer` resumes after the consumed `_`, so in
+`ra1_soviets_btr80_ra1_soviets_btr80_new_btr` the second occurrence could no longer
+match its required `(?:^|_)` prefix. **The doubled id the check exists to detect was
+structurally invisible to it.** It reported `N1 4 / N2 0` where the truth was `25 / 16`.
+
+`N2 = 0` — an exact zero, over a population whose members had been listed by eye ten
+minutes earlier. **Had that run set the baselines, N2 would have been ratcheted at 0:
+a check incapable of failing, with 16 real findings hidden behind a green PASS.** The
+correct count only existed because an unrelated performance rewrite had replaced the
+consuming separator with a lookahead `(?=_|$)`, which consumes nothing — the accuracy
+fix was accidental.
+
+Two rules fall out:
+
+* **A detector needs a positive self-test on a KNOWN-BAD input**, not just a plausible
+  count. `audit_naming_damage.self_test()` now asserts the pattern finds two
+  occurrences in a hand-written doubled stem, and fails loudly if anyone rewrites it
+  back into a consuming form.
+* **A guard must validate the thing being acted on, not the thing it lives next to.**
+  The same hour, `tools/hooks/bash_guard.py` was found resolving the repository from
+  its OWN file path, so it always inspected the MAIN checkout's index. Once the fleet
+  moved to `git worktree`s that was wrong in both directions: it refused a docs-only
+  commit in a worktree because another agent had 73 sprite files staged in the main
+  tree, and — the direction that matters — it would have waved through engine content
+  committed from a worktree whenever the main index happened to be clean. A boot gate
+  that reads the wrong index is not a weaker gate, it is **no gate**. Fixed to resolve
+  the worktree from the command's `cwd` (and from `git -C <dir>`), with
+  `tools/hooks/test_bash_guard.py` asserting the invariant across every worktree.
+* **When two runs of the same tool disagree, do not assume the newer one is right
+  because it is newer.** Diff the logic and prove which is correct. Here the older run
+  was the stale one AND the wrong one, but that had to be demonstrated in four lines of
+  `re.finditer`, not assumed.
+
+### The second half: a bad id does not stay local
+
+`ra1_soviets_actordogname` was not confined to the sprite folder. It reached
+`ai/ai.yaml` `GuerrillaTypes` (5 lines), an `InitialUnits:` list in
+`RedAlert/Soviets/yaml/aircraft.yaml`, and a `Targetable@` suffix inside
+**`ContentPacks/D2k/Ordos/yaml/infantry.yaml`** — a faction with no relationship to
+RA1. Renames propagate through text replacement into places the renamer never looked.
+
+### And a check that could not see the damage
+
+`gen_rename_maps.py` reports per-faction compliance over **faction-exclusive
+BUILDABLE actors only**. Husks, upgrade markers, proxy actors and variants are
+invisible to it, and `startswith(prefix)` is satisfied by `ra1_soviets_sovietairfield`
+just as well as by `ra1_soviets_airfield`. `asianalliance` read **73/73, 100%** while
+holding 27 dotted ids and 73 redundant-word ids. **A compliance percentage measures
+the predicate, not the goal.** `tools/audit/audit_naming_damage.py` now reads the
+RESULT instead — six pathologies, six lower-only ratchets, whoever produced them.
+
+Related: `docs/LESSONS_LEARNED.md` "A hand-edit to generated output has a countdown on
+it", and the exactly-0.0% tell in `tools/audit/gen_rename_maps.py`'s FACTION_SLUG
+comment.
+
+## ⛔ An override is a CANCELLATION — never judge it by the node it sits in (2026-09-06)
+
+`d818aec40` deleted 2248 `-Warhead@*` nodes as "stale". They were not stale. A
+`-Warhead@X` in a child **cancels a warhead an ANCESTOR defines**, and deleting it
+brings that warhead back.
+
+Measured with the audit's own resolver, at `d818aec40^` vs after:
+
+| | |
+|---|---|
+| weapons resolving to >1 MAIN warhead | **461 → 1103** |
+| newly multi-main | **644** |
+| same weapon, different main set | **161** |
+
+```
+IxianCombatTankCannon   cancelled CannonHE_Medium, then defined CannonHE_Heavy.
+                        Without the cancellation it fires BOTH on every shot.
+harkonnen_autogunturret cancelled Bullet_Light, Bullet_Medium, CannonHE_Heavy.
+25mmWaveforce           2 mains -> 8, gaining LightFlameWeapon, MediumChemical,
+                        ShrapnelWeapon, TankDestroyerCannon.
+```
+
+**Why they looked stale:** the check asked whether *the same node* also defines
+`Warhead@X`. It does not — that is the whole point of a cancellation — so every one
+of them read as dead.
+
+**The rule: resolve the node and check the ANCESTORS before deleting any override.**
+For a `-Warhead@X`, keep it unless **no ancestor defines `Warhead@X`**. The same trap
+wears other clothes: a child's `Modifier: 100` is almost always a cancellation of an
+inherited multiplier, not a no-op — W26's "20 no-ops" were 19 cancellations.
+
+**And a boot gate cannot catch this.** Nothing crashed; the game starts perfectly with
+a tank that also throws grenades. A boot gate proves the rules PARSE, never that they
+are RIGHT. For any bulk edit to resolved behaviour the gate is
+`tools/audit/review_resolve_diff.py` on a sample — five weapons would have caught this
+in minutes, and it was not run.
+
+⚠ **A bulk delete is the wrong shape for this class of cleanup entirely.** Whatever
+genuinely-dead nodes existed among those 2248 are still there after the revert; they
+have to be found per-node, by resolving each parent chain.

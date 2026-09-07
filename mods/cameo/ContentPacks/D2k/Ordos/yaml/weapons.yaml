@@ -4,7 +4,7 @@ OrdosCombatTankCannon:
 	ReloadDelay: 44
 	Projectile: Bullet
 		Speed: 523
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 8000
 HeavyOrdosCombatTankCannon:
@@ -13,7 +13,7 @@ HeavyOrdosCombatTankCannon:
 	ReloadDelay: 40
 	Projectile: Bullet
 		Speed: 600
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 10000
 HeavyOrdosCombatTankRockets:
@@ -76,7 +76,7 @@ HeavyOrdosCombatTankRockets:
 		Damage: 14000
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 7
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 2499
 		Damage: 56000
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -84,6 +84,10 @@ HeavyOrdosCombatTankRockets:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 7
 
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@CannonHE_MediumFlatCompatibility:
 120mm_cobra:
 	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -103,14 +107,14 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndWidth: 25
 		ContrailStartColor: FFFF88FF
 		ContrailEndColor: FF884422
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 30000
 	Warhead@CannonAP_Light:
 		Damage: 30000
 	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 30000
 	Warhead@Collapsed120mm_cobraCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -224,6 +228,10 @@ HeavyOrdosCombatTankRockets:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Medium:
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 120000
@@ -234,6 +242,10 @@ HeavyOrdosCombatTankRockets:
 		Speed: 225
 		Inaccuracy: 25
 		LaunchAngle: 75
+	-Warhead@Collapsed120mm_cobraCannonAP_LightPercentage:
+	-Warhead@Collapsed120mm_cobraCannonHE_MediumPercentage:
+	-Warhead@Collapsed120mm_cobraConcussion_MediumPercentage:
+	-Warhead@Collapsed120mm_cobraDemolition_LightPercentage:
 	Warhead@Collapsed120mm_cobra_deployCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -369,6 +381,10 @@ HeavyOrdosCombatTankRockets:
 		Palette: alpha25
 		Weapon: AnthraxCloud
 		InvalidTargets: Water, Structure
+	-Warhead@Collapsed120mm_cobraCannonAP_LightPercentage:
+	-Warhead@Collapsed120mm_cobraCannonHE_MediumPercentage:
+	-Warhead@Collapsed120mm_cobraConcussion_MediumPercentage:
+	-Warhead@Collapsed120mm_cobraDemolition_LightPercentage:
 	Warhead@Collapsed120mm_pythonCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -492,6 +508,10 @@ HeavyOrdosCombatTankRockets:
 		Speed: 275
 		Inaccuracy: 25
 		LaunchAngle: 75
+	-Warhead@Collapsed120mm_pythonCannonAP_LightPercentage:
+	-Warhead@Collapsed120mm_pythonCannonHE_MediumPercentage:
+	-Warhead@Collapsed120mm_pythonConcussion_MediumPercentage:
+	-Warhead@Collapsed120mm_pythonDemolition_LightPercentage:
 	Warhead@Collapsed120mm_python_deployCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -665,6 +685,8 @@ eye_bomberguy:
 		Damage: 20000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 10
+	-Warhead@Effect1:
+	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_building
 		ImpactSounds: EXPLSML4.WAV
@@ -673,6 +695,13 @@ eye_bomberguy:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1875
 
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -698,13 +727,13 @@ D2K_155mm_turret:
 	Report: MORTAR1.WAV
 	Projectile: Bullet
 		Speed: 228
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 12000
 	Warhead@Concussion_Medium:
 		Damage: 12000
 	Warhead@Demolition_Heavy:
 		Damage: 12000
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 12000
 	Warhead@Concrete: DamagesConcrete
@@ -821,6 +850,10 @@ D2K_155mm_turret:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
+	-Warhead@CannonHE_Medium:
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Heavy:
+	-Warhead@Demolition_Light:
 	Warhead@CannonHE_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 48000
@@ -849,9 +882,9 @@ Dune_SiegeMortar:
 		InaccuracyType: PerCellIncrement
 	Warhead@Concussion_Medium:
 		Damage: 10000
-	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
 		Damage: 10000
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 10000
 	Warhead@CannonAP_Light:
@@ -971,17 +1004,19 @@ Dune_SiegeMortar:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Medium:
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
 	Warhead@Concussion_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 0
 
 D2K_Rocket_Trooper_AGOnly:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Railgun_Heavy
-	Inherits@wh3: ^Warhead_CannonHE_Medium
-	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_CannonHE_Medium_D2K
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 50
 	Range: 6252
 	Report: ROCKET1.WAV
@@ -999,20 +1034,13 @@ D2K_Rocket_Trooper_AGOnly:
 		ProjectileSpeedPercentage: 10
 		LaunchAngle: 66
 		Shadow: true
-	Warhead@Demolition_Light: AreaDamage
-		ValidTargets: Ground, Water
-		Damage: 10000
-	Warhead@Railgun_Heavy:
-		Damage: 10000
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 10000
 D2K_Rocket_Trooper_AA:
-	Inherits@wh: ^Warhead_Flak_Medium
-	Inherits@wh2: ^Warhead_MissileAP_Light
-	Inherits@wh3: ^Warhead_MissileAP_Heavy
+	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
+	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
 	ReloadDelay: 75
 	Range: 9716
 	Report: ROCKET1.WAV
@@ -1032,13 +1060,7 @@ D2K_Rocket_Trooper_AA:
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
 		Acceleration: 8
-	Warhead@MissileAP_Light:
-		ValidTargets: Air
-		Damage: 10000
-	Warhead@Flak_Medium:
-		ValidTargets: Air
-		Damage: 10000
-	Warhead@MissileAP_Heavy:
+	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 10000
 D2K_APC_Rocket:
@@ -1144,6 +1166,9 @@ D2K_APC_Rocket:
 			None: 5
 		Falloff: 100, 50
 		Range: 0, 32
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Light:
+	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -1241,6 +1266,7 @@ D2K_APC_Rocket_AA:
 			None: 5
 		Falloff: 100, 50
 		Range: 0, 32
+	-Warhead@MissileAP_MediumFlatCompatibility:
 
 DeviatorMissile:
 	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
@@ -1301,6 +1327,10 @@ DeviatorMissile:
 		Damage: 1000
 
 	MinRange: 1415
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@CannonHE_Heavy:
 DeviatorMissile_Artillery:
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^HeavyFlameWeapon
@@ -1339,6 +1369,9 @@ DeviatorMissile_Artillery:
 		Range: 1250
 
 	MinRange: 2005
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyFlameWeapon:
 	Warhead@MissileAP_Heavy:
 		Damage: 60000
 		PercentageScale: 3332
@@ -1517,6 +1550,8 @@ Laboratory_Bioball:
 		Weapon: AnthraxCloud
 		InvalidTargets: Water, Structure
 
+	-Warhead@MediumFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -1606,6 +1641,15 @@ facedancer_grenade:
 	Warhead@Concrete:
 		Damage: 750
 
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@LightMissile:
+	-Warhead@MediumMissile:
 
 GrenDeath:
 	Warhead@EnemyDam: SpreadDamage
@@ -1737,6 +1781,8 @@ d2kChainGun_upgrade:
 		Color: 00ffbb
 	Warhead@Laser_Heavy:
 		Damage: 4000
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1756,6 +1802,8 @@ HMGstealth:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1856,6 +1904,10 @@ autogun_tank:
 		ValidTargets: Ground, Water
 
 	MinRange: 1495
+	-Warhead@HeavyAAWeapon:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@Chaingun:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1992,11 +2044,17 @@ ordos_airmine:
 		ValidTargets: Air
 		Spread: 0c768
 		Damage: 10000
+	-Warhead@TankDestroyerCannon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyBomb:
 	Warhead@MissileAP_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 1659
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	-Warhead@MissileAP_Heavy:
 	MinRange: 410
 ordos_lasertank:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -2013,14 +2071,18 @@ ordos_lasertank:
 		ZOffset: 2047
 		Color: 00ffbb
 	TargetActorCenter: false
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
 	Warhead@LegacyRailgunExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 500
@@ -2050,6 +2112,8 @@ ordos_lasertank:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LegacyLaserExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -2082,6 +2146,7 @@ ordos_lasertank:
 	Warhead@Laser_Heavy:
 		Damage: 40000
 		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 d2k_chemgun:
 	Inherits@wh: ^Warhead_Chemical_Light
@@ -2173,6 +2238,8 @@ d2kCarryallChainGun_upgrade:
 		Color: 00ffbb
 	Warhead@Laser_Heavy:
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2193,6 +2260,8 @@ LMG_ordos_upgrade:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2219,10 +2288,14 @@ light_inf_lmg_ordos_upgrade:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 	Warhead@Bullet_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	-Warhead@Bullet_LightFlatCompatibility:
+	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2319,7 +2392,7 @@ PlasBullet:
 		Damage: 12000
 	Warhead@Demolition_Heavy:
 		Damage: 24000
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 12000
 	Warhead@Concrete: DamagesConcrete
@@ -2870,7 +2943,7 @@ d2k_sard_crossbow:
 		Speed: 562
 		Inaccuracy: 380
 		Image: 120mm
-	Warhead@CannonHE_Medium: AreaDamage
+	Warhead@CannonHE_Medium:
 		PercentageScale: 14953
 		Damage: 5350
 	Warhead@2Smu: LeaveSmudge

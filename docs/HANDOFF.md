@@ -24,13 +24,96 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 | agent | lane |
 |---|---|
 | **Blackrobe GPT-6 Astra** | ⭐ **FINISH THE BALANCE PIPELINE** (Tasks A–G) **and inherit the AI bot modules** (Task H — Devin Cloud ran out of quota mid-merge). Full brief: [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md). Branch `astra/balance-pipeline`, never master. Has **full authority including `apply_balance --confirm`**, conditional on one commit per decision and a review dossier at `audit/ASTRA_REVIEW.md`. |
-| **Devin fleet** (Aurora, Nova, Ember, Blaze, Dawn, Echo) | the **144 dotted-suffix actor renames** (`frank.nax` → `naxis_frank`), one faction each; then weapon-shape conversion batches |
+| **Aurora** | `ra1_allies` + `ra2_allies` + `ts_gdi` — **128 items**, incl. the 16 Allies sprites wearing Soviet names → `../Cameo-mod-fleet/TASK_2026-09-06_aurora.md` |
+| **Ember** | `asianalliance` — **100 items**; first action is to rebase and push the finished `.asian` branch → `TASK_2026-09-06_ember.md` |
+| **Nova** | `ra1_soviets` — **94 items**, incl. the fluent-key leak and the 19 doubled filenames → `TASK_2026-09-06_nova.md` |
+| **Dawn** | `latinsyndicate` + `steelconsortium` + `wc2_*` + `zerg` — **79 items** → `TASK_2026-09-06_dawn.md` |
+| **Echo** | `ixian` + `ordos` + `d2k` + `japan` — **68 items** + the mod's last hyphen → `TASK_2026-09-06_echo.md` |
+| **Blaze** | `atreides` + `corrino` + `harkonnen` + `futuretech` + `yuri` — **32 items**, incl. **14 of the 15 actor-id renames left in the whole mod** → `TASK_2026-09-06_blaze.md` |
 | **Claude-Local (Opus 5)** | rulings, review, squash-merges to master, and the gates |
 
 ⚠ **Nobody merges to master except Claude-Local.** Agents commit freely on their own branch
 and report a completed work item; Claude reviews and squash-merges one meaningful commit. The
 maintainer must be able to read master — 107 commits in one day, 49 of them touching only
 `DEVELOPMENT_LOG.md`, is not reviewable.
+
+### ⛔ 2026-09-07 — four bugs shipped past every gate; three new audits + one hook rule
+
+**The maintainer found the worst one by playing**: the mutalisk's fire shrapnel bounced
+forever. Root cause for two of the four, and it is now `CLAUDE.md` rule 8g:
+
+> **`-Key@X:` in a child CANCELS what an ANCESTOR defines.** It looks dead precisely
+> because the node it sits in does not define X.
+
+`d818aec40` deleted 2248 of them as "stale": multi-main weapons **461 → 1103**, and 14
+deleted `-Warhead@shrapnel:` terminators made the spore loop forever. **Nothing
+crashed** — a boot gate proves the rules PARSE, never that they are RIGHT. Reverted in
+`ad6fc66b8`, ledger re-extracted in `a6525d6fb`.
+
+| new gate | catches | ratchet |
+|---|---|---|
+| `audit_shrapnel_chains.py` | a FireShrapnel chain that never ends | S1a **0**; S1b **0** — 44 self-cycles were the same damage; fixed in `7b63045fd` |
+| `audit_map_actors.py` | a map placing an actor the rules do not define (boot gate is blind: it fails when the map is STARTED) | M1 **0** |
+| `bash_guard.py` rule 4 | deleting a `-Key@...` without `RESOLVE-VERIFIED` in the message | — |
+
+Also fixed: `audit_naming_damage`'s regex could not see a doubled id (reported N1 4 /
+N2 0 against the true 25 / 16 — an exact zero is always suspect), and the boot-gate
+hook read the MAIN checkout's index from every worktree, which would have waved
+through engine content committed from a worktree. Both now have self-tests.
+
+✅ **RESOLVED 2026-09-07 — they were not old debt, and they are fixed.**
+`ad7c5e232` (labelled a *rename*) also stripped **236 removal nodes** out of
+`RedAlert/Soviets/yaml/weapons.yaml`, and the tesla fragments' `-Warhead@TeslaArc:`
+terminators were among them. Restoring all 236 (`7b63045fd`) took **S1b 44 → 0**;
+the ratchet is now 0. Every FireShrapnel chain in the mod terminates: 193 weapons,
+193 chains, zero cycles of either kind. No in-game test needed.
+
+⚠ **I was wrong about these twice, and the second time is the instructive one.** First
+I called them benign chain lightning — reasoned from field names, not the code. Then I
+called them pre-existing debt because *"all 44 predate `d818aec40`"*. That was literally
+true and still the wrong conclusion: **the bisect stopped at the first commit that showed
+the problem instead of walking back until it disappeared.** One commit further back was
+the actual cause. When bisecting, walk back until the symptom is GONE, not until it
+first appears.
+
+Full write-up for agents: `../Cameo-mod-fleet/BRIEF_2026-09-07_what_broke_and_the_new_gates.md`.
+
+### ⭐ Naming — the real state, measured 2026-09-06 (replaces every earlier count)
+
+`python tools/audit/audit_naming_damage.py` is the source of truth and is now in
+`run_all.sh`. Six pathologies, six **lower-only** ratchets, all currently PASS:
+
+| code | pathology | count | lane |
+|---|---|---|---|
+| N1 | a filename carries one actor id **twice** | 25 | Nova 19, Aurora 4, Dawn 2 |
+| N2 | a filename carries **two factions'** ids | 16 | Aurora — all 16 are RA1-Allies sprites wearing Soviet names |
+| N3 | a **fluent key** became an actor id | 5 | Nova |
+| N4 | the faction named **twice** (`ra1_allies_alliedaagun`) | 345 | split per faction |
+| N5 | dotted id that is not a sanctioned `.husk` | 161 | split per faction |
+| N6 | a hyphen (rule 9) | 1 | Echo |
+
+**Three earlier numbers were wrong and are retired:**
+
+* the **526-actor backlog** was a doubled game prefix in one config table — seven of eight
+  factions jumped **0% → 100%** when it was fixed;
+* the **144 dotted renames** undercounted; the real figure is **161**, and separately
+  **234 `.husk` ids are LEGAL** (`DESIGN.md` line 71 sanctions dotted `.husk` variants), so
+  the raw 398 must never be quoted as backlog;
+* **`.nax` / `.nax2` are DONE** — 0 remain. Nova landed them.
+
+Actor-id work left in `gen_rename_maps` is **15 actors total**: `atreides` 21/23,
+`corrino` 22/25, `harkonnen` 27/35, `ixian` 60/65. Every other faction reads 100%.
+
+⚠ **A 100% row there is not proof a faction is clean.** That report sees only
+faction-exclusive **buildable** actors, and `startswith(prefix)` is satisfied by
+`ra1_soviets_sovietairfield` too. `asianalliance` reads 73/73 while holding 27 dotted and
+73 redundant-word ids. Use `audit_naming_damage.py` for the real number.
+
+⛔ **`gen_rename_maps.py --files` is opt-in and `--out` is mandatory practice.** Six defects
+were found in its file half on 2026-09-06 (commit `c9437f4f8`); a regenerate proposed **842
+file renames, 92 corrupt**, now **44, none corrupt**. Without `--out` a run **overwrites every
+`tools/rename/rename_map_*.yaml`**, including hand-corrected ones. See `LESSONS_LEARNED.md`
+"Fix the TOOL, not its output".
 
 ### AI bot modules — state as of 2026-09-06
 
@@ -50,8 +133,70 @@ Devin Cloud designed the module architecture and stopped mid-merge when its quot
   gameplay effect and may run while the balance pipeline is still moving; **phase 6 (fog) is
   deliberately last** because it weakens the bots and invalidates any tuning done before it.
 
+⚠ **If you are a Devin agent, your task file is `../Cameo-mod-fleet/TASK_2026-09-06_<you>.md`**
+and the index is `TASKS_ACTIVE.md`. Each task file is self-contained: your complete item list,
+the method, the faction-specific traps, the gates, and the report format. Read
+`BRIEF_2026-09-06_naming_damage.md` once for context before you start.
+
 ⚠ **Agent-to-agent chatter lives OUTSIDE the repository**, in `../Cameo-mod-fleet/`.
 `DEVELOPMENT_LOG.md` keeps one entry per COMPLETED work item plus lessons learned — nothing else.
+
+## ⛔⛔ TOP OF THE QUEUE 2026-09-07 — revert the ra1_soviets rename
+
+**All 32 actor renames `ad7c5e232` applied made the id LONGER and WORSE. Not one
+improvement in the set.** Full write-up and the revert procedure:
+[`design/RA1_SOVIETS_RENAME_REVERT.md`](design/RA1_SOVIETS_RENAME_REVERT.md).
+
+```
+ra1_soviets_barracks              -> ra1_soviets_sovietbarracks
+ra1_soviets_constructionyard      -> ra1_soviets_sovietconstructionyard
+ra1_soviets_attackdog             -> ra1_soviets_actordogname      (a FLUENT KEY)
+ra1_soviets_doctrine_conscription -> ..._doctrine_conscriptiondoctrine
+ra1_soviets_upgrade_hammertank    -> ..._upgrade_hammertankupgrade
+```
+
+The tech markers are **duplicated** — `doctrine_X` became `doctrine_Xdoctrine`. That is
+what a mechanical rename looks like when nobody reads three lines of the proposal.
+
+**The cause is already fixed** (`c9437f4f8` defects C and E), so the corrected generator
+now proposes the ORIGINAL ids — the revert target is what the tool produces, not a
+judgement call. It has already cost: 7 broken `.oramap` files including both shellmaps
+(two tester crashes), 236 deleted removal nodes, and 69 of the 345 N4 findings.
+
+⛔ **Do not batch this with another rename.** It touches both shellmaps; boot gate is
+mandatory.
+
+**The rule it earns: a rename that makes an id LONGER is a regression until proven
+otherwise.** A batch that raises N4 has failed, whatever its compliance percentage says.
+
+## ⭐ NEW WORK SPECIFIED 2026-09-07 — two maintainer orders, neither built
+
+Both are written up in full, with the state verified rather than assumed. Neither is a
+naming-lane task; both are self-contained and neither outranks the balance pipeline.
+
+### 1. Paired effect+sound templates — [`design/EFFECT_SOUND_TEMPLATES.md`](design/EFFECT_SOUND_TEMPLATES.md)
+
+One inherit must carry the visual **and** its sound, named after the source game and the
+effect's own file name (`^d2k_big_explosion`), so the two can never drift apart.
+
+Measured: **6987** CreateEffect warheads, only **4008** carry both halves, and **68**
+sprites are each used with more than one sound. The reported symptom is located exactly —
+`D2K_Rocket_Trooper` pairs the visual `d2k_tiny_explosion` with the sound
+`xplobig4.aud` (a BIG explosion sound on a TINY sprite), and its four variants have four
+different pairings, one of them borrowing a RA/TD sound for a D2k visual. Those five
+weapons are the acceptance test.
+
+### 2. Colour-picker preview for every faction — [`design/COLORPICKER_PREVIEW.md`](design/COLORPICKER_PREVIEW.md)
+
+⚠ **The believed state was wrong.** TD/RA/Japan were not "done": `fact.colorpicker`,
+`rafact.colorpicker` and `rafactj.colorpicker` exist but are **dead — nothing references
+them**, there is **no `FactionPreviewActors` block anywhere**, and every faction currently
+previews a Soviet mammoth tank.
+
+The engine already has `FactionPreviewActors` (zero C# needed), but using it as-is means
+~31 clone actors. The better build is a **`RenderSprites` shadow in `OpenRA.Mods.Cameo`**
+honouring `ActorPreviewType.ColorPicker`, so any actor is its own preview — **route
+confirmed open**, since neither AS nor CA defines `RenderSprites`. No engine fork.
 
 ## 0. The one rule that makes all the others work
 
