@@ -30,6 +30,7 @@ the checkout rather than trusted from a document — and one of them was wrong:
 to **12,500**. The artifact wins.
 """
 import argparse
+import json
 import pathlib
 import re
 import sys
@@ -39,6 +40,9 @@ sys.path.insert(0, str(ROOT / "tools" / "audit"))
 import miniyaml  # noqa: E402
 
 OUT = ROOT / "docs" / "design" / "ORIGINAL_UNITS_PEER_OPENRA.md"
+# {source label: {leaf internal name: declared Side}} — written on every non-dry
+# run so routing can read the faction TREE instead of the leaf token alone.
+SIDES_OUT = ROOT / "docs" / "balance" / "peer_faction_sides.json"
 
 # ⚠ THE HEALTH TRAIT IS NOT ALWAYS CALLED `Health`. Crystallized Nexus ships its own
 # `CNHealth` (in `.modsdk/OpenRA.Mods.CN`), so a reader hardcoding `Health` finds 610 actors and
@@ -402,6 +406,30 @@ def declared_factions(rules):
     return out
 
 
+def faction_sides(rules):
+    """{internal name: declared Side} — the faction TREE the mod's own World actor declares.
+
+    ⚠ ROUTING READS THE LEAF TOKEN, NOT THE SIDE (ORDERS_2026-09-09 §EMBER-2). CA's
+    Titan is tagged `talon` and the `td_gdi` route lists only `gdi`, so
+    `talon ∩ {gdi}` was empty and the Titan was refused to the faction it plainly
+    belongs to. `Faction@N: InternalName: talon / Side: GDI` is the declared parent
+    — this map lets `faction_routes` answer a `gdi` route with a `talon` row. Not
+    hand-written; read from `Side:` on each `Faction@` node, per source.
+    """
+    world = rules.resolve("World") or rules.resolve("world")
+    if world is None:
+        return {}
+    out = {}
+    for c in world.children:
+        if c.key == "Faction" or c.key.startswith("Faction@"):
+            d = {k.key: k.value for k in c.children}
+            name = (d.get("InternalName") or "").strip().lower()
+            side = (d.get("Side") or "").strip().lower()
+            if name and side and name != "random":
+                out[name] = side
+    return out
+
+
 # How many prerequisite hops to follow when resolving a faction. 2 covers the real chains
 # (unit -> barracks -> `structures.<faction>`); deeper mostly reaches shared infrastructure and
 # risks attaching a faction through a building both sides can build.
@@ -651,7 +679,7 @@ def extract(mod_id):
             "x_cost": (int(cost) / rcost) if (cost and rcost) else None,
         })
     return label, {"root": root, "rifle": (rifle_id, rhp, rcost), "rows": rows,
-                   "note": note}, None
+                   "note": note, "sides": faction_sides(rules)}, None
 
 
 def main():
@@ -683,12 +711,14 @@ def main():
            "Anchors are verified against the checkout, never trusted from a document.", ""]
 
     total = 0
+    sides_by_label = {}
     for mod_id in (args.mod or sorted(PEERS)):
         label, data, err = extract(mod_id)
         if err:
             print(f"{label}: {err}")
             out += [f"## {label}", "", f"⚠ not extracted — {err}", ""]
             continue
+        sides_by_label[label] = data["sides"]
         rid, rhp, rcost = data["rifle"]
         total += len(data["rows"])
         print(f"{label}: {len(data['rows'])} buildable units "
@@ -725,7 +755,15 @@ def main():
         print(f"DRY RUN: {total} rows, nothing written")
         return 0
     OUT.write_text("\n".join(out) + "\n", encoding="utf-8")
-    print(f"wrote {OUT.relative_to(ROOT)} ({total} rows)")
+    # Merge, never overwrite: a `--mod` subset run only refreshes the sources it
+    # actually extracted, so a partial run cannot truncate the map the way it would
+    # truncate the corpus doc.
+    sides = json.loads(SIDES_OUT.read_text(encoding="utf-8")) if SIDES_OUT.is_file() else {}
+    sides.update(sides_by_label)
+    SIDES_OUT.write_text(json.dumps(sides, indent=2, sort_keys=True) + "\n",
+                         encoding="utf-8")
+    print(f"wrote {OUT.relative_to(ROOT)} ({total} rows), "
+          f"{SIDES_OUT.relative_to(ROOT)} ({sum(len(v) for v in sides.values())} sides)")
     return 0
 
 

@@ -34,6 +34,8 @@ i.e. where the unit sits in its class's distribution. The balance formula still 
 """
 from __future__ import annotations
 
+import json
+import pathlib
 import sys
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -663,16 +665,51 @@ FACTION_OVERRIDES = {
     ("OpenRA Tiberian Dawn", "GUN"): frozenset({"nod"}),    # Gun Turret — Nod in the original
 }
 
+_SIDE_MAP = None
+
+
+def _faction_sides():
+    """{source label: {leaf token: declared Side}} — the faction TREE each yaml mod
+    declares on its own `World` actor, extracted to `docs/balance/peer_faction_sides.json`.
+
+    ⚠ ROUTING WAS READING THE LEAF ONLY. CA's Titan is tagged `talon`; `td_gdi`
+    routes to `('gdi',)`; `talon ∩ {gdi}` is empty — the Titan was refused to the
+    faction it unambiguously belongs to (ORDERS_2026-09-09 §EMBER-2). The fix is
+    the mod's own declaration: `Faction@9: InternalName: talon / Side: GDI`. No
+    hand-written lists — the map is generated data, and a source with no entry
+    (INI-sourced mods have no `Side:`) simply expands to nothing.
+    """
+    global _SIDE_MAP
+    if _SIDE_MAP is None:
+        p = (pathlib.Path(__file__).resolve().parents[2]
+             / "docs" / "balance" / "peer_faction_sides.json")
+        try:
+            _SIDE_MAP = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            _SIDE_MAP = {}
+    return _SIDE_MAP
+
 
 def peer_factions(row):
-    """The faction tokens on one peer row. The column is `/`-separated; `—` means untagged."""
+    """The faction tokens on one peer row, EXPANDED to each leaf's declared Side.
+
+    The column is `/`-separated; `—` means untagged. A leaf token also claims its
+    `Side:` (`talon` → `gdi`) — a leaf-only read is what refused the Titan and the
+    Disruptor to `td_gdi`. Untagged rows still claim nothing: a missing tag stays
+    the absence of a claim. `FACTION_OVERRIDES` wins over everything — a deliberate
+    divergence from the original roster is settled data, not a routing question.
+    """
     override = FACTION_OVERRIDES.get((row.get("source"), (row.get("id") or "").strip().upper()))
     if override is not None:
         return override
     raw = (row.get("faction") or "").strip()
     if not raw or raw in {"—", "-", "?"}:
         return frozenset()
-    return frozenset(t.strip().lower() for t in raw.split("/") if t.strip())
+    toks = {t.strip().lower() for t in raw.split("/") if t.strip()}
+    sm = _faction_sides().get(row.get("source") or "")
+    if sm:
+        toks |= {sm[t] for t in set(toks) if t in sm}
+    return frozenset(toks)
 
 
 def allows(faction, row):
