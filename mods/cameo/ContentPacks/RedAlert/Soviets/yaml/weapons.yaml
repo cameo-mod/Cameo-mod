@@ -531,8 +531,8 @@ TTankZap2Arc_EMP:
 TTankZap2ArcTeslaFragment1_EMP:
 	Inherits: TTankZap2Arc_EMP
 	Range: 3325
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 20000
+	Warhead@Tesla_Super: SpreadDamage
+		Damage: 60000
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 10000
@@ -550,8 +550,8 @@ TTankZap2ArcTeslaFragment1_EMP:
 TTankZap2ArcTeslaFragment2_EMP:
 	Inherits: TTankZap2ArcTeslaFragment1_EMP
 	Range: 1663
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 10000
+	Warhead@Tesla_Super: SpreadDamage
+		Damage: 50000
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 5000
