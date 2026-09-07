@@ -607,6 +607,8 @@ RA2120xmm_rad:
 		PercentageScale: 0
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Heavy:
 RA2120xmm_fire:
 	Inherits@wh: ^Warhead_CannonFire_Light
 	Inherits@proj: ^Projectile_Shell_Light

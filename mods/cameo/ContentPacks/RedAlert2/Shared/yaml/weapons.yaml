@@ -2141,7 +2141,7 @@ MigMissiles_rad:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 	Warhead@Chemical_Medium:
-		Damage: 4000
+		Damage: 40000
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 200
@@ -2150,6 +2150,7 @@ MigMissiles_rad:
 		Explosions: ra2radbang
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
+	-Warhead@MissileAP_Medium:
 
 MigMissiles_fire:
 	Inherits: MigMissiles
@@ -2197,6 +2198,8 @@ MigMissiles_rad_elite:
 	Inherits: MigMissiles_rad
 	Range: 8600
 	Burst: 8
+	Warhead@Chemical_Medium:
+		Damage: 36000
 
 MigMissiles_fire_elite:
 	Inherits: MigMissiles_fire

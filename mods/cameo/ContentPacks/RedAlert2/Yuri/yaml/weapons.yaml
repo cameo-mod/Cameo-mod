@@ -205,9 +205,6 @@ RA2LasherToxicMortar_elite:
 		Damage: 4000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@CannonHE_Medium: AreaDamage
-		Damage: 12000
-		PercentageScale: 0
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Heavy: AreaDamage
@@ -228,7 +225,7 @@ RA2LasherToxicMortar_elite:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@CannonChem_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 30000
+		Damage: 36000
 		PercentageScale: 0
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:

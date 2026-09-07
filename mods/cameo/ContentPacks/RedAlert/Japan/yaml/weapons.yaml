@@ -149,8 +149,9 @@ TankBusterBeamCannon:
 	-Warhead@RailgunExtraDamage:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 15000
+		Damage: 24000
 		PercentageScale: 0
+	-Warhead@TankBusterBeamUnscopedCompatibility:
 
 TankBusterBeamCannonCharged:
 	Inherits@wh: ^Warhead_Laser_Heavy
