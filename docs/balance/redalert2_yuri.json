@@ -1886,7 +1886,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "13600",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "32",
         "tag": "Laser_LightFlatCompatibility",
@@ -2132,7 +2132,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
@@ -2161,7 +2161,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
@@ -2614,17 +2614,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2664,24 +2657,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2722,24 +2701,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2819,17 +2784,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2870,24 +2828,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2929,24 +2873,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4731,7 +4661,7 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "36000",
         "falloff": "100, 82, 61, 38, 0",
         "spread": "90",
         "tag": "CannonChem_MediumFlatCompatibility",
@@ -4808,13 +4738,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "12000",
-        "falloff": null,
-        "spread": null,
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": null,
@@ -4886,7 +4809,7 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_HeavyFlatCompatibility",

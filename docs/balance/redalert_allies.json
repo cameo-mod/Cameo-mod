@@ -298,17 +298,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 72, 50, 32, 19, 9, 0",
         "spread": "105",
         "tag": "CryoBlast_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 60, 27, 0",
-        "spread": "53",
-        "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -515,17 +508,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 72, 50, 32, 19, 9, 0",
         "spread": "105",
         "tag": "CryoBlast_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 60, 27, 0",
-        "spread": "53",
-        "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -1975,7 +1961,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
@@ -2009,7 +1995,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
@@ -5341,7 +5327,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "33000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -5424,7 +5410,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "33000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
