@@ -2501,8 +2501,12 @@ ArmoredCarMGAAWaveforce:
 	Inherits@3: ArmoredCarMG_AA
 	Inherits@4: ^WaveforceBulletProjectile
 	Warhead@Railgun_Heavy:
-		Damage: 3000
+		Damage: 19000
 		PercentageScale: 6667
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonAP_Light:
+	-Warhead@CannonHE_Medium:
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 250
