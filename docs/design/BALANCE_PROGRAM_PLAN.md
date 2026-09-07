@@ -37,9 +37,9 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured evidence |
 |---|---|
-| W24 — directly fired weapons with **more than one** damage main | **243** under the unified predicate; current 2026-08-31 survey (299 including indirectly reached weapons; worst direct stack is 6 mains) |
+| W24 — directly fired weapons with **more than one** damage main | **184** under the raw unified predicate; 2026-09-07 survey (234 including indirectly reached weapons; no reviewed exceptions subtracted) |
 | armament slots whose `K` moves when those collapse | **1 547** (2026-08-17 snapshot) |
-| fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** (2026-08-17 snapshot) — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
+| legacy template direct inheritors (W23) | **1596** on 2026-09-07 (`audit_unconverted_templates`); historical family reach was **665 of 1622 = 41.0%** on 2026-08-17, not a current measurement |
 
 Changing the warhead structure can change both delivered damage and **`K`** — `K`
 is share-weighted over each warhead's armor profile, so picking ONE family changes
@@ -53,7 +53,7 @@ the question was asked.
 
 **The order:**
 
-1. **W24** — one damage warhead per weapon (DESIGN §11b). 243 directly fired weapons remain non-compliant; 299 remain when indirect weapon-graph reachability is included.
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 184 directly fired weapons remain non-compliant; 234 remain when indirect weapon-graph reachability is included (2026-09-07 raw survey).
 2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
    is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
    merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE

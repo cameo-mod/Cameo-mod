@@ -6,6 +6,7 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "tools/audit"), str(ROOT / "tools/balance")]
 from audit_three_way_split import main_warhead_nodes, main_warheads
+from audit_impact_glow_preservation import EMISSIVE_EFFECT_ROOTS, tier_path_count
 from miniyaml import Ruleset, load
 
 NAMES = ("RA2120xmm", "RA2120xmm_elite", "RA2120xmm_rad", "RA2120xmm_rad_elite")
@@ -51,6 +52,9 @@ class ApocalypseMergeTests(unittest.TestCase):
             self.assertEqual([template], [p for p in parents if p.startswith("^Effect_")])
             self.assertFalse(any(n.key.startswith("Warhead@") and n.value in allowed_effects for n in local.children))
             effect = self.rules.resolve_weapon(template)
+            self.assertIn(template, EMISSIVE_EFFECT_ROOTS)
+            self.assertEqual(1, tier_path_count(self.rules, template, {}))
+            self.assertEqual([("Inherits@glow", "^ImpactGlow")], self.rules.inherits_of(self.rules.weapon(template)))
             self.assertTrue(all(n.key.startswith("Warhead@") and n.value in allowed_effects for n in effect.children))
             self.assertIsNone(effect.child("Warhead@Radiation"))
         self.assertEqual("^RA2RadShell", self.rules.weapon("RA2120xmm_rad").get("Inherits@rad"))
