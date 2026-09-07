@@ -2477,8 +2477,6 @@ AAGunBoatFlak:
 	BurstDelays: 3
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Underwater, Submarine
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
