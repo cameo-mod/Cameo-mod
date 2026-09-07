@@ -16,7 +16,6 @@ EditorPlayer:
 Player:
 	Inherits: ^BasePlayer
 	CameoCareerRecorder:
-	CameoMatchPlayerState:
 	QuotaProductionManager:
 	NewConstructionOptionsNotification:
 		Notification: NewOptions
@@ -217,6 +216,7 @@ Player:
 		RequiresCondition: freeminimap
 	PlayerStatistics:
 	CombatEffectivenessStatistics:
+	AiMatchLogRecorder:
 	FrozenActorLayer:
 	PlaceBeacon:
 	ProvidesTechPrerequisite@none:

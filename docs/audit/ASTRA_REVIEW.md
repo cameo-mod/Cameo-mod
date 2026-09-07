@@ -1,5 +1,40 @@
 # Astra implementation review
 
+## Current integration: merged graph and AI logging (2026-09-07)
+
+PR #329 is reconciled with upstream `9ad1a5f77`, including merged #323 and #331
+and the subsequent AI JSON separator fix. The dated sections below preserve
+prior evidence; they are not the current logging contract.
+
+- Keep one graph implementation. Retain signed-range/sampling regressions, the
+  label that fits at 1024x768, and enum/dropdown alignment: hotkeys index directly
+  into the dropdown, so the two orders must agree.
+- Retire `CameoMatchLog`, `CameoMatchRecorder`, its player-state trait and tests.
+  Use upstream `AiMatchLogRecorder`/`AiMatchLogWriter` and its offline aggregator.
+  Carry forward the permanent world-load save exclusion, with eligibility and
+  active-YAML/source regression coverage. No second writer or second output schema.
+- The retained writer is host-only and emits per-bot rows when all bots resolve
+  or GameOver occurs. It is not the old completed-world/all-player dataset and has
+  no rules hash, module IDs or lobby options. Old `cameo_matches` files must not
+  be pooled into the new `cameo-ai-matches.jsonl` schema. Its file/record sizes are
+  not bounded, missing counters are zero and personality ambiguity is not reported.
+  Earlier match/replay recording evidence applies to the retired writer.
+- Adopt Aedis's current total-output and missile-role laws. Retain useful document
+  cleanup and module contracts without restoring the retired exemption command.
+  The earlier Scooper/Apocalypse edits remain explicit merge-regression repairs,
+  not output-preserving collapses; their exact five-definition comparison remains
+  pinned. No new weapon-role or actor-stat changes are made by this integration.
+
+Independent review challenged retirement, schema differences and save eligibility.
+The integrated build passes (eight existing engine warnings), with a fresh DLL
+containing the new eligibility field. All 70 current C# cases pass with no skips.
+All 33 ledger checks have zero drift. A fresh 101.3-second menu/shellmap smoke
+reached `MenuPostProcessEffect.PostWorldLoaded`, with no new exceptions; its owned
+timed stop is not a completed-match exit. Sampled PC memory peaked at 71.8%.
+Full Python and canonical audit results follow after completion; prior green
+counts are not silently carried forward. A fresh bot-match/replay test of the
+replacement writer remains unperformed by this integration pass.
+
 ## Window and scope
 
 User-authorized three-hour run: 2026-09-07 03:18:43–06:18:43 WIB.

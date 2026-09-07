@@ -538,14 +538,21 @@ runtime, no network calls, no adapting mid-match from a file that another client
 
 `Log.AddChannel(name, file, isTimestamped)` writes to `Platform.SupportDir + "Logs"`
 (`engine/OpenRA.Game/Support/Log.cs:111,128`) and mods already add channels from traits
-(`ScriptContext.cs:146`, `TraitDictionary.cs:62`). The phase-one implementation instead writes
-one bounded, exclusively created file per completed match: the engine logger's asynchronous
-write/flush failures cannot be caught at the telemetry call site, and channel files are not an
-append-only match archive. This is a small local writer, not a second logging service.
+(`ScriptContext.cs:146`, `TraitDictionary.cs:62`). The shipped phase-one writer uses
+an append-only file with host authority, mutex coordination and bounded retries;
+its exact contract is in `AI_MATCH_LOG.md`.
 
-### 6.2 Log schema (one JSON object per line)
+### 6.2 Shipped record-only log schema (one JSON object per line)
 
-Three record types, deliberately flat so aggregation is trivial:
+Phase 1 ships one versioned JSONL object per bot player per finished match. The
+authoritative field order and writer rules live in [`AI_MATCH_LOG.md`](AI_MATCH_LOG.md).
+`AiMatchLogRecorder` observes personality transitions without changing them, and
+`AiMatchLogWriter` appends the records only on the host in regular non-replay worlds.
+The game never reads the file back. The offline
+[`aggregate_ai_matches.py`](../../tools/ai/aggregate_ai_matches.py) tool consumes
+schema version 1 records; later decision and episode records remain proposals.
+
+Three proposed learning record types, not the shipped schema above:
 
 * `match` — map, ruleset hash, player slots (faction, difficulty, bot type, human/bot), duration,
   outcome per player.
@@ -559,59 +566,27 @@ The unit of learning is the **episode** (a personality held against one target),
 Match-level win/loss alone is far too sparse to attribute — a 40-minute game with six switches
 gives one bit of signal against six decisions, which is the credit-assignment problem in §8.
 
-### 6.2a Implemented phase-one contract: completed-world records
+### 6.2a Integration boundary and learning stages
 
-`CameoMatchPlayerState` observes the existing `GrantRandomCondition` personality list through
-condition notifications; it does not grant/revoke conditions or draw random numbers.
-`CameoMatchRecorder` captures starting inputs at world load and emits one `match` record on
-`IGameOver`. Both are active in the Player/World rules on this branch. No bot decision module
-reads their state, and they never queue orders, price units, adapt weights or make network calls.
+PR #329 adopts the merged #331 writer rather than shipping its competing
+`CameoMatchRecorder`. Older `Logs/cameo_matches/*.jsonl` experiments have a different
+schema and must not be mixed with `Logs/cameo-ai-matches.jsonl`. The retained writer
+captures bot rows when all bots resolve or GameOver occurs, not necessarily at
+completion of the whole world. Replays, loaded saves and non-host clients are excluded.
+Prior PR #329 runtime recording evidence exercised the retired writer, not this one.
 
-Files are UTF-8 JSONL under `SupportDir/Logs/cameo_matches/`, with generated filenames and
-schema version 1. Each file contains one record and is at most 256 KiB including its newline.
-An incomplete temporary file is never published as `.jsonl`; completed files are not overwritten.
-Disk failures produce a best-effort stderr message and do not go back through the disk logger.
-Files remain local; users can remove this directory's records when no game is writing them.
+The shipped schema does not carry source hashes, module IDs or lobby options;
+matching mod-version strings do not prove identical balance inputs. Missing stats
+are zero, and overlapping personalities are not separately marked ambiguous.
+Timeline length and retries are bounded, but file size and record size are not.
+These are explicit limitations, not grounds for introducing a second recorder.
 
-The record contains internal slots (including scripted combatants), playable-slot flags,
-factions, raw bot identifiers, teams/allies, handicaps, lobby options, initial/final observed
-personality with separate unknown/ambiguous statuses, outcome and aggregate accounting totals.
-`bot_type` is the configured identifier, not a separately inferred difficulty label. Player
-display names, IP addresses and account fingerprints are not collected. Map titles and map/mod
-identifiers are ordinary content metadata. `simulation_duration_ms` is WorldTick times the
-world's readonly timestep; it is not elapsed wall-clock time. Missing counters stay null.
+**Phase 1 — record only (implemented).** Emit schema version 1 logs, change no behaviour, and
+leave aggregation offline. The shipped recorder, writer, schema, and aggregator are the proof of
+concept deliverable. Verify the schema survives real matches and that the numbers are attributable.
 
-`ruleset_hash` is SHA-256 over the **ordered raw Rules/Weapons source inputs**, including
-map-referenced files and inline overrides, read at world load rather than match end. Its
-`ruleset_hash_scope` names this limited input fingerprint; it is not a resolved-behavior or
-whole-runtime hash. Unreadable inputs and custom-rule fallback leave the hash unavailable.
-`code_modules_scope` explicitly limits the accompanying MVIDs to Game/Cameo/Common. Other
-assemblies, terrain, scripts and assets are not certified by these fields. Do not pool results
-as equivalent balance experiments solely because their ruleset hashes match.
-
-Coverage is `completed_world`: shellmaps, editors, replays and loaded saves do not produce
-records. A quit/disconnect/crash that never invokes `IGameOver` is not recorded as a completed
-match. Each local client can record the same match; aggregation must deduplicate GameUid and
-compare metadata, or mark missing IDs unavailable. Initial/final personality observations do
-not constitute episode histories or prove no intervening switch. `decision` and `outcome`
-episode records, pairwise attribution and composition performance remain unimplemented.
-
-Validation and limitations are recorded in the review dossier: deterministic scripted match
-capture, a normal-exit replay with no duplicate record, menu exclusion, unit tests and bounded
-PC-memory measurements. This is logging proof, not evidence that any personality is stronger.
-
-### 6.3 Learning stages within the delivery order
-
-The binding implementation phases are §10.6. The stages below describe the learning
-workstream, not a competing phase order: aggregate diagnostics may inspect phase-one
-records, but decision evaluation needs later decision traces and reviewed experiments.
-Phase-one aggregates alone cannot establish composition effects or adaptive-policy benefit.
-
-**Stage A — record only.** Emit the logs, change no behaviour. Verify the schema survives real
-matches and that the numbers are attributable. This is the proof of concept the user asked for,
-and it is the whole first deliverable.
-
-**Stage B — offline aggregation.** A future Python tool under `tools/` producing, per
+**Stage B — offline aggregation extensions.** The shipped aggregate tool handles
+schema-v1 bot rows; future episode-aware extensions would produce, per
 (faction × enemy faction × personality) and (composition × enemy faction), the episode counts,
 mean value-trade ratio and win contribution. This is where "which composition does badly" gets
 answered once episode attribution exists, with uncertainty and coverage reported before

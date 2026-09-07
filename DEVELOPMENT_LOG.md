@@ -10776,3 +10776,19 @@ Full evidence, limitations and revert boundaries: `docs/audit/ASTRA_REVIEW.md`.
 PR #329 remains draft and unmerged for coordinator review.
 
 Co-Authored-By: Codex <noreply@openai.com>
+
+## 2026-09-07 — Reconcile PR 329 with the merged observer graph and AI logger
+
+Integrated upstream `9ad1a5f77`, including PRs 323/331 and the JSON separator fix.
+Retired the competing CameoMatch recorder and its schema-specific tests; upstream
+AiMatchLogWriter is the sole active writer. Retained a permanent loaded-save
+exclusion, graph sampling/range tests, fitting labels and the enum/dropdown hotkey
+ordering repair. Adopted current design rulings and reconciled logging contracts.
+No new weapon or actor-stat edits. The build, 70 C# tests and 33 zero-drift ledger
+checks pass; the integrated menu reaches WorldLoaded with no new exception.
+Independent integration review found no blocker. Bot-match/replay emission remains
+unverified on this replacement writer; old recorder runtime evidence is historical.
+Full-suite/audit completion is recorded in `docs/audit/ASTRA_REVIEW.md`.
+PR 329 remains draft and unmerged.
+
+Co-Authored-By: Codex <noreply@openai.com>

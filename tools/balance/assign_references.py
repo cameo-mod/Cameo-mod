@@ -103,19 +103,43 @@ def norm_words(text):
     return [w for w in re.split(r"[^a-z0-9]+", (text or "").lower()) if w]
 
 
+# ⛔ CAMEO RENAMED UNITS THE WHOLE CORPUS CALLS SOMETHING ELSE, and the docstring below has
+# promised "alias matches" since this function was written without any table behind it. The cost
+# is invisible and total: `td_gdi_battletank` shares NO word with "GDI Medium Tank", so its name
+# score sat at 0.30 — the same score a MOBILE SENSOR ARRAY got — and the sensor array won on
+# shape. Every reference for a mainline GDI tank was lost to a naming choice.
+#
+# Keys are the normalised LAST TOKEN of a Cameo actor id; values are normalised reference names
+# it should also be tried as. Add only where the identity is not in dispute — this bypasses the
+# name evidence, so a wrong entry is worse than a missing one.
+NAME_ALIASES = {
+    "battletank": ("mediumtank",),
+    "mediumtank": ("battletank",),
+}
+
+
 def name_score(cameo_id, peer_name):
     """0..1. Exact and alias matches sit at the top; a shared distinctive word still counts."""
     tail = syn.norm(cameo_id.split("_")[-1])
     peer = syn.norm(peer_name)
     if not tail or not peer:
         return 0.0
-    if tail == peer:
-        return 1.0
-    if tail.startswith(peer) or peer.startswith(tail):
-        return 0.9
+    best = 0.0
+    for cand in (tail,) + NAME_ALIASES.get(tail, ()):
+        if cand == peer:
+            return 1.0
+        if cand.startswith(peer) or peer.startswith(cand):
+            best = max(best, 0.9)
+        # ⚠ CONTAINMENT, NOT JUST PREFIX. A reference row is routinely written with its faction
+        # in front — "GDI Medium Tank", "Allied Medium Tank", "Nod Light Tank" — so a prefix test
+        # alone misses the exact unit it is looking at. The same defect, in its `startswith` form,
+        # is what hides 143 actors from `reference_distribution`. Guarded on length so a short
+        # token cannot match half a roster.
+        elif len(cand) >= 8 and (cand in peer or peer in cand):
+            best = max(best, 0.85)
     ratio = difflib.SequenceMatcher(None, tail, peer).ratio()
     shared = set(norm_words(cameo_id.split("_")[-1])) & set(norm_words(peer_name))
-    return max(ratio, 0.6 if shared else 0.0)
+    return max(best, ratio, 0.6 if shared else 0.0)
 
 
 def pct_rank(value, population):
@@ -160,6 +184,48 @@ def shape_similarity(a, b):
     return 1.0 - sum(abs(x - y) for x, y in pairs) / len(pairs)
 
 
+# ⛔ ORIGINALS OUTRANK VARIANTS (maintainer 2026-09-07). Cameo ships more units than the source
+# games do: `ra1_soviets_sovietmammothtank` is RA1's Mammoth, and `ra1_soviets_siegemammothtank`
+# is a Cameo ADD-ON built on top of it. Both normalise to something CONTAINING "mammothtank", so
+# both land in the same name bucket and the reference went to whichever won on role/cost — which
+# was the add-on. The original is the unit the reference IS; the add-on is a unit the reference
+# is merely related to, and it must find its own counterpart (Combined Arms fields an Apocalypse
+# and an Overlord for exactly this reason) or be placed by rank.
+#
+# A FACTION word is not a variant: `soviet`/`allied`/`gdi` only say whose Mammoth it is.
+FACTION_WORDS = frozenset((
+    "soviet", "soviets", "allied", "allies", "gdi", "nod", "japanese", "japan", "german",
+    "germany", "russian", "russia", "french", "france", "american", "america", "usa", "asian",
+    "latin", "british", "england",
+))
+
+# A VARIANT word marks a unit the original game did not ship.
+VARIANT_WORDS = frozenset((
+    "mkii", "mkiii", "mk2", "mk3", "siege", "heavy", "light", "assault", "advanced", "elite",
+    "super", "nuclear", "atomic", "tesla", "laser", "chemical", "flame", "stealth", "sonic",
+    "railgun", "rail", "plasma", "cryo", "emp", "veteran", "prototype", "improved", "upgraded",
+    "armored", "twin", "multi", "quantum", "hover",
+))
+
+
+def variant_rank(cameo_id, peer_name):
+    """1 when the actor is the plain original, 0 when it carries a variant modifier.
+
+    Only consulted when the reference name is a SUBSTRING of the actor's — i.e. when two Cameo
+    actors are genuinely competing for the same counterpart. It never suppresses a variant that
+    has no competition; it only decides who wins the contest.
+    """
+    tail = syn.norm(cameo_id.split("_")[-1])
+    peer = syn.norm(peer_name)
+    if not peer or peer not in tail:
+        return 1
+    residue = tail.replace(peer, "")
+    for w in VARIANT_WORDS:
+        if w in residue and w not in FACTION_WORDS:
+            return 0
+    return 1
+
+
 def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, peer_shape=None):
     """The LEXICOGRAPHIC cascade (maintainer: name, then tech tier, then type, then role, then cost).
 
@@ -173,8 +239,24 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, pee
     """
     if cam["type"] != peer["type"]:
         return None                                   # cross-type is refused (§9 cross-type ruling)
-    if peer.get("w_damage") is not None and not peer["w_damage"] and is_armed(rec):
-        return None                                   # clause 5: zero damage never matches a combat unit
+    # ⛔ CLAUSE 5, AND *MISSING* DAMAGE COUNTS AS UNARMED. The old guard read
+    # `w_damage is not None and not w_damage`, which fires only on an explicit zero — so a row
+    # that carries NO damage field at all sailed past it. Every unarmed reference in the corpus is
+    # exactly that shape: OpenRA TD's Mobile Construction Vehicle and Combined Arms' Thief both
+    # have `w_damage=None`, and both were duly assigned to armed Cameo units (an MCV to
+    # `td_gdi_mammothtankmkiii`, a Thief to `ra1_soviets_sovietrocketsoldier`) on shape similarity
+    # alone. A support unit sitting in the same place in its roster as a tank does in ours is a
+    # coincidence of distribution, not a counterpart.
+    # ⚠ AND "UNARMED" MEANS NO WEAPON AT ALL, NOT A MISSING DAMAGE NUMBER. Refusing on
+    # `w_damage` alone threw away Combined Arms' E1 — the RIFLE INFANTRY, the single most
+    # important reference unit in the corpus — because its damage does not extract, and handed
+    # `ra1_allies_rifleinfantry` a Shock Trooper instead. The two cases are distinguishable:
+    #   CA MCV   w_range None  w_reload None  w_burst None   <- genuinely unarmed
+    #   CA E1    w_range 1024  w_reload 5     w_burst 1      <- armed, damage failed to extract
+    # A row carrying any weapon field is a combat unit whose damage is an extraction gap.
+    if is_armed(rec) and not any(peer.get(k) for k in
+                                 ("w_damage", "w_range", "w_reload", "w_burst")):
+        return None
     # ⛔ THE NAME SCORE IS BUCKETED, AND THAT IS WHAT MAKES THE CASCADE A CASCADE.
     # A lexicographic tuple whose first key is a near-continuous float degenerates into "rank by
     # that key alone": exact ties never happen, so tier, type, role and cost are never consulted.
@@ -199,8 +281,10 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, pee
         cost = 1.0 - abs(cam_cost_pct - peer_cost_pct)
     # home lineage sits directly under the name bucket: it decides CONTESTS (§9.4), which is a
     # stronger claim than shape similarity or cost proximity.
-    return (name, 1 if home else 0, TIER_UNAVAILABLE, round(role, 3), round(cost, 3),
-            round(raw_name, 3))
+    # `variant_rank` sits directly under the name bucket and above HOME: which unit the reference
+    # actually IS outranks which faction lineage it came from.
+    return (name, variant_rank(cam["id"], peer.get("name", "")), 1 if home else 0,
+            TIER_UNAVAILABLE, round(role, 3), round(cost, 3), round(raw_name, 3))
 
 
 def assign(only_class=None, routing=True):
@@ -211,6 +295,9 @@ def assign(only_class=None, routing=True):
     behaviour the maintainer rejected; do not generate a review sheet with it.
     """
     peers, cameo = rd.peer_rows(), rd.cameo_rows()
+    # The id-suffix claim (R15 in its second form) stays INACTIVE until the corpus is
+    # registered, so it can never fire on a source whose ids nobody has enumerated.
+    fr.register_source_ids(peers)
     led = ledger()
     cam_rows = [c for c in cameo if c["id"] in led]
 
@@ -274,9 +361,15 @@ def assign(only_class=None, routing=True):
     routed_pool = {}
     if routing:
         for fac in {fr.faction_of(c["id"]) for c in scope}:
-            for src, toks in fr.routes_for(fac):
+            for src, _toks in fr.routes_for(fac):
+                # ⛔ ASK `allows()`. This used to filter inline on `peer_factions(p) & toks`, a
+                # SECOND implementation of routing that silently skipped every ruling `allows`
+                # carries: R13 exclusivity, R14's universal carve-out, and R15's name claims —
+                # so CnC Reloaded's "CABAL's ..." claims and DTA's id-suffix claims were computed
+                # and then ignored. `ra1_soviets_rifleinfantry` drew DTA's ALLIED E1A because
+                # nothing here ever asked whether the Allies had claimed it.
                 routed_pool[(fac, src)] = [p for p in by_source.get(src, ())
-                                           if fr.peer_factions(p) & toks]
+                                           if fr.allows(fac, p)]
 
     result = collections.defaultdict(dict)
     for source, plist in sorted(by_source.items()):
@@ -305,7 +398,15 @@ def assign(only_class=None, routing=True):
         cands.sort(key=lambda t: (t[0], t[1]), reverse=True)
         used_cam, used_peer = set(), set()
         for s, cid, p in cands:
-            key = (p["source"], syn.norm(p.get("name", "")), p.get("id", ""))
+            # ⛔ CLAUSE 3 IS SCOPED PER CAMEO FACTION, not globally (maintainer 2026-09-07).
+            # A shared original exists ONCE in a reference roster and is built by BOTH sides:
+            # Tiberian Dawn's E1/E2/E3, APC and Harvester belong to GDI *and* Nod. Spending it
+            # globally starved the second faction of a unit the source game plainly gives it —
+            # OpenRA TD's Rocket Soldier went to `td_nod_rocketsoldier`, so `td_gdi_rocketsoldier`
+            # got nothing, and the same rule left the actual RA1 `sovietmammothtank` without the
+            # Mammoth it is named after. Within ONE faction the reference is still spent once, so
+            # the anti-duplication intent (clause 4, maximise DISTINCT references) is untouched.
+            key = (fr.faction_of(cid), p["source"], syn.norm(p.get("name", "")), p.get("id", ""))
             if cid in used_cam or key in used_peer:
                 continue
             used_cam.add(cid)
@@ -323,7 +424,12 @@ def assign(only_class=None, routing=True):
             # "Rebel" at 0.12, "Fremen" at 0.11. Each sits in the same place in ITS roster as the
             # militia does in ours, which is real evidence for a DISTRIBUTION method and is not a
             # claim that the two are the same unit. The reviewer has to be able to tell them apart.
-            bucket, role_score = s[0], s[3]
+            # ⚠ POSITIONAL READS OF THE SCORE TUPLE. `variant_rank` was inserted at index 1,
+            # which shifted every later key; reading the old offsets turned role into the
+            # TIER constant and collapsed the SHAPE tier to nothing (610 -> 0) while WEAK
+            # tripled. Keep these in step with `score()`'s return.
+            #   0 name · 1 variant · 2 home · 3 tier · 4 role · 5 cost · 6 raw_name
+            bucket, role_score = s[0], s[4]
             if bucket >= 3 or (bucket >= 1 and role_score >= 0.75):
                 conf = "STRONG"
             elif bucket >= 1:
@@ -332,9 +438,15 @@ def assign(only_class=None, routing=True):
                 conf = "SHAPE"         # same position in its own roster, name says nothing
             else:
                 conf = "WEAK"
-            result[cid][source] = {"name": p.get("name"), "score": s,
+            # ⛔ STORE THE ROW'S ID. The name alone is not a key: Combined Arms ships TWO rows
+            # called "Mammoth Tank" — `HTNK` (Tiberian Dawn's, routed to GDI) and `4TNK` (Red
+            # Alert's, routed to the Soviets) — with IDENTICAL hp and cost, so a consumer
+            # re-attaching by name and stats cannot tell them apart and silently took the first.
+            # That handed `td_gdi_mammothtank` the SOVIET mammoth and, once variant families were
+            # expanded, would have grown the wrong family around it.
+            result[cid][source] = {"name": p.get("name"), "id": p.get("id"), "score": s,
                                    "hp": p.get("hp"), "cost": p.get("cost"),
-                                   "home": bool(s[1]), "raw_name": s[5], "confidence": conf}
+                                   "home": bool(s[2]), "raw_name": s[6], "confidence": conf}
     assign.formula_only = formula_only
     return result, skipped, len(scope)
 

@@ -114,6 +114,14 @@ class CommittedLedgerTest(unittest.TestCase):
         for path in sorted(DERIVED.glob("*.json")):
             if path.name.startswith("_"):
                 continue
+            if path.name == "reference_assignment.json":
+                # Upstream reference routing cache, not a faction's extracted ledger.
+                reference = json.loads(path.read_text(encoding="utf-8"))
+                self.assertIsInstance(reference["assignment"], dict)
+                self.assertTrue(reference["assignment"])
+                self.assertNotIn("ledger", reference)
+                self.assertNotIn("sections", reference)
+                continue
             if path.name == "reference_distributions.json":
                 # reference_distribution.py emits a cross-game distribution,
                 # not a faction ledger. Unknown orphan sidecars still fail.

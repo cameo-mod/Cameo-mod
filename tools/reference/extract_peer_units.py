@@ -436,7 +436,68 @@ def _buildable(node):
                  if c.key == "Buildable" or c.key.startswith("Buildable@")), None)
 
 
-def factions_of(node, known, rules=None, _depth=PREREQ_DEPTH, _seen=None):
+def prerequisite_providers(rules, known):
+    """{provided token: set(declared factions)} — the INVERTED direction of faction gating.
+
+    ⚠ Some mods gate a unit's faction from the PROVIDER side, not the consumer side.
+    Combined Arms writes `Prerequisites: ~vehicles.1tnk` on the unit and then answers
+    "who may build it" on a structure:
+
+        ProvidesPrerequisiteValidatedFaction@1tnk:
+            Factions: allies, france, germany, usa
+            Prerequisite: vehicles.1tnk
+
+    `factions_of` walks the unit's prerequisites UP toward actors and finds nothing —
+    `vehicles.1tnk` is a capability token, not an actor. This index reads the other
+    direction: every `ProvidesPrerequisite*` trait's `Prerequisite:` token is mapped
+    to its scope, which is
+
+    * the trait's own `Factions:` (`ProvidesPrerequisiteValidatedFaction`), or
+    * the PROVIDING actor's `ValidFactions.Factions` — a Soviet-only barracks
+      provides `infantry.ra` unscoped, and the scope is the building's, not the
+      token's (structures.yaml: `ValidFactions: soviet, russia, ukraine, iraq, yuri`).
+
+    A provider with neither field contributes nothing — that preserves the deliberate
+    shared-infrastructure refusal (`anypower` et al. stay unscoped).
+    """
+    prov = {}
+    for aid in rules.actors:
+        try:
+            node = rules.resolve(aid)
+        except Exception:
+            continue
+        if node is None:
+            continue
+        own_factions = set(factions_of(node, known, rules))
+        actor_scope = set()
+        for c in node.children:
+            if c.key.split("@")[0] == "ValidFactions":
+                d = {k.key.lower(): k.value for k in c.children}
+                actor_scope |= {f.strip().lower()
+                                for f in (d.get("factions") or "").split(",") if f.strip()}
+        for c in node.children:
+            if not c.key.startswith("ProvidesPrerequisite"):
+                continue
+            d = {k.key.lower(): k.value for k in c.children}
+            pr = d.get("prerequisite") or d.get("prerequisites") or ""
+            fac = {f.strip().lower()
+                   for f in (d.get("factions") or "").split(",") if f.strip()}
+            # ⛔ A BARE `ProvidesPrerequisite` INHERITS THE PROVIDER'S OWN FACTIONS. OpenRA's
+            # Red Alert gates E1 on `~barracks`, and BOTH barracks grant it with no `Factions:`
+            # line — `TENT` is Allied and `BARR` is Soviet purely through their own buildability.
+            # Taking only the trait's declared factions left `barracks` unscoped, so E1 and E3 —
+            # the basic rifle and rocket infantry that every faction builds — came out UNTAGGED
+            # and `allows()` then refused them to everyone. The union across both providers is
+            # what makes them universal, which is exactly R14's carve-out.
+            scope = (fac or actor_scope or own_factions) & set(known)
+            for t in pr.split(","):
+                t = t.strip().lower()
+                if t and scope:
+                    prov.setdefault(t, set()).update(scope)
+    return prov
+
+
+def factions_of(node, known, rules=None, _depth=PREREQ_DEPTH, _seen=None, vfi=None):
     """The faction tokens an actor is gated on, filtered by what the mod actually declares.
 
     ⛔ THE FACTION IS OFTEN ONE HOP AWAY, IN THE PREREQUISITE BUILDING. OpenRA gates most infantry
@@ -464,6 +525,14 @@ def factions_of(node, known, rules=None, _depth=PREREQ_DEPTH, _seen=None):
     found = set()
     for field in ("Queue", "Prerequisites"):
         found |= _faction_tokens(b.get(field), known)
+    # A VALIDATED-FACTION GRANT IS A DIRECT CLAIM, not an inherited one: the mod names the
+    # factions explicitly next to the token this actor is gated on. Consulted before the
+    # prerequisite hop, and filtered by what the mod declares, like every other path here.
+    if vfi:
+        for chunk in ((b.get("Prerequisites") or "") + "," + (b.get("Queue") or "")).split(","):
+            tok = chunk.strip().lstrip("~!").strip().lower()
+            if tok and tok in vfi:
+                found |= {f for f in vfi[tok] if not known or f in known}
     # Already decided at this level — do not dilute a direct gate with an inherited one.
     if found or rules is None or _depth <= 0:
         return sorted(found)
@@ -480,7 +549,7 @@ def factions_of(node, known, rules=None, _depth=PREREQ_DEPTH, _seen=None):
             parent = rules.resolve(key)
         except Exception:                       # a prerequisite that does not resolve is not fatal
             continue
-        found |= set(factions_of(parent, known, rules, _depth - 1, _seen))
+        found |= set(factions_of(parent, known, rules, _depth - 1, _seen, vfi))
     return sorted(found)
 
 
@@ -494,6 +563,11 @@ def extract(mod_id):
     rules = miniyaml.Ruleset(root, mod_id)
     fluent = load_fluent(root, mod_id)
     known_factions = declared_factions(rules)
+    # EMBER's index (devin/ember/untagged-ca-sp), consulted at CLAIM level rather than as a
+    # last resort — see factions_of. Their version is the broader read: it takes every
+    # `ProvidesPrerequisite*` trait and falls back to the PROVIDING actor's `ValidFactions`,
+    # which a `ValidatedFaction`-only reader misses.
+    vfi = prerequisite_providers(rules, known_factions)
 
     key = rules._actor_ci.get(rifle_id.lower())
     if not key:
@@ -535,7 +609,7 @@ def extract(mod_id):
             # ⭐ THE FACTION COLUMN (maintainer 2026-09-04). Reference routing needs it: an Asian
             # Alliance unit may only draw on Mental Omega China, which is what stops
             # "Animal Alligator" from ever being a candidate.
-            "faction": "/".join(factions_of(node, known_factions, rules)) or "",
+            "faction": "/".join(factions_of(node, known_factions, rules, vfi=vfi)) or "",
             "limit": int(limit) if (limit and str(limit).strip().isdigit()) else None,
             **wep,
             "hp": int(hp), "cost": int(cost) if cost else None,

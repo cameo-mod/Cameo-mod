@@ -11,7 +11,9 @@
 > counts. The historical conversion plans below do not authorize a new collapse.
 
 > ⚠ **SUPERSEDED (W15/W17, 2026-08-15).** The grid is now `formula.DAMAGE_STEP` = **100**, the `%`-twin comes from `formula.percentage_twin()` (not `damage // 2000`), and `FirepowerMultiplier` is retired as a fine-tuning knob — `apply_balance` cannot write it and `decompose_dps` always solves at `fp = 1.0`. Read every "multiple of 2000" mention below as history.
-> The split itself is unaffected — it preserves `Damage` verbatim either way.
+> Current collapse-value authority is DESIGN §11b.1: preserve total resolved main
+> output and check the shipped-release baseline. Verbatim applies when only one
+> resolved main exists; it is not a general rule for discarding stacked damage.
 
 _The repoint architecture. Maintainer decision 2026-08-02: "do the full split
 now." Supersedes the naive "reparent onto warhead-only templates" plan (which

@@ -19,6 +19,40 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 
 ---
 
+## ⛔ 2026-09-07 — the reference map, and what it cost to make it trustworthy
+
+**master `57d7d7858`.** The maintainer reviewed a TD/RA1 reference map and rejected it:
+`ra1_allies_rifleinfantry` was mapped to a **Cryo Trooper** when all three sources ship an E1.
+Seven silent defects, each individually sufficient — full list in
+`memory: cameo-reference-defect-cascade`, the essentials here.
+
+⭐ **THE LESSON.** The matcher was never choosing badly. **The correct candidate was deleted
+from the pool before matching**, and the greedy picked the best of what remained. Every wrong
+pairing looked like a scoring bug and was a visibility bug.
+
+⛔ **A "verification" that reads a crashed run's output verifies nothing.** `factions_of` lost
+its `vfi` parameter in a merge, so every OpenRA extraction raised TypeError and was swallowed
+per-mod; my splice then copied the unchanged file back and I reported the fix working.
+
+**THE ACCEPTANCE TEST** (maintainer, verbatim): *"All the original units are in OpenRA. DTA, CA
+and Cameo all expand the roster... those that exist in OpenRA and OpenTD MUST ALWAYS HAVE 3
+REFERENCES."* Encoded as `audit_original_coverage.py`. **O2 — an original nobody claimed — is
+the check that matters**; a voice count cannot see it.
+
+**OPEN QUESTION, unanswered:** Romanov's Vengeance carries **729 buildable units**. RA2+YR never
+shipped that many, so RV expands the roster like CA and DTA do. `OpenRA RA2 official` (86) and
+`Yuri's Revenge on OpenRA` (124) match the real rosters. Which is the RA2 authority?
+
+**NEXT, in order:**
+1. Work the O2 list — **every Tiberian Dawn defense is unclaimed** (Obelisk, Guard Tower,
+   Advanced Guard Tower, Turret, SAM), plus RA1's Tesla/Chrono tank and Demolition Truck.
+2. Settle the RA2 authority, then re-baseline O1/O2.
+3. The regen conversion (892 nodes, delegated, `devin/regen/conversion`) — **Claude-Local flips
+   `defaults.yaml` LAST and merges whole**, or master double-heals.
+4. The faction identity modifier to break byte-identical mirrors — magnitude not yet set.
+
+⚠ **No balance number has been written to yaml.** Nothing is applied until the map is right.
+
 ## ⭐ AGENT ASSIGNMENTS — who is doing what (2026-09-06)
 
 | agent | lane |
@@ -140,6 +174,44 @@ the method, the faction-specific traps, the gates, and the report format. Read
 
 ⚠ **Agent-to-agent chatter lives OUTSIDE the repository**, in `../Cameo-mod-fleet/`.
 `DEVELOPMENT_LOG.md` keeps one entry per COMPLETED work item plus lessons learned — nothing else.
+
+## ⭐⭐ START HERE 2026-09-07 — why the balance pipeline has not moved, and the fix
+
+```
+$ python tools/balance/apply_balance.py --faction d2k_atreides
+DRY RUN: 0 values would change
+```
+
+**The pipeline is not blocked by tooling, by W11, or by sign-off. It is idle because nobody
+has written a target number into the ledger.** `apply_balance` writes ledger → yaml; the
+ledger holds today's values; applying it is therefore a no-op *by construction*.
+
+`anchor_readiness.py` reports **0 of 27 classes signable**, 26 failing "the anchor does not
+describe its members" (median pricing error 15%–106%) — and explains itself in one line:
+*"the anchor actor is still PRE-RESTAT, so its percentile is measured on stats the design
+already intends to replace."*
+
+Meanwhile **all 27 classes already carry a complete spec** in `docs/balance/class_anchors.json`
+(`cost0`, `dps0`, `hp0`, `range0_wdist`, `speed0`) that has never been used. `mbt`'s spec is
+hp0 **240,000**; the actual unit has **100,000**. The numbers were designed and never written
+anywhere the pipeline reads.
+
+⭐ **MAINTAINER ORDER, 2026-09-07 — do this first:**
+
+1. Write the 27 anchor specs into the ledger on **`hp0` / `speed0` / `range0_wdist` / `cost0`
+   only**. ⛔ **NOT `dps0`** — it depends on weapon structure and therefore on W24, and would
+   be written twice.
+2. `python tools/balance/apply_balance.py --faction <f> --confirm`
+3. Boot-gate, re-extract, then re-read `anchor_readiness.py`.
+
+This is the first real balance change the project will have made, and it breaks the apparent
+circularity (sign-off needs a restat; the restat needs numbers in the ledger — which is a
+LEDGER edit, explicitly sanctioned by CLAUDE.md rule 3, not a hand edit of yaml).
+
+⚠ The four non-DPS axes depend on nothing but the unit, so **W24 is not a prerequisite for
+this.** The two can run in parallel: the restat writes `docs/balance/*.json` → actor yaml,
+W24 writes `**/weapons.yaml`, and `extract_stats.load_existing_design()` preserves authored
+`design.*` across re-extraction.
 
 ## ⛔⛔ TOP OF THE QUEUE 2026-09-07 — revert the ra1_soviets rename
 

@@ -84,6 +84,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
 - [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
 - [A ContentPack can only ADD to a bot module - and a partial migration fails silently (2026-08-31)](#a-contentpack-can-only-add-to-a-bot-module---and-a-partial-migration-fails-silently-2026-08-31)
+- [MiniYaml treats unescaped hashes in values as comments (2026-09-01)](#miniyaml-treats-unescaped-hashes-in-values-as-comments-2026-09-01)
 - [Content installer and music filesystem plumbing (2026-08-11)](#content-installer-and-music-filesystem-plumbing-2026-08-11)
 - [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
 - [YAML lint rules learned (2026-07-24)](#yaml-lint-rules-learned-2026-07-24)
@@ -510,6 +511,35 @@ The `^D2KRocket` archetype inherits `^Projectile_Missile_Heavy`, which does **no
 - `tools/balance/apply_balance.py` and `tools/balance/extract_stats.py` now convert between the ledger fraction (`0.89`) and the YAML integer (`89`) automatically.
 - `tools/audit/audit_multiplier_modifiers.py` flags any non-integer `*Multiplier Modifier` value.
 
+### A tool that sums correctly still ships the wrong number if its input is already wrong
+
+`consolidate_reviewed_weapon_roots.py` computes `total = sum(...)` across a weapon's mains
+and writes exactly that. It is correct. It still helped put **195 weapons** off the damage
+they shipped with, because the values it summed had already been multiplied by
+`04de392b3` (2026-07-22, "WIP: balance, weapon-class, and audit fixes") — 70 `Damage:` lines
+changed with the main counts left alone. `RAVulcan` went 4,000 -> 16,000 in July with two
+mains intact; September collapsed it to one main and faithfully carried the 16,000 across.
+
+Three wrong hypotheses were spent before that landed:
+
+1. *"the templates supply the damage"* — every `^Warhead_*` template carries a `Damage: 2000`
+   placeholder and the weapons override it locally. Disproved by reading the templates.
+2. *"a uniform regrid multiplied everything"* — the multipliers are 4x, 6x, 8x, 15x, 25x, and
+   **85% of shared weapons never moved at all**. Disproved by measuring the population.
+3. *"the consolidation series wrote the numbers"* — `git blame` pointed at ContentPack SPLIT
+   commits, which is a blame artifact: blame follows file creation, not the edit. Disproved by
+   walking the resolved value across history instead of trusting blame.
+
+**The lesson is the method, not the culprit.** To find when a value changed, resolve it at
+sampled commits and watch the number move. Do not blame a line in a tree that has been
+reorganised, and do not reason from what a tool's code does — a correct tool with a corrupted
+input produces a confidently wrong result that every self-referential gate will pass.
+
+⛔ **Corollary, now enforced:** a gate that compares the tree to itself cannot see this class
+of defect at all. `tools/audit/audit_release_drift.py` compares against a committed snapshot
+of a SHIPPED release (`docs/reference/release_baseline_*.json`) and is the only gate in the
+tree with an external reference. Run it after every collapse.
+
 ### Balance tooling discipline
 
 - **A child command starting is not proof that it succeeded.** The old balance
@@ -755,7 +785,31 @@ SpeedMultiplier@myupgrade:
 
 ### Engine update pipeline and Smart App Control findings (2026-07-30, updated with deep research)
 
-#### The canonical engine update pipeline (binding, uniform process)
+#### The boot gate is not multi-agent safe — isolate the support directory
+
+**2026-09-07.** Every worktree's `launch-game.cmd` writes to the SAME
+`%APPDATA%\OpenRA\Logs`. With two agents gating at once (Claude-Local in
+`claude-naming`, Nova in `nova-lane2`) the consequences are:
+
+* `perf.log` is **locked by the other instance**, so it cannot be deleted before the run and
+  its contents belong to whichever process wrote last;
+* `exception-*.log` from ANY worktree lands in the same folder, so **another agent's crash
+  reads as your failure** — and your own crash can be attributed to them.
+
+The gate's own evidence is therefore shared state. Isolate it — `launch-game.cmd` forwards
+`"%*"` to `OpenRA.exe`, so the support directory can be redirected per run:
+
+```
+Start-Process -FilePath .\launch-game.cmd -ArgumentList "Engine.SupportDir=C:	mp\gate_<name>"
+```
+
+Then read `C:	mp\gate_<name>\Logs\perf.log` for
+`MenuPostProcessEffect.PostWorldLoaded` and check that directory — and only it — for
+`exception-*.log`. Kill only YOUR OpenRA process afterwards; match on
+`(Get-Process OpenRA).Path` against your own worktree, because another agent's gate may be
+mid-run and a live instance locks the next build.
+
+## The canonical engine update pipeline (binding, uniform process)
 
 The engine lives in TWO places that must stay in sync. Follow these steps IN ORDER for every engine change:
 
@@ -1380,6 +1434,14 @@ safe is a property of the CONSUMER, not of the yaml -
 `ConditionalTrait` still occupies the trait dictionary - so gating five
 composition modules by condition crashes on the first bot tick instead of
 degrading.
+
+## MiniYaml treats unescaped hashes in values as comments (2026-09-01)
+
+MiniYaml treats an unescaped `#` in a value as the start of a comment and
+silently truncates the value rather than reporting an error. A truncated .NET
+format string can then throw only when the consuming widget draws. Neither
+`--check-yaml` nor the boot gate exercises that graph draw path, so any YAML
+value carrying a `#` needs a display-time check.
 
 ## ⛔ `Node.child()` is an EXACT match — 97% of the mod's producers were invisible (2026-09-06)
 
