@@ -1665,7 +1665,7 @@ Type97PlasmaCannon:
 		ContrailLength: 15
 		Width: 50
 	Warhead@Tesla_Heavy:
-		Damage: 4000
+		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 2000
@@ -1679,6 +1679,8 @@ Type97PlasmaCannon:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
+	-Warhead@Railgun_Heavy:
+	-Warhead@CannonHE_Heavy:
 
 ShrineTankCannon:
 	# Shrine Minitank weapon — weaker version of Exorcist. Pure Magic (2026-08-10).

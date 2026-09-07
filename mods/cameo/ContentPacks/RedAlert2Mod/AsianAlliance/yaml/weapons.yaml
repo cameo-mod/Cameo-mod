@@ -177,7 +177,7 @@ RA2AsianShotgunFanatic1:
 	Range: 5000
 	Report: aa_sshtgatt.wav
 	Warhead@Demolition_Light:
-		Damage: 2000
+		Damage: 8000
 	Warhead@Concussion_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
@@ -186,6 +186,8 @@ RA2AsianShotgunFanatic1:
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
+	-Warhead@Concussion_Medium:
+	-Warhead@Bullet_Medium:
 
 RA2AsianShotgunFanatic2:
 	Inherits: RA2AsianShotgunFanatic1
