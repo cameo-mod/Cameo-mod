@@ -9975,6 +9975,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - Batch 28: `JapaneseHovercraftFlakWaveforce` and `JapaneseHovercraftFlakAAkWaveforce` collapsed to `Railgun_Heavy` 6000 [SHIPPED], moving `PercentageScale 9975` onto the waveforce main and cancelling `Flak_MediumFlatCompatibility`.
 - Batch 29: `ATMine` collapsed to `ATMineDemolition_Light` 110000 [SHIPPED], cancelling `Demolition_Light` from `^DamagingExplosionHE`. Preserved `HeavyMissilePercentage`, effect, smudge, and concrete.
 - Batch 30: `ZeroFighterChainGunWaveforce` collapsed to `Railgun_Heavy` 9000 [SHIPPED], cancelling `Bullet_Medium` and `ZeroFighterBullet_Medium`. Removed malformed `Projectile: Bullet` block. Renamed the ally-only twin to `...FriendlyFire` to keep it as a companion, preserving 500 ally damage.
+- Batch 31: `BarrelExplode` — removed dead `Warhead@1Dam` (SpreadDamage with no Damage value), leaving `Demolition_Light` 60000 [SHIPPED].
 - Re-extracted and committed `docs/balance` ledgers after each batch (`audit_balance_drift.py` clean).
 - Updated `C:/tmp/boot_gate.ps1` sleep from 45s to 70s because the game now occasionally needs ~50s to reach the main menu.
 
@@ -9982,7 +9983,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - `find_empty_warhead.py` = 0
 - `audit_orphan_removals.py` = 0
 - `audit_release_drift.py` D1 82 <= 133, D2 34 <= 62, D3 15 <= 27, D4 335 <= 335, D5 39 <= 43
-- `audit_weapon_shape.py` W5 301 <= 394
+- `audit_weapon_shape.py` W5 300 <= 394
 - `verify_generator_sync.py` = 0
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log` (70s boot-gate).
 
