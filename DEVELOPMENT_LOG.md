@@ -9969,6 +9969,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - Batch 22: `MagicOrb`/`MagicOrb2` -> Tesla_Heavy 24000/8000 [SHIPPED], dropped `Magic_Heavy` (preserved `EMPUnit` AffectsIntegrity). `tkmakap` -> Bullet_Light 8000 [SHIPPED], dropped `Demolition_Light`. `tkmm203` -> Demolition_Light 8000 [SHIPPED], dropped `Flame_Light`.
 - Batch 23: `AsianChaosMine` -> Chemical_Heavy 250000 [SHIPPED], dropped inherited `CannonAP_Light` (from `AsianTankMine`), preserved `Cloud` smoke. `WaveArtilleryImpact` -> Tesla_Heavy 20000 [SHIPPED], removed `^Warhead_Railgun_Heavy` inherit and local `Railgun_Heavy`, preserved `Tesla_Heavy_ExtraDamage`, `SonicDebuff`, `Effect` and `^Effect_Railgun_Heavy`. `WaveTurretImpact` -> inherits collapsed parent `Tesla_Heavy 20000`, removed local `RailgunWeapon` and `RailgunWeaponPercentage`, preserved `SonicDebuff`.
 - Batch 24: waveforce non-flak collapses to `Railgun_Heavy`: `ArmoredCarMGWaveforce` 19000 [SHIPPED] (kept `PercentageScale 6667`), `SkyHawkChainGunWaveforce` 6000 [SUM] (preserved `GrenadeFriendlyFire`), `japan_imperialscoutsman_rifle_waveforce` 15000 [SUM], `25mmWaveforce` 14000 [SHIPPED] (kept `PercentageScale 1659`). Each cancels the inherited secondary main (`Bullet_Medium` or `CannonHE_Medium`).
+- Batch 25: `ArmoredCarMGAAWaveforce` 19000 [SHIPPED] (kept `PercentageScale 6667`), cancelled all four inherited `AreaDamage` warheads from `ArmoredCarMG_AA` (`Bullet_Light`, `Bullet_Medium`, `CannonAP_Light`, `CannonHE_Medium`), preserved `HeavyAAWeaponPercentage`.
 - Re-extracted and committed `docs/balance` ledgers after each batch (`audit_balance_drift.py` clean).
 - Updated `C:/tmp/boot_gate.ps1` sleep from 45s to 70s because the game now occasionally needs ~50s to reach the main menu.
 
@@ -9976,7 +9977,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - `find_empty_warhead.py` = 0
 - `audit_orphan_removals.py` = 0
 - `audit_release_drift.py` D1 82 <= 133, D2 34 <= 62, D3 15 <= 27, D4 335 <= 335, D5 39 <= 43
-- `audit_weapon_shape.py` W5 309 <= 394
+- `audit_weapon_shape.py` W5 308 <= 394
 - `verify_generator_sync.py` = 0
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log` (70s boot-gate).
 
