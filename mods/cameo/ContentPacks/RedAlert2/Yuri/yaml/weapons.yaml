@@ -807,7 +807,7 @@ RA2Virusgun2:
 	-InvalidTargets:
 	Warhead@Flak_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 12000
+		Damage: 36000
 		Spread: 1
 		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -829,10 +829,7 @@ RA2Virusgun2:
 		Duration: 150
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@SniperWeapon:
-	Warhead@Sniper_LightFlatCompatibility:
-		ValidTargets: Ground, Ship, Garrisoned
-		Damage: 24000
-		PercentageScale: 0
+	-Warhead@Sniper_LightFlatCompatibility:
 
 RA2Virusgun3:
 	Inherits@wh: ^Warhead_MissileAP_Medium
@@ -847,10 +844,11 @@ RA2Virusgun3:
 		TrailDelay: 1
 	Warhead@MissileAP_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 12000
+		Damage: 48000
 		Spread: 1
 		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	-Warhead@Flak_Medium:
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
 		Condition: corroded

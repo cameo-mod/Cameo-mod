@@ -39,11 +39,9 @@ RA2KirovBomb_rad:
 	Inherits: RA2KirovBomb
 	Inherits@rad: ^RA2RadShell
 	Warhead@Chemical_Heavy:
-		Damage: 48000
+		Damage: 96000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Demolition_Heavy:
-		Damage: 48000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	-Warhead@Demolition_Heavy:
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 480
@@ -91,12 +89,11 @@ RA2KirovBomb_tesla:
 	Inherits@fx: ^Effect_Kirov_Tesla_RA2
 	Inherits@2: RA2KirovBomb
 	Warhead@Tesla_Super:
-		Damage: 80000
+		Damage: 160000
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 40000
-	Warhead@Demolition_Heavy:
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Demolition_Heavy:
 	Warhead@Shrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: TeslaFragmentLarge
@@ -108,8 +105,9 @@ RA2KirovBomb_nuclear:
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: RA2KirovBomb
+	-Warhead@Demolition_Heavy:
 	Warhead@Nuclear_Super:
-		Damage: 80000
+		Damage: 160000
 		Spread: 800
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
@@ -131,12 +129,8 @@ RA2KirovBomb_nuclear:
 
 RA2KirovBomb_nuclear_elite:
 	Inherits: RA2KirovBomb_nuclear
-	Warhead@Demolition_Heavy:
-		Damage: 100000
-		Spread: 1000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super:
-		Damage: 100000
+		Damage: 200000
 		Spread: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
@@ -413,8 +407,9 @@ RA160mmE_rad_elite:
 	Inherits: ^RA160mmRadLegacy
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 12345
+	-Warhead@Chemical_LightFlatCompatibility:
 	Warhead@Nuclear_Super:
-		Damage: 36000
+		Damage: 144000
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		Damage: 18
 	Warhead@Effect: CreateEffect
@@ -508,10 +503,6 @@ RA160mmE_rad_elite:
 	-Warhead@Chemical_Light:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Chemical_LightFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 108000
-		PercentageScale: 0
 
 RA160mmE_fire_elite:
 	Inherits: RA160mm_fire
@@ -561,9 +552,8 @@ RA2120xmm:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@CannonHE_Heavy: AreaDamage
+	Warhead@CannonAP_Light:
 		Damage: 12000
-		PercentageScale: 3325
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TankDestroyerCannon:
