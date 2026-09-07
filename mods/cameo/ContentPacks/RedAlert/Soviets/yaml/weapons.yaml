@@ -3697,8 +3697,6 @@ VolkovMagneticWeaponTeslaFragment1:
 	ValidTargets: Ground, Water, Air
 	Range: 2830
 	Report: shktrop1.aud
-	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 4000
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3713,7 +3711,7 @@ VolkovMagneticWeaponTeslaFragment1:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Tesla_Heavy:
-		Damage: 4000
+		Damage: 16000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
@@ -3732,8 +3730,6 @@ VolkovMagneticWeaponTeslaFragment1:
 VolkovMagneticWeaponTeslaFragment2:
 	Inherits: VolkovMagneticWeaponTeslaFragment1
 	Range: 1415
-	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 2000
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3748,7 +3744,7 @@ VolkovMagneticWeaponTeslaFragment2:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Tesla_Heavy:
-		Damage: 2000
+		Damage: 8000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 1000
@@ -3880,8 +3876,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 	ValidTargets: Ground, Water, Air
 	Range: 2830
 	Report: shktrop1.aud
-	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 4000
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3895,19 +3889,12 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 		Damage: 2000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@Tesla_Heavy:
-		Damage: 4000
+		Damage: 20000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
@@ -3926,8 +3913,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 VolkovMagneticWeaponIncendiaryTeslaFragment2:
 	Inherits: VolkovMagneticWeaponIncendiaryTeslaFragment1
 	Range: 1415
-	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 2000
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3941,19 +3926,12 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@Tesla_Heavy:
-		Damage: 2000
+		Damage: 10000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 1000
