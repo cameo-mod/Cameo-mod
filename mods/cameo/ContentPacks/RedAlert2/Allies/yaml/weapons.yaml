@@ -42,7 +42,7 @@ RA2PatriotThunderboltMissile:
 		ContrailEndColor: FFFFFF
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
-		Damage: 10000
+		Damage: 12000
 
 HarrierMissiles:
 	Inherits: ^LightFlameWeapon
@@ -66,7 +66,7 @@ HarrierMissiles:
 		ContrailEndColor: 000000FF
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 18000
+		Damage: 24000
 		PercentageScale: 2222
 		PercentageDenominator: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath

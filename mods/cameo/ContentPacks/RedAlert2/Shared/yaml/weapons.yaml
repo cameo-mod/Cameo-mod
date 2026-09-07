@@ -1063,7 +1063,7 @@ RA2ThunderboltMissile:
 	-Warhead@MissileHE_Heavy:
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 12000
 		PercentageScale: 9975
 
 RA2ThunderboltMissile_elite:
@@ -1116,7 +1116,7 @@ RA2MultiHoverMissile:
 	-Warhead@MissileHE_Light:
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 		PercentageScale: 9975
 
 RA2MultiHoverMissile_elite:
@@ -1131,7 +1131,7 @@ RA2MultiHoverMissile_elite:
 		ContrailStartColor: e60000
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 		PercentageScale: 9975
 
 RA2MultiHoverMissile_AA:
@@ -1186,7 +1186,7 @@ RA2MultiThunderboltMissile:
 	-Warhead@MissileHE_Heavy:
 	Warhead@MissileHE_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 16000
 		PercentageScale: 9975
 
 RA2MultiThunderboltMissile_elite:
@@ -2121,7 +2121,7 @@ MigMissiles:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@MissileAP_Medium:
-		Damage: 24000
+		Damage: 32000
 		PercentageScale: 3333
 		PercentageDenominator: 10000
 	Warhead@MissileAP_Medium_GroundShipExtraDamage:
