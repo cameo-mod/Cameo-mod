@@ -1563,19 +1563,21 @@ JapaneseHovercraftFlakWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapaneseHovercraftFlak
 	Inherits@3: ^WaveforceBulletProjectile
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 4000
+		Damage: 6000
 		PercentageScale: 9975
+	-Warhead@Flak_MediumFlatCompatibility:
 
 JapaneseHovercraftFlakAAkWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapaneseHovercraftFlakAA
 	Inherits@3: ^WaveforceBulletProjectile
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Railgun_Heavy:
 		ValidTargets: Air
-		Damage: 4000
+		Damage: 6000
 		PercentageScale: 9975
+	-Warhead@Flak_MediumFlatCompatibility:
 
 Type89Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
