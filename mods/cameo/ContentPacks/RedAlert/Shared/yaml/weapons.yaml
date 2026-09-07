@@ -829,6 +829,10 @@ TigerCannonCryo:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: 25mm
 	Inherits@3: ^WaveforceBulletProjectile
+	-Warhead@CannonHE_Medium:
+	Warhead@Railgun_Heavy:
+		Damage: 14000
+		PercentageScale: 1659
 
 WaveforceCannonChargedLaser:
 	Inherits@wh: ^Warhead_MissileHE_Heavy

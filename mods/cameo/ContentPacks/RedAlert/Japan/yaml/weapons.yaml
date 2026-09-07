@@ -57,6 +57,9 @@ japan_imperialscoutsman_rifle_waveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: japan_imperialscoutsman_rifle
 	Inherits@3: ^WaveforceBulletProjectile
+	-Warhead@Bullet_Medium:
+	Warhead@Railgun_Heavy:
+		Damage: 15000
 
 TankBusterBeamCannon:
 	Inherits@collapsewh: ^Warhead_Railgun_Heavy
@@ -1146,6 +1149,9 @@ SkyHawkChainGunWaveforce:
 	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 500
+	-Warhead@Bullet_Medium:
+	Warhead@Railgun_Heavy:
+		Damage: 6000
 
 SkyHawkCannon:
 	Inherits@wh2: ^Warhead_CannonAP_Light
@@ -2462,8 +2468,9 @@ ArmoredCarMGWaveforce:
 	Inherits@3: ArmoredCarMG
 	Inherits@4: ^WaveforceBulletProjectile
 	Warhead@Railgun_Heavy:
-		Damage: 3000
+		Damage: 19000
 		PercentageScale: 6667
+	-Warhead@Bullet_Medium:
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 250
