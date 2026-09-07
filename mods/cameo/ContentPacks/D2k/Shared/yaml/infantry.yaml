@@ -27,8 +27,6 @@ light_inf:
 		Prerequisites: ~d2k_barracks, ~!ordos_barracks, ~!ixian_barracks
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -94,8 +92,6 @@ trooper:
 		AddToArmyValue: true
 	Health:
 		HP: 12000
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Mobile:
 		Speed: 48
 	Armament:
