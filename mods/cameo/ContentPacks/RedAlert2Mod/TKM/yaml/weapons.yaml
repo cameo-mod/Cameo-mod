@@ -181,10 +181,11 @@ tkmakap:
 	Warhead@Bullet_Light:
 		PercentageScale: 3333
 		Burst: 3
-		Damage: 6000
+		Damage: 8000
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Demolition_Light:
 tkmkord:
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 10
@@ -274,9 +275,10 @@ tkmm203:
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
 	Warhead@Demolition_Light:
-		Damage: 4000
+		Damage: 8000
 	Warhead@Flame_Light:
 		Damage: 4000
+	-Warhead@Flame_Light:
 tkmrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light

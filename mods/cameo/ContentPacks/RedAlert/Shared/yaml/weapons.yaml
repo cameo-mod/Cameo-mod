@@ -562,7 +562,7 @@ MagicOrb:
 	Warhead@Tesla_Heavy:
 		PercentageScale: 6667
 		Spread: 1200
-		Damage: 12000
+		Damage: 24000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Spread: 1600
@@ -579,6 +579,7 @@ MagicOrb:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: thgun.wav
+	-Warhead@Magic_Heavy:
 
 MagicOrb2:
 	Inherits: ^Warhead_Tesla_Heavy
@@ -609,7 +610,7 @@ MagicOrb2:
 		ContrailLength: 0
 	Warhead@Tesla_Heavy:
 		Spread: 1600
-		Damage: 4000
+		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Spread: 2400
@@ -625,6 +626,7 @@ MagicOrb2:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: thgun.wav
+	-Warhead@Magic_Heavy:
 
 APCGunAllies:
 	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
