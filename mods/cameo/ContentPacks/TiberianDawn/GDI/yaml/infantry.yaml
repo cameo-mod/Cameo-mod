@@ -13,8 +13,6 @@ td_gdi_minigunner:
 		Speed: 63
 	Health:
 		HP: 31000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -81,8 +79,6 @@ td_gdi_grenadier:
 		Speed: 75
 	Health:
 		HP: 8000
-	ChangesHealth@SelfHealing:
-		Step: 8
 	Armament:
 		Weapon: Grenade
 		LocalOffset: 0,0,427
@@ -181,8 +177,6 @@ td_gdi_commando:
 		Voice: Move
 	Health:
 		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Passenger:
 		Voice: Move
 	Armament@c4:
@@ -257,8 +251,6 @@ td_gdi_empgrenadier:
 		Speed: 60
 	Health:
 		HP: 32000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Armament:
 		Weapon: Grenade_EMP
 		LocalOffset: 0,0,427
@@ -313,8 +305,6 @@ td_gdi_sonicmissilesoldier:
 		Speed: 50
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 25
 	Armament@PRIMARY:
 		Weapon: MissileSoldierWeapon
 		LocalOffset: 256,43,341
@@ -357,8 +347,6 @@ td_gdi_heavysniper:
 		Speed: 78
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 25
 	Armament:
 		Weapon: GDISniperRifle
 		LocalOffset: 0,0,427
@@ -399,8 +387,6 @@ td_gdi_shotgunner:
 		Speed: 75
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@PRIMARY:
 		Weapon: td_gdi_shotgunner_shotgun
 		LocalOffset: 128,0,256
@@ -440,8 +426,6 @@ td_gdi_officer:
 		Speed: 79
 	Health:
 		HP: 32000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Buildable:
 		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, ~td_gdi_promotion_gdiofficer
 		Queue: Infantry, RAInfantry
@@ -530,8 +514,6 @@ td_gdi_havoc:
 		Voice: Move
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Passenger:
 		Voice: Move
 	ProducibleWithLevel:

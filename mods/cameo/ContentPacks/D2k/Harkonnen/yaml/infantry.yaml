@@ -19,8 +19,6 @@ harkonnen_lightinfantry:
 		Prerequisites: ~harkonnen_barracks
 	Health:
 		HP: 32000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Mobile:
 		Speed: 56
 	Armament@PRIMARY:
@@ -126,8 +124,6 @@ harkonnen_sardaukar:
 		AddToArmyValue: true
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 56
 	Armor:

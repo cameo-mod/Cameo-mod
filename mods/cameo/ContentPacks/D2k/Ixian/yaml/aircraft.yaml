@@ -29,8 +29,6 @@ ixian_airdrone:
 		HP: 62500
 	Repairable:
 		HpPerStep: 3125
-	ChangesHealth@SelfHealing:
-		Step: 25
 	Shielded:
 		RegenAmount: 50
 	AmmoPool:
@@ -205,8 +203,6 @@ ixian_railgundrone:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Shielded:
 		RegenAmount: 24
 	Armament@PRIMARY:
@@ -285,8 +281,6 @@ ixian_empbomber:
 		HP: 111000
 	Repairable:
 		HpPerStep: 5555
-	ChangesHealth@SelfHealing:
-		Step: 44
 	Shielded:
 		RegenAmount: 76
 	Armament@PRIMARY:
@@ -352,8 +346,6 @@ ixian_resonancedrone:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	ProximityExternalCondition@shieldgen:
 		Range: 6000
 		ValidRelationships: Ally
@@ -471,8 +463,6 @@ ixian_farasha:
 		HP: 250000
 	Repairable:
 		HpPerStep: 12500
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Shielded:
 		InitialPercentageStrength: 100
 		MaxPercentageStrength: 100
@@ -602,8 +592,6 @@ farasha_drone_ixian:
 	HasParent:
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Shielded:
 		InitialPercentageStrength: 100
 		MaxPercentageStrength: 100

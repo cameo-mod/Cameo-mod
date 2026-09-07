@@ -20,8 +20,6 @@ atreides_lightinfantry:
 		Prerequisites: ~atreides_barracks
 	Health:
 		HP: 32000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Mobile:
 		Speed: 56
 	Armament@PRIMARY:

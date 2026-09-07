@@ -26,8 +26,6 @@ ordos_swarmerdrone:
 		HP: 20000
 	Repairable:
 		HpPerStep: 1000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Shielded:
 		RegenAmount: 40
 	AttackAircraft:
@@ -175,8 +173,6 @@ ordos_eyeinthesky:
 		HP: 150000
 	Repairable:
 		HpPerStep: 7500
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Shielded:
 		RegenAmount: 120
 	AttackAircraft:
@@ -233,8 +229,6 @@ ordos_banshee:
 		HP: 37500
 	Repairable:
 		HpPerStep: 1875
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Shielded:
 		RegenAmount: 30
 	AttackAircraft:
@@ -326,8 +320,6 @@ ordos_wraith:
 		HP: 375000
 	Repairable:
 		HpPerStep: 18750
-	ChangesHealth@SelfHealing:
-		Step: 150
 	Shielded:
 		RegenAmount: 300
 	Armament@PRIMARY:

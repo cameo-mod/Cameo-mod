@@ -29,8 +29,6 @@ td_nod_specterartillery:
 		HP: 22500
 	Repairable:
 		HpPerStep: 1125
-	ChangesHealth@SelfHealing:
-		Step: 9
 	Armament:
 		Weapon: SpecterArtilleryShell
 		LocalOffset: 500,0,500
@@ -131,8 +129,6 @@ td_nod_artillery:
 		HP: 17500
 	Repairable:
 		HpPerStep: 875
-	ChangesHealth@SelfHealing:
-		Step: 7
 	Armament:
 		Weapon: ArtilleryShell
 		LocalOffset: 624,0,208
@@ -189,8 +185,6 @@ td_nod_flametank:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament:
 		Weapon: BigFlamer
 		LocalOffset: 512,128,42, 512,-128,42
@@ -230,8 +224,6 @@ td_nod_buggy:
 		HP: 20000
 	Repairable:
 		HpPerStep: 1000
-	ChangesHealth@SelfHealing:
-		Step: 8
 	Turreted:
 		TurnSpeed: 40
 		Offset: -43,0,128
@@ -280,8 +272,6 @@ td_nod_reconbike:
 		HP: 17500
 	Repairable:
 		HpPerStep: 875
-	ChangesHealth@SelfHealing:
-		Step: 7
 	Armament:
 		Weapon: BikeRockets
 		LocalOffset: -125, -175, 175, -125, 175, 175
@@ -336,8 +326,6 @@ td_nod_lighttank:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Turreted:
 		TurnSpeed: 22
 	Armament:
@@ -396,8 +384,6 @@ td_nod_ssmlauncher:
 		HP: 20000
 	Repairable:
 		HpPerStep: 1000
-	ChangesHealth@SelfHealing:
-		Step: 8
 	Turreted:
 		TurnSpeed: 20
 		Offset: -128,0,128
@@ -469,8 +455,6 @@ td_nod_stealthtank:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Cloak:
 		InitialDelay: 100
 		CloakDelay: 50
@@ -553,8 +537,6 @@ td_nod_chemicalattackbike:
 		HP: 22500
 	Repairable:
 		HpPerStep: 1125
-	ChangesHealth@SelfHealing:
-		Step: 9
 	Armament:
 		Weapon: ChemicalBikeRockets
 		LocalOffset: -125, -175, 175, -125, 175, 175
@@ -614,8 +596,6 @@ td_nod_chemicalstealthtank:
 		HP: 90000
 	Repairable:
 		HpPerStep: 4500
-	ChangesHealth@SelfHealing:
-		Step: 36
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~td_nod_promotion_chemicalstealthtank
@@ -671,8 +651,6 @@ td_nod_chemicalssmlauncher:
 		HP: 32500
 	Repairable:
 		HpPerStep: 1625
-	ChangesHealth@SelfHealing:
-		Step: 13
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -729,8 +707,6 @@ td_nod_buggymkii:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	RenderSprites:
 		Image: td_nod_buggymkii
 	Turreted:
@@ -847,8 +823,6 @@ td_nod_lighttankmkii:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Turreted:
 		TurnSpeed: 20
 	AttackTurreted:
@@ -911,8 +885,6 @@ td_nod_flametankmkii:
 		HP: 200000
 	Repairable:
 		HpPerStep: 10000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Selectable:
 		DecorationBounds: 1280, 1280, 0, -128
 	Turreted:
@@ -946,8 +918,6 @@ td_nod_stealthharvester:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Harvester:
 		BaleLoadDelay: 2
 		BaleUnloadDelay: 1

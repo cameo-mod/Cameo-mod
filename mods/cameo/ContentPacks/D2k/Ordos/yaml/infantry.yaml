@@ -22,8 +22,6 @@ ordos_antiairtrooper:
 		Description: template_antitank_antiair_infantry.description
 	Health:
 		HP: 15000
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Mobile:
 		Speed: 45
 	Armament:
@@ -74,8 +72,6 @@ ordos_lightinfantry:
 		Prerequisites: ~ordos_barracks
 	Health:
 		HP: 28000
-	ChangesHealth@SelfHealing:
-		Step: 28
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -138,8 +134,6 @@ ordos_rockettrooper:
 		AddToArmyValue: true
 	Health:
 		HP: 12000
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Mobile:
 		Speed: 48
 	Armament:
@@ -183,8 +177,6 @@ ordos_chemicaltrooper:
 		IconPalette: player
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Mobile:
 		Speed: 45
 		Voice: Move
@@ -236,8 +228,6 @@ ordos_mortartrooper:
 		Description: template_antitank_antiair_infantry.description
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Mobile:
 		Speed: 40
 	Armament:
@@ -402,8 +392,6 @@ ordos_facedancer:
 		Description: Genetically modified humanoid armed with a powerful rocket launcher. Can cloak. Does not lie down when attacked. Immune to Tiberium
 	Health:
 		HP: 90000
-	ChangesHealth@SelfHealing:
-		Step: 90
 	Mobile:
 		Speed: 75
 	AttackFrontal:
@@ -464,8 +452,6 @@ ordos_contaminator:
 		Description: The Contaminator is a genetically engineered organism\nthat infects a target organic unit to create another Contaminator\nwhen the target dies. They are quite\nresilient to gunfire.\n  Strong vs Buildings, Infantry, Air, Vehicles\n  Weak vs Siege
 	Health:
 		HP: 75000
-	ChangesHealth@SelfHealing:
-		Step: 75
 	Mobile:
 		Speed: 60
 	AttackFrontal:
@@ -807,8 +793,6 @@ ordos_leech:
 		CrushClasses: vehicle
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: LeechJump
 		LocalOffset: 0,0,200

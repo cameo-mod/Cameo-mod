@@ -304,8 +304,6 @@ harkonnen_devastatormech:
 		SoundFiles: DEVASTATORMELTDOWN.WAV
 		RequiresCondition: overload
 		Interval: 250
-	ChangesHealth@SelfHealing:
-		Step: 250
 	Selectable:
 		DecorationBounds: 1408, 1216, 0, 0
 	FireProjectilesOnDeath@MELTDOWN:
@@ -356,8 +354,6 @@ harkonnen_spiceharvester:
 		HP: 240000
 	Repairable:
 		HpPerStep: 10000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Armor:
 		Type: Heavy
 	Mobile:

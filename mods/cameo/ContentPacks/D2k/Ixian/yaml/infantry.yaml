@@ -25,8 +25,6 @@ ixian_lightinfantry:
 		Prerequisites: ~ixian_barracks
 	Health:
 		HP: 32000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -92,8 +90,6 @@ ixian_rockettrooper:
 		AddToArmyValue: true
 	Health:
 		HP: 12000
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Mobile:
 		Speed: 48
 	Armament:
@@ -140,8 +136,6 @@ ixian_twinrockettrooper:
 		AddToArmyValue: true
 	Health:
 		HP: 24000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Mobile:
 		Speed: 48
 	Armament:
@@ -187,8 +181,6 @@ ixian_shockinfantry:
 		Prerequisites: ~ixian_barracks, ixian_ixresearchcenter, ~!ixian_promotion_storminfantry
 	Health:
 		HP: 36000
-	ChangesHealth@SelfHealing:
-		Step: 36
 	Mobile:
 		Speed: 45
 	Armament@PRIMARY:
@@ -241,8 +233,6 @@ ixian_storminfantry:
 		Speed: 44
 	Health:
 		HP: 44000
-	ChangesHealth@SelfHealing:
-		Step: 44
 	Armament@PRIMARY:
 		Weapon: D2K_StormGunInf
 		LocalOffset: 135,0,200
@@ -293,8 +283,6 @@ heavy_inf.ixian:
 		Speed: 50
 	Health:
 		HP: 32000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Armament@PRIMARY:
 		Weapon: RashidanGun
 		LocalOffset: 128,0,256

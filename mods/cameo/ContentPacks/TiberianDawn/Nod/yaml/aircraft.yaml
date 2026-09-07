@@ -22,8 +22,6 @@ td_nod_chinooktransport:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	EjectOnDeath:
 		PilotActor: td_nod_minigunner
 	WithIdleOverlay@ROTOR1AIR:
@@ -95,8 +93,6 @@ td_nod_apacheattackhelicopter:
 		HP: 45000
 	Repairable:
 		HpPerStep: 2250
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Armament@PRIMARY:
 		Weapon: HeliGun
 		LocalOffset: 128,-213,-85, 128,213,-85
@@ -192,8 +188,6 @@ td_nod_venom:
 		HP: 27500
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 11
 	Armament@Base:
 		Weapon: VenomLaser
 		LocalOffset: 750,0,-250

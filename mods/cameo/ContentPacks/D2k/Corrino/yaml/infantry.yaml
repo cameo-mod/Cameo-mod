@@ -22,8 +22,6 @@ corrino_sardaukar_bazooka:
 		AddToArmyValue: true
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 56
 	Armor:
@@ -77,8 +75,6 @@ corrino_lightinfantry:
 		Prerequisites: ~corrino_barracks
 	Health:
 		HP: 32000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Mobile:
 		Speed: 56
 	Armament@PRIMARY:
@@ -187,8 +183,6 @@ corrino_sardaukar_berserker:
 		AddToArmyValue: true
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 56
 	Armor:
@@ -229,8 +223,6 @@ corrino_sardaukar_sword:
 		AddToArmyValue: true
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 56
 	Armor:
@@ -275,8 +267,6 @@ corrino_sardaukar_javelin:
 		AddToArmyValue: true
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 56
 	Armor:
@@ -321,8 +311,6 @@ corrino_sardaukar_laser:
 		AddToArmyValue: true
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 56
 	Armor:

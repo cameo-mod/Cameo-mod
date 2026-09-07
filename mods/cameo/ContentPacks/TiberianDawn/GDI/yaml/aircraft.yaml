@@ -22,8 +22,6 @@ td_gdi_chinooktransport:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	EjectOnDeath:
 		PilotActor: td_gdi_minigunner
 	WithIdleOverlay@ROTOR1AIR:
@@ -98,8 +96,6 @@ td_gdi_orca:
 		HP: 32500
 	Repairable:
 		HpPerStep: 1625
-	ChangesHealth@SelfHealing:
-		Step: 13
 	Armament@PRIMARY:
 		Weapon: OrcaMissiles
 		LocalOffset: 427,-171,-213, 427,171,-213
@@ -218,8 +214,6 @@ A10Carrier:
 		TakeUpCellWhenLand: false
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 4
 	Armament@GUNS:
 		Name: primary
 		Weapon: VulcanA10Carrier
@@ -309,8 +303,6 @@ td_gdi_firehawk:
 		HP: 180000
 	Repairable:
 		HpPerStep: 9000
-	ChangesHealth@SelfHealing:
-		Step: 72
 	Armament:
 		Weapon: FirehawkMissiles_AA
 		LocalOffset: 0,-960,0, 0,960,0, 0,-480,0, 0,480,0
@@ -420,8 +412,6 @@ gdirigdrone:
 		Description: template_drone_slave.description
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Valued:
 		Cost: 500
 	Aircraft:
