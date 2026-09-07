@@ -1546,6 +1546,9 @@ ATMine:
 	Inherits@2: ^HeavyMissile
 	Inherits@compat: ^ATMineDemolitionCompatibility
 	Report: mineblo1.aud
+	Warhead@ATMineDemolition_Light:
+		Damage: 110000
+	-Warhead@Demolition_Light:
 	-Warhead@HeavyMissile:
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
