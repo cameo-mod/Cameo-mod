@@ -1,4 +1,4 @@
-ra1_soviets_sovietmortarsoldier:
+ra1_soviets_mortarsoldier:
 	Defaults:
 		Filename: ra1_soviets_promotion_unlockmortarsoldier_ra1_soviets_promotion_mortarsoldier_mortarsoldier.shp
 		Scale: 1.6
@@ -97,10 +97,10 @@ ra1_soviets_sovietmortarsoldier:
 	icon:
 		Filename: ra1_soviets_promotion_mortarsoldier_icon.png
 
-ra1_soviets_sovietgrenadier:
+ra1_soviets_grenadier:
 	Inherits: td_gdi_grenadier
 	icon:
-		Filename: ra1_soviets_sovietgrenadier_icon.png
+		Filename: ra1_soviets_grenadier_icon.png
 
 ra1_soviets_firerocketsoldier:
 	Inherits: e3
@@ -109,10 +109,10 @@ ra1_soviets_firerocketsoldier:
 	icon:
 		Filename: ra1_soviets_firerocketsoldier_icon.shp
 
-ra1_soviets_sovietflamethrower:
+ra1_soviets_flamethrower:
 	Inherits: td_nod_flamethrower
 	icon:
-		Filename: ra1_soviets_sovietflamethrower_icon.png
+		Filename: ra1_soviets_flamethrower_icon.png
 
 ra1_soviets_actordogname:
 	Defaults:
@@ -488,9 +488,9 @@ ra1_soviets_zapper:
 	icon:
 		Filename: ra1_soviets_zapper_icon.png
 
-ra1_soviets_sovietheavyindustrialminer:
+ra1_soviets_heavyindustrialminer:
 	Defaults:
-		Filename: ra1_soviets_sovietheavyindustrialminer_ra1_soviets_heavyindustrialminer_sovietheavyoretruckspritesheet.png
+		Filename: ra1_soviets_heavyindustrialminer_sovietheavyoretruckspritesheet.png
 		Scale: 1.25
 	idle:
 		Facings: 32
@@ -508,11 +508,11 @@ ra1_soviets_sovietheavyindustrialminer:
 		Tick: 105
 	icon:
 		Start: 0
-		Filename: ra1_soviets_sovietheavyindustrialminer_icon.png
+		Filename: ra1_soviets_heavyindustrialminer_icon.png
 
-ra1_soviets_sovietheavytank:
+ra1_soviets_heavytank:
 	Defaults:
-		Filename: ra1_soviets_sovietheavytank.shp
+		Filename: ra1_soviets_heavytank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -524,9 +524,9 @@ ra1_soviets_sovietheavytank:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: ra1_soviets_sovietheavytank_icon.shp
+		Filename: ra1_soviets_heavytank_icon.shp
 
-ra1_soviets_sovietmammothtank:
+ra1_soviets_mammothtank:
 	Defaults:
 		Filename: 4tnk.shp
 	idle:
@@ -540,7 +540,7 @@ ra1_soviets_sovietmammothtank:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: ra1_soviets_sovietmammothtank_icon.shp
+		Filename: ra1_soviets_mammothtank_icon.shp
 
 ra1_soviets_siegemammothtank:
 	Defaults:
@@ -720,32 +720,32 @@ ra1_soviets_btr80:
 raproc:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: ra1_soviets_sovietorerefinery_ra1_allies_alliedorerefinery_raproc.shp
+		Filename: ra1_allies_orerefinery_raproc.shp
 	idle:
 		ZOffset: -1c511
 	damaged-idle:
 		ZOffset: -1c511
 	idle-top:
-		Filename: ra1_soviets_sovietorerefinery_ra1_allies_alliedorerefinery_raproctop.shp
+		Filename: ra1_allies_orerefinery_raproctop.shp
 		ZOffset: 0
 	damaged-idle-top:
-		Filename: ra1_soviets_sovietorerefinery_ra1_allies_alliedorerefinery_raproctop.shp
+		Filename: ra1_allies_orerefinery_raproctop.shp
 		Start: 1
 		ZOffset: 0
 	make:
-		Filename: ra1_soviets_sovietorerefinery_ra1_allies_alliedorerefinery_raprocmake.shp
+		Filename: ra1_allies_orerefinery_raprocmake.shp
 		Length: *
 	dead:
-		Filename: ra1_soviets_sovietorerefinery_ra1_allies_alliedorerefinery_raprocdead.shp
+		Filename: ra1_allies_orerefinery_raprocdead.shp
 		Tick: 800
 	bib:
 	icon:
-		Filename: ra1_soviets_sovietorerefinery_icon.png
+		Filename: ra1_soviets_orerefinery_icon.png
 
-ra1_soviets_sovietbarracks:
+ra1_soviets_barracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: ra1_soviets_sovietbarracks.shp
+		Filename: ra1_soviets_barracks.shp
 	idle:
 		Length: 10
 		Offset: 0,-12
@@ -754,85 +754,85 @@ ra1_soviets_sovietbarracks:
 		Length: 10
 		Offset: 0,-12
 	make:
-		Filename: ra1_soviets_sovietbarracks_ra1_soviets_barracks_make.shp
+		Filename: ra1_soviets_barracks_make.shp
 		Length: *
 		Offset: 0,-12
 	dead:
 	bib:
 	icon:
-		Filename: ra1_soviets_sovietbarracks_icon.png
+		Filename: ra1_soviets_barracks_icon.png
 
-ra1_soviets_soviettechcenter:
+ra1_soviets_techcenter:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: ra1_soviets_soviettechcenter.shp
+		Filename: ra1_soviets_techcenter.shp
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: ra1_soviets_soviettechcenter_ra1_soviets_techcenter_stekmake.shp
+		Filename: ra1_soviets_techcenter_stekmake.shp
 		Length: *
 	dead:
 	bib:
 	icon:
-		Filename: ra1_soviets_soviettechcenter_icon.png
+		Filename: ra1_soviets_techcenter_icon.png
 
-ra1_soviets_sovietwarfactory:
+ra1_soviets_warfactory:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweap.shp
+		Filename: ra1_allies_warfactory_raweap.shp
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweapmake.shp
+		Filename: ra1_allies_warfactory_raweapmake.shp
 		Length: *
 	build-top:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweap3.shp
+		Filename: ra1_allies_warfactory_raweap3.shp
 		Length: 10
 	damaged-build-top:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweap2.shp
+		Filename: ra1_allies_warfactory_raweap2.shp
 		Start: 4
 		Length: 4
 	customhack:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweap3.shp
+		Filename: ra1_allies_warfactory_raweap3.shp
 		Length: 1
 	damaged-customhack:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweap2.shp
+		Filename: ra1_allies_warfactory_raweap2.shp
 		Start: 4
 		Length: 1
 	dead:
 	bib:
 	icon:
-		Filename: ra1_soviets_sovietwarfactory_icon.png
+		Filename: ra1_soviets_warfactory_icon.png
 
-ra1_soviets_sovietlargefactory:
+ra1_soviets_largefactory:
 	Inherits: ^WithBuildingBib1
 	Defaults:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweap.shp
+		Filename: ra1_allies_warfactory_raweap.shp
 		Scale: 1.333
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweapmake.shp
+		Filename: ra1_allies_warfactory_raweapmake.shp
 		Length: *
 	build-top:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweap3.shp
+		Filename: ra1_allies_warfactory_raweap3.shp
 		Length: 10
 	damaged-build-top:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweap2.shp
+		Filename: ra1_allies_warfactory_raweap2.shp
 		Start: 4
 		Length: 4
 	customhack:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweap3.shp
+		Filename: ra1_allies_warfactory_raweap3.shp
 		Length: 1
 	damaged-customhack:
-		Filename: ra1_soviets_sovietwarfactory_ra1_allies_alliedwarfactory_raweap2.shp
+		Filename: ra1_allies_warfactory_raweap2.shp
 		Start: 4
 		Length: 1
 	smoke:
-		Filename: ra1_soviets_sovietlargefactory_ra1_soviets_largefactory_raweapsmoke.png
+		Filename: ra1_soviets_largefactory_raweapsmoke.png
 		Length: *
 		Tick: 100
 		ZOffset: 100
@@ -840,19 +840,19 @@ ra1_soviets_sovietlargefactory:
 	bib:
 		Scale: 1
 	icon:
-		Filename: ra1_soviets_sovietlargefactory_icon.png
+		Filename: ra1_soviets_largefactory_icon.png
 
-ra1_soviets_sovietairfield:
+ra1_soviets_airfield:
 	Defaults:
-		Filename: ra1_soviets_sovietairfield.shp
+		Filename: ra1_soviets_airfield.shp
 	idle:
-		Filename: ra1_soviets_sovietairfield_ra1_soviets_airfield_raafldidle.shp
+		Filename: ra1_soviets_airfield_raafldidle.shp
 		Length: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	damaged-idle:
-		Filename: ra1_soviets_sovietairfield_ra1_soviets_airfield_raafldidle.shp
+		Filename: ra1_soviets_airfield_raafldidle.shp
 		Start: 8
 		Length: 8
 		Tick: 160
@@ -870,12 +870,12 @@ ra1_soviets_sovietairfield:
 		ZOffset: -1023
 		Offset: 0,-6
 	make:
-		Filename: ra1_soviets_sovietairfield_ra1_soviets_airfield_make.shp
+		Filename: ra1_soviets_airfield_make.shp
 		Length: *
 		Offset: 0,-6
 	dead:
 	icon:
-		Filename: ra1_soviets_sovietairfield_icon.png
+		Filename: ra1_soviets_airfield_icon.png
 
 ra1_soviets_largesovietairfield:
 	Defaults:
@@ -925,12 +925,12 @@ ra1_soviets_largesovietairfield:
 rafixs:
 	Inherits: rafix
 	Defaults:
-		Filename: ra1_soviets_sovietservicedepot_ra1_soviets_servicedepot_rafixs.shp
+		Filename: ra1_soviets_servicedepot_rafixs.shp
 
-ra1_soviets_sovietsamsite:
+ra1_soviets_samsite:
 	Inherits: ^WithBuildingBibSam
 	Defaults:
-		Filename: ra1_soviets_sovietsamsite.shp
+		Filename: ra1_soviets_samsite.shp
 		Offset: -2,-4
 	idle:
 		Facings: 32
@@ -938,10 +938,10 @@ ra1_soviets_sovietsamsite:
 		Start: 34
 		Facings: 32
 	make:
-		Filename: ra1_soviets_sovietsamsite_ra1_soviets_samsite_make.shp
+		Filename: ra1_soviets_samsite_make.shp
 		Length: *
 	muzzle:
-		Filename: ra1_soviets_sovietsamsite_ra1_soviets_samsite_fire.shp
+		Filename: ra1_soviets_samsite_fire.shp
 		Length: 18
 		Facings: 8
 		Offset: -2,12
@@ -949,7 +949,7 @@ ra1_soviets_sovietsamsite:
 	bib:
 		Offset: 0,0
 	icon:
-		Filename: ra1_soviets_sovietsamsite_icon.png
+		Filename: ra1_soviets_samsite_icon.png
 		Offset: 0,0
 
 ra1_soviets_flametower:
@@ -1019,9 +1019,9 @@ ra1_soviets_ironcurtain:
 	icon:
 		Filename: ra1_soviets_ironcurtain_icon.png
 
-ra1_soviets_sovietmissilesilo:
+ra1_soviets_missilesilo:
 	Defaults:
-		Filename: ra1_soviets_sovietmissilesilo.tem
+		Filename: ra1_soviets_missilesilo.tem
 		Scale: 1
 		TilesetFilenames:
 			WINTER: mslo.win
@@ -1038,7 +1038,7 @@ ra1_soviets_sovietmissilesilo:
 	damaged-idle:
 		Start: 8
 	make:
-		Filename: ra1_soviets_sovietmissilesilo_ra1_soviets_missilesilo_make.tem
+		Filename: ra1_soviets_missilesilo_make.tem
 		TilesetFilenames:
 			WINTER: mslomake.win
 			SNOW: mslomake.sno
@@ -1060,7 +1060,7 @@ ra1_soviets_sovietmissilesilo:
 		Length: 7
 	dead:
 	icon:
-		Filename: ra1_soviets_sovietmissilesilo_icon.png
+		Filename: ra1_soviets_missilesilo_icon.png
 		TilesetFilenames:
 
 ra1_soviets_migattackbomber:

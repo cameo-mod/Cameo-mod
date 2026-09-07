@@ -16,7 +16,7 @@ ra1_soviets_v1rockettruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_sovietradardome, ~!ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_radardome, ~!ra1_soviets_doctrine_heavyarmordoctrine
 		Queue: Vehicle, RAVehicle
 		Description: actor_v1truck.description
 	Mobile:
@@ -93,7 +93,7 @@ ra1_soviets_grad:
 		Name: Grad
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmordoctrine
 		Queue: Vehicle, RAVehicle
 		Description: actor_v2rl.description
 	Mobile:
@@ -160,7 +160,7 @@ ra1_soviets_v2rocketlauncher:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~!ra1_soviets_doctrine_nuclearwardoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~!ra1_soviets_doctrine_nuclearwardoctrine
 		Description: actor_v2rl.description
 	Valued:
 		Cost: 1600
@@ -235,7 +235,7 @@ ra1_soviets_nuclearv2launcher:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~ra1_soviets_doctrine_nuclearwardoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_doctrine_nuclearwardoctrine
 		Description: actor_v2rl.description
 	Valued:
 		Cost: 2300
@@ -290,7 +290,7 @@ ra1_soviets_nuclearv2launcher:
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_infernodoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_thermonuclearrockets, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
 
-ra1_soviets_sovietheavytank:
+ra1_soviets_heavytank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -303,7 +303,7 @@ ra1_soviets_sovietheavytank:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~!ra1_soviets_upgrade_hammertankupgrade
+		Prerequisites: ~ra1_soviets_warfactory, ~!ra1_soviets_upgrade_hammertankupgrade
 		BuildPaletteOrder: 120
 		Description: actor_3tnk.description
 	Valued:
@@ -372,7 +372,7 @@ ra1_soviets_hammertank:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_upgrade_hammertankupgrade, ~!ra1_soviets_upgrade_heavyteslatankupgrade, ~!ra1_soviets_upgrade_kotinnucleartankupgrade
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_upgrade_hammertankupgrade, ~!ra1_soviets_upgrade_heavyteslatankupgrade, ~!ra1_soviets_upgrade_kotinnucleartankupgrade
 		BuildPaletteOrder: 120
 		Description: actor_kotin.description
 	Valued:
@@ -443,7 +443,7 @@ ra1_soviets_gorynychtank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 190
-		Prerequisites: ~ra1_soviets_sovietwarfactory
+		Prerequisites: ~ra1_soviets_warfactory
 		Description: Heavy assault tank with multiple weapons.\n  Strong vs Vehicles, Infantry
 	Valued:
 		Cost: 1300
@@ -489,7 +489,7 @@ ra1_soviets_heavyteslatank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_upgrade_heavyteslatankupgrade
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_upgrade_heavyteslatankupgrade
 		Description: actor_ttnk2.description
 	Valued:
 		Cost: 3500
@@ -588,7 +588,7 @@ ra1_soviets_kotinnucleartank:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_upgrade_kotinnucleartankupgrade
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_upgrade_kotinnucleartankupgrade
 		BuildPaletteOrder: 120
 		Description: actor_kotin.description
 	Valued:
@@ -648,7 +648,7 @@ ra1_soviets_kotinnucleartank:
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_stalinium
 
-ra1_soviets_sovietmammothtank:
+ra1_soviets_mammothtank:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -665,7 +665,7 @@ ra1_soviets_sovietmammothtank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~!ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~!ra1_soviets_doctrine_heavyarmordoctrine
 		Description: actor_htnk.description
 	Valued:
 		Cost: 2000
@@ -802,7 +802,7 @@ ra1_soviets_siegemammothtank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmordoctrine
 		Description: actor_htnk.description
 	Valued:
 		Cost: 4000
@@ -929,26 +929,26 @@ ra1_soviets_siegemammothtank:
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_mammothtanktargetingcomputer, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_stalinium
 
-ra1_soviets_sovietoretruck:
+ra1_soviets_oretruck:
 	Inherits: ^RAHARV
 	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Tooltip:
 		Name: Soviet Ore Truck
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietorerefinery, ~!ra1_soviets_doctrine_industrialefficiencydoctrine
+		Prerequisites: ~ra1_soviets_orerefinery, ~!ra1_soviets_doctrine_industrialefficiencydoctrine
 		Description: Harvests ore for processing.\n  Unarmed
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_industrialefficiencydoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_wareconomy, ra1_soviets_upgrade_stalinium
 
-ra1_soviets_sovietheavyindustrialminer:
-	Inherits: ra1_soviets_sovietoretruck
+ra1_soviets_heavyindustrialminer:
+	Inherits: ra1_soviets_oretruck
 	Tooltip:
 		Name: Soviet Heavy Industrial Miner
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_sovietorerefinery, ~ra1_soviets_doctrine_industrialefficiencydoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_orerefinery, ~ra1_soviets_doctrine_industrialefficiencydoctrine
 		Description: Soviet Heavy Industrial Miner
 	Valued:
 		Cost: 1200
@@ -968,24 +968,24 @@ ra1_soviets_sovietheavyindustrialminer:
 		Speed: 80
 		TurnSpeed: 16
 	WithHarvesterSpriteBody:
-		ImageByFullness: ra1_soviets_sovietheavyindustrialminer
+		ImageByFullness: ra1_soviets_heavyindustrialminer
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
 	RenderSprites:
-		Image: ra1_soviets_sovietheavyindustrialminer
+		Image: ra1_soviets_heavyindustrialminer
 		PlayerPalette: player_rgba
 
-ra1_soviets_sovietmobileconstructionvehicle:
+ra1_soviets_mobileconstructionvehicle:
 	Inherits: ^RAMCV
 	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Tooltip:
 		Name: Soviet Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_sovietservicedepot
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_servicedepot
 		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
-		IntoActor: ra1_soviets_sovietconstructionyard
+		IntoActor: ra1_soviets_constructionyard
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	ActorStatValues:
@@ -1010,7 +1010,7 @@ ra1_soviets_teslatank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_sovietradardome
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_radardome
 		Description: actor_ttnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1073,7 +1073,7 @@ ra1_soviets_heatraytank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_upgrade_heatraytank
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_upgrade_heatraytank
 		Description: actor_ttnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1133,7 +1133,7 @@ ra1_soviets_flaktruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~!ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ~!ra1_soviets_doctrine_conscriptiondoctrine
 		Description: actor_ftrk.description
 	Valued:
 		Cost: 800
@@ -1170,7 +1170,7 @@ ra1_soviets_flaktruck:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 4
-		InitialUnits: ra1_soviets_rifleinfantry, ra1_soviets_sovietgrenadier, ra1_soviets_sovietrocketsoldier, ra1_soviets_sovietflamethrower
+		InitialUnits: ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower
 	SelectionDecorations:
 	Selectable:
 		Class: ra1_soviets_flaktruck
@@ -1206,7 +1206,7 @@ ra1_soviets_btr80:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_doctrine_conscriptiondoctrine
 		Description: actor_btr.description
 	Valued:
 		Cost: 1600
@@ -1273,7 +1273,7 @@ ra1_soviets_btr80:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 7
-		InitialUnits: ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_sovietgrenadier, ra1_soviets_molotovconscript, ra1_soviets_sovietrocketsoldier, ra1_soviets_dragunovantimaterialsniper, ra1_soviets_sovietflamethrower
+		InitialUnits: ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_dragunovantimaterialsniper, ra1_soviets_flamethrower
 	RenderSprites:
 		Image: ra1_soviets_btr80
 	Voiced:
@@ -1330,7 +1330,7 @@ ra1_soviets_nukedemotruck:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		BuildPaletteOrder: 160
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter
 		Description: actor_dtrk.description
 	Valued:
 		Cost: 1500
@@ -1390,7 +1390,7 @@ ra1_soviets_madtank:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 190
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter
 		Description: actor_qtnk.description
 	Valued:
 		Cost: 3000
@@ -1455,7 +1455,7 @@ ra1_soviets_stalinfist:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 190
-		Prerequisites: ~ra1_soviets_soviettechcenter
+		Prerequisites: ~ra1_soviets_techcenter
 		Description: Mobile command vehicle.\n  Strong vs Vehicles, Infantry
 		BuildLimit: 1
 	Valued:
@@ -1476,7 +1476,7 @@ ra1_soviets_stalinfist:
 		Bounds: 3072, 3072
 		DecorationBounds: 3072, 3072
 	Transforms:
-		IntoActor: ra1_soviets_sovietlargefactory
+		IntoActor: ra1_soviets_largefactory
 		Offset: -1,0
 		Facing: 0
 	Voiced:
@@ -1519,7 +1519,7 @@ ra1_soviets_gatlingtank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_promotion_gatlingtank, ~!ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_promotion_gatlingtank, ~!ra1_soviets_doctrine_conscriptiondoctrine
 		Description: actor_gtnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1672,7 +1672,7 @@ ra1_soviets_monstertank:
 	Buildable:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~ra1_soviets_promotion_monstertank
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_promotion_monstertank
 		BuildPaletteOrder: 120
 		Description: actor_monstertank.description
 	Valued:

@@ -1,4 +1,4 @@
-ra1_soviets_sovietmissilesilo:
+ra1_soviets_missilesilo:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x1Shape
 	Inherits@SW: ^PrimarySuperweapon
@@ -8,7 +8,7 @@ ra1_soviets_sovietmissilesilo:
 	Tooltip:
 		Name: Soviet Missile Silo
 	Buildable:
-		Prerequisites: ~ra1_soviets_soviettechcenter, ~techlevel.superweapons, !abomb
+		Prerequisites: ~ra1_soviets_techcenter, ~techlevel.superweapons, !abomb
 		Description: actor_mslo.description
 	Building:
 		Footprint: xx
@@ -68,7 +68,7 @@ ra1_soviets_ironcurtain:
 	Inherits@sell: ^RASovietSpawnActorsOnSell
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~ra1_soviets_soviettechcenter, ~techlevel.superweapons, !ra1_soviets_ironcurtain_swlimit
+		Prerequisites: ~ra1_soviets_techcenter, ~techlevel.superweapons, !ra1_soviets_ironcurtain_swlimit
 		Description: actor_iron.description
 	Tooltip:
 		Name: Iron Curtain
@@ -132,7 +132,7 @@ ra1_soviets_flametower:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra1_soviets_sovietconstructionyard, ra1_soviets_sovietbarracks
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_barracks
 		Description: actor_ftur.description
 	Valued:
 		Cost: 600
@@ -194,7 +194,7 @@ ra1_soviets_teslacoil:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
-		Prerequisites: ~ra1_soviets_sovietconstructionyard, ra1_soviets_soviettechcenter
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_techcenter
 		Description: actor_tsla.description
 	Valued:
 		Cost: 1500
@@ -241,7 +241,7 @@ ra1_soviets_teslacoil:
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_reactoroverload, ra1_soviets_upgrade_stalinium
 
-ra1_soviets_sovietsamsite:
+ra1_soviets_samsite:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^AntiAirDefenseTemplate
@@ -257,7 +257,7 @@ ra1_soviets_sovietsamsite:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 100
-		Prerequisites: ~ra1_soviets_sovietconstructionyard, ra1_soviets_sovietradardome
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_radardome
 		Description: actor_sam.description
 	Valued:
 		Cost: 700

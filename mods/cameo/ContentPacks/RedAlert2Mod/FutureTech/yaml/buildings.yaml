@@ -111,7 +111,7 @@ futuretech_troopgate:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
-	Inherits@ra1_soviets_sovietbarracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Tooltip:
 		Name: Troop Gate
 	Buildable:
@@ -467,13 +467,13 @@ futuretech_multiturretsystem:
 		Cost: 800
 	Tooltip:
 		Name: Multi Turret System
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
 	Tooltip@MISS:
 		Name: Javelin Turret System
 		RequiresCondition: ifv-miss || ifv-flak
 	Tooltip@FRAG:
 		Name: Frag Turret System
-		RequiresCondition: ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_alliedsniper || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono
+		RequiresCondition: ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_sniper || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono
 	Tooltip@Sigma:
 		Name: Sigma Turret System
 		RequiresCondition: ifv-hero
@@ -516,8 +516,8 @@ futuretech_multiturretsystem:
 		Condition: ifv-chem
 	ExternalCondition@hero:
 		Condition: ifv-hero
-	ExternalCondition@ra1_allies_alliedsniper:
-		Condition: ifv-ra1_allies_alliedsniper
+	ExternalCondition@ra1_allies_sniper:
+		Condition: ifv-ra1_allies_sniper
 	ExternalCondition@spy:
 		Condition: ifv-spy
 	ExternalCondition@chrono:
@@ -538,7 +538,7 @@ futuretech_multiturretsystem:
 		Name: primary
 		Weapon: Future_MultiMissile
 		LocalOffset: 600,100,300, 600,-100,300, 600,0,300
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief
 		MuzzleSequence: muzzle
 	Armament@MISS:
 		Name: primary
@@ -549,7 +549,7 @@ futuretech_multiturretsystem:
 	Armament@FRAG:
 		Name: primary
 		Weapon: Future_MultiMissile_Frag
-		RequiresCondition: ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono || ifv-spy || ifv-thief
+		RequiresCondition: ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_sniper || ifv-flak || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono || ifv-spy || ifv-thief
 		LocalOffset: 600,100,300, 600,-100,300, 600,0,300
 		MuzzleSequence: muzzle
 	Armament@Sigma:

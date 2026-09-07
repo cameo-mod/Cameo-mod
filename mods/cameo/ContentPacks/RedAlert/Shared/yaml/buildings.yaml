@@ -85,11 +85,11 @@ ra1_soviets_kennel:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^RASovietSpawnActorsOnSell
 	Inherits@shape: ^1x1Shape
-	Inherits@ra1_soviets_sovietbarracks: ^IsDogKennel
+	Inherits@ra1_soviets_barracks: ^IsDogKennel
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 175
-		Prerequisites: ~ra1_soviets_sovietconstructionyard, ra1_soviets_sovietbarracks, ~disabled
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_barracks, ~disabled
 		Description: Trains Attack Dogs.
 	Valued:
 		Cost: 200
@@ -153,7 +153,7 @@ ra1_oresilo:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-ra1_allies_alliednavalyard:
+ra1_allies_navalyard:
 	Inherits: ^BaseBuilding
 	Inherits@shipyard: ^IsShipyard
 	Inherits@shape: ^3x3Shape
@@ -161,7 +161,7 @@ ra1_allies_alliednavalyard:
 	Tooltip:
 		Name: Allied Naval Yard
 	Buildable:
-		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedorerefinery, ~globalnaval
+		Prerequisites: ~ra1_allies_constructionyard, ra1_allies_orerefinery, ~globalnaval
 		Description: Naval production structure.
 	Building:
 		Footprint: =+= +++ =+=
@@ -217,7 +217,7 @@ ra1_soviets_subpen:
 	Tooltip:
 		Name: Soviet Sub Pen
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietconstructionyard, ra1_soviets_sovietorerefinery, ~globalnaval
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_orerefinery, ~globalnaval
 		Queue: Building, RABuilding
 		Description: template_shipyard.description
 	Building:

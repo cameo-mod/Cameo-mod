@@ -9,7 +9,7 @@ ra1_allies_gunboat:
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra1_allies_alliednavalyard
+		Prerequisites: ~ra1_allies_navalyard
 		Queue: Naval, RANaval
 		Description: actor_ra1_allies_gunboat.description
 	Valued:
@@ -83,7 +83,7 @@ ra1_allies_destroyer:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_allies_alliednavalyard, ra1_allies_alliedradardome
+		Prerequisites: ~ra1_allies_navalyard, ra1_allies_radardome
 		Queue: Naval, RANaval
 		Description: actor_ra1_allies_destroyer.description
 	Mobile:
@@ -170,7 +170,7 @@ ra1_allies_cruiser:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_allies_alliednavalyard, ra1_allies_alliedtechcenter
+		Prerequisites: ~ra1_allies_navalyard, ra1_allies_techcenter
 		Queue: Naval, RANaval
 		Description: actor_ra1_allies_cruiser.description
 	Mobile:
@@ -636,7 +636,7 @@ ra1_soviets_missilesubmarine:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_subpen, ra1_soviets_soviettechcenter
+		Prerequisites: ~ra1_soviets_subpen, ra1_soviets_techcenter
 		Queue: Naval, RANaval
 		Description: actor_ra1_soviets_missilesubmarine.description
 	Mobile:

@@ -2960,7 +2960,7 @@ susalittlebird:
 			gle3: ifv-miss
 			che3: ifv-miss
 			e3: ifv-miss
-			ra1_allies_alliedrocketsoldier: ifv-miss
+			ra1_allies_rocketsoldier: ifv-miss
 			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 	Armament@MG:
@@ -8157,7 +8157,7 @@ sglballoon:
 			gle3: ifv-miss
 			che3: ifv-miss
 			e3: ifv-miss
-			ra1_allies_alliedrocketsoldier: ifv-miss
+			ra1_allies_rocketsoldier: ifv-miss
 			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 		InitialUnits: gle3,gle3
@@ -10465,7 +10465,7 @@ sglbus:
 		Ammo: 5
 		RearmSound: minelay1.aud
 	Rearmable:
-		RearmActors: fix,rafix,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,cra2nadept,cra2gadept,tsgtdept,chweap,usaweap,glweap,leangweap
+		RearmActors: fix,rafix,ra2_soviets_servicedepot,ra2_allies_servicedepot,c1fix,c2fix,c1rafix,c2rafix,cra2nadept,cra2gadept,tsgtdept,chweap,usaweap,glweap,leangweap
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -16025,7 +16025,7 @@ schleangtransporthelix:
 		Image: schtransporthelix
 
 CHE4:
-	Inherits: ra1_soviets_sovietflamethrower
+	Inherits: ra1_soviets_flamethrower
 	Inherits@horde: ^HordeBonus
 	Inherits@RadiationSuits: ^RadiationSuits
 	Buildable:

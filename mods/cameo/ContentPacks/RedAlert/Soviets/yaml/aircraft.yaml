@@ -12,7 +12,7 @@ ra1_soviets_yakscoutplane:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_sovietairfield, ~!ra1_soviets_upgrade_teslayak, ~!ra1_soviets_upgrade_armoredyak, ~!ra1_soviets_upgrade_nuclearyak
+		Prerequisites: ~ra1_soviets_airfield, ~!ra1_soviets_upgrade_teslayak, ~!ra1_soviets_upgrade_armoredyak, ~!ra1_soviets_upgrade_nuclearyak
 		Description: actor_yak.description
 	Valued:
 		Cost: 800
@@ -71,7 +71,7 @@ ra1_soviets_yakscoutplane:
 	SpawnActorOnDeath:
 		Actor: YAK.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietgrenadier
+		PilotActor: ra1_soviets_grenadier
 	LeavesTrails:
 		Offsets: -853,0,0
 		MovingInterval: 2
@@ -122,7 +122,7 @@ ra1_soviets_teslayak:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_sovietairfield, ~ra1_soviets_upgrade_teslayak
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_teslayak
 		Description: actor_yak.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -191,7 +191,7 @@ ra1_soviets_teslayak:
 	SpawnActorOnDeath:
 		Actor: yaktesla.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietgrenadier
+		PilotActor: ra1_soviets_grenadier
 	LeavesTrails:
 		Offsets: -900,0,300
 		MovingInterval: 2
@@ -238,7 +238,7 @@ ra1_soviets_armoredyak:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_sovietairfield, ~ra1_soviets_upgrade_armoredyak
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_armoredyak
 		Description: actor_yak.description
 	Valued:
 		Cost: 1600
@@ -290,7 +290,7 @@ ra1_soviets_armoredyak:
 	SpawnActorOnDeath:
 		Actor: yakarmored.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietgrenadier
+		PilotActor: ra1_soviets_grenadier
 	LeavesTrails:
 		Offsets: -900,0,150
 		MovingInterval: 2
@@ -340,7 +340,7 @@ ra1_soviets_nuclearyak:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_sovietairfield, ~ra1_soviets_upgrade_nuclearyak
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_nuclearyak
 		Description: actor_yak.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -395,7 +395,7 @@ ra1_soviets_nuclearyak:
 	SpawnActorOnDeath:
 		Actor: YAK.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietgrenadier
+		PilotActor: ra1_soviets_grenadier
 	LeavesTrails:
 		Offsets: -853,0,0
 		MovingInterval: 2
@@ -445,7 +445,7 @@ ra1_soviets_migattackbomber:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_sovietairfield, ra1_soviets_soviettechcenter, ~!ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_airfield, ra1_soviets_techcenter, ~!ra1_soviets_doctrine_heavyarmordoctrine
 		Description: actor_mig.description
 	Valued:
 		Cost: 1400
@@ -520,7 +520,7 @@ ra1_soviets_migattackbomber:
 	SpawnActorOnDeath:
 		Actor: MIG.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietflamethrower
+		PilotActor: ra1_soviets_flamethrower
 	LeavesTrails:
 		Offsets: -853,0,171
 		MovingInterval: 2
@@ -566,7 +566,7 @@ ra1_soviets_su57attackbomber:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_sovietairfield, ra1_soviets_soviettechcenter, ~ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_airfield, ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmordoctrine
 		Description: actor_su57.description
 	Valued:
 		Cost: 3000
@@ -635,7 +635,7 @@ ra1_soviets_su57attackbomber:
 	SpawnActorOnDeath:
 		Actor: su57.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietmortarsoldier
+		PilotActor: ra1_soviets_mortarsoldier
 	LeavesTrails:
 		Offsets: -853,0,171
 		MovingInterval: 2
@@ -685,7 +685,7 @@ ra1_soviets_hindattackhelicopter:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra1_soviets_sovietairfield, ~!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+		Prerequisites: ~ra1_soviets_airfield, ~!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
 		Description: actor_hind.description
 	Valued:
 		Cost: 1800
@@ -864,7 +864,7 @@ ra1_soviets_kamovattackhelicopter:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra1_soviets_sovietairfield, ~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
 		Description: actor_hind.description
 	Valued:
 		Cost: 2100
@@ -1053,7 +1053,7 @@ ra1_soviets_hiptransport:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~ra1_soviets_sovietairfield
+		Prerequisites: ~ra1_soviets_airfield
 		Queue: Aircraft, RAAircraft
 		Description: actor_tran.description
 	UpdatesPlayerStatistics:
@@ -1078,7 +1078,7 @@ ra1_soviets_hiptransport:
 		Offset: 0,0,400
 		Palette: ra_temperat
 	Cargo:
-		InitialUnits: ra1_soviets_actordogname, ra1_soviets_rifleinfantry, ra1_soviets_sovietgrenadier, ra1_soviets_sovietrocketsoldier, ra1_soviets_sovietflamethrower, ra1_soviets_shocktrooper, ra1_soviets_firerocketsoldier, ra1_soviets_sovietmortarsoldier
+		InitialUnits: ra1_soviets_actordogname, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_firerocketsoldier, ra1_soviets_mortarsoldier
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
 		AfterLoadDelay: 0
@@ -1133,7 +1133,7 @@ ra1_soviets_supersonicnuclearbomber:
 		Queue: Aircraft, RAAircraft
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_sovietairfield, ra1_soviets_soviettechcenter, ~ra1_soviets_promotion_supersonicnuclearbomber
+		Prerequisites: ~ra1_soviets_airfield, ra1_soviets_techcenter, ~ra1_soviets_promotion_supersonicnuclearbomber
 		Description: actor_mignuke.description
 	Valued:
 		Cost: 7000

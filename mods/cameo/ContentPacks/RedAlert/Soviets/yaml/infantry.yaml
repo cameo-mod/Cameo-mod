@@ -9,7 +9,7 @@ ra1_soviets_actordogname:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: ~ra1_soviets_sovietbarracks, ~!ra1_soviets_promotion_cyberdog
+		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_promotion_cyberdog
 		Description: actor_dog.description
 	Valued:
 		Cost: 200
@@ -118,7 +118,7 @@ ra1_soviets_rifleinfantry:
 	FirepowerMultiplier@ra1_soviets_rifleinfantry:
 		Modifier: 42
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietbarracks, ~!ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_doctrine_conscriptiondoctrine
 		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY:
 		Weapon: ra1_soviets_rifleinfantry_carbine
@@ -163,7 +163,7 @@ ra1_soviets_ak47conscript:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~ra1_soviets_sovietbarracks, ~ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_barracks, ~ra1_soviets_doctrine_conscriptiondoctrine
 		Queue: Infantry, RAInfantry
 		AdditionalActors: ra1_soviets_molotovconscript
 		Description: actor_e2.description
@@ -210,7 +210,7 @@ ra1_soviets_ak47conscript:
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscriptiondoctrine, ra1_soviets_upgrade_vengeance, ra1_soviets_upgrade_menofsteel
 
-ra1_soviets_sovietgrenadier:
+ra1_soviets_grenadier:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^GrenadierInfantryTemplate
@@ -229,7 +229,7 @@ ra1_soviets_sovietgrenadier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~ra1_soviets_sovietbarracks, ~!ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_doctrine_conscriptiondoctrine
 		Queue: Infantry, RAInfantry
 		Description: actor_e2.description
 	Mobile:
@@ -275,12 +275,12 @@ ra1_soviets_sovietgrenadier:
 	Voiced:
 		VoiceSet: RussianVoice
 	RenderSprites:
-		Image: ra1_soviets_sovietgrenadier
+		Image: ra1_soviets_grenadier
 		PlayerPalette: raplayer
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscriptiondoctrine, ra1_soviets_doctrine_infernodoctrine, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_menofsteel
 
-ra1_soviets_sovietmortarsoldier:
+ra1_soviets_mortarsoldier:
 	Inherits: ^Soldier
 	Inherits@Template: ^MortarInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -294,7 +294,7 @@ ra1_soviets_sovietmortarsoldier:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~ra1_soviets_sovietbarracks, ra1_soviets_sovietradardome, ~ra1_soviets_promotion_mortarsoldier
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_radardome, ~ra1_soviets_promotion_mortarsoldier
 		Description: actor_mortarsoldier.description
 	Valued:
 		Cost: 500
@@ -344,18 +344,18 @@ ra1_soviets_sovietmortarsoldier:
 	Voiced:
 		VoiceSet: RussianVoice
 	RenderSprites:
-		Image: ra1_soviets_sovietmortarsoldier
+		Image: ra1_soviets_mortarsoldier
 		PlayerPalette: playerra
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscriptiondoctrine, ra1_soviets_doctrine_infernodoctrine, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_menofsteel
 
-ra1_soviets_sovietrocketsoldier:
+ra1_soviets_rocketsoldier:
 	Inherits: ^RA1AlliesAlliedRocketSoldier
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Tooltip:
 		Name: Soviet Rocket Soldier
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietbarracks, ~!ra1_soviets_doctrine_infernodoctrine, ~!ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_doctrine_infernodoctrine, ~!ra1_soviets_doctrine_conscriptiondoctrine
 		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Voiced:
 		VoiceSet: RussianVoice
@@ -380,7 +380,7 @@ ra1_soviets_dragunovantimaterialsniper:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~ra1_soviets_sovietbarracks, ~ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_barracks, ~ra1_soviets_doctrine_conscriptiondoctrine
 		Queue: Infantry, RAInfantry
 		Description: Powerful Anti Material Sniper. Strong vs Tanks and Aircraft
 	Mobile:
@@ -427,7 +427,7 @@ ra1_soviets_firerocketsoldier:
 	Tooltip:
 		Name: Fire Rocket Soldier
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietbarracks, ~ra1_soviets_doctrine_infernodoctrine
+		Prerequisites: ~ra1_soviets_barracks, ~ra1_soviets_doctrine_infernodoctrine
 		Queue: Infantry, RAInfantry
 		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Valued:
@@ -469,7 +469,7 @@ ra1_soviets_firerocketsoldier:
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_menofsteel
 
-ra1_soviets_sovietflamethrower:
+ra1_soviets_flamethrower:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -490,7 +490,7 @@ ra1_soviets_sovietflamethrower:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 45
-		Prerequisites: ~ra1_soviets_sovietbarracks, ra1_soviets_sovietradardome
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_radardome
 		Description: actor_e4.description
 	Health:
 		HP: 16000
@@ -533,7 +533,7 @@ ra1_soviets_sovietflamethrower:
 		Weapon: FireballGunThermobaricExplode
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	RenderSprites:
-		Image: ra1_soviets_sovietflamethrower
+		Image: ra1_soviets_flamethrower
 		PlayerPalette: raplayer
 	Voiced:
 		VoiceSet: RussianVoice
@@ -554,7 +554,7 @@ ra1_soviets_shocktrooper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~ra1_soviets_sovietbarracks, ra1_soviets_soviettechcenter, ~!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_techcenter, ~!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
 		Description: actor_shok.description
 	Valued:
 		Cost: 600
@@ -621,7 +621,7 @@ ra1_soviets_zapper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~ra1_soviets_sovietbarracks, ra1_soviets_soviettechcenter, ~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_techcenter, ~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
 		Description: actor_shok.description
 	Valued:
 		Cost: 1200
@@ -694,7 +694,7 @@ ra1_soviets_commissar:
 	ChangesHealth@SelfHealing:
 		Step: 30
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietbarracks, ra1_soviets_upgrade_commissar
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_upgrade_commissar
 		Queue: Infantry, RAInfantry
 		Description: actor_gdiofficer.description
 	Armament@PRIMARY:
@@ -763,7 +763,7 @@ ra1_soviets_cyberdog:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: ~ra1_soviets_sovietbarracks, ~ra1_soviets_promotion_cyberdog
+		Prerequisites: ~ra1_soviets_barracks, ~ra1_soviets_promotion_cyberdog
 		Description: Cybernetically modified dog that is far more durable and can attack vehicles.
 	Valued:
 		Cost: 1000
@@ -879,7 +879,7 @@ ra1_soviets_volkov:
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		BuildPaletteOrder: 130
-		Prerequisites: ~ra1_soviets_sovietbarracks, ra1_soviets_soviettechcenter, ~ra1_soviets_promotion_volkov
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_techcenter, ~ra1_soviets_promotion_volkov
 		Description: actor_volkov.description
 	Tooltip:
 		Name: Volkov

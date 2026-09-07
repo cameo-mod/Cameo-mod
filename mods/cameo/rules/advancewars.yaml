@@ -7519,7 +7519,7 @@ awifv:
 			awe1blackhole: ifv-mg
 			awe1sensei: ifv-mg
 			td_gdi_grenadier: ifv-cannon
-			ra1_soviets_sovietgrenadier: ifv-cannon
+			ra1_soviets_grenadier: ifv-cannon
 			ts_gdi_discthrower: ifv-cannon
 			tse2para: ifv-cannon
 			forgotten_mutantsergeant: ifv-cannon
@@ -7544,8 +7544,8 @@ awifv:
 			leanghacker: ifv-repair
 			leanglotus: ifv-repair
 			e3: ifv-miss
-			ra1_allies_alliedrocketsoldier: ifv-miss
-			ra1_soviets_sovietrocketsoldier: ifv-miss
+			ra1_allies_rocketsoldier: ifv-miss
+			ra1_soviets_rocketsoldier: ifv-miss
 			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 			gle3: ifv-miss
@@ -7562,7 +7562,7 @@ awifv:
 			ra1_soviets_shocktrooper: ifv-tesla
 			ra2_soviets_teslatrooper: ifv-tesla
 			td_nod_flamethrower: ifv-fire
-			ra1_soviets_sovietflamethrower: ifv-fire
+			ra1_soviets_flamethrower: ifv-fire
 			yuri_initiate: ifv-fire
 			terran_firebat: ifv-fire
 			td_nod_chemicalwarrior: ifv-chem
@@ -7581,18 +7581,18 @@ awifv:
 			tsghost.mutant: ifv-hero
 			usaburton: ifv-hero
 			leangburton: ifv-hero
-			terran_ghost: ifv-ra1_allies_alliedsniper
-			ra2_allies_sniper: ifv-ra1_allies_alliedsniper
-			yuri_virus: ifv-ra1_allies_alliedsniper
-			ra1_allies_raspy: ifv-ra1_allies_alliedsniper
-			ra2_allies_ra2spy: ifv-ra1_allies_alliedsniper
-			ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
-			forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
-			glkell: ifv-ra1_allies_alliedsniper
-			leangkell: ifv-ra1_allies_alliedsniper
-			glsabo: ifv-ra1_allies_alliedsniper
-			usapath: ifv-ra1_allies_alliedsniper
-			leangpath: ifv-ra1_allies_alliedsniper
+			terran_ghost: ifv-ra1_allies_sniper
+			ra2_allies_sniper: ifv-ra1_allies_sniper
+			yuri_virus: ifv-ra1_allies_sniper
+			ra1_allies_raspy: ifv-ra1_allies_sniper
+			ra2_allies_ra2spy: ifv-ra1_allies_sniper
+			ts_nod_chameleonspy: ifv-ra1_allies_sniper
+			forgotten_mutantsniper: ifv-ra1_allies_sniper
+			glkell: ifv-ra1_allies_sniper
+			leangkell: ifv-ra1_allies_sniper
+			glsabo: ifv-ra1_allies_sniper
+			usapath: ifv-ra1_allies_sniper
+			leangpath: ifv-ra1_allies_sniper
 			ra2_allies_chronolegionnaire: ifv-chrono
 			ra2_soviets_crazyivan: ifv-demo
 			ra2terror: ifv-demo
@@ -7604,7 +7604,7 @@ awifv:
 	Armament@primary:
 		Weapon: AWRA2HoverMissile
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
 	Armament@mg:
 		Weapon: AWMachinegunIFV
 		LocalOffset: 171,0,255
@@ -7616,11 +7616,11 @@ awifv:
 		RequiresCondition: ifv-repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-	Armament@ra1_allies_alliedsniper:
+	Armament@ra1_allies_sniper:
 		Weapon: GENAWP
 		LocalOffset: 171,0,255
 		MuzzleSequence: muzzlemg
-		RequiresCondition: ifv-ra1_allies_alliedsniper
+		RequiresCondition: ifv-ra1_allies_sniper
 	Armament@hero:
 		Weapon: BorisAKM
 		LocalOffset: 171,0,255
@@ -7679,12 +7679,12 @@ awifv:
 		IdleSequences: stand
 		StandSequences: stand
 		MoveSequence: run
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
 	WithInfantryBody@mg:
 		IdleSequences: stand2
 		StandSequences: stand2
 		MoveSequence: run2
-		RequiresCondition: ifv-mg || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-hero || ifv-cannon || ifv-chem || ifv-fire
+		RequiresCondition: ifv-mg || ifv-ra1_allies_sniper || ifv-flak || ifv-hero || ifv-cannon || ifv-chem || ifv-fire
 	WithInfantryBody@hitech:
 		IdleSequences: stand3
 		StandSequences: stand3

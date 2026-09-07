@@ -173,7 +173,7 @@ WOLFBARR:
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@ra1_soviets_sovietbarracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 490,-470,0, 355,512,0, -355,-512,0, -630,512,0
@@ -2151,7 +2151,7 @@ IMP:
 		Queue: Vehicle
 		BuildAtProductionType: Vehicle
 		BuildPaletteOrder: 210
-		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~bio
+		Prerequisites: fix, ra1_allies_techcenter, ~vehicles.allies, ~bio
 		Description: A Demon that shoots salvo of plasma balls.\nStrong vs buildings vs vehicles
 	BodyOrientation:
 	Valued:
