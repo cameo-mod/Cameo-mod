@@ -750,14 +750,7 @@ v1rocketsThermobaric:
 
 	Warhead@Thermobaric_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 16000
-		PercentageScale: 0
-	Warhead@CollapseTargetCompatibility1: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 24000
 		PercentageScale: 0
 	-Warhead@MediumMissile:
 	-Warhead@Grenade:
@@ -861,23 +854,16 @@ SCUDThermobaric:
 		ContrailLength: 20
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 40000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Damage: 20
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 40000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 20
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@Demolition_Heavy:
-		Damage: 40000
+		Damage: 120000
+	-Warhead@MissileHE_Heavy:
+	-Warhead@Flame_Heavy:
 SCUDTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -892,23 +878,14 @@ SCUDTesla:
 		ContrailLength: 20
 		ContrailStartColor: 88BBFF44
 		ContrailEndColor: 11223300
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 30000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Damage: 15
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 30000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 15
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@Tesla_Heavy:
-		Damage: 30000
+		Damage: 90000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 15000
@@ -920,6 +897,8 @@ SCUDTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	-Warhead@MissileHE_Heavy:
+	-Warhead@Flame_Heavy:
 
 SCUDNUKE:
 	Inherits@wh: ^Warhead_Nuclear_Super
@@ -1840,92 +1819,6 @@ YakTeslaBomb:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@PreservedFlat_HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Ship
-		Spread: 800
-		Damage: 40000
-		Falloff: 100, 50, 25, 10, 5
-		Versus:
-			HAZMAT: 50
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@PreservedFlat_HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		InvalidTargets: wall
-		Spread: 1050
-		Damage: 40000
-		Falloff: 99, 66, 33
-		Versus:
-			HAZMAT: 50
-			Shield: 140
-			Superheavy: 100
-			Plate: 96
-			Heavy: 92
-			Flak: 88
-			Medium: 84
-			None: 80
-			Light: 76
-			Heroic: 72
-			Scout: 68
-			Steel: 64
-			Concrete: 60
-			Wood: 56
-			Spaceship: 52
-			Helicopter: 48
-			Bomber: 44
-			Fighter: 40
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStates:
-			Corrosion: 100
-	Warhead@PreservedFlat_HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		InvalidTargets: wall
-		Spread: 1000
-		Damage: 40000
-		Falloff: 111, 33, 11, 3
-		Versus:
-			Shield: 140
-			None: 100
-			Flak: 96
-			Plate: 92
-			Heroic: 88
-			Wood: 84
-			Concrete: 80
-			Steel: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@PreservedFlat_TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Falloff: 100, 75, 50, 25
@@ -1954,7 +1847,7 @@ YakTeslaBomb:
 	Warhead@PreservedFlat_TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
-		Damage: 40000
+		Damage: 160000
 		Versus:
 			REFLECTOR: 50
 			Shield: 150
@@ -3704,6 +3597,7 @@ VolkovMagneticWeapon:
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^MediumChemicalWeapon
 	Inherits@5: ^Grenade
+	-Warhead@Railgun_HeavyFlatCompatibility:
 	ValidTargets: Ground, Water
 	ReloadDelay: 15
 	Range: 5400
@@ -3715,7 +3609,7 @@ VolkovMagneticWeapon:
 		Speed: 5400
 		Inaccuracy: 540
 	Warhead@CannonHE_Heavy:
-		Damage: 10000
+		Damage: 30000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3738,10 +3632,6 @@ VolkovMagneticWeapon:
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: kaboom25.aud
-	Warhead@Railgun_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 20000
-		PercentageScale: 0
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
@@ -3758,10 +3648,6 @@ VolkovMagneticWeaponTesla:
 	BurstDelays: 9
 	Projectile: LightningZap
 		-Image:
-	Warhead@CannonHE_Heavy: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3787,7 +3673,7 @@ VolkovMagneticWeaponTesla:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -3801,13 +3687,10 @@ VolkovMagneticWeaponTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Railgun_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 16000
-		PercentageScale: 0
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
+	-Warhead@CannonHE_Heavy:
 
 VolkovMagneticWeaponTeslaFragment1:
 	Inherits: VolkovMagneticWeaponTesla
@@ -3842,10 +3725,6 @@ VolkovMagneticWeaponTeslaFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Railgun_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		PercentageScale: 0
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
@@ -3875,10 +3754,6 @@ VolkovMagneticWeaponTeslaFragment2:
 		Damage: 1000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	Warhead@Railgun_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 0
 	-Warhead@TeslaArc:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
@@ -3901,20 +3776,8 @@ VolkovMagneticWeaponNuclearShells:
 		LaunchAngle: 66
 		Inaccuracy: 333
 		Image: BOMB
-	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 40000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 40000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 20
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Grenade: SpreadDamage
-		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 20000
@@ -3923,7 +3786,7 @@ VolkovMagneticWeaponNuclearShells:
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Nuclear_Super:
-		Damage: 40000
+		Damage: 160000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		Damage: 20
@@ -3932,13 +3795,8 @@ VolkovMagneticWeaponNuclearShells:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
-	Warhead@Railgun_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 80000
-		PercentageScale: 0
-	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
+	-Warhead@CannonHE_Heavy:
 
 VolkovMagneticWeaponIncendiary:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -3947,7 +3805,8 @@ VolkovMagneticWeaponIncendiary:
 	Inherits: VolkovMagneticWeapon
 	Inherits@2: ^IncendiaryBulletProjectile
 	Warhead@Flame_Medium: AreaDamage
-		Damage: 10000
+		Damage: 40000
+	-Warhead@CannonHE_Heavy:
 VolkovMagneticWeaponIncendiaryTesla:
 	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
 	Inherits: VolkovMagneticWeapon
@@ -3960,24 +3819,9 @@ VolkovMagneticWeaponIncendiaryTesla:
 	BurstDelays: 9
 	Projectile: LightningZap
 		-Image:
-	Warhead@CannonHE_Heavy: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -4024,12 +3868,12 @@ VolkovMagneticWeaponIncendiaryTesla:
 		AimTargetStances: Enemy, Neutral
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 16000
+		Damage: 40000
 		PercentageScale: 0
 	-Warhead@MediumFlameWeapon:
-	-Warhead@Railgun_HeavyFlatCompatibility:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
+	-Warhead@CannonHE_Heavy:
 
 VolkovMagneticWeaponIncendiaryTeslaFragment1:
 	Inherits: VolkovMagneticWeaponTesla
@@ -4075,10 +3919,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Railgun_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		PercentageScale: 0
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
@@ -4119,10 +3959,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 		Damage: 1000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	Warhead@Railgun_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PercentageScale: 0
 	-Warhead@TeslaArc:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
@@ -4159,20 +3995,8 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 40000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 40000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 20
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Grenade: SpreadDamage
-		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 20000
@@ -4192,11 +4016,11 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 		ImpactActors: true
 	Warhead@CannonNuke_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 60000
+		Damage: 200000
 		PercentageScale: 0
 	-Warhead@MediumFlameWeapon:
 	-Warhead@NuclearWarhead:
-	-Warhead@Railgun_HeavyFlatCompatibility:
+	-Warhead@CannonHE_Heavy:
 
 ParaBombNuke:
 	Inherits@roleflat: ^Compatibility_Nuclear_SuperFlat
