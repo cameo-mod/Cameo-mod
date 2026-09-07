@@ -25,8 +25,6 @@ tkm_rifleman:
 		Speed: 61
 	Health:
 		HP: 29000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -105,8 +103,6 @@ tkm_marine:
 		Speed: 60
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: tkmm16
 		LocalOffset: 128,0,256
@@ -176,8 +172,6 @@ tkm_juggernaut:
 		Speed: 45
 	Health:
 		HP: 36000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	AutoTarget:
 	Armament@PRIMARY:
 		Weapon: tkm_juggernaut
@@ -249,8 +243,6 @@ tkm_thermonaut:
 		Speed: 60
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	AutoTarget:
 	Armament@PRIMARY:
 		Weapon: ThermoF
@@ -313,8 +305,6 @@ tkm_trooper:
 		Speed: 59
 	Health:
 		HP: 33000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	FirepowerMultiplier@tkm_trooper:
 		Modifier: 37
 	Armament@PRIMARY:
@@ -375,8 +365,6 @@ tkm_rocketeer:
 		Speed: 60
 	Health:
 		HP: 9000
-	ChangesHealth@SelfHealing:
-		Step: 9
 	Armament@PRIMARY:
 		Weapon: tkmrockets
 		LocalOffset: 500,0,400
@@ -638,8 +626,6 @@ tkm_sniper:
 		Speed: 60
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: tkmawp
 		LocalOffset: 0,0,427
@@ -699,8 +685,6 @@ tkm_von:
 		Speed: 75
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@lockdown:
 		Weapon: VonSniperLockdown
 		LocalOffset: 128,0,256
@@ -788,8 +772,6 @@ tkm_spetsnaz:
 		Cost: 900
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 100
 	Tooltip:
@@ -878,8 +860,6 @@ tkmworker:
 		Locomotor: chem
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament@PRIMARY:
 		Weapon: RA2Shovel
 	Armament@GARRISONED:
@@ -988,8 +968,6 @@ tkmvan:
 		Speed: 75
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament@PRIMARY:
 		Weapon: VanSniper
 		LocalOffset: 500,0,400

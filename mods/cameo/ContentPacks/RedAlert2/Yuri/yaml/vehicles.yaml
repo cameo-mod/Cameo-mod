@@ -67,8 +67,6 @@ yuri_slaveminer:
 		ImmovableCondition: driver-dead || deployed
 	Health:
 		HP: 200000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Power:
 		Amount: 0
 	Armor:
@@ -149,8 +147,6 @@ yuri_gatlingtank:
 		HP: 45000
 	Repairable:
 		HpPerStep: 2250
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Turreted:
 		TurnSpeed: 18
 	Armament@1:
@@ -235,8 +231,6 @@ yuri_lashertank:
 		HP: 70000
 	Repairable:
 		HpPerStep: 3500
-	ChangesHealth@SelfHealing:
-		Step: 28
 	Turreted:
 		TurnSpeed: 21
 	Armament@PRIMARY:
@@ -329,8 +323,6 @@ yuri_magnetron:
 		HP: 65000
 	Repairable:
 		HpPerStep: 3250
-	ChangesHealth@SelfHealing:
-		Step: 26
 	Turreted:
 		TurnSpeed: 13
 	Armament@Normal:
@@ -407,8 +399,6 @@ yuri_chaosdrone:
 		HP: 12500
 	Repairable:
 		HpPerStep: 625
-	ChangesHealth@SelfHealing:
-		Step: 5
 	Armor:
 		Type: Scout
 	Turreted:
@@ -476,8 +466,6 @@ yuri_mastermind:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Turreted:
 		TurnSpeed: 24
 	Armament@PRIMARY:

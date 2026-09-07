@@ -68,8 +68,6 @@ asianalliance_quasar:
 		HP: 55000
 	Repairable:
 		HpPerStep: 2750
-	ChangesHealth@SelfHealing:
-		Step: 22
 	Armament@AG:
 		Weapon: AsianQuasarAG
 		LocalOffset: -400,0,300
@@ -133,8 +131,6 @@ asianalliance_dragonfly:
 		HP: 32500
 	Repairable:
 		HpPerStep: 1625
-	ChangesHealth@SelfHealing:
-		Step: 13
 	Armor:
 		Type: Light
 	Selectable:
@@ -191,8 +187,6 @@ asianalliance_lynxtank:
 		HP: 120000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Turreted:
 		TurnSpeed: 18
 	Voiced:
@@ -357,8 +351,6 @@ asianalliance_droneminer:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armor:
 		Type: Plate
 	WithHarvestAnimation:
@@ -415,8 +407,6 @@ asianalliance_pulverizer:
 		HP: 85000
 	Repairable:
 		HpPerStep: 4250
-	ChangesHealth@SelfHealing:
-		Step: 34
 	Turreted:
 		TurnSpeed: 13
 	Armament@1:
@@ -470,8 +460,6 @@ ptnk.asian:
 		HP: 130000
 	Repairable:
 		HpPerStep: 6500
-	ChangesHealth@SelfHealing:
-		Step: 52
 	Turreted:
 		TurnSpeed: 10
 	Armament@PRIMARY:
@@ -525,8 +513,6 @@ asianalliance_viper:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament@PRIMARY:
 		Weapon: AsianChemical
 		LocalOffset: -400,0,300
@@ -583,8 +569,6 @@ asianalliance_type89mlrs:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Turreted:
 		TurnSpeed: 16
 		Offset: -256,0,128
@@ -634,8 +618,6 @@ asianalliance_howitzer:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Turreted:
 		TurnSpeed: 12
 	Armament:
@@ -707,8 +689,6 @@ asianalliance_asianflametank:
 		HP: 85000
 	Repairable:
 		HpPerStep: 4250
-	ChangesHealth@SelfHealing:
-		Step: 34
 	Armament@AG:
 		Weapon: AsianFlamerTank
 		LocalOffset: 300,0,200
@@ -769,8 +749,6 @@ asianalliance_pulverizermecha:
 		HP: 285000
 	Repairable:
 		HpPerStep: 14250
-	ChangesHealth@SelfHealing:
-		Step: 114
 	Armament@1:
 		Weapon: AsianPulverizerMechaGatling
 		LocalOffset: 800,300,600, 800,-300,600
@@ -838,8 +816,6 @@ asianalliance_railguntank:
 		HP: 160000
 	Repairable:
 		HpPerStep: 8000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: AsianRailTank
@@ -885,8 +861,6 @@ asianalliance_heavyrailguntank:
 		HP: 250000
 	Repairable:
 		HpPerStep: 12500
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Armament@PRIMARY:
 		Weapon: AsianRailTank2
 		RequiresCondition: !rank-elite
@@ -929,8 +903,6 @@ asianalliance_warturtle:
 		HP: 250000
 	Repairable:
 		HpPerStep: 12500
-	ChangesHealth@SelfHealing:
-		Step: 100
 	#Turreted:
 	#	TurnSpeed: 1023
 	-QuantizeFacingsFromSequence:

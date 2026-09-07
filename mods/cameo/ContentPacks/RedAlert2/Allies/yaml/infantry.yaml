@@ -27,8 +27,6 @@ ra2_allies_attackdog:
 	SelectionDecorations:
 	Health:
 		HP: 5000
-	ChangesHealth@SelfHealing:
-		Step: 2
 	Armor:
 		Type: None
 	Mobile:
@@ -133,8 +131,6 @@ ra2_allies_gi:
 		Speed: 50
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -270,8 +266,6 @@ ra2_allies_guardiangi:
 		Speed: 45
 	Health:
 		HP: 45000
-	ChangesHealth@SelfHealing:
-		Step: 45
 	RenderRangeCircle:
 		RequiresCondition: deployed
 	RevealOnFire:
@@ -421,8 +415,6 @@ ra2_allies_chronolegionnaire:
 		Speed: 35
 	Health:
 		HP: 35000
-	ChangesHealth@SelfHealing:
-		Step: 35
 	Passenger:
 	Armament@sound:
 		Weapon: RA2ChronoTele
@@ -512,8 +504,6 @@ ra2_allies_sniper:
 		Speed: 56
 	Health:
 		HP: 22000
-	ChangesHealth@SelfHealing:
-		Step: 22
 	Armament@PRIMARY:
 		Weapon: RA2AWP
 		LocalOffset: 0,0,427
@@ -648,8 +638,6 @@ ra2_allies_tanyaii:
 		Name: Tanya II
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 75
 	Passenger:
@@ -717,8 +705,6 @@ ra2_allies_seal:
 		Cost: 1162
 	Health:
 		HP: 31000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Mobile:
 		Speed: 59
 	Tooltip:
@@ -857,8 +843,6 @@ ra2_allies_rocketeer:
 		Voice: Move
 	Health:
 		HP: 18000
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Armament@PRIMARY:
 		Weapon: ra2roktgun
 	AttackAircraft:

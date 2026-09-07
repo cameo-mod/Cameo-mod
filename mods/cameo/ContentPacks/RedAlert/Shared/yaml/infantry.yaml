@@ -13,8 +13,6 @@ ra1_allies_rifleinfantry:
 		Speed: 55
 	Health:
 		HP: 27000
-	ChangesHealth@SelfHealing:
-		Step: 28
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -72,8 +70,6 @@ ra1_soviets_molotovconscript:
 		Speed: 67
 	Health:
 		HP: 11000
-	ChangesHealth@SelfHealing:
-		Step: 11
 	Armament:
 		Weapon: ConscriptMolotov
 		LocalOffset: 0,0,427

@@ -54,8 +54,6 @@ futuretech_gunstrider:
 		HP: 320000
 	Repairable:
 		HpPerStep: 16000
-	ChangesHealth@SelfHealing:
-		Step: 128
 	Armament:
 		Weapon: FutureMechGatling
 		LocalOffset: 200,300,500, 200,-300,500
@@ -107,8 +105,6 @@ futuretech_plasmastrider:
 		HP: 240000
 	Repairable:
 		HpPerStep: 12000
-	ChangesHealth@SelfHealing:
-		Step: 96
 	Armament@PRIMARY:
 		Weapon: FutureMechPlasma
 		LocalOffset: 100,190,800, 100,-190,800
@@ -165,8 +161,6 @@ futuretech_salamanderifv:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	FirepowerMultiplier@futuretech_salamanderifv:
 		Modifier: 150
 	Turreted:
@@ -208,8 +202,6 @@ futuretech_robottank:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Turreted:
 		TurnSpeed: 26 #3
 	Armament:
@@ -285,8 +277,6 @@ futuretech_guardiantank:
 		HP: 115000
 	Repairable:
 		HpPerStep: 5750
-	ChangesHealth@SelfHealing:
-		Step: 46
 	Turreted:
 		TurnSpeed: 17
 		Offset: -40,0,0
@@ -406,8 +396,6 @@ futuretech_riptideacv:
 		HP: 65000
 	Repairable:
 		HpPerStep: 3250
-	ChangesHealth@SelfHealing:
-		Step: 26
 	Turreted:
 		TurnSpeed: 21
 		Offset: -150,0,5
@@ -473,8 +461,6 @@ futuretech_phalanxwip:
 		HpPerStep: 3750
 	Armor:
 		Type: Medium
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Turreted:
 		TurnSpeed: 19
 		Offset: -150,0,5
@@ -536,8 +522,6 @@ futuretech_beehivedronecarrier:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6500
-	ChangesHealth@SelfHealing:
-		Step: 52
 	Turreted:
 		TurnSpeed: 9
 		Offset: 0,0,0
@@ -612,8 +596,6 @@ futuretech_oriontank:
 		HP: 180000
 	Repairable:
 		HpPerStep: 9000
-	ChangesHealth@SelfHealing:
-		Step: 72
 	Turreted:
 		TurnSpeed: 12
 		Offset: -40,0,0
@@ -681,8 +663,6 @@ futuretech_prospector:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armor:
 		Type: Medium
 	Mobile:
@@ -730,8 +710,6 @@ futuretech_prospectormk2:
 		HP: 120000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Armor:
 		Type: Medium
 	Mobile:
@@ -863,8 +841,6 @@ futuretech_energizer:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10
@@ -926,8 +902,6 @@ futuretech_futuretank:
 		HP: 650000
 	Repairable:
 		HpPerStep: 32500
-	ChangesHealth@SelfHealing:
-		Step: 260
 	Turreted:
 		TurnSpeed: 9 #3
 		Offset: 75,0,1

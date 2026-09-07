@@ -24,8 +24,6 @@ ra1_allies_blackhawk:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: ChainGunMH60
 		LocalOffset: 85,-213,-85, 85,213,-85
@@ -147,8 +145,6 @@ ra1_allies_longbow:
 		HP: 35000
 	Repairable:
 		HpPerStep: 1750
-	ChangesHealth@SelfHealing:
-		Step: 14
 	Armament:
 		Weapon: Hellfire
 		LocalOffset: 50,250,-100, 50,-250,-100
@@ -261,8 +257,6 @@ ra1_allies_alliedchinooktransport:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 50
 	WithIdleOverlay@ROTOR1AIR:
 		Offset: 597,0,213
 		Sequence: rotor
@@ -337,8 +331,6 @@ ra1_allies_rapierjumpjet:
 		HP: 77500
 	Repairable:
 		HpPerStep: 3875
-	ChangesHealth@SelfHealing:
-		Step: 31
 	Armament@PRIMARY:
 		Weapon: RapierBombs
 		LocalOffset: 256,213,0, 256,-213,0

@@ -48,8 +48,6 @@ tkm_templateharvesterraname:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armor:
 		Type: Medium
 	Mobile:
@@ -105,8 +103,6 @@ tkm_as42:
 		HP: 27500
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 11
 	Armament@Missiles:
 		Weapon: as42rockets
 		LocalOffset: -160,-276,232
@@ -182,8 +178,6 @@ tkm_technical:
 		HP: 27500
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 11
 	Turreted:
 		TurnSpeed: 35
 		Offset: -160,0,200
@@ -243,8 +237,6 @@ tkm_technicaltank:
 		HP: 70000
 	Repairable:
 		HpPerStep: 3500
-	ChangesHealth@SelfHealing:
-		Step: 35
 	RevealsShroud:
 		Range: 6c0
 	Turreted:
@@ -310,8 +302,6 @@ tkm_quadtruck:
 		HP: 65000
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 11
 	Turreted:
 		TurnSpeed: 18
 		Offset: -350,0,250
@@ -360,8 +350,6 @@ tkm_zaza:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 11
 	Turreted:
 		TurnSpeed: 15
 		Offset: -160,0,500
@@ -445,8 +433,6 @@ tkm_stryker:
 		HP: 80000
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Turreted:
 		TurnSpeed: 21
 		Offset: -350,0,325
@@ -509,8 +495,6 @@ tkm_abrams:
 		HP: 120000
 	Repairable:
 		HpPerStep: 4800
-	ChangesHealth@SelfHealing:
-		Step: 48
 	RevealsShroud:
 		Range: 6c0
 	Turreted:
@@ -701,8 +685,6 @@ tkm_tornadoglauncher:
 		HP: 35000
 	Repairable:
 		HpPerStep: 1750
-	ChangesHealth@SelfHealing:
-		Step: 14
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -781,8 +763,6 @@ tkm_radartruck:
 		HP: 75000
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 11
 	Armament:
 		Weapon: TKMLockOn
 	RevealsShroud:
@@ -848,8 +828,6 @@ tkm_repairtruck:
 		HP: 50000
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 11
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
@@ -902,8 +880,6 @@ tkm_medictruck:
 		HP: 50000
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 11
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
@@ -954,8 +930,6 @@ tkm_dronepodtruck:
 		HP: 60000
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 11
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	CarrierMaster:
@@ -1132,8 +1106,6 @@ tkm_battlebus:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	#Turreted:
 	#	TurnSpeed: 1023
 	-QuantizeFacingsFromSequence:
@@ -1270,8 +1242,6 @@ tkm_sandmarine:
 		HP: 800000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Cargo:
 		InitialUnits:
 		Types: Infantry, Hacker, Fremen, Vehicle
@@ -1422,8 +1392,6 @@ tkm_flakbus:
 		HP: 120000
 	Repairable:
 		HpPerStep: 1375
-	ChangesHealth@SelfHealing:
-		Step: 10
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
@@ -1470,8 +1438,6 @@ tkm_bigshiee:
 		HP: 500000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	#Turreted:
 	#	TurnSpeed: 1023
 	Armament@PRIMARY:

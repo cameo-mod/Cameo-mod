@@ -31,8 +31,6 @@ futuretech_twister:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: SteelTwisterMissiles
@@ -101,8 +99,6 @@ futuretech_cryocopter:
 		HP: 90000
 	Repairable:
 		HpPerStep: 4500
-	ChangesHealth@SelfHealing:
-		Step: 36
 	Armament@Rocket:
 		Name: secondary
 		Weapon: Future_Cryocopter_Rocket
@@ -213,8 +209,6 @@ futuretech_harbingergunship:
 		HP: 400000
 	Repairable:
 		HpPerStep: 20000
-	ChangesHealth@SelfHealing:
-		Step: 160
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: FutureHarbingerCannon
@@ -330,8 +324,6 @@ landcarr_drone.futu:
 		VTOL: true
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 4
 	Armament@PRIMARY:
 		Weapon: RA2HornetMissile
 		LocalOffset: 427,-171,-213, 427,171,-213

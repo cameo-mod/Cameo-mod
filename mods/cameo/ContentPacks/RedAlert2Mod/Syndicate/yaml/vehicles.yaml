@@ -22,8 +22,6 @@ latinsyndicate_mortarbike:
 		HP: 28000
 	Repairable:
 		HpPerStep: 1400
-	ChangesHealth@SelfHealing:
-		Step: 28
 	Mobile:
 		Speed: 140
 		TurnSpeed: 56
@@ -185,8 +183,6 @@ latinsyndicate_raiderbuggy:
 		HP: 37500
 	Repairable:
 		HpPerStep: 1875
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Armor:
 		Type: Light
 	Turreted:
@@ -273,8 +269,6 @@ latinsyndicate_tortugatank:
 		HP: 875000
 	Repairable:
 		HpPerStep: 43750
-	ChangesHealth@SelfHealing:
-		Step: 350
 	Turreted:
 		TurnSpeed: 9
 	Armament:
@@ -346,8 +340,6 @@ latinsyndicate_rushertank:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Turreted:
 		TurnSpeed: 23 #3
 		Offset: -100,0,5
@@ -433,8 +425,6 @@ latinsyndicate_smokertank:
 		HP: 260000
 	Repairable:
 		HpPerStep: 13000
-	ChangesHealth@SelfHealing:
-		Step: 104
 	Turreted:
 		TurnSpeed: 19
 		Offset: -100,0,5
@@ -537,8 +527,6 @@ latinsyndicate_diablo:
 		HP: 45000
 	Repairable:
 		HpPerStep: 2250
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Turreted:
 		TurnSpeed: 25
 		Offset: -100,0,5
@@ -654,8 +642,6 @@ latinsyndicate_latinapc:
 		HP: 180000
 	Repairable:
 		HpPerStep: 9000
-	ChangesHealth@SelfHealing:
-		Step: 72
 	Armor:
 		Type: Medium
 	Turreted:
@@ -806,8 +792,6 @@ latinsyndicate_narcohummer:
 		HP: 97500
 	Repairable:
 		HpPerStep: 4875
-	ChangesHealth@SelfHealing:
-		Step: 39
 	Armor:
 		Type: Medium
 	Turreted:
@@ -889,8 +873,6 @@ latinsyndicate_carteltruck:
 		HP: 167500
 	Repairable:
 		HpPerStep: 8375
-	ChangesHealth@SelfHealing:
-		Step: 67
 	Turreted:
 		TurnSpeed: 14
 		Offset: -1,0,4
@@ -963,8 +945,6 @@ latinsyndicate_missiletruck:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -1034,8 +1014,6 @@ latinsyndicate_burrito:
 		HP: 35000
 	Repairable:
 		HpPerStep: 1750
-	ChangesHealth@SelfHealing:
-		Step: 14
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -1103,8 +1081,6 @@ latinsyndicate_lars:
 		HP: 47500
 	Repairable:
 		HpPerStep: 2375
-	ChangesHealth@SelfHealing:
-		Step: 19
 	Mobile:
 		Speed: 70
 		TurnSpeed: 28
@@ -1178,8 +1154,6 @@ latinsyndicate_collectiontruck:
 		HP: 85000
 	Repairable:
 		HpPerStep: 4250
-	ChangesHealth@SelfHealing:
-		Step: 34
 	Harvester:
 		Voice: Harvest
 		BaleLoadDelay: 3
@@ -1350,8 +1324,6 @@ latinsyndicate_topolm:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30

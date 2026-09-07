@@ -27,8 +27,6 @@ asianalliance_asianmilitia:
 		Speed: 53
 	Health:
 		HP: 24000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -104,8 +102,6 @@ asianalliance_asiantankkiller:
 		Speed: 51
 	Health:
 		HP: 17000
-	ChangesHealth@SelfHealing:
-		Step: 17
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: AsianTankKillerRocket
@@ -176,8 +172,6 @@ asianalliance_plasmatrooper:
 		Speed: 42
 	Health:
 		HP: 64000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: AsianSinglePlasma
@@ -229,8 +223,6 @@ asianalliance_asianflametrooper:
 		Speed: 53
 	Health:
 		HP: 26000
-	ChangesHealth@SelfHealing:
-		Step: 26
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: AsianFlamerTroop
@@ -294,8 +286,6 @@ asianalliance_fanatic:
 		Speed: 75
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Armament@PRIMARY:
 		Weapon: asianalliance_fanatic_shotgun
 		LocalOffset: 128,0,256
@@ -357,8 +347,6 @@ asianalliance_japanesesamurai:
 		Speed: 72
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament@Sword1:
 		Weapon: AsianSamuraiSword1
 		RequiresCondition: !rank-elite && !asianalliance_doctrine_modernizedinfantryequipment
@@ -401,8 +389,6 @@ asianalliance_veteranarcher:
 		Speed: 68
 	Health:
 		HP: 14000
-	ChangesHealth@SelfHealing:
-		Step: 14
 	Armament@PRIMARY:
 		Weapon: AsianMaidenBow
 		LocalOffset: 128,0,256
@@ -454,8 +440,6 @@ asianalliance_shinobi:
 		Speed: 60
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: AsianNinjaStar
 		LocalOffset: 128,0,256
@@ -597,8 +581,6 @@ asianalliance_alligator:
 	Health:
 		HP: 27000
 		InitialStance: AttackAnything
-	ChangesHealth@SelfHealing:
-		Step: 27
 	Armor:
 		Type: None
 	Armament@PRIMARY:
@@ -674,8 +656,6 @@ asianalliance_asdf:
 		IconPalette: ra2cameo
 	Health:
 		HP: 39000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Mobile:
 		Speed: 58
 	Armament@PRIMARY:
@@ -758,8 +738,6 @@ asianalliance_asiancommando:
 		Speed: 75
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@lockdown:
 		Weapon: AsianSniperLockdown
 		LocalOffset: 128,0,256

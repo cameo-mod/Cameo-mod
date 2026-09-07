@@ -26,8 +26,6 @@ ra1_soviets_v1rockettruck:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Turreted:
 		TurnSpeed: 20
 		#Offset: -128,0,128
@@ -103,8 +101,6 @@ ra1_soviets_grad:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Turreted:
 		TurnSpeed: 15
 		Offset: -600,0,200
@@ -172,8 +168,6 @@ ra1_soviets_v2rocketlauncher:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Mobile:
 		Speed: 85
 		TurnSpeed: 34
@@ -247,8 +241,6 @@ ra1_soviets_nuclearv2launcher:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -316,8 +308,6 @@ ra1_soviets_sovietheavytank:
 		HP: 150000
 	Repairable:
 		HpPerStep: 7500
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Mobile:
 		Speed: 70
 		TurnSpeed: 14
@@ -385,8 +375,6 @@ ra1_soviets_hammertank:
 		HP: 210000
 	Repairable:
 		HpPerStep: 10500
-	ChangesHealth@SelfHealing:
-		Step: 84
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -501,8 +489,6 @@ ra1_soviets_heavyteslatank:
 		HP: 150000
 	Repairable:
 		HpPerStep: 7500
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -601,8 +587,6 @@ ra1_soviets_kotinnucleartank:
 		HP: 240000
 	Repairable:
 		HpPerStep: 12000
-	ChangesHealth@SelfHealing:
-		Step: 96
 	Mobile:
 		Speed: 65
 		TurnSpeed: 13
@@ -677,8 +661,6 @@ ra1_soviets_sovietmammothtank:
 		HP: 375000
 	Repairable:
 		HpPerStep: 18750
-	ChangesHealth@SelfHealing:
-		Step: 150
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10
@@ -815,8 +797,6 @@ ra1_soviets_siegemammothtank:
 		HP: 625000
 	Repairable:
 		HpPerStep: 31250
-	ChangesHealth@SelfHealing:
-		Step: 250
 	Mobile:
 		Speed: 45
 		TurnSpeed: 9
@@ -960,8 +940,6 @@ ra1_soviets_sovietheavyindustrialminer:
 		HP: 135000
 	Repairable:
 		HpPerStep: 6750
-	ChangesHealth@SelfHealing:
-		Step: 54
 	Armor:
 		Type: Medium
 	Mobile:
@@ -1018,8 +996,6 @@ ra1_soviets_teslatank:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -1081,8 +1057,6 @@ ra1_soviets_heatraytank:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -1146,8 +1120,6 @@ ra1_soviets_flaktruck:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Mobile:
 		Speed: 120
 		TurnSpeed: 24
@@ -1222,8 +1194,6 @@ ra1_soviets_btr80:
 		HP: 90000
 	Repairable:
 		HpPerStep: 4500
-	ChangesHealth@SelfHealing:
-		Step: 36
 	Armor:
 		Type: Heavy
 	Mobile:
@@ -1402,8 +1372,6 @@ ra1_soviets_madtank:
 		HP: 300000
 	Repairable:
 		HpPerStep: 15000
-	ChangesHealth@SelfHealing:
-		Step: 120
 	Mobile:
 		RequiresCondition: !deployed
 		Speed: 60
@@ -1527,8 +1495,6 @@ ra1_soviets_gatlingtank:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -1685,8 +1651,6 @@ ra1_soviets_monstertank:
 		HP: 1000000
 	Repairable:
 		HpPerStep: 50000
-	ChangesHealth@SelfHealing:
-		Step: 400
 	Mobile:
 		Speed: 45
 		TurnSpeed: 9

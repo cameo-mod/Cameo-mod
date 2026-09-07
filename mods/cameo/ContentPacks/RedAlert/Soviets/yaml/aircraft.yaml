@@ -24,8 +24,6 @@ ra1_soviets_yakscoutplane:
 		HP: 32000
 	Repairable:
 		HpPerStep: 1600
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Armament@BOMBS:
 		Weapon: YakNapalm
 		LocalOffset: 0,-256,-32, 0,256,-32
@@ -130,8 +128,6 @@ ra1_soviets_teslayak:
 		HP: 64000
 	Repairable:
 		HpPerStep: 3200
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Armament@BOMBS:
 		Weapon: YakTeslaBomb
 		LocalOffset: 0,0,-32
@@ -250,8 +246,6 @@ ra1_soviets_armoredyak:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Armament@PRIMARY:
 		Weapon: ArmoredYakChainGun
 		LocalOffset: 160,-320,-80
@@ -348,8 +342,6 @@ ra1_soviets_nuclearyak:
 		HP: 64000
 	Repairable:
 		HpPerStep: 3200
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Armament@BOMBS:
 		Weapon: YakNuclearBomb
 		LocalOffset: 0,0,-32
@@ -457,8 +449,6 @@ ra1_soviets_migattackbomber:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Armament@Rockets1:
 		Weapon: Maverick
 		LocalOffset: 0,-480,0, 0,640,0
@@ -576,8 +566,6 @@ ra1_soviets_su57attackbomber:
 		AddToArmyValue: true
 	Health:
 		HP: 65000
-	ChangesHealth@SelfHealing:
-		Step: 52
 	Armament:
 		Weapon: Su57Maverick
 		LocalOffset: -250,-750,0, -250,750,0
@@ -697,8 +685,6 @@ ra1_soviets_hindattackhelicopter:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament@Missiles:
 		Weapon: HindMissiles
 		LocalOffset: 85,250,-85, 85,-250,-85
@@ -876,8 +862,6 @@ ra1_soviets_kamovattackhelicopter:
 		HP: 122500
 	Repairable:
 		HpPerStep: 6125
-	ChangesHealth@SelfHealing:
-		Step: 49
 	Armament@Tesla:
 		Weapon: KamovTesla
 		LocalOffset: 150,0,-150
@@ -1062,8 +1046,6 @@ ra1_soviets_hiptransport:
 		HP: 150000
 	Repairable:
 		HpPerStep: 7500
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 100
@@ -1143,8 +1125,6 @@ ra1_soviets_supersonicnuclearbomber:
 		AddToArmyValue: true
 	Health:
 		HP: 125000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@Nuke:
 		Weapon: ParaBombNuke
 		LocalOffset: 0,-0,-64

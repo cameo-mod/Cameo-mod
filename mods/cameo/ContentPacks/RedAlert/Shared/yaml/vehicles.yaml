@@ -27,8 +27,6 @@ ra1_allies_alliedapc:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armor:
 		Type: Medium
 	Turreted:
@@ -117,8 +115,6 @@ ra1_allies_alliedcybertank:
 		HP: 160000
 	Repairable:
 		HpPerStep: 8000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Turreted:
 		TurnSpeed: 15
 		Offset: 0,0,0

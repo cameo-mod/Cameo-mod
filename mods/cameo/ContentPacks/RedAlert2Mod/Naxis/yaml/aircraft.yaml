@@ -19,8 +19,6 @@ naxis_interceptor:
 		TakeUpCellWhenLand: false
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 4
 	RevealsShroud:
 		Range: 7500
 		Type: GroundPosition
@@ -124,8 +122,6 @@ naxis_bf109:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	HitShape:
 	Voiced:
 		VoiceSet: NaxiAircraftVoice
@@ -208,8 +204,6 @@ naxis_me262:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 75
 	HitShape:
 	Voiced:
 		VoiceSet: NaxiAircraftVoice
@@ -321,8 +315,6 @@ naxis_transportzeppelin:
 		HP: 1250000
 	Repairable:
 		HpPerStep: 2625
-	ChangesHealth@SelfHealing:
-		Step: 21
 	Armament:
 		Name: primary
 		Weapon: NaxQuadCannon

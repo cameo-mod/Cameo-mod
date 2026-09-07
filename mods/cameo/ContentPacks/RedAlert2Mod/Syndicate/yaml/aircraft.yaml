@@ -26,8 +26,6 @@ latinsyndicate_hindtransport:
 		HP: 95000
 	Repairable:
 		HpPerStep: 4750
-	ChangesHealth@SelfHealing:
-		Step: 38
 	Armament@PRIMARY:
 		Weapon: BlackHawkCannon
 		LocalOffset: 128,-213,-85, 128,213,-85
@@ -103,8 +101,6 @@ latinsyndicate_yakovlev:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	HitShape:
 	Voiced:
 		VoiceSet: LatinMigVoice
@@ -213,8 +209,6 @@ latinsyndicate_mig21:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	HitShape:
 	Voiced:
 		VoiceSet: LatinMigVoice

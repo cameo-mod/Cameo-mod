@@ -21,8 +21,6 @@ tkm_iroquois:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament@PRIMARY:
 		Weapon: HueyGun
 		LocalOffset: 85,-200,-85, 85,200,-85
@@ -156,8 +154,6 @@ tkm_viper:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament@BOMBS:
 		Weapon: ViperMissiles
 		LocalOffset: 0,-256,-32, 0,256,-32
@@ -321,8 +317,6 @@ tkmsuicidedrone:
 		TargetTypes: Air
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	CarrierSlave:
 		LandingDistance: 8000
 	AutoTarget:

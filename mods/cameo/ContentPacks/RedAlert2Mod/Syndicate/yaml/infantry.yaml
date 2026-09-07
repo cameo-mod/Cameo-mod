@@ -21,8 +21,6 @@ latinsyndicate_latinmilitia:
 		Speed: 51
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 26
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -105,8 +103,6 @@ latinsyndicate_tankkiller:
 		Speed: 53
 	Health:
 		HP: 13000
-	ChangesHealth@SelfHealing:
-		Step: 13
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: LatinTankKillerRocket
@@ -156,8 +152,6 @@ latinsyndicate_grenademonkey:
 		Speed: 80
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@PRIMARY:
 		Weapon: LatinMonkeyGrenade1
 		LocalOffset: 128,0,256
@@ -238,8 +232,6 @@ latinsyndicate_latinflametrooper:
 		Speed: 55
 	Health:
 		HP: 55000
-	ChangesHealth@SelfHealing:
-		Step: 55
 	Armament@PRIMARY:
 		Weapon: SyndicateFireballLauncher
 		LocalOffset: 128,0,256
@@ -303,8 +295,6 @@ latinsyndicate_narco:
 		Speed: 70
 	Health:
 		HP: 28000
-	ChangesHealth@SelfHealing:
-		Step: 28
 	Armament@Grenade:
 		Weapon: NarcoGrenade
 		LocalOffset: 250,0,400
@@ -409,8 +399,6 @@ latinsyndicate_freedomfighter:
 		Speed: 55
 	Health:
 		HP: 77000
-	ChangesHealth@SelfHealing:
-		Step: 77
 	Armament@PRIMARY:
 		Weapon: RA2FreedomAK47
 		LocalOffset: 128,0,256
@@ -589,8 +577,6 @@ latinsyndicate_terrorist:
 		Speed: 75
 	Health:
 		HP: 15000
-	ChangesHealth@SelfHealing:
-		Step: 15
 	FireWarheadsOnDeathCA@bomb:
 		Weapon: RA2Terrorist
 		EmptyWeapon: RA2Terrorist
