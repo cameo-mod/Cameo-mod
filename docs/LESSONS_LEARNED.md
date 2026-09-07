@@ -892,6 +892,13 @@ A `Warhead@X:` line with **no value** is a boot crash, not a lint warning. `Weap
 - **Removal markers (`-Key:` or `-Sub/Key:`) crash if the removed key no longer exists in the resolved chain.** `8Inch` had `-Warhead@Effect2:` inherited from the old `^Grenade`/`^HeavyBomb` stack. After repointing to `^Effect_Demolition_Light`, `Effect2` was gone and the game threw "There are no elements with key `Warhead@Effect2` to remove". `JHindChainGun` had `-		-LaunchAngle:` nested under `Projectile: Bullet` to remove `LaunchAngle` from the old `^Chaingun`/`^Grenade` `Bullet` projectile; the new `^Projectile_Bullet_Medium` does not contain `LaunchAngle`, so the same crash occurred. Any conversion must strip **all** stale removal markers — top-level and nested, not just `-Warhead@*` — before boot-gating.
 - **Single-inherit repoint is only safe when the weapon has exactly one `Inherits` tag and no other addon inherits.** A mechanical sweep that included multi-addon `Steel`/`RA2` weapons produced 46 empty-type warheads because `^SteelLightMissile`, `^RA2FlakWeapon`, and other intermediate addons still supply the non-converted warheads. Filter for blocks with exactly one `Inherits` line and no `Inherits@2`/`Inherits@3` addons; the first broad run must be reverted.
 
+**2026-09-07 follow-up: Python resolved equality is not strict-engine validity.**
+The Scooper merge repair resolved identically to its authored reference in
+`miniyaml.Ruleset`, but the engine rejected two now-absent removal targets.
+The Python subset silently ignores those missing removals. Check the complete
+ancestor chain before removing or retaining a cancellation, add a targeted
+source regression, and boot the actual engine. Do not bulk-delete cancellations.
+
 ## Weapon 3-way split: projectile family naming (2026-08-07)
 
 - **The new projectile family for cannons is `Shell_`, not `Cannon_`.** `^Projectile_Shell_Light/Medium/Heavy` exists; `^Projectile_Cannon*` does not. `CannonHE_Heavy` and `CannonAP_*` weapons use `^Projectile_Shell_*` for delivery and `^Effect_CannonHE_*` / `^Effect_CannonAP_*` for impact.

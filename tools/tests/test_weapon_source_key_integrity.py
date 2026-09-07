@@ -46,8 +46,10 @@ EXPECTED_PARENTS = {
     "HammerTankCannonThermobaric": {
         "^Projectile_Flame_Medium", "HammerTankCannon",
     },
-    "KotinCannonThermobaric": {
-        "^Projectile_Flame_Medium", "KotinCannon",
+    # Upstream 4a1479b50 replaced the thermobaric role with a nuclear shell.
+    "KotinCannonNuclearShell": {
+        "^Warhead_CannonNuke_Heavy", "^Projectile_Shell_Heavy",
+        "^Effect_CannonHE_Heavy", "^Effect_Nuclear_Super",
     },
     "SandmarineTuskFire": {
         "^Warhead_MissileAP_Light", "^SandmarineTuskLegacy"},
@@ -195,6 +197,7 @@ class WeaponSourceKeyIntegrityTests(unittest.TestCase):
     def test_corrected_inheritance_keys_keep_every_authored_parent(self):
         for name, expected in EXPECTED_PARENTS.items():
             local = self.rules.weapon(name)
+            self.assertIsNotNone(local, name)
             actual = {
                 str(child.value) for child in local.children
                 if child.key == "Inherits" or child.key.startswith("Inherits@")

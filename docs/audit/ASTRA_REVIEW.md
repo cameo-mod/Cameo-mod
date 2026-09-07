@@ -517,3 +517,117 @@ retains 22 ledger-history findings and four unwired-audit findings, with zero
 blocking attribution findings. Its stderr also records historical actor lookups
 with no prior definition, not a successful historical lookup for every actor.
 Upstream master was rechecked after the refresh and remains `648f62f7c6`.
+
+## September 7: integrated runtime and inherited-test reconciliation
+
+Blackrobe authorized both the integrated runtime smoke and triage of the 33
+inherited failing test identities, with a two-hour limit. This section supersedes
+the pending-runtime and failing-suite status above. The PR stays draft/unmerged.
+Upstream remains `648f62f7c6`; the follow-up started at `b05f184750`.
+
+### Actual merge regressions, not a new balance prescription
+
+Two alternative branches of weapon work were combined in merge `4fd9937f3`.
+The repairs restore Aedis's authored role definitions, not the numerically larger
+union of both parents:
+
+| Live route | Broken merged flat payload | Repaired payload |
+|---|---|---|
+| Scooper chemical upgrade, `TSScoopDualChem` | two separate 30,000 mains | one CannonChem_Medium main, 30,000, Corrosion 100 |
+| Apocalypse base/elite, `RA2120xmm` | CannonAP 2,000 plus incomplete CannonHE 12,000 | one CannonAP_Light main, 12,000 |
+| Apocalypse radiation/elite, `RA2120xmm_rad` | three mains totaling 16,000, with mixed legacy percentage companions | one CannonChem_Light main, 16,000, Corrosion 100 |
+
+Scooper's source is Aedis commit `a92a4bc1bf`; both Apocalypse roots match the
+authored definitions in `4fd9937f3^1` (`a92ae850f`) under current templates.
+These are gameplay repairs: armor profiles, blast shape, state application and
+Apocalypse percentage behavior change. Apocalypse also regains its authored
+Inaccuracy 150 and impact/air-effect overrides. Range, reload, burst, burst delays,
+report and projectile speed are unchanged. No actor cost, HP, movement speed,
+anchor approval, Hydralisk definition, or engine pin changes.
+
+The full-roster comparison covers 2,367 concrete weapons and 156 active/design HP
+values. Exactly five weapon definitions change, with none added or removed.
+Its generic preservation gate deliberately exits 1: the three flat-damage
+changes and four percentage changes above are real, not a pure structural fold.
+The exact generated payload and current head snapshot are pinned in tests:
+`latest/merge_payload_repair_comparison.json`.
+
+Restoring the authored local Apocalypse effects initially exceeded existing
+effect-structure ratchets. Two faction-local effect compositions now own those
+overrides; they contain no primary damage or radiation mechanic. The radiation
+mechanic remains a separate explicit inherit. The four resolved definitions
+retain every authored field. Only four cosmetic nodes in the radiation variants
+move before the deterministic radiation update; their relative order is retained.
+The test permits that exact permutation, not arbitrary reordering. Independent
+engine inspection checked the local/shared randomness boundary for that move.
+
+### Tests reconciled without making old converters permissive
+
+- Retired exemption symbols no longer prevent 14 modules from importing. Raw
+  inventory tests count every stack; historical PR320 artifacts stay untouched.
+- Current identity/role tests follow the renamed Soviet Mammoth and Outpost2 EMP
+  routes, the deliberately self-contained Ordos air mine, the already-consolidated
+  D2K shotgun parent, and Kotin's authored nuclear upgrade, including death routing.
+- A test-only historical view asserts each exact modern field value, reverses
+  only the independently reviewed delta in a copy, then runs the original stored
+  fingerprints. This covers explicit Corrosion-binding cleanup, generated armor
+  coupling cells, LatinSmoker's authored effect-parent removal and TSPulse's dead
+  Falloff field. Converter source/guards and historical hashes remain unchanged.
+- Exact Flak damage/percentage/target tuples and all unaffected descendant
+  closures remain checked. The independent reviewer found those checks missing
+  from an early migration; they were restored before publication.
+- Derived-DPS tests retain their live role/geometry/upgrade guarantees and compare
+  extracted values with the current model, rather than freezing an older census.
+  The ledger layout test recognizes the two existing reference sidecars explicitly;
+  an unknown orphan still fails.
+- New regressions pin both repaired weapon families, effect ownership, and the
+  historical-view helper's rejection of unreviewed values and missing fields.
+
+Raw inventory is now 322 stacks: 234 reachable (184 direct plus 50 indirect) and 88
+unreached; reachable excess mains 425. The preceding integrated measurement was
+327/239/432, so this work removes five reachable stacks and seven excess mains.
+Raw/broadcast/reachable ceilings only move down. The separate weapon-shape audit
+uses a different predicate and reports 389 multi-main weapons; it is not relabeled
+as 322. Its six current buckets are 576/210/12/51/389/694, all within tightened limits.
+
+### Runtime evidence and limitations
+
+The integrated menu/shellmap rendered at 1024x768. Fresh three-minute fixture
+matches exercised 24 real attacks/kills, normal completion and match recording:
+4,501 ticks at 40ms, 180,040ms simulation, value destroyed 1,500 versus lost 900.
+The observer replay showed positive and negative values and the final +600 plateau;
+the complete Combat Value label fits at 1024x768. Replay completion did not create
+a duplicate match record. This is an integrated smoke, not long-match, multiplayer,
+AI-personality, or whole-roster balance proof.
+
+One intermediate repair boot failed on obsolete Scooper removal nodes. They were
+removed only after confirming their targets disappeared with the retired parents,
+and are now guarded explicitly. Python resolved equivalence had missed that strict
+engine error. The repaired match/replay subsequently exited normally with no new
+exceptions; the final effect extraction also passed the actual menu boot marker.
+Owned temporary maps/replays/records are recoverable in the local Temp evidence
+folder, not published as gameplay content or left in the normal match corpus.
+
+The final effect-template tree also completed a fresh match in 220.1s and its
+replay in 217.6s, both normal exit 0 with no new exceptions. There was exactly one
+match record before and after replay. Its captured source hash is
+`8035f04237e923c35be1f4e97b614108814bcbaaa77d405088604c940671d0ed`.
+The local evidence is under
+`%TEMP%/astra_pr329_runtime_evidence_20260907/final`; cleanup restored zero test
+records in the normal match corpus and removed the fixture from the mod.
+
+Default-interpreter validation completed all 98 modules: 974 tests run, 59 skips,
+zero failures. All 11 optional workbook tests additionally passed with bundled
+openpyxl, without installing packages. All 76 Cameo C# tests pass with no skips.
+Raw and derived extraction checks pass for all 33 ledgers with zero drift; only
+the Soviet RA2 and Forgotten ledgers/sidecars have content changes. The percentage
+runtime audit reports zero dispatch findings. Sampled PC memory has stayed below
+73% through these runs, with an 84% stop guard and 2 GB Python-tree guard.
+The dependency-enabled full rerun and canonical audit refresh are recorded below
+when complete; the canonical audit board is not claimed all-green.
+
+Revert boundary: revert this follow-up's implementation commit together with its
+generated ledger changes and associated regression/ratchet updates. To revert
+only one gameplay decision, restore that faction's weapon block and re-extract
+its ledgers, then regenerate comparison evidence and adjust the corresponding
+tests honestly. Do not replay any historical converter over current upstream.

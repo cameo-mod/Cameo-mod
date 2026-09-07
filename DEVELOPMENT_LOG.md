@@ -10749,3 +10749,30 @@ upstream comparison and current audit limitations are recorded in the existing
 `docs/audit/ASTRA_REVIEW.md` dossier. PR #329 remains open/unmerged.
 
 Co-Authored-By: Codex <noreply@openai.com>
+
+## 2026-09-07 — Restore merge-damaged payloads and reconcile inherited regression tests
+
+Completed Blackrobe's integrated runtime smoke and inherited-failure triage for
+PR #329. Merge4fd9937f3 combined alternative Scooper and Apocalypse weapon work;
+restored the authored chemical/AP roles across five concrete definitions, with
+resolved-inheritance regression coverage. This changes live damage/profile/state
+behavior, not actor prices or firing cadence. Two effect compositions preserve
+the Apocalypse visuals without exceeding structural ratchets. The whole-roster
+comparison explicitly reports the intended gameplay differences.
+
+Reconciled retired audit imports, identities and historical fingerprints without
+weakening converter guards or changing historical reports. Independent review
+challenged retained field/closure coverage and the cosmetic ordering boundary;
+all findings were addressed. The strict engine caught obsolete removal nodes in
+an intermediate repair; they were fixed and guarded before the final runtime pass.
+
+Final-state match and replay complete normally with no new exceptions and no
+duplicate match record; the observer graph shows signed values and the final
++600 plateau. Default Python: 974 tests, 59 skips, zero failures; the optional
+11 workbook tests also pass with bundled dependencies. All 76 C# tests and all
+33 raw/derived ledger checks pass. Canonical findings remain visible rather than
+being exempted. Runtime artifacts are recoverably removed from live folders.
+Full evidence, limitations and revert boundaries: `docs/audit/ASTRA_REVIEW.md`.
+PR #329 remains draft and unmerged for coordinator review.
+
+Co-Authored-By: Codex <noreply@openai.com>
