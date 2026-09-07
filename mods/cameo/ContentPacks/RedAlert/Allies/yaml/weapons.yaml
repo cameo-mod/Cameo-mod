@@ -335,13 +335,14 @@ Aphid_AA:
 		TrailDelay: 1
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
+	-Warhead@MissileHE_Heavy:
 
 AphidCryo_AA:
 	Inherits@wh: ^Warhead_CryoBlast_Medium

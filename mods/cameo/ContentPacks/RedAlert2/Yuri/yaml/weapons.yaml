@@ -336,12 +336,13 @@ RA2DiskDrain:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Magic_Heavy:
 RA2DiskSteal:
 	ReloadDelay: 5
 	Range: 125
