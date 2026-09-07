@@ -711,8 +711,6 @@ ra2shk.bot:
 		Cost: 500
 	Health:
 		HP: 48000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Mobile:
 		Voice: Move
 		Speed: 38
@@ -786,8 +784,6 @@ YRSLAV:
 		Locomotor: chem
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament@PRIMARY:
 		Weapon: RA2Shovel
 	Armament@GARRISONED:
@@ -1065,8 +1061,6 @@ ra2sqd:
 		TurnSpeed: 48
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Armor:
 		Type: Medium
 	Turreted:
@@ -1141,8 +1135,6 @@ ra2dlph:
 		Speed: 120
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 8
 	Armor:
 		Type: Light
 	Armament@PRIMARY:
@@ -1199,8 +1191,6 @@ ra2dest:
 		TurnSpeed: 28
 	Health:
 		HP: 160000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Armor:
 		Type: Heavy
 	Armament@PRIMARY:
@@ -1274,8 +1264,6 @@ ra2asw:
 		TakeUpCellWhenLand: false
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: RA2DepthCharge
 		LocalOffset: 427,-171,-213, 427,171,-213
@@ -1340,8 +1328,6 @@ ra2carrier:
 		TurnSpeed: 16
 	Health:
 		HP: 250000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Armor:
 		Type: Superheavy
 	AttackFrontal:
@@ -1385,8 +1371,6 @@ ra2hornet:
 		TakeUpCellWhenLand: false
 	Health:
 		HP: 5000
-	ChangesHealth@SelfHealing:
-		Step: 2
 	Armament@PRIMARY:
 		Weapon: RA2HornetMissile
 		LocalOffset: 427,-171,-213, 427,171,-213
@@ -1446,8 +1430,6 @@ ra2sub:
 		TurnSpeed: 36
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Armor:
 		Type: Heavy
 	Turreted:
@@ -1505,8 +1487,6 @@ ra2dred:
 		TurnSpeed: 20
 	Health:
 		HP: 250000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Armor:
 		Type: Superheavy
 	Armament@AG:
@@ -1618,8 +1598,6 @@ yrbpln:
 		Cost: 5000
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	HitShape:
 	Voiced:
 		VoiceSet: MiGVoice
@@ -2500,8 +2478,6 @@ ra2leopard:
 		HP: 230000
 	Repairable:
 		HpPerStep: 6500
-	ChangesHealth@SelfHealing:
-		Step: 52
 	Armor:
 		Type: Heavy
 	Turreted:
@@ -2572,8 +2548,6 @@ ra2_c_ifv:
 		HP: 120000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armor:
 		Type: Medium
 	Turreted:
@@ -2650,8 +2624,6 @@ ra2_c_hum:
 		HP: 80000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armor:
 		Type: Light
 	Turreted:
@@ -2717,8 +2689,6 @@ ra2_c_abram:
 		HP: 190000
 	Repairable:
 		HpPerStep: 6500
-	ChangesHealth@SelfHealing:
-		Step: 52
 	Armor:
 		Type: Heavy
 	Turreted:
@@ -4680,8 +4650,6 @@ ra2shkhero:
 		Name: Tesla Commando
 	Health:
 		HP: 45000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Mobile:
 		Voice: Move
 		Speed: 38
@@ -6300,8 +6268,6 @@ yrrobo:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armor:
 		Type: Medium
 	Turreted:
