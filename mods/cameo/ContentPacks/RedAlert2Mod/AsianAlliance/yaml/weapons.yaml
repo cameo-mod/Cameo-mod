@@ -2354,7 +2354,7 @@ AsianChaosMine:
 		PercentageScale: 4000
 		Spread: 1250
 		Falloff: 125, 100, 75, 50, 25
-		Damage: 125000
+		Damage: 250000
 		InvalidTargets: Mine
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 4
@@ -2366,6 +2366,7 @@ AsianChaosMine:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
+	-Warhead@CannonAP_Light:
 
 AsianPelicanMissile:
 	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat

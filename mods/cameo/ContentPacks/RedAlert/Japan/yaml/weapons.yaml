@@ -2299,12 +2299,11 @@ WaveArtilleryShell:
 
 WaveArtilleryImpact:
 	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Railgun_Heavy
 	Inherits@3: ^Effect_Railgun_Heavy
 	Projectile: InstantHit
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 10000
+		Damage: 20000
 		Spread: 333
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -2312,11 +2311,6 @@ WaveArtilleryImpact:
 		Damage: 5000
 		Spread: 666
 		ValidRelationships: Enemy, Neutral
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Railgun_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 10000
-		Spread: 333
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@SonicDebuff: GrantExternalCondition
 		Condition: SonicDebuff
@@ -2364,18 +2358,6 @@ WaveTurretImpact:
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 5
-		Spread: 500
-		ValidRelationships: Enemy, Neutral
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 20000
-		Spread: 500
-		ValidRelationships: Enemy, Neutral
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 5
 		Spread: 500
