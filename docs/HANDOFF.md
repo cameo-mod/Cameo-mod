@@ -1357,3 +1357,81 @@ kept for provenance and for the technique notes inside them.
 **The rule that keeps this file from becoming one of them:** a handoff records STATE, and state
 rots. When you finish a session, update **this** file — do not write a new dated one. If a
 statement here disagrees with the tree, the tree is right; fix the sentence.
+
+---
+
+## 7. NOVA (A2 / LANE-2) coordination snapshot — 2026-09-08
+
+**Identity.** Slot **A2**, callsign **NOVA**, branch `devin/nova/w24-lane2`. Worktree is the one named `C:/tmp/nova-*` per the fleet `AGENTS.md` table, and the `Cameo-mod-fleet/AGENTS.md` row has been updated to show current LANE-2 status.
+
+**Why this lane.** LANE-2 is the **Red Alert 1 & 2** W24 weapon-shape collapse: reduce concrete weapons to the one-main / three-inherit architecture so dynamic faction loading (the 8-GB-RAM goal in `MIGRATION.md`) does not pay for duplicate warheads. We preserve shipped total damage; we only clean dead zero-damage nodes, fold same-family multi-mains, and rename friendly-fire halves so the audit counts them as companions rather than extra mains. Every batch is gated, booted, and peer-reviewed.
+
+**What just landed (branch `devin/nova/w24-lane2`):**
+
+| batch | what | commit |
+|---|---|---|
+| 28 | `JapaneseHovercraftFlakWaveforce` / `JapaneseHovercraftFlakAAkWaveforce` collapsed to `Railgun_Heavy 6000` | `66a73ba26` |
+| 29 | `ATMine` collapsed to `ATMineDemolition_Light 110000` | `1838b2d24` |
+| 30 | `ZeroFighterChainGunWaveforce` collapsed to `Railgun_Heavy 9000`, renamed ally twin `...FriendlyFire` | `a0ae64486` |
+| 31 | `BarrelExplode` dead `1Dam` warhead removed, leaving `Demolition_Light 60000` | `7974b2b28` |
+| PS fix | Recomputed `PercentageScale` on the two waveforce weapons and on `ZeroFighterChainGunWaveforce` after EMBER's review flagged the percent-of-HP channel was being inflated by the higher-Damage main (`9975` -> `6650`; `6667` -> `4444`) | `9c8d793b0` |
+
+**Audit state after the PS fix (verified):**
+
+```
+find_empty_warhead.py            0
+audit_orphan_removals.py         0
+audit_release_drift.py           D1 80/133 D2 34/62 D3 15/27 D4 335/335 D5 39/43  (all PASS)
+audit_weapon_shape.py            W5 300 <= 394; all other W buckets <= ratchet
+launch-game.cmd                  menu reached, no new exception-*.log
+```
+
+**Master sync status — verified against the tree.** The fleet (`ORDERS_2026-09-09.md`) identified `5e87c1bdd` as the current stable master. `origin/master` has moved to `5bb76c22d` (PR #329, "Implement safe balance application and repair readiness blockers"), which currently fails to boot with a missing `AiMatchLogWriterInfo` type. A rebase of `devin/nova/w24-lane2` onto `5e87c1bdd` is unnecessary because that commit is already an ancestor of our branch. A rebase onto `origin/master` would pull in the broken boot commit and a large conflict in `mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml` where Blackrobe's Apocalypse 120mm repair and NOVA's W24 Phase-B 3-way split overlap.
+
+**Interim master-sync plan:**
+1. Hold `devin/nova/w24-lane2` at `5e87c1bdd` base. It is already past that point and bootable.
+2. Do **not** rebase onto `origin/master` (`5bb76c22d`) until the `AiMatchLogWriterInfo` boot crash is fixed.
+3. When the boot crash is fixed, resolve the `RedAlert2/Soviets/yaml/weapons.yaml` conflict by taking **both** the Apocalypse repair (master/Blackrobe) and NOVA's W24 canonical 3-way split, then run `review_resolve_diff.py` on the affected Apocalypse variants.
+4. Only Claude-Local squash-merges the branch to `master` once it is green.
+
+**Remaining W24 queue (rule-A / mechanical first, rulings second).** `audit_weapon_shape.py` W5 is down to **300 / 394**. The next lowest-risk mechanical pass is the **Naxis flak cluster** (`NaxQuadCannon_AA` and children in `ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml`): a dead `Bullet_Medium` zero-damage main and the `NaxFlakAlly*` Air-only companions need either cancellation or `...FriendlyFire` renaming. After that, the following clusters need a maintainer ruling or are explicitly multi-intentional:
+
+- `RA2SCUD` family (`RA2SCUD`, `V3Explode`, `DredMissile`) — `^RA2SCUDMissileCompatibility` composite.
+- `RA2TRIPODPLAZMA`, `RA2ThermobaricFlame`, `RA2REVENANTAA` — multi-main / mixed families.
+- `JapanMaidenBowEnergized`, `TankBusterBeamCannon`, `ExecutionerDeath` — intentional composites or death explosions.
+- `Atomic` / `RAAtomic` / `DTAtomic` / `CrateNuke` / `MiniNuke` / `ChemTibAtomic` — nuclear multi-blast, needs dedicated review.
+- `ShtoraLaser` (RA1 Soviets), `HeavyAATankCannon_AA` (RA1 Allies) — multi-role AA.
+
+**Peer review status.** EMBER (A1) reviewed `devin/nova/w24-lane2` up to batch 30 and gave **PASS WITH NOTES**; the two `PercentageScale` action items are now closed. Per the `ORDERS_2026-09-09` rota, **AURORA (A3)** is the next reviewer. NOVA will not add a new batch 32 until AURORA has reviewed the current tip.
+
+**Blackrobe / Codex / Astra integration summary.**
+
+- Blackrobe is a co-maintainer and owns two agent tracks: **Codex** (weapon consolidation / feature tweaks / semantic RAG index over the engine clone) and **Astra** (balance pipeline Tasks A–G and AI bot modules Task H). Full brief at `docs/BLACKROBE_ASTRA_BRIEF.md`.
+- The valuable Codex work has already reached `master` through PRs #317–#330. The remaining `codex/*` remote branches are stale and should not be merged; Ember's fleet handoff recommends a Claude-supervised sweep-delete, with only the handful of non-weapon feature branches (`resource-regrowth`, `remove-defense-bibs`, etc.) reviewed separately.
+- **Astra** has not yet branched (`astra/balance-pipeline` does not exist on `origin`). When it does, it must launch from a worktree, keep `docs/audit/ASTRA_REVIEW.md`, and not `apply_balance --confirm` without the maintainer order. Its balance-pipeline work is intentionally separate from W24 weapon-shape collapses.
+- **PR #323** (Combat Effectiveness graph, assigned to Astra Task H.1) and the later `5bb76c22d` (#329) touch C#; the current boot failure on `origin/master` is in that area. NOVA's LANE-2 work does not touch C#, so the boot crash is not caused by W24, but it does block merging W24 to master.
+- Blackrobe's `RedAlert2/Soviets/weapons.yaml` repair in #329 overlaps with NOVA's W24 Apocalypse work. The integration path is: fix the C# boot crash, then resolve the Apocalypse YAML conflict by merging the two edits, not by discarding either side.
+
+**What other agents are doing and what NOVA needs from them.**
+
+| agent | lane | current focus | what NOVA needs |
+|---|---|---|---|
+| **EMBER (A1)** | LANE-1 (TS + Consortium), `Side:` routing | verifying the CA untagged drop and fixing `Side:` routing | nothing new; review was accepted and PS fixes are now in |
+| **AURORA (A3)** | LANE-4 (no-template units), RV untagged, D2k effect+sound | rebasing `devin/aurora/rv-untagged-fix-v2` on `5e87c1bdd`, D2k paired templates | review `devin/nova/w24-lane2` at current tip (`9c8d793b0`) per the rota; notify NOVA when the master boot crash is cleared |
+| **DAWN (A4)** | Dune II / Dune 2000 peer recovery | `devin/dawn/untagged-dune-mo`, splicing `docs/design/ORIGINAL_UNITS_PEER_OPENRA.md` | no conflict with LANE-2; keep clear of `RedAlert*/**` and `weapons.yaml` |
+| **ECHO (A5)** | *unclaimed* | — | if claimed, the 195-weapon drift repair should stay in Ixian/Ordos/D2k/Japan lanes, not RA1/RA2, until coordinated with Claude |
+| **BLAZE** | D2k/WC2/Yuri naming | dirty rename maps in shared checkout | finish naming first; do not run `gen_rename_maps.py` without `--out` because it overwrites everyone's maps |
+| **Claude-Local** | rulings, review, merges | fixing `origin/master` boot crash | ruling on Naxis cleanup, RA2SCUD family, Japan composites, and nuclear explosions before NOVA edits them |
+
+**Instructions for other agents (and for future NOVA).**
+
+1. **Do not rebase LANE-2 onto `origin/master` (`5bb76c22d`) until the `AiMatchLogWriterInfo` boot crash is fixed.** `5e87c1bdd` is the safe baseline.
+2. **Do not merge any `codex/*` branch** without a maintainer triage; the `multi-main-weapon-bulk-*` family in particular predates the current 3-way split tooling and will resurrect pre-W24 structure.
+3. **Astra and W24 are parallel, not overlapping.** Astra owns ledgers, pricing, and `apply_balance --confirm`; NOVA owns `weapons.yaml` shape. Coordinate at `docs/balance/derived/*.json` boundaries only.
+4. **Peer review is mandatory before a W24 batch reaches Claude.** NOVA's next batch waits on AURORA.
+5. **Never `git add -A` or `git checkout -- .` in a worktree with live agent WIP.** Scoped adds and per-file checkouts only.
+6. **Always take the collapse number from `tools/balance/collapse_target.py`, not from summing today's mains.** Percentage companions and ExtraDamage halves must be recomputed (`Scale_new = Scale_old * Damage_old / Damage_new`) when a main's `Damage` changes.
+
+**Dreams and aspirations (for the lane, not the agent).** Get W5 below 250 by clearing the Naxis flak dead-main pass and the low-risk rule-A atomic/explosion cleanups, then hand the hard composite clusters (RA2SCUD, Japan energized, nuclear) to a maintainer ruling. Keep every commit boot-gated, peer-reviewed, and master-rebaseable. The end state is a Red Alert 1 & 2 pack that loads only the selected faction, starts fast, and still plays like the 2026-07-09 build.
+
+**Fleet chatter.** The detailed reports and check-ins live in `../Cameo-mod-fleet/`; the canonical ones are `REPORT_2026-09-08_nova_w24_batch31.md` and this `HANDOFF.md` section. The in-tree `DEVELOPMENT_LOG.md` contains only the completed batch entries and the `PercentageScale` lesson.
