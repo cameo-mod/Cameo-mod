@@ -2481,7 +2481,7 @@ AAGunBoatFlak:
 		ValidTargets: Ground, Water, Air
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 8000
 		PercentageScale: 10000
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
@@ -2489,6 +2489,7 @@ AAGunBoatFlak:
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 0
+	-Warhead@Flak_MediumFlatCompatibility:
 
 AAGunBoatFlak_elite:
 	Inherits: AAGunBoatFlak

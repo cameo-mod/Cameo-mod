@@ -48,57 +48,8 @@ japan_imperialscoutsman_rifle:
 	-Warhead@RailgunExtraDamage:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 13000
 		PercentageScale: 0
-	Warhead@RailgunCompatibility: SpreadDamage
-		AffectsParent: false
-		Spread: 250
-		Damage: 4000
-		Versus:
-			REFLECTOR: 50
-			Shield: 140
-			Superheavy: 100
-			Heavy: 96
-			Medium: 92
-			Light: 88
-			Scout: 84
-			Heroic: 80
-			Plate: 76
-			Flak: 72
-			None: 68
-			Steel: 64
-			Concrete: 60
-			Wood: 56
-			Spaceship: 52
-			Helicopter: 48
-			Bomber: 44
-			Fighter: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
-	Warhead@RailgunShieldCompatibility: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 500
-		Damage: 1000
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 
 # paired upgrade variant (LAW: renaming a base weapon ALWAYS renames its
 # upgraded variant with it). Waveforce flavor rides the baseline stats.
@@ -575,7 +526,7 @@ BallistaSingleShotAirEnergized:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 20000
+		Damage: 160000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
@@ -655,6 +606,9 @@ BallistaSingleShotAirEnergized:
 		ValidTargets: Air
 		Damage: 110000
 		PercentageScale: 0
+	-Warhead@Arrow_LightFlatCompatibility:
+	-Warhead@Arrow_Light:
+	-Warhead@CannonHE_Medium:
 BallistaMultiShot:
 	Inherits@collapsewh: ^Warhead_Arrow_Medium
 	-TargetActorCenter:
@@ -734,14 +688,7 @@ BallistaMultiShot:
 	-Warhead@ArrowWeapon:
 	Warhead@Arrow_Medium:
 		ValidTargets: Ground, Water
-		Damage: 30000
-		PercentageScale: 0
-	Warhead@CollapseTargetCompatibility1: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 40000
 		PercentageScale: 0
 
 BallistaMultiShotEnergized:
@@ -1249,15 +1196,11 @@ SkyHawkPlasmaCannon:
 		Width: 40
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonAP_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
@@ -1265,6 +1208,7 @@ SkyHawkPlasmaCannon:
 	Warhead@EffectAir: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
+	-Warhead@CannonAP_Light:
 
 SkyHawkArrows:
 	Inherits@finalmain: ^Compatibility_Arrow_LightFlat

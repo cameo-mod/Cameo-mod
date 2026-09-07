@@ -880,8 +880,12 @@ SandmarineTuskTwin:
 		Damage: 4000
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
-		Damage: 4000
+		Damage: 60000
 	-Warhead@FlakWeapon:
+	-Warhead@MissileHE_Heavy:
+	-Warhead@Concussion_Medium:
+	-Warhead@Grenade:
+	-Warhead@Bullet_Medium:
 SandmarineTuskCryo:
 	Inherits@finalmain: ^Compatibility_MissileCryo_HeavyFlat
 	Inherits: SandmarineTusk
@@ -1226,8 +1230,9 @@ tkmstrykerfirerockets:
 		Damage: 24000
 		ValidTargets: Ground, Water, Trees, Air
 	Warhead@Flame_Medium:
-		Damage: 6000
+		Damage: 30000
 		ValidTargets: Ground, Water, Air
+	-Warhead@MissileAP_Medium:
 VanSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
