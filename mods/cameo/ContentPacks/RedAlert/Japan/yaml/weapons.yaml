@@ -2438,17 +2438,11 @@ ArmoredCarMG_AA:
 	ValidTargets: Air
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@CannonAP_Light: AreaDamage
-		ValidTargets: Air
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
@@ -2503,10 +2497,7 @@ ArmoredCarMGAAWaveforce:
 	Warhead@Railgun_Heavy:
 		Damage: 19000
 		PercentageScale: 6667
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	-Warhead@CannonAP_Light:
-	-Warhead@CannonHE_Medium:
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 250
