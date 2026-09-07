@@ -9958,10 +9958,36 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - Planner-NONE 7 (`JapanMaidenBowEnergized`, `RA2Comet`/`RA2Comet_elite`, `Aphid_AA`, `BallistaTowerMultiShot`, `RA2DiskDrain`, `TorpTube`)
 - `GLASCUD` in legacy `mods/cameo/weapons/weapons.yaml`
 
+## NOVA (A2 / LANE-2) W24 batches 17-19 (2026-09-08 continuation)
 
-**Verification:**
-- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
-- `find_empty_warhead.py` = 0.
+**What and why:**
+- Batch 17: `Aphid_AA` -> Concussion_Medium 16000 [SUM], dropped MissileHE_Heavy; `RA2DiskDrain` -> Tesla_Heavy 4000 [SHIPPED], dropped Magic_Heavy.
+- Batch 18: `RA2Comet` -> Demolition_Light 60000 [SHIPPED], dropped Flame_Medium and Laser_Heavy (`RA2Comet_elite` inherits cleanly); `TorpTube` -> Concussion_Light 32000 [SHIPPED], dropped MissileHE_Heavy.
+- Batch 19: `AlliedTankDestroyerCannon` -> CannonHE_Medium 24000 [SHIPPED], dropped CannonAP_Light; `SheridanCannon` -> CannonAP_Light 16000 [SHIPPED], dropped CannonHE_Medium.
+- Re-extracted and committed `docs/balance` ledgers after each batch (`audit_balance_drift.py` clean).
+- Updated `C:/tmp/boot_gate.ps1` sleep from 45s to 70s because the game now occasionally needs ~50s to reach the main menu.
+
+**Verification after batch 19:**
+- `find_empty_warhead.py` = 0
+- `audit_orphan_removals.py` = 0
+- `audit_release_drift.py` D1 82 <= 133, D2 34 <= 62, D3 15 <= 27, D4 335 <= 335, D5 39 <= 43
+- `audit_weapon_shape.py` W5 325 <= 394
+- `verify_generator_sync.py` = 0
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log` (70s boot-gate).
+
+**Commits pushed since previous entry:**
+- `631c34ee4` w24: collapse Aphid_AA and RA2DiskDrain under rule A
+- `e9fe73303` ledgers: re-extract after batch 18 (RA2Comet, TorpTube)
+- `4f02bdcb1` w24: collapse AlliedTankDestroyerCannon and SheridanCannon under rule A
+- `53defbbed` ledgers: re-extract after batch 19 (AlliedTankDestroyerCannon, SheridanCannon)
+
+**Remaining blockers:**
+- Waveforce no-@wh 6 (ruling needed on whether `^WaveforceBulletWarhead` is a de-facto warhead-delivery survivor).
+- RA2SCUD family (multi-main composite with `^RA2SCUDMissileCompatibility`, no `@wh`).
+- `JapanMaidenBowEnergized` (intentional composite with 7+ warheads).
+- `GLASCUD` (legacy file, cross-lane/canonical-file ruling).
+- `BTRMachineGun` / `BTRTeslaMachineGun` W5 false positives (already resolve to one main; require 3-way split cleanup of cancelled warhead inherits).
+
 - `audit_balance_drift.py` = `_clean_` (33/33 ledgers match).
 
 **Commit:** `28ae6f0d4` fix(d2k_harkonnen): resolve baron_elite frame mismatch and boot-gate.
