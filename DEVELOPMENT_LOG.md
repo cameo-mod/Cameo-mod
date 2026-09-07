@@ -10768,8 +10768,8 @@ an intermediate repair; they were fixed and guarded before the final runtime pas
 
 Final-state match and replay complete normally with no new exceptions and no
 duplicate match record; the observer graph shows signed values and the final
-+600 plateau. Default Python: 974 tests, 59 skips, zero failures; the optional
-11 workbook tests also pass with bundled dependencies. All 76 C# tests and all
++600 plateau. Final dependency-enabled Python: 930 passed, 44 existing retired-
+feature skips, zero failures (974 tests across 98 modules). All 76 C# tests and all
 33 raw/derived ledger checks pass. Canonical findings remain visible rather than
 being exempted. Runtime artifacts are recoverably removed from live folders.
 Full evidence, limitations and revert boundaries: `docs/audit/ASTRA_REVIEW.md`.

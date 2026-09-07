@@ -1,12 +1,12 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **433**, files touched: **1044**
+Commits reviewed: **436**, files touched: **1053**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
 | R1 | balance yaml edited without the ledger | 22 | yes |
 | R2 | audit script never run by run_all.sh | 4 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 37 | partly |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 40 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 0 | no |
 
 
@@ -48,10 +48,13 @@ Commits reviewed: **433**, files touched: **1044**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (37)
+## R3 — commits without provenance (40)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 6d021955 | 2026-09-07 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
+| 6405d194 | 2026-09-07 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
+| b05f1847 | 2026-09-07 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
 | dcd26b4c | 2026-09-07 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
 | a5ec321a | 2026-09-07 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
 | 19ebd5d5 | 2026-09-07 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
@@ -100,17 +103,17 @@ _none found_
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 203 |
-| docs/HANDOFF.md | 77 |
-| tools/audit/audit_warhead_split.py | 48 |
-| docs/design/BALANCE_PROGRAM_PLAN.md | 39 |
+| DEVELOPMENT_LOG.md | 205 |
+| docs/HANDOFF.md | 78 |
+| tools/audit/audit_warhead_split.py | 49 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 40 |
 | docs/balance/derived/redalert_soviets.json | 36 |
-| docs/audit/doc_claims.yaml | 32 |
+| docs/audit/doc_claims.yaml | 33 |
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 31 |
 | docs/balance/derived/d2k_ordos.json | 31 |
+| docs/balance/derived/tiberiansun_forgotten.json | 30 |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 30 |
 | docs/balance/derived/d2k_ixian.json | 29 |
-| docs/balance/derived/tiberiansun_forgotten.json | 29 |
 | docs/balance/derived/tiberiansun_nod.json | 28 |
 | docs/balance/redalert_soviets.json | 27 |
 | docs/balance/derived/tiberiansun_gdi.json | 27 |
@@ -128,7 +131,7 @@ _none found_
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 22 R1 and 0 R3 of 22/37 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 22 R1 and 0 R3 of 22/40 findings are in scope; the rest predate the gate.
 
 
 ## FAIL

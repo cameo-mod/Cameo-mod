@@ -1,17 +1,17 @@
-# audit_tier_weapon_class — 45 of 1060 classifiable weapons break the TYPES x LEVELS budget
+# audit_tier_weapon_class — 43 of 1063 classifiable weapons break the TYPES x LEVELS budget
 
 LEGAL shapes:
-    947  1 type, 1 level - squarely in tier
+    952  1 type, 1 level - squarely in tier
      38  2 types, 1 level - lore hybrid
      29  2 types, 2 adjacent levels - hybrid AND between-tier (budget 4)
       1  1 type, 2 ADJACENT levels - between-tier mix
 
-   1093  weapons skipped — at least one LEGACY-named main warhead (no Family_Level), so the budget cannot be judged until they are 3-way split
+   1090  weapons skipped — at least one LEGACY-named main warhead (no Family_Level), so the budget cannot be judged until they are 3-way split
 
 VIOLATIONS by shape:
      22  3 LEVELS
      12  3 TYPES
-     11  NON-ADJACENT levels
+      9  NON-ADJACENT levels
 
 | weapon | problem | main warheads |
 |---|---|---|
@@ -40,8 +40,6 @@ VIOLATIONS by shape:
 | NaxiTank2Laser_AA | 3 LEVELS (Heavy+Light+Medium) - max is 2 | Bullet_Light, Bullet_Medium, Laser_Heavy |
 | NodTorpTube | NON-ADJACENT levels (Heavy+Light) | Concussion_Light, MissileHE_Heavy |
 | OIBigPlasmaCannon | 3 TYPES (CannonHE, Railgun, Tesla) - max is 2 | CannonHE_Heavy, Railgun_Heavy, Tesla_Heavy |
-| RA2120xmm | NON-ADJACENT levels (Heavy+Light) | CannonAP_Light, CannonHE_Heavy |
-| RA2120xmm_elite | NON-ADJACENT levels (Heavy+Light) | CannonAP_Light, CannonHE_Heavy |
 | RA2AsianShotgunFanatic1 | 3 TYPES (Bullet, Concussion, Demolition) - max is 2 | Bullet_Medium, Concussion_Medium, Demolition_Light |
 | RA2AsianShotgunFanatic2 | 3 TYPES (Bullet, Concussion, Demolition) - max is 2 | Bullet_Medium, Concussion_Medium, Demolition_Light |
 | RA2AsianShotgunFanatic3 | 3 TYPES (Bullet, Concussion, Demolition) - max is 2 | Bullet_Medium, Concussion_Medium, Demolition_Light |
@@ -55,8 +53,10 @@ VIOLATIONS by shape:
 | TSObeliskLaserFire | NON-ADJACENT levels (Heavy+Light) | CannonAP_Light, Laser_Heavy |
 | TorpTube | NON-ADJACENT levels (Heavy+Light) | Concussion_Light, MissileHE_Heavy |
 | Type97PlasmaCannon | 3 TYPES (CannonHE, Railgun, Tesla) - max is 2 | CannonHE_Heavy, Railgun_Heavy, Tesla_Heavy |
+| ViperMissilesFire | 3 TYPES (Concussion, Flame, MissileAP) - max is 2 | Concussion_Medium, Flame_Light, MissileAP_Light, MissileAP_Medium |
+| d2k_air_drone_guns_upgrade | 3 TYPES (Bullet, CannonHE, MissileAP) - max is 2 | Bullet_Medium, CannonHE_Heavy, MissileAP_Heavy |
 
-_(5 more)_
+_(3 more)_
 
-WARN 45 budget violations (ratchet 48)
+WARN 43 budget violations (ratchet 48)
 Lower `TIER_BASELINE` as weapons are brought onto the law; never raise it.

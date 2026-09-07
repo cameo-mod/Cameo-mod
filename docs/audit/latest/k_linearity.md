@@ -4,7 +4,7 @@ Analysed **2061** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
-_clean_ — modeled 1693 folded and 2457 standalone applications.
+_clean_ — modeled 1689 folded and 2441 standalone applications.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 
@@ -18,7 +18,7 @@ _clean_ — the identity holds for every analysed weapon; 11 percentage-only wea
 
 ## L3 — weapons with a standalone percentage DPS floor
 
-685 weapon(s) carry a standalone percentage hit; **187** have a floor at or above 25% of output.
+681 weapon(s) carry a standalone percentage hit; **185** have a floor at or above 25% of output.
 
 A price target below the floor is UNREACHABLE by lowering flat Damage — `required_damage()` returns None rather than a wrong positive number. To price these lower, the standalone percentage hit has to shrink.
 
@@ -55,11 +55,11 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `PhobosLaser` | 86.9% |
 | `TSHSeekerBomb` | 85.7% |
 
-_... and 157 more._
+_... and 155 more._
 
 ## L4 — folded runtime quantisation residual
 
-564 weapon(s) have a non-zero current folded runtime residual.
+561 weapon(s) have a non-zero current folded runtime residual.
 This residual is included in measured output but excluded from `k_flat` and `dps_floor`; recompute it after snapping a proposed Damage value.
 
 | weapon | context-adjusted residual per shot |

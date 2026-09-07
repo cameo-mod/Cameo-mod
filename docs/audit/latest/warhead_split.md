@@ -1,9 +1,9 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint / every MAIN identical (70 vs baseline 72)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (69 vs baseline 69)
 
-_at or below baseline_ — pre-existing **W24** debt (70 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+_at or below baseline_ — pre-existing **W24** debt (69 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
@@ -49,7 +49,7 @@ _at or below baseline_ — pre-existing **W24** debt (70 weapons), not a regress
 | SCUDIrak | 2 | 60000 | 120000 |
 
 
-_... and 30 more._
+_... and 29 more._
 
 
 ## Review — exact gameplay restorations (0)

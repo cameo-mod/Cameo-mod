@@ -15,7 +15,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 356 | 356 | ✅ |
-| `multi_main_fired_weapons` | 189 | 189 | ✅ |
+| `multi_main_fired_weapons` | 184 | 184 | ✅ |
 | `percentage_denominator_unset` | 183 | 183 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 18 | 18 | ✅ |
 | `meters_filling_before_death` | 269 | 269 | ✅ |
@@ -26,7 +26,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `plating_families` | 48 | 48 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1415 | 1415 | ✅ |
-| `unconverted_template_inheritors` | 1601 | 1601 | ✅ |
+| `unconverted_template_inheritors` | 1596 | 1596 | ✅ |
 | `ledgers_drifted` | 0 | 0 | ✅ |
 
 _clean_ — every registered claim still matches the tree.

@@ -94,7 +94,7 @@ ambiguous: Rifle Infantry -> ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry
 | Archon | protoss_archon | Damage 30000 vs game 47000 |
 | Mirage Tank | ra2_allies_miragetank | Damage 24000 vs game 25108 |
 | Heavy Mirage Tank | ra2_allies_heavymiragetank | Damage 32000 vs game 33112 |
-| Apocalypse Tank | ra2_soviets_apocalypsetank | Damage 24000 vs game 143322 |
+| Apocalypse Tank | ra2_soviets_apocalypsetank | Damage 24000 vs game 139300 |
 | Robot Tank | futuretech_robottank | Damage 24000 vs game 31100 |
 | Megalodon | steelconsortium_megalodon | Damage 60000 vs game 316325 |
 | Defender Bot | steelconsortium_defenderbot | Damage 32000 vs game 99212 |

@@ -8,23 +8,23 @@ concrete weapons with inherits: **2061**
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **577** | 583 |
-| W2 | two or more `^Warhead_*` inherits | **211** | 211 |
+| W1 | more than 3 inherits | **576** | 576 |
+| W2 | two or more `^Warhead_*` inherits | **210** | 210 |
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
-| W4 | two or more `^Effect_*` inherits | **52** | 52 |
-| W5 | more than one resolved MAIN warhead | **394** | 394 |
+| W4 | two or more `^Effect_*` inherits | **51** | 51 |
+| W5 | more than one resolved MAIN warhead | **389** | 389 |
 | W6 | effect warheads declared LOCALLY | **694** | 694 |
 
 | I7 informational ΓÇö missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1245 |
-| no `^Projectile_*` inherit | 1363 |
-| no `^Warhead_*` inherit | 1157 |
+| no `^Effect_*` inherit | 1244 |
+| no `^Projectile_*` inherit | 1362 |
+| no `^Warhead_*` inherit | 1156 |
 
 _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W1 ΓÇö more than 3 inherits (577 vs ratchet 583)
+## W1 ΓÇö more than 3 inherits (576 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -70,10 +70,10 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `AsianSniperLockdown` | 4 | `^Warhead_Tesla_Super` ┬╖ `^Projectile_Lightning_Super` ┬╖ `^Effect_Tesla_Super` ┬╖ `AsianSniperAP` |
 
 
-_... and 537 more._
+_... and 536 more._
 
 
-## W2 ΓÇö two or more `^Warhead_*` inherits (211 vs ratchet 211)
+## W2 ΓÇö two or more `^Warhead_*` inherits (210 vs ratchet 210)
 
 | weapon | warhead templates |
 |---|---|
@@ -119,7 +119,7 @@ _... and 537 more._
 | `Dune_SiegeMortar` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
 
 
-_... and 171 more._
+_... and 170 more._
 
 
 ## W3 ΓÇö two or more `^Projectile_*` inherits (12 vs ratchet 12)
@@ -140,7 +140,7 @@ _... and 171 more._
 | `ra120mmThermobaric` | `^Projectile_Shell_Heavy` ┬╖ `^Projectile_Flame_Heavy` |
 
 
-## W4 ΓÇö two or more `^Effect_*` inherits (52 vs ratchet 52)
+## W4 ΓÇö two or more `^Effect_*` inherits (51 vs ratchet 51)
 
 | weapon | effect templates |
 |---|---|
@@ -169,7 +169,6 @@ _... and 171 more._
 | `NaxiCowDrop` | `^Effect_Demolition_Heavy` ┬╖ `^Effect_Clsn_Medium_RA2` |
 | `NaxiJadgDestroyer` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Concussion_Medium` |
 | `OrionRailgun` | `^Effect_Railgun_Heavy` ┬╖ `^Effect_Explosion_Large_RA2` |
-| `RA2120xmm` | `^Effect_CannonAP_Light` ┬╖ `^Effect_Apoc_Explosion_RA2` |
 | `RA2FreedomAK47` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Bullet_Light_RA2` |
 | `RA2GrandCannonWeapon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Clsn_Medium_RA2` |
 | `RA2MortarBike` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Explosion_Large_RA2` |
@@ -184,12 +183,13 @@ _... and 171 more._
 | `YakovlevCannon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_CannonAP_Light` |
 | `YakovlevCannon_elite` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_CannonAP_Light` |
 | `bigshieemortar` | `^Effect_Flame_Medium` ┬╖ `^Effect_Explosion_Large_RA2` |
+| `ra120mm2Thermobaric` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
 
 
-_... and 12 more._
+_... and 11 more._
 
 
-## W5 ΓÇö more than one resolved MAIN warhead (394 vs ratchet 394)
+## W5 ΓÇö more than one resolved MAIN warhead (389 vs ratchet 389)
 
 | weapon | mains | which |
 |---|---|---|
@@ -235,7 +235,7 @@ _... and 12 more._
 | `Combat_Tank_F_Sound` | 2 | `1Dam` ┬╖ `2Dam` |
 
 
-_... and 354 more._
+_... and 349 more._
 
 
 ## W6 ΓÇö effect warheads declared LOCALLY (694 vs ratchet 694)

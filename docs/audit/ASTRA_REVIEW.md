@@ -546,7 +546,7 @@ report and projectile speed are unchanged. No actor cost, HP, movement speed,
 anchor approval, Hydralisk definition, or engine pin changes.
 
 The full-roster comparison covers 2,367 concrete weapons and 156 active/design HP
-values. Exactly five weapon definitions change, with none added or removed.
+values. Exactly five concrete weapon definitions change, with none added or removed.
 Its generic preservation gate deliberately exits 1: the three flat-damage
 changes and four percentage changes above are real, not a pure structural fold.
 The exact generated payload and current head snapshot are pinned in tests:
@@ -560,6 +560,13 @@ retain every authored field. Only four cosmetic nodes in the radiation variants
 move before the deterministic radiation update; their relative order is retained.
 The test permits that exact permutation, not arbitrary reordering. Independent
 engine inspection checked the local/shared randomness boundary for that move.
+
+The complete audit subsequently caught two glow-tier inheritance paths in those
+new compositions. Their already-resolved non-glow nodes are now explicit, in
+the same order, with one heavy `^ImpactGlow` parent. Both explosion roots are
+explicitly classified as emissive, not exempted. The full ordered reference test
+still passes and the glow audit has zero findings. This bounded duplication keeps
+the authored effects visible rather than weakening the single-glow-path rule.
 
 ### Tests reconciled without making old converters permissive
 
@@ -608,7 +615,8 @@ exceptions; the final effect extraction also passed the actual menu boot marker.
 Owned temporary maps/replays/records are recoverable in the local Temp evidence
 folder, not published as gameplay content or left in the normal match corpus.
 
-The final effect-template tree also completed a fresh match in 220.1s and its
+Before the field/order-identical single-glow materialization, the effect-template
+tree completed a fresh match in 220.1s and its
 replay in 217.6s, both normal exit 0 with no new exceptions. There was exactly one
 match record before and after replay. Its captured source hash is
 `8035f04237e923c35be1f4e97b614108814bcbaaa77d405088604c940671d0ed`.
@@ -616,15 +624,45 @@ The local evidence is under
 `%TEMP%/astra_pr329_runtime_evidence_20260907/final`; cleanup restored zero test
 records in the normal match corpus and removed the fixture from the mod.
 
-Default-interpreter validation completed all 98 modules: 974 tests run, 59 skips,
-zero failures. All 11 optional workbook tests additionally passed with bundled
-openpyxl, without installing packages. All 76 Cameo C# tests pass with no skips.
+The final single-glow source checkpoint `6d0219550` independently passed a fresh
+menu/shellmap boot: the actual `MenuPostProcessEffect.PostWorldLoaded` marker is
+present, with no new exceptions. The owned process was stopped at 100.6s, not
+reported as a normal match exit. Both effect templates and all four weapons have
+identical resolved fields and child order to the match-tested checkpoint, as
+independently verified. The new boot's sampled PC peak was 72.7%.
+
+All 76 Cameo C# tests pass with no skips.
 Raw and derived extraction checks pass for all 33 ledgers with zero drift; only
 the Soviet RA2 and Forgotten ledgers/sidecars have content changes. The percentage
 runtime audit reports zero dispatch findings. Sampled PC memory has stayed below
 73% through these runs, with an 84% stop guard and 2 GB Python-tree guard.
-The dependency-enabled full rerun and canonical audit refresh are recorded below
-when complete; the canonical audit board is not claimed all-green.
+The earlier dependency-enabled full run completed all 98 modules: **930 passed,
+44 retired-feature skips, zero failures** (974 tests). This also runs the 15 cases
+that the default interpreter skipped for optional dependencies. It took 583.4s,
+with sampled tree peak 863.9 MB and PC peak 50.1%. No packages were installed.
+
+A follow-up run correctly detected a source-comment edit during a converter's
+read-only byte check. That interfered run was stopped, not counted as a passing
+run. Source was frozen and the complete suite restarted; final results follow.
+
+That final frozen-source run completed at `6d0219550`: **930 passed, 44 existing
+retired-feature skips, zero failures**, all 98 modules (974 tests). All optional
+dependency tests ran. Duration 600.6s; sampled Python tree peak 889.8 MB and PC
+peak 52.1%. `latest/bounded_test_run.json` contains this final run, not the
+interfered run. No source changes followed it.
+
+The first canonical refresh used an interpreter without openpyxl and would have
+replaced the balance-sheet evidence with a dependency error. That partial run was
+discarded as publication evidence. The final complete canonical run at source
+checkpoint `6d0219550` used the bundled dependencies and the complete engine
+environment, without a force-latest override. It finished in 730.0s, sampled tree
+peak 1506.0 MB and PC peak 52.2%. All reports are nonempty and the full workbook
+comparison is retained. Overall exit 1 remains honest: inherited nuclear-flash,
+split-definition and other backlog findings are not waived. The new glow and
+registered-count findings are fixed; structural ratchets and percentage dispatch
+pass, empty-type warheads are zero, and all 145 generated templates have zero
+drift. Engine freshness still discloses the clone/pin mismatch and unavailable
+`mtr/rv-engine` ref; it is not an upstream-engine freshness certification.
 
 Revert boundary: revert this follow-up's implementation commit together with its
 generated ledger changes and associated regression/ratchet updates. To revert
