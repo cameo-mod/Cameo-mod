@@ -27,8 +27,6 @@
 		HP: 67500
 	Repairable:
 		HpPerStep: 3375
-	ChangesHealth@SelfHealing:
-		Step: 27
 	Shielded:
 		RegenAmount: 54
 	Armor:
@@ -90,8 +88,6 @@ ordos_laboratorycrawler:
 		HP: 137500
 	Repairable:
 		HpPerStep: 6875
-	ChangesHealth@SelfHealing:
-		Step: 55
 	Shielded:
 		RegenAmount: 110
 	Armor:
@@ -212,8 +208,6 @@ ordos_spiceharvester:
 		HP: 200000
 	Repairable:
 		HpPerStep: 10000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Armor:
 		Type: Heavy
 	Shielded:
@@ -804,8 +798,6 @@ ordos_cobratank:
 		HP: 45000
 	Repairable:
 		HpPerStep: 2250
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Shielded:
 		RegenAmount: 36
 	Mobile:
@@ -919,8 +911,6 @@ ordos_pythontank:
 		HP: 70000
 	Repairable:
 		HpPerStep: 3500
-	ChangesHealth@SelfHealing:
-		Step: 28
 	Shielded:
 		RegenAmount: 56
 	Mobile:
@@ -1028,8 +1018,6 @@ ordos_lasertank:
 		HP: 105000
 	Repairable:
 		HpPerStep: 5250
-	ChangesHealth@SelfHealing:
-		Step: 42
 	Shielded:
 		RegenAmount: 84
 	Mobile:
@@ -1088,8 +1076,6 @@ ordos_deviatortank:
 		HP: 85000
 	Repairable:
 		HpPerStep: 4250
-	ChangesHealth@SelfHealing:
-		Step: 34
 	Shielded:
 		RegenAmount: 68
 	Mobile:
@@ -1419,8 +1405,6 @@ ordos_raider:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Shielded:
 		RegenAmount: 48
 	Mobile:
@@ -1521,8 +1505,6 @@ ordos_dustdrone:
 		HP: 32500
 	Repairable:
 		HpPerStep: 1625
-	ChangesHealth@SelfHealing:
-		Step: 13
 	Shielded:
 		RegenAmount: 26
 	Mobile:
@@ -1586,8 +1568,6 @@ ordos_deviatorartillery:
 		HP: 55000
 	Repairable:
 		HpPerStep: 2750
-	ChangesHealth@SelfHealing:
-		Step: 22
 	Shielded:
 		RegenAmount: 44
 	Mobile:
@@ -1644,8 +1624,6 @@ ordos_combattank:
 		HP: 85000
 	Repairable:
 		HpPerStep: 4250
-	ChangesHealth@SelfHealing:
-		Step: 34
 	Shielded:
 		RegenAmount: 68
 	Mobile:
@@ -1700,8 +1678,6 @@ ordos_heavycombattank:
 		HP: 115000
 	Repairable:
 		HpPerStep: 5750
-	ChangesHealth@SelfHealing:
-		Step: 46
 	Shielded:
 		RegenAmount: 92
 	Mobile:
@@ -1771,8 +1747,6 @@ ordos_combatautoguntank:
 		HP: 95000
 	Repairable:
 		HpPerStep: 4750
-	ChangesHealth@SelfHealing:
-		Step: 38
 	Shielded:
 		RegenAmount: 48
 	Mobile:
@@ -1821,8 +1795,6 @@ ordos_heavyautoguntank:
 		HP: 160000
 	Repairable:
 		HpPerStep: 8000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Shielded:
 		RegenAmount: 96
 	Mobile:
@@ -1883,8 +1855,6 @@ ordos_tankdestroyer:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Shielded:
 		RegenAmount: 64
 	AttackFrontal:

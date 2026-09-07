@@ -43,8 +43,6 @@
 		Speed: 60
 	Health:
 		HP: 16000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Armament@PRIMARY:
 		Weapon: M16
 		LocalOffset: 128,0,256
@@ -86,8 +84,6 @@
 		Speed: 50
 	Health:
 		HP: 9000
-	ChangesHealth@SelfHealing:
-		Step: 9
 	Armament@PRIMARY:
 		Weapon: Rockets
 		LocalOffset: 256,43,341
@@ -144,8 +140,6 @@
 		HP: 150000
 	Repairable:
 		HpPerStep: 7500
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Armor:
 		Type: Heavy
 	WithHarvestAnimation:

@@ -57,8 +57,6 @@ ixian_spiceharvester:
 		HP: 200000
 	Repairable:
 		HpPerStep: 10000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Armor:
 		Type: Heavy
 	Shielded:
@@ -105,8 +103,6 @@ ixian_ixsiegetank:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Valued:
 		Cost: 2050
 	Mobile:
@@ -195,8 +191,6 @@ ixian_ixmissiletank:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Shielded:
 		RegenAmount: 40
 	Armament:
@@ -450,8 +444,6 @@ rocket_raider.ixian:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armor:
 		Type: Medium
 	Shielded:
@@ -542,8 +534,6 @@ ixian_shockraider:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Shielded:
 		RegenAmount: 32
 	Mobile:
@@ -601,8 +591,6 @@ ixian_mongoose:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	AutoTarget:
 	Armament@primary:
 		Weapon: MongooseRocket
@@ -654,8 +642,6 @@ ixian_kodatank:
 		HP: 65000
 	Repairable:
 		HpPerStep: 3250
-	ChangesHealth@SelfHealing:
-		Step: 26
 	Shielded:
 		RegenAmount: 52
 	Mobile:
@@ -712,8 +698,6 @@ ixian_heavykodatank:
 		HP: 95000
 	Repairable:
 		HpPerStep: 4750
-	ChangesHealth@SelfHealing:
-		Step: 38
 	Shielded:
 		RegenAmount: 76
 	Mobile:
@@ -961,8 +945,6 @@ ixian_stormraider:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Shielded:
 		RegenAmount: 48
 	Mobile:
@@ -1034,8 +1016,6 @@ heavy_rocket_raider.ixian:
 		HP: 85000
 	Repairable:
 		HpPerStep: 4250
-	ChangesHealth@SelfHealing:
-		Step: 34
 	Armor:
 		Type: Heavy
 	Shielded:
@@ -1139,8 +1119,6 @@ ixian_ixcombatsiege:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Shielded:
 		RegenAmount: 64
 	Mobile:
@@ -1204,8 +1182,6 @@ ixian_neocymek:
 		HP: 300000
 	Repairable:
 		HpPerStep: 15000
-	ChangesHealth@SelfHealing:
-		Step: 120
 	Shielded:
 		RegenAmount: 240
 	Armament@Cannon:
@@ -1294,8 +1270,6 @@ ixian_ixprojector:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Shielded:
 		InitialPercentageStrength: 100
 		MaxPercentageStrength: 100
@@ -1406,8 +1380,6 @@ apparition.ixian:
 		AddToArmyValue: true
 	Health:
 		HP: 37500
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armor:
 		Type: Plate
 	Mobile:
@@ -1555,8 +1527,6 @@ duelist_tank.ixian:
 		HP: 240000
 	Repairable:
 		HpPerStep: 12000
-	ChangesHealth@SelfHealing:
-		Step: 96
 	Shielded:
 		RegenAmount: 158
 	Mobile:

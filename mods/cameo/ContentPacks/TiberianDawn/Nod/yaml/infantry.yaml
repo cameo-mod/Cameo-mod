@@ -15,8 +15,6 @@ td_nod_minigunner:
 		Speed: 66
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -94,8 +92,6 @@ td_nod_flamethrower:
 		Speed: 60
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament:
 		Weapon: Flamethrower
 		LocalOffset: 341,0,256
@@ -151,8 +147,6 @@ td_nod_chemicalwarrior:
 	-DamagedByTerrain:
 	Health:
 		HP: 48000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Armament:
 		Weapon: Chemspray
 		LocalOffset: 341,0,256
@@ -214,8 +208,6 @@ td_nod_commando:
 		Voice: Move
 	Health:
 		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Passenger:
 		Voice: Move
 	Armament@c4:
@@ -277,8 +269,6 @@ td_nod_chemicalrocketsoldier:
 		Cost: 400
 	Health:
 		HP: 18000
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Mobile:
 		Speed: 60
 		Locomotor: chem
@@ -349,8 +339,6 @@ td_nod_lasertrooper:
 		Name: Laser Trooper
 	Health:
 		HP: 59000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Mobile:
 		Speed: 51
 	FirepowerMultiplier@PromotionUnit:
@@ -401,8 +389,6 @@ td_nod_blackhandflamer:
 		Name: Black Hand Flamer
 	Health:
 		HP: 36000
-	ChangesHealth@SelfHealing:
-		Step: 36
 	Mobile:
 		Speed: 66
 	Armament@PRIMARY:
@@ -458,8 +444,6 @@ td_nod_stealthsoldier:
 		Name: Stealth Soldier
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 25
 	Mobile:
 		Speed: 72
 	Armament@PRIMARY:
@@ -530,8 +514,6 @@ td_nod_lasercommando:
 		Voice: Move
 	Health:
 		HP: 57000
-	ChangesHealth@SelfHealing:
-		Step: 57
 	Passenger:
 		Voice: Move
 	AttackMove:

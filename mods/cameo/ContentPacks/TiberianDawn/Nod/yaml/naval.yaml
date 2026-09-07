@@ -22,8 +22,6 @@ CNCSS:
 		TurnSpeed: 32
 	Health:
 		HP: 160000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Armor:
 		Type: Heavy
 	Turreted:
@@ -80,8 +78,6 @@ ssmsub:
 		TurnSpeed: 24
 	Health:
 		HP: 200000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Armor:
 		Type: Medium
 	Armament:
@@ -145,8 +141,6 @@ nodlasercorvette:
 		TurnSpeed: 12
 	Health:
 		HP: 150000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Armor:
 		Type: Medium
 	Turreted@PRIMARY:

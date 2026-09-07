@@ -24,8 +24,6 @@ gdicarrier:
 		TurnSpeed: 10
 	Health:
 		HP: 300000
-	ChangesHealth@SelfHealing:
-		Step: 120
 	Armor:
 		Type: Superheavy
 	AttackFollow:
@@ -74,8 +72,6 @@ CNCPT:
 		TurnSpeed: 20
 	Health:
 		HP: 75000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armor:
 		Type: Heavy
 	Turreted:
@@ -135,8 +131,6 @@ CNCCA:
 		TurnSpeed: 10
 	Health:
 		HP: 167500
-	ChangesHealth@SelfHealing:
-		Step: 67
 	Armor:
 		Type: Superheavy
 	Turreted@PRIMARY:
