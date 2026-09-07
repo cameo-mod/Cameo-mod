@@ -9971,6 +9971,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - Batch 24: waveforce non-flak collapses to `Railgun_Heavy`: `ArmoredCarMGWaveforce` 19000 [SHIPPED] (kept `PercentageScale 6667`), `SkyHawkChainGunWaveforce` 6000 [SUM] (preserved `GrenadeFriendlyFire`), `japan_imperialscoutsman_rifle_waveforce` 15000 [SUM], `25mmWaveforce` 14000 [SHIPPED] (kept `PercentageScale 1659`). Each cancels the inherited secondary main (`Bullet_Medium` or `CannonHE_Medium`).
 - Batch 25: `ArmoredCarMGAAWaveforce` 19000 [SHIPPED] (kept `PercentageScale 6667`), cancelled all four inherited `AreaDamage` warheads from `ArmoredCarMG_AA` (`Bullet_Light`, `Bullet_Medium`, `CannonAP_Light`, `CannonHE_Medium`), preserved `HeavyAAWeaponPercentage`.
 - Batch 26: `TTankZap2ArcTeslaFragment1_EMP` 60000 [SUM] and `TTankZap2ArcTeslaFragment2_EMP` 50000 [SUM], both collapsed to `Tesla_Super` and removed local `TeslaWeapon`. Preserved `Tesla_Super_ExtraDamage`, `EMPUnit`, `TeslaArc`, and `TeslaWeaponPercentage`.
+- Batch 27: cleaned zero-damage `AreaDamage` warheads from `ArmoredCarMG_AA` (`Bullet_Light`, `CannonAP_Light`, `CannonHE_Medium`) and removed the now-orphan cancel lines from `ArmoredCarMGAAWaveforce`. Preserved `Bullet_Medium` main and all `*Percentage` companions.
 - Re-extracted and committed `docs/balance` ledgers after each batch (`audit_balance_drift.py` clean).
 - Updated `C:/tmp/boot_gate.ps1` sleep from 45s to 70s because the game now occasionally needs ~50s to reach the main menu.
 
@@ -9978,7 +9979,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - `find_empty_warhead.py` = 0
 - `audit_orphan_removals.py` = 0
 - `audit_release_drift.py` D1 82 <= 133, D2 34 <= 62, D3 15 <= 27, D4 335 <= 335, D5 39 <= 43
-- `audit_weapon_shape.py` W5 306 <= 394
+- `audit_weapon_shape.py` W5 305 <= 394
 - `verify_generator_sync.py` = 0
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log` (70s boot-gate).
 
