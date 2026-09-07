@@ -9964,6 +9964,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - Batch 17: `Aphid_AA` -> Concussion_Medium 16000 [SUM], dropped MissileHE_Heavy; `RA2DiskDrain` -> Tesla_Heavy 4000 [SHIPPED], dropped Magic_Heavy.
 - Batch 18: `RA2Comet` -> Demolition_Light 60000 [SHIPPED], dropped Flame_Medium and Laser_Heavy (`RA2Comet_elite` inherits cleanly); `TorpTube` -> Concussion_Light 32000 [SHIPPED], dropped MissileHE_Heavy.
 - Batch 19: `AlliedTankDestroyerCannon` -> CannonHE_Medium 24000 [SHIPPED], dropped CannonAP_Light; `SheridanCannon` -> CannonAP_Light 16000 [SHIPPED], dropped CannonHE_Medium.
+- Batch 20: `RA2SCUDELITE` -> Nuclear_Super 120000 [SHIPPED], cancelled inherited `Demolition_Light`, `MissileAP_Heavy`, `RA2SCUDMissileAP_Heavy_NoWall` from `RA2SCUD` parent. Left `RA2SCUD`, `RA2SCUD_fire`, `RA2SCUD_tesla`, `RA2SCUD_rad`, `V3Explode` for a separate SCUD-family ruling.
 - Re-extracted and committed `docs/balance` ledgers after each batch (`audit_balance_drift.py` clean).
 - Updated `C:/tmp/boot_gate.ps1` sleep from 45s to 70s because the game now occasionally needs ~50s to reach the main menu.
 
@@ -9971,7 +9972,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - `find_empty_warhead.py` = 0
 - `audit_orphan_removals.py` = 0
 - `audit_release_drift.py` D1 82 <= 133, D2 34 <= 62, D3 15 <= 27, D4 335 <= 335, D5 39 <= 43
-- `audit_weapon_shape.py` W5 325 <= 394
+- `audit_weapon_shape.py` W5 324 <= 394
 - `verify_generator_sync.py` = 0
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log` (70s boot-gate).
 
@@ -9980,6 +9981,7 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - `e9fe73303` ledgers: re-extract after batch 18 (RA2Comet, TorpTube)
 - `4f02bdcb1` w24: collapse AlliedTankDestroyerCannon and SheridanCannon under rule A
 - `53defbbed` ledgers: re-extract after batch 19 (AlliedTankDestroyerCannon, SheridanCannon)
+- `0af81e76d` w24: collapse RA2SCUDELITE under rule A
 
 **Remaining blockers:**
 - Waveforce no-@wh 6 (ruling needed on whether `^WaveforceBulletWarhead` is a de-facto warhead-delivery survivor).
