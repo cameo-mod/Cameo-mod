@@ -23,8 +23,6 @@ steelconsortium_clonetrooper:
 		Speed: 57
 	Health:
 		HP: 17000
-	ChangesHealth@SelfHealing:
-		Step: 17
 	Armament@PRIMARY:
 		Weapon: SteelCloneGun
 		RequiresCondition: !rank-elite
@@ -101,8 +99,6 @@ steelconsortium_hoverboardgrenadier:
 		TargetTypes: Water, Ship
 	Health:
 		HP: 22000
-	ChangesHealth@SelfHealing:
-		Step: 22
 	Armament@PRIMARY:
 		Weapon: SteelMakoGun
 		LocalOffset: 300,200,800
@@ -185,8 +181,6 @@ steelconsortium_quantummissiletrooper:
 		Speed: 48
 	Health:
 		HP: 64000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	RangeMultiplier@deployed:
 		Modifier: 125
 		RequiresCondition: deployed
@@ -441,8 +435,6 @@ steelconsortium_steelrunner:
 		Description: template_commando.description
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Mobile:
 		Speed: 90
 	Passenger:

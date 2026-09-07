@@ -20,8 +20,6 @@ cabal_lcraft:
 		RequiresCondition: !notmobile && !disabled
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armor:
 		Type: Heavy
 	RevealsShroud:
@@ -60,8 +58,6 @@ cabal_lazerboat:
 		AddToArmyValue: true
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Armor:
 		Type: Medium
 	Mobile:
@@ -128,8 +124,6 @@ cabal_plasmasub:
 		TurnSpeed: 24
 	Health:
 		HP: 200000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Armor:
 		Type: Medium
 	Armament:
@@ -180,8 +174,6 @@ cabal_radar_cruiser:
 		AddToArmyValue: true
 	Health:
 		HP: 200000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Armor:
 		Type: Medium
 	Mobile:

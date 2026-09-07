@@ -140,8 +140,6 @@ forgotten_mutantsniper:
 		Speed: 70
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament@PRIMARY:
 		Weapon: TSSniper
 		LocalOffset: 128,0,256
@@ -211,8 +209,6 @@ forgotten_ghoststalker:
 		Speed: 62
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Armament@PRIMARY:
 		Weapon: TSGhostGun
 		LocalOffset: 256,43,256
@@ -311,8 +307,6 @@ forgotten_mutant:
 		Speed: 65
 	Health:
 		HP: 45000
-	ChangesHealth@SelfHealing:
-		Step: 36
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -375,8 +369,6 @@ forgotten_mutantsoldier:
 		Speed: 60
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -460,8 +452,6 @@ forgotten_mutantsergeant:
 		Speed: 74
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	# Armament@GRENADE:
 	# 	Weapon: TSGrenade
 	# 	PauseOnCondition: !ammo
@@ -530,8 +520,6 @@ forgotten_zombiemutant:
 		Speed: 100
 	Health:
 		HP: 45000
-	ChangesHealth@SelfHealing:
-		Step: 45
 	Armament@PRIMARY:
 		Weapon: TSZombieAttack
 		LocalOffset: 128,0,256
@@ -583,8 +571,6 @@ forgotten_runnershotgal:
 		Speed: 85
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSMutShotgun
 		LocalOffset: 128,0,256
@@ -637,8 +623,6 @@ forgotten_chemsprayinfantry:
 	-DamagedByTerrain:
 	Health:
 		HP: 64000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Armament@PRIMARY:
 		Weapon: TSChemspray
 		LocalOffset: 341,0,256
@@ -705,8 +689,6 @@ forgotten_mutantmortarman:
 		Speed: 50
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSInfantryMortar
 		LocalOffset: 128,0,256
@@ -759,8 +741,6 @@ forgotten_visceroid:
 		Locomotor: chem
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@PRIMARY:
 		Weapon: TSVisceroidSpray
 		LocalOffset: 384,0,0
@@ -829,8 +809,6 @@ forgotten_tiberianfiend:
 	Inherits@Unity: ^Unity
 	Health:
 		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Valued:
 		Cost: 1000
 	Buildable:
@@ -890,8 +868,6 @@ forgotten_viniferafiend:
 	Inherits@Unity: ^Unity
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Valued:
 		Cost: 2000
 	Buildable:

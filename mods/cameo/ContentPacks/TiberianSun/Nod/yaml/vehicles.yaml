@@ -167,8 +167,6 @@ ts_nod_attackbuggy:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Armament@PRIMARY:
 		Weapon: TSRaiderCannon
 		LocalOffset: 0,-30,250, 0,30,250
@@ -236,8 +234,6 @@ ts_nod_stealthtank:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Armament@PRIMARY:
 		Weapon: TSStankTusk
 		LocalOffset: -153,-204,509, -153,204,509
@@ -303,8 +299,6 @@ ts_nod_mobilerepairvehicle:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armor:
 		Type: Heavy
 	Armament:
@@ -366,8 +360,6 @@ ts_nod_artillery:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Turreted:
 		TurnSpeed: 12
 		InitialFacing: 384
@@ -461,8 +453,6 @@ ts_nod_devilstongue:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament@PRIMARY:
 		Weapon: TSFireballLauncher
 	AttackFrontal:
@@ -566,8 +556,6 @@ ts_nod_attackcycle:
 		HP: 20000
 	Repairable:
 		HpPerStep: 100
-	ChangesHealth@SelfHealing:
-		Step: 8
 	Armament@PRIMARY:
 		Weapon: TSBikeMissile
 		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
@@ -623,8 +611,6 @@ ts_nod_ticktank:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	RevealOnFire:
 		ArmamentNames: primary, deployed
 	# DEPLOYING SWAPS THE ARMOUR TYPE, IT DOES NOT GRANT BLANKET DAMAGE REDUCTION.

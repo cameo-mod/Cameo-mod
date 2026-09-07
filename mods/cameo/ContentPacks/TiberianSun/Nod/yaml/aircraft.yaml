@@ -32,8 +32,6 @@ ts_nod_bansheefighter:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Armament@PRIMARY:
 		Weapon: TSProton
 		LocalOffset: 0,0,0
@@ -96,8 +94,6 @@ ts_nod_harpy:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: TSHarpyClaw
 		LocalOffset: 0,0,0

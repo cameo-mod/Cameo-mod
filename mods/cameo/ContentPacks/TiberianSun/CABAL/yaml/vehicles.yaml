@@ -15,8 +15,6 @@ cabal_constructionyard:
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 1000000
-	ChangesHealth@SelfHealing:
-		Step: 400
 	Armor:
 		Type: Wood
 	Transforms:
@@ -110,8 +108,6 @@ cabal_cyborgreaper:
 		Description: actor_cabal_cyborgreaper.description
 	Health:
 		HP: 70000
-	ChangesHealth@SelfHealing:
-		Step: 28
 	Mobile:
 		TurnSpeed: 26
 		Speed: 65
@@ -160,8 +156,6 @@ cabal_tiberiumharvester:
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Health:
 		HP: 150000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Shielded:
 		RegenAmount: 120
 	Harvester:
@@ -230,8 +224,6 @@ cabal_laserspider:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Armament@PRIMARY:
 		Weapon: CabalSpiderLaser
 		LocalOffset: 350,-30,250, 350,30,250
@@ -281,8 +273,6 @@ cabal_mantis:
 		HP: 35000
 	Repairable:
 		HpPerStep: 1750
-	ChangesHealth@SelfHealing:
-		Step: 14
 	Armament@PRIMARY:
 		Weapon: CabalMantisGun
 		LocalOffset: 350,-30,250, 350,30,250
@@ -333,8 +323,6 @@ cabal_manticore:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armament@PRIMARY:
 		Weapon: CabalManticoreLaser
 		LocalOffset: 128,-350,350, 128,350,350
@@ -385,8 +373,6 @@ cabal_artilleryspider:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: CabalArtilleryWalkerShell
 		LocalOffset: 300,0,1500
@@ -446,8 +432,6 @@ cabal_tarantula:
 		HP: 110000
 	Repairable:
 		HpPerStep: 5500
-	ChangesHealth@SelfHealing:
-		Step: 44
 	Turreted:
 		TurnSpeed: 14
 		Offset: -500,0,0
@@ -516,8 +500,6 @@ cabal_scarabapc:
 	Hovers:
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Repairable:
 		HpPerStep: 1500
 	Armor:
@@ -658,8 +640,6 @@ cabal_beholder:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@PRIMARY:
 		Weapon: CabalBeholderLaser
 		LocalOffset: 777,-222,-333, 777,222,-333
@@ -712,8 +692,6 @@ cabal_spidercnc4:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Armament@PRIMARY:
 		Weapon: CabalSpiderCnc4Laser
 		LocalOffset: 350,-30,250, 350,30,250
@@ -762,8 +740,6 @@ cabal_heavyreaper:
 		Description: actor_cabal_heavyreaper.description
 	Health:
 		HP: 75000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Mobile:
 		TurnSpeed: 26
 		Speed: 65
@@ -827,8 +803,6 @@ cabal_avatar:
 		Speed: 25
 	Health:
 		HP: 1000000
-	ChangesHealth@SelfHealing:
-		Step: 400
 	Armament@PRIMARY:
 		Weapon: CabalAvatarLaser
 		LocalOffset: 0, -250, 550
@@ -882,8 +856,6 @@ cabal_widow:
 		Speed: 60
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Armament@PRIMARY:
 		Weapon: CabalLegionGun
 		LocalOffset: 350,-30,250, 350,30,250
@@ -1030,8 +1002,6 @@ cabal_ravager:
 		Speed: 130
 	Health:
 		HP: 70000
-	ChangesHealth@SelfHealing:
-		Step: 70
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored

@@ -29,8 +29,6 @@ forgotten_lcraft:
 		RequiresCondition: !notmobile && !disabled
 	Health:
 		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armor:
 		Type: Heavy
 	RevealsShroud:
@@ -94,8 +92,6 @@ forgotten_juggerboat:
 		AddToArmyValue: true
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Armor:
 		Type: Medium
 	Mobile:
@@ -171,8 +167,6 @@ forgotten_cannonboat:
 		TurnSpeed: 17
 	Health:
 		HP: 125000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armor:
 		Type: Heavy
 	Turreted:
