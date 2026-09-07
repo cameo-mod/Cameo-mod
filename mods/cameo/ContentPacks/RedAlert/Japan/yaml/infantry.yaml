@@ -17,8 +17,6 @@ japan_imperialscoutsman:
 		Speed: 50
 	Health:
 		HP: 15000
-	ChangesHealth@SelfHealing:
-		Step: 15
 	# SPECIAL-FORCES BASELINE UNIT (Formula v2, maintainer 2026-07-20): the
 	# living in-game reference — 15000 HP / 50 Speed / 6.0 Range / 6000
 	# Damage (SmallArms + Chaingun + Railgun-AP, air-capable) / 50 Reload at
@@ -83,8 +81,6 @@ japan_tankbuster:
 		Speed: 48
 	Health:
 		HP: 48000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Armament@PRIMARY:
 		Weapon: TankBusterBeamCannon
 		LocalOffset: 256,43,341
@@ -151,8 +147,6 @@ japan_japaneseflamethrower:
 		Cost: 200
 	Health:
 		HP: 15000
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Mobile:
 		Speed: 50
 	Armament:
@@ -221,8 +215,6 @@ japan_samurai:
 		Speed: 65
 	Health:
 		HP: 35000
-	ChangesHealth@SelfHealing:
-		Step: 35
 	Armament@PRIMARY:
 		Weapon: SamuraiBlade
 		RequiresCondition: !japan_upgrade_advancedplasmaweapons
@@ -274,8 +266,6 @@ japan_archermaiden:
 		Speed: 72
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: JapanMaidenBow
 		RequiresCondition: !japan_upgrade_energizedarrows
@@ -338,8 +328,6 @@ japan_rocketangel:
 		Voice: Move
 	Health:
 		HP: 24000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Armament@PRIMARY:
 		Weapon: RocketAngelRockets
 		LocalOffset: 512,-512,512, 512,512,512, 512,-512,512, 512,512,512
@@ -478,8 +466,6 @@ japan_exorcist:
 		Speed: 60
 	Health:
 		HP: 75000
-	ChangesHealth@SelfHealing:
-		Step: 75
 	Armament@PRIMARY:
 		Weapon: Hakureiring
 		LocalOffset: 256,43,341

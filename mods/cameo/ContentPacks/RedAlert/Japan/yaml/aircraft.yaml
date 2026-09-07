@@ -25,8 +25,6 @@ japan_zerofighter:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@Missiles:
 		Weapon: ZeroFighterArrows
 		LocalOffset: 85,-300,-85, 85,300,-85
@@ -126,8 +124,6 @@ japan_japanesebomber:
 		HP: 122500
 	Repairable:
 		HpPerStep: 6125
-	ChangesHealth@SelfHealing:
-		Step: 49
 	AttackAircraft:
 		AttackType: Strafe
 		Armaments: primary, secondary
@@ -234,8 +230,6 @@ japan_skyhawk:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@Missiles:
 		Weapon: SkyHawkArrows
 		LocalOffset: 85,-300,-85, 85,300,-85

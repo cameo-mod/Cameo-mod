@@ -33,8 +33,6 @@ ra2_soviets_kirovairship:
 		CanSlide: False
 	Health:
 		HP: 800000
-	ChangesHealth@SelfHealing:
-		Step: 320
 	Armament@PRIMARY:
 		Weapon: RA2KirovBomb
 		LocalOffset: 256,0,-512
@@ -117,8 +115,6 @@ ra2_soviets_siegechopper:
 		PauseOnCondition: !undeployed || disabled
 	Health:
 		HP: 55000
-	ChangesHealth@SelfHealing:
-		Step: 22
 	Armament@PRIMARY:
 		Weapon: BlackHawkCannon
 		LocalOffset: 320,0,0
@@ -259,8 +255,6 @@ ra2_soviets_migbomber:
 		HP: 57500
 	Repairable:
 		HpPerStep: 2875
-	ChangesHealth@SelfHealing:
-		Step: 23
 	HitShape:
 	Voiced:
 		VoiceSet: MiGVoice
@@ -412,8 +406,6 @@ ra2_soviets_transportkirov:
 		HP: 265000
 	Repairable:
 		HpPerStep: 13250
-	ChangesHealth@SelfHealing:
-		Step: 106
 	Armament@PRIMARY:
 		Weapon: BlackHawkCannon
 		LocalOffset: 150,-200,-25, 150,200,-25

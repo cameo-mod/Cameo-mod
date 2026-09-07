@@ -26,8 +26,6 @@ schwarzermond_ubermensch:
 		Speed: 64
 	Health:
 		HP: 64000
-	ChangesHealth@SelfHealing:
-		Step: 64
 	Armament@PRIMARY:
 		Weapon: UbermenschLaser
 		LocalOffset: 500,0,400
@@ -110,8 +108,6 @@ schwarzermond_parzival:
 		Speed: 60
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 120
 	Armament@PRIMARY:
 		Weapon: BlackHoleMaker
 		LocalOffset: 500,0,400
@@ -174,8 +170,6 @@ schwarzermond_noidmgarmor:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 50
 	# W21 layer stack, R5: while the plating holds, BOTH armors are enabled and the
 	# warhead AVERAGES them (AreaDamage.MultiArmorCombination) — so anti-infantry fire
 	# is never useless against a plated walker and AP fire is never oppressive. Once
@@ -265,8 +259,6 @@ schwarzermond_noidharvester:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	# W21 layer stack, R5: while the plating holds, BOTH armors are enabled and the
 	# warhead AVERAGES them (AreaDamage.MultiArmorCombination) — so anti-infantry fire
 	# is never useless against a plated walker and AP fire is never oppressive. Once
@@ -355,8 +347,6 @@ schwarzermond_engineeringarmor:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	# W21 layer stack, R5: while the plating holds, BOTH armors are enabled and the
 	# warhead AVERAGES them (AreaDamage.MultiArmorCombination) — so anti-infantry fire
 	# is never useless against a plated walker and AP fire is never oppressive. Once
@@ -453,8 +443,6 @@ schwarzermond_lunarsoldier:
 		Speed: 50
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -538,8 +526,6 @@ schwarzermond_lunarrocket:
 		Speed: 60
 	Health:
 		HP: 18000
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Armament@PRIMARY:
 		Weapon: NaxCorrosionRocketTrooper_elite
 		LocalOffset: 500,0,400

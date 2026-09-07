@@ -32,8 +32,6 @@ ra2_allies_harrier:
 		HP: 72000
 	Repairable:
 		HpPerStep: 3600
-	ChangesHealth@SelfHealing:
-		Step: 72
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: HarrierMissiles
@@ -103,8 +101,6 @@ ra2_allies_blackeagle:
 		Cost: 3000
 	Health:
 		HP: 85000
-	ChangesHealth@SelfHealing:
-		Step: 34
 	Aircraft:
 		CruiseAltitude: 2560
 		TurnSpeed: 10
@@ -208,8 +204,6 @@ ra2_allies_nighthawk:
 		HP: 87500
 	Repairable:
 		HpPerStep: 4375
-	ChangesHealth@SelfHealing:
-		Step: 35
 	Armament@PRIMARY:
 		Weapon: BlackHawkCannon
 		LocalOffset: 150,-200,-25, 150,200,-25

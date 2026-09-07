@@ -22,8 +22,6 @@ naxis_naxiriflesoldier:
 		Speed: 60
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -81,8 +79,6 @@ naxis_naxiriflerecruit:
 		Speed: 48
 	Health:
 		HP: 21000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -140,8 +136,6 @@ naxis_sssoldier:
 		Speed: 55
 	Health:
 		HP: 63000
-	ChangesHealth@SelfHealing:
-		Step: 63
 	Armament@PRIMARY:
 		Weapon: naxis_sssoldier_smg
 		LocalOffset: 500,0,400
@@ -195,8 +189,6 @@ naxis_naxiflamer:
 		Speed: 48
 	Health:
 		HP: 24000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Armament@PRIMARY:
 		Weapon: NaxiFlamerTroop
 		LocalOffset: 500,0,400
@@ -251,8 +243,6 @@ naxis_naximercenarysniper:
 		Speed: 60
 	Health:
 		HP: 8000
-	ChangesHealth@SelfHealing:
-		Step: 8
 	Armament@PRIMARY:
 		Weapon: NaxiSniper
 		LocalOffset: 500,0,400
@@ -303,8 +293,6 @@ naxis_panzerschreck:
 		Speed: 42
 	Health:
 		HP: 96000
-	ChangesHealth@SelfHealing:
-		Step: 96
 	Armament@PRIMARY:
 		Weapon: NaxiShrek
 		LocalOffset: 500,0,400
@@ -355,8 +343,6 @@ naxis_panzerfausttrooper:
 		Speed: 46
 	Health:
 		HP: 36000
-	ChangesHealth@SelfHealing:
-		Step: 36
 	Armament@PRIMARY:
 		Weapon: NaxiShrekCons
 		LocalOffset: 500,0,400
@@ -407,8 +393,6 @@ naxis_skymage:
 		Voice: Move
 	Health:
 		HP: 48000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Armament@PRIMARY:
 		Weapon: SkyMageCannon
 		RequiresCondition: !rank-elite
@@ -481,8 +465,6 @@ naxis_slaveoverseer:
 		Locomotor: chem
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@SlaveWhip:
 		Weapon: NaxiSlaveWhip
 		LocalOffset: 500,0,400
@@ -555,8 +537,6 @@ naxis_slave:
 		Locomotor: chem
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament@PRIMARY:
 		Weapon: RA2Shovel
 	Armament@GARRISONED:
@@ -670,8 +650,6 @@ naxis_frank:
 		Speed: 61
 	Health:
 		HP: 85000
-	ChangesHealth@SelfHealing:
-		Step: 85
 	Armament@PRIMARY:
 		Weapon: RA2BrutePunch
 		RequiresCondition: !rank-elite
@@ -717,8 +695,6 @@ naxis_naximachinegunners:
 		Speed: 55
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	RevealsShroudMultiplier@deployed:
 		Modifier: 125
 		RequiresCondition: deployed
@@ -846,8 +822,6 @@ naxis_portableflak:
 		Speed: 55
 	Health:
 		HP: 12000
-	ChangesHealth@SelfHealing:
-		Step: 12
 	RevealsShroudMultiplier@deployed:
 		Modifier: 125
 		RequiresCondition: deployed
@@ -973,8 +947,6 @@ naxis_undead:
 		Speed: 50
 	Health:
 		HP: 15000
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Armament@PRIMARY:
 		Weapon: NaxiRifle
 		LocalOffset: 500,0,400
@@ -1027,8 +999,6 @@ naxis_coneheadsknights:
 		Speed: 90
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament:
 		Weapon: wc2gruntslice
 		FireDelay: 5
@@ -1077,8 +1047,6 @@ naxis_conehead2:
 		Speed: 90
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament@PRIMARY:
 		Weapon: RA2PortaTesla
 		LocalOffset: 500,0,400
@@ -1138,8 +1106,6 @@ naxis_antitankcannon:
 		HP: 17500
 	Repairable:
 		HpPerStep: 875
-	ChangesHealth@SelfHealing:
-		Step: 7
 	Armor:
 		Type: Light
 	Armament@PRIMARY:
@@ -1191,8 +1157,6 @@ naxis_bmwbike:
 		HP: 22000
 	Repairable:
 		HpPerStep: 4125
-	ChangesHealth@SelfHealing:
-		Step: 33
 	Armor:
 		Type: Light
 	Armament@AG:
@@ -1265,8 +1229,6 @@ naxis_alien:
 		Speed: 40
 	Health:
 		HP: 15000
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Armament@PRIMARY:
 		Weapon: NaxiAlienPistol
 		LocalOffset: 500,0,400

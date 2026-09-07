@@ -24,8 +24,6 @@ futuretech_enforcer:
 		Speed: 60
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	AutoTarget:
 		InitialStance: Defend
 	RenderRangeCircle:
@@ -167,8 +165,6 @@ futuretech_javelinsoldier:
 		Speed: 50
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 25
 	RenderRangeCircle:
 		RequiresCondition: deployed
 	RevealOnFire:
@@ -421,8 +417,6 @@ futuretech_blackwidow:
 		Cost: 1200
 	Health:
 		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 25
 	Mobile:
 		Speed: 75
 	Tooltip:
@@ -497,8 +491,6 @@ futuretech_cryolegionnaire:
 		Name: Cryo Legionnaire
 	Health:
 		HP: 360000
-	ChangesHealth@SelfHealing:
-		Step: 360
 	Mobile:
 		Speed: 75
 	Armament@PRIMARY:
@@ -554,8 +546,6 @@ futuretech_repairdroid:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armor:
 		Type: Plate
 	Armament:
@@ -630,8 +620,6 @@ futuretech_scoutdroid:
 		HP: 30000
 	Repairable:
 		HpPerStep: 1500
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Armor:
 		Type: None
 		-RequiresCondition:
@@ -698,8 +686,6 @@ futuretech_shotgundroid:
 		HP: 55000
 	Repairable:
 		HpPerStep: 2750
-	ChangesHealth@SelfHealing:
-		Step: 22
 	Armor:
 		Type: Plate
 		-RequiresCondition:
@@ -781,8 +767,6 @@ futuretech_cannondroid:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Armor:
 		Type: Plate
 		-RequiresCondition:
@@ -852,8 +836,6 @@ futuretech_missiledroid:
 		HP: 67500
 	Repairable:
 		HpPerStep: 3375
-	ChangesHealth@SelfHealing:
-		Step: 27
 	Armor:
 		Type: Flak
 		-RequiresCondition:

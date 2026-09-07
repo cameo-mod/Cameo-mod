@@ -87,8 +87,6 @@ naxis_halftrack:
 		HP: 115000
 	Repairable:
 		HpPerStep: 5750
-	ChangesHealth@SelfHealing:
-		Step: 46
 	Armor:
 		Type: Medium
 	Armament@AG:
@@ -144,8 +142,6 @@ naxis_kubelwagen:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@AG:
 		Weapon: NaxiWW2KübelwagenMachinegun
 		LocalOffset: 300,10,300
@@ -194,8 +190,6 @@ naxis_wirbelwind:
 		HP: 87500
 	Repairable:
 		HpPerStep: 4375
-	ChangesHealth@SelfHealing:
-		Step: 35
 	Turreted:
 		TurnSpeed: 17
 		Offset: -4,0,5
@@ -300,8 +294,6 @@ naxis_tiger:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Turreted:
 		TurnSpeed: 20 #3
 		Offset: -4,0,5
@@ -361,8 +353,6 @@ naxis_kingtigerheavytank:
 		HP: 200000
 	Repairable:
 		HpPerStep: 10000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Turreted:
 		TurnSpeed: 20 #3
 		Offset: -4,0,5
@@ -423,8 +413,6 @@ naxis_maus:
 		HP: 600000
 	Repairable:
 		HpPerStep: 30000
-	ChangesHealth@SelfHealing:
-		Step: 240
 	Turreted:
 		TurnSpeed: 12 #3
 		Offset: -160,0,5
@@ -488,8 +476,6 @@ naxis_ratte:
 		HP: 2000000
 	Repairable:
 		HpPerStep: 100000
-	ChangesHealth@SelfHealing:
-		Step: 800
 	Turreted:
 		TurnSpeed: 7
 		Offset: 100,0,5
@@ -565,8 +551,6 @@ naxis_grille:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Armament@AG:
 		Weapon: NaxGrilleArty
 		LocalOffset: -400,0,300
@@ -617,8 +601,6 @@ naxis_brummbar:
 		HP: 90000
 	Repairable:
 		HpPerStep: 4500
-	ChangesHealth@SelfHealing:
-		Step: 36
 	Armament@AG:
 		Weapon: NaxBrummbarArty
 		LocalOffset: -400,0,300
@@ -668,8 +650,6 @@ naxis_sturmtiger:
 		HP: 250000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Armament@AG:
 		Weapon: NaxSturmArty
 		LocalOffset: -400,0,300
@@ -713,8 +693,6 @@ naxis_hetzer:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@AG:
 		Weapon: NaxiHetzerDestroyer
 		LocalOffset: 300,0,300
@@ -765,8 +743,6 @@ naxis_jagdpanzer:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@AG:
 		Weapon: NaxiJadgDestroyer
 		LocalOffset: 400,0,300
@@ -814,8 +790,6 @@ naxis_engineeringtruck:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armor:
 		Type: Light
 	Turreted:
@@ -882,8 +856,6 @@ naxis_donnerschlag:
 		HP: 80000
 	Repairable:
 		HpPerStep: 4000
-	ChangesHealth@SelfHealing:
-		Step: 32
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -1029,8 +1001,6 @@ naxis_shoekarn:
 		HP: 150000
 	Repairable:
 		HpPerStep: 10000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Turreted:
 		TurnSpeed: 15
 		Offset: -4,0,5
@@ -1186,8 +1156,6 @@ naxis_oldtank:
 		HP: 110000
 	Repairable:
 		HpPerStep: 7875
-	ChangesHealth@SelfHealing:
-		Step: 63
 	#Turreted:
 	#	TurnSpeed: 1023
 	-QuantizeFacingsFromSequence:
@@ -1256,8 +1224,6 @@ naxis_assault:
 		HP: 130000
 	Repairable:
 		HpPerStep: 6500
-	ChangesHealth@SelfHealing:
-		Step: 52
 	Turreted:
 		TurnSpeed: 16 #3
 		Offset: -4,0,5
@@ -1387,8 +1353,6 @@ naxis_panzer:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Turreted:
 		TurnSpeed: 20 #3
 	Armament:
@@ -1447,8 +1411,6 @@ naxis_car:
 		HP: 47500
 	Repairable:
 		HpPerStep: 4375
-	ChangesHealth@SelfHealing:
-		Step: 35
 	Armor:
 		Type: Medium
 	Turreted:

@@ -30,8 +30,6 @@ asianalliance_phoenix:
 		HP: 90000
 	Repairable:
 		HpPerStep: 4500
-	ChangesHealth@SelfHealing:
-		Step: 36
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: AsianPhoenixRocket
@@ -116,8 +114,6 @@ asianalliance_pelican:
 		HP: 40000
 	Repairable:
 		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Armament@PRIMARY:
 		Weapon: AsianPelicanMissile
 		LocalOffset: 85,-213,-85, 85,213,-85
@@ -234,8 +230,6 @@ asianalliance_harbinger:
 		HP: 90000
 	Repairable:
 		HpPerStep: 4500
-	ChangesHealth@SelfHealing:
-		Step: 36
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: AsianHarbingerPlasma
@@ -285,8 +279,6 @@ kami.asian:
 		TakeUpCellWhenLand: false
 	Health:
 		HP: 7500
-	ChangesHealth@SelfHealing:
-		Step: 3
 	RevealsShroud:
 		Range: 7500
 		Type: GroundPosition
@@ -345,8 +337,6 @@ kami_chemical.asian:
 		Cost: 225
 	Health:
 		HP: 15000
-	ChangesHealth@SelfHealing:
-		Step: 6
 	Tooltip:
 		Name: Chemical Attack Plane
 	Armament@PRIMARY:

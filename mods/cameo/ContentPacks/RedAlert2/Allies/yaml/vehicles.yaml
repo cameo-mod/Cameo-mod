@@ -59,8 +59,6 @@ ra2_allies_chronominer:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Armor:
 		Type: Medium
 	Mobile:
@@ -124,8 +122,6 @@ ra2_allies_grizzlytank:
 		HP: 100000
 	Repairable:
 		HpPerStep: 5000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Turreted:
 		TurnSpeed: 19
 	Armament:
@@ -193,8 +189,6 @@ ra2_allies_tankdestroyer:
 		HP: 145000
 	Repairable:
 		HpPerStep: 7250
-	ChangesHealth@SelfHealing:
-		Step: 58
 	Armament:
 		Name: primary
 		Weapon: RA2sabot
@@ -389,8 +383,6 @@ ra2_allies_prismtank:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Turreted:
 		TurnSpeed: 12 #3
 	Armament@Charge:
@@ -477,8 +469,6 @@ ra2_allies_miragetank:
 		HP: 120000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Turreted:
 		TurnSpeed: 18
 	Armament:
@@ -564,8 +554,6 @@ ra2_allies_heavymiragetank:
 		HP: 240000
 	Repairable:
 		HpPerStep: 12000
-	ChangesHealth@SelfHealing:
-		Step: 96
 	Turreted:
 		TurnSpeed: 12
 	Armament:
@@ -652,8 +640,6 @@ ra2_allies_battlefortress:
 		HP: 320000
 	Repairable:
 		HpPerStep: 16000
-	ChangesHealth@SelfHealing:
-		Step: 128
 	#Turreted:
 	#	TurnSpeed: 1023
 	-QuantizeFacingsFromSequence:

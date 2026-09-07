@@ -18,8 +18,6 @@ japan_japaneseoretruck:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armor:
 		Type: Light
 	Mobile:
@@ -69,8 +67,6 @@ japan_scoutcar:
 		HP: 25000
 	Repairable:
 		HpPerStep: 1250
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Mobile:
 		Speed: 160
 		TurnSpeed: 32
@@ -124,8 +120,6 @@ japan_igomediumtank:
 		HP: 110000
 	Repairable:
 		HpPerStep: 5500
-	ChangesHealth@SelfHealing:
-		Step: 44
 	Mobile:
 		Speed: 90
 		TurnSpeed: 18
@@ -187,8 +181,6 @@ japan_nanodronebuggy:
 		HP: 37500
 	Repairable:
 		HpPerStep: 1875
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Mobile:
 		Speed: 77
 		TurnSpeed: 15
@@ -241,8 +233,6 @@ japan_ballista:
 		HP: 65000
 	Repairable:
 		HpPerStep: 3250
-	ChangesHealth@SelfHealing:
-		Step: 26
 	Mobile:
 		Speed: 65
 		TurnSpeed: 26
@@ -295,8 +285,6 @@ japan_oitank:
 		HP: 650000
 	Repairable:
 		HpPerStep: 32500
-	ChangesHealth@SelfHealing:
-		Step: 260
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10
@@ -649,8 +637,6 @@ japan_hovercrafttransport:
 		HP: 65000
 	Repairable:
 		HpPerStep: 3250
-	ChangesHealth@SelfHealing:
-		Step: 26
 	Armor:
 		Type: Medium
 	Mobile:
@@ -739,8 +725,6 @@ japan_armoredcar:
 		HP: 42500
 	Repairable:
 		HpPerStep: 2125
-	ChangesHealth@SelfHealing:
-		Step: 17
 	Mobile:
 		Speed: 130
 		TurnSpeed: 26
@@ -850,8 +834,6 @@ japan_chihaheavytank:
 		HP: 130000
 	Repairable:
 		HpPerStep: 6500
-	ChangesHealth@SelfHealing:
-		Step: 104
 	Mobile:
 		Speed: 85
 		TurnSpeed: 17
@@ -926,8 +908,6 @@ japan_hovercraftflametank:
 		HP: 120000
 	Repairable:
 		HpPerStep: 6000
-	ChangesHealth@SelfHealing:
-		Step: 96
 	Mobile:
 		Locomotor: hover
 		Speed: 90
@@ -1000,8 +980,6 @@ japan_shogunexecutioner:
 		HP: 3000000
 	Repairable:
 		HpPerStep: 150000
-	ChangesHealth@SelfHealing:
-		Step: 1200
 	AutoTarget:
 		ScanRadius: 10
 		InitialStance: AttackAnything
@@ -1076,8 +1054,6 @@ japan_grenadebuggy:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Turreted:
 		TurnSpeed: 24
 		Offset: -40,0,0
@@ -1135,8 +1111,6 @@ japan_shrineminitank:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Mobile:
 		Speed: 120
 		TurnSpeed: 24
@@ -1190,8 +1164,6 @@ japan_waveforcetank:
 		HP: 60000
 	Repairable:
 		HpPerStep: 3000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -1282,8 +1254,6 @@ japan_waveforceartillery:
 		HP: 50000
 	Repairable:
 		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Mobile:
 		TurnSpeed: 11
 		Speed: 55
@@ -1349,8 +1319,6 @@ japan_exorcistoitank:
 		HP: 750000
 	Repairable:
 		HpPerStep: 37500
-	ChangesHealth@SelfHealing:
-		Step: 300
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10

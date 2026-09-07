@@ -106,8 +106,6 @@ yuri_initiate:
 		Speed: 66
 	Health:
 		HP: 24000
-	ChangesHealth@SelfHealing:
-		Step: 24
 	AutoTarget:
 	Armament@PRIMARY:
 		Name: primary
@@ -176,8 +174,6 @@ yuri_brute:
 		Speed: 80
 	Health:
 		HP: 45000
-	ChangesHealth@SelfHealing:
-		Step: 45
 	Armament@PRIMARY:
 		Weapon: RA2BrutePunch
 		RequiresCondition: !rank-elite
@@ -234,8 +230,6 @@ yuri_virus:
 		Speed: 52
 	Health:
 		HP: 12000
-	ChangesHealth@SelfHealing:
-		Step: 12
 	Armament@PRIMARY:
 		Weapon: RA2Virusgun
 		LocalOffset: 0,0,427
@@ -312,8 +306,6 @@ yuri_clone:
 		Speed: 50
 	Health:
 		HP: 5000
-	ChangesHealth@SelfHealing:
-		Step: 5
 	Armament@CONTROL:
 		Name: primary
 		Weapon: RA2MindControl
@@ -411,8 +403,6 @@ yuri_yurix:
 		Locomotor: hover
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: RA2XMindControl
 		ReloadingCondition: reload-structure
@@ -570,8 +560,6 @@ yuri_gatlingtrooper:
 		Speed: 45
 	Health:
 		HP: 36000
-	ChangesHealth@SelfHealing:
-		Step: 36
 	AutoTarget:
 	Armament@PRIMARY:
 		Weapon: RA2GattlingInf
@@ -658,8 +646,6 @@ yuri_biotrooper:
 		AddToArmyValue: true
 	Health:
 		HP: 96000
-	ChangesHealth@SelfHealing:
-		Step: 96
 	Mobile:
 		Speed: 64
 	Armament@PRIMARY:
@@ -735,8 +721,6 @@ yuri_cosmonaut:
 		Voice: Move
 	Health:
 		HP: 28000
-	ChangesHealth@SelfHealing:
-		Step: 28
 	Armament@PRIMARY:
 		Weapon: RA2CosmonautLaser
 		LocalOffset: 128,196,128, 128,-196,128

@@ -19,8 +19,6 @@ schwarzermond_drone:
 		VTOL: true
 	Health:
 		HP: 7500
-	ChangesHealth@SelfHealing:
-		Step: 3
 	RevealsShroud:
 		Range: 7500
 		Type: GroundPosition
@@ -134,8 +132,6 @@ schwarzermond_spacezeppelin:
 		HP: 1350000
 	Repairable:
 		HpPerStep: 2625
-	ChangesHealth@SelfHealing:
-		Step: 21
 	Armament:
 		Name: primary
 		Weapon: NaxiBeetleLaser_elite
@@ -291,8 +287,6 @@ schwarzermond_blackbomb:
 		Description: actor_nax_piercer.description
 	Health:
 		HP: 37500
-	ChangesHealth@SelfHealing:
-		Step: 7
 	HitShape:
 	Voiced:
 		VoiceSet: NaxiPiercerUFOVoice
@@ -403,8 +397,6 @@ schwarzermond_haunebuii:
 		IdealSeparation: 2222
 	Health:
 		HP: 250000
-	ChangesHealth@SelfHealing:
-		Step: 100
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: NaxHaenebuQuadCannon
@@ -491,8 +483,6 @@ schwarzermond_haunebuiii:
 		IdealSeparation: 2222
 	Health:
 		HP: 375000
-	ChangesHealth@SelfHealing:
-		Step: 150
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: NaxHaenebuQuadCannon
@@ -576,8 +566,6 @@ schwarzermond_corruptorpiercer:
 		Description: actor_nax_piercer.description
 	Health:
 		HP: 37500
-	ChangesHealth@SelfHealing:
-		Step: 7
 	HitShape:
 	Voiced:
 		VoiceSet: NaxiPiercerUFOVoice
@@ -668,8 +656,6 @@ schwarzermond_dieglocke:
 		RepulsionSpeed: 40
 	Health:
 		HP: 3750000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: NaxDieGlocke

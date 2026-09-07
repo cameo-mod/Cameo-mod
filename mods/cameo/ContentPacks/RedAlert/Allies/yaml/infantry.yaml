@@ -24,8 +24,6 @@ ra1_allies_alliedsniper:
 		Description: actor_rasniper.description
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Mobile:
 		Speed: 60
 	Passenger:
@@ -88,8 +86,6 @@ ra1_allies_tanya:
 		AddToArmyValue: true
 	Health:
 		HP: 44000
-	ChangesHealth@SelfHealing:
-		Step: 44
 	Mobile:
 		Speed: 77
 		Voice: Move
@@ -338,8 +334,6 @@ ra1_allies_machinegunner:
 		Speed: 49
 	Health:
 		HP: 19000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament@PRIMARY:
 		Weapon: RAVulcan
 		LocalOffset: 128,0,256

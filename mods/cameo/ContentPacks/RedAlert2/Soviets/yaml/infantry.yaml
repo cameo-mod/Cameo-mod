@@ -106,8 +106,6 @@ ra2_soviets_attackdog:
 	SelectionDecorations:
 	Health:
 		HP: 5000
-	ChangesHealth@SelfHealing:
-		Step: 2
 	Armor:
 		Type: None
 	Mobile:
@@ -210,8 +208,6 @@ ra2_soviets_conscript:
 		Speed: 58
 	Health:
 		HP: 26000
-	ChangesHealth@SelfHealing:
-		Step: 26
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -288,8 +284,6 @@ ra2_soviets_flaktrooper:
 		Speed: 44
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: RA2CRFlakGuyGun
@@ -378,8 +372,6 @@ ra2_soviets_crazyivan:
 		Speed: 100
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 10
 	AutoTarget:
 	AttackFrontal:
 		FacingTolerance: 0
@@ -442,8 +434,6 @@ ra2_soviets_teslatrooper:
 		Name: Tesla Trooper
 	Health:
 		HP: 48000
-	ChangesHealth@SelfHealing:
-		Step: 48
 	Mobile:
 		Voice: Move
 		Speed: 38
@@ -520,8 +510,6 @@ ra2_soviets_desolator:
 		Speed: 59
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	AutoTarget:
 	Armament@PRIMARY:
 		Weapon: RA2RadBeamWeapon
@@ -599,8 +587,6 @@ ra2_soviets_boris:
 		Name: Boris
 	Health:
 		HP: 90000
-	ChangesHealth@SelfHealing:
-		Step: 90
 	Mobile:
 		Speed: 60
 	Passenger:

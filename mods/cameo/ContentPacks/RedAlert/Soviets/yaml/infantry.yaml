@@ -23,8 +23,6 @@ ra1_soviets_actordogname:
 	SelectionDecorations:
 	Health:
 		HP: 5000
-	ChangesHealth@SelfHealing:
-		Step: 5
 	Armor:
 		Type: None
 	Mobile:
@@ -109,8 +107,6 @@ ra1_soviets_rifleinfantry:
 		Speed: 54
 	Health:
 		HP: 34000
-	ChangesHealth@SelfHealing:
-		Step: 34
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -171,8 +167,6 @@ ra1_soviets_ak47conscript:
 		Speed: 71
 	Health:
 		HP: 44000
-	ChangesHealth@SelfHealing:
-		Step: 44
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -236,8 +230,6 @@ ra1_soviets_sovietgrenadier:
 		Speed: 75
 	Health:
 		HP: 8000
-	ChangesHealth@SelfHealing:
-		Step: 8
 	Armament:
 		Weapon: GrenadeRA
 		LocalOffset: 0,0,427
@@ -304,8 +296,6 @@ ra1_soviets_sovietmortarsoldier:
 		AddToArmyValue: true
 	Health:
 		HP: 16000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Mobile:
 		Speed: 48
 	Armament@PRIMARY:
@@ -387,8 +377,6 @@ ra1_soviets_dragunovantimaterialsniper:
 		Speed: 40
 	Health:
 		HP: 20000
-	ChangesHealth@SelfHealing:
-		Step: 20
 	Armament:
 		Weapon: DragunovSniper
 		LocalOffset: 0,0,427
@@ -434,8 +422,6 @@ ra1_soviets_firerocketsoldier:
 		Cost: 400
 	Health:
 		HP: 16000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Mobile:
 		Speed: 48
 	Armament@PRIMARY:
@@ -494,8 +480,6 @@ ra1_soviets_sovietflamethrower:
 		Description: actor_e4.description
 	Health:
 		HP: 16000
-	ChangesHealth@SelfHealing:
-		Step: 16
 	Mobile:
 		Speed: 56
 	Armament:
@@ -564,8 +548,6 @@ ra1_soviets_shocktrooper:
 		AddToArmyValue: true
 	Health:
 		HP: 40000
-	ChangesHealth@SelfHealing:
-		Step: 40
 	Mobile:
 		Speed: 40
 	Armament@PRIMARY:
@@ -631,8 +613,6 @@ ra1_soviets_zapper:
 		AddToArmyValue: true
 	Health:
 		HP: 60000
-	ChangesHealth@SelfHealing:
-		Step: 60
 	Mobile:
 		Speed: 30
 	Armament@PRIMARY:
@@ -691,8 +671,6 @@ ra1_soviets_commissar:
 		Speed: 70
 	Health:
 		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Buildable:
 		Prerequisites: ~ra1_soviets_sovietbarracks, ra1_soviets_upgrade_commissar
 		Queue: Infantry, RAInfantry
@@ -776,8 +754,6 @@ ra1_soviets_cyberdog:
 	SelectionDecorations:
 	Health:
 		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Mobile:
 		Speed: 100
 		Voice: Move
@@ -935,8 +911,6 @@ ra1_soviets_volkov:
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells
 	Health:
 		HP: 400000
-	ChangesHealth@SelfHealing:
-		Step: 400
 	Mobile:
 		Speed: 55
 		PauseOnCondition: disabled

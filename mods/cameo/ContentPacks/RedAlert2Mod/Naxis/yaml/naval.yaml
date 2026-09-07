@@ -23,8 +23,6 @@ naxis_tuboat:
 		TurnSpeed: 32
 	Health:
 		HP: 120000
-	ChangesHealth@SelfHealing:
-		Step: 96
 	Armor:
 		Type: Heavy
 	Turreted:
@@ -76,8 +74,6 @@ naxis_muboat:
 		TurnSpeed: 24
 	Health:
 		HP: 200000
-	ChangesHealth@SelfHealing:
-		Step: 80
 	Armor:
 		Type: Medium
 	Armament:
@@ -144,8 +140,6 @@ nax_bitsmark:
 		TurnSpeed: 8
 	Health:
 		HP: 335000
-	ChangesHealth@SelfHealing:
-		Step: 90
 	Armor:
 		Type: Superheavy
 	Turreted@PRIMARY:

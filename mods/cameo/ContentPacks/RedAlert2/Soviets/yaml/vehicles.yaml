@@ -63,8 +63,6 @@ ra2_soviets_rhinoheavytank:
 		HP: 130000
 	Repairable:
 		HpPerStep: 6500
-	ChangesHealth@SelfHealing:
-		Step: 52
 	Turreted:
 		TurnSpeed: 17
 		Offset: -100,0,5
@@ -188,8 +186,6 @@ ra2_soviets_flaktrack:
 		HP: 45000
 	Repairable:
 		HpPerStep: 2250
-	ChangesHealth@SelfHealing:
-		Step: 18
 	Turreted:
 		TurnSpeed: 19
 		Offset: -150,0,100
@@ -272,8 +268,6 @@ ra2_soviets_apocalypsetank:
 		HP: 350000
 	Repairable:
 		HpPerStep: 17500
-	ChangesHealth@SelfHealing:
-		Step: 140
 	Turreted:
 		TurnSpeed: 11
 	Armament@PRIMARY:
@@ -406,8 +400,6 @@ ra2_soviets_v3rocketlauncher:
 		HP: 37500
 	Repairable:
 		HpPerStep: 1875
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -497,8 +489,6 @@ ra2_soviets_teslatank:
 		HP: 75000
 	Repairable:
 		HpPerStep: 3750
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Turreted:
 		TurnSpeed: 15
 	Armament@PRIMARY:
@@ -562,8 +552,6 @@ ra2_soviets_warminer:
 		HP: 125000
 	Repairable:
 		HpPerStep: 6250
-	ChangesHealth@SelfHealing:
-		Step: 50
 	Harvester:
 		Voice: Harvest
 		BaleLoadDelay: 2
@@ -621,8 +609,6 @@ ra2_soviets_terrordrone:
 		PlayerPalette: playerra2
 	Health:
 		HP: 10000
-	ChangesHealth@SelfHealing:
-		Step: 4
 	Passenger:
 		CargoType: Infantry
 	WithInfantryBody:

@@ -23,8 +23,6 @@ triton.latin:
 		TurnSpeed: 50
 	Health:
 		HP: 37500
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Armor:
 		Type: Light
 	Armament@PRIMARY:
@@ -103,8 +101,6 @@ sub.latin:
 		TurnSpeed: 22
 	Health:
 		HP: 240000
-	ChangesHealth@SelfHealing:
-		Step: 96
 	Armor:
 		Type: Heavy
 	Turreted:
@@ -161,8 +157,6 @@ rammax.latin:
 		TurnSpeed: 50
 	Health:
 		HP: 47500
-	ChangesHealth@SelfHealing:
-		Step: 15
 	Armor:
 		Type: Medium
 	Armament@PRIMARY:
