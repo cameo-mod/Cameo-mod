@@ -304,7 +304,7 @@ Player:
 2100OIL:
 	GrantExternalConditionToOwner@OilDerricksOwned:
 		Condition: OilDerricksOwned
-	Inherits: OILB.Building
+	Inherits: shared_oilbuilding
 	Inherits@BaseBuilding: ^BaseBuilding
 	-RenderSprites:
 	-HitShape:

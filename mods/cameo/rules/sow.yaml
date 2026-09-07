@@ -957,7 +957,7 @@ sowradar:
 sowgoldmine:
 	GrantExternalConditionToOwner@GoldminesOwned:
 		Condition: GoldminesOwned
-	Inherits: OILB.Building
+	Inherits: shared_oilbuilding
 	Inherits@BaseBuilding: ^BaseBuilding
 	-RenderSprites:
 	Inherits@resize: ^SowResize

@@ -499,28 +499,7 @@ RA2Flameguy:
 # Sell Actors
 #
 
-OILB.RA2:
-	Inherits: ^RA2Building
-	Inherits@cashtrickler: ^CashTricklerWithExperience
-	Inherits@cashtricklerlimit: ^CashTricklerLimited
-	Inherits@shape: ^2x2Shape
-	Inherits@Bot: ^BotMicromanageable
-	Tooltip:
-		Name: RA2 Oil Derrick
-	Buildable:
-		Prerequisites: ~ra2oilderrick, ra2tek, derricklimit
-		Description: actor_oilb.description
-	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
-	WithIdleOverlay@idle-pump:
-		Sequence: idle-pump
-		PauseOnCondition: lowpower
-		RequiresCondition: !build-incomplete
-	RenderSprites:
-		Image: ra2caoild
-		PlayerPalette: playerra2
-	-WithDeathAnimation:
+# ra2_allies_oilderrick: moved to ContentPacks/RedAlert2/Shared/yaml/misc.yaml (canonical ContentPack copy)
 
 ra2gacnst.infiltrated:
 	Inherits: ^ResearchedUpgradeTemplate

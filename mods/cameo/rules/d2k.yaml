@@ -776,7 +776,7 @@
 
 # OILB.d2k:
 # 	Inherits@D2kBLD: ^D2KBuilding
-# 	Inherits: OILB.Building
+# 	Inherits: shared_oilbuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Buildable:
 # 		Prerequisites: ~construction_yard, research_centre, derricklimit

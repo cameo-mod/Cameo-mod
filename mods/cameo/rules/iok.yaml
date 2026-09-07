@@ -709,7 +709,7 @@ IOKNUK2:
 		VoiceSet: USAColdFusionReactorVoice
 
 iokblackmarket:
-	Inherits: OILB.Building
+	Inherits: shared_oilbuilding
 	Inherits@2: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@camo: ^BuildingCamoLevel2

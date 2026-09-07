@@ -2499,7 +2499,7 @@ glstorm.hole:
 		Prerequisites: scudstorm, global-swlimit
 
 glblackmarket:
-	Inherits: OILB.Building
+	Inherits: shared_oilbuilding
 	Inherits@BaseBuilding: ^BaseBuilding
 	-RenderSprites:
 	Inherits@shape: ^2x2Shape
@@ -11873,7 +11873,7 @@ usaairport:
 		Prerequisites: selectusaairforce
 
 usadropzone:
-	Inherits: OILB.Building
+	Inherits: shared_oilbuilding
 	Inherits@BaseBuilding2: ^BaseBuilding
 	-RenderSprites:
 	Inherits@shape: ^2x2Shape

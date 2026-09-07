@@ -4605,7 +4605,7 @@ mcv.alliedn:
 awcity:
 	GrantExternalConditionToOwner@CitiesOwned:
 		Condition: CitiesOwned
-	Inherits: OILB.Building
+	Inherits: shared_oilbuilding
 	Inherits@BaseBuilding: ^BaseBuilding
 	-RenderSprites:
 	Inherits@2: ^CashTricklerMultipliers

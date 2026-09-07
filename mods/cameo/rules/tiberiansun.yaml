@@ -231,8 +231,8 @@ tsmonstermaker1:
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
 
-OILB.TS:
-	Inherits: OILB.Building
+ts_gdi_oilpump:
+	Inherits: shared_oilbuilding
 	Inherits@cashtrickler: ^CashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
 	Tooltip:
