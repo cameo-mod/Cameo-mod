@@ -35,6 +35,30 @@ Full Python and canonical audit results follow after completion; prior green
 counts are not silently carried forward. A fresh bot-match/replay test of the
 replacement writer remains unperformed by this integration pass.
 
+The complete canonical audit refresh at source checkpoint `204fa6040` finished
+in 779.8s (sampled Python tree 1505.7 MB, PC 49.0%) using bundled dependencies and
+the complete engine environment. All reports are nonempty. Five newly wired
+reports are included: missile roles, release drift, turning, original reference
+coverage and stat uniqueness. The overall exit remains 1 for retained debt,
+including the upstream missing Contents entry in `LESSONS_LEARNED.md`; no ceiling
+was raised to pass integration. Registered document counts, glow, percentage
+dispatch and structural ratchets pass. Empty-type warheads are zero; all 145
+generated templates remain in sync. Engine-freshness limitations remain explicit.
+
+Final frozen-source Python validation: **933 passed, 44 existing retired-feature
+skips, zero failures**, all 100 modules (977 tests), with bundled dependencies.
+The first run found only the new upstream `reference_assignment.json` cache being
+mistaken for an orphan faction ledger. Its exact schema now has a narrow layout
+check; unknown orphan files still fail. The complete rerun took 588s,
+sampled tree peak 849.6 MB and PC peak 48.9%.
+`latest/bounded_test_run.json` records that clean final rerun. A fresh fetch still
+points to `9ad1a5f77`; the non-mutating merge check is clean. PR remains draft.
+
+Whitespace caveat: the new upstream missile-role and release-drift generators
+emit an extra blank line at EOF. Their reports are retained verbatim. Standard
+`git diff --check` flags those two lines; checking with only `blank-at-eof`
+disabled passes. No audit finding or generator threshold was edited to hide it.
+
 ## Window and scope
 
 User-authorized three-hour run: 2026-09-07 03:18:43–06:18:43 WIB.

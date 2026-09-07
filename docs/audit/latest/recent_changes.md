@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **436**, files touched: **1053**
+Commits reviewed: **457**, files touched: **1056**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -52,6 +52,7 @@ Commits reviewed: **436**, files touched: **1053**
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 78ba66d8 | 2026-09-07 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
 | 6d021955 | 2026-09-07 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
 | 6405d194 | 2026-09-07 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
 | b05f1847 | 2026-09-07 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
@@ -74,6 +75,8 @@ Commits reviewed: **436**, files touched: **1053**
 | 15a08466 | 2026-09-06 | devin-ai-integration[bot] | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | 979d172c | 2026-09-05 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | c6313f50 | 2026-09-05 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 82dd5f70 | 2026-09-01 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
+| e70ab6cd | 2026-09-01 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | 3256bb36 | 2026-08-31 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | d3f188d0 | 2026-08-31 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | c91de468 | 2026-08-31 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
@@ -89,9 +92,6 @@ Commits reviewed: **436**, files touched: **1053**
 | c71bde9d | 2026-08-25 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | ec2457c0 | 2026-08-25 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | ccace5a5 | 2026-08-25 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 36ee102c | 2026-08-24 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| 75238eb3 | 2026-08-24 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| 5f0f2828 | 2026-08-24 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 
 
 ## R4 — engine/config changes to re-verify (0)
@@ -103,16 +103,16 @@ _none found_
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 205 |
-| docs/HANDOFF.md | 78 |
+| DEVELOPMENT_LOG.md | 200 |
+| docs/HANDOFF.md | 75 |
 | tools/audit/audit_warhead_split.py | 49 |
-| docs/design/BALANCE_PROGRAM_PLAN.md | 40 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 39 |
 | docs/balance/derived/redalert_soviets.json | 36 |
 | docs/audit/doc_claims.yaml | 33 |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 31 |
 | docs/balance/derived/d2k_ordos.json | 31 |
 | docs/balance/derived/tiberiansun_forgotten.json | 30 |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 30 |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 30 |
 | docs/balance/derived/d2k_ixian.json | 29 |
 | docs/balance/derived/tiberiansun_nod.json | 28 |
 | docs/balance/redalert_soviets.json | 27 |

@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (8 file(s)) | 76 | >= 24 |
-| T2 | `def test_*` in tools/tests (101 file(s)) | 974 | >= 177 |
-| T3 | modules with no test mentioning them | 267 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (8 file(s)) | 70 | >= 24 |
+| T2 | `def test_*` in tools/tests (103 file(s)) | 977 | >= 177 |
+| T3 | modules with no test mentioning them | 277 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (267)
+## T3 — untested modules (277)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -39,6 +39,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeed.cs | AdaptiveGameSpeed |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeedHost.cs | AdaptiveGameSpeedHost |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveSpeedController.cs | AdaptiveSpeedController |
+| C# | OpenRA.Mods.Cameo/Traits/AiMatchLogRecorder.cs | AiMatchLogRecorder |
 | C# | OpenRA.Mods.Cameo/Traits/AnnounceOnDamageState.cs | AnnounceOnDamageState |
 | C# | OpenRA.Mods.Cameo/Traits/ArmorPlating.cs | ArmorPlating, ArmorPlatingInit |
 | C# | OpenRA.Mods.Cameo/Traits/Attack/AttackInfectCA.cs | AttackInfectCA |
@@ -97,6 +98,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithMuzzleGlow.cs | WithMuzzleGlow |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithMuzzleSmoke.cs | WithMuzzleSmoke |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithTurretSearchlight.cs | WithTurretSearchlight |
+| C# | OpenRA.Mods.Cameo/Traits/ScaledSelfHeal.cs | ScaledSelfHeal |
 | C# | OpenRA.Mods.Cameo/Traits/ShadeMaster.cs | ShadeMaster |
 | C# | OpenRA.Mods.Cameo/Traits/ShadeSlave.cs | ShadeSlave |
 | C# | OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs | SlaveMinerSpawnerMaster |
@@ -194,10 +196,12 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_metadata.py | audit_metadata |
 | python | tools/audit/audit_meter_dilution.py | audit_meter_dilution |
 | python | tools/audit/audit_min_range.py | audit_min_range |
+| python | tools/audit/audit_missile_role_family.py | audit_missile_role_family |
 | python | tools/audit/audit_missing_elite.py | audit_missing_elite |
 | python | tools/audit/audit_multiplier_modifiers.py | audit_multiplier_modifiers |
 | python | tools/audit/audit_naming_damage.py | audit_naming_damage |
 | python | tools/audit/audit_nuclear_flash_bindings.py | audit_nuclear_flash_bindings |
+| python | tools/audit/audit_original_coverage.py | audit_original_coverage |
 | python | tools/audit/audit_orphans.py | audit_orphans |
 | python | tools/audit/audit_outliers.py | audit_outliers |
 | python | tools/audit/audit_packs.py | audit_packs |
@@ -206,16 +210,19 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_power_budget.py | audit_power_budget |
 | python | tools/audit/audit_promotion_gating.py | audit_promotion_gating |
 | python | tools/audit/audit_rank_decoration.py | audit_rank_decoration |
+| python | tools/audit/audit_release_drift.py | audit_release_drift |
 | python | tools/audit/audit_rename_safety.py | audit_rename_safety |
 | python | tools/audit/audit_sequences.py | audit_sequences |
 | python | tools/audit/audit_shrapnel_chains.py | audit_shrapnel_chains |
 | python | tools/audit/audit_split_definitions.py | audit_split_definitions |
+| python | tools/audit/audit_stat_uniqueness.py | audit_stat_uniqueness |
 | python | tools/audit/audit_survivability_pricing.py | audit_survivability_pricing |
 | python | tools/audit/audit_task_index.py | audit_task_index |
 | python | tools/audit/audit_template_conformance.py | audit_template_conformance |
 | python | tools/audit/audit_test_coverage.py | audit_test_coverage |
 | python | tools/audit/audit_tier_weapon_class.py | audit_tier_weapon_class |
 | python | tools/audit/audit_ts_death_palette.py | audit_ts_death_palette |
+| python | tools/audit/audit_turn_speed.py | audit_turn_speed |
 | python | tools/audit/audit_unconverted_templates.py | audit_unconverted_templates |
 | python | tools/audit/audit_unique_traits.py | audit_unique_traits |
 | python | tools/audit/audit_upgrade_coverage.py | audit_upgrade_coverage |
@@ -233,6 +240,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/find_orphan_old_keys_multi.py | find_orphan_old_keys_multi |
 | python | tools/audit/gen_damage_matrix.py | gen_damage_matrix |
 | python | tools/audit/gen_faction_matrix.py | gen_faction_matrix |
+| python | tools/audit/gen_release_baseline.py | gen_release_baseline |
 | python | tools/audit/gen_rename_maps.py | gen_rename_maps |
 | python | tools/audit/phase_b_survey.py | phase_b_survey |
 | python | tools/audit/propose_sonic_mapping.py | propose_sonic_mapping |
@@ -245,6 +253,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/_write_weapon_class.py | _write_weapon_class |
 | python | tools/balance/armor_exposure.py | armor_exposure |
 | python | tools/balance/audit_below_divider.py | audit_below_divider |
+| python | tools/balance/collapse_target.py | collapse_target |
 | python | tools/balance/compensate_retrofit.py | compensate_retrofit |
 | python | tools/balance/consolidate_compatibility_profiles.py | consolidate_compatibility_profiles |
 | python | tools/balance/consolidate_reviewed_weapon_roots.py | consolidate_reviewed_weapon_roots |
@@ -263,6 +272,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/plan_firepower_retirement.py | plan_firepower_retirement |
 | python | tools/balance/plan_warhead_collapse.py | plan_warhead_collapse |
 | python | tools/balance/preview_bell.py | preview_bell |
+| python | tools/balance/reference_targets.py | reference_targets |
 | python | tools/balance/remove_dead_weapons.py | remove_dead_weapons |
 | python | tools/balance/rename_3way_underscore.py | rename_3way_underscore |
 | python | tools/balance/report_versus_change.py | report_versus_change |
@@ -290,5 +300,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 267 untested > baseline 224
+- T3: 277 untested > baseline 224
 

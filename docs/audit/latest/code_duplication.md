@@ -1,12 +1,12 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **418** (min 5 statements), C# files: **352** (min 8 lines)
+Python files: **429** (min 5 statements), C# files: **353** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
 | C1 | identical Python function bodies | 19 | 10 |
 | C2 | identical C# method bodies | 15 | 14 |
-| C3 | identical module-level literal tables | 21 | 10 |
+| C3 | identical module-level literal tables | 22 | 10 |
 
 
 ## C1 — Python function clones (19 group(s))
@@ -55,13 +55,14 @@ Python files: **418** (min 5 statements), C# files: **352** (min 8 lines)
 | 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:825 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:833 SellUselessRefinery() |
 
 
-## C3 — Duplicated constant tables (21 group(s))
+## C3 — Duplicated constant tables (22 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
 | 5 | e90c0e4fa9ad2195 | tools/balance/consolidate_corroborated_role_profiles.py:278 CONTRACT_FIELDS; tools/balance/consolidate_explicit_family_state_profiles.py:158 CONTRACT_FIELDS; tools/balance/consolidate_high_identity_profiles.py:60 CONTRACT_FIELDS; tools/balance/consolidate_named_state_corrections.py:61 CONTRACT_FIELDS; tools/balance/consolidate_pinned_role_profiles.py:86 CONTRACT_FIELDS |
 | 4 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
 | 4 | 9a62b7cb0c6b46dc | tools/audit/audit_heaviness_bell.py:95 COMPANION; tools/audit/audit_three_way_split.py:75 COMPANION_MARKERS; tools/audit/audit_tier_weapon_class.py:55 COMPANION_MARKERS; tools/balance/preview_bell.py:44 COMPANION |
+| 3 | 6c04bed7d433482f | tools/audit/audit_stat_uniqueness.py:44 STATS; tools/balance/faction_extrapolate.py:84 RATE_STATS; tools/balance/reference_targets.py:41 STATS |
 | 3 | 985c1fe34e42db41 | tools/audit/find_empty_warhead.py:16 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/sweep_areadamage.py:25 CENTRAL |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
 | 2 | 245ae127cd6182e8 | tools/balance/consolidate_explicit_family_state_profiles.py:81 STATE_EXPANSION; tools/tests/test_explicit_family_state_profile_consolidation.py:31 EXPECTED_EXPANSION |
@@ -86,5 +87,5 @@ Python files: **418** (min 5 statements), C# files: **352** (min 8 lines)
 
 - C1: 19 > baseline 10
 - C2: 15 > baseline 14
-- C3: 21 > baseline 10
+- C3: 22 > baseline 10
 
