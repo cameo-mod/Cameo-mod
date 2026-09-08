@@ -89,6 +89,78 @@ class ApplyTests(unittest.TestCase):
         self.assertEqual(self.yaml.read_bytes(), self.original)
         child.assert_not_called()
 
+    def test_shadowed_values_refuse_but_consistent_noops_pass(self):
+        baseline = copy.deepcopy(self.fresh)
+        original_weapon = self.weapon.read_bytes()
+        for field in ("cost", "reload", "damage"):
+            with self.subTest(field=field):
+                self.fresh.clear()
+                self.fresh.update(copy.deepcopy(baseline))
+                self.desired = copy.deepcopy(self.fresh)
+                unit = self.desired["test"]["sections"]["infantry"]["unit"]
+                self.yaml.write_bytes(self.original)
+                self.weapon.write_bytes(original_weapon)
+                if field == "cost":
+                    unit["cost"]["v"] = 150
+                    self.yaml.write_bytes(self.original.replace(b"Cost: 100", b"Cost: 150"))
+                elif field == "reload":
+                    unit["armaments"][0]["reloaddelay"] = "30"
+                    self.weapon.write_bytes(original_weapon.replace(b"ReloadDelay: 20", b"ReloadDelay: 30"))
+                else:
+                    unit["armaments"][0]["damage_warheads"][0]["damage"] = 200
+                    self.weapon.write_bytes(original_weapon.replace(b"Damage: 100", b"Damage: 200"))
+                self.write_ledgers()
+                before = (self.yaml.read_bytes(), self.weapon.read_bytes())
+                code, text, child = self.run_apply("--confirm")
+                self.assertEqual(code, 1, text)
+                self.assertIn("SHADOWED", text)
+                child.assert_not_called()
+                self.assertEqual((self.yaml.read_bytes(), self.weapon.read_bytes()), before)
+                self.fresh.clear()
+                self.fresh.update(copy.deepcopy(self.desired))
+                code, text, child = self.run_apply("--confirm")
+                self.assertEqual(code, 0, text)
+                self.assertIn("NO CHANGES", text)
+                child.assert_not_called()
+
+    def test_retired_multiplier_change_refuses_but_preservation_passes(self):
+        unit = self.fresh["test"]["sections"]["infantry"]["unit"]
+        unit["firepower_multiplier"] = {"v": .5, "src": "inherited"}
+        self.desired = copy.deepcopy(self.fresh)
+        self.change_cost()
+        code, text, child = self.run_apply()
+        self.assertEqual(code, 0, text)
+        self.assertIn("DRY RUN: 1", text)
+        self.desired["test"]["sections"]["infantry"]["unit"]["firepower_multiplier"]["v"] = 1
+        self.write_ledgers()
+        code, text, child = self.run_apply("--confirm")
+        self.assertEqual(code, 1, text)
+        self.assertIn("RETIRED KNOB", text)
+        child.assert_not_called()
+
+    def test_untouched_inherited_stat_and_utility_arm_do_not_block(self):
+        unit = self.fresh["test"]["sections"]["infantry"]["unit"]
+        unit["hp"]["src"] = "inherited"
+        unit["armaments"].append({"slot": "Armament@UTILITY", "reloaddelay": "20"})
+        self.desired = copy.deepcopy(self.fresh)
+        self.change_cost()
+        code, text, _ = self.run_apply()
+        self.assertEqual(code, 0, text)
+        self.assertIn("DRY RUN: 1", text)
+        self.desired["test"]["sections"]["infantry"]["unit"]["hp"]["v"] = 600
+        self.write_ledgers()
+        code, text, child = self.run_apply("--confirm")
+        self.assertEqual(code, 1, text)
+        self.assertIn("inherited edit", text)
+        child.assert_not_called()
+
+    def test_represented_weapon_consumer_and_unrelated_inheritance_pass(self):
+        self.patches[-1].stop()
+        self.yaml.write_bytes(self.original + b"\tArmament:\r\n\t\tWeapon: Gun\r\n"
+                              b"unrelated:\r\n\tValued:\r\n\t\tCost: 1\r\n"
+                              b"child:\r\n\tInherits: unrelated\r\n")
+        self.assertEqual(apply.reference_problems(self.desired, {"unit"}, {"Gun"}), [])
+
     def test_noop_confirmation_does_not_refresh_ledgers(self):
         code, text, child = self.run_apply("--confirm")
         self.assertEqual(code, 0)

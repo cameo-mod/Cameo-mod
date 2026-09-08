@@ -10889,3 +10889,40 @@ Full-suite/audit completion is recorded in `docs/audit/ASTRA_REVIEW.md`.
 PR 329 remains draft and unmerged.
 
 Co-Authored-By: Codex <noreply@openai.com>
+
+## 2026-09-08 — Astra: tested pipeline implementation, pending publication
+
+Isolated branch `codex/astra-pipeline-implementation`, based on `a089bd3dc`.
+No commits, pushes, gameplay YAML changes, anchor signatures or game launches.
+
+- A4: shared report-column contract; per-main damage/count semantics; explicit report
+  selection and dry-run default; refuses incomplete/stale/unsupported selections.
+  Existing staged ledgers are preserved by refusal, and writes reuse `Transaction`.
+- A2: `derive_virtual_anchor.py` gathers classified eligible members, reference IDs,
+  rounded current-stat medians, bias and thin-sample diagnostics. All are unapproved:
+  these are NOT calibrated reference targets. Missing explicit damage/reload emits
+  `NO MODEL`, not invented prices. With explicit synthetic inputs, virtual `fit_class`
+  now uses the existing final per-stat formula, proving baseline O=P=Q=cost and the
+  2.5x verifier. Real-actor fitting is unchanged. A3 awaits C32 reconciliation; the
+  named AURORA readiness branch was not present on upstream when checked.
+- A5: paired refusal/pass tests cover shadowed unit/weapon/warhead values, preserved
+  retired multipliers, untouched inherited/utility fields, and a real allowed-consumer
+  graph. This is targeted coverage, not a claim every refusal is exhaustively paired.
+- B2: `audit_weapon_shape.py --compare-split` explains 304 versus 231: 73 shape-only
+  weapons, zero split-only. Both predicates and every ratchet remain unchanged.
+
+Independent challenge found and drove fixes for staged-proposal erasure, sidecar and
+population mismatch, off-grid model cost, spawn-sibling inclusion, and arbitrary model
+DPS defaults. Resolved-inheritance producer/extractor/consumer coverage was added.
+Combined isolated unittest run: 103 modules, 1017 tests, 45 skips, 15 failing modules.
+All 15 also fail on clean `a089bd3dc`; failures were NOT waived or repaired by changing
+weapon expectations. Details remain in `docs/audit/latest/bounded_test_run.json`.
+33 ledgers have zero drift; percentage-runtime audit and structure ratchets pass.
+Test-runner sampled peak: 839.6 MB process tree, 45.4% PC memory.
+
+Open boundaries: the current MBT replacement-damage producer still refuses retained
+inherited/scoped firepower; this guard was not bypassed. The new armed-transport class
+has no classified members until its template migration lands. Support has no combat
+verifier. Faction approval/calibration and model choices are still required before any
+signable anchor. Chrome/hook/compatibility-splice defects refer to the old PR code,
+not the current-master implementations; no disputed PR payload was imported here.

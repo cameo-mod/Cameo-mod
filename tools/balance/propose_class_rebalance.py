@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT / "tools/balance"))
 import formula  # noqa: E402
 import class_membership  # noqa: E402
 import tier_chain  # noqa: E402
+from proposal_contract import format_damage, table_header, table_separator
 
 LEDGER_DIR = ROOT / "docs/balance"
 ANCHORS_FILE = LEDGER_DIR / "class_anchors.json"
@@ -353,9 +354,9 @@ def load_class_rows(cls: str):
                 row["spd_step"] = 5 if row["vehicle_turnrate"] else 1
                 row["arm_rng"] = formula.wdist_value(arm.get("range"), 0)
                 # offensive warheads on the primary weapon (100-grid split target)
-                offensive = [w for w in arm.get("damage_warheads", [])
-                             if not str(w.get("tag", "")).lower().endswith(
-                                 ("percentage", "extradamage", "friendlyfire"))]
+                offensive = formula.main_spread_warheads(arm.get("damage_warheads", []))
+                if smallarms_only:
+                    offensive = [w for w in offensive if w.get("tag", "").lower().startswith("smallarms")]
                 row["n_wh"] = len(offensive) or 1
                 # cross-pack shared weapon → editing its Damage/Range leaks; flag it
                 row["weapon_file"] = arm.get("defined_in", "")
@@ -599,8 +600,8 @@ def render_report(rows, cls):
         "Converter law: cost pinned, range clamped to band + made unique, "
         "eff-DPS trimmed to Δ≤1 via 100-grid warhead Damage; unconditional FirepowerMultiplier is retired.",
         "",
-        "| actor | faction | HP | spd | rng | cost | dmg/wh×n | rl | burst | legacy FP% | eff DPS | price | Δ | flags |",
-        "|---|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|---|",
+        table_header(),
+        table_separator(),
     ]
     worst = 0.0
     for r in rows:
@@ -617,11 +618,13 @@ def render_report(rows, cls):
             flags = (flags + " fp-debt").strip()
         if not r["protected"]:
             worst = max(worst, abs(r["delta"]))
-        dcol = f"{r.get('per_wh') or r['dmg']}×{r.get('n_wh', 1)}"
+        per_main = r.get('per_wh')
+        dcol = format_damage(r['dmg'] if per_main is None else per_main, r.get('n_wh', 1))
         lines.append(
             f"| `{r['actor']}` | {r['faction']} | {r['hp']} | {r['spd']} | {r['rng']} | "
             f"{r['cost']} | {dcol} | {r['rl']} | {r['burst']} | {int(round(r['fp0'] * 100))} | "
-            f"{r['dps_eff']:.1f} | {r['price']:.0f} | {r['delta']:+.1f} | {flags} |"
+            f"{r['dps_eff']:.1f} | {r['price']:.0f} | {r['delta']:+.1f} | {flags} | "
+            f"{r['dmg_filter']} | {r['weapon']} |"
         )
     lines += ["", f"**Worst |Δ| among non-anchor members: {worst:.1f}** "
               f"(goal ≤1).", "",

@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import json
 import pathlib
+import math
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -35,6 +36,38 @@ import class_membership  # noqa: E402
 
 LEDGER = ROOT / "docs/balance"
 ANCHORS = LEDGER / "class_anchors.json"
+
+
+def eligible_virtual_member(unit):
+    """Exclude unavailable variants, retain explicitly included spawn siblings."""
+    return unit.get("buildable") is not False or bool((unit.get("design") or {}).get("balance_include"))
+
+
+def virtual_spec(value):
+    """Validate the six model inputs, without changing any real actor."""
+    values = tuple(float(x) for x in value.split(","))
+    if len(values) != 6 or not all(math.isfinite(x) and x > 0 for x in values):
+        raise ValueError("virtual spec needs six finite positive values")
+    return values
+
+
+def virtual_estimators(inputs, spec):
+    """Use FINAL per-stat normalization, not the superseded aggregate O/P/Q fit.
+
+    Both model and members use the same nominal DPS basis. Virtual tech tier
+    and K are unity; member tier is relative to this model, not a real actor.
+    """
+    hp, speed, rng, damage, reload_, cost = spec
+    h, s, r, d, special, _unit_class, tier = inputs
+    return formula.class_baseline_estimators(
+        h, s, r, d, hp, speed, rng, formula.dps(damage, reload_), cost,
+        special=special, tech_tier=tier)
+
+
+def virtual_price(unit, derived, inputs, spec):
+    return (sum(virtual_estimators(inputs, spec)) / 3
+            * formula.charge_price_multiplier(unit.get("charge_up"), charge_cycle_fallback(unit))
+            * formula.physical_state_price_multiplier(physical_state_weight(unit, derived)))
 
 
 def fnum(v):
@@ -323,9 +356,18 @@ def main() -> int:
     if args.compare_k and args.spec:
         ap.error("--compare-k needs a real --anchor: a virtual --spec has no "
                  "armaments, so it has no K to compare")
+    if args.spec and args.use_k:
+        ap.error("--use-k requires a real anchor; a virtual model has no measured K")
+    if args.spec:
+        try:
+            spec = virtual_spec(args.spec)
+        except ValueError as error:
+            ap.error(str(error))
 
     units, derived = collect_units(args.cls, set(args.actors or []),
                                    always={args.anchor} if args.anchor else set())
+    if args.spec:
+        units = {actor: unit for actor, unit in units.items() if eligible_virtual_member(unit)}
     def fit(use_k):
         """(anchor_id, cost0, o0, p0, q0, rows, fallbacks) for one pricing mode.
 
@@ -337,9 +379,9 @@ def main() -> int:
         # gets priced against it. A spec anchor has no armaments, so it has no
         # K fallbacks of its own.
         if args.spec:
-            hp, speed, rng, dmg, reload_ , c0 = (float(x) for x in args.spec.split(","))
+            hp, speed, rng, dmg, reload_, c0 = spec
             d0 = formula.dps(dmg, reload_)
-            e0 = formula.estimators(hp, speed, rng, d0)
+            e0 = virtual_estimators((hp, speed, rng, d0, 1, 1, 1), spec)
             anchor_id, af = f"SPEC({args.spec})", 0
         else:
             ai, af = unit_inputs(units[args.anchor], derived.get(args.anchor), use_k)
@@ -361,7 +403,8 @@ def main() -> int:
             if inp is None or cost is None:
                 rws.append((actor, cost, None, None))
                 continue
-            v2 = price_unit(u, derived.get(actor), inp, *e0, c0)
+            v2 = (virtual_price(u, derived.get(actor), inp, spec) if args.spec
+                  else price_unit(u, derived.get(actor), inp, *e0, c0))
             rws.append((actor, cost, v2, (v2 - cost) / cost if cost else None))
         return (anchor_id, c0) + e0 + (rws, fb)
 
