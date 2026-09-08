@@ -129,7 +129,6 @@ TS120mmx:
 	-Warhead@1Dam:
 TSChem120mmx:
 	Inherits@chemical: ^Warhead_CannonChem_Heavy
-	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^TSCannon
@@ -141,9 +140,6 @@ TSChem120mmx:
 	BurstDelays: 4
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 15
-	Warhead@CannonHE_Medium:
-		Damage: 33600
-		PercentageScale: 8929
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@Cloud: SpawnSmokeParticle
@@ -162,7 +158,7 @@ TSChem120mmx:
 	-Warhead@1Dam:
 	Warhead@CannonChem_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 60000
+		Damage: 93600
 		PercentageScale: 0
 
 TSScoopDual:
@@ -178,9 +174,9 @@ TSScoopDual:
 	Warhead@CannonHE_Medium:
 		Damage: 20000
 TSScoopDualChem:
-	Inherits@finalmain: ^Compatibility_Chemical_MediumFlat
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_Chemical_Medium
+	# Restore the 30000-damage CannonChem role from a92a4bc1bf; the merge
+	# accidentally retained the alternative 30000-damage compatibility payload too.
+	Inherits@wh: ^Warhead_CannonChem_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@fx2: ^TSCannonEffect
@@ -216,12 +212,6 @@ TSScoopDualChem:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	-Warhead@CannonHE_Medium:
-	-Warhead@Chemical_Medium:
-	Warhead@Chemical_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 30000
-		PercentageScale: 9997
 
 TSScoopDualTur:
 	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
@@ -691,7 +681,6 @@ TSJuggerboat90mm:
 	# 	Explosions: artillery_explosion
 TSBoatcannon:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 80
 	Burst: 2
@@ -703,9 +692,8 @@ TSBoatcannon:
 		Blockable: false
 		Speed: 800
 		ContrailLength: 8
-	Warhead@Demolition_Heavy:
-		Damage: 16000
-		Spread: 400
+	Warhead@Concussion_Medium:
+		Damage: 18000
 TSChemJuggerboat90mm:
 	Inherits@wh: ^Warhead_CannonChem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
@@ -781,6 +769,7 @@ TSChemBazooka:
 	Range: 6694
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		TrailImage: spittrail
 	Warhead@MissileChem_Light:
 		Damage: 30000
@@ -988,7 +977,7 @@ TSMammothTusk:
 	Projectile: Missile
 		Speed: 500
 		HorizontalRateOfTurn: 25
-		VerticalRateOfTurn: 25
+		VerticalRateOfTurn: 12
 		MinimumLaunchAngle: 75
 		Acceleration: 5
 		AllowSnapping: true
@@ -1026,6 +1015,9 @@ TSRuinerMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 9998
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+
 TSChemRuinerMissile:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
 	Inherits: ^LightChemicalWeapon
@@ -1036,6 +1028,7 @@ TSChemRuinerMissile:
 	ReloadDelay: 50
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
@@ -1094,6 +1087,9 @@ TSApacheMissile:
 	Warhead@ShieldHit:
 		Duration: 8
 
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+
 TSChemApacheMissile:
 	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -1104,6 +1100,7 @@ TSChemApacheMissile:
 	Range: 4688
 	Report: orcamis1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		TrailImage: spittrail
 	Warhead@MissileChem_Medium:
 		Damage: 36000
@@ -1171,6 +1168,9 @@ TSCobraMissile:
 	Warhead@ShieldHit:
 		Duration: 8
 
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+
 TSChemCobraMissile:
 	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -1181,6 +1181,7 @@ TSChemCobraMissile:
 	Range: 5052
 	Report: orcamis1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		TrailImage: spittrail
 	Warhead@MissileChem_Medium:
 		Damage: 36000
@@ -1258,6 +1259,9 @@ TSAdatsMissile_AA:
 		Damage: 8000
 		PercentageScale: 9988
 		ValidTargets: Air
+	Projectile: Missile
+		VerticalRateOfTurn: 20
+
 MutFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -1698,8 +1702,7 @@ TSCropBomb:
 		SmudgeType: Crater
 
 TSCropBombChem:
-	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@wh2: ^Warhead_Chemical_Heavy
+	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 50
 	Range: 1250
@@ -1709,11 +1712,8 @@ TSCropBombChem:
 		Acceleration: 0, 0, -8
 		Image: 120mm
 		Shadow: true
-	Warhead@Demolition_Heavy:
-		ValidTargets: Ground, Ship
-		Damage: 120000
 	Warhead@Chemical_Heavy:
-		Damage: 60000
+		Damage: 180000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 10
 		Duration: 50
@@ -1737,8 +1737,7 @@ TSCropBombChem:
 		SmudgeType: Crater
 
 TSLocustBombChem:
-	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@wh2: ^Warhead_Chemical_Heavy
+	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 38
 	Burst: 5
@@ -1750,11 +1749,8 @@ TSLocustBombChem:
 		Acceleration: 0, 0, -8
 		Image: 120mm
 		Shadow: true
-	Warhead@Demolition_Heavy:
-		ValidTargets: Ground, Ship
-		Damage: 180000
 	Warhead@Chemical_Heavy:
-		Damage: 90000
+		Damage: 270000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 15
 		Duration: 50
@@ -2022,7 +2018,7 @@ TSSergGun:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 16000
+		Damage: 4000
 		PercentageScale: 2494
 forgotten_mutantsoldier_rifle:
 	Inherits@wh: ^Warhead_Bullet_Light

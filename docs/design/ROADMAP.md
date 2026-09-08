@@ -3,6 +3,46 @@
 _Entry point for a new session: **[`docs/HANDOFF.md`](../HANDOFF.md)**. This file is the
 granular, resumable task queue that the handoff points into._
 
+## STAT GRANULARITY + REGENERATION (2026-09-07) — maintainer rulings, IN FLIGHT
+
+- [x] DESIGN.md: HP to **1000-steps for every type** (was 2500 vehicles / 1000 infantry),
+  Speed to **steps of 1** (was 5). Both coarse steps existed only to make a DERIVED value
+  divide evenly, and both made the uniqueness law impossible — `mbt` has 51 members but
+  24 distinct HP values and 14 distinct speeds (`64dd80480`).
+- [x] `ScaledSelfHeal` trait — ticks-to-full, applied per tick with a carried fraction,
+  linear ramp over 125 ticks replacing `DamageCooldown`. Built, boot-gated, shipped
+  **INERT** (`4afa00095`).
+- [ ] **Convert the 892 `ChangesHealth@SelfHealing` nodes.** DELEGATED and split four ways —
+  `Cameo-mod-fleet/TASK_2026-09-07_regen_conversion.md`. Everything lands on
+  `devin/regen/conversion`; Claude-Local flips `defaults.yaml` LAST and merges whole,
+  because deleting overrides first leaves a flat `Step: 10` and flipping first
+  double-heals. Neither state may sit on master.
+- [ ] Infantry moves from **1.25x** to the ruled **2x** vehicle heal rate (80 s -> 50 s).
+  This is the first change that alters gameplay; wants a playtest, not just a boot gate.
+- [x] `audit_turn_speed.py` guards `TurnSpeed = Speed/5` (turretless 2x) — generator +
+  audit rather than C#, because turn speed is an integer `WAngle` at every layer and
+  `Aircraft` exposes no modifier hook (`d83812437`). Ratchets T1 37 · T2 142 · T3 27 · T4 137.
+- [ ] **Turret rulings not yet written into DESIGN.md**: all 27 turret/hull mismatches are
+  bugs; stationary defenses get the **2x rule on the TURRET** rather than the chassis, so a
+  defense tracks as fast as a frontal-weapon tank; a tank that DEPLOYS into an immobile
+  form doubles its rotation (GDI Rig, Terran siege tank, Matador). Husks alone keep no
+  turn rate.
+- [ ] Generate `Mobile` / `Turreted` / `Aircraft` TurnSpeed from Speed and drive the
+  T1/T2 ratchets down. 40% of vehicles currently disobey the rule.
+
+## Balance apply failure safety (2026-09-07)
+
+- [x] Repair `apply_balance.py` confirmation: reject incomplete plans, validate
+  provenance/shared consumers, stage extraction outside proposal ledgers, propagate
+  failed subprocesses, and restore transaction-owned writes on failure.
+- [x] Add failure-injection regressions and verify an unchanged live faction dry run.
+
+The former writer could save YAML despite planning errors, invoke the extractor
+with an obsolete positional argument, and report success after subprocess failure.
+The repair is independently reviewed; balance targets still require the normal
+sign-off and boot gates. Evidence and delivery status are in
+`docs/audit/ASTRA_REVIEW.md`.
+
 ## AI PERSONALITY SELECTOR (2026-08-21)
 
 - [x] Add synchronized random Rush/Turtle/Tech/Expansion/Steamroller selection
@@ -26,8 +66,9 @@ granular, resumable task queue that the handoff points into._
 
 ## AI ARCHITECTURE (2026-08-31)
 
-Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Nothing here is implemented; the
-design document is the deliverable so far. Ordered so each item is independently
+Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Record-only completed-match telemetry
+is implemented on the follow-up branch; adaptive decision behavior remains proposed.
+Ordered so each item is independently
 verifiable. §10 of the design is the module-by-module build plan: what every loaded
 bot module owns, what it reads from the master's snapshot, and the phase order
 (logging → observe-only master → switching → targeting → hints → fog → learning),
@@ -58,11 +99,13 @@ the fog sequencing.
   a synced controller trait, because bot logic may not touch synced state.
 - [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
   cannot attribute losses to a specific opponent).
-- [ ] **M** JSONL match logging: match / decision / outcome records, the episode
-  as the unit of learning. Record-only, no behaviour change - this is the
-  proof-of-concept deliverable.
-- [ ] **M** Offline aggregation tool: personality and composition performance per
-  faction matchup, with a minimum sample threshold.
+  - [x] **M** Record-only AI match logging: [`AI_MATCH_LOG.md`](AI_MATCH_LOG.md),
+    [`AiMatchLogRecorder.cs`](../../OpenRA.Mods.Cameo/Traits/AiMatchLogRecorder.cs),
+    [`AiMatchLogWriter.cs`](../../OpenRA.Mods.Cameo/Traits/AiMatchLogWriter.cs), and
+    [`aggregate_ai_matches.py`](../../tools/ai/aggregate_ai_matches.py). Schema version 1;
+    host-only JSONL writes with no gameplay effect and no read-back.
+  - [ ] **M** Offline aggregation extensions: personality and composition performance per
+    faction matchup, with a minimum sample threshold.
 - [ ] **L** Bandit-style (UCB1/Thompson) personality priors per matchup, fitted
   offline and committed as reviewed data.
 - [ ] **L** Headless AI-vs-AI batch harness to produce the data volume.

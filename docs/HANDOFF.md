@@ -1,5 +1,119 @@
 # Cameo — THE HANDOFF
 
+## ⛔⛔ 2026-09-07 — READ THIS FIRST: the reference map, and one absolute rule
+
+**SUPERWEAPONS ARE NEVER PRICED, RESTATTED OR TOUCHED** (maintainer, verbatim: *"NEVER CHANGE
+THEM!! SO EXCLUDE THEM BEFORE ANYTHING IS CHANGED ON ACCIDENT!!!"*). 32 actors are gated on
+`~techlevel.superweapons`; every one whose HP is recorded holds exactly **1,000,000**, which is a
+deliberate constant, not a balance figure. Two locks, both landed in `9ad611a6d`:
+`reference_distribution.cameo_rows()` drops them from the priced population, and `apply_balance`
+**refuses** any ledger edit that touches one. Do not weaken either.
+
+### Where the reference map stands (master `8589e8eb8`)
+
+The maintainer reviewed it three times and rejected it twice. Every reference is now
+**name-backed** — shape-only matches are refused outright, after a sniper drew a Velociraptor and
+an officer a Triceratops. 63 originals · 77 expanded · 235 references · 4 originals still short.
+
+**The one lesson that generalises**, stated three ways because it recurred every single time:
+
+> The matcher was never choosing badly. **The correct candidate was invisible, or the wrong one
+> was recorded despite the scorer already knowing it was bad.** Of ten mappings the maintainer
+> called junk: 8 SHAPE, 2 WEAK, **zero STRONG**. Of the ones they called correct: 20 STRONG of 21.
+> When a mapping looks stupid, ask what was excluded — not what was chosen.
+
+Defects fixed today, each worth knowing because each was invisible:
+
+| | |
+|---|---|
+| Armed structures in a `buildings` section were not in the population at all | 38 actors, incl. every TD defence |
+| AI-only variants were eligible references (suffix **and** prefix forms) | 122 rows; they are deliberately CHEAPER |
+| `~disabled` rows were eligible | OpenRA's dinosaurs, ants, Visceroid — and its `HIND` |
+| A direct `Queue:` gate was diluted by a shared prerequisite (`anyhq`) | 15 TD rows incl. Light/Medium Tank |
+| An EXPANSION outbid an ORIGINAL for its own reference | `firerocketsoldier` scores **0.867** vs `sovietrocketsoldier`'s **0.850** — the expansion is literally the closer string, so no scorer tuning fixes it. Originals now claim first. |
+| `variant_rank` was a whack-a-mole list — held "flame", not "fire" | inverted: a closed list of FACTION words, not an open list of variant words |
+| Containment guard measured the Cameo string, not the peer's | `Ant` matched inside `dragunov**ant**imaterialsniper` |
+| Sources agree on IDS after renaming, and nothing read it | CA ships `1TNK` as "Scout Tank"; DTA prefixes RA-era actors `RA` (`RAPBOX`) |
+| CA states ownership in a DOT SUFFIX (`STNK.Nod`) | its Queue/Prereq tags are useless — see below |
+| The report hid variant FAMILIES | a 6-row mapping displayed as one arbitrary pick |
+
+### ⛔ THE BIGGEST REMAINING LEVER — Combined Arms over-tagging
+
+**CA's median row is admissible to FIVE Cameo factions. Every other source's median is ONE**, and
+154 of 346 CA rows exceed six. That single fact produced most of what was rejected in both
+reviews: a Soviet Tesla Trooper for Nod's laser trooper, Nod's SAM for the Soviet SAM site, an RA1
+Allied IFV for a GDI APC, and `allows("td_gdi", TITN)` returning **False** — CA denying GDI its own
+walker. **EMBER owns this.** Until it is fixed, `REFERENCE_OVERRIDES` and `FAMILY_EXTRA` in
+`tools/balance/` are papering over it with named rows.
+
+### ⭐ 2026-09-08 — the fleet stopped writing and started landing
+
+`docs/FLEET_ORDERS_2026-09-08.md` is the live fleet order set; Codex/Astra's is
+`docs/BLACKROBE_ASTRA_ORDERS_2026-09-07.md` (read its §13 addendum first).
+
+The measurement that drove it: **39 unmerged agent branches, ~200 unmerged commits, and zero
+merged to master by the fleet.** Four branches were byte-identical duplicates; two agents wrote
+competing proposals for the same 268 units and neither shipped.
+
+Landed today, both boot-gated:
+
+| | |
+|---|---|
+| `devin/ember/w24-lane1` | 22 weapons collapsed to one main |
+| `devin/dawn/w24-lane3` | 69 more, ledgers re-extracted on landing |
+| **`audit_three_way_split`** | **322 → 231** |
+
+⚠ Lane 3 arrived having changed 10 weapon files and no ledgers, so `audit_balance_drift` went red
+across 10 of them. Fixed by `extract_stats.py`, never by hand. **Yaml and ledger in the SAME
+commit** is now a standing fleet rule.
+
+Next in the W24 queue: `devin/nova/w24-lane2` (57 commits, conflicts in
+`RedAlert2/Soviets/weapons.yaml` — a real per-weapon decision, not a merge tool), then
+`devin/nova/w24-naxi-pilot`, which must follow it.
+
+### Priority queue
+
+1. **CA over-tagging** (EMBER) — unblocks ~8 known-wrong mappings at once.
+2. **Heroes are invisible on BOTH sides — that, not a missing filter, is why `RMBO` is
+   unclaimed.** ⚠ This CORRECTS what this file said earlier on 2026-09-07, and the correction
+   matters more than the item. Aurora's `filter_candidate_eligibility.py`
+   (`devin/aurora/pool-hygiene-clean`) must **not** be wired as written: measured against the live
+   pipeline it removes **0** rows that `reference_distribution.ini_rows()` keeps, and would add
+   **699** back (295 build-limited one-offs, 404 with no cost at all). `ini_rows()` already applies
+   its exact rule — `cost` AND no `build_limit` AND `buildable` — and applies it more strictly.
+   Wiring the side file would LOOSEN the pool, not clean it.
+   The real cause is the POPULATION RULE itself (maintainer, 2026-08-30): `cameo_rows()` drops
+   every actor carrying a `build_limit`, so **83 Cameo hero/epic combat rows** — Tanya, Boris,
+   Volkov, both TD Commandos, Havoc, Kerrigan, Zeratul, Jim Raynor, Chrono Tank, MAD Tank — never
+   enter the reference map at all. OpenTD's `RMBO` sits in the peer pool and always did; there is
+   simply no Cameo actor left in scope that can claim it, and the same is true of OpenRA RA's
+   `CTNK`.
+   ⭐ **RULED 2026-09-07 — the HERO-ONLY REFERENCE LANE.** Heroes stay OUT of every ordinary
+   distribution (the population rule is unchanged, and the 3,000,000 HP epic never re-enters the
+   vehicle ceiling), but a Cameo hero MAY match a peer hero, so `td_gdi_commando` claims `RMBO`
+   and `ra1_allies_chronotank` claims `CTNK`. References only — **no hero is ever priced by the
+   ordinary formula.** Implementation is the fleet's: a hero flag carried on the row rather than a
+   drop, `peer_rows()` keeping its exclusion for distributions, and `assign_references` matching
+   hero-to-hero only. 83 Cameo actors and 295 peer heroes are in scope.
+3. **Aliases for the 9 short originals** (ECHO) — each is one synonym; DTA calls its rocket
+   soldier "Bazooka" and its AA gun "Anti-aircraft Gun". Finite and checkable.
+4. **Sign the 27 class anchors** (CODEX) — 0 of 27 signed, and `apply_balance` therefore refuses
+   every faction. This, not writer safety, is what blocks the whole pipeline.
+5. **Then: the faction-calibration method for expansions** — anchor on originals, derive the rest
+   (class anchor × tech tier × faction factor). Maintainer wants **Japan** as the first test,
+   precisely because it has no reference data.
+
+### Open questions the maintainer has not answered
+
+* **Is Romanov's Vengeance the RA2 authority?** It carries 729 buildable units; RA2 + YR never
+  shipped that many. It is 104 of 119 unclaimed "originals", and O2 currently reports it without
+  gating on it. That exemption must be DELETED when ruled, never raised.
+* **TD naval** — GDI and Nod ships exist in DTA and CA and Cameo has none mapped.
+* Missing actors the maintainer named: **RMBO / E7 (Tanya)**, CA's Chinook, Specter, Venom.
+
+---
+
+
 **2026-08-25 update (Devin AI):** The volcanic shellmap (`shellmap_v3.oramap`) camera was too tight (6-cell radius), hiding the scripted attack waves. The `attack.lua` camera radius has been widened to 45 cells. The boot-blocking stale removal `-Warhead@CannonHE_MediumPercentage` in `weapons/outpost2.yaml` is resolved in `a92ae850`, and boot-gate passes with no new exceptions. See `DEVELOPMENT_LOG.md` § "Volcanic shellmap camera radius fix" for evidence and verification.
 
 **This is the single entry point for anyone picking up work on Cameo — human or agent.**
@@ -18,6 +132,40 @@ those are archived under [`history/handoffs/`](history/handoffs/) and must not b
 | **you are the Blackrobe GPT-6 Astra Agent** | ⭐ [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md) — your complete single-prompt instruction set |
 
 ---
+
+## ⛔ 2026-09-07 — the reference map, and what it cost to make it trustworthy
+
+**master `57d7d7858`.** The maintainer reviewed a TD/RA1 reference map and rejected it:
+`ra1_allies_rifleinfantry` was mapped to a **Cryo Trooper** when all three sources ship an E1.
+Seven silent defects, each individually sufficient — full list in
+`memory: cameo-reference-defect-cascade`, the essentials here.
+
+⭐ **THE LESSON.** The matcher was never choosing badly. **The correct candidate was deleted
+from the pool before matching**, and the greedy picked the best of what remained. Every wrong
+pairing looked like a scoring bug and was a visibility bug.
+
+⛔ **A "verification" that reads a crashed run's output verifies nothing.** `factions_of` lost
+its `vfi` parameter in a merge, so every OpenRA extraction raised TypeError and was swallowed
+per-mod; my splice then copied the unchanged file back and I reported the fix working.
+
+**THE ACCEPTANCE TEST** (maintainer, verbatim): *"All the original units are in OpenRA. DTA, CA
+and Cameo all expand the roster... those that exist in OpenRA and OpenTD MUST ALWAYS HAVE 3
+REFERENCES."* Encoded as `audit_original_coverage.py`. **O2 — an original nobody claimed — is
+the check that matters**; a voice count cannot see it.
+
+**OPEN QUESTION, unanswered:** Romanov's Vengeance carries **729 buildable units**. RA2+YR never
+shipped that many, so RV expands the roster like CA and DTA do. `OpenRA RA2 official` (86) and
+`Yuri's Revenge on OpenRA` (124) match the real rosters. Which is the RA2 authority?
+
+**NEXT, in order:**
+1. Work the O2 list — **every Tiberian Dawn defense is unclaimed** (Obelisk, Guard Tower,
+   Advanced Guard Tower, Turret, SAM), plus RA1's Tesla/Chrono tank and Demolition Truck.
+2. Settle the RA2 authority, then re-baseline O1/O2.
+3. The regen conversion (892 nodes, delegated, `devin/regen/conversion`) — **Claude-Local flips
+   `defaults.yaml` LAST and merges whole**, or master double-heals.
+4. The faction identity modifier to break byte-identical mirrors — magnitude not yet set.
+
+⚠ **No balance number has been written to yaml.** Nothing is applied until the map is right.
 
 ## ⭐ AGENT ASSIGNMENTS — who is doing what (2026-09-06)
 
@@ -140,6 +288,44 @@ the method, the faction-specific traps, the gates, and the report format. Read
 
 ⚠ **Agent-to-agent chatter lives OUTSIDE the repository**, in `../Cameo-mod-fleet/`.
 `DEVELOPMENT_LOG.md` keeps one entry per COMPLETED work item plus lessons learned — nothing else.
+
+## ⭐⭐ START HERE 2026-09-07 — why the balance pipeline has not moved, and the fix
+
+```
+$ python tools/balance/apply_balance.py --faction d2k_atreides
+DRY RUN: 0 values would change
+```
+
+**The pipeline is not blocked by tooling, by W11, or by sign-off. It is idle because nobody
+has written a target number into the ledger.** `apply_balance` writes ledger → yaml; the
+ledger holds today's values; applying it is therefore a no-op *by construction*.
+
+`anchor_readiness.py` reports **0 of 27 classes signable**, 26 failing "the anchor does not
+describe its members" (median pricing error 15%–106%) — and explains itself in one line:
+*"the anchor actor is still PRE-RESTAT, so its percentile is measured on stats the design
+already intends to replace."*
+
+Meanwhile **all 27 classes already carry a complete spec** in `docs/balance/class_anchors.json`
+(`cost0`, `dps0`, `hp0`, `range0_wdist`, `speed0`) that has never been used. `mbt`'s spec is
+hp0 **240,000**; the actual unit has **100,000**. The numbers were designed and never written
+anywhere the pipeline reads.
+
+⭐ **MAINTAINER ORDER, 2026-09-07 — do this first:**
+
+1. Write the 27 anchor specs into the ledger on **`hp0` / `speed0` / `range0_wdist` / `cost0`
+   only**. ⛔ **NOT `dps0`** — it depends on weapon structure and therefore on W24, and would
+   be written twice.
+2. `python tools/balance/apply_balance.py --faction <f> --confirm`
+3. Boot-gate, re-extract, then re-read `anchor_readiness.py`.
+
+This is the first real balance change the project will have made, and it breaks the apparent
+circularity (sign-off needs a restat; the restat needs numbers in the ledger — which is a
+LEDGER edit, explicitly sanctioned by CLAUDE.md rule 3, not a hand edit of yaml).
+
+⚠ The four non-DPS axes depend on nothing but the unit, so **W24 is not a prerequisite for
+this.** The two can run in parallel: the restat writes `docs/balance/*.json` → actor yaml,
+W24 writes `**/weapons.yaml`, and `extract_stats.load_existing_design()` preserves authored
+`design.*` across re-extraction.
 
 ## ⛔⛔ TOP OF THE QUEUE 2026-09-07 — revert the ra1_soviets rename
 
@@ -276,10 +462,10 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          192 directly fired weapons still carry 2+
- └─> W23  retrofit the legacy templates      1162 direct inheritors; 1245 fired
- │        (2026-08-23 baseline; re-measure before using as current state)
- │        (its old "33-collision" blocker    weapons already reach a ^Warhead_* family
+W24  one damage warhead per weapon          184 directly fired weapons still carry 2+
+ └─> W23  retrofit the legacy templates      1596 direct inheritors
+ │        (2026-09-07 raw counts; 234 direct + indirect reachable stacks)
+ │        (its old "33-collision" blocker
  │         is DISSOLVED — W24 removes it)
  └─> A5   retire the remaining inline-Versus weapons onto templates
       └─> class anchors → fit_class per class → W11 maintainer sign-off

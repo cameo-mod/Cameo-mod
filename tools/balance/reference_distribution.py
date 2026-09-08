@@ -65,6 +65,7 @@ import argparse
 import collections
 import json
 import math
+import re
 import pathlib
 import statistics
 import sys
@@ -423,6 +424,46 @@ def doc1_rows():
     return out
 
 
+# ⛔ AI-ONLY VARIANTS ARE NOT REFERENCES (maintainer, 2026-09-07). Several mods ship a duplicate
+# actor that only the computer player can build — DTA's `TWR_AI`/`GUN1_AI`, CnC Reloaded's
+# `NABNKR_AI` ("Soviet Battle Bunker (for AI)"), Red Resurrection's "AI ONLY" rows. They are
+# balance crutches for the bot, not units a player ever faces on equal terms, and the real actor
+# they shadow is sitting right next to them in the same source. The assignment was handing
+# `td_gdi_guardtower` DTA's `TWR1_AI` while DTA's actual `TWR` went unused.
+#
+# ⚠ THE TEST MUST NOT BE `id.endswith("AI")`. Shattered Paradise's `ORCAI` is an Orca Interceptor
+# and Combined Arms' `ZRAI` is a Zone Raider — real units whose names simply end in those letters.
+# A separator before the suffix (`_AI`, `.AI`) is what marks the variant, and the mods that use a
+# bare suffix say so in the NAME instead ("(AI)", "AI ONLY", "for AI").
+_AI_ID = re.compile(r"[._]AI\d*$", re.I)
+_AI_NAME = re.compile(r"\(\s*AI\s*\)|AI[- ]ONLY|for AI", re.I)
+
+
+def is_ai_only(row, source_ids=None):
+    """True when a corpus row is an AI-exclusive duplicate and must never be a reference.
+
+    ⚠ THE MARKER IS ALSO A PREFIX, not only a suffix. DTA ships 37 of them — `AIMSAM`, `AIMLRS`,
+    `AILTNK`, `AIMTNK` — beside the real `MSAM`, `MLRS`, `LTNK`, `MTNK`, and the first pass of
+    this filter looked only for a trailing `_AI`, so every one of them stayed in the pool. Here
+    the sibling test is REQUIRED rather than advisory: `AI` at the front of an id is far too
+    common to act on alone (a bare prefix rule would strike `AIRCRAFT`), so the row is refused
+    only when stripping the prefix names a unit the same source actually ships.
+    """
+    if _AI_ID.search(row.get("id") or "") or _AI_NAME.search(row.get("name") or ""):
+        return True
+    rid = (row.get("id") or "").upper()
+    if source_ids and rid.startswith("AI") and len(rid) > 3:
+        known = source_ids.get(row.get("source"), ())
+        base = rid[2:]
+        # ⚠ AND THE SIBLING MAY CARRY A TRAILING INDEX THE REAL UNIT DOES NOT. DTA ships
+        # `AIHTNK2` beside `HTNK` — there is no `HTNK2` — so an exact sibling test let it through
+        # and `td_gdi_mammothtankmkiii` drew an AI-only Mammoth. The maintainer's objection is the
+        # substantive one: AI variants are deliberately CHEAPER, so using one as a price reference
+        # is worse than having no reference at all.
+        return base in known or base.rstrip("0123456789") in known
+    return False
+
+
 def peer_rows():
     """Doc 5 rows with type, raw HP/speed/turn — the chassis corpus, after lineage de-dup."""
     rows, source, header = [], None, None
@@ -511,7 +552,15 @@ def peer_rows():
             dropped_lineage.add(row["source"])
             continue
         rows.append(row)
-    return rows
+    # Applied once, here, so EVERY consumer sees the same corpus: the assignment, the coverage
+    # audit and the distributions alike. An AI-only row must not shape a distribution either.
+    by_src = collections.defaultdict(set)
+    for r in rows:
+        rid = (r.get("id") or "").strip().upper()
+        if rid:
+            by_src[r["source"]].add(rid)
+    peer_rows.ai_only = [r for r in rows if is_ai_only(r, by_src)]
+    return [r for r in rows if not is_ai_only(r, by_src)]
 
 
 # Cameo's own 16 armor rows, grouped by the ladder DESIGN.md puts them in.
@@ -568,6 +617,31 @@ def cameo_weapon_ladders(weapon_name):
     return {k: sum(v) / len(v) / 100.0 for k, v in hits.items() if v}
 
 
+# ⛔⛔ SUPERWEAPONS ARE NEVER PRICED, NEVER RESTATTED, NEVER TOUCHED (maintainer, 2026-09-07):
+#
+#     "exclude super weapons from this balance formula since they are all fixed HP!
+#      NEVER CHANGE THEM!! SO EXCLUDE THEM BEFORE ANYTHING IS CHANGED ON ACCIDENT!!!"
+#
+# They are gated on `~techlevel.superweapons` (or a `_swlimit` negation), and that prerequisite is
+# the mechanical test — 32 actors carry it, and EVERY one whose HP is recorded holds exactly
+# 1,000,000. That uniform value is the point: it is a deliberate constant, not a balance figure,
+# and a pipeline that treats it as a stat to normalise would drag it toward a building average
+# and quietly destroy it.
+#
+# Excluded HERE, at the single point every consumer reads, so the reference map, the
+# distributions, the targets and the uniqueness audit all agree that these actors do not exist.
+SUPERWEAPON_TOKENS = ("techlevel.superweapon", "swlimit")
+
+
+def is_superweapon(rec):
+    """True when a ledger record is gated on a superweapon prerequisite."""
+    for pre in (rec.get("prerequisites") or []):
+        low = str(pre).lower()
+        if any(tok in low for tok in SUPERWEAPON_TOKENS):
+            return True
+    return False
+
+
 def cameo_rows():
     """Cameo's own roster in the same shape, so it has real distributions to project onto."""
     out = []
@@ -580,12 +654,25 @@ def cameo_rows():
             continue
         for section, units in (doc.get("sections") or {}).items():
             kind = CAMEO_SECTION_TYPE.get(section)
-            if not kind or not isinstance(units, dict):
+            # ⛔ `buildings` has NO entry in CAMEO_SECTION_TYPE, and for most of its contents that
+            # is right — a refinery is not a combat unit. But Cameo files its defences by pack
+            # CONVENTION, not by rule: the RedAlert packs have a `defenses.yaml`, the TiberianDawn
+            # ones keep theirs in `buildings.yaml`. Gating on the section name alone therefore
+            # dropped every armed structure in the second group — 38 buildable actors, INCLUDING
+            # ALL SEVEN TD DEFENCES (Obelisk, both Guard Towers, Gun Turret, SAM, Skyshield).
+            # They were not mismatched; they never entered the population, so nothing could claim
+            # OpenTD's OBLI/GTWR/ATWR/GUN/SAM and audit_original_coverage reported them unclaimed.
+            # This is the SAME rule the peer side already applies (see the `building` -> `defense`
+            # retype below): armed means defence, on BOTH sides, or Cameo's `defense` population is
+            # measured against a peer population built to a wider definition.
+            if (kind is None and section != "buildings") or not isinstance(units, dict):
                 continue
             for name, rec in units.items():
                 if not isinstance(rec, dict):
                     continue
                 if rec.get("buildable") is not True:
+                    continue
+                if is_superweapon(rec):
                     continue
                 if rec.get("build_limit") is not None:      # check_band.py's epic/hero predicate
                     continue
@@ -608,6 +695,14 @@ def cameo_rows():
                 # way as the peers': damage summed over POSITIVE mains, burst inside the cycle.
                 arms = [a for a in (rec.get("armaments") or [])
                         if isinstance(a, dict) and a.get("pricing")]
+                # An actor from `buildings` earns a place only by being armed; production and
+                # economy structures stay out. `row_kind` is local because `kind` is the section's
+                # and must not leak from one actor to the next.
+                row_kind = kind
+                if row_kind is None:
+                    if not arms:
+                        continue
+                    row_kind = "defense"
 
                 def anum(v):
                     try:
@@ -637,8 +732,14 @@ def cameo_rows():
                     if dps and wname:
                         for lad, frac in cameo_weapon_ladders(wname).items():
                             w[f"dps_vs_{lad}"] = dps * frac
-                out.append({"source": "Cameo", "id": name, "name": name, "type": kind,
-                            "hp": hp, "speed": spd, "turn_speed": turn,
+                # ⭐ COST. Every PEER row has carried a price since extraction; Cameo's did not,
+                # so a price target had nothing on this side to normalise onto and every cost
+                # column came out empty — reading as "no reference data" when the references had
+                # it all along. `cost` is not in ALL_STATS (this module is the chassis layer), so
+                # a consumer that wants price must build that aggregate itself; carrying the value
+                # here is what makes that possible at all.
+                out.append({"source": "Cameo", "id": name, "name": name, "type": row_kind,
+                            "hp": hp, "speed": spd, "turn_speed": turn, "cost": val("cost"),
                             "structure_debt": debt,
                             "turn_ratio": (spd / turn) if (spd and turn) else None, **w})
     return out

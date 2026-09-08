@@ -485,6 +485,81 @@ NAME_CLAIMS = {
 }
 
 
+# ⛔ R15 IN ITS SECOND FORM: THE CLAIM IS IN THE ID SUFFIX, NOT THE NAME. DTA ships one shared
+# roster across four sides and tags EVERY variant `GDI/Nod/Allies/Soviet`, so `Owner=` cannot
+# separate them — but its ids can: bare = GDI, `N` = Nod, `A` = Allies, `S` = Soviets.
+#
+#   E1  Minigunner   E1N Minigunner   E1A Rifle Infantry   E1S Rifle Infantry
+#
+# Without this the Soviet rifle infantry drew the ALLIED variant, because both were equally
+# admissible and nothing broke the tie. (Harmless in that instance — the four are byte-identical
+# on every stat — but a crossed mapping is still wrong, and it will not stay harmless.)
+#
+# ⚠ A SINGLE-LETTER SUFFIX IS A BLUNT KEY, so the claim only fires when the UNSUFFIXED sibling
+# actually exists in the same source. `E1A` claims Allies because `E1` is there; `GUN` claims
+# nothing because `GU` is not. The index is registered by whoever loads the corpus; until then
+# the rule is INACTIVE, so a consumer that never registers behaves exactly as before.
+ID_SUFFIX_CLAIMS = {
+    "DTA Enhanced": {"A": "ra1_allies", "S": "ra1_soviets", "N": "td_nod"},
+}
+
+_SOURCE_IDS: dict[str, frozenset] = {}
+
+
+def register_source_ids(rows):
+    """Tell the suffix rule which ids each source actually ships. Idempotent."""
+    seen = {}
+    for r in rows:
+        rid = (r.get("id") or "").strip().upper()
+        if rid:
+            seen.setdefault(r.get("source"), set()).add(rid)
+    for src, ids in seen.items():
+        _SOURCE_IDS[src] = frozenset(ids)
+
+
+def suffix_claim(row, src):
+    """The Cameo faction this source's ID NAMING claims the row for, or None."""
+    table = ID_SUFFIX_CLAIMS.get(src)
+    known = _SOURCE_IDS.get(src)
+    if not table or not known:
+        return None
+    rid = (row.get("id") or "").strip().upper()
+    if len(rid) < 3:
+        return None
+    base, suffix = rid[:-1], rid[-1]
+    if suffix not in table or base not in known:
+        return None
+    return table[suffix]
+
+
+# ⛔ R15 IN ITS THIRD FORM: THE CLAIM IS A DOT SUFFIX ON THE ID. Combined Arms distinguishes the
+# side-specific build of a shared chassis by appending it to the id — `STNK.Nod`, `GUN.Nod`,
+# `SYRD.gdi`, `BTR.YURI` — while its `Prerequisites`/`Queue` tags stay broad (CA's median row is
+# admissible to FIVE factions, against ONE for every other source). The suffix is therefore the
+# only place CA states ownership precisely, and not reading it let Nod's Stealth Tank become the
+# reference for `td_gdi_predatortank` AND `ra1_allies_sheridanassaulttank` at once, and Nod's SAM
+# the reference for `ra1_soviets_sovietsamsite`.
+#
+# ⚠ ONLY UNAMBIGUOUS FACTION TOKENS BELONG HERE. CA's other suffixes are variants, not owners —
+# `.ATOMIC`, `.LASER`, `.RAIL`, `.UPG`, `.DRONE`, `.TOW` — and `.TD` names a THEME that both
+# Tiberian Dawn factions share, so none of them may claim.
+DOT_SUFFIX_CLAIMS = {
+    "Combined Arms": {"nod": "td_nod", "gdi": "td_gdi", "yuri": "yuri"},
+}
+
+
+def dot_claim(row, src):
+    """The Cameo faction a dotted id suffix claims the row for, or None."""
+    table = DOT_SUFFIX_CLAIMS.get(src)
+    if not table:
+        return None
+    for part in reversed((row.get("id") or "").split(".")[1:]):
+        hit = table.get(part.strip().lower())
+        if hit:
+            return hit
+    return None
+
+
 def claimed_by(row, src):
     """The Cameo faction this source's own naming claims the row for, or None."""
     name = (row.get("name") or "").strip().lower()
@@ -573,8 +648,27 @@ def routed_sources(faction):
     return frozenset(src for src, _ in ROUTES.get(faction, ()))
 
 
+# ⛔ WHERE A REFERENCE MOD DEPARTS FROM THE ORIGINAL GAME, THE ORIGINAL WINS (maintainer,
+# 2026-09-07). OpenRA's Tiberian Dawn lets BOTH sides build the Guard Tower and the Gun Turret
+# (`Queue: Support.GDI, Support.Nod` on each). The original game did not, and neither do DTA,
+# Combined Arms or Cameo — all three keep a GDI Guard Tower and a Nod Gun Turret. DTA even names
+# its row "Nod Gun Turret". OpenRA is the outlier of four, so it does not get to widen the pool:
+# a GDI actor must not draw the Nod turret as its reference, nor a Nod actor the GDI tower.
+#
+# ⚠ This table is for a DELIBERATE DIVERGENCE from the original roster, verified against the
+# other sources — never for a row that is merely inconvenient to route. Each entry names the
+# faction(s) the ORIGINAL game gave the unit, and it overrides whatever the mod's own data says.
+FACTION_OVERRIDES = {
+    ("OpenRA Tiberian Dawn", "GTWR"): frozenset({"gdi"}),   # Guard Tower — GDI in the original
+    ("OpenRA Tiberian Dawn", "GUN"): frozenset({"nod"}),    # Gun Turret — Nod in the original
+}
+
+
 def peer_factions(row):
     """The faction tokens on one peer row. The column is `/`-separated; `—` means untagged."""
+    override = FACTION_OVERRIDES.get((row.get("source"), (row.get("id") or "").strip().upper()))
+    if override is not None:
+        return override
     raw = (row.get("faction") or "").strip()
     if not raw or raw in {"—", "-", "?"}:
         return frozenset()
@@ -592,6 +686,10 @@ def allows(faction, row):
     # A NAME CLAIM SHORT-CIRCUITS BOTH WAYS: the claimant gets the row, everyone else is
     # refused it, and no exclusivity or ownership test is consulted.
     claim = claimed_by(row, row.get("source"))
+    if claim is None:
+        claim = dot_claim(row, row.get("source"))
+    if claim is None:
+        claim = suffix_claim(row, row.get("source"))
     if claim is not None:
         return claim == faction and row.get("source") in routed_sources(faction)
 

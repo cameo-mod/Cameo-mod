@@ -310,13 +310,16 @@ Reference-clean units: **TD GDI Archer** (`gdiarcher`), **Ordos Raider**
 | rule | formula |
 |---|---|
 | Repair | `Repairable.HpPerStep = HP / 20` (non-infantry) |
-| Self-heal | `ChangesHealth@SelfHealing.Step = HP / 2500`; infantry `HP / 1000`; infantry never has Repairable |
-| Upgrade shields | `Shielded.RegenAmount = 2 × SelfHealing Step` (Ixian model) |
+| Self-heal | **TICKS TO FULL, not a per-step amount** (maintainer 2026-09-07): every unit fully self-heals in **2500 ticks (100 s)**; **infantry in 1250 ticks (50 s)** — exactly 2x. Applied EVERY tick with a fractional accumulator, so HP is no longer constrained by the divisor. Always active while damaged (`StartIfBelow: 100`). Infantry never has Repairable. See §Regeneration. |
+| Upgrade shields | **Shield regen is ALWAYS 2x the HP regen rate**, measured as %-of-max-HP per tick (`GrantsShield.PercentageRegenAmount 2` per `RegenInterval 25` = 0.08%/tick against HP's 0.04%/tick — the rule already holds in the shipped trait). Shield ramp is **2x as long** as the HP ramp. |
 | Defense vision | `RevealsShroud.Range = weapon range` |
 | AA / advanced defense detection | `DetectCloaked.Range = weapon range / 2` |
 | Defense power | `Power.Amount = -(Cost / 20)` |
-| Vehicle turning | `Mobile.TurnSpeed = Speed / 5`; `Turreted.TurnSpeed` equals it |
+| Vehicle turning | `TurnSpeed = Speed / 5`, `Turreted.TurnSpeed` equals it — but **DERIVED IN C#, not written in yaml** (maintainer 2026-09-07). Speed is now on a step of 1, so `Speed / 5` is no longer an integer; the yaml carries a MULTIPLIER and the trait computes the angle in fixed point, so the ratio stays exact instead of rounding to ~3%. |
 | Turretless (AttackFrontal) vehicles | `TurnSpeed = 2 × Speed / 5` — the former artillery exception was dropped 2026-07-10 (data check: turretless artillery split 24 at 2×, 18 at 1× — no real pattern) |
+| Stationary defenses | **`Turreted.TurnSpeed = 2 × Speed / 5` applied to the TURRET, not a chassis** (maintainer 2026-09-07). A defense has no hull to turn, so the turretless doubling lands on the turret instead — a defense therefore tracks as fast as a frontal-weapon tank, and markedly faster than a tank TURRET. `Speed` here is the speed the emplacement would have as a mobile unit of its class. |
+| Units that DEPLOY into an immobile form | **rotation DOUBLES while deployed** (maintainer 2026-09-07) — the deployed state is a stationary defense and takes the defense rule. Applies to `td_gdi_defenserig`, the Terran siege tank, the Matador and every other deploy-to-immobile unit. |
+| Husks | **the only actors with no turn rate at all.** Everything else that can face a direction has one. |
 | Turreted artillery / fire support | Archer firing-slow: `GrantConditionOnAttack(firing)`, 50% Speed/Turn/TurretTurn multipliers, `RevokeDelay = weapon ReloadDelay / 2` |
 | Fighters & bombers (by template) | `Aircraft.TurnSpeed = Speed / 15` (frontal-weapon craft 2×) |
 | Helicopters & spaceships (by template) | `Aircraft.TurnSpeed = Speed / 5`, like vehicles (design 2026-07-10; 45 of ~55 helicopters already comply) |
@@ -886,9 +889,48 @@ inherits (1,142 no `^Warhead_*`, 1,348 no `^Projectile_*`, 1,230 no `^Effect_*`)
 **review queue, not a defect count** — an instant or utility weapon may legitimately have no
 projectile — and it must not be bulk-converted or ratcheted without a per-weapon design pass.
 
-⚠ **The value rule when collapsing is VERBATIM, never the SUM.** Equal-damage mains are the
-fingerprint of a refactor that duplicated one warhead across families; the multiplication was
-the bug. See the HydraSpit precedent (`8748c68e4`) and the note below.
+⚠ **The value rule when collapsing is TOTAL OUTPUT PRESERVED.** Maintainer, 2026-09-07:
+*"make it so the total damage output remains the same after the collapse."* There is ONE rule, not two.
+
+The survivor's `Damage` = Σ of the weapon's **RESOLVED MAIN** warheads
+(`formula.spread_damage_sum`, each first mapped through its family ratio). **"Verbatim" is not
+a second rule** — it is what that sum degenerates to when the weapon resolves to exactly ONE
+main, no matter how many templates it inherits. That is why the earlier "VERBATIM, never the
+SUM" phrasing was wrong as a general law: it read a one-main case as if it were the rule.
+
+* **Many inherits, ONE resolved main.** `D2K_APC_Rocket` carries SIX inherits and resolves to a
+  single `MissileAP_Medium` main at 24000. Cutting it to three inherits moves no damage,
+  because Σ over one main is that one number. This is the case people call "verbatim".
+* **Several resolved MAINS.** `TSZoneHellfireSonic` resolves to `MissileAP_Heavy` 24000 **plus**
+  `Sonic_Heavy` 16000. The engine applies both warheads, so the weapon delivers 40000 and the
+  survivor must be 40000. Equal-damage mains are no exception — if it really lands twice today,
+  the survivor lands the total.
+
+⛔ **Count the RESOLVED MAINS, never the inherits.** The two cases are indistinguishable in the
+source and differ by a factor of N in what the weapon actually does.
+
+⚠ **The HydraSpit conversion (`8748c68e4`) is cited in older notes as the "verbatim" precedent.
+It is not** — and measuring it against the last SHIPPED build shows why a collapse must never be
+judged on the tree's own numbers alone. Measured 2026-09-07 against `playtest-20260709`
+(Tournament Build 24):
+
+| | flat per shot | percentage half |
+|---|--:|--:|
+| shipped release | 4 mains x 2000 = **8000** | 4 x 1% = **4%** |
+| pre-collapse (`8748c68e4^`) | 4 mains x 18000 = **72000** | — |
+| now | 1 main x 18000 = **18000** | **9%** |
+
+The collapse was NOT the origin of the defect: an earlier sweep had inflated the per-main value
+**2000 -> 18000 (9x)**, and the collapse took the weapon from 9x the shipped damage down to
+**2.25x**. It is a partial repair of an upstream inflation, not a clean conversion — and the
+weapon still deals 2.25x what shipped, on BOTH halves.
+
+⛔ **A collapse is only verifiable against a baseline outside the tree.** 1321 of 1559 weapons
+shared with `playtest-20260709` carry byte-identical total main damage, so the damage scale did
+NOT move and the comparison is valid — but **238 weapons have drifted from the shipped build**,
+in both directions (`AsianTSIonCannon` 7.67x, `MarineMG` 6.00x; `wc2ogremageRunes_Hit` 0.11x
+after 10 mains became 1). Re-check a conversion against the release tag, not against the commit
+before it.
 
 ### 11b.2 The SEVEN kinds of multi-main weapon (the codemod's taxonomy)
 
@@ -914,9 +956,10 @@ warhead system expresses in ONE warhead.
 
 ### Collapsing a multi-warhead weapon
 
-1. **Sum is preserved.** The survivor's `Damage` = Σ of the old warheads' damage, each
-   first mapped through its own family ratio (`formula.spread_damage_sum`, the SUM law).
-   Collapsing must never change what the weapon deals in total.
+1. **Total output is preserved.** The survivor's `Damage` = Σ of the old MAIN warheads'
+   damage, each first mapped through its own family ratio (`formula.spread_damage_sum`).
+   Where the weapon had only ONE main and merely inherited several templates, that sum is that
+   one number — i.e. verbatim. Collapsing must never change what the weapon deals in total.
 2. **Pick the family that matches the weapon's IDENTITY**, not the one with the largest
    damage — check what it actually is (its projectile, its lore, its role).
 3. ⚠ **If no existing family fits, CREATE A NEW ONE — do not force a bad fit.**
@@ -961,6 +1004,45 @@ is a faction upgrade that cannot be built.
 |---|---|---|
 | **un-upgraded** | the PRIMITIVE delivery family | `CannonAP`, `CannonHE`, `MissileAP`, `MissileHE`, `Bullet`, `Demolition` |
 | **upgraded** | `<Delivery><FactionTech>` | `CannonTesla`, `MissileCryo`, `BulletQuantum` |
+
+### Which missile family — the ROLE decides (maintainer 2026-09-07) — binding
+
+> *"If the unit is using the weapon against ground it will be missile he, and if the weapon is
+> anti air then missile aa, but if the same missile is used against both then only missile AP.
+> And missile he should never be used for anti air — that one is for anti ground rockets only."*
+
+The weapon's own `ValidTargets` decides its family, and there is exactly one right answer:
+
+| the weapon can hit | family | why that delivery |
+|---|---|---|
+| Ground / Water only | `^Warhead_MissileHE_*` | blast rocket, no reason to carry a fuze it never uses |
+| Air only | `^Warhead_MissileAA_*` | **proximity fuze** — `PHYSICS_SHAPES` gives it Spread 300 / `Falloff 100, 70, 30, 0`, a blast radius of 900, because an AA missile has to detonate NEAR a moving target |
+| both | `^Warhead_MissileAP_*` | shaped charge, Spread 64 / `Falloff 100, 0` — one direct-hit rocket that works either way |
+
+⛔ **`MissileHE` may never be reachable against `Air`.** That clause is absolute; the other
+three rows are the positive form of the same rule.
+
+⚠ **This is a DELIVERY difference, not a label.** Swapping an AA mount from `MissileAA` to
+`MissileAP` does not retag it — it removes the proximity blast, i.e. the mechanism that lets
+the missile connect at all. Never "simplify" an AA weapon onto AP because the ladder looks
+better; read `PHYSICS_SHAPES` first.
+
+The **payload blends** (`MissileChem`, `MissileCryo`, `MissileFire`, `MissileNuke`,
+`MissileQuantum`, `MissileTesla`, `MissileThermobaric`) are OUT of scope: a blend carries a
+payload identity that outranks the role tag, and the ruling did not cover them.
+
+**Measured 2026-09-07** by `tools/audit/audit_missile_role_family.py` (LOWER-ONLY ratchets) —
+358 concrete weapons fly a `Missile*` main, **190 already conform**:
+
+| code | violation | count |
+|---|---|--:|
+| R1 | ground-only not flying `MissileHE` | 51 |
+| R2 | air-only not flying `MissileAA` | 33 |
+| R3 | dual-role not flying `MissileAP` | 47 |
+| R4 | `MissileHE` reachable against Air — the hard clause | 50 |
+
+⚠ `df01cb590` set `D2K_Rocket_Trooper_AGOnly` to `MissileAP` the day before this ruling. Under
+the rule it is ground-only and belongs on `MissileHE`; it is one of the 51.
 
 ### The mechanism already exists — do not invent a new one
 
@@ -1393,11 +1475,19 @@ steps so the house formulas stay integral:
   `Warhead@SmallArms`, `Warhead@TankDestroyerCannon`, …). The legacy
   generic `Warhead@1Dam` is RETIRED — it was renamed to the per-template
   warhead name; a bare `1Dam` (or stray non-template warhead) is a bug.
-- **HP: 2500-steps** for vehicles/aircraft/ships (self-heal HP/2500,
-  repair HP/20); **1000-steps for infantry** (self-heal HP/1000);
-  defenses may use either (their self-heal is a flat 10).
-- **Speed: steps of 5** for vehicles, aircraft, and ships; **steps of 1**
-  for infantry (per `FORMULA_V2.md` and `LESSONS_LEARNED.md`).
+- **HP: 1000-steps for EVERY type** (maintainer 2026-09-07; was 2500 for
+  vehicles/aircraft/ships and 1000 for infantry). The old 2500 existed only so
+  `Step = HP/2500` divided evenly; once regeneration is expressed as TICKS TO FULL
+  and accumulated fractionally, nothing constrains HP and the finer step is free.
+  Repair stays `HP/20` (every 1000-step is a multiple of 20).
+  ⭐ **Why it changed: the coarse steps made the uniqueness law impossible.** Measured
+  2026-09-07, the `mbt` class has **51 members but only 24 distinct HP values** — HP
+  100,000 is shared by **10 units**.
+- **Speed: steps of 1 for EVERY type** (was 5 for vehicles/aircraft/ships). Steps of 5
+  over a 60-120 range give **13 slots for 51 mbt units** — speed 75 is shared by 9 of
+  them, and no assignment of 51 units to 13 values can satisfy uniqueness. The step of 5
+  existed only to keep `TurnSpeed = Speed/5` an integer, which the derived-turn-rate
+  trait now handles.
 - **TurnSpeed (vehicles & fixed-weapon units):** units without a turret or
   with a forward-facing fixed weapon turn at **`TurnSpeed = 2 × Speed / 5`**;
   turreted units turn at **`TurnSpeed = Speed / 5`**. Infantry normally turns
@@ -1405,6 +1495,51 @@ steps so the house formulas stay integral:
   because they carry forward-facing weapons.
 - **TurnSpeed (aircraft):** helicopters and spaceships both use
   **`Speed / 5`**.
+- ⛔ **A TURRET ALWAYS FOLLOWS ITS HULL** (maintainer 2026-09-07). `Turreted.TurnSpeed` equals
+  `Mobile.TurnSpeed`; **every disagreement is a bug**, with no per-class exemption. Measured
+  2026-09-07: 233 of 260 turreted vehicles already comply, and the 27 that do not are not a
+  design — they are two accidental families plus two outright errors (`nodlasercorvette` turret
+  1000 against a hull of 12; `td_gdi_defenserig` 128 against 12). The naval group sitting at
+  0.4–0.7x and the light/IFV group at 2–3x are **not** ratified; they are drift that happened to
+  be consistent. Guarded by `audit_turn_speed.py` T3.
+- **Turn rate is GENERATED into yaml, never derived at runtime** — `audit_turn_speed.py` guards
+  it. Turn speed is an integer `WAngle` at every layer and both runtime hooks
+  (`ITurnSpeedModifier`, `ITurretTurnSpeedModifier`) take an integer PERCENTAGE, so code and a
+  generator produce byte-identical values; `Aircraft` exposes no hook at all and would need the
+  whole trait shadowed for no change in the numbers.
+### Regeneration — one global rule, no per-actor numbers
+
+**Maintainer ruling 2026-09-07.** Regeneration is stated as **TICKS TO FULL**, never as a
+per-step amount, and it is applied **every tick**:
+
+| | ticks to full | seconds | ramp after damage |
+|---|--:|--:|--:|
+| infantry | **1250** | 50 | 125 ticks (5 s) |
+| vehicles / aircraft / ships / defenses | **2500** | 100 | 125 ticks (5 s) |
+| **shields** | **2x the HP rate** | half the HP time | **250 ticks (10 s)** |
+
+* **Per tick, with a fractional accumulator.** At 0.04%/tick a 1,000 HP unit heals 0.4 HP per
+  tick, which truncates to zero as an `int` — the remainder is carried, so the rate is exact at
+  every HP value. This is what frees HP from any step constraint.
+* **`ChangesHealth.PercentageStep` cannot express this** (it is an `int`, minimum 1% per step),
+  so the rate lives in a Cameo trait. Only `Common` declares `ChangesHealth` — CA's is
+  `ChangesHealthVersus`, a different name — so a Cameo type shadows it with no yaml churn.
+* **The ramp replaces the hard cooldown.** Rate is `full x min(1, t / 125)` where `t` is ticks
+  since the last damage: 0 at the moment of the hit, full at 5 s, linear between. Shields use
+  250. The old `DamageCooldown` (10 vehicles / 20 infantry) is retired.
+* **Always on while damaged** — `StartIfBelow: 100`, as `defaults.yaml` already sets.
+* **ONE global inherit.** The rate belongs to `^InfantryBuffs` / `^VehicleBuffs` /
+  `^AircraftBuffs` / `^ShipBuffs` in `defaults.yaml`. **The 883 per-actor
+  `ChangesHealth@SelfHealing` overrides are deleted** — they existed only to write `HP/2500`
+  per actor, which the trait now derives.
+
+⚠ **What was already correct, and was nearly "fixed" by mistake.** `defaults.yaml` sets
+`Delay: 1` for vehicles/aircraft/ships and `Delay: 2` for infantry. Reading only the ContentPack
+templates — which set `Step` and no `Delay` — suggests the engine default of 5 and yields a
+"500 s" self-heal that does not exist. Vehicles really do heal in **100 s** and the shipped
+shield trait really is **exactly 2x** the HP rate. The one real gap was infantry, which
+`Delay: 2` put at **80 s (1.25x)** rather than the intended 2x; that is what moves to 1250 ticks.
+
 - ReloadDelay: any integer.
 - **Beautiful ranges are kept**: if Range is exactly 6.000 or 7.500,
   adjust the other stats, not the range.
@@ -2742,6 +2877,12 @@ verification has been performed for this system; no long-match in-game
 composition behavior is claimed.
 
 ## 21. AI architecture (forward design)
+
+### 21.1 Record-only AI match logging
+
+AI match logging is record-only: it never changes gameplay and the game never
+reads the log back. The writer runs on the host only and emits schema version 1
+JSONL records.
 
 The forward design for bot modules, per-ContentPack AI splitting, the dynamic
 personality manager, the master AI module, and match logging lives in

@@ -204,14 +204,7 @@ ArtilleryShellUpgrade:
 	-Warhead@HeavyBomb:
 	Warhead@Concussion_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 30000
-		PercentageScale: 0
-	Warhead@CollapseTargetCompatibility1: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Ship
-		Damage: 6000
+		Damage: 36000
 		PercentageScale: 0
 
 MachineGun:
@@ -255,6 +248,7 @@ BikeRockets:
 	Range: 6000
 	Report: bazook1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -323,6 +317,9 @@ LTNKMissiles:
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+
 HonestJohn:
 	Inherits@wh: ^Warhead_MissileFire_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -372,9 +369,13 @@ StealthTankMissiles:
 		Explosions: small_poof
 		ImpactSounds: xplobig4.aud
 
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+
 StealthTankMissilesBlackMarket:
 	Inherits: StealthTankMissiles
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -444,6 +445,9 @@ HeliMissiles:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+
 TurretGun:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^ShrapnelWeapon
@@ -520,7 +524,7 @@ Dragon:
 		AllowSnapping: true
 		Shadow: true
 		HorizontalRateOfTurn: 25
-		VerticalRateOfTurn: 25
+		VerticalRateOfTurn: 12
 		TrailImage: smokey
 		TrailInterval: 1
 		MaximumLaunchSpeed: 200
@@ -617,7 +621,8 @@ LaserObeliskBurning:
 		TrackTarget: false
 		Inaccuracy: 0
 	Warhead@Inferno_Heavy:
-		Damage: 24000
+		Damage: 120000
+	-Warhead@Laser_Heavy:
 ChemRockets:
 	Inherits@collapsewh: ^Warhead_Chemical_Light
 	Inherits: ^Grenade
@@ -627,6 +632,7 @@ ChemRockets:
 	Range: 6006
 	Report: bazook1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		TrailImage: spittrail
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -652,13 +658,9 @@ ChemRockets:
 	-Warhead@LightMissile:
 	Warhead@Chemical_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 36000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PercentageScale: 0
-	Warhead@ChemRocketCompatibility: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 
 ChemRocketsExplosion:
 	Inherits: ChemRockets
@@ -671,11 +673,12 @@ ChemRocketsExplosion:
 	Warhead@Chemical_Light:
 		Damage: 12000
 		PercentageScale: 0
-	Warhead@ChemRocketCompatibility:
-		Damage: 6000
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
 		Size: 0,0
+
+	Projectile: Missile
+		VerticalRateOfTurn: 40
 
 ChemicalBikeRockets:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
@@ -690,6 +693,7 @@ ChemicalBikeRockets:
 	Range: 6000
 	Report: missile6.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		TrailImage: spittrail
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
@@ -732,6 +736,9 @@ ChemicalBikeRocketsExplosion:
 		AddsResourceType: Tiberium
 		Size: 0,0
 
+	Projectile: Missile
+		VerticalRateOfTurn: 30
+
 ChemicalStealthTankMissiles:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
 	Inherits: ^ShrapnelWeapon
@@ -742,6 +749,7 @@ ChemicalStealthTankMissiles:
 	Range: 6962
 	Report: rocket2.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		Image: MISSILE
 		TrailImage: spittrail
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
@@ -781,6 +789,9 @@ ChemicalStealthTankExplosion:
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
 		Size: 1,1
+
+	Projectile: Missile
+		VerticalRateOfTurn: 30
 
 ChemicalHonestJohn:
 	Inherits@collapsewh: ^Warhead_MissileChem_Heavy
@@ -1061,6 +1072,9 @@ LightTank2Missiles:
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+
 PDLaserLTNK2:
 	Inherits: PDLaser
 	Range: 4903
@@ -1158,43 +1172,9 @@ BlackHandLaser:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@Laser_Heavy:
-		Damage: 96000
+		Damage: 30000
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
-	Warhead@LaserHeavyGroundRemainder: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 64
-		Damage: 48000
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 71
-			BLAST: 95
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 294
-			Superheavy: 162
-			Spaceship: 144
-			Concrete: 141
-			Plate: 134
-			Heavy: 124
-			Helicopter: 114
-			Steel: 103
-			Medium: 100
-			Flak: 97
-			Bomber: 88
-			Light: 80
-			Wood: 75
-			None: 70
-			Fighter: 68
-			Scout: 55
-			Heroic: 45
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 75
 
 BlackHandFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -1232,6 +1212,7 @@ BHRedDarts:
 	ValidTargets: Ground, Water, Air
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		TrailImage: red_smokey
 		Image: bhreddragon
 		ContrailLength: 8
@@ -1604,7 +1585,7 @@ CorvetteDragon:
 		Speed: 500
 		HorizontalRateOfTurn: 50
 		MinimumLaunchAngle: 50
-		VerticalRateOfTurn: 50
+		VerticalRateOfTurn: 24
 		Acceleration: 5
 		AllowSnapping: true
 		CloseEnough: 500

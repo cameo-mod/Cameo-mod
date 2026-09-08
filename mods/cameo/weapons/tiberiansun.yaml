@@ -300,14 +300,13 @@ TSLaser90mm:
 	Inherits@3: ^Effect_CannonAP_Medium
 	Inherits@4: ^LaserWeapon
 	Inherits@5: ^TSLaserEffect
-	Inherits@compat: ^TSLaser90mmCannonCompatibility
 	Projectile: LaserZap
 		Width: 72
 		SecondaryBeamWidth: 36
 	ReloadDelay: 32
 	Range: 5423
 	Warhead@CannonAP_Medium:
-		Damage: 6000
+		Damage: 12000
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -482,8 +481,7 @@ TSGrenade:
 		PercentageScale: 9996
 
 TSGrenadeSonic:
-	Inherits@wh: ^Warhead_Concussion_Light
-	Inherits@wh2: ^Warhead_Sonic_Light
+	Inherits@wh: ^Warhead_Sonic_Light
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
 	ReloadDelay: 45
@@ -500,12 +498,9 @@ TSGrenadeSonic:
 		ContrailEndWidth: 44
 		ContrailStartColor: 8888FFFF
 		ContrailEndColor: FFFFFF22
-	Warhead@Concussion_Light:
-		ValidTargets: Ground, Water
-		Damage: 18000
 	Warhead@Sonic_Light:
 		ValidTargets: Ground, Water
-		Damage: 18000
+		Damage: 36000
 TSGrenadeAA:
 	Inherits: TSGrenade
 	Range: 6512
@@ -715,8 +710,7 @@ TurretLaserFragment:
 		PercentageScale: 9994
 		PhysicalStateScale: 38
 TSObeliskLaserFire:
-	Inherits@wh: ^Warhead_CannonAP_Light
-	Inherits@wh2: ^Warhead_Laser_Heavy
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
@@ -736,10 +730,8 @@ TSObeliskLaserFire:
 		SourceFlareSize: 64, 72
 		SourceFlareWidth: 2.5
 		SourceFlareCoreSize: 5
-	Warhead@CannonAP_Light:
-		Damage: 52000
 	Warhead@Laser_Heavy:
-		Damage: 52000
+		Damage: 104000
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -748,8 +740,7 @@ TSObeliskLaserFire:
 		ImpactActors: false
 
 TSLaserObeliskLaserFire:
-	Inherits@wh: ^Warhead_CannonAP_Light
-	Inherits@wh2: ^Warhead_Laser_Heavy
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
@@ -769,10 +760,8 @@ TSLaserObeliskLaserFire:
 	Range: 10435
 	Report: obelray1.aud
 	ValidTargets: Ground, Water
-	Warhead@CannonAP_Light:
-		Damage: 80000
 	Warhead@Laser_Heavy:
-		Damage: 80000
+		Damage: 160000
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -878,11 +867,15 @@ TSBazooka:
 	ReloadDelay: 52
 	Range: 6694
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 	Warhead@MissileAP_Light:
 		Damage: 24000
 TSBazookaG:
 	Inherits: TSBazooka
 	Range: 9216
+
+	Projectile: Missile
+		VerticalRateOfTurn: 40
 
 TSReaperTusk:
 	Inherits: ^TSDefaultMissile
@@ -933,6 +926,7 @@ TSAegisMissile:
 	Range: 9216
 	Report: vaegatta.wav, vaegattb.wav
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		RangeLimit: 18c0
 	-Warhead@MediumMissile:
 	-Warhead@LightMissile:
@@ -952,6 +946,9 @@ TSMammothTusk_elite:
 	Burst: 8
 	Range: 9216
 
+	Projectile: Missile
+		VerticalRateOfTurn: 25
+
 TSBikeMissile:
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Light
@@ -964,6 +961,7 @@ TSBikeMissile:
 	ReloadDelay: 40
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 	Warhead@MissileHE_Medium:
@@ -987,6 +985,7 @@ TSBikeTibMissile:
 	ReloadDelay: 40
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
@@ -1039,6 +1038,7 @@ TSSAPCMissiles:
 	ReloadDelay: 18
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 	Warhead@Grenade: SpreadDamage
@@ -1071,6 +1071,7 @@ TSSAPCCoreMissiles:
 	Inherits@fx: ^Effect_Chem_Light
 	Inherits: TSSAPCMissiles
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
@@ -1115,6 +1116,9 @@ TSHellfire:
 	Warhead@ShieldHit:
 		Duration: 8
 
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+
 TSRedEye2:
 	Inherits: Dragon
 	Report: rocket2.aud
@@ -1122,6 +1126,9 @@ TSRedEye2:
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 		ImpactActors: false
+
+	Projectile: Missile
+		VerticalRateOfTurn: 25
 
 TSChemAdatsMissile:
 	Inherits@collapsewh: ^Warhead_MissileChem_Light
@@ -1169,6 +1176,7 @@ TSChemAdatsMissile:
 TSChemAdatsMissileAA:
 	Inherits: TSAdatsMissile_AA
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
