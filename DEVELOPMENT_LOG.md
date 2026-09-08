@@ -10926,3 +10926,34 @@ has no classified members until its template migration lands. Support has no com
 verifier. Faction approval/calibration and model choices are still required before any
 signable anchor. Chrome/hook/compatibility-splice defects refer to the old PR code,
 not the current-master implementations; no disputed PR payload was imported here.
+
+## 2026-09-08 — Ground-domain fitting follow-up for draft PR 335
+
+Both real and virtual fitting now reuse the reference pipeline's AA slot/weapon
+naming predicate. Active ground weapons supply DPS, range, K coverage and charge
+fallback; pure-AA domains remain represented. Baseline condition evaluation is
+unchanged: no strongest-conditional-mode fallback was imported. Virtual derivation
+uses the same armament selection. No gameplay YAML or actor prices changed.
+
+Comparison: 44 of 638 eligible classified ledger actors change fitting inputs.
+APC range/nominal DPS: 8502/400 -> 5668/200; BTR80: 8181/500 -> 5454/250.
+These are fitting units, not measured gameplay DPS or approved prices. Ten new
+tests cover domain selection, condition filtering, K/fallback semantics and actual
+APC/BTR resolved inheritance. The generated firepower-input report was refreshed.
+
+Independent challenge found no AA blocker. Expanded focused run: 117 passed,
+229 subtests passed. Full isolated suite: 104/104 modules, 1027 tests, 45 skipped,
+14 failing modules, all from the previously reproduced upstream failure set.
+The refreshed report fixes the fifteenth failing module; no new failing module.
+33 ledgers: zero drift. Percentage-runtime audit and diff checks pass. Full-suite
+sampled peak: 882.7 MB process tree / 47.6% PC memory; guards 1536 MB / 84%.
+
+Limitations: AA detection follows naming, not actual target masks. Existing
+physical-state sidecars can select upgrade/passenger modes outside baseline;
+none of the excluded AA weapons supplies that surcharge in this population.
+That broader issue is not changed here. A3 readiness remains untouched: AURORA's
+named branch is absent from both GitHub remotes and no identifiable patch was
+found in reachable history. Requested Aedis's C32 reconciliation on PR 335;
+absence is not permission to release the ownership gate. PR remains draft.
+
+Co-Authored-By: Codex <noreply@openai.com>

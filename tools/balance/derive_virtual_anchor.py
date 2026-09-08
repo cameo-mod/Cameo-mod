@@ -45,8 +45,7 @@ def load_members(ledger):
                 cls, reason = class_membership.classify(unit.get("design") or {})
                 if cls is None or not fit_class.eligible_virtual_member(unit):
                     continue
-                arms = [a for a in unit.get("armaments", []) if a.get("pricing", True)
-                        and formula.condition_holds_by_default(a.get("requires"))]
+                arms = fit_class.pricing_armaments(unit)
                 ranges = [number(formula.wdist_value(a.get("range"), 0)) for a in arms]
                 ranges = [r for r in ranges if r is not None]
                 members.append(dict(actor=actor, faction=doc.get("ledger", path.stem),

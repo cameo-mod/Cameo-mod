@@ -33,6 +33,7 @@ import formula  # noqa: E402
 import tier_chain  # noqa: E402
 from firepower import armament_firepower  # re-export for existing callers
 import class_membership  # noqa: E402
+from reference_distribution import is_anti_air_armament  # shared fleet-owned naming rule
 
 LEDGER = ROOT / "docs/balance"
 ANCHORS = LEDGER / "class_anchors.json"
@@ -41,6 +42,19 @@ ANCHORS = LEDGER / "class_anchors.json"
 def eligible_virtual_member(unit):
     """Exclude unavailable variants, retain explicitly included spawn siblings."""
     return unit.get("buildable") is not False or bool((unit.get("design") or {}).get("balance_include"))
+
+
+def pricing_armaments(unit):
+    """Baseline ground domain, or the AA domain when it is the only active one.
+
+    Use the reference pipeline's slot AND weapon naming predicate, but retain
+    the existing fitting condition evaluator. Do not copy its strongest-mode
+    fallback: unknown/disabled modes must not become baseline fitting inputs.
+    """
+    live = [arm for arm in unit.get("armaments", []) if arm.get("pricing", True)
+            and formula.condition_holds_by_default(arm.get("requires"))]
+    ground = [arm for arm in live if not is_anti_air_armament(arm)]
+    return ground or live
 
 
 def virtual_spec(value):
@@ -112,16 +126,7 @@ def unit_inputs(u, du=None, use_k=False):
     kidx = derived_dps_index(du) if use_k else {}
     total_dps, best_range = 0.0, 0.0
     fallbacks = 0
-    for arm in u.get("armaments", []):
-        if not arm.get("pricing", True):
-            continue
-        # Price the weapon the unit fires AS BUILT. The old rule skipped every
-        # armament that had any `requires` at all, which threw away the BASE
-        # weapon of each unit that merely owns an elite variant: 371 of 863
-        # actors with priced armaments came out at zero DPS and dropped out of
-        # pricing entirely, `tiger.nax` — the recorded `mbt` anchor — among them.
-        if not formula.condition_holds_by_default(arm.get("requires")):
-            continue
+    for arm in pricing_armaments(u):
         dmg = formula.spread_damage_sum(arm.get("damage_warheads", []))  # SUM law, chips excluded
         reload_ = fnum(arm.get("reloaddelay"))
         if not dmg or not reload_:
@@ -212,9 +217,7 @@ def charge_cycle_fallback(u) -> float | None:
     slowest weapon is the charged one, which is true for every charging actor in the
     tree today.
     """
-    reloads = [fnum(a.get("reloaddelay")) for a in u.get("armaments", [])
-               if a.get("pricing", True)
-               and formula.condition_holds_by_default(a.get("requires"))]
+    reloads = [fnum(a.get("reloaddelay")) for a in pricing_armaments(u)]
     reloads = [r for r in reloads if r]
     return max(reloads) if reloads else None
 
