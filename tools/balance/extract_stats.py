@@ -916,6 +916,28 @@ def extract_actor(rs, key: str, section: str,
         s = stat(resolved, local, trait, field)
         if s is not None:
             u[out_key] = s
+    # --- CARGO / FIREPORTS (C47, LANE 4) --------------------------------------- #
+    # The ledger recorded no passenger capacity at all — no Cargo, no Passengers,
+    # no OpenTopped.  That is why no audit can distinguish a transport from any
+    # other armed vehicle today.  Record cargo_capacity (Cargo.MaxWeight) and
+    # open_topped (presence of AttackOpenTopped trait) per actor, resolved through
+    # miniyaml.  Re-extract is deferred to after Lane 1 lands (per FLEET_ORDERS
+    # SS10 LANE 4).
+    cargo = child(resolved, "Cargo")
+    if cargo is not None:
+        mw = cargo.get("MaxWeight")
+        if mw is not None:
+            lt = child(local, "Cargo") if local is not None else None
+            src = f"{rel(lt.file)}#Cargo.MaxWeight" if lt is not None and lt.get("MaxWeight") is not None else "inherited"
+            u["cargo_capacity"] = {"v": mw, "src": src}
+    # AttackOpenTopped is a marker trait — its presence means passengers fire
+    # from inside the vehicle.  Record as boolean, not a stat dict.
+    for c in resolved.children:
+        if c.key == "AttackOpenTopped" or c.key.startswith("AttackOpenTopped@"):
+            lt = child(local, c.key) if local is not None else None
+            src = f"{rel(lt.file)}#{c.key}" if lt is not None else "inherited"
+            u["open_topped"] = {"v": True, "src": src}
+            break
     if buildable is not None:
         prereq = buildable.get("Prerequisites")
         if prereq:
