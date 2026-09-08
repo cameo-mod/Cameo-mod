@@ -23,7 +23,17 @@ def classify(row: dict) -> str:
     if row.get("buildable"):
         return "buildable_untagged"
     if row.get("cost") is not None:
-        return "costed_not_buildable"
+        cost = row.get("cost")
+        tech = row.get("tech_level")
+        if cost == 0:
+            return "cost_0_civilian"
+        if tech == 11 and cost is not None and cost <= 100:
+            return "cost_low_hero"
+        if tech == 11:
+            return "cost_tech11"
+        if tech is not None and tech < 0:
+            return "cost_disabled"
+        return "cost_other"
     if row.get("prerequisite"):
         return "prerequisite_no_owner"
     return "no_production_claim"
@@ -48,32 +58,51 @@ def main() -> int:
             by_source[r["source"]].append(r)
 
     print("# INI corpus untagged breakdown\n")
-    print("| source | total | buildable | costed_not_buildable | prereq_no_owner | no_production_claim |")
-    print("|---|---|---|---|---|---|")
+    headers = ["source", "total", "buildable", "cost_0_civilian", "cost_low_hero",
+               "cost_tech11", "cost_disabled", "cost_other", "prereq_no_owner", "no_production_claim"]
+    print("| " + " | ".join(headers) + " |")
+    print("|" + "|".join(["---"] * len(headers)) + "|")
     summary = {}
     for s, rs in sorted(by_source.items()):
         buckets = defaultdict(list)
         for r in rs:
             buckets[classify(r)].append(r)
         summary[s] = buckets
-        print(f"| {s} | {len(rs)} | {len(buckets['buildable_untagged'])} | "
-              f"{len(buckets['costed_not_buildable'])} | {len(buckets['prerequisite_no_owner'])} | "
-              f"{len(buckets['no_production_claim'])} |")
+        cells = [s, str(len(rs))]
+        for h in headers[2:]:
+            cells.append(str(len(buckets.get(h, []))))
+        print("| " + " | ".join(cells) + " |")
 
     print("\n## Buildable but untagged (actionable)\n")
-    any_actionable = False
-    for s, buckets in sorted(summary.items()):
-        actionable = buckets["buildable_untagged"]
-        if actionable:
-            any_actionable = True
+    any_actionable = any(buckets.get("buildable_untagged") for buckets in summary.values())
+    if any_actionable:
+        for s, buckets in sorted(summary.items()):
+            actionable = buckets.get("buildable_untagged")
+            if not actionable:
+                continue
             print(f"### {s} ({len(actionable)})\n")
             for r in actionable:
                 print(f"- `{r['id']}` | {r.get('name', '')} | type={r.get('type')} | "
                       f"cost={r.get('cost')} | tech={r.get('tech_level')} | "
                       f"prereq={r.get('prerequisite')}")
             print()
-    if not any_actionable:
+    else:
         print("None. All buildable rows now have resolved owners.\n")
+
+    print("\n## Costed but not buildable — data-driven subcategories\n")
+    for s, buckets in sorted(summary.items()):
+        for cat in ["cost_0_civilian", "cost_low_hero", "cost_tech11", "cost_disabled", "cost_other"]:
+            rows = buckets.get(cat, [])
+            if not rows:
+                continue
+            print(f"### {s} — {cat} ({len(rows)})\n")
+            for r in rows[:10]:
+                print(f"- `{r['id']}` | {r.get('name', '')} | type={r.get('type')} | "
+                      f"cost={r.get('cost')} | tech={r.get('tech_level')} | "
+                      f"prereq={r.get('prerequisite')}")
+            if len(rows) > 10:
+                print(f"- ... and {len(rows) - 10} more")
+            print()
 
     return 0
 
