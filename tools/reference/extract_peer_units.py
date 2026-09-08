@@ -883,6 +883,17 @@ def extract(mod_id):
                 (inherited_disabled_faction(actor, rules, known_factions, vfi, pidx) & set(known_factions))
             if not fac_disabled:
                 continue
+        # ⛔ A NON-PRODUCTION QUEUE IS THE QUEUE'S OWN STATEMENT of "not a faction unit".
+        # Romanov's Vengeance files 450 of its 725 buildable actors under `.Civilian` —
+        # neutral map elements, tech buildings, debug actors — which matched no declared
+        # faction and landed in the corpus untagged. Same data-derived principle as the
+        # `~disabled` check: the mod says it is not production, so it is not a reference.
+        # A unit on a MIXED queue keeps its row — one real queue is a real claim.
+        # (AURORA's v5 idea, folded in here — the file is single-owner EMBER.)
+        queue_val = (b.get("Queue") or "") if b is not None else ""
+        queue_tokens = [q.strip() for q in queue_val.split(",") if q.strip()]
+        if queue_tokens and all(q.lower().endswith((".civilian", ".tech", ".debug", ".unused")) for q in queue_tokens):
+            continue
         hp = trait(node, T["health"], "HP")
         if not hp:
             continue
