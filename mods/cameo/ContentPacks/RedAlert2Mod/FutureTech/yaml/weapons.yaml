@@ -247,7 +247,7 @@ Future_Cryocopter_Cryo:
 	-Warhead@TeslaWeapon:
 	Warhead@Cryo_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 12600
+		Damage: 12000
 		PercentageScale: 0
 		-PhysicalStateName:
 		-PhysicalStateScale:
@@ -381,7 +381,7 @@ CryoLegionnaireAttack:
 	-Warhead@TeslaWeapon:
 	Warhead@Cryo_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 13600
+		Damage: 12000
 		PercentageScale: 0
 		-PhysicalStateName:
 		-PhysicalStateScale:
@@ -852,7 +852,7 @@ Future_MultiMissile_Sigma:
 	-Warhead@TeslaChargedWeapon:
 	Warhead@MissileTesla_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 55888
+		Damage: 50000
 		PercentageScale: 0
 
 FutureEnforcerShotgun:
@@ -1165,7 +1165,7 @@ MissileAttackRobotGun:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 8000
 		PercentageScale: 9996
 	Projectile: Missile
 		VerticalRateOfTurn: 16

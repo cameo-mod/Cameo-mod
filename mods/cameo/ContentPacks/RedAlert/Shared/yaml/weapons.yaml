@@ -270,7 +270,7 @@ DragunovSniper:
 		Spread: 1
 		Falloff: 100, 0
 		# Still heavily damages tanks, but cannot one-shot a Mammoth or win the return-fire duel.
-		Damage: 200000
+		Damage: 40000
 		PercentageScale: 0
 	Warhead@LegacyRailgunExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -568,7 +568,7 @@ MagicOrb:
 	Warhead@Tesla_Heavy:
 		PercentageScale: 6667
 		Spread: 1200
-		Damage: 12000
+		Damage: 24000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Spread: 1600
@@ -585,6 +585,7 @@ MagicOrb:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: thgun.wav
+	-Warhead@Magic_Heavy:
 
 MagicOrb2:
 	Inherits: ^Warhead_Tesla_Heavy
@@ -615,7 +616,7 @@ MagicOrb2:
 		ContrailLength: 0
 	Warhead@Tesla_Heavy:
 		Spread: 1600
-		Damage: 4000
+		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Spread: 2400
@@ -631,6 +632,7 @@ MagicOrb2:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: thgun.wav
+	-Warhead@Magic_Heavy:
 
 APCGunAllies:
 	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
@@ -687,7 +689,7 @@ RAVulcan:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 4000
 		PercentageScale: 2494
 RAVulcanCryo:
 	Inherits@wh: ^Warhead_BulletCryo_Medium
@@ -749,7 +751,7 @@ ZeroFighterChainGun:
 			Spaceship: 57
 			Superheavy: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ZeroFighterBullet_MediumFriendly: AreaDamage
+	Warhead@ZeroFighterBullet_MediumFriendlyFire: AreaDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Air
 		Spread: 100
@@ -787,15 +789,12 @@ ZeroFighterChainGunWaveforce:
 	Inherits@3: ZeroFighterChainGun
 	Inherits@4: ^WaveforceBulletProjectile
 	Inherits@compat: ^ZeroFighterWaveforceBulletCompatibility
-	Warhead@Bullet_Medium:
-		PercentageScale: 6667
-	Projectile: Bullet
-		-LaunchAngle:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 9000
+		PercentageScale: 4444
+	-Warhead@Bullet_Medium:
+	-Warhead@ZeroFighterBullet_Medium:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -833,6 +832,10 @@ TigerCannonCryo:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: 25mm
 	Inherits@3: ^WaveforceBulletProjectile
+	-Warhead@CannonHE_Medium:
+	Warhead@Railgun_Heavy:
+		Damage: 14000
+		PercentageScale: 1659
 
 WaveforceCannonChargedLaser:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
@@ -859,7 +862,7 @@ WaveforceCannonChargedLaser:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
@@ -874,6 +877,7 @@ WaveforceCannonChargedLaser:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 		ValidTargets: Air
+	-Warhead@Railgun_Heavy:
 
 WaveforceCannonDistortedBeam1:
 	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
@@ -930,7 +934,7 @@ WaveforceCannonDistortedBeam1:
 	-Warhead@TeslaWeapon:
 	Warhead@Waveforce_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 25000
+		Damage: 20000
 		PercentageScale: 0
 
 WaveforceCannonDistortedBeam2:
@@ -954,7 +958,7 @@ WaveforceCannonDistortedBeam2:
 		Inaccuracy: 100
 	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -973,6 +977,7 @@ WaveforceCannonDistortedBeam2:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 		ValidTargets: Air
+	-Warhead@Flame_Heavy:
 
 ra120mm:
 	Inherits@collapsewh: ^Warhead_CannonHE_Heavy
@@ -1486,16 +1491,6 @@ V2ExplodeIrak:
 	MinRange: 2820
 BarrelExplode:
 	Inherits: ^DamagingExplosionHE
-	Warhead@1Dam: SpreadDamage
-		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		Delay: 5
-		ValidTargets: Ground
-		Versus:
-			None: 120
-			Wood: 100
-			Light: 50
-			Concrete: 10
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, Incendiary
 	Warhead@2Eff: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
@@ -1548,6 +1543,9 @@ ATMine:
 	Inherits@2: ^HeavyMissile
 	Inherits@compat: ^ATMineDemolitionCompatibility
 	Report: mineblo1.aud
+	Warhead@ATMineDemolition_Light:
+		Damage: 110000
+	-Warhead@Demolition_Light:
 	-Warhead@HeavyMissile:
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -1926,7 +1924,7 @@ TorpTube:
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
 	Warhead@Concussion_Light:
-		Damage: 16000
+		Damage: 32000
 	Warhead@MissileHE_Heavy:
 		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure
@@ -1940,6 +1938,7 @@ TorpTube:
 		ImpactSounds: splash9.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
+	-Warhead@MissileHE_Heavy:
 
 TorpTubeThermobaric:
 	Inherits@wh: ^Warhead_MissileNuke_Heavy

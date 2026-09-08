@@ -44,7 +44,7 @@ RA2PatriotThunderboltMissile:
 		ContrailEndColor: FFFFFF
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
-		Damage: 10000
+		Damage: 12000
 
 HarrierMissiles:
 	Inherits: ^LightFlameWeapon
@@ -69,7 +69,7 @@ HarrierMissiles:
 		ContrailEndColor: 000000FF
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 18000
+		Damage: 24000
 		PercentageScale: 2222
 		PercentageDenominator: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -396,7 +396,7 @@ BlackEagleThunderboltMissiles:
 		ContrailEndColor: FFFFFF
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 48000
+		Damage: 54000
 		PercentageScale: 1250
 		PercentageDenominator: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -617,7 +617,7 @@ RA2Comet:
 		SecondaryBeamColor: FFFFFFFF
 		SecondaryBeamUsePlayerColor: false
 	Warhead@Demolition_Light:
-		Damage: 20000
+		Damage: 60000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Flame_Medium:
 		Damage: 20000
@@ -630,6 +630,8 @@ RA2Comet:
 		Amount: 4
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
+	-Warhead@Flame_Medium:
+	-Warhead@Laser_Heavy:
 
 RA2Comet_elite:
 	Inherits: RA2Comet
@@ -773,7 +775,7 @@ RA2HeavyMirageGun:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@CannonAP_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 33000
+		Damage: 32000
 		PercentageScale: 2422
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	-Warhead@CannonAP_Light:

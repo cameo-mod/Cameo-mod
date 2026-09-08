@@ -89,12 +89,11 @@ RA2KirovBomb_tesla:
 	Inherits@fx: ^Effect_Kirov_Tesla_RA2
 	Inherits@2: RA2KirovBomb
 	Warhead@Tesla_Super:
-		Damage: 80000
+		Damage: 160000
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 40000
-	Warhead@Demolition_Heavy:
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Demolition_Heavy:
 	Warhead@Shrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: TeslaFragmentLarge
@@ -352,7 +351,7 @@ RA160mm_rad:
 	-Warhead@Demolition_Light:
 	Warhead@Chemical_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 108000
+		Damage: 144000
 		PercentageScale: 0
 RA160mm_fire:
 	Inherits@finalmain: ^Compatibility_CannonFire_HeavyFlat
@@ -408,8 +407,9 @@ RA160mmE_rad_elite:
 	Inherits: ^RA160mmRadLegacy
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 12345
+	-Warhead@Chemical_LightFlatCompatibility:
 	Warhead@Nuclear_Super:
-		Damage: 36000
+		Damage: 144000
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		Damage: 18
 	Warhead@Effect: CreateEffect
@@ -503,10 +503,6 @@ RA160mmE_rad_elite:
 	-Warhead@Chemical_Light:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Chemical_LightFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 108000
-		PercentageScale: 0
 
 RA160mmE_fire_elite:
 	Inherits: RA160mm_fire
@@ -1111,7 +1107,7 @@ RA2FlakTrackAAGun:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		PercentageScale: 2488
-		Damage: 8000
+		Damage: 7000
 		ValidTargets: Air
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:

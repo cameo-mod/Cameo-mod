@@ -134,10 +134,11 @@ HellfireCryo:
 	Report: missile6.aud
 	Warhead@CryoBlast_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 	Warhead@MissileCryo_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
+	-Warhead@MissileCryo_Heavy:
 
 	Projectile: Missile
 		VerticalRateOfTurn: 12
@@ -187,9 +188,10 @@ AlliedTankDestroyerCannon:
 	Projectile: Bullet
 		Speed: 1362
 	Warhead@CannonHE_Medium:
-		Damage: 12000
+		Damage: 24000
 	Warhead@CannonAP_Light:
 		Damage: 12000
+	-Warhead@CannonAP_Light:
 AlliedTankDestroyerCannonCryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Light
@@ -213,9 +215,10 @@ SheridanCannon:
 	Projectile: Bullet
 		Speed: 502
 	Warhead@CannonAP_Light:
-		Damage: 8000
+		Damage: 16000
 	Warhead@CannonHE_Medium:
 		Damage: 8000
+	-Warhead@CannonHE_Medium:
 SheridanCannonCryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -346,13 +349,14 @@ Aphid_AA:
 		TrailDelay: 1
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
+	-Warhead@MissileHE_Heavy:
 
 AphidCryo_AA:
 	Inherits@wh: ^Warhead_CryoBlast_Medium
@@ -378,10 +382,11 @@ AphidCryo_AA:
 		TrailDelay: 1
 	Warhead@CryoBlast_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 	Warhead@MissileCryo_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
+	-Warhead@MissileCryo_Heavy:
 
 ReconRangerRecoillessGun:
 	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
@@ -473,7 +478,7 @@ ReconRangerRecoillessGun:
 	Warhead@MissileAP_Heavy:
 		PercentageScale: 1210
 		ValidTargets: Ground, Water, Air
-		Damage: 33000
+		Damage: 32000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud

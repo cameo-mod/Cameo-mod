@@ -10106,9 +10106,94 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 - Re-balanced the `devastator` vs `harkonnen_devastatormech` image references and kept Harkonnen translation strings in sync.
 - Re-extracted `docs/balance/d2k_harkonnen.json`.
 
+## NOVA (A2 / LANE-2) W24 batches 14-16 + ledger refresh (2026-09-08)
+
+**Identity:** A2 / NOVA (SWE 1.7). Branch `devin/nova/w24-lane2`, worktree `C:/tmp/nova-lane2`.
+
+**What and why:**
+- Batch 14: collapsed SCUD family (`SCUD` -> MissileHE_Heavy 120000; removed orphan `-Flame_Heavy` from `SCUDThermobaric` and `SCUDTesla`). `V2ExplodeIrak`/`SCUDIrak` resolve to single main automatically. `GLASCUD` (legacy file) deferred.
+- Batch 15: collapsed sniper chains in `AsianAlliance` and `TKM` (`AsianSniper`/`VonSniper` -> Bullet_Heavy 30000; `AsianSniperAP`/`VonSniperAP` -> Bullet_Heavy 80000 [SHIPPED, restoring from drifted 92000]; `AsianSniperLockdown`/`VonSniperLockdown` -> Tesla_Super 192000 [SHIPPED, restoring from drifted 204000]). Parent and child edits in one batch to avoid orphans.
+- Batch 16: removed zero-damage `Warhead@Bullet_Light` placeholder from `AAGunBoatFlak`; `AAGunBoatFlak_elite` now also one main.
+- Re-extracted and committed balance ledgers (`docs/balance/*.json` + `docs/balance/derived/*.json`) after all batches. `audit_balance_drift.py` clean.
+
 **Verification:**
-- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
-- `find_empty_warhead.py` = 0.
+- `find_empty_warhead.py` = 0
+- `audit_orphan_removals.py` = 0
+- `find_orphan_old_keys.py` = 0 real
+- `audit_release_drift.py` D1 82 <= 133, D2 34 <= 62, D3 15 <= 27, D4 335 <= 335, D5 39 <= 43
+- `audit_weapon_shape.py` W5 332 <= 394
+- `verify_generator_sync.py` = 0
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log` files after each batch and after ledger extraction.
+
+**Commits pushed:**
+- `0da5f6d5f` w24: collapse SCUD family under rule A
+- `0aadee929` w24: collapse sniper chains under rule A
+- `6e4362dd5` w24: remove zero-damage Bullet_Light placeholder from AAGunBoatFlak
+- `68a896199` ledgers: re-extract balance sidecars after W24 batches 13-16
+
+**Remaining blockers (need rulings):**
+- Waveforce no-@wh 6 (`ArmoredCarMG*Waveforce`, `SkyHawkChainGunWaveforce`, `JapaneseHovercraftFlak*Waveforce`, `japan_imperialscoutsman_rifle_waveforce`)
+- Planner-NONE 7 (`JapanMaidenBowEnergized`, `RA2Comet`/`RA2Comet_elite`, `Aphid_AA`, `BallistaTowerMultiShot`, `RA2DiskDrain`, `TorpTube`)
+- `GLASCUD` in legacy `mods/cameo/weapons/weapons.yaml`
+
+## NOVA (A2 / LANE-2) W24 batches 17-19 (2026-09-08 continuation)
+
+**What and why:**
+- Batch 17: `Aphid_AA` -> Concussion_Medium 16000 [SUM], dropped MissileHE_Heavy; `RA2DiskDrain` -> Tesla_Heavy 4000 [SHIPPED], dropped Magic_Heavy.
+- Batch 18: `RA2Comet` -> Demolition_Light 60000 [SHIPPED], dropped Flame_Medium and Laser_Heavy (`RA2Comet_elite` inherits cleanly); `TorpTube` -> Concussion_Light 32000 [SHIPPED], dropped MissileHE_Heavy.
+- Batch 19: `AlliedTankDestroyerCannon` -> CannonHE_Medium 24000 [SHIPPED], dropped CannonAP_Light; `SheridanCannon` -> CannonAP_Light 16000 [SHIPPED], dropped CannonHE_Medium.
+- Batch 20: `RA2SCUDELITE` -> Nuclear_Super 120000 [SHIPPED], cancelled inherited `Demolition_Light`, `MissileAP_Heavy`, `RA2SCUDMissileAP_Heavy_NoWall` from `RA2SCUD` parent. Left `RA2SCUD`, `RA2SCUD_fire`, `RA2SCUD_tesla`, `RA2SCUD_rad`, `V3Explode` for a separate SCUD-family ruling.
+- Batch 21: `RA2AsianShotgunFanatic1` -> Demolition_Light 8000 [SHIPPED], dropped `Concussion_Medium` and `Bullet_Medium`; `RA2AsianShotgunFanatic2/3` inherit cleanly. `Type97PlasmaCannon` -> Tesla_Heavy 12000 [SHIPPED], dropped `Railgun_Heavy` and `CannonHE_Heavy`, preserved `Tesla_Heavy_ExtraDamage` and `Effect`.
+- Batch 22: `MagicOrb`/`MagicOrb2` -> Tesla_Heavy 24000/8000 [SHIPPED], dropped `Magic_Heavy` (preserved `EMPUnit` AffectsIntegrity). `tkmakap` -> Bullet_Light 8000 [SHIPPED], dropped `Demolition_Light`. `tkmm203` -> Demolition_Light 8000 [SHIPPED], dropped `Flame_Light`.
+- Batch 23: `AsianChaosMine` -> Chemical_Heavy 250000 [SHIPPED], dropped inherited `CannonAP_Light` (from `AsianTankMine`), preserved `Cloud` smoke. `WaveArtilleryImpact` -> Tesla_Heavy 20000 [SHIPPED], removed `^Warhead_Railgun_Heavy` inherit and local `Railgun_Heavy`, preserved `Tesla_Heavy_ExtraDamage`, `SonicDebuff`, `Effect` and `^Effect_Railgun_Heavy`. `WaveTurretImpact` -> inherits collapsed parent `Tesla_Heavy 20000`, removed local `RailgunWeapon` and `RailgunWeaponPercentage`, preserved `SonicDebuff`.
+- Batch 24: waveforce non-flak collapses to `Railgun_Heavy`: `ArmoredCarMGWaveforce` 19000 [SHIPPED] (kept `PercentageScale 6667`), `SkyHawkChainGunWaveforce` 6000 [SUM] (preserved `GrenadeFriendlyFire`), `japan_imperialscoutsman_rifle_waveforce` 15000 [SUM], `25mmWaveforce` 14000 [SHIPPED] (kept `PercentageScale 1659`). Each cancels the inherited secondary main (`Bullet_Medium` or `CannonHE_Medium`).
+- Batch 25: `ArmoredCarMGAAWaveforce` 19000 [SHIPPED] (kept `PercentageScale 6667`), cancelled all four inherited `AreaDamage` warheads from `ArmoredCarMG_AA` (`Bullet_Light`, `Bullet_Medium`, `CannonAP_Light`, `CannonHE_Medium`), preserved `HeavyAAWeaponPercentage`.
+- Batch 26: `TTankZap2ArcTeslaFragment1_EMP` 60000 [SUM] and `TTankZap2ArcTeslaFragment2_EMP` 50000 [SUM], both collapsed to `Tesla_Super` and removed local `TeslaWeapon`. Preserved `Tesla_Super_ExtraDamage`, `EMPUnit`, `TeslaArc`, and `TeslaWeaponPercentage`.
+- Batch 27: cleaned zero-damage `AreaDamage` warheads from `ArmoredCarMG_AA` (`Bullet_Light`, `CannonAP_Light`, `CannonHE_Medium`) and removed the now-orphan cancel lines from `ArmoredCarMGAAWaveforce`. Preserved `Bullet_Medium` main and all `*Percentage` companions.
+- Batch 28: `JapaneseHovercraftFlakWaveforce` and `JapaneseHovercraftFlakAAkWaveforce` collapsed to `Railgun_Heavy` 6000 [SHIPPED], moving `PercentageScale 9975` onto the waveforce main and cancelling `Flak_MediumFlatCompatibility`.
+- Batch 29: `ATMine` collapsed to `ATMineDemolition_Light` 110000 [SHIPPED], cancelling `Demolition_Light` from `^DamagingExplosionHE`. Preserved `HeavyMissilePercentage`, effect, smudge, and concrete.
+- Batch 30: `ZeroFighterChainGunWaveforce` collapsed to `Railgun_Heavy` 9000 [SHIPPED], cancelling `Bullet_Medium` and `ZeroFighterBullet_Medium`. Removed malformed `Projectile: Bullet` block. Renamed the ally-only twin to `...FriendlyFire` to keep it as a companion, preserving 500 ally damage.
+- Batch 31: `BarrelExplode` — removed dead `Warhead@1Dam` (SpreadDamage with no Damage value), leaving `Demolition_Light` 60000 [SHIPPED].
+- PS-fix (post-EMBER review): recomputed `PercentageScale` carried onto the surviving main in batch 28 (`9975 -> 6650` on `JapaneseHovercraftFlakWaveforce` and `JapaneseHovercraftFlakAAkWaveforce`) and batch 30 (`6667 -> 4444` on `ZeroFighterChainGunWaveforce`). `AreaDamage` percent-of-HP channel is `Damage/2000 * PercentageScale/100`; keeping the old scale on a higher-Damage main inflated the percentage channel. Rule: `Scale_new = Scale_old * Damage_old / Damage_new`.
+- Re-extracted and committed `docs/balance` ledgers after each batch (`audit_balance_drift.py` clean).
+- Updated `C:/tmp/boot_gate.ps1` sleep from 45s to 70s because the game now occasionally needs ~50s to reach the main menu.
+
+**Verification after batch 19:**
+- `find_empty_warhead.py` = 0
+- `audit_orphan_removals.py` = 0
+- `audit_release_drift.py` D1 82 <= 133, D2 34 <= 62, D3 15 <= 27, D4 335 <= 335, D5 39 <= 43
+- `audit_weapon_shape.py` W5 300 <= 394
+- `verify_generator_sync.py` = 0
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded` with no new `exception-*.log` (70s boot-gate).
+
+**Verification after PercentageScale fix (2026-09-08, commit `9c8d793b0`):**
+- `find_empty_warhead.py` = 0
+- `audit_orphan_removals.py` = 0
+- `audit_release_drift.py` D1 80/133, D2 34/62, D3 15/27, D4 335/335, D5 39/43
+- `audit_weapon_shape.py` W5 300/394 (all W buckets <= ratchet)
+- `launch-game.cmd` reached main menu with no new `exception-*.log`
+- `review_resolve_diff.py` vs pre-batch 28 base shows only the expected main-damage multiset flags; ValidTargets/Range/Reload/Burst/Projectile/CreateEffect invariants preserved.
+
+**Commits pushed since previous entry:**
+- `631c34ee4` w24: collapse Aphid_AA and RA2DiskDrain under rule A
+- `e9fe73303` ledgers: re-extract after batch 18 (RA2Comet, TorpTube)
+- `4f02bdcb1` w24: collapse AlliedTankDestroyerCannon and SheridanCannon under rule A
+- `53defbbed` ledgers: re-extract after batch 19 (AlliedTankDestroyerCannon, SheridanCannon)
+- `0af81e76d` w24: collapse RA2SCUDELITE under rule A
+- `c3db237bb` w24: collapse RA2AsianShotgunFanatic and Type97PlasmaCannon under rule A
+- `57d78cce5` ledgers: re-extract after batch 21
+- `f41f461d3` w24: collapse MagicOrb, MagicOrb2, tkmakap, tkmm203 under rule A
+- `740d7be2e` w24: collapse AsianChaosMine, WaveArtilleryImpact, WaveTurretImpact under rule A
+- `6a4f0281d` w24: collapse waveforce non-flak weapons under rule A
+- `7c7bb29a2` ledgers: re-extract redalert_japan after batch 24
+
+**Remaining blockers:**
+- Waveforce no-@wh 6 (ruling needed on whether `^WaveforceBulletWarhead` is a de-facto warhead-delivery survivor).
+- RA2SCUD family (multi-main composite with `^RA2SCUDMissileCompatibility`, no `@wh`).
+- `JapanMaidenBowEnergized` (intentional composite with 7+ warheads).
+- `GLASCUD` (legacy file, cross-lane/canonical-file ruling).
+- `BTRMachineGun` / `BTRTeslaMachineGun` W5 false positives (already resolve to one main; require 3-way split cleanup of cancelled warhead inherits).
+
 - `audit_balance_drift.py` = `_clean_` (33/33 ledgers match).
 
 **Commit:** `28ae6f0d4` fix(d2k_harkonnen): resolve baron_elite frame mismatch and boot-gate.
@@ -10889,3 +10974,72 @@ Full-suite/audit completion is recorded in `docs/audit/ASTRA_REVIEW.md`.
 PR 329 remains draft and unmerged.
 
 Co-Authored-By: Codex <noreply@openai.com>
+## NOVA — AURORA peer review + fleet handoff (2026-09-09)
+
+**Identity:** A2 / NOVA, `devin/nova/w24-lane2`.
+
+**Completed this session:**
+- Reproduced AURORA's RV extractor fix on `origin/master` and on `devin/aurora/rv-untagged-fix-v3`.
+- Verified RV counts: 729 buildable rows; tagged 185 -> 256, untagged 544 -> 473.
+- Ran `find_empty_warhead.py` (0), `audit_release_drift.py` (all PASS at/below ratchet), `audit_weapon_shape.py` (all PASS), `audit_original_coverage.py` (O1 18, O2 94 below 103 ratchet).
+- Attempted boot-gate on AURORA's v3 and on `origin/master`; both reached menu then crashed. `devin/nova/w24-lane2` still boots cleanly. No new `exception-*.log` written.
+- Wrote `REVIEW_2026-09-09_nova_on_aurora.md` (PASS WITH NOTES) in the fleet repo.
+- Updated `Cameo-mod-fleet/AGENTS.md` A2 row.
+- Researched Blackrobe/Codex PRs #320, #328, #329, #330 and integration impact. Posted `HANDOFF_2026-09-09_nova_comprehensive.md`.
+- Decided next LANE-2 batch: `RA2Robotmm`/`RA2Robotmm_elite`, blocked on a family ruling.
+
+**Findings:**
+- AURORA's fix is correct but needs a bootable master before merge.
+- `origin/master` (`467041434`) and `weapon_structure_and_warhead_fold` crash after menu; treat `5bb76c22d` as last known-good master.
+- Blackrobe/Codex #320 is an authoritative first pass of the W24 3-way split; fleet should use `plan_warhead_collapse.py` and avoid re-converting their resolved weapons.
+
+**Next:**
+- Wait for a bootable master and/or Claude-Local rulings.
+- Once family is ruled, convert `RA2Robotmm`/`RA2Robotmm_elite` and re-run gates.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
+## NOVA — master boot unblocked + rebase conflict found (2026-09-09, continued)
+
+**Identity:** A2 / NOVA, `devin/nova/w24-lane2`.
+
+**Completed this continuation:**
+- Re-tested `origin/master` (`05fd2b4c0`) in a fresh worktree with `Engine.SupportDir=C:\tmp\gate_master_clean` — boot-gate PASS.
+- Re-tested `devin/aurora/rv-untagged-fix-v3` with `Engine.SupportDir=C:\tmp\gate_aurora_v3` — boot-gate PASS.
+- Concluded the earlier master crash was a tainted default `%APPDATA%\OpenRA` support directory, not `AiMatchLogWriter` or a code regression.
+- Updated fleet `REVIEW_2026-09-09_nova_on_aurora.md`, `HANDOFF_2026-09-09_nova_comprehensive.md`, `UPDATE_2026-09-09_nova_master_boot_unblocked.md`, and `AGENTS.md`.
+- Ran `git rebase origin/master` on `devin/nova/w24-lane2`; first commit conflicts in `mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml`. Aborted.
+- Ran `plan_warhead_collapse.py` on `origin/master`; found ~88 LANE-2 multi-main weapons still unresolved, including `RA2Robotmm`, `JapanMaidenBowEnergized`, `VolkovMagneticWeapon`, `WaveforceCannon`, and many `RedAlert2Mod` pack weapons.
+
+**Findings:**
+- A blind rebase of `devin/nova/w24-lane2` onto `origin/master` is unsafe because of overlapping W24 collapses with Blackrobe's #320.
+- `origin/master` has more remaining LANE-2 multi-main weapons than `devin/nova/w24-lane2`, so the branch and master diverged significantly.
+
+**Next:**
+- Seek a maintainer ruling on how to integrate `devin/nova/w24-lane2` with `origin/master` (coordinated merge, filtered rebase, or fresh branch).
+- Wait for the `RA2Robotmm`/`RA2Robotmm_elite` family ruling before starting the next conversion.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
+## NOVA — CORRECTION: master still crashes after menu (2026-09-09, late)
+
+**Identity:** A2 / NOVA, `devin/nova/w24-lane2`.
+
+**Completed:**
+- Retested `origin/master` at `05fd2b4c0` and `4f6e7bb92` with a fresh `Engine.SupportDir` — both reached `MenuPostProcessEffect.PostWorldLoaded` and then displayed `OpenRA has encountered a fatal error`. No `exception-*.log` written; `debug.log` only "Voxel sheet overflow".
+- The earlier `05fd2b4c0` "clean" run was a false positive (the launcher returned before the crash).
+- `devin/nova/w24-lane2` remains the last verified bootable LANE-2 branch.
+- Wrote `CORRECTION_2026-09-09_nova_master_boot_still_crashing.md` and updated `HANDOFF_2026-09-09_nova_comprehensive.md`, `REVIEW_2026-09-09_nova_on_aurora.md`, and `AGENTS.md`.
+
+**Findings:**
+- The post-menu crash is a real runtime regression on master, not a stale support directory.
+- `AiMatchLogWriter` is still a suspect, but removing it did not produce a clean boot in one test.
+- DAWN's `BLOCKER_2026-09-09_master_boot_ai_match_log.md` was correct.
+- AURORA's clean boot claim needs verification; please post the exact launch command and build hash.
+
+**Next:**
+- Do not rebase `devin/nova/w24-lane2` onto `origin/master` until the post-menu crash is fixed.
+- Wait for the `RA2Robotmm` family ruling.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
