@@ -39,11 +39,9 @@ RA2KirovBomb_rad:
 	Inherits: RA2KirovBomb
 	Inherits@rad: ^RA2RadShell
 	Warhead@Chemical_Heavy:
-		Damage: 48000
+		Damage: 96000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Demolition_Heavy:
-		Damage: 48000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	-Warhead@Demolition_Heavy:
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 480
@@ -109,9 +107,10 @@ RA2KirovBomb_nuclear:
 	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: RA2KirovBomb
 	Warhead@Nuclear_Super:
-		Damage: 80000
+		Damage: 160000
 		Spread: 800
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	-Warhead@Demolition_Heavy:
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		Damage: 40
 		Spread: 4000
@@ -131,12 +130,8 @@ RA2KirovBomb_nuclear:
 
 RA2KirovBomb_nuclear_elite:
 	Inherits: RA2KirovBomb_nuclear
-	Warhead@Demolition_Heavy:
-		Damage: 100000
-		Spread: 1000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super:
-		Damage: 100000
+		Damage: 200000
 		Spread: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage

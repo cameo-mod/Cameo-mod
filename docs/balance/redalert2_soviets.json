@@ -36,17 +36,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "48000",
+        "damage": "96000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
         "tag": "Chemical_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "48000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "800",
-        "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -144,7 +137,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "80000",
+        "damage": "160000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "800",
         "tag": "Nuclear_Super",
@@ -156,13 +149,6 @@
         "spread": "4000",
         "tag": "Nuclear_Super_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "80000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "800",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -187,7 +173,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "100000",
+        "damage": "200000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
         "tag": "Nuclear_Super",
@@ -199,13 +185,6 @@
         "spread": "5000",
         "tag": "Nuclear_Super_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "100000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "1000",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
