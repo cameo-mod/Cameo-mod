@@ -10986,70 +10986,30 @@ PR 329 remains draft and unmerged.
 
 Co-Authored-By: Codex <noreply@openai.com>
 
-## 2026-09-08 — Astra: tested pipeline implementation, pending publication
+## Devin-DAWN - INI buildability and untagged breakdown (2026-09-09)
 
-Isolated branch `codex/astra-pipeline-implementation`, based on `a089bd3dc`.
-No commits, pushes, gameplay YAML changes, anchor signatures or game launches.
+**Identity:** Devin-DAWN (Devin CLI, SWE-1.7 Max), A4, INI reference extraction.
 
-- A4: shared report-column contract; per-main damage/count semantics; explicit report
-  selection and dry-run default; refuses incomplete/stale/unsupported selections.
-  Existing staged ledgers are preserved by refusal, and writes reuse `Transaction`.
-- A2: `derive_virtual_anchor.py` gathers classified eligible members, reference IDs,
-  rounded current-stat medians, bias and thin-sample diagnostics. All are unapproved:
-  these are NOT calibrated reference targets. Missing explicit damage/reload emits
-  `NO MODEL`, not invented prices. With explicit synthetic inputs, virtual `fit_class`
-  now uses the existing final per-stat formula, proving baseline O=P=Q=cost and the
-  2.5x verifier. Real-actor fitting is unchanged. A3 awaits C32 reconciliation; the
-  named AURORA readiness branch was not present on upstream when checked.
-- A5: paired refusal/pass tests cover shadowed unit/weapon/warhead values, preserved
-  retired multipliers, untouched inherited/utility fields, and a real allowed-consumer
-  graph. This is targeted coverage, not a claim every refusal is exhaustively paired.
-- B2: `audit_weapon_shape.py --compare-split` explains 304 versus 231: 73 shape-only
-  weapons, zero split-only. Both predicates and every ratchet remain unchanged.
+**Commits this session:**
+- b15b3e07 - feat(reference): expand [GenericPrerequisites] labels in INI owner resolution
+- d8c81d83d - feat(reference): audit_ini_untagged.py classifies untagged INI rows
 
-Independent challenge found and drove fixes for staged-proposal erasure, sidecar and
-population mismatch, off-grid model cost, spawn-sibling inclusion, and arbitrary model
-DPS defaults. Resolved-inheritance producer/extractor/consumer coverage was added.
-Combined isolated unittest run: 103 modules, 1017 tests, 45 skips, 15 failing modules.
-All 15 also fail on clean `a089bd3dc`; failures were NOT waived or repaired by changing
-weapon expectations. Details remain in `docs/audit/latest/bounded_test_run.json`.
-33 ledgers have zero drift; percentage-runtime audit and structure ratchets pass.
-Test-runner sampled peak: 839.6 MB process tree, 45.4% PC memory.
+**What was fixed:**
+- 	ools/reference/extract_ini_units.py now expands virtual prerequisite labels from [GenericPrerequisites] when walking Prerequisite chains, e.g. SOVWEAP=NAWEAP,NAWEAPB,NAFIST resolves to Soviet.
+- Buildability is now derived from resolved playable owner, raw Prerequisite (including generic labels), or RequiredHouses; Cost is no longer a buildability test.
+- docs/reference/ini_corpus.json regenerated: ~500 incorrectly-buildable decorative/campaign/hero/tech rows marked unbuildable, zero buildable-but-unowned rows remain.
+- 	ools/reference/audit_ini_untagged.py classifies untagged rows into data-driven buckets (costed disabled, costed hero, costed civilian, etc.).
 
-Open boundaries: the current MBT replacement-damage producer still refuses retained
-inherited/scoped firepower; this guard was not bypassed. The new armed-transport class
-has no classified members until its template migration lands. Support has no combat
-verifier. Faction approval/calibration and model choices are still required before any
-signable anchor. Chrome/hook/compatibility-splice defects refer to the old PR code,
-not the current-master implementations; no disputed PR payload was imported here.
+**Gates on b15b3e07:**
+- ind_empty_warhead.py -> 0
+- udit_release_drift.py -> PASS
+- udit_weapon_shape.py -> PASS
+- extract_peer_units.py --mod d2 --dry-run -> 46 rows
+- launch-game.cmd -> MenuPostProcessEffect.PostWorldLoaded, no new exception-*.log`r
 
-## 2026-09-08 — Ground-domain fitting follow-up for draft PR 335
+**Open PRs:**
+- PR #334: devin/dawn/ini-side-aliases -> master`r
+- devin/dawn/ini-untagged-breakdown queued behind PR #334.
 
-Both real and virtual fitting now reuse the reference pipeline's AA slot/weapon
-naming predicate. Active ground weapons supply DPS, range, K coverage and charge
-fallback; pure-AA domains remain represented. Baseline condition evaluation is
-unchanged: no strongest-conditional-mode fallback was imported. Virtual derivation
-uses the same armament selection. No gameplay YAML or actor prices changed.
+Co-Authored-By: Devin AI <devin@cognition.ai>
 
-Comparison: 44 of 638 eligible classified ledger actors change fitting inputs.
-APC range/nominal DPS: 8502/400 -> 5668/200; BTR80: 8181/500 -> 5454/250.
-These are fitting units, not measured gameplay DPS or approved prices. Ten new
-tests cover domain selection, condition filtering, K/fallback semantics and actual
-APC/BTR resolved inheritance. The generated firepower-input report was refreshed.
-
-Independent challenge found no AA blocker. Expanded focused run: 117 passed,
-229 subtests passed. Full isolated suite: 104/104 modules, 1027 tests, 45 skipped,
-14 failing modules, all from the previously reproduced upstream failure set.
-The refreshed report fixes the fifteenth failing module; no new failing module.
-33 ledgers: zero drift. Percentage-runtime audit and diff checks pass. Full-suite
-sampled peak: 882.7 MB process tree / 47.6% PC memory; guards 1536 MB / 84%.
-
-Limitations: AA detection follows naming, not actual target masks. Existing
-physical-state sidecars can select upgrade/passenger modes outside baseline;
-none of the excluded AA weapons supplies that surcharge in this population.
-That broader issue is not changed here. A3 readiness remains untouched: AURORA's
-named branch is absent from both GitHub remotes and no identifiable patch was
-found in reachable history. Requested Aedis's C32 reconciliation on PR 335;
-absence is not permission to release the ownership gate. PR remains draft.
-
-Co-Authored-By: Codex <noreply@openai.com>
