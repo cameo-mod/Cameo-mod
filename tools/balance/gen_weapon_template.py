@@ -39,6 +39,11 @@ LADDERS = {  # lightest -> heaviest
     "AIR": ["Fighter", "Bomber", "Helicopter", "Spaceship"],
 }
 CANON16 = {a for arms in LADDERS.values() for a in arms}
+# AA range law (DESIGN.md "The AA range law", 2026-09-08): the AA twin's Range is
+# 1.5x the ground twin's, generated here and enforced by audit_aa_range.py as a
+# lower-only ratchet. The twin is air-only (ValidTargets: Air) and inherits the
+# ground warhead's Versus, Damage, Spread, Falloff and projectile fields verbatim.
+AA_RANGE_MULT = 1.5
 # Level = step (falloff slope) = WeaponClass. Super (step 3, floor 55, WC 1.5, Shield 155)
 # is the superweapon band for Nuclear + charged Tesla — one notch above Heavy (maintainer 2026-08-02).
 LEVELS = {"Light": (6, 10, 16), "Medium": (5, 25, 20), "Heavy": (4, 40, 25), "Super": (3, 55, 30),
@@ -1432,7 +1437,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
            falloffs=DEFAULT_FALLOFFS,
            damage_types="Prone75Percent, TriggerProne, ExplosionDeath",
            overlays=True, reload=25, rng=5120, versus_override=None, physical_states=None,
-           profile_family=None):
+           profile_family=None, aa_twin=False):
     """mode: None = sloped (from order16); 'flat' = Sonic (uniform flat, small %);
     'pct' = Magic (tiny uniform flat + LARGE uniform % of max HP).
     Every main warhead is AreaDamage with baked UNIVERSAL friendly fire
@@ -1511,7 +1516,17 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         # sonic weapon, and that is the correct reading.
         main = [r for r in main if r[0] not in PLATING_CYCLE]
         main = plating_rows(name) + main
-        tag = f"{name}_{level}"
+        # AA twin (DESIGN.md "The AA range law"): air-only, Range = ground * AA_RANGE_MULT.
+        # The twin inherits the ground warhead's Versus/Damage/Spread/Falloff verbatim;
+        # only ValidTargets and Range change. Uses a LOCAL copy so the multiplier does
+        # not compound across levels in the loop.
+        if aa_twin:
+            tag = f"{name}_{level}_AA"
+            vt = "Air"
+            eff_rng = int(rng * AA_RANGE_MULT)
+        else:
+            tag = f"{name}_{level}"
+            eff_rng = rng
         # ⚠ `spreads` (the PHYSICS_SHAPES value) WINS. ENERGY_THIN_SPREAD is the older
         # "thin the energy mains to near single-target" rule and it is now only a FALLBACK for a
         # family with no physics shape. It used to win outright, which pinned Tesla, Laser,
@@ -1527,7 +1542,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
              f"\tValidTargets: {vt}",
              *inv_weapon,
              f"\tReloadDelay: {reload}",
-             f"\tRange: {rng}",
+             f"\tRange: {eff_rng}",
              f"\tTargetActorCenter: true",
              f"\tWarhead@{tag}: AreaDamage",
              f"\t\tValidRelationships: Ally, Neutral, Enemy",
@@ -2236,18 +2251,33 @@ def _generate():
             print(f"###### {nm}: {macro_summary(bl)} ######")
             print(family(nm, None, vt, lv, mode=SPECIAL_MODE[bl], spreads=spreads, falloffs=falloffs))
             print()
+            if air:
+                print(f"###### {nm}_AA: AA twin (Range x{AA_RANGE_MULT}) ######")
+                print(family(nm, None, vt, lv, mode=SPECIAL_MODE[bl], spreads=spreads, falloffs=falloffs, aa_twin=True))
+                print()
             continue
         order = build_order(bl, d)
         dt = FAMILY_DAMAGE_TYPES.get(nm)
         print(f"###### {nm}: {macro_summary(bl)} ({d}, air={air}) ######")
         print(family(nm, order, vt, lv, spreads=spreads, falloffs=falloffs, **({"damage_types": dt} if dt else {})))
         print()
+        if air:
+            print(f"###### {nm}_AA: AA twin (Range x{AA_RANGE_MULT}) ######")
+            print(family(nm, order, vt, lv, spreads=spreads, falloffs=falloffs, aa_twin=True, **({"damage_types": dt} if dt else {})))
+            print()
     for nm, (parent, psn, pss, lv) in INHERIT_FAMILIES.items():
         if wanted and nm.lower() not in wanted:
             continue
         print(f"###### {nm}: inherits {parent} + PhysicalState {psn} {pss} ######")
         print(emit_inherit_family(nm, parent, psn, pss, lv))
         print()
+        if WEAPONS[parent][2]:  # parent hits air
+            print(f"###### {nm}_AA: AA twin (Range x{AA_RANGE_MULT}) ######")
+            parent_cfg = WEAPONS[parent]
+            order16 = build_order(parent_cfg[0], parent_cfg[1])
+            print(family(nm, order16, valid_targets(parent_cfg[2]), lv, profile_family=parent,
+                        aa_twin=True, **({"damage_types": FAMILY_DAMAGE_TYPES.get(nm)} if FAMILY_DAMAGE_TYPES.get(nm) else {})))
+            print()
     for nm, (parents, states, lv) in BLEND_FAMILIES.items():
         if wanted and nm.lower() not in wanted:
             continue
@@ -2277,6 +2307,12 @@ def _generate():
                      spreads=bspreads, falloffs=bfalloffs,
                      **({"damage_types": dt} if dt else {})))
         print()
+        if air_share >= 1 / 3:
+            print(f"###### {nm}_AA: AA twin (Range x{AA_RANGE_MULT}) ######")
+            print(family(nm, None, vt, lv, versus_override=blend_versus(parents), physical_states=states,
+                         spreads=bspreads, falloffs=bfalloffs, aa_twin=True,
+                         **({"damage_types": dt} if dt else {})))
+            print()
     if not wanted or "storm" in wanted:
         print("###### Storm: Tesla_Super + Magic + TeslaSuperExtraDamage/5 (Super-anchored, scaled down) ######")
         sphysics = shape_for("Storm")

@@ -37,7 +37,10 @@ def parse_blocks(text):
 
 
 def family_from(name: str) -> str:
-    """'^Warhead_Family_Level:' -> 'Family'."""
+    """'^Warhead_Family_Level:' -> 'Family'.
+    Also handles AA twins: '^Warhead_Family_Level_AA' -> 'Family'."""
+    if name.endswith("_AA"):
+        name = name[:-3]  # strip the _AA twin suffix before extracting the family
     parts = name.split("_")
     return "_".join(parts[1:-1]) if len(parts) >= 3 else name
 
