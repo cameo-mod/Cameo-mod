@@ -1,3 +1,39 @@
+﻿## Devin-Ember - LANE-1 W24 collapse batches 1-3: 19 weapons to single-main (2026-09-07, midday)
+
+**Identity:** Devin-Ember (Devin CLI, SWE-1.7 Max), LANE-1 per .agent-id / CLAIMS.
+Branch `devin/ember/w24-lane1` (commits `62fbc0339`/`10dca3861`/`6cec3798e`).
+
+Collapsed 19 TiberianSun/Consortium broadcast weapons to one main each per
+`collapse_target.py` targets + `plan_warhead_collapse.py` family picks.
+Mechanics used: same-block inherit+node drops, `-Warhead@X:` cancellations of
+parent-inherited mains (TSHellfireSonic, TSZoneHellfireSonic, SteelMegaSword_elite),
+and one forced chain collapse (SteelStalkerRailgun_EMP/_elite/EScatter share an
+untyped `Warhead@Quantum_HeavyFlatCompatibility` node - removing the parent's
+`@roleflat` orphans all descendants, so all three went to Tesla).
+
+New traps for the fleet:
+- The planner's NAME heuristic fires on name substrings even when the family is
+  absent from the resolved mains (TSBoatcannon 'cannon'->CannonHE vs Concussion+
+  Demolition; TSSonicZapWeapon 'sonic'->Sonic vs Tesla+Magic; three Consortium
+  cases). Gate NAME rows by "family must appear in resolved mains".
+- `Inherits@roleflat` overrides down a chain mean removing it reverts to the
+  grandparent's flat template - check for an existing `-Warhead@` cancel.
+- `audit_release_drift` reads raw `Damage`, not `PercentageScale`-adjusted
+  runtime: a shrapnel child at 16.67% scale looked 6.05x shipped until its flat
+  `Damage` was set to the tool's 30000 target.
+
+Skipped (ruling-blocked, detailed in fleet report
+`ember_2026-09-07_lane1_batch1.md`): shotgun trio (same-block -Warhead@
+self-cancel), SteelAirTurret chain (NONE-confidence elite), TSScoopDualChem
+(ambiguous chem-vs-chem), 5 planner NAME-misfires, TSCABALObeliskLaserFire
+(deliberate 2.68x), CabalAscendedRockets (conditional bonus main), 14
+not-planner-covered weapons.
+
+Gates on branch tip: empty-warhead 0, drift D1 128/133 D2 61/62 D3 27/27
+D4 335/335, weapon_shape W5 377/394, shrapnel 193 clean, boot-gate PASS x3.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
 # Development Log
 
 ## Codex - Complete runtime graph validation (2026-09-07)
@@ -80,6 +116,67 @@ all 67 artifacts semantically without touching live ledgers. Canonical audits
 complete with existing failures and no empty reports. Independent review approved
 the scoped repair. No gameplay values were applied and no game was launched for
 this tools-only commit. Dossier: `docs/audit/ASTRA_REVIEW.md`.
+
+## Devin-DAWN (A4) — LANE-3 batch 1: 10 multi-main collapses (2026-09-07)
+
+**Identity:** Devin-DAWN (Devin CLI, SWE-1.7 Max). Formerly the "second Nova" —
+re-slotted per `Cameo-mod-fleet/AGENTS.md` (`.agent-id` = A4/DAWN/`devin/dawn/`).
+
+Batch 1 of LANE-3 (D2k/StarCraft/Warcraft2/TiberianDawn W24 + drift repair),
+commit `5be0ad305` on `devin/dawn/w24-lane3`:
+
+- 10 weapons collapsed to one resolved main each, survivor `Damage` set to the
+  `collapse_target.py` number: CommandoM16, CommandoSniper,
+  td_gdi_commando_sniper_elite, GDISniperRifle (TD); wc2_dwarf_Rifle,
+  wc2catapultFire, wc2deathknightFire (WC2); ArcherArtilleryShell,
+  ArtilleryShellUpgrade (TD); GoliathMk2MG (SC).
+- Mechanic: delete local `Warhead@CollapseTargetCompatibility1` / `*Compatibility`
+  placeholder blocks, or add `-Warhead@X:` markers where an ancestor still
+  provides the node (verified providers exist — no dangling removals).
+- Gates: `find_empty_warhead` 0; `audit_release_drift` all ratchets hold;
+  `audit_weapon_shape` W5 394→382, nothing rose; boot-gate PASS from the
+  worktree (engine `462fc1fc` copied in for the launch).
+- Deferred: `JimRaynorMachineGun` (planner family Bullet but resolves
+  MissileHE+CannonHE — needs a family swap, not a drop); 12 NONE-confidence
+  weapons listed in the fleet report.
+
+Batch 2 (`5ab072593`): 3 shipped-damage repairs (wc2ogremageRunes_Hit,
+d2k_grenade, D2K_Rocket_Trooper_AGOnly) + 7 collapses (D2K_155mm2, AtreusMG,
+EpigraphMG, HMG_Duelist_upgrade, DuelistTankCannon, BlackHandLaser, BCLaser).
+Drift improved: D1 131(-2), D2 59(-3), D3 23(-4); W5 377(-5). Boot PASS.
+Deferred for ruling: `BikeRockets` split-definition, `AGOnly` AP-vs-HE role
+conflict with `df01cb590`, the `^D2KMissile`/`PhoenixRocket` family-swap
+cluster, and the `D2K_Rocket_Trooper1/2` three-family weapons.
+
+Batch 3 (`334cff6ef`): 10 collapses incl. the two 6-main Lockdowns
+(GhostSniper/SpecterSniper families — parent collapse propagates cancels into
+the children; their local overrides had to be deleted, not `-`'d, or they
+either resurrect untyped (NRE) or dangle (boot crash). `find_empty_warhead`
+caught the same class in `ChemRocketsExplosion`/`GrenadeExplode_EMP`, fixed in
+the same commit.) Drift: D2 60(-2), D5 41(-2); W5 365(-12). Boot PASS under
+Nova's BOOT.lock protocol.
+
+Batch 4 (`22a88fc52`): 8 collapses — Laboratory_Bioball, autogun_tank (its
+child autogun_tank_small collapsed free via inheritance), d2k_air_drone_guns +
+_upgrade, IxianCombatTankCannon, LaserObeliskBurning (SUM 120k, Inferno),
+eye_bomberguy, BCYamatoCannon (SHIPPED 144k). W5 356(-9), D1 130(-1). Boot
+PASS. New deferral: `ordos_airmine` (no Chemical main exists — a conversion,
+not a collapse). Gotcha logged in the fleet report: a weapon can carry TWO
+overrides of the same warhead key in its own block — later wins; dump the full
+resolved block before editing.
+
+Batches 5+6 (`b13f1e413`, `4c5410915`): 28 collapses through the legacy
+`weapons/d2k.yaml` + Ordos pack — mostly `Warhead@1Dam` bespoke-Versus legacy
+channels folded into the family survivor, plus the `^D2KMissile` `1Dam`
+cluster (kept MissileAP; the AA/AG role-law question is flagged for ruling —
+`*_AA` wants MissileAA, `*_AG` wants MissileHE per `audit_missile_role_family`).
+`D2K_Rocket_Fremen` collapsed free via its parent. Found a systemic class:
+25 weapons are defined in BOTH a ContentPack file and a legacy file and the
+merge combines them (`d2k25mm`, `d2kFlameTurret` fixed in both; `mtank_pri`,
+`BikeRockets`, `d2k_tyrant`, ~20 more need a canonical-file ruling — details
+in the fleet report). W5 328(-15), drift flat. Both boot-gates PASS.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 
 ## Codex - PR 328 current-upstream integration and scoped review (2026-09-06)
 

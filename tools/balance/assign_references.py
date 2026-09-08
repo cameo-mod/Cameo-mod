@@ -115,14 +115,28 @@ def has_any_armament(rec):
 
 
 def exempt(actor, rec):
+    """Chassis-only actors need HP and speed alone, so they take a weaker reference test.
+
+    ⛔ AN ARMED ACTOR IS NEVER CHASSIS-ONLY, whatever class it lands in. This guard used to ask the
+    class question first, and `class_membership` files armed transports and the GDI Vulcan under
+    `support` — so `td_gdi_boxer`, `td_gdi_apc`, `ra1_allies_alliedapc` and `ra1_soviets_btr80` were
+    all reported chassis-only while carrying live weapons. The maintainer put it plainly on
+    2026-09-08: *"td_gdi_boxer chassis-only but in fact the referenced vulcan does have a weapon!
+    ... no they are not chassis only! Also review the other APCs as well since all APCs come with
+    weapons!"*
+
+    The weapon is the test, and it comes FIRST. A real support unit — engineer, harvester, MCV —
+    carries no armament at all, so it still falls through to the class and word rules below.
+    `has_any_armament` rather than `is_armed` for the same reason it is used everywhere else: a
+    guard that is wrong in the RESTRICTIVE direction deletes correct candidates.
+    """
+    if has_any_armament(rec):
+        return None
     if cm.classify(rec.get("design") or {})[0] in EXEMPT_CLASSES:
         return "support-class"
     tail = actor.split("_")[-1]
     for word in EXEMPT_WORDS:
         if word in tail:
-            # the APC carve-out: a carrier that shoots is not exempt
-            if word in ("transport", "carryall", "chinook", "dropship", "hovercraft") and is_armed(rec):
-                return None
             return f"role-identical ({word})"
     return None
 
@@ -313,6 +327,15 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, pee
     rather than silently satisfied. It sits in the tuple as a constant so the cascade's SHAPE stays
     honest and the step can be filled the day the data exists.
     """
+    # HERO-TO-HERO ONLY (maintainer ruling, 2026-09-07). Heroes and epics are balanced
+    # separately, so a hero may ONLY match a hero and a non-hero may ONLY match a
+    # non-hero. Without this, the 3,000,000 HP epic would match a normal vehicle on
+    # shape alone and a normal unit would claim a hero's peer. The flag is carried
+    # on the row, never a drop.
+    cam_hero = cam.get("hero", False)
+    peer_hero = peer.get("hero", False)
+    if cam_hero != peer_hero:
+        return None
     if cam["type"] != peer["type"]:
         return None                                   # cross-type is refused (§9 cross-type ruling)
     # ⛔ CLAUSE 5, AND *MISSING* DAMAGE COUNTS AS UNARMED. The old guard read
@@ -391,6 +414,18 @@ def assign(only_class=None, routing=True):
     behaviour the maintainer rejected; do not generate a review sheet with it.
     """
     peers, cameo = rd.peer_rows(), rd.cameo_rows()
+    # HERO LANE (maintainer, 2026-09-07). Heroes stay OUT of distributions (peer_rows()
+    # and cameo_rows() still exclude them), but the ASSIGNMENT may see them so a Cameo
+    # hero matches a peer hero. The hero-to-hero-only rule in score() prevents a hero
+    # from matching a non-hero and vice versa. 83 Cameo heroes + 424 peer heroes in scope.
+    #
+    # ⛔ TWO-PASS DESIGN. The hero lane runs as a SEPARATE pass after the non-hero
+    # assignment is complete. Mixing hero and non-hero rows in the same greedy pool
+    # changed 9 non-hero mappings (the hero cameos shifted the sort order and stole
+    # peers from non-hero cameos). The two-pass approach guarantees "no non-hero
+    # mapping changes at all" — the acceptance criterion from FLEET_ORDERS_2026-09-08.
+    hero_peers = rd.peer_hero_rows()
+    hero_cameo = rd.cameo_hero_rows()
     # The id-suffix claim (R15 in its second form) stays INACTIVE until the corpus is
     # registered, so it can never fire on a source whose ids nobody has enumerated.
     fr.register_source_ids(peers)
@@ -485,6 +520,11 @@ def assign(only_class=None, routing=True):
     # than another heuristic competing with the others.
     originals = original_actors(scope, by_source, routed_pool, routing)
     assign.originals = originals
+
+    # ⛔ HERO PEERS DO NOT JOIN THE NON-HERO GREEDY. The two-pass design runs the
+    # hero lane separately after this function returns, so hero peers never enter
+    # `by_source` or `routed_pool` here. This is the guarantee that no non-hero
+    # mapping changes when the hero lane is enabled.
 
     result = collections.defaultdict(dict)
     for source, plist in sorted(by_source.items()):
@@ -586,6 +626,118 @@ def assign(only_class=None, routing=True):
     result = apply_overrides(result, by_source, routed_pool, routing)
     result, shape_only = drop_unbacked_shape(result)
     assign.shape_only = shape_only
+
+    # ── HERO PASS (maintainer ruling 2026-09-07) ──────────────────────────────
+    # A separate greedy for hero/epic cameos against hero/epic peers only. This
+    # runs AFTER the non-hero assignment is complete, so it cannot change any
+    # non-hero mapping. The hero-to-hero-only rule in score() prevents a hero
+    # from matching a non-hero and vice versa, and this pass only sees heroes
+    # on both sides, so every match is hero-to-hero by construction.
+    if hero_cameo and hero_peers:
+        hero_led = {c["id"]: led[c["id"]] for c in hero_cameo if c["id"] in led}
+        hero_scope = [c for c in hero_cameo if c["id"] in hero_led
+                      and (not only_class or cm.classify(hero_led[c["id"]].get("design") or {})[0] == only_class)]
+        # Skip exempted hero cameos (same exempt() as non-hero pass)
+        hero_scope = [c for c in hero_scope if not exempt(c["id"], hero_led[c["id"]])]
+        # Route hero cameos
+        if routing:
+            hero_scope = [c for c in hero_scope
+                          if fr.faction_of(c["id"]) and fr.routes_for(fr.faction_of(c["id"]))]
+        # Build hero peer pool
+        hero_by_source = collections.defaultdict(list)
+        for p in hero_peers:
+            hero_by_source[p["source"]].append(p)
+        hero_routed_pool = {}
+        if routing:
+            for fac in {fr.faction_of(c["id"]) for c in hero_scope}:
+                for src, _toks in fr.routes_for(fac):
+                    hero_routed_pool[(fac, src)] = [p for p in hero_by_source.get(src, ())
+                                                    if fr.allows(fac, p)]
+        # Hero shape vectors
+        hero_pools = collections.defaultdict(list)
+        for p in hero_peers:
+            for f in SHAPE_FIELDS:
+                if p.get(f):
+                    hero_pools[(p["source"], p["type"], f)].append(p[f])
+        for c in hero_scope:
+            for f in SHAPE_FIELDS:
+                if c.get(f):
+                    hero_pools[("Cameo", c["type"], f)].append(c[f])
+        hero_cam_shapes = {c["id"]: shape_vector(c, hero_pools, "Cameo") for c in hero_scope}
+        hero_peer_shapes = {id(p): shape_vector(p, hero_pools, p["source"]) for p in hero_peers}
+        # Hero costs
+        hero_cam_costs = collections.defaultdict(list)
+        for c in hero_scope:
+            v = (hero_led[c["id"]].get("cost") or {})
+            v = v.get("v") if isinstance(v, dict) else v
+            try:
+                hero_cam_costs[c["type"]].append(float(v))
+            except (TypeError, ValueError):
+                pass
+        hero_peer_costs = collections.defaultdict(list)
+        for p in hero_peers:
+            if p.get("cost"):
+                hero_peer_costs[(p["source"], p["type"])].append(p["cost"])
+        # Hero greedy
+        for source, plist in sorted(hero_by_source.items()):
+            cands = []
+            for c in hero_scope:
+                rec = hero_led[c["id"]]
+                raw = (rec.get("cost") or {})
+                raw = raw.get("v") if isinstance(raw, dict) else raw
+                try:
+                    ccost = float(raw)
+                except (TypeError, ValueError):
+                    ccost = None
+                cpct = pct_rank(ccost, hero_cam_costs.get(c["type"], []))
+                home = source in eu.HOME.get(eu.family_of(c["id"]) or "", [])
+                visible = (hero_routed_pool.get((fr.faction_of(c["id"]), source), ()) if routing
+                           else plist)
+                for p in visible:
+                    s = score(c, rec, p, cpct,
+                              pct_rank(p.get("cost"), hero_peer_costs.get((source, p["type"]), [])), home,
+                              hero_cam_shapes.get(c["id"]), hero_peer_shapes.get(id(p)))
+                    if s:
+                        cands.append((s, c["id"], p))
+            cands.sort(key=lambda t: (t[0], t[1]), reverse=True)
+            used_cam, used_peer = set(), set()
+            for s, cid, p in cands:
+                key = (fr.faction_of(cid), p["source"], syn.norm(p.get("name", "")), p.get("id", ""))
+                if cid in used_cam or key in used_peer:
+                    continue
+                used_cam.add(cid)
+                used_peer.add(key)
+                bucket, role_score = s[0], s[4]
+                if bucket >= 3 or (bucket >= 1 and role_score >= 0.75):
+                    conf = "STRONG"
+                elif bucket >= 1:
+                    conf = "FAIR"
+                elif role_score >= 0.75:
+                    conf = "SHAPE"
+                else:
+                    conf = "WEAK"
+                if bucket >= 1 or role_score >= 0.75:
+                    result.setdefault(cid, {})[source] = {"name": p.get("name"), "id": p.get("id"), "score": s,
+                                           "hp": p.get("hp"), "cost": p.get("cost"),
+                                           "home": bool(s[2]), "raw_name": s[6], "confidence": conf}
+        assign.hero_count = sum(1 for k in result if any(c.get("hero") for c in hero_cameo if c["id"] == k))
+
+    # ⛔ THE HERO PASS RUNS AFTER `apply_overrides` AND `drop_unbacked_shape`, so on its own it
+    # bypasses BOTH. Measured when the lane first landed: 12 SHAPE rows came back into a map that
+    # had been 100% name-backed for a day, and the maintainer's own overrides for DTA's `A10` and
+    # `XO` could not resolve because the hero rows were absent from the override index. Both rules
+    # are re-applied here over the combined pool. A rule that the last pass in a pipeline skips is
+    # not a rule.
+    hero_by_source = collections.defaultdict(list)
+    for p in (hero_peers or ()):
+        hero_by_source[p["source"]].append(p)
+    combined = collections.defaultdict(list)
+    for src, rows_ in list(by_source.items()) + list(hero_by_source.items()):
+        combined[src].extend(rows_)
+    result = apply_overrides(result, combined, routed_pool, routing)
+    result, hero_dropped = drop_unbacked_shape(result)
+    assign.shape_only = {**getattr(assign, "shape_only", {}), **hero_dropped}
+
     return result, skipped, len(scope)
 
 
@@ -650,6 +802,65 @@ REFERENCE_OVERRIDES = {
     # uses, so id agreement gives it to the Allied gun and frees `CRAM` for GDI's Skyshield.
     ("td_gdi_skyshield", "Combined Arms"): "CRAM",
     ("ra1_allies_alliedaagun", "Combined Arms"): "AGUN",
+
+    # ── Maintainer review round FOUR, 2026-09-08. Every id below was verified present in the
+    # routed pool before it was written here; `apply_overrides` now WARNS on one that is not,
+    # because a typo used to vanish silently and read as "the matcher chose badly".
+    #
+    # Regressions first — mappings that existed and were lost:
+    ("td_gdi_rocketsoldier", "DTA Enhanced"): "E3",        # DTA calls it "Bazooka"; no shared word
+    ("td_nod_rocketsoldier", "DTA Enhanced"): "E3N",       # the Nod-side row of the same pair
+    ("td_nod_apacheattackhelicopter", "OpenRA Tiberian Dawn"): "HELI",   # named "Apache Longbow"
+    ("ra1_soviets_actordogname", "Combined Arms"): "DOG",
+    ("ra1_soviets_actordogname", "OpenRA Red Alert"): "DOG",
+    ("ra1_soviets_actordogname", "DTA Enhanced"): "DOG",
+    # Tiberian Dawn:
+    ("td_gdi_archerartillery", "DTA Enhanced"): "DISCARTY",   # "Disc Launcher", GDI
+    ("td_gdi_archerartillery", "Combined Arms"): "THWK",      # Tomahawk Launcher
+    ("td_gdi_exosuit", "Combined Arms"): "XO",                # X-O Powersuit
+    ("td_gdi_predatortank", "Combined Arms"): "MTNK.Laser",   # the GDI Battle Tank replacement
+    ("td_gdi_firehawk", "Combined Arms"): "AURO",             # Aurora; A10 joins via FAMILY_EXTRA
+    ("td_nod_venom", "Combined Arms"): "VENM",
+    # Red Alert, Allies:
+    ("ra1_allies_rapierjumpjet", "Combined Arms"): "BEAG",    # Black Eagle — NOT the Blackhawk
+    ("ra1_allies_alliedapc", "Combined Arms"): "APC",         # the Allied APC, not GDI's APC2
+    ("ra1_allies_alliedapc", "DTA Enhanced"): "RAAPC",        # DTA prefixes RA-era actors with RA
+    ("ra1_allies_alliedapc", "OpenRA Red Alert"): "APC",
+    ("ra1_allies_reconranger", "Combined Arms"): "PBUL",      # Pitbull — a jeep that shoots rockets
+    ("ra1_allies_sheridanassaulttank", "Combined Arms"): "RTNK",   # Mirage Tank
+    # ⛔ NOT ("ra1_allies_alliedtigerheavytank", "Combined Arms"): "2TNK".
+    # The maintainer asked which other 2TNK variants CA ships. The answer is NONE — there is
+    # exactly one `2TNK`, and it is the Allied MEDIUM tank. Binding it to the Tiger took the
+    # medium tank's own reference, which then took `1TNK` from the light tank, and BOTH fell out
+    # of O1 while `1TNK` ended up assigned to nobody. One override, three units worse off.
+    # The Tiger is a Cameo expansion with no CA counterpart, so it gets none: an empty slot is a
+    # question, a stolen row is a wrong answer that also breaks two correct mappings.
+    ("ra1_allies_bastionartillerybunker", "Combined Arms"): "HTUR",  # Grand Cannon
+    ("ra1_allies_alliedheavyaatank", "DTA Enhanced"): "SHILKA",      # Quad Tank
+    # Red Alert, Soviets:
+    # ⚠ CA ships TWO rows named "SAM Site" with identical faction lists — `NSAM` (Nod's) and `SAM`
+    # (the Soviet one). The NAME cannot separate them and the id can, exactly like the AA Gun pair.
+    ("ra1_soviets_sovietsamsite", "Combined Arms"): "SAM",
+    ("td_nod_samsite", "Combined Arms"): "NSAM",
+    ("ra1_soviets_zapper", "Combined Arms"): "TTRP",         # Tesla Trooper
+    ("ra1_soviets_btr80", "Combined Arms"): "BTR",           # see the note below on flaktruck
+    ("ra1_soviets_gatlingtank", "Combined Arms"): "BTR.YURI",   # the Gattling BTR
+    ("ra1_soviets_gorynychtank", "Combined Arms"): "HFTK",      # Heavy Flame Tank
+    ("ra1_soviets_hammertank", "Combined Arms"): "3TNK.RHINO",  # Rhino, not a flame tank
+    ("ra1_soviets_nuclearv2launcher", "Combined Arms"): "NUKC", # Nuke Cannon
+    ("ra1_soviets_hiptransport", "Combined Arms"): "HALO",
+    ("ra1_soviets_su57attackbomber", "Combined Arms"): "SUK",   # Sukhoi Attack Plane
+
+    # ── Round five, 2026-09-08. The maintainer named five rows I had reported as non-existent.
+    # They all existed; they were invisible because the pool dropped every build-limited row.
+    # `A10` is capped at 3 and `XO` at 1 — a cap is not a one-off, and only the second is a hero.
+    ("td_gdi_firehawk", "DTA Enhanced"): "A10",       # A-10 Warthog, GDI, BuildLimit 3
+    ("td_gdi_exosuit", "DTA Enhanced"): "XO",         # X-O Power Suit, GDI, BuildLimit 1
+    ("td_gdi_empgrenadier", "DTA Enhanced"): "GRENL", # "Grenade Launcher", GDI
+    ("td_nod_buggymkii", "DTA Enhanced"): "RAIDER",   # "Heavy Raider", Nod
+    # MFLAK frees SHILKA for the Soviet gatling tank, so both get a real row and the
+    # one-row-one-actor rule holds. The maintainer named this one; it is not a workaround.
+    ("ra1_allies_alliedheavyaatank", "DTA Enhanced"): "MFLAK",   # "Anti-Aircraft Truck", Allies
 }
 
 
@@ -659,9 +870,16 @@ def apply_overrides(result, by_source, routed_pool, routing):
     for src, plist in by_source.items():
         for p in plist:
             index[(src, (p.get("id") or "").upper())] = p
+    apply_overrides.missing = missing = []
     for (cid, src), pid in REFERENCE_OVERRIDES.items():
         p = index.get((src, pid.upper()))
         if p is None:
+            # ⛔ NEVER SILENT. A maintainer-ruled pairing whose peer id is absent from the routed
+            # pool used to `continue` without a word, so a typo — or a row the routing refuses —
+            # looked exactly like the matcher having chosen badly. Every override in the table was
+            # verified present when written; if one stops resolving, that is a finding about the
+            # POOL and it has to surface.
+            missing.append((cid, src, pid))
             continue
         for other, srcs in result.items():
             d = srcs.get(src)
@@ -925,6 +1143,8 @@ def main():
         n = sum(1 for v in result.values()
                 if sum(1 for m in v.values() if m["confidence"] in tiers) >= 2)
         print(f"⭐ actors with >=2 {label} references: {n}")
+    for cid, src, pid in getattr(apply_overrides, "missing", ()):
+        print(f"⛔ OVERRIDE UNRESOLVED  {cid:38s} {src:24s} {pid}  — not in the routed pool")
 
     if args.cls:
         print(f"\n── {args.cls} — every member and its one reference per source ──")

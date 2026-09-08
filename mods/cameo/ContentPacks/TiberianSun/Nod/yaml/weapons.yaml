@@ -60,7 +60,6 @@ TSRaiderGrenade:
 TSProton:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
-	Inherits@collapseground: ^Compatibility_ProtonLaser_GroundSlice
 	-TargetActorCenter:
 	Inherits: ^TSEnergyBlast
 	Inherits@2: ^MediumFlameWeapon
@@ -100,7 +99,7 @@ TSProton:
 	-Warhead@LaserExtraDamage:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 29000
+		Damage: 60000
 		PercentageScale: 0
 
 TSTibBazooka:
@@ -112,6 +111,7 @@ TSTibBazooka:
 	Range: 6694
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		TrailImage: spittrail
 	Warhead@MissileChem_Light:
 		Damage: 30000
@@ -147,6 +147,7 @@ TSStankTusk:
 	ReloadDelay: 60
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 	Warhead@MissileHE_Medium:
@@ -173,6 +174,7 @@ TSSBoatTusk:
 	ReloadDelay: 60
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 	Warhead@MissileHE_Medium:
@@ -202,6 +204,7 @@ TSStankTibTusk:
 	ReloadDelay: 60
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
@@ -248,7 +251,7 @@ TSNODRedEye:
 	Projectile: Missile
 		Speed: 500
 		HorizontalRateOfTurn: 25
-		VerticalRateOfTurn: 25
+		VerticalRateOfTurn: 12
 		MinimumLaunchAngle: 75
 		Acceleration: 5
 		AllowSnapping: true
@@ -263,6 +266,7 @@ TSNODRedEye:
 TSNODTibRedEye:
 	Inherits: TSNODRedEye
 	Projectile: Missile
+		VerticalRateOfTurn: 12
 		TrailImage: spittrail
 	Warhead@MissileAP_Heavy:
 		Damage: 18000

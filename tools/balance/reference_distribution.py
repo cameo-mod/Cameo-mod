@@ -617,6 +617,175 @@ def cameo_weapon_ladders(weapon_name):
     return {k: sum(v) / len(v) / 100.0 for k, v in hits.items() if v}
 
 
+AA_SLOT = re.compile(r"(^|[@_.])aa($|[0-9_.])", re.I)
+
+
+def is_anti_air_armament(arm):
+    """An `@AA` armament engages a different DOMAIN and must not be summed with the ground gun.
+
+    ⛔ FOUND ON `ra1_soviets_btr80` (maintainer, 2026-09-08). Its two unconditional armaments are
+    `Armament` (ground) and `Armament@AA`, each 4,000 x burst 4 = 16,000, and summing them reported
+    32,000 for a transport whose ground gun delivers 16,000. They can never fire at the same
+    target: one shoots aircraft, the other cannot.
+
+    ⭐ THIS IS NOT A NEW RULE, it is one DESIGN.md already made. The `anti_air_vehicle` anchor
+    reads: "Dedicated AA; keeps a SEPARATE FREE air weapon (+50% range/+100% dmg) priced only on
+    the ground weapon." Pricing on the ground weapon is the ruling; this makes the measurement obey
+    it. 63 of 2,245 priced armaments are affected.
+
+    ⛔ AND THE TEST MUST READ THE WEAPON, NOT ONLY THE SLOT. The first version matched the slot
+    alone and missed `td_gdi_apc`, whose AA gun sits in a slot called `Armament@SECONDARY` while
+    the WEAPON is `APCGun_AA` — range 8,502 against the primary's 5,668, which is 1.500 exactly.
+    The maintainer spotted it immediately: *"I'm pretty sure they have Anti Air and also the +50%
+    range against air right?"* They do. Matching the slot name alone is the same name-blocklist
+    mistake this file warns about elsewhere; `_AA` on the weapon is the normalised convention here.
+
+    ⚠ A unit whose armaments are ALL anti-air keeps them — that is its weapon, not a bonus. Exactly
+    one actor is in that state today (`tkm_quadturretbunker`), and a dedicated AA unit reporting
+    zero DPS would be the same class of error this whole sequence has been about.
+    """
+    return bool(AA_SLOT.search(str(arm.get("slot") or ""))
+                or AA_SLOT.search(str(arm.get("weapon") or "")))
+
+
+def burst_cycle(arm, anum):
+    """Ticks between the START of one burst and the next: ReloadDelay + (Burst-1) x BurstDelay.
+
+    ⛔ `BurstDelay` WAS HARDCODED TO 5 AND THE LEDGER CARRIES IT. Measured 2026-09-08 after the
+    maintainer said the Sheridan number "has to do with our burst values": 1,017 priced armaments
+    declare a burst, and their `burstdelays` are 3 (256 of them), 2 (172), 4 (160), 5 (78), 1 (62),
+    0 (55), 8 (36)... so the hardcoded 5 was right for 78 weapons and wrong for the rest. A burst
+    of 4 at delay 2 finishes in 6 ticks, not 15, and the DPS was understated by the difference.
+
+    DESIGN.md's burst rule is the authority: "sheet ReloadDelay = weapon ReloadDelay + (bursts - 1)
+    x BurstDelay". OpenRA cycles through several delays when several are given, so their mean is
+    the honest single number.
+    """
+    rel = anum(arm.get("reloaddelay")) or 0
+    burst = anum(arm.get("burst")) or 1
+    if burst <= 1:
+        return rel or None
+    raw = str(arm.get("burstdelays") or "").replace(",", " ").split()
+    delays = [d for d in (anum(x) for x in raw) if d is not None]
+    delay = (sum(delays) / len(delays)) if delays else 5.0   # OpenRA's own default
+    return rel + (burst - 1) * delay
+
+
+def is_upgrade_gated(arm):
+    """True when this armament only fires once an UPGRADE or rank is granted.
+
+    The ledger records the armament's condition in `requires`, and it has three shapes:
+      None            always active
+      `!upgrade_x`    active only WITHOUT the upgrade -- this IS the baseline form
+      `upgrade_x`     active only WITH it -- an upgraded form, and not what we price
+
+    A compound is gated unless every clause is a negation.
+    """
+    req = str(arm.get("requires") or "").strip()
+    if not req:
+        return False
+    parts = [p for p in req.replace("&", " ").replace(",", " ").replace("|", " ").split() if p]
+    return any(not p.startswith("!") for p in parts)
+
+
+def baseline_armaments(arms):
+    """The armaments a unit fires AT ONCE with no upgrades and no rank.
+
+    ⛔ `max()` WAS WRONG AND THE MAINTAINER CAUGHT IT (2026-09-08): *"What if there are two weapons
+    that are fired at the same time? Like the GDI battle tank with cannon + rocket or the Sheridan
+    that even has 3 parallel weapons all active at the same time!"* Measured on exactly those:
+
+        td_gdi_battletank             cannon 8000 (!highvelocitycannons)
+                                    + missiles 8000 (!advancedmissiletargeting)   = 16000, max gave 8000
+        ra1_allies_sheridanassaulttank  16000 + 16000 + 4000, all `!cryomissiles`  = 36000, max gave 16000
+
+    So simultaneous armaments SUM. What must never be summed is the alternatives: an upgraded
+    barrel, an elite rank, or `ra2_allies_ifv`'s 39 passenger weapons, which are mutually exclusive
+    at runtime. `requires` separates the two exactly, and the baseline set is also the right
+    comparison for the references, which record un-upgraded weapons.
+    """
+    live = [a for a in arms if not is_upgrade_gated(a)]
+    ground = [a for a in live if not is_anti_air_armament(a)]
+    if ground:
+        return ground            # price on the ground weapon (DESIGN, anti_air_vehicle anchor)
+    if live:
+        return live              # a dedicated AA unit keeps its only weapon
+    # ⛔ EVERY ARMAMENT IS CONDITIONAL — so fall back to the STRONGEST ONE, never to the sum.
+    # `ra2_soviets_siegechopper` is the case: it has no unconditional armament at all, because
+    # each is gated on a MODE and a doctrine and a rank at once
+    # (`!rank-elite && !doctrine_nuclearmunitions && ... && deployed`). Returning the whole set
+    # summed 10 mutually-exclusive barrels into 986,818 damage for a unit that fires one. A
+    # fallback that is too PERMISSIVE is as wrong as a guard that is too restrictive; when the
+    # data cannot say which armament is live, the honest answer is the single best one.
+    return [max(arms, key=_armament_damage)]
+
+
+def armament_profile(arms, anum):
+    """(w_range, w_damage, w_burst, w_reload, w_dps, debt, primary) over the BASELINE set."""
+    live = baseline_armaments(arms)
+    dps_total, dmg_total, debt = 0.0, 0.0, False
+    for a in live:
+        mains = [wh for wh in (a.get("damage_warheads") or [])
+                 if (anum(wh.get("damage")) or 0) > 0]
+        if len(mains) > 1:
+            debt = True          # §0a structure debt: `K` moves under W24
+        # ⛔ DAMAGE IS PER SHOT; A BURST FIRES SEVERAL. DESIGN.md's burst rule is explicit —
+        # "sheet Damage = single-burst damage x bursts" — and this used to apply the burst to the
+        # DPS but not to the damage column, so a 4-shot machine gun reported a quarter of what it
+        # delivers. The Sheridan read 36,000 (16,000 + 16,000 + 4,000) when its MG alone puts out
+        # 4,000 x 4.
+        dmg = sum(anum(wh.get("damage")) or 0 for wh in mains)
+        burst = anum(a.get("burst")) or 1
+        cycle = burst_cycle(a, anum)
+        per_cycle = dmg * burst
+        if per_cycle and cycle:
+            dps_total += per_cycle / cycle
+        dmg_total += per_cycle
+    primary = max(live, key=lambda a: sum(anum(wh.get("damage")) or 0
+                                          for wh in (a.get("damage_warheads") or [])
+                                          if (anum(wh.get("damage")) or 0) > 0))
+    ranges = [anum(a.get("range")) for a in live if anum(a.get("range"))]
+    return {"w_range": max(ranges) if ranges else None,
+            "w_damage": dmg_total or None,
+            "w_burst": anum(primary.get("burst")) or 1,
+            "w_reload": anum(primary.get("reloaddelay")),
+            "w_dps": dps_total or None}, debt, primary
+
+
+def _armament_damage(arm):
+    """Total damage over an armament's POSITIVE main warheads."""
+    total = 0.0
+    for wh in (arm.get("damage_warheads") or []):
+        try:
+            d = float(str(wh.get("damage")))
+        except (TypeError, ValueError):
+            continue
+        if d > 0:
+            total += d
+    return total
+
+
+def primary_armament(arms):
+    """The armament that represents this actor's firepower: the HARDEST-HITTING one.
+
+    ⛔ THIS USED TO BE `arms[0]` AND THAT IS YAML ORDER, NOT IMPORTANCE. Found by the maintainer
+    2026-09-08 on `td_nod_lighttankmkii`, whose reported DPS was 0: its first priced armament is
+    `Armament@pointdefense` firing `PDLaserLTNK2` for **1** damage, while the actual gun
+    (`LightTank2Cannon`) and missiles (`LightTank2Missiles`) each deal 8,000. The table was showing
+    a point-defense laser as the tank's weapon.
+
+    Measured across the tree: 822 buildable actors carry a priced armament, **495 of them carry
+    more than one**, and on **86** the first armament deals under half what the best one does. So
+    this was never one unit — it is a sixth of every armed actor reporting the wrong weapon.
+
+    ⚠ MAX, NEVER SUM. `ra2_allies_ifv` has THIRTY-NINE priced armaments — one per passenger type,
+    mutually exclusive at runtime. Summing them would claim 200,000+ damage for a transport that
+    can only ever fire one. The maintainer's own framing is the rule: the conditional armaments
+    exist, but only one of them is the unit's weapon at any moment.
+    """
+    return max(arms, key=_armament_damage)
+
+
 # ⛔⛔ SUPERWEAPONS ARE NEVER PRICED, NEVER RESTATTED, NEVER TOUCHED (maintainer, 2026-09-07):
 #
 #     "exclude super weapons from this balance formula since they are all fixed HP!
@@ -712,21 +881,8 @@ def cameo_rows():
 
                 w, debt = {}, False
                 if arms:
-                    a = arms[0]
-                    mains = [wh for wh in (a.get("damage_warheads") or [])
-                             if (anum(wh.get("damage")) or 0) > 0]
-                    # §0a STRUCTURE DEBT: a weapon still firing 2+ damage mains has a `K` that is
-                    # scheduled to move under W24, so its weapon numbers are not a stable target
-                    # yet. The flag rides along on the signature so a later pricing pass can
-                    # refuse to trust them, rather than silently pricing an input about to change.
-                    debt = len(mains) > 1
-                    dmg = sum(anum(wh.get("damage")) or 0 for wh in mains)
-                    rel = anum(a.get("reloaddelay"))
-                    burst = anum(a.get("burst")) or 1
-                    cycle = (rel or 0) + (burst - 1) * 5
-                    dps = ((dmg * burst) / cycle) if (dmg and cycle) else None
-                    w = {"w_range": anum(a.get("range")), "w_damage": dmg or None,
-                         "w_burst": burst, "w_reload": rel, "w_dps": dps}
+                    w, debt, a = armament_profile(arms, anum)
+                    dps = w["w_dps"]
                     tpl = a.get("versus_templates") or []
                     wname = a.get("weapon") or (tpl[-1] if tpl else None)
                     if dps and wname:
@@ -741,6 +897,227 @@ def cameo_rows():
                 out.append({"source": "Cameo", "id": name, "name": name, "type": row_kind,
                             "hp": hp, "speed": spd, "turn_speed": turn, "cost": val("cost"),
                             "structure_debt": debt,
+                            "turn_ratio": (spd / turn) if (spd and turn) else None, **w})
+    return out
+
+
+def is_one_off(limit):
+    """A HERO is a limit of exactly one. A cap of 2+ is a scarce unit, not a one-off.
+
+    Maintainer's ruling 2026-09-08: build-limited rows all become visible to the assignment,
+    TAGGED — heroes (limit 1) match only Cameo heroes, while a capped unit matches normally.
+    DTA's `A10` A-10 Warthog is capped at 3 and is an ordinary GDI aircraft; its `XO` X-O Power
+    Suit is capped at 1 and is a one-off. Both were invisible before, which is why the maintainer
+    had to point out twice that they exist.
+
+    ⚠ Neither ever enters a pricing DISTRIBUTION — `ini_rows`/`peer_rows` still drop every
+    build-limited row, so the population rule is untouched and the 3,000,000 HP epic cannot
+    distort a ceiling. This flag governs MATCHING only.
+    """
+    try:
+        return limit is not None and float(limit) == 1
+    except (TypeError, ValueError):
+        return False
+
+
+def is_hero_limit(limit):
+    """A one-off is `BuildLimit` PRESENT AND GREATER THAN ZERO. Zero is not a limit.
+
+    ⛔ MEASURED 2026-09-08, and it is the difference between a hero lane and deleting 110 units.
+    125 corpus rows carry `build_limit == 0`: Mental Omega's Flame Tower (400cr), Instant Shelter
+    (500cr) and Deployed Grumble (2000cr), DTA's `RAAGUN_AI`, and Twisted Insurrection's deployed
+    forms. Ordinary buildable units at ordinary prices — `BuildLimit=0` means NO LIMIT in Westwood
+    INI, not "one only".
+
+    A proposed fix read the falsy-zero as a bug and changed `ini_rows`' test to `is not None`,
+    which would have dropped all 110 costed, buildable ones out of every distribution. The truthy
+    test was right. Heroes are `> 0`, and this function is the only place that decides it.
+    """
+    try:
+        return limit is not None and float(limit) > 0
+    except (TypeError, ValueError):
+        return False
+
+
+def peer_hero_rows():
+    """Hero/epic peer rows that peer_rows() drops, with a `hero` flag.
+
+    The population rule excludes heroes from distributions (a 3,000,000 HP epic
+    must never re-enter the vehicle ceiling), but the ASSIGNMENT may see them so
+    a Cameo hero matches a peer hero. This returns the rows peer_rows() drops
+    -- Doc 5 rows with `limit`, INI rows with `build_limit` -- flagged `hero: True`.
+
+    These rows are for assign_references ONLY. Distributions still call
+    peer_rows(), which excludes them. Wiring them into distributions would
+    re-enter the epic into the vehicle ceiling.
+    """
+    rows = []
+    # Doc 5 heroes: rows with `limit` present (peer_rows drops at line 508)
+    source, header = None, None
+    text = (ROOT / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md").read_text(encoding="utf-8")
+    for line in text.splitlines():
+        if line.startswith("## "):
+            source = line[3:].split("(")[0].strip()
+            header = None
+            continue
+        if not source or not line.startswith("|"):
+            continue
+        cells = [c.strip().strip("`") for c in line.split("|")[1:-1]]
+        if not cells:
+            continue
+        if cells[0].lower() == "id":
+            header = [c.lower() for c in cells]
+            continue
+        if not header or len(cells) != len(header) or set("".join(cells)) <= set("-: "):
+            continue
+        d = dict(zip(header, cells))
+        def num(key):
+            v = (d.get(key) or "").replace(",", "")
+            try:
+                return float(v)
+            except ValueError:
+                return None
+        limit = num("limit")
+        if not is_hero_limit(limit):      # ONLY heroes -- the rows peer_rows() drops
+            continue
+        if source in LINEAGE_MEMBERS:
+            continue
+        hp, spd, turn = num("hp"), num("speed"), num("turn")
+        cost = num("cost")
+        wep = {k: num(c) for k, c in (("w_range", "range"), ("w_damage", "dmg"),
+                                      ("w_burst", "burst"), ("w_reload", "reload"),
+                                      ("w_dps", "dps"))}
+        for lad in LADDERS:
+            frac = num(f"vs{lad.lower()}")
+            wep[f"dps_vs_{lad}"] = (wep["w_dps"] * frac) if (wep.get("w_dps") and frac) else None
+        if d.get("type", "").strip().lower() == "building" and wep.get("w_damage"):
+            d["type"] = "defense"
+        rows.append({"source": source, "raw_source": source,
+                     "id": d.get("id", ""), "name": d.get("unit", ""),
+                     "type": d.get("type", "other"),
+                     "faction": d.get("faction", ""),
+                     "turreted": (d.get("turret", "").lower() == "y"),
+                     "hp": hp, "speed": spd, "turn_speed": turn,
+                     "turn_ratio": (spd / turn) if (spd and turn) else None,
+                     "cost": cost, "hero": is_one_off(limit), **wep})
+    # INI heroes: rows with build_limit present (ini_rows drops at line 366)
+    if INI_CORPUS.exists():
+        armor = _ini_armor_index()
+        for line in INI_CORPUS.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            kind = INI_TYPE.get(r.get("type"))
+            if kind is None:
+                continue
+            bl = r.get("build_limit")
+            if not is_hero_limit(bl):       # ONLY heroes -- the rows ini_rows() drops
+                continue
+            if not r.get("cost") or not r.get("buildable", True):
+                continue
+            if r["source"] in LINEAGE_MEMBERS:
+                continue
+            spd, turn = r.get("speed"), r.get("turn_speed")
+            dps = r.get("w_dps")
+            row = {"source": r["source"], "raw_source": r["source"],
+                   "id": r.get("id", ""), "name": r.get("name", ""),
+                   "type": kind,
+                   "faction": r.get("faction", ""),
+                   "turreted": r.get("turreted"),
+                   "hp": r.get("hp"), "speed": spd,
+                   "turn_speed": turn,
+                   "turn_ratio": (spd / turn) if (spd and turn) else None,
+                   "cost": r.get("cost"), "hero": is_one_off(bl),
+                   "w_range": r.get("w_range"), "w_damage": r.get("w_damage"),
+                   "w_burst": r.get("w_burst"), "w_reload": r.get("w_reload"),
+                   "w_dps": dps}
+            vs = armor.get((r["source"], r.get("id"))) or {}
+            for lad in LADDERS:
+                frac = vs.get(lad)
+                row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None
+            rows.append(row)
+    # Apply the same AI-only filter as peer_rows()
+    by_src = collections.defaultdict(set)
+    for r in rows:
+        rid = (r.get("id") or "").strip().upper()
+        if rid:
+            by_src[r["source"]].add(rid)
+    rows = [r for r in rows if not is_ai_only(r, by_src)]
+    return rows
+
+
+def cameo_hero_rows():
+    """Hero/epic Cameo rows that cameo_rows() drops, with a `hero` flag.
+
+    cameo_rows() drops every actor with `build_limit` (line 677) -- the 83 hero/epic
+    combat rows the maintainer ruled are balanced separately. This returns them
+    flagged `hero: True` so assign_references can match hero-to-hero only.
+
+    NO EXCLUDE_CLASSES FILTER: the hero lane is specifically for heroes and epics,
+    which `epic_vehicle` class_anchor marks. cameo_rows() excludes them from the
+    normal population; the hero lane includes them so a Cameo epic can match a
+    peer epic.
+    """
+    out = []
+    for path in sorted((ROOT / "docs/balance").glob("*.json")):
+        if "class_anchors" in path.name:
+            continue
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+        except ValueError:
+            continue
+        for section, units in (doc.get("sections") or {}).items():
+            kind = CAMEO_SECTION_TYPE.get(section)
+            if (kind is None and section != "buildings") or not isinstance(units, dict):
+                continue
+            for name, rec in units.items():
+                if not isinstance(rec, dict):
+                    continue
+                if rec.get("buildable") is not True:
+                    continue
+                if is_superweapon(rec):
+                    continue
+                if not is_hero_limit((rec.get("build_limit") or {}).get("v")
+                                     if isinstance(rec.get("build_limit"), dict)
+                                     else rec.get("build_limit")):   # ONLY heroes
+                    continue
+                def val(field):
+                    slot = rec.get(field)
+                    if isinstance(slot, dict):
+                        slot = slot.get("v")
+                    try:
+                        return float(str(slot))
+                    except (TypeError, ValueError):
+                        return None
+                hp = val("hp")
+                spd = val("speed") or val("speed_air")
+                turn = val("turn_speed") or val("turn_speed_air")
+                if hp is None:
+                    continue
+                arms = [a for a in (rec.get("armaments") or [])
+                        if isinstance(a, dict) and a.get("pricing")]
+                row_kind = kind
+                if row_kind is None:
+                    if not arms:
+                        continue
+                    row_kind = "defense"
+                def anum(v):
+                    try:
+                        return float(str(v))
+                    except (TypeError, ValueError):
+                        return None
+                w, debt = {}, False
+                if arms:
+                    w, debt, a = armament_profile(arms, anum)
+                    dps = w["w_dps"]
+                    tpl = a.get("versus_templates") or []
+                    wname = a.get("weapon") or (tpl[-1] if tpl else None)
+                    if dps and wname:
+                        for lad, frac in cameo_weapon_ladders(wname).items():
+                            w[f"dps_vs_{lad}"] = dps * frac
+                out.append({"source": "Cameo", "id": name, "name": name, "type": row_kind,
+                            "hp": hp, "speed": spd, "turn_speed": turn, "cost": val("cost"),
+                            "structure_debt": debt, "hero": True,
                             "turn_ratio": (spd / turn) if (spd and turn) else None, **w})
     return out
 
