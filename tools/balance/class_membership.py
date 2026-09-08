@@ -90,6 +90,9 @@ SUBTYPE_TO_CLASS: dict[str, str] = {
     # members by inheriting `^ArmedTroopTransportTemplate`, not by being listed anywhere.
     # The maintainer asked for exactly this ("maybe they need a new TroopTransport Template?").
     "armedtrooptransport": "armed_troop_transport",
+    # mobile_bunker: the open-topped carrier class (ruling 2026-09-08) — buildable ground
+    # vehicles whose passengers fire out. Subtype from `^MobileBunkerTemplate`.
+    "mobilebunker": "mobile_bunker",
 
     # --- infantry -----------------------------------------------------------------------------
     "scoutinfantry": "scout",

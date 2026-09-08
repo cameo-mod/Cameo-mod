@@ -109,6 +109,7 @@ asianalliance_quasar:
 asianalliance_dragonfly:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@cargo: ^CargoVehicle
@@ -896,6 +897,7 @@ asianalliance_heavyrailguntank:
 
 asianalliance_warturtle:
 	Inherits: ^Tank
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle

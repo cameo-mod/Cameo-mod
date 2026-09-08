@@ -616,6 +616,7 @@ ra2_allies_heavymiragetank:
 
 ra2_allies_battlefortress:
 	Inherits: ^Tank
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2

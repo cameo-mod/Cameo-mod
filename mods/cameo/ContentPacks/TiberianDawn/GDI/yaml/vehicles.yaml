@@ -29,6 +29,7 @@ td_gdi_tiberiumharvester:
 
 td_gdi_apc:
 	Inherits: ^Tank
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -525,6 +526,7 @@ td_gdi_archerartillery:
 
 td_gdi_assaultapc:
 	Inherits: ^Tank
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

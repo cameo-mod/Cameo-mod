@@ -73,6 +73,7 @@ ts_nod_tiberiumharvester:
 
 ts_nod_subterraneanapc:
 	Inherits: ^Tank
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@botmicro: ^BotAutoDeployTransport
 	Inherits@EXPERIENCE: ^GainsExperienceTD

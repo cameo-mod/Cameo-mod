@@ -104,6 +104,7 @@ ts_gdi_pitbull:
 
 ts_gdi_amphibiousapc:
 	Inherits: ^Tank
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@botmicro: ^BotAutoDeployTransport
 	Inherits@EXPERIENCE: ^GainsExperienceTD

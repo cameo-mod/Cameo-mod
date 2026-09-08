@@ -382,6 +382,7 @@ ra2_soviets_migbomber:
 
 ra2_soviets_transportkirov:
 	Inherits: ^Helicopter
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
 	Inherits@EXPERIENCE: ^GainsExperienceRA2

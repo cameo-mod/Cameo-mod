@@ -1350,6 +1350,7 @@ steelconsortium_hammerheadartillerytank:
 
 steelconsortium_poseidontank:
 	Inherits: ^Tank
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2

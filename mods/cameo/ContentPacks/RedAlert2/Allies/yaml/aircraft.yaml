@@ -183,6 +183,7 @@ ra2_allies_blackeagle:
 
 ra2_allies_nighthawk:
 	Inherits: ^Helicopter
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
 	Inherits@EXPERIENCE: ^GainsExperienceRA2

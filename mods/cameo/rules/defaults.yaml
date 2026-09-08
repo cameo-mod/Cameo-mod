@@ -1614,6 +1614,39 @@
 	TooltipExtras@Support:
 		Description: Support Vehicle
 
+^ArmedTroopTransportTemplate:
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@EXT: ^ExternalConditions
+	Inherits@VehicleBuffs: ^VehicleBuffs
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 5000
+	Buildable:
+		Description: Armed troop transport.\n  Carries infantry and fights on the way
+		BuildPaletteOrder: 40
+		BuildDurationModifier: 50
+		IconPalette: cameo
+	TooltipExtras@Transport:
+		Description: Armed Troop Transport
+
+^MobileBunkerTemplate:
+	Inherits: ^OpenToppedVehicle
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@EXT: ^ExternalConditions
+	Inherits@VehicleBuffs: ^VehicleBuffs
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6000
+	Buildable:
+		Description: Mobile bunker.\n  Passengers fire from inside
+		BuildPaletteOrder: 40
+		BuildDurationModifier: 50
+		IconPalette: cameo
+	TooltipExtras@Bunker:
+		Description: Mobile Bunker
+
 ^HarvesterTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceVehicle
 	Inherits@EXT: ^ExternalConditions

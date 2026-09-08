@@ -1187,6 +1187,7 @@ ra1_soviets_flaktruck:
 
 ra1_soviets_btr80:
 	Inherits: ^Tank
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

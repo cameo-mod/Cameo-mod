@@ -332,6 +332,7 @@ atreides_apc:
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Buildable:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport

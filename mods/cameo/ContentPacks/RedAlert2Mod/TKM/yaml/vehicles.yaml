@@ -1103,6 +1103,7 @@ tkm_t30:
 		PlayerPalette: player_rgba
 tkm_battlebus:
 	Inherits: ^Tank
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle
@@ -1440,6 +1441,7 @@ tkm_flakbus:
 		PlayerPalette: player_rgba
 tkm_bigshiee:
 	Inherits: ^Tank
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXPERIENCE: ^GainsExperienceRA2

@@ -59,6 +59,7 @@ forgotten_tiberiumharvester:
 
 forgotten_scarabapc:
 	Inherits: ^Tank
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@botmicro: ^BotAutoDeployTransport
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -818,6 +819,7 @@ forgotten_tankkiller:
 
 forgotten_thumperbus:
 	Inherits: ^Tank
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^ForgottenRankDecoration
@@ -902,6 +904,7 @@ forgotten_nomadbarracks:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@ra1_soviets_sovietbarracks: ^IsBarrack
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@cargo: ^OpenToppedVehicle
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
@@ -1116,6 +1119,7 @@ forgotten_m113adats:
 
 forgotten_apctruck:
 	Inherits: ^Tank
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@botmicro: ^BotAutoDeployTransport
 	Inherits@EXPERIENCE: ^GainsExperienceTD

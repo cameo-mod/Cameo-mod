@@ -1,6 +1,7 @@
-﻿ordos_apc:
+ordos_apc:
 	Inherits: ^D2KTank
 	Inherits@HoverDrive: ^Ordos_HoverDrive
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration

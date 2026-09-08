@@ -820,6 +820,7 @@ ra1_allies_chronotank:
 
 ra1_allies_phasetransport:
 	Inherits: ^Vehicle
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

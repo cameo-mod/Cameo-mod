@@ -626,6 +626,7 @@ latinsyndicate_diablo:
 
 latinsyndicate_latinapc:
 	Inherits: ^Tank
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle
@@ -779,6 +780,7 @@ latinsyndicate_latinapc:
 
 latinsyndicate_narcohummer:
 	Inherits: ^Tank
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@GAINSEXPERIENCE: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -861,6 +863,7 @@ latinsyndicate_narcohummer:
 
 latinsyndicate_carteltruck:
 	Inherits: ^Tank
+	Inherits@class: ^MobileBunkerTemplate
 	Inherits@GAINSEXPERIENCE: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle

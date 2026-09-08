@@ -1,5 +1,6 @@
 latinsyndicate_hindtransport:
 	Inherits: ^Helicopter
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
 	Inherits@EXPERIENCE: ^GainsExperienceRA2

@@ -295,6 +295,7 @@ naxis_me262_husk:
 		PlayerPalette: playerra2
 naxis_transportzeppelin:
 	Inherits: ^Helicopter
+	Inherits@class: ^ArmedTroopTransportTemplate
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
