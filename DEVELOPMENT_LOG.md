@@ -1,4 +1,43 @@
-﻿## Devin-Ember - LANE-1 W24 collapse batches 1-3: 19 weapons to single-main (2026-09-07, midday)
+﻿## OpenCode GLM 5.3 Flash - Astra pipeline batch: A3/C1 dossiers, extrapolation join, speed law, report refresh (2026-09-09)
+
+Batch under Codex/Astra planning/review coordination, no commits; both 2026-09-09 passes
+consolidated here. A3/C1: fixed seven-section `propose_anchor_spec.py` dossier generator —
+read-only virtual candidate + readiness over live resolved YAML and the ledger for 700
+classified members (638 fit-eligible, 62 excluded), four axes only, no DPS target; strict
+source+ID references with a separate hero lane; source hashes, registry race checks and
+refuse-overwrite diagnostics. Four C3 pilots checked in at `docs/balance/anchors/` with
+coordinator judgement in section 6; nomination retention is not sign-off or restat.
+Extrapolation: strict ID join drops 22 wrong-ID substitutions, none lost; fresh 903
+assignments = 863 ordinary + 40 hero-only excluded; virtual members 3235 -> 3193;
+coverage 537/633 unchanged; 48 THIN stat rows (CLI minimum 3). Stored fits: 26/28 classes
+lack stored cost0/o0/p0/q0 (line_breaker, mbt complete legacy raw); the false "0/28
+identity failed" assertion was removed. Speed law: DESIGN steps 1 for every type
+(64dd80480) wired into derive metadata/tests and `propose_class_rebalance` rows — future
+proposals only, no live stat changes. C8: eight role questions, no classification changed;
+C43 twin-AA analysis retains generated twin armaments; C49 fitting follow-up (coordinator
+run, `pure-aa-fitting-run.txt`) gives all 21 strict pure-AA rows a fit diagnostic,
+nominal DPS retained, no signed price; Scourge 2875 is raw periodic DPS, not a suicide
+valuation. Report refresh: four committed `latest/` reports updated verbatim from
+coordinator-verified toolstdout — no re-runs, no ratchet changes. Independent challenge
+FINAL: CLEARED WITH CAVEATS — no remaining blocker on the speed law or the four pilot
+notes; 5 new speed tests confirmed. Final bounded run VERIFIED from
+`docs/audit/latest/bounded_test_run.json`: 107/107 modules, 1121 tests, 45 skipped, 14
+failing modules — the 21 FAIL/ERROR signatures are identical to the published
+`5544cf061` report, all 14 known baseline (`a089bd3dc`), no new failing module, no
+full-suite-green claim; seven targeted modules 190/190. Bounded-run peak 865.4 MB / 60.1%
+PC over 639.5 s inside the 1536 MB / 84% guards; dossier generation is a separate
+1227.3 MB / 55.9% peak. Upstream re-fetch unchanged at `5f170ba07` (0 commits missing),
+integrated at local `eb3cb60a3`; PR #335 DRAFT/open at remote head `5544cf061`. No
+YAML/C#/engine/pin changes or game launch. AI owner handover: the `_AI_NAME` literal-U+0008
+counterfactual is measured — ordinary pool 4384 -> 4370 (14 Red Resurrection AI-only rows
+dropped, 0 added) with 0 current assignment deltas (scope 686, chassis 67 unchanged); owner
+patch unapplied at `docs/audit/patches/ai_name_boundaries.patch`, root regression red/green
+pending, calibration regenerates only after the fix lands. Doc correction: EXTRAPOLATION_PROGRAM
+§1's superseded raw-fit metrics block replaced with the dated 2026-09-09 stored-fit measurement
+(28 entries, 26 without stored cost0/o0/p0/q0 — absence is not failed identity). Details and
+pilot blockers: `docs/audit/ASTRA_REVIEW.md` (2026-09-09 section).
+
+## Devin-Ember - LANE-1 W24 collapse batches 1-3: 19 weapons to single-main (2026-09-07, midday)
 
 **Identity:** Devin-Ember (Devin CLI, SWE-1.7 Max), LANE-1 per .agent-id / CLAIMS.
 Branch `devin/ember/w24-lane1` (commits `62fbc0339`/`10dca3861`/`6cec3798e`).
@@ -10887,5 +10926,73 @@ Independent integration review found no blocker. Bot-match/replay emission remai
 unverified on this replacement writer; old recorder runtime evidence is historical.
 Full-suite/audit completion is recorded in `docs/audit/ASTRA_REVIEW.md`.
 PR 329 remains draft and unmerged.
+
+Co-Authored-By: Codex <noreply@openai.com>
+
+## 2026-09-08 — Astra: tested pipeline implementation, pending publication
+
+Isolated branch `codex/astra-pipeline-implementation`, based on `a089bd3dc`.
+No commits, pushes, gameplay YAML changes, anchor signatures or game launches.
+
+- A4: shared report-column contract; per-main damage/count semantics; explicit report
+  selection and dry-run default; refuses incomplete/stale/unsupported selections.
+  Existing staged ledgers are preserved by refusal, and writes reuse `Transaction`.
+- A2: `derive_virtual_anchor.py` gathers classified eligible members, reference IDs,
+  rounded current-stat medians, bias and thin-sample diagnostics. All are unapproved:
+  these are NOT calibrated reference targets. Missing explicit damage/reload emits
+  `NO MODEL`, not invented prices. With explicit synthetic inputs, virtual `fit_class`
+  now uses the existing final per-stat formula, proving baseline O=P=Q=cost and the
+  2.5x verifier. Real-actor fitting is unchanged. A3 awaits C32 reconciliation; the
+  named AURORA readiness branch was not present on upstream when checked.
+- A5: paired refusal/pass tests cover shadowed unit/weapon/warhead values, preserved
+  retired multipliers, untouched inherited/utility fields, and a real allowed-consumer
+  graph. This is targeted coverage, not a claim every refusal is exhaustively paired.
+- B2: `audit_weapon_shape.py --compare-split` explains 304 versus 231: 73 shape-only
+  weapons, zero split-only. Both predicates and every ratchet remain unchanged.
+
+Independent challenge found and drove fixes for staged-proposal erasure, sidecar and
+population mismatch, off-grid model cost, spawn-sibling inclusion, and arbitrary model
+DPS defaults. Resolved-inheritance producer/extractor/consumer coverage was added.
+Combined isolated unittest run: 103 modules, 1017 tests, 45 skips, 15 failing modules.
+All 15 also fail on clean `a089bd3dc`; failures were NOT waived or repaired by changing
+weapon expectations. Details remain in `docs/audit/latest/bounded_test_run.json`.
+33 ledgers have zero drift; percentage-runtime audit and structure ratchets pass.
+Test-runner sampled peak: 839.6 MB process tree, 45.4% PC memory.
+
+Open boundaries: the current MBT replacement-damage producer still refuses retained
+inherited/scoped firepower; this guard was not bypassed. The new armed-transport class
+has no classified members until its template migration lands. Support has no combat
+verifier. Faction approval/calibration and model choices are still required before any
+signable anchor. Chrome/hook/compatibility-splice defects refer to the old PR code,
+not the current-master implementations; no disputed PR payload was imported here.
+
+## 2026-09-08 — Ground-domain fitting follow-up for draft PR 335
+
+Both real and virtual fitting now reuse the reference pipeline's AA slot/weapon
+naming predicate. Active ground weapons supply DPS, range, K coverage and charge
+fallback; pure-AA domains remain represented. Baseline condition evaluation is
+unchanged: no strongest-conditional-mode fallback was imported. Virtual derivation
+uses the same armament selection. No gameplay YAML or actor prices changed.
+
+Comparison: 44 of 638 eligible classified ledger actors change fitting inputs.
+APC range/nominal DPS: 8502/400 -> 5668/200; BTR80: 8181/500 -> 5454/250.
+These are fitting units, not measured gameplay DPS or approved prices. Ten new
+tests cover domain selection, condition filtering, K/fallback semantics and actual
+APC/BTR resolved inheritance. The generated firepower-input report was refreshed.
+
+Independent challenge found no AA blocker. Expanded focused run: 117 passed,
+229 subtests passed. Full isolated suite: 104/104 modules, 1027 tests, 45 skipped,
+14 failing modules, all from the previously reproduced upstream failure set.
+The refreshed report fixes the fifteenth failing module; no new failing module.
+33 ledgers: zero drift. Percentage-runtime audit and diff checks pass. Full-suite
+sampled peak: 882.7 MB process tree / 47.6% PC memory; guards 1536 MB / 84%.
+
+Limitations: AA detection follows naming, not actual target masks. Existing
+physical-state sidecars can select upgrade/passenger modes outside baseline;
+none of the excluded AA weapons supplies that surcharge in this population.
+That broader issue is not changed here. A3 readiness remains untouched: AURORA's
+named branch is absent from both GitHub remotes and no identifiable patch was
+found in reachable history. Requested Aedis's C32 reconciliation on PR 335;
+absence is not permission to release the ownership gate. PR remains draft.
 
 Co-Authored-By: Codex <noreply@openai.com>

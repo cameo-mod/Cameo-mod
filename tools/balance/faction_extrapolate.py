@@ -101,44 +101,87 @@ def _num(rec, key):
     v = rec.get(key)
     if isinstance(v, dict):
         v = v.get("v")
+    if isinstance(v, bool):
+        return None
     try:
         v = float(v)
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, OverflowError):
         return None
-    return v if v > 0 else None
+    return v if math.isfinite(v) and v > 0 else None
 
 
-def paired_rows(result, peers):
+def paired_rows(result, peers, diagnostics=None):
     """{cameo id: {source: peer row}} — re-attach the assignment's chosen rows to the corpus.
 
-    ⚠ The assignment stores the reference unit's NAME, not the row. Two rows in one source can
-    share a name (a variant), so the lookup takes the row whose stats the assignment recorded —
-    matching on hp and cost — and falls back to the first name hit rather than dropping the pair.
+    Exact source+ID, never name or hp/cost. Same-name rows can have identical stats
+    while belonging to different factions. Preserve the corpus object itself:
+    virtual_members identifies consumed rows by object identity.
+
+    Missing/ambiguous IDs refuse the join. Hero-only evidence is distinguished
+    from a missing row, but never re-enters the ordinary population. Diagnostics
+    are returned through the optional mapping, or printed if it is omitted.
     """
     idx = collections.defaultdict(list)
     for p in peers:
-        idx[(p["source"], (p.get("name") or "").strip())].append(p)
+        idx[(p["source"], p.get("id"))].append(p)
+    hero_idx = None
+    notes = diagnostics if diagnostics is not None else {}
     out = {}
     for cid, srcs in result.items():
         for src, m in srcs.items():
-            cands = idx.get((src, (m.get("name") or "").strip()))
-            if not cands:
-                continue
-            best = next((p for p in cands
-                         if p.get("hp") == m.get("hp") and p.get("cost") == m.get("cost")),
-                        cands[0])
-            out.setdefault(cid, {})[src] = best
+            rid = m.get("id")
+            cands = idx.get((src, rid), []) if isinstance(rid, str) and rid.strip() else []
+            heroes = []
+            if not isinstance(rid, str) or not rid.strip():
+                reason = "missing_id"
+            elif len(cands) == 1:
+                out.setdefault(cid, {})[src] = cands[0]
+                reason = "joined"
+            elif len(cands) > 1:
+                reason = "ambiguous_id"
+            else:
+                if hero_idx is None:
+                    hero_idx = collections.defaultdict(list)
+                    for peer in rd.peer_hero_rows():
+                        hero_idx[(peer["source"], peer.get("id"))].append(peer)
+                heroes = hero_idx.get((src, rid), [])
+                reason = "hero_only" if len(heroes) == 1 else "unresolved_in_available_pools"
+            notes.setdefault(reason, []).append(dict(actor=cid, source=src, id=rid,
+                ordinary_rows=len(cands), hero_rows=len(heroes)))
+    if diagnostics is None:
+        report_join_diagnostics(notes)
     return out
 
 
-def exchange_rates(pairs, cameo_by_id, min_pairs=MIN_PAIRS_DEFAULT):
+def report_join_diagnostics(notes):
+    excluded = {reason: rows for reason, rows in notes.items() if reason != "joined" and rows}
+    if not excluded:
+        return
+    print("REFERENCE JOIN: " + "; ".join(f"{reason}={len(rows)}" for reason, rows in sorted(excluded.items())),
+          file=sys.stderr)
+    for reason, rows in sorted(excluded.items()):
+        if reason == "hero_only":
+            continue  # expected ordinary-pool exclusion, not a missing-reference alarm
+        for row in rows:
+            print(f"  {reason}: {row['actor']} / {row['source']} / {row['id']}", file=sys.stderr)
+
+
+def exchange_rates(pairs, cameo_by_id, min_pairs=MIN_PAIRS_DEFAULT, diagnostics=None):
     """{(faction, source): {stat: {k, n, spread}}} — the measured scale between two rosters.
 
     `spread` is the geometric standard deviation of the per-pair ratios: 1.0 means every pair
     agrees on the scale, and a large value means the two rosters do not scale by one number at all.
     ⚠ It is reported, not acted on — an honest wide rate is more useful than a hidden one.
+
+    `diagnostics`, when given a dict, records per (faction, source, stat) what each rate rests
+    on: `n` usable ratios, `invalid` pairs a ratio could not be built from (missing, bool,
+    non-finite, unrepresentable), `required` the floor, `status` usable or THIN. A THIN entry is
+    withheld by the floor and carries no `k` — diagnostics are visibility, never evidence.
     """
+    if min_pairs < 1:
+        raise ValueError(f"min_pairs must be a positive threshold, got {min_pairs}")
     ratios = collections.defaultdict(list)
+    attempts = collections.defaultdict(lambda: [0, 0])
     for cid, srcs in pairs.items():
         fac = fr.faction_of(cid)
         cam = cameo_by_id.get(cid)
@@ -147,8 +190,15 @@ def exchange_rates(pairs, cameo_by_id, min_pairs=MIN_PAIRS_DEFAULT):
         for src, p in srcs.items():
             for stat in RATE_STATS:
                 a, b = _num(cam, stat), _num(p, stat)
-                if a and b:
-                    ratios[(fac, src, stat)].append(a / b)
+                if a is None and b is None:
+                    continue
+                key = (fac, src, stat)
+                r = a / b if a is not None and b is not None else None
+                if r is not None and math.isfinite(r) and r > 0:
+                    ratios[key].append(r)
+                    attempts[key][0] += 1
+                else:
+                    attempts[key][1] += 1
     out = {}
     for (fac, src, stat), vals in ratios.items():
         if len(vals) < min_pairs:
@@ -162,7 +212,25 @@ def exchange_rates(pairs, cameo_by_id, min_pairs=MIN_PAIRS_DEFAULT):
             "k": k, "n": len(vals), "spread": math.exp(sd),
             "_mean_log": logs[0],
         }
+    if diagnostics is not None:
+        for key, (usable, invalid) in attempts.items():
+            diagnostics[key] = {"n": usable, "invalid": invalid, "required": min_pairs,
+                                "status": "usable" if usable >= min_pairs else "THIN"}
     return out
+
+
+def _thin_rows(diagnostics):
+    return {k: v for k, v in (diagnostics or {}).items() if v["status"] == "THIN"}
+
+
+def _thin_summary(diagnostics):
+    thin = _thin_rows(diagnostics)
+    if not thin:
+        return
+    floor = next(iter(thin.values()))["required"]
+    routes = len({k[:2] for k in thin})
+    print(f"\nTHIN: {len(thin)} stat rows withheld across {routes} routes "
+          f"(fewer than {floor} pairs — details: --rates)")
 
 
 def virtual_members(rates, pairs, peers):
@@ -313,13 +381,13 @@ def place_unpaired(faction, cameo_rows_in, pool, paired_ids):
     return out
 
 
-def build(min_pairs=MIN_PAIRS_DEFAULT):
+def build(min_pairs=MIN_PAIRS_DEFAULT, join_diagnostics=None, rate_diagnostics=None):
     peers = rd.peer_rows()
     cameo = rd.cameo_rows()
     result, _, _ = ar.assign()
     cameo_by_id = {c["id"]: c for c in cameo}
-    pairs = paired_rows(result, peers)
-    rates = exchange_rates(pairs, cameo_by_id, min_pairs)
+    pairs = paired_rows(result, peers, diagnostics=join_diagnostics)
+    rates = exchange_rates(pairs, cameo_by_id, min_pairs, rate_diagnostics)
     virt = virtual_members(rates, pairs, peers)
     # ⛔ PLACEMENT USES THE SAME SCOPE AS THE ASSIGNMENT — clause 10's exemptions included.
     # Without this the rank-placer happily placed MCVs, carryalls and drone miners: 41 placements,
@@ -434,7 +502,7 @@ def _by_class(rows):
           f"floor; {len(short)} classes are still short of it.")
 
 
-def _rates(rates):
+def _rates(rates, diagnostics=None):
     print(f"  {'faction':<17}{'source':<24}{'stat':<9}{'k':>10}{'n':>5}{'spread':>9}")
     for (fac, src) in sorted(rates):
         for stat in RATE_STATS:
@@ -444,6 +512,13 @@ def _rates(rates):
             warn = "  ⚠ wide" if ent["spread"] > 3 else ""
             print(f"  {fac:<17}{src[:23]:<24}{stat:<9}{ent['k']:>10.3f}{ent['n']:>5}"
                   f"{ent['spread']:>9.2f}{warn}")
+    thin = _thin_rows(diagnostics)
+    if thin:
+        floor = next(iter(thin.values()))["required"]
+        print(f"\n  THIN — withheld, below the {floor}-pair floor (no rate, no k):")
+        for (fac, src, stat), d in sorted(thin.items()):
+            print(f"  {fac:<17}{src[:23]:<24}{stat:<9}"
+                  f"n={d['n']:<4}invalid={d['invalid']:<4}status=THIN")
 
 
 def main():
@@ -458,11 +533,20 @@ def main():
     ap.add_argument("--write", action="store_true", help="save the derived JSON")
     args = ap.parse_args()
 
-    peers, cameo, pairs, rates, virt, placements = build(args.min_pairs)
+    if args.min_pairs < MIN_PAIRS_DEFAULT:
+        ap.error(f"--min-pairs must be >= {MIN_PAIRS_DEFAULT} "
+                 f"(the Phase B floor), got {args.min_pairs}")
+
+    joins = {}
+    rate_diag = {}
+    peers, cameo, pairs, rates, virt, placements = build(
+        args.min_pairs, join_diagnostics=joins, rate_diagnostics=rate_diag)
+    report_join_diagnostics(joins)
     if args.by_class:
         _by_class(by_class(pairs, placements))
+        _thin_summary(rate_diag)
     elif args.rates:
-        _rates(rates)
+        _rates(rates, rate_diag)
     elif args.faction:
         fac = args.faction
         if fac not in fr.ROUTES:
@@ -471,7 +555,8 @@ def main():
             return 1
         print(f"{fac}  routes: "
               + ", ".join(f"{s} {'/'.join(sorted(t))}" for s, t in fr.routes_for(fac)))
-        _rates({k: v for k, v in rates.items() if k[0] == fac})
+        _rates({k: v for k, v in rates.items() if k[0] == fac},
+               {k: v for k, v in rate_diag.items() if k[0] == fac})
         members = [c for c in cameo if fr.faction_of(c["id"]) == fac]
         print(f"\n  paired {sum(1 for c in members if c['id'] in pairs)} · "
               f"rank-placed {sum(1 for c in members if c['id'] in placements)} · "
@@ -483,9 +568,13 @@ def main():
                       f"{e['pct']:>7.2f}{e['ref_n']:>6}")
     else:
         _report(peers, cameo, pairs, rates, virt, placements)
+        _thin_summary(rate_diag)
 
     if args.write:
         doc = {
+            "join_diagnostics": joins,
+            "rate_diagnostics": {f"{fac}|{src}|{stat}": ent
+                                 for (fac, src, stat), ent in rate_diag.items()},
             "rates": {f"{fac}|{src}": {s: {k: (round(v, 4) if isinstance(v, float) else v)
                                            for k, v in ent.items() if not k.startswith("_")}
                                        for s, ent in stats.items()}

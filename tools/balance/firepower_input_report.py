@@ -32,6 +32,7 @@ def build():
                              'new_class_fit_dps': round(new, 6),
                              'ratio': round(new / old, 6) if old else None})
     return {'scope': 'Class-fit raw DPS inputs, not combat DPS or proposed actor costs. '
+                     'Uses baseline ground weapons, retaining AA-only domains. '
                      'Legacy comparison uses the corrected zero handling. '
                      'Conditional traits and other modifier trait types excluded.',
             'changed_actor_entries': len(rows), 'rows': rows}
