@@ -119,6 +119,7 @@ PROVENANCE_DATA = (
 PROVENANCE_CODE = (
     "tools/balance/build_japan_pilot.py",
     "tools/balance/reference_distribution.py",
+    "tools/balance/peer_corpus.py",
     "tools/balance/reference_targets.py",
     "tools/balance/faction_extrapolate.py",
     "tools/balance/faction_routes.py",
@@ -162,6 +163,8 @@ def input_fingerprints(pending_path=None):
     manifest; anything else is not fingerprinted.
     """
     files = {name: _digest(name) for name in PROVENANCE_DATA}
+    files.update({path.relative_to(ROOT).as_posix(): _digest(path.relative_to(ROOT).as_posix())
+                  for path in rd.peer_corpus.input_paths(ROOT)})
     files.update({f"docs/balance/{p.name}": _digest(f"docs/balance/{p.name}")
                   for p in sorted((ROOT / "docs" / "balance").glob("*.json"))
                   if p.name != "class_anchors.json"})

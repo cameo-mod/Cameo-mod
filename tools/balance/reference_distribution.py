@@ -72,6 +72,7 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import reference_lineages  # noqa: E402  (the shared lineage rulings)
+import peer_corpus  # noqa: E402
 import synthesize_reference as syn  # noqa: E402  (parsers + roster loader are reused wholesale)
 
 ROOT = syn.ROOT
@@ -640,9 +641,36 @@ def is_ai_only(row, source_ids=None):
     return False
 
 
+def structured_peer_rows(corpora, *, heroes=False):
+    """Adapt stable numeric fields without discarding nested source evidence."""
+    rows = []
+    for source, (_meta, records) in corpora.items():
+        if source in LINEAGE_MEMBERS:
+            continue
+        for record in records:
+            if bool(is_hero_limit(record.get("limit"))) != heroes:
+                continue
+            row = dict(record)
+            row.pop("record", None)
+            row.update(source=source, raw_source=source)
+            if heroes:
+                row["hero"] = is_one_off(record.get("limit"))
+            speed, turn = row.get("speed"), row.get("turn_speed")
+            row["turn_ratio"] = speed / turn if speed and turn else None
+            if row.get("type") == "building" and row.get("w_damage"):
+                row["type"] = "defense"
+            dps = apply_weapon_evidence(row, record)
+            for ladder in LADDERS:
+                fraction = record.get(f"eff_vs_{ladder}")
+                row[f"dps_vs_{ladder}"] = dps * fraction if dps and fraction else None
+            rows.append(row)
+    return rows
+
+
 def peer_rows():
     """Doc 5 rows with type, raw HP/speed/turn — the chassis corpus, after lineage de-dup."""
-    rows, source, header = [], None, None
+    corpora = peer_corpus.load(ROOT)
+    rows, source, header = structured_peer_rows(corpora), None, None
     dropped_lineage = peer_rows.dropped = set()
     text = (ROOT / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md").read_text(encoding="utf-8")
     for line in text.splitlines():
@@ -650,7 +678,7 @@ def peer_rows():
             source = line[3:].split("(")[0].strip()
             header = None
             continue
-        if not source or not line.startswith("|"):
+        if not source or source in corpora or not line.startswith("|"):
             continue
         cells = [c.strip().strip("`") for c in line.split("|")[1:-1]]
         if not cells:
@@ -1135,7 +1163,8 @@ def peer_hero_rows():
     peer_rows(), which excludes them. Wiring them into distributions would
     re-enter the epic into the vehicle ceiling.
     """
-    rows = []
+    corpora = peer_corpus.load(ROOT)
+    rows = structured_peer_rows(corpora, heroes=True)
     # Doc 5 heroes: rows with `limit` present (peer_rows drops at line 508)
     source, header = None, None
     text = (ROOT / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md").read_text(encoding="utf-8")
@@ -1144,7 +1173,7 @@ def peer_hero_rows():
             source = line[3:].split("(")[0].strip()
             header = None
             continue
-        if not source or not line.startswith("|"):
+        if not source or source in corpora or not line.startswith("|"):
             continue
         cells = [c.strip().strip("`") for c in line.split("|")[1:-1]]
         if not cells:

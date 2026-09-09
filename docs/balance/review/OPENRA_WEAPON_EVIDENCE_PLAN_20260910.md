@@ -3,8 +3,34 @@
 The findings below began as a read-only plan. Bounded P0 implementation now retains
 resolved armament evidence and withholds unsupported numeric summaries; ordinary and
 hero Doc5 consumers now honor emitted evidence columns. Legacy corpus rows remain
-unassessed and unchanged. Full factory-ready/max-upgrade state evaluation and structured
-corpus migration remain pending. Source checkouts were read only; no source game ran.
+unassessed for unmigrated sources. Full factory-ready/max-upgrade state evaluation remains
+pending. The CA structured transport is now implemented locally as described below.
+Source checkouts were read only; no source game ran.
+
+### CA structured consumer migration (P3, local follow-up)
+
+`docs/reference/peer_corpus/index.json` explicitly selects the pinned CA JSONL payload.
+That source replaces, rather than supplements, the CA Doc5 slice in ordinary/hero
+distribution, chassis synthesis and peer cost-grid readers. Other sources remain on
+Doc5. Unlisted files are inert; malformed selected evidence raises an error without
+falling back to stale Markdown. Pilot/anchor fingerprints include the index, selected
+payload and loader. JSONL bytes are preserved by Git because the index hashes them.
+
+The payload contains 377 source rows, retaining nested evidence: 288 armed rows remain
+incomplete and have no certified DPS; 89 rows have no weapon evidence. Population filters
+yield 341 ordinary and 25 hero-lane CA rows, with the remaining 11 excluded by existing
+AI-only filters. This is an evidence-input change, not a live unit-stat or price change.
+No factory-ready or maximum-upgrade state has been certified by this transport work.
+The old CA table remains historical/display material; do not use its first-slot DPS
+as a certified unit-level value. Other source migrations require explicit review.
+
+Validation: 1,706 tests ran, with 14 failures, 8 errors and 64 skips; failure signatures
+match the recorded baseline, with no new failures. The raw ordinary evidence inventory
+is now 310 incomplete, 46 nominal-direct and 4,023 legacy-unassessed rows (4,379 total).
+CA contributes 269 incomplete ordinary rows; non-CA counts remain unchanged. Tests
+assert these findings instead of hiding CA under the old legacy count. Independent
+review found no remaining transport blocker. The full suite is not green and this
+is not a merge or gameplay-balance recommendation.
 
 ### Explicit evidence export implemented (10 September)
 
@@ -48,6 +74,29 @@ not its combat rifle. HP/cost/speed spot checks for HMMV, HMMV.TOW, XO and E1 ma
 No declaration-order replacement is automatically certified as the factory-ready weapon.
 
 ## 1. Verified findings
+
+### Source-specific state semantics inspected on 10 September
+
+The CA checkout is sparse: absence of `OpenRA.Mods.CA` on disk is not absence from
+the pinned Git tree. Reading that tree without changing the checkout verified
+[`Upgradeable`](https://github.com/Inq8/CAmod/blob/ab9e477c3db818e91946d4cfdc86e71012966141/OpenRA.Mods.CA/Traits/Upgradeable.cs)
+and [`ReloadAmmoPoolCA`](https://github.com/Inq8/CAmod/blob/ab9e477c3db818e91946d4cfdc86e71012966141/OpenRA.Mods.CA/Traits/ReloadAmmoPoolCA.cs).
+The former requires an unlocked upgrade, an enabled trait and an explicit upgrade
+order; its target actor is not an additional simultaneously firing unit. The latter
+uses the named pool, conditional pause/disable state, reload modifiers and tick timing.
+`Delay` alone therefore does not certify the actor's effective sustained DPS.
+
+The declared engine branch `ca-engine/1.09` resolved during this inspection to
+`ce20e97bbe43812ee9c7a8ad9d716d2bcaf99419`. This is a captured candidate revision,
+not proof of the engine binary originally paired with CA's July source commit.
+At that revision, [`AmmoPool`](https://github.com/Inq8/OpenRA/blob/ce20e97bbe43812ee9c7a8ad9d716d2bcaf99419/OpenRA.Mods.Common/Traits/AmmoPool.cs)
+defaults to a full pool and grants its ammo condition on creation; therefore setting
+all named conditions false would incorrectly suppress HMMV.TOW's loaded missile.
+[`ProducibleWithLevel`](https://github.com/Inq8/OpenRA/blob/ce20e97bbe43812ee9c7a8ad9d716d2bcaf99419/OpenRA.Mods.Common/Traits/ProducibleWithLevel.cs)
+can grant levels on creation when player prerequisites are met. Factory-created is
+not automatically unranked. The requested no-purchased-upgrades/no-elite baseline
+must explicitly identify player prerequisite state, not infer it from actor age.
+No source executable was run and no complete state/DPS certification is claimed.
 
 **F1 — `weapon_stats` keeps only the first Armament.** `tools/reference/extract_peer_units.py:97`
 collects every `Armament@*` weapon but resolves and reports `weapons[0]` only — declaration

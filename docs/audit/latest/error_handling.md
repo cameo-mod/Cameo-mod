@@ -86,11 +86,11 @@ Files scanned: **466**
 | tools/balance/pending_classes.py | 35 | handler body discards the error |
 | tools/balance/plan_firepower_retirement.py | 81 | handler body discards the error |
 | tools/balance/propose_class_rebalance.py | 271 | handler body discards the error |
-| tools/balance/reference_distribution.py | 788 | handler body discards the error |
-| tools/balance/reference_distribution.py | 799 | handler body discards the error |
-| tools/balance/reference_distribution.py | 945 | handler body discards the error |
-| tools/balance/reference_distribution.py | 1006 | handler body discards the error |
-| tools/balance/reference_distribution.py | 1260 | handler body discards the error |
+| tools/balance/reference_distribution.py | 816 | handler body discards the error |
+| tools/balance/reference_distribution.py | 827 | handler body discards the error |
+| tools/balance/reference_distribution.py | 973 | handler body discards the error |
+| tools/balance/reference_distribution.py | 1034 | handler body discards the error |
+| tools/balance/reference_distribution.py | 1289 | handler body discards the error |
 | tools/balance/report_versus_change.py | 74 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 219 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 322 | handler body discards the error |
@@ -99,7 +99,7 @@ Files scanned: **466**
 | tools/balance/retrofit_legacy_template.py | 536 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 547 | handler body discards the error |
 | tools/balance/shield_uniqueness.py | 63 | handler body discards the error |
-| tools/balance/synthesize_reference.py | 360 | handler body discards the error |
+| tools/balance/synthesize_reference.py | 370 | handler body discards the error |
 | tools/balance/target_model.py | 416 | handler body discards the error |
 | tools/balance/tier_chain.py | 48 | handler body discards the error |
 | tools/balance/tier_chain.py | 119 | handler body discards the error |

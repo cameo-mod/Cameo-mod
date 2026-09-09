@@ -342,6 +342,9 @@ class InputFingerprintTests(unittest.TestCase):
                     self.assertTrue(not name.startswith("/"))
                     self.assertTrue((root / name).exists(), name)
         for consumed in ("docs/reference/ini_corpus.json",
+                         "docs/reference/peer_corpus/index.json",
+                         "docs/reference/peer_corpus/ca_ab9e477c.jsonl",
+                         "tools/balance/peer_corpus.py",
                          "docs/reference/armor_normalized.json",
                          "docs/design/ORIGINAL_UNITS_RAW.md",
                          "mods/cameo/mod.yaml",          # CHAIN ROOT from the miniyaml manifest

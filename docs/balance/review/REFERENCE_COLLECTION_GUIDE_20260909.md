@@ -20,6 +20,18 @@ OpenDUNE includes projectile, superweapon and wildlife entries. All new RA3/Dune
 collection outputs withhold automatic balance eligibility. MCVs and harvesters are
 manual-review only; their presence is never permission to fit them with combat units.
 
+### Spice Wars acquisition check (10 September)
+
+The official [game site](https://dunespicewars.com/) and publisher/developer
+[Steam announcement stream](https://steamcommunity.com/app/1605220/announcements/)
+provide release context, including a patch announcement dated 9 July 2025, but this
+check did not acquire a versioned full unit-stat dataset. Patch deltas alone cannot
+reconstruct the complete base roster. The configured local Steam library did not list
+Spice Wars (app 1605220). No game was purchased, installed, downloaded or executed.
+Community tables/mod packs remain discovery leads, not certified retail evidence.
+This source remains a named input hold; obtaining version-identified original data is
+required before extracting or fitting its numerical stats.
+
 ## Source acquisition
 
 - [EA CnC Modding Support](https://github.com/electronicarts/CnC_Modding_Support):

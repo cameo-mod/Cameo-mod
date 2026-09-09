@@ -232,10 +232,16 @@ class ConsumerWithholdingTest(unittest.TestCase):
 
     def test_evidence_counts_are_exposed_not_hidden(self):
         counts = rd.evidence_counts(self.peers)
-        self.assertEqual(counts['incomplete'], 41)
+        # CA's selected structured source now exposes 269 additional incomplete
+        # ordinary rows; do not hide them behind the former legacy count.
+        self.assertEqual(counts['incomplete'], 310)
         self.assertEqual(counts['nominal_direct'], 46)
-        self.assertEqual(counts['legacy-unassessed'], 4297)
-        self.assertEqual(sum(counts.values()), 4384)
+        self.assertEqual(counts['legacy-unassessed'], 4023)
+        self.assertEqual(sum(counts.values()), 4379)
+        other = rd.evidence_counts([r for r in self.peers if r['source'] != 'Combined Arms'])
+        self.assertEqual(other['incomplete'], 41)
+        self.assertEqual(other['nominal_direct'], 46)
+        self.assertEqual(other['legacy-unassessed'], 3951)
 
 
 class OptionalBeforeCorpusTest(unittest.TestCase):

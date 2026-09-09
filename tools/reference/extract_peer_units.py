@@ -1414,6 +1414,7 @@ def export_explicit(args):
     rid, rhp, rcost = data["rifle"]
     meta = {
         "record": "meta",
+        "schema": 1,
         "provenance": prov,
         # every input, checkout-relative — never a private absolute path
         "inputs": [{"path": rel, "sha256_before": before[rel], "sha256_after": after[rel],

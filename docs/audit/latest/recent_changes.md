@@ -1,12 +1,12 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **423**, files touched: **1389**
+Commits reviewed: **424**, files touched: **1390**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
 | R1 | balance yaml edited without the ledger | 18 | yes |
 | R2 | audit script never run by run_all.sh | 4 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 26 | partly |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 27 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 1 | no |
 
 
@@ -44,10 +44,11 @@ Commits reviewed: **423**, files touched: **1389**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (26)
+## R3 — commits without provenance (27)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 0a0b7f3d | 2026-09-10 | Blackrobe | agent trailer `GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
 | 29462ded | 2026-09-10 | Blackrobe | agent trailer `GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
 | 86b41c00 | 2026-09-09 | Blackrobe | agent trailer `Codex <noreply@openai.com>` on a non-shared identity | review |
 | 8c9457d7 | 2026-09-09 | Blackrobe | agent trailer `Codex GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
@@ -115,7 +116,7 @@ Commits reviewed: **423**, files touched: **1389**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 18 R1 and 0 R3 of 18/26 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 18 R1 and 0 R3 of 18/27 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
