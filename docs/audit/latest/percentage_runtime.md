@@ -1,11 +1,11 @@
 # Folded percentage runtime audit
 
 - Reachable direct-hit weapons activated: **186**
-- Folded direct-hit applications activated: **189**
+- Folded direct-hit applications activated: **190**
 - Direct weapons also carrying standalone percentage hits: **7**
 - Direct weapons whose folded hit feeds physical state: **7**
 - Direct weapons whose folded hit feeds integrity: **5**
-- Legacy Int32 overflow applications repaired: **8**
+- Legacy Int32 overflow applications repaired: **7**
 - Non-default direct relationship sets: **0**
 - Dispatch structural findings: **0**
 
@@ -18,7 +18,6 @@
 | `ExecutionerSword` | `Melee_Medium` | 8525 | 30000 |
 | `Hakureiring2` | `Magic_Heavy` | -9474 | 12000 |
 | `OIHakureiring2` | `Magic_Heavy` | -9474 | 12000 |
-| `TSLocustBombChem` | `Chemical_Heavy` | -7974 | 13500 |
 | `d2kStormLasher` | `Storm_Heavy` | -6474 | 15000 |
 | `sandmarinemortar` | `Demolition_HeavyFlatCompatibility` | -9474 | 12000 |
 
