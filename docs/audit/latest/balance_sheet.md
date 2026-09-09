@@ -28,7 +28,7 @@
 | Elven Archer | wc2_humans_elvenarcher | Damage 18000 vs game 24110 |
 | Asian Tank Killer | asianalliance_asiantankkiller | Damage 34000 vs game 68200 |
 | Veteran Archer | asianalliance_veteranarcher | Damage 36000 vs game 71982 |
-| Laser Trooper | td_nod_lasertrooper | HP 60000 vs game 59000; Speed 60 vs game 51; Damage 30000 vs game 144637; Reload 60 vs game 50 |
+| Laser Trooper | td_nod_lasertrooper | HP 60000 vs game 59000; Speed 60 vs game 51; Damage 30000 vs game 30637; Reload 60 vs game 50 |
 | Stealth Soldier | td_nod_stealthsoldier | Damage 32000 vs game 108640 |
 | GDI Officer | td_gdi_officer | Damage 16000 vs game 64100 |
 | Tank Buster | japan_tankbuster | Damage 24000 vs game 25112 |
@@ -51,8 +51,8 @@
 | Seal | ra2_allies_seal | HP 30000 vs game 31000; Damage 18000 vs game 24004 |
 | Black Widow | futuretech_blackwidow | Damage 20000 vs game 40010 |
 | Allied Sniper | ra1_allies_alliedsniper | Damage 30000 vs game 60015 |
-| Ghost | terran_ghost | HP 45000 vs game 44000; Damage 10000 vs game 178064 |
-| Specter | terran_specter | Damage 20000 vs game 356078 |
+| Ghost | terran_ghost | HP 45000 vs game 44000; Damage 10000 vs game 78064 |
+| Specter | terran_specter | Damage 20000 vs game 156078 |
 | Virus | yuri_virus | Damage 24000 vs game 144111 |
 | ASDF | asianalliance_asdf | HP 40000 vs game 39000; Speed 60 vs game 58 |
 | Laser Commando | td_nod_lasercommando | Damage 12000 vs game 3025 |
@@ -112,7 +112,7 @@ unmatched: Light Tank Mk2, Sheridan, Chi-Ha Medium Tank, Shrine Tank, Ix Combat 
 ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_lunartiger | Quantum Tank -> steelconsortium_promotion_quantumtank, steelconsortium_quantumtank | Laser Tank -> ordos_lasertank, schwarzermond_lasertank, schwarzermond_promotion_lasertank | Katy Tank -> steelconsortium_katytank, steelconsortium_promotion_katytank
 
 
-## Vehicles: 98 matched, 47 mismatched, 50 unmatched, 9 ambiguous
+## Vehicles: 97 matched, 47 mismatched, 51 unmatched, 9 ambiguous
 
 | sheet unit | actor | mismatches |
 |---|---|---|
@@ -159,7 +159,7 @@ ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_luna
 | Eden Laser Tiger | eden_tiger_laser | HP 120000 vs game 150000; Speed 60 vs game 50; Damage 24000 vs game 10629; Reload 40 vs game 16 |
 | Eden ThorsHammer Lynx | eden_lynx_thorshammer | Damage 6000 vs game 10000 |
 | Eden ThorsHammer Tiger | eden_tiger_thorshammer | Damage 6000 vs game 10000 |
-| Specter | terran_specter | HP 22500 vs game 50000; Speed 100 vs game 80; Damage 48000 vs game 356078; Reload 117 vs game 33 |
+| Specter | terran_specter | HP 22500 vs game 50000; Speed 100 vs game 80; Damage 48000 vs game 156078; Reload 117 vs game 33 |
 | Brummbär | naxis_brummbar | Damage 56000 vs game 42200 |
 | Lunar Grille | schwarzermond_lunargrille | Damage 32000 vs game 121200 |
 | Burrito | latinsyndicate_burrito | Damage 240000 vs game 161248 |
@@ -200,7 +200,7 @@ ambiguous: Ranger -> ra1_allies_ranger, wc2_humans_upgrade_ranger | Battle Fortr
 | Black Eagle | ra2_allies_blackeagle | Damage 192000 vs game 418696; Reload 250 vs game 56 |
 | Orca Bomber | ts_gdi_orcabomber | Reload 250 vs game 50 |
 | Farasha | ixian_farasha | Damage 300000 vs game 910300; Reload 175 vs game 99 |
-| Battlecruiser | terran_battlecruiser | Damage 32000 vs game 37641 |
+| Battlecruiser | terran_battlecruiser | Damage 32000 vs game 36041 |
 | Phobos | terran_phobos | Damage 96000 vs game 198584 |
 | Starship Sovereign | protoss_starshipsovereign | Damage 12000 vs game 14631 |
 | Gryphon Rider | wc2_humans_gryphonrider | Damage 40000 vs game 55270 |

@@ -30,6 +30,7 @@ the checkout rather than trusted from a document — and one of them was wrong:
 to **12,500**. The artifact wins.
 """
 import argparse
+import math
 import pathlib
 import re
 import sys
@@ -94,80 +95,488 @@ def armor_map(source_label):
     return (entry.get("map") or {}), entry.get("confidence", "exclude")
 
 
-def weapon_stats(rules, node, source_label=""):
-    """Primary armament's scale-free weapon numbers, resolved through the weapon chain."""
-    weapons = [c.get("Weapon") for c in node.children
-               if c.key.split("@")[0] == "Armament" and c.get("Weapon")]
-    if not weapons:
-        return {}
-    try:
-        w = rules.resolve_weapon(weapons[0])
-    except Exception:
-        return {}
-    if w is None:
-        return {}
+# ── THE WEAPON EVIDENCE POLICY (P0/P1, 2026-09-10) ───────────────────────────
+# `weapon_stats` used to fold the FIRST `Armament`'s weapon and present it as
+# the unit's damage summary; every further slot, its conditions and its ammo
+# cadence were dropped in silence. The recorded casualty is CA `HMMV.TOW`,
+# whose TOW slot never surfaced (docs/balance/review/
+# OPENRA_WEAPON_EVIDENCE_PLAN_20260910.md; BUGGY_HUMVEE_REFERENCE_REVIEW_20260909.md).
+# The vocabulary is the INI extractor's contract, consumed by
+# `reference_distribution.apply_weapon_evidence`:
+#
+#   * `nominal_direct` — the DECLARED contract that `w_dps` is the plain
+#     direct Damage/ROF fold of ONE weapon. NEVER a complete unit DPS. It is
+#     emitted only when the whole actor is provably simple: exactly ONE
+#     resolved Armament slot, no PauseOnCondition / RequiresCondition /
+#     UpgradeTypes on it, no AmmoPool (ammo is a cadence channel this fold
+#     cannot read), no FirepowerMultiplier, a weapon that resolves through
+#     the chain, every warhead a plain positive-Damage warhead seen through
+#     fields we know, and a resolvable cadence — explicit BurstDelays
+#     whenever Burst > 1 and an explicit ReloadDelay. The engine's
+#     default-5 BurstDelays guess is NOT trusted here.
+#   * `incomplete` (+ reason) — everything else: the raw first-weapon fold is
+#     preserved on `w_dps_raw` (the old diagnostic; it votes nowhere),
+#     `w_dps` is None, and EVERY resolved slot travels in `weapon_evidence`
+#     with its raw warheads, conditions, targeting fields and ammo/rearm
+#     bindings — for the future JSON export and for consumers to gate on.
+#     Conditions are RETAINED, never assumed false or true: a gated slot is
+#     recorded with its own weapon's numbers.
+#   * An unknown warhead field is a fail-closed CHANNEL, not a cosmetic
+#     extra — a peer engine may give it semantics this fold cannot see.
+KNOWN_WARHEAD_FIELDS = frozenset(
+    ("Damage", "Spread", "Falloff", "Delay", "Versus", "InvalidTargets"))
+# Fields we can NAME but that are not plain-damage channels. AS's
+# `PercentageVersus` is the near-miss sibling of `Versus` (LESSONS 8e);
+# `DamageTypes` carries status/evaluator modifiers, not the plain hit.
+NONDAMAGE_WARHEAD_FIELDS = ("PercentageVersus", "DamageTypes")
+# The warhead node's VALUE is its TYPE, and only an exact allowlist backs a
+# nominal claim. Measured across CA's weapons: 593 SpreadDamage warheads are
+# the plain direct-damage channel; HealthPercentageDamage /
+# HealthPercentageSpreadDamage / WarpPercentDamage are PERCENTAGE channels,
+# TargetDamage / WarpDamage and every GrantCondition* / CreateEffect /
+# FireShrapnel / SpawnActor node are channels this fold cannot read. An
+# unfamiliar or missing type NEVER yields a numeric summary — the raw type
+# and all its fields are retained instead.
+CONVENTIONAL_WARHEAD_TYPES = frozenset(("SpreadDamage",))
 
-    def num(v):
-        if v is None:
-            return None
-        v = str(v).strip()
-        # OpenRA ranges are cell distances: "6c0" = 6 cells, "6c512" = 6.5 cells.
-        if "c" in v:
-            a, _, b = v.partition("c")
-            try:
-                return int(a) * 1024 + int(b or 0)
-            except ValueError:
-                return None
+
+def _cell_num(v):
+    """Scale-free cell parser: OpenRA ranges are cell distances ("6c0" = 6 cells)."""
+    if v is None:
+        return None
+    v = str(v).strip()
+    if "c" in v:
+        a, _, b = v.partition("c")
         try:
-            return float(v)
+            return int(a) * 1024 + int(b or 0)
         except ValueError:
             return None
+    try:
+        return float(v)
+    except ValueError:
+        return None
 
-    # ⚠ `Versus` is a NODE whose VALUE is empty and whose CHILDREN are the armor rows. Reading
-    # `warhead.get("Versus")` returns the empty value and looks like "this mod has no Versus" —
-    # which is how the first sweep of this corpus reported 0 for all 13 mods.
-    amap, conf = armor_map(source_label)
-    damage = 0
-    mains = 0
-    ladder_hits = {}
-    for c in w.children:
-        if not c.key.startswith("Warhead"):
+
+def _delay_list(raw):
+    """Parsed BurstDelays — NEVER silently drops a token. Zeros are preserved
+    (a declared zero gap is data); a token that is not a finite non-negative
+    number is returned in `bad` so the cadence is refused outright."""
+    delays, bad = [], []
+    for tok in str(raw or "").replace(",", " ").split():
+        v = _cell_num(tok)
+        if v is None or not math.isfinite(v) or v < 0:
+            bad.append(tok)
+        else:
+            delays.append(v)
+    return delays, bad
+
+
+def _burst_time(burst, delays):
+    """Burst cadence under the engine's repeat-last semantics: an array shorter
+    than Burst-1 repeats its last entry for the remaining gaps. None = the
+    cadence is UNRESOLVED (Burst > 1 with no explicit BurstDelays) and may not
+    back a DPS claim."""
+    gaps = max(0, int(burst) - 1)
+    if not gaps:
+        return 0
+    if not delays:
+        return None
+    return sum(delays[min(i, len(delays) - 1)] for i in range(gaps))
+
+
+def _warhead_evidence(wh):
+    """Raw + audited view of one Warhead@* node. The node's VALUE is the
+    warhead TYPE: only an exactly allowed conventional type whose damage
+    comes through plain positive `Damage` fields we know qualifies; an
+    unfamiliar, percentage, custom or missing type NEVER backs a nominal
+    summary. The raw type and every field ride along, so no channel vanishes."""
+    rows = {"key": wh.key, "type": (wh.value or "").strip(), "damage": wh.get("Damage"),
+            "fields": {c.key: c.value for c in wh.children},
+            "versus": {}, "channels": []}
+    d = _cell_num(rows["damage"])
+    rows["damage_num"] = d if (d is not None and math.isfinite(d)) else None
+    if rows["type"] not in CONVENTIONAL_WARHEAD_TYPES:
+        rows["channels"].append("missing_warhead_type" if not rows["type"]
+                                else f"unknown_warhead_type: {rows['type']}")
+    if rows["damage"] is None:
+        rows["channels"].append("non_damage_warhead: no Damage")
+    elif d is None or not math.isfinite(d):
+        rows["channels"].append(f"unresolved_damage: {rows['damage']}")
+    elif d <= 0:
+        rows["channels"].append(f"non_damage_warhead: Damage {rows['damage']}")
+    for c in wh.children:
+        if c.key == "Versus":
+            rows["versus"] = {r.key: r.value for r in c.children}
+            for r in c.children:            # a malformed declared rung can never
+                v = _cell_num(r.value)      # become the 100% engine default
+                if v is None or not math.isfinite(v):
+                    rows["channels"].append(f"unresolved_versus: {r.key}={r.value}")
+        elif c.key in NONDAMAGE_WARHEAD_FIELDS:
+            rows["channels"].append(f"nonconventional_channel: {c.key}={c.value}")
+        elif c.key not in KNOWN_WARHEAD_FIELDS:
+            rows["channels"].append(f"unknown_warhead_field: {c.key}={c.value}")
+    return rows
+
+
+def _audit_weapon(rules, weapon_id):
+    """Resolve ONE weapon through the chain and audit it.
+
+    Returns (audit, reason); reason is None only when the weapon resolved.
+    The cadence arithmetic is fail-closed end to end: Burst must be a finite
+    positive INTEGER when declared (a fraction 2.5, zero, negative, NaN, inf
+    or malformed value is REFUSED, never rounded nor defaulted); an explicit
+    finite positive-integer ReloadDelay is required; BurstDelay tokens are
+    never silently dropped, and a declared zero gap stays zero.
+    `burst_time_legacy` reproduces the OLD fold verbatim (sum of the parsed
+    list, else the default-5 fallback) so the raw diagnostic keeps its old
+    value wherever the cadence is still readable; the NOMINAL claim
+    additionally requires `conventional` and `cadence_resolved`.
+    """
+    try:
+        w = rules.resolve_weapon(weapon_id)
+    except Exception:
+        w = None
+    if w is None:
+        return None, f"weapon_unresolved: {weapon_id}"
+    warheads = [_warhead_evidence(c) for c in w.children if c.key.startswith("Warhead")]
+    channels = [ch for wh in warheads for ch in wh["channels"]]
+    if not warheads:
+        channels.append("no_warheads")
+
+    problems = []
+    burst_raw = w.get("Burst")
+    if burst_raw is None or str(burst_raw).strip() == "":
+        burst = 1                      # the engine's WeaponInfo default
+    else:
+        bnum = _cell_num(burst_raw)
+        if bnum is None or not math.isfinite(bnum) or bnum < 1 or bnum != int(bnum):
+            burst = None
+            problems.append(f"invalid_burst: Burst {burst_raw} is not a positive integer")
+        else:
+            burst = int(bnum)
+    delays, bad_delays = _delay_list(w.get("BurstDelays"))
+    if bad_delays:
+        problems.append(f"invalid_burst_delay: {', '.join(bad_delays)}")
+    burst_time_strict = burst_time_legacy = None
+    if burst is not None and not bad_delays:
+        burst_time_strict = _burst_time(burst, delays)
+        if burst_time_strict is None:
+            problems.append(f"unresolved_burst_cadence: Burst {burst} without BurstDelays")
+        burst_time_legacy = sum(delays) if delays else (burst - 1) * 5
+    reload_raw = w.get("ReloadDelay")
+    reload = None
+    if reload_raw is None or str(reload_raw).strip() == "":
+        problems.append("unresolved_reload_delay")
+    else:
+        rnum = _cell_num(reload_raw)
+        if rnum is None or not math.isfinite(rnum) or rnum < 1 or rnum != int(rnum):
+            problems.append(f"invalid_reload: ReloadDelay {reload_raw} is not a positive integer")
+        else:
+            reload = rnum
+    channels.extend(problems)
+    damage_pos = sum(wh["damage_num"] for wh in warheads if (wh["damage_num"] or 0) > 0)
+    audit = {
+        "weapon": weapon_id, "warheads": warheads, "channels": channels,
+        "conventional": not channels,
+        "burst": burst, "reload": reload, "delays": delays, "bad_delays": bad_delays,
+        "burst_time_strict": burst_time_strict, "burst_time_legacy": burst_time_legacy,
+        "cadence_resolved": not problems, "cadence_reason": "; ".join(problems) or None,
+        "damage_pos": damage_pos or None,
+        "mains": sum(1 for wh in warheads if (wh["damage_num"] or 0) > 0) or None,
+        "range": _cell_num(w.get("Range")), "min_range": _cell_num(w.get("MinRange")),
+        "valid_targets": w.get("ValidTargets"), "valid_stances": w.get("ValidStances"),
+    }
+    return audit, None
+
+
+def _ladder_means(warheads, amap):
+    """({ladder: DAMAGE-WEIGHTED mean}, {withheld ladder: reason}).
+
+    A ladder is numeric only when EVERY clean damaging warhead declares an
+    explicit value for EVERY armor key this amap maps to that ladder.
+    INTER-warhead and INTRA-ladder coverage are distinct requirements, and a
+    single declared rung (Heavy 50 beside undeclared Light/Medium) proves
+    neither: the peer's exact full ladder roster is NOT verifiable here (the
+    map may even be a superset), so anything less WITHHOLDS that ladder — no
+    engine-default fill, no invented roster, even when a default would be
+    plausible. Fully covered ladders stay exact: each contributor is the
+    mean of its own declared rungs, weighted by its own damage; every
+    declared rung stays raw in the warhead evidence."""
+    clean = [wh for wh in warheads if (wh.get("damage_num") or 0) > 0 and not wh["channels"]]
+    if not clean:
+        return {}, {}
+    roster = {}                       # ladder -> the armor keys THIS amap maps to it
+    for armor, lad in amap.items():
+        roster.setdefault(lad, set()).add(armor)
+    parsed, ladders = [], set()
+    for wh in clean:
+        per = {}
+        for armor, raw in wh["versus"].items():
+            lad = amap.get(armor)
+            v = _cell_num(raw)
+            if lad and v is not None:
+                per.setdefault(lad, {})[armor] = v
+        parsed.append((wh["damage_num"], per))
+        ladders |= set(per)
+    means, withheld = {}, {}
+    for lad in ladders:
+        required = roster.get(lad, set())
+        if any(set(per.get(lad, {})) != required for _, per in parsed):
+            withheld[lad] = "partial_versus_coverage"
             continue
-        d = num(c.get("Damage"))
-        if d and d > 0:
-            damage += d
-            mains += 1
-            for x in c.children:
-                if x.key != "Versus":
-                    continue
-                for row in x.children:
-                    ladder = amap.get(row.key)
-                    v = num(row.value)
-                    if ladder and v is not None:
-                        ladder_hits.setdefault(ladder, []).append(v)
-    burst = num(w.get("Burst")) or 1
-    reload_delay = num(w.get("ReloadDelay"))
-    delays = [num(x) for x in (w.get("BurstDelays") or "").replace(",", " ").split() if x]
-    delays = [d for d in delays if d]
-    burst_time = sum(delays) if delays else (burst - 1) * 5   # OpenRA's default BurstDelays is 5
-    cycle = (reload_delay or 0) + burst_time
-    # Effective damage vs a LADDER is the mean of that ladder's Versus rows, as a fraction. A
-    # peer that expresses the whole AIR ladder with one `Aircraft` tag contributes one number to
-    # AIR — correct, because that is the entire precision that source has. A tag absent from the
-    # weapon's Versus block means OpenRA's default of 100%, so a missing ladder is left as None
-    # rather than 0: absent is not immune.
-    eff = {}
-    if conf in ("high", "medium"):
-        for ladder, vals in ladder_hits.items():
-            eff[f"eff_vs_{ladder}"] = sum(vals) / len(vals) / 100.0
-    return {"weapon": weapons[0], "w_range": num(w.get("Range")), "armor_conf": conf, **eff,
-            "w_min_range": num(w.get("MinRange")), "w_damage": damage or None,
-            "w_mains": mains or None, "w_burst": burst,
-            "w_reload": reload_delay,
-            # Sustained output over the full cycle, in damage per tick. Burst is inside the
-            # cycle, not on top of it — a 4-round burst with a 40-tick reload is not 4x a
-            # single shot, which is the most common way this number gets inflated.
-            "w_dps": ((damage * burst) / cycle) if (damage and cycle) else None}
+        s = wgt = 0.0
+        for d, per in parsed:
+            vals = list(per[lad].values())
+            s += d * (sum(vals) / len(vals))
+            wgt += d
+        means[lad] = s / wgt
+    return means, withheld
+
+
+def _pool_binding(pool, armament_name):
+    """(state, kind) with state in bound | unknown | other.
+
+    OpenRA matches a pool to an armament by the armament's `Name:` field
+    (default "primary"), NOT by the `@suffix`. A MISSING `Armaments:` is an
+    engine default that DIFFERS PER SOURCE (CA's engine — verified against
+    ca-engine/1.09 — binds primary AND secondary); an explicitly EMPTY one
+    is a distinct state that is also engine-defined. Without an explicit
+    per-source profile neither is resolvable HERE, so both stay conservative
+    `unknown` and are never read as "binds every armament"."""
+    entry = pool.child("Armaments")
+    if entry is None:
+        return "unknown", "missing"
+    if not (entry.value or "").strip():
+        return "unknown", "empty"
+    names = [t.strip() for t in str(entry.value).split(",") if t.strip()]
+    return ("bound" if armament_name in names else "other"), "explicit"
+
+
+def _ammo_pool_evidence(pool):
+    return {"trait": pool.key, "armaments": pool.get("Armaments"),
+            "ammo": pool.get("Ammo"), "ammo_condition": pool.get("AmmoCondition"),
+            "fields": {c.key: c.value for c in pool.children}}
+
+
+def _rearm_evidence(trait):
+    return {"trait": trait.key, "delay": trait.get("Delay"), "count": trait.get("Count")}
+
+
+MODIFIER_BASES = ("FirepowerMultiplier",)
+# `DamageMultiplier` implements IDamageModifier: it modifies INCOMING damage
+# on the defender (engine Traits/Multipliers/DamageMultiplier.cs), so it is a
+# DEFENSIVE fact, never a weapon's outgoing multiplier — retained raw and
+# never counted against the weapon's nominal certification.
+DEFENSIVE_BASES = ("DamageMultiplier",)
+
+
+def _weapon_modifier_evidence(trait):
+    """Actor-level weapon modifiers (`FirepowerMultiplier*` and friends).
+    The `Modifier` field is a PERCENT: 100 is neutral, 1 is a 99% nerf — it
+    is retained RAW and never folded into a DPS claim. Any conditioned
+    multiplier — an elite tier, an upgrade path — is a mutually exclusive
+    state, not a summand."""
+    raw = trait.get("Modifier")
+    num = _cell_num(raw)
+    conditioned = bool(trait.get("UpgradeTypes") or trait.get("RequiresCondition"))
+    return {"trait": trait.key, "modifier": raw,
+            "upgrade_types": trait.get("UpgradeTypes"),
+            "requires_condition": trait.get("RequiresCondition"),
+            "conditional": conditioned,
+            "nontrivial": conditioned or (num is None or num != 100.0)}
+
+
+# Attack* traits that are the NORMAL firing path (no gate fields = the
+# weapon fires plainly). Any OTHER Attack* base — CA's AttackTesla, a fork's
+# special activation — is a suspect this layer cannot prove neutral.
+PLAIN_ATTACK_BASES = frozenset(
+    ("AttackFrontal", "AttackTurreted", "AttackFollow", "AttackBomber",
+     "AttackAircraft", "AttackWander"))
+GATE_FIELDS = ("PauseOnCondition", "RequiresCondition", "UpgradeTypes")
+# Verified against the engine's Traits/AttackMove: these two are the
+# condition-grant fields of AttackMoveInfo (null = no grant); every other
+# field is a voice/cursor/shroud cosmetic. A bare AttackMove is the ordinary
+# movement-order command, NOT firing or cadence evidence.
+ATTACKMOVE_GRANT_FIELDS = ("AttackMoveCondition", "AssaultMoveCondition")
+
+
+def _activation_evidence(node, has_pool):
+    """Actor traits that can gate or retime the weapon outside the weapon
+    itself: a conditioned Attack* (CA pauses AttackTurreted on EMP), an
+    unusual activation (`AttackTesla`), a configured AttackMove (its own
+    condition grants), and `Reload*` cadence modifiers. Recorded RAW, and
+    each suspect withholds the nominal summary — a clean weapon alone never
+    proves the ACTOR simple. Two proven-inert exemptions: an ordinary
+    UNCONDITIONED AttackMove with no condition-grant fields is the movement
+    order command (any AttackMoveCondition/AssaultMoveCondition or gate the
+    actor configures makes it a suspect again), and `ReloadAmmoPool*` with
+    no AmmoPool on the actor (nothing to reload)."""
+    out = []
+    gate_keys = {"PauseOnCondition": "pause_on_condition",
+                 "RequiresCondition": "requires_condition", "UpgradeTypes": "upgrade_types"}
+    for c in node.children:
+        base = c.key.split("@")[0]
+        gate = {gate_keys[f]: c.get(f) for f in GATE_FIELDS}
+        if base.startswith("Attack"):
+            if base == "AttackMove":
+                grants = any(c.get(f) for f in ATTACKMOVE_GRANT_FIELDS)
+                if any(gate.values()) or grants:
+                    out.append({"trait": c.key, "kind": "activation", **gate,
+                                "attack_move_condition": c.get("AttackMoveCondition"),
+                                "assault_move_condition": c.get("AssaultMoveCondition")})
+                continue               # ordinary movement-order command: exempt
+            if any(gate.values()) or base not in PLAIN_ATTACK_BASES:
+                out.append({"trait": c.key, "kind": "activation", **gate})
+        elif base.startswith("Reload"):
+            if base.startswith("ReloadAmmoPool") and not has_pool:
+                continue               # proven inert: no AmmoPool exists to reload
+            out.append({"trait": c.key, "kind": "cadence", **gate})
+    return out
+
+
+def _slot_evidence(slot, audit, pool):
+    """One resolved Armament slot's full evidence record."""
+    ev = {
+        "slot": slot.key,
+        "name": slot.get("Name") or "primary",
+        "weapon": slot.get("Weapon"),
+        "weapon_resolved": audit is not None,
+        "pause_on_condition": slot.get("PauseOnCondition"),
+        "requires_condition": slot.get("RequiresCondition"),
+        "upgrade_types": slot.get("UpgradeTypes"),
+        "target_stances": slot.get("TargetStances"),
+        "ammo_pool": pool,
+        "warheads": audit["warheads"] if audit else [],
+        "channels": [] if audit is not None else ["weapon_unresolved"],
+    }
+    if audit is not None:
+        ev.update({
+            "valid_targets": audit["valid_targets"], "valid_stances": audit["valid_stances"],
+            "range": audit["range"], "min_range": audit["min_range"],
+            "reload_delay": audit["reload"], "burst": audit["burst"],
+            "burst_delays": audit["delays"], "bad_burst_delays": audit["bad_delays"],
+            "cadence_resolved": audit["cadence_resolved"],
+            "cadence_reason": audit["cadence_reason"],
+        })
+    else:
+        ev.update({"valid_targets": None, "valid_stances": None, "range": None,
+                   "min_range": None, "reload_delay": None, "burst": None,
+                   "burst_delays": [], "bad_burst_delays": [],
+                   "cadence_resolved": False, "cadence_reason": None})
+    return ev
+
+
+def weapon_stats(rules, node, source_label=""):
+    """Per-armament weapon evidence + the unit summary, fail-closed.
+
+    Legacy scalar fields keep their shapes; `w_dps` carries a number only
+    under the `nominal_direct` contract above, the old first-weapon fold
+    survives as `w_dps_raw` otherwise, and `weapon_evidence` (plus
+    `ammo_rearm` / `activation_traits` / `weapon_modifiers`) carries the
+    full structured record for the future JSON export. An actor with no
+    Armament carrying a Weapon is still {} — the same unarmed verdict as
+    before.
+    """
+    slots = [c for c in node.children
+             if c.key.split("@")[0] == "Armament" and c.get("Weapon")]
+    if not slots:
+        return {}
+    pools = [c for c in node.children if c.key.split("@")[0] == "AmmoPool"]
+    rearms = [_rearm_evidence(c) for c in node.children
+              if c.key.split("@")[0].startswith("ReloadAmmoPool")]
+    mods = [_weapon_modifier_evidence(c) for c in node.children
+            if c.key.split("@")[0] in MODIFIER_BASES]
+    defensive = [_weapon_modifier_evidence(c) for c in node.children
+                 if c.key.split("@")[0] in DEFENSIVE_BASES]
+    activation = _activation_evidence(node, has_pool=bool(pools))
+
+    audits, evidence = {}, []
+    for slot in slots:
+        wid = slot.get("Weapon")
+        if wid not in audits:
+            audits[wid] = _audit_weapon(rules, wid)[0]
+        audit = audits[wid]
+        name = slot.get("Name") or "primary"
+        # Priority bound > unknown > other: the pool record this slot votes
+        # on, with its binding state carried verbatim. A pool explicitly
+        # bound to a DIFFERENT armament name is proven inert here.
+        pick = None
+        order = {"bound": 0, "unknown": 1, "other": 2}
+        for p in pools:
+            state, kind = _pool_binding(p, name)
+            if pick is None or order[state] < order[pick[1]]:
+                pick = (p, state, kind)
+        pool_ev = None
+        if pick is not None:
+            pool_ev = dict(_ammo_pool_evidence(pick[0]),
+                           binding=pick[1], binding_kind=pick[2])
+        evidence.append(_slot_evidence(slot, audit, pool_ev))
+
+    reasons = []
+    if len(slots) > 1:
+        reasons.append(f"multi_armament: {len(slots)} slots")
+    for ev in evidence:
+        gated = [f for f in ("pause_on_condition", "requires_condition", "upgrade_types")
+                 if ev.get(f)]
+        if gated:
+            reasons.append(f"conditional_armament: {ev['slot']} ({', '.join(gated)})")
+        p = ev["ammo_pool"]
+        if p is not None and p["binding"] == "bound":
+            reasons.append(f"ammo_pool: {p['trait']} -> {p['armaments']}")
+        elif p is not None and p["binding"] == "unknown":
+            reasons.append(
+                f"ammo_pool_binding_unknown: {p['trait']} "
+                f"({'empty Armaments' if p['binding_kind'] == 'empty' else
+                    'Armaments missing; engine default differs per source'})")
+        if not ev["weapon_resolved"]:
+            reasons.append(f"weapon_unresolved: {ev['weapon']}")
+        else:
+            reasons.extend(audits[ev["weapon"]]["channels"])
+    for act in activation:
+        reasons.append(f"{act['kind']}_trait: {act['trait']}")
+    reasons.extend(f"weapon_modifier: {m['trait']}" for m in mods if m["nontrivial"])
+    reasons = list(dict.fromkeys(reasons))          # de-duped, order preserved
+
+    amap, conf = armor_map(source_label)
+    audit = audits[slots[0].get("Weapon")]          # the OLD first-weapon pick
+    row = {}
+    raw_dps = None
+    if audit is not None:
+        row = {"weapon": slots[0].get("Weapon"),
+               "w_range": audit["range"], "w_min_range": audit["min_range"],
+               "w_damage": audit["damage_pos"], "w_mains": audit["mains"],
+               "w_burst": audit["burst"], "w_reload": audit["reload"]}
+        if conf in ("high", "medium"):
+            means, withheld = _ladder_means(audit["warheads"], amap)
+            row.update({f"eff_vs_{lad}": v / 100.0 for lad, v in means.items()})
+            if withheld:
+                row["ladders_withheld"] = withheld
+        if audit["burst_time_legacy"] is not None:
+            legacy_cycle = (audit["reload"] or 0) + audit["burst_time_legacy"]
+            if audit["damage_pos"] and legacy_cycle > 0:
+                raw_dps = (audit["damage_pos"] * audit["burst"]) / legacy_cycle
+    if reasons:
+        row.update({"w_evidence": "incomplete",
+                    "w_evidence_reason": "; ".join(reasons),
+                    "w_dps_usable": False, "w_dps": None})
+        if raw_dps is not None:
+            row["w_dps_raw"] = raw_dps
+    else:
+        cycle = (audit["reload"] or 0) + audit["burst_time_strict"]
+        row.update({"w_evidence": "nominal_direct", "w_evidence_reason": None,
+                    "w_dps_usable": True,
+                    # Sustained output over the full cycle, in damage per tick — the plain
+                    # direct fold, and even under `nominal_direct` NOT a complete unit DPS.
+                    "w_dps": (audit["damage_pos"] * audit["burst"]) / cycle})
+    row["weapon_evidence"] = evidence
+    # every AmmoPool trait's full raw record at ROW level, not only each
+    # slot's prioritized pick (whose binding certification stays unchanged)
+    row["ammo_pools"] = [_ammo_pool_evidence(p) for p in pools]
+    row["ammo_rearm"] = rearms
+    row["activation_traits"] = activation
+    row["weapon_modifiers"] = mods
+    row["defensive_modifiers"] = defensive
+    return row
 
 
 def unit_type(node):
@@ -700,8 +1109,9 @@ def main():
             out += ["", data["note"]]
         out += ["", "| id | unit | type | faction | HP | ×rifle | Cost | ×rifle cost | Speed | "
                 "Turn | Turret | Limit | Range | Dmg | Burst | Reload | DPS | vsINF | vsVEH | "
-                "vsAIR | vsBLD |",
-                "|---|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|"]
+                "vsAIR | vsBLD | Evidence | Reason |",
+                "|---|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:"
+                "|---|---|"]
         for r in sorted(data["rows"], key=lambda x: -x["x_hp"]):
             xc = f"{r['x_cost']:.2f}" if r["x_cost"] else "—"
             cost = f"{r['cost']:,}" if r["cost"] else "—"
@@ -718,6 +1128,8 @@ def main():
                        + " | " + " | ".join(
                            (f"{r.get(k):.2f}" if isinstance(r.get(k), (int, float)) else "—")
                            for k in ("eff_vs_INF", "eff_vs_VEH", "eff_vs_AIR", "eff_vs_BLD"))
+                       + " | " + str(r.get("w_evidence") or "—")
+                       + " | " + str(r.get("w_evidence_reason") or "—").replace("|", "/")
                        + " |")
         out.append("")
 

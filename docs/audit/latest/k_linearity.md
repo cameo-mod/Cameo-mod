@@ -4,7 +4,7 @@ Analysed **2061** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
-_clean_ — modeled 1689 folded and 2441 standalone applications.
+_clean_ — modeled 1653 folded and 2441 standalone applications.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 
@@ -52,7 +52,7 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `MigMissiles_tesla` | 92.9% |
 | `RA2APCRocket_elite` | 92.6% |
 | `RA2APCRocket` | 92.4% |
-| `PhobosLaser` | 86.9% |
+| `PhobosLaser` | 87.0% |
 | `TSHSeekerBomb` | 85.7% |
 
 _... and 155 more._
@@ -64,33 +64,33 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 
 | weapon | context-adjusted residual per shot |
 |---|--:|
-| `AsianTurretPlasma` | +2.3819 |
-| `AsianTwinPlasma_elite` | +2.1341 |
-| `AsianTwinPlasma` | +2.0538 |
+| `AsianTurretPlasma` | +2.3815 |
+| `AsianTwinPlasma_elite` | +2.1338 |
+| `AsianTwinPlasma` | +2.0535 |
 | `Tentacle` | +1.9921 |
-| `FutureMechPlasma_elite` | +1.9192 |
-| `ThermobaricMaverick` | +1.9088 |
-| `AsianSinglePlasma_elite` | +1.8929 |
-| `FutureMechPlasma` | +1.8492 |
-| `AsianSinglePlasma` | +1.8477 |
-| `YakTeslaGun` | +1.8392 |
-| `YakTeslaGunArc` | +1.8392 |
-| `KamovTesla` | +1.8031 |
-| `KamovTeslaArc` | +1.8031 |
-| `BTRTeslaMachineGun` | +1.7787 |
-| `BTRTeslaMachineGunArc` | +1.7787 |
-| `edenMobileDefenceLaser` | +1.7736 |
-| `Napalm` | +1.7341 |
-| `CabalMantisGun` | +1.7321 |
-| `RA2LasherLaser` | +1.7309 |
-| `AsianChemicalBombs` | +1.7046 |
-| `TSTurretLaser` | +1.6734 |
-| `TSCABALPlasmaFire` | +1.6734 |
-| `d2kChainGun_upgrade` | +1.6701 |
-| `RATurretGun` | +1.6673 |
-| `schwarzermond_lunarsoldier_rifle_yellow` | +1.6574 |
-| `schwarzermond_lunarsoldier_rifle_amplified` | +1.6574 |
-| `NapalmA10Carrier` | +1.6474 |
-| `TSLaserTurretLaser` | +1.6396 |
-| `Lunar_YellowUbermenschLaser_elite` | +1.6270 |
-| `Lunar_AmplifiedUbermenschLaser_elite` | +1.6270 |
+| `FutureMechPlasma_elite` | +1.9189 |
+| `ThermobaricMaverick` | +1.9090 |
+| `AsianSinglePlasma_elite` | +1.8926 |
+| `FutureMechPlasma` | +1.8489 |
+| `AsianSinglePlasma` | +1.8474 |
+| `YakTeslaGun` | +1.8383 |
+| `YakTeslaGunArc` | +1.8383 |
+| `KamovTesla` | +1.8021 |
+| `KamovTeslaArc` | +1.8021 |
+| `BTRTeslaMachineGun` | +1.7778 |
+| `BTRTeslaMachineGunArc` | +1.7778 |
+| `edenMobileDefenceLaser` | +1.7711 |
+| `Napalm` | +1.7344 |
+| `CabalMantisGun` | +1.7296 |
+| `RA2LasherLaser` | +1.7285 |
+| `AsianChemicalBombs` | +1.7038 |
+| `TSTurretLaser` | +1.6710 |
+| `TSCABALPlasmaFire` | +1.6710 |
+| `d2kChainGun_upgrade` | +1.6677 |
+| `RATurretGun` | +1.6676 |
+| `schwarzermond_lunarsoldier_rifle_yellow` | +1.6550 |
+| `schwarzermond_lunarsoldier_rifle_amplified` | +1.6550 |
+| `NapalmA10Carrier` | +1.6477 |
+| `TSLaserTurretLaser` | +1.6373 |
+| `Lunar_YellowUbermenschLaser_elite` | +1.6247 |
+| `Lunar_AmplifiedUbermenschLaser_elite` | +1.6247 |

@@ -1,13 +1,13 @@
 # audit_inherits — §10.3 invariant violations (B2)
 
-Actors+templates scanned: **4089**
+Actors+templates scanned: **4132**
 
 | violation | meaning | count |
 |---|---|---|
 | V1 | concrete actor inherits from concrete actor | 277 |
 | V2 | inherit crosses faction ownership | 0 |
 | V3 | dangling inherit target (BLOCKING) | 0 |
-| V4 | chain depth > 3 | 1942 |
+| V4 | chain depth > 3 | 1985 |
 | V5 | > 2 -Trait removals (warning) | 102 |
 
 
@@ -2055,6 +2055,49 @@ _none found_
 | ts_nod_toxintrooper | 5 | mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml |
 | ts_nod_warfactory | 4 | mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml |
 | tsaegis | 4 | mods/cameo/rules/tiberiansun.yaml |
+| tscity01 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity02 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity03 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity04 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity05 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity06 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity07 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity08 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity09 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity10 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity11 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity12 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity13 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity14 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity15 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity16 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity17 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity18 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity19 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity20 | 4 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity21 | 4 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tscity22 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0001 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0002 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0003 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0004 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0005 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0006 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0007 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0008 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0009 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0010 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0011 | 4 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0012 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0013 | 4 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0014 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0015 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0016 | 5 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0017 | 4 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0018 | 4 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0019 | 4 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0020 | 4 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
+| tsct0021 | 4 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml |
 | tsctarmr | 4 | mods/cameo/rules/tiberiansun.yaml |
 | tsfloater | 4 | mods/cameo/rules/tiberiansun.yaml |
 | tsfsmoker.bomber | 4 | mods/cameo/rules/tiberiansun.yaml |

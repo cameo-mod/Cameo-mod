@@ -1867,7 +1867,7 @@ ra1_soviets_doctrine_heavyarmordoctrine =
       Focuses on Heavy Armor and Powerful Tanks
       All Vehicles and Aircraft have 10% additional Damage Resistance
       Replaces Mammoth Tanks with Siege Mammoth Tanks
-      Replaces V1 Rocket Trucks with Grads
+      Replaces Katyushas with Grads
       Replaces Replaces Migs with Su-57s
       Unlocks Shtora Defense System Upgrade
       Unlocks Auto Loaders, Thermobaric Rockets and Stalinium Upgrades
@@ -1924,7 +1924,7 @@ ra1_soviets_upgrade_incendiarybullets =
 ra1_soviets_upgrade_scorchedearth =
    .description = Team Upgrade (Also affects units of your teammates)
       Increases Firepower of all Grenadiers, Mortars, Flame Weapons and Artilleries by 25%.
-      Equips the V1 Rocket Truck and the Grad with Fire Rockets.
+      Equips the Katyusha and the Grad with Fire Rockets.
 
 ra1_soviets_upgrade_teslaarcing =
    .description = Tech Upgrade (Only affects units of own faction)

@@ -311,7 +311,17 @@ def variant_rank(cameo_id, peer_name):
     # anything left that is not a faction prefix makes this a VARIANT. `sovietrocketsoldier`
     # leaves "soviet" and is the base; `firerocketsoldier` leaves "fire" and is not.
     residue = tail.replace(peer, "")
-    for w in FACTION_WORDS:
+    # ⛔ DETERMINISM (found 2026-09-09, regenerating for the Katyusha override). FACTION_WORDS is
+    # a frozenset, so iteration order is hash-randomized PER PROCESS — and the words OVERLAP:
+    # "japan" is a prefix of "japanese", likewise soviet/soviets, german/germany, america/american
+    # and russia/russian. Removing the shorter one first eats the longer's tail ("japanese" ->
+    # "ese", "germany" -> "y"), so the same (actor, peer) pair scored variant 1 in one process and
+    # variant 0 in the next; `japan_japaneseflamethrower | RA2 Reborn` is the row it was caught on.
+    # Sort longest-first, lexical among equals, so the longest word always consumes first and the
+    # answer is stable whatever the seed. This cannot invent a third outcome: for any overlapping
+    # pair the only two orders that ever existed are shortest-first and longest-first, so the
+    # fixed order is one of the two the data has already been flipping between.
+    for w in sorted(FACTION_WORDS, key=lambda word: (-len(word), word)):
         residue = residue.replace(w, "")
     return 1 if not residue else 0
 
@@ -861,6 +871,16 @@ REFERENCE_OVERRIDES = {
     # MFLAK frees SHILKA for the Soviet gatling tank, so both get a real row and the
     # one-row-one-actor rule holds. The maintainer named this one; it is not a workaround.
     ("ra1_allies_alliedheavyaatank", "DTA Enhanced"): "MFLAK",   # "Anti-Aircraft Truck", Allies
+
+    # ── Round six, 2026-09-09. Aedis's DM 22:33 under Blackrobe's overnight authority: the
+    # V1 Rocket Truck maps to Combined Arms' KATY and is renamed Katyusha for players. The
+    # matcher can never find this pairing by itself — CA names the row "Katyusha", which shares
+    # no word with `v1rockettruck` — and the actor currently holds no name-backed reference at
+    # all (its greedy proposals were all struck). Verified before writing, per the override
+    # contract: the row exists in the de-duplicated pool (Combined Arms, vehicle, hp 13000,
+    # cost 750, factions include `soviet`), `faction_routes.allows("ra1_soviets", row)` admits
+    # it, and NO actor held CA KATY in the regenerated assignment — so this displaces nobody.
+    ("ra1_soviets_v1rockettruck", "Combined Arms"): "KATY",
 }
 
 

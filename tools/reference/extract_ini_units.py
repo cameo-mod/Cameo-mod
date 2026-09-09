@@ -17,11 +17,29 @@ through `miniyaml.Ruleset`. These sources are Westwood INI: flat sections, no in
     byte round-trips; a UTF-8 read throws partway through several of them.
   * `Owner=` is the faction column and it is a COMMA LIST. A unit owned by six countries is six
     faction rows, not one.
+  * ⛔ Rail/particle weapons deal damage through channels `Damage=` does not describe. The
+    engine profile below is taken from the OpenTS source (weapon keys `AmbientDamage`,
+    `IsRailgun`, `UseFireParticles`, `UseSparkParticles`, `AttachedParticleSystem`; warhead
+    key `Particle`). DTA's X-O Power Suit (Primary=`XORail` railgun, Secondary=`XOMachineGun`)
+    once had its railgun demoted to a bare name and the machine gun promoted in its place.
+    The final contract: channels stay RAW, the fold is declared — `w_evidence` is
+    `nominal_direct` for the plain Damage/ROF contract (never "complete") or `incomplete`
+    with a reason — and `w_dps_usable` True vouches for the NOMINAL-DIRECT contract only.
+    There is NO auto-promotion: the original primary and the raw secondary stay in their
+    slots; the only promotion path is `EXPLICIT_DUMMY_WEAPONS`, an empty-by-default
+    per-source profile the exact rules files must populate. Burst > 1, effect references and
+    dangling/absent warheads are incomplete until a cycle model exists.
 
 Usage:
     python tools/reference/extract_ini_units.py --list
     python tools/reference/extract_ini_units.py --source "Mental Omega"
     python tools/reference/extract_ini_units.py --json docs/reference/ini_corpus.json
+    python tools/reference/extract_ini_units.py --rules path/Rules.ini \
+        [--overlay path/Enhance.ini] --engine ts --label NAME --json out.jsonl
+        (single-source mode: exact files only — Rules.ini + Enhance.ini from DTA_INI.zip;
+         GlobalCode/Base are never auto-merged; --engine and a nonblank --label are
+         required with --rules; --json must land outside every git repo and source
+         directory and is never overwritten)
 """
 
 from __future__ import annotations
@@ -40,6 +58,20 @@ REF = pathlib.Path.home() / "Documents" / "GitHub" / "Cameo-mod-reference" / "ex
 
 # Vanilla Yuri's Revenge. Any source whose rules hash to this is not a mod at all.
 VANILLA_YR_MD5 = "cf7eb658327aff1fe7e6c4e7400eb87f"
+
+# ⛔ THE ONLY PROMOTION PATH, AND IT IS EMPTY. A missing/zero `Damage` cannot prove a dummy
+# primary — the absence of known markers is not proof that all channels are supported — and a
+# wrongly promoted secondary silently votes. So by default the ORIGINAL primary keeps `w_*`
+# and the raw secondary stays whole in `w2_*`. Promotion happens ONLY when the source itself
+# proves the placeholder: a per-source set of weapon names. The exact DTA INI archive has
+# been received by the maintainer OUTSIDE this repo; ⚠ it does NOT verify any dummy — this
+# profile stays empty until the parent's review proves placeholder weapons from that source's
+# own text. When it fires, the historical compatibility shape is emitted — `w_from_secondary`,
+# `w_dummy_primary` (the original public key, kept as a compatibility diagnostic where it
+# actually applies), the demoted record whole under `wdummy_*` — and the raw `w2_*` slot is
+# re-emitted. The legacy committed corpus keeps its old promoted rows regardless: it is NOT
+# regenerated this session.
+EXPLICIT_DUMMY_WEAPONS: dict[str, set] = {}
 
 SOURCES = {
     "Rise of the East":  {"file": "rulesmd_RotE300c.ini",  "engine": "ra2"},
@@ -136,6 +168,114 @@ def versus_of(ini: dict, warhead: str, engine: str) -> tuple[dict, str]:
     return {}, "none"
 
 
+# ── Engine profile: where damage can hide, with the source that says so ─────────────────────
+# OpenTS looks INI names up by their RAW BYTES: "Names are looked up by their raw bytes, so
+# lookups are case sensitive" (opents code/ini.h:144; INIStringHash hashes the string_view
+# unchanged). Every key below is copied EXACTLY from the engine's own ini.Get_* calls, and
+# every read here is therefore EXACT-CASE. A near-miss spelling is EXPOSED as ambiguity
+# (`channel_ambiguities`) — never silently folded, never counted as evidence.
+#   AmbientDamage            weapon   Get_Int     opents code/weapon.cpp:169
+#   IsRailgun                weapon   Get_Bool    opents code/weapon.cpp:200
+#   UseFireParticles         weapon   Get_Bool    opents code/weapon.cpp:198
+#   UseSparkParticles        weapon   Get_Bool    opents code/weapon.cpp:199
+#   AttachedParticleSystem   weapon   Get_String  opents code/weapon.cpp:214 — the system
+#                                         techno.cpp:4088-4097 attaches for rail/fire/spark
+#   Particle                 warhead  Get_String  opents code/warhead.cpp:162
+# Bool VALUES are the one case-folded thing, and that is the engine's own rule: Get_Bool
+# (opents code/ini.cpp:1390) decides on toupper(Value[0]) ∈ {Y,T,1} vs {N,F,0}.
+# ⚠ This profile is OPENTS (Tiberian Sun). The RA2/YR sources share the weapon keys but no
+# engine source for them is on disk here — the ambiguity probe covers that gap instead of a
+# guess. `versus_of`'s pre-existing `k.lower().startswith("modifier.")` fold is NOT touched:
+# it predates this repair and the committed armor corpora were built on it (see report).
+WEAPON_CHANNEL_KEYS = ("AmbientDamage", "IsRailgun", "UseFireParticles",
+                       "UseSparkParticles", "AttachedParticleSystem")
+WARHEAD_CHANNEL_KEYS = ("Particle",)
+# Stamped onto every single-source provenance row; bump when the profile's key set or
+# verdict rules change, so an exported corpus states WHICH rules produced it.
+ENGINE_PROFILE_ID = "opents_weapon_channels"
+ENGINE_PROFILE_VERSION = 1
+
+
+def bool_value(v):
+    """The engine's own bool parsing (opents code/ini.cpp:1390): decide on the FIRST
+    character of the value, case-insensitively — Y/T/1 true, N/F/0 false, anything else
+    (or nothing) falls back to the caller's default, which reads as None here."""
+    c = (v or "").strip()[:1].upper()
+    if c in ("Y", "T", "1"):
+        return True
+    if c in ("N", "F", "0"):
+        return False
+    return None
+
+
+def damage_channels(ini: dict, w: dict, warhead: str) -> dict:
+    """Raw, DECLARED damage channels that the simple Damage/ROF fold cannot express.
+
+    ⛔ Rail/particle weapons carry damage outside the plain `Damage` literal: the railgun
+    beam deals `AmbientDamage` along its path (techno.cpp `Railgun_Beam_Damage`), and the
+    fire/spark particle systems damage through their own behaviour. The values are kept RAW
+    on purpose — no fold, no total, no DPS is computed from them here; the verdict is carried
+    separately by `w_evidence`/`w_evidence_reason`/`w_dps_usable` in `weapon_of`.
+
+    Marker vs reference, per the engine profile above:
+      * `IsRailgun` true, a NON-ZERO `AmbientDamage`, `UseFireParticles`/`UseSparkParticles`
+        true are MARKERS — damage the fold cannot see;
+      * `AttachedParticleSystem` (weapon) and warhead `Particle` are retained REFERENCES —
+        the engine attaches/draws them for many weapons regardless of damage behaviour, so
+        they never drive the verdict on their own;
+      * an explicit `AmbientDamage=0` is a cancellation the fold CAN include (it adds
+        nothing), so it is retained but is not a marker;
+      * an unparsable `AmbientDamage` reads the engine default 0 — retained raw for review,
+        not a marker.
+    """
+    out: dict = {}
+    ambient = w.get("AmbientDamage")
+    if ambient is not None and str(ambient).strip():
+        parsed = num(ambient)
+        # Unparsable ambient text round-trips as its raw string rather than being dropped.
+        out["w_ambient_damage"] = parsed if parsed is not None else str(ambient).strip()
+    if bool_value(w.get("IsRailgun")):
+        out["w_railgun"] = True
+    if bool_value(w.get("UseFireParticles")):
+        out["w_fire_particles"] = True
+    if bool_value(w.get("UseSparkParticles")):
+        out["w_spark_particles"] = True
+    attached = w.get("AttachedParticleSystem")
+    if attached and str(attached).strip():
+        out["w_attached_particle_system"] = str(attached).strip()
+    wh = ini.get(warhead) if warhead else None
+    particle = wh.get("Particle") if wh else None
+    if particle and str(particle).strip():
+        out["w_particle_system"] = str(particle).strip()
+    return out
+
+
+def channel_ambiguities(ini: dict, w: dict, warhead: str) -> list:
+    """Near-miss spellings of the profile keys — keys that differ only by case.
+
+    The engine ignores them (raw-byte lookup, opents code/ini.h:144), so they are NOT
+    evidence and MUST NOT close a gate or count as a channel. They are exposed so a mod's
+    spelling drift is visible instead of silently folded away.
+    """
+    found = set()
+    for section, keys in ((w, WEAPON_CHANNEL_KEYS),
+                          (ini.get(warhead) if warhead else None, WARHEAD_CHANNEL_KEYS)):
+        if not section:
+            continue
+        for key in keys:
+            for k in section:
+                if k != key and k.lower() == key.lower():
+                    found.add(f"{key}<>{k}")
+    return sorted(found)
+
+
+def relabel_weapon(rec: dict, prefix: str) -> dict:
+    """Copy a weapon record under another slot prefix (`w2_*`, `wdummy_*`), keeping only the
+    fields that carry a value — the same shape the `w2_` merge has always used."""
+    return {f"{prefix}{k[2:]}" if k.startswith("w_") else f"{prefix}weapon": v
+            for k, v in rec.items() if v is not None}
+
+
 def weapon_of(ini: dict, wname: str, engine: str) -> dict:
     """Scale-free numbers for one weapon, plus its warhead's armor profile."""
     w = ini.get(wname)
@@ -144,39 +284,78 @@ def weapon_of(ini: dict, wname: str, engine: str) -> dict:
     dmg, rof = num(w.get("Damage")), num(w.get("ROF"))
     warhead = (w.get("Warhead") or "").strip()
     vs, notation = versus_of(ini, warhead, engine)
+    channels = damage_channels(ini, w, warhead)
+    ambiguity = channel_ambiguities(ini, w, warhead)
+    burst = num(w.get("Burst"))
+    # A dangling or absent warhead is a missing DEPENDENCY: the versus profile cannot be
+    # resolved and the weapon's damage application cannot be assessed. (The projectile is
+    # deliberately NOT dependency-checked: TS mods declare projectiles in art.ini as often as
+    # in rules, which this extractor does not read — checking it here would fabricate
+    # missing-dependency verdicts.)
+    wh_resolved = bool(warhead) and warhead in ini
+    # Verdict, kept SEPARATE from the raw channels. There is no "complete" verdict:
+    #   * declared markers (railgun identity — even beside a positive `Damage` literal — a
+    #     non-zero `AmbientDamage`, fire/spark particles) → incomplete, `exotic_channels`;
+    #   * dangling/absent warhead → incomplete, `missing_dependency`;
+    #   * `Burst` > 1 → incomplete, `burst_unfolded` — damage/ROF is one shot per cycle and
+    #     cannot describe the declared multi-shot cadence until a cycle model exists;
+    #   * an effect-system reference (AttachedParticleSystem / warhead `Particle`) →
+    #     incomplete, `effect_reference` — an effect the fold cannot model;
+    #   * missing/zero `Damage` → incomplete, `direct_undeclared` — the absence of known
+    #     markers is NOT proof that all channels are supported;
+    #   * otherwise → `nominal_direct`: the DECLARED contract that `w_dps` is the plain
+    #     direct Damage/ROF estimate. That is a NOMINAL DIRECT value, never a proven total
+    #     DPS or a full cycle — and `w_dps_usable` True vouches for exactly that contract.
+    if channels:
+        markers = (channels.get("w_railgun")
+                   or channels.get("w_fire_particles")
+                   or channels.get("w_spark_particles")
+                   or (num(channels.get("w_ambient_damage")) or 0) != 0)
+    else:
+        markers = False
+    if markers:
+        evidence, reason = "incomplete", "exotic_channels"
+    elif not wh_resolved:
+        evidence, reason = "incomplete", "missing_dependency"
+    elif burst is not None and burst > 1:
+        evidence, reason = "incomplete", "burst_unfolded"
+    elif channels.get("w_particle_system") or channels.get("w_attached_particle_system"):
+        evidence, reason = "incomplete", "effect_reference"
+    elif not dmg:
+        evidence, reason = "incomplete", "direct_undeclared"
+    else:
+        evidence, reason = "nominal_direct", None
+    dps = (dmg / rof) if (dmg and rof) else None
     return {
         "weapon": wname or None,
         "w_damage": dmg,
         "w_reload": rof,
         "w_range": num(w.get("Range")),
         "w_min_range": num(w.get("MinimumRange")),
-        "w_burst": num(w.get("Burst")),
+        "w_burst": burst,
         # ROF is frames between shots; damage/ROF is the engine's own scale-free rate.
-        "w_dps": (dmg / rof) if (dmg and rof) else None,
+        # A NOMINAL DIRECT estimate under the declared contract: when `w_dps_usable` is not
+        # True the number MUST NOT be consumed at all (not even as a diagnostic total).
+        "w_dps": dps,
         "w_projectile": w.get("Projectile"),
         "w_warhead": warhead or None,
         "w_versus": vs or None,
         "w_versus_notation": notation,
+        **channels,
+        "w_evidence": evidence,
+        "w_evidence_reason": reason,
+        "w_dps_usable": True if (reason is None and dps is not None) else None,
+        # Exposed, never folded: near-miss spellings the raw-byte engine will not read.
+        "w_channel_ambiguity": ambiguity or None,
     }
 
 
-def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
-    notes: list[str] = []
-    path = REF / spec["file"]
-    if not path.exists():
-        return [], [f"{label}: MISSING {path}"]
-    digest = hashlib.md5(path.read_bytes()).hexdigest()
-    if digest == VANILLA_YR_MD5:
-        return [], [f"{label}: REFUSED — this file is vanilla Yuri's Revenge (md5 {digest})"]
-
-    ini = read_ini(path)
-    if spec.get("overlay"):
-        ov = REF / spec["overlay"]
-        if ov.exists():
-            ini = merge_overlay(ini, read_ini(ov))
-            notes.append(f"{label}: applied overlay {spec['overlay']}")
-
-    engine = spec["engine"]
+def extract_rows_from_ini(ini: dict, label: str, engine: str) -> list[dict]:
+    """The shared extraction core for BOTH modes: every unit-list section, weapon evidence,
+    ownership and the naval/defense reclassification. It reads NOTHING but the `ini` dict it
+    is handed — named sources (`extract`) and the single-source CLI
+    (`extract_single_source`) differ only in how the dict is built; the single-source mode
+    stamps per-row provenance on top of these rows."""
     # ⚠ `[Countries]` is the RA2/YR spelling; Tiberian Sun mods use `[Houses]`. Reading only the
     # first left `countries` empty for a TS source, which silently disabled the filter below
     # rather than failing — the owners were kept unvalidated. Read both.
@@ -191,24 +370,39 @@ def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
             sec = (a.get("Secondary") or "").strip()
             wep = weapon_of(ini, prim, engine) if prim else {"weapon": None}
             sw = weapon_of(ini, sec, engine) if sec else None
-            # ⛔ A DUMMY PRIMARY HIDES THE REAL GUN IN THE SECONDARY SLOT. Westwood engines pick
-            # Primary/Secondary by TARGET, so a unit whose anti-air or elite-only slot is a
-            # zero-damage placeholder carries its actual cannon as `Secondary`. Reading only
-            # `Primary` recorded those units as unarmed: DTA's GDI Medium Tank extracted as
-            # `90mmDummy`, damage 0 — and clause 5 of the matching law ("a zero-damage row never
-            # matches a combat unit") then removed the one exact-name reference for Cameo's GDI
-            # Battle Tank, which fell through to a MOBILE SENSOR ARRAY. 161 rows across 8 sources
-            # were reading damage off the wrong weapon.
+            # ⛔ A DUMMY PRIMARY HIDES THE REAL GUN IN THE SECONDARY SLOT — and the wrong
+            # selection silently votes. Westwood engines pick Primary/Secondary by TARGET, so
+            # a unit whose anti-air or elite-only slot is a zero-damage placeholder carries its
+            # actual cannon as `Secondary`. Reading only `Primary` recorded those units as
+            # unarmed: DTA's GDI Medium Tank extracted as `90mmDummy`, damage 0 — and clause 5
+            # of the matching law ("a zero-damage row never matches a combat unit") then
+            # removed the one exact-name reference for Cameo's GDI Battle Tank, which fell
+            # through to a MOBILE SENSOR ARRAY. 161 rows across 8 sources were reading damage
+            # off the wrong weapon.
+            # ⛔ NO AUTO-PROMOTION. An unsupported primary cannot prove a dummy: a missing or
+            # zero `Damage` is `w_evidence: incomplete` (`direct_undeclared`) even with no
+            # known marker, because the profile above is what the engine source declares, not
+            # what every mod writes — and promoting the wrong slot would make the secondary
+            # vote for the unit. So the ORIGINAL primary keeps `w_*` and the raw secondary
+            # stays whole in `w2_*`, always. The ONLY promotion path is the explicit
+            # source-profile proof in `EXPLICIT_DUMMY_WEAPONS` (empty until the exact DTA
+            # files arrive); when it fires it emits the historical compatibility shape —
+            # `w_from_secondary`, `w_dummy_primary` (the original public key, kept as a
+            # compatibility diagnostic where it actually applies), the demoted record whole
+            # under `wdummy_*` — and `sw` is KEPT so the raw `w2_*` slot is re-emitted.
+            # ⛔ DPS IS NEVER SUMMED ACROSS THE SLOTS. The OTHER weapon is kept whole so an
+            # effective-damage fold (burst + simultaneous weapons) can be built later without a
+            # re-extract. It does NOT vote yet: Westwood Primary/Secondary is usually
+            # target-SELECTED, not simultaneous, so summing the two would overstate every
+            # dual-purpose unit.
             if sw and sw.get("w_damage") and not wep.get("w_damage"):
-                wep = {**sw, "w_from_secondary": True, "w_dummy_primary": wep.get("weapon")}
-                sw = None
-            # The OTHER weapon is kept whole so an effective-damage fold (burst + simultaneous
-            # weapons) can be built later without a re-extract. It does NOT vote yet: Westwood
-            # Primary/Secondary is usually target-SELECTED, not simultaneous, so summing the two
-            # would overstate every dual-purpose unit.
+                if wep.get("weapon") in EXPLICIT_DUMMY_WEAPONS.get(label, ()):
+                    demoted = wep
+                    wep = {**sw, "w_from_secondary": True,
+                           "w_dummy_primary": demoted.get("weapon")}
+                    wep.update(relabel_weapon(demoted, "wdummy_"))
             if sw:
-                wep = {**wep, **{f"w2_{k[2:]}" if k.startswith("w_") else "w2_weapon": v
-                                 for k, v in sw.items() if v is not None}}
+                wep = {**wep, **relabel_weapon(sw, "w2_")}
             owners = [o.strip() for o in (a.get("Owner") or "").split(",") if o.strip()]
             rows.append({
                 "source": label,
@@ -269,15 +463,215 @@ def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
             r["type"] = "naval"
         elif r["type"] == "building":
             r["type"] = "defense" if r.get("weapon") else "building"
-    return rows, notes
+    return rows
 
 
-def main() -> int:
+def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
+    """NAMED-source mode — unchanged public behavior. Resolves the file under `REF`,
+    refuses a vanilla-YR byte-identical file, applies the overlay fail-closed, then runs the
+    shared core."""
+    notes: list[str] = []
+    path = REF / spec["file"]
+    if not path.exists():
+        return [], [f"{label}: MISSING {path}"]
+    digest = hashlib.md5(path.read_bytes()).hexdigest()
+    if digest == VANILLA_YR_MD5:
+        return [], [f"{label}: REFUSED — this file is vanilla Yuri's Revenge (md5 {digest})"]
+
+    ini = read_ini(path)
+    if spec.get("overlay"):
+        # ⛔ FAIL CLOSED. A missing overlay must not silently label the base file's rows with
+        # the overlay's identity (DTA Classic would be extracted AS "DTA Enhanced"). Refuse
+        # the whole source: no rows, one clear note.
+        ov = REF / spec["overlay"]
+        if not ov.exists():
+            return [], [f"{label}: REFUSED — overlay {spec['overlay']} missing; base "
+                        f"{spec['file']} would be mislabelled as {label}"]
+        ini = merge_overlay(ini, read_ini(ov))
+        notes.append(f"{label}: applied overlay {spec['overlay']}")
+    return extract_rows_from_ini(ini, label, spec["engine"]), notes
+
+
+class SingleSourceRefusal(RuntimeError):
+    """The single-source mode refuses loudly (CLI exits 1) instead of guessing."""
+
+
+def sha256_file(path: pathlib.Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def jsonl_lines(rows: list[dict]) -> list[str]:
+    # One row per line: a changed unit is a one-line diff, and it greps. An indented
+    # 10k-row array is neither reviewable nor small.
+    # ⛔ allow_nan=False: a NaN/Infinity would be written as bare `NaN` — invalid JSON a
+    # downstream parser rejects halfway through. Non-finite data fails HERE, before any
+    # output file exists.
+    return [
+        # `buildable` is named explicitly because it is the one field whose FALSE is the
+        # signal — a row that survives the filter is worth nothing without it.
+        json.dumps({k: v for k, v in r.items()
+                    if k == "buildable" or v not in (None, "", [])},
+                   sort_keys=True, separators=(",", ":"), allow_nan=False)
+        for r in rows
+    ]
+
+
+def extract_single_source(rules, overlay, label: str, engine: str) -> tuple[list[dict], list[str], dict]:
+    """Single-source mode: extract ONE exact rules file (+ optional overlay) with full
+    provenance, for when the exact source files live outside the repo (DTA's generated
+    `Rules.ini` / `Enhance.ini`).
+
+    ⛔ READS ONLY THE TWO GIVEN FILES. DTA's INI archive also ships GlobalCode / Base /
+    artwork INI sets — none are merged, scanned or inferred here: no directory walk, no
+    sibling-file magic. Overlay precedence is the game's own (Enhance wins over Rules, the
+    same `merge_overlay` the named mode uses).
+
+    Reproducibility contract:
+      * paths are JUNCTION-RESOLVED before anything is decided;
+      * SHA256 of every input is taken BEFORE the read and AGAIN after extraction — any
+        change in between fails the whole run;
+      * the returned provenance dict (stamped onto EVERY row) carries the exact source
+        SHA256, the overlay's SHA256 and precedence, the label, the SELECTED engine (its
+        own field, `engine` — ts/ra2 as passed), the OpenTS channel-profile version WITH an
+        explicit applicability status, the SOURCE game runtime version status (unverified —
+        we do not know which engine build produced these files) and the extractor's own
+        Python version, which is the only runtime recorded as fact;
+      * the raw source text is NEVER embedded — rows carry extracted scalars and hashes only.
+    """
+    notes: list[str] = []
+    rules = pathlib.Path(rules).resolve()
+    if not rules.exists() or rules.is_dir():
+        raise SingleSourceRefusal(f"REFUSED — rules file missing or not a file: {rules}")
+    if overlay:
+        overlay = pathlib.Path(overlay).resolve()
+        if not overlay.exists() or overlay.is_dir():
+            raise SingleSourceRefusal(
+                f"REFUSED — overlay {overlay.name} missing; base {rules.name} would be "
+                f"mislabelled as {label}")
+    digest = hashlib.md5(rules.read_bytes()).hexdigest()
+    if digest == VANILLA_YR_MD5:
+        raise SingleSourceRefusal(
+            f"REFUSED — this file is vanilla Yuri's Revenge (md5 {digest})")
+
+    sha_rules_before = sha256_file(rules)
+    sha_overlay_before = sha256_file(overlay) if overlay else None
+
+    ini = read_ini(rules)
+    if overlay:
+        ini = merge_overlay(ini, read_ini(overlay))
+        notes.append(f"{label}: applied overlay {overlay.name}")
+    rows = extract_rows_from_ini(ini, label, engine)
+
+    # ⛔ the extraction is only honest for the bytes it actually read
+    if sha256_file(rules) != sha_rules_before or (overlay and sha256_file(overlay) != sha_overlay_before):
+        raise SingleSourceRefusal(
+            f"REFUSED — input changed during extraction ({rules.name}"
+            + (f" / {overlay.name}" if overlay else "") + "); nothing is exported")
+
+    provenance = {
+        "source_label": label,
+        "source_sha256": sha_rules_before,
+        "overlay_sha256": sha_overlay_before,
+        "overlay_precedence": "overlay_over_rules" if overlay else "none",
+        # The SELECTED engine stays its own field (`engine`, stamped by the core). The
+        # channel profile is OPENTS — the Tiberian Sun engine source. ⛔ ITS APPLICABILITY
+        # IS ALWAYS UNVERIFIED, for BOTH engines: a user-declared `--engine ts` is not proof
+        # that the mod's exact engine build implements OpenTS (DTA ships its own TS fork),
+        # and RA2 has no engine source on disk at all. No executable fidelity is claimed —
+        # the only thing recorded is that the profile was USER-SELECTED.
+        "engine_profile": f"{ENGINE_PROFILE_ID}_v{ENGINE_PROFILE_VERSION}",
+        "engine_profile_applicability": "unverified",
+        "profile_selection": "user_declared",
+        # The SOURCE game's runtime version is unknown here — status only, never a guess.
+        "source_runtime_version_status": "unverified",
+        "extractor_python_version": sys.version.split()[0],
+    }
+    for r in rows:
+        r.update(provenance)
+    return rows, notes, provenance
+
+
+def ensure_external_output(out_path, source_paths) -> pathlib.Path:
+    """--json in single-source mode must land OUTSIDE every git repo and outside every
+    source directory, must not overwrite, and every decision runs on JUNCTION-RESOLVED
+    paths (`Path.resolve` also normalizes `..`). Refusals are loud, not silent renames."""
+    out = pathlib.Path(out_path).resolve()
+    parent = out.parent
+    for anc in (parent, *parent.parents):
+        if (anc / ".git").exists():          # covers .git dirs AND worktree .git files
+            raise SingleSourceRefusal(
+                f"REFUSED — {out} sits inside the git repo at {anc}; external output only")
+    for src in source_paths:
+        src_dir = pathlib.Path(src).resolve().parent
+        if parent == src_dir or src_dir in parent.parents:
+            raise SingleSourceRefusal(
+                f"REFUSED — {out} sits inside the source directory {src_dir}")
+    if out.exists():
+        raise SingleSourceRefusal(
+            f"REFUSED — {out} already exists; single-source output never overwrites")
+    return out
+
+
+def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--source", action="append", help="limit to these sources (repeatable)")
+    ap.add_argument("--rules", help="single-source mode: extract this exact rules file")
+    ap.add_argument("--overlay", help="single-source mode: optional overlay (e.g. Enhance.ini)")
+    ap.add_argument("--label", help="single-source mode: source label (default: rules stem)")
+    ap.add_argument("--engine", choices=("ts", "ra2"),
+                    help="single-source mode: engine profile — REQUIRED with --rules")
     ap.add_argument("--json", help="write the corpus to this path")
     ap.add_argument("--list", action="store_true", help="list sources and exit")
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
+
+    if (args.overlay or args.label or args.engine) and not args.rules:
+        print("  refused: --overlay/--label/--engine require --rules", file=sys.stderr)
+        return 1
+    if args.source and args.list:
+        print("  refused: --source and --list are conflicting named-mode flags", file=sys.stderr)
+        return 1
+
+    if args.rules:
+        if args.source:
+            print("  refused: --rules cannot be combined with --source", file=sys.stderr)
+            return 1
+        if args.list:
+            print("  refused: --rules cannot be combined with --list", file=sys.stderr)
+            return 1
+        if not args.engine:
+            print("  refused: --engine ts|ra2 is required with --rules", file=sys.stderr)
+            return 1
+        if not args.label or not args.label.strip():
+            # two source variants must never silently share one label
+            print("  refused: --rules needs an explicit nonblank --label", file=sys.stderr)
+            return 1
+        try:
+            label = args.label
+            sources = [pathlib.Path(args.rules).resolve()]
+            if args.overlay:
+                sources.append(pathlib.Path(args.overlay).resolve())
+            rows, notes, _ = extract_single_source(args.rules, args.overlay, label,
+                                                   args.engine)
+            for n in notes:
+                print(f"  ! {n}")
+            print(f"  {label}: {len(rows)} rows (single-source, engine {args.engine})")
+            if args.json:
+                # ⛔ strict serialization FIRST — a malformed (non-finite) row must never
+                # leave a partial artifact behind
+                lines = jsonl_lines(rows)
+                out = ensure_external_output(args.json, sources)
+                # exclusive create — the file must not exist, and it is written only after
+                # the extraction passed its hash and output-safety gates
+                with open(out, "x", encoding="utf-8", newline="\n") as fh:
+                    fh.write("\n".join(lines) + "\n")
+                print(f"  wrote {out}")
+            return 0
+        except SingleSourceRefusal as e:
+            print(f"  {e}", file=sys.stderr)
+            return 1
+        except ValueError as e:
+            print(f"  REFUSED — output serialization failed: {e}", file=sys.stderr)
+            return 1
 
     if args.list:
         for k, v in SOURCES.items():
@@ -307,17 +701,7 @@ def main() -> int:
     if args.json:
         out = pathlib.Path(args.json)
         out.parent.mkdir(parents=True, exist_ok=True)
-        # One row per line: a changed unit is a one-line diff, and it greps. An indented
-        # 10k-row array is neither reviewable nor small.
-        lines = [
-            # `buildable` is named explicitly because it is the one field whose FALSE is the
-            # signal — a row that survives the filter is worth nothing without it.
-            json.dumps({k: v for k, v in r.items()
-                        if k == "buildable" or v not in (None, "", [])},
-                       sort_keys=True, separators=(",", ":"))
-            for r in all_rows
-        ]
-        out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        out.write_text("\n".join(jsonl_lines(all_rows)) + "\n", encoding="utf-8")
         print(f"  wrote {out}")
     return 0
 

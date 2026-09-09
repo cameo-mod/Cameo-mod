@@ -9,27 +9,29 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `ai_contract_distinct_module_types` | 21 | 21 | ✅ |
 | `ai_contract_player_module_instances` | 36 | 36 | ✅ |
 | `ai_contract_world_module_instances` | 1 | 1 | ✅ |
-| `shield_versus_mean` | 175.919 | 176.598 | ✅ |
-| `shield_hp_factor` | 0.568442 | 0.566258 | ✅ |
-| `shield_damage_share` | 0.0152182 | 0.0151465 | ✅ |
+| `shield_versus_mean` | 175.919 | 177.23 | ✅ |
+| `shield_hp_factor` | 0.568442 | 0.56424 | ✅ |
+| `shield_damage_share` | 0.0152182 | 0.0148269 | ✅ |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 356 | 356 | ✅ |
-| `multi_main_fired_weapons` | 184 | 184 | ✅ |
+| `multi_main_fired_weapons` | 184 | 122 | **MISMATCH** |
 | `percentage_denominator_unset` | 183 | 183 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 18 | 18 | ✅ |
-| `meters_filling_before_death` | 269 | 269 | ✅ |
+| `meters_filling_before_death` | 269 | 282 | **MISMATCH** |
 | `corrosion_meter_actors` | 817 | 817 | ✅ |
-| `w24_multi_main_fed` | 429 | 429 | ✅ |
-| `physical_state_fired_weapons` | 534 | 534 | ✅ |
+| `w24_multi_main_fed` | 429 | 425 | **MISMATCH** |
+| `physical_state_fired_weapons` | 534 | 531 | **MISMATCH** |
 | `plating_row_ties` | 0 | 0 | ✅ |
 | `plating_families` | 48 | 48 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1415 | 1415 | ✅ |
-| `unconverted_template_inheritors` | 1596 | 1596 | ✅ |
+| `unconverted_template_inheritors` | 1596 | 1592 | **MISMATCH** |
 | `ledgers_drifted` | 0 | 0 | ✅ |
 
-_clean_ — every registered claim still matches the tree.
+**FAIL — a document and the tree disagree.**
+
+Fix whichever is wrong, and if the tree is right update `value` in `doc_claims.yaml` **and every doc listed under `docs:`** in the SAME commit. That co-update is the point: it is how the `Shield = top + floor` duplication survived in two documents for weeks.
 
 ## Review cadence (for what a number cannot capture)
 
