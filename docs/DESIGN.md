@@ -1778,6 +1778,16 @@ detector and fixes land as ordered batches, never silently.
 
 ### 12.0c THE SHIELD LADDER (maintainer 2026-08-16) — binding
 
+**Continuous migration ruling (Aedis, 2026-09-10 02:10):** uniqueness applies
+between the new family bases. Old Light/Medium/Heavy templates remain temporary
+compatibility definitions; their duplicate Shield values must remain visible in raw
+audits. The first CannonAP base reuses its existing finalized Medium Shield (144),
+as proposed and approved, without re-ranking legacy templates. This is a staged
+coexistence policy, not evidence that a one-family pilot spans the full legacy band.
+Shield remains outside the heaviness bell. The level-based specification below
+continues to describe the retained legacy generator, not a requirement to invent a
+new Shield value solely to avoid an approved compatibility duplicate.
+
 > *"the only thing that should deal extreme amount of damage to shields is tesla"*
 
 ```
@@ -2248,7 +2258,7 @@ derivation and the measurements behind every constant: `docs/design/WEAPON_HEAVI
     mu(family, h) = ( h + centre_of_mass(base_profile) ) / 2
     curve(x)      = LO + (1 - LO) * exp( -(x - mu)^2 / (2*sigma^2) )
     Versus(a, h)  = base(a) * curve(x(a), mu)
-                    then renormalised to a constant weighted mean
+                    then renormalised to a constant arithmetic mean over tiltable rows
                     then RANK-RESTORED per ladder (§12.0d) — see law 5
 
 #### The axis (maintainer, 2026-08-24)
@@ -2308,8 +2318,8 @@ rung ORDER — all four ladders come out monotone, independently — and nothing
 | `sigma` | **0.75** | RULED 2026-08-24 — it had been an assumed 1.0 inherited from an audit. 0.75 gives the strongest consistent tilt; below ~0.5 the effect starts to INVERT, because only the rung nearest the peak still moves. |
 | `mu` | **`(h + centre_of_mass) / 2`** | the BLEND, ruled 2026-08-24 — see law 1. |
 | `SHIFT` | **deleted** | it belonged to the family-anchored peak. |
-| price effect | **none** | see law 2. |
-| verified | `audit_heaviness_bell.py`, 2026-08-24 | 48 families, h ∈ {0, 0.5, 1, 1.5, 2}: **0** ladder orderings changed, **0** weighted-mean drift, **2** flat families (`Sonic`, `Magic`) at the ratchet. |
+| price effect | **actual effects enter normal pricing; no extra surcharge** | clarified by maintainer 2026-09-10 at 01:19; see law 2. |
+| historical check | `audit_heaviness_bell.py`, 2026-08-24 | 48 families, h ∈ {0, 0.5, 1, 1.5, 2}: **0** ladder orderings changed, **0** arithmetic-mean drift, **2** flat families (`Sonic`, `Magic`) at the ratchet. This did not test roster-weighted price invariance. |
 
 #### The laws
 
@@ -2328,10 +2338,13 @@ rung ORDER — all four ladders come out monotone, independently — and nothing
    sentence. Worked example, `CannonAP`, `Versus` at h=0 / 1 / 2: `Superheavy` 160.1 → 174.1 →
    205.0, `Scout` 108.9 → 89.4 → 81.4. At h=0 `Superheavy` is still the largest value in the whole
    profile — the weapon leans lighter without ever ceasing to be anti-heavy.
-2. **HEAVINESS IS FREE OF PRICE.** Renormalising to a constant weighted mean makes `K` invariant
-   in `h`. `Versus` = WHAT the weapon is good against, `Damage` = HOW strong it is. A late-game
-   weapon costs more because its `Damage` is higher, and **no tier term is added to pricing**.
-   This REVERSES `WEAPON_HEAVINESS.md` §1, which measured the retired additive model.
+2. **NO SEPARATE HEAVINESS SURCHARGE.** Clarified by the maintainer on 2026-09-10 at 01:19:
+   normal pricing includes actual percentage damage and splash, and roster-weighted armor
+   redistribution can also change price. The bell preserves an arithmetic table mean, not
+   the target-population-weighted result; `K` is therefore not invariant in `h`. Do not add
+   a separate tier term for power already represented by these effects. Preserve source
+   placement separately from the final joint stats/price fit. The earlier invariance claim
+   is superseded; this does not revive the retired additive model in WEAPON_HEAVINESS §1.
 3. **THE LEVEL IS NOT A DAMAGE LADDER, and never was.** 145 `^Warhead_*` templates carry only a
    placeholder `Damage: 2000`: the template holds the SHAPE, the weapon holds the MAGNITUDE. A
    family's effective damage across its rungs is emergent, orthogonal to the bell, and no law
@@ -2344,12 +2357,12 @@ rung ORDER — all four ladders come out monotone, independently — and nothing
    what makes "can never invert" TRUE rather than merely hoped for. Measured across 48 families:
    without it the bell changes a ladder's internal order in **127** cases spanning 60
    family/ladder pairs; with it, **zero**. It permutes values inside one ladder, so the multiset
-   and therefore the weighted mean are untouched — law 2's price invariance survives it.
+   and therefore its arithmetic mean are untouched. Roster-weighted effectiveness can
+   change because weights remain attached to armor identities; see law 2.
 
-   ⚠ A consequence worth knowing: a family with NO gradient (`Sonic`, `Magic`) does not come out
-   inert. With every value tied, the "rank held" falls back to the ladder's own lightest→heaviest
-   order, so the family picks up a mild gradient pointing that way. Reasonable as a tie-break, but
-   "flat family" does not mean "heaviness does nothing".
+   A flat armor table (`Sonic`, `Magic`) takes the implementation's early return and does not
+   acquire a bell gradient. Separate percentage-magnitude and radius interpolation can still
+   change its power. The earlier claim of a tie-break gradient did not describe the code.
 
 ⚠ **"Inert at h=1" is a DEPLOYMENT property, not a design one, and it needs proving separately.**
 The intent was the discipline `AreaDamage` shipped under: turn the code on with every weapon at
@@ -2361,6 +2374,30 @@ today's Light / Medium / Heavy yaml.** Do NOT test it by comparing the bell agai
 TEMPLATES directly — the level also changes the body's `step` and `floor` (`LEVELS` in
 `gen_weapon_template.py`), so even the shipped `class_tilt` itself scores **+18.7% worse than doing
 nothing** on that comparison. Compare tilt to tilt, on the same base.
+
+#### Shared percentage and Shield rule (maintainer 2026-09-10, 03:17 Jakarta)
+
+For newly migrated warheads, `HeavinessMode: SharedVersus` explicitly opts into
+one armor table for flat and percentage damage. The bell transforms `Versus`
+once. Its Shield row is then multiplied once by `1 + h/2`; both damage halves
+read that resulting table. Shield remains outside the bell axis. At equal `h`,
+new family bases must have distinct Shield coefficients; retained legacy-level
+templates remain visible compatibility duplicates, not hidden exceptions.
+
+The new base conversion is 100 raw damage to 0.01% maximum HP **before** heaviness
+and armor. With the existing field units, migrated CannonAP explicitly sets
+`PercentageScale: 2000`. The percentage magnitude is multiplied by `h/2`:
+zero at h=0, half at h=1, full at h=2. Thus h=0 retains flat damage and the Shield
+coefficient floor, but has no percentage component. Integer basis-point units
+are rounded half-up once from `Damage * PercentageScale * Heaviness / 400000000`,
+where YAML Heaviness is h times 1000. Small hits are quantized; do not describe
+the unrounded formula as exact observed damage for every Damage value.
+
+Shared mode rejects separate percentage tables/endpoints and requires active
+Heaviness 0..2000. Omitted mode keeps legacy behavior, including existing healing
+and standalone percentage warheads. This is an intentional gameplay change,
+not an equivalence-preserving refactor. Initial activation is limited to five
+CannonAP pilot definitions; it does not authorize automatic whole-roster fitting.
 
 ## 16. Rank decorations, experience systems & elite weapons
 

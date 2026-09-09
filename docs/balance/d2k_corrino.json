@@ -2427,24 +2427,24 @@
        {
         "damage": "3000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Corrino/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5c0",
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonAP_Light",
+       "^Warhead_CannonAP",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "corrino_buggy_gun",
       "weapon_class_source": "template"

@@ -8,7 +8,7 @@
 | R4 | MissileHE reachable against Air (hard rule) | 50 | 50 | PASS |
 
 
-358 concrete weapon(s) fly a Missile* main; 190 already match their role.
+352 concrete weapon(s) fly a Missile* main; 184 already match their role.
 
 
 ## payload blends - counted, never failed

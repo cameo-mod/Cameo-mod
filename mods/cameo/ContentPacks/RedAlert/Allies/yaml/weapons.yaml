@@ -177,7 +177,6 @@ ChainGunMH60Cryo:
 		Damage: 8000
 
 AlliedTankDestroyerCannon:
-	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
@@ -186,10 +185,8 @@ AlliedTankDestroyerCannon:
 	Report: tank5.aud
 	Projectile: Bullet
 		Speed: 1362
-	Warhead@CannonHE_Medium:
-		Damage: 12000
 	Warhead@CannonAP_Light:
-		Damage: 12000
+		Damage: 24000
 AlliedTankDestroyerCannonCryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Light

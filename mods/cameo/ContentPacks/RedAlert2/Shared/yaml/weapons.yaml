@@ -921,20 +921,30 @@ RA2105mm_elite:
 	BurstDelays: 3
 
 RA2sabot:
-	Inherits: ^RA2TankDestroyerCannon
+	# PILOT (Aedis 2026-09-10 02:10/02:14, scoped): repointed onto the live
+	# ^Warhead_CannonAP continuous base. ONLY the warhead template moves; Damage,
+	# ReloadDelay, Range, projectile, effect and resolved firing operation stay
+	# exactly as before. Heaviness 0 is the ACTIVE h=0 (thousandths), NOT the
+	# disabled sentinel - it reproduces the old Light geometry (Spread 120 x 2/3
+	# = 80) and carries the provisional role profile on purpose (K counterfactual
+	# Light +0.4%; Wood/Heroic shifts are the intended migration).
+	Inherits: ^Warhead_CannonAP
+	Inherits@projectile: ^Projectile_Shell_Light
+	Inherits@effect: ^Effect_Explosion_Small_RA2
 	Report: cannon1.aud
 	ReloadDelay: 160
 	Range: 7040
 	Projectile: Bullet
 		Speed: 1408
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
+		Heaviness: 0
 		Damage: 80000
 RA2sabot_elite:
 	Inherits: RA2sabot
 	Inherits@Elite: ^RA2EliteEffects
 	Report: cannon1.aud
 	Range: 8040
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 160000
 RA2MirageGun:
 	Inherits@roleflat: ^Compatibility_CannonAP_LightFlat

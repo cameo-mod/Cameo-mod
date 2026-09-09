@@ -6,25 +6,27 @@
 
 concrete weapons with inherits: **2061**
 
+W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
+
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **576** | 576 |
-| W2 | two or more `^Warhead_*` inherits | **210** | 210 |
+| W1 | more than 3 inherits | **573** | 576 |
+| W2 | two or more `^Warhead_*` inherits | **200** | 210 |
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
 | W4 | two or more `^Effect_*` inherits | **51** | 51 |
-| W5 | more than one resolved MAIN warhead | **389** | 389 |
+| W5 | more than one resolved MAIN warhead | **303** | 389 |
 | W6 | effect warheads declared LOCALLY | **694** | 694 |
 
 | I7 informational ΓÇö missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1244 |
-| no `^Projectile_*` inherit | 1362 |
-| no `^Warhead_*` inherit | 1156 |
+| no `^Effect_*` inherit | 1243 |
+| no `^Projectile_*` inherit | 1361 |
+| no `^Warhead_*` inherit | 1155 |
 
 _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W1 ΓÇö more than 3 inherits (576 vs ratchet 576)
+## W1 ΓÇö more than 3 inherits (573 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -43,7 +45,6 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `APTusk` | 5 | `^Warhead_MissileAP_Heavy` ┬╖ `^TankDestroyerCannon` ┬╖ `^Grenade` ┬╖ `^FlakWeapon` |
 | `ASDFGun2` | 4 | `^Warhead_Railgun_Heavy` ┬╖ `^Projectile_Railgun_Heavy` ┬╖ `^Effect_Railgun_Heavy` ┬╖ `ASDFGun` |
 | `ASDFKamikazeExplosion` | 4 | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Effect_Concussion_Medium` ┬╖ `^Projectile_Grenade_Light` |
-| `AlliedTankDestroyerCannon` | 4 | `^Warhead_CannonHE_Medium` ┬╖ `^Warhead_CannonAP_Light` ┬╖ `^Projectile_Shell_Light` ┬╖ `^Effect_CannonAP_Light` |
 | `AphidCryo_AA` | 4 | `^Warhead_CryoBlast_Medium` ┬╖ `^Warhead_MissileCryo_Heavy` ┬╖ `^Projectile_Missile_Heavy` ┬╖ `^Effect_Cryo` |
 | `Aphid_AA` | 4 | `^Warhead_Concussion_Medium` ┬╖ `^Warhead_MissileHE_Heavy` ┬╖ `^Projectile_Missile_Heavy` ┬╖ `^Effect_MissileHE_Heavy` |
 | `ArcherArtilleryShell` | 6 | `^Warhead_Concussion_Heavy` ┬╖ `^MediumCannon` ┬╖ `^HeavyCannon` ┬╖ `^MediumFlameWeapon` |
@@ -68,12 +69,13 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `AsianSmallTorpedo` | 4 | `^Compatibility_MissileAP_HeavyFlat` ┬╖ `^RA2Grenade` ┬╖ `^RA2HeavyMissile` ┬╖ `^Effect_Watersplash_Large_RA2` |
 | `AsianSniper` | 8 | `^Warhead_Bullet_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` ┬╖ `^MediumMissile` |
 | `AsianSniperLockdown` | 4 | `^Warhead_Tesla_Super` ┬╖ `^Projectile_Lightning_Super` ┬╖ `^Effect_Tesla_Super` ┬╖ `AsianSniperAP` |
+| `AsianSubmarineBomb` | 5 | `^Compatibility_Demolition_HeavyFlat` ┬╖ `^Warhead_Demolition_Heavy` ┬╖ `^Effect_Demolition_Heavy` ┬╖ `^RA2Grenade` |
 
 
-_... and 536 more._
+_... and 533 more._
 
 
-## W2 ΓÇö two or more `^Warhead_*` inherits (210 vs ratchet 210)
+## W2 ΓÇö two or more `^Warhead_*` inherits (200 vs ratchet 210)
 
 | weapon | warhead templates |
 |---|---|
@@ -83,7 +85,6 @@ _... and 536 more._
 | `APCGun` | `^Warhead_Bullet_Medium` ┬╖ `^Warhead_Flak_Medium` |
 | `APCGunAllies` | `^Warhead_Bullet_Medium` ┬╖ `^Warhead_Flak_Medium` |
 | `ASDFKamikazeExplosion` | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Concussion_Medium` |
-| `AlliedTankDestroyerCannon` | `^Warhead_CannonHE_Medium` ┬╖ `^Warhead_CannonAP_Light` |
 | `AphidCryo_AA` | `^Warhead_CryoBlast_Medium` ┬╖ `^Warhead_MissileCryo_Heavy` |
 | `Aphid_AA` | `^Warhead_Concussion_Medium` ┬╖ `^Warhead_MissileHE_Heavy` |
 | `ArtilleryShell` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` |
@@ -117,9 +118,10 @@ _... and 536 more._
 | `D2K_Rocket_Trooper2` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Railgun_Heavy` ┬╖ `^Warhead_CannonHE_Medium` |
 | `DalekCannon` | `^Warhead_Tesla_Heavy` ┬╖ `^Warhead_Laser_Heavy` |
 | `Dune_SiegeMortar` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
+| `FireballLauncherBuggy2` | `^Warhead_Flame_Light` ┬╖ `^Warhead_Flame_Heavy` |
 
 
-_... and 170 more._
+_... and 160 more._
 
 
 ## W3 ΓÇö two or more `^Projectile_*` inherits (12 vs ratchet 12)
@@ -189,7 +191,7 @@ _... and 170 more._
 _... and 11 more._
 
 
-## W5 ΓÇö more than one resolved MAIN warhead (389 vs ratchet 389)
+## W5 ΓÇö more than one resolved MAIN warhead (303 vs ratchet 389)
 
 | weapon | mains | which |
 |---|---|---|
@@ -198,14 +200,11 @@ _... and 11 more._
 | `AAGunBoatFlak` | 3 | `Bullet_Light` ┬╖ `Flak_Medium` ┬╖ `Flak_MediumFlatCompatibility` |
 | `AAGunBoatFlak_elite` | 3 | `Bullet_Light` ┬╖ `Flak_Medium` ┬╖ `Flak_MediumFlatCompatibility` |
 | `ATMine` | 2 | `ATMineDemolition_Light` ┬╖ `Demolition_Light` |
-| `AlliedTankDestroyerCannon` | 2 | `CannonAP_Light` ┬╖ `CannonHE_Medium` |
 | `AphidCryo_AA` | 2 | `CryoBlast_Medium` ┬╖ `MissileCryo_Heavy` |
 | `Aphid_AA` | 2 | `Concussion_Medium` ┬╖ `MissileHE_Heavy` |
-| `ArcherArtilleryShell` | 2 | `CollapseTargetCompatibility1` ┬╖ `Concussion_Heavy` |
 | `ArmoredCarMGAAWaveforce` | 5 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonAP_Light` ┬╖ `CannonHE_Medium` |
 | `ArmoredCarMGWaveforce` | 2 | `Bullet_Medium` ┬╖ `Railgun_Heavy` |
 | `ArmoredCarMG_AA` | 4 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonAP_Light` ┬╖ `CannonHE_Medium` |
-| `ArtilleryShellUpgrade` | 2 | `CollapseTargetCompatibility1` ┬╖ `Concussion_Heavy` |
 | `AsianChaosMine` | 2 | `CannonAP_Light` ┬╖ `Chemical_Heavy` |
 | `AsianPhoenixRocket` | 3 | `Demolition_Light` ┬╖ `Flame_Medium` ┬╖ `MissileAP_Heavy` |
 | `AsianPhoenixRocket_elite` | 3 | `Demolition_Light` ┬╖ `Flame_Medium` ┬╖ `MissileAP_Heavy` |
@@ -214,28 +213,31 @@ _... and 11 more._
 | `AsianSniperLockdown` | 6 | `Bullet_Heavy` ┬╖ `Bullet_Medium` ┬╖ `SniperChaingun` ┬╖ `SniperFlak` |
 | `AsianTSIonCannon` | 4 | `IonCannon` ┬╖ `TeslaChargedWeapon` ┬╖ `TeslaWeapon` ┬╖ `Tesla_Super` |
 | `Atomic` | 2 | `Nuclear_Super` ┬╖ `Tesla_Super` |
-| `AtreusMG` | 2 | `Bullet_Medium` ┬╖ `CannonHE_Heavy` |
 | `BCLaser` | 2 | `CannonHE_Heavy` ┬╖ `Laser_HeavyFlatCompatibility` |
-| `BCYamatoCannon` | 2 | `CannonHE_Heavy` ┬╖ `Plasma_HeavyFlatCompatibility` |
 | `BallistaMultiShot` | 2 | `Arrow_Medium` ┬╖ `CollapseTargetCompatibility1` |
 | `BallistaSingleShotAirEnergized` | 4 | `Arrow_Light` ┬╖ `Arrow_LightFlatCompatibility` ┬╖ `CannonHE_Medium` ┬╖ `MissileAP_Light` |
 | `BallistaTowerMultiShot` | 2 | `Arrow_Medium` ┬╖ `CollapseTargetCompatibility1` |
 | `BarrelExplode` | 2 | `1Dam` ┬╖ `Demolition_Light` |
 | `BikeRockets` | 2 | `CollapseTargetCompatibility1` ┬╖ `MissileAP_Medium` |
-| `BlackHandLaser` | 2 | `LaserHeavyGroundRemainder` ┬╖ `Laser_Heavy` |
 | `BoxerCannon_AA` | 4 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonHE_Medium` ┬╖ `Flak_MediumFlatCompatibility` |
 | `BroodweaverLeech` | 2 | `ExtraHealing` ┬╖ `HealingWeapon` |
 | `CHFlameBlue` | 2 | `1Dam` ┬╖ `Flame_Medium` |
 | `CabalAscendedRockets` | 2 | `MissileHE_Heavy` ┬╖ `MissileHE_HeavyGroundBonus` |
 | `CabalEngineerRepairBeam` | 2 | `ExtraRepair` ┬╖ `RepairWeapon` |
 | `CabalMagicNuke` | 8 | `10Dam_areanuke3` ┬╖ `11Dam_areanuke3` ┬╖ `1Dam_impact` ┬╖ `4Dam_areanuke1` |
-| `ChemRockets` | 2 | `ChemRocketCompatibility` ┬╖ `Chemical_Light` |
-| `ChemRocketsExplosion` | 2 | `ChemRocketCompatibility` ┬╖ `Chemical_Light` |
 | `ChemTibAtomic` | 2 | `Nuclear_Super` ┬╖ `Tesla_Super` |
 | `Combat_Tank_F_Sound` | 2 | `1Dam` ┬╖ `2Dam` |
+| `ConsortiumMissileSystem` | 3 | `Flak_Medium` ┬╖ `MissileAA_MediumFlatCompatibility` ┬╖ `MissileAP_Medium` |
+| `ConsortiumMissileSystem_EMP` | 3 | `Flak_Medium` ┬╖ `MissileAP_Medium` ┬╖ `MissileQuantum_MediumFlatCompatibility` |
+| `CrateNuke` | 3 | `1Dam_impact` ┬╖ `4Dam_areanuke1` ┬╖ `TREEKILL` |
+| `D2KRepair` | 3 | `1Dam` ┬╖ `ExtraHealing` ┬╖ `HealingWeapon` |
+| `D2K_Rocket_AA` | 2 | `1Dam` ┬╖ `MissileAP_Heavy` |
+| `D2K_Rocket_Trooper1` | 3 | `Flak_Medium` ┬╖ `MissileAP_Heavy` ┬╖ `MissileAP_Light` |
+| `D2K_Rocket_Trooper2` | 3 | `CannonHE_Medium` ┬╖ `Demolition_Light` ┬╖ `Railgun_Heavy` |
+| `D2K_SiegeQuad` | 4 | `CannonHE_Medium` ┬╖ `Concussion_Medium` ┬╖ `Demolition_Heavy` ┬╖ `Demolition_Light` |
 
 
-_... and 349 more._
+_... and 263 more._
 
 
 ## W6 ΓÇö effect warheads declared LOCALLY (694 vs ratchet 694)

@@ -5479,7 +5479,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "120",
-        "tag": "CannonAP_Medium",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
@@ -5492,12 +5492,12 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^TSCannonEffect",
-       "^Warhead_CannonAP_Medium",
+       "^Warhead_CannonAP",
        "^Projectile_Shell_Medium",
        "^Effect_CannonAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Medium"
+       "^Warhead_CannonAP"
       ],
       "weapon": "TS90mm",
       "weapon_class_source": "template"
@@ -5546,7 +5546,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "120",
-        "tag": "CannonAP_Medium",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
@@ -5561,7 +5561,7 @@
        "TS90mm"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Medium"
+       "^Warhead_CannonAP"
       ],
       "weapon": "TS90mmDep",
       "weapon_class_source": "template"

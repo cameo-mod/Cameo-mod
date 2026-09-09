@@ -12,14 +12,21 @@ corrino_cannon:
 		Damage: 8000
 
 corrino_buggy_gun:
-	Inherits@wh: ^Warhead_CannonAP_Light
+	# PILOT (Aedis 2026-09-10 02:10/02:14, scoped): repointed onto the live
+	# ^Warhead_CannonAP continuous base. Heaviness 0 = ACTIVE h=0 (thousandths,
+	# NOT the disabled sentinel); reproduces the old Light geometry (Spread
+	# 120 x 2/3 = 80). Damage 3000, ReloadDelay 30, Range, projectile and effect
+	# resolve exactly as before; the Versus shift is the intentional provisional
+	# role-profile migration.
+	Inherits@wh: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 30
 	Range: 5c0
 	Report: MEDTANK1.WAV
 	ValidTargets: Ground, Water
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
+		Heaviness: 0
 		Damage: 3000
 
 # Sardaukar specialist infantry weapons (3-way split, template defaults).

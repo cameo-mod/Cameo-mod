@@ -97,11 +97,9 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
             self.assertIn(f"{destination}FlatCompatibility", mains, weapon)
 
     def test_routing_and_overflow_hazards_remain_unconverted(self):
-        deferred = {
-            "AlliedTankDestroyerCannon",
-        }
-        for weapon in deferred:
-            self.assertGreater(len(main_warheads(self.rules.resolve_weapon(weapon))), 1, weapon)
+        self.assertEqual(
+            ["CannonAP_Light"],
+            main_warheads(self.rules.resolve_weapon("AlliedTankDestroyerCannon")))
 
         # This AA child still carries the deferred route-specific Medium nodes,
         # but they have no Damage and therefore are not active second mains.

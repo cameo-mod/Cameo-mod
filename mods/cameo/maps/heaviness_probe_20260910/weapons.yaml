@@ -1,0 +1,35 @@
+ProbeLegacyLight:
+	Inherits: ^Warhead_CannonAP_Light
+	ReloadDelay: 99999
+	Range: 5120
+	Projectile: InstantHit
+
+ProbeLegacyMedium:
+	Inherits: ^Warhead_CannonAP_Medium
+	ReloadDelay: 99999
+	Range: 5120
+	Projectile: InstantHit
+
+ProbeLegacyHeavy:
+	Inherits: ^Warhead_CannonAP_Heavy
+	ReloadDelay: 99999
+	Range: 5120
+	Projectile: InstantHit
+
+ProbeH0:
+	Inherits: ^Warhead_CannonAP
+	ReloadDelay: 99999
+	Range: 5120
+	Projectile: InstantHit
+	Warhead@CannonAP:
+		Heaviness: 0
+
+ProbeH1000:
+	Inherits: ProbeH0
+	Warhead@CannonAP:
+		Heaviness: 1000
+
+ProbeH2000:
+	Inherits: ProbeH0
+	Warhead@CannonAP:
+		Heaviness: 2000

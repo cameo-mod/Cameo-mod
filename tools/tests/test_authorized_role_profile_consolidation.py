@@ -146,12 +146,19 @@ class AuthorizedRoleProfileConsolidationTests(unittest.TestCase):
             )
             self.assertEqual(expected, actual, name)
 
-    def test_allied_tank_destroyer_remains_deferred_with_its_paid_cryo_pair(self):
+    def test_allied_tank_destroyer_corrected_to_single_ap_main(self):
         self.assertEqual(
-            ["CannonHE_Medium", "CannonAP_Light"],
+            ["CannonAP_Light"],
             main_warheads(self.rules.resolve_weapon("AlliedTankDestroyerCannon")),
         )
+        node = main_warhead_nodes(self.rules.resolve_weapon("AlliedTankDestroyerCannon"))[0]
+        self.assertEqual("24000", node.get("Damage"))
         self.assertNotIn("AlliedTankDestroyerCannon", self.report["changed"])
+        self.assertEqual(
+            ["CannonCryo_Medium"],
+            main_warheads(self.rules.resolve_weapon("AlliedTankDestroyerCannonCryo")),
+        )
+        self.assertNotIn("AlliedTankDestroyerCannonCryo", self.report["changed"])
 
 
 if __name__ == "__main__":

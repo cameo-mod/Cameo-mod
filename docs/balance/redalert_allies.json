@@ -4114,14 +4114,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "80",
         "tag": "CannonAP_Light",
@@ -4129,20 +4122,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6819",
       "reloaddelay": "60",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "AlliedTankDestroyerCannon",

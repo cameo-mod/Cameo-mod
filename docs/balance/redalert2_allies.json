@@ -13720,23 +13720,25 @@
        {
         "damage": "80000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7040",
       "reloaddelay": "160",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2TankDestroyerCannon"
+       "^Warhead_CannonAP",
+       "^Projectile_Shell_Light",
+       "^Effect_Explosion_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "RA2sabot",
       "weapon_class_source": "template"
@@ -13747,13 +13749,13 @@
        {
         "damage": "160000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8040",
       "reloaddelay": "160",
@@ -13764,7 +13766,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "RA2sabot_elite",
       "weapon_class_source": "template"

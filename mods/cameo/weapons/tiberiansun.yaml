@@ -215,14 +215,19 @@ TS90mm:
 	# `Warhead@CannonHE_Medium` would orphan it into a bare override of a warhead the new
 	# parent never defines — an abstract warhead, which is the documented empty-warhead boot
 	# crash (find_empty_warhead.py).
+	# PILOT (Aedis 2026-09-10 02:10/02:14, scoped): repointed onto the live
+	# ^Warhead_CannonAP continuous base at the base's own h=1000 (thousandths,
+	# active Medium). Only the warhead template moves; Damage 6000, ReloadDelay 26,
+	# Range 5319, projectile and effect resolve exactly as before; main key is renamed
+	# (h=1000 scales Spread 120 x 1 = 120, the old Medium geometry).
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^Warhead_CannonAP_Medium
+	Inherits@wh: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonAP_Medium
 	Report: tnkfire6.aud
 	ReloadDelay: 26
 	Range: 5319
-	Warhead@CannonAP_Medium:
+	Warhead@CannonAP:
 		Damage: 6000
 TS90mmDep:
 	Inherits: TS90mm

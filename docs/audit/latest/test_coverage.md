@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (8 file(s)) | 70 | >= 24 |
-| T2 | `def test_*` in tools/tests (103 file(s)) | 977 | >= 177 |
-| T3 | modules with no test mentioning them | 277 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (11 file(s)) | 173 | >= 24 |
+| T2 | `def test_*` in tools/tests (120 file(s)) | 1433 | >= 177 |
+| T3 | modules with no test mentioning them | 270 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (277)
+## T3 — untested modules (270)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -124,11 +124,9 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/World/ResourceSparkleEffect.cs | SparkleConfig, ResourceSparkleEffect |
 | C# | OpenRA.Mods.Cameo/Traits/World/ShockwaveDistortionRenderer.cs | ShockwaveDistortionRenderer |
 | C# | OpenRA.Mods.Cameo/Warheads/AffectsIntegrityWarhead.cs | AffectsIntegrityWarhead |
-| C# | OpenRA.Mods.Cameo/Warheads/AreaDamagePercentageWarhead.cs | AreaDamagePercentageWarhead |
 | C# | OpenRA.Mods.Cameo/Warheads/ChangeOwnerToNeutralWarhead.cs | ChangeOwnerToNeutralWarhead |
 | C# | OpenRA.Mods.Cameo/Warheads/GlowImpactWarhead.cs | GlowImpactWarhead |
 | C# | OpenRA.Mods.Cameo/Warheads/HeatDistortionWarhead.cs | HeatDistortionWarhead |
-| C# | OpenRA.Mods.Cameo/Warheads/HeavinessBell.cs | HeavinessBell |
 | C# | OpenRA.Mods.Cameo/Warheads/MindControlWarhead.cs | MindControlWarhead |
 | C# | OpenRA.Mods.Cameo/Warheads/NuclearFlashEffectWarhead.cs | NuclearFlashEffectWarhead |
 | C# | OpenRA.Mods.Cameo/Warheads/ShockwaveWarhead.cs | ShockwaveWarhead |
@@ -178,7 +176,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_code_duplication.py | audit_code_duplication |
 | python | tools/audit/audit_consistency_report.py | audit_consistency_report |
 | python | tools/audit/audit_damage_grid.py | audit_damage_grid |
-| python | tools/audit/audit_dead_warhead_fields.py | audit_dead_warhead_fields |
 | python | tools/audit/audit_display_text.py | audit_display_text |
 | python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
 | python | tools/audit/audit_duplicate_inherits.py | audit_duplicate_inherits |
@@ -186,7 +183,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_elite_gating.py | audit_elite_gating |
 | python | tools/audit/audit_empty_warheads.py | audit_empty_warheads |
 | python | tools/audit/audit_faction_leaks.py | audit_faction_leaks |
-| python | tools/audit/audit_family_uniqueness.py | audit_family_uniqueness |
 | python | tools/audit/audit_fluent.py | audit_fluent |
 | python | tools/audit/audit_garrison_weapons.py | audit_garrison_weapons |
 | python | tools/audit/audit_hex_shield_routing.py | audit_hex_shield_routing |
@@ -232,7 +228,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/check_effect_audio.py | check_effect_audio |
 | python | tools/audit/dump_resolved.py | dump_resolved |
 | python | tools/audit/effect_audit.py | effect_audit |
-| python | tools/audit/environment.py | environment |
 | python | tools/audit/extract_reference_effects.py | extract_reference_effects |
 | python | tools/audit/find_empty_warhead.py | find_empty_warhead |
 | python | tools/audit/find_mechanical_phase_a.py | find_mechanical_phase_a |
@@ -247,12 +242,12 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/review_resolve_diff.py | review_resolve_diff |
 | python | tools/audit/summarize_role_comparison.py | summarize_role_comparison |
 | python | tools/balance/_fix_min_range.py | _fix_min_range |
-| python | tools/balance/_patch_ledgers_from_reports.py | _patch_ledgers_from_reports |
 | python | tools/balance/_requantize_ledgers.py | _requantize_ledgers |
 | python | tools/balance/_show_audit_summaries.py | _show_audit_summaries |
 | python | tools/balance/_write_weapon_class.py | _write_weapon_class |
 | python | tools/balance/armor_exposure.py | armor_exposure |
 | python | tools/balance/audit_below_divider.py | audit_below_divider |
+| python | tools/balance/build_reference_report.py | build_reference_report |
 | python | tools/balance/collapse_target.py | collapse_target |
 | python | tools/balance/compensate_retrofit.py | compensate_retrofit |
 | python | tools/balance/consolidate_compatibility_profiles.py | consolidate_compatibility_profiles |
@@ -269,9 +264,11 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/gen_projectiles.py | gen_projectiles |
 | python | tools/balance/harvester_table.py | harvester_table |
 | python | tools/balance/measure_retrofit_gap.py | measure_retrofit_gap |
+| python | tools/balance/pending_classes.py | pending_classes |
 | python | tools/balance/plan_firepower_retirement.py | plan_firepower_retirement |
 | python | tools/balance/plan_warhead_collapse.py | plan_warhead_collapse |
 | python | tools/balance/preview_bell.py | preview_bell |
+| python | tools/balance/proposal_contract.py | proposal_contract |
 | python | tools/balance/reference_targets.py | reference_targets |
 | python | tools/balance/remove_dead_weapons.py | remove_dead_weapons |
 | python | tools/balance/rename_3way_underscore.py | rename_3way_underscore |
@@ -280,15 +277,11 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/retrofit_legacy_template.py | retrofit_legacy_template |
 | python | tools/balance/retrofit_weapon_family.py | retrofit_weapon_family |
 | python | tools/balance/run_with_guard.py | run_with_guard |
-| python | tools/balance/seed_design.py | seed_design |
-| python | tools/balance/shield_uniqueness.py | shield_uniqueness |
 | python | tools/balance/splice_templates.py | splice_templates |
 | python | tools/balance/strip_orphan_report.py | strip_orphan_report |
 | python | tools/balance/strip_weapon_versus.py | strip_weapon_versus |
 | python | tools/balance/sweep_areadamage.py | sweep_areadamage |
 | python | tools/balance/synthesize_reference.py | synthesize_reference |
-| python | tools/balance/tier_chain.py | tier_chain |
-| python | tools/balance/verify_generator_sync.py | verify_generator_sync |
 | python | tools/balance/verify_retrofit.py | verify_retrofit |
 | python | tools/packs/extract_shared.py | extract_shared |
 | python | tools/packs/split_faction.py | split_faction |
@@ -300,5 +293,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 277 untested > baseline 224
+- T3: 270 untested > baseline 224
 
