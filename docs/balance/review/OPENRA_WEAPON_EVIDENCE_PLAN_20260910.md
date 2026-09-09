@@ -6,6 +6,28 @@ hero Doc5 consumers now honor emitted evidence columns. Legacy corpus rows remai
 unassessed and unchanged. Full factory-ready/max-upgrade state evaluation and structured
 corpus migration remain pending. Source checkouts were read only; no source game ran.
 
+### Explicit evidence export implemented (10 September)
+
+`extract_peer_units.py --mod ca --root <checkout> --json <external.jsonl>
+--expect-commit <40-hex-HEAD>` now retains every nested weapon/armament record in
+an external JSONL artifact. It does not rewrite Doc5 or feed the new file into
+balance targets automatically. Exactly one source mod is required. Non-finite
+JSON and conflicting output files are refused; source/output junction escapes
+are checked on resolved paths.
+
+The metadata records source HEAD/dirty state, the declared engine pin (unverified),
+48 source-input hashes in the current CA export, and a documented finite local
+dependency fingerprint. Source files and the engine pin are checked before/after
+extraction. Local tool hashes are a snapshot, not a toolchain-stability guarantee.
+Git diagnostic paths are not exported. Neither factory-ready nor maximum-upgrade
+states are certified. The exact CA checkout still returns 377 units, including
+288 armed rows that remain conservatively incomplete.
+
+Independent review passed 16 export tests after correcting resolved-source
+containment, engine-pin provenance and Git-error redaction. The parent reran
+62 combined export, weapon-evidence, consumer and pinned DTA tests successfully.
+No source executable, corpus rewrite or live unit-stat change was involved.
+
 ## Current CA source validation
 
 At `ab9e477c3db818e91946d4cfdc86e71012966141`, active manifest extraction returns

@@ -100,7 +100,11 @@ manual review. Combat-unit fitting must not silently include either group.
 - **01:22:** Astra asked whether Shield uniqueness should apply between new family
   bases while old level definitions remain visible compatibility duplicates, using
   the existing Medium Shield value for the first pilot. This is an unanswered
-  migration question, not an approved change to the uniqueness rule.
+  migration question at that time.
+- **02:10:** Aedis approved that Shield proposal and requested expedited migration
+  alongside W24. New bases must be unique; old compatibility duplicates remain
+  visible. Astra acknowledged at 02:14 and started the scoped CannonAP activation
+  on the separate heaviness branch.
 
 At 23:20 Astra acknowledged the five safeguards and described a reviewed first batch
 within the remaining overnight window, not completion of the entire cross-game

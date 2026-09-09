@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **465**
+Files scanned: **466**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 3 | 2 |
 | E2 | handler discards the error | 98 | 30 |
 | E3 | open() without encoding= | 103 | 90 |
-| E4 | subprocess call without check= | 29 | 9 |
+| E4 | subprocess call without check= | 31 | 9 |
 
 
 ## E1 — 3 finding(s)
@@ -112,8 +112,8 @@ Files scanned: **465**
 | tools/hooks/bash_guard.py | 154 | handler body discards the error |
 | tools/hooks/bash_guard.py | 214 | handler body discards the error |
 | tools/reference/aggregate_archetype.py | 873 | handler body discards the error |
-| tools/reference/extract_peer_units.py | 876 | handler body discards the error |
-| tools/reference/extract_peer_units.py | 976 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 901 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 1001 | handler body discards the error |
 | tools/reference/extract_versus.py | 175 | handler body discards the error |
 | tools/rename/apply.py | 178 | handler body discards the error |
 | tools/rename/safe_rename.py | 132 | handler body discards the error |
@@ -232,7 +232,7 @@ Files scanned: **465**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 29 finding(s)
+## E4 — 31 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -265,6 +265,8 @@ Files scanned: **465**
 | tools/hooks/test_bash_guard.py | 58 | `subprocess.run()` without check= |
 | tools/hooks/test_bash_guard.py | 77 | `subprocess.run()` without check= |
 | tools/reference/splice_peer_section.py | 73 | `subprocess.run()` without check= |
+| tools/tests/test_peer_export.py | 428 | `subprocess.run()` without check= |
+| tools/tests/test_peer_export.py | 515 | `subprocess.run()` without check= |
 
 
 ## FAIL
@@ -272,5 +274,5 @@ Files scanned: **465**
 - E1: 3 > baseline 2
 - E2: 98 > baseline 30
 - E3: 103 > baseline 90
-- E4: 29 > baseline 9
+- E4: 31 > baseline 9
 

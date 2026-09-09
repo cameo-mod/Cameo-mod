@@ -8,6 +8,28 @@ Speed — which that corpus deliberately does not carry. Different axis, no over
     python tools/reference/extract_peer_units.py            # both mods, write the document
     python tools/reference/extract_peer_units.py --mod ca --dry-run
 
+EXPLICIT EXPORT ROUTE (P4 provenance routing, OPENRA_WEAPON_EVIDENCE_PLAN_20260910):
+    python tools/reference/extract_peer_units.py --root CA_CHECKOUT --mod ca \
+        --json EXTERNAL_DIR/out.jsonl [--expect-commit 40HEXCOMMIT]
+
+`--root` names ONE peer checkout explicitly (it must hold `mods/<mod_id>/mod.yaml`),
+`--mod` must appear EXACTLY once, and `--json` writes a JSONL corpus OUTSIDE every git
+repo and source checkout. The legacy CLI above is untouched and still writes Document 5;
+explicit mode NEVER writes it. The JSONL's first line is a `meta` record carrying the
+provenance contract: checkout HEAD + dirty state + engine pin, every ACTUALLY-read input
+(mod.yaml, includes, rules/weapons/sequences, the fluent loader's .ftl reads, and
+mod.config when present) hashed before AND after the extraction with `unchanged` flags,
+all as checkout-relative names — never private absolute paths. Containment of every input
+is checked on its RESOLVED target, so a junction/symlink that reaches outside the
+checkout is refused. Runtime applicability of the source stays UNVERIFIED and neither
+factory-ready nor maximum-upgrade states are certified. The local toolchain side of the
+claim is bounded too: `LOCAL_DEPENDENCIES` (extractor, miniyaml, peer armor map) is
+fingerprinted with per-file sha256, and the provenance carries that explicit scope. Git
+failures are serialized as a bounded, path-free status (`git_unavailable`); raw git
+stderr — which can quote private absolute paths — goes to console stderr only.
+The checkout is only ever READ: git is called read-only (`rev-parse`, `status`) and no
+source file or executable is ever run.
+
 WHY IT EXISTS
 -------------
 `BALANCE_SYNTHESIS.md` §15 pools every reference source into a per-unit target, and
@@ -30,9 +52,12 @@ the checkout rather than trusted from a document — and one of them was wrong:
 to **12,500**. The artifact wins.
 """
 import argparse
+import hashlib
+import json
 import math
 import pathlib
 import re
+import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -979,11 +1004,15 @@ def factions_of(node, known, rules=None, _depth=PREREQ_DEPTH, _seen=None, vfi=No
     return sorted(found)
 
 
-def extract(mod_id):
+def extract(mod_id, root_override=None):
+    """`root_override` is the explicit `--root` route (P4): it wins outright and there is
+    NO fallback to the PEERS candidates. The legacy candidate walk is unchanged when it
+    is None, and PEERS itself is never mutated — the override travels as a parameter."""
     spec = PEERS[mod_id]
     label, cands, rifle_id, expect = spec["label"], spec["root"], spec["rifle"], spec["expect"]
     T = traits_for(spec)
-    root = find_checkout(cands, mod_id)
+    root = pathlib.Path(root_override).resolve() if root_override is not None \
+        else find_checkout(cands, mod_id)
     if root is None:
         return label, None, f"no checkout found (looked in {', '.join(cands)})"
     rules = miniyaml.Ruleset(root, mod_id)
@@ -1063,7 +1092,355 @@ def extract(mod_id):
                    "note": note}, None
 
 
-def main():
+# ── Explicit external export (--root / --json, P4 2026-09-10) ────────────────────────────────
+# Mirrors the INI extractor's single-source route (`extract_ini_units.py`): one explicitly
+# named checkout, one JSONL corpus OUTSIDE every git repo and source checkout, inputs hashed
+# before/after, loud refusals instead of silent guesses.
+#
+# ⚠ `diagnostic_output.py` is NOT the host here — and the reason is narrow: it ACCEPTS
+# external paths (its in-repo restriction applies only to paths under the repo root, which
+# must then sit under docs/audit/latest or docs/balance/anchors), but it accepts only
+# `.json`/`.md` suffixes (a `.jsonl` corpus fails that gate) and it implements no
+# git-repo / source-checkout rejection. Only its no-overwrite + exclusive-create
+# discipline is reused, in `ensure_external_output` below.
+#
+# ⛔ THE CHECKOUT IS READ, NEVER EXECUTED — no source script, binary or game code runs; git
+# is called READ-ONLY (`rev-parse HEAD`, `status --porcelain`) and nothing else.
+
+class ExplicitExportRefusal(Exception):
+    """The explicit route refuses loudly (CLI exit 1) instead of guessing."""
+
+
+def _sha256_file(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _git_readonly(checkout, argv):
+    """Read-only git around `checkout`: capture output, timeout, never any write.
+
+    Returns (stdout, detail, returncode). `detail` is the RAW git diagnostic and is
+    CONSOLE-STDERR MATERIAL ONLY — git stderr routinely quotes absolute paths (private
+    directories), so it must never be serialized into the export; the JSON carries the
+    bounded `checkout_head_status` instead."""
+    try:
+        proc = subprocess.run(["git", *argv], cwd=str(checkout),
+                              capture_output=True, timeout=30, check=False)
+    except (OSError, subprocess.SubprocessError) as exc:
+        return None, f"git {' '.join(argv)} failed: {exc}", None
+    if proc.returncode != 0:
+        return None, (f"git {' '.join(argv)} exit {proc.returncode}: "
+                      f"{(proc.stderr or b'').decode('utf-8', 'replace').strip()[:200]}"), \
+            proc.returncode
+    return proc.stdout.decode("utf-8", "replace").strip(), None, proc.returncode
+
+
+def git_identity(checkout):
+    """HEAD + whole-checkout dirty state, from `rev-parse`/`status --porcelain` only.
+
+    Only the bounded, path-free `checkout_head_status` may be serialized; `head_detail`
+    is for console stderr alone (see `_git_readonly`)."""
+    head, head_detail, _ = _git_readonly(checkout, ["rev-parse", "HEAD"])
+    status, _, _ = _git_readonly(checkout, ["status", "--porcelain"])
+    dirty, entries = None, 0
+    if status is not None:
+        lines = [line for line in status.splitlines() if line.strip()]
+        dirty, entries = bool(lines), len(lines)
+    return {"checkout_head": head,
+            "checkout_head_status": "ok" if head else "git_unavailable",
+            "head_detail": head_detail,
+            "checkout_dirty": dirty, "checkout_dirty_entries": entries}
+
+
+def engine_pin(checkout):
+    """The checkout's own engine pin (mod.config `ENGINE_VERSION`), if the file carries one.
+
+    mod.config is INVENTORIED in `collect_read_inputs` (hashed before/after like every
+    other input) and the pin itself is read at BOTH ends of the extraction window, so
+    its appearance, disappearance or mutation fails the run. The pin is RECORDED, never
+    verified: `applicability: unverified` — a declared version string is not proof the
+    source was actually built/played against that engine."""
+    p = checkout / "mod.config"
+    if not p.is_file():
+        return None
+    for line in p.read_text(encoding="utf-8", errors="replace").splitlines():
+        m = re.match(r"^\s*ENGINE_VERSION\s*[=:]\s*(.+?)\s*$", line)
+        if m:
+            return m.group(1).strip("\"'")
+    return None
+
+
+def collect_read_inputs(checkout, mod_id):
+    """{checkout-relative posix name: path} of EVERYTHING the current extraction reads:
+    mod.yaml + every Include'd manifest source, the resolved Rules/Weapons/Sequences
+    lists, every .ftl the fluent loader rglobs, and mod.config when present (the
+    engine-pin source, read inside the hash window).
+
+    ⚠ CONTAINMENT IS CHECKED ON THE RESOLVED TARGET, not lexically: `p.relative_to()`
+    alone cannot see a junction/symlink that leaves the checkout while keeping an
+    in-tree-looking path. The KEY stays the LOGICAL checkout-relative name (stable
+    across reruns, what digests are built from); a target that resolves outside the
+    checkout is a refusal, never a silently re-rooted row."""
+    man = miniyaml.load_manifest(checkout, mod_id)
+    files = set(man.sources) | set(man.rules) | set(man.weapons) | set(man.sequences)
+    files |= set((checkout / "mods" / mod_id).rglob("*.ftl"))
+    if (checkout / "mod.config").is_file():
+        files.add(checkout / "mod.config")
+    root = checkout.resolve()
+    out = {}
+    for p in sorted(files):
+        try:
+            rel = p.relative_to(checkout).as_posix()
+        except ValueError:
+            raise ExplicitExportRefusal(
+                f"REFUSED — input {p} is not inside the checkout {checkout}") from None
+        try:
+            target = p.resolve()
+        except (OSError, ValueError):
+            raise ExplicitExportRefusal(
+                f"REFUSED — input {rel} cannot be resolved inside {checkout}") from None
+        try:
+            target.relative_to(root)
+        except ValueError:
+            raise ExplicitExportRefusal(
+                f"REFUSED — input {rel} resolves outside the checkout {checkout} "
+                f"through a junction or symlink") from None
+        if not target.is_file():
+            raise ExplicitExportRefusal(f"REFUSED — input {rel} disappeared during enumeration")
+        out[rel] = p
+    return out
+
+
+def hash_inputs(inputs):
+    return {rel: _sha256_file(p) for rel, p in sorted(inputs.items())}
+
+
+def verify_inputs_unchanged(before, after):
+    """Every actually-read input must hash identically before and after the extraction."""
+    problems = []
+    added = sorted(set(after) - set(before))
+    removed = sorted(set(before) - set(after))
+    if added or removed:
+        problems.append("input file set changed during extraction "
+                        f"(added: {added or '—'}; removed: {removed or '—'})")
+    for rel in sorted(set(before) & set(after)):
+        if before[rel] != after[rel]:
+            problems.append(f"input changed during extraction: {rel}")
+    return problems
+
+
+def engine_input_digest(hashes):
+    """One stable digest over the sorted (relative-name, sha256) input table."""
+    src = "".join(f"{rel}\t{h}\n" for rel, h in sorted(hashes.items()))
+    return hashlib.sha256(src.encode("utf-8")).hexdigest()
+
+
+# The documented FINITE set of local (repo-side) files these rows depend on. Fingerprinting
+# them is what makes the reproducibility claim honest and bounded: source-checkout inputs
+# are fully hashed, and the local toolchain is covered ONLY by this list — anything else
+# in the repo is outside the claim, and the provenance says so explicitly.
+LOCAL_DEPENDENCIES = (
+    "tools/reference/extract_peer_units.py",
+    "tools/audit/miniyaml.py",
+    "docs/reference/peer_armor_map.yaml",
+)
+
+
+def local_dependency_fingerprints():
+    out = []
+    for rel in LOCAL_DEPENDENCIES:
+        p = ROOT / rel
+        entry = {"path": rel}
+        if p.is_file():
+            entry["sha256"] = _sha256_file(p)
+        else:
+            entry["sha256"] = None
+            entry["note"] = "absent"
+        out.append(entry)
+    return out
+
+
+def dependency_digest(entries):
+    src = "".join(f"{e['path']}\t{e['sha256'] or '-'}\n"
+                  for e in sorted(entries, key=lambda e: e["path"]))
+    return hashlib.sha256(src.encode("utf-8")).hexdigest()
+
+
+def build_provenance(mod_id, label, gitinfo, pin, expect_commit, hashes):
+    deps = local_dependency_fingerprints()
+    return {
+        "extractor": "tools/reference/extract_peer_units.py",
+        "mode": "explicit_root",
+        "mod_id": mod_id,
+        "source_label": label,
+        "checkout_head": gitinfo["checkout_head"],
+        # bounded, path-free git status — the raw git diagnostic can quote private
+        # absolute paths and is console-stderr material only
+        "checkout_head_status": gitinfo["checkout_head_status"],
+        "checkout_dirty": gitinfo["checkout_dirty"],
+        "checkout_dirty_entries": gitinfo["checkout_dirty_entries"],
+        "engine_pin": pin,
+        "engine_pin_applicability": "unverified",
+        "source_runtime_applicability": "unverified",
+        "factory_state_certification": "none",
+        "max_state_certification": "none",
+        "expect_commit": expect_commit or None,
+        "inputs_digest": engine_input_digest(hashes),
+        "input_count": len(hashes),
+        "local_dependencies": deps,
+        "local_dependencies_digest": dependency_digest(deps),
+        "input_scope": "source_checkout_inputs_hashed_plus_documented_local_dependencies",
+        "extractor_python_version": sys.version.split()[0],
+    }
+
+
+def ensure_external_output(out_path, text, forbidden_roots):
+    """Junction-resolved safety for the --json target.
+
+    * must sit OUTSIDE every git repo (`.git` dir or worktree `.git` FILE) and outside
+      every protected root (the source checkout, this repo) — all comparisons run on
+      `Path.resolve()`d paths, so junction/symlink aliases cannot smuggle an in-tree
+      destination through;
+    * an existing file is only ever left alone: identical content is a successful no-op
+      rerun, different content is refused, never overwritten.
+
+    Returns (resolved path, already_identical)."""
+    out = pathlib.Path(out_path).resolve()
+    parent = out.parent
+    for anc in (parent, *parent.parents):
+        if (anc / ".git").exists():          # covers .git dirs AND worktree .git files
+            raise ExplicitExportRefusal(
+                f"REFUSED — {out} sits inside the git repo at {anc}; external output only")
+    for root in forbidden_roots:
+        root = pathlib.Path(root).resolve()
+        if out == root or root in out.parents:
+            raise ExplicitExportRefusal(
+                f"REFUSED — {out} sits inside the protected tree {root}; external output only")
+    if out.exists():
+        if out.read_text(encoding="utf-8") == text:
+            return out, True
+        raise ExplicitExportRefusal(
+            f"REFUSED — {out} already exists with different content; not overwritten")
+    return out, False
+
+
+def jsonl_line(obj):
+    """One compact, key-sorted JSON line. ⛔ allow_nan=False: a NaN/Infinity would be
+    written as bare `NaN` — invalid JSON a downstream parser rejects halfway through.
+    Non-finite (or non-serializable, e.g. pathlib) data fails HERE, before any output
+    file exists."""
+    return json.dumps(obj, sort_keys=True, separators=(",", ":"), allow_nan=False)
+
+
+ROW_PROVENANCE_KEYS = ("extractor", "mode", "mod_id", "source_label", "checkout_head",
+                       "checkout_head_status", "checkout_dirty", "checkout_dirty_entries",
+                       "engine_pin", "expect_commit", "inputs_digest",
+                       "local_dependencies_digest", "source_runtime_applicability",
+                       "factory_state_certification", "max_state_certification")
+
+
+def export_explicit(args):
+    """The whole explicit route: exactly one --mod under an explicit --root, provenance
+    hashed around the extraction, strict JSONL to an external path. Returns 0; raises
+    ExplicitExportRefusal (or ValueError/TypeError during serialization) on any refusal —
+    no output file is EVER created from a failed run."""
+    if not args.root:
+        raise ExplicitExportRefusal("REFUSED — explicit export requires --root")
+    mods = args.mod or []
+    if len(mods) != 1:
+        raise ExplicitExportRefusal(
+            f"REFUSED — explicit --root mode takes exactly one --mod (got {len(mods)})")
+    if not args.json:
+        raise ExplicitExportRefusal(
+            "REFUSED — explicit --root mode requires an external --json path")
+    if args.dry_run:
+        raise ExplicitExportRefusal(
+            "REFUSED — --dry-run is legacy Document-5 mode and has no explicit-route meaning")
+    mod_id = mods[0]
+    if mod_id not in PEERS:
+        raise ExplicitExportRefusal(f"REFUSED — unknown peer mod {mod_id!r}")
+    if args.expect_commit and not re.fullmatch(r"[0-9a-fA-F]{40}", args.expect_commit):
+        raise ExplicitExportRefusal(
+            f"REFUSED — --expect-commit must be exactly 40 hex characters "
+            f"(got {args.expect_commit!r})")
+
+    checkout = pathlib.Path(args.root).expanduser()
+    if not checkout.is_dir():
+        raise ExplicitExportRefusal(f"REFUSED — --root {checkout} is not a directory")
+    checkout = checkout.resolve()
+    if not (checkout / "mods" / mod_id / "mod.yaml").is_file():
+        raise ExplicitExportRefusal(
+            f"REFUSED — no manifest at {checkout / 'mods' / mod_id / 'mod.yaml'}")
+
+    gitinfo = git_identity(checkout)
+    if gitinfo["checkout_head"] is None and gitinfo["head_detail"]:
+        # raw git diagnostics can quote private absolute paths — console stderr only,
+        # never serialized (the JSON carries the bounded `checkout_head_status`)
+        print(f"  ! git: {gitinfo['head_detail']}", file=sys.stderr)
+    if args.expect_commit:
+        if gitinfo["checkout_head"] is None:
+            raise ExplicitExportRefusal(
+                "REFUSED — cannot verify --expect-commit: git_unavailable "
+                "(details on stderr)")
+        if gitinfo["checkout_head"] != args.expect_commit.lower():
+            raise ExplicitExportRefusal(
+                f"REFUSED — commit mismatch: expected {args.expect_commit.lower()}, "
+                f"checkout HEAD is {gitinfo['checkout_head']}")
+
+    inputs = collect_read_inputs(checkout, mod_id)
+    before = hash_inputs(inputs)
+    pin_before = engine_pin(checkout)
+    label, data, err = extract(mod_id, root_override=checkout)
+    if err:
+        raise ExplicitExportRefusal(f"REFUSED — {label}: {err}")
+    # re-enumerate too: a file that APPEARED mid-run (e.g. a new .ftl the fluent
+    # loader rglobbed) would otherwise escape the after-hash
+    after = hash_inputs(collect_read_inputs(checkout, mod_id))
+    problems = verify_inputs_unchanged(before, after)
+    head_after, _, _ = _git_readonly(checkout, ["rev-parse", "HEAD"])
+    if head_after != gitinfo["checkout_head"]:
+        problems.append(f"git HEAD moved during extraction "
+                        f"({gitinfo['checkout_head']} -> {head_after})")
+    pin_after = engine_pin(checkout)
+    if pin_after != pin_before:
+        problems.append(f"engine pin changed during extraction "
+                        f"({pin_before!r} -> {pin_after!r})")
+    if problems:
+        raise ExplicitExportRefusal("REFUSED — " + "; ".join(problems)
+                                    + "; nothing is exported")
+
+    pin = pin_after
+    prov = build_provenance(mod_id, label, gitinfo, pin, args.expect_commit, before)
+    row_prov = {k: prov[k] for k in ROW_PROVENANCE_KEYS}
+    rid, rhp, rcost = data["rifle"]
+    meta = {
+        "record": "meta",
+        "provenance": prov,
+        # every input, checkout-relative — never a private absolute path
+        "inputs": [{"path": rel, "sha256_before": before[rel], "sha256_after": after[rel],
+                    "unchanged": before[rel] == after[rel]} for rel in sorted(before)],
+        "rifle": {"id": rid, "hp": rhp, "cost": rcost},
+        "anchor_note": data["note"] or None,
+        "row_count": len(data["rows"]),
+    }
+    # ⛔ serialize FIRST: strict JSON (allow_nan=False) must fail before the output path
+    # is even touched — no partial artifact ever exists.
+    lines = [jsonl_line(meta)]
+    lines += [jsonl_line({"record": "unit", **r, "provenance": row_prov})
+              for r in data["rows"]]
+    text = "\n".join(lines) + "\n"
+    out, identical = ensure_external_output(args.json, text, [checkout, ROOT])
+    if identical:
+        print(f"  {label}: {len(data['rows'])} rows; {out} already holds this exact export")
+        return 0
+    with open(out, "x", encoding="utf-8", newline="\n") as fh:
+        fh.write(text)
+    print(f"  {label}: {len(data['rows'])} buildable units -> {out}")
+    print(f"  head={gitinfo['checkout_head']} dirty={gitinfo['checkout_dirty']} "
+          f"engine_pin={pin} inputs={len(before)} (all unchanged)")
+    return 0
+
+
+def main(argv=None):
     # ⚠ A LABEL MUST NOT CONTAIN "(". Document 5's section headings are `## <label>  (N units)`,
     # and the synthesis reads them back with `line[3:].split("(")[0]` — so a parenthesised label
     # is TRUNCATED on the way in. That has bitten twice: "Romanov's Vengeance (live)" silently
@@ -1078,7 +1455,26 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--mod", choices=sorted(PEERS), action="append")
     ap.add_argument("--dry-run", action="store_true")
-    args = ap.parse_args()
+    ap.add_argument("--root", help="explicit mode: read THIS peer checkout (must hold "
+                                   "mods/<mod>/mod.yaml); never executed, read-only")
+    ap.add_argument("--json", help="explicit mode: write the JSONL export here — must sit "
+                                   "OUTSIDE every git repo and source checkout; a differing "
+                                   "existing file is refused, never overwritten")
+    ap.add_argument("--expect-commit", metavar="COMMIT",
+                    help="explicit mode: refuse to run unless the checkout HEAD equals this "
+                         "40-hex commit")
+    args = ap.parse_args(argv)
+
+    if args.root or args.json or args.expect_commit:
+        try:
+            return export_explicit(args)
+        except ExplicitExportRefusal as e:
+            print(f"  {e}", file=sys.stderr)
+            return 1
+        except (ValueError, TypeError) as e:
+            print(f"  REFUSED — explicit export failed before any output was written: {e}",
+                  file=sys.stderr)
+            return 1
 
     out = ["# Original units — OpenRA peer crossovers (Combined Arms, Shattered Paradise)", "",
            "_AUTO-GENERATED by `tools/reference/extract_peer_units.py` from each mod's own "
