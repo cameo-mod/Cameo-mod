@@ -1004,6 +1004,45 @@ def factions_of(node, known, rules=None, _depth=PREREQ_DEPTH, _seen=None, vfi=No
     return sorted(found)
 
 
+def production_state_evidence(rules, node):
+    """Retain declared production/upgrade evidence without simulating activation.
+
+    Queue replacements and post-purchase transformations are alternatives, not
+    additive armaments. A declared edge is not proof that its prerequisites can
+    be satisfied, and this shallow inventory does not certify an upgrade ceiling.
+    Preserve ordered nested fields rather than flattening repeated trait data.
+    """
+    def raw(item):
+        return {"key": item.key, "value": item.value,
+                "children": [raw(child) for child in item.children]}
+
+    production, conditions, routes = [], [], []
+    for item in node.children:
+        base = item.key.split('@')[0]
+        if base in ('Buildable', 'ProducibleWithLevel', 'GainsExperience'):
+            production.append(raw(item))
+        if base.startswith(('GrantCondition', 'GrantExternalCondition')):
+            conditions.append(raw(item))
+        if base not in ('ReplacedInQueue', 'Upgradeable'):
+            continue
+        field = 'Actors' if base == 'ReplacedInQueue' else 'Actor'
+        targets = [v.strip() for v in (item.get(field) or '').split(',') if v.strip()]
+        routes.append({
+            "trait": item.key,
+            "kind": 'queue_replacement_declaration' if base == 'ReplacedInQueue' else 'upgrade_declaration',
+            "raw": raw(item),
+            "targets": [{"actor": target, "definition_exists": rules.actor(target) is not None}
+                        for target in targets],
+            "activation": 'unverified',
+            "combination": 'do_not_sum_declared_target_actors' if targets
+                           else 'condition_upgrade_compatibility_unverified',
+        })
+    return {"factory_ready_certification": 'none', "maximum_upgrade_certification": 'none',
+            "scope": 'declared production and upgrade routes; not exhaustive state evaluation',
+            "production_traits": production, "condition_grants": conditions,
+            "declared_routes": routes}
+
+
 def extract(mod_id, root_override=None):
     """`root_override` is the explicit `--root` route (P4): it wins outright and there is
     NO fallback to the PEERS candidates. The legacy candidate walk is unchanged when it
@@ -1082,6 +1121,7 @@ def extract(mod_id, root_override=None):
             # "Animal Alligator" from ever being a candidate.
             "faction": "/".join(factions_of(node, known_factions, rules, vfi=vfi)) or "",
             "limit": int(limit) if (limit and str(limit).strip().isdigit()) else None,
+            "production_state_evidence": production_state_evidence(rules, node),
             **wep,
             "hp": int(hp), "cost": int(cost) if cost else None,
             "speed": int(speed) if speed else None,

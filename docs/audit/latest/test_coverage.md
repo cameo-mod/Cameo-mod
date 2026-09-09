@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (8 file(s)) | 70 | >= 24 |
-| T2 | `def test_*` in tools/tests (127 file(s)) | 1692 | >= 177 |
-| T3 | modules with no test mentioning them | 273 | <= 224 |
+| T2 | `def test_*` in tools/tests (128 file(s)) | 1709 | >= 177 |
+| T3 | modules with no test mentioning them | 272 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (273)
+## T3 — untested modules (272)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -283,7 +283,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/strip_orphan_report.py | strip_orphan_report |
 | python | tools/balance/strip_weapon_versus.py | strip_weapon_versus |
 | python | tools/balance/sweep_areadamage.py | sweep_areadamage |
-| python | tools/balance/synthesize_reference.py | synthesize_reference |
 | python | tools/balance/verify_generator_sync.py | verify_generator_sync |
 | python | tools/balance/verify_retrofit.py | verify_retrofit |
 | python | tools/packs/extract_shared.py | extract_shared |
@@ -296,5 +295,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 273 untested > baseline 224
+- T3: 272 untested > baseline 224
 

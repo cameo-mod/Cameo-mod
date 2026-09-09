@@ -32,6 +32,22 @@ assert these findings instead of hiding CA under the old legacy count. Independe
 review found no remaining transport blocker. The full suite is not green and this
 is not a merge or gameplay-balance recommendation.
 
+### Production-state declaration inventory (P2 groundwork)
+
+The structured export now retains selected production prerequisites, initial-level/experience
+traits, recognized condition grants and raw `ReplacedInQueue`/`Upgradeable` declarations. Nested
+fields and ordering survive. 57 of 377 CA records declare routes. Missing targets are
+reported as missing definitions rather than discarded; existing targets are not labeled
+reachable. HMMV declares queue replacement and an upgrade route to HMMV.TOW; inheritance
+removals correctly leave neither route on HMMV.TOW itself. The two references are not
+two additional simultaneous weapons or proof of a complete maximum-upgrade path.
+
+All previous 377 rows' non-provenance fields are unchanged by this addition. Factory-ready
+and maximum-upgrade certification remain `none`, including actors with no declared routes.
+Condition values, player prerequisites, rank and compatible upgrade combinations still
+need source-specific evaluation. No numerical source or live game stat was changed.
+Differently named/custom state providers are not exhaustively inventoried by this step.
+
 ### Explicit evidence export implemented (10 September)
 
 `extract_peer_units.py --mod ca --root <checkout> --json <external.jsonl>
@@ -186,6 +202,20 @@ corpus. Keep `ENGINE_VERSION="ca-engine/1.09"` (mod.config) as part of the ident
 sources stay outside the repo (R9); the checkout is never executed. Any Doc5 CA-section
 rewrite invalidates earlier source-pinned diagnostics and needs explicit evidence review
 (F4). A `TASK_INDEX.md` row for this task is added when implementation lands.
+
+## Production-declaration follow-up validation
+
+The selected raw production/upgrade declarations are retained for all 377 CA rows;
+57 rows declare routes. Existing numeric fields are unchanged. Factory-ready and
+maximum-upgrade certification remain `none`: this is evidence preservation, not a
+completed condition evaluator. Source-specific providers outside the selected trait
+inventory still require review.
+
+37 focused tests pass. Full suite: 1,710 tests, 14 failures, 8 errors and 64 skips,
+with the exact existing baseline signatures; sampled memory peak 80.26%, no guard
+stop. Canonical audits retain nine failing categories: inherits, upgrades,
+basebuilder_crates, buildable_order, packs, split_definitions, nuclear_flash_bindings,
+doc_claims and doc_health. No empty final Markdown reports. No live YAML or C# change.
 
 ## 3. Non-goals
 

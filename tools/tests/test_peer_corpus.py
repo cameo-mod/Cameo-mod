@@ -206,6 +206,13 @@ class InstalledCorpusTests(unittest.TestCase):
         meta, rows = pc.load(root)['Combined Arms']
         self.assertEqual(meta['row_count'], 377)
         self.assertEqual(sum(r.get('w_evidence') == 'incomplete' for r in rows), 288)
+        self.assertEqual(sum(bool(r['production_state_evidence']['declared_routes']) for r in rows), 57)
+        states = {r['id']: r['production_state_evidence'] for r in rows}
+        self.assertEqual(len(states['HMMV']['declared_routes']), 2)
+        self.assertEqual(states['HMMV.TOW']['declared_routes'], [])
+        self.assertTrue(all(r['factory_ready_certification'] == 'none' and
+                            r['maximum_upgrade_certification'] == 'none'
+                            for r in states.values()))
         disabled = {'AFAC', 'FACT', 'SFAC', 'TRUK', 'TRUK.DROP'}
         self.assertFalse(disabled & {r['id'] for r in rows})
         self.assertEqual(sum(r['source'] == 'Combined Arms' for r in rd.peer_rows()), 341)

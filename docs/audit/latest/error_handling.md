@@ -1,12 +1,12 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **466**
+Files scanned: **468**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 3 | 2 |
 | E2 | handler discards the error | 98 | 30 |
-| E3 | open() without encoding= | 103 | 90 |
+| E3 | open() without encoding= | 112 | 90 |
 | E4 | subprocess call without check= | 31 | 9 |
 
 
@@ -123,13 +123,14 @@ Files scanned: **466**
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
 
 
-## E3 — 103 finding(s)
+## E3 — 112 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/bake_d2k_overlay.py | 28 | `Image.open()` without encoding= |
 | tools/bake_d2k_overlay_zap.py | 10 | `Image.open()` without encoding= |
 | tools/bake_d2k_zap.py | 41 | `Image.open()` without encoding= |
+| tools/balance/peer_corpus.py | 58 | `path.open()` without encoding= |
 | tools/balance/pending_classes.py | 59 | `open()` without encoding= |
 | tools/d2k_to_openra.py | 153 | `Image.open()` without encoding= |
 | tools/d2k_to_openra.py | 164 | `Image.open()` without encoding= |
@@ -150,6 +151,14 @@ Files scanned: **466**
 | tools/tests/test_anchor_dossier.py | 362 | `read_text()` without encoding= |
 | tools/tests/test_defense_tooltip_accuracy.py | 30 | `read_text()` without encoding= |
 | tools/tests/test_diagnostic_output.py | 38 | `two.read_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 60 | `write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 70 | `write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 76 | `path.write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 134 | `write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 144 | `doc.write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 184 | `index.read_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 186 | `index.write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 197 | `doc.write_text()` without encoding= |
 | tools/tilesets/apply_ai_edge_correction.py | 34 | `Image.open()` without encoding= |
 | tools/tilesets/apply_ai_edge_correction.py | 78 | `Image.open()` without encoding= |
 | tools/tilesets/apply_dark_noise_cleanup.py | 79 | `Image.open()` without encoding= |
@@ -273,6 +282,6 @@ Files scanned: **466**
 
 - E1: 3 > baseline 2
 - E2: 98 > baseline 30
-- E3: 103 > baseline 90
+- E3: 112 > baseline 90
 - E4: 31 > baseline 9
 
